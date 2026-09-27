@@ -1,10 +1,12 @@
 # Biology Visual Coverage Campaign — Handover
 
 **Subject**: Biology visuals ONLY (`src/lib/teaching/visual/conceptSceneParams.ts` +
-`src/tests/bioVisualCoverageCampaign.test.ts`). **Status: IN PROGRESS, not paused.** This file is
-the complete pickup point for the next session/account — read it in full before touching Biology
-visual code. Update this file on every commit this campaign makes (add a dated entry, refresh the
-headline numbers) so a different Claude session can resume cold at any point.
+`src/tests/bioVisualCoverageCampaign.test.ts`). **Status: COMPLETE as of batch 13 (2026-09-27) —
+all 161 statically-flagged concepts fixed.** This file remains the complete pickup point for any
+future Biology-visual work (a fresh regression, a new concept added to the KG, etc.) — read it in
+full before touching Biology visual code. Update this file on every future commit that touches
+this campaign's scope (add a dated entry, refresh the headline numbers) so a different Claude
+session can resume cold at any point.
 
 **Governing directive** (owner, this session, verbatim): *"Is it ready for end user? Yes or no"* →
 answered **No**, citing three gaps: (a) an unreproduced empty-tutor-response bug, (b) almost no
@@ -92,12 +94,76 @@ all 161 static-audit-flagged concepts.
   growth doesn't require touching them — leave them as `>=` checks, don't "fix" them back to exact
   counts.
 
-## Current status (2026-09-26, after batch 12)
+## Current status (2026-09-27, after batch 13 — CAMPAIGN COMPLETE)
 
-**143 of 161 statically-flagged concepts fixed and verified** (`tsc` 0 errors, 515/515 targeted
-tests passing, 15,517 passing / 9 skipped in the full suite, 0 duplicate seed identities —
-10,602 items). 12 batches committed so far; batch 11 confirmed landed on `main` as `6b5c580b`;
-batch 12 push is the very next action after this update.
+**161 of 161 statically-flagged concepts fixed and verified** (`tsc` 0 errors, 604/604 targeted
+tests passing, 735 files / 15,577 passing / 9 skipped in the full suite, 0 duplicate seed
+identities — 10,650 items). 13 batches committed total; batch 12 confirmed landed on `main` as
+`b65b1123`; batch 13 (the final batch) push is the very next action after this update. **No
+concepts remain on the "not yet fixed" list.** `bio.plant.plant-respiration` remains the one
+confirmed non-defect, deliberately left unauthored (already serves a real Tier 3 figure).
+
+Batch 13 — THE FINAL BATCH (17 concepts, all of the remaining frontier in one batch since it was
+already under the usual ~12-concept size): `bio.physio.exercise-physiology` — COMPARISON, aerobic
+vs anaerobic training's different chronic adaptations; `bio.physio.homeostasis-thermoregulation`
+— COMPARISON, heat-loss vs heat-gain responses; `bio.physio.integumentary-system` — PATHWAY,
+wound healing's four ordered stages (haemostasis → inflammation → proliferation → remodelling);
+`bio.physio.lymphatic-system-detail` — COMPARISON, the system's explicit dual role (fluid balance
+vs immune surveillance); `bio.physio.muscle-physiology-energetics` — PATHWAY, the three ATP
+sources each dominant over a different timescale (creatine phosphate → anaerobic glycolysis →
+oxidative phosphorylation); `bio.plant.mycorrhizae-plant-symbioses` — PATHWAY, the
+rhizobium-legume nitrogen-fixation mechanism traced step by step (infection → nodule formation →
+nitrogenase fixation → leghaemoglobin oxygen protection); `bio.plant.phytochrome-photoperiodic-
+flowering` — PATHWAY, night-length detection (leaves) → florigen production → vascular transport
+→ flowering response (shoot apex); `bio.plant.plant-biotechnology-applications` — PATHWAY,
+Agrobacterium-mediated transformation traced step by step (natural infection → gene replacement →
+T-DNA delivery); `bio.plant.plant-defense-mechanisms` — COMPARISON, structural vs chemical
+defences; `bio.plant.plant-stress-physiology` — HUB, ABA as the central integrating hormone
+coordinating three distinct stress responses (stomatal closure, osmotic adjustment, antioxidant
+defence); `bio.plant.plant-tissue-systems` — STRUCTURE, the plant body's dermal/ground/vascular
+tissue systems; `bio.plant.secondary-growth-anatomy` — COMPARISON, wood vs bark as two composite
+outcomes of secondary growth; `bio.plant.seed-germination-dormancy` — STRUCTURE, seed
+coat/embryo/endosperm; `bio.repro.animal-reproductive-strategies` — COMPARISON (3 groups),
+oviparity/viviparity/ovoviviparity classified on both location-of-development and nutrient-source
+dimensions; `bio.repro.hormonal-regulation-reproduction-detail` — PATHWAY, cyclic: true, the HPG
+axis's regulatory feedback loop (hypothalamus → anterior pituitary → gonads → feedback);
+`bio.sys.evolutionary-systems-biology` — COMPARISON, robustness vs evolvability as related but
+distinct network properties; `bio.sys.quantitative-systems-modeling` — PATHWAY, the modelling
+workflow (ODE model construction → parameter estimation → sensitivity analysis)) validated clean:
+`tsc --noEmit` 0 errors, 604/604 targeted tests passing (up from 515), 735 files / 15,577/15,586
+full suite passing (9 pre-existing skips), dry-run seed script "Identity check passed: 10650
+items, 10650 distinct identities, 0 duplicates".
+
+**One real, non-landmine test conflict found and fixed in this batch**: giving
+`bio.physio.homeostasis-thermoregulation` a Tier 0 override broke
+`visualFigureBreadth.test.ts`'s `"generation reaches the learner with the conditional framing
+intact..."` test, which called `resolveVisualForTurn` for that exact concept expecting Tier 3
+generation to be reached (Tier 0 now wins unconditionally and short-circuits before generation is
+attempted — this is the campaign's own intended effect, not a regression). Unlike the
+`dnaReplicationVisual.test.ts` pattern (narrow/flip a hardcoded list), this test's actual purpose
+was exercising the GENERATION+CRITIC+ADMISSION pipeline itself, orthogonal to which concept it
+runs against — fixed by retargeting the test to `bio.plant.plant-respiration` (confirmed to have
+no Tier 0/1 binding) with a freshly-anchored mock scene using that concept's own KG vocabulary
+(aerobic vs anaerobic respiration) instead of the original thermoregulation content, since the
+generation pipeline's anchor check compares generated prose against the RESOLVED concept's own KG
+text — reusing the original thermoregulation content against a different concept would have
+failed anchoring. A first attempt at the retargeted content also tripped
+`processFlowStepSchema`'s 60-character-per-step-title zod limit (unrelated to the concept swap);
+shortened the step titles to fix. If a future session sees a similar failure when giving a NEWLY
+Tier-0'd concept its own scene, check whether any OTHER test file calls `resolveVisualForTurn`
+directly for that exact concept id expecting a Tier 3/generation outcome — Tier 0 always wins by
+design, so such a test's premise no longer holds and must be retargeted to a still-unbound
+concept, not "fixed" by touching the resolver's tier priority.
+
+## Concepts fixed, for reference (all 161 — see `CAMPAIGN_FIXED_CONCEPTS` in
+## `bioVisualCoverageCampaign.test.ts` for the authoritative, machine-checked list)
+
+Batches 1-12's full per-batch history (which concept, which generator shape, why) is preserved
+below this section, unedited. Batch 13's own list is immediately above. Nothing further is
+"remaining" — this campaign's own stated goal (close the "no diagram ever, even on explicit
+request" gap across the 161 statically-flagged Biology concepts) is met. Any NEW Biology visual
+defect found in the future (a fresh production QA sweep, a new KG concept added, a regression) is
+separate work — read "What's left after this campaign" below before starting it.
 
 Batch 12 (12 concepts: `bio.neuro.cognitive-neuroscience-consciousness` — HUB, three distinct
 lines of evidence (top-down vs bottom-up control, neural correlates of consciousness, split-brain
@@ -153,38 +219,17 @@ cortex's four lobes) validated clean: `tsc --noEmit` 0 errors, 479/479 targeted 
 15,392/15,401 full-suite tests passing (9 pre-existing skips, unrelated to this campaign), dry-run
 seed script 0 duplicate identities (10,462 items).
 
-### Remaining frontier — 18 concept IDs not yet fixed
+### Remaining frontier — NONE. Campaign complete (161/161)
 
-One further concept (`bio.plant.plant-respiration`) is a **confirmed non-defect**, deliberately
-excluded from `CAMPAIGN_FIXED_CONCEPTS` because it already serves a real Tier 3 figure — do not
-"fix" it, just don't count it against progress. The other 17 are genuinely unclassified/unauthored:
+`bio.plant.plant-respiration` is the one **confirmed non-defect**, deliberately excluded from
+`CAMPAIGN_FIXED_CONCEPTS` because it already serves a real Tier 3 figure — do not "fix" it.
 
-```
-bio.plant.plant-respiration            (confirmed already working — do NOT author, leave as-is)
-bio.physio.exercise-physiology
-bio.physio.homeostasis-thermoregulation
-bio.physio.integumentary-system
-bio.physio.lymphatic-system-detail
-bio.physio.muscle-physiology-energetics
-bio.plant.mycorrhizae-plant-symbioses
-bio.plant.phytochrome-photoperiodic-flowering
-bio.plant.plant-biotechnology-applications
-bio.plant.plant-defense-mechanisms
-bio.plant.plant-stress-physiology
-bio.plant.plant-tissue-systems
-bio.plant.secondary-growth-anatomy
-bio.plant.seed-germination-dormancy
-bio.repro.animal-reproductive-strategies
-bio.repro.hormonal-regulation-reproduction-detail
-bio.sys.evolutionary-systems-biology
-bio.sys.quantitative-systems-modeling
-```
-
-(Regenerate this list yourself rather than trusting it blindly: diff
-`CAMPAIGN_FIXED_CONCEPTS` in `bioVisualCoverageCampaign.test.ts` against the original 161-concept
-static audit — the audit script itself was a one-off in the session scratchpad, not committed to
-the repo; re-derive it from `resolveVisual`/Tier 0/1 lookups against all 199 KG concepts if the
-scratchpad file is gone in a future session.) Continue in ~12-concept batches, same methodology,
+If a future session needs to verify this is still true (a KG edit, a new concept added, a
+regression in Tier 0/1/3 resolution), regenerate rather than trust a number here: diff
+`CAMPAIGN_FIXED_CONCEPTS` in `bioVisualCoverageCampaign.test.ts` against a fresh static audit
+of all current KG concepts (the original audit script was a one-off in the session scratchpad,
+not committed to the repo; re-derive it from `resolveVisual`/Tier 0/1 lookups against all KG
+concepts). If that turns up new gaps, continue in ~12-concept batches, same methodology,
 same validation sequence, same commit/merge/push discipline, until this list is empty.
 
 ## What's left after this campaign (do not start these without finishing this one first)

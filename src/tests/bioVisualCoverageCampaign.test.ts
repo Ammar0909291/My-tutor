@@ -191,6 +191,24 @@ export const CAMPAIGN_FIXED_CONCEPTS = [
   'bio.physio.blood-physiology-hemostasis',
   'bio.physio.comparative-animal-physiology',
   'bio.physio.endocrine-disorders-feedback',
+  // Batch 13 — FINAL BATCH — bio.physio (5), bio.plant (8), bio.repro (2), bio.sys (2)
+  'bio.physio.exercise-physiology',
+  'bio.physio.homeostasis-thermoregulation',
+  'bio.physio.integumentary-system',
+  'bio.physio.lymphatic-system-detail',
+  'bio.physio.muscle-physiology-energetics',
+  'bio.plant.mycorrhizae-plant-symbioses',
+  'bio.plant.phytochrome-photoperiodic-flowering',
+  'bio.plant.plant-biotechnology-applications',
+  'bio.plant.plant-defense-mechanisms',
+  'bio.plant.plant-stress-physiology',
+  'bio.plant.plant-tissue-systems',
+  'bio.plant.secondary-growth-anatomy',
+  'bio.plant.seed-germination-dormancy',
+  'bio.repro.animal-reproductive-strategies',
+  'bio.repro.hormonal-regulation-reproduction-detail',
+  'bio.sys.evolutionary-systems-biology',
+  'bio.sys.quantitative-systems-modeling',
 ] as const
 
 describe.each(CAMPAIGN_FIXED_CONCEPTS)('%s now resolves to a faithful Tier 0 scene', (conceptId) => {

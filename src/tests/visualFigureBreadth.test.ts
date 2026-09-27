@@ -308,8 +308,22 @@ describe('a branching feedback loop is not a simultaneous sequence', () => {
   })
 
   it('generation reaches the learner with the conditional framing intact, via the same admission gate as any other spec', async () => {
+    // Concept id deliberately NOT HOMEOSTASIS.conceptId: the Biology visual
+    // coverage campaign (batch 13) gave bio.physio.homeostasis-thermoregulation
+    // its own Tier 0 CONCEPT_SCENES override, which now wins unconditionally
+    // over generation for that concept, before resolveVisualForTurn's async
+    // generate/critic/admission path is even reached — exactly the intended
+    // end state of that campaign, not a regression (see conceptSceneParams.ts).
+    // This test's own purpose is the GENERATION path itself (a conditionally-
+    // framed process_flow passing the critic and admission gate), which is
+    // orthogonal to which concept it runs against, so it now runs against
+    // bio.plant.plant-respiration — confirmed by the same campaign to have no
+    // Tier 0/1 binding — with a freshly-anchored conditional scene using that
+    // concept's own KG vocabulary (aerobic vs anaerobic respiration) rather
+    // than the thermoregulation content, since the anchor check compares the
+    // generated scene's labels against the RESOLVED concept's own KG text.
     const d = await resolveVisualForTurn(
-      { message: 'show me a diagram', lessonConceptId: HOMEOSTASIS.conceptId, subject: 'biology', learnerRequest: 'diagram' },
+      { message: 'show me a diagram', lessonConceptId: 'bio.plant.plant-respiration', subject: 'biology', learnerRequest: 'diagram' },
       {
         enabled: () => true,
         policy: 'auto',
@@ -318,11 +332,12 @@ describe('a branching feedback loop is not a simultaneous sequence', () => {
         budgetReader: openBudget,
         generate: async () => ({
           type: 'process_flow',
-          title: 'Thermoregulation negative feedback',
+          title: 'Aerobic vs anaerobic respiration',
           steps: [
-            { title: 'Hypothalamus compares body temperature to its set point' },
-            { title: 'If temperature rises: vasodilation and sweating' },
-            { title: 'If temperature falls: vasoconstriction and shivering' },
+            { title: 'Glycolysis converts glucose into pyruvate' },
+            { title: 'Cell checks oxygen availability' },
+            { title: 'If oxygen available: aerobic respiration via Krebs cycle' },
+            { title: 'If oxygen scarce: anaerobic fermentation instead' },
           ],
         }),
       },
