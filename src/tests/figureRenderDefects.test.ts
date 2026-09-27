@@ -246,3 +246,26 @@ describe("the What's happening? panel", () => {
     expect(rule).toContain('white-space: pre-line')
   })
 })
+
+// ── found by the same browser pass: comparison figures ───────────────────────
+
+describe('comparison figures', () => {
+  const groupsOf = (s: SceneSpec) => objectsOf(s).filter((o) => /^group-\d+$/.test(o.id ?? ''))
+
+  it('"Whittaker\'s Five Kingdoms" draws all five, Animalia from the concept\'s own EB text', () => {
+    const groups = groupsOf(scene(null, 'bio.found.five-kingdom')).map((g) => g.text)
+    expect(groups).toEqual(['Monera', 'Protista', 'Fungi', 'Plantae', 'Animalia'])
+    const eb = read('educational-brain/concepts/biology/bio.found.five-kingdom.md')
+    expect(eb).toContain('ingestive heterotrophs with no cell walls')
+  })
+
+  it('no comparison figure paints two of its groups the same colour', () => {
+    const offenders: string[] = []
+    for (const [key, s] of CORPUS) {
+      if (!s.id.startsWith('cell-comparison')) continue
+      const colours = groupsOf(s).map((g) => g.color)
+      if (new Set(colours).size !== colours.length) offenders.push(`${key}: ${colours.join(' ')}`)
+    }
+    expect(offenders).toEqual([])
+  })
+})

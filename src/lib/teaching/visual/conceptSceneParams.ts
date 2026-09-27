@@ -833,6 +833,10 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
       { label: 'Protista', description: 'eukaryotic, unicellular', items: ['Unicellular'] },
       { label: 'Fungi', description: 'eukaryotic, multicellular, absorptive heterotrophs with chitin walls', items: ['Chitin cell walls', 'Absorptive heterotroph'] },
       { label: 'Plantae', description: 'eukaryotic, multicellular, autotrophs with cellulose walls and chlorophyll', items: ['Cellulose cell walls', 'Autotroph'] },
+      // Animalia was missing: a figure titled "Five Kingdoms" drew four. Text
+      // from the concept's own Educational Brain Core Understanding
+      // ("Animalia are ingestive heterotrophs with no cell walls at all").
+      { label: 'Animalia', description: 'eukaryotic, multicellular, ingestive heterotrophs with no cell walls at all', items: ['No cell walls', 'Ingestive heterotroph'] },
     ],
   }),
 

@@ -32,7 +32,13 @@ export interface CellComparisonParams {
   groups: readonly ComparisonGroup[]
 }
 
-const GROUP_COLORS = ['#4C8DFF', '#FFB020', '#39C46E', '#EF4444'] as const
+// Six, not four: nine Biology comparisons have five or six groups (the five
+// kingdoms, six modes of asexual reproduction, six invertebrate phyla), and
+// with four colours the fifth group was painted the first group's blue — two
+// unrelated categories the figure then claimed were the same kind of thing.
+// The first four are unchanged, so every figure of four or fewer groups is
+// byte-identical.
+const GROUP_COLORS = ['#4C8DFF', '#FFB020', '#39C46E', '#EF4444', '#B47CFF', '#2EC4B6'] as const
 const ITEM_COLOR = '#9AA5B8'
 const GROUP_SPACING = 5.5
 const ITEM_SPACING = 1.1
