@@ -29,6 +29,45 @@ import { join } from 'node:path'
 import { BIOLOGY_PROBES, BIOLOGY_EXPLANATIONS } from '../../src/lib/teaching/assets/biologySeedAssets'
 import { BIOLOGY_DEPTH_PROBES } from '../../src/lib/teaching/assets/biologyDepthSeedAssets'
 import { BIOLOGY_EXTENSION_PROBES, BIOLOGY_EXTENSION_EXPLANATIONS } from '../../src/lib/teaching/assets/biologyExtensionSeedAssets'
+import { AUTHORED_EXPLANATIONS, AUTHORED_PROBES } from '../../src/lib/teaching/assets/authoredSeedAssets'
+import { CHEMISTRY_EXPLANATIONS, CHEMISTRY_PROBES } from '../../src/lib/teaching/assets/chemistrySeedAssets'
+import { CHEMISTRY_DEPTH_PROBES } from '../../src/lib/teaching/assets/chemistryDepthSeedAssets'
+import { PHYSICS_BAND_GAP_PROBES } from '../../src/lib/teaching/assets/physicsBandGapAssets'
+import { PHYSICS_DEPTH_PROBES } from '../../src/lib/teaching/assets/physicsDepthSeedAssets'
+import { ENGLISH_BAND_GAP_PROBES } from '../../src/lib/teaching/assets/englishBandGapAssets'
+import { ENGLISH_PROBE_BATCH_1 } from '../../src/lib/teaching/assets/englishProbeBatch1'
+import { ENGLISH_BATCH_1_DEPTH_4 } from '../../src/lib/teaching/assets/englishBatch1Depth4'
+import { ENGLISH_PROBE_BATCH_2 } from '../../src/lib/teaching/assets/englishProbeBatch2'
+import { ENGLISH_PROBE_BATCH_3 } from '../../src/lib/teaching/assets/englishProbeBatch3'
+import { ENGLISH_PROBE_BATCH_4 } from '../../src/lib/teaching/assets/englishProbeBatch4'
+import { ENGLISH_PROBE_BATCH_5 } from '../../src/lib/teaching/assets/englishProbeBatch5'
+import { ENGLISH_PROBE_BATCH_6 } from '../../src/lib/teaching/assets/englishProbeBatch6'
+import { ENGLISH_PROBE_BATCH_7 } from '../../src/lib/teaching/assets/englishProbeBatch7'
+import { ENGLISH_PROBE_BATCH_8 } from '../../src/lib/teaching/assets/englishProbeBatch8'
+import { ENGLISH_PROBE_BATCH_9 } from '../../src/lib/teaching/assets/englishProbeBatch9'
+import { ENGLISH_PROBE_BATCH_10 } from '../../src/lib/teaching/assets/englishProbeBatch10'
+import { ENGLISH_ADULT_BAND_BATCH_1 } from '../../src/lib/teaching/assets/englishAdultBandBatch1'
+import { ENGLISH_ADULT_BAND_BATCH_2 } from '../../src/lib/teaching/assets/englishAdultBandBatch2'
+import { ENGLISH_ADULT_BAND_BATCH_3 } from '../../src/lib/teaching/assets/englishAdultBandBatch3'
+import { ENGLISH_ADULT_BAND_BATCH_4 } from '../../src/lib/teaching/assets/englishAdultBandBatch4'
+import { ENGLISH_ADULT_BAND_BATCH_5 } from '../../src/lib/teaching/assets/englishAdultBandBatch5'
+import { ENGLISH_ADULT_BAND_BATCH_6 } from '../../src/lib/teaching/assets/englishAdultBandBatch6'
+import { ENGLISH_ADULT_BAND_BATCH_7 } from '../../src/lib/teaching/assets/englishAdultBandBatch7'
+import { ENGLISH_ADULT_BAND_BATCH_8 } from '../../src/lib/teaching/assets/englishAdultBandBatch8'
+import { ENGLISH_ADULT_BAND_BATCH_9 } from '../../src/lib/teaching/assets/englishAdultBandBatch9'
+import { ENGLISH_ADULT_BAND_BATCH_10 } from '../../src/lib/teaching/assets/englishAdultBandBatch10'
+import { ENGLISH_ADULT_BAND_BATCH_11 } from '../../src/lib/teaching/assets/englishAdultBandBatch11'
+import { ENGLISH_ADULT_BAND_BATCH_12 } from '../../src/lib/teaching/assets/englishAdultBandBatch12'
+import { ENGLISH_ADULT_BAND_BATCH_13 } from '../../src/lib/teaching/assets/englishAdultBandBatch13'
+import { ENGLISH_ADULT_BAND_BATCH_14 } from '../../src/lib/teaching/assets/englishAdultBandBatch14'
+import { ENGLISH_ADULT_BAND_BATCH_15 } from '../../src/lib/teaching/assets/englishAdultBandBatch15'
+import { ENGLISH_ADULT_BAND_BATCH_16 } from '../../src/lib/teaching/assets/englishAdultBandBatch16'
+import { ENGLISH_ADULT_BAND_BATCH_17 } from '../../src/lib/teaching/assets/englishAdultBandBatch17'
+import { ENGLISH_ADULT_BAND_BATCH_18 } from '../../src/lib/teaching/assets/englishAdultBandBatch18'
+import { ENGLISH_ADULT_BAND_BATCH_19 } from '../../src/lib/teaching/assets/englishAdultBandBatch19'
+import { ENGLISH_ADULT_BAND_BATCH_20 } from '../../src/lib/teaching/assets/englishAdultBandBatch20'
+import { ENGLISH_ADULT_BAND_BATCH_21 } from '../../src/lib/teaching/assets/englishAdultBandBatch21'
+import { ENGLISH_LETTER_SOUND_ELEMENTARY_GAP } from '../../src/lib/teaching/assets/englishLetterSoundElementaryGap'
 
 export interface CanonicalProbe {
   stem: string
@@ -179,8 +218,8 @@ export function proseOptions(text: string | undefined): { question: string; opti
   return options.length >= 2 ? { question: parts[0].trim(), options } : null
 }
 
-function ebSections(conceptId: string, names: RegExp): string {
-  const file = join(process.cwd(), 'educational-brain', 'concepts', 'biology', `${conceptId}.md`)
+function ebSections(subjectFolder: string, conceptId: string, names: RegExp): string {
+  const file = join(process.cwd(), 'educational-brain', 'concepts', subjectFolder, `${conceptId}.md`)
   if (!existsSync(file)) return ''
   const out: string[] = []
   let on = false
@@ -198,7 +237,70 @@ export function biologyCanonicalContent(conceptId: string): CanonicalContent {
   const explanations = [...BIOLOGY_EXPLANATIONS, ...BIOLOGY_EXTENSION_EXPLANATIONS]
     .filter((e) => e.conceptId === conceptId)
     .map((e) => e.content)
-  const eb = ebSections(conceptId, /Learning Objective|Core Understanding|Mental Models/)
+  const eb = ebSections('biology', conceptId, /Learning Objective|Core Understanding|Mental Models/)
   if (!probes.length && !explanations.length && !eb) throw new Error(`no canonical content for ${conceptId}`)
+  return { probes, taught: [...explanations, eb].filter(Boolean) }
+}
+
+export type QaSubject = 'physics' | 'chemistry' | 'english' | 'biology'
+
+/**
+ * Same recognition mechanism as `biologyCanonicalContent`, generalized to
+ * physics/chemistry/english (added for the item-11 Groq-vs-Gemini identical-
+ * student A/B test, docs/architecture/TUTOR_QUALITY_FIX_PLAN.md). The probe
+ * and explanation source lists per subject mirror EXACTLY what
+ * scripts/brain/seed-knowledge-assets.ts's own ALL_PROBES/ALL_EXPLANATIONS
+ * aggregate for that subject (grepped from that file, not guessed), so this
+ * sees the same canonical corpus that is actually seeded to production.
+ */
+function allProbesFor(subject: QaSubject) {
+  switch (subject) {
+    case 'biology':
+      return [...BIOLOGY_PROBES, ...BIOLOGY_DEPTH_PROBES, ...BIOLOGY_EXTENSION_PROBES]
+    case 'chemistry':
+      return [...CHEMISTRY_PROBES, ...CHEMISTRY_DEPTH_PROBES]
+    case 'physics':
+      return [...AUTHORED_PROBES, ...PHYSICS_BAND_GAP_PROBES, ...PHYSICS_DEPTH_PROBES]
+    case 'english':
+      return [
+        ...AUTHORED_PROBES, ...ENGLISH_BAND_GAP_PROBES, ...ENGLISH_PROBE_BATCH_1, ...ENGLISH_BATCH_1_DEPTH_4,
+        ...ENGLISH_PROBE_BATCH_2, ...ENGLISH_PROBE_BATCH_3, ...ENGLISH_PROBE_BATCH_4, ...ENGLISH_PROBE_BATCH_5,
+        ...ENGLISH_PROBE_BATCH_6, ...ENGLISH_PROBE_BATCH_7, ...ENGLISH_PROBE_BATCH_8, ...ENGLISH_PROBE_BATCH_9,
+        ...ENGLISH_PROBE_BATCH_10, ...ENGLISH_ADULT_BAND_BATCH_1, ...ENGLISH_ADULT_BAND_BATCH_2,
+        ...ENGLISH_ADULT_BAND_BATCH_3, ...ENGLISH_ADULT_BAND_BATCH_4, ...ENGLISH_ADULT_BAND_BATCH_5,
+        ...ENGLISH_ADULT_BAND_BATCH_6, ...ENGLISH_ADULT_BAND_BATCH_7, ...ENGLISH_ADULT_BAND_BATCH_8,
+        ...ENGLISH_ADULT_BAND_BATCH_9, ...ENGLISH_ADULT_BAND_BATCH_10, ...ENGLISH_ADULT_BAND_BATCH_11,
+        ...ENGLISH_ADULT_BAND_BATCH_12, ...ENGLISH_ADULT_BAND_BATCH_13, ...ENGLISH_ADULT_BAND_BATCH_14,
+        ...ENGLISH_ADULT_BAND_BATCH_15, ...ENGLISH_ADULT_BAND_BATCH_16, ...ENGLISH_ADULT_BAND_BATCH_17,
+        ...ENGLISH_ADULT_BAND_BATCH_18, ...ENGLISH_ADULT_BAND_BATCH_19, ...ENGLISH_ADULT_BAND_BATCH_20,
+        ...ENGLISH_ADULT_BAND_BATCH_21, ...ENGLISH_LETTER_SOUND_ELEMENTARY_GAP,
+      ]
+  }
+}
+
+function allExplanationsFor(subject: QaSubject) {
+  switch (subject) {
+    case 'biology':
+      return [...BIOLOGY_EXPLANATIONS, ...BIOLOGY_EXTENSION_EXPLANATIONS]
+    case 'chemistry':
+      return [...CHEMISTRY_EXPLANATIONS, ...AUTHORED_EXPLANATIONS]
+    case 'physics':
+    case 'english':
+      return [...AUTHORED_EXPLANATIONS]
+  }
+}
+
+const EB_FOLDER: Record<QaSubject, string> = {
+  biology: 'biology', chemistry: 'chemistry', physics: 'physics', english: 'english',
+}
+
+/** Everything canonical the lesson teaches for one concept, any of the 4 subjects. */
+export function canonicalContent(subject: QaSubject, conceptId: string): CanonicalContent {
+  const probes = allProbesFor(subject).filter((p) => p.conceptId === conceptId)
+  const explanations = allExplanationsFor(subject)
+    .filter((e) => e.conceptId === conceptId)
+    .map((e) => e.content)
+  const eb = ebSections(EB_FOLDER[subject], conceptId, /Learning Objective|Core Understanding|Mental Models/)
+  if (!probes.length && !explanations.length && !eb) throw new Error(`no canonical content for ${subject}/${conceptId}`)
   return { probes, taught: [...explanations, eb].filter(Boolean) }
 }
