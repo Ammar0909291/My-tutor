@@ -18,6 +18,7 @@ type PrismaLike = {
       where: { learnerId: string; seq?: { gt: number }; type?: { in: string[] } }
       orderBy: { seq: 'asc' }
       take?: number
+      select?: Record<string, true>
     }): Promise<Array<{
       eventId: string; seq: number; learnerId: string; sessionId: string | null
       turnId: string | null; type: string; schemaVersion: number
@@ -114,8 +115,43 @@ export async function loadSpineEventsOfType(
 export async function replayCapabilityProjection(
   prisma: PrismaLike, learnerId: string,
 ): Promise<CapabilityProjection> {
-  const events = await loadSpineEventsOfType(prisma, learnerId, ['CapabilityObserved'])
+  const events = await loadCapabilityEvents(prisma, learnerId)
   return foldAll(learnerId, events).capability
+}
+
+/**
+ * EGRESS-5 (2026-09-27). The capability fold reads only `seq`, `type`,
+ * `schemaVersion` and `payload` (fold.ts: foldEvent's preamble + its
+ * CapabilityObserved branch), so only those columns are fetched. The other
+ * nine (event/session/turn ids, idempotency key, source, confidence,
+ * packVersion, createdAt) were ~2/3 of every row's bytes and were discarded.
+ * MEASURED in production: this query ran 1,680 times in its first 4 days at
+ * ~230 rows per call (heavy learners opening many sessions). Same pages, same
+ * filter, same order as loadSpineEventsOfType — only the column list differs.
+ */
+async function loadCapabilityEvents(prisma: PrismaLike, learnerId: string): Promise<SpineEventRecord[]> {
+  const out: SpineEventRecord[] = []
+  let after = 0
+  for (;;) {
+    const page = await prisma.spineEvent.findMany({
+      where: { learnerId, type: { in: ['CapabilityObserved'] }, seq: { gt: after } },
+      orderBy: { seq: 'asc' },
+      take: PAGE,
+      select: { seq: true, type: true, schemaVersion: true, payload: true },
+    })
+    if (page.length === 0) break
+    for (const r of page) {
+      out.push({
+        eventId: '', seq: r.seq, learnerId, sessionId: null, turnId: null,
+        type: r.type, schemaVersion: r.schemaVersion, payload: r.payload,
+        // Not selected: the capability fold never reads these.
+        source: { componentId: '', version: 0 }, confidence: 0,
+      })
+    }
+    after = page[page.length - 1].seq
+    if (page.length < PAGE) break
+  }
+  return out
 }
 
 /**

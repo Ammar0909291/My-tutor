@@ -16,8 +16,9 @@ import {
   detectLearningDifficulties,
 } from '@/lib/intelligence/learningDifficultyProfile'
 import { generateTeachingAdaptations } from '@/lib/intelligence/teachingAdaptations'
+import { withRequestMemo } from '@/lib/db/requestMemo'
 
-export async function GET() {
+async function handleGET() {
   const session = await auth()
   if (!session?.user?.id) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 
@@ -26,4 +27,9 @@ export async function GET() {
   const recommendations = generateTeachingAdaptations(profile)
 
   return NextResponse.json({ profile, difficulties, recommendations })
+}
+
+// One read per distinct query across this handler's loaders (egress, requestMemo.ts).
+export function GET(...args: Parameters<typeof handleGET>) {
+  return withRequestMemo(() => handleGET(...args))
 }
