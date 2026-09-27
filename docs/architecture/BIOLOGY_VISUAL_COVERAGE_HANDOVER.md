@@ -246,3 +246,43 @@ that this campaign does not address:
 - **Final report**: once visual coverage is complete AND the two items above are resolved (or
   explicitly deferred with owner sign-off), CLAUDE.md's binding reporting preference requires a
   single fenced-code-block report covering git info and a final ready/not-ready verdict.
+
+## Client-side render verification (2026-09-27) — figure renders; 3 render defects found, NOT fixed
+
+The one step API calls could not cover — does the browser actually DRAW the served `sceneSpec` —
+was checked in real headless Chromium against production (`my-tutor-flame.vercel.app`, owner
+account, `/learn?subject=biology` → prelude → "More options" → "Give me a diagram", concept
+`bio.found.what-is-biology`, desktop 1440px and mobile 390px). Screenshots stayed in that
+session's scratchpad (not committed).
+
+**PASS — a real figure renders.** `POST /api/learn/chat` returned 200 with a `sceneSpec`
+(`cell-hub-bio.found.what-is-biology`, 7 steps); the browser mounted a WebGL canvas (526×300)
+and drew the orange "Biology" hub plus all six blue branch nodes (Botany, Zoology,
+Microbiology, Physiology, Ecology, Genetics) with legible labels, matching the payload exactly.
+The stepper ("Stage 1 of 7", Next/Previous, Show all, Play the stages) works; the figure opens
+on stage 1 (hub only) by design. No page errors, no failed asset loads (only navigation-abort
+`ERR_ABORTED` prefetches) — the prior session's `ERR_TOO_MANY_RETRIES` was specific to that
+sandbox. The prior session's gap in the browser was the sandbox's Chromium NSS store being
+empty; the fix there was importing the proxy CAs from `/root/.ccr/ca-bundle.crt` into
+`/root/.pki/nssdb` with `certutil -A -t "C,,"` (never disable TLS verification).
+
+**Precondition found:** `/learn?subject=<slug>` only honours the param when the profile is
+ENROLLED in that subject (`src/app/learn/page.tsx:82-86`); otherwise it silently falls back to
+`profile.subjects[0]`. The owner account was not enrolled in biology, so the page opened
+Chemistry. Enrolled via the app's own additive `POST /api/subjects/enroll` (new
+`profile_subjects` + `learning_paths` rows only; nothing else touched).
+
+**Defects (root-caused, NOT fixed — cross-subject renderer change, owner decision):**
+1. **Connector lines are invisible.** `SceneSpecRenderer.tsx` `case 'path'` draws only a
+   0.06-radius marker at each point, never a segment between them. `cellHub.pure.ts:48` emits
+   each spoke as a 2-point path from the hub centre to the spoke centre, so both markers sit
+   inside the spheres and the spoke disappears completely. Same pattern in
+   `cellComparison.pure.ts:54` (header→item lines, 92 concepts), `cellStructure.pure.ts:60`
+   (11), `cellPathway.pure.ts:119` (cycle-return arrow) — code-derived, only the hub family was
+   seen in the browser. The tutor's prose ("six curved paths") describes lines the learner
+   cannot see.
+2. **Misleading legend.** `explainer.ts` `deriveLegend` keeps one row per COLOUR, labelled by
+   the first object of that colour: the six blue branches are all captioned "Botany", and the
+   invisible line gets its raw id, "Spoke line 0".
+3. **Run-on "What's happening?" panel.** `derivePanels` joins step narrations with a bare
+   space: "Biology Botany: the study of plants Zoology: the study of animals …".
