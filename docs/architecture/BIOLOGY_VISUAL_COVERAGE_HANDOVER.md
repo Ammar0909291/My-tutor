@@ -341,3 +341,91 @@ deleted, re-login blocked.
   grows…"), so a pathway's "What's happening?" lines don't say which stage they describe.
 - Legends for label-less physics objects still fall back to palette role names ("Resulting
   / outgoing quantity") — pre-existing, unchanged.
+
+## Mastery reachability, batch 13 — live, 2026-09-27
+
+**Question:** can a learner who answers correctly reach VERIFIED mastery (1 verified CHECK +
+2 verified PRACTICE, `masteryGate.ts`) on the 17 batch-13 concepts? The earlier harness
+could not say: it matched quiz stems with hand-written regexes and guessed option 0 on
+anything else.
+
+**Harness** (`scripts/qa/biologyMasteryReachability.ts` + `biologyAnswerPicker.ts`,
+pinned by `src/tests/qaBiologyAnswerPicker.test.ts`). Answers come only from the concept's
+own canonical sources (seed probes, seed explanations, EB Learning Objective / Core
+Understanding / Mental Models); `correctIndex` is never read (the route strips it).
+Measured over all 597 Biology seed probes, options shuffled: 99.5% on an authored probe;
+72.9% on a held-out question (leave-one-out) vs a 35.0% random baseline. Prose questions
+with lettered options are answered like an MCQ; open questions by quoting the taught
+sentence that best matches.
+
+Two harness defects were found and fixed before any result was trusted:
+1. Nudging "can you quiz me?" made the tutor write its own quiz during GUIDE — an
+   ungradeable (model-invented key) question whose wrong answer still regresses the
+   ladder. The harness now only acknowledges; the lesson's gate decides when to ask.
+2. Three lessons driven CONCURRENTLY on one account overwrote each other's lesson state
+   (one session taught another concept's figure and closed "<other concept> is on
+   pause"; a CHECK counter fell 1 → 0) — the API harness sends no `tabId`. Run 1's 4/17
+   is therefore void. Run 2 uses one disposable account per worker, concepts sequential.
+
+**Result (run 2, disposable accounts, production):** **8/17 VERIFIED** (DB: 8 `COMPLETED`, 9 `REVISION` — matches the API exactly). Every NOT-verified lesson answered all three authored probes correctly.
+
+| concept | verified | turns | verified CHECK/PRACTICE | 3 authored probes: attached at → graded at |
+|---|---|---|---|---|
+| `bio.physio.exercise-physiology` | no | 18 | 1/1 | GUIDE/CHECK/CHECK → GUIDE/CHECK/PRACTICE |
+| `bio.physio.homeostasis-thermoregulation` | no | 18 | 1/1 | GUIDE/CHECK/CHECK → GUIDE/CHECK/PRACTICE |
+| `bio.physio.integumentary-system` | no | 18 | 1/1 | GUIDE/CHECK/CHECK → GUIDE/CHECK/PRACTICE |
+| `bio.physio.lymphatic-system-detail` | no | 18 | 1/1 | GUIDE/CHECK/CHECK → DEMONSTRATE/CHECK/PRACTICE |
+| `bio.physio.muscle-physiology-energetics` | YES | 9 | 1/2 | CHECK/CHECK/PRACTICE → CHECK/PRACTICE/PRACTICE |
+| `bio.plant.mycorrhizae-plant-symbioses` | YES | 7 | 1/2 | GUIDE/CHECK/PRACTICE → CHECK/PRACTICE/PRACTICE |
+| `bio.plant.phytochrome-photoperiodic-flowering` | YES | 9 | 1/2 | CHECK/CHECK/PRACTICE → CHECK/PRACTICE/PRACTICE |
+| `bio.plant.plant-biotechnology-applications` | no | 18 | 1/1 | GUIDE/GUIDE/CHECK → DEMONSTRATE/CHECK/PRACTICE |
+| `bio.plant.plant-defense-mechanisms` | YES | 9 | 1/2 | CHECK/CHECK/PRACTICE → CHECK/PRACTICE/PRACTICE |
+| `bio.plant.plant-stress-physiology` | YES | 7 | 1/2 | GUIDE/CHECK/PRACTICE → CHECK/PRACTICE/PRACTICE |
+| `bio.plant.plant-tissue-systems` | no | 18 | 1/1 | GUIDE/CHECK/CHECK → GUIDE/CHECK/PRACTICE |
+| `bio.plant.secondary-growth-anatomy` | YES | 9 | 1/2 | CHECK/CHECK/PRACTICE → CHECK/PRACTICE/PRACTICE |
+| `bio.plant.seed-germination-dormancy` | no | 18 | 1/1 | GUIDE/CHECK/CHECK → GUIDE/CHECK/PRACTICE |
+| `bio.repro.animal-reproductive-strategies` | YES | 10 | 1/2 | GUIDE/CHECK/PRACTICE → CHECK/PRACTICE/PRACTICE |
+| `bio.repro.hormonal-regulation-reproduction-detail` | no | 18 | 1/1 | GUIDE/CHECK/CHECK → GUIDE/CHECK/PRACTICE |
+| `bio.sys.evolutionary-systems-biology` | no | 18 | 1/1 | GUIDE/CHECK/CHECK → GUIDE/CHECK/PRACTICE |
+| `bio.sys.quantitative-systems-modeling` | YES | 9 | 1/2 | GUIDE/CHECK/PRACTICE → CHECK/PRACTICE/PRACTICE |
+
+**Root cause of every NOT-verified lesson — a product defect (NOT fixed; owner decision).**
+The learner answered ALL THREE authored probes correctly in every lesson. What decides the
+outcome is the phase the FIRST probe is GRADED in:
+- 9/9 NOT-verified: the first authored probe was graded at GUIDE (7) or DEMONSTRATE after a
+  ladder regression (2). A correct answer there only advances the ladder
+  (`conversationState.ts` fold, `case 'GUIDE'`) and banks no credit — and the probe is
+  spent. With exactly three authored probes per Biology concept (the bare asset contract),
+  two remain for three required credits: verified mastery is unreachable however well the
+  learner answers, and the lesson pauses at turn 18 ("…is on pause — you haven't mastered
+  it yet").
+- 8/8 VERIFIED: all three probes were graded at CHECK/PRACTICE. In 4 of them the first probe
+  was ATTACHED at GUIDE too, but the attaching turn itself advanced the ladder to CHECK
+  before the answer arrived, so it counted.
+It is timing, not content: integumentary and homeostasis were verified in 9 turns in run 1
+and not in run 2.
+
+The code already states this law for the phases below GUIDE: `mayAttachProbeBelowGuide`
+(masteryReachability.ts) refuses to spend a probe at OBSERVE/DEMONSTRATE unless three remain
+afterwards, "because at a pool of exactly three, spending one below the gates makes mastery
+unreachable". GUIDE is outside it on purpose — A2 (`a2LadderGateReachability.test.ts`) opened
+authored probes at GUIDE so a lesson could not stall there on ungradeable model questions —
+but an authored probe GRADED at GUIDE earns the same zero credit.
+
+Fix options for the owner (none implemented):
+- **(a) Surplus rule at GUIDE** — attach an authored probe at GUIDE only while ≥3 remain
+  afterwards. Closes the defect for bare-contract concepts in every subject (physics/
+  chemistry, ≥5 probes, unchanged), but also removes the 4 successful GUIDE-attach paths
+  above, so those lessons must reach CHECK through other turns (they did in the 4 verified
+  lessons with no GUIDE attach). Re-creating A2's GUIDE stall is the risk to measure.
+- **(b) A fourth authored probe per Biology concept** (from each EB entry, as the earlier
+  depth campaigns did), so a GUIDE-graded spend still leaves three. No logic change; 199
+  concepts of content work.
+- **(c) Don't mark an authored probe spent when it is graded at GUIDE** (re-askable later at
+  CHECK, options rotated, as a missed probe already is). Keeps A2's ladder benefit and the
+  pool; the learner meets the same question twice.
+
+**Also observed (not fixed):** on a model-invented quiz the learner answered wrongly, the
+server graded it wrong (phase regressed GUIDE → DEMONSTRATE) but the reply said "Great,
+you've spotted the hypertrophy adaptation" — `wrongAnswerCorrection.ts` deliberately stays
+silent on model-invented keys, and nothing stops the model praising a wrong answer.
