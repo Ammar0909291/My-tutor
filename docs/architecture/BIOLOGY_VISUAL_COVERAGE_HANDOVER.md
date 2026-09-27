@@ -286,3 +286,58 @@ Chemistry. Enrolled via the app's own additive `POST /api/subjects/enroll` (new
    invisible line gets its raw id, "Spoke line 0".
 3. **Run-on "What's happening?" panel.** `derivePanels` joins step narrations with a bare
    space: "Biology Botany: the study of plants Zoology: the study of animals …".
+
+### Update (2026-09-27, later) — all three render defects FIXED and verified on production
+
+Fixed in `622268f` (renderer + legend + panel), with two follow-ups found by the same
+browser pass: `b4def2a` (content + colour) and the visual-contract commit below. Verified in
+real headless Chromium against production (deployment `94211d5`, then `1d34991`), owner
+account, `bio.found.what-is-biology`, a FRESH "Give me a diagram" request (`/api/learn/chat`
+200, new `sceneSpec`), desktop 1440px and mobile 390px, 0 page errors:
+
+1. **Connectors drawn.** `SceneSpecRenderer` now joins each consecutive pair of a `path`'s
+   points with the existing `BondLine` (markers kept as round joints; `pathSegments()` in
+   `sceneSpec.ts`). All six hub spokes visible on production. Because `path` is shared, the
+   physics/chemistry/maths curves were checked through the dev-only `/dev/physics-pilot`
+   harness before and after: projectile parabola, pendulum arc, circular-motion circle,
+   gravitation orbit, transverse wave, interference, torque arc, electric-dipole arc,
+   electron shells, kinematics and calculus curves — all now continuous lines (were loose
+   dots), rings closed, arcs open. Pinned in `figureRenderDefects.test.ts`.
+2. **Legend truthful.** Production legend now reads "Biology" / "Botany, Zoology,
+   Microbiology, Physiology, Ecology, Genetics". `deriveLegend` names every captioned object
+   of a colour (with "+N more" past 64 chars), uses ids only when `nameFromId` says they
+   read as names, and drops rows whose only evidence is a numbered handle. Measured across
+   all 248 deterministic scenes before/after: every id-handle leak removed ("Spoke line 0",
+   "Group 0 line 0", "Stage 1 arrow", "Critical 0", "E0", …); physics names preserved
+   ("P vector", "Resistor", "Male"/"Female", "Object"/"Image").
+3. **Panel separated.** "What's happening?" is one finished sentence per step
+   (`white-space: pre-line`); verified on production.
+
+**Found by the same pass and fixed:**
+- `b4def2a` — "Whittaker's Five Kingdoms" drew FOUR kingdoms (Animalia missing though the
+  KG and EB list five); Animalia added from the EB Core Understanding. The comparison
+  generator had 4 group colours, so 9 Biology comparisons with 5–6 groups painted unrelated
+  groups the same colour; now 6 colours (≤4-group figures byte-identical).
+- Visual contract (what the tutor is TOLD about the figure) — it described the six straight
+  spokes as "6 plotted curves" (the tutor then said "six curved arrows") and said "built in
+  6 stages" for the 7-stage figure, never passing stage 7 (the count was taken after a
+  6-stage cap). Straight paths are now "straight lines"; the cap is 12 (covers all 7
+  Biology figures with 7–12 stages); a truncated list reports the real total.
+  `visualContractFigureTruth.test.ts`.
+
+**`/learn?subject=` fallback FIXED (`1d34991`).** `resolveLearnSubject()` + the
+`SubjectNotEnrolled` screen: an unenrolled (or removed — `isActive=false`) subject now
+shows "You're not enrolled in Biology yet" with Add (the Library's own additive enroll
+endpoint), "<current subject> — Continue Learning", and Go to Library; an unknown/hidden
+slug says "This subject isn't available yet". Never enrolls on a GET. Verified on
+production with a disposable account (onboarded with Chemistry): prompt shown, no
+Chemistry lesson; unknown slug message; Add → 200 → Biology subject introduction; account
+deleted, re-login blocked.
+
+**Still open from this pass (not fixed):**
+- Six-group comparison figures (e.g. `bio.repro.asexual-reproduction`) are cramped at
+  lesson width: item labels crowd each other. Pre-existing layout; colours now distinct.
+- `cellPathway` narrations omit the stage name ("the cell grows…", not "G1: the cell
+  grows…"), so a pathway's "What's happening?" lines don't say which stage they describe.
+- Legends for label-less physics objects still fall back to palette role names ("Resulting
+  / outgoing quantity") — pre-existing, unchanged.
