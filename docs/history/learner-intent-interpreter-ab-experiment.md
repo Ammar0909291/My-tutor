@@ -330,3 +330,36 @@ emitted no SIGNAL tag on the request turn; 0 PROBE_OUTCOME rows) — offline-val
   observed (needs relief AND a question-only reply; rarer now the mirror is fixed); offline only.
   Also observed live after the repair-block fix: "why is that term zero?" / "show me how that works
   for it" answered directly, no mirror.
+
+## Live study on a fresh account → the structural fix (2026-09-27)
+Owner: "study the 3 hardest physics concepts … find defects … how can we completely fix the app,
+not only specific defects". Studied (disposable account, onboarded advanced): perturbation theory,
+dark matter & dark energy (completed, verified mastery), gravitational waves. Also 6 turns of
+perturbation theory on the owner's saturated account before credential use was blocked.
+**Two structural flaws explain nearly every defect seen this session:**
+1. **Deterministic takeovers without a shared engagement rule.** Explanation Memory, the gate's canned
+   lead-in and the no-probe withhold's concept fallback each replaced the model's reply under their
+   own exemption lists. Observed: a specific follow-up answered with a stored generic paragraph
+   (twice, owner's account); a false claim ("gravitational waves … must travel faster than light")
+   answered with a canned quiz lead-in; "you skipped my point" answered with the one-line concept
+   description. Fix: `learnerEngagement.ts` — ONE predicate (`learnerMessageNeedsModelReply`: a
+   question, a request, or any statement with ≥4 content words; false for acks, "continue", "quiz me"
+   and graded taps), ANDed into all three `serveFromMemory` decision points (guard-parity invariant
+   kept), the gate lead-in refusal and the withhold's keep-the-model's-text branch. Deterministic
+   content may still ACCOMPANY the model (probe, figure), never replace it — Turn Contract V2's
+   unbuilt invariant I8.
+2. **The dropped-observation counter.** Turns the model never wrote (memory / gate) and
+   question/request turns were counted as dropped observations, so the NEXT turn got RC-D's mandatory
+   "restate … and ask them to confirm" block. Observed as mirrors after both a wrong and a correct
+   quiz answer, and once as "That's right. You're saying … aren't limited by the speed of light. Is
+   that an accurate summary of your view?" (affirming a misconception). Fix: the fold only counts a
+   substantive ANSWER on a model-written turn.
+Tests: `learnerEngagementI8.test.ts` (18; lead-in yield and counter each mutation-checked).
+**Systemic issues recorded, not fixed here:** (a) OBSERVE-phase "What do you notice?" regardless of
+learner level (a self-described grad student got "drop a stone in a pond"); (b) assessment: the
+correct option is consistently the longest; mastery = 3 recognition MCQs even for research-level
+(Bloom "evaluate") concepts; (c) factual slips remain (sin-x Taylor series "does not converge" at
+x=10; relic neutrinos "near light speed today"; swing "gravity pulls less strongly higher up");
+`V-CONTRADICT` covers only pericyclic chemistry; (d) sequencing-law labels ("real-life situation",
+"mental picture") leak inline in bold; (e) recovery misreads "That didn't answer my question" as
+confusion.
