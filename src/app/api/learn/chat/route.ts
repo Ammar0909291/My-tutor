@@ -5177,7 +5177,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // below, the model serves this turn and needs its instruction.
             // On a relieved turn (a learner question/request owns it) the
             // model answers first; see buildGateAssessmentBlock.
-            systemPrompt += buildGateAssessmentBlock(converted, { answerLearnerFirst: probeStarvationRelievedHoisted })
+            // I8 (2026-09-27, live): also when the learner's message needs a
+            // reply — a false claim got "LEAD-IN ONLY … do NOT give a new
+            // definition", so the correction never happened.
+            systemPrompt += buildGateAssessmentBlock(converted, {
+              answerLearnerFirst: probeStarvationRelievedHoisted
+                || (await import('@/lib/teaching/learnerEngagement')).learnerMessageNeedsModelReply(
+                  message, { answeredPendingQuestion: mcqGradeHoisted !== null }),
+            })
             // Phase 2 — DETERMINISTIC LEAD-IN. The question, choices,
             // correctIndex and grading are already server-owned by this point;
             // the model's only remaining job is the sentence above the

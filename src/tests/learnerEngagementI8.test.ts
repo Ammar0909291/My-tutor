@@ -62,7 +62,7 @@ describe('the predicate', () => {
   ])('needs a reply: %s', (m) => expect(learnerMessageNeedsModelReply(m, { answeredPendingQuestion: false })).toBe(true))
 
   // "quiz me on this": a stock lead-in + authored quiz IS the right reply to it.
-  it.each(['ok', 'ok, continue', 'got it', 'thanks', 'yes', 'ok, that makes sense', 'next', 'quiz me on this', ''])(
+  it.each(['ok', 'ok, continue', 'got it', 'thanks', 'yes', 'ok, that makes sense', 'next', 'quiz me on this', 'give me a practice question', ''])(
     'does not: %j', (m) => expect(learnerMessageNeedsModelReply(m, { answeredPendingQuestion: false })).toBe(false))
 
   it('a tap the server graded never does (the grade answers it)', () => {
@@ -78,6 +78,9 @@ describe('the canned quiz lead-in yields to content', () => {
     expect(llm(t)).toBeGreaterThan(0)
     expect(text(t)).toContain('MODEL REPLY')
     expect(text(t)).not.toMatch(/Here's a question on|is sitting\. Pick/)
+    // and when a probe rides along, the model is told to answer first (live: a
+    // "LEAD-IN ONLY" block left the false claim uncorrected)
+    if (mcq(t)) expect(t.systemPrompt).toContain('ANSWER IT FIRST')
   }, 60_000)
 
   it('control: a low-content turn still gets the deterministic lead-in', async () => {
