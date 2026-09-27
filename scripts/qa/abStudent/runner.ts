@@ -311,7 +311,11 @@ async function phaseCleanup(): Promise<void> {
   let deleted = 0
   let stillLoginable = 0
   for (const a of accounts) {
-    const acct: QaAccount = { email: a.email, password: a.password, name: '', cookie: '' }
+    // BUG FIXED (first cleanup attempt): deleteQaAccount needs a live session
+    // cookie to authenticate the DELETE call — an empty cookie 401s silently
+    // and every account came back deleted=false. Log in fresh first.
+    const cookie = await login(a.email, a.password)
+    const acct: QaAccount = { email: a.email, password: a.password, name: '', cookie }
     const res = await deleteQaAccount(acct)
     if (res.deleted && res.reloginBlocked) deleted++
     if (!res.reloginBlocked) stillLoginable++
