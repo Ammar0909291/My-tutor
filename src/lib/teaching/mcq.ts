@@ -1654,6 +1654,12 @@ export function engagesPendingOptions(message: string, mcq: TutorMCQ | null): bo
   // the tutor or a claim challenge does not reach for an option, so the
   // "tap the choice you mean" lead-in must not fire on it either.
   if (readsAsRequestToTutor(raw)) return false
+  // A real question is not an attempt at the pending one (2026-09-28, Physics
+  // Unit-1 certification pass 1): "A 5 kg mass hangs from a rope over a pulley
+  // … What is the tension T?" drew "I couldn't tell which option your answer
+  // matched" and the question went unanswered. A short "is it B?" still
+  // reaches for an option; a longer question ending in "?" does not.
+  if (/\?\s*$/.test(raw) && raw.trim().split(/\s+/).length > 6) return false
   const limit = Math.min(mcq.options.length, OPTION_KEYS.length)
 
   // (a) An option letter as a standalone token. Same shape rule 0a reads, and
@@ -1664,6 +1670,8 @@ export function engagesPendingOptions(message: string, mcq: TutorMCQ | null): bo
     if (idx < 0 || idx >= limit) continue
     if (m[1].toLowerCase() === 'a' && !m[2]) {
       const after = raw.slice((m.index ?? 0) + m[0].length).trim().split(/\s+/)[0]
+      // "A 5 kg mass …", "A 200°C nail …": an article before a number.
+      if (/^\d/.test(after ?? '')) continue
       if (!cannotFollowAnArticle(after?.toLowerCase().replace(/[^a-z']/g, '') || undefined)) continue
     }
     return true

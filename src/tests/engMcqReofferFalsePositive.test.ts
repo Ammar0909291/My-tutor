@@ -179,3 +179,28 @@ describe('route wiring', () => {
     expect(src).toContain('[mcq-reoffer-fabricated-options]')
   })
 })
+
+describe('Physics Unit-1 pass 1 (2026-09-28): an off-topic question is not an attempt', () => {
+  const pending = {
+    question: 'The bus brakes suddenly. Why does the passenger lurch forward?',
+    options: [
+      'The passenger’s inertia acts as a force pushing them forward',
+      'The bus slows, but the passenger keeps moving at the old velocity until something acts on them',
+    ],
+    correctIndex: 1,
+  }
+  it.each([
+    'A 5 kg mass hangs from a rope over a pulley in a system that is accelerating (not at rest). What is the tension T?',
+    'You push a 5 kg box with 10 N while friction resists with 4 N. What acceleration does the box get?',
+    'A 200°C steel nail is dropped into a 20°C swimming pool. Which way does heat flow?',
+  ])('%s', async (m) => {
+    const { engagesPendingOptions } = await import('@/lib/teaching/mcq')
+    expect(engagesPendingOptions(m, pending)).toBe(false)
+  })
+  it('a short option-naming answer still reaches for an option', async () => {
+    const { engagesPendingOptions } = await import('@/lib/teaching/mcq')
+    // Unchanged by the long-question rule: short answers still count.
+    expect(engagesPendingOptions('B', pending)).toBe(true)
+    expect(engagesPendingOptions('the second one', pending)).toBe(true)
+  })
+})

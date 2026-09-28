@@ -51,7 +51,16 @@ function resolve(slot: typeof SLOTS[number], c: Concept, prev: TurnPayload | nul
     : (() => { const p = proseOptions(prev?.text); return p?.options.length ? { q: p.question, o: p.options, rule: 'b' } : null })()
   if (opts) {
     const pick = pickAnswer(opts.q, opts.o, content)
-    const idx = slot.kind === 'right' ? pick.index : (opts.o.findIndex((_, i) => i !== pick.index))
+    // The deliberate wrong answer is never an option the authored corpus marks
+    // correct (pass 1: the picker's top choice was wrong, so its "runner-up"
+    // was the right answer and the tutor rightly confirmed it — a false flag).
+    const norm = (x: string) => x.toLowerCase().replace(/\s+/g, ' ').trim()
+    const authoredCorrect = new Set(content.probes.flatMap((p) => (p.choices ?? []).filter((ch) => ch.isCorrect).map((ch) => norm(ch.text))))
+    const idx = slot.kind === 'right' ? pick.index
+      : (() => {
+        const safe = opts.o.findIndex((o, i) => i !== pick.index && !authoredCorrect.has(norm(o)))
+        return safe >= 0 ? safe : opts.o.findIndex((_, i) => i !== pick.index)
+      })()
     return { message: opts.o[Math.max(0, idx)], rule: opts.rule }
   }
   if ((prev?.text ?? '').includes('?')) return { message: slot.kind === 'right' ? c.correctTyped : c.wrongTyped, rule: 'c' }

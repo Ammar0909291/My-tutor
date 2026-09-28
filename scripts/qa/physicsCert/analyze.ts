@@ -16,6 +16,7 @@
  *        M-DOUBLECONF   two stacked confirmations ("That's right. That's spot-on …")
  *        M-NODIAGRAM    slot 3 diagram request: no figure and no explicit decline
  *        M-REPEAT       the same long paragraph (>=150 chars) served in 2+ tutor turns
+ *        M-NOQUIZ       "quiz me" / "give me a practice question" answered with no question at all
  *
  * Run: OUT_DIR=<scratch> npx tsx scripts/qa/physicsCert/analyze.ts   (writes <OUT_DIR>/report.md)
  */
@@ -60,6 +61,7 @@ export function analyzeLesson(conceptId: string, run: number, turns: Turn[]): Fl
     const s = flat(text).trim().split(/(?<=[.!?—-])\s+/)
     if (s.length > 1 && CONFIRMS_CORRECT.test(s[0]) && CONFIRMS_CORRECT.test(s[1]) && s[0].length < 40) add('MEDIUM', 'M-DOUBLECONF', t)
     if (t.slot === 3 && !t.figure && !DECLINE.test(flat(text))) add('MEDIUM', 'M-NODIAGRAM', t)
+    if ((t.slot === 6 || t.slot === 11) && !t.mcq && !text.includes('?')) add('MEDIUM', 'M-NOQUIZ', t)
   }
   return flags
 }

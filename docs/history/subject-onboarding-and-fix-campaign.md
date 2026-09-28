@@ -742,3 +742,31 @@ because the one miss had moved the phase below CHECK.
 reached the learner three times in one lesson: once served from memory, then twice recited
 verbatim by the model. The response's `retrievedExplanationInPrompt` diagnostic is now captured
 by `drive.ts`, to settle from evidence whether the already-served guard is being bypassed.
+
+**Pass 1 findings (partial, 33+/46 lessons) and fixes, 2026-09-28.**
+- **Budget fix confirmed live:** 0 H-PAUSE (the smoke run had 1/1). No misconception was
+  answered "That's right" across all 23 concepts (the V-AFFIRM belief fix holds). Every
+  deliberate wrong answer at slot 9 was corrected.
+- **Confirm-back** ("That's right. You said … Is that right?", and after "continue": "So you'd
+  like to keep moving forward—have I got that right?"): `isMirrorTurn` only saw a whole turn of
+  at most 2 sentences ending on the request. New `stripConfirmBack` (attributionGuard.ts) removes
+  the request and the paraphrase feeding it wherever they sit, only in paraphrase context, so
+  authored "…Is that right?" quiz stems are untouched. Wired after the verdict repair, with a
+  fallback if the turn empties.
+- **C7 verbatim repeats, settled from evidence:** the slot-3 memory paragraph came back verbatim
+  from the model in 11 of 32 lessons, WITH `already_served` firing and
+  `retrievedExplanationInPrompt: false`. New output-side `dropRepeatedParagraphs`
+  (historyCompaction.ts) drops a paragraph of 120+ chars already sent this session (checked
+  against the uncompacted stored tutor messages; verdict paragraphs exempt).
+- **Off-topic question treated as a failed quiz answer** ("I couldn't tell which option your
+  answer matched"). `engagesPendingOptions` counted long questions via shared option words, and
+  read "A 5 kg mass …" as option A. A question of more than 6 words ending in "?" is no longer an
+  attempt; "A" followed by a number is an article.
+- **Harness:** the deliberate wrong answer is never an authored-correct option (one false
+  H-UNCORRECTED).
+- **Recorded, not yet fixed:**
+  - "quiz me" / "give me a practice question" answered with no question (new M-NOQUIZ detector
+    to measure it);
+  - the V-AFFIRM fall-closed template is generic;
+  - several slot-5 replies only ask "how did you decide that?" without correcting in the same
+    turn.
