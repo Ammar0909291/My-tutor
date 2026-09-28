@@ -152,6 +152,11 @@ export function pickAnswer(question: string, options: string[], content: Canonic
   }
   if (best && best.sim >= AUTHORED_STEM_SIMILARITY) {
     const correct = best.probe.choices?.find((c) => c.isCorrect)?.text ?? best.probe.correctValue ?? ''
+    // The authored key verbatim, case kept, answers first: tokens() folds case,
+    // so options that differ only by case ("Homo sapiens" / "homo sapiens")
+    // all scored alike and option 0 was picked whatever its text.
+    const verbatim = options.findIndex((o) => o.trim() === correct.trim())
+    if (verbatim >= 0) return { index: verbatim, tier: 'authored', confidence: best.sim, matchedStem: best.probe.stem }
     const cTok = tokens(correct)
     const wrongs = (best.probe.choices ?? []).filter((c) => !c.isCorrect).map((c) => tokens(c.text))
     const scores = options.map((o) => {

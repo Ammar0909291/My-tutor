@@ -78,8 +78,19 @@ describe('probeToMcq refuses what it cannot grade', () => {
   it('refuses duplicate options — parseMcqTag rejects these too, for the same reason', () => {
     expect(probeToMcq(probe([
       { text: 'kelvin', isCorrect: true },
-      { text: ' Kelvin ', isCorrect: false },
+      { text: ' kelvin ', isCorrect: false },
     ]))).toBeNull()
+  })
+
+  it('keeps options that differ only by case — an author may ask about case itself', () => {
+    // bio.found.binomial-nomenclature asks which of Homo sapiens / homo sapiens /
+    // Homo Sapiens / HOMO SAPIENS is written correctly; folding case refused it
+    // (caseOnlyOptionsProbe.test.ts). An ACCIDENTAL case-only pair is caught at
+    // authoring time by that file's corpus guard instead.
+    expect(probeToMcq(probe([
+      { text: 'Homo sapiens', isCorrect: true },
+      { text: 'homo sapiens', isCorrect: false },
+    ]))).not.toBeNull()
   })
 
   it('refuses an empty option text and an empty stem', () => {
