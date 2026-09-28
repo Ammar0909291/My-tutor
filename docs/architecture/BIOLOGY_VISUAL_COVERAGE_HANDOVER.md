@@ -499,3 +499,116 @@ mastery):
 - 5–10 s blank frame after Add-subject; ~9–13 s diagram turns;
 - only batch 13 was mastery-driven live — the other 182 concepts share the same contract and
   gate, so the fix applies to them, but they have not each been driven end to end.
+
+## Caveats closed (2026-09-28) — the six named above
+
+Owner instruction: "Fix all 6". Each item below: what was measured, what changed, how it was
+verified. Commits on `main`: `f9831f9`, `14bd350`, `e04fccc`, `bd75f6a` (merged as `253071a`); the case-only-probe fix found by item 5 is `70fac07` (merged as `0fc94de`).
+
+1. **Praise for a wrong answer (`14bd350`).** The unbacked-claim stripper already runs when a
+   grade comes from a model-invented key, but its pattern list missed praise of the form
+   "Great, you've spotted …", "well spotted", "good catch". Added (opening sentence only, as
+   before); `stateCorrectionForWrongAnswer` now strips the same claim before "Not quite — the
+   answer is: …". `rubricScore.ts` kept in lockstep. `praiseForWrongAnswer.test.ts`.
+2. **Figures (`e04fccc`).**
+   - Five/six-group comparisons: two rows of ≤3 columns 6.5 apart, camera 20. MEASURED in
+     Chromium before: labels overlapped at 1200px, outer columns clipped at 390px; after:
+     neither, at both widths. ≤4-group figures byte-identical (83 of 92).
+   - Pathway steps now lead with their stage name ("Hypothalamus: secretes GnRH …"); branch
+     steps name both branches and no longer run together.
+   - The panel's `slice(0, 600)` cut six figures mid-sentence (DNA replication, meiosis,
+     viscosity, levels of organisation, evidence for evolution, surface tension); it now cuts
+     at whole lines within 1000 chars (longest narration 925).
+   - Full 248-scene before/after diff: 58 scenes changed, all Biology; no other subject's
+     geometry changed. `comparisonGridAndStageNames.test.ts`.
+   - Production (deployment `253071a`, disposable account, real diagram request): asexual
+     reproduction served two rows of three (headers y 3.54 / -1.78, x -6.5 / 0 / 6.5, camera
+     20); hormonal regulation's steps read "Hypothalamus: …", "Anterior pituitary: …",
+     "Gonads: …".
+3. **`masteryPct` (`f9831f9`).** Now the verified share of the gate's bar (0/33/67/100), from
+   the gate's own counters, written when a concept is mastered or sent to review. A verified
+   lesson whose last chat answer was wrong no longer stays IN_PROGRESS. Every
+   `topic_progress` consumer already treats COMPLETED and MASTERED alike. Production: the
+   first verified lesson of the 182-concept run below wrote `MASTERED`, 100 (was `COMPLETED`,
+   65 for every verified batch-13 lesson).
+4. **Blank frame after Add subject (`bd75f6a`).** MEASURED on production before the fix
+   (disposable account, 500 ms frames): "Enrolling…" 0–2.6 s, then "＋ Add subject: Biology"
+   AGAIN 3.1–4.6 s (a `finally` cleared the busy state while `router.refresh()` was still
+   running), then 13 blank frames 5.2–11.2 s (the lesson overlays deliberately render nothing
+   until the entry gate can answer), prelude at 11.7 s. Fixed: the refresh runs in a
+   transition so the button stays busy; a neutral "Loading your lesson…" status line fills the
+   gate gap. Same probe after deploy `253071a`: "Enrolling…" 0–4.1 s, "Loading your lesson…"
+   4.7–7.3 s, prelude 7.8 s — **0 blank frames** (was 13). Account deleted, re-login blocked.
+   **Diagram-turn latency — root cause found, NOT changed (owner decision).** Over 5,556
+   production turns (4 days): a diagram turn is NOT slower than any other turn (1 LLM call:
+   p50 10.8 s with a figure, 10.9 s without). Turns with ZERO LLM calls still take 6–8 s p50,
+   so most of every turn is server overhead, not the model. The database executes in ~1 ms
+   per query (pg_stat_statements mean 1.1 ms), but the functions run in Vercel `sin1`
+   (Singapore, `vercel.json`, chosen when the deployment doc assumed Neon) while the database
+   is Supabase `ap-south-1` (Mumbai), reached through Supavisor. Measured from outside:
+   `/api/health` (one `SELECT 1`) 1.05–1.1 s vs `/api/auth/csrf` (no DB) 0.40–0.45 s — one
+   query costs ~650 ms end to end. Recommended: `"regions": ["bom1"]` in `vercel.json`
+   (functions next to the database). Not applied: it moves every production function and is
+   the owner's call.
+5. **Live mastery test of the other 182 Biology concepts** (production, disposable accounts,
+   `biologyMasteryReachability.ts`, DB cross-check, accounts deleted afterwards).
+   - **Run 1** (deployment `253071a`, 8 workers): 72 VERIFIED, 2 NOT-VERIFIED, 9 ERROR, then
+     STOPPED by me when production `/api/health` went 503 (see incident below). DB agreed
+     exactly: 72 `MASTERED`/100, 2 `REVISION`/67 (Fix 3's verified share: 2 of 3 credits).
+   - The two NOT-VERIFIED, root-caused from transcript + `evidence_events` + `messages`:
+     - `bio.found.binomial-nomenclature` — **product defect, FIXED (`70fac07`)**. Its third
+       authored probe asks which of Homo sapiens / homo sapiens / Homo Sapiens / HOMO SAPIENS
+       is written correctly. `probeToMcq` compared options with case folded and refused it as
+       duplicates, so it was never served; the PRACTICE turns that should have asked it were
+       content-free fallback text and the lesson paused 1 credit short. The grader would have
+       refused every tap the same way. Now: case is kept when comparing authored options and,
+       only where case-folding finds several matches, when resolving a tap. It is the only
+       such probe (repo seed files and production `probe_assets`); a corpus guard fails on a
+       new one. Re-run on `0fc94de`: VERIFIED in 7 turns, the case probe served and graded
+       "That's right."
+     - `bio.plant.plant-water-relations` — **test-harness artifact, not a product defect.** One
+       harness `say()` reached the server TWICE (two identical USER rows 11 s apart; the
+       harness saw only the second reply). The server graded the repeat against the next
+       probe it had just served — correctly "Not quite" — which held the ladder at CHECK. The
+       same class of duplicate can come from a real client retry: route.ts's own Typed Turn
+       Contract I10 note says a retried request whose server side completed runs as a second
+       full turn (observation only; the real fix needs a persisted idempotency key = schema
+       migration, under the deferred primitives). Re-run: VERIFIED in 6 turns.
+   - **Run 2** (deployment `0fc94de`, 3 workers, health watchdog): the 110 concepts not
+     verified in run 1 (incl. the 2 above and the 9 errored). **110/110 VERIFIED**, 0 errors.
+     DB: 110 `MASTERED`/100 (36/39/35 per account, matching the harness exactly).
+   - **Result: 182/182 VERIFIED** (median 8 turns, p90 10, max 28). With batch 13's 17/17,
+     **all 199 Biology concepts reach verified mastery on production**. All 11 disposable
+     accounts deleted; re-login blocked; 0 `qa-bio-mastery-*` users left.
+
+6. **Comparison colours in other subjects.** `buildCellComparisonScene` and its colour list
+   have 92 consumers, all Biology; no physics, chemistry, mathematics, CS or English code
+   imports them. The full-corpus diff above confirms no other subject's scene changed.
+
+### Production incident during run 1 (2026-09-28 ~04:47–04:59 UTC) — mitigated, NOT fixed
+
+Run 1 (8 workers) coincided with another session's deploy (`1aa7782`, 04:43) and that session's
+own QA traffic. From ~04:57: 8 chat turns 503 `route_deadline`, one `/api/sessions` 500
+`db_timeout`, and `/api/health` 503 (DB unreachable within 3 s). I stopped the run; health was
+200 again within ~30 s. `pg_stat_activity` at the time: **15 backends `idle in transaction`
+(oldest 683 s) + 1 aborted** — abandoned app transactions (`spine_events`, `student_progress`,
+`asset_identity` INSERTs, bare `BEGIN`s) whose Vercel invocations (max 60 s) were long gone.
+Through Supavisor each pins a pooled connection; `idle_in_transaction_session_timeout` is `0`
+(disabled), so they hold it until the client connection drops. 7 more had accumulated again
+~7 min after the next deploy. Pool starvation under load is the evident mechanism.
+
+**Owner decisions recommended (not applied — production configuration):**
+1. `ALTER DATABASE postgres SET idle_in_transaction_session_timeout = '60s';` (Prisma
+   interactive transactions time out at 5 s by default and functions at 60 s, so no
+   legitimate transaction idles that long). Reversible with `… RESET …`.
+2. `vercel.json` `"regions": ["bom1"]` — functions next to the Mumbai database (see item 4).
+3. Find why app transactions are abandoned (route deadline vs. in-flight transaction).
+Load-testing rule learned: ≤3 concurrent QA workers, with a health watchdog.
+
+## VERDICT UPDATE (2026-09-28, evening): all six caveats closed; 199/199 concepts verified live
+
+Biology is production-ready. Every caveat named above is fixed and verified on production
+except diagram-turn latency, whose root cause (function region ≠ database region) is found and
+handed to the owner with the one-line change. New since the last verdict: the case-only probe
+defect (fixed), the duplicate-request gap (documented, deferred primitive), and the
+leaked-transaction pool starvation (mitigated, owner decision above).
