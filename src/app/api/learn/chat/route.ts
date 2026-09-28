@@ -11354,9 +11354,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             const carriedForwardUngraded =
               mcqHoisted === null && pendingMcqHoisted !== null && mcqGradeHoisted === null
             const { shouldReleaseHeldProbe } = await import('@/lib/teaching/turnProgress')
+            // NOT on a practice request (2026-09-28, Physics Unit-1 certification
+            // pass 1: 52 of 59 unanswered "quiz me" turns). The release runs
+            // after this turn's probe selection, so a release leaves NOTHING on
+            // screen this turn — and the learner who just asked for a question
+            // got none. The held quiz is exactly what they asked for; keep it.
             const releasePending =
               carriedForwardUngraded
               && shouldReleaseHeldProbe(turnProgressHoisted?.probeHeldTurns ?? 0)
+              && !turnIntent.wantsPractice
             // ── RUNG 3: NAME IT ─────────────────────────────────────────
             //
             // Four turns in which the runtime did nothing a learner could use,
@@ -12638,6 +12644,22 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         }
       }
 
+      // ── NEVER A BLANK REPLY (2026-09-28) ──────────────────────────────────
+      // Physics Unit-1 certification pass 1 measured 2 of ~690 turns shipping
+      // text '' with no quiz attached (both llmCallCount 2 — a regeneration,
+      // then later repairs that strip sentences). Whichever repair emptied it,
+      // the learner must not receive nothing. Same fallbacks the other emptying
+      // repairs use; logged so the emptying path can be pinned down.
+      if (!cleanText.trim() && !servedMcq) {
+        try {
+          const { getKGNode } = await import('@/lib/curriculum/knowledgeGraph')
+          const node = resolvedConceptId ? getKGNode(resolvedConceptId) : null
+          const { conceptFallbackText } = await import('@/lib/teaching/conceptFallback')
+          cleanText = node?.title && node.description ? conceptFallbackText(node.title, node.description) : "Good — let's keep going."
+        } catch { cleanText = "Good — let's keep going." }
+        console.warn('[empty-reply-net] ' + JSON.stringify({ provider, llmCallCount, conceptId: resolvedConceptId ?? null }))
+      }
+
       // ── PHASE 0: TURN DECISION PROVENANCE ────────────────────────────
       //
       // The latest point at which everything is known: after every text
@@ -12793,7 +12815,6 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       if (topicProgressEvidenceWrite) {
         try { await topicProgressEvidenceWrite } catch { /* total by construction */ }
       }
-
 
       return NextResponse.json({
         success: true, text: cleanText, provider,

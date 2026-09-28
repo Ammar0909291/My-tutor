@@ -770,3 +770,20 @@ by `drive.ts`, to settle from evidence whether the already-served guard is being
   - the V-AFFIRM fall-closed template is generic;
   - several slot-5 replies only ask "how did you decide that?" without correcting in the same
     turn.
+
+**Pass 1 complete (46 lessons, ~690 turns, 0 errors; baseline on deploy 372be7a8).**
+- Flags: HIGH 4 (2 H-EMPTY; 2 H-UNCORRECTED, both the harness artifact, now fixed in the
+  harness). MEDIUM 86: M-NOQUIZ 59, M-REPEAT 16, M-SELFGRADE 9, M-DOUBLECONF 2.
+- **Egress measured:** ~30–37 MB for the pass (~50 KB/turn, ~0.7% of the 5 GB quota). The largest
+  real cost is session snapshots (~12 KB, read about twice per turn).
+- **Practice requests unanswered (M-NOQUIZ 59/92).** 52 were at GUIDE with a quiz already on
+  screen. Root cause, reproduced offline: the held-probe release (turnProgress rung 1, after 2
+  unanswered turns) runs AFTER this turn's probe selection, so on the release turn nothing is on
+  screen. When that turn was "quiz me", the learner got no question. Fix: no release on a
+  practice-request turn (`&& !turnIntent.wantsPractice`); the held quiz is what they asked for.
+  Test: `practiceRequestKeepsHeldQuiz.test.ts` (fails without the fix; control shows the release
+  still fires otherwise).
+- **Blank replies (H-EMPTY, 2 turns, both llmCallCount 2).** A final net before the provenance log
+  substitutes the concept's own description (or the hand-off line) when text is empty and no quiz
+  is attached, and logs `[empty-reply-net]` to pin down the emptying repair. Test:
+  `emptyReplyNet.test.ts`.
