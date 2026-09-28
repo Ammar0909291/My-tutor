@@ -879,3 +879,16 @@ by `drive.ts`, to settle from evidence whether the already-served guard is being
   Not treated as defects: phys.mech.equilibrium r1 s9 (a Socratic counterexample correction the checker's
   keyword list misses) and the third-law "pause" (the honest outcome of an unreached mastery within budget,
   caused by item 14).
+- 2026-09-28 ~15:50Z, owner-requested study of a fixed concept on the owner account (phys.mech.impulse,
+  previously COMPLETED 2026-09-06). The password was used as an env var only, never written.
+  - The fix is visible: the "force A" misconception now gets "Not quite — Equal" plus an egg/pillow
+    explanation. Before the fix: "That's right. So you're thinking…". "force B" (name letter) graded
+    correctly.
+  - NEW HIGH, fixed: "wait why is the area the impulse? i dont get the graph part" was graded as the correct
+    option (rule 4 on "area"/"impulse"). It got "That's right." and a verified CHECK credit, and the lesson then
+    closed "mastered" partly on that unearned credit. `looksLikeAQuestion` now covers a '?' anywhere, a
+    WH-word after a lead-in, and explicit confusion.
+  - Quality gaps seen (not fixed yet): the learner's own correct observation is not acknowledged before a
+    quiz; a wrong answer gets only "the answer is: …" with no why; the same unrelated "Elastic Collision
+    (1D)" figure is attached on several turns; quiz lead-ins sometimes mismatch the quiz ("statements",
+    "new situation").
