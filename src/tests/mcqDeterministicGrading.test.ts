@@ -23,7 +23,7 @@ describe('GB+ explicit choice grammar', () => {
   })
   it('wrong explicit choices remain wrong', () => {
     expect(gradeMcqAnswer('A', REAL)).toEqual({chosenIndex:0,correct:false})
-    expect(gradeMcqAnswer('C because I am unsure', REAL)).toEqual({chosenIndex:2,correct:false})
+    expect(gradeMcqAnswer('C because this is the other explanation', REAL)).toEqual({chosenIndex:2,correct:false})
   })
   it('preserves symbolic exact-option behaviour', () => {
     const dims:TutorMCQ={question:'Which is the dimensional formula for force?',options:['[M][L][T]','[M][L][T]⁻²','[M][L]⁻¹[T]²','[M]²[L][T]⁻¹'],correctIndex:1}
