@@ -11449,6 +11449,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                       userId,
                       subjectSlug: learnSession.subject.slug,
                       topicSlug: stateForOutcome.conceptId,
+                      // masteryPct = the verified share of the bar, not the
+                      // last chat answer's score (verifiedBarPct).
+                      evidence: stateForOutcome,
                     })
                   } else if (folded.conceptsMastered.includes(stateForOutcome.conceptId)) {
                     // A3 — the branch that had no writer.
@@ -11468,6 +11471,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                       userId,
                       subjectSlug: learnSession.subject.slug,
                       topicSlug: stateForOutcome.conceptId,
+                      evidence: stateForOutcome,
                     })
                   }
                   // P6.6: has every required concept in this lesson closed?

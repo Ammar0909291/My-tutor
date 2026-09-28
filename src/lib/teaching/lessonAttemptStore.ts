@@ -14,6 +14,7 @@
  */
 
 import type { PrismaClient } from '@prisma/client'
+import { MASTERY_CHECK_REQUIRED, MASTERY_PRACTICE_REQUIRED } from './masteryGate'
 import {
   type LessonAttemptOutcome, completeLessonAttempt, startLessonAttempt, summaryFromAttempt,
 } from './lessonAttempt'
@@ -214,6 +215,30 @@ export async function finalizeLessonAttempt(
   return { outcome: completed, summary }
 }
 
+/** The lesson's VERIFIED evidence toward the mastery bar (masteryGate.ts). */
+export interface VerifiedBarEvidence {
+  verifiedCorrectAtCheck?: number
+  verifiedCorrectAtPractice?: number
+}
+
+/**
+ * The share of the mastery bar (1 verified CHECK + 2 verified PRACTICE) this
+ * lesson actually earned, as a percentage: 0, 33, 67 or 100.
+ *
+ * MEASURED on production (2026-09-27, Biology): every topic_progress row read
+ * 65% — mastered and needs-review alike — because the only writer of
+ * masteryPct is the conversational one, which records the LAST answer's score
+ * (65 right / 25 wrong). The roadmap prints that number beside completed and
+ * revision topics, so a mastered topic and an unmastered one looked the same.
+ * This is not an invented score: it is the gate's own verified counters,
+ * stated as a fraction of the gate's own bar.
+ */
+export function verifiedBarPct(e: VerifiedBarEvidence): number {
+  const credits = Math.min(Math.max(e.verifiedCorrectAtCheck ?? 0, 0), MASTERY_CHECK_REQUIRED)
+    + Math.min(Math.max(e.verifiedCorrectAtPractice ?? 0, 0), MASTERY_PRACTICE_REQUIRED)
+  return Math.round((100 * credits) / (MASTERY_CHECK_REQUIRED + MASTERY_PRACTICE_REQUIRED))
+}
+
 /**
  * Flag a concept for future review in the EXISTING owner (TopicProgress), not
  * in a second queue. Uses the REVISION status and revisionCount that
@@ -225,7 +250,7 @@ export async function finalizeLessonAttempt(
  */
 export async function markConceptForReview(
   db: Db,
-  args: { userId: string; subjectSlug: string; topicSlug: string },
+  args: { userId: string; subjectSlug: string; topicSlug: string; evidence?: VerifiedBarEvidence },
 ): Promise<void> {
   const existing = await db.topicProgress.findUnique({
     where: {
@@ -250,6 +275,7 @@ export async function markConceptForReview(
       status: 'REVISION',
       revisionCount: { increment: 1 },
       lastRevisionAt: new Date(),
+      ...(args.evidence ? { masteryPct: verifiedBarPct(args.evidence) } : {}),
     },
     create: {
       userId: args.userId,
@@ -258,6 +284,7 @@ export async function markConceptForReview(
       status: 'REVISION',
       revisionCount: 1,
       lastRevisionAt: new Date(),
+      ...(args.evidence ? { masteryPct: verifiedBarPct(args.evidence) } : {}),
     },
   })
 }
@@ -291,7 +318,7 @@ export async function markConceptForReview(
  */
 export async function markConceptMastered(
   db: Db,
-  args: { userId: string; subjectSlug: string; topicSlug: string },
+  args: { userId: string; subjectSlug: string; topicSlug: string; evidence?: VerifiedBarEvidence },
 ): Promise<void> {
   const key = {
     userId_subjectSlug_topicSlug: {
@@ -304,15 +331,20 @@ export async function markConceptMastered(
   if (!existing) return
 
   const { deriveTopicStatus } = await import('@/lib/mastery/topicMasteryFormula')
-  const next = deriveTopicStatus(
-    existing.status as Parameters<typeof deriveTopicStatus>[0],
-    existing.masteryPct ?? 0,
-  )
+  // With the lesson's verified evidence, the score judged is the verified share
+  // of the bar (never lower than what the row already holds). MEASURED: judging
+  // the LAST conversational answer instead meant a verified lesson whose final
+  // chat answer happened to be wrong (25%) stayed IN_PROGRESS. Without evidence
+  // the behaviour is exactly as before.
+  const pct = args.evidence
+    ? Math.max(existing.masteryPct ?? 0, verifiedBarPct(args.evidence))
+    : existing.masteryPct ?? 0
+  const next = deriveTopicStatus(existing.status as Parameters<typeof deriveTopicStatus>[0], pct)
   if (next === existing.status) return
 
   await db.topicProgress.update({
     where: key,
-    data: { status: next, completedAt: new Date() },
+    data: { status: next, completedAt: new Date(), ...(args.evidence ? { masteryPct: pct } : {}) },
   })
 }
 
