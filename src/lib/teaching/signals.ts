@@ -32,7 +32,11 @@ export interface TeachingSignal {
 // Accept both standard HTML-comment close (-->) and XML/self-closing style
 // (/>), because the LLM sometimes produces <!--SIGNAL .../> instead of
 // <!--SIGNAL ...-->, and [^>]*? stops at the > in /> leaving --> unfound.
-const SIGNAL_RE = /<!--\s*SIGNAL\s+([\s\S]*?)(?:-->|\/>)/i
+// And a bare `>` straight after the last attribute's closing quote, which the
+// model also writes: `<!--SIGNAL correctness="false" phrase="…">` reached the
+// learner verbatim (physics certification, phys.opt.single-slit r2 s7,
+// 2026-09-28). The lookbehind keeps that quote inside the captured attributes.
+const SIGNAL_RE = /<!--\s*SIGNAL\s+([\s\S]*?)(?:-->|\/>|(?<="\s*)>)/i
 
 // R-1/R-3 — removal must be GLOBAL. `.replace` with a non-global regex removes
 // only the FIRST match, so a second complete SIGNAL tag survived to the learner:

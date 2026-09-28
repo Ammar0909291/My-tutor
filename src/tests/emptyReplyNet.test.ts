@@ -43,6 +43,17 @@ describe('never a blank reply', () => {
     expect(text(b)).toBe(FALLBACK_REPEAT_TEXT)
   }, 90_000)
 
+  it('nor again later in the session, with other turns between (hamiltons-equations s7 / s10)', async () => {
+    const { FALLBACK_REPEAT_TEXT } = await import('@/lib/teaching/conceptFallback')
+    const turns = await driveTurns(h, POST, [
+      { learnerSays: 'ok, continue', modelReplies: 'Tension is the pulling force transmitted through a rope.' },
+      { learnerSays: 'continue', modelReplies: "Here's a quick question for you:" },
+      { learnerSays: 'why?', modelReplies: 'Because the rope pulls equally on both ends when it is light.' },
+      { learnerSays: 'continue', modelReplies: "Here's a quick question for you:" },
+    ], { subjectSlug: 'physics', conceptId: 'phys.mech.tension', lessonTitle: 'Tension' })
+    expect(String((turns[3].body as { text?: string }).text ?? '').trim()).toBe(FALLBACK_REPEAT_TEXT)
+  }, 90_000)
+
   it('the net runs after every rewriter and before the provenance log sees the final text', () => {
     const route = readFileSync('src/app/api/learn/chat/route.ts', 'utf8')
     const net = route.indexOf('[empty-reply-net]')

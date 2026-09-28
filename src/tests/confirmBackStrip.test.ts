@@ -84,3 +84,10 @@ describe('"I hear you saying … Is that an accurate summary …?" (unit 3, phys
     expect(r).toEqual({ text: '', stripped: true })
   })
 })
+
+describe('"have I understood you correctly?" (unit 3, phys.opt.single-slit r2 s7)', () => {
+  it('is a confirm-back', () => {
+    expect(stripConfirmBack('So you’re saying that the secondary bright bands are brighter than the central bright band—have I understood you correctly?'))
+      .toEqual({ text: '', stripped: true })
+  })
+})

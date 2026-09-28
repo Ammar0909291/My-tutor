@@ -868,3 +868,14 @@ by `drive.ts`, to settle from evidence whether the already-served guard is being
       read by rule 2 as "the first one", the correct option. An ordinal now names a position only alone, before
       "one"/"option"/a reason, at the end, or after a marker. The same turn's "So I hear you saying … Is that an
       accurate summary …?" confirm-back is now stripped.
+  14. phys.therm.third-law r2 s11-s13: a withheld model quiz left "Pick the statement that best captures it."
+      and then bare inline "A) … B) … C) … D) …" lines with no question, two turns running. The lesson then
+      closed "on pause" (budget spent on ungradeable prose quizzes). Inline option runs are now dropped with
+      their question (withhold `poses`, `dropAnswerableContent`, salvage), and "Pick/Choose/Select the …" is
+      an announcement when nothing follows.
+  15. phys.opt.single-slit r2 s7, HIGH H-LEAK: `<!--SIGNAL … phrase="…">` (bare `>` close) reached the learner.
+      SIGNAL_RE now accepts that close. Same turn: "have I understood you correctly?" is now a confirm-back.
+  16. The fallback-repeat guard (item 12) now covers any earlier tutor turn, not only the last.
+  Not treated as defects: phys.mech.equilibrium r1 s9 (a Socratic counterexample correction the checker's
+  keyword list misses) and the third-law "pause" (the honest outcome of an unreached mastery within budget,
+  caused by item 14).
