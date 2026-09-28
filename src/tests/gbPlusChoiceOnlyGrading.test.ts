@@ -30,6 +30,8 @@ describe('GB+ choice-only grading', () => {
     ['I think B', 1],
     ['I think B because it matches the rule', 1],
     ['B because it matches the rule', 1],
+    ['the answer is B', 1],
+    ['my choice is B', 1],
     ['B) because it matches the rule', 1],
     ['B, because it matches the rule', 1],
     ['C, 0 m', 2],
