@@ -21,3 +21,7 @@ export function conceptFallbackText(title: string, description: string): string 
   const isList = d.includes(';') || !/[.!?]$/.test(d)
   return isList ? `${t} covers: ${d.replace(/[.;]\s*$/, '')}.` : d
 }
+
+/** Said instead of repeating the concept fallback on consecutive turns (see route.ts). */
+export const FALLBACK_REPEAT_TEXT =
+  'Which part of this would you like me to explain more — the idea itself, a worked example, or where it is used?'

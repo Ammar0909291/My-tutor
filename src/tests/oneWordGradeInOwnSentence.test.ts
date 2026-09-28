@@ -54,3 +54,21 @@ describe('rule 4: two shared words inside an unrelated claim (phys.mech.poisson-
     expect(gradeMcqAnswer('L_z is conserved — the bracket vanishing means it does not change over time under the flow', LZ)).toEqual({ chosenIndex: 0, correct: true })
   })
 })
+
+describe('rule 5: a number word inside a sentence is not a value answer (phys.mech.cyclic-coordinates-conservation-laws r2 s5)', () => {
+  const NOETHER: TutorMCQ = {
+    question: 'A free particle moving in 1D has L=½mẋ². Does it have a Noether symmetry leading to a conserved quantity?',
+    options: [
+      'No — Noether symmetries require the system to look geometrically symmetric (spherical or cylindrical), and a point particle has no such shape',
+      "Yes — L is independent of x (∂L/∂x=0), a genuine translational symmetry, so p_x is conserved by Noether's theorem, regardless of the absence of visible shape",
+    ],
+    correctIndex: 1,
+  }
+  it('"… that coordinate is zero or held constant …" is not graded', () => {
+    expect(gradeMcqAnswer('I think a cyclic coordinate means that coordinate is zero or held constant throughout the motion', NOETHER).chosenIndex).toBeNull()
+  })
+  it('a bare value still grades', () => {
+    const Q: TutorMCQ = { question: 'Net torque?', options: ['5 N·m', '10 N·m', '0 N·m'], correctIndex: 0 }
+    expect(gradeMcqAnswer('i think 5', Q)).toEqual({ chosenIndex: 0, correct: true })
+  })
+})

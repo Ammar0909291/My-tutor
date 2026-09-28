@@ -12685,6 +12685,28 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         console.warn('[empty-reply-net] ' + JSON.stringify({ provider, llmCallCount, conceptId: resolvedConceptId ?? null }))
       }
 
+      // ── THE FALLBACK SENTENCE IS NOT SAID TWICE IN A ROW (2026-09-28) ─────
+      // Physics certification unit 2 (hamiltonian, hamilton-jacobi,
+      // euler-lagrange): repairs emptied two consecutive turns and both shipped
+      // the same "<concept> covers: …" line, so the learner read it twice. When
+      // the outgoing text is the concept fallback and repeats the previous tutor
+      // message verbatim, ask what to explain instead — honest, and it gives
+      // the model something real to answer next turn.
+      if (!servedMcq) {
+        try {
+          const { getKGNode } = await import('@/lib/curriculum/knowledgeGraph')
+          const node = resolvedConceptId ? getKGNode(resolvedConceptId) : null
+          const { conceptFallbackText, FALLBACK_REPEAT_TEXT } = await import('@/lib/teaching/conceptFallback')
+          const { mostRecentAssistantText } = await import('@/lib/teaching/remediationOutputContract')
+          const fallback = node?.title && node.description ? conceptFallbackText(node.title, node.description) : null
+          const prev = mostRecentAssistantText(learnSession.messages, MessageRole.ASSISTANT)
+          if (fallback && cleanText.trim() === fallback && (prev ?? '').trim() === fallback) {
+            cleanText = FALLBACK_REPEAT_TEXT
+            console.warn('[fallback-repeat] ' + JSON.stringify({ conceptId: resolvedConceptId ?? null }))
+          }
+        } catch { /* non-fatal — a repair must never break a turn */ }
+      }
+
       // ── PHASE 0: TURN DECISION PROVENANCE ────────────────────────────
       //
       // The latest point at which everything is known: after every text

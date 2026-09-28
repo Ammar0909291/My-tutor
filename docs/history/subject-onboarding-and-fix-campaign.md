@@ -854,3 +854,12 @@ by `drive.ts`, to settle from evidence whether the already-served guard is being
 - Production incident, 2026-09-28 11:02-11:05Z: db_timeout site-wide right after a deploy. Cold-start
   bootstrap transactions were left idle in transaction (idle_in_transaction_session_timeout = 0).
   OWNER DECISION pending: set that timeout. Mitigation: one deploy per pass.
+  11. phys.mech.cyclic-coordinates-conservation-laws r2 s5, HIGH (on the 5729359f deploy): "I think a cyclic
+      coordinate means that coordinate is zero or held constant" was graded as the correct option by rule 5.
+      The only number named was "zero", and the only option carrying 0 was "∂L/∂x=0". Rule 5 now needs a bare
+      value (at most one option-foreign word).
+  12. Unit 2 MEDIUM cluster (hamiltonian, hamilton-jacobi, euler-lagrange, hamiltons-equations): repairs
+      emptied consecutive turns and both shipped the same "<concept> covers: …" line. A verbatim-repeat
+      fallback is now replaced by an open "which part should I explain more" question (`FALLBACK_REPEAT_TEXT`).
+- Unit 2 pass 1 final: 77 lessons + 15 infra re-drives in progress. Every HIGH root-caused: grading misreads
+  (4 kinds), the placement hijack, and 1 harness artifact.

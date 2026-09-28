@@ -1566,7 +1566,13 @@ function resolveMcqChoiceFolded(message: string, mcq: TutorMCQ): number | null {
   //    in that option. A worked reply ("5, because 10 times 0.5") still
   //    refuses, because 10 and 0.5 are not in the "5" option.
   const said = numbersIn(n)
-  if (said.length === 1) {
+  // A bare value, not a sentence of the learner's own that happens to contain
+  // a number word (phys.mech.cyclic-coordinates-conservation-laws, 2026-09-28):
+  // "I think a cyclic coordinate means that coordinate is zero or held constant"
+  // named one number, "zero", and the one option carrying a 0 ("∂L/∂x=0") was
+  // the correct one, so the misconception was banked as right. Same vocabulary
+  // test as rules 4/4a.
+  if (said.length === 1 && foreignWords.size <= 1) {
     const carrying = mcq.options
       .map((o, i) => ({ i, hit: numbersIn(norm(o)).includes(said[0]) }))
       .filter((x) => x.hit)
