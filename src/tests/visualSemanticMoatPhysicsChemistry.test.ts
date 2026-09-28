@@ -445,11 +445,13 @@ describe('widened-identity bindings do not grow unaudited', () => {
     // — all four physics retirements were reversed as inert. Every one was
     // read against what it paints, and every one is demoted or faithful.
     expect(widened('physics').length).toBeLessThanOrEqual(23)
-  })
+    // A full-KG sweep through the real resolver: ~4s alone, over vitest's 5s
+    // default under full-suite load. Same budget as the repo's other sweeps.
+  }, 30000)
 
   it('chemistry: 20 widened bindings, all inspected', () => {
     // 23 domain-default and 5 generator-default before the sweep; eight
     // retired as harmful, six reversed as inert.
     expect(widened('chemistry').length).toBeLessThanOrEqual(20)
-  })
+  }, 30000)
 })
