@@ -787,3 +787,19 @@ by `drive.ts`, to settle from evidence whether the already-served guard is being
   substitutes the concept's own description (or the hand-off line) when text is empty and no quiz
   is attached, and logs `[empty-reply-net]` to pin down the emptying repair. Test:
   `emptyReplyNet.test.ts`.
+
+### 2026-09-28 — Physics Unit-1 certification, pass 2 + lesson-one "quiz me" fix
+- Pass 2 (production 1aa77824, 23 concepts x 2 runs, disposable accounts): 40 lessons completed, HIGH 1
+  (H-UNCORRECTED, kinematics-1d r2 s9 — harness artifact: the "wrong" answer to a model-written
+  question was actually correct), MEDIUM 1 (M-NOQUIZ, phys.meas.units r2 s6). Pass 1 was HIGH 4 /
+  MEDIUM 86. 6 lessons failed on infrastructure (3 x route_deadline 503, 2 x login, 1 x onboarding
+  500) and were re-driven.
+- Root cause of the M-NOQUIZ: phys.meas.units is lesson one for every beginner. There
+  `notFirstLesson` refused the authored probe, and memoryState was null. The invented-probe guard reads
+  that refusal as POLICY, so it withheld the model's own question as well, and "quiz me" got one KG
+  sentence. Fix: when a lesson-one learner asks for practice, `notFirstLesson` is true and memoryState
+  is built for the gate only (assembleLesson stays skipped, same shape as the prose-MCQ branch).
+  Test: `firstLessonPracticeRequest.test.ts` (fails without the fix). Harness gained a `lessonOne` option.
+- Known, not fixed: at DEMONSTRATE with a bare 3-probe pool the gate declines `below-guide-no-surplus`
+  and the model's question is withheld (`authored-probes-exist`), so "quiz me" there can also get no
+  question. Seen in the harness, not in pass 2's production data.

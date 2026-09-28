@@ -4413,6 +4413,24 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         memoryFallbackReason = 'No concept'
       } else if (firstLessonActiveHoisted) {
         memoryFallbackReason = 'First lesson'
+        // A lesson-one "quiz me" gets a reviewed question (unit-1 cert,
+        // 2026-09-28, phys.meas.units): memoryState feeds the gate only, as
+        // on the prose-MCQ branch below. See firstLessonPracticeRequest.test.ts.
+        if (turnIntent.wantsPractice) {
+          try {
+            memoryState = buildStudentState({
+              conceptId: resolvedConceptId,
+              subjectSlug: learnSession.subject.slug,
+              teachingLanguage: teachingLang,
+              grade: profile?.grade,
+              currentLevel: profile?.currentLevel,
+              targetLevel: profile?.targetLevel,
+              userMessage: message,
+            })
+          } catch (err) {
+            console.warn('[learn/chat] buildStudentState failed (first-lesson practice path):', err)
+          }
+        }
       } else if (recoveryKeyHoisted) {
         memoryFallbackReason = 'Recovery mode'
       } else if (priorTurnUnresolvedProseMcqHoisted) {
@@ -5006,7 +5024,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             transferNeedsVerifiedCredit,
           hasMemoryState: memoryState !== null,
           noUnansweredProbeOnScreen: !unansweredProbeOnScreen,
-          notFirstLesson: !firstLessonActiveHoisted,
+          // A learner's own "quiz me" is honoured in lesson one too — see the
+          // first-lesson practice path at the memory-serving decision.
+          notFirstLesson: !firstLessonActiveHoisted || turnIntent.wantsPractice,
           notExcursion: !excursionActiveHoisted,
           // The session is ending: no question is attached, and no authored
           // probe is spent. See closingTurnWithholdsQuestion.

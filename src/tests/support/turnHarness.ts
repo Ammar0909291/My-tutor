@@ -59,6 +59,9 @@ export interface HarnessOptions {
   currentLevel?: string
   /** The account's `modelOverrideAllowed` DB flag (A/B gates). Default false. */
   modelOverrideAllowed?: boolean
+  /** A beginner on lesson one with nothing completed, so the real
+   *  firstLessonGuard fires. Default false (mid-course, see studentProgress). */
+  lessonOne?: boolean
 }
 
 export interface ServedMcq { question: string; options: string[] }
@@ -200,8 +203,8 @@ export function createHarness(): Harness {
         id: 'sp-1',
         userId: state.opts.userId,
         subjectSlug: state.opts.subjectSlug,
-        currentLesson: 12,
-        completedLessons: ['l1', 'l2', 'l3'],
+        currentLesson: (state.opts as HarnessOptions).lessonOne ? 1 : 12,
+        completedLessons: (state.opts as HarnessOptions).lessonOne ? [] : ['l1', 'l2', 'l3'],
         activeLessonSlug: state.opts.conceptId,
         lastLessonTitle: state.opts.lessonTitle,
       }),
@@ -293,7 +296,7 @@ export async function driveTurns(
   opts: HarnessOptions = {},
 ): Promise<TurnResult[]> {
   const { modelOverrideAllowed, ...laneOpts } = opts
-  Object.assign(h.state.opts, laneOpts)
+  Object.assign(h.state.opts, { lessonOne: false }, laneOpts)
   h.state.modelOverrideAllowed = modelOverrideAllowed ?? false
   h.state.probes = opts.probes ?? []
   if (opts.conversationState) {
