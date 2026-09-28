@@ -868,3 +868,27 @@ by `drive.ts`, to settle from evidence whether the already-served guard is being
       read by rule 2 as "the first one", the correct option. An ordinal now names a position only alone, before
       "one"/"option"/a reason, at the end, or after a marker. The same turn's "So I hear you saying … Is that an
       accurate summary …?" confirm-back is now stripped.
+  14. phys.therm.third-law r2 s11-s13: a withheld model quiz left "Pick the statement that best captures it."
+      and then bare inline "A) … B) … C) … D) …" lines with no question, two turns running. The lesson then
+      closed "on pause" (budget spent on ungradeable prose quizzes). Inline option runs are now dropped with
+      their question (withhold `poses`, `dropAnswerableContent`, salvage), and "Pick/Choose/Select the …" is
+      an announcement when nothing follows.
+  15. phys.opt.single-slit r2 s7, HIGH H-LEAK: `<!--SIGNAL … phrase="…">` (bare `>` close) reached the learner.
+      SIGNAL_RE now accepts that close. Same turn: "have I understood you correctly?" is now a confirm-back.
+  16. The fallback-repeat guard (item 12) now covers any earlier tutor turn, not only the last.
+  Not treated as defects: phys.mech.equilibrium r1 s9 (a Socratic counterexample correction the checker's
+  keyword list misses) and the third-law "pause" (the honest outcome of an unreached mastery within budget,
+  caused by item 14).
+- 2026-09-28 ~15:50Z, owner-requested study of a fixed concept on the owner account (phys.mech.impulse,
+  previously COMPLETED 2026-09-06). The password was used as an env var only, never written.
+  - The fix is visible: the "force A" misconception now gets "Not quite — Equal" plus an egg/pillow
+    explanation. Before the fix: "That's right. So you're thinking…". "force B" (name letter) graded
+    correctly.
+  - NEW HIGH, fixed: "wait why is the area the impulse? i dont get the graph part" was graded as the correct
+    option (rule 4 on "area"/"impulse"). It got "That's right." and a verified CHECK credit, and the lesson then
+    closed "mastered" partly on that unearned credit. `looksLikeAQuestion` now covers a '?' anywhere, a
+    WH-word after a lead-in, and explicit confusion.
+  - Quality gaps seen (not fixed yet): the learner's own correct observation is not acknowledged before a
+    quiz; a wrong answer gets only "the answer is: …" with no why; the same unrelated "Elastic Collision
+    (1D)" figure is attached on several turns; quiz lead-ins sometimes mismatch the quiz ("statements",
+    "new situation").

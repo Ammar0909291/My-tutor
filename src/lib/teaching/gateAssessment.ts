@@ -886,7 +886,7 @@ export function withholdUngradedGateQuestion(
       const attached = typeof input.attachedMcqQuestion === 'string' ? input.attachedMcqQuestion.trim() : ''
       if (!attached) return { text: input.text, withheld: false, reason: 'ok' }
 
-      const poses = askedAnswerableQuestion(text) || containsOptionList(text)
+      const poses = askedAnswerableQuestion(text) || containsOptionList(text) || hasInlineOptionRun(text)
       if (!poses) return { text: input.text, withheld: false, reason: 'ok' }
 
       // The model restating the SAME authored question in prose (harmless,
@@ -956,7 +956,7 @@ export function withholdUngradedGateQuestion(
     // is reused rather than re-derived precisely because it ALREADY excludes
     // confirmation tails — "does that make sense?" and "shall we carry on?" are
     // not mastery questions and must survive untouched.
-    const poses = askedAnswerableQuestion(text) || containsOptionList(text)
+    const poses = askedAnswerableQuestion(text) || containsOptionList(text) || hasInlineOptionRun(text)
     if (!poses) return { text: input.text, withheld: false, reason: 'ok' }
 
     // The learner asked for a question, below GUIDE, with nothing on screen:
@@ -972,7 +972,9 @@ export function withholdUngradedGateQuestion(
     // Paragraph scope throws real teaching away with the question whenever a
     // model writes both in ONE paragraph (the common case). Try sentence
     // scope before giving up — see `salvageNonQuestionSentences`.
-    const kept = paragraphKept.length > 0 ? paragraphKept : salvageNonQuestionSentences(text)
+    // Salvage never keeps option sentences: an inline "A) … B) …" run is not teaching.
+    const kept = paragraphKept.length > 0 ? paragraphKept
+      : salvageNonQuestionSentences(text.split('\n').filter((l) => !INLINE_OPTION_RUN_LINE.test(l)).join('\n'))
     if (kept.length > 0) {
       return { text: kept, withheld: true, reason: 'no-gradeable-probe' }
     }
@@ -1048,6 +1050,12 @@ export function withholdUngradedGateQuestion(
  * does not match it) is never touched.
  */
 export function dropAnswerableContent(text: string): string {
+  // AN INLINE OPTION RUN IS AN OPTION LIST TOO (phys.therm.third-law r2,
+  // 2026-09-28): "A) Each cooling step always removes … B) As the temperature
+  // approaches zero … C) …" on ONE line survived after its question was cut,
+  // two turns running, so the learner saw answers to no question. A line that
+  // opens with "A)" and carries a "B)" later is dropped with the question.
+  text = text.split('\n').filter((l) => !INLINE_OPTION_RUN_LINE.test(l)).join('\n')
   const lines = text.split('\n')
   const firstOptionLine = lines.findIndex((l) => OPTION_LINE_RE.test(l))
   const scoped = firstOptionLine >= 0 ? lines.slice(0, firstOptionLine).join('\n').trim() : text.trim()
@@ -1060,6 +1068,9 @@ export function dropAnswerableContent(text: string): string {
 
   return kept.join('\n\n').trim()
 }
+
+const hasInlineOptionRun = (text: string): boolean => text.split('\n').some((l) => INLINE_OPTION_RUN_LINE.test(l))
+const INLINE_OPTION_RUN_LINE = /^\s*(?:[-*•]\s+)?(?:\*\*)?\(?A[).](?:\*\*)?\s+\S.*\s(?:\*\*)?\(?B[).](?:\*\*)?\s+\S/
 
 /**
  * KEEP THE TEACHING, DROP THE QUESTION — EVEN WHEN THEY SHARE A PARAGRAPH.
@@ -1340,10 +1351,17 @@ const ANNOUNCES_A_CHECK =
 // only ("here's a/your/another/the next … check/quiz/question/test:") so a verb
 // lead-in to content ("Let's check the formula:") is never touched; and the
 // function still returns early whenever the text asks anything.
+// "Pick the statement that best captures it." with nothing to pick
+// (phys.therm.third-law r2 s11, 2026-09-28) — an instruction to choose is a
+// promise of options.
+const INSTRUCTS_A_CHOICE =
+  /^(?:(?:now|ok(?:ay)?|alright|so)[,\s]+)?(?:pick|choose|select|tap)\s+(?:the\s+)?(?:one|option|statement|answer|choice|best)\b[^.!?]{0,80}[.!]?$/i
+
 const ANNOUNCES_A_CHECK_COLON = /^(?:[^.!?]{0,30}[,—–-]\s*)?here(?:(?:'|’)s| is)\b/i
 const ANNOUNCED_CHECK_NOUN_COLON = /\b(?:a|your|another|the next)\b[^.!?:]{0,40}\b(?:check|quiz|question|test)\b[^.!?:]{0,60}:$/i
 const announcesACheck = (sentence: string): boolean =>
   ANNOUNCES_A_CHECK.test(sentence)
+  || INSTRUCTS_A_CHOICE.test(sentence)
   || (ANNOUNCES_A_CHECK_COLON.test(sentence) && ANNOUNCED_CHECK_NOUN_COLON.test(sentence))
 
 export function dropUndeliveredCheckAnnouncements(text: string): string {

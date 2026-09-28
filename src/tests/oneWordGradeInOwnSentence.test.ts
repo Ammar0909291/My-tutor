@@ -86,3 +86,28 @@ describe('rule 2: an ordinal inside a noun phrase is not a position (phys.therm.
     expect(gradeMcqAnswer(m, SECOND_LAW).chosenIndex).toBe(i)
   })
 })
+
+describe('a confused question is never an answer (owner-account study, phys.mech.impulse)', () => {
+  const AREA: TutorMCQ = {
+    question: 'On a force–time graph for a collision, what does the AREA under the curve represent, and why does that matter?',
+    options: [
+      'The impulse, and therefore the change in momentum — which is what makes a violently varying collision force usable, since only the area matters',
+      'The momentum of the object, rather than its change',
+      'The average force during the collision',
+      'The work done during the collision',
+    ],
+    correctIndex: 0,
+  }
+  it.each([
+    'wait why is the area the impulse? i dont get the graph part',
+    'so how is the area the impulse',
+    'i dont understand the area impulse thing',
+    "I'm confused, is it the impulse",
+  ])('"%s" is not graded', (m) => expect(gradeMcqAnswer(m, AREA).chosenIndex).toBeNull())
+  it('a real answer still grades', () => {
+    expect(gradeMcqAnswer('the impulse — the area is the change in momentum', AREA)).toEqual({ chosenIndex: 0, correct: true })
+  })
+  it('a tap is always graded', () => {
+    expect(gradeMcqAnswer(AREA.options[0], AREA).chosenIndex).toBe(0)
+  })
+})

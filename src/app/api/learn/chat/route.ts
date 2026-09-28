@@ -12685,7 +12685,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         console.warn('[empty-reply-net] ' + JSON.stringify({ provider, llmCallCount, conceptId: resolvedConceptId ?? null }))
       }
 
-      // ── THE FALLBACK SENTENCE IS NOT SAID TWICE IN A ROW (2026-09-28) ─────
+      // ── THE FALLBACK SENTENCE IS NOT SAID TWICE (2026-09-28) ──────────────
       // Physics certification unit 2 (hamiltonian, hamilton-jacobi,
       // euler-lagrange): repairs emptied two consecutive turns and both shipped
       // the same "<concept> covers: …" line, so the learner read it twice. When
@@ -12700,7 +12700,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           const { mostRecentAssistantText } = await import('@/lib/teaching/remediationOutputContract')
           const fallback = node?.title && node.description ? conceptFallbackText(node.title, node.description) : null
           const prev = mostRecentAssistantText(learnSession.messages, MessageRole.ASSISTANT)
-          if (fallback && cleanText.trim() === fallback && (prev ?? '').trim() === fallback) {
+          // Any earlier tutor turn, not only the last (unit 2 pass 2,
+          // hamiltons-equations: the same line at s7 and again at s10).
+          const saidBefore = (prev ?? '').trim() === fallback
+            || (learnSession.messages as Array<{ role: unknown; content?: unknown }>).some((m) =>
+              m.role === MessageRole.ASSISTANT && typeof m.content === 'string' && m.content.trim() === fallback)
+          if (fallback && cleanText.trim() === fallback && saidBefore) {
             cleanText = FALLBACK_REPEAT_TEXT
             console.warn('[fallback-repeat] ' + JSON.stringify({ conceptId: resolvedConceptId ?? null }))
           }

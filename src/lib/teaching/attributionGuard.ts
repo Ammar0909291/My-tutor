@@ -376,7 +376,7 @@ export function repairMirrorWithVerdict(input: MirrorVerdictInput): MirrorVerdic
 // that feeds it, wherever they sit — and keeps everything that teaches.
 
 const CONFIRM_REQUEST_ANY_RE =
-  /(?:is\s+that\s+(?:right|correct)|am\s+i\s+right|did\s+i\s+(?:get|understand)\s+(?:that|it|you)\s+right|is\s+that\s+what\s+you\s+(?:meant|mean)|have\s+i\s+got\s+that\s+right|do\s+i\s+have\s+that\s+right|,\s*(?:right|correct)\s*\?|is\s+that\s+an?\s+(?:accurate|fair|correct)\s+(?:summary|description|reading)\b[^?]*\?|does\s+that\s+(?:sound\s+right|capture\s+(?:it|what\s+you\s+mean))\b[^?]*\?)\s*[?.!]*\s*$/i
+  /(?:is\s+that\s+(?:right|correct)|am\s+i\s+right|did\s+i\s+(?:get|understand)\s+(?:that|it|you)\s+right|is\s+that\s+what\s+you\s+(?:meant|mean)|have\s+i\s+got\s+that\s+right|have\s+i\s+understood\s+(?:you|that|this|it)\s+(?:correctly|right)|do\s+i\s+have\s+that\s+right|,\s*(?:right|correct)\s*\?|is\s+that\s+an?\s+(?:accurate|fair|correct)\s+(?:summary|description|reading)\b[^?]*\?|does\s+that\s+(?:sound\s+right|capture\s+(?:it|what\s+you\s+mean))\b[^?]*\?)\s*[?.!]*\s*$/i
 const LET_ME_KNOW_RE =
   /^(?:please\s+)?let\s+me\s+know\s+if\s+(?:that(?:'|’)?s|that\s+is|this\s+is|i(?:'|’)?ve\s+got\s+(?:it|that))\s+(?:right|correct|what\s+you\s+meant)\b/i
 const FRAME_START_RE =

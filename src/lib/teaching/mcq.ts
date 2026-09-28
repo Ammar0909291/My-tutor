@@ -976,8 +976,15 @@ const LEAD_TOO_CONVERSATIONAL: ReadonlySet<string> = new Set([
   'yes', 'no', 'ok', 'okay', 'sure', 'right', 'correct', 'wrong', 'not quite',
 ])
 
+// Widened 2026-09-28 (owner-account study, phys.mech.impulse): "wait why is the
+// area the impulse? i dont get the graph part" — a '?' mid-message, a WH-word
+// after "wait", and explicit confusion — was graded as the correct option on
+// "area"/"impulse", banked a verified CHECK credit and got "That's right."
+// Rule 0 (verbatim tap) runs before this precondition, so taps are unaffected.
 const looksLikeAQuestion = (s: string): boolean =>
-  /\?\s*$/.test(s.trim()) || /^\s*(why|how|what|when|where|which|who|is|are|does|do|can|could|should)\b/i.test(s)
+  /\?/.test(s)
+  || /^\s*(?:(?:wait|ok(?:ay)?|so|but|and|hmm+|um+|sir|ma'?am|then|also|sorry)[\s,.;:!\-]+)*(why|how|what|when|where|which|who|is|are|does|do|can|could|should)\b/i.test(s)
+  || /\b(?:i\s+(?:still\s+)?(?:do\s*n[o'’]?t|dont|didn'?t|did\s+not)\s+(?:get|understand|follow|see)|confus(?:ed|ing)|i(?:'|’)?m\s+lost|i\s+am\s+lost|makes?\s+no\s+sense)\b/i.test(s)
 
 /**
  * A REQUEST TO THE TUTOR, OR A CHALLENGE TO WHAT IT SAID, IS NOT AN ANSWER.
