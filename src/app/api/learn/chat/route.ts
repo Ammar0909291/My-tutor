@@ -3204,6 +3204,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             const entryOrder = graph ? computeCurriculumEntryOrder(graph, level) : null
             return isEligibleForPlacementVerification({
               nothingCompleted, currentLesson: studentProgress?.currentLesson, entryOrder,
+              taughtLesson: lessonCtx?.currentLesson ?? null,
             })
           } catch { return nothingCompleted } // degrade to the old behavior rather than block eligibility on an error
         })() : nothingCompleted
@@ -11047,6 +11048,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 : null
               const learnerStillAtEntry = shouldApplyDownwardAdjustment({
                 currentLesson: studentProgress?.currentLesson, originalEntryOrder,
+                taughtLesson: lessonCtx?.currentLesson ?? null,
               })
               if (graph && learnerStillAtEntry) {
                 const lowered = computeCurriculumEntryOrder(graph, levelBelow(resolvedPlacementLevel))

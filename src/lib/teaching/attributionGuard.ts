@@ -380,7 +380,7 @@ const CONFIRM_REQUEST_ANY_RE =
 const LET_ME_KNOW_RE =
   /^(?:please\s+)?let\s+me\s+know\s+if\s+(?:that(?:'|’)?s|that\s+is|this\s+is|i(?:'|’)?ve\s+got\s+(?:it|that))\s+(?:right|correct|what\s+you\s+meant)\b/i
 const FRAME_START_RE =
-  /^(?:(?:ok(?:ay)?|great|got\s+it|alright)[,!]?\s+)?(?:so\s+)?(?:you(?:'|’)?re\s+saying|you\s+are\s+saying|you(?:'|’)?re\s+thinking|you\s+said|you\s+think|you\s+(?:selected|chose|picked|answered|went\s+with|opted\s+for)|i\s+hear\s+(?:that\s+)?you(?:'|’)?re|i\s+take\s+it\s+you|it\s+sounds\s+like\s+you|you(?:'|’)?d\s+like\s+(?:me\s+)?to|you\s+would\s+like\s+(?:me\s+)?to|you\s+want\s+(?:me\s+)?to|if\s+i\s+understand\s+you)\b/i
+  /^(?:(?:ok(?:ay)?|great|got\s+it|alright)[,!]?\s+)?(?:so\s+)?(?:you(?:'|’)?re\s+saying|you\s+are\s+saying|you(?:'|’)?re\s+thinking|you\s+said|you\s+think|you\s+(?:selected|chose|picked|answered|went\s+with|opted\s+for)|you(?:'|’)?re\s+indicating|you\s+are\s+indicating|i\s+hear\s+(?:that\s+)?you(?:'|’)?re|i\s+take\s+it\s+you|it\s+sounds\s+like\s+you|you(?:'|’)?d\s+like\s+(?:me\s+)?to|you\s+would\s+like\s+(?:me\s+)?to|you\s+want\s+(?:me\s+)?to|if\s+i\s+understand\s+you)\b/i
 
 const flatApos = (s: string) => s.replace(/[’ʼ]/g, "'")
 

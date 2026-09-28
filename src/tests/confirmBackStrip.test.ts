@@ -69,3 +69,11 @@ describe('answer-report frames (unit 2, phys.mech.moment-of-inertia)', () => {
     expect(stripConfirmBack(q)).toEqual({ text: q, stripped: false })
   })
 })
+
+describe('"you\'re indicating" (unit 1 pass 3, phys.mech.kinematics-1d r2 s5)', () => {
+  it('the confirm-back goes, the teaching question stays', () => {
+    const r = stripConfirmBack("So you're indicating you're ready for me to keep going. Is that right? When you say the ball is going up, how do you decide whether the displacement s should be taken as positive or negative?")
+    expect(r.stripped).toBe(true)
+    expect(r.text).toBe('When you say the ball is going up, how do you decide whether the displacement s should be taken as positive or negative?')
+  })
+})

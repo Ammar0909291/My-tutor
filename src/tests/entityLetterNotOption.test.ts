@@ -29,3 +29,17 @@ describe('entity letters', () => {
     expect(gradeMcqAnswer('I think C because they balance', PLAIN)).toEqual({ chosenIndex: 2, correct: true })
   })
 })
+
+describe('a capital letter after an ordinary word is a name (phys.mech.power r2 s5)', () => {
+  const POWER: TutorMCQ = {
+    question: 'A motor delivers a steady 1500 W. How much work does it do in 20 s?',
+    options: ['1500 J — the power is the work', '30 000 J', '300 J', '75 J — dividing the power by the time'],
+    correctIndex: 1,
+  }
+  it('"I think crane B did more work …" is not option B', () => {
+    expect(gradeMcqAnswer('I think crane B did more work because it has more power', POWER).chosenIndex).toBeNull()
+  })
+  it.each(['I think B', 'B because 1500 × 20', 'I think B is right', 'option B please', 'maybe B', 'it is B'])('"%s" still chooses B', (m) => {
+    expect(gradeMcqAnswer(m, POWER).chosenIndex).toBe(1)
+  })
+})

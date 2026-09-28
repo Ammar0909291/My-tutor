@@ -835,3 +835,22 @@ by `drive.ts`, to settle from evidence whether the already-served guard is being
   6. phys.mech.moment-of-inertia r1 s7, MEDIUM. "So you selected option A … Is that right?" survived
      `stripConfirmBack`, which lacked answer-report frames. Added "you selected/chose/picked/answered/
      went with/opted for". Tests added to `confirmBackStrip.test.ts`.
+  7. Unit 2, HIGH (lesson hijack). phys.mech.conservation-of-momentum r2 and phys.mech.impulse r2
+     (intermediate accounts): mid-lesson the tutor switched to teaching SI units (curriculum lesson 1)
+     and served SI quizzes. Placement verification's eligibility and write-site checks read
+     `studentProgress.currentLesson`, which stays at the placement entry, so answers inside a lesson the
+     learner opened themselves were folded as calibration results. The downward adjustment then cleared
+     `activeLessonSlug` mid-lesson. Both checks now take the lesson actually taught
+     (`lessonCtx.currentLesson`); placement neither probes nor adjusts outside the entry lesson.
+     Test: `placementOnlyAtEntryLesson.test.ts`.
+  8. phys.mech.power r2 s5, HIGH: "I think crane B did more work …" was read as option B (correct). A
+     capital letter after an ordinary word and before more of the sentence is now a name; only
+     answer-lead words ("think B", "option B", "is B") keep the letter reading.
+  9. phys.mech.poisson-brackets r1 s5, HIGH: a misconception about a different bracket shared
+     "bracket"/"does" with the correct option (rule 4) and was banked as right. Rule 4 now allows at most
+     2x as many option-foreign words as matched distinctive words.
+  10. unit 1 pass 3, kinematics-1d r2 s5: "So you're indicating … Is that right?" is now stripped.
+- Unit 1 pass 3 (verification on 1aa77824+ deploys): 36/46 lessons, HIGH 0. 10 infra failures re-driving.
+- Production incident, 2026-09-28 11:02-11:05Z: db_timeout site-wide right after a deploy. Cold-start
+  bootstrap transactions were left idle in transaction (idle_in_transaction_session_timeout = 0).
+  OWNER DECISION pending: set that timeout. Mitigation: one deploy per pass.

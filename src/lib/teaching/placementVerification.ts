@@ -125,11 +125,30 @@ export function isEligibleForPlacementVerification(params: {
   nothingCompleted: boolean
   currentLesson: number | null | undefined
   entryOrder: number | null
+  /** The order of the lesson actually being TAUGHT this turn (see notTheEntryLesson). */
+  taughtLesson?: number | null
 }): boolean {
   if (!params.nothingCompleted) return false
   if (params.entryOrder === null) return true
+  if (notTheEntryLesson(params.taughtLesson, params.entryOrder)) return false
   const learnerCurrentLesson = params.currentLesson ?? params.entryOrder
   return learnerCurrentLesson <= params.entryOrder
+}
+
+/**
+ * PLACEMENT IS ABOUT THE ENTRY LESSON, NOT THE LESSON THE LEARNER OPENED.
+ *
+ * Physics certification, 2026-09-28 (unit 2, intermediate accounts):
+ * `currentLesson` stays at the placement entry while a learner opens another
+ * lesson from the curriculum, so both checks here passed. The learner's answers
+ * inside phys.mech.conservation-of-momentum were folded as calibration results,
+ * the downward adjustment cleared `activeLessonSlug` mid-lesson, and the next
+ * turn taught lesson one (SI units) inside the momentum lesson. When the lesson
+ * actually being taught is known and is not the entry lesson, placement neither
+ * probes nor adjusts. Absent (unknown) keeps the previous behaviour.
+ */
+export function notTheEntryLesson(taughtLesson: number | null | undefined, entryOrder: number): boolean {
+  return typeof taughtLesson === 'number' && taughtLesson !== entryOrder
 }
 
 /**
@@ -146,8 +165,10 @@ export function isEligibleForPlacementVerification(params: {
 export function shouldApplyDownwardAdjustment(params: {
   currentLesson: number | null | undefined
   originalEntryOrder: number | null
+  taughtLesson?: number | null
 }): boolean {
   if (params.originalEntryOrder === null) return true
+  if (notTheEntryLesson(params.taughtLesson, params.originalEntryOrder)) return false
   const learnerCurrentLesson = params.currentLesson ?? params.originalEntryOrder
   return learnerCurrentLesson <= params.originalEntryOrder
 }

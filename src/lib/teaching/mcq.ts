@@ -1064,15 +1064,31 @@ export function resolveMcqChoice(message: string, mcq: TutorMCQ): number | null 
  * said "That's right." When the question itself writes "<word> <LETTER>"
  * ("Force A", "car B", "point C"), the same pair in the message names that
  * thing, so the LETTER rules do not see it. Every text rule still reads the
- * message as typed.
+ * message as typed. (Extended the same day to a capital letter after any
+ * ordinary word — see the body.)
  */
 function withoutEntityLetters(message: string, question: string | undefined): string {
-  if (!question) return message
   const nouns = new Set<string>()
-  for (const m of question.matchAll(/\b([A-Za-z]{2,})\s+([A-D])\b/g)) nouns.add(m[1].toLowerCase())
-  if (nouns.size === 0) return message
-  return message.replace(/\b([A-Za-z]{2,})\s+([A-Da-d])\b/g, (whole, w: string) => (nouns.has(w.toLowerCase()) ? ' ' : whole))
+  for (const m of (question ?? '').matchAll(/\b([A-Za-z]{2,})\s+([A-D])\b/g)) nouns.add(m[1].toLowerCase())
+  // Same defect without the question's help (phys.mech.power r2 s5): "I think
+  // crane B did more work because it has more power" was read as option B. A
+  // capital letter after an ordinary word and before more of the sentence is a
+  // NAME ("crane B did", "car C is"); only words that can introduce an answer
+  // ("think B", "option B", "is B", "the B") keep the letter reading.
+  const named = message.replace(/\b([A-Za-z]{2,})\s+([A-D])(?=\s+[A-Za-z\u2014\u2013-])/g,
+    (whole, w: string) => (ANSWER_LEAD_WORDS.has(w.toLowerCase()) ? whole : ' '))
+  if (nouns.size === 0) return named
+  return named.replace(/\b([A-Za-z]{2,})\s+([A-Da-d])\b/g, (whole, w: string) => (nouns.has(w.toLowerCase()) ? ' ' : whole))
 }
+
+/** Words that can stand directly before an option letter in an answer — see withoutEntityLetters. */
+const ANSWER_LEAD_WORDS = new Set([
+  'think', 'thought', 'guess', 'believe', 'feel', 'say', 'said', 'choose', 'chose', 'pick', 'picked',
+  'select', 'selected', 'option', 'answer', 'choice', 'letter', 'number', 'is', 'was', 'be', 'its', 'it',
+  'maybe', 'probably', 'definitely', 'surely', 'perhaps', 'with', 'the', 'and', 'or', 'not', 'then', 'so',
+  'ok', 'okay', 'yes', 'no', 'sir', 'maam', 'madam', 'hmm', 'um', 'uh', 'go', 'prefer', 'pls', 'please',
+  'im', 'correct', 'right', 'because', 'but', 'thats',
+])
 
 function resolveMcqChoiceFolded(message: string, mcq: TutorMCQ): number | null {
   const n = norm(message)
@@ -1480,7 +1496,16 @@ function resolveMcqChoiceFolded(message: string, mcq: TutorMCQ): number | null {
     return distinctive.filter((w) => tokens.includes(w)).length
   })
   const best = Math.max(...scores)
-  if (best >= 2 && scores.filter((s) => s === best).length === 1) return scores.indexOf(best)
+  // A sentence of the learner's OWN that shares two words with an option is not
+  // a choice of it (phys.mech.poisson-brackets, 2026-09-28): "I think {x,p}={p,x},
+  // since the Poisson bracket is symmetric like a dot product, so order of
+  // arguments does not matter" scored 2 on "bracket"/"does" against the correct
+  // option of a DIFFERENT question and was banked as right. The words the
+  // options never use may be at most twice the matched distinctive ones; a
+  // paraphrase of the option passes, an unrelated claim does not.
+  const optionVocab = new Set(mcq.options.flatMap((o) => words(o)))
+  const foreignWords = new Set(words(message).filter((w) => w.length >= 4 && !optionVocab.has(w) && !ANSWER_FILLER.has(w)))
+  if (best >= 2 && scores.filter((s) => s === best).length === 1 && foreignWords.size <= 2 * best) return scores.indexOf(best)
 
   // 4a. ONE distinctive word, when nothing at all competes with it.
   //
@@ -1515,8 +1540,6 @@ function resolveMcqChoiceFolded(message: string, mcq: TutorMCQ): number | null {
   //     (phys.mech.work-energy-theorem, physics certification). At most one
   //     substantial word the options never use may ride along; "i think it is
   //     the lowest point sir" has none once fillers are dropped.
-  const optionVocab = new Set(mcq.options.flatMap((o) => words(o)))
-  const foreignWords = new Set(words(message).filter((w) => w.length >= 4 && !optionVocab.has(w) && !ANSWER_FILLER.has(w)))
   if (best === 1 && scores.filter((s) => s > 0).length === 1 && statesAnAnswer(message) && foreignWords.size <= 1) {
     const winner = scores.indexOf(best)
     const distinctive = [...new Set(words(mcq.options[winner]))]
