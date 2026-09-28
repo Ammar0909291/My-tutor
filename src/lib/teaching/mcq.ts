@@ -1133,7 +1133,7 @@ export function resolveMcqChoice(message: string, mcq: TutorMCQ): number | null 
   const explicitPatterns = [
     /^\\s*[\\(\\[]?([A-Da-d])[\\)\\].,:;-]?\\s*(.*)$/,
     /^\\s*(?:option|answer|choice|letter)\\s+([A-Da-d])\\b\\s*(.*)$/i,
-    /^\\s*(?:i\\s+(?:think|guess|believe|choose|pick|select)|my\\s+answer\\s+is|answer\\s+is|it(?:'|’)?s|it\\s+is)\\s*[\\(\\[]?([A-Da-d])[\\)\\].,:;-]?\\s*(.*)$/i,
+    /^\\s*(?:i\\s+(?:think|guess|believe|choose|pick|select|say)|(?:the\\s+)?(?:my\\s+)?(?:answer|choice)\\s+is|it(?:'|’)?s|it\\s+is)\\s*[\\(\\[]?([A-Da-d])[\\)\\].,:;-]?\\s*(.*)$/i,
   ]
 
   let chosen: number | null = null
