@@ -148,6 +148,8 @@ const CONFIRMS = new RegExp([
   "\\byou'?re right\\b", "\\byou are right\\b", "\\bquite right\\b",
   "\\byou'?ve got it\\b", "\\bgot it right\\b", "\\byou nailed\\b",
   "\\bgood job\\b", "\\bgreat job\\b", "\\byes[,!.]",
+  "\\b(great|good|nice|excellent|brilliant)[,!]?\\s+(you'?ve|you have|you)\\s+(correctly\\s+)?(spotted|identified|picked|found|chosen|caught|got)\\b",
+  "\\bwell spotted\\b", "\\bgood (catch|spot|eye)\\b",
 ].join('|'), 'i')
 const FILLER = /let'?s stay with this idea|let'?s take a moment|take a moment to think|let'?s pause here/i
 /** A turn spent teaching the learner how to OPERATE the tutor instead of the
