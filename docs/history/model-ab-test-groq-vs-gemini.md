@@ -275,3 +275,34 @@ optimized to reach mastery.
   exports untouched, existing test suite still 15/15 passing).
 - Raw transcripts (40 lesson JSON files) were kept in this session's scratchpad only, per the
   "no transcripts in the repo" rule — not committed.
+
+## Follow-up fix — misconceptions endorsed as "That's right" (2026-09-28, app-level, model-independent)
+
+**Root cause (not the model alone).** The `V-AFFIRM` output guard (`src/lib/kernel/verifier/rules.ts`)
+already existed to stop exactly this, and `route.ts` already fed it each concept's authored
+misconceptions (Blueprint + Educational Brain). For `chem.found.mole-concept` the EB
+characteristic phrase is literally "The mole is a mass — it's like a gram." But the guard only
+activated when the learner's message "proposed" something (`…is just…`, `…, right?`,
+`so it's…?`). A first-person belief ("I think …") matched none of those, so the guard never
+looked at the four failing turns.
+
+**Fix.**
+- `LEARNER_BELIEF_RE` makes a first-person belief statement (never a question) count as a
+  proposal.
+- A belief is judged only when it matches ONE authored misconception entry: at least 3 shared
+  stems covering at least 75% of what the learner asserted (`beliefMatchesAuthoredMisconception`;
+  the route now sends one entry per line).
+- With no match, or no authored library, the guard stands down, so a correct belief is never
+  "corrected".
+- On a match, the existing repair path runs unchanged: one regeneration carrying the authored
+  correction; if the retry agrees again, it falls closed to the authored correction.
+
+**Verified through the real route** (`src/tests/affirmGuardBelief.test.ts`): the production
+learner sentence plus Groq's production reply is rejected. Even with a retry that agrees again,
+the learner receives "The mole is a fixed COUNT (6.022×10²³ entities…) — not a mass — …" and
+never "That's right". The same test covers the verbs case, a correcting reply shipping unchanged,
+and correct beliefs left alone.
+
+**Honest limit.** Word overlap cannot see order: a reversed-direction misconception worded like
+the correct rule (e.g. which way to divide by Avogadro's number) is not caught. Such a belief sits
+below the bar on purpose, because this rule forces a correction and silence is the safe side.

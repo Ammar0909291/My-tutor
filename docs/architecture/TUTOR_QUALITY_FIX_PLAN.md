@@ -45,7 +45,10 @@ confidence. Estimated today: 4–5/10. These are judgements until item 4 exists.
    - `stripAuthoringLabel` runs only in `probeToMcq`.
    - `assembleLesson` → `formatProbeAsFollowUp` (non-MCQ probes typed into prose) does not strip,
      which is where the "DIAGNOSTIC (P4-a, retrieval):" leak came from.
-3. **Never ignore a wrong answer.**
+3. **Never ignore a wrong answer.** *(Partly done 2026-09-28: `V-AFFIRM` now also catches a
+   first-person belief that matches an authored misconception and replaces "That's right" with
+   the authored correction — see `docs/history/model-ab-test-groq-vs-gemini.md`, follow-up fix.
+   Typed-answer grading below is still open.)*
    - Grade typed answers against the authored key (`correctValue` and the probe text) using a
      conservative matcher.
    - On a clear miss, say so plainly and give the authored correction.

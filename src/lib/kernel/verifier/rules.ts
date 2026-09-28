@@ -530,6 +530,17 @@ const LEARNER_PROPOSES_RE =
 const LEARNER_PROPOSES_ALT_RE =
   /(?:\bso\b[\s\S]{0,90}\bright\b\s*[?.!]?\s*$|\bdoes\s+that\s+mean\b|\bis\s+that\s+(?:the\s+same|because)\b|\bso\s+it'?s\b[\s\S]{0,60}\?|,\s*right\s*[?.!]?\s*$|\bmeans?\s+(?:it|that|the)\b[\s\S]{0,60}\?)/i
 
+// A FIRST-PERSON BELIEF is a proposal too. MEASURED 2026-09-28 (identical-
+// student A/B, docs/history/model-ab-test-groq-vs-gemini.md): "I think the mole
+// is a mass — it's like a gram." and "I think a verb has to show physical
+// action, so 'is' and 'know' can't really be verbs." matched neither pattern
+// above, so this rule never looked at the turn, and the production model's
+// "That's right. You're saying that a mole is a type of mass…" shipped on both
+// concepts in both runs — although each sentence is, near word for word, the
+// concept's own authored misconception. A statement, never a question.
+const LEARNER_BELIEF_RE =
+  /^(?:(?:hmm+|well|so|ok(?:ay)?|but|actually|wait)[,.!]?\s+)*(?:i\s+(?:think|believe|thought|guess|reckon|feel\s+like|suppose|assume|was\s+taught|heard)|i(?:'|’)?m\s+(?:pretty\s+|fairly\s+)?(?:sure|certain)|i\s+am\s+(?:pretty\s+|fairly\s+)?(?:sure|certain)|my\s+understanding\s+is|in\s+my\s+(?:opinion|view))\b[^?]*$/i
+
 const BARE_AGREEMENT_OPENER_RE =
   /^\s*(?:yes|yeah|yep|yup|exactly|correct|right|true|absolutely|precisely|indeed|spot\s+on|perfect|100%|of\s+course|that(?:'|’)?s\s+(?:right|correct|it|exactly\s+right)|that\s+is\s+(?:right|correct|completely\s+right|exactly\s+right)|you(?:'|’)?re\s+(?:right|correct))\b/i
 
@@ -557,12 +568,52 @@ const BARE_AGREEMENT_OPENER_RE =
 const DISTINGUISHING_MARKER_RE =
   /\b(not\s+quite|not\s+exactly|not\s+just|not\s+the\s+same|isn'?t|is\s+not|are\s+not|aren'?t|rather\s+than|more\s+than\s+just|instead\s+of|careful|to\s+be\s+precise|precisely\s+speaking|partly|partially|close|almost|but\s+not|however|the\s+difference|differs?\s+from|actually|strictly\s+speaking|watch\s+out|common\s+mix[- ]?up|easy\s+to\s+confuse)\b/i
 
+/** Words that say nothing about WHAT the learner believes. */
+const BELIEF_FILLER = new Set(['think', 'believe', 'thought', 'guess', 'reckon', 'suppose', 'assume', 'really', 'pretty', 'sure', 'that', 'this', 'have', 'with', 'what', 'when', 'they', 'there', 'just', 'must', 'always', 'never', 'only', 'cant', 'cannot', 'dont', 'isnt'])
+const beliefStems = (text: string): Set<string> => new Set(
+  text.toLowerCase().replace(/[’']/g, '').split(/[^a-z0-9]+/)
+    .filter((w) => w.length > 3 && !BELIEF_FILLER.has(w))
+    .map((w) => w.replace(/(?:ing|ed|es|s)$/, '')),
+)
+
+/**
+ * Does the learner's belief match ONE authored misconception entry?
+ * `known` carries one entry per line (route.ts). Needs >= 3 shared stems with a
+ * single entry AND those stems cover >= 75% of what the learner asserted.
+ *
+ * HONEST LIMIT: word overlap cannot see ORDER. "divide by Avogadro's number to
+ * go from particles to moles" (right) and the authored direction-error entry
+ * share the same words (60% coverage — below the bar, so it is left alone,
+ * and a reversed-direction misconception worded the same way is missed too).
+ * The bar is set where the measured failures (100%, 80%) are caught and that
+ * correct statement is not; silence is the safe side for a rule that forces a
+ * correction.
+ */
+export function beliefMatchesAuthoredMisconception(learner: string, known: string): boolean {
+  const said = beliefStems(learner)
+  if (said.size === 0) return false
+  for (const entry of known.split('\n')) {
+    const e = beliefStems(entry)
+    let shared = 0
+    for (const w of said) if (e.has(w)) shared++
+    if (shared >= 3 && shared / said.size >= 0.75) return true
+  }
+  return false
+}
+
 export function vAffirm(text: string, ctx: VerifierContext): Violation | null {
   const learner = (ctx.learnerText ?? '').trim()
   if (!learner) return null
   const proposes =
     LEARNER_PROPOSES_RE.test(learner) || LEARNER_PROPOSES_ALT_RE.test(learner)
-  if (!proposes) return null
+  const believes = !proposes && LEARNER_BELIEF_RE.test(learner)
+  if (!proposes && !believes) return null
+  // A belief is judged ONLY against authored misconceptions, one entry at a
+  // time: with no library to say it is wrong, a stated belief is as likely
+  // right as wrong, and the conservative default below would manufacture a
+  // disagreement. The whole-register overlap used for proposals is too loose
+  // here — any on-topic sentence shares two topic nouns ("mole", "particles").
+  if (believes && !beliefMatchesAuthoredMisconception(learner, ctx.knownMisconceptionText ?? '')) return null
 
   const clean = withoutCodeFences(text).trim()
   if (!clean) return null

@@ -8390,6 +8390,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // learner who is WRONG from one who is RIGHT. Titles + symptom
             // phrases from BOTH registers; failure here degrades to the
             // conservative behaviour rather than taking the turn down.
+            // One entry per line: V-AFFIRM's belief check matches a learner's
+            // "I think…" against ONE authored misconception at a time.
             let knownMisconceptionText = ''
             try {
               const { loadBlueprintContent, loadEBConceptContext } =
@@ -8399,13 +8401,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 const bp = loadBlueprintContent(cid)
                 if (bp.found) {
                   for (const mc of bp.content.misconceptions) {
-                    knownMisconceptionText += ` ${mc.title} ${mc.characteristicPhrase ?? ''}`
+                    knownMisconceptionText += `\n${mc.title} ${mc.characteristicPhrase ?? ''}`
                   }
                 }
                 const eb = loadEBConceptContext(cid)
                 if (eb.found) {
                   for (const mc of eb.context.ebMisconceptions) {
-                    knownMisconceptionText += ` ${mc.title} ${mc.symptom ?? ''}`
+                    knownMisconceptionText += `\n${mc.title} ${mc.symptom ?? ''}`
                   }
                   // PHASE 7K TRACK E. An anti-analogy IS a misconception the
                   // concept's author anticipated — it names the wrong idea a
@@ -8424,7 +8426,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                   // sources. That is a CONTENT gap in protected curriculum,
                   // reported rather than silently authored here.
                   for (const anti of eb.context.antiAnalogies) {
-                    knownMisconceptionText += ` ${anti}`
+                    knownMisconceptionText += `\n${anti}`
                   }
                 }
               }
