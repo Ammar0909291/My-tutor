@@ -44,10 +44,19 @@
  * said…", a single lettered aside, or a numbered list) cannot trip it, and
  * anchors each to its own line so an inline "(a) thing" mid-sentence is ignored.
  */
+/**
+ * One option line, `A)` / `A.` / `(A)`, also when the model wraps it in markdown:
+ * a bullet (`- A) …`) and/or bold (`**A)** …`). Physics certification,
+ * 2026-09-28 (phys.mech.kinematics-1d): the withhold cut the question stem of
+ * "- **A)** 12 m/s …" but not the options, which this pattern did not see, and
+ * the learner got four answers to no question. Shared by every option-line check.
+ */
+export const OPTION_LINE_RE = /^\s*(?:[-*•]\s+)?(?:\*\*|__)?\(?([A-Da-d])[).](?:\*\*|__)?\s+\S/
+
 export function containsOptionList(text: string): boolean {
   const withoutCode = text.replace(/```[\s\S]*?```/g, '')
   const letters = new Set<string>()
-  for (const m of withoutCode.matchAll(/^\s*\(?([A-Da-d])[).]\s+\S/gm)) {
+  for (const m of withoutCode.matchAll(new RegExp(OPTION_LINE_RE.source, 'gm'))) {
     letters.add(m[1].toUpperCase())
   }
   // A and B are the minimum a real option list can have; requiring A specifically
@@ -91,7 +100,7 @@ const FALLBACK_LEAD_IN = 'Here is your next question.'
 export function enforceGateProbeContract(input: GateContractInput): GateContractResult {
   try {
     const lines = input.text.split('\n')
-    const firstOptionLine = lines.findIndex((l) => /^\s*\(?[A-Da-d][).]\s+\S/.test(l))
+    const firstOptionLine = lines.findIndex((l) => OPTION_LINE_RE.test(l))
     const hasOptionList = containsOptionList(input.text) && firstOptionLine >= 0
 
     // A COMPETING QUESTION DOES NOT NEED OPTIONS TO BE ONE.

@@ -9361,6 +9361,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // Same established whole-message detector `route.ts` already
               // uses a few hundred lines up to null a self-reported SIGNAL.
               learnerAcknowledged: isBareAcknowledgementForWithhold(message),
+              // "quiz me" below GUIDE while the surplus rule holds the pool in
+              // reserve: the model's question is the learner's only question.
+              learnerRequestedPractice: turnIntent.wantsPractice,
             })
             if (ungraded.withheld) {
               console.warn('[gate-contract] ' + JSON.stringify({

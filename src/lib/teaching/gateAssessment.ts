@@ -55,7 +55,7 @@
  * read as one rather than be papered over with a server-invented question.
  */
 
-import { stripAuthoringLabel, containsOptionList } from './gateProbeContract'
+import { stripAuthoringLabel, containsOptionList, OPTION_LINE_RE } from './gateProbeContract'
 import { hasProseMultipleChoice } from './proseMcqGuard'
 import { askedAnswerableQuestion } from './answerableTurn'
 import type { TutorMCQ } from './mcq'
@@ -557,6 +557,16 @@ export interface UngradedGateQuestionInput {
    */
   learnerAskedDirectQuestion?: boolean
   /**
+   * Did the learner explicitly ask to be quizzed this turn ("quiz me", "give
+   * me a practice question")? Read ONLY below GUIDE (OBSERVE/DEMONSTRATE),
+   * where the surplus rule may keep a bare-contract pool in reserve and a
+   * model-written question cannot reach the mastery record (see
+   * inventedProbeGuard's 'phase-does-not-count'). There, withholding the
+   * model's question left a learner who asked for one with none — physics
+   * unit-1 certification, 2026-09-28. Optional; absent keeps prior behaviour.
+   */
+  learnerRequestedPractice?: boolean
+  /**
    * Was the LEARNER'S OWN message this turn a bare acknowledgement — "yes",
    * "ok", "got it", "okay", … (`isBareAcknowledgement`, `masteryGate.ts`'s
    * own established whole-message detector, reused here rather than
@@ -615,6 +625,7 @@ export interface UngradedGateQuestionResult {
     | 'no-gradeable-probe'
     | 'stray-question-alongside-mcq'
     | 'left-for-direct-question'
+    | 'left-for-practice-request'
     | 'announced-question-never-delivered'
 }
 
@@ -948,6 +959,14 @@ export function withholdUngradedGateQuestion(
     const poses = askedAnswerableQuestion(text) || containsOptionList(text)
     if (!poses) return { text: input.text, withheld: false, reason: 'ok' }
 
+    // The learner asked for a question, below GUIDE, with nothing on screen:
+    // the model's question is the only one they will get this turn, and it
+    // cannot move the mastery record here. See `learnerRequestedPractice`.
+    if (input.learnerRequestedPractice === true && input.questionOnScreen !== true
+      && (input.phase === 'OBSERVE' || input.phase === 'DEMONSTRATE')) {
+      return { text: input.text, withheld: false, reason: 'left-for-practice-request' }
+    }
+
     // An introduction has nothing left to introduce — see `dropOrphanedLeadIn`.
     const paragraphKept = dropOrphanedLeadIn(dropAnswerableContent(text))
     // Paragraph scope throws real teaching away with the question whenever a
@@ -1024,7 +1043,7 @@ export function withholdUngradedGateQuestion(
  */
 export function dropAnswerableContent(text: string): string {
   const lines = text.split('\n')
-  const firstOptionLine = lines.findIndex((l) => /^\s*\(?[A-Da-d][).]\s+\S/.test(l))
+  const firstOptionLine = lines.findIndex((l) => OPTION_LINE_RE.test(l))
   const scoped = firstOptionLine >= 0 ? lines.slice(0, firstOptionLine).join('\n').trim() : text.trim()
   if (scoped.length === 0) return scoped
 

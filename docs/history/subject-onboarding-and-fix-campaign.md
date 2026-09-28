@@ -803,3 +803,17 @@ by `drive.ts`, to settle from evidence whether the already-served guard is being
 - Known, not fixed: at DEMONSTRATE with a bare 3-probe pool the gate declines `below-guide-no-surplus`
   and the model's question is withheld (`authored-probes-exist`), so "quiz me" there can also get no
   question. Seen in the harness, not in pass 2's production data.
+- Pass 2 final (46/46 after re-driving): HIGH 1 (the kinematics harness artifact above), MEDIUM 3
+  (M-NOQUIZ fixed; 2 x M-DOUBLECONF benign). Two more defects found reading it and fixed:
+  1. "quiz me" at OBSERVE/DEMONSTRATE with a bare 3-probe pool got no question. The surplus rule keeps
+     the pool in reserve (correct), and the ungraded-question withhold then removed the model's question.
+     Below GUIDE a model question cannot reach the mastery record, so on a practice request it is now kept
+     (`withholdUngradedGateQuestion` input `learnerRequestedPractice`, reason 'left-for-practice-request').
+     Test: `practiceRequestBelowGuide.test.ts`.
+  2. kinematics-1d r1 s9 showed "- **A)** 12 metres per second …" options with no question. The option-line
+     regexes (3 copies plus proseMcqGuard's) did not allow a markdown bullet/bold around the label, so the
+     withhold cut the stem but left the options. There is now one shared `OPTION_LINE_RE` in
+     gateProbeContract.ts, and proseMcqGuard accepts the same markup. Test: `markdownOptionList.test.ts`.
+- Harness now covers all 238 concepts: `buildScript.ts --unit 2..5` (46/49/51/69 concepts, 0 gaps), with
+  the onboarding level by difficulty. The wrong-answer pick prefers an authored wrong option; an unverified
+  pick is reported as M-UNVERIFIED.
