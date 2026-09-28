@@ -430,7 +430,7 @@ server graded it wrong (phase regressed GUIDE → DEMONSTRATE) but the reply sai
 you've spotted the hypertrophy adaptation" — `wrongAnswerCorrection.ts` deliberately stays
 silent on model-invented keys, and nothing stops the model praising a wrong answer.
 
-## FINAL VERDICT (2026-09-27): Is Biology fully production-ready? **NO.**
+## FINAL VERDICT (2026-09-27): Is Biology fully production-ready? **NO.** — SUPERSEDED 2026-09-28, see the update below
 
 Everything a learner SEES and the content behind it is ready. The one outcome that makes
 Biology a finished course is not: **a learner who answers every question correctly reaches
@@ -476,3 +476,26 @@ decision (section "Mastery reachability, batch 13" above).
 7. Diagram turns take ~9–13 s end to end.
 8. Only batch 13 (17 concepts) was mastery-driven live; the other 182 Biology concepts
    share the same three-probe contract and the same gate, so caveat 1 applies to them too.
+
+## VERDICT UPDATE (2026-09-28): blocker fixed — Biology is production-ready, with the named caveats
+
+The owner chose option **(c)**. Commit `5639ee4` (`recordMcqOutcome`'s `gradedWithoutCredit`):
+an authored probe answered CORRECTLY while the lesson is at OBSERVE / DEMONSTRATE / GUIDE —
+where a correct answer banks no mastery credit — is no longer lost; it gets the same single
+re-ask a missed probe already gets (fresh probes first, at most once). Tests:
+`probeGradedWithoutCreditReaskable.test.ts`; tsc clean; full suite 743 files, 15,696 passed.
+
+**Live re-test on production (deployment `5639ee4`, same harness, same 17 batch-13 concepts,
+three disposable accounts, all deleted afterwards): 17/17 VERIFIED** (was 8/17). DB agrees:
+17/17 `topic_progress` rows `COMPLETED`. Several lessons now serve 4–5 authored-probe turns
+instead of 3 — the GUIDE-graded probe coming back at CHECK/PRACTICE, as designed.
+
+**Verdict: YES — Biology is production-ready**, with caveats 2–8 from the section above still
+open (none blocks a learner from being taught, shown correct figures, or reaching verified
+mastery):
+- praise for a wrong answer on a model-invented quiz;
+- cramped six-group comparison figures; pathway panel lines don't name their stage;
+- `masteryPct` shows 65 for COMPLETED and REVISION alike;
+- 5–10 s blank frame after Add-subject; ~9–13 s diagram turns;
+- only batch 13 was mastery-driven live — the other 182 concepts share the same contract and
+  gate, so the fix applies to them, but they have not each been driven end to end.
