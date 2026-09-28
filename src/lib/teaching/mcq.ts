@@ -830,6 +830,13 @@ const norm = (s: string) =>
   )
 const words = (s: string) => norm(s).split(' ').filter((w) => w.length > 2)
 
+/** Words a learner wraps an answer in that say nothing about WHICH option — rule 4a only. */
+const ANSWER_FILLER = new Set([
+  'think', 'guess', 'believe', 'maybe', 'probably', 'answer', 'option', 'choose', 'pick',
+  'sure', 'would', 'should', 'must', 'that', 'this', 'thats', 'sir', 'maam', 'madam', 'miss', 'teacher',
+  'please', 'correct', 'right', 'because', 'is', 'its',
+])
+
 /**
  * Is this reply a question to the TUTOR rather than an answer?
  *
@@ -1478,7 +1485,18 @@ function resolveMcqChoiceFolded(message: string, mcq: TutorMCQ): number | null {
   //     would bank a wrong answer against a learner who was asking for help.
   // The question guard that used to sit here is now a precondition above, so
   // it protects rules 1-5 rather than only this one.
-  if (best === 1 && scores.filter((s) => s > 0).length === 1 && statesAnAnswer(message)) {
+  //   - (2026-09-28) the message must be made of the OPTIONS' vocabulary. One
+  //     shared word inside a sentence of the learner's own is not a choice:
+  //     "I think it is at rest — zero work means zero kinetic energy" against
+  //     "State the work–energy theorem" scored 1 on "kinetic" (only the
+  //     correct option says it) and was banked as the right answer, and the
+  //     tutor told the learner their misconception was right
+  //     (phys.mech.work-energy-theorem, physics certification). At most one
+  //     substantial word the options never use may ride along; "i think it is
+  //     the lowest point sir" has none once fillers are dropped.
+  const optionVocab = new Set(mcq.options.flatMap((o) => words(o)))
+  const foreignWords = new Set(words(message).filter((w) => w.length >= 4 && !optionVocab.has(w) && !ANSWER_FILLER.has(w)))
+  if (best === 1 && scores.filter((s) => s > 0).length === 1 && statesAnAnswer(message) && foreignWords.size <= 1) {
     const winner = scores.indexOf(best)
     const distinctive = [...new Set(words(mcq.options[winner]))]
       .filter((w) => counts.get(w) === 1 && w.length >= 4)

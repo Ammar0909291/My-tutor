@@ -32,6 +32,16 @@ describe('withholdUngradedGateQuestion, practice request', () => {
   it('control: without a practice request the question is still withheld at OBSERVE', () => {
     expect(withholdUngradedGateQuestion({ ...base, phase: 'OBSERVE' }).withheld).toBe(true)
   })
+  it('with a quiz already on screen, "give me a practice question" is pointed at it, not given a second question', () => {
+    const r = withholdUngradedGateQuestion({ ...base, phase: 'CHECK', questionOnScreen: true, learnerRequestedPractice: true, learnerAskedDirectQuestion: true,
+      text: 'When a block slides down a ramp that has friction, what kind of work does the friction force do on the block?' })
+    expect(r.withheld).toBe(true)
+    expect(r.text).not.toMatch(/friction/)
+  })
+  it('control: a genuine direct question with a quiz on screen keeps its exemption', () => {
+    expect(withholdUngradedGateQuestion({ ...base, phase: 'CHECK', questionOnScreen: true, learnerAskedDirectQuestion: true, text: 'Which direction does friction point here?' }))
+      .toMatchObject({ withheld: false, reason: 'left-for-direct-question' })
+  })
   it('a broken announcement is still repaired', () => {
     expect(withholdUngradedGateQuestion({ ...base, text: "Here's a quick question:", phase: 'OBSERVE', learnerRequestedPractice: true }))
       .toMatchObject({ withheld: true, reason: 'announced-question-never-delivered' })

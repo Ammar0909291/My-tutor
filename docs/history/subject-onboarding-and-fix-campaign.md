@@ -817,3 +817,13 @@ by `drive.ts`, to settle from evidence whether the already-served guard is being
 - Harness now covers all 238 concepts: `buildScript.ts --unit 2..5` (46/49/51/69 concepts, 0 gaps), with
   the onboarding level by difficulty. The wrong-answer pick prefers an authored wrong option; an unverified
   pick is reported as M-UNVERIFIED.
+- Unit 2 pass 1 (in progress) found two more defects, both fixed:
+  3. phys.mech.work-energy-theorem r1 s5, HIGH. With "State the work–energy theorem" on screen, the
+     typed misconception "I think it is at rest — zero work means zero kinetic energy" was graded as the
+     CORRECT option. Rule 4a let one distinctive word ("kinetic") decide, and the tutor said "That's right."
+     Rule 4a now also requires the message to use the options' vocabulary: at most one substantial word
+     the options never use, fillers aside. Test: `oneWordGradeInOwnSentence.test.ts`.
+  4. Same lesson, s11-s12. "give me a practice question" with a quiz carried forward on screen: the
+     direct-request exemption kept the model's own second question, and the learner's quiz answer was
+     then judged against it ("Correct — well done … but it doesn't address friction"). On a practice request
+     with a quiz on screen the exemption no longer applies, and the turn hands off to the quiz.

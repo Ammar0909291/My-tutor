@@ -983,7 +983,13 @@ export function withholdUngradedGateQuestion(
     // the model's original text on screen is a better outcome than the
     // content-free placeholder — see `learnerAskedDirectQuestion`'s doc
     // comment for why this is safe and not a new evidence-integrity hole.
-    if (input.learnerAskedDirectQuestion === true && !input.justGraded) {
+    // Not for a practice request with a quiz already on screen: the quiz IS the
+    // practice question, and a second one beside it is what the learner then
+    // answers the quiz against (phys.mech.work-energy-theorem r1 s11-s12,
+    // 2026-09-28: "Correct — well done … but it doesn't address what the
+    // friction force does"). The hand-off sentence points at the quiz instead.
+    const practiceWithQuizShown = input.learnerRequestedPractice === true && input.questionOnScreen === true
+    if (input.learnerAskedDirectQuestion === true && !input.justGraded && !practiceWithQuizShown) {
       return { text: input.text, withheld: false, reason: 'left-for-direct-question' }
     }
 
