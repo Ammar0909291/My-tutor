@@ -55,6 +55,28 @@ function arrow(id: string, from: Vec3, to: Vec3): SceneObject {
   return { type: 'arrow', id, from, to, color: ARROW_COLOR, thickness: 0.05 }
 }
 
+/**
+ * A stage's narration, led by the stage's own name. The authored descriptions
+ * are clauses whose subject IS the stage ("secretes GnRH in pulsatile bursts"
+ * for the hypothalamus), so without the name the "What's happening?" panel
+ * listed actions with no actor. A description that already opens with the name
+ * is left as it is.
+ */
+function stageLine(stage: PathwayStage): string {
+  const description = stage.description.trim()
+  const name = stage.name.trim()
+  // A whole-word match: stage "M" must not count as named by "mitosis and …".
+  const named = description.toLowerCase().startsWith(name.toLowerCase())
+    && !/[\p{L}\p{N}]/u.test(description.charAt(name.length))
+  return named ? description : `${name}: ${description}`
+}
+
+/** Two branch stages in one narration, each ended so they cannot run together. */
+function branchLines(a: PathwayStage, b: PathwayStage): string {
+  const end = (t: string) => (/[.!?…]["'”’)\]]*$/.test(t) ? t : `${t}.`)
+  return `${end(stageLine(a))} ${stageLine(b)}`
+}
+
 export function buildCellPathwayScene(params: CellPathwayParams): SceneSpec {
   const { conceptId, title, teachingGoal, cyclic, branchStart, stages, branchEnd } = params
   const steps: SceneStep[] = []
@@ -69,11 +91,11 @@ export function buildCellPathwayScene(params: CellPathwayParams): SceneSpec {
     const posB: Vec3 = [0, -1.6, 0]
     const mainPos: Vec3 = [round(mainStartX), 0, 0]
     steps.push({
-      narration: `Two independent triggers converge on the same continuation: ${a.description} ${b.description}`,
+      narration: `Two independent triggers converge on the same continuation. ${branchLines(a, b)}`,
       objects: [node('branch-start-a', posA, a.name), node('branch-start-b', posB, b.name)],
     })
     steps.push({
-      narration: stages[0]?.description ?? '',
+      narration: stages[0] ? stageLine(stages[0]) : '',
       objects: [
         node('stage-0', mainPos, stages[0]?.name ?? ''),
         arrow('branch-start-a-arrow', posA, mainPos),
@@ -82,7 +104,7 @@ export function buildCellPathwayScene(params: CellPathwayParams): SceneSpec {
     })
   } else if (stages[0]) {
     steps.push({
-      narration: stages[0].description,
+      narration: stageLine(stages[0]),
       objects: [node('stage-0', [round(mainStartX), 0, 0], stages[0].name)],
     })
   }
@@ -92,7 +114,7 @@ export function buildCellPathwayScene(params: CellPathwayParams): SceneSpec {
     const prevPos: Vec3 = [round(mainStartX + (i - 1) * SPACING), 0, 0]
     const pos: Vec3 = [round(mainStartX + i * SPACING), 0, 0]
     steps.push({
-      narration: stages[i].description,
+      narration: stageLine(stages[i]),
       objects: [node(`stage-${i}`, pos, stages[i].name), arrow(`stage-${i}-arrow`, prevPos, pos)],
     })
   }
@@ -104,7 +126,7 @@ export function buildCellPathwayScene(params: CellPathwayParams): SceneSpec {
     const posA: Vec3 = [round(lastPos[0] + SPACING), 1.8, 0]
     const posB: Vec3 = [round(lastPos[0] + SPACING), -1.8, 0]
     steps.push({
-      narration: `The same shared stage can lead to two different outcomes: ${a.description} ${b.description}`,
+      narration: `The same shared stage can lead to two different outcomes. ${branchLines(a, b)}`,
       objects: [
         node('branch-end-a', posA, a.name),
         node('branch-end-b', posB, b.name),

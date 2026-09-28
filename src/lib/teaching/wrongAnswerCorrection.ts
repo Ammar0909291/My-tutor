@@ -58,6 +58,7 @@
  * answer is the content-free hold this register tracks separately; returning the
  * authored answer is strictly better than returning nothing.
  */
+import { stripLeadingFalseConfirmation } from './answerConfirmation'
 
 export interface TutorMcqLike {
   options?: unknown
@@ -171,7 +172,12 @@ export function stateCorrectionForWrongAnswer(
   }
 
   const correction = `Not quite — the answer is: ${answer}`
-  const rest = text.trim()
+  // The model's own opening praise cannot stand under a correction. MEASURED
+  // (production, 2026-09-27): replies to wrong answers opened "Great, you've
+  // spotted …" — prepending the correction alone would leave "Not quite — the
+  // answer is: X / Great, you've spotted Y". Opening sentence only, the same
+  // rule stripLeadingFalseConfirmation applies everywhere else.
+  const rest = stripLeadingFalseConfirmation(text).trim()
   return {
     text: rest.length > 0 ? `${correction}\n\n${rest}` : correction,
     added: true,

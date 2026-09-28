@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useState, useTransition } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { CandyPage, Card, CandyButton, EagleMascot } from '@/components/ui/candy'
@@ -41,10 +41,17 @@ export function SubjectNotEnrolled({
 }) {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
+  const [refreshing, startRefresh] = useTransition()
   const [error, setError] = useState(false)
+  // MEASURED on production (2026-09-28): the enroll POST takes ~2.5 s and the
+  // refreshed page another ~2 s. router.refresh() returns at once, so a
+  // `finally` that cleared the busy state put "Add subject" back on the button
+  // for the whole re-render, as if nothing had happened. The refresh now runs
+  // in a transition and the button stays busy until the new page replaces it.
+  const busy = loading || refreshing
 
   async function enroll() {
-    if (loading) return
+    if (busy) return
     setLoading(true)
     setError(false)
     try {
@@ -54,12 +61,12 @@ export function SubjectNotEnrolled({
         body: JSON.stringify({ subjectSlug }),
       })
       const data = (await res.json().catch(() => ({}))) as { success?: boolean }
-      if (!res.ok || !data.success) { setError(true); return }
+      if (!res.ok || !data.success) { setError(true); setLoading(false); return }
       // The same URL now resolves to the newly enrolled subject's lesson.
-      router.refresh()
+      setLoading(false)
+      startRefresh(() => router.refresh())
     } catch {
       setError(true)
-    } finally {
       setLoading(false)
     }
   }
@@ -80,11 +87,11 @@ export function SubjectNotEnrolled({
           {canEnroll && copy.add && (
             <CandyButton
               onClick={enroll}
-              disabled={loading}
+              disabled={busy}
               className="px-5 py-3 rounded-2xl text-sm mt-2 w-full"
               style={{ background: 'var(--candy-purple)', color: '#fff', fontWeight: 800, border: 'none' }}
             >
-              {loading ? copy.adding : copy.add}
+              {busy ? copy.adding : copy.add}
             </CandyButton>
           )}
           {error && (

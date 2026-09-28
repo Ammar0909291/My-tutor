@@ -66,6 +66,11 @@ const flatten = (s: string) =>
 // kinematics-2d) — a Great job opener matched none of the existing
 // phrasings, only its sibling good job did. Kept in the same relative
 // position as good job below so the two files' diff stays minimal.
+// The last two alternatives are identification praise. MEASURED on production
+// (Biology, 2026-09-27): a WRONG answer to a model-invented quiz, graded wrong
+// with the ladder stepped back, got the reply: Great, you have spotted the
+// hypertrophy adaptation. None of the other phrasings matched, so the unbacked
+// praise was never stripped. Kept in lockstep with scripts/qa/rubricScore.ts.
 export const CONFIRMS_CORRECT = new RegExp([
   '\\bcorrect\\b', '\\bexactly\\b', '\\bprecisely\\b', '\\bspot on\\b',
   '\\bwell done\\b', '\\bnicely done\\b', '\\bperfect\\b',
@@ -73,6 +78,8 @@ export const CONFIRMS_CORRECT = new RegExp([
   "\\byou'?re right\\b", '\\byou are right\\b', '\\bquite right\\b',
   "\\byou'?ve got it\\b", '\\bgot it right\\b', '\\byou nailed\\b',
   '\\bgood job\\b', '\\bgreat job\\b', '\\byes[,!.]',
+  "\\b(great|good|nice|excellent|brilliant)[,!]?\\s+(you'?ve|you have|you)\\s+(correctly\\s+)?(spotted|identified|picked|found|chosen|caught|got)\\b",
+  '\\bwell spotted\\b', '\\bgood (catch|spot|eye)\\b',
 ].join('|'), 'i')
 
 /**
