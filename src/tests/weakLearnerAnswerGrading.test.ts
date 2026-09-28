@@ -85,10 +85,12 @@ describe('the replies the live run lost', () => {
     expect(g.correct).toBe(true)
   })
 
-  it('grades a hedged paraphrase that names one option', () => {
-    const g = gradeMcqAnswer('i think it is the lowest point sir', SHM)
-    expect(g.chosenIndex).toBe(2)
-    expect(g.correct).toBe(true)
+  // Choice-only (2026-09-28, owner-approved spec GB+): BEFORE this hedged
+  // paraphrase was graded by rule 4a; AFTER it is refused (the accepted cost of
+  // removing inference). Its letter form still grades.
+  it('a hedged paraphrase is refused; its letter form grades', () => {
+    expect(gradeMcqAnswer('i think it is the lowest point sir', SHM)).toEqual({ chosenIndex: null, correct: null })
+    expect(gradeMcqAnswer('i think C sir', SHM)).toEqual({ chosenIndex: 2, correct: true })
   })
 
   it('still grades the reply that DID work, unchanged', () => {
@@ -151,9 +153,13 @@ describe('what must still refuse to be graded', () => {
 // ═══════════════════════════════════════════════════════════════════════════
 describe('rule 0a — a labelled letter anywhere in the sentence', () => {
   it('accepts every label form a learner actually types', () => {
-    for (const m of ['well i think B.', 'my answer: C)', 'i say D,', 'maybe B;', 'i pick C -']) {
+    for (const m of ['well i think B.', 'my answer: C)', 'i say D,', 'i pick C -']) {
       expect(resolveMcqChoice(m, SHM), m).not.toBeNull()
     }
+    // Choice-only (2026-09-28): BEFORE "maybe B;" was accepted (a punctuated
+    // letter anywhere); AFTER a hedge before the letter is refused, as the
+    // "uncertainty is not an answer" controls already require for "maybe A".
+    expect(resolveMcqChoice('maybe B;', SHM)).toBeNull()
   })
 
   it('is case-insensitive, because a struggling learner does not capitalise', () => {
@@ -189,9 +195,10 @@ describe('rule 4a — one distinctive word, only when nothing competes', () => {
     expect(resolveMcqChoice('i think it is the one', SHM)).toBeNull()
     expect(resolveMcqChoice('the one', SHM)).toBeNull()
     expect(resolveMcqChoice('one more', SHM)).toBeNull()
-    // ...while a genuine ordinal, and an explicitly marked cardinal, still work.
-    expect(resolveMcqChoice('the third one', SHM)).toBe(2)
-    expect(resolveMcqChoice('option one', SHM)).toBe(0)
+    // Choice-only (2026-09-28): BEFORE a genuine ordinal and a marked cardinal
+    // still named a position; AFTER positions by ordinal/number are refused (R1).
+    expect(resolveMcqChoice('the third one', SHM)).toBeNull()
+    expect(resolveMcqChoice('option one', SHM)).toBeNull()
   })
 
   it('refuses when two options are both named', () => {

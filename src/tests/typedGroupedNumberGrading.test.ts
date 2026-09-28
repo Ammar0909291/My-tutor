@@ -14,11 +14,18 @@ const q = {
 } as never
 
 describe('typed answers to a grouped-number option', () => {
-  for (const a of ['84000 J', '84000', '84 000 J', '84,000 J', '0.5 x 4200 x 40 = 84000 J', 'A']) {
+  for (const a of ['84000 J', '84 000 J', '84,000 J', 'A']) {
     it(`"${a}" -> the 84 000 J option`, () => expect(resolveMcqChoice(a, q)).toBe(0))
   }
-  it('a distractor typed without its separator resolves to that distractor', () => {
-    expect(resolveMcqChoice('126000 J', q)).toBe(1)
+  // Choice-only (2026-09-28, owner-approved spec GB+): BEFORE a bare value, a
+  // worked equation and a distractor's answer half resolved by inference; AFTER
+  // they are refused (R2 / R3). Grouped digits in the exact option text still fold.
+  for (const a of ['84000', '0.5 x 4200 x 40 = 84000 J', '126000 J']) {
+    it(`"${a}" is refused (choice-only)`, () => expect(resolveMcqChoice(a, q)).toBeNull())
+  }
+  it('the distractor as its full text, or its letter, resolves to that distractor', () => {
+    expect(resolveMcqChoice('126000 J — using the final temperature as ΔT', q)).toBe(1)
+    expect(resolveMcqChoice('B', q)).toBe(1)
   })
 })
 

@@ -892,3 +892,28 @@ by `drive.ts`, to settle from evidence whether the already-served guard is being
     quiz; a wrong answer gets only "the answer is: …" with no why; the same unrelated "Elastic Collision
     (1D)" figure is attached on several turns; quiz lead-ins sometimes mismatch the quiz ("statements",
     "new situation").
+
+### 2026-09-28 — Choice-only MCQ grading (spec GB+), owner-approved; committed locally, NOT deployed
+- Evidence: Phase 1 offline replay (457 scripted physics lessons, 20,726 graded cases) plus 65 anonymised
+  real replies (internal accounts). The old resolver credited 28 of 478 scripted misconception sentences
+  as CORRECT (shared-word and letter-as-symbol inference), and each patch closed one wording only.
+- Change (src/lib/teaching/mcq.ts): `resolveMcqChoice` keeps Stage E (exact option text, existing rule-0
+  normalization, verbatim fallback, case tiebreak, "B) <exact text>"). The label must now agree with the
+  text (R13). It then applies Stage L, `resolveExplicitLetter`: a bare letter, a labelled letter
+  ("B)", "B.", "B:", "C, 0 m", "A —", "(B) …"), or a letter + connective ("B because …"), at the start
+  after an optional lead-in. All inference rules (0a letter-anywhere, 1, 2 ordinals, 3/3b containment
+  and answer halves, 4/4a words, 5 numbers) and their dead helpers were removed. No kill switch
+  (owner: no path back to the old grading).
+- Offline replay against the real code: identical to scratchpad GB+ on all 20,726 cases. Harmful false
+  credit 28 -> 0; taps, letters and letter + reason 100%. Real sample: 3/58 answers refused (ordinal, two
+  natural typed), 0/7 non-answers graded.
+- Deviation from the spec text, documented: the lead-in list gained "my answer" (without "is") and
+  "i say", because pinned learner forms "my answer: C)" and "i say D," are explicit letters (the same class
+  of normalization gap as "C, 0 m").
+- Accepted false negatives (pinned in choiceOnlyGrading.test.ts): ordinals, bare values/equations,
+  answer halves, paraphrases, "I think B is right" (the same shape as the harmful "B is perpendicular"),
+  hedges ("maybe B", "A but i am not sure"), and lead-in or reason + exact option text
+  ("i think it is negative", "Negative, because …"). The last two need an owner decision.
+- Behaviour change on a pinned guard: "A sir" / "a sir" are now an explicit letter A (grammar BARE + TRAIL).
+- Tests: new choiceOnlyGrading.test.ts (44, incl. route-level no-credit / SIGNAL-suppression /
+  still-answerable) + fixture; 13 files had removed-inference assertions flipped, each marked BEFORE -> AFTER.

@@ -53,12 +53,12 @@ const TWO: TutorMCQ = {
 }
 
 describe('the answer the learner actually typed', () => {
-  it('grades the real production reply correctly', () => {
-    // "the second one, they must be identical types" — this exact message was
-    // sent in production and produced no evidence at all.
-    const g = gradeMcqAnswer('the second one, they must be identical types', REAL)
-    expect(g.chosenIndex).toBe(1)
-    expect(g.correct).toBe(true)
+  // Choice-only (2026-09-28, owner-approved spec GB+): BEFORE this ordinal reply
+  // was graded by inference; AFTER ordinals are refused (the accepted cost of
+  // removing inference). The same answer as an explicit letter still grades.
+  it('the real production reply (an ordinal) is refused; the letter form grades', () => {
+    expect(gradeMcqAnswer('the second one, they must be identical types', REAL)).toEqual({ chosenIndex: null, correct: null })
+    expect(gradeMcqAnswer('B, they must be identical types', REAL)).toEqual({ chosenIndex: 1, correct: true })
   })
 })
 
@@ -69,20 +69,20 @@ describe('the forms a learner actually uses', () => {
     ['(b)', 1],
     ['option b', 1],
     ['b) they must be identical', 1],
-    ['second', 1],
-    ['the second one', 1],
-    ['number 2', 1],
-    ['2', 1],
-    ['2nd', 1],
     ['They must be identical types of physical quantities', 1],
-    ['i think they must be identical types of physical quantities', 1],
     ['a', 0],
-    ['the first one', 0],
     ['d', 3],
   ]
   for (const [msg, idx] of cases) {
     it(`resolves ${JSON.stringify(msg)} → option ${idx}`, () => {
       expect(resolveMcqChoice(msg, REAL)).toBe(idx)
+    })
+  }
+  // Choice-only (2026-09-28): BEFORE ordinals, digit positions and "i think" +
+  // option text were resolved by inference; AFTER they are refused.
+  for (const msg of ['second', 'the second one', 'number 2', '2', '2nd', 'the first one', 'i think they must be identical types of physical quantities']) {
+    it(`refuses ${JSON.stringify(msg)} (choice-only)`, () => {
+      expect(resolveMcqChoice(msg, REAL)).toBeNull()
     })
   }
 })
@@ -189,7 +189,8 @@ describe('symbolic options — the form this corpus actually uses', () => {
 
   it('letters still work alongside symbols', () => {
     expect(resolveMcqChoice('b', DIMS)).toBe(1)
-    expect(resolveMcqChoice('the second one', DIMS)).toBe(1)
+    // Choice-only (2026-09-28): BEFORE the ordinal also resolved; AFTER refused.
+    expect(resolveMcqChoice('the second one', DIMS)).toBeNull()
   })
 })
 

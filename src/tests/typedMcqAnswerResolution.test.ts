@@ -161,8 +161,13 @@ describe('"A because <reason>" resolves with no first-person marker required', (
     expect(resolveMcqChoice('A because as here means while', YES_NO_MCQ)).toBe(0)
   })
 
-  it('"A but ..." — another CANNOT_FOLLOW_AN_ARTICLE word after a leading A', () => {
-    expect(resolveMcqChoice('A but i am not fully sure', YES_NO_MCQ)).toBe(0)
+  // Choice-only (2026-09-28, owner-approved spec GB+): BEFORE "A but i am not
+  // fully sure" resolved to A; AFTER it is refused — "but" is not an approved
+  // explanation connective and the reply is a hedge (consistent with the
+  // "uncertainty is not an answer" controls). "A, but …" (a comma label) grades.
+  it('"A but i am not fully sure" is refused; "A, but …" grades', () => {
+    expect(resolveMcqChoice('A but i am not fully sure', YES_NO_MCQ)).toBeNull()
+    expect(resolveMcqChoice('A, but let me explain', YES_NO_MCQ)).toBe(0)
   })
 
   it('"B because ..." already worked and keeps working (no regression)', () => {
@@ -181,9 +186,12 @@ describe('"A because <reason>" resolves with no first-person marker required', (
     expect(resolveMcqChoice('A', YES_NO_MCQ)).toBe(0)
   })
 
-  it('"A sir" / "a sir" — a QA-harness artifact with no reasoning content — still refuses (mcqAnswerShapeIsTheClients.test.ts\'s own pin, guarded here too)', () => {
-    expect(resolveMcqChoice('A sir', YES_NO_MCQ)).toBeNull()
-    expect(resolveMcqChoice('a sir', YES_NO_MCQ)).toBeNull()
+  // Choice-only (2026-09-28): BEFORE refused; AFTER an explicit letter plus a
+  // politeness word is a choice (approved grammar: BARE + TRAIL), matching
+  // mcqAnswerShapeIsTheClients.test.ts.
+  it('"A sir" / "a sir" is an explicit letter A', () => {
+    expect(resolveMcqChoice('A sir', YES_NO_MCQ)).toBe(0)
+    expect(resolveMcqChoice('a sir', YES_NO_MCQ)).toBe(0)
   })
 })
 

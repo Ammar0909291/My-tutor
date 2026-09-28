@@ -43,34 +43,44 @@ describe('THE MEASURED FAILURE — every natural form of the right answer', () =
     expect(gradeMcqAnswer('5 newton metres', TORQUE).correct).toBe(true)
   })
 
-  it('grades digits and words alike, with or without the unit', () => {
-    for (const reply of ['5 newton metres', '5 newton-metres', '5', 'five', 'five newton-metres', '5 Newton Metres']) {
+  it('grades digits and words alike WITH the unit; a bare value is refused', () => {
+    // Choice-only (2026-09-28, owner-approved spec GB+): the value WITH its unit
+    // is the option's own text (norm folds number words), so it still grades;
+    // BEFORE a bare value ("5", "five") was also graded by inference, AFTER it is
+    // refused — bare values are a removed form (R2).
+    for (const reply of ['5 newton metres', '5 newton-metres', 'five newton-metres', '5 Newton Metres']) {
       expect(gradeMcqAnswer(reply, TORQUE).correct).toBe(true)
     }
+    for (const reply of ['5', 'five']) expect(gradeMcqAnswer(reply, TORQUE).correct).toBeNull()
   })
 
   it('the letter and the tapped option still work — nothing was traded away', () => {
-    for (const reply of ['B', 'b', 'b)', 'option b', 'the second one', 'five newton-metres']) {
+    for (const reply of ['B', 'b', 'b)', 'option b', 'five newton-metres']) {
       expect(gradeMcqAnswer(reply, TORQUE).correct).toBe(true)
     }
+    // Choice-only (2026-09-28): BEFORE the ordinal graded; AFTER refused (R1).
+    expect(gradeMcqAnswer('the second one', TORQUE).correct).toBeNull()
   })
 
   it('a decimal written in words is the same as the digit', () => {
     // "zero point five" -> 0.5, which is a DISTRACTOR here: it must select
     // option 0 and grade FALSE, not go ungraded.
-    for (const reply of ['0.5', 'zero point five', '0.5 newton metres']) {
+    for (const reply of ['0.5 newton metres']) {
       const r = gradeMcqAnswer(reply, TORQUE)
       expect(r.chosenIndex).toBe(0)
       expect(r.correct).toBe(false)
     }
+    // Choice-only (2026-09-28): BEFORE bare values selected option 0; AFTER refused (R2).
+    for (const reply of ['0.5', 'zero point five']) expect(gradeMcqAnswer(reply, TORQUE).chosenIndex).toBeNull()
   })
 
   it('a wrong number selects ITS option and grades false — not ungraded', () => {
     // Ungraded and wrong are different outcomes: one stalls the ladder, the
     // other is evidence the learner holds a specific misconception.
-    expect(gradeMcqAnswer('twenty', TORQUE).chosenIndex).toBe(3)
     expect(gradeMcqAnswer('20 newton metres', TORQUE).correct).toBe(false)
-    expect(gradeMcqAnswer('10', TORQUE).chosenIndex).toBe(2)
+    // Choice-only (2026-09-28): BEFORE bare values selected their option; AFTER refused (R2).
+    expect(gradeMcqAnswer('twenty', TORQUE).chosenIndex).toBeNull()
+    expect(gradeMcqAnswer('10', TORQUE).chosenIndex).toBeNull()
   })
 })
 

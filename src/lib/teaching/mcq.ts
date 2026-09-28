@@ -660,30 +660,6 @@ export function buildMcqInstruction(opts: { atMasteryGate?: boolean } = {}): str
 // worse than the freeze this repairs.
 
 /**
- * Ordinal words a learner might use instead of a letter.
- *
- * The English NUMBER words (one/two/three/four) are deliberately ABSENT. Their
- * first draft included them and this module's own test caught the consequence
- * immediately: "the third one" contains "one", so it resolved to option 1 — the
- * filler noun in "the Nth one" read as the numeral. That is precisely the class
- * of silent mis-grade this grader exists to avoid, so the ambiguous forms are
- * dropped rather than disambiguated. "Number two" now refuses instead of
- * guessing, which is the correct trade.
- */
-/** What may follow an ordinal that names an option position — see rule 2. */
-const ORDINAL_FOLLOWERS = new Set([
-  'one', 'option', 'choice', 'answer', 'because', 'since', 'as', 'so', 'but', 'is', 'it', 'please',
-  'sir', 'maam', 'madam', 'i', 'im', 'thats', 'that', 'right', 'correct', 'then', 'ok', 'okay',
-])
-
-const ORDINALS: Record<string, number> = {
-  first: 0, '1': 0, '1st': 0,
-  second: 1, '2': 1, '2nd': 1,
-  third: 2, '3': 2, '3rd': 2,
-  fourth: 3, '4': 3, '4th': 3,
-}
-
-/**
  * Words that explicitly announce a choice, so "a" can be told from the article
  * and "one" from the pronoun.
  *
@@ -809,11 +785,6 @@ function digitiseNumbers(text: string): string {
   return out.join(' ')
 }
 
-/** Every distinct number a string mentions, in canonical digit form. */
-function numbersIn(text: string): string[] {
-  return [...new Set((text.match(/\d+(?:\.\d+)?/g) ?? []).map((v) => String(Number(v))))]
-}
-
 const norm = (s: string) =>
   digitiseNumbers(
     foldSuperscripts(s).toLowerCase()
@@ -836,24 +807,6 @@ const norm = (s: string) =>
   )
 const words = (s: string) => norm(s).split(' ').filter((w) => w.length > 2)
 
-/** Words a learner wraps an answer in that say nothing about WHICH option — rule 4a only. */
-const ANSWER_FILLER = new Set([
-  'think', 'guess', 'believe', 'maybe', 'probably', 'answer', 'option', 'choose', 'pick',
-  'sure', 'would', 'should', 'must', 'that', 'this', 'thats', 'sir', 'maam', 'madam', 'miss', 'teacher',
-  'please', 'correct', 'right', 'because', 'is', 'its',
-])
-
-/**
- * Is this reply a question to the TUTOR rather than an answer?
- *
- * Used only to hold back rule 4a, the weakest matching rule. A learner who
- * asks "why is the lowest point fastest?" has named an option without
- * choosing it, and rule 4a is the one rule loose enough to mistake the two.
- * Everything stronger — an explicit label, exact text, an ordinal, full
- * containment — is a positive statement of choice and is NOT gated on this:
- * "C. but why does the string not get longer?" is both an answer and a
- * question, and the answer half is real.
- */
 /**
  * Does the learner explicitly present this as their answer?
  *
@@ -907,84 +860,6 @@ const CANNOT_FOLLOW_AN_ARTICLE = new Set([
 ])
 const cannotFollowAnArticle = (next: string | undefined): boolean =>
   next === undefined || CANNOT_FOLLOW_AN_ARTICLE.has(next)
-
-/**
- * Words that, immediately after a LEADING "A", signal a REASONING CLAUSE is
- * about to follow — used ONLY by rule 1's `leadingLetterBeforeReasoning`
- * below. Deliberately a strict SUBSET of `CANNOT_FOLLOW_AN_ARTICLE`, not the
- * same set: that set exists to tell the article apart from the letter, and
- * includes plenty of words ("sir", "maam", pronouns, "ok", "yes", "please")
- * that disambiguate the article without being any evidence the learner is
- * about to give a REASON for their choice. `mcqAnswerShapeIsTheClients.test.ts`
- * pins "A sir" / "a sir" as refused (a QA-harness artifact with a title
- * tacked on and no reasoning content), so this set may never include "sir".
- */
-const REASONING_CONNECTIVE = new Set(['because', 'but', 'so', 'since'])
-
-/**
- * A QUANTITY SYMBOL IS NOT AN OPTION LETTER.
- *
- * Physics writes its answers as assignments — "a = 2 m/s^2", "c = 450",
- * "d = 5 m" — and a, c and d are also option letters. Measured (production
- * harness, 2026-09-24, phys.therm.specific-heat): "c = 450" against
- * "450 J kg⁻¹ K⁻¹" | "900 …" | "180 …" | "720 000 …" resolved by rule 1 to
- * option C, "180", so the correct value was graded wrong. A letter directly
- * followed by "=" names a quantity, never a choice, so the letter rules read
- * the message with such letters removed. The value itself is untouched and
- * still reaches rule 5.
- */
-const VARIABLE_LETTER = /(^|[^A-Za-z0-9_])[a-dA-D](?=\s*=)/g
-const withoutVariableLetters = (s: string): string => s.replace(VARIABLE_LETTER, '$1')
-
-/**
- * The value an option LEADS with — "2 m/s²" -> "2", "About 19.5°" -> "19.5",
- * "zero point five newton-metres" -> "0.5" — or null when the option does not
- * open with a number. Canonical form matches `numbersIn`.
- */
-function leadingValue(option: string): string | null {
-  const m = norm(option).match(/^(?:about |approximately |approx |around |roughly |nearly )?(\d+(?:\.\d+)?)(?![\d.])/)
-  return m ? String(Number(m[1])) : null
-}
-
-/**
- * The leading VALUE EXPRESSION of a string, canonicalised: "2 m/s²" -> "2",
- * "0.20 V" -> "0.2", "2/4" -> "2/4", "1:5 — …" -> "1:5", "−1 — …" -> "-1".
- * Kept as an expression rather than split into numbers so a fraction, ratio
- * or sign stays ONE value. `anywhere` finds the first expression in a
- * learner's sentence ("i think 2 m/s2", "a = 2 m/s^2"); without it the string
- * must open with one (an option). Word numbers are read through `norm`, so
- * "five newton-metres" leads with "5".
- */
-function valueExpression(text: string, anywhere: boolean): string | null {
-  const canon = (e: string) => {
-    const signed = e.replace(/\u2212/g, '-')
-    return /^[-+]?\d+(?:\.\d+)?$/.test(signed) ? String(Number(signed)) : signed.replace(/^\+/, '')
-  }
-  const raw = foldSuperscripts(text).toLowerCase()
-  const re = anywhere
-    ? /(?<![\w.])([-+\u2212]?\d+(?:[.:/]\d+)*)/
-    : /^\s*(?:about |approximately |approx |around |roughly |nearly )?([-+\u2212]?\d+(?:[.:/]\d+)*)/
-  const m = raw.match(re)
-  if (m) return canon(m[1])
-  const lead = anywhere ? (numbersIn(norm(text))[0] ?? null) : leadingValue(text)
-  return lead
-}
-
-/** Answer halves that are also what a learner says to a yes/no CHECK-IN
- *  question, so rule 3b never reads them as a choice. */
-const LEAD_TOO_CONVERSATIONAL: ReadonlySet<string> = new Set([
-  'yes', 'no', 'ok', 'okay', 'sure', 'right', 'correct', 'wrong', 'not quite',
-])
-
-// Widened 2026-09-28 (owner-account study, phys.mech.impulse): "wait why is the
-// area the impulse? i dont get the graph part" — a '?' mid-message, a WH-word
-// after "wait", and explicit confusion — was graded as the correct option on
-// "area"/"impulse", banked a verified CHECK credit and got "That's right."
-// Rule 0 (verbatim tap) runs before this precondition, so taps are unaffected.
-const looksLikeAQuestion = (s: string): boolean =>
-  /\?/.test(s)
-  || /^\s*(?:(?:wait|ok(?:ay)?|so|but|and|hmm+|um+|sir|ma'?am|then|also|sorry)[\s,.;:!\-]+)*(why|how|what|when|where|which|who|is|are|does|do|can|could|should)\b/i.test(s)
-  || /\b(?:i\s+(?:still\s+)?(?:do\s*n[o'’]?t|dont|didn'?t|did\s+not)\s+(?:get|understand|follow|see)|confus(?:ed|ing)|i(?:'|’)?m\s+lost|i\s+am\s+lost|makes?\s+no\s+sense)\b/i.test(s)
 
 /**
  * A REQUEST TO THE TUTOR, OR A CHALLENGE TO WHAT IT SAID, IS NOT AN ANSWER.
@@ -1067,41 +942,60 @@ export function resolveMcqChoice(message: string, mcq: TutorMCQ): number | null 
 }
 
 /**
- * A LETTER THAT NAMES A THING IN THE QUESTION IS NOT AN OPTION LABEL.
+ * CHOICE-ONLY GRADING, STAGE L: AN EXPLICIT OPTION LETTER (spec GB+, 2026-09-28).
  *
- * Physics certification, 2026-09-28 (phys.mech.impulse): "Force A = 800 N for
- * 0.002 s; Force B = 8 N for 0.2 s. Which delivers more impulse?" with options
- * "Equal — …" | "A, because it is a much bigger force". The learner typed the
- * misconception "I think force A — it is a much bigger force …", rule 1 read
- * the "A" of "force A" as option A (index 0, the CORRECT answer) and the tutor
- * said "That's right." When the question itself writes "<word> <LETTER>"
- * ("Force A", "car B", "point C"), the same pair in the message names that
- * thing, so the LETTER rules do not see it. Every text rule still reads the
- * message as typed. (Extended the same day to a capital letter after any
- * ordinary word — see the body.)
+ * Accepted, after an optional lead-in ("I think", "my answer is", "option", …):
+ *   BARE        "B", "b)", "(B)", "B.", "option B please"
+ *   LABELLED    "B) …", "B. …", "B: …", "C, 0 m", "A — …", "(B) …"
+ *   CONNECTIVE  "B because …", "a since …"
+ * Rejected (null): a letter not at the start ("I think force A …", "solenoid B
+ * (wider)"), "B?", two letters named ("A or B"), and a label whose explanation is
+ * the exact text of a DIFFERENT option. The explanation is never read to pick an
+ * option — it can only cause a rejection.
  */
-function withoutEntityLetters(message: string, question: string | undefined): string {
-  const nouns = new Set<string>()
-  for (const m of (question ?? '').matchAll(/\b([A-Za-z]{2,})\s+([A-D])\b/g)) nouns.add(m[1].toLowerCase())
-  // Same defect without the question's help (phys.mech.power r2 s5): "I think
-  // crane B did more work because it has more power" was read as option B. A
-  // capital letter after an ordinary word and before more of the sentence is a
-  // NAME ("crane B did", "car C is"); only words that can introduce an answer
-  // ("think B", "option B", "is B", "the B") keep the letter reading.
-  const named = message.replace(/\b([A-Za-z]{2,})\s+([A-D])(?=\s+[A-Za-z\u2014\u2013-])/g,
-    (whole, w: string) => (ANSWER_LEAD_WORDS.has(w.toLowerCase()) ? whole : ' '))
-  if (nouns.size === 0) return named
-  return named.replace(/\b([A-Za-z]{2,})\s+([A-Da-d])\b/g, (whole, w: string) => (nouns.has(w.toLowerCase()) ? ' ' : whole))
-}
+const EXPLICIT_LEAD = /^(?:ok(?:ay)?|so|um+|hmm+|well|i think|i guess|i believe|i choose|i pick|i(?:'|\u2019)d say|i would say|i say|my answer(?: is)?|the answer is|answer is|answer|it(?:'|\u2019)s|it is|its|option|choice|letter|sir|ma(?:'|\u2019)?am|please)(?![a-z])[\s,:;-]*/i
+const EXPLICIT_CONNECTIVES = /^(because|since|as|so|cause|coz|bc)\b/i
 
-/** Words that can stand directly before an option letter in an answer — see withoutEntityLetters. */
-const ANSWER_LEAD_WORDS = new Set([
-  'think', 'thought', 'guess', 'believe', 'feel', 'say', 'said', 'choose', 'chose', 'pick', 'picked',
-  'select', 'selected', 'option', 'answer', 'choice', 'letter', 'number', 'is', 'was', 'be', 'its', 'it',
-  'maybe', 'probably', 'definitely', 'surely', 'perhaps', 'with', 'the', 'and', 'or', 'not', 'then', 'so',
-  'ok', 'okay', 'yes', 'no', 'sir', 'maam', 'madam', 'hmm', 'um', 'uh', 'go', 'prefer', 'pls', 'please',
-  'im', 'correct', 'right', 'because', 'but', 'thats',
-])
+function resolveExplicitLetter(message: string, mcq: TutorMCQ, limit: number): number | null {
+  let r = message.normalize('NFKC').trim().replace(/^[-*\u2022]\s+/, '').replace(/\*\*|__/g, '').trim()
+  for (let k = 0; k < 8; k++) {
+    const next = r.replace(EXPLICIT_LEAD, '').trimStart()
+    if (next === r) break
+    r = next
+  }
+  const indexOf = (ch: string): number | null => {
+    const i = OPTION_KEYS.indexOf(ch.toLowerCase() as typeof OPTION_KEYS[number])
+    return i >= 0 && i < limit ? i : null
+  }
+  let letter: string | null = null
+  let rest = ''
+  let m: RegExpMatchArray | null
+  if ((m = r.match(/^\(?([A-Da-d])\)?\s*[.)!:]?(?:\s*(?:please|sir|ma(?:'|\u2019)?am))?[\s.!]*$/i))) {
+    letter = m[1]
+  } else if ((m = r.match(/^\(([A-Da-d])\)\s+([\s\S]+)$/))) {
+    letter = m[1]; rest = m[2]
+  } else if ((m = r.match(/^([A-Da-d])\s*(?:[).:,]|[-\u2013\u2014])(?=\s|$)\s*([\s\S]*)$/))) {
+    letter = m[1]; rest = m[2]
+  } else if ((m = r.match(/^([A-Da-d])\s+([\s\S]+)$/)) && EXPLICIT_CONNECTIVES.test(m[2])) {
+    letter = m[1]; rest = m[2]
+  }
+  if (letter === null) return null
+  const chosen = indexOf(letter)
+  if (chosen === null) return null
+  if (rest) {
+    // c3: a second option named as a label or an alternative.
+    for (const o of rest.matchAll(/(?:^|[\s(])([A-Da-d])\s*[).:,](?=\s|$)/g)) {
+      const j = indexOf(o[1]); if (j !== null && j !== chosen) return null
+    }
+    for (const o of rest.matchAll(/\b(?:or|and)\s+\(?([A-D])(?=[\s).,:;!?]|$)/g)) {
+      const j = indexOf(o[1]); if (j !== null && j !== chosen) return null
+    }
+    // c4: the explanation is a DIFFERENT option's exact text.
+    const said = norm(rest)
+    if (said && mcq.options.some((o, i) => i !== chosen && norm(o) === said)) return null
+  }
+  return chosen
+}
 
 function resolveMcqChoiceFolded(message: string, mcq: TutorMCQ): number | null {
   const n = norm(message)
@@ -1163,13 +1057,6 @@ function resolveMcqChoiceFolded(message: string, mcq: TutorMCQ): number | null {
   // hedge always contains letters, so it can never reach the fallback, but
   // stating the order here keeps that guarantee explicit rather than lucky.
   if (!n) return NON_COMMITTAL.test(message) ? null : verbatimOption()
-  const tokens = n.split(' ')
-  // The LETTER rules (0a, the precondition, 1) read the message with quantity
-  // symbols removed — see `withoutVariableLetters`. Every other rule, and
-  // every exact/containment match, still reads the message as typed.
-  const letterMessage = withoutEntityLetters(withoutVariableLetters(message), mcq.question)
-  const letterTokens = norm(letterMessage).split(' ')
-  const quantityOptions = mcq.options.length > 0 && mcq.options.every((o) => leadingValue(o) !== null)
   const limit = Math.min(mcq.options.length, OPTION_KEYS.length)
 
   // 0. EXACT MATCH — RUNS FIRST, AND THE ORDER IS THE POINT.
@@ -1248,7 +1135,12 @@ function resolveMcqChoiceFolded(message: string, mcq: TutorMCQ): number | null {
         const labelExact = mcq.options
           .map((o, i) => ({ i, hit: norm(o) === strippedNorm }))
           .filter((x) => x.hit)
-        if (labelExact.length === 1) return labelExact[0].i
+        // R13 (choice-only, 2026-09-28): the label and the text must name the
+        // same option. "B) <exact text of C>" is a contradiction, not a choice.
+        if (labelExact.length === 1) {
+          const label = /^\s*[([]?([A-Da-d])/.exec(message)![1].toLowerCase()
+          return OPTION_KEYS.indexOf(label as typeof OPTION_KEYS[number]) === labelExact[0].i ? labelExact[0].i : null
+        }
       }
     }
   }
@@ -1270,346 +1162,15 @@ function resolveMcqChoiceFolded(message: string, mcq: TutorMCQ): number | null {
   // for why refusing does not stall the ladder.
   if (NON_COMMITTAL.test(message)) return null
 
-  // 0a. A LABELLED LETTER, ANYWHERE IN THE SENTENCE.
-  //
-  // MEASURED IN PRODUCTION (2026-08-25, phys.opt.lenses, real learner account).
-  // The learner replied "ok i think A. but sir i still not understand lens.
-  // can you show picture please" — a valid choice AND a question in one
-  // breath, which is how a learner with weak English actually writes. It was
-  // NOT GRADED at all: rule 1 below reaches "a" at token 3, and because "a" is
-  // also the English indefinite article it demands an explicit marker word,
-  // which "think" is not. The answer was discarded, `signalCorrect` stayed
-  // undefined, and OBSERVE -> DEMONSTRATE (which needs a graded correct
-  // answer) could not fire. Across four lessons and sixteen turns the ladder
-  // never left OBSERVE.
-  //
-  // The discriminator is PUNCTUATION, not vocabulary, and it is destroyed by
-  // `norm` before rule 1 ever runs — so this reads the RAW message. A learner
-  // labelling a choice writes "A." / "A)" / "A," / "A:" / "A -". The English
-  // article never carries punctuation: "a lens bends light" has no delimiter
-  // after "a", so the sentence that motivated rule 1's caution
-  // ("a dimension is about quantity") still resolves to nothing.
-  //
-  // Deliberately placed BEFORE the exact-text rule but AFTER nothing: an
-  // explicit label is the strongest statement of intent a learner can make,
-  // and ambiguity is still fatal — two different labelled letters select
-  // neither, because we cannot tell which one they meant.
-  {
-    const labelled = new Set<number>()
-    const named = new Set<number>()
-    for (const m of letterMessage.matchAll(/(?:^|[\s(])([a-dA-D])(\s*[.)\],:;-])?(?=\s|$)/g)) {
-      const idx = OPTION_KEYS.indexOf(m[1].toLowerCase() as typeof OPTION_KEYS[number])
-      if (idx < 0 || idx >= limit) continue
-      // "a" is also the English indefinite article. An UNLABELLED "a" (no
-      // trailing punctuation — m[2] undefined) must clear the same article
-      // test rule 1 already applies below, or an ordinary sentence like
-      // "if I had A car" pollutes `named` with a phantom option A.
-      //
-      // MEASURED (real-student session, 2026-09): "B, if i had a car i would
-      // drive to work" — a clearly labelled B — resolved to null, because
-      // the "a" in "had a car" was unlabelled-but-named, making
-      // named.size === 2 ({A, B}) and defeating the "exactly one labelled,
-      // exactly one named" shortcut below. `cannotFollowAnArticle` already
-      // exists for exactly this ambiguity (see its own doc comment); reused
-      // here rather than re-derived.
-      //
-      // A LABELLED "a" ("A.", "a,", "a)") is unaffected — punctuation is a
-      // strong signal it is a letter-label, and the article never carries
-      // punctuation, so "A or B, i am not sure" still names both (the
-      // unlabelled "A" there is followed by "or", which cannot follow an
-      // article, so it still counts).
-      if (!m[2] && m[1].toLowerCase() === 'a') {
-        const rest = letterMessage.slice((m.index ?? 0) + m[0].length)
-        const nextWord = rest.match(/^\s*([a-zA-Z']+)/)?.[1]?.toLowerCase()
-        if (!cannotFollowAnArticle(nextWord)) continue
-      }
-      named.add(idx)
-      if (m[2]) labelled.add(idx)
-    }
-    // "A or B, i am not sure" labels only B (the comma) but NAMES both. A
-    // learner weighing two options has chosen neither, so the label is not
-    // decisive unless it is the only option letter in the sentence.
-    if (labelled.size === 1 && named.size === 1) return [...labelled][0]
-    if (labelled.size > 1) return null
-  }
-
-  // ── PRECONDITIONS FOR EVERY WEAKER RULE ────────────────────────────────
-  //
-  // Rules 0 and 0a above are POSITIVE STATEMENTS OF CHOICE: text identical to
-  // an option (which is what tapping the option sends), or an explicitly
-  // punctuated label. Everything below infers a choice from a sentence, and
-  // inference needs to know when the sentence is not a choice at all.
-  //
-  // MEASURED, all three against the real grader:
-  //   "A or B"                  -> B    two options named; the learner is
-  //                                     weighing, not choosing
-  //   "B? Can you explain?"     -> B    a question, banked as an answer
-  //   "I dont know but maybe B" -> B    explicit non-commitment, banked
-  //
-  // One check, applied once, ahead of every inferring rule — rather than
-  // repeating three guards inside each of rules 1-5, which is how rule 4a
-  // ended up with its own copy of the question guard.
-  const namedStandalone = new Set<number>()
-  for (let i = 0; i < limit; i++) {
-    const key = OPTION_KEYS[i]
-    const pos = letterTokens.indexOf(key)
-    if (pos === -1) continue
-    // Same article guard as rule 0a and rule 1 below: a bare "a" token is
-    // this precondition's own article collision ("B because i had a car"
-    // must not be treated as naming both A and B — see rule 0a's doc
-    // comment for the measured production repro).
-    if (key === 'a' && !cannotFollowAnArticle(letterTokens[pos + 1])) continue
-    namedStandalone.add(i)
-  }
-  if (namedStandalone.size > 1) return null
-  if (looksLikeAQuestion(message)) return null
-  if (readsAsRequestToTutor(message)) return null
-
-  // 1. A bare letter, alone or as "option b" / "b)" — normalisation has already
-  //    removed the bracket. Standalone-token matching alone is NOT enough, and
-  //    this module's own test caught why: "a dimension is about quantity" — the
-  //    shape of a real answer this learner typed — has "a" as a standalone
-  //    token and was graded as selecting option A. The English indefinite
-  //    article is the one option key that is also an ordinary word, so it needs
-  //    an explicit marker; b/c/d are not English words and are safe in the
-  //    positions a learner actually puts them ("b) they must be identical").
-  //
-  //    THE LETTER INSIDE A SENTENCE (added 2026-08-25, measured). Requiring an
-  //    edge position or an immediately-preceding marker refused every learner
-  //    who wrote a sentence around their choice:
-  //
-  //      "I think A"                              -> not graded
-  //      "answer is A"          ("is" sits between the marker and the letter)
-  //      "ok I think A"                           -> not graded
-  //      "I think C because it has more energy"   -> not graded
-  //      "sir I think C because..."               -> not graded
-  //
-  //    Five of them, and every one is a learner answering. `statesAnAnswer`
-  //    is the same first-person phrase test rule 4a already uses — no new
-  //    detector. For "a" alone that is not enough, because "I think a lens
-  //    bends light" also states an answer: the letter must additionally be
-  //    followed by a word that cannot follow an article.
-  //
-  //    "A BECAUSE <REASON>" WITH NO FIRST-PERSON MARKER (measured, real-
-  //    student session, 2026-09). "A because they use different tenses" and
-  //    "A because as here means while" both refused to resolve, while "B
-  //    because ..." resolved every time. The asymmetry: for b/c/d, `atEdge`
-  //    (the letter is the FIRST token) is sufficient on its own — but `atEdge`
-  //    is deliberately excluded for 'a' (see the module docblock), so a bare
-  //    leading "A" needed `insideAStatedAnswer`, which additionally requires
-  //    an explicit "I think"/"my answer is"/… phrase. "A because <reason>"
-  //    has none — the reason clause states nothing about the LEARNER, only
-  //    about the CONCEPT — so it fell through every rule.
-  //
-  //    NOT FIXED BY WIDENING ON `cannotFollowAnArticle` GENERALLY. A first
-  //    attempt did exactly that and broke a DIFFERENT pinned guard
-  //    (mcqAnswerShapeIsTheClients.test.ts): "A sir" and "a sir" — a QA-
-  //    harness artifact with a title tacked on and no reasoning content at
-  //    all — must stay refused, and `cannotFollowAnArticle`'s set includes
-  //    "sir"/"maam"/pronouns/politeness words precisely so THOSE can be told
-  //    apart from the article, not so they count as evidence of a reasoned
-  //    choice. A narrower, PURPOSE-BUILT set is used instead: words that
-  //    themselves signal a REASONING CLAUSE is coming — "because", "but",
-  //    "so", "since" — a strict subset of `cannotFollowAnArticle`'s, chosen
-  //    so "A sir"/"a sir" (no reasoning connective) keep refusing exactly as
-  //    pinned, while "A because …" (a reasoning connective) now resolves.
-  //    Scoped to `pos === 0` (the letter opens the message) because that is
-  //    the measured shape and the narrowest one that closes it; "I think A
-  //    because…" is unaffected — it already resolves via `insideAStatedAnswer`.
-  for (let i = 0; i < limit; i++) {
-    const key = OPTION_KEYS[i]
-    const pos = letterTokens.indexOf(key)
-    if (pos === -1) continue
-    const marked = pos > 0 && LETTER_MARKERS.has(letterTokens[pos - 1])
-    const alone = letterTokens.length === 1
-    const atEdge = pos === 0 || pos === letterTokens.length - 1
-    const insideAStatedAnswer = statesAnAnswer(message)
-      && (key !== 'a' || cannotFollowAnArticle(letterTokens[pos + 1]))
-    const leadingLetterBeforeReasoning =
-      key === 'a' && pos === 0 && REASONING_CONNECTIVE.has(letterTokens[pos + 1])
-    if (key === 'a'
-      ? (marked || alone || insideAStatedAnswer || leadingLetterBeforeReasoning)
-      : (marked || alone || atEdge || insideAStatedAnswer)) {
-      return i
-    }
-  }
-
-  // 2. An ordinal ("the second one", "number 2"). Bounded by the option count
-  //    so "the third one" against a 2-option question resolves to nothing
-  //    rather than to a question that was never asked.
-  //
-  //    A BARE DIGIT AGAINST QUANTITY OPTIONS IS A VALUE, NOT A POSITION.
-  //    Measured (production, 2026-09-24, phys.mech.newtons-second-law): the
-  //    options were "2 m/s²" | "50 m/s²" | "0.5 m/s²" | "15 m/s²" and the
-  //    correct answer is 2. "2", "i think 2 m/s2" and "a = 2 m/s^2" all
-  //    resolved HERE to option index 1 — "50 m/s²", the multiply-F-by-m
-  //    misconception — so a learner typing the right number was graded wrong
-  //    and tagged with a misconception they do not hold. When EVERY option is
-  //    a quantity (`leadingValue`), an unmarked digit is left to rule 5, which
-  //    reads it as the value it is. "option 2", "number 2" and "2nd" still
-  //    name a position, and word options keep the digit-as-position reading
-  //    exactly as before.
-  for (let ti = 0; ti < tokens.length; ti++) {
-    const t = tokens[ti]
-    const idx = ORDINALS[t]
-    if (idx === undefined) continue
-    if (quantityOptions && /^\d$/.test(t) && !(ti > 0 && LETTER_MARKERS.has(tokens[ti - 1]))) continue
-    // AN ORDINAL INSIDE A NOUN PHRASE IS NOT A POSITION (phys.therm.second-law,
-    // 2026-09-28): "…the First Law rules it out, making the Second Law
-    // essentially redundant" was read as "the first one" and graded as the
-    // correct option — a misconception banked as right. A position is named
-    // alone, before "one"/"option"/a reason, at the end, or after a marker
-    // ("option 2", "number 2").
-    const nextTok = tokens[ti + 1]
-    const namesPosition = nextTok === undefined || ORDINAL_FOLLOWERS.has(nextTok)
-      || (ti > 0 && LETTER_MARKERS.has(tokens[ti - 1]))
-    if (!namesPosition) continue
-    // Out of range REFUSES rather than falling through to a weaker rule: the
-    // learner named a position, and it is not one this question offered.
-    // Continuing would let a text-similarity match answer a question they were
-    // plainly not answering.
-    return idx < mcq.options.length ? idx : null
-  }
-
-  // 3. The option's own text, quoted or paraphrased closely enough to contain
-  //    it. Ambiguity is fatal: if two options are both contained, neither wins.
-  const contained = mcq.options
-    .map((o, i) => ({ i, hit: norm(o).length >= 6 && n.includes(norm(o)) }))
-    .filter((x) => x.hit)
-  if (contained.length === 1) return contained[0].i
-
-  // 3b. THE ANSWER HALF OF AN AUTHORED OPTION.
-  //
-  //    Authored options are written "<answer> — <why>": "Toward the normal —
-  //    light always bends toward the normal on leaving water". A learner types
-  //    the answer half. MEASURED (production QA, 2026-09-24): "Toward the
-  //    normal" (phys.opt.refraction), "The car" and "The cyclist"
-  //    (phys.mech.newtons-second-law) all graded as NOTHING — their words are
-  //    shared with sibling options, so rules 3-4 cannot see them — and a wrong
-  //    answer that is never graded is never corrected: the reply after
-  //    "Toward the normal" was "Here is a question to check your
-  //    understanding:". Exact equality with exactly ONE option's answer half,
-  //    after dropping a leading answer phrase ("i think", "answer is"), is as
-  //    unambiguous as a tap. A yes/no/ok answer half is deliberately NOT
-  //    matched: the tutor often closes a turn with a yes/no check-in ("have I
-  //    got that right?") while such a probe is still on screen, so a bare
-  //    "no" cannot be told apart from a reply to the check-in.
-  {
-    const said = n.replace(/^(?:(?:i think|i guess|i believe|i choose|i pick|my answer is|answer is|it is|its|it s|maybe|probably)\s+)+/, '').trim()
-    if (said) {
-      const hits = mcq.options
-        .map((o, i) => {
-          const parts = o.split(/\s+[\u2014\u2013]\s+/)
-          if (parts.length < 2) return null
-          const lead = norm(parts[0])
-          return lead && !LEAD_TOO_CONVERSATIONAL.has(lead) && lead === said ? i : null
-        })
-        .filter((x): x is number => x !== null)
-      if (hits.length === 1) return hits[0]
-    }
-  }
-
-  // 4. DISTINCTIVE words only — the words that belong to exactly one option.
-  //    Shared vocabulary is what every distractor has in common with the right
-  //    answer, so scoring on it would grade the topic rather than the choice.
-  const counts = new Map<string, number>()
-  for (const o of mcq.options) for (const w of new Set(words(o))) counts.set(w, (counts.get(w) ?? 0) + 1)
-  const scores = mcq.options.map((o) => {
-    const distinctive = [...new Set(words(o))].filter((w) => counts.get(w) === 1)
-    return distinctive.filter((w) => tokens.includes(w)).length
-  })
-  const best = Math.max(...scores)
-  // A sentence of the learner's OWN that shares two words with an option is not
-  // a choice of it (phys.mech.poisson-brackets, 2026-09-28): "I think {x,p}={p,x},
-  // since the Poisson bracket is symmetric like a dot product, so order of
-  // arguments does not matter" scored 2 on "bracket"/"does" against the correct
-  // option of a DIFFERENT question and was banked as right. The words the
-  // options never use may be at most twice the matched distinctive ones; a
-  // paraphrase of the option passes, an unrelated claim does not.
-  const optionVocab = new Set(mcq.options.flatMap((o) => words(o)))
-  const foreignWords = new Set(words(message).filter((w) => w.length >= 4 && !optionVocab.has(w) && !ANSWER_FILLER.has(w)))
-  if (best >= 2 && scores.filter((s) => s === best).length === 1 && foreignWords.size <= 2 * best) return scores.indexOf(best)
-
-  // 4a. ONE distinctive word, when nothing at all competes with it.
-  //
-  // MEASURED IN PRODUCTION (2026-08-25, phys.wave.shm). Options were
-  // "At the highest point on the left" / "...on the right" / "At the LOWEST
-  // point in the MIDDLE" / "It moves at a constant speed". The learner wrote
-  // "i think it is the lowest point sir" — unambiguously the third option, to
-  // any human. It scored 1 ("lowest"; they did not say "middle"), the
-  // threshold above is 2, and the answer was thrown away.
-  //
-  // Two learners are hurt by a threshold of 2 and neither is careless: the one
-  // who paraphrases instead of quoting, and the one whose English is short.
-  // Both are exactly this product's audience.
-  //
-  // Narrowed three ways, because a false grade writes PERMANENT evidence the
-  // learner never produced (the defect class Phase 7P was opened for):
-  //   - the word must be SUBSTANTIAL (>= 4 chars), so "the"/"one"/"in" cannot
-  //     carry a grade on their own;
-  //   - every other option must score ZERO, not merely less — one distinctive
-  //     word is only decisive when nothing competes;
-  //   - the message must not be a QUESTION. "why is the lowest point
-  //     fastest?" names an option while answering nothing, and grading it
-  //     would bank a wrong answer against a learner who was asking for help.
-  // The question guard that used to sit here is now a precondition above, so
-  // it protects rules 1-5 rather than only this one.
-  //   - (2026-09-28) the message must be made of the OPTIONS' vocabulary. One
-  //     shared word inside a sentence of the learner's own is not a choice:
-  //     "I think it is at rest — zero work means zero kinetic energy" against
-  //     "State the work–energy theorem" scored 1 on "kinetic" (only the
-  //     correct option says it) and was banked as the right answer, and the
-  //     tutor told the learner their misconception was right
-  //     (phys.mech.work-energy-theorem, physics certification). At most one
-  //     substantial word the options never use may ride along; "i think it is
-  //     the lowest point sir" has none once fillers are dropped.
-  if (best === 1 && scores.filter((s) => s > 0).length === 1 && statesAnAnswer(message) && foreignWords.size <= 1) {
-    const winner = scores.indexOf(best)
-    const distinctive = [...new Set(words(mcq.options[winner]))]
-      .filter((w) => counts.get(w) === 1 && w.length >= 4)
-    if (distinctive.some((w) => tokens.includes(w))) return winner
-  }
-
-  // 5. THE NUMBER ITSELF. In physics and mathematics the natural answer to
-  //    "what is the resulting torque?" is "5" — no unit, no sentence, no
-  //    letter. Every rule above needs either the option's words or its letter,
-  //    so the bare value graded as nothing.
-  //
-  //    Deliberately the LAST rule and deliberately narrow: it fires only when
-  //    the learner named exactly ONE number and exactly ONE option carries it.
-  //    A worked-out reply ("5, because 10 times 0.5") names three numbers and
-  //    is refused rather than guessed at — refusing costs a turn, guessing
-  //    grades the wrong option.
-  //
-  //    QUANTITY OPTIONS (2026-09-24). When every option leads with a value and
-  //    the plain rule above is ambiguous — every "m/s²" option carries a 2
-  //    through its unit, and "0.5 m/s2" names two numbers — the learner's
-  //    leading VALUE EXPRESSION decides: it must equal exactly one option's
-  //    own leading expression, and every number the learner wrote must appear
-  //    in that option. A worked reply ("5, because 10 times 0.5") still
-  //    refuses, because 10 and 0.5 are not in the "5" option.
-  const said = numbersIn(n)
-  // A bare value, not a sentence of the learner's own that happens to contain
-  // a number word (phys.mech.cyclic-coordinates-conservation-laws, 2026-09-28):
-  // "I think a cyclic coordinate means that coordinate is zero or held constant"
-  // named one number, "zero", and the one option carrying a 0 ("∂L/∂x=0") was
-  // the correct one, so the misconception was banked as right. Same vocabulary
-  // test as rules 4/4a.
-  if (said.length === 1 && foreignWords.size <= 1) {
-    const carrying = mcq.options
-      .map((o, i) => ({ i, hit: numbersIn(norm(o)).includes(said[0]) }))
-      .filter((x) => x.hit)
-    if (carrying.length === 1) return carrying[0].i
-  }
-  if (quantityOptions && said.length > 0) {
-    const stated = valueExpression(message, true)
-    const leading = stated === null ? [] : mcq.options
-      .map((o, i) => ({ i, hit: valueExpression(o, false) === stated && said.every((v) => numbersIn(norm(o)).includes(v)) }))
-      .filter((x) => x.hit)
-    if (leading.length === 1) return leading[0].i
-  }
-
-  return null
+  // Stage L — CHOICE-ONLY (owner-approved spec GB+, 2026-09-28). Past the exact
+  // forms above, a reply is graded ONLY when it names an option letter
+  // explicitly at the start. Every inference rule that used to follow (a
+  // letter anywhere, ordinals, containment, answer halves, distinctive words,
+  // bare numbers) was removed: across 478 scripted misconception sentences they
+  // credited 28 as CORRECT, and each patch closed one wording while the next
+  // slipped through. A reply this returns null for is routed as learner
+  // communication — never an answer. See resolveExplicitLetter.
+  return resolveExplicitLetter(message, mcq, limit)
 }
 
 /**

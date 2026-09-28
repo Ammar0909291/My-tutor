@@ -49,62 +49,49 @@ const WATER_TO_AIR = authored('phys.opt.refraction', 'PRACTICE: Light travels fr
 const CAR_CYCLIST = authored('phys.mech.newtons-second-law', 'A 1500 kg car and a 60 kg cyclist')
 const SPECIFIC_HEAT_YN = authored('phys.therm.specific-heat', 'Exactly 50 kJ of heat')
 
-describe('the production cases — a correct typed value is graded correct', () => {
-  it.each(['2', 'i think 2 m/s2', 'a = 2 m/s^2', '2 m/s2', 'answer is 2 m/s²'])('N2L: %s', (msg) => {
+// Choice-only grading (2026-09-28, owner-approved spec GB+): BEFORE, a typed
+// value / equation / answer half was graded by inference (rules 3b and 5);
+// AFTER, only a tap, the exact option text (existing normalization, which folds
+// number words, superscripts and grouped digits) or an explicit letter grades.
+// The inference rules also credited 28 of 478 scripted misconception sentences
+// as CORRECT; these forms are the accepted false-negative cost (R2 values,
+// R3 answer halves, R1 positions). Each old expectation is kept below as a
+// refusal so the cost stays visible.
+describe('typed values: the option text grades; anything else is refused', () => {
+  it.each(['2 m/s2'])('N2L graded: %s', (msg) => {
     expect(N2L.options[N2L.correctIndex]).toMatch(/^2 m\/s²/)
     expect(gradeMcqAnswer(msg, N2L)).toEqual({ chosenIndex: N2L.correctIndex, correct: true })
   })
-
-  it.each(['c = 450', '450', '450 J/(kg·K)', 'i think 450 J/kg K'])('specific heat: %s', (msg) => {
-    expect(gradeMcqAnswer(msg, HEAT)).toEqual({ chosenIndex: HEAT.correctIndex, correct: true })
+  it.each(['40 V'])('Faraday graded: %s', (msg) => expect(gradeMcqAnswer(msg, FARADAY).correct).toBe(true))
+  it.each(['24'])('Ohm graded: %s', (msg) => expect(gradeMcqAnswer(msg, OHM).correct).toBe(true))
+  it.each([
+    ['N2L', '2'], ['N2L', 'i think 2 m/s2'], ['N2L', 'a = 2 m/s^2'], ['N2L', 'answer is 2 m/s²'],
+    ['HEAT', 'c = 450'], ['HEAT', '450'], ['HEAT', '450 J/(kg·K)'], ['HEAT', 'i think 450 J/kg K'],
+    ['FARADAY', '40'], ['FARADAY', 'emf = 40 V'], ['FARADAY', 'answer is 40 V i think'],
+    ['OHM', 'R = 24 ohm'], ['OHM', '24 ohms'],
+    ['SNELL', '19.5'], ['SNELL', 'about 19.5 degrees'],
+    ['N2L', '50 m/s2'], ['N2L', '0.5 m/s2'], ['FARADAY', '4 V'], ['HEAT', 'c = 900'],
+  ] as const)('%s refused (value / equation, not the option text): %s', (q, msg) => {
+    const mcq = { N2L, HEAT, FARADAY, OHM, SNELL }[q]
+    expect(gradeMcqAnswer(msg, mcq)).toEqual({ chosenIndex: null, correct: null })
   })
-
-  it.each(['40', '40 V', 'emf = 40 V', 'answer is 40 V i think'])('Faraday: %s', (msg) => {
-    expect(gradeMcqAnswer(msg, FARADAY).correct).toBe(true)
-  })
-
-  it.each(['24', 'R = 24 ohm', '24 ohms'])('Ohm: %s', (msg) => {
-    expect(gradeMcqAnswer(msg, OHM).correct).toBe(true)
-  })
-
-  it.each(['19.5', 'about 19.5 degrees'])('Snell: %s', (msg) => {
-    expect(gradeMcqAnswer(msg, SNELL).correct).toBe(true)
-  })
-})
-
-describe('a wrong typed value is still graded wrong — to ITS OWN option', () => {
-  it('the multiply-F-by-m value lands on the option that names that misconception', () => {
-    const r = gradeMcqAnswer('50 m/s2', N2L)
-    expect(r.correct).toBe(false)
-    expect(N2L.options[r.chosenIndex!]).toMatch(/^50 m\/s²/)
-  })
-  it('0.5 m/s2 (two numbers through the unit) resolves to 0.5, not refused and not mis-attributed', () => {
-    const r = gradeMcqAnswer('0.5 m/s2', N2L)
-    expect(N2L.options[r.chosenIndex!]).toMatch(/^0\.5 m\/s²/)
-    expect(r.correct).toBe(false)
-  })
-  it('"4 V" is the 4.0 V option, never the 1600 V one', () => {
-    const r = resolveMcqChoice('4 V', FARADAY)
-    expect(FARADAY.options[r!]).toMatch(/^4\.0 V/)
-  })
-  it('c = 900 is the 900 option', () => {
-    expect(HEAT.options[resolveMcqChoice('c = 900', HEAT)!]).toMatch(/^900/)
+  it('the explicit letter for the same answer grades', () => {
+    expect(gradeMcqAnswer('ABCD'[N2L.correctIndex], N2L)).toEqual({ chosenIndex: N2L.correctIndex, correct: true })
+    expect(gradeMcqAnswer(`${'ABCD'[HEAT.correctIndex]} because 18000 / (2 × 20)`, HEAT)).toEqual({ chosenIndex: HEAT.correctIndex, correct: true })
   })
 })
 
 describe('the refusals and readings that must not move', () => {
-  it('a worked reply naming several numbers still refuses', () => {
+  it('a worked reply naming several numbers still refuses, and so does a bare value now', () => {
     const torque: TutorMCQ = { question: 'q', options: ['zero point five newton-metres', 'five newton-metres', 'ten newton-metres', 'twenty newton-metres'], correctIndex: 1 }
     expect(resolveMcqChoice('5, because 10 times 0.5', torque)).toBeNull()
-    expect(resolveMcqChoice('5', torque)).toBe(1)
+    expect(resolveMcqChoice('5', torque)).toBeNull()
   })
-  it('an explicit position still names a position against quantity options', () => {
-    expect(resolveMcqChoice('option 2', N2L)).toBe(1)
-    expect(resolveMcqChoice('the second one', N2L)).toBe(1)
-  })
-  it('word options keep the bare-digit-as-position reading', () => {
+  it('positions by number or ordinal are refused (R1)', () => {
+    expect(resolveMcqChoice('option 2', N2L)).toBeNull()
+    expect(resolveMcqChoice('the second one', N2L)).toBeNull()
     const words: TutorMCQ = { question: 'q', options: ['Its mass is bigger', 'Heavy things need more force', 'The push gets used up'], correctIndex: 0 }
-    expect(resolveMcqChoice('2', words)).toBe(1)
+    expect(resolveMcqChoice('2', words)).toBeNull()
   })
   it('a plain option letter is still a letter', () => {
     expect(resolveMcqChoice('c', N2L)).toBe(2)
@@ -114,27 +101,28 @@ describe('the refusals and readings that must not move', () => {
     const sameLead: TutorMCQ = { question: 'q', options: ['5 m east', '11 m east', '5 m west'], correctIndex: 0 }
     expect(resolveMcqChoice('5', sameLead)).toBeNull()
   })
-  it('glued symbols that ARE the answer still resolve (sp², cos30°)', () => {
+  it('the answer half of a symbol option is refused (R3); its full text and letter grade', () => {
     const hyb: TutorMCQ = { question: 'q', options: ['sp² — 3 electron domains', 'sp³ — carbon always uses four'], correctIndex: 0 }
-    expect(resolveMcqChoice('sp²', hyb)).toBe(0)
+    expect(resolveMcqChoice('sp²', hyb)).toBeNull()
+    expect(resolveMcqChoice('sp² — 3 electron domains', hyb)).toBe(0)
+    expect(resolveMcqChoice('A', hyb)).toBe(0)
     const incline: TutorMCQ = { question: 'q', options: ['f = μ mg cos30° — using the normal force', 'f = μ mg — using the full weight'], correctIndex: 0 }
-    expect(resolveMcqChoice('f = μ mg cos30°', incline)).toBe(0)
+    expect(resolveMcqChoice('f = μ mg cos30°', incline)).toBeNull()
   })
   it('every verbatim tap of every option of these probes resolves to itself', () => {
     for (const q of [N2L, HEAT, FARADAY, OHM, SNELL]) q.options.forEach((o, i) => expect(resolveMcqChoice(o, q)).toBe(i))
   })
 })
 
-describe('rule 3b — the answer half of an authored "<answer> — <why>" option', () => {
-  it('the production wrong answer "Toward the normal" is now GRADED — as wrong, so it can be corrected', () => {
-    const r = gradeMcqAnswer('Toward the normal', WATER_TO_AIR)
-    expect(r.correct).toBe(false)
-    expect(WATER_TO_AIR.options[r.chosenIndex!]).toMatch(/^Toward the normal/)
+describe('answer halves of authored "<answer> — <why>" options are refused (R3)', () => {
+  it('"Toward the normal" is refused; the letter form is graded wrong so it can be corrected', () => {
+    expect(gradeMcqAnswer('Toward the normal', WATER_TO_AIR)).toEqual({ chosenIndex: null, correct: null })
+    const i = WATER_TO_AIR.options.findIndex((o) => /^Toward the normal/.test(o))
+    const r = gradeMcqAnswer('ABCD'[i], WATER_TO_AIR)
+    expect(r).toEqual({ chosenIndex: i, correct: false })
   })
-  it('the terse production answers resolve to the option they name', () => {
-    expect(gradeMcqAnswer('The car', CAR_CYCLIST).correct).toBe(false)
-    expect(gradeMcqAnswer('The cyclist', CAR_CYCLIST).correct).toBe(true)
-    expect(gradeMcqAnswer('i think the cyclist', CAR_CYCLIST).correct).toBe(true)
+  it('terse answer halves are refused', () => {
+    for (const m of ['The car', 'The cyclist', 'i think the cyclist']) expect(gradeMcqAnswer(m, CAR_CYCLIST).chosenIndex).toBeNull()
   })
   it('a yes/no answer half is NEVER matched — a bare "no" may be a reply to the tutor\'s check-in', () => {
     expect(resolveMcqChoice('No', SPECIFIC_HEAT_YN)).toBeNull()

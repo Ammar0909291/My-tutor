@@ -30,8 +30,10 @@ describe('rule 4a', () => {
     expect(gradeMcqAnswer('I think it is at rest — zero work means zero kinetic energy', THEOREM))
       .toEqual({ chosenIndex: null, correct: null })
   })
-  it('the short answer rule 4a was written for still grades', () => {
-    expect(gradeMcqAnswer('i think it is the lowest point sir', SHM)).toEqual({ chosenIndex: 2, correct: true })
+  // Choice-only (2026-09-28, owner-approved spec GB+): BEFORE this control pinned an inference rule that graded it; AFTER the rule is removed and the reply is refused. The explicit-letter form still grades.
+  it('the short answer rule 4a was written for is refused; its letter form grades', () => {
+    expect(gradeMcqAnswer('i think it is the lowest point sir', SHM)).toEqual({ chosenIndex: null, correct: null })
+    expect(gradeMcqAnswer('i think C sir', SHM)).toEqual({ chosenIndex: 2, correct: true })
   })
   it('stronger rules are untouched: quoting the option grades', () => {
     expect(gradeMcqAnswer('the net work done on an object equals the change in its kinetic energy', THEOREM).correct).toBe(true)
@@ -50,8 +52,10 @@ describe('rule 4: two shared words inside an unrelated claim (phys.mech.poisson-
   it('the misconception about a different bracket is not graded', () => {
     expect(gradeMcqAnswer('I think {x,p}={p,x}, since the Poisson bracket is symmetric like a dot product, so order of arguments does not matter', LZ).chosenIndex).toBeNull()
   })
-  it('a paraphrase of the option still grades', () => {
-    expect(gradeMcqAnswer('L_z is conserved — the bracket vanishing means it does not change over time under the flow', LZ)).toEqual({ chosenIndex: 0, correct: true })
+  // Choice-only (2026-09-28, owner-approved spec GB+): BEFORE this control pinned an inference rule that graded it; AFTER the rule is removed and the reply is refused. The explicit-letter form still grades.
+  it('a paraphrase is refused; the letter + explanation form grades', () => {
+    expect(gradeMcqAnswer('L_z is conserved — the bracket vanishing means it does not change over time under the flow', LZ).chosenIndex).toBeNull()
+    expect(gradeMcqAnswer('A because L_z does not change over time under the flow', LZ)).toEqual({ chosenIndex: 0, correct: true })
   })
 })
 
@@ -67,9 +71,12 @@ describe('rule 5: a number word inside a sentence is not a value answer (phys.me
   it('"… that coordinate is zero or held constant …" is not graded', () => {
     expect(gradeMcqAnswer('I think a cyclic coordinate means that coordinate is zero or held constant throughout the motion', NOETHER).chosenIndex).toBeNull()
   })
-  it('a bare value still grades', () => {
+  // Choice-only (2026-09-28, owner-approved spec GB+): BEFORE this control pinned an inference rule that graded it; AFTER the rule is removed and the reply is refused. The explicit-letter form still grades.
+  it('a bare value is refused; the exact option and the letter grade', () => {
     const Q: TutorMCQ = { question: 'Net torque?', options: ['5 N·m', '10 N·m', '0 N·m'], correctIndex: 0 }
-    expect(gradeMcqAnswer('i think 5', Q)).toEqual({ chosenIndex: 0, correct: true })
+    expect(gradeMcqAnswer('i think 5', Q).chosenIndex).toBeNull()
+    expect(gradeMcqAnswer('5 N·m', Q)).toEqual({ chosenIndex: 0, correct: true })
+    expect(gradeMcqAnswer('A', Q)).toEqual({ chosenIndex: 0, correct: true })
   })
 })
 
@@ -82,8 +89,12 @@ describe('rule 2: an ordinal inside a noun phrase is not a position (phys.therm.
   it('"… the First Law rules it out …" is not "the first one"', () => {
     expect(gradeMcqAnswer('I think since this violates energy conservation, the First Law rules it out, making the Second Law essentially redundant', SECOND_LAW).chosenIndex).toBeNull()
   })
-  it.each([['the first one', 0], ['second', 1], ['I think the second one because entropy', 1], ['option 1', 0]] as const)('"%s" still names a position', (m, i) => {
-    expect(gradeMcqAnswer(m, SECOND_LAW).chosenIndex).toBe(i)
+  // Choice-only (2026-09-28, owner-approved spec GB+): BEFORE this control pinned an inference rule that graded it; AFTER the rule is removed and the reply is refused. The explicit-letter form still grades.
+  it.each(['the first one', 'second', 'I think the second one because entropy', 'option 1'])('"%s" is refused (ordinal)', (m) => {
+    expect(gradeMcqAnswer(m, SECOND_LAW).chosenIndex).toBeNull()
+  })
+  it('the explicit letter still names the option', () => {
+    expect(gradeMcqAnswer('I think B because entropy', SECOND_LAW).chosenIndex).toBe(1)
   })
 })
 
@@ -104,8 +115,10 @@ describe('a confused question is never an answer (owner-account study, phys.mech
     'i dont understand the area impulse thing',
     "I'm confused, is it the impulse",
   ])('"%s" is not graded', (m) => expect(gradeMcqAnswer(m, AREA).chosenIndex).toBeNull())
-  it('a real answer still grades', () => {
-    expect(gradeMcqAnswer('the impulse — the area is the change in momentum', AREA)).toEqual({ chosenIndex: 0, correct: true })
+  // Choice-only (2026-09-28, owner-approved spec GB+): BEFORE this control pinned an inference rule that graded it; AFTER the rule is removed and the reply is refused. The explicit-letter form still grades.
+  it('a typed paraphrase is refused; the letter form grades', () => {
+    expect(gradeMcqAnswer('the impulse — the area is the change in momentum', AREA).chosenIndex).toBeNull()
+    expect(gradeMcqAnswer('A — the area is the change in momentum', AREA)).toEqual({ chosenIndex: 0, correct: true })
   })
   it('a tap is always graded', () => {
     expect(gradeMcqAnswer(AREA.options[0], AREA).chosenIndex).toBe(0)

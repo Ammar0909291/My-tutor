@@ -168,7 +168,9 @@ describe('Phase 5 — a typed non-answer is not graded against a pending MCQ', (
     // fact pattern needs three space-separated words there — a pre-existing
     // property of that detector, not changed here.)
     const control = 'each term in the second order sum came out negative for the ground state'
-    expect(gradeMcqAnswer(control, PERT_MCQ).chosenIndex).toBe(1)          // the words DO resolve to an option…
+    // Choice-only (2026-09-28): BEFORE the words resolved to option 1 by
+    // keyword; AFTER a sentence is never a choice (owner-approved spec GB+).
+    expect(gradeMcqAnswer(control, PERT_MCQ)).toEqual(NOT_GRADED)
     const correction = `I thought ${control}`
     expect(readsAsRequestToTutor(correction)).toBe(true)
     expect(gradeMcqAnswer(correction, PERT_MCQ)).toEqual(NOT_GRADED)       // …but a challenge answers nothing
@@ -187,8 +189,12 @@ describe('Phase 5 — a typed non-answer is not graded against a pending MCQ', (
     expect(gradeMcqAnswer('Negative', PERT_MCQ)).toEqual({ chosenIndex: 1, correct: true })     // a tap
     expect(gradeMcqAnswer('Positive', PERT_MCQ)).toEqual({ chosenIndex: 0, correct: false })
     expect(gradeMcqAnswer('B', PERT_MCQ)).toEqual({ chosenIndex: 1, correct: true })
-    expect(gradeMcqAnswer('i think it is negative', PERT_MCQ)).toEqual({ chosenIndex: 1, correct: true })
-    expect(gradeMcqAnswer('Negative, because every denominator is negative', PERT_MCQ)).toEqual({ chosenIndex: 1, correct: true })
+    // Choice-only (2026-09-28): BEFORE graded by inference (lead-in + option
+    // word; option word + reason); AFTER refused — the approved grammar takes an
+    // explanation only after an explicit letter ("B because …" still grades).
+    expect(gradeMcqAnswer('i think it is negative', PERT_MCQ)).toEqual(NOT_GRADED)
+    expect(gradeMcqAnswer('Negative, because every denominator is negative', PERT_MCQ)).toEqual(NOT_GRADED)
+    expect(gradeMcqAnswer('B because every denominator is negative', PERT_MCQ)).toEqual({ chosenIndex: 1, correct: true })
     expect(engagesPendingOptions('i think it is negative', PERT_MCQ)).toBe(true)
   })
 })

@@ -96,7 +96,11 @@ describe('P0 — a pending MCQ cannot survive into another lesson', () => {
     // else, so it handed the grader lesson A's question on lesson B's turn.
     const oldRead = (raw: Record<string, unknown>): TutorMCQ =>
       ({ question: raw.question as string, options: raw.options as string[], correctIndex: raw.correctIndex as number })
-    const learnersFirstMessageInLessonB = 'It doubles I think'
+    // Choice-only (2026-09-28): BEFORE the reproduction used 'It doubles I think',
+    // which keyword grading resolved; AFTER sentences are never graded, so the
+    // reproduction uses an explicit letter — still graded, so the cross-lesson
+    // risk this test documents is unchanged.
+    const learnersFirstMessageInLessonB = 'B'
     const grade = gradeMcqAnswer(learnersFirstMessageInLessonB, oldRead(legacyRow))
     // A grade was produced — evidence for phys.opt.lenses, from a
     // phys.wave.interference question the learner never saw in this lesson.

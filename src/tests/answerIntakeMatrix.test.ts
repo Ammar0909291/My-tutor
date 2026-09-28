@@ -73,12 +73,14 @@ describe('a correct answer grades correct, in every natural form', () => {
     'ok I think C',
     'sir I think C because...',
     'answer is C',
-    'the third one',                                 // ordinal      (control 5)
-    'I think the third one',
-    'I think it is the lowest point',                // paraphrase
-    'the lowest point in the middle',                // verbatim tap
   ]
   for (const m of CORRECT) it(`"${m}"`, () => grades(m, 2))
+  // Choice-only grading (2026-09-28, owner-approved spec GB+): BEFORE these
+  // were graded by inference (ordinal / paraphrase / containment); AFTER they
+  // are refused — the old rules that read them also credited 28 of 478 scripted
+  // misconception sentences as CORRECT. Explicit letters above are unchanged.
+  const NO_LONGER_GRADED = ['the third one', 'I think the third one', 'I think it is the lowest point', 'the lowest point in the middle']
+  for (const m of NO_LONGER_GRADED) it(`"${m}" is refused (choice-only)`, () => refuses(m))
 })
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -86,15 +88,19 @@ describe('a correct answer grades correct, in every natural form', () => {
 // ═══════════════════════════════════════════════════════════════════════════
 describe('a wrong answer grades wrong, in every natural form', () => {
   const WRONG = [
-    'A', 'a', 'A.', 'option one', 'the first one',
+    'A', 'a', 'A.',
     'I think A',
     'I think A because it starts there',
     'ok I think A',
     'answer is A',
-    'I think the first one',
-    'I think it is the highest point on the left',
   ]
   for (const m of WRONG) it(`"${m}"`, () => grades(m, 0))
+  // Choice-only grading (2026-09-28, owner-approved spec GB+): BEFORE these
+  // were graded by inference (ordinal / paraphrase / containment); AFTER they
+  // are refused — the old rules that read them also credited 28 of 478 scripted
+  // misconception sentences as CORRECT. Explicit letters above are unchanged.
+  const NO_LONGER_GRADED = ['option one', 'the first one', 'I think the first one', 'I think it is the highest point on the left']
+  for (const m of NO_LONGER_GRADED) it(`"${m}" is refused (choice-only)`, () => refuses(m))
 
   it('CONTROL 10: the fix did not turn wrong answers into refusals', () => {
     // The cheapest way to kill a false positive is to grade nothing. That
@@ -167,19 +173,13 @@ describe('"one" is a pronoun unless something says it is a number', () => {
       'I think it is the one', 'which one', 'the left one']) refuses(m)
   })
 
-  it('an explicit marker makes it a number again', () => {
-    expect(resolveMcqChoice('option one', Q)).toBe(0)
-    expect(resolveMcqChoice('number one', Q)).toBe(0)
-  })
-
-  it('a genuine ordinal is untouched', () => {
-    expect(resolveMcqChoice('the first one', Q)).toBe(0)
-    expect(resolveMcqChoice('the second one', Q)).toBe(1)
-    expect(resolveMcqChoice('the third one', Q)).toBe(2)
-  })
-
-  it('a bare digit is untouched — it is a choice, not a pronoun', () => {
-    expect(resolveMcqChoice('2', Q)).toBe(1)
+  // Choice-only (2026-09-28): BEFORE "option one" / "the first one" / "2" named a
+  // position; AFTER positions by number or ordinal are refused — only a tap,
+  // exact text or an explicit letter selects (owner-approved spec GB+).
+  it('a number-marked or ordinal position is refused (choice-only)', () => {
+    for (const m of ['option one', 'number one', 'the first one', 'the second one', 'the third one', '2']) {
+      expect(resolveMcqChoice(m, Q), m).toBeNull()
+    }
   })
 
   it('other number words are untouched — none of them is a pronoun', () => {

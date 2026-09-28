@@ -17,9 +17,11 @@ const IMPULSE: TutorMCQ = {
 const PLAIN: TutorMCQ = { question: 'Which force is larger?', options: ['The weight', 'The normal force', 'They are equal', 'Neither'], correctIndex: 2 }
 
 describe('entity letters', () => {
-  it('the production misconception grades as the misconception option', () => {
+  // Choice-only (2026-09-28): BEFORE the sentence was read as the misconception
+  // option (keyword); AFTER a sentence that names "force A" is no choice at all.
+  it('the production misconception is not graded at all (choice-only)', () => {
     expect(gradeMcqAnswer('I think force A — it is a much bigger force, so it must deliver more impulse', IMPULSE))
-      .toEqual({ chosenIndex: 1, correct: false })
+      .toEqual({ chosenIndex: null, correct: null })
   })
   it('a labelled letter still chooses', () => {
     expect(gradeMcqAnswer('A) Equal', IMPULSE).chosenIndex).toBe(0)
@@ -39,7 +41,13 @@ describe('a capital letter after an ordinary word is a name (phys.mech.power r2 
   it('"I think crane B did more work …" is not option B', () => {
     expect(gradeMcqAnswer('I think crane B did more work because it has more power', POWER).chosenIndex).toBeNull()
   })
-  it.each(['I think B', 'B because 1500 × 20', 'I think B is right', 'option B please', 'maybe B', 'it is B'])('"%s" still chooses B', (m) => {
+  it.each(['I think B', 'B because 1500 × 20', 'option B please', 'it is B'])('"%s" still chooses B', (m) => {
     expect(gradeMcqAnswer(m, POWER).chosenIndex).toBe(1)
+  })
+  // Choice-only (2026-09-28): BEFORE graded B; AFTER refused. "B is right" has the
+  // exact shape of the harmful "B is perpendicular …" (B = the field), and "maybe"
+  // is a hedge — neither is an explicit choice under the approved grammar.
+  it.each(['I think B is right', 'maybe B'])('"%s" is refused (choice-only)', (m) => {
+    expect(gradeMcqAnswer(m, POWER).chosenIndex).toBeNull()
   })
 })
