@@ -376,11 +376,11 @@ export function repairMirrorWithVerdict(input: MirrorVerdictInput): MirrorVerdic
 // that feeds it, wherever they sit — and keeps everything that teaches.
 
 const CONFIRM_REQUEST_ANY_RE =
-  /(?:is\s+that\s+(?:right|correct)|am\s+i\s+right|did\s+i\s+(?:get|understand)\s+(?:that|it|you)\s+right|is\s+that\s+what\s+you\s+(?:meant|mean)|have\s+i\s+got\s+that\s+right|do\s+i\s+have\s+that\s+right|,\s*(?:right|correct)\s*\?)\s*[?.!]*\s*$/i
+  /(?:is\s+that\s+(?:right|correct)|am\s+i\s+right|did\s+i\s+(?:get|understand)\s+(?:that|it|you)\s+right|is\s+that\s+what\s+you\s+(?:meant|mean)|have\s+i\s+got\s+that\s+right|do\s+i\s+have\s+that\s+right|,\s*(?:right|correct)\s*\?|is\s+that\s+an?\s+(?:accurate|fair|correct)\s+(?:summary|description|reading)\b[^?]*\?|does\s+that\s+(?:sound\s+right|capture\s+(?:it|what\s+you\s+mean))\b[^?]*\?)\s*[?.!]*\s*$/i
 const LET_ME_KNOW_RE =
   /^(?:please\s+)?let\s+me\s+know\s+if\s+(?:that(?:'|’)?s|that\s+is|this\s+is|i(?:'|’)?ve\s+got\s+(?:it|that))\s+(?:right|correct|what\s+you\s+meant)\b/i
 const FRAME_START_RE =
-  /^(?:(?:ok(?:ay)?|great|got\s+it|alright)[,!]?\s+)?(?:so\s+)?(?:you(?:'|’)?re\s+saying|you\s+are\s+saying|you(?:'|’)?re\s+thinking|you\s+said|you\s+think|you\s+(?:selected|chose|picked|answered|went\s+with|opted\s+for)|you(?:'|’)?re\s+indicating|you\s+are\s+indicating|i\s+hear\s+(?:that\s+)?you(?:'|’)?re|i\s+take\s+it\s+you|it\s+sounds\s+like\s+you|you(?:'|’)?d\s+like\s+(?:me\s+)?to|you\s+would\s+like\s+(?:me\s+)?to|you\s+want\s+(?:me\s+)?to|if\s+i\s+understand\s+you)\b/i
+  /^(?:(?:ok(?:ay)?|great|got\s+it|alright)[,!]?\s+)?(?:so\s+)?(?:you(?:'|’)?re\s+saying|you\s+are\s+saying|you(?:'|’)?re\s+thinking|you\s+said|you\s+think|you\s+(?:selected|chose|picked|answered|went\s+with|opted\s+for)|you(?:'|’)?re\s+indicating|you\s+are\s+indicating|i\s+hear\s+(?:that\s+)?you(?:'|’)?re|i\s+hear\s+you\s+(?:saying|say)|i\s+take\s+it\s+you|it\s+sounds\s+like\s+you|you(?:'|’)?d\s+like\s+(?:me\s+)?to|you\s+would\s+like\s+(?:me\s+)?to|you\s+want\s+(?:me\s+)?to|if\s+i\s+understand\s+you)\b/i
 
 const flatApos = (s: string) => s.replace(/[’ʼ]/g, "'")
 

@@ -72,3 +72,17 @@ describe('rule 5: a number word inside a sentence is not a value answer (phys.me
     expect(gradeMcqAnswer('i think 5', Q)).toEqual({ chosenIndex: 0, correct: true })
   })
 })
+
+describe('rule 2: an ordinal inside a noun phrase is not a position (phys.therm.second-law r1 s5)', () => {
+  const SECOND_LAW: TutorMCQ = {
+    question: 'Of these three — (i) heat flows hot→cold, (ii) gas expands into vacuum, (iii) two gases unmix spontaneously — which violates the second law?',
+    options: ['Only (iii) — spontaneous unmixing decreases entropy with no external work', 'All three violate it, since entropy always increases'],
+    correctIndex: 0,
+  }
+  it('"… the First Law rules it out …" is not "the first one"', () => {
+    expect(gradeMcqAnswer('I think since this violates energy conservation, the First Law rules it out, making the Second Law essentially redundant', SECOND_LAW).chosenIndex).toBeNull()
+  })
+  it.each([['the first one', 0], ['second', 1], ['I think the second one because entropy', 1], ['option 1', 0]] as const)('"%s" still names a position', (m, i) => {
+    expect(gradeMcqAnswer(m, SECOND_LAW).chosenIndex).toBe(i)
+  })
+})

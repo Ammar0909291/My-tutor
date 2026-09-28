@@ -670,6 +670,12 @@ export function buildMcqInstruction(opts: { atMasteryGate?: boolean } = {}): str
  * dropped rather than disambiguated. "Number two" now refuses instead of
  * guessing, which is the correct trade.
  */
+/** What may follow an ordinal that names an option position — see rule 2. */
+const ORDINAL_FOLLOWERS = new Set([
+  'one', 'option', 'choice', 'answer', 'because', 'since', 'as', 'so', 'but', 'is', 'it', 'please',
+  'sir', 'maam', 'madam', 'i', 'im', 'thats', 'that', 'right', 'correct', 'then', 'ok', 'okay',
+])
+
 const ORDINALS: Record<string, number> = {
   first: 0, '1': 0, '1st': 0,
   second: 1, '2': 1, '2nd': 1,
@@ -1441,6 +1447,16 @@ function resolveMcqChoiceFolded(message: string, mcq: TutorMCQ): number | null {
     const idx = ORDINALS[t]
     if (idx === undefined) continue
     if (quantityOptions && /^\d$/.test(t) && !(ti > 0 && LETTER_MARKERS.has(tokens[ti - 1]))) continue
+    // AN ORDINAL INSIDE A NOUN PHRASE IS NOT A POSITION (phys.therm.second-law,
+    // 2026-09-28): "…the First Law rules it out, making the Second Law
+    // essentially redundant" was read as "the first one" and graded as the
+    // correct option — a misconception banked as right. A position is named
+    // alone, before "one"/"option"/a reason, at the end, or after a marker
+    // ("option 2", "number 2").
+    const nextTok = tokens[ti + 1]
+    const namesPosition = nextTok === undefined || ORDINAL_FOLLOWERS.has(nextTok)
+      || (ti > 0 && LETTER_MARKERS.has(tokens[ti - 1]))
+    if (!namesPosition) continue
     // Out of range REFUSES rather than falling through to a weaker rule: the
     // learner named a position, and it is not one this question offered.
     // Continuing would let a text-similarity match answer a question they were

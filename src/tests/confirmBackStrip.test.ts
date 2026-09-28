@@ -77,3 +77,10 @@ describe('"you\'re indicating" (unit 1 pass 3, phys.mech.kinematics-1d r2 s5)', 
     expect(r.text).toBe('When you say the ball is going up, how do you decide whether the displacement s should be taken as positive or negative?')
   })
 })
+
+describe('"I hear you saying … Is that an accurate summary …?" (unit 3, phys.therm.second-law r1 s5)', () => {
+  it('is a confirm-back', () => {
+    const r = stripConfirmBack('So I hear you saying that the first law already prevents it, making the second law unnecessary. Is that an accurate summary of your thinking?')
+    expect(r).toEqual({ text: '', stripped: true })
+  })
+})

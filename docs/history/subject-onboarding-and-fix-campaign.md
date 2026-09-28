@@ -863,3 +863,8 @@ by `drive.ts`, to settle from evidence whether the already-served guard is being
       fallback is now replaced by an open "which part should I explain more" question (`FALLBACK_REPEAT_TEXT`).
 - Unit 2 pass 1 final: 77 lessons + 15 infra re-drives in progress. Every HIGH root-caused: grading misreads
   (4 kinds), the placement hijack, and 1 harness artifact.
+- Unit 3 pass 1 (in progress):
+  13. phys.therm.second-law r1 s5, HIGH: "… the First Law rules it out, making the Second Law redundant" was
+      read by rule 2 as "the first one", the correct option. An ordinal now names a position only alone, before
+      "one"/"option"/a reason, at the end, or after a marker. The same turn's "So I hear you saying … Is that an
+      accurate summary …?" confirm-back is now stripped.
