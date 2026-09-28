@@ -17,6 +17,23 @@ answer (slot 9, 40/40). Latency is comparable, Gemini slightly faster at the p95
 This is a real, evidence-based signal in favor of Gemini on correctness for these two specific
 misconceptions, not a general "Gemini is better" claim — see Scope and Limitations.
 
+### Which Groq model did arm A actually use? (confirmed, not assumed)
+
+**`openai/gpt-oss-120b`** — the current production default, not the smaller 20B variant.
+Confirmed two ways:
+1. **Code**: `src/lib/ai/router.ts`'s `getRouter()`, when `forceProvider === 'groq'`, resolves
+   `const model = groqModelOverride ?? GROQ_MODEL`. This harness never sent the
+   `x-cert-groq-model` header, so `groqModelOverride` was always `undefined`, and `GROQ_MODEL =
+   process.env.GROQ_MODEL ?? 'openai/gpt-oss-120b'`.
+2. **Live production environment**: pulled this project's actual Vercel env var list
+   (`filter_project_envs`) — there is **no `GROQ_MODEL` key configured at all**, in production
+   or preview, so the code fell through to the hardcoded `'openai/gpt-oss-120b'` default with
+   certainty, not merely by static-code inference.
+   (A third check — pulling the literal `"[ai/router] cert override active — provider=groq
+   model=..."` console.log line from Vercel runtime logs for the test's exact time window —
+   was attempted and failed with `ExceedsBillingLimitError` on this Vercel plan; not needed
+   given the above, but noted for completeness.)
+
 ## Methodology
 
 - Script: `scripts/qa/abStudent/script.json`, sha256
@@ -238,12 +255,13 @@ optimized to reach mastery.
   all 40 (a bug in the first cleanup attempt — an empty session cookie — was found, fixed, and
   re-run; see commit `a9acea42`).
 - **Important, not glossed over**: this app's delete-account endpoint is a *soft* delete — it
-  renames the email to `deleted_<timestamp>_<original>` and blocks login, but the row persists
-  with `modelOverrideAllowed` still `true`. A direct count confirmed all 40 rows still exist
-  under those renamed emails. Re-login-blocked is a real, verified guarantee; "0 rows remain" is
-  not this endpoint's contract and was not achieved. I did not hard-delete these rows via raw
-  SQL without further authorization — flagged to the owner separately, offering to flip their
-  `modelOverrideAllowed` to `false` as a harmless follow-up if wanted.
+  renames the email to `deleted_<timestamp>_<original>` and blocks login, but the row persists.
+  A direct count confirmed all 40 rows still exist under those renamed emails; "0 rows remain"
+  is not this endpoint's contract and was not achieved. Re-login-blocked is the real, verified
+  guarantee. Per owner follow-up instruction, `modelOverrideAllowed` was then flipped to `false`
+  on exactly those 40 (now-unreachable, soft-deleted) rows via a second self-limiting, owner-
+  approved UPDATE (`WHERE id IN (<the 40 ids>) AND email LIKE 'deleted_%qa-%@mytutor-qa.invalid'
+  RETURNING id`, confirmed exactly 40 rows returned). No row was hard-deleted.
 - `suaibamr1@gmail.com` / `suaibamr3@gmail.com`: `modelOverrideAllowed` confirmed `false` before
   this test began and re-confirmed `false` after — no password or other field touched (the owner
   is rotating those passwords separately).
