@@ -9509,6 +9509,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // RS P-3: an outage template taught nothing, so it must not be
             // folded as a give. See TurnEvidence.degradedTurn.
             degradedTurn: isDegradedProvider(provider),
+            // The learner's own question/request does not spend the concept's
+            // teaching budget. See TurnEvidence.learnerInitiated.
+            learnerInitiated: (await import('@/lib/teaching/learnerEngagement'))
+              .isLearnerInitiatedTurn(message, { answeredPendingQuestion: mcqGradeHoisted !== null }),
             // The server's own decided move, not a guess from prose. A turn
             // that taught AND ended on a question is still a give; treating
             // it as "taught nothing" is what froze the ladder at DEMONSTRATE.
@@ -11650,6 +11654,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // Same guard as the upstream fold — the two must not disagree
               // about whether an outage template taught anything.
               degradedTurn: isDegradedProvider(provider),
+              learnerInitiated: (await import('@/lib/teaching/learnerEngagement'))
+                .isLearnerInitiatedTurn(message, { answeredPendingQuestion: mcqGradeHoisted !== null }),
               deliveredTeaching: resolvedEvidenceMove === 'teach' || resolvedEvidenceMove === 'show',
               acknowledgement: resolvedLowSignalAck,
               fillerTurnDetected: fillerDetectedHoisted,

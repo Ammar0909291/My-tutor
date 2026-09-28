@@ -708,3 +708,37 @@ direct, owner-authorized DB update. Not done unilaterally.
 the authored-correct option sat at A in 4/10 (3 of them 2-option items that happened to land in
 authored order — chance is 1/2 there), versus 10/10 before the fix. Tapping the authored-correct
 option still graded correct (`checkCorrect: 1`, verified).
+
+## 2026-09-28 — Physics Unit 1 certification begins; learner questions no longer spend the teaching budget
+
+**Owner goal:** make one subject defect-free, starting with Physics. **Unit 1** is every
+`foundational` concept plus the `developing` `phys.meas.*` / `phys.mech.*` concepts (23).
+Harness: `scripts/qa/physicsCert/`.
+- `buildScript.ts` freezes the scripted student from authored content only: quoted Blueprint/EB
+  misconception phrases, else the misconception-tagged seed choice; seed-probe correct and wrong
+  choices; the next concept's stem as the off-topic question. Output is `unit1.json`, with its
+  sha256 logged per run.
+- `drive.ts` runs the identical-student 14-slot plan on the production default model, one
+  disposable account per lesson, deleted after.
+- `analyze.ts` applies deterministic HIGH/MEDIUM detectors, and prints slots 2/5/9/10 for human
+  reading.
+
+**First defect found (smoke run, phys.mech.normal-force), root-caused and fixed.** The concept
+turn budget (`CONCEPT_TURN_BUDGET = 12`) counted EVERY turn, including the learner's own questions
+and requests. The scripted learner asked "why does that matter?", asked for a diagram and asked
+one off-topic question. It answered correctly twice and missed once (deliberately), and on turn
+12 was closed with "Let's pause … you haven't mastered it yet". The extension did not apply
+because the one miss had moved the phase below CHECK.
+
+**Fix.**
+- `TurnEvidence.learnerInitiated` (`isLearnerInitiatedTurn`: a question or a request, not an
+  answer to the pending quiz, not "quiz me") no longer increments `turnsOnConcept`.
+- `turnsTotalOnConcept` counts every turn.
+- `ABSOLUTE_TURN_CEILING = 2 × 12 + 6 = 30` keeps termination structural.
+- Wired at both route ladder folds and replayed in `transcriptReplayFramework.test.ts`.
+- Tests: `learnerInitiatedBudget.test.ts`.
+
+**Also found, not yet fixed.** The same authored explanation (the "book on a mattress" paragraph)
+reached the learner three times in one lesson: once served from memory, then twice recited
+verbatim by the model. The response's `retrievedExplanationInPrompt` diagnostic is now captured
+by `drive.ts`, to settle from evidence whether the already-served guard is being bypassed.

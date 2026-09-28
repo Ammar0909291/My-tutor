@@ -131,6 +131,14 @@ export function effectiveTurnBudget(state: ConversationState): number {
   return CONCEPT_TURN_BUDGET + (state.budgetExtensionGranted ? BUDGET_EXTENSION_TURNS : 0)
 }
 
+/**
+ * The absolute ceiling on ALL turns spent on one concept, learner-initiated
+ * ones included. `turnsOnConcept` no longer counts a learner's own questions
+ * and requests, so this is what keeps termination structural: however many
+ * questions a learner asks, a concept still closes by here.
+ */
+export const ABSOLUTE_TURN_CEILING = 2 * CONCEPT_TURN_BUDGET + BUDGET_EXTENSION_TURNS
+
 /** Consecutive failures after which continuing is more costly than moving on. */
 export const MAX_CONSECUTIVE_FAILURES = 3
 
@@ -251,7 +259,8 @@ export function evaluateConceptBudget(state: ConversationState): ConceptBudget {
   // THE `turns` BACKSTOP IS ABSOLUTE — it fires even for an unassessed
   // learner, so termination is always guaranteed and no loop can form. This
   // is deliberately checked BEFORE the confusion guard below.
-  if (turnsUsed >= effectiveTurnBudget(state)) {
+  if (turnsUsed >= effectiveTurnBudget(state)
+      || (state.turnsTotalOnConcept ?? turnsUsed) >= ABSOLUTE_TURN_CEILING) {
     return { ...base, status: 'exhausted', reason: 'turns', markForReview: true }
   }
 

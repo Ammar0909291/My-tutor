@@ -44,6 +44,19 @@ function contentWordCount(message: string): number {
     .length
 }
 
+/**
+ * Did the LEARNER drive this turn — a question or a request to the tutor, not
+ * an answer to the pending quiz and not a request for practice? Such a turn
+ * does not consume the concept's teaching budget (conversationState
+ * TurnEvidence.learnerInitiated).
+ */
+export function isLearnerInitiatedTurn(message: string, opts: { answeredPendingQuestion: boolean }): boolean {
+  const m = (typeof message === 'string' ? message : '').trim()
+  if (!m || opts.answeredPendingQuestion) return false
+  if (isBareAcknowledgement(m) || isLowSignalAcknowledgement(m) || asksForPractice(m)) return false
+  return /\?\s*$/.test(m) || detectLearnerQuestion(m) || readsAsRequestToTutor(m)
+}
+
 export function learnerMessageNeedsModelReply(
   message: string,
   opts: { answeredPendingQuestion: boolean },

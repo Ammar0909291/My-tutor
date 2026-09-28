@@ -201,6 +201,10 @@ export interface ConversationState {
    *  phases — the exact loop the concept budget exists to bound. Reset on a
    *  concept change by readConversationState, like every other counter here. */
   turnsOnConcept: number
+  /** Every non-degraded turn on this concept, INCLUDING learner-initiated ones
+   *  (questions / requests), which `turnsOnConcept` no longer counts. Only the
+   *  absolute termination ceiling reads it (conceptBudget.ABSOLUTE_TURN_CEILING). */
+  turnsTotalOnConcept?: number
   /** Set once, by advanceConversationState, when the learner reaches the base
    *  turn budget while demonstrably converting (conceptBudget:
    *  qualifiesForBudgetExtension). Buys turns only — never mastery. Persisted
@@ -532,6 +536,16 @@ export interface TurnEvidence {
    *  and `taughtThisSession` must not record that it did. Sourced from
    *  degradedMode.isDegradedProvider(), the single owner of the question. */
   degradedTurn?: boolean
+  /** The LEARNER drove this turn: they asked a question or made a request to
+   *  the tutor (not answering the pending quiz, not asking for practice). Such a
+   *  turn is the learner engaging, not the tutor spending a teaching attempt, so
+   *  it does not consume the concept's teaching budget (`turnsOnConcept`); it
+   *  still counts toward the absolute ceiling. Measured 2026-09-28 (physics
+   *  unit-1 certification, phys.mech.normal-force): a learner who asked "why
+   *  does that matter?", asked for a diagram and asked one off-topic question
+   *  was closed as "on pause — not mastered" on turn 12 after answering
+   *  correctly twice and missing once. */
+  learnerInitiated?: boolean
   /** Did this turn actually DELIVER teaching — the server's decided move was
    *  'teach' or 'show'? A tutor normally explains and then ends on a question,
    *  and treating "asked something" as "taught nothing" froze the ladder at
@@ -680,7 +694,10 @@ export function advanceConversationState(
   // regardless of which phase it happened in or how it went. A degraded turn
   // taught nothing, so it must not consume budget either (same reasoning as
   // the P4 stage guard).
-  if (!evidence.degradedTurn) next.turnsOnConcept = (prev.turnsOnConcept ?? 0) + 1
+  if (!evidence.degradedTurn) {
+    next.turnsTotalOnConcept = (prev.turnsTotalOnConcept ?? prev.turnsOnConcept ?? 0) + 1
+    if (!evidence.learnerInitiated) next.turnsOnConcept = (prev.turnsOnConcept ?? 0) + 1
+  }
 
   // Stance Enforcement (Claude Recommendation #6): monotonic within the
   // concept's lifetime, same reset-on-concept-change rule as every other
