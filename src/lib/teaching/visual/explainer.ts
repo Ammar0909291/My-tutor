@@ -326,6 +326,26 @@ function asSentence(text: string): string {
 }
 
 /**
+ * The panel's length budget, spent in whole lines. It used to be a bare
+ * `slice(0, 600)`, which cut six deterministic figures mid-sentence (DNA
+ * replication, meiosis, viscosity, levels of organisation, evidence for
+ * evolution, surface tension). A line that would overrun is dropped whole;
+ * 1000 fits every deterministic figure's narration today (longest 925 chars,
+ * bio.mol.dna-replication).
+ */
+const PANEL_CHARS = 1000
+function fitWholeLines(text: string, max = PANEL_CHARS): string {
+  if (text.length <= max) return text
+  let out = ''
+  for (const line of text.split('\n')) {
+    const next = out ? `${out}\n${line}` : line
+    if (next.length > max) break
+    out = next
+  }
+  return out || text.slice(0, max)
+}
+
+/**
  * The explanation rail.
  *
  * "What's happening?" is the scene's own narration — the sentences its author
@@ -347,7 +367,7 @@ function derivePanels(spec: SceneSpec, narrations: string[]): ExplainerPanel[] {
   // is added only where the author left none, and nothing else is changed.
   const happening = prose.map(asSentence).join('\n').trim() || spec.teachingGoal?.trim() || ''
   if (happening) {
-    panels.push({ heading: "What's happening?", body: happening.slice(0, 600) })
+    panels.push({ heading: "What's happening?", body: fitWholeLines(happening) })
   }
 
   if (formulas.length) {

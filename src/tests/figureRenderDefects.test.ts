@@ -234,7 +234,8 @@ describe("the What's happening? panel", () => {
       const text = body(s)
       if (!text) continue
       for (const line of text.split('\n')) {
-        if (!/[.!?…:;]["'”’)\]]*$/.test(line) && text.length < 600) offenders.push(`${key}: "${line}"`)
+        // No length exemption: the panel is cut at whole lines, never mid-sentence.
+        if (!/[.!?…:;]["'”’)\]]*$/.test(line)) offenders.push(`${key}: "${line}"`)
       }
     }
     expect(offenders).toEqual([])
