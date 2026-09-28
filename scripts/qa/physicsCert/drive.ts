@@ -10,7 +10,7 @@
  * Egress: the harness reads only API replies. Use --egress-note to remind yourself to take the
  * pg_stat_statements snapshot before/after (done from the session, not from here).
  *
- * Run: OUT_DIR=<scratch> npx tsx scripts/qa/physicsCert/drive.ts [--runs 2] [--concurrency 3] [--only id,id]
+ * Run: OUT_DIR=<scratch> npx tsx scripts/qa/physicsCert/drive.ts [--unit N] [--runs 2] [--concurrency 3] [--only id,id]
  */
 import { mkdirSync, readFileSync, writeFileSync, existsSync } from 'node:fs'
 import { join } from 'node:path'
@@ -18,9 +18,9 @@ import { createHash } from 'node:crypto'
 import { createQaAccount, deleteQaAccount, BASE, type QaAccount } from '../liveAccount'
 import { createSession, openLesson, say, carriesFigure, type TurnPayload } from '../liveSession'
 import { canonicalContent, pickAnswer, proseOptions } from '../biologyAnswerPicker'
-import { UNIT1_FILE } from './buildScript'
+import { unitFile } from './buildScript'
 
-interface Concept { conceptId: string; lessonTitleHint: string; misconception: string; correctTyped: string; wrongTyped: string; offTopic: string }
+interface Concept { conceptId: string; lessonTitleHint: string; misconception: string; correctTyped: string; wrongTyped: string; offTopic: string; level?: string }
 interface Lesson { topicSlug: string; lessonTitle: string; order: number; unitTitle: string }
 
 export type SlotKind = 'fixed' | 'misconception' | 'right' | 'wrong' | 'offTopic'
@@ -56,12 +56,16 @@ function resolve(slot: typeof SLOTS[number], c: Concept, prev: TurnPayload | nul
     // was the right answer and the tutor rightly confirmed it — a false flag).
     const norm = (x: string) => x.toLowerCase().replace(/\s+/g, ' ').trim()
     const authoredCorrect = new Set(content.probes.flatMap((p) => (p.choices ?? []).filter((ch) => ch.isCorrect).map((ch) => norm(ch.text))))
-    const idx = slot.kind === 'right' ? pick.index
-      : (() => {
-        const safe = opts.o.findIndex((o, i) => i !== pick.index && !authoredCorrect.has(norm(o)))
-        return safe >= 0 ? safe : opts.o.findIndex((_, i) => i !== pick.index)
-      })()
-    return { message: opts.o[Math.max(0, idx)], rule: opts.rule }
+    const authoredWrong = new Set(content.probes.flatMap((p) => (p.choices ?? []).filter((ch) => !ch.isCorrect).map((ch) => norm(ch.text))))
+    if (slot.kind === 'right') return { message: opts.o[Math.max(0, pick.index)], rule: opts.rule }
+    // Prefer an option the corpus marks WRONG. On a model-written question
+    // nothing is authored, so the pick is unverified and tagged '<rule>?' —
+    // pass 2's one HIGH was exactly that: the "wrong" pick was correct.
+    const verified = opts.o.findIndex((o) => authoredWrong.has(norm(o)))
+    if (verified >= 0) return { message: opts.o[verified], rule: opts.rule }
+    const safe = opts.o.findIndex((o, i) => i !== pick.index && !authoredCorrect.has(norm(o)))
+    const idx = safe >= 0 ? safe : opts.o.findIndex((_, i) => i !== pick.index)
+    return { message: opts.o[Math.max(0, idx)], rule: `${opts.rule}?` }
   }
   if ((prev?.text ?? '').includes('?')) return { message: slot.kind === 'right' ? c.correctTyped : c.wrongTyped, rule: 'c' }
   return { message: 'continue', rule: 'd' }
@@ -73,10 +77,10 @@ function diagnostics(p: TurnPayload): Record<string, unknown> {
   return Object.fromEntries(Object.entries(p).filter(([k, v]) => !skip.has(k) && (typeof v !== 'string' || v.length < 400)))
 }
 
-async function onboard(cookie: string) {
+async function onboard(cookie: string, level: string) {
   const r = await fetch(`${BASE}/api/onboarding`, {
     method: 'POST', headers: { 'Content-Type': 'application/json', cookie },
-    body: JSON.stringify({ subjectSlug: 'physics', currentLevel: 'beginner', voiceChoice: 'male', teachingLanguage: 'en', selfDescription: 'I am a student and want to understand each topic properly.' }),
+    body: JSON.stringify({ subjectSlug: 'physics', currentLevel: level, voiceChoice: 'male', teachingLanguage: 'en', selfDescription: 'I am a student and want to understand each topic properly.' }),
   })
   if (!r.ok) throw new Error(`onboarding ${r.status}`)
 }
@@ -86,7 +90,7 @@ async function driveLesson(c: Concept, run: number, outDir: string, sha: string)
   const turns: unknown[] = []
   try {
     acct = await createQaAccount(`p1-${c.conceptId.replace(/\./g, '-')}-r${run}`)
-    await onboard(acct.cookie)
+    await onboard(acct.cookie, c.level ?? 'beginner')
     const cur = await fetch(`${BASE}/api/curriculum?subject=physics`, { headers: { cookie: acct.cookie } })
     const lessons = ((await cur.json()) as { lessons?: Lesson[] }).lessons ?? []
     const l = lessons.find((x) => x.topicSlug === c.conceptId)
@@ -120,10 +124,11 @@ async function main() {
   const runs = Number(arg('--runs') ?? 2)
   const conc = Number(arg('--concurrency') ?? 3)
   const only = arg('--only')?.split(',')
-  const raw = readFileSync(UNIT1_FILE, 'utf8')
+  const unit = Number(arg('--unit') ?? 1)
+  const raw = readFileSync(unitFile(unit), 'utf8')
   const sha = createHash('sha256').update(raw).digest('hex')
   const concepts = (JSON.parse(raw).concepts as Concept[]).filter((c) => !only || only.includes(c.conceptId))
-  console.log(`unit1.json sha256 ${sha}; ${concepts.length} concepts x ${runs} runs, concurrency ${conc}`)
+  console.log(`unit${unit}.json sha256 ${sha}; ${concepts.length} concepts x ${runs} runs, concurrency ${conc}`)
   const jobs: Array<() => Promise<void>> = []
   for (let r = 1; r <= runs; r++) for (const c of concepts) {
     if (existsSync(join(outDir, `${c.conceptId}__run${r}.json`))) continue // resumable

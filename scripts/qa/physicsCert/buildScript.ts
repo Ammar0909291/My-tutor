@@ -10,7 +10,10 @@
  *   wrongTyped     -> the SAME probe's misconception-tagged wrong choice (verbatim)
  *   offTopic       -> the next Unit-1 concept's first seed probe stem (verbatim)
  *
- * Run: npx tsx scripts/qa/physicsCert/buildScript.ts   (writes unit1.json + prints sha256)
+ * Units 2-5 (2026-09-28) cover the other 215 concepts by domain, so every physics concept is in
+ * exactly one unit (see UNITS). Each carries the onboarding level a learner studying it would pick.
+ *
+ * Run: npx tsx scripts/qa/physicsCert/buildScript.ts [--unit N]   (writes unitN.json + prints sha256)
  */
 import { createHash } from 'node:crypto'
 import { readFileSync, writeFileSync } from 'node:fs'
@@ -21,12 +24,38 @@ import { canonicalContent } from '../biologyAnswerPicker'
 interface KgNode { id: string; name: string; difficulty: string }
 
 export const UNIT1_FILE = join(__dirname, 'unit1.json')
+export const unitFile = (n: number) => join(__dirname, `unit${n}.json`)
 
-export function unit1Concepts(): KgNode[] {
+const isUnit1 = (x: KgNode) => x.difficulty === 'foundational'
+  || (x.difficulty === 'developing' && /^phys\.(meas|mech)\./.test(x.id))
+const domainOf = (x: KgNode) => x.id.split('.')[1]
+/** Units 2-5: every concept not in unit 1, by domain. Together the five units cover the KG exactly. */
+const UNITS: Record<number, (x: KgNode) => boolean> = {
+  1: isUnit1,
+  2: (x) => !isUnit1(x) && ['meas', 'mech'].includes(domainOf(x)),
+  3: (x) => !isUnit1(x) && ['therm', 'wave', 'opt'].includes(domainOf(x)),
+  4: (x) => !isUnit1(x) && ['em', 'particle'].includes(domainOf(x)),
+  5: (x) => !isUnit1(x) && ['mod', 'qm', 'rel', 'stat', 'astro'].includes(domainOf(x)),
+}
+
+export function allPhysicsConcepts(): KgNode[] {
   const g = JSON.parse(readFileSync('docs/physics/kg/graph.json', 'utf8'))
-  const arr: KgNode[] = Array.isArray(g) ? g : (g.concepts ?? g.nodes ?? Object.values(g))
-  return arr.filter((x) => x.difficulty === 'foundational'
-    || (x.difficulty === 'developing' && /^phys\.(meas|mech)\./.test(x.id)))
+  return Array.isArray(g) ? g : (g.concepts ?? g.nodes ?? Object.values(g))
+}
+
+export function unitConcepts(n: number): KgNode[] {
+  const pick = UNITS[n]
+  if (!pick) throw new Error(`no unit ${n}`)
+  return allPhysicsConcepts().filter(pick)
+}
+
+export function unit1Concepts(): KgNode[] { return unitConcepts(1) }
+
+/** The onboarding level a learner studying this concept would pick (onboarding's own enum). */
+export function levelFor(difficulty: string): 'beginner' | 'intermediate' | 'advanced' {
+  if (difficulty === 'foundational' || difficulty === 'developing') return 'beginner'
+  if (difficulty === 'proficient') return 'intermediate'
+  return 'advanced'
 }
 
 const unquote = (s: string) => s.trim().replace(/^[“"']+|[”"']+$/g, '').trim()
@@ -61,7 +90,9 @@ function usablePhrase(p: string | undefined | null): p is string {
 }
 
 function main() {
-  const concepts = unit1Concepts()
+  const i = process.argv.indexOf('--unit')
+  const unit = i > 0 ? Number(process.argv[i + 1]) : 1
+  const concepts = unitConcepts(unit)
   const out: unknown[] = []
   const gaps: string[] = []
   concepts.forEach((c, i) => {
@@ -101,16 +132,17 @@ function main() {
 
     out.push({
       subject: 'physics', conceptId: c.id, lessonTitleHint: c.name,
+      ...(unit === 1 ? {} : { level: levelFor(c.difficulty) }),
       misconception, misconceptionSource,
       correctTyped: correct, wrongTyped: wrong,
       typedSource: probe ? `seed probe "${probe.stem.slice(0, 80)}" (isCorrect choice / misconception-tagged choice, verbatim)` : '',
       offTopic, offTopicSource: offProbe ? `seed probe of ${next.id} (stem, verbatim)` : '',
     })
   })
-  const doc = { version: 1, unit: 'physics-unit-1', createdAt: new Date().toISOString().slice(0, 10), concepts: out, gaps }
+  const doc = { version: 1, unit: `physics-unit-${unit}`, createdAt: new Date().toISOString().slice(0, 10), concepts: out, gaps }
   const json = JSON.stringify(doc, null, 2) + '\n'
-  writeFileSync(UNIT1_FILE, json)
-  console.log(`wrote ${UNIT1_FILE}: ${out.length} concepts, ${gaps.length} gaps`)
+  writeFileSync(unitFile(unit), json)
+  console.log(`wrote ${unitFile(unit)}: ${out.length} concepts, ${gaps.length} gaps`)
   for (const g of gaps) console.log('  GAP', g)
   console.log('sha256', createHash('sha256').update(json).digest('hex'))
 }

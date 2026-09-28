@@ -8,6 +8,8 @@
  *
  * HIGH   H-AFFIRM       slot 5 (stated misconception) answered with an opening confirmation and no correction
  *        H-UNCORRECTED  slot 9 (deliberate wrong answer) reply contains no correction
+ *                       (only when the pick is an authored wrong option; an unverified pick on a
+ *                       model-written question, rule '<x>?', is M-UNVERIFIED for a human to read)
  *        H-LEAK         authoring labels / machine tags in learner-facing text
  *        H-EMPTY        empty tutor reply
  *        H-PAUSE        the lesson closed "on pause / not mastered" inside the scripted turns
@@ -55,7 +57,7 @@ export function analyzeLesson(conceptId: string, run: number, turns: Turn[]): Fl
       const lead = flat(text).split(/(?<=[.!?])\s+/).slice(0, 2).join(' ')
       if (CONFIRMS_CORRECT.test(first(text)) && !CORRECTION.test(lead)) add('HIGH', 'H-AFFIRM', t)
     }
-    if (t.kind === 'wrong' && t.rule !== 'd' && !CORRECTION.test(flat(text))) add('HIGH', 'H-UNCORRECTED', t)
+    if (t.kind === 'wrong' && t.rule !== 'd' && !CORRECTION.test(flat(text))) add(t.rule?.endsWith('?') ? 'MEDIUM' : 'HIGH', t.rule?.endsWith('?') ? 'M-UNVERIFIED' : 'H-UNCORRECTED', t)
     if (!t.mcq && text && dropUndeliveredCheckAnnouncements(text) !== text) add('MEDIUM', 'M-PROMISE', t)
     if ((t.kind === 'right' || t.kind === 'wrong' || t.kind === 'misconception') && SELFGRADE.test(flat(text))) add('MEDIUM', 'M-SELFGRADE', t)
     const s = flat(text).trim().split(/(?<=[.!?—-])\s+/)
@@ -88,7 +90,7 @@ function main() {
   }
   const turnsTotal = files.length * 15
   const lines = [
-    `# Physics Unit 1 — automated report`, '',
+    `# Physics certification — automated report`, '',
     `Lessons: ${files.length} (${errors.length} errored). Turns: ~${turnsTotal}. HIGH flags: ${all.filter((x) => x.sev === 'HIGH').length}. MEDIUM flags: ${all.filter((x) => x.sev === 'MEDIUM').length}.`, '',
     '| concept | runs | HIGH | MEDIUM | mastery reached |', '|---|---|---|---|---|',
     ...[...perConcept].map(([k, v]) => `| ${k} | ${v.runs} | ${v.high} | ${v.medium} | ${v.mastery}/${v.runs} |`), '',
