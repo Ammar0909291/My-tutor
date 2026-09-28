@@ -306,3 +306,14 @@ and correct beliefs left alone.
 **Honest limit.** Word overlap cannot see order: a reversed-direction misconception worded like
 the correct rule (e.g. which way to divide by Avogadro's number) is not caught. Such a belief sits
 below the bar on purpose, because this rule forces a correction and silence is the safe side.
+
+## Follow-up — live re-checks of the A/B defects (2026-09-28)
+- mole-concept false credit: 0/3 after `dc5566c`.
+- Friction Third-Law routing: fixed (`5be436a`). A 1/3 model residual remains, from ungrounded
+  excursion turns.
+- Electric-charge off-topic grading: fixed (`8ee670f`).
+- mole-concept "question ignored": not reproducible.
+
+Details, evidence and the open items: `subject-onboarding-and-fix-campaign.md`, section "2026-09-28 —
+Chemistry/Physics live-QA defect pass". `scripts/qa/abStudent/runner.ts` can now re-drive a subset
+(`AB_CONCEPTS`/`AB_ARMS`/`AB_RUNS`).
