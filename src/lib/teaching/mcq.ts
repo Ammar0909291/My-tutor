@@ -1053,6 +1053,27 @@ export function resolveMcqChoice(message: string, mcq: TutorMCQ): number | null 
   return resolveMcqChoiceFolded(message, mcq)
 }
 
+/**
+ * A LETTER THAT NAMES A THING IN THE QUESTION IS NOT AN OPTION LABEL.
+ *
+ * Physics certification, 2026-09-28 (phys.mech.impulse): "Force A = 800 N for
+ * 0.002 s; Force B = 8 N for 0.2 s. Which delivers more impulse?" with options
+ * "Equal — …" | "A, because it is a much bigger force". The learner typed the
+ * misconception "I think force A — it is a much bigger force …", rule 1 read
+ * the "A" of "force A" as option A (index 0, the CORRECT answer) and the tutor
+ * said "That's right." When the question itself writes "<word> <LETTER>"
+ * ("Force A", "car B", "point C"), the same pair in the message names that
+ * thing, so the LETTER rules do not see it. Every text rule still reads the
+ * message as typed.
+ */
+function withoutEntityLetters(message: string, question: string | undefined): string {
+  if (!question) return message
+  const nouns = new Set<string>()
+  for (const m of question.matchAll(/\b([A-Za-z]{2,})\s+([A-D])\b/g)) nouns.add(m[1].toLowerCase())
+  if (nouns.size === 0) return message
+  return message.replace(/\b([A-Za-z]{2,})\s+([A-Da-d])\b/g, (whole, w: string) => (nouns.has(w.toLowerCase()) ? ' ' : whole))
+}
+
 function resolveMcqChoiceFolded(message: string, mcq: TutorMCQ): number | null {
   const n = norm(message)
 
@@ -1117,7 +1138,7 @@ function resolveMcqChoiceFolded(message: string, mcq: TutorMCQ): number | null {
   // The LETTER rules (0a, the precondition, 1) read the message with quantity
   // symbols removed — see `withoutVariableLetters`. Every other rule, and
   // every exact/containment match, still reads the message as typed.
-  const letterMessage = withoutVariableLetters(message)
+  const letterMessage = withoutEntityLetters(withoutVariableLetters(message), mcq.question)
   const letterTokens = norm(letterMessage).split(' ')
   const quantityOptions = mcq.options.length > 0 && mcq.options.every((o) => leadingValue(o) !== null)
   const limit = Math.min(mcq.options.length, OPTION_KEYS.length)

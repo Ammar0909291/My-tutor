@@ -55,3 +55,17 @@ describe('route wiring', () => {
     expect(route.slice(strip, strip + 1200)).toContain('conceptFallbackText')
   })
 })
+
+describe('answer-report frames (unit 2, phys.mech.moment-of-inertia)', () => {
+  it('"So you selected option A … Is that right?" is a confirm-back', () => {
+    const r = stripConfirmBack('So you selected option A, ½ M R², as the moment of inertia for a solid cylinder about its central axis. Is that right?')
+    expect(r).toEqual({ text: '', stripped: true })
+  })
+  it.each(['you chose', 'you picked', 'you answered', 'you went with'])('"%s …, right?" too', (f) => {
+    expect(stripConfirmBack(`So ${f} 20 m/s. Is that correct?`).stripped).toBe(true)
+  })
+  it('an authored stem ending "Is that right?" with no frame is untouched', () => {
+    const q = 'A student claims the net force is zero. Is that right?'
+    expect(stripConfirmBack(q)).toEqual({ text: q, stripped: false })
+  })
+})

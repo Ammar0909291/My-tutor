@@ -827,3 +827,11 @@ by `drive.ts`, to settle from evidence whether the already-served guard is being
      direct-request exemption kept the model's own second question, and the learner's quiz answer was
      then judged against it ("Correct — well done … but it doesn't address friction"). On a practice request
      with a quiz on screen the exemption no longer applies, and the turn hands off to the quiz.
+  5. phys.mech.impulse r1 s5, HIGH. "Force A = 800 N …; Force B = 8 N …" with options "Equal — …" |
+     "A, because it is a much bigger force". The misconception "I think force A — it is a much bigger
+     force …" was read by the letter rule as option A, the CORRECT answer, and the tutor said "That's
+     right." A "<word> <LETTER>" pair that the question uses as a name is now removed before the letter
+     rules run (`withoutEntityLetters`). Test: `entityLetterNotOption.test.ts`.
+  6. phys.mech.moment-of-inertia r1 s7, MEDIUM. "So you selected option A … Is that right?" survived
+     `stripConfirmBack`, which lacked answer-report frames. Added "you selected/chose/picked/answered/
+     went with/opted for". Tests added to `confirmBackStrip.test.ts`.
