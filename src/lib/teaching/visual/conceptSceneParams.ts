@@ -443,6 +443,53 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'chem.thermo.system': () => buildSystemBoundaryScene('closed'),
   'chem.thermo.first-law': () => buildChemFirstLawScene(100, -40),
 
+  // ══ CHEMISTRY EXPERT-TIER VISUAL GAP (2026-09-28) ════════════════════════
+  //
+  // Live QA (disposable accounts, production): 12 explicit diagram requests
+  // across these three concepts returned ZERO figures. Root cause, from the
+  // production cache and generation ledger: with no Tier 0/1 binding, each
+  // depended on Tier 3, and the generator answered `{type: "none"}`
+  // (`no-suitable-form`) — a deliberate decline, cached for 30 days by
+  // verdictCache.writeDecline, so later requests never even reached
+  // generation (pericyclic's decline was hit 90 times). The earlier generated
+  // candidates for pericyclic and biodegradable had already been rejected by
+  // the critic. A content gap, not a code bug: the same fix as the Biology
+  // visual campaign — existing generators, content taken strictly from each
+  // concept's Educational Brain entry (educational-brain/concepts/chemistry/).
+  'chem.org.pericyclic': () => buildCellComparisonScene({
+    conceptId: 'chem.org.pericyclic',
+    title: 'Three Families of Pericyclic Reactions',
+    teachingGoal: 'Every pericyclic reaction is concerted — electron pairs flow round one cyclic transition state with no intermediate; the Woodward–Hoffmann rules decide whether heat or light allows it.',
+    groups: [
+      { label: 'Cycloaddition', description: 'two separate π-systems form a ring through two new σ-bonds', items: ['[4+2] Diels–Alder: thermally allowed', '[2+2]: thermally forbidden, photochemically allowed'] },
+      { label: 'Electrocyclic', description: 'a conjugated polyene ring-closes or ring-opens as one σ-bond forms or breaks', items: ['4n electrons: conrotatory when heated', '4n+2 electrons: disrotatory when heated'] },
+      { label: 'Sigmatropic', description: 'a σ-bond migrates across a π-system', items: ['[1,5]H and [3,3] (Cope, Claisen): thermally allowed', '[1,3]H: thermally forbidden (suprafacial)'] },
+    ],
+  }),
+  'chem.dblock.organometallics': () => buildCellPathwayScene({
+    conceptId: 'chem.dblock.organometallics',
+    title: 'Wilkinson’s Catalyst: The Hydrogenation Cycle',
+    teachingGoal: 'The metal is a shuttle between oxidation states — Rh(I) → Rh(III) → Rh(I) — and is never consumed: the alkene enters, the alkane leaves, the 16-electron catalyst is regenerated.',
+    cyclic: true,
+    stages: [
+      { name: 'Rh(I) catalyst, 16 e⁻', description: 'Rh(PPh₃)₃Cl is coordinatively unsaturated — one empty site, ready for oxidative addition' },
+      { name: 'Oxidative addition of H₂', description: 'Rh(I) becomes Rh(III)(H)₂: the oxidation state rises by 2 and the count goes from 16 to 18 electrons' },
+      { name: 'Alkene coordination', description: 'the alkene displaces one PPh₃ (18 → 16 electrons) and binds (back to 18)' },
+      { name: 'Migratory insertion', description: 'one H migrates onto the coordinated alkene, giving a Rh–alkyl (16 electrons)' },
+      { name: 'Reductive elimination', description: 'the remaining H and the alkyl couple and leave as the alkane; Rh(I) is regenerated and PPh₃ rebinds (16 electrons)' },
+    ],
+  }),
+  'chem.poly.biodegradable': () => buildCellComparisonScene({
+    conceptId: 'chem.poly.biodegradable',
+    title: 'Polymer Behaviour Follows the Backbone, Not the Feedstock',
+    teachingGoal: 'Biodegradability is decided by backbone chemistry — hydrolysable linkages or none — not by whether the monomer came from plants; conductivity needs a conjugated π-system AND a doping step.',
+    groups: [
+      { label: 'Hydrolysable backbone', description: 'ester linkages that moisture and microbial enzymes can cleave — biodegradable', items: ['PLA (often plant-derived)'] },
+      { label: 'All-carbon backbone', description: 'no hydrolysable linkage — not biodegradable, whatever the feedstock', items: ['Bio-polyethylene (from bio-based ethanol)', 'Petroleum polyethylene (chemically identical)'] },
+      { label: 'Conducting polymers', description: 'need an extended conjugated π-system AND a doping step', items: ['Undoped: only a modest semiconductor', 'Doped polyacetylene, polypyrrole: mobile charge carriers'] },
+    ],
+  }),
+
   // ══ BIOLOGY CELL VISUAL REPLACEMENT (2026-09-24) ═════════════════════════
   //
   // Faithful, concept-specific replacements for the 18 bio.cell concepts
