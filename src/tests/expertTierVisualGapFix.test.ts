@@ -95,3 +95,31 @@ describe('the scenes say what the Educational Brain says', () => {
     expect(text(s)).toContain('a conjugated π-system AND a doping step')
   })
 })
+
+/**
+ * phys.astro.gravitational-waves (same fix, 2026-09-28). Live QA: 0 figures in
+ * 4 explicit requests. Production logs (`[visual-critic-retry]`): every retry
+ * candidate was a strain-vs-time GRAPH rejected before judging —
+ * "equation does not compile — the plot would be blank" — because the
+ * generator wrote `t`, π and 1e-21, none of which mathParser accepts.
+ */
+describe('phys.astro.gravitational-waves resolves to its own Tier 0 scene', () => {
+  const id = 'phys.astro.gravitational-waves'
+
+  it('is served on an explicit request, and while a stale reject is cached', async () => {
+    const d = resolveVisual({ message: 'can you give me a diagram?', lessonConceptId: id, learnerRequest: 'diagram' })
+    expect(d.graphical).toBe(true)
+    expect(d.provenance).toBe(`generator:${id}:concept-authored`)
+    const a = await resolveVisualForTurn(
+      { message: 'give me a diagram', lessonConceptId: id, learnerRequest: 'diagram' },
+      { cacheClient: declinedCache(id) },
+    )
+    expect(a.provenance).toBe(`generator:${id}:concept-authored`)
+  })
+
+  it('says what the Educational Brain says: no medium, strain h = ΔL/L, 1/r not 1/r²', () => {
+    const t = text(buildCanonicalScene(null, id)!)
+    for (const s of ['no medium is needed', 'h = ΔL/L', 'not 1/r² like a static field', 'GW150914'])
+      expect(t).toContain(s)
+  })
+})

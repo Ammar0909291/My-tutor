@@ -232,6 +232,26 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     orbitRadius: 4.2164e7,
   }),
 
+  // GRAVITATIONAL WAVES (2026-09-28). Live QA: 0 figures across repeated
+  // explicit requests. Root cause (production logs + generation ledger): the
+  // generator always chose a GRAPH of strain against time and wrote an equation
+  // the plotter cannot compile ("h(t) = 1e-21 * sin(2π * 150 * t)",
+  // "0.001*sin(2π*30*t)" — `t`, π and 1e-21 are all outside mathParser's
+  // x-only grammar), so the critic rejected every candidate as a blank plot
+  // before judging it. The source-to-detector sequence is real order, taken
+  // from the concept's Educational Brain entry.
+  'phys.astro.gravitational-waves': () => buildCellPathwayScene({
+    conceptId: 'phys.astro.gravitational-waves',
+    title: 'Gravitational Waves: From Source to Detector',
+    teachingGoal: 'Gravitational waves are oscillations in the geometry of spacetime itself — they need no medium — and LIGO detects them by measuring strain, h = ΔL/L, not by seeing the source.',
+    stages: [
+      { name: 'Accelerating masses', description: 'two black holes of about 30 solar masses each spiral together and merge (GW150914)' },
+      { name: 'Ripples in spacetime', description: 'the curvature of spacetime itself oscillates and travels outward at c — no medium is needed, and vacuum does not stop it' },
+      { name: 'Amplitude falls as 1/r', description: 'the strain weakens as 1/r, like radiation, not 1/r² like a static field; after 1.3 billion light-years it is about 10⁻²¹' },
+      { name: 'Interferometer measures strain', description: 'LIGO measures the differential change in its arm lengths: h = ΔL/L' },
+    ],
+  }),
+
   // ── M4 Physics visual authoring pilot ────────────────────────────────────
   // The seven concepts the visualization programme started from. Each had NO
   // figure — correctly, since the only figures ever offered for them were

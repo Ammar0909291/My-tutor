@@ -94,7 +94,7 @@ describe('Typed Turn Contract Batch 5 — figure cluster, real route', () => {
   it('(c) a concept with no visual at all never attaches one, on any turn', async () => {
     // chem.org.mechanisms: no Tier 0 scene and no registry binding. (This used
     // chem.org.pericyclic until that concept got a Tier 0 scene, 2026-09-28 —
-    // chemExpertVisualGapFix.test.ts.)
+    // expertTierVisualGapFix.test.ts.)
     const res = await driveTurns(h, POST, [
       { learnerSays: 'ok', modelReplies: 'A curly arrow shows where an electron pair moves.' },
       { learnerSays: 'ok', modelReplies: 'A mechanism lists each bond made and broken, in order.' },
