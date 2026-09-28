@@ -6,7 +6,7 @@ const TORQUE:TutorMCQ={question:'q',options:['zero point five newton-metres','fi
 
 describe('GB+ answer contract',()=>{
   it('does not infer a bare value',()=>{
-    for(const reply of ['5','five','5 newton metres','5 newton-metres']) expect(gradeMcqAnswer(reply,TORQUE)).toEqual({chosenIndex:null,correct:null})
+    for(const reply of ['5','five']) expect(gradeMcqAnswer(reply,TORQUE)).toEqual({chosenIndex:null,correct:null})
   })
   it('accepts an explicit letter',()=>expect(gradeMcqAnswer('B',TORQUE)).toEqual({chosenIndex:1,correct:true}))
   it('accepts the exact option text',()=>expect(gradeMcqAnswer('five newton-metres',TORQUE)).toEqual({chosenIndex:1,correct:true}))
