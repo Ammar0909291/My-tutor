@@ -1094,30 +1094,30 @@ export function resolveMcqChoice(message: string, mcq: TutorMCQ): number | null 
   // including its symbolic-option fallback.
   const foldedMessage = foldDigitGroups(raw)
   const foldedOptions = mcq.options.map(foldDigitGroups)
-  const normalizeExact = (value: string): string => norm(value).replace(/\\s+/g, ' ').trim()
+  const normalizeExact = (value: string): string => norm(value).replace(/\s+/g, ' ').trim()
   const exactHits = foldedOptions
     .map((option, i) => ({ i, hit: normalizeExact(option) === normalizeExact(foldedMessage) }))
     .filter((x) => x.hit)
   if (exactHits.length === 1) return exactHits[0].i
   if (exactHits.length > 1) {
-    const preserve = (value: string) => value.replace(/\\s+/g, ' ').trim()
+    const preserve = (value: string) => value.replace(/\s+/g, ' ').trim()
     const preserved = preserve(raw)
     const cased = mcq.options.map((option, i) => ({ i, hit: preserve(option) === preserved })).filter((x) => x.hit)
     if (cased.length === 1) return cased[0].i
     return null
   }
-  const rawFold = (value: string) => value.replace(/\\s+/g, ' ').trim().toLowerCase()
+  const rawFold = (value: string) => value.replace(/\s+/g, ' ').trim().toLowerCase()
   const rawHits = mcq.options.map((option, i) => ({ i, hit: rawFold(option) === rawFold(raw) })).filter((x) => x.hit)
   if (rawHits.length === 1) return rawHits[0].i
   if (rawHits.length > 1) {
-    const preserved = raw.replace(/\\s+/g, ' ').trim()
-    const cased = mcq.options.map((option, i) => ({ i, hit: option.replace(/\\s+/g, ' ').trim() === preserved })).filter((x) => x.hit)
+    const preserved = raw.replace(/\s+/g, ' ').trim()
+    const cased = mcq.options.map((option, i) => ({ i, hit: option.replace(/\s+/g, ' ').trim() === preserved })).filter((x) => x.hit)
     if (cased.length === 1) return cased[0].i
     return null
   }
 
   // Explicit label + exact option text.
-  const labelledExact = raw.match(/^\\s*[\\(\\[]?([A-Da-d])[\\)\\].,:;-]\\s*(.+)\\s*$/)
+  const labelledExact = raw.match(/^\s*[\(\[]?([A-Da-d])[\)\].,:;-]\s*(.+)\s*$/)
   if (labelledExact) {
     const labelIndex = OPTION_KEYS.indexOf(labelledExact[1].toLowerCase() as (typeof OPTION_KEYS)[number])
     if (labelIndex >= 0 && labelIndex < mcq.options.length &&
@@ -1128,12 +1128,12 @@ export function resolveMcqChoice(message: string, mcq: TutorMCQ): number | null 
   // semantically evaluated against option text.
   if (/[?]/.test(raw)) return null
   if (readsAsRequestToTutor(raw) || NON_COMMITTAL.test(raw)) return null
-  if (/\\b(?:confus(?:ed|ing)|lost|don'?t\\s+get|do\\s+not\\s+get|don'?t\\s+understand|do\\s+not\\s+understand)\\b/i.test(raw)) return null
+  if (/\b(?:confus(?:ed|ing)|lost|don'?t\s+get|do\s+not\s+get|don'?t\s+understand|do\s+not\s+understand)\b/i.test(raw)) return null
 
   const explicitPatterns = [
-    /^\\s*[\\(\\[]?([A-Da-d])[\\)\\].,:;-]?\\s*(.*)$/,
-    /^\\s*(?:option|answer|choice|letter)\\s+([A-Da-d])\\b\\s*(.*)$/i,
-    /^\\s*(?:i\\s+(?:think|guess|believe|choose|pick|select|say)|(?:the\\s+)?(?:my\\s+)?(?:answer|choice)\\s+is|it(?:'|’)?s|it\\s+is)\\s*[\\(\\[]?([A-Da-d])[\\)\\].,:;-]?\\s*(.*)$/i,
+    /^\s*[\(\[]?([A-Da-d])[\)\].,:;-]?\s*(.*)$/,
+    /^\s*(?:option|answer|choice|letter)\s+([A-Da-d])\b\s*(.*)$/i,
+    /^\s*(?:i\s+(?:think|guess|believe|choose|pick|select|say)|(?:the\s+)?(?:my\s+)?(?:answer|choice)\s+is|it(?:'|’)?s|it\s+is)\s*[\(\[]?([A-Da-d])[\)\].,:;-]?\s*(.*)$/i,
   ]
 
   let chosen: number | null = null
@@ -1154,8 +1154,8 @@ export function resolveMcqChoice(message: string, mcq: TutorMCQ): number | null 
 
   // Alternatives are ambiguous. Never choose for the learner.
   const tail = explanation.trim()
-  if (/^(?:or|and|vs\\.?|versus)\\s+[A-Da-d]\\b/i.test(tail)) return null
-  if (/^[A-Da-d]\\s*(?:\\/|\\|)\\s*[A-Da-d](?:\\s|$)/i.test(tail)) return null
+  if (/^(?:or|and|vs\.?|versus)\s+[A-Da-d]\b/i.test(tail)) return null
+  if (/^[A-Da-d]\s*(?:\/|\|)\s*[A-Da-d](?:\s|$)/i.test(tail)) return null
 
   return chosen
 }
