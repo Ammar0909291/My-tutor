@@ -10225,6 +10225,61 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         console.warn('[mirror] verdict repair skipped:', err)
       }
 
+      // ── THE CONFIRM-BACK, WHEREVER IT SITS (2026-09-28) ───────────────────
+      // After the verdict repair above (which needs the whole-turn mirror to
+      // replace it with the grade): any remaining "So you're saying … Is that
+      // right?" / "have I got that right?" / "Let me know if that's correct."
+      // is removed and the teaching around it kept. See stripConfirmBack.
+      try {
+        const { stripConfirmBack } = await import('@/lib/teaching/attributionGuard')
+        const cb = stripConfirmBack(cleanText)
+        if (cb.stripped) {
+          let next = cb.text
+          if (!next.trim()) {
+            if (mcqHoisted) {
+              next = 'Let me check your thinking with this.'
+            } else {
+              const { getKGNode } = await import('@/lib/curriculum/knowledgeGraph')
+              const node = resolvedConceptId ? getKGNode(resolvedConceptId) : null
+              const { conceptFallbackText } = await import('@/lib/teaching/conceptFallback')
+              next = node?.title && node.description ? conceptFallbackText(node.title, node.description) : "Good — let's keep going."
+            }
+          }
+          console.log('[confirm-back] ' + JSON.stringify({ stripped: true, emptied: !cb.text.trim(), charsBefore: cleanText.length, charsAfter: next.length }))
+          cleanText = next
+        }
+      } catch { /* non-fatal — a repair must never break a turn */ }
+
+      // ── A PARAGRAPH THE LEARNER HAS ALREADY READ IS NOT SENT AGAIN ────────
+      // (2026-09-28, the C7 repeat channel.) The model recites a long authored
+      // paragraph served earlier in the session even with the already-served
+      // guard firing and nothing retrieved into the prompt. Checked against the
+      // UNCOMPACTED stored tutor messages. See dropRepeatedParagraphs.
+      if (!serveLessonComplete) {
+        try {
+          const { dropRepeatedParagraphs } = await import('@/lib/teaching/historyCompaction')
+          const priorTutor = historyScope.messages
+            .filter((m) => m.role !== MessageRole.USER)
+            .map((m) => m.content)
+          const rep = dropRepeatedParagraphs(cleanText, priorTutor)
+          if (rep.dropped > 0) {
+            let next = rep.text
+            if (!next.trim()) {
+              if (mcqHoisted) {
+                next = 'Let me check your thinking with this.'
+              } else {
+                const { getKGNode } = await import('@/lib/curriculum/knowledgeGraph')
+                const node = resolvedConceptId ? getKGNode(resolvedConceptId) : null
+                const { conceptFallbackText } = await import('@/lib/teaching/conceptFallback')
+                next = node?.title && node.description ? conceptFallbackText(node.title, node.description) : "Good — let's keep going."
+              }
+            }
+            console.log('[repeat-guard] ' + JSON.stringify({ dropped: rep.dropped, emptied: !rep.text.trim(), charsBefore: cleanText.length, charsAfter: next.length }))
+            cleanText = next
+          }
+        } catch { /* non-fatal — a repair must never break a turn */ }
+      }
+
       // THE SAME QUESTION, ON SCREEN, TWICE.
       //
       // When the model writes its question inline as prose AND emits the
