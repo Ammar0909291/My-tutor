@@ -142,9 +142,21 @@ describe('P-9: rule 0a is unchanged for everything that is not a verbatim option
 
   it('an option that normalises like another still selects neither', () => {
     const twins: TutorMCQ = {
-      question: 'Which one?', options: ['Same text', 'same   TEXT'], correctIndex: 0,
+      question: 'Which one?', options: ['Same text', 'Same   text'], correctIndex: 0,
     }
     expect(resolveMcqChoice('Same text', twins)).toBeNull()
+  })
+
+  it('options that differ only by case are told apart by case (and only then)', () => {
+    // caseOnlyOptionsProbe.test.ts: the capitalisation probe's taps were all
+    // refused as ambiguous. A verbatim tap now selects its own option; an answer
+    // matching none of them by case is still refused.
+    const cased: TutorMCQ = {
+      question: 'Which one?', options: ['Same text', 'same   TEXT'], correctIndex: 0,
+    }
+    expect(resolveMcqChoice('Same text', cased)).toBe(0)
+    expect(resolveMcqChoice('same TEXT', cased)).toBe(1)
+    expect(resolveMcqChoice('SAME TEXT', cased)).toBeNull()
   })
 })
 

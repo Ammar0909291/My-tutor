@@ -1085,7 +1085,20 @@ function resolveMcqChoiceFolded(message: string, mcq: TutorMCQ): number | null {
     const v = fold(message)
     if (!v) return null
     const hits = mcq.options.map((o, i) => ({ i, hit: fold(o) === v })).filter((x) => x.hit)
-    return hits.length === 1 ? hits[0].i : null
+    if (hits.length === 1) return hits[0].i
+    // CASE IS THE ANSWER when the options differ only by case (2026-09-28:
+    // "Homo sapiens" / "homo sapiens" / "Homo Sapiens" / "HOMO SAPIENS").
+    // Every tap matched all four with case folded, so the right answer was
+    // refused as ambiguous. Strictly narrowing, like the fallback itself: it
+    // runs only where the answer was already about to be refused, and returns
+    // an index only when exactly one option matches with case kept.
+    if (hits.length > 1) {
+      const keepCase = (t: string) => t.replace(/\s+/g, ' ').trim()
+      const typed = keepCase(message)
+      const cased = hits.filter((x) => keepCase(mcq.options[x.i]) === typed)
+      if (cased.length === 1) return cased[0].i
+    }
+    return null
   }
 
   // An option made ENTIRELY of characters norm() strips (Greek, arrows, maths

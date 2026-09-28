@@ -117,7 +117,19 @@ export interface ConvertibleProbe {
   assetId?: string
 }
 
-const norm = (s: string) => s.trim().toLowerCase().replace(/\s+/g, ' ')
+/**
+ * Two authored options are the same option when they match with whitespace
+ * folded. CASE IS KEPT: it used to be folded too, which refused the one
+ * authored probe whose options differ ONLY by case — the capitalisation
+ * question "Which of the following correctly writes a scientific name?"
+ * (Homo sapiens / homo sapiens / Homo Sapiens / HOMO SAPIENS,
+ * bio.found.binomial-nomenclature). MEASURED live (2026-09-28): never served,
+ * so the concept's third authored probe was unreachable and the lesson could
+ * not reach verified mastery; the PRACTICE turns that should have asked it
+ * were spent on content-free fallback text instead. The grader tells such
+ * options apart the same way (mcq.ts `verbatimOption`).
+ */
+const norm = (s: string) => s.trim().replace(/\s+/g, ' ')
 
 /**
  * Authored probe → the turn's MCQ, or null when the probe cannot be served as
@@ -133,9 +145,10 @@ const norm = (s: string) => s.trim().toLowerCase().replace(/\s+/g, ' ')
  *   · Exactly one correct choice. Zero means the authored key is missing and
  *     every answer would grade wrong; more than one means the item is
  *     unanswerable and the learner would be marked wrong for a right answer.
- *   · No empty option text, and no two options that normalise identically —
+ *   · No empty option text, and no two options that are the same text —
  *     `parseMcqTag`'s dedup rule, for the same reason (assessment/03:
- *     distractors must be discriminable).
+ *     distractors must be discriminable), except that letter case counts as
+ *     a difference here: an author may ask about case itself (see `norm`).
  *
  * `correctValue` is deliberately NOT consulted. In the authored corpus it holds
  * a short form ("kelvin") while the choice reads "kelvin (K)", so matching on it
