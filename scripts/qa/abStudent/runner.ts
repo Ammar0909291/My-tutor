@@ -46,7 +46,21 @@ const SCRIPT_PATH = join(__dirname, 'script.json')
 const ARMS = ['A', 'B'] as const
 type Arm = typeof ARMS[number]
 const ARM_PROVIDER: Record<Arm, 'groq' | 'gemini'> = { A: 'groq', B: 'gemini' }
-const RUNS = [1, 2] as const
+// AB_RUNS may also ask for MORE repeats than the frozen two (e.g. 1,2,3) when a
+// single-occurrence defect needs its reproducibility checked.
+const RUNS: number[] = process.env.AB_RUNS ? process.env.AB_RUNS.split(',').map(Number).filter((n) => n > 0) : [1, 2]
+
+/**
+ * Optional subset for a targeted re-check, e.g. a defect's own concept and arm:
+ *   AB_CONCEPTS=chem.found.mole-concept,phys.mech.friction AB_ARMS=A AB_RUNS=1,2
+ * Unset = the full frozen matrix, exactly as before.
+ */
+const only = (v: string | undefined) => (v ? new Set(v.split(',').map((x) => x.trim()).filter(Boolean)) : null)
+const ONLY_CONCEPTS = only(process.env.AB_CONCEPTS)
+const ONLY_ARMS = only(process.env.AB_ARMS)
+const ONLY_RUNS = only(process.env.AB_RUNS)
+const inScope = (conceptId: string, arm: Arm, run: number) =>
+  (!ONLY_CONCEPTS || ONLY_CONCEPTS.has(conceptId)) && (!ONLY_ARMS || ONLY_ARMS.has(arm)) && (!ONLY_RUNS || ONLY_RUNS.has(String(run)))
 
 interface ScriptConcept {
   subject: QaSubject
@@ -165,6 +179,7 @@ async function phasePrepare(): Promise<void> {
     for (const run of RUNS) {
       for (const arm of ARMS) {
         const key = `${c.conceptId}|${arm}|${run}`
+        if (!inScope(c.conceptId, arm, run)) continue
         if (already.has(key)) { console.log(`skip (already prepared): ${key}`); continue }
         const label = `ab-${c.conceptId.replace(/\./g, '-')}-${arm}-${run}`
         const acct = await createQaAccountWithRetry(label)
@@ -289,6 +304,7 @@ async function phaseDrive(): Promise<void> {
   for (const concept of script.concepts) {
     for (const run of RUNS) {
       for (const arm of ARMS) {
+        if (!inScope(concept.conceptId, arm, run)) continue
         const acct = accounts.find((a) => a.conceptId === concept.conceptId && a.arm === arm && a.run === run)
         if (!acct) throw new Error(`no prepared account for ${concept.conceptId}/${arm}/run${run}`)
         console.log(`\n=== ${concept.conceptId} arm=${arm} (${ARM_PROVIDER[arm]}) run=${run} — ${acct.email} ===`)

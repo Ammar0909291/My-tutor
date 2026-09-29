@@ -917,3 +917,102 @@ by `drive.ts`, to settle from evidence whether the already-served guard is being
 - Behaviour change on a pinned guard: "A sir" / "a sir" are now an explicit letter A (grammar BARE + TRAIL).
 - Tests: new choiceOnlyGrading.test.ts (44, incl. route-level no-credit / SIGNAL-suppression /
   still-answerable) + fixture; 13 files had removed-inference assertions flipped, each marked BEFORE -> AFTER.
+- 2026-09-29, merged with a parallel GB+ draft pushed straight to `main` (595ea7a4..7d6aa426; owner chose
+  "Option 1"). That draft first failed CI: its regex literals were double-escaped (`\\s`, `\\/`), which gave
+  11 tsc errors. Once the escaping was fixed (7d6aa426), its first letter pattern made the separator
+  optional, so any first word starting with a/b/c/d was graded as that option ("Air resistance slows it"
+  -> A, "I think all of them…" -> A). Phase 1 replay: 66 non-answers graded, 14 credited CORRECT,
+  57 answers graded as the wrong option. The merge keeps this GB+ resolver (0 / 0 / 0 on the same replay)
+  plus the 8ee670f8 `isLongQuestion` guard. It keeps the draft's tests; 8 assertions were re-aligned to the
+  approved spec, each marked BEFORE -> AFTER: exact option text and "0.5 m/s2" (a tap / normalised exact
+  text) are graded; "B … C and A …" is ambiguous (c3); "ok i think A. but sir …" is graded A (LABELLED).
+  Ordinals and paraphrases in offTopicQuestionNotGraded.test.ts are now ungraded. Lead-ins "my choice is",
+  "the choice is" and "choice is" were added.
+## 2026-09-28 — Chemistry/Physics live-QA defect pass (visual delivery, off-topic grading, Third-Law routing)
+
+Owner request: fix the Chemistry and Physics defects found in this session's live QA, then re-run the
+same live check (disposable `qa-*@mytutor-qa.invalid` accounts, exact concept, exact phrasing) against
+production. Commits: `d1eb649` (item 1), `6bcb274` `4d89b3a` `52de4f6` `5be436a` `8ee670f` `f714b69`
+`12039fb`, merged as `a05a3ba` and deployed (`dpl_CX5kLJPhskwPFvq7aU8eAHXqSGUf`, live 16:23:47Z).
+Every account used was deleted afterwards (DB-checked: 0 `qa-ab-*`/`qa-repro-*`, 0 qa accounts with
+`modelOverrideAllowed`).
+
+1. **Chemistry visual delivery — FIXED, verified live.** `chem.org.pericyclic`,
+   `chem.dblock.organometallics` and `chem.poly.biodegradable` had no Tier 0/1 binding, and Tier 3 was
+   declining or critic-rejecting. They now have Tier 0 scenes built from the existing
+   `buildCellComparisonScene`/`buildCellPathwayScene`, with content taken from each concept's EB entry.
+   The scene is served even while a Tier 3 decline is cached. Live: 12/12 diagram requests served the
+   concept's own figure.
+2. **`phys.astro.gravitational-waves`, 0/4 figures — FIXED, verified live (4/4).**
+   - **Root cause**, from production logs and the `visual_generation_outcome` ledger: the generator
+     always chose a strain-vs-TIME graph. Its equation (`h(t) = 1e-21 * sin(2π * 150 * t)`) is outside
+     mathParser's x-only grammar, so every candidate rendered blank, and the critic rejected it before
+     judging (`[visual-critic-retry]`, `judged:false`). perturbation-theory and dark-matter pick process
+     flows, which can pass.
+   - **Fix:** a Tier 0 source-to-detector pathway scene.
+   - **The garbled `|` block** was the model's own unfenced ASCII interferometer. No guard pass
+     recognised vertical strokes, and Pass 5 removed only the horizontal arm, leaving an orphan "Mirror"
+     label. New Pass 4b in `asciiDiagramGuard.ts` removes a paragraph made only of drawing-shaped lines
+     that contains a stroke-only line, together with its "Picture it like this:" lead-in.
+   - **NEW, root-caused, NOT fixed** (found while verifying): diagram requests 2 and 3 got only a
+     one-line summary, and turn 3 repeated it.
+     - Chain: any help request (diagram included) sets `studentIntent=requesting_help`, and
+       `classifyConversation` turns that into `REPHRASE_REQUEST`, a remediation turn held on GW's
+       curated card (`constrained-source`).
+     - The model's figure-anchored reply was rejected by the remediation floor as `question-only` twice,
+       so it fell back to the one-line KG sentence.
+     - Next turn, the repeat-guard emptied the held-card substitute and the same sentence was served
+       again.
+     - The chemistry concepts have no held card, and their figure walkthroughs passed (222–1966
+       characters).
+     - **Not fixed:** it lives in the remediation-floor / fallback-repeat code the concurrent physics
+       session changed today (`26b9a94`). **Proposed fix:** a diagram request whose figure is delivered
+       this turn is not a REPHRASE remediation turn (or the floor accepts a figure walkthrough); and the
+       fallback-repeat guard should also compare against a CONTAINED repeat, not only an equal one.
+3. **Tier 3 "fails twice then succeeds" (`phys.qm.perturbation-theory`) — ROOT-CAUSED, prompt fixed.**
+   - Not variance. All 64 `structurally-invalid` process flows in the ledger had a step title over the
+     60-character cap: the formula was packed into the title. The prompt stated the cap but never
+     offered the schema's optional `note` field (<= 140 characters, rendered).
+   - Graphs: only 124 of 378 distinct generated equations compile, because the prompt never named the
+     parser's grammar.
+   - The prompt now names both (`figurePromptMatchesParser.test.ts` pins that what it recommends
+     compiles).
+   - Retries were deliberately not added.
+   - After deploy (organic traffic, small sample): 3/3 new graph equations compile (one is literally
+     the recommended `sin(6.2832*x)`), 2/2 process flows are valid, and 1 uses notes (0 of 336 did
+     before).
+4. **Groq correctness.**
+   - (a) mole-concept "That's right" to "the mole is a mass" — **FIXED earlier (`dc5566c`)**. Re-check
+     on the deployed code, Groq forced: 0/3 false credit. Observation: in 1/3 runs the reply was only
+     "I couldn't tell which option your answer matched" with nothing addressing the stated
+     misconception.
+   - (b) friction off-topic "What is the Third-Law reaction to that force?" — **app defect FIXED; a
+     model residual remains.**
+     - Root cause: "Third Law" was indexed as an unambiguous title component of `chem.thermo.third-law`
+       although it reads inside two other titles, so the question resolved to `phys.therm.third-law`.
+     - `deriveTitleComponents` now treats a multi-word conjunct inside >= 2 other titles as ambiguous
+       (removes exactly "Second Law"/"Third Law"). New aliases keep "third law reaction/pair" on Newton
+       and each thermodynamics law in its own subject.
+     - Before, on the deployed code: 3/3 wrong (2 thermodynamics tangents, 2 normal-force answers).
+     - After: 0/3 tangents; the excursion opened to `phys.mech.newtons-third-law` in 3/3.
+     - **Model residual (1/3):** run 3 still named the normal force as the reaction, with the right
+       concept and figure. Root cause: a DIRECT_QUESTION excursion carries none of the target concept's
+       authored content. The target-keyed grounding and cards run only on CONFUSION/REPHRASE and
+       claim-challenge turns (`route.ts` ~5600/5780/5836), and `remediationGrounding` deliberately
+       excludes misconception registers.
+     - Grounding excursions with the target's authored explanation (which does carry the
+       MC-SAME-OBJECT-PAIR repair) is an EB content decision. It was left for the owner (G1/G2).
+5. **Single-occurrence artifacts.**
+   - (a) electric-charge "Not quite — the answer is: Two" — **systematic, FIXED, verified live.**
+     Re-check on the deployed code: 3/3 graded the off-topic friction question CORRECT against the
+     pending rubbing probe ("That's right.", PROBE_OUTCOME pass, probe spent). `resolveMcqChoice` now
+     declines a question of more than six words ending in "?", as `engagesPendingOptions` already did.
+     After: 0/3. The probe stayed pending and was graded at slot 12 (DB `evidence_events` timings
+     confirm no outcome at slot 10).
+   - (b) mole-concept off-topic question ignored — **CONFIRMED NOT REPRODUCIBLE** (3/3 answered the
+     limiting-reagent question correctly).
+   - (c) biodegradable wrong previous-answer reference — **CONFIRMED NOT REPRODUCIBLE** in two clean,
+     correctly-answered runs.
+- Test hygiene: the two widened-binding KG sweeps in `visualSemanticMoatPhysicsChemistry.test.ts` take
+  ~4s alone (on the previous HEAD too). They timed out at vitest's 5s default under full-suite load, so
+  they now get 30s like the repo's other sweeps; the ceilings are unchanged.

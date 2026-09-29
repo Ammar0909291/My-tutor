@@ -319,6 +319,48 @@ export function stripUnbackedAsciiDiagram(
     })
   }
 
+  // Pass 4b — an UNFENCED DRAWING built from vertical strokes and labels
+  // (production, 2026-09-28, phys.astro.gravitational-waves, no figure): an
+  // interferometer drawn as a label, a column of "|" and a labelled arm. No
+  // pass saw it — there is no fence, no "ASCII" lead-in, and Pass 5 only knows
+  // HORIZONTAL connector runs — so a live reply shipped "a garbled block of
+  // repeated | characters", and another kept only an orphan "Mirror" after
+  // Pass 5 took the arm line beneath it. So a whole paragraph goes when it
+  // contains a pure stroke line (no letter or digit: |, ^, /, \, arrows) and
+  // EVERY line in it is drawing-shaped: a stroke line, a connector line, or a
+  // short unpunctuated label. Prose, bullets, tables, rules and ellipses fail
+  // that test and are never touched. Runs before Pass 5 so the labels go with
+  // their drawing instead of being orphaned.
+  if (!figureOnScreen) {
+    const lines = result.split('\n')
+    const drop = new Set<number>()
+    let inFence = false
+    let para: number[] = []
+    let prev: number[] = []
+    const flush = () => {
+      if (para.length === 0) return
+      if (para.some((i) => isStrokeLine(lines[i])) && para.every((i) => isDrawingShapedLine(lines[i]))) {
+        para.forEach((i) => drop.add(i))
+        // Its one-line lead-in ("Picture it like this:") points at nothing once
+        // the drawing is gone — the same rule Pass 1 applies before a fence.
+        if (prev.length === 1 && /:\s*$/.test(lines[prev[0]]) && DIAGRAM_WORD_RE.test(lines[prev[0]])) drop.add(prev[0])
+      }
+      prev = para
+      para = []
+    }
+    lines.forEach((line, i) => {
+      if (/^\s*```/.test(line)) { flush(); inFence = !inFence; return }
+      if (inFence) return
+      if (line.trim() === '') { flush(); return }
+      para.push(i)
+    })
+    flush()
+    if (drop.size > 0) {
+      removedBlocks += 1
+      result = lines.filter((_, i) => !drop.has(i)).join('\n')
+    }
+  }
+
   // Pass 5 — a STANDALONE ART LINE outside any fence (production, 2026-09-24,
   // bio.mol.transcription, no figure attached):
   //
@@ -364,6 +406,28 @@ export function isStandaloneArtLine(line: string): boolean {
   if (!/[A-Za-z0-9]/.test(t)) return false
   const prose = t.replace(/\[[^\]]*\]/g, ' ').replace(/[^A-Za-z\s]/g, ' ').split(/\s+/).filter((w) => w.length > 1)
   return prose.length <= 2
+}
+
+/**
+ * A line that is only strokes: no letter or digit, at least one vertical or
+ * pointing stroke. Markdown rules, table separators and ellipses are not
+ * strokes — they carry no "|", "^", "/", "\" or arrow.
+ */
+export function isStrokeLine(line: string): boolean {
+  const t = line.trim()
+  if (t.length === 0 || /[\p{L}\p{N}]/u.test(t)) return false
+  if (/^\|?(\s*:?-{3,}:?\s*\|)+\s*(:?-{3,}:?\s*)?$/.test(t)) return false // table separator
+  return /[|^/\\↑↓←→↕⇅]/.test(t) && /^[\s|^/\\↑↓←→↕⇅<>+\-=_~.:*()[\]]*$/.test(t)
+}
+
+/** A line that belongs to a drawing: strokes, a connector with a few labels, or a bare label. */
+function isDrawingShapedLine(line: string): boolean {
+  const t = line.trim()
+  if (isStrokeLine(t) || isStandaloneArtLine(t) || isCaptionLine(t)) return true
+  // A connector run carrying a handful of labels ("Laser --> Beam splitter ------ Mirror").
+  if (!CONNECTOR_RUN_RE.test(t) || /^\|.*\|$/.test(t) || /[.!?;]$/.test(t)) return false
+  const words = t.replace(/[^\p{L}\s]/gu, ' ').split(/\s+/).filter((w) => w.length > 1)
+  return words.length <= 6
 }
 
 /** A short caption line with no sentence punctuation — a drawing's label, not prose. */

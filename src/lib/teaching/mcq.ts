@@ -929,7 +929,30 @@ export function foldDigitGroups(s: string): string {
   return s.replace(/\b\d{1,3}(?:[ ,\u00a0\u202f]\d{3})+(?!\d)/g, (m) => m.replace(/[ ,\u00a0\u202f]/g, ''))
 }
 
+/**
+ * A REAL QUESTION IS NOT AN ANSWER TO THE PENDING ONE.
+ *
+ * More than six words, ending in "?" — optionally followed by ONE parenthetical
+ * such as "(g = 10 m/s^2)". MEASURED (production, 2026-09-28, A/B test re-check,
+ * phys.em.electric-charge): with "rod and cloth, total charge?" on screen, the
+ * learner asked "A 4 kg box … What is the coefficient of static friction?
+ * (g = 10 m/s^2)" and it was GRADED — PROBE_OUTCOME pass, the reply "That's
+ * right.", the probe spent — because the vocabulary rules found enough shared
+ * words in the correct option. The original A/B run got the mirror image: the
+ * same question graded WRONG against "how many excess electrons?", so the reply
+ * opened "Not quite — the answer is: Two". engagesPendingOptions already said a
+ * long question is not an attempt; the grader did not, and the trailing
+ * parenthetical slipped past that rule too. A short "is it B?" still reaches
+ * for an option.
+ */
+export function isLongQuestion(message: string): boolean {
+  const t = typeof message === 'string' ? message.trim() : ''
+  return /\?\s*(\([^()]*\))?\s*$/.test(t) && t.split(/\s+/).length > 6
+}
+
 export function resolveMcqChoice(message: string, mcq: TutorMCQ): number | null {
+  // Tapped text is always graded, even when an option is itself phrased as a question.
+  if (isLongQuestion(message) && !mcq.options.some((o) => o.trim() === message.trim())) return null
   // A GROUPED NUMBER IS ONE NUMBER (live, phys.therm.calorimetry, 2026-09-24):
   // the option "84 000 J" was read as leading value 84, so a learner typing
   // the right answer "84000 J" was never graded. Both sides are folded once.
@@ -953,7 +976,7 @@ export function resolveMcqChoice(message: string, mcq: TutorMCQ): number | null 
  * the exact text of a DIFFERENT option. The explanation is never read to pick an
  * option — it can only cause a rejection.
  */
-const EXPLICIT_LEAD = /^(?:ok(?:ay)?|so|um+|hmm+|well|i think|i guess|i believe|i choose|i pick|i(?:'|\u2019)d say|i would say|i say|my answer(?: is)?|the answer is|answer is|answer|it(?:'|\u2019)s|it is|its|option|choice|letter|sir|ma(?:'|\u2019)?am|please)(?![a-z])[\s,:;-]*/i
+const EXPLICIT_LEAD = /^(?:ok(?:ay)?|so|um+|hmm+|well|i think|i guess|i believe|i choose|i pick|i(?:'|\u2019)d say|i would say|i say|my answer(?: is)?|my choice(?: is)?|the answer is|the choice is|choice is|answer is|answer|it(?:'|\u2019)s|it is|its|option|choice|letter|sir|ma(?:'|\u2019)?am|please)(?![a-z])[\s,:;-]*/i
 const EXPLICIT_CONNECTIVES = /^(because|since|as|so|cause|coz|bc)\b/i
 
 function resolveExplicitLetter(message: string, mcq: TutorMCQ, limit: number): number | null {
@@ -1324,7 +1347,7 @@ export function engagesPendingOptions(message: string, mcq: TutorMCQ | null): bo
   // … What is the tension T?" drew "I couldn't tell which option your answer
   // matched" and the question went unanswered. A short "is it B?" still
   // reaches for an option; a longer question ending in "?" does not.
-  if (/\?\s*$/.test(raw) && raw.trim().split(/\s+/).length > 6) return false
+  if (isLongQuestion(raw)) return false
   const limit = Math.min(mcq.options.length, OPTION_KEYS.length)
 
   // (a) An option letter as a standalone token. Same shape rule 0a reads, and
