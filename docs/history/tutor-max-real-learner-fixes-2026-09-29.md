@@ -101,3 +101,19 @@ prediction's answer, but only while that simulation is on screen. It removes not
 
 Only verbal claims are matched. The formula the lesson teaches, T = 2π√(L/g), is never removed.
 Tests use the two real production replies.
+
+## Batch 3 checked in production (deployment of 47ce04e0)
+
+The replay passed all four scenarios. Two more pendulum runs, same message:
+- One reply had no spoiler (formula only).
+- One reply had two spoilers the patterns missed:
+  - "it does **not** depend on how far you pull the bob back (the amplitude) or on the bob's mass" —
+    75 characters between "not" and "mass", past the 60-character window;
+  - "four times longer, the period grows by a factor of √4 = 2".
+
+Windows widened to 100 characters. The length pattern now also accepts "√4", "sqrt{4}" and
+"factor of 2". Both real sentences are now regression tests.
+
+Honest status: the prompt rule alone held in 2 of 4 production samples. The backstop is the real
+guarantee. Its patterns are authored per prediction, so a phrasing they do not cover can still get
+through.

@@ -90,6 +90,15 @@ describe('the give-away backstop', () => {
     expect(stripSimulationGiveaways(t, n, 'empty cart go more fast because less mass').removed).toEqual([])
   })
 
+  it('production run 3: the long negation and the √4 sentence are both caught', () => {
+    const t = 'When the pendulum swings only a small amount, each back-and-forth motion takes essentially the same time. For small angles the period depends only on the length of the string L and g; it does **not** depend on how far you pull the bob back (the amplitude) or on the bob’s mass. The word inextensible means that the string does not stretch.\n\nIf you press Run, the graph traces a smooth curve. Likewise, if you make the string four times longer, the period grows by a factor of \\(\\sqrt{4}=2\\), so the swing now takes about 4 seconds per cycle.'
+    const r = stripSimulationGiveaways(t, d, Q)
+    expect(r.removed).toHaveLength(2)
+    expect(r.text).not.toMatch(/mass|four times/)
+    expect(r.text).toContain('does not stretch')
+    expect(r.text).toContain('If you press Run')
+  })
+
   it('does nothing without a simulation on screen', () => {
     expect(stripSimulationGiveaways(PROD_A, decisionFor('phys.wave.shm'), Q).removed).toEqual([])
     expect(stripSimulationGiveaways(PROD_A, null, Q).removed).toEqual([])

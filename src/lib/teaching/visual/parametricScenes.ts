@@ -751,7 +751,7 @@ export const PARAMETRIC_SCENES: Readonly<Record<string, ParametricScene>> = {
           giveaway: {
             topic: /\b(?:mass|heav\w*|light\w*|weigh\w*)\b/i,
             answer: [
-              /\b(?:twice|double[ds]?|two times)\b(?:[^.!?\n]|\.\d){0,30}\bmass\b(?:[^.!?\n]|\.\d){0,60}\b(?:half|halves|halved)\b/i,
+              /\b(?:twice|double[ds]?|two times)\b(?:[^.!?\n]|\.\d){0,30}\bmass\b(?:[^.!?\n]|\.\d){0,100}\b(?:half|halves|halved)\b/i,
               /\binversely proportional to (?:the |its )?mass\b/i,
             ],
           },
@@ -769,7 +769,7 @@ export const PARAMETRIC_SCENES: Readonly<Record<string, ParametricScene>> = {
           giveaway: {
             topic: /\b(?:force|push\w*|pull\w*)\b/i,
             answer: [
-              /\b(?:twice|double[ds]?|two times)\b(?:[^.!?\n]|\.\d){0,30}\bforce\b(?:[^.!?\n]|\.\d){0,60}\b(?:twice|double[ds]?|two times)\b/i,
+              /\b(?:twice|double[ds]?|two times)\b(?:[^.!?\n]|\.\d){0,30}\bforce\b(?:[^.!?\n]|\.\d){0,100}\b(?:twice|double[ds]?|two times)\b/i,
               /\bdirectly proportional to (?:the )?(?:net )?force\b/i,
             ],
           },
@@ -819,7 +819,7 @@ export const PARAMETRIC_SCENES: Readonly<Record<string, ParametricScene>> = {
             topic: /\b(?:length|long\w*|short\w*|string)\b/i,
             answer: [
               /\bsquare root of (?:the )?(?:length|L)\b/i,
-              /\b(?:four|4)\s*(?:times|×)(?:[^.!?\n]|\.\d){0,50}\b(?:twice|double[ds]?|two times|2\s*(?:times|×))/i,
+              /\b(?:four|4)\s*(?:times|×)(?:[^.!?\n]|\.\d){0,100}(?:\btwice\b|\bdouble[ds]?\b|\btwo times\b|\b2\s*(?:times|×)|√\s*4|sqrt\{?4|factor of (?:2|two)\b)/i,
             ],
           },
         },
@@ -836,8 +836,8 @@ export const PARAMETRIC_SCENES: Readonly<Record<string, ParametricScene>> = {
           giveaway: {
             topic: /\b(?:mass|heav\w*|light\w*|weigh\w*)\b/i,
             answer: [
-              /\b(?:not|n't|never|nor|regardless of|independent of|no matter)\b(?:[^.!?\n]|\.\d){0,60}\b(?:mass|heav\w*|weigh\w*)\b/i,
-              /\b(?:mass|heav\w*|weigh\w*)\b(?:[^.!?\n]|\.\d){0,60}\b(?:does not|doesn't|do not|don't|has no|makes no|no effect|no difference|not affect|cancel\w*)/i,
+              /\b(?:not|n't|never|nor|regardless of|independent of|no matter)\b(?:[^.!?\n]|\.\d){0,100}\b(?:mass|heav\w*|weigh\w*)\b/i,
+              /\b(?:mass|heav\w*|weigh\w*)\b(?:[^.!?\n]|\.\d){0,100}\b(?:does not|doesn't|do not|don't|has no|makes no|no effect|no difference|not affect|cancel\w*)/i,
             ],
           },
         },
@@ -854,8 +854,8 @@ export const PARAMETRIC_SCENES: Readonly<Record<string, ParametricScene>> = {
           giveaway: {
             topic: /\b(?:angle|amplitude|wide\w*|far\w*|same time|every swing)\b/i,
             answer: [
-              /\b(?:not|n't|never|nor|regardless of|independent of|no matter)\b(?:[^.!?\n]|\.\d){0,60}\b(?:amplitude|angle|size of the swing|how (?:far|wide|big))\b/i,
-              /\b(?:amplitude|angle)\b(?:[^.!?\n]|\.\d){0,60}\b(?:does not|doesn't|has no|makes no|no effect|barely|hardly)\b/i,
+              /\b(?:not|n't|never|nor|regardless of|independent of|no matter)\b(?:[^.!?\n]|\.\d){0,100}\b(?:amplitude|angle|size of the swing|how (?:far|wide|big))\b/i,
+              /\b(?:amplitude|angle)\b(?:[^.!?\n]|\.\d){0,100}\b(?:does not|doesn't|has no|makes no|no effect|barely|hardly)\b/i,
             ],
           },
         },
