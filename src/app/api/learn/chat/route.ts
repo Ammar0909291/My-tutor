@@ -2603,6 +2603,17 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             if (g.correct !== null) mcqGradeHoisted = g
           }
         }
+        // The verdict the server just computed, told to the model so a wrong
+        // answer is EXPLAINED rather than paraphrased back (answerVerdictBlock.ts).
+        try {
+          const { buildAnswerVerdictBlock } = await import('@/lib/teaching/answerVerdictBlock')
+          const { probeKeyIsAuthored: verdictKeyIsAuthored } = await import('@/lib/teaching/mcq')
+          systemPrompt += buildAnswerVerdictBlock({
+            grade: mcqGradeHoisted,
+            mcq: pendingMcqHoisted,
+            keyIsAuthored: verdictKeyIsAuthored(pendingMcqHoisted),
+          })
+        } catch { /* a missing verdict block only loses the explanation, never the turn */ }
         // Read once, from the same helper the grading branch above uses, so the
         // readiness guard further down cannot disagree with it.
         {
@@ -2714,7 +2725,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         const { resolveRequestedConceptId } = await import('@/lib/teaching/concept/requestedConcept')
         const { parseExcursionState, decideExcursion, buildExcursionDirective } =
           await import('@/lib/teaching/excursion')
-        const requestedConceptIdThisTurn = resolveRequestedConceptId(learnerAuthoredMessage, excursionLessonConceptId, subjectCode)
+        // What the tutor just said is lesson vocabulary: a term it used ("focal
+        // length", "resultant") is asked about as the lesson's own term, not as a
+        // request to travel to a concept that shares a word with it (L1).
+        const { mostRecentAssistantText: recentTutorTextOf } = await import('@/lib/teaching/remediationOutputContract')
+        const requestedConceptIdThisTurn = resolveRequestedConceptId(
+          learnerAuthoredMessage, excursionLessonConceptId, subjectCode, undefined,
+          recentTutorTextOf(learnSession.messages, MessageRole.ASSISTANT),
+        )
         // PHASE 4 — IS THIS A REPORTED KNOWLEDGE GAP RATHER THAN DISTRESS?
         //
         // Nothing new is read. The resolver above already ran on this exact

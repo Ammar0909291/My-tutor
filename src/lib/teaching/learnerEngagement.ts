@@ -68,8 +68,24 @@ export function learnerMessageNeedsModelReply(
   if (isBareAcknowledgement(m) || isLowSignalAcknowledgement(m)) return false
   // "give me a practice question" / "quiz me": a stock lead-in plus an authored
   // quiz IS the reply it asks for (the same reading turnIntent.wantsPractice uses).
-  if (asksForPractice(m)) return false
+  // ONLY when that is all the message says. MEASURED (real-learner production
+  // run, 2026-09-29, phys.em.kirchhoffs-laws): "i see no arrow in picture. can
+  // you give me new question to practice?" matched asksForPractice, a stored
+  // paragraph was served, and the learner's report that the figure had no
+  // arrow was never answered. Any OTHER sentence with content still needs the
+  // model.
+  if (asksForPractice(m)) return otherSentenceHasContent(m)
   if (detectLearnerQuestion(m) || readsAsRequestToTutor(m)) return true
   // A claim, an explanation, a typed answer, a complaint — anything with content.
   return contentWordCount(m) >= MIN_CONTENT_WORDS
+}
+
+/** Does any sentence OTHER than the practice request carry content of its own? */
+function otherSentenceHasContent(message: string): boolean {
+  const sentences = message.split(/(?<=[.!?])\s+|\n+/).map((x) => x.trim()).filter(Boolean)
+  if (sentences.length < 2) return false
+  return sentences.some((sentence) =>
+    !asksForPractice(sentence)
+    && (detectLearnerQuestion(sentence) || readsAsRequestToTutor(sentence) || contentWordCount(sentence) >= MIN_CONTENT_WORDS - 1),
+  )
 }

@@ -320,6 +320,22 @@ export function buildSemanticsBlock(semantics: VisualSemantics): string {
       'and by the stages below, never by their shape alone.',
     )
   }
+  // ── WHAT IS NOT THERE ──────────────────────────────────────────────────────
+  // MEASURED (real-learner production run, 2026-09-29): with the drawn objects
+  // listed, the tutor still told the learner to look at "the rays that
+  // converge" on a lens figure with no rays, "the arrow" on a circuit with no
+  // current arrows, and "evenly spaced marks" on a projectile path with none.
+  // The list above never said it was COMPLETE, so the model filled the gaps
+  // with what such a figure usually has. It is complete; say so.
+  if (readable.length || geometry.length) {
+    parts.push(
+      'That list is COMPLETE: nothing else is drawn. If explaining needs something ' +
+      'that is not listed — a light ray, a current arrow, a force arrow, evenly ' +
+      'spaced marks, a moving object, a label — describe it in words as something ' +
+      'to IMAGINE ("imagine a ray of light…"), and never tell the learner to look ' +
+      'at it on the figure.',
+    )
+  }
   // The flat list stays, because it is what the contract's "name only these"
   // rule points at, and callers with no readable/geometry split still work.
   if (!readable.length && !geometry.length && elements.length) {
