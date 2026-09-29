@@ -53,6 +53,8 @@ import {
 } from '@/lib/teaching/visual/representation'
 import { budgetLabels, complexityFor, labelsHeldBack } from '@/lib/teaching/visual/visualComplexity'
 import { normalizeToCanonicalLevel } from '@/lib/curriculum/levels'
+import { useSimulation, type SimulationHost } from './useSimulation'
+import { SimulationControls } from './SimulationControls'
 
 const MODE_LABEL: Record<SceneMode, string> = {
   explain: 'Explain',
@@ -70,10 +72,16 @@ const MODE_HINT: Record<SceneMode, string> = {
 }
 
 export function ExplainerFigure({
-  spec, learnerLevel,
+  spec, learnerLevel, onSimulationUpdate,
 }: {
   spec: SceneSpec
   learnerLevel?: string | null
+  /**
+   * Dev-only inspection hook (ADR 16, G2): the dev simulation demo reads the
+   * control state, current frame and in-memory evidence through this. No
+   * production caller passes it, and it never sends anything anywhere.
+   */
+  onSimulationUpdate?: (host: SimulationHost) => void
 }) {
   const { theme } = useTheme()
 
@@ -98,6 +106,13 @@ export function ExplainerFigure({
   )
   const live = params ?? spec.parametric?.params ?? {}
 
+  // ── time-stepped simulation (ADR 16) ─────────────────────────────────────
+  // Inert for every kind that declares no `simulation` — which is every kind
+  // but the Newton proof of concept. When active, the figure shown is the
+  // simulation's frame at the current tick; tick 0 is the static figure.
+  const reducedMotion = usePrefersReducedMotion()
+  const simulation = useSimulation(spec.parametric?.kind, live, reducedMotion)
+
   /**
    * The figure being shown. A rebuild that fails — a value the generator's own
    * validator refuses — falls back to the scene as sent rather than drawing
@@ -109,16 +124,24 @@ export function ExplainerFigure({
   // degenerate one.
   const lastGood = useRef<SceneSpec>(spec)
   const shown = useMemo(() => {
+    if (simulation.active) {
+      if (simulation.frame) lastGood.current = simulation.frame
+      return simulation.frame ?? lastGood.current
+    }
     if (!spec.parametric || !params) return spec
     const rebuilt = rebuildScene(spec.parametric.kind, params)
     if (rebuilt) lastGood.current = rebuilt
     return rebuilt ?? lastGood.current
-  }, [spec, params])
+  }, [spec, params, simulation.active, simulation.frame])
 
   const explainerFull = useMemo(() => deriveExplainer(shown), [shown])
+  // A simulation brings its own predict → run → observe loop, and its readouts
+  // state every value — so the frame's challenge modes, which promise that
+  // values are hidden, are not offered over it (measured in the browser: "Test
+  // me" said "Every stated value is hidden" above live readouts).
   const modes = useMemo(
-    () => (policy.offerChallengeModes ? availableModes(shown) : ['explain' as const]),
-    [shown, policy.offerChallengeModes],
+    () => (policy.offerChallengeModes && !simulation.active ? availableModes(shown) : ['explain' as const]),
+    [shown, policy.offerChallengeModes, simulation.active],
   )
 
   const [mode, setMode] = useState<SceneMode>('explain')
@@ -130,8 +153,11 @@ export function ExplainerFigure({
   const [pinnedColor, setPinnedColor] = useState<string | null>(null)
 
   // ── animation ──────────────────────────────────────────────────────────────
-  const reducedMotion = usePrefersReducedMotion()
-  const animations = useMemo(() => availableAnimations(shown, variables), [shown, variables])
+  // A simulation owns the one clock: its figure is not also swept or traced.
+  const animations = useMemo(
+    () => (simulation.active ? [] : availableAnimations(shown, variables)),
+    [shown, variables, simulation.active],
+  )
   const [playing, setPlaying] = useState<SceneAnimation | null>(null)
   const [progress, setProgress] = useState(0)
 
@@ -221,9 +247,13 @@ export function ExplainerFigure({
     ? explainerFull.legend?.find((l) => l.color === pinnedColor)?.label ?? null
     : null
 
+  const simulationLocked = simulation.locked
   const setVar = useCallback((key: string, value: number | string) => {
+    if (simulationLocked) return // values are locked while a run is active (ADR 16, U4)
     setParams((prev) => ({ ...(prev ?? spec.parametric?.params ?? {}), [key]: value }))
-  }, [spec])
+  }, [spec, simulationLocked])
+
+  useEffect(() => { onSimulationUpdate?.(simulation) }, [onSimulationUpdate, simulation])
 
   // ── representation ─────────────────────────────────────────────────────────
   const [view, setView] = useState<RepresentationView>('spatial')
@@ -623,6 +653,10 @@ export function ExplainerFigure({
             </div>
           )}
 
+          {simulation.active && spec.parametric?.kind && !contrast && (
+            <SimulationControls host={simulation} kind={spec.parametric.kind} reducedMotion={reducedMotion} />
+          )}
+
           {playing && (
             <div className={styles.animationPanel}>
               <p className={styles.effect} style={{ margin: 0 }}>
@@ -751,6 +785,7 @@ export function ExplainerFigure({
                       value={live[v.key] ?? defaultValueOf(v)}
                       idPrefix={shown.id}
                       showEffect={policy.showEffects}
+                      disabled={simulationLocked}
                       onChange={setVar}
                     />
                   ))}
@@ -818,7 +853,7 @@ export function ExplainerFigure({
  * that survives a screen reader or `prefers-reduced-motion`.
  */
 function Control({
-  variable, value, idPrefix, showEffect, onChange,
+  variable, value, idPrefix, showEffect, disabled = false, onChange,
 }: {
   variable: SceneVariable
   value: number | string
@@ -830,6 +865,8 @@ function Control({
    * the control as its accessible description either way.
    */
   showEffect: boolean
+  /** Locked while a simulation run is active (ADR 16, U4). */
+  disabled?: boolean
   onChange: (key: string, value: number | string) => void
 }) {
   const id = `${idPrefix}-${variable.key}`
@@ -845,6 +882,7 @@ function Control({
               type="button"
               className={`${styles.chip}${value === opt.value ? ` ${styles.chipActive}` : ''}`}
               aria-pressed={value === opt.value}
+              disabled={disabled}
               onClick={() => onChange(variable.key, opt.value)}
             >
               {opt.label}
@@ -870,6 +908,7 @@ function Control({
         max={variable.max}
         step={variable.step}
         value={numeric}
+        disabled={disabled}
         aria-describedby={`${id}-effect`}
         onChange={(e) => onChange(variable.key, Number(e.target.value))}
       />

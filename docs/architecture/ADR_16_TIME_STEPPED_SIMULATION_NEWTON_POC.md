@@ -1,7 +1,7 @@
 # ADR 16 · Time-Stepped Simulation Layer — Newton's Second Law Proof of Concept
 
-**Status:** ACCEPTED (owner, 2026-09-29) for the Newton POC direction. **G1 implemented (pure
-layer only, not pushed).** G2–G4 remain gated; G5 needs its own future ADR. U1–U7 decided and U8
+**Status:** ACCEPTED (owner, 2026-09-29) for the Newton POC direction. **G1 and G2 implemented**
+(pure layer + dev-only browser integration; no concept bound). G3–G4 remain gated; G5 needs its own future ADR. U1–U7 decided and U8
 deferred to G3 (see §13).
 **Date:** 2026-09-29
 **Roadmap:** Educational Brain forward roadmap item 7, "Visualization & Simulation Architecture"
@@ -413,3 +413,20 @@ No database, migration or persisted state exists at any phase, so rollback never
 - **U7** Documentation: commit this ADR to `docs/architecture/`, and correct `PROJECT_STATE.md`
   item 7 ("not started"), which is stale because ADR 12 exists.
 - **U8** Flag mechanism at G3: a dedicated env var versus an existing visual configuration surface.
+
+## 15. G2 implementation record (2026-09-29, dev-only)
+
+- `useSimulation.ts` (client host: rAF clock feeding the pure reducer, visibilitychange → pause,
+  in-memory evidence recorded on transitions only) and `SimulationControls.tsx` (prediction,
+  Run/Pause/Step/Reset, reduced-motion time scrubber, readouts, runs table, interpretation).
+- `ExplainerFigure.tsx`: when the kind declares a simulation, it draws the simulation frame, hides
+  sweep/trace animations (one clock), offers only Explain mode (its challenge modes promise hidden
+  values that the readouts show), and locks the sliders while running. It is inert for every other
+  kind. It also gains an optional dev-only `onSimulationUpdate` prop.
+- Dev-only page `/dev/visual-demo/simulation` (`notFound()` in production, verified 404 against a
+  production build), linked from `/dev/visual-demo`.
+- `e2e/simulation-newton.spec.ts`: Playwright coverage of the full interaction, zero network
+  requests, no browser storage, and evidence held in memory only.
+- Defects found in the browser and fixed: the explanation and hint were hidden (hover-only class);
+  internal graph ids leaked into the legend; the runs table layout was broken; the host object was
+  unstable; and the challenge modes contradicted the readouts.

@@ -27,7 +27,8 @@
 
 import type { SceneParams, SimPrediction, SimReadout, SimRelation } from './parametricScenes'
 
-export type SimAction = 'set' | 'run' | 'pause' | 'step' | 'reset'
+/** `seek` is the reduced-motion time scrubber: moving through a run without playing it. */
+export type SimAction = 'set' | 'run' | 'pause' | 'step' | 'reset' | 'seek'
 
 export type SimEvent =
   | { kind: 'prediction'; id: string; at: number; predictionId: string; choice: number | null }

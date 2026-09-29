@@ -205,7 +205,7 @@ describe('frame 0 is the static figure', () => {
     expect(ids).toContain('force')
     expect(ids).toContain('acceleration')
     expect(ids).not.toContain('velocity')
-    expect(ids).not.toContain('vt-trace')
+    expect(ids).not.toContain('velocity-time-graph')
   })
 })
 

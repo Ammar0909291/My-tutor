@@ -198,13 +198,15 @@ export function buildNewtonScene(p: NewtonParams, tick = 0): SceneSpec {
   body.push({ ...label(`v = ${fmt(s.v, 1)} m/s`, [x, Y_VELOCITY + 0.5, 0], ROLE.result), id: 'velocity-label' })
   body.push({ ...label(`t = ${fmt(s.t, 2)} s`, [FLOOR_X0 + 1.5, TOP_Y, 0], ROLE.ink), id: 'time-label' })
 
-  // The v–t trace so far, and the current point on it.
+  // The v–t trace so far, and the current point on it. Object ids double as the
+  // legend's names when an object carries no caption, so they are written for
+  // the learner (measured in the browser: 'vt-now' surfaced as "Vt now").
   const trace: Vec3[] = []
   for (let k = 0; k <= s.tick; k += GRAPH_SAMPLE_TICKS) trace.push(graphPoint(k * NEWTON_FIXED_DT, s.a * k * NEWTON_FIXED_DT))
   if (trace.length >= MIN_TRACE_POINTS) {
-    body.push({ type: 'path', id: 'vt-trace', points: trace, color: ROLE.result })
+    body.push({ type: 'path', id: 'velocity-time-graph', points: trace, color: ROLE.result })
   }
-  body.push({ type: 'node', id: 'vt-now', position: graphPoint(s.t, s.v), color: ROLE.result, radius: 0.18 })
+  body.push({ type: 'node', id: 'current-velocity', position: graphPoint(s.t, s.v), color: ROLE.result, radius: 0.18 })
 
   return {
     id: `newton-second-law-${p.force}-${p.mass}-${s.tick}`,
