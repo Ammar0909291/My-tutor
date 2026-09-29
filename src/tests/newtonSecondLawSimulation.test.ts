@@ -310,7 +310,17 @@ describe("pilot polish — the frame says what is true of THIS tick", () => {
 describe('pilot polish — labels', () => {
   it('the v–t graph carries both axis names and its scale', () => {
     const texts = canonicalParametricScene(KIND)!.steps.flatMap((s) => s.objects).map((o) => ('text' in o ? o.text : null))
-    for (const t of ['t (s)', 'v (m/s)', '0', '10 s', '45 m/s']) expect(texts).toContain(t)
+    for (const t of ['t (s)', 'v (m/s)', '0', '10', '45']) expect(texts).toContain(t)
+  })
+
+  it('the tutor-visible text cannot be read as a measurement on the empty graph', () => {
+    // Measured live: "10 s" and "45 m/s" as axis-end labels were narrated as
+    // "after 10 seconds it reaches 45 m/s". Ends are bare ticks; the ranges are
+    // stated as ranges, and frame 0 says the graph is empty.
+    const spec = canonicalParametricScene(KIND)!
+    const labels = spec.steps.flatMap((s) => s.objects).map((o) => ('text' in o ? o.text : '')).join(' | ')
+    expect(labels).not.toMatch(/\d\s*m\/s|\d+\s*s\b/)
+    expect(spec.steps[0].narration).toMatch(/time axis runs from 0 to 10 s and its speed axis from 0 to 45 m\/s\. It stays empty until the experiment runs\./)
   })
 
   it('no live (per-tick) value is drawn on the canvas — the DOM readouts are the one live source', () => {

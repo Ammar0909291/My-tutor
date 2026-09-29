@@ -234,15 +234,18 @@ export function buildNewtonScene(p: NewtonParams, tick = 0): SceneSpec {
     { ...label('frictionless track', [NEWTON_TRACK_M / 2, TOP_Y, 0], ROLE.reference), id: 'track-caption' },
     { ...label('0 m', [0, -1.1, 0], ROLE.reference), id: 'start-label' },
     { ...label(`${NEWTON_TRACK_M} m`, [NEWTON_TRACK_M, -1.1, 0], ROLE.reference), id: 'finish-label' },
-    // v–t axes, with enough scale to compare runs: both axis names, the origin,
-    // and the two axis ends.
+    // v–t axes, with enough scale to compare runs: both axis names (with their
+    // units), the origin, and the two axis ends as bare tick numbers. The ends
+    // carry NO unit on purpose: the tutor reads every label on the figure, and
+    // "10 s" beside "45 m/s" was read live as a data point ("after 10 seconds it
+    // reaches 45 m/s") on an empty graph.
     { ...line([0, GRAPH_Y0, 0], [GRAPH_WIDTH, GRAPH_Y0, 0], ROLE.reference), id: 'graph-t-axis' },
     { ...line([0, GRAPH_Y0, 0], [0, GRAPH_Y0 + GRAPH_HEIGHT, 0], ROLE.reference), id: 'graph-v-axis' },
     { ...label('t (s)', [GRAPH_WIDTH / 2, BOTTOM_Y, 0], ROLE.reference), id: 'graph-t-label' },
     { ...label('v (m/s)', [-2.6, GRAPH_Y0 + GRAPH_HEIGHT / 2, 0], ROLE.reference), id: 'graph-v-label' },
     { ...label('0', [-0.6, GRAPH_Y0 - 0.6, 0], ROLE.reference), id: 'graph-origin' },
-    { ...label(`${fmt(GRAPH_T_MAX, 0)} s`, [GRAPH_WIDTH, GRAPH_Y0 - 0.6, 0], ROLE.reference), id: 'graph-t-max' },
-    { ...label(`${GRAPH_V_MAX} m/s`, [-1.8, GRAPH_Y0 + GRAPH_HEIGHT, 0], ROLE.reference), id: 'graph-v-max' },
+    { ...label(fmt(GRAPH_T_MAX, 0), [GRAPH_WIDTH, GRAPH_Y0 - 0.6, 0], ROLE.reference), id: 'graph-t-max' },
+    { ...label(String(GRAPH_V_MAX), [-1.2, GRAPH_Y0 + GRAPH_HEIGHT, 0], ROLE.reference), id: 'graph-v-max' },
   ]
 
   const body: SceneObject[] = [
@@ -305,7 +308,9 @@ export function buildNewtonScene(p: NewtonParams, tick = 0): SceneSpec {
         : `A block of mass ${m} kg on a frictionless 20 m track with no net force on it. It stays at rest, and the velocity–time graph stays flat.`,
     steps: [
       {
-        narration: 'A frictionless 20 m track, with a velocity–time graph below it that records the motion.',
+        narration: 'A frictionless 20 m track. Below it, a velocity–time graph records the motion: its time axis runs '
+          + `from 0 to ${fmt(GRAPH_T_MAX, 0)} s and its speed axis from 0 to ${GRAPH_V_MAX} m/s. `
+          + (graphDrawn ? 'The line on it is this run so far.' : phase === 'start' ? 'It stays empty until the experiment runs.' : 'This run has only just started on it.'),
         intent: 'establish',
         objects: apparatus,
       },

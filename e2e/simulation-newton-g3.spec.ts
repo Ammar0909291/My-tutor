@@ -185,7 +185,8 @@ test.describe('pilot polish', () => {
 
   test('#4–5 v–t graph labels are shown; no live value is painted on the canvas', async ({ page }) => {
     await open(page, PILOT)
-    for (const t of ['t (s)', 'v (m/s)', '10 s', '45 m/s']) await expect(figure(page).getByText(t, { exact: true })).toBeVisible()
+    const scene = figure(page).locator('[data-scene-box]')
+    for (const t of ['t (s)', 'v (m/s)', '0', '10', '45']) await expect(scene.getByText(t, { exact: true })).toBeVisible()
     await setValues(page, '1', '10')
     await page.getByRole('button', { name: 'Run' }).click()
     await expect.poll(() => tick(page)).toBeGreaterThan(20)

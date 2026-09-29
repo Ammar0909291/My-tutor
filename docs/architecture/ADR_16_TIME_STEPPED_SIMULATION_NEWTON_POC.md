@@ -496,8 +496,15 @@ unchanged. No second concept was bound.
      into a 200 px empty band on every figure.
    - Browser-tested at 390 and 1280: no horizontal overflow and controls beside the figure.
 9. **Description honesty.** The description claims a v–t line only once one is drawn. The frame-0
-   text says the graph is empty and will record the motion. The tutor's view of a scene is its
-   title (`renderedRealityModel.describeSceneSpec`), which now names only the inputs.
+   text says the graph is empty and will record the motion.
+   - The tutor sees every label on the figure plus the step narrations, through
+     `visualSemantics.fromScene` → `buildSemanticsBlock`.
+   - The live recheck of the first deploy caught the tutor saying the block "after 10 seconds
+     reaches 45 m/s" on an EMPTY graph. It had read the axis-end labels "10 s" and "45 m/s" as a
+     data point.
+   - Fix: the axis ends are now bare tick numbers (0 / 10 / 45) beside the unit-bearing axis
+     names. The apparatus narration states the ranges as ranges and, before the run, says the
+     graph stays empty until the experiment runs.
 10. **Network assertion.** `e2e/simulationNetwork.ts` allows exactly the app shell's
     `GET /api/auth/session` (same origin, empty query). Everything else is reported as
     unexpected: any other `/api` call, `POST /api/learn/chat`, a query string, or another origin.
