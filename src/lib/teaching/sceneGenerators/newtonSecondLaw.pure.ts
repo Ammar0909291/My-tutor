@@ -106,30 +106,43 @@ export function newtonStateAt(p: NewtonParams, tick: number): NewtonState {
 
 // ── Figure ──────────────────────────────────────────────────────────────────
 
-// Arrow scales (world units per physical unit). Chosen so the largest value
-// in range (F 20 N, a 40 m/s², v ≈ 40.8 m/s) stays inside the fixed box.
-const FORCE_SCALE = 0.2
-const ACCEL_SCALE = 0.1
-const VELOCITY_SCALE = 0.1
+// Arrow scales (world units per physical unit). Proportional within a run AND
+// across runs, so "twice the mass, half the arrow" can be seen. Large enough to
+// read at lesson width: the default run (F = 10 N, a = 5 m/s², v up to ≈ 14 m/s)
+// gives arrows of 4, 5 and up to ≈ 7 units against the 20-unit track. Beyond
+// MAX_ARROW an arrow is drawn at the cap and its label says so, rather than the
+// frame growing to fit an arrow few runs ever reach (measured before: 0.1 units
+// per m/s² drew the default run's arrows a few pixels long). The force arrow is
+// never capped (20 N × 0.4 = 8).
+const FORCE_SCALE = 0.4
+const ACCEL_SCALE = 1
+const VELOCITY_SCALE = 0.5
+const MAX_ARROW = 8
+const ARROW_THICKNESS = 0.16
 
 // The v–t graph under the track. Axes are FIXED (not fitted to the run) so the
 // slopes of different runs can be compared: a steeper line is a larger a.
-const GRAPH_Y0 = -7.5
+const GRAPH_Y0 = -8.5
 const GRAPH_T_MAX = NEWTON_MAX_TICKS * NEWTON_FIXED_DT // 10 s
 const GRAPH_V_MAX = 45 // m/s — above the largest reachable speed (≈ 40.8)
 const GRAPH_WIDTH = NEWTON_TRACK_M // 20 units for 10 s
-const GRAPH_HEIGHT = 5
+const GRAPH_HEIGHT = 6
 const GRAPH_SAMPLE_TICKS = 5 // one trace point per 0.1 s
 const MIN_TRACE_POINTS = 8
 
-// The fixed box every frame lives in.
-const FLOOR_X0 = -6
-const FLOOR_X1 = 26
-const TOP_Y = 4.4
+// The fixed box every frame lives in. Every arrow starts AT the block and points
+// the way the block goes (free-body style), so nothing extends behind the start
+// line but the mass label and the graph's axis labels. Right: the force arrow
+// ahead of a heavy block that has just crossed the line (20.8 + 0.78 + 8).
+const FLOOR_X0 = -5
+const FLOOR_X1 = 30
+const TOP_Y = 5.8
 const BOTTOM_Y = GRAPH_Y0 - 0.9
 
-const Y_ACCEL = 2.1
-const Y_VELOCITY = 3.1
+// One row per arrow, far enough apart that each label can sit by its own arrow
+// (measured at 1.0-unit spacing: the label solver pushed them off their rows).
+const Y_ACCEL = 2.5
+const Y_VELOCITY = 4.3
 /**
  * Shortest arrow drawn. Below this an arrow is invisible and, once rounded, can
  * collapse to zero length, which validateSceneSpec rightly refuses (measured:
@@ -151,12 +164,65 @@ export function newtonBlockRadius(mass: number): number {
   return round(0.35 + 0.2 * Math.cbrt(mass))
 }
 
+/** A drawn arrow length for a value, and whether it had to be capped. */
+export function newtonArrowLength(value: number, scale: number): { length: number; capped: boolean } {
+  const raw = value * scale
+  return raw > MAX_ARROW ? { length: MAX_ARROW, capped: true } : { length: round(raw), capped: false }
+}
+export const NEWTON_ARROW_SCALES = { force: FORCE_SCALE, acceleration: ACCEL_SCALE, velocity: VELOCITY_SCALE, max: MAX_ARROW } as const
+
+/** Where the run is: before it starts, under way, or over. */
+export type NewtonPhase = 'start' | 'moving' | 'finished'
+export function newtonPhaseAt(p: NewtonParams, tick: number): NewtonPhase {
+  const s = newtonStateAt(p, tick)
+  if (s.tick === 0) return 'start'
+  return s.tick >= newtonTerminalTick(p) ? 'finished' : 'moving'
+}
+
+/**
+ * What the figure says is happening, true of THIS tick. Before the run it
+ * states only the inputs — never the acceleration, the answer the learner is
+ * about to find out by experiment (ADR 16: predict → experiment → observe).
+ */
+function whatIsHappening(p: NewtonParams, phase: NewtonPhase, s: NewtonState): string {
+  const F = fmt(p.force, 0)
+  const m = fmt(p.mass, 1)
+  if (phase === 'start') {
+    return p.force > 0
+      ? `A net force of ${F} N is ready to push the ${m} kg block from rest. Make a prediction, then run the experiment.`
+      : `No net force is applied to the ${m} kg block. Run the experiment to see what it does.`
+  }
+  if (s.a === 0) return `No net force acts on the ${m} kg block, so it stays at rest.`
+  if (phase === 'moving') {
+    return `The block is speeding up: after ${fmt(s.t, 2)} s it has moved ${fmt(s.x, 2)} m and reached ${fmt(s.v, 2)} m/s.`
+  }
+  return s.x >= NEWTON_TRACK_M
+    ? `The block reached the end of the track after ${fmt(s.t, 2)} s, moving at ${fmt(s.v, 2)} m/s.`
+    : `After ${fmt(s.t, 2)} s the block has moved ${fmt(s.x, 2)} m and reached ${fmt(s.v, 2)} m/s.`
+}
+
 /**
  * The figure at a tick. Tick 0 is the static figure (the block at rest on the
  * start line), and it is exactly what the parametric registry builds.
+ *
+ * ── THE ANSWER IS NOT IN THE FIGURE BEFORE THE RUN ──────────────────────────
+ * At tick 0 nothing states or encodes the acceleration: no acceleration arrow
+ * (its LENGTH is the answer too), no "a =" label, no F / m in the narration,
+ * title or description. Only the inputs — the force and the mass — are shown.
+ * The acceleration appears once the block is moving, i.e. once it has been
+ * observed. Measured before this rule: setting m = 4 kg printed
+ * "a = 2.50 m/s²" in the header and on the canvas before Run was pressed.
+ *
+ * ── LIVE NUMBERS LIVE IN ONE PLACE ──────────────────────────────────────────
+ * The running time and speed are NOT drawn as canvas labels. The DOM readouts
+ * beside the controls show them; a second copy inside the canvas is painted a
+ * render frame later and was measured disagreeing with them mid-run (8.1 vs
+ * 8.4 m/s). The canvas carries geometry — the block, the arrows, the graph —
+ * and the labels that stay constant through a run.
  */
 export function buildNewtonScene(p: NewtonParams, tick = 0): SceneSpec {
   const s = newtonStateAt(p, tick)
+  const phase = newtonPhaseAt(p, tick)
   const r = newtonBlockRadius(p.mass)
   const x = round(s.x)
 
@@ -168,72 +234,89 @@ export function buildNewtonScene(p: NewtonParams, tick = 0): SceneSpec {
     { ...label('frictionless track', [NEWTON_TRACK_M / 2, TOP_Y, 0], ROLE.reference), id: 'track-caption' },
     { ...label('0 m', [0, -1.1, 0], ROLE.reference), id: 'start-label' },
     { ...label(`${NEWTON_TRACK_M} m`, [NEWTON_TRACK_M, -1.1, 0], ROLE.reference), id: 'finish-label' },
-    // v–t axes.
+    // v–t axes, with enough scale to compare runs: both axis names, the origin,
+    // and the two axis ends.
     { ...line([0, GRAPH_Y0, 0], [GRAPH_WIDTH, GRAPH_Y0, 0], ROLE.reference), id: 'graph-t-axis' },
     { ...line([0, GRAPH_Y0, 0], [0, GRAPH_Y0 + GRAPH_HEIGHT, 0], ROLE.reference), id: 'graph-v-axis' },
     { ...label('t (s)', [GRAPH_WIDTH / 2, BOTTOM_Y, 0], ROLE.reference), id: 'graph-t-label' },
     { ...label('v (m/s)', [-2.6, GRAPH_Y0 + GRAPH_HEIGHT / 2, 0], ROLE.reference), id: 'graph-v-label' },
+    { ...label('0', [-0.6, GRAPH_Y0 - 0.6, 0], ROLE.reference), id: 'graph-origin' },
     { ...label(`${fmt(GRAPH_T_MAX, 0)} s`, [GRAPH_WIDTH, GRAPH_Y0 - 0.6, 0], ROLE.reference), id: 'graph-t-max' },
+    { ...label(`${GRAPH_V_MAX} m/s`, [-1.8, GRAPH_Y0 + GRAPH_HEIGHT, 0], ROLE.reference), id: 'graph-v-max' },
   ]
 
   const body: SceneObject[] = [
     { type: 'node', id: 'block', position: [x, r, 0], color: ROLE.ink, radius: r },
-    { ...label(`m = ${fmt(p.mass, 1)} kg`, [x, r + 0.8, 0], ROLE.ink), id: 'mass-label' },
+    { ...label(`m = ${fmt(p.mass, 1)} kg`, [round(x - r - 1.9), r, 0], ROLE.ink), id: 'mass-label' },
   ]
   if (p.force * FORCE_SCALE >= MIN_ARROW) {
-    // A push from behind: the arrow ends at the block.
-    const from: Vec3 = [round(x - r - p.force * FORCE_SCALE), r, 0]
-    body.push({ type: 'arrow', id: 'force', from, to: [round(x - r), r, 0], color: ROLE.input, thickness: 0.055 })
-    body.push({ ...label(`F = ${fmt(p.force, 0)} N`, [round(from[0]), r + 0.6, 0], ROLE.input), id: 'force-label' })
+    // The net force on the block, drawn from the block in the direction it acts.
+    const len = newtonArrowLength(p.force, FORCE_SCALE).length
+    const to: Vec3 = [round(x + r + len), r, 0]
+    body.push({ type: 'arrow', id: 'force', from: [round(x + r), r, 0], to, color: ROLE.input, thickness: ARROW_THICKNESS })
+    body.push({ ...label(`F = ${fmt(p.force, 0)} N`, [round(x + r + len / 2), r + 0.8, 0], ROLE.input), id: 'force-label' })
   }
-  if (s.a * ACCEL_SCALE >= MIN_ARROW) {
-    body.push({ type: 'arrow', id: 'acceleration', from: [x, Y_ACCEL, 0], to: [round(x + s.a * ACCEL_SCALE), Y_ACCEL, 0], color: ROLE.output, thickness: 0.055 })
+  if (phase !== 'start' && s.a > 0) {
+    const arrow = newtonArrowLength(s.a, ACCEL_SCALE)
+    if (arrow.length >= MIN_ARROW) {
+      body.push({ type: 'arrow', id: 'acceleration', from: [x, Y_ACCEL, 0], to: [round(x + arrow.length), Y_ACCEL, 0], color: ROLE.output, thickness: ARROW_THICKNESS })
+    }
+    body.push({ ...label(`a = ${fmt(s.a, 2)} m/s²${arrow.capped ? ' (arrow capped)' : ''}`, [round(x + arrow.length / 2), Y_ACCEL + 0.8, 0], ROLE.output), id: 'acceleration-label' })
   }
-  if (s.a > 0) {
-    body.push({ ...label(`a = ${fmt(s.a, 2)} m/s²`, [x, Y_ACCEL + 0.5, 0], ROLE.output), id: 'acceleration-label' })
+  if (phase !== 'start') {
+    const arrow = newtonArrowLength(s.v, VELOCITY_SCALE)
+    if (arrow.length >= MIN_ARROW) {
+      body.push({ type: 'arrow', id: 'velocity', from: [x, Y_VELOCITY, 0], to: [round(x + arrow.length), Y_VELOCITY, 0], color: ROLE.result, thickness: ARROW_THICKNESS })
+    }
   }
-  if (s.v * VELOCITY_SCALE >= MIN_ARROW) {
-    body.push({ type: 'arrow', id: 'velocity', from: [x, Y_VELOCITY, 0], to: [round(x + s.v * VELOCITY_SCALE), Y_VELOCITY, 0], color: ROLE.result, thickness: 0.055 })
-  }
-  body.push({ ...label(`v = ${fmt(s.v, 1)} m/s`, [x, Y_VELOCITY + 0.5, 0], ROLE.result), id: 'velocity-label' })
-  body.push({ ...label(`t = ${fmt(s.t, 2)} s`, [FLOOR_X0 + 1.5, TOP_Y, 0], ROLE.ink), id: 'time-label' })
 
   // The v–t trace so far, and the current point on it. Object ids double as the
   // legend's names when an object carries no caption, so they are written for
   // the learner (measured in the browser: 'vt-now' surfaced as "Vt now").
   const trace: Vec3[] = []
   for (let k = 0; k <= s.tick; k += GRAPH_SAMPLE_TICKS) trace.push(graphPoint(k * NEWTON_FIXED_DT, s.a * k * NEWTON_FIXED_DT))
-  if (trace.length >= MIN_TRACE_POINTS) {
+  // The description may only claim a line that is actually drawn (measured: the
+  // tutor, reading this text, described a v–t line the learner could not see).
+  const graphDrawn = trace.length >= MIN_TRACE_POINTS
+  if (graphDrawn) {
     body.push({ type: 'path', id: 'velocity-time-graph', points: trace, color: ROLE.result })
   }
   body.push({ type: 'node', id: 'current-velocity', position: graphPoint(s.t, s.v), color: ROLE.result, radius: 0.18 })
 
+  const happening = whatIsHappening(p, phase, s)
+  const F = fmt(p.force, 0)
+  const m = fmt(p.mass, 1)
   return {
     id: `newton-second-law-${p.force}-${p.mass}-${s.tick}`,
-    title: `Newton's second law — F = ${fmt(p.force, 0)} N, m = ${fmt(p.mass, 1)} kg, a = ${fmt(s.a, 2)} m/s²`,
+    // "Name: givens" — the frame splits it, so the header shows the name and the
+    // two INPUTS. Never the acceleration: that is the result of the experiment.
+    title: `Newton's second law: F = ${F} N, m = ${m} kg`,
     sceneType: 'simulation',
-    teachingGoal: 'Show that a constant net force gives a constant acceleration, a = F / m: more force, more acceleration; more mass, less.',
-    ariaLabel:
-      `A block of mass ${fmt(p.mass, 1)} kg on a frictionless 20 m track, `
-      + (s.a > 0
-        ? `pushed by a net force of ${fmt(p.force, 0)} N, so it accelerates at ${fmt(s.a, 2)} m/s². `
-        : 'with no net force on it, so it does not accelerate. ')
-      + `At t = ${fmt(s.t, 2)} s it is ${fmt(s.x, 2)} m from the start, moving at ${fmt(s.v, 2)} m/s. `
-      + 'Below the track, a velocity–time graph whose slope is the acceleration.',
+    teachingGoal: 'Find out by experiment how the net force and the mass together decide how quickly the block speeds up.',
+    ariaLabel: phase === 'start'
+      ? `A block of mass ${m} kg at rest at the start of a frictionless 20 m track, with a net force of ${F} N ready to push it. `
+        + 'Below the track, an empty velocity–time graph that will record the motion once the experiment runs.'
+      : s.a > 0
+        ? `A block of mass ${m} kg on a frictionless 20 m track, pushed by a net force of ${F} N. `
+          + `After ${fmt(s.t, 2)} s it is ${fmt(s.x, 2)} m from the start, moving at ${fmt(s.v, 2)} m/s and accelerating at ${fmt(s.a, 2)} m/s². `
+          + (graphDrawn
+            ? 'The velocity–time graph below shows its speed rising in a straight line.'
+            : 'The velocity–time graph below has only just started recording.')
+        : `A block of mass ${m} kg on a frictionless 20 m track with no net force on it. It stays at rest, and the velocity–time graph stays flat.`,
     steps: [
       {
-        narration: 'A block rests on a frictionless 20 m track. Below it, a velocity–time graph will record its motion.',
+        narration: 'A frictionless 20 m track, with a velocity–time graph below it that records the motion.',
         intent: 'establish',
         objects: apparatus,
       },
       {
-        narration: s.a > 0
-          ? `A constant net force of ${fmt(p.force, 0)} N pushes the ${fmt(p.mass, 1)} kg block, so its acceleration is F / m = ${fmt(s.a, 2)} m/s². Its speed grows steadily: the v–t line is straight, and its slope is the acceleration.`
-          : `No net force acts on the ${fmt(p.mass, 1)} kg block, so its acceleration is F / m = 0: it stays at rest, and the v–t line stays flat on the axis.`,
+        narration: happening,
         intent: 'relate',
         objects: body,
       },
     ],
+    // The panel says exactly what is true of this tick, and nothing more.
+    explainer: { panels: [{ heading: "What's happening?", body: happening }] },
   }
 }
 

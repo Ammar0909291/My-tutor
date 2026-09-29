@@ -1,4 +1,5 @@
 import { test, expect, type Page } from '@playwright/test'
+import { classifyRequest, watchNetwork } from './simulationNetwork'
 
 // ADR 16, gate G3 — the ONE-concept production pilot, through the SERVED path.
 //
@@ -48,12 +49,7 @@ test.describe('the pilot concept', () => {
     await open(page, PILOT)
     const storage = () => page.evaluate(() => [Object.keys(localStorage).sort(), Object.keys(sessionStorage).sort()])
     const storageBefore = await storage()
-    const requests: string[] = []
-    page.on('request', (r) => {
-      const url = r.url()
-      if (url.includes('/_next/') || url.includes('__nextjs')) return // dev-server tooling
-      requests.push(`${r.method()} ${url}`)
-    })
+    const network = watchNetwork(page, new URL(page.url()).origin)
 
     // 4. Prediction.
     const prediction = page.getByTestId('prediction')
@@ -99,7 +95,7 @@ test.describe('the pilot concept', () => {
     await expect(interpretation.getByText(/inversely proportional to mass/)).toBeVisible()
 
     // 16. No network, no storage.
-    expect(requests).toEqual([])
+    expect(network.unexpected()).toEqual([])
     expect(await storage()).toEqual(storageBefore)
   })
 
@@ -140,4 +136,130 @@ test.describe('17–18. everything else keeps its existing path', () => {
       await expect(sim(page)).toHaveCount(0)
     })
   }
+})
+
+// ── Pilot polish (master loop): answer withholding, chrome, state, layout ────
+
+const figure = (page: Page) => page.getByRole('figure').first()
+/** Every learner-visible string in the figure, plus its accessible description. */
+async function visibleFigureText(page: Page) {
+  return `${await figure(page).innerText()} | ${await figure(page).getAttribute('aria-label')}`
+}
+const happening = (page: Page) => page.locator('section', { has: page.getByRole('heading', { name: "What's happening?" }) })
+const LEAK = /\ba\s*=|m\/s²|F\s*\/\s*m/
+
+test.describe('pilot polish', () => {
+  test('#1 no acceleration value, arrow or label before the run — also after changing values', async ({ page }) => {
+    await open(page, PILOT)
+    expect(await visibleFigureText(page)).not.toMatch(LEAK)
+    await setValues(page, '10', '4') // a would be 2.50 m/s²
+    await expect(page.getByTestId('simulation')).toHaveAttribute('data-tick', '0')
+    const text = await visibleFigureText(page)
+    expect(text).not.toMatch(LEAK)
+    expect(text).not.toContain('2.50')
+    await expect(page.getByTestId('readout-a_measured')).toHaveCount(0)
+    // …and it appears once the run has shown it.
+    await page.getByRole('button', { name: 'Run' }).click()
+    await expect.poll(() => tick(page)).toBeGreaterThan(5)
+    await page.getByRole('button', { name: 'Pause' }).click()
+    expect(await visibleFigureText(page)).toContain('a = 2.50 m/s²')
+  })
+
+  test('#3 "What\'s happening?" follows the state: start, running, paused, finished', async ({ page }) => {
+    await open(page, PILOT)
+    await expect(happening(page)).toContainText('ready to push the 2.0 kg block from rest')
+    await setValues(page, '1', '10')
+    await page.getByRole('button', { name: 'Run' }).click()
+    await expect.poll(() => tick(page)).toBeGreaterThan(20)
+    await expect(happening(page)).toContainText('The block is speeding up')
+    await page.getByRole('button', { name: 'Pause' }).click()
+    const t = (await page.getByTestId('readout-t').innerText()).replace(' s', '')
+    await expect(happening(page)).toContainText(`after ${t} s`) // the panel and the readout agree
+    await page.getByRole('button', { name: 'Reset' }).click()
+    await expect(happening(page)).toContainText('ready to push')
+    await setValues(page, '10', '2')
+    await page.getByRole('button', { name: 'Run' }).click()
+    await expect.poll(() => phase(page), { timeout: 15_000 }).toBe('finished')
+    await expect(happening(page)).toContainText('reached the end of the track after 2.84 s')
+  })
+
+  test('#4–5 v–t graph labels are shown; no live value is painted on the canvas', async ({ page }) => {
+    await open(page, PILOT)
+    for (const t of ['t (s)', 'v (m/s)', '10 s', '45 m/s']) await expect(figure(page).getByText(t, { exact: true })).toBeVisible()
+    await setValues(page, '1', '10')
+    await page.getByRole('button', { name: 'Run' }).click()
+    await expect.poll(() => tick(page)).toBeGreaterThan(20)
+    await expect(figure(page).getByText(/^(v|t) = /)).toHaveCount(0)
+  })
+
+  test('#6 prediction options read as live; disabled controls read as disabled', async ({ page }) => {
+    await open(page, PILOT)
+    const option = page.getByTestId('prediction').getByRole('button', { name: 'It halves' })
+    const pause = page.getByRole('button', { name: 'Pause' })
+    await expect(pause).toBeDisabled()
+    const opacity = (l: typeof option) => l.evaluate((el) => Number(getComputedStyle(el).opacity))
+    expect(await opacity(option)).toBe(1)
+    expect(await opacity(pause)).toBeLessThan(0.6)
+    const colour = (l: typeof option) => l.evaluate((el) => getComputedStyle(el).color)
+    expect(await colour(option)).not.toBe(await colour(pause))
+  })
+
+  test('#7 the generic figure chrome is not shown over the simulation', async ({ page }) => {
+    await open(page, PILOT)
+    await expect(page.getByRole('group', { name: 'How this is shown' })).toHaveCount(0)
+    await expect(page.getByRole('button', { name: 'Previous stage' })).toHaveCount(0)
+    await expect(page.getByText(/more labels? (is|are) on this figure/)).toHaveCount(0)
+    await expect(page.getByText('More insights')).toHaveCount(0)
+    await expect(page.getByRole('heading', { name: 'Try changing values' })).toHaveCount(0)
+    // …and it is still there for a figure that is not a simulation.
+    await open(page, 'phys.mech.projectile-motion')
+    await expect(page.getByRole('heading', { name: 'Try changing values' })).toBeVisible()
+  })
+
+  for (const width of [390, 1280]) {
+    test(`#8 layout at ${width}px: no overflow, no empty header band, controls beside the figure`, async ({ page }) => {
+      await page.setViewportSize({ width, height: 844 })
+      await open(page, PILOT)
+      expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width)
+      const header = await figure(page).locator('header').boundingBox()
+      const title = await figure(page).getByRole('heading', { level: 3 }).boundingBox()
+      expect(header!.height - title!.height).toBeLessThan(40) // measured before: a ≈ 200px empty band at 390
+      const canvas = await figure(page).locator('canvas').first().boundingBox()
+      const slider = await page.getByLabel('F (N)').boundingBox()
+      const run = await page.getByRole('button', { name: 'Run' }).boundingBox()
+      expect(slider!.y - (canvas!.y + canvas!.height)).toBeLessThan(260)
+      expect(run!.y - (slider!.y + slider!.height)).toBeLessThan(160)
+      await page.screenshot({ path: `test-results/newton-pilot-${width}.png`, fullPage: true })
+    })
+  }
+})
+
+test.describe('#10 the network assertion distinguishes the app shell from the simulation', () => {
+  const origin = 'http://localhost:3000'
+  test('classifier: only the exact session GET is app shell', () => {
+    expect(classifyRequest('GET', `${origin}/api/auth/session`, origin)).toBe('app-shell')
+    expect(classifyRequest('GET', `${origin}/_next/static/chunks/app.js`, origin)).toBe('dev-tooling')
+    for (const [m, u] of [
+      ['POST', `${origin}/api/auth/session`],
+      ['GET', `${origin}/api/auth/session?probe=1`],
+      ['POST', `${origin}/api/learn/chat`],
+      ['GET', `${origin}/api/curriculum?subject=physics`],
+      ['GET', `${origin}/api/progress`],
+      ['GET', 'https://ywakxiqbevfuxsiwewnw.supabase.co/rest/v1/topic_progress'],
+      ['GET', 'https://evil.example/api/auth/session'],
+    ]) expect(classifyRequest(m, u, origin), `${m} ${u}`).toBe('unexpected')
+  })
+
+  test('negative control: a request from the page to the tutor or an API is caught', async ({ page }) => {
+    await open(page, PILOT)
+    const network = watchNetwork(page, new URL(page.url()).origin)
+    await page.evaluate(async () => {
+      await fetch('/api/auth/session').catch(() => null) // the one allowed shell request
+      await fetch('/api/learn/chat', { method: 'POST', body: '{}' }).catch(() => null)
+      await fetch('/api/progress').catch(() => null)
+    })
+    await expect.poll(() => network.unexpected().length).toBe(2)
+    expect(network.unexpected().join('\n')).toMatch(/POST .*\/api\/learn\/chat/)
+    expect(network.appShell()).toHaveLength(1)
+  })
 })

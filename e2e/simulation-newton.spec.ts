@@ -1,4 +1,5 @@
 import { test, expect, type Page } from '@playwright/test'
+import { watchNetwork } from './simulationNetwork'
 
 // ADR 16, gate G2 — the Newton's-second-law simulation in a real browser.
 //
@@ -42,7 +43,8 @@ test('1–2. the dev visual demo links to the Newton simulation, which loads', a
   await expect(link).toBeVisible({ timeout: 60_000 })
   await expect(link).toHaveAttribute('href', PAGE)
   await open(page)
-  await expect(page.getByRole('heading', { level: 3, name: /^Newton's second law — F = 10 N/ })).toBeVisible()
+  await expect(page.getByRole('heading', { level: 3, name: "Newton's second law" })).toBeVisible()
+  await expect(page.getByText('F = 10 N, m = 2.0 kg', { exact: true })).toBeVisible()
 })
 
 test('3–4. initial frame and prediction controls', async ({ page }) => {
@@ -145,13 +147,9 @@ test('14–16. evidence: four separate record kinds, in memory only, and no netw
     idb: (await (indexedDB.databases?.() ?? Promise.resolve([]))).map((d) => d.name).sort(),
   }))
 
-  // Every request made from here on is attributable to the simulation.
-  const requests: string[] = []
-  page.on('request', (r) => {
-    const url = r.url()
-    if (url.includes('/_next/') || url.includes('__nextjs')) return // dev-server tooling (HMR), not the page
-    requests.push(`${r.method()} ${url}`)
-  })
+  // Every request made from here on, bar dev tooling and the exact app-shell
+  // session refresh, would be the simulation's (see simulationNetwork.ts).
+  const network = watchNetwork(page, new URL(page.url()).origin)
 
   // Predict, then a FAIR test: mass 2 kg → 4 kg at the same 10 N.
   await page.getByTestId('prediction').getByRole('button', { name: 'It halves' }).click()
@@ -183,7 +181,7 @@ test('14–16. evidence: four separate record kinds, in memory only, and no netw
   }
 
   // 16. No network activity at all from the simulation — no API, no database, no tutor.
-  expect(requests).toEqual([])
+  expect(network.unexpected()).toEqual([])
   // 14. Nothing written to browser storage.
   const storageAfter = await page.evaluate(async () => ({
     local: Object.keys(localStorage).sort(),

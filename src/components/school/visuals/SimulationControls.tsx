@@ -13,7 +13,7 @@
  * with a scrubber, which shows the identical states without movement. The
  * readouts are announced only when a run comes to rest, never per frame.
  */
-import type { CSSProperties, MouseEvent } from 'react'
+import type { CSSProperties, MouseEvent, ReactNode } from 'react'
 import { Pause, Play, RotateCcw, SkipForward } from 'lucide-react'
 import styles from './ExplainerFigure.module.css'
 import { variablesFor, type SimPrediction, type SimRelation } from '@/lib/teaching/visual/parametricScenes'
@@ -49,10 +49,16 @@ type Observation = Extract<SimEvent, { kind: 'observation' }>
 
 const ratio = (n: number) => (Math.abs(n - Math.round(n)) < 1e-6 ? `×${Math.round(n)}` : `×${n.toFixed(2)}`)
 
-export function SimulationControls({ host, kind, reducedMotion }: {
+export function SimulationControls({ host, kind, reducedMotion, valueControls }: {
   host: SimulationHost
   kind: string
   reducedMotion: boolean
+  /**
+   * The figure's value sliders, drawn between the prediction and Run so the
+   * whole experiment — choose values, run, read — sits in one block beside the
+   * figure instead of in a rail far below it on a phone.
+   */
+  valueControls?: ReactNode
 }) {
   const { sim, control, readouts, evidence } = host
   if (!host.active || !sim || !control) return null
@@ -91,6 +97,8 @@ export function SimulationControls({ host, kind, reducedMotion }: {
       data-tick={control.tick}
     >
       {open && <PredictionBlock prediction={open} chosen={predictionOf(open.id)} labelOf={labelOf} onPredict={host.predict} />}
+
+      {valueControls}
 
       <div className={styles.predictOptions} role="group" aria-label="Simulation controls">
         {!reducedMotion && (
@@ -181,9 +189,9 @@ function PredictionBlock({ prediction, chosen, labelOf, onPredict }: {
         <p className={styles.panelBody} style={{ color: 'var(--text-primary)' }}>{prediction.question}</p>
         <div className={styles.predictOptions} role="group" aria-label="Your prediction">
           {prediction.options.map((o, i) => (
-            <button key={o.label} type="button" className={styles.chip} onClick={() => onPredict(prediction.id, i)}>{o.label}</button>
+            <button key={o.label} type="button" onMouseDown={keepFocus} className={`${styles.chip} ${styles.choice}`} onClick={() => onPredict(prediction.id, i)}>{o.label}</button>
           ))}
-          <button type="button" onMouseDown={keepFocus} className={styles.chip} onClick={() => onPredict(prediction.id, null)}>Skip — just experiment</button>
+          <button type="button" onMouseDown={keepFocus} className={`${styles.chip} ${styles.choice}`} onClick={() => onPredict(prediction.id, null)}>Skip — just experiment</button>
         </div>
       </div>
     )

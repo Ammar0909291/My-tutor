@@ -432,6 +432,24 @@
   color: var(--text-primary);
 }
 
+/* A disabled control must LOOK disabled, so an enabled one reads as live. */
+.chip:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* An answer the learner can choose (a simulation's prediction options): full
+   contrast and a visible border, unlike the dim secondary chip, which was
+   measured to read as greyed-out beside the disabled Pause/Reset. */
+.choice {
+  color: var(--text-primary);
+  border-color: var(--border-emphasis);
+}
+.choice:hover:not(:disabled),
+.choice:focus-visible {
+  background: var(--bg-elevated);
+}
+
 .narration {
   margin: 0;
   font-size: 13.5px;
@@ -494,10 +512,15 @@
 /* Genuinely narrow. Below this a legend beside the title leaves neither
    enough room, so it stacks and wraps into rows instead of a column. */
 @container (max-width: 430px) {
+  /* The header holds only the title block and the expand button now (the
+     legend moved to the rail), so it stays one row. Stacking it as a column
+     turned the title block's 200px flex-BASIS into a 200px HEIGHT — measured
+     at 390px: an empty band between the title and the scene on every figure. */
   .header {
-    flex-direction: column;
+    flex-wrap: nowrap;
     gap: 8px;
   }
+  .titleBlock { flex: 1 1 auto; }
 }
 
 /* Browsers without container-query support fall back to the viewport, which

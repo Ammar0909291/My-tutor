@@ -452,3 +452,54 @@ No database, migration or persisted state exists at any phase, so rollback never
 - Governance ratchets updated with recorded judgment: `visualGeneratorDefaultScope` (the concept
   was judged genuine), `visualSemanticMoat` (physics widened 23 → 24), and
   `visualEngineArchitecture` (the curated-card example moved to the first law).
+
+## 17. Pilot polish record (2026-09-29): Newton as the reference implementation
+
+This pass was a master loop on the ONE pilot concept: audit, fix, test, browser review, deploy,
+live review. It covered visuals only. The physics model (a = F/m, v = at, x = ½at², 0.02 s tick,
+bounded parameters, no friction, deterministic), the binding, the registry and the fallback are
+unchanged. No second concept was bound.
+
+1. **Answer withheld until observed.** At tick 0 no surface states or encodes the acceleration:
+   no acceleration arrow (its length is the answer too), no `a =` label, and no F / m in the
+   title, narration, "What's happening?", description or goal. The slider guidance no longer
+   states the relationship ("…change it, run again, and compare how the block moves"). The
+   acceleration appears once the block is moving. Pinned by unit tests over the whole (F, m)
+   grid and by a browser test that changes m before Run.
+2. **Readable arrows, still true to the physics.** The arrows are drawn free-body style from the
+   block. The scales are 0.4 per N, 1 per m/s² and 0.5 per m/s, with thickness 0.16. They stay
+   proportional within a run and across runs. Past 8 units an arrow is drawn at the cap and its
+   label says "(arrow capped)"; it is never silently shortened.
+   - A simulation is now framed for the canvas it is drawn in. The server fits every figure for
+     4:3, but a desktop lesson canvas is about 2.4:1, which left the figure under half the width.
+   - `cameraDistanceForAspect` (`layout.ts`) brings the camera closer to fit the measured shape.
+     It never moves it further away, and the label layer reads the same distance.
+   - The distance depends on the fixed box and the canvas, not on the tick, so there is still no
+     mid-run re-zoom.
+   - It applies to simulations only. Every other figure keeps its framing.
+3. **"What's happening?" follows the state.** The panel is authored per frame (start, moving,
+   finished, no net force) and equals the step narration, so the two cannot disagree. When paused,
+   it states the same t as the readout.
+4. **v–t graph labels.** The label budget, which paces a stage walk, is not applied to a
+   simulation. The graph now carries t (s), v (m/s), 0, 10 s and 45 m/s.
+5. **Canvas/DOM drift.** Cause: the canvas labels live in the separate R3F root and are painted a
+   frame after the DOM readouts. Fix: no per-tick value is drawn on the canvas (the `t =` and
+   `v =` labels were removed). The DOM readouts are the single live source.
+6. **Prediction controls** use a full-contrast choice style. A disabled `.chip` is now visibly
+   disabled (opacity 0.4, not-allowed cursor).
+7. **Generic chrome suppressed for simulations only.** Hidden while a simulation is active:
+   representation chips, stage stepper, "more labels…", result chip, "More insights" and the
+   figcaption. Other figures keep them (browser-tested on projectile motion).
+8. **Layout.**
+   - The value sliders sit inside the experiment block, between the prediction and Run.
+   - At ≤ 430 px the header stays one row. Stacking it turned the title block's 200 px flex-basis
+     into a 200 px empty band on every figure.
+   - Browser-tested at 390 and 1280: no horizontal overflow and controls beside the figure.
+9. **Description honesty.** The description claims a v–t line only once one is drawn. The frame-0
+   text says the graph is empty and will record the motion. The tutor's view of a scene is its
+   title (`renderedRealityModel.describeSceneSpec`), which now names only the inputs.
+10. **Network assertion.** `e2e/simulationNetwork.ts` allows exactly the app shell's
+    `GET /api/auth/session` (same origin, empty query). Everything else is reported as
+    unexpected: any other `/api` call, `POST /api/learn/chat`, a query string, or another origin.
+    A classifier test and a live negative-control test show the assertion still fails when the
+    page calls the tutor or an API.

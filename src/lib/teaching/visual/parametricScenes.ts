@@ -698,8 +698,8 @@ export const PARAMETRIC_SCENES: Readonly<Record<string, ParametricScene>> = {
   newton_second_law: {
     defaults: { force: 10, mass: 2 },
     variables: [
-      { key: 'force', label: 'F', kind: 'number', unit: 'N', min: 0, max: 20, step: 1, effect: 'for the same mass, acceleration grows in direct proportion to the net force' },
-      { key: 'mass', label: 'm', kind: 'number', unit: 'kg', min: 0.5, max: 10, step: 0.5, effect: 'for the same force, a heavier block accelerates less: acceleration is inversely proportional to mass' },
+      { key: 'force', label: 'F', kind: 'number', unit: 'N', min: 0, max: 20, step: 1, effect: 'the net push on the block: change it, run again, and compare how the block moves' },
+      { key: 'mass', label: 'm', kind: 'number', unit: 'kg', min: 0.5, max: 10, step: 0.5, effect: 'how much matter the block has: change it, run again, and compare how the block moves' },
     ],
     build: guarded(validateNewtonParams, (p) => buildNewtonScene(p, 0)),
     simulation: {

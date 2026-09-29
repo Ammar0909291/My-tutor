@@ -54,6 +54,7 @@ import {
 import { budgetLabels, complexityFor, labelsHeldBack } from '@/lib/teaching/visual/visualComplexity'
 import { normalizeToCanonicalLevel } from '@/lib/curriculum/levels'
 import { useSimulation, type SimulationHost } from './useSimulation'
+import { cameraDistanceForAspect } from '@/lib/teaching/visual/layout'
 import { SimulationControls } from './SimulationControls'
 
 const MODE_LABEL: Record<SceneMode, string> = {
@@ -235,8 +236,39 @@ export function ExplainerFigure({
       ? (sweepCamera ? { ...sweep.spec, cameraDistance: sweepCamera } : sweep.spec)
       : shown
 
+  // ── a simulation is framed for the canvas it is actually drawn in ─────────
+  // Every figure is framed server-side for a 4:3 canvas. A simulation's fixed
+  // world box is wide, and a desktop lesson canvas is wider still (measured
+  // ≈ 2.4:1), so it used under half the canvas and its arrows read as a few
+  // pixels. For a simulation only, the camera comes closer to fit the measured
+  // shape (cameraDistanceForAspect never moves it further away). The distance
+  // depends on the fixed box and the canvas, not the tick, so it holds for a
+  // whole run and the camera never re-zooms mid-run.
+  const stageRef = useRef<HTMLDivElement>(null)
+  const [sceneAspect, setSceneAspect] = useState<number | null>(null)
+  useEffect(() => {
+    const stageEl = stageRef.current
+    if (!simulation.active || !stageEl || typeof ResizeObserver === 'undefined') return
+    const measure = () => {
+      const box = stageEl.querySelector<HTMLElement>('[data-scene-box]')?.getBoundingClientRect()
+      if (box && box.width > 0 && box.height > 0) setSceneAspect(Math.round((box.width / box.height) * 100) / 100)
+    }
+    measure()
+    const observer = new ResizeObserver(measure)
+    observer.observe(stageEl)
+    return () => observer.disconnect()
+  }, [simulation.active])
+  // Not memoised: one pass over a few dozen coordinates, and `drawn` is itself
+  // rebuilt per render in the sweep branch, so a memo keyed on it buys nothing.
+  const framedDistance = simulation.active && sceneAspect ? cameraDistanceForAspect(drawn, sceneAspect) : null
+  const framed = framedDistance === null || framedDistance === drawn.cameraDistance
+    ? drawn
+    : { ...drawn, cameraDistance: framedDistance }
+
   const total = Math.max(1, drawn.steps.length)
-  const walking = stage !== null
+  // A simulation is always shown complete: its figure changes with TIME, and a
+  // stage walk over the same frame would be a second, competing timeline.
+  const walking = stage !== null && !simulation.active
   const animatedStage = playing?.kind === 'stages' ? stageAt(drawn, progress) : null
   const stageState = stageView(drawn, animatedStage ?? (walking ? stage! : Infinity), mode)
   const stageObjects = stageState.objects
@@ -258,8 +290,8 @@ export function ExplainerFigure({
   // ── representation ─────────────────────────────────────────────────────────
   const [view, setView] = useState<RepresentationView>('spatial')
   const representations = useMemo(
-    () => (policy.offerRepresentations ? availableRepresentations(drawn, explainerFull) : []),
-    [drawn, explainerFull, policy.offerRepresentations],
+    () => (policy.offerRepresentations && !simulation.active ? availableRepresentations(drawn, explainerFull) : []),
+    [drawn, explainerFull, policy.offerRepresentations, simulation.active],
   )
   // A view the current figure cannot support must not stay selected — a
   // contrast or a slider can change what the scene states.
@@ -285,14 +317,20 @@ export function ExplainerFigure({
     // Order matters: the stage decides what has been REVEALED, the mode decides
     // what is WITHHELD, and the representation decides what is FOREGROUNDED.
     // Each narrows the last; none of them rewrites an object.
-    const staged = budgetLabels(objectsForView(stageObjects, view), policy)
+    //
+    // A simulation's labels are authored per frame and few (its live values
+    // are in the readouts, not on the canvas), so the label budget — which
+    // exists to pace a stage walk a simulation does not have — is not applied:
+    // measured, it hid the v–t graph's axis labels.
+    const inView = objectsForView(stageObjects, view)
+    const staged = simulation.active ? inView : budgetLabels(inView, policy)
     if (playing?.kind !== 'trace') return staged
     const walked = traceObjects(staged, playing.objectId, progress)
     const head = tracePlayhead(drawn, playing.objectId, progress)
     return head ? [...walked, head] : walked
-  }, [playing, stageObjects, view, drawn, progress, policy])
+  }, [playing, stageObjects, view, drawn, progress, policy, simulation.active])
 
-  const heldBackLabels = labelsHeldBack(objectsForView(stageObjects, view), policy)
+  const heldBackLabels = simulation.active ? 0 : labelsHeldBack(objectsForView(stageObjects, view), policy)
 
   const predicting = mode === 'predict' && !revealed
   /** True in any mode whose whole point is that the learner works it out. */
@@ -404,7 +442,10 @@ export function ExplainerFigure({
   const panels = explainer.panels ?? []
   const primaryPanels = panels.slice(0, 1)
   const tailPanels = panels.slice(1)
-  const hasTail = tailPanels.length > 0 || Boolean(explainer.insight)
+  // A simulation's frame is the experiment: its one panel says what is
+  // happening NOW, and the generic insight/tail would restate the relationship
+  // the learner is there to discover.
+  const hasTail = !simulation.active && (tailPanels.length > 0 || Boolean(explainer.insight))
 
   return (
     <figure
@@ -423,7 +464,7 @@ export function ExplainerFigure({
               this the challenge layer was defeated by its own header: measured
               in the browser, practice mode hid the label on the canvas and
               printed the same number in the chip above it. */}
-          {explainer.result && !answerWithheld && (
+          {explainer.result && !answerWithheld && !simulation.active && (
             <p className={styles.result}>
               <span>{explainer.result.expression}</span>
               {explainer.result.value && <span className={styles.resultValue}>{explainer.result.value}</span>}
@@ -445,9 +486,9 @@ export function ExplainerFigure({
       </header>
 
       <div className={styles.body}>
-        <div className={styles.stage}>
+        <div className={styles.stage} ref={stageRef}>
           <SceneSpecRenderer
-            spec={drawn}
+            spec={framed}
             objects={drawnObjects}
             focusIds={focusIds}
             decor={decorForView(view)}
@@ -504,7 +545,7 @@ export function ExplainerFigure({
           )}
 
           <div className={styles.bar} style={{ marginTop: 10 }}>
-            {total > 1 && (
+            {total > 1 && !simulation.active && (
               <>
                 <button
                   type="button"
@@ -654,7 +695,26 @@ export function ExplainerFigure({
           )}
 
           {simulation.active && spec.parametric?.kind && !contrast && (
-            <SimulationControls host={simulation} kind={spec.parametric.kind} reducedMotion={reducedMotion} />
+            <SimulationControls
+              host={simulation}
+              kind={spec.parametric.kind}
+              reducedMotion={reducedMotion}
+              valueControls={variables.length > 0 && (
+                <div className={styles.controls} role="group" aria-label="Values">
+                  {variables.map((v) => (
+                    <Control
+                      key={v.key}
+                      variable={v}
+                      value={live[v.key] ?? defaultValueOf(v)}
+                      idPrefix={shown.id}
+                      showEffect={policy.showEffects}
+                      disabled={simulationLocked}
+                      onChange={setVar}
+                    />
+                  ))}
+                </div>
+              )}
+            />
           )}
 
           {playing && (
@@ -722,7 +782,7 @@ export function ExplainerFigure({
           )}
         </div>
 
-        {(primaryPanels.length > 0 || variables.length > 0 || (explainer.legend?.length ?? 0) > 0) && (
+        {(primaryPanels.length > 0 || (variables.length > 0 && !simulation.active) || (explainer.legend?.length ?? 0) > 0) && (
           <div className={styles.rail}>
             {/* The legend reads with the explanation, not above the picture.
                 In the header it was a five-row column that either doubled the
@@ -774,7 +834,7 @@ export function ExplainerFigure({
                 what gets collapsed. They share the grid row with the
                 explanation rather than starting a second full-width band under
                 it — two bands is how the frame grew past a viewport. */}
-            {variables.length > 0 && (
+            {variables.length > 0 && !simulation.active && (
               <section className={`${styles.panel} ${styles.railWide}`}>
                 <h4 className={styles.panelHeading}>Try changing values</h4>
                 <div className={styles.controls}>
@@ -836,7 +896,7 @@ export function ExplainerFigure({
         </details>
       )}
 
-      {shown.teachingGoal && !explainer.insight && (
+      {shown.teachingGoal && !explainer.insight && !simulation.active && (
         <figcaption className={styles.note}>{shown.teachingGoal}</figcaption>
       )}
     </figure>

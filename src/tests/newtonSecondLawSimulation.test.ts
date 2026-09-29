@@ -16,7 +16,8 @@ import { existsSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import {
   NEWTON_FIXED_DT, NEWTON_MAX_TICKS, NEWTON_TRACK_M,
-  buildNewtonScene, newtonReadouts, newtonStateAt, newtonTerminalTick, validateNewtonParams,
+  NEWTON_ARROW_SCALES, buildNewtonScene, newtonArrowLength, newtonPhaseAt, newtonReadouts, newtonStateAt,
+  newtonTerminalTick, validateNewtonParams,
 } from '@/lib/teaching/sceneGenerators/newtonSecondLaw.pure'
 import {
   PARAMETRIC_SCENES, canonicalParametricScene, rebuildScene, simulationFor, simulationFrame,
@@ -28,6 +29,7 @@ import { resolveVisual } from '@/lib/teaching/visual/resolveVisual'
 import { routeSceneGenerator } from '@/lib/teaching/sceneGenerators/sceneRouter'
 import { ACTIVATED_SCENE_KINDS, buildCanonicalScene } from '@/lib/teaching/visual/conceptSceneParams'
 import type { SceneSpec } from '@/lib/teaching/sceneSpec'
+import { cameraDistanceForAspect } from '@/lib/teaching/visual/layout'
 
 const KIND = 'newton_second_law'
 const FORCES = [0, 1, 5, 10, 17, 20]
@@ -201,13 +203,122 @@ describe('frame 0 is the static figure', () => {
     expect(ids).not.toContain('velocity')
   })
 
-  it('at rest on the start line: no velocity arrow, no trace', () => {
+  it('at rest on the start line: only the inputs — no acceleration or velocity arrow, no trace', () => {
     const ids = canonicalParametricScene(KIND)!.steps.flatMap((s) => s.objects).map((o) => o.id)
     expect(ids).toContain('block')
     expect(ids).toContain('force')
-    expect(ids).toContain('acceleration')
+    expect(ids).not.toContain('acceleration')
+    expect(ids).not.toContain('acceleration-label')
     expect(ids).not.toContain('velocity')
     expect(ids).not.toContain('velocity-time-graph')
+  })
+})
+
+/** Every learner-facing string a frame carries: title, labels, narration, panels, description, goal. */
+function frameText(spec: SceneSpec): string {
+  const labels = spec.steps.flatMap((s) => s.objects).map((o) => ('text' in o && typeof o.text === 'string' ? o.text : ''))
+  const panels = (spec.explainer?.panels ?? []).map((p) => `${p.heading} ${p.body ?? ''} ${(p.lines ?? []).join(' ')}`)
+  return [spec.title, spec.ariaLabel, spec.teachingGoal, ...spec.steps.map((s) => s.narration), ...labels, ...panels].join(' | ')
+}
+
+describe('pilot polish — the answer is withheld until the run shows it', () => {
+  it.each(GRID)('tick 0 states no acceleration anywhere (F=$force, m=$mass)', (p) => {
+    const spec = simulationFrame(KIND, p, 0)!
+    const text = frameText(spec)
+    const a = p.force / p.mass
+    expect(text).not.toMatch(/\ba\s*=|m\/s²|F\s*\/\s*m|accelerat(es|ion is|ion of)/i)
+    // …nor the numeric value of a in any format the frame uses.
+    if (a > 0) {
+      for (const n of [a.toFixed(2), a.toFixed(1)]) expect(text).not.toContain(`${n} m/s`)
+    }
+    const ids = spec.steps.flatMap((s) => s.objects).map((o) => o.id)
+    expect(ids).not.toContain('acceleration')
+    expect(ids).not.toContain('velocity')
+  })
+
+  it('the slider guidance does not state the relationship the learner is testing', () => {
+    for (const v of PARAMETRIC_SCENES[KIND].variables) {
+      expect(v.effect).not.toMatch(/proportion|accelerat|less|more|faster|slower|halve|double/i)
+      expect(v.effect.length).toBeGreaterThan(15)
+    }
+  })
+
+  it('the acceleration appears once the block is moving, stated as observed', () => {
+    const spec = buildNewtonScene({ force: 10, mass: 2 }, 10)
+    const ids = spec.steps.flatMap((s) => s.objects).map((o) => o.id)
+    expect(ids).toContain('acceleration')
+    expect(ids).toContain('velocity')
+    expect(frameText(spec)).toContain('a = 5.00 m/s²')
+  })
+})
+
+describe('pilot polish — readable arrows that stay true to the physics', () => {
+  const len = (o: { from: number[]; to: number[] }) => Math.hypot(o.to[0] - o.from[0], o.to[1] - o.from[1])
+  const arrow = (spec: SceneSpec, id: string) =>
+    spec.steps.flatMap((s) => s.objects).find((o) => o.id === id) as { from: number[]; to: number[] } | undefined
+
+  it('the default run draws arrows at least 2 world units long', () => {
+    const spec = buildNewtonScene({ force: 10, mass: 2 }, 100)
+    expect(len(arrow(spec, 'acceleration')!)).toBeGreaterThanOrEqual(2)
+    expect(len(arrow(spec, 'velocity')!)).toBeGreaterThanOrEqual(2)
+    expect(len(arrow(spec, 'force')!)).toBeGreaterThanOrEqual(2)
+  })
+
+  it('arrow lengths stay proportional across runs: twice the mass, half the acceleration arrow', () => {
+    const a1 = len(arrow(buildNewtonScene({ force: 10, mass: 2 }, 10), 'acceleration')!)
+    const a2 = len(arrow(buildNewtonScene({ force: 10, mass: 4 }, 10), 'acceleration')!)
+    expect(a1 / a2).toBeCloseTo(2, 2)
+  })
+
+  it('an arrow beyond the cap is drawn at the cap and its label says so — never silently shortened', () => {
+    expect(newtonArrowLength(40, NEWTON_ARROW_SCALES.acceleration)).toEqual({ length: NEWTON_ARROW_SCALES.max, capped: true })
+    const spec = buildNewtonScene({ force: 20, mass: 0.5 }, 10) // a = 40 m/s²
+    expect(len(arrow(spec, 'acceleration')!)).toBeCloseTo(NEWTON_ARROW_SCALES.max, 5)
+    expect(frameText(spec)).toContain('a = 40.00 m/s² (arrow capped)')
+  })
+})
+
+describe("pilot polish — the frame says what is true of THIS tick", () => {
+  const panel = (spec: SceneSpec) => spec.explainer?.panels?.[0]
+  it('start → moving → finished', () => {
+    const p = { force: 10, mass: 2 }
+    expect(newtonPhaseAt(p, 0)).toBe('start')
+    expect(panel(buildNewtonScene(p, 0))).toEqual({ heading: "What's happening?", body: expect.stringMatching(/ready to push the 2\.0 kg block from rest/) })
+    expect(newtonPhaseAt(p, 50)).toBe('moving')
+    expect(panel(buildNewtonScene(p, 50))!.body).toMatch(/speeding up: after 1\.00 s it has moved 2\.50 m and reached 5\.00 m\/s/)
+    const end = newtonTerminalTick(p)
+    expect(newtonPhaseAt(p, end)).toBe('finished')
+    expect(panel(buildNewtonScene(p, end))!.body).toMatch(/reached the end of the track after 2\.84 s/)
+  })
+
+  it('the panel is the step narration, so the two cannot disagree', () => {
+    for (const tick of [0, 1, 50, 142]) {
+      const spec = buildNewtonScene({ force: 10, mass: 2 }, tick)
+      expect(panel(spec)!.body).toBe(spec.steps[1].narration)
+    }
+  })
+
+  it('the description claims a v–t line only once one is drawn', () => {
+    for (const tick of [0, 1, 20, 34, 35, 100]) {
+      const spec = buildNewtonScene({ force: 10, mass: 2 }, tick)
+      const drawn = spec.steps.flatMap((s) => s.objects).some((o) => o.id === 'velocity-time-graph')
+      expect(/rising in a straight line/.test(spec.ariaLabel ?? '')).toBe(drawn)
+    }
+  })
+})
+
+describe('pilot polish — labels', () => {
+  it('the v–t graph carries both axis names and its scale', () => {
+    const texts = canonicalParametricScene(KIND)!.steps.flatMap((s) => s.objects).map((o) => ('text' in o ? o.text : null))
+    for (const t of ['t (s)', 'v (m/s)', '0', '10 s', '45 m/s']) expect(texts).toContain(t)
+  })
+
+  it('no live (per-tick) value is drawn on the canvas — the DOM readouts are the one live source', () => {
+    const labelsAt = (tick: number) => buildNewtonScene({ force: 10, mass: 2 }, tick).steps
+      .flatMap((s) => s.objects).filter((o) => o.type === 'label').map((o) => (o as { text: string }).text)
+    const a = labelsAt(20), b = labelsAt(60)
+    expect(a).toEqual(b)
+    expect(a.join(' ')).not.toMatch(/\bt\s*=|\bv\s*=|\bx\s*=/)
   })
 })
 
@@ -319,5 +430,30 @@ describe('G3 pilot: exactly ONE production concept is bound', () => {
     }
     const host = readFileSync(join(process.cwd(), 'src/lib/teaching/sceneGenerators/newtonSecondLaw.ts'), 'utf8')
     expect(host).not.toContain('generateJSON')
+  })
+})
+
+describe('pilot polish — framed for the canvas it is drawn in', () => {
+  const frame = (p: { force: number; mass: number }, tick: number) => simulationFrame(KIND, p, tick)!
+
+  it('on a wide desktop canvas the camera comes closer; on a 4:3-or-narrower one it keeps the server framing', () => {
+    const f = frame({ force: 10, mass: 2 }, 0)
+    expect(cameraDistanceForAspect(f, 2.36)).toBeLessThan(f.cameraDistance!)
+    expect(cameraDistanceForAspect(f, 4 / 3)).toBe(f.cameraDistance)
+    expect(cameraDistanceForAspect(f, 1.1)).toBe(f.cameraDistance)
+  })
+
+  it('never moves the camera further than the scene’s own distance', () => {
+    for (const aspect of [0.5, 1, 1.5, 2, 3, 5]) {
+      const f = frame({ force: 20, mass: 0.5 }, 30)
+      expect(cameraDistanceForAspect(f, aspect)).toBeLessThanOrEqual(f.cameraDistance!)
+    }
+  })
+
+  it('is the same for every tick and every (F, m), so the camera never re-zooms during or between runs', () => {
+    const d = cameraDistanceForAspect(frame({ force: 10, mass: 2 }, 0), 2.36)
+    for (const p of GRID) for (const tick of [0, 1, 71, 142, newtonTerminalTick(p)]) {
+      expect(cameraDistanceForAspect(frame(p, tick), 2.36)).toBe(d)
+    }
   })
 })

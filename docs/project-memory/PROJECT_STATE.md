@@ -346,7 +346,10 @@ list in order, one ADR per turn, architecture-only:
    `PARAMETRIC_SCENES` an optional time dimension (no new registry or renderer).
    **G1, G2 and G3 are implemented.** G3 is a ONE-concept production pilot:
    `phys.mech.newtons-second-law` is served the simulation (card fallback kept;
-   no flag, by owner decision). No other concept is bound, and mass migration
+   no flag, by owner decision). A pilot-polish pass (ADR 16 §17) made it the
+   reference implementation: the answer is withheld until the run shows it, the
+   arrows are readable, the state text is accurate, the generic chrome is off
+   for simulations, and it is browser-tested at 390/1280. No other concept is bound, and mass migration
    is not started; G5 (simulation evidence reaching Tutor Max / mastery)
    needs its own future ADR.
 8. **AI Independence Roadmap** — not started. Measuring/reducing AI
