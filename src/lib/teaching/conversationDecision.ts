@@ -12,6 +12,8 @@
  * Pure function — no I/O, no side effects, no model calls.
  */
 
+import { asksForPractice } from './masteryGate'
+
 export type ConversationDecisionType =
   | 'CONFUSION'          // student is confused or lost
   | 'REPHRASE_REQUEST'   // student asked to explain differently
@@ -100,7 +102,17 @@ export function classifyConversation(
     }
   }
 
-  if (opts.helpRequestKind === 'explain_differently' || opts.studentIntent === 'requesting_help') {
+  // A request for a PICTURE or for PRACTICE is not a request to be taught
+  // again. Both arrive as studentIntent 'requesting_help', and reading them as
+  // REPHRASE_REQUEST served a canned remediation card that answered neither.
+  // Measured (production, 2026-09-29, phys.em.kirchhoffs-laws): "i see no arrow
+  // in picture. can you give me new question to practice?" got the card's
+  // pipes-and-water explanation, with no word about the arrow and no question.
+  // Confusion still wins: "i don't understand, show me a picture" is CONFUSION.
+  const asksForSomethingElse = opts.helpRequestKind !== 'explain_differently'
+    && (opts.helpRequestKind === 'diagram' || asksForPractice(trimmed))
+    && !CONFUSION_RE.test(trimmed)
+  if ((opts.helpRequestKind === 'explain_differently' || opts.studentIntent === 'requesting_help') && !asksForSomethingElse) {
     if (CONFUSION_RE.test(trimmed)) {
       return {
         type: 'CONFUSION',

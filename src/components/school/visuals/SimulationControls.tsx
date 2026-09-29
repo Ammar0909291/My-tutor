@@ -187,7 +187,7 @@ export function SimulationControls({ host, kind, reducedMotion, valueControls }:
       )}
 
       {answered.map((p) => (
-        <InterpretationBlock key={p.id} prediction={p} interpretation={interpretationOf(p.id)!} labelOf={labelOf} />
+        <InterpretationBlock key={p.id} prediction={p} interpretation={interpretationOf(p.id)!} labelOf={labelOf} measuredLabel={measuredHeader(p.tests.measure)} />
       ))}
     </section>
   )
@@ -224,17 +224,19 @@ function PredictionBlock({ prediction, chosen, labelOf, onPredict }: {
   )
 }
 
-function InterpretationBlock({ prediction, interpretation, labelOf }: {
+function InterpretationBlock({ prediction, interpretation, labelOf, measuredLabel }: {
   prediction: SimPrediction
   interpretation: Interpretation
   labelOf: (key: string) => string
+  /** The measured quantity's own name ("a (measured)", "one swing (measured)"). */
+  measuredLabel: string
 }) {
   const { vary } = prediction.tests
   const observed = interpretation.observedRelation
   return (
     <div className={styles.panel} style={{ marginTop: 8 }} role="status" data-testid="interpretation" data-prediction-id={prediction.id}>
       <p className={styles.panelBody}>
-        {labelOf(vary)} {ratio(interpretation.varyRatio)} → measured a {ratio(interpretation.measureRatio)}
+        {labelOf(vary)} {ratio(interpretation.varyRatio)} → {measuredLabel} {ratio(interpretation.measureRatio)}
         {observed ? `: ${RELATION_TEXT[observed]}.` : '.'}
         {interpretation.matchedPrediction === true && ' That matches your prediction.'}
         {interpretation.matchedPrediction === false && ' That is not what you predicted — the runs are the evidence.'}

@@ -92,6 +92,50 @@ function computeGeometry(p: RayOpticsParams): RayOpticsGeometry {
   return { u, f, v, m, isMirror, real, erect, imageHeight }
 }
 
+/**
+ * The two principal rays from the top of the object, derived from the SAME
+ * image point the formula gives (so they cannot disagree with it):
+ *   · the ray parallel to the axis, meeting the element at the object's height
+ *   · the ray through the pole / optical centre
+ * A real image is where the outgoing rays MEET; a virtual image is where their
+ * backward extensions meet, drawn separately so the figure never shows light
+ * travelling where it does not.
+ *
+ * MEASURED (real-learner production run, 2026-09-29, phys.opt.lenses): the
+ * figure had an axis, a dot for the lens, F, and the two arrows — no rays — and
+ * the tutor told the learner to "look at the rays that converge". A ray
+ * diagram without rays cannot show HOW an image forms.
+ */
+function principalRays(
+  object: Vec3,
+  image: Vec3,
+  outgoingSign: 1 | -1,
+  real: boolean,
+): { rays: Vec3[][]; extensions: Vec3[][] } {
+  const hits: Vec3[] = [[0, object[1], 0], [0, 0, 0]]
+  const rays: Vec3[][] = []
+  const extensions: Vec3[][] = []
+  const clipX = VISUAL_MAX
+  for (const hit of hits) {
+    if (real) {
+      // Through the real image, and a little beyond it, inside the frame.
+      const dx = image[0] - hit[0]
+      const dy = image[1] - hit[1]
+      const beyond = Math.abs(dx) > 1e-9 ? Math.min(1.25, (clipX - Math.abs(image[0])) / Math.abs(dx) + 1) : 1
+      rays.push([object, hit, [round(hit[0] + dx * beyond), round(hit[1] + dy * beyond), 0]])
+    } else {
+      // Outgoing along the line AWAY from the virtual image, to the frame edge;
+      // the backward extension runs from the element to the virtual image.
+      const dx = hit[0] - image[0]
+      const dy = hit[1] - image[1]
+      const t = Math.abs(dx) > 1e-9 ? (clipX * outgoingSign - hit[0]) / dx : 1
+      rays.push([object, hit, [round(hit[0] + dx * Math.max(t, 0)), round(hit[1] + dy * Math.max(t, 0)), 0]])
+      extensions.push([hit, image])
+    }
+  }
+  return { rays, extensions }
+}
+
 /** Build a ray-optics SceneSpec: object/element/focus in step 1, the formed image in step 2. */
 export function buildRayOpticsScene(params: RayOpticsParams): SceneSpec {
   const geo = computeGeometry(params)
@@ -106,6 +150,8 @@ export function buildRayOpticsScene(params: RayOpticsParams): SceneSpec {
   const objectPos: Vec3 = [objX, objY, 0]
   const imagePos: Vec3 = [imgX, imgY, 0]
   const elementLabel = params.opticsType.replace('_', ' ')
+  // Light leaves a lens on the far side (+x) and a mirror back on the object side (−x).
+  const { rays, extensions } = principalRays(objectPos, imagePos, geo.isMirror ? -1 : 1, geo.real)
 
   return {
     id: `ray-optics-${params.opticsType}-${params.objectDistance}-${params.focalLength}`,
@@ -113,6 +159,8 @@ export function buildRayOpticsScene(params: RayOpticsParams): SceneSpec {
     sceneType: 'diagram',
     teachingGoal: 'Show how a mirror or lens forms an image from an object, and whether that image is real/virtual and erect/inverted.',
     cameraDistance: VISUAL_MAX * 3,
+    // A flat ray diagram: no 3D floor grid or axis triad behind it.
+    stage: { grid: false, axes: false },
     ariaLabel: `A ${elementLabel} forming a ${geo.real ? 'real' : 'virtual'}, ${geo.erect ? 'erect' : 'inverted'} image.`,
     steps: [
       {
@@ -128,6 +176,8 @@ export function buildRayOpticsScene(params: RayOpticsParams): SceneSpec {
       {
         narration: `Using the formula, the image forms at ${round(geo.v, 2)}cm, height ${round(geo.imageHeight, 2)}cm — a ${geo.real ? 'real' : 'virtual'}, ${geo.erect ? 'erect' : 'inverted'} image (magnification ${round(geo.m, 2)}).`,
         objects: [
+          ...rays.map((points, i) => ({ type: 'path' as const, id: i === 0 ? 'light-ray-parallel' : 'light-ray-through-centre', points, color: '#eab308' })),
+          ...extensions.map((points, i) => ({ type: 'path' as const, id: i === 0 ? 'virtual-extension-parallel' : 'virtual-extension-centre', points, color: '#64748b' })),
           { type: 'arrow', id: 'image', from: [imgX, 0, 0], to: imagePos, color: geo.real ? '#ef4444' : '#a855f7' },
           {
             type: 'label',

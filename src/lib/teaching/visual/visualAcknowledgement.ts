@@ -62,6 +62,7 @@
 
 import type { VisualDecision, EducationalPurpose } from './types'
 import { clamp } from './conceptText'
+import { servedSimulation } from './simulationPrompt'
 
 /** Nouns that name a rendered artefact — essentially never used outside a
  *  real reference to one. Mirrors figureReference.ts's STRONG_FIGURE_NOUN. */
@@ -141,7 +142,10 @@ export function ensureVisualAcknowledged(
     const pointer =
       asset.scope === 'domain'
         ? `Take a look at the ${kind} beside this message — it's a general illustration related to the topic.`
-        : `Take a look at the ${kind} beside this message — it shows ${what}. ${PURPOSE_CLAUSE[decision.purpose]}`
+        : servedSimulation(decision)
+          // A simulation is run, not watched: say how to start it.
+          ? `Try the experiment beside this message — it shows ${what}. Make a prediction first, then press Run and compare.`
+          : `Take a look at the ${kind} beside this message — it shows ${what}. ${PURPOSE_CLAUSE[decision.purpose]}`
 
     return { text: `${text.trim()}\n\n${pointer}`, appended: true }
   } catch {

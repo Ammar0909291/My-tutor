@@ -53,3 +53,26 @@ learner turns against production. It flags three things:
 - IGNORED: stored text replaces a reply the learner needed.
 
 Baseline against production before this batch: 6 failures, covering all three types.
+
+## Batch 1 verified in production (deployment of 61b122aa)
+
+`npx tsx scripts/qa/learnerReplay.ts` against production, disposable account (deleted):
+
+- lenses: "what is focal length?" is answered about lenses; "what is P? power?" is answered as
+  lens power (dioptres). No relativity, no watts. **Fixed.**
+- Newton: the wrong answer got a real explanation ("The F in F = ma stands for the net force…").
+  **Fixed.**
+- Kirchhoff: still answered with stored text. The production log showed a DIFFERENT path from
+  the one batch 1 fixed: `source=RemediationCard`, `conversation decision=REPHRASE_REQUEST`.
+  Fixed in batch 2 (below).
+
+## Batch 2
+
+| # | Defect | Root cause | Fix |
+|---|---|---|---|
+| 4b | Picture or practice request answered with a canned card | `classifyConversation` read every `requesting_help` turn as REPHRASE_REQUEST. A picture request (`helpRequestKind: 'diagram'`) and a practice request are both `requesting_help`, so they became remediation turns and got the curated card. | A picture or practice request is not a rephrase unless the learner also says they are confused. `conversationDecision.ts`. |
+| 9 | Lesson text gives away the simulation's answers | The prompt said a figure was attached but never that it was an experiment, or which questions it leaves for the learner. | `visual/simulationPrompt.ts`: when a time simulation is on screen, the prompt names its prediction questions and asks the tutor to invite a prediction, not state the result, until the learner reports a measurement or asks. The fallback pointer now says "Make a prediction first, then press Run" instead of "Follow it step by step". |
+| 10 | Pendulum interpretation said "measured a" | Hard-coded Newton label. | Uses the measured quantity's own label. |
+| 10 | Lens figure had no rays and a 3D grid | The generator drew only the object, image and focal points. | Two principal rays (parallel ray through the focus, ray through the centre); grey back-extensions for a virtual image; flat stage. `rayOpticsPrincipalRays.test.ts` checks every ray passes through the image point for six lens and mirror cases. `phys.opt.reflection`'s retired mirror figure changed content, so its new fingerprint was added to the retirement record. The figure is still image formation, not the laws of reflection. |
+
+The replay gained a `pendulum-no-spoiler` scenario.

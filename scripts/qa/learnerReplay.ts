@@ -24,7 +24,7 @@ import { createSession, openLesson, say, type TurnPayload } from './liveSession'
 
 type Send = string | { pick: 'first' | 'last' }
 interface Check {
-  /** Words that must NOT appear (case-insensitive) — the off-topic signature. */
+  /** Words that must NOT appear (case-insensitive) — an off-topic or spoiler signature. */
   offTopic?: string[]
   /** If the reply marks the answer wrong, it must also explain (≥ this many words after the verdict line). */
   wrongNeedsWhy?: number
@@ -53,6 +53,15 @@ const SCENARIOS: Scenario[] = [
       // wrong, the reply must explain why, not only state the key.
       { send: { pick: 'last' }, check: { wrongNeedsWhy: 12 } },
       { send: { pick: 'last' }, check: { wrongNeedsWhy: 12 } },
+    ],
+  },
+  {
+    // The simulation asks "make the bob heavier — what happens?"; the tutor
+    // must leave that for the learner to find out, not state it first.
+    id: 'pendulum-no-spoiler',
+    subject: 'physics', slug: 'phys.wave.pendulum',
+    steps: [
+      { send: 'i think every swing take same time? not sure. what mean inextensible?', check: { offTopic: ['mass does not', 'does not depend on the mass', 'independent of the mass', 'mass of the bob does not'] } },
     ],
   },
   {
