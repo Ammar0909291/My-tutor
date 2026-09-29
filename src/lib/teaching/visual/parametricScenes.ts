@@ -67,6 +67,9 @@ import { buildPunnettSquareScene, validatePunnettParams } from '@/lib/teaching/s
 import { buildDNAStructureScene, validateDNAStructureParams } from '@/lib/teaching/sceneGenerators/dnaStructure.pure'
 import { buildEcologicalPyramidScene, validateEcologicalPyramidParams } from '@/lib/teaching/sceneGenerators/ecologicalPyramid.pure'
 import { buildERDiagramScene, validateERDiagramParams } from '@/lib/teaching/sceneGenerators/erDiagram.pure'
+import {
+  NEWTON_FIXED_DT, NEWTON_MAX_TICKS, buildNewtonScene, newtonReadouts, newtonTerminalTick, validateNewtonParams,
+} from '@/lib/teaching/sceneGenerators/newtonSecondLaw.pure'
 
 /**
  * One variable a learner may move.
@@ -122,6 +125,67 @@ export interface ParametricScene {
    * refuses the values — a figure is never approximated to satisfy a control.
    */
   build: (params: SceneParams) => SceneSpec | null
+  /**
+   * OPTIONAL time dimension (ADR 16). Absent = the figure is not simulatable,
+   * which is every kind but the Newton proof of concept — their behaviour is
+   * unchanged. Present = the same figure evolves through time, one fixed tick
+   * at a time, and tick 0 IS the figure `build` returns.
+   */
+  simulation?: TimeSimulation
+}
+
+/** One value the learner can read off a running simulation. */
+export interface SimReadout {
+  key: string
+  label: string
+  value: number
+  unit: string
+}
+
+/**
+ * How two runs relate: the measured quantity scales WITH the varied one
+ * (proportional), AGAINST it (inverse), or not at all (unchanged).
+ */
+export type SimRelation = 'proportional' | 'inverse' | 'unchanged'
+
+/**
+ * A prediction the learner may make BEFORE running, authored here on the
+ * registry entry (ADR 16, U6) — never in the pedagogical registry.
+ *
+ * `tests` says what a fair experiment for it looks like: change `vary`, hold
+ * every `holdConstant` fixed, and read `measure`. Only a pair of runs that
+ * does exactly that can answer the prediction — the control-of-variables rule.
+ */
+export interface SimPrediction {
+  id: string
+  question: string
+  options: readonly { label: string; relation: SimRelation }[]
+  tests: { vary: string; holdConstant: readonly string[]; measure: string }
+  /** Shown once a fair experiment has answered the prediction. */
+  explanation: string
+}
+
+/**
+ * A pure, deterministic time model. No React, no timers, no randomness, no I/O.
+ *
+ * State is a function of (params, tick) with t = tick · fixedDt. The wall clock
+ * only decides HOW MANY ticks have passed, so every device reaches the same
+ * state at the same tick.
+ */
+export interface TimeSimulation {
+  /** Fixed simulation tick, seconds. */
+  fixedDt: number
+  /** How far one press of Step advances, in ticks. */
+  stepTicks: number
+  /** Hard stop, in ticks. */
+  maxTicks: number
+  /** The tick on which the run ends; null when the generator refuses the values. */
+  terminalTick: (params: SceneParams) => number | null
+  /** The kind's own builder at a tick. The host applies rebuildScene's gate to it. */
+  build: (params: SceneParams, tick: number) => SceneSpec | null
+  /** What can be read off the run at a tick; null when the values are refused. */
+  observe: (params: SceneParams, tick: number) => SimReadout[] | null
+  predictions: readonly SimPrediction[]
 }
 
 /**
@@ -626,6 +690,60 @@ export const PARAMETRIC_SCENES: Readonly<Record<string, ParametricScene>> = {
       equilibriumPrice: num(p.equilibriumPrice, 50), equilibriumQuantity: num(p.equilibriumQuantity, 100),
     } as unknown as SceneParams),
   },
+
+  // ── time-stepped simulation (ADR 16 proof of concept) ─────────────────────
+  // Registered here so the figure is interactive like every other kind, but NO
+  // concept is bound to it yet (visualRegistry, ADR 16 gate G3): nothing in the
+  // product can serve it until then.
+  newton_second_law: {
+    defaults: { force: 10, mass: 2 },
+    variables: [
+      { key: 'force', label: 'F', kind: 'number', unit: 'N', min: 0, max: 20, step: 1, effect: 'for the same mass, acceleration grows in direct proportion to the net force' },
+      { key: 'mass', label: 'm', kind: 'number', unit: 'kg', min: 0.5, max: 10, step: 0.5, effect: 'for the same force, a heavier block accelerates less: acceleration is inversely proportional to mass' },
+    ],
+    build: guarded(validateNewtonParams, (p) => buildNewtonScene(p, 0)),
+    simulation: {
+      fixedDt: NEWTON_FIXED_DT,
+      stepTicks: 5,
+      maxTicks: NEWTON_MAX_TICKS,
+      terminalTick: (params) => {
+        const p = validateNewtonParams(params)
+        return p ? newtonTerminalTick(p) : null
+      },
+      build: (params, tick) => {
+        const p = validateNewtonParams(params)
+        return p ? buildNewtonScene(p, tick) : null
+      },
+      observe: (params, tick) => {
+        const p = validateNewtonParams(params)
+        return p ? newtonReadouts(p, tick) : null
+      },
+      predictions: [
+        {
+          id: 'double-mass',
+          question: 'Keep the force the same and double the mass. What happens to the acceleration?',
+          options: [
+            { label: 'It doubles', relation: 'proportional' },
+            { label: 'It halves', relation: 'inverse' },
+            { label: 'It stays the same', relation: 'unchanged' },
+          ],
+          tests: { vary: 'mass', holdConstant: ['force'], measure: 'a_measured' },
+          explanation: 'With the same net force, twice the mass gets half the acceleration: a = F / m, so acceleration is inversely proportional to mass.',
+        },
+        {
+          id: 'double-force',
+          question: 'Keep the mass the same and double the force. What happens to the acceleration?',
+          options: [
+            { label: 'It doubles', relation: 'proportional' },
+            { label: 'It halves', relation: 'inverse' },
+            { label: 'It stays the same', relation: 'unchanged' },
+          ],
+          tests: { vary: 'force', holdConstant: ['mass'], measure: 'a_measured' },
+          explanation: 'On the same mass, twice the net force gives twice the acceleration: a = F / m, so acceleration is directly proportional to the net force.',
+        },
+      ],
+    },
+  },
 }
 
 /**
@@ -686,7 +804,20 @@ export function rebuildScene(
   if (!entry) return null
 
   const merged = { ...entry.defaults, ...params }
-  const built = entry.build(merged)
+  return finishFrame(kind, entry, merged, entry.build(merged))
+}
+
+/**
+ * The gate every re-derived figure passes before a learner sees it — shared by
+ * a slider rebuild and by every frame of a time-stepped simulation (ADR 16), so
+ * a simulation frame is framed, validated and stamped by exactly the same code.
+ */
+function finishFrame(
+  kind: string,
+  entry: ParametricScene,
+  merged: SceneParams,
+  built: SceneSpec | null,
+): SceneSpec | null {
   if (!built) return null
 
   // THE SAME FRAMING THE SERVER APPLIES. `buildCanonicalScene` fits every
@@ -732,4 +863,34 @@ export function rebuildScene(
 export function canonicalParametricScene(kind: string): SceneSpec | null {
   const entry = PARAMETRIC_SCENES[kind]
   return entry ? rebuildScene(kind, entry.defaults) : null
+}
+
+/** The time model a kind declares, or null — every kind but the ADR 16 POC. */
+export function simulationFor(kind: string | null | undefined): TimeSimulation | null {
+  return (kind && PARAMETRIC_SCENES[kind]?.simulation) || null
+}
+
+/**
+ * The figure at one tick of a simulation, through the SAME gate as a slider
+ * rebuild (framing, validateSceneSpec, the parametric stamp). The tick is
+ * clamped to [0, terminal tick]. Returns null when the kind has no simulation,
+ * the values are refused, or the frame fails validation — the host then keeps
+ * its last good frame rather than showing a wrong one.
+ *
+ * Tick 0 is, by construction, identical to `rebuildScene(kind, params)`.
+ */
+export function simulationFrame(
+  kind: string | null | undefined,
+  params: SceneParams,
+  tick: number,
+): SceneSpec | null {
+  if (!kind) return null
+  const entry = PARAMETRIC_SCENES[kind]
+  const sim = entry?.simulation
+  if (!entry || !sim) return null
+  const merged = { ...entry.defaults, ...params }
+  const end = sim.terminalTick(merged)
+  if (end === null) return null
+  const k = Math.max(0, Math.min(end, Math.floor(Number.isFinite(tick) ? tick : 0)))
+  return finishFrame(kind, entry, merged, sim.build(merged, k))
 }

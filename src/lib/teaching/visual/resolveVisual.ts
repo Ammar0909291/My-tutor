@@ -730,6 +730,8 @@ const SCENE_KIND_REPRESENTATION: Record<string, Representation> = {
   ray_optics: 'ray_optics',
   torque_diagram: 'force_diagram',
   electric_dipole: 'force_diagram',
+  // ADR 16 POC. Consulted only for a concept bound to this kind (none yet, gate G3).
+  newton_second_law: 'force_diagram',
   vector: 'vector',
   triangle: 'geometry',
   heights_and_distances: 'geometry',

@@ -84,6 +84,10 @@ const CANONICAL_SCENES: Record<string, () => SceneSpec> = {
   ray_optics:      () => fromRegistry('ray_optics'),
   electric_circuit: () => fromRegistry('electric_circuit'),
   kinematics_graphs: () => fromRegistry('kinematics_graphs'),
+  // ADR 16 POC: frame 0 of the time-stepped simulation. Inert until a concept
+  // is bound to this kind in visualRegistry (gate G3) — the resolver reaches
+  // this table only through a concept's binding.
+  newton_second_law: () => fromRegistry('newton_second_law'),
 
   // ── mathematics ──
   vector:   () => fromRegistry('vector'),  // the 3-4-5 case
