@@ -732,6 +732,7 @@ const SCENE_KIND_REPRESENTATION: Record<string, Representation> = {
   electric_dipole: 'force_diagram',
   // ADR 16 POC. Consulted only for a concept bound to this kind (none yet, gate G3).
   newton_second_law: 'force_diagram',
+  pendulum_period: 'pendulum',
   vector: 'vector',
   triangle: 'geometry',
   heights_and_distances: 'geometry',

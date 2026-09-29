@@ -70,6 +70,9 @@ import { buildERDiagramScene, validateERDiagramParams } from '@/lib/teaching/sce
 import {
   NEWTON_FIXED_DT, NEWTON_MAX_TICKS, buildNewtonScene, newtonReadouts, newtonTerminalTick, validateNewtonParams,
 } from '@/lib/teaching/sceneGenerators/newtonSecondLaw.pure'
+import {
+  PENDULUM_FIXED_DT, PENDULUM_MAX_TICKS, PENDULUM_SWINGS_PER_RUN, buildPendulumPeriodScene, pendulumReadouts, pendulumTerminalTick, validatePendulumPeriodParams,
+} from '@/lib/teaching/sceneGenerators/pendulumPeriod.pure'
 
 /**
  * One variable a learner may move.
@@ -140,13 +143,18 @@ export interface SimReadout {
   label: string
   value: number
   unit: string
+  /** Decimal places to show; 2 when omitted. */
+  dp?: number
+  /** A shorter header for the runs table; `label` when omitted. */
+  tableLabel?: string
 }
 
 /**
  * How two runs relate: the measured quantity scales WITH the varied one
- * (proportional), AGAINST it (inverse), or not at all (unchanged).
+ * (proportional), AGAINST it (inverse), with its square root (square_root:
+ * four times the input, twice the result), or not at all (unchanged).
  */
-export type SimRelation = 'proportional' | 'inverse' | 'unchanged'
+export type SimRelation = 'proportional' | 'inverse' | 'square_root' | 'unchanged'
 
 /**
  * A prediction the learner may make BEFORE running, authored here on the
@@ -186,6 +194,8 @@ export interface TimeSimulation {
   /** What can be read off the run at a tick; null when the values are refused. */
   observe: (params: SceneParams, tick: number) => SimReadout[] | null
   predictions: readonly SimPrediction[]
+  /** What the status line says once a run has finished; "Finished." when omitted. */
+  finishedText?: (params: SceneParams, tick: number) => string
 }
 
 /**
@@ -742,6 +752,71 @@ export const PARAMETRIC_SCENES: Readonly<Record<string, ParametricScene>> = {
           explanation: 'On the same mass, twice the net force gives twice the acceleration: a = F / m, so acceleration is directly proportional to the net force.',
         },
       ],
+      finishedText: (_params, tick) => (tick >= NEWTON_MAX_TICKS ? 'Finished — 10 s have passed.' : 'Finished — the block reached the end of the track.'),
+    },
+  },
+
+  // ── ADR 16, second pilot: how long one swing of a pendulum takes ──────────
+  pendulum_period: {
+    defaults: { length: 1, amplitudeDeg: 10, mass: 0.5 },
+    variables: [
+      { key: 'length', label: 'L', kind: 'number', unit: 'm', min: 0.25, max: 2, step: 0.25, effect: 'the length of the string: change it, release again, and compare the swings' },
+      { key: 'amplitudeDeg', label: 'Swing angle', kind: 'number', unit: '°', min: 5, max: 30, step: 5, effect: 'how far to the side the bob is released: change it, release again, and compare the swings' },
+      { key: 'mass', label: 'm', kind: 'number', unit: 'kg', min: 0.1, max: 1, step: 0.1, effect: 'how heavy the bob is: change it, release again, and compare the swings' },
+    ],
+    build: guarded(validatePendulumPeriodParams, (p) => buildPendulumPeriodScene(p, 0)),
+    simulation: {
+      fixedDt: PENDULUM_FIXED_DT,
+      stepTicks: 10,
+      maxTicks: PENDULUM_MAX_TICKS,
+      terminalTick: (params) => {
+        const p = validatePendulumPeriodParams(params)
+        return p ? pendulumTerminalTick(p) : null
+      },
+      build: (params, tick) => {
+        const p = validatePendulumPeriodParams(params)
+        return p ? buildPendulumPeriodScene(p, tick) : null
+      },
+      observe: (params, tick) => {
+        const p = validatePendulumPeriodParams(params)
+        return p ? pendulumReadouts(p, tick) : null
+      },
+      predictions: [
+        {
+          id: 'longer-string',
+          question: 'Keep the swing angle and the bob the same, and make the string four times as long. What happens to the time for one swing?',
+          options: [
+            { label: 'It becomes four times as long', relation: 'proportional' },
+            { label: 'It doubles', relation: 'square_root' },
+            { label: 'It stays the same', relation: 'unchanged' },
+          ],
+          tests: { vary: 'length', holdConstant: ['amplitudeDeg', 'mass'], measure: 'period_measured' },
+          explanation: 'Four times the length gives twice the time for one swing: the time grows with the square root of the length. For small swings, T = 2π√(L / g).',
+        },
+        {
+          id: 'heavier-bob',
+          question: 'Keep the string and the swing angle the same, and make the bob heavier. What happens to the time for one swing?',
+          options: [
+            { label: 'It gets longer', relation: 'proportional' },
+            { label: 'It gets shorter', relation: 'inverse' },
+            { label: 'It stays the same', relation: 'unchanged' },
+          ],
+          tests: { vary: 'mass', holdConstant: ['length', 'amplitudeDeg'], measure: 'period_measured' },
+          explanation: 'The mass makes no difference. A heavier bob is pulled harder by gravity, but it is also harder to speed up, and the two cancel exactly.',
+        },
+        {
+          id: 'wider-swing',
+          question: 'Keep the string and the bob the same, and release it from twice the angle. What happens to the time for one swing?',
+          options: [
+            { label: 'It doubles', relation: 'proportional' },
+            { label: 'It halves', relation: 'inverse' },
+            { label: 'It stays about the same', relation: 'unchanged' },
+          ],
+          tests: { vary: 'amplitudeDeg', holdConstant: ['length', 'mass'], measure: 'period_measured' },
+          explanation: 'For swings up to 30° the time barely changes: a wider swing covers more distance, but the bob also moves faster. The small difference that remains, under 2%, is why T = 2π√(L / g) is called a small-angle result.',
+        },
+      ],
+      finishedText: () => `Finished — the bob made ${PENDULUM_SWINGS_PER_RUN} full swings.`,
     },
   },
 }

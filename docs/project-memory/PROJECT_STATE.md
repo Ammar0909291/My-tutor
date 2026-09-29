@@ -349,7 +349,10 @@ list in order, one ADR per turn, architecture-only:
    no flag, by owner decision). A pilot-polish pass (ADR 16 §17) made it the
    reference implementation: the answer is withheld until the run shows it, the
    arrows are readable, the state text is accurate, the generic chrome is off
-   for simulations, and it is browser-tested at 390/1280. No other concept is bound, and mass migration
+   for simulations, and it is browser-tested at 390/1280. G4 (ADR 16 §18) added ONE second pilot,
+   `phys.wave.pendulum` (kind `pendulum_period`: period vs length, mass and swing angle, measured
+   from an exact-equation run), so exactly TWO concepts are simulation-bound. No third concept is
+   bound, and mass migration
    is not started; G5 (simulation evidence reaching Tutor Max / mastery)
    needs its own future ADR.
 8. **AI Independence Roadmap** — not started. Measuring/reducing AI

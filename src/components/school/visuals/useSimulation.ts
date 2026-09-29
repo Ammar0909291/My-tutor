@@ -22,7 +22,7 @@
  */
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import type { SceneSpec } from '@/lib/teaching/sceneSpec'
-import { simulationFor, simulationFrame, type SceneParams, type SimReadout, type TimeSimulation } from '@/lib/teaching/visual/parametricScenes'
+import { simulationFor, simulationFrame, variablesFor, type SceneParams, type SimReadout, type TimeSimulation } from '@/lib/teaching/visual/parametricScenes'
 import {
   initialSimControl, paramsLocked, simulationControl, type SimControlEvent, type SimControlState,
 } from '@/lib/teaching/visual/simulationControl'
@@ -51,16 +51,23 @@ export interface SimulationHost {
 
 const paramsKey = (p: SceneParams) => JSON.stringify(Object.keys(p).sort().map((k) => [k, p[k]]))
 
-function describeReadouts(readouts: SimReadout[]): string {
+/** What a screen reader hears when a run comes to rest; readouts that only echo a slider are left out. */
+function describeReadouts(readouts: SimReadout[], inputKeys: ReadonlySet<string>): string {
   return readouts
-    .filter((r) => r.key !== 'force' && r.key !== 'mass')
+    .filter((r) => !inputKeys.has(r.key))
     .map((r) => `${r.label} ${formatReadout(r)}`)
     .join(', ')
 }
 
+/** A value and its unit; a degree sign sits against the number (10°, not 10 °). */
+export function withUnit(value: string, unit: string): string {
+  if (!unit) return value
+  return unit === '°' ? `${value}°` : `${value} ${unit}`
+}
+
 export function formatReadout(r: SimReadout): string {
-  const dp = r.key === 't' ? 2 : r.key === 'force' ? 0 : r.key === 'mass' ? 1 : 2
-  return `${r.value.toFixed(dp)} ${r.unit}`
+  const text = r.value.toFixed(r.dp ?? 2)
+  return withUnit(text, r.unit)
 }
 
 export function useSimulation(
@@ -69,6 +76,7 @@ export function useSimulation(
   reducedMotion: boolean,
 ): SimulationHost {
   const sim = simulationFor(kind)
+  const inputKeys = useMemo(() => new Set(variablesFor(kind).map((v) => v.key)), [kind])
 
   const [control, setControl] = useState<SimControlState | null>(() =>
     sim ? initialSimControl({ params, terminalTick: sim.terminalTick(params), fixedDt: sim.fixedDt, stepTicks: sim.stepTicks }) : null,
@@ -92,8 +100,8 @@ export function useSimulation(
     if (!sim || !runId.current) return
     const readouts = sim.observe(s.params, s.tick) ?? []
     record({ kind: 'observation', at: Date.now(), runId: runId.current, params: s.params, tick: s.tick, readouts, terminal: s.phase === 'finished' })
-    setAnnouncement(describeReadouts(readouts))
-  }, [sim, record])
+    setAnnouncement(describeReadouts(readouts, inputKeys))
+  }, [sim, record, inputKeys])
 
   const dispatch = useCallback((event: SimControlEvent, action?: SimAction) => {
     const prev = controlRef.current

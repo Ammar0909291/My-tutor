@@ -127,11 +127,16 @@ describe('an interpretation needs a fair test', () => {
 })
 
 describe('relationOf', () => {
-  it('reads the three clean relations and refuses anything else', () => {
+  it('reads the four clean relations and refuses anything else', () => {
     expect(relationOf(2, 2)).toBe('proportional')
     expect(relationOf(2, 0.5)).toBe('inverse')
     expect(relationOf(2, 1)).toBe('unchanged')
-    expect(relationOf(2, 1.4)).toBeNull()
+    // ADR 16 second pilot: the pendulum's period grows with √L.
+    expect(relationOf(4, 2)).toBe('square_root')
+    expect(relationOf(2, Math.SQRT2)).toBe('square_root')
+    expect(relationOf(0.25, 0.5)).toBe('square_root')
+    expect(relationOf(2, 1.7)).toBeNull()
+    expect(relationOf(4, 3)).toBeNull()
     expect(relationOf(0, 1)).toBeNull()
     expect(relationOf(2, Number.NaN)).toBeNull()
   })

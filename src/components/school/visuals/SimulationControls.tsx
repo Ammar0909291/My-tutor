@@ -19,12 +19,13 @@ import styles from './ExplainerFigure.module.css'
 import { variablesFor, type SimPrediction, type SimRelation } from '@/lib/teaching/visual/parametricScenes'
 import { canPause, canReset, canRun, canStep } from '@/lib/teaching/visual/simulationControl'
 import type { SimEvent } from '@/lib/teaching/visual/simulationEvidence'
-import { formatReadout, type SimulationHost } from './useSimulation'
+import { formatReadout, withUnit, type SimulationHost } from './useSimulation'
 
 const RELATION_TEXT: Record<SimRelation, string> = {
   proportional: 'it changed in direct proportion',
   inverse: 'it changed in inverse proportion',
-  unchanged: 'it did not change',
+  square_root: 'it changed with the square root (four times the input gives twice the result)',
+  unchanged: 'it stayed the same, to within 2%',
 }
 
 const visuallyHidden: CSSProperties = {
@@ -63,8 +64,21 @@ export function SimulationControls({ host, kind, reducedMotion, valueControls }:
   const { sim, control, readouts, evidence } = host
   if (!host.active || !sim || !control) return null
 
-  const labelOf = (key: string) => variablesFor(kind).find((v) => v.key === key)?.label ?? key
   const events = evidence.events
+  const variables = variablesFor(kind)
+  const labelOf = (key: string) => variables.find((v) => v.key === key)?.label ?? key
+  // Readouts that only echo a slider are not shown again; the slider shows them.
+  const inputKeys = new Set(variables.map((v) => v.key))
+  // The runs table: one column per value the learner sets, then each quantity a
+  // prediction measures.
+  const measured = [...new Set(sim.predictions.map((p) => p.tests.measure))]
+  const measuredHeader = (key: string) => {
+    for (const e of events) {
+      const r = e.kind === 'observation' ? e.readouts.find((x) => x.key === key) : undefined
+      if (r) return r.tableLabel ?? r.label
+    }
+    return key
+  }
   const predictionOf = (id: string) => [...events].reverse().find((e) => e.kind === 'prediction' && e.predictionId === id) as
     Extract<SimEvent, { kind: 'prediction' }> | undefined
   const interpretationOf = (id: string) => [...events].reverse().find((e) => e.kind === 'interpretation' && e.predictionId === id) as
@@ -84,7 +98,7 @@ export function SimulationControls({ host, kind, reducedMotion, valueControls }:
     ? 'These values cannot be simulated.'
     : control.phase === 'running' ? 'Running…'
       : control.phase === 'finished'
-        ? (control.tick >= sim.maxTicks ? 'Finished — 10 s have passed.' : 'Finished — the block reached the end of the track.')
+        ? (sim.finishedText?.(control.params, control.tick) ?? 'Finished.')
         : control.phase === 'paused' ? 'Paused.' : 'Ready.'
 
   return (
@@ -139,7 +153,7 @@ export function SimulationControls({ host, kind, reducedMotion, valueControls }:
       <p className={styles.note} data-testid="simulation-status">{status}{host.locked ? ' Values are locked while it runs.' : ''}</p>
 
       <dl className={styles.panelLines} aria-label="Readings" style={{ display: 'grid', gridTemplateColumns: 'auto 1fr', columnGap: 10, margin: '6px 0 0' }}>
-        {readouts.filter((r) => r.key !== 'force' && r.key !== 'mass').map((r) => (
+        {readouts.filter((r) => !inputKeys.has(r.key)).map((r) => (
           <div key={r.key} style={{ display: 'contents' }}>
             <dt>{r.label}</dt>
             <dd style={{ margin: 0 }} data-testid={`readout-${r.key}`}>{formatReadout(r)}</dd>
@@ -151,20 +165,23 @@ export function SimulationControls({ host, kind, reducedMotion, valueControls }:
       {runs.size > 0 && (
         <table aria-label="Your runs" data-testid="simulation-runs" style={{ marginTop: 8, borderCollapse: 'collapse', fontSize: 12, color: 'var(--text-secondary)' }}>
           <thead>
-            <tr>{['Run', labelOf('force'), labelOf('mass'), 'a (measured)'].map((h) => <th key={h} scope="col" style={cell}>{h}</th>)}</tr>
+            <tr>
+              {['Run', ...variables.map((v) => v.label), ...measured.map(measuredHeader)].map((h) => <th key={h} scope="col" style={cell}>{h}</th>)}
+            </tr>
           </thead>
           <tbody>
-            {[...runs.values()].map((o, i) => {
-              const a = o.readouts.find((r) => r.key === 'a_measured')
-              return (
-                <tr key={o.runId}>
-                  <td style={cell}>{i + 1}</td>
-                  <td style={cell}>{String(o.params.force)} N</td>
-                  <td style={cell}>{String(o.params.mass)} kg</td>
-                  <td style={cell}>{a ? `${a.value.toFixed(2)} m/s²` : '—'}</td>
-                </tr>
-              )
-            })}
+            {[...runs.values()].map((o, i) => (
+              <tr key={o.runId}>
+                <td style={cell}>{i + 1}</td>
+                {variables.map((v) => (
+                  <td key={v.key} style={cell}>{withUnit(String(o.params[v.key]), 'unit' in v && v.unit ? v.unit : '')}</td>
+                ))}
+                {measured.map((key) => {
+                  const r = o.readouts.find((x) => x.key === key)
+                  return <td key={key} style={cell}>{r ? formatReadout(r) : '—'}</td>
+                })}
+              </tr>
+            ))}
           </tbody>
         </table>
       )}

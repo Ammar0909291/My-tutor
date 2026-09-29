@@ -353,7 +353,11 @@ describe('registry integration — reuses PARAMETRIC_SCENES, adds no registry', 
   })
 
   it('every other kind is unchanged: no simulation', () => {
-    for (const kind of Object.keys(PARAMETRIC_SCENES).filter((k) => k !== KIND)) {
+    // The approved ADR 16 simulations: Newton (the reference) and the pendulum
+    // (the second pilot, src/tests/pendulumPeriodSimulation.test.ts). No third.
+    const SIMULATION_KINDS = [KIND, 'pendulum_period']
+    expect(Object.keys(PARAMETRIC_SCENES).filter((k) => simulationFor(k) !== null).sort()).toEqual([...SIMULATION_KINDS].sort())
+    for (const kind of Object.keys(PARAMETRIC_SCENES).filter((k) => !SIMULATION_KINDS.includes(k))) {
       expect(simulationFor(kind), kind).toBeNull()
       expect(simulationFrame(kind, PARAMETRIC_SCENES[kind].defaults, 0), kind).toBeNull()
     }

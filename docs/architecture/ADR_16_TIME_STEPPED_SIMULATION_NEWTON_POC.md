@@ -510,3 +510,73 @@ unchanged. No second concept was bound.
     unexpected: any other `/api` call, `POST /api/learn/chat`, a query string, or another origin.
     A classifier test and a live negative-control test show the assertion still fails when the
     page calls the tutor or an API.
+
+## 18. G4 record (2026-09-29): second pilot, the simple pendulum
+
+Owner instruction: select exactly one more physics concept from repository evidence, build it on
+the Newton pattern, validate it, and bind it as the second production simulation. No mass migration.
+
+**Candidates examined** (all physics kinds already in `PARAMETRIC_SCENES`):
+- `projectile`: the static trajectory already shows the result (range and shape) in space. Time adds
+  little, which fails criterion I.
+- `circular`: the quantity at stake (centripetal acceleration) cannot be seen, only computed. The
+  motion itself is uniform, so observation is weak.
+- `collision`: the before/after figure already carries the outcome. Momentum is a readout-level idea.
+- `gravitation_orbit`: period ∝ r^(3/2) is temporal, but the range spans hours to days of real time,
+  so it would need time compression and a heavier model.
+- `kinematics_graphs`: already a graph, and it overlaps Newton's v–t graph.
+- `pendulum` → **selected, as `phys.wave.pendulum`**. The KG describes it as "approximate SHM for
+  small angles with period T = 2π√(L/g)", which is a statement about time, and a static figure cannot
+  show time.
+  - The existing static generator scales every length to the same drawn size (`VISUAL_MAX / L`), so a
+    2 m and a 0.25 m pendulum look identical.
+  - It prints the period in its title before the learner does anything.
+  - All three variables give clean fair tests:
+    - length: T ∝ √L;
+    - mass: no effect, the classic misconception;
+    - swing angle: barely any effect, which is the point of "small angles".
+
+**Design** (new kind `pendulum_period`, `pendulumPeriod.pure.ts`):
+- Inputs: L 0.25–2 m (step 0.25), swing angle 5–30° (step 5), m 0.1–1 kg (step 0.1). g = 9.8.
+  No air resistance.
+- Model: the exact equation θ'' = −(g/L) sin θ, integrated with fixed-step RK4 at 0.01 s, one pass
+  from t = 0 memoised per (L, A), so the state depends on the tick alone.
+  - The 30° cap keeps T within 2% of 2π√(L/g).
+  - The run SHOWS the remaining small difference instead of a formula hiding it.
+- Observation: the time for one swing is MEASURED from the run.
+  - A swing ends when the angular velocity crosses back through zero on the release side; the
+    crossing is interpolated between ticks.
+  - The readout is the average over the swings completed so far.
+  - It is shown only after one full swing.
+  - Accuracy: within 0.1% of the textbook large-angle series.
+- A run ends on the tick the third full swing completes (at most 8.7 s).
+- Figure:
+  - True scale: 4 world units per metre, so 2 m is drawn eight times as long as 0.25 m.
+  - A faint swing arc and a lowest-point line.
+  - An angle–time trace on fixed axes, so more peaks in 10 s means a shorter swing.
+  - A fixed box, so there is one camera distance for every tick and every value.
+- Predictions (authored on the entry): four times the length, a heavier bob, twice the angle. Each
+  is answered only by a fair pair of runs through the existing evidence reducer.
+- Frame 0 withholds the answer: no period, formula or "depends on" in the title, labels, narration,
+  panel, description, goal or slider guidance. Axis ends are bare tick numbers.
+
+**Shared simulation layer, generalized (no new framework).** Newton had wired four things into
+`SimulationControls`/`useSimulation`. They are now data on the entry, with Newton's visible output
+unchanged:
+- which readouts are shown: readouts that echo a slider are hidden;
+- decimal places: an optional `dp` on the readout;
+- the finished status: an optional `finishedText`;
+- the runs table: its columns come from the kind's variables plus what the predictions measure,
+  with an optional `tableLabel`.
+
+The evidence reducer gains one relation, `square_root`. The unchanged relation now reads "it stayed
+the same, to within 2%", which matches the reducer's own tolerance. Degree units print against the
+number (10°).
+
+**Binding.** `phys.wave.pendulum` changes its `sceneGenerator` from `pendulum` to `pendulum_period`.
+Its card `three_pendulum_motion` is kept as the Tier 1 fallback. `phys.wave.shm` and
+`phys.wave.shm-energy` keep the static `pendulum` figure. Newton's binding is untouched. A
+whole-corpus test pins exactly two simulation-bound concepts.
+
+**Known limitation.** At 390 px the figure is limited by the canvas width, so a 0.25 m string is
+short on screen. That follows from drawing to true scale, and comparing lengths is the point.

@@ -88,6 +88,7 @@ const CANONICAL_SCENES: Record<string, () => SceneSpec> = {
   // is bound to this kind in visualRegistry (gate G3) — the resolver reaches
   // this table only through a concept's binding.
   newton_second_law: () => fromRegistry('newton_second_law'),
+  pendulum_period: () => fromRegistry('pendulum_period'),
 
   // ── mathematics ──
   vector:   () => fromRegistry('vector'),  // the 3-4-5 case

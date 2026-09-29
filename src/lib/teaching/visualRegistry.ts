@@ -301,7 +301,7 @@ const CONCEPT_VISUALS: Record<string, VisualEntry> = {
   // Physics — Waves (P1 fix: pendulum and SHM belong to phys.wave.* in the KG,
   // not phys.mech.*; the prior orphan keys phys.mech.pendulum and
   // phys.mech.simple-harmonic-motion were silently unreachable at runtime).
-  'phys.wave.pendulum':               { primary: 'three_pendulum_motion', all: ['three_pendulum_motion'], sceneGenerator: 'pendulum' },
+  'phys.wave.pendulum':               { primary: 'three_pendulum_motion', all: ['three_pendulum_motion'], sceneGenerator: 'pendulum_period' },
   'phys.wave.shm':                    { primary: 'three_pendulum_motion', all: ['three_pendulum_motion'], sceneGenerator: 'pendulum' },
   'phys.wave.shm-energy':             { primary: 'three_pendulum_motion', all: ['three_pendulum_motion'], sceneGenerator: 'pendulum' },
   // P0 audit: the remaining 14 phys.wave concepts (wave-properties,

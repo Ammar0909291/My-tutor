@@ -49,9 +49,10 @@ import { extractDNAStructureParams, buildDNAStructureScene, checkDNAStructureCon
 
 // Keep this union on ONE line: scripts/validate-visualization-coverage.ts (a CI
 // step) reads it from source with a single-line match.
-// newton_second_law (ADR 16) is bound to a concept only through visualRegistry;
-// it is deliberately NOT in ROUTE_RULES and has no extractor, so text never routes to it.
-export type SceneGeneratorKind = 'projectile' | 'triangle' | 'molecule' | 'vector' | 'circular' | 'pendulum' | 'electron_shells' | 'lattice' | 'collision' | 'ray_optics' | 'historical_timeline' | 'economics_curves' | 'calculus_graph' | 'civics_org_chart' | 'electric_circuit' | 'kinematics_graphs' | 'heights_and_distances' | 'demographic_pyramid' | 'coordinate_geometry_line' | 'punnett_square' | 'torque_diagram' | 'gravitation_orbit' | 'statistics_bar_chart' | 'ecological_pyramid' | 'logic_gate' | 'er_diagram' | 'periodic_trends' | 'cell_division' | 'dna_structure' | 'electric_dipole' | 'newton_second_law'
+// The ADR 16 simulations (Newton's second law, pendulum period) are bound to a concept
+// only through visualRegistry; they are deliberately NOT in ROUTE_RULES and have no
+// extractor, so text never routes to them.
+export type SceneGeneratorKind = 'projectile' | 'triangle' | 'molecule' | 'vector' | 'circular' | 'pendulum' | 'electron_shells' | 'lattice' | 'collision' | 'ray_optics' | 'historical_timeline' | 'economics_curves' | 'calculus_graph' | 'civics_org_chart' | 'electric_circuit' | 'kinematics_graphs' | 'heights_and_distances' | 'demographic_pyramid' | 'coordinate_geometry_line' | 'punnett_square' | 'torque_diagram' | 'gravitation_orbit' | 'statistics_bar_chart' | 'ecological_pyramid' | 'logic_gate' | 'er_diagram' | 'periodic_trends' | 'cell_division' | 'dna_structure' | 'electric_dipole' | 'newton_second_law' | 'pendulum_period'
 
 // INTENTIONALLY OUT OF SCOPE — do not add these as scene generators:
 //  • SHM / y=A·sin(ωt) graphs — already owned by the existing 2D graph engine

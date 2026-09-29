@@ -332,6 +332,8 @@ export interface NewtonReadout {
   label: string
   value: number
   unit: string
+  /** A shorter header for the runs table. */
+  tableLabel?: string
 }
 
 /**
@@ -347,7 +349,7 @@ export function newtonReadouts(p: NewtonParams, tick: number): NewtonReadout[] {
     { key: 'x', label: 'x', value: s.x, unit: 'm' },
     { key: 'v', label: 'v', value: s.v, unit: 'm/s' },
   ]
-  if (s.t > 0) out.push({ key: 'a_measured', label: 'a (measured, Δv/Δt)', value: s.v / s.t, unit: 'm/s²' })
+  if (s.t > 0) out.push({ key: 'a_measured', label: 'a (measured, Δv/Δt)', value: s.v / s.t, unit: 'm/s²', tableLabel: 'a (measured)' })
   out.push({ key: 'force', label: 'F', value: p.force, unit: 'N' })
   out.push({ key: 'mass', label: 'm', value: p.mass, unit: 'kg' })
   return out

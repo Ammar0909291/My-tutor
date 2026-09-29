@@ -66,13 +66,14 @@ const near = (x: number, target: number): boolean =>
 
 /**
  * How the measured quantity moved relative to the varied one. `null` when the
- * pair shows none of the three clean relations (not a fair reading).
+ * pair shows none of the clean relations (not a fair reading).
  */
 export function relationOf(varyRatio: number, measureRatio: number): SimRelation | null {
   if (!Number.isFinite(varyRatio) || !Number.isFinite(measureRatio) || varyRatio <= 0 || measureRatio <= 0) return null
   if (near(measureRatio, 1)) return 'unchanged'
   if (near(measureRatio, varyRatio)) return 'proportional'
   if (near(measureRatio, 1 / varyRatio)) return 'inverse'
+  if (near(measureRatio, Math.sqrt(varyRatio))) return 'square_root'
   return null
 }
 
