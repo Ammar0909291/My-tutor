@@ -57,7 +57,6 @@ const passingCritic = async () => ({
 // check compares the scene's own labels with the concept's KG text.
 const CALORIMETRY = 'phys.mech.kinetic-energy'          // no curated visual
 const PROJECTILE  = 'phys.mech.projectile-motion' // canonical generator
-const NEWTON2     = 'phys.mech.newtons-second-law'// curated card
 const PHONICS     = 'eng.phonics.phonemic-awareness'
 const DIM         = 'phys.meas.dimensional-analysis'
 
@@ -130,8 +129,12 @@ describe('the three legitimate outcomes', () => {
   })
 
   it('1b. a curated CARD is also never replaced by generation', async () => {
+    // BEFORE: the example was phys.mech.newtons-second-law. AFTER (ADR 16 G3): that
+    // concept is now served the registry's own Newton simulation (Tier 0), so the
+    // card example moves to the first law, which is still a curated card. The rule
+    // under test (runtime generation never replaces a curated binding) is unchanged.
     const d = await resolveVisualForTurn(
-      { message: '', lessonConceptId: NEWTON2, subject: 'physics', learnerRequest: 'diagram' },
+      { message: '', lessonConceptId: 'phys.mech.newtons-first-law', subject: 'physics', learnerRequest: 'diagram' },
       engine(faithfulCalorimetryScene()),
     )
     expect(d.source).toBe('registry')

@@ -13,7 +13,7 @@
  * with a scrubber, which shows the identical states without movement. The
  * readouts are announced only when a run comes to rest, never per frame.
  */
-import type { CSSProperties } from 'react'
+import type { CSSProperties, MouseEvent } from 'react'
 import { Pause, Play, RotateCcw, SkipForward } from 'lucide-react'
 import styles from './ExplainerFigure.module.css'
 import { variablesFor, type SimPrediction, type SimRelation } from '@/lib/teaching/visual/parametricScenes'
@@ -32,6 +32,17 @@ const visuallyHidden: CSSProperties = {
 }
 
 const cell: CSSProperties = { padding: '2px 12px 2px 0', textAlign: 'left' }
+
+/**
+ * A mouse press on a control must not move focus off the slider the learner
+ * just used. ExplainerFigure shows a slider's effect sentence only while the
+ * slider has focus; the blur collapses it, the page shortens, and when the
+ * figure sits at the bottom of the scroll (as the newest lesson figure does)
+ * the browser clamps the scroll and the button jumps out from under the pointer
+ * between press and release — the click is lost (measured: Run moved 47 px,
+ * pointerdown hit Run, click hit the section). Keyboard use is unaffected.
+ */
+const keepFocus = (e: MouseEvent<HTMLButtonElement>) => e.preventDefault()
 
 type Interpretation = Extract<SimEvent, { kind: 'interpretation' }>
 type Observation = Extract<SimEvent, { kind: 'observation' }>
@@ -83,17 +94,17 @@ export function SimulationControls({ host, kind, reducedMotion }: {
 
       <div className={styles.predictOptions} role="group" aria-label="Simulation controls">
         {!reducedMotion && (
-          <button type="button" className={`${styles.chip} ${styles.chipActive}`} disabled={!canRun(control)} onClick={host.run} aria-label="Run">
+          <button type="button" onMouseDown={keepFocus} className={`${styles.chip} ${styles.chipActive}`} disabled={!canRun(control)} onClick={host.run} aria-label="Run">
             <span className={styles.chipIcon} aria-hidden="true"><Play size={11} /></span>Run
           </button>
         )}
-        <button type="button" className={styles.chip} disabled={!canPause(control)} onClick={host.pause} aria-label="Pause">
+        <button type="button" onMouseDown={keepFocus} className={styles.chip} disabled={!canPause(control)} onClick={host.pause} aria-label="Pause">
           <span className={styles.chipIcon} aria-hidden="true"><Pause size={11} /></span>Pause
         </button>
-        <button type="button" className={styles.chip} disabled={!canStep(control)} onClick={host.step} aria-label={`Step ${seconds} s`}>
+        <button type="button" onMouseDown={keepFocus} className={styles.chip} disabled={!canStep(control)} onClick={host.step} aria-label={`Step ${seconds} s`}>
           <span className={styles.chipIcon} aria-hidden="true"><SkipForward size={11} /></span>Step +{seconds} s
         </button>
-        <button type="button" className={styles.chip} disabled={!canReset(control)} onClick={host.reset} aria-label="Reset">
+        <button type="button" onMouseDown={keepFocus} className={styles.chip} disabled={!canReset(control)} onClick={host.reset} aria-label="Reset">
           <span className={styles.chipIcon} aria-hidden="true"><RotateCcw size={11} /></span>Reset
         </button>
       </div>
@@ -172,7 +183,7 @@ function PredictionBlock({ prediction, chosen, labelOf, onPredict }: {
           {prediction.options.map((o, i) => (
             <button key={o.label} type="button" className={styles.chip} onClick={() => onPredict(prediction.id, i)}>{o.label}</button>
           ))}
-          <button type="button" className={styles.chip} onClick={() => onPredict(prediction.id, null)}>Skip — just experiment</button>
+          <button type="button" onMouseDown={keepFocus} className={styles.chip} onClick={() => onPredict(prediction.id, null)}>Skip — just experiment</button>
         </div>
       </div>
     )

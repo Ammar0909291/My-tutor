@@ -9,10 +9,10 @@
  *   - every frame of every run passes the existing SceneSpec validator
  *   - the camera never re-zooms during a run (a fixed world frame)
  *   - frame 0 IS the static figure the registry builds
- *   - no concept is bound to the kind yet (production exposure is gate G3)
+ *   - G3 pilot: exactly one production concept is bound, with no spillover
  */
 import { describe, expect, it } from 'vitest'
-import { readFileSync } from 'node:fs'
+import { existsSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import {
   NEWTON_FIXED_DT, NEWTON_MAX_TICKS, NEWTON_TRACK_M,
@@ -23,7 +23,9 @@ import {
 } from '@/lib/teaching/visual/parametricScenes'
 import { figureFingerprint } from '@/lib/teaching/visual/sceneAnimation'
 import { validateSceneSpec } from '@/lib/teaching/sceneSpecValidator'
-import { getConceptSceneGenerator } from '@/lib/teaching/visualRegistry'
+import { getConceptSceneGenerator, lookupConceptVisual } from '@/lib/teaching/visualRegistry'
+import { resolveVisual } from '@/lib/teaching/visual/resolveVisual'
+import { routeSceneGenerator } from '@/lib/teaching/sceneGenerators/sceneRouter'
 import { ACTIVATED_SCENE_KINDS, buildCanonicalScene } from '@/lib/teaching/visual/conceptSceneParams'
 import type { SceneSpec } from '@/lib/teaching/sceneSpec'
 
@@ -245,26 +247,76 @@ describe('registry integration — reuses PARAMETRIC_SCENES, adds no registry', 
   })
 })
 
-describe('no production exposure at G1', () => {
-  it('no concept is bound to the kind in the visual registry', () => {
-    expect(getConceptSceneGenerator('phys.mech.newtons-second-law')).toBeNull()
+describe('G3 pilot: exactly ONE production concept is bound', () => {
+  const PILOT = 'phys.mech.newtons-second-law'
+
+  /** Every canonical KG concept id across every registered subject. */
+  const ALL_CONCEPTS: string[] = (() => {
+    const ids: string[] = []
+    for (const dir of ['mathematics', 'physics', 'chemistry', 'computer-science', 'biology', 'english']) {
+      const f = join(process.cwd(), 'docs', dir, 'kg', 'graph.json')
+      if (!existsSync(f)) continue
+      const g = JSON.parse(readFileSync(f, 'utf8'))
+      const cs: Array<{ id: string }> = Array.isArray(g.concepts) ? g.concepts : Object.values(g.concepts ?? g)
+      for (const c of cs) ids.push(c.id)
+    }
+    return ids
+  })()
+  const servedKind = (conceptId: string, learnerRequest: 'diagram' | null) => {
+    const d = resolveVisual({ message: learnerRequest ? 'can you show me a diagram?' : '', lessonConceptId: conceptId, learnerRequest })
+    const payload = d.payload as { renderer?: string; sceneSpec?: SceneSpec } | null
+    return payload?.renderer === 'scene' ? payload.sceneSpec?.parametric?.kind ?? null : null
+  }
+
+  it('the pilot concept is bound through the EXISTING registry field, keeping its card as fallback', () => {
+    expect(getConceptSceneGenerator(PILOT)).toBe(KIND)
+    const entry = lookupConceptVisual(PILOT)!
+    expect(entry.primary).toBe('three_newton_forces') // Tier 1 fallback, unchanged
     const registry = readFileSync(join(process.cwd(), 'src/lib/teaching/visualRegistry.ts'), 'utf8')
-    expect(registry).not.toContain(KIND)
+    expect(registry.match(new RegExp(`sceneGenerator: '${KIND}'`, 'g'))).toHaveLength(1)
   })
 
-  it('the canonical path builds exactly frame 0 — and only a concept binding can reach it', () => {
-    // The resolver calls buildCanonicalScene(getConceptSceneGenerator(conceptId)),
-    // so with no concept bound (above) this entry is unreachable in the product.
+  it('across the WHOLE corpus, only the pilot concept is served the simulation', () => {
+    expect(ALL_CONCEPTS.length).toBeGreaterThan(1500)
+    for (const request of [null, 'diagram'] as const) {
+      const served = ALL_CONCEPTS.filter((id) => servedKind(id, request) === KIND)
+      expect(served, `learnerRequest=${request}`).toEqual([PILOT])
+    }
+  }, 120_000) // two resolver sweeps over ~1,900 concepts (same precedent as the KG-wide visual sweeps)
+
+  it('the pilot is served frame 0 of the simulation — the canonical static figure', () => {
+    const d = resolveVisual({ message: 'can you show me a diagram?', lessonConceptId: PILOT, learnerRequest: 'diagram' })
+    expect(d.graphical).toBe(true)
+    expect(d.source).toBe('registry')
+    expect(d.provenance).toBe(`generator:kind-default:${KIND}`)
+    const scene = (d.payload as { sceneSpec: SceneSpec }).sceneSpec
+    expect(figureFingerprint(scene)).toBe(figureFingerprint(simulationFrame(KIND, PARAMETRIC_SCENES[KIND].defaults, 0)!))
+    expect(scene.parametric).toEqual({ kind: KIND, params: { force: 10, mass: 2 } })
+  })
+
+  it('neighbouring concepts keep exactly the visuals they had', () => {
+    const card = (id: string) => {
+      const d = resolveVisual({ message: 'can you show me a diagram?', lessonConceptId: id, learnerRequest: 'diagram' })
+      return (d.payload as { renderer?: string; visualType?: string } | null)?.visualType ?? null
+    }
+    expect(card('phys.mech.newtons-first-law')).toBe('three_newton_forces')
+    expect(card('phys.mech.newtons-third-law')).toBe('three_newton_forces')
+    expect(card('phys.mech.force')).toBe('force_diagram')
+    expect(servedKind('phys.mech.projectile-motion', 'diagram')).toBe('projectile')
+  })
+
+  it('the canonical path builds exactly frame 0', () => {
     expect(ACTIVATED_SCENE_KINDS).toContain(KIND)
     expect(buildCanonicalScene(KIND)).toEqual(simulationFrame(KIND, PARAMETRIC_SCENES[KIND].defaults, 0))
-    const resolver = readFileSync(join(process.cwd(), 'src/lib/teaching/visual/resolveVisual.ts'), 'utf8')
-    expect(resolver).toContain('buildCanonicalScene(generatorKind, ctx.conceptId)')
-    expect(resolver).toContain('const generatorKind = getConceptSceneGenerator(ctx.conceptId)')
   })
 
-  it('the kind has no keyword route and no LLM extractor', () => {
+  it('no text ever routes to the kind: it is not a keyword route and has no LLM extractor', () => {
     const router = readFileSync(join(process.cwd(), 'src/lib/teaching/sceneGenerators/sceneRouter.ts'), 'utf8')
-    expect(router).not.toContain(KIND)
+    // Present exactly once, in the SceneGeneratorKind type union only.
+    expect(router.match(new RegExp(`'${KIND}'`, 'g'))).toHaveLength(1)
+    for (const text of ["Newton's second law F = ma", 'a force of 10 N accelerates a 2 kg mass', 'net force equals mass times acceleration']) {
+      expect(routeSceneGenerator(text), text).not.toBe(KIND)
+    }
     const host = readFileSync(join(process.cwd(), 'src/lib/teaching/sceneGenerators/newtonSecondLaw.ts'), 'utf8')
     expect(host).not.toContain('generateJSON')
   })

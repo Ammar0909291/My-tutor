@@ -112,6 +112,11 @@ describe('the remaining gap is enumerated and may only shrink', () => {
     'phys.mech.circular-motion',
     'phys.mech.collisions-elastic',
     'phys.mech.kinematics-1d',
+    // ADR 16 G3 (2026-09-29), judged against the KG description "The net force on a
+    // body equals the product of its mass and acceleration: F = ma": the shared
+    // instance draws the net force, the resulting a = F/m and a v–t graph whose slope
+    // is a, with F and m both learner-variable — the relation itself, not one instance.
+    'phys.mech.newtons-second-law',
     'phys.mech.orbital-mechanics',
     'phys.mech.projectile-motion',
     'phys.mech.torque',

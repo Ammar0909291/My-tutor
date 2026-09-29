@@ -37,7 +37,9 @@ const CONCEPT_VISUALS: Record<string, VisualEntry> = {
   'phys.mech.projectile-motion':      { primary: 'three_projectile_motion', all: ['three_projectile_motion', 'force_diagram'], sceneGenerator: 'projectile' },
   'phys.mech.circular-motion':        { primary: 'three_circular_motion', all: ['three_circular_motion', 'force_diagram'], sceneGenerator: 'circular' },
   'phys.mech.newtons-first-law':      { primary: 'three_newton_forces', all: ['three_newton_forces', 'force_diagram'] },
-  'phys.mech.newtons-second-law':     { primary: 'three_newton_forces', all: ['three_newton_forces', 'force_diagram'] },
+  // ADR 16 G3 pilot: the time-stepped F = ma simulation is served first (Tier 0);
+  // the three_newton_forces card stays as the Tier 1 fallback. The ONLY concept bound to it.
+  'phys.mech.newtons-second-law':     { primary: 'three_newton_forces', all: ['three_newton_forces', 'force_diagram'], sceneGenerator: 'newton_second_law' },
   'phys.mech.newtons-third-law':      { primary: 'three_newton_forces', all: ['three_newton_forces', 'force_diagram'] },
   // REPAIRED by the visual semantic moat sweep (round 4): the primary and the
   // secondary were the wrong way round. `three_newton_forces` (NewtonForces3D)

@@ -1,7 +1,8 @@
 # ADR 16 · Time-Stepped Simulation Layer — Newton's Second Law Proof of Concept
 
-**Status:** ACCEPTED (owner, 2026-09-29) for the Newton POC direction. **G1 and G2 implemented**
-(pure layer + dev-only browser integration; no concept bound). G3–G4 remain gated; G5 needs its own future ADR. U1–U7 decided and U8
+**Status:** ACCEPTED (owner, 2026-09-29) for the Newton POC direction. **G1, G2 and G3 implemented.**
+G3 binds exactly ONE production concept (`phys.mech.newtons-second-law`) with no flag (owner decision
+on U8). Mass migration is not started; G5 needs its own future ADR. U1–U7 decided and U8
 deferred to G3 (see §13).
 **Date:** 2026-09-29
 **Roadmap:** Educational Brain forward roadmap item 7, "Visualization & Simulation Architecture"
@@ -430,3 +431,24 @@ No database, migration or persisted state exists at any phase, so rollback never
 - Defects found in the browser and fixed: the explanation and hint were hidden (hover-only class);
   internal graph ids leaked into the legend; the runs table layout was broken; the host object was
   unstable; and the challenge modes contradicted the readouts.
+
+## 16. G3 implementation record (2026-09-29): one-concept production pilot
+
+- Concept: `phys.mech.newtons-second-law` (KG: "The net force on a body equals the product of its
+  mass and acceleration: F = ma"). It is the only concept whose meaning is F = ma itself.
+- Binding: the EXISTING `visualRegistry` field. `sceneGenerator: 'newton_second_law'` is added to the
+  concept's existing row, and `primary: 'three_newton_forces'` is kept, so the resolver serves the
+  simulation at Tier 0 and falls back to the card at Tier 1 (U3). `SceneGeneratorKind` gains the
+  kind name as a type only: no keyword route and no extractor.
+- U8 resolved by the owner: no flag. Rollback is reverting the one registry line, after which the
+  card fallback returns automatically.
+- Verified: across every canonical KG concept, only the pilot is served the simulation (unit test
+  and browser test); the first law, third law, force and projectile motion are unchanged.
+- Defect found on the served path and fixed: after a learner moved a slider, the first click on
+  Run could be lost. Blurring the slider collapses its focus-only effect sentence, and at the bottom
+  of the scroll the page shortens and the button jumps mid-click. The simulation buttons now keep
+  focus on mouse press. The same pattern may affect other ExplainerFigure controls; that is outside
+  this ADR.
+- Governance ratchets updated with recorded judgment: `visualGeneratorDefaultScope` (the concept
+  was judged genuine), `visualSemanticMoat` (physics widened 23 → 24), and
+  `visualEngineArchitecture` (the curated-card example moved to the first law).

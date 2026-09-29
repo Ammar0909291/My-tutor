@@ -48,6 +48,9 @@ import { extractCellDivisionParams, buildCellDivisionScene, checkCellDivisionCon
 import { extractDNAStructureParams, buildDNAStructureScene, checkDNAStructureConsistency } from './dnaStructure'
 
 export type SceneGeneratorKind = 'projectile' | 'triangle' | 'molecule' | 'vector' | 'circular' | 'pendulum' | 'electron_shells' | 'lattice' | 'collision' | 'ray_optics' | 'historical_timeline' | 'economics_curves' | 'calculus_graph' | 'civics_org_chart' | 'electric_circuit' | 'kinematics_graphs' | 'heights_and_distances' | 'demographic_pyramid' | 'coordinate_geometry_line' | 'punnett_square' | 'torque_diagram' | 'gravitation_orbit' | 'statistics_bar_chart' | 'ecological_pyramid' | 'logic_gate' | 'er_diagram' | 'periodic_trends' | 'cell_division' | 'dna_structure' | 'electric_dipole'
+  // ADR 16 time-stepped simulation. Bound to a concept only through visualRegistry;
+  // deliberately NOT in ROUTE_RULES and has no extractor, so text never routes to it.
+  | 'newton_second_law'
 
 // INTENTIONALLY OUT OF SCOPE — do not add these as scene generators:
 //  • SHM / y=A·sin(ωt) graphs — already owned by the existing 2D graph engine

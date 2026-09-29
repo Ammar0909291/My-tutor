@@ -440,11 +440,13 @@ describe('widened-identity bindings do not grow unaudited', () => {
       .filter((d) => d.graphical && (d.asset?.provenance === 'domain-default' || d.asset?.provenance === 'generator-default'))
   }
 
-  it('physics: 23 widened bindings, all inspected', () => {
+  it('physics: 24 widened bindings, all inspected', () => {
     // 23 generator-default and 0 domain-default. None was retired in the end
     // — all four physics retirements were reversed as inert. Every one was
     // read against what it paints, and every one is demoted or faithful.
-    expect(widened('physics').length).toBeLessThanOrEqual(23)
+    // +1 (ADR 16 G3, 2026-09-29): phys.mech.newtons-second-law → the Newton
+    // simulation, inspected and judged faithful (visualGeneratorDefaultScope).
+    expect(widened('physics').length).toBeLessThanOrEqual(24)
     // A full-KG sweep through the real resolver: ~4s alone, over vitest's 5s
     // default under full-suite load. Same budget as the repo's other sweeps.
   }, 30000)
