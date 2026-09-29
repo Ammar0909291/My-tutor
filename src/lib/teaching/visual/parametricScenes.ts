@@ -171,6 +171,15 @@ export interface SimPrediction {
   tests: { vary: string; holdConstant: readonly string[]; measure: string }
   /** Shown once a fair experiment has answered the prediction. */
   explanation: string
+  /**
+   * How a tutor sentence gives this prediction's answer away, and how a learner
+   * message raises the variable itself. While the simulation is on screen, a
+   * sentence matching `answer` is removed from the tutor's reply unless the
+   * learner's own message matches `topic` (they asked) or reports a
+   * measurement (simulationPrompt.ts). Verbal claims only: a formula the lesson
+   * itself teaches is never matched.
+   */
+  giveaway?: { topic: RegExp; answer: readonly RegExp[] }
 }
 
 /**
@@ -739,6 +748,13 @@ export const PARAMETRIC_SCENES: Readonly<Record<string, ParametricScene>> = {
           ],
           tests: { vary: 'mass', holdConstant: ['force'], measure: 'a_measured' },
           explanation: 'With the same net force, twice the mass gets half the acceleration: a = F / m, so acceleration is inversely proportional to mass.',
+          giveaway: {
+            topic: /\b(?:mass|heav\w*|light\w*|weigh\w*)\b/i,
+            answer: [
+              /\b(?:twice|double[ds]?|two times)\b(?:[^.!?\n]|\.\d){0,30}\bmass\b(?:[^.!?\n]|\.\d){0,60}\b(?:half|halves|halved)\b/i,
+              /\binversely proportional to (?:the |its )?mass\b/i,
+            ],
+          },
         },
         {
           id: 'double-force',
@@ -750,6 +766,13 @@ export const PARAMETRIC_SCENES: Readonly<Record<string, ParametricScene>> = {
           ],
           tests: { vary: 'force', holdConstant: ['mass'], measure: 'a_measured' },
           explanation: 'On the same mass, twice the net force gives twice the acceleration: a = F / m, so acceleration is directly proportional to the net force.',
+          giveaway: {
+            topic: /\b(?:force|push\w*|pull\w*)\b/i,
+            answer: [
+              /\b(?:twice|double[ds]?|two times)\b(?:[^.!?\n]|\.\d){0,30}\bforce\b(?:[^.!?\n]|\.\d){0,60}\b(?:twice|double[ds]?|two times)\b/i,
+              /\bdirectly proportional to (?:the )?(?:net )?force\b/i,
+            ],
+          },
         },
       ],
       finishedText: (_params, tick) => (tick >= NEWTON_MAX_TICKS ? 'Finished — 10 s have passed.' : 'Finished — the block reached the end of the track.'),
@@ -792,6 +815,13 @@ export const PARAMETRIC_SCENES: Readonly<Record<string, ParametricScene>> = {
           ],
           tests: { vary: 'length', holdConstant: ['amplitudeDeg', 'mass'], measure: 'period_measured' },
           explanation: 'Four times the length gives twice the time for one swing: the time grows with the square root of the length. For small swings, T = 2π√(L / g).',
+          giveaway: {
+            topic: /\b(?:length|long\w*|short\w*|string)\b/i,
+            answer: [
+              /\bsquare root of (?:the )?(?:length|L)\b/i,
+              /\b(?:four|4)\s*(?:times|×)(?:[^.!?\n]|\.\d){0,50}\b(?:twice|double[ds]?|two times|2\s*(?:times|×))/i,
+            ],
+          },
         },
         {
           id: 'heavier-bob',
@@ -803,6 +833,13 @@ export const PARAMETRIC_SCENES: Readonly<Record<string, ParametricScene>> = {
           ],
           tests: { vary: 'mass', holdConstant: ['length', 'amplitudeDeg'], measure: 'period_measured' },
           explanation: 'The mass makes no difference. A heavier bob is pulled harder by gravity, but it is also harder to speed up, and the two cancel exactly.',
+          giveaway: {
+            topic: /\b(?:mass|heav\w*|light\w*|weigh\w*)\b/i,
+            answer: [
+              /\b(?:not|n't|never|nor|regardless of|independent of|no matter)\b(?:[^.!?\n]|\.\d){0,60}\b(?:mass|heav\w*|weigh\w*)\b/i,
+              /\b(?:mass|heav\w*|weigh\w*)\b(?:[^.!?\n]|\.\d){0,60}\b(?:does not|doesn't|do not|don't|has no|makes no|no effect|no difference|not affect|cancel\w*)/i,
+            ],
+          },
         },
         {
           id: 'wider-swing',
@@ -814,6 +851,13 @@ export const PARAMETRIC_SCENES: Readonly<Record<string, ParametricScene>> = {
           ],
           tests: { vary: 'amplitudeDeg', holdConstant: ['length', 'mass'], measure: 'period_measured' },
           explanation: 'For swings up to 30° the time barely changes: a wider swing covers more distance, but the bob also moves faster. The small difference that remains, under 2%, is why T = 2π√(L / g) is called a small-angle result.',
+          giveaway: {
+            topic: /\b(?:angle|amplitude|wide\w*|far\w*|same time|every swing)\b/i,
+            answer: [
+              /\b(?:not|n't|never|nor|regardless of|independent of|no matter)\b(?:[^.!?\n]|\.\d){0,60}\b(?:amplitude|angle|size of the swing|how (?:far|wide|big))\b/i,
+              /\b(?:amplitude|angle)\b(?:[^.!?\n]|\.\d){0,60}\b(?:does not|doesn't|has no|makes no|no effect|barely|hardly)\b/i,
+            ],
+          },
         },
       ],
       finishedText: () => `Finished — the bob made ${PENDULUM_SWINGS_PER_RUN} full swings.`,

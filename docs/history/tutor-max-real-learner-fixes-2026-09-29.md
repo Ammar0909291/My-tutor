@@ -76,3 +76,28 @@ Baseline against production before this batch: 6 failures, covering all three ty
 | 10 | Lens figure had no rays and a 3D grid | The generator drew only the object, image and focal points. | Two principal rays (parallel ray through the focus, ray through the centre); grey back-extensions for a virtual image; flat stage. `rayOpticsPrincipalRays.test.ts` checks every ray passes through the image point for six lens and mirror cases. `phys.opt.reflection`'s retired mirror figure changed content, so its new fingerprint was added to the retirement record. The figure is still image formation, not the laws of reflection. |
 
 The replay gained a `pendulum-no-spoiler` scenario.
+
+## Batch 2 checked in production (deployment of 7c88b52e)
+
+Replay against production:
+- lenses: pass.
+- Newton: pass.
+- Kirchhoff: **now passes**. The tutor says the diagram shows the currents as numbers rather than
+  arrows, then gives a practice question.
+- pendulum-no-spoiler: **still failed**. The simulation was served and the new prompt block was in
+  place, but the model still wrote "the period depends only on the length L … not on how heavy the
+  bob is". This is the same pattern already measured for other advisory prompt rules.
+
+## Batch 3 — deterministic backstop for simulation spoilers
+
+Each `SimPrediction` may now declare `giveaway: { topic, answer[] }`. The fields are authored on
+the registry entry, beside the prediction itself. `stripSimulationGiveaways` (visual/simulationPrompt.ts,
+wired into route.ts before the figure acknowledgement) removes the reply sentences that state a
+prediction's answer, but only while that simulation is on screen. It removes nothing when:
+
+- the learner's message raises that variable (they asked, so they get an answer);
+- the message contains a number (a reported measurement);
+- removal would leave almost no text.
+
+Only verbal claims are matched. The formula the lesson teaches, T = 2π√(L/g), is never removed.
+Tests use the two real production replies.

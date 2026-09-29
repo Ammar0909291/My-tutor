@@ -10134,6 +10134,25 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         console.warn('[topic-drift] check skipped:', err)
       }
 
+      // A SIMULATION'S ANSWERS ARE THE LEARNER'S TO FIND. The prompt asks the
+      // tutor not to state them; this removes the sentences that still do
+      // (simulationPrompt.ts — measured ignored in production, 2026-09-29).
+      try {
+        const { stripSimulationGiveaways } = await import('@/lib/teaching/visual/simulationPrompt')
+        const spoil = stripSimulationGiveaways(cleanText, resolvedVisualDecision, learnerAuthoredMessage)
+        if (spoil.removed.length) {
+          console.warn('[simulation-giveaway] ' + JSON.stringify({
+            event: 'prediction-answer-stripped',
+            conceptId: resolvedConceptId ?? null,
+            removed: spoil.removed.map((r) => r.slice(0, 120)),
+          }))
+          cleanText = spoil.text
+        }
+      } catch (err) {
+        // A repair must never break a turn.
+        console.warn('[simulation-giveaway] check skipped:', err)
+      }
+
       // A DELIVERED FIGURE MUST BE INTRODUCED, NOT JUST ATTACHED.
       // Real-student session (2026-09): a requested diagram sometimes
       // appeared with the reply carrying no reference to it at all — nothing

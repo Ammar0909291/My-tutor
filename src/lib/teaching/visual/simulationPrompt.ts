@@ -43,3 +43,45 @@ export function buildSimulationBlock(decision: VisualDecision | null | undefined
     'to make a prediction and test it. When they report a result, explain it.'
   )
 }
+
+/**
+ * THE BACKSTOP. Measured on production after the prompt block above shipped
+ * (2026-09-29, phys.wave.pendulum): "the period depends only on the length L
+ * … not on how heavy the bob is" — the prompt rule was ignored, as this
+ * codebase has measured for advisory rules before. So the sentences that
+ * state a prediction's answer are removed after generation, using each
+ * prediction's authored `giveaway` patterns.
+ *
+ * Nothing is removed when the learner's own message raises that variable (they
+ * asked, so they get an answer) or reports a measurement (a number: they ran
+ * it, so the tutor explains). Pure and additive-safe: when removal would leave
+ * almost nothing, the text is returned unchanged.
+ */
+export function stripSimulationGiveaways(
+  text: string,
+  decision: VisualDecision | null | undefined,
+  learnerMessage: string,
+): { text: string; removed: string[] } {
+  const sim = servedSimulation(decision)
+  if (!sim || typeof text !== 'string' || !text.trim()) return { text, removed: [] }
+  const msg = learnerMessage ?? ''
+  if (/\d/.test(msg)) return { text, removed: [] }
+  const patterns = sim.predictions
+    .filter((p) => p.giveaway && !p.giveaway.topic.test(msg))
+    .flatMap((p) => p.giveaway!.answer)
+  if (patterns.length === 0) return { text, removed: [] }
+
+  const removed: string[] = []
+  const lines = text.split('\n').map((line) => {
+    const sentences = line.split(/(?<=[.!?])\s+/)
+    const kept = sentences.filter((s) => {
+      if (patterns.some((re) => re.test(s))) { removed.push(s.trim()); return false }
+      return true
+    })
+    return kept.join(' ')
+  })
+  if (removed.length === 0) return { text, removed: [] }
+  const out = lines.join('\n').replace(/\n{3,}/g, '\n\n').trim()
+  if (out.length < 40) return { text, removed: [] }
+  return { text: out, removed }
+}
