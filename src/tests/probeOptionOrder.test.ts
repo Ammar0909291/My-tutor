@@ -46,7 +46,7 @@ describe('the served order', () => {
     // with the authored working held in `rationales`; rejoined, it is the
     // authored text exactly, so the key still moves with its choice.
     const full = (m: NonNullable<typeof served[number]['m']>, i: number) =>
-      m.rationales ? `${m.options[i]} — ${m.rationales[i]}` : m.options[i]
+      m.rationales?.[i] ? `${m.options[i]} — ${m.rationales[i]}` : m.options[i]
     for (const { p, m } of served) {
       const authored = p.choices!.find((c) => c.isCorrect)!.text.trim()
       expect(full(m!, m!.correctIndex).replace(/\s[—–]\s/, ' — ')).toBe(authored.replace(/\s[—–]\s/, ' — '))

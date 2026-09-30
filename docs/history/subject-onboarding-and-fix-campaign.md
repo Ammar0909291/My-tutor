@@ -739,6 +739,25 @@ option uniquely longest: english 96% → 18%, chemistry 79% → 45%, cs 78% → 
 No production data changed; option (b) (rewriting the remaining items, then an owner-reviewed
 UPDATE) stays open — mathematics is the main residue and its content work is paused.
 
+**2026-09-30 — part (b), PHYSICS ONLY (owner: "Go task 2", then "only physics as of now").**
+Analysis of physics' 734 remaining cue items (correct uniquely longest after the heads change):
+247 carried working on the correct option alone, 104 on a mix of options, 155 were already split
+(heads differing by a few letters, not a real cue), 187 were plainly longer wording and 41
+multi-sentence/"because". The first two groups are the same authored annotation, so the runtime
+rule was extended rather than the content rewritten: `splitAnswerHeadsPerOption`
+(gateAssessment.ts) serves the head of EVERY option that has the spaced-dash shape and serves
+the rest whole (empty rationale), with the same safety rules; it applies only when the probe's
+`conceptId` starts with `phys.` (plumbed via the new optional `ProbeMatch.conceptId` /
+`ConvertibleProbe.conceptId`) — every other subject keeps the all-or-nothing rule. The
+full-text grading rule skips empty rationales; the verdict never invents "thinking" for a
+whole-served distractor. Physics, served: correct option uniquely longest 81% → 54% → **36%**,
+uniquely shortest 8% → **42%** (no-cue baseline for physics' 722 two-option / 643 three-to-four-
+option mix ≈ 40% each) — "pick the longest" no longer beats chance, and no reverse cue was
+created. Grading simulation: 5,734/5,734 head taps and original full texts grade to their own
+option, 0 misattributions. No production data changed; no DB statements were needed. Left, as
+optional per-item polish only (content + an owner-reviewed UPDATE): the ~220 plain/multi-sentence
+physics items whose correct wording is individually longer.
+
 **Verified live (2026-09-27, production deploy `2f15d657`, disposable account, deleted after).**
 `scripts/qa/probeOptionOrderLive.ts` over the first 5 Biology lessons: 10 authored quizzes served;
 the authored-correct option sat at A in 4/10 (3 of them 2-option items that happened to land in

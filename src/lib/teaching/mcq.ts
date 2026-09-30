@@ -975,7 +975,8 @@ export function resolveMcqChoice(message: string, mcq: TutorMCQ): number | null 
   // that option. Exact match on the rejoined text only — nothing else widens.
   if (Array.isArray(mcq.rationales) && mcq.rationales.length === mcq.options.length) {
     const typed = message.replace(/\s+/g, ' ').trim()
-    const hit = mcq.options.findIndex((o, i) => `${o} — ${mcq.rationales![i]}`.replace(/\s+/g, ' ').trim() === typed)
+    // An empty rationale is an option that was served whole (physics per-option split).
+    const hit = mcq.options.findIndex((o, i) => Boolean(mcq.rationales![i]) && `${o} — ${mcq.rationales![i]}`.replace(/\s+/g, ' ').trim() === typed)
     if (hit >= 0) return hit
   }
   // Tapped text is always graded, even when an option is itself phrased as a question.

@@ -26,6 +26,9 @@ import type { TutorMCQ } from '../mcq'
 
 export interface ProbeMatch {
   assetId: string
+  /** The concept the probe was selected for — lets `probeToMcq` apply
+   *  subject-scoped presentation rules (task #2, physics-only per-option split). */
+  conceptId?: string
   stem: string
   choices: ProbeChoice[] | null
   correctValue: string | null
@@ -152,6 +155,7 @@ export async function findBestProbe(state: StudentState, options: MatchOptions =
     if (best) {
       return {
         assetId: best.asset.assetId,
+        conceptId: state.conceptId,
         stem: best.asset.probeAsset!.stem,
         choices: choicesOf(best.asset),
         correctValue: best.asset.probeAsset!.correctValue,
@@ -168,6 +172,7 @@ export async function findBestProbe(state: StudentState, options: MatchOptions =
       if (fallback) {
         return {
           assetId: fallback.asset.assetId,
+          conceptId: state.conceptId,
           stem: fallback.asset.probeAsset!.stem,
           choices: choicesOf(fallback.asset),
           correctValue: fallback.asset.probeAsset!.correctValue,

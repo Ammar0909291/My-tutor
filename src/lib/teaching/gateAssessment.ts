@@ -115,6 +115,9 @@ export interface ConvertibleProbe {
    *  narrowed shape is also satisfied by callers that do not have one; absent
    *  produces exactly the previous output. */
   assetId?: string
+  /** The concept the probe belongs to, when the caller has it. Used only to
+   *  scope the physics per-option head split (task #2); absent → unchanged. */
+  conceptId?: string
 }
 
 /**
@@ -193,6 +196,7 @@ export function probeToMcq(probe: ConvertibleProbe): TutorMCQ | null {
   // TutorMCQ.rationales. The order is still keyed on the question alone, so it
   // is identical to what the full-text options would have been given.
   const split = splitAnswerHeads(options)
+    ?? (typeof probe.conceptId === 'string' && probe.conceptId.startsWith('phys.') ? splitAnswerHeadsPerOption(options) : null)
   const shownOptions = order.map((i) => (split ? split.heads[i] : options[i]))
   const shownCorrect = order.indexOf(correctIndexes[0])
 
@@ -238,6 +242,38 @@ export function splitAnswerHeads(options: string[]): { heads: string[]; rational
     heads.push(head)
     rationales.push(why)
   }
+  if (new Set(heads.map((h) => norm(h).toLowerCase())).size !== heads.length) return null
+  if (heads.some((h) => norm(h).length === 0)) return null
+  return { heads, rationales }
+}
+
+/**
+ * PHYSICS ONLY, PER OPTION (task #2 part b, 2026-09-30). After the all-or-
+ * nothing split above, 351 of physics' 734 remaining length-cue items still
+ * had authored working on SOME options only — 247 on the correct option alone
+ * ("Equal — gravity pays out by height drop alone; the path does not matter"
+ * against "The steep slide gives a higher exit speed"), 104 on a mix. Here each
+ * option that has the spaced-dash shape is served as its head and keeps its
+ * working in `rationales`; an option without it is served whole with an empty
+ * rationale. The same safety rules hold: at least one option splits, no head
+ * is a bare letter, and every served option stays distinct case-insensitively.
+ * Scoped to physics (the only subject in scope for this change); every other
+ * subject keeps the all-or-nothing rule.
+ */
+export function splitAnswerHeadsPerOption(options: string[]): { heads: string[]; rationales: string[] } | null {
+  const heads: string[] = []
+  const rationales: string[] = []
+  let splitAny = false
+  for (const o of options) {
+    const m = o.match(/^([\s\S]+?)\s[—–]\s([\s\S]+)$/)
+    const head = m ? m[1].trim() : '', why = m ? m[2].trim() : ''
+    if (m && head && why && !/^[A-Da-d][.)]?$/.test(head)) {
+      heads.push(head); rationales.push(why); splitAny = true
+    } else {
+      heads.push(o); rationales.push('')
+    }
+  }
+  if (!splitAny) return null
   if (new Set(heads.map((h) => norm(h).toLowerCase())).size !== heads.length) return null
   if (heads.some((h) => norm(h).length === 0)) return null
   return { heads, rationales }

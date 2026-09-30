@@ -13,7 +13,7 @@
 import { describe, it, expect, beforeAll } from 'vitest'
 import { readdirSync } from 'fs'
 import path from 'path'
-import { probeToMcq, splitAnswerHeads } from '@/lib/teaching/gateAssessment'
+import { probeToMcq, splitAnswerHeads, splitAnswerHeadsPerOption } from '@/lib/teaching/gateAssessment'
 import { resolveMcqChoice, mcqForClient, type TutorMCQ } from '@/lib/teaching/mcq'
 import { readPendingQuestion, writePendingQuestion } from '@/lib/teaching/pendingQuestion'
 import { buildAnswerVerdictBlock } from '@/lib/teaching/answerVerdictBlock'
@@ -86,7 +86,8 @@ describe('corpus-wide: grading is untouched and the cue drops', () => {
       split++
       m.options.forEach((o, i) => {
         if (resolveMcqChoice(o, m) !== i) wrong.push(`${p.conceptId} tap "${o}"`)
-        if (resolveMcqChoice(`${o} — ${m.rationales![i]}`, m) !== i) wrong.push(`${p.conceptId} full "${o} — …"`)
+        const full = m.rationales![i] ? `${o} — ${m.rationales![i]}` : o
+        if (resolveMcqChoice(full, m) !== i) wrong.push(`${p.conceptId} full "${o} — …"`)
       })
     }
     expect(split).toBeGreaterThan(2000)
@@ -140,4 +141,69 @@ describe('the working survives the turn boundary and reaches the verdict', () =>
     const r = stateCorrectionForWrongAnswer({ text: 'Let us look again.', correct: false, probe: m })
     expect(r.text).toMatch(/^Not quite — the answer is: Four — l can be 0 or 1/)
   })
+})
+
+describe('physics only: per-option split (task #2 part b)', () => {
+  const EQUAL = {
+    conceptId: 'phys.mech.conservation-of-energy',
+    stem: 'Two slides of the same height, one steep and one gentle. Which gives the higher exit speed (no friction)?',
+    choices: [
+      { text: 'Equal — gravity pays out by height drop alone; the path does not matter', isCorrect: true },
+      { text: 'The steep slide gives a higher exit speed', isCorrect: false },
+      { text: 'The gentle slide, because it is longer', isCorrect: false },
+    ],
+  }
+
+  it('splits only the options that have the shape; the rest are served whole', () => {
+    expect(splitAnswerHeadsPerOption(['Equal — height alone', 'The steep one'])).toEqual({ heads: ['Equal', 'The steep one'], rationales: ['height alone', ''] })
+    expect(splitAnswerHeadsPerOption(['No dash here', 'Nor here'])).toBeNull()
+    expect(splitAnswerHeadsPerOption(['Steep — reason', 'steep'])).toBeNull()
+  })
+
+  it('applies to a physics probe, and never to another subject', () => {
+    const phys = probeToMcq(EQUAL as never)!
+    expect(phys.options[phys.correctIndex]).toBe('Equal')
+    expect(phys.rationales![phys.correctIndex]).toMatch(/^gravity pays out/)
+    const chem = probeToMcq({ ...EQUAL, conceptId: 'chem.found.matter' } as never)!
+    expect(chem.options[chem.correctIndex]).toMatch(/^Equal — gravity pays out/)
+    expect(chem).not.toHaveProperty('rationales')
+    const unknown = probeToMcq({ ...EQUAL, conceptId: undefined } as never)!
+    expect(unknown).not.toHaveProperty('rationales')
+  })
+
+  it('a wrong answer on a whole-served option gets no invented reasoning, only the right one\'s', () => {
+    const m = probeToMcq(EQUAL as never)!
+    const wrong = m.options.findIndex((o, i) => i !== m.correctIndex)
+    const block = buildAnswerVerdictBlock({ grade: { chosenIndex: wrong, correct: false }, mcq: m, keyIsAuthored: true })
+    expect(block).not.toContain('The thinking behind that choice')
+    expect(block).toContain('The authored reason it is right: "gravity pays out')
+  })
+
+  it('corpus: physics now sits near chance on length, in both directions (measured 2026-09-30)', async () => {
+    const dir = path.resolve(__dirname, '../lib/teaching/assets')
+    const physics: Probe[] = []
+    for (const f of readdirSync(dir).filter((f) => f.endsWith('.ts') && !f.endsWith('.test.ts'))) {
+      const mod = await import(path.join(dir, f))
+      for (const [name, value] of Object.entries(mod)) if (Array.isArray(value) && name.endsWith('PROBES')) physics.push(...(value as Probe[]).filter((p) => p.subjectSlug === 'physics'))
+    }
+    let n = 0, longest = 0, shortest = 0
+    const wrong: string[] = []
+    for (const p of physics) {
+      const m = probeToMcq(p as never)
+      if (!m) continue
+      n++
+      const L = m.options.map((o) => o.length), max = Math.max(...L), min = Math.min(...L)
+      if (L[m.correctIndex] === max && L.filter((l) => l === max).length === 1) longest++
+      if (L[m.correctIndex] === min && L.filter((l) => l === min).length === 1) shortest++
+      m.options.forEach((o, i) => {
+        const full = m.rationales?.[i] ? `${o} — ${m.rationales[i]}` : o
+        if (resolveMcqChoice(o, m) !== i || resolveMcqChoice(full, m) !== i) wrong.push(`${p.conceptId} "${o}"`)
+      })
+    }
+    // Before this work: correct option uniquely longest 81%, uniquely shortest 8%.
+    // No-cue baseline for physics' option-count mix is ~40% for each.
+    expect(longest / n).toBeLessThan(0.42)
+    expect(shortest / n).toBeLessThan(0.48)
+    expect(wrong).toEqual([])
+  }, 60_000)
 })
