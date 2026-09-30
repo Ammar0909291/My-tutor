@@ -201,8 +201,9 @@ finding above: `docs/history/subject-onboarding-and-fix-campaign.md`.
 production; remaining items are non-blocking. Details, evidence and the QA harness
 (`scripts/qa/physicsProductionRuntimeQa.ts`) are in the same history file's dated section.
 **Physics visual gap campaign (2026-09-30) — COMPLETE**: all 238 physics concepts resolve to a
-figure (226 concept-scoped after the batch-15 upgrade, 12 pinned domain-scoped), asserted by
-`physicsCoreScenesBatch14.test.ts`.
+figure (226 concept-scoped after the batch-15 upgrade, 12 pinned domain-scoped — kept on purpose:
+they are interactive parametric figures a static scene would strip; see the history file), asserted
+by `physicsCoreScenesBatch14.test.ts`.
 Physics has no assetless concept left — tests needing one use `chem.found.significant-figures`.
 Production rendering not yet QA'd (Vercel 403). Full log: `docs/history/physics-visual-gap-campaign.md`.
 

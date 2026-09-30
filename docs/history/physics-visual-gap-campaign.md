@@ -591,3 +591,36 @@ repair, while their registry card is still the bare coordinate plane).
 Validation: tsc ratchet 0 ≤ 0; vitest 802 files / 17,116 passed, 9 skipped (first run found the
 moat/maths fixtures above, 9 tests; re-run fully green); validate:visuals physics exact=77
 incorrect=0; `npm run build` exit 0.
+
+## Batch 16 decision (2026-09-30): the 12 generator-kind concepts stay interactive — documented, not replaced
+
+Owner instruction: "decide yourself what is best". Checked before authoring: all 12 remaining
+domain-scoped concepts are served by a PARAMETRIC generator kind (`visual/parametricScenes.ts`:
+vector, kinematics_graphs, collision, torque_diagram, gravitation_orbit, pendulum, ray_optics,
+electric_circuit). The client attaches sliders — and, for some kinds, a time-stepped simulation —
+by the scene's `parametric.kind` stamp (`ExplainerFigure.tsx`, `useSimulation.ts`). A static
+CONCEPT_SCENES figure carries no stamp, so replacing any of these would REMOVE the learner's
+ability to vary the figure, to gain only the stronger contract wording. Their domain scope
+changes the tutor's framing ("a general illustration"), never the picture, so it is the honest
+and safe state. Decision: keep all 12 interactive and domain-scoped; this is the documented
+reason the campaign's end state pins them (`physicsCoreScenesBatch14.test.ts` DOMAIN_SCOPED).
+
+Per concept (audit verdict → what the interactive figure already offers):
+- phys.em.ohms-law (series network, V = IR not the figure) → the Voltage slider changes the
+  current in proportion: Ohm's law demonstrated by interaction.
+- phys.em.dc-circuits (series only) → the Wiring control switches Series/Parallel; the verdict
+  describes only the opening frame.
+- phys.mech.momentum (elastic collision, p = mv not drawn) → mass/velocity sliders with
+  "total momentum before equals after".
+- phys.wave.shm / shm-energy (one pendulum instance; no F = −kx / no KE–PE split) → a real SHM
+  system with length/amplitude sliders.
+- phys.opt.lens-power (one lens; needs a combination) → focal-length slider shows "shorter f
+  bends more"; the generator has no two-lens mode.
+- phys.meas.scalars-vectors, phys.mech.rotational-dynamics, phys.mech.universal-gravitation,
+  phys.mech.gravitational-field, phys.em.electric-current, phys.mech.kinematics-2d → the
+  kind's variables cannot draw the missing element (a scalar, I and α, the force pair, field
+  lines, drift velocity, a 2-D path).
+Upgrade path that keeps interaction (not started): extend the kind's generator (e.g. a
+two-lens ray_optics mode, a field-line mode for gravitation_orbit, a spring mode for SHM), or
+rebind kinematics-2d to the 2-D `projectile` kind — each then becomes a concept-authored
+PARAMETRIC scene (rebuildScene with concept parameters), which keeps the sliders and earns scope.
