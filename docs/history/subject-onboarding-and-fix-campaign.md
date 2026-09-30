@@ -1071,3 +1071,25 @@ Every account used was deleted afterwards (DB-checked: 0 `qa-ab-*`/`qa-repro-*`,
 - Test hygiene: the two widened-binding KG sweeps in `visualSemanticMoatPhysicsChemistry.test.ts` take
   ~4s alone (on the previous HEAD too). They timed out at vitest's 5s default under full-suite load, so
   they now get 30s like the repo's other sweeps; the ceilings are unchanged.
+
+## 2026-09-30 — live production check, physics (deployment of 76916f3b)
+
+Production was confirmed on the latest commit via the Vercel API (dpl_EtsaxeJw26z3XoD1daHwcujZTRho,
+READY, sha 76916f3b). The site answered this container (home 200, /api/health 200 db:true).
+
+- `scripts/qa/learnerReplay.ts` (all physics scenarios, disposable account, deleted with
+  re-login blocked): **ALL CHECKS PASSED**.
+- One concept end to end on the owner-supplied fresh account `suaibamr6@gmail.com`
+  (credentials used only as an ephemeral env var, never written), via the new
+  `scripts/qa/physicsOneConceptLive.ts`: lesson 1, `phys.meas.units` "SI Units and
+  Measurement". **Mastery verified in 10 turns** (check 1/1, practice 2/2, lesson complete,
+  fullyMastered, 107 s). The "seven SI base units" figure was on screen on 3 turns. All 5
+  authored quizzes were served without working in the options (e.g. "Its zero is absolute",
+  "No"/"Yes"); one answered deliberately wrong, four right, grades followed the key.
+- **Defect found (open):** the deliberately wrong answer (4.7 µF → "4.7 × 10⁶ F") got ONLY
+  "Not quite — the answer is: 4.7 × 10⁻⁶ F" — no why. That item's options carry no authored
+  working (nothing to reveal), and the model's own explanation did not survive into the reply,
+  so this is the earlier "bare Not quite" symptom (answerVerdictBlock asks for a why; the
+  final text had none). Not yet root-caused.
+- Account note: `suaibamr6@gmail.com` now has `phys.meas.units` COMPLETED; the rest of
+  physics is still fresh on it.
