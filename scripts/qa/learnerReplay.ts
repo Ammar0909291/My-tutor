@@ -108,7 +108,7 @@ const SCENARIOS: Scenario[] = [
 
 const WRONG_RE = /^\s*not quite\b/i
 
-function checkReply(p: TurnPayload, c: Check | undefined): string[] {
+function checkReply(p: TurnPayload, c: Check | undefined, sceneOnScreen: string | null = null): string[] {
   if (!c) return []
   const text = p.text ?? ''
   const fails: string[] = []
@@ -124,7 +124,8 @@ function checkReply(p: TurnPayload, c: Check | undefined): string[] {
     if (words < c.minWords) fails.push(`STUB: only ${words} words and no question`)
   }
   if (c.sceneId) {
-    const id = (p.sceneSpec as { id?: string } | undefined)?.id ?? null
+    // A figure shown on an earlier turn stays on screen (held turns do not re-send it).
+    const id = (p.sceneSpec as { id?: string } | undefined)?.id ?? sceneOnScreen
     if (id !== c.sceneId) fails.push(`FIGURE: expected scene ${c.sceneId}, got ${id ?? 'none'}`)
   }
   return fails
@@ -147,6 +148,7 @@ async function main() {
         unitTitle: String(l.unitTitle), totalLessons: lessons.length,
       })
       console.log(`\n=== ${sc.id}`)
+      let sceneOnScreen: string | null = (last.sceneSpec as { id?: string } | undefined)?.id ?? null
       for (const [i, step] of sc.steps.entries()) {
         let msg: string
         if (typeof step.send === 'string') msg = step.send
@@ -156,7 +158,8 @@ async function main() {
           msg = step.send.pick === 'first' ? opts[0] : opts[opts.length - 1]
         }
         last = await say(acct.cookie, sid, msg)
-        const fails = checkReply(last, step.check)
+        const fails = checkReply(last, step.check, sceneOnScreen)
+        sceneOnScreen = (last.sceneSpec as { id?: string } | undefined)?.id ?? sceneOnScreen
         console.log(`  [${i}] > ${msg.slice(0, 70)}\n      provider=${last.provider ?? '?'} ${fails.length ? 'FAIL ' + fails.join('; ') : 'ok'}\n      ${(last.text ?? '').replace(/\s+/g, ' ').slice(0, 220)}`)
         for (const f of fails) failures.push(`${sc.id}[${i}]: ${f}`)
       }

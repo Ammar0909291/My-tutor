@@ -127,3 +127,11 @@ Egress (owner, 2026-09-30: must stay under 1 GB). None of batches 4–6 adds a d
 - the figure labels are built in memory from code.
 The stub repair adds a model call, not database egress. From now on, QA re-runs only the
 scenario a fix targets, not the whole replay, to keep test traffic small.
+
+## Batch 6 checked in production (deployment of 969eecfa)
+
+`learnerReplay.ts refraction` only (egress-light): PASS. "what is the normal line?" now serves the
+refraction figure (phys-refraction), and the tutor points at its real vertical normal line. The
+diagram request on the next turn is answered from the same figure ("already includes everything you
+asked for"). The FIGURE check now accepts a figure already on screen from an earlier turn, because
+held turns do not re-send the payload.
