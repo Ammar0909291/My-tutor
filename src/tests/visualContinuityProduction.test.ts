@@ -133,3 +133,23 @@ describe('a question about a word printed on the active figure stays on that fig
     }
   })
 })
+
+describe('the excursion check reads the same figure text (labels and narration)', () => {
+  // MEASURED LIVE 2026-09-30 on c3183ed7: "why is the wave smaller after the
+  // barrier?" opened a topic detour, because the excursion's taught text had
+  // the figure's LABELS only; "barrier" is in its stage narration.
+  it('a question about the WKB narration is not a new topic', async () => {
+    const { namedTopicUnknownTo } = await import('@/lib/teaching/visual/requestedTopic')
+    const { authoredFigureText } = await import('@/lib/teaching/visual/authoredFigureText')
+    const { getKGNode } = await import('@/lib/curriculum/knowledgeGraph')
+    const n = getKGNode('phys.qm.wkb-approximation')!
+    expect(namedTopicUnknownTo('why is the wave smaller after the barrier?', `${n.title} ${n.description} ${authoredFigureText(n.id)}`)).toBeNull()
+  })
+
+  it('route.ts builds the excursion taught text from authoredFigureText', async () => {
+    const { readFileSync } = await import('fs')
+    const src = readFileSync(require('path').resolve(__dirname, '../app/api/learn/chat/route.ts'), 'utf8')
+    expect(src).toMatch(/authoredFigureText\(lessonNode \? excursionLessonConceptId : null\)/)
+    expect(src).not.toMatch(/authoredFigureLabelText\(lessonNode \? excursionLessonConceptId/)
+  })
+})

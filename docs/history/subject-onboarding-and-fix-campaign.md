@@ -1115,3 +1115,31 @@ Four figures were served:
   figure's own labels and stage narration. Regression test: `visualContinuityProduction.test.ts`
   ("a question about a word printed on the active figure stays on that figure"). It fails without the fix and
   passes with it. Production re-check after deploy is pending.
+
+## 2026-09-30 — "Fix defects": bare correction root-caused; WKB figure re-verified live
+
+**1. The bare "Not quite — the answer is: 4.7 × 10⁻⁶ F" (phys.meas.units).** Evidence from the Vercel runtime log for
+that turn: Groq returned 148 characters (`finish_reason=stop`), and the shipped reply was 39 characters. No
+answer-leak, empty-reply or phantom-visual strip was logged, and the verifier saw the bare line before the remediation
+floor ran. The only step left that removes text is `stripLeadingFalseConfirmation`, called inside the correction.
+`CONFIRMS_CORRECT` matches a bare "correct" and "exactly". Reproduced exactly: "The correct conversion uses micro =
+10⁻⁶ …" and "Micro means one millionth, which is exactly 10⁻⁶." were each deleted as false praise, leaving only the
+correction line. **Fix:** new `affirmsTheLearner()` (answerConfirmation.ts), used by the strip. It neutralises
+attributive "the correct X" / "correct value/answer/…" and "exactly/precisely" qualifying a quantity. Genuine praise
+("Correct!", "Exactly right.", "Great, you got it!") is still stripped. The model's exact text is not retained anywhere,
+so this is the only mechanism consistent with every logged fact. It is reproduced, but not observed verbatim.
+
+**2. A tapped numeric option was read as UNINTERPRETABLE.** Same turn: `LEARNER_MOVE kinds=["UNINTERPRETABLE"]`, while
+`mcq-grade` resolved it. Cause: `engagesPendingOptions` had no exact-option rule, and every word of "4.7 × 10⁶ F" is
+shared or too short to discriminate. **Fix:** rule (0), the option typed or tapped whole.
+
+Tests: `wrongAnswerKeepsTeaching.test.ts`.
+
+**3. WKB figure, re-verified live on c3183ed7** (disposable qa-* account, deleted afterwards; the script gained
+`QA_DISPOSABLE=1`). t2 "what are the turning points in the picture?" now keeps the authored figure (continuity
+'continuity'), so the earlier fix is confirmed in production. **New:** t3 "why is the wave smaller after the barrier?"
+still swapped in the generated flowchart, via a second path. The excursion check's taught text used the figure's
+labels only (`authoredFigureLabelText`), and "barrier" is in its stage narration, so a topic detour opened
+(`transition: started`, `named-topic-left-the-figure`). **Fix:** route.ts now uses `authoredFigureText` (labels and
+narration), the same definition resolveVisual reads. Tests are in `visualContinuityProduction.test.ts`. This fix still
+needs a production re-check after deploy.

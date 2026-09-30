@@ -16,10 +16,11 @@
  * served (answer heads), grades, the wrong-answer reply, final mastery.
  *
  *   QA_EMAIL=… QA_PASSWORD=… npx tsx scripts/qa/physicsOneConceptLive.ts
+ *   QA_DISPOSABLE=1 npx tsx scripts/qa/physicsOneConceptLive.ts   # throwaway qa-* account, deleted at the end
  */
 import { readdirSync } from 'fs'
 import path from 'path'
-import { BASE, login } from './liveAccount'
+import { BASE, login, createQaAccount, deleteQaAccount, type QaAccount } from './liveAccount'
 import { createSession, openLesson, say, carriesFigure, figureLabel, type TurnPayload } from './liveSession'
 import { probeToMcq } from '../../src/lib/teaching/gateAssessment'
 import { stripAuthoringLabel } from '../../src/lib/teaching/gateProbeContract'
@@ -41,9 +42,12 @@ async function physicsProbes(): Promise<Map<string, SeedProbe>> {
   return out
 }
 
+let disposable: QaAccount | null = null
+
 async function main() {
-  const email = process.env.QA_EMAIL, password = process.env.QA_PASSWORD
-  if (!email || !password) throw new Error('QA_EMAIL and QA_PASSWORD must be set in the environment')
+  if (process.env.QA_DISPOSABLE === '1') disposable = await createQaAccount('physics-one-concept')
+  const email = disposable?.email ?? process.env.QA_EMAIL, password = disposable?.password ?? process.env.QA_PASSWORD
+  if (!email || !password) throw new Error('QA_EMAIL and QA_PASSWORD (or QA_DISPOSABLE=1) must be set in the environment')
   const lessonIndex = Number(process.env.QA_LESSON_INDEX ?? 0)
   const wantConcept = process.env.QA_CONCEPT ?? null
   const dumpPath = process.env.QA_DUMP ?? null
@@ -129,4 +133,6 @@ async function main() {
   }, null, 2))
 }
 
-main().catch((e) => { console.error(String(e instanceof Error ? e.message : e)); process.exit(1) })
+main()
+  .catch((e) => { console.error(String(e instanceof Error ? e.message : e)); process.exitCode = 1 })
+  .finally(async () => { if (disposable) console.log('disposable account deleted:', JSON.stringify(await deleteQaAccount(disposable))) })

@@ -1378,6 +1378,14 @@ export function engagesPendingOptions(message: string, mcq: TutorMCQ | null): bo
   if (isLongQuestion(raw)) return false
   const limit = Math.min(mcq.options.length, OPTION_KEYS.length)
 
+  // (0) The option itself, tapped or typed whole. MEASURED LIVE (2026-09-30,
+  //     phys.meas.units): the tap "4.7 × 10⁶ F" was graded by resolveMcqChoice
+  //     yet read as UNINTERPRETABLE here, because every word of a numeric
+  //     option is shared or too short to discriminate. An exact option is the
+  //     clearest answer attempt there is.
+  const whole = (s: string) => s.toLowerCase().replace(/\s+/g, ' ').replace(/[\s.!]+$/, '').trim()
+  if (mcq.options.slice(0, limit).some((o) => typeof o === 'string' && whole(o).length > 0 && whole(o) === whole(raw))) return true
+
   // (a) An option letter as a standalone token. Same shape rule 0a reads, and
   //     the same article guard: an unlabelled "a" only counts when the word
   //     after it cannot begin a noun phrase.

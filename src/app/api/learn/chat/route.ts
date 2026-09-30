@@ -2808,13 +2808,19 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // "what is the normal line?" in refraction opened a topic detour
           // because neither the KG sentence nor the last replies said
           // "normal", while the lesson figure labels exactly that line.
-          const { authoredFigureLabelText } = await import('@/lib/teaching/visual/resolveVisualTarget')
+          // Labels AND stage narration (2026-09-30, phys.qm.wkb-approximation,
+          // deployment c3183ed7): "why is the wave smaller after the barrier?"
+          // opened a topic detour — "barrier" and the smaller wave are in the
+          // figure's narration, not its labels — and Tier 3 replaced the
+          // authored figure with a generated flowchart. Same definition the
+          // visual continuity check in resolveVisual.ts reads.
+          const { authoredFigureText } = await import('@/lib/teaching/visual/authoredFigureText')
           const taughtText = [
             lessonNode?.title ?? '',
             lessonNode?.description ?? '',
             activeTopic,
             recentTutorText,
-            authoredFigureLabelText(lessonNode ? excursionLessonConceptId : null),
+            authoredFigureText(lessonNode ? excursionLessonConceptId : null),
           ].join(' ')
           return namedTopicUnknownTo(learnerAuthoredMessage, taughtText)?.title ?? null
         })()

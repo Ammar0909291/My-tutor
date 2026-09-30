@@ -119,8 +119,29 @@ export function stripLeadingFalseConfirmation(text: string): string {
   if (!trimmed) return text
   const sentences = trimmed.split(/(?<=[.!?])\s+/)
   const [first, ...rest] = sentences
-  if (!first || !CONFIRMS_CORRECT.test(flatten(first))) return text
+  if (!first || !affirmsTheLearner(first)) return text
   return rest.join(' ').trim()
+}
+
+/**
+ * Does this sentence AFFIRM the learner, rather than merely use the words?
+ *
+ * MEASURED LIVE (2026-09-30, phys.meas.units, deployment 76916f3b): after a
+ * wrong tap the model's reply was 148 characters and what shipped was the bare
+ * "Not quite — the answer is: 4.7 × 10⁻⁶ F". The model had written a one-
+ * sentence explanation; "the correct conversion …" or "… which is exactly
+ * 10⁻⁶" matched CONFIRMS_CORRECT, the whole sentence was dropped as false
+ * praise, and the learner lost the only reason they were given. "Correct" as
+ * an attributive adjective ("the correct value") and "exactly"/"precisely"
+ * qualifying a quantity ("exactly one millionth") describe the physics, not
+ * the learner's answer, so they are neutralised before the test.
+ */
+export function affirmsTheLearner(sentence: string): boolean {
+  const neutral = flatten(sentence)
+    .replace(/\b(?:the|a|an|your|its|their|this|that|our)\s+(?:most\s+)?correct\b/gi, ' ')
+    .replace(/\bcorrect(?:ly)?\s+(?:answer|value|option|unit|units|conversion|choice|result|form|way|approach|one|reading|expression|equation|sign|direction|magnitude)\b/gi, ' ')
+    .replace(/\b(?:exactly|precisely)\s+(?=[\d(−-]|one\b|two\b|half\b|twice\b|zero\b|the\b|a\b|an\b|what\b|how\b|where\b|when\b|why\b|equal\b|as\b)/gi, ' ')
+  return CONFIRMS_CORRECT.test(neutral)
 }
 
 /**
