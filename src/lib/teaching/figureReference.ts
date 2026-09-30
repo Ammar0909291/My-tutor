@@ -461,6 +461,21 @@ const CLAUSE_BOUNDARY_RE = /(?:[—–]|(?<=\s)-(?=\s)|,)\s*/g
  * exactly as shape 1's whole-sentence test already does; a dash-terminated
  * head keeps the original, more permissive bar.
  */
+/**
+ * A leading clause that IS a direct pointer, ending at a comma: "Looking at
+ * this diagram, what do you notice…", "**Question:** Looking at the sketch,
+ * what do you notice…". MEASURED (real-learner run 2, production 2026-09-30,
+ * phys.opt.refraction): the model drew a text sketch, the ASCII guard removed
+ * it, and both of these questions survived the post-diagram reference pass —
+ * the comma boundary above demands an on-screen locator, which a direct
+ * "looking at the sketch" never carries. The pointer alone is a claim that a
+ * figure is visible; only the clause is removed, the question is kept.
+ */
+const DIRECT_POINTER_HEAD_RE = new RegExp(
+  String.raw`^\s*(?:\*\*[^*]{1,30}\*\*\s*)?(?:` + DIRECT_POINTER_RE.source.replace(/^\\b/, '') + String.raw`)\s*,\s*$`,
+  'i',
+)
+
 function findPointerClauseHead(s: string): string | null {
   CLAUSE_BOUNDARY_RE.lastIndex = 0
   let m: RegExpExecArray | null
@@ -472,7 +487,7 @@ function findPointerClauseHead(s: string): string | null {
     const boundaryIsComma = m[0].trim() === ','
     const pointingVerbQualifies =
       POINTING_VERB.test(head) && namesAFigure(head) && (!boundaryIsComma || ON_SCREEN.test(head))
-    if (pointingVerbQualifies || isPreposedLocatorClaim(head)) {
+    if (pointingVerbQualifies || isPreposedLocatorClaim(head) || DIRECT_POINTER_HEAD_RE.test(head)) {
       return head
     }
   }

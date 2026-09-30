@@ -554,6 +554,37 @@ export function mostRecentAssistantText(
   }
 }
 
+/**
+ * The newest `n` assistant messages, newest first, joined. Used as lesson
+ * vocabulary by the concept resolver: a word the tutor used in the last few
+ * turns of THIS lesson is the lesson's own term (requestedConcept L1/L3).
+ * The lesson opening often introduces the term ("the light ray") and the very
+ * last message may not repeat it. Timestamps order when present; otherwise the
+ * route's own newest-first order is kept.
+ */
+export function recentAssistantTexts(
+  messages: ReadonlyArray<{ role: unknown; content?: unknown; createdAt?: unknown }> | null | undefined,
+  assistantRole: unknown = 'ASSISTANT',
+  n = 3,
+): string | null {
+  try {
+    if (!Array.isArray(messages) || messages.length === 0) return null
+    const at = (raw: unknown) =>
+      raw instanceof Date ? raw.getTime()
+        : typeof raw === 'string' || typeof raw === 'number' ? new Date(raw).getTime()
+          : Number.NaN
+    const own = messages
+      .map((m, i) => ({ m, i }))
+      .filter(({ m }) => m && m.role === assistantRole && typeof m.content === 'string' && m.content.length > 0)
+    const timed = own.every(({ m }) => Number.isFinite(at(m.createdAt)))
+    const ordered = timed ? [...own].sort((a, b) => at(b.m.createdAt) - at(a.m.createdAt)) : own
+    const texts = ordered.slice(0, Math.max(1, n)).map(({ m }) => m.content as string)
+    return texts.length ? texts.join('\n\n') : null
+  } catch {
+    return null
+  }
+}
+
 /** Why the curriculum-sentence alternative could not be offered this turn. */
 export type RemediationAltUnavailable =
   | 'unresolved-concept'      // no concept id resolved for this turn

@@ -146,6 +146,85 @@ export function buildTotalInternalReflectionScene(): SceneSpec {
   }
 }
 
+// ── 1b. Refraction at a surface (Snell's law) ────────────────────────────────
+
+/**
+ * MEASURED (real-learner run 2, production, 2026-09-30): the refraction lesson
+ * was served the ray_optics generator's convex-lens image diagram as a
+ * "general illustration" three times, and a learner asking to "see light ray
+ * and water and normal line" got nothing. This is that picture: one ray,
+ * one boundary, the normal, and the bend — built from real angles.
+ *
+ * Physics: air n₁ = 1.00 above, water n₂ = 1.33 below. θ₁ = 40° gives
+ * sin θ₂ = sin 40° / 1.33 = 0.483 → θ₂ = 28.9°, drawn from that value. The
+ * dashed line is where the ray would go with no bend, so the bend is visible
+ * as a gap rather than described.
+ */
+export function buildRefractionScene(): SceneSpec {
+  const rad = (deg: number) => (deg * Math.PI) / 180
+  const r = (n: number) => Math.round(n * 100) / 100
+  const N1 = 1.0, N2 = 1.33, THETA1 = 40
+  const THETA2 = Math.asin(Math.sin(rad(THETA1)) * N1 / N2) * 180 / Math.PI
+  const LEN = 3.2
+  const start: [number, number, number] = [r(-Math.sin(rad(THETA1)) * LEN), r(Math.cos(rad(THETA1)) * LEN), 0]
+  const straightOn: [number, number, number] = [r(Math.sin(rad(THETA1)) * LEN), r(-Math.cos(rad(THETA1)) * LEN), 0]
+  const bent: [number, number, number] = [r(Math.sin(rad(THETA2)) * LEN), r(-Math.cos(rad(THETA2)) * LEN), 0]
+
+  return {
+    id: 'phys-refraction',
+    title: 'Refraction: light going from air into water',
+    sceneType: 'diagram',
+    cameraDistance: 13,
+    teachingGoal:
+      'Show a light ray bending toward the normal as it slows down going from air into water, ' +
+      'with both angles measured from the normal.',
+    ariaLabel:
+      'A horizontal boundary with air above and water below, and a vertical dashed normal line ' +
+      'through the point where a light ray hits. The ray comes down from the upper left at 40 ' +
+      'degrees from the normal and continues into the water at about 29 degrees, closer to the ' +
+      'normal. A faint line shows where it would have gone without bending.',
+    steps: [
+      {
+        narration:
+          'Air is above the surface and water is below. The normal is the line straight up and ' +
+          'down through the point where the light hits.',
+        objects: [
+          line([-5.0, 0, 0], [5.0, 0, 0], ROLE.reference, 0.05),
+          ...hatch(-4.6, 4.6, 0, 11, 0.34),
+          label('air · n₁ = 1.00', [-3.8, 0.7, 0], ROLE.ink, 'primary'),
+          label('water · n₂ = 1.33', [-3.8, -0.7, 0], ROLE.ink, 'primary'),
+          line([0, -3.3, 0], [0, 3.3, 0], ROLE.aid, 0.03),
+          label('normal', [0.7, 3.5, 0], ROLE.aid, 'detail'),
+        ],
+      },
+      {
+        narration:
+          'A light ray comes down through the air and hits the surface. Its angle is measured ' +
+          'from the normal: θ₁ = 40°.',
+        objects: [
+          arrow(start, [0, 0, 0], ROLE.input),
+          dot([0, 0, 0], ROLE.input, 0.1),
+          label('light ray', [r(start[0] - 0.3), r(start[1] + 0.45), 0], ROLE.input, 'detail'),
+          label('θ₁ = 40°', [-1.0, 1.55, 0], ROLE.input, 'primary'),
+        ],
+      },
+      {
+        narration:
+          'In water the light slows down, so it bends toward the normal: θ₂ is about 29°, smaller ' +
+          'than θ₁. The faint line shows where it would have gone without bending.',
+        objects: [
+          line([0, 0, 0], straightOn, ROLE.reference, 0.02),
+          label('no bend', [r(straightOn[0] + 0.2), r(straightOn[1] - 0.35), 0], ROLE.reference, 'detail'),
+          arrow([0, 0, 0], bent, ROLE.output),
+          label(`θ₂ ≈ ${Math.round(THETA2)}°`, [0.55, -1.65, 0], ROLE.output, 'primary'),
+          label('bends toward the normal', [1.1, -3.55, 0], ROLE.output, 'detail'),
+          label('n₁ sin θ₁ = n₂ sin θ₂', [2.2, 2.1, 0], ROLE.result, 'detail'),
+        ],
+      },
+    ],
+  }
+}
+
 // ── 2. Transverse Waves ──────────────────────────────────────────────────────
 
 /**

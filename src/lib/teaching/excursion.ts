@@ -34,7 +34,7 @@
  */
 
 import {
-  isExplicitTopicRequest, isReturnRequest, isExplicitCorrection, looksLikeAnswer, MAX_EXCURSION_TURNS,
+  isExplicitTopicRequest, isReturnRequest, isSideTopicRejection, isExplicitCorrection, looksLikeAnswer, MAX_EXCURSION_TURNS,
 } from './visual/session'
 
 export { MAX_EXCURSION_TURNS }
@@ -377,6 +377,8 @@ export function decideExcursion(input: ExcursionInput): ExcursionDecision {
 
   // The learner asked to go back, in their own words.
   if (active && isReturnRequest(message)) return closed('closed-returned')
+  // Or refused the side topic without naming where to go ("stop chair please").
+  if (active && isSideTopicRejection(message)) return closed('closed-returned')
 
   // The learner said they are done.
   if (active && isSatisfactionSignal(message)) return closed('closed-satisfied')

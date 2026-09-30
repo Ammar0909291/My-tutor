@@ -30,6 +30,10 @@ interface Check {
   wrongNeedsWhy?: number
   /** The reply must not be stored text. */
   notMemory?: boolean
+  /** The reply must carry at least this many words (a stub is not a reply). */
+  minWords?: number
+  /** The scene on screen after this turn must have this id. */
+  sceneId?: string
 }
 interface Step { send: Send; check?: Check }
 interface Scenario { id: string; subject: string; slug: string; steps: Step[] }
@@ -65,6 +69,34 @@ const SCENARIOS: Scenario[] = [
     ],
   },
   {
+    // Run 2, P6: "light ray" opened a detour to "Nature of Light: Ray and Wave
+    // Models", and the lesson showed a lens instead of a bent ray.
+    id: 'refraction-light-ray',
+    subject: 'physics', slug: 'phys.opt.refraction',
+    steps: [
+      { send: 'straw look broken at water. what is the normal line?' },
+      { send: 'i want see light ray and water and normal line. can you show?', check: { offTopic: ['wave model', 'ray model', 'diffraction', 'slit'], sceneId: 'phys-refraction' } },
+    ],
+  },
+  {
+    // Run 2, C7: an angular-momentum detour held through "stop chair please".
+    id: 'bohr-stop-side-topic',
+    subject: 'chemistry', slug: 'chem.atomic.bohr-model',
+    steps: [
+      { send: 'what is angular momentum? very hard. simple please' },
+      { send: 'stop chair please. give me bohr question', check: { offTopic: ['chair', 'diver', 'arms in'] } },
+    ],
+  },
+  {
+    // Run 2, C6: practice requests got "Gas Laws covers: …" one-liners.
+    id: 'gas-laws-practice-not-stub',
+    subject: 'chemistry', slug: 'chem.state.gas-laws',
+    steps: [
+      { send: 'balloon get big. i squeeze balloon, pressure go down?' },
+      { send: 'please give me a test question with answers A B C to practice', check: { minWords: 8 } },
+    ],
+  },
+  {
     id: 'kirchhoff-practice-with-content',
     subject: 'physics', slug: 'phys.em.kirchhoffs-laws',
     steps: [
@@ -87,6 +119,14 @@ function checkReply(p: TurnPayload, c: Check | undefined): string[] {
     if (words < c.wrongNeedsWhy) fails.push(`BARE_WRONG: only ${words} words after the verdict`)
   }
   if (c.notMemory && p.provider === 'memory') fails.push('IGNORED: served stored text (provider=memory)')
+  if (c.minWords) {
+    const words = text.split(/\s+/).filter(Boolean).length + (p.mcq ? 10 : 0)
+    if (words < c.minWords) fails.push(`STUB: only ${words} words and no question`)
+  }
+  if (c.sceneId) {
+    const id = (p.sceneSpec as { id?: string } | undefined)?.id ?? null
+    if (id !== c.sceneId) fails.push(`FIGURE: expected scene ${c.sceneId}, got ${id ?? 'none'}`)
+  }
   return fails
 }
 

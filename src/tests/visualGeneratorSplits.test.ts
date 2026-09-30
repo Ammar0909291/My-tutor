@@ -206,7 +206,6 @@ describe('cases the audit found that B2 deliberately did NOT approximate', () =>
   // sweep's contribution here is the second one below, which pins WHY it is
   // safe — see visualSemanticMoatPhysicsChemistry.test.ts.
   const REQUIRES_AUTHORING = [
-    'phys.opt.refraction',            // needs a boundary, a normal, angles i/r
     'phys.opt.lens-power',            // needs a lens COMBINATION
     'phys.mech.impulse',              // needs a force-time curve
     'phys.wave.shm-energy',           // needs a KE/PE energy split
@@ -217,6 +216,10 @@ describe('cases the audit found that B2 deliberately did NOT approximate', () =>
     'phys.em.electric-current',       // needs drift velocity / charge carriers
     'phys.mech.rotational-dynamics',  // needs moment of inertia and angular acceleration
     'chem.period.modern-periodic-law',// needs the periodic table itself
+    // AUTHORED, and so no longer here: 'phys.opt.refraction' ("needs a
+    // boundary, a normal, angles i/r") now owns exactly that figure in
+    // CONCEPT_SCENES (physicsPilot.ts buildRefractionScene, 2026-09-30) — see
+    // refractionConceptFigure.test.ts, which pins it at concept scope.
     // AUTHORED, and so no longer here: 'bio.mol.dna-replication' ("needs a
     // replication fork, not static base pairing") now owns a replication-fork
     // figure in CONCEPT_SCENES — see dnaReplicationVisual.test.ts, which pins

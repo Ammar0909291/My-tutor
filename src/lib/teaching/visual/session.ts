@@ -258,6 +258,30 @@ export function isReturnRequest(message: string): boolean {
 }
 
 /**
+ * The learner REFUSES the side topic, without naming where to go back to.
+ *
+ * MEASURED (real-learner run 2, production, 2026-09-30): "stop chair please",
+ * "I DONT WANT CHAIR", "chair? i ask about atom colour light" (Bohr model,
+ * held on an angular-momentum detour for three turns) and "too hard math. i
+ * only want gas" (Gas Laws, held on a hyperbola detour). None says "back to",
+ * so the detour held. Only consulted while a detour is open, so "stop" or
+ * "don't want" in ordinary lesson talk is never read this way.
+ */
+const SIDE_TOPIC_REJECTION_RE = new RegExp([
+  String.raw`^\s*(?:please\s+)?stop\b`,
+  String.raw`\bstop\s+(?:the\s+|this\s+|that\s+|talking\s+about\s+)?\w+\s*(?:please|pls|now|!)`,
+  String.raw`\bi\s*(?:don'?t|do\s+not|dont)\s+want\s+(?:this|that|it|the\s+\w+|\w+)\b`,
+  String.raw`\bno\s+(?:more\s+)?\w+\s*(?:please|pls|!)`,
+  String.raw`\bi\s+only\s+want\b`,
+  String.raw`\bi\s+(?:ask|asked)\s+(?:about|for)\b`,
+].join('|'), 'i')
+
+/** Did the learner refuse the side topic currently being taught? */
+export function isSideTopicRejection(message: string): boolean {
+  return SIDE_TOPIC_REJECTION_RE.test(message ?? '')
+}
+
+/**
  * Is this message a reply to the tutor rather than a new request?
  *
  * Short, verb-less messages arriving straight after a tutor question are

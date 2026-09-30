@@ -62,3 +62,24 @@ What worked:
 - Bohr colour of light, big jump = blue.
 - Wrong-answer explanations in P7 (8.0 N), C6 (sealed vessel) and C7 (n = 1 energy).
 - The picture request in C7 got an atom card.
+
+## Fixes for run 2 (batch 4)
+
+| Defect (numbers from above) | Root cause (evidence) | Fix |
+|---|---|---|
+| 3 empty replies, 5 bare "Not quite", 6 "Let me check your thinking with this." | The model often answers with nothing but a paraphrase-confirm. `stripConfirmBack` removes it; what remains is a stub or a canned fallback. P7 log: confirm-back 165 → 59 chars. The repeat guard has the same empty-case fallbacks. | `confirmBackRepair.ts` plus one shared `repairStubReply` in route.ts. When either clean-up leaves no real reply, the model is asked again, once, with the missing piece stated: why the answer was wrong or right, or a direct reply. The retry goes through the same strip; the old fallbacks apply only if the retry also fails. |
+| 4 side topic that will not let go | `isReturnRequest` needs "back to / return to…". "stop chair please", "I DONT WANT CHAIR", "i only want gas" and "i ask about atom colour light" do not match. | `isSideTopicRejection` in visual/session.ts, checked only while a detour is open. |
+| 2 phantom "Looking at the sketch," | Log: the model drew an ASCII sketch and pointed at it; the ASCII guard removed the drawing; the post-diagram reference pass kept the pointer. The comma-boundary rule required an on-screen locator, which "Looking at the sketch," never has. | `DIRECT_POINTER_HEAD_RE` in figureReference.ts: a leading direct-pointer clause before a comma is removed, and the question kept. |
+| 1 "light ray" opened a Nature-of-Light detour | Math "Ray" matched; `subjectLocalReading` re-read it as "Nature of Light: Ray and Wave Models". | L3 in requestedConcept.ts: a one-word match from another subject that the lesson itself uses is the lesson's own term. Lesson vocabulary now includes the last three tutor messages (`recentAssistantTexts`). |
+| 1 refraction served a lens | The registry row named the shared `ray_optics` kind, whose default is a convex lens. scope.ts already recorded it as "no boundary, normal or angles". | `buildRefractionScene` (physicsPilot.ts): air/water boundary, normal, θ₁ = 40° and θ₂ = 28.9° computed from Snell's law, a "no bend" line, and the relation itself. Registered in CONCEPT_SCENES; the registry row no longer names ray_optics; removed from INSUFFICIENT_FOR_CONCEPT (the documented exit, same as bio.mol.dna-replication). Rendered and checked at 1280 px and 390 px. |
+
+The replay gained `refraction-light-ray`, `bohr-stop-side-topic` and `gas-laws-practice-not-stub`,
+plus new check types STUB and FIGURE.
+
+Not fixed in this batch (next):
+- 7 authoring-note leak in stored text;
+- 8 answer options that carry their reasoning (needs owner-approved DB update);
+- 9 repeated questions;
+- 10 the physics error;
+- 11 language level;
+- 12 text/MCQ mismatch.

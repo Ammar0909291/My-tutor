@@ -131,7 +131,8 @@ describe('every semantic defect found in the sweep stays suppressed', () => {
  */
 const INERT_BUT_RENDERING: ReadonlyArray<readonly [string, string, string]> = [
   // reversed from the first pass — already demoted before it touched them
-  ['physics', 'phys.opt.refraction',        'a lens image construction; a lens works BY refraction, so on-topic'],
+  // phys.opt.refraction left this list 2026-09-30: it now owns an authored
+  // boundary/normal/angles figure (refractionConceptFigure.test.ts).
   ['physics', 'phys.wave.shm-energy',       'a pendulum IS a simple-harmonic system; it simply prints no energy'],
   ['physics', 'phys.mech.gravitational-field', 'an orbit; gravitation, without the field lines'],
   ['physics', 'phys.mech.kinematics-2d',    '1-D kinematics graphs; kinematics, one dimension short'],

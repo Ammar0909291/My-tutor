@@ -29,8 +29,11 @@ describe('the concept, not the generator kind, decides the figure', () => {
     const scene = buildCanonicalScene('ray_optics', 'phys.opt.reflection')
     expect(scene?.title.toLowerCase()).toContain('mirror')
     expect(scene?.title.toLowerCase()).not.toContain('lens')
-    // …while refraction keeps the lens default.
-    expect(buildCanonicalScene('ray_optics', 'phys.opt.refraction')?.title.toLowerCase()).toContain('lens')
+    // …and refraction draws a boundary and a bent ray, not a lens (its own
+    // authored figure since 2026-09-30).
+    const refraction = buildCanonicalScene('ray_optics', 'phys.opt.refraction')?.title.toLowerCase()
+    expect(refraction).toContain('refraction')
+    expect(refraction).not.toContain('lens')
   })
 
   it('the inelastic concept draws an inelastic collision', () => {

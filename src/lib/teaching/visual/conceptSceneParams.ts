@@ -35,7 +35,7 @@ import { buildCircuitScene } from '@/lib/teaching/sceneGenerators/electricCircui
 import { buildGravitationOrbitScene } from '@/lib/teaching/sceneGenerators/gravitationOrbit'
 import {
   buildCalorimetryScene, buildFirstLawScene, buildSurfaceTensionScene,
-  buildTotalInternalReflectionScene, buildTransverseWaveScene,
+  buildTotalInternalReflectionScene, buildRefractionScene, buildTransverseWaveScene,
   buildViscosityScene, buildWaveInterferenceScene,
 } from '@/lib/teaching/sceneGenerators/physicsPilot'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
@@ -282,6 +282,7 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'phys.meas.vector-products': buildVectorProductsScene,
 
   'phys.opt.total-internal-reflection': buildTotalInternalReflectionScene,
+  'phys.opt.refraction':                buildRefractionScene,
   'phys.wave.transverse-waves':         buildTransverseWaveScene,
   'phys.wave.interference':             buildWaveInterferenceScene,
   'phys.therm.calorimetry':             buildCalorimetryScene,

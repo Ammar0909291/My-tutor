@@ -155,7 +155,9 @@ describe('the route holds on a NON-remediation turn', () => {
     // ONE new routeAI call site (the claim-challenge repair regeneration in
     // route.ts, right after the V-AFFIRM floor) -- the only production change
     // to this count since this assertion was written. 4 -> 5.
-    expect((ROUTE.match(/await routeAI\(/g) ?? []).length).toBe(5)
+    // 5 -> 6 (2026-09-30): the stub repair's single regeneration (repairStubReply,
+    // confirmBackRepair.ts) — fires only when a clean-up left no real reply.
+    expect((ROUTE.match(/await routeAI\(/g) ?? []).length).toBe(6)
     // The refusal reason lives in the lookup, which is where the boundary is.
     const cards = readFileSync(join(process.cwd(), 'src/lib/teaching/remediationCards.ts'), 'utf8')
     expect(cards).toContain('draft-not-promoted')
@@ -222,7 +224,9 @@ describe('a held turn that teaches past the card is rejected', () => {
     // ONE new routeAI call site (the claim-challenge repair regeneration in
     // route.ts, right after the V-AFFIRM floor) -- the only production change
     // to this count since this assertion was written. 4 -> 5.
-    expect((ROUTE.match(/await routeAI\(/g) ?? []).length).toBe(5)
+    // 5 -> 6 (2026-09-30): the stub repair's single regeneration (repairStubReply,
+    // confirmBackRepair.ts) — fires only when a clean-up left no real reply.
+    expect((ROUTE.match(/await routeAI\(/g) ?? []).length).toBe(6)
   })
 })
 

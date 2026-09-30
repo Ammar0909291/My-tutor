@@ -93,7 +93,9 @@ describe('4 — instrumentation introduces no provider call', () => {
     // ONE new routeAI call site (the claim-challenge repair regeneration) --
     // the only production change to this count since this assertion was
     // written. 4 -> 5.
-    expect((CHAT.match(/await routeAI\(/g) ?? []).length).toBe(5)
+    // 5 -> 6 (2026-09-30): the stub repair's single regeneration (repairStubReply,
+    // confirmBackRepair.ts) — fires only when a clean-up left no real reply.
+    expect((CHAT.match(/await routeAI\(/g) ?? []).length).toBe(6)
   })
 })
 

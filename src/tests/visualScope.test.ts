@@ -37,7 +37,7 @@ describe('scope is decided by provenance and audit, never by words', () => {
 
   it('an audited-insufficient asset is demoted regardless of provenance', () => {
     expect(scopeForAsset('curated', 'phys.therm.carnot-cycle')).toBe('domain')
-    expect(scopeForAsset('generator-default', 'phys.opt.refraction')).toBe('domain')
+    expect(scopeForAsset('generator-default', 'phys.mech.impulse')).toBe('domain')
   })
 
   it('every audited-insufficient id is a real KG concept', () => {

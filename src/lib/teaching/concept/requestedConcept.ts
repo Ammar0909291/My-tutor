@@ -1031,6 +1031,16 @@ export function resolveRequestedConceptId(
     // The winner belongs to another subject: check whether the learner's own
     // subject has a concept of that name before travelling to a foreign one.
     if (best && lessonPrefix && idPrefix(best.conceptId) !== lessonPrefix) {
+      // L3: a one-word match from ANOTHER subject, where the lesson itself is
+      // using that word, is the lesson's own term — not a detour. Production,
+      // real-learner run 2 (2026-09-30, phys.opt.refraction): "i want see
+      // light ray and water and normal line" matched math "Ray", and the local
+      // re-read below turned it into "Nature of Light: Ray and Wave Models",
+      // one turn after the tutor said "a straight line (a **ray**)".
+      const word = tokens(best.matchedText)
+      if (best.matchedTokenCount === 1 && word.length === 1 && lessonVocabulary.includes(` ${word[0]} `)) {
+        return null
+      }
       requested = subjectLocalReading(best.matchedText, lessonPrefix, conceptIndex()) ?? requested
     }
 

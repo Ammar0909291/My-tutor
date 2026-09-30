@@ -341,7 +341,10 @@ describe('the repair path is the general one, not a special case', () => {
     // fork") now owns an authored replication-fork figure in CONCEPT_SCENES, so
     // its verdict no longer describes what it renders and was removed — see
     // dnaReplicationVisual.test.ts.
-    expect(INSUFFICIENT_FOR_CONCEPT.size).toBe(47)
+    // 47 -> 46 (2026-09-30): a REPAIR. phys.opt.refraction owns an authored
+    // boundary/normal/angles figure (physicsPilot.ts buildRefractionScene).
+    expect(INSUFFICIENT_FOR_CONCEPT.size).toBe(46)
+    expect(INSUFFICIENT_FOR_CONCEPT.has('phys.opt.refraction')).toBe(false)
     expect(INSUFFICIENT_FOR_CONCEPT.has('bio.mol.dna-replication')).toBe(false)
     expect([...INSUFFICIENT_FOR_CONCEPT].some((id) => id.startsWith('chem.'))).toBe(true)
     // The queue now tracks mathematics too, which it did not before.

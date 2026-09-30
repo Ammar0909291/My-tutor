@@ -207,7 +207,9 @@ const CONCEPT_VISUALS: Record<string, VisualEntry> = {
 
   // Physics — Optics
   'phys.opt.reflection':              { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'ray_optics' },
-  'phys.opt.refraction':              { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'ray_optics' },
+  // No sceneGenerator: the shared ray_optics kind draws a LENS. The concept's own
+  // boundary/normal/angles figure is CONCEPT_SCENES['phys.opt.refraction'] (2026-09-30).
+  'phys.opt.refraction':              { primary: 'force_diagram', all: ['force_diagram'] },
   'phys.opt.mirrors':                 { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'ray_optics' },
   'phys.opt.lenses':                  { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'ray_optics' },
   // Lens power (1/f) is the SAME physical setup the ray_optics generator

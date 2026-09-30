@@ -43,7 +43,9 @@ export type VisualScope = 'concept' | 'domain'
  */
 export const INSUFFICIENT_FOR_CONCEPT: ReadonlySet<string> = new Set([
   // ── generator figures missing the concept's defining element ─────────────
-  'phys.opt.refraction',             // lens image construction; no boundary, normal or angles i/r
+  // REMOVED: 'phys.opt.refraction' ("lens image construction; no boundary,
+  // normal or angles i/r"). It now owns an authored boundary/normal/angles
+  // figure in CONCEPT_SCENES (physicsPilot.ts buildRefractionScene, 2026-09-30).
   'phys.meas.scalars-vectors',       // vector addition; no scalar quantity is drawn
   'phys.mech.kinematics-2d',         // 1D graphs for a 2D concept
   'phys.mech.impulse',               // before/after velocities; no force-time or labelled Δp

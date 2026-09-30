@@ -2728,10 +2728,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // What the tutor just said is lesson vocabulary: a term it used ("focal
         // length", "resultant") is asked about as the lesson's own term, not as a
         // request to travel to a concept that shares a word with it (L1).
-        const { mostRecentAssistantText: recentTutorTextOf } = await import('@/lib/teaching/remediationOutputContract')
+        // The last three tutor messages, not one: the opening often introduces
+        // the term and the latest reply may not repeat it (L3, 2026-09-30).
+        const { recentAssistantTexts: recentTutorTextOf } = await import('@/lib/teaching/remediationOutputContract')
         const requestedConceptIdThisTurn = resolveRequestedConceptId(
           learnerAuthoredMessage, excursionLessonConceptId, subjectCode, undefined,
-          recentTutorTextOf(learnSession.messages, MessageRole.ASSISTANT),
+          recentTutorTextOf(learnSession.messages, MessageRole.ASSISTANT, 3),
         )
         // PHASE 4 — IS THIS A REPORTED KNOWLEDGE GAP RATHER THAN DISTRESS?
         //
@@ -10286,6 +10288,51 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         console.warn('[mirror] verdict repair skipped:', err)
       }
 
+      // ── A STUB IS NOT A REPLY (2026-09-30) ────────────────────────────────
+      // When a clean-up step (confirm-back strip, repeat guard) leaves no real
+      // reply, regenerate ONCE with the missing piece stated — why the answer
+      // was right/wrong, or a direct reply — instead of serving a stub or the
+      // concept-fallback line. Returns null when no repair was made; the
+      // callers' existing fallbacks then apply unchanged. See confirmBackRepair.ts.
+      const repairStubReply = async (stub: string, source: string): Promise<string | null> => {
+        const { needsRepair, buildConfirmBackRepairAppendix, mergeRepair } = await import('@/lib/teaching/confirmBackRepair')
+        if (!needsRepair(stub) || serveLessonComplete) return null
+        try {
+          const { stripConfirmBack } = await import('@/lib/teaching/attributionGuard')
+          const opts = pendingMcqHoisted?.options
+          const chosenIdx = mcqGradeHoisted?.chosenIndex
+          const appendix = buildConfirmBackRepairAppendix({
+            graded: gradeForVerdict,
+            chosenOption: Array.isArray(opts) && typeof chosenIdx === 'number' ? opts[chosenIdx] ?? null : null,
+            correctOption: Array.isArray(opts) && typeof pendingMcqHoisted?.correctIndex === 'number' ? opts[pendingMcqHoisted.correctIndex] ?? null : null,
+          })
+          llmCallCount++ // instrumentation only (stub repair)
+          const routed = await routeAI(
+            [...historyMessages, { role: 'user', content: message }],
+            systemPrompt + appendix + resolvedOutputLanguageBlock,
+            country, 2048, teachingLang,
+            { userId, subject: learnSession.subject.slug },
+            groqModelOverride,
+            undefined,
+            forceProvider,
+          )
+          // The retry passes the same strip; a second confirm-back is not served.
+          const retry = stripConfirmBack(routed.text ?? '')
+          let retryText = retry.text
+          try {
+            const { stripSimulationGiveaways } = await import('@/lib/teaching/visual/simulationPrompt')
+            retryText = stripSimulationGiveaways(retryText, resolvedVisualDecision, learnerAuthoredMessage).text
+          } catch { /* optional backstop */ }
+          const merged = mergeRepair(stub, retryText)
+          const repaired = !needsRepair(merged)
+          console.log('[stub-repair] ' + JSON.stringify({ source, repaired, retryStripped: retry.stripped, chars: merged.length }))
+          return repaired ? merged : null
+        } catch (regenErr) {
+          console.warn('[stub-repair] regeneration failed:', regenErr)
+          return null
+        }
+      }
+
       // ── THE CONFIRM-BACK, WHEREVER IT SITS (2026-09-28) ───────────────────
       // After the verdict repair above (which needs the whole-turn mirror to
       // replace it with the grade): any remaining "So you're saying … Is that
@@ -10296,6 +10343,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         const cb = stripConfirmBack(cleanText)
         if (cb.stripped) {
           let next = cb.text
+          // ONE REGENERATION when the strip left no real reply (a bare
+          // "Not quite — the answer is: X", or nothing). See confirmBackRepair.ts.
+          next = (await repairStubReply(next, 'confirm-back')) ?? next
           if (!next.trim()) {
             if (mcqHoisted) {
               next = 'Let me check your thinking with this.'
@@ -10325,6 +10375,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           const rep = dropRepeatedParagraphs(cleanText, priorTutor)
           if (rep.dropped > 0) {
             let next = rep.text
+            next = (await repairStubReply(next, 'repeat-guard')) ?? next
             if (!next.trim()) {
               if (mcqHoisted) {
                 next = 'Let me check your thinking with this.'
