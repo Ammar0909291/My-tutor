@@ -33,6 +33,8 @@ log.
 | `subject-onboarding-and-fix-campaign.md` | The subject-onboarding pipeline architecture audit (confirms the KG→registration→seed-corpus→bootstrap pipeline is already generically hardened for a future subject); and the full running log of the current "fix physics/english/chemistry" campaign, including the `contract-audit.ts` English-undercount bug fix and the account-saturation finding. |
 | `synthetic-students.md` | The synthetic-student runner on the physics mechanics launch set (owner decisions 2026-09-24: no boards, no real traffic yet): the tool, how to run it, and each run's findings and fixes. |
 | `learner-intent-interpreter-ab-experiment.md` | The 2026-09-25 AI learner-intent interpreter A/B experiment (three live 6×2 runs): design, results, the deterministic fixes it surfaced, cleanup. FINAL: abandoned for production, interpreter removed 2026-09-26, deterministic path retained (A 8/12 → 10/12 → 12/12 first ask). |
+| `tutor-max-real-learner-fixes-2026-09-29.md` | Real-learner QA run 1 (5 physics lessons) and the fixes it led to: topic hijack, bare "Not quite", figure completeness, stored text ignoring the learner, picture/practice card, simulation spoilers (prompt block + give-away backstop), lens rays. Also `scripts/qa/learnerReplay.ts`. |
+| `tutor-max-real-learner-fixes-2026-09-30-qa2.md` | Real-learner QA run 2 (refraction, circular motion, gas laws, Bohr model): ratings and 12 defects, 5 still open from run 1. |
 
 ## Live pointers (not history — check these first for CURRENT state)
 - `/CLAUDE.md` — live rules.
