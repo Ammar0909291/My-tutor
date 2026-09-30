@@ -168,3 +168,40 @@ Live QA was still blocked by the Vercel 403 during this batch. The firewall API 
 Config not found" (no project firewall config to edit), so the owner needs to act in the Vercel
 dashboard (Firewall / Attack Challenge / bot protection for the scripted client). A request-level
 bypass for QA traffic was deliberately not added.
+
+## Batch 4 (2026-09-30): electromagnetism, AC, modern physics, wave optics
+
+New module `src/lib/teaching/sceneGenerators/physicsCoreScenesB4.ts` (batch 1–3 helpers are now
+exported from physicsCoreScenes.ts and reused, not copied).
+
+| Concept | Figure |
+|---|---|
+| phys.em.electric-potential | Equipotential circles around +Q labelled with V = kQ/r (12, 6, 4, 3 V); radial field lines crossing them at right angles. |
+| phys.em.magnetic-force | B into the page (drawn ×); +q moving right; F computed as v × B (up); circular path r = mv/(qB) bending toward F. |
+| phys.em.magnetic-flux | Same loop square-on (all 5 lines pass, Φ = BA) and tilted 60° (3 pass, Φ = BA cos 60° = 0.5 BA). |
+| phys.em.faradays-law | Φ(t) rise/hold/fall and ε = −dΦ/dt computed by finite difference: negative, zero, positive. |
+| phys.em.lenzs-law | N pole approaching a coil; induced field inside the coil opposite to the increasing magnet field; near face becomes N. |
+| phys.em.ac-basics | Sinusoid with peak V₀ = 3 V, period T, and V_rms = V₀/√2 = 2.12 V line. Left the retirement register. |
+| phys.em.rc-circuits | Charging curve V₀(1 − e^(−t/τ)); 0.63 V₀ at t = τ = RC; 5τ marked. Left the retirement register. |
+| phys.em.electromagnetic-waves | E (vertical) and B (oblique depth projection) in phase, both ⟂ travel; c = 3 × 10⁸ m/s; λ marked. |
+| phys.mod.photoelectric-effect | Light ejecting e⁻ from a metal; KE_max vs f: zero below f₀, slope h above, extension meets −φ. |
+| phys.mod.radioactive-decay | N = N₀e^(−λt) with N₀/2, N₀/4, N₀/8 at T½, 2T½, 3T½ (asserted); T½ = ln 2/λ. |
+| phys.opt.polarization | Unpolarized → vertical polarizer (I₀/2) → crossed polarizer: I = I₁cos²90° = 0. |
+| phys.opt.diffraction | Plane wavefronts spaced λ through a gap ≈ λ, leaving as circular wavefronts with the same spacing. |
+
+Found while rendering:
+- **The explainer's label budget.** At the default (intermediate) level a figure shows at most 9
+  labels at once (`visualComplexity.ts` `maxLabels`) and holds back the lowest-priority ones (ink,
+  then reference). Nothing told authors. Measured casualties: the magnetic-force field marks (20
+  "×" text labels — now drawn as crossed lines), the decay curve's N₀, and batch 1's Coulomb's law
+  (one "+q₂" of four; the repeated pair is now unlabelled). New guard:
+  `physicsFigureLabelBudget.test.ts` holds every campaign figure within the budget.
+- RC and polarization headline chips fell back to a whole narration sentence; each now has a
+  formula-shaped result label (`V = 0.63 V₀`, `no light: I = 0`).
+- The Faraday "ε = 0" note sat on the curve and hijacked the headline chip; it is now a plain aid
+  note above the zero segment.
+
+Retirement register: phys.em.rc-circuits and phys.em.ac-basics removed from RETIRED_VISUAL_BINDINGS
+and RETIRED_ASSET_FINGERPRINTS (reflection precedent), 24 → 22. Pinned tests updated; where
+rc-circuits was the "unrelated retired concept" example, a still-retired sibling replaced it (not
+lc-circuits in the two files that inject lc-circuits as their replaced concept).

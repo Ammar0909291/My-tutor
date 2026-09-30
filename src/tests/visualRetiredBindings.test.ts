@@ -24,7 +24,7 @@ const ask = (conceptId: string, message = 'explain with diagram') =>
   resolveVisual({ message, lessonConceptId: conceptId, learnerRequest: 'diagram' })
 
 describe('the register itself', () => {
-  it('covers exactly the 24 audited concepts', () => {
+  it('covers exactly the 22 audited concepts', () => {
     // 29 from the M3-A audit + 8 from the visual semantic moat sweep, which
     // ran the resolver over all 238 physics and 186 chemistry concepts and
     // read all 105 bindings that render.
@@ -47,7 +47,9 @@ describe('the register itself', () => {
     // faithful figure"). 43 - 18 = 25.
     // 25 -> 24 (2026-09-30): phys.opt.reflection was removed from the register once it owned
     // a faithful incident/normal/equal-angles figure (physicsCoreScenesBatch1.test.ts).
-    expect(RETIRED).toHaveLength(24)
+    // 24 -> 22 (2026-09-30): phys.em.rc-circuits and phys.em.ac-basics were removed once they
+    // owned faithful figures (physicsCoreScenesBatch4.test.ts).
+    expect(RETIRED).toHaveLength(22)
   })
 
   it('every retired id is a real KG concept — a typo would silently retire nothing', () => {

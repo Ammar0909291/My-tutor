@@ -67,14 +67,17 @@ export const RETIRED_VISUAL_BINDINGS: Readonly<Record<string, string>> = {
     'Requires a four-resistor bridge with a galvanometer; the card is a single-loop bulb circuit.',
   'phys.em.potentiometer':
     'Requires a slide wire with a tapping key; neither is in the card.',
-  'phys.em.rc-circuits':
-    'Requires a capacitor and a charging/discharging curve; the card has neither.',
+  // REMOVED 2026-09-30: 'phys.em.rc-circuits' ("Requires a capacitor and a
+  // charging/discharging curve; the card has neither."). It now owns the
+  // charging curve with τ = RC marked (physicsCoreScenesB4.ts). Coverage:
+  // physicsCoreScenesBatch4.test.ts.
   'phys.em.self-inductance':
     'Requires an inductor; the card contains no inductive element.',
   'phys.em.mutual-inductance':
     'Requires two magnetically coupled coils (a transformer); the card is a bulb circuit.',
-  'phys.em.ac-basics':
-    'Peak and RMS values require an AC source and a sinusoid; the card is a DC loop.',
+  // REMOVED 2026-09-30: 'phys.em.ac-basics' ("Peak and RMS values require an
+  // AC source and a sinusoid; the card is a DC loop."). It now owns the
+  // sinusoid with peak, period and RMS marked (physicsCoreScenesB4.ts).
   'phys.em.lc-circuits':
     'LC oscillation requires an inductor and a capacitor; the card contains neither.',
 
@@ -275,10 +278,8 @@ export const RETIRED_ASSET_FINGERPRINTS: Readonly<Record<string, readonly string
   'phys.mech.keplers-laws': ['f3ccc74b7', 'f1f29e6b2'], // scene:gravitation-5.97e+24-7000000 + card:force_diagram
   'phys.em.wheatstone-bridge': ['fcd558030'], // card:circuit_diagram
   'phys.em.potentiometer': ['fcd558030'], // card:circuit_diagram
-  'phys.em.rc-circuits': ['fcd558030'], // card:circuit_diagram
   'phys.em.self-inductance': ['fcd558030'], // card:circuit_diagram
   'phys.em.mutual-inductance': ['fcd558030'], // card:circuit_diagram
-  'phys.em.ac-basics': ['fcd558030'], // card:circuit_diagram
   'phys.em.lc-circuits': ['fcd558030'], // card:circuit_diagram
   'chem.found.states-of-matter': ['ffdc76ff'], // card:three_crystal_lattice
   'chem.bond.ionic-bonding': ['f4a1f0cb9'], // card:three_bond_formation

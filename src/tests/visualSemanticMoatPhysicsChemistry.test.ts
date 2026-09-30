@@ -172,15 +172,17 @@ describe('the inert set is demoted, not suppressed', () => {
     }
   })
 
-  it('phys.em.emf is demoted while its seven siblings stay retired', () => {
+  it('phys.em.emf is demoted while its circuit-card siblings stay retired', () => {
     // All eight sit on the same "battery, switch, bulb, resistor" card. Seven
     // require a component the card does not contain AND cannot be read as the
     // concept at all; emf is about the battery the card does draw, just
     // without internal resistance. Thin, not wrong — the same verdict
     // phys.em.resistivity already carries.
     for (const id of [
-      'phys.em.wheatstone-bridge', 'phys.em.potentiometer', 'phys.em.rc-circuits',
-      'phys.em.self-inductance', 'phys.em.mutual-inductance', 'phys.em.ac-basics',
+      // rc-circuits and ac-basics left this list 2026-09-30: both now own a
+      // faithful figure (physicsCoreScenesBatch4.test.ts) and left the register.
+      'phys.em.wheatstone-bridge', 'phys.em.potentiometer',
+      'phys.em.self-inductance', 'phys.em.mutual-inductance',
       'phys.em.lc-circuits',
     ]) {
       expect(isRetiredVisualBinding(id), id).toBe(true)

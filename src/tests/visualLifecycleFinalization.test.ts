@@ -208,15 +208,17 @@ describe('A. retirement retires an ARTIFACT, on every tier', () => {
   it('3. unrelated retired concepts are unaffected (sync decision still no-figure:retired-binding)', () => {
     EXTRA.conceptId = LC
     EXTRA.fingerprints = ['fdeadbeef']
-    for (const id of ['phys.em.rc-circuits', 'phys.mech.keplers-laws', 'chem.bond.ionic-bonding', 'cs.algo.flowcharts', 'phys.em.potentiometer']) {
+    for (const id of ['phys.em.self-inductance', 'phys.mech.keplers-laws', 'chem.bond.ionic-bonding', 'cs.algo.flowcharts', 'phys.em.potentiometer']) {
       expect(resolveVisual({ message: '', lessonConceptId: id }).provenance).toBe('no-figure:retired-binding')
     }
   })
 
-  it('no retirement row was removed by this lifecycle (24 rows of evidence)', () => {
+  it('no retirement row was removed by this lifecycle (22 rows of evidence)', () => {
     // 25 -> 24 (2026-09-30): phys.opt.reflection was removed from the register once it owned
     // a faithful incident/normal/equal-angles figure (physicsCoreScenesBatch1.test.ts).
-    expect(Object.keys(RETIRED_VISUAL_BINDINGS)).toHaveLength(24)
+    // 24 -> 22 (2026-09-30): phys.em.rc-circuits and phys.em.ac-basics were removed once they
+    // owned faithful figures (physicsCoreScenesBatch4.test.ts).
+    expect(Object.keys(RETIRED_VISUAL_BINDINGS)).toHaveLength(22)
   })
 })
 

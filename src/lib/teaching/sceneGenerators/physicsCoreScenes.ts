@@ -17,13 +17,13 @@
 import type { SceneSpec, SceneObject } from '@/lib/teaching/sceneSpec'
 import { ROLE, arrow, curve, dot, hatch, label, line, sinePath } from './visualDesign'
 
-type V3 = [number, number, number]
-const r2 = (n: number) => Math.round(n * 100) / 100
-const rad = (deg: number) => (deg * Math.PI) / 180
-const P = (x: number, y: number): V3 => [r2(x), r2(y), 0]
+export type V3 = [number, number, number]
+export const r2 = (n: number) => Math.round(n * 100) / 100
+export const rad = (deg: number) => (deg * Math.PI) / 180
+export const P = (x: number, y: number): V3 => [r2(x), r2(y), 0]
 
 /** A sampled circle (or arc) as a path. */
-function circlePoints(cx: number, cy: number, radius: number, from = 0, to = 2 * Math.PI, samples = 48): V3[] {
+export function circlePoints(cx: number, cy: number, radius: number, from = 0, to = 2 * Math.PI, samples = 48): V3[] {
   const pts: V3[] = []
   for (let i = 0; i <= samples; i++) {
     const t = from + ((to - from) * i) / samples
@@ -33,7 +33,7 @@ function circlePoints(cx: number, cy: number, radius: number, from = 0, to = 2 *
 }
 
 /** A thick horizontal bar (an energy bar), drawn as one heavy line. */
-function bar(x0: number, y: number, length: number, color: string): SceneObject {
+export function bar(x0: number, y: number, length: number, color: string): SceneObject {
   return line(P(x0, y), P(x0 + Math.max(length, 0.02), y), color, 0.16)
 }
 
@@ -103,11 +103,12 @@ export function buildReflectionScene(): SceneSpec {
 export function buildCoulombsLawScene(): SceneSpec {
   const F1 = 1.6                    // arrow length at separation r
   const F2 = r2(F1 / 4)             // at 2r: F / 2² = F / 4
-  const row = (y: number, half: number, f: number, tag: string): SceneObject[] => [
+  // The second row is the same pair, so only the first names the charges: the
+  // intermediate label budget (9 at once) would otherwise drop one of them.
+  const row = (y: number, half: number, f: number, tag: string, names = true): SceneObject[] => [
     dot(P(-half, y), ROLE.input, 0.26),
     dot(P(half, y), ROLE.input, 0.26),
-    label('+q₁', P(-half, y + 0.6), ROLE.ink, 'detail'),
-    label('+q₂', P(half, y + 0.6), ROLE.ink, 'detail'),
+    ...(names ? [label('+q₁', P(-half, y + 0.6), ROLE.ink, 'detail'), label('+q₂', P(half, y + 0.6), ROLE.ink, 'detail')] : []),
     arrow(P(-half - 0.3, y), P(-half - 0.3 - f, y), ROLE.output),
     arrow(P(half + 0.3, y), P(half + 0.3 + f, y), ROLE.output),
     line(P(-half, y - 0.55), P(half, y - 0.55), ROLE.aid, 0.02),
@@ -130,7 +131,7 @@ export function buildCoulombsLawScene(): SceneSpec {
       {
         narration: 'At twice the distance the force is four times smaller, because it depends on 1 / r².',
         objects: [
-          ...row(-1.8, 2.0, F2, '2r'),
+          ...row(-1.8, 2.0, F2, '2r', false),
           label('F / 4', P(-3.1, -1.3), ROLE.output, 'primary'),
           label('F = k q₁q₂ / r²', P(0, 3.4), ROLE.result, 'primary'),
         ],
@@ -528,7 +529,7 @@ export function buildHookesLawScene(): SceneSpec {
 // ═══════════════════════════════════════════════════════════════════════════
 
 /** Two labelled axes meeting at (x0, y0). */
-function axes(x0: number, y0: number, x1: number, y1: number, xLabel: string, yLabel: string): SceneObject[] {
+export function axes(x0: number, y0: number, x1: number, y1: number, xLabel: string, yLabel: string): SceneObject[] {
   return [
     arrow(P(x0, y0), P(x1, y0), ROLE.reference),
     arrow(P(x0, y0), P(x0, y1), ROLE.reference),
@@ -538,7 +539,7 @@ function axes(x0: number, y0: number, x1: number, y1: number, xLabel: string, yL
 }
 
 /** A closed rectangle (a cart, a block, a box). */
-function rect(x0: number, y0: number, x1: number, y1: number, color: string = ROLE.reference): SceneObject[] {
+export function rect(x0: number, y0: number, x1: number, y1: number, color: string = ROLE.reference): SceneObject[] {
   return [
     line(P(x0, y0), P(x1, y0), color, 0.05), line(P(x1, y0), P(x1, y1), color, 0.05),
     line(P(x1, y1), P(x0, y1), color, 0.05), line(P(x0, y1), P(x0, y0), color, 0.05),
@@ -897,7 +898,7 @@ export function buildLongitudinalWaveScene(): SceneSpec {
 // ═══════════════════════════════════════════════════════════════════════════
 
 /** A sampled function y = f(x) over [x0, x1] as a path. */
-function fnPath(f: (x: number) => number, x0: number, x1: number, samples = 80): V3[] {
+export function fnPath(f: (x: number) => number, x0: number, x1: number, samples = 80): V3[] {
   const pts: V3[] = []
   for (let i = 0; i <= samples; i++) { const x = x0 + ((x1 - x0) * i) / samples; pts.push(P(x, f(x))) }
   return pts

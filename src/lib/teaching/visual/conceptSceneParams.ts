@@ -49,6 +49,11 @@ import {
   buildDampedOscillationScene, buildSuperpositionScene, buildBeatsScene, buildDispersionScene,
   buildSingleSlitScene, buildCapacitanceScene, buildSolenoidScene,
 } from '@/lib/teaching/sceneGenerators/physicsCoreScenes'
+import {
+  buildElectricPotentialScene, buildMagneticForceScene, buildMagneticFluxScene, buildFaradaysLawScene,
+  buildLenzsLawScene, buildAcBasicsScene, buildRcCircuitScene, buildElectromagneticWaveScene,
+  buildPhotoelectricScene, buildRadioactiveDecayScene, buildPolarizationScene, buildDiffractionScene,
+} from '@/lib/teaching/sceneGenerators/physicsCoreScenesB4'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -335,6 +340,19 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'phys.opt.single-slit':               buildSingleSlitScene,
   'phys.em.capacitance':                buildCapacitanceScene,
   'phys.em.solenoid':                   buildSolenoidScene,
+  // Batch 4 (2026-09-30). See physicsCoreScenesB4.ts.
+  'phys.em.electric-potential':         buildElectricPotentialScene,
+  'phys.em.magnetic-force':             buildMagneticForceScene,
+  'phys.em.magnetic-flux':              buildMagneticFluxScene,
+  'phys.em.faradays-law':               buildFaradaysLawScene,
+  'phys.em.lenzs-law':                  buildLenzsLawScene,
+  'phys.em.ac-basics':                  buildAcBasicsScene,
+  'phys.em.rc-circuits':                buildRcCircuitScene,
+  'phys.em.electromagnetic-waves':      buildElectromagneticWaveScene,
+  'phys.mod.photoelectric-effect':      buildPhotoelectricScene,
+  'phys.mod.radioactive-decay':         buildRadioactiveDecayScene,
+  'phys.opt.polarization':              buildPolarizationScene,
+  'phys.opt.diffraction':               buildDiffractionScene,
   'phys.wave.transverse-waves':         buildTransverseWaveScene,
   'phys.wave.interference':             buildWaveInterferenceScene,
   'phys.therm.calorimetry':             buildCalorimetryScene,
