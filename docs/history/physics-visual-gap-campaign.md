@@ -256,3 +256,41 @@ Found while rendering: the first binding-energy figure used the semi-empirical m
 peaks at A ≈ 63 — it labelled the wrong nucleus as the peak. Replaced with tabulated measured values
 (peak Fe-56 asserted). On a linear A axis every light nucleus was squashed against the vertical
 axis, hiding the He-4 spike fusion climbs to; the axis is now logarithmic (labelled so).
+
+## Batch 7 (2026-09-30): measurement, mechanics, gravitation
+
+New module `physicsCoreScenesB7.ts`.
+
+| Concept | Figure |
+|---|---|
+| phys.meas.units | The seven SI base quantities and units round "SI"; 1 N = 1 kg·m/s². |
+| phys.meas.dimensions | v = u + at term by term ([L T⁻¹] each: consistent) vs v = u + at² ([L] ≠ [L T⁻¹]: inconsistent). |
+| phys.meas.errors | Five readings vs true 10.0 cm; mean 9.92, absolute error 0.08 cm, relative 0.8 % (computed). |
+| phys.meas.significant-figures | Rod on a mm ruler read as 4.37 cm: 4.3 certain, 7 estimated → 3 s.f. (computed). |
+| phys.meas.unit-conversion | 72 km/h × 1000 m/km ÷ 3600 s/h = 20 m/s. |
+| phys.mech.work-energy-theorem | 2 kg cart, 6 N over 3 m: W = Fd = 18 J = ΔKE (1 J → 19 J bars, asserted). |
+| phys.mech.angular-kinematics | Disc swept through θ = 60°; points at r and 2r with tangential v and 2v (asserted ⟂ radius); ω = Δθ/Δt, v = ωr. |
+| phys.mech.rolling-motion | Point velocities v(1 + y/R): top 2v, centre v, contact 0 (asserted); v = ωR. Left the retirement register. |
+| phys.mech.gravitational-potential | U = −GMm/r: negative, deepest at the surface, rising to zero at infinity (monotone, asserted). |
+| phys.mech.keplers-laws | e = 0.5 ellipse, Sun at a focus; two equal-time sectors from Kepler's equation — equal areas (asserted numerically); T² ∝ a³. Left the register; its circular-orbit generator removed from the registry row. |
+| phys.mech.escape-velocity | Newton's cannon: exact conics for k = 0.7 (falls back), 1 (circle), √2 (parabola, escapes); Earth v_esc = 11.19 km/s from G, M, R. |
+| phys.mech.stress-strain | Typical ductile-metal curve (shape only): linear to the elastic limit (slope E), plastic, breaks. |
+| phys.therm.third-law | S(T) ∝ T³ near 0 K, still rising (ln form) above; 0 K: S = 0, Ω = 1. |
+
+Found while rendering:
+- Boxes around text (dimensions, unit conversion) came out empty with the text beside them: the label
+  placer moves a label off its box's edges. Boxes removed; the coloured labels carry the grouping.
+- Work–energy's headline chip read "KE = 19 J"; the result label is now `W = Fd = 18 J = ΔKE`.
+- Third law: the first curve saturated to a plateau (unphysical: entropy keeps rising with T); now
+  ln(1 + T³), ∝ T³ near zero.
+- Escape velocity: launching from the surface made the "falls back" path end at its first point;
+  now Newton's cannon (launch above a smaller Earth), and the figure was scaled up.
+
+Retirement register 22 → 20 (rolling-motion, keplers-laws). Fixtures moved: visualFailClosed's
+no-asset stand-ins (meas.errors, escape-velocity → qm.s-matrix-basics, stat.monte-carlo-basics);
+tests that used a now-authored physics concept as "a concept with no figure" (conceptExcursion,
+visualGrounding, visualSessionRestore — their fake `phys.meas.dimensional-analysis` id resolved to
+phys.meas.dimensions through the learner's message) now use eng.phonics.rhyming, because physics is
+heading to full coverage and English has no visuals. visualRetiredBindings' scene-generator case
+(Kepler) has no remaining retired example; retirement beating a generator stays covered by
+visualRetirementLifecycle's injected replacement.

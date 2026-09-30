@@ -174,7 +174,10 @@ const CONCEPT_VISUALS: Record<string, VisualEntry> = {
   // whole gravitation sub-area.
   'phys.mech.gravitational-field':    { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'gravitation_orbit' },
   'phys.mech.orbital-mechanics':      { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'gravitation_orbit' },
-  'phys.mech.keplers-laws':           { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'gravitation_orbit' },
+  // keplers-laws: sceneGenerator removed 2026-09-30 — the gravitation generator
+  // draws a CIRCULAR orbit, contradicting Kepler's first law. Its own ellipse /
+  // equal-areas figure is CONCEPT_SCENES['phys.mech.keplers-laws'].
+  'phys.mech.keplers-laws':           { primary: 'force_diagram', all: ['force_diagram'] },
   // 'phys.mech.escape-velocity' was flagged 🔴 Incorrect Mapping by the new
   // visualCoverageValidator: "Escape Velocity" is fundamentally a kinematics/
   // energy-threshold quantity (a scalar speed), not a force-diagram or

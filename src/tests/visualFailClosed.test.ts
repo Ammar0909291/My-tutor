@@ -81,8 +81,10 @@ const NO_ASSET_CONCEPTS = [
   'phys.qm.wkb-approximation',
   'phys.stat.ising-model',
   'phys.mech.power',
-  'phys.meas.errors',
-  'phys.mech.escape-velocity',
+  // meas.errors and escape-velocity were here until batch 7 (2026-09-30)
+  // authored both.
+  'phys.qm.s-matrix-basics',
+  'phys.stat.monte-carlo-basics',
 ] as const
 
 describe('the prose routers still misroute — which is why they are not authorities', () => {

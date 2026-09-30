@@ -44,13 +44,12 @@
 /** conceptId -> why its binding was retired. Evidence, not a label. */
 export const RETIRED_VISUAL_BINDINGS: Readonly<Record<string, string>> = {
   // ── physics: mechanics ──────────────────────────────────────────────────
-  'phys.mech.rolling-motion':
-    'Rendered the circular-motion card (an orbiting body on a closed path). Rolling ' +
-    'without slipping is defined by a contact point and v = ωr; an orbit shows neither.',
-  'phys.mech.keplers-laws':
-    'The gravitation generator draws a CIRCULAR orbit of fixed radius. Kepler\'s first ' +
-    'law states orbits are ellipses with the star at a focus, so the figure contradicts ' +
-    'the law it was attached to.',
+  // REMOVED 2026-09-30: 'phys.mech.rolling-motion' ("Rendered the circular-motion
+  // card … Rolling without slipping is defined by a contact point and v = ωr")
+  // and 'phys.mech.keplers-laws' ("The gravitation generator draws a CIRCULAR
+  // orbit …"). Both now own faithful figures — contact point at rest with
+  // 2v / v / 0, and an e = 0.5 ellipse with equal-area sectors from Kepler's
+  // equation (physicsCoreScenesB7.ts). Coverage: physicsCoreScenesBatch7.test.ts.
 
   // ── physics: optics ─────────────────────────────────────────────────────
   // REMOVED 2026-09-30: 'phys.opt.reflection' ("Rendered a concave-mirror
@@ -274,8 +273,6 @@ export function retirementReason(conceptId: string): string | null {
 // needs no edit here. `visualRetirementLifecycle.test.ts` keeps this table and
 // RETIRED_VISUAL_BINDINGS in lock-step and reports which rows are REPLACED.
 export const RETIRED_ASSET_FINGERPRINTS: Readonly<Record<string, readonly string[]>> = {
-  'phys.mech.rolling-motion': ['fdc3ee668'], // card:three_circular_motion
-  'phys.mech.keplers-laws': ['f3ccc74b7', 'f1f29e6b2'], // scene:gravitation-5.97e+24-7000000 + card:force_diagram
   'phys.em.wheatstone-bridge': ['fcd558030'], // card:circuit_diagram
   'phys.em.potentiometer': ['fcd558030'], // card:circuit_diagram
   'phys.em.self-inductance': ['fcd558030'], // card:circuit_diagram

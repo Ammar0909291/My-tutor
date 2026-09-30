@@ -185,9 +185,11 @@ describe('F/G/H/I · restoration honours every existing guarantee', () => {
     expect(restoreVisualSession(null)).toBeNull()
     // A concept with no faithful figure produces no session to persist.
     const none = resolveVisual({
-      message: 'explain dimensional analysis',
-      lessonConceptId: 'phys.meas.dimensional-analysis',
-      subject: 'physics',
+      // An English concept: physics now gives every concept a figure (physics
+      // visual gap campaign, 2026-09-30), and English has no visuals at all.
+      message: 'explain rhyming',
+      lessonConceptId: 'eng.phonics.rhyming',
+      subject: 'english',
     })
     expect(none.graphical).toBe(false)
     expect(restoreVisualSession(none.session)).toBeNull()
@@ -258,11 +260,12 @@ describe('a restored figure cannot be manufactured', () => {
     // an admitted asset for THAT concept, or nothing at all. There is no path
     // from a supplied id to an arbitrary asset.
     const forged: VisualSession = {
-      conceptId: 'phys.meas.units', representation: 'labelled_figure', renderer: 'scene',
+      conceptId: 'eng.phonics.rhyming', representation: 'labelled_figure', renderer: 'scene',
       returnToConceptId: null, turns: 0,
     }
     const restored = restoreVisualSession(forged)
-    // phys.meas.units has no curated binding and no generator → no figure.
+    // eng.phonics.rhyming has no curated binding and no generator → no figure.
+    // (phys.meas.units was this case until it gained its own figure, 2026-09-30.)
     expect(restored).toBeNull()
   })
 

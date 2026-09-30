@@ -260,8 +260,9 @@ describe('a restored figure carries identical grounding', () => {
 describe('grounding fails closed', () => {
   it('no asset ⇒ the NO-FIGURE contract, which claims nothing', () => {
     const none = resolveVisual({
-      message: 'explain dimensional analysis',
-      lessonConceptId: 'phys.meas.dimensional-analysis', subject: 'physics',
+      // English: physics now gives every concept a figure (2026-09-30).
+      message: 'explain rhyming',
+      lessonConceptId: 'eng.phonics.rhyming', subject: 'english',
     })
     const block = buildVisualContractBlock(none)
     expect(block).toContain('NO FIGURE IS ATTACHED')

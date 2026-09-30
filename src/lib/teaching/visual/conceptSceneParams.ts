@@ -65,6 +65,12 @@ import {
   buildBindingEnergyScene, buildFissionScene, buildFusionScene, buildComptonScene, buildRelativityPostulatesScene,
   buildTimeDilationScene, buildLengthContractionScene, buildMassEnergyScene,
 } from '@/lib/teaching/sceneGenerators/physicsCoreScenesB6'
+import {
+  buildSiUnitsScene, buildDimensionsScene, buildMeasurementErrorsScene, buildSignificantFiguresScene,
+  buildUnitConversionScene, buildWorkEnergyTheoremScene, buildAngularKinematicsScene, buildRollingMotionScene,
+  buildGravitationalPotentialScene, buildKeplersLawsScene, buildEscapeVelocityScene, buildStressStrainScene,
+  buildThirdLawScene,
+} from '@/lib/teaching/sceneGenerators/physicsCoreScenesB7'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -392,6 +398,20 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'phys.rel.time-dilation':             buildTimeDilationScene,
   'phys.rel.length-contraction':        buildLengthContractionScene,
   'phys.rel.mass-energy':               buildMassEnergyScene,
+  // Batch 7 (2026-09-30). See physicsCoreScenesB7.ts.
+  'phys.meas.units':                    buildSiUnitsScene,
+  'phys.meas.dimensions':               buildDimensionsScene,
+  'phys.meas.errors':                   buildMeasurementErrorsScene,
+  'phys.meas.significant-figures':      buildSignificantFiguresScene,
+  'phys.meas.unit-conversion':          buildUnitConversionScene,
+  'phys.mech.work-energy-theorem':      buildWorkEnergyTheoremScene,
+  'phys.mech.angular-kinematics':       buildAngularKinematicsScene,
+  'phys.mech.rolling-motion':           buildRollingMotionScene,
+  'phys.mech.gravitational-potential':  buildGravitationalPotentialScene,
+  'phys.mech.keplers-laws':             buildKeplersLawsScene,
+  'phys.mech.escape-velocity':          buildEscapeVelocityScene,
+  'phys.mech.stress-strain':            buildStressStrainScene,
+  'phys.therm.third-law':               buildThirdLawScene,
   'phys.wave.transverse-waves':         buildTransverseWaveScene,
   'phys.wave.interference':             buildWaveInterferenceScene,
   'phys.therm.calorimetry':             buildCalorimetryScene,

@@ -24,7 +24,7 @@ const ask = (conceptId: string, message = 'explain with diagram') =>
   resolveVisual({ message, lessonConceptId: conceptId, learnerRequest: 'diagram' })
 
 describe('the register itself', () => {
-  it('covers exactly the 22 audited concepts', () => {
+  it('covers exactly the 20 audited concepts', () => {
     // 29 from the M3-A audit + 8 from the visual semantic moat sweep, which
     // ran the resolver over all 238 physics and 186 chemistry concepts and
     // read all 105 bindings that render.
@@ -49,7 +49,9 @@ describe('the register itself', () => {
     // a faithful incident/normal/equal-angles figure (physicsCoreScenesBatch1.test.ts).
     // 24 -> 22 (2026-09-30): phys.em.rc-circuits and phys.em.ac-basics were removed once they
     // owned faithful figures (physicsCoreScenesBatch4.test.ts).
-    expect(RETIRED).toHaveLength(22)
+    // 22 -> 20 (2026-09-30): phys.mech.rolling-motion and phys.mech.keplers-laws were removed once
+    // they owned faithful figures (physicsCoreScenesBatch7.test.ts).
+    expect(RETIRED).toHaveLength(20)
   })
 
   it('every retired id is a real KG concept — a typo would silently retire nothing', () => {
@@ -96,7 +98,11 @@ describe('every retired concept resolves to NO FIGURE', () => {
     // The register sits ahead of every tier, so retirement survives the curated
     // row, the domain-prefix rule AND the scene generator. These three cover one
     // retired concept from each of those sources.
-    for (const id of ['phys.em.lc-circuits', 'chem.bond.ionic-bonding', 'phys.mech.keplers-laws', 'phys.em.potentiometer']) {
+    // phys.mech.keplers-laws was the scene-generator case until 2026-09-30, when it
+    // left the register with its own figure; no retired concept keeps a generator
+    // binding now. Retirement beating a generator stays covered by the injected
+    // replacement in visualRetirementLifecycle.test.ts.
+    for (const id of ['phys.em.lc-circuits', 'chem.bond.ionic-bonding', 'cs.algo.flowcharts', 'phys.em.potentiometer']) {
       expect(ask(id).graphical, id).toBe(false)
     }
   })

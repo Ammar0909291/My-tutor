@@ -392,9 +392,11 @@ describe('the EXCURSION DIRECTIVE is independent of the visual contract', () => 
     // A concept with no authored figure — the majority of the curriculum, and
     // the case that silently produced no guidance at all before.
     const noFigure = resolveVisual({
-      message: 'explain dimensional analysis',
-      lessonConceptId: 'phys.meas.dimensional-analysis',
-      subject: 'physics',
+      // An English concept: physics now gives every concept a figure (physics
+      // visual gap campaign, 2026-09-30), and English has no visuals at all.
+      message: 'explain rhyming',
+      lessonConceptId: 'eng.phonics.rhyming',
+      subject: 'english',
     })
     expect(noFigure.graphical).toBe(false)
     expect(buildVisualContractBlock(noFigure)).toContain('NO FIGURE IS ATTACHED')

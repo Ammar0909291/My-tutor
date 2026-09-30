@@ -74,7 +74,7 @@ describe('a retired CONCEPT-AUTHORED figure stays retired', () => {
   })
 
   it('every other retired concept is unaffected by one concept\'s replacement', () => {
-    for (const id of ['phys.em.potentiometer', 'phys.mech.keplers-laws', 'chem.bond.ionic-bonding', 'cs.algo.flowcharts']) {
+    for (const id of ['phys.em.potentiometer', 'chem.solid.defects', 'chem.bond.ionic-bonding', 'cs.algo.flowcharts']) {
       expect(resolve(id).provenance).toBe('no-figure:retired-binding')
     }
   })

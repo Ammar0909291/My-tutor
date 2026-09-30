@@ -166,7 +166,8 @@ describe('Phase 6 P2 — semantically wrong bindings are suppressed before any t
     // than the concept requires.
     // (phys.opt.reflection left the register 2026-09-30 with its own faithful figure.)
     expect(isRetiredVisualBinding('phys.em.potentiometer')).toBe(true)
-    expect(isRetiredVisualBinding('phys.mech.keplers-laws')).toBe(true)
+    // (phys.mech.keplers-laws left the register 2026-09-30 with its own faithful figure.)
+    expect(isRetiredVisualBinding('phys.em.lc-circuits')).toBe(true)
   })
 
   it('an ordinary concept is NOT retired — the register is targeted, not blanket', () => {
