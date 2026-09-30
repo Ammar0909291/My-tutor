@@ -299,7 +299,7 @@ describe('G/H. the tutor is told about the admitted asset, or about nothing', ()
     // Assetless fixture: TIR gained an authored figure in the M4 pilot.
     const d = resolveVisual({
       message: 'explain with diagram',
-      lessonConceptId: 'phys.mech.kinetic-energy',
+      lessonConceptId: 'phys.mech.power',
       subject: 'physics',
       learnerRequest: 'diagram',
     })

@@ -51,7 +51,9 @@ const CONCEPT_VISUALS: Record<string, VisualEntry> = {
   // is a binding fix at the source rather than a new asset or a suppression.
   'phys.mech.friction':               { primary: 'force_diagram', all: ['force_diagram', 'three_newton_forces'] },
   'phys.mech.momentum':               { primary: 'three_momentum_collision', all: ['three_momentum_collision', 'force_diagram'], sceneGenerator: 'collision' },
-  'phys.mech.impulse':                { primary: 'three_momentum_collision', all: ['three_momentum_collision', 'force_diagram'], sceneGenerator: 'collision' },
+  // No sceneGenerator: a collision is not impulse. The concept's own force–time
+  // area figure is CONCEPT_SCENES['phys.mech.impulse'] (2026-09-30).
+  'phys.mech.impulse':                { primary: 'three_momentum_collision', all: ['three_momentum_collision', 'force_diagram'] },
   'phys.mech.torque':                 { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'torque_diagram' },
   // P2 fix: these two keys did not match any real KG concept ID ('phys.mech.
   // gravitation' vs the KG's 'phys.mech.universal-gravitation'; 'phys.mech.

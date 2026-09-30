@@ -153,12 +153,13 @@ describe('non-regression: everything this fix must not touch', () => {
   })
 
   it('an unrelated concept still genuinely stuck on Tier 3 is unaffected by this fix', () => {
-    // phys.mech.impulse is a documented still-unauthored case
+    // phys.wave.shm-energy is a documented still-unauthored case
     // (visualGeneratorSplits.test.ts's own REQUIRES_AUTHORING list) — it
     // must still resolve exactly as before, with no override accidentally
     // added by this change. (phys.opt.refraction was the example here until
-    // it was given its own authored figure on 2026-09-30.)
-    expect(CONCEPT_SCENE_OVERRIDES).not.toContain('phys.mech.impulse')
+    // it was given its own authored figure on 2026-09-30, then phys.mech.impulse
+    // until physics batch 2 the same day.)
+    expect(CONCEPT_SCENE_OVERRIDES).not.toContain('phys.wave.shm-energy')
   })
 
   it('mitosis and the 18 retired-then-replaced bio.cell concepts are unaffected', () => {

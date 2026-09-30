@@ -82,7 +82,7 @@ const rejectingCritic = async () => ({
 })
 
 // No curated asset for either, so the resolver reaches the engine tier.
-const CALORIMETRY = 'phys.mech.kinetic-energy'
+const CALORIMETRY = 'phys.mech.power'
 const PHOTOSYNTHESIS = 'bio.plant.photosynthesis'
 
 const ctxFor = (conceptId: string): ArchetypeContext => {

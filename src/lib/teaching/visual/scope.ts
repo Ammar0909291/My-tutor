@@ -48,7 +48,7 @@ export const INSUFFICIENT_FOR_CONCEPT: ReadonlySet<string> = new Set([
   // figure in CONCEPT_SCENES (physicsPilot.ts buildRefractionScene, 2026-09-30).
   'phys.meas.scalars-vectors',       // vector addition; no scalar quantity is drawn
   'phys.mech.kinematics-2d',         // 1D graphs for a 2D concept
-  'phys.mech.impulse',               // before/after velocities; no force-time or labelled Δp
+  // REMOVED 2026-09-30: 'phys.mech.impulse' now owns a force–time area figure (physicsCoreScenes.ts batch 2).
   'phys.mech.rotational-dynamics',   // torque diagram; no moment of inertia, no angular acceleration
   'phys.mech.universal-gravitation', // an orbit; never the inverse-square force between two masses
   'phys.mech.gravitational-field',   // an orbit; the concept is field LINES
@@ -69,9 +69,9 @@ export const INSUFFICIENT_FOR_CONCEPT: ReadonlySet<string> = new Set([
   'phys.mech.velocity',              // static number line cannot show a rate
   'phys.mech.acceleration',          // static number line cannot show a rate of a rate
   'phys.mech.relative-motion',       // one number line; the concept needs two frames
-  'phys.mech.newtons-third-law',     // forces on ONE body; the third law needs a pair on two
-  'phys.mech.inclined-plane',        // force diagram with no incline drawn
-  'phys.mech.work',                  // empty x-y plane; work is the area under an F-d curve
+  // REMOVED 2026-09-30: 'phys.mech.newtons-third-law' now owns a force pair on two bodies (physicsCoreScenes.ts batch 2).
+  // REMOVED 2026-09-30: 'phys.mech.inclined-plane' now owns an incline with resolved weight (physicsCoreScenes.ts batch 2).
+  // REMOVED 2026-09-30: 'phys.mech.work' now owns an F·d cos θ figure (physicsCoreScenes.ts batch 2).
   'phys.mech.conservative-forces',   // static forces cannot show path-independence
   // REMOVED: 'phys.mech.angular-kinematics'. The verdict was written about a
   // curated binding (coordinate_plane with no generator) that has since been
@@ -96,7 +96,7 @@ export const INSUFFICIENT_FOR_CONCEPT: ReadonlySet<string> = new Set([
   'phys.mech.conservation-of-angular-momentum', // no before/after spin-rate change
   // REMOVED 2026-09-30: 'phys.mech.hookes-law' ("no spring, no extension-vs-force
   // relation") now owns an authored spring / x / F = −kx figure (physicsCoreScenes.ts).
-  'phys.therm.ideal-gas-law',        // empty x-y plane where a P-V diagram is required
+  // REMOVED 2026-09-30: 'phys.therm.ideal-gas-law' now owns P–V isotherms (physicsCoreScenes.ts batch 2).
   'phys.therm.thermodynamic-processes', // empty x-y plane; no labelled P-V paths
   'phys.therm.carnot-cycle',         // empty x-y plane; no closed four-stage cycle
   'phys.em.resistivity',             // bulb circuit; ρ = RA/L needs conductor geometry

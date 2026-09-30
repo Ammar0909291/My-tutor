@@ -84,3 +84,46 @@ runs every stem in the corpus through the strip.
 - Optics and E&M: dispersion (prism), diffraction/single slit, polarization, capacitance,
   Lorentz force, solenoid, Faraday/Lenz, AC sine.
 - Modern: photoelectric effect, radioactive decay curve, p-n junction.
+
+## Batch 2 — twelve more figures (physicsCoreScenes.ts)
+
+| Concept | Figure |
+|---|---|
+| phys.mech.kinetic-energy | The same cart at v and 2v; KE bar 4× (½mv²). |
+| phys.mech.potential-energy | Ball at h and 2h above a zero level; PE bar 2× (mgh). |
+| phys.mech.work | F at 30° on a box moved d; component F cos θ drawn; W = F d cos θ. Left the general list. |
+| phys.mech.newtons-third-law | Two skaters: "force on A by B" and "force on B by A", equal and opposite. Left the general list. |
+| phys.mech.inclined-plane | 30° slope; mg resolved into mg sin θ along and mg cos θ into the slope; N balances mg cos θ. Left the general list. |
+| phys.mech.pressure-fluids | Tank; four equal arrows at each of two depths, longer deeper; P = P₀ + ρgh. |
+| phys.mech.impulse | F–t pulse with the area under it marked impulse J = Δp. Left the general list; collision generator removed from its row. |
+| phys.therm.thermal-expansion | Rod at T and at T + ΔT with ΔL marked; ΔL = αL₀ΔT. |
+| phys.therm.phase-transitions | Heating curve with flat melting and (longer) boiling plateaus; labelled not to scale. |
+| phys.therm.ideal-gas-law | Two P–V isotherms, T₂ = 2T₁; PV constant along each (asserted). Left the general list. |
+| phys.wave.wave-properties | Crest, trough, amplitude and wavelength labelled; v = fλ. |
+| phys.wave.longitudinal-waves | Particles at x + A sin kx (A·k < 1): compressions at λ/2, rarefactions at λ; particle motion parallel to travel. |
+
+Found and fixed while authoring:
+- The first longitudinal figure put 93 objects in one step, above `validateSceneSpec`'s 50-per-step
+  bound. It is now two rows (46).
+- Both batch test files now run every figure through `validateSceneSpec`.
+
+Tests: `physicsCoreScenesBatch2.test.ts` checks the physics of each figure. INSUFFICIENT_FOR_CONCEPT
+45 → 40. The live-generation test fixture (a concept with no asset) moved from kinetic-energy to
+phys.mech.power, with its fake generated scene rewritten in power's vocabulary — the same move made
+earlier from calorimetry to kinetic-energy.
+
+Coverage after batches 1–2 (local audit): 43 + 22 = 65 physics concepts with their own figure;
+GENERAL 32 → 26; NONE 163 → 147.
+
+## Live testing paused: Vercel platform protection
+
+After a day of scripted QA sessions, production began answering the scripted client with a Vercel
+403 (`{"error":{"code":"403","message":"Forbidden","id":"cle1::…"}}`) on /api/learn/chat, and with
+HTML at login. The project has no custom firewall config (`get_firewall_config` → not found), so
+this is Vercel's built-in protection. It was not worked around; live QA is paused.
+
+One consequence: two disposable accounts were registered (201, 07:02:49 and 07:03:11 UTC,
+`qa-r3-…@mytutor-qa.invalid`), but the scripted login then failed, so their generated passwords
+were lost. **They still exist and need manual deletion by the owner.**
+`scripts/qa/liveAccount.ts` now retries the login with backoff, and on final failure names the
+account, so this cannot silently recur.

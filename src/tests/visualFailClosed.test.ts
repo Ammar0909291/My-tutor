@@ -73,9 +73,11 @@ const HIJACK_CASES = [
  * path — these do. The invariant under test is unchanged: a concept with no
  * asset gets no figure, however the request is phrased.
  */
+// kinetic-energy and potential-energy were here until physics batch 2
+// (2026-09-30) authored both; moment-of-inertia and center-of-mass replace them.
 const NO_ASSET_CONCEPTS = [
-  'phys.mech.kinetic-energy',
-  'phys.mech.potential-energy',
+  'phys.mech.moment-of-inertia',
+  'phys.mech.center-of-mass',
   'phys.mech.power',
   'phys.meas.errors',
   'phys.mech.escape-velocity',
@@ -173,8 +175,8 @@ describe('curated assets are untouched by M1', () => {
 describe('the no-figure contract', () => {
   it('a declining decision tells the tutor the screen is empty', () => {
     const decision = resolveVisual({
-      message: 'explain kinetic energy with a ray diagram',
-      lessonConceptId: 'phys.mech.kinetic-energy',
+      message: 'explain power with a ray diagram',
+      lessonConceptId: 'phys.mech.power',
       subject: 'physics',
       learnerRequest: 'diagram',
     })
@@ -190,7 +192,7 @@ describe('the no-figure contract', () => {
     // This is the M1 fail-closed path: route.ts turns a thrown resolver into
     // this decision instead of into four prose-keyword pipelines.
     const errored = {
-      ...noFigureDecision('resolver-error', 'phys.mech.kinetic-energy', null, 'explain' as const),
+      ...noFigureDecision('resolver-error', 'phys.mech.power', null, 'explain' as const),
       continuityReason: 'resolver-error',
       session: null,
     }
@@ -200,7 +202,7 @@ describe('the no-figure contract', () => {
 
     const declined = resolveVisual({
       message: 'explain with diagram',
-      lessonConceptId: 'phys.mech.kinetic-energy',
+      lessonConceptId: 'phys.mech.power',
       subject: 'physics',
       learnerRequest: 'diagram',
     })

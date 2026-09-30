@@ -208,7 +208,8 @@ describe('cases the audit found that B2 deliberately did NOT approximate', () =>
   // safe — see visualSemanticMoatPhysicsChemistry.test.ts.
   const REQUIRES_AUTHORING = [
     'phys.opt.lens-power',            // needs a lens COMBINATION
-    'phys.mech.impulse',              // needs a force-time curve
+    // AUTHORED 2026-09-30 (physics batch 2), so no longer here:
+    // 'phys.mech.impulse' ("needs a force-time curve") — physicsCoreScenesBatch2.test.ts.
     'phys.wave.shm-energy',           // needs a KE/PE energy split
     'phys.meas.scalars-vectors',      // needs a scalar shown beside a vector
     'phys.mech.kinematics-2d',        // needs 2D components, not 1D graphs

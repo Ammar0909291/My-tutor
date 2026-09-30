@@ -521,3 +521,372 @@ export function buildHookesLawScene(): SceneSpec {
     ],
   }
 }
+
+// ═══════════════════════════════════════════════════════════════════════════
+// Batch 2 (2026-09-30): mechanics, thermal and wave concepts that had no figure
+// or only a general illustration. Same rules as batch 1.
+// ═══════════════════════════════════════════════════════════════════════════
+
+/** Two labelled axes meeting at (x0, y0). */
+function axes(x0: number, y0: number, x1: number, y1: number, xLabel: string, yLabel: string): SceneObject[] {
+  return [
+    arrow(P(x0, y0), P(x1, y0), ROLE.reference),
+    arrow(P(x0, y0), P(x0, y1), ROLE.reference),
+    label(xLabel, P(x1 - 0.2, y0 - 0.5), ROLE.ink, 'detail'),
+    label(yLabel, P(x0 + 0.1, y1 + 0.4), ROLE.ink, 'detail'),
+  ]
+}
+
+/** A closed rectangle (a cart, a block, a box). */
+function rect(x0: number, y0: number, x1: number, y1: number, color: string = ROLE.reference): SceneObject[] {
+  return [
+    line(P(x0, y0), P(x1, y0), color, 0.05), line(P(x1, y0), P(x1, y1), color, 0.05),
+    line(P(x1, y1), P(x0, y1), color, 0.05), line(P(x0, y1), P(x0, y0), color, 0.05),
+  ]
+}
+
+// ── 11. Kinetic energy ───────────────────────────────────────────────────────
+
+/** KG: "energy … due to its motion, equal to ½mv²." Same mass at v and 2v: the KE bar is 4× as long. */
+export function buildKineticEnergyScene(): SceneSpec {
+  const KE1 = 0.6
+  const KE2 = r2(KE1 * 4) // ½m(2v)² = 4 × ½mv²
+  return {
+    id: 'phys-kinetic-energy',
+    title: 'Kinetic energy: double the speed, four times the energy',
+    sceneType: 'diagram',
+    cameraDistance: 13,
+    teachingGoal: 'Show that kinetic energy grows with the square of speed: the same cart at twice the speed has four times the kinetic energy.',
+    ariaLabel: 'Two identical carts. The top one moves at speed v and has a short kinetic-energy bar. The bottom one moves at 2v and its bar is four times as long.',
+    steps: [
+      {
+        narration: 'A cart of mass m moving at speed v has kinetic energy KE = ½mv².',
+        objects: [...rect(-4.2, 1.2, -2.8, 2.0), arrow(P(-2.6, 1.6), P(-1.6, 1.6), ROLE.input), label('v', P(-2.1, 2.1), ROLE.input, 'primary'), bar(0.2, 1.6, KE1, ROLE.output), label('KE', P(0.5, 2.1), ROLE.output, 'detail')],
+      },
+      {
+        narration: 'The same cart at twice the speed has four times the kinetic energy, because speed is squared.',
+        objects: [...rect(-4.2, -1.6, -2.8, -0.8), arrow(P(-2.6, -1.2), P(-0.6, -1.2), ROLE.input), label('2v', P(-1.6, -0.7), ROLE.input, 'primary'), bar(0.2, -1.2, KE2, ROLE.output), label('4 × KE', P(1.4, -0.7), ROLE.output, 'primary'), label('KE = ½mv²', P(0, 3.4), ROLE.result, 'primary')],
+      },
+    ],
+  }
+}
+
+// ── 12. Potential energy ─────────────────────────────────────────────────────
+
+/** KG: "stored energy associated with an object's position." Gravitational PE = mgh: at 2h the bar doubles. */
+export function buildPotentialEnergyScene(): SceneSpec {
+  const G = -2.6, H = 2.0
+  return {
+    id: 'phys-potential-energy',
+    title: 'Potential energy: higher up, more stored energy',
+    sceneType: 'diagram',
+    cameraDistance: 13,
+    teachingGoal: 'Show that gravitational potential energy depends on height: twice the height stores twice the energy (PE = mgh).',
+    ariaLabel: 'A ball at height h and an identical ball at height 2h above the ground. The potential-energy bar for the higher ball is twice as long.',
+    steps: [
+      {
+        narration: 'Height is measured from a chosen zero level: here, the ground.',
+        objects: [line(P(-4.6, G), P(1.0, G), ROLE.reference, 0.05), ...hatch(-4.5, 0.9, G, 10, 0.3), label('ground (PE = 0)', P(-2.0, G - 0.7), ROLE.ink, 'detail')],
+      },
+      {
+        narration: 'A ball lifted to height h stores potential energy PE = mgh.',
+        objects: [dot(P(-3.2, G + H), ROLE.reference, 0.24), line(P(-3.9, G), P(-3.9, G + H), ROLE.aid, 0.02), label('h', P(-4.3, G + H / 2), ROLE.aid, 'primary'), bar(1.6, G + H, 1.0, ROLE.input), label('PE', P(2.1, G + H + 0.5), ROLE.input, 'detail')],
+      },
+      {
+        narration: 'Twice as high, it stores twice as much.',
+        objects: [dot(P(-0.8, G + 2 * H), ROLE.reference, 0.24), line(P(-1.5, G), P(-1.5, G + 2 * H), ROLE.aid, 0.02), label('2h', P(-2.0, G + 1.5 * H), ROLE.aid, 'primary'), bar(1.6, G + 2 * H, 2.0, ROLE.input), label('2 × PE', P(2.6, G + 2 * H + 0.5), ROLE.input, 'primary'), label('PE = mgh', P(3.0, -1.2), ROLE.result, 'primary')],
+      },
+    ],
+  }
+}
+
+// ── 13. Work ─────────────────────────────────────────────────────────────────
+
+/** KG: "the scalar product of force and displacement." F at 30° to d: only F cos θ along d does work. */
+export function buildWorkScene(): SceneSpec {
+  const T = 30, F = 2.4
+  const fx = r2(F * Math.cos(rad(T))), fy = r2(F * Math.sin(rad(T)))
+  return {
+    id: 'phys-work',
+    title: 'Work: force along the displacement',
+    sceneType: 'diagram',
+    cameraDistance: 13,
+    teachingGoal: 'Show that only the part of a force along the displacement does work: W = F d cos θ.',
+    ariaLabel: 'A box on the floor pulled by a force at 30 degrees above horizontal. The box moves a distance d to the right. The part of the force along the floor, F cos θ, is shown.',
+    steps: [
+      {
+        narration: 'A box is pulled by a force F at an angle θ = 30° above the floor, and moves a distance d.',
+        objects: [line(P(-4.8, -1.0), P(4.8, -1.0), ROLE.reference, 0.05), ...hatch(-4.6, 4.6, -1.0, 12, 0.3), ...rect(-3.4, -1.0, -2.2, 0.0), arrow(P(-2.2, -0.5), P(-2.2 + fx, -0.5 + fy), ROLE.input), label('F', P(-2.2 + fx + 0.3, -0.5 + fy + 0.3), ROLE.input, 'primary'), label(`θ = ${T}°`, P(-0.9, -0.1), ROLE.input, 'detail'), arrow(P(-3.4, -1.9), P(1.6, -1.9), ROLE.aid), label('d', P(-0.9, -2.4), ROLE.aid, 'primary')],
+      },
+      {
+        narration: 'Only the part of the force along the displacement, F cos θ, does work.',
+        objects: [line(P(-2.2, -0.5), P(-2.2 + fx, -0.5), ROLE.output, 0.04), label('F cos θ', P(-2.2 + fx + 1.0, -0.45), ROLE.output, 'detail'), line(P(-2.2 + fx, -0.5), P(-2.2 + fx, -0.5 + fy), ROLE.reference, 0.02)],
+      },
+      {
+        narration: 'Work is force times displacement times cos θ.',
+        objects: [label('W = F d cos θ', P(2.2, 2.4), ROLE.result, 'primary')],
+      },
+    ],
+  }
+}
+
+// ── 14. Newton's third law ───────────────────────────────────────────────────
+
+/** KG: "an equal and opposite reaction force acting on a different body." Two skaters push apart. */
+export function buildNewtonsThirdLawScene(): SceneSpec {
+  return {
+    id: 'phys-newtons-third-law',
+    title: "Newton's third law: a force pair on two bodies",
+    sceneType: 'diagram',
+    cameraDistance: 13,
+    teachingGoal: 'Show an action-reaction pair: equal in size, opposite in direction, and acting on two different bodies.',
+    ariaLabel: 'Two skaters, A and B, pushing against each other. An arrow on A points left, labelled force on A by B; an equal arrow on B points right, labelled force on B by A.',
+    steps: [
+      {
+        narration: 'Skater A pushes skater B.',
+        objects: [...rect(-2.4, -1.0, -0.8, 1.0), label('A', P(-1.6, 0), ROLE.ink, 'primary'), ...rect(0.8, -1.0, 2.4, 1.0), label('B', P(1.6, 0), ROLE.ink, 'primary')],
+      },
+      {
+        narration: 'A pushes on B, and B pushes back on A with a force of the same size in the opposite direction.',
+        objects: [arrow(P(2.6, 0), P(4.4, 0), ROLE.output), label('force on B by A', P(3.3, 0.7), ROLE.output, 'detail'), arrow(P(-2.6, 0), P(-4.4, 0), ROLE.input), label('force on A by B', P(-3.3, 0.7), ROLE.input, 'detail')],
+      },
+      {
+        narration: 'The two forces act on DIFFERENT bodies, so they never cancel each other.',
+        objects: [label('equal size · opposite direction · different bodies', P(0, -2.3), ROLE.result, 'detail')],
+      },
+    ],
+  }
+}
+
+// ── 15. Inclined plane ───────────────────────────────────────────────────────
+
+/**
+ * KG: "resolving gravitational and normal forces along and perpendicular to the
+ * slope." θ = 30°: mg sin θ down the slope, mg cos θ into it, N balancing it.
+ */
+export function buildInclinedPlaneScene(): SceneSpec {
+  const T = 30, MG = 2.2
+  const bx0 = -4.2, by0 = -2.6, bx1 = 3.2
+  const topY = r2(by0 + (bx1 - bx0) * Math.tan(rad(T)))
+  const down: [number, number] = [Math.cos(rad(T)), -Math.sin(rad(T))]  // down the slope
+  const out: [number, number] = [Math.sin(rad(T)), Math.cos(rad(T))]    // out of the slope
+  // block centre: middle of the slope, lifted off it along the outward normal
+  const mx = (bx0 + bx1) / 2, my = (topY + by0) / 2
+  const cx = r2(mx + out[0] * 0.45), cy = r2(my + out[1] * 0.45)
+  const along = r2(MG * Math.sin(rad(T))), perp = r2(MG * Math.cos(rad(T)))
+  return {
+    id: 'phys-inclined-plane',
+    title: 'Forces on a block on an inclined plane',
+    sceneType: 'diagram',
+    cameraDistance: 13,
+    teachingGoal: 'Show the weight of a block on a slope split into mg sin θ along the slope and mg cos θ into it, with the normal force balancing the second.',
+    ariaLabel: 'A slope at 30 degrees with a block on it. The weight points straight down. It is split into a part along the slope, mg sin θ, and a part into the slope, mg cos θ. The normal force points out of the slope.',
+    steps: [
+      {
+        narration: 'A block rests on a slope at θ = 30°.',
+        objects: [line(P(bx0, by0), P(bx1, by0), ROLE.reference, 0.05), line(P(bx0, by0), P(bx0, topY), ROLE.reference, 0.04), line(P(bx0, topY), P(bx1, by0), ROLE.reference, 0.05), label(`θ = ${T}°`, P(bx1 - 1.3, by0 + 0.35), ROLE.ink, 'detail'), dot(P(cx, cy), ROLE.reference, 0.3)],
+      },
+      {
+        narration: 'Its weight mg points straight down.',
+        objects: [arrow(P(cx, cy), P(cx, r2(cy - MG)), ROLE.input), label('mg', P(cx - 0.45, r2(cy - MG + 0.2)), ROLE.input, 'primary')],
+      },
+      {
+        narration: 'Split the weight along the slope (mg sin θ, pulling it down the slope) and into the slope (mg cos θ). The normal force N balances the part into the slope.',
+        objects: [
+          arrow(P(cx, cy), P(r2(cx + down[0] * along), r2(cy + down[1] * along)), ROLE.output), label('mg sin θ', P(r2(cx + down[0] * along + 0.6), r2(cy + down[1] * along + 0.3)), ROLE.output, 'detail'),
+          arrow(P(cx, cy), P(r2(cx - out[0] * perp), r2(cy - out[1] * perp)), ROLE.aid), label('mg cos θ', P(r2(cx - out[0] * perp - 0.9), r2(cy - out[1] * perp)), ROLE.aid, 'detail'),
+          arrow(P(cx, cy), P(r2(cx + out[0] * perp), r2(cy + out[1] * perp)), ROLE.result), label('N', P(r2(cx + out[0] * perp + 0.3), r2(cy + out[1] * perp + 0.2)), ROLE.result, 'primary'),
+        ],
+      },
+    ],
+  }
+}
+
+// ── 16. Pressure in fluids ───────────────────────────────────────────────────
+
+/** KG: "increases with depth and acts equally in all directions." Arrow length ∝ depth, four directions at each point. */
+export function buildPressureFluidsScene(): SceneSpec {
+  const SURF = 2.4, K = 0.32
+  const point = (x: number, y: number, color: string): SceneObject[] => {
+    const L = r2((SURF - y) * K)
+    return [dot(P(x, y), color, 0.1), arrow(P(x, y + 0.15), P(x, y + 0.15 + L), color), arrow(P(x, y - 0.15), P(x, y - 0.15 - L), color), arrow(P(x + 0.15, y), P(x + 0.15 + L, y), color), arrow(P(x - 0.15, y), P(x - 0.15 - L, y), color)]
+  }
+  return {
+    id: 'phys-pressure-fluids',
+    title: 'Pressure in a liquid grows with depth',
+    sceneType: 'diagram',
+    cameraDistance: 13,
+    teachingGoal: 'Show that pressure in a still liquid is larger deeper down and pushes equally in every direction.',
+    ariaLabel: 'A tank of water. A point near the surface has four short pressure arrows pointing up, down, left and right. A deeper point has four longer arrows.',
+    steps: [
+      {
+        narration: 'A tank of still water.',
+        objects: [line(P(-3.0, SURF + 0.6), P(-3.0, -3.2), ROLE.reference, 0.05), line(P(-3.0, -3.2), P(3.0, -3.2), ROLE.reference, 0.05), line(P(3.0, -3.2), P(3.0, SURF + 0.6), ROLE.reference, 0.05), line(P(-3.0, SURF), P(3.0, SURF), ROLE.output, 0.04), label('surface', P(3.9, SURF), ROLE.output, 'detail')],
+      },
+      {
+        narration: 'At any point the water pushes equally in all directions.',
+        objects: [...point(-1.2, 1.2, ROLE.aid), line(P(-2.4, SURF), P(-2.4, 1.2), ROLE.aid, 0.02), label('h₁', P(-2.75, 1.8), ROLE.aid, 'primary')],
+      },
+      {
+        narration: 'Deeper down the pressure is larger: P = P₀ + ρgh.',
+        objects: [...point(1.2, -1.8, ROLE.input), line(P(2.4, SURF), P(2.4, -1.8), ROLE.input, 0.02), label('h₂', P(2.75, 0.3), ROLE.input, 'primary'), label('P = P₀ + ρgh', P(0, 3.6), ROLE.result, 'primary')],
+      },
+    ],
+  }
+}
+
+// ── 17. Impulse ──────────────────────────────────────────────────────────────
+
+/** KG: "the product of force and time interval and equals the change in momentum." The area under F–t is J = Δp. */
+export function buildImpulseScene(): SceneSpec {
+  const X0 = -4, Y0 = -2.4, T0 = -2.4, DT = 4.2, FMAX = 4.0
+  const Ft = (t: number) => FMAX * Math.sin((Math.PI * (t - T0)) / DT)
+  const pts: V3[] = []
+  for (let i = 0; i <= 40; i++) { const t = T0 + (DT * i) / 40; pts.push(P(t, Y0 + Ft(t))) }
+  const shade: SceneObject[] = []
+  for (let i = 1; i < 12; i++) { const t = T0 + (DT * i) / 12; shade.push(line(P(t, Y0), P(t, Y0 + Ft(t)), ROLE.aid, 0.02)) }
+  return {
+    id: 'phys-impulse',
+    title: 'Impulse: the area under a force–time graph',
+    sceneType: 'diagram',
+    cameraDistance: 13,
+    teachingGoal: 'Show impulse as the area under a force–time curve during a short push, equal to the change in momentum.',
+    ariaLabel: 'A force against time graph. The force rises and falls during a short time Δt. The area under the curve is shaded and labelled impulse J, equal to the change in momentum.',
+    steps: [
+      { narration: 'Force against time during a short push, like a bat hitting a ball.', objects: [...axes(X0, Y0, 4.4, 2.6, 'time t', 'force F'), curve(pts, ROLE.input)] },
+      { narration: 'The push lasts a time Δt.', objects: [line(P(T0, Y0 - 0.4), P(T0 + DT, Y0 - 0.4), ROLE.reference, 0.02), label('Δt', P(T0 + DT / 2, Y0 - 0.8), ROLE.ink, 'primary')] },
+      { narration: 'The area under the curve is the impulse, and it equals the change in momentum.', objects: [...shade, label('area = impulse J', P(T0 + DT / 2, Y0 + 1.4), ROLE.aid, 'primary'), label('J = F Δt = Δp', P(2.9, 2.0), ROLE.result, 'primary')] },
+    ],
+  }
+}
+
+// ── 18. Thermal expansion ────────────────────────────────────────────────────
+
+/** KG: "change dimensions with temperature." Linear expansion: ΔL = αL₀ΔT. */
+export function buildThermalExpansionScene(): SceneSpec {
+  const X0 = -4, L0 = 6, DL = 1.0
+  return {
+    id: 'phys-thermal-expansion',
+    title: 'Thermal expansion: a heated rod gets longer',
+    sceneType: 'diagram',
+    cameraDistance: 13,
+    teachingGoal: 'Show a rod growing longer when heated, by ΔL = αL₀ΔT.',
+    ariaLabel: 'A rod of length L₀ at temperature T. Below it the same rod after heating by ΔT, longer by ΔL. The extra length is marked.',
+    steps: [
+      { narration: 'A metal rod of length L₀ at temperature T.', objects: [line(P(X0, 1.5), P(X0 + L0, 1.5), ROLE.output, 0.18), label('L₀ at T', P(X0 + L0 / 2, 2.1), ROLE.output, 'primary'), line(P(X0 + L0, 2.6), P(X0 + L0, -1.8), ROLE.aid, 0.02)] },
+      { narration: 'Heated by ΔT, its particles vibrate more and the rod gets longer by ΔL.', objects: [line(P(X0, -0.8), P(X0 + L0 + DL, -0.8), ROLE.input, 0.18), label('at T + ΔT', P(X0 + L0 / 2, -0.2), ROLE.input, 'primary'), line(P(X0 + L0, -1.5), P(X0 + L0 + DL, -1.5), ROLE.result, 0.04), label('ΔL', P(X0 + L0 + DL / 2, -1.95), ROLE.result, 'primary')] },
+      { narration: 'The extra length is proportional to the original length and to the temperature rise.', objects: [label('ΔL = α L₀ ΔT', P(0, 3.4), ROLE.result, 'primary')] },
+    ],
+  }
+}
+
+// ── 19. Phase transitions (heating curve) ────────────────────────────────────
+
+/**
+ * KG: "absorb or release latent heat at constant temperature." Heating curve:
+ * temperature rises, stays flat while melting, rises, stays flat (longer) while
+ * boiling. Not to scale, and labelled so.
+ */
+export function buildPhaseTransitionsScene(): SceneSpec {
+  const X0 = -4.4, Y0 = -2.6
+  const pts: Array<[number, number]> = [[-4.4, -2.4], [-3.4, -1.2], [-2.4, -1.2], [-1.2, 0.8], [1.4, 0.8], [2.4, 2.6]]
+  const segs: SceneObject[] = []
+  const col = [ROLE.output, ROLE.result, ROLE.output, ROLE.result, ROLE.output]
+  for (let i = 0; i < pts.length - 1; i++) segs.push(line(P(pts[i][0], pts[i][1]), P(pts[i + 1][0], pts[i + 1][1]), col[i], 0.06))
+  return {
+    id: 'phys-phase-transitions',
+    title: 'Heating curve: flat while the state changes',
+    sceneType: 'diagram',
+    cameraDistance: 13,
+    teachingGoal: 'Show that temperature stays constant during melting and boiling, while latent heat is absorbed.',
+    ariaLabel: 'A graph of temperature against heat added. The line rises for the solid, stays flat while melting, rises for the liquid, stays flat for longer while boiling, then rises for the gas.',
+    steps: [
+      { narration: 'Heat is added steadily to ice, and we watch its temperature.', objects: axes(X0, Y0, 4.4, 3.2, 'heat added', 'temperature') },
+      { narration: 'The temperature rises, except during melting and boiling, when it stays flat.', objects: [...segs, label('solid', P(-4.3, -1.5), ROLE.output, 'detail'), label('liquid', P(-2.2, 0.0), ROLE.output, 'detail'), label('gas', P(2.4, 1.6), ROLE.output, 'detail')] },
+      { narration: 'On the flat parts, the heat goes into changing the state: latent heat. Boiling water needs more latent heat than melting ice.', objects: [label('melting', P(-2.9, -0.7), ROLE.result, 'primary'), label('boiling', P(0.1, 1.3), ROLE.result, 'primary'), label('flat: latent heat', P(2.4, -1.6), ROLE.result, 'detail'), label('(not to scale)', P(2.9, -2.2), ROLE.reference, 'detail')] },
+    ],
+  }
+}
+
+// ── 20. Ideal gas law ────────────────────────────────────────────────────────
+
+/** KG: "PV = nRT." Two isotherms P = nRT / V, the hotter one (T₂ = 2T₁) higher. */
+export function buildIdealGasScene(): SceneSpec {
+  const X0 = -4, Y0 = -2.6
+  const iso = (c: number): V3[] => {
+    const pts: V3[] = []
+    // Start where P = c/V fits under the top of the axis, so no clamped flat.
+    const v0 = Math.max(0.7, c / 5.3)
+    for (let i = 0; i <= 40; i++) { const V = v0 + ((8.1 - v0) * i) / 40; pts.push(P(X0 + V, Y0 + c / V)) }
+    return pts
+  }
+  return {
+    id: 'phys-ideal-gas',
+    title: 'Ideal gas: pressure against volume at fixed temperature',
+    sceneType: 'diagram',
+    cameraDistance: 13,
+    teachingGoal: 'Show that at fixed temperature, pressure falls as volume grows (PV = nRT), and a hotter gas sits on a higher curve.',
+    ariaLabel: 'A graph of pressure against volume with two curves. Each falls as volume increases. The curve for the higher temperature T₂ lies above the one for T₁.',
+    steps: [
+      { narration: 'Pressure against volume for a fixed amount of gas.', objects: axes(X0, Y0, 4.2, 3.2, 'volume V', 'pressure P') },
+      { narration: 'At a fixed temperature T₁, halving the volume doubles the pressure.', objects: [curve(iso(2.4), ROLE.output), label('T₁', P(3.6, Y0 + 0.75), ROLE.output, 'primary')] },
+      { narration: 'At a higher temperature T₂ = 2T₁, every pressure is doubled: a higher curve.', objects: [curve(iso(4.8), ROLE.input), label('T₂ = 2T₁', P(3.3, Y0 + 1.25), ROLE.input, 'primary'), label('PV = nRT', P(1.2, 2.6), ROLE.result, 'primary')] },
+    ],
+  }
+}
+
+// ── 21. Wave properties ──────────────────────────────────────────────────────
+
+/** KG: "amplitude, wavelength, period, frequency, and phase, related by v = fλ." */
+export function buildWavePropertiesScene(): SceneSpec {
+  const X0 = -4.4, X1 = 4.4, A = 1.4, LAMBDA = 3.2
+  const crest1 = X0 + LAMBDA / 4, crest2 = crest1 + LAMBDA, trough = crest1 + LAMBDA / 2
+  return {
+    id: 'phys-wave-properties',
+    title: 'Parts of a wave',
+    sceneType: 'diagram',
+    cameraDistance: 13,
+    teachingGoal: 'Name the parts of a wave — crest, trough, amplitude, wavelength — and relate speed, frequency and wavelength by v = fλ.',
+    ariaLabel: 'A transverse wave along a horizontal line. A crest and a trough are labelled. The amplitude is the height from the middle line to a crest. The wavelength is the distance from one crest to the next.',
+    steps: [
+      { narration: 'A wave moving to the right, drawn at one instant.', objects: [line(P(X0, 0), P(X1, 0), ROLE.reference, 0.02), curve(sinePath({ x0: X0, x1: X1, amplitude: A, wavelength: LAMBDA, samples: 80 }), ROLE.output), arrow(P(2.6, 2.6), P(4.2, 2.6), ROLE.reference), label('travels', P(3.4, 3.0), ROLE.ink, 'detail')] },
+      { narration: 'The top points are crests and the bottom points are troughs. The amplitude is the height from the middle line to a crest.', objects: [dot(P(crest1, A), ROLE.input, 0.1), label('crest', P(crest1, A + 0.5), ROLE.input, 'primary'), dot(P(trough, -A), ROLE.input, 0.1), label('trough', P(trough, -A - 0.5), ROLE.input, 'primary'), line(P(crest1 - 0.55, 0), P(crest1 - 0.55, A), ROLE.aid, 0.03), label('amplitude', P(crest1 - 1.4, A / 2), ROLE.aid, 'detail')] },
+      { narration: 'The wavelength λ is the distance from one crest to the next. Speed = frequency × wavelength.', objects: [line(P(crest1, A + 1.1), P(crest2, A + 1.1), ROLE.result, 0.03), label('wavelength λ', P((crest1 + crest2) / 2, A + 1.5), ROLE.result, 'primary'), label('v = f λ', P(0, -3.0), ROLE.result, 'primary')] },
+    ],
+  }
+}
+
+// ── 22. Longitudinal waves ───────────────────────────────────────────────────
+
+/**
+ * KG: "particle displacement is parallel to the direction of wave propagation,
+ * forming compressions and rarefactions." Particles at x + A sin(kx): they
+ * crowd where the displacement gradient is most negative (kx = π → x = λ/2)
+ * and spread where it is most positive (kx = 0, 2π).
+ */
+export function buildLongitudinalWaveScene(): SceneSpec {
+  // A·k = 0.45 · 2π/4.4 ≈ 0.64 < 1, so particles crowd visibly but never cross.
+  // Two rows of 23 = 46 objects: inside the validator's 50-per-step bound.
+  const X0 = -4.4, N = 22, SP = 8.8 / N, A = 0.45, LAMBDA = 4.4
+  const k = (2 * Math.PI) / LAMBDA
+  const dots: SceneObject[] = []
+  for (let i = 0; i <= N; i++) {
+    const x = X0 + i * SP
+    const xd = x + A * Math.sin(k * (x - X0))
+    for (const y of [-0.3, 0.3]) dots.push(dot(P(xd, y), ROLE.output, 0.08))
+  }
+  const comp = X0 + LAMBDA / 2, rare = X0 + LAMBDA
+  return {
+    id: 'phys-longitudinal-wave',
+    title: 'A longitudinal wave: compressions and rarefactions',
+    sceneType: 'diagram',
+    cameraDistance: 13,
+    teachingGoal: 'Show particles moving back and forth along the direction the wave travels, crowding into compressions and spreading into rarefactions.',
+    ariaLabel: 'Rows of particles along a line. In some places they are crowded together (compressions) and in others spread apart (rarefactions). The wave travels to the right and each particle moves back and forth along the same direction.',
+    steps: [
+      { narration: 'Particles along a spring or in air, drawn at one instant.', objects: dots },
+      { narration: 'Where they crowd together is a compression; where they spread apart is a rarefaction.', objects: [label('compression', P(comp, 1.4), ROLE.input, 'primary'), label('rarefaction', P(rare, 1.4), ROLE.aid, 'primary'), line(P(comp, 1.0), P(comp, -1.0), ROLE.input, 0.02), line(P(rare, 1.0), P(rare, -1.0), ROLE.aid, 0.02)] },
+      { narration: 'Each particle moves back and forth along the same line the wave travels.', objects: [arrow(P(-1.4, -2.2), P(1.4, -2.2), ROLE.reference), label('wave travels', P(0, -2.7), ROLE.ink, 'detail'), arrow(P(-3.5, 2.6), P(-2.7, 2.6), ROLE.result), arrow(P(-3.5, 2.6), P(-4.3, 2.6), ROLE.result), label('particle moves back and forth', P(-2.6, 3.1), ROLE.result, 'detail'), line(P(comp, -1.6), P(comp + LAMBDA, -1.6), ROLE.result, 0.02), label('λ', P(comp + LAMBDA / 2, -1.95), ROLE.result, 'primary')] },
+    ],
+  }
+}

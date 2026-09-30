@@ -11,7 +11,8 @@ import { validateSceneSpec } from '@/lib/teaching/sceneSpecValidator'
 
 // M4 note: this fixture concept must have NO asset. It was phys.therm.calorimetry
 // until the M4 Physics pilot authored a real figure for that concept; it is now
-// phys.mech.kinetic-energy, which is still genuinely assetless. The invariants
+// phys.mech.kinetic-energy until physics batch 2 (2026-09-30), and is now
+// phys.mech.power, which is still genuinely assetless. The invariants
 // under test are unchanged.
 
 const SUBJECTS = ['mathematics', 'physics', 'chemistry', 'biology', 'computer_science', 'english'] as const
@@ -66,7 +67,7 @@ describe('Visual Resolver V2 — semantic safety invariant', () => {
     // Calorimetry has no curated binding and no generator. It used to receive
     // the "3D Data Visualization" card. It must now receive nothing at all.
     const d = resolveVisual({
-      message: '', lessonConceptId: 'phys.mech.kinetic-energy',
+      message: '', lessonConceptId: 'phys.mech.power',
       subject: 'physics', learnerRequest: 'diagram',
     })
     expect(d.payload).toBeNull()
@@ -114,7 +115,7 @@ describe('Visual Resolver V2 — semantic safety invariant', () => {
 // ── determinism ──────────────────────────────────────────────────────────────
 describe('Visual Resolver V2 — determinism', () => {
   it('returns byte-identical decisions across repeated calls', () => {
-    const input = { message: 'teach me vectors with a diagram', lessonConceptId: 'phys.mech.kinetic-energy', subject: 'physics' as const }
+    const input = { message: 'teach me vectors with a diagram', lessonConceptId: 'phys.mech.power', subject: 'physics' as const }
     const first = JSON.stringify(resolveVisual(input))
     for (let i = 0; i < 25; i++) expect(JSON.stringify(resolveVisual(input))).toBe(first)
   })
@@ -133,20 +134,20 @@ describe('Visual Resolver V2 — concept excursions', () => {
   it('draws the concept the learner NAMED, not the lesson they are sitting in', () => {
     const d = resolveVisual({
       message: 'Teach me vectors with diagram.',
-      lessonConceptId: 'phys.mech.kinetic-energy',
+      lessonConceptId: 'phys.mech.power',
       subject: 'physics',
       learnerRequest: 'diagram',
     })
     expect(d.excursion).toBe(true)
     expect(d.graphical).toBe(true)
     expect(d.representation).toBe('vector')
-    expect(d.conceptId).not.toBe('phys.mech.kinetic-energy')
+    expect(d.conceptId).not.toBe('phys.mech.power')
   })
 
   it('handles the noun form "visualization" identically to "diagram"', () => {
     const d = resolveVisual({
       message: 'Explain me vector with visualization',
-      lessonConceptId: 'phys.mech.kinetic-energy',
+      lessonConceptId: 'phys.mech.power',
       learnerRequest: 'diagram',
     })
     expect(d.representation).toBe('vector')
@@ -156,11 +157,11 @@ describe('Visual Resolver V2 — concept excursions', () => {
   it('stays on the lesson concept when the learner names nothing', () => {
     const d = resolveVisual({
       message: 'explain this again please',
-      lessonConceptId: 'phys.mech.kinetic-energy',
+      lessonConceptId: 'phys.mech.power',
       learnerRequest: 'explain_differently',
     })
     expect(d.excursion).toBe(false)
-    expect(d.conceptId).toBe('phys.mech.kinetic-energy')
+    expect(d.conceptId).toBe('phys.mech.power')
     // Calorimetry has no faithful figure, so none is attached — the assertion
     // that matters here is that the TARGET did not move, not that a picture
     // appeared.
@@ -168,9 +169,9 @@ describe('Visual Resolver V2 — concept excursions', () => {
   })
 
   it('target resolution reports its origin honestly', () => {
-    const learner = resolveVisualTarget('what is a triangle', 'phys.mech.kinetic-energy')
+    const learner = resolveVisualTarget('what is a triangle', 'phys.mech.power')
     expect(learner?.origin).toBe('learner-request')
-    const lesson = resolveVisualTarget('ok thanks', 'phys.mech.kinetic-energy')
+    const lesson = resolveVisualTarget('ok thanks', 'phys.mech.power')
     expect(lesson?.origin).toBe('lesson-concept')
   })
 })
@@ -191,7 +192,7 @@ describe('Visual Resolver V2 — the no-figure contract', () => {
   })
 
   it('a concept with no curated visual and no generator returns no figure', () => {
-    const d = resolveVisual({ message: '', lessonConceptId: 'phys.mech.kinetic-energy', learnerRequest: 'diagram' })
+    const d = resolveVisual({ message: '', lessonConceptId: 'phys.mech.power', learnerRequest: 'diagram' })
     expect(d.source).toBe('none')
     expect(d.graphical).toBe(false)
     expect(d.payload).toBeNull()
@@ -199,7 +200,7 @@ describe('Visual Resolver V2 — the no-figure contract', () => {
 
   it('the contract NEVER claims a figure when none is attached', () => {
     for (const d of [
-      resolveVisual({ message: '', lessonConceptId: 'phys.mech.kinetic-energy', learnerRequest: 'diagram' }),
+      resolveVisual({ message: '', lessonConceptId: 'phys.mech.power', learnerRequest: 'diagram' }),
       resolveVisual({ message: 'tell me a joke about pirates', lessonConceptId: null }),
     ]) {
       const block = buildVisualContractBlock(d)

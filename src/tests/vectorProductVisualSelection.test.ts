@@ -345,7 +345,9 @@ describe('the repair path is the general one, not a special case', () => {
     // boundary/normal/angles figure (physicsPilot.ts buildRefractionScene).
     // 46 -> 45 (2026-09-30): a REPAIR. phys.mech.hookes-law owns an authored
     // spring / x / F = −kx figure (physicsCoreScenes.ts buildHookesLawScene).
-    expect(INSUFFICIENT_FOR_CONCEPT.size).toBe(45)
+    // 45 -> 40 (2026-09-30, physics batch 2): impulse, newtons-third-law,
+    // inclined-plane, work and ideal-gas-law each own an authored figure.
+    expect(INSUFFICIENT_FOR_CONCEPT.size).toBe(40)
     expect(INSUFFICIENT_FOR_CONCEPT.has('phys.mech.hookes-law')).toBe(false)
     expect(INSUFFICIENT_FOR_CONCEPT.has('phys.opt.refraction')).toBe(false)
     expect(INSUFFICIENT_FOR_CONCEPT.has('bio.mol.dna-replication')).toBe(false)

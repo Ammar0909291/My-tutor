@@ -42,6 +42,9 @@ import {
   buildReflectionScene, buildCoulombsLawScene, buildElectricFieldScene, buildMagneticFieldScene,
   buildStandingWavesScene, buildDopplerScene, buildConservationOfEnergyScene, buildHeatTransferScene,
   buildBuoyancyScene, buildHookesLawScene,
+  buildKineticEnergyScene, buildPotentialEnergyScene, buildWorkScene, buildNewtonsThirdLawScene,
+  buildInclinedPlaneScene, buildPressureFluidsScene, buildImpulseScene, buildThermalExpansionScene,
+  buildPhaseTransitionsScene, buildIdealGasScene, buildWavePropertiesScene, buildLongitudinalWaveScene,
 } from '@/lib/teaching/sceneGenerators/physicsCoreScenes'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
@@ -304,6 +307,19 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'phys.therm.heat-transfer':           buildHeatTransferScene,
   'phys.mech.buoyancy':                 buildBuoyancyScene,
   'phys.mech.hookes-law':               buildHookesLawScene,
+  // Batch 2 (2026-09-30).
+  'phys.mech.kinetic-energy':           buildKineticEnergyScene,
+  'phys.mech.potential-energy':         buildPotentialEnergyScene,
+  'phys.mech.work':                     buildWorkScene,
+  'phys.mech.newtons-third-law':        buildNewtonsThirdLawScene,
+  'phys.mech.inclined-plane':           buildInclinedPlaneScene,
+  'phys.mech.pressure-fluids':          buildPressureFluidsScene,
+  'phys.mech.impulse':                  buildImpulseScene,
+  'phys.therm.thermal-expansion':       buildThermalExpansionScene,
+  'phys.therm.phase-transitions':       buildPhaseTransitionsScene,
+  'phys.therm.ideal-gas-law':           buildIdealGasScene,
+  'phys.wave.wave-properties':          buildWavePropertiesScene,
+  'phys.wave.longitudinal-waves':       buildLongitudinalWaveScene,
   'phys.wave.transverse-waves':         buildTransverseWaveScene,
   'phys.wave.interference':             buildWaveInterferenceScene,
   'phys.therm.calorimetry':             buildCalorimetryScene,

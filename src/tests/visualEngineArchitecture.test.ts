@@ -52,10 +52,11 @@ const passingCritic = async () => ({
 // M4 note: the engine fixture concept must have NO curated asset, or the
 // resolver never reaches the engine. It was phys.therm.calorimetry until the
 // M4 Physics pilot authored a real figure for that concept; it is now
-// phys.mech.kinetic-energy, which is still genuinely assetless. The scene
+// phys.mech.kinetic-energy until physics batch 2 (2026-09-30) authored that too;
+// it is now phys.mech.power, which is still genuinely assetless. The scene
 // fixtures below were re-vocabularised to match, since the engine's anchor
 // check compares the scene's own labels with the concept's KG text.
-const CALORIMETRY = 'phys.mech.kinetic-energy'          // no curated visual
+const CALORIMETRY = 'phys.mech.power'          // no curated visual
 const PROJECTILE  = 'phys.mech.projectile-motion' // canonical generator
 const PHONICS     = 'eng.phonics.phonemic-awareness'
 const DIM         = 'phys.meas.dimensional-analysis'
@@ -68,17 +69,17 @@ const ctxFor = (conceptId: string): ArchetypeContext => {
   }
 }
 
-/** A scene that genuinely depicts kinetic energy, in its own vocabulary. */
+/** A scene that genuinely depicts power, in its own vocabulary. */
 const faithfulCalorimetryScene = (): SceneSpec => ({
-  id: 'gen-kinetic-energy', title: 'Kinetic energy of a moving mass',
-  sceneType: 'diagram', teachingGoal: 'Show how kinetic energy grows with speed.',
+  id: 'gen-power', title: 'Power: the rate of doing work',
+  sceneType: 'diagram', teachingGoal: 'Show power as the rate at which work is done.',
   steps: [
-    { narration: 'A mass moves with some velocity.', objects: [
-      { type: 'node', position: [-2, 0, 0], text: 'moving mass — kinetic energy' },
-      { type: 'node', position: [2, 0, 0], text: 'faster mass — more kinetic energy' },
+    { narration: 'A motor lifts a load, doing work.', objects: [
+      { type: 'node', position: [-2, 0, 0], text: 'slow lift — low power' },
+      { type: 'node', position: [2, 0, 0], text: 'fast lift — more power, in watts' },
     ] },
-    { narration: 'Kinetic energy depends on the square of the velocity.', objects: [
-      { type: 'arrow', from: [-1.5, 0, 0], to: [1.5, 0, 0], text: 'velocity v' },
+    { narration: 'Power is the rate at which work is done: energy transferred per second.', objects: [
+      { type: 'arrow', from: [-1.5, 0, 0], to: [1.5, 0, 0], text: 'work done per second' },
     ] },
   ],
 })
@@ -297,8 +298,8 @@ describe('payload and contract invariants hold in both directions', () => {
     )
     const block = buildVisualContractBlock(accepted)
     expect(block).toContain('ALREADY BEING RENDERED')
-    expect(block).toContain('moving mass')       // a label that is really drawn
-    expect(block).toContain('velocity v')
+    expect(block).toContain('slow lift')         // a label that is really drawn
+    expect(block).toContain('work done per second')
 
     const rejected = await resolveVisualForTurn(
       { message: '', lessonConceptId: CALORIMETRY, subject: 'physics', learnerRequest: 'diagram' },

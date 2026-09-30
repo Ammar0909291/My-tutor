@@ -425,7 +425,8 @@ describe('G3 pilot: exactly ONE production concept is bound', () => {
       return (d.payload as { renderer?: string; visualType?: string } | null)?.visualType ?? null
     }
     expect(card('phys.mech.newtons-first-law')).toBe('three_newton_forces')
-    expect(card('phys.mech.newtons-third-law')).toBe('three_newton_forces')
+    // newtons-third-law owns an authored force-pair figure since 2026-09-30 (batch 2).
+    expect((resolveVisual({ message: 'can you show me a diagram?', lessonConceptId: 'phys.mech.newtons-third-law', learnerRequest: 'diagram' }).payload as { sceneSpec?: { id?: string } }).sceneSpec?.id).toBe('phys-newtons-third-law')
     expect(card('phys.mech.force')).toBe('force_diagram')
     expect(servedKind('phys.mech.projectile-motion', 'diagram')).toBe('projectile')
   })

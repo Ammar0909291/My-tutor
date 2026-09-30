@@ -37,7 +37,7 @@ describe('scope is decided by provenance and audit, never by words', () => {
 
   it('an audited-insufficient asset is demoted regardless of provenance', () => {
     expect(scopeForAsset('curated', 'phys.therm.carnot-cycle')).toBe('domain')
-    expect(scopeForAsset('generator-default', 'phys.mech.impulse')).toBe('domain')
+    expect(scopeForAsset('generator-default', 'phys.wave.shm-energy')).toBe('domain')
   })
 
   it('every audited-insufficient id is a real KG concept', () => {
@@ -146,7 +146,8 @@ describe('the three acceptable states, and nothing else', () => {
   })
 
   it('a concept that genuinely has no asset still receives no figure', () => {
-    const d = ask('phys.mech.kinetic-energy')
+    // (phys.mech.kinetic-energy was this example until physics batch 2, 2026-09-30.)
+    const d = ask('phys.stat.ising-model')
     expect(d.graphical).toBe(false)
     expect(d.asset).toBeNull()
     expect(buildVisualContractBlock(d)).toContain('NO FIGURE IS ATTACHED')

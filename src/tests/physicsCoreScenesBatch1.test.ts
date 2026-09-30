@@ -9,6 +9,7 @@ import { resolveVisual } from '@/lib/teaching/visual/resolveVisual'
 import { isRetiredVisualBinding } from '@/lib/teaching/visual/retired'
 import { INSUFFICIENT_FOR_CONCEPT } from '@/lib/teaching/visual/scope'
 import type { SceneSpec } from '@/lib/teaching/sceneSpec'
+import { validateSceneSpec } from '@/lib/teaching/sceneSpecValidator'
 import {
   buildReflectionScene, buildCoulombsLawScene, buildElectricFieldScene, buildMagneticFieldScene,
   buildStandingWavesScene, buildDopplerScene, buildConservationOfEnergyScene, buildHeatTransferScene,
@@ -51,6 +52,13 @@ describe('each concept is served its own figure, as a figure OF the concept', ()
         expect(Math.abs(p[1]), `${conceptId} y`).toBeLessThanOrEqual(5)
       }
     }
+  })
+})
+
+describe('every figure passes the scene validator the renderer uses', () => {
+  it.each(BATCH)('%s', (_id, build) => {
+    const v = validateSceneSpec(build()) as { valid?: boolean; ok?: boolean; errors?: unknown }
+    expect(v.valid ?? v.ok, JSON.stringify(v.errors ?? v)).toBe(true)
   })
 })
 

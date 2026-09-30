@@ -76,7 +76,7 @@ describe('the excursion check reads the lesson figure too (production 2026-09-30
     expect(namedTopicUnknownTo(msg, `${node.title} ${node.description} ${authoredFigureLabelText('phys.opt.refraction')}`)).toBeNull()
   })
   it('a concept with no authored scene adds nothing', () => {
-    expect(authoredFigureLabelText('phys.mech.impulse')).toBe('')
+    expect(authoredFigureLabelText('phys.wave.shm-energy')).toBe('')
     expect(authoredFigureLabelText(null)).toBe('')
   })
 })

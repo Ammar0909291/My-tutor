@@ -51,7 +51,8 @@ describe('mathematics bare-canvas bindings carry the same verdict as physics', (
 
   it('the physics verdicts this mirrors are unchanged', () => {
     // If these ever stop being demoted, the mathematics rows lose their basis.
-    for (const id of ['phys.mech.work', 'phys.therm.carnot-cycle']) {
+    // (phys.mech.work was the first example until physics batch 2, 2026-09-30.)
+    for (const id of ['phys.therm.thermodynamic-processes', 'phys.therm.carnot-cycle']) {
       expect(INSUFFICIENT_FOR_CONCEPT.has(id), id).toBe(true)
       expect(getConceptVisualType(id)).toBe('coordinate_plane')
     }

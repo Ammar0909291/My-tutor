@@ -149,7 +149,7 @@ const INERT_BUT_RENDERING: ReadonlyArray<readonly [string, string, string]> = [
   // correctly left alone by the first pass
   ['physics', 'phys.therm.carnot-cycle',    'an empty x-y plane; the case that set the standard'],
   ['physics', 'phys.mech.acceleration',     'the same number line as displacement, already demoted'],
-  ['physics', 'phys.mech.work',             'an empty x-y plane where an F-d area is required'],
+  // phys.mech.work left this list 2026-09-30: it owns an authored F·d cos θ figure.
 ]
 
 describe('the inert set is demoted, not suppressed', () => {
