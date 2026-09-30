@@ -93,6 +93,12 @@ import {
   buildStellarStructureScene, buildStellarEvolutionScene, buildCosmologyScene, buildDarkMatterScene,
   buildBlackHoleScene, buildUncertaintyScene, buildQuantumOscillatorScene, buildPauliScene,
 } from '@/lib/teaching/sceneGenerators/physicsCoreScenesB11'
+import {
+  buildBoltzmannFactorScene, buildPartitionFunctionScene, buildMaxwellBoltzmannScene, buildFermiDiracScene,
+  buildBoseEinsteinScene, buildStatisticalEntropyScene, buildFreeEnergyScene, buildGrandCanonicalScene,
+  buildChemicalPotentialScene, buildFluctuationsScene, buildLandauScene, buildIsingScene, buildCriticalScene,
+  buildMonteCarloScene,
+} from '@/lib/teaching/sceneGenerators/physicsCoreScenesB12'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -491,6 +497,21 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'phys.qm.uncertainty-principle':      buildUncertaintyScene,
   'phys.qm.harmonic-oscillator-qm':     buildQuantumOscillatorScene,
   'phys.qm.pauli-exclusion':            buildPauliScene,
+  // Batch 12 (2026-09-30). See physicsCoreScenesB12.ts.
+  'phys.stat.boltzmann-factor':       buildBoltzmannFactorScene,
+  'phys.stat.partition-function':     buildPartitionFunctionScene,
+  'phys.stat.maxwell-boltzmann':      buildMaxwellBoltzmannScene,
+  'phys.stat.fermi-dirac':            buildFermiDiracScene,
+  'phys.stat.bose-einstein':          buildBoseEinsteinScene,
+  'phys.stat.entropy-statistical':    buildStatisticalEntropyScene,
+  'phys.stat.free-energy':            buildFreeEnergyScene,
+  'phys.stat.grand-canonical-ensemble': buildGrandCanonicalScene,
+  'phys.stat.chemical-potential':     buildChemicalPotentialScene,
+  'phys.stat.fluctuations-correlations': buildFluctuationsScene,
+  'phys.stat.phase-transitions':      buildLandauScene,
+  'phys.stat.ising-model':            buildIsingScene,
+  'phys.stat.phase-transitions-critical-phenomena': buildCriticalScene,
+  'phys.stat.monte-carlo-basics':     buildMonteCarloScene,
   'phys.wave.transverse-waves':         buildTransverseWaveScene,
   'phys.wave.interference':             buildWaveInterferenceScene,
   'phys.therm.calorimetry':             buildCalorimetryScene,

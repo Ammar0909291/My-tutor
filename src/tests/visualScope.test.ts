@@ -146,8 +146,9 @@ describe('the three acceptable states, and nothing else', () => {
   })
 
   it('a concept that genuinely has no asset still receives no figure', () => {
-    // (phys.mech.kinetic-energy was this example until physics batch 2, 2026-09-30.)
-    const d = ask('phys.stat.ising-model')
+    // (phys.mech.kinetic-energy was this example until physics batch 2, and
+    // phys.stat.ising-model until batch 12, 2026-09-30.)
+    const d = ask('eng.phonics.rhyming')
     expect(d.graphical).toBe(false)
     expect(d.asset).toBeNull()
     expect(buildVisualContractBlock(d)).toContain('NO FIGURE IS ATTACHED')

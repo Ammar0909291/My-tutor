@@ -421,3 +421,42 @@ outgoing angle, 2.6 − 0.35·(x + √(x² + 1))/2); the Pauli spin arrows were 
 
 Validation: tsc ratchet 0 ≤ 0; vitest 798 files / 16,940 passed, 9 skipped; validate:visuals
 physics exact=77 incorrect=0; `npm run build` exit 0.
+
+## Batch 12 (2026-09-30): statistical physics (all 14)
+
+New module `physicsCoreScenesB12.ts`. Measured on this branch: 220/238 physics concepts now resolve
+to their own concept figure (was 180). Left: 8 analytical-mechanics concepts, 9 advanced quantum
+concepts, and `phys.mech.power` (kept as the no-asset live-generation fixture until the end).
+
+| Concept | Figure |
+|---|---|
+| phys.stat.boltzmann-factor | e^(−E/kT) at T and 2T; at 2kT the factor is e^(−1) = 0.37 hot vs e^(−2) = 0.14 cold (asserted). |
+| phys.stat.partition-function | Levels 0, kT, 2kT with factor bars; Z = 1.5 and P = 0.67, 0.24, 0.09 summing to 1 (asserted). |
+| phys.stat.maxwell-boltzmann | N₂ speed distributions at 300 K and 900 K; v_p = √(2kT/m) = 422 and 731 m/s, ratio √3 (asserted). |
+| phys.stat.fermi-dirac | Step at T = 0; smooth at T > 0 with f = ½ exactly at E_F (asserted). |
+| phys.stat.bose-einstein | Condensate fraction N₀/N = 1 − (T/T_c)^(3/2): 1 at T = 0, 0 at T_c (asserted). |
+| phys.stat.entropy-statistical | Six coins: Ω = 1, 6, 15, 20, 15, 6, 1 (sum 2⁶, asserted); S = k ln Ω. |
+| phys.stat.free-energy | ΔG = ΔH − TΔS for ΔH = +40 kJ, ΔS = +0.1 kJ/K, changing sign at 400 K (asserted). |
+| phys.stat.grand-canonical-ensemble | Small open system exchanging energy and particles with a reservoir at fixed T and μ; Ξ = Σe^(−β(E − μN)). |
+| phys.stat.chemical-potential | Particles flow from the dense (high μ) box to the sparse one until μ₁ = μ₂ at 9 and 9 (asserted). |
+| phys.stat.fluctuations-correlations | ΔE/E ∝ 1/√N on log–log axes: 10% at N = 100, ~10⁻¹² for a mole (asserted). |
+| phys.stat.phase-transitions | Landau F = a(T − T_c)η² + bη⁴: single minimum above T_c, two symmetric minima below (asserted). |
+| phys.stat.ising-model | 5×5 spin lattices, cold (E = −32 J) and hot (mixed, higher E), from neighbour sums (asserted). |
+| phys.stat.phase-transitions-critical-phenomena | 3D-Ising exponents: M ∝ (T_c − T)^0.326 vanishing at T_c, χ peaking there (asserted). |
+| phys.stat.monte-carlo-basics | Metropolis acceptance min(1, e^(−ΔE/kT)): downhill always, uphill more often when hot (asserted). |
+
+Found while rendering: the Landau curves ran off the frame (each now drawn only to where it has
+risen 2.2 units, solved per temperature); the free-energy line struck through both region labels
+and its crossing label; partition-function levels had no energy labels, and its ariaLabel said 0.25
+where the computed probability is 0.24; the entropy tick "6" sat under the axis title; the
+Boltzmann, chemical-potential, fluctuations and Monte Carlo headline chips picked narration or a
+non-formula label (formula-shaped result labels added, the Monte Carlo "always accept" guide
+recoloured as an aid); the fluctuations "N = 100: 10%" label was hard-coded and overlapped the line
+(removed, the chip now computes it); Ising energies used a hyphen for minus.
+
+Fixtures: `visualFailClosed` NO_ASSET_CONCEPTS now carry their own subject and use
+`eng.phonics.rhyming` / `eng.phonics.consonants` in place of ising-model and monte-carlo-basics;
+`visualScope`'s no-asset example moved to `eng.phonics.rhyming`.
+
+Validation: tsc ratchet 0 ≤ 0; vitest 799 files / 16,996 passed, 9 skipped; validate:visuals
+physics exact=77 incorrect=0; `npm run build` exit 0.

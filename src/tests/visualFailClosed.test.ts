@@ -77,15 +77,18 @@ const HIJACK_CASES = [
 // (2026-09-30) authored both; moment-of-inertia and center-of-mass replaced
 // them until batch 3 authored those too. The stand-ins are now deliberately
 // far from the campaign frontier so the next batch does not move them again.
-const NO_ASSET_CONCEPTS = [
-  'phys.qm.wkb-approximation',
-  'phys.stat.ising-model',
-  'phys.mech.power',
+// Physics batch 12 (2026-09-30) authored ising-model and monte-carlo-basics;
+// the physics frontier is nearly closed, so the list now also carries
+// non-physics concepts that have no asset, each with its own subject.
+const NO_ASSET_CONCEPTS: ReadonlyArray<readonly [string, string]> = [
+  ['phys.qm.wkb-approximation', 'physics'],
+  ['phys.mech.power', 'physics'],
   // meas.errors and escape-velocity were here until batch 7 (2026-09-30)
   // authored both.
-  'phys.qm.s-matrix-basics',
-  'phys.stat.monte-carlo-basics',
-] as const
+  ['phys.qm.s-matrix-basics', 'physics'],
+  ['eng.phonics.rhyming', 'english'],
+  ['eng.phonics.consonants', 'english'],
+]
 
 describe('the prose routers still misroute — which is why they are not authorities', () => {
   // If these ever start returning null, the test above them stops proving
@@ -121,11 +124,11 @@ describe('prose can no longer reach the learner', () => {
     expect(decision.payload).toEqual(neutral.payload)
   })
 
-  it.each(NO_ASSET_CONCEPTS)('%s asks for a diagram and honestly gets none', async (concept) => {
+  it.each(NO_ASSET_CONCEPTS)('%s asks for a diagram and honestly gets none', async (concept, subject) => {
     const decision = await resolveVisualForTurn({
       message: 'explain with diagram',
       lessonConceptId: concept,
-      subject: 'physics',
+      subject,
       learnerRequest: 'diagram',
     })
     expect(decision.graphical).toBe(false)
