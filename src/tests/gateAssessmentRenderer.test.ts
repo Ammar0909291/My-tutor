@@ -53,9 +53,13 @@ describe('the assessment itself is untouched (1-5)', () => {
     const mcq = probeToMcq(PROBE)
     expect(mcq).not.toBeNull()
     expect(mcq!.question).toBe(PROBE.stem)
-    expect(mcq!.options).toEqual([
-      '0 m — the runner returns to the exact starting position',
-      '400 m — that is how far the runner ran',
+    // Since task #2 (2026-09-30) the options are served as answer heads — the
+    // correct one no longer wins on length — and the authored working is held
+    // in `rationales` until after grading.
+    expect(mcq!.options).toEqual(['0 m', '400 m'])
+    expect(mcq!.rationales).toEqual([
+      'the runner returns to the exact starting position',
+      'that is how far the runner ran',
     ])
     expect(mcq!.correctIndex).toBe(0)
   })

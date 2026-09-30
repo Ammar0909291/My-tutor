@@ -722,6 +722,23 @@ text to write. Options put to the owner:
   insert-only, so edited seed text never reaches rows already in production).
 - (a) then (b) for what (a) leaves behind is the cheapest route to near-chance.
 
+**2026-09-30 — option (a) SHIPPED (owner: "decide yourself what is best").** `probeToMcq` now
+serves each option's answer head when every option has the "head — working" shape (spaced em/en
+dash; heads distinct case-insensitively; no bare letter heads; hyphens never split) — 2,081 of
+the 6,345 convertible items. The working travels in the new optional `TutorMCQ.rationales`,
+persisted with the pending question, never sent to the client (`mcqForClient` unchanged) and
+read only after grading: `buildAnswerVerdictBlock` hands the model the authored reason (and the
+thinking behind a wrong choice), and `stateCorrectionForWrongAnswer` now says "Not quite — the
+answer is: X — <authored working>", never a bare answer (this also addresses the earlier
+"bare 'the answer is: X', no why" finding). Grading is untouched — `resolveMcqChoice` reads
+`correctIndex`; one narrow rule accepts the ORIGINAL full text of option i as option i, so a
+page rendered before the deploy still grades. Corpus simulation: 4,617/4,617 head taps and
+4,617/4,617 full-text answers grade to their own option, 0 misattributions. Served cue, correct
+option uniquely longest: english 96% → 18%, chemistry 79% → 45%, cs 78% → 48%, physics 81% →
+54%, biology 79% → 56%, mathematics 94% → 89%. Regression: `src/tests/probeAnswerHeads.test.ts`.
+No production data changed; option (b) (rewriting the remaining items, then an owner-reviewed
+UPDATE) stays open — mathematics is the main residue and its content work is paused.
+
 **Verified live (2026-09-27, production deploy `2f15d657`, disposable account, deleted after).**
 `scripts/qa/probeOptionOrderLive.ts` over the first 5 Biology lessons: 10 authored quizzes served;
 the authored-correct option sat at A in 4/10 (3 of them 2-option items that happened to land in

@@ -42,10 +42,16 @@ describe('the served order', () => {
   })
 
   it('the key moves with its choice — the served correct option is the authored correct option', () => {
+    // Since task #2 (2026-09-30) an option may be served as its answer head,
+    // with the authored working held in `rationales`; rejoined, it is the
+    // authored text exactly, so the key still moves with its choice.
+    const full = (m: NonNullable<typeof served[number]['m']>, i: number) =>
+      m.rationales ? `${m.options[i]} — ${m.rationales[i]}` : m.options[i]
     for (const { p, m } of served) {
       const authored = p.choices!.find((c) => c.isCorrect)!.text.trim()
-      expect(m!.options[m!.correctIndex]).toBe(authored)
-      expect([...m!.options].sort()).toEqual(p.choices!.map((c) => c.text.trim()).sort())
+      expect(full(m!, m!.correctIndex).replace(/\s[—–]\s/, ' — ')).toBe(authored.replace(/\s[—–]\s/, ' — '))
+      expect(m!.options.map((_, i) => full(m!, i).replace(/\s[—–]\s/, ' — ')).sort())
+        .toEqual(p.choices!.map((c) => c.text.trim().replace(/\s[—–]\s/, ' — ')).sort())
     }
   })
 

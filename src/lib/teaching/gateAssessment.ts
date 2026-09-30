@@ -188,7 +188,12 @@ export function probeToMcq(probe: ConvertibleProbe): TutorMCQ | null {
   // (findBestProbe), so its order still differs from the first asking.
   // The key travels with each choice; grading reads the stored correctIndex.
   const order = presentationOrder(question, options.length)
-  const shownOptions = order.map((i) => options[i])
+  // ANSWER HEADS (task #2, 2026-09-30): serve "Four", not "Four — l can be 0
+  // or 1 …", when every option has that shape — see `splitAnswerHeads` and
+  // TutorMCQ.rationales. The order is still keyed on the question alone, so it
+  // is identical to what the full-text options would have been given.
+  const split = splitAnswerHeads(options)
+  const shownOptions = order.map((i) => (split ? split.heads[i] : options[i]))
   const shownCorrect = order.indexOf(correctIndexes[0])
 
   // PHASE F: carry the authored identity forward. This is the ONLY writer of
@@ -202,7 +207,40 @@ export function probeToMcq(probe: ConvertibleProbe): TutorMCQ | null {
     options: shownOptions,
     correctIndex: shownCorrect,
     ...(probe.assetId ? { assetId: probe.assetId } : {}),
+    ...(split ? { rationales: order.map((i) => split.rationales[i]) } : {}),
   }
+}
+
+/**
+ * THE LENGTH GIVEAWAY (task #2, measured 2026-09-30 with
+ * scripts/assets/length-cue-audit.ts): the correct option was the uniquely
+ * longest on 79% of biology, 79% chemistry, 78% cs, 96% english, 94%
+ * mathematics and 81% physics items, because it carried its own working
+ * ("Four — l can be 0 or 1. The l=0 (2s) subshell contributes 1 …") while the
+ * distractors were short. Serving only the answer head removes most of that
+ * cue (english 96% → 18%, chemistry → 45%, physics → 54%, biology → 56%,
+ * cs → 48%) with no change to stored content.
+ *
+ * Splits only when it is unambiguous: EVERY option has a head before a spaced
+ * em/en dash and a non-empty working after it, the heads are distinct once
+ * normalised, and no head is a bare option letter (which would read as "tap
+ * B"). Otherwise returns null and the full text is served exactly as before.
+ * A hyphen never splits — "x - 2" is an answer, not an annotation.
+ */
+export function splitAnswerHeads(options: string[]): { heads: string[]; rationales: string[] } | null {
+  const heads: string[] = []
+  const rationales: string[] = []
+  for (const o of options) {
+    const m = o.match(/^([\s\S]+?)\s[—–]\s([\s\S]+)$/)
+    if (!m) return null
+    const head = m[1].trim(), why = m[2].trim()
+    if (!head || !why || /^[A-Da-d][.)]?$/.test(head)) return null
+    heads.push(head)
+    rationales.push(why)
+  }
+  if (new Set(heads.map((h) => norm(h).toLowerCase())).size !== heads.length) return null
+  if (heads.some((h) => norm(h).length === 0)) return null
+  return { heads, rationales }
 }
 
 /**

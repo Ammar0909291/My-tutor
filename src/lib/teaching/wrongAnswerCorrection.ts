@@ -63,6 +63,8 @@ import { stripLeadingFalseConfirmation } from './answerConfirmation'
 export interface TutorMcqLike {
   options?: unknown
   correctIndex?: unknown
+  /** Task #2: authored working behind head-only options (TutorMCQ.rationales). */
+  rationales?: unknown
 }
 
 export interface WrongAnswerCorrectionInput {
@@ -107,6 +109,13 @@ const norm = (s: string) =>
 const contentWords = (s: string) => norm(s).split(' ').filter((w) => w.length > 2)
 
 /** The authored key, or null when the probe cannot supply one. Never guesses. */
+function correctRationale(probe: TutorMcqLike | null | undefined): string | null {
+  if (!probe || typeof probe !== 'object' || !Array.isArray(probe.rationales)) return null
+  const i = probe.correctIndex
+  const r = typeof i === 'number' && Number.isInteger(i) ? probe.rationales[i] : undefined
+  return typeof r === 'string' && r.trim().length > 0 ? r.trim() : null
+}
+
 function correctOption(probe: TutorMcqLike | null | undefined): string | null {
   if (!probe || typeof probe !== 'object') return null
   const options = Array.isArray(probe.options) ? probe.options : null
@@ -171,7 +180,11 @@ export function stateCorrectionForWrongAnswer(
     return { text: input.text, added: false, reason: 'already-corrected' }
   }
 
-  const correction = `Not quite — the answer is: ${answer}`
+  // Task #2 (2026-09-30): when the options were served as answer heads, the
+  // authored working was held back until the answer was graded. Now it is,
+  // so the correction carries it — never a bare "the answer is: X".
+  const why = correctRationale(input.probe)
+  const correction = why ? `Not quite — the answer is: ${answer} — ${why}` : `Not quite — the answer is: ${answer}`
   // The model's own opening praise cannot stand under a correction. MEASURED
   // (production, 2026-09-27): replies to wrong answers opened "Great, you've
   // spotted …" — prepending the correction alone would leave "Not quite — the

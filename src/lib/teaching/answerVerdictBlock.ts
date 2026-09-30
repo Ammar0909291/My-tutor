@@ -25,7 +25,7 @@ export interface AnswerVerdictInput {
   /** `gradeMcqAnswer`'s result for THIS turn, or null when nothing was graded. */
   grade: { chosenIndex: number | null; correct: boolean | null } | null
   /** The question the answer was graded against. */
-  mcq: { question?: unknown; options?: unknown; correctIndex?: unknown } | null | undefined
+  mcq: { question?: unknown; options?: unknown; correctIndex?: unknown; rationales?: unknown } | null | undefined
   /** Whether that question's key is authored (`probeKeyIsAuthored`). */
   keyIsAuthored: boolean
 }
@@ -44,17 +44,25 @@ export function buildAnswerVerdictBlock(input: AnswerVerdictInput): string {
   const right = optionAt(mcq.options, mcq.correctIndex)
   const question = typeof mcq.question === 'string' ? mcq.question.trim() : ''
   if (!chosen || !right) return ''
+  // Task #2 (2026-09-30): options may have been served as answer heads, with
+  // the authored working held back until now. Once graded it is the best
+  // material there is for the WHY, so it is handed over verbatim.
+  const rightWhy = optionAt(mcq.rationales, mcq.correctIndex)
+  const chosenWhy = optionAt(mcq.rationales, grade.chosenIndex)
 
   if (grade.correct) {
     return `\n\nANSWER JUST GRADED — CORRECT (server-checked against the authored key).
 Question: "${question}"
-The learner chose: "${chosen}" — this is right.
+The learner chose: "${chosen}" — this is right.${rightWhy ? `
+The authored reason it is right: "${rightWhy}"` : ''}
 In your reply: confirm it in one short sentence, then give ONE simple sentence saying WHY it is right, using only what this lesson has taught. Do not restate their answer as a question.`
   }
   return `\n\nANSWER JUST GRADED — WRONG (server-checked against the authored key).
 Question: "${question}"
-The learner chose: "${chosen}"
-The correct answer is: "${right}"
+The learner chose: "${chosen}"${chosenWhy ? `
+The thinking behind that choice: "${chosenWhy}"` : ''}
+The correct answer is: "${right}"${rightWhy ? `
+The authored reason it is right: "${rightWhy}"` : ''}
 In your reply, in simple, short sentences a weak English reader can follow:
 1. Say kindly that this answer is not right.
 2. Explain WHY "${chosen}" is wrong — name the exact idea it gets wrong.

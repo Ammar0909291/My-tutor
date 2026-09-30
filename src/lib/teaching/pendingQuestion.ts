@@ -97,7 +97,7 @@ export function readPendingQuestion(
   if (!isWellFormed(raw)) return null
   const p = raw as {
     question: string; options: string[]; correctIndex: number
-    lessonKey?: unknown; assetId?: unknown
+    lessonKey?: unknown; assetId?: unknown; rationales?: unknown
   }
 
   // Legacy row (key absent entirely) — see LEGACY ROWS above.
@@ -110,11 +110,18 @@ export function readPendingQuestion(
   // defensively — every row written before this change has no assetId, and a
   // legacy row must restore and grade exactly as it always did.
   const assetId = typeof p.assetId === 'string' && p.assetId ? p.assetId : undefined
+  // Task #2 (2026-09-30): the authored working behind head-only options, read
+  // back for the verdict. Kept only when it is exactly one string per option —
+  // anything else is dropped, and the question grades exactly as it always did.
+  const rationales = Array.isArray(p.rationales) && p.rationales.length === p.options.length
+    && p.rationales.every((r) => typeof r === 'string')
+    ? (p.rationales as string[]) : undefined
   return {
     question: p.question,
     options: p.options,
     correctIndex: p.correctIndex,
     ...(assetId ? { assetId } : {}),
+    ...(rationales ? { rationales } : {}),
   }
 }
 
@@ -138,6 +145,9 @@ export function writePendingQuestion(
     // conditionally so a model-generated question stores exactly the shape it
     // always did — the row stays anonymous, which is the contract.
     ...(mcq.assetId ? { assetId: mcq.assetId } : {}),
+    // Task #2: the authored working behind head-only options, for next turn's
+    // verdict. Absent for every question that was served in full text.
+    ...(mcq.rationales ? { rationales: mcq.rationales } : {}),
   }
 }
 

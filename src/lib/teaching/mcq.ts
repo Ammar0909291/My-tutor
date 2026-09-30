@@ -53,6 +53,24 @@ export interface TutorMCQ {
    * grade identically.
    */
   assetId?: string
+  /**
+   * The authored WORKING behind each option, aligned with `options`, when the
+   * options were served as answer heads only (task #2, 2026-09-30).
+   *
+   * Authored choices read "Four — l can be 0 or 1, so 1 + 3 states …": the
+   * correct option carried its own full reasoning and the distractors were
+   * short, so the correct one was the uniquely longest on ~80% of items and
+   * "pick the longest" beat chance two to three times over. `probeToMcq` now
+   * serves only the part before " — " as the option and keeps the rest here.
+   *
+   * NEVER SHOWN BEFORE GRADING. `mcqForClient` does not send it and no prompt
+   * builder reads it while a question is outstanding; it is read only AFTER the
+   * answer is graded — by the verdict block and the stated correction — so the
+   * learner gets the authored why instead of a bare "the answer is: X". Grading
+   * itself never reads it (`gradeMcqAnswer` reads `correctIndex` only).
+   * Optional: model-written questions and unsplittable authored ones carry none.
+   */
+  rationales?: string[]
 }
 
 /**
@@ -951,6 +969,15 @@ export function isLongQuestion(message: string): boolean {
 }
 
 export function resolveMcqChoice(message: string, mcq: TutorMCQ): number | null {
+  // HEAD-ONLY OPTIONS (task #2, 2026-09-30): an option served as "Four" was
+  // authored as "Four — l can be 0 or 1 …". A page rendered before that change
+  // still sends the full authored text; it names exactly one option, so it is
+  // that option. Exact match on the rejoined text only — nothing else widens.
+  if (Array.isArray(mcq.rationales) && mcq.rationales.length === mcq.options.length) {
+    const typed = message.replace(/\s+/g, ' ').trim()
+    const hit = mcq.options.findIndex((o, i) => `${o} — ${mcq.rationales![i]}`.replace(/\s+/g, ' ').trim() === typed)
+    if (hit >= 0) return hit
+  }
   // Tapped text is always graded, even when an option is itself phrased as a question.
   if (isLongQuestion(message) && !mcq.options.some((o) => o.trim() === message.trim())) return null
   // A GROUPED NUMBER IS ONE NUMBER (live, phys.therm.calorimetry, 2026-09-24):
