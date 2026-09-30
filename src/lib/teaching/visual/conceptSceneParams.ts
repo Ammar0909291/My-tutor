@@ -82,6 +82,12 @@ import {
   buildEnergyBandsScene, buildSemiconductorClassesScene, buildIntrinsicScene, buildExtrinsicScene,
   buildPnJunctionScene, buildDiodeScene, buildShellModelScene,
 } from '@/lib/teaching/sceneGenerators/physicsCoreScenesB9'
+import {
+  buildFourForcesScene, buildParticleClassificationScene, buildAntimatterScene, buildQuarksScene,
+  buildLeptonsScene, buildNeutrinoScene, buildHadronQuarkScene, buildGaugeBosonsScene,
+  buildStrongInteractionScene, buildWeakInteractionScene, buildElectroweakScene, buildHiggsScene,
+  buildParticleConservationScene, buildFeynmanScene, buildAcceleratorScene, buildStandardModelScene,
+} from '@/lib/teaching/sceneGenerators/physicsCoreScenesB10'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -450,6 +456,23 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'phys.mod.pn-junction':               buildPnJunctionScene,
   'phys.mod.diode-rectification':       buildDiodeScene,
   'phys.mod.nuclear-models':            buildShellModelScene,
+  // Batch 10 (2026-09-30). See physicsCoreScenesB10.ts.
+  'phys.particle.four-forces':          buildFourForcesScene,
+  'phys.particle.particle-classification': buildParticleClassificationScene,
+  'phys.particle.antimatter':           buildAntimatterScene,
+  'phys.particle.quarks':               buildQuarksScene,
+  'phys.particle.leptons':              buildLeptonsScene,
+  'phys.particle.neutrinos':            buildNeutrinoScene,
+  'phys.particle.hadron-quark-model':   buildHadronQuarkScene,
+  'phys.particle.gauge-bosons':         buildGaugeBosonsScene,
+  'phys.particle.strong-interaction':   buildStrongInteractionScene,
+  'phys.particle.weak-interaction':     buildWeakInteractionScene,
+  'phys.particle.electroweak-unification': buildElectroweakScene,
+  'phys.particle.higgs-mechanism':      buildHiggsScene,
+  'phys.particle.conservation-laws':    buildParticleConservationScene,
+  'phys.particle.feynman-diagrams':     buildFeynmanScene,
+  'phys.particle.accelerators-detectors': buildAcceleratorScene,
+  'phys.particle.standard-model':       buildStandardModelScene,
   'phys.wave.transverse-waves':         buildTransverseWaveScene,
   'phys.wave.interference':             buildWaveInterferenceScene,
   'phys.therm.calorimetry':             buildCalorimetryScene,

@@ -363,3 +363,33 @@ visualLifecycleFinalization and visualRetirementLifecycle, which inject a replac
 concept, moved from lc-circuits to chem.solid.defects (with defect-vocabulary fixture figures);
 visualSemanticMoat's emf test now asserts the seven circuit-card siblings own figures and emf is
 still demoted.
+
+## Batch 10 (2026-09-30): particle physics (all 16)
+
+New module `physicsCoreScenesB10.ts` (adds a wavy boson-line helper). Numbers are standard measured
+values (PDG) where stated.
+
+| Concept | Figure |
+|---|---|
+| phys.particle.four-forces | Strengths relative to the strong force on a log scale (1, 1/137, 1e-6, 6e-39) with ranges; bars in order (asserted). |
+| phys.particle.particle-classification | Tree: hadrons (baryons p, n; mesons π, K) vs leptons (e, μ, τ, ν); strong force: hadrons only. |
+| phys.particle.antimatter | Pair production γ (E ≥ 2mₑc² = 1.02 MeV) → e⁻ + e⁺ curling opposite ways (asserted). |
+| phys.particle.quarks | Six flavours in three generations; up-type +⅔, down-type −⅓; confined. |
+| phys.particle.leptons | e, μ, τ with masses 0.511, 105.7, 1776.9 MeV (log bars) and their neutrinos. |
+| phys.particle.neutrinos | Neutron beta spectrum (allowed shape p·E·(Q − T)²) continuous up to Q = 0.782 MeV; missing energy → ν̄. |
+| phys.particle.hadron-quark-model | proton uud +1, neutron udd 0, π⁺ ud̄ +1 (charges summed, asserted). |
+| phys.particle.gauge-bosons | Exchange diagrams: photon (0), gluon (0), W±/Z (80.4, 91.2 GeV); heavy carrier → short range. |
+| phys.particle.strong-interaction | Cornell potential V = −a/r + kr (linear rise asserted); string snaps into a new pair. |
+| phys.particle.weak-interaction | d → u + W⁻, W⁻ → e⁻ + ν̄ₑ; charge −⅓ = +⅔ − 1 at the vertex (asserted). |
+| phys.particle.electroweak-unification | Log–log: weak strength ∝ (E/M_W)² meets electromagnetism at ≈ 80 GeV. |
+| phys.particle.higgs-mechanism | V(φ) = −μ²φ² + λφ⁴ with the vacuum at φ = v ≠ 0 (minimum asserted); coupling ↔ mass. |
+| phys.particle.conservation-laws | n → p e⁻ ν̄ₑ balances B and L; p → e⁺ γ breaks B (tallied). |
+| phys.particle.feynman-diagrams | e⁻e⁻ scattering by photon exchange, two vertices, time upward. |
+| phys.particle.accelerators-detectors | Beams collide; two 63.5 GeV photons 160° apart → m = √(2E₁E₂(1 − cos θ)) = 125 GeV. |
+| phys.particle.standard-model | Quarks, leptons (three generations), gauge bosons g γ Z W, Higgs H — all 17 named (asserted). |
+
+Found while rendering: the Higgs potential ran past the frame (range clipped to |φ| ≤ 2.1); the
+electroweak weak-strength line dipped below its axis (now starts where it enters the plotted
+range); the collider figure computed 123.1 GeV while calling it the Higgs (photon energies now give
+125 GeV); the Standard Model boson box clipped its text (boxes removed for bosons and Higgs);
+antimatter and weak-interaction headline chips picked narration sentences (formula labels added).
