@@ -36,7 +36,8 @@ describe('scope is decided by provenance and audit, never by words', () => {
   })
 
   it('an audited-insufficient asset is demoted regardless of provenance', () => {
-    expect(scopeForAsset('curated', 'phys.therm.carnot-cycle')).toBe('domain')
+    // (phys.therm.carnot-cycle was the curated example until physics batch 15, 2026-09-30.)
+    expect(scopeForAsset('curated', 'chem.bond.hybridization')).toBe('domain')
     expect(scopeForAsset('generator-default', 'phys.wave.shm-energy')).toBe('domain')
   })
 
@@ -107,8 +108,10 @@ describe('a domain illustration cannot claim to be the concept', () => {
 
   it('an audited-insufficient curated card is demoted in the contract too', () => {
     // The Carnot cycle was rendering an EMPTY coordinate plane while the
-    // contract introduced it as "a figure of the Carnot Cycle".
-    const block = contract('phys.therm.carnot-cycle')
+    // contract introduced it as "a figure of the Carnot Cycle" — it now owns an
+    // authored cycle (physics batch 15, 2026-09-30). chem.bond.hybridization is
+    // still an audited-insufficient curated card (sp3 only), so it stands in.
+    const block = contract('chem.bond.hybridization')
     expect(block).toContain('GENERAL ILLUSTRATION')
     expect(block).not.toContain('the figure leads, the words support it')
   })

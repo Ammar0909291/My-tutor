@@ -106,6 +106,12 @@ import {
   buildAngularMomentumAdditionScene, buildBornScene, buildSMatrixScene, buildDensityMatrixScene,
 } from '@/lib/teaching/sceneGenerators/physicsCoreScenesB13'
 import { buildPowerScene } from '@/lib/teaching/sceneGenerators/physicsCoreScenesB14'
+import {
+  buildDisplacementScene, buildVelocityScene, buildAccelerationScene, buildRelativeMotionScene, buildTensionScene,
+  buildConservativeForcesScene, buildAngularMomentumScene, buildAngularMomentumConservationScene,
+  buildThermoProcessesScene, buildCarnotScene, buildResistivityScene, buildEmfScene, buildSchrodingerScene,
+  buildSelectionRulesScene,
+} from '@/lib/teaching/sceneGenerators/physicsCoreScenesB15'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -539,6 +545,21 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'phys.qm.density-matrix':           buildDensityMatrixScene,
   // Batch 14 (2026-09-30). See physicsCoreScenesB14.ts.
   'phys.mech.power':                    buildPowerScene,
+  // Batch 15 (2026-09-30): promoted from domain scope. See physicsCoreScenesB15.ts.
+  'phys.mech.displacement':           buildDisplacementScene,
+  'phys.mech.velocity':               buildVelocityScene,
+  'phys.mech.acceleration':           buildAccelerationScene,
+  'phys.mech.relative-motion':        buildRelativeMotionScene,
+  'phys.mech.tension':                buildTensionScene,
+  'phys.mech.conservative-forces':    buildConservativeForcesScene,
+  'phys.mech.angular-momentum':       buildAngularMomentumScene,
+  'phys.mech.conservation-of-angular-momentum': buildAngularMomentumConservationScene,
+  'phys.therm.thermodynamic-processes': buildThermoProcessesScene,
+  'phys.therm.carnot-cycle':          buildCarnotScene,
+  'phys.em.resistivity':              buildResistivityScene,
+  'phys.em.emf':                      buildEmfScene,
+  'phys.qm.schrodinger-equation':     buildSchrodingerScene,
+  'phys.qm.selection-rules':          buildSelectionRulesScene,
   'phys.wave.transverse-waves':         buildTransverseWaveScene,
   'phys.wave.interference':             buildWaveInterferenceScene,
   'phys.therm.calorimetry':             buildCalorimetryScene,

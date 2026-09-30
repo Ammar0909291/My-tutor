@@ -703,6 +703,25 @@ probe text, and the cold-start bootstrap is insert-only (`createMany … skipDup
 `src/instrumentation.ts`), so edited seed text never reaches existing production rows without a
 direct, owner-authorized DB update. Not done unilaterally.
 
+**2026-09-30 update (owner approved working on it; re-measured, not yet fixed).** Re-measured
+from the seed corpus with the new, re-runnable `scripts/assets/length-cue-audit.ts` (no DB
+access). It is wider than the figures above, because TWO-option items are the worst case and
+were not counted before: the correct option is the uniquely longest on 79% of biology items
+(597), 79% chemistry (931), 78% cs (268), 96% english (432), 94% mathematics (2752) and 81%
+physics (1365) — about 5,400 items in all. Cause, visible in the samples: the correct option
+carries its own full working ("Four — l can be 0 or 1. The 2s subshell contributes 1 …") while
+distractors are short. The planned "DB update" cannot be written yet: there is no rewritten
+text to write. Options put to the owner:
+- (a) runtime, no DB write: show only each option's answer head (text before " — ") and reveal
+  the working after grading. Measured effect: english 96% → 18%, chemistry 79% → 45%, physics
+  81% → 54%, biology 79% → 56%, cs 78% → 48%, mathematics 94% → 89% (only 9% of maths items
+  split cleanly on " — "). A change to every learner's quiz presentation — needs a decision.
+- (b) content rewrite of the remaining items in the seed files (distractors given comparable
+  working, or working moved out of the options), batch by batch, then an owner-reviewed,
+  idempotent UPDATE of existing `probe_assets` rows generated from those files (the bootstrap is
+  insert-only, so edited seed text never reaches rows already in production).
+- (a) then (b) for what (a) leaves behind is the cheapest route to near-chance.
+
 **Verified live (2026-09-27, production deploy `2f15d657`, disposable account, deleted after).**
 `scripts/qa/probeOptionOrderLive.ts` over the first 5 Biology lessons: 10 authored quizzes served;
 the authored-correct option sat at A in 4/10 (3 of them 2-option items that happened to land in

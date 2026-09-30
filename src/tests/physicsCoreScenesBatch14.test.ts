@@ -56,20 +56,16 @@ describe('the physics the figure draws', () => {
 
 /**
  * These resolve to a figure that is honestly scoped 'domain' — a shared,
- * concept-bound illustration of the right kind (number line, pendulum, circuit…)
+ * concept-bound illustration of the right kind (pendulum, circuit, orbit…)
  * rather than a figure authored for the concept alone. They were never part of
- * the "no figure" gap this campaign closed; upgrading them to their own
- * concept-scoped figures is a separate follow-up. Pinned so the list only
- * changes deliberately.
+ * the "no figure" gap batches 1-14 closed. Batch 15 promoted the fourteen
+ * card-backed ones; these twelve come from shared generator kinds and are the
+ * next upgrade. Pinned so the list only changes deliberately.
  */
 const DOMAIN_SCOPED = [
-  'phys.meas.scalars-vectors', 'phys.mech.displacement', 'phys.mech.velocity', 'phys.mech.acceleration',
-  'phys.mech.kinematics-2d', 'phys.mech.relative-motion', 'phys.mech.tension', 'phys.mech.conservative-forces',
-  'phys.mech.momentum', 'phys.mech.rotational-dynamics', 'phys.mech.angular-momentum',
-  'phys.mech.conservation-of-angular-momentum', 'phys.mech.universal-gravitation', 'phys.mech.gravitational-field',
-  'phys.therm.thermodynamic-processes', 'phys.therm.carnot-cycle', 'phys.wave.shm', 'phys.wave.shm-energy',
-  'phys.opt.lens-power', 'phys.em.electric-current', 'phys.em.ohms-law', 'phys.em.resistivity', 'phys.em.dc-circuits',
-  'phys.em.emf', 'phys.qm.schrodinger-equation', 'phys.qm.selection-rules',
+  'phys.meas.scalars-vectors', 'phys.mech.kinematics-2d', 'phys.mech.momentum', 'phys.mech.rotational-dynamics',
+  'phys.mech.universal-gravitation', 'phys.mech.gravitational-field', 'phys.wave.shm', 'phys.wave.shm-energy',
+  'phys.opt.lens-power', 'phys.em.electric-current', 'phys.em.ohms-law', 'phys.em.dc-circuits',
 ]
 
 describe('campaign end state', () => {

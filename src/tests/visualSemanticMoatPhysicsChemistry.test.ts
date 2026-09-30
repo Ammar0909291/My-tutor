@@ -142,13 +142,11 @@ const INERT_BUT_RENDERING: ReadonlyArray<readonly [string, string, string]> = [
   ['chemistry', 'chem.atomic.photoelectric-effect', 'an atom; no surface or photon, but nothing contradicted'],
   ['chemistry', 'chem.period.classification', 'electron shells; later physics than the classification taught'],
   ['chemistry', 'chem.solid.properties',    'a lattice; solids do have lattices, it simply carries no band structure'],
-  // moved from a claim to a demotion (were on the STRONG contract)
-  ['physics', 'phys.mech.displacement',     'a bare -5..5 number line; no start, no end, no path'],
-  ['physics', 'phys.mech.tension',          'a force diagram with no string, rope or tension arrow'],
-  ['physics', 'phys.em.emf',                'the bulb circuit; V = E - Ir needs r drawn inside the cell'],
-  // correctly left alone by the first pass
-  ['physics', 'phys.therm.carnot-cycle',    'an empty x-y plane; the case that set the standard'],
-  ['physics', 'phys.mech.acceleration',     'the same number line as displacement, already demoted'],
+  // phys.mech.displacement, phys.mech.tension and phys.em.emf (moved here off
+  // the STRONG contract), and phys.therm.carnot-cycle and phys.mech.acceleration
+  // (correctly left alone by the first pass) left this list 2026-09-30: physics
+  // batch 15 gave each an authored figure of what its verdict said was missing
+  // (physicsCoreScenesBatch15.test.ts), so each now earns the claim.
   // phys.mech.work left this list 2026-09-30: it owns an authored F·d cos θ figure.
 ]
 
@@ -164,11 +162,14 @@ describe('the inert set is demoted, not suppressed', () => {
     expect(claimsToBeTheConcept(conceptId, subject), `${conceptId} now claims to be the concept`).toBe(false)
   })
 
-  it('the three moved off the strong contract are demoted at the source', () => {
-    // Recorded in INSUFFICIENT_FOR_CONCEPT rather than fixed at the call site,
-    // so the demotion holds for every entry path at once.
+  it('the three moved off the strong contract were later REPAIRED, and earn the claim back', () => {
+    // They were demoted at the source (INSUFFICIENT_FOR_CONCEPT) so the
+    // demotion held for every entry path at once. Physics batch 15 (2026-09-30)
+    // authored each a figure of what its verdict said was missing, and removed
+    // the verdict — the only honest way off that list.
     for (const id of ['phys.mech.displacement', 'phys.mech.tension', 'phys.em.emf']) {
-      expect(isInsufficientForConcept(id), id).toBe(true)
+      expect(isInsufficientForConcept(id), id).toBe(false)
+      expect(claimsToBeTheConcept(id, 'physics'), id).toBe(true)
     }
   })
 
@@ -190,8 +191,11 @@ describe('the inert set is demoted, not suppressed', () => {
       expect(isRetiredVisualBinding(id), id).toBe(false)
     }
     expect(isRetiredVisualBinding('phys.em.emf')).toBe(false)
-    expect(isInsufficientForConcept('phys.em.emf')).toBe(true)
-    expect(isInsufficientForConcept('phys.em.resistivity')).toBe(true)
+    // emf and resistivity were the thin-not-wrong pair on that card until
+    // physics batch 15 (2026-09-30) drew r inside the cell and the conductor's
+    // geometry; both now own their figures too.
+    expect(isInsufficientForConcept('phys.em.emf')).toBe(false)
+    expect(isInsufficientForConcept('phys.em.resistivity')).toBe(false)
   })
 
   it('every generator-tier binding is faithful and untouched', () => {
@@ -291,10 +295,13 @@ describe('round 4 — figure content, not figure choice', () => {
     // phys.qm.wave-function, and silent about time for the TIME-DEPENDENT
     // Schrödinger equation. The energy_level_diagram draws transitions but not
     // which are allowed, which is what selection rules are.
-    expect(isInsufficientForConcept('phys.qm.schrodinger-equation')).toBe(true)
-    expect(isInsufficientForConcept('phys.qm.selection-rules')).toBe(true)
-    expect(claimsToBeTheConcept('phys.qm.schrodinger-equation', 'physics')).toBe(false)
-    expect(claimsToBeTheConcept('phys.qm.selection-rules', 'physics')).toBe(false)
+    // Physics batch 15 (2026-09-30) authored both what the cards lacked — the
+    // time evolution of a mixed state, and which transitions are allowed — so
+    // both left the demotion list and now earn the claim with their own figure.
+    expect(isInsufficientForConcept('phys.qm.schrodinger-equation')).toBe(false)
+    expect(isInsufficientForConcept('phys.qm.selection-rules')).toBe(false)
+    expect(claimsToBeTheConcept('phys.qm.schrodinger-equation', 'physics')).toBe(true)
+    expect(claimsToBeTheConcept('phys.qm.selection-rules', 'physics')).toBe(true)
     // Their siblings on the same two cards are correct and keep the claim.
     expect(claimsToBeTheConcept('phys.qm.wave-function', 'physics')).toBe(true)
     expect(claimsToBeTheConcept('phys.mod.atomic-spectra', 'physics')).toBe(true)

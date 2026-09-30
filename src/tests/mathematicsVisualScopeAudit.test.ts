@@ -16,6 +16,7 @@
 import { describe, it, expect } from 'vitest'
 import { INSUFFICIENT_FOR_CONCEPT } from '@/lib/teaching/visual/scope'
 import { getConceptVisualType, getConceptSceneGenerator } from '@/lib/teaching/visualRegistry'
+import { CONCEPT_SCENE_OVERRIDES } from '@/lib/teaching/visual/conceptSceneParams'
 
 const BARE_CANVAS = new Set(['coordinate_plane', 'number_line'])
 
@@ -49,12 +50,17 @@ describe('mathematics bare-canvas bindings carry the same verdict as physics', (
     }
   })
 
-  it('the physics verdicts this mirrors are unchanged', () => {
-    // If these ever stop being demoted, the mathematics rows lose their basis.
-    // (phys.mech.work was the first example until physics batch 2, 2026-09-30.)
+  it('the physics verdicts this mirrors were honoured — repaired, never simply lifted', () => {
+    // The mathematics rows rest on the physics verdict that a bare
+    // coordinate_plane card is not a figure of a curve-shaped concept. That
+    // verdict stands. The physics rows left the demotion list only by being
+    // REPAIRED — each now owns an authored figure (phys.mech.work in physics
+    // batch 2; thermodynamic-processes and carnot-cycle in physics batch 15,
+    // 2026-09-30) — while their registry card is still the bare plane.
     for (const id of ['phys.therm.thermodynamic-processes', 'phys.therm.carnot-cycle']) {
-      expect(INSUFFICIENT_FOR_CONCEPT.has(id), id).toBe(true)
       expect(getConceptVisualType(id)).toBe('coordinate_plane')
+      expect(INSUFFICIENT_FOR_CONCEPT.has(id) || CONCEPT_SCENE_OVERRIDES.includes(id), id).toBe(true)
+      expect(INSUFFICIENT_FOR_CONCEPT.has(id), `${id} left the list without a repair`).toBe(!CONCEPT_SCENE_OVERRIDES.includes(id))
     }
   })
 })

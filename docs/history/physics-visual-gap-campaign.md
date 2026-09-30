@@ -541,3 +541,53 @@ Validation: tsc ratchet 0 ≤ 0; vitest 801 files / 17,070 passed, 9 skipped (th
 timed out the two corpus-wide end-state tests at the default 5 s under parallel load — decisions
 are now resolved once and shared, with a 60 s timeout, the repo's convention for corpus-wide tests;
 the re-run was fully green); validate:visuals physics exact=77 incorrect=0; `npm run build` exit 0.
+
+## Batch 15 (2026-09-30): domain-scope upgrade, part 1 — the 14 card-backed concepts
+
+Owner-approved follow-up to the campaign: the 26 physics concepts served a shared, honestly
+`domain`-scoped figure (listed in `visual/scope.ts` INSUFFICIENT_FOR_CONCEPT, each with an
+audit verdict saying what its figure lacked). Split in two: the 14 backed by a fixed registry
+CARD first (a card → computed scene is a pure gain), the 12 served a shared generator KIND
+(pendulum, collision, circuit, orbit, ray optics, vector, torque, kinematics graphs) next, after
+checking how the front end animates those kinds so no simulation is replaced by a static scene.
+
+New module `physicsCoreScenesB15.ts`. Each figure keeps the KIND its card named (number line,
+force diagram, circular motion, P–V graph, circuit, wave, energy levels), because the resolver
+still introduces a concept-authored scene by its exact registry card's representation. Each
+concept's audit verdict was replaced in scope.ts by a dated PROMOTED note quoting it.
+
+| Concept | Figure (what the verdict said was missing is now drawn) |
+|---|---|
+| phys.mech.displacement | Number line walk 0 → +4 → +1 m: distance 4 + 3 = 7 m, displacement +1 m (asserted). |
+| phys.mech.velocity | Two carts marked each second: A +2 m/s, B −1 m/s; v = Δx/Δt = 8 m / 4 s (asserted). |
+| phys.mech.acceleration | Cart from rest, a = 0.5 m/s²: growing gaps, staggered velocity arrows 0.5 m/s longer each second (asserted). |
+| phys.mech.relative-motion | Velocity number line: walker +5 in a +20 train = +25 over ground; car −15 seen from train = −35 (asserted). |
+| phys.mech.tension | Two blocks on a smooth table, F = 24 N: a = 4 m/s², rope tension T = m₂a = 8 N, equal and opposite at the rope ends (asserted). |
+| phys.mech.conservative-forces | A → B (Δh = 3 m) by ramp and by curve: gravity −58.8 J on both; friction −20.0 J vs −27.8 J (asserted). |
+| phys.mech.angular-momentum | Mass on a string: L = mvr = Iω = 2 × 1.5 = 3 kg·m²/s, out of the page (asserted). |
+| phys.mech.conservation-of-angular-momentum | Skater top views: I₁ω₁ = I₂ω₂, 4 × 2 = 1.6 × 5 = 8; KE 8 J → 20 J (asserted). |
+| phys.therm.thermodynamic-processes | P–V from (1.5 L, 4 atm): isobaric, isochoric, isothermal PV = 6, adiabatic PV^1.4 below it (asserted). |
+| phys.therm.carnot-cycle | Closed 500 K / 300 K cycle (γ = 5/3, V₂ = 3V₁), corners on isotherms and adiabats; η = 0.4 (asserted). |
+| phys.em.resistivity | Three copper wires: 0.17 Ω; 2L → 0.34 Ω; 2A → 0.08 Ω (R = ρL/A, asserted). |
+| phys.em.emf | Cell with r inside a dashed casing: E = 12 V, r = 0.5 Ω, R = 5.5 Ω → I = 2 A, V = 11 V (asserted). |
+| phys.qm.schrodinger-equation | Box: one state's |ψ|² fixed; (φ₁ + φ₂)/√2 sloshes left → right at T/2 (mirror, normalised, asserted). |
+| phys.qm.selection-rules | H levels n ≤ 3 by l: Δl = ±1 allowed (Lyman-α 10.2 eV), 2s→1s and 3d→1s forbidden (asserted); levels spaced by n, labelled "not to scale". |
+
+Found while rendering: acceleration's velocity arrows ran together into one chain (now
+staggered); the Carnot loop was too thin to read at V₂ = 2V₁ (now 3V₁); selection-rule levels
+n = 2 and 3 were stacked on a true energy scale (now spaced by n, labelled not to scale);
+conservative-forces printed hyphens for minus signs; velocity's number line crossed x = 5.
+
+Fixtures: `vectorProductVisualSelection` backlog count 40 → 26 (a repair, noted in its
+running comment) and its "still renders, demoted" example → `phys.em.dc-circuits`; `visualScope`'s
+curated-card demotion examples → `chem.bond.hybridization` (still insufficient: sp3 only);
+`physicsCoreScenesBatch14`'s pinned DOMAIN_SCOPED list shrinks to the 12 generator-kind concepts.
+Also updated: `visualSemanticMoatPhysicsChemistry` (the five repaired concepts leave its
+"inert but rendering" list; the displacement/tension/emf, emf/resistivity and two-quantum
+assertions now require the claim to be EARNED — off the list and claiming the concept) and
+`mathematicsVisualScopeAudit` (its mirror now asserts the physics rows left the list only by
+repair, while their registry card is still the bare coordinate plane).
+
+Validation: tsc ratchet 0 ≤ 0; vitest 802 files / 17,116 passed, 9 skipped (first run found the
+moat/maths fixtures above, 9 tests; re-run fully green); validate:visuals physics exact=77
+incorrect=0; `npm run build` exit 0.

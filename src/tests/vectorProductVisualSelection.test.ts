@@ -255,7 +255,8 @@ describe('the repair path is the general one, not a special case', () => {
    * deliberately kept, so the idea is not silently re-attempted.
    */
   it('an insufficient concept still renders, demoted rather than withheld', () => {
-    const decision = requestDiagram('phys.em.resistivity')
+    // (phys.em.resistivity was this example until physics batch 15, 2026-09-30.)
+    const decision = requestDiagram('phys.em.dc-circuits')
     expect(decision.graphical).toBe(true)
     expect(decision.asset?.scope).toBe('domain')
   })
@@ -347,7 +348,14 @@ describe('the repair path is the general one, not a special case', () => {
     // spring / x / F = −kx figure (physicsCoreScenes.ts buildHookesLawScene).
     // 45 -> 40 (2026-09-30, physics batch 2): impulse, newtons-third-law,
     // inclined-plane, work and ideal-gas-law each own an authored figure.
-    expect(INSUFFICIENT_FOR_CONCEPT.size).toBe(40)
+    // 40 -> 26 (2026-09-30, physics batch 15): REPAIRS. The fourteen
+    // card-backed physics entries (displacement, velocity, acceleration,
+    // relative-motion, tension, conservative-forces, both angular-momentum
+    // concepts, thermodynamic-processes, carnot-cycle, resistivity, emf,
+    // schrodinger-equation, selection-rules) each own an authored figure that
+    // draws what their verdict said was missing — physicsCoreScenesB15.ts.
+    expect(INSUFFICIENT_FOR_CONCEPT.size).toBe(26)
+    expect(INSUFFICIENT_FOR_CONCEPT.has('phys.therm.carnot-cycle')).toBe(false)
     expect(INSUFFICIENT_FOR_CONCEPT.has('phys.mech.hookes-law')).toBe(false)
     expect(INSUFFICIENT_FOR_CONCEPT.has('phys.opt.refraction')).toBe(false)
     expect(INSUFFICIENT_FOR_CONCEPT.has('bio.mol.dna-replication')).toBe(false)
