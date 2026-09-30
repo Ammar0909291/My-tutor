@@ -460,3 +460,44 @@ Fixtures: `visualFailClosed` NO_ASSET_CONCEPTS now carry their own subject and u
 
 Validation: tsc ratchet 0 ≤ 0; vitest 799 files / 16,996 passed, 9 skipped; validate:visuals
 physics exact=77 incorrect=0; `npm run build` exit 0.
+
+## Batch 13 (2026-09-30): analytical mechanics (all 8) and advanced quantum (9)
+
+New module `physicsCoreScenesB13.ts`. Measured on this branch: 237/238 physics concepts now resolve
+to their own concept figure (was 220). The only one left is `phys.mech.power`, still the no-asset
+live-generation fixture; it is handled on its own in the next step.
+
+| Concept | Figure |
+|---|---|
+| phys.mech.generalized-coordinates | Plane pendulum: (x, y) plus the constraint x² + y² = L² leaves one coordinate θ (bob on the circle, asserted). |
+| phys.mech.euler-lagrange-equation | Ball thrown up and caught after 2 s: action computed numerically; true path S = −32.01, varied paths −30.24; excess ε²π²/4T (asserted). |
+| phys.mech.cyclic-coordinates-conservation-laws | Kepler ellipse a = 2.8, e = 0.5: φ cyclic, r·v = 1.4 × 1.5 = 4.2 × 0.5 = 2.1 (asserted). |
+| phys.mech.hamiltonian | Legendre transform of L = ½mq̇²: tangent slope p = 2, intercept −H, H = pq̇ − L = 2 (asserted). |
+| phys.mech.hamiltons-equations | Oscillator phase portrait (m = 2, k = 1): flow (∂H/∂p, −∂H/∂q) tangent to H = const, clockwise (asserted). |
+| phys.mech.poisson-brackets | Pendulum phase space: RK4-evolved patch shears but keeps area 0.64 (within 1%, asserted); df/dt = {f, H}. |
+| phys.mech.canonical-transformations | q = √(2P) sin Q, p = √(2P) cos Q maps circles to lines P = const; {q, p} = 1 by finite differences (asserted). |
+| phys.mech.hamilton-jacobi-equation | S = mq²/2t for free particles: slope p = ∂S/∂q = 1 at q = 2, t = 2; HJ equation satisfied numerically (asserted). |
+| phys.qm.operators | A = [[2, 1], [1, 2]]: eigenvalues 1, 3, orthogonal eigenvectors; state at 20° gives P = 0.18, 0.82, ⟨A⟩ = 2.64 (asserted). |
+| phys.qm.perturbation-theory | Two levels 0, 2 coupled by λ: exact 1 ∓ √(1 + λ²) vs second order ∓λ²/2 — close for small λ, apart for large (asserted). |
+| phys.qm.variational-method | Hydrogen with Gaussian trial: E(α) = 3α/2 − 2√(2α/π), minimum −4/(3π) = −0.424 above −0.5 (asserted). |
+| phys.qm.wkb-approximation | Parabolic barrier: WKB wave oscillates, decays between turning points, leaves at e^(−∫κ) = 0.26; T = 0.07; ∫κ vs closed form (asserted). |
+| phys.qm.identical-particles | Two particles in a box (n = 1, 2): along x₁ = x₂ bosons doubled, fermions zero; exchange signs (asserted). |
+| phys.qm.angular-momentum-addition | 1 ⊗ ½: six (m₁, m₂) states regroup into J = 3/2 and 1/2, 3 × 2 = 4 + 2; CG block orthogonal (asserted). |
+| phys.qm.scattering-theory-born-approximation | q = k′ − k with |q| = 2k sin(θ/2); Yukawa dσ/dΩ ∝ 1/(q² + μ²)², wider for shorter range (asserted). |
+| phys.qm.s-matrix-basics | One partial wave: S = e^(2iδ) on the unit circle, T = (S − 1)/2i on the unitarity circle, Im T = |T|² = 0.33 (asserted). |
+| phys.qm.density-matrix | Bloch slice: pure Tr ρ² = 1, mixed |r| = 0.5 gives 0.63, centre 0.5; Tr ρ² = (1 + |r|²)/2 (asserted). |
+
+Found while rendering: the orbit speed arrows were short and lay along the ellipse (velocity is
+tangent there) — lengthened ×1.8 and offset just outside; the phase-space flow arrows were too
+small; the Hamilton–Jacobi tangent hid under its curve (lengthened, thicker); the perturbation
+exact and second-order curves were compressed and same-looking (taller scale, estimate in a
+contrasting colour, labels at the curve ends); the operator bars had no outcome labels; the
+identical-particle and density-matrix labels sat on curves/the circle edge.
+
+Fixtures: `visualFailClosed` NO_ASSET_CONCEPTS replaced wkb-approximation and s-matrix-basics with
+`eng.phonics.short-vowels` / `eng.phonics.blending-segmenting` (both checked to resolve to none).
+Figure text was kept free of words such as "term" and "field" so it does not become lesson
+vocabulary that would shadow resolver tests pinned to the perturbation-theory lesson.
+
+Validation: tsc ratchet 0 ≤ 0; vitest 800 files / 17,064 passed, 9 skipped; validate:visuals
+physics exact=77 incorrect=0; `npm run build` exit 0.

@@ -99,6 +99,12 @@ import {
   buildChemicalPotentialScene, buildFluctuationsScene, buildLandauScene, buildIsingScene, buildCriticalScene,
   buildMonteCarloScene,
 } from '@/lib/teaching/sceneGenerators/physicsCoreScenesB12'
+import {
+  buildGeneralizedCoordinatesScene, buildEulerLagrangeScene, buildCyclicCoordinatesScene, buildHamiltonianScene,
+  buildHamiltonsEquationsScene, buildPoissonBracketsScene, buildCanonicalTransformScene, buildHamiltonJacobiScene,
+  buildOperatorsScene, buildPerturbationScene, buildVariationalScene, buildWkbScene, buildIdenticalParticlesScene,
+  buildAngularMomentumAdditionScene, buildBornScene, buildSMatrixScene, buildDensityMatrixScene,
+} from '@/lib/teaching/sceneGenerators/physicsCoreScenesB13'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -512,6 +518,24 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'phys.stat.ising-model':            buildIsingScene,
   'phys.stat.phase-transitions-critical-phenomena': buildCriticalScene,
   'phys.stat.monte-carlo-basics':     buildMonteCarloScene,
+  // Batch 13 (2026-09-30). See physicsCoreScenesB13.ts.
+  'phys.mech.generalized-coordinates': buildGeneralizedCoordinatesScene,
+  'phys.mech.euler-lagrange-equation': buildEulerLagrangeScene,
+  'phys.mech.cyclic-coordinates-conservation-laws': buildCyclicCoordinatesScene,
+  'phys.mech.hamiltonian':            buildHamiltonianScene,
+  'phys.mech.hamiltons-equations':    buildHamiltonsEquationsScene,
+  'phys.mech.poisson-brackets':       buildPoissonBracketsScene,
+  'phys.mech.canonical-transformations': buildCanonicalTransformScene,
+  'phys.mech.hamilton-jacobi-equation': buildHamiltonJacobiScene,
+  'phys.qm.operators':                buildOperatorsScene,
+  'phys.qm.perturbation-theory':      buildPerturbationScene,
+  'phys.qm.variational-method':       buildVariationalScene,
+  'phys.qm.wkb-approximation':        buildWkbScene,
+  'phys.qm.identical-particles':      buildIdenticalParticlesScene,
+  'phys.qm.angular-momentum-addition': buildAngularMomentumAdditionScene,
+  'phys.qm.scattering-theory-born-approximation': buildBornScene,
+  'phys.qm.s-matrix-basics':          buildSMatrixScene,
+  'phys.qm.density-matrix':           buildDensityMatrixScene,
   'phys.wave.transverse-waves':         buildTransverseWaveScene,
   'phys.wave.interference':             buildWaveInterferenceScene,
   'phys.therm.calorimetry':             buildCalorimetryScene,

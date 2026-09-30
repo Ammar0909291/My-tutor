@@ -77,15 +77,15 @@ const HIJACK_CASES = [
 // (2026-09-30) authored both; moment-of-inertia and center-of-mass replaced
 // them until batch 3 authored those too. The stand-ins are now deliberately
 // far from the campaign frontier so the next batch does not move them again.
-// Physics batch 12 (2026-09-30) authored ising-model and monte-carlo-basics;
+// Physics batches 12-13 (2026-09-30) authored the physics stand-ins here;
 // the physics frontier is nearly closed, so the list now also carries
 // non-physics concepts that have no asset, each with its own subject.
 const NO_ASSET_CONCEPTS: ReadonlyArray<readonly [string, string]> = [
-  ['phys.qm.wkb-approximation', 'physics'],
   ['phys.mech.power', 'physics'],
   // meas.errors and escape-velocity were here until batch 7 (2026-09-30)
-  // authored both.
-  ['phys.qm.s-matrix-basics', 'physics'],
+  // authored both; wkb-approximation and s-matrix-basics until batch 13.
+  ['eng.phonics.short-vowels', 'english'],
+  ['eng.phonics.blending-segmenting', 'english'],
   ['eng.phonics.rhyming', 'english'],
   ['eng.phonics.consonants', 'english'],
 ]
