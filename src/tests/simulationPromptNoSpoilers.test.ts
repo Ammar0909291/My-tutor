@@ -99,6 +99,13 @@ describe('the give-away backstop', () => {
     expect(r.text).toContain('If you press Run')
   })
 
+  it('production run 4: a curly apostrophe does not hide the mass answer', () => {
+    const t = 'You’re right that, for a simple pendulum, the mass of the bob doesn’t change how long one swing takes. That’s why a bowling ball and a tennis ball swing together. When we say the string is inextensible, it means it does not stretch.'
+    const r = stripSimulationGiveaways(t, d, Q)
+    expect(r.text).not.toMatch(/mass of the bob/)
+    expect(r.text).toContain('does not stretch')
+  })
+
   it('does nothing without a simulation on screen', () => {
     expect(stripSimulationGiveaways(PROD_A, decisionFor('phys.wave.shm'), Q).removed).toEqual([])
     expect(stripSimulationGiveaways(PROD_A, null, Q).removed).toEqual([])

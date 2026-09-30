@@ -82,6 +82,13 @@ export interface ResolveVisualInput {
    */
   excursionReturnToConceptId?: string | null
   /**
+   * The tutor's last few messages in this lesson — the SAME lesson vocabulary
+   * the excursion decision reads (requestedConcept L1/L3), so the figure and
+   * the teaching layer cannot disagree about which concept a word names.
+   * Omitted -> behaviour unchanged.
+   */
+  recentTutorText?: string | null
+  /**
    * Whether the Teaching Engine considers an excursion open this turn.
    * `false` RELEASES a held excursion figure — when teaching has returned to
    * the lesson, the figure from the detour must not stay on screen. Omitted by
@@ -459,7 +466,7 @@ export function resolveVisual(input: ResolveVisualInput): VisualDecision {
   // is null on purpose, and without context "every term" in a physics lesson
   // resolved to algebra's Term and drew its coordinate-plane card (A/B
   // experiment trace, 2026-09-25). It is never used as a fallback figure.
-  const rawTarget = resolveVisualTarget(input.message, input.lessonConceptId, input.subject, input.excursionReturnToConceptId ?? null)
+  const rawTarget = resolveVisualTarget(input.message, input.lessonConceptId, input.subject, input.excursionReturnToConceptId ?? null, input.recentTutorText ?? null)
   // `resolveVisualTarget`'s step 2 (a `'learner-request'` match) is guarded by
   // `requestTargetsSomethingElse` only on the FALLBACK path — a direct KG-title
   // match from the learner's raw text has no protection at all. A learner's

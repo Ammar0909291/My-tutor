@@ -20,6 +20,7 @@ import { resolveRequestedConceptId, conceptIndex } from '@/lib/teaching/concept/
 import { isTopicQuestion } from './session'
 import { extractRequestedTopic, isMediumWord, isPureVisualRepeatRequest } from './requestedTopic'
 import { contentWords } from './visualEngine'
+import { buildCanonicalScene, CONCEPT_SCENE_OVERRIDES } from './conceptSceneParams'
 import type { ArchetypeContext } from './archetypes'
 
 export {
@@ -33,6 +34,19 @@ export interface VisualTarget extends ArchetypeContext {
   excursion: boolean
   /** `learner-request` | `lesson-concept` — logged for auditability. */
   origin: 'learner-request' | 'lesson-concept'
+}
+
+/** Content words of the concept's own AUTHORED scene (CONCEPT_SCENES) labels. */
+function authoredFigureWords(conceptId: string): Set<string> {
+  try {
+    if (!CONCEPT_SCENE_OVERRIDES.includes(conceptId)) return new Set()
+    const scene = buildCanonicalScene(null, conceptId)
+    const texts = (scene?.steps ?? []).flatMap((st) =>
+      (st.objects as Array<{ text?: unknown }>).map((o) => (typeof o.text === 'string' ? o.text : '')))
+    return contentWords(texts.join(' '), true)
+  } catch {
+    return new Set()
+  }
 }
 
 function toContext(conceptId: string): ArchetypeContext | null {
@@ -60,9 +74,11 @@ export function resolveVisualTarget(
   preferredSubject?: string | null,
   /** Disambiguation context only (see resolveRequestedConceptId). Never drawn. */
   contextConceptId?: string | null,
+  /** Lesson vocabulary from the tutor's recent messages (requestedConcept L1/L3). */
+  recentTutorText?: string | null,
 ): VisualTarget | null {
   // 1. What did the learner actually name?
-  const requested = resolveRequestedConceptId(message, lessonConceptId, preferredSubject, contextConceptId)
+  const requested = resolveRequestedConceptId(message, lessonConceptId, preferredSubject, contextConceptId, recentTutorText)
 
   // 2. The learner's own words win whenever they named something real.
   if (requested) {
@@ -184,6 +200,13 @@ export function requestTargetsSomethingElse(message: string, target: VisualTarge
 
   const drawn = contentWords(`${target.title} ${target.description ?? ''}`, true)
   for (const word of named) if (drawn.has(word)) return false
+  // The lesson's own AUTHORED figure counts too: if it draws and labels what
+  // the learner named, it is about what they asked. Measured (real-learner
+  // run 2, 2026-09-30, phys.opt.refraction): "what is the normal line?" was
+  // declined as off-topic because the one-line KG description never says
+  // "normal" — while the lesson's refraction figure labels exactly that line.
+  const labelled = authoredFigureWords(target.conceptId)
+  for (const word of named) if (labelled.has(word)) return false
 
   // IS THIS EVEN OFF-CURRICULUM?
   //

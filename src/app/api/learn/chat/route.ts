@@ -3717,6 +3717,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 lessonConceptId: unresolvedTopicExcursion ? null : teachingTargetConceptId,
                 excursionReturnToConceptId: excursionDecision.returnToConceptId,
                 excursionActive: excursionDecision.state.active,
+                // The same lesson vocabulary the excursion decision read, so the
+                // figure cannot name a different concept than the teaching layer.
+                recentTutorText: (await import('@/lib/teaching/remediationOutputContract'))
+                  .recentAssistantTexts(learnSession.messages, MessageRole.ASSISTANT, 3),
                 // The excursion just opened or switched onto a topic the KG
                 // cannot name — release a held figure even though the
                 // learner's own words didn't read as an EXPLICIT request

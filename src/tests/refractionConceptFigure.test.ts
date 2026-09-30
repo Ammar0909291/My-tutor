@@ -42,3 +42,23 @@ describe('the refraction figure', () => {
     expect(refracted.to![1]).toBeLessThan(0) // into the water, below the boundary
   })
 })
+
+describe('the figure follows the lesson, not a shared word (production 2026-09-30, batch 4 recheck)', () => {
+  const OPENING = 'The mental picture is this: a straight line (the light ray) travels in one material, hits the surface, and continues as another straight line.'
+  const ask = (message: string, recentTutorText: string | null, learnerRequest: 'diagram' | null = null) =>
+    resolveVisual({ message, lessonConceptId: 'phys.opt.refraction', learnerRequest, subject: 'physics', recentTutorText } as Parameters<typeof resolveVisual>[0])
+
+  it('"i want see light ray…" gets the refraction figure when the lesson has used "ray"', () => {
+    const d = ask('i want see light ray and water and normal line. can you show?', OPENING, 'diagram')
+    expect((d.payload as { sceneSpec?: { id?: string } }).sceneSpec?.id).toBe('phys-refraction')
+  })
+
+  it('"what is the normal line?" is on-topic: the lesson figure labels the normal', () => {
+    const d = ask('straw look broken at water. what is the normal line?', null)
+    expect((d.payload as { sceneSpec?: { id?: string } }).sceneSpec?.id).toBe('phys-refraction')
+  })
+
+  it('a genuinely off-curriculum question still gets no lesson figure', () => {
+    expect(ask('what is kubernetes?', null).graphical).toBe(false)
+  })
+})

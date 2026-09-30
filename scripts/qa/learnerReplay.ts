@@ -65,7 +65,7 @@ const SCENARIOS: Scenario[] = [
     id: 'pendulum-no-spoiler',
     subject: 'physics', slug: 'phys.wave.pendulum',
     steps: [
-      { send: 'i think every swing take same time? not sure. what mean inextensible?', check: { offTopic: ['mass does not', 'does not depend on the mass', 'independent of the mass', 'mass of the bob does not'] } },
+      { send: 'i think every swing take same time? not sure. what mean inextensible?', check: { offTopic: ['mass does not', 'does not depend on the mass', 'independent of the mass', 'mass of the bob does', 'mass of the bob doesn', 'bob’s mass', "bob's mass"] } },
     ],
   },
   {

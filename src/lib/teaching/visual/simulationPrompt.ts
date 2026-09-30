@@ -75,7 +75,11 @@ export function stripSimulationGiveaways(
   const lines = text.split('\n').map((line) => {
     const sentences = line.split(/(?<=[.!?])\s+/)
     const kept = sentences.filter((s) => {
-      if (patterns.some((re) => re.test(s))) { removed.push(s.trim()); return false }
+      // Curly apostrophes normalised for matching only: "doesn’t" must match
+      // "doesn't" (production 2026-09-30: "the mass of the bob doesn’t change
+      // how long one swing takes" passed the patterns).
+      const probe = s.replace(/[\u2018\u2019\u02BC]/g, "'")
+      if (patterns.some((re) => re.test(probe))) { removed.push(s.trim()); return false }
       return true
     })
     return kept.join(' ')

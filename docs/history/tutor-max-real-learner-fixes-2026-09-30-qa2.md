@@ -83,3 +83,27 @@ Not fixed in this batch (next):
 - 10 the physics error;
 - 11 language level;
 - 12 text/MCQ mismatch.
+
+## Batch 4 checked in production (deployment of f0c149ef), and batch 5
+
+Replay, 7 scenarios, disposable account:
+- PASS: newton (wrong answer explained), bohr-stop-side-topic (detour closed on "stop chair
+  please"; the reply is a Bohr question), gas-laws-practice-not-stub (a real practice question),
+  kirchhoff.
+- **refraction-light-ray FAILED (FIGURE).** No detour any more, but no figure either. Log: the
+  VISUAL resolver calls `resolveRequestedConceptId` on its own, without the lesson vocabulary.
+  So for the figure, "light ray" still meant Nature of Light, and "what is the normal line?" was
+  "request-names-an-uncatalogued-topic".
+- **pendulum spoiler got through, and the replay check missed it.** "the mass of the bob
+  doesn’t change how long one swing takes": a curly apostrophe (’) that the patterns (written
+  with ') did not match.
+
+Batch 5 fixes:
+- `ResolveVisualInput.recentTutorText` / `resolveVisualTarget(..., recentTutorText)`. The route
+  passes the same last-three-tutor-messages vocabulary as the excursion decision, so the figure
+  and the teaching layer cannot name different concepts.
+- `requestTargetsSomethingElse` also counts the labels of the lesson's own AUTHORED figure. A
+  question about something the lesson's figure draws ("the normal") is on-topic. Off-curriculum
+  questions ("kubernetes", "isotopes" in refraction) still get no figure.
+- The spoiler filter normalises ‘ ’ ʼ to ' before matching. The replay check now looks for
+  "mass of the bob does/doesn" and "bob’s mass".
