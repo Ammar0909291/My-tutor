@@ -1163,3 +1163,8 @@ Run on the owner's account (credentials supplied in chat, used as env vars for t
   fire here, because CLOSING withholds every authored question. The same wrong tap on the same lesson did NOT close the
   episode in the 19:09 run on 76916f3b. Why is not established: the failure signal does not read the learner-move
   reading, so 0151eb40's answer-detector change is not the cause.
+- **Recheck on a second owner account** (the saturated physics account, same deployment 0151eb40): WKB held the
+  authored figure on all four figure questions and reached mastery at turn 11, with the wrong answer explained.
+  phys.meas.units: the wrong tap "4.7 × 10⁶ F" was explained ("µ stands for micro … 10⁻⁶"), the next authored question
+  came in the same reply, and mastery was reached at turn 8 with no spiral close. The deadlock above is not
+  universal; it reproduced once, on the account where this was a genuine first lesson. Its exact trigger is still open.
