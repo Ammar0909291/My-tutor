@@ -27,7 +27,10 @@ const figureFor = (conceptId: string) =>
 describe('the concept, not the generator kind, decides the figure', () => {
   it('reflection draws a mirror, not a lens', () => {
     const scene = buildCanonicalScene('ray_optics', 'phys.opt.reflection')
-    expect(scene?.title.toLowerCase()).toContain('mirror')
+    // Since 2026-09-30 its own figure: a flat mirror, the normal, equal angles.
+    const labels = (scene?.steps ?? []).flatMap((s) => s.objects.map((o) => (o as { text?: string }).text ?? '')).join(' ').toLowerCase()
+    expect(labels).toContain('mirror')
+    expect(labels).toContain('normal')
     expect(scene?.title.toLowerCase()).not.toContain('lens')
     // …and refraction draws a boundary and a bent ray, not a lens (its own
     // authored figure since 2026-09-30).
@@ -184,12 +187,11 @@ describe('incidental vocabulary never hijacks the figure', () => {
     // The invariant here is CONCEPT TARGETING: the physics word must reach the
     // physics concept, not math.geom.reflection. That is unchanged.
     expect(d.conceptId).toBe('phys.opt.reflection')
-    // Its FIGURE was retired in M3-B/B1: the concave-mirror image-construction
-    // diagram contains no incident ray, no normal and no equal angles, so it
-    // cannot teach "Laws of Reflection". Targeting the right concept and having
-    // no faithful figure for it are now separate facts, and both are asserted.
-    expect(d.graphical).toBe(false)
-    expect(d.provenance).toBe('no-figure:retired-binding')
+    // Its old FIGURE was retired in M3-B/B1 (a concave-mirror image diagram with
+    // no incident ray, normal or equal angles). Since 2026-09-30 it owns exactly
+    // that figure, so the right concept now also gets a faithful picture.
+    expect(d.graphical).toBe(true)
+    expect((d.payload as { sceneSpec?: { id?: string } }).sceneSpec?.id).toBe('phys-reflection')
   })
 
   it('the lesson topic under a shorter name stays on the lesson', () => {
@@ -232,8 +234,9 @@ describe('PRODUCTION 2026-08-08 — a physics word must get its physics concept'
     // is no figure at all rather than a mirror diagram, which is stronger: the
     // learner cannot be shown any figure for a concept we cannot draw faithfully.
     expect(d.conceptId).not.toBe('math.geom.reflection')
-    expect(d.payload).toBeNull()
-    expect(d.graphical).toBe(false)
+    // Since 2026-09-30 the answer is the concept's own faithful figure: a ray,
+    // the surface and the normal — exactly what the tutor described.
+    expect((d.payload as { sceneSpec?: { id?: string } } | null)?.sceneSpec?.id).toBe('phys-reflection')
   })
 
   it('the whole matrix resolves inside physics from an unrelated lesson', () => {

@@ -281,7 +281,9 @@ describe('nothing outside the pilot changed', () => {
   })
 
   it('retired bindings are still retired', () => {
-    expect(ask('phys.opt.reflection').graphical).toBe(false)
+    // phys.opt.reflection was the example here until 2026-09-30, when it got its own
+    // faithful figure; phys.em.potentiometer is still retired.
+    expect(ask('phys.em.potentiometer').graphical).toBe(false)
     // bio.cell.apoptosis was retired until the 2026-09-24 Biology cell visual
     // replacement gave it its own faithful Tier 0 scene — see
     // bioCellVisualReplacement.test.ts; chem.bond.ionic-bonding stands in as

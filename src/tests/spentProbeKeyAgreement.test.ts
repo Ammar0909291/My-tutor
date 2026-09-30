@@ -313,7 +313,9 @@ describe('D1 has TWO serving paths and both must honour the ledger', () => {
    * (`hasServedExplanation`); the probe attached alongside had nothing.
    */
   it('assembleLesson forwards its options to probe selection', () => {
-    expect(SELECTOR).toMatch(/const probe = await findBestProbe\(state, options\)/)
+    // (the result is named `found` since 2026-09-30, when a follow-up that
+    // depends on an earlier item is filtered out before use; the call is unchanged)
+    expect(SELECTOR).toMatch(/= await findBestProbe\(state, options\)/)
   })
 
   it('the route now passes the same exclusion into assembleLesson', () => {

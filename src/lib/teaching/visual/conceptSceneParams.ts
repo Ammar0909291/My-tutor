@@ -38,6 +38,11 @@ import {
   buildTotalInternalReflectionScene, buildRefractionScene, buildTransverseWaveScene,
   buildViscosityScene, buildWaveInterferenceScene,
 } from '@/lib/teaching/sceneGenerators/physicsPilot'
+import {
+  buildReflectionScene, buildCoulombsLawScene, buildElectricFieldScene, buildMagneticFieldScene,
+  buildStandingWavesScene, buildDopplerScene, buildConservationOfEnergyScene, buildHeatTransferScene,
+  buildBuoyancyScene, buildHookesLawScene,
+} from '@/lib/teaching/sceneGenerators/physicsCoreScenes'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -172,8 +177,10 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   // torque τ = pE sinθ, built specifically for phys.em.electric-dipole.
   'phys.em.electric-dipole': () => fromRegistry('electric_dipole'),
 
-  // Reflection and mirrors are mirror problems, not lens problems.
-  'phys.opt.reflection': () => buildRayOpticsScene({ opticsType: 'concave_mirror', objectDistance: 30, focalLength: 10, objectHeight: 5 }),
+  // Mirrors are mirror problems, not lens problems. Reflection (the LAW, not
+  // image formation) owns its own figure below — its concave-mirror image
+  // diagram was retired for showing none of incident ray, normal, equal angles.
+  'phys.opt.reflection': buildReflectionScene,
   'phys.opt.mirrors':    () => buildRayOpticsScene({ opticsType: 'concave_mirror', objectDistance: 30, focalLength: 10, objectHeight: 5 }),
 
   // The inelastic concept must show the inelastic case — the carts stick.
@@ -283,6 +290,20 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
 
   'phys.opt.total-internal-reflection': buildTotalInternalReflectionScene,
   'phys.opt.refraction':                buildRefractionScene,
+
+  // ── Physics visual gap campaign, batch 1 (2026-09-30) ─────────────────────
+  // A local audit found 163/238 physics concepts with no deterministic figure;
+  // these are among the most-taught (phys.opt.reflection is registered above).
+  // See physicsCoreScenes.ts.
+  'phys.em.coulombs-law':               buildCoulombsLawScene,
+  'phys.em.electric-field':             buildElectricFieldScene,
+  'phys.em.magnetic-field':             buildMagneticFieldScene,
+  'phys.wave.standing-waves':           buildStandingWavesScene,
+  'phys.wave.doppler-effect':           buildDopplerScene,
+  'phys.mech.conservation-of-energy':   buildConservationOfEnergyScene,
+  'phys.therm.heat-transfer':           buildHeatTransferScene,
+  'phys.mech.buoyancy':                 buildBuoyancyScene,
+  'phys.mech.hookes-law':               buildHookesLawScene,
   'phys.wave.transverse-waves':         buildTransverseWaveScene,
   'phys.wave.interference':             buildWaveInterferenceScene,
   'phys.therm.calorimetry':             buildCalorimetryScene,

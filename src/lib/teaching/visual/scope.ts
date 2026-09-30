@@ -94,7 +94,8 @@ export const INSUFFICIENT_FOR_CONCEPT: ReadonlySet<string> = new Set([
   // criticism of its predecessor.
   'phys.mech.angular-momentum',      // centripetal-force card; L = r × p is not drawn
   'phys.mech.conservation-of-angular-momentum', // no before/after spin-rate change
-  'phys.mech.hookes-law',            // no spring, no extension-vs-force relation
+  // REMOVED 2026-09-30: 'phys.mech.hookes-law' ("no spring, no extension-vs-force
+  // relation") now owns an authored spring / x / F = −kx figure (physicsCoreScenes.ts).
   'phys.therm.ideal-gas-law',        // empty x-y plane where a P-V diagram is required
   'phys.therm.thermodynamic-processes', // empty x-y plane; no labelled P-V paths
   'phys.therm.carnot-cycle',         // empty x-y plane; no closed four-stage cycle

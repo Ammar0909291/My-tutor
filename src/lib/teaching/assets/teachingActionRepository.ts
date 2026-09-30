@@ -21,6 +21,7 @@ import { findBestExplanation, captureGeneratedExplanation, type ExplanationMatch
 import { decideCaptureAction, type LineageAsset, type CaptureOutcome } from './versioning'
 import { hashContent } from './similarity'
 import { probeToMcq } from '../gateAssessment'
+import { stripAuthoringLabel, dependsOnEarlierItem } from '../gateProbeContract'
 import type { TutorMCQ } from '../mcq'
 
 export interface ProbeMatch {
@@ -329,7 +330,10 @@ export async function assembleLesson(state: StudentState, options: MatchOptions 
   const usedAssetIds = [explanation.assetId]
   let text = explanation.content
 
-  const probe = await findBestProbe(state, options)
+  const found = await findBestProbe(state, options)
+  // A follow-up written for an earlier item ("For the glass slab above …") is
+  // not served on its own — the turn is complete with the explanation alone.
+  const probe = found && dependsOnEarlierItem(found.stem) ? null : found
   let probeMcq: TutorMCQ | null = null
   if (probe) {
     usedAssetIds.push(probe.assetId)
@@ -351,11 +355,15 @@ export async function assembleLesson(state: StudentState, options: MatchOptions 
 }
 
 function formatProbeAsFollowUp(probe: ProbeMatch): string {
-  if (!probe.choices || probe.choices.length === 0) return `\n\n**Quick check:** ${probe.stem}`
+  // The same presentation-only label strip probeToMcq applies: this prose path
+  // served "RETRIEVAL PRACTICE (P-3b style, lateral shift): …" verbatim
+  // (production, 2026-09-30).
+  const stem = stripAuthoringLabel(probe.stem)
+  if (!probe.choices || probe.choices.length === 0) return `\n\n**Quick check:** ${stem}`
   const options = probe.choices
     .map((c, i) => `${String.fromCharCode(65 + i)}. ${c.text}`)
     .join('\n')
-  return `\n\n**Quick check:** ${probe.stem}\n\n${options}`
+  return `\n\n**Quick check:** ${stem}\n\n${options}`
 }
 
 export { findBestExplanation, captureGeneratedExplanation, type ExplanationMatch }

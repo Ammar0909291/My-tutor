@@ -255,9 +255,11 @@ describe('the four new builders produce the geometry their own parameters descri
 })
 
 describe('non-regression: everything this campaign must not touch', () => {
-  it('RETIRED_VISUAL_BINDINGS now holds exactly the 25 non-biology-cell entries', () => {
+  it('RETIRED_VISUAL_BINDINGS now holds exactly the 24 non-biology-cell entries', () => {
     const remaining = Object.keys(RETIRED_VISUAL_BINDINGS)
-    expect(remaining).toHaveLength(25)
+    // 25 -> 24 (2026-09-30): phys.opt.reflection was removed from the register once it owned
+    // a faithful incident/normal/equal-angles figure (physicsCoreScenesBatch1.test.ts).
+    expect(remaining).toHaveLength(24)
     for (const id of THE_18) expect(remaining).not.toContain(id)
   })
 

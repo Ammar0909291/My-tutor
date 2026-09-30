@@ -343,7 +343,10 @@ describe('the repair path is the general one, not a special case', () => {
     // dnaReplicationVisual.test.ts.
     // 47 -> 46 (2026-09-30): a REPAIR. phys.opt.refraction owns an authored
     // boundary/normal/angles figure (physicsPilot.ts buildRefractionScene).
-    expect(INSUFFICIENT_FOR_CONCEPT.size).toBe(46)
+    // 46 -> 45 (2026-09-30): a REPAIR. phys.mech.hookes-law owns an authored
+    // spring / x / F = −kx figure (physicsCoreScenes.ts buildHookesLawScene).
+    expect(INSUFFICIENT_FOR_CONCEPT.size).toBe(45)
+    expect(INSUFFICIENT_FOR_CONCEPT.has('phys.mech.hookes-law')).toBe(false)
     expect(INSUFFICIENT_FOR_CONCEPT.has('phys.opt.refraction')).toBe(false)
     expect(INSUFFICIENT_FOR_CONCEPT.has('bio.mol.dna-replication')).toBe(false)
     expect([...INSUFFICIENT_FOR_CONCEPT].some((id) => id.startsWith('chem.'))).toBe(true)

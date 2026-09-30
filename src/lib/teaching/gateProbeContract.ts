@@ -200,7 +200,26 @@ function dropCompetingQuestion(head: string, canonicalQuestion: string): string 
  * changes nothing about which probe is selected, how it is graded, or what is
  * stored — only what is rendered.
  */
-const AUTHORING_LABELS = /^\s*(DIAGNOSTIC|FORMATIVE|SUMMATIVE|CHECKPOINT|PROBE|PRACTICE|MISCONCEPTION[- ]PROBE)\s*(\([^)]*\)\s*)?:\s*/i
+// RETRIEVAL PRACTICE / TRANSFER / MASTERY GATE added 2026-09-30: 384 authored
+// stems carry them (counted across src/lib/teaching/assets), and a learner met
+// "RETRIEVAL PRACTICE (P-3b style, lateral shift): …" verbatim in production.
+const AUTHORING_LABELS = /^\s*(DIAGNOSTIC|FORMATIVE|SUMMATIVE|CHECKPOINT|PROBE|RETRIEVAL[- ]PRACTICE|PRACTICE|TRANSFER|MASTERY[- ]GATE|MISCONCEPTION[- ]PROBE)\s*(\([^)]*\)\s*)?:\s*/i
+
+/** A trailing grader's note, from "Pass criterion" to the end of the stem. */
+const GRADING_NOTE = /\s*\bPass criterion\b[\s\S]*$/
+
+/**
+ * A stem written as the follow-up to an EARLIER item ("For the glass slab
+ * above (…)", "For the two-loop circuit above, …"). Served on its own it points
+ * at something the learner never saw. Narrow on purpose: "the row above it"
+ * and "above the threshold frequency" are ordinary content, not a reference.
+ */
+const EARLIER_ITEM_REF = /\b(?:for|from|using|with|of|in)\s+(?:the|this|that)\s+[\p{L}\d -]{1,30}?\s+above\b(?!\s+it\b)/iu
+
+/** Does this authored stem only make sense after a previous item? */
+export function dependsOnEarlierItem(stem: string): boolean {
+  return EARLIER_ITEM_REF.test(stem ?? '')
+}
 
 /** Remove a leading authoring label from a learner-facing stem. Idempotent. */
 export function stripAuthoringLabel(stem: string): string {
@@ -210,5 +229,9 @@ export function stripAuthoringLabel(stem: string): string {
   for (let i = 0; i < 3 && AUTHORING_LABELS.test(out); i++) {
     out = out.replace(AUTHORING_LABELS, '')
   }
+  // The grading note some stems end with — "Pass criterion (5-probe bank, 4/5
+  // at threshold 0.80): all four parts correct." (125 authored stems, 2026-09-30)
+  // — is metadata for the grader, not part of the question.
+  out = out.replace(GRADING_NOTE, '')
   return out.trim() || stem.trim()
 }

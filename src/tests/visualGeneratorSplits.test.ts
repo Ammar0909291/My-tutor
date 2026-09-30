@@ -186,7 +186,8 @@ describe('B2 changed nothing else', () => {
 
   it('retired bindings stayed retired', () => {
     expect(ask('phys.mech.keplers-laws').graphical).toBe(false)
-    expect(ask('phys.opt.reflection').graphical).toBe(false)
+    // (phys.opt.reflection left the register 2026-09-30 with its own faithful figure.)
+    expect(ask('phys.em.potentiometer').graphical).toBe(false)
   })
 })
 

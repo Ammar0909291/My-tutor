@@ -64,10 +64,13 @@ describe('retired -> replaced, with no retirement row removed', () => {
 })
 
 describe('a retired CONCEPT-AUTHORED figure stays retired', () => {
-  it('phys.opt.reflection: its own concave-mirror scene is the retired asset, so it is still refused', () => {
+  // phys.opt.reflection was this block's case until 2026-09-30: its retired
+  // asset was its own concave-mirror scene. It now owns a faithful figure and
+  // left the register (physicsCoreScenesBatch1.test.ts pins the new figure).
+  it('phys.opt.reflection no longer serves the retired concave-mirror scene', () => {
     const d = resolve('phys.opt.reflection', true)
-    expect(d.graphical).toBe(false)
-    expect(d.provenance).toBe('no-figure:retired-binding')
+    expect((d.payload as { sceneSpec?: { id?: string } }).sceneSpec?.id).toBe('phys-reflection')
+    expect(JSON.stringify(d.payload)).not.toMatch(/concave/)
   })
 
   it('every other retired concept is unaffected by one concept\'s replacement', () => {

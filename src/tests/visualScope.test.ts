@@ -159,7 +159,7 @@ describe('the three acceptable states, and nothing else', () => {
     // visual replacement gave it its own faithful Tier 0 scene — see
     // bioCellVisualReplacement.test.ts; chem.bond.ionic-bonding is still
     // retired and stands in its place as this test's biology-adjacent example.)
-    for (const id of ['chem.bond.ionic-bonding', 'cs.found.number-systems', 'phys.opt.reflection']) {
+    for (const id of ['chem.bond.ionic-bonding', 'cs.found.number-systems', 'phys.em.potentiometer']) {
       expect(ask(id).graphical, id).toBe(false)
     }
   })

@@ -53,10 +53,12 @@ export const RETIRED_VISUAL_BINDINGS: Readonly<Record<string, string>> = {
     'the law it was attached to.',
 
   // ── physics: optics ─────────────────────────────────────────────────────
-  'phys.opt.reflection':
-    'Rendered a concave-mirror IMAGE-FORMATION diagram, byte-identical to the one for ' +
-    'phys.opt.mirrors. "Reflection and Laws of Reflection" requires an incident ray, a ' +
-    'normal and equal angles; the payload contains none of the three.',
+  // REMOVED 2026-09-30: 'phys.opt.reflection' ("Rendered a concave-mirror
+  // IMAGE-FORMATION diagram … requires an incident ray, a normal and equal
+  // angles; the payload contains none of the three"). It now owns exactly that
+  // figure (physicsCoreScenes.ts buildReflectionScene), so — as with the 18
+  // bio.cell rows removed 2026-09-24 — the verdict no longer describes what the
+  // concept renders. Coverage: physicsCoreScenesBatch1.test.ts.
 
   // ── physics: electricity ────────────────────────────────────────────────
   // All seven rendered the same "battery, wires, switch, bulb" card, which does
@@ -271,9 +273,6 @@ export function retirementReason(conceptId: string): string | null {
 export const RETIRED_ASSET_FINGERPRINTS: Readonly<Record<string, readonly string[]>> = {
   'phys.mech.rolling-motion': ['fdc3ee668'], // card:three_circular_motion
   'phys.mech.keplers-laws': ['f3ccc74b7', 'f1f29e6b2'], // scene:gravitation-5.97e+24-7000000 + card:force_diagram
-  // ffdb8537f: the same concave-mirror image diagram after principal rays were added
-  // (2026-09-29). Still image formation, still no normal or equal angles, so still retired.
-  'phys.opt.reflection': ['fb50d48ca', 'ffdb8537f', 'f1f29e6b2'], // scene:ray-optics-concave_mirror-30-10 (before + after rays) + card:force_diagram
   'phys.em.wheatstone-bridge': ['fcd558030'], // card:circuit_diagram
   'phys.em.potentiometer': ['fcd558030'], // card:circuit_diagram
   'phys.em.rc-circuits': ['fcd558030'], // card:circuit_diagram

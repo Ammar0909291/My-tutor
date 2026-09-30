@@ -206,7 +206,9 @@ const CONCEPT_VISUALS: Record<string, VisualEntry> = {
   'phys.meas.vector-products':        { primary: 'three_vector_visualization', all: ['three_vector_visualization'] },
 
   // Physics — Optics
-  'phys.opt.reflection':              { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'ray_optics' },
+  // No sceneGenerator: ray_optics draws image formation, not the law. The concept's
+  // own incident/normal/equal-angles figure is CONCEPT_SCENES['phys.opt.reflection'].
+  'phys.opt.reflection':              { primary: 'force_diagram', all: ['force_diagram'] },
   // No sceneGenerator: the shared ray_optics kind draws a LENS. The concept's own
   // boundary/normal/angles figure is CONCEPT_SCENES['phys.opt.refraction'] (2026-09-30).
   'phys.opt.refraction':              { primary: 'force_diagram', all: ['force_diagram'] },

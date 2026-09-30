@@ -24,7 +24,7 @@ const ask = (conceptId: string, message = 'explain with diagram') =>
   resolveVisual({ message, lessonConceptId: conceptId, learnerRequest: 'diagram' })
 
 describe('the register itself', () => {
-  it('covers exactly the 25 audited concepts', () => {
+  it('covers exactly the 24 audited concepts', () => {
     // 29 from the M3-A audit + 8 from the visual semantic moat sweep, which
     // ran the resolver over all 238 physics and 186 chemistry concepts and
     // read all 105 bindings that render.
@@ -45,7 +45,9 @@ describe('the register itself', () => {
     // suppressions — exactly the documented lifecycle in retired.ts's own
     // top-of-file comment ("a later milestone can replace an entry with a
     // faithful figure"). 43 - 18 = 25.
-    expect(RETIRED).toHaveLength(25)
+    // 25 -> 24 (2026-09-30): phys.opt.reflection was removed from the register once it owned
+    // a faithful incident/normal/equal-angles figure (physicsCoreScenesBatch1.test.ts).
+    expect(RETIRED).toHaveLength(24)
   })
 
   it('every retired id is a real KG concept — a typo would silently retire nothing', () => {
@@ -92,7 +94,7 @@ describe('every retired concept resolves to NO FIGURE', () => {
     // The register sits ahead of every tier, so retirement survives the curated
     // row, the domain-prefix rule AND the scene generator. These three cover one
     // retired concept from each of those sources.
-    for (const id of ['phys.em.lc-circuits', 'chem.bond.ionic-bonding', 'phys.mech.keplers-laws', 'phys.opt.reflection']) {
+    for (const id of ['phys.em.lc-circuits', 'chem.bond.ionic-bonding', 'phys.mech.keplers-laws', 'phys.em.potentiometer']) {
       expect(ask(id).graphical, id).toBe(false)
     }
   })
@@ -100,9 +102,11 @@ describe('every retired concept resolves to NO FIGURE', () => {
   it('a retired concept stays retired however the learner phrases the request', () => {
     for (const message of [
       'draw it', 'show me a diagram', 'visualise this', 'can I see a picture',
-      'explain differently with a ray diagram and a mirror',
+      'explain differently with a circuit diagram',
     ]) {
-      expect(ask('phys.opt.reflection', message).graphical, message).toBe(false)
+      // phys.opt.reflection was this test's example until it was given its own
+      // faithful figure (2026-09-30); phys.em.potentiometer is still retired.
+      expect(ask('phys.em.potentiometer', message).graphical, message).toBe(false)
     }
   })
 })

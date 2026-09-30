@@ -35,6 +35,7 @@ log.
 | `learner-intent-interpreter-ab-experiment.md` | The 2026-09-25 AI learner-intent interpreter A/B experiment (three live 6×2 runs): design, results, the deterministic fixes it surfaced, cleanup. FINAL: abandoned for production, interpreter removed 2026-09-26, deterministic path retained (A 8/12 → 10/12 → 12/12 first ask). |
 | `tutor-max-real-learner-fixes-2026-09-29.md` | Real-learner QA run 1 (5 physics lessons) and the fixes it led to: topic hijack, bare "Not quite", figure completeness, stored text ignoring the learner, picture/practice card, simulation spoilers (prompt block + give-away backstop), lens rays. Also `scripts/qa/learnerReplay.ts`. |
 | `tutor-max-real-learner-fixes-2026-09-30-qa2.md` | Real-learner QA run 2 (refraction, circular motion, gas laws, Bohr model): ratings and 12 defects, 5 still open from run 1. |
+| `physics-visual-gap-campaign.md` | Physics visual audit (238 concepts: 43 own figure / 32 general / 163 none), batch 1 of authored figures (reflection, Coulomb, E-field, B-field, standing waves, Doppler, energy conservation, heat transfer, buoyancy, Hooke), the authoring-label leak fix, and the queue for later batches. |
 
 ## Live pointers (not history — check these first for CURRENT state)
 - `/CLAUDE.md` — live rules.
