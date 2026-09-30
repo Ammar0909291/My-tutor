@@ -107,3 +107,23 @@ Batch 5 fixes:
   questions ("kubernetes", "isotopes" in refraction) still get no figure.
 - The spoiler filter normalises ‘ ’ ʼ to ' before matching. The replay check now looks for
   "mass of the bob does/doesn" and "bob’s mass".
+
+## Batch 5 checked in production (deployment of b1033a88), and batch 6
+
+Replay: newton, pendulum (no spoiler this time), bohr, gas-laws and kirchhoff all PASS.
+refraction-light-ray still FAILED (FIGURE). The log showed a figure WAS served, but a generated
+"normal line" topic figure, not the refraction figure. Cause: the route's excursion check
+(`namedTopicUnknownTo` with a taughtText of KG title + description + last two tutor replies)
+read "normal line" as an unknown topic and opened an unresolved-topic detour. On such a detour
+the visual layer is given no lesson concept by design.
+
+Batch 6: `authoredFigureLabelText` (resolveVisualTarget.ts) is shared by both layers. The route
+adds the lesson figure's labels to taughtText, so a word the lesson's own figure labels is the
+lesson's term in the teaching layer too. learnerMove.ts's own call is untouched (closed by the
+earlier owner decision).
+
+Egress (owner, 2026-09-30: must stay under 1 GB). None of batches 4–6 adds a database read:
+- the lesson vocabulary reuses `learnSession.messages`, already loaded;
+- the figure labels are built in memory from code.
+The stub repair adds a model call, not database egress. From now on, QA re-runs only the
+scenario a fix targets, not the whole replay, to keep test traffic small.

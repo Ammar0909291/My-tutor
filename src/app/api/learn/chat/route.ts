@@ -2804,11 +2804,17 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             .slice(0, 2)
             .map((m) => m.content.replace(/<!--[\s\S]*?-->/g, ' ').slice(0, 4000))
             .join(' ')
+          // …and what the lesson's own authored figure labels (2026-09-30):
+          // "what is the normal line?" in refraction opened a topic detour
+          // because neither the KG sentence nor the last replies said
+          // "normal", while the lesson figure labels exactly that line.
+          const { authoredFigureLabelText } = await import('@/lib/teaching/visual/resolveVisualTarget')
           const taughtText = [
             lessonNode?.title ?? '',
             lessonNode?.description ?? '',
             activeTopic,
             recentTutorText,
+            authoredFigureLabelText(lessonNode ? excursionLessonConceptId : null),
           ].join(' ')
           return namedTopicUnknownTo(learnerAuthoredMessage, taughtText)?.title ?? null
         })()

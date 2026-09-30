@@ -36,17 +36,24 @@ export interface VisualTarget extends ArchetypeContext {
   origin: 'learner-request' | 'lesson-concept'
 }
 
-/** Content words of the concept's own AUTHORED scene (CONCEPT_SCENES) labels. */
-function authoredFigureWords(conceptId: string): Set<string> {
+/**
+ * The label text of the concept's own AUTHORED scene (CONCEPT_SCENES), or ''.
+ * Shared by the visual layer (below) and the route's excursion check, so both
+ * agree that a word the lesson's own figure labels is the lesson's term.
+ */
+export function authoredFigureLabelText(conceptId: string | null | undefined): string {
   try {
-    if (!CONCEPT_SCENE_OVERRIDES.includes(conceptId)) return new Set()
+    if (!conceptId || !CONCEPT_SCENE_OVERRIDES.includes(conceptId)) return ''
     const scene = buildCanonicalScene(null, conceptId)
-    const texts = (scene?.steps ?? []).flatMap((st) =>
-      (st.objects as Array<{ text?: unknown }>).map((o) => (typeof o.text === 'string' ? o.text : '')))
-    return contentWords(texts.join(' '), true)
+    return (scene?.steps ?? []).flatMap((st) =>
+      (st.objects as Array<{ text?: unknown }>).map((o) => (typeof o.text === 'string' ? o.text : ''))).join(' ')
   } catch {
-    return new Set()
+    return ''
   }
+}
+
+function authoredFigureWords(conceptId: string): Set<string> {
+  return contentWords(authoredFigureLabelText(conceptId), true)
 }
 
 function toContext(conceptId: string): ArchetypeContext | null {

@@ -6,6 +6,9 @@ import { describe, it, expect } from 'vitest'
 import { resolveVisual } from '@/lib/teaching/visual/resolveVisual'
 import { buildRefractionScene } from '@/lib/teaching/sceneGenerators/physicsPilot'
 import { INSUFFICIENT_FOR_CONCEPT } from '@/lib/teaching/visual/scope'
+import { authoredFigureLabelText } from '@/lib/teaching/visual/resolveVisualTarget'
+import { namedTopicUnknownTo } from '@/lib/teaching/visual/requestedTopic'
+import { getKGNode } from '@/lib/curriculum/knowledgeGraph'
 
 type Obj = { type?: string; text?: string; from?: number[]; to?: number[]; position?: number[] }
 const all = (): Obj[] => buildRefractionScene().steps.flatMap((s) => s.objects as Obj[])
@@ -60,5 +63,20 @@ describe('the figure follows the lesson, not a shared word (production 2026-09-3
 
   it('a genuinely off-curriculum question still gets no lesson figure', () => {
     expect(ask('what is kubernetes?', null).graphical).toBe(false)
+  })
+})
+
+describe('the excursion check reads the lesson figure too (production 2026-09-30, batch 5 recheck)', () => {
+  const node = getKGNode('phys.opt.refraction')!
+  const msg = 'straw look broken at water. what is the normal line?'
+  it('without the figure labels, "normal line" reads as an unknown topic (the old detour)', () => {
+    expect(namedTopicUnknownTo(msg, `${node.title} ${node.description}`)?.title).toBeTruthy()
+  })
+  it('with them, it is the lesson\'s own term', () => {
+    expect(namedTopicUnknownTo(msg, `${node.title} ${node.description} ${authoredFigureLabelText('phys.opt.refraction')}`)).toBeNull()
+  })
+  it('a concept with no authored scene adds nothing', () => {
+    expect(authoredFigureLabelText('phys.mech.impulse')).toBe('')
+    expect(authoredFigureLabelText(null)).toBe('')
   })
 })
