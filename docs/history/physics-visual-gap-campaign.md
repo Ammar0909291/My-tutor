@@ -393,3 +393,31 @@ electroweak weak-strength line dipped below its axis (now starts where it enters
 range); the collider figure computed 123.1 GeV while calling it the Higgs (photon energies now give
 125 GeV); the Standard Model boson box clipped its text (boxes removed for bosons and Higgs);
 antimatter and weak-interaction headline chips picked narration sentences (formula labels added).
+
+## Batch 11 (2026-09-30): relativity (remaining 4), astrophysics, core quantum
+
+New module `physicsCoreScenesB11.ts`. Measured on this branch: 180/238 physics concepts now resolve
+to their own concept figure (was 168).
+
+| Concept | Figure |
+|---|---|
+| phys.rel.simultaneity | Flash from the centre of a moving carriage (β = 0.5): on the platform the rear is reached at (L/2)/(c + v), the front at (L/2)/(c − v) (asserted). |
+| phys.rel.lorentz-transform | Event (x, ct) mapped by γ(x − βct), γ(ct − βx) onto tilted primed axes; label value computed (asserted). |
+| phys.rel.relativistic-momentum | p = γmv against the Newtonian mv: equal at low speed, runaway near c (asserted at 0.05, 0.9, 0.99). |
+| phys.rel.spacetime | Minkowski diagram with light cone; the interval s² = (ct)² − x² = 12 in both frames (asserted invariant). |
+| phys.astro.stellar-structure | Hydrostatic equilibrium: pressure and gravity arrows equal and opposite at a shell (asserted); core, radiative, convective zones. |
+| phys.astro.stellar-evolution | Mass decides the end: white dwarf / neutron star / black hole (ordered, asserted). |
+| phys.astro.cosmology | Hubble plot v = H₀d with H₀ = 70 km/s/Mpc; 1/H₀ ≈ 14 Gyr (asserted). |
+| phys.astro.dark-matter | Rotation curve: visible-only v ∝ 1/√r far out vs the observed flat curve (asserted). |
+| phys.astro.black-holes | r_s = 2GM/c² ≈ 2.95 km for the Sun; a passing ray comes in level and leaves deflected (asserted). |
+| phys.qm.uncertainty-principle | Narrow and wide Gaussian packets with their momentum spreads; σx·σp = ℏ/2 for both (asserted). |
+| phys.qm.harmonic-oscillator-qm | Parabolic well with levels E = (n + ½)ℏω, equally spaced, lowest ½ℏω (asserted). |
+| phys.qm.pauli-exclusion | 1s holds two opposite spins, the third electron goes to 2s (asserted). |
+
+Found while rendering: the simultaneity figure needed tick lines to show where each flash meets its
+end; the black-hole ray dipped and recovered instead of being deflected (now bends to a new
+outgoing angle, 2.6 − 0.35·(x + √(x² + 1))/2); the Pauli spin arrows were too short to read at
+1280px (lengthened to ±0.55).
+
+Validation: tsc ratchet 0 ≤ 0; vitest 798 files / 16,940 passed, 9 skipped; validate:visuals
+physics exact=77 incorrect=0; `npm run build` exit 0.

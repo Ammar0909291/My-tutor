@@ -88,6 +88,11 @@ import {
   buildStrongInteractionScene, buildWeakInteractionScene, buildElectroweakScene, buildHiggsScene,
   buildParticleConservationScene, buildFeynmanScene, buildAcceleratorScene, buildStandardModelScene,
 } from '@/lib/teaching/sceneGenerators/physicsCoreScenesB10'
+import {
+  buildSimultaneityScene, buildLorentzScene, buildRelativisticMomentumScene, buildSpacetimeScene,
+  buildStellarStructureScene, buildStellarEvolutionScene, buildCosmologyScene, buildDarkMatterScene,
+  buildBlackHoleScene, buildUncertaintyScene, buildQuantumOscillatorScene, buildPauliScene,
+} from '@/lib/teaching/sceneGenerators/physicsCoreScenesB11'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -473,6 +478,19 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'phys.particle.feynman-diagrams':     buildFeynmanScene,
   'phys.particle.accelerators-detectors': buildAcceleratorScene,
   'phys.particle.standard-model':       buildStandardModelScene,
+  // Batch 11 (2026-09-30). See physicsCoreScenesB11.ts.
+  'phys.rel.simultaneity':              buildSimultaneityScene,
+  'phys.rel.lorentz-transform':         buildLorentzScene,
+  'phys.rel.relativistic-momentum':     buildRelativisticMomentumScene,
+  'phys.rel.spacetime':                 buildSpacetimeScene,
+  'phys.astro.stellar-structure':       buildStellarStructureScene,
+  'phys.astro.stellar-evolution':       buildStellarEvolutionScene,
+  'phys.astro.cosmology':               buildCosmologyScene,
+  'phys.astro.dark-matter':             buildDarkMatterScene,
+  'phys.astro.black-holes':             buildBlackHoleScene,
+  'phys.qm.uncertainty-principle':      buildUncertaintyScene,
+  'phys.qm.harmonic-oscillator-qm':     buildQuantumOscillatorScene,
+  'phys.qm.pauli-exclusion':            buildPauliScene,
   'phys.wave.transverse-waves':         buildTransverseWaveScene,
   'phys.wave.interference':             buildWaveInterferenceScene,
   'phys.therm.calorimetry':             buildCalorimetryScene,

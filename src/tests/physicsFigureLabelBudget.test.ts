@@ -18,8 +18,9 @@ import * as b7 from '@/lib/teaching/sceneGenerators/physicsCoreScenesB7'
 import * as b8 from '@/lib/teaching/sceneGenerators/physicsCoreScenesB8'
 import * as b9 from '@/lib/teaching/sceneGenerators/physicsCoreScenesB9'
 import * as b10 from '@/lib/teaching/sceneGenerators/physicsCoreScenesB10'
+import * as b11 from '@/lib/teaching/sceneGenerators/physicsCoreScenesB11'
 
-const builders = [b123, b4, b5, b6, b7, b8, b9, b10].flatMap((m) =>
+const builders = [b123, b4, b5, b6, b7, b8, b9, b10, b11].flatMap((m) =>
   Object.entries(m).filter(([n, f]) => n.startsWith('build') && typeof f === 'function') as Array<[string, () => SceneSpec]>)
 
 describe('campaign figures fit the intermediate label budget', () => {
