@@ -54,6 +54,12 @@ import {
   buildLenzsLawScene, buildAcBasicsScene, buildRcCircuitScene, buildElectromagneticWaveScene,
   buildPhotoelectricScene, buildRadioactiveDecayScene, buildPolarizationScene, buildDiffractionScene,
 } from '@/lib/teaching/sceneGenerators/physicsCoreScenesB4'
+import {
+  buildTemperatureScene, buildZerothLawScene, buildSpecificHeatScene, buildKineticTheoryScene,
+  buildInternalEnergyScene, buildSecondLawScene, buildEntropyScene, buildHeatEngineScene,
+  buildRefrigeratorScene, buildForcedOscillationScene, buildSoundWaveScene, buildSoundIntensityScene,
+  buildWaveSpeedScene,
+} from '@/lib/teaching/sceneGenerators/physicsCoreScenesB5'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -353,6 +359,20 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'phys.mod.radioactive-decay':         buildRadioactiveDecayScene,
   'phys.opt.polarization':              buildPolarizationScene,
   'phys.opt.diffraction':               buildDiffractionScene,
+  // Batch 5 (2026-09-30). See physicsCoreScenesB5.ts.
+  'phys.therm.temperature':             buildTemperatureScene,
+  'phys.therm.zeroth-law':              buildZerothLawScene,
+  'phys.therm.specific-heat':           buildSpecificHeatScene,
+  'phys.therm.kinetic-theory':          buildKineticTheoryScene,
+  'phys.therm.internal-energy':         buildInternalEnergyScene,
+  'phys.therm.second-law':              buildSecondLawScene,
+  'phys.therm.entropy':                 buildEntropyScene,
+  'phys.therm.heat-engines':            buildHeatEngineScene,
+  'phys.therm.refrigerators':           buildRefrigeratorScene,
+  'phys.wave.forced-oscillations':      buildForcedOscillationScene,
+  'phys.wave.sound-waves':              buildSoundWaveScene,
+  'phys.wave.sound-intensity':          buildSoundIntensityScene,
+  'phys.wave.wave-speed':               buildWaveSpeedScene,
   'phys.wave.transverse-waves':         buildTransverseWaveScene,
   'phys.wave.interference':             buildWaveInterferenceScene,
   'phys.therm.calorimetry':             buildCalorimetryScene,

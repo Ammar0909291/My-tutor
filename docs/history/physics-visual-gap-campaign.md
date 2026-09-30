@@ -205,3 +205,29 @@ Retirement register: phys.em.rc-circuits and phys.em.ac-basics removed from RETI
 and RETIRED_ASSET_FINGERPRINTS (reflection precedent), 24 → 22. Pinned tests updated; where
 rc-circuits was the "unrelated retired concept" example, a still-retired sibling replaced it (not
 lc-circuits in the two files that inject lc-circuits as their replaced concept).
+
+## Batch 5 (2026-09-30): thermal physics and sound
+
+New module `physicsCoreScenesB5.ts`.
+
+| Concept | Figure |
+|---|---|
+| phys.therm.temperature | Same gas at 200 K and 800 K; velocity arrows 2× longer (speed ∝ √T, asserted); T ∝ average KE. |
+| phys.therm.zeroth-law | A and B each in contact with thermometer C, both reading 30 °C; so A–B in equilibrium, no heat flows. |
+| phys.therm.specific-heat | ΔT vs Q for equal masses of aluminium and water; slope ratio = c_water/c_Al = 4.67 (asserted); Q = mcΔT. |
+| phys.therm.kinetic-theory | Gas molecules; one bounce reverses the momentum into the wall (Δp = 2mv); force on wall; P = ⅓ρ⟨v²⟩. |
+| phys.therm.internal-energy | Molecules with bonds (PE) and velocity arrows (KE); U = ΣKE + ΣPE. |
+| phys.therm.second-law | Heat arrow hot → cold; cold → hot crossed out ("never by itself"). |
+| phys.therm.entropy | Gas behind a partition vs spread through the whole box; ΔS > 0. |
+| phys.therm.heat-engines | Q_H = 100 J in, W = 40 J out, Q_C = 60 J rejected (computed); η = W/Q_H = 0.4. |
+| phys.therm.refrigerators | Q_C = 60 J pulled up from cold, W = 20 J in, Q_H = 80 J out; COP = 3; all heat arrows point cold → hot (asserted). |
+| phys.wave.forced-oscillations | A(ω) = 1/√((ω₀² − ω²)² + (γω)²) for light and heavy damping; peak at f₀ (asserted). |
+| phys.wave.sound-waves | Air layers displaced by A sin kx; pressure ∝ −dξ/dx; compressions where the layers bunch (asserted). |
+| phys.wave.sound-intensity | Spheres at r and 2r; same cone covers 4× the area; I = P/4πr²; at 2r: I/4, −6 dB (computed). |
+| phys.wave.wave-speed | Same frequency on a light string and a 4× heavier one: v halves, λ halves (asserted); v = √(T/μ). |
+
+Found while rendering: the first particle scatter (an LCG) clumped all six particles into one
+corner of the temperature box; replaced with the R2 low-discrepancy sequence. Zeroth law showed only
+one "30 °C" reading (B's contact now has its own). Specific heat, heat engine and refrigerator
+headline chips picked the wrong line (a narration sentence, "W = 40 J", "W = 20 J"); result labels
+were recoloured / added so the chip states the concept's own result.
