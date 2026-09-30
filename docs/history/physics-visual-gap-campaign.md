@@ -231,3 +231,28 @@ corner of the temperature box; replaced with the R2 low-discrepancy sequence. Ze
 one "30 °C" reading (B's contact now has its own). Specific heat, heat engine and refrigerator
 headline chips picked the wrong line (a narration sentence, "W = 40 J", "W = 20 J"); result labels
 were recoloured / added so the chip states the concept's own result.
+
+## Batch 6 (2026-09-30): photons, matter waves, nuclear physics, relativity
+
+New module `physicsCoreScenesB6.ts`.
+
+| Concept | Figure |
+|---|---|
+| phys.mod.photons | Red/green/violet photon packets (λ ∝ 1/f) with energy bars E = hf: 1.78, 2.32, 3.1 eV (h in eV·s, asserted). |
+| phys.mod.de-broglie | Electron packets at p and 2p; λ and λ/2 marked (asserted); λ = h/p. |
+| phys.mod.x-rays | Tube: hot cathode, electrons across 50 kV, metal target emitting X-rays; E_max = eV = 50 keV. |
+| phys.mod.radioactivity | α stopped by paper, β by aluminium, γ through lead (arrow endpoints asserted against the barriers). |
+| phys.mod.nuclear-reactions | ¹⁴N + ⁴He → ¹⁷O + ¹H; A: 18 = 18, Z: 9 = 9 (summed). |
+| phys.mod.binding-energy | Measured B/A for 11 nuclei on a log-A axis; peak Fe-56 8.79 MeV; He-4 spike; fusion H-2 → He-4, fission U-238 → Sn-120. |
+| phys.mod.nuclear-fission | n + U-235 → Ba + Kr + 3 n, ≈ 200 MeV; three further U nuclei: chain reaction. |
+| phys.mod.nuclear-fusion | D + T → ⁴He + n; Q from the mass defect = 17.59 MeV (computed from atomic masses). |
+| phys.mod.compton-effect | Photon scattered at 60° with λ′ > λ; electron recoil direction from p_in − p_out; Δλ = 2.426 pm × (1 − cos 60°) = 1.21 pm. |
+| phys.rel.postulates | Train at v; passenger and platform both measure c for the light pulse; "not c + v". |
+| phys.rel.time-dilation | Light clock at rest vs at 0.6c; diagonal leg = γ × rest leg, γ = 1.25 (asserted). |
+| phys.rel.length-contraction | Rod at rest vs at 0.8c: L = L₀/γ = 0.6 L₀ (asserted). |
+| phys.rel.mass-energy | e⁻ + e⁺ → two back-to-back γ; m_e c² = 0.511 MeV (computed from m_e, c). |
+
+Found while rendering: the first binding-energy figure used the semi-empirical mass formula, which
+peaks at A ≈ 63 — it labelled the wrong nucleus as the peak. Replaced with tabulated measured values
+(peak Fe-56 asserted). On a linear A axis every light nucleus was squashed against the vertical
+axis, hiding the He-4 spike fusion climbs to; the axis is now logarithmic (labelled so).

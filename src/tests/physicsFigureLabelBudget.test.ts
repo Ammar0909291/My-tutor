@@ -13,8 +13,9 @@ import { complexityFor } from '@/lib/teaching/visual/visualComplexity'
 import * as b123 from '@/lib/teaching/sceneGenerators/physicsCoreScenes'
 import * as b4 from '@/lib/teaching/sceneGenerators/physicsCoreScenesB4'
 import * as b5 from '@/lib/teaching/sceneGenerators/physicsCoreScenesB5'
+import * as b6 from '@/lib/teaching/sceneGenerators/physicsCoreScenesB6'
 
-const builders = [b123, b4, b5].flatMap((m) =>
+const builders = [b123, b4, b5, b6].flatMap((m) =>
   Object.entries(m).filter(([n, f]) => n.startsWith('build') && typeof f === 'function') as Array<[string, () => SceneSpec]>)
 
 describe('campaign figures fit the intermediate label budget', () => {

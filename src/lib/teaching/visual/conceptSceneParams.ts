@@ -60,6 +60,11 @@ import {
   buildRefrigeratorScene, buildForcedOscillationScene, buildSoundWaveScene, buildSoundIntensityScene,
   buildWaveSpeedScene,
 } from '@/lib/teaching/sceneGenerators/physicsCoreScenesB5'
+import {
+  buildPhotonScene, buildDeBroglieScene, buildXRayScene, buildRadioactivityScene, buildNuclearReactionScene,
+  buildBindingEnergyScene, buildFissionScene, buildFusionScene, buildComptonScene, buildRelativityPostulatesScene,
+  buildTimeDilationScene, buildLengthContractionScene, buildMassEnergyScene,
+} from '@/lib/teaching/sceneGenerators/physicsCoreScenesB6'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -373,6 +378,20 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'phys.wave.sound-waves':              buildSoundWaveScene,
   'phys.wave.sound-intensity':          buildSoundIntensityScene,
   'phys.wave.wave-speed':               buildWaveSpeedScene,
+  // Batch 6 (2026-09-30). See physicsCoreScenesB6.ts.
+  'phys.mod.photons':                   buildPhotonScene,
+  'phys.mod.de-broglie':                buildDeBroglieScene,
+  'phys.mod.x-rays':                    buildXRayScene,
+  'phys.mod.radioactivity':             buildRadioactivityScene,
+  'phys.mod.nuclear-reactions':         buildNuclearReactionScene,
+  'phys.mod.binding-energy':            buildBindingEnergyScene,
+  'phys.mod.nuclear-fission':           buildFissionScene,
+  'phys.mod.nuclear-fusion':            buildFusionScene,
+  'phys.mod.compton-effect':            buildComptonScene,
+  'phys.rel.postulates':                buildRelativityPostulatesScene,
+  'phys.rel.time-dilation':             buildTimeDilationScene,
+  'phys.rel.length-contraction':        buildLengthContractionScene,
+  'phys.rel.mass-energy':               buildMassEnergyScene,
   'phys.wave.transverse-waves':         buildTransverseWaveScene,
   'phys.wave.interference':             buildWaveInterferenceScene,
   'phys.therm.calorimetry':             buildCalorimetryScene,
