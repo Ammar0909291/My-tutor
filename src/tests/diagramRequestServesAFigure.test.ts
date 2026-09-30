@@ -77,20 +77,22 @@ function makeCache(seed: Record<string, string> = {}) {
 
 // The defect was measured on phys.em.energy-capacitor, which has since gained
 // its own authored figure (physics visual gap campaign batch 8, 2026-09-30) and
-// so no longer reaches live generation. phys.mech.power is kept deliberately
-// unauthored as the live-generation fixture; the mechanism under test is the
-// same for any concept that reaches Tier 3.
-const CONCEPT = 'phys.mech.power'
-const TITLE = 'Power'
-const DESC = 'Power is the rate at which work is done or energy is transferred, measured in watts: P = W / t.'
+// so no longer reaches live generation. phys.mech.power was then the
+// live-generation fixture until physics batch 14 (2026-09-30) gave every
+// physics concept a figure; chem.found.significant-figures, still assetless,
+// replaces it. The mechanism under test is the same for any concept that
+// reaches Tier 3.
+const CONCEPT = 'chem.found.significant-figures'
+const TITLE = 'Significant Figures and Error Analysis'
+const DESC = 'Rules for counting and arithmetic with significant figures; absolute and relative error; propagation of uncertainty.'
 
 /** Structurally valid figures the validator accepts (process_flow specs). */
 function figureFor(title: string, steps: string[]) {
   return { type: 'process_flow', title, steps: steps.map((t) => ({ title: t })) }
 }
 
-const REJECTED = figureFor('Power of a lifting motor', ['Work done lifting the load', 'Time taken to lift it', 'Power is work divided by time'])
-const FRESH = figureFor('Power: work done per second', ['Count the work done in joules', 'Time it in seconds', 'Power in watts is joules per second'])
+const REJECTED = figureFor('Significant figures in a ruler reading', ['Read the ruler to its smallest division', 'Estimate one more digit', 'Every certain digit plus the estimate is significant'])
+const FRESH = figureFor('Significant figures: how precise is the answer?', ['Count the significant figures in each value', 'Multiply or divide the values', 'Round to the fewest significant figures'])
 
 function deps(cache: ReturnType<typeof makeCache>, opts: {
   generate: () => unknown
@@ -124,7 +126,7 @@ const reject = (): CriticReport => ({ decision: 'reject', confidence: 0.9, dimen
  * a wrong guess makes the cache silently miss — which is a test that passes for
  * the wrong reason.
  */
-const ORDINARY_TEACHING_TURN = 'I am still not sure how that power formula comes about at all'
+const ORDINARY_TEACHING_TURN = 'I am still not sure how that rounding rule comes about at all'
 
 async function seedRejectedCandidate(calls: { generate: number; critic: number }) {
   const cache = makeCache()

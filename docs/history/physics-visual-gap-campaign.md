@@ -501,3 +501,43 @@ vocabulary that would shadow resolver tests pinned to the perturbation-theory le
 
 Validation: tsc ratchet 0 ≤ 0; vitest 800 files / 17,064 passed, 9 skipped; validate:visuals
 physics exact=77 incorrect=0; `npm run build` exit 0.
+
+## Batch 14 (2026-09-30): phys.mech.power — CAMPAIGN COMPLETE
+
+New module `physicsCoreScenesB14.ts`: a 50 kg load lifted 6 m (W = mgh = 2943 J) by a slow motor
+(12 s, 245 W) and a fast one (6 s, 491 W); on the work–time graph the fast line is exactly twice as
+steep — power is the slope (asserted). Found while rendering: the "fast" label floated up by the
+headline; it now sits over the fast motor's flat segment.
+
+**End state (asserted in `physicsCoreScenesBatch14.test.ts` over `docs/physics/kg/graph.json`):**
+all 238/238 physics concepts resolve to a figure of that concept — zero resolve to "no figure".
+212 are served a concept-scoped figure of their own; 26 are served an honestly `domain`-scoped
+illustration of the right kind (number line, pendulum, circuit, force diagram, …) that predates
+this campaign and was never part of its "no figure" gap. Those 26 are pinned in the test
+(`DOMAIN_SCOPED`) — upgrading them to concept-scoped figures is a possible follow-up, not started:
+scalars-vectors, displacement, velocity, acceleration, kinematics-2d, relative-motion, tension,
+conservative-forces, momentum, rotational-dynamics, angular-momentum,
+conservation-of-angular-momentum, universal-gravitation, gravitational-field,
+thermodynamic-processes, carnot-cycle, shm, shm-energy, lens-power, electric-current, ohms-law,
+resistivity, dc-circuits, emf, schrodinger-equation, selection-rules.
+
+Fixture migration (physics has no assetless concept left): every test that needed a concept with
+no asset now uses `chem.found.significant-figures` (subject chemistry; one of 127 assetless
+chemistry concepts, chosen as among the least diagram-like). Files: `visualFailClosed`,
+`diagramRequestServesAFigure` (title/description/candidate figures re-worded), `visualEngineArchitecture`
+and `visualCanaryAllowlist` (engine fixture scenes re-vocabularised to significant figures, since
+the anchor check compares scene labels with KG text; the canary wildcard/subject-name checks gained
+`chem.*`/`chemistry` patterns so they stay non-vacuous), `photosynthesisVisualServingLedger`,
+`visualAssetIdentity`, `visualResolverV2` (no-figure cases only; excursion cases keep the Power
+lesson), `rayDiagramIsAMedium`, and `visualContinuityProduction` (excursion concept moved from
+physics' own vector to `chem.elect.galvanic-cell`, which a chemistry learner reaches by name and
+which carries an authored figure — the old physics-local "vector" reading does not apply from a
+chemistry lesson). Invariants under test are unchanged throughout.
+
+Not done (out of scope / needs owner): live production QA of the new figures (Vercel 403 needs
+the owner); no DB reads were made at any point in this campaign.
+
+Validation: tsc ratchet 0 ≤ 0; vitest 801 files / 17,070 passed, 9 skipped (the first full run
+timed out the two corpus-wide end-state tests at the default 5 s under parallel load — decisions
+are now resolved once and shared, with a 60 s timeout, the repo's convention for corpus-wide tests;
+the re-run was fully green); validate:visuals physics exact=77 incorrect=0; `npm run build` exit 0.

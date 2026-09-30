@@ -35,7 +35,8 @@ describe("an optics lesson's own word does not open a detour", () => {
   })
 
   it('a concept with no authored figure contributes no vocabulary', () => {
-    expect(authoredFigureText('phys.mech.power')).toBe('')
+    // (phys.mech.power was this example until physics batch 14, 2026-09-30.)
+    expect(authoredFigureText('chem.found.significant-figures')).toBe('')
     expect(authoredFigureText(null)).toBe('')
   })
 })

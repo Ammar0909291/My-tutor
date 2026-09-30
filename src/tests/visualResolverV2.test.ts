@@ -12,8 +12,11 @@ import { validateSceneSpec } from '@/lib/teaching/sceneSpecValidator'
 // M4 note: this fixture concept must have NO asset. It was phys.therm.calorimetry
 // until the M4 Physics pilot authored a real figure for that concept; it is now
 // phys.mech.kinetic-energy until physics batch 2 (2026-09-30), and is now
-// phys.mech.power, which is still genuinely assetless. The invariants
-// under test are unchanged.
+// phys.mech.power until physics batch 14 (2026-09-30) gave every physics concept
+// a figure. The no-figure cases now use chem.found.significant-figures, which is
+// still genuinely assetless; the excursion cases keep the Power lesson, since
+// they only need a lesson the learner is detouring FROM. The invariants under
+// test are unchanged.
 
 const SUBJECTS = ['mathematics', 'physics', 'chemistry', 'biology', 'computer_science', 'english'] as const
 
@@ -67,8 +70,8 @@ describe('Visual Resolver V2 — semantic safety invariant', () => {
     // Calorimetry has no curated binding and no generator. It used to receive
     // the "3D Data Visualization" card. It must now receive nothing at all.
     const d = resolveVisual({
-      message: '', lessonConceptId: 'phys.mech.power',
-      subject: 'physics', learnerRequest: 'diagram',
+      message: '', lessonConceptId: 'chem.found.significant-figures',
+      subject: 'chemistry', learnerRequest: 'diagram',
     })
     expect(d.payload).toBeNull()
     expect(d.graphical).toBe(false)
@@ -157,11 +160,11 @@ describe('Visual Resolver V2 — concept excursions', () => {
   it('stays on the lesson concept when the learner names nothing', () => {
     const d = resolveVisual({
       message: 'explain this again please',
-      lessonConceptId: 'phys.mech.power',
+      lessonConceptId: 'chem.found.significant-figures',
       learnerRequest: 'explain_differently',
     })
     expect(d.excursion).toBe(false)
-    expect(d.conceptId).toBe('phys.mech.power')
+    expect(d.conceptId).toBe('chem.found.significant-figures')
     // Calorimetry has no faithful figure, so none is attached — the assertion
     // that matters here is that the TARGET did not move, not that a picture
     // appeared.
@@ -192,7 +195,7 @@ describe('Visual Resolver V2 — the no-figure contract', () => {
   })
 
   it('a concept with no curated visual and no generator returns no figure', () => {
-    const d = resolveVisual({ message: '', lessonConceptId: 'phys.mech.power', learnerRequest: 'diagram' })
+    const d = resolveVisual({ message: '', lessonConceptId: 'chem.found.significant-figures', learnerRequest: 'diagram' })
     expect(d.source).toBe('none')
     expect(d.graphical).toBe(false)
     expect(d.payload).toBeNull()
@@ -200,7 +203,7 @@ describe('Visual Resolver V2 — the no-figure contract', () => {
 
   it('the contract NEVER claims a figure when none is attached', () => {
     for (const d of [
-      resolveVisual({ message: '', lessonConceptId: 'phys.mech.power', learnerRequest: 'diagram' }),
+      resolveVisual({ message: '', lessonConceptId: 'chem.found.significant-figures', learnerRequest: 'diagram' }),
       resolveVisual({ message: 'tell me a joke about pirates', lessonConceptId: null }),
     ]) {
       const block = buildVisualContractBlock(d)

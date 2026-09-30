@@ -82,7 +82,7 @@ const rejectingCritic = async () => ({
 })
 
 // No curated asset for either, so the resolver reaches the engine tier.
-const CALORIMETRY = 'phys.mech.power'
+const CALORIMETRY = 'chem.found.significant-figures' // no asset; was phys.mech.power until physics batch 14 (2026-09-30) gave every physics concept a figure
 const PHOTOSYNTHESIS = 'bio.plant.photosynthesis'
 
 const ctxFor = (conceptId: string): ArchetypeContext => {
@@ -142,7 +142,7 @@ describe('the ledger-correction fix does not change what a learner is served', (
     const { outcomes, sink } = fakeOutcomeSink()
     const cache = fakeCacheClient()
     const d = await resolveVisualForTurn(
-      { message: '', lessonConceptId: CALORIMETRY, subject: 'physics', learnerRequest: 'diagram' },
+      { message: '', lessonConceptId: CALORIMETRY, subject: 'chemistry', learnerRequest: 'diagram' },
       {
         enabled: () => true, policy: 'auto', critic: passingCritic, budgetReader: openBudget,
         generate: async () => scene(CALORIMETRY, 'accepted'), cacheClient: cache.client, outcomeSink: sink,
@@ -158,7 +158,7 @@ describe('the ledger-correction fix does not change what a learner is served', (
     const { sink } = fakeOutcomeSink()
     const cache = fakeCacheClient()
     const accepted = await resolveVisualForTurn(
-      { message: '', lessonConceptId: CALORIMETRY, subject: 'physics', learnerRequest: 'diagram' },
+      { message: '', lessonConceptId: CALORIMETRY, subject: 'chemistry', learnerRequest: 'diagram' },
       {
         enabled: () => true, policy: 'auto', critic: passingCritic, budgetReader: openBudget,
         generate: async () => scene(CALORIMETRY, 'consistency'), cacheClient: cache.client, outcomeSink: sink,
@@ -168,7 +168,7 @@ describe('the ledger-correction fix does not change what a learner is served', (
 
     const cache2 = fakeCacheClient()
     const rejected = await resolveVisualForTurn(
-      { message: '', lessonConceptId: CALORIMETRY, subject: 'physics', learnerRequest: 'diagram' },
+      { message: '', lessonConceptId: CALORIMETRY, subject: 'chemistry', learnerRequest: 'diagram' },
       {
         enabled: () => true, policy: 'auto', critic: rejectingCritic, budgetReader: openBudget,
         generate: async () => scene(CALORIMETRY, 'consistency'), cacheClient: cache2.client, outcomeSink: sink,
@@ -182,7 +182,7 @@ describe('the ledger-correction fix does not change what a learner is served', (
     const { sink } = fakeOutcomeSink()
     const cache = fakeCacheClient()
     const d = await resolveVisualForTurn(
-      { message: '', lessonConceptId: CALORIMETRY, subject: 'physics', learnerRequest: 'diagram' },
+      { message: '', lessonConceptId: CALORIMETRY, subject: 'chemistry', learnerRequest: 'diagram' },
       {
         enabled: () => true, policy: 'auto', critic: rejectingCritic, budgetReader: openBudget,
         generate: async () => scene(CALORIMETRY, 'rejected'), cacheClient: cache.client, outcomeSink: sink,
@@ -196,7 +196,7 @@ describe('the ledger-correction fix does not change what a learner is served', (
     const { sink } = fakeOutcomeSink()
     const cache = fakeCacheClient()
     const d = await resolveVisualForTurn(
-      { message: '', lessonConceptId: CALORIMETRY, subject: 'physics', learnerRequest: 'diagram' },
+      { message: '', lessonConceptId: CALORIMETRY, subject: 'chemistry', learnerRequest: 'diagram' },
       {
         enabled: () => true, policy: 'auto', critic: passingCritic, budgetReader: openBudget,
         generate: async () => ({ id: 'x' }), cacheClient: cache.client, outcomeSink: sink,
@@ -245,7 +245,7 @@ describe('the ledger now agrees with the HTTP response on the discard paths', ()
 
     const d = await resolveVisualForTurn(
       // No explicit diagram request — an ordinary teaching turn.
-      { message: 'can you explain that again?', lessonConceptId: CALORIMETRY, subject: 'physics' },
+      { message: 'can you explain that again?', lessonConceptId: CALORIMETRY, subject: 'chemistry' },
       {
         enabled: () => true, policy: 'auto', critic: passingCritic, budgetReader: openBudget,
         generate: async () => frozen, cacheClient: cache.client, outcomeSink: sink,
@@ -269,7 +269,7 @@ describe('the ledger now agrees with the HTTP response on the discard paths', ()
     seedCachedReject(cache, CALORIMETRY, frozen)
 
     const d = await resolveVisualForTurn(
-      { message: 'can you show me a diagram of this?', lessonConceptId: CALORIMETRY, subject: 'physics', learnerRequest: 'diagram' },
+      { message: 'can you show me a diagram of this?', lessonConceptId: CALORIMETRY, subject: 'chemistry', learnerRequest: 'diagram' },
       {
         enabled: () => true, policy: 'auto', critic: passingCritic, budgetReader: openBudget,
         // The retry regenerates the SAME figure -> identical-figure discard.
@@ -292,7 +292,7 @@ describe('the ledger now agrees with the HTTP response on the discard paths', ()
     seedCachedReject(cache, CALORIMETRY, frozen)
 
     const d = await resolveVisualForTurn(
-      { message: 'can you show me a diagram of this?', lessonConceptId: CALORIMETRY, subject: 'physics', learnerRequest: 'diagram' },
+      { message: 'can you show me a diagram of this?', lessonConceptId: CALORIMETRY, subject: 'chemistry', learnerRequest: 'diagram' },
       {
         enabled: () => true, policy: 'auto', critic: rejectingCritic, budgetReader: openBudget,
         // The first attempt is a CACHE HIT on the seeded `frozen` figure —
@@ -355,7 +355,7 @@ describe('the ledger now agrees with the HTTP response on the discard paths', ()
     seedCachedReject(cache, CALORIMETRY, frozen)
 
     const d = await resolveVisualForTurn(
-      { message: 'can you show me a diagram of this?', lessonConceptId: CALORIMETRY, subject: 'physics', learnerRequest: 'diagram' },
+      { message: 'can you show me a diagram of this?', lessonConceptId: CALORIMETRY, subject: 'chemistry', learnerRequest: 'diagram' },
       {
         enabled: () => true, policy: 'auto', critic: passingCritic, budgetReader: openBudget,
         // First attempt is a cache hit on `frozen` (deps.generate not

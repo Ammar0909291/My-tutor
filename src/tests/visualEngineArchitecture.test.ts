@@ -53,10 +53,12 @@ const passingCritic = async () => ({
 // resolver never reaches the engine. It was phys.therm.calorimetry until the
 // M4 Physics pilot authored a real figure for that concept; it is now
 // phys.mech.kinetic-energy until physics batch 2 (2026-09-30) authored that too;
-// it is now phys.mech.power, which is still genuinely assetless. The scene
-// fixtures below were re-vocabularised to match, since the engine's anchor
-// check compares the scene's own labels with the concept's KG text.
-const CALORIMETRY = 'phys.mech.power'          // no curated visual
+// then phys.mech.power until physics batch 14 (2026-09-30) gave every physics
+// concept a figure; it is now chem.found.significant-figures, which is still
+// genuinely assetless. The scene fixtures below were re-vocabularised to match,
+// since the engine's anchor check compares the scene's own labels with the
+// concept's KG text.
+const CALORIMETRY = 'chem.found.significant-figures' // no curated visual
 const PROJECTILE  = 'phys.mech.projectile-motion' // canonical generator
 const PHONICS     = 'eng.phonics.phonemic-awareness'
 const DIM         = 'phys.meas.dimensional-analysis'
@@ -69,17 +71,17 @@ const ctxFor = (conceptId: string): ArchetypeContext => {
   }
 }
 
-/** A scene that genuinely depicts power, in its own vocabulary. */
+/** A scene that genuinely depicts significant figures, in its own vocabulary. */
 const faithfulCalorimetryScene = (): SceneSpec => ({
-  id: 'gen-power', title: 'Power: the rate of doing work',
-  sceneType: 'diagram', teachingGoal: 'Show power as the rate at which work is done.',
+  id: 'gen-sig-figs', title: 'Significant figures and error',
+  sceneType: 'diagram', teachingGoal: 'Show how significant figures carry the uncertainty of a measurement.',
   steps: [
-    { narration: 'A motor lifts a load, doing work.', objects: [
-      { type: 'node', position: [-2, 0, 0], text: 'slow lift — low power' },
-      { type: 'node', position: [2, 0, 0], text: 'fast lift — more power, in watts' },
+    { narration: 'Two measurements of the same length, one more precise than the other.', objects: [
+      { type: 'node', position: [-2, 0, 0], text: '12.3 cm — three significant figures' },
+      { type: 'node', position: [2, 0, 0], text: '12.30 cm — four significant figures' },
     ] },
-    { narration: 'Power is the rate at which work is done: energy transferred per second.', objects: [
-      { type: 'arrow', from: [-1.5, 0, 0], to: [1.5, 0, 0], text: 'work done per second' },
+    { narration: 'The last significant figure carries the absolute error; divide by the value for the relative error.', objects: [
+      { type: 'arrow', from: [-1.5, 0, 0], to: [1.5, 0, 0], text: 'relative error propagates' },
     ] },
   ],
 })
@@ -144,7 +146,7 @@ describe('the three legitimate outcomes', () => {
 
   it('2. engine capable → runtime-generated visual', async () => {
     const d = await resolveVisualForTurn(
-      { message: '', lessonConceptId: CALORIMETRY, subject: 'physics', learnerRequest: 'diagram' },
+      { message: '', lessonConceptId: CALORIMETRY, subject: 'chemistry', learnerRequest: 'diagram' },
       engine(faithfulCalorimetryScene()),
     )
     expect(d.source).toBe('generated')
@@ -156,7 +158,7 @@ describe('the three legitimate outcomes', () => {
 
   it('3. engine incapable (flag off) → no figure', async () => {
     const d = await resolveVisualForTurn(
-      { message: '', lessonConceptId: CALORIMETRY, subject: 'physics', learnerRequest: 'diagram' },
+      { message: '', lessonConceptId: CALORIMETRY, subject: 'chemistry', learnerRequest: 'diagram' },
       { ...engine(null), enabled: () => false },
     )
     expect(d.graphical).toBe(false)
@@ -170,7 +172,7 @@ describe('the three legitimate outcomes', () => {
       { ...engine(null), generate: async () => { throw new Error('provider down') } },
     ]) {
       const d = await resolveVisualForTurn(
-        { message: '', lessonConceptId: CALORIMETRY, subject: 'physics', learnerRequest: 'diagram' },
+        { message: '', lessonConceptId: CALORIMETRY, subject: 'chemistry', learnerRequest: 'diagram' },
         failing,
       )
       expect(d.graphical).toBe(false)
@@ -181,7 +183,7 @@ describe('the three legitimate outcomes', () => {
 
   it('5. semantic validation failure → no figure', async () => {
     const d = await resolveVisualForTurn(
-      { message: '', lessonConceptId: CALORIMETRY, subject: 'physics', learnerRequest: 'diagram' },
+      { message: '', lessonConceptId: CALORIMETRY, subject: 'chemistry', learnerRequest: 'diagram' },
       engine(driftingScene()),
     )
     expect(d.graphical).toBe(false)
@@ -277,14 +279,14 @@ describe('payload and contract invariants hold in both directions', () => {
 
   it('11b+12b. the same holds for a generated decision', async () => {
     const accepted = await resolveVisualForTurn(
-      { message: '', lessonConceptId: CALORIMETRY, subject: 'physics', learnerRequest: 'diagram' },
+      { message: '', lessonConceptId: CALORIMETRY, subject: 'chemistry', learnerRequest: 'diagram' },
       engine(faithfulCalorimetryScene()),
     )
     expect(accepted.graphical).toBe(true)
     expect(accepted.payload).not.toBeNull()
 
     const rejected = await resolveVisualForTurn(
-      { message: '', lessonConceptId: CALORIMETRY, subject: 'physics', learnerRequest: 'diagram' },
+      { message: '', lessonConceptId: CALORIMETRY, subject: 'chemistry', learnerRequest: 'diagram' },
       engine(driftingScene()),
     )
     expect(rejected.graphical).toBe(false)
@@ -293,16 +295,16 @@ describe('payload and contract invariants hold in both directions', () => {
 
   it('13. the tutor contract matches the ACCEPTED payload, and only it', async () => {
     const accepted = await resolveVisualForTurn(
-      { message: '', lessonConceptId: CALORIMETRY, subject: 'physics', learnerRequest: 'diagram' },
+      { message: '', lessonConceptId: CALORIMETRY, subject: 'chemistry', learnerRequest: 'diagram' },
       engine(faithfulCalorimetryScene()),
     )
     const block = buildVisualContractBlock(accepted)
     expect(block).toContain('ALREADY BEING RENDERED')
-    expect(block).toContain('slow lift')         // a label that is really drawn
-    expect(block).toContain('work done per second')
+    expect(block).toContain('three significant figures')   // a label that is really drawn
+    expect(block).toContain('relative error propagates')
 
     const rejected = await resolveVisualForTurn(
-      { message: '', lessonConceptId: CALORIMETRY, subject: 'physics', learnerRequest: 'diagram' },
+      { message: '', lessonConceptId: CALORIMETRY, subject: 'chemistry', learnerRequest: 'diagram' },
       engine(driftingScene()),
     )
     const noBlock = buildVisualContractBlock(rejected)
@@ -357,7 +359,7 @@ describe('continuity is unchanged by the engine', () => {
 
   it('18. a generated visual survives the persistence round-trip', async () => {
     const d = await resolveVisualForTurn(
-      { message: '', lessonConceptId: CALORIMETRY, subject: 'physics', learnerRequest: 'diagram' },
+      { message: '', lessonConceptId: CALORIMETRY, subject: 'chemistry', learnerRequest: 'diagram' },
       engine(faithfulCalorimetryScene()),
     )
     const restored = p(d.session)
@@ -365,7 +367,7 @@ describe('continuity is unchanged by the engine', () => {
     expect(restored?.renderer).toBe('scene')
     // …and the held turn re-derives the SAME concept rather than regenerating.
     const held = await resolveVisualForTurn(
-      { message: 'ok', lessonConceptId: CALORIMETRY, subject: 'physics',
+      { message: 'ok', lessonConceptId: CALORIMETRY, subject: 'chemistry',
         activeSession: restored, lastAssistantAskedQuestion: true },
       engine(faithfulCalorimetryScene()),
     )

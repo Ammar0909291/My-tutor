@@ -46,10 +46,12 @@ const passingCritic = async () => ({
 // resolver never reaches the engine. It was phys.therm.calorimetry until the
 // M4 Physics pilot authored a real figure for that concept; it is now
 // phys.mech.kinetic-energy until physics batch 2 (2026-09-30) authored that too;
-// it is now phys.mech.power, which is still genuinely assetless. The scene
+// then phys.mech.power until physics batch 14 (2026-09-30) gave every physics
+// concept a figure; it is now chem.found.significant-figures, which is still
+// genuinely assetless. The scene
 // fixtures below were re-vocabularised to match, since the engine's anchor
 // check compares the scene's own labels with the concept's KG text.
-const CALORIMETRY = 'phys.mech.power'
+const CALORIMETRY = 'chem.found.significant-figures'
 const PROJECTILE = 'phys.mech.projectile-motion'   // curated generator
 const DIM = 'phys.meas.dimensional-analysis'
 
@@ -61,17 +63,17 @@ const ctxFor = (conceptId: string) => {
   }
 }
 
-/** A scene that genuinely depicts power — accepted when authorized. */
+/** A scene that genuinely depicts significant figures — accepted when authorized. */
 const calorimetryScene = (): SceneSpec => ({
-  id: 'gen', title: 'Power: the rate of doing work', sceneType: 'diagram',
-  teachingGoal: 'Show power as the rate at which work is done.',
+  id: 'gen', title: 'Significant figures and error', sceneType: 'diagram',
+  teachingGoal: 'Show how significant figures carry the uncertainty of a measurement.',
   steps: [
-    { narration: 'A motor lifts a load, doing work.', objects: [
-      { type: 'node', position: [-2, 0, 0], text: 'slow lift — low power' },
-      { type: 'node', position: [2, 0, 0], text: 'fast lift — more power, in watts' },
+    { narration: 'Two measurements of the same length, one more precise than the other.', objects: [
+      { type: 'node', position: [-2, 0, 0], text: '12.3 cm — three significant figures' },
+      { type: 'node', position: [2, 0, 0], text: '12.30 cm — four significant figures' },
     ] },
-    { narration: 'Power is the rate at which work is done: energy transferred per second.', objects: [
-      { type: 'arrow', from: [-1, 0, 0], to: [1, 0, 0], text: 'work done per second' },
+    { narration: 'The last significant figure carries the absolute error; divide by the value for the relative error.', objects: [
+      { type: 'arrow', from: [-1, 0, 0], to: [1, 0, 0], text: 'relative error propagates' },
     ] },
   ],
 })
@@ -177,7 +179,7 @@ describe('permission is the conjunction of flag AND allowlist', () => {
 
   it('9. wildcards match nothing — a canary must not widen by typo', () => {
     on()
-    for (const pattern of ['*', 'phys.*', 'phys.', '.*', 'phys.therm.*', '%']) {
+    for (const pattern of ['*', 'phys.*', 'phys.', 'chem.*', 'chem.', '.*', 'chem.found.*', '%']) {
       allow(pattern)
       expect(isRuntimeSceneGenerationAllowed(CALORIMETRY), pattern).toBe(false)
     }
@@ -185,7 +187,7 @@ describe('permission is the conjunction of flag AND allowlist', () => {
 
   it('10. a subject name is not a concept id', () => {
     on()
-    for (const subject of ['physics', 'phys', 'Physics']) {
+    for (const subject of ['physics', 'phys', 'Physics', 'chemistry', 'chem', 'Chemistry']) {
       allow(subject)
       expect(isRuntimeSceneGenerationAllowed(CALORIMETRY), subject).toBe(false)
     }
@@ -283,7 +285,7 @@ describe('nothing else changes', () => {
   it('an unauthorized concept still yields NO FIGURE, never a substitute', async () => {
     on()
     const d = await resolveVisualForTurn(
-      { message: '', lessonConceptId: CALORIMETRY, subject: 'physics', learnerRequest: 'diagram' },
+      { message: '', lessonConceptId: CALORIMETRY, subject: 'chemistry', learnerRequest: 'diagram' },
       { cacheClient: warmCache() as never, generate: async () => calorimetryScene() },
     )
     expect(d.payload).toBeNull()
@@ -325,7 +327,7 @@ describe('nothing else changes', () => {
   it('an authorized concept generates and stays semantically gated', async () => {
     on(); allow(CALORIMETRY)
     const good = await resolveVisualForTurn(
-      { message: '', lessonConceptId: CALORIMETRY, subject: 'physics', learnerRequest: 'diagram' },
+      { message: '', lessonConceptId: CALORIMETRY, subject: 'chemistry', learnerRequest: 'diagram' },
       { cacheClient: coldCache() as never, critic: passingCritic, budgetReader: openBudget, generate: async () => calorimetryScene() })
     expect(good.source).toBe('generated')
     expect(good.payload).not.toBeNull()
@@ -339,7 +341,7 @@ describe('nothing else changes', () => {
       ] }],
     }
     const bad = await resolveVisualForTurn(
-      { message: '', lessonConceptId: CALORIMETRY, subject: 'physics', learnerRequest: 'diagram' },
+      { message: '', lessonConceptId: CALORIMETRY, subject: 'chemistry', learnerRequest: 'diagram' },
       { cacheClient: coldCache() as never, critic: passingCritic, budgetReader: openBudget, generate: async () => drift })
     expect(bad.payload).toBeNull()
     expect(bad.provenance).toBe('no-figure:engine-not-anchored-to-concept')

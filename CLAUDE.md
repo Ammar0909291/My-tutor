@@ -200,6 +200,10 @@ finding above: `docs/history/subject-onboarding-and-fix-campaign.md`.
 **Physics master completion pass (2026-09-24)**: 3 grading/assessment defects fixed and verified in
 production; remaining items are non-blocking. Details, evidence and the QA harness
 (`scripts/qa/physicsProductionRuntimeQa.ts`) are in the same history file's dated section.
+**Physics visual gap campaign (2026-09-30) — COMPLETE**: all 238 physics concepts resolve to a
+figure (212 concept-scoped, 26 pinned domain-scoped), asserted by `physicsCoreScenesBatch14.test.ts`.
+Physics has no assetless concept left — tests needing one use `chem.found.significant-figures`.
+Production rendering not yet QA'd (Vercel 403). Full log: `docs/history/physics-visual-gap-campaign.md`.
 
 ## Mathematics asset-contract campaign (PAPPU account, owner-scoped, in progress — un-paused by
 ## explicit fresh instruction naming Mathematics; CS remains paused above; do not touch Biology,

@@ -105,6 +105,7 @@ import {
   buildOperatorsScene, buildPerturbationScene, buildVariationalScene, buildWkbScene, buildIdenticalParticlesScene,
   buildAngularMomentumAdditionScene, buildBornScene, buildSMatrixScene, buildDensityMatrixScene,
 } from '@/lib/teaching/sceneGenerators/physicsCoreScenesB13'
+import { buildPowerScene } from '@/lib/teaching/sceneGenerators/physicsCoreScenesB14'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -536,6 +537,8 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'phys.qm.scattering-theory-born-approximation': buildBornScene,
   'phys.qm.s-matrix-basics':          buildSMatrixScene,
   'phys.qm.density-matrix':           buildDensityMatrixScene,
+  // Batch 14 (2026-09-30). See physicsCoreScenesB14.ts.
+  'phys.mech.power':                    buildPowerScene,
   'phys.wave.transverse-waves':         buildTransverseWaveScene,
   'phys.wave.interference':             buildWaveInterferenceScene,
   'phys.therm.calorimetry':             buildCalorimetryScene,

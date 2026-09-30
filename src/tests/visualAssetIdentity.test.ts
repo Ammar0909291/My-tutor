@@ -296,11 +296,12 @@ describe('derived identity is visible and counted', () => {
 
 describe('G/H. the tutor is told about the admitted asset, or about nothing', () => {
   it('no admitted asset yields the NO FIGURE contract', () => {
-    // Assetless fixture: TIR gained an authored figure in the M4 pilot.
+    // Assetless fixture: TIR gained an authored figure in the M4 pilot, and
+    // phys.mech.power until physics batch 14 (2026-09-30) gave every physics concept a figure.
     const d = resolveVisual({
       message: 'explain with diagram',
-      lessonConceptId: 'phys.mech.power',
-      subject: 'physics',
+      lessonConceptId: 'chem.found.significant-figures',
+      subject: 'chemistry',
       learnerRequest: 'diagram',
     })
     expect(d.asset).toBeNull()

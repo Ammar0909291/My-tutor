@@ -10,23 +10,22 @@ import { parseVisualSession } from '@/lib/teaching/visual/session'
 import { detectLearnerRequest } from '@/lib/teaching/masteryGate'
 
 // M4 note: this fixture concept must have NO asset. It was phys.therm.calorimetry
-// until the M4 Physics pilot authored a real figure for that concept; it is now
-// phys.mech.kinetic-energy until physics batch 2 (2026-09-30) authored that too;
-// it is now phys.mech.power, which is still genuinely assetless. The invariants
-// under test are unchanged.
+// until the M4 Physics pilot authored a real figure for that concept, then
+// phys.mech.kinetic-energy until physics batch 2 (2026-09-30), then
+// phys.mech.power until physics batch 14 (2026-09-30) gave every physics
+// concept a figure. It is now a chemistry concept that is genuinely assetless,
+// and the excursion concept (formerly physics' own vector) is chemistry's
+// galvanic cell, which a chemistry learner reaches by name and which carries an
+// authored figure. The invariants under test are unchanged: the concept behind
+// the named topic wins, it is not the lesson's concept, and a visual request
+// with no named topic returns to the lesson.
 
-const CALORIMETRY = 'phys.mech.power'
-// The subject-local reading rule (2026-08-08) changed WHICH vector concept a
-// physics learner reaches: "vector" from a physics lesson now resolves to
-// physics' own Scalar and Vector Quantities — which carries the real vector
-// scene generator — instead of travelling to math.linalg.vector's card. These
-// tests still assert exactly what they always did: the concept behind the
-// medium word wins, and it is not the lesson's concept.
-const VECTOR = 'phys.meas.scalars-vectors'
+const CALORIMETRY = 'chem.found.significant-figures'
+const VECTOR = 'chem.elect.galvanic-cell'
 
 const decide = (message: string, opts: Partial<Parameters<typeof resolveVisual>[0]> = {}) =>
   resolveVisual({
-    subject: 'physics', message, lessonConceptId: CALORIMETRY,
+    subject: 'chemistry', message, lessonConceptId: CALORIMETRY,
     learnerRequest: detectLearnerRequest(message), ...opts,
   })
 
@@ -36,7 +35,7 @@ const persist = (s: unknown) => (s ? parseVisualSession(JSON.parse(JSON.stringif
 describe('a visual request with no named concept returns to the lesson', () => {
   it('reproduces session cmsj5569t 17:42:23Z and fixes it', () => {
     // Calorimetry lesson, vector excursion opened three turns earlier.
-    let session = persist(decide('Teach me vector with diagram').session)
+    let session = persist(decide('Teach me galvanic cells with diagram').session)
     session = persist(decide('ok', { activeSession: session, lastAssistantAskedQuestion: true }).session)
     expect(session?.conceptId).toBe(VECTOR)
 
@@ -61,13 +60,13 @@ describe('a visual request with no named concept returns to the lesson', () => {
   })
 
   it('a named concept plus a medium word still excurses', () => {
-    expect(decide('show me vector graph').conceptId).toBe(VECTOR)
+    expect(decide('show me galvanic cells graph').conceptId).toBe(VECTOR)
   })
 })
 
 describe('continuity behaviour that must not regress', () => {
   it('an answer during an excursion still holds the figure', () => {
-    const seed = decide('Teach me vector with diagram')
+    const seed = decide('Teach me galvanic cells with diagram')
     const answer = decide("It's starting point.", {
       activeSession: seed.session, lastAssistantAskedQuestion: true,
     })
@@ -75,7 +74,7 @@ describe('continuity behaviour that must not regress', () => {
   })
 
   it('an explicit new topic still switches', () => {
-    const seed = decide('Teach me vector with diagram')
+    const seed = decide('Teach me galvanic cells with diagram')
     expect(decide('teach me graph theory', { activeSession: seed.session }).conceptId)
       .toBe('math.disc.graph')
   })
