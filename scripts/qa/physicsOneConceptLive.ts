@@ -6,7 +6,9 @@
  * (QA_EMAIL, QA_PASSWORD) and are never printed, logged or written anywhere.
  * The account is NOT deleted — it belongs to the owner.
  *
- * Drives the first physics lesson (or the one at index QA_LESSON_INDEX):
+ * Drives the first physics lesson (or QA_LESSON_INDEX, or the lesson for QA_CONCEPT):
+ * optional QA_PROMPTS='a|b|c' overrides the learner's first turns (quizzes are still answered),
+ * and QA_DUMP=<path> writes every figure payload served, for correctness checks.
  * answers each authored quiz from the seed key (tapping the served option),
  * except ONE deliberately wrong answer to check the correction carries a why.
  * Stops at verified mastery / lesson complete, or after QA_MAX_TURNS turns.
@@ -43,6 +45,17 @@ async function main() {
   const email = process.env.QA_EMAIL, password = process.env.QA_PASSWORD
   if (!email || !password) throw new Error('QA_EMAIL and QA_PASSWORD must be set in the environment')
   const lessonIndex = Number(process.env.QA_LESSON_INDEX ?? 0)
+  const wantConcept = process.env.QA_CONCEPT ?? null
+  const dumpPath = process.env.QA_DUMP ?? null
+  const figurePayloads: Array<{ turn: string; payload: Record<string, unknown> }> = []
+  const keepFigure = (turn: string, p: TurnPayload) => {
+    if (!carriesFigure(p)) return
+    const payload: Record<string, unknown> = {}
+    for (const k of ['visual', 'visualSpec', 'sceneSpec', 'dynamicVisualizationCode']) if (p[k]) payload[k] = p[k]
+    payload.text = p.text
+    figurePayloads.push({ turn, payload })
+  }
+  const prompts = (process.env.QA_PROMPTS ?? '').split('|').map((x) => x.trim()).filter(Boolean)
   const maxTurns = Number(process.env.QA_MAX_TURNS ?? 24)
   const authored = await physicsProbes()
 
@@ -56,7 +69,7 @@ async function main() {
 
   const cur = await fetch(`${BASE}/api/curriculum?subject=physics`, { headers: { cookie } })
   const lessons = ((await cur.json()) as { lessons?: Array<{ topicSlug: string; lessonTitle: string; order: number; unitTitle: string }> }).lessons ?? []
-  const l = lessons[lessonIndex]
+  const l = wantConcept ? lessons.find((x) => x.topicSlug === wantConcept) : lessons[lessonIndex]
   if (!l) throw new Error(`no physics lesson at index ${lessonIndex} (got ${lessons.length})`)
   console.log(`lesson: ${l.topicSlug} — "${l.lessonTitle}" (${lessons.length} physics lessons)`)
 
@@ -64,6 +77,7 @@ async function main() {
   const opened = await openLesson(cookie, sid, { lessonTitle: l.lessonTitle, lessonOrder: l.order, topicSlug: l.topicSlug, unitTitle: l.unitTitle, totalLessons: lessons.length })
   const figures: string[] = []
   if (carriesFigure(opened)) figures.push(`open: ${figureLabel(opened)}`)
+  keepFigure('open', opened)
   console.log(`[open] provider=${opened.provider} ${short(opened.text)}`)
 
   let last: TurnPayload = opened
@@ -72,7 +86,7 @@ async function main() {
   let wrongReply = ''
   for (let turn = 1; turn <= maxTurns; turn++) {
     const q = last.mcq
-    let msg = turn === 2 ? 'show me a diagram' : 'quiz me'
+    let msg = prompts[turn - 1] ?? (turn === 2 ? 'show me a diagram' : 'quiz me')
     let intended: 'right' | 'wrong' | null = null
     let probe: SeedProbe | undefined
     if (q) {
@@ -92,6 +106,7 @@ async function main() {
     }
     const p = await say(cookie, sid, msg)
     if (carriesFigure(p)) figures.push(`t${turn}: ${figureLabel(p)}`)
+    keepFigure(`t${turn}`, p)
     const m = p.mastery ?? {}
     console.log(`[t${turn}] > ${short(msg, 70)}\n       provider=${p.provider} phase=${m.phase ?? '-'} check=${m.checkCorrect ?? '-'} practice=${m.practiceCorrect ?? '-'} verified=${m.verified ?? '-'}${p.mcq ? ` | new quiz: ${JSON.stringify(p.mcq.options)}` : ''}\n       ${short(p.text, 220)}`)
     if (q && intended) {
@@ -102,6 +117,7 @@ async function main() {
     if (m.verified || p.lessonComplete?.complete) { console.log(`\nSTOP: ${m.verified ? 'mastery verified' : 'lesson complete'} at turn ${turn}`); break }
   }
 
+  if (dumpPath) { const { writeFileSync } = await import('fs'); writeFileSync(dumpPath, JSON.stringify(figurePayloads, null, 2)); console.log(`figure payloads (${figurePayloads.length}) written to ${dumpPath}`) }
   console.log('\n' + JSON.stringify({
     lesson: l.topicSlug,
     turns: quizzes.length ? undefined : 'no authored quiz served',

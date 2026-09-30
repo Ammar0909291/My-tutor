@@ -110,3 +110,26 @@ describe('session hardening', () => {
     expect(parsed?.turns).toBe(0)
   })
 })
+
+describe('a question about a word printed on the active figure stays on that figure', () => {
+  // MEASURED LIVE 2026-09-30, phys.qm.wkb-approximation on deployment 76916f3b:
+  // "turning points" is a label on the authored WKB figure but absent from the
+  // KG description, so the question was read as a named topic leaving the
+  // figure and Tier 3 replaced it with a generated lesson flowchart.
+  const WKB = 'phys.qm.wkb-approximation'
+  const wkb = (message: string, activeSession?: ReturnType<typeof persist>) =>
+    resolveVisual({ subject: 'physics', message, lessonConceptId: WKB, learnerRequest: detectLearnerRequest(message), activeSession })
+
+  it('keeps the authored WKB figure for questions about its labels', () => {
+    const opened = wkb('show me a diagram')
+    expect(opened.conceptId).toBe(WKB)
+    expect(opened.provenance).toMatch(/^generator:phys.qm.wkb-approximation/)
+    const session = persist(opened.session)
+    for (const m of ['what are the turning points in the picture?', 'why is the wave smaller after the barrier?', 'what does T mean in the figure?']) {
+      const d = wkb(m, session)
+      expect(d.conceptId, m).toBe(WKB)
+      expect(d.graphical, m).toBe(true)
+      expect(d.continuityReason, m).not.toBe('named-topic-left-the-figure')
+    }
+  })
+})

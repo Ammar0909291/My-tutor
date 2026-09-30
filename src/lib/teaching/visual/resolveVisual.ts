@@ -30,6 +30,7 @@
 
 import { getConceptVisualType, lookupConceptVisualBinding, getConceptSceneGenerator } from '@/lib/teaching/visualRegistry'
 import { buildCanonicalScene, CONCEPT_SCENE_OVERRIDES } from './conceptSceneParams'
+import { authoredFigureText } from './authoredFigureText'
 import { admitVisualAsset, makeVisualAsset, type AssetProvenance, type VisualAsset, type VisualIntent } from './asset'
 import { isRetiredVisualBinding, retiredAssetVerdict } from './retired'
 import { getKGNode } from '@/lib/curriculum/knowledgeGraph'
@@ -584,7 +585,15 @@ export function resolveVisual(input: ResolveVisualInput): VisualDecision {
   const activeFigureText = liveSession
     ? (() => {
         const ctx = contextFor(liveSession.conceptId)
-        if (ctx) return `${ctx.title} ${ctx.description ?? ''}`
+        // …and through what the figure itself SAYS. MEASURED LIVE 2026-09-30
+        // (phys.qm.wkb-approximation, deployment 76916f3b): "what are the
+        // turning points in the picture?" asked about a LABEL on the authored
+        // figure, but "turning points" is absent from the KG description, so
+        // the question read as a named topic leaving the figure; the screen
+        // was released to no concept and Tier 3 generated a lesson flowchart
+        // in its place, which the tutor then narrated. A word printed on the
+        // active figure (label or stage narration) is about that figure.
+        if (ctx) return `${ctx.title} ${ctx.description ?? ''} ${authoredFigureText(liveSession.conceptId)}`
         return liveSession.topic ? `${liveSession.topic.title} ${liveSession.topic.description}` : ''
       })()
     : ''

@@ -1093,3 +1093,25 @@ READY, sha 76916f3b). The site answered this container (home 200, /api/health 20
   final text had none). Not yet root-caused.
 - Account note: `suaibamr6@gmail.com` now has `phys.meas.units` COMPLETED; the rest of
   physics is still fresh on it.
+
+## 2026-09-30 — live difficult-concept visual check: phys.qm.wkb-approximation
+
+Owner instruction: "Run difficult concept again with visuals. Check all n visuals correctness."
+Ran `scripts/qa/physicsOneConceptLive.ts` (now with `QA_CONCEPT`, `QA_PROMPTS`, `QA_DUMP`) on the
+owner-supplied fresh account (credentials supplied as env vars only, never written). Mastery was verified in 12 turns,
+and the deliberate wrong answer got a correction with its authored reason.
+
+Four figures were served:
+- **t1, t5, t12: the authored `phys-wkb` scene, correct.** The dumped payload is identical to `buildWkbScene`
+  (objects and narration), and `validateSceneSpec` is clean. Physics recomputed: the turning point is at x = 0.6, where
+  V = E = 3; ∫κ dx = 1.33287 matches the closed form; T = e^(−2∫κ) = 0.0695 matches the printed label
+  0.07; the transmitted amplitude is 0.26 ≈ √T.
+- **t2: DEFECT, a generated `process_flow` ("WKB Approximation Procedure").** It replaced the authored
+  figure after the learner asked "what are the turning points in the picture?". Root cause:
+  `requestLeftActiveFigure` compared the question only to the KG title and description, and "turning points"
+  is not in either. The question was read as a named topic leaving the figure, so the screen was released to
+  no concept and Tier 3 generated a flowchart in its place.
+  **Fix** (`resolveVisual.ts` `activeFigureText`): also include `authoredFigureText(conceptId)`, meaning the
+  figure's own labels and stage narration. Regression test: `visualContinuityProduction.test.ts`
+  ("a question about a word printed on the active figure stays on that figure"). It fails without the fix and
+  passes with it. Production re-check after deploy is pending.
