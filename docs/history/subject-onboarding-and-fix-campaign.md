@@ -1143,3 +1143,23 @@ labels only (`authoredFigureLabelText`), and "barrier" is in its stage narration
 (`transition: started`, `named-topic-left-the-figure`). **Fix:** route.ts now uses `authoredFigureText` (labels and
 narration), the same definition resolveVisual reads. Tests are in `visualContinuityProduction.test.ts`. This fix still
 needs a production re-check after deploy.
+
+## 2026-09-30 — live check on the owner's account, deployment 0151eb40
+
+Run on the owner's account (credentials supplied in chat, used as env vars for the invocation only, never written).
+
+- **WKB visuals: FIXED IN PRODUCTION.** t2 "turning points", t3 "wave smaller after the barrier" and t4 "what does T
+  mean" were all held on the authored figure (`continuity`, tier0-generator on every turn, no excursion opened, no
+  generated figure). Mastery was verified at turn 12. The deliberate wrong answer got a full explanation.
+- **Wrong-answer explanation: FIXED IN PRODUCTION.** phys.meas.units t4 "4.7 × 10⁶ F" → "Not quite — the answer is:
+  4.7 × 10⁻⁶ F. … The prefix micro- means 10⁻⁶ … You reversed the sign of the exponent …".
+- **NEW DEFECT (open, awaiting owner decision): the lesson-one spiral close deadlocks.** In lesson one the affect
+  budget is 1, so ONE graded wrong answer on an authored item set the episode to `CLOSING` (closedBy 'spiral'). The log
+  shows "CLOSING (affect budget spent): no new content". From then on every turn read `gate-eligibility`
+  `blockedBy:["arbitrationAllowsProbe","notClosingTurn"]` and the model's own questions were withheld
+  (`model-probe-withheld`, gate-declined-by-policy). The learner asked "quiz me" (PRACTICE_REQUEST) nine times, got "Which
+  part of this would you like me to explain more …" (and once the degraded template), and the lesson paused unmastered
+  at turn 14. The owner-approved 2026-09-25 reopen (a spiral close returns to CORE on an AUTHORED right answer) cannot
+  fire here, because CLOSING withholds every authored question. The same wrong tap on the same lesson did NOT close the
+  episode in the 19:09 run on 76916f3b. Why is not established: the failure signal does not read the learner-move
+  reading, so 0151eb40's answer-detector change is not the cause.
