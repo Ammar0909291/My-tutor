@@ -294,3 +294,42 @@ phys.meas.dimensions through the learner's message) now use eng.phonics.rhyming,
 heading to full coverage and English has no visuals. visualRetiredBindings' scene-generator case
 (Kepler) has no remaining retired example; retirement beating a generator stays covered by
 visualRetirementLifecycle's injected replacement.
+
+## Batch 8 (2026-09-30): electrostatics, magnetostatics, Maxwell, optics
+
+New module `physicsCoreScenesB8.ts`.
+
+| Concept | Figure |
+|---|---|
+| phys.em.electric-charge | Rod and cloth before/after rubbing: 3 electrons move; rod −3e, cloth +3e, total 0; q = ne. |
+| phys.em.gauss-law | +Q with 8 field lines; two surfaces each crossed by all 8 (asserted); a charge-free surface ON a line: in = out, Φ = 0 (asserted). |
+| phys.em.dielectrics | Same Q: vacuum (4 lines) vs κ = 2 slab with aligned dipoles (2 lines); E = E₀/κ, C = κC₀. |
+| phys.em.energy-capacitor | V = Q/C line for 2 μF to 6 V; shaded triangle U = ½CV² = 36 μJ. |
+| phys.em.biot-savart | Current element I dl, r at 60°, dB into the page (dl × r̂ asserted), a quarter at 2r. |
+| phys.em.amperes-law | Wire out of page; B anticlockwise on loops r and 2r, half as long at 2r (asserted); ∮B·dl = μ₀I. |
+| phys.em.magnetic-materials | Same B: M against it (dia), weakly along (para), strongly along (ferro) — qualitative lengths. |
+| phys.em.magnetic-dipole | Current loop, m = NIA, field lines from r = L sin²θ (closed through the loop, asserted). |
+| phys.em.maxwells-equations | Four panels, one per equation, and c = 1/√(μ₀ε₀). |
+| phys.opt.nature-of-light | Wide opening → straight rays; opening ≈ λ → spreading waves. |
+| phys.opt.optical-instruments | Magnifying glass: f = 2, u = −1.2 → virtual upright image v = −3, m = 2.5 (asserted). |
+| phys.opt.wave-optics | Huygens: wavelets from points on a wavefront; new front = envelope at ct (asserted). |
+| phys.opt.brewsters-law | n = 1.5: θ_B = 56.3°, refracted 33.7°, 90° between reflected and refracted (asserted); reflected fully polarized. |
+
+Found while rendering: Gauss's "no charge inside" surface first sat between field lines (showed
+nothing) — now centred on a line. Ampère and magnetic-materials arrows too short to read; lengthened.
+The magnetic-dipole chip picked a narration sentence (a ")" made it formula-shaped); reworded.
+Maxwell's c label collided with the panels.
+
+**Resolver defect surfaced by this batch (fixed).** Giving Nature of Light a figure meant a Total
+Internal Reflection learner asking "show me a ray diagram" would be shown "Light: rays or waves?":
+"ray" matched math "Ray", which the same-subject re-read turned into "Nature of Light: Ray and Wave
+Models" (before, the same mis-resolution showed no figure at all). Fix: the lesson's own authored
+figure text (labels + narration, new `visual/authoredFigureText.ts`) is now part of
+requestedConcept's lesson vocabulary, so the existing L3 rule keeps a lesson's own word from opening
+a detour. Shared by the teaching target and the figure (the V1 invariant holds). Two rejected
+attempts first: a "word before a medium noun" filter broke "viscosity diagram" / "vector diagram"
+requests, and a same-domain variant broke "vector visualization" from a phys.meas lesson. Tests:
+rayDiagramIsAMedium.test.ts; four tests that pinned "ray bending in a refraction lesson →
+nature-of-light" now pin it from dispersion (whose figure never says "ray") and assert refraction
+keeps its own lesson. diagramRequestServesAFigure's live-generation block moved from
+energy-capacitor (now authored) to phys.mech.power with power-vocabulary figures.

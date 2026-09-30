@@ -18,7 +18,12 @@ describe('L3', () => {
   })
 
   it('without that vocabulary the old reading is unchanged', () => {
-    expect(resolveRequestedConceptId(MSG, 'phys.opt.refraction', 'physics')).toBe('phys.opt.nature-of-light')
+    // Since 2026-09-30 the refraction lesson's own authored figure labels its
+    // "light ray", which is lesson vocabulary too (authoredFigureText) — so the
+    // refraction lesson never reads "ray" as a detour now. A lesson whose figure
+    // never mentions a ray (dispersion) still shows the old reading.
+    expect(resolveRequestedConceptId(MSG, 'phys.opt.refraction', 'physics')).toBeNull()
+    expect(resolveRequestedConceptId(MSG, 'phys.opt.dispersion', 'physics')).toBe('phys.opt.nature-of-light')
   })
 
   it('a genuine cross-subject request is untouched', () => {

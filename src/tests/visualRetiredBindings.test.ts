@@ -174,8 +174,11 @@ describe('B1 changed only what it was meant to change', () => {
       'phys.wave.interference',
     ]) {
       const d = ask(id, 'explain with a ray diagram, like a mirror')
-      expect(d.graphical, id).toBe(false)
-      expect(d.asset, id).toBeNull()
+      // Since 2026-09-30 a request that names rays can legitimately excurse to
+      // Nature of Light, which now has its own figure. What this guards is
+      // unchanged: the LESSON's own figure is never served for a request about
+      // something else.
+      expect(d.asset?.conceptId ?? null, id).not.toBe(id)
     }
   })
 })

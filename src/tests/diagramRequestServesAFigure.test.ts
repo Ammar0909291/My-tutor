@@ -75,17 +75,22 @@ function makeCache(seed: Record<string, string> = {}) {
   }
 }
 
-const CONCEPT = 'phys.em.energy-capacitor'
-const TITLE = 'Energy Stored in a Capacitor'
-const DESC = 'A charged capacitor stores energy in its electric field; the work done charging it is U = 1/2 C V squared.'
+// The defect was measured on phys.em.energy-capacitor, which has since gained
+// its own authored figure (physics visual gap campaign batch 8, 2026-09-30) and
+// so no longer reaches live generation. phys.mech.power is kept deliberately
+// unauthored as the live-generation fixture; the mechanism under test is the
+// same for any concept that reaches Tier 3.
+const CONCEPT = 'phys.mech.power'
+const TITLE = 'Power'
+const DESC = 'Power is the rate at which work is done or energy is transferred, measured in watts: P = W / t.'
 
 /** Structurally valid figures the validator accepts (process_flow specs). */
 function figureFor(title: string, steps: string[]) {
   return { type: 'process_flow', title, steps: steps.map((t) => ({ title: t })) }
 }
 
-const REJECTED = figureFor('Charging a capacitor', ['Connect the source', 'Charge builds on the plates', 'Voltage rises to its final value'])
-const FRESH = figureFor('Energy stored while charging', ['Move the first charge across', 'Push the next against what is there', 'Total work is the stored energy'])
+const REJECTED = figureFor('Power of a lifting motor', ['Work done lifting the load', 'Time taken to lift it', 'Power is work divided by time'])
+const FRESH = figureFor('Power: work done per second', ['Count the work done in joules', 'Time it in seconds', 'Power in watts is joules per second'])
 
 function deps(cache: ReturnType<typeof makeCache>, opts: {
   generate: () => unknown
@@ -119,7 +124,7 @@ const reject = (): CriticReport => ({ decision: 'reject', confidence: 0.9, dimen
  * a wrong guess makes the cache silently miss — which is a test that passes for
  * the wrong reason.
  */
-const ORDINARY_TEACHING_TURN = 'I am still not sure how that energy formula comes about at all'
+const ORDINARY_TEACHING_TURN = 'I am still not sure how that power formula comes about at all'
 
 async function seedRejectedCandidate(calls: { generate: number; critic: number }) {
   const cache = makeCache()

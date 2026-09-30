@@ -20,8 +20,11 @@ import { resolveRequestedConceptId, conceptIndex } from '@/lib/teaching/concept/
 import { isTopicQuestion } from './session'
 import { extractRequestedTopic, isMediumWord, isPureVisualRepeatRequest } from './requestedTopic'
 import { contentWords } from './visualEngine'
-import { buildCanonicalScene, CONCEPT_SCENE_OVERRIDES } from './conceptSceneParams'
+import { authoredFigureLabelText } from './authoredFigureText'
 import type { ArchetypeContext } from './archetypes'
+
+// Re-exported: the route's excursion check imports it from here.
+export { authoredFigureLabelText, authoredFigureText } from './authoredFigureText'
 
 export {
   isMediumUsage,
@@ -34,22 +37,6 @@ export interface VisualTarget extends ArchetypeContext {
   excursion: boolean
   /** `learner-request` | `lesson-concept` — logged for auditability. */
   origin: 'learner-request' | 'lesson-concept'
-}
-
-/**
- * The label text of the concept's own AUTHORED scene (CONCEPT_SCENES), or ''.
- * Shared by the visual layer (below) and the route's excursion check, so both
- * agree that a word the lesson's own figure labels is the lesson's term.
- */
-export function authoredFigureLabelText(conceptId: string | null | undefined): string {
-  try {
-    if (!conceptId || !CONCEPT_SCENE_OVERRIDES.includes(conceptId)) return ''
-    const scene = buildCanonicalScene(null, conceptId)
-    return (scene?.steps ?? []).flatMap((st) =>
-      (st.objects as Array<{ text?: unknown }>).map((o) => (typeof o.text === 'string' ? o.text : ''))).join(' ')
-  } catch {
-    return ''
-  }
 }
 
 function authoredFigureWords(conceptId: string): Set<string> {

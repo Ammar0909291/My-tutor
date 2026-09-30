@@ -25,6 +25,7 @@ import { matchTopicRequest } from '@/lib/teaching/visual/session'
 import { buildConceptIndexFromKnowledgeGraph } from './conceptIndexSource'
 import { VISUAL_MEDIUM_NOUNS } from '@/lib/teaching/masteryGate'
 import { DISCOURSE_NOUNS } from '@/lib/teaching/visual/requestedTopic'
+import { authoredFigureText } from '@/lib/teaching/visual/authoredFigureText'
 import type { ConceptIndexEntry } from './conceptUnderstanding'
 
 /** Minimum confidence before a learner-named concept may override the lesson. */
@@ -992,7 +993,13 @@ export function resolveRequestedConceptId(
   try {
     const matches = resolveConceptMatches(message ?? '', conceptIndex(), preferredSubject ?? null)
     const lessonNodeForVocab = lessonConceptId ? getKGNode(lessonConceptId) : null
-    const lessonVocabulary = lessonVocabularyOf(lessonNodeForVocab?.title, lessonNodeForVocab?.description, recentTutorText)
+    // Lesson vocabulary also includes what the lesson's own authored figure says
+    // (authoredFigureText): a word the lesson's figure uses is the lesson's term.
+    const lessonVocabulary = lessonVocabularyOf(
+      lessonNodeForVocab?.title,
+      lessonNodeForVocab?.description,
+      [recentTutorText ?? '', authoredFigureText(lessonConceptId)].filter(Boolean).join(' ') || null,
+    )
     // Drop medium-word and incidental-vocabulary matches BEFORE picking the
     // best one, so a genuine concept sitting behind them still wins: "show me
     // vector graph" ranks {Graph, Graph, Vector} and must resolve to Vector;

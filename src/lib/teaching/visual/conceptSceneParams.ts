@@ -71,6 +71,12 @@ import {
   buildGravitationalPotentialScene, buildKeplersLawsScene, buildEscapeVelocityScene, buildStressStrainScene,
   buildThirdLawScene,
 } from '@/lib/teaching/sceneGenerators/physicsCoreScenesB7'
+import {
+  buildElectricChargeScene, buildGaussLawScene, buildDielectricScene, buildCapacitorEnergyScene,
+  buildBiotSavartScene, buildAmperesLawScene, buildMagneticMaterialsScene, buildMagneticDipoleScene,
+  buildMaxwellScene, buildNatureOfLightScene, buildOpticalInstrumentsScene, buildWaveOpticsScene,
+  buildBrewsterScene,
+} from '@/lib/teaching/sceneGenerators/physicsCoreScenesB8'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -412,6 +418,20 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'phys.mech.escape-velocity':          buildEscapeVelocityScene,
   'phys.mech.stress-strain':            buildStressStrainScene,
   'phys.therm.third-law':               buildThirdLawScene,
+  // Batch 8 (2026-09-30). See physicsCoreScenesB8.ts.
+  'phys.em.electric-charge':            buildElectricChargeScene,
+  'phys.em.gauss-law':                  buildGaussLawScene,
+  'phys.em.dielectrics':                buildDielectricScene,
+  'phys.em.energy-capacitor':           buildCapacitorEnergyScene,
+  'phys.em.biot-savart':                buildBiotSavartScene,
+  'phys.em.amperes-law':                buildAmperesLawScene,
+  'phys.em.magnetic-materials':         buildMagneticMaterialsScene,
+  'phys.em.magnetic-dipole':            buildMagneticDipoleScene,
+  'phys.em.maxwells-equations':         buildMaxwellScene,
+  'phys.opt.nature-of-light':           buildNatureOfLightScene,
+  'phys.opt.optical-instruments':       buildOpticalInstrumentsScene,
+  'phys.opt.wave-optics':               buildWaveOpticsScene,
+  'phys.opt.brewsters-law':             buildBrewsterScene,
   'phys.wave.transverse-waves':         buildTransverseWaveScene,
   'phys.wave.interference':             buildWaveInterferenceScene,
   'phys.therm.calorimetry':             buildCalorimetryScene,
