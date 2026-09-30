@@ -24,7 +24,7 @@ const ask = (conceptId: string, message = 'explain with diagram') =>
   resolveVisual({ message, lessonConceptId: conceptId, learnerRequest: 'diagram' })
 
 describe('the register itself', () => {
-  it('covers exactly the 20 audited concepts', () => {
+  it('covers exactly the 15 audited concepts', () => {
     // 29 from the M3-A audit + 8 from the visual semantic moat sweep, which
     // ran the resolver over all 238 physics and 186 chemistry concepts and
     // read all 105 bindings that render.
@@ -51,7 +51,10 @@ describe('the register itself', () => {
     // owned faithful figures (physicsCoreScenesBatch4.test.ts).
     // 22 -> 20 (2026-09-30): phys.mech.rolling-motion and phys.mech.keplers-laws were removed once
     // they owned faithful figures (physicsCoreScenesBatch7.test.ts).
-    expect(RETIRED).toHaveLength(20)
+    // 20 -> 15 (2026-09-30): the last five physics circuit concepts (wheatstone-bridge, potentiometer,
+    // self-inductance, mutual-inductance, lc-circuits) left once they owned faithful figures
+    // (physicsCoreScenesBatch9.test.ts). Only chemistry and CS rows remain.
+    expect(RETIRED).toHaveLength(15)
   })
 
   it('every retired id is a real KG concept — a typo would silently retire nothing', () => {
@@ -102,7 +105,7 @@ describe('every retired concept resolves to NO FIGURE', () => {
     // left the register with its own figure; no retired concept keeps a generator
     // binding now. Retirement beating a generator stays covered by the injected
     // replacement in visualRetirementLifecycle.test.ts.
-    for (const id of ['phys.em.lc-circuits', 'chem.bond.ionic-bonding', 'cs.algo.flowcharts', 'phys.em.potentiometer']) {
+    for (const id of ['chem.solid.defects', 'chem.bond.ionic-bonding', 'cs.algo.flowcharts', 'chem.atomic.orbitals']) {
       expect(ask(id).graphical, id).toBe(false)
     }
   })
@@ -110,11 +113,12 @@ describe('every retired concept resolves to NO FIGURE', () => {
   it('a retired concept stays retired however the learner phrases the request', () => {
     for (const message of [
       'draw it', 'show me a diagram', 'visualise this', 'can I see a picture',
-      'explain differently with a circuit diagram',
+      'explain differently with a lattice diagram',
     ]) {
-      // phys.opt.reflection was this test's example until it was given its own
-      // faithful figure (2026-09-30); phys.em.potentiometer is still retired.
-      expect(ask('phys.em.potentiometer', message).graphical, message).toBe(false)
+      // phys.opt.reflection, then phys.em.potentiometer, were this test's example
+      // until each got its own faithful figure (2026-09-30); crystal defects is
+      // still retired.
+      expect(ask('chem.solid.defects', message).graphical, message).toBe(false)
     }
   })
 })

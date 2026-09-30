@@ -96,11 +96,14 @@ const pointScene = (title: string, labels: string[]): SceneSpec => ({
   ] }],
 } as SceneSpec)
 
-// Retired (card has neither inductor nor capacitor) and no concept-authored scene.
-const LC = 'phys.em.lc-circuits'
-const LC_TITLE = 'LC Oscillations and Resonance'
-const lcFigureA: GeneratedFigure = { kind: 'scene', scene: pointScene(LC_TITLE, ['inductor', 'capacitor']) }
-const lcFigureB: GeneratedFigure = { kind: 'scene', scene: pointScene(LC_TITLE, ['capacitor', 'inductor', 'resonance']) }
+// Retired (a perfect lattice for crystal DEFECTS) and no concept-authored scene.
+// Was phys.em.lc-circuits until that concept gained its own figure (physics
+// visual gap campaign batch 9, 2026-09-30) and left the register; the names
+// LC / lcFigure* are kept so the history of each test below stays readable.
+const LC = 'chem.solid.defects'
+const LC_TITLE = 'Crystal Defects'
+const lcFigureA: GeneratedFigure = { kind: 'scene', scene: pointScene(LC_TITLE, ['Schottky defect', 'Frenkel defect']) }
+const lcFigureB: GeneratedFigure = { kind: 'scene', scene: pointScene(LC_TITLE, ['Frenkel defect', 'Schottky defect', 'non-stoichiometric defect']) }
 
 // A subject-wide card concept (registry:domain-default:math.calc:coordinate_plane).
 const LIMITS = 'math.calc.limits'
@@ -154,7 +157,7 @@ describe('A. retirement retires an ARTIFACT, on every tier', () => {
   it('1. a retired artifact offered by the APPROVED tier is refused', async () => {
     EXTRA.conceptId = LC
     EXTRA.fingerprints = [servedFingerprint(lcFigureA, LC)]
-    const d = await resolveVisualForTurn(turn(LC, 'physics'), {
+    const d = await resolveVisualForTurn(turn(LC, 'chemistry'), {
       enabled: () => true, policy: 'auto', critic: passingCritic, budgetReader: openBudget,
       findApprovedFigure: async () => lcFigureA, generate: noGeneration,
     })
@@ -166,7 +169,7 @@ describe('A. retirement retires an ARTIFACT, on every tier', () => {
     EXTRA.conceptId = LC
     EXTRA.fingerprints = [servedFingerprint(lcFigureA, LC)]
     const { outcomes, sink } = fakeOutcomeSink()
-    const d = await resolveVisualForTurn(turn(LC, 'physics'), {
+    const d = await resolveVisualForTurn(turn(LC, 'chemistry'), {
       enabled: () => true, policy: 'auto', critic: passingCritic, budgetReader: openBudget,
       findApprovedFigure: async () => null, generate: async () => lcFigureA.kind === 'scene' ? lcFigureA.scene : null,
       cacheClient: fakeCacheClient() as never, outcomeSink: sink,
@@ -181,20 +184,20 @@ describe('A. retirement retires an ARTIFACT, on every tier', () => {
   it('2. new content for a retired concept is a REPLACEMENT and serves — the register row stays', async () => {
     EXTRA.conceptId = LC
     EXTRA.fingerprints = [servedFingerprint(lcFigureA, LC)]
-    const d = await resolveVisualForTurn(turn(LC, 'physics'), {
+    const d = await resolveVisualForTurn(turn(LC, 'chemistry'), {
       enabled: () => true, policy: 'auto', critic: passingCritic, budgetReader: openBudget,
       findApprovedFigure: async () => lcFigureB, generate: noGeneration,
     })
     expect(d.graphical).toBe(true)
     expect(tierOf(d)).toBe('tier2-approved')
     expect(isRetiredVisualBinding(LC)).toBe(true)
-    expect(retirementReason(LC)).toMatch(/inductor/)
+    expect(retirementReason(LC)).toMatch(/defect/)
     expect(describeVisualTurn(d, { sceneSpec: (d.payload as { sceneSpec: unknown }).sceneSpec }, true).retirement)
       .toBe('replacement')
   })
 
   it('the retired CARD itself is never served, whatever the async tiers do', async () => {
-    const d = await resolveVisualForTurn(turn(LC, 'physics'), {
+    const d = await resolveVisualForTurn(turn(LC, 'chemistry'), {
       enabled: () => true, policy: 'auto', critic: passingCritic, budgetReader: openBudget,
       findApprovedFigure: async () => null, generate: async () => null,
       cacheClient: fakeCacheClient() as never,
@@ -208,19 +211,22 @@ describe('A. retirement retires an ARTIFACT, on every tier', () => {
   it('3. unrelated retired concepts are unaffected (sync decision still no-figure:retired-binding)', () => {
     EXTRA.conceptId = LC
     EXTRA.fingerprints = ['fdeadbeef']
-    for (const id of ['phys.em.self-inductance', 'chem.solid.defects', 'chem.bond.ionic-bonding', 'cs.algo.flowcharts', 'phys.em.potentiometer']) {
+    for (const id of ['chem.bond.polar-molecules', 'chem.atomic.orbitals', 'chem.bond.ionic-bonding', 'cs.algo.flowcharts', 'chem.bond.resonance']) {
       expect(resolveVisual({ message: '', lessonConceptId: id }).provenance).toBe('no-figure:retired-binding')
     }
   })
 
-  it('no retirement row was removed by this lifecycle (20 rows of evidence)', () => {
+  it('no retirement row was removed by this lifecycle (15 rows of evidence)', () => {
     // 25 -> 24 (2026-09-30): phys.opt.reflection was removed from the register once it owned
     // a faithful incident/normal/equal-angles figure (physicsCoreScenesBatch1.test.ts).
     // 24 -> 22 (2026-09-30): phys.em.rc-circuits and phys.em.ac-basics were removed once they
     // owned faithful figures (physicsCoreScenesBatch4.test.ts).
     // 22 -> 20 (2026-09-30): phys.mech.rolling-motion and phys.mech.keplers-laws were removed once
     // they owned faithful figures (physicsCoreScenesBatch7.test.ts).
-    expect(Object.keys(RETIRED_VISUAL_BINDINGS)).toHaveLength(20)
+    // 20 -> 15 (2026-09-30): the last five physics circuit concepts (wheatstone-bridge, potentiometer,
+    // self-inductance, mutual-inductance, lc-circuits) left once they owned faithful figures
+    // (physicsCoreScenesBatch9.test.ts). Only chemistry and CS rows remain.
+    expect(Object.keys(RETIRED_VISUAL_BINDINGS)).toHaveLength(15)
   })
 })
 

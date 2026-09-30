@@ -7,20 +7,22 @@
  * Now retirement records the retired ASSETS (by content), and a
  * concept-authored asset with new content is served with no edit to retired.ts.
  *
- * A replacement scene is injected for phys.em.lc-circuits (retired: its card
- * has neither an inductor nor a capacitor) exactly as an author would add one
+ * A replacement scene is injected for chem.solid.defects (retired: its card
+ * showed a perfect lattice, no defect — formerly phys.em.lc-circuits) as an author would add one
  * — a CONCEPT_SCENES entry. retired.ts is NOT touched by this test.
  */
 import { describe, it, expect, vi } from 'vitest'
 import type { SceneSpec } from '@/lib/teaching/sceneSpec'
 
-const { REPLACED } = vi.hoisted(() => ({ REPLACED: 'phys.em.lc-circuits' }))
+// phys.em.lc-circuits was this case until it gained its own real figure and left
+// the register (2026-09-30); crystal defects is still retired, so it stands in.
+const { REPLACED } = vi.hoisted(() => ({ REPLACED: 'chem.solid.defects' }))
 
 vi.mock('@/lib/teaching/visual/conceptSceneParams', async (importOriginal) => {
   const real = await importOriginal<typeof import('@/lib/teaching/visual/conceptSceneParams')>()
-  // A structurally real scene, re-identified as an LC-circuit figure.
+  // A structurally real scene, re-identified as a crystal-defect figure.
   const donor = real.buildCanonicalScene(null, 'bio.cell.cell-cycle') as SceneSpec
-  const replacement: SceneSpec = { ...donor, id: 'lc-circuit-energy-exchange', title: 'LC circuit: energy moves between C and L' }
+  const replacement: SceneSpec = { ...donor, id: 'crystal-defects-vacancy', title: 'Crystal defects: a vacancy in the lattice' }
   return {
     ...real,
     CONCEPT_SCENE_OVERRIDES: [...real.CONCEPT_SCENE_OVERRIDES, REPLACED],
@@ -39,14 +41,14 @@ const resolve = (id: string, request = false) =>
 describe('retired -> replaced, with no retirement row removed', () => {
   it('the concept is STILL on the retirement register (evidence kept, nothing deleted)', () => {
     expect(isRetiredVisualBinding(REPLACED)).toBe(true)
-    expect(retirementReason(REPLACED)).toMatch(/inductor/)
+    expect(retirementReason(REPLACED)).toMatch(/defect/)
   })
 
   it('the authored replacement is served — on an ordinary turn and on an explicit request', () => {
     for (const d of [resolve(REPLACED), resolve(REPLACED, true)]) {
       expect(d.graphical).toBe(true)
       expect(d.asset?.provenance).toBe('generator')
-      expect((d.payload as { sceneSpec: SceneSpec }).sceneSpec.id).toBe('lc-circuit-energy-exchange')
+      expect((d.payload as { sceneSpec: SceneSpec }).sceneSpec.id).toBe('crystal-defects-vacancy')
       expect(d.provenance).toBe(`generator:${REPLACED}:concept-authored`)
     }
   })
@@ -74,7 +76,7 @@ describe('a retired CONCEPT-AUTHORED figure stays retired', () => {
   })
 
   it('every other retired concept is unaffected by one concept\'s replacement', () => {
-    for (const id of ['phys.em.potentiometer', 'chem.solid.defects', 'chem.bond.ionic-bonding', 'cs.algo.flowcharts']) {
+    for (const id of ['chem.atomic.orbitals', 'chem.bond.polar-molecules', 'chem.bond.ionic-bonding', 'cs.algo.flowcharts']) {
       expect(resolve(id).provenance).toBe('no-figure:retired-binding')
     }
   })

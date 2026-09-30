@@ -255,7 +255,7 @@ describe('the four new builders produce the geometry their own parameters descri
 })
 
 describe('non-regression: everything this campaign must not touch', () => {
-  it('RETIRED_VISUAL_BINDINGS now holds exactly the 20 non-biology-cell entries', () => {
+  it('RETIRED_VISUAL_BINDINGS now holds exactly the 15 non-biology-cell entries', () => {
     const remaining = Object.keys(RETIRED_VISUAL_BINDINGS)
     // 25 -> 24 (2026-09-30): phys.opt.reflection was removed from the register once it owned
     // a faithful incident/normal/equal-angles figure (physicsCoreScenesBatch1.test.ts).
@@ -263,7 +263,10 @@ describe('non-regression: everything this campaign must not touch', () => {
     // owned faithful figures (physicsCoreScenesBatch4.test.ts).
     // 22 -> 20 (2026-09-30): phys.mech.rolling-motion and phys.mech.keplers-laws were removed once
     // they owned faithful figures (physicsCoreScenesBatch7.test.ts).
-    expect(remaining).toHaveLength(20)
+    // 20 -> 15 (2026-09-30): the last five physics circuit concepts (wheatstone-bridge, potentiometer,
+    // self-inductance, mutual-inductance, lc-circuits) left once they owned faithful figures
+    // (physicsCoreScenesBatch9.test.ts). Only chemistry and CS rows remain.
+    expect(remaining).toHaveLength(15)
     for (const id of THE_18) expect(remaining).not.toContain(id)
   })
 

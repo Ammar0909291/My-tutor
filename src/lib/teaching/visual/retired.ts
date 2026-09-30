@@ -60,25 +60,15 @@ export const RETIRED_VISUAL_BINDINGS: Readonly<Record<string, string>> = {
   // concept renders. Coverage: physicsCoreScenesBatch1.test.ts.
 
   // ── physics: electricity ────────────────────────────────────────────────
-  // All seven rendered the same "battery, wires, switch, bulb" card, which does
-  // not contain the component that defines the concept.
-  'phys.em.wheatstone-bridge':
-    'Requires a four-resistor bridge with a galvanometer; the card is a single-loop bulb circuit.',
-  'phys.em.potentiometer':
-    'Requires a slide wire with a tapping key; neither is in the card.',
-  // REMOVED 2026-09-30: 'phys.em.rc-circuits' ("Requires a capacitor and a
-  // charging/discharging curve; the card has neither."). It now owns the
-  // charging curve with τ = RC marked (physicsCoreScenesB4.ts). Coverage:
-  // physicsCoreScenesBatch4.test.ts.
-  'phys.em.self-inductance':
-    'Requires an inductor; the card contains no inductive element.',
-  'phys.em.mutual-inductance':
-    'Requires two magnetically coupled coils (a transformer); the card is a bulb circuit.',
-  // REMOVED 2026-09-30: 'phys.em.ac-basics' ("Peak and RMS values require an
-  // AC source and a sinusoid; the card is a DC loop."). It now owns the
-  // sinusoid with peak, period and RMS marked (physicsCoreScenesB4.ts).
-  'phys.em.lc-circuits':
-    'LC oscillation requires an inductor and a capacitor; the card contains neither.',
+  // REMOVED 2026-09-30, all seven that rendered the "battery, wires, switch,
+  // bulb" card: rc-circuits and ac-basics (batch 4), then wheatstone-bridge
+  // ("Requires a four-resistor bridge with a galvanometer"), potentiometer
+  // ("Requires a slide wire with a tapping key"), self-inductance ("Requires an
+  // inductor"), mutual-inductance ("Requires two magnetically coupled coils")
+  // and lc-circuits ("LC oscillation requires an inductor and a capacitor").
+  // Each now owns a figure of exactly what its verdict said was missing
+  // (physicsCoreScenesB9.ts). Coverage: physicsCoreScenesBatch9.test.ts.
+  // No physics concept remains in this register.
 
   // ── chemistry ───────────────────────────────────────────────────────────
   'chem.found.states-of-matter':
@@ -273,11 +263,6 @@ export function retirementReason(conceptId: string): string | null {
 // needs no edit here. `visualRetirementLifecycle.test.ts` keeps this table and
 // RETIRED_VISUAL_BINDINGS in lock-step and reports which rows are REPLACED.
 export const RETIRED_ASSET_FINGERPRINTS: Readonly<Record<string, readonly string[]>> = {
-  'phys.em.wheatstone-bridge': ['fcd558030'], // card:circuit_diagram
-  'phys.em.potentiometer': ['fcd558030'], // card:circuit_diagram
-  'phys.em.self-inductance': ['fcd558030'], // card:circuit_diagram
-  'phys.em.mutual-inductance': ['fcd558030'], // card:circuit_diagram
-  'phys.em.lc-circuits': ['fcd558030'], // card:circuit_diagram
   'chem.found.states-of-matter': ['ffdc76ff'], // card:three_crystal_lattice
   'chem.bond.ionic-bonding': ['f4a1f0cb9'], // card:three_bond_formation
   'chem.bond.metallic-bonding': ['f4a1f0cb9'], // card:three_bond_formation

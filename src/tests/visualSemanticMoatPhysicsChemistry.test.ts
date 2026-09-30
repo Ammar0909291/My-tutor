@@ -172,20 +172,22 @@ describe('the inert set is demoted, not suppressed', () => {
     }
   })
 
-  it('phys.em.emf is demoted while its circuit-card siblings stay retired', () => {
+  it('phys.em.emf is demoted while its circuit-card siblings now own figures', () => {
     // All eight sit on the same "battery, switch, bulb, resistor" card. Seven
     // require a component the card does not contain AND cannot be read as the
     // concept at all; emf is about the battery the card does draw, just
     // without internal resistance. Thin, not wrong — the same verdict
     // phys.em.resistivity already carries.
+    // All seven siblings were retired here until 2026-09-30, when each gained a
+    // faithful figure of exactly what its verdict said was missing
+    // (physicsCoreScenesBatch4/9.test.ts) and left the register.
     for (const id of [
-      // rc-circuits and ac-basics left this list 2026-09-30: both now own a
-      // faithful figure (physicsCoreScenesBatch4.test.ts) and left the register.
+      'phys.em.rc-circuits', 'phys.em.ac-basics',
       'phys.em.wheatstone-bridge', 'phys.em.potentiometer',
       'phys.em.self-inductance', 'phys.em.mutual-inductance',
       'phys.em.lc-circuits',
     ]) {
-      expect(isRetiredVisualBinding(id), id).toBe(true)
+      expect(isRetiredVisualBinding(id), id).toBe(false)
     }
     expect(isRetiredVisualBinding('phys.em.emf')).toBe(false)
     expect(isInsufficientForConcept('phys.em.emf')).toBe(true)

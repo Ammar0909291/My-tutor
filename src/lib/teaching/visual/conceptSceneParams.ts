@@ -77,6 +77,11 @@ import {
   buildMaxwellScene, buildNatureOfLightScene, buildOpticalInstrumentsScene, buildWaveOpticsScene,
   buildBrewsterScene,
 } from '@/lib/teaching/sceneGenerators/physicsCoreScenesB8'
+import {
+  buildWheatstoneScene, buildPotentiometerScene, buildSelfInductanceScene, buildTransformerScene, buildLcScene,
+  buildEnergyBandsScene, buildSemiconductorClassesScene, buildIntrinsicScene, buildExtrinsicScene,
+  buildPnJunctionScene, buildDiodeScene, buildShellModelScene,
+} from '@/lib/teaching/sceneGenerators/physicsCoreScenesB9'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -432,6 +437,19 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'phys.opt.optical-instruments':       buildOpticalInstrumentsScene,
   'phys.opt.wave-optics':               buildWaveOpticsScene,
   'phys.opt.brewsters-law':             buildBrewsterScene,
+  // Batch 9 (2026-09-30). See physicsCoreScenesB9.ts.
+  'phys.em.wheatstone-bridge':          buildWheatstoneScene,
+  'phys.em.potentiometer':              buildPotentiometerScene,
+  'phys.em.self-inductance':            buildSelfInductanceScene,
+  'phys.em.mutual-inductance':          buildTransformerScene,
+  'phys.em.lc-circuits':                buildLcScene,
+  'phys.mod.energy-bands':              buildEnergyBandsScene,
+  'phys.mod.semiconductor-classification': buildSemiconductorClassesScene,
+  'phys.mod.intrinsic-semiconductors':  buildIntrinsicScene,
+  'phys.mod.extrinsic-semiconductors':  buildExtrinsicScene,
+  'phys.mod.pn-junction':               buildPnJunctionScene,
+  'phys.mod.diode-rectification':       buildDiodeScene,
+  'phys.mod.nuclear-models':            buildShellModelScene,
   'phys.wave.transverse-waves':         buildTransverseWaveScene,
   'phys.wave.interference':             buildWaveInterferenceScene,
   'phys.therm.calorimetry':             buildCalorimetryScene,

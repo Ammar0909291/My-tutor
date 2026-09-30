@@ -333,3 +333,33 @@ rayDiagramIsAMedium.test.ts; four tests that pinned "ray bending in a refraction
 nature-of-light" now pin it from dispersion (whose figure never says "ray") and assert refraction
 keeps its own lesson. diagramRequestServesAFigure's live-generation block moved from
 energy-capacitor (now authored) to phys.mech.power with power-vocabulary figures.
+
+## Batch 9 (2026-09-30): the retired circuit concepts, semiconductors, shell model
+
+New module `physicsCoreScenesB9.ts` (adds resistor zig-zag, cell, galvanometer and coil helpers).
+
+| Concept | Figure |
+|---|---|
+| phys.em.wheatstone-bridge | Diamond of P, Q, R, S with galvanometer G = 0; S = QR/P = 300 Ω (balance asserted). |
+| phys.em.potentiometer | Uniform wire AB with driver cell (2 V); test cell + G to the jockey at l = 60 cm; E = V_AB·l/L = 1.2 V. |
+| phys.em.self-inductance | I(t) ramp / hold / fast switch-off; ε = −L dI/dt by finite difference: small, zero, large spike (asserted). |
+| phys.em.mutual-inductance | Transformer: 4-turn primary, 8-turn secondary on one core; V_s = V_p·N_s/N_p = 24 V. |
+| phys.em.lc-circuits | U_C = cos², U_L = sin², total constant (sum asserted); f = 1/(2π√LC) = 1.59 kHz for 10 mH, 1 μF. |
+| phys.mod.energy-bands | Two levels splitting into six as atoms approach (spread ∝ overlap); valence band, gap, conduction band. |
+| phys.mod.semiconductor-classification | Conductor (overlap), semiconductor (1.1 eV), insulator (5.5 eV). |
+| phys.mod.intrinsic-semiconductors | Electron–hole pairs across the gap; σ(T) rising steeply vs a metal's falling. |
+| phys.mod.extrinsic-semiconductors | Si lattice with P donor (spare e⁻, n-type) and B acceptor (hole, p-type); neutral overall. |
+| phys.mod.pn-junction | Holes / electrons, depletion region with fixed ions, built-in field n → p (asserted), barrier V₀. |
+| phys.mod.diode-rectification | Shockley curve I_s = 1e-14 A, nV_T = 0.026 V: blocks in reverse, turns on ≈ 0.66 V. |
+| phys.mod.nuclear-models | Shell-model levels (2j + 1 each); gaps give the magic numbers 2, 8, 20, 28, 50 (computed). |
+
+Found while rendering: the first diode used nV_T = 0.05, putting turn-on at 1.04 V — past the plotted
+range, so the forward curve never rose. Potentiometer and transformer headline chips picked the wrong
+line (balance length; a narration sentence); recoloured / reworded.
+
+**No physics concept remains in the retirement register** (20 → 15; chemistry and CS rows only).
+Fixtures that used physics circuit concepts as "still retired" examples now use chemistry ones;
+visualLifecycleFinalization and visualRetirementLifecycle, which inject a replacement for a retired
+concept, moved from lc-circuits to chem.solid.defects (with defect-vocabulary fixture figures);
+visualSemanticMoat's emf test now asserts the seven circuit-card siblings own figures and emf is
+still demoted.

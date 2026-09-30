@@ -204,7 +204,8 @@ describe('SERVED STATE MATCHES LEARNER RESPONSE', () => {
   })
 
   it('no figure carries its reason', () => {
-    const none = resolve('phys.em.lc-circuits', 'please draw the circuit', 'diagram')
+    // phys.em.lc-circuits was this case until it gained its own figure (2026-09-30).
+    const none = resolve('chem.solid.defects', 'please draw the defect', 'diagram')
     expect(describeVisualTurn(none, {}, true)).toMatchObject({
       decided: false, served: false, onScreen: false, requested: true, tier: 'none', reason: 'no-figure:retired-binding',
     })
