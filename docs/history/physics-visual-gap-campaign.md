@@ -127,3 +127,44 @@ One consequence: two disposable accounts were registered (201, 07:02:49 and 07:0
 were lost. **They still exist and need manual deletion by the owner.**
 `scripts/qa/liveAccount.ts` now retries the login with backoff, and on final failure names the
 account, so this cannot silently recur.
+
+## Batch 3 (2026-09-30): eleven more concepts
+
+| Concept | Figure |
+|---|---|
+| phys.mech.bernoulli | Pipe narrowing A₁ → A₂; v₂/v₁ = A₁/A₂ (continuity, asserted); gauge column shorter over the narrow part; P + ½ρv² + ρgh = constant. |
+| phys.mech.center-of-mass | 3 kg and 1 kg on a light rod; centre of mass at the computed mass-weighted average (¼ of the way from the heavy mass); pivot there. |
+| phys.mech.moment-of-inertia | Same dumbbell masses at r and 3r about one axis; I_far = 9 × I_close (I = Σmr²). |
+| phys.wave.spring-mass | Mass on a spring with ±A marked; position–time trace x = −A cos ωt (released from −A); T = 2π√(m/k). |
+| phys.wave.damped-oscillations | Oscillation inside the ±A e^(−bt) envelope (asserted point by point). |
+| phys.wave.superposition | Two waves and their point-by-point sum, y = y₁ + y₂ (asserted). |
+| phys.wave.beats | Sum of two close frequencies with its envelope; one beat marked loud → soft → loud; f_beat = \|f₁ − f₂\|. |
+| phys.opt.dispersion | White light into a prism; red bent least, green more, blue most (asserted), toward the base. |
+| phys.opt.single-slit | (sin β/β)² brightness: wide central maximum, side maxima < 5 % of it, dark minima. |
+| phys.em.capacitance | Parallel plates on a battery (long line = + terminal on the +Q plate); field + → −; C = Q/V. |
+| phys.em.solenoid | Coil of turns; straight, evenly spaced field lines inside running toward N; B = μ₀nI. |
+
+Found and fixed while rendering each figure at 1280 px (local dev server):
+- Spring–mass: the first trace started at equilibrium moving up, contradicting "pulled down and let
+  go". Now x = −A cos ωt, starting at the bottom (asserted).
+- Dispersion: the colour names were crowded at the ray tips and repeated by the step-3 labels. The
+  names now sit just past each tip, and "bent least/most" sit on the rays themselves.
+- Moment of inertia: no label read as a formula to the explainer (Σ and ² are not ASCII digits), so
+  the headline chip fell back to the whole step-3 narration and was cut off. The result label now
+  reads `I_far = 9 × I_close`.
+
+Tests: `physicsCoreScenesBatch3.test.ts`. `visualFailClosed.test.ts`'s no-asset stand-ins moved
+from moment-of-inertia / center-of-mass (now authored) to phys.qm.wkb-approximation /
+phys.stat.ising-model, chosen far from the campaign frontier so the next batch does not move them.
+phys.mech.power stays unauthored on purpose (it is the live-generation test fixture).
+
+Coverage after batches 1–3 (local resolver audit, all 238 physics concepts through
+`resolveVisualForTurn` with a diagram request): 102 answer with a figure (65 + 11 = 76 with their own
+concept figure, the rest a general illustration), 136 still answer "no figure". Next queue (unauthored, high-traffic school concepts): photoelectric effect, radioactive
+decay, p-n junction, polarization, diffraction/wave optics, magnetic force (Lorentz), Faraday/Lenz,
+AC basics, electric potential, Gauss's law, sound waves, wave speed, Kepler's laws, escape velocity.
+
+Live QA was still blocked by the Vercel 403 during this batch. The firewall API answers "Seawall
+Config not found" (no project firewall config to edit), so the owner needs to act in the Vercel
+dashboard (Firewall / Attack Challenge / bot protection for the scripted client). A request-level
+bypass for QA traffic was deliberately not added.

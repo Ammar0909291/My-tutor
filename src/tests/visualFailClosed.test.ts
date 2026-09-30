@@ -74,10 +74,12 @@ const HIJACK_CASES = [
  * asset gets no figure, however the request is phrased.
  */
 // kinetic-energy and potential-energy were here until physics batch 2
-// (2026-09-30) authored both; moment-of-inertia and center-of-mass replace them.
+// (2026-09-30) authored both; moment-of-inertia and center-of-mass replaced
+// them until batch 3 authored those too. The stand-ins are now deliberately
+// far from the campaign frontier so the next batch does not move them again.
 const NO_ASSET_CONCEPTS = [
-  'phys.mech.moment-of-inertia',
-  'phys.mech.center-of-mass',
+  'phys.qm.wkb-approximation',
+  'phys.stat.ising-model',
   'phys.mech.power',
   'phys.meas.errors',
   'phys.mech.escape-velocity',

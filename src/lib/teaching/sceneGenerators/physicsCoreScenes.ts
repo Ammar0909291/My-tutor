@@ -890,3 +890,270 @@ export function buildLongitudinalWaveScene(): SceneSpec {
     ],
   }
 }
+
+// ═══════════════════════════════════════════════════════════════════════════
+// Batch 3 (2026-09-30). phys.mech.power is deliberately NOT here: it is the
+// live-generation test fixture ("a concept with no asset").
+// ═══════════════════════════════════════════════════════════════════════════
+
+/** A sampled function y = f(x) over [x0, x1] as a path. */
+function fnPath(f: (x: number) => number, x0: number, x1: number, samples = 80): V3[] {
+  const pts: V3[] = []
+  for (let i = 0; i <= samples; i++) { const x = x0 + ((x1 - x0) * i) / samples; pts.push(P(x, f(x))) }
+  return pts
+}
+
+// ── 23. Bernoulli ────────────────────────────────────────────────────────────
+
+/**
+ * KG: "conservation of energy in steady, incompressible fluid flow along a
+ * streamline." A pipe narrows: continuity A₁v₁ = A₂v₂ makes the flow faster in
+ * the narrow part, and Bernoulli makes its pressure lower (shorter gauge column).
+ */
+export function buildBernoulliScene(): SceneSpec {
+  const H1 = 1.2, H2 = 0.5            // half-heights (areas ∝ height in this 2D pipe)
+  const V1 = 0.9, V2 = r2(V1 * H1 / H2) // continuity
+  const top: V3[] = [P(-4.8, H1), P(-1.2, H1), P(0.2, H2), P(4.8, H2)]
+  const bot: V3[] = top.map((p) => P(p[0], -p[1]))
+  const seg = (pts: V3[]) => pts.slice(1).map((p, i) => line(pts[i], p, ROLE.reference, 0.05))
+  return {
+    id: 'phys-bernoulli',
+    title: "Bernoulli's principle: faster flow, lower pressure",
+    sceneType: 'diagram',
+    cameraDistance: 13,
+    teachingGoal: 'Show fluid speeding up where a pipe narrows (A₁v₁ = A₂v₂) and its pressure dropping there, as Bernoulli\'s equation requires.',
+    ariaLabel: 'A horizontal pipe that narrows from a wide section on the left to a narrow section on the right. The flow arrow is short in the wide part and long in the narrow part. Pressure gauge tubes show a tall water column over the wide part and a short one over the narrow part.',
+    steps: [
+      { narration: 'Water flows through a pipe that narrows.', objects: [...seg(top), ...seg(bot), label('wide: A₁', P(-3.2, -1.8), ROLE.ink, 'detail'), label('narrow: A₂', P(2.8, -1.1), ROLE.ink, 'detail')] },
+      { narration: 'The same volume passes each second, so the water must move faster in the narrow part: A₁v₁ = A₂v₂.', objects: [arrow(P(-3.8, 0), P(-3.8 + V1, 0), ROLE.output), label('v₁', P(-3.3, 0.5), ROLE.output, 'primary'), arrow(P(1.6, 0), P(1.6 + V2, 0), ROLE.output), label('v₂ faster', P(2.6, 0.9), ROLE.output, 'primary')] },
+      { narration: 'Where the water is faster, its pressure is lower: the gauge column over the narrow part is shorter.', objects: [line(P(-3.0, H1), P(-3.0, H1 + 2.4), ROLE.input, 0.12), label('P₁ higher', P(-2.0, H1 + 2.2), ROLE.input, 'detail'), line(P(2.4, H2), P(2.4, H2 + 1.0), ROLE.input, 0.12), label('P₂ lower', P(3.4, H2 + 1.0), ROLE.input, 'detail'), label('P + ½ρv² + ρgh = constant', P(0, -3.4), ROLE.result, 'primary')] },
+    ],
+  }
+}
+
+// ── 24. Centre of mass ───────────────────────────────────────────────────────
+
+/** KG: "the mass-weighted average position." m₁ = 3 at x = −3, m₂ = 1 at x = +3 → x_cm = −1.5. */
+export function buildCenterOfMassScene(): SceneSpec {
+  const M1 = 3, M2 = 1, X1 = -3, X2 = 3
+  const XCM = (M1 * X1 + M2 * X2) / (M1 + M2)
+  return {
+    id: 'phys-center-of-mass',
+    title: 'Centre of mass: the balance point',
+    sceneType: 'diagram',
+    cameraDistance: 13,
+    teachingGoal: 'Show the centre of mass of two masses as their mass-weighted average position, closer to the heavier mass.',
+    ariaLabel: 'A light rod with a heavy mass of 3 kilograms on the left and a light mass of 1 kilogram on the right. The centre of mass is marked closer to the heavy mass, where the rod would balance.',
+    steps: [
+      { narration: 'A light rod carries a 3 kg mass on the left and a 1 kg mass on the right.', objects: [line(P(X1, 0), P(X2, 0), ROLE.reference, 0.05), dot(P(X1, 0), ROLE.input, 0.42), dot(P(X2, 0), ROLE.output, 0.24), label('m₁ = 3 kg', P(X1, 0.9), ROLE.input, 'primary'), label('m₂ = 1 kg', P(X2, 0.75), ROLE.output, 'primary')] },
+      { narration: `The centre of mass is the mass-weighted average position: x = (3 × −3 + 1 × 3) / 4 = ${XCM}.`, objects: [dot(P(XCM, 0), ROLE.result, 0.16), line(P(XCM, -0.3), P(XCM, -1.3), ROLE.result, 0.03), label('centre of mass', P(XCM, -1.7), ROLE.result, 'primary'), label('x_cm = (m₁x₁ + m₂x₂) / (m₁ + m₂)', P(0, 2.6), ROLE.result, 'detail')] },
+      { narration: 'It sits closer to the heavier mass. Supported there, the rod balances.', objects: [line(P(XCM - 0.4, -2.4), P(XCM, -1.9), ROLE.reference, 0.04), line(P(XCM + 0.4, -2.4), P(XCM, -1.9), ROLE.reference, 0.04), line(P(XCM - 0.4, -2.4), P(XCM + 0.4, -2.4), ROLE.reference, 0.04), label('balances here', P(XCM + 1.6, -2.3), ROLE.ink, 'detail')] },
+    ],
+  }
+}
+
+// ── 25. Moment of inertia ────────────────────────────────────────────────────
+
+/** KG: "depends on mass distribution about the rotation axis." Same masses at r and 3r: I is 9×. */
+export function buildMomentOfInertiaScene(): SceneSpec {
+  const R1 = 0.8, R2 = 2.4
+  const ratio = Math.round((R2 * R2) / (R1 * R1))
+  const dumbbell = (y: number, rr: number, color: string): SceneObject[] => [line(P(-rr, y), P(rr, y), ROLE.reference, 0.04), dot(P(-rr, y), color, 0.3), dot(P(rr, y), color, 0.3)]
+  return {
+    id: 'phys-moment-of-inertia',
+    title: 'Moment of inertia: where the mass is matters',
+    sceneType: 'diagram',
+    cameraDistance: 13,
+    teachingGoal: 'Show that the same masses placed farther from the axis give a larger moment of inertia (I = Σmr²), so the object is harder to spin up.',
+    ariaLabel: 'Two dumbbells spinning about the same vertical axis. In the top one the masses are close to the axis; in the bottom one the same masses are three times farther out, giving nine times the moment of inertia.',
+    steps: [
+      { narration: 'Two dumbbells with the same masses turn about the same vertical axis.', objects: [line(P(0, 3.2), P(0, -3.2), ROLE.aid, 0.03), label('axis', P(0.6, 3.4), ROLE.aid, 'detail'), ...dumbbell(1.6, R1, ROLE.output), label('masses close: r', P(-3.2, 1.6), ROLE.output, 'detail')] },
+      { narration: 'Move the masses three times farther out.', objects: [...dumbbell(-1.6, R2, ROLE.input), label('masses far: 3r', P(-3.2, -0.8), ROLE.input, 'detail')] },
+      { narration: `I = Σmr², so three times the distance gives ${ratio} times the moment of inertia: much harder to start or stop spinning.`, objects: [label('I = Σ m r²', P(2.9, 1.6), ROLE.result, 'primary'), label(`I_far = ${ratio} × I_close`, P(2.9, -2.4), ROLE.input, 'primary')] },
+    ],
+  }
+}
+
+// ── 26. Spring–mass oscillator ───────────────────────────────────────────────
+
+/** KG: "SHM with angular frequency ω = √(k/m) and period T = 2π√(m/k)." */
+export function buildSpringMassScene(): SceneSpec {
+  const X = -2.6, TOP = 3.4, EQ = -0.4, A = 1.1
+  const spring: V3[] = [P(X, TOP)]
+  for (let i = 1; i < 18; i++) spring.push(P(X + (i % 2 ? 0.3 : -0.3), TOP - ((TOP - EQ - 0.3) * i) / 18))
+  spring.push(P(X, EQ + 0.3))
+  const gx0 = 0.2, gx1 = 4.6
+  return {
+    id: 'phys-spring-mass',
+    title: 'A mass on a spring oscillates',
+    sceneType: 'diagram',
+    cameraDistance: 13,
+    teachingGoal: 'Show a mass bouncing on a spring between +A and −A about equilibrium, its position tracing a sine curve in time, with period T = 2π√(m/k).',
+    ariaLabel: 'A mass hanging from a spring, with its equilibrium level and the top and bottom of its motion, +A and −A, marked. Beside it, a graph of position against time is a sine curve between +A and −A.',
+    steps: [
+      { narration: 'A mass hangs on a spring at its equilibrium position.', objects: [line(P(X - 1, TOP), P(X + 1, TOP), ROLE.reference, 0.06), curve(spring, ROLE.aid), dot(P(X, EQ), ROLE.input, 0.32), line(P(-4.4, EQ), P(-0.8, EQ), ROLE.aid, 0.02), label('equilibrium', P(-4.1, EQ + 0.35), ROLE.aid, 'detail')] },
+      { narration: 'Pulled down and let go, it moves up and down between +A and −A.', objects: [line(P(-1.4, EQ + A), P(-1.4, EQ - A), ROLE.input, 0.03), label('+A', P(-1.0, EQ + A), ROLE.input, 'primary'), label('−A', P(-1.0, EQ - A), ROLE.input, 'primary')] },
+      { narration: 'Its position traces a sine curve in time. One full cycle takes T = 2π√(m/k): heavier masses and softer springs oscillate more slowly.', objects: [...axes(gx0, EQ, gx1, EQ + 2.2, 'time', 'position'), // Released from −A at t = 0 ("pulled down and let go"): x(t) = −A cos ωt.
+        curve(fnPath((x) => EQ - A * Math.cos(((x - gx0) * 2 * Math.PI) / 2.0), gx0, gx1 - 0.3), ROLE.input), line(P(gx0 + 0.5, EQ - 1.6), P(gx0 + 2.5, EQ - 1.6), ROLE.result, 0.03), label('T', P(gx0 + 1.5, EQ - 2.0), ROLE.result, 'primary'), label('T = 2π√(m/k)', P(2.4, 3.2), ROLE.result, 'primary')] },
+    ],
+  }
+}
+
+// ── 27. Damped oscillations ──────────────────────────────────────────────────
+
+/** KG: "the amplitude to decrease exponentially with time." x(t) = A e^{−bt} cos(ωt), inside ±A e^{−bt}. */
+export function buildDampedOscillationScene(): SceneSpec {
+  const X0 = -4.2, Y0 = 0, A = 2.4, B = 0.32, W = 2 * Math.PI / 1.3
+  const env = (x: number) => A * Math.exp(-B * (x - X0))
+  return {
+    id: 'phys-damped-oscillation',
+    title: 'Damped oscillation: the swings die away',
+    sceneType: 'diagram',
+    cameraDistance: 13,
+    teachingGoal: 'Show an oscillation whose amplitude shrinks exponentially, always inside the envelope ±A e^(−bt).',
+    ariaLabel: 'A graph of displacement against time. The curve oscillates but each swing is smaller than the last, staying between two dashed curves that shrink exponentially toward zero.',
+    steps: [
+      { narration: 'Displacement against time for an oscillator with friction or air resistance.', objects: axes(X0, Y0, 4.6, 3.2, 'time', 'displacement') },
+      { narration: 'Each swing is smaller than the one before.', objects: [curve(fnPath((x) => Y0 + env(x) * Math.cos(W * (x - X0)), X0, 4.2, 120), ROLE.output)] },
+      { narration: 'The peaks follow an exponential envelope, A e^(−bt): energy is steadily lost to the resistive force.', objects: [curve(fnPath((x) => Y0 + env(x), X0, 4.2), ROLE.input), curve(fnPath((x) => Y0 - env(x), X0, 4.2), ROLE.input), label('envelope A e^(−bt)', P(1.6, 1.4), ROLE.input, 'primary')] },
+    ],
+  }
+}
+
+// ── 28. Superposition ────────────────────────────────────────────────────────
+
+/** KG: "the resultant displacement is the algebraic sum of displacements." y = y₁ + y₂, computed point by point. */
+export function buildSuperpositionScene(): SceneSpec {
+  const X0 = -4.4, X1 = 4.4, L = 4.4
+  const y1 = (x: number) => 0.7 * Math.sin((2 * Math.PI * (x - X0)) / L)
+  const y2 = (x: number) => 0.45 * Math.sin((4 * Math.PI * (x - X0)) / L)
+  const O1 = 2.6, O2 = 0.9, OS = -1.9
+  return {
+    id: 'phys-superposition',
+    title: 'Superposition: waves add point by point',
+    sceneType: 'diagram',
+    cameraDistance: 13,
+    teachingGoal: 'Show two waves and the wave they make together: at every point the displacements simply add.',
+    ariaLabel: 'Three traces. The top two are two different waves. The bottom trace is their sum, drawn by adding the two displacements at every point; a vertical guide shows one point where the heights add.',
+    steps: [
+      { narration: 'Two waves pass through the same place.', objects: [line(P(X0, O1), P(X1, O1), ROLE.reference, 0.015), curve(fnPath((x) => O1 + y1(x), X0, X1), ROLE.input), label('wave 1', P(-4.2, O1 + 0.95), ROLE.input, 'detail'), line(P(X0, O2), P(X1, O2), ROLE.reference, 0.015), curve(fnPath((x) => O2 + y2(x), X0, X1), ROLE.output), label('wave 2', P(-4.2, O2 + 0.75), ROLE.output, 'detail')] },
+      { narration: 'At every point, the total displacement is the sum of the two: y = y₁ + y₂.', objects: [line(P(X0, OS), P(X1, OS), ROLE.reference, 0.015), curve(fnPath((x) => OS + y1(x) + y2(x), X0, X1, 120), ROLE.result), label('sum', P(-4.2, OS + 1.3), ROLE.result, 'primary'), line(P(-3.3, O1 + 1.1), P(-3.3, OS - 1.2), ROLE.aid, 0.015), label('y = y₁ + y₂', P(2.6, -3.6), ROLE.result, 'primary')] },
+    ],
+  }
+}
+
+// ── 29. Beats ────────────────────────────────────────────────────────────────
+
+/** KG: "periodic variations in amplitude … two waves of slightly different frequencies." Envelope 2A cos(π Δf t); f_beat = |f₁ − f₂|. */
+export function buildBeatsScene(): SceneSpec {
+  const X0 = -4.4, X1 = 4.4, A = 0.9, F1 = 4.0, F2 = 3.5   // cycles per 8.8 units → Δf = 0.5 → one beat per 8.8/… units
+  const t = (x: number) => (x - X0) / (X1 - X0)
+  const sum = (x: number) => A * (Math.sin(2 * Math.PI * F1 * 2 * t(x)) + Math.sin(2 * Math.PI * F2 * 2 * t(x)))
+  const env = (x: number) => 2 * A * Math.abs(Math.cos(Math.PI * (F1 - F2) * 2 * t(x)))
+  const beatLen = (X1 - X0) / ((F1 - F2) * 2)
+  return {
+    id: 'phys-beats',
+    title: 'Beats: loud, soft, loud',
+    sceneType: 'diagram',
+    cameraDistance: 13,
+    teachingGoal: 'Show two sounds of slightly different frequency adding into one whose loudness rises and falls, f_beat = |f₁ − f₂| times per second.',
+    ariaLabel: 'The sum of two waves of slightly different frequency. Its amplitude swells and shrinks regularly, following a dashed envelope; the time between two loud points is one beat.',
+    steps: [
+      { narration: 'Two notes with slightly different frequencies play together. Their sum is drawn here.', objects: [line(P(X0, 0), P(X1, 0), ROLE.reference, 0.015), curve(fnPath((x) => sum(x), X0, X1, 240), ROLE.output)] },
+      { narration: 'Where the waves line up the sound is loud; where they cancel it is soft. The loudness follows the envelope.', objects: [curve(fnPath((x) => env(x), X0, X1, 120), ROLE.input), curve(fnPath((x) => -env(x), X0, X1, 120), ROLE.input), label('loud', P(X0 + 0.2, 2.3), ROLE.input, 'detail'), label('soft', P(X0 + beatLen / 2, 0.6), ROLE.input, 'detail')] },
+      { narration: 'One beat is the time from one loud point to the next. The number of beats per second is the difference of the two frequencies.', objects: [line(P(X0, -2.3), P(X0 + beatLen, -2.3), ROLE.result, 0.03), label('one beat', P(X0 + beatLen / 2, -2.7), ROLE.result, 'primary'), label('f_beat = |f₁ − f₂|', P(0, 3.3), ROLE.result, 'primary')] },
+    ],
+  }
+}
+
+// ── 30. Dispersion ───────────────────────────────────────────────────────────
+
+/** KG: "separation of white light … by a prism due to wavelength-dependent refractive index." Red bends least, blue/violet most. */
+export function buildDispersionScene(): SceneSpec {
+  const A: V3 = P(-1.6, -2.2), B: V3 = P(1.6, -2.2), C: V3 = P(0, 2.4)
+  const hit: V3 = P(-0.8, 0.1), out: V3 = P(0.75, 0.05)
+  const fan = (dy: number, color: string, name: string): SceneObject[] => [line(hit, out, color, 0.02), arrow(out, P(3.8, out[1] - dy), color), label(name, P(4.5, out[1] - dy), color, 'detail')]
+  return {
+    id: 'phys-dispersion',
+    title: 'Dispersion: a prism splits white light',
+    sceneType: 'diagram',
+    cameraDistance: 13,
+    teachingGoal: 'Show white light entering a prism and leaving as a spread of colours, with red bent least and blue/violet bent most.',
+    ariaLabel: 'A triangular glass prism. A white light ray enters from the left and leaves on the right as a fan of colours: red is bent the least, green more, and blue the most.',
+    steps: [
+      { narration: 'White light enters a glass prism.', objects: [line(A, B, ROLE.reference, 0.05), line(B, C, ROLE.reference, 0.05), line(C, A, ROLE.reference, 0.05), arrow(P(-4.6, 1.2), hit, ROLE.ink), label('white light', P(-3.6, 1.7), ROLE.ink, 'primary'), label('prism', P(0, -2.7), ROLE.ink, 'detail')] },
+      { narration: 'Glass bends each colour by a different amount, because its refractive index depends on wavelength.', objects: [...fan(0.6, ROLE.input, 'red'), ...fan(1.3, ROLE.result, 'green'), ...fan(2.0, ROLE.output, 'blue')] },
+      { narration: 'Red, with the longest wavelength, is bent least; blue and violet are bent most.', objects: [label('bent least', P(2.4, 0.3), ROLE.input, 'detail'), label('bent most', P(1.8, -1.8), ROLE.output, 'detail')] },
+    ],
+  }
+}
+
+// ── 31. Single-slit diffraction ──────────────────────────────────────────────
+
+/** KG: "a central maximum flanked by progressively weaker secondary maxima." I ∝ (sin β / β)². */
+export function buildSingleSlitScene(): SceneSpec {
+  const X0 = -4.4, X1 = 4.4, Y0 = -2.2, H = 4.4, S = 1.1  // one minimum every S units from centre
+  const I = (x: number) => { const b = (Math.PI * x) / S; return b === 0 ? 1 : (Math.sin(b) / b) ** 2 }
+  return {
+    id: 'phys-single-slit',
+    title: 'Single-slit diffraction pattern',
+    sceneType: 'diagram',
+    cameraDistance: 13,
+    teachingGoal: 'Show the brightness pattern from one narrow slit: a wide, bright central maximum with much weaker side maxima, separated by dark minima.',
+    ariaLabel: 'A graph of brightness across the screen. A tall, wide central peak is flanked by much smaller peaks that get weaker further out, with dark points of zero brightness between them.',
+    steps: [
+      { narration: 'Light through one narrow slit lands on a screen. This is its brightness across the screen.', objects: [line(P(X0, Y0), P(X1, Y0), ROLE.reference, 0.03), label('position on screen', P(3.2, Y0 - 0.5), ROLE.ink, 'detail'), curve(fnPath((x) => Y0 + H * I(x), X0, X1, 200), ROLE.output)] },
+      { narration: 'The central maximum is bright and twice as wide as the others.', objects: [label('central maximum', P(0, Y0 + H + 0.4), ROLE.output, 'primary'), line(P(-S, Y0 - 0.25), P(S, Y0 - 0.25), ROLE.output, 0.03)] },
+      { narration: 'Side maxima are much weaker, and get weaker further out. Between them are dark minima.', objects: [label('weaker side maxima', P(2.6, Y0 + 1.1), ROLE.input, 'detail'), dot(P(S, Y0), ROLE.result, 0.08), dot(P(-S, Y0), ROLE.result, 0.08), label('dark', P(-S - 0.1, Y0 + 0.45), ROLE.result, 'detail')] },
+    ],
+  }
+}
+
+// ── 32. Capacitance ──────────────────────────────────────────────────────────
+
+/** KG: "a capacitor's ability to store electric charge; C = Q/V." Parallel plates, +Q / −Q, field between, battery V. */
+export function buildCapacitanceScene(): SceneSpec {
+  const XL = -1.0, XR = 1.0, T = 1.8
+  const field: SceneObject[] = []
+  for (const y of [-1.2, -0.4, 0.4, 1.2]) field.push(arrow(P(XL + 0.15, y), P(XR - 0.15, y), ROLE.aid))
+  return {
+    id: 'phys-capacitance',
+    title: 'A parallel-plate capacitor stores charge',
+    sceneType: 'diagram',
+    cameraDistance: 13,
+    teachingGoal: 'Show a capacitor charged by a battery: +Q on one plate, −Q on the other, a field between them, and C = Q / V.',
+    ariaLabel: 'Two parallel metal plates connected to a battery. The left plate holds positive charge +Q and the right plate negative charge −Q. Electric field arrows point from the positive plate to the negative plate.',
+    steps: [
+      { narration: 'Two metal plates face each other with a gap between them, connected to a battery of voltage V.', objects: [line(P(XL, -T), P(XL, T), ROLE.input, 0.1), line(P(XR, -T), P(XR, T), ROLE.output, 0.1), line(P(XL, -T), P(XL, -3.0), ROLE.reference, 0.03), line(P(XR, -T), P(XR, -3.0), ROLE.reference, 0.03), line(P(XL, -3.0), P(-0.35, -3.0), ROLE.reference, 0.03), line(P(0.35, -3.0), P(XR, -3.0), ROLE.reference, 0.03), line(P(-0.35, -2.6), P(-0.35, -3.4), ROLE.reference, 0.06), line(P(0.35, -2.8), P(0.35, -3.2), ROLE.reference, 0.06), label('battery V', P(0, -3.9), ROLE.ink, 'detail')] },
+      { narration: 'The battery moves charge: one plate gets +Q, the other −Q.', objects: [label('+Q', P(XL - 0.7, T + 0.3), ROLE.input, 'primary'), label('−Q', P(XR + 0.7, T + 0.3), ROLE.output, 'primary')] },
+      { narration: 'An electric field points from + to − across the gap. The capacitance is the charge stored per volt: C = Q / V.', objects: [...field, label('field', P(0, 2.4), ROLE.aid, 'detail'), label('C = Q / V', P(3.2, 0.2), ROLE.result, 'primary')] },
+    ],
+  }
+}
+
+// ── 33. Solenoid ─────────────────────────────────────────────────────────────
+
+/** KG: "a uniform axial magnetic field B = μ₀nI inside." Turns drawn as loops; straight, evenly spaced field lines inside. */
+export function buildSolenoidScene(): SceneSpec {
+  const X0 = -3.0, X1 = 3.0, R = 1.0, N = 9
+  const turns: SceneObject[] = []
+  for (let i = 0; i < N; i++) {
+    const x = X0 + ((X1 - X0) * i) / (N - 1)
+    turns.push(curve(circlePoints(x, 0, R, Math.PI / 2, (3 * Math.PI) / 2, 12).map((p) => P(x + (p[0] - x) * 0.25, p[1])), ROLE.input))
+    turns.push(curve(circlePoints(x, 0, R, -Math.PI / 2, Math.PI / 2, 12).map((p) => P(x + (p[0] - x) * 0.25, p[1])), ROLE.reference))
+  }
+  const inside: SceneObject[] = [-0.5, 0, 0.5].map((y) => arrow(P(X0 - 0.6, y), P(X1 + 0.8, y), ROLE.aid))
+  return {
+    id: 'phys-solenoid',
+    title: 'Magnetic field of a solenoid',
+    sceneType: 'diagram',
+    cameraDistance: 13,
+    teachingGoal: 'Show a current-carrying coil with a strong, uniform magnetic field along its axis inside, B = μ₀nI.',
+    ariaLabel: 'A long coil of wire drawn as a row of loops carrying current. Inside the coil, straight, evenly spaced field lines run along its axis from one end to the other.',
+    steps: [
+      { narration: 'A long coil of wire — a solenoid — carries a current I.', objects: [...turns, label('current I', P(X0 - 0.2, R + 0.5), ROLE.input, 'primary')] },
+      { narration: 'Inside, the magnetic field lines are straight, parallel and evenly spaced: the field is uniform along the axis.', objects: [...inside, label('uniform field inside', P(0, -1.6), ROLE.aid, 'primary'), label('N', P(X1 + 1.2, 0.8), ROLE.input, 'primary'), label('S', P(X0 - 1.0, 0.8), ROLE.output, 'primary')] },
+      { narration: 'Its strength depends on the turns per metre n and the current: B = μ₀nI.', objects: [label('B = μ₀ n I', P(0, 2.6), ROLE.result, 'primary')] },
+    ],
+  }
+}

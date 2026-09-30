@@ -45,6 +45,9 @@ import {
   buildKineticEnergyScene, buildPotentialEnergyScene, buildWorkScene, buildNewtonsThirdLawScene,
   buildInclinedPlaneScene, buildPressureFluidsScene, buildImpulseScene, buildThermalExpansionScene,
   buildPhaseTransitionsScene, buildIdealGasScene, buildWavePropertiesScene, buildLongitudinalWaveScene,
+  buildBernoulliScene, buildCenterOfMassScene, buildMomentOfInertiaScene, buildSpringMassScene,
+  buildDampedOscillationScene, buildSuperpositionScene, buildBeatsScene, buildDispersionScene,
+  buildSingleSlitScene, buildCapacitanceScene, buildSolenoidScene,
 } from '@/lib/teaching/sceneGenerators/physicsCoreScenes'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
@@ -320,6 +323,18 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'phys.therm.ideal-gas-law':           buildIdealGasScene,
   'phys.wave.wave-properties':          buildWavePropertiesScene,
   'phys.wave.longitudinal-waves':       buildLongitudinalWaveScene,
+  // Batch 3 (2026-09-30).
+  'phys.mech.bernoulli':                buildBernoulliScene,
+  'phys.mech.center-of-mass':           buildCenterOfMassScene,
+  'phys.mech.moment-of-inertia':        buildMomentOfInertiaScene,
+  'phys.wave.spring-mass':              buildSpringMassScene,
+  'phys.wave.damped-oscillations':      buildDampedOscillationScene,
+  'phys.wave.superposition':            buildSuperpositionScene,
+  'phys.wave.beats':                    buildBeatsScene,
+  'phys.opt.dispersion':                buildDispersionScene,
+  'phys.opt.single-slit':               buildSingleSlitScene,
+  'phys.em.capacitance':                buildCapacitanceScene,
+  'phys.em.solenoid':                   buildSolenoidScene,
   'phys.wave.transverse-waves':         buildTransverseWaveScene,
   'phys.wave.interference':             buildWaveInterferenceScene,
   'phys.therm.calorimetry':             buildCalorimetryScene,
