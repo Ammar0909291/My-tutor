@@ -3174,7 +3174,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             }
             // OPENING (07 §1 + §8 rules 2–3): engineered win first when
             // owed → one-breath continuity → due reviews BEFORE new content.
-            systemPrompt += buildOpeningBlock({
+            //
+            // NOT for a lesson that is already complete (2026-10-01, live,
+            // mole concept): after a mastered lesson was closed, a reload
+            // opened a fresh session, this block asked for "welcome, recap,
+            // objective" — and "is this lesson done?" was answered "No, the
+            // lesson isn't finished yet" while COMPLETE owned the turn.
+            if (!lessonCompletedHoisted) systemPrompt += buildOpeningBlock({
               dueReviewCount,
               retroWinOwed: sessionEpisodeHoisted.retroWinOwed,
               isFreshBoundary: true,
