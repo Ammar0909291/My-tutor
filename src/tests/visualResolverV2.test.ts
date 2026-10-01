@@ -64,7 +64,10 @@ describe('Visual Resolver V2 — semantic safety invariant', () => {
     }
     expect(fabricated, `concepts given a fabricated visual:\n${fabricated.slice(0, 20).join('\n')}`).toEqual([])
     expect(inconsistent, `graphical/payload disagreement:\n${inconsistent.slice(0, 20).join('\n')}`).toEqual([])
-  })
+    // A whole-KG sweep (~1,900 concepts): 30s like the repo's other sweeps. It
+    // took ~5.2s alone on 2026-10-01 (same before and after that day's visual
+    // changes) and timed out at vitest's 5s default under full-suite load.
+  }, 30_000)
 
   it('an unsupported concept receives NO visual, not a substitute', () => {
     // Calorimetry has no curated binding and no generator. It used to receive
