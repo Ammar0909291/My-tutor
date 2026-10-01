@@ -1,7 +1,7 @@
 /**
  * A prediction asked the learner to change a control that was not on screen.
  *
- * 2026-09-30 learner baseline, P3 (phys.osc.simple-pendulum, beginner, phone):
+ * 2026-09-30 learner baseline, P3 (phys.wave.pendulum, beginner, phone):
  * the simulation's own prediction said "make the bob heavier … change only m",
  * but a beginner's complexity budget (maxControls 2) cut the third declared
  * variable, `mass`. The learner: "what happen if heavier? i cant find the mass

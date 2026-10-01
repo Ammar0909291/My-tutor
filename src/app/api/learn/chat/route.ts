@@ -10182,7 +10182,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // (simulationPrompt.ts — measured ignored in production, 2026-09-29).
       try {
         const { stripSimulationGiveaways } = await import('@/lib/teaching/visual/simulationPrompt')
-        const spoil = stripSimulationGiveaways(cleanText, resolvedVisualDecision, learnerAuthoredMessage)
+        const spoil = stripSimulationGiveaways(cleanText, resolvedVisualDecision, learnerAuthoredMessage, {
+          answeredQuiz: mcqGradeHoisted && pendingMcqHoisted ? { question: pendingMcqHoisted.question } : null,
+        })
         if (spoil.removed.length) {
           console.warn('[simulation-giveaway] ' + JSON.stringify({
             event: 'prediction-answer-stripped',
@@ -10363,7 +10365,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           let retryText = retry.text
           try {
             const { stripSimulationGiveaways } = await import('@/lib/teaching/visual/simulationPrompt')
-            retryText = stripSimulationGiveaways(retryText, resolvedVisualDecision, learnerAuthoredMessage).text
+            retryText = stripSimulationGiveaways(retryText, resolvedVisualDecision, learnerAuthoredMessage, {
+              answeredQuiz: mcqGradeHoisted && pendingMcqHoisted ? { question: pendingMcqHoisted.question } : null,
+            }).text
           } catch { /* optional backstop */ }
           const merged = mergeRepair(stub, retryText)
           const repaired = !needsRepair(merged)

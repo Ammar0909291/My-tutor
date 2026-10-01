@@ -20,6 +20,7 @@
  */
 import type { VisualDecision } from './types'
 import { simulationFor, type TimeSimulation } from './parametricScenes'
+import { getConceptSceneGenerator } from '@/lib/teaching/visualRegistry'
 
 /** The time simulation this decision puts on screen, or null. */
 export function servedSimulation(decision: VisualDecision | null | undefined): TimeSimulation | null {
@@ -61,11 +62,47 @@ export function stripSimulationGiveaways(
   text: string,
   decision: VisualDecision | null | undefined,
   learnerMessage: string,
+  opts: StripGiveawayOptions = {},
 ): { text: string; removed: string[] } {
-  const sim = servedSimulation(decision)
+  return stripGiveawaysFor(servedSimulation(decision), text, learnerMessage, opts)
+}
+
+export interface StripGiveawayOptions {
+  /**
+   * The learner's message answered a quiz, whose question is given here.
+   *
+   * MEASURED 2026-09-30 (learner baseline, P3 pendulum): the tapped option "It
+   * increases by a factor of √2" contains a digit, so it read as a reported
+   * measurement and the backstop stood down — the reply then narrated both
+   * experiments' outcomes (heavier bob: no change; 4× length: twice). A quiz
+   * answer is not a measurement. What the QUIZ asked about may be explained
+   * (that is its feedback); every other prediction stays the learner's.
+   */
+  answeredQuiz?: { question: string } | null
+}
+
+/** The time simulation a concept's lesson figure is, or null. */
+export function simulationForConcept(conceptId: string | null | undefined): TimeSimulation | null {
+  return conceptId ? simulationFor(getConceptSceneGenerator(conceptId)) : null
+}
+
+/**
+ * The backstop over an explicit simulation — the chat turn passes the one on
+ * screen; the lesson opening passes the concept's own, because the opening
+ * comes before the figure and an answer given there is given before the
+ * learner ever predicts (P3: "the mass of the bob and the size of the swing
+ * angle … do not affect T" in the very first message).
+ */
+export function stripGiveawaysFor(
+  sim: TimeSimulation | null,
+  text: string,
+  learnerMessage: string,
+  opts: StripGiveawayOptions = {},
+): { text: string; removed: string[] } {
   if (!sim || typeof text !== 'string' || !text.trim()) return { text, removed: [] }
-  const msg = learnerMessage ?? ''
-  if (/\d/.test(msg)) return { text, removed: [] }
+  const quiz = opts.answeredQuiz ?? null
+  const msg = (learnerMessage ?? '') + (quiz ? ' ' + quiz.question : '')
+  if (!quiz && /\d/.test(msg)) return { text, removed: [] }
   const patterns = sim.predictions
     .filter((p) => p.giveaway && !p.giveaway.topic.test(msg))
     .flatMap((p) => p.giveaway!.answer)
@@ -75,10 +112,14 @@ export function stripSimulationGiveaways(
   const lines = text.split('\n').map((line) => {
     const sentences = line.split(/(?<=[.!?])\s+/)
     const kept = sentences.filter((s) => {
-      // Curly apostrophes normalised for matching only: "doesn’t" must match
-      // "doesn't" (production 2026-09-30: "the mass of the bob doesn’t change
-      // how long one swing takes" passed the patterns).
-      const probe = s.replace(/[\u2018\u2019\u02BC]/g, "'")
+      // Normalised for matching only: curly apostrophes ("doesn’t" must match
+      // "doesn't", production 2026-09-30), non-breaking spaces, and the
+      // non-breaking/typographic hyphens a model writes between words
+      // ("square‑root" with U+2011 slipped past "square root of", P3).
+      const probe = s
+        .replace(/[\u2018\u2019\u02BC]/g, "'")
+        .replace(/[\u00A0\u202F]/g, ' ')
+        .replace(/(\p{L})[\u2010\u2011\u2012-](?=\p{L})/gu, '$1 ')
       if (patterns.some((re) => re.test(probe))) { removed.push(s.trim()); return false }
       return true
     })
