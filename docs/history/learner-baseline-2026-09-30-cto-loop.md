@@ -51,6 +51,7 @@ The sessions ran in Playwright Chromium against https://my-tutor-flame.vercel.ap
 | CL-20 | Found LIVE: a server-graded correct tap got "I understand that you're saying … Is that right?" (the OBSERVATION REPAIR block was in the prompt). | The repair block never fires on a graded turn. | 964ae368 |
 | CL-21 | Found LIVE: the H₂/O₂ item's key head said "2g of H₂ contains more" while its working said "equal". | Seed corrected. The production row needs the owner (see below). | b65684e5 |
 | CL-22 | Found LIVE: a mastered, closed lesson reloaded into a fresh session got the OPENING protocol, and "is this lesson done?" was answered "not quite yet". | The opening block is skipped on a completed lesson. A status question is not new intent, so the close answers it. | e4727f09, 669db565 |
+| CL-23 | Found LIVE (friction): "friction is bigger when the surface area is bigger, right?" put the maths geometry-shapes card on screen (math.geom.surface-area) with no excursion open. The tutor then described arrows that were not drawn. | A cross-subject learner-request target is honoured only when an excursion is actually open. | 47df5e22 |
 
 ## Recorded, not fixed (owner decision or out of scope)
 
@@ -129,6 +130,17 @@ L, Swing angle and m (kg) are all rendered. P3 showed only L and Swing angle.
   run never reached a spiral close.
 - **Status:** the fix is verified by its harness state-walk only. The live trigger observed in
   production (nine refusals) needs the typed-answer path. That is still to be re-driven.
+
+### Re-test on unused concepts (real account, after the fixes)
+
+| Lesson | Device | Time to mastery | Quizzes | Notes |
+| --- | --- | --- | --- | --- |
+| phys.mech.newtons-third-law | desktop | 8 min | 5 authored, all right | Colours described correctly. |
+| chem.found.mole-concept | phone | 7 min | — | Found CL-18/20/21/22. |
+| phys.mech.friction | desktop | 16 min | 6 authored | Found CL-23. The deliberate miss (40 N vs 20 N static friction) was corrected with its reason and the misconception named. |
+
+After each Close the lesson landed in completedLessons. Physics now reads `[146, 20, 22]` and
+chemistry `[6]`.
 
 ## Owner actions needed
 
