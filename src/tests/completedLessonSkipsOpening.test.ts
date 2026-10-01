@@ -48,6 +48,8 @@ describe('a question about the lesson\'s own status is not new intent', () => {
     'did i complete it?',
     'is it over already?',
     'have i finished this?',
+    'ok so am i finished with the mole lesson?',
+    'are we done with this topic now?',
   ])('%s', (m) => expect(asksWhetherLessonIsDone(m)).toBe(true))
 
   it.each([
@@ -56,6 +58,7 @@ describe('a question about the lesson\'s own status is not new intent', () => {
     'is a mole done with carbon-12?',
     'what should I study next?',
     'can you give me a practice problem',
+    'is the reaction complete with excess oxygen?',
   ])('%s', (m) => expect(asksWhetherLessonIsDone(m)).toBe(false))
 
   it('the route excludes it from new intent', () => {

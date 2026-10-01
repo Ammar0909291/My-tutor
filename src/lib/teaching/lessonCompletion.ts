@@ -366,11 +366,13 @@ export function isQuestionAnnouncement(message: string): boolean {
  * "Not quite yet — there's still a key idea we need to explore" twice, on two
  * fresh sessions, while the runtime recorded the lesson COMPLETED. Excluded
  * from new intent so the deterministic close (built from persisted evidence)
- * answers it. The status word must end the clause ("is it complete
- * combustion?" is not a status question).
+ * answers it. The status word must end the clause, optionally followed by
+ * "(with) it / this / the … lesson" ("is it complete combustion?" is not a
+ * status question). LIVE again 2026-10-01: "am i finished with the mole
+ * lesson?" slipped past the first version.
  */
 const LESSON_STATUS_QUESTION_RE =
-  /\b(?:is|are|am|did|have|has)\b[^?.!]{0,30}\b(?:lesson|this|it|we|i)\b[^?.!]{0,20}\b(?:done|finished|complete|completed|over)\b\s*(?:(?:it|this|the lesson)\s*)?(?:yet|now|already)?\s*(?:[?.!]|$)/i
+  /\b(?:is|are|am|did|have|has)\b[^?.!]{0,30}\b(?:lesson|this|it|we|i)\b[^?.!]{0,20}\b(?:done|finished|complete|completed|over)\b\s*(?:(?:with\s+)?(?:it|this|(?:the|this|my)\s+(?:[a-z'-]+\s+){0,3}(?:lesson|topic|chapter))\s*)?(?:yet|now|already)?\s*(?:[?.!]|$)/i
 
 export function asksWhetherLessonIsDone(message: string): boolean {
   return LESSON_STATUS_QUESTION_RE.test((message ?? '').trim())
