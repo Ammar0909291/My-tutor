@@ -5067,7 +5067,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // A learner's own "quiz me" is honoured in lesson one too — see the
           // first-lesson practice path at the memory-serving decision.
           notFirstLesson: !firstLessonActiveHoisted || turnIntent.wantsPractice,
-          notExcursion: !excursionActiveHoisted,
+          // The one closing turn that is NOT a detour for the gate: the
+          // learner asked to be assessed, and that request is what closed it
+          // (closed-wants-practice). Reading the closing turn's attribution
+          // here left "quiz me" with no quiz (2026-09-30 learner baseline, P4).
+          // Lesson credit is unchanged: the probe is answered next turn.
+          notExcursion: !excursionActiveHoisted || excursionDecisionHoisted?.transition === 'closed-wants-practice',
           // The session is ending: no question is attached, and no authored
           // probe is spent. See closingTurnWithholdsQuestion.
           arbitrationAllowsProbe: arbitrationRawAllowsProbe,
