@@ -13,7 +13,8 @@
  * authored. Nothing here guesses at colour, position, or content: if the
  * payload does not state it, it is not returned, and the contract falls back to
  * a truthful generic description. Positions are not guessed either: each
- * label's coarse place on the figure is read off its own coordinates.
+ * label's coarse place on the figure is read off its own coordinates, and each
+ * colour is named from the object's own drawn colour.
  */
 
 import type { VisualPayload } from './types'
@@ -22,6 +23,7 @@ import { sceneStepCount, type Vec3 } from '@/lib/teaching/sceneSpec'
 import type { VisualSpec } from '@/lib/visuals/visualSpec'
 import { VISUAL_META } from '@/lib/school/visuals/visualTypes'
 import { clamp } from './conceptText'
+import { familyOfHex } from './figureFidelity'
 
 /** Facts derived from the payload. Every field is either real or absent. */
 export interface VisualSemantics {
@@ -66,6 +68,16 @@ export interface VisualSemantics {
    * right. A learner following the words looked in the wrong places.
    */
   placed?: string[]
+  /**
+   * Each named colour and the parts drawn in it, read off `obj.color`.
+   *
+   * MEASURED LIVE (2026-09-30 learner baseline, P1 Newton's second law and P2
+   * Faraday's law): asked "what do the blue and green lines mean?", the tutor
+   * was never told a colour and guessed — "the blue line is the velocity-time
+   * graph" (it is green; blue is the acceleration arrow) and "the red curve is
+   * the EMF" (red is the flux). It then built a quick check on the guess.
+   */
+  colours?: string[]
 }
 
 const EMPTY: VisualSemantics = {
@@ -174,6 +186,35 @@ export function coarsePlace(x: number, y: number, ext: { x0: number; x1: number;
   return v && h ? `${v} ${h}` : v || h || 'centre'
 }
 
+/**
+ * The everyday name of a drawn colour, or null when it has no stable name.
+ *
+ * Near-white and near-black are null on purpose: neutral ink is flipped by the
+ * renderer's theme (white on the dark canvas, near-black on the light one), so
+ * any name for it would be wrong in one of the two themes. Every chromatic
+ * colour keeps its hue in both themes, so its name is true in both.
+ */
+export function colourName(css: string | undefined): string | null {
+  // The hue family comes from figureFidelity's own reader, so a colour named
+  // here is always one the post-generation fidelity check accepts.
+  const family = familyOfHex(css)
+  if (!family || family === 'white' || family === 'black') return null
+  const h6 = css!.trim().slice(1)
+  const hex = h6.length === 3 ? h6.split('').map((c) => c + c).join('') : h6
+  const [r, g, b] = [0, 2, 4].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255)
+  const max = Math.max(r, g, b)
+  const min = Math.min(r, g, b)
+  const light = (max + min) / 2
+  if (light > 0.85 || light < 0.15) return null
+  const sat = max === min ? 0 : (max - min) / (1 - Math.abs(2 * light - 1))
+  // Muted (slate, the reference role) reads as grey to a learner.
+  if (sat < 0.35) return 'grey'
+  return family
+}
+
+/** Parts listed per colour, so one busy colour cannot crowd out the rest. */
+const MAX_PER_COLOUR = 4
+
 function fromScene(spec: SceneSpec): VisualSemantics {
   // Read the drawn objects once, splitting text from shape. Both halves come
   // from the payload the renderer will paint — nothing here is inferred.
@@ -187,8 +228,15 @@ function fromScene(spec: SceneSpec): VisualSemantics {
   }
   const equations: string[] = []
   const shapeCounts = new Map<SceneObject['type'], number>()
+  // colour -> labels drawn in it, and unlabelled shape kinds drawn in it
+  const colourTexts = new Map<string, string[]>()
+  const colourShapes = new Map<string, Map<SceneObject['type'], number>>()
+  // colour -> the stages its unlabelled shapes appear in. An unlabelled curve's
+  // meaning is its stage's narration ("The magnetic flux … rises"), so naming
+  // the stage lets the model tie the colour to it without guessing.
+  const colourStages = new Map<string, Set<number>>()
 
-  for (const step of spec.steps ?? []) {
+  for (const [stepIndex, step] of (spec.steps ?? []).entries()) {
     for (const obj of step.objects ?? []) {
       // Never describe something the renderer will not draw.
       if (!DRAWN.has(obj.type)) continue
@@ -204,10 +252,19 @@ function fromScene(spec: SceneSpec): VisualSemantics {
         // `equations` is an ADDITIONAL view of the same labels, never a move.
         texts.push(clamp(text, 60))
         if (isEquation(text)) equations.push(clamp(text, 60))
+        const colour = colourName(obj.color)
+        if (colour) colourTexts.set(colour, [...(colourTexts.get(colour) ?? []), clamp(text, 60)])
       } else {
         // A straight path is described as what the learner sees: a line.
         const kind = (obj.type === 'path' || obj.type === 'trajectory') && isStraightPath(obj.points) ? 'bond' : obj.type
         shapeCounts.set(kind, (shapeCounts.get(kind) ?? 0) + 1)
+        const colour = colourName(obj.color)
+        if (colour) {
+          const kinds = colourShapes.get(colour) ?? new Map<SceneObject['type'], number>()
+          kinds.set(kind, (kinds.get(kind) ?? 0) + 1)
+          colourShapes.set(colour, kinds)
+          colourStages.set(colour, (colourStages.get(colour) ?? new Set<number>()).add(stepIndex + 1))
+        }
       }
     }
   }
@@ -225,6 +282,18 @@ function fromScene(spec: SceneSpec): VisualSemantics {
     .sort((a, b) => b[1] - a[1])
     .slice(0, MAX_GEOMETRY)
     .map(([type, n]) => (n === 1 ? OBJECT_NOUN[type] : `${n} ${OBJECT_PLURAL[type] ?? OBJECT_NOUN[type]}`))
+
+  const colours = [...new Set([...colourTexts.keys(), ...colourShapes.keys()])].map((colour) => {
+    const parts = [
+      ...dedupe(colourTexts.get(colour) ?? []).slice(0, MAX_PER_COLOUR).map((t) => `"${t}"`),
+      ...[...(colourShapes.get(colour) ?? new Map<SceneObject['type'], number>()).entries()]
+        .map(([type, n]) => (n === 1 ? OBJECT_NOUN[type] : `${n} ${OBJECT_PLURAL[type] ?? OBJECT_NOUN[type]}`)),
+    ]
+    const stages = [...(colourStages.get(colour) ?? [])]
+    const stepped = sceneStepCount(spec) > 1 && stages.length > 0 && stages.length <= 3
+    return `${colour}: ${parts.join(', ')}` +
+      (stepped ? ` (its unlabelled shapes are drawn in stage${stages.length === 1 ? '' : 's'} ${stages.join(', ')})` : '')
+  })
 
   const allSteps = dedupe(
     (spec.steps ?? [])
@@ -251,6 +320,7 @@ function fromScene(spec: SceneSpec): VisualSemantics {
     steps: sceneStepCount(spec) > 1 ? steps : [],
     ...(sceneStepCount(spec) > 1 && allSteps.length > steps.length ? { stepTotal: allSteps.length } : {}),
     ...(placed ? { placed } : {}),
+    ...(colours.length ? { colours } : {}),
   }
 }
 
@@ -360,6 +430,20 @@ export function buildSemanticsBlock(semantics: VisualSemantics): string {
       'Drawn without text of their own: ' + geometry.join(', ') +
       '. These are shapes — what each one MEANS is given by the text beside it ' +
       'and by the stages below, never by their shape alone.',
+    )
+  }
+  const colours = semantics.colours ?? []
+  if (colours.length) {
+    parts.push(
+      'COLOURS, exactly as drawn — ' + colours.join('; ') + '. ' +
+      'When you or the learner name a colour, use only this list: a colour ' +
+      'belongs only to the parts listed with it. A colour that is not listed ' +
+      'is not on the figure — say so rather than guess what it shows.',
+    )
+  } else if (readable.length || geometry.length) {
+    parts.push(
+      'No colour information is available for this figure: never say what a ' +
+      'colour shows; point at parts by the text written beside them.',
     )
   }
   // ── WHAT IS NOT THERE ──────────────────────────────────────────────────────
