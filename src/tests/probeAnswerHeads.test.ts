@@ -164,9 +164,14 @@ describe('physics only: per-option split (task #2 part b)', () => {
     const phys = probeToMcq(EQUAL as never)!
     expect(phys.options[phys.correctIndex]).toBe('Equal')
     expect(phys.rationales![phys.correctIndex]).toMatch(/^gravity pays out/)
+    // Chemistry joined physics 2026-10-01 (see PER_OPTION_SPLIT_PREFIXES);
+    // every other subject keeps the all-or-nothing rule. Original assertion:
+    //   expect(chem.options[chem.correctIndex]).toMatch(/^Equal — gravity pays out/)
     const chem = probeToMcq({ ...EQUAL, conceptId: 'chem.found.matter' } as never)!
-    expect(chem.options[chem.correctIndex]).toMatch(/^Equal — gravity pays out/)
-    expect(chem).not.toHaveProperty('rationales')
+    expect(chem.options[chem.correctIndex]).toBe('Equal')
+    const bio = probeToMcq({ ...EQUAL, conceptId: 'bio.found.what-is-biology' } as never)!
+    expect(bio.options[bio.correctIndex]).toMatch(/^Equal — gravity pays out/)
+    expect(bio).not.toHaveProperty('rationales')
     const unknown = probeToMcq({ ...EQUAL, conceptId: undefined } as never)!
     expect(unknown).not.toHaveProperty('rationales')
   })
