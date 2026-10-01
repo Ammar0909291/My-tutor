@@ -360,6 +360,23 @@ export function isQuestionAnnouncement(message: string): boolean {
 }
 
 /**
+ * "Is this lesson done?" — a question ABOUT the lesson's status, not new
+ * intent. MEASURED LIVE 2026-10-01 (chem.found.mole-concept, mastered and
+ * closed): read as a genuine question, it routed to the model, which answered
+ * "Not quite yet — there's still a key idea we need to explore" twice, on two
+ * fresh sessions, while the runtime recorded the lesson COMPLETED. Excluded
+ * from new intent so the deterministic close (built from persisted evidence)
+ * answers it. The status word must end the clause ("is it complete
+ * combustion?" is not a status question).
+ */
+const LESSON_STATUS_QUESTION_RE =
+  /\b(?:is|are|am|did|have|has)\b[^?.!]{0,30}\b(?:lesson|this|it|we|i)\b[^?.!]{0,20}\b(?:done|finished|complete|completed|over)\b\s*(?:(?:it|this|the lesson)\s*)?(?:yet|now|already)?\s*(?:[?.!]|$)/i
+
+export function asksWhetherLessonIsDone(message: string): boolean {
+  return LESSON_STATUS_QUESTION_RE.test((message ?? '').trim())
+}
+
+/**
  * P1 fix, second root cause ("got it" after completion, live-reproduced
  * 2026-08-22) — extracted to a pure, testable predicate rather than left as
  * an inline boolean at the route.ts call site.

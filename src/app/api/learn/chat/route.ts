@@ -2976,7 +2976,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // stays recorded COMPLETED regardless; nothing here reopens it.
         if (lessonCompletedHoisted) {
           const { isGenuineQuestion } = await import('@/lib/understanding/readers/conversationReader')
-          const { isQuestionAnnouncement } = await import('@/lib/teaching/lessonCompletion')
+          const { isQuestionAnnouncement, asksWhetherLessonIsDone } = await import('@/lib/teaching/lessonCompletion')
           //   - PHASE 7M-A: the learner asks to PRACTISE or be QUIZZED on the
           //     lesson that just ended ("give me a practice problem", "quiz
           //     me"). Every signal above is about going ELSEWHERE (an
@@ -3001,10 +3001,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           //     block's own header says, the lesson stays recorded COMPLETED
           //     and nothing here reopens it — D0a simply yields for this turn,
           //     exactly as it already does for a question or for distress.
+          //   - A question about the lesson's OWN status ("is this lesson
+          //     done?") is not new intent: the deterministic close answers it
+          //     (live 2026-10-01 — the model said "not quite yet" on a
+          //     COMPLETED lesson; see asksWhetherLessonIsDone).
           lessonCompletionRespectsNewIntentHoisted = excursionDecision.state.active
             || requestedConceptIdThisTurn != null
             || requestedTopicTitleThisTurn != null
-            || turnIntent.isQuestion   // Phase 1: the one authoritative read
+            || (turnIntent.isQuestion && !asksWhetherLessonIsDone(message))
             || turnIntent.wantsPractice // Phase 7M-A
             || recoveryKeyHoisted !== null
             || isQuestionAnnouncement(message)
