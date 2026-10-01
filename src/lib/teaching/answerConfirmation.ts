@@ -140,6 +140,9 @@ export function affirmsTheLearner(sentence: string): boolean {
   const neutral = flatten(sentence)
     .replace(/\b(?:the|a|an|your|its|their|this|that|our)\s+(?:most\s+)?correct\b/gi, ' ')
     .replace(/\bcorrect(?:ly)?\s+(?:answer|value|option|unit|units|conversion|choice|result|form|way|approach|one|reading|expression|equation|sign|direction|magnitude)\b/gi, ' ')
+    .replace(/\b(?:you|you'?re)\s+(?:think|believe|feel|guess)\b[^.!?]*?\bcorrect\b/gi, ' ')
+    .replace(/\b(?:select|choose|pick|tap|click)\b[^.!?]*?\bcorrect\b/gi, ' ')
+    .replace(/\b(?:which|what)\s+(?:one|option|answer|choice\s+)?\s*(?:is|was)\s+correct\b/gi, ' ')
     .replace(/\b(?:exactly|precisely)\s+(?=[\d(−-]|one\b|two\b|half\b|twice\b|zero\b|the\b|a\b|an\b|what\b|how\b|where\b|when\b|why\b|equal\b|as\b)/gi, ' ')
   return CONFIRMS_CORRECT.test(neutral)
 }
@@ -206,8 +209,13 @@ export function statesCorrect(text: string): boolean {
     // A denial is never a confirmation: "not quite right" contains "quite
     // right", which CONFIRMS_CORRECT matches (see DENIES_CORRECT below).
     .filter((sentence) => !DENIES_CORRECT.test(sentence))
-    .join(' ')
-  return CONFIRMS_CORRECT.test(statements)
+  // Per sentence, through affirmsTheLearner: "please select the option you
+  // think is correct" is an instruction, not a verdict. MEASURED LIVE
+  // (2026-09-30, phys.particle.standard-model turn 10): after a CREDITED right
+  // answer the reply was "Got it — please select the option you think is
+  // correct from the choices above". "correct" matched, so no confirmation was
+  // added and the learner was told to answer a question they had just got right.
+  return statements.some((sentence) => affirmsTheLearner(sentence))
 }
 
 /**
@@ -249,6 +257,14 @@ export function confirmCorrectAnswer(input: ConfirmationInput): ConfirmationResu
   let { text } = input
   if (correct !== true) return { text, added: false }
   if (typeof text !== 'string' || text.trim().length === 0) return { text, added: false }
+  // An instruction to pick from the choices ABOVE, on the turn that graded that
+  // very pick, asks the learner to answer again what they just got right (live
+  // QA 2026-09-30; see statesCorrect). A new question's options sit BELOW the
+  // message, so "above" only ever points at the answered one.
+  text = text.replace(
+    /(^|(?<=[.!?])\s+)[^.!?\n]*\b(?:select|choose|pick|tap|click)\b[^.!?\n]*\b(?:option|answer|choice)s?\b[^.!?\n]*\babove\b[^.!?\n]*[.!?]?/gi,
+    '',
+  ).trim()
   // The grade is the authority: a reply that opens by calling a correct answer
   // wrong loses that sentence before the confirmation is added.
   const undenied = stripLeadingFalseDenial(text)

@@ -12,7 +12,8 @@
  * renderer will draw, the equation it will plot, the step narrations that were
  * authored. Nothing here guesses at colour, position, or content: if the
  * payload does not state it, it is not returned, and the contract falls back to
- * a truthful generic description.
+ * a truthful generic description. Positions are not guessed either: each
+ * label's coarse place on the figure is read off its own coordinates.
  */
 
 import type { VisualPayload } from './types'
@@ -54,6 +55,17 @@ export interface VisualSemantics {
   steps: string[]
   /** How many stages the figure really has, when `steps` had to be cut short. */
   stepTotal?: number
+  /**
+   * Each readable label with its coarse place on the figure ("top left",
+   * "right", …), read off its coordinates against the drawn extent.
+   *
+   * MEASURED LIVE (2026-09-30, phys.particle.standard-model): told only WHICH
+   * labels were drawn, the tutor said the leptons were "next to" the quarks,
+   * the bosons "below those rows" and the Higgs "at the bottom". In the figure
+   * the leptons are below the quarks, the bosons to the right and H at the far
+   * right. A learner following the words looked in the wrong places.
+   */
+  placed?: string[]
 }
 
 const EMPTY: VisualSemantics = {
@@ -153,10 +165,26 @@ function dedupe(values: string[]): string[] {
   return out
 }
 
+/** Where a point sits in the drawn extent, in thirds: "top left" … "bottom right". */
+export function coarsePlace(x: number, y: number, ext: { x0: number; x1: number; y0: number; y1: number }): string {
+  const fx = ext.x1 > ext.x0 ? (x - ext.x0) / (ext.x1 - ext.x0) : 0.5
+  const fy = ext.y1 > ext.y0 ? (y - ext.y0) / (ext.y1 - ext.y0) : 0.5
+  const h = fx < 1 / 3 ? 'left' : fx > 2 / 3 ? 'right' : ''
+  const v = fy > 2 / 3 ? 'top' : fy < 1 / 3 ? 'bottom' : ''
+  return v && h ? `${v} ${h}` : v || h || 'centre'
+}
+
 function fromScene(spec: SceneSpec): VisualSemantics {
   // Read the drawn objects once, splitting text from shape. Both halves come
   // from the payload the renderer will paint — nothing here is inferred.
   const texts: string[] = []
+  const labelAt: Array<{ text: string; x: number; y: number }> = []
+  const ext = { x0: Infinity, x1: -Infinity, y0: Infinity, y1: -Infinity }
+  const extend = (p: unknown) => {
+    if (!Array.isArray(p) || typeof p[0] !== 'number' || typeof p[1] !== 'number') return
+    ext.x0 = Math.min(ext.x0, p[0]); ext.x1 = Math.max(ext.x1, p[0])
+    ext.y0 = Math.min(ext.y0, p[1]); ext.y1 = Math.max(ext.y1, p[1])
+  }
   const equations: string[] = []
   const shapeCounts = new Map<SceneObject['type'], number>()
 
@@ -164,7 +192,9 @@ function fromScene(spec: SceneSpec): VisualSemantics {
     for (const obj of step.objects ?? []) {
       // Never describe something the renderer will not draw.
       if (!DRAWN.has(obj.type)) continue
+      for (const p of [obj.position, obj.from, obj.to, ...(obj.points ?? [])]) extend(p)
       const text = typeof obj.text === 'string' ? obj.text.trim() : ''
+      if (text && Array.isArray(obj.position)) labelAt.push({ text: clamp(text, 60), x: obj.position[0], y: obj.position[1] })
       if (text) {
         // A label's TEXT is what the learner reads, whatever shape carries it.
         // EVERY label goes into `texts`, including the relationships: pulling
@@ -183,6 +213,13 @@ function fromScene(spec: SceneSpec): VisualSemantics {
   }
 
   const readable = dedupe(texts).slice(0, MAX_READABLE)
+  // A place only means something against a real extent and at least two labels.
+  const placed = labelAt.length >= 2 && Number.isFinite(ext.x0) && (ext.x1 - ext.x0 > 0.5 || ext.y1 - ext.y0 > 0.5)
+    ? readable.map((t) => {
+        const at = labelAt.find((l) => l.text === t)
+        return at ? `"${t}" (${coarsePlace(at.x, at.y, ext)})` : `"${t}"`
+      })
+    : undefined
   const geometry = [...shapeCounts.entries()]
     // Densest shapes first: what dominates the picture is what a learner sees.
     .sort((a, b) => b[1] - a[1])
@@ -213,6 +250,7 @@ function fromScene(spec: SceneSpec): VisualSemantics {
     // announce stages that do not exist.
     steps: sceneStepCount(spec) > 1 ? steps : [],
     ...(sceneStepCount(spec) > 1 && allSteps.length > steps.length ? { stepTotal: allSteps.length } : {}),
+    ...(placed ? { placed } : {}),
   }
 }
 
@@ -307,10 +345,14 @@ export function buildSemanticsBlock(semantics: VisualSemantics): string {
   // Text first and complete: it is the only part of the figure a learner can
   // quote back, and the part the tutor is most likely to invent.
   if (readable.length) {
+    const placed = semantics.placed && semantics.placed.length === readable.length ? semantics.placed : null
     parts.push(
-      'TEXT WRITTEN ON THE FIGURE, exactly as the learner reads it: ' +
-      readable.map((t) => `"${t}"`).join(', ') +
-      '. Use these words when you point at parts of it.',
+      'TEXT WRITTEN ON THE FIGURE, exactly as the learner reads it' +
+      (placed ? ', each with where it sits on the figure: ' + placed.join(', ') : ': ' + readable.map((t) => `"${t}"`).join(', ')) +
+      '. Use these words when you point at parts of it.' +
+      (placed
+        ? ' When you say WHERE something is, use only those positions — never say a part is "next to", "below", "above" or "at the bottom" unless those positions show it.'
+        : ''),
     )
   }
   if (geometry.length) {

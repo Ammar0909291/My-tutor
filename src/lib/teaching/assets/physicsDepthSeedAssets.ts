@@ -5671,7 +5671,7 @@ const PARTICLE: SeedProbe[] = [
   {
     conceptId: 'phys.particle.standard-model', subjectSlug: S, probeKind: 'mcq',
     gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
-    stem: 'How many fundamental matter particles (fermions) does the Standard Model contain, counting antiparticles separately from particles?',
+    stem: 'How many fundamental matter particles (fermions) does the Standard Model contain, counting each particle and its antiparticle as one?',
     choices: [
       { text: 'Twelve — six quarks and six leptons', isCorrect: true },
       { text: 'Three — the proton, the neutron and the electron', isCorrect: false },

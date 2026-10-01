@@ -291,7 +291,13 @@ describe('route wiring — the two runtime rules', () => {
     // untouched — it asks a different question ("was something attached THIS
     // turn"). Old assertion (kept verbatim, no longer matches source):
     //   expect(ROUTE).toContain('if (gateMcqHoisted && mcqHoisted) {')
-    expect(ROUTE).toContain('if (resolvedGateMcq && mcqHoisted) {')
+    // 2026-10-01 (live QA): it also runs, in `held` mode, against an AUTHORED
+    // question already on screen. Old assertion (kept verbatim):
+    //   expect(ROUTE).toContain('if (resolvedGateMcq && mcqHoisted) {')
+    expect(ROUTE).toContain('const contractQuestion = resolvedGateMcq && mcqHoisted')
+    expect(ROUTE).toContain(': (resolvedQuestionServed?.assetId ? resolvedQuestionServed : null)')
+    expect(ROUTE).toContain('if (contractQuestion) {')
+    expect(ROUTE).toContain('held: contractQuestion !== mcqHoisted || !resolvedGateMcq,')
     expect(ROUTE).toContain('enforceGateProbeContract')
   })
 

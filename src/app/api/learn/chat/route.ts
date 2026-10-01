@@ -10182,7 +10182,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       try {
         const { ensureVisualAcknowledged } = await import('@/lib/teaching/visual/visualAcknowledgement')
         // Typed Turn Contract Batch 5: reuses `resolvedVisualDecision`.
-        const ack = ensureVisualAcknowledged(cleanText, resolvedVisualDecision, figureIntroducedThisTurn && visualFired)
+        const ack = ensureVisualAcknowledged(cleanText, resolvedVisualDecision, figureIntroducedThisTurn && visualFired, serveLessonComplete || /\[LESSON_COMPLETE\]/i.test(cleanText))
         if (ack.appended) {
           console.warn('[visual-acknowledgement] ' + JSON.stringify({
             event: 'unacknowledged-figure-introduced',
@@ -10537,13 +10537,26 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       //
       // The probe, its options, its correct index and the grade are untouched —
       // this decides which SENTENCE sits above a question the server chose.
-      if (resolvedGateMcq && mcqHoisted) {
+      //
+      // AND ON A HELD QUESTION TOO (live QA, 2026-09-30): the contract ran only
+      // when a gate probe was attached THIS turn. With an authored question
+      // already on screen (phys.particle.standard-model: "Yes/No" buttons) the
+      // model printed its own A)–D) list; on phys.mod.diode-rectification it
+      // asked "Which factor is the primary reason the peak output is lower…?"
+      // above the held "What does a single diode do to an alternating supply?".
+      // Whatever authored question this turn puts in front of the learner is the
+      // one the prose must not compete with.
+      const contractQuestion = resolvedGateMcq && mcqHoisted
+        ? mcqHoisted
+        : (resolvedQuestionServed?.assetId ? resolvedQuestionServed : null)
+      if (contractQuestion) {
         try {
           const { enforceGateProbeContract } = await import('@/lib/teaching/gateProbeContract')
           const contract = enforceGateProbeContract({
             text: cleanText,
             leadIn: resolvedGateLeadIn,
-            canonicalQuestion: mcqHoisted.question,
+            canonicalQuestion: contractQuestion.question,
+            held: contractQuestion !== mcqHoisted || !resolvedGateMcq,
           })
           if (contract.replaced) {
             console.warn(

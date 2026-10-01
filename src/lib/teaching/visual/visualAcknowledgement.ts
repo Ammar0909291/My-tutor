@@ -120,9 +120,15 @@ export function ensureVisualAcknowledged(
   text: string,
   decision: VisualDecision | null,
   figureIntroducedThisTurn: boolean,
+  /** The turn closes the lesson (completion banner, recap). MEASURED LIVE
+   *  (2026-09-30, phys.particle.standard-model and phys.mod.diode-rectification):
+   *  "Take a look at the … beside this message — it shows X. Follow it step by
+   *  step." was appended under the "You mastered …" completion banner, an
+   *  instruction to study a figure on the turn that ends the lesson. */
+  closesLesson = false,
 ): VisualAcknowledgementResult {
   try {
-    if (!figureIntroducedThisTurn) return { text, appended: false }
+    if (!figureIntroducedThisTurn || closesLesson) return { text, appended: false }
     if (!decision || !decision.graphical || !decision.asset) return { text, appended: false }
     if (typeof text !== 'string' || text.trim().length === 0) return { text, appended: false }
     if (referencesFigure(text)) return { text, appended: false }

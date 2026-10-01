@@ -71,6 +71,15 @@ export interface GateContractInput {
   leadIn: string | null
   /** The canonical question the learner will actually be graded on. */
   canonicalQuestion: string
+  /**
+   * The question was attached on an EARLIER turn and is still on screen (not a
+   * fresh gate turn). Stricter about what it removes: an option list always
+   * goes, a trailing competing question only when it is a real question in its
+   * own paragraph, and the reply is never replaced wholesale — a learner asking
+   * something while a question waits is owed the answer, and "Does that help?"
+   * is not a competing assessment.
+   */
+  held?: boolean
 }
 
 export interface GateContractResult {
@@ -117,7 +126,15 @@ export function enforceGateProbeContract(input: GateContractInput): GateContract
     // legitimately repeats it when a learner asks for a reminder) from a
     // different one (cut), by word overlap against the probe the server chose.
     const head = hasOptionList ? lines.slice(0, firstOptionLine).join('\n').trim() : input.text.trim()
-    const kept = dropCompetingQuestion(head, input.canonicalQuestion)
+    let kept = dropCompetingQuestion(head, input.canonicalQuestion)
+    if (input.held && kept !== head) {
+      const cut = head.slice(kept.length).trim()
+      // Keep a short check-in, and never let the cut take the whole reply.
+      if (kept.length === 0 || cut.split(/\s+/).length < 6) kept = head
+    }
+    if (input.held && hasOptionList && kept.length === 0) {
+      return { text: input.text, replaced: false, reason: 'ok' }
+    }
     if (!hasOptionList && kept === head) {
       // Nothing to repair: no option list, and no competing question.
       return { text: input.text, replaced: false, reason: 'ok' }

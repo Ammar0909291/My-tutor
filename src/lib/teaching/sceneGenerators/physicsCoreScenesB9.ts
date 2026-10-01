@@ -318,22 +318,39 @@ export function buildPnJunctionScene(): SceneSpec {
  * at 1.04 V, beyond the plotted range, so the forward curve never rose.
  */
 export function diodeCurrent(v: number): number { return 1e-14 * (Math.exp(v / 0.026) - 1) }
+/** Half-wave rectifier, one diode in series with a load: the load sees the
+ *  input minus the diode's turn-on drop while forward biased, nothing in reverse. */
+export function halfWaveOutput(vIn: number, vOn: number): number {
+  return Math.max(0, vIn - vOn)
+}
+
 export function buildDiodeScene(): SceneSpec {
   const OX = -0.4, OY = -1.2, SV = 3.6, SI = 180 // SI: drawn units per ampere
+  const CAP = 4.8 // drawn height of the current axis above OY
   const x = (v: number) => OX + v * SV
-  const y = (v: number) => OY + Math.min(diodeCurrent(v) * SI, 4.8)
+  const y = (v: number) => OY + diodeCurrent(v) * SI
   const vOn = (() => { let v = 0; while (diodeCurrent(v) < 0.001) v += 0.001; return r2(v) })()
+  // The curve ENDS where it reaches the top of the axis. It used to be clamped
+  // there, which drew a flat top that read as the current saturating — the
+  // opposite of the exponential rise (live QA, 2026-09-30).
+  const vTop = (() => { let lo = vOn, hi = 2; for (let i = 0; i < 60; i++) { const m = (lo + hi) / 2; if (diodeCurrent(m) * SI < CAP) lo = m; else hi = m } return lo })()
+  // Inset: a half-wave rectifier. Input peak VP volts drawn at S units per volt.
+  // Two stacked traces on one volts scale: the input on top, the output on its
+  // own axis below, so the blocked half-cycles and the drop are both visible.
+  const IX0 = -4.4, IX1 = -1.2, IY = 3.2, OY2 = 0.9, VP = 5, S = 0.15, PERIOD = (IX1 - IX0) / 2
+  const vIn = (t: number) => VP * Math.sin((2 * Math.PI * (t - IX0)) / PERIOD)
   return {
     id: 'phys-diode',
     title: 'The diode: one-way current',
     sceneType: 'diagram',
     cameraDistance: 13,
-    teachingGoal: 'Show a diode\'s current–voltage curve: almost no current in reverse bias, and a sharply rising current once the forward voltage passes about 0.6–0.7 V — so it lets current through only one way (rectification).',
-    ariaLabel: 'A graph of current against voltage for a silicon diode. For negative voltages the current is essentially zero. For positive voltages it stays near zero until about 0.6 volts, then rises very steeply.',
+    teachingGoal: 'Show a diode\'s current–voltage curve: almost no current in reverse bias, and a sharply rising current once the forward voltage passes about 0.6–0.7 V — so it lets current through only one way, which is what rectifies AC into one-direction humps.',
+    ariaLabel: 'A graph of current against voltage for a silicon diode. For negative voltages the current is essentially zero. For positive voltages it stays near zero until about 0.6 volts, then rises very steeply. An inset shows an alternating input voltage and the half-wave rectified output: only the positive half-cycles pass, each slightly lower than the input peak.',
     steps: [
       { narration: 'Current through a diode against the voltage across it.', objects: [arrow(P(-4.4, OY), P(4.4, OY), ROLE.reference), arrow(P(OX, -2.4), P(OX, 4.0), ROLE.reference), label('voltage V', P(3.8, OY - 0.45), ROLE.ink, 'detail'), label('current I', P(OX + 0.9, 4.3), ROLE.ink, 'detail')] },
       { narration: 'Reverse bias (negative V): the depletion region widens and almost no current flows.', objects: [line(P(-4.2, OY - 0.05), P(OX, OY), ROLE.output, 0.06), label('reverse: blocks', P(-2.6, OY + 0.6), ROLE.output, 'primary')] },
-      { narration: `Forward bias: the barrier shrinks, and above about ${vOn} V the current rises steeply (I = I_s(e^(V/nV_T) − 1)). One-way flow is what lets a diode turn AC into DC.`, objects: [curve(fnPath((v) => y((v - OX) / SV), OX, x(0.9), 160), ROLE.input), line(P(x(vOn), OY - 0.3), P(x(vOn), OY + 0.3), ROLE.result, 0.03), label(`≈ ${vOn} V`, P(x(vOn), OY - 0.7), ROLE.result, 'primary'), label('forward: conducts', P(x(0.9) - 1.3, 3.4), ROLE.input, 'primary')] },
+      { narration: `Forward bias: the barrier shrinks, and above about ${vOn} V the current rises steeply (I = I_s(e^(V/nV_T) − 1)) — it keeps climbing past the top of this graph.`, objects: [curve(fnPath((xx) => y((xx - OX) / SV), OX, x(vTop), 160), ROLE.input), line(P(x(vOn), OY - 0.3), P(x(vOn), OY + 0.3), ROLE.result, 0.03), label(`≈ ${vOn} V`, P(x(vOn), OY - 0.7), ROLE.result, 'primary'), label('forward: conducts', P(x(vTop) + 1.45, 2.2), ROLE.input, 'primary')] },
+      { narration: `Rectification: put the diode in series with a load and drive it with AC. Only the forward half-cycles get through, each about ${vOn} V below the input peak; the reverse halves are blocked. The output is one-direction humps — half-wave rectified.`, objects: [arrow(P(IX0, IY), P(IX1 + 0.25, IY), ROLE.reference), curve(fnPath((t) => IY + S * vIn(t), IX0, IX1, 200), ROLE.reference), label('AC input', P(IX0 + 0.75, IY + S * VP + 0.35), ROLE.ink, 'detail'), arrow(P(IX0, OY2), P(IX1 + 0.25, OY2), ROLE.reference), curve(fnPath((t) => OY2 + S * halfWaveOutput(vIn(t), vOn), IX0, IX1, 200), ROLE.result), label('output: half-wave', P(IX0 + 1.6, OY2 - 0.4), ROLE.result, 'primary')] },
     ],
   }
 }

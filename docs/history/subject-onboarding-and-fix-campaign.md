@@ -1168,3 +1168,39 @@ Run on the owner's account (credentials supplied in chat, used as env vars for t
   phys.meas.units: the wrong tap "4.7 × 10⁶ F" was explained ("µ stands for micro … 10⁻⁶"), the next authored question
   came in the same reply, and mastery was reached at turn 8 with no spiral close. The deadlock above is not
   universal; it reproduced once, on the account where this was a genuine first lesson. Its exact trigger is still open.
+
+## 2026-10-01 — fixes from the two-hard-concepts live QA (phys.particle.standard-model, phys.mod.diode-rectification)
+
+Owner instruction: "Fix" for the QA report. Physics only.
+
+- **P1, wrong answer key (content).** The stem said "counting antiparticles separately" (which makes it 24) while the
+  key is "Twelve". The stem now reads "counting each particle and its antiparticle as one". The seed is fixed, but the
+  cold-start bootstrap is insert-only (`createMany … skipDuplicates`), so the live `probe_assets` row keeps the old stem
+  until an owner-approved one-row UPDATE is run.
+- **V2, diode figure.** (a) The I–V curve was clamped at the axis top (`Math.min(…, 4.8)`), which drew a flat top that
+  read as saturation. It now ends where it reaches the top, and the narration says it keeps climbing. (b) The concept is
+  rectification, but the figure had no rectifier. A fourth stage now draws the half-wave rectifier: an AC input on top
+  and the output humps on their own axis below, on one volts scale, each a turn-on drop (0.66 V) lower
+  (`halfWaveOutput`). (c) "forward: conducts" was moved off the curve. Rendered at 1280px through the local app: no
+  overlaps.
+- **V1, the tutor misdescribed the figure's layout.** The model was told which labels were drawn, never where. The
+  semantics now carry each label's coarse place, read off its own coordinates against the drawn extent ("u c t" (top
+  left), "leptons" (bottom left), "g γ Z W" (right), "H" (right)). The contract says to describe positions only by
+  those places.
+- **P3, prose competing with the question on screen.** The one-question contract only ran on a fresh gate turn. It now
+  also runs when an authored question is HELD on screen, in a stricter `held` mode: an option list always goes; a
+  trailing competing question is cut only when it is a real question (6+ words) in its own paragraph; and the reply is
+  never replaced wholesale ("Does that help?" stays).
+- **P7, "please select the option you think is correct" after a credited right answer.** The word "correct" in that
+  instruction counted as a confirmation, so no confirmation was added. `statesCorrect` now tests each sentence with
+  `affirmsTheLearner` (choose/select instructions and "which is correct" are neutral), and on a graded-correct turn an
+  instruction to pick from the choices ABOVE is removed.
+- **P10, the figure pointer under the completion banner.** `ensureVisualAcknowledged` takes `closesLesson`; it is not
+  appended on a served completion or when the reply carries the completion tag.
+- **Not fixed, with reasons:**
+  - P6 `[LESSON_COMPLETE]`: the UI strips it (`parseLessonCompletionTag`). The harness read raw API text.
+  - P2: a model-invented question is never graded, by design (an unauthored key cannot be trusted).
+  - P4, guessable 2-option mastery: an assessment-policy change, which needs the owner (G1/G2).
+  - P9: model wording.
+  - P11–P13: separate investigations.
+- Tests: `hardPhysicsLiveQaFixes.test.ts`.
