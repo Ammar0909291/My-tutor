@@ -489,7 +489,22 @@ export function resolveVisual(input: ResolveVisualInput): VisualDecision {
       options: [...input.offeredMcqOptions],
       correctIndex: 0,
     })
-  const target = answeringPendingProbe ? null : rawTarget
+  // A CONCEPT FROM ANOTHER SUBJECT, MERELY MENTIONED, IS NOT A DETOUR.
+  // MEASURED LIVE 2026-10-01 (phys.mech.friction, real account): "i think
+  // friction is bigger when the surface area is bigger, right?" resolved
+  // "surface area" to math.geom.surface-area; the Teaching Engine correctly
+  // opened no excursion (transition none), but this layer drew the maths
+  // geometry-shapes card beside a friction lesson (FIGURE_CONCEPT_MISMATCH)
+  // and the tutor described "an arrow on the block" that was not there. The
+  // excursion's open/closed state is the Teaching Engine's to decide: a
+  // cross-subject target is honoured only when it actually opened one.
+  const lessonSubject = input.lessonConceptId?.split('.')[0] ?? null
+  const crossSubjectMention =
+    rawTarget?.origin === 'learner-request' &&
+    input.excursionActive === false &&
+    lessonSubject !== null &&
+    rawTarget.conceptId.split('.')[0] !== lessonSubject
+  const target = answeringPendingProbe || crossSubjectMention ? null : rawTarget
   const requestedConceptId = target?.origin === 'learner-request' ? target.conceptId : null
 
   /**
