@@ -4132,7 +4132,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // the tutor (2026-09-27, live QA): there is no answer to restate, and
         // the block's "restate … and ask them to confirm" produced the mirror
         // ("So you're wondering whether … have I got that right?").
+        // Nor on a turn the server GRADED (2026-10-01, live, mole concept): a
+        // graded tap IS this turn's observation, and the block turned a
+        // correct answer into "I understand that you're saying … Is that
+        // right?" with no verdict.
         if (!recoveryKeyHoisted
+          && !(mcqGradeHoisted && typeof mcqGradeHoisted.correct === 'boolean')
           && !((await import('@/lib/teaching/conversationState')).detectLearnerQuestion(message)
             || (await import('@/lib/teaching/mcq')).readsAsRequestToTutor(message))
           && needsSignalRepair(
