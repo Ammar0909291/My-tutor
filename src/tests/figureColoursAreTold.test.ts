@@ -13,7 +13,7 @@
  * so the model guessed. Colours are now read off the drawn objects.
  */
 import { describe, it, expect } from 'vitest'
-import { describeVisualPayload, buildSemanticsBlock, colourName } from '@/lib/teaching/visual/visualSemantics'
+import { describeVisualPayload, buildSemanticsBlock, colourName, idName } from '@/lib/teaching/visual/visualSemantics'
 import { buildNewtonScene } from '@/lib/teaching/sceneGenerators/newtonSecondLaw.pure'
 import { buildFaradaysLawScene } from '@/lib/teaching/sceneGenerators/physicsCoreScenesB4'
 import { ROLE } from '@/lib/teaching/sceneGenerators/visualDesign'
@@ -87,5 +87,25 @@ describe('colour naming', () => {
   it('a figure with no colours says so instead of leaving room to guess', () => {
     const block = buildSemanticsBlock({ caption: 'x', elements: ['a'], readable: ['a'], geometry: [], equations: [], steps: [] })
     expect(block).toContain('No colour information')
+  })
+})
+
+/**
+ * Follow-up, measured LIVE on the deployed colour fix (2026-10-01, Newton,
+ * t = 0): "the green marked point marks the block". The colour was right, the
+ * meaning was guessed — the green point is the current velocity on the graph
+ * (id `current-velocity`); the block is ink. The generator's own id names it.
+ */
+describe('an unlabelled shape is named by its generator id', () => {
+  const sem = describeVisualPayload({ renderer: 'scene', sceneSpec: buildNewtonScene({ force: 10, mass: 2 }, 0) } as never)
+
+  it('the green point is the current velocity, in so many words', () => {
+    expect(colourLine(sem.colours, 'green')).toContain('a marked point ("current velocity")')
+  })
+
+  it('ids become words; bare or numbered ids say nothing', () => {
+    expect(idName('velocity-time-graph')).toBe('velocity time graph')
+    expect(idName('torqueLabel')).toBe('torque label')
+    for (const bad of ['A', 'v1f', 'u2', 'obj1-after', undefined, '']) expect(idName(bad as string | undefined), String(bad)).toBeNull()
   })
 })

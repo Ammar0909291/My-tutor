@@ -212,6 +212,23 @@ export function colourName(css: string | undefined): string | null {
   return family
 }
 
+/**
+ * The name a generator gave an unlabelled shape through its id, in words:
+ * `velocity-time-graph` -> "velocity time graph", `currentVelocity` ->
+ * "current velocity". MEASURED live after colours shipped (2026-10-01, Newton):
+ * the tutor said "the green marked point marks the block" — the point is the
+ * current velocity on the graph (id `current-velocity`); the block is ink. An
+ * id is authored data; a bare letter or numbered id ("A", "v1f") says nothing
+ * and is not used.
+ */
+export function idName(id: string | undefined): string | null {
+  if (typeof id !== 'string') return null
+  const words = id.replace(/([a-z])([A-Z])/g, '$1 $2').toLowerCase().split(/[-_\s]+/).filter(Boolean)
+  if (words.length === 0 || words.some((w) => !/^[a-z]+$/.test(w))) return null
+  if (words.join('').length < 4) return null
+  return words.join(' ')
+}
+
 /** Parts listed per colour, so one busy colour cannot crowd out the rest. */
 const MAX_PER_COLOUR = 4
 
@@ -235,6 +252,8 @@ function fromScene(spec: SceneSpec): VisualSemantics {
   // meaning is its stage's narration ("The magnetic flux … rises"), so naming
   // the stage lets the model tie the colour to it without guessing.
   const colourStages = new Map<string, Set<number>>()
+  // colour -> unlabelled shapes the generator NAMED by id ("current velocity")
+  const colourNamed = new Map<string, string[]>()
 
   for (const [stepIndex, step] of (spec.steps ?? []).entries()) {
     for (const obj of step.objects ?? []) {
@@ -259,7 +278,10 @@ function fromScene(spec: SceneSpec): VisualSemantics {
         const kind = (obj.type === 'path' || obj.type === 'trajectory') && isStraightPath(obj.points) ? 'bond' : obj.type
         shapeCounts.set(kind, (shapeCounts.get(kind) ?? 0) + 1)
         const colour = colourName(obj.color)
-        if (colour) {
+        const named = idName(obj.id)
+        if (colour && named) {
+          colourNamed.set(colour, [...(colourNamed.get(colour) ?? []), `${OBJECT_NOUN[kind]} ("${named}")`])
+        } else if (colour) {
           const kinds = colourShapes.get(colour) ?? new Map<SceneObject['type'], number>()
           kinds.set(kind, (kinds.get(kind) ?? 0) + 1)
           colourShapes.set(colour, kinds)
@@ -283,9 +305,10 @@ function fromScene(spec: SceneSpec): VisualSemantics {
     .slice(0, MAX_GEOMETRY)
     .map(([type, n]) => (n === 1 ? OBJECT_NOUN[type] : `${n} ${OBJECT_PLURAL[type] ?? OBJECT_NOUN[type]}`))
 
-  const colours = [...new Set([...colourTexts.keys(), ...colourShapes.keys()])].map((colour) => {
+  const colours = [...new Set([...colourTexts.keys(), ...colourNamed.keys(), ...colourShapes.keys()])].map((colour) => {
     const parts = [
       ...dedupe(colourTexts.get(colour) ?? []).slice(0, MAX_PER_COLOUR).map((t) => `"${t}"`),
+      ...dedupe(colourNamed.get(colour) ?? []).slice(0, MAX_PER_COLOUR),
       ...[...(colourShapes.get(colour) ?? new Map<SceneObject['type'], number>()).entries()]
         .map(([type, n]) => (n === 1 ? OBJECT_NOUN[type] : `${n} ${OBJECT_PLURAL[type] ?? OBJECT_NOUN[type]}`)),
     ]
