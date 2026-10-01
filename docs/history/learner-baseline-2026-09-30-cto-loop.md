@@ -44,6 +44,13 @@ The sessions ran in Playwright Chromium against https://my-tutor-flame.vercel.ap
 | CL-12 | The generated graph `-5000*(1/x)+10` opened on −5…5 with nothing drawn. The tutor then described "the curve you see" four times (C2). | One shared opening view (graphView.ts). validateGeneratedFigure refuses a graph whose curve fills less than 5% of the view. | d903f910 |
 | RC-C | Lesson-one deadlock. One graded miss caused a spiral close. Reopening needs an authored correct answer, but CLOSING withheld every authored question. | In a spiral close only, an explicit practice request lets the gate serve one authored probe. A correct answer takes the existing reopen. An explicit close stays absolute. | fda2f132 |
 | (test) | An ordering pin searched for vAffirm's old declaration line. | It now locates the call instead. | f399324f |
+| CL-8b | Found LIVE after deploy: the colour was right but its meaning was guessed ("the green marked point marks the block"; it is the current-velocity point). | An unlabelled coloured shape is named by its descriptive generator id. | d54b49ef |
+| CL-17 | Found LIVE after deploy: leaving a re-entered MASTERED lesson recorded it SKIPPED (Newton's Second Law, 21:17:06). | topic-progress `skip` keeps COMPLETED, MASTERED and REVISION. | 246bae14 |
+| CL-19 | Found LIVE: the completion card read "Mastered: phys.mech.newtons-third-law" (a raw id). | The payload carries masteredTitles/needsReviewTitles; the card shows those. | 877ed832 |
+| CL-18 | Found LIVE (mole concept): chemistry distractors were served with their error written on them. | Per-option answer heads extended to chemistry: 200 of 931 items change; the length cue drops 418 → 368. | 6d67157f |
+| CL-20 | Found LIVE: a server-graded correct tap got "I understand that you're saying … Is that right?" (the OBSERVATION REPAIR block was in the prompt). | The repair block never fires on a graded turn. | 964ae368 |
+| CL-21 | Found LIVE: the H₂/O₂ item's key head said "2g of H₂ contains more" while its working said "equal". | Seed corrected. The production row needs the owner (see below). | b65684e5 |
+| CL-22 | Found LIVE: a mastered, closed lesson reloaded into a fresh session got the OPENING protocol, and "is this lesson done?" was answered "not quite yet". | The opening block is skipped on a completed lesson. A status question is not new intent, so the close answers it. | e4727f09, 669db565 |
 
 ## Recorded, not fixed (owner decision or out of scope)
 
