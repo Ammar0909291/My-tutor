@@ -8494,7 +8494,18 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
 
             const affirmCtx = { learnerText: message, knownMisconceptionText } as unknown as
               import('@/lib/kernel/verifier').VerifierContext
-            const firstViolation = vAffirm(cleanText, affirmCtx)
+            // REAL-LEARNER BASELINE 2026-10-01 (C2, chem.equil.le-chatelier, log
+            // 18:47:03): the learner TAPPED the correct authored option ("Four on
+            // the left and two on the right, so it shifts to the right"), the
+            // server graded it correct against the authored key, and this rule
+            // still rejected the model's "That's correct" — the option text reads
+            // as a proposal and shares words with the authored misconceptions.
+            // The learner got "Let's check that one carefully rather than me just
+            // agreeing", and the next reply told them the right answer was wrong.
+            // The rule guesses whether a learner is wrong; when the authored key
+            // has already said they are right, there is nothing to guess.
+            const gradedCorrectByAuthoredKey = gradeForVerdict?.correct === true
+            const firstViolation = gradedCorrectByAuthoredKey ? null : vAffirm(cleanText, affirmCtx)
             // The gate PASSES offline for this exact learner/concept pair, so a
             // production REJECT means the rule saw no misconception knowledge
             // and fell back to its conservative branch. Log the one value that
@@ -8510,8 +8521,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // silence is ambiguous is not a safety rule you can trust.
             console.log('[affirm-guard-scope]', {
               branch: 'unconditional',
-              considered: true,
+              considered: !gradedCorrectByAuthoredKey,
               violated: firstViolation !== null,
+              ...(gradedCorrectByAuthoredKey ? { skipped: 'graded-correct-by-authored-key' } : {}),
             })
             if (firstViolation) {
               // One regeneration, carrying the violation as instruction — the
