@@ -8,6 +8,8 @@
  * every ambiguous form is asserted to NOT advance.
  */
 import { describe, it, expect } from 'vitest'
+import { readFileSync } from 'node:fs'
+import { join } from 'node:path'
 import {
   detectAutonomyRequest, detectNavigationRequest,
   detectLearnerQuestion, classifyAcknowledgementContext,
@@ -228,5 +230,19 @@ describe('B.13-17 — Acknowledgement Engine', () => {
 
   it('recovery outranks navigation', () => {
     expect(classifyAcknowledgementContext(base(), null, true, true)).toBe('recovery')
+  })
+})
+
+describe('a right answer after misses is not "confusion" (synthetic run, 2026-09-25)', () => {
+  it('earlier failures do not outrank a correct answer', () => {
+    const s = { ...initialConversationState(null), consecutiveFailures: 2 }
+    expect(classifyAcknowledgementContext(s, true, false, false)).not.toBe('confusion')
+    expect(classifyAcknowledgementContext(s, null, false, false)).toBe('confusion')
+    expect(classifyAcknowledgementContext(s, false, false, false)).toBe('confusion')
+  })
+  it('the route answers THIS turn\'s authored grade before the previous signal', () => {
+    const route = readFileSync(join(process.cwd(), 'src/app/api/learn/chat/route.ts'), 'utf8')
+    expect(route).toMatch(/mcqGradeHoisted && typeof mcqGradeHoisted\.correct === 'boolean' && ackKeyIsAuthored\(pendingMcqHoisted\)/)
+    expect(route).toContain('conversationStateHoisted, ackThisTurnCorrect ?? prevSig,')
   })
 })

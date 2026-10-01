@@ -107,13 +107,21 @@
  * (`[Chapter 2](…)`) and a citation (`[A]`) cannot match; the SHOUTED-name rule
  * (uppercase token, 3+ chars) and the mandatory terminator both still apply.
  */
-const MACHINE_TAG_RE = /[<[]!?-{1,3}\s*[A-Z][A-Z0-9_]{2,}\b[\s\S]*?(?:-->|\/>)\]?/g
+/**
+ * MIXED-CASE NAME (2026-09-25, synthetic run, phys.mech.newtons-second-law,
+ * Gemini-served): `<!--MCq="If you push a heavy refrigerator…" a="…" …
+ * correct="A"-->` reached the learner — tag, options AND answer key — because
+ * the name rule required every letter upper-case. The name now needs two
+ * leading capitals and 3+ characters: "MCq", "Mcq…" no, "MCQ" yes; a lowercase
+ * HTML comment is still untouched.
+ */
+const MACHINE_TAG_RE = /[<[]!?-{1,3}\s*[A-Z]{2}[A-Za-z0-9_]+\b[\s\S]*?(?:-->|\/>)\]?/g
 
 /** The OPENER alone — no terminator required. One definition serves the sweep's
  *  fast path and `hasResidualMachineTag`, so the three cannot drift apart again
  *  (they already had, which is how the malformed opener survived a widened
  *  MACHINE_TAG_RE). Not global: every use is a one-shot `.test`. */
-const MACHINE_TAG_OPENER_RE = /[<[]!?-{1,3}\s*[A-Z][A-Z0-9_]{2,}\b/
+const MACHINE_TAG_OPENER_RE = /[<[]!?-{1,3}\s*[A-Z]{2}[A-Za-z0-9_]+\b/
 
 /**
  * P1 (visual reference integrity, 2026-08-22): a raw HTML-ELEMENT-shaped
@@ -256,7 +264,7 @@ function stripStandaloneMachineJson(text: string): string {
  * a trailing line that was never prose to begin with. Anchored to end-of-text
  * so it can only ever eat the tail.
  */
-const UNTERMINATED_TRAILING_RE = /\n?[ \t]*<!--\s*[A-Z][A-Z0-9_]{2,}\b[^>]*$/
+const UNTERMINATED_TRAILING_RE = /\n?[ \t]*<!--\s*[A-Z]{2}[A-Za-z0-9_]+\b[^>]*$/
 
 /**
  * PHASE 8 — INTERNAL PACING/NUMBERING LABELS, THE FOURTH DISTINCT LEAK CLASS.

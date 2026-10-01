@@ -55,7 +55,8 @@
  * read as one rather than be papered over with a server-invented question.
  */
 
-import { stripAuthoringLabel, containsOptionList } from './gateProbeContract'
+import { stripAuthoringLabel, containsOptionList, OPTION_LINE_RE } from './gateProbeContract'
+import { hasProseMultipleChoice } from './proseMcqGuard'
 import { askedAnswerableQuestion } from './answerableTurn'
 import type { TutorMCQ } from './mcq'
 
@@ -114,9 +115,24 @@ export interface ConvertibleProbe {
    *  narrowed shape is also satisfied by callers that do not have one; absent
    *  produces exactly the previous output. */
   assetId?: string
+  /** The concept the probe belongs to, when the caller has it. Used only to
+   *  scope the physics per-option head split (task #2); absent → unchanged. */
+  conceptId?: string
 }
 
-const norm = (s: string) => s.trim().toLowerCase().replace(/\s+/g, ' ')
+/**
+ * Two authored options are the same option when they match with whitespace
+ * folded. CASE IS KEPT: it used to be folded too, which refused the one
+ * authored probe whose options differ ONLY by case — the capitalisation
+ * question "Which of the following correctly writes a scientific name?"
+ * (Homo sapiens / homo sapiens / Homo Sapiens / HOMO SAPIENS,
+ * bio.found.binomial-nomenclature). MEASURED live (2026-09-28): never served,
+ * so the concept's third authored probe was unreachable and the lesson could
+ * not reach verified mastery; the PRACTICE turns that should have asked it
+ * were spent on content-free fallback text instead. The grader tells such
+ * options apart the same way (mcq.ts `verbatimOption`).
+ */
+const norm = (s: string) => s.trim().replace(/\s+/g, ' ')
 
 /**
  * Authored probe → the turn's MCQ, or null when the probe cannot be served as
@@ -132,9 +148,10 @@ const norm = (s: string) => s.trim().toLowerCase().replace(/\s+/g, ' ')
  *   · Exactly one correct choice. Zero means the authored key is missing and
  *     every answer would grade wrong; more than one means the item is
  *     unanswerable and the learner would be marked wrong for a right answer.
- *   · No empty option text, and no two options that normalise identically —
+ *   · No empty option text, and no two options that are the same text —
  *     `parseMcqTag`'s dedup rule, for the same reason (assessment/03:
- *     distractors must be discriminable).
+ *     distractors must be discriminable), except that letter case counts as
+ *     a difference here: an author may ask about case itself (see `norm`).
  *
  * `correctValue` is deliberately NOT consulted. In the authored corpus it holds
  * a short form ("kelvin") while the choice reads "kelvin (K)", so matching on it
@@ -164,6 +181,25 @@ export function probeToMcq(probe: ConvertibleProbe): TutorMCQ | null {
     .filter((i) => i >= 0)
   if (correctIndexes.length !== 1) return null
 
+  // PRESENTATION ORDER (2026-09-27). The authored corpus lists the correct
+  // choice FIRST in 6,280 of 6,281 items across every subject, and this was
+  // the order served — so "always tap the first option" passed every gate.
+  // The order is now a deterministic permutation keyed on the question text:
+  // the same question always shows the same order (a reload, a restored turn
+  // and the grade all agree), while the correct answer's position is spread
+  // across the slots. A re-ask arrives with its choices already rotated
+  // (findBestProbe), so its order still differs from the first asking.
+  // The key travels with each choice; grading reads the stored correctIndex.
+  const order = presentationOrder(question, options.length)
+  // ANSWER HEADS (task #2, 2026-09-30): serve "Four", not "Four — l can be 0
+  // or 1 …", when every option has that shape — see `splitAnswerHeads` and
+  // TutorMCQ.rationales. The order is still keyed on the question alone, so it
+  // is identical to what the full-text options would have been given.
+  const split = splitAnswerHeads(options)
+    ?? (typeof probe.conceptId === 'string' && probe.conceptId.startsWith('phys.') ? splitAnswerHeadsPerOption(options) : null)
+  const shownOptions = order.map((i) => (split ? split.heads[i] : options[i]))
+  const shownCorrect = order.indexOf(correctIndexes[0])
+
   // PHASE F: carry the authored identity forward. This is the ONLY writer of
   // TutorMCQ.assetId — a model-parsed tag has no asset and must stay anonymous.
   // Presentation, selection, the answer key and grading are all untouched;
@@ -172,10 +208,102 @@ export function probeToMcq(probe: ConvertibleProbe): TutorMCQ | null {
   // an assetId produces a byte-identical object to the previous behaviour.
   return {
     question,
-    options,
-    correctIndex: correctIndexes[0],
+    options: shownOptions,
+    correctIndex: shownCorrect,
     ...(probe.assetId ? { assetId: probe.assetId } : {}),
+    ...(split ? { rationales: order.map((i) => split.rationales[i]) } : {}),
   }
+}
+
+/**
+ * THE LENGTH GIVEAWAY (task #2, measured 2026-09-30 with
+ * scripts/assets/length-cue-audit.ts): the correct option was the uniquely
+ * longest on 79% of biology, 79% chemistry, 78% cs, 96% english, 94%
+ * mathematics and 81% physics items, because it carried its own working
+ * ("Four — l can be 0 or 1. The l=0 (2s) subshell contributes 1 …") while the
+ * distractors were short. Serving only the answer head removes most of that
+ * cue (english 96% → 18%, chemistry → 45%, physics → 54%, biology → 56%,
+ * cs → 48%) with no change to stored content.
+ *
+ * Splits only when it is unambiguous: EVERY option has a head before a spaced
+ * em/en dash and a non-empty working after it, the heads are distinct once
+ * normalised, and no head is a bare option letter (which would read as "tap
+ * B"). Otherwise returns null and the full text is served exactly as before.
+ * A hyphen never splits — "x - 2" is an answer, not an annotation.
+ */
+export function splitAnswerHeads(options: string[]): { heads: string[]; rationales: string[] } | null {
+  const heads: string[] = []
+  const rationales: string[] = []
+  for (const o of options) {
+    const m = o.match(/^([\s\S]+?)\s[—–]\s([\s\S]+)$/)
+    if (!m) return null
+    const head = m[1].trim(), why = m[2].trim()
+    if (!head || !why || /^[A-Da-d][.)]?$/.test(head)) return null
+    heads.push(head)
+    rationales.push(why)
+  }
+  if (new Set(heads.map((h) => norm(h).toLowerCase())).size !== heads.length) return null
+  if (heads.some((h) => norm(h).length === 0)) return null
+  return { heads, rationales }
+}
+
+/**
+ * PHYSICS ONLY, PER OPTION (task #2 part b, 2026-09-30). After the all-or-
+ * nothing split above, 351 of physics' 734 remaining length-cue items still
+ * had authored working on SOME options only — 247 on the correct option alone
+ * ("Equal — gravity pays out by height drop alone; the path does not matter"
+ * against "The steep slide gives a higher exit speed"), 104 on a mix. Here each
+ * option that has the spaced-dash shape is served as its head and keeps its
+ * working in `rationales`; an option without it is served whole with an empty
+ * rationale. The same safety rules hold: at least one option splits, no head
+ * is a bare letter, and every served option stays distinct case-insensitively.
+ * Scoped to physics (the only subject in scope for this change); every other
+ * subject keeps the all-or-nothing rule.
+ */
+export function splitAnswerHeadsPerOption(options: string[]): { heads: string[]; rationales: string[] } | null {
+  const heads: string[] = []
+  const rationales: string[] = []
+  let splitAny = false
+  for (const o of options) {
+    const m = o.match(/^([\s\S]+?)\s[—–]\s([\s\S]+)$/)
+    const head = m ? m[1].trim() : '', why = m ? m[2].trim() : ''
+    if (m && head && why && !/^[A-Da-d][.)]?$/.test(head)) {
+      heads.push(head); rationales.push(why); splitAny = true
+    } else {
+      heads.push(o); rationales.push('')
+    }
+  }
+  if (!splitAny) return null
+  if (new Set(heads.map((h) => norm(h).toLowerCase())).size !== heads.length) return null
+  if (heads.some((h) => norm(h).length === 0)) return null
+  return { heads, rationales }
+}
+
+/**
+ * A stable permutation of `[0, n)` derived from `key` (FNV-1a seed, then a
+ * Fisher–Yates shuffle driven by mulberry32). Pure: identical input, identical
+ * order. Exported for the regression test's distribution check.
+ */
+export function presentationOrder(key: string, n: number): number[] {
+  let h = 0x811c9dc5
+  for (let i = 0; i < key.length; i++) {
+    h ^= key.charCodeAt(i)
+    h = Math.imul(h, 0x01000193)
+  }
+  let s = h >>> 0
+  const next = () => {
+    s = (s + 0x6d2b79f5) >>> 0
+    let t = s
+    t = Math.imul(t ^ (t >>> 15), t | 1)
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61)
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296
+  }
+  const order = Array.from({ length: n }, (_, i) => i)
+  for (let i = n - 1; i > 0; i--) {
+    const j = Math.floor(next() * (i + 1))
+    ;[order[i], order[j]] = [order[j], order[i]]
+  }
+  return order
 }
 
 /**
@@ -191,19 +319,42 @@ export function probeToMcq(probe: ConvertibleProbe): TutorMCQ | null {
  * than a generic "here's a check" — but it is quoted as context, never as
  * something to reproduce, because the learner is already reading it.
  */
-export function buildGateAssessmentBlock(mcq: TutorMCQ): string {
+export function buildGateAssessmentBlock(_mcq: TutorMCQ, opts: { answerLearnerFirst?: boolean } = {}): string {
+  // THE QUESTION IS NOT SHOWN TO THE MODEL (owner-approved, G2, 2026-09-24).
+  // It used to be quoted here "as context", and on a real account the model
+  // used it to work the exact problem first — "3.0 mol H₂ × (2/2) = 3.0 mol
+  // H₂O … you can produce 3.0 mol of water" — then the learner was asked
+  // "how many moles of water form from 3.0 mol of hydrogen?". A model that
+  // never sees the question cannot solve it for the learner. The lead-in is
+  // still about the concept just taught; `dropAnswerLeaks` backs this up.
+  //
+  // ANSWER-FIRST VARIANT (2026-09-26, live QA): probe-starvation relief lets
+  // this probe ride on a turn the learner's own question/request owns. The
+  // lead-in-only wording then told the model not to explain anything, so the
+  // learner's question went unanswered. Here the answer comes first; the
+  // question stays hidden and the leak guard still applies.
+  if (opts.answerLearnerFirst) {
+    return (
+      '\n\nASSESSMENT ALREADY SELECTED (do not write a question this turn). ' +
+      'A graded question on this concept will appear beneath your message as ' +
+      'tappable buttons, chosen by the teaching engine from reviewed course ' +
+      'material. The learner has just asked you something: ANSWER IT FIRST, ' +
+      'fully, exactly as you otherwise would. Then end with one short ' +
+      'sentence that bridges to the question beneath. Do NOT ask any other ' +
+      'question, and do NOT emit an MCQ tag of your own. Never mention that ' +
+      'the question was selected for you.'
+    )
+  }
   return (
     '\n\nASSESSMENT ALREADY SELECTED (do not write a question this turn). ' +
-    'The learner is about to see this question, rendered as tappable buttons ' +
-    'beneath your message:\n' +
-    `  "${mcq.question}"\n` +
-    'It was chosen by the teaching engine from reviewed course material, and ' +
-    'it is what their progress will be graded on. Your job this turn is the ' +
-    'LEAD-IN ONLY: one or two sentences that make the question worth ' +
-    'answering — a bridge from what you just taught, or the reason it matters. ' +
-    'Do NOT restate the question, do NOT list the options, do NOT ask any ' +
-    'other question, and do NOT emit an MCQ tag of your own. Never mention ' +
-    'that the question was selected for you.'
+    'A graded question on this concept will appear beneath your message as ' +
+    'tappable buttons. It was chosen by the teaching engine from reviewed ' +
+    'course material, and it is what their progress will be graded on. Your ' +
+    'job this turn is the LEAD-IN ONLY: one or two sentences that bridge from ' +
+    'what you just taught. Do NOT work a new example or give a new ' +
+    'definition this turn — the learner must answer from their own ' +
+    'understanding. Do NOT ask any other question, and do NOT emit an MCQ ' +
+    'tag of your own. Never mention that the question was selected for you.'
   )
 }
 
@@ -480,6 +631,16 @@ export interface UngradedGateQuestionInput {
    */
   learnerAskedDirectQuestion?: boolean
   /**
+   * Did the learner explicitly ask to be quizzed this turn ("quiz me", "give
+   * me a practice question")? Read ONLY below GUIDE (OBSERVE/DEMONSTRATE),
+   * where the surplus rule may keep a bare-contract pool in reserve and a
+   * model-written question cannot reach the mastery record (see
+   * inventedProbeGuard's 'phase-does-not-count'). There, withholding the
+   * model's question left a learner who asked for one with none — physics
+   * unit-1 certification, 2026-09-28. Optional; absent keeps prior behaviour.
+   */
+  learnerRequestedPractice?: boolean
+  /**
    * Was the LEARNER'S OWN message this turn a bare acknowledgement — "yes",
    * "ok", "got it", "okay", … (`isBareAcknowledgement`, `masteryGate.ts`'s
    * own established whole-message detector, reused here rather than
@@ -515,6 +676,12 @@ export interface UngradedGateQuestionInput {
    * keeps its exact prior behaviour.
    */
   learnerAcknowledged?: boolean
+  /**
+   * What to say instead of the content-free continuation when the withheld
+   * question leaves nothing (see conceptFallback.ts). Absent -> the original
+   * behaviour, byte-for-byte.
+   */
+  conceptFallback?: string
 }
 
 /** The route's own grade of the pending question, passed in, never derived. */
@@ -532,6 +699,7 @@ export interface UngradedGateQuestionResult {
     | 'no-gradeable-probe'
     | 'stray-question-alongside-mcq'
     | 'left-for-direct-question'
+    | 'left-for-practice-request'
     | 'announced-question-never-delivered'
 }
 
@@ -619,15 +787,22 @@ function withheldContinuation(
    *  branch below — a real grade already reports the outcome and must not
    *  have its wording second-guessed by what the ack detector also thinks. */
   learnerAcknowledged = false,
+  /** The concept's own words (conceptFallback.ts). When given, it replaces the
+   *  content-free continuation; after a real grade the grade stands alone. */
+  conceptFallback?: string,
 ): string {
+  const fallback = conceptFallback && conceptFallback.trim().length > 0 ? conceptFallback.trim() : null
   if (!justGraded || typeof justGraded.correct !== 'boolean') {
     if (questionFollows) return WITHHELD_QUESTION_HANDS_OFF_TO_MCQ
     if (learnerAcknowledged) return WITHHELD_QUESTION_ACK_CONTINUATION
-    return WITHHELD_QUESTION_CONTINUATION
+    return fallback ?? WITHHELD_QUESTION_CONTINUATION
   }
-  const tail = questionFollows ? WITHHELD_QUESTION_HANDS_OFF_TO_MCQ : WITHHELD_QUESTION_CONTINUATION
+  // Learner pilot, 2026-09-24: "That's right. Let's stay with this idea for a
+  // moment." — the grade is the content; the hollow tail is dropped when the
+  // caller supplied the concept (and kept otherwise, unchanged).
+  const tail = questionFollows ? WITHHELD_QUESTION_HANDS_OFF_TO_MCQ : (fallback ? '' : WITHHELD_QUESTION_CONTINUATION)
   if (justGraded.correct) {
-    return `That's right. ${tail}`
+    return tail ? `That's right. ${tail}` : "That's right."
   }
   const key = typeof justGraded.correctOptionText === 'string'
     ? justGraded.correctOptionText.trim()
@@ -647,9 +822,9 @@ function withheldContinuation(
   // already handled; terminal punctuation is the same class and was missed.
   // Authored option texts are written by hand across six subjects, so whether
   // one ends in a stop is not something this template can assume either way.
-  return key.length > 0 && !key.includes('?')
+  return (key.length > 0 && !key.includes('?')
     ? `Not quite — the answer was: ${endStopped(key)} ${tail}`
-    : `Not quite. ${tail}`
+    : `Not quite. ${tail}`).trim()
 }
 
 /** The key with exactly one terminal stop, never two and never none. */
@@ -719,6 +894,28 @@ export function cutBackToTeaching(text: string): string {
 }
 
 /**
+ * IS THE REPLY NOTHING BUT A QUESTION? (2026-09-26, live QA)
+ *
+ * The withhold's own "nothing survived either salvage pass" condition, asked
+ * one step earlier: `cutBackToTeaching` and `salvageNonQuestionSentences` both
+ * return '' — the whole reply was a question and its introduction. Used by the
+ * route so a probe-starvation-relief probe steps aside for one turn when the
+ * model answered a learner's question with a clarifying question, instead of
+ * the withhold deleting that clarification and leaving only a hand-off line
+ * in front of the quiz. Hidden tags are ignored.
+ */
+export function replyIsOnlyAQuestion(text: string): boolean {
+  try {
+    const t = (typeof text === 'string' ? text : '').replace(/<!--[\s\S]*?-->/g, ' ').trim()
+    if (t.length === 0) return false
+    if (!(askedAnswerableQuestion(t) || containsOptionList(t))) return false
+    return cutBackToTeaching(t).length === 0 && salvageNonQuestionSentences(t).length === 0
+  } catch {
+    return false
+  }
+}
+
+/**
  * SENTENCE-LEVEL SALVAGE: keep the statements when the question shares a
  * paragraph with real teaching.
  *
@@ -763,7 +960,7 @@ export function withholdUngradedGateQuestion(
       const attached = typeof input.attachedMcqQuestion === 'string' ? input.attachedMcqQuestion.trim() : ''
       if (!attached) return { text: input.text, withheld: false, reason: 'ok' }
 
-      const poses = askedAnswerableQuestion(text) || containsOptionList(text)
+      const poses = askedAnswerableQuestion(text) || containsOptionList(text) || hasInlineOptionRun(text)
       if (!poses) return { text: input.text, withheld: false, reason: 'ok' }
 
       // The model restating the SAME authored question in prose (harmless,
@@ -778,7 +975,7 @@ export function withholdUngradedGateQuestion(
       return {
         // A tappable MCQ follows this text, so the fallback hands off to it
         // instead of stalling with the content-free hold sentence.
-        text: kept.length > 0 ? kept : withheldContinuation(input.justGraded, true),
+        text: kept.length > 0 ? kept : withheldContinuation(input.justGraded, true, false, input.conceptFallback),
         withheld: true,
         reason: 'stray-question-alongside-mcq',
       }
@@ -823,7 +1020,7 @@ export function withholdUngradedGateQuestion(
         // teaching preceded the broken promise, and otherwise fall back to the
         // established continuation sentence. Never a second announcement, and
         // never a claim about how the learner did.
-        text: teaching.length > 0 ? teaching : withheldContinuation(input.justGraded, false),
+        text: teaching.length > 0 ? teaching : withheldContinuation(input.justGraded, false, false, input.conceptFallback),
         withheld: true,
         reason: 'announced-question-never-delivered',
       }
@@ -833,15 +1030,25 @@ export function withholdUngradedGateQuestion(
     // is reused rather than re-derived precisely because it ALREADY excludes
     // confirmation tails — "does that make sense?" and "shall we carry on?" are
     // not mastery questions and must survive untouched.
-    const poses = askedAnswerableQuestion(text) || containsOptionList(text)
+    const poses = askedAnswerableQuestion(text) || containsOptionList(text) || hasInlineOptionRun(text)
     if (!poses) return { text: input.text, withheld: false, reason: 'ok' }
+
+    // The learner asked for a question, below GUIDE, with nothing on screen:
+    // the model's question is the only one they will get this turn, and it
+    // cannot move the mastery record here. See `learnerRequestedPractice`.
+    if (input.learnerRequestedPractice === true && input.questionOnScreen !== true
+      && (input.phase === 'OBSERVE' || input.phase === 'DEMONSTRATE')) {
+      return { text: input.text, withheld: false, reason: 'left-for-practice-request' }
+    }
 
     // An introduction has nothing left to introduce — see `dropOrphanedLeadIn`.
     const paragraphKept = dropOrphanedLeadIn(dropAnswerableContent(text))
     // Paragraph scope throws real teaching away with the question whenever a
     // model writes both in ONE paragraph (the common case). Try sentence
     // scope before giving up — see `salvageNonQuestionSentences`.
-    const kept = paragraphKept.length > 0 ? paragraphKept : salvageNonQuestionSentences(text)
+    // Salvage never keeps option sentences: an inline "A) … B) …" run is not teaching.
+    const kept = paragraphKept.length > 0 ? paragraphKept
+      : salvageNonQuestionSentences(text.split('\n').filter((l) => !INLINE_OPTION_RUN_LINE.test(l)).join('\n'))
     if (kept.length > 0) {
       return { text: kept, withheld: true, reason: 'no-gradeable-probe' }
     }
@@ -852,7 +1059,13 @@ export function withholdUngradedGateQuestion(
     // the model's original text on screen is a better outcome than the
     // content-free placeholder — see `learnerAskedDirectQuestion`'s doc
     // comment for why this is safe and not a new evidence-integrity hole.
-    if (input.learnerAskedDirectQuestion === true && !input.justGraded) {
+    // Not for a practice request with a quiz already on screen: the quiz IS the
+    // practice question, and a second one beside it is what the learner then
+    // answers the quiz against (phys.mech.work-energy-theorem r1 s11-s12,
+    // 2026-09-28: "Correct — well done … but it doesn't address what the
+    // friction force does"). The hand-off sentence points at the quiz instead.
+    const practiceWithQuizShown = input.learnerRequestedPractice === true && input.questionOnScreen === true
+    if (input.learnerAskedDirectQuestion === true && !input.justGraded && !practiceWithQuizShown) {
       return { text: input.text, withheld: false, reason: 'left-for-direct-question' }
     }
 
@@ -865,6 +1078,7 @@ export function withholdUngradedGateQuestion(
         input.justGraded,
         input.questionOnScreen === true,
         input.learnerAcknowledged === true,
+        input.conceptFallback,
       ),
       withheld: true,
       reason: 'no-gradeable-probe',
@@ -910,8 +1124,14 @@ export function withholdUngradedGateQuestion(
  * does not match it) is never touched.
  */
 export function dropAnswerableContent(text: string): string {
+  // AN INLINE OPTION RUN IS AN OPTION LIST TOO (phys.therm.third-law r2,
+  // 2026-09-28): "A) Each cooling step always removes … B) As the temperature
+  // approaches zero … C) …" on ONE line survived after its question was cut,
+  // two turns running, so the learner saw answers to no question. A line that
+  // opens with "A)" and carries a "B)" later is dropped with the question.
+  text = text.split('\n').filter((l) => !INLINE_OPTION_RUN_LINE.test(l)).join('\n')
   const lines = text.split('\n')
-  const firstOptionLine = lines.findIndex((l) => /^\s*\(?[A-Da-d][).]\s+\S/.test(l))
+  const firstOptionLine = lines.findIndex((l) => OPTION_LINE_RE.test(l))
   const scoped = firstOptionLine >= 0 ? lines.slice(0, firstOptionLine).join('\n').trim() : text.trim()
   if (scoped.length === 0) return scoped
 
@@ -922,6 +1142,9 @@ export function dropAnswerableContent(text: string): string {
 
   return kept.join('\n\n').trim()
 }
+
+const hasInlineOptionRun = (text: string): boolean => text.split('\n').some((l) => INLINE_OPTION_RUN_LINE.test(l))
+const INLINE_OPTION_RUN_LINE = /^\s*(?:[-*•]\s+)?(?:\*\*)?\(?A[).](?:\*\*)?\s+\S.*\s(?:\*\*)?\(?B[).](?:\*\*)?\s+\S/
 
 /**
  * KEEP THE TEACHING, DROP THE QUESTION — EVEN WHEN THEY SHARE A PARAGRAPH.
@@ -952,6 +1175,8 @@ export function dropAnswerableContent(text: string): string {
  * paragraph is discarded exactly as before. Conservative by construction: this
  * can only ever keep MORE teaching than the previous behaviour, never less.
  */
+const SCENARIO_OPENER = /^(?:(?:now|so|okay|ok|next)[,\s]+)?(?:imagine|suppose|picture|pretend|let(?:'|’)s say|say that|consider this)\b/i
+
 function trimTrailingQuestions(paragraph: string): string {
   if (paragraph.length === 0 || !askedAnswerableQuestion(paragraph)) return paragraph
 
@@ -990,6 +1215,22 @@ function trimTrailingQuestions(paragraph: string): string {
   // That is 1 of the 3 measured live turns still unfixed, and it is the
   // honest price of not regressing the lead-in case.
   if (kept.length < 2) return ''
+
+  // A SCENARIO LEFT WITHOUT ITS QUESTION. MEASURED (synthetic run 2026-09-25,
+  // phys.mech.newtons-third-law, `[gate-contract]` log): "…Let's look at
+  // another everyday situation. Imagine you are standing on a skateboard and
+  // you throw a heavy medicine ball forward. What happens to you on the
+  // skateboard?" lost only its question, and the learner was left with a
+  // set-up that led nowhere, above an unrelated authored question. A scenario
+  // opener that ENDS the paragraph (nothing explained after it) existed only
+  // to pose the removed question, so it goes too. A scenario followed by an
+  // explanation is teaching and is untouched.
+  const lastIsBareScenario = () => kept.length > 0 && SCENARIO_OPENER.test(kept[kept.length - 1].trim())
+  const beforeScenario = kept.length
+  while (lastIsBareScenario()) kept.pop()
+  // Same two-sentence floor as above: a lone lead-in ("Let's look at another
+  // everyday situation.") is not teaching once its scenario is gone.
+  if (kept.length !== beforeScenario && kept.length < 2) return ''
 
   const remainder = kept.join(' ').trim()
   // Anything answerable still in there means the question was not merely
@@ -1129,9 +1370,97 @@ export function withholdClosingProseQuestion(input: {
  * Call ONLY when no artifact will be served. Pure; never throws; returns a
  * non-empty turn or the caller's own fallback.
  */
+/**
+ * A SENTENCE THAT POINTS AT OPTIONS THE LEARNER CANNOT SEE.
+ *
+ * MEASURED (production, 2026-09-24, real account, no widget served on either
+ * turn):
+ *   phys.em.lc-circuits      "…pick the best answer: Let me know which option
+ *                             you choose when you're ready."
+ *   phys.qm.particle-in-box  "…which of the following statements is correct,
+ *                             and why? Take a look at the labelled figure…"
+ * Neither ends in a colon, so the structural check below never saw them, and
+ * the learner was asked to choose from a list that does not exist.
+ *
+ * Phrase-based ON PURPOSE and narrow: each phrase only makes sense when a list
+ * of options is on screen. Only consulted when no MCQ is served AND the text
+ * carries no lettered option list of its own (a prose list is a separate case,
+ * owned by proseMcqGuard).
+ */
+const POINTS_AT_MISSING_OPTIONS =
+  /\b(which of the following|of the (?:options|choices) (?:below|above|shown)|(?:pick|choose|select|tap) (?:the )?(?:best|correct|right) (?:answer|option|choice)|which (?:option|choice|answer) you (?:choose|pick|select)|from the (?:options|choices|list) (?:below|above)|the options below)\b/i
+
+export function dropSentencesPointingAtMissingOptions(text: string): string {
+  const t = typeof text === 'string' ? text : ''
+  if (!POINTS_AT_MISSING_OPTIONS.test(t) || containsOptionList(t) || hasProseMultipleChoice(t)) return t
+  // Split on sentence ends AND on a colon that introduces a new sentence, so
+  // "…behaves, pick the best answer: Let me know…" loses both halves of the
+  // promise but keeps the teaching before it.
+  const parts = t.split(/(?<=[.!?])\s+|(?<=:)\s+(?=[A-Z])/)
+  const kept: string[] = []
+  for (const part of parts) {
+    if (!POINTS_AT_MISSING_OPTIONS.test(part)) kept.push(part)
+  }
+  return kept.join(' ').replace(/\s+([.!?])/g, '$1').trim()
+}
+
+/**
+ * A sentence that ANNOUNCES a check ("Sure, let's check your understanding with
+ * a quick multiple-choice question.", "I hear you—let's do a quick check.",
+ * "Here's a quick check to see how well you can blend…") in a reply that then
+ * asks nothing. Pilot, 2026-09-24: four consecutive turns of exactly this while
+ * the question itself had been withheld. Judged only when the reply contains no
+ * question mark at all and no options list — the one condition under which the
+ * announcement is certainly unkept.
+ */
+const ANNOUNCES_A_CHECK =
+  /^(?:(?:sure|great|ok(?:ay)?|alright|got it|understood|no problem|absolutely|of course|i hear you|that(?:'|’)s great)[^.!?]{0,30}[,—–-]\s*)?(?:let(?:'|’)s|let me|here(?:'|’)s|here is)\b[^.!?]{0,80}\b(?:check|test|quiz|question)\b[^.!?:]{0,80}[.!]?$/i
+
+// The same promise ending in a COLON. MEASURED (synthetic run, 2026-09-25,
+// phys.mech.acceleration, strong student "can you quiz me?"): "Sure! Here's a
+// quick check on acceleration:" shipped with no question after it. The
+// trailing-colon rule in `enforceQuestionDeliveryContract` would have caught
+// it, but the figure pointer (`ensureVisualAcknowledged`, appended earlier in
+// the route) followed the colon, so the colon was no longer trailing. Noun form
+// only ("here's a/your/another/the next … check/quiz/question/test:") so a verb
+// lead-in to content ("Let's check the formula:") is never touched; and the
+// function still returns early whenever the text asks anything.
+// "Pick the statement that best captures it." with nothing to pick
+// (phys.therm.third-law r2 s11, 2026-09-28) — an instruction to choose is a
+// promise of options.
+const INSTRUCTS_A_CHOICE =
+  /^(?:(?:now|ok(?:ay)?|alright|so)[,\s]+)?(?:pick|choose|select|tap)\s+(?:the\s+)?(?:one|option|statement|answer|choice|best)\b[^.!?]{0,80}[.!]?$/i
+
+const ANNOUNCES_A_CHECK_COLON = /^(?:[^.!?]{0,30}[,—–-]\s*)?here(?:(?:'|’)s| is)\b/i
+const ANNOUNCED_CHECK_NOUN_COLON = /\b(?:a|your|another|the next)\b[^.!?:]{0,40}\b(?:check|quiz|question|test)\b[^.!?:]{0,60}:$/i
+const announcesACheck = (sentence: string): boolean =>
+  ANNOUNCES_A_CHECK.test(sentence)
+  || INSTRUCTS_A_CHOICE.test(sentence)
+  || (ANNOUNCES_A_CHECK_COLON.test(sentence) && ANNOUNCED_CHECK_NOUN_COLON.test(sentence))
+
+export function dropUndeliveredCheckAnnouncements(text: string): string {
+  const t = typeof text === 'string' ? text : ''
+  if (t.includes('?') || containsOptionList(t) || hasProseMultipleChoice(t)) return t
+  let dropped = false
+  const paragraphs = t.split(/\n{2,}/).map((p) => {
+    const sentences = p.split(/(?<=[.!])\s+/)
+    const kept = sentences.filter((s) => !announcesACheck(s.trim()))
+    if (kept.length === sentences.length) return p
+    dropped = true
+    return kept.join(' ').trim()
+  })
+  // Untouched text is returned byte-identical — paragraph breaks included.
+  if (!dropped) return t
+  return paragraphs.filter((p) => p.trim().length > 0).join('\n\n').trim()
+}
+
 export function enforceQuestionDeliveryContract(text: string, fallback: string): string {
   try {
-    const t = typeof text === 'string' ? text : ''
+    const raw = typeof text === 'string' ? text : ''
+    const t0 = dropUndeliveredCheckAnnouncements(raw)
+    if (t0 !== raw) return t0.length > 0 ? t0 : fallback
+    const t = dropSentencesPointingAtMissingOptions(t0)
+    if (t !== t0 && !/:\s*$/.test(t.trimEnd())) return t.length > 0 ? t : fallback
     // A trailing colon is a promise of something that should follow. Nothing
     // does. Structural, so it needs no phrase list and catches a turn the
     // provider truncated at its own lead-in for free.
@@ -1142,4 +1471,78 @@ export function enforceQuestionDeliveryContract(text: string, fallback: string):
     // A repair must never break a turn.
     return typeof text === 'string' ? text : fallback
   }
+}
+
+// ── A GRADED QUESTION IS NOT ANSWERED IN THE SENTENCES ABOVE IT ─────────────
+//
+// Owner-approved (G2, 2026-09-24), from a real-account session on
+// chem.found.stoichiometry. Twice in one lesson the reply answered the graded
+// question it was about to ask:
+//
+//   "So, from 3.0 mol of hydrogen you can produce **3.0 mol of water** …"
+//     -> "how many moles of water form from 3.0 mol of hydrogen?"  [3.0 mol]
+//   "… is called the **limiting reactant** – it's the one that would be
+//    completely consumed first …"
+//     -> "The reactant that runs out first … is called the ______ reactant."
+//                                                               [limiting]
+//
+// The question is no longer shown to the model (`buildGateAssessmentBlock`),
+// which removes the first cause. The second is the model teaching the answer
+// on its own, so the served question is checked against the text: a sentence
+// that states the CORRECT option more often than the question itself does is
+// removed. "More often than the question" is what keeps the setup: "Start with
+// 3.0 mol H₂" repeats the question's own quantity (once, as the question
+// does) and stays; "3.0 mol H₂ × … = 3.0 mol H₂O" states it a second time and
+// goes. An option also named inside a distractor, or too short to be
+// distinctive ("H₂", "Yes"), is never used.
+//
+// Pure. Returns the text unchanged, paragraph for paragraph, when nothing
+// matches.
+
+const leakNorm = (s: string) =>
+  s.normalize('NFKC').toLowerCase()
+    .replace(/(\d)[ ,\u00a0\u202f](?=\d{3}\b)/g, '$1')
+    .replace(/[^\p{L}\p{N}.]+/gu, ' ')
+    .replace(/(?<!\d)\.|\.(?!\d)/g, ' ')
+    .replace(/\s+/g, ' ').trim()
+
+/** The option's answer, without an authored "— because …" annotation. */
+const optionCore = (o: string) => leakNorm(o.split(/\s[—–]\s|\s-\s/)[0] ?? '')
+
+function occurrences(haystack: string, needle: string): number {
+  const esc = needle.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+  return (haystack.match(new RegExp(`(?<![\\p{L}\\p{N}])${esc}(?![\\p{L}\\p{N}])`, 'gu')) ?? []).length
+}
+
+export function dropAnswerLeaks(text: string, mcq: TutorMCQ, conceptTitle?: string | null): { text: string; dropped: string[] } {
+  const correct = optionCore(mcq.options[mcq.correctIndex] ?? '')
+  if (correct.replace(/[^\p{L}\p{N}]/gu, '').length < 3) return { text, dropped: [] }
+  // An answer that IS the lesson's own concept name ("Displacement" in
+  // "Displacement and Distance") is named by every teaching sentence; removing
+  // those would remove the lesson. Synthetic-student after-run 2, 2026-09-24:
+  // "…is the displacement: nowhere, zero." above "What type of quantity is
+  // this?" — teaching, not a leak.
+  if (conceptTitle && occurrences(leakNorm(conceptTitle), correct) > 0) return { text, dropped: [] }
+  const others = mcq.options.filter((_, i) => i !== mcq.correctIndex).map(optionCore)
+  if (others.some((o) => occurrences(o, correct) > 0)) return { text, dropped: [] }
+  const inQuestion = occurrences(leakNorm(mcq.question), correct)
+  const dropped: string[] = []
+  const paragraphs = text.split(/\n{2,}/).map((para) => {
+    const lines = para.split('\n').map((line) => {
+      const sentences = line.split(/(?<=[.!?])\s+/)
+      const kept = sentences.filter((sentence) => {
+        const leaks = occurrences(leakNorm(sentence), correct) > inQuestion
+        if (leaks) dropped.push(sentence)
+        return !leaks
+      })
+      if (kept.length === sentences.length) return line
+      const rest = kept.join(' ').trim()
+      // A list marker left on its own ("3.") is not content.
+      return /^(?:\d+[.)]|[-*•])?$/.test(rest) ? '' : rest
+    })
+    const keptLines = lines.filter((l, i) => l.length > 0 || para.split('\n')[i].length === 0)
+    return keptLines.join('\n').trim()
+  })
+  if (dropped.length === 0) return { text, dropped }
+  return { text: paragraphs.filter((p) => p.length > 0).join('\n\n'), dropped }
 }

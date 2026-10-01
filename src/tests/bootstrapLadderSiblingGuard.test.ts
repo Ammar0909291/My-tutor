@@ -272,9 +272,23 @@ describe('the real 45-slot divergence cannot produce a duplicate', () => {
     const manual = await load(allFiles())
     const bAband = abandonedLegacyProbeSlugs(boot as never)
     const mAband = abandonedLegacyProbeSlugs(manual as never)
-    // The measured values from §9v/§9w, unchanged.
+    // `bAband` is pinned exactly: BOOTSTRAP_FILES is a small, fixed list
+    // (six files) untouched by ordinary content authoring, so this count is
+    // a genuine, stable regression signal — unchanged since §9v/§9w.
     expect(bAband.size).toBe(429)
-    expect(mAband.size).toBe(711)
+    // `mAband` reads EVERY file in the assets directory (`allFiles()`), so
+    // its size grows continuously and legitimately as any subject's seed
+    // corpus is authored — physics/chemistry/biology/mathematics all add
+    // files here, often in concurrent sessions. Pinning it to an exact
+    // number breaks CI on every unrelated content commit: measured
+    // 711 -> 713 -> 719 -> (still climbing) within a single 2026-09-20
+    // session, purely from parallel mathematics batches with no biology or
+    // guard-logic change involved. Asserting only non-decrease keeps this
+    // useful as a regression check (it still catches genuine content
+    // deletion) without hard-coding a number that legitimate, ongoing
+    // authoring is expected to move. `mAband` itself is otherwise unused
+    // below — only `bAband` feeds the actual behavioural assertion.
+    expect(mAband.size).toBeGreaterThanOrEqual(711)
     // And the detector still says nothing about the 45 — which is correct, and
     // is precisely why this separate guard had to exist.
     const slot = (p: Probe) => seedCanonicalSlug(p.conceptId, p.probeKind, p.gradeBand)

@@ -54,6 +54,7 @@
  * It fires ONLY when no figure is attached. With a figure present the reference
  * is true and is left exactly as written.
  */
+import { conceptFallbackText } from './conceptFallback'
 
 /** Words that place the thing on screen rather than in the prose. */
 const ON_SCREEN =
@@ -70,12 +71,20 @@ const ON_SCREEN =
  * real lesson: "Let's look at a complete worked example on your screen using the
  * expression (2 + 3)² ÷ 5 − 1" slipped through when the list was strong-only,
  * because "worked example" is not a diagram and the turn carried no figure.
+ *
+ * "layout" is WEAK, not STRONG, deliberately: "circuit layout", "page layout",
+ * "the layout of the periodic table", "sentence layout" are all ordinary
+ * non-visual vocabulary across several subjects this platform teaches, unlike
+ * "diagram"/"sketch"/"figure", which essentially never occur outside a real
+ * reference to a rendered artefact. See DIRECT_POINTER_RE below for the one
+ * shape where "layout" IS treated unconditionally — a live-reproduced defect
+ * that on-screen-gating alone cannot close.
  */
 const STRONG_FIGURE_NOUN =
   /\b(diagram|figure|graph|picture|image|chart|number ?line|animation|illustration|visual|simulation|plot|sketch)\b/i
 
 const WEAK_FIGURE_NOUN =
-  /\b(worked example|example|table|steps?|solution|board|canvas|panel|screen)\b/i
+  /\b(worked example|example|table|steps?|solution|board|canvas|panel|screen|layout)\b/i
 
 /** Does this fragment name something the learner is being told to look AT? */
 function namesAFigure(fragment: string): boolean {
@@ -140,9 +149,45 @@ function isPreposedLocatorClaim(fragment: string): boolean {
  * are not adjacent through a determiner here. Requiring VERB + (the/this/
  * that) + NOUN immediately adjacent is the shape that is always a pointer at
  * a specific, present thing, never a general statement about the noun.
+ *
+ * ── "USE THIS <NOUN> TO …" AND "LAYOUT" (bio.plant.photosynthesis, 2026-09-23) ──
+ * Reproduced live on the deployed app, no visual/visualSpec/sceneSpec attached:
+ *
+ *   "Use this sketch to see how light captured in the thylakoid membrane
+ *    produces ATP and NADPH, which then power the Calvin cycle…"
+ *   "Use this layout to see how light energy moves electrons from water to
+ *    NADPH while generating a proton gradient that powers ATP synthesis."
+ *
+ * Two independent misses in one shape. First, "sketch" is already a STRONG
+ * noun everywhere else in this file, but the sentence carries no ON_SCREEN
+ * locator, so `isPointer`'s locator-gated branch never fired; and the verb is
+ * "use", which was on no verb list anywhere, so DIRECT_POINTER_RE's own
+ * locator-free adjacency shape — the one path that needs no on-screen
+ * corroboration — never fired either. Second, "layout" named no figure noun
+ * at all before this change (see STRONG_FIGURE_NOUN/WEAK_FIGURE_NOUN above),
+ * so even a recognised verb would not have helped it.
+ *
+ * "use" joins this rule's own verb list, not the general POINTING_VERB list
+ * used elsewhere in this file: POINTING_VERB feeds branches that DON'T
+ * require on-screen corroboration on a dash boundary (`findPointerClauseHead`),
+ * and "use" is common with ordinary non-visual objects ("use the formula",
+ * "use this method") that would false-positive there. DIRECT_POINTER_RE's own
+ * VERB + (the/this/that) + NOUN adjacency is what makes it safe regardless —
+ * "use the formula" never matches this list's nouns, and "use this diagram"/
+ * "use this layout" already presuppose a specific, present artefact exactly
+ * as "look at this diagram" does.
+ *
+ * "layout" is added to THIS list specifically (not to STRONG_FIGURE_NOUN),
+ * so it is caught ONLY through the same rigid, low-risk adjacency this whole
+ * rule already relies on — never through the looser locator-optional paths
+ * that consult STRONG_FIGURE_NOUN directly. A declarative, non-pointing
+ * sentence like "The layout of the periodic table reflects electron
+ * configuration trends." has no verb from this list adjacent to a
+ * determiner + "layout", so it does not match and is left untouched — see
+ * figureReference.test.ts's negative controls for the checked cases.
  */
 const DIRECT_POINTER_RE =
-  /\b(?:look at|looking at|see|notice|observe|study|examine|consider)\s+(?:the|this|that)\s+(?:diagram|figure|graph|picture|image|chart|number ?line|animation|illustration|visual|simulation|plot|sketch)\b/i
+  /\b(?:look at|looking at|see|notice|observe|study|examine|consider|use)\s+(?:the|this|that)\s+(?:diagram|figure|graph|picture|image|chart|number ?line|animation|illustration|visual|simulation|plot|sketch|layout)\b/i
 
 /**
  * A single boundary character — em/en dash, a whitespace-bounded hyphen, or a
@@ -196,6 +241,93 @@ const VISIBILITY_DEIXIS_RE =
  */
 const FIGURE_SUBJECT_CLAIM_RE =
   /^(?:the|this|that|here(?:'s| is))\s+(?:the\s+|a\s+|an\s+)?(?:diagram|figure|picture|image|illustration|sketch|drawing|animation)\b[^.!?]{0,60}?\b(?:shows?|shown|depicts?|depicted|illustrates?|illustrated|displays?|displayed|represents?|pictures?|presents?|highlights?|indicates?)\b/i
+
+/**
+ * A SHORT LEADING LABEL WITH NO TERMINAL PUNCTUATION AT ALL — "Light ↓ This
+ * diagram shows…", "Energy This figure illustrates…" — bio.plant.
+ * photosynthesis, reproduced live on the deployed app, 2026-09-23/24.
+ *
+ * `stripUnbackedFigureReferences` splits on `(?<=[.!?])\s+` — a sentence
+ * boundary REQUIRES a terminal punctuation mark before it. The model's own
+ * "diagram-caption" habit produces a bare, unpunctuated one- or two-word
+ * label ("Light", "Energy", "Sunlight" — never itself a claim, and never a
+ * complete sentence) immediately followed by a genuine `FIGURE_SUBJECT_
+ * CLAIM_RE`-shaped claim, with nothing but whitespace (and sometimes an
+ * arrow glyph the model used as an ad hoc separator) between them. The
+ * splitter sees no boundary at all, so the whole run — label AND claim —
+ * arrives at `FIGURE_SUBJECT_CLAIM_RE` as ONE "sentence" whose first
+ * characters are the label, not "the/this/that/here's" — so the `^` anchor
+ * never reaches the claim, and the false claim ships unstripped.
+ *
+ * ── WHY THIS IS NOT "REMOVE THE ANCHOR" ─────────────────────────────────
+ * The anchor stays exactly as strict as it always was: this constant finds
+ * a CANDIDATE cut point ahead of it, and `FIGURE_SUBJECT_CLAIM_RE` — wholly
+ * unmodified — is what decides, on the text AFTER that cut, whether a claim
+ * is actually there. A bad or overly eager cut can only ever produce a
+ * remainder `FIGURE_SUBJECT_CLAIM_RE` was already willing to accept as
+ * sentence-initial; it can never make the claim test itself more permissive
+ * for text that reaches it any other way (every other call site, and every
+ * pre-existing behaviour of this regex, is untouched).
+ *
+ * ── WHY A LABEL IS SAFE TO ASSUME, RATHER THAN ORDINARY PROSE ───────────
+ * Deliberately narrow, on both ends:
+ *   - Exactly ONE capitalised word (never two-plus): ordinary sentence-
+ *     initial text capitalises only its own first word ("Consider how
+ *     this diagram shows…" breaks at "how", lowercase) — a caption-style
+ *     label is the one shape that puts a bare capitalised word directly
+ *     before what reads like a fresh sentence, with nothing grammatical
+ *     joining them.
+ *   - The lookahead requires the very next token to be literally "the/
+ *     this/that/here's/here is" — not merely a figure noun, not merely
+ *     capitalised — so an ordinary label-like opener followed by anything
+ *     else ("Sunlight Follow the arrows…", captured on the same lesson)
+ *     never even reaches the cut, and `FIGURE_SUBJECT_CLAIM_RE` on the
+ *     remainder is the real, unrelaxed gate regardless.
+ * A three-word proper noun run ("New York City This diagram shows…") is
+ * therefore NOT treated as a label — checked, not assumed — because this
+ * repo's own tutoring prose has no evidenced case of one, and admitting it
+ * would widen the surface with no observed need.
+ *
+ * ── THE REGRESSION THE EXCLUSION LIST CLOSES ────────────────────────────
+ * The lookahead alone is not enough: "In the diagram shown above—gravity
+ * pulls down…" ALSO has exactly one capitalised word ("In") directly before
+ * literal "the" — but "In" is an ordinary sentence-initial PREPOSITION
+ * genuinely governing "the diagram shown above" as one grammatical phrase
+ * (already correctly handled, in full, by `PREPOSED_LOCATOR_RE`/
+ * `findPointerClauseHead`'s Shape 2 — which trims only the leading clause
+ * and KEEPS "gravity pulls down… these are action-reaction partners").
+ * Treating "In" as a label made `hasFigureSubjectClaim` match the ENTIRE
+ * run-on sentence via `FIGURE_SUBJECT_CLAIM_RE` on "the diagram shown
+ * above…", so Shape 0b dropped the whole sentence — including the real
+ * content Shape 2 already correctly preserves — a measured regression
+ * against this file's own existing `figureReference.test.ts` fixtures,
+ * caught before shipping by running the full suite, not assumed safe.
+ * `LEADING_LABEL_RE` therefore excludes the closed class of English
+ * function words (determiners, prepositions, conjunctions, pronouns,
+ * auxiliaries, wh-words) from ever counting as a label: every evidenced
+ * TRUE label ("Light", "Sunlight", "Energy") is a content noun with no
+ * grammatical tie to what follows, and every false positive found while
+ * building this fix was exactly one of these closed-class words instead.
+ */
+const LABEL_EXCLUSION_RE =
+  /^(?:In|On|At|For|With|To|Of|By|From|As|Into|Onto|Upon|The|This|That|These|Those|It|He|She|They|We|You|I|Is|Are|Was|Were|Be|Been|Being|And|Or|But|So|Because|Since|If|When|While|Although|Though|Unless|Until|After|Before|During|Once|Whenever|Whether|Why|How|What|Where|Who|Which|There|Here|Not|No|Yes|A|An)\b/
+
+const LEADING_LABEL_RE =
+  /^[A-Z][a-zA-Z]*\s*[↓↑→←⇒⇐⇓⇑↔]?\s+(?=[Tt]he\b|[Tt]his\b|[Tt]hat\b|[Hh]ere(?:'s| is))/
+
+/**
+ * `FIGURE_SUBJECT_CLAIM_RE`, tried first exactly as written (so every
+ * existing sentence-initial match is byte-for-byte unchanged), then — only
+ * on failure — tried again against whatever follows a `LEADING_LABEL_RE`
+ * cut, if one exists. See `LEADING_LABEL_RE`'s own comment for why this
+ * composition cannot make the underlying claim test any more permissive.
+ */
+function hasFigureSubjectClaim(sentence: string): boolean {
+  if (FIGURE_SUBJECT_CLAIM_RE.test(sentence)) return true
+  const label = LEADING_LABEL_RE.exec(sentence)
+  if (!label || LABEL_EXCLUSION_RE.test(label[0])) return false
+  return FIGURE_SUBJECT_CLAIM_RE.test(sentence.slice(label[0].length))
+}
 
 /**
  * AN EMBEDDED LOCATOR — "the histogram IN THE FIGURE".
@@ -329,6 +461,21 @@ const CLAUSE_BOUNDARY_RE = /(?:[—–]|(?<=\s)-(?=\s)|,)\s*/g
  * exactly as shape 1's whole-sentence test already does; a dash-terminated
  * head keeps the original, more permissive bar.
  */
+/**
+ * A leading clause that IS a direct pointer, ending at a comma: "Looking at
+ * this diagram, what do you notice…", "**Question:** Looking at the sketch,
+ * what do you notice…". MEASURED (real-learner run 2, production 2026-09-30,
+ * phys.opt.refraction): the model drew a text sketch, the ASCII guard removed
+ * it, and both of these questions survived the post-diagram reference pass —
+ * the comma boundary above demands an on-screen locator, which a direct
+ * "looking at the sketch" never carries. The pointer alone is a claim that a
+ * figure is visible; only the clause is removed, the question is kept.
+ */
+const DIRECT_POINTER_HEAD_RE = new RegExp(
+  String.raw`^\s*(?:\*\*[^*]{1,30}\*\*\s*)?(?:` + DIRECT_POINTER_RE.source.replace(/^\\b/, '') + String.raw`)\s*,\s*$`,
+  'i',
+)
+
 function findPointerClauseHead(s: string): string | null {
   CLAUSE_BOUNDARY_RE.lastIndex = 0
   let m: RegExpExecArray | null
@@ -340,11 +487,65 @@ function findPointerClauseHead(s: string): string | null {
     const boundaryIsComma = m[0].trim() === ','
     const pointingVerbQualifies =
       POINTING_VERB.test(head) && namesAFigure(head) && (!boundaryIsComma || ON_SCREEN.test(head))
-    if (pointingVerbQualifies || isPreposedLocatorClaim(head)) {
+    if (pointingVerbQualifies || isPreposedLocatorClaim(head) || DIRECT_POINTER_HEAD_RE.test(head)) {
       return head
     }
   }
   return null
+}
+
+/**
+ * THREE REMNANT SHAPES that survive once a text diagram is taken out of a
+ * no-figure turn (production, 2026-09-24 — every one after the honest
+ * "I don't have a picture" line, so the learner was told there is no picture
+ * and then pointed at one):
+ *
+ *   "Follow the arrows from light energy to the production of glucose."
+ *   "This layout shows the sequence of events from the promoter region…"
+ *   "*P = phosphate, C = deoxyribose sugar; the two backbones run…"
+ *
+ * Each carries real teaching after the false pointer, so each is REWRITTEN to
+ * keep it (the honestifyFigureOffer precedent), never simply deleted:
+ * arrows -> "Trace the steps", "this layout shows" -> "Here is", and a symbol
+ * legend is removed from the front of the sentence it prefixes.
+ */
+const ARROW_FOLLOW_RE = /^(?:[A-Z][a-z]+\s+(?=[FfTt]))?(?:follow|trace)\s+(?:the|these|those)\s+arrows?\b\s*/i
+// Up to two words before the noun: "This simple layout shows…" (pilot, eng.grammar.pronouns).
+const LAYOUT_SUBJECT_RE = /^(?:this|the)\s+(?:[a-z-]+\s+){0,2}(?:layout|arrangement)\s+shows\s+/i
+/** "The arrow highlights **barks**…" — a claim about a drawn arrow; dropped whole. */
+const ARROW_SUBJECT_RE = /^the\s+arrows?\s+(?:highlights?|shows?|points?|leads?|marks?|indicates?)\b/i
+const LEGEND_PREFIX_RE = /^\*?\s*(?:[A-Z][a-z]?\s*=\s*[^,;=\n]{2,40},\s*)+[A-Z][a-z]?\s*=\s*[^,;=\n]{2,40};\s*/
+const REMNANT_ANYWHERE_RE = /(?:^|[\n.!?]\s*)(?:(?:[A-Z][a-z]+\s+)?(?:follow|trace)\s+(?:the|these|those)\s+arrows?\b|(?:this|the)\s+(?:[a-z-]+\s+){0,2}(?:layout|arrangement)\s+shows\b|the\s+arrows?\s+(?:highlights?|shows?|points?|leads?|marks?|indicates?)\b|\*?\s*[A-Z][a-z]?\s*=\s*[^,;=\n]{2,40},)/i
+
+/** Rewrite a remnant sentence, or null when it is not one. `''` means drop it. */
+function repairRemnant(s: string): string | null {
+  const cap = (x: string) => x.charAt(0).toUpperCase() + x.slice(1)
+  const arrow = s.match(ARROW_FOLLOW_RE)
+  if (arrow) {
+    const rest = s.slice(arrow[0].length).trim()
+    // The layout words that only mean something beside a drawing go with it.
+    const unplaced = rest.replace(/\s+(?:on|at)\s+the\s+(?:left|right|top|bottom)\b/gi, '')
+    return /[A-Za-z]{3,}/.test(unplaced) ? `Trace the steps ${unplaced}` : ''
+  }
+  if (ARROW_SUBJECT_RE.test(s)) return ''
+  const layout = s.match(LAYOUT_SUBJECT_RE)
+  if (layout) {
+    const rest = s.slice(layout[0].length).trim()
+    return /[A-Za-z]{3,}/.test(rest) ? `Here is ${rest}` : ''
+  }
+  const legend = s.match(LEGEND_PREFIX_RE)
+  if (legend) {
+    const rest = s.slice(legend[0].length).trim()
+    return /[A-Za-z]{3,}/.test(rest) ? cap(rest) : ''
+  }
+  return null
+}
+
+/** A leftover drawing label: one to three words, no sentence punctuation, no markdown. */
+function isOrphanLabelParagraph(p: string): boolean {
+  const t = p.trim()
+  if (t.length === 0 || /[.!?:;,)]$/.test(t) || /^[#*>\-|`\d]/.test(t) || /[*_`]/.test(t)) return false
+  return t.split(/\s+/).length <= 3
 }
 
 export interface FigureReferenceResult {
@@ -352,6 +553,22 @@ export interface FigureReferenceResult {
   stripped: boolean
   /** The exact fragments removed, for the log — never guessed at after the fact. */
   removed: string[]
+  /**
+   * The turn was NOTHING but pointers at a figure that is not there, so it was
+   * handed back unchanged (an empty turn is never returned). The caller must
+   * replace it — see pointerOnlyFallback — or the pointer reaches the learner.
+   */
+  onlyPointer?: boolean
+}
+
+/**
+ * What a turn says when its whole text pointed at a figure that does not exist
+ * (production, eng.grammar.word-classes-overview, 2026-09-24: the entire reply
+ * was "Use this layout to picture where a word belongs…"). Retrieval, never
+ * invention: the concept's own Knowledge Graph title and description.
+ */
+export function pointerOnlyFallback(title: string, description: string): string {
+  return conceptFallbackText(title, description)
 }
 
 /**
@@ -393,7 +610,8 @@ export function stripUnbackedFigureReferences(
     // per sentence below.
     const hasVisibilityDeixis =
       /\b(?:here\s+(?:you|we)\s+(?:can\s+|will\s+|'ll\s+)?see|as\s+(?:you|we)\s+can\s+see|you\s+can\s+see\s+(?:here|above|below))\b/i.test(text)
-    if (!STRONG_FIGURE_NOUN.test(text) && !WEAK_FIGURE_NOUN.test(text) && !hasVisibilityDeixis) {
+    if (!STRONG_FIGURE_NOUN.test(text) && !WEAK_FIGURE_NOUN.test(text) && !hasVisibilityDeixis
+      && !REMNANT_ANYWHERE_RE.test(text)) {
       return { text, stripped: false, removed: [] }
     }
 
@@ -405,6 +623,15 @@ export function stripUnbackedFigureReferences(
       const kept = sentences.map((sentence) => {
         const s = sentence.trim()
         if (s.length === 0) return ''
+
+        // Remnants of a removed text diagram — see ARROW_FOLLOW_RE.
+        if (!s.includes('?')) {
+          const repaired = repairRemnant(s)
+          if (repaired !== null) {
+            removed.push(s)
+            return repaired
+          }
+        }
 
         // Shape 0: a leading VISIBILITY-DEIXIS opener ("Here you see …", "As
         // you can see, …"). It names no figure noun, so shape 1/2 below never
@@ -431,10 +658,12 @@ export function stripUnbackedFigureReferences(
           }
 
           // Shape 0b: a figure noun in SUBJECT position asserting the figure is
-          // present ("The diagram shows nitrogen in the center…"). The whole
-          // sentence is a claim about a figure that is not there, so it goes —
-          // the surrounding paragraphs carry the teaching.
-          if (FIGURE_SUBJECT_CLAIM_RE.test(s)) {
+          // present ("The diagram shows nitrogen in the center…"), including
+          // one preceded by an unpunctuated leading label ("Light ↓ This
+          // diagram shows…" — see LEADING_LABEL_RE/hasFigureSubjectClaim).
+          // The whole sentence is a claim about a figure that is not there,
+          // so it goes — the surrounding paragraphs carry the teaching.
+          if (hasFigureSubjectClaim(s)) {
             removed.push(s)
             return ''
           }
@@ -515,11 +744,21 @@ export function stripUnbackedFigureReferences(
       return kept.filter((x) => x.length > 0).join(' ')
     })
 
-    const out = cleanedParagraphs.filter((p) => p.trim().length > 0).join('\n\n').trim()
+    // A drawing's stray label ("Light") is only recognisable as one when the
+    // drawing around it was just found and removed; on its own a two-word
+    // paragraph is left alone.
+    const paragraphsOut = removed.length > 0
+      ? cleanedParagraphs.filter((p) => {
+          if (!isOrphanLabelParagraph(p)) return true
+          removed.push(p.trim())
+          return false
+        })
+      : cleanedParagraphs
+    const out = paragraphsOut.filter((p) => p.trim().length > 0).join('\n\n').trim()
     // Never hand back an empty turn. If the figure reference WAS the whole
     // message there is nothing safe to say, so the original stands and the
     // caller's log records that it could not be repaired.
-    if (out.length === 0) return { text, stripped: false, removed: [] }
+    if (out.length === 0) return { text, stripped: false, removed: [], onlyPointer: removed.length > 0 }
     if (removed.length === 0) return { text, stripped: false, removed: [] }
     return { text: out, stripped: true, removed }
   } catch {

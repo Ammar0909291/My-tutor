@@ -206,3 +206,46 @@ describe('the head fallback cannot undo an E2 suppression', () => {
     ).toBeNull()
   })
 })
+
+/**
+ * L1 / L2 — found by the 2026-09-29 real-learner production run (lenses
+ * lesson): "what is focal length?" opened a three-turn special-relativity
+ * excursion (math.geom.length re-read as phys.rel.length-contraction), and
+ * "what is P? power?" was answered as mechanical power in watts.
+ */
+describe('L1: a word inside one of the lesson\'s own compound terms stays in the lesson', () => {
+  const LENSES = 'phys.opt.lenses'
+
+  it('the production utterance no longer resolves to Length Contraction', () => {
+    expect(resolveRequestedConceptId('what is focal length? i dont know', LENSES, 'physics')).toBeNull()
+    expect(gapFor('what is focal length? i dont know', LENSES)).toBeNull()
+  })
+
+  it('the head fallback cannot bring it back', () => {
+    expect(resolveRequestedConceptId('teach me focal length', LENSES, 'physics')).toBeNull()
+  })
+
+  it('a term the tutor just used counts as lesson vocabulary when the caller passes it', () => {
+    const tutor = 'The resultant force is what goes into F = ma.'
+    // Without the tutor text nothing names "resultant force" as a lesson term…
+    const withTutor = resolveRequestedConceptId('what is resultant force exactly', 'phys.mech.newtons-second-law', 'physics', undefined, tutor)
+    expect(withTutor === null || withTutor === 'phys.mech.newtons-second-law').toBe(true)
+  })
+
+  it('genuine requests for another concept still resolve', () => {
+    expect(resolveRequestedConceptId('teach me length contraction', LENSES, 'physics')).toBe('phys.rel.length-contraction')
+    expect(resolveRequestedConceptId('explain photosynthesis to me please', LENSES, 'physics')).toBe('bio.plant.photosynthesis')
+    expect(resolveRequestedConceptId('i dont know enough about the mole concept', 'chem.found.stoichiometry', 'chemistry')).toBe('chem.found.mole-concept')
+  })
+})
+
+describe('L2: a word is read in the lesson\'s own domain first', () => {
+  it('"power" in a lenses lesson is Power of a Lens, not mechanical power', () => {
+    expect(resolveRequestedConceptId('what is P? power? you never teach power. i dont know', 'phys.opt.lenses', 'physics'))
+      .toBe('phys.opt.lens-power')
+  })
+
+  it('outside optics, power keeps its mechanics reading', () => {
+    expect(resolveRequestedConceptId('teach me power', 'phys.mech.work', 'physics')).toBe('phys.mech.power')
+  })
+})

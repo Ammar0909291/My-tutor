@@ -152,8 +152,11 @@ describe('REGRESSION 5 — R1/R6 anti-regression, re-pinned here against the SAM
   })
 
   it('R1: "ray" still resolves to the genuine physics ray concept, never x-rays', () => {
-    const got = resolveRequestedConceptId('can you draw diagram of ray bending please', 'phys.opt.refraction')
-    expect(got).toBe('phys.opt.nature-of-light')
+    // Pinned from a lesson whose figure never mentions rays: since 2026-09-30 the
+    // refraction lesson's own figure labels its "light ray" (lesson vocabulary),
+    // so in THAT lesson ray bending stays on refraction (null = the lesson).
+    expect(resolveRequestedConceptId('can you draw diagram of ray bending please', 'phys.opt.dispersion')).toBe('phys.opt.nature-of-light')
+    expect(resolveRequestedConceptId('can you draw diagram of ray bending please', 'phys.opt.refraction')).not.toBe('phys.mod.x-rays')
   })
 
   it('R4: an explicit X-ray request still reaches X-rays', () => {

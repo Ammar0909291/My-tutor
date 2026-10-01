@@ -807,6 +807,10 @@ describe('Bug 4 — detectFillerTurn', () => {
     "Feel free to take a moment.",
     "Let's move forward whenever you're ready.",
     "We'll continue at your own pace.",
+    // Real-learner QA, 2026-09-22 — measured verbatim, twice, on
+    // eng.communication.business-writing (see FILLER_PHRASE_RE's own
+    // comment for the full trace).
+    "Let's stay with this idea for a moment.",
   ]
   const NOT_FILLER = [
     "Henry's law states that the concentration of a dissolved gas is proportional to its partial pressure above the liquid.",

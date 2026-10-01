@@ -17,7 +17,7 @@ import { ThreeDVisual } from './ThreeDVisual'
 import { Vector3D } from './Vector3D'
 import { MolecularNode3D } from './MolecularNode3D'
 import { SceneLabelLayer, type LayerLabel } from './SceneLabelLayer'
-import { visibleObjects, type SceneObject, type SceneSpec } from '@/lib/teaching/sceneSpec'
+import { pathSegments, visibleObjects, type SceneObject, type SceneSpec } from '@/lib/teaching/sceneSpec'
 import { sceneTextObjects } from '@/lib/teaching/visual/layout'
 import { dimColor, themeColor } from '@/lib/teaching/sceneGenerators/visualDesign'
 import { emphasisOf } from '@/lib/teaching/visual/sceneStage'
@@ -84,18 +84,32 @@ function renderObject(obj: SceneObject, key: number, theme: Theme, focusIds: Rea
       // Drawn by <PlacedLabels/>, which solves every label's position together.
       return null
     case 'path':
-    case 'trajectory':
-      // Render the ordered points as small markers (spike: no spline geometry yet).
-      // The path's own text used to be dropped: markers were drawn and the
-      // label silently discarded. Any text a scene declares must reach the
-      // learner, so it is drawn once at the path's midpoint.
+    case 'trajectory': {
+      // An ordered list of points, drawn as what it is: a line through them.
+      // It used to be drawn as the markers alone (spike: no spline geometry),
+      // which MEASURED in the browser made every two-point connector vanish —
+      // the Biology hub's spokes run centre to centre, so both markers sat
+      // inside the spheres and the learner saw no line at all, while every
+      // curve (a projectile's parabola, an orbit, a wave) read as loose dots.
+      // Each consecutive pair is now joined by the same headless cylinder a
+      // bond uses; the markers stay, at the same radius, as the round joints
+      // that keep a bent polyline continuous. A closed ring repeats its first
+      // point last, so it closes itself; an open arc stays open.
+      // The path's own text is drawn once at its midpoint by the label layer.
+      const points = obj.points ?? []
+      const radius = obj.radius ?? 0.06
+      const stroke = color ?? '#FFD166'
       return (
         <group key={key}>
-          {(obj.points ?? []).map((p, i) => (
-            <MolecularNode3D key={i} position={p} radius={obj.radius ?? 0.06} color={color ?? '#FFD166'} theme={theme} />
+          {pathSegments(points).map(([from, to], i) => (
+            <BondLine key={`s${i}`} from={from} to={to} color={stroke} thickness={obj.thickness ?? radius} />
+          ))}
+          {points.map((p, i) => (
+            <MolecularNode3D key={i} position={p} radius={radius} color={stroke} theme={theme} />
           ))}
         </group>
       )
+    }
     case 'bond':
       return (
         <BondLine

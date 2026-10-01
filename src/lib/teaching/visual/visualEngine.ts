@@ -689,11 +689,22 @@ A. graph          a function of one variable            {"type":"graph","equatio
                   Choose a domain that is PHYSICALLY MEANINGFUL: if the
                   quantity cannot be negative (speed, mass, time elapsed,
                   concentration), start the domain at 0.
+                  The equation is plotted by a small parser that knows ONLY:
+                  the variable x, plain numbers, + - * / ^, parentheses, and
+                  sin cos exp. x stands for whatever the horizontal axis is
+                  (time, distance, concentration). Anything else never plots:
+                  no other letter or symbol (not t, π, pi, sqrt, log, k, A),
+                  no "=", no 1e-21 style numbers. Write the numbers in instead:
+                  6.2832 for 2π, x^0.5 for a square root, and readable
+                  magnitudes — the shape matters; put a real scale in the axis
+                  label ("Strain (×10⁻²¹)").
 B. number_line    positions or ranges on a line         {"type":"number_line","start":-5,"end":5,"highlight":[0,3],"title":"..."}
 C. geometry       one shape with real measurements      {"type":"geometry","shape":"triangle","base":8,"height":5}
                   shape is triangle | rectangle | circle | angle
 D. process_flow   an ordered sequence of named steps    {"type":"process_flow","title":"...","steps":[{"title":"..."},{"title":"..."}]}
-                  2-12 steps, each title <= 60 characters
+                  2-12 steps, each title <= 60 characters — a short name. Put
+                  any formula or detail in the step's optional "note"
+                  (<= 140 characters): {"title":"First-order energy shift","note":"E1 = <n|V|n>"}
                   ONLY when the ORDER IS REAL — step 2 happens after step 1, or
                   because of it. A LIST of things that coexist (the seven SI
                   base units; the characteristics of a living organism) and a
@@ -701,6 +712,16 @@ D. process_flow   an ordered sequence of named steps    {"type":"process_flow","
                   mixtures) are NOT processes. Drawing either as a flow asserts
                   a sequence the concept does not have, which is worse than
                   drawing nothing.
+                  A FEEDBACK LOOP THAT BRANCHES BY CONDITION (thermoregulation's
+                  hot-response vs. cold-response, blood-sugar's insulin vs.
+                  glucagon response, any homeostatic mechanism with an "if too
+                  high" reaction AND a separate "if too low" reaction) must
+                  never list both branches as bare unconditional steps in one
+                  flow — that asserts they fire together, which they do not.
+                  Name the TRIGGERING CONDITION inside the step itself ("If
+                  temperature rises: vasodilation and sweating", "If
+                  temperature falls: vasoconstriction and shivering"), or
+                  choose "none" if the branching cannot be made honest this way.
 E. scene          a labelled 3D diagram, when none of A-D fits
 F. none           {"type":"none"} — no honest figure of this concept exists in
                   any form above. THIS IS A CORRECT ANSWER and is expected

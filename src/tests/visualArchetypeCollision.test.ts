@@ -164,8 +164,11 @@ describe('Phase 6 P2 — semantically wrong bindings are suppressed before any t
   it('known-wrong bindings report as retired', () => {
     // Each of these was found by the M3-A audit to paint a different situation
     // than the concept requires.
-    expect(isRetiredVisualBinding('phys.opt.reflection')).toBe(true)
-    expect(isRetiredVisualBinding('phys.mech.keplers-laws')).toBe(true)
+    // (phys.opt.reflection left the register 2026-09-30 with its own faithful figure.)
+    // (the physics circuit concepts left the register 2026-09-30, batch 9.)
+    expect(isRetiredVisualBinding('chem.bond.ionic-bonding')).toBe(true)
+    // (phys.mech.keplers-laws left the register 2026-09-30 with its own faithful figure.)
+    expect(isRetiredVisualBinding('chem.solid.defects')).toBe(true)
   })
 
   it('an ordinary concept is NOT retired — the register is targeted, not blanket', () => {

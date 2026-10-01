@@ -92,10 +92,13 @@ describe('Typed Turn Contract Batch 5 — figure cluster, real route', () => {
   })
 
   it('(c) a concept with no visual at all never attaches one, on any turn', async () => {
+    // chem.org.mechanisms: no Tier 0 scene and no registry binding. (This used
+    // chem.org.pericyclic until that concept got a Tier 0 scene, 2026-09-28 —
+    // expertTierVisualGapFix.test.ts.)
     const res = await driveTurns(h, POST, [
-      { learnerSays: 'ok', modelReplies: 'Pericyclic reactions proceed through a single concerted transition state.' },
-      { learnerSays: 'ok', modelReplies: 'The Woodward-Hoffmann rules classify them by electron count and geometry.' },
-    ], { conceptId: 'chem.org.pericyclic', subjectSlug: 'chemistry' })
+      { learnerSays: 'ok', modelReplies: 'A curly arrow shows where an electron pair moves.' },
+      { learnerSays: 'ok', modelReplies: 'A mechanism lists each bond made and broken, in order.' },
+    ], { conceptId: 'chem.org.mechanisms', subjectSlug: 'chemistry' })
     for (const t of res) {
       expect(t.status).toBe(200)
       expect(readLog(t, '[learn/chat] CONTRACT_ASSERT=')).toBeNull()

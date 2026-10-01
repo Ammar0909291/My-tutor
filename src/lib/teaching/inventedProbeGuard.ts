@@ -72,6 +72,9 @@ export type ModelProbeVerdict =
   | 'model-probe-already-asked'
   /** Authored probes exist for this concept — the reviewed item wins. */
   | 'authored-probes-exist'
+  /** The concept's authored probes exist but every one is spent this lesson —
+   *  see `authoredPoolExhausted`. */
+  | 'authored-pool-exhausted'
   /** The server ruled out a question this turn; the model may not override. */
   | 'gate-declined-by-policy'
   /** Nothing reviewed is available; an imperfect question beats silence. */
@@ -145,6 +148,36 @@ export interface ModelProbeInput {
    * exact prior behaviour.
    */
   modelProbeAlreadyAsked?: boolean
+  /**
+   * The selector RAN and found the concept's gate-compatible authored probes
+   * all spent this lesson (`MatchOptions.onAllCandidatesSpent`) — as opposed
+   * to `authoredProbesExist === false` because none were ever authored.
+   *
+   * ── MEASURED (production, 2026-09-24, disposable account) ───────────────
+   * `phys.mod.photoelectric-effect` holds four authored probes at the served
+   * band. A learner who missed two spent them all before PRACTICE finished;
+   * the verdict fell through to 'served-no-alternative' and the model wrote
+   * "What does the stopping potential directly measure?" keyed to "The number
+   * of photons hitting the metal each second". The learner tapped exactly
+   * that, the server graded it correct against the model's key
+   * (`gradeSource: server-key, gradedCorrect: true` in the turn event), the
+   * plain practice counter moved, and the next reply opened "That's right".
+   * Every physics (concept, band) pair holds 4-6 gradeable probes, so a
+   * struggling learner reaches this state anywhere in the subject.
+   *
+   * ── WHY WITHHOLDING COSTS NOTHING REAL ─────────────────────────────────
+   * 'served-no-alternative' exists for concepts with NO reviewed assessment
+   * ("teaching not at all is a failure"). An exhausted pool is not that: the
+   * concept is at contract and HAS been assessed. And a grade against an
+   * invented key can never certify (`unauthoredKeyGrades` →
+   * `unverifiedReason: 'invented-key'`), so the model's item here buys no
+   * mastery path — only the risk of a wrong key. The lesson still closes
+   * through `conceptBudget` exactly as it does today.
+   *
+   * Optional and defaulting to false: every existing caller keeps its exact
+   * prior behaviour.
+   */
+  authoredPoolExhausted?: boolean
 }
 
 export function decideModelProbe(input: ModelProbeInput): ModelProbeDecision {
@@ -160,6 +193,7 @@ export function decideModelProbe(input: ModelProbeInput): ModelProbeDecision {
   // Ordered so the STRONGEST evidence decides first: knowing a reviewed item
   // is available beats inferring from the gate's refusal.
   if (input.authoredProbesExist === true) return { serve: false, reason: 'authored-probes-exist' }
+  if (input.authoredPoolExhausted) return { serve: false, reason: 'authored-pool-exhausted' }
   if (input.gateDeclinedByPolicy) return { serve: false, reason: 'gate-declined-by-policy' }
   return { serve: true, reason: 'served-no-alternative' }
 }

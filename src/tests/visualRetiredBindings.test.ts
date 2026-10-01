@@ -24,7 +24,7 @@ const ask = (conceptId: string, message = 'explain with diagram') =>
   resolveVisual({ message, lessonConceptId: conceptId, learnerRequest: 'diagram' })
 
 describe('the register itself', () => {
-  it('covers exactly the 37 audited concepts', () => {
+  it('covers exactly the 15 audited concepts', () => {
     // 29 from the M3-A audit + 8 from the visual semantic moat sweep, which
     // ran the resolver over all 238 physics and 186 chemistry concepts and
     // read all 105 bindings that render.
@@ -35,7 +35,26 @@ describe('the register itself', () => {
     // 8 that remain depict the very position their concept exists to refute —
     // a perfect lattice for crystal DEFECTS, shell rings for ORBITALS, a
     // covalent bond for INTERmolecular forces — which no wording can fix.
-    expect(RETIRED).toHaveLength(37)
+    //
+    // 18 bio.cell concepts (the original 12 plus 6 more found by the
+    // 2026-09-24 Biology visual coverage inventory) passed through this
+    // register too, but are GONE from it as of the 2026-09-24 Biology cell
+    // visual replacement campaign: each now has its own faithful, concept-
+    // specific Tier 0 scene (see bioCellVisualReplacement.test.ts), so the
+    // entries were removed rather than kept as permanently-unreachable dead
+    // suppressions — exactly the documented lifecycle in retired.ts's own
+    // top-of-file comment ("a later milestone can replace an entry with a
+    // faithful figure"). 43 - 18 = 25.
+    // 25 -> 24 (2026-09-30): phys.opt.reflection was removed from the register once it owned
+    // a faithful incident/normal/equal-angles figure (physicsCoreScenesBatch1.test.ts).
+    // 24 -> 22 (2026-09-30): phys.em.rc-circuits and phys.em.ac-basics were removed once they
+    // owned faithful figures (physicsCoreScenesBatch4.test.ts).
+    // 22 -> 20 (2026-09-30): phys.mech.rolling-motion and phys.mech.keplers-laws were removed once
+    // they owned faithful figures (physicsCoreScenesBatch7.test.ts).
+    // 20 -> 15 (2026-09-30): the last five physics circuit concepts (wheatstone-bridge, potentiometer,
+    // self-inductance, mutual-inductance, lc-circuits) left once they owned faithful figures
+    // (physicsCoreScenesBatch9.test.ts). Only chemistry and CS rows remain.
+    expect(RETIRED).toHaveLength(15)
   })
 
   it('every retired id is a real KG concept — a typo would silently retire nothing', () => {
@@ -82,7 +101,11 @@ describe('every retired concept resolves to NO FIGURE', () => {
     // The register sits ahead of every tier, so retirement survives the curated
     // row, the domain-prefix rule AND the scene generator. These three cover one
     // retired concept from each of those sources.
-    for (const id of ['phys.em.lc-circuits', 'bio.cell.apoptosis', 'phys.mech.keplers-laws', 'phys.opt.reflection']) {
+    // phys.mech.keplers-laws was the scene-generator case until 2026-09-30, when it
+    // left the register with its own figure; no retired concept keeps a generator
+    // binding now. Retirement beating a generator stays covered by the injected
+    // replacement in visualRetirementLifecycle.test.ts.
+    for (const id of ['chem.solid.defects', 'chem.bond.ionic-bonding', 'cs.algo.flowcharts', 'chem.atomic.orbitals']) {
       expect(ask(id).graphical, id).toBe(false)
     }
   })
@@ -90,9 +113,12 @@ describe('every retired concept resolves to NO FIGURE', () => {
   it('a retired concept stays retired however the learner phrases the request', () => {
     for (const message of [
       'draw it', 'show me a diagram', 'visualise this', 'can I see a picture',
-      'explain differently with a ray diagram and a mirror',
+      'explain differently with a lattice diagram',
     ]) {
-      expect(ask('phys.opt.reflection', message).graphical, message).toBe(false)
+      // phys.opt.reflection, then phys.em.potentiometer, were this test's example
+      // until each got its own faithful figure (2026-09-30); crystal defects is
+      // still retired.
+      expect(ask('chem.solid.defects', message).graphical, message).toBe(false)
     }
   })
 })
@@ -152,8 +178,24 @@ describe('B1 changed only what it was meant to change', () => {
       'phys.wave.interference',
     ]) {
       const d = ask(id, 'explain with a ray diagram, like a mirror')
-      expect(d.graphical, id).toBe(false)
-      expect(d.asset, id).toBeNull()
+      // Since 2026-09-30 a request that names rays can legitimately excurse to
+      // Nature of Light, which now has its own figure. What this guards is
+      // unchanged: the LESSON's own figure is never served for a request about
+      // something else.
+      expect(d.asset?.conceptId ?? null, id).not.toBe(id)
     }
   })
 })
+
+/**
+ * The 18 bio.cell concepts formerly retired here (the original 12, plus 6
+ * more found by the 2026-09-24 Biology visual coverage inventory) were REMOVED
+ * from RETIRED_VISUAL_BINDINGS by the 2026-09-24 Biology cell visual
+ * replacement campaign, once each had its own faithful, concept-specific
+ * Tier 0 scene — exactly the "a later milestone can replace an entry with a
+ * faithful figure" lifecycle this file's own top-of-file comment describes.
+ * Their full coverage (not-retired, resolves to the new scene, food_chain
+ * structurally unreachable, the bio.eco domain default and mitosis/meiosis
+ * unaffected) now lives in bioCellVisualReplacement.test.ts, which supersedes
+ * the two describe blocks that used to be here.
+ */

@@ -36,8 +36,9 @@ describe('scope is decided by provenance and audit, never by words', () => {
   })
 
   it('an audited-insufficient asset is demoted regardless of provenance', () => {
-    expect(scopeForAsset('curated', 'phys.therm.carnot-cycle')).toBe('domain')
-    expect(scopeForAsset('generator-default', 'phys.opt.refraction')).toBe('domain')
+    // (phys.therm.carnot-cycle was the curated example until physics batch 15, 2026-09-30.)
+    expect(scopeForAsset('curated', 'chem.bond.hybridization')).toBe('domain')
+    expect(scopeForAsset('generator-default', 'phys.wave.shm-energy')).toBe('domain')
   })
 
   it('every audited-insufficient id is a real KG concept', () => {
@@ -107,8 +108,10 @@ describe('a domain illustration cannot claim to be the concept', () => {
 
   it('an audited-insufficient curated card is demoted in the contract too', () => {
     // The Carnot cycle was rendering an EMPTY coordinate plane while the
-    // contract introduced it as "a figure of the Carnot Cycle".
-    const block = contract('phys.therm.carnot-cycle')
+    // contract introduced it as "a figure of the Carnot Cycle" — it now owns an
+    // authored cycle (physics batch 15, 2026-09-30). chem.bond.hybridization is
+    // still an audited-insufficient curated card (sp3 only), so it stands in.
+    const block = contract('chem.bond.hybridization')
     expect(block).toContain('GENERAL ILLUSTRATION')
     expect(block).not.toContain('the figure leads, the words support it')
   })
@@ -146,7 +149,9 @@ describe('the three acceptable states, and nothing else', () => {
   })
 
   it('a concept that genuinely has no asset still receives no figure', () => {
-    const d = ask('phys.mech.kinetic-energy')
+    // (phys.mech.kinetic-energy was this example until physics batch 2, and
+    // phys.stat.ising-model until batch 12, 2026-09-30.)
+    const d = ask('eng.phonics.rhyming')
     expect(d.graphical).toBe(false)
     expect(d.asset).toBeNull()
     expect(buildVisualContractBlock(d)).toContain('NO FIGURE IS ATTACHED')
@@ -155,7 +160,11 @@ describe('the three acceptable states, and nothing else', () => {
   it('a retired binding is still not a domain illustration in disguise', () => {
     // B1 retirement outranks scope: the asset depicted a different situation,
     // so it must not come back as "a general illustration" either.
-    for (const id of ['bio.cell.apoptosis', 'cs.found.number-systems', 'phys.opt.reflection']) {
+    // (bio.cell.apoptosis was retired here until the 2026-09-24 Biology cell
+    // visual replacement gave it its own faithful Tier 0 scene — see
+    // bioCellVisualReplacement.test.ts; chem.bond.ionic-bonding is still
+    // retired and stands in its place as this test's biology-adjacent example.)
+    for (const id of ['chem.bond.ionic-bonding', 'cs.found.number-systems', 'chem.solid.defects']) {
       expect(ask(id).graphical, id).toBe(false)
     }
   })

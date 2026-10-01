@@ -48,29 +48,32 @@ const OPENROUTER_MODEL = process.env.OPENROUTER_MODEL ?? 'deepseek/deepseek-chat
 // Gemini+OpenRouter outage together doesn't take teaching turns down.
 const GROQ_API_KEY = process.env.GROQ_API_KEY ?? ''
 /**
- * `openai/gpt-oss-20b` is THE Groq model, always (2026-09-08, explicit owner
- * instruction: "set groq gpt 20b as default to use always, remove gpt 120b").
- * gpt-oss-120b is removed from this file entirely — it is no longer the
- * default, no longer a named identifier, and no longer selectable through the
- * certification override, so no request can route a teaching turn to it.
+ * `openai/gpt-oss-120b` is THE Groq model, always (2026-09-21, explicit owner
+ * instruction: "set gpt 120b"). 20b is no longer the default; it remains
+ * selectable ONLY through the certification override below (GROQ_MODEL_20B /
+ * GROQ_CERT_MODEL_ALLOWLIST), never as the value an ordinary learner gets.
  *
- * History, kept because the reasoning is evidence and the decision reversed
- * twice: 20b was made the default on 2026-08-21 after a production A/B test on
- * the identical 12-concept chemistry certification batch — 10/12 PASS on both
- * models, same failure count, same failure class, on a different concept per
- * model, i.e. no measurable quality difference at n=12, with 20b measuring
- * 51.4% cheaper on the real tokens consumed ($0.0774 vs $0.1593 for that
- * batch). It was flipped to 120b on 2026-09-06 by owner instruction, and is
- * flipped back here by the instruction above.
+ * History, kept because the reasoning is evidence and this toggle has now
+ * flipped three times by direct owner instruction: 20b was made the default
+ * on 2026-08-21 after a production A/B test on the identical 12-concept
+ * chemistry certification batch — 10/12 PASS on both models, same failure
+ * count, same failure class, on a different concept per model, i.e. no
+ * measurable quality difference at n=12, with 20b measuring 51.4% cheaper on
+ * the real tokens consumed ($0.0774 vs $0.1593 for that batch). It was
+ * flipped to 120b on 2026-09-06, flipped back to 20b on 2026-09-08 ("set groq
+ * gpt 20b as default to use always, remove gpt 120b"), and is flipped back to
+ * 120b here by the 2026-09-21 instruction above. No new A/B evidence
+ * accompanied this instruction — if quality/cost is ever in question again,
+ * re-run the same certification-batch comparison rather than assuming either
+ * direction's prior numbers still hold.
  *
  * `GROQ_MODEL` remains an env-level override so a future model can be adopted
  * without a deploy. It is set by the owner on the deployment, never by a
- * request — the request-level path is the allowlist below, which now contains
- * this model alone.
+ * request — the request-level path is the allowlist below.
  */
-const GROQ_MODEL = process.env.GROQ_MODEL ?? 'openai/gpt-oss-20b'
-/** The one Groq model. Named so the string is not duplicated between the
- *  default above and the certification allowlist below. */
+const GROQ_MODEL = process.env.GROQ_MODEL ?? 'openai/gpt-oss-120b'
+/** The smaller Groq model — no longer the default (see GROQ_MODEL above), but
+ *  kept as a named identifier for the certification override allowlist. */
 export const GROQ_MODEL_20B = 'openai/gpt-oss-20b'
 
 /** The teaching language the learner selected. This is the ONLY routing signal. */
@@ -143,17 +146,18 @@ export function isGeminiOnlyMode(): boolean {
  * never arbitrary provider config.
  *
  * `openai/gpt-oss-120b` re-added 2026-09-17, PER-REQUEST ONLY, for a direct
- * owner-requested Groq-vs-Gemini model comparison — this does NOT touch
- * `GROQ_MODEL` above, so the live production default for every ordinary
- * learner stays `openai/gpt-oss-20b`, exactly per the 2026-09-08 decision
- * ("set groq gpt 20b as default to use always, remove gpt 120b"). That
- * decision is about the DEFAULT every learner gets; this is the same
- * request-scoped, DB-flag-gated testing lane `GROQ_MODEL_20B` has always
- * used for A/B certification, now carrying a second option. Given the
- * documented history of this exact toggle flip-flopping by direct owner
- * instruction (20b -> 120b on 2026-09-06 -> 20b again on 2026-09-08), any
- * future request to change the DEFAULT (not just this per-request lane)
- * should be confirmed explicitly before editing `GROQ_MODEL` above.
+ * owner-requested Groq-vs-Gemini model comparison. On 2026-09-21 the owner
+ * separately instructed the DEFAULT itself changed to 120b (see `GROQ_MODEL`
+ * above) — so as of that change 120b is BOTH the default every ordinary
+ * learner gets AND still selectable here, and `GROQ_MODEL_20B` is now the
+ * one that only reaches a request through this allowlist. This gate's own
+ * mechanics (closed 2-value list, DB-flag-gated, request-scoped, never
+ * shared-router state) are unchanged by which value happens to be the
+ * current default. Given the documented history of this exact toggle
+ * flip-flopping by direct owner instruction (20b -> 120b on 2026-09-06 -> 20b
+ * on 2026-09-08 -> 120b on 2026-09-21), any future request to change the
+ * DEFAULT (not just this per-request lane) should be confirmed explicitly
+ * before editing `GROQ_MODEL` above.
  */
 const GROQ_MODEL_120B = 'openai/gpt-oss-120b'
 const GROQ_CERT_MODEL_ALLOWLIST = [GROQ_MODEL_20B, GROQ_MODEL_120B]

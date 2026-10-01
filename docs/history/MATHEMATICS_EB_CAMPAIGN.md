@@ -5477,3 +5477,1255 @@ math.opt.quadratic-programming/semidefinite-programming/stochastic-gradient,
 math.prob.characteristic-function/joint-distribution,
 math.stats.normal-distribution/percentile/sampling-distribution. Campaign continues under the
 same active `/loop`.
+
+### Batch 188 (2026-09-19) — zero discrepancy, both `math.top` concepts
+
+Authored `fundamental-group` (loop homotopy shown to require the basepoint fixed at every
+intermediate stage via the rotating-loop-on-$S^1$ counterexample; concatenation associativity
+shown to hold only up to based homotopy via the differing-breakpoint-schedule reparametrization
+argument; "simply connected" shown to rule out only loop-detectable holes via the
+$\pi_1(S^1)$-versus-$\pi_1(S^2)$ contrast) and `homotopy-equivalence` (homotopy equivalence shown
+strictly weaker than homeomorphism via $[0,1]\simeq\{0\}\not\cong\{0\}$; deformation retracts shown
+to require checking both directions via $\mathbb R^2\setminus\{0\}\simeq S^1$; contractibility
+shown logically independent of compactness via the $\mathbb R^n$/$S^n$/$D^2$ table). Both had zero
+Blueprint/KG discrepancy; `math.abst.group-theory` independently re-confirmed authored. Mathematics
+**771/908** (769→771), 137 remaining. Full per-concept detail in `COVERAGE.md` Batch 188.
+Validated: KG validator PASS (908/908 reachable, file untouched), `scripts/math/state.ts` confirms
+mathematics 771/908 (13 EB-certified domains unchanged), `tsc --noEmit` clean, targeted
+EB/curriculum tests (7 files) 561/561 passed. No Physics/Chemistry/English/Biology/CS/KG/
+Blueprint/runtime file touched. Commit `bf95b0b` on `main`, pushed directly (no upstream
+divergence this batch).
+
+Fresh frontier recomputed for Batch 189 (27 concepts): math.cat.morphism-types/
+natural-transformation, math.top.covering-space/simplicial-complex/smooth-manifold/van-kampen
+(covering-space/van-kampen newly unlocked), plus math.cx.complex-numbers-analysis,
+math.de.systems-matrix-method, math.fnal.convolution, math.fnal.normed-space,
+math.graph.random-graph, math.linalg.jordan-form/matrix-exponential/matrix-representation/tensor,
+math.num.floating-point/interpolation/qr-algorithm/root-finding,
+math.opt.quadratic-programming/semidefinite-programming/stochastic-gradient,
+math.prob.characteristic-function/joint-distribution,
+math.stats.normal-distribution/percentile/sampling-distribution. Campaign continues under the
+same active `/loop`.
+
+### Batch 189 (2026-09-19) — one wrong-corpus cross-link discrepancy
+
+Authored `covering-space` ("evenly covered" shown to require disjoint homeomorphic copies via the
+precise covering-map unpacking; the universal cover shown special via a finite-sheeted-covering
+nontrivial-loop contrast; the Galois correspondence shown a precise bijection via a specific
+subgroup-to-covering pairing) and `smooth-manifold` (a smooth atlas shown to require smooth
+transition maps, never smooth charts, via $S^n$'s stereographic verification; tangent vectors
+shown as intrinsic derivations via the $p=0\in\mathbb R^n$ construction; smooth structures shown
+not always unique via exotic $\mathbb R^4$/$S^7$). `covering-space` had a wrong-corpus cross-link
+discrepancy: its Blueprint's `math.cx.riemann-surface` authorship check pointed at the blueprints
+directory rather than the EB corpus; independently re-verified NOT yet authored in the EB corpus —
+transfer probe downgraded to independence mode, the ninth such wrong-corpus discrepancy this
+campaign. `smooth-manifold` had zero discrepancy; both
+`math.geom.differential-geometry-curves`/`math.real.differentiability-rigorous` independently
+re-confirmed authored. Mathematics **773/908** (771→773), 135 remaining. Full per-concept detail
+in `COVERAGE.md` Batch 189. Validated: KG validator PASS (908/908 reachable, file untouched),
+`scripts/math/state.ts` confirms mathematics 773/908 (13 EB-certified domains unchanged), `tsc
+--noEmit` clean, targeted EB/curriculum tests (7 files) 561/561 passed. No Physics/Chemistry/
+English/Biology/CS/KG/Blueprint/runtime file touched. Commit `002cda1` on `main`, pushed directly
+(no upstream divergence this batch).
+
+Fresh frontier recomputed for Batch 190 (25 concepts): math.cat.morphism-types/
+natural-transformation, math.top.simplicial-complex/van-kampen (math.top narrowed to its final two
+unauthored concepts), plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution, math.fnal.normed-space, math.graph.random-graph,
+math.linalg.jordan-form/matrix-exponential/matrix-representation/tensor,
+math.num.floating-point/interpolation/qr-algorithm/root-finding,
+math.opt.quadratic-programming/semidefinite-programming/stochastic-gradient,
+math.prob.characteristic-function/joint-distribution,
+math.stats.normal-distribution/percentile/sampling-distribution. Campaign continues under the
+same active `/loop`.
+
+### Batch 190 (2026-09-19) — zero discrepancy, completes math.top domain's reachable frontier
+
+Authored `simplicial-complex` (face-closure shown to require explicit listing via the 7-simplex
+face-closed collection; triangulation shown a chosen model via two different valid triangulations
+of the same square; the compact-manifold guarantee shown scoped via the $S^2$-versus-half-plane
+contrast) and `van-kampen` (hypotheses shown to require verification via the wedge-of-circles
+open-neighborhood enlargement; simply connected intersection shown to collapse to a free product
+via $\pi_1(S^1\vee S^1)\cong\mathbb Z*\mathbb Z$; nontrivial intersection shown to genuinely
+change the computation via the two-tori amalgamation). Both had zero Blueprint/KG discrepancy.
+Mathematics **775/908** (773→775), 133 remaining. This batch completes `math.top`'s entire
+currently-reachable frontier — only `math.top.homology` (now reachable) and its downstream
+`math.top.euler-characteristic`/`math.top.cohomology` remain unauthored in the domain. Full
+per-concept detail in `COVERAGE.md` Batch 190. Validated: KG validator PASS (908/908 reachable,
+file untouched), `scripts/math/state.ts` confirms mathematics 775/908 (13 EB-certified domains
+unchanged), `tsc --noEmit` clean, targeted EB/curriculum tests (7 files) 561/561 passed. No
+Physics/Chemistry/English/Biology/CS/KG/Blueprint/runtime file touched. Commit `6155c44` on
+`main`, pushed directly (no upstream divergence this batch).
+
+Fresh frontier recomputed for Batch 191 (24 concepts): math.cat.morphism-types/
+natural-transformation, math.top.homology (newly unlocked), plus
+math.cx.complex-numbers-analysis, math.de.systems-matrix-method, math.fnal.convolution,
+math.fnal.normed-space, math.graph.random-graph, math.linalg.jordan-form/matrix-exponential/
+matrix-representation/tensor, math.num.floating-point/interpolation/qr-algorithm/root-finding,
+math.opt.quadratic-programming/semidefinite-programming/stochastic-gradient,
+math.prob.characteristic-function/joint-distribution,
+math.stats.normal-distribution/percentile/sampling-distribution. Campaign continues under the
+same active `/loop`.
+
+### Batch 191 (2026-09-19) — zero discrepancy
+
+Authored `homology` (H₀ counts components not simplex tallies via two-disjoint-triangles; H₁'s
+class depends on 2-simplex presence via filled-vs-hollow-triangle; homology is one-directional
+via point-vs-disc) and `morphism-types` (mono/epi via cancellation, never elements; mono=injective
+in Set proven via one-point-set trick, not definitional; mono+epi doesn't always imply iso, via
+ℤ↪ℚ). Both zero discrepancy. Mathematics **777/908** (775→777), 131 remaining. Full detail in
+`COVERAGE.md` Batch 191. Validated: KG PASS, state.ts 777/908, tsc clean, tests 561/561. Commit
+`e7b84c5`, pushed.
+
+Fresh frontier for Batch 192 (24 concepts): math.cat.natural-transformation,
+math.top.cohomology/euler-characteristic, plus math.cx.complex-numbers-analysis,
+math.de.systems-matrix-method, math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.jordan-form/matrix-exponential/matrix-representation/tensor,
+math.num.floating-point/interpolation/qr-algorithm/root-finding,
+math.opt.quadratic-programming/semidefinite-programming/stochastic-gradient,
+math.prob.characteristic-function/joint-distribution,
+math.stats.normal-distribution/percentile/sampling-distribution. Campaign continues under the
+same active `/loop`.
+
+### Batch 192 (2026-09-19) — one reverse-direction discrepancy
+
+Authored `euler-characteristic` (χ=2 only for S²-topology via cube-vs-torus; same χ never implies
+homeomorphic via torus-vs-Klein-bottle orientability) and `natural-transformation` (arbitrary
+families aren't automatically natural via the basis-dependent counterexample; naturality holds
+for ALL morphisms). `euler-characteristic` had a reverse-direction discrepancy: its cross-link
+math.disc.planar-graph, unauthored at write-time, is now authored — upgraded to a genuine
+cross-link probe (sixth such this campaign). `natural-transformation` zero discrepancy.
+Mathematics **779/908** (777→779), 129 remaining. This completes math.top except cohomology.
+Validated: KG PASS, state.ts 779/908, tsc clean, tests 561/561. Commit `43f3ce1`, pushed.
+
+Fresh frontier for Batch 193 (25 concepts): math.cat.adjunction/functor-category/limits (newly
+unlocked), plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.jordan-form/matrix-exponential/matrix-representation/tensor,
+math.num.floating-point/interpolation/qr-algorithm/root-finding,
+math.opt.quadratic-programming/semidefinite-programming/stochastic-gradient,
+math.prob.characteristic-function/joint-distribution,
+math.stats.normal-distribution/percentile/sampling-distribution, math.top.cohomology. Campaign
+continues under the same active `/loop`.
+
+### Batch 193 (2026-09-19) — zero discrepancy
+
+Authored `jordan-form` (superdiagonal 1's, never subdiagonal; geometric multiplicity=block count,
+algebraic=total size) and `matrix-exponential` (e^D entries are e^λᵢ; e^{At} is genuinely
+t-dependent, never t·e^A). Both zero discrepancy. Mathematics **781/908** (779→781), 127
+remaining. Full detail in `COVERAGE.md` Batch 193. Validated: KG PASS, state.ts 781/908, tsc
+clean, tests 561/561. Commit `0f3b275`, pushed.
+
+Fresh frontier for Batch 194 (23 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.floating-point/interpolation/qr-algorithm/
+root-finding, math.opt.quadratic-programming/semidefinite-programming/stochastic-gradient,
+math.prob.characteristic-function/joint-distribution,
+math.stats.normal-distribution/percentile/sampling-distribution. Campaign continues under the
+same active `/loop`.
+
+### Batch 194 (2026-09-19) — one stale-metadata discrepancy (unlocks)
+
+Authored `floating-point` (never exact; small-into-large absorption; cancellation destroys
+relative accuracy) and `root-finding` (bisection is IVT made algorithmic; Newton has real failure
+modes; secant is superlinear, not quadratic). `root-finding` had a stale-metadata discrepancy:
+Blueprint claims no unlocks, live KG shows math.num.newtons-method — live KG adopted, confirmed
+unauthored. `floating-point` zero discrepancy. Mathematics **783/908** (781→783), 125 remaining.
+Full detail in `COVERAGE.md` Batch 194. Validated: KG PASS, state.ts 783/908, tsc clean, tests
+561/561. Commit `b2c63ad`, pushed.
+
+Fresh frontier for Batch 195 (23 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/interpolation/newtons-method/
+qr-algorithm, math.opt.quadratic-programming/semidefinite-programming/stochastic-gradient,
+math.prob.characteristic-function/joint-distribution,
+math.stats.normal-distribution/percentile/sampling-distribution. Campaign continues under the
+same active `/loop`.
+
+### Batch 195 (2026-09-19) — zero discrepancy
+
+Authored `normal-distribution` (68-95-99.7 pairing fixed; failing-to-reject ≠ proof; CLT rescues
+sample mean regardless of population shape) and `percentile` (percentile rank ≠ raw score; Q2 IS
+median; IQR robust to outliers). Both zero discrepancy. Mathematics **785/908** (783→785), 123
+remaining. Full detail in `COVERAGE.md` Batch 195. Validated: KG PASS, state.ts 785/908, tsc
+clean, tests 561/561. Commit `cdf4f0e`, pushed.
+
+Fresh frontier for Batch 196 (22 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/interpolation/newtons-method/
+qr-algorithm, math.opt.quadratic-programming/semidefinite-programming/stochastic-gradient,
+math.prob.characteristic-function/joint-distribution,
+math.stats.normal-approximation/sampling-distribution. Campaign continues under the same active
+`/loop`.
+
+### Batch 196 (2026-09-19) — zero discrepancy
+
+Authored `quadratic-programming` (QP convex only if Q⪰0; KKT sufficient only when convex; LS is
+QP's unconstrained special case) and `stochastic-gradient` (SGD unbiased despite high variance;
+constant LR leaves permanent noise floor; batch size independent of N). Both zero discrepancy.
+Mathematics **787/908** (785→787), 121 remaining. Full detail in `COVERAGE.md` Batch 196.
+Validated: KG PASS, state.ts 787/908, tsc clean, tests 561/561. Commit `0d635c4`, pushed.
+
+Fresh frontier for Batch 197 (20 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/interpolation/newtons-method/
+qr-algorithm, math.opt.semidefinite-programming, math.prob.characteristic-function/
+joint-distribution, math.stats.normal-approximation/sampling-distribution. Campaign continues
+under the same active `/loop`.
+
+### Batch 197 (2026-09-19) — one wrong-corpus cross-link discrepancy
+
+Authored `characteristic-function` (t→it guarantees always-existence via Euler's formula; φ_X IS
+the Fourier transform applied to a density; always-exists makes uniqueness usable for heavy tails)
+and `joint-distribution` (marginals require genuine sum/integral, never a single cell; bounds must
+match actual support; marginals alone never determine the joint). `characteristic-function` had a
+wrong-corpus cross-link discrepancy: math.fnal.fourier-transform check pointed at blueprints dir,
+not EB corpus — downgraded to independence mode (tenth such this campaign). `joint-distribution`
+zero discrepancy. Mathematics **789/908** (787→789), 119 remaining. Full detail in `COVERAGE.md`
+Batch 197. Validated: KG PASS, state.ts 789/908, tsc clean, tests 561/561. Commit `6a8d0f1`,
+pushed.
+
+Fresh frontier for Batch 198 (21 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/interpolation/newtons-method/
+qr-algorithm, math.opt.semidefinite-programming, math.prob.conditional-distribution/covariance/
+marginal-distribution, math.stats.normal-approximation/sampling-distribution. Campaign continues
+under the same active `/loop`.
+
+### Batch 198 (2026-09-19) — zero discrepancy
+
+Authored `covariance` (sign flips predictably with pairing; zero covariance never implies
+independence; shortcut needs genuine marginals) and `conditional-distribution` (conditional
+distribution IS conditional probability applied to a distribution; normalization guaranteed;
+conditional expectation can differ from marginal). Both zero discrepancy. Mathematics **791/908**
+(789→791), 117 remaining. Full detail in `COVERAGE.md` Batch 198. Validated: KG PASS, state.ts
+791/908, tsc clean, tests 561/561. Commit `c578e74`, pushed.
+
+Fresh frontier for Batch 199 (22 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/interpolation/newtons-method/
+qr-algorithm, math.opt.semidefinite-programming, math.prob.conditional-expectation/correlation/
+marginal-distribution, math.stats.covariance-matrix/normal-approximation/sampling-distribution.
+Campaign continues under the same active `/loop`.
+
+### Batch 199 (2026-09-19) — zero discrepancy
+
+Authored `sampling-distribution` (population/sample-data/sampling-distribution are three distinct
+objects; SE scales as σ/√n; halving SE requires quadrupling n) and `normal-approximation`
+(binomial uses full np/np(1-p); Poisson uses same λ for both parameters; continuity correction
+genuinely matters). Both zero discrepancy. Mathematics **793/908** (791→793), 115 remaining. Full
+detail in `COVERAGE.md` Batch 199. Validated: KG PASS, state.ts 793/908, tsc clean, tests
+561/561. Commit `2cd2750`, pushed.
+
+Fresh frontier for Batch 200 (24 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/interpolation/newtons-method/
+qr-algorithm, math.opt.semidefinite-programming, math.prob.conditional-expectation/correlation/
+marginal-distribution, math.stats.confidence-interval/covariance-matrix/estimator/
+hypothesis-testing/standard-error. Campaign continues under the same active `/loop`.
+
+### Batch 200 (2026-09-19) — zero discrepancy — MILESTONE: 200 batches, 795/908
+
+Authored `standard-error` (SE divides by √n, never n; quadrupling n halves SE; SE is the sampling
+distribution's own spread) and `estimator` (estimator is a rule, estimate is its output;
+unbiasedness must be verified, never assumed; unbiasedness and consistency are independent). Both
+zero discrepancy. Mathematics **795/908** (793→795), 113 remaining. Full detail in `COVERAGE.md`
+Batch 200. Validated: KG PASS, state.ts 795/908, tsc clean, tests 561/561. Commit `34abbd5`,
+pushed.
+
+Fresh frontier for Batch 201 (27 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/interpolation/newtons-method/
+qr-algorithm, math.opt.semidefinite-programming, math.prob.conditional-expectation/correlation/
+marginal-distribution, math.stats.bias-variance/confidence-interval/consistency/
+covariance-matrix/hypothesis-testing/method-of-moments/mle/sufficient-statistic. Campaign
+continues under the same active `/loop`.
+
+## Batch 201 (2026-09-19)
+
+Authored `confidence-interval` (CI assembles two known facts — the normal's z=1.96, the sampling
+distribution's standard error; 95% confidence describes the construction procedure, never this
+one fixed interval; unknown σ needs a wider t-based interval, never the same z-formula with s
+substituted) and `hypothesis-testing` (p-value is P(data|H0), never P(H0|data) — a specific
+instance of the general P(A|B)≠P(B|A) warning; fail-to-reject means insufficient evidence, never
+proof; Type I/Type II errors trade off, never both reduced by α alone). Both zero discrepancy.
+Mathematics **797/908** (795→797), 111 remaining. Full detail in `COVERAGE.md` Batch 201.
+Validated: KG PASS, state.ts 797/908, tsc clean, tests 561/561. Commit `d0330a6`, pushed.
+
+Fresh frontier for Batch 202 (34 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/interpolation/newtons-method/
+qr-algorithm, math.opt.semidefinite-programming, math.prob.conditional-expectation/correlation/
+marginal-distribution, math.stats.anova/bias-variance/chi-squared-test/ci-mean/ci-proportion/
+consistency/covariance-matrix/method-of-moments/mle/nonparametric/sufficient-statistic/
+test-statistic/type-errors/t-test/z-test. Campaign continues under the same active `/loop`.
+
+## Batch 202 (2026-09-19)
+
+Authored `newtons-method` (iteration is the tangent line's x-intercept; convergence never
+unconditional — zero derivative, bad start, or multiple root each break it; linear convergence is
+slower, never useless) and `interpolation` (Lagrange basis terms are engineered indicators, never
+arbitrary; interpolation IS a Vandermonde linear system; Runge's phenomenon — more points can
+worsen the edge fit). `interpolation`'s Blueprint claimed unlocks:none; live KG has
+unlocks:[math.num.splines] — corrected (11th discrepancy, 3rd stale-KG-metadata case).
+`newtons-method` zero discrepancy. Mathematics **799/908** (797→799), 109 remaining. Full detail
+in `COVERAGE.md` Batch 202. Validated: KG PASS, state.ts 799/908, tsc clean, tests 561/561.
+Commit `07ee8f4`, pushed.
+
+Fresh frontier for Batch 203 (34 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-integration/
+qr-algorithm/splines, math.opt.semidefinite-programming, math.prob.conditional-expectation/
+correlation/marginal-distribution, math.stats.anova/bias-variance/chi-squared-test/ci-mean/
+ci-proportion/consistency/covariance-matrix/method-of-moments/mle/nonparametric/
+sufficient-statistic/test-statistic/type-errors/t-test/z-test. Campaign continues under the same
+active `/loop`.
+
+## Batch 203 (2026-09-19)
+
+Authored `test-statistic` (evidential meaning comes from position relative to the null
+distribution, never a bare number; different tests use different reference distributions; more
+extreme statistic means smaller p-value, never larger) and `type-errors` (Type I/Type II occupy
+specific, non-interchangeable truth/decision cells, never swapped; decreasing α increases β for
+fixed n, never cost-free). Both zero discrepancy. Mathematics **801/908** (799→801), 107
+remaining. Full detail in `COVERAGE.md` Batch 203. Validated: KG PASS, state.ts 801/908, tsc
+clean, tests 561/561. Commit `e3797e0`, pushed.
+
+Fresh frontier for Batch 204 (34 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-integration/
+qr-algorithm/splines, math.opt.semidefinite-programming, math.prob.conditional-expectation/
+correlation/marginal-distribution, math.stats.anova/bias-variance/chi-squared-test/ci-mean/
+ci-proportion/consistency/covariance-matrix/method-of-moments/mle/nonparametric/p-value/power/
+sufficient-statistic/t-test/z-test. Campaign continues under the same active `/loop`.
+
+## Batch 204 (2026-09-19)
+
+Authored `p-value` (conditions on H0, computing a probability about the data, never the reverse;
+large p-value means insufficient evidence, never proof; never P(H0 true), a Bayesian quantity)
+and `power` (power is directly 1−β, never separate; every power-increasing factor has a genuine
+tradeoff, never cost-free; power analysis is pre-study planning, never post-hoc). Both zero
+discrepancy. Mathematics **803/908** (801→803), 105 remaining. Full detail in `COVERAGE.md`
+Batch 204. Validated: KG PASS, state.ts 803/908, tsc clean, tests 561/561. Commit `0fdb560`,
+pushed.
+
+Fresh frontier for Batch 205 (32 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-integration/
+qr-algorithm/splines, math.opt.semidefinite-programming, math.prob.conditional-expectation/
+correlation/marginal-distribution, math.stats.anova/bias-variance/chi-squared-test/ci-mean/
+ci-proportion/consistency/covariance-matrix/method-of-moments/mle/nonparametric/
+sufficient-statistic/t-test/z-test. Campaign continues under the same active `/loop`.
+
+## Batch 205 (2026-09-19)
+
+Authored `z-test` (requires σ genuinely known, never s substituted; one-tailed/two-tailed use
+different critical values, can flip the decision; known σ is rare) and `t-test` (unknown σ needs
+the t-distribution, never the normal's; paired data needs within-pair differences, never treated
+as independent groups; robustness to non-normality is a large-sample property). Both zero
+discrepancy. Mathematics **805/908** (803→805), 103 remaining. Full detail in `COVERAGE.md`
+Batch 205. Validated: KG PASS, state.ts 805/908, tsc clean, tests 561/561. Commit `7df4414`,
+pushed.
+
+Fresh frontier for Batch 206 (30 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-integration/
+qr-algorithm/splines, math.opt.semidefinite-programming, math.prob.conditional-expectation/
+correlation/marginal-distribution, math.stats.anova/bias-variance/chi-squared-test/ci-mean/
+ci-proportion/consistency/covariance-matrix/method-of-moments/mle/nonparametric/
+sufficient-statistic. Campaign continues under the same active `/loop`.
+
+## Batch 206 (2026-09-19)
+
+Authored `mle` (log first, never the raw product; setting score to zero and solving is the
+finish line, never the derivative alone; consistent, asymptotically normal, asymptotically
+efficient) and `sufficient-statistic` (θ drops out of the leftover conditional distribution,
+never about estimator accuracy; factorization is a shortcut, never the only test; sufficiency
+enables genuine estimator improvement, never just a label). Both zero discrepancy. Mathematics
+**807/908** (805→807), 101 remaining. Full detail in `COVERAGE.md` Batch 206. Validated: KG PASS,
+state.ts 807/908, tsc clean, tests 561/561. Commit `17ca302`, pushed.
+
+Fresh frontier for Batch 207 (29 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-integration/
+qr-algorithm/splines, math.opt.semidefinite-programming, math.prob.conditional-expectation/
+correlation/marginal-distribution, math.stats.anova/bayesian-inference/bias-variance/
+chi-squared-test/ci-mean/ci-proportion/consistency/covariance-matrix/method-of-moments/
+nonparametric. Campaign continues under the same active `/loop`.
+
+## Batch 207 (2026-09-19)
+
+Authored `consistency` (large-sample limit property, never fixed-n accuracy; sufficient
+condition needs both bias and variance to vanish, never one; sample mean's consistency IS the
+LLN) and `bias-variance` (bias and variance answer different questions, never conflated; MSE
+squares the bias, never a plain sum; unbiased is never automatically best). Both zero
+discrepancy. Mathematics **809/908** (807→809), 99 remaining. Full detail in `COVERAGE.md`
+Batch 207. Validated: KG PASS, state.ts 809/908, tsc clean, tests 561/561. Commit `ca23588`,
+pushed.
+
+Fresh frontier for Batch 208 (28 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-integration/
+qr-algorithm/splines, math.opt.semidefinite-programming, math.prob.conditional-expectation/
+correlation/marginal-distribution, math.stats.anova/bayesian-inference/chi-squared-test/ci-mean/
+ci-proportion/covariance-matrix/method-of-moments/nonparametric/rao-blackwell. Campaign
+continues under the same active `/loop`.
+
+## Batch 208 (2026-09-19)
+
+Authored `method-of-moments` (match order-k theoretical to order-k sample moment, never a
+mismatch; one equation per unknown, never fewer; simpler but less efficient than MLE — a
+fallback) and `rao-blackwell` (unbiased in, unbiased out — never fixes bias; no greater than
+includes equal, never guaranteed strict; Rao-Blackwellization is mechanical, never requiring fresh
+cleverness). Both zero discrepancy. Mathematics **811/908** (809→811), 97 remaining. Full detail
+in `COVERAGE.md` Batch 208. Validated: KG PASS, state.ts 811/908, tsc clean, tests 561/561.
+Commit `43f7413`, pushed.
+
+Fresh frontier for Batch 209 (26 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-integration/
+qr-algorithm/splines, math.opt.semidefinite-programming, math.prob.conditional-expectation/
+correlation/marginal-distribution, math.stats.anova/bayesian-inference/chi-squared-test/ci-mean/
+ci-proportion/covariance-matrix/nonparametric. Campaign continues under the same active `/loop`.
+
+## Batch 209 (2026-09-19)
+
+Authored `ci-mean` (z only when σ genuinely known, never a reflex to t; t with n−1 df when σ
+estimated, never z which understates uncertainty; width shrinks with n, grows with confidence —
+two separate effects) and `ci-proportion` (p̂(1−p̂)/n exactly, never p̂² or a missing n; both
+large-sample conditions checked together, never just one). Both zero discrepancy. Mathematics
+**813/908** (811→813), 95 remaining. Full detail in `COVERAGE.md` Batch 209. Validated: KG PASS,
+state.ts 813/908, tsc clean, tests 561/561. Commit `1fccd07`, pushed.
+
+Fresh frontier for Batch 210 (24 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-integration/
+qr-algorithm/splines, math.opt.semidefinite-programming, math.prob.conditional-expectation/
+correlation/marginal-distribution, math.stats.anova/bayesian-inference/chi-squared-test/
+covariance-matrix/nonparametric. Campaign continues under the same active `/loop`.
+
+## Batch 210 (2026-09-19)
+
+Authored `chi-squared-test` (square and divide each term, never a raw sum; goodness-of-fit and
+independence are different tests, never interchangeable; k−1 vs (r−1)(c−1), never swapped) and
+`covariance-matrix` (diagonal is the same covariance formula, never separate; symmetry is
+automatic, never imposed; PSD is derived from variance's nonnegativity, never separately
+checked). Both zero discrepancy. Mathematics **815/908** (813→815), 93 remaining. Full detail in
+`COVERAGE.md` Batch 210. Validated: KG PASS, state.ts 815/908, tsc clean, tests 561/561. Commit
+`d6c7080`, pushed.
+
+Fresh frontier for Batch 211 (23 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-integration/
+qr-algorithm/splines, math.opt.pca/semidefinite-programming, math.prob.conditional-expectation/
+correlation/marginal-distribution, math.stats.anova/bayesian-inference/nonparametric. Campaign
+continues under the same active `/loop`.
+
+## Batch 211 (2026-09-19)
+
+Authored `anova` (one combined test, never equivalent to pairwise t-tests; variance partition is
+guaranteed algebra, never coincidental; significant F proves something differs, never which pair)
+and `correlation` (ρ is scale-invariant, never a rescaled covariance; ρ=0 means uncorrelated,
+never independent; Var(X+Y) needs the covariance cross-term). `correlation`'s Blueprint declared
+a cross-link to `math.stats.correlation`, not yet authored — corrected to independence mode
+(12th discrepancy, new wrong-corpus-status variant). `anova` zero discrepancy. Mathematics
+**817/908** (815→817), 91 remaining. Full detail in `COVERAGE.md` Batch 211. Validated: KG PASS,
+state.ts 817/908, tsc clean, tests 561/561. Commit `54cd65a`, pushed.
+
+Fresh frontier for Batch 212 (24 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-integration/
+qr-algorithm/splines, math.opt.pca/semidefinite-programming, math.prob.conditional-expectation/
+marginal-distribution, math.stats.bayesian-inference/correlation/experimental-design/
+nonparametric/two-way-anova. Campaign continues under the same active `/loop`.
+
+## Batch 212 (2026-09-19)
+
+Authored `correlation` (r outside [−1,1] is an error, never valid; r sees only lines, never
+"no relationship" without a scatterplot check; correlation never implies causation) and
+`two-way-anova` (three separate hypotheses, never one combined test; interaction can mask a
+main effect, never safely ignored; blocking controls noise, never the research question). Both
+zero discrepancy. Mathematics **819/908** (817→819), 89 remaining. Full detail in `COVERAGE.md`
+Batch 212. Validated: KG PASS, state.ts 819/908, tsc clean, tests 561/561. Commit `655c3cd`,
+pushed.
+
+Fresh frontier for Batch 213 (23 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-integration/
+qr-algorithm/splines, math.opt.pca/semidefinite-programming, math.prob.conditional-expectation/
+marginal-distribution, math.stats.bayesian-inference/experimental-design/linear-regression/
+nonparametric. Campaign continues under the same active `/loop`.
+
+## Batch 213 (2026-09-19)
+
+Authored `linear-regression` (slope before intercept, never reversed; non-significant slope
+never means no relationship, only no linear one; high R² never validates assumptions) and
+`experimental-design` (randomization enables causal claims, never substitutable by observational
+data; blocking on known noise improves precision, never skippable; factorial designs capture
+interactions separate experiments miss). Both zero discrepancy. Mathematics **821/908**
+(819→821), 87 remaining. Full detail in `COVERAGE.md` Batch 213. Validated: KG PASS, state.ts
+821/908, tsc clean, tests 561/561. Commit `c37af86`, pushed.
+
+Fresh frontier for Batch 214 (22 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-integration/
+qr-algorithm/splines, math.opt.pca/semidefinite-programming, math.prob.conditional-expectation/
+marginal-distribution, math.stats.bayesian-inference/multiple-regression/nonparametric. Campaign
+continues under the same active `/loop`.
+
+## Batch 214 (2026-09-19) — MILESTONE: math.stats 37/40
+
+Authored `multiple-regression` ((XᵀX)⁻¹Xᵀy is a fixed sequence, never a shortcut; overall F and
+individual t answer different questions, never guaranteed to agree; multicollinearity breaks
+individual coefficients, never necessarily overall fit) and `nonparametric` (small/skewed favors
+nonparametric, never a reflexive t-test; test must match paired-vs-independent structure; ranks
+trade magnitude for robustness). Both zero discrepancy. Mathematics **823/908** (821→823), 85
+remaining. Only `bayesian-inference` remains reachable in math.stats (37/40 authored). Full
+detail in `COVERAGE.md` Batch 214. Validated: KG PASS, state.ts 823/908, tsc clean, tests
+561/561. Commit `4fd96e7`, pushed.
+
+Fresh frontier for Batch 215 (20 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-integration/
+qr-algorithm/splines, math.opt.pca/semidefinite-programming, math.prob.conditional-expectation/
+marginal-distribution, math.stats.bayesian-inference. Campaign continues under the same active
+`/loop`.
+
+## Batch 215 (2026-09-19)
+
+Authored `bayesian-inference` (Bayesian vs frequentist are genuinely different philosophies,
+never same notation; posterior is prior times likelihood, never either alone; credible vs
+confidence intervals are direct vs indirect) and `marginal-distribution` (joint recoverable from
+marginals only under independence; marginalization integrates over all values, never one;
+marginal ≠ conditional). Both zero discrepancy. Mathematics **825/908** (823→825), 83 remaining.
+Full detail in `COVERAGE.md` Batch 215. Validated: KG PASS, state.ts 825/908, tsc clean, tests
+561/561. Commit `c536875`, pushed.
+
+Fresh frontier for Batch 216 (20 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-integration/
+qr-algorithm/splines, math.opt.pca/semidefinite-programming, math.prob.conditional-expectation,
+math.stats.conjugate-prior/credible-interval. Campaign continues under the same active `/loop`.
+
+## Batch 216 (2026-09-19) — MILESTONE: math.stats fully EB-certified (14th domain)
+
+Authored `conjugate-prior` (successes to α, failures to β — never total trials; same family, new
+parameters; convenience-based selection is legitimate) and `credible-interval` (direct
+probability statement, never frequentist procedural language; credible ≠ confidence; HPD is
+narrowest, matches equal-tailed only when symmetric). Both zero discrepancy. Mathematics
+**827/908** (825→827), 81 remaining. **math.stats becomes the 14th fully EB-certified domain.**
+Full detail in `COVERAGE.md` Batch 216. Validated: KG PASS, state.ts 827/908 and 14 certified
+domains, tsc clean, tests 561/561. Commit `6f61553`, pushed.
+
+Fresh frontier for Batch 217 (18 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.error-analysis/numerical-integration/
+qr-algorithm/splines, math.opt.pca/semidefinite-programming, math.prob.conditional-expectation.
+Campaign continues under the same active `/loop`.
+
+## Batch 217 (2026-09-19)
+
+Authored `conditional-expectation` (E[X|Y] is a function of Y, never a single number; tower
+property is exact, never approximate; law of total variance reveals variance sources, never just
+a check) and `error-analysis` (roundoff/truncation are independent, never conflated; a tiny
+residual under a large κ is still a large forward error; backward error is often a simple
+residual, never requiring inversion). `error-analysis`'s Blueprint claimed 6 unlocks; live KG has
+none — corrected (13th discrepancy, 4th stale-KG-metadata case). `conditional-expectation` zero
+discrepancy. Mathematics **829/908** (827→829), 79 remaining. Full detail in `COVERAGE.md`
+Batch 217. Validated: KG PASS, state.ts 829/908, tsc clean, tests 561/561. Commit `35b5b91`,
+pushed.
+
+Fresh frontier for Batch 218 (21 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.euler-method/iterative-linear/
+lu-factorization/numerical-differentiation/numerical-integration/qr-algorithm/splines,
+math.opt.pca/semidefinite-programming, math.prob.martingale. Campaign continues under the same
+active `/loop`.
+
+## Batch 218 (2026-09-19)
+
+Authored `numerical-differentiation` (smaller h isn't always better — roundoff grows as h→0,
+U-shaped error curve; forward/central have different orders, never the same; Richardson
+extrapolation is a free two-order upgrade) and `lu-factorization` (forward before back
+substitution, never reversed; pivoting never optional; LU never equivalent to explicit A⁻¹).
+Both zero discrepancy. Mathematics **831/908** (829→831), 77 remaining. Full detail in
+`COVERAGE.md` Batch 218. Validated: KG PASS, state.ts 831/908, tsc clean, tests 561/561. Commit
+`71e235f`, pushed.
+
+Fresh frontier for Batch 219 (20 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.cholesky/euler-method/iterative-linear/
+numerical-integration/qr-algorithm/splines, math.opt.pca/semidefinite-programming,
+math.prob.martingale. Campaign continues under the same active `/loop`.
+
+## Batch 219 (2026-09-19)
+
+Authored `cholesky` (SPD is necessary, never symmetry alone; Cholesky is ⅓n³, half of LU, never
+the same; positive definite is about the quadratic form, never entries) and `euler-method` (local
+O(h²) vs global O(h), never confused; smaller h isn't always better — roundoff grows; oscillation
+means outside the stability region, never a broken method). Both zero discrepancy. Mathematics
+**833/908** (831→833), 75 remaining. Full detail in `COVERAGE.md` Batch 219. Validated: KG PASS,
+state.ts 833/908, tsc clean, tests 561/561. Commit `4b301b1`, pushed.
+
+Fresh frontier for Batch 220 (19 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.iterative-linear/numerical-integration/
+qr-algorithm/runge-kutta/splines, math.opt.pca/semidefinite-programming, math.prob.martingale.
+Campaign continues under the same active `/loop`.
+
+## Batch 220 (2026-09-19)
+
+Authored `numerical-integration` (more points isn't always better, never unlimited improvement;
+Trapezoid/Simpson's differ genuinely in order, never the same; midpoint rectangle is O(h²), never
+lumped with left/right) and `splines` (higher smoothness isn't always better, never default to
+max; splines avoid Runge's phenomenon via piecewise low degree; control points attract, never
+interpolate). Both zero discrepancy. Mathematics **835/908** (833→835), 73 remaining. Full detail
+in `COVERAGE.md` Batch 220. Validated: KG PASS, state.ts 835/908, tsc clean, tests 561/561.
+Commit `70e3af2`, pushed.
+
+Fresh frontier for Batch 221 (17 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.iterative-linear/qr-algorithm/runge-kutta,
+math.opt.pca/semidefinite-programming, math.prob.martingale. Campaign continues under the same
+active `/loop`.
+
+## Batch 221 (2026-09-19)
+
+Authored `qr-algorithm` (iterates QR factorization, never the same one-shot operation; individual
+Qₖ never the eigenvectors, only the accumulated product; shift never permanently changes
+eigenvalues) and `runge-kutta` (RK4 never exact, small O(h⁵) error still accumulates; more stages
+never always better — Butcher barrier; adaptive control never changes the method, only h). Both
+zero discrepancy. Mathematics **837/908** (835→837), 71 remaining. math.num now 13/16. Full
+detail in `COVERAGE.md` Batch 221. Validated: KG PASS, state.ts 837/908, tsc clean, tests
+561/561. Commit `3864726`, pushed.
+
+Fresh frontier for Batch 222 (17 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.iterative-linear/stiff-ode/svd,
+math.opt.pca/semidefinite-programming, math.prob.martingale. Campaign continues under the same
+active `/loop`.
+
+## Batch 222 (2026-09-19)
+
+Authored `svd` (never the same as eigendecomposition except symmetric PSD; truncated SVD is
+provably optimal via Eckart-Young, never heuristic loss; numerical rank always needs a threshold)
+and `iterative-linear` (never categorically slower than direct — fill-in makes direct infeasible
+on large sparse systems; Jacobi/GS never automatically converge; CG requires SPD, never applied
+indiscriminately). Both zero discrepancy. Mathematics **839/908** (837→839), 69 remaining.
+Correction: prior batch's commit message inaccurately claimed math.num was "complete (16/16)" —
+`state.ts` confirms math.num is actually **15/16** (`math.num.stiff-ode` remains). Full detail in
+`COVERAGE.md` Batch 222. Validated: KG PASS, state.ts 839/908, tsc clean, tests 561/561. Commit
+`2b60493`, pushed.
+
+Fresh frontier for Batch 223 (15 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.num.stiff-ode, math.opt.pca/
+semidefinite-programming, math.prob.martingale. Campaign continues under the same active
+`/loop`.
+
+## Batch 223 (2026-09-19) — MILESTONE: math.num fully EB-certified (15th domain)
+
+Authored `stiff-ode` (stiff means a specific eigenvalue-spread ratio, never a general synonym for
+"hard"; implicit methods win on stability, never accuracy; stiffness evolves along the trajectory,
+never a fixed global label) and `pca` (centering is required, never a minor detail; principal
+components are linear combinations of all features, never selected original features; explained
+variance divides by the sum of all eigenvalues, never the largest alone). Both zero discrepancy.
+Mathematics **841/908** (839→841), 67 remaining. **math.num is now the 15th fully EB-certified
+domain** (math.found, math.calc, math.geom, math.alg, math.arith, math.stats, math.abst, math.nt,
+math.disc, math.real, math.func, math.trig, math.seq, math.num, math.meas). Full detail in
+`COVERAGE.md` Batch 223. Validated: KG PASS, state.ts 841/908, tsc clean, tests 561/561. Commit
+`86d7535`, pushed.
+
+Fresh frontier for Batch 224 (13 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.linalg.matrix-representation/tensor, math.opt.semidefinite-programming,
+math.prob.martingale. Campaign continues under the same active `/loop`.
+
+## Batch 224 (2026-09-19) — MILESTONE: math.linalg fully EB-certified (16th domain)
+
+Authored `matrix-representation` (matrix built column-by-column from T applied to β's own basis
+vectors, never arbitrary vectors; matrix-vector product uses coordinates relative to β, never raw
+standard components for non-standard bases; composition matches multiplication order exactly,
+never reversed) and `tensor` (vectors/covectors/matrices are special cases of one multilinear-map
+framework, never separate objects; tensor product must be verified multilinear, never merely
+symbolic; tensors have real physics/categorical significance, never obscure). One stale-KG
+discrepancy: `matrix-representation`'s Blueprint claimed no `unlocks` but live KG shows
+`math.linalg.change-of-basis` — corrected. Mathematics **843/908** (841→843), 65 remaining.
+**math.linalg is now the 16th fully EB-certified domain**. Full detail in `COVERAGE.md` Batch 224.
+Validated: KG PASS, state.ts 843/908, tsc clean, tests 561/561. Commit `fb1d786`, pushed.
+
+Fresh frontier for Batch 225 (11 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.convolution/normed-space, math.graph.random-graph,
+math.opt.semidefinite-programming, math.prob.martingale. Campaign continues under the same
+active `/loop`.
+
+## Batch 225 (2026-09-19)
+
+Authored `normed-space` (a normed space is always a pair — vector space plus a specific norm,
+never a space-independent unique quantity; the induced metric's axioms follow directly from the
+norm's own axioms, never assumed for free; homogeneity needs a negative-scalar check too) and
+`convolution` (genuinely commutative despite the asymmetric flip-and-slide picture; Young's
+inequality's exponents are a genuine trade-off, never arbitrary; the convolution theorem is a
+real simplification, never a curiosity). One reverse-direction discrepancy: convolution's
+Blueprint said its cross-link `math.de.convolution-theorem` was unauthored at write time, but it
+is now authored — noted, no probe change needed (engaged target `math.de.fourier-transform`
+still holds). Mathematics **845/908** (843→845), 63 remaining. Full detail in `COVERAGE.md`
+Batch 225. Validated: KG PASS, state.ts 845/908, tsc clean, tests 561/561. Commit `6a9edd5`,
+pushed.
+
+Fresh frontier for Batch 226 (10 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.de.systems-matrix-method,
+math.fnal.completeness, math.graph.random-graph, math.opt.semidefinite-programming,
+math.prob.martingale. Campaign continues under the same active `/loop`.
+
+## Batch 226 (2026-09-19) — MILESTONE: math.de fully EB-certified (17th domain)
+
+Authored `completeness` ("Cauchy" and "complete" are never synonyms — completeness is
+space-dependent; can depend on the specific norm, never assumed inherited; incomplete spaces still
+have some convergent sequences) and `systems-matrix-method` (solution is v·eλt, never the scalar
+alone; complex eigenvalues need Re/Im extraction, never left complex; matrix exponential is the
+power series/diagonalization construction, never entrywise). One reverse-direction discrepancy:
+`completeness`'s cross-link `math.real.completeness-metric` is now authored though the Blueprint
+said unauthored at write time — noted, probe unchanged. Mathematics **847/908** (845→847), 61
+remaining. **math.de is now the 17th fully EB-certified domain**. Full detail in `COVERAGE.md`
+Batch 226. Validated: KG PASS, state.ts 847/908, tsc clean, tests 561/561. Commit `b0d8e72`,
+pushed.
+
+Fresh frontier for Batch 227 (9 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.fnal.banach-space,
+math.graph.random-graph, math.opt.semidefinite-programming, math.prob.martingale. Campaign
+continues under the same active `/loop`.
+
+## Batch 227 (2026-09-19) — MILESTONE: math.prob fully EB-certified (18th domain)
+
+Authored `banach-space` (Banach = normed + complete, never a new independent idea; not every
+normed space is Banach; completeness is load-bearing, never a footnote) and `martingale` (the
+martingale condition is conditional expectation on the whole past, never a new tool; sub-/
+supermartingale is a precise sign-sensitive inequality check, never qualitative; optional stopping
+needs real hypotheses, never unconditional). One reverse-direction discrepancy: `banach-space`'s
+cross-link `math.meas.lp-space` is now authored though the Blueprint said unauthored at write
+time — noted, probe unchanged. Mathematics **849/908** (847→849), 59 remaining. **math.prob is
+now the 18th fully EB-certified domain**. Full detail in `COVERAGE.md` Batch 227. Validated: KG
+PASS, state.ts 849/908, tsc clean, tests 561/561. Commit `fba7930`, pushed.
+
+Fresh frontier for Batch 228 (10 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.fnal.bounded-operator/
+dense-subspace/hilbert-space, math.graph.random-graph, math.opt.semidefinite-programming.
+Campaign continues under the same active `/loop`.
+
+## Batch 228 (2026-09-19)
+
+Authored `hilbert-space` (Hilbert = inner product space + complete, never a new idea; Projection
+Theorem gives existence AND uniqueness, never existence alone; Hilbert implies Banach, never the
+reverse) and `dense-subspace` (density is one unified definition, never per-space; Weierstrass IS
+a density statement with a witness in hand, never merely analogous; Weierstrass/smoothing/Fourier
+density are one pattern, never unrelated facts). One reverse-direction discrepancy:
+`hilbert-space`'s cross-link `math.meas.l2-space` is now authored though the Blueprint said
+unauthored at write time — noted, probe unchanged. Mathematics **851/908** (849→851), 57
+remaining. Full detail in `COVERAGE.md` Batch 228. Validated: KG PASS, state.ts 851/908, tsc
+clean, tests 561/561. Commit `e171a01`, pushed.
+
+Fresh frontier for Batch 229 (11 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.fnal.bounded-operator/
+fourier-transform/riesz-representation/special-functions, math.graph.random-graph,
+math.opt.semidefinite-programming. Campaign continues under the same active `/loop`.
+
+## Batch 229 (2026-09-19)
+
+Authored `bounded-operator` (bounded and continuous are one fact for linear maps, never
+independent; B(X,Y) is Banach whenever Y is, never depends on X; ‖T‖ is a supremum over the whole
+unit ball, never just basis vectors) and `riesz-representation` (the representing vector y is
+unique, never non-unique; the theorem is a complete characterization, never leaves gaps;
+self-duality is Hilbert-specific, never general Banach). Both zero discrepancy. Mathematics
+**853/908** (851→853), 55 remaining. Full detail in `COVERAGE.md` Batch 229. Validated: KG PASS,
+state.ts 853/908, tsc clean, tests 561/561. Commit `fe595bc`, pushed.
+
+Fresh frontier for Batch 230 (13 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.fnal.dual-space-functional/
+fourier-transform/open-mapping-theorem/special-functions/spectral-theory/uniform-boundedness,
+math.graph.random-graph, math.opt.semidefinite-programming. Campaign continues under the same
+active `/loop`.
+
+## Batch 230 (2026-09-19)
+
+Authored `dual-space-functional` (a functional is just a scalar-valued bounded operator, never
+different; X* is always Banach regardless of X, never requiring X complete; reflexivity is
+special, never automatic) and `open-mapping-theorem` ("open" is about images, never conflated with
+continuity's preimages; bounded-inverse needs both spaces complete, never assumed for merely
+normed; surjectivity is required for openness, never automatic). Two reverse-direction
+discrepancies (both cross-links now authored though Blueprints said unauthored at write time) —
+noted, probes unchanged. Mathematics **855/908** (853→855), 53 remaining. Full detail in
+`COVERAGE.md` Batch 230. Validated: KG PASS, state.ts 855/908, tsc clean, tests 561/561. Commit
+`90e94f3`, pushed.
+
+Fresh frontier for Batch 231 (14 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.fnal.closed-graph-theorem/
+distributions/fourier-transform/hahn-banach/special-functions/spectral-theory/
+uniform-boundedness, math.graph.random-graph, math.opt.semidefinite-programming. Campaign
+continues under the same active `/loop`.
+
+## Batch 231 (2026-09-19/20)
+
+Authored `closed-graph-theorem` (full-domain hypothesis required, never assume a closed graph on
+a subspace suffices; both spaces must be complete, never assumed for any normed spaces; closed
+graph is a joint pair-condition, never identical to continuity's one-sided definition) and
+`hahn-banach` (extension preserves the exact norm, never merely "some extension exists"; infinite-
+dimensional hyperplane separation genuinely needs Hahn-Banach, never automatic; the dual separates
+every nonzero point, never assume an escape). Both zero discrepancy. Mathematics **857/908**
+(855→857), 51 remaining. Full detail in `COVERAGE.md` Batch 231. Validated: KG PASS, state.ts
+857/908, tsc clean, tests 561/561. Commit `ebe029a`, pushed.
+
+Fresh frontier for Batch 232 (12 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.fnal.distributions/
+fourier-transform/special-functions/spectral-theory/uniform-boundedness, math.graph.random-graph,
+math.opt.semidefinite-programming. Campaign continues under the same active `/loop`.
+
+## Batch 232 (2026-09-20)
+
+Authored `uniform-boundedness` (pointwise boundedness never trivially gives uniform boundedness;
+completeness via Baire Category is the essential mechanism, never assumed for any normed space; a
+pointwise-convergent operator sequence's norms are automatically uniformly bounded) and
+`spectral-theory` (spectrum defined via invertibility never a determinant, a spectral point need
+not be an eigenvalue; self-adjoint real spectrum verified operator-theoretically, never via a
+polynomial; the spectral measure is a genuinely different object, never an extended finite sum).
+Both zero discrepancy. One transient vitest flake self-resolved on re-run (561/561 confirmed).
+Mathematics **859/908** (857→859), 49 remaining. Full detail in `COVERAGE.md` Batch 232.
+Validated: KG PASS, state.ts 859/908, tsc clean, tests 561/561. Commit `0cce628`, pushed.
+
+Fresh frontier for Batch 233 (11 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.fnal.compact-operator-spectrum/
+distributions/fourier-transform/special-functions, math.graph.random-graph,
+math.opt.semidefinite-programming. Campaign continues under the same active `/loop`.
+
+## Batch 233 (2026-09-20)
+
+Authored `compact-operator-spectrum` (bounded never implies compact in infinite dimensions;
+nonzero spectrum accumulates only at 0; Fredholm alternative needs compactness) and
+`fourier-transform` (L² transform needs density extension, never the L¹ formula directly;
+unitary means exact norm preservation, never mere bijectivity; diagonalizing differentiation is
+precise, never a metaphor). Both zero discrepancy. Mathematics **861/908** (859→861), 47
+remaining. **Correction**: the prior content commit's message inaccurately claimed "math.fnal
+certified" — `state.ts` confirms math.fnal is actually **16/18** (`distributions` and
+`special-functions` remain unauthored), same error class as Batch 222's miscount, self-caught and
+corrected here. Full detail in `COVERAGE.md` Batch 233. Validated: KG PASS, state.ts 861/908, tsc
+clean, tests 561/561. Commit `b6d77a8`, pushed.
+
+Fresh frontier for Batch 234 (9 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, plus math.cx.complex-numbers-analysis, math.fnal.distributions/
+special-functions, math.graph.random-graph, math.opt.semidefinite-programming. Campaign continues
+under the same active `/loop`.
+
+## Batch 234 (2026-09-20) — MILESTONE: math.fnal fully EB-certified (19th domain)
+
+Authored `distributions` (δ is a rigorous linear functional, never an ordinary function; every
+locally integrable function embeds as a distribution, never disconnected; the weak derivative
+always exists, never assume a jump has no derivative) and `special-functions` (Γ(n+1)=n! by the
+same recursion, never coincidental; Bessel functions and orthogonal polynomials are one unified
+class, never unrelated; domain/weight choices are one construction, never independently invented).
+One reverse-direction discrepancy on `special-functions` (cross-link now authored though Blueprint
+said unauthored). Mathematics **863/908** (861→863), 45 remaining. **math.fnal is now the 19th
+fully EB-certified domain** — explicitly verified 18/18 via direct count before claiming it, per
+the correction discipline from Batch 233's self-caught error. Full detail in `COVERAGE.md` Batch
+234. Validated: KG PASS, state.ts 863/908, tsc clean, tests 561/561. Commit `25f255b`, pushed.
+
+Fresh frontier for Batch 235 (7 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, math.cx.complex-numbers-analysis, math.graph.random-graph,
+math.opt.semidefinite-programming. Campaign continues under the same active `/loop`.
+
+## Batch 235 (2026-09-20) — MILESTONE: math.graph fully EB-certified (20th domain)
+
+Authored `complex-numbers-analysis` (modulus is Pythagorean, never taxicab sum; conjugation
+negates only the imaginary part; z·z̄=|z|² always real, never confused with z²) and
+`random-graph` (expected edge count is an average, never a guarantee; a.a.s. is a limiting
+probability, never universal; the connectivity threshold is a sharp phase transition, never
+gradual). Both zero discrepancy. Mathematics **865/908** (863→865), 43 remaining. **math.graph is
+now the 20th fully EB-certified domain** — explicitly verified 16/16 before claiming it. Full
+detail in `COVERAGE.md` Batch 235. Validated: KG PASS, state.ts 865/908, tsc clean, tests
+561/561. Commit `a6690d0`, pushed.
+
+Fresh frontier for Batch 236 (6 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, math.cx.complex-function, math.opt.semidefinite-programming. Campaign
+continues under the same active `/loop`.
+
+## Batch 236 (2026-09-20) — MILESTONE: math.opt fully EB-certified (21st domain)
+
+Authored `complex-function` (u,v depend jointly on x and y, never separate tracks; a complex
+limit needs every path, never just two axes; joint continuity is required, never separate
+axis-continuity) and `semidefinite-programming` (SDP's matrix variable is structurally different
+from QP's vector, never "just a QP"; the PSD cone is convex despite looking nonlinear, never
+assumed otherwise; SDP relaxation solutions can have any rank, never assumed rank-1). Both zero
+discrepancy. Mathematics **867/908** (865→867), 41 remaining. **math.opt is now the 21st fully
+EB-certified domain** — explicitly verified 16/16 before claiming it. Full detail in `COVERAGE.md`
+Batch 236. Validated: KG PASS, state.ts 867/908, tsc clean, tests 561/561. Commit `1eae8dc`,
+pushed.
+
+Fresh frontier for Batch 237 (5 concepts): math.cat.adjunction/functor-category/limits,
+math.top.cohomology, math.cx.cauchy-riemann. Campaign continues under the same active `/loop`.
+
+## Batch 237 (2026-09-20) — MILESTONE: math.top fully EB-certified (22nd domain)
+
+Authored `cauchy-riemann` (z̄ fails CR everywhere despite being smooth, never assume smoothness
+implies analyticity; CR at one point never implies holomorphicity; smooth u,v is never sufficient
+for complex differentiability) and `cohomology` (H^n(X) is the dual group, never just another name
+for H_n(X); the cup product is genuinely new ring structure, never redundant with the bare groups;
+de Rham and singular cohomology are isomorphic, never unrelated). Both zero discrepancy.
+Mathematics **869/908** (867→869), 39 remaining. **math.top is now the 22nd fully EB-certified
+domain** — explicitly verified 23/23 before claiming it. Full detail in `COVERAGE.md` Batch 237.
+Validated: KG PASS, state.ts 869/908, tsc clean, tests 561/561. Commit `437fcd6`, pushed.
+
+Fresh frontier for Batch 238 (5 concepts): math.cat.adjunction/functor-category/limits,
+math.cx.analytic-functions/harmonic-functions. Campaign continues under the same active `/loop`.
+
+## Batch 238 (2026-09-20)
+
+Authored `analytic-functions` (holomorphic is an open-set property, never a single point;
+holomorphic⟺analytic exactly in ℂ, never ℝ's gap; entire means the whole plane, never a smaller
+domain) and `harmonic-functions` (forward direction already proven, never re-derive; the
+CR-recipe's success is guaranteed by u's harmonicity, never coincidental; "locally" is a genuine
+obstruction on domains with holes, never routine). Both zero discrepancy. Mathematics **871/908**
+(869→871), 37 remaining. **Self-caught correction**: an early draft of this batch's version-history
+line inaccurately claimed math.cx was complete at "12/12" — a direct count shows math.cx actually
+has 31 concepts, 7 now authored, 26 remaining. The error was caught and edited out before the
+content commit was made (no false claim reached git history), but is logged here anyway per
+standing transparency discipline. Full detail in `COVERAGE.md` Batch 238. Validated: KG PASS,
+state.ts 871/908, tsc clean, tests 561/561. Commit `4109211`, pushed.
+
+Fresh frontier for Batch 239 (7 concepts): math.cat.adjunction/functor-category/limits,
+math.cx.complex-integration/conformal-mapping/power-series-cx/singularities. Campaign continues
+under the same active `/loop`.
+
+## Batch 239 (2026-09-20)
+
+Authored `power-series-cx` (ratio test transfers identically, never new; the boundary circle has
+infinitely many points, never uniform; holomorphic⟺Taylor-series is automatic in ℂ, never like
+ℝ's gap) and `complex-integration` (parametrize-substitute-reduce, identical to the real vector
+line integral; reversal-of-path is proven, never needing re-verification; the Estimation Lemma is
+an upper bound only, never the exact value). Both zero discrepancy. Mathematics **873/908**
+(871→873), 35 remaining. math.cx now 9/31 authored — far from certified, no domain claim made.
+Full detail in `COVERAGE.md` Batch 239. Validated: KG PASS, state.ts 873/908, tsc clean, tests
+561/561. Commit `5ccc0cd`, pushed.
+
+Fresh frontier for Batch 240 (7 concepts): math.cat.adjunction/functor-category/limits,
+math.cx.cauchy-theorem/conformal-mapping/identity-theorem/singularities. Campaign continues under
+the same active `/loop`.
+
+## Batch 240 (2026-09-20)
+
+Authored `cauchy-theorem` (both hypotheses always checked together, never holomorphy alone; a
+singularity elsewhere never disqualifies a function on a domain avoiding it; path-independence
+never extends across an encircled singularity) and `identity-theorem` (a limit point is required,
+never merely infinitely many points; connectedness is essential, never assumed on disconnected
+domains; two valid continuations to a connected domain must coincide). Both zero discrepancy.
+Mathematics **875/908** (873→875), 33 remaining. math.cx now 11/31 authored. Full detail in
+`COVERAGE.md` Batch 240. Validated: KG PASS, state.ts 875/908, tsc clean, tests 561/561. Commit
+`30c0e79`, pushed.
+
+Fresh frontier for Batch 241 (8 concepts): math.cat.adjunction/functor-category/limits,
+math.cx.analytic-continuation/cauchy-goursat/cauchy-integral-formula/conformal-mapping/
+singularities. Campaign continues under the same active `/loop`.
+
+## Batch 241 (2026-09-20)
+
+Authored `cauchy-integral-formula` (verify z₀ inside C before applying, never regardless of
+position; the formula reveals rigidity, never a mere trick; the integrand's own singularity at z₀
+is why a separate formula is needed) and `singularities` (classify by actual limiting behavior,
+never algebraic form; a pole needs |f|→∞ uniformly, never conflated with essential singularities;
+Riemann's theorem certifies via boundedness alone, never requiring the patch value). Both zero
+discrepancy. Mathematics **877/908** (875→877), 31 remaining. math.cx now 13/31 authored. Full
+detail in `COVERAGE.md` Batch 241. Validated: KG PASS, state.ts 877/908, tsc clean, tests
+561/561. Commit `fc46edf`, pushed.
+
+Fresh frontier for Batch 242 (12 concepts): math.cat.adjunction/functor-category/limits,
+math.cx.analytic-continuation/cauchy-goursat/conformal-mapping/essential-singularity/
+higher-derivatives/laurent-series/maximum-modulus/morera-theorem/poles. Campaign continues under
+the same active `/loop`.
+
+## Batch 242 (2026-09-20)
+
+Authored `higher-derivatives` (f⁽ⁿ⁾'s formula generalizes the Cauchy Integral Formula's n=0 case,
+never independent; holomorphic once means C∞ forever, never a real-variable-style gap; Cauchy's
+inequality bounds from f alone, never requiring the explicit formula) and `poles` (pole order is
+the unique n threading between too-small and too-large; meromorphicity requires checking every
+singularity, never assumed; the rational-function classification is nontrivial, never obvious).
+Both zero discrepancy. Mathematics **879/908** (877→879), 29 remaining. math.cx now 15/31
+authored. Full detail in `COVERAGE.md` Batch 242. Validated: KG PASS, state.ts 879/908, tsc
+clean, tests 561/561. Commit `d5e5bac`, pushed.
+
+Fresh frontier for Batch 243 (11 concepts): math.cat.adjunction/functor-category/limits,
+math.cx.analytic-continuation/cauchy-goursat/conformal-mapping/essential-singularity/
+laurent-series/liouville-theorem/maximum-modulus/morera-theorem. Campaign continues under the
+same active `/loop`.
+
+## Batch 243 (2026-09-20)
+
+Authored `liouville-theorem` (the proof is a single decisive application of Cauchy's inequality
+at n=1 letting R→∞, never a new technique; the contrapositive certifies unboundedness
+immediately, never requiring direct growth analysis; sin(z)/cos(z) are genuinely unbounded on ℂ,
+never a contradiction) and `morera-theorem` (the theorem requires only every triangle, never
+every closed contour; uniform limits of holomorphic functions are holomorphic, a genuine payoff
+never obvious by real-analysis analogy; the proof mechanism is a path-independent antiderivative
+construction, never direct derivative computation). Both zero discrepancy. Mathematics
+**881/908** (879→881), 27 remaining. math.cx now 15/31 authored (still far from certified).
+Full detail in `COVERAGE.md` Batch 243. Validated: KG PASS, state.ts 881/908, tsc clean, tests
+561/561. Commit `9eb415b`, pushed.
+
+Fresh frontier for Batch 244 (10 concepts): math.cat.adjunction/functor-category/limits,
+math.cx.analytic-continuation/cauchy-goursat/conformal-mapping/essential-singularity/
+fundamental-theorem-algebra/laurent-series/maximum-modulus. Campaign continues under the same
+active `/loop`.
+
+## Batch 244 (2026-09-20)
+
+Authored `fundamental-theorem-algebra` (FTA asserts at least one root, never directly n roots
+without iteration; the Liouville proof needs both the growth argument and Liouville, never
+Liouville alone, and fails over the reals; the Liouville proof and the winding-number proof are
+genuinely different routes, never the same argument renamed) and `laurent-series` (the principal
+part is the only genuinely new ingredient, never an unrelated new object; Laurent coefficients
+come from algebraic substitution, never always the contour integral; a finite principal part of
+any length means a pole, never essential). Both zero discrepancy. Mathematics **883/908**
+(881→883), 25 remaining. math.cx now 17/31 authored. Full detail in `COVERAGE.md` Batch 244.
+Validated: KG PASS, state.ts 883/908, tsc clean, tests 561/561. Commit `0343116`, pushed.
+
+Fresh frontier for Batch 245 (9 concepts): math.cat.adjunction/functor-category/limits,
+math.cx.analytic-continuation/cauchy-goursat/conformal-mapping/essential-singularity/
+maximum-modulus/residue. Campaign continues under the same active `/loop`.
+
+## Batch 245 (2026-09-20)
+
+Authored `cauchy-goursat` (Cauchy-Goursat genuinely weakens the classical hypothesis, never
+already covered; Goursat's proof is a nested-triangle compactness argument, never algebraic; the
+holomorphic-equals-analytic collapse is genuine, never separate requirements) and `residue` (the
+residue is exactly a₋₁, never the whole principal part; a simple pole's residue comes from a limit
+shortcut, never requiring full expansion; a higher-order pole needs full-factor removal then
+differentiation, never the simple-pole shortcut directly). Both zero discrepancy. Mathematics
+**885/908** (883→885), 23 remaining. math.cx now 19/31 authored. Full detail in `COVERAGE.md`
+Batch 245. Validated: KG PASS, state.ts 885/908, tsc clean, tests 561/561. Commit `f926d45`,
+pushed.
+
+Fresh frontier for Batch 246 (8 concepts): math.cat.adjunction/functor-category/limits,
+math.cx.analytic-continuation/conformal-mapping/essential-singularity/maximum-modulus/
+residue-theorem. Campaign continues under the same active `/loop`.
+
+## Batch 246 (2026-09-20)
+
+Authored `residue-theorem` (the theorem collapses to Cauchy's theorem at zero enclosed poles,
+never an unrelated tool; multiple enclosed poles need each residue summed individually, never one
+combined computation; only enclosed poles count, never every pole of the function regardless of
+the contour) and `essential-singularity` (an essential singularity has no limit at all, never
+|f|→∞ like a pole; Casorati-Weierstrass guarantees only a dense image, never surjectivity; Great
+Picard is dramatically stronger, never the same result renamed). Both zero discrepancy.
+Mathematics **887/908** (885→887), 21 remaining. math.cx now 21/31 authored. Full detail in
+`COVERAGE.md` Batch 246. Validated: KG PASS, state.ts 887/908, tsc clean, tests 561/561. Commit
+`8fabfa0`, pushed.
+
+Fresh frontier for Batch 247 (8 concepts): math.cat.adjunction/functor-category/limits,
+math.cx.analytic-continuation/argument-principle/conformal-mapping/maximum-modulus/
+real-integral-residues. Campaign continues under the same active `/loop`.
+
+## Batch 247 (2026-09-20)
+
+Authored `argument-principle` (directly derived from the Residue Theorem applied to f′/f, never
+independent; Z and P count with multiplicity, never distinct location; Z−P is the geometric
+winding number, never purely abstract) and `maximum-modulus` (transported from
+`math.de.harmonic-functions`'s already-proven maximum principle via log|f|'s harmonicity, never an
+independent proof; boundary values alone bound |f| everywhere, never requiring an interior check;
+any interior maximum forces constancy, never merely permitted for a non-constant function). Both
+zero discrepancy. Mathematics **889/908** (887→889), 19 remaining. math.cx now 23/31 authored.
+Full detail in `COVERAGE.md` Batch 247. Validated: KG PASS, state.ts 889/908, tsc clean, tests
+561/561. Commit `0151c1c`, pushed.
+
+Fresh frontier for Batch 248 (7 concepts): math.cat.adjunction/functor-category/limits,
+math.cx.analytic-continuation/conformal-mapping/real-integral-residues/rouche-theorem. Campaign
+continues under the same active `/loop`.
+
+## Batch 248 (2026-09-20)
+
+Authored `rouche-theorem` (the domination condition holds only on the contour, never inside it;
+FTA via Rouché needs R large enough for the leading term to dominate, never any radius; the
+conclusion is equal zero counts, never equal zero locations) and `real-integral-residues` (closing
+the contour with an arc is the essential setup step, never assuming the residue theorem applies to
+an open integral directly; the arc's vanishing is a separate step needing explicit justification,
+never automatic; oscillatory integrands need Jordan's lemma, never the same simple bound). Both
+zero discrepancy. Mathematics **891/908** (889→891), 17 remaining. math.cx now 25/31 authored.
+Full detail in `COVERAGE.md` Batch 248. Validated: KG PASS, state.ts 891/908, tsc clean, tests
+561/561. Commit `dcb68d0`, pushed.
+
+Fresh frontier for Batch 249 (5 concepts): math.cat.adjunction/functor-category/limits,
+math.cx.analytic-continuation/conformal-mapping. Campaign continues under the same active `/loop`.
+
+## Batch 249 (2026-09-20)
+
+Authored `conformal-mapping` (conformality fails exactly where f′=0, never guaranteed everywhere
+holomorphic; the Jacobian is forced into a rotation-dilation form, never arbitrary; conformal maps
+preserve only angles, never distances or areas) and `analytic-continuation` (continuation is
+re-centering the Taylor series, never guaranteed to reach all of ℂ; uniqueness guarantees the
+result, never the construction; monodromy is a genuine subtlety, never "same point means same
+value"). Both zero discrepancy. Mathematics **893/908** (891→893), 15 remaining. math.cx now
+27/31 authored. Full detail in `COVERAGE.md` Batch 249. Validated: KG PASS, state.ts 893/908, tsc
+clean, tests 561/561. Commit `0847789`, pushed.
+
+Fresh frontier for Batch 250 (7 concepts): math.cat.adjunction/functor-category/limits,
+math.cx.mobius-transformation/riemann-mapping/riemann-surface/riemann-zeta. Campaign continues
+under the same active `/loop`.
+
+## Batch 250 (2026-09-20)
+
+Authored `mobius-transformation` (composition is direct matrix multiplication, never lacking a
+systematic formula; exactly three prescribed points determine the transformation, never two or
+four; circle-and-line preservation covers both as generalized circles, never circles only) and
+`riemann-mapping` (the hypotheses simply-connected and proper are genuine restrictions, never
+satisfied by every open subset; uniqueness requires exactly three real normalizing conditions,
+never automatic; both hypotheses are load-bearing, never minor technical fine print). Both zero
+discrepancy. Mathematics **895/908** (893→895), 13 remaining. math.cx now 29/31 authored. Full
+detail in `COVERAGE.md` Batch 250. Validated: KG PASS, state.ts 895/908, tsc clean, tests
+561/561. Commit `8135945`, pushed.
+
+Fresh frontier for Batch 251 (5 concepts): math.cat.adjunction/functor-category/limits,
+math.cx.riemann-surface/riemann-zeta. Campaign continues under the same active `/loop`.
+
+## Batch 251 (2026-09-20)
+
+Authored `riemann-surface` (multivaluedness signals the wrong domain, never a patchable quirk;
+the Riemann surface is a genuine new geometric domain, never mere notation; branch points produce
+genuinely finite structures, never assuming every function needs log z's infinite helix) and
+`riemann-zeta` (the pole at s=1 is an honest report of genuine divergence, never a mysterious
+introduced gap; the Euler product is a genuine analytic bridge relying on unique factorization,
+never a cosmetic rewrite; the Riemann Hypothesis is open, never proven however overwhelming its
+numerical support). Both flagged a reverse-direction discrepancy: each Blueprint's Component 7
+recorded its cross-link target (`math.top.covering-space`, `math.nt.riemann-hypothesis`
+respectively) as not-yet-authored at blueprint-writing time; direct verification confirms both are
+now authored — documented in each file's Curriculum Feedback section, same class of discrepancy as
+prior batches. Mathematics **897/908** (895→897), 11 remaining. **math.cx now 31/31 authored —
+CERTIFIED, the 23rd EB-certified domain.** Full detail in `COVERAGE.md` Batch 251. Validated: KG
+PASS, state.ts 897/908, tsc clean, tests 561/561. Commit `8f7bd38`, pushed.
+
+Fresh frontier for Batch 252 (3 concepts, all math.cat): math.cat.adjunction/functor-category/
+limits. Campaign continues under the same active `/loop`.
+
+## Batch 252 (2026-09-20)
+
+Authored `functor-category` (functors are objects, natural transformations are morphisms, never
+the reverse; composition is built pointwise, never a single opaque whole-transformation
+operation; the category axioms are inherited pointwise from D's own, never automatic from naming)
+and `limits` (limit-preservation is a genuine non-automatic property of a functor, never assumed
+free; universality requires a unique factoring map, never merely some map; discrete diagrams are
+one shape among many, never assuming every limit is a product). Both zero discrepancy. Mathematics
+**899/908** (897→899), 9 remaining. Full detail in `COVERAGE.md` Batch 252. Validated: KG PASS,
+state.ts 899/908, tsc clean, tests 561/561. Commit `6ec6495`, pushed.
+
+Fresh frontier for Batch 253 (5 concepts, all math.cat): math.cat.adjunction/equalizer/pullback/
+tensor-product/yoneda-lemma. Campaign continues under the same active `/loop`.
+
+## Batch 253 (2026-09-20)
+
+Authored `equalizer` (the equalizer is exactly the limit of the two-parallel-arrows diagram, never
+an unrelated new definition; universality picks out one canonical subset, never any arbitrary
+agreeing subset; the coequalizer is a genuinely different quotient construction, never the
+equalizer mirrored) and `pullback` (cospan and span point opposite directions, never
+interchangeable; the pullback equals the product only in the degenerate one-point-C case, never
+always; the pushout's element count is reduced by identification, never a plain sum). Both zero
+discrepancy. Mathematics **901/908** (899→901), 7 remaining. Full detail in `COVERAGE.md` Batch
+253. Validated: KG PASS, state.ts 901/908, tsc clean, tests 561/561. Commit `93c9c7e`, pushed.
+
+Fresh frontier for Batch 254 (3 concepts, all math.cat): math.cat.adjunction/tensor-product/
+yoneda-lemma. Campaign continues under the same active `/loop`.
+
+## Batch 254 (2026-09-20)
+
+Authored `yoneda-lemma` (the bijection is a genuine constructive two-way correspondence, never a
+cardinality coincidence; the extraction recipe evaluates specifically at A using the identity,
+never at an arbitrary object or morphism; the embedding consequence is determination up to
+isomorphism, never literal identity) and `tensor-product` (categorical) (Vect,⊗,k is the concrete
+instance the abstract definition generalizes, never unrelated; monoidal laws hold up to coherent
+natural isomorphism, never literal equality; symmetric monoidal structure is additional
+separately-verified data, never automatic). Both zero discrepancy. Mathematics **903/908**
+(901→903), 5 remaining — all math.cat: adjunction, monad, topos, higher-category,
+representable-functor. Full detail in `COVERAGE.md` Batch 254. Validated: KG PASS, state.ts
+903/908, tsc clean, tests 561/561. Commit `f684846`, pushed.
+
+Fresh frontier for Batch 255 (2 concepts, all math.cat): math.cat.adjunction/representable-functor.
+Campaign continues under the same active `/loop`.
+
+## Batch 255 (2026-09-20)
+
+Authored `adjunction` (the hom-set bijection is the correct relationship between F and G, never an
+inverse expectation; left and right adjoint directions are specific, never interchangeable;
+adjunctions are a pervasive cross-mathematics pattern, never an isolated exotic construction) and
+`representable-functor` (representability requires a genuine natural isomorphism verified at every
+object, never a loose resemblance; the universal element is the specific eta_A(id_A), never any
+convenient element; the representing object is unique up to isomorphism, never absolutely unique).
+Both zero discrepancy. Mathematics **905/908** (903→905), 3 remaining: math.cat.monad, topos,
+higher-category. Full detail in `COVERAGE.md` Batch 255. Validated: KG PASS, state.ts 905/908,
+tsc clean, tests 561/561. Commit `f974d8d`, pushed.
+
+Fresh frontier for Batch 256 (2 concepts, all math.cat): math.cat.monad/topos. Campaign continues
+under the same active `/loop`.
+
+## Batch 256 (2026-09-20)
+
+Authored `monad` (a monad's structure arises directly from any adjunction, never arbitrarily
+imposed; the multiplication mu is built directly from the adjunction's counit, never an unrelated
+construction; functional-programming monads are genuine instances, never coincidental name-
+sharing) and `topos` (all three topos conditions — limits, exponentials, subobject classifier —
+are independently required, never just finite limits with add-ons; the subobject classifier Omega
+is defined by its universal subset-classifying property, never an arbitrary conventional choice;
+a topos's internal logic is generally intuitionistic, never automatically classical). Both zero
+discrepancy. Mathematics **907/908** (905→907), **1 remaining: math.cat.higher-category** — the
+final concept of the entire 908-concept Mathematics EB campaign. Full detail in `COVERAGE.md`
+Batch 256. Validated: KG PASS, state.ts 907/908, tsc clean, tests 561/561. Commit `2d04cb1`,
+pushed.
+
+Fresh frontier for Batch 257 (1 concept): math.cat.higher-category. Final batch of the campaign.
+
+## Batch 257 (2026-09-20) — FINAL BATCH — CAMPAIGN COMPLETE 908/908
+
+Authored `math.cat.higher-category`, the last remaining concept in the entire Mathematics KG (a
+2-category's hom-category is literally [C,D], never an unrelated new invention; ∞-category
+composition is associative up to homotopy, never strictly associative like an ordinary category;
+HoTT's "proofs are paths" is a genuine formal correspondence built on already-mastered homotopy
+machinery, never a loose metaphor). Zero discrepancy. Mathematics **908/908** (907→908) — **THE
+MATHEMATICS EDUCATIONAL BRAIN AUTHORING CAMPAIGN IS COMPLETE.** math.cat (15/15) is now the 24th
+and final EB-certified domain, joining math.found, math.calc, math.geom, math.linalg, math.alg,
+math.arith, math.de, math.prob, math.stats, math.abst, math.nt, math.disc, math.cx, math.real,
+math.func, math.trig, math.top, math.seq, math.fnal, math.num, math.opt, math.graph, math.meas —
+every single one of the 908 concepts across all mathematics KG domains now has an authored
+Educational Brain entry. Validated: KG PASS (908/908 reachable), state.ts confirms 908/908 and 24
+EB-certified domains, tsc clean, targeted 7-file vitest suite 561/561 passing. Commit `16c548e`,
+pushed.
+
+This is the final entry in this campaign log. The `/loop keep working until u finish eb for
+mathematics` standing instruction has been fully satisfied — there is no remaining unauthored
+concept anywhere in `docs/mathematics/kg/graph.json`. The loop is being stopped per its own
+completion condition.

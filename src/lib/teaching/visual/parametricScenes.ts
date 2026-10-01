@@ -67,6 +67,12 @@ import { buildPunnettSquareScene, validatePunnettParams } from '@/lib/teaching/s
 import { buildDNAStructureScene, validateDNAStructureParams } from '@/lib/teaching/sceneGenerators/dnaStructure.pure'
 import { buildEcologicalPyramidScene, validateEcologicalPyramidParams } from '@/lib/teaching/sceneGenerators/ecologicalPyramid.pure'
 import { buildERDiagramScene, validateERDiagramParams } from '@/lib/teaching/sceneGenerators/erDiagram.pure'
+import {
+  NEWTON_FIXED_DT, NEWTON_MAX_TICKS, buildNewtonScene, newtonReadouts, newtonTerminalTick, validateNewtonParams,
+} from '@/lib/teaching/sceneGenerators/newtonSecondLaw.pure'
+import {
+  PENDULUM_FIXED_DT, PENDULUM_MAX_TICKS, PENDULUM_SWINGS_PER_RUN, buildPendulumPeriodScene, pendulumReadouts, pendulumTerminalTick, validatePendulumPeriodParams,
+} from '@/lib/teaching/sceneGenerators/pendulumPeriod.pure'
 
 /**
  * One variable a learner may move.
@@ -122,6 +128,83 @@ export interface ParametricScene {
    * refuses the values — a figure is never approximated to satisfy a control.
    */
   build: (params: SceneParams) => SceneSpec | null
+  /**
+   * OPTIONAL time dimension (ADR 16). Absent = the figure is not simulatable,
+   * which is every kind but the Newton proof of concept — their behaviour is
+   * unchanged. Present = the same figure evolves through time, one fixed tick
+   * at a time, and tick 0 IS the figure `build` returns.
+   */
+  simulation?: TimeSimulation
+}
+
+/** One value the learner can read off a running simulation. */
+export interface SimReadout {
+  key: string
+  label: string
+  value: number
+  unit: string
+  /** Decimal places to show; 2 when omitted. */
+  dp?: number
+  /** A shorter header for the runs table; `label` when omitted. */
+  tableLabel?: string
+}
+
+/**
+ * How two runs relate: the measured quantity scales WITH the varied one
+ * (proportional), AGAINST it (inverse), with its square root (square_root:
+ * four times the input, twice the result), or not at all (unchanged).
+ */
+export type SimRelation = 'proportional' | 'inverse' | 'square_root' | 'unchanged'
+
+/**
+ * A prediction the learner may make BEFORE running, authored here on the
+ * registry entry (ADR 16, U6) — never in the pedagogical registry.
+ *
+ * `tests` says what a fair experiment for it looks like: change `vary`, hold
+ * every `holdConstant` fixed, and read `measure`. Only a pair of runs that
+ * does exactly that can answer the prediction — the control-of-variables rule.
+ */
+export interface SimPrediction {
+  id: string
+  question: string
+  options: readonly { label: string; relation: SimRelation }[]
+  tests: { vary: string; holdConstant: readonly string[]; measure: string }
+  /** Shown once a fair experiment has answered the prediction. */
+  explanation: string
+  /**
+   * How a tutor sentence gives this prediction's answer away, and how a learner
+   * message raises the variable itself. While the simulation is on screen, a
+   * sentence matching `answer` is removed from the tutor's reply unless the
+   * learner's own message matches `topic` (they asked) or reports a
+   * measurement (simulationPrompt.ts). Verbal claims only: a formula the lesson
+   * itself teaches is never matched.
+   */
+  giveaway?: { topic: RegExp; answer: readonly RegExp[] }
+}
+
+/**
+ * A pure, deterministic time model. No React, no timers, no randomness, no I/O.
+ *
+ * State is a function of (params, tick) with t = tick · fixedDt. The wall clock
+ * only decides HOW MANY ticks have passed, so every device reaches the same
+ * state at the same tick.
+ */
+export interface TimeSimulation {
+  /** Fixed simulation tick, seconds. */
+  fixedDt: number
+  /** How far one press of Step advances, in ticks. */
+  stepTicks: number
+  /** Hard stop, in ticks. */
+  maxTicks: number
+  /** The tick on which the run ends; null when the generator refuses the values. */
+  terminalTick: (params: SceneParams) => number | null
+  /** The kind's own builder at a tick. The host applies rebuildScene's gate to it. */
+  build: (params: SceneParams, tick: number) => SceneSpec | null
+  /** What can be read off the run at a tick; null when the values are refused. */
+  observe: (params: SceneParams, tick: number) => SimReadout[] | null
+  predictions: readonly SimPrediction[]
+  /** What the status line says once a run has finished; "Finished." when omitted. */
+  finishedText?: (params: SceneParams, tick: number) => string
 }
 
 /**
@@ -626,6 +709,160 @@ export const PARAMETRIC_SCENES: Readonly<Record<string, ParametricScene>> = {
       equilibriumPrice: num(p.equilibriumPrice, 50), equilibriumQuantity: num(p.equilibriumQuantity, 100),
     } as unknown as SceneParams),
   },
+
+  // ── time-stepped simulation (ADR 16 proof of concept) ─────────────────────
+  // Registered here so the figure is interactive like every other kind, but NO
+  // concept is bound to it yet (visualRegistry, ADR 16 gate G3): nothing in the
+  // product can serve it until then.
+  newton_second_law: {
+    defaults: { force: 10, mass: 2 },
+    variables: [
+      { key: 'force', label: 'F', kind: 'number', unit: 'N', min: 0, max: 20, step: 1, effect: 'the net push on the block: change it, run again, and compare how the block moves' },
+      { key: 'mass', label: 'm', kind: 'number', unit: 'kg', min: 0.5, max: 10, step: 0.5, effect: 'how much matter the block has: change it, run again, and compare how the block moves' },
+    ],
+    build: guarded(validateNewtonParams, (p) => buildNewtonScene(p, 0)),
+    simulation: {
+      fixedDt: NEWTON_FIXED_DT,
+      stepTicks: 5,
+      maxTicks: NEWTON_MAX_TICKS,
+      terminalTick: (params) => {
+        const p = validateNewtonParams(params)
+        return p ? newtonTerminalTick(p) : null
+      },
+      build: (params, tick) => {
+        const p = validateNewtonParams(params)
+        return p ? buildNewtonScene(p, tick) : null
+      },
+      observe: (params, tick) => {
+        const p = validateNewtonParams(params)
+        return p ? newtonReadouts(p, tick) : null
+      },
+      predictions: [
+        {
+          id: 'double-mass',
+          question: 'Keep the force the same and double the mass. What happens to the acceleration?',
+          options: [
+            { label: 'It doubles', relation: 'proportional' },
+            { label: 'It halves', relation: 'inverse' },
+            { label: 'It stays the same', relation: 'unchanged' },
+          ],
+          tests: { vary: 'mass', holdConstant: ['force'], measure: 'a_measured' },
+          explanation: 'With the same net force, twice the mass gets half the acceleration: a = F / m, so acceleration is inversely proportional to mass.',
+          giveaway: {
+            topic: /\b(?:mass|heav\w*|light\w*|weigh\w*)\b/i,
+            answer: [
+              /\b(?:twice|double[ds]?|two times)\b(?:[^.!?\n]|\.\d){0,30}\bmass\b(?:[^.!?\n]|\.\d){0,100}\b(?:half|halves|halved)\b/i,
+              /\binversely proportional to (?:the |its )?mass\b/i,
+            ],
+          },
+        },
+        {
+          id: 'double-force',
+          question: 'Keep the mass the same and double the force. What happens to the acceleration?',
+          options: [
+            { label: 'It doubles', relation: 'proportional' },
+            { label: 'It halves', relation: 'inverse' },
+            { label: 'It stays the same', relation: 'unchanged' },
+          ],
+          tests: { vary: 'force', holdConstant: ['mass'], measure: 'a_measured' },
+          explanation: 'On the same mass, twice the net force gives twice the acceleration: a = F / m, so acceleration is directly proportional to the net force.',
+          giveaway: {
+            topic: /\b(?:force|push\w*|pull\w*)\b/i,
+            answer: [
+              /\b(?:twice|double[ds]?|two times)\b(?:[^.!?\n]|\.\d){0,30}\bforce\b(?:[^.!?\n]|\.\d){0,100}\b(?:twice|double[ds]?|two times)\b/i,
+              /\bdirectly proportional to (?:the )?(?:net )?force\b/i,
+            ],
+          },
+        },
+      ],
+      finishedText: (_params, tick) => (tick >= NEWTON_MAX_TICKS ? 'Finished — 10 s have passed.' : 'Finished — the block reached the end of the track.'),
+    },
+  },
+
+  // ── ADR 16, second pilot: how long one swing of a pendulum takes ──────────
+  pendulum_period: {
+    defaults: { length: 1, amplitudeDeg: 10, mass: 0.5 },
+    variables: [
+      { key: 'length', label: 'L', kind: 'number', unit: 'm', min: 0.25, max: 2, step: 0.25, effect: 'the length of the string: change it, release again, and compare the swings' },
+      { key: 'amplitudeDeg', label: 'Swing angle', kind: 'number', unit: '°', min: 5, max: 30, step: 5, effect: 'how far to the side the bob is released: change it, release again, and compare the swings' },
+      { key: 'mass', label: 'm', kind: 'number', unit: 'kg', min: 0.1, max: 1, step: 0.1, effect: 'how heavy the bob is: change it, release again, and compare the swings' },
+    ],
+    build: guarded(validatePendulumPeriodParams, (p) => buildPendulumPeriodScene(p, 0)),
+    simulation: {
+      fixedDt: PENDULUM_FIXED_DT,
+      stepTicks: 10,
+      maxTicks: PENDULUM_MAX_TICKS,
+      terminalTick: (params) => {
+        const p = validatePendulumPeriodParams(params)
+        return p ? pendulumTerminalTick(p) : null
+      },
+      build: (params, tick) => {
+        const p = validatePendulumPeriodParams(params)
+        return p ? buildPendulumPeriodScene(p, tick) : null
+      },
+      observe: (params, tick) => {
+        const p = validatePendulumPeriodParams(params)
+        return p ? pendulumReadouts(p, tick) : null
+      },
+      predictions: [
+        {
+          id: 'longer-string',
+          question: 'Keep the swing angle and the bob the same, and make the string four times as long. What happens to the time for one swing?',
+          options: [
+            { label: 'It becomes four times as long', relation: 'proportional' },
+            { label: 'It doubles', relation: 'square_root' },
+            { label: 'It stays the same', relation: 'unchanged' },
+          ],
+          tests: { vary: 'length', holdConstant: ['amplitudeDeg', 'mass'], measure: 'period_measured' },
+          explanation: 'Four times the length gives twice the time for one swing: the time grows with the square root of the length. For small swings, T = 2π√(L / g).',
+          giveaway: {
+            topic: /\b(?:length|long\w*|short\w*|string)\b/i,
+            answer: [
+              /\bsquare root of (?:the )?(?:length|L)\b/i,
+              /\b(?:four|4)\s*(?:times|×)(?:[^.!?\n]|\.\d){0,100}(?:\btwice\b|\bdouble[ds]?\b|\btwo times\b|\b2\s*(?:times|×)|√\s*4|sqrt\{?4|factor of (?:2|two)\b)/i,
+            ],
+          },
+        },
+        {
+          id: 'heavier-bob',
+          question: 'Keep the string and the swing angle the same, and make the bob heavier. What happens to the time for one swing?',
+          options: [
+            { label: 'It gets longer', relation: 'proportional' },
+            { label: 'It gets shorter', relation: 'inverse' },
+            { label: 'It stays the same', relation: 'unchanged' },
+          ],
+          tests: { vary: 'mass', holdConstant: ['length', 'amplitudeDeg'], measure: 'period_measured' },
+          explanation: 'The mass makes no difference. A heavier bob is pulled harder by gravity, but it is also harder to speed up, and the two cancel exactly.',
+          giveaway: {
+            topic: /\b(?:mass|heav\w*|light\w*|weigh\w*)\b/i,
+            answer: [
+              /\b(?:not|n't|never|nor|regardless of|independent of|no matter)\b(?:[^.!?\n]|\.\d){0,100}\b(?:mass|heav\w*|weigh\w*)\b/i,
+              /\b(?:mass|heav\w*|weigh\w*)\b(?:[^.!?\n]|\.\d){0,100}\b(?:does not|doesn't|do not|don't|has no|makes no|no effect|no difference|not affect|cancel\w*)/i,
+            ],
+          },
+        },
+        {
+          id: 'wider-swing',
+          question: 'Keep the string and the bob the same, and release it from twice the angle. What happens to the time for one swing?',
+          options: [
+            { label: 'It doubles', relation: 'proportional' },
+            { label: 'It halves', relation: 'inverse' },
+            { label: 'It stays about the same', relation: 'unchanged' },
+          ],
+          tests: { vary: 'amplitudeDeg', holdConstant: ['length', 'mass'], measure: 'period_measured' },
+          explanation: 'For swings up to 30° the time barely changes: a wider swing covers more distance, but the bob also moves faster. The small difference that remains, under 2%, is why T = 2π√(L / g) is called a small-angle result.',
+          giveaway: {
+            topic: /\b(?:angle|amplitude|wide\w*|far\w*|same time|every swing)\b/i,
+            answer: [
+              /\b(?:not|n't|never|nor|regardless of|independent of|no matter)\b(?:[^.!?\n]|\.\d){0,100}\b(?:amplitude|angle|size of the swing|how (?:far|wide|big))\b/i,
+              /\b(?:amplitude|angle)\b(?:[^.!?\n]|\.\d){0,100}\b(?:does not|doesn't|has no|makes no|no effect|barely|hardly)\b/i,
+            ],
+          },
+        },
+      ],
+      finishedText: () => `Finished — the bob made ${PENDULUM_SWINGS_PER_RUN} full swings.`,
+    },
+  },
 }
 
 /**
@@ -686,7 +923,20 @@ export function rebuildScene(
   if (!entry) return null
 
   const merged = { ...entry.defaults, ...params }
-  const built = entry.build(merged)
+  return finishFrame(kind, entry, merged, entry.build(merged))
+}
+
+/**
+ * The gate every re-derived figure passes before a learner sees it — shared by
+ * a slider rebuild and by every frame of a time-stepped simulation (ADR 16), so
+ * a simulation frame is framed, validated and stamped by exactly the same code.
+ */
+function finishFrame(
+  kind: string,
+  entry: ParametricScene,
+  merged: SceneParams,
+  built: SceneSpec | null,
+): SceneSpec | null {
   if (!built) return null
 
   // THE SAME FRAMING THE SERVER APPLIES. `buildCanonicalScene` fits every
@@ -732,4 +982,34 @@ export function rebuildScene(
 export function canonicalParametricScene(kind: string): SceneSpec | null {
   const entry = PARAMETRIC_SCENES[kind]
   return entry ? rebuildScene(kind, entry.defaults) : null
+}
+
+/** The time model a kind declares, or null — every kind but the ADR 16 POC. */
+export function simulationFor(kind: string | null | undefined): TimeSimulation | null {
+  return (kind && PARAMETRIC_SCENES[kind]?.simulation) || null
+}
+
+/**
+ * The figure at one tick of a simulation, through the SAME gate as a slider
+ * rebuild (framing, validateSceneSpec, the parametric stamp). The tick is
+ * clamped to [0, terminal tick]. Returns null when the kind has no simulation,
+ * the values are refused, or the frame fails validation — the host then keeps
+ * its last good frame rather than showing a wrong one.
+ *
+ * Tick 0 is, by construction, identical to `rebuildScene(kind, params)`.
+ */
+export function simulationFrame(
+  kind: string | null | undefined,
+  params: SceneParams,
+  tick: number,
+): SceneSpec | null {
+  if (!kind) return null
+  const entry = PARAMETRIC_SCENES[kind]
+  const sim = entry?.simulation
+  if (!entry || !sim) return null
+  const merged = { ...entry.defaults, ...params }
+  const end = sim.terminalTick(merged)
+  if (end === null) return null
+  const k = Math.max(0, Math.min(end, Math.floor(Number.isFinite(tick) ? tick : 0)))
+  return finishFrame(kind, entry, merged, sim.build(merged, k))
 }

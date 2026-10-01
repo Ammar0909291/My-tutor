@@ -39,6 +39,19 @@ export interface GateResult {
   mode: 'log' | 'enforce'
 }
 
+/**
+ * V-CONTRADICT is LOG severity, so it never makes a verdict REJECT and would
+ * never reach `[verifier-log]` on its own. Its whole purpose in this phase is
+ * to be MEASURED (owner-approved 2026-09-27, log-only), so it gets its own line
+ * whenever it fires: the authored rule it contradicts and the tutor's sentence
+ * — never the learner's text — to the runtime log only (no DB write, no egress).
+ */
+function logClaimCheck(violations: ReadonlyArray<{ code: string; matched?: string; detail?: string }>): void {
+  const hits = violations.filter((v) => v.code === 'V-CONTRADICT')
+  if (hits.length === 0) return
+  console.warn('[claim-check] ' + JSON.stringify(hits.map((v) => ({ matched: v.matched ?? null, rule: v.detail ?? null }))))
+}
+
 /** Total: never throws. On any internal failure, returns the original
  *  draftText unchanged (fail-open — matches the rest of the route's
  *  additive discipline). */
@@ -52,6 +65,20 @@ export async function verifierGate(inputs: GateInputs): Promise<GateResult> {
     // observed during a log-mode canary is definitively NOT the verifier.
     if (mode === 'log') {
       const decision = verify(inputs.draftText, inputs.ctx, 1)
+      logClaimCheck(decision.violations)
+      // PRECISION EVIDENCE (2026-09-24). Aggregate counts said 8,697 of 15,744
+      // verified turns would be rejected, and nothing recorded WHAT was
+      // flagged, so no rule's false-positive rate could be measured and none
+      // could be promoted to enforce on evidence. One line per rejected draft:
+      // the codes and the start of the TUTOR'S text (never the learner's), to
+      // the runtime log only — no database write, no added egress.
+      if (decision.verdict === 'REJECT') {
+        console.log('[verifier-log] ' + JSON.stringify({
+          codes: decision.violations.map((v) => v.code),
+          matched: decision.violations.map((v) => v.matched ?? null).slice(0, 3),
+          draft: inputs.draftText.slice(0, 200),
+        }))
+      }
       const events: OutputEvent[] =
         decision.verdict === 'REJECT'
           ? [{ kind: 'OutputRejected', attempt: 1, violations: decision.violations },
@@ -74,6 +101,7 @@ export async function verifierGate(inputs: GateInputs): Promise<GateResult> {
       inputs.draftText, inputs.ctx, inputs.rerender,
       inputs.fallbackChain, inputs.learnerText,
     )
+    logClaimCheck(loopResult.decision?.violations ?? [])
     return {
       finalText: loopResult.finalText,
       attempts: loopResult.attempts as 1 | 2,

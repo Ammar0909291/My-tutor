@@ -196,6 +196,31 @@ const MIN_TITLE_WORDS = 2
 const LEADING_MODIFIER_HEADS = new Set(['from', 'in', 'like'])
 
 /**
+ * A CLAUSE ABOUT "THAT" IS ABOUT THE LESSON (2026-09-26, turn harness).
+ *
+ * "show why that happens step by step" extracted the topic "why that happens
+ * step by step" and opened an unresolved-topic excursion. A request whose
+ * object is a clause headed by why/how/whether/what/that with a PRONOUN or
+ * demonstrative subject ("why that happens", "how it works", "that this is
+ * negative") points back at what is already on the table; it names nothing.
+ * The same rule QUESTION_FORM_RE (session.ts) already applies to "why does
+ * that/this/it…". A clause with a real subject ("explain why the sky is
+ * blue", "explain what photosynthesis is") is untouched.
+ */
+const CLAUSE_HEADS = new Set(['why', 'how', 'whether', 'what', 'that'])
+const PRONOUN_SUBJECTS = new Set([
+  'that', 'this', 'it', 'its', 'these', 'those', 'they', 'there', 'we', 'you', 'he', 'she', 'i',
+])
+const CLAUSE_LEADERS = new Set(['me', 'us', 'to', 'please', 'again'])
+
+function isPronounClause(words: readonly string[]): boolean {
+  const norm = (w: string) => w.toLowerCase().replace(/['’]s$/, '').replace(/[^a-z]/g, '')
+  let i = 0
+  while (i < words.length && CLAUSE_LEADERS.has(norm(words[i]))) i++
+  return i + 1 < words.length && CLAUSE_HEADS.has(norm(words[i])) && PRONOUN_SUBJECTS.has(norm(words[i + 1]))
+}
+
+/**
  * Content words the grounding must carry BEYOND the title itself.
  *
  * The character floor alone is not a substance test: "explain kubernetes pod
@@ -302,6 +327,7 @@ export function extractRequestedTopic(
   // the only order-independent answer, and it terminates because every branch
   // removes at least one word.
   let words = clause.trim().split(/\s+/).filter(Boolean)
+  if (isPronounClause(words)) return null
   for (;;) {
     if (words.length && LEADING_CONNECTIVES.has(words[0].toLowerCase().replace(/[^a-z0-9]/g, ''))) {
       words = words.slice(1)

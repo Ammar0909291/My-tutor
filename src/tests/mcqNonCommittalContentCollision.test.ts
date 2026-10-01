@@ -86,11 +86,12 @@ describe('ENG-D02 — the typed "A) <verbatim option>" shape now resolves (the e
     expect(resolveMcqChoice(`(A) ${CORRECT_TEXT}`, mcq)).toBe(mcq.correctIndex)
   })
 
-  it('a MISMATCHED label (content still wins — the content is the strongest signal, exactly rule 0\'s own philosophy) still resolves to the option whose TEXT was quoted', () => {
-    // The learner labelled it "B" but typed option A's exact words — the
-    // corpus only has 2 options here, so this exercises the general case
-    // without asserting a specific interaction beyond "content wins."
-    expect(resolveMcqChoice(`B) ${CORRECT_TEXT}`, mcq)).toBe(mcq.correctIndex)
+  // Choice-only (2026-09-28, owner-approved spec GB+, R13): BEFORE a label that
+  // disagreed with the quoted text resolved to the text; AFTER a label/text
+  // contradiction is not a choice. A MATCHING label + text still resolves (above).
+  it('a MISMATCHED label (the label names a different option than the quoted text) is refused', () => {
+    const other = 'ABCD'[mcq.correctIndex === 0 ? 1 : 0]
+    expect(resolveMcqChoice(`${other}) ${CORRECT_TEXT}`, mcq)).toBeNull()
   })
 })
 

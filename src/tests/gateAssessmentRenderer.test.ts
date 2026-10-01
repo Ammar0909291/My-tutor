@@ -53,9 +53,13 @@ describe('the assessment itself is untouched (1-5)', () => {
     const mcq = probeToMcq(PROBE)
     expect(mcq).not.toBeNull()
     expect(mcq!.question).toBe(PROBE.stem)
-    expect(mcq!.options).toEqual([
-      '0 m — the runner returns to the exact starting position',
-      '400 m — that is how far the runner ran',
+    // Since task #2 (2026-09-30) the options are served as answer heads — the
+    // correct one no longer wins on length — and the authored working is held
+    // in `rationales` until after grading.
+    expect(mcq!.options).toEqual(['0 m', '400 m'])
+    expect(mcq!.rationales).toEqual([
+      'the runner returns to the exact starting position',
+      'that is how far the runner ran',
     ])
     expect(mcq!.correctIndex).toBe(0)
   })
@@ -188,7 +192,9 @@ describe('route wiring — fewer LLM calls, nothing else changed (7,8,9,11,12)',
     // ONE new routeAI call site (the claim-challenge repair regeneration in
     // route.ts, right after the V-AFFIRM floor) -- the only production change
     // to this count since this assertion was written. 4 -> 5.
-    expect((ROUTE.match(/await routeAI\(/g) ?? []).length).toBe(5)
+    // 5 -> 6 (2026-09-30): the stub repair's single regeneration (repairStubReply,
+    // confirmBackRepair.ts) — fires only when a clean-up left no real reply.
+    expect((ROUTE.match(/await routeAI\(/g) ?? []).length).toBe(6)
     expect(ROUTE).toContain("provider = 'gate'")
   })
 

@@ -63,7 +63,47 @@
  * ordinary teaching prose that happens to end a sentence in a colon is never
  * touched.
  *
- * ── WHEN IT STAYS QUIET, AND THE ONE CASE THAT MUST NOT (2026-09-19) ────────
+ * ── PASS 4 — THE MODEL SELF-LABELS AS "ASCII", NOT "TEXT DIAGRAM" (2026-09-20) ──
+ *
+ * Live reproduction on a real account, `phys.*` gravitational-waves lesson, no
+ * figure attached, learner asked twice for a diagram ("can you show me a
+ * diagram of this stretching and squeezing", then "i still didnt get a
+ * picture, can you actually show me one?"):
+ *
+ *   Here's a simple ASCII sketch to visualise the stretching-and-squeezing
+ *   effect that a passing gravitational wave would produce on two
+ *   perpendicular arms (think of the two arms of an interferometer):
+ *
+ *   |<-- 4 km arm 1 -->|
+ *
+ *   When a wave travels across the detector: ...
+ *
+ * Pass 3 requires the co-occurring words "text" AND "diagram" — this lead-in
+ * has neither; it says "ASCII sketch". And the single line that follows
+ * (`|<-- 4 km arm 1 -->|`) fails `isArtShapedParagraph`'s 3-symbol-run test:
+ * its dashes only ever run 2 deep (`--`), and the run regex does not count
+ * `<`/`>` at all, so nothing here would have been recognised as "art-shaped"
+ * even if the lead-in had matched. Unlike "text diagram" (a phrase that could
+ * in principle occur in ordinary discussion ABOUT diagrams), the model
+ * explicitly naming its own output "ASCII" is the same unambiguous signal
+ * that already justifies box-drawing's unconditional removal above — no
+ * separate shape heuristic is needed once the model has self-labeled this
+ * precisely. Scoped the same way as Pass 3 otherwise (co-occurrence with a
+ * diagram-shaped noun, colon-terminated lead-in, single paragraph consumed),
+ * and stays figure-gated for the same reason Pass 3 does: it is a text
+ * substitute for a missing figure, not something that can coexist with a
+ * real one.
+ */
+// The trailing `{0,200}?` (not the `{0,60}?` Pass 3 uses) is deliberately
+// wider: the live-reproduced lead-in continues for a full clause AFTER the
+// "ASCII sketch" phrase itself ("...to visualise the stretching-and-squeezing
+// effect... (think of the two arms of an interferometer):") before its
+// terminating colon — over 150 characters of ordinary sentence, not
+// decoration. Checked against the exact reproduced text, not assumed.
+const ASCII_LEADIN_RE =
+  /(?:^|\n)([^\n]{0,160}\bascii\b[^\n]{0,40}\b(?:sketch|diagram|art|drawing|figure|picture)\b[^\n]{0,200}?|[^\n]{0,160}\b(?:sketch|diagram|art|drawing|figure|picture)\b[^\n]{0,40}\bascii\b[^\n]{0,200}?)[.:]\s*\n+([^\n]+(?:\n[^\n]+)*)\n+/gi
+
+/** ── WHEN IT STAYS QUIET, AND THE ONE CASE THAT MUST NOT (2026-09-19) ────────
  * Pointer-line decoration and Pass 3's unfenced "text diagram" substitute are
  * gated on `figureOnScreen` (the SAME condition `stripUnbackedFigureReferences`
  * already uses, reused rather than re-derived): a genuinely code-fenced worked
@@ -113,6 +153,13 @@ function processFenceBody(
   }
   if (!allowPointerRemoval) {
     return { text: body, removed: false }
+  }
+  // A fence DRAWN with arrow glyphs (pilot, 2026-09-24, eng.grammar.verbs, no
+  // figure attached): "The dog → barks → loudly / (subject) (verb) (adverb)".
+  // Code does not use these glyphs (JavaScript's arrow is "=>"), so two or more
+  // of them in a fence is a drawing, and with no figure it goes.
+  if ((body.match(/[→←↑↓⇒⇐⇑⇓↔]/g) ?? []).length >= 2) {
+    return { text: '', removed: true }
   }
   const lines = body.split('\n')
   const firstPointerIdx = lines.findIndex(isPointerOnlyLine)
@@ -259,8 +306,133 @@ export function stripUnbackedAsciiDiagram(
     })
   }
 
+  // Pass 4: a self-labeled "ASCII sketch/diagram/art/drawing" with no fence —
+  // see the constant's own header for the live reproduction. No shape check
+  // (unlike Pass 3): the model naming its own output "ASCII" is already the
+  // same unambiguous signal that makes box-drawing removal unconditional
+  // above, so nothing further needs verifying once it has self-labeled this
+  // precisely. Still figure-gated, for the same reason Pass 3 is.
+  if (!figureOnScreen) {
+    result = result.replace(ASCII_LEADIN_RE, () => {
+      removedBlocks += 1
+      return ''
+    })
+  }
+
+  // Pass 4b — an UNFENCED DRAWING built from vertical strokes and labels
+  // (production, 2026-09-28, phys.astro.gravitational-waves, no figure): an
+  // interferometer drawn as a label, a column of "|" and a labelled arm. No
+  // pass saw it — there is no fence, no "ASCII" lead-in, and Pass 5 only knows
+  // HORIZONTAL connector runs — so a live reply shipped "a garbled block of
+  // repeated | characters", and another kept only an orphan "Mirror" after
+  // Pass 5 took the arm line beneath it. So a whole paragraph goes when it
+  // contains a pure stroke line (no letter or digit: |, ^, /, \, arrows) and
+  // EVERY line in it is drawing-shaped: a stroke line, a connector line, or a
+  // short unpunctuated label. Prose, bullets, tables, rules and ellipses fail
+  // that test and are never touched. Runs before Pass 5 so the labels go with
+  // their drawing instead of being orphaned.
+  if (!figureOnScreen) {
+    const lines = result.split('\n')
+    const drop = new Set<number>()
+    let inFence = false
+    let para: number[] = []
+    let prev: number[] = []
+    const flush = () => {
+      if (para.length === 0) return
+      if (para.some((i) => isStrokeLine(lines[i])) && para.every((i) => isDrawingShapedLine(lines[i]))) {
+        para.forEach((i) => drop.add(i))
+        // Its one-line lead-in ("Picture it like this:") points at nothing once
+        // the drawing is gone — the same rule Pass 1 applies before a fence.
+        if (prev.length === 1 && /:\s*$/.test(lines[prev[0]]) && DIAGRAM_WORD_RE.test(lines[prev[0]])) drop.add(prev[0])
+      }
+      prev = para
+      para = []
+    }
+    lines.forEach((line, i) => {
+      if (/^\s*```/.test(line)) { flush(); inFence = !inFence; return }
+      if (inFence) return
+      if (line.trim() === '') { flush(); return }
+      para.push(i)
+    })
+    flush()
+    if (drop.size > 0) {
+      removedBlocks += 1
+      result = lines.filter((_, i) => !drop.has(i)).join('\n')
+    }
+  }
+
+  // Pass 5 — a STANDALONE ART LINE outside any fence (production, 2026-09-24,
+  // bio.mol.transcription, no figure attached):
+  //
+  //   DNA (double helix)
+  //   5'---[Promoter]------[Coding region]---[Poly-A signal]---3'
+  //
+  // One line, so no paragraph test sees enough symbols (0.27 < 0.3). What marks
+  // it is shape, not density: a connector run (---, ===, -->, <--) and almost no
+  // prose once bracketed labels are set aside. The short unpunctuated caption
+  // directly above it is part of the same drawing and goes with it.
+  if (!figureOnScreen) {
+    const lines = result.split('\n')
+    const drop = new Set<number>()
+    let inFence = false
+    lines.forEach((line, i) => {
+      if (/^\s*```/.test(line)) { inFence = !inFence; return }
+      if (inFence || !isStandaloneArtLine(line)) return
+      drop.add(i)
+      if (i > 0 && isCaptionLine(lines[i - 1])) drop.add(i - 1)
+    })
+    if (drop.size > 0) {
+      removedBlocks += 1
+      result = lines.filter((_, i) => !drop.has(i)).join('\n')
+    }
+  }
+
   if (removedBlocks === 0) return { text, stripped: false, removedBlocks: 0 }
   // Collapse a run of blank lines a removal can leave behind, never touching
   // a single blank line (ordinary paragraph spacing).
   return { text: result.replace(/\n{3,}/g, '\n\n').trim(), stripped: true, removedBlocks }
+}
+
+const CONNECTOR_RUN_RE = /-{3,}|={3,}|-{2,}>|<-{2,}|={2,}>/
+
+/** A line that draws rather than says: a connector run and at most two words of prose outside [labels]. */
+export function isStandaloneArtLine(line: string): boolean {
+  const t = line.trim()
+  if (t.length === 0 || !CONNECTOR_RUN_RE.test(t)) return false
+  if (/^[-=]{3,}$/.test(t)) return false // a markdown rule, not a drawing
+  if (/^\|.*\|$/.test(t)) return false // a markdown table row or separator
+  // A drawing of a process LABELS its parts; a bare box edge ("+-----+") is
+  // left to the paragraph passes and their narrower co-occurrence rules.
+  if (!/[A-Za-z0-9]/.test(t)) return false
+  const prose = t.replace(/\[[^\]]*\]/g, ' ').replace(/[^A-Za-z\s]/g, ' ').split(/\s+/).filter((w) => w.length > 1)
+  return prose.length <= 2
+}
+
+/**
+ * A line that is only strokes: no letter or digit, at least one vertical or
+ * pointing stroke. Markdown rules, table separators and ellipses are not
+ * strokes — they carry no "|", "^", "/", "\" or arrow.
+ */
+export function isStrokeLine(line: string): boolean {
+  const t = line.trim()
+  if (t.length === 0 || /[\p{L}\p{N}]/u.test(t)) return false
+  if (/^\|?(\s*:?-{3,}:?\s*\|)+\s*(:?-{3,}:?\s*)?$/.test(t)) return false // table separator
+  return /[|^/\\↑↓←→↕⇅]/.test(t) && /^[\s|^/\\↑↓←→↕⇅<>+\-=_~.:*()[\]]*$/.test(t)
+}
+
+/** A line that belongs to a drawing: strokes, a connector with a few labels, or a bare label. */
+function isDrawingShapedLine(line: string): boolean {
+  const t = line.trim()
+  if (isStrokeLine(t) || isStandaloneArtLine(t) || isCaptionLine(t)) return true
+  // A connector run carrying a handful of labels ("Laser --> Beam splitter ------ Mirror").
+  if (!CONNECTOR_RUN_RE.test(t) || /^\|.*\|$/.test(t) || /[.!?;]$/.test(t)) return false
+  const words = t.replace(/[^\p{L}\s]/gu, ' ').split(/\s+/).filter((w) => w.length > 1)
+  return words.length <= 6
+}
+
+/** A short caption line with no sentence punctuation — a drawing's label, not prose. */
+function isCaptionLine(line: string): boolean {
+  const t = line.trim()
+  if (t.length === 0 || /[.!?:;]$/.test(t) || /^[#*>\-]/.test(t)) return false
+  return t.split(/\s+/).length <= 4
 }

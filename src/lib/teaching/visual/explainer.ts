@@ -210,35 +210,139 @@ function deriveResult(objects: SceneObject[], narrations: string[]): ExplainerRe
 }
 
 /**
+ * An id is a NAME only when it reads as one. `orbit`, `collision-point`,
+ * `pVector` and `bond0` (trailing counter dropped by `humanizeId`) name what
+ * they draw, and so does `male-0` or `resistor-0` — the nth member of a family
+ * whose noun IS its name. `spoke-line-0`, `group-1-line-2`, `stage-1-arrow` and
+ * `branch-start-a-arrow` are handles a generator numbered its objects with.
+ * MEASURED in the browser: the Biology hub's legend read "Spoke line 0" and the
+ * five-kingdom figure's "Group 0 line 0" — internal ids shown to a learner as
+ * if they meant something. So: a single noun with a counter keeps the noun;
+ * anything else still carrying a digit is a handle, and so is an id with a
+ * one-letter word anywhere but first (a branch letter, where a leading one is
+ * a symbol — the dipole moment `p` in "P vector"). A handle never becomes a
+ * label.
+ */
+export function nameFromId(id: string | undefined): string {
+  if (!id) return ''
+  const name = humanizeId(id)
+  if (!name) return ''
+  const counted = name.match(/^([A-Za-z]{2,}) \d+$/)
+  if (counted) return counted[1]
+  if (/\d/.test(name)) return ''
+  return name.split(/\s+/).every((word, i) => i === 0 || word.length >= 2) ? name : ''
+}
+
+/** Distinct values, first-seen order. */
+function distinct(values: string[]): string[] {
+  return [...new Set(values.filter(Boolean))]
+}
+
+const LEGEND_LABEL_MAX = 64
+
+/**
+ * Several names on one row: as many as fit, then an honest count of the rest —
+ * "Botany, Zoology, Microbiology +3 more". A row that silently named one of
+ * six would claim the other five were something else.
+ */
+function listLabel(names: string[]): string {
+  if (names.length === 1) return names[0].slice(0, LEGEND_LABEL_MAX)
+  let label = names[0].slice(0, LEGEND_LABEL_MAX)
+  let shown = 1
+  for (const name of names.slice(1)) {
+    const rest = names.length - shown - 1
+    const suffix = rest > 0 ? ` +${rest} more` : ''
+    if ((label + ', ' + name + suffix).length > LEGEND_LABEL_MAX) break
+    label += ', ' + name
+    shown++
+  }
+  const hidden = names.length - shown
+  return hidden > 0 ? `${label} +${hidden} more` : label
+}
+
+/**
  * The colour legend.
  *
- * One row per distinct colour that is actually drawn, named by the best
- * evidence available: the object's own caption, else its humanised id, else
- * the semantic role the palette assigns that colour. Rows whose colour carries
- * no meaning (the neutral ink used for plain labels) are dropped — a legend
- * entry reading "Labels" teaches nothing.
+ * One row per distinct colour that is actually drawn — the row is also the
+ * figure's focus control, which isolates a colour, so a colour is the unit.
+ * The row is named for EVERY object drawn in that colour, not the first one
+ * met: MEASURED in the browser, the Biology hub's six blue branches all read
+ * "Botany" because Botany happened to be drawn first. So the name is, in order
+ * of evidence: the objects' own captions (all of them, when they differ),
+ * else their ids where an id reads as a name (see `nameFromId`), else the
+ * semantic role the palette assigns that colour. A colour with none of these
+ * — a plain connector a generator numbered but never named — has no row: the
+ * figure shows what it joins, and a row naming its id would teach a handle.
+ * Rows whose colour carries no meaning (the neutral ink used for plain labels)
+ * are dropped too — a legend entry reading "Labels" teaches nothing.
  */
 function deriveLegend(objects: SceneObject[]): ExplainerSwatch[] {
-  const byColor = new Map<string, ExplainerSwatch>()
+  const byColor = new Map<string, SceneObject[]>()
 
   for (const obj of objects) {
     if (!DRAWN_TYPES.has(obj.type)) continue
     const color = obj.color
     if (!color) continue
-    const role = roleOf(color)
-    if (role === 'ink') continue
-    if (byColor.has(color)) continue
+    if (roleOf(color) === 'ink') continue
+    const group = byColor.get(color)
+    if (group) group.push(obj)
+    else byColor.set(color, [obj])
+  }
 
-    const caption = typeof obj.text === 'string' ? obj.text.trim() : ''
-    const label = caption || (obj.id ? humanizeId(obj.id) : '') || (role ? ROLE_NAME[role] : '')
-    if (!label) continue
+  const rows: ExplainerSwatch[] = []
+  for (const [color, group] of byColor) {
+    const captioned = group.filter((o) => typeof o.text === 'string' && o.text.trim())
+    const captions = distinct(captioned.map((o) => o.text!.trim()))
+    // An id is weaker evidence than a caption, so ids name a colour only when
+    // they name ALL of it: the cell cycle's "cycle-return" arrow shares its
+    // colour with arrows numbered `stage-1-arrow`…, and naming the colour
+    // "Cycle return" would caption those arrows too.
+    const idNamed = group.every((o) => nameFromId(o.id)) ? group : []
+    const idNames = distinct(idNamed.map((o) => nameFromId(o.id)))
+    // The palette's role name is for objects a generator never named at all.
+    // A group whose ids are all handles has been named — badly — so it gets no
+    // row rather than a generic one: MEASURED, falling back to the role there
+    // captioned a circuit's resistors "Resulting / outgoing quantity".
+    const role = group.some((o) => o.id) ? null : roleOf(color)
 
-    byColor.set(color, { label: label.slice(0, 48), color, shape: swatchShape(obj.type) })
+    // The swatch is drawn like the objects the row is named for.
+    const [names, namedBy] = captions.length
+      ? [captions, captioned]
+      : idNames.length
+        ? [idNames, idNamed]
+        : [role ? [ROLE_NAME[role]] : [], group]
+    if (!names.length) continue
+
+    rows.push({ label: listLabel(names), color, shape: swatchShape(namedBy[0].type) })
   }
 
   // A one-row legend explains nothing the figure does not already show.
-  const rows = [...byColor.values()]
   return rows.length >= 2 ? rows.slice(0, 6) : []
+}
+
+/** A narration as a sentence: terminal punctuation added only when it has none. */
+function asSentence(text: string): string {
+  return /[.!?…:;]["'”’)\]]*$/.test(text) ? text : `${text}.`
+}
+
+/**
+ * The panel's length budget, spent in whole lines. It used to be a bare
+ * `slice(0, 600)`, which cut six deterministic figures mid-sentence (DNA
+ * replication, meiosis, viscosity, levels of organisation, evidence for
+ * evolution, surface tension). A line that would overrun is dropped whole;
+ * 1000 fits every deterministic figure's narration today (longest 925 chars,
+ * bio.mol.dna-replication).
+ */
+const PANEL_CHARS = 1000
+function fitWholeLines(text: string, max = PANEL_CHARS): string {
+  if (text.length <= max) return text
+  let out = ''
+  for (const line of text.split('\n')) {
+    const next = out ? `${out}\n${line}` : line
+    if (next.length > max) break
+    out = next
+  }
+  return out || text.slice(0, max)
 }
 
 /**
@@ -256,9 +360,14 @@ function derivePanels(spec: SceneSpec, narrations: string[]): ExplainerPanel[] {
   const prose = narrations.filter((n) => !looksLikeFormula(n))
   const formulas = narrations.filter(looksLikeFormula)
 
-  const happening = prose.join(' ').trim() || spec.teachingGoal?.trim() || ''
+  // One step per line, each a finished sentence. They used to be joined with a
+  // bare space, and MEASURED in the browser that ran the steps together — "Biology
+  // Botany: the study of plants Zoology: the study of animals …" — because a
+  // generator's narrations are often labelled clauses with no full stop. A stop
+  // is added only where the author left none, and nothing else is changed.
+  const happening = prose.map(asSentence).join('\n').trim() || spec.teachingGoal?.trim() || ''
   if (happening) {
-    panels.push({ heading: "What's happening?", body: happening.slice(0, 600) })
+    panels.push({ heading: "What's happening?", body: fitWholeLines(happening) })
   }
 
   if (formulas.length) {

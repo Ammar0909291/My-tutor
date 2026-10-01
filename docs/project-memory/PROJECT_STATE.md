@@ -36,7 +36,7 @@ CHANGELOG going forward.
 | Knowledge Graph Consumption Architecture (`ADR_05_KNOWLEDGE_GRAPH_CONSUMPTION_ARCHITECTURE.md`) | **Proposal written, not executed.** Per explicit user instruction (2026-06-30, second pivot): Phase 1 must NOT be implemented — no canonical KG field (`mastery_threshold`, `cross_links`, or any other) may be exposed until the Curriculum Production Pipeline freezes the Canonical Knowledge Graph v1 specification. Status downgraded from "awaiting go-ahead" to "blocked on external v1 freeze + future approval." See §4b below. |
 | KG Consumption Pipeline contract (`ADR_06_KG_CONSUMPTION_PIPELINE.md`) | **Specification written, not implemented.** Opened 2026-06-30, item #1 of the user's 8-item forward-architecture roadmap. Specifies the version/status/shape gate that must sit between the Curriculum Pipeline's output and the Educational Brain's adapter — found zero such gate exists today (no version check, no status check, no runtime shape validation, no CI wiring). Implementation blocked on the same two conditions as ADR 05 Phase 1. See §4c below. |
 | Mastery Intelligence Architecture (`ADR_07_MASTERY_INTELLIGENCE_ARCHITECTURE.md`) | **Specification written, not implemented.** Opened 2026-06-30, item #2 of the roadmap. Found five non-unified mastery/progression representations (`MasteryLevel`, `TopicProgress.masteryPct`, `EbLearnerConceptMastery`, `TrackLevel`, `LevelBand`) with no reconciliation. Designates `MasteryLevel` (`masteryIntelligence.ts`) as canonical; proposes (not implemented) extending it to Library Mode, consolidating `learningProfile.ts`'s duplicate classification onto it, and a cross-vocabulary mapping table. Implementation blocked on the same two conditions as ADR 05/06. See §4d below. |
-| Educational Brain forward-architecture roadmap (8 ADRs, user-specified priority order) | **In progress — items 1-2 of 8 done (ADR 06, ADR 07).** Items 3-8 (Teaching Action Intelligence, Dynamic Lesson Composition, Student Memory Evolution, Recommendation Intelligence, Visualization & Simulation Architecture, AI Independence Roadmap) not yet started. Strict constraint for the whole roadmap: design/document only, zero production code changes without explicit per-ADR approval. See §4c below. |
+| Educational Brain forward-architecture roadmap (8 ADRs, user-specified priority order) | **In progress — items 1-2 of 8 done (ADR 06, ADR 07).** Items 3-8 (Teaching Action Intelligence, Dynamic Lesson Composition, Student Memory Evolution, Recommendation Intelligence, Visualization & Simulation Architecture, AI Independence Roadmap) not yet started — except item 7, corrected 2026-09-29: ADR 12 (Proposed) exists, and ADR 16 (time-stepped simulation, Newton POC) is ACCEPTED with gates G1–G3 implemented (one-concept production pilot); see §4c item 7. Strict constraint for the whole roadmap: design/document only, zero production code changes without explicit per-ADR approval. See §4c below. |
 | Educational Brain Bible (`docs/architecture/EDUCATIONAL_BRAIN_BIBLE.md`) | **Established this session.** Single living master document, updated by every ADR going forward. See §4e below. |
 
 ---
@@ -336,9 +336,25 @@ list in order, one ADR per turn, architecture-only:
 6. **Recommendation Intelligence** — not started. Short-term
    recommendations, long-term learning plans, weakness recovery,
    goal-based learning.
-7. **Visualization & Simulation Architecture** — not started. Visual
-   selection, graphs, animations, interactive simulations, scene
-   generation, rendering independence.
+7. **Visualization & Simulation Architecture** — IN PROGRESS (corrected
+   2026-09-29; the earlier "not started" was stale). Visual selection, graphs,
+   animations, interactive simulations, scene generation, rendering
+   independence. `ADR_12_VISUALIZATION_SIMULATION_ARCHITECTURE.md` (Visual
+   Asset Model, Proposed) already existed. `ADR_16_TIME_STEPPED_SIMULATION_NEWTON_POC.md`
+   was ACCEPTED by the owner on 2026-09-29 for the Newton's-second-law proof of
+   concept (decisions U1–U7; U8 deferred). It extends ADR 12 by giving
+   `PARAMETRIC_SCENES` an optional time dimension (no new registry or renderer).
+   **G1, G2 and G3 are implemented.** G3 is a ONE-concept production pilot:
+   `phys.mech.newtons-second-law` is served the simulation (card fallback kept;
+   no flag, by owner decision). A pilot-polish pass (ADR 16 §17) made it the
+   reference implementation: the answer is withheld until the run shows it, the
+   arrows are readable, the state text is accurate, the generic chrome is off
+   for simulations, and it is browser-tested at 390/1280. G4 (ADR 16 §18) added ONE second pilot,
+   `phys.wave.pendulum` (kind `pendulum_period`: period vs length, mass and swing angle, measured
+   from an exact-equation run), so exactly TWO concepts are simulation-bound. No third concept is
+   bound, and mass migration
+   is not started; G5 (simulation evidence reaching Tutor Max / mastery)
+   needs its own future ADR.
 8. **AI Independence Roadmap** — not started. Measuring/reducing AI
    dependency, promoting validated assets, knowledge acquisition
    strategy.

@@ -21,10 +21,14 @@ import { findBestExplanation, captureGeneratedExplanation, type ExplanationMatch
 import { decideCaptureAction, type LineageAsset, type CaptureOutcome } from './versioning'
 import { hashContent } from './similarity'
 import { probeToMcq } from '../gateAssessment'
+import { stripAuthoringLabel, dependsOnEarlierItem } from '../gateProbeContract'
 import type { TutorMCQ } from '../mcq'
 
 export interface ProbeMatch {
   assetId: string
+  /** The concept the probe was selected for — lets `probeToMcq` apply
+   *  subject-scoped presentation rules (task #2, physics-only per-option split). */
+  conceptId?: string
   stem: string
   choices: ProbeChoice[] | null
   correctValue: string | null
@@ -45,6 +49,9 @@ export interface ProbeMatch {
    * zero-slack pool is the defect that held physics at 79%.
    */
   poolSize: number
+  /** True when every unasked probe was spent and this is a question the
+   *  learner answered wrong earlier, asked once more (`allowMissedStem`). */
+  reask?: boolean
 }
 
 interface ProbeCandidateRow extends MatchableAsset {
@@ -66,7 +73,7 @@ export async function findBestProbe(state: StudentState, options: MatchOptions =
       take: 50,
     })
 
-    const rows: ProbeCandidateRow[] = candidates
+    const convertible: ProbeCandidateRow[] = candidates
       .filter((c) => c.probeAsset)
       .map((c) => ({
         assetId: c.assetId, conceptId: c.conceptId, language: c.language, gradeBand: c.gradeBand,
@@ -92,11 +99,6 @@ export async function findBestProbe(state: StudentState, options: MatchOptions =
         console.warn(`[teachingActionRepository] refused probe ${row.assetId} for learner: ${scaffolding}`)
         return false
       })
-      // ALREADY-ASKED EXCLUSION (MatchOptions.excludeProbeStem). Applied here,
-      // before scoring, so an exhausted corpus returns null and the caller
-      // falls back rather than re-asking — never after, which would silently
-      // serve the same question with a lower confidence number attached.
-      .filter((row) => !options.excludeProbeStem?.(row.probeAsset!.stem))
       // GATE-COMPATIBILITY FILTER (MatchOptions.requireMcq).
       //
       // The selection layer must not return an asset that the next MANDATORY
@@ -121,15 +123,45 @@ export async function findBestProbe(state: StudentState, options: MatchOptions =
         }) !== null
       })
 
+    // ALREADY-ASKED EXCLUSION (MatchOptions.excludeProbeStem). Applied here,
+    // before scoring, so an exhausted corpus returns null and the caller
+    // falls back rather than re-asking — never after, which would silently
+    // serve the same question with a lower confidence number attached.
+    // Applied AFTER the gate-compatibility filter (both are pure filters, so
+    // the surviving set is identical) so "the concept had usable probes and
+    // every one is spent" is observable here rather than collapsing into the
+    // same null as "the concept never had any".
+    const unasked = convertible.filter((row) => !options.excludeProbeStem?.(row.probeAsset!.stem))
+    // SECOND CHANCE ON A MISSED QUESTION (MatchOptions.allowMissedStem). Only
+    // when nothing unasked is left, and only questions the learner got wrong
+    // and has not been re-asked — so each authored question still yields at
+    // most one correct answer. The pool is not "exhausted" while one remains.
+    const reaskable = unasked.length === 0 && options.allowMissedStem
+      ? convertible.filter((row) => options.allowMissedStem!(row.probeAsset!.stem))
+      : []
+    const reask = reaskable.length > 0
+    const rows = reask ? reaskable : unasked
+    if (rows.length === 0 && convertible.length > 0) options.onAllCandidatesSpent?.()
+
+    // A re-ask shows its options in a new order, so it is answered from
+    // understanding rather than from where the right answer sat last time.
+    // Each choice carries its own isCorrect, so the key moves with it.
+    const choicesOf = (row: ProbeCandidateRow): ProbeChoice[] | null => {
+      const c = (row.probeAsset!.choices as ProbeChoice[] | null) ?? null
+      return reask && Array.isArray(c) && c.length > 1 ? [...c.slice(1), c[0]] : c
+    }
+
     const best = pickBest(state, rows, options)
     if (best) {
       return {
         assetId: best.asset.assetId,
+        conceptId: state.conceptId,
         stem: best.asset.probeAsset!.stem,
-        choices: (best.asset.probeAsset!.choices as ProbeChoice[] | null) ?? null,
+        choices: choicesOf(best.asset),
         correctValue: best.asset.probeAsset!.correctValue,
         confidence: best.confidence,
         poolSize: rows.length,
+        ...(reask ? { reask: true } : {}),
       }
     }
 
@@ -140,11 +172,13 @@ export async function findBestProbe(state: StudentState, options: MatchOptions =
       if (fallback) {
         return {
           assetId: fallback.asset.assetId,
+          conceptId: state.conceptId,
           stem: fallback.asset.probeAsset!.stem,
-          choices: (fallback.asset.probeAsset!.choices as ProbeChoice[] | null) ?? null,
+          choices: choicesOf(fallback.asset),
           correctValue: fallback.asset.probeAsset!.correctValue,
           confidence: fallback.confidence,
           poolSize: rows.length,
+          ...(reask ? { reask: true } : {}),
         }
       }
     }
@@ -301,7 +335,10 @@ export async function assembleLesson(state: StudentState, options: MatchOptions 
   const usedAssetIds = [explanation.assetId]
   let text = explanation.content
 
-  const probe = await findBestProbe(state, options)
+  const found = await findBestProbe(state, options)
+  // A follow-up written for an earlier item ("For the glass slab above …") is
+  // not served on its own — the turn is complete with the explanation alone.
+  const probe = found && dependsOnEarlierItem(found.stem) ? null : found
   let probeMcq: TutorMCQ | null = null
   if (probe) {
     usedAssetIds.push(probe.assetId)
@@ -323,11 +360,15 @@ export async function assembleLesson(state: StudentState, options: MatchOptions 
 }
 
 function formatProbeAsFollowUp(probe: ProbeMatch): string {
-  if (!probe.choices || probe.choices.length === 0) return `\n\n**Quick check:** ${probe.stem}`
+  // The same presentation-only label strip probeToMcq applies: this prose path
+  // served "RETRIEVAL PRACTICE (P-3b style, lateral shift): …" verbatim
+  // (production, 2026-09-30).
+  const stem = stripAuthoringLabel(probe.stem)
+  if (!probe.choices || probe.choices.length === 0) return `\n\n**Quick check:** ${stem}`
   const options = probe.choices
     .map((c, i) => `${String.fromCharCode(65 + i)}. ${c.text}`)
     .join('\n')
-  return `\n\n**Quick check:** ${probe.stem}\n\n${options}`
+  return `\n\n**Quick check:** ${stem}\n\n${options}`
 }
 
 export { findBestExplanation, captureGeneratedExplanation, type ExplanationMatch }

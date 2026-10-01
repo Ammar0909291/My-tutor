@@ -78,16 +78,16 @@ afterEach(() => {
 })
 
 describe('groq A/B certification override', () => {
-  it('(a) no header/override -> production default model (20b, the only Groq model since 2026-09-08)', async () => {
+  it('(a) no header/override -> production default model (120b, since 2026-09-21)', async () => {
     const { routeAI } = await import('@/lib/ai/router')
     const result = await routeAI(
       [{ role: 'user', content: 'hi' }], 'sys', 'IN', 800, 'en', undefined, undefined,
     )
     expect(result.provider).toBe('groq')
-    expect(groqModelsRequested).toEqual(['openai/gpt-oss-20b'])
+    expect(groqModelsRequested).toEqual(['openai/gpt-oss-120b'])
   })
 
-  it('(b) header present but caller passes no override (flag=false case) -> still the default (20b)', async () => {
+  it('(b) header present but caller passes no override (flag=false case) -> still the default (120b)', async () => {
     // Simulates route.ts's branch when modelOverrideAllowed is false: it never
     // sets groqModelOverride at all, so routeAI is called exactly like (a).
     const { routeAI } = await import('@/lib/ai/router')
@@ -95,15 +95,14 @@ describe('groq A/B certification override', () => {
       [{ role: 'user', content: 'hi' }], 'sys', 'IN', 800, 'en', undefined, undefined,
     )
     expect(result.provider).toBe('groq')
-    expect(groqModelsRequested).toEqual(['openai/gpt-oss-20b'])
+    expect(groqModelsRequested).toEqual(['openai/gpt-oss-120b'])
   })
 
-  it('(c) header + flag=true, requesting the default-matching allowed model -> that model is used', async () => {
-    // Between 2026-09-08 and 2026-09-17 the allowlist held 20b alone, so this
-    // case could only ever re-select the default. 2026-09-17 re-added 120b
-    // per-request only (see the sibling test below), so this case now
-    // genuinely exercises "request the SAME model as the default" rather
-    // than being the allowlist's only reachable value.
+  it('(c) header + flag=true, explicitly requesting 20b -> the override wins over the (now 120b) default', async () => {
+    // Before 2026-09-21 the default was 20b, so this case re-selected the
+    // default. The default has since flipped to 120b (see the sibling test
+    // above), so this now genuinely exercises "the explicit override beats
+    // whatever GROQ_MODEL currently is" rather than coinciding with it.
     const { routeAI } = await import('@/lib/ai/router')
     const result = await routeAI(
       [{ role: 'user', content: 'hi' }], 'sys', 'IN', 800, 'en', undefined, 'openai/gpt-oss-20b',
@@ -116,7 +115,10 @@ describe('groq A/B certification override', () => {
     const { routeAI } = await import('@/lib/ai/router')
     await routeAI([{ role: 'user', content: 'hi' }], 'sys', 'IN', 800, 'en', undefined, 'openai/gpt-oss-20b')
     await routeAI([{ role: 'user', content: 'hi' }], 'sys', 'IN', 800, 'en', undefined, undefined)
-    expect(groqModelsRequested).toEqual(['openai/gpt-oss-20b', 'openai/gpt-oss-20b'])
+    // First call explicitly overrides to 20b; the second, unoverridden call
+    // must fall through to the current default (120b) rather than sticking
+    // to whatever the first call happened to request.
+    expect(groqModelsRequested).toEqual(['openai/gpt-oss-20b', 'openai/gpt-oss-120b'])
   })
 
   it('isAllowedGroqCertModel rejects anything not on the closed allowlist (spoof resistance)', async () => {
@@ -215,7 +217,7 @@ describe('provider-forcing A/B certification override (2026-09-16)', () => {
       undefined, undefined, 'groq',
     )
     expect(result.provider).toBe('groq')
-    expect(groqModelsRequested).toEqual(['openai/gpt-oss-20b'])
+    expect(groqModelsRequested).toEqual(['openai/gpt-oss-120b'])
     expect(geminiCallCount).toBe(0)
   })
 

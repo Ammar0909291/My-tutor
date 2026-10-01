@@ -48,8 +48,21 @@ export async function createQaAccount(label: string): Promise<QaAccount> {
     throw new Error(`register failed ${reg.status}: ${(await reg.text()).slice(0, 300)}`)
   }
 
-  const cookie = await login(email, password)
-  return { email, password, name, cookie }
+  // The account now exists. A transient login failure here used to throw and
+  // lose the generated password, leaving an account nothing could delete
+  // (2026-09-30: two qa-r3-* accounts, register 201 then a non-JSON reply).
+  // Retry with backoff; on final failure, name the account so it can be found.
+  let lastErr: unknown
+  for (const waitMs of [0, 2000, 5000, 10000]) {
+    if (waitMs) await new Promise((r) => setTimeout(r, waitMs))
+    try {
+      const cookie = await login(email, password)
+      return { email, password, name, cookie }
+    } catch (err) {
+      lastErr = err
+    }
+  }
+  throw new Error(`registered ${email} but could not log in (${lastErr instanceof Error ? lastErr.message : String(lastErr)}); this QA account needs manual deletion`)
 }
 
 export async function login(email: string, password: string): Promise<string> {

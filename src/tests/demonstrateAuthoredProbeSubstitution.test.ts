@@ -147,7 +147,8 @@ describe('A — DEMONSTRATE, pool >= 4, no failures: the authored probe attaches
 
   it('an authored probe is attached and is gradeable', () => {
     expect(r.gateMcq).not.toBeNull()
-    expect(r.gateMcq!.correctIndex).toBe(0)
+    // Served order is a question-keyed permutation; the key moves with its choice.
+    expect(r.gateMcq!.options[r.gateMcq!.correctIndex]).toBe(AUTHORED_PROBE.choices.find((c) => c.isCorrect)!.text.trim())
     expect(r.gateMcq!.options).toHaveLength(4)
     // exactly one correct choice survived conversion
     expect(AUTHORED_PROBE.choices.filter((c) => c.isCorrect)).toHaveLength(1)
@@ -204,7 +205,7 @@ describe('C — OBSERVE, pool >= 4: the authored probe substitutes too (R81)', (
 
   it('an authored probe is attached and is gradeable', () => {
     expect(r.gateMcq).not.toBeNull()
-    expect(r.gateMcq!.correctIndex).toBe(0)
+    expect(r.gateMcq!.options[r.gateMcq!.correctIndex]).toBe(AUTHORED_PROBE.choices.find((c) => c.isCorrect)!.text.trim())
   })
 
   it('decideModelProbe resolves as authored-served — no change needed to that module', () => {

@@ -66,14 +66,16 @@ describe('R1 - ordinary lesson vocabulary must not open a wrong excursion', () =
   })
 
   it('resolves to the legitimate physics ray concept, never a foreign geometry one', () => {
-    const got = resolveRequestedConceptId(
-      'can you draw diagram of ray bending please', REFRACTION,
-    )
-    // `phys.opt.nature-of-light` - "Nature of Light: Ray and Wave Models" - is
-    // the only physics title that genuinely contains the standalone word, and
-    // it is refraction's own declared KG prerequisite.
+    // From a lesson whose figure never mentions rays, `phys.opt.nature-of-light`
+    // - "Nature of Light: Ray and Wave Models" - is the only physics title that
+    // genuinely contains the standalone word.
+    const got = resolveRequestedConceptId('can you draw diagram of ray bending please', 'phys.opt.dispersion')
     expect(got).toBe('phys.opt.nature-of-light')
     expect(idPrefix(got!)).toBe('phys')
+    // In the refraction lesson itself the ray is the lesson's own (its authored
+    // figure labels the "light ray", 2026-09-30): ray bending IS refraction, so
+    // no detour — the lesson's own figure is drawn.
+    expect(resolveRequestedConceptId('can you draw diagram of ray bending please', REFRACTION)).toBeNull()
   })
 })
 

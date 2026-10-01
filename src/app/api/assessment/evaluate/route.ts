@@ -81,11 +81,26 @@ export async function POST(req: Request) {
         ? existing.status
         : 'IN_PROGRESS' as const
 
+    // MASTERY MUST NOT REGRESS (real-learner QA, 2026-09-21). This was a bare
+    // `masteryPct: masteryScore` — an unconditional overwrite with every
+    // attempt, no floor. `status` already protects itself one line above
+    // (a MASTERED/COMPLETED topic can't be demoted by a later attempt), but
+    // the NUMBER had no equivalent guard: a learner who scored 65 on attempt
+    // 1 and stumbled on attempt 5 had masteryPct silently overwritten to
+    // whatever the new, lower score was — measured live (chem.org.pericyclic,
+    // masteryPct dropped to 25% over 11 attempts on an account that had
+    // scored higher earlier in the same session). `lastScore` is left as the
+    // genuine, unmodified latest-attempt score — that is honest, different
+    // information ("how did THIS attempt go") and must not be floored; only
+    // the cumulative masteryPct (the number this app is doing a "best
+    // mastery achieved" contract with) is protected against regressing.
+    const flooredMasteryPct = Math.max(masteryScore, existing?.masteryPct ?? 0)
+
     const row = await withRetry(() => prisma.topicProgress.upsert({
       where: key,
       update: {
         status,
-        masteryPct: masteryScore,
+        masteryPct: flooredMasteryPct,
         lastScore: masteryScore,
         attempts: { increment: 1 },
         ...(decision === 'PROMOTED' ? { completedAt: existing?.completedAt ?? new Date() } : {}),

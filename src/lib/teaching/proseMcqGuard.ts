@@ -49,7 +49,9 @@
 // same with lowercase letters. A-Z (not A-D) is deliberate: matching only A-D
 // would silently accept a five-option list "A/B/C/D/E" as a four-option MCQ,
 // which is not an MCQ shape at all. The 2-4 bound is enforced on the count.
-const OPTION_LINE = /^\s*[([]?([A-Za-z])[).\]]\s+\S.*$/
+// A markdown bullet and/or bold around the label (`- **A)** …`) is still an
+// option line — see gateProbeContract's OPTION_LINE_RE (2026-09-28).
+const OPTION_LINE = /^\s*(?:[-*•]\s+)?(?:\*\*|__)?[([]?([A-Za-z])[).\]](?:\*\*|__)?\s+\S.*$/
 
 /**
  * P2 FIX — THE INLINE SHAPE, the second half of the prose-MCQ gap.

@@ -35,12 +35,23 @@ import { validateProbeCandidate } from '../lib/teaching/assets/validation'
 const ASSET_DIR = path.join(__dirname, '..', 'lib', 'teaching', 'assets')
 const INSTRUMENTATION = path.join(__dirname, '..', 'instrumentation.ts')
 
-/** The depth target. Three is the mastery bar; five is the bar plus room for
- *  two wrong answers, which is what a real lesson needs. */
-const DEPTH_TARGET = 5
+/** The depth target. Three is the mastery bar (`correctAtCheck >= 1` plus
+ *  `correctAtPractice >= 2`, no slack) — the minimum for a lesson to be
+ *  completable at all. Five is the bar plus room for two wrong answers, which
+ *  is what a real lesson needs, and is the target physics/chemistry's more
+ *  mature depth programmes have reached over several batches. A module whose
+ *  own batch has only closed the bare floor so far (e.g. biology's first
+ *  batch) is held to 3 here rather than silently exempted or falsely reported
+ *  against a target it was never authored to reach — extend a module's own
+ *  target to 5 only once a later batch actually lifts it that far. */
+const DEPTH_TARGETS: Record<string, number> = {
+  'physicsDepthSeedAssets.ts': 5,
+  'chemistryDepthSeedAssets.ts': 5,
+  'biologyDepthSeedAssets.ts': 3,
+}
 
 /** Modules authored by the probe-depth programme. Extend as batches land. */
-const DEPTH_MODULES = ['physicsDepthSeedAssets.ts', 'chemistryDepthSeedAssets.ts']
+const DEPTH_MODULES = Object.keys(DEPTH_TARGETS)
 
 interface Probe {
   conceptId: string
@@ -97,17 +108,24 @@ function canonicalSlug(p: Probe, slots: Map<string, number>): string {
 }
 
 describe('probe depth', () => {
-  it('lifts every pair it touches to at least five gradeable probes', async () => {
-    const { all, depth } = await corpus()
+  it('lifts every pair it touches to at least its module\'s own depth target', async () => {
+    const { all } = await corpus()
     const counts = new Map<string, number>()
     for (const p of all) {
       if (!isGradeable(p)) continue
       counts.set(pairKey(p), (counts.get(pairKey(p)) ?? 0) + 1)
     }
-    const touched = [...new Set(depth.map(pairKey))].sort()
-    expect(touched.length).toBeGreaterThan(0)
-    const short = touched.filter((k) => (counts.get(k) ?? 0) < DEPTH_TARGET)
-    expect(short.map((k) => `${k} has ${counts.get(k) ?? 0}`)).toEqual([])
+    const short: string[] = []
+    for (const file of DEPTH_MODULES) {
+      const target = DEPTH_TARGETS[file]
+      const modulePairs = new Set((await loadFrom([file])).map(pairKey))
+      expect(modulePairs.size).toBeGreaterThan(0)
+      for (const k of modulePairs) {
+        const n = counts.get(k) ?? 0
+        if (n < target) short.push(`${file}: ${k} has ${n}, needs ${target}`)
+      }
+    }
+    expect(short).toEqual([])
   }, 30_000)
 
   it('converts no existing singleton slot into a ladder', async () => {

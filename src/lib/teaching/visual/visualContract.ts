@@ -13,6 +13,7 @@
 
 import { clamp } from './conceptText'
 import { buildSemanticsBlock } from './visualSemantics'
+import { buildSimulationBlock } from './simulationPrompt'
 import type { RequestedVisualForm } from '@/lib/teaching/masteryGate'
 import type { EducationalPurpose, Representation, VisualDecision } from './types'
 
@@ -241,6 +242,10 @@ export function buildVisualContractBlock(
   const semantics = asset.semantics
   const semanticsBlock = buildSemanticsBlock(semantics)
   if (semanticsBlock) lines.push('WHAT THE LEARNER SEES: ' + semanticsBlock)
+  // A simulation leaves its prediction questions for the learner to answer by
+  // experiment; the tutor must not answer them first (simulationPrompt.ts).
+  const simulationBlock = buildSimulationBlock(decision)
+  if (simulationBlock) lines.push(simulationBlock)
 
   // ── ALREADY INTRODUCED ────────────────────────────────────────────────────
   //

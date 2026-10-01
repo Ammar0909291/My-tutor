@@ -12,12 +12,13 @@
  * renderer will draw, the equation it will plot, the step narrations that were
  * authored. Nothing here guesses at colour, position, or content: if the
  * payload does not state it, it is not returned, and the contract falls back to
- * a truthful generic description.
+ * a truthful generic description. Positions are not guessed either: each
+ * label's coarse place on the figure is read off its own coordinates.
  */
 
 import type { VisualPayload } from './types'
 import type { SceneObject, SceneSpec } from '@/lib/teaching/sceneSpec'
-import { sceneStepCount } from '@/lib/teaching/sceneSpec'
+import { sceneStepCount, type Vec3 } from '@/lib/teaching/sceneSpec'
 import type { VisualSpec } from '@/lib/visuals/visualSpec'
 import { VISUAL_META } from '@/lib/school/visuals/visualTypes'
 import { clamp } from './conceptText'
@@ -52,6 +53,19 @@ export interface VisualSemantics {
   equations: string[]
   /** Authored step narrations, in reveal order. Empty when not stepped. */
   steps: string[]
+  /** How many stages the figure really has, when `steps` had to be cut short. */
+  stepTotal?: number
+  /**
+   * Each readable label with its coarse place on the figure ("top left",
+   * "right", …), read off its coordinates against the drawn extent.
+   *
+   * MEASURED LIVE (2026-09-30, phys.particle.standard-model): told only WHICH
+   * labels were drawn, the tutor said the leptons were "next to" the quarks,
+   * the bosons "below those rows" and the Higgs "at the bottom". In the figure
+   * the leptons are below the quarks, the bosons to the right and H at the far
+   * right. A learner following the words looked in the wrong places.
+   */
+  placed?: string[]
 }
 
 const EMPTY: VisualSemantics = {
@@ -61,7 +75,11 @@ const EMPTY: VisualSemantics = {
 /** Labels are the teaching; every one of them earns a slot before geometry. */
 const MAX_READABLE = 14
 const MAX_GEOMETRY = 5
-const MAX_STEPS = 6
+// Twelve, not six: MEASURED on production (2026-09-27), the tutor was told
+// "built in 6 stages" for a 7-stage Biology figure and never heard its last
+// stage (Genetics) — the count was taken after the cut. Seven Biology figures
+// have 7-12 stages (the levels of organisation have 12); all now fit.
+const MAX_STEPS = 12
 
 /**
  * Human-readable noun for a scene object that carries no text of its own.
@@ -115,6 +133,26 @@ const DRAWN: ReadonlySet<SceneObject['type']> = new Set<SceneObject['type']>([
   'point', 'particle', 'node', 'vector', 'arrow', 'bond', 'label', 'path', 'trajectory',
 ])
 
+/**
+ * A path through two points, or through points that all lie on one line, is
+ * drawn as a straight line. Calling it "a plotted curve" MEASURED on
+ * production: the Biology hub's six straight spokes reached the tutor as
+ * "6 plotted curves", and it told the learner about "six curved arrows".
+ */
+function isStraightPath(points: Vec3[] | undefined): boolean {
+  if (!points || points.length <= 2) return true
+  const [a] = points
+  const b = points.find((p) => p[0] !== a[0] || p[1] !== a[1] || p[2] !== a[2])
+  if (!b) return true
+  const d = [b[0] - a[0], b[1] - a[1], b[2] - a[2]]
+  const len = Math.hypot(d[0], d[1], d[2])
+  return points.every((p) => {
+    const e = [p[0] - a[0], p[1] - a[1], p[2] - a[2]]
+    const cross = Math.hypot(d[1] * e[2] - d[2] * e[1], d[2] * e[0] - d[0] * e[2], d[0] * e[1] - d[1] * e[0])
+    return cross / len <= 1e-6 * Math.max(1, len)
+  })
+}
+
 function dedupe(values: string[]): string[] {
   const seen = new Set<string>()
   const out: string[] = []
@@ -127,10 +165,26 @@ function dedupe(values: string[]): string[] {
   return out
 }
 
+/** Where a point sits in the drawn extent, in thirds: "top left" … "bottom right". */
+export function coarsePlace(x: number, y: number, ext: { x0: number; x1: number; y0: number; y1: number }): string {
+  const fx = ext.x1 > ext.x0 ? (x - ext.x0) / (ext.x1 - ext.x0) : 0.5
+  const fy = ext.y1 > ext.y0 ? (y - ext.y0) / (ext.y1 - ext.y0) : 0.5
+  const h = fx < 1 / 3 ? 'left' : fx > 2 / 3 ? 'right' : ''
+  const v = fy > 2 / 3 ? 'top' : fy < 1 / 3 ? 'bottom' : ''
+  return v && h ? `${v} ${h}` : v || h || 'centre'
+}
+
 function fromScene(spec: SceneSpec): VisualSemantics {
   // Read the drawn objects once, splitting text from shape. Both halves come
   // from the payload the renderer will paint — nothing here is inferred.
   const texts: string[] = []
+  const labelAt: Array<{ text: string; x: number; y: number }> = []
+  const ext = { x0: Infinity, x1: -Infinity, y0: Infinity, y1: -Infinity }
+  const extend = (p: unknown) => {
+    if (!Array.isArray(p) || typeof p[0] !== 'number' || typeof p[1] !== 'number') return
+    ext.x0 = Math.min(ext.x0, p[0]); ext.x1 = Math.max(ext.x1, p[0])
+    ext.y0 = Math.min(ext.y0, p[1]); ext.y1 = Math.max(ext.y1, p[1])
+  }
   const equations: string[] = []
   const shapeCounts = new Map<SceneObject['type'], number>()
 
@@ -138,7 +192,9 @@ function fromScene(spec: SceneSpec): VisualSemantics {
     for (const obj of step.objects ?? []) {
       // Never describe something the renderer will not draw.
       if (!DRAWN.has(obj.type)) continue
+      for (const p of [obj.position, obj.from, obj.to, ...(obj.points ?? [])]) extend(p)
       const text = typeof obj.text === 'string' ? obj.text.trim() : ''
+      if (text && Array.isArray(obj.position)) labelAt.push({ text: clamp(text, 60), x: obj.position[0], y: obj.position[1] })
       if (text) {
         // A label's TEXT is what the learner reads, whatever shape carries it.
         // EVERY label goes into `texts`, including the relationships: pulling
@@ -149,23 +205,33 @@ function fromScene(spec: SceneSpec): VisualSemantics {
         texts.push(clamp(text, 60))
         if (isEquation(text)) equations.push(clamp(text, 60))
       } else {
-        shapeCounts.set(obj.type, (shapeCounts.get(obj.type) ?? 0) + 1)
+        // A straight path is described as what the learner sees: a line.
+        const kind = (obj.type === 'path' || obj.type === 'trajectory') && isStraightPath(obj.points) ? 'bond' : obj.type
+        shapeCounts.set(kind, (shapeCounts.get(kind) ?? 0) + 1)
       }
     }
   }
 
   const readable = dedupe(texts).slice(0, MAX_READABLE)
+  // A place only means something against a real extent and at least two labels.
+  const placed = labelAt.length >= 2 && Number.isFinite(ext.x0) && (ext.x1 - ext.x0 > 0.5 || ext.y1 - ext.y0 > 0.5)
+    ? readable.map((t) => {
+        const at = labelAt.find((l) => l.text === t)
+        return at ? `"${t}" (${coarsePlace(at.x, at.y, ext)})` : `"${t}"`
+      })
+    : undefined
   const geometry = [...shapeCounts.entries()]
     // Densest shapes first: what dominates the picture is what a learner sees.
     .sort((a, b) => b[1] - a[1])
     .slice(0, MAX_GEOMETRY)
     .map(([type, n]) => (n === 1 ? OBJECT_NOUN[type] : `${n} ${OBJECT_PLURAL[type] ?? OBJECT_NOUN[type]}`))
 
-  const steps = dedupe(
+  const allSteps = dedupe(
     (spec.steps ?? [])
       .map((s) => (typeof s.narration === 'string' ? s.narration.trim() : ''))
       .filter(Boolean),
-  ).slice(0, MAX_STEPS)
+  )
+  const steps = allSteps.slice(0, MAX_STEPS)
 
   const caption = spec.teachingGoal?.trim()
     ? `${clamp(spec.title, 60)} — ${clamp(spec.teachingGoal.trim(), 160)}`
@@ -183,6 +249,8 @@ function fromScene(spec: SceneSpec): VisualSemantics {
     // A one-step scene is not "stepped"; saying so would invite the model to
     // announce stages that do not exist.
     steps: sceneStepCount(spec) > 1 ? steps : [],
+    ...(sceneStepCount(spec) > 1 && allSteps.length > steps.length ? { stepTotal: allSteps.length } : {}),
+    ...(placed ? { placed } : {}),
   }
 }
 
@@ -277,10 +345,14 @@ export function buildSemanticsBlock(semantics: VisualSemantics): string {
   // Text first and complete: it is the only part of the figure a learner can
   // quote back, and the part the tutor is most likely to invent.
   if (readable.length) {
+    const placed = semantics.placed && semantics.placed.length === readable.length ? semantics.placed : null
     parts.push(
-      'TEXT WRITTEN ON THE FIGURE, exactly as the learner reads it: ' +
-      readable.map((t) => `"${t}"`).join(', ') +
-      '. Use these words when you point at parts of it.',
+      'TEXT WRITTEN ON THE FIGURE, exactly as the learner reads it' +
+      (placed ? ', each with where it sits on the figure: ' + placed.join(', ') : ': ' + readable.map((t) => `"${t}"`).join(', ')) +
+      '. Use these words when you point at parts of it.' +
+      (placed
+        ? ' When you say WHERE something is, use only those positions — never say a part is "next to", "below", "above" or "at the bottom" unless those positions show it.'
+        : ''),
     )
   }
   if (geometry.length) {
@@ -288,6 +360,22 @@ export function buildSemanticsBlock(semantics: VisualSemantics): string {
       'Drawn without text of their own: ' + geometry.join(', ') +
       '. These are shapes — what each one MEANS is given by the text beside it ' +
       'and by the stages below, never by their shape alone.',
+    )
+  }
+  // ── WHAT IS NOT THERE ──────────────────────────────────────────────────────
+  // MEASURED (real-learner production run, 2026-09-29): with the drawn objects
+  // listed, the tutor still told the learner to look at "the rays that
+  // converge" on a lens figure with no rays, "the arrow" on a circuit with no
+  // current arrows, and "evenly spaced marks" on a projectile path with none.
+  // The list above never said it was COMPLETE, so the model filled the gaps
+  // with what such a figure usually has. It is complete; say so.
+  if (readable.length || geometry.length) {
+    parts.push(
+      'That list is COMPLETE: nothing else is drawn. If explaining needs something ' +
+      'that is not listed — a light ray, a current arrow, a force arrow, evenly ' +
+      'spaced marks, a moving object, a label — describe it in words as something ' +
+      'to IMAGINE ("imagine a ray of light…"), and never tell the learner to look ' +
+      'at it on the figure.',
     )
   }
   // The flat list stays, because it is what the contract's "name only these"
@@ -319,8 +407,9 @@ export function buildSemanticsBlock(semantics: VisualSemantics): string {
   // meaning in the payload, so they are quoted, never paraphrased into claims.
   if (steps.length) {
     parts.push(
-      `It is built in ${steps.length} stages, shown complete but ` +
-      'walkable one stage at a time by the learner: ' +
+      `It is built in ${Math.max(semantics.stepTotal ?? 0, steps.length)} stages, shown complete but ` +
+      'walkable one stage at a time by the learner' +
+      ((semantics.stepTotal ?? 0) > steps.length ? ` (the first ${steps.length} are listed)` : '') + ': ' +
       steps.map((s, i) => `(${i + 1}) ${clamp(s, 220)}`).join(' ') +
       '. These stages are what the figure MEANS: teach it in that order, keep ' +
       'each stage\'s claim intact, and invite them to walk the stages if they ' +

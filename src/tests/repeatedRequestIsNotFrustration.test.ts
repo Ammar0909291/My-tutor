@@ -112,3 +112,40 @@ describe('WHAT MUST STILL FIRE — the guard is narrowed, not disabled', () => {
     }
   })
 })
+
+/**
+ * THE LESSON SCREEN'S QUICK ACTIONS REPEAT BYTE-FOR-BYTE.
+ *
+ * MEASURED on production (2026-09-27, Biology): "Give me a diagram" tapped in
+ * one lesson and again as the next lesson's first message read as
+ * 'frustrated' — recovery fired and the tutor opened "I'm sorry you're feeling
+ * stuck" on 4 of 8 fresh diagram requests.
+ */
+describe('a repeated quick action is a request, not frustration', () => {
+  it('diagram, real-life example and challenge — every teaching language', async () => {
+    const { QUICK_ACTIONS } = await import('@/lib/learn/quickActions')
+    for (const action of Object.values(QUICK_ACTIONS).flat()) {
+      if (action.key === 'simpler') continue
+      expect(detectFailureState(action.prompt, action.prompt), action.prompt).toBeNull()
+    }
+  })
+
+  it('typed English forms of the same requests', () => {
+    for (const m of ['give me a diagram', 'show me a picture of the cell', 'can you draw me a diagram please', 'challenge me'])
+      expect(detectFailureState(m, m), m).toBeNull()
+  })
+
+  it('a repeated request to be re-explained is still a signal', () => {
+    expect(detectFailureState('Can you explain that in a simpler way?', 'Can you explain that in a simpler way?')).toBe('frustrated')
+  })
+
+  it('a repeated substantive answer is still frustration', () => {
+    expect(detectFailureState('The mitochondria makes ATP', 'The mitochondria makes ATP')).toBe('frustrated')
+  })
+
+  it('the lesson screen sends exactly the shared prompts', () => {
+    const src = require('node:fs').readFileSync(require('node:path').join(process.cwd(), 'src/components/learn/LessonScreen.tsx'), 'utf8') as string
+    expect(src).toContain("import { QUICK_ACTIONS } from '@/lib/learn/quickActions'")
+    expect(src).not.toMatch(/const QUICK_ACTIONS\s*[:=]/)
+  })
+})

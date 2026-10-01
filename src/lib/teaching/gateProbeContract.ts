@@ -44,10 +44,19 @@
  * said…", a single lettered aside, or a numbered list) cannot trip it, and
  * anchors each to its own line so an inline "(a) thing" mid-sentence is ignored.
  */
+/**
+ * One option line, `A)` / `A.` / `(A)`, also when the model wraps it in markdown:
+ * a bullet (`- A) …`) and/or bold (`**A)** …`). Physics certification,
+ * 2026-09-28 (phys.mech.kinematics-1d): the withhold cut the question stem of
+ * "- **A)** 12 m/s …" but not the options, which this pattern did not see, and
+ * the learner got four answers to no question. Shared by every option-line check.
+ */
+export const OPTION_LINE_RE = /^\s*(?:[-*•]\s+)?(?:\*\*|__)?\(?([A-Da-d])[).](?:\*\*|__)?\s+\S/
+
 export function containsOptionList(text: string): boolean {
   const withoutCode = text.replace(/```[\s\S]*?```/g, '')
   const letters = new Set<string>()
-  for (const m of withoutCode.matchAll(/^\s*\(?([A-Da-d])[).]\s+\S/gm)) {
+  for (const m of withoutCode.matchAll(new RegExp(OPTION_LINE_RE.source, 'gm'))) {
     letters.add(m[1].toUpperCase())
   }
   // A and B are the minimum a real option list can have; requiring A specifically
@@ -62,6 +71,15 @@ export interface GateContractInput {
   leadIn: string | null
   /** The canonical question the learner will actually be graded on. */
   canonicalQuestion: string
+  /**
+   * The question was attached on an EARLIER turn and is still on screen (not a
+   * fresh gate turn). Stricter about what it removes: an option list always
+   * goes, a trailing competing question only when it is a real question in its
+   * own paragraph, and the reply is never replaced wholesale — a learner asking
+   * something while a question waits is owed the answer, and "Does that help?"
+   * is not a competing assessment.
+   */
+  held?: boolean
 }
 
 export interface GateContractResult {
@@ -91,7 +109,7 @@ const FALLBACK_LEAD_IN = 'Here is your next question.'
 export function enforceGateProbeContract(input: GateContractInput): GateContractResult {
   try {
     const lines = input.text.split('\n')
-    const firstOptionLine = lines.findIndex((l) => /^\s*\(?[A-Da-d][).]\s+\S/.test(l))
+    const firstOptionLine = lines.findIndex((l) => OPTION_LINE_RE.test(l))
     const hasOptionList = containsOptionList(input.text) && firstOptionLine >= 0
 
     // A COMPETING QUESTION DOES NOT NEED OPTIONS TO BE ONE.
@@ -108,7 +126,15 @@ export function enforceGateProbeContract(input: GateContractInput): GateContract
     // legitimately repeats it when a learner asks for a reminder) from a
     // different one (cut), by word overlap against the probe the server chose.
     const head = hasOptionList ? lines.slice(0, firstOptionLine).join('\n').trim() : input.text.trim()
-    const kept = dropCompetingQuestion(head, input.canonicalQuestion)
+    let kept = dropCompetingQuestion(head, input.canonicalQuestion)
+    if (input.held && kept !== head) {
+      const cut = head.slice(kept.length).trim()
+      // Keep a short check-in, and never let the cut take the whole reply.
+      if (kept.length === 0 || cut.split(/\s+/).length < 6) kept = head
+    }
+    if (input.held && hasOptionList && kept.length === 0) {
+      return { text: input.text, replaced: false, reason: 'ok' }
+    }
     if (!hasOptionList && kept === head) {
       // Nothing to repair: no option list, and no competing question.
       return { text: input.text, replaced: false, reason: 'ok' }
@@ -191,7 +217,26 @@ function dropCompetingQuestion(head: string, canonicalQuestion: string): string 
  * changes nothing about which probe is selected, how it is graded, or what is
  * stored — only what is rendered.
  */
-const AUTHORING_LABELS = /^\s*(DIAGNOSTIC|FORMATIVE|SUMMATIVE|CHECKPOINT|PROBE|PRACTICE|MISCONCEPTION[- ]PROBE)\s*(\([^)]*\)\s*)?:\s*/i
+// RETRIEVAL PRACTICE / TRANSFER / MASTERY GATE added 2026-09-30: 384 authored
+// stems carry them (counted across src/lib/teaching/assets), and a learner met
+// "RETRIEVAL PRACTICE (P-3b style, lateral shift): …" verbatim in production.
+const AUTHORING_LABELS = /^\s*(DIAGNOSTIC|FORMATIVE|SUMMATIVE|CHECKPOINT|PROBE|RETRIEVAL[- ]PRACTICE|PRACTICE|TRANSFER|MASTERY[- ]GATE|MISCONCEPTION[- ]PROBE)\s*(\([^)]*\)\s*)?:\s*/i
+
+/** A trailing grader's note, from "Pass criterion" to the end of the stem. */
+const GRADING_NOTE = /\s*\bPass criterion\b[\s\S]*$/
+
+/**
+ * A stem written as the follow-up to an EARLIER item ("For the glass slab
+ * above (…)", "For the two-loop circuit above, …"). Served on its own it points
+ * at something the learner never saw. Narrow on purpose: "the row above it"
+ * and "above the threshold frequency" are ordinary content, not a reference.
+ */
+const EARLIER_ITEM_REF = /\b(?:for|from|using|with|of|in)\s+(?:the|this|that)\s+[\p{L}\d -]{1,30}?\s+above\b(?!\s+it\b)/iu
+
+/** Does this authored stem only make sense after a previous item? */
+export function dependsOnEarlierItem(stem: string): boolean {
+  return EARLIER_ITEM_REF.test(stem ?? '')
+}
 
 /** Remove a leading authoring label from a learner-facing stem. Idempotent. */
 export function stripAuthoringLabel(stem: string): string {
@@ -201,5 +246,9 @@ export function stripAuthoringLabel(stem: string): string {
   for (let i = 0; i < 3 && AUTHORING_LABELS.test(out); i++) {
     out = out.replace(AUTHORING_LABELS, '')
   }
+  // The grading note some stems end with — "Pass criterion (5-probe bank, 4/5
+  // at threshold 0.80): all four parts correct." (125 authored stems, 2026-09-30)
+  // — is metadata for the grader, not part of the question.
+  out = out.replace(GRADING_NOTE, '')
   return out.trim() || stem.trim()
 }

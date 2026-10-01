@@ -316,8 +316,11 @@ describe('13 · an excursion never writes lesson state', () => {
     // `openedAsKnowledgeGap` records WHY the excursion opened so its exit can
     // differ from a learner-chosen one — lifecycle, not progress: it moves no
     // counter, gates no mastery, and is never read by the ladder.
+    // `heldQuestion` (2026-09-24) is the lesson question that was on screen
+    // when the detour opened — lifecycle again: it decides only WHEN the detour
+    // closes ('closed-answered-lesson'); it moves no counter itself.
     expect(Object.keys(t.excursion.state).sort()).toEqual(
-      ['active', 'openedAsKnowledgeGap', 'returnToConceptId', 'targetConceptId', 'targetTopicTitle', 'turns'],
+      ['active', 'heldQuestion', 'openedAsKnowledgeGap', 'returnToConceptId', 'targetConceptId', 'targetTopicTitle', 'turns'],
     )
     // The lesson identity handed in is returned untouched as the return anchor.
     expect(t.excursion.returnToConceptId).toBe(LESSON)
@@ -389,9 +392,11 @@ describe('the EXCURSION DIRECTIVE is independent of the visual contract', () => 
     // A concept with no authored figure — the majority of the curriculum, and
     // the case that silently produced no guidance at all before.
     const noFigure = resolveVisual({
-      message: 'explain dimensional analysis',
-      lessonConceptId: 'phys.meas.dimensional-analysis',
-      subject: 'physics',
+      // An English concept: physics now gives every concept a figure (physics
+      // visual gap campaign, 2026-09-30), and English has no visuals at all.
+      message: 'explain rhyming',
+      lessonConceptId: 'eng.phonics.rhyming',
+      subject: 'english',
     })
     expect(noFigure.graphical).toBe(false)
     expect(buildVisualContractBlock(noFigure)).toContain('NO FIGURE IS ATTACHED')

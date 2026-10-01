@@ -43,17 +43,22 @@ export type VisualScope = 'concept' | 'domain'
  */
 export const INSUFFICIENT_FOR_CONCEPT: ReadonlySet<string> = new Set([
   // ── generator figures missing the concept's defining element ─────────────
-  'phys.opt.refraction',             // lens image construction; no boundary, normal or angles i/r
+  // REMOVED: 'phys.opt.refraction' ("lens image construction; no boundary,
+  // normal or angles i/r"). It now owns an authored boundary/normal/angles
+  // figure in CONCEPT_SCENES (physicsPilot.ts buildRefractionScene, 2026-09-30).
   'phys.meas.scalars-vectors',       // vector addition; no scalar quantity is drawn
   'phys.mech.kinematics-2d',         // 1D graphs for a 2D concept
-  'phys.mech.impulse',               // before/after velocities; no force-time or labelled Δp
+  // REMOVED 2026-09-30: 'phys.mech.impulse' now owns a force–time area figure (physicsCoreScenes.ts batch 2).
   'phys.mech.rotational-dynamics',   // torque diagram; no moment of inertia, no angular acceleration
   'phys.mech.universal-gravitation', // an orbit; never the inverse-square force between two masses
   'phys.mech.gravitational-field',   // an orbit; the concept is field LINES
   'phys.wave.shm-energy',            // pendulum geometry; no KE/PE split
   'phys.em.electric-current',        // lumped circuit; no drift velocity or charge carriers
   'chem.period.modern-periodic-law', // two elements compared; not the table or the law
-  'bio.mol.dna-replication',         // static Watson-Crick pairing; no replication fork
+  // REMOVED: 'bio.mol.dna-replication' ("static Watson-Crick pairing; no
+  // replication fork"). It now owns an authored replication-fork figure in
+  // CONCEPT_SCENES (dnaReplication.pure.ts), so the verdict no longer
+  // describes what the concept renders — the intended exit from this set.
 
   // ── curated cards thinner than the concept they were bound to ────────────
   // phys.meas.vector-products was HERE ("one vector; dot/cross need two and
@@ -61,13 +66,13 @@ export const INSUFFICIENT_FOR_CONCEPT: ReadonlySet<string> = new Set([
   // dot/cross figure via CONCEPT_SCENES, which outranks the card, so the
   // verdict no longer describes what the concept renders. This is the
   // intended exit from this set — repair the figure, then drop the entry.
-  'phys.mech.velocity',              // static number line cannot show a rate
-  'phys.mech.acceleration',          // static number line cannot show a rate of a rate
-  'phys.mech.relative-motion',       // one number line; the concept needs two frames
-  'phys.mech.newtons-third-law',     // forces on ONE body; the third law needs a pair on two
-  'phys.mech.inclined-plane',        // force diagram with no incline drawn
-  'phys.mech.work',                  // empty x-y plane; work is the area under an F-d curve
-  'phys.mech.conservative-forces',   // static forces cannot show path-independence
+  // PROMOTED 2026-09-30 (physics batch 15, physicsCoreScenesB15.ts): 'phys.mech.velocity' — was: static number line cannot show a rate
+  // PROMOTED 2026-09-30 (physics batch 15, physicsCoreScenesB15.ts): 'phys.mech.acceleration' — was: static number line cannot show a rate of a rate
+  // PROMOTED 2026-09-30 (physics batch 15, physicsCoreScenesB15.ts): 'phys.mech.relative-motion' — was: one number line; the concept needs two frames
+  // REMOVED 2026-09-30: 'phys.mech.newtons-third-law' now owns a force pair on two bodies (physicsCoreScenes.ts batch 2).
+  // REMOVED 2026-09-30: 'phys.mech.inclined-plane' now owns an incline with resolved weight (physicsCoreScenes.ts batch 2).
+  // REMOVED 2026-09-30: 'phys.mech.work' now owns an F·d cos θ figure (physicsCoreScenes.ts batch 2).
+  // PROMOTED 2026-09-30 (physics batch 15, physicsCoreScenesB15.ts): 'phys.mech.conservative-forces' — was: static forces cannot show path-independence
   // REMOVED: 'phys.mech.angular-kinematics'. The verdict was written about a
   // curated binding (coordinate_plane with no generator) that has since been
   // removed from the registry, so the sentence "empty x-y plane; no θ/ω/α
@@ -87,13 +92,14 @@ export const INSUFFICIENT_FOR_CONCEPT: ReadonlySet<string> = new Set([
   // an entry outlives the figure it judged. When a binding is removed or
   // repaired, its verdict must be revisited, or the next figure inherits a
   // criticism of its predecessor.
-  'phys.mech.angular-momentum',      // centripetal-force card; L = r × p is not drawn
-  'phys.mech.conservation-of-angular-momentum', // no before/after spin-rate change
-  'phys.mech.hookes-law',            // no spring, no extension-vs-force relation
-  'phys.therm.ideal-gas-law',        // empty x-y plane where a P-V diagram is required
-  'phys.therm.thermodynamic-processes', // empty x-y plane; no labelled P-V paths
-  'phys.therm.carnot-cycle',         // empty x-y plane; no closed four-stage cycle
-  'phys.em.resistivity',             // bulb circuit; ρ = RA/L needs conductor geometry
+  // PROMOTED 2026-09-30 (physics batch 15, physicsCoreScenesB15.ts): 'phys.mech.angular-momentum' — was: centripetal-force card; L = r × p is not drawn
+  // PROMOTED 2026-09-30 (physics batch 15, physicsCoreScenesB15.ts): 'phys.mech.conservation-of-angular-momentum' — was: no before/after spin-rate change
+  // REMOVED 2026-09-30: 'phys.mech.hookes-law' ("no spring, no extension-vs-force
+  // relation") now owns an authored spring / x / F = −kx figure (physicsCoreScenes.ts).
+  // REMOVED 2026-09-30: 'phys.therm.ideal-gas-law' now owns P–V isotherms (physicsCoreScenes.ts batch 2).
+  // PROMOTED 2026-09-30 (physics batch 15, physicsCoreScenesB15.ts): 'phys.therm.thermodynamic-processes' — was: empty x-y plane; no labelled P-V paths
+  // PROMOTED 2026-09-30 (physics batch 15, physicsCoreScenesB15.ts): 'phys.therm.carnot-cycle' — was: empty x-y plane; no closed four-stage cycle
+  // PROMOTED 2026-09-30 (physics batch 15, physicsCoreScenesB15.ts): 'phys.em.resistivity' — was: bulb circuit; ρ = RA/L needs conductor geometry
 
   // ── MATHEMATICS: the sweep never reached it (P1 audit) ───────────────────
   // Every entry above came from the physics/chemistry semantic-moat sweep, and
@@ -182,9 +188,9 @@ export const INSUFFICIENT_FOR_CONCEPT: ReadonlySet<string> = new Set([
   // retired — the same verdict phys.em.resistivity and phys.mech.inclined-plane
   // already carry for the same reason. The demotion is what stops the false
   // claim; the picture still renders.
-  'phys.mech.displacement',          // bare -5..5 number line; no start, no end, no path
-  'phys.mech.tension',               // force diagram with no string, rope or tension arrow
-  'phys.em.emf',                     // bulb circuit; V = E - I*r needs r drawn inside the cell
+  // PROMOTED 2026-09-30 (physics batch 15, physicsCoreScenesB15.ts): 'phys.mech.displacement' — was: bare -5..5 number line; no start, no end, no path
+  // PROMOTED 2026-09-30 (physics batch 15, physicsCoreScenesB15.ts): 'phys.mech.tension' — was: force diagram with no string, rope or tension arrow
+  // PROMOTED 2026-09-30 (physics batch 15, physicsCoreScenesB15.ts): 'phys.em.emf' — was: bulb circuit; V = E - I*r needs r drawn inside the cell
   // Found by asserting the condition rather than assuming it: B2's own
   // "requires authoring" list already recorded this one as needing a lens
   // COMBINATION, but it was never demoted, so it kept claiming to BE a figure
@@ -194,8 +200,8 @@ export const INSUFFICIENT_FOR_CONCEPT: ReadonlySet<string> = new Set([
   // card-backed figure carrying the STRONG contract, and compared it with the
   // concept's claim. Two named a thing the card's own description does not
   // contain.
-  'phys.qm.schrodinger-equation',    // a static ψ(x); the TIME-DEPENDENT equation shows no time and no equation
-  'phys.qm.selection-rules',         // transitions are drawn, but not which are allowed, and no probabilities
+  // PROMOTED 2026-09-30 (physics batch 15, physicsCoreScenesB15.ts): 'phys.qm.schrodinger-equation' — was: a static ψ(x); the TIME-DEPENDENT equation shows no time and no equation
+  // PROMOTED 2026-09-30 (physics batch 15, physicsCoreScenesB15.ts): 'phys.qm.selection-rules' — was: transitions are drawn, but not which are allowed, and no probabilities
   // Round 5 rebound these two from the chem.bond domain default onto the
   // molecular-shapes card, which is strictly more relevant (it labels
   // 109.5° tetrahedral angles rather than showing an abstract A-B pair).

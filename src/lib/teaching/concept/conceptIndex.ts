@@ -120,8 +120,17 @@ export function deriveAcronym(title: string): string | null {
 export const CONCEPT_ALIASES: Readonly<Record<string, readonly string[]>> = {
   'phys.mech.newtons-second-law': ['f=ma', 'f = ma', 'second law of motion', 'newtons 2nd law'],
   'phys.mech.newtons-first-law': ['law of inertia', 'first law of motion', 'newtons 1st law'],
-  'phys.mech.newtons-third-law': ['third law of motion', 'newtons 3rd law', 'action reaction'],
+  // 'third law reaction' / 'third law pair': how a learner names a Third-Law
+  // PAIR without saying "Newton" ("What is the Third-Law reaction to that
+  // force?", A/B test 2026-09-28) — never how anyone refers to thermodynamics.
+  'phys.mech.newtons-third-law': ['third law of motion', 'newtons 3rd law', 'action reaction', 'third law reaction', 'third law pair'],
   'phys.therm.calorimetry': ['heat measurement'],
+  // Chemistry's own thermodynamics laws. Their bare conjuncts "Second Law" and
+  // "Third Law" are no longer components (each also names a Newton's law —
+  // see deriveTitleComponents), so a chemistry learner naming the law in full
+  // is kept in chemistry by these instead of landing on the physics title.
+  'chem.thermo.entropy': ['second law of thermodynamics'],
+  'chem.thermo.third-law': ['third law of thermodynamics'],
   // 'phys.mech.kinetic-energy': ['ke'] and 'phys.mech.potential-energy': ['pe']
   // were here. Both are below the abbreviation floor enforced by
   // `isAdmissibleAlias` (see its note) and were dropped rather than left as
@@ -209,12 +218,31 @@ export function deriveTitleComponents(
     }
   }
 
+  // A multi-word conjunct is AMBIGUOUS, too, when it reads inside two or more
+  // OTHER titles. MEASURED (A/B test, production, 2026-09-28): "Third Law" is a
+  // conjunct of chem.thermo.third-law ("Third Law and Absolute Entropy") and
+  // was admitted as unambiguous because no other CONJUNCT spelled it — but it
+  // is inside "Newton's Third Law — Action-Reaction" and "Third Law of
+  // Thermodynamics". Mid-friction lesson, "What is the Third-Law reaction to
+  // that force?" resolved through it to phys.therm.third-law, the tutor was
+  // pointed at absolute zero, and Groq answered with thermodynamics in one run
+  // and endorsed the same-object-pair misconception in the other. Two or more,
+  // not one: a phrase inside ONE other title is the same idea named in two
+  // subjects ("Enzyme Kinetics", "Photoelectric Effect"), where the component
+  // is what keeps the learner in their own subject. Across the live KGs this
+  // removes exactly "Second Law" and "Third Law".
+  const titleTokens = entries.map(e => ({ conceptId: e.conceptId, tokens: normalizeToTokens(e.title) }))
+  const insideOtherTitles = (conceptId: string, partTokens: readonly string[]) =>
+    titleTokens.filter(t => t.conceptId !== conceptId && containsTokenRun(t.tokens, partTokens)).length
+
   const out = new Map<string, readonly string[]>()
   for (const [conceptId, parts] of candidates) {
     const kept = parts.filter(part => {
       const key = normalizeKey(part)
       const claimants = owners.get(key)
       if (!claimants || claimants.size !== 1) return false      // ambiguous conjunct
+      const partTokens = normalizeToTokens(part)
+      if (partTokens.length > 1 && insideOtherTitles(conceptId, partTokens) >= 2) return false
       const tokens = normalizeToTokens(part).filter(t => !STOP_WORDS.has(t))
       if (tokens.length === 0) return false
       if (tokens.length === 1) return (docFreq.get(tokens[0]) ?? 0) === 1 // generic-word floor

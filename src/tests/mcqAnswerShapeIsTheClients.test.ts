@@ -79,10 +79,11 @@ describe('the client sends the option TEXT', () => {
 
 describe('the option text grades, for authored and model questions alike', () => {
   it('grades the authored probe from its own option text', () => {
+    const wrong = AUTHORED.options.findIndex((_, i) => i !== AUTHORED.correctIndex)
     expect(gradeMcqAnswer(AUTHORED.options[AUTHORED.correctIndex], AUTHORED))
-      .toEqual({ chosenIndex: 0, correct: true })
-    expect(gradeMcqAnswer(AUTHORED.options[1], AUTHORED))
-      .toEqual({ chosenIndex: 1, correct: false })
+      .toEqual({ chosenIndex: AUTHORED.correctIndex, correct: true })
+    expect(gradeMcqAnswer(AUTHORED.options[wrong], AUTHORED))
+      .toEqual({ chosenIndex: wrong, correct: false })
   })
 
   it('grades a model question from its own option text', () => {
@@ -91,24 +92,29 @@ describe('the option text grades, for authored and model questions alike', () =>
   })
 
   it('a bare letter also grades — the typed shortcut a learner may use', () => {
-    expect(gradeMcqAnswer('A', AUTHORED)).toEqual({ chosenIndex: 0, correct: true })
+    const letter = 'ABCD'[AUTHORED.correctIndex]
+    expect(gradeMcqAnswer(letter, AUTHORED)).toEqual({ chosenIndex: AUTHORED.correctIndex, correct: true })
     expect(gradeMcqAnswer('A', MODEL)).toEqual({ chosenIndex: 0, correct: true })
   })
 })
 
 describe('the shape that fooled the harness is refused, and refused evenly', () => {
-  it('"A sir" is ungradeable for BOTH kinds of question', () => {
-    // Evenly is the point: a harness seeing this fail only for authored probes
-    // would have concluded, again, that authored probes are special.
-    expect(gradeMcqAnswer('A sir', AUTHORED)).toEqual({ chosenIndex: null, correct: null })
-    expect(gradeMcqAnswer('A sir', MODEL)).toEqual({ chosenIndex: null, correct: null })
+  // Choice-only (2026-09-28, owner-approved spec GB+): BEFORE "A sir" was refused
+  // (a guard from the keyword era); AFTER it is an explicit letter with a
+  // politeness word — graded as A, and graded EVENLY for both kinds of question,
+  // which is still the point of this test.
+  it('"A sir" is graded the same way for BOTH kinds of question', () => {
+    expect(gradeMcqAnswer('A sir', AUTHORED).chosenIndex).toBe(0)
+    expect(gradeMcqAnswer('A sir', MODEL).chosenIndex).toBe(0)
   })
 
   it('an ungradeable answer yields correct === null, which spends no probe', () => {
     // route.ts only sets mcqGradeHoisted when `g.correct !== null`, and only a
     // set grade reaches recordMcqAsked. This is the whole causal chain that
     // made an unspent probe look like a re-serving defect.
-    for (const junk of ['A sir', 'a sir', 'hmm A maybe', 'ok sir']) {
+    // Choice-only: "A sir" / "a sir" are explicit letters now (see above); the
+    // hedge and the letterless politeness stay ungradeable.
+    for (const junk of ['hmm A maybe', 'ok sir']) {
       expect(gradeMcqAnswer(junk, AUTHORED).correct).toBeNull()
     }
   })

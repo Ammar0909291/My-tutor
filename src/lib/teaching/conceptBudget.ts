@@ -61,7 +61,7 @@ export const BUDGET_EXTENSION_TURNS = 6
  *   1. at least one server-graded correct answer at an ASSESSED rung —
  *      `correctAtCheck`/`correctAtPractice` move only inside CHECK/PRACTICE, so
  *      this cannot be satisfied by chat, acknowledgement or a diagnostic exit;
- *   2. the learner is not currently failing;
+ *   2. the learner is not spiralling (fewer than two consecutive misses);
  *   3. the ladder is past the diagnostic rungs.
  *
  * Grantable at most once (`budgetExtensionGranted`), so the worst case is a
@@ -113,7 +113,15 @@ export function qualifiesForBudgetExtension(state: ConversationState): boolean {
     (state.correctAtCheck ?? 0) + (state.correctAtPractice ?? 0) >= 1 ||
     (state.correctAnswersTotal ?? 0) >= 1
   if (!answeredSomethingRight) return false
-  if ((state.consecutiveFailures ?? 0) !== 0) return false
+  // NOT SPIRALLING, rather than "no miss at all" (2026-09-25). Measured on the
+  // synthetic launch-set run for free-body diagram + normal force: both
+  // unmastered lessons closed at turn 12 on a SINGLE wrong answer that followed
+  // a correct one (confused/free-body at CHECK with 1 check credit; the budget
+  // expired on the very turn of the slip). One miss after converting is normal
+  // learning, not a stall; two in a row is the same threshold the confusion
+  // signal uses (conversationState: consecutiveFailures >= 2). The extension
+  // still buys only turns — mastery stays server-graded.
+  if ((state.consecutiveFailures ?? 0) >= 2) return false
   return state.phase === 'CHECK' || state.phase === 'PRACTICE' || state.phase === 'TRANSFER'
 }
 
@@ -122,6 +130,14 @@ export function qualifiesForBudgetExtension(state: ConversationState): boolean {
 export function effectiveTurnBudget(state: ConversationState): number {
   return CONCEPT_TURN_BUDGET + (state.budgetExtensionGranted ? BUDGET_EXTENSION_TURNS : 0)
 }
+
+/**
+ * The absolute ceiling on ALL turns spent on one concept, learner-initiated
+ * ones included. `turnsOnConcept` no longer counts a learner's own questions
+ * and requests, so this is what keeps termination structural: however many
+ * questions a learner asks, a concept still closes by here.
+ */
+export const ABSOLUTE_TURN_CEILING = 2 * CONCEPT_TURN_BUDGET + BUDGET_EXTENSION_TURNS
 
 /** Consecutive failures after which continuing is more costly than moving on. */
 export const MAX_CONSECUTIVE_FAILURES = 3
@@ -243,7 +259,8 @@ export function evaluateConceptBudget(state: ConversationState): ConceptBudget {
   // THE `turns` BACKSTOP IS ABSOLUTE — it fires even for an unassessed
   // learner, so termination is always guaranteed and no loop can form. This
   // is deliberately checked BEFORE the confusion guard below.
-  if (turnsUsed >= effectiveTurnBudget(state)) {
+  if (turnsUsed >= effectiveTurnBudget(state)
+      || (state.turnsTotalOnConcept ?? turnsUsed) >= ABSOLUTE_TURN_CEILING) {
     return { ...base, status: 'exhausted', reason: 'turns', markForReview: true }
   }
 

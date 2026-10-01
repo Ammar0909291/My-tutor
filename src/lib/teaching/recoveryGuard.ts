@@ -29,6 +29,7 @@
 // isRepeatedAnswer below). conversationState.ts does not import this module,
 // so this edge adds no cycle.
 import { isLowSignalAcknowledgement } from './conversationState'
+import { QUICK_ACTIONS } from '@/lib/learn/quickActions'
 
 export type FailureStateKey =
   | 'dont_know' | 'dont_understand' | 'confused' | 'forgot' | 'guessing'
@@ -398,13 +399,74 @@ function isShoutingCaps(text: string): boolean {
 const NEXT_ITEM_REQUEST_RE =
   /^(?:ok(?:ay)?|right|sure|yes|yeah|alright)?[\s,.]*(?:can\s+you\s+|could\s+you\s+|please\s+|lets?\s+|i(?:'|’)?d\s+like\s+|i\s+want\s+)*(?:give\s+me|gimme|ask\s+me|show\s+me|do|try|have|get)?\s*(?:me\s+)?(?:the\s+|a\s+|an\s+|one\s+|another\s+|some\s+|more\s+|next\s+|other\s+)*(?:more\s+|next\s+|new\s+|practice\s+|practise\s+|another\s+)*(?:question|questions|problem|problems|example|examples|exercise|exercises|one)\b[\s\S]{0,40}$/i
 
+/**
+ * "Test me" — a request to BE ASKED, phrased as a verb on the learner.
+ * Pilot, 2026-09-24 (real accounts): "ok i get it, can you test me?" sent twice
+ * matched isRepeatedAnswer and returned 'frustrated'; arbitration then refused
+ * the authored probe and the lesson closed unmastered while the tutor kept
+ * promising a question it never asked. Positive evidence only — a verb that
+ * asks to be examined, aimed at the learner.
+ */
+const TEST_ME_RE =
+  /^(?:ok(?:ay)?|right|sure|yes|yeah|alright)?[\s,.]*(?:i\s+(?:get|got|understand)\s+it[\s,.]*)?(?:can\s+you\s+|could\s+you\s+|please\s+|now\s+)*(?:test|quiz|check)\s+(?:me|my\s+understanding)\b[\s\S]{0,40}$/i
+
 /** A bare "next" / "keep going" style nudge, with no content of its own. */
 const BARE_NEXT_RE = /^(?:ok(?:ay)?[\s,.]*)?(?:next|another|more|again|continue|carry\s+on|go\s+on|keep\s+going)\s*(?:please|one|question)?[\s.!?]*$/i
+
+/**
+ * A request after a short lead-in is still a request. Synthetic-student smoke
+ * run, 2026-09-24 (phys.mech.displacement, production): a learner who had
+ * answered three questions right sent "can we move faster? give me a question"
+ * six times. Anchored at the start, none of the patterns above matched, so the
+ * repeat read as 'frustrated', recovery refused every question, and the ladder
+ * walked CHECK -> GUIDE -> DEMONSTRATE until the lesson closed "for another
+ * look later". The same held for "got it. test me please" and "cool. ok test
+ * me". Each clause after the first is tested on its own; the length cap and
+ * the patterns themselves are unchanged.
+ */
+const CLAUSE_SPLIT_RE = /(?<=[.?!;:])\s+|,\s+/
+/** A clause must name what is asked for — "one of them is heavier" is an answer, not a request. */
+const REQUEST_WORD_RE = /\b(?:questions?|problems?|exercises?|examples?|next|another|more|test|quiz|check)\b/i
 
 function isNextItemRequest(text: string): boolean {
   const t = text.trim()
   if (t.length > MILD_MAX_LENGTH) return false
-  return NEXT_ITEM_REQUEST_RE.test(t) || BARE_NEXT_RE.test(t)
+  const asks = (s: string) => NEXT_ITEM_REQUEST_RE.test(s) || BARE_NEXT_RE.test(s) || TEST_ME_RE.test(s)
+  if (asks(t)) return true
+  return t.split(CLAUSE_SPLIT_RE).slice(1).some((clause) => REQUEST_WORD_RE.test(clause) && asks(clause.trim()))
+}
+
+/**
+ * A REQUEST TO BE SHOWN SOMETHING, OR TO BE CHALLENGED, IS NOT AN ANSWER.
+ *
+ * MEASURED on production (2026-09-27, Biology, the lesson screen's "Give me a
+ * diagram" quick action): the action sends the SAME text every time, so a
+ * learner who tapped it in one lesson and again as the first message of the
+ * next matched isRepeatedAnswer and was read as 'frustrated' — recovery fired
+ * (failure counted, phase stepped down) and the tutor opened with "I'm sorry
+ * you're feeling stuck". Four of eight fresh diagram requests got that reply.
+ * The same holds for "Show real-life example" and "Challenge me". This is the
+ * reasoning above applied once more: asking to SEE a diagram or an example, or
+ * to be challenged, is a willing learner's request, not a repeated answer.
+ *
+ * Deliberately narrow: the quick actions' own prompts (every teaching
+ * language) EXCEPT "Explain in simpler way" — a repeated request to be
+ * re-explained IS a signal (`isRephraseRequest`, above) — plus typed English
+ * "give/show/draw me a diagram/picture/…" and "challenge me" forms.
+ */
+const SHOW_OR_CHALLENGE_REQUEST_RE =
+  /^(?:ok(?:ay)?|right|sure|yes|yeah|alright)?[\s,.]*(?:can\s+you\s+|could\s+you\s+|please\s+|now\s+)*(?:(?:give|show|draw)\s+me\s+(?:a\s+|an\s+|another\s+|the\s+|one\s+more\s+)?(?:diagram|picture|visual|figure|image|illustration|drawing|real[\s-]?(?:life|world)\s+example)|challenge\s+me)\b[\s\S]{0,60}$/i
+
+const NON_ANSWER_QUICK_ACTION_PROMPTS: ReadonlySet<string> = new Set(
+  Object.values(QUICK_ACTIONS).flat()
+    .filter((a) => a.key !== 'simpler')
+    .map((a) => a.prompt.trim().toLowerCase()),
+)
+
+function isShowOrChallengeRequest(text: string): boolean {
+  const t = text.trim()
+  return NON_ANSWER_QUICK_ACTION_PROMPTS.has(t.toLowerCase())
+    || (t.length <= MILD_MAX_LENGTH && SHOW_OR_CHALLENGE_REQUEST_RE.test(t))
 }
 
 function isRepeatedAnswer(message: string, priorUserMessage: string | null | undefined): boolean {
@@ -414,6 +476,7 @@ function isRepeatedAnswer(message: string, priorUserMessage: string | null | und
   const b = normalize(priorUserMessage)
   if (a.length < 4 || a !== b) return false
   if (isNextItemRequest(message)) return false
+  if (isShowOrChallengeRequest(message)) return false
   return !isLowSignalAcknowledgement(message)
 }
 

@@ -141,7 +141,34 @@ describe('B2 changed nothing else', () => {
     // same trend in ONE session. A curated binding outranks generation, which
     // is why authoring one IS the fix. Counted here per this test's own
     // convention of recording each movement and why.
-    expect(CONCEPT_SCENE_OVERRIDES).toHaveLength(38)
+    //
+    // 38 -> 56 (2026-09-24, Biology cell visual replacement): 18 new
+    // concept-owned entries replacing the 18 bio.cell concepts formerly
+    // suppressed in retired.ts for inheriting the wrong 'bio.cell' ->
+    // food_chain domain default — see bioCellVisualReplacement.test.ts for
+    // full per-concept coverage.
+    //
+    // 56 -> 57 (2026-09-24, Biology DNA replication): bio.mol.dna-replication
+    // owns an authored replication-fork figure in place of the dna_structure
+    // kind default (a static base-pairing ladder, demoted in scope.ts as "no
+    // replication fork"). It leaves REQUIRES_AUTHORING below for the same
+    // reason — see dnaReplicationVisual.test.ts.
+    //
+    // 57 -> 59 (2026-09-25, Biology end-user-ready visual gap fix):
+    // bio.plant.photosynthesis and bio.immuno.immune-disorders, both
+    // formerly Tier-3-only concepts stuck in a critic-reject-cache /
+    // retry-identical-figure loop that never served a diagram even on an
+    // explicit request (measured live in production, 2026-09-24 QA) — see
+    // bioVisualGapFix.test.ts for full coverage.
+    //
+    // 59 -> 94+ (2026-09-25, Biology visual coverage campaign): a live
+    // diagnostic sweep found the SAME failure shape on roughly 3 in 4 of
+    // Biology's 161 unauthored concepts, not just the two above — see
+    // bioVisualCoverageCampaign.test.ts for the running, growing coverage
+    // list and its own up-to-date length assertion (kept there rather than
+    // duplicated here, since this campaign is still in progress).
+    expect(CONCEPT_SCENE_OVERRIDES.length).toBeGreaterThanOrEqual(94)
+    expect(CONCEPT_SCENE_OVERRIDES).toContain('bio.mol.dna-replication')
     expect(CONCEPT_SCENE_OVERRIDES).toContain('chem.dblock.lanthanides')
     expect(CONCEPT_SCENE_OVERRIDES).toContain('math.calc.critical-points')
     expect(CONCEPT_SCENE_OVERRIDES).toContain('phys.em.kirchhoffs-laws')
@@ -158,8 +185,11 @@ describe('B2 changed nothing else', () => {
   })
 
   it('retired bindings stayed retired', () => {
-    expect(ask('phys.mech.keplers-laws').graphical).toBe(false)
-    expect(ask('phys.opt.reflection').graphical).toBe(false)
+    // (phys.mech.keplers-laws left the register 2026-09-30 with its own faithful figure.)
+    expect(ask('chem.solid.defects').graphical).toBe(false)
+    // (phys.opt.reflection left the register 2026-09-30 with its own faithful figure.)
+    // (the physics circuit concepts left the register 2026-09-30, batch 9.)
+    expect(ask('chem.bond.ionic-bonding').graphical).toBe(false)
   })
 })
 
@@ -179,9 +209,9 @@ describe('cases the audit found that B2 deliberately did NOT approximate', () =>
   // sweep's contribution here is the second one below, which pins WHY it is
   // safe — see visualSemanticMoatPhysicsChemistry.test.ts.
   const REQUIRES_AUTHORING = [
-    'phys.opt.refraction',            // needs a boundary, a normal, angles i/r
     'phys.opt.lens-power',            // needs a lens COMBINATION
-    'phys.mech.impulse',              // needs a force-time curve
+    // AUTHORED 2026-09-30 (physics batch 2), so no longer here:
+    // 'phys.mech.impulse' ("needs a force-time curve") — physicsCoreScenesBatch2.test.ts.
     'phys.wave.shm-energy',           // needs a KE/PE energy split
     'phys.meas.scalars-vectors',      // needs a scalar shown beside a vector
     'phys.mech.kinematics-2d',        // needs 2D components, not 1D graphs
@@ -190,7 +220,14 @@ describe('cases the audit found that B2 deliberately did NOT approximate', () =>
     'phys.em.electric-current',       // needs drift velocity / charge carriers
     'phys.mech.rotational-dynamics',  // needs moment of inertia and angular acceleration
     'chem.period.modern-periodic-law',// needs the periodic table itself
-    'bio.mol.dna-replication',        // needs a replication fork, not static base pairing
+    // AUTHORED, and so no longer here: 'phys.opt.refraction' ("needs a
+    // boundary, a normal, angles i/r") now owns exactly that figure in
+    // CONCEPT_SCENES (physicsPilot.ts buildRefractionScene, 2026-09-30) — see
+    // refractionConceptFigure.test.ts, which pins it at concept scope.
+    // AUTHORED, and so no longer here: 'bio.mol.dna-replication' ("needs a
+    // replication fork, not static base pairing") now owns a replication-fork
+    // figure in CONCEPT_SCENES — see dnaReplicationVisual.test.ts, which pins
+    // that it resolves to it at concept scope.
   ] as const
 
   it.each(REQUIRES_AUTHORING)('%s still resolves, unchanged and not faked', (conceptId) => {
@@ -208,8 +245,9 @@ describe('cases the audit found that B2 deliberately did NOT approximate', () =>
     expect(ask(conceptId).asset?.scope, conceptId).toBe('domain')
   })
 
-  it('none of the twelve was silently given another concept\'s override', () => {
-    // The original invariant, unchanged and still covering all twelve: B2
+  it('none of the remaining eleven was silently given another concept\'s override', () => {
+    // The original invariant, unchanged and still covering every entry (twelve,
+    // until bio.mol.dna-replication was authored its own figure): B2
     // must not have handed any of them a neighbour's authored parameters.
     for (const conceptId of REQUIRES_AUTHORING) {
       expect(CONCEPT_SCENE_OVERRIDES, conceptId).not.toContain(conceptId)

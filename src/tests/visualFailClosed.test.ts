@@ -73,13 +73,23 @@ const HIJACK_CASES = [
  * path — these do. The invariant under test is unchanged: a concept with no
  * asset gets no figure, however the request is phrased.
  */
-const NO_ASSET_CONCEPTS = [
-  'phys.mech.kinetic-energy',
-  'phys.mech.potential-energy',
-  'phys.mech.power',
-  'phys.meas.errors',
-  'phys.mech.escape-velocity',
-] as const
+// kinetic-energy and potential-energy were here until physics batch 2
+// (2026-09-30) authored both; moment-of-inertia and center-of-mass replaced
+// them until batch 3 authored those too. The stand-ins are now deliberately
+// far from the campaign frontier so the next batch does not move them again.
+// Physics batches 12-14 (2026-09-30) authored the physics stand-ins here —
+// every physics concept now has a figure — so the list carries non-physics
+// concepts that have no asset, each with its own subject.
+const NO_ASSET_CONCEPTS: ReadonlyArray<readonly [string, string]> = [
+  // phys.mech.power was the last physics entry, until batch 14 (2026-09-30).
+  ['chem.found.significant-figures', 'chemistry'],
+  // meas.errors and escape-velocity were here until batch 7 (2026-09-30)
+  // authored both; wkb-approximation and s-matrix-basics until batch 13.
+  ['eng.phonics.short-vowels', 'english'],
+  ['eng.phonics.blending-segmenting', 'english'],
+  ['eng.phonics.rhyming', 'english'],
+  ['eng.phonics.consonants', 'english'],
+]
 
 describe('the prose routers still misroute — which is why they are not authorities', () => {
   // If these ever start returning null, the test above them stops proving
@@ -115,11 +125,11 @@ describe('prose can no longer reach the learner', () => {
     expect(decision.payload).toEqual(neutral.payload)
   })
 
-  it.each(NO_ASSET_CONCEPTS)('%s asks for a diagram and honestly gets none', async (concept) => {
+  it.each(NO_ASSET_CONCEPTS)('%s asks for a diagram and honestly gets none', async (concept, subject) => {
     const decision = await resolveVisualForTurn({
       message: 'explain with diagram',
       lessonConceptId: concept,
-      subject: 'physics',
+      subject,
       learnerRequest: 'diagram',
     })
     expect(decision.graphical).toBe(false)
@@ -172,10 +182,11 @@ describe('curated assets are untouched by M1', () => {
 
 describe('the no-figure contract', () => {
   it('a declining decision tells the tutor the screen is empty', () => {
+    // (phys.mech.power was this lesson until physics batch 14, 2026-09-30.)
     const decision = resolveVisual({
-      message: 'explain kinetic energy with a ray diagram',
-      lessonConceptId: 'phys.mech.kinetic-energy',
-      subject: 'physics',
+      message: 'explain significant figures with a ray diagram',
+      lessonConceptId: 'chem.found.significant-figures',
+      subject: 'chemistry',
       learnerRequest: 'diagram',
     })
     const block = buildVisualContractBlock(decision)
@@ -190,7 +201,7 @@ describe('the no-figure contract', () => {
     // This is the M1 fail-closed path: route.ts turns a thrown resolver into
     // this decision instead of into four prose-keyword pipelines.
     const errored = {
-      ...noFigureDecision('resolver-error', 'phys.mech.kinetic-energy', null, 'explain' as const),
+      ...noFigureDecision('resolver-error', 'chem.found.significant-figures', null, 'explain' as const),
       continuityReason: 'resolver-error',
       session: null,
     }
@@ -200,8 +211,8 @@ describe('the no-figure contract', () => {
 
     const declined = resolveVisual({
       message: 'explain with diagram',
-      lessonConceptId: 'phys.mech.kinetic-energy',
-      subject: 'physics',
+      lessonConceptId: 'chem.found.significant-figures',
+      subject: 'chemistry',
       learnerRequest: 'diagram',
     })
 

@@ -135,3 +135,45 @@ reset — `stats_reset: 2026-07-05 15:50:54+00`), not re-derived from the prior 
   explicitly rule out. Nothing here contradicts or supersedes the 2026-08-31 entry above.
 
 
+
+## EGRESS-4 — full bootstrap prefetch bounded to what its guards read (2026-09-25)
+Another session's live `pg_stat_statements` delta check found no active growth in EGRESS-1/2/3,
+but showed the full cold-start prefetch (`instrumentation.ts`) running on most cold starts,
+because the corpus is rarely converged while campaigns ship many batches a day. The prefetch
+read EVERY seed-owned row plus two relation reads, so its cost grew with the table's history.
+- Rejected fix: bounding to `expectedSlugs` alone. It drops the manual seeder's 5-segment ladder
+  rows from `liveSeedSlugs`, which disarms P-10-FOLLOW-UP-D and re-creates the 45 duplicate
+  ACTIVE maths identities (proven by the negative control in `bootstrapPrefetchBound.test.ts`).
+- Shipped: `bootstrapPrefetchSlugs` = expected ∪ abandoned ∪ `{base:difficulty}` for singleton
+  slots, i.e. exactly what `existing`, `liveAbandoned` and `liveSeedSlugs` look up. Over 30,000
+  slugs (Postgres bind cap 65,535) it returns null and the unbounded read is kept. Mutation-checked.
+- Expected saving today is small (declared corpus ≈ stored rows). It stops future growth with
+  historical rows. Re-measure with the same two-snapshot delta method after deploy.
+
+## EGRESS-5 — duplicate per-turn topic_progress reads + wide capability replay (2026-09-27)
+Production `pg_stat_statements` (lifetime counters; row sizes measured with `pg_column_size`).
+- **Found 1 — the per-turn adaptive teaching context re-read `topic_progress` ~6×.**
+  `getTutorTeachingContext` → `getWeightedTeachingPlanProfile` calls `getTeachingPlans` twice
+  and `getRevisionProfile` three times, and each re-reads the learner's WHOLE all-subjects
+  `topic_progress` (plus three identical VISUAL `evidence_records` reads). The three
+  all-subjects `topic_progress` queries stood at ~29.7M rows lifetime (≈5M on 2026-08-31), ≈80 B
+  per row → roughly 74 MB/day, ~2.2 GB/month.
+  **Fix:** `src/lib/db/requestMemo.ts` (AsyncLocalStorage, request-scoped, failed loads evicted,
+  nothing shared across requests). `loadUserTopicRows` (one column superset), plus memoized
+  `getRevisionProfile`, `getTeachingPlans` and `getVisualLearningProfile`. The chat route wraps
+  `getTutorTeachingContext` in `withRequestMemo`; so do the 10 `/api/intelligence/*` GET
+  handlers. Result: 1 `topic_progress` read per turn instead of ~6, identical results
+  (`intelligenceReadMemo.test.ts`). Expected ~−1.8 GB/month.
+- **Found 2 — the EGRESS-2 capability replay fetched every column.** Since EGRESS-2
+  (2026-09-23), the type-filtered query ran 1,680 times at ~230 rows per call (heavy learners
+  with up to 563 CapabilityObserved events, opening many sessions). A full row is 418 B; the fold
+  reads only `seq, type, schemaVersion, payload` (108 B).
+  **Fix:** `loadCapabilityEvents` selects those four columns; same pages, filter and order. The
+  equivalence test still passes, and a new test pins the select. Expected ~−0.9 GB/month.
+- **Checked, not a live leak:** the unfiltered `spine_events` replay counter grew between 09-02
+  and 09-23, before EGRESS-2 shipped. No code calls `loadSpineEvents`/`replayStudentView` now.
+  The `probe_assets`/`explanation_assets` "IN (…)" reads return one ~30 B id column (bootstrap
+  prefetch relations), so they are small in bytes.
+- **Re-measure after deploy** with the two-snapshot delta on queryids 628852208896445779,
+  444473988123706220, -7522253544637828763 (topic_progress) and 7123691883795881034
+  (capability replay).

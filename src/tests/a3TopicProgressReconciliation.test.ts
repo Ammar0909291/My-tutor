@@ -101,3 +101,45 @@ describe('the route calls it on the branch that lacked a writer', () => {
     expect(ROUTE).toContain('folded.conceptsMastered.includes(stateForOutcome.conceptId)')
   })
 })
+
+describe('masteryPct states the VERIFIED share of the bar (2026-09-28)', () => {
+  // MEASURED on production: every Biology topic_progress row read 65% — the last
+  // chat answer's score — mastered and needs-review alike; the roadmap prints it.
+  it('verifiedBarPct: 0 / 33 / 67 / 100, capped at the bar', async () => {
+    const { verifiedBarPct } = await import('@/lib/teaching/lessonAttemptStore')
+    expect(verifiedBarPct({})).toBe(0)
+    expect(verifiedBarPct({ verifiedCorrectAtCheck: 1 })).toBe(33)
+    expect(verifiedBarPct({ verifiedCorrectAtCheck: 1, verifiedCorrectAtPractice: 1 })).toBe(67)
+    expect(verifiedBarPct({ verifiedCorrectAtCheck: 1, verifiedCorrectAtPractice: 2 })).toBe(100)
+    expect(verifiedBarPct({ verifiedCorrectAtCheck: 5, verifiedCorrectAtPractice: 9 })).toBe(100)
+  })
+
+  it('a verified lesson is certified with its evidence even when the last chat answer was wrong (25%)', async () => {
+    const { db: d, update } = db({ status: 'IN_PROGRESS', masteryPct: 25 })
+    await markConceptMastered(d, { ...ARGS, evidence: { verifiedCorrectAtCheck: 1, verifiedCorrectAtPractice: 2 } })
+    expect(update).toHaveBeenCalledTimes(1)
+    expect(update.mock.calls[0][0].data).toMatchObject({ status: 'MASTERED', masteryPct: 100 })
+  })
+
+  it('still never touches a REVISION / COMPLETED / MASTERED row', async () => {
+    for (const status of ['MASTERED', 'REVISION', 'COMPLETED']) {
+      const { db: d, update } = db({ status, masteryPct: 65 })
+      await markConceptMastered(d, { ...ARGS, evidence: { verifiedCorrectAtCheck: 1, verifiedCorrectAtPractice: 2 } })
+      expect(update, status).not.toHaveBeenCalled()
+    }
+  })
+
+  it('needs-review records what was actually verified', async () => {
+    const { db: d } = db({ status: 'IN_PROGRESS', masteryPct: 65 })
+    await markConceptForReview(d, { ...ARGS, evidence: { verifiedCorrectAtCheck: 1, verifiedCorrectAtPractice: 1 } })
+    const call = (d as unknown as { topicProgress: { upsert: ReturnType<typeof vi.fn> } }).topicProgress.upsert.mock.calls[0][0]
+    expect(call.update.masteryPct).toBe(67)
+    expect(call.create.masteryPct).toBe(67)
+  })
+
+  it('the route passes the lesson evidence to both writers', async () => {
+    const fs = await import('node:fs')
+    const ROUTE = fs.readFileSync('src/app/api/learn/chat/route.ts', 'utf8')
+    expect(ROUTE.match(/evidence: stateForOutcome,/g)?.length).toBe(2)
+  })
+})

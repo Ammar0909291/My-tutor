@@ -516,6 +516,33 @@ export function fitSceneToFrame(scene: SceneSpec): SceneSpec {
   }
 }
 
+/**
+ * The camera distance at which a scene fills a canvas of the ACTUAL shape.
+ *
+ * `fitSceneToFrame` frames every figure for a 4:3 canvas, because the server
+ * cannot know the learner's screen. A lesson figure on a desktop is much wider
+ * than 4:3 (measured: 914 × 387, ≈ 2.4:1), so a wide figure fitted by its width
+ * used under half the canvas and its arrows read as a few pixels.
+ *
+ * Given the canvas's measured aspect (width / height), this returns the distance
+ * at which the geometry's extent — about the origin, where the fitted scene is
+ * centred — reaches TARGET_FRAME_FILL on its binding axis. It only ever moves
+ * the camera CLOSER than the scene's own distance, never further, so a figure
+ * is never drawn smaller than the server framed it. Nothing is moved, scaled or
+ * relabelled: it is the same information at a larger size.
+ */
+export function cameraDistanceForAspect(scene: SceneSpec, aspect: number): number {
+  const own = scene.cameraDistance ?? DEFAULT_CAMERA_DISTANCE
+  const extent = sceneExtent(scene)
+  if (!extent || !Number.isFinite(aspect) || aspect <= 0) return own
+  const tan = Math.tan(FOV_RADIANS / 2)
+  const halfX = Math.max(Math.abs(extent.minX), Math.abs(extent.maxX))
+  const halfY = Math.max(Math.abs(extent.minY), Math.abs(extent.maxY))
+  const needed = Math.max(halfX / (TARGET_FRAME_FILL * tan * aspect), halfY / (TARGET_FRAME_FILL * tan))
+  if (!Number.isFinite(needed) || needed <= 0) return own
+  return Math.min(own, Math.round(needed * 10) / 10)
+}
+
 // ── Label placement solver ───────────────────────────────────────────────────
 /**
  * THE PLACEMENT CONTRACT.

@@ -38,6 +38,7 @@
  * NOT presented as any real transcript — it proves the harness itself works.
  */
 import { describe, it, expect } from 'vitest'
+import { isLearnerInitiatedTurn } from '@/lib/teaching/learnerEngagement'
 import {
   classifyTurn, foldStagnation, diagnosticStalledThisTurn,
 } from '@/lib/teaching/turnProgress'
@@ -207,6 +208,9 @@ export function replay(t: ReplayTranscript): ReplayOutcome {
       // pre-2026-07-30 runtime — OBSERVE forever under an acknowledging
       // learner — while the shipping runtime climbs to CHECK.
       acknowledgement: bareAck,
+      // Replayable: derived from the learner's own words alone, with the same
+      // function both route.ts folds use. A graded answer carries a signal.
+      learnerInitiated: isLearnerInitiatedTurn(turn.learner, { answeredPendingQuestion: effectiveSignal !== null }),
       // Computable only once the decided move is captured (step 3), which is
       // why it was absent before. Same expression route.ts uses: the server
       // said ASK and the rendered reply carried no question.

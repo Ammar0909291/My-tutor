@@ -3,6 +3,11 @@
   "buildCommand": "bash scripts/ci/vercel-build.sh",
   "installCommand": "npm install",
   "regions": ["sin1"],
+  "git": {
+    "deploymentEnabled": {
+      "claude/*": false
+    }
+  },
   "functions": {
     "src/app/api/learn/chat/route.ts":                    { "maxDuration": 60 },
     "src/app/api/learn/lesson-init/route.ts":             { "maxDuration": 60 },

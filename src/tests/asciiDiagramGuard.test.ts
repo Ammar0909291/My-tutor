@@ -15,6 +15,15 @@ const CHEM_EQUIL_WEAK_ACID = 'I can describe a simple diagram in text for you:\n
 // deployed app, real account) — no code fence at all, plain ASCII.
 const CHEM_GLASS_OF_WATER = 'Below is a simple, text‑based “diagram” of a glass of water and its key features. \n\n+-------------------+ ← Glass\n\n- The dots represent water molecules moving around.\n- The space inside the glass is the *volume* the water occupies.\n- The glass holds the water in a liquid state; if you heat it, the dots would spread out and turn into steam.'
 
+// Byte-for-byte (as far as the plaintext scrape could capture) the FOURTH real
+// reply, `phys.*` gravitational-waves lesson, 2026-09-20 live account QA — no
+// figure attached, learner asked twice for a diagram. Self-labeled "ASCII
+// sketch", not "text diagram", so Pass 3 alone does not catch it (see the
+// module header's Pass 4 section for the full reproduction and why the
+// single-line body also fails `isArtShapedParagraph`).
+const PHYSICS_GRAVITATIONAL_WAVES_ASCII =
+  'Here’s a simple ASCII sketch to visualise the stretching-and-squeezing effect that a passing gravitational wave would produce on two perpendicular arms (think of the two arms of an interferometer):\n\n|<-- 4 km arm 1 -->|\n\nWhen a wave travels across the detector:\n\n1. Arm 1 (horizontal) is stretched a tiny amount – the dots at its ends move slightly farther apart.\n2. Arm 2 (vertical) is squeezed – the dots at its ends move slightly closer together.'
+
 describe('the two real reproduced cases', () => {
   it('chem.found.matter: box-drawing decision tree is removed whole, the lead-in dropped, the Guidance paragraph survives', () => {
     const result = stripUnbackedAsciiDiagram(CHEM_FOUND_MATTER, false)
@@ -57,6 +66,19 @@ describe('the two real reproduced cases', () => {
     expect(result.text).toContain('volume')
     expect(result.text).toContain('turn into steam.')
   })
+
+  it('phys.* gravitational waves: the self-labeled "ASCII sketch" line is removed, the lead-in and the real teaching content survive', () => {
+    const result = stripUnbackedAsciiDiagram(PHYSICS_GRAVITATIONAL_WAVES_ASCII, false)
+    expect(result.stripped).toBe(true)
+    expect(result.removedBlocks).toBe(1)
+    expect(result.text).not.toContain('|<-- 4 km arm 1 -->|')
+    // The lead-in's promise of a sketch is now false too, since Pass 4 (like
+    // Pass 3) drops the whole matched span, not just the art line.
+    expect(result.text).not.toMatch(/ascii sketch/i)
+    // The actual teaching content that followed is untouched.
+    expect(result.text).toContain('Arm 1 (horizontal) is stretched')
+    expect(result.text).toContain('Arm 2 (vertical) is squeezed')
+  })
 })
 
 describe('pointer-line and Pass-3 removal still stay quiet while a real figure is on screen', () => {
@@ -69,6 +91,12 @@ describe('pointer-line and Pass-3 removal still stay quiet while a real figure i
   it('the unfenced "text diagram" (Pass 3) case is left byte-identical when figureOnScreen is true', () => {
     expect(stripUnbackedAsciiDiagram(CHEM_GLASS_OF_WATER, true)).toEqual({
       text: CHEM_GLASS_OF_WATER, stripped: false, removedBlocks: 0,
+    })
+  })
+
+  it('the self-labeled "ASCII sketch" (Pass 4) case is left byte-identical when figureOnScreen is true', () => {
+    expect(stripUnbackedAsciiDiagram(PHYSICS_GRAVITATIONAL_WAVES_ASCII, true)).toEqual({
+      text: PHYSICS_GRAVITATIONAL_WAVES_ASCII, stripped: false, removedBlocks: 0,
     })
   })
 })
@@ -122,6 +150,18 @@ describe('Pass 3 (unfenced "text diagram") false-positive checks', () => {
     // No word "text" anywhere near "diagram" — the co-occurrence requirement
     // is what makes this guard narrow; "diagram" alone is far too common a
     // word to key off by itself.
+    expect(stripUnbackedAsciiDiagram(text, false)).toEqual({ text, stripped: false, removedBlocks: 0 })
+  })
+})
+
+describe('Pass 4 ("ASCII sketch/diagram/art") false-positive checks', () => {
+  it('"ASCII" with no diagram-shaped noun nearby is never touched', () => {
+    const text = 'The ASCII value of the character A is 65.\n\nThat is just how computers encode letters as numbers.'
+    expect(stripUnbackedAsciiDiagram(text, false)).toEqual({ text, stripped: false, removedBlocks: 0 })
+  })
+
+  it('a diagram-shaped noun with no "ascii" nearby is left to Pass 3\'s own (stricter) rules, not Pass 4', () => {
+    const text = 'Here is a diagram of the water cycle.\n\nEvaporation happens when the sun heats water and it rises as vapor.'
     expect(stripUnbackedAsciiDiagram(text, false)).toEqual({ text, stripped: false, removedBlocks: 0 })
   })
 })

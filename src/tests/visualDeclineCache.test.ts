@@ -1,8 +1,9 @@
-import { describe, it, expect } from 'vitest'
-import { writeVerdict, readVerdict } from '@/lib/teaching/visual/verdictCache'
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
+import { writeVerdict, readVerdict, figureFingerprint } from '@/lib/teaching/visual/verdictCache'
 import {
   readDecline, writeDecline, declineKey, DECLINE_TTL_MS,
 } from '@/lib/teaching/visual/verdictCache'
+import { groundingHash } from '@/lib/teaching/visual/topicIdentity'
 
 /**
  * A DECLINE IS A FACT ABOUT THE TOPIC, NOT ABOUT THE MOMENT.
@@ -136,5 +137,94 @@ describe('remembering a settled REJECT, but never a HOLD', () => {
     const s = store()
     await writeVerdict(ctx, figure, report('reject'), s.client)
     expect(await readVerdict({ ...ctx, description: 'entirely different text' }, figure, s.client)).toBeNull()
+  })
+})
+
+/**
+ * OBSERVABILITY ONLY — [visual-critic].
+ *
+ * `writeVerdict` receives the full CriticReport but its cached CachedVerdict
+ * only ever carried decision/confidence/grounding/figure — the per-dimension
+ * detail (which of relevance/correctness/explanatoryValue/grounding/
+ * rendering/claimSupport failed, and why) was computed and then discarded,
+ * which is exactly what made a real production reject
+ * (bio.physio.homeostasis-thermoregulation, reject, confidence 5/6)
+ * undiagnosable after the fact. These tests pin that the full report now
+ * reaches a log line, and — just as importantly — that logging it changes
+ * NOTHING about what gets cached or returned.
+ */
+describe('[visual-critic] preserves the full report for a settled verdict', () => {
+  const figure = { type: 'graph', equation: '2x + 1' }
+  const fullReport = (decision: 'promote' | 'reject') => ({
+    dimensions: {
+      relevance: { verdict: 'pass' as const, reason: 'is a figure of this concept' },
+      correctness: { verdict: 'pass' as const, reason: 'nothing asserted is false' },
+      explanatoryValue: {
+        verdict: (decision === 'reject' ? 'fail' : 'pass') as 'pass' | 'fail',
+        reason: decision === 'reject' ? 'restates the title, teaches nothing new' : 'clarifies the relationship',
+      },
+      grounding: { verdict: 'pass' as const, reason: '3 text elements the tutor can speak from' },
+      rendering: { verdict: 'pass' as const, reason: 'equation compiles and varies across its domain' },
+      claimSupport: { verdict: 'pass' as const, reason: 'no unsupported multiplicity claim in the title' },
+    },
+    decision,
+    confidence: decision === 'reject' ? 5 / 6 : 1,
+    judged: true,
+  })
+
+  let spy: ReturnType<typeof vi.spyOn>
+  beforeEach(() => {
+    spy = vi.spyOn(console, 'log').mockImplementation(() => {})
+  })
+  afterEach(() => spy.mockRestore())
+
+  const criticLines = () => spy.mock.calls.filter((c) => c[0] === '[visual-critic]')
+
+  it('PRIMARY REJECT — emits exactly one [visual-critic] event with the complete dimensions', async () => {
+    const s = store()
+    await writeVerdict(ctx, figure, fullReport('reject'), s.client)
+    const lines = criticLines()
+    expect(lines).toHaveLength(1)
+    const [, payload] = lines[0] as [string, Record<string, unknown>]
+    expect(payload.conceptId).toBe(ctx.conceptId)
+    expect(payload.decision).toBe('reject')
+    expect(payload.confidence).toBe(5 / 6)
+    expect(payload.judged).toBe(true)
+    expect(payload.dimensions).toEqual(fullReport('reject').dimensions)
+    expect(payload.figure).toBe(figureFingerprint(figure))
+    expect(payload.grounding).toBe(groundingHash(ctx))
+  })
+
+  it('PRIMARY PROMOTE — emits exactly one [visual-critic] event with the complete dimensions', async () => {
+    const s = store()
+    await writeVerdict(ctx, figure, fullReport('promote'), s.client)
+    const lines = criticLines()
+    expect(lines).toHaveLength(1)
+    const [, payload] = lines[0] as [string, Record<string, unknown>]
+    expect(payload.decision).toBe('promote')
+    expect(payload.dimensions).toEqual(fullReport('promote').dimensions)
+  })
+
+  it('NON-INTERFERENCE — logging changes nothing about the cached verdict', async () => {
+    const s = store()
+    await writeVerdict(ctx, figure, fullReport('reject'), s.client)
+    const cached = await readVerdict(ctx, figure, s.client)
+    // Same shape/values a caller would have seen before this change: only
+    // decision/confidence/grounding/figure/judgedAt, nothing extra leaked in.
+    expect(cached).toEqual({
+      decision: 'reject',
+      confidence: 5 / 6,
+      grounding: groundingHash(ctx),
+      figure: figureFingerprint(figure),
+      judgedAt: expect.any(Number),
+    })
+  })
+
+  it('HOLD — still never cached, and (per the accepted design) not logged from this site either', async () => {
+    const s = store()
+    const hold = { ...fullReport('reject'), decision: 'hold' as const }
+    await writeVerdict(ctx, figure, hold, s.client)
+    expect(await readVerdict(ctx, figure, s.client)).toBeNull()
+    expect(criticLines()).toHaveLength(0)
   })
 })

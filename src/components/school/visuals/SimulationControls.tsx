@@ -1,0 +1,247 @@
+'use client'
+/**
+ * The experiment controls for a time-stepped simulation (ADR 16, G2).
+ *
+ * Predict → run → observe → explain, inside the figure. The learner may make a
+ * prediction first (or skip it); runs are compared only when they make a FAIR
+ * test — one quantity changed, the rest held — and only then does the frame
+ * show what the runs measured and the authored explanation. Nothing here
+ * grades: a prediction is compared with what the runs SHOWED, not with an
+ * answer key, and the result never leaves this component (ADR 16 §6, §7).
+ *
+ * Under reduced motion there is no Run: the learner steps or drags through time
+ * with a scrubber, which shows the identical states without movement. The
+ * readouts are announced only when a run comes to rest, never per frame.
+ */
+import type { CSSProperties, MouseEvent, ReactNode } from 'react'
+import { Pause, Play, RotateCcw, SkipForward } from 'lucide-react'
+import styles from './ExplainerFigure.module.css'
+import { variablesFor, type SimPrediction, type SimRelation } from '@/lib/teaching/visual/parametricScenes'
+import { canPause, canReset, canRun, canStep } from '@/lib/teaching/visual/simulationControl'
+import type { SimEvent } from '@/lib/teaching/visual/simulationEvidence'
+import { formatReadout, withUnit, type SimulationHost } from './useSimulation'
+
+const RELATION_TEXT: Record<SimRelation, string> = {
+  proportional: 'it changed in direct proportion',
+  inverse: 'it changed in inverse proportion',
+  square_root: 'it changed with the square root (four times the input gives twice the result)',
+  unchanged: 'it stayed the same, to within 2%',
+}
+
+const visuallyHidden: CSSProperties = {
+  position: 'absolute', width: 1, height: 1, padding: 0, margin: -1, overflow: 'hidden', clip: 'rect(0 0 0 0)', whiteSpace: 'nowrap', border: 0,
+}
+
+const cell: CSSProperties = { padding: '2px 12px 2px 0', textAlign: 'left' }
+
+/**
+ * A mouse press on a control must not move focus off the slider the learner
+ * just used. ExplainerFigure shows a slider's effect sentence only while the
+ * slider has focus; the blur collapses it, the page shortens, and when the
+ * figure sits at the bottom of the scroll (as the newest lesson figure does)
+ * the browser clamps the scroll and the button jumps out from under the pointer
+ * between press and release — the click is lost (measured: Run moved 47 px,
+ * pointerdown hit Run, click hit the section). Keyboard use is unaffected.
+ */
+const keepFocus = (e: MouseEvent<HTMLButtonElement>) => e.preventDefault()
+
+type Interpretation = Extract<SimEvent, { kind: 'interpretation' }>
+type Observation = Extract<SimEvent, { kind: 'observation' }>
+
+const ratio = (n: number) => (Math.abs(n - Math.round(n)) < 1e-6 ? `×${Math.round(n)}` : `×${n.toFixed(2)}`)
+
+export function SimulationControls({ host, kind, reducedMotion, valueControls }: {
+  host: SimulationHost
+  kind: string
+  reducedMotion: boolean
+  /**
+   * The figure's value sliders, drawn between the prediction and Run so the
+   * whole experiment — choose values, run, read — sits in one block beside the
+   * figure instead of in a rail far below it on a phone.
+   */
+  valueControls?: ReactNode
+}) {
+  const { sim, control, readouts, evidence } = host
+  if (!host.active || !sim || !control) return null
+
+  const events = evidence.events
+  const variables = variablesFor(kind)
+  const labelOf = (key: string) => variables.find((v) => v.key === key)?.label ?? key
+  // Readouts that only echo a slider are not shown again; the slider shows them.
+  const inputKeys = new Set(variables.map((v) => v.key))
+  // The runs table: one column per value the learner sets, then each quantity a
+  // prediction measures.
+  const measured = [...new Set(sim.predictions.map((p) => p.tests.measure))]
+  const measuredHeader = (key: string) => {
+    for (const e of events) {
+      const r = e.kind === 'observation' ? e.readouts.find((x) => x.key === key) : undefined
+      if (r) return r.tableLabel ?? r.label
+    }
+    return key
+  }
+  const predictionOf = (id: string) => [...events].reverse().find((e) => e.kind === 'prediction' && e.predictionId === id) as
+    Extract<SimEvent, { kind: 'prediction' }> | undefined
+  const interpretationOf = (id: string) => [...events].reverse().find((e) => e.kind === 'interpretation' && e.predictionId === id) as
+    Interpretation | undefined
+
+  // One prediction at a time: the first one the runs have not answered yet.
+  const open = sim.predictions.find((p) => !interpretationOf(p.id))
+  const answered = sim.predictions.filter((p) => interpretationOf(p.id))
+
+  // The latest observation of each run, in run order, for the table.
+  const runs = new Map<string, Observation>()
+  for (const e of events) if (e.kind === 'observation') runs.set(e.runId, e)
+
+  const seconds = (sim.stepTicks * sim.fixedDt).toFixed(1)
+  const end = control.terminalTick ?? 0
+  const status = control.terminalTick === null
+    ? 'These values cannot be simulated.'
+    : control.phase === 'running' ? 'Running…'
+      : control.phase === 'finished'
+        ? (sim.finishedText?.(control.params, control.tick) ?? 'Finished.')
+        : control.phase === 'paused' ? 'Paused.' : 'Ready.'
+
+  return (
+    <section
+      className={styles.predict}
+      style={{ marginTop: 10 }}
+      aria-label="Experiment"
+      data-testid="simulation"
+      data-phase={control.phase}
+      data-tick={control.tick}
+    >
+      {open && <PredictionBlock prediction={open} chosen={predictionOf(open.id)} labelOf={labelOf} onPredict={host.predict} />}
+
+      {valueControls}
+
+      <div className={styles.predictOptions} role="group" aria-label="Simulation controls">
+        {!reducedMotion && (
+          <button type="button" onMouseDown={keepFocus} className={`${styles.chip} ${styles.chipActive}`} disabled={!canRun(control)} onClick={host.run} aria-label="Run">
+            <span className={styles.chipIcon} aria-hidden="true"><Play size={11} /></span>Run
+          </button>
+        )}
+        <button type="button" onMouseDown={keepFocus} className={styles.chip} disabled={!canPause(control)} onClick={host.pause} aria-label="Pause">
+          <span className={styles.chipIcon} aria-hidden="true"><Pause size={11} /></span>Pause
+        </button>
+        <button type="button" onMouseDown={keepFocus} className={styles.chip} disabled={!canStep(control)} onClick={host.step} aria-label={`Step ${seconds} s`}>
+          <span className={styles.chipIcon} aria-hidden="true"><SkipForward size={11} /></span>Step +{seconds} s
+        </button>
+        <button type="button" onMouseDown={keepFocus} className={styles.chip} disabled={!canReset(control)} onClick={host.reset} aria-label="Reset">
+          <span className={styles.chipIcon} aria-hidden="true"><RotateCcw size={11} /></span>Reset
+        </button>
+      </div>
+
+      {reducedMotion && control.terminalTick !== null && (
+        <div className={styles.animationPanel}>
+          <p className={styles.note} style={{ margin: 0 }}>Motion is off — step or drag through time.</p>
+          <div className={styles.control} style={{ gridTemplateColumns: 'minmax(0, 1fr) minmax(70px, auto)', marginTop: 6 }}>
+            <input
+              className={styles.slider}
+              type="range"
+              min={0}
+              max={end}
+              step={1}
+              value={control.tick}
+              aria-label="Time"
+              onChange={(e) => host.seek(Number(e.target.value))}
+            />
+            <output className={styles.controlValue}>{(control.tick * sim.fixedDt).toFixed(2)} s</output>
+          </div>
+        </div>
+      )}
+
+      <p className={styles.note} data-testid="simulation-status">{status}{host.locked ? ' Values are locked while it runs.' : ''}</p>
+
+      <dl className={styles.panelLines} aria-label="Readings" style={{ display: 'grid', gridTemplateColumns: 'auto 1fr', columnGap: 10, margin: '6px 0 0' }}>
+        {readouts.filter((r) => !inputKeys.has(r.key)).map((r) => (
+          <div key={r.key} style={{ display: 'contents' }}>
+            <dt>{r.label}</dt>
+            <dd style={{ margin: 0 }} data-testid={`readout-${r.key}`}>{formatReadout(r)}</dd>
+          </div>
+        ))}
+      </dl>
+      <p style={visuallyHidden} role="status" aria-live="polite">{host.announcement}</p>
+
+      {runs.size > 0 && (
+        <table aria-label="Your runs" data-testid="simulation-runs" style={{ marginTop: 8, borderCollapse: 'collapse', fontSize: 12, color: 'var(--text-secondary)' }}>
+          <thead>
+            <tr>
+              {['Run', ...variables.map((v) => v.label), ...measured.map(measuredHeader)].map((h) => <th key={h} scope="col" style={cell}>{h}</th>)}
+            </tr>
+          </thead>
+          <tbody>
+            {[...runs.values()].map((o, i) => (
+              <tr key={o.runId}>
+                <td style={cell}>{i + 1}</td>
+                {variables.map((v) => (
+                  <td key={v.key} style={cell}>{withUnit(String(o.params[v.key]), 'unit' in v && v.unit ? v.unit : '')}</td>
+                ))}
+                {measured.map((key) => {
+                  const r = o.readouts.find((x) => x.key === key)
+                  return <td key={key} style={cell}>{r ? formatReadout(r) : '—'}</td>
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+
+      {answered.map((p) => (
+        <InterpretationBlock key={p.id} prediction={p} interpretation={interpretationOf(p.id)!} labelOf={labelOf} measuredLabel={measuredHeader(p.tests.measure)} />
+      ))}
+    </section>
+  )
+}
+
+function PredictionBlock({ prediction, chosen, labelOf, onPredict }: {
+  prediction: SimPrediction
+  chosen: Extract<SimEvent, { kind: 'prediction' }> | undefined
+  labelOf: (key: string) => string
+  onPredict: (predictionId: string, choice: number | null) => void
+}) {
+  const { vary, holdConstant } = prediction.tests
+  if (!chosen) {
+    return (
+      <div data-testid="prediction" data-prediction-id={prediction.id}>
+        <p className={styles.panelBody} style={{ color: 'var(--text-primary)' }}>{prediction.question}</p>
+        <div className={styles.predictOptions} role="group" aria-label="Your prediction">
+          {prediction.options.map((o, i) => (
+            <button key={o.label} type="button" onMouseDown={keepFocus} className={`${styles.chip} ${styles.choice}`} onClick={() => onPredict(prediction.id, i)}>{o.label}</button>
+          ))}
+          <button type="button" onMouseDown={keepFocus} className={`${styles.chip} ${styles.choice}`} onClick={() => onPredict(prediction.id, null)}>Skip — just experiment</button>
+        </div>
+      </div>
+    )
+  }
+  const said = chosen.choice === null ? 'No prediction.' : `Your prediction: ${prediction.options[chosen.choice]?.label}.`
+  return (
+    <div data-testid="prediction" data-prediction-id={prediction.id} data-predicted="true">
+      <p className={styles.panelBody} style={{ color: 'var(--text-primary)' }}>{said}</p>
+      <p className={styles.note} style={{ margin: '2px 0 6px' }}>
+        Test it fairly: change only {labelOf(vary)}, keep {holdConstant.map(labelOf).join(' and ')} the same, and compare two runs.
+      </p>
+    </div>
+  )
+}
+
+function InterpretationBlock({ prediction, interpretation, labelOf, measuredLabel }: {
+  prediction: SimPrediction
+  interpretation: Interpretation
+  labelOf: (key: string) => string
+  /** The measured quantity's own name ("a (measured)", "one swing (measured)"). */
+  measuredLabel: string
+}) {
+  const { vary } = prediction.tests
+  const observed = interpretation.observedRelation
+  return (
+    <div className={styles.panel} style={{ marginTop: 8 }} role="status" data-testid="interpretation" data-prediction-id={prediction.id}>
+      <p className={styles.panelBody}>
+        {labelOf(vary)} {ratio(interpretation.varyRatio)} → {measuredLabel} {ratio(interpretation.measureRatio)}
+        {observed ? `: ${RELATION_TEXT[observed]}.` : '.'}
+        {interpretation.matchedPrediction === true && ' That matches your prediction.'}
+        {interpretation.matchedPrediction === false && ' That is not what you predicted — the runs are the evidence.'}
+      </p>
+      <p className={styles.note} style={{ margin: '4px 0 0' }}>{prediction.explanation}</p>
+    </div>
+  )
+}

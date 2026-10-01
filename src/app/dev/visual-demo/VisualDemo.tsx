@@ -457,6 +457,11 @@ export function VisualDemo() {
         <p style={{ fontSize: 13, opacity: 0.7, marginTop: 0 }}>
           Dev-only. GraphRenderer (zoom/pan) + NumberLineRenderer via the real VisualRenderer.
         </p>
+        <p style={{ fontSize: 13, marginTop: 0 }}>
+          <a href="/dev/visual-demo/simulation" data-testid="newton-simulation-link">
+            Newton&apos;s second law — time-stepped simulation (ADR 16, dev only) →
+          </a>
+        </p>
 
         <h1 style={{ fontSize: 20, fontWeight: 800, margin: '24px 0 4px' }}>Scene Specification Prototype</h1>
         <p style={{ fontSize: 13, opacity: 0.7, marginTop: 0 }}>

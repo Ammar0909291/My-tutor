@@ -177,7 +177,9 @@ describe('C — "can you show me a diagram" answered with no diagram', () => {
     // ONE new routeAI call site (the claim-challenge repair regeneration in
     // route.ts, right after the V-AFFIRM floor) -- the only production change
     // to this count since this assertion was written. 4 -> 5.
-    expect((ROUTE.match(/await routeAI\(/g) ?? []).length).toBe(5)
+    // 5 -> 6 (2026-09-30): the stub repair's single regeneration (repairStubReply,
+    // confirmBackRepair.ts) — fires only when a clean-up left no real reply.
+    expect((ROUTE.match(/await routeAI\(/g) ?? []).length).toBe(6)
   })
 })
 

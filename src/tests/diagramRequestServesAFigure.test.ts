@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { detectLearnerRequest } from '@/lib/teaching/masteryGate'
 import { decideVisualNeed } from '@/lib/teaching/visual/visualNeed'
 import { resolveVisualForTurn } from '@/lib/teaching/visual/resolveVisual'
@@ -75,17 +75,24 @@ function makeCache(seed: Record<string, string> = {}) {
   }
 }
 
-const CONCEPT = 'phys.em.energy-capacitor'
-const TITLE = 'Energy Stored in a Capacitor'
-const DESC = 'A charged capacitor stores energy in its electric field; the work done charging it is U = 1/2 C V squared.'
+// The defect was measured on phys.em.energy-capacitor, which has since gained
+// its own authored figure (physics visual gap campaign batch 8, 2026-09-30) and
+// so no longer reaches live generation. phys.mech.power was then the
+// live-generation fixture until physics batch 14 (2026-09-30) gave every
+// physics concept a figure; chem.found.significant-figures, still assetless,
+// replaces it. The mechanism under test is the same for any concept that
+// reaches Tier 3.
+const CONCEPT = 'chem.found.significant-figures'
+const TITLE = 'Significant Figures and Error Analysis'
+const DESC = 'Rules for counting and arithmetic with significant figures; absolute and relative error; propagation of uncertainty.'
 
 /** Structurally valid figures the validator accepts (process_flow specs). */
 function figureFor(title: string, steps: string[]) {
   return { type: 'process_flow', title, steps: steps.map((t) => ({ title: t })) }
 }
 
-const REJECTED = figureFor('Charging a capacitor', ['Connect the source', 'Charge builds on the plates', 'Voltage rises to its final value'])
-const FRESH = figureFor('Energy stored while charging', ['Move the first charge across', 'Push the next against what is there', 'Total work is the stored energy'])
+const REJECTED = figureFor('Significant figures in a ruler reading', ['Read the ruler to its smallest division', 'Estimate one more digit', 'Every certain digit plus the estimate is significant'])
+const FRESH = figureFor('Significant figures: how precise is the answer?', ['Count the significant figures in each value', 'Multiply or divide the values', 'Round to the fewest significant figures'])
 
 function deps(cache: ReturnType<typeof makeCache>, opts: {
   generate: () => unknown
@@ -119,7 +126,7 @@ const reject = (): CriticReport => ({ decision: 'reject', confidence: 0.9, dimen
  * a wrong guess makes the cache silently miss — which is a test that passes for
  * the wrong reason.
  */
-const ORDINARY_TEACHING_TURN = 'I am still not sure how that energy formula comes about at all'
+const ORDINARY_TEACHING_TURN = 'I am still not sure how that rounding rule comes about at all'
 
 async function seedRejectedCandidate(calls: { generate: number; critic: number }) {
   const cache = makeCache()
@@ -183,6 +190,29 @@ describe('a rejected candidate is not a permanent verdict on the concept', () =>
     expect(calls.critic).toBe(criticBefore) // no wasted judge call
   })
 
+  it('THE RETRY IS COUNTED AS SPENT even though the first result was a free cache hit', async () => {
+    // Production, lc-circuits, 2026-09-24: `no-figure:retry-structurally-invalid`
+    // was logged with generationSpent=false, so the session budget never
+    // counted the provider call the retry made.
+    for (const generate of [() => ({ type: 'not-a-figure' }), () => FRESH]) {
+      const calls = { generate: 0, critic: 0 }
+      const cache = await seedRejectedCandidate({ generate: 0, critic: 0 })
+      const d = deps(cache, { generate, critic: reject, calls })
+      const asked = await resolve(cache, d, 'Show me a diagram')
+      expect(calls.generate).toBe(1)
+      expect(asked.payload).toBeNull()
+      expect(asked.generationSpent).toBe(true)
+    }
+  })
+
+  it('an ordinary turn on a cached reject spends nothing and says so', async () => {
+    const calls = { generate: 0, critic: 0 }
+    const cache = await seedRejectedCandidate({ generate: 0, critic: 0 })
+    const d = deps(cache, { generate: () => FRESH, critic: reject, calls })
+    const turn = await resolve(cache, d, 'ok')
+    expect(turn.generationSpent).toBe(false)
+  })
+
   it('the retry fires only on an explicit request — an ordinary turn never pays for it', async () => {
     const calls = { generate: 0, critic: 0 }
     const cache = await seedRejectedCandidate({ generate: 0, critic: 0 })
@@ -191,6 +221,85 @@ describe('a rejected candidate is not a permanent verdict on the concept', () =>
     await resolve(cache, d, 'ok')
     await resolve(cache, d, 'that makes sense')
     expect(calls.generate).toBe(genBefore)
+  })
+})
+
+/**
+ * OBSERVABILITY ONLY — [visual-critic-retry].
+ *
+ * The explicit-request retry path (above) never calls writeVerdict at all —
+ * its promote branch hand-writes a stripped verdict, and its reject branch
+ * just returns — so the retry's own CriticReport.dimensions was discarded on
+ * BOTH outcomes, with no [visual-critic] equivalent. These pin that a log now
+ * fires exactly once per retry judgment, with the full report, on both
+ * outcomes, and that a plain (non-diagram) turn — which never reaches the
+ * retry critic at all — never fabricates one.
+ */
+describe('[visual-critic-retry] preserves the full report for an explicit-request retry', () => {
+  const dims = (explanatoryVerdict: 'pass' | 'fail') => ({
+    relevance: { verdict: 'pass' as const, reason: 'is a figure of this concept' },
+    correctness: { verdict: 'pass' as const, reason: 'the arrows assert a real order' },
+    explanatoryValue: {
+      verdict: explanatoryVerdict,
+      reason: explanatoryVerdict === 'fail' ? 'only restates the title in boxes' : 'clarifies the sequence',
+    },
+    grounding: { verdict: 'pass' as const, reason: '3 text elements the tutor can speak from' },
+    rendering: { verdict: 'pass' as const, reason: 'schema-constrained renderer' },
+    claimSupport: { verdict: 'pass' as const, reason: 'no unsupported multiplicity claim in the title' },
+  })
+  const promoteFull = (): CriticReport =>
+    ({ decision: 'promote', confidence: 1, judged: true, dimensions: dims('pass') } as never)
+  const rejectFull = (): CriticReport =>
+    ({ decision: 'reject', confidence: 5 / 6, judged: true, dimensions: dims('fail') } as never)
+
+  let spy: ReturnType<typeof vi.spyOn>
+  beforeEach(() => { spy = vi.spyOn(console, 'log').mockImplementation(() => {}) })
+  afterEach(() => spy.mockRestore())
+  const retryLines = () => spy.mock.calls.filter((c) => c[0] === '[visual-critic-retry]')
+
+  it('RETRY REJECT — emits exactly one [visual-critic-retry] event with the complete dimensions', async () => {
+    const calls = { generate: 0, critic: 0 }
+    const cache = await seedRejectedCandidate({ generate: 0, critic: 0 })
+    const d = deps(cache, { generate: () => FRESH, critic: rejectFull, calls })
+    const asked = await resolve(cache, d, 'Show me a diagram')
+    expect(asked.payload).toBeNull()
+    const lines = retryLines()
+    expect(lines).toHaveLength(1)
+    const [, payload] = lines[0] as [string, Record<string, unknown>]
+    expect(payload.conceptId).toBe(CONCEPT)
+    expect(payload.decision).toBe('reject')
+    expect(payload.dimensions).toEqual(dims('fail'))
+  })
+
+  it('RETRY PROMOTE — emits exactly one [visual-critic-retry] event with the complete dimensions', async () => {
+    const calls = { generate: 0, critic: 0 }
+    const cache = await seedRejectedCandidate({ generate: 0, critic: 0 })
+    const d = deps(cache, { generate: () => FRESH, critic: promoteFull, calls })
+    const asked = await resolve(cache, d, 'Show me a diagram')
+    expect(asked.payload).not.toBeNull()
+    const lines = retryLines()
+    expect(lines).toHaveLength(1)
+    const [, payload] = lines[0] as [string, Record<string, unknown>]
+    expect(payload.decision).toBe('promote')
+    expect(payload.dimensions).toEqual(dims('pass'))
+  })
+
+  it('NON-INTERFERENCE — logging changes nothing about the returned VisualDecision', async () => {
+    const calls = { generate: 0, critic: 0 }
+    const cache = await seedRejectedCandidate({ generate: 0, critic: 0 })
+    const d = deps(cache, { generate: () => FRESH, critic: promoteFull, calls })
+    const asked = await resolve(cache, d, 'Show me a diagram')
+    expect(asked.payload).not.toBeNull()
+    expect(asked.provenance).toContain('generated-retry')
+    expect(asked.conceptId).toBe(CONCEPT)
+  })
+
+  it('STATIC/NO-RETRY SHORT-CIRCUIT — an ordinary turn never reaches the retry critic, so no fake event is emitted', async () => {
+    const calls = { generate: 0, critic: 0 }
+    const cache = await seedRejectedCandidate({ generate: 0, critic: 0 })
+    const d = deps(cache, { generate: () => FRESH, critic: rejectFull, calls })
+    await resolve(cache, d, 'ok')
+    expect(retryLines()).toHaveLength(0)
   })
 })
 

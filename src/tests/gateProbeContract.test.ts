@@ -183,18 +183,19 @@ describe('B — a competing question WITHOUT an option list', () => {
 describe('P0 safety contract — the probe itself is untouched', () => {
   it('selected probe P produces widget P, options and key intact', () => {
     const mcq = probeToMcq(PROBE)!
-    expect(mcq.options).toEqual([
+    expect([...mcq.options].sort()).toEqual([
       'The first is speed (scalar, no direction); the second is velocity (vector, has direction)',
       'They are the same quantity just phrased differently',
-    ])
-    expect(mcq.correctIndex).toBe(0)
+    ].sort())
+    expect(mcq.options[mcq.correctIndex]).toBe('The first is speed (scalar, no direction); the second is velocity (vector, has direction)')
   })
 
   it('grading still evaluates against P after the prose was replaced', () => {
     const mcq = probeToMcq(PROBE)!
     enforceGateProbeContract({ text: VIOLATING_PROSE, leadIn: null, canonicalQuestion: mcq.question })
-    expect(gradeMcqAnswer('A', mcq).correct).toBe(true)
-    expect(gradeMcqAnswer('B', mcq).correct).toBe(false)
+    const right = 'AB'[mcq.correctIndex], wrong = 'AB'[1 - mcq.correctIndex]
+    expect(gradeMcqAnswer(right, mcq).correct).toBe(true)
+    expect(gradeMcqAnswer(wrong, mcq).correct).toBe(false)
     expect(gradeMcqAnswer('who knows', mcq).correct).toBeNull()
   })
 
@@ -290,7 +291,13 @@ describe('route wiring — the two runtime rules', () => {
     // untouched — it asks a different question ("was something attached THIS
     // turn"). Old assertion (kept verbatim, no longer matches source):
     //   expect(ROUTE).toContain('if (gateMcqHoisted && mcqHoisted) {')
-    expect(ROUTE).toContain('if (resolvedGateMcq && mcqHoisted) {')
+    // 2026-10-01 (live QA): it also runs, in `held` mode, against an AUTHORED
+    // question already on screen. Old assertion (kept verbatim):
+    //   expect(ROUTE).toContain('if (resolvedGateMcq && mcqHoisted) {')
+    expect(ROUTE).toContain('const contractQuestion = resolvedGateMcq && mcqHoisted')
+    expect(ROUTE).toContain(': (resolvedQuestionServed?.assetId ? resolvedQuestionServed : null)')
+    expect(ROUTE).toContain('if (contractQuestion) {')
+    expect(ROUTE).toContain('held: contractQuestion !== mcqHoisted || !resolvedGateMcq,')
     expect(ROUTE).toContain('enforceGateProbeContract')
   })
 
@@ -304,7 +311,9 @@ describe('route wiring — the two runtime rules', () => {
     // ONE new routeAI call site (the claim-challenge repair regeneration in
     // route.ts, right after the V-AFFIRM floor) -- the only production change
     // to this count since this assertion was written. 4 -> 5.
-    expect((ROUTE.match(/await routeAI\(/g) ?? []).length).toBe(5)
+    // 5 -> 6 (2026-09-30): the stub repair's single regeneration (repairStubReply,
+    // confirmBackRepair.ts) — fires only when a clean-up left no real reply.
+    expect((ROUTE.match(/await routeAI\(/g) ?? []).length).toBe(6)
   })
 
   it('mastery, grading and the attach line are untouched', () => {

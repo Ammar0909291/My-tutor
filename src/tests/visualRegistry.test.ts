@@ -255,7 +255,9 @@ describe('visualRegistry', () => {
 
   it('gravitation/orbital concepts reuse the existing gravitation_orbit scene generator', () => {
     for (const id of [
-      'phys.mech.gravitational-field', 'phys.mech.orbital-mechanics', 'phys.mech.keplers-laws',
+      // keplers-laws left this list 2026-09-30: the generator's circular orbit
+      // contradicts Kepler's first law; it owns an ellipse figure in CONCEPT_SCENES.
+      'phys.mech.gravitational-field', 'phys.mech.orbital-mechanics',
     ]) {
       expect(getConceptSceneGenerator(id)).toBe('gravitation_orbit')
     }

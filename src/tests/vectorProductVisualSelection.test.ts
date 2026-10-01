@@ -255,7 +255,8 @@ describe('the repair path is the general one, not a special case', () => {
    * deliberately kept, so the idea is not silently re-attempted.
    */
   it('an insufficient concept still renders, demoted rather than withheld', () => {
-    const decision = requestDiagram('phys.em.resistivity')
+    // (phys.em.resistivity was this example until physics batch 15, 2026-09-30.)
+    const decision = requestDiagram('phys.em.dc-circuits')
     expect(decision.graphical).toBe(true)
     expect(decision.asset?.scope).toBe('domain')
   })
@@ -336,7 +337,28 @@ describe('the repair path is the general one, not a special case', () => {
     // for "Ecosystem Structure and Function", one frequency distribution for
     // "Data Visualization". Both are still a real upgrade on the generic
     // domain default they previously received.
-    expect(INSUFFICIENT_FOR_CONCEPT.size).toBe(48)
+    // 48 -> 47 (2026-09-24): a REPAIR, the direction this queue exists for.
+    // 'bio.mol.dna-replication' ("static Watson-Crick pairing; no replication
+    // fork") now owns an authored replication-fork figure in CONCEPT_SCENES, so
+    // its verdict no longer describes what it renders and was removed — see
+    // dnaReplicationVisual.test.ts.
+    // 47 -> 46 (2026-09-30): a REPAIR. phys.opt.refraction owns an authored
+    // boundary/normal/angles figure (physicsPilot.ts buildRefractionScene).
+    // 46 -> 45 (2026-09-30): a REPAIR. phys.mech.hookes-law owns an authored
+    // spring / x / F = −kx figure (physicsCoreScenes.ts buildHookesLawScene).
+    // 45 -> 40 (2026-09-30, physics batch 2): impulse, newtons-third-law,
+    // inclined-plane, work and ideal-gas-law each own an authored figure.
+    // 40 -> 26 (2026-09-30, physics batch 15): REPAIRS. The fourteen
+    // card-backed physics entries (displacement, velocity, acceleration,
+    // relative-motion, tension, conservative-forces, both angular-momentum
+    // concepts, thermodynamic-processes, carnot-cycle, resistivity, emf,
+    // schrodinger-equation, selection-rules) each own an authored figure that
+    // draws what their verdict said was missing — physicsCoreScenesB15.ts.
+    expect(INSUFFICIENT_FOR_CONCEPT.size).toBe(26)
+    expect(INSUFFICIENT_FOR_CONCEPT.has('phys.therm.carnot-cycle')).toBe(false)
+    expect(INSUFFICIENT_FOR_CONCEPT.has('phys.mech.hookes-law')).toBe(false)
+    expect(INSUFFICIENT_FOR_CONCEPT.has('phys.opt.refraction')).toBe(false)
+    expect(INSUFFICIENT_FOR_CONCEPT.has('bio.mol.dna-replication')).toBe(false)
     expect([...INSUFFICIENT_FOR_CONCEPT].some((id) => id.startsWith('chem.'))).toBe(true)
     // The queue now tracks mathematics too, which it did not before.
     expect([...INSUFFICIENT_FOR_CONCEPT].some((id) => id.startsWith('math.'))).toBe(true)

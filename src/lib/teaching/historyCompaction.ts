@@ -120,3 +120,43 @@ export function compactServedExplanations(
     return { role: m.role, content: marker }
   })
 }
+
+// ── THE OUTPUT SIDE: A PARAGRAPH THE LEARNER HAS ALREADY READ IS NOT SENT AGAIN ──
+//
+// Compaction removes what the model can see; it cannot stop the model producing
+// the same authored text from another channel (the header's own "ONE THING THIS
+// DOES NOT AND CANNOT FIX"). Measured 2026-09-28, Physics Unit-1 certification
+// pass 1, production: the memory-served explanation at slot 3 came back
+// VERBATIM from the model 3-11 turns later in 11 of 32 lessons, with the
+// already-served guard firing (`already_served`) and
+// `retrievedExplanationInPrompt: false` — so whatever the channel, the fix that
+// cannot be bypassed is at the output: drop any long paragraph whose text
+// already reached the learner earlier in this session. Pure.
+
+const REPEAT_MIN_CHARS = 120
+const normPara = (s: string) => s.toLowerCase().replace(/[’ʼ]/g, "'").replace(/[^\p{L}\p{N}' ]+/gu, ' ').replace(/\s+/g, ' ').trim()
+
+export function dropRepeatedParagraphs(
+  text: string,
+  priorAssistantTexts: readonly string[],
+): { text: string; dropped: number } {
+  const t = typeof text === 'string' ? text : ''
+  if (!t.trim() || priorAssistantTexts.length === 0) return { text: t, dropped: 0 }
+  const prior = priorAssistantTexts.map((p) => normPara(p ?? '')).filter(Boolean)
+  let dropped = 0
+  const kept = t.split(/\n{2,}/).filter((para) => {
+    const n = normPara(para)
+    if (n.length < REPEAT_MIN_CHARS) return true
+    // A server verdict may legitimately recur (a missed question re-asked and
+    // missed again): never drop a paragraph that opens with one.
+    if (/^(?:not quite|that'?s right|correct|yes, exactly)/i.test(para.trim().replace(/[’ʼ]/g, "'"))) return true
+    // Match on a long leading window, so a trailing edit ("…with your hand and")
+    // does not let a recited paragraph through.
+    const probe = n.slice(0, Math.min(n.length, 160))
+    const repeated = prior.some((p) => p.includes(probe))
+    if (repeated) dropped++
+    return !repeated
+  })
+  if (dropped === 0) return { text: t, dropped: 0 }
+  return { text: kept.join('\n\n').trim(), dropped }
+}

@@ -37,7 +37,9 @@ const CONCEPT_VISUALS: Record<string, VisualEntry> = {
   'phys.mech.projectile-motion':      { primary: 'three_projectile_motion', all: ['three_projectile_motion', 'force_diagram'], sceneGenerator: 'projectile' },
   'phys.mech.circular-motion':        { primary: 'three_circular_motion', all: ['three_circular_motion', 'force_diagram'], sceneGenerator: 'circular' },
   'phys.mech.newtons-first-law':      { primary: 'three_newton_forces', all: ['three_newton_forces', 'force_diagram'] },
-  'phys.mech.newtons-second-law':     { primary: 'three_newton_forces', all: ['three_newton_forces', 'force_diagram'] },
+  // ADR 16 G3 pilot: the time-stepped F = ma simulation is served first (Tier 0);
+  // the three_newton_forces card stays as the Tier 1 fallback. The ONLY concept bound to it.
+  'phys.mech.newtons-second-law':     { primary: 'three_newton_forces', all: ['three_newton_forces', 'force_diagram'], sceneGenerator: 'newton_second_law' },
   'phys.mech.newtons-third-law':      { primary: 'three_newton_forces', all: ['three_newton_forces', 'force_diagram'] },
   // REPAIRED by the visual semantic moat sweep (round 4): the primary and the
   // secondary were the wrong way round. `three_newton_forces` (NewtonForces3D)
@@ -49,7 +51,9 @@ const CONCEPT_VISUALS: Record<string, VisualEntry> = {
   // is a binding fix at the source rather than a new asset or a suppression.
   'phys.mech.friction':               { primary: 'force_diagram', all: ['force_diagram', 'three_newton_forces'] },
   'phys.mech.momentum':               { primary: 'three_momentum_collision', all: ['three_momentum_collision', 'force_diagram'], sceneGenerator: 'collision' },
-  'phys.mech.impulse':                { primary: 'three_momentum_collision', all: ['three_momentum_collision', 'force_diagram'], sceneGenerator: 'collision' },
+  // No sceneGenerator: a collision is not impulse. The concept's own force–time
+  // area figure is CONCEPT_SCENES['phys.mech.impulse'] (2026-09-30).
+  'phys.mech.impulse':                { primary: 'three_momentum_collision', all: ['three_momentum_collision', 'force_diagram'] },
   'phys.mech.torque':                 { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'torque_diagram' },
   // P2 fix: these two keys did not match any real KG concept ID ('phys.mech.
   // gravitation' vs the KG's 'phys.mech.universal-gravitation'; 'phys.mech.
@@ -170,7 +174,10 @@ const CONCEPT_VISUALS: Record<string, VisualEntry> = {
   // whole gravitation sub-area.
   'phys.mech.gravitational-field':    { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'gravitation_orbit' },
   'phys.mech.orbital-mechanics':      { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'gravitation_orbit' },
-  'phys.mech.keplers-laws':           { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'gravitation_orbit' },
+  // keplers-laws: sceneGenerator removed 2026-09-30 — the gravitation generator
+  // draws a CIRCULAR orbit, contradicting Kepler's first law. Its own ellipse /
+  // equal-areas figure is CONCEPT_SCENES['phys.mech.keplers-laws'].
+  'phys.mech.keplers-laws':           { primary: 'force_diagram', all: ['force_diagram'] },
   // 'phys.mech.escape-velocity' was flagged 🔴 Incorrect Mapping by the new
   // visualCoverageValidator: "Escape Velocity" is fundamentally a kinematics/
   // energy-threshold quantity (a scalar speed), not a force-diagram or
@@ -204,8 +211,12 @@ const CONCEPT_VISUALS: Record<string, VisualEntry> = {
   'phys.meas.vector-products':        { primary: 'three_vector_visualization', all: ['three_vector_visualization'] },
 
   // Physics — Optics
-  'phys.opt.reflection':              { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'ray_optics' },
-  'phys.opt.refraction':              { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'ray_optics' },
+  // No sceneGenerator: ray_optics draws image formation, not the law. The concept's
+  // own incident/normal/equal-angles figure is CONCEPT_SCENES['phys.opt.reflection'].
+  'phys.opt.reflection':              { primary: 'force_diagram', all: ['force_diagram'] },
+  // No sceneGenerator: the shared ray_optics kind draws a LENS. The concept's own
+  // boundary/normal/angles figure is CONCEPT_SCENES['phys.opt.refraction'] (2026-09-30).
+  'phys.opt.refraction':              { primary: 'force_diagram', all: ['force_diagram'] },
   'phys.opt.mirrors':                 { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'ray_optics' },
   'phys.opt.lenses':                  { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'ray_optics' },
   // Lens power (1/f) is the SAME physical setup the ray_optics generator
@@ -299,7 +310,7 @@ const CONCEPT_VISUALS: Record<string, VisualEntry> = {
   // Physics — Waves (P1 fix: pendulum and SHM belong to phys.wave.* in the KG,
   // not phys.mech.*; the prior orphan keys phys.mech.pendulum and
   // phys.mech.simple-harmonic-motion were silently unreachable at runtime).
-  'phys.wave.pendulum':               { primary: 'three_pendulum_motion', all: ['three_pendulum_motion'], sceneGenerator: 'pendulum' },
+  'phys.wave.pendulum':               { primary: 'three_pendulum_motion', all: ['three_pendulum_motion'], sceneGenerator: 'pendulum_period' },
   'phys.wave.shm':                    { primary: 'three_pendulum_motion', all: ['three_pendulum_motion'], sceneGenerator: 'pendulum' },
   'phys.wave.shm-energy':             { primary: 'three_pendulum_motion', all: ['three_pendulum_motion'], sceneGenerator: 'pendulum' },
   // P0 audit: the remaining 14 phys.wave concepts (wave-properties,
@@ -769,6 +780,55 @@ export function lookupConceptVisual(conceptId: string | null): VisualEntry | nul
  * Additive: DOMAIN_VISUALS and its 394 entries are untouched, and
  * lookupConceptVisual's behaviour is byte-for-byte what it was.
  */
+/**
+ * WHICH DOMAINS EACH DOMAIN-DEFAULT CARD FAITHFULLY ILLUSTRATES.
+ *
+ * A domain-prefix rule hands one stock card to every concept under the prefix
+ * that has nothing better, so the card must at least depict the DOMAIN. That
+ * was never checked: 'bio.cell' -> food_chain put an ecology diagram under
+ * cell biology, and every one of the 24 bio.cell concepts that reached it had
+ * to be retired or individually overridden (retired.ts, 1f829c0) — while the
+ * rule itself stayed live for the next bio.cell concept to fall into.
+ *
+ * The declaration sits with the CARD (what it depicts), not with the rule, so
+ * it is made once per card and a new rule is judged against it rather than
+ * against a reviewer's memory. A rule whose card does not declare its prefix
+ * is REFUSED by lookupConceptVisualBinding — the concept gets NO FIGURE,
+ * which is safer than the wrong one — and `visualDomainFallbackSafety.test.ts`
+ * names every refused rule so it cannot go unnoticed. Rules are left in
+ * DOMAIN_VISUALS (reviewable, reversible); only their serving is gated.
+ */
+export const DOMAIN_CARD_HOME: Readonly<Partial<Record<VisualType, readonly string[]>>> = {
+  three_bond_formation:          ['chem.bond'],
+  three_molecular_shapes:        ['chem.bond'],
+  three_atomic_structure:        ['chem.atomic'],
+  three_electron_shells:         ['chem.atomic', 'chem.period'],
+  three_crystal_lattice:         ['chem.solid'],
+  food_chain:                    ['bio.eco'],
+  water_cycle:                   ['bio.eco'],
+  geometry_shape:                ['math.geom', 'math.trig'],
+  number_line:                   ['math.arith'],
+  coordinate_plane:              ['math.alg', 'math.stat', 'math.calc', 'math.trig'],
+  three_vector_visualization:    ['math.vec'],
+  three_data_structure:          ['cs.ds'],
+  three_algorithm_visualization: ['cs.algo'],
+  three_network_packet_flow:     ['cs.net'],
+  three_computer_architecture:   ['cs.found'],
+}
+
+/** Does this domain rule's card illustrate the domain it is bound to? */
+export function domainRuleIsFaithful(rule: { prefix: string; primary: VisualType }): boolean {
+  return (DOMAIN_CARD_HOME[rule.primary] ?? []).includes(rule.prefix)
+}
+
+/** Every domain rule, with whether it may serve. For tests and audits. */
+export function listDomainRules(): Array<{ prefix: string; primary: VisualType; faithful: boolean }> {
+  return DOMAIN_VISUALS.map((r) => ({
+    prefix: r.prefix, primary: r.entry.primary,
+    faithful: domainRuleIsFaithful({ prefix: r.prefix, primary: r.entry.primary }),
+  }))
+}
+
 export function lookupConceptVisualBinding(
   conceptId: string | null,
 ): { entry: VisualEntry; scope: string; tier: 'exact' | 'domain' } | null {
@@ -780,7 +840,11 @@ export function lookupConceptVisualBinding(
 
   // Tier 2: domain prefix (longest match first)
   for (const rule of DOMAIN_VISUALS) {
-    if (conceptId.startsWith(rule.prefix)) return { entry: rule.entry, scope: rule.prefix, tier: 'domain' }
+    if (!conceptId.startsWith(rule.prefix)) continue
+    // The first matching rule decides, as before — but an unfaithful rule
+    // decides NO FIGURE rather than falling through to a broader one.
+    if (!domainRuleIsFaithful({ prefix: rule.prefix, primary: rule.entry.primary })) return null
+    return { entry: rule.entry, scope: rule.prefix, tier: 'domain' }
   }
 
   return null
@@ -844,10 +908,102 @@ export function shouldForceVisualRender(
 // force-render path in resolveResponseVisual() also covers "the model
 // promised, the registry has something to show" — not just "the student
 // asked, the registry has something to show".
-const VISUAL_PROMISE_RE = /\b(here'?s|here is|below is|see the|look at the|take a look at|check out the)\b[^.!?\n]{0,40}\b(visual|diagram|graph|chart|illustration|image|figure|plot)\b/i
+// [’']? rather than '? — real model output consistently uses the
+// typographic apostrophe (’, U+2019), not the ASCII one, and a straight-
+// quote-only pattern silently fails to match "Here’s a diagram…" or "the
+// picture you’re looking at" in production text. Measured: this exact gap
+// let genuine hallucinated-visual sentences through even after the fixes
+// below were added, caught only by re-testing against real transcripts
+// rather than hand-written fixtures.
+const APOS = '[’\']?'
+const VISUAL_PROMISE_RE = new RegExp(
+  `\\b(here${APOS}s|here is|below is|see the|look at the|take a look at|check out the)\\b[^.!?\\n]{0,40}\\b(visual|diagram|graph|chart|illustration|image|figure|plot|picture|flowchart|flow chart|sketch)\\b`,
+  'i',
+)
 
 export function textPromisesUnfulfilledVisual(text: string): boolean {
   return VISUAL_PROMISE_RE.test(text)
+}
+
+// Grounding-contract defense-in-depth (real-learner QA, 2026-09-21). The
+// VISUAL CONTRACT's NO-FIGURE prompt block (visualContract.ts) already tells
+// the model, in as many words, never to say "look at the diagram/picture/
+// figure", "as you can see", or "on your screen" when nothing is attached —
+// but a prompt instruction is not an invariant, and real production
+// transcripts across Chemistry and English concepts (concepts with no
+// curated SceneSpec and no legacy registry entry) showed the model ignoring
+// it repeatedly: "look at the picture on your screen", "the diagram is a
+// simple flow chart", "the image is a process flow diagram" — none of it
+// backed by an actual visual payload. `VISUAL_PROMISE_RE` above already
+// catches the FUTURE/imperative form ("here's a diagram") for the force-
+// render path; it does not catch the PRESENT-TENSE claim that something is
+// already visible, which is what the observed hallucinations actually were.
+//
+// This is caught, never fixed, by generating more visuals — most of these
+// concepts simply have none authored, and that is a content decision, not a
+// bug this function should paper over. The only thing that IS this
+// function's job is making sure the LEARNER never reads a false claim about
+// their own screen. Scoped to the sentence, not the whole turn, so the rest
+// of the (usually correct) explanation survives.
+// "simulation"/"animation"/"visualization" added 2026-09-25 (synthetic run,
+// phys.mech.newtons-first-law, Gemini-served, no figure attached): "Let's check
+// how this applies to a brand-new scenario with the 3D Newton's Forces
+// simulation on your screen." The product does ship 3D simulations, so the
+// model has a real word to borrow; the claim is only false when none is
+// attached, which is the only time this runs.
+const SCREEN_CLAIM_RE = new RegExp(
+  `\\b(diagram|figure|picture|image|graph|chart|illustration|flowchart|flow chart|sketch|drawing|simulation|animation|visuali[sz]ation)\\b[^.!?\\n]{0,60}\\b(on (your|the) screen|in front of you|you${APOS}re looking at|you have (on|in front of))\\b`,
+  'i',
+)
+const LOOK_AT_CLAIM_RE =
+  /\b(look at|take a look at|glance at)\b[^.!?\n]{0,40}\b(diagram|figure|picture|image|graph|chart|illustration|flowchart|flow chart|sketch|simulation|animation)\b[^.!?\n]{0,60}\b(on (your|the) screen|already|attached|beside)?/i
+// "The diagram IS a flow chart", "the image IS a process flow diagram" —
+// measured (Chemistry/English, both with no visual field returned at all):
+// a bare definite-article description with no screen-reference and no
+// look-at verb, so neither pattern above catches it. Scoped to "the"/"this"
+// + noun + copula/description-verb so it does not fire on a hypothetical
+// ("a diagram would show...") or the legitimate imperative-invitation form
+// already covered by VISUAL_PROMISE_RE.
+const DEFINITE_DESCRIPTION_RE =
+  /\b(the|this)\s+(diagram|figure|picture|image|graph|chart|illustration|flowchart|flow chart|sketch|drawing|simulation|animation)\b[^.!?\n]{0,10}\b(is|shows|depicts|illustrates|represents|split)\b/i
+
+/** Splits on sentence-ending punctuation, keeping the punctuation with the
+ *  sentence it ends — deliberately naive (no NLP dependency) since it only
+ *  needs to isolate the one offending clause, not parse the passage. */
+function splitIntoSentences(text: string): string[] {
+  return text.split(/(?<=[.!?])\s+(?=\S)/)
+}
+
+/**
+ * Removes sentences that claim a visual is CURRENTLY present ("the diagram
+ * on your screen shows...") or promise one that never arrives ("here's a
+ * diagram..."), for use ONLY once the caller has already established that no
+ * visual — neither the legacy visual-registry attachment nor the V2
+ * SceneSpec authority — was actually attached this turn. Never strips down
+ * to an empty response: if every sentence would be removed (the whole turn
+ * was about a visual that doesn't exist), the original text is returned
+ * unchanged rather than silencing the tutor entirely.
+ */
+export function stripPhantomVisualClaims(text: string): string {
+  const isClaim = (s: string) =>
+    SCREEN_CLAIM_RE.test(s) || LOOK_AT_CLAIM_RE.test(s) || VISUAL_PROMISE_RE.test(s) || DEFINITE_DESCRIPTION_RE.test(s)
+  // PARAGRAPHS ARE KEPT, AND AN UNTOUCHED TEXT IS RETURNED AS-IS (2026-09-24).
+  // This used to re-join every sentence with a single space whether or not
+  // anything was removed, so every multi-paragraph reply on a no-figure turn
+  // reached the learner as one flattened block — measured on all 26 production
+  // lesson openings replayed through it. Sentences are now judged per
+  // paragraph and paragraphs re-joined with their blank line.
+  let removedAny = false
+  const paragraphs = text.split(/\n{2,}/).map((paragraph) => {
+    const sentences = splitIntoSentences(paragraph)
+    const kept = sentences.filter((s) => !isClaim(s))
+    if (kept.length === sentences.length) return paragraph
+    removedAny = true
+    return kept.join(' ').trim()
+  })
+  if (!removedAny) return text
+  const out = paragraphs.filter((p) => p.trim().length > 0).join('\n\n').trim()
+  return out.length === 0 ? text : out
 }
 
 /**

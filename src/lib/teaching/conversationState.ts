@@ -42,6 +42,26 @@ export const PHASE_ORDER: TeachingPhase[] = [
 ]
 
 /**
+ * The verified bar, mirrored from masteryGate's MASTERY_CHECK_REQUIRED /
+ * MASTERY_PRACTICE_REQUIRED: masteryGate imports this module, so it cannot be
+ * imported back. A test pins the two pairs equal.
+ */
+export const VERIFIED_CHECK_BAR = 1
+export const VERIFIED_PRACTICE_BAR = 2
+
+/**
+ * At TRANSFER with verified evidence still short of the bar — the only state
+ * where TRANSFER must keep assessing with authored questions, so the lesson
+ * can still certify (owner-approved, 2026-09-24; see the TRANSFER case in
+ * advanceConversationState).
+ */
+export function transferBelowVerifiedBar(state: Pick<ConversationState, 'phase' | 'verifiedCorrectAtCheck' | 'verifiedCorrectAtPractice'> | null | undefined): boolean {
+  if (!state || state.phase !== 'TRANSFER') return false
+  return (state.verifiedCorrectAtCheck ?? 0) < VERIFIED_CHECK_BAR
+    || (state.verifiedCorrectAtPractice ?? 0) < VERIFIED_PRACTICE_BAR
+}
+
+/**
  * The ladder splits in two, and the split is the reason acknowledgements are
  * safe to act on.
  *
@@ -181,6 +201,10 @@ export interface ConversationState {
    *  phases — the exact loop the concept budget exists to bound. Reset on a
    *  concept change by readConversationState, like every other counter here. */
   turnsOnConcept: number
+  /** Every non-degraded turn on this concept, INCLUDING learner-initiated ones
+   *  (questions / requests), which `turnsOnConcept` no longer counts. Only the
+   *  absolute termination ceiling reads it (conceptBudget.ABSOLUTE_TURN_CEILING). */
+  turnsTotalOnConcept?: number
   /** Set once, by advanceConversationState, when the learner reaches the base
    *  turn budget while demonstrably converting (conceptBudget:
    *  qualifiesForBudgetExtension). Buys turns only — never mastery. Persisted
@@ -512,6 +536,16 @@ export interface TurnEvidence {
    *  and `taughtThisSession` must not record that it did. Sourced from
    *  degradedMode.isDegradedProvider(), the single owner of the question. */
   degradedTurn?: boolean
+  /** The LEARNER drove this turn: they asked a question or made a request to
+   *  the tutor (not answering the pending quiz, not asking for practice). Such a
+   *  turn is the learner engaging, not the tutor spending a teaching attempt, so
+   *  it does not consume the concept's teaching budget (`turnsOnConcept`); it
+   *  still counts toward the absolute ceiling. Measured 2026-09-28 (physics
+   *  unit-1 certification, phys.mech.normal-force): a learner who asked "why
+   *  does that matter?", asked for a diagram and asked one off-topic question
+   *  was closed as "on pause — not mastered" on turn 12 after answering
+   *  correctly twice and missing once. */
+  learnerInitiated?: boolean
   /** Did this turn actually DELIVER teaching — the server's decided move was
    *  'teach' or 'show'? A tutor normally explains and then ends on a question,
    *  and treating "asked something" as "taught nothing" froze the ladder at
@@ -660,7 +694,10 @@ export function advanceConversationState(
   // regardless of which phase it happened in or how it went. A degraded turn
   // taught nothing, so it must not consume budget either (same reasoning as
   // the P4 stage guard).
-  if (!evidence.degradedTurn) next.turnsOnConcept = (prev.turnsOnConcept ?? 0) + 1
+  if (!evidence.degradedTurn) {
+    next.turnsTotalOnConcept = (prev.turnsTotalOnConcept ?? prev.turnsOnConcept ?? 0) + 1
+    if (!evidence.learnerInitiated) next.turnsOnConcept = (prev.turnsOnConcept ?? 0) + 1
+  }
 
   // Stance Enforcement (Claude Recommendation #6): monotonic within the
   // concept's lifetime, same reset-on-concept-change rule as every other
@@ -1183,8 +1220,30 @@ export function advanceConversationState(
         if (verified) next.verifiedCorrectAtPractice = (prev.verifiedCorrectAtPractice ?? 0) + 1
         if (next.correctAtPractice >= 2) next.phase = 'TRANSFER'
         break
-      case 'TRANSFER':
+      case 'TRANSFER': {
+        // TRANSFER BELOW THE VERIFIED BAR (owner-approved, 2026-09-24).
+        //
+        // The plain counters above deliberately advance on any accepted
+        // correct answer, so a lesson can reach TRANSFER with verified
+        // evidence short of the bar — measured on production (synthetic
+        // after-run 2, phys.mech.velocity): verified 1/1 at TRANSFER, and
+        // TRANSFER moved no counter, so verified mastery was unreachable for
+        // the rest of the lesson however well the learner answered. A
+        // SERVER-GRADED correct answer here now tops up the lowest unmet
+        // verified counter, never past the bar and never past its plain
+        // counterpart (verified <= plain is kept). Self-reported correctness
+        // still credits nothing (`verified` requires serverGraded).
+        if (verified) {
+          const vCheck = prev.verifiedCorrectAtCheck ?? 0
+          const vPractice = prev.verifiedCorrectAtPractice ?? 0
+          if (vCheck < VERIFIED_CHECK_BAR && vCheck < prev.correctAtCheck) {
+            next.verifiedCorrectAtCheck = vCheck + 1
+          } else if (vPractice < VERIFIED_PRACTICE_BAR && vPractice < prev.correctAtPractice) {
+            next.verifiedCorrectAtPractice = vPractice + 1
+          }
+        }
         break
+      }
     }
   } else if (evidence.acknowledgement) {
     // The learner acknowledged ("got it") or asked to proceed ("go",
@@ -1945,9 +2004,19 @@ export function isLowSignalAcknowledgement(message: string): boolean {
  * the length/no-question criteria AND an explicit filler phrase — a very short
  * but concrete statement ("An orbital is a region where electrons can be found.")
  * will not fire because it contains no filler phrase.
+ *
+ * "let's stay with this idea for a moment" added (real-learner QA,
+ * 2026-09-22): measured live, verbatim, on eng.communication.business-
+ * writing — the whole visible turn, twice, after a correctly-graded check
+ * cycle while the model stalled transitioning to the next practice
+ * activity. Intermittent (a second attempt at the identical scripted
+ * conversation did not reproduce it — non-deterministic model output, not
+ * a deterministic code path), but a real content-free turn shape this list
+ * did not yet cover: none of the existing phrases anchor on "stay with"
+ * as the stalling verb, only "take a step"/"take a moment"/"move forward".
  */
 const FILLER_PHRASE_RE =
-  /\b(?:whenever you'?re ready|when(?:ever)? you'?re ready|take your time|in your own time|we can continue|let'?s take (?:a|one) (?:small )?step|feel free to|we'?ll continue|take a moment|no rush|we can go|let'?s move forward whenever|at your own pace)\b/i
+  /\b(?:whenever you'?re ready|when(?:ever)? you'?re ready|take your time|in your own time|we can continue|let'?s take (?:a|one) (?:small )?step|feel free to|we'?ll continue|take a moment|no rush|we can go|let'?s move forward whenever|at your own pace|let'?s stay (?:with|on) (?:this|that|it) (?:idea|topic|point)? ?for a moment)\b/i
 
 export function detectFillerTurn(text: string): boolean {
   const wordCount = text.trim().split(/\s+/).length
@@ -2042,7 +2111,9 @@ export function classifyAcknowledgementContext(
 ): AcknowledgementContext {
   if (recoveryFired) return 'recovery'
   if (navigationRequest) return 'navigation'
-  if (state.consecutiveFailures >= 2) return 'confusion'
+  // A right answer is never met with "this is genuinely tricky": earlier
+  // misses do not outrank the answer in front of us (synthetic run 2026-09-25).
+  if (state.consecutiveFailures >= 2 && signalCorrect !== true) return 'confusion'
   if (signalCorrect === false) return 'correction'
   if (signalCorrect === true) {
     if (state.learnerConfidence === 'low') return 'confidence_building'
@@ -2119,6 +2190,13 @@ export interface TurnDirectiveParams {
   /** A.4: true when the learner's message contains a genuine question the
    *  LLM must address before following the phase template. */
   learnerAskedQuestion?: boolean
+  /** A.4b (2026-09-26, live QA): the learner's question/request is a follow-up
+   *  about the lesson's own idea, already taught this session (no excursion,
+   *  no example/diagram/re-explain request). The EXPLANATION SEQUENCING LAW
+   *  (client.ts) is for introducing a NEW idea; without this the model
+   *  restarted it and answered "explain to me why this is negative" with
+   *  "Imagine you have a simple balance scale…". */
+  followUpOnTaughtIdea?: boolean
   /** A.7: true when this concept was previously completed/mastered by the
    *  learner — skip re-teaching from scratch, treat as review/refresh. */
   conceptPreviouslyMastered?: boolean
@@ -2166,6 +2244,28 @@ const MOVE_LINE: Record<NextMove, string> = {
  * write, whether a visual leads) — it does not add another advisory
  * opinion on top of it.
  */
+/**
+ * The mirror (2026-09-27, owner instruction; live QA 2026-09-26): "why is that
+ * term zero?" came back as "So you're wondering whether … vanishes — have I got
+ * that right?" and "show why the term is negative" as "So you'd like me to …
+ * correct?". Both question lines (A.4, A.4b) now say: answer it, or ask ONE
+ * specific clarifying question that names the options — never restate the
+ * question back for confirmation. Prompt steering; see attributionGuard.ts for
+ * why no output-side rewrite exists.
+ */
+export const NO_MIRROR_CLAUSE =
+  'Do NOT restate their question back to them for confirmation ("So you\'re asking…?", "So you\'re wondering whether…?", "So you\'d like me to…, correct?", "have I got that right?") — answer it. If it is genuinely ambiguous or rests on a false premise, ask ONE specific clarifying question that names the options (e.g. "Do you mean the first-order or the second-order term?"), or gently correct the premise and answer.'
+
+/**
+ * A.4b's exclusion: the learner asked for the very framing the sequencing law
+ * provides (an analogy, an example, a picture, everyday/real-life terms, or a
+ * simpler telling). The caller then leaves `followUpOnTaughtIdea` false.
+ */
+export function asksForEverydayFraming(message: string): boolean {
+  return /\b(?:analog\w*|examples?|metaphors?|real[- ]?(?:life|world)|everyday|pictures?|imagine|simpl\w*|plain(?:er)?\s+(?:words|english|language)|like\s+i'?m\s+(?:five|5))\b/i
+    .test(message ?? '')
+}
+
 export function buildTurnDirective(p: TurnDirectiveParams): string {
   // PHASE 3 — ARBITRATION BY ABSENCE.
   //
@@ -2317,7 +2417,12 @@ export function buildTurnDirective(p: TurnDirectiveParams): string {
   // A.4: when the learner asked a genuine question, the LLM must address
   // it directly BEFORE following the phase template — intent > template.
   if (p.learnerAskedQuestion) {
-    lines.push('- STUDENT QUESTION DETECTED: the student asked a genuine question. Address their specific question FIRST, directly and concisely. Then continue with the teaching phase above. Never ignore a student question to follow a template.')
+    lines.push('- STUDENT QUESTION DETECTED: the student asked a genuine question. Address their specific question FIRST, directly and concisely. Then continue with the teaching phase above. Never ignore a student question to follow a template. ' + NO_MIRROR_CLAUSE)
+  }
+  // A.4b: a follow-up on an idea already introduced is answered at the level
+  // already reached — the sequencing law does not restart for it.
+  if (p.followUpOnTaughtIdea) {
+    lines.push('- FOLLOW-UP ON WHAT YOU ALREADY TAUGHT: answer it directly, using the terms, formulas and reasoning already introduced in this conversation. The EXPLANATION SEQUENCING LAW is for introducing a NEW idea and does not restart here: do NOT open with an everyday object, analogy or "imagine…" scene unless the student asks for one. ' + NO_MIRROR_CLAUSE)
   }
   // A.10: brief concept recap on phase advancement — grounds the student
   // before moving to the next teaching mode.

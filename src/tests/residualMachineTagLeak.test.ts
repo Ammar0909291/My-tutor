@@ -227,3 +227,16 @@ describe('the real production row, replayed through the fixed pipeline', () => {
     expect(out).toContain('B) Kilogram (kg)')
   })
 })
+
+describe('mixed-case tag name (synthetic run 2026-09-25, Gemini)', () => {
+  it('the production MCq tag is removed, answer key and all; teaching stays', () => {
+    const t = 'Now, keeping that distinction in mind, let\'s look at how mass affects acceleration.\n\n<!--MCq="If you push a heavy refrigerator and a light shopping cart with the exact same net force across a smooth floor, what happens to their accelerations?" a="The shopping cart accelerates much faster because its mass is smaller" b="The refrigerator accelerates faster" c="Both accelerate at the exact same rate" d="Neither accelerates" correct="A"-->'
+    const out = stripResidualMachineTags(t)
+    expect(out).not.toMatch(/<!--|MCq|correct=/)
+    expect(out).toContain('how mass affects acceleration')
+  })
+  it('an ordinary lowercase HTML comment is still left alone', () => {
+    const t = 'Text <!-- note to self --> more text'
+    expect(stripResidualMachineTags(t)).toBe(t)
+  })
+})

@@ -177,6 +177,27 @@ const SELF_ANSWERED_HEAD =
   /^\s*(?:that'?s|this\s+is|it'?s)?\s*because\b/i
 
 /**
+ * The same rhetorical pair without "because". MEASURED (synthetic run,
+ * 2026-09-25, phys.mech.newtons-third-law, CHECK, `[gate-contract]` log):
+ * "Second: how does a rocket accelerate in empty space with nothing to push
+ * against? It carries its own something: it hurls exhaust gas backward…" read
+ * as a question for the learner, and the stray-question withhold cut the whole
+ * teaching paragraph — 693 chars to 37.
+ *
+ * Narrow on purpose: an explanatory why/how question that does not address the
+ * learner (no "you"/"your"), answered at once by a plain statement opening with
+ * a subject (It/They/The/This/That). A question put to the learner almost
+ * always says "you" ("How would you find the acceleration?"), and those are
+ * untouched.
+ */
+const RHETORICAL_WHY_HOW = /^(?:[A-Za-z]+\s*:\s*)?(?:why|how)\b/i
+const ADDRESSES_LEARNER = /\byou(?:r|rs|rself)?\b/i
+const DECLARATIVE_ANSWER_HEAD = /^\s*(?:it|they|the|this|that)\b(?!.*\?\s*$)/i
+function selfAnsweredWhyHow(question: string, next: string): boolean {
+  return RHETORICAL_WHY_HOW.test(question) && !ADDRESSES_LEARNER.test(question) && DECLARATIVE_ANSWER_HEAD.test(next)
+}
+
+/**
  * Did this tutor turn pose something the learner could actually answer?
  *
  * True when EITHER a question sentence solicits content, OR a line sets an
@@ -201,6 +222,7 @@ export function askedAnswerableQuestion(text: string): boolean {
     if (!SOLICITS_CONTENT.test(s) && !ALTERNATIVE_CHOICE.test(s)) continue
     const next = (sentences[i + 1] ?? '').trim()
     if (SELF_ANSWERED_HEAD.test(next)) continue
+    if (selfAnsweredWhyHow(s, next)) continue
     return true
   }
 

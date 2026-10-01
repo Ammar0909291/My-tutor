@@ -42,6 +42,7 @@
 
 import { getCachedVisualization, saveVisualization, type VisualizationCacheClient } from '@/lib/teaching/visuals/visualizationCache'
 import { groundingHash } from './topicIdentity'
+import { figureFingerprint } from './fingerprint'
 import type { ArchetypeContext } from './archetypes'
 import type { CriticReport } from './figureCritic'
 
@@ -79,12 +80,7 @@ export function verdictKey(conceptId: string): string {
 }
 
 /** Cheap, stable fingerprint of a figure payload. Shape, not content quality. */
-export function figureFingerprint(payload: unknown): string {
-  const text = JSON.stringify(payload) ?? ''
-  let hash = 0
-  for (let i = 0; i < text.length; i++) hash = (hash * 31 + text.charCodeAt(i)) | 0
-  return `f${(hash >>> 0).toString(16)}`
-}
+export { figureFingerprint }
 
 /**
  * The stored pass for this topic, if one still applies.
@@ -134,6 +130,19 @@ export async function writeVerdict(
     figure: figureFingerprint(figurePayload),
     judgedAt: now,
   }
+  // Diagnostic only — the CachedVerdict above is what's authoritative and
+  // cached; this preserves the full per-dimension report (otherwise
+  // discarded here) so a REJECT is diagnosable from logs instead of only
+  // "reject, confidence 0.83, cause unknown". Never read by any code path.
+  console.log('[visual-critic]', {
+    conceptId: ctx.conceptId,
+    figure: verdict.figure,
+    grounding: verdict.grounding,
+    decision: report.decision,
+    confidence: report.confidence,
+    judged: report.judged,
+    dimensions: report.dimensions,
+  })
   try {
     await saveVisualization(verdictKey(ctx.conceptId), JSON.stringify(verdict), client)
   } catch { /* best-effort by design */ }

@@ -124,7 +124,10 @@ describe('route wiring — no competing raw-text read remains', () => {
     // functions — which is exactly what the production defect this fix closes
     // walked through (`namedTopicUnknownTo` extracted the topic "someone else
     // in plain words" from the opening template's own worked example).
-    expect(ROUTE).toContain('resolveRequestedConceptId(learnerAuthoredMessage, excursionLessonConceptId, subjectCode)')
+    // 2026-09-29 (L1): the call gained a fifth argument, the tutor's most recent
+    // message, read only as lesson vocabulary. The learner-authored value is
+    // still what reaches the resolver's first parameter.
+    expect(ROUTE).toMatch(/resolveRequestedConceptId\(\s*learnerAuthoredMessage, excursionLessonConceptId, subjectCode,/)
     expect(ROUTE).toContain('namedTopicUnknownTo(learnerAuthoredMessage, taughtText)')
     // The raw `message` identifier must not reach either call directly —
     // confirming the substitution is total, not partial.

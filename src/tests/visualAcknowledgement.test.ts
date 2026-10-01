@@ -200,6 +200,7 @@ describe('the route actually wires this in, scoped to a newly-introduced figure'
     // read here via `resolvedVisualDecision`, the same value. Old assertion
     // (kept verbatim, no longer matches source):
     //   expect(ROUTE).toMatch(/ensureVisualAcknowledged\(cleanText, visualDecisionHoisted, figureIntroducedThisTurn && visualFired\)/)
-    expect(ROUTE).toMatch(/ensureVisualAcknowledged\(cleanText, resolvedVisualDecision, figureIntroducedThisTurn && visualFired\)/)
+    // 2026-10-01: a fourth argument skips the pointer on a lesson-closing turn.
+    expect(ROUTE).toMatch(/ensureVisualAcknowledged\(cleanText, resolvedVisualDecision, figureIntroducedThisTurn && visualFired, serveLessonComplete \|\| \/\\\[LESSON_COMPLETE\\\]\/i\.test\(cleanText\)\)/)
   })
 })

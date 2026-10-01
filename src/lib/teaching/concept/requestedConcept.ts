@@ -25,6 +25,7 @@ import { matchTopicRequest } from '@/lib/teaching/visual/session'
 import { buildConceptIndexFromKnowledgeGraph } from './conceptIndexSource'
 import { VISUAL_MEDIUM_NOUNS } from '@/lib/teaching/masteryGate'
 import { DISCOURSE_NOUNS } from '@/lib/teaching/visual/requestedTopic'
+import { authoredFigureText } from '@/lib/teaching/visual/authoredFigureText'
 import type { ConceptIndexEntry } from './conceptUnderstanding'
 
 /** Minimum confidence before a learner-named concept may override the lesson. */
@@ -304,6 +305,111 @@ function matchPrecedesItsRequest(message: string, matchedText: string): boolean 
     if (hit && i >= governedFrom) return false
   }
   return true                                   // every occurrence precedes it
+}
+
+/**
+ * E4 · A QUANTIFIED OR DETERMINED NOUN IS AN INSTANCE HERE, NOT A TOPIC ELSEWHERE.
+ *
+ * ── THE DEFECT, reproduced offline from production traces (2026-09-25) ──────
+ * Found by the learner-intent A/B experiment (docs/history/
+ * learner-intent-interpreter-ab-experiment.md), in BOTH arms:
+ *
+ *   physics lesson `phys.qm.perturbation-theory`:
+ *     "Please write out E_n^(2) explicitly and show why EVERY TERM is negative
+ *      when n is the ground state."
+ *     -> `math.alg.term` ("Term", algebra). Production `[excursion]` opened
+ *        lesson -> math.alg.term and `[visual-v2]` served
+ *        `registry:domain-default:math.alg:coordinate_plane` in the physics
+ *        lesson; the tutor then asked "which specific term?" and, a turn
+ *        later, for "the coordinates of the origin".
+ *   mathematics lesson `math.graph.random-graph`:
+ *     "…and WHAT DISTRIBUTION does it follow?"
+ *     -> `math.fnal.distributions` (generalized functions — the wrong sense
+ *        of the word); both arms then drifted into "what is a probability
+ *        distribution" for the rest of the session.
+ *
+ * ── WHY THE EXISTING FILTERS KEEP IT (traced) ──────────────────────────────
+ * `isIncidentalWord` treats a one-word title as a topic when a cue sits within
+ * CUE_WINDOW tokens before it. "SHOW why every TERM" and "WHAT distribution"
+ * both put a cue there, so both matches survive as "governed". But in neither
+ * sentence does the cue govern the noun: "every term" and "what distribution"
+ * are a quantifier and an interrogative determiner picking out INSTANCES —
+ * the terms of the sum just shown, the distribution of the count just
+ * discussed. The learner is asking about the lesson's own material, and
+ * nothing here names a concept to travel to.
+ *
+ * ── THE RULE, deliberately narrow ──────────────────────────────────────────
+ * A match is dropped only when ALL of these hold:
+ *   1. its title is ONE word (multi-word titles are specific — unchanged);
+ *   2. it lies OUTSIDE the lesson's own KG domain (`phys.qm`, `math.graph`, …),
+ *      so a word the lesson's own domain owns is never touched;
+ *   3. EVERY occurrence of the word in the message is immediately preceded by
+ *      a quantifier / interrogative determiner (INSTANCE_DETERMINERS);
+ *   4. no occurrence is the definitional frame "what X is / what X means"
+ *      ("teach me what entropy is" still names entropy).
+ * Positional, like E3: it reads where the determiner sits, not which noun it
+ * is. The earlier-rejected definite-article rule ("the") is NOT this rule —
+ * "teach me the derivative" contains no member of INSTANCE_DETERMINERS.
+ *
+ * Returning null leaves the teaching target on the lesson, the same "an honest
+ * 'I could not name it' rather than a guess" stance the rest of this module
+ * takes; an explicit request such as "teach me distributions" is untouched
+ * (no determiner) and still resolves.
+ */
+const INSTANCE_DETERMINERS: ReadonlySet<string> = new Set([
+  'every', 'each', 'all', 'any', 'which', 'what', 'whichever', 'whatever',
+  // E4b (2026-09-26): demonstratives point at something already present —
+  // "why is THIS term negative" is about the sum on screen, not algebra.
+  'this', 'that', 'these', 'those',
+])
+/**
+ * E4b · "THE <noun> IS …" — the definite article counts ONLY when the noun is
+ * the subject of a following predicate ("show why the term is negative").
+ * The rejected definite-article rule blocked "teach me the derivative"; that
+ * phrase has no predicate after the noun, so it is untouched, and so is the
+ * definitional "what the derivative is" (predicate with nothing after it).
+ */
+const SUBJECT_PREDICATES: ReadonlySet<string> = new Set([
+  'is', 'are', 'was', 'were', 'has', 'have', 'does', 'do', 'did', 'can', 'will', 'would',
+  'should', 'must', 'becomes', 'become', 'goes', 'go', 'comes', 'come', 'gets', 'get',
+])
+/** "what entropy IS" / "what entropy MEANS" — a definition request, not an instance. */
+const DEFINITION_COPULA: ReadonlySet<string> = new Set(['is', 'are', 'mean', 'means', 'was', 'were'])
+/** "which distribution IS IT" — an inverted copula asks WHICH instance, not what the noun is. */
+const INVERTED_SUBJECT: ReadonlySet<string> = new Set([
+  'it', 'this', 'that', 'these', 'those', 'they', 'there', 'he', 'she', 'we', 'you', 'i',
+])
+
+export function isOffDomainInstanceReference(
+  message: string,
+  matchedText: string,
+  matchedConceptId: string,
+  lessonConceptId: string | null,
+): boolean {
+  if (!lessonConceptId) return false
+  const matched = tokens(matchedText)
+  if (matched.length !== 1) return false
+  if (conceptDomain(matchedConceptId) === conceptDomain(lessonConceptId)) return false
+  const noun = matched[0]
+  const words = tokens(message ?? '')
+  let occurrences = 0
+  for (let i = 0; i < words.length; i++) {
+    if (words[i] !== noun) continue
+    occurrences++
+    const before = words[i - 1]
+    const next = words[i + 1]
+    if (before === 'the') {
+      // subject of a predicate that continues ("the term is negative") -> instance
+      if (next && SUBJECT_PREDICATES.has(next) && words[i + 2]) continue
+      return false
+    }
+    if (!before || !INSTANCE_DETERMINERS.has(before)) return false
+    if ((before === 'what' || before === 'which') && next && DEFINITION_COPULA.has(next)) {
+      const after = words[i + 2]
+      if (!after || !INVERTED_SUBJECT.has(after)) return false   // "what entropy is" -> a topic
+    }
+  }
+  return occurrences > 0
 }
 
 /**
@@ -604,6 +710,105 @@ function conceptDomain(conceptId: string): string {
   return parts.length >= 3 ? parts.slice(0, 2).join('.') : (parts[0] ?? '')
 }
 
+/**
+ * L1 · A WORD INSIDE ONE OF THE LESSON'S OWN COMPOUND TERMS IS THE LESSON'S TERM.
+ *
+ * ── THE DEFECT, measured in a real-learner production run (2026-09-29) ──────
+ * Lesson `phys.opt.lenses`. The learner, told about the lens formula, typed
+ * "what is focal length? i dont know". `resolveConceptMatches` returned
+ * "Length" (math.geom.length, EXACT_TITLE 0.95); `subjectLocalReading` then
+ * re-read it in physics as `phys.rel.length-contraction`, the knowledge-gap
+ * path opened an excursion, and the tutor taught special relativity for three
+ * turns inside a lenses lesson.
+ *
+ * ── WHY THE EXISTING RULES MISSED IT ────────────────────────────────────────
+ * E2 (`lessonOwnsTheTerm`) asks the right question, but only of the bare
+ * matched word, and refuses whenever some concept is headed by it — "Length
+ * Contraction" is. The word alone is ambiguous; the learner's PHRASE is not.
+ * "focal length" is exactly the phrase the lesson's own definition uses.
+ *
+ * ── THE RULE (positional, no word list) ─────────────────────────────────────
+ * For every occurrence of the matched text in the message, take it together
+ * with the neighbouring content word on either side. If that two-word-or-more
+ * phrase appears in the lesson's vocabulary — its KG title and definition, plus
+ * what the tutor just said when the caller passes it — and it is not simply the
+ * candidate concept's own title, the learner is asking about the lesson's own
+ * term. Every occurrence must qualify; one free-standing use keeps the match.
+ * The tutor still explains the term: returning null only keeps the teaching
+ * target on the lesson.
+ */
+function isLessonCompoundTerm(
+  message: string,
+  matchedText: string,
+  candidateConceptId: string,
+  lessonVocabulary: string,
+): boolean {
+  if (!lessonVocabulary) return false
+  const needle = tokens(matchedText)
+  if (needle.length === 0) return false
+  const candidateTitle = ` ${tokens(getKGNode(candidateConceptId)?.title ?? '').join(' ')} `
+  const words = tokens(message ?? '')
+  const isContent = (w: string | undefined): w is string =>
+    Boolean(w) && !HEAD_STOP.has(w as string) && !TEACHING_CUE.has(w as string) && !DISCOURSE_NOUNS.has(w as string)
+  let occurrences = 0
+  for (let i = 0; i + needle.length <= words.length; i++) {
+    let hit = true
+    for (let j = 0; j < needle.length; j++) if (words[i + j] !== needle[j]) { hit = false; break }
+    if (!hit) continue
+    occurrences++
+    const left = words[i - 1]
+    const right = words[i + needle.length]
+    const phrases = [
+      isContent(left) ? [left, ...needle].join(' ') : null,
+      isContent(right) ? [...needle, right].join(' ') : null,
+    ].filter((x): x is string => x !== null)
+    const inLesson = phrases.some((ph) => lessonVocabulary.includes(` ${ph} `) && !candidateTitle.includes(` ${ph} `))
+    if (!inLesson) return false
+  }
+  return occurrences > 0
+}
+
+/** The lesson's own words, tokenized once: KG title, KG definition, and what the tutor just said. */
+function lessonVocabularyOf(
+  title: string | null | undefined,
+  description: string | null | undefined,
+  recentTutorText: string | null | undefined,
+): string {
+  const text = [title, description, recentTutorText].filter(Boolean).join(' . ')
+  const t = tokens(text)
+  return t.length ? ` ${t.join(' ')} ` : ''
+}
+
+/**
+ * L2 · READ A WORD IN THE LESSON'S OWN DOMAIN FIRST.
+ *
+ * Production, same run: in the lenses lesson the learner asked "what is P?
+ * power? you never teach power". "Power" is an EXACT_TITLE match for
+ * `phys.mech.power` — same subject, so `subjectLocalReading` never ran — and
+ * the tutor answered with watts and dE/dt beside a generated power-vs-time
+ * graph. The optics domain names the intended sense: "Power of a Lens and Lens
+ * Combinations". When the lesson's own KG domain has exactly the shortest
+ * whole-word title containing the word, that is the reading.
+ */
+function domainLocalReading(
+  matchedText: string,
+  lessonConceptId: string,
+  index: readonly ConceptIndexEntry[],
+): string | null {
+  const word = normalizeTitle(matchedText)
+  if (!word) return null
+  const domain = conceptDomain(lessonConceptId)
+  const re = new RegExp(`\\b${escapeRegex(word)}\\b`)
+  let best: { conceptId: string; length: number } | null = null
+  for (const entry of index) {
+    if (conceptDomain(entry.conceptId) !== domain || entry.conceptId === lessonConceptId) continue
+    const title = normalizeTitle(entry.title)
+    if (!re.test(title)) continue
+    if (!best || title.length < best.length) best = { conceptId: entry.conceptId, length: title.length }
+  }
+  return best?.conceptId ?? null
+}
+
 function subjectLocalReading(
   matchedText: string,
   lessonPrefix: string | null,
@@ -768,9 +973,33 @@ export function resolveRequestedConceptId(
   message: string,
   lessonConceptId: string | null,
   preferredSubject?: string | null,
+  /**
+   * The lesson the learner is actually in, when `lessonConceptId` is null ON
+   * PURPOSE — the visual resolver passes null during an unresolved-topic
+   * excursion so it never introduces a figure of the paused lesson. Read by E4
+   * ONLY, as disambiguation context; it never becomes a fallback target and
+   * no other rule reads it. Omitted -> behaviour identical to before.
+   */
+  contextConceptId?: string | null,
+  /**
+   * What the tutor has just said in this lesson (the most recent assistant
+   * message). Read ONLY as lesson vocabulary by the L1 rule below: a term the
+   * tutor just used is the lesson's own term. Omitted -> the lesson's KG title
+   * and definition are the only vocabulary, exactly as before for every caller
+   * that does not pass it.
+   */
+  recentTutorText?: string | null,
 ): string | null {
   try {
     const matches = resolveConceptMatches(message ?? '', conceptIndex(), preferredSubject ?? null)
+    const lessonNodeForVocab = lessonConceptId ? getKGNode(lessonConceptId) : null
+    // Lesson vocabulary also includes what the lesson's own authored figure says
+    // (authoredFigureText): a word the lesson's figure uses is the lesson's term.
+    const lessonVocabulary = lessonVocabularyOf(
+      lessonNodeForVocab?.title,
+      lessonNodeForVocab?.description,
+      [recentTutorText ?? '', authoredFigureText(lessonConceptId)].filter(Boolean).join(' ') || null,
+    )
     // Drop medium-word and incidental-vocabulary matches BEFORE picking the
     // best one, so a genuine concept sitting behind them still wins: "show me
     // vector graph" ranks {Graph, Graph, Vector} and must resolve to Vector;
@@ -788,7 +1017,13 @@ export function resolveRequestedConceptId(
         // E3: named in a different clause from the request that would justify
         // moving the teaching target. The fourth member of the same family,
         // and the only one that reads position rather than vocabulary.
-        !matchPrecedesItsRequest(message ?? '', m.matchedText),
+        !matchPrecedesItsRequest(message ?? '', m.matchedText) &&
+        // E4: "every term", "what distribution" — an off-domain one-word title
+        // used as an instance of the lesson's own material, not a topic.
+        !isOffDomainInstanceReference(message ?? '', m.matchedText, m.conceptId, lessonConceptId ?? contextConceptId ?? null) &&
+        // L1: the word is part of a compound term the LESSON uses ("focal
+        // length" in a lenses lesson), so it names the lesson's own material.
+        !isLessonCompoundTerm(message ?? '', m.matchedText, m.conceptId, lessonVocabulary),
     )
     // Same-subject candidates win over an equally-confident foreign one. The
     // lesson's own id prefix is the subject signal — it needs no mapping table
@@ -803,7 +1038,32 @@ export function resolveRequestedConceptId(
     // The winner belongs to another subject: check whether the learner's own
     // subject has a concept of that name before travelling to a foreign one.
     if (best && lessonPrefix && idPrefix(best.conceptId) !== lessonPrefix) {
+      // L3: a one-word match from ANOTHER subject, where the lesson itself is
+      // using that word, is the lesson's own term — not a detour. Production,
+      // real-learner run 2 (2026-09-30, phys.opt.refraction): "i want see
+      // light ray and water and normal line" matched math "Ray", and the local
+      // re-read below turned it into "Nature of Light: Ray and Wave Models",
+      // one turn after the tutor said "a straight line (a **ray**)".
+      const word = tokens(best.matchedText)
+      if (best.matchedTokenCount === 1 && word.length === 1 && lessonVocabulary.includes(` ${word[0]} `)) {
+        return null
+      }
       requested = subjectLocalReading(best.matchedText, lessonPrefix, conceptIndex()) ?? requested
+    }
+
+    // L2: the same word, read in the LESSON'S OWN DOMAIN first. "power" in a
+    // lenses lesson is "Power of a Lens" (phys.opt), not mechanical power
+    // (phys.mech). Only moves the reading when the lesson's domain has a
+    // concept named with that word; otherwise nothing changes.
+    // Same SUBJECT only: a genuine cross-subject request ("teach me equations"
+    // from a physics lesson -> math.alg.equation) and the scatter rule's refusal
+    // to guess across domains are both left exactly as they were.
+    if (
+      best && requested && lessonConceptId && lessonPrefix
+      && idPrefix(best.conceptId) === lessonPrefix
+      && conceptDomain(requested) !== conceptDomain(lessonConceptId)
+    ) {
+      requested = domainLocalReading(best.matchedText, lessonConceptId, conceptIndex()) ?? requested
     }
 
     // A shorter name for the lesson's own topic is the lesson, not a trip away
@@ -838,7 +1098,15 @@ export function resolveRequestedConceptId(
     // Nothing cleared the floor. Before giving up — and giving up is what
     // stopped the learner's question from ever becoming the teaching target —
     // ask whether they named a concept plainly enough to be its title's head.
-    if (!requested) requested = resolveNamedTopicHead(message ?? '', lessonPrefix, conceptIndex())
+    if (!requested) {
+      const head = resolveNamedTopicHead(message ?? '', lessonPrefix, conceptIndex())
+      // The same L1 rule, repeated for the same reason the discourse rule is
+      // repeated inside the fallback: a match L1 dropped must not come back
+      // through the title-head path ("focal length" -> "Length Contraction").
+      const headTitle = head ? getKGNode(head)?.title ?? null : null
+      const headWord = headTitle ? (titleHead(headTitle) ?? headTitle) : null
+      requested = head && headWord && isLessonCompoundTerm(message ?? '', headWord, head, lessonVocabulary) ? null : head
+    }
 
     return requested
   } catch {

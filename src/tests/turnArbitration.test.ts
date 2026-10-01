@@ -639,8 +639,11 @@ describe('7. LEARNER_QUESTION — a genuine question denies a NEW authored probe
     const src = readFileSync('src/app/api/learn/chat/route.ts', 'utf8')
     const at = src.indexOf('genuineQuestionActive:')
     expect(at).toBeGreaterThan(0)
-    expect(src.slice(at, at + 100)).toContain(
-      'genuineQuestionActive: detectLearnerQuestion(turnIntent.message) && pendingMcqHoisted === null',
+    // 2026-09-25 (owner-requested quiz-gate fix): the claim ORs in
+    // readsAsRequestToTutor — an EXISTING export of mcq.ts, not a new regex —
+    // and still requires no pending probe.
+    expect(src.slice(at, at + 200)).toMatch(
+      /^genuineQuestionActive: \(detectLearnerQuestion\(turnIntent\.message\) \|\| readsAsRequestToTutor\(turnIntent\.message\)\)\s*&& pendingMcqHoisted === null/,
     )
     // The call site imports the EXISTING detector rather than inventing one —
     // the same function `buildTurnDirective`'s A.4 "STUDENT QUESTION
@@ -660,8 +663,12 @@ describe('7. LEARNER_QUESTION — a genuine question denies a NEW authored probe
     // LEARNER_REQUEST rung's own explanatory comment (on `learnerRequestActive`,
     // inside the same `arbitrateTurn({...})` call) sits between the import
     // and `genuineQuestionActive:` too, pushing the distance to ~3900. Same
-    // import statement, further back again.
-    const near = src.slice(Math.max(0, at - 4200), at)
+    // import statement, further back again. Previous window: `at - 4200`.
+    //
+    // SUPERSEDED AGAIN (2026-09-24, synthetic-student after-run): the claim
+    // gained its practice-request exclusion (`&& !turnIntent.wantsPractice`)
+    // with a ~700-char comment above it. Same import, further back again.
+    const near = src.slice(Math.max(0, at - 5200), at)
     expect(near).toContain("await import('@/lib/teaching/conversationState')")
     expect(near).toContain('detectLearnerQuestion')
     // No fresh regex is authored at the call site itself.

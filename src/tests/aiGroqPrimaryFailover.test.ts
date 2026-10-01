@@ -219,33 +219,35 @@ describe('8. Pre-existing provider-chain behaviour that is not about ordering st
     expect(getAIRouter('en').providerNames).toEqual(['gemini'])
   })
 
-  // 2026-09-08 owner instruction: 20b is the default always and 120b is
-  // removed. Same assertion — that the default is pinned rather than drifting
-  // — restated against the current model.
-  //
-  // 2026-09-17 UPDATE: 120b was re-added, but only to the per-request,
+  // 2026-09-08 owner instruction: 20b was made the default always and 120b
+  // removed. 2026-09-17: 120b re-added, but only to the per-request,
   // DB-flag-gated certification allowlist (router.ts's own comment on
-  // GROQ_CERT_MODEL_ALLOWLIST has the full history) — never to the default
-  // every ordinary learner gets. This test's ORIGINAL invariant ("120b is
-  // gone from the router, full stop") is genuinely no longer true and is
-  // narrowed here to what actually still matters: the DEFAULT is pinned to
-  // 20b, and 120b appears ONLY inside the named cert-allowlist constant, not
-  // anywhere else a request could reach it unconditionally.
-  it('the GROQ_MODEL default is openai/gpt-oss-20b, and 120b (where present) is confined to the cert allowlist', async () => {
+  // GROQ_CERT_MODEL_ALLOWLIST has the full history) — not yet the default.
+  //
+  // 2026-09-21 UPDATE: a fresh owner instruction ("set gpt 120b") flipped the
+  // DEFAULT itself to 120b. The invariant this test polices is unchanged —
+  // the default is a single pinned model, not something that can drift — only
+  // which model that is has flipped, so the assertions below flip with it:
+  // the default is now 120b, and 20b (where present) is confined to the cert
+  // allowlist, mirroring the 20b-default/120b-allowlist shape this same test
+  // asserted before.
+  it('the GROQ_MODEL default is openai/gpt-oss-120b, and 20b (where present) is confined to the cert allowlist', async () => {
     delete process.env.GROQ_MODEL
     const fs = await import('node:fs')
     const src = fs.readFileSync('src/lib/ai/router.ts', 'utf8')
-    expect(src).toContain("process.env.GROQ_MODEL ?? 'openai/gpt-oss-20b'")
-    // Every non-comment code line mentioning 120b must also mention the
+    expect(src).toContain("process.env.GROQ_MODEL ?? 'openai/gpt-oss-120b'")
+    // Every non-comment code line mentioning 20b must also mention the
     // cert-allowlist machinery on the SAME line (the constant declaration
     // and the allowlist array itself) — never a bare default assignment.
     const code = src.split('\n').filter((l) => !/^\s*(\*|\/\*|\/\/)/.test(l.trim()))
-    const code120bLines = code.filter((l) => l.includes('gpt-oss-120b') || l.includes('GROQ_MODEL_120B'))
-    for (const line of code120bLines) {
-      expect(line).toMatch(/GROQ_MODEL_120B|GROQ_CERT_MODEL_ALLOWLIST/)
+    const code20bLines = code.filter((l) => l.includes('gpt-oss-20b') || l.includes('GROQ_MODEL_20B'))
+    for (const line of code20bLines) {
+      expect(line).toMatch(/GROQ_MODEL_20B|GROQ_CERT_MODEL_ALLOWLIST/)
     }
-    // And the default assignment itself must never be the line naming 120b.
-    expect(code.find((l) => l.includes("process.env.GROQ_MODEL ??"))).not.toMatch(/120b/)
+    // And the default assignment itself must never be the line naming 20b.
+    // (A bare /20b/ regex would false-positive on "...oss-120b" — "120b"
+    // contains "20b" as a substring — so this checks the full model string.)
+    expect(code.find((l) => l.includes("process.env.GROQ_MODEL ??"))).not.toMatch(/gpt-oss-20b/)
   })
 
   it('GROQ_MODEL env override still works, unaffected by the default change', async () => {

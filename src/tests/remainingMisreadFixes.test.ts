@@ -1,0 +1,269 @@
+import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { driveTurns, readLog } from './support/turnHarness'
+import { resolveRequestedConceptId, isOffDomainInstanceReference } from '@/lib/teaching/concept/requestedConcept'
+import { detectLearnerRequest } from '@/lib/teaching/masteryGate'
+import { namedTopicUnknownTo, extractRequestedTopic } from '@/lib/teaching/visual/requestedTopic'
+
+/**
+ * The remaining known issues after the learner-intent A/B (2026-09-26):
+ *   1. a follow-up about what the tutor JUST taught opened an unresolved-topic detour;
+ *   2. "the/this term" still jumped to algebra's Term in a physics lesson;
+ *   3. "for example, …" inside an answer read as a request for an example;
+ *   5. a model SIGNAL on a request turn (no '?') became a PROBE_OUTCOME row.
+ * (Issue 4 — model factual slips — needs a content verifier, a deferred
+ * primitive under CLAUDE.md; not addressed here.)
+ */
+const h = await vi.hoisted(async () => (await import('./support/turnHarness')).createHarness())
+vi.mock('@/lib/auth', () => ({ auth: () => h.auth() }))
+vi.mock('@/lib/db/prisma', () => ({ prisma: h.prisma }))
+vi.mock('@/lib/rateLimit', () => ({
+  checkRateLimit: async () => ({ allowed: true }),
+  rateLimitResponse: () => new Response('{}', { status: 429 }),
+}))
+vi.mock('@/lib/ai/router', async (o) => ({ ...(await o<Record<string, unknown>>()), routeAI: (...a: unknown[]) => h.routeAI(...a) }))
+// Records evidence writes (the real writer is fire-and-forget into prisma).
+const evidence = vi.hoisted(() => [] as { category: string; outcome?: string }[])
+vi.mock('@/lib/teaching/evidence/evidenceEngine', async (o) => ({
+  ...(await o<Record<string, unknown>>()),
+  appendEvidenceEvent: (i: { category: string; outcome?: string }) => { evidence.push(i) },
+}))
+const { POST } = await import('@/app/api/learn/chat/route')
+beforeEach(() => { h.state.messages = []; h.state.snapshot = {}; evidence.length = 0 })
+const misconceptionRows = () => evidence.filter((e) => e.category === 'MISCONCEPTION_DETECTED')
+
+const PHYS = { subjectSlug: 'physics', conceptId: 'phys.qm.perturbation-theory', lessonTitle: 'Time-Independent Perturbation Theory' }
+const TAUGHT = 'The second-order correction is a sum over states. For the ground state every term in the sum is negative, because each denominator is negative.'
+const FOLLOW_UP = 'Please write out E_n^(2) explicitly and show why every term is negative when n is the ground state.'
+const excursion = (logs: ReturnType<typeof readLog>) => logs as { unresolvedTopic?: string | null; active?: boolean } | null
+
+describe('1. a follow-up about what the tutor just taught does not open a detour', () => {
+  it('reuses the tutor\'s own words → no unresolved-topic detour', async () => {
+    const [, t] = await driveTurns(h, POST, [
+      { learnerSays: 'ok, continue', modelReplies: TAUGHT },
+      { learnerSays: FOLLOW_UP, modelReplies: 'E2 = …' },
+    ], PHYS)
+    const e = excursion(readLog(t, '[excursion]'))
+    expect(e?.unresolvedTopic ?? null).toBeNull()
+    expect(e?.active ?? false).toBe(false)
+  }, 60_000)
+
+  it('control: a topic the tutor never mentioned still opens one', async () => {
+    const [, t] = await driveTurns(h, POST, [
+      { learnerSays: 'ok, continue', modelReplies: TAUGHT },
+      { learnerSays: 'Can you explain Kubernetes pod scheduling?', modelReplies: 'x' },
+    ], PHYS)
+    expect(excursion(readLog(t, '[excursion]'))?.unresolvedTopic ?? null).not.toBeNull()
+  }, 60_000)
+})
+
+describe('2. "the/this term" stays in the lesson (E4b)', () => {
+  it.each([
+    'show why the term is negative',
+    'show why this term is negative',
+    'why is that term zero?',
+  ])('%s → no cross-subject target', (m) => {
+    expect(resolveRequestedConceptId(m, PHYS.conceptId, 'physics')).toBeNull()
+  })
+
+  it('the rejected definite-article cases are untouched by the predicate', () => {
+    // "teach me the derivative" / "what the derivative is": no continuing predicate → not an instance
+    expect(isOffDomainInstanceReference('teach me the derivative', 'Derivative', 'math.calc.derivative', PHYS.conceptId)).toBe(false)
+    expect(isOffDomainInstanceReference('teach me what the derivative is', 'Derivative', 'math.calc.derivative', PHYS.conceptId)).toBe(false)
+    // explicit definition / named-topic requests still travel
+    expect(resolveRequestedConceptId('what is a term?', PHYS.conceptId, 'physics')).toBe('math.alg.term')
+    expect(resolveRequestedConceptId('explain photosynthesis to me please', PHYS.conceptId, 'physics')).toBe('bio.plant.photosynthesis')
+  })
+})
+
+describe('3. "for example, …" inside an answer is not a request', () => {
+  it.each([
+    'for example, when I push a box it moves',
+    'e.g. a ball rolling down a hill',
+    'for instance the anode loses electrons',
+  ])('%s → null', (m) => expect(detectLearnerRequest(m)).toBeNull())
+
+  it.each([
+    'like what, for example?',
+    'for example?',
+    'can you give me an example?',
+    'give me a real-life example please',
+  ])('%s → still an example request', (m) => expect(detectLearnerRequest(m)).toBe('real_life_example'))
+})
+
+describe('5. a model SIGNAL on a request turn is not answer evidence', () => {
+  const SIGNAL_FAIL = '\n<!--SIGNAL correctness="false" confidence="high" confusion="false"-->'
+  it('request (no "?") → correctness stripped', async () => {
+    const [, t] = await driveTurns(h, POST, [
+      { learnerSays: 'ok, continue', modelReplies: 'Teaching. Quick check: what sign do you expect?' },
+      { learnerSays: "Give me the second-order energy correction and explain why it's negative for the ground state.", modelReplies: `E2 = …${SIGNAL_FAIL}` },
+    ], PHYS)
+    expect(t.logs.some((l) => l.startsWith('[learner-asked-question]'))).toBe(true)
+  }, 60_000)
+
+  it('control: a typed answer keeps its signal', async () => {
+    const [, t] = await driveTurns(h, POST, [
+      { learnerSays: 'ok, continue', modelReplies: 'Teaching. Quick check: what sign do you expect?' },
+      { learnerSays: 'it comes out negative because the denominator is negative', modelReplies: `Yes.${SIGNAL_FAIL}` },
+    ], PHYS)
+    expect(t.logs.some((l) => l.startsWith('[learner-asked-question]'))).toBe(false)
+  }, 60_000)
+})
+
+describe('5b. a misconception phrase on a question/request turn is not evidence (2026-09-26)', () => {
+  const tag = (attrs: string) => `\n<!--SIGNAL ${attrs}-->`
+  const setup = { learnerSays: 'ok, continue', modelReplies: 'Teaching. Quick check: what sign do you expect?' }
+
+  it.each([
+    ['question + correctness + phrase', 'why is that term zero?', 'correctness="false" confidence="high" confusion="false" phrase="why is that term zero"'],
+    ['question + phrase only', 'why is that term zero?', 'confidence="high" confusion="false" phrase="why is that term zero"'],
+    ['request (no "?") + phrase only', 'explain why the term vanishes for the ground state', 'confidence="high" confusion="false" phrase="the term vanishes"'],
+  ])('%s → phrase dropped', async (_label, msg, attrs) => {
+    const [, t] = await driveTurns(h, POST, [setup, { learnerSays: msg, modelReplies: `Here is why.${tag(attrs)}` }], PHYS)
+    expect(t.logs.some((l) => l.startsWith('[learner-asked-question]'))).toBe(true)
+    expect(readLog(t, '[ladder]')).toMatchObject({ correctness: null })
+    expect(misconceptionRows()).toHaveLength(0)
+  }, 60_000)
+
+  it('control: a typed ANSWER with a phrase keeps it', async () => {
+    const [, t] = await driveTurns(h, POST, [setup, {
+      learnerSays: 'it is positive because you just add the energies',
+      modelReplies: `Not quite.${tag('correctness="false" confidence="high" confusion="false" phrase="you just add the energies"')}`,
+    }], PHYS)
+    expect(t.logs.some((l) => l.startsWith('[learner-asked-question]'))).toBe(false)
+    expect(misconceptionRows()).toHaveLength(1)
+  }, 60_000)
+})
+
+describe('6. "show why that happens" is not a named topic (2026-09-26)', () => {
+  const TAUGHT_TEXT = 'Time-Independent Perturbation Theory first order energy shift'
+  it.each([
+    'show why that happens step by step',
+    'show me how it works',
+    'explain to me why this is negative',
+    'can you explain whether that is right',
+    "explain what it's doing",
+    'show that it is negative',
+  ])('%s → no topic', (m) => {
+    expect(namedTopicUnknownTo(m, TAUGHT_TEXT)).toBeNull()
+    expect(extractRequestedTopic(m, 1, true)).toBeNull()
+  })
+
+  it.each([
+    ['explain why the sky is blue', 'why the sky is blue'],
+    ['explain what photosynthesis is', 'what photosynthesis is'],
+    ['can you explain Kubernetes pod scheduling', 'Kubernetes pod scheduling'],
+  ])('control: %s still names a topic', (m, title) => {
+    expect(namedTopicUnknownTo(m, TAUGHT_TEXT)?.title).toBe(title)
+  })
+
+  it('route: no unresolved-topic detour', async () => {
+    const [, t] = await driveTurns(h, POST, [
+      { learnerSays: 'ok, continue', modelReplies: TAUGHT },
+      { learnerSays: 'show why that happens step by step', modelReplies: 'Step 1 …' },
+    ], PHYS)
+    const e = excursion(readLog(t, '[excursion]'))
+    expect(e?.unresolvedTopic ?? null).toBeNull()
+    expect(e?.active ?? false).toBe(false)
+  }, 60_000)
+})
+
+describe('7. a follow-up on the taught idea is answered at that level, not with an everyday analogy (2026-09-26)', () => {
+  const LINE = 'FOLLOW-UP ON WHAT YOU ALREADY TAUGHT'
+  const prompted = (t: { body: unknown }) => ((t.body as { llmCallCount?: number }).llmCallCount ?? 0) > 0
+  const second = async (msg: string) => {
+    const [, t] = await driveTurns(h, POST, [
+      { learnerSays: 'ok, continue', modelReplies: TAUGHT },
+      { learnerSays: msg, modelReplies: 'Reply.' },
+    ], PHYS)
+    expect(prompted(t)).toBe(true)
+    return t.systemPrompt
+  }
+
+  it.each([
+    'explain to me why this is negative',
+    'why is that term zero?',
+    'show why that happens step by step',
+  ])('%s → directive present', async (m) => {
+    expect(await second(m)).toContain(LINE)
+  }, 60_000)
+
+  it.each([
+    ['asks for an analogy', 'can you give me an analogy?'],
+    ['asks for it simpler', 'why is it negative, in simpler words?'],
+    ['new topic (detour)', 'Can you explain Kubernetes pod scheduling?'],
+    ['a typed answer', 'it comes out negative because the denominator is negative'],
+  ])('control: %s → no directive', async (_l, m) => {
+    expect(await second(m)).not.toContain(LINE)
+  }, 60_000)
+})
+
+describe('8. a clarifying question to a request without "?" is kept (2026-09-26)', () => {
+  const CLARIFY = 'Which specific quantity or result are you referring to when you say "this is negative"?'
+  it('request → the model\'s clarification reaches the learner, not the concept fallback', async () => {
+    const [, t] = await driveTurns(h, POST, [
+      { learnerSays: 'ok, continue', modelReplies: TAUGHT },
+      { learnerSays: 'explain to me why this is negative', modelReplies: CLARIFY },
+    ], PHYS)
+    expect((t.body as { text?: string }).text).toContain('Which specific quantity')
+  }, 60_000)
+
+  it('control: the same bare question after a plain acknowledgement is still withheld', async () => {
+    const [, t] = await driveTurns(h, POST, [
+      { learnerSays: 'ok, continue', modelReplies: TAUGHT },
+      { learnerSays: 'ok', modelReplies: CLARIFY },
+    ], PHYS)
+    expect((t.body as { text?: string }).text).not.toContain('Which specific quantity')
+  }, 60_000)
+})
+
+describe('9. question turns carry the no-mirror clause (2026-09-27)', () => {
+  const prompted = (t: { body: unknown }) => ((t.body as { llmCallCount?: number }).llmCallCount ?? 0) > 0
+  const promptFor = async (msg: string) => {
+    const [, t] = await driveTurns(h, POST, [
+      { learnerSays: 'ok, continue', modelReplies: TAUGHT },
+      { learnerSays: msg, modelReplies: 'Reply.' },
+    ], PHYS)
+    expect(prompted(t)).toBe(true)
+    return t.systemPrompt
+  }
+  it.each([
+    'why is that term zero?',
+    'explain to me why this is negative',
+  ])('%s → no-mirror clause present', async (m) => {
+    expect(await promptFor(m)).toContain('Do NOT restate their question back to them for confirmation')
+  }, 60_000)
+  it('control: a typed answer carries no question clause', async () => {
+    expect(await promptFor('it comes out negative because the denominator is negative')).not.toContain('Do NOT restate their question back')
+  }, 60_000)
+})
+
+describe('10. a question is not a dropped observation — no restate-and-confirm repair (2026-09-27)', () => {
+  const REPAIR = 'OBSERVATION REPAIR'
+  const ANSWER = 'it is negative because the denominators are all negative'
+  const prompted = (t: { body: unknown }) => ((t.body as { llmCallCount?: number }).llmCallCount ?? 0) > 0
+  const run = async (turns: string[]) => {
+    const res = await driveTurns(h, POST, [
+      { learnerSays: 'ok, continue', modelReplies: TAUGHT },
+      ...turns.map((m) => ({ learnerSays: m, modelReplies: 'Reply without a tag.' })),
+    ], PHYS)
+    const last = res[res.length - 1]
+    expect(prompted(last)).toBe(true)
+    return last.systemPrompt
+  }
+
+  it('injection: a question turn never gets the repair block', async () => {
+    expect(await run(['why is that term zero?'])).not.toContain(REPAIR)
+  }, 60_000)
+
+  it('injection: a request without "?" never gets it either', async () => {
+    expect(await run(['explain to me why this is negative'])).not.toContain(REPAIR)
+  }, 60_000)
+
+  it('counter: a question does not arm it for the following answer', async () => {
+    expect(await run(['why does the denominator matter here?', ANSWER])).not.toContain(REPAIR)
+  }, 60_000)
+
+  it('control: a typed answer after an untagged turn still gets the repair', async () => {
+    expect(await run([ANSWER])).toContain(REPAIR)
+  }, 60_000)
+})

@@ -279,6 +279,48 @@ export async function findActiveVisualFigure(conceptId: string): Promise<Generat
 }
 
 /**
+ * WHICH CONCEPTS HAVE AN APPROVED FIGURE — an in-process index, not a query per turn.
+ *
+ * Needed so a subject-wide card no longer shadows a reviewed concept figure
+ * (resolveVisualForTurn, step 1) WITHOUT a database read on every turn that
+ * shows one: 367 concepts resolve to a subject-wide card; 10 concepts have an
+ * ACTIVE figure (production, 2026-09-24), none of them among the 367.
+ *
+ * One narrow read per lambda per TTL — conceptIds only, never payloads, and
+ * only ACTIVE VISUAL rows (tens of short strings). The index only decides
+ * whether to ASK: `findActiveVisualFigure` stays the authority, so an index
+ * that is stale in the "has one" direction costs one read that returns null,
+ * and one stale in the "has none" direction delays a new approval by at most
+ * the TTL. An unreadable index is treated as empty for a short back-off — the
+ * subject-wide card is served exactly as before, never an empty screen.
+ */
+const APPROVED_INDEX_TTL_MS = 10 * 60 * 1000
+const APPROVED_INDEX_RETRY_MS = 60 * 1000
+let approvedIndex: { expiresAt: number; conceptIds: ReadonlySet<string> } | null = null
+
+export async function hasActiveVisualFigure(conceptId: string, now: number = Date.now()): Promise<boolean> {
+  if (!approvedIndex || now >= approvedIndex.expiresAt) {
+    try {
+      const rows = await prisma.assetIdentity.findMany({
+        where: { family: AssetFamily.VISUAL, status: AssetStatus.ACTIVE },
+        select: { conceptId: true },
+        distinct: ['conceptId'],
+      })
+      approvedIndex = { expiresAt: now + APPROVED_INDEX_TTL_MS, conceptIds: new Set(rows.map((r) => r.conceptId)) }
+    } catch (err) {
+      console.warn('[visual-outcome] approved-figure index read failed:', err)
+      approvedIndex = { expiresAt: now + APPROVED_INDEX_RETRY_MS, conceptIds: new Set() }
+    }
+  }
+  return approvedIndex.conceptIds.has(conceptId)
+}
+
+/** Tests only: forget the index. */
+export function resetApprovedFigureIndexForTests(): void {
+  approvedIndex = null
+}
+
+/**
  * The platform's generation count for the last 24 hours.
  *
  * Read from the outcome table because every instance writes to it: an

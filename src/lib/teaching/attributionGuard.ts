@@ -357,3 +357,64 @@ export function repairMirrorWithVerdict(input: MirrorVerdictInput): MirrorVerdic
     reason: 'revealed-answer',
   }
 }
+
+// ── THE CONFIRM-BACK, WHEREVER IT SITS (2026-09-28) ─────────────────────────
+//
+// `isMirrorTurn` only recognises a WHOLE-turn mirror of at most two sentences
+// that ENDS on the confirmation request. Physics Unit-1 certification (pass 1,
+// production, disposable accounts) measured the shapes it cannot see:
+//   "That's right. You said that 0.00420 has three significant figures … Is
+//    that right?"                       (3 sentences — the server's prefix)
+//   "That's right. So you're saying … Is that right? When we talk about
+//    acceleration …"                    (teaching follows the request)
+//   learner "continue" -> "So you'd like to keep moving forward with the
+//    lesson—have I got that right? Let me know if that's correct."
+//   learner "½ M R²" -> "So you selected option A, ½ M R², as the moment of
+//    inertia … Is that right?"   (unit 2, phys.mech.moment-of-inertia)
+// NO_MIRROR_CLAUSE already forbids asking the learner to confirm the tutor's
+// paraphrase. This removes the request sentence, and the attribution sentence
+// that feeds it, wherever they sit — and keeps everything that teaches.
+
+const CONFIRM_REQUEST_ANY_RE =
+  /(?:is\s+that\s+(?:right|correct)|am\s+i\s+right|did\s+i\s+(?:get|understand)\s+(?:that|it|you)\s+right|is\s+that\s+what\s+you\s+(?:meant|mean)|have\s+i\s+got\s+that\s+right|have\s+i\s+understood\s+(?:you|that|this|it)\s+(?:correctly|right)|do\s+i\s+have\s+that\s+right|,\s*(?:right|correct)\s*\?|is\s+that\s+an?\s+(?:accurate|fair|correct)\s+(?:summary|description|reading)\b[^?]*\?|does\s+that\s+(?:sound\s+right|capture\s+(?:it|what\s+you\s+mean))\b[^?]*\?)\s*[?.!]*\s*$/i
+const LET_ME_KNOW_RE =
+  /^(?:please\s+)?let\s+me\s+know\s+if\s+(?:that(?:'|’)?s|that\s+is|this\s+is|i(?:'|’)?ve\s+got\s+(?:it|that))\s+(?:right|correct|what\s+you\s+meant)\b/i
+const FRAME_START_RE =
+  /^(?:(?:ok(?:ay)?|great|got\s+it|alright)[,!]?\s+)?(?:so\s+)?(?:you(?:'|’)?re\s+saying|you\s+are\s+saying|you(?:'|’)?re\s+thinking|you\s+said|you\s+think|you\s+(?:selected|chose|picked|answered|went\s+with|opted\s+for)|you(?:'|’)?re\s+indicating|you\s+are\s+indicating|i\s+hear\s+(?:that\s+)?you(?:'|’)?re|i\s+hear\s+you\s+(?:saying|say)|i\s+take\s+it\s+you|it\s+sounds\s+like\s+you|you(?:'|’)?d\s+like\s+(?:me\s+)?to|you\s+would\s+like\s+(?:me\s+)?to|you\s+want\s+(?:me\s+)?to|if\s+i\s+understand\s+you)\b/i
+
+const flatApos = (s: string) => s.replace(/[’ʼ]/g, "'")
+
+/**
+ * Remove confirm-back requests and the paraphrase that feeds them. Returns the
+ * text unchanged when there is none. May return '' when the turn was nothing
+ * but a confirm-back — the caller supplies the fallback.
+ */
+export function stripConfirmBack(text: string): { text: string; stripped: boolean } {
+  const t = typeof text === 'string' ? text : ''
+  if (!t.trim()) return { text: t, stripped: false }
+  const paragraphs = t.split(/\n{2,}/)
+  let stripped = false
+  const out = paragraphs.map((para) => {
+    const sentences = para.split(/(?<=[.!?])\s+/)
+    // A request is a confirm-BACK only in paraphrase context: the sentence is
+    // itself the paraphrase, or follows one, or follows a dropped request. An
+    // authored quiz stem that ends "… Is that right?" has no such frame and
+    // is left alone — it is a question TO the learner, not a check on them.
+    const drop: boolean[] = sentences.map(() => false)
+    for (let i = 0; i < sentences.length; i++) {
+      const f = flatApos(sentences[i].trim())
+      if (!(CONFIRM_REQUEST_ANY_RE.test(f) || LET_ME_KNOW_RE.test(f))) continue
+      const selfFramed = FRAME_START_RE.test(f)
+      const prevFramed = i > 0 && FRAME_START_RE.test(flatApos(sentences[i - 1].trim()))
+      const prevDropped = i > 0 && drop[i - 1]
+      if (!(selfFramed || prevFramed || prevDropped)) continue
+      drop[i] = true
+      if (prevFramed) drop[i - 1] = true
+    }
+    if (!drop.some(Boolean)) return para
+    stripped = true
+    return sentences.filter((_, i) => !drop[i]).join(' ').trim()
+  })
+  if (!stripped) return { text: t, stripped: false }
+  return { text: out.filter((p) => p.trim().length > 0).join('\n\n').trim(), stripped: true }
+}
