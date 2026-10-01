@@ -210,9 +210,9 @@ export default function HomePage() {
                   <span className={styles.mockFile}>{t('mockup_filename')}</span>
                 </div>
                 <div className={styles.mockCode}>
-                  <div><span style={{ color: 'var(--blue)' }}>def </span><span style={{ color: 'var(--green)' }}>hello</span><span style={{ color: '#C9D1D9' }}>():</span></div>
-                  <div style={{ paddingLeft: 16 }}><span style={{ color: 'var(--blue)' }}>print</span><span style={{ color: '#C9D1D9' }}>(</span><span style={{ color: 'var(--yellow)' }}>&quot;{t('hero_mock_string')}&quot;</span><span style={{ color: '#C9D1D9' }}>)</span></div>
-                  <div style={{ marginTop: 4 }}><span style={{ color: 'var(--green)' }}>hello</span><span style={{ color: '#C9D1D9' }}>()</span></div>
+                  <div><span style={{ color: 'var(--blue)' }}>def </span><span style={{ color: 'var(--green)' }}>hello</span><span style={{ color: 'var(--text-primary)' }}>():</span></div>
+                  <div style={{ paddingLeft: 16 }}><span style={{ color: 'var(--blue)' }}>print</span><span style={{ color: 'var(--text-primary)' }}>(</span><span style={{ color: 'var(--yellow)' }}>&quot;{t('hero_mock_string')}&quot;</span><span style={{ color: 'var(--text-primary)' }}>)</span></div>
+                  <div style={{ marginTop: 4 }}><span style={{ color: 'var(--green)' }}>hello</span><span style={{ color: 'var(--text-primary)' }}>()</span></div>
                 </div>
                 <div className={styles.mockChat}>
                   <div className={styles.mockChatAvatar}><EagleMascot variant="logo" size={18} /></div>

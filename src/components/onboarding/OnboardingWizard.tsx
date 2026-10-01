@@ -20,7 +20,7 @@ import { describeFromAnswers } from '@/lib/coach/learnerProfile'
 // request fails). Names render via the ob_subj_<slug> translation keys.
 const FALLBACK_SUBJECTS = [
   { id: 'english',     slug: 'english',     name: 'English',     icon: '🇬🇧', accent: '#E3B341', subAccent: 'rgba(227,179,65,0.08)' },
-  { id: 'mathematics', slug: 'mathematics', name: 'Mathematics', icon: '∑',   accent: '#56D364', subAccent: 'rgba(86,211,100,0.08)' },
+  { id: 'mathematics', slug: 'mathematics', name: 'Mathematics', icon: '∑',   accent: 'var(--green)', subAccent: 'rgba(86,211,100,0.08)' },
   { id: 'physics',     slug: 'physics',     name: 'Physics',     icon: '⚛️',  accent: '#3178C6', subAccent: 'rgba(49,120,198,0.08)' },
   { id: 'chemistry',   slug: 'chemistry',   name: 'Chemistry',   icon: '🧪',  accent: '#A371F7', subAccent: 'rgba(163,113,247,0.08)' },
   { id: 'biology',     slug: 'biology',     name: 'Biology',     icon: '🧬',  accent: '#2EA043', subAccent: 'rgba(46,160,67,0.08)' },
@@ -117,7 +117,7 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
   const progressPct = ((currentStep - 1) / (totalSteps - 1)) * 100
 
   const SUBJ_ICON: Record<string, string> = { c: 'C', cpp: 'C++', python: '🐍', english: '🇬🇧' }
-  const SUBJ_ACCENT: Record<string, string> = { c: '#F78166', cpp: '#79C0FF', python: '#56D364', english: '#E3B341' }
+  const SUBJ_ACCENT: Record<string, string> = { c: 'var(--coral)', cpp: 'var(--blue)', python: 'var(--green)', english: '#E3B341' }
   const SUBJ_SUB: Record<string, string> = {
     c: 'rgba(247,129,102,0.1)', cpp: 'rgba(121,192,255,0.08)',
     python: 'rgba(86,211,100,0.08)', english: 'rgba(227,179,65,0.08)',
@@ -197,7 +197,7 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
               <div className="grid grid-cols-2 gap-4 mb-8">
                 {subjects.map((s) => {
                   const selected = subjectSlugs.includes(s.slug)
-                  const accent = SUBJ_ACCENT[s.slug] ?? '#F78166'
+                  const accent = SUBJ_ACCENT[s.slug] ?? 'var(--coral)'
                   const subAccent = SUBJ_SUB[s.slug] ?? 'rgba(247,129,102,0.1)'
                   const icon = s.icon ?? SUBJ_ICON[s.slug] ?? s.name
                   return (
@@ -206,7 +206,7 @@ export function OnboardingWizard({ userName }: { userName: string | null | undef
                       style={{
                         background: selected ? subAccent : 'var(--bg-surface)',
                         border: `1px solid ${selected ? accent : 'var(--border-default)'}`,
-                        boxShadow: selected ? `0 0 20px ${accent}20` : 'none',
+                        boxShadow: selected ? `0 0 20px color-mix(in srgb, ${accent} 13%, transparent)` : 'none',
                         minHeight: 120,
                       }}>
                       {selected && (

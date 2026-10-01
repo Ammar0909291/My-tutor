@@ -89,13 +89,13 @@ export function SubjectNotEnrolled({
               onClick={enroll}
               disabled={busy}
               className="px-5 py-3 rounded-2xl text-sm mt-2 w-full"
-              style={{ background: 'var(--candy-purple)', color: '#fff', fontWeight: 800, border: 'none' }}
+              style={{ background: 'var(--candy-purple)', color: 'var(--on-accent)', fontWeight: 800, border: 'none' }}
             >
               {busy ? copy.adding : copy.add}
             </CandyButton>
           )}
           {error && (
-            <p className="text-xs" role="alert" style={{ color: '#EF4444', fontWeight: 700 }}>
+            <p className="text-xs" role="alert" style={{ color: 'var(--red)', fontWeight: 700 }}>
               {copy.failed}
             </p>
           )}

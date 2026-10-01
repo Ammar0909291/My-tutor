@@ -44,7 +44,7 @@ export function LockedTopicDetail({ topicSlug, lockReasons, teachingLanguage }: 
       </p>
       {info.missingPrereqs.map((p) => (
         <div key={p.slug} style={{ display: 'flex', alignItems: 'center', gap: 5, marginBottom: 2 }}>
-          <span style={{ fontSize: 8, color: '#F85149', flexShrink: 0 }}>●</span>
+          <span style={{ fontSize: 8, color: 'var(--red)', flexShrink: 0 }}>●</span>
           <span style={{ fontSize: 11, color: 'var(--text-secondary)' }}>{p.title}</span>
         </div>
       ))}

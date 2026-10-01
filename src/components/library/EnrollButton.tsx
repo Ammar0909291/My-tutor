@@ -19,7 +19,7 @@ export function EnrollButton({ subjectSlug, label, accent, enrolled }: Props) {
     return (
       <span
         className="rounded-lg px-4 py-2 text-sm font-medium"
-        style={{ background: accent ? `${accent}22` : undefined, color: accent ?? 'var(--text-secondary)' }}
+        style={{ background: accent ? `color-mix(in srgb, ${accent} 13%, transparent)` : undefined, color: accent ?? 'var(--text-secondary)' }}
       >
         Enrolled
       </span>
@@ -57,7 +57,7 @@ export function EnrollButton({ subjectSlug, label, accent, enrolled }: Props) {
         className="rounded-lg px-4 py-2 text-sm font-medium transition-opacity disabled:opacity-60"
         style={{
           background: accent ?? 'var(--accent-primary)',
-          color: '#fff',
+          color: 'var(--on-accent)',
         }}
       >
         {loading ? 'Adding…' : (label ?? '+ Add Subject')}

@@ -15,11 +15,11 @@ interface GamData {
 }
 
 function getLevel(xp: number): { name: string; color: string; next: number | null } {
-  if (xp >= 1001) return { name: 'Master',       color: '#F6B444', next: null }
-  if (xp >= 601)  return { name: 'Expert',        color: '#79C0FF', next: 1001 }
-  if (xp >= 301)  return { name: 'Practitioner',  color: '#56D364', next: 601 }
-  if (xp >= 101)  return { name: 'Student',       color: '#A78BFA', next: 301 }
-  return                 { name: 'Novice',         color: '#71717A', next: 101 }
+  if (xp >= 1001) return { name: 'Master',       color: 'var(--yellow)', next: null }
+  if (xp >= 601)  return { name: 'Expert',        color: 'var(--blue)', next: 1001 }
+  if (xp >= 301)  return { name: 'Practitioner',  color: 'var(--green)', next: 601 }
+  if (xp >= 101)  return { name: 'Student',       color: 'var(--purple)', next: 301 }
+  return                 { name: 'Novice',         color: 'var(--text-dim)', next: 101 }
 }
 
 export default function GamificationPanel(_props: Props) {
@@ -105,7 +105,7 @@ export default function GamificationPanel(_props: Props) {
       {streakDays > 0 && (
         <div
           className="rounded-xl px-4 py-3 text-sm"
-          style={{ background: '#F6B44415', border: '1px solid #F6B44430', color: '#F6B444' }}
+          style={{ background: 'color-mix(in srgb, var(--yellow) 8%, transparent)', border: '1px solid color-mix(in srgb, var(--yellow) 19%, transparent)', color: 'var(--yellow)' }}
         >
           🔥 {streakDays}-day streak! Keep it up.
         </div>

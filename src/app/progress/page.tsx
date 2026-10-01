@@ -7,11 +7,11 @@ import { t as i18nT, type Lang } from '@/lib/i18n'
 import { CandyPage, Card, ProgressBar, Pill } from '@/components/ui/candy'
 
 function getLevel(xp: number, lang: Lang) {
-  if (xp >= 1001) return { name: i18nT(lang, 'level_master'),       color: '#FFC800', next: null }
-  if (xp >= 601) return { name: i18nT(lang, 'level_expert'),        color: '#3B9EFF', next: 1001 }
-  if (xp >= 301) return { name: i18nT(lang, 'level_practitioner'),  color: '#58CC02', next: 601 }
+  if (xp >= 1001) return { name: i18nT(lang, 'level_master'),       color: 'var(--yellow)', next: null }
+  if (xp >= 601) return { name: i18nT(lang, 'level_expert'),        color: 'var(--blue)', next: 1001 }
+  if (xp >= 301) return { name: i18nT(lang, 'level_practitioner'),  color: 'var(--green)', next: 601 }
   if (xp >= 101) return { name: i18nT(lang, 'level_student'),       color: '#E8B84B', next: 301 }
-  return { name: i18nT(lang, 'level_novice'), color: '#8B8AA3', next: 101 }
+  return { name: i18nT(lang, 'level_novice'), color: 'var(--text-dim)', next: 101 }
 }
 
 export default async function ProgressPage() {
@@ -117,7 +117,7 @@ export default async function ProgressPage() {
                   <p style={{ fontSize: 11, color: 'var(--candy-ink-soft)', marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.04em', fontWeight: 700 }}>{T('progressx_mastered')}</p>
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
                     {masteredTopics.map((t) => (
-                      <Pill key={t} color="rgba(88,204,2,0.14)" style={{ color: '#58CC02', fontSize: 13, padding: '4px 12px' }}>{t}</Pill>
+                      <Pill key={t} color="rgba(88,204,2,0.14)" style={{ color: 'var(--green)', fontSize: 13, padding: '4px 12px' }}>{t}</Pill>
                     ))}
                   </div>
                 </div>
@@ -127,7 +127,7 @@ export default async function ProgressPage() {
                   <p style={{ fontSize: 11, color: 'var(--candy-ink-soft)', marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.04em', fontWeight: 700 }}>{T('progressx_needs_review')}</p>
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
                     {confusedTopics.map((t) => (
-                      <Pill key={t} color="rgba(255,75,75,0.12)" style={{ color: '#FF4B4B', fontSize: 13, padding: '4px 12px' }}>{t}</Pill>
+                      <Pill key={t} color="rgba(255,75,75,0.12)" style={{ color: 'var(--red)', fontSize: 13, padding: '4px 12px' }}>{t}</Pill>
                     ))}
                   </div>
                 </div>
@@ -143,7 +143,7 @@ export default async function ProgressPage() {
               <p style={{ fontWeight: 800, color: 'var(--candy-ink)', fontSize: 14 }}>🃏 {T('progressx_flashcards_title')}</p>
               <p style={{ color: 'var(--candy-ink-soft)', fontSize: 13, marginTop: 4, fontWeight: 600 }}>{flashcardsDue} {T('progressx_flashcards_waiting')}</p>
             </div>
-            <Link href="/flashcards" style={{ padding: '10px 20px', borderRadius: 12, background: 'var(--candy-blue)', color: '#fff', textDecoration: 'none', fontWeight: 800, fontSize: 13, boxShadow: '0 3px 0 var(--candy-blue-d)' }}>
+            <Link href="/flashcards" style={{ padding: '10px 20px', borderRadius: 12, background: 'var(--candy-blue)', color: 'var(--on-accent)', textDecoration: 'none', fontWeight: 800, fontSize: 13, boxShadow: '0 3px 0 var(--candy-blue-d)' }}>
               {T('progressx_review_btn')}
             </Link>
           </Card>

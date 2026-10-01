@@ -31,8 +31,8 @@ function Btn({
         fontWeight: 700,
         padding: '3px 8px',
         borderRadius: 6,
-        border: `1px solid ${color}44`,
-        background: `${color}18`,
+        border: `1px solid color-mix(in srgb, ${color} 27%, transparent)`,
+        background: `color-mix(in srgb, ${color} 9%, transparent)`,
         color,
         cursor: pending ? 'not-allowed' : 'pointer',
         opacity: pending ? 0.6 : 1,
@@ -64,7 +64,7 @@ export function AssetActions({
       {(status === 'DRAFT' || status === 'REVIEW') && (
         <>
           <Btn label="Approve" color="var(--green)" onClick={approve} pending={pending} />
-          <Btn label="Reject"  color="#F85149"       onClick={reject}  pending={pending}
+          <Btn label="Reject"  color="var(--red)"       onClick={reject}  pending={pending}
             confirmMsg="Reject this asset? It will be marked RETIRED and cannot be served." />
         </>
       )}
@@ -101,8 +101,8 @@ export function BulkApproveButton({ subjectPrefix, label }: { subjectPrefix: str
         fontWeight: 700,
         padding: '6px 14px',
         borderRadius: 8,
-        border: '1px solid var(--green)44',
-        background: 'var(--green)18',
+        border: '1px solid color-mix(in srgb, var(--green) 27%, transparent)',
+        background: 'color-mix(in srgb, var(--green) 9%, transparent)',
         color: 'var(--green)',
         cursor: pending ? 'not-allowed' : 'pointer',
         opacity: pending ? 0.6 : 1,

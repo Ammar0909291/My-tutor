@@ -59,11 +59,11 @@ export default function MasterySummaryPanel(_props: Props) {
   if (!data) return null
 
   const levelColors: Record<string, string> = {
-    beginner: '#56D364',
-    intermediate: '#F6B444',
-    advanced: '#79C0FF',
+    beginner: 'var(--green)',
+    intermediate: 'var(--yellow)',
+    advanced: 'var(--blue)',
   }
-  const levelColor = levelColors[data.estimatedLevel] ?? '#71717A'
+  const levelColor = levelColors[data.estimatedLevel] ?? 'var(--text-dim)'
 
   return (
     <div
@@ -76,7 +76,7 @@ export default function MasterySummaryPanel(_props: Props) {
         </h3>
         <span
           className="text-xs px-2 py-0.5 rounded-full font-medium capitalize"
-          style={{ background: `${levelColor}22`, color: levelColor }}
+          style={{ background: `color-mix(in srgb, ${levelColor} 13%, transparent)`, color: levelColor }}
         >
           {data.estimatedLevel}
         </span>
@@ -107,13 +107,13 @@ export default function MasterySummaryPanel(_props: Props) {
       {/* Strong concepts */}
       {data.strongConcepts.length > 0 && (
         <div className="space-y-1">
-          <p className="text-xs font-medium" style={{ color: '#56D364' }}>💪 Strong</p>
+          <p className="text-xs font-medium" style={{ color: 'var(--green)' }}>💪 Strong</p>
           <div className="flex flex-wrap gap-1.5">
             {data.strongConcepts.map((c) => (
               <span
                 key={c}
                 className="text-xs px-2 py-0.5 rounded-full"
-                style={{ background: '#56D36420', color: '#56D364' }}
+                style={{ background: 'color-mix(in srgb, var(--green) 13%, transparent)', color: 'var(--green)' }}
               >
                 {humanize(c)}
               </span>
@@ -125,13 +125,13 @@ export default function MasterySummaryPanel(_props: Props) {
       {/* Weak concepts */}
       {data.weakConcepts.length > 0 && (
         <div className="space-y-1">
-          <p className="text-xs font-medium" style={{ color: '#F87171' }}>🔍 Needs Work</p>
+          <p className="text-xs font-medium" style={{ color: 'var(--red)' }}>🔍 Needs Work</p>
           <div className="flex flex-wrap gap-1.5">
             {data.weakConcepts.map((c) => (
               <span
                 key={c}
                 className="text-xs px-2 py-0.5 rounded-full"
-                style={{ background: '#F8717120', color: '#F87171' }}
+                style={{ background: 'color-mix(in srgb, var(--red) 13%, transparent)', color: 'var(--red)' }}
               >
                 {humanize(c)}
               </span>

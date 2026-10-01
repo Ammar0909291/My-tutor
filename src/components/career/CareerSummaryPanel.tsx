@@ -87,7 +87,7 @@ export default function CareerSummaryPanel(_props: Props) {
     .filter((v, i, arr) => arr.findIndex((x) => x.role === v.role) === i)
     .slice(0, 3)
 
-  const readinessColor = readinessScore >= 70 ? '#56D364' : readinessScore >= 40 ? '#F6B444' : '#F87171'
+  const readinessColor = readinessScore >= 70 ? 'var(--green)' : readinessScore >= 40 ? 'var(--yellow)' : 'var(--red)'
 
   return (
     <div
@@ -100,7 +100,7 @@ export default function CareerSummaryPanel(_props: Props) {
         </h3>
         <span
           className="text-xs font-semibold px-2 py-0.5 rounded-full"
-          style={{ background: `${readinessColor}22`, color: readinessColor }}
+          style={{ background: `color-mix(in srgb, ${readinessColor} 13%, transparent)`, color: readinessColor }}
         >
           {readinessScore}%
         </span>
@@ -124,7 +124,7 @@ export default function CareerSummaryPanel(_props: Props) {
         {subjects.map((sub) => {
           const libSub = findLibrarySubject(sub.slug)
           const icon = libSub?.icon ?? '📘'
-          const pctColor = sub.completionPercent >= 70 ? '#56D364' : sub.completionPercent >= 40 ? '#F6B444' : '#79C0FF'
+          const pctColor = sub.completionPercent >= 70 ? 'var(--green)' : sub.completionPercent >= 40 ? 'var(--yellow)' : 'var(--blue)'
           return (
             <div key={sub.slug} className="flex items-center gap-3">
               <span className="text-base w-6 text-center">{icon}</span>
@@ -156,8 +156,8 @@ export default function CareerSummaryPanel(_props: Props) {
                 key={role}
                 className="text-xs px-2 py-0.5 rounded-full"
                 style={{
-                  background: progress >= 70 ? '#56D36420' : 'var(--bg-base)',
-                  color: progress >= 70 ? '#56D364' : 'var(--text-secondary)',
+                  background: progress >= 70 ? 'color-mix(in srgb, var(--green) 13%, transparent)' : 'var(--bg-base)',
+                  color: progress >= 70 ? 'var(--green)' : 'var(--text-secondary)',
                   border: '1px solid var(--border-subtle)',
                 }}
               >

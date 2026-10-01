@@ -16,7 +16,7 @@ export function UserActions({ userId, role, isDeleted }: { userId: string; role:
     <div className="flex gap-1.5 flex-wrap">
       {role === 'STUDENT' && btn('Promote', () => promoteUser(userId), 'var(--coral)')}
       {role === 'ADMIN'   && btn('Demote',  () => demoteUser(userId))}
-      {!isDeleted && btn('Disable', () => disableUser(userId), '#F85149')}
+      {!isDeleted && btn('Disable', () => disableUser(userId), 'var(--red)')}
       {isDeleted  && btn('Enable',  () => enableUser(userId),  'var(--green)')}
     </div>
   )

@@ -50,7 +50,7 @@ export default async function AdminUsersPage({ searchParams }: { searchParams: P
                 <td className="px-4 py-3">{badge(u.role, u.role === 'ADMIN' ? 'var(--coral)' : 'var(--text-dim)')}</td>
                 <td className="px-4 py-3 text-xs" style={{ color: 'var(--text-secondary)' }}>{u.xpPoints.toLocaleString()}</td>
                 <td className="px-4 py-3 text-xs" style={{ color: 'var(--text-dim)' }}>{u.createdAt.toLocaleDateString()}</td>
-                <td className="px-4 py-3">{badge(u.isDeleted ? 'Disabled' : 'Active', u.isDeleted ? '#F85149' : 'var(--green)')}</td>
+                <td className="px-4 py-3">{badge(u.isDeleted ? 'Disabled' : 'Active', u.isDeleted ? 'var(--red)' : 'var(--green)')}</td>
                 <td className="px-4 py-3"><UserActions userId={u.id} role={u.role} isDeleted={u.isDeleted} /></td>
               </tr>
             ))}

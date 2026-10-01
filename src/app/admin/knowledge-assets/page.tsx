@@ -17,18 +17,18 @@ function subjectLabel(conceptId: string): string {
 }
 
 const STATUS_COLORS: Record<string, string> = {
-  DRAFT:      '#888',
-  REVIEW:     'var(--candy-blue, #3B9EFF)',
+  DRAFT:      'var(--text-dim)',
+  REVIEW:     'var(--candy-blue, var(--blue))',
   ACTIVE:     'var(--green)',
   DEPRECATED: 'var(--candy-orange, #FF9600)',
-  RETIRED:    '#F85149',
+  RETIRED:    'var(--red)',
 }
 
 const AUTHOR_COLORS: Record<string, string> = {
   HUMAN_CURATOR:      'var(--green)',
-  AI_AUTHORED:        'var(--candy-blue, #3B9EFF)',
+  AI_AUTHORED:        'var(--candy-blue, var(--blue))',
   AI_AUTHORED_REVIEWED: 'var(--candy-purple)',
-  IMPORTED:           '#888',
+  IMPORTED:           'var(--text-dim)',
 }
 
 function Badge({ text, color }: { text: string; color: string }) {
@@ -36,7 +36,7 @@ function Badge({ text, color }: { text: string; color: string }) {
     <span style={{
       fontSize: 10, fontWeight: 700, padding: '2px 6px', borderRadius: 4,
       textTransform: 'uppercase', letterSpacing: '0.04em',
-      background: `${color}22`, color,
+      background: `color-mix(in srgb, ${color} 13%, transparent)`, color,
     }}>
       {text}
     </span>
@@ -215,13 +215,13 @@ export default async function AdminKnowledgeAssetsPage({
                       <span title={a.conceptId}>{a.conceptId}</span>
                     </td>
                     <td style={{ padding: '8px 12px', whiteSpace: 'nowrap' }}>
-                      <Badge text={subjectLabel(a.conceptId)} color="var(--candy-blue, #3B9EFF)" />
+                      <Badge text={subjectLabel(a.conceptId)} color="var(--candy-blue, var(--blue))" />
                     </td>
                     <td style={{ padding: '8px 12px', whiteSpace: 'nowrap' }}>
-                      <Badge text={a.status} color={STATUS_COLORS[a.status] ?? '#888'} />
+                      <Badge text={a.status} color={STATUS_COLORS[a.status] ?? 'var(--text-dim)'} />
                     </td>
                     <td style={{ padding: '8px 12px', whiteSpace: 'nowrap' }}>
-                      <Badge text={a.authorKind.replace('_', ' ').toLowerCase()} color={AUTHOR_COLORS[a.authorKind] ?? '#888'} />
+                      <Badge text={a.authorKind.replace('_', ' ').toLowerCase()} color={AUTHOR_COLORS[a.authorKind] ?? 'var(--text-dim)'} />
                     </td>
                     <td style={{ padding: '8px 12px', color: 'var(--candy-ink-soft)', whiteSpace: 'nowrap' }}>{a.gradeBand}</td>
                     <td style={{ padding: '8px 12px', color: 'var(--candy-ink-soft)', whiteSpace: 'nowrap' }}>{a.language}</td>

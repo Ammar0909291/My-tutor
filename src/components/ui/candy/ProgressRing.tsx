@@ -16,7 +16,7 @@ export interface ProgressRingProps {
   trackColor?: string
   /** Gradient start color for the fill stroke. Default '#E8B84B' (brand chalk-yellow). */
   gradientFrom?: string
-  /** Gradient end color for the fill stroke. Default '#3B9EFF' (candy blue). */
+  /** Gradient end color for the fill stroke. Default '#8FD1C4' (brand teal). */
   gradientTo?: string
   /** Optional centered content, e.g. a "65%" label. */
   label?: ReactNode
@@ -34,7 +34,7 @@ export function ProgressRing({
   strokeWidth = 10,
   trackColor = '#EEF1FB',
   gradientFrom = '#E8B84B',
-  gradientTo = '#3B9EFF',
+  gradientTo = '#8FD1C4',
   label,
   className,
 }: ProgressRingProps) {

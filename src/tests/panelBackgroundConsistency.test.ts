@@ -82,7 +82,9 @@ describe('nested cards/rows inside each panel remain distinguishable (not everyt
   })
 
   it('the Learning Roadmap unit-header rows stay on --bg-elevated, a distinct token from the new shared --bg-void background', () => {
-    const idx = TSX.indexOf("background: unitComplete ? 'rgba(63,185,80,0.15)' : `${UI.indigo}18`")
+    // 2026-10-01: the `${UI.indigo}18` hex-alpha concat became color-mix() so the tint also works when the
+    // colour is a CSS variable; was: `${UI.indigo}18`.
+    const idx = TSX.indexOf("background: unitComplete ? 'rgba(63,185,80,0.15)' : `color-mix(in srgb, ${UI.indigo} 9%, transparent)`")
     expect(idx).toBeGreaterThan(-1)
   })
 

@@ -142,7 +142,7 @@ export default function CoachChat({ subject, teachingLanguage }: Props) {
               padding: '12px 22px',
               borderRadius: 14,
               background: 'var(--candy-purple)',
-              color: '#fff',
+              color: 'var(--on-accent)',
               fontWeight: 800,
               fontSize: 16,
               opacity: loading || !input.trim() ? 0.5 : 1,

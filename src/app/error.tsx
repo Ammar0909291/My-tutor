@@ -44,7 +44,7 @@ export default function Error({ error, reset }: { error: Error & { digest?: stri
             // to recover from a screenshot alone, which repeatedly made it
             // impossible to tell a timeout apart from a genuinely different
             // thrown error when this screen was reported from production.
-            <p className="text-xs select-all" style={{ color: 'var(--candy-ink-soft)', opacity: 0.6, fontFamily: 'monospace' }}>
+            <p className="text-xs select-all" style={{ color: 'var(--candy-ink-soft)', fontFamily: 'monospace' }}>
               Error ID: {error.digest}
             </p>
           )}

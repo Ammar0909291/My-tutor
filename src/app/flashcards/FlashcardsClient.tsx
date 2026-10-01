@@ -98,7 +98,7 @@ export default function FlashcardsClient() {
         <EagleMascot variant="hero" />
         <h2 style={{ fontSize: 22, fontWeight: 800, color: 'var(--candy-ink)', maxWidth: 420, fontFamily: 'var(--font-baloo2)' }}>{tr.flashcards_zero_title}</h2>
         <StatsBar stats={stats} tr={tr} />
-        <a href="/learn" style={{ padding: '12px 24px', borderRadius: 16, background: 'var(--candy-orange)', color: '#fff', textDecoration: 'none', fontWeight: 800, boxShadow: '0 4px 0 var(--candy-shadow)' }}>
+        <a href="/learn" style={{ padding: '12px 24px', borderRadius: 16, background: 'var(--candy-orange)', color: 'var(--on-accent)', textDecoration: 'none', fontWeight: 800, boxShadow: '0 4px 0 var(--candy-shadow)' }}>
           {tr.flashcards_empty_cta}
         </a>
         <a href="/dashboard" style={{ color: 'var(--candy-ink-soft)', fontSize: 13, fontWeight: 600 }}>{tr.flashcards_back_home}</a>
@@ -112,7 +112,7 @@ export default function FlashcardsClient() {
         <div style={{ fontSize: 50 }}>🏆</div>
         <h2 style={{ fontSize: 22, fontWeight: 800, color: 'var(--candy-ink)', fontFamily: 'var(--font-baloo2)' }}>{tr.flashcards_alldone_title}</h2>
         <p style={{ color: 'var(--candy-ink-soft)', fontSize: 14, fontWeight: 600 }}>+{done.length * 2} {tr.flashcards_xp_earned}</p>
-        <a href="/dashboard" style={{ padding: '12px 24px', borderRadius: 16, background: 'var(--candy-green)', color: '#fff', textDecoration: 'none', fontWeight: 800, boxShadow: '0 4px 0 var(--candy-green-d)' }}>
+        <a href="/dashboard" style={{ padding: '12px 24px', borderRadius: 16, background: 'var(--candy-green)', color: 'var(--on-accent)', textDecoration: 'none', fontWeight: 800, boxShadow: '0 4px 0 var(--candy-green-d)' }}>
           {tr.flashcards_back_home}
         </a>
       </CandyPage>
@@ -126,7 +126,7 @@ export default function FlashcardsClient() {
         <h2 style={{ fontSize: 22, fontWeight: 800, color: 'var(--candy-ink)', fontFamily: 'var(--font-baloo2)' }}>{tr.flashcards_empty_title}</h2>
         <p style={{ color: 'var(--candy-ink-soft)', fontSize: 14, fontWeight: 600 }}>{tr.flashcards_empty_sub}</p>
         <StatsBar stats={stats} tr={tr} />
-        <a href="/learn" style={{ padding: '12px 24px', borderRadius: 16, background: 'var(--candy-orange)', color: '#fff', textDecoration: 'none', fontWeight: 800, boxShadow: '0 4px 0 var(--candy-shadow)' }}>
+        <a href="/learn" style={{ padding: '12px 24px', borderRadius: 16, background: 'var(--candy-orange)', color: 'var(--on-accent)', textDecoration: 'none', fontWeight: 800, boxShadow: '0 4px 0 var(--candy-shadow)' }}>
           {tr.flashcards_empty_cta}
         </a>
         <a href="/dashboard" style={{ color: 'var(--candy-ink-soft)', fontSize: 13, fontWeight: 600 }}>{tr.flashcards_back_home}</a>
@@ -198,7 +198,7 @@ export default function FlashcardsClient() {
             <div style={{ display: 'flex', gap: 12 }}>
               <CandyButton
                 onClick={() => handleRate('hard')}
-                style={{ flex: 1, padding: '14px', borderRadius: 16, background: 'var(--candy-red)', color: '#fff', fontWeight: 800, fontSize: 15 }}
+                style={{ flex: 1, padding: '14px', borderRadius: 16, background: 'var(--candy-red)', color: 'var(--on-accent)', fontWeight: 800, fontSize: 15 }}
                 shadowColor="#D43B3B"
               >
                 {tr.flashcards_hard}
@@ -212,7 +212,7 @@ export default function FlashcardsClient() {
               </CandyButton>
               <CandyButton
                 onClick={() => handleRate('easy')}
-                style={{ flex: 1, padding: '14px', borderRadius: 16, background: 'var(--candy-green)', color: '#fff', fontWeight: 800, fontSize: 15 }}
+                style={{ flex: 1, padding: '14px', borderRadius: 16, background: 'var(--candy-green)', color: 'var(--on-accent)', fontWeight: 800, fontSize: 15 }}
                 shadowColor="var(--candy-green-d)"
               >
                 {tr.flashcards_easy}

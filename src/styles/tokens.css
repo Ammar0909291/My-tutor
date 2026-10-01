@@ -28,7 +28,7 @@
   --bg-overlay:  rgba(27,23,18,0.95);
   --text-primary:   #F1EDE2;              /* chalk */
   --text-secondary: #A9B0A6;
-  --text-dim:       #8A9487;
+  --text-dim:       #9DA89A;
   --border-subtle:   rgba(241,237,226,0.10);
   --border-default:  rgba(241,237,226,0.14);
   --border-emphasis: rgba(241,237,226,0.32);
@@ -71,11 +71,11 @@
   --bg-surface:     #FAF7EE;
   --bg-card:        #FFFFFF;              /* the whiteboard itself */
   --bg-elevated:    #FAF7EE;
-  --bg-hover:       rgba(47,125,90,0.08);
+  --bg-hover:       rgba(39,107,76,0.08);
   --bg-overlay:     rgba(241,236,224,0.95);
   --text-primary:   #232722;              /* ink */
-  --text-secondary: #6B6F66;
-  --text-dim:       #7C8075;
+  --text-secondary: #5A5E55;
+  --text-dim:       #60645B;
   --text-inverse:   #FFFFFF;
   --border-subtle:  rgba(220,213,196,0.8);
   --border-default: #DCD5C4;
@@ -88,30 +88,30 @@
   --shadow-xl: 0 16px 64px rgba(140,149,159,0.25);
 
   /* Brand accent: marker-green is the primary mark on the whiteboard. */
-  --coral:        #2F7D5A;
-  --coral-hover:  #256A4C;
-  --coral-muted:  rgba(47,125,90,0.12);
-  --coral-border: rgba(47,125,90,0.30);
-  --coral-glow:   0 0 32px rgba(47,125,90,0.20);
-  --accent-primary-glow: rgba(47,125,90,0.30);
-  --border-accent: rgba(47,125,90,0.4);
+  --coral:        #276B4C;
+  --coral-hover:  #1F5A40;
+  --coral-muted:  rgba(39,107,76,0.12);
+  --coral-border: rgba(39,107,76,0.30);
+  --coral-glow:   0 0 32px rgba(39,107,76,0.20);
+  --accent-primary-glow: rgba(39,107,76,0.30);
+  --border-accent: rgba(39,107,76,0.4);
   --on-accent:    #FFFFFF;
 
-  --blue:          #3B6FD9;
+  --blue:          #2D58B0;
   --blue-muted:    rgba(59,111,217,0.10);
-  --green:         #2F8F4E;
+  --green:         #237A3E;
   --green-muted:   rgba(47,143,78,0.10);
-  --yellow:        #C97A22;
+  --yellow:        #9A5A18;
   --yellow-muted:  rgba(201,122,34,0.10);
-  --purple:        #2F7D5A;
-  --purple-muted:  rgba(47,125,90,0.10);
+  --purple:        #276B4C;
+  --purple-muted:  rgba(39,107,76,0.10);
   --red:           #B23B3B;
   --red-muted:     rgba(178,59,59,0.10);
 
-  --indigo:        #2F7D5A;
-  --indigo-hover:  #256A4C;
-  --indigo-muted:  rgba(47,125,90,0.10);
-  --indigo-border: rgba(47,125,90,0.25);
+  --indigo:        #276B4C;
+  --indigo-hover:  #1F5A40;
+  --indigo-muted:  rgba(39,107,76,0.10);
+  --indigo-border: rgba(39,107,76,0.25);
 }
 
 :root {

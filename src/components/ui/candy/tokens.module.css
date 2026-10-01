@@ -16,6 +16,7 @@
  * differ by theme (a yellow brand on a dark board needs a different green /
  * blue than a green brand on white paper).
  *
+ * CONTRAST PASS 2026-10-01: light hues darkened so coloured TEXT clears 4.5:1 on paper/white.
  * Superseded values: bg #F0F4FF / #0D1117, card #FFFFFF / #161B22, ink
  * #3C3B54 / #E6EDF3, ink-soft #8B8AA3 / #8B949E, purple #8B5CF6 (-d #7C3AED),
  * blue #3B9EFF (-d #2B7FD9), green #58CC02 (-d #46A302), yellow #FFC800 (-d
@@ -35,25 +36,25 @@
   --candy-bg: #F1ECE0;
   --candy-card: #FFFFFF;
   --candy-ink: #232722;
-  --candy-ink-soft: #6B6F66;
+  --candy-ink-soft: #5A5E55;
 
-  --candy-purple: #2F7D5A;
-  --candy-purple-d: #256A4C;
-  --candy-blue: #3B6FD9;
-  --candy-blue-d: #2D58B0;
-  --candy-green: #2F8F4E;
-  --candy-green-d: #237A3E;
-  --candy-yellow: #C97A22;
-  --candy-yellow-d: #A8611A;
-  --candy-orange: #C2642A;
+  --candy-purple: #276B4C;
+  --candy-purple-d: #1F5A40;
+  --candy-blue: #2D58B0;
+  --candy-blue-d: #234690;
+  --candy-green: #237A3E;
+  --candy-green-d: #1B6232;
+  --candy-yellow: #9A5A18;
+  --candy-yellow-d: #7E4912;
+  --candy-orange: #A8521F;
   --candy-red: #B23B3B;
-  --candy-pink: #B8527A;
+  --candy-pink: #A03F68;
 
   --candy-shadow: #DCD5C4;
 
   --candy-on-accent: #FFFFFF;
   --candy-tint-yellow: rgba(201, 122, 34, 0.14);
-  --candy-tint-purple: rgba(47, 125, 90, 0.12);
+  --candy-tint-purple: rgba(39, 107, 76, 0.12);
   --candy-tint-blue: rgba(59, 111, 217, 0.12);
   --candy-tint-pink: rgba(184, 82, 122, 0.12);
   --candy-tint-neutral: #FAF7EE;

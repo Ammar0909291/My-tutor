@@ -23,7 +23,7 @@ interface LessonNavigationPanelProps {
 
 const INDIGO = '#6C5CE7'
 const GREEN = '#22C55E'
-const AMBER = '#F59E0B'
+const AMBER = 'var(--yellow)'
 
 type BadgeLabels = {
   mastered: string; inRevision: string; completed: string
@@ -38,7 +38,7 @@ function statusBadge(lesson: CurriculumLesson | null, ctx: {
   if (!lesson) return null
   const state = computeLessonLockState(lesson, ctx)
   if (state.isMastered) return { icon: '⭐', color: GREEN, label: labels.mastered }
-  if (state.isRevision) return { icon: '🔁', color: '#79C0FF', label: labels.inRevision }
+  if (state.isRevision) return { icon: '🔁', color: 'var(--blue)', label: labels.inRevision }
   if (state.isCompleted) return { icon: '✅', color: GREEN, label: labels.completed }
   if (state.isCurrent) return { icon: '●', color: INDIGO, label: labels.inProgress }
   if (state.isLocked) return { icon: '🔒', color: 'var(--text-dim)', label: labels.locked }
@@ -85,8 +85,8 @@ export function LessonNavigationPanel({
 
   const slotStyle = (accent?: string): React.CSSProperties => ({
     flex: 1, minWidth: 0, padding: '8px 10px', borderRadius: 10,
-    border: `1px solid ${accent ? `${accent}44` : 'var(--border-subtle)'}`,
-    background: accent ? `${accent}0c` : 'transparent',
+    border: `1px solid ${accent ? `color-mix(in srgb, ${accent} 27%, transparent)` : 'var(--border-subtle)'}`,
+    background: accent ? `color-mix(in srgb, ${accent} 5%, transparent)` : 'transparent',
     display: 'flex', flexDirection: 'column', gap: 3,
   })
 

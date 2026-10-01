@@ -44,7 +44,8 @@ describe('color tokens — a real chalkboard (dark) / whiteboard (light) pair, n
     const idx = CSS.indexOf('.learnCandy {')
     const end = CSS.indexOf("font-family: var(--font-plex-sans)")
     const block = CSS.slice(idx, end)
-    expect(block).toContain('--sb-accent: #2F7D5A')
+    // 2026-10-01 contrast pass: marker green #2F7D5A -> #276B4C (4.2:1 -> 5.4:1 on the paper desk).
+    expect(block).toContain('--sb-accent: #276B4C')
     expect(block).toContain('--bg-void: var(--sb-paper)')
     expect(block).toContain('--coral: var(--sb-accent)')
   })
@@ -73,9 +74,10 @@ describe('color tokens — a real chalkboard (dark) / whiteboard (light) pair, n
 describe('the JS brand accent (UI.indigo) — used directly in ~60 inline styles the CSS cascade cannot reach', () => {
   it('is no longer the old purple', () => {
     const idx = TSX.indexOf('const UI = {')
-    const block = TSX.slice(idx, idx + 400)
+    const block = TSX.slice(idx, idx + 700) // 2026-10-01: window widened from 400 (a comment was added inside UI)
     expect(block).not.toContain('#6C5CE7')
-    expect(block).toContain("indigo: '#C97A22'")
+    // 2026-10-01: was `indigo: '#C97A22'` (fixed amber; 3.4:1 under white button text). Now the theme brand token.
+    expect(block).toContain("indigo: 'var(--coral)'")
   })
 })
 

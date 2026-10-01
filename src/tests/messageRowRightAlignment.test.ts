@@ -78,7 +78,8 @@ describe('learner bubble: content-sized, never stretched, right-anchored via the
 
   it('bubble styling (colors, border-radius, spacing, timestamp) is unchanged by this fix', () => {
     expect(BUBBLE_BLOCK).toContain("padding: '12px 14px', borderRadius: '18px 18px 4px 18px', fontSize: 15.6, lineHeight: 1.5,")
-    expect(BUBBLE_BLOCK).toContain('background: `linear-gradient(135deg, ${UI.indigo}, ${UI.indigoDark})`, color: \'#fff\',')
+    // 2026-10-01: text colour was '#fff'; now var(--on-accent) so it stays readable on the chalk-yellow fill.
+    expect(BUBBLE_BLOCK).toContain('background: `linear-gradient(135deg, ${UI.indigo}, ${UI.indigoDark})`, color: \'var(--on-accent)\',')
     expect(BUBBLE_BLOCK).toContain("textAlign: 'right'")
   })
 })

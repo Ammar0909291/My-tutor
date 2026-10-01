@@ -59,11 +59,11 @@ export default async function AdminOverviewPage() {
       {/* Asset stats */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 16, marginBottom: 32 }}>
         {[
-          { label: 'DRAFT Assets (pending review)', value: draftAssets, color: '#888',           href: '/admin/knowledge-assets?status=DRAFT' },
+          { label: 'DRAFT Assets (pending review)', value: draftAssets, color: 'var(--text-dim)',           href: '/admin/knowledge-assets?status=DRAFT' },
           { label: 'ACTIVE Assets (serving)',        value: activeAssets, color: 'var(--candy-green)', href: '/admin/knowledge-assets?status=ACTIVE' },
         ].map(({ label, value, color, href }) => (
           <a key={label} href={href} style={{ textDecoration: 'none' }}>
-            <Card style={{ padding: 20, border: `1px solid ${color}33` }}>
+            <Card style={{ padding: 20, border: `1px solid color-mix(in srgb, ${color} 20%, transparent)` }}>
               <p style={{ fontSize: 11, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--candy-ink-soft)', margin: 0 }}>{label}</p>
               <p style={{ fontSize: 32, fontWeight: 800, color, margin: '4px 0 0' }}>
                 {value ?? '—'}

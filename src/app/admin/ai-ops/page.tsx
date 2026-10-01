@@ -32,7 +32,7 @@ export default async function AdminAIOpsPage() {
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6">
         {stat('Total Requests', totalLogs as number)}
         {stat('Success', successLogs as number, 'var(--green)')}
-        {stat('Error Rate', `${errorRate.toFixed(1)}%`, errorRate > 5 ? '#F85149' : 'var(--text-primary)')}
+        {stat('Error Rate', `${errorRate.toFixed(1)}%`, errorRate > 5 ? 'var(--red)' : 'var(--text-primary)')}
       </div>
 
       {/* Providers */}
@@ -78,7 +78,7 @@ export default async function AdminAIOpsPage() {
       {/* Last error */}
       {lastError && (
         <div className="rounded-xl border p-4" style={{ background: 'rgba(248,81,73,0.05)', borderColor: 'rgba(248,81,73,0.2)' }}>
-          <p className="text-xs font-bold mb-1" style={{ color: '#F85149' }}>Last Error · {lastError.provider}</p>
+          <p className="text-xs font-bold mb-1" style={{ color: 'var(--red)' }}>Last Error · {lastError.provider}</p>
           <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>{lastError.errorMessage ?? 'Unknown'}</p>
           <p className="text-xs mt-1" style={{ color: 'var(--text-dim)' }}>{lastError.createdAt.toLocaleString()}</p>
         </div>

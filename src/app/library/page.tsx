@@ -11,10 +11,10 @@ import { CandyPage, Card, SectionTitle, ProgressBar } from '@/components/ui/cand
 
 // Candy-palette accents per category (hex so the `${accent}xx` alpha trick keeps working).
 const CATEGORY_ACCENT: Record<SubjectCategory, string> = {
-  languages: '#FFC800',
-  programming: '#58CC02',
+  languages: 'var(--yellow)',
+  programming: 'var(--green)',
   mathematics: '#E8B84B',
-  physics: '#3B9EFF',
+  physics: 'var(--blue)',
   chemistry: '#FF9600',
   biology: '#FF5FA2',
   ai: '#8FD1C4',
@@ -98,7 +98,7 @@ export default async function LibraryPage() {
                       <Card key={s.slug} className="p-4 flex flex-col gap-3">
                         <div className="flex items-center gap-3">
                           <div className="w-10 h-10 rounded-xl flex items-center justify-center text-lg shrink-0"
-                            style={{ background: `${accent}1f`, color: accent }}>
+                            style={{ background: `color-mix(in srgb, ${accent} 12%, transparent)`, color: accent }}>
                             {s.icon}
                           </div>
                           <div className="min-w-0">
@@ -139,7 +139,7 @@ export default async function LibraryPage() {
                               {/* Actions */}
                               <div className="flex items-center gap-2">
                                 <Link href={`/learn?subject=${s.slug}`} className="flex-1 text-center text-xs px-3 py-2 rounded-xl"
-                                  style={{ background: accent, color: '#fff', fontWeight: 800, textDecoration: 'none', boxShadow: '0 3px 0 var(--candy-shadow)' }}>
+                                  style={{ background: accent, color: 'var(--on-accent)', fontWeight: 800, textDecoration: 'none', boxShadow: '0 3px 0 var(--candy-shadow)' }}>
                                   {T('library_continue_learning')}
                                 </Link>
                                 <Link href={`/library/${s.slug}`} className="text-xs px-3 py-2 rounded-xl"

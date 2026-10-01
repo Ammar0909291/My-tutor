@@ -25,7 +25,7 @@ export default function AdminSettingsPage() {
     const set = !!(process.env[key])
     return (
       <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded uppercase`}
-        style={{ background: set ? 'var(--green)22' : '#F8514922', color: set ? 'var(--green)' : '#F85149' }}>
+        style={{ background: set ? 'color-mix(in srgb, var(--green) 13%, transparent)' : 'color-mix(in srgb, var(--red) 13%, transparent)', color: set ? 'var(--green)' : 'var(--red)' }}>
         {set ? (secret ? 'Set ✓' : process.env[key]!.slice(0, 30) + (process.env[key]!.length > 30 ? '…' : '')) : 'Not set'}
       </span>
     )
@@ -58,7 +58,7 @@ export default function AdminSettingsPage() {
               <p className="text-[11px]" style={{ color: 'var(--text-dim)' }}>{desc}</p>
             </div>
             <span className="text-[10px] font-bold px-1.5 py-0.5 rounded uppercase"
-              style={{ background: value==='true' ? 'var(--green)22' : 'var(--text-dim)22', color: value==='true' ? 'var(--green)' : 'var(--text-dim)' }}>
+              style={{ background: value==='true' ? 'color-mix(in srgb, var(--green) 13%, transparent)' : 'color-mix(in srgb, var(--text-dim) 13%, transparent)', color: value==='true' ? 'var(--green)' : 'var(--text-dim)' }}>
               {value}
             </span>
           </div>

@@ -84,7 +84,7 @@ export function CompactLessonProgressBar({
                 width: 14,
                 height: 6,
                 borderRadius: 999,
-                background: reached ? 'var(--coral, #F78166)' : 'var(--bg-hover)',
+                background: reached ? 'var(--coral, var(--coral))' : 'var(--bg-hover)',
                 opacity: past ? 0.75 : 1,
                 transition: 'background 320ms ease, opacity 320ms ease',
               }}
@@ -172,7 +172,7 @@ export function LessonProgressBar({
               style={{
                 flex: 1,
                 borderRadius: 999,
-                background: reached ? 'var(--coral, #F78166)' : 'var(--bg-hover)',
+                background: reached ? 'var(--coral, var(--coral))' : 'var(--bg-hover)',
                 opacity: reached && !current ? 0.75 : 1,
                 // P8: smooth transitions between stages.
                 transition: 'background 320ms ease, opacity 320ms ease',

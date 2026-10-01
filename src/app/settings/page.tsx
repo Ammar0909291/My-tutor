@@ -14,9 +14,9 @@ type LangOption = { key: TeachingLang; icon: string; label: string }
 type CountryOption = { key: Country; flag: string; name: string; desc: string; color: string }
 
 const COUNTRY_OPTIONS: CountryOption[] = [
-  { key: 'ru',     flag: '🇷🇺', name: 'Россия', desc: 'YandexGPT · SpeechKit', color: '#F78166' },
-  { key: 'in',     flag: '🇮🇳', name: 'India',  desc: 'Groq · Hinglish',      color: '#3FB950' },
-  { key: 'global', flag: '🌍', name: 'Global', desc: 'Groq · English',        color: '#79C0FF' },
+  { key: 'ru',     flag: '🇷🇺', name: 'Россия', desc: 'YandexGPT · SpeechKit', color: 'var(--coral)' },
+  { key: 'in',     flag: '🇮🇳', name: 'India',  desc: 'Groq · Hinglish',      color: 'var(--green)' },
+  { key: 'global', flag: '🌍', name: 'Global', desc: 'Groq · English',        color: 'var(--blue)' },
 ]
 
 const LANG_OPTIONS: LangOption[] = [
@@ -219,7 +219,7 @@ export default function SettingsPage() {
       aria-label="avatar"
       className="rounded-2xl"
       style={{
-        width: 64, height: 64, flexShrink: 0, background: '#F78166', color: '#fff',
+        width: 64, height: 64, flexShrink: 0, background: 'var(--coral)', color: 'var(--on-accent)',
         display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
         fontWeight: 700, fontSize: 28,
       }}
@@ -321,7 +321,7 @@ export default function SettingsPage() {
           <CandyButton
             onClick={handleProfileSave}
             disabled={profileSave === 'saving'}
-            style={{ marginTop: 20, width: '100%', padding: '12px', borderRadius: 14, background: 'var(--candy-orange)', color: '#fff', fontWeight: 800, fontSize: 14, opacity: profileSave === 'saving' ? 0.6 : 1 }}>
+            style={{ marginTop: 20, width: '100%', padding: '12px', borderRadius: 14, background: 'var(--candy-orange)', color: 'var(--on-accent)', fontWeight: 800, fontSize: 14, opacity: profileSave === 'saving' ? 0.6 : 1 }}>
             {profileSave === 'saved' ? t('profile_saved') : profileSave === 'saving' ? '...' : t('profile_save')}
           </CandyButton>
         </Section>
@@ -358,13 +358,13 @@ export default function SettingsPage() {
                   }}
                   style={{
                     flex: 1, minWidth: 100, cursor: 'pointer', position: 'relative',
-                    background: isSelected ? `${opt.color}15` : 'var(--candy-bg)',
+                    background: isSelected ? `color-mix(in srgb, ${opt.color} 8%, transparent)` : 'var(--candy-bg)',
                     border: `2px solid ${isSelected ? opt.color : 'var(--candy-shadow)'}`,
                     borderRadius: 14, padding: '14px 12px', textAlign: 'center',
                     transition: 'all 200ms', outline: 'none',
                   }}>
                   {isSelected && (
-                    <div style={{ position: 'absolute', top: 8, right: 8, width: 16, height: 16, borderRadius: '50%', background: opt.color, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 9, color: '#fff', fontWeight: 700 }}>✓</div>
+                    <div style={{ position: 'absolute', top: 8, right: 8, width: 16, height: 16, borderRadius: '50%', background: opt.color, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 9, color: 'var(--on-accent)', fontWeight: 700 }}>✓</div>
                   )}
                   <div style={{ fontSize: 28 }}>{opt.flag}</div>
                   <p style={{ fontSize: 13, fontWeight: 700, color: 'var(--candy-ink)', marginTop: 6 }}>{opt.name}</p>
@@ -439,7 +439,7 @@ export default function SettingsPage() {
                 <CandyButton
                   onClick={handleDeleteAccount}
                   disabled={!deleteReady || deleteStep === 'deleting'}
-                  style={{ flex: 1, padding: '10px', borderRadius: 14, background: deleteReady ? 'var(--candy-red)' : 'rgba(255,75,75,0.2)', color: '#fff', fontWeight: 800, fontSize: 14, opacity: (!deleteReady || deleteStep === 'deleting') ? 0.5 : 1 }}
+                  style={{ flex: 1, padding: '10px', borderRadius: 14, background: deleteReady ? 'var(--candy-red)' : 'color-mix(in srgb, var(--candy-red) 14%, transparent)', color: deleteReady ? 'var(--on-accent)' : 'var(--candy-red)', fontWeight: 800, fontSize: 14, opacity: (!deleteReady || deleteStep === 'deleting') ? 0.5 : 1 }}
                   shadowColor="#D43B3B">
                   {deleteStep === 'deleting' ? t('settings_deleting') : t('settings_delete_permanent')}
                 </CandyButton>
@@ -464,7 +464,7 @@ export default function SettingsPage() {
         <button
           onClick={handleSave}
           disabled={saveState === 'saving'}
-          style={{ width: '100%', padding: '14px', borderRadius: 16, background: 'var(--candy-orange)', color: '#fff', fontWeight: 800, fontSize: 15, opacity: saveState === 'saving' ? 0.6 : 1 }}>
+          style={{ width: '100%', padding: '14px', borderRadius: 16, background: 'var(--candy-orange)', color: 'var(--on-accent)', fontWeight: 800, fontSize: 15, opacity: saveState === 'saving' ? 0.6 : 1 }}>
           {saveState === 'saved' ? t('settings_saved')
             : saveState === 'saving' ? '...'
             : saveState === 'error' ? t('settings_save_retry')

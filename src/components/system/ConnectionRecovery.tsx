@@ -95,7 +95,7 @@ export function ConnectionRecovery({ retryKey }: { retryKey: string }) {
             {t('lesson_connect_failed')}
           </p>
           {!autoExhausted && (
-            <p className="text-xs" style={{ color: 'var(--candy-ink-soft)', opacity: 0.7 }}>
+            <p className="text-xs" style={{ color: 'var(--candy-ink-soft)' }}>
               {t('lesson_reconnecting')}
             </p>
           )}

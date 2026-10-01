@@ -10,10 +10,10 @@ import SubjectModuleTree from './SubjectModuleTree'
 
 // Candy-palette accents per category (hex so the `${accent}xx` alpha trick keeps working).
 const CATEGORY_ACCENT: Record<SubjectCategory, string> = {
-  languages: '#FFC800',
-  programming: '#58CC02',
+  languages: 'var(--yellow)',
+  programming: 'var(--green)',
   mathematics: '#8B5CF6',
-  physics: '#3B9EFF',
+  physics: 'var(--blue)',
   chemistry: '#FF9600',
   biology: '#FF5FA2',
   ai: '#7C3AED',
@@ -46,7 +46,7 @@ export default async function SubjectDashboardPage({ params }: { params: { slug:
         <Link href="/library" className="text-xs font-extrabold" style={{ color: 'var(--candy-ink-soft)', textDecoration: 'none' }}>{T('library_back')}</Link>
 
         <div className="flex items-center gap-3 mt-3 mb-2">
-          <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-xl shrink-0" style={{ background: `${accent}1f`, color: accent }}>
+          <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-xl shrink-0" style={{ background: `color-mix(in srgb, ${accent} 12%, transparent)`, color: accent }}>
             {librarySubject.icon}
           </div>
           <div>
@@ -59,17 +59,17 @@ export default async function SubjectDashboardPage({ params }: { params: { slug:
           <Card className="mt-8 p-6 text-center">
             <p className="text-sm mb-1" style={{ color: 'var(--candy-ink)', fontWeight: 800 }}>{T('library_not_enrolled_title').replace('{name}', subjectName)}</p>
             <p className="text-xs mb-4" style={{ color: 'var(--candy-ink-soft)', fontWeight: 600 }}>{T('library_enroll_unlock')}</p>
-            <Link href="/library" className="text-xs px-4 py-2 rounded-xl inline-block" style={{ background: accent, color: '#fff', fontWeight: 800, textDecoration: 'none', boxShadow: '0 3px 0 var(--candy-shadow)' }}>
+            <Link href="/library" className="text-xs px-4 py-2 rounded-xl inline-block" style={{ background: accent, color: 'var(--on-accent)', fontWeight: 800, textDecoration: 'none', boxShadow: '0 3px 0 var(--candy-shadow)' }}>
               {T('library_go_to_library')}
             </Link>
           </Card>
         ) : (
           <>
             <div className="flex items-center gap-3 mb-6 mt-2">
-              <Pill color={`${accent}26`} style={{ color: accent, fontSize: 11, padding: '4px 12px' }}>
+              <Pill color={`color-mix(in srgb, ${accent} 15%, transparent)`} style={{ color: accent, fontSize: 11, padding: '4px 12px' }}>
                 {levelLabel(enrollment.currentLevelIndex, lang)}
               </Pill>
-              <Link href={`/learn?subject=${params.slug}`} className="text-xs px-3 py-2 rounded-xl" style={{ background: accent, color: '#fff', fontWeight: 800, textDecoration: 'none', boxShadow: '0 3px 0 var(--candy-shadow)' }}>
+              <Link href={`/learn?subject=${params.slug}`} className="text-xs px-3 py-2 rounded-xl" style={{ background: accent, color: 'var(--on-accent)', fontWeight: 800, textDecoration: 'none', boxShadow: '0 3px 0 var(--candy-shadow)' }}>
                 {T('library_continue_learning')}
               </Link>
             </div>

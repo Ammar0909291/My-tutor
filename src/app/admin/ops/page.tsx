@@ -13,7 +13,7 @@ interface OpsData {
 
 function StatusPill({ ok, label }: { ok: boolean; label: string }) {
   return (
-    <Pill color={ok ? 'var(--candy-green)' : 'var(--candy-red)'} style={{ color: '#fff' }}>
+    <Pill color={ok ? 'var(--candy-green)' : 'var(--candy-red)'} style={{ color: 'var(--on-accent)' }}>
       {label}
     </Pill>
   )
@@ -141,7 +141,7 @@ export default async function AdminOpsPage() {
             {data ? (
               <Pill
                 color={data.health.redis === 'configured' ? 'var(--candy-blue)' : 'var(--candy-ink-soft)'}
-                style={{ color: '#fff' }}
+                style={{ color: 'var(--on-accent)' }}
               >
                 {data.health.redis === 'configured' ? 'Configured' : data.health.redis === 'error' ? 'Error' : 'Not Configured'}
               </Pill>

@@ -95,7 +95,7 @@
 }
 .navAvatar {
   width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-  font-size: 12px; font-weight: 800; color: #fff; flex-shrink: 0;
+  font-size: 12px; font-weight: 800; color: var(--on-accent); flex-shrink: 0;
   background: linear-gradient(135deg, var(--purple), var(--blue));
 }
 .mobileToggle { padding: 8px; border-radius: 10px; background: var(--shadow); color: var(--ink-soft); border: none; cursor: pointer; }
@@ -111,7 +111,7 @@
 .btnPrimary {
   --btn-shadow: var(--purple-d);
   background: linear-gradient(135deg, var(--purple), var(--blue));
-  color: #fff; border-radius: 14px; padding: 12px 22px; font-weight: 800; font-size: 14px;
+  color: var(--on-accent); border-radius: 14px; padding: 12px 22px; font-weight: 800; font-size: 14px;
   display: inline-flex; align-items: center; gap: 8px; text-decoration: none;
 }
 .btnGhost {
@@ -141,7 +141,7 @@
 .avatarStack { display: flex; }
 .avatarChip {
   width: 32px; height: 32px; border-radius: 50%; border: 2px solid var(--candy-bg);
-  display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; color: #fff;
+  display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; color: var(--on-accent);
 }
 .avatarProofText { font-size: 13px; font-weight: 700; color: var(--ink-soft); }
 
@@ -151,7 +151,7 @@
 .mockTop { display: flex; align-items: center; gap: 8px; padding: 12px 16px; background: color-mix(in srgb, var(--ink) 4%, var(--card)); box-shadow: 0 1px 0 var(--shadow); }
 .mockDot { width: 11px; height: 11px; border-radius: 50%; }
 .mockFile { margin-left: 8px; font-size: 12px; font-weight: 700; color: var(--ink-soft); font-family: var(--font-jetbrains), monospace; }
-.mockCode { padding: 16px; font-family: var(--font-jetbrains), monospace; font-size: 13px; line-height: 1.7; background: #161B22; }
+.mockCode { padding: 16px; font-family: var(--font-jetbrains), monospace; font-size: 13px; line-height: 1.7; background: var(--bg-elevated); }
 .mockChat { padding: 16px; display: flex; gap: 12px; }
 .mockChatAvatar {
   width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
@@ -199,7 +199,7 @@
 .stepItem { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px; position: relative; }
 .stepBadge {
   width: 46px; height: 46px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-  font-weight: 800; font-size: 15px; color: #fff; box-shadow: 0 4px 0 var(--shadow); flex-shrink: 0;
+  font-weight: 800; font-size: 15px; color: var(--on-accent); box-shadow: 0 4px 0 var(--shadow); flex-shrink: 0;
 }
 .stepText { font-size: 14px; font-weight: 600; color: var(--ink-soft); line-height: 1.6; }
 
@@ -275,7 +275,7 @@
 .journeyTrack { display: flex; flex-direction: column; align-items: center; width: 40px; flex-shrink: 0; }
 .journeyDot {
   width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
-  font-size: 16px; color: #fff; box-shadow: 0 3px 0 var(--shadow); z-index: 1;
+  font-size: 16px; color: var(--on-accent); box-shadow: 0 3px 0 var(--shadow); z-index: 1;
 }
 .journeyLine { width: 3px; flex: 1; min-height: 28px; background: var(--shadow); margin: 2px 0; }
 .journeyContent { padding-bottom: 28px; flex: 1; }
@@ -288,7 +288,8 @@
   background: linear-gradient(135deg, var(--purple) 0%, var(--blue) 100%); color: var(--on-accent);
   padding: 22px 26px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
 }
-.coachBadge { background: rgba(255,255,255,0.2); color: #fff; font-size: 11px; font-weight: 800; padding: 4px 12px; border-radius: 20px; }
+.coachBadge { background: rgba(255,255,255,0.3); color: var(--on-accent); font-size: 11px; font-weight: 800; padding: 4px 12px; border-radius: 20px; }
+.coachHeader .coachHeaderTitle { color: var(--on-accent); }
 .coachHeaderTitle { font-family: var(--font-baloo2), 'Baloo 2', cursive; font-weight: 800; font-size: 18px; }
 .coachHeaderSub { font-size: 13px; font-weight: 600; opacity: 0.92; }
 .coachTiles { display: grid; grid-template-columns: 1fr; gap: 16px; padding: 26px; }
@@ -309,3 +310,5 @@
 .ladderDot { width: 14px; height: 14px; border-radius: 50%; background: var(--shadow); }
 .ladderStepName { font-size: 11px; font-weight: 800; color: var(--ink-soft); white-space: nowrap; }
 .ladderConnector { width: 28px; height: 2px; background: var(--shadow); margin: 0 2px; }
+
+:global([data-theme='light']) .coachBadge { background: rgba(0,0,0,0.22); }

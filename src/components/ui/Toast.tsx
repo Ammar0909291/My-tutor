@@ -17,7 +17,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
   }, [])
 
   const iconMap = { success: '✓', error: '✕', info: 'ℹ' }
-  const colorMap = { success: 'var(--accent-green)', error: '#F85149', info: 'var(--accent-secondary)' }
+  const colorMap = { success: 'var(--accent-green)', error: 'var(--red)', info: 'var(--accent-secondary)' }
 
   return (
     <ToastContext.Provider value={{ show }}>

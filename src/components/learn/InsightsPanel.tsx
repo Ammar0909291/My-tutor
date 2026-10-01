@@ -136,7 +136,7 @@ export function InsightsPanel({ subjectSlug, topicSlug, onClose, onStartTargeted
         padding: '0 14px', gap: 8,
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <span style={{ fontSize: 14, color: '#F59E0B' }}>📊</span>
+          <span style={{ fontSize: 14, color: 'var(--yellow)' }}>📊</span>
           <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--text-primary)' }}>{t('insights_title')}</span>
           {data && (
             <span style={{ fontSize: 10, color: 'var(--text-dim)', fontFamily: 'var(--font-mono)' }}>
@@ -154,7 +154,7 @@ export function InsightsPanel({ subjectSlug, topicSlug, onClose, onStartTargeted
 
         {loading && (
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', gap: 12 }}>
-            <Loader2 size={24} style={{ animation: 'spin 1s linear infinite', color: '#F59E0B' }} />
+            <Loader2 size={24} style={{ animation: 'spin 1s linear infinite', color: 'var(--yellow)' }} />
             <p style={{ fontSize: 12, color: 'var(--text-secondary)' }}>{t('insights_loading')}</p>
           </div>
         )}
@@ -163,7 +163,7 @@ export function InsightsPanel({ subjectSlug, topicSlug, onClose, onStartTargeted
         {!loading && (
           <div style={{ marginBottom: 14 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 8 }}>
-              <Brain size={12} style={{ color: '#A78BFA' }} />
+              <Brain size={12} style={{ color: 'var(--purple)' }} />
               <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                 {t('insights_learner_intel')}
               </span>
@@ -265,14 +265,14 @@ export function InsightsPanel({ subjectSlug, topicSlug, onClose, onStartTargeted
             {data.gaps.length > 0 && (
               <div style={{ padding: 12, borderRadius: 10, background: 'var(--bg-base)', border: '1px solid var(--border-subtle)', marginBottom: 12 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 8 }}>
-                  <BookOpen size={12} style={{ color: '#79C0FF' }} />
+                  <BookOpen size={12} style={{ color: 'var(--blue)' }} />
                   <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                     {t('insights_gaps')}
                   </span>
                 </div>
                 {data.gaps.slice(0, 5).map((gap, i) => (
                   <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
-                    <span style={{ fontSize: 9, color: '#79C0FF', flexShrink: 0 }}>→</span>
+                    <span style={{ fontSize: 9, color: 'var(--blue)', flexShrink: 0 }}>→</span>
                     <div style={{ flex: 1 }}>
                       <span style={{ fontSize: 11, color: 'var(--text-primary)', fontFamily: 'var(--font-mono)' }}>
                         {gap.topicSlug}
@@ -314,7 +314,7 @@ export function InsightsPanel({ subjectSlug, topicSlug, onClose, onStartTargeted
             onClick={() => onStartTargetedPractice(data.recommendedDifficulty, data.recommendedFocusCategories)}
             style={{
               width: '100%', padding: '9px 0', borderRadius: 10, cursor: 'pointer',
-              background: '#F59E0B', color: '#fff', border: 'none', fontWeight: 700, fontSize: 13,
+              background: 'var(--yellow)', color: 'var(--on-accent)', border: 'none', fontWeight: 700, fontSize: 13,
               display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
             }}>
             🎯 {t('insights_start_targeted')}

@@ -121,7 +121,7 @@ export default function QuizClient({ subject, lang }: Props) {
       <CandyPage style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 16 }}>
         <EagleMascot variant="hero" size={72} />
         <p style={{ color: 'var(--candy-red)', fontSize: 16, fontWeight: 700 }}>{error}</p>
-        <CandyButton onClick={restart} style={{ padding: '10px 20px', borderRadius: 14, background: 'var(--candy-orange)', color: '#fff', fontWeight: 800 }}>
+        <CandyButton onClick={restart} style={{ padding: '10px 20px', borderRadius: 14, background: 'var(--candy-orange)', color: 'var(--on-accent)', fontWeight: 800 }}>
           {i18n(lang, 'quiz_retry')}
         </CandyButton>
         <a href="/dashboard" style={{ color: 'var(--candy-ink-soft)', fontSize: 14, fontWeight: 600 }}>{i18n(lang, 'quiz_back')}</a>
@@ -149,7 +149,7 @@ export default function QuizClient({ subject, lang }: Props) {
               : i18n(lang, 'quiz_retry_msg')}
           </p>
           <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-            <CandyButton onClick={restart} style={{ padding: '12px 24px', borderRadius: 14, background: 'var(--candy-orange)', color: '#fff', fontWeight: 800, fontSize: 14 }}>
+            <CandyButton onClick={restart} style={{ padding: '12px 24px', borderRadius: 14, background: 'var(--candy-orange)', color: 'var(--on-accent)', fontWeight: 800, fontSize: 14 }}>
               {i18n(lang, 'quiz_retry')}
             </CandyButton>
             <a href="/dashboard" style={{ padding: '12px 24px', borderRadius: 14, background: 'var(--candy-card)', color: 'var(--candy-ink)', textDecoration: 'none', fontWeight: 800, fontSize: 14, display: 'inline-block', boxShadow: '0 4px 0 var(--candy-shadow)' }}>
@@ -205,7 +205,7 @@ export default function QuizClient({ subject, lang }: Props) {
             let shadowColor = 'var(--candy-shadow)'
             if (selected !== null) {
               if (idx === q.correctIndex) { bg = 'rgba(88,204,2,0.16)'; color = '#46A302'; shadowColor = 'rgba(88,204,2,0.3)' }
-              else if (idx === selected) { bg = 'rgba(255,75,75,0.16)'; color = '#FF4B4B'; shadowColor = 'rgba(255,75,75,0.3)' }
+              else if (idx === selected) { bg = 'rgba(255,75,75,0.16)'; color = 'var(--red)'; shadowColor = 'rgba(255,75,75,0.3)' }
             }
             return (
               <CandyButton
@@ -235,7 +235,7 @@ export default function QuizClient({ subject, lang }: Props) {
             <Card style={{ padding: '16px', background: 'rgba(59,158,255,0.08)', marginBottom: 16 }}>
               <p style={{ fontSize: 13, color: 'var(--candy-blue)', lineHeight: 1.6, fontWeight: 600 }}>💡 {q.explanation}</p>
             </Card>
-            <CandyButton onClick={nextQuestion} style={{ width: '100%', padding: '14px', borderRadius: 16, background: 'var(--candy-orange)', color: '#fff', fontWeight: 800, fontSize: 15 }}>
+            <CandyButton onClick={nextQuestion} style={{ width: '100%', padding: '14px', borderRadius: 16, background: 'var(--candy-orange)', color: 'var(--on-accent)', fontWeight: 800, fontSize: 15 }}>
               {current + 1 < questions.length ? i18n(lang, 'quiz_next') : i18n(lang, 'quiz_finish')}
             </CandyButton>
           </div>

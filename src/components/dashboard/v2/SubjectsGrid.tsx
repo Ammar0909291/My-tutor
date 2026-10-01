@@ -51,7 +51,7 @@ export function SubjectsGrid({ subjects }: SubjectsGridProps) {
               style={{
                 position: 'absolute', top: 8, right: 8, zIndex: 1,
                 width: 24, height: 24, borderRadius: '50%', border: 'none',
-                background: 'rgba(0,0,0,0.35)', color: '#fff', fontSize: 14, lineHeight: 1,
+                background: 'var(--candy-ink)', color: 'var(--candy-card)', fontSize: 14, lineHeight: 1,
                 cursor: removingSlug === s.slug ? 'default' : 'pointer',
                 opacity: removingSlug === s.slug ? 0.5 : 1,
                 display: 'flex', alignItems: 'center', justifyContent: 'center',

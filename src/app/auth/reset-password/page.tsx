@@ -84,7 +84,7 @@ function ResetPasswordForm() {
   }
 
   const strength = password.length === 0 ? 0 : password.length < 8 ? 1 : password.length < 12 ? 2 : 3
-  const strengthColors = ['transparent', '#F85149', '#E3B341', '#56D364']
+  const strengthColors = ['transparent', 'var(--red)', '#E3B341', 'var(--green)']
   const strengthLabels = ['', t('reset_strength_weak'), t('reset_strength_medium'), t('reset_strength_strong')]
 
   return (

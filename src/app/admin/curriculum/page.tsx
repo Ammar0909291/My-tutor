@@ -16,7 +16,7 @@ export default function AdminCurriculumPage() {
           <div key={b.name} className="rounded-xl border p-5" style={{ background: 'var(--bg-elevated)', borderColor: 'var(--border-default)' }}>
             <div className="flex items-center justify-between mb-3">
               <h2 className="font-black text-base" style={{ color: 'var(--text-primary)' }}>{b.name}</h2>
-              <span className="text-xs px-2 py-0.5 rounded" style={{ background: 'var(--green)22', color: 'var(--green)' }}>Grades {b.grades}</span>
+              <span className="text-xs px-2 py-0.5 rounded" style={{ background: 'color-mix(in srgb, var(--green) 13%, transparent)', color: 'var(--green)' }}>Grades {b.grades}</span>
             </div>
             <div className="flex gap-2 flex-wrap">
               {b.subjects.map(s => (

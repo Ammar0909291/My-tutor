@@ -35,7 +35,7 @@ export default async function UserDetailPage({ params }: { params: Promise<{ id:
         {row('ID', <span className="font-mono text-xs">{user.id}</span>)}
         {row('Email', user.email)}
         {row('Name', user.name ?? '—')}
-        {row('Status', badge(user.isDeleted ? 'Disabled' : 'Active', user.isDeleted ? '#F85149' : 'var(--green)'))}
+        {row('Status', badge(user.isDeleted ? 'Disabled' : 'Active', user.isDeleted ? 'var(--red)' : 'var(--green)'))}
         {row('XP', user.xpPoints.toLocaleString())}
         {row('Streak', `${user.profile?.streakDays ?? 0} days`)}
         {row('Sessions', user.profile?.totalSessions ?? 0)}

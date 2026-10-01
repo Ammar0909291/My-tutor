@@ -138,9 +138,9 @@ import { QUICK_ACTIONS } from '@/lib/learn/quickActions'
 function resolveVoice(choice: string): VoiceType { return VOICE_MAP[choice] ?? 'male' }
 
 const LANG_BADGE: Record<string, { label: string; accent: string }> = {
-  c:          { label: 'C',          accent: '#F78166' },
-  cpp:        { label: 'C++',        accent: '#79C0FF' },
-  python:     { label: 'Python',     accent: '#56D364' },
+  c:          { label: 'C',          accent: 'var(--coral)' },
+  cpp:        { label: 'C++',        accent: 'var(--blue)' },
+  python:     { label: 'Python',     accent: 'var(--green)' },
   english:    { label: 'English',    accent: '#E3B341' },
   javascript: { label: 'JavaScript', accent: '#F0DB4F' },
   typescript: { label: 'TypeScript', accent: '#3178C6' },
@@ -148,13 +148,13 @@ const LANG_BADGE: Record<string, { label: string; accent: string }> = {
   csharp:     { label: 'C#',         accent: '#A179DC' },
   go:         { label: 'Go',         accent: '#00ADD8' },
   rust:       { label: 'Rust',       accent: '#DEA584' },
-  russian:    { label: 'Russian',    accent: '#F78166' },
+  russian:    { label: 'Russian',    accent: 'var(--coral)' },
   hindi:      { label: 'Hindi',      accent: '#FF9933' },
   german:     { label: 'German',     accent: '#FFCE00' },
   arabic:     { label: 'Arabic',     accent: '#2EA043' },
-  mathematics:{ label: 'Math',       accent: '#A78BFA' },
-  physics:    { label: 'Physics',    accent: '#79C0FF' },
-  chemistry:  { label: 'Chemistry',  accent: '#F78166' },
+  mathematics:{ label: 'Math',       accent: 'var(--purple)' },
+  physics:    { label: 'Physics',    accent: 'var(--blue)' },
+  chemistry:  { label: 'Chemistry',  accent: 'var(--coral)' },
   biology:    { label: 'Biology',    accent: '#2EA043' },
 }
 // Subjects that aren't programming languages render their lesson canvas as markdown/plaintext.
@@ -163,7 +163,7 @@ const NON_CODE_SUBJECTS = ['english', 'russian', 'hindi', 'german', 'arabic', 'm
 // ─── "My Tutor" redesign tokens (Learn window only — approved exception to the
 // standing "don't redesign UI" rule, scoped to this screen) ───────────────────
 // Kept as literal hex (not var(--indigo)) because many call sites append a hex
-// alpha suffix directly (e.g. `${UI.indigo}18`) — CSS custom properties can't be
+// alpha suffix directly (e.g. `color-mix(in srgb, ${UI.indigo} 9%, transparent)`) — CSS custom properties can't be
 // suffixed that way. --indigo/--indigo-hover in src/styles/tokens.css are the
 // canonical theme-token definition of this same color; keep both in sync.
 const UI = {
@@ -171,10 +171,12 @@ const UI = {
   // earlier generic purple-on-dark "AI chat" accent. Not theme-reactive by
   // itself (same as before this change), but sits legibly on both the
   // whiteboard and chalkboard surfaces the CSS tokens above now define.
-  indigo: '#C97A22', indigoDark: '#A8611A',
-  green: '#22C55E', greenBg: 'rgba(34,197,94,0.1)', greenBorder: 'rgba(34,197,94,0.3)',
-  red: '#EF4444', redBg: 'rgba(239,68,68,0.08)', redBorder: 'rgba(239,68,68,0.25)',
-  amber: '#F59E0B',
+  // 2026-10-01: was fixed amber hexes ('#C97A22'/'#A8611A') — 3.4:1 under white button text and a
+  // poor mark on the chalkboard. Now the theme brand token, so it is chalk-yellow on dark / marker-green on light.
+  indigo: 'var(--coral)', indigoDark: 'var(--coral-hover)',
+  green: 'var(--green)', greenBg: 'rgba(34,197,94,0.1)', greenBorder: 'rgba(34,197,94,0.3)',
+  red: 'var(--red)', redBg: 'rgba(239,68,68,0.08)', redBorder: 'rgba(239,68,68,0.25)',
+  amber: 'var(--yellow)',
   card: 'var(--bg-surface)', page: 'var(--bg-void)', border: 'var(--border-subtle)',
   textPrimary: 'var(--text-primary)', textSecondary: 'var(--text-secondary)', textDim: 'var(--text-dim)',
 }
@@ -468,7 +470,7 @@ function LessonDocument({ text }: { text: string }) {
           return (
             <div key={idx} style={{
               margin: '16px 0', padding: '14px 16px', borderRadius: 12,
-              background: cs.bg, border: `1px solid ${cs.color}33`,
+              background: cs.bg, border: `1px solid color-mix(in srgb, ${cs.color} 20%, transparent)`,
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 8, fontSize: 14.4, fontWeight: 700, color: cs.color, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                 <span style={{ fontSize: 16.8 }}>{cs.icon}</span>{b.lang ? b.lang : cs.label}
@@ -565,7 +567,7 @@ function MemoryBadge() {
         fontWeight: 700,
         letterSpacing: 0.5,
         color: '#fff',
-        background: 'linear-gradient(135deg, #16A34A 0%, #15803D 100%)',
+        background: 'linear-gradient(135deg, #15803D 0%, #166534 100%)',
         border: '1px solid rgba(255,255,255,0.18)',
         boxShadow: '0 0 6px rgba(22,163,74,0.35), inset 0 1px 0 rgba(255,255,255,0.25)',
         cursor: 'help',
@@ -904,7 +906,7 @@ function Panel({ children, style, accentColor = 'var(--coral)' }: { children: Re
   return (
     <Card
       style={{
-        boxShadow: `0 0 0 1px ${accentColor}22, 0 1px 3px rgba(0,0,0,0.06)`,
+        boxShadow: `0 0 0 1px color-mix(in srgb, ${accentColor} 13%, transparent), 0 1px 3px rgba(0,0,0,0.06)`,
         border: '1px solid var(--panel-border)',
         borderRadius: 16,
         display: 'flex',
@@ -1519,7 +1521,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   // matching how dev communities always refer to them) — localize only that one.
   const badge = subjectSlug === 'english'
     ? { ...LANG_BADGE.english, label: t('subj_english_label') }
-    : LANG_BADGE[subjectSlug] ?? { label: subjectSlug.toUpperCase(), accent: '#F78166' }
+    : LANG_BADGE[subjectSlug] ?? { label: subjectSlug.toUpperCase(), accent: 'var(--coral)' }
   const filename = FILENAME[subjectSlug] ?? 'lesson.txt'
   // Eagle UI alignment sprint: non-programming subjects render the lesson
   // canvas as a formatted learning document instead of a raw-markdown code
@@ -1952,7 +1954,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       colors: {
         'editor.background':                 '#0D1117',
         'editor.foreground':                 '#F0F6FC',
-        'editorCursor.foreground':           '#F78166',
+        'editorCursor.foreground':           'var(--coral)',
         'editorLineNumber.foreground':       '#484F58',
         'editorLineNumber.activeForeground': '#8B949E',
         'editor.selectionBackground':        '#264F78',
@@ -3713,7 +3715,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
           <div style={{ display: 'flex', gap: 12, justifyContent: 'center', alignItems: 'center' }}>
             <button
               onClick={retryInit}
-              style={{ padding: '9px 20px', borderRadius: 12, fontSize: 16.2, fontWeight: 700, cursor: 'pointer', background: UI.indigo, color: '#fff', border: 'none' }}>
+              style={{ padding: '9px 20px', borderRadius: 12, fontSize: 16.2, fontWeight: 700, cursor: 'pointer', background: UI.indigo, color: 'var(--on-accent)', border: 'none' }}>
               {t('lesson_connect_retry')}
             </button>
             <Link href="/dashboard" className="text-sm" style={{ color: 'var(--coral)' }}>{t('lesson_back_base')}</Link>
@@ -3759,7 +3761,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
               display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4,
               padding: '8px 4px', borderRadius: 10, width: '100%', cursor: 'pointer',
               color: item.active ? UI.indigo : 'var(--text-dim)',
-              background: item.active ? `${UI.indigo}14` : 'transparent',
+              background: item.active ? `color-mix(in srgb, ${UI.indigo} 8%, transparent)` : 'transparent',
             }}>
               {item.icon}
               <span style={{ fontSize: 11.4, fontWeight: item.active ? 700 : 500, textAlign: 'center' }}>{item.label}</span>
@@ -3906,7 +3908,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                   onClick={confirmLessonSwitch}
                   style={{
                     padding: '8px 18px', borderRadius: 8, border: 'none',
-                    background: UI.indigo, color: '#fff',
+                    background: UI.indigo, color: 'var(--on-accent)',
                     fontSize: 15.6, fontWeight: 600, cursor: 'pointer',
                   }}
                 >
@@ -3943,7 +3945,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
           <div style={{
             width: 32, height: 32, borderRadius: 9, flexShrink: 0,
             background: `linear-gradient(135deg, ${UI.indigo}, ${UI.indigoDark})`,
-            display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff',
+            display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--on-accent)',
           }}>
             <BookOpen size={17} />
           </div>
@@ -3961,7 +3963,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
             const otherSubjects = (subjects ?? []).filter((s) => s.slug !== subjectSlug)
             if (otherSubjects.length === 0) {
               return (
-                <span style={{ padding: '2px 10px', borderRadius: 20, fontSize: 13.2, fontWeight: 700, background: `${badge.accent}22`, color: badge.accent, border: `1px solid ${badge.accent}44`, flexShrink: 0 }}>
+                <span style={{ padding: '2px 10px', borderRadius: 20, fontSize: 13.2, fontWeight: 700, background: `color-mix(in srgb, ${badge.accent} 13%, transparent)`, color: badge.accent, border: `1px solid color-mix(in srgb, ${badge.accent} 27%, transparent)`, flexShrink: 0 }}>
                   {badge.label}
                 </span>
               )
@@ -3978,7 +3980,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                   style={{
                     display: 'flex', alignItems: 'center', gap: 4, cursor: 'pointer',
                     padding: '2px 8px 2px 10px', borderRadius: 20, fontSize: 13.2, fontWeight: 700,
-                    background: `${badge.accent}22`, color: badge.accent, border: `1px solid ${badge.accent}44`,
+                    background: `color-mix(in srgb, ${badge.accent} 13%, transparent)`, color: badge.accent, border: `1px solid color-mix(in srgb, ${badge.accent} 27%, transparent)`,
                   }}>
                   {badge.label}
                   <ChevronDown size={12} style={{ transform: subjectMenuOpen ? 'rotate(180deg)' : 'none', transition: 'transform 150ms' }} />
@@ -4002,7 +4004,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                       {otherSubjects.map((s) => {
                         const b = s.slug === 'english'
                           ? { ...LANG_BADGE.english, label: t('subj_english_label') }
-                          : LANG_BADGE[s.slug] ?? { label: s.name, accent: '#F78166' }
+                          : LANG_BADGE[s.slug] ?? { label: s.name, accent: 'var(--coral)' }
                         return (
                           <Link key={s.slug} href={`/learn?subject=${s.slug}`}
                             onClick={() => setSubjectMenuOpen(false)}
@@ -4040,9 +4042,9 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
               style={{
                 display: 'inline-flex', alignItems: 'center', gap: 5, height: 30, padding: '0 10px', borderRadius: 8,
                 fontSize: 13.8, fontWeight: 700, cursor: 'pointer', whiteSpace: 'nowrap', flexShrink: 0,
-                background: langMenuOpen ? `${UI.indigo}18` : 'var(--bg-elevated)',
+                background: langMenuOpen ? `color-mix(in srgb, ${UI.indigo} 9%, transparent)` : 'var(--bg-elevated)',
                 color: langMenuOpen ? UI.indigo : 'var(--text-secondary)',
-                border: `1px solid ${langMenuOpen ? `${UI.indigo}55` : 'var(--border-default)'}`,
+                border: `1px solid ${langMenuOpen ? `color-mix(in srgb, ${UI.indigo} 33%, transparent)` : 'var(--border-default)'}`,
                 transition: 'all 150ms',
               }}>
               <Globe2 size={13} />
@@ -4106,9 +4108,9 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 display: 'inline-flex', alignItems: 'center', gap: 5,
                 height: 30, padding: '0 10px', borderRadius: 8, fontSize: 13.8, fontWeight: 700, cursor: 'pointer',
                 whiteSpace: 'nowrap', flexShrink: 0,
-                background: speedMenuOpen ? `${UI.indigo}18` : 'var(--bg-elevated)',
+                background: speedMenuOpen ? `color-mix(in srgb, ${UI.indigo} 9%, transparent)` : 'var(--bg-elevated)',
                 color: speedMenuOpen ? UI.indigo : 'var(--text-secondary)',
-                border: `1px solid ${speedMenuOpen ? `${UI.indigo}55` : 'var(--border-default)'}`,
+                border: `1px solid ${speedMenuOpen ? `color-mix(in srgb, ${UI.indigo} 33%, transparent)` : 'var(--border-default)'}`,
                 transition: 'all 150ms',
               }}>
               <Gauge size={13} />
@@ -4130,7 +4132,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                     <button key={s} onClick={() => handleSpeedChange(s)}
                       style={{
                         padding: '8px 16px', fontSize: 15, fontWeight: 600, textAlign: 'left', cursor: 'pointer',
-                        background: speed === s ? `${UI.indigo}18` : 'transparent',
+                        background: speed === s ? `color-mix(in srgb, ${UI.indigo} 9%, transparent)` : 'transparent',
                         color: speed === s ? UI.indigo : 'var(--text-primary)',
                       }}
                       onMouseEnter={(e) => { if (speed !== s) (e.currentTarget as HTMLButtonElement).style.background = 'var(--bg-hover)' }}
@@ -4153,7 +4155,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
             aria-label={t('lesson_profile_settings')}
             style={{
               width: 30, height: 30, borderRadius: '50%', flexShrink: 0,
-              background: UI.indigo, color: '#fff', fontSize: 15, fontWeight: 800,
+              background: UI.indigo, color: 'var(--on-accent)', fontSize: 15, fontWeight: 800,
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               textDecoration: 'none', cursor: 'pointer',
             }}>
@@ -4280,14 +4282,14 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 background: 'rgba(121,192,255,0.08)',
                 display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 6,
               }}>
-                <span style={{ fontSize: 12, fontWeight: 700, color: '#79C0FF' }}>
+                <span style={{ fontSize: 12, fontWeight: 700, color: 'var(--blue)' }}>
                   {t('revision_mode')}: {revisionTopic.lessonTitle}
                 </span>
                 <button
                   onClick={() => setRevisionTopic(null)}
                   style={{
                     fontSize: 10.8, padding: '2px 6px', borderRadius: 4, cursor: 'pointer', flexShrink: 0,
-                    background: 'rgba(121,192,255,0.12)', color: '#79C0FF',
+                    background: 'rgba(121,192,255,0.12)', color: 'var(--blue)',
                     border: '1px solid rgba(121,192,255,0.3)', fontWeight: 600,
                   }}>
                   {t('revision_end')}
@@ -4297,7 +4299,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
 
             {/* Goal card for current lesson */}
             {currentLessonData?.lessonGoal && (
-              <div style={{ padding: '10px 12px', borderBottom: '1px solid var(--border-subtle)', background: `${UI.indigo}0c` }}>
+              <div style={{ padding: '10px 12px', borderBottom: '1px solid var(--border-subtle)', background: `color-mix(in srgb, ${UI.indigo} 5%, transparent)` }}>
                 <p style={{ fontSize: 12, color: UI.indigo, textTransform: 'uppercase', letterSpacing: '0.08em', fontWeight: 700 }}>
                   🎯 {t('lesson_goal_label')}
                 </p>
@@ -4338,7 +4340,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                       autoFocus
                       style={{
                         width: '100%', padding: '8px 10px', borderRadius: 8, fontSize: 14.4, fontWeight: 700, cursor: 'pointer',
-                        background: UI.indigo, color: '#fff', border: 'none',
+                        background: UI.indigo, color: 'var(--on-accent)', border: 'none',
                       }}>
                       📚 {t('lesson_continue_learning')}
                     </button>
@@ -4358,7 +4360,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                       : setSkipConfirm(true)}
                     style={{
                       width: '100%', padding: '8px 10px', borderRadius: 8, fontSize: 14.4, fontWeight: 700, cursor: 'pointer',
-                      background: UI.indigo, color: '#fff', border: 'none',
+                      background: UI.indigo, color: 'var(--on-accent)', border: 'none',
                     }}>
                     {t('complete_lesson_btn')}
                   </button>
@@ -4432,7 +4434,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                       transition: 'transform 200ms', display: 'inline-block',
                     }}>▶</span>
                     <span style={{
-                      background: unitComplete ? 'rgba(63,185,80,0.15)' : `${UI.indigo}18`,
+                      background: unitComplete ? 'rgba(63,185,80,0.15)' : `color-mix(in srgb, ${UI.indigo} 9%, transparent)`,
                       color: unitComplete ? 'var(--green)' : UI.indigo,
                       borderRadius: 4, padding: '1px 5px', fontSize: 10.8, fontWeight: 700, flexShrink: 0,
                     }}>{unitComplete ? '✅' : `U${unit.number}`}</span>
@@ -4474,8 +4476,8 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                           : '○'
 
                         const iconColor = (isMastered || isCompleted) ? 'var(--green)'
-                          : isRevision ? '#79C0FF'
-                          : isSkipped ? '#F59E0B'
+                          : isRevision ? 'var(--blue)'
+                          : isSkipped ? 'var(--yellow)'
                           : isCurrent ? UI.indigo
                           : 'var(--text-dim)'
 
@@ -4495,12 +4497,12 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                                 display: 'flex', alignItems: 'flex-start', gap: 11,
                                 padding: '12px 14px', borderRadius: 12,
                                 cursor: (canNavigate || isLocked) ? 'pointer' : 'default',
-                                background: isCurrent ? `${UI.indigo}14`
+                                background: isCurrent ? `color-mix(in srgb, ${UI.indigo} 8%, transparent)`
                                   : isRevision ? 'rgba(121,192,255,0.07)'
                                   : isSkipWarningShown ? 'rgba(245,158,11,0.07)'
                                   : isLockExpanded ? 'rgba(239,68,68,0.05)'
                                   : 'transparent',
-                                border: isCurrent ? `1.5px solid ${UI.indigo}66`
+                                border: isCurrent ? `1.5px solid color-mix(in srgb, ${UI.indigo} 40%, transparent)`
                                   : isRevision ? '1px solid rgba(121,192,255,0.2)'
                                   : isSkipWarningShown ? '1px solid rgba(245,158,11,0.25)'
                                   : isLockExpanded ? '1px solid rgba(239,68,68,0.15)'
@@ -4517,8 +4519,8 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                                   fontSize: 15, lineHeight: 1.35,
                                   fontWeight: isCurrent ? 600 : 500,
                                   color: (isCompleted || isMastered) ? 'var(--border-emphasis)'
-                                    : isRevision ? '#79C0FF'
-                                    : isSkipped ? '#F59E0B'
+                                    : isRevision ? 'var(--blue)'
+                                    : isSkipped ? 'var(--yellow)'
                                     : isCurrent ? UI.indigo
                                     : isPrevious ? 'var(--text-secondary)'
                                     : 'var(--text-dim)',
@@ -4531,7 +4533,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                                     </span>
                                   )}
                                   {isRevision && topicData?.revisionCount && topicData.revisionCount > 0 && (
-                                    <span style={{ marginLeft: 5, fontSize: 11.7, color: '#79C0FF', fontWeight: 600 }}>
+                                    <span style={{ marginLeft: 5, fontSize: 11.7, color: 'var(--blue)', fontWeight: 600 }}>
                                       ×{topicData.revisionCount}
                                     </span>
                                   )}
@@ -4559,7 +4561,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                                     <>
                                       <span style={{
                                         fontSize: 10.8, fontWeight: 700, padding: '1px 6px', borderRadius: 10,
-                                        background: `${UI.indigo}18`, color: UI.indigo,
+                                        background: `color-mix(in srgb, ${UI.indigo} 9%, transparent)`, color: UI.indigo,
                                       }}>
                                         {t('lesson_current_label')}
                                       </span>
@@ -4576,8 +4578,8 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                                           }}
                                           style={{
                                             fontSize: 10.8, padding: '1px 5px', borderRadius: 4, cursor: 'pointer',
-                                            background: `${UI.indigo}18`, color: UI.indigo,
-                                            border: `1px solid ${UI.indigo}4d`, fontWeight: 600,
+                                            background: `color-mix(in srgb, ${UI.indigo} 9%, transparent)`, color: UI.indigo,
+                                            border: `1px solid color-mix(in srgb, ${UI.indigo} 30%, transparent)`, fontWeight: 600,
                                           }}>
                                           {t('assess_start')}
                                         </button>
@@ -4592,7 +4594,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                                       onClick={(e) => { e.stopPropagation(); startRevision(lesson) }}
                                       style={{
                                         fontSize: 10.8, padding: '1px 5px', borderRadius: 4, cursor: 'pointer',
-                                        background: 'rgba(121,192,255,0.1)', color: '#79C0FF',
+                                        background: 'rgba(121,192,255,0.1)', color: 'var(--blue)',
                                         border: '1px solid rgba(121,192,255,0.3)', fontWeight: 600,
                                       }}>
                                       {t('revision_start')}
@@ -4603,7 +4605,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                                       onClick={(e) => { e.stopPropagation(); initiateSkip(lesson) }}
                                       style={{
                                         fontSize: 10.8, padding: '1px 5px', borderRadius: 4, cursor: 'pointer',
-                                        background: 'rgba(245,158,11,0.08)', color: '#F59E0B',
+                                        background: 'rgba(245,158,11,0.08)', color: 'var(--yellow)',
                                         border: '1px solid rgba(245,158,11,0.25)', fontWeight: 600,
                                       }}>
                                       {t('skip_topic')}
@@ -4614,7 +4616,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                                       onClick={(e) => { e.stopPropagation(); lesson.topicSlug && resumeTopic(lesson.topicSlug) }}
                                       style={{
                                         fontSize: 10.8, padding: '1px 5px', borderRadius: 4, cursor: 'pointer',
-                                        background: 'rgba(245,158,11,0.1)', color: '#F59E0B',
+                                        background: 'rgba(245,158,11,0.1)', color: 'var(--yellow)',
                                         border: '1px solid rgba(245,158,11,0.3)', fontWeight: 600,
                                       }}>
                                       {t('skip_resume')}
@@ -4659,7 +4661,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                                 background: 'rgba(245,158,11,0.07)',
                                 border: '1px solid rgba(245,158,11,0.25)',
                               }}>
-                                <div style={{ fontSize: 10.8, fontWeight: 700, color: '#F59E0B', marginBottom: 4 }}>
+                                <div style={{ fontSize: 10.8, fontWeight: 700, color: 'var(--yellow)', marginBottom: 4 }}>
                                   ⚠ {t('skip_warning')}
                                 </div>
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: 2, marginBottom: 6 }}>
@@ -4672,7 +4674,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                                     onClick={() => confirmSkip(skipWarning.topicSlug)}
                                     style={{
                                       fontSize: 10.8, padding: '2px 7px', borderRadius: 4, cursor: 'pointer',
-                                      background: 'rgba(245,158,11,0.15)', color: '#F59E0B',
+                                      background: 'rgba(245,158,11,0.15)', color: 'var(--yellow)',
                                       border: '1px solid rgba(245,158,11,0.4)', fontWeight: 700,
                                     }}>
                                     {t('skip_confirm')}
@@ -4751,12 +4753,12 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
              actions) is unchanged. */}
         <div className={isNotebook ? 'hidden' : 'hidden md:contents'}
           style={maximizedPanel && maximizedPanel !== 'code' ? { display: 'none' } : undefined}>
-        <Panel accentColor={isNotebook ? UI.indigo : '#79C0FF'} style={{ order: isNotebook ? 3 : 2 }}>
+        <Panel accentColor={isNotebook ? UI.indigo : 'var(--blue)'} style={{ order: isNotebook ? 3 : 2 }}>
           <div style={{ flexDirection: 'column', height: '100%' }} className="hidden md:flex">
             <>
             {/* Header */}
             <PanelHeader>
-              <span style={{ padding: '2px 8px', borderRadius: 6, fontSize: 12, fontWeight: 700, background: `${badge.accent}22`, color: badge.accent }}>{badge.label}</span>
+              <span style={{ padding: '2px 8px', borderRadius: 6, fontSize: 12, fontWeight: 700, background: `color-mix(in srgb, ${badge.accent} 13%, transparent)`, color: badge.accent }}>{badge.label}</span>
               <span style={{ fontSize: 14.4, fontFamily: 'var(--font-mono)', color: 'var(--text-secondary)' }}>{filename}</span>
               <span style={{ color: 'var(--coral)', fontSize: 14.4, animation: 'blink 1s infinite' }}>_</span>
               <div style={{ flex: 1 }} />
@@ -4912,7 +4914,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
              as always. ══ */}
         <div className={maximizedPanel === 'curriculum' ? 'hidden md:contents' : 'contents'}
           style={maximizedPanel && maximizedPanel !== 'chat' && maximizedPanel !== 'curriculum' ? { display: 'none' } : undefined}>
-        <Panel accentColor={isNotebook ? UI.indigo : '#3FB950'} style={{ order: isNotebook ? 2 : 3 }}>
+        <Panel accentColor={isNotebook ? UI.indigo : 'var(--green)'} style={{ order: isNotebook ? 2 : 3 }}>
           <div style={{ flexDirection: 'column', height: '100%', position: 'relative' }} className="flex">
 
             {/* Header (taller) */}
@@ -5001,7 +5003,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                   aria-pressed={bookmarkedLessons.has(currentLessonData.order)}
                   style={{
                     width: 30, height: 30, borderRadius: 8, flexShrink: 0, border: '1px solid var(--border-default)',
-                    background: bookmarkedLessons.has(currentLessonData.order) ? `${UI.indigo}18` : 'transparent',
+                    background: bookmarkedLessons.has(currentLessonData.order) ? `color-mix(in srgb, ${UI.indigo} 9%, transparent)` : 'transparent',
                     color: bookmarkedLessons.has(currentLessonData.order) ? UI.indigo : 'var(--text-dim)',
                     cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
                   }}>
@@ -5021,7 +5023,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 onClick={() => setMaximizedPanel('curriculum')}
                 title={t('lesson_roadmap')}
                 aria-label={t('lesson_roadmap')}
-                style={{ height: 30, padding: '0 12px', borderRadius: 999, border: `1px solid ${UI.indigo}40`, background: `${UI.indigo}14`, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 5, color: UI.indigo, fontSize: 12.6, fontWeight: 700, flexShrink: 0 }}>
+                style={{ height: 30, padding: '0 12px', borderRadius: 999, border: `1px solid color-mix(in srgb, ${UI.indigo} 25%, transparent)`, background: `color-mix(in srgb, ${UI.indigo} 8%, transparent)`, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 5, color: UI.indigo, fontSize: 12.6, fontWeight: 700, flexShrink: 0 }}>
                 <ListChecks size={14} />
                 <span className="hidden sm:inline">{t('lesson_roadmap')}</span>
               </button>
@@ -5230,7 +5232,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                       }}
                       style={{
                         padding: '10px 22px', borderRadius: 12, fontSize: 16.2, fontWeight: 700, cursor: 'pointer',
-                        background: UI.indigo, color: '#fff', border: 'none', marginTop: 4,
+                        background: UI.indigo, color: 'var(--on-accent)', border: 'none', marginTop: 4,
                       }}>
                       {isResume ? t('resume_lesson_btn') : t('start_lesson_btn')}
                     </button>
@@ -5255,7 +5257,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                   <p style={{ fontSize: 16.2, color: 'var(--text-secondary)', maxWidth: 320 }}>{t('lesson_connect_failed')}</p>
                   <button
                     onClick={retryInit}
-                    style={{ padding: '10px 22px', borderRadius: 12, fontSize: 16.2, fontWeight: 700, cursor: 'pointer', background: UI.indigo, color: '#fff', border: 'none' }}>
+                    style={{ padding: '10px 22px', borderRadius: 12, fontSize: 16.2, fontWeight: 700, cursor: 'pointer', background: UI.indigo, color: 'var(--on-accent)', border: 'none' }}>
                     {t('lesson_connect_retry')}
                   </button>
                 </div>
@@ -5453,7 +5455,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                         borderRadius: 14,
                         border: hasCanvasVisual
                           ? '1px solid transparent'
-                          : `1px solid ${isSpeaking ? `${UI.indigo}55` : 'var(--border-subtle)'}`,
+                          : `1px solid ${isSpeaking ? `color-mix(in srgb, ${UI.indigo} 33%, transparent)` : 'var(--border-subtle)'}`,
                         // Canvas mode: the 2cm indent moved to `styles.canvasBubble`
                         // (applied via className above) because an inline style
                         // cannot carry a media query, and on a phone that indent
@@ -5624,7 +5626,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                       <div style={{ animation: 'slideInRight 200ms ease-out both', maxWidth: '75%' }}>
                         <div style={{
                           padding: '12px 14px', borderRadius: '18px 18px 4px 18px', fontSize: 15.6, lineHeight: 1.5,
-                          background: `linear-gradient(135deg, ${UI.indigo}, ${UI.indigoDark})`, color: '#fff',
+                          background: `linear-gradient(135deg, ${UI.indigo}, ${UI.indigoDark})`, color: 'var(--on-accent)',
                         }}>
                           <MessageContent text={displayText} isUser={true} />
                         </div>
@@ -5658,7 +5660,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
               {masteryState?.gatePending && !isStreaming && currentLessonData && (
                 <div style={{
                   alignSelf: 'flex-start', maxWidth: '90%', padding: '10px 12px', borderRadius: 12,
-                  background: `${UI.indigo}0c`, border: `1px solid ${UI.indigo}33`,
+                  background: `color-mix(in srgb, ${UI.indigo} 5%, transparent)`, border: `1px solid color-mix(in srgb, ${UI.indigo} 20%, transparent)`,
                   display: 'flex', flexDirection: 'column', gap: 8,
                 }}>
                   <p style={{ fontSize: 14.4, color: 'var(--text-primary)', lineHeight: 1.5 }}>
@@ -5673,7 +5675,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                       disabled={isStreaming || !sessionId}
                       style={{
                         padding: '7px 14px', borderRadius: 8, fontSize: 14.4, fontWeight: 700, cursor: 'pointer',
-                        background: UI.indigo, color: '#fff', border: 'none',
+                        background: UI.indigo, color: 'var(--on-accent)', border: 'none',
                       }}>
                       📚 {t('lesson_continue_learning')}
                     </button>
@@ -5875,7 +5877,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 >
                   <span style={{
                     fontSize: 10.8, fontWeight: 800, letterSpacing: '0.06em', textTransform: 'uppercase',
-                    color: UI.indigo, background: `${UI.indigo}18`, padding: '2px 8px', borderRadius: 20,
+                    color: UI.indigo, background: `color-mix(in srgb, ${UI.indigo} 9%, transparent)`, padding: '2px 8px', borderRadius: 20,
                   }}>
                     {t('lc_quick_check_label')}
                   </span>
@@ -6086,7 +6088,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                           display: 'flex', alignItems: 'center', gap: 8,
                           minHeight: 40, padding: '9px 12px', borderRadius: 10, width: '100%',
                           border: `1px solid ${practiceOpen ? UI.indigo : 'var(--border-default)'}`,
-                          background: practiceOpen ? `${UI.indigo}14` : 'var(--bg-elevated)',
+                          background: practiceOpen ? `color-mix(in srgb, ${UI.indigo} 8%, transparent)` : 'var(--bg-elevated)',
                           color: practiceOpen ? UI.indigo : 'var(--text-secondary)', fontSize: 14.4, fontWeight: 600,
                           textAlign: 'left', cursor: 'pointer',
                         }}
@@ -6106,7 +6108,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                           display: 'flex', alignItems: 'center', gap: 8,
                           minHeight: 40, padding: '9px 12px', borderRadius: 10, width: '100%',
                           border: `1px solid ${insightsOpen ? UI.indigo : 'var(--border-default)'}`,
-                          background: insightsOpen ? `${UI.indigo}14` : 'var(--bg-elevated)',
+                          background: insightsOpen ? `color-mix(in srgb, ${UI.indigo} 8%, transparent)` : 'var(--bg-elevated)',
                           color: insightsOpen ? UI.indigo : 'var(--text-secondary)', fontSize: 14.4, fontWeight: 600,
                           textAlign: 'left', cursor: 'pointer',
                         }}
@@ -6134,7 +6136,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                             style={{
                               display: 'flex', alignItems: 'center', gap: 8,
                               minHeight: 40, padding: '9px 12px', borderRadius: 10, width: '100%',
-                              border: `1px solid ${UI.indigo}44`, background: `${UI.indigo}14`, color: UI.indigo,
+                              border: `1px solid color-mix(in srgb, ${UI.indigo} 27%, transparent)`, background: `color-mix(in srgb, ${UI.indigo} 8%, transparent)`, color: UI.indigo,
                               fontSize: 14.4, fontWeight: 600, textAlign: 'left',
                               cursor: isStreaming || !sessionId ? 'not-allowed' : 'pointer',
                               opacity: isStreaming || !sessionId ? 0.5 : 1,
@@ -6151,7 +6153,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                             style={{
                               display: 'flex', alignItems: 'center', gap: 8,
                               minHeight: 40, padding: '9px 12px', borderRadius: 10, width: '100%',
-                              border: `1px solid ${UI.red}44`, background: UI.redBg, color: UI.red,
+                              border: `1px solid color-mix(in srgb, ${UI.red} 27%, transparent)`, background: UI.redBg, color: UI.red,
                               fontSize: 14.4, fontWeight: 600, textAlign: 'left',
                               cursor: isStreaming || !sessionId ? 'not-allowed' : 'pointer',
                               opacity: isStreaming || !sessionId ? 0.5 : 1,
@@ -6206,7 +6208,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                       flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
                       height: 34, borderRadius: 12,
                       border: '1px solid var(--border-default)',
-                      background: actionsMenuOpen ? `${UI.indigo}14` : 'var(--bg-surface)',
+                      background: actionsMenuOpen ? `color-mix(in srgb, ${UI.indigo} 8%, transparent)` : 'var(--bg-surface)',
                       color: actionsMenuOpen ? UI.indigo : 'var(--text-secondary)',
                       fontSize: 13.2, fontWeight: 700, cursor: 'pointer',
                     }}
@@ -6249,7 +6251,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                   flex: 1, display: 'flex', alignItems: 'center', gap: 4, padding: '4px 6px', borderRadius: 22,
                   background: 'var(--bg-surface)',
                   border: `1px solid ${micState === 'recording' ? UI.red : input ? UI.indigo : 'var(--border-default)'}`,
-                  boxShadow: input ? `0 0 0 3px ${UI.indigo}18` : 'none',
+                  boxShadow: input ? `0 0 0 3px color-mix(in srgb, ${UI.indigo} 9%, transparent)` : 'none',
                   transition: 'border-color 150ms, box-shadow 150ms',
                 }}>
                   <input ref={fileInputRef} type="file" accept=".py,.c,.cpp,.txt" className="hidden" onChange={handleFileSelect} />
@@ -6321,7 +6323,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                   aria-label={t('lesson_send')}
                   style={{
                     width: 40, height: 40, borderRadius: '50%', flexShrink: 0, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', border: 'none',
-                    background: UI.indigo, color: '#fff',
+                    background: UI.indigo, color: 'var(--on-accent)',
                     opacity: (!input.trim() && !attachedFile && !selectedImage) || isStreaming || !sessionId ? 0.4 : 1,
                     transition: 'opacity 150ms',
                   }}>
@@ -6386,7 +6388,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                             background: entry.result === 'correct' ? 'rgba(63,185,80,0.15)'
                               : entry.result === 'pending' ? 'rgba(245,158,11,0.15)' : 'var(--bg-elevated)',
                             color: entry.result === 'correct' ? 'var(--green)'
-                              : entry.result === 'pending' ? '#F59E0B' : 'var(--text-dim)',
+                              : entry.result === 'pending' ? 'var(--yellow)' : 'var(--text-dim)',
                           }}>
                             {entry.result === 'correct' ? t('lc_history_correct')
                               : entry.result === 'pending' ? t('lc_history_pending')

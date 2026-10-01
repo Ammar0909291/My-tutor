@@ -41,16 +41,16 @@
      pointing at nothing. */
   composes: candyTheme from '../ui/candy/tokens.module.css';
 
-  /* ── Whiteboard (light, default) ── */
+  /* ── Whiteboard (light, default) — 2026-10-01 contrast pass: ink-soft/accent/amber/blue/green darkened so text clears 4.5:1 on paper ── */
   --sb-paper: #F1ECE0;      /* the desk the board sits on */
   --sb-board: #FFFFFF;      /* the whiteboard itself */
   --sb-board-alt: #FAF7EE;
   --sb-ink: #232722;
-  --sb-ink-soft: #6B6F66;
+  --sb-ink-soft: #5A5E55;
   --sb-rule: #DCD5C4;
-  --sb-accent: #2F7D5A;     /* whiteboard marker green */
+  --sb-accent: #276B4C;     /* whiteboard marker green */
   --sb-accent-ink: #FFFFFF;
-  --sb-amber: #C97A22;      /* chalk-amber, secondary mark */
+  --sb-amber: #9A5A18;      /* chalk-amber, secondary mark */
 
   /* Surfaces */
   --bg-void: var(--sb-paper);
@@ -58,7 +58,7 @@
   --bg-surface: var(--sb-board-alt);
   --bg-card: var(--sb-board);
   --bg-elevated: var(--sb-board-alt);
-  --bg-hover: rgba(47, 125, 90, 0.08);
+  --bg-hover: rgba(39, 107, 76, 0.08);
   --bg-overlay: var(--sb-paper);
   /* Panel background inconsistency fix: the shared candy <Card> primitive
      (used by every panel wrapper here — Lesson List, Code Editor, Tutor
@@ -86,14 +86,14 @@
 
   /* Brand accent */
   --coral: var(--sb-accent);
-  --coral-hover: #256A4C;
-  --coral-muted: rgba(47, 125, 90, 0.12);
-  --coral-border: rgba(47, 125, 90, 0.3);
+  --coral-hover: #1F5A40;
+  --coral-muted: rgba(39, 107, 76, 0.12);
+  --coral-border: rgba(39, 107, 76, 0.3);
   --accent-primary: var(--sb-accent);
 
   /* Semantic hues */
-  --blue: #3B6FD9;
-  --green: #2F8F4E;
+  --blue: #2D58B0;
+  --green: #237A3E;
   --yellow: var(--sb-amber);
   --purple: var(--sb-accent);
   --red: #B23B3B;

@@ -85,7 +85,7 @@ export function TestEmailPanel({ defaultTo }: { defaultTo: string }) {
           {result.smtpResponse && <p style={{ margin: '4px 0 0', fontFamily: 'monospace', wordBreak: 'break-all' }}>{result.smtpResponse}</p>}
           {result.host && <p style={{ margin: '4px 0 0', color: 'var(--candy-ink-soft)' }}>host: {result.host}:{result.port} (secure: {String(result.secure)}) · from: {result.from}</p>}
           {result.fromDomainMismatchWarning && (
-            <p style={{ margin: '8px 0 0', color: '#B8860B' }}>⚠ {result.fromDomainMismatchWarning}</p>
+            <p style={{ margin: '8px 0 0', color: 'var(--yellow)' }}>⚠ {result.fromDomainMismatchWarning}</p>
           )}
           {result.success && (
             <p style={{ margin: '8px 0 0', color: 'var(--candy-ink-soft)' }}>

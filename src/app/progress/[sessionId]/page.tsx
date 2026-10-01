@@ -46,7 +46,7 @@ export default async function SessionDetailPage({ params }: { params: { sessionI
           </p>
           <Link
             href={`/learn?subject=${learnSession.subject.slug}`}
-            style={{ padding: '10px 20px', borderRadius: 12, background: 'var(--candy-blue)', color: '#fff', textDecoration: 'none', fontWeight: 800, fontSize: 13, boxShadow: '0 3px 0 var(--candy-blue-d)' }}
+            style={{ padding: '10px 20px', borderRadius: 12, background: 'var(--candy-blue)', color: 'var(--on-accent)', textDecoration: 'none', fontWeight: 800, fontSize: 13, boxShadow: '0 3px 0 var(--candy-blue-d)' }}
           >
             Continue this lesson
           </Link>
