@@ -139,6 +139,9 @@ L, Swing angle and m (kg) are all rendered. P3 showed only L and Swing angle.
 | chem.found.mole-concept | phone | 7 min | — | Found CL-18/20/21/22. |
 | phys.mech.friction | desktop | 16 min | 6 authored | Found CL-23. The deliberate miss (40 N vs 20 N static friction) was corrected with its reason and the misconception named. |
 
+CL-23 was verified live on 5c8d576e. The same "surface area" phrase in the Normal Force lesson
+served the physics force-diagram card.
+
 After each Close the lesson landed in completedLessons. Physics now reads `[146, 20, 22]` and
 chemistry `[6]`.
 
