@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import { t as i18n, type Lang } from '@/lib/i18n'
-import { Card, CandyButton, Pill, ProgressRing, EagleMascot, useConfetti } from '@/components/ui/candy'
+import { Card, CandyButton, Pill, ProgressRing, CockroachMascot, useConfetti } from '@/components/ui/candy'
 
 interface Question {
   question: string
@@ -155,7 +155,7 @@ export function PracticePanel({
           className="flex items-start gap-3 px-6 py-4"
           style={{ background: 'var(--bg-surface)', boxShadow: '0 2px 0 var(--border-subtle)' }}
         >
-          <EagleMascot variant="logo" size={40} className="shrink-0" />
+          <CockroachMascot variant="logo" size={40} className="shrink-0" />
           <div className="min-w-0 flex-1">
             <Pill color="var(--coral)" style={{ fontSize: 10, letterSpacing: '0.08em' }}>
               {i18n(lang, 'practice_knowledge_check')}
@@ -215,7 +215,7 @@ export function PracticePanel({
           {/* ── Loading ── */}
           {state === 'loading' && (
             <div className="flex flex-col items-center justify-center gap-4 py-14">
-              <EagleMascot variant="hero" size={56} className="animate-pulse" />
+              <CockroachMascot variant="hero" mood="thinking" size={56} className="animate-pulse" />
               <p className="text-sm font-medium" style={{ color: 'var(--text-primary)' }}>
                 {i18n(lang, 'practice_loading')}
               </p>
@@ -225,7 +225,7 @@ export function PracticePanel({
           {/* ── Error / AI unavailable ── */}
           {state === 'error' && (
             <div className="flex flex-col items-center text-center gap-3 py-8 px-4">
-              <EagleMascot variant="logo" size={56} />
+              <CockroachMascot variant="hero" mood="confused" size={56} />
               <h4 className="text-lg font-bold" style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-baloo2)' }}>
                 {i18n(lang, 'practice_unavailable')}
               </h4>
@@ -313,7 +313,7 @@ export function PracticePanel({
           {/* ── Result — connected to lesson completion's mascot + ProgressRing language ── */}
           {state === 'result' && (
             <div className="space-y-4 text-center py-4">
-              <EagleMascot variant="hero" size={64} className="mx-auto" />
+              <CockroachMascot variant="hero" mood={score >= 50 ? 'laughing' : 'confused'} size={64} className="mx-auto" />
               <ProgressRing
                 percent={score}
                 size={96} radius={40} strokeWidth={9}

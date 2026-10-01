@@ -1,7 +1,7 @@
 'use client'
 import Link from 'next/link'
 import { useLanguage } from '@/components/ui/LanguageToggle'
-import { CandyPage, Card, CandyButton, EagleMascot } from '@/components/ui/candy'
+import { CandyPage, Card, CandyButton, CockroachMascot } from '@/components/ui/candy'
 
 /**
  * App-wide 404 — replaces Next.js's bare default not-found page with the
@@ -14,7 +14,7 @@ export default function NotFound() {
   return (
     <CandyPage className="p-6">
       <div className="max-w-md mx-auto flex flex-col items-center justify-center min-h-screen text-center gap-4">
-        <EagleMascot variant="hero" size={96} />
+        <CockroachMascot variant="hero" mood="confused" size={96} />
         <Card className="px-6 py-8 flex flex-col items-center gap-3">
           <span className="text-4xl" style={{ fontFamily: 'var(--font-baloo2)', fontWeight: 800, color: 'var(--candy-purple)' }}>404</span>
           <h1 className="text-xl" style={{ fontFamily: 'var(--font-baloo2)', fontWeight: 800, color: 'var(--candy-ink)' }}>

@@ -5,7 +5,7 @@ Shared visual primitives extracted from dashboard v2
 `design/dashboard-approved.html`). These are the building blocks for
 rebuilding other screens in the same "candy" gamified style — chunky 3D
 buttons, rounded drop-shadow cards, springy progress bars/rings, pills and
-the eagle mascot.
+the cockroach-headed tutor mascot.
 
 Import from `@/components/ui/candy`.
 
@@ -135,15 +135,21 @@ Circular progress ring with the springy `fillRing` overshoot animation.
 | `label` | `ReactNode` | — | centered content, e.g. a "65%" label |
 | `className` | `string` | — | |
 
-## `<EagleMascot />`
+## `<CockroachMascot />`
 
-The two hand-drawn eagle illustrations ported verbatim from
-`design/dashboard-approved.html` — **do not redesign or simplify the
-paths**.
+The tutor mascot: a sharp-suited human with a cockroach's head (owner-supplied artwork, replaced
+the earlier eagle on 2026-10-01). One layered SVG with four moods — `serious` (default),
+`thinking`, `confused`, `laughing` — switched by the `mood` prop; features tween between moods in
+CSS, so changing the prop animates. `<CockroachMascotCycle />` (client component) rotates through
+the moods on a timer for idle showcase spots. Motion is transform/opacity only and the mascot is **never static** — every mood, both variants, always
+animate (breathing/tilting head, swaying antennae, human-style blink). There is no prop to freeze it;
+under reduced motion only a soft breath and the blink remain.
 
 | Prop | Type | Default | Notes |
 |---|---|---|---|
-| `variant` | `'logo' \| 'hero'` | required | `'logo'` = 38x38 mark (top bar); `'hero'` = 110x110 mark (banners) — different artwork, not a scaled copy |
+| `variant` | `'logo' \| 'hero'` | required | `'logo'` = 38px head-and-antennae crop (top bar, avatars); `'hero'` = 110px figure with shoulders + mood props (banners) — same drawing, different crop |
+| `mood` | `'serious' \| 'thinking' \| 'confused' \| 'laughing'` | `'serious'` | Expression + props (thought bubble, "?", tears of joy) |
+| `halo` | `boolean` | `true` | Soft round backdrop |
 | `size` | `number` (px) | `38` (logo) / `110` (hero) | uniform scale via the SVG `viewBox` |
 | `className` | `string` | — | |
 

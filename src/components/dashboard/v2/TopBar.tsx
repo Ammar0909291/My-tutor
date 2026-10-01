@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import styles from './dashboard.module.css'
-import { EagleMascot, useConfetti } from '@/components/ui/candy'
+import { CockroachMascot, useConfetti } from '@/components/ui/candy'
 import type { TopBarData } from './types'
 
 interface TopBarProps {
@@ -26,7 +26,7 @@ export function TopBar({ data }: TopBarProps) {
           onClick={handleMascotClick}
           onAnimationEnd={() => setWaving(false)}
         >
-          <EagleMascot variant="logo" />
+          <CockroachMascot variant="logo" />
         </div>
         <div className={styles['logo-text']}>
           My<span>Tutor</span>

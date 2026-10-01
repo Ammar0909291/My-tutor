@@ -1,5 +1,5 @@
 import { CandyPage } from './CandyPage'
-import { EagleMascot } from './Mascot'
+import { CockroachMascot } from './Mascot'
 
 export interface PageLoadingSkeletonProps {
   /** Short status line shown under the mascot, e.g. "Loading your library…". */
@@ -16,7 +16,7 @@ export function PageLoadingSkeleton({ label }: PageLoadingSkeletonProps) {
   return (
     <CandyPage className="p-6">
       <div className="flex flex-col items-center justify-center gap-4 min-h-screen text-center">
-        <EagleMascot variant="hero" size={72} />
+        <CockroachMascot variant="hero" size={72} />
         <div className="w-6 h-6 border-2 rounded-full animate-spin" style={{ borderColor: 'var(--candy-purple)', borderTopColor: 'transparent' }} />
         <p className="text-sm" style={{ color: 'var(--candy-ink-soft)', fontWeight: 700 }}>{label}</p>
       </div>

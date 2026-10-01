@@ -50,7 +50,7 @@ import { applyRestoredVisuals } from '@/lib/teaching/visual/messageMerge'
 import { createRevealController } from '@/lib/teaching/progressiveReveal'
 import type { InlinePracticeQuestion } from '@/lib/school/practice/generateInlinePractice'
 import { parseLessonCompletionTag, parseMathCodeAnswerTags, parseAssessmentResultTag } from '@/lib/school/tutoring/parseAssistantTags'
-import { Card, CandyButton, Pill, EagleMascot, useConfetti } from '@/components/ui/candy'
+import { Card, CandyButton, Pill, CockroachMascot, useConfetti } from '@/components/ui/candy'
 import { TutorNarratedMessage } from '@/components/narration/TutorNarratedMessage'
 import { NarratedText } from '@/components/narration/NarratedText'
 import { NarratedPlaybackControls } from '@/components/narration/NarratedPlaybackControls'
@@ -3799,11 +3799,11 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
 
       <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
 
-      {/* XP Celebration — candy Card + EagleMascot + confetti (useConfetti fired alongside setXpCelebration above) */}
+      {/* XP Celebration — candy Card + CockroachMascot + confetti (useConfetti fired alongside setXpCelebration above) */}
       {xpCelebration && (
         <div className="fixed inset-0 z-50 pointer-events-none flex items-center justify-center">
           <Card className="animate-bounce" style={{ padding: '20px 28px', textAlign: 'center', boxShadow: '0 4px 0 var(--coral)' }}>
-            <EagleMascot variant="hero" size={72} className="mx-auto mb-2" />
+            <CockroachMascot variant="hero" mood="laughing" size={72} className="mx-auto mb-2" />
             <div style={{ fontSize: 26.4, fontWeight: 800, color: 'var(--coral)', fontFamily: 'var(--font-baloo2)' }}>+10 XP</div>
             <div style={{ fontSize: 15.6, marginTop: 4, color: 'var(--text-secondary)' }}>
               {t('lesson_complete_excl')}
@@ -4919,12 +4919,12 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
 
             {/* Header (taller) */}
             <PanelHeader tall>
-              {/* Avatar — EagleMascot replaces the generic initials avatar */}
+              {/* Avatar — CockroachMascot replaces the generic initials avatar */}
               <div style={{
                 width: 36, height: 36, borderRadius: '50%', flexShrink: 0,
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
               }}>
-                <EagleMascot variant="logo" size={36} />
+                <CockroachMascot variant="logo" size={36} />
               </div>
 
               {/* Info — the header is a FIXED 60px (PanelHeader tall). The
@@ -5174,7 +5174,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 const isResume = previewEntryMode === 'resume' || previewEntryMode === 'review'
                 return (
                   <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flex: 1, gap: 12, paddingTop: 32, paddingBottom: 32, paddingLeft: 20, paddingRight: 20 }}>
-                    <EagleMascot variant="hero" size={52} />
+                    <CockroachMascot variant="hero" size={52} />
                     {previewLesson && (
                       <div style={{ maxWidth: 420, width: '100%', display: 'flex', flexDirection: 'column', gap: 10, textAlign: 'center' }}>
                         <p style={{ fontSize: 13.2, fontWeight: 700, color: 'var(--text-dim)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
@@ -5240,10 +5240,10 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 )
               })()}
 
-              {/* Welcome / loading state — EagleMascot replaces the generic initials avatar */}
+              {/* Welcome / loading state — CockroachMascot replaces the generic initials avatar */}
               {lessonStarted && messages.length === 0 && !connectStalled && (
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flex: 1, gap: 12, paddingTop: 40 }}>
-                  <EagleMascot variant="hero" size={56} />
+                  <CockroachMascot variant="hero" size={56} />
                   <p style={{ fontSize: 15.6, color: 'var(--text-secondary)' }}>{t('lesson_init')}</p>
                   <ThinkingBrain compact size={32} label={t('lesson_init')} />
                 </div>
@@ -5381,10 +5381,10 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                       ...(hasCanvasVisual ? { width: '100%' } : null),
                     }}>
 
-                    {/* Tutor avatar row — EagleMascot replaces the generic initials avatar */}
+                    {/* Tutor avatar row — CockroachMascot replaces the generic initials avatar */}
                     {!isUser && !msg.streaming && (
                       <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
-                        <EagleMascot variant="logo" size={20} />
+                        <CockroachMascot variant="logo" size={20} />
                         <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--border-emphasis)' }}>{t('lesson_tutor_max')}</span>
                         {/* Provider badge — every real provider now gets a
                             visible, correctly-labeled indicator. See the API

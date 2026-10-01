@@ -6,7 +6,7 @@ import { ArrowRight, Check, ChevronDown, LogOut, Menu, X } from 'lucide-react'
 import { useLanguage } from '@/components/ui/LanguageToggle'
 import { LanguageToggle } from '@/components/ui/LanguageToggle'
 import { useTheme } from '@/components/Providers'
-import { CandyPage, Card, CandyButton, Pill, EagleMascot, ProgressRing, useConfetti } from '@/components/ui/candy'
+import { CandyPage, Card, CandyButton, Pill, CockroachMascot, ProgressRing, useConfetti } from '@/components/ui/candy'
 import styles from './homepage.module.css'
 
 const JOURNEY_STEPS = [
@@ -92,7 +92,7 @@ export default function HomePage() {
               onClick={(e) => { e.preventDefault(); handleMascotClick() }}
               onAnimationEnd={() => setMascotWaving(false)}
             >
-              <EagleMascot variant="logo" size={24} />
+              <CockroachMascot variant="logo" size={24} />
             </span>
             <span className={styles.navLogoText}>My Tutor</span>
           </Link>
@@ -167,7 +167,7 @@ export default function HomePage() {
         <div className={styles.heroInner}>
           <div>
             <div className={styles.heroMascotRow}>
-              <span className={styles.heroMascotMark}><EagleMascot variant="logo" size={30} /></span>
+              <span className={styles.heroMascotMark}><CockroachMascot variant="logo" size={30} /></span>
               <span className={styles.heroMascotBubble}>{t('mascot_greet')}</span>
             </div>
 
@@ -215,7 +215,7 @@ export default function HomePage() {
                   <div style={{ marginTop: 4 }}><span style={{ color: 'var(--green)' }}>hello</span><span style={{ color: 'var(--text-primary)' }}>()</span></div>
                 </div>
                 <div className={styles.mockChat}>
-                  <div className={styles.mockChatAvatar}><EagleMascot variant="logo" size={18} /></div>
+                  <div className={styles.mockChatAvatar}><CockroachMascot variant="logo" size={18} /></div>
                   <div className={styles.mockChatBubble}>{t('hero_mock_msg')}</div>
                 </div>
               </div>
@@ -456,7 +456,7 @@ export default function HomePage() {
       <footer className={styles.footer}>
         <div className={styles.footerInner}>
           <div className={styles.footerLogo}>
-            <EagleMascot variant="logo" size={20} />
+            <CockroachMascot variant="logo" size={20} />
             <span>My Tutor</span>
           </div>
           <p className={styles.footerRights}>{t('footer_rights')}</p>

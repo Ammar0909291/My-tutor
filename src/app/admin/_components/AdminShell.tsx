@@ -3,7 +3,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { LayoutDashboard, Users, BookOpen, GitBranch, BarChart2, Bot, Settings, ChevronRight, Activity, Menu, X, Brain } from 'lucide-react'
-import { EagleMascot } from '@/components/ui/candy'
+import { CockroachMascot } from '@/components/ui/candy'
 
 const NAV = [
   { href: '/admin',                    label: 'Overview',          icon: LayoutDashboard },
@@ -57,7 +57,7 @@ function NavLinks({ onNavigate }: { onNavigate?: () => void }) {
 function Brand() {
   return (
     <div style={{ padding: '20px 16px', borderBottom: '1px solid var(--candy-shadow)', display: 'flex', alignItems: 'center', gap: 10 }}>
-      <EagleMascot variant="logo" size={32} />
+      <CockroachMascot variant="logo" size={32} />
       <div>
         <p style={{ fontSize: 11, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--candy-red)', margin: 0 }}>My Tutor</p>
         <p style={{ fontSize: 10, color: 'var(--candy-ink-soft)', margin: 0 }}>Mission Control</p>
@@ -108,7 +108,7 @@ export function AdminShell({ userEmail, children }: { userEmail: string; childre
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <EagleMascot variant="logo" size={26} />
+          <CockroachMascot variant="logo" size={26} />
           <span style={{ fontSize: 12, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--candy-red)' }}>Mission Control</span>
         </div>
         <button

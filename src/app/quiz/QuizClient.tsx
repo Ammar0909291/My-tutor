@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { t as i18n } from '@/lib/i18n'
-import { CandyPage, Card, CandyButton, Pill, ProgressBar, EagleMascot, useConfetti } from '@/components/ui/candy'
+import { CandyPage, Card, CandyButton, Pill, ProgressBar, CockroachMascot, useConfetti } from '@/components/ui/candy'
 
 interface Question {
   question: string
@@ -110,7 +110,7 @@ export default function QuizClient({ subject, lang }: Props) {
   if (loading) {
     return (
       <CandyPage style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 16 }}>
-        <EagleMascot variant="hero" size={72} />
+        <CockroachMascot variant="hero" mood="thinking" size={72} />
         <p style={{ color: 'var(--candy-ink-soft)', fontSize: 16, fontWeight: 600 }}>{i18n(lang, 'quiz_loading')}</p>
       </CandyPage>
     )
@@ -119,7 +119,7 @@ export default function QuizClient({ subject, lang }: Props) {
   if (error) {
     return (
       <CandyPage style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 16 }}>
-        <EagleMascot variant="hero" size={72} />
+        <CockroachMascot variant="hero" mood="confused" size={72} />
         <p style={{ color: 'var(--candy-red)', fontSize: 16, fontWeight: 700 }}>{error}</p>
         <CandyButton onClick={restart} style={{ padding: '10px 20px', borderRadius: 14, background: 'var(--candy-orange)', color: 'var(--on-accent)', fontWeight: 800 }}>
           {i18n(lang, 'quiz_retry')}
@@ -135,7 +135,7 @@ export default function QuizClient({ subject, lang }: Props) {
       <CandyPage style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <div style={{ textAlign: 'center', padding: 40, maxWidth: 400 }}>
           <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 12 }}>
-            <EagleMascot variant="hero" size={80} />
+            <CockroachMascot variant="hero" mood={score >= 4 ? 'laughing' : score >= 3 ? 'serious' : 'confused'} size={80} />
           </div>
           <div style={{ fontSize: 40, marginBottom: 8 }}>{emoji}</div>
           <h2 style={{ fontSize: 28, fontWeight: 900, color: 'var(--candy-ink)', marginBottom: 8, fontFamily: 'var(--font-baloo2)' }}>

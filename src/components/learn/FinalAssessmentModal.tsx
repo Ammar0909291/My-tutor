@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react'
 import { X, RotateCcw } from 'lucide-react'
 import { useLanguage } from '@/components/ui/LanguageToggle'
-import { Card, CandyButton, Pill, ProgressRing, EagleMascot, useConfetti } from '@/components/ui/candy'
+import { Card, CandyButton, Pill, ProgressRing, CockroachMascot, useConfetti } from '@/components/ui/candy'
 
 interface Question {
   question: string
@@ -129,7 +129,7 @@ export function FinalAssessmentModal({ subjectSlug, subjectName, lessonTitles, o
           display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8,
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-            <EagleMascot variant="logo" size={26} />
+            <CockroachMascot variant="logo" size={26} />
             <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-primary)' }}>
               {t('final_assessment_title')}: {subjectName}
             </span>
@@ -144,14 +144,14 @@ export function FinalAssessmentModal({ subjectSlug, subjectName, lessonTitles, o
         <div style={{ flex: 1, overflowY: 'auto', padding: 16 }}>
           {(phase === 'checking' || phase === 'loading') && (
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: 200, gap: 12 }}>
-              <EagleMascot variant="hero" size={56} className="animate-pulse" />
+              <CockroachMascot variant="hero" mood="thinking" size={56} className="animate-pulse" />
               <p style={{ fontSize: 12, color: 'var(--text-secondary)' }}>{t('final_assessment_loading')}</p>
             </div>
           )}
 
           {phase === 'error' && (
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: 200, gap: 12 }}>
-              <EagleMascot variant="logo" size={48} />
+              <CockroachMascot variant="hero" mood="confused" size={48} />
               <p style={{ fontSize: 12, color: 'var(--red)', textAlign: 'center' }}>{errorMsg}</p>
               <CandyButton onClick={generate} depth={2} shadowColor="var(--coral-hover)"
                 style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 11, padding: '6px 14px', borderRadius: 10, cursor: 'pointer', background: 'var(--coral)', color: 'var(--on-accent, #fff)', border: 'none', fontWeight: 700 }}>
@@ -191,7 +191,7 @@ export function FinalAssessmentModal({ subjectSlug, subjectName, lessonTitles, o
 
           {phase === 'results' && (
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: 200, gap: 14, textAlign: 'center' }}>
-              <EagleMascot variant="hero" size={64} />
+              <CockroachMascot variant="hero" mood={passed ? 'laughing' : 'confused'} size={64} />
               <ProgressRing
                 percent={scorePct}
                 size={96} radius={40} strokeWidth={9}

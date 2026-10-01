@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useLanguage } from '@/components/ui/LanguageToggle'
 import { getTranslations } from '@/lib/i18n'
-import { CandyPage, Card, CandyButton, Pill, ProgressBar, EagleMascot, useConfetti } from '@/components/ui/candy'
+import { CandyPage, Card, CandyButton, Pill, ProgressBar, CockroachMascot, useConfetti } from '@/components/ui/candy'
 
 interface Flashcard {
   id: string
@@ -86,7 +86,7 @@ export default function FlashcardsClient() {
   if (loading) {
     return (
       <CandyPage style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 16 }}>
-        <EagleMascot variant="hero" size={72} />
+        <CockroachMascot variant="hero" mood="thinking" size={72} />
         <p style={{ color: 'var(--candy-ink-soft)', fontWeight: 600 }}>{tr.flashcards_loading}</p>
       </CandyPage>
     )
@@ -95,7 +95,7 @@ export default function FlashcardsClient() {
   if (stats.total === 0) {
     return (
       <CandyPage style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 20, textAlign: 'center', padding: 40 }}>
-        <EagleMascot variant="hero" />
+        <CockroachMascot variant="hero" />
         <h2 style={{ fontSize: 22, fontWeight: 800, color: 'var(--candy-ink)', maxWidth: 420, fontFamily: 'var(--font-baloo2)' }}>{tr.flashcards_zero_title}</h2>
         <StatsBar stats={stats} tr={tr} />
         <a href="/learn" style={{ padding: '12px 24px', borderRadius: 16, background: 'var(--candy-orange)', color: 'var(--on-accent)', textDecoration: 'none', fontWeight: 800, boxShadow: '0 4px 0 var(--candy-shadow)' }}>
@@ -122,7 +122,7 @@ export default function FlashcardsClient() {
   if (cards.length === 0) {
     return (
       <CandyPage style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', gap: 20, textAlign: 'center', padding: 40 }}>
-        <EagleMascot variant="hero" />
+        <CockroachMascot variant="hero" />
         <h2 style={{ fontSize: 22, fontWeight: 800, color: 'var(--candy-ink)', fontFamily: 'var(--font-baloo2)' }}>{tr.flashcards_empty_title}</h2>
         <p style={{ color: 'var(--candy-ink-soft)', fontSize: 14, fontWeight: 600 }}>{tr.flashcards_empty_sub}</p>
         <StatsBar stats={stats} tr={tr} />

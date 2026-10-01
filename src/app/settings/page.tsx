@@ -7,7 +7,7 @@ import { useLanguage, LanguageToggle } from '@/components/ui/LanguageToggle'
 import { ThemeToggle } from '@/components/ui/ThemeToggle'
 import { useCountry, type Country } from '@/components/Providers'
 import type { TeachingLang } from '@/lib/tts'
-import { Card, CandyButton, SectionTitle, EagleMascot } from '@/components/ui/candy'
+import { Card, CandyButton, SectionTitle, CockroachMascot } from '@/components/ui/candy'
 import tokenStyles from '@/components/ui/candy/tokens.module.css'
 
 type LangOption = { key: TeachingLang; icon: string; label: string }
@@ -248,7 +248,7 @@ export default function SettingsPage() {
 
       <main className="max-w-2xl mx-auto px-6 py-10 space-y-6">
         <div className="flex items-center gap-3">
-          <EagleMascot variant="hero" size={48} />
+          <CockroachMascot variant="hero" size={48} />
           <h1 style={{ fontSize: 24, fontWeight: 900, color: 'var(--candy-ink)', fontFamily: 'var(--font-baloo2)' }}>{t('settings_title')}</h1>
         </div>
 

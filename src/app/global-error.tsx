@@ -11,7 +11,7 @@ export default function GlobalError({ reset }: { error: Error & { digest?: strin
     <html lang="en">
       <body style={{ margin: 0, minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'sans-serif', background: '#FFF8F0' }}>
         <div style={{ maxWidth: 380, textAlign: 'center', padding: 32 }}>
-          <p style={{ fontSize: 48, margin: '0 0 12px' }}>🦅</p>
+          <p style={{ fontSize: 48, margin: '0 0 12px' }}>🪳</p>
           <h1 style={{ fontSize: 20, fontWeight: 800, color: '#2D2A3D', margin: '0 0 8px' }}>Something broke</h1>
           <p style={{ fontSize: 14, color: '#6B6680', margin: '0 0 20px' }}>
             My Tutor hit an unexpected error. Try again, or come back in a bit.

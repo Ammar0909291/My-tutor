@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useLanguage } from '@/components/ui/LanguageToggle'
-import { CandyPage, Card, EagleMascot } from '@/components/ui/candy'
+import { CandyPage, Card, CockroachMascot } from '@/components/ui/candy'
 
 type Entry = { rank: number; userId: string; name: string; image: string | null; xp: number }
 
@@ -68,7 +68,7 @@ export default function LeaderboardPage() {
         {/* List */}
         {loading ? (
           <div className="flex flex-col items-center justify-center gap-3 py-12">
-            <EagleMascot variant="hero" size={56} />
+            <CockroachMascot variant="hero" size={56} />
             <div className="w-6 h-6 border-2 rounded-full animate-spin" style={{ borderColor: 'var(--candy-purple)', borderTopColor: 'transparent' }} />
           </div>
         ) : (
@@ -92,7 +92,7 @@ export default function LeaderboardPage() {
             ))}
             {(data?.entries ?? []).length === 0 && (
               <div className="flex flex-col items-center gap-3 py-8">
-                <EagleMascot variant="hero" size={56} />
+                <CockroachMascot variant="hero" size={56} />
                 <p className="text-center text-sm" style={{ color: 'var(--candy-ink-soft)', fontWeight: 600 }}>
                   {t('lb_no_entries')}
                 </p>

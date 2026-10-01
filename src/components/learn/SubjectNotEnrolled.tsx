@@ -2,7 +2,7 @@
 import { useState, useTransition } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { CandyPage, Card, CandyButton, EagleMascot } from '@/components/ui/candy'
+import { CandyPage, Card, CandyButton, CockroachMascot } from '@/components/ui/candy'
 
 /** Every string on the screen, already translated by the page (same language the Library uses). */
 export interface SubjectNotEnrolledCopy {
@@ -74,7 +74,7 @@ export function SubjectNotEnrolled({
   return (
     <CandyPage className="p-6">
       <div className="max-w-md mx-auto flex flex-col items-center justify-center min-h-screen text-center gap-4">
-        <EagleMascot variant="hero" size={96} />
+        <CockroachMascot variant="hero" size={96} />
         <Card className="px-6 py-8 flex flex-col items-center gap-3" data-testid="subject-not-enrolled">
           <h1 className="text-xl" style={{ fontFamily: 'var(--font-baloo2)', fontWeight: 800, color: 'var(--candy-ink)' }}>
             {copy.title}

@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { Eye, EyeOff } from 'lucide-react'
 import { useLanguage, LanguageToggle } from '@/components/ui/LanguageToggle'
 import { AuthBackLink } from '@/components/auth/AuthBackLink'
-import { Card, CandyButton, EagleMascot } from '@/components/ui/candy'
+import { Card, CandyButton, CockroachMascot } from '@/components/ui/candy'
 import tokenStyles from '@/components/ui/candy/tokens.module.css'
 
 const inputStyle: React.CSSProperties = {
@@ -84,7 +84,7 @@ export default function SignupPage() {
           style={{ background: 'radial-gradient(ellipse at 20% 80%, rgba(232,184,75,0.10) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(143,209,196,0.08) 0%, transparent 50%)' }} />
         <div className="relative">
           <div className="flex items-center gap-2 mb-12">
-            <EagleMascot variant="logo" size={36} />
+            <CockroachMascot variant="logo" size={36} />
             <span style={{ fontWeight: 800, fontSize: 18, color: 'var(--candy-red)' }}>My Tutor</span>
           </div>
           <blockquote className="text-2xl font-bold leading-snug mb-8" style={{ color: 'var(--candy-ink)' }}>
@@ -109,7 +109,7 @@ export default function SignupPage() {
 
         <div className="w-full max-w-sm">
           <div className="flex items-center gap-3 mb-6">
-            <EagleMascot variant="hero" size={56} />
+            <CockroachMascot variant="hero" size={56} />
             <div>
               <h1 style={{ fontSize: 22, fontWeight: 800, color: 'var(--candy-ink)', margin: 0 }}>Let&rsquo;s start your learning journey</h1>
               <p style={{ fontSize: 13, color: 'var(--candy-ink-soft)', margin: 0 }}>{t('signup_sub')}</p>

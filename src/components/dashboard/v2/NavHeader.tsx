@@ -17,7 +17,7 @@ export function NavHeader({ userRole }: NavHeaderProps) {
     <nav className={styles['nav-header']}>
       <div className={styles['nav-inner']}>
         <Link href="/" className={styles['nav-logo']}>
-          <span>🦅</span>
+          <span>🪳</span>
           <span className={styles['nav-logo-text']}>My <span>Tutor</span></span>
         </Link>
         <div className={styles['nav-actions']}>

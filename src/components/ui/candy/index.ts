@@ -19,8 +19,10 @@ export type { ProgressBarProps } from './ProgressBar'
 export { ProgressRing } from './ProgressRing'
 export type { ProgressRingProps } from './ProgressRing'
 
-export { EagleMascot } from './Mascot'
-export type { EagleMascotProps } from './Mascot'
+export { CockroachMascot } from './Mascot'
+export type { CockroachMascotProps, MascotMood } from './Mascot'
+export { CockroachMascotCycle } from './MascotCycle'
+export type { CockroachMascotCycleProps } from './MascotCycle'
 
 export { PageLoadingSkeleton } from './PageLoadingSkeleton'
 export type { PageLoadingSkeletonProps } from './PageLoadingSkeleton'

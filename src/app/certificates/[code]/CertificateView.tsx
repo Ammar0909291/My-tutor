@@ -1,4 +1,4 @@
-import { Card, EagleMascot } from '@/components/ui/candy'
+import { Card, CockroachMascot } from '@/components/ui/candy'
 
 interface Props {
   certificate: {
@@ -22,7 +22,7 @@ export default function CertificateView({ certificate }: Props) {
   }
   return (
     <Card className="flex flex-col items-center gap-4 text-center" style={{ padding: 40 }}>
-      <EagleMascot variant="hero" />
+      <CockroachMascot variant="hero" />
       <h1 style={{ fontFamily: 'var(--font-baloo2)', fontWeight: 800, fontSize: 28, color: 'var(--candy-ink)' }}>Certificate of Completion</h1>
       <p style={{ fontSize: 18, fontWeight: 800, color: 'var(--candy-purple)' }}>{certificate.roadmapTitle ?? certificate.subjectName}</p>
       <p style={{ color: 'var(--candy-ink-soft)', fontWeight: 600 }}>Awarded to {certificate.recipientName ?? certificate.profileName}</p>

@@ -3,7 +3,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { LanguageToggle, useLanguage } from '@/components/ui/LanguageToggle'
 import { AuthBackLink } from '@/components/auth/AuthBackLink'
-import { Card, CandyButton, EagleMascot } from '@/components/ui/candy'
+import { Card, CandyButton, CockroachMascot } from '@/components/ui/candy'
 import tokenStyles from '@/components/ui/candy/tokens.module.css'
 
 const inputStyle: React.CSSProperties = {
@@ -53,7 +53,7 @@ export default function ForgotPasswordPage() {
 
       {/* Logo */}
       <div className="absolute top-5 left-5 flex items-center gap-2">
-        <EagleMascot variant="logo" size={28} />
+        <CockroachMascot variant="logo" size={28} />
         <span style={{ fontWeight: 800, fontSize: 14, color: 'var(--candy-red)' }}>My Tutor</span>
       </div>
 
@@ -66,7 +66,7 @@ export default function ForgotPasswordPage() {
         {state === 'sent' ? (
           <Card style={{ padding: 28, textAlign: 'center' }}>
             <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 12 }}>
-              <EagleMascot variant="hero" size={72} />
+              <CockroachMascot variant="hero" size={72} />
             </div>
             <h1 style={{ fontSize: 22, fontWeight: 800, color: 'var(--candy-ink)', marginBottom: 12 }}>
               {t('forgot_success')}
@@ -82,7 +82,7 @@ export default function ForgotPasswordPage() {
         ) : (
           <>
             <div className="flex items-center gap-3 mb-6">
-              <EagleMascot variant="hero" size={56} />
+              <CockroachMascot variant="hero" size={56} />
               <div>
                 <h1 style={{ fontSize: 22, fontWeight: 800, color: 'var(--candy-ink)', margin: 0 }}>We&rsquo;ll help you get back in</h1>
                 <p style={{ fontSize: 13, color: 'var(--candy-ink-soft)', margin: 0 }}>{t('forgot_sub')}</p>
