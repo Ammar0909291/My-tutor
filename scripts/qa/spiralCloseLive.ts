@@ -74,6 +74,9 @@ async function main() {
   const wrong = pick(p.mcq, authored, false)
   if (!wrong) throw new Error('first quiz is not authored')
   log('miss', wrong, await say(cookie, sid, wrong))
+  // Time to read the episode the miss produced (expected: CLOSING / spiral).
+  const pause = Number(process.env.QA_PAUSE_AFTER_MISS_MS ?? 0)
+  if (pause > 0) { console.log(`pausing ${pause} ms after the miss`); await new Promise((r) => setTimeout(r, pause)) }
 
   const after = await say(cookie, sid, 'quiz me')
   log('after-miss', 'quiz me', after)
