@@ -36,6 +36,7 @@ log.
 | `tutor-max-real-learner-fixes-2026-09-29.md` | Real-learner QA run 1 (5 physics lessons) and the fixes it led to: topic hijack, bare "Not quite", figure completeness, stored text ignoring the learner, picture/practice card, simulation spoilers (prompt block + give-away backstop), lens rays. Also `scripts/qa/learnerReplay.ts`. |
 | `tutor-max-real-learner-fixes-2026-09-30-qa2.md` | Real-learner QA run 2 (refraction, circular motion, gas laws, Bohr model): ratings and 12 defects, 5 still open from run 1. |
 | `physics-visual-gap-campaign.md` | Physics visual audit (238 concepts: 43 own figure / 32 general / 163 none), batch 1 of authored figures (reflection, Coulomb, E-field, B-field, standing waves, Doppler, energy conservation, heat transfer, buoyancy, Hooke), the authoring-label leak fix, and the queue for later batches. |
+| `learner-baseline-2026-09-30-cto-loop.md` | Autonomous CTO loop: 10-session real-browser learner baseline (5 physics, 5 chemistry, real account), the defect clusters, 17 fixes (stub repair, affirm guard vs authored key, Close records mastery, R1 resume, figure colours, simulation controls/spoilers, answer heads, excursion quiz, empty generated graph, lesson-one spiral deadlock, skip-demotes-mastery, completion-card ids, graded-tap confirm-back, H2/O2 key), production verification, and the owner actions left open. |
 
 ## Live pointers (not history — check these first for CURRENT state)
 - `/CLAUDE.md` — live rules.
