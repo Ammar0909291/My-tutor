@@ -312,6 +312,10 @@ export function chooseResumableSession(input: {
   candidates: readonly ResumeCandidate[]
   tabId: string | null | undefined
   now: Date
+  /** The learner's selected lesson (StudentProgress.activeLessonSlug). When
+   *  known, a session another tab released is taken over only if it belongs
+   *  to this lesson (or to none). */
+  activeLessonSlug?: string | null
 }): { session: ResumeCandidate | null; reason: ResumeChoiceReason } {
   const mine = typeof input.tabId === 'string' && input.tabId.trim() !== '' ? input.tabId.trim() : null
 
@@ -331,8 +335,18 @@ export function chooseResumableSession(input: {
   const own = input.candidates.find((c) => readSessionTabOwner(c.contextSnapshot)?.tabId === mine)
   if (own) return { session: own, reason: 'same-tab' }
 
-  const free = input.candidates.find((c) =>
-    !isClaimedByAnotherTab({ snapshot: c.contextSnapshot, tabId: mine, now: input.now }))
+  // R1 (2026-09-30 learner baseline, reproduced twice): the selected lesson's
+  // session was held by a live tab, so a new tab took the newest UNCLAIMED
+  // session — another lesson's — and showed the Simple Pendulum conversation
+  // under the "Inelastic Collisions" header. Taking a session over is a
+  // continuation of THAT conversation, so it must be the same lesson; with
+  // none, the new tab starts its own session, exactly as tier 3 already does.
+  const active = cleanSlug(input.activeLessonSlug)
+  const free = input.candidates.find((c) => {
+    if (isClaimedByAnotherTab({ snapshot: c.contextSnapshot, tabId: mine, now: input.now })) return false
+    const pointer = readSessionLessonPointer(c.contextSnapshot)
+    return !active || !pointer || pointer === active
+  })
   if (free) return { session: free, reason: 'unclaimed' }
 
   return { session: null, reason: 'create-new' }

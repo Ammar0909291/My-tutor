@@ -179,3 +179,63 @@ describe('the wiring — a missing CALL is the failure mode', () => {
     expect(t).not.toMatch(/localStorage\.(get|set)Item/)
   })
 })
+
+/**
+ * R1 — 2026-09-30 learner baseline, real account, reproduced twice: with the
+ * selected lesson's session held by a live tab, a new phone tab opened on
+ * /learn?subject=physics showed the Simple Pendulum conversation under the
+ * "Inelastic Collisions" header — the newest UNCLAIMED session, whatever its
+ * lesson. Taking a session over must stay inside the selected lesson.
+ */
+describe('R1 — a new tab never takes over another lesson\'s conversation', () => {
+  const pointed = (slug: string, owner?: Record<string, unknown>) =>
+    ({ lessonPointer: { topicSlug: slug }, ...(owner ?? {}) })
+
+  it('the production shape: selected lesson held live, another lesson free → create', () => {
+    const candidates = [
+      { id: 'COLLISIONS', contextSnapshot: pointed('phys.mech.collisions-inelastic', owned('desktop', 60_000)) },
+      { id: 'PENDULUM', contextSnapshot: pointed('phys.osc.simple-pendulum', owned('old-tab', TAB_CLAIM_TTL_MS + 60_000)) },
+    ]
+    const r = chooseResumableSession({
+      candidates, tabId: 'phone', now: NOW, activeLessonSlug: 'phys.mech.collisions-inelastic',
+    })
+    expect(r.session).toBeNull()
+    expect(r.reason).toBe('create-new')
+  })
+
+  it('a released session of the SELECTED lesson is still taken over', () => {
+    const candidates = [
+      { id: 'PENDULUM', contextSnapshot: pointed('phys.osc.simple-pendulum') },
+      { id: 'COLLISIONS', contextSnapshot: pointed('phys.mech.collisions-inelastic', owned('old', TAB_CLAIM_TTL_MS + 1)) },
+    ]
+    const r = chooseResumableSession({
+      candidates, tabId: 'phone', now: NOW, activeLessonSlug: 'phys.mech.collisions-inelastic',
+    })
+    expect(r.session?.id).toBe('COLLISIONS')
+    expect(r.reason).toBe('unclaimed')
+  })
+
+  it('a session with no lesson pointer stays resumable, as before', () => {
+    const candidates = [{ id: 'S1', contextSnapshot: { conversationState: {} } }]
+    expect(chooseResumableSession({ candidates, tabId: 'tab-1', now: NOW, activeLessonSlug: 'x.y' }).session?.id)
+      .toBe('S1')
+  })
+
+  it('no selected lesson ⇒ unchanged: newest unclaimed', () => {
+    const candidates = [{ id: 'S1', contextSnapshot: pointed('phys.osc.simple-pendulum') }]
+    expect(chooseResumableSession({ candidates, tabId: 'tab-1', now: NOW, activeLessonSlug: null }).session?.id)
+      .toBe('S1')
+  })
+
+  it('the same tab always gets its own session back, whatever is selected', () => {
+    const candidates = [{ id: 'S1', contextSnapshot: pointed('a.b', owned('tab-1', 1_000)) }]
+    expect(chooseResumableSession({ candidates, tabId: 'tab-1', now: NOW, activeLessonSlug: 'c.d' }).reason)
+      .toBe('same-tab')
+  })
+
+  it('the route passes the selected lesson into the rule', () => {
+    const s = readFileSync(path.join(process.cwd(), 'src/app/api/sessions/route.ts'), 'utf8')
+    expect(s).toContain('activeLessonSlug: sp?.activeLessonSlug ?? null,')
+    expect(s.indexOf('sessions-progress-lookup')).toBeLessThan(s.indexOf('chooseResumableSession({'))
+  })
+})

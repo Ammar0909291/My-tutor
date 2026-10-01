@@ -126,19 +126,26 @@ export async function POST(req: Request) {
       select: { id: true, contextSnapshot: true },
     })).catch(() => [] as { id: string; contextSnapshot: unknown }[]);
 
+    // Read before choosing: the resume rule needs the selected lesson so a new
+    // tab never takes over another lesson's conversation (R1).
+    const sp = await dbCall('sessions-progress-lookup', () => prisma.studentProgress.findUnique({
+      where: { userId_subjectCode: { userId: session.user.id, subjectCode: subjectSlug } },
+      select: { currentLesson: true, activeLessonSlug: true },
+    })).catch((err) => {
+      console.warn('[sessions POST] progress lookup failed:', err);
+      return null;
+    });
+
     const { chooseResumableSession, sessionTabOwnerDelta } =
       await import('@/lib/teaching/sessionLessonPointer');
     const resumeChoice = chooseResumableSession({
       candidates: resumeCandidates, tabId, now: new Date(),
+      activeLessonSlug: sp?.activeLessonSlug ?? null,
     });
     const resumeCandidate = resumeChoice.session;
 
     let resumeLessonKey: string | null = null;
     try {
-      const sp = await dbCall('sessions-progress-lookup', () => prisma.studentProgress.findUnique({
-        where: { userId_subjectCode: { userId: session.user.id, subjectCode: subjectSlug } },
-        select: { currentLesson: true, activeLessonSlug: true },
-      }));
       if (sp || resumeCandidate) {
         const { lessonKeyFor } = await import('@/lib/teaching/lessonAttempt');
         const { resolveSessionLessonSlug } = await import('@/lib/teaching/sessionLessonPointer');
