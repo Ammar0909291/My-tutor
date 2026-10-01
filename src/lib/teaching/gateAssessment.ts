@@ -231,6 +231,39 @@ export function probeToMcq(probe: ConvertibleProbe): TutorMCQ | null {
  * B"). Otherwise returns null and the full text is served exactly as before.
  * A hyphen never splits — "x - 2" is an answer, not an annotation.
  */
+/**
+ * Words that qualify an answer without changing it. A head that differs from
+ * another only by these says the same thing, so the difference that decided
+ * the item must have been in the working the cut removed.
+ */
+const HEDGE_WORDS = new Set([
+  'here', 'there', 'now', 'then', 'still', 'just', 'really', 'indeed', 'though',
+  'anyway', 'again', 'too', 'also', 'so', 'this', 'case', 'time',
+])
+
+const headWords = (h: string) =>
+  new Set(h.toLowerCase().replace(/[^\p{L}\p{N}\s']/gu, ' ').split(/\s+/).filter(Boolean))
+
+/**
+ * Do the heads still tell the options apart? MEASURED 2026-09-30 (learner
+ * baseline, chem.elect.galvanic-cell): "Yes here — but the reason is the
+ * COMPARISON …" and "Yes — copper is more reactive …" were served as "Yes"
+ * and "Yes here", an unanswerable pair; everything that discriminated them was
+ * after the dash. When one head is another plus only hedge words, the split is
+ * refused and the full text is served as before.
+ */
+function headsDiscriminate(heads: string[]): boolean {
+  const sets = heads.map(headWords)
+  for (let i = 0; i < sets.length; i++) {
+    for (let j = 0; j < sets.length; j++) {
+      if (i === j || ![...sets[i]].every((w) => sets[j].has(w))) continue
+      const extra = [...sets[j]].filter((w) => !sets[i].has(w))
+      if (extra.length > 0 && extra.every((w) => HEDGE_WORDS.has(w))) return false
+    }
+  }
+  return true
+}
+
 export function splitAnswerHeads(options: string[]): { heads: string[]; rationales: string[] } | null {
   const heads: string[] = []
   const rationales: string[] = []
@@ -244,6 +277,7 @@ export function splitAnswerHeads(options: string[]): { heads: string[]; rational
   }
   if (new Set(heads.map((h) => norm(h).toLowerCase())).size !== heads.length) return null
   if (heads.some((h) => norm(h).length === 0)) return null
+  if (!headsDiscriminate(heads)) return null
   return { heads, rationales }
 }
 
@@ -276,6 +310,7 @@ export function splitAnswerHeadsPerOption(options: string[]): { heads: string[];
   if (!splitAny) return null
   if (new Set(heads.map((h) => norm(h).toLowerCase())).size !== heads.length) return null
   if (heads.some((h) => norm(h).length === 0)) return null
+  if (!headsDiscriminate(heads)) return null
   return { heads, rationales }
 }
 
