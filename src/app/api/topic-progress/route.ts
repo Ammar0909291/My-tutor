@@ -120,7 +120,16 @@ export async function PATCH(req: Request) {
         }
         break
       case 'skip':
-        data = { status: 'SKIPPED' }
+        // Never demote earned or in-review progress to SKIPPED. Leaving a
+        // lesson records a skip (Option B), and the client's own guard reads a
+        // possibly stale map — MEASURED 2026-10-01 on the real account: opening
+        // Simple Pendulum from a re-entered Newton's Second Law turned Newton's
+        // MASTERED (masteryPct 100) into SKIPPED. The server owns the rule.
+        if (existing && (existing.status === 'COMPLETED' || existing.status === 'MASTERED' || existing.status === 'REVISION')) {
+          data = { status: existing.status }
+        } else {
+          data = { status: 'SKIPPED' }
+        }
         break
       case 'resume':
         // Back from SKIPPED / REVISION to the learner's working state
