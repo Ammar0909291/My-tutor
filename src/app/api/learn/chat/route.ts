@@ -818,6 +818,16 @@ async function handleChatTurn(req: Request, deadline: RouteDeadline): Promise<Re
     // all far below this block — read the same single answer the prompt side
     // used, instead of each re-deriving it (or, as before, not knowing at all).
     let excursionActiveHoisted = false
+    // RC-C — THE LESSON-ONE DEADLOCK (2026-09-30). A spiral close reopens only
+    // on a correct answer to an AUTHORED question (applySignalToEpisode), yet
+    // CLOSING withheld every authored question — so in lesson one (affect
+    // budget 1) a single graded miss left "quiz me" refused nine times and the
+    // lesson unfinishable. True when the episode is a SPIRAL close and the
+    // learner explicitly asks to be quizzed: CLOSE does not claim the turn, the
+    // gate may serve one authored probe, and a correct answer takes the
+    // existing reopen. An explicit close ("I'm done") stays absolute, and the
+    // model's own questions stay withheld.
+    let spiralCloseQuizRequestHoisted = false
     /** Title of the excursion's target concept, or null on an ordinary turn. */
     let excursionTeachingTitleHoisted: string | null = null
     let conceptPreviouslyMasteredHoisted = false
@@ -3091,6 +3101,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               isBareAcknowledgement: isBareAckHoisted,
               isLowSignalAcknowledgement: isLowSignalAcknowledgement(message),
             })
+            // RC-C: see the declaration.
+            spiralCloseQuizRequestHoisted = sessionEpisodeHoisted.phase === 'CLOSING'
+              && sessionEpisodeHoisted.closedBy === 'spiral'
+              && turnIntent.wantsPractice
             turnArbitrationHoisted = arbitrateTurn({
               knowledgeGapResolved: knowledgeGapHoisted !== null,
               recoveryActive: learnerMoveStageAHoisted.has('DISTRESS'),
@@ -3113,7 +3127,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // carries `turnIntent`'s own value forward.
               learnerRequestActive:
                 learnerMoveStageAHoisted.has('HELP_REQUEST') || learnerMoveStageAHoisted.ambiguous,
-              closing: sessionEpisodeHoisted.phase === 'CLOSING',
+              closing: sessionEpisodeHoisted.phase === 'CLOSING' && !spiralCloseQuizRequestHoisted,
               completionReady: lessonCompletedHoisted,
               // A REQUEST TO BE ASKED IS NOT A QUESTION TO ANSWER FIRST.
               // Synthetic-student after-run, 2026-09-24 (production 1f438cd,
@@ -3187,7 +3201,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // ALSO a recovery turn emitted both blocks and let the model pick.
             // Deferred, never cancelled: the episode stays CLOSING (Phase 1),
             // so the close fires on the first turn that is not a rescue.
-            arbitrationAllowsClose: (turnArbitrationHoisted ?? arbitrationUnavailable()).allows('SESSION_CLOSE'),
+            arbitrationAllowsClose: (turnArbitrationHoisted ?? arbitrationUnavailable()).allows('SESSION_CLOSE')
+              && !spiralCloseQuizRequestHoisted,
           })) {
             // Affect budget spent earlier this session (07 §6): the close
             // instruction holds until a boundary resets the episode.
@@ -5076,7 +5091,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // The session is ending: no question is attached, and no authored
           // probe is spent. See closingTurnWithholdsQuestion.
           arbitrationAllowsProbe: arbitrationRawAllowsProbe,
-          notClosingTurn: !closingTurnWithholdsQuestion(sessionEpisodeHoisted?.phase),
+          notClosingTurn: !closingTurnWithholdsQuestion(sessionEpisodeHoisted?.phase) || spiralCloseQuizRequestHoisted,
         }
         // "Sole blocker" is read FROM the terms object the gate itself decides
         // on — never a second copy of the same conditions, which is precisely
@@ -6536,7 +6551,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // from the text either way, so nothing leaks.
       {
         const { closingTurnWithholdsQuestion } = await import('@/lib/teaching/gateAssessment')
-        if (closingTurnWithholdsQuestion(sessionEpisodeHoisted?.phase)) mcqHoisted = null
+        // RC-C: the one authored probe a spiral-closed learner asked for
+        // survives; the model's own question never does.
+        if (closingTurnWithholdsQuestion(sessionEpisodeHoisted?.phase)
+          && !(spiralCloseQuizRequestHoisted && mcqHoisted !== null && mcqHoisted === gateMcqHoisted)) mcqHoisted = null
         // PHASE 3 — MEASURED IN PRODUCTION, and the Step 0 matrix missed it.
         //
         // Live run, disposable account: the learner typed "I'm lost. I don't

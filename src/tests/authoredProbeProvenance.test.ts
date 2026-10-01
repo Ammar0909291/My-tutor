@@ -193,7 +193,9 @@ describe('CLOSE, arbitration and completion still suppress the question', () => 
   const src = require('fs').readFileSync('src/app/api/learn/chat/route.ts', 'utf8') as string
 
   it('closing turns still null the MCQ', () => {
-    expect(src).toMatch(/if \(closingTurnWithholdsQuestion\(sessionEpisodeHoisted\?\.phase\)\) mcqHoisted = null/)
+    // RC-C (2026-09-30): the one authored probe a spiral-closed learner asked
+    // for is carved out; every other closing MCQ is still nulled.
+    expect(src).toMatch(/if \(closingTurnWithholdsQuestion\(sessionEpisodeHoisted\?\.phase\)\s*&& !\(spiralCloseQuizRequestHoisted && mcqHoisted !== null && mcqHoisted === gateMcqHoisted\)\) mcqHoisted = null/)
   })
 
   it('an owner that denies NEW_QUESTION still nulls the MCQ', () => {

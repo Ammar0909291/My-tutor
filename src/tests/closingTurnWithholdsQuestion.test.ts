@@ -57,7 +57,7 @@ describe('a CLOSING turn withholds every question', () => {
     // without changing anything it was protecting. Asserting the ordering says
     // what it means and cannot be broken by prose.
     const at = src.indexOf('mcqHoisted = gateMcqHoisted ?? mcqParse.mcq')
-    const withheld = src.indexOf('if (closingTurnWithholdsQuestion(sessionEpisodeHoisted?.phase)) mcqHoisted = null')
+    const withheld = src.indexOf('if (closingTurnWithholdsQuestion(sessionEpisodeHoisted?.phase)')
     expect(at).toBeGreaterThan(0)
     expect(withheld).toBeGreaterThan(at)
     // …and still close by: after the attach line, before the turn moves on to
