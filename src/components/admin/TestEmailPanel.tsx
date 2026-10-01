@@ -60,7 +60,7 @@ export function TestEmailPanel({ defaultTo }: { defaultTo: string }) {
           disabled={loading || !to}
           style={{
             padding: '8px 14px', borderRadius: 8, fontSize: 12, fontWeight: 700,
-            background: 'var(--candy-purple)', color: '#fff', border: 'none',
+            background: 'var(--candy-purple)', color: 'var(--candy-on-accent, #fff)', border: 'none',
             opacity: loading || !to ? 0.5 : 1, cursor: loading || !to ? 'default' : 'pointer',
           }}
         >

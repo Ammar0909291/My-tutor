@@ -59,7 +59,7 @@ export default async function CertificatesPage() {
             </div>
             <h2 className="text-base" style={{ color: 'var(--candy-ink)', fontFamily: 'var(--font-baloo2)', fontWeight: 800 }}>{T('certificates_empty_title')}</h2>
             <p className="text-sm mt-2 max-w-sm mx-auto" style={{ color: 'var(--candy-ink-soft)', fontWeight: 600 }}>{T('certificates_empty_body')}</p>
-            <Link href="/library" className="inline-block mt-5 px-5 py-2.5 text-sm" style={{ background: 'var(--candy-purple)', color: '#fff', fontWeight: 800, borderRadius: 14, textDecoration: 'none', boxShadow: '0 4px 0 var(--candy-purple-d)' }}>
+            <Link href="/library" className="inline-block mt-5 px-5 py-2.5 text-sm" style={{ background: 'var(--candy-purple)', color: 'var(--candy-on-accent, #fff)', fontWeight: 800, borderRadius: 14, textDecoration: 'none', boxShadow: '0 4px 0 var(--candy-purple-d)' }}>
               {T('certificates_browse_roadmaps')}
             </Link>
           </Card>
@@ -73,7 +73,7 @@ export default async function CertificatesPage() {
                 style={{ textDecoration: 'none' }}
               >
                 <Card className="flex items-center gap-4" style={{ padding: '20px' }}>
-                  <div className="flex items-center justify-center rounded-2xl shrink-0" style={{ width: 44, height: 44, background: 'rgba(139,92,246,0.14)' }}>
+                  <div className="flex items-center justify-center rounded-2xl shrink-0" style={{ width: 44, height: 44, background: 'var(--coral-muted)' }}>
                     <Award size={20} color="var(--candy-purple)" />
                   </div>
                   <div className="flex-1 min-w-0">

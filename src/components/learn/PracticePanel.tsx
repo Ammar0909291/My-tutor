@@ -240,7 +240,7 @@ export function PracticePanel({
                   onClick={load}
                   depth={3} shadowColor="var(--coral-hover)"
                   className="rounded-xl px-5 py-2.5 text-sm font-bold"
-                  style={{ background: 'var(--coral)', color: '#fff', border: 'none', cursor: 'pointer' }}
+                  style={{ background: 'var(--coral)', color: 'var(--on-accent, #fff)', border: 'none', cursor: 'pointer' }}
                 >
                   ↻ {i18n(lang, 'quiz_retry')}
                 </CandyButton>
@@ -303,7 +303,7 @@ export function PracticePanel({
                 disabled={selected === null}
                 depth={3} shadowColor="var(--coral-hover)"
                 className="w-full rounded-xl py-3 text-sm font-bold disabled:opacity-40"
-                style={{ background: 'var(--coral)', color: '#fff', border: 'none', cursor: selected === null ? 'default' : 'pointer' }}
+                style={{ background: 'var(--coral)', color: 'var(--on-accent, #fff)', border: 'none', cursor: selected === null ? 'default' : 'pointer' }}
               >
                 {currentIdx + 1 < questions.length ? i18n(lang, 'quiz_next') : i18n(lang, 'quiz_finish')}
               </CandyButton>
@@ -335,7 +335,7 @@ export function PracticePanel({
                   onClick={load}
                   depth={3} shadowColor="var(--coral-hover)"
                   className="rounded-xl px-5 py-2.5 text-sm font-bold"
-                  style={{ background: 'var(--coral)', color: '#fff', border: 'none', cursor: 'pointer' }}
+                  style={{ background: 'var(--coral)', color: 'var(--on-accent, #fff)', border: 'none', cursor: 'pointer' }}
                 >
                   {i18n(lang, 'quiz_retry')}
                 </CandyButton>

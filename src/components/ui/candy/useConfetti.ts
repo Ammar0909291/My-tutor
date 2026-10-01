@@ -3,7 +3,7 @@
 import { useCallback } from 'react'
 import styles from './primitives.module.css'
 
-const CONFETTI_COLORS = ['#8B5CF6', '#3B9EFF', '#58CC02', '#FFC800', '#FF5FA2', '#FF9600']
+const CONFETTI_COLORS = ['#E8B84B', '#8FD1C4', '#6FCF87', '#F4D37A', '#E08B79', '#E59A5A']
 
 /**
  * Candy confetti burst — ported from design/dashboard-approved.html's inline

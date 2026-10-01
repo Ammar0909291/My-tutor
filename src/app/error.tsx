@@ -52,7 +52,7 @@ export default function Error({ error, reset }: { error: Error & { digest?: stri
             <CandyButton
               onClick={retry}
               className="flex-1 px-5 py-3 rounded-2xl text-sm"
-              style={{ background: 'var(--candy-purple)', color: '#fff', fontWeight: 800, border: 'none' }}
+              style={{ background: 'var(--candy-purple)', color: 'var(--candy-on-accent, #fff)', fontWeight: 800, border: 'none' }}
             >
               {t('error_cta_retry')}
             </CandyButton>

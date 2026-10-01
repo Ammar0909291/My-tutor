@@ -13,11 +13,11 @@ import { CandyPage, Card, SectionTitle, ProgressBar } from '@/components/ui/cand
 const CATEGORY_ACCENT: Record<SubjectCategory, string> = {
   languages: '#FFC800',
   programming: '#58CC02',
-  mathematics: '#8B5CF6',
+  mathematics: '#E8B84B',
   physics: '#3B9EFF',
   chemistry: '#FF9600',
   biology: '#FF5FA2',
-  ai: '#7C3AED',
+  ai: '#8FD1C4',
   computer_science: '#1CB0F6',
 }
 

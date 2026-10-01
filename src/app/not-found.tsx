@@ -27,7 +27,7 @@ export default function NotFound() {
             <Link href="/dashboard" className="flex-1">
               <CandyButton
                 className="w-full px-5 py-3 rounded-2xl text-sm"
-                style={{ background: 'var(--candy-purple)', color: '#fff', fontWeight: 800, border: 'none' }}
+                style={{ background: 'var(--candy-purple)', color: 'var(--candy-on-accent, #fff)', fontWeight: 800, border: 'none' }}
               >
                 {t('not_found_cta_dashboard')}
               </CandyButton>

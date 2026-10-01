@@ -102,7 +102,7 @@ export function ConnectionRecovery({ retryKey }: { retryKey: string }) {
           <CandyButton
             onClick={manualRetry}
             className="px-5 py-3 rounded-2xl text-sm mt-2 w-full"
-            style={{ background: 'var(--candy-purple)', color: '#fff', fontWeight: 800, border: 'none' }}
+            style={{ background: 'var(--candy-purple)', color: 'var(--candy-on-accent, #fff)', fontWeight: 800, border: 'none' }}
           >
             {t('error_cta_retry')}
           </CandyButton>

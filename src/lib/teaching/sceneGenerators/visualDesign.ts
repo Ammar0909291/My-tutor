@@ -89,6 +89,17 @@ export const ROLE_LIGHT: Record<Role, string> = {
   result:    '#15803d',   // green-700  — green-500 is 1.9:1 on white
 }
 
+// ── dark-theme render overrides (Study Board chalkboard, 2026-10-01) ─────────
+// The dark figure surface moved from slate #161B22 to the chalkboard green
+// #243329 (src/styles/tokens.css). Red-500 / blue-500 fall to 3.5:1 / 3.6:1 on
+// it, below the 4.5:1 this file promises. The STORED values (the wire format —
+// literals in many generators and saved scenes) are untouched; only these two
+// roles are lightened at render time, exactly as ROLE_LIGHT does for light.
+const ROLE_DARK_OVERRIDE: Partial<Record<Role, string>> = {
+  input:  '#f87171',   // red-400
+  output: '#60a5fa',   // blue-400
+}
+
 /** Which role a stored colour represents, or null when it is not one of ours. */
 export function roleOf(color: string | null | undefined): Role | null {
   if (!color) return null
@@ -115,8 +126,8 @@ export function themeColor(
   theme: 'dark' | 'light',
 ): string | undefined {
   if (!color) return undefined
-  if (theme !== 'light') return color
   const role = roleOf(color)
+  if (theme !== 'light') return (role && ROLE_DARK_OVERRIDE[role]) || color
   return role ? ROLE_LIGHT[role] : color
 }
 

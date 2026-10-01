@@ -25,23 +25,23 @@ import type {
 } from '@/components/dashboard/v2/types'
 
 const DEFAULT_DAILY_GOAL_LESSONS = 3
-const AVATAR_PALETTE = ['#FF5FA2', '#3B9EFF', '#8B5CF6', '#58CC02', '#FFC800', '#FF9600']
+const AVATAR_PALETTE = ['#E08B79', '#8FD1C4', '#E8B84B', '#6FCF87', '#F4D37A', '#E59A5A']
 const LEADERBOARD_SIZE = 5
 
 const SUBJECT_COLOR_MAP: Record<string, { color: string; bgColor: string }> = {
-  c:           { color: 'var(--blue)',   bgColor: 'rgba(59,158,255,0.12)' },
-  cpp:         { color: 'var(--blue)',   bgColor: 'rgba(59,158,255,0.12)' },
-  python:      { color: 'var(--green)',  bgColor: 'rgba(88,204,2,0.12)' },
-  english:     { color: 'var(--yellow)', bgColor: 'rgba(255,200,0,0.12)' },
-  javascript:  { color: 'var(--yellow)', bgColor: 'rgba(255,200,0,0.12)' },
-  typescript:  { color: 'var(--blue)',   bgColor: 'rgba(59,158,255,0.12)' },
-  java:        { color: 'var(--orange)', bgColor: 'rgba(255,150,0,0.12)' },
-  russian:     { color: 'var(--purple)', bgColor: 'rgba(139,92,246,0.12)' },
-  mathematics: { color: 'var(--blue)',   bgColor: 'rgba(59,158,255,0.12)' },
-  physics:     { color: 'var(--purple)', bgColor: 'rgba(139,92,246,0.12)' },
-  chemistry:   { color: 'var(--green)',  bgColor: 'rgba(88,204,2,0.12)' },
+  c:           { color: 'var(--blue)',   bgColor: 'color-mix(in srgb, var(--blue) 12%, transparent)' },
+  cpp:         { color: 'var(--blue)',   bgColor: 'color-mix(in srgb, var(--blue) 12%, transparent)' },
+  python:      { color: 'var(--green)',  bgColor: 'color-mix(in srgb, var(--green) 12%, transparent)' },
+  english:     { color: 'var(--yellow)', bgColor: 'color-mix(in srgb, var(--yellow) 12%, transparent)' },
+  javascript:  { color: 'var(--yellow)', bgColor: 'color-mix(in srgb, var(--yellow) 12%, transparent)' },
+  typescript:  { color: 'var(--blue)',   bgColor: 'color-mix(in srgb, var(--blue) 12%, transparent)' },
+  java:        { color: 'var(--orange)', bgColor: 'color-mix(in srgb, var(--orange) 12%, transparent)' },
+  russian:     { color: 'var(--purple)', bgColor: 'color-mix(in srgb, var(--purple) 12%, transparent)' },
+  mathematics: { color: 'var(--blue)',   bgColor: 'color-mix(in srgb, var(--blue) 12%, transparent)' },
+  physics:     { color: 'var(--purple)', bgColor: 'color-mix(in srgb, var(--purple) 12%, transparent)' },
+  chemistry:   { color: 'var(--green)',  bgColor: 'color-mix(in srgb, var(--green) 12%, transparent)' },
 }
-const DEFAULT_SUBJECT_COLORS = { color: 'var(--pink)', bgColor: 'rgba(255,95,162,0.12)' }
+const DEFAULT_SUBJECT_COLORS = { color: 'var(--pink)', bgColor: 'color-mix(in srgb, var(--pink) 12%, transparent)' }
 
 // Maps xp.ts's canonical English LeagueTier.name (its stable identifier) to
 // the display translation key — mirrors AchievementCenter's LEVEL_NAME_KEY

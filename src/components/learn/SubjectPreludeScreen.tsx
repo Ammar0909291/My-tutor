@@ -164,7 +164,7 @@ export default function SubjectPreludeScreen({
           style={{
             alignSelf: 'flex-start', padding: '11px 22px', borderRadius: 12,
             fontSize: 13.5, fontWeight: 700, cursor: busy ? 'default' : 'pointer',
-            background: UI.indigo, color: '#fff', border: 'none', opacity: busy ? 0.6 : 1,
+            background: UI.indigo, color: 'var(--on-accent, #fff)', border: 'none', opacity: busy ? 0.6 : 1,
           }}
         >
           {continueLabel}

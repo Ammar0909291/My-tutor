@@ -10,7 +10,7 @@ function getLevel(xp: number, lang: Lang) {
   if (xp >= 1001) return { name: i18nT(lang, 'level_master'),       color: '#FFC800', next: null }
   if (xp >= 601) return { name: i18nT(lang, 'level_expert'),        color: '#3B9EFF', next: 1001 }
   if (xp >= 301) return { name: i18nT(lang, 'level_practitioner'),  color: '#58CC02', next: 601 }
-  if (xp >= 101) return { name: i18nT(lang, 'level_student'),       color: '#8B5CF6', next: 301 }
+  if (xp >= 101) return { name: i18nT(lang, 'level_student'),       color: '#E8B84B', next: 301 }
   return { name: i18nT(lang, 'level_novice'), color: '#8B8AA3', next: 101 }
 }
 

@@ -23,7 +23,7 @@ export default function GlobalError({ reset }: { error: Error & { digest?: strin
             // A hard reload is the only recovery that re-fetches everything.
             onClick={() => window.location.reload()}
             style={{
-              background: '#8B5CF6', color: '#fff', fontWeight: 800, fontSize: 14,
+              background: '#E8B84B', color: '#241B08', fontWeight: 800, fontSize: 14,
               border: 'none', borderRadius: 16, padding: '12px 24px', cursor: 'pointer',
             }}
           >

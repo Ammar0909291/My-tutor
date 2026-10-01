@@ -154,7 +154,7 @@ export function FinalAssessmentModal({ subjectSlug, subjectName, lessonTitles, o
               <EagleMascot variant="logo" size={48} />
               <p style={{ fontSize: 12, color: 'var(--red)', textAlign: 'center' }}>{errorMsg}</p>
               <CandyButton onClick={generate} depth={2} shadowColor="var(--coral-hover)"
-                style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 11, padding: '6px 14px', borderRadius: 10, cursor: 'pointer', background: 'var(--coral)', color: '#fff', border: 'none', fontWeight: 700 }}>
+                style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 11, padding: '6px 14px', borderRadius: 10, cursor: 'pointer', background: 'var(--coral)', color: 'var(--on-accent, #fff)', border: 'none', fontWeight: 700 }}>
                 <RotateCcw size={11} /> {t('final_assessment_retry')}
               </CandyButton>
             </div>
@@ -208,13 +208,13 @@ export function FinalAssessmentModal({ subjectSlug, subjectName, lessonTitles, o
               </p>
               {passed && certificateCode && (
                 <a href={`/certificates/${certificateCode}`}
-                  style={{ textDecoration: 'none', display: 'inline-block', padding: '8px 16px', fontSize: 12, fontWeight: 700, color: '#fff', background: 'var(--coral)', borderRadius: 10, boxShadow: '0 3px 0 var(--coral-hover)' }}>
+                  style={{ textDecoration: 'none', display: 'inline-block', padding: '8px 16px', fontSize: 12, fontWeight: 700, color: 'var(--on-accent, #fff)', background: 'var(--coral)', borderRadius: 10, boxShadow: '0 3px 0 var(--coral-hover)' }}>
                   {t('final_assessment_view_cert')}
                 </a>
               )}
               {!passed && (
                 <CandyButton onClick={generate} depth={3} shadowColor="var(--coral-hover)"
-                  style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12, padding: '8px 16px', borderRadius: 10, cursor: 'pointer', background: 'var(--coral)', color: '#fff', border: 'none', fontWeight: 700 }}>
+                  style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 12, padding: '8px 16px', borderRadius: 10, cursor: 'pointer', background: 'var(--coral)', color: 'var(--on-accent, #fff)', border: 'none', fontWeight: 700 }}>
                   <RotateCcw size={12} /> {t('final_assessment_retry')}
                 </CandyButton>
               )}

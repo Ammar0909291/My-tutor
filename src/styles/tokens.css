@@ -1,86 +1,129 @@
-/* ── Dark theme (default) ─────────────────────────────────────────── */
+/*
+ * THEME — the "Study Board" palette, app-wide (owner-directed 2026-10-01).
+ *
+ * The tutor window (LessonScreen.module.css, `.learnCandy`) has carried this
+ * palette locally since the Study Board re-skin: a chalkboard in dark theme
+ * (walnut desk, green board, chalk text, chalk-yellow mark) and a whiteboard in
+ * light theme (paper desk, white board, ink text, marker-green mark). The rest
+ * of the app was still the earlier GitHub-dark + coral/indigo set. These
+ * values are the SAME ones the tutor window uses, so the two now agree and the
+ * tutor window's local overrides are a no-op rather than a seam.
+ *
+ * Superseded values (kept here so the change is reversible by reading, not by
+ * archaeology): dark surfaces #080B10 / #0D1117 / #161B22 / #21262D, text
+ * #E6EDF3 / #7D8590 / #484F58, border #30363D; light surfaces #F6F8FA /
+ * #FFFFFF / #EAEEF2, text #1F2328 / #656D76 / #9198A1, border #D0D7DE; brand
+ * coral #FF7B6B (+ hover #FF6B58); indigo #6C5CE7; blue #79C0FF; green
+ * #3FB950; yellow #D29922; purple #A371F7; red #F85149.
+ */
+
+/* ── Dark theme (default) — chalkboard ─────────────────────────────── */
 :root, [data-theme="dark"] {
-  --bg-void:     #080B10;
-  --bg-base:     #0D1117;
-  --bg-surface:  #161B22;
-  --bg-card:     #161B22;
-  --bg-elevated: #21262D;
-  --bg-hover:    #2D333B;
-  --bg-overlay:  rgba(13,17,23,0.95);
-  --text-primary:   #E6EDF3;
-  --text-secondary: #7D8590;
-  --text-dim:       #484F58;
-  --border-subtle:   rgba(48,54,61,0.8);
-  --border-default: #30363D;
-  --border-emphasis: #6E7681;
-  --border-muted:    rgba(48,54,61,0.6);
-  --panel-border:    rgba(255,255,255,0.1);
+  --bg-void:     #1B1712;                 /* walnut desk */
+  --bg-base:     #1B1712;
+  --bg-surface:  #243329;                 /* board, raised */
+  --bg-card:     #1E2B24;                 /* the chalkboard itself */
+  --bg-elevated: #243329;
+  --bg-hover:    rgba(232,184,75,0.10);
+  --bg-overlay:  rgba(27,23,18,0.95);
+  --text-primary:   #F1EDE2;              /* chalk */
+  --text-secondary: #A9B0A6;
+  --text-dim:       #8A9487;
+  --border-subtle:   rgba(241,237,226,0.10);
+  --border-default:  rgba(241,237,226,0.14);
+  --border-emphasis: rgba(241,237,226,0.32);
+  --border-muted:    rgba(241,237,226,0.08);
+  --panel-border:    rgba(241,237,226,0.12);
+
+  /* Brand accent: chalk-yellow is the primary mark on the chalkboard. */
+  --coral:        #E8B84B;
+  --coral-hover:  #D1A13F;
+  --coral-muted:  rgba(232,184,75,0.14);
+  --coral-border: rgba(232,184,75,0.32);
+  --coral-glow:   0 0 32px rgba(232,184,75,0.22);
+  --accent-primary-glow: rgba(232,184,75,0.35);
+  --border-accent: rgba(232,184,75,0.4);
+  /* Text/icon colour that sits ON a --coral fill. White on chalk-yellow is
+     ~1.7:1; the dark brown the tutor window already uses is ~9:1. */
+  --on-accent:    #241B08;
+
+  --blue:          #8FD1C4;
+  --blue-muted:    rgba(143,209,196,0.10);
+  --green:         #6FCF87;
+  --green-muted:   rgba(111,207,135,0.10);
+  --yellow:        #E8B84B;
+  --yellow-muted:  rgba(232,184,75,0.10);
+  --purple:        #E8B84B;
+  --purple-muted:  rgba(232,184,75,0.10);
+  --red:           #E08B79;
+  --red-muted:     rgba(224,139,121,0.10);
+
+  --indigo:        #E8B84B;
+  --indigo-hover:  #D1A13F;
+  --indigo-muted:  rgba(232,184,75,0.12);
+  --indigo-border: rgba(232,184,75,0.30);
 }
 
-/* ── Light theme ──────────────────────────────────────────────────── */
+/* ── Light theme — whiteboard ─────────────────────────────────────── */
 [data-theme="light"] {
-  --bg-void:        #F6F8FA;
-  --bg-base:        #FFFFFF;
-  --bg-surface:     #F6F8FA;
-  --bg-card:        #FFFFFF;
-  --bg-elevated:    #EAEEF2;
-  --bg-hover:       #D0D7DE;
-  --bg-overlay:     rgba(246,248,250,0.95);
-  --text-primary:   #1F2328;
-  --text-secondary: #656D76;
-  --text-dim:       #9198A1;
+  --bg-void:        #F1ECE0;              /* paper desk */
+  --bg-base:        #F1ECE0;
+  --bg-surface:     #FAF7EE;
+  --bg-card:        #FFFFFF;              /* the whiteboard itself */
+  --bg-elevated:    #FAF7EE;
+  --bg-hover:       rgba(47,125,90,0.08);
+  --bg-overlay:     rgba(241,236,224,0.95);
+  --text-primary:   #232722;              /* ink */
+  --text-secondary: #6B6F66;
+  --text-dim:       #7C8075;
   --text-inverse:   #FFFFFF;
-  --border-subtle:  rgba(208,215,222,0.8);
-  --border-default: #D0D7DE;
-  --border-emphasis: #8C959F;
-  --border-muted:   rgba(208,215,222,0.6);
-  --border-accent:  rgba(255,123,107,0.4);
-  --panel-border:   rgba(31,35,40,0.12);
+  --border-subtle:  rgba(220,213,196,0.8);
+  --border-default: #DCD5C4;
+  --border-emphasis: #6B6F66;
+  --border-muted:   rgba(220,213,196,0.6);
+  --panel-border:   rgba(35,39,34,0.12);
   --shadow-sm: 0 1px 0 rgba(27,31,36,0.04);
   --shadow-md: 0 3px 12px rgba(140,149,159,0.15);
   --shadow-lg: 0 8px 32px rgba(140,149,159,0.2);
   --shadow-xl: 0 16px 64px rgba(140,149,159,0.25);
+
+  /* Brand accent: marker-green is the primary mark on the whiteboard. */
+  --coral:        #2F7D5A;
+  --coral-hover:  #256A4C;
+  --coral-muted:  rgba(47,125,90,0.12);
+  --coral-border: rgba(47,125,90,0.30);
+  --coral-glow:   0 0 32px rgba(47,125,90,0.20);
+  --accent-primary-glow: rgba(47,125,90,0.30);
+  --border-accent: rgba(47,125,90,0.4);
+  --on-accent:    #FFFFFF;
+
+  --blue:          #3B6FD9;
+  --blue-muted:    rgba(59,111,217,0.10);
+  --green:         #2F8F4E;
+  --green-muted:   rgba(47,143,78,0.10);
+  --yellow:        #C97A22;
+  --yellow-muted:  rgba(201,122,34,0.10);
+  --purple:        #2F7D5A;
+  --purple-muted:  rgba(47,125,90,0.10);
+  --red:           #B23B3B;
+  --red-muted:     rgba(178,59,59,0.10);
+
+  --indigo:        #2F7D5A;
+  --indigo-hover:  #256A4C;
+  --indigo-muted:  rgba(47,125,90,0.10);
+  --indigo-border: rgba(47,125,90,0.25);
 }
 
 :root {
-  /* ── Brand coral ── */
-  --coral:        #FF7B6B;
-  --coral-hover:  #FF6B58;
-  --coral-muted:  rgba(255,123,107,0.12);
-  --coral-border: rgba(255,123,107,0.25);
-  --coral-glow:   0 0 32px rgba(255,123,107,0.25);
-
-  /* ── Semantic colors ── */
-  --blue:          #79C0FF;
-  --blue-muted:    rgba(121,192,255,0.10);
-  --green:         #3FB950;
-  --green-muted:   rgba(63,185,80,0.10);
-  --yellow:        #D29922;
-  --yellow-muted:  rgba(210,153,34,0.10);
-  --purple:        #A371F7;
-  --purple-muted:  rgba(163,113,247,0.10);
-  --red:           #F85149;
-  --red-muted:     rgba(248,81,73,0.10);
-
-  /* ── Indigo (Learn window redesign accent — 2026-07-06) ── */
-  --indigo:        #6C5CE7;
-  --indigo-hover:   #5A4BD1;
-  --indigo-muted:  rgba(108,92,231,0.10);
-  --indigo-border: rgba(108,92,231,0.25);
-
   /* ── Legacy accent aliases (keep for backward compat) ── */
   --accent-primary:      var(--coral);
   --accent-secondary:    var(--blue);
   --accent-green:        var(--green);
   --accent-yellow:       var(--yellow);
   --accent-primary-dim:  var(--coral-muted);
-  --accent-primary-glow: rgba(255,123,107,0.35);
 
   /* ── Text (theme-independent) ── */
-  --text-inverse:   #0D1117;
-
-  /* ── Borders (theme-independent) ── */
-  --border-accent:   rgba(255,123,107,0.4);
+  --text-inverse:   #1B1712;
 
   /* ── Radius ── */
   --r-sm:   6px;

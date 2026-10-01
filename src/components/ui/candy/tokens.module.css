@@ -3,13 +3,28 @@
  * language introduced by dashboard v2 (design/dashboard-approved.html).
  *
  * Apply `.candyTheme` (or `composes: candyTheme from ...`) on the root
- * element of any screen built from src/components/ui/candy/*. It defines
- * the full light-mode palette plus a [data-theme='dark'] override for the
- * neutral tokens (--candy-bg/card/ink/ink-soft/shadow).
+ * element of any screen built from src/components/ui/candy/*. The base block
+ * is the light (whiteboard) palette; a [data-theme='dark'] override supplies
+ * the dark (chalkboard) palette.
  *
- * The candy/brand hues (purple, blue, green, yellow, orange, red, pink) are
- * intentionally IDENTICAL in both themes — only the neutral surface/text
- * tokens flip for dark mode, matching the approved dashboard mockup.
+ * THEME CHANGE (owner-directed 2026-10-01): these were the Duolingo-style
+ * purple / lime / sky-blue set, with the hues IDENTICAL in both themes and
+ * only the neutrals flipping. They now follow the Study Board palette the
+ * tutor window already uses (LessonScreen.module.css) — chalkboard green with
+ * a chalk-yellow mark in dark, paper and marker-green in light — so the
+ * dashboard and the tutor window read as one product. Hues therefore now DO
+ * differ by theme (a yellow brand on a dark board needs a different green /
+ * blue than a green brand on white paper).
+ *
+ * Superseded values: bg #F0F4FF / #0D1117, card #FFFFFF / #161B22, ink
+ * #3C3B54 / #E6EDF3, ink-soft #8B8AA3 / #8B949E, purple #8B5CF6 (-d #7C3AED),
+ * blue #3B9EFF (-d #2B7FD9), green #58CC02 (-d #46A302), yellow #FFC800 (-d
+ * #E6AC00), orange #FF9600, red #FF4B4B, pink #FF5FA2, shadow #E0E4F5.
+ *
+ * `--candy-purple` is the BRAND accent slot (name kept so no consumer changes):
+ * marker-green in light, chalk-yellow in dark. Anything painted ON a brand or
+ * coloured fill must use `--candy-on-accent`, not a literal white — white on
+ * chalk-yellow is ~1.7:1.
  *
  * These are namespaced with a `--candy-` prefix so they never collide with
  * the app-wide semantic tokens (--purple/--blue/--green/--yellow/--red etc.)
@@ -17,30 +32,57 @@
  */
 
 .candyTheme {
-  --candy-bg: #F0F4FF;
+  --candy-bg: #F1ECE0;
   --candy-card: #FFFFFF;
-  --candy-ink: #3C3B54;
-  --candy-ink-soft: #8B8AA3;
+  --candy-ink: #232722;
+  --candy-ink-soft: #6B6F66;
 
-  --candy-purple: #8B5CF6;
-  --candy-purple-d: #7C3AED;
-  --candy-blue: #3B9EFF;
-  --candy-blue-d: #2B7FD9;
-  --candy-green: #58CC02;
-  --candy-green-d: #46A302;
-  --candy-yellow: #FFC800;
-  --candy-yellow-d: #E6AC00;
-  --candy-orange: #FF9600;
-  --candy-red: #FF4B4B;
-  --candy-pink: #FF5FA2;
+  --candy-purple: #2F7D5A;
+  --candy-purple-d: #256A4C;
+  --candy-blue: #3B6FD9;
+  --candy-blue-d: #2D58B0;
+  --candy-green: #2F8F4E;
+  --candy-green-d: #237A3E;
+  --candy-yellow: #C97A22;
+  --candy-yellow-d: #A8611A;
+  --candy-orange: #C2642A;
+  --candy-red: #B23B3B;
+  --candy-pink: #B8527A;
 
-  --candy-shadow: #E0E4F5;
+  --candy-shadow: #DCD5C4;
+
+  --candy-on-accent: #FFFFFF;
+  --candy-tint-yellow: rgba(201, 122, 34, 0.14);
+  --candy-tint-purple: rgba(47, 125, 90, 0.12);
+  --candy-tint-blue: rgba(59, 111, 217, 0.12);
+  --candy-tint-pink: rgba(184, 82, 122, 0.12);
+  --candy-tint-neutral: #FAF7EE;
 }
 
 :global([data-theme='dark']) .candyTheme {
-  --candy-bg: #0D1117;
-  --candy-card: #161B22;
-  --candy-ink: #E6EDF3;
-  --candy-ink-soft: #8B949E;
+  --candy-bg: #1B1712;
+  --candy-card: #1E2B24;
+  --candy-ink: #F1EDE2;
+  --candy-ink-soft: #A9B0A6;
+
+  --candy-purple: #E8B84B;
+  --candy-purple-d: #B98C2E;
+  --candy-blue: #8FD1C4;
+  --candy-blue-d: #5FA89A;
+  --candy-green: #6FCF87;
+  --candy-green-d: #4BAA66;
+  --candy-yellow: #F4D37A;
+  --candy-yellow-d: #C9A24A;
+  --candy-orange: #E59A5A;
+  --candy-red: #E08B79;
+  --candy-pink: #D99AB0;
+
   --candy-shadow: rgba(0, 0, 0, 0.45);
+
+  --candy-on-accent: #241B08;
+  --candy-tint-yellow: rgba(244, 211, 122, 0.14);
+  --candy-tint-purple: rgba(232, 184, 75, 0.12);
+  --candy-tint-blue: rgba(143, 209, 196, 0.12);
+  --candy-tint-pink: rgba(217, 154, 176, 0.12);
+  --candy-tint-neutral: #243329;
 }

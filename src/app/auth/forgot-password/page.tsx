@@ -75,7 +75,7 @@ export default function ForgotPasswordPage() {
               <span style={{ fontWeight: 700, color: 'var(--candy-ink)' }}>{email}</span>
             </p>
             <Link href="/auth/login" className="block w-full"
-              style={{ padding: '12px', borderRadius: 14, background: 'var(--candy-purple)', color: '#fff', fontWeight: 800, fontSize: 14, textAlign: 'center', textDecoration: 'none', boxShadow: '0 4px 0 var(--candy-purple-d)' }}>
+              style={{ padding: '12px', borderRadius: 14, background: 'var(--candy-purple)', color: 'var(--candy-on-accent, #fff)', fontWeight: 800, fontSize: 14, textAlign: 'center', textDecoration: 'none', boxShadow: '0 4px 0 var(--candy-purple-d)' }}>
               {t('forgot_back')}
             </Link>
           </Card>
@@ -110,7 +110,7 @@ export default function ForgotPasswordPage() {
                 <CandyButton
                   type="submit" disabled={state === 'loading'}
                   className="w-full" shadowColor="var(--candy-purple-d)"
-                  style={{ padding: '12px', borderRadius: 14, background: 'var(--candy-purple)', color: '#fff', fontWeight: 800, fontSize: 14, opacity: state === 'loading' ? 0.5 : 1 }}>
+                  style={{ padding: '12px', borderRadius: 14, background: 'var(--candy-purple)', color: 'var(--candy-on-accent, #fff)', fontWeight: 800, fontSize: 14, opacity: state === 'loading' ? 0.5 : 1 }}>
                   {state === 'loading' ? '...' : t('forgot_btn')}
                 </CandyButton>
               </form>

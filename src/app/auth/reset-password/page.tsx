@@ -114,7 +114,7 @@ function ResetPasswordForm() {
               {t('reset_success_sub')}
             </p>
             <Link href="/auth/login" className="block w-full"
-              style={{ padding: '12px', borderRadius: 14, background: 'var(--candy-purple)', color: '#fff', fontWeight: 800, fontSize: 14, textAlign: 'center', textDecoration: 'none', boxShadow: '0 4px 0 var(--candy-purple-d)' }}>
+              style={{ padding: '12px', borderRadius: 14, background: 'var(--candy-purple)', color: 'var(--candy-on-accent, #fff)', fontWeight: 800, fontSize: 14, textAlign: 'center', textDecoration: 'none', boxShadow: '0 4px 0 var(--candy-purple-d)' }}>
               {t('reset_success_login')}
             </Link>
           </Card>
@@ -187,7 +187,7 @@ function ResetPasswordForm() {
                 <CandyButton type="submit"
                   disabled={state === 'loading' || !token || password !== confirm || password.length < 8}
                   className="w-full" shadowColor="var(--candy-purple-d)"
-                  style={{ padding: '12px', borderRadius: 14, background: 'var(--candy-purple)', color: '#fff', fontWeight: 800, fontSize: 14, opacity: (state === 'loading' || !token || password !== confirm || password.length < 8) ? 0.5 : 1 }}>
+                  style={{ padding: '12px', borderRadius: 14, background: 'var(--candy-purple)', color: 'var(--candy-on-accent, #fff)', fontWeight: 800, fontSize: 14, opacity: (state === 'loading' || !token || password !== confirm || password.length < 8) ? 0.5 : 1 }}>
                   {state === 'loading' ? t('reset_saving') : t('reset_btn')}
                 </CandyButton>
               </form>

@@ -24,8 +24,10 @@ import { resolveVisual, restoreVisualSession } from '@/lib/teaching/visual/resol
 import { visibleObjects, type SceneSpec } from '@/lib/teaching/sceneSpec'
 import { validateSceneSpec } from '@/lib/teaching/sceneSpecValidator'
 
-/** The themed figure surface the scene is painted on — src/styles/tokens.css. */
-const SURFACE = { dark: '#161B22', light: '#F6F8FA' } as const
+/** The themed figure surface the scene is painted on — src/styles/tokens.css (--bg-surface).
+ *  2026-10-01 Study Board theme: was { dark: '#161B22', light: '#F6F8FA' }; now chalkboard
+ *  #243329 / whiteboard #FAF7EE. */
+const SURFACE = { dark: '#243329', light: '#FAF7EE' } as const
 
 function channel(v: number): number {
   const c = v / 255
@@ -86,7 +88,9 @@ describe('the reported failure is measurable, and is fixed', () => {
 describe('every semantic role resolves to a readable token in BOTH themes', () => {
   it.each(ROLES)('%s · dark', (role) => {
     const c = themeColor(ROLE[role], 'dark')!
-    expect(c).toBe(ROLE[role])                       // dark is the stored value
+    // Was `expect(c).toBe(ROLE[role])` ("dark is the stored value"). 2026-10-01: input/output are
+    // lightened at render time for the chalkboard surface; every other role is still the stored value.
+    if (role !== 'input' && role !== 'output') expect(c).toBe(ROLE[role])
     expect(contrast(c, SURFACE.dark)).toBeGreaterThanOrEqual(4.5)
   })
 
@@ -140,8 +144,14 @@ describe('themeColor maps by ROLE, and touches nothing else', () => {
     }
   })
 
-  it('dark rendering is byte-identical to before the fix', () => {
-    for (const role of ROLES) expect(themeColor(ROLE[role], 'dark')).toBe(ROLE[role])
+  it('dark rendering is byte-identical to before the fix, except input/output (lightened for the chalkboard surface)', () => {
+    // 2026-10-01: previously every role. input/output are now lightened at render time only.
+    for (const role of ROLES) {
+      if (role === 'input' || role === 'output') continue
+      expect(themeColor(ROLE[role], 'dark')).toBe(ROLE[role])
+    }
+    expect(themeColor(ROLE.input, 'dark')).toBe('#f87171')
+    expect(themeColor(ROLE.output, 'dark')).toBe('#60a5fa')
   })
 
   it('undefined stays undefined so renderer fallbacks still apply', () => {

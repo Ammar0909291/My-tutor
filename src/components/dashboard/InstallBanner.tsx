@@ -56,7 +56,7 @@ export function InstallBanner() {
         </p>
       </div>
       <button onClick={handleInstall}
-        style={{ padding: '6px 14px', borderRadius: 10, border: 'none', cursor: 'pointer', fontSize: 12, fontWeight: 700, background: 'var(--accent-primary)', color: '#fff' }}>
+        style={{ padding: '6px 14px', borderRadius: 10, border: 'none', cursor: 'pointer', fontSize: 12, fontWeight: 700, background: 'var(--accent-primary)', color: 'var(--on-accent, #fff)' }}>
         {t('pwa_install_btn')}
       </button>
       <button onClick={handleDismiss}

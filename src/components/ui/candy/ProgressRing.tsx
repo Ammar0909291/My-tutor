@@ -14,7 +14,7 @@ export interface ProgressRingProps {
   strokeWidth?: number
   /** Track stroke color. Default '#EEF1FB'. */
   trackColor?: string
-  /** Gradient start color for the fill stroke. Default '#8B5CF6' (candy purple). */
+  /** Gradient start color for the fill stroke. Default '#E8B84B' (brand chalk-yellow). */
   gradientFrom?: string
   /** Gradient end color for the fill stroke. Default '#3B9EFF' (candy blue). */
   gradientTo?: string
@@ -33,7 +33,7 @@ export function ProgressRing({
   radius = 36,
   strokeWidth = 10,
   trackColor = '#EEF1FB',
-  gradientFrom = '#8B5CF6',
+  gradientFrom = '#E8B84B',
   gradientTo = '#3B9EFF',
   label,
   className,

@@ -59,7 +59,7 @@ export default function LeaderboardPage() {
 
         {/* My rank */}
         {data?.myRank && (
-          <Card className="flex items-center justify-between px-4 py-3 mb-4" style={{ background: 'rgba(139,92,246,0.12)' }}>
+          <Card className="flex items-center justify-between px-4 py-3 mb-4" style={{ background: 'var(--coral-muted)' }}>
             <span className="text-sm" style={{ color: 'var(--candy-purple)', fontWeight: 800 }}>{t('lb_your_rank')}</span>
             <span className="text-sm" style={{ fontWeight: 800, color: 'var(--candy-ink)' }}>#{data.myRank} · {data.myXP} XP</span>
           </Card>
@@ -82,7 +82,7 @@ export default function LeaderboardPage() {
                   <Image src={entry.image} alt={entry.name} width={32} height={32} className="w-8 h-8 rounded-full object-cover" />
                 ) : (
                   <div className="w-8 h-8 rounded-full flex items-center justify-center text-xs"
-                    style={{ background: 'var(--candy-purple)', color: '#fff', fontWeight: 800 }}>
+                    style={{ background: 'var(--candy-purple)', color: 'var(--candy-on-accent, #fff)', fontWeight: 800 }}>
                     {entry.name[0]?.toUpperCase()}
                   </div>
                 )}

@@ -81,7 +81,7 @@ export default function SignupPage() {
       <div className="hidden lg:flex flex-col justify-between w-[45%] p-12 relative overflow-hidden"
         style={{ background: 'var(--candy-card)', borderRight: '1px solid var(--candy-shadow)' }}>
         <div className="pointer-events-none absolute inset-0"
-          style={{ background: 'radial-gradient(ellipse at 20% 80%, rgba(139,92,246,0.10) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(59,158,255,0.08) 0%, transparent 50%)' }} />
+          style={{ background: 'radial-gradient(ellipse at 20% 80%, rgba(232,184,75,0.10) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(143,209,196,0.08) 0%, transparent 50%)' }} />
         <div className="relative">
           <div className="flex items-center gap-2 mb-12">
             <EagleMascot variant="logo" size={36} />
@@ -163,7 +163,7 @@ export default function SignupPage() {
                 </div>
               </div>
               <CandyButton type="submit" disabled={loading} className="w-full" shadowColor="var(--candy-purple-d)"
-                style={{ padding: '12px', marginTop: 4, borderRadius: 14, background: 'var(--candy-purple)', color: '#fff', fontWeight: 800, fontSize: 14, opacity: loading ? 0.5 : 1 }}>
+                style={{ padding: '12px', marginTop: 4, borderRadius: 14, background: 'var(--candy-purple)', color: 'var(--candy-on-accent, #fff)', fontWeight: 800, fontSize: 14, opacity: loading ? 0.5 : 1 }}>
                 {loading ? t('signup_loading') : t('signup_submit')}
               </CandyButton>
             </form>

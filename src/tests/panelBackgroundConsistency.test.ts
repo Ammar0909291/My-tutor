@@ -103,8 +103,11 @@ describe('scope: only this Study Board re-skin is touched — the shared candy p
   })
 
   it("the base candy theme's own --candy-card definitions (used by Dashboard/Coach/Quiz/Flashcards, outside .learnCandy) are untouched", () => {
+    // 2026-10-01 owner-directed theme change: dark card #161B22 -> #1E2B24 (chalkboard,
+    // the same board colour .learnCandy uses). Light stays #FFFFFF. Previous assertion was
+    // `--candy-card: #161B22;` — kept here as a note, not silently dropped.
     expect(CANDY_TOKENS_CSS).toContain('--candy-card: #FFFFFF;')
-    expect(CANDY_TOKENS_CSS).toContain('--candy-card: #161B22;')
+    expect(CANDY_TOKENS_CSS).toContain('--candy-card: #1E2B24;')
   })
 
   it('the re-skin still composes candyTheme (so --candy-green/--candy-yellow/--candy-text-muted consumers are unaffected) — unchanged', () => {

@@ -27,7 +27,7 @@ const STATUS_COLORS: Record<string, string> = {
 const AUTHOR_COLORS: Record<string, string> = {
   HUMAN_CURATOR:      'var(--green)',
   AI_AUTHORED:        'var(--candy-blue, #3B9EFF)',
-  AI_AUTHORED_REVIEWED: 'var(--candy-purple, #8B5CF6)',
+  AI_AUTHORED_REVIEWED: 'var(--candy-purple)',
   IMPORTED:           '#888',
 }
 
@@ -163,7 +163,7 @@ export default async function AdminKnowledgeAssetsPage({
         </select>
         <button type="submit" style={{
           fontSize: 13, fontWeight: 700, padding: '6px 16px', borderRadius: 8, height: 34,
-          background: 'var(--candy-purple, #8B5CF6)', color: '#fff', border: 'none', cursor: 'pointer',
+          background: 'var(--candy-purple)', color: 'var(--candy-on-accent, #fff)', border: 'none', cursor: 'pointer',
         }}>Filter</button>
       </form>
 

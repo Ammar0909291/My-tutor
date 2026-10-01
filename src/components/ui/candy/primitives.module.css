@@ -30,7 +30,7 @@
 .pill {
   display: inline-block;
   background: var(--candy-red);
-  color: #fff;
+  color: var(--candy-on-accent, #fff);
   font-size: 10px;
   font-weight: 800;
   padding: 2px 8px;
