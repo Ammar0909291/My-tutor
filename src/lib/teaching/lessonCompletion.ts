@@ -106,6 +106,15 @@ export interface LessonCompletionPayload {
    * unchanged).
    */
   answeredButUnverified: string[]
+  /**
+   * What the card SHOWS for `mastered` / `needsReview`: learner-facing concept
+   * names, never ids. MEASURED live 2026-10-01: the card read "Mastered:
+   * phys.mech.newtons-third-law" — it joined the id lists above. The ids stay
+   * for every machine consumer; these are the same concepts, in the same order,
+   * through the same id-rejecting resolver the close text uses.
+   */
+  masteredTitles: string[]
+  needsReviewTitles: string[]
 }
 
 /**
@@ -146,6 +155,8 @@ export function buildCompletionPayload(
     answeredButUnverified: summary.needsReview
       .filter((o) => o.answeredButUnverified)
       .map((o) => o.conceptId),
+    masteredTitles: summary.mastered.map((o) => conceptNames([o], lang)),
+    needsReviewTitles: summary.needsReview.map((o) => conceptNames([o], lang)),
   }
 }
 

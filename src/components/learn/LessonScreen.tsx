@@ -2079,7 +2079,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     const aid = `a-${Date.now()}`
     setMessages((p) => [...p, { id: aid, role: 'assistant', content: '', ts: Date.now(), streaming: true }])
     let res: Response | undefined
-    let data: { success?: boolean; text?: string; provider?: 'yandex'|'groq'|'fallback'; llmCallCount?: number; visual?: string; visualSpec?: unknown; sceneSpec?: unknown; learnerLevel?: string; dynamicVisualizationCode?: unknown; inlinePractice?: unknown; hint?: unknown; error?: any; lessonOrder?: number; completedLessons?: number[]; mastery?: { verified?: boolean; gatePending?: boolean; completionSuppressed?: boolean; phase?: string; checkCorrect?: number; practiceCorrect?: number }; mcq?: { question?: string; options?: string[]; renderId?: string }; lessonComplete?: { complete?: boolean; lessonTitle?: string | null; durationSeconds?: number | null; mastered?: string[]; needsReview?: string[]; nextLessonOrder?: number | null; fullyMastered?: boolean } } = {}
+    let data: { success?: boolean; text?: string; provider?: 'yandex'|'groq'|'fallback'; llmCallCount?: number; visual?: string; visualSpec?: unknown; sceneSpec?: unknown; learnerLevel?: string; dynamicVisualizationCode?: unknown; inlinePractice?: unknown; hint?: unknown; error?: any; lessonOrder?: number; completedLessons?: number[]; mastery?: { verified?: boolean; gatePending?: boolean; completionSuppressed?: boolean; phase?: string; checkCorrect?: number; practiceCorrect?: number }; mcq?: { question?: string; options?: string[]; renderId?: string }; lessonComplete?: { complete?: boolean; lessonTitle?: string | null; durationSeconds?: number | null; mastered?: string[]; needsReview?: string[]; masteredTitles?: string[]; needsReviewTitles?: string[]; nextLessonOrder?: number | null; fullyMastered?: boolean } } = {}
     try {
       // P0 (duplicate AI responses — proven root cause): retry ONLY a thrown/
       // aborted fetch (a dropped connection, or fetchWithTimeout's own abort
@@ -2211,8 +2211,10 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         setLessonCompletion({
           lessonTitle: data.lessonComplete.lessonTitle ?? null,
           durationSeconds: data.lessonComplete.durationSeconds ?? null,
-          mastered: data.lessonComplete.mastered ?? [],
-          needsReview: data.lessonComplete.needsReview ?? [],
+          // Names, not ids: the card used to print "Mastered:
+          // phys.mech.newtons-third-law" (live, 2026-10-01).
+          mastered: data.lessonComplete.masteredTitles ?? [],
+          needsReview: data.lessonComplete.needsReviewTitles ?? [],
           nextLessonOrder: data.lessonComplete.nextLessonOrder ?? null,
           fullyMastered: data.lessonComplete.fullyMastered === true,
         })
