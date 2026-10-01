@@ -899,6 +899,21 @@ export function variablesFor(kind: string | null | undefined): readonly SceneVar
   return (kind && PARAMETRIC_SCENES[kind]?.variables) || []
 }
 
+/**
+ * The controls a learner is shown: the first `maxControls` declared variables,
+ * plus every variable one of the kind's own simulation predictions asks them to
+ * change. A prediction that says "make the bob heavier" with no mass control on
+ * screen cannot be tested — MEASURED in the 2026-09-30 learner baseline (P3,
+ * pendulum, beginner: maxControls 2 cut `mass`, the learner asked "i cant find
+ * the mass button"). The complexity budget limits what is offered, never what
+ * the figure itself asks for.
+ */
+export function controlsFor(kind: string | null | undefined, maxControls: number): readonly SceneVariable[] {
+  const all = variablesFor(kind)
+  const tested = new Set((simulationFor(kind)?.predictions ?? []).map((p) => p.tests.vary))
+  return all.filter((v, i) => i < maxControls || tested.has(v.key))
+}
+
 /** The value a variable falls back to when a scene did not carry one. */
 export function defaultValueOf(v: SceneVariable): number | string {
   return v.kind === 'number' ? v.min : v.options[0]?.value ?? ''
