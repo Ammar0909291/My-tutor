@@ -49,6 +49,8 @@ export interface RepairContext {
   graded: { correct: boolean } | null
   chosenOption: string | null
   correctOption: string | null
+  /** A question card is rendered right after the reply (the turn's MCQ). */
+  questionFollows?: boolean
 }
 
 /** The one instruction the regeneration carries. */
@@ -71,9 +73,16 @@ export function buildConfirmBackRepairAppendix(ctx: RepairContext): string {
   } else {
     task =
       'Reply directly to what the learner just wrote: answer their question, or do ' +
-      'what they asked (if they asked for a practice question, give one), in 2–5 short sentences.'
+      'what they asked (if they asked for a practice question, give one), in 2–5 short sentences. ' +
+      'If they answered a question or problem you set earlier, say plainly whether their answer ' +
+      'is right or wrong, and why.'
   }
-  return head + task + ' Use easy words and short sentences — the learner is still learning English.'
+  // A question card follows the reply: a second question would compete with it
+  // (and is the very thing the one-question contract just removed).
+  const noQuestion = ctx.questionFollows
+    ? ' A question card is shown right after your reply, so do NOT ask a question yourself.'
+    : ''
+  return head + task + noQuestion + ' Use easy words and short sentences — the learner is still learning English.'
 }
 
 /** The kept correction line (if any) followed by the retry's own text. */

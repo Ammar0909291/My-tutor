@@ -2153,6 +2153,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     let probeStarvationRelievedHoisted = false
     // Set when a relieved probe stepped aside for a clarifying question.
     let relievedProbeYieldedHoisted = false
+    // Set when the one-question contract (gate-contract, stray-question-alongside-mcq)
+    // cut the reply down to a stub; the stub repair below regenerates once.
+    let gateContractStubHoisted: string | null = null
     let arbitrationWasSoleBlockerHoisted = false
     let turnProgressHoisted: {
       outcome: import('@/lib/teaching/turnProgress').TurnOutcome
@@ -9433,6 +9436,16 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 before: cleanText.slice(0, 600),
               }))
               cleanText = ungraded.text
+              // REAL-LEARNER BASELINE 2026-10-01 (P2, P4, P5, C1, C4): the model's
+              // whole reply to an answer was a question about the learner's
+              // reasoning ("How did you work out the 2.5 m/s value?"), this cut
+              // removed it, and the learner got only "Let me check your thinking
+              // with this." or a bare "Not quite — the answer is: X". The stub
+              // repair (repairStubReply, below) regenerates once for this stage.
+              if (ungraded.reason === 'stray-question-alongside-mcq') {
+                const { needsRepair } = await import('@/lib/teaching/confirmBackRepair')
+                gateContractStubHoisted = needsRepair(ungraded.text) ? ungraded.text : null
+              }
             }
           } catch (err) {
             // A repair must never break a turn.
@@ -10318,6 +10331,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           const opts = pendingMcqHoisted?.options
           const chosenIdx = mcqGradeHoisted?.chosenIndex
           const appendix = buildConfirmBackRepairAppendix({
+            questionFollows: mcqHoisted !== null,
             graded: gradeForVerdict,
             chosenOption: Array.isArray(opts) && typeof chosenIdx === 'number' ? opts[chosenIdx] ?? null : null,
             correctOption: Array.isArray(opts) && typeof pendingMcqHoisted?.correctIndex === 'number' ? opts[pendingMcqHoisted.correctIndex] ?? null : null,
@@ -10376,6 +10390,17 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           cleanText = next
         }
       } catch { /* non-fatal — a repair must never break a turn */ }
+
+      // The gate-contract cut (above) can leave the same kind of stub the
+      // confirm-back strip does. Same one regeneration, attributed to its stage.
+      // Later steps may have appended a figure pointer after the stub, so the
+      // stub is matched as the reply's opening and only that part is replaced.
+      if (gateContractStubHoisted && cleanText.startsWith(gateContractStubHoisted)) {
+        try {
+          const repaired = await repairStubReply(gateContractStubHoisted, 'gate-contract')
+          if (repaired) cleanText = repaired + cleanText.slice(gateContractStubHoisted.length)
+        } catch { /* non-fatal — a repair must never break a turn */ }
+      }
 
       // ── A PARAGRAPH THE LEARNER HAS ALREADY READ IS NOT SENT AGAIN ────────
       // (2026-09-28, the C7 repeat channel.) The model recites a long authored
