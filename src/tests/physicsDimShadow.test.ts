@@ -90,7 +90,7 @@ describe('both routes wire the shadow exactly once, safely, at the correct posit
   it('chat route: the shadow runs AFTER repairVisionDirection and BEFORE vAffirm', () => {
     const visionAt = CHAT.indexOf('repairVisionDirection(cleanText,')
     const emitAt = CHAT.indexOf('recordPhysicsDimEvent(')
-    const affirmAt = CHAT.indexOf('const firstViolation = vAffirm(cleanText, affirmCtx)')
+    const affirmAt = CHAT.indexOf('vAffirm(cleanText, affirmCtx)')
     expect(visionAt).toBeGreaterThan(-1)
     expect(emitAt).toBeGreaterThan(-1)
     expect(affirmAt).toBeGreaterThan(-1)
