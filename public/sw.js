@@ -1,10 +1,14 @@
-const CACHE_NAME = 'my-tutor-static-v2'
+// v3 (2026-10-02): bumped so the activate step below deletes v2, whose cache-first copy of the
+// manifest and icons kept serving the OLD eagle branding to every browser that already had it.
+const CACHE_NAME = 'my-tutor-static-v3'
 
 // Only truly static assets that never change between builds
 const PRECACHE_URLS = [
   '/manifest.json',
-  '/icons/icon-192.png',
-  '/icons/icon-512.png',
+  '/icons/mascot-192.png',
+  '/icons/mascot-512.png',
+  '/icons/mascot-maskable-192.png',
+  '/icons/mascot-maskable-512.png',
 ]
 
 // ─── Install: pre-cache only static assets ────────────────────────────────────
@@ -47,13 +51,23 @@ self.addEventListener('fetch', (event) => {
     return
   }
 
-  // Static icons and manifest — cache-first (these truly never change)
+  // Icons and manifest — NETWORK-first, cache only as the offline fallback. These were cache-first
+  // ("they never change"), which froze installed apps and favicons on stale branding. Branding does
+  // change, so the network wins whenever it is reachable and the cache is refreshed from it.
   if (
     url.pathname.startsWith('/icons/') ||
     url.pathname === '/manifest.json'
   ) {
     event.respondWith(
-      caches.match(event.request).then((cached) => cached || fetch(event.request))
+      fetch(event.request)
+        .then((res) => {
+          if (res.ok) {
+            const copy = res.clone()
+            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy))
+          }
+          return res
+        })
+        .catch(() => caches.match(event.request))
     )
     return
   }
