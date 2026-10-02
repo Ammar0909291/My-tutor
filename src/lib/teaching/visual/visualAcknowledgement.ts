@@ -159,6 +159,29 @@ export function ensureVisualAcknowledged(
   }
 }
 
+/** The pointer ensureVisualAcknowledged appends, matched by its fixed openings
+ *  and only as the reply's last paragraph, where it is always put. */
+const APPENDED_POINTER =
+  /\n*(?:Take a look at the [^\n]*? beside this message — [^\n]*|Try the experiment beside this message — [^\n]*)\s*$/
+
+/**
+ * The reply split into what was written and the appended figure pointer.
+ *
+ * MEASURED (production, 2026-10-02, math.trig.unit-circle, weak-learner QA):
+ * the repeat guard dropped the turn's only paragraph and left the pointer
+ * alone — "Take a look at the figure beside this message — it's a general
+ * illustration related to the topic." was the learner's whole reply to "can
+ * you ask me a question?". The pointer's 16 words lifted the remainder over
+ * the stub threshold (confirmBackRepair.needsRepair), so neither the one
+ * regeneration nor the empty-reply fallback ran. A stub is judged on the body.
+ */
+export function splitVisualPointer(text: string): { body: string; pointer: string } {
+  const t = typeof text === 'string' ? text : ''
+  const m = APPENDED_POINTER.exec(t)
+  if (!m) return { body: t, pointer: '' }
+  return { body: t.slice(0, m.index).trimEnd(), pointer: m[0].trim() }
+}
+
 /**
  * AN UNMET PICTURE REQUEST IS SAID OUT LOUD, NOT IGNORED.
  *

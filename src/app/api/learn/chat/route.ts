@@ -10504,7 +10504,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // callers' existing fallbacks then apply unchanged. See confirmBackRepair.ts.
       const repairStubReply = async (stub: string, source: string): Promise<string | null> => {
         const { needsRepair, buildConfirmBackRepairAppendix, mergeRepair, dropQuestionSentences } = await import('@/lib/teaching/confirmBackRepair')
-        if (!needsRepair(stub) || serveLessonComplete) return null
+        // An appended figure pointer is not a reply: judge the stub without it
+        // and put it back after the repair (see splitVisualPointer).
+        const { splitVisualPointer } = await import('@/lib/teaching/visual/visualAcknowledgement')
+        const { body: stubBody, pointer: stubPointer } = splitVisualPointer(stub)
+        if (!needsRepair(stubBody) || serveLessonComplete) return null
         try {
           const { stripConfirmBack } = await import('@/lib/teaching/attributionGuard')
           const opts = pendingMcqHoisted?.options
@@ -10547,10 +10551,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             console.log('[stub-repair] ' + JSON.stringify({ source, repaired: false, reason: 'repair-asked-a-question-beside-the-card' }))
             return null
           }
-          const merged = mergeRepair(stub, retryText)
+          const merged = mergeRepair(stubBody, retryText)
           const repaired = !needsRepair(merged)
           console.log('[stub-repair] ' + JSON.stringify({ source, repaired, retryStripped: retry.stripped, chars: merged.length }))
-          return repaired ? merged : null
+          return repaired ? (stubPointer ? `${merged}\n\n${stubPointer}` : merged) : null
         } catch (regenErr) {
           console.warn('[stub-repair] regeneration failed:', regenErr)
           return null
@@ -10570,7 +10574,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // ONE REGENERATION when the strip left no real reply (a bare
           // "Not quite — the answer is: X", or nothing). See confirmBackRepair.ts.
           next = (await repairStubReply(next, 'confirm-back')) ?? next
-          if (!next.trim()) {
+          const { splitVisualPointer: splitCb } = await import('@/lib/teaching/visual/visualAcknowledgement')
+          const cbPointer = splitCb(next)
+          if (!cbPointer.body.trim()) {
             if (mcqHoisted) {
               next = 'Let me check your thinking with this.'
             } else {
@@ -10579,8 +10585,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               const { conceptFallbackText } = await import('@/lib/teaching/conceptFallback')
               next = node?.title && node.description ? conceptFallbackText(node.title, node.description) : "Good — let's keep going."
             }
+            if (cbPointer.pointer) next = `${next}\n\n${cbPointer.pointer}`
           }
-          console.log('[confirm-back] ' + JSON.stringify({ stripped: true, emptied: !cb.text.trim(), charsBefore: cleanText.length, charsAfter: next.length }))
+          console.log('[confirm-back] ' + JSON.stringify({ stripped: true, emptied: !splitCb(cb.text).body.trim(), charsBefore: cleanText.length, charsAfter: next.length }))
           cleanText = next
         }
       } catch { /* non-fatal — a repair must never break a turn */ }
@@ -10611,7 +10618,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           if (rep.dropped > 0) {
             let next = rep.text
             next = (await repairStubReply(next, 'repeat-guard')) ?? next
-            if (!next.trim()) {
+            const { splitVisualPointer: splitRg } = await import('@/lib/teaching/visual/visualAcknowledgement')
+            const rgPointer = splitRg(next)
+            if (!rgPointer.body.trim()) {
               if (mcqHoisted) {
                 next = 'Let me check your thinking with this.'
               } else {
@@ -10620,8 +10629,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 const { conceptFallbackText } = await import('@/lib/teaching/conceptFallback')
                 next = node?.title && node.description ? conceptFallbackText(node.title, node.description) : "Good — let's keep going."
               }
+              if (rgPointer.pointer) next = `${next}\n\n${rgPointer.pointer}`
             }
-            console.log('[repeat-guard] ' + JSON.stringify({ dropped: rep.dropped, emptied: !rep.text.trim(), charsBefore: cleanText.length, charsAfter: next.length }))
+            console.log('[repeat-guard] ' + JSON.stringify({ dropped: rep.dropped, emptied: !splitRg(rep.text).body.trim(), charsBefore: cleanText.length, charsAfter: next.length }))
             cleanText = next
           }
         } catch { /* non-fatal — a repair must never break a turn */ }
