@@ -5572,7 +5572,17 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       if (learnerNeedsReply && assembled !== null && memoryFallbackReason === null) {
         memoryFallbackReason = 'Learner message needs a reply'
       }
-      let serveFromMemory = assembled !== null && !answersPendingQuestion && !readinessAtGate && !answersProse && !ackToQuestion && !learnerNeedsReply
+      // A PRACTICE REQUEST IS NOT A REQUEST FOR AN ESSAY (live, 2026-10-02,
+      // stoichiometry): "give me another problem" at DEMONSTRATE had its
+      // authored probe declined by the surplus rule (pool 3), and D1 then
+      // served a stored Brain explanation with no question at all. With no
+      // authored quiz attached, the model answers — its own question at a
+      // non-gate phase cannot touch mastery (inventedProbeGuard).
+      const practiceWithoutQuiz = turnIntent.wantsPractice && gateMcqHoisted === null
+      if (practiceWithoutQuiz && assembled !== null && memoryFallbackReason === null) {
+        memoryFallbackReason = 'Practice requested and no authored question attached'
+      }
+      let serveFromMemory = assembled !== null && !answersPendingQuestion && !readinessAtGate && !answersProse && !ackToQuestion && !learnerNeedsReply && !practiceWithoutQuiz
       let serveLessonComplete = false
       let dispatchPlanHoisted: import('@/lib/understanding/dispatcher').DispatchPlan | null = null
       try {
@@ -5585,7 +5595,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             ` mode=${brainRuntimeActive ? 'ACTIVE' : 'shadow'}`
           )
           if (brainRuntimeActive) {
-            serveFromMemory = dispatchPlanHoisted.executor === 'EXPLANATION_MEMORY' && assembled !== null && !answersPendingQuestion && !readinessAtGate && !answersProse && !ackToQuestion && !learnerNeedsReply
+            serveFromMemory = dispatchPlanHoisted.executor === 'EXPLANATION_MEMORY' && assembled !== null && !answersPendingQuestion && !readinessAtGate && !answersProse && !ackToQuestion && !learnerNeedsReply && !practiceWithoutQuiz
             // P13: the plan — not this route — decides that no provider is
             // needed. Acting on plan.executor is the SAME pattern as
             // serveFromMemory above, not a bypass of the engine.
@@ -5636,7 +5646,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         recordDispatch(dispatchPlanHoisted, brainRuntimeActive)
       } catch (err) {
         console.warn('[learn/chat] dispatcher skipped (legacy serving choice retained):', err)
-        serveFromMemory = assembled !== null && !answersPendingQuestion && !readinessAtGate && !answersProse && !ackToQuestion && !learnerNeedsReply
+        serveFromMemory = assembled !== null && !answersPendingQuestion && !readinessAtGate && !answersProse && !ackToQuestion && !learnerNeedsReply && !practiceWithoutQuiz
       }
 
       // Conversation Decision — standalone block for turns where the Brain
@@ -6171,6 +6181,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           : memoryFallbackReason === 'Explanation Memory lookup error' ? 'lookup_error'
           : memoryFallbackReason === 'Brain decision' ? 'brain_decision'
           : memoryFallbackReason === 'Learner message needs a reply' ? 'learner_needs_reply'
+          : memoryFallbackReason === 'Practice requested and no authored question attached' ? 'practice_without_quiz'
           : 'no_asset'
         // K6 — Degraded deterministic mode (RS P-3). When EVERY provider in
         // the failover chain has thrown, the turn is served by a K5 template
