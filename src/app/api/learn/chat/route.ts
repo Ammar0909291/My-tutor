@@ -11897,6 +11897,20 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                         reflectionAskedThisEntry: true,
                       }
                     }
+                    // THE STORED ROW MUST MATCH WHAT WAS DELIVERED. The
+                    // assistant row was written above from the model's draft
+                    // (plus its attached question), before completion was
+                    // known. A reload rendered that undelivered question after
+                    // the learner had been told the lesson was finished, and
+                    // the next turn's history carried it too.
+                    try {
+                      await prisma.message.update({
+                        where: { id: assistantMessage.id },
+                        data: { content: cleanText },
+                      })
+                    } catch (err) {
+                      console.warn('[learn/chat] completing-turn row rewrite skipped:', err)
+                    }
                   }
                 }
               }
