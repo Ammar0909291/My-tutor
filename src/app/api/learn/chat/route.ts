@@ -10586,6 +10586,19 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         } catch { /* a wording repair never breaks a turn */ }
       }
 
+      // The model never saw a gate-selected question (owner G2, 2026-09-24), so
+      // a closing "now a question on X" is a guess about X. See neutraliseBlindLeadIn.
+      if (mcqHoisted && gateMcqHoisted && mcqHoisted.question === gateMcqHoisted.question) {
+        try {
+          const { neutraliseBlindLeadIn } = await import('@/lib/teaching/gateAssessmentRenderer')
+          const bridged = neutraliseBlindLeadIn(cleanText, mcqHoisted.question)
+          if (bridged !== cleanText) {
+            console.log('[mcq] ' + JSON.stringify({ event: 'blind-lead-in-neutralised', conceptId: resolvedConceptId ?? null }))
+            cleanText = bridged
+          }
+        } catch { /* a wording repair never breaks a turn */ }
+      }
+
       // AN OPTION'S OWN TEXT REPEATING ITS LETTER LABEL. Measured live
       // (2026-09-20, chem.* Pericyclic Reactions, real account): every option
       // in a model-authored MCQ read "A) A [2+2] cycloaddition...", "B) B

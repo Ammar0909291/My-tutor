@@ -176,3 +176,36 @@ export function renderGateLeadIn(input: GateLeadInInput): string | null {
   const i = frameIndex(question, FRAMES_WITHOUT_CONCEPT.length)
   return FRAMES_WITHOUT_CONCEPT[i]
 }
+
+/** "now", "next", "let's", "you'll" … — the sentence points at what comes next. */
+const POINTS_FORWARD = /\b(?:now|next|let'?s|let me|you'?ll|below|beneath|coming up|time to|follows|following|upcoming)\b/i
+/** … and what comes next is an assessment. */
+const ANNOUNCES_ASSESSMENT =
+  /\b(?:question|check|quiz|test(?:s|ed|ing)?|try|problem|exercise|see (?:if|whether|how well)|your turn|put (?:it|this) to)\b/i
+
+/**
+ * Replace a closing sentence that announces the attached question.
+ *
+ * The model never sees the gate-selected question (owner decision, G2,
+ * 2026-09-24, see buildGateAssessmentBlock), so a lead-in that says what the
+ * question checks is a guess. MEASURED live (2026-10-02, chemistry): "Now
+ * you'll see a short question that checks whether this multiplication rule
+ * has landed." above a card on trailing zeros. Only the reply's last sentence
+ * is considered, and only one that both points forward and announces an
+ * assessment. It becomes the neutral frame the deterministic lead-in uses for
+ * the same question, which names no topic.
+ */
+export function neutraliseBlindLeadIn(text: string, question: string): string {
+  if (typeof text !== 'string' || !text.trim()) return text
+  const body = text.trimEnd()
+  const sentences = body.match(/[^.!?]+(?:[.!?]+|$)/g)
+  if (!sentences || sentences.length === 0) return text
+  const last = sentences[sentences.length - 1]
+  const lastTrimmed = last.trim()
+  if (lastTrimmed.includes('?') || lastTrimmed.length > 200) return text
+  if (!POINTS_FORWARD.test(lastTrimmed) || !ANNOUNCES_ASSESSMENT.test(lastTrimmed)) return text
+  const frame = FRAMES_WITHOUT_CONCEPT[frameIndex(question ?? '', FRAMES_WITHOUT_CONCEPT.length)]
+  const head = body.slice(0, body.length - last.length)
+  const lead = last.slice(0, last.length - last.trimStart().length)
+  return head + lead + frame
+}
