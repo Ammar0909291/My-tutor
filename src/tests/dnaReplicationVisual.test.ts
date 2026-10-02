@@ -196,7 +196,9 @@ describe('5-6. nothing else moved', () => {
       }
     }
     expect(holders).toEqual([ID])
-  })
+    // Whole-KG sweep (~4.3s alone): 30s like the repo's other sweeps; it
+    // timed out at the 5s default under full-suite load (2026-10-02).
+  }, 30_000)
 })
 
 describe('10. telemetry reports the provenance actually served', () => {
