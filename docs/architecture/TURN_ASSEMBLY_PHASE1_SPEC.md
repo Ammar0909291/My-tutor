@@ -408,3 +408,69 @@ numbers.
   - fallback 7/88 (8%), every one traced to a since-fixed cause.
   - Under the fixes in place by the fifth window, the only fallback was the V6 false positive now
     fixed: 1/42.
+
+### 11.7 Sixth window (2026-10-02 15:43–15:52, deploy `802066f3`: all fixes incl. strict V6; chemistry atomic structure)
+
+- **Volume:** 10 lines on this deployment: 7 parsed, 3 cut by the log viewer. Other lines of the
+  16-turn run landed on warm instances of earlier deploys.
+- **Results:**
+
+  | Measure | Result |
+  | --- | --- |
+  | `completionAgreement` | 7/7 |
+  | Fallback / regenerated | 0 / 0 |
+  | Assembled K1 / K2 | 0 / 0 |
+  | `waitedMs` max | 1 ms |
+
+- **Log-line size:** cut lines were 30% of this window. Served and assembled text in the log are
+  now 700 characters each (was 1,200), so lines stay parseable.
+- **Cumulative:**
+  - 95 parsed graded turns;
+  - `completionAgreement` 95/95;
+  - assembled K2 0.
+  - Since the last fix set, `waitedMs` max is 1 ms.
+
+### 11.8 Seventh window (2026-10-02 16:20–16:30, deploy `7409a0c3`, 700-char log lines)
+
+- **Traffic:** a physics mechanics sampler run (free-body, friction, tension, normal force) plus
+  8 turns of other mathematics traffic.
+- **Results:** 19 lines, **19 parsed, 0 truncated**.
+
+  | Measure | Result |
+  | --- | --- |
+  | `completionAgreement` | 19/19 |
+  | Fallback / regenerated | 0 / 0 |
+  | Assembled K1 / K2 | 0 / 0 |
+  | Served K2 | 1/19 |
+  | Shadow call p50 / max | 916 / 1,205 ms |
+  | `waitedMs` max | 0 ms |
+
+- **Cumulative:**
+  - 114 parsed graded turns;
+  - `completionAgreement` 114/114;
+  - assembled K2 0.
+  - Since all fixes were in place (windows 6–7): 26/26 clean, 0 fallback.
+
+### 11.9 Windows 8–9 (2026-10-02 16:32–16:51, deploy `0efe34cb`)
+
+- **Window 8 (biology, cell biology, + 5 mathematics):**
+  - 13 parsed, 0 truncated, 13/13 clean.
+  - The rest of the run landed on the previous deploy, whose log query timed out.
+- **Window 9 (chemistry periodic trends, + 3 mathematics):**
+  - 19 parsed, 0 truncated, 19/19 clean.
+  - Fallback 0, regenerated 0, `waitedMs` max 0 ms.
+  - On the same turns the **served** replies had K1 1 and K2 2; the assembled replies had 0 and 0.
+- **Cumulative:**
+  - **146 parsed graded turns, `completionAgreement` 146/146**, assembled K2 0;
+  - since every fix was in place (windows 6–9): **58/58 clean, 0 fallback**;
+  - `waitedMs` max 1 ms.
+- **§7 gate status:**
+
+  | Requirement | Status |
+  | --- | --- |
+  | ≥ 300 shadowed graded turns | 146 |
+  | Assembled K1/K2 at 0 | met so far |
+  | Fallback < 10% | 0% since the fixes |
+  | `completionAgreement` 100% | met so far |
+  | Latency | no added wait |
+  | Owner hand-read of 30 pairs | pending; pairs file ready, predates the last fixes |

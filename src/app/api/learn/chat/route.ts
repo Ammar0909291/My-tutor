@@ -13294,8 +13294,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               live: ta.turnChecks(cleanText, mcqHoisted !== null),
               assembled: ta.turnChecks(assembled, mcqHoisted !== null),
               // Tutor text only, never the learner's; [verifier-log] logs drafts the same way.
-              liveText: cleanText.slice(0, 1200),
-              assembledText: assembled.slice(0, 1200),
+              // 700 each: at 1,200 the log viewer cut 3 of 10 lines (2026-10-02),
+              // and a cut line cannot be parsed at all.
+              liveText: cleanText.slice(0, 700),
+              assembledText: assembled.slice(0, 700),
             }))
           }
         } catch (err) {
