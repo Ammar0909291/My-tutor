@@ -177,3 +177,24 @@ Production `pg_stat_statements` (lifetime counters; row sizes measured with `pg_
 - **Re-measure after deploy** with the two-snapshot delta on queryids 628852208896445779,
   444473988123706220, -7522253544637828763 (topic_progress) and 7123691883795881034
   (capability replay).
+
+## EGRESS-6 — measurement only: per-turn cost and free-tier headroom (2026-10-02)
+Owner instruction: "keep egress size under free tier". No leak found; nothing changed in code.
+Method: per-table `pg_stat_statements` row deltas (SELECTs grouped by the `FROM "public"."<table>"`
+they read), weighted by measured row widths (`pg_column_size`: messages 552 B, spine_events 496 B,
+asset_identity 369 B full / 87 B id+slug, topic_progress 190 B, mistake_records 191 B).
+- **Every historical leak is still flat.** Over a 22.6-minute window (17:45:47 → 18:08:23 UTC),
+  spine replay (2599099062474326428), the bootstrap prefetch and `IN (…)` reads, and the three
+  EGRESS-5 `topic_progress` queryids grew by ~0; the three topic_progress totals (29.76M rows) and
+  the capability replay (1,680 calls) are unchanged since the 2026-09-27 EGRESS-5 entry.
+- **Live cost ≈ 33 KB of DB reads per chat turn.** The window read ≈ 4.3 MB while 262 messages
+  (~131 turns) were written — dominated by the bounded history read (`take: 30` messages ≈ 16 KB),
+  then asset/explanation/probe retrieval. 155 of the 262 messages came from disposable QA
+  accounts; the rest from 3 sessions.
+- **Headroom:** 5 GB/month ÷ 33 KB ≈ 150,000 chat turns/month (~5,000/day). A sustained 24/7 load
+  equal to this QA-heavy window would project to ~8 GB/month, so the free tier holds for real
+  learner volumes well above today's but not for round-the-clock synthetic QA. Keep QA runs bounded
+  (a 6-concept weak-learner run ≈ 100 turns ≈ 3.3 MB).
+- **Mathematics probe-depth campaign (same day):** +1,833 seed probes. The bounded prefetch
+  (EGRESS-4) reads ~11k slugs × 87 B ≈ 1 MB per unconverged cold start; at ~150 rows per cold
+  start the new rows converge in ~12 cold starts ≈ 12 MB once. Negligible against 5 GB.

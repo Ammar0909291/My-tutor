@@ -186,3 +186,36 @@ DB: 6 MASTERED, 0 MISCONCEPTION_DETECTED on any pass turn, 0 non-seed / non-math
 asset rows. Production convergence re-checked at the end: hashes unchanged (961 + 2,752, identical
 aggregates). All four disposable accounts deleted (0 `qa-math-runtime-*` rows remain). Session
 total: 33 production certification runs, 30 distinct concepts, 24/24 domains, 33/33 PASS.
+
+## 2026-10-02 (continued) — weak-learner QA, a lesson-switch lock defect, and probe depth
+
+**Weak-learner production QA** (new `scripts/qa/mathematicsProductionRuntimeQa.ts`, disposable
+account, one session, six lessons opened back to back with misconception / wrong / typed /
+confused / question turns): fraction-addition, linear-equation-1var, pythagorean-theorem and
+chain-rule reached verified mastery; bayes-theorem ended one practice answer short at the 18-turn
+budget; **math.trig.unit-circle never left GUIDE.**
+
+**Defect 3 — opening the next lesson could be blocked by the previous turn's open transaction
+(runtime, fixed).** Vercel log, lesson-init for unit-circle: three `studentProgress.upsert`
+attempts failed with `55P03 canceling statement due to lock timeout` and `activeLessonSlug persist
+FAILED after retries`. The pointer stayed on pythagorean-theorem, so all 18 "Unit Circle" turns
+taught Pythagoras (DB: 32 ASSET_SHOWN rows for pythagorean-theorem in that window, none for
+unit-circle). Cause: the chat route's two writes to the same `student_progress` row — the per-turn
+"auto-save lesson position" upsert and the placement-adjustment update — were fire-and-forget, the
+exact R1 shape (a frozen serverless instance keeps the row lock). Fix: both are captured in
+`studentProgressWrites` and settled at R1's response boundary; regression
+`studentProgressWritesAwaited.test.ts` (fails 3/3 on the old route). The harness now flags
+`activeLessonPersisted === false` directly.
+
+**Probe depth — what it is for (corrected the same day).** 916/917 mathematics pairs held exactly
+three gradeable probes. A first reading said one wrong answer made mastery unreachable; production
+showed otherwise — the owner-approved G2 rule (2026-09-24) re-asks a question the learner got
+WRONG once the fresh pool is spent. What production did show: after a miss the tutor states the
+answer ("Not quite — the answer is: 5 — 9 + 16 = 25") and the re-asked question is then credited
+toward VERIFIED mastery (pythagorean-theorem, linear-equation-1var). Depth lets a learner recover
+on questions they have not been shown. Batches 1–5 (arith 64, nt 36, found 84, geom 69, alg 60
+pairs; 626 probes) extend existing ladder slots only — no singleton promoted, guarded by
+`probeInventoryDepth.test.ts` (whose duplicate-stem normaliser now keeps Unicode letters/digits:
+"a³ · a²" and "a⁵ / a²" are different questions). `bootstrapLadderSiblingGuard.test.ts`'s fixture
+size ("two rungs per slot", 90) now checks the property per slot, since those 45 ladders gained
+rungs; its real assertions (0 created with the guard, exactly 45 without) are unchanged.
