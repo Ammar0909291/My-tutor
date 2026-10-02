@@ -55,6 +55,8 @@ The sessions ran in Playwright Chromium against https://my-tutor-flame.vercel.ap
 | CL-1b | Found LIVE (stoichiometry): the CL-1 repair fired on "quiz me". It invented "the thermite problem I gave earlier" and asked a second question beside the card. | The repair skips practice requests. A repair that asks a question while a card follows is discarded. Verified live: "quiz me" now gets a clean hand-off plus the quiz. | de205b61 |
 | CL-24 | Found LIVE (stoichiometry): "give me another problem" at DEMONSTRATE had its probe declined by the surplus rule, and D1 then served a stored essay with no question. | A practice request with no authored quiz attached is never memory-served. | 92c3e8a8 |
 | CL-16 | Found LIVE (concentration): a correct "No" to the NaOH item got feedback about the previous ppm question (the one-turn-late attribution from the baseline). | On a graded turn the main prompt ends with the answered question and its grade. | 5ba7e62a |
+| CL-25 | Found LIVE: "Let me know when you'd like another practice problem" appeared while the next quiz was already attached (concentration, stoichiometry). | A closing deferred-practice offer is dropped when a card is attached. | 97ab3b6d |
+| CL-26 | Found LIVE (tension): "ok another one" matched no practice pattern and got a stored explanation with no question. | A whole-message pattern now reads "another one", "next one" and "give me another one". | e16a9ef9 |
 
 ## Recorded, not fixed (owner decision or out of scope)
 
@@ -142,6 +144,7 @@ L, Swing angle and m (kg) are all rendered. P3 showed only L and Swing angle.
 | chem.found.mole-concept | phone | 7 min | — | Found CL-18/20/21/22. |
 | chem.found.stoichiometry | phone | not finished | — | Found CL-1b and CL-24. |
 | chem.found.concentration | phone | 7 min | — | Found CL-16. Close recorded: chemistry `[6, 8]`. |
+| phys.mech.tension | desktop | 13 min | 7 | CL-16 verified live: three graded taps in a row, each answered about its own question. The wrong answer (17.2 N) was corrected with T − mg = ma. Found CL-26. Close recorded `[…, 23]`. |
 | phys.mech.friction | desktop | 16 min | 6 authored | Found CL-23. The deliberate miss (40 N vs 20 N static friction) was corrected with its reason and the misconception named. |
 
 CL-23 was verified live on 5c8d576e. The same "surface area" phrase in the Normal Force lesson
