@@ -97,10 +97,15 @@ high precision.
 
 ## Also seen
 
-- `MISCONCEPTION_DETECTED` events whose recorded text is a request, not an answer: "quiz me" ×7,
-  "can you quiz me on this" ×8. A misconception is being recorded for a request.
-  - Biology QA noted the same on 2026-09-22.
-  - Not yet sized across all such texts.
+- `MISCONCEPTION_DETECTED` recorded for a request, not an answer. 26 of 1,371 misconception
+  events in the window have a request or acknowledgement as their text.
+  - A "quiz me" message became a misconception record in 22 of 677 cases (3.2%) before
+    2026-09-29, and in 0 of 37 since.
+  - Consistent with GB+ (choice-only grading, 2026-09-29), but **not conclusive**: at the old
+    rate only about 1 would be expected in 37.
+  - Three recent records ("No", 2026-09-30 and 10-01, chemistry) carry no misconception id. They
+    may be real wrong answers to yes/no cards; not classified.
+  - Biology QA noted the same symptom on 2026-09-22.
 
 ## Not measured, and why
 
