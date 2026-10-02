@@ -353,3 +353,29 @@ numbers.
   - `completionAgreement` 46/46;
   - assembled K2 0;
   - fallback 6/46 (13%), from three causes that are now fixed but not yet re-measured.
+
+### 11.5 Fourth window (2026-10-02 14:56–15:15, deploy `a2a716b4`: no-history call + V5 previous-card + no distractor fallback)
+
+- **Traffic:** an English sampler run plus real mathematics traffic from another account.
+- **Coverage caveat:** the window was fetched with a `gate-assessment` filter, so this is a
+  subset of the `[assembled-turn]` lines.
+- **Results:** 21 lines, all parsed.
+
+  | Measure | Result |
+  | --- | --- |
+  | `completionAgreement` | 21/21 |
+  | Fallback | **0/21** |
+  | Regenerated | **0/21** |
+  | Assembled K1 / K2 | 0 / 0 |
+  | Served K1 / K2 | 0 / 0 |
+  | Shadow call p50 / max | 809 / 983 ms |
+
+- **Concepts covered:** eng.phonics (9), math.linalg / calc / func / trig (12).
+- **The sampler's English "unauthored" count (19) was its own key mismatch.** The server served
+  authored cards (23 `authored-served`). The sampler now also keys on the served question text.
+- **Cumulative, all four windows:**
+  - 67 parsed graded turns;
+  - `completionAgreement` 67/67;
+  - assembled K2 0;
+  - fallback 6/67 (9%). All 6 came before the fixes; 0/21 after them.
+  - The §7 gate needs ≥300, and `waitedMs` (deployed in `0bbd64cb`) is not yet measured.
