@@ -11,7 +11,7 @@ import { readFileSync } from 'fs'
 
 interface Rec {
   conceptId?: string | null; event?: string; provider?: string | null; ms?: number; error?: string | null
-  attempts?: number; completionAgreement?: boolean | null; codes?: string[]; fallback?: boolean
+  attempts?: number; waitedMs?: number; completionAgreement?: boolean | null; codes?: string[]; fallback?: boolean
   completion?: boolean; cardAttached?: boolean
   live?: { k1Stub: boolean; k2QuestionBesideCard: boolean }
   assembled?: { k1Stub: boolean; k2QuestionBesideCard: boolean }
@@ -37,6 +37,7 @@ const pct = (k: number, of = n) => (of ? `${k}/${of} (${((100 * k) / of).toFixed
 const count = (f: (r: Rec) => boolean) => recs.filter((r) => r.event !== 'timeout' && f(r)).length
 const codes = new Map<string, number>()
 for (const r of recs) for (const c of r.codes ?? []) codes.set(c, (codes.get(c) ?? 0) + 1)
+const waited = recs.map((r) => r.waitedMs).filter((x): x is number => typeof x === 'number').sort((a, b) => a - b)
 const ms = recs.map((r) => r.ms).filter((x): x is number => typeof x === 'number').sort((a, b) => a - b)
 
 console.log(JSON.stringify({
@@ -52,6 +53,7 @@ console.log(JSON.stringify({
   servedK2: pct(count((r) => r.live?.k2QuestionBesideCard === true)),
   codes: Object.fromEntries(codes),
   shadowMs: ms.length ? { p50: ms[Math.floor(ms.length / 2)], p95: ms[Math.floor(ms.length * 0.95)], max: ms[ms.length - 1] } : null,
+  addedWaitMs: waited.length ? { p50: waited[Math.floor(waited.length / 2)], p95: waited[Math.floor(waited.length * 0.95)], max: waited[waited.length - 1] } : null,
   byConcept: Object.fromEntries([...recs.reduce((m, r) => m.set(r.conceptId ?? '?', (m.get(r.conceptId ?? '?') ?? 0) + 1), new Map<string, number>())]),
 }, null, 2))
-for (const r of recs) if (r.rawOnFailure) console.log(`\nPARSE FAILURE (${r.conceptId}): ${r.rawOnFailure}`)
+for (const r of recs) if (r.rawOnFailure) console.log(`\nREJECTED SLOT TEXT (${r.conceptId}, ${(r.codes ?? []).join(" ")}): ${r.rawOnFailure}`)
