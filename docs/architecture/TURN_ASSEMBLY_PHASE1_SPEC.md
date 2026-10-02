@@ -450,3 +450,27 @@ numbers.
   - `completionAgreement` 114/114;
   - assembled K2 0.
   - Since all fixes were in place (windows 6–7): 26/26 clean, 0 fallback.
+
+### 11.9 Windows 8–9 (2026-10-02 16:32–16:51, deploy `0efe34cb`)
+
+- **Window 8 (biology, cell biology, + 5 mathematics):**
+  - 13 parsed, 0 truncated, 13/13 clean.
+  - The rest of the run landed on the previous deploy, whose log query timed out.
+- **Window 9 (chemistry periodic trends, + 3 mathematics):**
+  - 19 parsed, 0 truncated, 19/19 clean.
+  - Fallback 0, regenerated 0, `waitedMs` max 0 ms.
+  - On the same turns the **served** replies had K1 1 and K2 2; the assembled replies had 0 and 0.
+- **Cumulative:**
+  - **146 parsed graded turns, `completionAgreement` 146/146**, assembled K2 0;
+  - since every fix was in place (windows 6–9): **58/58 clean, 0 fallback**;
+  - `waitedMs` max 1 ms.
+- **§7 gate status:**
+
+  | Requirement | Status |
+  | --- | --- |
+  | ≥ 300 shadowed graded turns | 146 |
+  | Assembled K1/K2 at 0 | met so far |
+  | Fallback < 10% | 0% since the fixes |
+  | `completionAgreement` 100% | met so far |
+  | Latency | no added wait |
+  | Owner hand-read of 30 pairs | pending; pairs file ready, predates the last fixes |
