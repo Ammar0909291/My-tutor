@@ -1,611 +1,617 @@
-# Turn assembly — served vs assembled pairs (shadow, 2026-10-02)
+# Turn assembly — served vs assembled pairs (shadow, post-fix, 2026-10-02)
 
-For the owner's hand-read (spec §7 gate: the assembled turn no worse in a majority of 30 pairs).
-All pairs come from disposable QA accounts driven by `scripts/qa/shadowSampleRun.ts`. They are tutor
-text only. "Assembled" is what serve mode would have sent; the student got "Served".
+For the owner's hand-read: the spec §7 gate asks whether the assembled turn is no worse in a majority of 30 pairs.
 
-**Caveat:** these pairs predate two fixes (commit after `6e2d984b`):
-- a wrong answer no longer gets distractor-text fallback;
-- V5 now checks only the previous card.
+- **Source:** shadow windows 6–11, with every fix in place (no-history slot call, V5 on the previous card, no
+  distractor fallback, strict V6).
+- **Content:** tutor text only, cut to 700 characters each as logged.
+- **Accounts:** disposable QA accounts, plus other mathematics traffic in the same windows.
+- **Which is which:** "Served" is what the student got; "Assembled" is what serve mode would send.
 
-Pairs marked FALLBACK show the old fallback behaviour.
+30 pairs, from 88 post-fix records.
 
-## 1. `chem.found.mole-concept`
+## 1. `chem.atomic.atomic-spectra` — graded wrong
 
 **Served:**
 
-> That’s correct — you divided the number of CO₂ molecules by Avogadro’s number, because converting **particles → moles** always uses division, and the result (0.5 mol) is smaller than the original particle count, as expected.
-> 
-> **How did you figure that out?** 
-> 
-> Now, let’s give a name to the step you just used. The operation “divide by Avogadro’s number” (or “multiply by it” when going the other way) is called a **conversion factor**. It’s the constant that lets us move between the counting world of particles and the macroscopic world of moles, just as the figure on your screen shows the bridge from “Number of Particles” to “Moles”. Whenever you need to go from particles to moles, apply the conversion factor by dividing; to go from moles to particles, multiply.
-> 
-> When you’re ready for another practice conversion, just let me know!
+> That answer isn’t correct. In an absorption spectrum the same wavelengths that appear as bright lines in emission appear as dark lines, because both are caused by the same electron transition—one emits a photon, the other absorbs it. Therefore the 589 nm line would show up as a dark line at exactly 589 nm in the absorption spectrum.
 
 **Assembled:**
 
-> That's right.
+> Not quite — the answer is: At exactly the same place — as a DARK line on a bright background. Absorption and emission use the identical set of energy gaps, just in opposite directions: an atom absorbs at the same wavelengths it emits. That is why the Fraunhofer dark lines in sunlight identify the elements in the Sun's atmosphere. Same fingerprint, photographic negative
 > 
-> You correctly divided the number of molecules by Avogadro's constant, showing the right conversion from particles to moles. The result of 0.5 mol matches the expected small mole value for a large particle count.
+> The bright emission line at 589 nm will appear as a dark absorption line at the same wavelength, not elsewhere. Emission and absorption use the same energy transitions.
 > 
-> When you need to go the opposite way—moles to particles—just multiply by 6.022 × 10²³. Remember: particles are huge numbers, moles are comparatively tiny, so division shrinks and multiplication expands.
+> When an atom absorbs light, electrons move to higher levels, creating dark lines at those wavelengths; when they fall back, they emit light at the same wavelengths, producing bright lines. Thus the pattern of lines is identical for both spectra.
 > 
 > One to try. There's no rush.
 
 Better: [ ] served  [ ] assembled  [ ] same
 
-## 2. `chem.found.mole-concept`
+## 2. `math.top.open-sets` — graded right
 
 **Served:**
 
-> That's right. Here’s a quick practice you can try using the bridge diagram you’re looking at. Focus on the box that says **“Divide by Molar Mass (g / mol) to get”** – that’s the step that turns a mass into moles.
-> 
-> Take a sample of **3.0 g of carbon‑12**. First, divide the mass by carbon’s molar mass (12 g / mol) to find the number of moles, then multiply the resulting moles by Avogadro’s number (6.022 × 10²³) to obtain the number of atoms.
-> 
-> Work through those two steps and let me know the number of carbon atoms you calculate.
+> That’s correct — the interior, closure, and boundary are defined solely from the declared open sets in the topology, without any reference to distance or metric balls. This works because each definition uses only the collection τ of open sets and their complements.
 
 **Assembled:**
 
 > That's right.
 > 
-> You chose No because equal masses of different substances do not give equal numbers of molecules; water and glucose have different molar masses.
+> The interior, closure, and boundary are defined from the open sets of a topology, not from distances. A topology can be specified without any metric, as shown by the X={a,b,c} example. Therefore these notions are computed purely from the declared open sets.
 > 
-> To compare any two samples, first change grams to moles using each substance’s molar mass, then multiply by Avogadro’s number to see how many molecules each contains.
-
-Better: [ ] served  [ ] assembled  [ ] same
-
-## 3. `chem.found.mole-concept`
-
-**Served:**
-
-> Not quite — the answer is: 3.01 × 10²³
-> 
-> The number 0.500 represents the amount of substance in moles, but it does not tell you how many helium atoms are actually present. To find the number of atoms you must use Avogadro’s number, which is the fixed count of particles in one mole: \(6.022 \times 10^{23}\) particles per mole. The relationship is Number of particles = moles × Avogadro’s number. So for 0.500 mol of helium: 
-> 
-> \(0.500\ \text{mol} \times 6.022 \times 10^{23}\ \text{atoms mol}^{-1} = 3.01 \times 10^{23}\) atoms. This is why the correct answer is \(3.01 \times 10^{23}\) atoms. You were close to the right idea—recognizing the 0.500 mol—but the extra multiplication step with Avogadro’s number is essential to convert moles into actual particle counts.
-
-**Assembled:**
-
-> Not quite — the answer is: 3.01 × 10²³
-> 
-> You gave the amount in moles instead of converting to atoms. The number of atoms is found by multiplying moles by Avogadro's constant.
-> 
-> Multiply 0.500 mol by 6.02 × 10²³ mol⁻¹. The calculation 0.500 × 6.02 × 10²³ gives 3.01 × 10²³ atoms. This shows how moles link to actual particle counts.
-> 
-> Let's check this one before we go further.
-
-Better: [ ] served  [ ] assembled  [ ] same
-
-## 4. `chem.found.mole-concept`
-
-**Served:**
-
-> That's right. Great, let’s see how you can apply the mole concept and Avogadro’s number to a new situation.
-
-**Assembled:**
-
-> That's right.
-> 
-> You chose the right answer because the atomic mass unit describes the mass of one atom while the molar mass describes the mass of a whole mole of atoms.
-> 
-> The mole links the microscopic and macroscopic worlds. Avogadro's number is defined so that the mass of one mole of carbon‑12 equals exactly 12 grams, making the numerical values match but the quantities remain different.
-> 
-> Let's check this one before we go further.
-
-Better: [ ] served  [ ] assembled  [ ] same
-
-## 5. `chem.found.significant-figures`
-
-**Served:**
-
-> That answer isn’t right. When we add or subtract numbers, we don’t count all the digits; we look at how many **decimal places** each addend is reliable to. The result can only be trusted to the fewest decimal places among the numbers you’re adding. So “5 (count all digits)” applies to the multiplication rule, not to addition.
-> 
-> For example, if you add 2.34 g + 0.5 g, the second number is only reliable to the tenths place, so the sum must be rounded to the tenths place as well: 2.8 g, not 2.84 g. The rule is about the **position of the decimal point**, not the total count of digits.
-
-**Assembled:**
-
-> Not quite — the answer is: 3 (the 4, 7, and trailing 0 after decimal count; leading zeros are placeholders)
-> 
-> The leading zeros are only placeholders and do not count as significant figures. The trailing zero after the decimal is significant, giving three significant figures.
-> 
-> When a zero appears after a non‑zero digit and to the right of a decimal point, it is considered significant because it indicates measured precision.
+> In metric spaces the open balls generate the topology, so distance can be used to find interiors and closures. However, once the topology is known, the same definitions apply to any space, even those without a metric. This shows how topological concepts generalize beyond metric spaces.
 > 
 > One to try. There's no rush.
 
 Better: [ ] served  [ ] assembled  [ ] same
 
-## 6. `chem.found.significant-figures` — FALLBACK
+## 3. `phys.mech.normal-force` — graded wrong
 
 **Served:**
 
-> That’s correct — the “3” is an exact count, so it doesn’t limit the significant figures; the product keeps the two sig figs from the measured 2.5 cm. 
+> Not quite — the answer is: No — N pairs with the body’s push on the surface; weight pairs with the body pulling the Earth up
 > 
-> Let's check this one before we go further.
+> The normal force is **not** the Newton‑Third‑Law partner of the object’s weight. Weight is the gravitational pull that the Earth exerts on the object, and its reaction pair is the equal‑and‑opposite pull that the object exerts on the Earth. The normal force, instead, is the contact force the surface supplies to keep the object from moving into it; its own reaction pair is the force the object pushes on the surface. Now that the misconception is cleared, the next question will test your understanding of how the normal force behaves in a new situation. Let’s continue.
 
 **Assembled:**
 
-> That's right.
+> Not quite — the answer is: No — N pairs with the body’s push on the surface; weight pairs with the body pulling the Earth up
 > 
-> 7.5 cm, to 2 significant figures. The 3 is an EXACT number: it comes from counting, not from measuring, so it carries infinite significant figures and never limits the result. The same is true of defined conversions such as 1 km = 1000 m exactly. Only MEASURED values limit precision
+> The normal force balances the object's push on the surface, not its weight. Weight’s action‑reaction pair is the gravitational pull on the Earth and the Earth's pull on the object. Therefore the normal force is not the third‑law partner of weight.
 > 
-> Let's check this one before we go further.
-
-Better: [ ] served  [ ] assembled  [ ] same
-
-## 7. `chem.found.significant-figures`
-
-**Served:**
-
-> That’s correct — you kept only one decimal place because the sum is limited by the fewest decimal places among the numbers you added.
-
-**Assembled:**
-
-> That's right.
-> 
-> You applied the rule that the result is rounded to the same number of decimal places as the term with the fewest decimal places
-> 
-> When adding or subtracting, count the decimal places of each number. The final answer must be rounded to the smallest count of decimal places among the addends. This keeps the precision consistent and avoids implying greater accuracy than the data provides.
-> 
-> One to try. There's no rush.
-
-Better: [ ] served  [ ] assembled  [ ] same
-
-## 8. `chem.found.measurement`
-
-**Served:**
-
-> That answer isn’t correct. The mistake is thinking that because the readings are consistent, they must also be close to the true value. Precision refers only to how tightly the measurements cluster together; it says nothing about whether they hit the correct target.
-> 
-> In this case the five boiling‑point readings (102.1 °C, 102.0 °C, 102.1 °C, 102.0 °C, 102.1 °C) are tightly grouped, so they are **precise**. However, the true boiling point of water is 100.0 °C, and all the measurements are about two degrees higher, so they are **not accurate**. Thus the correct description is “precise but not accurate.”
-
-**Assembled:**
-
-> Not quite — the answer is: Precise but not accurate — tightly clustered but far from the true value
-> 
-> The measurements are tightly grouped, showing good precision, but they are all about 2 °C higher than the true boiling point, so they are not accurate. Accuracy refers to closeness to the true value, while precision refers to consistency among repeated measurements.
-> 
-> When results are consistently off in the same direction, a systematic error is present. This shifts all measurements away from the true value, reducing accuracy but leaving precision unchanged. Random errors cause spread in the data, lowering precision. Identifying and correcting systematic errors improves accuracy without affecting precision.
+> Remember that every force comes in a pair: the object’s weight is paired with the Earth’s pull on the object, while the normal force is paired with the object’s push on the surface. These two pairs are distinct and act on different objects.
 > 
 > Let's check this one before we go further.
 
 Better: [ ] served  [ ] assembled  [ ] same
 
-## 9. `chem.found.measurement`
+## 4. `bio.cell.mitochondria-energy` — graded wrong
 
 **Served:**
 
-> Your reply was about leading zeros, which doesn’t address the flow‑chart question (it was asking what you notice about the order of the six steps).
+> Not quite — the answer is: No — they transform chemical energy in glucose into ATP; energy is never created, only converted
 > 
-> <!" a="milli" b="micro" c="nano" d="centi" correct="A"-->
+> Got it—the matrix is the innermost fluid space where the citric‑acid cycle takes place.
+> 
+> <!" a="Electron transport chain" b="Citric‑acid cycle" c="Glycolysis" d="Photosynthesis" correct="B"-->
 
 **Assembled:**
 
-> That's right.
+> Not quite — the answer is: No — they transform chemical energy in glucose into ATP; energy is never created, only converted
 > 
-> You recognized that the zeros before the first non‑zero digit are leading zeros and do not count as significant. The final zero after the decimal point is a trailing zero, which is significant. Thus the number 0.0450 g has three significant figures.
+> Mitochondria do not make new energy; they change chemical energy from glucose into ATP. Energy is conserved, not created.
 > 
-> When writing numbers in scientific notation, all digits in the coefficient are significant. For example, 0.0450 g can be expressed as 4.50×10⁻² g, making it clear that the three digits 4, 5, and 0 are all significant. This format avoids ambiguity about which zeros count.
+> The mitochondrion acts like a power plant. It takes the energy stored in glucose molecules and, through a series of steps, transfers it to ATP, the cell’s usable energy currency. This process follows the law of conservation of energy, meaning the total amount of energy stays the same, only its form changes.
+> 
+> Quick check. Think it through before you choose.
 
 Better: [ ] served  [ ] assembled  [ ] same
 
-## 10. `chem.found.measurement`
-
-**Served:**
-
-> Not quite — the answer is: 25,000 mg (0.025 kg × 1000 g/kg × 1000 mg/g)
-> 
-> Moving the decimal three places only changes kilograms to grams, but the target unit is milligrams, which are a thousand times smaller than a gram. Here’s why the full conversion works step by step:
-> 
-> 1. Start with 0.025 kilograms. 2. Convert kilograms to grams: 1 kilogram = 1000 grams, so 
->  \(0.025 \text{kg} × \frac{1000 \text{g}}{1 \text{kg}} = 25 \text{g}\). The kilograms cancel, leaving grams. 3. Convert grams to milligrams: 1 gram = 1000 milligrams, so 
->  \(25 \text{g} × \frac{1000 \text{mg}}{1 \text{g}} = 25 000 \text{mg}\). The grams cancel, leaving milligrams. So the correct result is **25 000 milligrams**, not 25 mg.
-
-**Assembled:**
-
-> Not quite — the answer is: 25,000 mg (0.025 kg × 1000 g/kg × 1000 mg/g)
-> 
-> You moved the decimal only three places, but converting kilograms to milligrams requires multiplying by 1,000,000, not 1,000. The extra factor of 1,000 was missed.
-> 
-> Remember the chain: 1 kg = 1,000 g and 1 g = 1,000 mg, so 1 kg = 1,000 × 1,000 mg = 1,000,000 mg. Multiply the kilogram value by 1,000,000 to get milligrams.
-> 
-> One to try. There's no rush.
-
-Better: [ ] served  [ ] assembled  [ ] same
-
-## 11. `chem.found.measurement`
-
-**Served:**
-
-> That’s correct— 0.250 dm³ is the right conversion because 1 dm³ equals 100 cm³, so dividing 250 cm³ by 100 gives 2.5 × 10⁻¹ dm³. 
-> 
-> Now let’s move on to the next step in the measurement process.
-> 
-> Take a look at the labelled figure beside this message — it shows Physical Quantities and SI Units. Study it while I explain.
-
-**Assembled:**
-
-> That's right.
-> 
-> You used the conversion 1 dm³ = 1000 cm³ and divided 250 cm³ by 1000, giving 0.250 dm³. The idea is converting between cubic units by scaling the linear factor cubed.
-> 
-> Remember that when you change length units, the volume changes by the cube of that factor. For example, 1 m = 10 dm, so 1 m³ = 10³ = 1000 dm³. Apply the same rule for any other unit pair.
-> 
-> One to try. There's no rush.
-
-Better: [ ] served  [ ] assembled  [ ] same
-
-## 12. `chem.found.pure-substances`
+## 5. `chem.atomic.atomic-spectra` — graded wrong
 
 **Served:**
 
 > I’m sorry, that answer isn’t correct. 
 > 
-> A pure substance has one specific, sharp melting point that doesn’t change no matter where the sample comes from. Because the composition is fixed, the temperature at which it turns from solid to liquid is always the same. 
+> The idea that hydrogen atoms “constantly emit light because their electron is always orbiting the nucleus” mixes up two different situations. In an atom’s stable (ground‑state) orbit, the electron does **not** lose energy by radiating light; a stable orbit means the electron’s energy stays fixed and no photon is released. 
 > 
-> A mixture contains more than one component, so its overall composition can vary. Different proportions of the components cause the mixture to begin melting at one temperature and finish melting at another, giving a range of melting temperatures. 
+> Light is produced only when an electron **changes** energy levels—dropping from a higher level to a lower one. That transition releases a photon whose energy equals the difference between the two levels (ΔE = hν). While the electron is in its normal orbit, there is no such energy change, so no light is emitted. 
 > 
-> Understanding this difference helps us tell pure substances and mixtures apart, and it tells us which separation technique to use later on. 
-> 
-> Feel free to let me know if anything is still unclear.
+> So the correct statement is that electrons in stable orbits emit **no** radiation; emission occurs only during a transition between levels.
 
 **Assembled:**
 
-> Not quite — the answer is: sharp, fixed … over a range of temperatures
+> Not quite — the answer is: Electrons in stable orbits emit NO radiation — light is emitted ONLY when an electron transitions from a higher to a lower energy level
 > 
-> Pure substances melt at a single, sharp temperature, not over a range. Mixtures do not have one fixed point; they melt over a range of temperatures. Your answer reverses these facts.
+> The student thinks an electron always radiates because it moves around the nucleus, but electrons in stable energy levels do not emit light. Radiation only occurs when an electron changes energy levels.
 > 
-> When different substances are mixed, each component begins to melt at its own temperature, so the overall mixture softens gradually. This creates a melting range, unlike a pure compound which changes state all at once at its specific melting point.
+> When an electron drops from a higher to a lower orbit, it releases a photon with energy equal to the difference between the two levels. In a stable orbit, no energy is lost as light.
+> 
+> Let's check this one before we go further.
+
+Better: [ ] served  [ ] assembled  [ ] same
+
+## 6. `math.cx.cauchy-riemann` — graded right
+
+**Served:**
+
+> That's Cauchy-Riemann Equations finished — nice work. You mastered: Cauchy-Riemann Equations. Press "Start next lesson" whenever you're ready to carry on.
+
+**Assembled:**
+
+> Yes, exactly right.
+> 
+> The example shows that smooth real parts do not guarantee the Cauchy‑Riemann equations. The CR equations couple u and v, and they fail except at a single point. Therefore real smoothness alone is insufficient for complex differentiability.
+> 
+> That's Cauchy-Riemann Equations finished — nice work. You mastered: Cauchy-Riemann Equations. Press "Start next lesson" whenever you're ready to carry on.
+
+Better: [ ] served  [ ] assembled  [ ] same
+
+## 7. `phys.mech.normal-force` — graded right
+
+**Served:**
+
+> That’s correct — the normal force is about 78 newtons because the upward component of the rope’s tension (40 N × sin 30° = 20 N) reduces the weight the floor must support, leaving the floor to supply the remaining 78 N.
+> 
+> Take a look at the force diagram beside this message — it shows Normal Force and Constraint Forces. Study it while I explain.
+
+**Assembled:**
+
+> That's right.
+> 
+> You recognized that the rope’s upward component lessens the weight supported by the floor. By subtracting 20 N (40 N × 0.5) from the 98 N weight you obtained 78 N for the normal force.
+> 
+> In general, the normal force on a flat surface is the net vertical force: N = mg – T sinθ when the pull has an upward angle, and N = mg + T sinθ when the angle is downward. Always resolve forces into vertical components before applying Newton’s second law.
+
+Better: [ ] served  [ ] assembled  [ ] same
+
+## 8. `bio.cell.mitochondria-energy` — graded right
+
+**Served:**
+
+> Correct — the Krebs (citric‑acid) cycle occurs in the matrix because that inner compartment holds the enzymes and substrates needed for the reactions.
+> 
+> Now, looking back at the figure, notice the colors used for each part.
+
+**Assembled:**
+
+> That's right.
+> 
+> The Krebs cycle occurs in the mitochondrial matrix where its enzymes and substrates are located.
+> 
+> The matrix also contains enzymes for fatty acid oxidation and the production of NADH and FADH2, which later donate electrons to the electron transport chain embedded in the inner membrane.
 > 
 > Here's a question — take your time with it.
 
 Better: [ ] served  [ ] assembled  [ ] same
 
-## 13. `chem.found.pure-substances`
+## 9. `chem.atomic.atomic-spectra` — graded right
 
 **Served:**
 
-> That’s correct—water is a chemical compound, so it’s a pure substance because its composition (two hydrogen atoms bonded to one oxygen atom) is fixed and its physical properties, like boiling point, are uniform. 
-> 
-> Whenever you see a material that always melts or boils at the same temperature regardless of where it came from, you can be confident it’s a pure substance rather than a mixture. 
-> 
-> Whenever you’re ready, just let me know and we can move on to the next step in the process.
+> That’s right—an absorption spectrum shows dark lines on a continuous background at exactly the same wavelengths where the emission spectrum has bright lines, because the same energy transitions are involved, just in opposite directions.
 
 **Assembled:**
 
 > That's right.
 > 
-> Water is a compound because hydrogen and oxygen atoms are chemically bonded in a fixed ratio. This makes it a pure substance, not a mixture. The elements cannot be separated without a chemical reaction.
+> The absorption spectrum shows dark lines at the same wavelengths where the emission spectrum shows bright lines because those wavelengths are absorbed by the same element. This demonstrates the link between emission and absorption processes.
 > 
-> A compound always has the same composition throughout, so any sample of water has the same 2:1 hydrogen‑oxygen ratio. In contrast, a mixture contains parts that keep their own identities and can be separated by physical means such as filtering or evaporating.
+> When a continuous light source passes through a cooler gas of the same element, the gas absorbs photons at specific energies, creating dark lines. If the gas itself is heated, it emits photons at those same energies, producing bright lines. This symmetry helps identify elements in stars and laboratory samples.
+> 
+> One to try. There's no rush.
 
 Better: [ ] served  [ ] assembled  [ ] same
 
-## 14. `chem.found.pure-substances`
+## 10. `math.cx.cauchy-riemann` — graded right
 
 **Served:**
 
-> Not quite — the answer is: No — filtration separates an INSOLUBLE solid from a liquid by particle size, and dissolved salt passes straight through the filter paper with the water. Evaporation (or distillation, if you also want the water back) is the technique that matches this mixture, because it separates by boiling point instead
+> Correct — well done. That’s spot‑on—you showed that the Cauchy‑Riemann equations are satisfied only at the origin, so \(f(z)=|z|^{2}\) has a complex derivative at \(z=0\) but fails to be holomorphic because the equations do not hold throughout any open neighbourhood. Holomorphicity is a local property: the equations must be true on an entire disc around the point, not just at the point itself. 
 > 
-> Let’s see if you can spot a pure substance among a few common examples.
+> Now that the distinction between pointwise differentiability and holomorphicity is clear, we can move on to applying the Cauchy‑Riemann equations to build a harmonic conjugate for a given real‑valued function. 
+> 
+> Let’s get started!
 
 **Assembled:**
 
-> Not quite — the answer is: No — filtration separates an INSOLUBLE solid from a liquid by particle size, and dissolved salt passes straight through the filter paper with the water. Evaporation (or distillation, if you also want the water back) is the technique that matches this mixture, because it separates by boiling point instead
+> Correct — well done.
 > 
-> A pure substance indeed shows one fixed boiling point regardless of its origin
+> The Cauchy‑Riemann equations must hold on an open neighbourhood for holomorphicity. At a single point they only give complex differentiability there. The example f(z)=|z|^2 shows the equations hold only at 0, so the function is not holomorphic.
 > 
-> If another substance is present, the mixture’s boiling point changes. This is why adding salt to water raises its boiling point and why distillation can separate components based on their different boiling points.
+> Remember that a function is holomorphic if it is complex‑differentiable at every point of some open set. Checking the C‑R equations at just one point is insufficient; you also need the partial derivatives to be continuous near that point. This ensures the derivative exists in a neighbourhood, not just at an isolated point.
+> 
+> One to try. There's no rush.
+
+Better: [ ] served  [ ] assembled  [ ] same
+
+## 11. `phys.mech.normal-force` — graded wrong
+
+**Served:**
+
+> Not quite — the answer is: Flat: N = 50 N; incline: N = mg cos30° ≈ 43.3 N (less than weight)
+> 
+> It’s okay—thinking the normal force stays equal to the weight is a very common slip. In the diagram you’re looking at, the weight arrow points straight down, while the normal‑force arrow is drawn perpendicular to the surface. On a flat table those two arrows line up, so the normal force happens to match the weight. But on a 30° incline the surface is tilted, so the normal force must be perpendicular to that tilted surface; it only balances the component of the weight that pushes into the plane, not the whole weight.
+> 
+> Because of that geometry, the normal force on the incline is **mg cos θ** (mass × 
+
+**Assembled:**
+
+> Not quite — the answer is: Flat: N = 50 N; incline: N = mg cos30° ≈ 43.3 N (less than weight)
+> 
+> On an incline the surface only supports the component of weight perpendicular to it, not the full weight. The normal force equals mg cos θ, which is smaller than mg for a 30° slope.
+> 
+> When an object rests on a slanted surface, split its weight into two parts: one perpendicular to the surface (mg cos θ) and one parallel (mg sin θ). The perpendicular part is balanced by the normal force, while the parallel part tries to slide the object down.
 > 
 > Quick check. Think it through before you choose.
 
 Better: [ ] served  [ ] assembled  [ ] same
 
-## 15. `chem.found.pure-substances` — FALLBACK
+## 12. `bio.cell.mitochondria-energy` — graded wrong
 
 **Served:**
 
-> Correct—carbon dioxide (CO₂) is a pure substance because it has a fixed chemical composition and consistent properties.
+> Not quite — the answer is: The endosymbiotic theory — mitochondria descended from free-living bacteria engulfed by an ancestral host cell
+> 
+> I see why you might think mitochondria don’t make energy, but actually they are the cell’s power plants. Together these steps convert nutrients into ATP, the cell’s usable energy currency. So the correct answer is **Yes – mitochondria create energy**.
+
+**Assembled:**
+
+> Not quite — the answer is: The endosymbiotic theory — mitochondria descended from free-living bacteria engulfed by an ancestral host cell
+> 
+> The claim that mitochondria arose spontaneously in the cytoplasm ignores the bacterial features observed. Circular DNA and 70S ribosomes match those of free‑living bacteria, not a spontaneous origin.
+> 
+> The endosymbiotic theory also explains chloroplasts, which have similar bacterial DNA and ribosomes. Both organelles retain their own genomes, showing they were once independent microbes that entered a host cell and became permanent partners.
+> 
+> One to try. There's no rush.
+
+Better: [ ] served  [ ] assembled  [ ] same
+
+## 13. `chem.atomic.electromagnetic-radiation` — graded right
+
+**Served:**
+
+> That’s right—because the 200 nm photon has the shorter wavelength, its frequency is higher and it carries more energy. 
+> 
+> A wavelength of 200 nanometres falls in the ultraviolet (UV) part of the electromagnetic spectrum, just beyond the violet end of visible light. UV radiation has enough energy to excite many electronic transitions in atoms and molecules, which is why it’s so useful in spectroscopy and why it can cause chemical changes like sunburn. 
+> 
+> In contrast, a wavelength of 600 nanometres lies in the orange‑red region of visible light, where the photons are less energetic and typically only promote lower‑energy electronic or vibrational processes. 
+> 
+> If you’d like to try a quick check on this idea, just let me know.
+> 
+> Take a look at the figure beside this message — it's a general illustration related to the topic.
 
 **Assembled:**
 
 > That's right.
 > 
-> fixed composition, one formula
+> The 200 nm photon has the higher energy because a shorter wavelength gives a higher frequency. Energy is calculated with E = hc/λ.
 > 
-> Quick check. Think it through before you choose.
+> If you decrease the wavelength, the energy goes up proportionally. For example, a photon with 100 nm wavelength has twice the energy of one with 200 nm, since the wavelength is half as long.
 
 Better: [ ] served  [ ] assembled  [ ] same
 
-## 16. `phys.meas.vector-products`
+## 14. `math.cx.cauchy-riemann` — graded right
 
 **Served:**
 
-> I see where the idea came from, but it’s not quite right. Work isn’t about how hard you push or how long you lean; it’s the dot product of the force \( \mathbf{F} \) and the displacement \( \mathbf{d} \). In the picture, the wall doesn’t move, so the displacement vector is zero. A dot product with a zero vector always gives zero, no matter how large the force is. That’s why the correct answer is exactly zero joules.
-> 
-> If you’d like another example to see how the dot product works in a different situation, just let me know.
-
-**Assembled:**
-
-> Not quite — the answer is: Exactly zero — work is a dot product F·d, and with zero displacement (or force perpendicular to any motion), there is no aligned component to produce work, regardless of how large the force is
-> 
-> You assumed that pushing harder or longer automatically creates work, but work is force times displacement in the direction of the force. The wall does not move, so displacement is zero and the work done on the wall is zero.
-> 
-> If the wall stayed still, all the energy you expend becomes internal strain or heat in your muscles, not mechanical work on the wall. Only when an object actually moves in the direction of the applied force is mechanical work transferred to it.
-> 
-> Quick check. Think it through before you choose.
-
-Better: [ ] served  [ ] assembled  [ ] same
-
-## 17. `phys.meas.vector-products`
-
-**Served:**
-
-> That's right. That’s spot‑on—the dot product yields a scalar (no direction), while the cross product yields a vector that points perpendicular to both original vectors. This follows directly from what each product measures: alignment for the dot product and the area‑swept‑out (and its perpendicular direction) for the cross product. 
-> 
-> Whenever you’re ready, let me know and we can move on to a short practice problem together.
-> 
-> Take a look at the vector beside this message — it shows Dot and Cross Products. Follow it step by step.
+> That’s correct — the conjugate map \(z\mapsto\bar z\) fails the first Cauchy‑Riemann equation because \(\partial u/\partial x=1\) while \(\partial v/\partial y=-1\), so the required equality \(1=-1\) never holds, even though the real‑valued components are perfectly smooth.
 
 **Assembled:**
 
 > That's right.
 > 
-> The dot product combines two vectors into a scalar, so work has no direction. The cross product produces a vector perpendicular to the input plane, giving torque a genuine direction. This reflects the fundamental difference between the two products.
+> The function \u0305z equals x−iy, so u=x and v=−y. Its partial derivatives give du/dx=1 and dv/dy=−1, which do not satisfy du/dx = dv/dy, so the Cauchy‑Riemann equations fail everywhere, making it non‑analytic.
 > 
-> Remember that the dot product equals |A||B|cosθ and measures how much one vector projects onto another. The cross product equals |A||B|sinθ and points along the axis given by the right‑hand rule, representing the area of the parallelogram spanned by the vectors.
-
-Better: [ ] served  [ ] assembled  [ ] same
-
-## 18. `phys.meas.vector-products` — FALLBACK
-
-**Served:**
-
-> That’s correct—you multiplied the two magnitudes and the cosine of the 60° angle, which is precisely how the dot product is evaluated, and it always produces a single number (a scalar).
-
-**Assembled:**
-
-> That's right.
-> 
-> 3 × 2 × cos60 = 3 J, a scalar — the dot product uses cosine and always gives a number.
+> A map can be infinitely differentiable as a real function and still fail to be holomorphic. For complex differentiability the Cauchy‑Riemann equations must hold in a neighbourhood, and the derivative must be independent of direction. This explains why \u0305z is nowhere analytic despite being smooth.
 > 
 > Here's a question — take your time with it.
 
 Better: [ ] served  [ ] assembled  [ ] same
 
-## 19. `phys.meas.vector-addition`
+## 15. `phys.mech.normal-force` — graded right
+
+**Served:**
+
+> Correct — the table must supply a normal force that balances the book’s weight (≈19.6 N) plus the 10 N downward push, giving about 29.6 N.
+
+**Assembled:**
+
+> That's right.
+> 
+> The table must support both the weight of the book and the extra downward force you apply. The weight is 2 kg × 9.8 m/s² = 19.6 N, and adding the 10 N push gives a normal force of about 29.6 N.
+> 
+> Remember that the normal force always adjusts to keep the net vertical force zero for objects at rest. If you push upward on the book, the normal force would be reduced, and if you lift the book, the normal force would disappear once it leaves the surface.
+> 
+> Here's a question — take your time with it.
+
+Better: [ ] served  [ ] assembled  [ ] same
+
+## 16. `bio.cell.mitochondria-energy` — graded right
+
+**Served:**
+
+> That’s right—mitochondria don’t create energy; they transform the chemical energy stored in glucose into the usable molecule ATP, following the principle that energy is conserved, not created.
+> 
+> Now let’s look at the inner membrane and its cristae. The inner membrane is the blue layer on the right side of the figure, and the cristae are the blue folds at the top left. Those folds dramatically increase the surface area where the protein complexes of the electron‑transport chain sit, allowing many more reactions of aerobic respiration to occur simultaneously. This is why the inner membrane’s shape is crucial for efficient ATP production.
+> 
+> Take a moment to examine the cristae in the diagram and 
+
+**Assembled:**
+
+> That's right.
+> 
+> Mitochondria do not create energy; they change chemical energy from glucose into ATP. Energy is conserved, not made from nothing.
+> 
+> The ATP made in mitochondria is used by cells for many tasks such as muscle contraction, transport, and biosynthesis. The process is called oxidative phosphorylation and relies on a gradient of protons across the inner membrane.
+
+Better: [ ] served  [ ] assembled  [ ] same
+
+## 17. `chem.atomic.electromagnetic-radiation` — graded right
+
+**Served:**
+
+> That’s right—when the wavelength gets longer, the frequency drops, and because photon energy E = h ν, the energy per photon also decreases.
+
+**Assembled:**
+
+> That's right.
+> 
+> Longer wavelengths mean the wave oscillates more slowly, so the frequency decreases. Because photon energy is proportional to frequency, the energy of each photon also decreases.
+> 
+> Remember the formula E = h·f, where h is Planck's constant. As you move to lower‑frequency parts of the spectrum, such as radio waves, the energy per photon becomes extremely small compared to high‑frequency light like X‑rays.
+> 
+> Let's check this one before we go further.
+
+Better: [ ] served  [ ] assembled  [ ] same
+
+## 18. `math.real.sup-inf` — graded right
+
+**Served:**
+
+> That's Supremum and Infimum finished — nice work. You mastered: Supremum and Infimum. Press "Start next lesson" whenever you're ready to carry on.
+
+**Assembled:**
+
+> Yes, exactly right.
+> 
+> The supremum of (0,3) is 3, but 3 is not an element of the open interval. A supremum need not belong to the set; it only bounds the set from above.
+> 
+> That's Supremum and Infimum finished — nice work. You mastered: Supremum and Infimum. Press "Start next lesson" whenever you're ready to carry on.
+
+Better: [ ] served  [ ] assembled  [ ] same
+
+## 19. `phys.mech.tension` — graded wrong
+
+**Served:**
+
+> Not quite — the answer is: No — if T = 5g, the 5 kg mass would have zero net force and couldn’t accelerate; T is between 3g and 5g
+> 
+> <!" a="The tension is the same everywhere along an ideal rope" b="The tension gets larger toward the heavier mass" c="A rope can push as well as pull" d="The tension is zero if the rope is massless" correct="A"-->
+
+**Assembled:**
+
+> Not quite — the answer is: No — if T = 5g, the 5 kg mass would have zero net force and couldn’t accelerate; T is between 3g and 5g
+> 
+> You assumed the tension equals the weight of the heavier mass. The tension is the same on both sides and must be less than the heavier weight for the system to accelerate.
+> 
+> Because the 5 kg mass accelerates downward, the net force on it is 5g − T, which must be positive. Likewise the 3 kg mass accelerates upward with net force T − 3g. Solving the two equations shows T lies between 3g and 5g.
+> 
+> Here's a question — take your time with it.
+
+Better: [ ] served  [ ] assembled  [ ] same
+
+## 20. `bio.cell.nucleus-chromosomes` — graded wrong
+
+**Served:**
+
+> Not quite — the answer is: Centromere
+> 
+> It’s easy to mix up the parts of the nucleus—many of them look similar in the figure. The nucleolus (the blue spot on the right side of the nucleus) is actually the region where ribosomal RNA is made and ribosome subunits are assembled; it doesn’t connect chromosomes together.
+> 
+> The structure that joins the two sister chromatids of a replicated chromosome is the **centromere**. In the illustration it appears as the blue label at the top‑left of the chromosome and is the narrow constriction where the two identical copies stay linked until they separate during cell division.
+
+**Assembled:**
+
+> Not quite — the answer is: Centromere
+> 
+> The nucleolus makes ribosomes and does not link sister chromatids.
+> 
+> The centromere is a specialized DNA region where the two sister chromatids are tightly connected. During cell division, proteins called cohesins hold the chromatids together at the centromere until they are pulled apart by spindle fibers.
+> 
+> Here's a question — take your time with it.
+
+Better: [ ] served  [ ] assembled  [ ] same
+
+## 21. `chem.atomic.subatomic-particles` — graded wrong
 
 **Served:**
 
 > Your answer isn’t correct. 
 > 
-> You assumed the two forces simply add their sizes, giving 10 newtons, which ignores their directions. That’s the common mistake of treating vector magnitudes like ordinary numbers. 
+> The mass number is indeed the total of protons + neutrons, so \(A = 26 + 30 = 56\) – that part is right. 
 > 
-> In fact, the two 5‑newton forces point exactly opposite each other. When you place the tail of one at the head of the other (the head‑to‑tail method), the arrows line up back‑to‑back and the closing side of the triangle has zero length. So the resultant force on the box is 0 newtons. 
+> The charge, however, depends on how many electrons differ from the proton count. An ion’s charge is **positive** when it has lost electrons and **negative** when it has gained electrons. Here the atom has 26 protons but only 23 electrons, so it has lost three electrons. Therefore the ion carries a **3+** charge, not a 3‑ negative charge. 
+> 
+> So the correct answer is: charge = 3+, mass number = 56.
+
+**Assembled:**
+
+> Not quite — the answer is: Charge 3+, mass number 56
+> 
+> You counted the mass number correctly but assigned the wrong sign to the charge; the ion has three more protons than electrons, giving a 3+ charge.
+> 
+> Remember: charge equals protons minus electrons. A positive difference means a cation with a plus sign. Mass number is simply protons plus neutrons.
 > 
 > Here's a question — take your time with it.
 
-**Assembled:**
-
-> Not quite — the answer is: 0 N — the two equal, oppositely-directed forces cancel completely; combining two nonzero vectors can produce a result smaller than either one, even exactly zero
-> 
-> The forces point opposite each other, so they subtract instead of add; equal opposite forces cancel to zero net force. Adding vectors can give a result smaller than each individual vector.
-> 
-> Draw each force as an arrow. Place the tail of the second arrow at the head of the first. If the arrows are the same length but point opposite ways, the final arrow collapses to a point, showing that the object feels no overall push.
-> 
-> Here's a question — take your time with it.
-
 Better: [ ] served  [ ] assembled  [ ] same
 
-## 20. `phys.meas.vector-addition`
+## 22. `math.real.sup-inf` — graded right
 
 **Served:**
 
-> That's right. QA shadow-sample, notice how the green vector labeled "A (3 at 0°)" and the blue vector labeled "B (4 at 90°)" on your screen start together at the origin. When we slide the blue vector over so its tail sits right on the tip of the green vector, we form a triangle whose closing side is the red vector labeled "R (5 at 53.1°)". That red vector is the resultant, combining both direction and magnitude.
+> That’s correct — you pointed out that the set \(\{q\in\mathbb{Q}:q>0,\;q^{2}<2\}\) is bounded above in \(\mathbb{Q}\) but has no rational least upper bound because any rational upper bound can be improved, illustrating that the supremum need not be a rational number.
+> 
+> This example highlights the role of the completeness axiom: in \(\mathbb{R}\) every non‑empty set that is bounded above does have a supremum (here it would be \(\sqrt{2}\)), whereas \(\mathbb{Q}\) can fail to provide one.
+> 
+> Recall the number‑line you’re looking at: the point labeled 3 is the supremum of the open interval \((0,3)\); it is the **least** upper bound even though the interval itself never reaches 3. The same principl
 
 **Assembled:**
 
-> That's right.
+> Correct — well done.
 > 
-> You used the Pythagorean theorem for perpendicular forces. The forces form a right triangle with sides 3 and 4. The hypotenuse gives the resultant magnitude.
+> The set of positive rationals whose square is less than 2 is bounded above but has no rational least upper bound. This demonstrates that the rational numbers are not complete, unlike the real numbers.
 > 
-> The direction of the resultant can be found with the tangent function. The angle north of east satisfies tanθ=4/3, giving θ≈53 degrees. This shows how both magnitude and direction follow from vector components.
-
-Better: [ ] served  [ ] assembled  [ ] same
-
-## 21. `phys.meas.vector-addition`
-
-**Served:**
-
-> Not quite — the answer is: 5 N — vectors at an angle combine via the Pythagorean/triangle rule, not simple addition
-> 
-> That’s a common slip—adding just the numbers treats the forces like plain scalars, but forces are vectors, so their directions matter.
-> 
-> In the picture, the green arrow **A** (3 N at 0°) points east and the blue arrow **B** (4 N at 90°) points north. When you place **B** tip‑to‑tail on **A**, they form a right‑angled triangle. The straight‑line side that closes the triangle is the red arrow **R**, whose length is found with the Pythagorean theorem: √(3² + 4²) = 5 N. Its direction comes from the angle of that side, about 53° measured from the eastward axis (northeast).
-> 
-> So the resultant isn’t 7 N; it’s 5 N pointing toward the northeast because both magnitude and direction combine geometrically.
-
-**Assembled:**
-
-> Not quite — the answer is: 5 N — vectors at an angle combine via the Pythagorean/triangle rule, not simple addition
-> 
-> You added the magnitudes directly ignoring the right‑angle relationship. The angle changes how the forces combine.
-> 
-> For perpendicular vectors, treat them as the legs of a right triangle. The resultant is the hypotenuse, found with R = √(A²+ B²). In this case √(3²+4²)=5 N, and the direction is halfway between the two, at 45° to each.
-> 
-> Quick check. Think it through before you choose.
-
-Better: [ ] served  [ ] assembled  [ ] same
-
-## 22. `phys.meas.vector-addition`
-
-**Served:**
-
-> That’s correct—you identified the resultant as 5 newtons toward the north‑east because the two perpendicular forces form a right‑triangle whose hypotenuse gives that magnitude and direction.
-
-**Assembled:**
-
-> That's right.
-> 
-> You added the east and north forces as a right‑angle triangle. Using the Pythagorean theorem gives √(3²+4²)=5 N, and the direction is exactly between east and north, i.e., north‑east.
-> 
-> To find the exact direction, use the tangent function: tan θ = opposite/adjacent = 4/3, so θ ≈ 53.1° north of east. This method works for any two perpendicular forces.
+> A field is called complete when every non‑empty set that is bounded above has a supremum in the field. The rationals fail this property, so limits that exist in ℝ may not exist in ℚ. For instance, the sequence of rationals approaching √2 never reaches a rational supremum, illustrating the need for the real number system to capture such limits.
 > 
 > Let's check this one before we go further.
 
 Better: [ ] served  [ ] assembled  [ ] same
 
-## 23. `phys.meas.significant-figures`
+## 23. `phys.mech.tension` — graded right
 
 **Served:**
 
-> Your answer of three significant figures isn’t correct. When we multiply numbers, the result can’t be reported with more significant figures than the *least* precise factor. Here 2.5 has only two significant figures, while 3.42 has three, so the product must be limited to two significant figures. Multiplying gives 8.55, which we round to **8.6** (two significant figures).
+> That’s correct — using \(T = m(g + a)\) gives \(T = 2 \text{kg} \times (9.8 \text{m/s}² + 1.2 \text{m/s}²) = 22 \text{N}\).
+> 
+> The rope must support the bucket’s weight ( \(mg\) ) and also provide the extra upward force needed for the 1.2 m/s² acceleration, so the two contributions add together.
+> 
+> Take a look at the force diagram beside this message — it shows Tension in Strings and Ropes. Follow it step by step.
 
 **Assembled:**
 
-> Not quite — the answer is: Two — a product carries the precision of its LEAST precise input
+> That's right.
 > 
-> The result must have the same number of significant figures as the factor with the fewest, which is 2.5 with two figures, so two sig figs are required.
+> You used the net‑force equation correctly. The tension equals the weight plus the force for the upward acceleration, giving T = 2 kg × (9.8 + 1.2) = 22 N.
 > 
-> When multiplying or dividing, count the significant figures in each number and round the product to the smallest count. This keeps the precision consistent with the least precise measurement.
+> If the bucket were accelerating downward, the tension would be reduced: T = m(g − a). The same formula works for any direction by assigning the sign of a appropriately.
 > 
 > Quick check. Think it through before you choose.
 
 Better: [ ] served  [ ] assembled  [ ] same
 
-## 24. `phys.meas.significant-figures`
+## 24. `bio.cell.nucleus-chromosomes` — graded right
 
 **Served:**
 
-> That’s right—you can only trust the digits that the millimetre‑limited measurement can actually provide. Because the ruler’s smallest division is 1 mm, the length is known only to the nearest 0.1 cm, so any finer digits in the calculated area are just arithmetic noise.
+> That’s correct—before DNA replication a chromosome is a single chromatid, and only after replication does it have two sister chromatids.
 > 
-> Now let’s look at how we decide what counts as a significant figure when zeros appear in a number. Zeros that sit **between** non‑zero digits are always significant (they’re “captive” zeros). A zero that comes **before** the first non‑zero digit is just a placeholder and isn’t significant (a “leading” zero). A zero that follows a decimal point **after** a non‑zero digit is significant because the decimal point tells us the measurement was made to that place.
-> 
-> Take the number 4.370 cm shown in the figure. The “4” and “3” are certain, the “7” is an estimated last digit, and the trailing “0” after the decimal point is also significant—it tells us the measurement was made to the thousandths place. That’s why the figure notes “sig. figs = 3” (the zero isn’t counted because it’s part of the same decimal‑place precision as the “7”).
-> 
-> When you feel ready, let me know what you notice about the zeros in the next number we’ll 
+> Take a look at the labelled figure beside this message — it shows Nucleus and Chromosomes. Follow it step by step.
 
 **Assembled:**
 
 > That's right.
 > 
-> You recognized that the number of reliable digits is limited by the precision of the original measurement. The ruler gives only three significant figures, so any extra digits are just calculation noise.
+> A chromosome has one chromatid before DNA replication and two after replication. The learner chose No, which matches that a chromosome does not always have two chromatids.
 > 
-> When you use measured values in further calculations, keep only as many decimal places as the least precise measurement. This avoids implying a higher accuracy than the data actually provides.
+> During the S phase of the cell cycle the DNA is copied, so each chromosome becomes two identical sister chromatids joined at the centromere. These two chromatids stay together until anaphase, when they separate into individual chromosomes for the daughter cells.
+> 
+> One to try. There's no rush.
 
 Better: [ ] served  [ ] assembled  [ ] same
 
-## 25. `phys.meas.significant-figures`
+## 25. `chem.atomic.subatomic-particles` — graded right
 
 **Served:**
 
-> Not quite — the answer is: 3 in 0.00420 (leading zeros don't count, trailing zero after decimal does); 4 in 4002 (embedded zeros count)
+> That’s correct — you identified the atomic number **Z** as 17 because it counts the protons, and the mass number **A** as 35 because it is the sum of protons + neutrons.
 > 
-> When we count significant figures, we don’t treat every digit that appears as meaningful. The leading zeros in 0.00420 are only placeholders—they tell us where the decimal point is, but they were not measured. Only the “4”, “2”, and the final “0” after the decimal are significant, so 0.00420 has **3 significant figures**. In 4002, the zeros are between non‑zero digits. Those “captive” zeros are measured and therefore count. All four digits (4, 0, 0, 2) are significant, giving **4 significant figures**. So the correct counts are 3 sig figs for 0.00420 and 4 sig figs for 4002.
-
-**Assembled:**
-
-> Not quite — the answer is: 3 in 0.00420 (leading zeros don't count, trailing zero after decimal does); 4 in 4002 (embedded zeros count)
+> Since the atom is neutral, the number of electrons equals the atomic number, so it also has 17 electrons. The neutron count **N** is found by subtracting Z from A: 
 > 
-> You counted the leading zeros in 0.00420 as significant, but leading zeros are only placeholders and are not counted. The trailing zero after the decimal is significant, giving three significant figures. The zeros in 4002 are internal and are counted, giving four significant figures.
+> \(N = A - Z = 35 - 17 = 18\) (18 neutrons).
 > 
-> Remember: ignore zeros before the first non‑zero digit, count zeros between non‑zero digits, and count any zero after a decimal point that follows a non‑zero digit.
+> With Z = 17 we know the element is chlorine, and the mass number 35 tells us we are looking at the isotope ^35Cl.
 > 
-> Here's a question — take your time with it.
-
-Better: [ ] served  [ ] assembled  [ ] same
-
-## 26. `phys.meas.significant-figures`
-
-**Served:**
-
-> Correct — you should keep two significant figures.
+> Whenever you see an isotope symbol, you can read Z (the lower‑left number) and A (the upper‑left number), then get N by A − Z and the electron count by Z for a neutral atom. Let me know when you’d like to explore isotopes, isobars, or isotones next.
 > 
-> Because the original measurement (2.5 cm) is known to only two significant figures, the result cannot be reported with greater precision.
+> Take a look at the atom beside this message — it shows Subatomic Particles. Study it while I explain.
 
 **Assembled:**
 
 > That's right.
 > 
-> You kept two significant figures because the original measurement 2.5 cm has only two significant figures, so the product must be rounded to the same precision.
+> The atomic number Z is the count of protons, which is 17. The mass number A adds the protons and neutrons, giving 35.
 > 
-> When you multiply or divide, the result should have as many significant figures as the measurement with the fewest. This rule also applies to addition or subtraction, but there you match the smallest number of decimal places instead.
-> 
-> Here's a question — take your time with it.
+> Electrons are not included in the mass number because they have negligible mass. Elements with the same Z but different A are isotopes, showing how neutron count changes the atom’s weight while its chemical identity stays the same.
 
 Better: [ ] served  [ ] assembled  [ ] same
 
-## 27. `phys.meas.errors`
+## 26. `math.real.sup-inf` — graded right
 
 **Served:**
 
-> Your answer isn’t correct—averaging many measurements doesn’t cut down both types of error equally. 
-> 
-> The idea that “both kinds, equally” is wrong because systematic error is a consistent offset that appears in every single reading. Since every measurement is shifted by the same amount, adding them together and dividing by the number of readings just gives you a more precise version of that shifted value; the bias remains unchanged. 
-> 
-> Averaging does help with random error, though. Random errors make the individual readings scatter above and below the true value. When you take many such scattered results, the positive and negative deviations tend to cancel, so the mean gets closer to the true value and the random spread becomes smaller. That’s why the correct answer is **random error only**. 
-> 
-> Take a moment to let this distinction settle, and we’ll keep building on it.
-
-**Assembled:**
-
-> Not quite — the answer is: Random error only — systematic error survives averaging completely untouched
-> 
-> Averaging many measurements smooths out the scatter caused by random fluctuations, but it does not change a consistent offset that is present in every reading.
-> 
-> To lower systematic error you must change the measurement setup, calibrate the instrument, or apply a correction factor, because repeating the same biased measurement will keep the bias.
-> 
-> Here's a question — take your time with it.
-
-Better: [ ] served  [ ] assembled  [ ] same
-
-## 28. `phys.meas.errors` — FALLBACK
-
-**Served:**
-
-> That's correct — the stopwatch error is systematic because it shifts every measurement by the same amount, while the scatter from pressing the timer at slightly different moments is random because it varies from trial to trial. Let me know when you’d like to continue.
-> 
-> Take a look at the labelled figure beside this message — it shows Measurement Errors and Uncertainty. Follow it step by step.
-
-**Assembled:**
-
-> That's right.
-
-Better: [ ] served  [ ] assembled  [ ] same
-
-## 29. `phys.meas.errors`
-
-**Served:**
-
-> Not quite — the answer is: Precise but NOT accurate — the readings cluster tightly together (precision), but they are all systematically offset from the true value (inaccurate)
-> 
-> But the key idea we covered is that **precision** and **accuracy** are independent qualities. *Precision* describes how closely repeated measurements agree with each other. In this case the three rulers all read **12.41 cm**, so their results are tightly clustered—that’s precise. *Accuracy* describes how close the measurements are to the **true value**. Because each ruler’s zero mark is shifted **2 mm** forward, every reading is **2 mm too high**. Even though the three readings match each other, they are all offset from the true length, so they are **not accurate**. Therefore the correct description is **“precise but NOT accurate.”**
-
-**Assembled:**
-
-> Not quite — the answer is: Precise but NOT accurate — the readings cluster tightly together (precision), but they are all systematically offset from the true value (inaccurate)
-> 
-> The three rulers all give the same value, which shows precision, but they all start 2 mm beyond the true zero, so the measurements are not close to the true length. This systematic offset means the readings are inaccurate.
-> 
-> Precision is about the consistency of repeated measurements, while accuracy is about how close a measurement is to the real value. Even if all measurements agree (high precision), a constant bias can make them inaccurate. Recognizing this difference helps interpret experimental data correctly.
-> 
-> Let's check this one before we go further.
-
-Better: [ ] served  [ ] assembled  [ ] same
-
-## 30. `phys.meas.errors`
-
-**Served:**
-
-> Correct—your “No” shows you recognize that a consistently shifted zero gives a precise reading that’s still inaccurate. Next, let’s think about how the spread of the five scattered readings in the figure reflects random error.
+> That's right. That’s spot‑on—10 is an upper bound, but because a smaller upper bound (like 9) still works, it fails the “least” part of the definition, so the supremum is 3.
 
 **Assembled:**
 
 > That's right.
 > 
-> Your answer is correct because the worn zero creates a systematic error. The measurements are precise but not accurate. The true length is offset by the 2 mm error.
+> The supremum must be the smallest upper bound. 10 is an upper bound but 3 is a smaller upper bound, so 10 cannot be the supremum.
 > 
-> A systematic error shifts every measurement by the same amount. To obtain the true length you must determine the offset, for example by measuring a known standard, and then add that correction to each reading. This improves accuracy while preserving the precision of the instrument.
+> Remember that the supremum of an open interval (a,b) is the right endpoint b, even though b is not inside the interval. Any number larger than b is also an upper bound, but it is not the supremum because a smaller upper bound exists.
+> 
+> Quick check. Think it through before you choose.
+
+Better: [ ] served  [ ] assembled  [ ] same
+
+## 27. `phys.mech.tension` — graded wrong
+
+**Served:**
+
+> That answer isn’t right. The idea that “nothing is moving, so there is no force” misses an important point: even when an object is stationary, forces can still be acting on it.
+> 
+> When the lamp hangs at rest, the rope must pull upward with a force that exactly balances the lamp’s weight. The weight is the product of the lamp’s mass (5 kilograms) and the acceleration due to gravity (9.8 metres per second squared). So the weight is 5 × 9.8 = 49 newtons, and the tension in the cord must be 49 newtons upward to keep the lamp in equilibrium.
+> 
+> If the tension were 0 newtons, the lamp would accelerate downward because gravity would have nothing to oppose it. Because the lamp isn’t falling, the tension
+
+**Assembled:**
+
+> Not quite — the answer is: 49 N — it must balance the lamp’s weight
+> 
+> The lamp is acted on by gravity, so the cord must pull upward. Zero tension would not support the weight.
+> 
+> In a hanging object at rest, the upward tension equals the downward weight mg. For a 5 kg lamp, mg = 5 × 9.8 = 49 N, so the cord tension is 49 N.
 > 
 > Here's a question — take your time with it.
+
+Better: [ ] served  [ ] assembled  [ ] same
+
+## 28. `bio.cell.nucleus-chromosomes` — graded wrong
+
+**Served:**
+
+> Your answer isn’t correct, but that’s a common mix‑up.
+> 
+> “23” is the number of chromosome **pairs** in a human somatic cell, not the number of chromatids. After DNA replication each chromosome consists of two identical sister chromatids, so the count of chromatids is not the same as the count of chromosome pairs.
+> 
+> A human cell has 46 individual chromosomes (23 pairs). Because each chromosome now has two sister chromatids, the total number of chromatids is 46 × 2 = 92.
+> 
+> Feel free to let me know if anything about this still feels unclear.
+
+**Assembled:**
+
+> Not quite — the answer is: 92 — each of the 46 chromosomes now has two sister chromatids
+> 
+> You assumed the number of chromatids goes down after DNA replication, but replication creates a second sister chromatid for each chromosome, so the count doubles.
+> 
+> Before S phase each of the 46 chromosomes has one chromatid. After DNA replication each chromosome consists of two identical sister chromatids, giving 46 × 2 = 92 total chromatids.
+> 
+> Quick check. Think it through before you choose.
+
+Better: [ ] served  [ ] assembled  [ ] same
+
+## 29. `chem.period.ionization-energy` — graded wrong
+
+**Served:**
+
+> Not quite — the answer is: No — inner-shell shielding stays effective, so Zeff barely moves (about 1.3 for Li against 2.2 for Cs). The dominant cause is DISTANCE: Cs's outer electron sits in n=6, far further out, and nuclear attraction falls off with distance
+> 
+> I see why you thought the drop in ionization energy might be due to weaker shielding—​it’s a common intuition. The mistake is that the inner‑shell electrons continue to shield the nucleus very effectively as we go down a group, so the effective nuclear charge on the outermost electron does not change much. What really drives the lower ionization energy is the increasing distance of that outer electron: in cesium the valence electron re
+
+**Assembled:**
+
+> Not quite — the answer is: No — inner-shell shielding stays effective, so Zeff barely moves (about 1.3 for Li against 2.2 for Cs). The dominant cause is DISTANCE: Cs's outer electron sits in n=6, far further out, and nuclear attraction falls off with distance
+> 
+> Shielding by inner electrons does not decrease significantly across the series. The effective nuclear charge changes only a little. The large drop in ionisation energy is due to the outer electron being farther from the nucleus.
+> 
+> When you go down a group, a new electron shell is added. The valence electron then sits at a higher energy level, farther from the nucleus. This greater distance weakens the attraction and makes it easier to r
+
+Better: [ ] served  [ ] assembled  [ ] same
+
+## 30. `math.seq.geometric-sequence` — graded right
+
+**Served:**
+
+> That's Geometric Sequence finished — nice work. You mastered: Geometric Sequence. Press "Start next lesson" whenever you're ready to carry on.
+
+**Assembled:**
+
+> Yes, exactly right.
+> 
+> The exponent shows how many times you multiply by the ratio, which is n‑1 steps from a₁ to aₙ. For n=4 you multiply three times, giving 2³. Thus a₄ = 3·2³ = 24.
+> 
+> That's Geometric Sequence finished — nice work. You mastered: Geometric Sequence. Press "Start next lesson" whenever you're ready to carry on.
 
 Better: [ ] served  [ ] assembled  [ ] same
