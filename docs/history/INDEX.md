@@ -37,6 +37,7 @@ log.
 | `tutor-max-real-learner-fixes-2026-09-30-qa2.md` | Real-learner QA run 2 (refraction, circular motion, gas laws, Bohr model): ratings and 12 defects, 5 still open from run 1. |
 | `physics-visual-gap-campaign.md` | Physics visual audit (238 concepts: 43 own figure / 32 general / 163 none), batch 1 of authored figures (reflection, Coulomb, E-field, B-field, standing waves, Doppler, energy conservation, heat transfer, buoyancy, Hooke), the authoring-label leak fix, and the queue for later batches. |
 | `learner-baseline-2026-09-30-cto-loop.md` | Autonomous CTO loop: 10-session real-browser learner baseline (5 physics, 5 chemistry, real account), the defect clusters, 17 fixes (stub repair, affirm guard vs authored key, Close records mastery, R1 resume, figure colours, simulation controls/spoilers, answer heads, excursion quiz, empty generated graph, lesson-one spiral deadlock, skip-demotes-mastery, completion-card ids, graded-tap confirm-back, H2/O2 key), production verification, and the owner actions left open. |
+| `turn-quality-baseline-2026-10-02.md` | Phase 0 of the turn assembly proposal: read-only production baseline. Zero-tolerance checks (grade vs authored key, mastery without evidence), heuristic turn checks K1–K5 with hand-read precision, 14-day trend, and what was not measured. SQL in `scripts/qa/turnQuality/`. |
 
 ## Live pointers (not history — check these first for CURRENT state)
 - `/CLAUDE.md` — live rules.
