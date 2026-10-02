@@ -4728,6 +4728,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // The promise is total (its own .then/.catch handle both outcomes), so
       // settling it can never fail the turn.
       let topicProgressEvidenceWrite: Promise<void> | null = null
+      // R1, applied to student_progress (2026-10-02). Both writes to the
+      // learner's student_progress row below were fire-and-forget, so a frozen
+      // instance kept that row locked and the learner's NEXT request blocked on
+      // it. MEASURED in production: lesson-init for math.trig.unit-circle, sent
+      // right after a math.geom.pythagorean-theorem turn, failed all three
+      // activeLessonSlug upserts with 55P03 "lock timeout", the pointer stayed
+      // on the old lesson, and every turn of "Unit Circle" taught Pythagoras.
+      // Settled at the same response boundary as topicProgressEvidenceWrite.
+      const studentProgressWrites: Promise<void>[] = []
       // GUIDE or a mastery gate — the ORIGINAL isProbeAttachablePhase, never
       // the gate's E1-widened copy. See ModelProbeInput.probeWouldCountThisPhase.
       let probeWouldCountThisPhaseHoisted = false
@@ -11404,7 +11413,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               })
               if (graph && learnerStillAtEntry) {
                 const lowered = computeCurriculumEntryOrder(graph, levelBelow(resolvedPlacementLevel))
-                prisma.studentProgress.update({
+                studentProgressWrites.push(prisma.studentProgress.update({
                   where: { userId_subjectCode: { userId, subjectCode: progressCode } },
                   // activeLessonSlug is cleared with it: this adjustment is
                   // meaningless if a stale explicit selection still outranks
@@ -11412,7 +11421,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                   // auditing writers for the Persisted Active Lesson — this is
                   // the third and last writer of currentLesson.
                   data: { currentLesson: lowered, activeLessonSlug: null },
-                }).catch(() => {})
+                }).then(() => {}, () => {}))
                 // PCD-004: the SESSION pointer outranks the per-user one, so
                 // clearing only the latter would leave the lowered position
                 // still overridden — the exact staleness the line above exists
@@ -12645,7 +12654,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
 
       // Auto-save lesson position on every interaction so Dashboard/Library
       // can show exactly where the learner is without them completing a lesson.
-      prisma.studentProgress.upsert({
+      // Settled before the reply (studentProgressWrites) — see its declaration.
+      studentProgressWrites.push(prisma.studentProgress.upsert({
         where: { userId_subjectCode: { userId, subjectCode: progressCode } },
         update: {
           lastStudiedAt: new Date(),
@@ -12663,7 +12673,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           lastLessonTitle: lessonCtx?.lessonTitle ?? null,
           lastUnitTitle: lessonCtx?.unitTitle ?? null,
         },
-      }).catch(() => {})
+      }).then(() => {}, () => {}))
 
       // Lesson-sync bug fix: surface the exact lesson context this response
       // was generated from, so the client can reconcile Roadmap/Learn Panel
@@ -13233,6 +13243,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       if (topicProgressEvidenceWrite) {
         try { await topicProgressEvidenceWrite } catch { /* total by construction */ }
       }
+      // Same rule for the learner's student_progress row: every promise is
+      // total (.then with both handlers), so this can never fail the turn.
+      await Promise.all(studentProgressWrites)
 
       // TURN ASSEMBLY, Phase 1 — SHADOW. Assemble what the server would have
       // sent and log it beside what it did send. The served reply is untouched.
