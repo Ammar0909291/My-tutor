@@ -1239,6 +1239,37 @@ export function gradeMcqAnswer(
 }
 
 /**
+ * Is the model's misconception `phrase` just the answer the server graded
+ * CORRECT?
+ *
+ * MEASURED (mathematics production certification, 2026-10-02): on 2 of 12
+ * concepts a turn wrote PROBE_OUTCOME `pass` AND MISCONCEPTION_DETECTED for the
+ * same tap, the "misconception" text being the correct option itself
+ * ("It is multiplied by 3 too", "5 — 9 + 16 = 25"). The server grade replaces
+ * the SIGNAL's correctness but its phrase survived, so a correct answer set
+ * `misconceptionDetectedThisLesson` and was stored as misconception evidence.
+ *
+ * Narrow on purpose: true only when the grade is correct AND the phrase is the
+ * chosen option (its head, its head plus authored working, or a span of
+ * either). A phrase in the learner's own different words is left alone.
+ */
+export function phraseRestatesCorrectChoice(
+  phrase: string | undefined,
+  mcq: TutorMCQ,
+  grade: { chosenIndex: number | null; correct: boolean | null } | null,
+): boolean {
+  if (!phrase || !grade || grade.correct !== true || grade.chosenIndex === null) return false
+  const head = mcq.options[grade.chosenIndex]
+  if (typeof head !== 'string') return false
+  const norm = (s: string) => s.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ').trim()
+  const p = norm(phrase)
+  if (!p) return false
+  const working = mcq.rationales?.[grade.chosenIndex]
+  const full = norm(working ? `${head} — ${working}` : head)
+  return p === norm(head) || full.includes(p)
+}
+
+/**
  * Does this message read as the learner TAPPING (or typing verbatim) one of
  * the pending question's own options — regardless of what that option's
  * text happens to say?

@@ -212,13 +212,12 @@ Production rendering not yet QA'd (Vercel 403). Full log: `docs/history/physics-
 ## owned by the Mohd account on this same shared `main`)
 **Full handover, pickup instructions, exact registration mechanics, and current frontier:
 `docs/architecture/MATHEMATICS_ASSET_CAMPAIGN_HANDOVER.md` — read it in full before continuing.**
-Headline: Mathematics EB is COMPLETE (908/908, do not re-author) but EB completion never meant
-servable content — at last measurement 334/908 concepts had actual seed assets (343
-concept/gradeBand pairs, all 343 at contract, 0 short, 0 never-quizzable). Three domains taken to
-100% this campaign (`math.cat` 15/15, `math.abst` 37/37); `math.alg` opened and advanced to
-24/59, the active frontier. Re-measure everything with `npx tsx scripts/assets/contract-audit.ts
---subject mathematics` before trusting any number here — this line will go stale the moment
-either campaign pushes again.
+Headline (measured 2026-10-02): Mathematics EB 908/908 (do not re-author); asset contract
+908/908 concepts, 917/917 (concept, band) pairs, 0 short; production ACTIVE rows byte-identical to
+the corpus (961 explanations, 2,752 probes); production certification 12/12 PASS across 12
+domains. The asset-authoring campaign is DONE — no frontier remains. Full record + how to re-verify
+convergence (the bootstrap is create-only, so a content EDIT never reaches production by itself):
+`docs/history/mathematics-and-physics-e2e.md` (2026-10-02 section). Re-measure before trusting.
 
 ## Biology end-user readiness program (2026-09-20, owner-scoped, in progress — un-paused by
 ## explicit fresh instruction naming Biology; math/CS remain paused above)
