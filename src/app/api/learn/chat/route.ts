@@ -818,6 +818,8 @@ async function handleChatTurn(req: Request, deadline: RouteDeadline): Promise<Re
     // all far below this block — read the same single answer the prompt side
     // used, instead of each re-deriving it (or, as before, not knowing at all).
     let excursionActiveHoisted = false
+    // The graded question, restated last in the prompt (see the verdict block).
+    let answeredQuestionReminderHoisted = ''
     // RC-C — THE LESSON-ONE DEADLOCK (2026-09-30). A spiral close reopens only
     // on a correct answer to an AUTHORED question (applySignalToEpisode), yet
     // CLOSING withheld every authored question — so in lesson one (affect
@@ -2626,6 +2628,16 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             mcq: pendingMcqHoisted,
             keyIsAuthored: verdictKeyIsAuthored(pendingMcqHoisted),
           })
+          // ...and named again as the prompt's LAST line (see the main call).
+          // MEASURED LIVE 2026-10-02 (chem.found.concentration): a correct
+          // "No" to the NaOH 1 M item was answered "That's correct — you
+          // recognized that ppm means mg per kg", i.e. about the PREVIOUS
+          // question, with this block present thousands of tokens earlier.
+          if (mcqGradeHoisted && typeof mcqGradeHoisted.correct === 'boolean' && pendingMcqHoisted?.question) {
+            answeredQuestionReminderHoisted =
+              `\n\nTHIS TURN'S ANSWER: the learner's message answered exactly this question — "${pendingMcqHoisted.question.trim().slice(0, 300)}" — ` +
+              `and it was graded ${mcqGradeHoisted.correct ? 'CORRECT' : 'WRONG'}. Your feedback must be about THIS question only; every earlier question is already settled.`
+          }
         } catch { /* a missing verdict block only loses the explanation, never the turn */ }
         // Read once, from the same helper the grading branch above uses, so the
         // readiness guard further down cannot disagree with it.
@@ -6327,7 +6339,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // throw still records the call that was actually spent.
           routed = await routeAI(
             [...historyMessages, { role: 'user', content: message }],
-            systemPrompt,
+            systemPrompt + answeredQuestionReminderHoisted,
             country,
           // Was 1024. gpt-oss-20b is a reasoning model — it spends output
           // tokens on internal reasoning BEFORE the final answer, so a tight
