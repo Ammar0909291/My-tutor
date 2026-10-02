@@ -167,3 +167,132 @@ chemistry `[6]`.
    `cmuoh41hs0005jm04eiscsi00` from SKIPPED to MASTERED. CL-17 destroyed it; the evidence
    events still show the mastery.
 3. **Policy decisions** on the "Recorded, not fixed" list above (RC-E mastery evidence and others).
+
+## Cycle 3 — historical evidence register (2026-10-02)
+
+Sources searched for each recurring-looking problem, in this order:
+1. docs/history/*.md
+2. `git log --grep` and `git log -S`, with the commit bodies and diffs read
+3. src/tests regression files
+4. Vercel and CI records
+
+Where nothing was found, the register says **HISTORICAL STATUS = UNKNOWN**. No earlier fix is
+claimed to have worked or failed without evidence. Note that several `git log -S` lookups resolve
+to b7a9c716 (2026-09-28). That commit carries most of the tree, so it is only a lower bound for
+when a mechanism appeared.
+
+Fix class:
+- **A** — a new mechanism.
+- **B** — a re-implementation or extension of a known fix.
+- **C** — a symptom-level patch whose durability is uncertain.
+
+### R1. Stub reply "Let me check your thinking with this." (CL-1, CL-1b)
+
+- **Previous fix:** f0c149ef (2026-09-30) added `repairStubReply`. It covered the confirm-back
+  and repeat-guard stubs only.
+  - Production-verified then: UNKNOWN.
+- **Regression tests:**
+  - `confirmBackRepair*` tests.
+  - `gateContractStubRepair.test.ts` (this cycle).
+- **This cycle:**
+  - 9e16ff7f extended the repair to the gate-contract cut (class B).
+  - That extension regressed live on "quiz me": an invented "thermite problem I gave earlier" plus
+    a second question.
+  - de205b61 fixed it (class A: never on a practice request, and a repair that asks a question
+    beside a card is discarded). Verified live 2026-10-02 (concentration lesson).
+- **Mechanism remaining:** the gate-contract cut still produces stubs on other turns. They are
+  repaired, but each repair depends on the model obeying the appendix.
+
+### R2. Feedback attributed to the previous question (CL-16)
+
+- **Previous occurrences:** the 2026-09-30 baseline only. Nothing found in docs/history or git.
+  HISTORICAL STATUS = UNKNOWN before that.
+- **Fix:** 5ba7e62a restates the graded question as the prompt's last line.
+  - Class C: prompt-only, so durability is uncertain.
+  - The verdict block already named the right question earlier in the prompt, and the model still
+    drifted. So this is advisory, not enforced.
+- **Live:** V8 (tension) had 3 graded taps, each answered about its own question.
+  - One session is not conclusive.
+  - No post-generation check exists yet.
+
+### R3. A practice request answered with no question (CL-24, CL-26; also CL-15 and RC-C)
+
+- **Previous fixes:**
+  - b7a9c716 or earlier: "next question" / "check me" patterns.
+  - `practiceRequestKeepsHeldQuiz.test.ts` and `firstLessonPracticeRequest.test.ts` (2026-09-28).
+  - Phase 7H/7M (wantsPractice).
+  - Production-verified then: UNKNOWN.
+- **This cycle — three distinct mechanisms:**
+  - **CL-15:** an excursion close. Class A.
+  - **CL-24:** memory serve on a practice turn whose probe the surplus rule declined. Class A,
+    92c3e8a8.
+  - **CL-26:** the phrase "ok another one". Class C, e16a9ef9; verified live 2026-10-02.
+- **Mechanism remaining:** practice intent is a phrase list. It has needed extension at least
+  three times (b7a9c716, Phase 7M-A, e16a9ef9) and will need it again.
+
+### R4. An answered item re-served
+
+- **Previous fixes:**
+  - D1 ledger fix (2026-08-26, `defect-investigations-i-series.md`).
+  - 3149453b (2026-09-13): pendingMcq rederiver.
+- **Current mechanism, from the live ledger** (session cmuq1ls9c…, read-only):
+  - the first-answered direction item sits in `mcqReasked`;
+  - correct GUIDE-phase answers are listed in `mcqMissed`.
+- **Cause:** `recordMcqOutcome(gradedWithoutCredit)` — a correct answer in a phase that banks no
+  credit is re-askable once. This was an owner decision, "option (c)", on 2026-09-27.
+- **Verdict:** not a defect, and not fixed. Any change is an RC-E owner decision.
+
+### R5. A completed lesson treated as unfinished (CL-22)
+
+- **Previous fixes:**
+  - 51a4cae8 (2026-08-22): "did I pass?" is routed TO the model when the learner also signals
+    confusion.
+  - 8b66d2a8 (2026-09-07): the completion card is re-served.
+  - Phase 7M-A: a practice request after completion.
+- **This cycle:**
+  - e4727f09: the opening block is skipped on a completed lesson. Class A.
+  - 669db565 and 9b33ba0b: "is this lesson done?" counts as a status question, not new intent.
+    Class C: phrase pattern.
+- **Check against 51a4cae8:** "wait did i pass? i dont think i understand it" still routes to the
+  model. Its tests still pass, so the two rules do not conflict.
+- **Live:** verified 2026-10-01 22:36.
+
+### R6. Figure colours (CL-8, CL-8b)
+
+- **Previous:** `figureFidelity.ts` (by b7a9c716). It checks only that a colour word names a
+  colour the scene HAS. It could not catch blue/green swapped between parts.
+- **This cycle:** fdb93a5c and d54b49ef give the model the colour-to-part mapping. Class A.
+- **Live:** verified 2026-10-01 (Newton, Newton's Third Law, Tension).
+
+### R7. Simulation spoilers (CL-9)
+
+- **Previous fixes:** 7c88b52e, 47ce04e0 (2026-09-29), b1033a88 (2026-09-30).
+- **This cycle:** 97dc1dd4.
+  - The lesson-init channel and the quiz-tap exemption are new channels, class A.
+  - Hyphen normalisation is class C.
+- **Live:** the opening on the pendulum is not re-verified after this fix (UNKNOWN).
+
+### R8. Answer-head giveaways (CL-13, CL-18) and option-length cues (CL-14)
+
+- **Previous fixes:**
+  - e3456161 (2026-09-30): all-or-nothing heads.
+  - 76916f3b (2026-09-30): physics per-option heads.
+- **This cycle:**
+  - c088361e: head-collision guard, class A.
+  - 6d67157f: chemistry scope, class B (extension).
+- **Mechanism remaining:** items whose working is not after a spaced dash are not split. These
+  are parentheses ("0.1 mol (M = mol/L …)") and full-paragraph options (the puddle item,
+  2026-10-02). Content or policy; recorded only.
+
+### R9. Confirm-back on a graded tap (CL-20)
+
+- **Previous:** b7a9c716 (2026-09-28), "strip 'you selected … is that right?'" — a symptom strip.
+- **This cycle:** 964ae368 stops the OBSERVATION REPAIR block on graded turns. That block is the
+  prompt source of the mirror. Class A.
+- **Live:** not re-observed since; UNKNOWN.
+
+### R10. Raw LaTeX / `\cdotp` / `\ce` (CL-11)
+
+- **Previous:** Physics Verifier batches (ec42ca39 and others) touch LaTeX detection. They do not
+  touch rendering.
+- **This cycle:** recorded, not fixed. HISTORICAL STATUS of a rendering fix: UNKNOWN.
