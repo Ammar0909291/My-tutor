@@ -196,7 +196,7 @@ export function probeToMcq(probe: ConvertibleProbe): TutorMCQ | null {
   // TutorMCQ.rationales. The order is still keyed on the question alone, so it
   // is identical to what the full-text options would have been given.
   const split = splitAnswerHeads(options)
-    ?? (typeof probe.conceptId === 'string' && probe.conceptId.startsWith('phys.') ? splitAnswerHeadsPerOption(options) : null)
+    ?? (typeof probe.conceptId === 'string' && PER_OPTION_SPLIT_PREFIXES.some((p) => probe.conceptId!.startsWith(p)) ? splitAnswerHeadsPerOption(options) : null)
   const shownOptions = order.map((i) => (split ? split.heads[i] : options[i]))
   const shownCorrect = order.indexOf(correctIndexes[0])
 
@@ -231,6 +231,39 @@ export function probeToMcq(probe: ConvertibleProbe): TutorMCQ | null {
  * B"). Otherwise returns null and the full text is served exactly as before.
  * A hyphen never splits — "x - 2" is an answer, not an annotation.
  */
+/**
+ * Words that qualify an answer without changing it. A head that differs from
+ * another only by these says the same thing, so the difference that decided
+ * the item must have been in the working the cut removed.
+ */
+const HEDGE_WORDS = new Set([
+  'here', 'there', 'now', 'then', 'still', 'just', 'really', 'indeed', 'though',
+  'anyway', 'again', 'too', 'also', 'so', 'this', 'case', 'time',
+])
+
+const headWords = (h: string) =>
+  new Set(h.toLowerCase().replace(/[^\p{L}\p{N}\s']/gu, ' ').split(/\s+/).filter(Boolean))
+
+/**
+ * Do the heads still tell the options apart? MEASURED 2026-09-30 (learner
+ * baseline, chem.elect.galvanic-cell): "Yes here — but the reason is the
+ * COMPARISON …" and "Yes — copper is more reactive …" were served as "Yes"
+ * and "Yes here", an unanswerable pair; everything that discriminated them was
+ * after the dash. When one head is another plus only hedge words, the split is
+ * refused and the full text is served as before.
+ */
+function headsDiscriminate(heads: string[]): boolean {
+  const sets = heads.map(headWords)
+  for (let i = 0; i < sets.length; i++) {
+    for (let j = 0; j < sets.length; j++) {
+      if (i === j || ![...sets[i]].every((w) => sets[j].has(w))) continue
+      const extra = [...sets[j]].filter((w) => !sets[i].has(w))
+      if (extra.length > 0 && extra.every((w) => HEDGE_WORDS.has(w))) return false
+    }
+  }
+  return true
+}
+
 export function splitAnswerHeads(options: string[]): { heads: string[]; rationales: string[] } | null {
   const heads: string[] = []
   const rationales: string[] = []
@@ -244,6 +277,7 @@ export function splitAnswerHeads(options: string[]): { heads: string[]; rational
   }
   if (new Set(heads.map((h) => norm(h).toLowerCase())).size !== heads.length) return null
   if (heads.some((h) => norm(h).length === 0)) return null
+  if (!headsDiscriminate(heads)) return null
   return { heads, rationales }
 }
 
@@ -260,6 +294,16 @@ export function splitAnswerHeads(options: string[]): { heads: string[]; rational
  * Scoped to physics (the only subject in scope for this change); every other
  * subject keeps the all-or-nothing rule.
  */
+/**
+ * Subjects served with per-option answer heads. Chemistry added 2026-10-01:
+ * the learner baseline served "6.02 × 10²³ — one Avogadro number regardless of
+ * the amount" and "1.20 × 10²⁴ — dividing by 0.500 instead of multiplying"
+ * beside a bare correct "3.01 × 10²³" (chem.found.mole-concept, live) — the
+ * distractors carried their own error. 200 of 931 chemistry items change; the
+ * correct option is the uniquely longest on 368 instead of 418.
+ */
+const PER_OPTION_SPLIT_PREFIXES = ['phys.', 'chem.'] as const
+
 export function splitAnswerHeadsPerOption(options: string[]): { heads: string[]; rationales: string[] } | null {
   const heads: string[] = []
   const rationales: string[] = []
@@ -276,6 +320,7 @@ export function splitAnswerHeadsPerOption(options: string[]): { heads: string[];
   if (!splitAny) return null
   if (new Set(heads.map((h) => norm(h).toLowerCase())).size !== heads.length) return null
   if (heads.some((h) => norm(h).length === 0)) return null
+  if (!headsDiscriminate(heads)) return null
   return { heads, rationales }
 }
 
@@ -1389,6 +1434,28 @@ export function withholdClosingProseQuestion(input: {
  */
 const POINTS_AT_MISSING_OPTIONS =
   /\b(which of the following|of the (?:options|choices) (?:below|above|shown)|(?:pick|choose|select|tap) (?:the )?(?:best|correct|right) (?:answer|option|choice)|which (?:option|choice|answer) you (?:choose|pick|select)|from the (?:options|choices|list) (?:below|above)|the options below)\b/i
+
+/**
+ * "Let me know when you'd like another practice problem" — said beside a quiz
+ * card that is already on screen. MEASURED LIVE 2026-10-02 (chem.found.
+ * concentration, twice; stoichiometry once): the learner is told to ask for a
+ * problem while one is waiting under the message. Only a closing OFFER of
+ * future practice is dropped, and only when a card is attached; teaching is
+ * never touched, and nothing is dropped if it would leave the reply empty.
+ */
+const DEFERS_PRACTICE =
+  /^(?:(?:and|so|now)\s+)?(?:(?:just|please|feel free to)\s+)?(?:let me know|tell me|whenever you(?:'|’)re ready|when you(?:'|’)re ready|if you(?:'|’)d like|if you want)\b[^.!?]{0,90}\b(?:another|more|next|a)\s+(?:[a-z-]+\s+){0,2}(?:problem|question|quiz|check|one)\b[^.!?]{0,40}[.!]?$/i
+
+export function dropDeferredPracticeOffer(text: string, cardAttached: boolean): string {
+  const t = typeof text === 'string' ? text : ''
+  if (!cardAttached || !t.trim()) return t
+  const paragraphs = t.split(/\n{2,}/)
+  const out = paragraphs.map((para) => {
+    const sentences = para.split(/(?<=[.!?])\s+/)
+    return sentences.filter((s) => !DEFERS_PRACTICE.test(s.trim())).join(' ')
+  }).filter((p) => p.trim().length > 0).join('\n\n').trim()
+  return out.length > 0 ? out : t
+}
 
 export function dropSentencesPointingAtMissingOptions(text: string): string {
   const t = typeof text === 'string' ? text : ''

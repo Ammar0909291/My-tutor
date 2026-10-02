@@ -21,9 +21,12 @@ import path from 'path'
  *   -> confirmLessonSwitch -> callLessonInit(mode:'restart')) — no second,
  *   parallel restart mechanism. Always rendered (not gated on
  *   nextLessonOrder).
- * - Close: touches lessonCompletion state ONLY. It must call NEITHER
- *   completeAndAdvance NOR requestLessonSwitch NOR any progress-mutating
- *   function — closing must never record, advance, or alter completion.
+ * - Close: dismisses the card and keeps the learner on the lesson. It must
+ *   call NEITHER completeAndAdvance NOR requestLessonSwitch NOR any
+ *   lesson-moving function. It records a FULL mastery in place
+ *   (recordMasteredInPlace, advance:false) and nothing for a partial one —
+ *   the 2026-09-30 learner baseline closed 8 of 9 mastered lessons and the
+ *   old "touch nothing" Close left completedLessons empty for all of them.
  */
 
 const SRC = readFileSync(
@@ -114,7 +117,7 @@ describe('Restart Current Lesson — reuses the canonical restart gate', () => {
   })
 })
 
-describe('Close — dismisses the card and touches nothing else', () => {
+describe('Close — dismisses the card and never moves the learner', () => {
   const start = CARD.indexOf("{t('lc_close')}")
   const onClickStart = CARD.lastIndexOf('onClick={() =>', start)
   const body = CARD.slice(onClickStart, start)
@@ -123,13 +126,13 @@ describe('Close — dismisses the card and touches nothing else', () => {
     expect(start).toBeGreaterThan(-1)
   })
 
-  it('calls setLessonCompletion(null) and nothing else state-mutating', () => {
+  it('dismisses the card', () => {
     expect(body).toContain('setLessonCompletion(null)')
   })
 
-  it('never advances, restarts, or records progress', () => {
-    // Anti-vacuity: assert the ABSENCE of every progress-mutating call this
-    // handler could accidentally pick up, not just "contains setLessonCompletion".
+  it('never advances, restarts, or ends the lesson selection', () => {
+    // Anti-vacuity: assert the ABSENCE of every lesson-moving call this
+    // handler could accidentally pick up.
     expect(body).not.toContain('completeAndAdvance(')
     expect(body).not.toContain('requestLessonSwitch(')
     expect(body).not.toContain('callLessonInit(')
@@ -137,13 +140,15 @@ describe('Close — dismisses the card and touches nothing else', () => {
     expect(body).not.toContain('markLessonSkipped(')
   })
 
-  it("the handler's own onClick body is a single short arrow, not a multi-statement block", () => {
-    // A `onClick={() => setLessonCompletion(null)}` single-expression arrow
-    // structurally cannot smuggle in a second statement the way a `{ ... }`
-    // block could — this is close reading of the exact source shape, not a
-    // string-contains guess.
-    const fullOnClick = CARD.slice(onClickStart, CARD.indexOf('}', CARD.indexOf('setLessonCompletion(null)', onClickStart)) + 1)
-    expect(fullOnClick).toMatch(/onClick=\{\(\)\s*=>\s*setLessonCompletion\(null\)\}/)
+  it('records only a full mastery, and only in place', () => {
+    expect(body).toMatch(/if \(finished\.fullyMastered && currentLessonData\)/)
+    expect(body).toContain('recordMasteredInPlace(currentLessonData)')
+    const fnStart = SRC.indexOf('const recordMasteredInPlace = useCallback')
+    expect(fnStart).toBeGreaterThan(-1)
+    const fn = SRC.slice(fnStart, SRC.indexOf('}, [', fnStart))
+    expect(fn).toContain('advance: false')
+    expect(fn).toContain('mastered: true')
+    expect(fn).not.toContain('handleLessonComplete(')
   })
 })
 

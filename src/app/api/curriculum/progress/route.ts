@@ -22,6 +22,16 @@ const schema = z.object({
   // clears that stale pointer so the next chat turn re-resolves fresh.
   mastered: z.boolean().optional().default(true),
   topicSlug: z.string().optional(),
+  // Record a mastered lesson WITHOUT moving the learner off it. The lesson
+  // completion card's Close button keeps the learner on the finished lesson,
+  // so it must not advance currentLesson or clear the lesson selection (that
+  // would point the roadmap at one lesson while the chat stays on another).
+  // Before this existed Close recorded nothing: 8 of 9 lessons mastered in the
+  // 2026-09-30 learner baseline were closed, and completedLessons stayed
+  // empty — roadmap "0% Complete" after nine verified masteries. A later
+  // "Next lesson" still advances through the default path; the atomic append
+  // below makes that second call a no-op for XP.
+  advance: z.boolean().optional().default(true),
 })
 
 /**
@@ -115,7 +125,9 @@ export async function PATCH(req: Request) {
 
   try {
     const body = await req.json()
-    const { subjectCode, completedLesson, totalLessons: clientTotalLessons, lessonTitle, lessonGoal, mastered, topicSlug } = schema.parse(body)
+    const { subjectCode, completedLesson, totalLessons: clientTotalLessons, lessonTitle, lessonGoal, mastered, topicSlug, advance: advanceRequested } = schema.parse(body)
+    // Only a genuine mastery may be recorded in place; a skip always moves on.
+    const advance = advanceRequested || !mastered
 
     const totalLessons = clientTotalLessons ?? undefined
 
@@ -166,7 +178,7 @@ export async function PATCH(req: Request) {
       create: {
         userId: session.user.id,
         subjectCode,
-        currentLesson: completedLesson + 1,
+        currentLesson: advance ? completedLesson + 1 : completedLesson,
         completedLessons,
         // Persisted Active Lesson: finishing a lesson ENDS the explicit
         // selection that opened it. Clearing rather than advancing keeps one
@@ -180,8 +192,11 @@ export async function PATCH(req: Request) {
         completedAt,
       },
       update: {
-        currentLesson: Math.max((existing?.currentLesson ?? 1), completedLesson + 1),
-        activeLessonSlug: null,   // see the create branch — completion ends the selection
+        // An in-place record leaves the selection exactly as it was.
+        ...(advance ? {
+          currentLesson: Math.max((existing?.currentLesson ?? 1), completedLesson + 1),
+          activeLessonSlug: null,   // see the create branch — completion ends the selection
+        } : {}),
         // completedLessons for existing rows is managed by the atomic raw UPDATE above
         lastStudiedAt: new Date(),
         updatedAt: new Date(),
@@ -212,8 +227,10 @@ export async function PATCH(req: Request) {
     //
     // Fail-soft: a pointer that does not clear degrades to a stale session
     // selection, which the next lesson open overwrites. Never fails the PATCH.
+    // An in-place record (advance=false) keeps the lesson selected, so it
+    // leaves the session pointer alone too.
     try {
-      const subjectRow = await prisma.subject.findUnique({ where: { slug: subjectCode } })
+      const subjectRow = advance ? await prisma.subject.findUnique({ where: { slug: subjectCode } }) : null
       if (subjectRow) {
         const recentSession = await prisma.learnSession.findFirst({
           where: { userId: session.user.id, subjectId: subjectRow.id },

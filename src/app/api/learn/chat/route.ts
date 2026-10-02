@@ -818,6 +818,18 @@ async function handleChatTurn(req: Request, deadline: RouteDeadline): Promise<Re
     // all far below this block — read the same single answer the prompt side
     // used, instead of each re-deriving it (or, as before, not knowing at all).
     let excursionActiveHoisted = false
+    // The graded question, restated last in the prompt (see the verdict block).
+    let answeredQuestionReminderHoisted = ''
+    // RC-C — THE LESSON-ONE DEADLOCK (2026-09-30). A spiral close reopens only
+    // on a correct answer to an AUTHORED question (applySignalToEpisode), yet
+    // CLOSING withheld every authored question — so in lesson one (affect
+    // budget 1) a single graded miss left "quiz me" refused nine times and the
+    // lesson unfinishable. True when the episode is a SPIRAL close and the
+    // learner explicitly asks to be quizzed: CLOSE does not claim the turn, the
+    // gate may serve one authored probe, and a correct answer takes the
+    // existing reopen. An explicit close ("I'm done") stays absolute, and the
+    // model's own questions stay withheld.
+    let spiralCloseQuizRequestHoisted = false
     /** Title of the excursion's target concept, or null on an ordinary turn. */
     let excursionTeachingTitleHoisted: string | null = null
     let conceptPreviouslyMasteredHoisted = false
@@ -2153,6 +2165,22 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     let probeStarvationRelievedHoisted = false
     // Set when a relieved probe stepped aside for a clarifying question.
     let relievedProbeYieldedHoisted = false
+    // Set when the one-question contract (gate-contract, stray-question-alongside-mcq)
+    // cut the reply down to a stub; the stub repair below regenerates once.
+    let gateContractStubHoisted: string | null = null
+    // TURN ASSEMBLY, Phase 1 — SHADOW (owner G2 2026-10-02). The slot call
+    // started after grading; awaited and logged just before the reply.
+    // The ladder fold's inputs, kept on shadowed turns so the assembled text's
+    // effect on lesson completion can be measured (spec §2, §11).
+    let ladderFoldForShadowHoisted: {
+      before: import('@/lib/teaching/conversationState').ConversationState
+      evidence: import('@/lib/teaching/conversationState').TurnEvidence
+      after: import('@/lib/teaching/conversationState').ConversationState
+    } | null = null
+    let turnAssemblyShadowHoisted: Promise<{
+      facts: import('@/lib/teaching/turnAssembly').GradedTurnFacts
+      raw: string; provider: string | null; ms: number; error: string | null; attempts: number
+    }> | null = null
     let arbitrationWasSoleBlockerHoisted = false
     let turnProgressHoisted: {
       outcome: import('@/lib/teaching/turnProgress').TurnOutcome
@@ -2613,6 +2641,16 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             mcq: pendingMcqHoisted,
             keyIsAuthored: verdictKeyIsAuthored(pendingMcqHoisted),
           })
+          // ...and named again as the prompt's LAST line (see the main call).
+          // MEASURED LIVE 2026-10-02 (chem.found.concentration): a correct
+          // "No" to the NaOH 1 M item was answered "That's correct — you
+          // recognized that ppm means mg per kg", i.e. about the PREVIOUS
+          // question, with this block present thousands of tokens earlier.
+          if (mcqGradeHoisted && typeof mcqGradeHoisted.correct === 'boolean' && pendingMcqHoisted?.question) {
+            answeredQuestionReminderHoisted =
+              `\n\nTHIS TURN'S ANSWER: the learner's message answered exactly this question — "${pendingMcqHoisted.question.trim().slice(0, 300)}" — ` +
+              `and it was graded ${mcqGradeHoisted.correct ? 'CORRECT' : 'WRONG'}. Your feedback must be about THIS question only; every earlier question is already settled.`
+          }
         } catch { /* a missing verdict block only loses the explanation, never the turn */ }
         // Read once, from the same helper the grading branch above uses, so the
         // readiness guard further down cannot disagree with it.
@@ -2963,7 +3001,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // stays recorded COMPLETED regardless; nothing here reopens it.
         if (lessonCompletedHoisted) {
           const { isGenuineQuestion } = await import('@/lib/understanding/readers/conversationReader')
-          const { isQuestionAnnouncement } = await import('@/lib/teaching/lessonCompletion')
+          const { isQuestionAnnouncement, asksWhetherLessonIsDone } = await import('@/lib/teaching/lessonCompletion')
           //   - PHASE 7M-A: the learner asks to PRACTISE or be QUIZZED on the
           //     lesson that just ended ("give me a practice problem", "quiz
           //     me"). Every signal above is about going ELSEWHERE (an
@@ -2988,10 +3026,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           //     block's own header says, the lesson stays recorded COMPLETED
           //     and nothing here reopens it — D0a simply yields for this turn,
           //     exactly as it already does for a question or for distress.
+          //   - A question about the lesson's OWN status ("is this lesson
+          //     done?") is not new intent: the deterministic close answers it
+          //     (live 2026-10-01 — the model said "not quite yet" on a
+          //     COMPLETED lesson; see asksWhetherLessonIsDone).
           lessonCompletionRespectsNewIntentHoisted = excursionDecision.state.active
             || requestedConceptIdThisTurn != null
             || requestedTopicTitleThisTurn != null
-            || turnIntent.isQuestion   // Phase 1: the one authoritative read
+            || (turnIntent.isQuestion && !asksWhetherLessonIsDone(message))
             || turnIntent.wantsPractice // Phase 7M-A
             || recoveryKeyHoisted !== null
             || isQuestionAnnouncement(message)
@@ -3088,6 +3130,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               isBareAcknowledgement: isBareAckHoisted,
               isLowSignalAcknowledgement: isLowSignalAcknowledgement(message),
             })
+            // RC-C: see the declaration.
+            spiralCloseQuizRequestHoisted = sessionEpisodeHoisted.phase === 'CLOSING'
+              && sessionEpisodeHoisted.closedBy === 'spiral'
+              && turnIntent.wantsPractice
             turnArbitrationHoisted = arbitrateTurn({
               knowledgeGapResolved: knowledgeGapHoisted !== null,
               recoveryActive: learnerMoveStageAHoisted.has('DISTRESS'),
@@ -3110,7 +3156,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // carries `turnIntent`'s own value forward.
               learnerRequestActive:
                 learnerMoveStageAHoisted.has('HELP_REQUEST') || learnerMoveStageAHoisted.ambiguous,
-              closing: sessionEpisodeHoisted.phase === 'CLOSING',
+              closing: sessionEpisodeHoisted.phase === 'CLOSING' && !spiralCloseQuizRequestHoisted,
               completionReady: lessonCompletedHoisted,
               // A REQUEST TO BE ASKED IS NOT A QUESTION TO ANSWER FIRST.
               // Synthetic-student after-run, 2026-09-24 (production 1f438cd,
@@ -3157,7 +3203,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             }
             // OPENING (07 §1 + §8 rules 2–3): engineered win first when
             // owed → one-breath continuity → due reviews BEFORE new content.
-            systemPrompt += buildOpeningBlock({
+            //
+            // NOT for a lesson that is already complete (2026-10-01, live,
+            // mole concept): after a mastered lesson was closed, a reload
+            // opened a fresh session, this block asked for "welcome, recap,
+            // objective" — and "is this lesson done?" was answered "No, the
+            // lesson isn't finished yet" while COMPLETE owned the turn.
+            if (!lessonCompletedHoisted) systemPrompt += buildOpeningBlock({
               dueReviewCount,
               retroWinOwed: sessionEpisodeHoisted.retroWinOwed,
               isFreshBoundary: true,
@@ -3184,7 +3236,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // ALSO a recovery turn emitted both blocks and let the model pick.
             // Deferred, never cancelled: the episode stays CLOSING (Phase 1),
             // so the close fires on the first turn that is not a rescue.
-            arbitrationAllowsClose: (turnArbitrationHoisted ?? arbitrationUnavailable()).allows('SESSION_CLOSE'),
+            arbitrationAllowsClose: (turnArbitrationHoisted ?? arbitrationUnavailable()).allows('SESSION_CLOSE')
+              && !spiralCloseQuizRequestHoisted,
           })) {
             // Affect budget spent earlier this session (07 §6): the close
             // instruction holds until a boundary resets the episode.
@@ -4114,7 +4167,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // the tutor (2026-09-27, live QA): there is no answer to restate, and
         // the block's "restate … and ask them to confirm" produced the mirror
         // ("So you're wondering whether … have I got that right?").
+        // Nor on a turn the server GRADED (2026-10-01, live, mole concept): a
+        // graded tap IS this turn's observation, and the block turned a
+        // correct answer into "I understand that you're saying … Is that
+        // right?" with no verdict.
         if (!recoveryKeyHoisted
+          && !(mcqGradeHoisted && typeof mcqGradeHoisted.correct === 'boolean')
           && !((await import('@/lib/teaching/conversationState')).detectLearnerQuestion(message)
             || (await import('@/lib/teaching/mcq')).readsAsRequestToTutor(message))
           && needsSignalRepair(
@@ -5064,11 +5122,16 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // A learner's own "quiz me" is honoured in lesson one too — see the
           // first-lesson practice path at the memory-serving decision.
           notFirstLesson: !firstLessonActiveHoisted || turnIntent.wantsPractice,
-          notExcursion: !excursionActiveHoisted,
+          // The one closing turn that is NOT a detour for the gate: the
+          // learner asked to be assessed, and that request is what closed it
+          // (closed-wants-practice). Reading the closing turn's attribution
+          // here left "quiz me" with no quiz (2026-09-30 learner baseline, P4).
+          // Lesson credit is unchanged: the probe is answered next turn.
+          notExcursion: !excursionActiveHoisted || excursionDecisionHoisted?.transition === 'closed-wants-practice',
           // The session is ending: no question is attached, and no authored
           // probe is spent. See closingTurnWithholdsQuestion.
           arbitrationAllowsProbe: arbitrationRawAllowsProbe,
-          notClosingTurn: !closingTurnWithholdsQuestion(sessionEpisodeHoisted?.phase),
+          notClosingTurn: !closingTurnWithholdsQuestion(sessionEpisodeHoisted?.phase) || spiralCloseQuizRequestHoisted,
         }
         // "Sole blocker" is read FROM the terms object the gate itself decides
         // on — never a second copy of the same conditions, which is precisely
@@ -5534,7 +5597,17 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       if (learnerNeedsReply && assembled !== null && memoryFallbackReason === null) {
         memoryFallbackReason = 'Learner message needs a reply'
       }
-      let serveFromMemory = assembled !== null && !answersPendingQuestion && !readinessAtGate && !answersProse && !ackToQuestion && !learnerNeedsReply
+      // A PRACTICE REQUEST IS NOT A REQUEST FOR AN ESSAY (live, 2026-10-02,
+      // stoichiometry): "give me another problem" at DEMONSTRATE had its
+      // authored probe declined by the surplus rule (pool 3), and D1 then
+      // served a stored Brain explanation with no question at all. With no
+      // authored quiz attached, the model answers — its own question at a
+      // non-gate phase cannot touch mastery (inventedProbeGuard).
+      const practiceWithoutQuiz = turnIntent.wantsPractice && gateMcqHoisted === null
+      if (practiceWithoutQuiz && assembled !== null && memoryFallbackReason === null) {
+        memoryFallbackReason = 'Practice requested and no authored question attached'
+      }
+      let serveFromMemory = assembled !== null && !answersPendingQuestion && !readinessAtGate && !answersProse && !ackToQuestion && !learnerNeedsReply && !practiceWithoutQuiz
       let serveLessonComplete = false
       let dispatchPlanHoisted: import('@/lib/understanding/dispatcher').DispatchPlan | null = null
       try {
@@ -5547,7 +5620,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             ` mode=${brainRuntimeActive ? 'ACTIVE' : 'shadow'}`
           )
           if (brainRuntimeActive) {
-            serveFromMemory = dispatchPlanHoisted.executor === 'EXPLANATION_MEMORY' && assembled !== null && !answersPendingQuestion && !readinessAtGate && !answersProse && !ackToQuestion && !learnerNeedsReply
+            serveFromMemory = dispatchPlanHoisted.executor === 'EXPLANATION_MEMORY' && assembled !== null && !answersPendingQuestion && !readinessAtGate && !answersProse && !ackToQuestion && !learnerNeedsReply && !practiceWithoutQuiz
             // P13: the plan — not this route — decides that no provider is
             // needed. Acting on plan.executor is the SAME pattern as
             // serveFromMemory above, not a bypass of the engine.
@@ -5598,7 +5671,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         recordDispatch(dispatchPlanHoisted, brainRuntimeActive)
       } catch (err) {
         console.warn('[learn/chat] dispatcher skipped (legacy serving choice retained):', err)
-        serveFromMemory = assembled !== null && !answersPendingQuestion && !readinessAtGate && !answersProse && !ackToQuestion && !learnerNeedsReply
+        serveFromMemory = assembled !== null && !answersPendingQuestion && !readinessAtGate && !answersProse && !ackToQuestion && !learnerNeedsReply && !practiceWithoutQuiz
       }
 
       // Conversation Decision — standalone block for turns where the Brain
@@ -5935,6 +6008,69 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // dependency audit. Incremented at every routeAI() call site in this
       // route; a memory- or degraded-served turn correctly ends at 0.
       let llmCallCount = 0
+      // TURN ASSEMBLY, Phase 1 — SHADOW (docs/architecture/TURN_ASSEMBLY_PHASE1_SPEC.md).
+      // Placed after the gate has selected its card and before every serving
+      // branch, so memory-served graded turns are shadowed too.
+      // On a turn graded against an authored key, ask for the two slots in
+      // PARALLEL with the rest of the turn. Nothing it returns reaches the
+      // learner; it is logged as [assembled-turn] beside the reply actually served.
+      if (mcqGradeHoisted && typeof mcqGradeHoisted.correct === 'boolean'
+        && typeof mcqGradeHoisted.chosenIndex === 'number' && pendingMcqHoisted) {
+        try {
+          const ta = await import('@/lib/teaching/turnAssembly')
+          const { probeKeyIsAuthored } = await import('@/lib/teaching/mcq')
+          if (ta.turnAssemblyMode() === 'shadow' && probeKeyIsAuthored(pendingMcqHoisted) && ta.shadowSampled()) {
+            const facts: import('@/lib/teaching/turnAssembly').GradedTurnFacts = {
+              question: pendingMcqHoisted.question,
+              options: pendingMcqHoisted.options,
+              chosenIndex: mcqGradeHoisted.chosenIndex,
+              correctIndex: pendingMcqHoisted.correctIndex,
+              correct: mcqGradeHoisted.correct,
+              rationales: pendingMcqHoisted.rationales,
+              earlierOptions: ta.previousCardOptions(historyMessages.filter((m) => m.role === 'assistant').map((m) => m.content)),
+            }
+            const startedAt = Date.now()
+            // NO CONVERSATION HISTORY. Measured in shadow (2026-10-02, physics
+            // sample): with the recent turns sent as chat, the model continued
+            // their pattern and wrote a new quiz instead of the JSON (2 of 15
+            // unparseable, 6 of 15 needing a retry). Every fact the slots need
+            // is already in the system prompt, so the call gets one instruction.
+            const slotRequest = [{ role: 'user' as const, content: 'Write the JSON object for this answer now.' }]
+            turnAssemblyShadowHoisted = (async () => {
+              // Spec §4: one regeneration, naming what failed. Both attempts go
+              // through this one call site. The second attempt's increment can
+              // land after the row is written, so `attempts` is logged as well.
+              let raw = ''
+              let provider: string | null = null
+              let codes: string[] = []
+              let attempts = 0
+              try {
+                for (let attempt = 0; attempt < 2; attempt++) {
+                  attempts++
+                  llmCallCount++ // a real provider call, counted like every other (shadow only)
+                  const routed = await routeAI(
+                    slotRequest,
+                    ta.buildSlotSystemPrompt(facts) + (attempt === 0 ? '' : ta.retryInstruction(codes)),
+                    country, 700, teachingLang,
+                    { userId, subject: learnSession.subject.slug },
+                    groqModelOverride, undefined, forceProvider,
+                  )
+                  raw = routed.text ?? ''
+                  provider = routed.provider ?? null
+                  const parsed = ta.parseSlots(raw)
+                  codes = parsed ? ta.validateSlots(parsed, facts) : ['V1-unparseable']
+                  if (codes.length === 0) break
+                }
+                return { facts, raw, provider, ms: Date.now() - startedAt, error: null, attempts }
+              } catch (err) {
+                return { facts, raw, provider, ms: Date.now() - startedAt, error: err instanceof Error ? err.message : String(err), attempts }
+              }
+            })()
+          }
+        } catch (err) {
+          console.warn('[assembled-turn] shadow start skipped:', err)
+        }
+      }
       // Typed Turn Contract, Batch 1 — SHADOW ONLY, read by nothing this
       // batch. `turnContractShadow` is compiled just before the primary
       // `routeAI` call below (design doc §6 Batch 1); `turnDeliveryShadow`
@@ -6133,6 +6269,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           : memoryFallbackReason === 'Explanation Memory lookup error' ? 'lookup_error'
           : memoryFallbackReason === 'Brain decision' ? 'brain_decision'
           : memoryFallbackReason === 'Learner message needs a reply' ? 'learner_needs_reply'
+          : memoryFallbackReason === 'Practice requested and no authored question attached' ? 'practice_without_quiz'
           : 'no_asset'
         // K6 — Degraded deterministic mode (RS P-3). When EVERY provider in
         // the failover chain has thrown, the turn is served by a K5 template
@@ -6278,7 +6415,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // throw still records the call that was actually spent.
           routed = await routeAI(
             [...historyMessages, { role: 'user', content: message }],
-            systemPrompt,
+            systemPrompt + answeredQuestionReminderHoisted,
             country,
           // Was 1024. gpt-oss-20b is a reasoning model — it spends output
           // tokens on internal reasoning BEFORE the final answer, so a tight
@@ -6528,7 +6665,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // from the text either way, so nothing leaks.
       {
         const { closingTurnWithholdsQuestion } = await import('@/lib/teaching/gateAssessment')
-        if (closingTurnWithholdsQuestion(sessionEpisodeHoisted?.phase)) mcqHoisted = null
+        // RC-C: the one authored probe a spiral-closed learner asked for
+        // survives; the model's own question never does.
+        if (closingTurnWithholdsQuestion(sessionEpisodeHoisted?.phase)
+          && !(spiralCloseQuizRequestHoisted && mcqHoisted !== null && mcqHoisted === gateMcqHoisted)) mcqHoisted = null
         // PHASE 3 — MEASURED IN PRODUCTION, and the Step 0 matrix missed it.
         //
         // Live run, disposable account: the learner typed "I'm lost. I don't
@@ -8491,7 +8631,18 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
 
             const affirmCtx = { learnerText: message, knownMisconceptionText } as unknown as
               import('@/lib/kernel/verifier').VerifierContext
-            const firstViolation = vAffirm(cleanText, affirmCtx)
+            // REAL-LEARNER BASELINE 2026-10-01 (C2, chem.equil.le-chatelier, log
+            // 18:47:03): the learner TAPPED the correct authored option ("Four on
+            // the left and two on the right, so it shifts to the right"), the
+            // server graded it correct against the authored key, and this rule
+            // still rejected the model's "That's correct" — the option text reads
+            // as a proposal and shares words with the authored misconceptions.
+            // The learner got "Let's check that one carefully rather than me just
+            // agreeing", and the next reply told them the right answer was wrong.
+            // The rule guesses whether a learner is wrong; when the authored key
+            // has already said they are right, there is nothing to guess.
+            const gradedCorrectByAuthoredKey = gradeForVerdict?.correct === true
+            const firstViolation = gradedCorrectByAuthoredKey ? null : vAffirm(cleanText, affirmCtx)
             // The gate PASSES offline for this exact learner/concept pair, so a
             // production REJECT means the rule saw no misconception knowledge
             // and fell back to its conservative branch. Log the one value that
@@ -8507,8 +8658,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // silence is ambiguous is not a safety rule you can trust.
             console.log('[affirm-guard-scope]', {
               branch: 'unconditional',
-              considered: true,
+              considered: !gradedCorrectByAuthoredKey,
               violated: firstViolation !== null,
+              ...(gradedCorrectByAuthoredKey ? { skipped: 'graded-correct-by-authored-key' } : {}),
             })
             if (firstViolation) {
               // One regeneration, carrying the violation as instruction — the
@@ -9433,6 +9585,23 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 before: cleanText.slice(0, 600),
               }))
               cleanText = ungraded.text
+              // REAL-LEARNER BASELINE 2026-10-01 (P2, P4, P5, C1, C4): the model's
+              // whole reply to an answer was a question about the learner's
+              // reasoning ("How did you work out the 2.5 m/s value?"), this cut
+              // removed it, and the learner got only "Let me check your thinking
+              // with this." or a bare "Not quite — the answer is: X". The stub
+              // repair (repairStubReply, below) regenerates once for this stage.
+              // LIVE 2026-10-02 (chem.found.measurement): a no-gradeable-probe
+              // cut left a bare "That's right." — the repair was wired for the
+              // stray-question reason only. Every withhold is repaired the same way.
+              if (ungraded.withheld) {
+                const { needsRepair } = await import('@/lib/teaching/confirmBackRepair')
+                // Not on a practice request: "Let me check your thinking with
+                // this." + the quiz IS the answer to "quiz me". Repairing it
+                // produced an invented "thermite problem I gave earlier" plus a
+                // second question beside the card (live, 2026-10-02).
+                gateContractStubHoisted = needsRepair(ungraded.text) && !turnIntent.wantsPractice ? ungraded.text : null
+              }
             }
           } catch (err) {
             // A repair must never break a turn.
@@ -9598,6 +9767,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               : advanceConversationState(freshLadderBase, turnEvidenceForLadder)
             return { conversationState: rederivedLadder }
           })
+          if (turnAssemblyShadowHoisted && !excursionFrozeLadderThisTurn && conversationStateAfterTurnHoisted) {
+            ladderFoldForShadowHoisted = {
+              before: resolvedConversationState, evidence: turnEvidenceForLadder, after: conversationStateAfterTurnHoisted,
+            }
+          }
 
           // Loop 2: advance narrative state with this turn's evidence
           if (narrativeStateHoisted) {
@@ -10157,7 +10331,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // (simulationPrompt.ts — measured ignored in production, 2026-09-29).
       try {
         const { stripSimulationGiveaways } = await import('@/lib/teaching/visual/simulationPrompt')
-        const spoil = stripSimulationGiveaways(cleanText, resolvedVisualDecision, learnerAuthoredMessage)
+        const spoil = stripSimulationGiveaways(cleanText, resolvedVisualDecision, learnerAuthoredMessage, {
+          answeredQuiz: mcqGradeHoisted && pendingMcqHoisted ? { question: pendingMcqHoisted.question } : null,
+        })
         if (spoil.removed.length) {
           console.warn('[simulation-giveaway] ' + JSON.stringify({
             event: 'prediction-answer-stripped',
@@ -10311,13 +10487,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // concept-fallback line. Returns null when no repair was made; the
       // callers' existing fallbacks then apply unchanged. See confirmBackRepair.ts.
       const repairStubReply = async (stub: string, source: string): Promise<string | null> => {
-        const { needsRepair, buildConfirmBackRepairAppendix, mergeRepair } = await import('@/lib/teaching/confirmBackRepair')
+        const { needsRepair, buildConfirmBackRepairAppendix, mergeRepair, dropQuestionSentences } = await import('@/lib/teaching/confirmBackRepair')
         if (!needsRepair(stub) || serveLessonComplete) return null
         try {
           const { stripConfirmBack } = await import('@/lib/teaching/attributionGuard')
           const opts = pendingMcqHoisted?.options
           const chosenIdx = mcqGradeHoisted?.chosenIndex
           const appendix = buildConfirmBackRepairAppendix({
+            questionFollows: mcqHoisted !== null,
+            cause: source === 'gate-contract' ? 'question-cut' : 'confirm-back',
             graded: gradeForVerdict,
             chosenOption: Array.isArray(opts) && typeof chosenIdx === 'number' ? opts[chosenIdx] ?? null : null,
             correctOption: Array.isArray(opts) && typeof pendingMcqHoisted?.correctIndex === 'number' ? opts[pendingMcqHoisted.correctIndex] ?? null : null,
@@ -10337,8 +10515,22 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           let retryText = retry.text
           try {
             const { stripSimulationGiveaways } = await import('@/lib/teaching/visual/simulationPrompt')
-            retryText = stripSimulationGiveaways(retryText, resolvedVisualDecision, learnerAuthoredMessage).text
+            retryText = stripSimulationGiveaways(retryText, resolvedVisualDecision, learnerAuthoredMessage, {
+              answeredQuiz: mcqGradeHoisted && pendingMcqHoisted ? { question: pendingMcqHoisted.question } : null,
+            }).text
           } catch { /* optional backstop */ }
+          // A question card follows: a repair that asks its own question is
+          // the two-questions-at-once shape the cut existed to prevent. Its
+          // question sentences go and its teaching stays; only a retry that
+          // was nothing but questions is discarded.
+          // The gate-contract cut exists to stop an ungraded question, card or
+          // no card, so its repair may not bring one back either.
+          const noQuestionAllowed = mcqHoisted !== null || source === 'gate-contract'
+          if (noQuestionAllowed && /\?/.test(retryText)) retryText = dropQuestionSentences(retryText)
+          if (noQuestionAllowed && (/\?/.test(retryText) || needsRepair(retryText))) {
+            console.log('[stub-repair] ' + JSON.stringify({ source, repaired: false, reason: 'repair-asked-a-question-beside-the-card' }))
+            return null
+          }
           const merged = mergeRepair(stub, retryText)
           const repaired = !needsRepair(merged)
           console.log('[stub-repair] ' + JSON.stringify({ source, repaired, retryStripped: retry.stripped, chars: merged.length }))
@@ -10376,6 +10568,17 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           cleanText = next
         }
       } catch { /* non-fatal — a repair must never break a turn */ }
+
+      // The gate-contract cut (above) can leave the same kind of stub the
+      // confirm-back strip does. Same one regeneration, attributed to its stage.
+      // Later steps may have appended a figure pointer after the stub, so the
+      // stub is matched as the reply's opening and only that part is replaced.
+      if (gateContractStubHoisted && cleanText.startsWith(gateContractStubHoisted)) {
+        try {
+          const repaired = await repairStubReply(gateContractStubHoisted, 'gate-contract')
+          if (repaired) cleanText = repaired + cleanText.slice(gateContractStubHoisted.length)
+        } catch { /* non-fatal — a repair must never break a turn */ }
+      }
 
       // ── A PARAGRAPH THE LEARNER HAS ALREADY READ IS NOT SENT AGAIN ────────
       // (2026-09-28, the C7 repeat channel.) The model recites a long authored
@@ -10450,6 +10653,31 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         } catch (err) {
           console.warn('[mcq] duplicate-prose check skipped:', err)
         }
+      }
+
+      // A card is on screen: no "let me know when you'd like another problem".
+      if (mcqHoisted) {
+        try {
+          const { dropDeferredPracticeOffer } = await import('@/lib/teaching/gateAssessment')
+          const trimmed = dropDeferredPracticeOffer(cleanText, true)
+          if (trimmed !== cleanText) {
+            console.log('[mcq] ' + JSON.stringify({ event: 'deferred-practice-offer-dropped', conceptId: resolvedConceptId ?? null }))
+            cleanText = trimmed
+          }
+        } catch { /* a wording repair never breaks a turn */ }
+      }
+
+      // The model never saw a gate-selected question (owner G2, 2026-09-24), so
+      // a closing "now a question on X" is a guess about X. See neutraliseBlindLeadIn.
+      if (mcqHoisted && gateMcqHoisted && mcqHoisted.question === gateMcqHoisted.question) {
+        try {
+          const { neutraliseBlindLeadIn } = await import('@/lib/teaching/gateAssessmentRenderer')
+          const bridged = neutraliseBlindLeadIn(cleanText, mcqHoisted.question)
+          if (bridged !== cleanText) {
+            console.log('[mcq] ' + JSON.stringify({ event: 'blind-lead-in-neutralised', conceptId: resolvedConceptId ?? null }))
+            cleanText = bridged
+          }
+        } catch { /* a wording repair never breaks a turn */ }
       }
 
       // AN OPTION'S OWN TEXT REPEATING ITS LETTER LABEL. Measured live
@@ -11773,6 +12001,20 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                         reflectionAskedThisEntry: true,
                       }
                     }
+                    // THE STORED ROW MUST MATCH WHAT WAS DELIVERED. The
+                    // assistant row was written above from the model's draft
+                    // (plus its attached question), before completion was
+                    // known. A reload rendered that undelivered question after
+                    // the learner had been told the lesson was finished, and
+                    // the next turn's history carried it too.
+                    try {
+                      await prisma.message.update({
+                        where: { id: assistantMessage.id },
+                        data: { content: cleanText },
+                      })
+                    } catch (err) {
+                      console.warn('[learn/chat] completing-turn row rewrite skipped:', err)
+                    }
                   }
                 }
               }
@@ -12983,6 +13225,75 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // instance cannot freeze with its transaction open. See the declaration.
       if (topicProgressEvidenceWrite) {
         try { await topicProgressEvidenceWrite } catch { /* total by construction */ }
+      }
+
+      // TURN ASSEMBLY, Phase 1 — SHADOW. Assemble what the server would have
+      // sent and log it beside what it did send. The served reply is untouched.
+      // Waits at most 1.5 s: the call started early, so it is normally done.
+      if (turnAssemblyShadowHoisted) {
+        try {
+          // waitedMs is the latency shadow mode adds to the reply: the time this
+          // await holds the response, not the slot call's own duration.
+          const waitStartedAt = Date.now()
+          const r = await Promise.race([
+            turnAssemblyShadowHoisted,
+            new Promise<null>((resolve) => setTimeout(() => resolve(null), 1500)),
+          ])
+          const waitedMs = Date.now() - waitStartedAt
+          const ta = await import('@/lib/teaching/turnAssembly')
+          if (!r) {
+            console.log('[assembled-turn] ' + JSON.stringify({ conceptId: resolvedConceptId ?? null, event: 'timeout', waitedMs }))
+          } else {
+            const parsed = ta.parseSlots(r.raw)
+            const codes = r.error && !r.raw ? ['V0-provider-error'] : parsed ? ta.validateSlots(parsed, r.facts) : ['V1-unparseable']
+            const used = ta.usableSlots(parsed, codes, r.facts)
+            const probe = { question: r.facts.question, options: r.facts.options, correctIndex: r.facts.correctIndex, rationales: r.facts.rationales }
+            const verdictLine = r.facts.correct
+              ? (await import('@/lib/teaching/answerConfirmation')).confirmationPhrase(resolvedPriorConfirmations)
+              : (await import('@/lib/teaching/wrongAnswerCorrection')).stateCorrectionForWrongAnswer({ text: '', correct: false, probe: probe as never }).text
+            const { neutralLeadInFor } = await import('@/lib/teaching/gateAssessmentRenderer')
+            const assembled = ta.assembleGradedTurn({
+              verdictLine,
+              slots: used.slots,
+              leadIn: mcqHoisted ? neutralLeadInFor(mcqHoisted.question) : null,
+              closeText: lessonCompletionHoisted ? cleanText : null,
+            })
+            // Would the ASSEMBLED text close the concept exactly when the served
+            // one did? Re-fold with the text-derived inputs recomputed on it.
+            // Spec §2's "decide completion first" rests on this being true.
+            let completionAgreement: boolean | null = null
+            if (ladderFoldForShadowHoisted) {
+              try {
+                const cs = await import('@/lib/teaching/conversationState')
+                const { isConceptClosed } = await import('@/lib/teaching/lessonAttempt')
+                const f = ladderFoldForShadowHoisted
+                const counterfactual = cs.advanceConversationState(f.before, {
+                  ...f.evidence,
+                  isPriorKnowledgeProbe: cs.isPriorKnowledgeProbe(assembled),
+                  fillerTurnDetected: false,
+                  teachingClaimUnresolved: false,
+                })
+                completionAgreement = isConceptClosed(counterfactual) === isConceptClosed(f.after)
+              } catch { completionAgreement = null }
+            }
+            console.log('[assembled-turn] ' + JSON.stringify({
+              conceptId: resolvedConceptId ?? null,
+              provider: r.provider, ms: r.ms, waitedMs, error: r.error, attempts: r.attempts,
+              completionAgreement,
+              // Why a parse failed is otherwise invisible. Model text only.
+              ...(codes.length > 0 ? { rawOnFailure: r.raw.slice(0, 600) } : {}),
+              codes, fallback: used.fallback,
+              completion: lessonCompletionHoisted !== null, cardAttached: mcqHoisted !== null,
+              live: ta.turnChecks(cleanText, mcqHoisted !== null),
+              assembled: ta.turnChecks(assembled, mcqHoisted !== null),
+              // Tutor text only, never the learner's; [verifier-log] logs drafts the same way.
+              liveText: cleanText.slice(0, 1200),
+              assembledText: assembled.slice(0, 1200),
+            }))
+          }
+        } catch (err) {
+          console.warn('[assembled-turn] shadow log skipped:', err)
+        }
       }
 
       return NextResponse.json({

@@ -275,7 +275,9 @@ describe('payload and contract invariants hold in both directions', () => {
       }
     }
     expect(violations).toEqual([])
-  })
+    // Whole-KG sweep (~4.3s alone): 30s like the repo's other sweeps; it
+    // timed out at the 5s default under full-suite load (2026-10-02).
+  }, 30_000)
 
   it('11b+12b. the same holds for a generated decision', async () => {
     const accepted = await resolveVisualForTurn(

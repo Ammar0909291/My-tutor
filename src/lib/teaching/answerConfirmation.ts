@@ -163,6 +163,13 @@ const PHRASINGS = [
   'Yes, exactly right.',
 ] as const
 
+/** The confirmation sentence for a correct answer, rotated by the confirmations already given. */
+export function confirmationPhrase(priorConfirmations?: number): string {
+  const n = priorConfirmations
+  const i = Number.isFinite(n) && (n as number) >= 0 ? Math.floor(n as number) % PHRASINGS.length : 0
+  return PHRASINGS[i]
+}
+
 export interface ConfirmationInput {
   /** The reply as it stands after the other post-model repairs. */
   text: string

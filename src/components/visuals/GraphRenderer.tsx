@@ -11,13 +11,14 @@ import { FIGURE_TEXT_FLOOR_PX } from '@/components/school/visuals/useFigureLegib
  */
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { compileExpression } from '@/lib/visuals/mathParser'
+import { GRAPH_MAX_PPU, GRAPH_MIN_PPU, initialGraphView } from '@/lib/visuals/graphView'
 import type { GraphSpec } from '@/lib/visuals/visualSpec'
 import { createMasteryEmitter, type VisualMasteryContext, type VisualMasterySignal } from '@/lib/visuals/visualMastery'
 
 interface View { cx: number; cy: number; ppu: number } // center (math units) + pixels-per-unit
 
-const MIN_PPU = 4
-const MAX_PPU = 400
+const MIN_PPU = GRAPH_MIN_PPU
+const MAX_PPU = GRAPH_MAX_PPU
 
 // ── Sprint F: interactive linear model (draggable slope/intercept) ─────────
 // Only a plain `y = mx + b` form is recognized — quadratics and other forms
@@ -114,11 +115,8 @@ export function GraphRenderer({
   }, [])
 
   // Initial view: center on origin, scale so the optional domain (or [-10,10]) fits.
-  const [view, setView] = useState<View>(() => {
-    const [d0, d1] = spec.domain ?? [-10, 10]
-    const span = Math.max(2, Math.abs(d1 - d0))
-    return { cx: (d0 + d1) / 2, cy: 0, ppu: Math.max(MIN_PPU, Math.min(MAX_PPU, 360 / span)) }
-  })
+  // Shared with the server's empty-axes check (graphView.ts).
+  const [view, setView] = useState<View>(() => initialGraphView(spec.domain))
 
   // Responsive sizing
   useEffect(() => {
@@ -217,11 +215,7 @@ export function GraphRenderer({
     })
   }
   const zoomBtn = (factor: number) => setView((v) => ({ ...v, ppu: Math.max(MIN_PPU, Math.min(MAX_PPU, v.ppu * factor)) }))
-  const reset = () => {
-    const [d0, d1] = spec.domain ?? [-10, 10]
-    const span = Math.max(2, Math.abs(d1 - d0))
-    setView({ cx: (d0 + d1) / 2, cy: 0, ppu: Math.max(MIN_PPU, Math.min(MAX_PPU, 360 / span)) })
-  }
+  const reset = () => setView(initialGraphView(spec.domain))
 
   // ── grid + path geometry ──
   const step = niceStep(view.ppu)

@@ -1769,6 +1769,31 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   }, [subjectSlug, curriculumLessons.length])
 
 
+  // Records a fully mastered lesson while the learner STAYS on it (the
+  // completion card's Close). advance:false tells the progress route to append
+  // to completedLessons (and award first-completion XP) without moving
+  // currentLesson or clearing the selection, so the roadmap and the chat keep
+  // pointing at the same lesson. Not handleLessonComplete: that one ends the
+  // selection and is only legitimate inside completeAndAdvance.
+  const recordMasteredInPlace = useCallback(async (lesson: { order: number; lessonTitle: string; lessonGoal: string; topicSlug?: string }) => {
+    try {
+      const res = await fetch('/api/curriculum/progress', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          subjectCode: subjectSlug, completedLesson: lesson.order, totalLessons: curriculumLessons.length || undefined,
+          lessonTitle: lesson.lessonTitle, lessonGoal: lesson.lessonGoal,
+          mastered: true, topicSlug: lesson.topicSlug, advance: false,
+        }),
+      })
+      const data = await res.json()
+      if (data.success) {
+        progressGenerationRef.current += 1
+        setCurriculumProgress(data.progress)
+      }
+    } catch { /* ignore */ }
+  }, [subjectSlug, curriculumLessons.length])
+
   const handleLessonRestart = useCallback(async (lessonOrder: number, topicSlug?: string) => {
     try {
       const res = await fetch('/api/curriculum/progress', {
@@ -2054,7 +2079,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     const aid = `a-${Date.now()}`
     setMessages((p) => [...p, { id: aid, role: 'assistant', content: '', ts: Date.now(), streaming: true }])
     let res: Response | undefined
-    let data: { success?: boolean; text?: string; provider?: 'yandex'|'groq'|'fallback'; llmCallCount?: number; visual?: string; visualSpec?: unknown; sceneSpec?: unknown; learnerLevel?: string; dynamicVisualizationCode?: unknown; inlinePractice?: unknown; hint?: unknown; error?: any; lessonOrder?: number; completedLessons?: number[]; mastery?: { verified?: boolean; gatePending?: boolean; completionSuppressed?: boolean; phase?: string; checkCorrect?: number; practiceCorrect?: number }; mcq?: { question?: string; options?: string[]; renderId?: string }; lessonComplete?: { complete?: boolean; lessonTitle?: string | null; durationSeconds?: number | null; mastered?: string[]; needsReview?: string[]; nextLessonOrder?: number | null; fullyMastered?: boolean } } = {}
+    let data: { success?: boolean; text?: string; provider?: 'yandex'|'groq'|'fallback'; llmCallCount?: number; visual?: string; visualSpec?: unknown; sceneSpec?: unknown; learnerLevel?: string; dynamicVisualizationCode?: unknown; inlinePractice?: unknown; hint?: unknown; error?: any; lessonOrder?: number; completedLessons?: number[]; mastery?: { verified?: boolean; gatePending?: boolean; completionSuppressed?: boolean; phase?: string; checkCorrect?: number; practiceCorrect?: number }; mcq?: { question?: string; options?: string[]; renderId?: string }; lessonComplete?: { complete?: boolean; lessonTitle?: string | null; durationSeconds?: number | null; mastered?: string[]; needsReview?: string[]; masteredTitles?: string[]; needsReviewTitles?: string[]; nextLessonOrder?: number | null; fullyMastered?: boolean } } = {}
     try {
       // P0 (duplicate AI responses — proven root cause): retry ONLY a thrown/
       // aborted fetch (a dropped connection, or fetchWithTimeout's own abort
@@ -2186,8 +2211,10 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         setLessonCompletion({
           lessonTitle: data.lessonComplete.lessonTitle ?? null,
           durationSeconds: data.lessonComplete.durationSeconds ?? null,
-          mastered: data.lessonComplete.mastered ?? [],
-          needsReview: data.lessonComplete.needsReview ?? [],
+          // Names, not ids: the card used to print "Mastered:
+          // phys.mech.newtons-third-law" (live, 2026-10-01).
+          mastered: data.lessonComplete.masteredTitles ?? [],
+          needsReview: data.lessonComplete.needsReviewTitles ?? [],
           nextLessonOrder: data.lessonComplete.nextLessonOrder ?? null,
           fullyMastered: data.lessonComplete.fullyMastered === true,
         })
@@ -3875,7 +3902,8 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                     </p>
                   )}
                   <ul style={{ fontSize: 14.4, color: 'var(--text-dim)', lineHeight: 1.7, paddingLeft: 18, marginBottom: 18 }}>
-                    {[t('lesson_dialog_progress_saved'), t('lesson_dialog_mastery_saved'), t('lesson_dialog_can_resume')]
+                    {/* "unfinished mastery" is only true of a lesson left unfinished. */}
+                    {[t('lesson_dialog_progress_saved'), ...(isCompletedNow ? [] : [t('lesson_dialog_mastery_saved')]), t('lesson_dialog_can_resume')]
                       .map((line) => <li key={line}>{line}</li>)}
                   </ul>
                   {/* Prerequisites are GUIDANCE, never access control. The
@@ -5803,15 +5831,22 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                     {t('lc_restart')}
                   </button>
 
-                  {/* Close — dismisses the completion screen only. Completion
-                      was already recorded server-side the moment this card
-                      appeared (the `data.lessonComplete?.complete === true`
-                      handler that sets `lessonCompletion`); this button
-                      touches no completion/mastery state at all, so closing
-                      can never mark, unmark, or alter what was earned. */}
+                  {/* Close — dismisses the completion screen and keeps the
+                      learner on this lesson. Nothing recorded completion when
+                      the card appeared: in the 2026-09-30 learner baseline 8 of
+                      9 mastered lessons were closed and completedLessons stayed
+                      empty. So a FULL mastery is recorded in place here
+                      (advance:false — no lesson change); a partial one records
+                      nothing, and mastery/evidence are never touched. */}
                   <button
                     type="button"
-                    onClick={() => setLessonCompletion(null)}
+                    onClick={() => {
+                      const finished = lessonCompletion
+                      setLessonCompletion(null)
+                      if (finished.fullyMastered && currentLessonData) {
+                        void recordMasteredInPlace(currentLessonData)
+                      }
+                    }}
                     style={{ padding: '10px 14px', borderRadius: 10, fontWeight: 700, fontSize: 15.6, border: '1px solid var(--border-subtle)', background: 'transparent', color: 'var(--text-dim)', cursor: 'pointer' }}
                   >
                     {t('lc_close')}

@@ -1222,7 +1222,7 @@ const CHEM_C: SeedProbe[] = [
   {
     conceptId: 'chem.found.states-of-matter', subjectSlug: S, probeKind: 'fill_blank',
     gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.FOUNDATIONAL,
-    stem: 'Going from solid to liquid to gas, the average separation of the particles ______ and the hold the forces between them have ______.',
+    stem: 'Going from solid to liquid to gas, the average separation of the particles ______ and the hold of the forces between them ______.',
     choices: [
       { text: 'increases … weakens', isCorrect: true },
       { text: 'decreases … strengthens', isCorrect: false },

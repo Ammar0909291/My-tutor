@@ -693,7 +693,10 @@ const MOLE_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.HIGH,
     stem: 'Which contains more molecules: 2g of H₂ (molar mass 2 g/mol) or 32g of O₂ (molar mass 32 g/mol)?',
     choices: [
-      { text: '2g of H₂ contains more — that\'s 1 mol (6.022×10²³ molecules) vs. 32g O₂ which is also 1 mol; they\'re EQUAL', isCorrect: true },
+      // Was "2g of H₂ contains more — … they're EQUAL": its answer head said the
+      // opposite of its own working and was served as the key (live,
+      // 2026-10-01). The head now states the answer the item is about.
+      { text: 'They contain the same number — 2g of H₂ is 1 mol (6.022×10²³ molecules), and so is 32g of O₂', isCorrect: true },
       { text: '32g of O₂ — it\'s heavier so it must contain more molecules', isCorrect: false, misconceptionId: `${MOLE}:MC1` },
       { text: '2g of H₂ — hydrogen is smaller so more fit in 2g', isCorrect: false, misconceptionId: `${MOLE}:MC1` },
     ],

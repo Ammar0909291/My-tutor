@@ -29,6 +29,7 @@
  *   - every rejection returns NO FIGURE. Nothing is ever substituted.
  */
 
+import { visibleCurveFraction } from '@/lib/visuals/graphView'
 import { generateJSON } from '@/lib/ai/client'
 import { validateSceneSpec } from '@/lib/teaching/sceneSpecValidator'
 import { isRuntimeSceneGenerationAllowed } from './flag'
@@ -881,6 +882,13 @@ export function validateGeneratedFigure(
     // field and are served by other tiers that never call this function.
     if (opts.requireAxisLabels && spec.type === 'graph' && !(spec.xLabel?.trim() && spec.yLabel?.trim())) {
       return { ok: false, reason: 'unlabelled-axes' }
+    }
+    // A graph whose curve is nowhere in the opening view is empty axes to the
+    // learner (C2, 2026-09-30: `-5000 * (1/x) + 10` on −5…5, then four turns
+    // of "the curve you see"). Under 5% of the view drawn is refused.
+    if (spec.type === 'graph') {
+      const fraction = visibleCurveFraction(spec.equation, spec.domain)
+      if (fraction !== null && fraction < 0.05) return { ok: false, reason: 'nothing-drawable' }
     }
     return { ok: true, figure: { kind: 'spec', spec }, cached: false }
   }

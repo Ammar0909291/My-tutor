@@ -49,14 +49,22 @@ export interface RepairContext {
   graded: { correct: boolean } | null
   chosenOption: string | null
   correctOption: string | null
+  /** A question card is rendered right after the reply (the turn's MCQ). */
+  questionFollows?: boolean
+  /** What the clean-up removed: a confirm-back (default) or a question cut
+   *  beside the card by the gate contract. */
+  cause?: 'confirm-back' | 'question-cut'
 }
 
 /** The one instruction the regeneration carries. */
 export function buildConfirmBackRepairAppendix(ctx: RepairContext): string {
-  const head =
-    '\n\nOUTPUT REJECTED (server-side check). Your reply only restated the ' +
-    "learner's words and asked them to confirm. The learner gets nothing from " +
-    'that. Do NOT restate what they said and do NOT ask "is that right?". '
+  const head = ctx.cause === 'question-cut'
+    ? '\n\nOUTPUT REJECTED (server-side check). Your reply was only a question, ' +
+      'and a question card is already shown to the learner, so your question was ' +
+      'removed and they got nothing. Teach instead, and do NOT ask any question. '
+    : '\n\nOUTPUT REJECTED (server-side check). Your reply only restated the ' +
+      "learner's words and asked them to confirm. The learner gets nothing from " +
+      'that. Do NOT restate what they said and do NOT ask "is that right?". '
   let task: string
   if (ctx.graded && ctx.graded.correct === false && ctx.chosenOption && ctx.correctOption) {
     task =
@@ -71,9 +79,16 @@ export function buildConfirmBackRepairAppendix(ctx: RepairContext): string {
   } else {
     task =
       'Reply directly to what the learner just wrote: answer their question, or do ' +
-      'what they asked (if they asked for a practice question, give one), in 2–5 short sentences.'
+      'what they asked (if they asked for a practice question, give one), in 2–5 short sentences. ' +
+      'If they answered a question or problem you set earlier, say plainly whether their answer ' +
+      'is right or wrong, and why.'
   }
-  return head + task + ' Use easy words and short sentences — the learner is still learning English.'
+  // A question card follows the reply: a second question would compete with it
+  // (and is the very thing the one-question contract just removed).
+  const noQuestion = ctx.questionFollows
+    ? ' A question card is shown right after your reply, so do NOT ask a question yourself.'
+    : ''
+  return head + task + noQuestion + ' Use easy words and short sentences — the learner is still learning English.'
 }
 
 /** The kept correction line (if any) followed by the retry's own text. */
@@ -82,4 +97,33 @@ export function mergeRepair(strippedText: string, retryText: string): string {
   const retry = (retryText ?? '').replace(CORRECTION_LINE, '').trim()
   if (!retry) return strippedText
   return line ? `${line}\n\n${retry}` : retry
+}
+
+/** A line the model wrote as an answer option of its own: "A) …", "B. …". */
+const OPTION_LINE = /^\s*(?:[A-D][).:]|\([A-D]\))\s/
+
+/**
+ * The reply without its question sentences and home-made option lines.
+ *
+ * MEASURED (2026-10-02, chem.found.pure-substances): the one regeneration was
+ * 496 chars of teaching that ended in a question. Beside a question card that
+ * question cannot ship, and discarding the whole retry left the learner a
+ * stub. Only the sentences carrying "?" go; the teaching stays.
+ */
+export function dropQuestionSentences(text: string): string {
+  if (!/\?/.test(text ?? '')) return text
+  return (text ?? '')
+    .split(/\n{2,}/)
+    .map((para) => para
+      .split('\n')
+      .filter((line) => !OPTION_LINE.test(line))
+      .map((line) => (line.match(/[^.!?]+(?:[.!?]+|$)/g) ?? [])
+        .filter((sentence) => !sentence.includes('?'))
+        .join('')
+        .trim())
+      .filter(Boolean)
+      .join('\n'))
+    .filter(Boolean)
+    .join('\n\n')
+    .trim()
 }

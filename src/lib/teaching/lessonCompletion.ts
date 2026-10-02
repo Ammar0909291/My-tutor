@@ -106,6 +106,15 @@ export interface LessonCompletionPayload {
    * unchanged).
    */
   answeredButUnverified: string[]
+  /**
+   * What the card SHOWS for `mastered` / `needsReview`: learner-facing concept
+   * names, never ids. MEASURED live 2026-10-01: the card read "Mastered:
+   * phys.mech.newtons-third-law" — it joined the id lists above. The ids stay
+   * for every machine consumer; these are the same concepts, in the same order,
+   * through the same id-rejecting resolver the close text uses.
+   */
+  masteredTitles: string[]
+  needsReviewTitles: string[]
 }
 
 /**
@@ -146,6 +155,8 @@ export function buildCompletionPayload(
     answeredButUnverified: summary.needsReview
       .filter((o) => o.answeredButUnverified)
       .map((o) => o.conceptId),
+    masteredTitles: summary.mastered.map((o) => conceptNames([o], lang)),
+    needsReviewTitles: summary.needsReview.map((o) => conceptNames([o], lang)),
   }
 }
 
@@ -346,6 +357,25 @@ const QUESTION_ANNOUNCEMENT_RE = /\bi\s*(?:'ve(?:\s+got)?|\s+have|\s+got)\s+(?:a
 
 export function isQuestionAnnouncement(message: string): boolean {
   return QUESTION_ANNOUNCEMENT_RE.test((message ?? '').trim())
+}
+
+/**
+ * "Is this lesson done?" — a question ABOUT the lesson's status, not new
+ * intent. MEASURED LIVE 2026-10-01 (chem.found.mole-concept, mastered and
+ * closed): read as a genuine question, it routed to the model, which answered
+ * "Not quite yet — there's still a key idea we need to explore" twice, on two
+ * fresh sessions, while the runtime recorded the lesson COMPLETED. Excluded
+ * from new intent so the deterministic close (built from persisted evidence)
+ * answers it. The status word must end the clause, optionally followed by
+ * "(with) it / this / the … lesson" ("is it complete combustion?" is not a
+ * status question). LIVE again 2026-10-01: "am i finished with the mole
+ * lesson?" slipped past the first version.
+ */
+const LESSON_STATUS_QUESTION_RE =
+  /\b(?:is|are|am|did|have|has)\b[^?.!]{0,30}\b(?:lesson|this|it|we|i)\b[^?.!]{0,20}\b(?:done|finished|complete|completed|over)\b\s*(?:(?:with\s+)?(?:it|this|(?:the|this|my)\s+(?:[a-z'-]+\s+){0,3}(?:lesson|topic|chapter))\s*)?(?:yet|now|already)?\s*(?:[?.!]|$)/i
+
+export function asksWhetherLessonIsDone(message: string): boolean {
+  return LESSON_STATUS_QUESTION_RE.test((message ?? '').trim())
 }
 
 /**

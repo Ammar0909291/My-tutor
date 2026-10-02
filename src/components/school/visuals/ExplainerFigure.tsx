@@ -39,7 +39,7 @@ import { useTheme } from '@/components/Providers'
 import type { SceneSpec } from '@/lib/teaching/sceneSpec'
 import { deriveExplainer } from '@/lib/teaching/visual/explainer'
 import { availableModes, redactExplainer, redactText, stageView, withheldValues, type SceneMode } from '@/lib/teaching/visual/sceneStage'
-import { defaultValueOf, rebuildScene, variablesFor, type SceneParams, type SceneVariable } from '@/lib/teaching/visual/parametricScenes'
+import { controlsFor, defaultValueOf, rebuildScene, variablesFor, type SceneParams, type SceneVariable } from '@/lib/teaching/visual/parametricScenes'
 import { themeColor } from '@/lib/teaching/sceneGenerators/visualDesign'
 import {
   availableAnimations, stageAt, sweepFrame, traceObjects, tracePlayhead,
@@ -102,8 +102,8 @@ export function ExplainerFigure({
   const [params, setParams] = useState<SceneParams | null>(null)
   const allVariables = variablesFor(spec.parametric?.kind)
   const variables = useMemo(
-    () => allVariables.slice(0, policy.maxControls),
-    [allVariables, policy.maxControls],
+    () => controlsFor(spec.parametric?.kind, policy.maxControls),
+    [spec.parametric?.kind, policy.maxControls],
   )
   const live = params ?? spec.parametric?.params ?? {}
 

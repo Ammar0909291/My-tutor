@@ -590,6 +590,25 @@ export async function POST(req: Request) {
       console.warn('[lesson-init] output checks skipped:', err)
     }
 
+    // A SIMULATION'S ANSWERS ARE THE LEARNER'S TO FIND — from the first
+    // message. The chat turn's backstop never reached the opening, so the
+    // pendulum lesson opened with "the mass of the bob and the size of the
+    // swing angle … do not affect T" (2026-09-30 learner baseline, P3) before
+    // the learner had made either prediction.
+    try {
+      const { stripGiveawaysFor, simulationForConcept } = await import('@/lib/teaching/visual/simulationPrompt')
+      const spoil = stripGiveawaysFor(simulationForConcept(topicSlug), routed.text, '')
+      if (spoil.removed.length) {
+        console.warn('[lesson-init] ' + JSON.stringify({
+          event: 'prediction-answer-stripped', topicSlug,
+          removed: spoil.removed.map((r) => r.slice(0, 120)),
+        }))
+        routed = { ...routed, text: spoil.text }
+      }
+    } catch (err) {
+      console.warn('[lesson-init] simulation-giveaway check skipped:', err)
+    }
+
     // Same reasoning as the figure repair immediately above, and found the same
     // way: the opening turn lives behind its own endpoint, so a repair added to
     // the chat route does not reach it. The learner's FIRST contact with a

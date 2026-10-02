@@ -933,6 +933,12 @@ const PRACTICE_REQUEST_RE: readonly RegExp[] = [
   // not requests for a question. A learner asking for the next item puts it
   // first.
   /^\s*(one|another)\s+more\b/i,
+  // "ok another one", "next one", "give me another one" — the whole message is
+  // the request (anchored at BOTH ends, so "another one of these confuses me"
+  // is not). MEASURED LIVE 2026-10-02 (phys.mech.tension, real account): "ok
+  // another one" after an answered quiz matched nothing and was answered with
+  // a stored explanation and no question.
+  /^\s*(?:(?:ok(?:ay)?|yes|yeah|sure|cool|great|nice)[\s,.!]+)?(?:(?:give me|can i have|can you give me|let'?s (?:do|try))\s+)?(?:(?:another|next)\s+one|one more|another)(?:\s+please)?\s*[.!?]*\s*$/i,
   // Synthetic-student baseline, 2026-09-24 (production, phys.mech.*): "ok,
   // next question please" and "can you check me with a question?" matched
   // none of the patterns above. Unread, "next question please" could not
