@@ -22,6 +22,7 @@ const SLOTS = JSON.stringify({ feedback: 'Momentum is conserved in every collisi
 
 const baseRouteAI = h.routeAI
 let slotCalls = 0
+const slotMessageCounts: number[] = []
 const textOf = (t: TurnResult) => String((t.body as { text?: string }).text ?? '')
 
 async function gradedTap(): Promise<TurnResult | null> {
@@ -42,7 +43,11 @@ afterEach(() => { delete process.env.TURN_ASSEMBLY_MODE; h.routeAI = baseRouteAI
 describe('shadow mode leaves the served reply untouched', () => {
   it('logs [assembled-turn] and serves exactly what mode off serves', async () => {
     h.routeAI = async (...args: unknown[]) => {
-      if (String(args[1] ?? '').includes('Return ONLY a JSON object')) { slotCalls++; return { text: SLOTS, provider: 'harness', finishReason: 'stop' } }
+      if (String(args[1] ?? '').includes('Return ONLY a JSON object')) {
+        slotCalls++
+        slotMessageCounts.push((args[0] as unknown[]).length)
+        return { text: SLOTS, provider: 'harness', finishReason: 'stop' }
+      }
       return baseRouteAI(...args)
     }
     const off = await gradedTap()
@@ -65,6 +70,10 @@ describe('shadow mode leaves the served reply untouched', () => {
     // Spec §2: whether the assembled text would close the concept exactly when
     // the served one did. A plain graded tap at this rung closes nothing either way.
     expect(logged.completionAgreement).toBe(true)
+    // No conversation history in the slot call: with it the model wrote a new
+    // quiz instead of the JSON (shadow sample, 2026-10-02).
+    expect(slotMessageCounts.length).toBeGreaterThan(0)
+    expect(slotMessageCounts.every((n) => n === 1)).toBe(true)
   }, 180_000)
 })
 

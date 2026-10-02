@@ -6030,7 +6030,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               earlierOptions: ta.optionsFromHistory(historyMessages.filter((m) => m.role === 'assistant').map((m) => m.content)),
             }
             const startedAt = Date.now()
-            const recent = historyMessages.slice(-4).map(({ role, content }) => ({ role, content }))
+            // NO CONVERSATION HISTORY. Measured in shadow (2026-10-02, physics
+            // sample): with the recent turns sent as chat, the model continued
+            // their pattern and wrote a new quiz instead of the JSON (2 of 15
+            // unparseable, 6 of 15 needing a retry). Every fact the slots need
+            // is already in the system prompt, so the call gets one instruction.
+            const slotRequest = [{ role: 'user' as const, content: 'Write the JSON object for this answer now.' }]
             turnAssemblyShadowHoisted = (async () => {
               // Spec §4: one regeneration, naming what failed. Both attempts go
               // through this one call site. The second attempt's increment can
@@ -6044,7 +6049,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                   attempts++
                   llmCallCount++ // a real provider call, counted like every other (shadow only)
                   const routed = await routeAI(
-                    [...recent, { role: 'user' as const, content: message }],
+                    slotRequest,
                     ta.buildSlotSystemPrompt(facts) + (attempt === 0 ? '' : ta.retryInstruction(codes)),
                     country, 700, teachingLang,
                     { userId, subject: learnSession.subject.slug },

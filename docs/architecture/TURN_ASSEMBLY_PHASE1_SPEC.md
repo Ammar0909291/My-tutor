@@ -299,3 +299,26 @@ numbers.
   - The fallback read as a fragment ("fixed composition, one formula"), because authored
     rationales are the text after the answer head. It is now rejoined: "Carbon dioxide (CO₂) —
     fixed composition, one formula."
+
+### 11.3 Second sample (2026-10-02 13:54, physics, deploy `3caa41f4`)
+
+- **Volume:** 16 graded taps over 4 lessons (errors, significant-figures, vector-addition,
+  vector-products). 15 lines parsed, 1 truncated. Tallied with
+  `scripts/qa/turnQuality/tallyAssembledTurns.ts`.
+- **Results:**
+
+  | Measure | Result |
+  | --- | --- |
+  | `completionAgreement` | 15/15 |
+  | Fallback | 2/15 (13%), both `V1-unparseable` |
+  | Regenerated | 6/15 (40%) |
+  | Assembled K1 / K2 | 1 / 0 (the K1 is a fallback with no authored rationale) |
+  | Served K1 / K2 | 0 / 0 |
+  | Shadow call p50 / max | 844 / 1,619 ms |
+
+- **Root cause, from `rawOnFailure`:** the model ignored the JSON instruction and wrote a new
+  quiz ("Here's a new question for you: … A) 20 J …", "**Quiz** …"). The slot call sent the
+  recent turns as chat, so the model continued the "quiz me" pattern. That also explains the
+  high regeneration rate.
+- **Fix (next commit):** the slot call sends no history, only one instruction. Every fact the
+  slots need is already in its system prompt. Needs a third sample to confirm.
