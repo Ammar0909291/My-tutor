@@ -497,3 +497,18 @@ numbers.
   - **166 parsed graded turns, `completionAgreement` 166/166**, assembled K2 0;
   - since all fixes: **78/78 clean, 0 fallback**;
   - `waitedMs` max 1 ms.
+
+### 11.11 Windows 12–13 (2026-10-02 17:27–17:57)
+
+- **Window 12 (chemistry bonding):** 6/6 clean.
+- **Window 12b (physics Lagrangian, bounded run used for the egress measurement):** 6/6 clean.
+- **Window 13 (chemistry states and solutions, + 6 mathematics):** 11/11 clean.
+  - `waitedMs` max 1 ms.
+- **Egress (owner's constraint):** measured by `pg_stat_statements` delta, recorded in
+  `docs/history/egress-incidents.md`.
+  - About 90 rows per chat turn, about 1 MB per bounded sampler run.
+  - Shadow mode does no database I/O.
+  - The spine-replay leak is still at 0.
+- **Cumulative:**
+  - **189 parsed graded turns, `completionAgreement` 189/189**, assembled K2 0;
+  - **post-fix 101/101 clean, 0 fallback**.
