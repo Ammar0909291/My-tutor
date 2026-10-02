@@ -86,6 +86,24 @@ describe('V2–V6 validate', () => {
   })
 })
 
+describe('V6 reads only verdicts addressed to the learner', () => {
+  it('"perfect squares" is not praise (math shadow sample, 2026-10-02)', () => {
+    const f = { ...WRONG }
+    const feedback = 'The sums given are 4, 9, and 16, which are not all even. The pattern shows they are perfect squares, not simply even numbers. Therefore the choice that every sum of odd numbers is even is incorrect.'
+    expect(validateSlots({ feedback, teaching: null }, f)).toEqual([])
+  })
+  it('"the other options are incorrect" is not a denial of a right answer', () => {
+    const feedback = 'A kilogram is 1000 grams and a gram is 1000 milligrams. The other options are incorrect because they convert only one step.'
+    expect(validateSlots({ feedback, teaching: null }, RIGHT)).toEqual([])
+  })
+  it('still catches a verdict that contradicts the grade', () => {
+    expect(validateSlots({ feedback: "You're right — moving the decimal three places gives milligrams directly.", teaching: null }, WRONG))
+      .toContain('V6-feedback-affirms-wrong')
+    expect(validateSlots({ feedback: "That's not correct: the factor between kilograms and milligrams is a million.", teaching: null }, RIGHT))
+      .toContain('V6-feedback-denies-correct')
+  })
+})
+
 describe('fallback and assembly', () => {
   it('a WRONG answer gets no fallback feedback: the verdict line carries the correct answer and its why', () => {
     // Shadow sample (biology, 2026-10-02): the chosen distractor's own text was
