@@ -241,6 +241,11 @@ Fix class:
 - **Cause:** `recordMcqOutcome(gradedWithoutCredit)` — a correct answer in a phase that banks no
   credit is re-askable once. This was an owner decision, "option (c)", on 2026-09-27.
 - **Verdict:** not a defect, and not fixed. Any change is an RC-E owner decision.
+- **Production size of this for the owner** (read-only, `evidence_events`, last 7 days):
+  - 100 of 1,043 concept-sessions with authored PROBE_OUTCOMEs (9.6%) graded the same authored
+    asset more than once.
+  - The average was 3.73 distinct probes per concept-session.
+  - V9 (States of Matter, 2026-10-02): all 3 completing credits were re-asks.
 
 ### R5. A completed lesson treated as unfinished (CL-22)
 
