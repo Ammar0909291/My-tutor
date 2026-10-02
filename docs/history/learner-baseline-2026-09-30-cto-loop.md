@@ -57,6 +57,9 @@ The sessions ran in Playwright Chromium against https://my-tutor-flame.vercel.ap
 | CL-16 | Found LIVE (concentration): a correct "No" to the NaOH item got feedback about the previous ppm question (the one-turn-late attribution from the baseline). | On a graded turn the main prompt ends with the answered question and its grade. | 5ba7e62a |
 | CL-25 | Found LIVE: "Let me know when you'd like another practice problem" appeared while the next quiz was already attached (concentration, stoichiometry). | A closing deferred-practice offer is dropped when a card is attached. | 97ab3b6d |
 | CL-26 | Found LIVE (tension): "ok another one" matched no practice pattern and got a stored explanation with no question. | A whole-message pattern now reads "another one", "next one" and "give me another one". | e16a9ef9 |
+| CL-27 | Found LIVE (chemistry, phone): leaving a COMPLETED lesson still listed "unfinished mastery remains recorded". | That line shows only when the lesson being left is not complete. Verified live 2026-10-02. | 93cbb998 |
+| CL-28 | Found LIVE (Pure Substances turn 1): the stub-repair retry ended in a question beside the card and was discarded whole, so the learner got the stub plus "Study it while I explain." and no explanation. | The retry's question sentences and home-made option lines are dropped and its teaching kept. The repair instruction names a gate-contract cut correctly. | a96b53fb |
+| CL-29 | Found LIVE (States of Matter): the completing tap showed the close, but a reload showed a different reply plus a new question. The stored row was written before completion was known. | The finalising branch rewrites the stored row to the close. Verified live 2026-10-02 (Pure Substances: stored row == delivered close). | 93f4d95e |
 
 ## Recorded, not fixed (owner decision or out of scope)
 
@@ -146,6 +149,7 @@ L, Swing angle and m (kg) are all rendered. P3 showed only L and Swing angle.
 | chem.found.concentration | phone | 7 min | — | Found CL-16. Close recorded: chemistry `[6, 8]`. |
 | phys.mech.tension | desktop | 13 min | 7 | CL-16 verified live: three graded taps in a row, each answered about its own question. The wrong answer (17.2 N) was corrected with T − mg = ma. Found CL-26. Close recorded `[…, 23]`. |
 | phys.mech.friction | desktop | 16 min | 6 authored | Found CL-23. The deliberate miss (40 N vs 20 N static friction) was corrected with its reason and the misconception named. |
+| chem.found.pure-substances | phone | 15 min | 5 authored, all right | Found CL-27/28. CL-29 verified on its completing turn. |
 
 CL-23 was verified live on 5c8d576e. The same "surface area" phrase in the Normal Force lesson
 served the physics force-diagram card.
@@ -202,6 +206,12 @@ Fix class:
     beside a card is discarded). Verified live 2026-10-02 (concentration lesson).
 - **Mechanism remaining:** the gate-contract cut still produces stubs on other turns. They are
   repaired, but each repair depends on the model obeying the appendix.
+- **2026-10-02 recurrence** (Pure Substances, turn 1).
+  - Production log: gate-contract 224 → 37 chars; the retry was 496 chars and ended in a
+    question, so it was discarded.
+  - Cause: de205b61's own discard rule threw away the teaching with the question.
+  - a96b53fb (class B) now drops only the question sentences. Live verification pending.
+    It needs a turn where the cut fires again.
 
 ### R2. Feedback attributed to the previous question (CL-16)
 
@@ -310,3 +320,14 @@ Fix class:
 - **Previous:** Physics Verifier batches (ec42ca39 and others) touch LaTeX detection. They do not
   touch rendering.
 - **This cycle:** recorded, not fixed. HISTORICAL STATUS of a rendering fix: UNKNOWN.
+
+### R11. Completing turn: stored row ≠ delivered text (CL-29)
+
+- **Previous fix:** 5095de4c (2026-08-02) replaced the completing turn's outgoing text with the
+  close.
+  - Then and now, the assistant row is written before completion is known, so that fix covered
+    the response only.
+  - Regression test then: `lessonCompletionFinality.test.ts`. It pins the response replacement
+    and never the row.
+- **This cycle:** 93f4d95e (class B, completing the earlier fix), with
+  `completingTurnStoredRowMatchesClose.test.ts`. Production-verified 2026-10-02.
