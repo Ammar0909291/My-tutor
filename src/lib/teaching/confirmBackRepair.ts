@@ -51,14 +51,20 @@ export interface RepairContext {
   correctOption: string | null
   /** A question card is rendered right after the reply (the turn's MCQ). */
   questionFollows?: boolean
+  /** What the clean-up removed: a confirm-back (default) or a question cut
+   *  beside the card by the gate contract. */
+  cause?: 'confirm-back' | 'question-cut'
 }
 
 /** The one instruction the regeneration carries. */
 export function buildConfirmBackRepairAppendix(ctx: RepairContext): string {
-  const head =
-    '\n\nOUTPUT REJECTED (server-side check). Your reply only restated the ' +
-    "learner's words and asked them to confirm. The learner gets nothing from " +
-    'that. Do NOT restate what they said and do NOT ask "is that right?". '
+  const head = ctx.cause === 'question-cut'
+    ? '\n\nOUTPUT REJECTED (server-side check). Your reply was only a question, ' +
+      'and a question card is already shown to the learner, so your question was ' +
+      'removed and they got nothing. Teach instead. '
+    : '\n\nOUTPUT REJECTED (server-side check). Your reply only restated the ' +
+      "learner's words and asked them to confirm. The learner gets nothing from " +
+      'that. Do NOT restate what they said and do NOT ask "is that right?". '
   let task: string
   if (ctx.graded && ctx.graded.correct === false && ctx.chosenOption && ctx.correctOption) {
     task =
@@ -91,4 +97,33 @@ export function mergeRepair(strippedText: string, retryText: string): string {
   const retry = (retryText ?? '').replace(CORRECTION_LINE, '').trim()
   if (!retry) return strippedText
   return line ? `${line}\n\n${retry}` : retry
+}
+
+/** A line the model wrote as an answer option of its own: "A) …", "B. …". */
+const OPTION_LINE = /^\s*(?:[A-D][).:]|\([A-D]\))\s/
+
+/**
+ * The reply without its question sentences and home-made option lines.
+ *
+ * MEASURED (2026-10-02, chem.found.pure-substances): the one regeneration was
+ * 496 chars of teaching that ended in a question. Beside a question card that
+ * question cannot ship, and discarding the whole retry left the learner a
+ * stub. Only the sentences carrying "?" go; the teaching stays.
+ */
+export function dropQuestionSentences(text: string): string {
+  if (!/\?/.test(text ?? '')) return text
+  return (text ?? '')
+    .split(/\n{2,}/)
+    .map((para) => para
+      .split('\n')
+      .filter((line) => !OPTION_LINE.test(line))
+      .map((line) => (line.match(/[^.!?]+(?:[.!?]+|$)/g) ?? [])
+        .filter((sentence) => !sentence.includes('?'))
+        .join('')
+        .trim())
+      .filter(Boolean)
+      .join('\n'))
+    .filter(Boolean)
+    .join('\n\n')
+    .trim()
 }

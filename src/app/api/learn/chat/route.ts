@@ -10403,7 +10403,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // concept-fallback line. Returns null when no repair was made; the
       // callers' existing fallbacks then apply unchanged. See confirmBackRepair.ts.
       const repairStubReply = async (stub: string, source: string): Promise<string | null> => {
-        const { needsRepair, buildConfirmBackRepairAppendix, mergeRepair } = await import('@/lib/teaching/confirmBackRepair')
+        const { needsRepair, buildConfirmBackRepairAppendix, mergeRepair, dropQuestionSentences } = await import('@/lib/teaching/confirmBackRepair')
         if (!needsRepair(stub) || serveLessonComplete) return null
         try {
           const { stripConfirmBack } = await import('@/lib/teaching/attributionGuard')
@@ -10411,6 +10411,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           const chosenIdx = mcqGradeHoisted?.chosenIndex
           const appendix = buildConfirmBackRepairAppendix({
             questionFollows: mcqHoisted !== null,
+            cause: source === 'gate-contract' ? 'question-cut' : 'confirm-back',
             graded: gradeForVerdict,
             chosenOption: Array.isArray(opts) && typeof chosenIdx === 'number' ? opts[chosenIdx] ?? null : null,
             correctOption: Array.isArray(opts) && typeof pendingMcqHoisted?.correctIndex === 'number' ? opts[pendingMcqHoisted.correctIndex] ?? null : null,
@@ -10435,8 +10436,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             }).text
           } catch { /* optional backstop */ }
           // A question card follows: a repair that asks its own question is
-          // the two-questions-at-once shape the cut existed to prevent.
-          if (mcqHoisted !== null && /\?/.test(retryText)) {
+          // the two-questions-at-once shape the cut existed to prevent. Its
+          // question sentences go and its teaching stays; only a retry that
+          // was nothing but questions is discarded.
+          if (mcqHoisted !== null && /\?/.test(retryText)) retryText = dropQuestionSentences(retryText)
+          if (mcqHoisted !== null && (/\?/.test(retryText) || needsRepair(retryText))) {
             console.log('[stub-repair] ' + JSON.stringify({ source, repaired: false, reason: 'repair-asked-a-question-beside-the-card' }))
             return null
           }
