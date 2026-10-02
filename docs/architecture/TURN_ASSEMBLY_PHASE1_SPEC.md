@@ -408,3 +408,24 @@ numbers.
   - fallback 7/88 (8%), every one traced to a since-fixed cause.
   - Under the fixes in place by the fifth window, the only fallback was the V6 false positive now
     fixed: 1/42.
+
+### 11.7 Sixth window (2026-10-02 15:43–15:52, deploy `802066f3`: all fixes incl. strict V6; chemistry atomic structure)
+
+- **Volume:** 10 lines on this deployment: 7 parsed, 3 cut by the log viewer. Other lines of the
+  16-turn run landed on warm instances of earlier deploys.
+- **Results:**
+
+  | Measure | Result |
+  | --- | --- |
+  | `completionAgreement` | 7/7 |
+  | Fallback / regenerated | 0 / 0 |
+  | Assembled K1 / K2 | 0 / 0 |
+  | `waitedMs` max | 1 ms |
+
+- **Log-line size:** cut lines were 30% of this window. Served and assembled text in the log are
+  now 700 characters each (was 1,200), so lines stay parseable.
+- **Cumulative:**
+  - 95 parsed graded turns;
+  - `completionAgreement` 95/95;
+  - assembled K2 0.
+  - Since the last fix set, `waitedMs` max is 1 ms.
