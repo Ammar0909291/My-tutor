@@ -6027,7 +6027,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               correctIndex: pendingMcqHoisted.correctIndex,
               correct: mcqGradeHoisted.correct,
               rationales: pendingMcqHoisted.rationales,
-              earlierOptions: ta.optionsFromHistory(historyMessages.filter((m) => m.role === 'assistant').map((m) => m.content)),
+              earlierOptions: ta.previousCardOptions(historyMessages.filter((m) => m.role === 'assistant').map((m) => m.content)),
             }
             const startedAt = Date.now()
             // NO CONVERSATION HISTORY. Measured in shadow (2026-10-02, physics
@@ -13277,7 +13277,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               provider: r.provider, ms: r.ms, error: r.error, attempts: r.attempts,
               completionAgreement,
               // Why a parse failed is otherwise invisible. Model text only.
-              ...(parsed ? {} : { rawOnFailure: r.raw.slice(0, 600) }),
+              ...(codes.length > 0 ? { rawOnFailure: r.raw.slice(0, 600) } : {}),
               codes, fallback: used.fallback,
               completion: lessonCompletionHoisted !== null, cardAttached: mcqHoisted !== null,
               live: ta.turnChecks(cleanText, mcqHoisted !== null),

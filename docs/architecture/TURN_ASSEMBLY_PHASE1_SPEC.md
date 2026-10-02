@@ -322,3 +322,34 @@ numbers.
   high regeneration rate.
 - **Fix (next commit):** the slot call sends no history, only one instruction. Every fact the
   slots need is already in its system prompt. Needs a third sample to confirm.
+
+### 11.4 Third sample (2026-10-02 14:33, biology, deploy `6e2d984b`, no-history slot call)
+
+- **Volume:** 16 graded taps over 4 lessons. All 16 lines parsed, none truncated.
+- **Results:**
+
+  | Measure | Result |
+  | --- | --- |
+  | `completionAgreement` | 16/16 |
+  | Parse failures | **0** (2 per sample before) |
+  | Regenerated | 4/16 (25%; was 40%) |
+  | Fallback | 2/16 (12.5%) |
+  | Assembled K1 / K2 | 1 / 0 |
+  | Shadow call p50 / max | 847 / 1,658 ms |
+
+- **The no-history fix worked for parsing.** Every remaining failure was V5.
+- **Two defects found and fixed (next commit):**
+  1. **The fallback taught a misconception.** On a wrong answer it rejoined the chosen
+     distractor to its own authored continuation: "Fungi and plants are in the same kingdom —
+     fungi are simply non-green plants." That would have been stated as fact. Now a wrong
+     answer gets no fallback feedback, and the verdict line already carries the correct answer
+     and its authored why.
+  2. **V5 was too broad.** It checked every earlier card's options, and cards in one lesson
+     share the concept's vocabulary. Now only the card shown before the graded one is checked,
+     which is exactly the R2 defect. Failed slot text is now logged too (`rawOnFailure` on any
+     code).
+- **Cumulative over the three samples:**
+  - 48 graded turns, 46 parsed;
+  - `completionAgreement` 46/46;
+  - assembled K2 0;
+  - fallback 6/46 (13%), from three causes that are now fixed but not yet re-measured.
