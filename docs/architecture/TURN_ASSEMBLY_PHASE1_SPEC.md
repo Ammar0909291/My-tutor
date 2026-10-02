@@ -474,3 +474,26 @@ numbers.
   | `completionAgreement` 100% | met so far |
   | Latency | no added wait |
   | Owner hand-read of 30 pairs | pending; pairs file ready, predates the last fixes |
+
+### 11.10 Windows 10–11 (2026-10-02 16:51–17:27, deploys `4c1ada8a` / `a412642a`)
+
+- **Window 10 (physics rotational mechanics):**
+  - 10 lines read (2 returned inline, 8 from file), 10/10 clean, `waitedMs` 0–1 ms.
+  - A telling pair on a wrong answer about rotational KE:
+    - **served** drifted into torque from the on-screen figure ("τ = r F sin θ … pick the one
+      that correctly describes how the torque is calculated");
+    - **assembled** explained why ½mv² misses rotation and worked ½Iω² = 4.5 J.
+- **Window 11 (mathematics, foundations + conditional probability):**
+  - 10/10 clean.
+  - Slot call max 2.8 s; `waitedMs` still 0, because the main turn was slower.
+  - The English window between them could not be fetched (log query timed out), so it is not
+    counted.
+- **Sampler incident:** an English run killed by an outer `timeout` skipped its cleanup and left
+  one disposable `qa-shadow-sample` account. Read-only check: exactly one, created 17:01:17.
+  - It is not deleted here: that would be a production write outside the app's deletion path;
+    owner's call.
+  - Fixed in `a412642a`: an internal time budget, plus SIGTERM/SIGINT cleanup.
+- **Cumulative:**
+  - **166 parsed graded turns, `completionAgreement` 166/166**, assembled K2 0;
+  - since all fixes: **78/78 clean, 0 fallback**;
+  - `waitedMs` max 1 ms.
