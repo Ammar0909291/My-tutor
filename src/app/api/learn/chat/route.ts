@@ -2179,7 +2179,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     } | null = null
     let turnAssemblyShadowHoisted: Promise<{
       facts: import('@/lib/teaching/turnAssembly').GradedTurnFacts
-      raw: string; provider: string | null; ms: number; error: string | null
+      raw: string; provider: string | null; ms: number; error: string | null; attempts: number
     }> | null = null
     let arbitrationWasSoleBlockerHoisted = false
     let turnProgressHoisted: {
@@ -6032,18 +6032,33 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             const startedAt = Date.now()
             const recent = historyMessages.slice(-4).map(({ role, content }) => ({ role, content }))
             turnAssemblyShadowHoisted = (async () => {
+              // Spec §4: one regeneration, naming what failed. Both attempts go
+              // through this one call site. The second attempt's increment can
+              // land after the row is written, so `attempts` is logged as well.
+              let raw = ''
+              let provider: string | null = null
+              let codes: string[] = []
+              let attempts = 0
               try {
-                llmCallCount++ // a real provider call, counted like every other (shadow only)
-              const routed = await routeAI(
-                  [...recent, { role: 'user' as const, content: message }],
-                  ta.buildSlotSystemPrompt(facts),
-                  country, 700, teachingLang,
-                  { userId, subject: learnSession.subject.slug },
-                  groqModelOverride, undefined, forceProvider,
-                )
-                return { facts, raw: routed.text ?? '', provider: routed.provider ?? null, ms: Date.now() - startedAt, error: null }
+                for (let attempt = 0; attempt < 2; attempt++) {
+                  attempts++
+                  llmCallCount++ // a real provider call, counted like every other (shadow only)
+                  const routed = await routeAI(
+                    [...recent, { role: 'user' as const, content: message }],
+                    ta.buildSlotSystemPrompt(facts) + (attempt === 0 ? '' : ta.retryInstruction(codes)),
+                    country, 700, teachingLang,
+                    { userId, subject: learnSession.subject.slug },
+                    groqModelOverride, undefined, forceProvider,
+                  )
+                  raw = routed.text ?? ''
+                  provider = routed.provider ?? null
+                  const parsed = ta.parseSlots(raw)
+                  codes = parsed ? ta.validateSlots(parsed, facts) : ['V1-unparseable']
+                  if (codes.length === 0) break
+                }
+                return { facts, raw, provider, ms: Date.now() - startedAt, error: null, attempts }
               } catch (err) {
-                return { facts, raw: '', provider: null, ms: Date.now() - startedAt, error: err instanceof Error ? err.message : String(err) }
+                return { facts, raw, provider, ms: Date.now() - startedAt, error: err instanceof Error ? err.message : String(err), attempts }
               }
             })()
           }
@@ -13221,7 +13236,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             console.log('[assembled-turn] ' + JSON.stringify({ conceptId: resolvedConceptId ?? null, event: 'timeout' }))
           } else {
             const parsed = ta.parseSlots(r.raw)
-            const codes = r.error ? ['V0-provider-error'] : parsed ? ta.validateSlots(parsed, r.facts) : ['V1-unparseable']
+            const codes = r.error && !r.raw ? ['V0-provider-error'] : parsed ? ta.validateSlots(parsed, r.facts) : ['V1-unparseable']
             const used = ta.usableSlots(parsed, codes, r.facts)
             const probe = { question: r.facts.question, options: r.facts.options, correctIndex: r.facts.correctIndex, rationales: r.facts.rationales }
             const verdictLine = r.facts.correct
@@ -13254,7 +13269,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             }
             console.log('[assembled-turn] ' + JSON.stringify({
               conceptId: resolvedConceptId ?? null,
-              provider: r.provider, ms: r.ms, error: r.error,
+              provider: r.provider, ms: r.ms, error: r.error, attempts: r.attempts,
               completionAgreement,
               codes, fallback: used.fallback,
               completion: lessonCompletionHoisted !== null, cardAttached: mcqHoisted !== null,

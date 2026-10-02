@@ -6,7 +6,7 @@
 import { describe, it, expect } from 'vitest'
 import {
   turnAssemblyMode, shadowSampled, buildSlotSystemPrompt, parseSlots, validateSlots,
-  usableSlots, assembleGradedTurn, optionsFromHistory, turnChecks, type GradedTurnFacts,
+  usableSlots, assembleGradedTurn, optionsFromHistory, turnChecks, retryInstruction, type GradedTurnFacts,
 } from '@/lib/teaching/turnAssembly'
 
 const RIGHT: GradedTurnFacts = {
@@ -117,5 +117,14 @@ describe('helpers', () => {
   it('the Phase-0 checks flag the production stub and the question beside a card', () => {
     expect(turnChecks("That's right.", false).k1Stub).toBe(true)
     expect(turnChecks('What do you expect the formal charge to be?', true).k2QuestionBesideCard).toBe(true)
+  })
+})
+
+describe('the one regeneration (spec §4)', () => {
+  it('names each failed rule once', () => {
+    const r = retryInstruction(['V2-feedback-question', 'V2-teaching-question', 'V5-feedback-earlier-item'])
+    expect(r).toMatch(/question or a question mark/)
+    expect(r).toMatch(/another question's answer/)
+    expect(r.match(/question mark/g)).toHaveLength(1)
   })
 })

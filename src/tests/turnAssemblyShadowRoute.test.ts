@@ -67,3 +67,28 @@ describe('shadow mode leaves the served reply untouched', () => {
     expect(logged.completionAgreement).toBe(true)
   }, 180_000)
 })
+
+describe('spec §4: one regeneration when a slot fails', () => {
+  it('a question in the first reply is rejected, the second reply is used', async () => {
+    let calls = 0
+    h.routeAI = async (...args: unknown[]) => {
+      const sys = String(args[1] ?? '')
+      if (sys.includes('Return ONLY a JSON object')) {
+        calls++
+        const bad = JSON.stringify({ feedback: 'Momentum is conserved here. Can you say why that is true for every collision?', teaching: null })
+        return { text: sys.includes('YOUR PREVIOUS ANSWER WAS REJECTED') ? SLOTS : bad, provider: 'harness', finishReason: 'stop' }
+      }
+      return baseRouteAI(...args)
+    }
+    process.env.TURN_ASSEMBLY_MODE = 'shadow'
+    const t = await gradedTap()
+    expect(t).not.toBeNull()
+    const line = t!.logs.find((l) => l.includes('[assembled-turn]'))!
+    const logged = JSON.parse(line.slice(line.indexOf('{')))
+    expect(logged.attempts).toBe(2)
+    expect(logged.codes).toEqual([])
+    expect(logged.fallback).toBe(false)
+    expect(logged.assembledText).not.toContain('?')
+    expect(calls).toBeGreaterThanOrEqual(2)
+  }, 180_000)
+})

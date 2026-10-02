@@ -221,8 +221,13 @@ numbers.
   - `src/tests/turnAssembly.test.ts`: every code, using production drafts.
   - `src/tests/turnAssemblyShadowRoute.test.ts`: a graded tap in shadow mode serves byte-identical
     text to mode off, and logs `[assembled-turn]`.
-- **No regeneration in shadow.** A failed slot goes straight to the fallback. The logged fallback
-  rate is therefore an **upper bound** on what serve mode, which regenerates once, would see.
+- **One regeneration, as §4 specifies (added 2026-10-02, after the first shadow deploy).** A
+  failed slot gets one retry naming the failed rule (`retryInstruction`), through the same call
+  site.
+  - `[assembled-turn]` logs `attempts` (1 or 2), so the logged fallback rate is now the rate
+    serve mode would see.
+  - The second attempt's `llmCallCount` increment can land after the message row is written, so
+    `attempts` in the log is the authoritative count of shadow calls.
 - **Completion comes from the end of the turn, not an early fold.** Shadow reads
   `lessonCompletionHoisted` after the turn has finalised. §2's early fold is **not built**, and
   its agreement is **not measured** yet. It must be built and measured before serve.

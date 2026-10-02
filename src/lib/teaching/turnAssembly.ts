@@ -188,3 +188,19 @@ export function optionsFromHistory(contents: string[]): string[] {
 export function turnChecks(prose: string, cardAttached: boolean): { k1Stub: boolean; k2QuestionBesideCard: boolean } {
   return { k1Stub: words(prose ?? '') < 12, k2QuestionBesideCard: cardAttached && /\?/.test(prose ?? '') }
 }
+
+const CODE_REASON: Record<string, string> = {
+  V1: 'it was not the agreed JSON object with the keys "feedback" and "teaching"',
+  V2: 'it contained a question or a question mark',
+  V3: 'it contained answer options',
+  V4: 'the feedback was missing, too short or too long',
+  V5: "it mentioned another question's answer",
+  V6: "its verdict contradicted the server's grade",
+}
+
+/** The one regeneration's instruction (spec §4), naming what failed. */
+export function retryInstruction(codes: string[]): string {
+  const reasons = [...new Set(codes.map((c) => CODE_REASON[c.slice(0, 2)]).filter(Boolean))]
+  return '\n\nYOUR PREVIOUS ANSWER WAS REJECTED because ' + (reasons.join('; ') || 'it failed validation') +
+    '. Return the JSON object again, following every rule above.'
+}
