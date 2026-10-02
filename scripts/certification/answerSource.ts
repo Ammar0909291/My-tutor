@@ -34,8 +34,10 @@
  * `question = stripAuthoringLabel(probe.stem)` and
  * `options = choices.map(c => c.text.trim())`, IN AUTHORED ORDER, and refuses
  * any probe that does not have exactly one `isCorrect` choice. So the served
- * question is a pure function of the authored stem, and this module reuses the
- * real `stripAuthoringLabel` rather than reimplementing it.
+ * question is a pure function of the authored stem, and this module calls the
+ * real `probeToMcq` rather than reimplementing any of it — the served question,
+ * the served answer head and the admission rules all come from that one
+ * function, so the index cannot drift from what production shows.
  *
  * MEASURED on the corpus production is actually seeded from (physics +
  * chemistry, 2026-09-03): 2,239 gradeable closed-choice probes, 2,239 DISTINCT
@@ -51,7 +53,7 @@
  * concept UNMEASURED — never a product failure, never a guess.
  */
 
-import { stripAuthoringLabel } from '../../src/lib/teaching/gateProbeContract'
+import { probeToMcq } from '../../src/lib/teaching/gateAssessment'
 
 /** The learner-visible projection of a served probe — all the harness gets. */
 export interface ServedMcq {
@@ -109,29 +111,45 @@ export interface CorpusProbe {
 /**
  * Load the authored probe corpus.
  *
- * The module list is deliberately the SAME list `src/instrumentation.ts`'s
- * cold-start bootstrap assembles, because that bootstrap is what actually
- * writes production's ACTIVE probes. Adding a module here that production is
- * not seeded from would let the harness answer a question production cannot
- * serve; omitting one would make answerable probes look UNMEASURED.
+ * The corpus is EVERY seed content module under src/lib/teaching/assets/ —
+ * which is exactly the set `src/instrumentation.ts`'s cold-start bootstrap
+ * imports, because `seedCorpusCoverageRatchet.test.ts` fails CI whenever a
+ * content module on disk is missing from the bootstrap. Adding a module here
+ * that production is not seeded from would let the harness answer a question
+ * production cannot serve; omitting one would make answerable probes look
+ * UNMEASURED.
+ *
+ * MEASURED 2026-10-02: this used to be a hand-written list of six modules
+ * (brain, authored, chemistry, physics band-gap, physics depth, chemistry
+ * depth). Every one of the ~100 `mathematics*Assets.ts` batch modules the
+ * bootstrap serves was absent, so `certify.ts` reported 908-concept
+ * mathematics as UNMEASURED-no-authored-match on the first served probe
+ * (math.found.set-theory, 3 turns) — the instrument, not the product.
+ *
+ * A module is classified by the SHAPE of its exported arrays (a probe carries
+ * `probeKind`), never by the const's name — the same runtime rule
+ * `scripts/assets/contract-audit.ts` uses, for the same reason: names such as
+ * `ENGLISH_PROBE_BATCH_2` do not follow one convention. A probe exported from
+ * two places is harmless: identical stem and answer is a duplicate, not a
+ * collision (see indexFrom).
  */
 async function loadCorpus(): Promise<CorpusProbe[]> {
-  const [brain, authored, chem, physBand, physDepth, chemDepth] = await Promise.all([
-    import('../../src/lib/teaching/assets/brainSeedAssets'),
-    import('../../src/lib/teaching/assets/authoredSeedAssets'),
-    import('../../src/lib/teaching/assets/chemistrySeedAssets'),
-    import('../../src/lib/teaching/assets/physicsBandGapAssets'),
-    import('../../src/lib/teaching/assets/physicsDepthSeedAssets'),
-    import('../../src/lib/teaching/assets/chemistryDepthSeedAssets'),
-  ])
-  return [
-    ...(brain as unknown as { SEED_PROBES: CorpusProbe[] }).SEED_PROBES,
-    ...(authored as unknown as { AUTHORED_PROBES: CorpusProbe[] }).AUTHORED_PROBES,
-    ...(chem as unknown as { CHEMISTRY_PROBES: CorpusProbe[] }).CHEMISTRY_PROBES,
-    ...(physBand as unknown as { PHYSICS_BAND_GAP_PROBES: CorpusProbe[] }).PHYSICS_BAND_GAP_PROBES,
-    ...(physDepth as unknown as { PHYSICS_DEPTH_PROBES: CorpusProbe[] }).PHYSICS_DEPTH_PROBES,
-    ...(chemDepth as unknown as { CHEMISTRY_DEPTH_PROBES: CorpusProbe[] }).CHEMISTRY_DEPTH_PROBES,
-  ]
+  const { readdirSync } = await import('node:fs')
+  const path = await import('node:path')
+  const dir = path.join(__dirname, '..', '..', 'src', 'lib', 'teaching', 'assets')
+  const files = readdirSync(dir).filter((f) => f.endsWith('.ts') && !f.endsWith('.test.ts')).sort()
+  const out: CorpusProbe[] = []
+  for (const f of files) {
+    const mod = (await import(path.join(dir, f))) as Record<string, unknown>
+    for (const value of Object.values(mod)) {
+      if (!Array.isArray(value) || value.length === 0) continue
+      const first = value[0] as { probeKind?: unknown } | null
+      if (first && typeof first === 'object' && typeof first.probeKind === 'string') {
+        out.push(...(value as CorpusProbe[]))
+      }
+    }
+  }
+  return out
 }
 
 /**
@@ -144,18 +162,26 @@ export function indexFrom(probes: readonly CorpusProbe[]): AnswerIndex {
   let collisions = 0
 
   for (const p of probes) {
-    // The same admission rules probeToMcq applies. A probe it would refuse is
-    // a probe production can never serve, so indexing it would only create
-    // phantom answers.
-    const choices = p.choices
-    if (!Array.isArray(choices) || choices.length < 2 || choices.length > 4) continue
-    const correct = choices.filter((c) => c?.isCorrect === true)
-    if (correct.length !== 1) continue
-    const options = choices.map((c) => (typeof c?.text === 'string' ? c.text.trim() : ''))
-    if (options.some((o) => o.length === 0)) continue
-    const question = normaliseQuestion(stripAuthoringLabel(p.stem ?? ''))
+    // probeToMcq ITSELF, not a copy of its rules. A probe it refuses is a probe
+    // production can never serve, so indexing it would only create phantom
+    // answers; and the answer recorded is the option it actually SERVES.
+    // MEASURED 2026-10-02: a re-implemented copy indexed the full choice text,
+    // while probeToMcq (2026-09-30) serves only the answer head before " — "
+    // ("\"An honest mistake\"", not "\"An honest mistake\" — the h is silent…"),
+    // so every such probe resolved to options-mismatch — 16 whole English
+    // modules unanswerable.
+    if (typeof p.stem !== 'string' || !Array.isArray(p.choices)) continue
+    const projected = probeToMcq({
+      stem: p.stem,
+      choices: p.choices as Array<{ text: string; isCorrect: boolean }>,
+      ...(p.conceptId ? { conceptId: p.conceptId } : {}),
+    })
+    if (!projected) continue
+    const question = normaliseQuestion(projected.question)
     if (!question) continue
-    const correctText = (correct[0].text ?? '').trim()
+    // The AUTHORED projection's key, computed here from the corpus — never a
+    // response's (the client payload carries no correctIndex at all).
+    const correctText = (projected.options[projected.correctIndex] ?? '').trim()
     if (!correctText) continue
 
     usable++
@@ -214,8 +240,12 @@ function fingerprintOf(keys: readonly string[], probes: number): string {
   return `probes:${probes}:h${h.toString(16)}`
 }
 
+// The corpus is static for the life of a process, and loading it imports every
+// module in the assets directory (~150 files), so it is loaded once.
+let corpus: Promise<CorpusProbe[]> | null = null
+
 export async function buildAnswerIndex(): Promise<AnswerIndex> {
-  return indexFrom(await loadCorpus())
+  return indexFrom(await (corpus ??= loadCorpus()))
 }
 
 /**

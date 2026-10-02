@@ -94,3 +94,73 @@
   refuses the engineering account by construction.
 
 
+
+## 2026-10-02 — Mathematics production-readiness loop (all layers re-measured, 2 defects fixed)
+
+Owner instruction: "MATHEMATICS AUTONOMOUS COMPLETION LOOP" (Mathematics only). Starting SHA
+`6e2d984b`. Every number below was measured this session, not carried forward.
+
+**Static layers (no defects found).**
+- KG: `scripts/validate-knowledge-graph.ts docs/mathematics/kg/graph.json` PASS — 908 concepts,
+  0 duplicate ids, 0 broken edges, 0 cycles, 908/908 reachable from the single root, 0 warnings.
+- `scripts/math/state.ts`: KG 908/908, Blueprints 908/908, EB 908/908, 24/24 domains, 0 orphan
+  Blueprints, 0 orphan EB entries. (Its "serving source extract/author/neither" split is a
+  historical Blueprint-prose classification, not a gap — all 908 now carry authored assets.)
+- `scripts/assets/contract-audit.ts --subject mathematics`: 908/908 concepts authored, 917/917
+  (concept, band) pairs at contract, 0 short, 0 never-quizzable.
+- Educational Package determinism: 908/908 `math.*` packages `--check OK`.
+- Placeholder scan of EB/Blueprints/asset files: every hit was mathematical prose ("placeholder
+  zero", "dummy variable"), none a stub.
+
+**Production convergence (verified against the live database, read-only).**
+Seed corpus = 961 explanations + 2,752 probes (3,713 slugs, 0 duplicate identities). Production
+ACTIVE math rows = 961 EXPLANATION (908 concepts / 917 pairs) + 2,752 PROBE (908 / 917).
+Order-independent md5 aggregates over `slug=md5(content)`, `slug=md5(stem)` and
+`slug=md5(choices text:isCorrect)` are byte-identical between the corpus and production, so no
+stale content. 0 hollow identities. Production curriculum endpoint: 908 lessons, 1:1 with the KG,
+0 non-math slugs. (The bootstrap is create-only — a future content EDIT to an existing slug will
+NOT reach production by itself; re-run this aggregate comparison after any such edit.)
+
+**Defect 1 — the certification instrument could not answer mathematics (harness, fixed).**
+`scripts/certification/answerSource.ts` loaded a hand-written list of six corpus modules
+(brain/authored/chemistry/physics), none of the ~100 `mathematics*Assets.ts` modules the bootstrap
+serves. `certify.ts` therefore reported `UNMEASURED-no-authored-match` on the first served probe
+(math.found.set-theory). Fixed: the corpus is now every content module on disk (the set
+`seedCorpusCoverageRatchet.test.ts` proves the bootstrap imports). A second staleness in the same
+file: it re-implemented `probeToMcq`'s rules and indexed the FULL choice text, while `probeToMcq`
+(2026-09-30) serves only the answer head before " — " — 16 English modules were wholly
+`options-mismatch`. Fixed by calling the real `probeToMcq` for admission, question and answer
+head. Index now: 7,414 probes, 7,406 answerable stems; mathematics 2,748/2,752 resolvable. The 4
+are two cross-concept duplicate stems with different correct wording ("What is 7⁰?" in
+math.arith.exponentiation + math.alg.zero-exponent; "A circle has diameter 10…" in math.geom.circle
++ math.geom.circle-parts) — harmless to learners (grading is per pending probe), recorded only.
+Regression: `certificationAnswerSource.test.ts` "answers a probe from every content module on
+disk" (fails on the old loader, listing the mathematics modules).
+
+**Production runtime certification — 12/12 PASS** (`certify.ts`, D1–D6, disposable
+`qa-math-runtime-*@mytutor-qa.invalid`, deleted afterwards): math.found.set-theory,
+math.arith.fraction-addition, math.alg.linear-equation-1var, math.alg.factoring,
+math.geom.pythagorean-theorem, math.trig.unit-circle, math.func.composition, math.calc.chain-rule,
+math.linalg.eigenvalues, math.prob.bayes-theorem, math.abst.group-theory, math.de.ode — each
+`verified=true` at TRANSFER (check 1, practice 2) in 6 turns, 0 unmeasured. DB cross-check: 12
+`topic_progress` rows MASTERED/100; 104 asset-linked evidence rows, all EDUCATIONAL_BRAIN_SEED
+assets of the lesson's own concept; 0 non-math evidence; 36/36 PROBE_OUTCOME pass.
+
+**Defect 2 — a correct tap was stored as misconception evidence (runtime, fixed).** The same run
+wrote, on 2 of 12 concepts, PROBE_OUTCOME `pass` AND MISCONCEPTION_DETECTED on one turn, the
+"misconception" being the correct option tapped ("It is multiplied by 3 too",
+"5 — 9 + 16 = 25"). The server grade replaces the model SIGNAL's `correctness`, but its `phrase`
+survived, setting `misconceptionDetectedThisLesson` (read by stance enforcement and the concept
+budget) and persisting a correct answer as misconception evidence (read by authoring feedback and
+analytics). Smallest fix, in the existing grade block of `route.ts`: `phraseRestatesCorrectChoice`
+(mcq.ts) drops the phrase only when the server graded the tap CORRECT and the phrase is that
+option (head, head + working, or a span). Different-words phrases and wrong taps are untouched.
+Regression: `mcqCorrectAnswerPhraseDropped.test.ts` (the two real probes + narrowness + wiring).
+
+**Visual verification (no campaign).** `validate-visualization-coverage.ts`: mathematics exact 17,
+fallback 313, none 578, **incorrect 0**, broken refs 0. 11 legacy `math.*` registry keys match no
+KG concept — already in the warn-only orphan baseline, left untouched. 4 of 12 certified lessons
+served a figure on the opening turn. 3 ACTIVE math VISUAL rows in production.
+
+**Recorded, not changed (outside Mathematics authority):** the create-only bootstrap (see above);
+`eb_asset_identity`/`eb_explanation`/`eb_probe` are empty for every subject (not read for math).
