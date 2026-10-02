@@ -13271,6 +13271,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               conceptId: resolvedConceptId ?? null,
               provider: r.provider, ms: r.ms, error: r.error, attempts: r.attempts,
               completionAgreement,
+              // Why a parse failed is otherwise invisible. Model text only.
+              ...(parsed ? {} : { rawOnFailure: r.raw.slice(0, 600) }),
               codes, fallback: used.fallback,
               completion: lessonCompletionHoisted !== null, cardAttached: mcqHoisted !== null,
               live: ta.turnChecks(cleanText, mcqHoisted !== null),

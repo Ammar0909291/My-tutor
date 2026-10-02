@@ -92,12 +92,18 @@ export function parseSlots(raw: string | null | undefined): TurnSlots | null {
   const match = clean.match(/\{[\s\S]*\}/)
   if (!match) return null
   let obj: unknown
-  try { obj = JSON.parse(match[0]) } catch { return null }
+  try {
+    obj = JSON.parse(match[0])
+  } catch {
+    // A literal line break inside a string is invalid JSON and a common model
+    // slip. Between tokens it is only whitespace, so a space is safe there too.
+    try { obj = JSON.parse(match[0].replace(/\r?\n/g, ' ')) } catch { return null }
+  }
   if (!obj || typeof obj !== 'object' || Array.isArray(obj)) return null
   const o = obj as Record<string, unknown>
   const keys = Object.keys(o)
   if (!keys.includes('feedback') || keys.some((k) => k !== 'feedback' && k !== 'teaching')) return null
-  const str = (v: unknown) => (typeof v === 'string' && v.trim() ? v.trim() : null)
+  const str = (v: unknown) => (typeof v === 'string' && v.trim() ? v.trim().replace(/\s{2,}/g, ' ') : null)
   if (o.feedback !== null && typeof o.feedback !== 'string') return null
   if (o.teaching !== undefined && o.teaching !== null && typeof o.teaching !== 'string') return null
   return { feedback: str(o.feedback), teaching: str(o.teaching) }
@@ -140,8 +146,16 @@ export function validateSlots(s: TurnSlots, f: GradedTurnFacts): string[] {
  * probe carries none — the verdict line then stands alone, with no invented why.
  */
 export function fallbackFeedback(f: GradedTurnFacts): string | null {
-  const r = f.rationales?.[f.correct ? f.correctIndex : f.chosenIndex]?.trim()
-  return r ? r : null
+  const i = f.correct ? f.correctIndex : f.chosenIndex
+  const r = f.rationales?.[i]?.trim()
+  if (!r) return null
+  // Authored rationales are the working AFTER the answer head ("— fixed
+  // composition, one formula"), not sentences. MEASURED in shadow (2026-10-02,
+  // chem.found.pure-substances): served bare, the fallback read as a fragment.
+  // Rejoin it to its option, as the authored choice was written.
+  const head = f.options[i]?.trim()
+  const joined = head ? `${head} — ${r.replace(/^[—–-]\s*/, '')}` : r
+  return /[.!]$/.test(joined) ? joined : `${joined}.`
 }
 
 /** Drop a slot that failed only on its own field; a failing feedback falls back. */

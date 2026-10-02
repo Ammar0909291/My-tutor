@@ -273,3 +273,29 @@ numbers.
 - **Side finding:** a CL-31 gap found in the same run. "Great, let’s see how well you’ve grasped
   the seven base units" (U+2019 apostrophe) sat above a µF card and was not neutralised. Fixed
   in the next commit; the Phase-0 K4 SQL had the same blind spot and now normalises it.
+
+### 11.2 First sample (2026-10-02 13:23, `scripts/qa/shadowSampleRun.ts`, chemistry, disposable account)
+
+- **Volume:** 16 graded taps over 4 lessons (pure-substances, measurement, significant-figures,
+  mole-concept). 16 `[assembled-turn]` lines: 15 parsed, and 1 truncated by the log viewer.
+  5 lines came from a warm instance of the previous deploy, so they carry no `attempts`.
+- **Of the 15 parsed:**
+
+  | Measure | Result |
+  | --- | --- |
+  | `completionAgreement` | true 15/15 |
+  | Assembled K1 / K2 | 0 / 0 |
+  | Served K1 / K2 | 0 / 1 |
+  | Validation failures | 2, both `V1-unparseable`, both fell back |
+  | Regenerations | 1 attempt on 9 turns, 2 attempts on 1 |
+  | Slowest shadow call | 1,573 ms (the regenerated turn) |
+
+- **Fallback rate:** 2/15 = 13%. That is above the §7 bar of under 10%, on a tiny sample.
+- **Two fixes from this sample:**
+  - The cause of the parse failure is unknown, because raw text was not logged. Now:
+    - `rawOnFailure` is logged;
+    - the parser accepts a literal line break inside a JSON string, the most common model JSON
+      slip. This is unconfirmed as the cause.
+  - The fallback read as a fragment ("fixed composition, one formula"), because authored
+    rationales are the text after the answer head. It is now rejoined: "Carbon dioxide (CO₂) —
+    fixed composition, one formula."

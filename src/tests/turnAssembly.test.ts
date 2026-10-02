@@ -47,6 +47,10 @@ describe('V1 parse', () => {
   it('accepts the agreed JSON, with or without a fence', () => {
     expect(parseSlots('```json\n{"feedback":"x y","teaching":null}\n```')).toEqual({ feedback: 'x y', teaching: null })
   })
+  it('accepts a literal line break inside a string (a common model slip)', () => {
+    expect(parseSlots('{"feedback": "Line one.\nLine two.", "teaching": null}'))
+      .toEqual({ feedback: 'Line one. Line two.', teaching: null })
+  })
   it('rejects prose, extra keys and wrong types', () => {
     expect(parseSlots("That's right. How did you arrive at 2.50 dm³?")).toBeNull()
     expect(parseSlots('{"feedback":"a","teaching":null,"question":"b"}')).toBeNull()
@@ -85,11 +89,15 @@ describe('fallback and assembly', () => {
   it('a failed feedback falls back to the authored working for the chosen option', () => {
     const u = usableSlots(null, ['V1-unparseable'], WRONG)
     expect(u.fallback).toBe(true)
-    expect(u.slots.feedback).toBe('just moving the decimal three places converts only one step')
+    expect(u.slots.feedback).toBe('25 mg — just moving the decimal three places converts only one step.')
   })
   it('no authored working: no invented why', () => {
     const u = usableSlots(null, ['V1-unparseable'], { ...RIGHT, rationales: undefined })
     expect(u.slots.feedback).toBeNull()
+  })
+  it('a rationale fragment is rejoined to its option (shadow finding: "fixed composition, one formula")', () => {
+    const f = { ...RIGHT, options: ['Air', 'Carbon dioxide (CO₂)'], rationales: ['', 'fixed composition, one formula'] }
+    expect(usableSlots(null, ['V1-unparseable'], f).slots.feedback).toBe('Carbon dioxide (CO₂) — fixed composition, one formula.')
   })
   it('a failed teaching slot is dropped, feedback kept', () => {
     const u = usableSlots({ feedback: GOOD, teaching: 'What next?' }, ['V2-teaching-question'], RIGHT)
