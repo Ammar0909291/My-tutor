@@ -51,6 +51,21 @@ it appears to depend only on the stored state plus this turn's grade, and the gr
 before generation. If so, the fold can run before generation, with its result kept for the
 existing end-of-turn write.
 
+**Read, 2026-10-02 — the assumption is FALSE as stated.** The ladder fold (`advanceConversationState`
+with `turnEvidenceForLadder`, `route.ts` ~9680) does take inputs from the model's own reply:
+- `isPriorKnowledgeProbe(cleanText)`;
+- the misconception phrase and signal confidence from the model's tag;
+- the verifier status;
+- filler detection and the teaching-integrity flag;
+- `degradedTurn` (provider).
+
+So completion cannot simply be computed before generation. What still needs establishing is
+whether those inputs ever change closure on a graded turn. Shadow now logs
+`completionAgreement`: the turn re-folded with the text-derived inputs recomputed on the
+assembled text, compared with the real result. Serve stays blocked until that is measured at
+100% over the §7 sample.
+
+Historical note: the paragraph below is the original draft wording.
 **Not verified.** No one has yet read the fold for hidden inputs from later in the turn. Until
 the early fold is shown to give the same answer as the end-of-turn fold on the same turns, it is
 a **shadow-only assumption**. Phase 2 logs both and counts disagreements.

@@ -2170,6 +2170,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     let gateContractStubHoisted: string | null = null
     // TURN ASSEMBLY, Phase 1 — SHADOW (owner G2 2026-10-02). The slot call
     // started after grading; awaited and logged just before the reply.
+    // The ladder fold's inputs, kept on shadowed turns so the assembled text's
+    // effect on lesson completion can be measured (spec §2, §11).
+    let ladderFoldForShadowHoisted: {
+      before: import('@/lib/teaching/conversationState').ConversationState
+      evidence: import('@/lib/teaching/conversationState').TurnEvidence
+      after: import('@/lib/teaching/conversationState').ConversationState
+    } | null = null
     let turnAssemblyShadowHoisted: Promise<{
       facts: import('@/lib/teaching/turnAssembly').GradedTurnFacts
       raw: string; provider: string | null; ms: number; error: string | null
@@ -9740,6 +9747,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               : advanceConversationState(freshLadderBase, turnEvidenceForLadder)
             return { conversationState: rederivedLadder }
           })
+          if (turnAssemblyShadowHoisted && !excursionFrozeLadderThisTurn && conversationStateAfterTurnHoisted) {
+            ladderFoldForShadowHoisted = {
+              before: resolvedConversationState, evidence: turnEvidenceForLadder, after: conversationStateAfterTurnHoisted,
+            }
+          }
 
           // Loop 2: advance narrative state with this turn's evidence
           if (narrativeStateHoisted) {
@@ -13222,9 +13234,28 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               leadIn: mcqHoisted ? neutralLeadInFor(mcqHoisted.question) : null,
               closeText: lessonCompletionHoisted ? cleanText : null,
             })
+            // Would the ASSEMBLED text close the concept exactly when the served
+            // one did? Re-fold with the text-derived inputs recomputed on it.
+            // Spec §2's "decide completion first" rests on this being true.
+            let completionAgreement: boolean | null = null
+            if (ladderFoldForShadowHoisted) {
+              try {
+                const cs = await import('@/lib/teaching/conversationState')
+                const { isConceptClosed } = await import('@/lib/teaching/lessonAttempt')
+                const f = ladderFoldForShadowHoisted
+                const counterfactual = cs.advanceConversationState(f.before, {
+                  ...f.evidence,
+                  isPriorKnowledgeProbe: cs.isPriorKnowledgeProbe(assembled),
+                  fillerTurnDetected: false,
+                  teachingClaimUnresolved: false,
+                })
+                completionAgreement = isConceptClosed(counterfactual) === isConceptClosed(f.after)
+              } catch { completionAgreement = null }
+            }
             console.log('[assembled-turn] ' + JSON.stringify({
               conceptId: resolvedConceptId ?? null,
               provider: r.provider, ms: r.ms, error: r.error,
+              completionAgreement,
               codes, fallback: used.fallback,
               completion: lessonCompletionHoisted !== null, cardAttached: mcqHoisted !== null,
               live: ta.turnChecks(cleanText, mcqHoisted !== null),

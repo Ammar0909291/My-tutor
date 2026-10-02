@@ -62,5 +62,8 @@ describe('shadow mode leaves the served reply untouched', () => {
     expect(logged.assembledText).toMatch(/^(That's right\.|Correct — well done\.|Yes, exactly right\.)\n\n/)
     expect(logged.assembledText).toContain('Momentum is conserved in every collision')
     expect(logged.assembled.k2QuestionBesideCard).toBe(false)
+    // Spec §2: whether the assembled text would close the concept exactly when
+    // the served one did. A plain graded tap at this rung closes nothing either way.
+    expect(logged.completionAgreement).toBe(true)
   }, 180_000)
 })
