@@ -3902,7 +3902,8 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                     </p>
                   )}
                   <ul style={{ fontSize: 14.4, color: 'var(--text-dim)', lineHeight: 1.7, paddingLeft: 18, marginBottom: 18 }}>
-                    {[t('lesson_dialog_progress_saved'), t('lesson_dialog_mastery_saved'), t('lesson_dialog_can_resume')]
+                    {/* "unfinished mastery" is only true of a lesson left unfinished. */}
+                    {[t('lesson_dialog_progress_saved'), ...(isCompletedNow ? [] : [t('lesson_dialog_mastery_saved')]), t('lesson_dialog_can_resume')]
                       .map((line) => <li key={line}>{line}</li>)}
                   </ul>
                   {/* Prerequisites are GUIDANCE, never access control. The
