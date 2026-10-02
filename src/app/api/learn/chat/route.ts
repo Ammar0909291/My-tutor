@@ -9515,7 +9515,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // removed it, and the learner got only "Let me check your thinking
               // with this." or a bare "Not quite — the answer is: X". The stub
               // repair (repairStubReply, below) regenerates once for this stage.
-              if (ungraded.reason === 'stray-question-alongside-mcq') {
+              // LIVE 2026-10-02 (chem.found.measurement): a no-gradeable-probe
+              // cut left a bare "That's right." — the repair was wired for the
+              // stray-question reason only. Every withhold is repaired the same way.
+              if (ungraded.withheld) {
                 const { needsRepair } = await import('@/lib/teaching/confirmBackRepair')
                 // Not on a practice request: "Let me check your thinking with
                 // this." + the quiz IS the answer to "quiz me". Repairing it
@@ -10439,8 +10442,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // the two-questions-at-once shape the cut existed to prevent. Its
           // question sentences go and its teaching stays; only a retry that
           // was nothing but questions is discarded.
-          if (mcqHoisted !== null && /\?/.test(retryText)) retryText = dropQuestionSentences(retryText)
-          if (mcqHoisted !== null && (/\?/.test(retryText) || needsRepair(retryText))) {
+          // The gate-contract cut exists to stop an ungraded question, card or
+          // no card, so its repair may not bring one back either.
+          const noQuestionAllowed = mcqHoisted !== null || source === 'gate-contract'
+          if (noQuestionAllowed && /\?/.test(retryText)) retryText = dropQuestionSentences(retryText)
+          if (noQuestionAllowed && (/\?/.test(retryText) || needsRepair(retryText))) {
             console.log('[stub-repair] ' + JSON.stringify({ source, repaired: false, reason: 'repair-asked-a-question-beside-the-card' }))
             return null
           }

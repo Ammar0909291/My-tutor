@@ -61,7 +61,7 @@ export function buildConfirmBackRepairAppendix(ctx: RepairContext): string {
   const head = ctx.cause === 'question-cut'
     ? '\n\nOUTPUT REJECTED (server-side check). Your reply was only a question, ' +
       'and a question card is already shown to the learner, so your question was ' +
-      'removed and they got nothing. Teach instead. '
+      'removed and they got nothing. Teach instead, and do NOT ask any question. '
     : '\n\nOUTPUT REJECTED (server-side check). Your reply only restated the ' +
       "learner's words and asked them to confirm. The learner gets nothing from " +
       'that. Do NOT restate what they said and do NOT ask "is that right?". '

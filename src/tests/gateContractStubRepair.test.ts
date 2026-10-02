@@ -115,3 +115,56 @@ describe('the repair instruction', () => {
       .not.toContain('do NOT ask a question yourself')
   })
 })
+
+/**
+ * LIVE 2026-10-02 (chem.found.measurement, deploy a96b53fb). A correct tap; the
+ * model wrote "That's right. How did you arrive at 2.50 dm³? Could you walk me
+ * through the steps …?" with no card attached. The cut's reason was
+ * no-gradeable-probe, the repair was wired only for
+ * stray-question-alongside-mcq, and the learner got a bare "That's right.".
+ */
+describe('a no-gradeable-probe cut is repaired too, and the repair adds no question', () => {
+  const POOL = { ...LANE, probes: PROBES.slice(0, 3) }
+  const STRAY = "That's right. How did you arrive at that answer? Could you walk me through the steps you used?"
+
+  // At DEMONSTRATE the gate declines a 3-probe pool (below-guide-no-surplus),
+  // so no card is attached and the cut's reason is no-gradeable-probe.
+  async function noCardCut() {
+    for (let i = 0; i < 8; i++) {
+      h.state.messages = []; h.state.snapshot = {}
+      const res = await driveTurns(h, POST, [
+        { learnerSays: 'ok', modelReplies: 'Momentum is mass times velocity. In a collision the total momentum stays the same.' },
+        { learnerSays: 'ok', modelReplies: STRAY },
+      ], POOL)
+      const t = res[1]
+      if (t.logs.some((l) => l.includes('"reason":"no-gradeable-probe"'))) return t
+    }
+    return null
+  }
+
+  it('the learner gets the repair, not "That\'s right."', async () => {
+    const t = await noCardCut()
+    expect(t, 'the no-gradeable-probe cut never fired').not.toBeNull()
+    expect(mcqOf(t!)).toBeNull()
+    expect(textOf(t!)).toContain('2.2 metres per second')
+    expect(t!.logs.some((l) => l.includes('[stub-repair]') && l.includes('"source":"gate-contract"'))).toBe(true)
+  }, 180_000)
+
+  it('a question in the repair is dropped even with no card, its teaching kept', async () => {
+    h.routeAI = async (...args: unknown[]) => {
+      if (String(args[1] ?? '').includes('OUTPUT REJECTED (server-side check)')) {
+        return { text: REPAIR + ' Can you try the next one the same way?', provider: 'harness', finishReason: 'stop' }
+      }
+      return baseRouteAI(...args)
+    }
+    const t = await noCardCut()
+    expect(t).not.toBeNull()
+    expect(textOf(t!)).toContain('2.2 metres per second')
+    expect(textOf(t!)).not.toContain('Can you try the next one')
+  }, 180_000)
+
+  it('the instruction forbids a question for a question cut even with no card', () => {
+    const a = buildConfirmBackRepairAppendix({ graded: null, chosenOption: null, correctOption: null, cause: 'question-cut' })
+    expect(a).toMatch(/do NOT ask/i)
+  })
+})
