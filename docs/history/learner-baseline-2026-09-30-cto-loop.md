@@ -52,6 +52,9 @@ The sessions ran in Playwright Chromium against https://my-tutor-flame.vercel.ap
 | CL-21 | Found LIVE: the H₂/O₂ item's key head said "2g of H₂ contains more" while its working said "equal". | Seed corrected. The production row needs the owner (see below). | b65684e5 |
 | CL-22 | Found LIVE: a mastered, closed lesson reloaded into a fresh session got the OPENING protocol, and "is this lesson done?" was answered "not quite yet". | The opening block is skipped on a completed lesson. A status question is not new intent, so the close answers it. | e4727f09, 669db565 |
 | CL-23 | Found LIVE (friction): "friction is bigger when the surface area is bigger, right?" put the maths geometry-shapes card on screen (math.geom.surface-area) with no excursion open. The tutor then described arrows that were not drawn. | A cross-subject learner-request target is honoured only when an excursion is actually open. | 47df5e22 |
+| CL-1b | Found LIVE (stoichiometry): the CL-1 repair fired on "quiz me". It invented "the thermite problem I gave earlier" and asked a second question beside the card. | The repair skips practice requests. A repair that asks a question while a card follows is discarded. Verified live: "quiz me" now gets a clean hand-off plus the quiz. | de205b61 |
+| CL-24 | Found LIVE (stoichiometry): "give me another problem" at DEMONSTRATE had its probe declined by the surplus rule, and D1 then served a stored essay with no question. | A practice request with no authored quiz attached is never memory-served. | 92c3e8a8 |
+| CL-16 | Found LIVE (concentration): a correct "No" to the NaOH item got feedback about the previous ppm question (the one-turn-late attribution from the baseline). | On a graded turn the main prompt ends with the answered question and its grade. | 5ba7e62a |
 
 ## Recorded, not fixed (owner decision or out of scope)
 
@@ -62,7 +65,7 @@ The sessions ran in Playwright Chromium against https://my-tutor-flame.vercel.ap
 - **CL-7 — factual slips in feedback.** Examples: "same net force" (P1); a Faraday formula
   without N (P2); a wrong worked answer after a resume (P4). The Physics Verifier is deferred.
 - **CL-11 — LaTeX / `\ce` rendered raw.** Two sessions (S2).
-- **CL-16 — a grade attributed one turn late.** Attribution task.
+- **CL-16 — a grade attributed one turn late.** Fixed in 5ba7e62a (see table).
 - **Other observations:**
   - Language stays too hard after an explicit "simple words" request.
   - Two questions in one turn.
@@ -137,6 +140,8 @@ L, Swing angle and m (kg) are all rendered. P3 showed only L and Swing angle.
 | --- | --- | --- | --- | --- |
 | phys.mech.newtons-third-law | desktop | 8 min | 5 authored, all right | Colours described correctly. |
 | chem.found.mole-concept | phone | 7 min | — | Found CL-18/20/21/22. |
+| chem.found.stoichiometry | phone | not finished | — | Found CL-1b and CL-24. |
+| chem.found.concentration | phone | 7 min | — | Found CL-16. Close recorded: chemistry `[6, 8]`. |
 | phys.mech.friction | desktop | 16 min | 6 authored | Found CL-23. The deliberate miss (40 N vs 20 N static friction) was corrected with its reason and the misconception named. |
 
 CL-23 was verified live on 5c8d576e. The same "surface area" phrase in the Normal Force lesson
