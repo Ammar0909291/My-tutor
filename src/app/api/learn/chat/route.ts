@@ -10564,6 +10564,18 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         }
       }
 
+      // A card is on screen: no "let me know when you'd like another problem".
+      if (mcqHoisted) {
+        try {
+          const { dropDeferredPracticeOffer } = await import('@/lib/teaching/gateAssessment')
+          const trimmed = dropDeferredPracticeOffer(cleanText, true)
+          if (trimmed !== cleanText) {
+            console.log('[mcq] ' + JSON.stringify({ event: 'deferred-practice-offer-dropped', conceptId: resolvedConceptId ?? null }))
+            cleanText = trimmed
+          }
+        } catch { /* a wording repair never breaks a turn */ }
+      }
+
       // AN OPTION'S OWN TEXT REPEATING ITS LETTER LABEL. Measured live
       // (2026-09-20, chem.* Pericyclic Reactions, real account): every option
       // in a model-authored MCQ read "A) A [2+2] cycloaddition...", "B) B

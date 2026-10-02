@@ -1435,6 +1435,28 @@ export function withholdClosingProseQuestion(input: {
 const POINTS_AT_MISSING_OPTIONS =
   /\b(which of the following|of the (?:options|choices) (?:below|above|shown)|(?:pick|choose|select|tap) (?:the )?(?:best|correct|right) (?:answer|option|choice)|which (?:option|choice|answer) you (?:choose|pick|select)|from the (?:options|choices|list) (?:below|above)|the options below)\b/i
 
+/**
+ * "Let me know when you'd like another practice problem" — said beside a quiz
+ * card that is already on screen. MEASURED LIVE 2026-10-02 (chem.found.
+ * concentration, twice; stoichiometry once): the learner is told to ask for a
+ * problem while one is waiting under the message. Only a closing OFFER of
+ * future practice is dropped, and only when a card is attached; teaching is
+ * never touched, and nothing is dropped if it would leave the reply empty.
+ */
+const DEFERS_PRACTICE =
+  /^(?:(?:and|so|now)\s+)?(?:(?:just|please|feel free to)\s+)?(?:let me know|tell me|whenever you(?:'|’)re ready|when you(?:'|’)re ready|if you(?:'|’)d like|if you want)\b[^.!?]{0,90}\b(?:another|more|next|a)\s+(?:[a-z-]+\s+){0,2}(?:problem|question|quiz|check|one)\b[^.!?]{0,40}[.!]?$/i
+
+export function dropDeferredPracticeOffer(text: string, cardAttached: boolean): string {
+  const t = typeof text === 'string' ? text : ''
+  if (!cardAttached || !t.trim()) return t
+  const paragraphs = t.split(/\n{2,}/)
+  const out = paragraphs.map((para) => {
+    const sentences = para.split(/(?<=[.!?])\s+/)
+    return sentences.filter((s) => !DEFERS_PRACTICE.test(s.trim())).join(' ')
+  }).filter((p) => p.trim().length > 0).join('\n\n').trim()
+  return out.length > 0 ? out : t
+}
+
 export function dropSentencesPointingAtMissingOptions(text: string): string {
   const t = typeof text === 'string' ? text : ''
   if (!POINTS_AT_MISSING_OPTIONS.test(t) || containsOptionList(t) || hasProseMultipleChoice(t)) return t
