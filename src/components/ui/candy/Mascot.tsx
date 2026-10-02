@@ -93,7 +93,7 @@ export function CockroachMascot({
             <g transform="translate(604 300)">
               <g className={`${styles.antL} ${styles.pivot}`}>
                 <g transform="translate(-604 -300)">
-                  <path d="M 604 300 C 560 150 470 62 392 60 C 346 58 322 100 324 138" fill="none" stroke="#4A2A18" strokeWidth="10" strokeLinecap="round" />
+                  <path d="M 604 300 C 560 150 470 62 392 60 C 346 58 322 100 324 138" fill="none" stroke="#8A5A36" strokeWidth="10" strokeLinecap="round" />
                   <circle cx="324" cy="138" r="8" fill={SENSOR} />
                 </g>
               </g>
@@ -101,7 +101,7 @@ export function CockroachMascot({
             <g transform="translate(656 300)">
               <g className={`${styles.antR} ${styles.pivot}`}>
                 <g transform="translate(-656 -300)">
-                  <path d="M 656 300 C 700 150 790 62 868 60 C 914 58 938 100 936 138" fill="none" stroke="#4A2A18" strokeWidth="10" strokeLinecap="round" />
+                  <path d="M 656 300 C 700 150 790 62 868 60 C 914 58 938 100 936 138" fill="none" stroke="#8A5A36" strokeWidth="10" strokeLinecap="round" />
                   <circle cx="936" cy="138" r="8" fill={SENSOR} />
                 </g>
               </g>
