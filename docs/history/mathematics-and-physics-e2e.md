@@ -219,3 +219,36 @@ pairs; 626 probes) extend existing ladder slots only — no singleton promoted, 
 "a³ · a²" and "a⁵ / a²" are different questions). `bootstrapLadderSiblingGuard.test.ts`'s fixture
 size ("two rungs per slot", 90) now checks the property per slot, since those 45 ladders gained
 rungs; its real assertions (0 created with the guard, exactly 45 without) are unchanged.
+
+## 2026-10-02 (continued) — probe depth COMPLETE (917/917 pairs at five), lock fix verified, figure-pointer stub fixed
+
+**Probe depth is done.** Every mathematics (concept, band) pair now holds five gradeable probes:
+`contract-audit --subject mathematics --min 5` → **917/917 at contract, 0 short, 0
+never-quizzable**. 1,833 probes in 24 modules (`mathematicsDepth*Assets.ts`, one per domain: arith,
+number theory, foundations, geometry, algebra, calculus, trig, functions, sequences, linear
+algebra, probability, statistics, differential equations, abstract algebra, discrete, complex,
+real, topology, functional analysis, optimization, numerical, graph theory, category, measure),
+all registered in both writers and in `probeInventoryDepth.test.ts`'s `DEPTH_TARGETS`. Every probe
+extends an existing ladder slot at an unused rung (worklist from the live corpus, never a
+singleton promoted); seed dry-run **12,883 items, 0 duplicate identities**. Answers were worked by
+hand; each module header lists the checked computations. Production convergence is gradual: the
+create-only bootstrap adds ~150 rows per cold start (math ACTIVE probes 2,752 → 3,352 by 19:00
+UTC; corpus target 4,585). Re-measure with the probe count query, not this number.
+
+**Lock fix verified in production** (deploy `36bd4626`, weak-learner harness
+`--only=math.geom.pythagorean-theorem,math.trig.unit-circle`, fresh disposable account, deleted):
+pythagorean-theorem reached verified mastery, then unit-circle opened as unit-circle — no
+`activeLessonPersisted === false`, answers graded against unit-circle probes, counters moved. It
+ended one practice answer short: its pool held three probes, so after one miss and one G2 re-ask
+T16–T17 had no question left to serve. That is exactly the depth gap batch 7 closes (unit-circle
+gains two misconception probes).
+
+**Defect 4 — a figure pointer passed for a reply (runtime, fixed, `b3501be2`).** Same run, T17
+(Vercel 19:02:18): the authored pool was spent, the gate contract repaired an announced question
+(76 → 177 chars), the figure pointer was appended (276), then the repeat guard dropped the
+paragraph (→ 97, `emptied: false`). The learner's whole reply to "can you ask me a question?" was
+"Take a look at the figure beside this message — it's a general illustration related to the
+topic." Its 16 words beat the 12-word stub threshold, so neither the regeneration nor the
+empty-reply fallback ran. `splitVisualPointer` (visualAcknowledgement.ts) separates the appended
+pointer; the stub repair and the confirm-back / repeat-guard fallbacks judge the body and re-append
+the pointer. Regression: `stubRepairIgnoresFigurePointer.test.ts`.
