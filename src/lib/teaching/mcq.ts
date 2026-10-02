@@ -1252,11 +1252,19 @@ export function gradeMcqAnswer(
  * Narrow on purpose: true only when the grade is correct AND the phrase is the
  * chosen option (its head, its head plus authored working, or a span of
  * either). A phrase in the learner's own different words is left alone.
+ *
+ * One widening, measured after deploy (math.cat.functor, 2026-10-02): the model
+ * PARAPHRASED the correct option's working ("U discards G's relations" for
+ * "U discards G's specific relations …"). When the learner's message is a pure
+ * tap of that option, the learner wrote nothing else, so a phrase built only
+ * from the option's own words cannot be theirs and is dropped too. A typed
+ * answer with words of its own keeps the exact-span rule only.
  */
 export function phraseRestatesCorrectChoice(
   phrase: string | undefined,
   mcq: TutorMCQ,
   grade: { chosenIndex: number | null; correct: boolean | null } | null,
+  learnerMessage?: string,
 ): boolean {
   if (!phrase || !grade || grade.correct !== true || grade.chosenIndex === null) return false
   const head = mcq.options[grade.chosenIndex]
@@ -1266,7 +1274,11 @@ export function phraseRestatesCorrectChoice(
   if (!p) return false
   const working = mcq.rationales?.[grade.chosenIndex]
   const full = norm(working ? `${head} — ${working}` : head)
-  return p === norm(head) || full.includes(p)
+  if (p === norm(head) || full.includes(p)) return true
+  const m = learnerMessage === undefined ? '' : norm(learnerMessage)
+  if (m !== norm(head) && m !== full) return false
+  const optionWords = new Set(full.split(' '))
+  return p.split(' ').every((w) => optionWords.has(w))
 }
 
 /**

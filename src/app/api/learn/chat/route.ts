@@ -7017,7 +7017,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // Ground truth beats self-report for the phrase too: a correct
             // tap is not misconception evidence (see phraseRestatesCorrectChoice).
             const { phraseRestatesCorrectChoice } = await import('@/lib/teaching/mcq')
-            if (phraseRestatesCorrectChoice(teachingSignal.phrase, pendingMcqHoisted, mcqGradedThisTurn)) {
+            if (phraseRestatesCorrectChoice(teachingSignal.phrase, pendingMcqHoisted, mcqGradedThisTurn, message)) {
               console.log('[mcq-grade] correct-answer-phrase-dropped', { phrase: teachingSignal.phrase?.slice(0, 40) })
               teachingSignal = { ...teachingSignal, phrase: undefined }
             }

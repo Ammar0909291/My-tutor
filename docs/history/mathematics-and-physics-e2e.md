@@ -164,3 +164,17 @@ served a figure on the opening turn. 3 ACTIVE math VISUAL rows in production.
 
 **Recorded, not changed (outside Mathematics authority):** the create-only bootstrap (see above);
 `eb_asset_identity`/`eb_explanation`/`eb_probe` are empty for every subject (not read for math).
+
+**Post-deploy verification (production `7980085e`, CI `validate` green, fresh disposable account):
+15/15 PASS** — math.arith.fraction-addition, math.geom.pythagorean-theorem, math.nt.prime-number,
+math.stats.measures-of-center, math.disc.permutations, math.seq.geometric-sequence,
+math.real.sup-inf, math.cx.cauchy-riemann, math.top.open-sets, math.meas.sigma-algebra,
+math.fnal.banach-space, math.num.newtons-method, math.opt.convex-function,
+math.graph.connectivity, math.cat.functor. With the first run, all 24 mathematics domains have a
+production-certified concept (27 runs, 25 distinct concepts, 27/27 PASS). DB: 15 MASTERED, 93
+asset-linked rows all seed assets of their own concept, 45/45 PROBE_OUTCOME pass, 0 non-math. The
+two Defect-2 cases no longer recur; one new pass-turn misconception row did — "U discards G's
+relations" on math.cat.functor, a PARAPHRASE of the correct option's working, not a span, so the
+narrow rule kept it. Widened minimally: on a pure tap of the correct option (the learner wrote
+nothing else), a phrase built only from that option's own words is dropped too; a typed answer
+with words of its own keeps the exact-span rule (tests in the same file).

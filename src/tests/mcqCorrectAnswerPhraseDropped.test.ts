@@ -18,6 +18,7 @@ import { gradeMcqAnswer, phraseRestatesCorrectChoice, type TutorMCQ } from '@/li
 import { probeToMcq } from '@/lib/teaching/gateAssessment'
 import { MATHEMATICS_ARITH_CLOSE_PROBES } from '@/lib/teaching/assets/mathematicsArithCloseAssets'
 import { MATHEMATICS_TRIANGLE_TRANSFORM_PROBES } from '@/lib/teaching/assets/mathematicsTriangleTransformAssets'
+import { MATHEMATICS_CATEGORY_MORPHISM_PROBES } from '@/lib/teaching/assets/mathematicsCategoryMorphismAssets'
 
 function served(probes: readonly { stem: string; choices?: { text: string; isCorrect: boolean }[]; conceptId: string }[], stem: string): TutorMCQ {
   const p = probes.find((x) => x.stem === stem)
@@ -42,6 +43,33 @@ describe('the two production cases', () => {
     const grade = gradeMcqAnswer(tap, mcq)
     expect(grade.correct).toBe(true)
     expect(phraseRestatesCorrectChoice('5 — 9 + 16 = 25', mcq, grade)).toBe(true)
+  })
+})
+
+describe('post-deploy case: a paraphrase of the tapped correct option', () => {
+  it('math.cat.functor: "U discards G\'s relations" on a pure tap of the correct option is dropped', () => {
+    const mcq = served(MATHEMATICS_CATEGORY_MORPHISM_PROBES,
+      'For a group G, does applying the forgetful functor U then the free functor F recover G — i.e. is F(U(G)) isomorphic to G?')
+    const tap = mcq.options[mcq.correctIndex]
+    const grade = gradeMcqAnswer(tap, mcq)
+    expect(grade.correct).toBe(true)
+    expect(phraseRestatesCorrectChoice("U discards G's relations", mcq, grade, tap)).toBe(true)
+    // Without the tap the exact-span rule alone applies, and a paraphrase is not a span.
+    expect(phraseRestatesCorrectChoice("U discards G's relations", mcq, grade)).toBe(false)
+  })
+
+  it('a typed answer with words of its own keeps a phrase built from option words', () => {
+    const mcq: TutorMCQ = { question: 'q', options: ['No — x is not always positive', 'Yes'], correctIndex: 0 }
+    const typed = 'No, though honestly I still think x is always positive'
+    const grade = gradeMcqAnswer('No — x is not always positive', mcq)
+    expect(grade.correct).toBe(true)
+    expect(phraseRestatesCorrectChoice('x is always positive', mcq, grade, typed)).toBe(false)
+  })
+
+  it('a pure tap still keeps a phrase that uses words the option does not contain', () => {
+    const mcq: TutorMCQ = { question: 'q', options: ['It is multiplied by 3 too', 'It stays 1'], correctIndex: 0 }
+    const grade = gradeMcqAnswer('It is multiplied by 3 too', mcq)
+    expect(phraseRestatesCorrectChoice('only the bottom number changes', mcq, grade, 'It is multiplied by 3 too')).toBe(false)
   })
 })
 
@@ -79,7 +107,7 @@ describe('wiring', () => {
   it('the chat route drops the phrase inside the server-grade block, before evidence is written', () => {
     const src = readFileSync('src/app/api/learn/chat/route.ts', 'utf-8')
     const graded = src.indexOf('correctness: mcqGradedThisTurn.correct ?? undefined')
-    const guard = src.indexOf('phraseRestatesCorrectChoice(teachingSignal.phrase, pendingMcqHoisted, mcqGradedThisTurn)')
+    const guard = src.indexOf('phraseRestatesCorrectChoice(teachingSignal.phrase, pendingMcqHoisted, mcqGradedThisTurn, message)')
     const ladder = src.indexOf('misconceptionDetected: teachingSignal?.phrase !== undefined')
     const evidence = src.indexOf('category:  EvidenceCategory.MISCONCEPTION_DETECTED')
     expect(graded).toBeGreaterThan(0)
