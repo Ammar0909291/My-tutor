@@ -214,6 +214,15 @@ Fix class:
 - **Live:** V8 (tension) had 3 graded taps, each answered about its own question.
   - One session is not conclusive.
   - No post-generation check exists yet.
+- **Root-cause evidence** (read-only `messages`, session cmuq2z5cq…): the stored assistant message
+  at 04:51:37 ENDS with the NaOH question and its options. So the model had the right question in
+  history AND in the verdict block, and still answered about ppm. This is attention drift, not
+  missing context.
+- **Proposed class-A backstop, not built:**
+  - On a graded turn, regenerate once if the reply shares clearly more content words with the
+    previous graded question than with the current one plus its options and rationale.
+  - Deferred until the prompt-only fix is measured over more turns. It would add a 7th provider
+    call site.
 
 ### R3. A practice request answered with no question (CL-24, CL-26; also CL-15 and RC-C)
 
