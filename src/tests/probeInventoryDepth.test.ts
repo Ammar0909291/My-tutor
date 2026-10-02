@@ -48,6 +48,12 @@ const DEPTH_TARGETS: Record<string, number> = {
   'physicsDepthSeedAssets.ts': 5,
   'chemistryDepthSeedAssets.ts': 5,
   'biologyDepthSeedAssets.ts': 3,
+  'mathematicsDepthArithAssets.ts': 5,
+  'mathematicsDepthNumberTheoryAssets.ts': 5,
+  'mathematicsDepthFoundationsAssets.ts': 5,
+  'mathematicsDepthGeometryAssets.ts': 5,
+  'mathematicsDepthAlgebraAssets.ts': 5,
+  'mathematicsDepthCalculusAssets.ts': 5,
 }
 
 /** Modules authored by the probe-depth programme. Extend as batches land. */
@@ -159,7 +165,10 @@ describe('probe depth', () => {
     const { all } = await corpus()
     const byConcept = new Map<string, string[]>()
     for (const p of all) {
-      const norm = p.stem.toLowerCase().replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim()
+      // Unicode letters and digits, not just ASCII: an ASCII-only strip turned
+      // "Simplify a³ · a²" and "Simplify a⁵ / a²" into the same "simplify a a"
+      // (math.arith.exponent-rules, 2026-10-02) — two different questions.
+      const norm = p.stem.toLowerCase().replace(/[^\p{L}\p{N} ]/gu, ' ').replace(/\s+/g, ' ').trim()
       const list = byConcept.get(p.conceptId) ?? []
       list.push(norm)
       byConcept.set(p.conceptId, list)

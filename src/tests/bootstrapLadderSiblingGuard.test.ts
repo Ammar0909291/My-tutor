@@ -211,7 +211,15 @@ describe('the real 45-slot divergence cannot produce a duplicate', () => {
     const rows: Row[] = manual
       .filter((p) => divergentSet.has(slot(p)))
       .map((p) => ({ canonicalSlug: mResolve(p as never), status: AssetStatus.ACTIVE }))
-    expect(rows.length).toBe(90) // two rungs per slot
+    // Every divergent slot is a LADDER in the manual corpus — the property this
+    // simulation needs. It was exactly two rungs per slot (90 rows) until the
+    // mathematics probe-depth campaign (2026-10-02) added rungs to those same
+    // ladders, at unused difficulties, so the count is checked per slot rather
+    // than pinned: each of the 45 holds at least two rungs.
+    const rungs = count(manual.filter((p) => divergentSet.has(slot(p))))
+    expect(rungs.size).toBe(45)
+    expect([...rungs.values()].every((n) => n >= 2)).toBe(true)
+    expect(rows.length).toBe([...rungs.values()].reduce((a, b) => a + b, 0))
     expect(rows.every((r) => !divergentSet.has(r.canonicalSlug))).toBe(true)
 
     const withGuard = planProbeCreates(boot, rows, { guard: true })
