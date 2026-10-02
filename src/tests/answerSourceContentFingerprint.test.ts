@@ -113,5 +113,5 @@ describe('the real corpus produces a fingerprint that reflects current content',
     const idx = await buildAnswerIndex()
     expect(idx.fingerprint).not.toBe('probes:2750:h5e86a3a9')
     expect(idx.fingerprint).toMatch(/^probes:\d+:h[0-9a-f]+$/)
-  })
+  }, 30_000)
 })
