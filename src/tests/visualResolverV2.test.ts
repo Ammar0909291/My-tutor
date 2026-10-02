@@ -102,7 +102,8 @@ describe('Visual Resolver V2 — semantic safety invariant', () => {
     // from the one above: silently bypassing curated bindings and showing
     // nothing where a real, hand-verified figure exists.
     expect(registry).toBeGreaterThan(450)
-  })
+    // Whole-KG sweep: ~4.5s alone on 2026-10-02, timed out at 5s under load.
+  }, 30_000)
 
   it('never emits a payload the client cannot render', () => {
     for (const c of allConcepts()) {
@@ -115,7 +116,8 @@ describe('Visual Resolver V2 — semantic safety invariant', () => {
         expect(result.valid, `${c.id} produced an invalid SceneSpec: ${JSON.stringify(result.errors)}`).toBe(true)
       }
     }
-  })
+    // Whole-KG sweep: ~4.6s alone on 2026-10-02, timed out at 5s under full-suite load.
+  }, 30_000)
 })
 
 // ── determinism ──────────────────────────────────────────────────────────────
