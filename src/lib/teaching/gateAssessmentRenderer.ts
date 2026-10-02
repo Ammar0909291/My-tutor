@@ -204,8 +204,13 @@ export function neutraliseBlindLeadIn(text: string, question: string): string {
   const lastTrimmed = last.trim()
   if (lastTrimmed.includes('?') || lastTrimmed.length > 200) return text
   if (!POINTS_FORWARD.test(lastTrimmed) || !ANNOUNCES_ASSESSMENT.test(lastTrimmed)) return text
-  const frame = FRAMES_WITHOUT_CONCEPT[frameIndex(question ?? '', FRAMES_WITHOUT_CONCEPT.length)]
+  const frame = neutralLeadInFor(question)
   const head = body.slice(0, body.length - last.length)
   const lead = last.slice(0, last.length - last.trimStart().length)
   return head + lead + frame
+}
+
+/** The neutral, topic-free bridge for a question: same question → same frame. */
+export function neutralLeadInFor(question: string): string {
+  return FRAMES_WITHOUT_CONCEPT[frameIndex(question ?? '', FRAMES_WITHOUT_CONCEPT.length)]
 }

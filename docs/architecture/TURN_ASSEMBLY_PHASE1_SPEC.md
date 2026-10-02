@@ -1,7 +1,8 @@
 # Turn assembly — Phase 1 design spec (graded-answer turns)
 
-**Status: DESIGN ONLY. Awaiting owner G2.** No runtime code may be written from this document
-until the owner approves it explicitly. Parent: `TURN_ASSEMBLY_PROPOSAL.md`. Evidence:
+**Status: G2 GRANTED 2026-10-02 for §10 items 1–2** (build behind the flag, off by default; run
+in shadow). The owner replied "Go" to the explicit G2 request. **Serve (§10 item 3) is NOT
+approved** and needs a separate owner decision, made on the §7 numbers. Parent: `TURN_ASSEMBLY_PROPOSAL.md`. Evidence:
 `docs/history/turn-quality-baseline-2026-10-02.md`.
 
 **Date:** 2026-10-02. **Measured against:** `main` after `3860bc1c`.
@@ -192,3 +193,41 @@ numbers.
    - Cost: one extra model call per graded turn.
    - Nothing changes for learners.
 3. A separate later approval to switch to **serve**, given the §7 numbers.
+
+---
+
+## 11. Shadow v1 as built (2026-10-02) — where it differs from §2–§7
+
+- **Code:**
+  - `src/lib/teaching/turnAssembly.ts` (slot prompt, parse, validation V1–V6, fallback, assembly);
+  - `src/app/api/learn/chat/route.ts`: the slot call starts after grading, the result is awaited
+    and logged just before the response.
+- **Tests:**
+  - `src/tests/turnAssembly.test.ts`: every code, using production drafts.
+  - `src/tests/turnAssemblyShadowRoute.test.ts`: a graded tap in shadow mode serves byte-identical
+    text to mode off, and logs `[assembled-turn]`.
+- **No regeneration in shadow.** A failed slot goes straight to the fallback. The logged fallback
+  rate is therefore an **upper bound** on what serve mode, which regenerates once, would see.
+- **Completion comes from the end of the turn, not an early fold.** Shadow reads
+  `lessonCompletionHoisted` after the turn has finalised. §2's early fold is **not built**, and
+  its agreement is **not measured** yet. It must be built and measured before serve.
+- **Placement and counting:**
+  - The slot call starts just after `llmCallCount` is declared. That is after the gate has
+    selected its card, so the "select before any provider call" invariant holds, and before
+    every serving branch, so memory-served graded turns are shadowed too.
+  - It is counted in `llmCallCount`. On a sampled graded turn the persisted count is therefore
+    one higher than without shadow mode.
+  - The seven tests that pin the route's provider-call count moved from 6 to 7, each citing
+    this approval.
+- **Latency:** the slot call starts in parallel with the main turn. The reply waits for it at
+  most 1.5 s; a timeout is logged as `event: "timeout"`. Measure the added time from `ms` in the
+  log against the turn's own duration.
+- **Cost controls:**
+  - one extra model call per sampled graded turn;
+  - `TURN_ASSEMBLY_SHADOW_RATE` (0–1, default 1) samples graded turns.
+- **No concept title** in the slot prompt yet; the question and options carry the topic.
+- **Log line `[assembled-turn]`:**
+  - `codes` and `fallback`;
+  - `live` / `assembled`: K1 and K2 on each text;
+  - `liveText` / `assembledText`: tutor text only, 1,200 characters each.
+  This is the data for the §7 gates.

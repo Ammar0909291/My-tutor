@@ -95,7 +95,9 @@ describe('4 — instrumentation introduces no provider call', () => {
     // written. 4 -> 5.
     // 5 -> 6 (2026-09-30): the stub repair's single regeneration (repairStubReply,
     // confirmBackRepair.ts) — fires only when a clean-up left no real reply.
-    expect((CHAT.match(/await routeAI\(/g) ?? []).length).toBe(6)
+    // 6 -> 7 (2026-10-02): the turn-assembly SHADOW slot call (owner G2), graded
+    // turns only, behind TURN_ASSEMBLY_MODE=shadow; never reaches the learner.
+    expect((CHAT.match(/await routeAI\(/g) ?? []).length).toBe(7)
   })
 })
 

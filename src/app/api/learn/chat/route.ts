@@ -2168,6 +2168,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     // Set when the one-question contract (gate-contract, stray-question-alongside-mcq)
     // cut the reply down to a stub; the stub repair below regenerates once.
     let gateContractStubHoisted: string | null = null
+    // TURN ASSEMBLY, Phase 1 — SHADOW (owner G2 2026-10-02). The slot call
+    // started after grading; awaited and logged just before the reply.
+    let turnAssemblyShadowHoisted: Promise<{
+      facts: import('@/lib/teaching/turnAssembly').GradedTurnFacts
+      raw: string; provider: string | null; ms: number; error: string | null
+    }> | null = null
     let arbitrationWasSoleBlockerHoisted = false
     let turnProgressHoisted: {
       outcome: import('@/lib/teaching/turnProgress').TurnOutcome
@@ -5995,6 +6001,49 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // dependency audit. Incremented at every routeAI() call site in this
       // route; a memory- or degraded-served turn correctly ends at 0.
       let llmCallCount = 0
+      // TURN ASSEMBLY, Phase 1 — SHADOW (docs/architecture/TURN_ASSEMBLY_PHASE1_SPEC.md).
+      // Placed after the gate has selected its card and before every serving
+      // branch, so memory-served graded turns are shadowed too.
+      // On a turn graded against an authored key, ask for the two slots in
+      // PARALLEL with the rest of the turn. Nothing it returns reaches the
+      // learner; it is logged as [assembled-turn] beside the reply actually served.
+      if (mcqGradeHoisted && typeof mcqGradeHoisted.correct === 'boolean'
+        && typeof mcqGradeHoisted.chosenIndex === 'number' && pendingMcqHoisted) {
+        try {
+          const ta = await import('@/lib/teaching/turnAssembly')
+          const { probeKeyIsAuthored } = await import('@/lib/teaching/mcq')
+          if (ta.turnAssemblyMode() === 'shadow' && probeKeyIsAuthored(pendingMcqHoisted) && ta.shadowSampled()) {
+            const facts: import('@/lib/teaching/turnAssembly').GradedTurnFacts = {
+              question: pendingMcqHoisted.question,
+              options: pendingMcqHoisted.options,
+              chosenIndex: mcqGradeHoisted.chosenIndex,
+              correctIndex: pendingMcqHoisted.correctIndex,
+              correct: mcqGradeHoisted.correct,
+              rationales: pendingMcqHoisted.rationales,
+              earlierOptions: ta.optionsFromHistory(historyMessages.filter((m) => m.role === 'assistant').map((m) => m.content)),
+            }
+            const startedAt = Date.now()
+            const recent = historyMessages.slice(-4).map(({ role, content }) => ({ role, content }))
+            turnAssemblyShadowHoisted = (async () => {
+              try {
+                llmCallCount++ // a real provider call, counted like every other (shadow only)
+              const routed = await routeAI(
+                  [...recent, { role: 'user' as const, content: message }],
+                  ta.buildSlotSystemPrompt(facts),
+                  country, 700, teachingLang,
+                  { userId, subject: learnSession.subject.slug },
+                  groqModelOverride, undefined, forceProvider,
+                )
+                return { facts, raw: routed.text ?? '', provider: routed.provider ?? null, ms: Date.now() - startedAt, error: null }
+              } catch (err) {
+                return { facts, raw: '', provider: null, ms: Date.now() - startedAt, error: err instanceof Error ? err.message : String(err) }
+              }
+            })()
+          }
+        } catch (err) {
+          console.warn('[assembled-turn] shadow start skipped:', err)
+        }
+      }
       // Typed Turn Contract, Batch 1 — SHADOW ONLY, read by nothing this
       // batch. `turnContractShadow` is compiled just before the primary
       // `routeAI` call below (design doc §6 Batch 1); `turnDeliveryShadow`
@@ -13144,6 +13193,50 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // instance cannot freeze with its transaction open. See the declaration.
       if (topicProgressEvidenceWrite) {
         try { await topicProgressEvidenceWrite } catch { /* total by construction */ }
+      }
+
+      // TURN ASSEMBLY, Phase 1 — SHADOW. Assemble what the server would have
+      // sent and log it beside what it did send. The served reply is untouched.
+      // Waits at most 1.5 s: the call started early, so it is normally done.
+      if (turnAssemblyShadowHoisted) {
+        try {
+          const r = await Promise.race([
+            turnAssemblyShadowHoisted,
+            new Promise<null>((resolve) => setTimeout(() => resolve(null), 1500)),
+          ])
+          const ta = await import('@/lib/teaching/turnAssembly')
+          if (!r) {
+            console.log('[assembled-turn] ' + JSON.stringify({ conceptId: resolvedConceptId ?? null, event: 'timeout' }))
+          } else {
+            const parsed = ta.parseSlots(r.raw)
+            const codes = r.error ? ['V0-provider-error'] : parsed ? ta.validateSlots(parsed, r.facts) : ['V1-unparseable']
+            const used = ta.usableSlots(parsed, codes, r.facts)
+            const probe = { question: r.facts.question, options: r.facts.options, correctIndex: r.facts.correctIndex, rationales: r.facts.rationales }
+            const verdictLine = r.facts.correct
+              ? (await import('@/lib/teaching/answerConfirmation')).confirmationPhrase(resolvedPriorConfirmations)
+              : (await import('@/lib/teaching/wrongAnswerCorrection')).stateCorrectionForWrongAnswer({ text: '', correct: false, probe: probe as never }).text
+            const { neutralLeadInFor } = await import('@/lib/teaching/gateAssessmentRenderer')
+            const assembled = ta.assembleGradedTurn({
+              verdictLine,
+              slots: used.slots,
+              leadIn: mcqHoisted ? neutralLeadInFor(mcqHoisted.question) : null,
+              closeText: lessonCompletionHoisted ? cleanText : null,
+            })
+            console.log('[assembled-turn] ' + JSON.stringify({
+              conceptId: resolvedConceptId ?? null,
+              provider: r.provider, ms: r.ms, error: r.error,
+              codes, fallback: used.fallback,
+              completion: lessonCompletionHoisted !== null, cardAttached: mcqHoisted !== null,
+              live: ta.turnChecks(cleanText, mcqHoisted !== null),
+              assembled: ta.turnChecks(assembled, mcqHoisted !== null),
+              // Tutor text only, never the learner's; [verifier-log] logs drafts the same way.
+              liveText: cleanText.slice(0, 1200),
+              assembledText: assembled.slice(0, 1200),
+            }))
+          }
+        } catch (err) {
+          console.warn('[assembled-turn] shadow log skipped:', err)
+        }
       }
 
       return NextResponse.json({
