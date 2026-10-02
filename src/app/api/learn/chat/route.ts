@@ -9494,7 +9494,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // repair (repairStubReply, below) regenerates once for this stage.
               if (ungraded.reason === 'stray-question-alongside-mcq') {
                 const { needsRepair } = await import('@/lib/teaching/confirmBackRepair')
-                gateContractStubHoisted = needsRepair(ungraded.text) ? ungraded.text : null
+                // Not on a practice request: "Let me check your thinking with
+                // this." + the quiz IS the answer to "quiz me". Repairing it
+                // produced an invented "thermite problem I gave earlier" plus a
+                // second question beside the card (live, 2026-10-02).
+                gateContractStubHoisted = needsRepair(ungraded.text) && !turnIntent.wantsPractice ? ungraded.text : null
               }
             }
           } catch (err) {
@@ -10407,6 +10411,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               answeredQuiz: mcqGradeHoisted && pendingMcqHoisted ? { question: pendingMcqHoisted.question } : null,
             }).text
           } catch { /* optional backstop */ }
+          // A question card follows: a repair that asks its own question is
+          // the two-questions-at-once shape the cut existed to prevent.
+          if (mcqHoisted !== null && /\?/.test(retryText)) {
+            console.log('[stub-repair] ' + JSON.stringify({ source, repaired: false, reason: 'repair-asked-a-question-beside-the-card' }))
+            return null
+          }
           const merged = mergeRepair(stub, retryText)
           const repaired = !needsRepair(merged)
           console.log('[stub-repair] ' + JSON.stringify({ source, repaired, retryStripped: retry.stripped, chars: merged.length }))

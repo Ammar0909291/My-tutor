@@ -62,6 +62,47 @@ describe('a reply cut down to a stub by the one-question contract is regenerated
   }, 180_000)
 })
 
+/**
+ * LIVE 2026-10-02 (chem.found.stoichiometry, deploy 5c8d576e): on "quiz me" the
+ * cut left "Let me check your thinking with this." + the authored quiz — the
+ * right answer to a practice request — and the repair replaced it with "We
+ * still need to work through the thermite problem I gave earlier" (no such
+ * problem existed) plus a second typed question beside the card.
+ */
+describe('the repair never fires on a practice request, and never adds a question', () => {
+  async function cutTurn(learnerSays: string) {
+    for (let i = 0; i < 16; i++) {
+      const [t] = await driveTurns(h, POST, [{ learnerSays, modelReplies: 'What is the next step shown in the diagram?' }], LANE)
+      if (t.logs.some((l) => l.includes('stray-question-alongside-mcq'))) return t
+    }
+    return null
+  }
+
+  it('"quiz me" keeps the hand-off line and the quiz; no repair runs', async () => {
+    const t = await cutTurn('quiz me')
+    expect(t, 'the gate-contract cut never fired').not.toBeNull()
+    expect(mcqOf(t!)).not.toBeNull()
+    expect(t!.logs.some((l) => l.includes('"source":"gate-contract"'))).toBe(false)
+  }, 180_000)
+
+  it('a repair that asks its own question beside the card is discarded', async () => {
+    h.routeAI = async (...args: unknown[]) => {
+      if (String(args[1] ?? '').includes('OUTPUT REJECTED (server-side check)')) {
+        return { text: 'We still need the thermite problem I gave earlier. Which reactant limits the reaction?', provider: 'harness', finishReason: 'stop' }
+      }
+      return baseRouteAI(...args)
+    }
+    let cut: TurnResult | null = null
+    for (let i = 0; i < 16 && !cut; i++) {
+      const [t] = await driveTurns(h, POST, [{ learnerSays: 'i think 2.5 m/s', modelReplies: 'How did you work out the 2.5 m/s value?' }], LANE)
+      if (t.logs.some((l) => l.includes('stray-question-alongside-mcq'))) cut = t
+    }
+    expect(cut).not.toBeNull()
+    expect(textOf(cut!)).not.toContain('thermite')
+    expect(cut!.logs.some((l) => l.includes('repair-asked-a-question-beside-the-card'))).toBe(true)
+  }, 180_000)
+})
+
 describe('the repair instruction', () => {
   it('asks for a verdict on an answer to the tutor\'s own question', () => {
     const a = buildConfirmBackRepairAppendix({ graded: null, chosenOption: null, correctOption: null })
