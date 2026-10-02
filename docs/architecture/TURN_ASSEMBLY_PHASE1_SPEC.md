@@ -429,3 +429,24 @@ numbers.
   - `completionAgreement` 95/95;
   - assembled K2 0.
   - Since the last fix set, `waitedMs` max is 1 ms.
+
+### 11.8 Seventh window (2026-10-02 16:20–16:30, deploy `7409a0c3`, 700-char log lines)
+
+- **Traffic:** a physics mechanics sampler run (free-body, friction, tension, normal force) plus
+  8 turns of other mathematics traffic.
+- **Results:** 19 lines, **19 parsed, 0 truncated**.
+
+  | Measure | Result |
+  | --- | --- |
+  | `completionAgreement` | 19/19 |
+  | Fallback / regenerated | 0 / 0 |
+  | Assembled K1 / K2 | 0 / 0 |
+  | Served K2 | 1/19 |
+  | Shadow call p50 / max | 916 / 1,205 ms |
+  | `waitedMs` max | 0 ms |
+
+- **Cumulative:**
+  - 114 parsed graded turns;
+  - `completionAgreement` 114/114;
+  - assembled K2 0.
+  - Since all fixes were in place (windows 6–7): 26/26 clean, 0 fallback.
