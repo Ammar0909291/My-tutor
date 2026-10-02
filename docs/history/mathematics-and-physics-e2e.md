@@ -178,3 +178,11 @@ relations" on math.cat.functor, a PARAPHRASE of the correct option's working, no
 narrow rule kept it. Widened minimally: on a pure tap of the correct option (the learner wrote
 nothing else), a phrase built only from that option's own words is dropped too; a typed answer
 with words of its own keeps the exact-span rule (tests in the same file).
+
+**Final verification (production `448ef6c8`, CI `validate` green): 6/6 PASS** — math.cat.functor,
+math.arith.fraction-addition, math.geom.pythagorean-theorem (the three concepts that had shown the
+phrase defect) plus math.calc.limits, math.linalg.determinant, math.prob.conditional-probability.
+DB: 6 MASTERED, 0 MISCONCEPTION_DETECTED on any pass turn, 0 non-seed / non-math / cross-concept
+asset rows. Production convergence re-checked at the end: hashes unchanged (961 + 2,752, identical
+aggregates). All four disposable accounts deleted (0 `qa-math-runtime-*` rows remain). Session
+total: 33 production certification runs, 30 distinct concepts, 24/24 domains, 33/33 PASS.
