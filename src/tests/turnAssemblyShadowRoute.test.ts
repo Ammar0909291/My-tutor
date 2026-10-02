@@ -70,6 +70,9 @@ describe('shadow mode leaves the served reply untouched', () => {
     // Spec §2: whether the assembled text would close the concept exactly when
     // the served one did. A plain graded tap at this rung closes nothing either way.
     expect(logged.completionAgreement).toBe(true)
+    // The latency shadow adds to the reply is measured, never above the cap.
+    expect(typeof logged.waitedMs).toBe('number')
+    expect(logged.waitedMs).toBeLessThanOrEqual(1600)
     // No conversation history in the slot call: with it the model wrote a new
     // quiz instead of the JSON (shadow sample, 2026-10-02).
     expect(slotMessageCounts.length).toBeGreaterThan(0)

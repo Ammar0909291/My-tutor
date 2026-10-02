@@ -33,7 +33,14 @@ async function authoredProbes(): Promise<Map<string, SeedProbe>> {
     const mod = await import(path.join(dir, f))
     for (const [name, value] of Object.entries(mod)) {
       if (!Array.isArray(value) || !name.endsWith('PROBES')) continue
-      for (const p of value as SeedProbe[]) if (p.subjectSlug === SUBJECT && (p.choices?.length ?? 0) >= 2) out.set(norm(stripAuthoringLabel(p.stem)), p)
+      for (const p of value as SeedProbe[]) {
+        if (p.subjectSlug !== SUBJECT || (p.choices?.length ?? 0) < 2) continue
+        out.set(norm(stripAuthoringLabel(p.stem)), p)
+        // Key on the question as SERVED too: probeToMcq reshapes some stems
+        // (English quoting), and 19 of 27 English cards missed the raw-stem key.
+        const served = probeToMcq({ stem: p.stem, choices: p.choices as never, conceptId: p.conceptId })
+        if (served) out.set(norm(served.question), p)
+      }
     }
   }
   return out

@@ -6027,7 +6027,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               correctIndex: pendingMcqHoisted.correctIndex,
               correct: mcqGradeHoisted.correct,
               rationales: pendingMcqHoisted.rationales,
-              earlierOptions: ta.optionsFromHistory(historyMessages.filter((m) => m.role === 'assistant').map((m) => m.content)),
+              earlierOptions: ta.previousCardOptions(historyMessages.filter((m) => m.role === 'assistant').map((m) => m.content)),
             }
             const startedAt = Date.now()
             // NO CONVERSATION HISTORY. Measured in shadow (2026-10-02, physics
@@ -13239,13 +13239,17 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // Waits at most 1.5 s: the call started early, so it is normally done.
       if (turnAssemblyShadowHoisted) {
         try {
+          // waitedMs is the latency shadow mode adds to the reply: the time this
+          // await holds the response, not the slot call's own duration.
+          const waitStartedAt = Date.now()
           const r = await Promise.race([
             turnAssemblyShadowHoisted,
             new Promise<null>((resolve) => setTimeout(() => resolve(null), 1500)),
           ])
+          const waitedMs = Date.now() - waitStartedAt
           const ta = await import('@/lib/teaching/turnAssembly')
           if (!r) {
-            console.log('[assembled-turn] ' + JSON.stringify({ conceptId: resolvedConceptId ?? null, event: 'timeout' }))
+            console.log('[assembled-turn] ' + JSON.stringify({ conceptId: resolvedConceptId ?? null, event: 'timeout', waitedMs }))
           } else {
             const parsed = ta.parseSlots(r.raw)
             const codes = r.error && !r.raw ? ['V0-provider-error'] : parsed ? ta.validateSlots(parsed, r.facts) : ['V1-unparseable']
@@ -13281,10 +13285,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             }
             console.log('[assembled-turn] ' + JSON.stringify({
               conceptId: resolvedConceptId ?? null,
-              provider: r.provider, ms: r.ms, error: r.error, attempts: r.attempts,
+              provider: r.provider, ms: r.ms, waitedMs, error: r.error, attempts: r.attempts,
               completionAgreement,
               // Why a parse failed is otherwise invisible. Model text only.
-              ...(parsed ? {} : { rawOnFailure: r.raw.slice(0, 600) }),
+              ...(codes.length > 0 ? { rawOnFailure: r.raw.slice(0, 600) } : {}),
               codes, fallback: used.fallback,
               completion: lessonCompletionHoisted !== null, cardAttached: mcqHoisted !== null,
               live: ta.turnChecks(cleanText, mcqHoisted !== null),

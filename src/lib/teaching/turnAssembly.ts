@@ -11,7 +11,15 @@
  * In SHADOW mode nothing here reaches the learner: the route logs the
  * assembled text next to the reply it actually served.
  */
-import { DENIES_CORRECT, statesCorrect } from '@/lib/teaching/answerConfirmation'
+/**
+ * V6's verdict phrases: only what is SAID TO THE LEARNER about their answer.
+ * The route's broad CONFIRMS/DENIES lists detect a reply's opening claim and
+ * flag ordinary teaching here: "perfect squares" matched `perfect` (math
+ * shadow sample, 2026-10-02), and "the other options are incorrect" would
+ * read as denying a right answer.
+ */
+const AFFIRMS_TO_LEARNER = /\b(?:that'?s (?:right|correct)|that is (?:right|correct)|you(?:'re| are) (?:right|correct)|you got it|well done|good job|great job|nicely done|spot on|exactly right|nailed it|correct[!,—-])/i
+const DENIES_TO_LEARNER = /\b(?:not quite|that'?s (?:wrong|incorrect|not (?:right|correct))|that is (?:wrong|incorrect|not (?:right|correct))|you(?:'re| are) (?:wrong|incorrect|not (?:right|correct))|(?:good|nice) try|close,? but)\b/i
 
 export type TurnAssemblyMode = 'off' | 'shadow' | 'serve'
 
@@ -129,8 +137,9 @@ export function validateSlots(s: TurnSlots, f: GradedTurnFacts): string[] {
       if (t.length >= 4 && !current.has(t) && lower.includes(t)) { codes.add(`V5-${name}-earlier-item`); break }
     }
     // V6 — a verdict word that contradicts the server's grade.
-    if (f.correct && DENIES_CORRECT.test(text)) codes.add(`V6-${name}-denies-correct`)
-    if (!f.correct && statesCorrect(text)) codes.add(`V6-${name}-affirms-wrong`)
+    const plain = text.replace(/[\u2018\u2019]/g, "'")
+    if (f.correct && DENIES_TO_LEARNER.test(plain)) codes.add(`V6-${name}-denies-correct`)
+    if (!f.correct && AFFIRMS_TO_LEARNER.test(plain)) codes.add(`V6-${name}-affirms-wrong`)
   }
   if (s.feedback) {
     const n = words(s.feedback)
@@ -146,7 +155,12 @@ export function validateSlots(s: TurnSlots, f: GradedTurnFacts): string[] {
  * probe carries none — the verdict line then stands alone, with no invented why.
  */
 export function fallbackFeedback(f: GradedTurnFacts): string | null {
-  const i = f.correct ? f.correctIndex : f.chosenIndex
+  // WRONG: nothing. A distractor's authored continuation is part of the wrong
+  // answer ("fungi are simply non-green plants"), never an explanation of it —
+  // rejoined, it states the misconception as fact (shadow sample, biology,
+  // 2026-10-02). The verdict line already carries the correct answer and its why.
+  if (!f.correct) return null
+  const i = f.correctIndex
   const r = f.rationales?.[i]?.trim()
   if (!r) return null
   // Authored rationales are the working AFTER the answer head ("— fixed
@@ -187,6 +201,18 @@ export function assembleGradedTurn(a: AssembleInput): string {
     if (a.leadIn) parts.push(a.leadIn.trim())
   }
   return parts.filter(Boolean).join('\n\n')
+}
+
+/**
+ * V5's input: the options of the card shown BEFORE the one just graded. The
+ * defect is quoting the previous item's answer (R2: "How did you arrive at
+ * 2.50 dm³?" on the next item). Every earlier card was too broad — cards in one
+ * lesson share the concept's vocabulary (shadow sample, biology, 2026-10-02:
+ * 6 false V5 hits in 16 turns).
+ */
+export function previousCardOptions(contents: string[]): string[] {
+  const cards = contents.map((c) => optionsFromHistory([c])).filter((o) => o.length > 0)
+  return cards.length >= 2 ? cards[cards.length - 2] : []
 }
 
 /** Option texts written as "A) …" lines in earlier tutor messages. */

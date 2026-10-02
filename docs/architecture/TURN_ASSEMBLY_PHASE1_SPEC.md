@@ -322,3 +322,89 @@ numbers.
   high regeneration rate.
 - **Fix (next commit):** the slot call sends no history, only one instruction. Every fact the
   slots need is already in its system prompt. Needs a third sample to confirm.
+
+### 11.4 Third sample (2026-10-02 14:33, biology, deploy `6e2d984b`, no-history slot call)
+
+- **Volume:** 16 graded taps over 4 lessons. All 16 lines parsed, none truncated.
+- **Results:**
+
+  | Measure | Result |
+  | --- | --- |
+  | `completionAgreement` | 16/16 |
+  | Parse failures | **0** (2 per sample before) |
+  | Regenerated | 4/16 (25%; was 40%) |
+  | Fallback | 2/16 (12.5%) |
+  | Assembled K1 / K2 | 1 / 0 |
+  | Shadow call p50 / max | 847 / 1,658 ms |
+
+- **The no-history fix worked for parsing.** Every remaining failure was V5.
+- **Two defects found and fixed (next commit):**
+  1. **The fallback taught a misconception.** On a wrong answer it rejoined the chosen
+     distractor to its own authored continuation: "Fungi and plants are in the same kingdom —
+     fungi are simply non-green plants." That would have been stated as fact. Now a wrong
+     answer gets no fallback feedback, and the verdict line already carries the correct answer
+     and its authored why.
+  2. **V5 was too broad.** It checked every earlier card's options, and cards in one lesson
+     share the concept's vocabulary. Now only the card shown before the graded one is checked,
+     which is exactly the R2 defect. Failed slot text is now logged too (`rawOnFailure` on any
+     code).
+- **Cumulative over the three samples:**
+  - 48 graded turns, 46 parsed;
+  - `completionAgreement` 46/46;
+  - assembled K2 0;
+  - fallback 6/46 (13%), from three causes that are now fixed but not yet re-measured.
+
+### 11.5 Fourth window (2026-10-02 14:56–15:15, deploy `a2a716b4`: no-history call + V5 previous-card + no distractor fallback)
+
+- **Traffic:** an English sampler run plus real mathematics traffic from another account.
+- **Coverage caveat:** the window was fetched with a `gate-assessment` filter, so this is a
+  subset of the `[assembled-turn]` lines.
+- **Results:** 21 lines, all parsed.
+
+  | Measure | Result |
+  | --- | --- |
+  | `completionAgreement` | 21/21 |
+  | Fallback | **0/21** |
+  | Regenerated | **0/21** |
+  | Assembled K1 / K2 | 0 / 0 |
+  | Served K1 / K2 | 0 / 0 |
+  | Shadow call p50 / max | 809 / 983 ms |
+
+- **Concepts covered:** eng.phonics (9), math.linalg / calc / func / trig (12).
+- **The sampler's English "unauthored" count (19) was its own key mismatch.** The server served
+  authored cards (23 `authored-served`). The sampler now also keys on the served question text.
+- **Cumulative, all four windows:**
+  - 67 parsed graded turns;
+  - `completionAgreement` 67/67;
+  - assembled K2 0;
+  - fallback 6/67 (9%). All 6 came before the fixes; 0/21 after them.
+  - The §7 gate needs ≥300, and `waitedMs` (deployed in `0bbd64cb`) is not yet measured.
+
+### 11.6 Fifth window (2026-10-02 15:15–15:30, deploys `a2a716b4` / `0bbd64cb` / `7bc0c8d1`, mathematics sampler + other traffic)
+
+- **Volume:** 24 lines: 21 parsed, 3 truncated by the viewer.
+- **Results:**
+
+  | Measure | Result |
+  | --- | --- |
+  | `completionAgreement` | 21/21 |
+  | Fallback | 1/21 (4.8%) |
+  | Regenerated | 1/21 |
+  | Assembled K1 / K2 | 0 / 0 |
+  | Shadow call p50 / max | 783 / 1,812 ms |
+  | **`waitedMs` p50 / p95 / max** | **0 / 1 / 1 ms** |
+
+- **Latency (§7) answered:** shadow mode adds no measurable wait to the reply. The slot call always
+  finished before the main turn did.
+- **The one fallback was a V6 false positive.** Correct feedback on a wrong answer ("…they are
+  perfect squares… the choice … is incorrect") was flagged as affirming the wrong answer, because
+  the route's broad `CONFIRMS_CORRECT` list matches `perfect`.
+  - The denial side had the same risk ("the other options are incorrect").
+  - V6 now uses verdict phrases addressed to the learner only (next commit).
+- **Cumulative:**
+  - 88 parsed graded turns;
+  - `completionAgreement` 88/88;
+  - assembled K2 0;
+  - fallback 7/88 (8%), every one traced to a since-fixed cause.
+  - Under the fixes in place by the fifth window, the only fallback was the V6 false positive now
+    fixed: 1/42.

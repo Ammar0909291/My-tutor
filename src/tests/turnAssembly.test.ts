@@ -6,7 +6,8 @@
 import { describe, it, expect } from 'vitest'
 import {
   turnAssemblyMode, shadowSampled, buildSlotSystemPrompt, parseSlots, validateSlots,
-  usableSlots, assembleGradedTurn, optionsFromHistory, turnChecks, retryInstruction, type GradedTurnFacts,
+  usableSlots, assembleGradedTurn, optionsFromHistory, turnChecks, retryInstruction, previousCardOptions, fallbackFeedback,
+  type GradedTurnFacts,
 } from '@/lib/teaching/turnAssembly'
 
 const RIGHT: GradedTurnFacts = {
@@ -85,11 +86,35 @@ describe('V2–V6 validate', () => {
   })
 })
 
+describe('V6 reads only verdicts addressed to the learner', () => {
+  it('"perfect squares" is not praise (math shadow sample, 2026-10-02)', () => {
+    const f = { ...WRONG }
+    const feedback = 'The sums given are 4, 9, and 16, which are not all even. The pattern shows they are perfect squares, not simply even numbers. Therefore the choice that every sum of odd numbers is even is incorrect.'
+    expect(validateSlots({ feedback, teaching: null }, f)).toEqual([])
+  })
+  it('"the other options are incorrect" is not a denial of a right answer', () => {
+    const feedback = 'A kilogram is 1000 grams and a gram is 1000 milligrams. The other options are incorrect because they convert only one step.'
+    expect(validateSlots({ feedback, teaching: null }, RIGHT)).toEqual([])
+  })
+  it('still catches a verdict that contradicts the grade', () => {
+    expect(validateSlots({ feedback: "You're right — moving the decimal three places gives milligrams directly.", teaching: null }, WRONG))
+      .toContain('V6-feedback-affirms-wrong')
+    expect(validateSlots({ feedback: "That's not correct: the factor between kilograms and milligrams is a million.", teaching: null }, RIGHT))
+      .toContain('V6-feedback-denies-correct')
+  })
+})
+
 describe('fallback and assembly', () => {
-  it('a failed feedback falls back to the authored working for the chosen option', () => {
+  it('a WRONG answer gets no fallback feedback: the verdict line carries the correct answer and its why', () => {
+    // Shadow sample (biology, 2026-10-02): the chosen distractor's own text was
+    // rejoined and stated as fact — "Fungi and plants are in the same kingdom —
+    // fungi are simply non-green plants." A distractor's continuation is part
+    // of the wrong answer, never an explanation of it.
     const u = usableSlots(null, ['V1-unparseable'], WRONG)
     expect(u.fallback).toBe(true)
-    expect(u.slots.feedback).toBe('25 mg — just moving the decimal three places converts only one step.')
+    expect(u.slots.feedback).toBeNull()
+    expect(fallbackFeedback({ ...WRONG, options: ['Fungi and plants are in the same kingdom', 'No'], rationales: ['fungi are simply non-green plants', ''] }))
+      .toBeNull()
   })
   it('no authored working: no invented why', () => {
     const u = usableSlots(null, ['V1-unparseable'], { ...RIGHT, rationales: undefined })
@@ -134,5 +159,19 @@ describe('the one regeneration (spec §4)', () => {
     expect(r).toMatch(/question or a question mark/)
     expect(r).toMatch(/another question's answer/)
     expect(r.match(/question mark/g)).toHaveLength(1)
+  })
+})
+
+describe('V5 looks at the previous card only', () => {
+  it('returns the options of the card before the one just graded', () => {
+    const msgs = [
+      'Teach.\n\nQ1?\nA) Kingdom Monera\nB) Kingdom Fungi',
+      'Feedback.\n\nQ2?\nA) 2.50 dm³\nB) 0.250 dm³',
+      'Feedback.\n\nQ3?\nA) 25 mg\nB) 25,000 mg',
+    ]
+    expect(previousCardOptions(msgs)).toEqual(['2.50 dm³', '0.250 dm³'])
+  })
+  it('none when fewer than two cards were shown', () => {
+    expect(previousCardOptions(['Teach.', 'Q?\nA) x\nB) y'])).toEqual([])
   })
 })
