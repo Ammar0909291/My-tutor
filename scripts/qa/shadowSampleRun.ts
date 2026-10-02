@@ -25,6 +25,12 @@ const LESSONS = Math.min(6, Number(process.env.QA_LESSONS ?? 4))
 const QUIZZES = Math.min(6, Number(process.env.QA_QUIZZES ?? 4))
 // Skip lesson one (its own locked protocol) and start a little way in.
 const START = Number(process.env.QA_START ?? 2)
+// Stop asking for new quizzes after this long, so the run ends — and deletes its
+// account — before any outer timeout kills it. A killed run (2026-10-02,
+// English, outer `timeout 590`) skipped the `finally` and left its account behind.
+const BUDGET_MS = Number(process.env.QA_BUDGET_MS ?? 7 * 60_000)
+const startedAt = Date.now()
+const overBudget = () => Date.now() - startedAt > BUDGET_MS
 
 async function authoredProbes(): Promise<Map<string, SeedProbe>> {
   const dir = path.resolve(__dirname, '../../src/lib/teaching/assets')
@@ -72,11 +78,12 @@ async function main() {
   let unauthored = 0
   let right = true
   for (const l of lessons.slice(START, START + LESSONS)) {
+    if (overBudget()) { console.log('time budget reached — stopping'); break }
     const sid = await createSession(cookie, SUBJECT)
     await openLesson(cookie, sid, { lessonTitle: l.lessonTitle, lessonOrder: l.order, topicSlug: l.topicSlug, unitTitle: l.unitTitle, totalLessons: lessons.length })
     for (const m of ['ok, continue', 'ok']) await say(cookie, sid, m)
     let done = 0
-    for (let tries = 0; tries < QUIZZES * 3 && done < QUIZZES; tries++) {
+    for (let tries = 0; tries < QUIZZES * 3 && done < QUIZZES && !overBudget(); tries++) {
       const p = await say(cookie, sid, 'quiz me')
       if (!p.mcq) continue
       const pick = answer(p.mcq, authored, right)
@@ -88,6 +95,14 @@ async function main() {
     console.log(`${l.topicSlug}: ${done} graded`)
   }
   console.log(JSON.stringify({ subject: SUBJECT, graded, unauthored }))
+}
+
+// A kill still deletes the account: SIGTERM/SIGINT run the same cleanup.
+for (const sig of ['SIGTERM', 'SIGINT'] as const) {
+  process.on(sig, async () => {
+    if (acct) console.log(`${sig}: deleting disposable account:`, JSON.stringify(await deleteQaAccount(acct)))
+    process.exit(130)
+  })
 }
 
 main()
