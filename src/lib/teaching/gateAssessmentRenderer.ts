@@ -203,7 +203,9 @@ export function neutraliseBlindLeadIn(text: string, question: string): string {
   const last = sentences[sentences.length - 1]
   const lastTrimmed = last.trim()
   if (lastTrimmed.includes('?') || lastTrimmed.length > 200) return text
-  if (!POINTS_FORWARD.test(lastTrimmed) || !ANNOUNCES_ASSESSMENT.test(lastTrimmed)) return text
+  // Models write "let’s" (U+2019) as often as "let's"; read both the same.
+  const plain = lastTrimmed.replace(/[\u2018\u2019]/g, "'")
+  if (!POINTS_FORWARD.test(plain) || !ANNOUNCES_ASSESSMENT.test(plain)) return text
   const frame = neutralLeadInFor(question)
   const head = body.slice(0, body.length - last.length)
   const lead = last.slice(0, last.length - last.trimStart().length)

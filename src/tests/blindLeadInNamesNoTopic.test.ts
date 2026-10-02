@@ -52,6 +52,12 @@ describe('a closing announcement of the hidden question is made neutral', () => 
     expect(neutraliseBlindLeadIn(text, Q)).not.toMatch(/calculation problem/)
   })
 
+  it('a curly apostrophe ("let’s") is read like a straight one (production, 2026-10-02)', () => {
+    // Shadow verification run, phys.meas.units: above a µF-conversion card.
+    const text = 'Great, let’s see how well you’ve grasped the seven base units with a quick check.'
+    expect(neutraliseBlindLeadIn(text, Q)).not.toMatch(/seven base units/)
+  })
+
   it('the same question always gets the same bridge', () => {
     const t = 'Good.\n\nNow try a quick check on this idea.'
     expect(neutraliseBlindLeadIn(t, Q)).toBe(neutraliseBlindLeadIn(t, Q))

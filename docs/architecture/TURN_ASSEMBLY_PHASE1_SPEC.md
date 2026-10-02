@@ -231,3 +231,25 @@ numbers.
   - `live` / `assembled`: K1 and K2 on each text;
   - `liveText` / `assembledText`: tutor text only, 1,200 characters each.
   This is the data for the §7 gates.
+
+### 11.1 Production verification (2026-10-02, deploy of `3b0e18c2`, dpl_9SQSqbgw9LNxQBeHuKjzGXdcuDcm)
+
+- **Setup:** `TURN_ASSEMBLY_MODE=shadow` set for production. `scripts/qa/spiralCloseLive.ts` was
+  run on a disposable `qa-*` account (deleted afterwards). It produced 2 graded taps on
+  `phys.meas.units`.
+- **Both turns logged `[assembled-turn]`:**
+
+  | Turn | Slot call | Main call (parallel) | Validation codes | Fallback |
+  | --- | --- | --- | --- | --- |
+  | Wrong tap (4.7 µF) | 680 ms | 1.9 s | none | no |
+  | Right tap (the newton) | 546 ms | 2.5 s | none | no |
+
+  - Each assembled text was the verdict line, the feedback, then a teaching paragraph.
+  - The served replies were the normal ones.
+- **Not yet shown:**
+  - any rate (2 turns, against the §7 gate of 300 or more);
+  - behaviour on other providers;
+  - added latency at the 95th percentile.
+- **Side finding:** a CL-31 gap found in the same run. "Great, let’s see how well you’ve grasped
+  the seven base units" (U+2019 apostrophe) sat above a µF card and was not neutralised. Fixed
+  in the next commit; the Phase-0 K4 SQL had the same blind spot and now normalises it.

@@ -31,7 +31,8 @@ with s0 as (
     -- the learner tapped an option of the card on the previous reply
     (prev_reply is not null and said is not null
       and (strpos(prev_reply, E'\nA) ' || said) + strpos(prev_reply, E'\nB) ' || said) + strpos(prev_reply, E'\nC) ' || said) + strpos(prev_reply, E'\nD) ' || said)) > 0) graded,
-    coalesce(substring(btrim(prose) from E'([^.!?]+[.!?]*)$'), '') last_sentence,
+    -- curly apostrophes read as straight ones (models write "let’s")
+    translate(coalesce(substring(btrim(prose) from E'([^.!?]+[.!?]*)$'), ''), '‘’', '''''') last_sentence,
     row_number() over (partition by "sessionId", md5(btrim(prose)) order by "createdAt") dup_rank
   from a
 )
