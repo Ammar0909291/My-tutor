@@ -15,6 +15,7 @@ import type {
   AttemptVectorV2, AdaptationStateVectorV2, AdjustmentRecordV2,
 } from './types'
 import { appendSpineEvents, prismaSpineStore, type SpineStore } from './writer'
+import { trackWrite } from '@/lib/db/pendingWrites'
 
 const SOURCE: SpineSource = { componentId: 'learn-chat-route', version: 1 }
 
@@ -156,9 +157,10 @@ function phaseDirection(from: string, to: string): 'up' | 'down' | 'reset' {
   return b > a ? 'up' : b < a ? 'down' : 'reset'
 }
 
-/** Fire-and-forget entry point for the route. Never throws, never awaited. */
+/** Fire-and-forget entry point for the route. Never throws, never awaited by
+ *  the caller; recorded with trackWrite so the route settles it before replying. */
 export function emitTurn(prismaLike: unknown, facts: TurnFacts): void {
   if (process.env.ENABLE_EVIDENCE_SPINE === '0') return
   const store: SpineStore = prismaSpineStore(prismaLike as Parameters<typeof prismaSpineStore>[0])
-  void appendSpineEvents(store, buildTurnEvents(facts)).catch(() => {})
+  void trackWrite(appendSpineEvents(store, buildTurnEvents(facts)).catch(() => 0))
 }

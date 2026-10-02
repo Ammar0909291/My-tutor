@@ -49,6 +49,7 @@ import { requestedTopicIdentity } from './requestedTopic'
 import { checkBudgetsLive, type BudgetReader } from './generationBudget'
 import { readVerdict, writeVerdict, readDecline, writeDecline, figureFingerprint, verdictKey } from './verdictCache'
 import { getCachedVisualization, replaceVisualization } from '@/lib/teaching/visuals/visualizationCache'
+import { trackWrite } from '@/lib/db/pendingWrites'
 import { startDeadline, NO_DEADLINE, type Deadline } from './turnDeadline'
 import { recordGenerationOutcome, type GenerationOutcomeSink } from './generationOutcome'
 import type { SceneSpec } from '@/lib/teaching/sceneSpec'
@@ -1103,7 +1104,7 @@ export async function resolveVisualForTurn(
     // Remember a DELIBERATE decline so the next learner does not pay to be told
     // the same thing. Only 'no-suitable-form' is stored — transient and
     // variance-prone rejections are deliberately not; see verdictCache.
-    void writeDecline(ctx, result.reason, deps.cacheClient)
+    void trackWrite(writeDecline(ctx, result.reason, deps.cacheClient))
     // 3. NONE — carry the reason so a rejection is auditable rather than silent.
     return { ...decision, provenance: `no-figure:engine-${result.reason}` }
   }
@@ -1173,7 +1174,7 @@ export async function resolveVisualForTurn(
       // EVERY such turn, not only an explicit request — the same gap as the
       // retry-path exits below, firing far more often since it needs no
       // learner action to trigger.
-      void recordNotServed(ctx, result.figure, deps.outcomeSink)
+      void trackWrite(recordNotServed(ctx, result.figure, deps.outcomeSink))
       return { ...decision, provenance: 'no-figure:critic-reject-cached' }
     }
     const retry = await generateConceptFigure(ctx, {
@@ -1186,18 +1187,18 @@ export async function resolveVisualForTurn(
     // 2026-09-24: `no-figure:retry-structurally-invalid`, generationSpent=false).
     if (!(retry.ok && retry.cached)) decision = { ...decision, generationSpent: true }
     if (!retry.ok) {
-      void writeDecline(ctx, retry.reason, deps.cacheClient)
+      void trackWrite(writeDecline(ctx, retry.reason, deps.cacheClient))
       return { ...decision, provenance: `no-figure:retry-${retry.reason}` }
     }
     const retryPayload = retry.figure.kind === 'scene' ? retry.figure.scene : retry.figure.spec
     if (figureFingerprint(retryPayload) === figureFingerprint(figurePayload)) {
       // The generator produced the same figure again. Judging it would ask an
       // identical question of identical input; the cached answer stands.
-      void recordNotServed(ctx, retry.figure, deps.outcomeSink)
+      void trackWrite(recordNotServed(ctx, retry.figure, deps.outcomeSink))
       return { ...decision, provenance: 'no-figure:retry-identical-figure' }
     }
     if (deadline.expired()) {
-      void recordNotServed(ctx, retry.figure, deps.outcomeSink)
+      void trackWrite(recordNotServed(ctx, retry.figure, deps.outcomeSink))
       return { ...decision, provenance: 'no-figure:retry-deadline-before-critic' }
     }
     const retryCritic = deps.critic ?? ((f, c, budgetMs) => criticiseFigure(f, c, { budgetMs }))
@@ -1217,7 +1218,7 @@ export async function resolveVisualForTurn(
     })
     if (retryVerdict.decision !== 'promote') {
       // The stale reject already stands for this concept; nothing to update.
-      void recordNotServed(ctx, retry.figure, deps.outcomeSink)
+      void trackWrite(recordNotServed(ctx, retry.figure, deps.outcomeSink))
       return { ...decision, provenance: `no-figure:retry-critic-${retryVerdict.decision}` }
     }
     /**
@@ -1229,14 +1230,14 @@ export async function resolveVisualForTurn(
      * work is redone each time. Replacing both is what makes the fix converge
      * rather than merely paper over the turn.
      */
-    void replaceVisualization(figureCacheKey(ctx.conceptId), JSON.stringify(retryPayload), deps.cacheClient)
-    void replaceVisualization(verdictKey(ctx.conceptId), JSON.stringify({
+    void trackWrite(replaceVisualization(figureCacheKey(ctx.conceptId), JSON.stringify(retryPayload), deps.cacheClient))
+    void trackWrite(replaceVisualization(verdictKey(ctx.conceptId), JSON.stringify({
       decision: 'promote' as const,
       confidence: retryVerdict.confidence,
       grounding: groundingHash(ctx),
       figure: figureFingerprint(retryPayload),
       judgedAt: Date.now(),
-    }), deps.cacheClient)
+    }), deps.cacheClient))
     return serve(retry.figure, `generated-retry:${ctx.conceptId}`)
   }
 
@@ -1245,7 +1246,7 @@ export async function resolveVisualForTurn(
       // Out of time before the judge could answer. The figure is ABANDONED,
       // never served half-checked — the generation still populated the cache,
       // so the next learner will not wait for it.
-      void recordNotServed(ctx, result.figure, deps.outcomeSink)
+      void trackWrite(recordNotServed(ctx, result.figure, deps.outcomeSink))
       return { ...decision, provenance: 'no-figure:deadline-before-critic' }
     }
     const critic = deps.critic ?? ((f, c, budgetMs) => criticiseFigure(f, c, { budgetMs }))
@@ -1253,12 +1254,12 @@ export async function resolveVisualForTurn(
     if (critique.decision !== 'promote') {
       // A settled REJECT is stored so the next learner does not pay for it; a
       // HOLD deliberately is not, because it is usually about the moment.
-      void writeVerdict(ctx, figurePayload, critique, deps.cacheClient)
-      void recordNotServed(ctx, result.figure, deps.outcomeSink)
+      void trackWrite(writeVerdict(ctx, figurePayload, critique, deps.cacheClient))
+      void trackWrite(recordNotServed(ctx, result.figure, deps.outcomeSink))
       return { ...decision, provenance: `no-figure:critic-${critique.decision}` }
     }
     // Best-effort and not awaited: this learner already has their figure.
-    void writeVerdict(ctx, figurePayload, critique, deps.cacheClient)
+    void trackWrite(writeVerdict(ctx, figurePayload, critique, deps.cacheClient))
   }
 
   // The model chose the form; the payload follows it rather than the other way

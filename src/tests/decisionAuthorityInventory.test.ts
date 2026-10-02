@@ -155,7 +155,9 @@ describe('I — the classification, verified against the actual call graph', () 
 
   it('L6 — the archived Eb pipeline is fire-and-forget behind its own flag', () => {
     expect(routeSrc).toContain("@/lib/educationalBrain/pipeline")
-    expect(routeSrc).toContain('void import')
+    // Still not awaited in-line; since 2026-10-02 it is recorded with
+    // trackWrite so the route settles it before replying (pendingWrites.ts).
+    expect(routeSrc).toContain("void trackWrite(import('@/lib/educationalBrain/pipeline')")
   })
 })
 

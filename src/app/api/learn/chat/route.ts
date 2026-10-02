@@ -38,6 +38,7 @@ import type { VisualSpec } from '@/lib/visuals/visualSpec'
 import type { SceneSpec } from '@/lib/teaching/sceneSpec'
 import { decide } from '@/lib/teaching-engine'
 import { appendEvidenceEvent, GradeBand, EvidenceCategory } from '@/lib/teaching/evidence/evidenceEngine'
+import { withPendingWrites, trackWrite, settlePendingWrites } from '@/lib/db/pendingWrites'
 import { isEduBrainEnabled } from '@/lib/curriculum/subjectRollout'
 import {
   assembleLesson, buildStudentState, ingestGeneratedLesson, isExplanationMemoryEnabled, resolveContentRegister,
@@ -157,6 +158,23 @@ const schema = z.object({
  * client sees a retryable server condition rather than a platform error page.
  */
 export async function POST(req: Request) {
+  // Every write this turn starts without awaiting is recorded (trackWrite) and
+  // settled here, before the response leaves: a frozen instance would keep its
+  // transaction open. See src/lib/db/pendingWrites.ts for the measured incident.
+  return withPendingWrites(async () => {
+    const res = await raceChatTurn(req)
+    const settled = await settlePendingWrites(BACKGROUND_WRITE_CAP_MS)
+    if (settled.stillPending > 0) {
+      console.warn('[pending-writes] reply sent with writes still running', settled)
+    }
+    return res
+  })
+}
+
+// Bounds the delay one slow database adds to one reply.
+const BACKGROUND_WRITE_CAP_MS = 3000
+
+async function raceChatTurn(req: Request): Promise<Response> {
   const deadline = createRouteDeadline()
   let timer: ReturnType<typeof setTimeout> | undefined
   try {
@@ -6517,7 +6535,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // never in play at all (no KG for this subject) — skip the write
       // rather than log a conceptId-less row that couldn't be aggregated.
       if (resolvedConceptId) {
-        prisma.memoryServingEvent.create({
+        void trackWrite(prisma.memoryServingEvent.create({
           data: {
             conceptId: resolvedConceptId,
             subjectSlug: learnSession.subject.slug,
@@ -6528,7 +6546,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             fallbackReason: memoryFallbackReasonCode,
             assetId: memoryAssetId,
           },
-        }).catch((err) => console.warn('[learn/chat] MemoryServingEvent write failed (non-fatal):', err))
+        }).catch((err) => console.warn('[learn/chat] MemoryServingEvent write failed (non-fatal):', err)))
       }
 
       // Wave 0 Step 2/4 (Blueprint Phase 3): extract and strip the SIGNAL
@@ -7920,7 +7938,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       if (memoryState && !assembled && provider !== 'gate') {
         const { isDegradedProvider } = await import('@/lib/eos-runtime/degradedMode')
         if (!isDegradedProvider(provider)) {
-          void ingestGeneratedLesson({
+          void trackWrite(ingestGeneratedLesson({
             conceptId: memoryState.conceptId,
             subjectSlug: memoryState.subjectSlug,
             language: memoryState.language,
@@ -7931,7 +7949,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // exactly rather than by shape. Measured: an asset opening
             // "Mohammad Suaib, …" was captured, stored and served twice.
             learnerName: profile?.displayName ?? session.user.name ?? null,
-          })
+          }))
         }
       }
 
@@ -10751,7 +10769,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // strategy-effectiveness analysis. Never awaited, never throws, so it
       // cannot add latency or fail the turn.
       if (resolvedStrategy && resolvedOutputBias && userId) {
-        prisma.teachingStrategyEvent.create({
+        void trackWrite(prisma.teachingStrategyEvent.create({
           data: {
             userId,
             topicSlug: resolvedStrategyTopicSlug ?? subjectCode,
@@ -10760,7 +10778,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             visualFired,
             sessionId: sessionId ?? null,
           },
-        }).catch(() => { /* non-fatal — outcome logging is purely additive */ })
+        }).catch(() => { /* non-fatal — outcome logging is purely additive */ }))
       }
 
       // P0 (Brain compliance validation) + P1 (production-validation
@@ -11233,7 +11251,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // not attempted. Reporting a missing foundation is not an error, so the
         // correct number of rows to write is zero.
         if (resolvedConceptId && !resolvedKnowledgeGap) {
-          prisma.mistakeRecord.create({
+          void trackWrite(prisma.mistakeRecord.create({
             data: {
               userId,
               subjectSlug: subjectCode,
@@ -11242,7 +11260,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               category: 'recovery_signal',
               questionId: resolvedConceptId,
             },
-          }).catch(() => {})
+          }).catch(() => {}))
         }
       }
 
@@ -12696,9 +12714,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
 
       // Educational Brain side-car: fire-and-forget, never awaited, never blocks response.
       // Activated only when ENABLE_EDUCATIONAL_BRAIN_PIPELINE=true; zero-overhead when off.
-      void import('@/lib/educationalBrain/pipeline').then(({ runEducationalBrainPipeline }) =>
+      void trackWrite(import('@/lib/educationalBrain/pipeline').then(({ runEducationalBrainPipeline }) =>
         runEducationalBrainPipeline({ userId, sessionId, subjectSlug: subjectCode, userMessage: message })
-      ).catch(() => {})
+      ).catch(() => {}))
 
       // Mastery gate — the client's single source of truth for whether the
       // Complete/Next actions are evidence-backed (Bug 9: roadmap, chat,

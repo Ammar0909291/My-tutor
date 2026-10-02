@@ -5,6 +5,7 @@
 // No FK to User — denormalized for lock-free INSERT on the hot path (ADR 13 §5).
 
 import { prisma } from '@/lib/db/prisma'
+import { trackWrite } from '@/lib/db/pendingWrites'
 import { EvidenceCategory, GradeBand } from '@prisma/client'
 
 export { EvidenceCategory, GradeBand }
@@ -31,7 +32,9 @@ export interface EvidenceEventInput {
  * loss is acceptable; turn failure on evidence write is not (ADR 13 §10 P1).
  */
 export function appendEvidenceEvent(input: EvidenceEventInput): void {
-  prisma.evidenceEvent
+  // Not awaited by callers; trackWrite lets the chat route settle it before
+  // replying (src/lib/db/pendingWrites.ts).
+  void trackWrite(prisma.evidenceEvent
     .create({
       data: {
         userId:          input.userId,
@@ -50,5 +53,5 @@ export function appendEvidenceEvent(input: EvidenceEventInput): void {
         contextHash:     input.contextHash,
       },
     })
-    .catch(() => {})
+    .catch(() => {}))
 }
