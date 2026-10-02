@@ -177,3 +177,33 @@ Production `pg_stat_statements` (lifetime counters; row sizes measured with `pg_
 - **Re-measure after deploy** with the two-snapshot delta on queryids 628852208896445779,
   444473988123706220, -7522253544637828763 (topic_progress) and 7123691883795881034
   (capability replay).
+
+## 2026-10-02 — Turn-assembly shadow sampling: egress measured, not estimated
+
+The owner asked for egress to stay under the free tier while `scripts/qa/shadowSampleRun.ts`
+drove disposable-account sessions to fill the shadow sample.
+
+**Method:** two-snapshot `pg_stat_statements` delta (lifetime counters), the same method as the
+entries above. Snapshot 1 at 17:42:26 UTC, snapshot 2 at 17:46:42 UTC, around one bounded sampler
+run (physics, 2 lessons, 6 graded taps, about 20 chat requests), plus any other traffic in the
+window.
+
+| Measure | Delta |
+| --- | --- |
+| All statements | +3,571 calls, +1,779 rows returned |
+| `spine_events` select (queryid 2599099062474326428, the EGRESS-1 replay) | **+0 calls, +0 rows** |
+| `topic_progress` reads (4078834300536363835, 444473988123706220) | +30 calls, +36 rows |
+| Every other top-10 statement by lifetime rows | +0 |
+
+- **Rows per turn:** about 90 rows per chat turn. Measured row sizes for today:
+  - a message averages 391 bytes;
+  - a `contextSnapshot` averages 7.5 KB stored (`pg_column_size`).
+- **Egress estimate:** about 1 MB per bounded sampler run. 300 sampled turns would be about
+  15 MB, roughly 0.3% of the 5 GB monthly free tier.
+- **Shadow mode:** the turn-assembly shadow itself does no database I/O. Its slot call works from
+  in-memory facts, and its log goes to Vercel, not Supabase.
+- **All of today's traffic** (about 1,800 messages, about 900 chat turns, all accounts): roughly
+  30–55 MB. That is about 1–1.6 GB/month if every day looked like today.
+- **What this does not measure:** the Supabase billing meter itself. Dashboard page loads also
+  count toward it (see the line above about the dashboard's own query). Read the meter in the
+  Supabase dashboard to confirm.
