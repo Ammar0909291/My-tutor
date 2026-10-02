@@ -61,6 +61,10 @@ const DEPTH_TARGETS: Record<string, number> = {
   'mathematicsDepthProbabilityAssets.ts': 5,
   'mathematicsDepthStatisticsAssets.ts': 5,
   'mathematicsDepthDifferentialEquationsAssets.ts': 5,
+  'mathematicsDepthAbstractAlgebraAssets.ts': 5,
+  'mathematicsDepthDiscreteAssets.ts': 5,
+  'mathematicsDepthComplexAnalysisAssets.ts': 5,
+  'mathematicsDepthRealAnalysisAssets.ts': 5,
 }
 
 /** Modules authored by the probe-depth programme. Extend as batches land. */
