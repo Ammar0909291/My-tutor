@@ -555,6 +555,36 @@ numbers.
     (§10 item 3).
   - Serve stays off until the owner decides.
 
+### 11.13 SERVE, windows 1–2 (2026-10-03, deploy `0c4cfa8` / dpl_A8Au4zmsDg8Kqib7HdBEqPsXbhF3)
+
+- **Switch:** owner approval 2026-10-03 (§10 item 3). `TURN_ASSEMBLY_MODE` set to `serve`
+  (env `JbRbLIiro5FFjyBB`). The deploy of `464f0ea` captured the old value: its 9 lines say
+  `served: live`. `0c4cfa8` is the first serve deploy.
+- **Runs:** disposable accounts, deleted after each run:
+  - chemistry: 10 graded;
+  - physics: 12 graded;
+  - biology: 12 graded;
+  - plus another session's mathematics QA on the same deploy.
+- **Graded turns, 49 lines** (`tallyAssembledTurns.ts`):
+  - served assembled **49/49**; completion agreement **49/49**;
+  - served K1 **0/49**, served K2 **0/49**. Live, the model's own text in the same turns: K1
+    1/49, K2 1/49;
+  - fallback 0, regenerations 0, validation codes none;
+  - slot call p50 715 ms, max 1.25 s; added wait 0 ms.
+- **Completion turns:** 3 of 49. Each was verdict, then feedback, then close (§14).
+- **Stored row = served text:**
+  - read-only SQL found all 25 window-1 texts verbatim as ASSISTANT rows (24 by 120-character
+    prefix, 1 by content, after a Unicode-normalisation difference);
+  - the card block was present exactly when `cardAttached` was, on every turn that a
+    60-character prefix tells apart. One pair shared a prefix and could not be.
+- **5xx:** none on the production deployment in the window (`get_runtime_logs`,
+  statusCode 5xx).
+- **Hand-read of the 25 served texts (window 1):**
+  - each is a verdict, then a reason naming the idea, then teaching, then a neutral lead-in
+    or the close;
+  - no stub, no question.
+  - The factual content was not checked (Phase 5).
+
 ---
 
 ## 12. Phase 3 step 2 — turns that attach a card (design, 2026-10-03)

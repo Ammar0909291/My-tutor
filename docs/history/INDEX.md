@@ -39,6 +39,7 @@ log.
 | `learner-baseline-2026-09-30-cto-loop.md` | Autonomous CTO loop: 10-session real-browser learner baseline (5 physics, 5 chemistry, real account), the defect clusters, 17 fixes (stub repair, affirm guard vs authored key, Close records mastery, R1 resume, figure colours, simulation controls/spoilers, answer heads, excursion quiz, empty generated graph, lesson-one spiral deadlock, skip-demotes-mastery, completion-card ids, graded-tap confirm-back, H2/O2 key), production verification, and the owner actions left open. |
 | `turn-quality-baseline-2026-10-02.md` | Phase 0 of the turn assembly proposal: read-only production baseline. Zero-tolerance checks (grade vs authored key, mastery without evidence), heuristic turn checks K1–K5 with hand-read precision, 14-day trend, and what was not measured. SQL in `scripts/qa/turnQuality/`. |
 | `turn-assembly-pairs-2026-10-02.md` | Turn assembly shadow: 30 served-vs-assembled reply pairs (post-fix windows 6–11, four subjects) for the owner's spec §7 hand-read. |
+| `turn-assembly-serve-2026-10-03.md` | Turn assembly Phase 3 serve rollout: incident log (the attach assembler cut rhetorical questions, fixed in `504579c`), and an owner security note about a key visible in a Vercel env comment. |
 
 ## Live pointers (not history — check these first for CURRENT state)
 - `/CLAUDE.md` — live rules.
