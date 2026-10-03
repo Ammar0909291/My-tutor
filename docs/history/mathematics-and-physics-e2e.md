@@ -306,3 +306,80 @@ is in test mode and only delivers to the account owner's address; a verified sen
 needed at resend.com/domains. (2) A 07:53 UTC cold start hit the 12 s bootstrap deadline before
 its first DB step (benign now that the corpus has fully converged; owned by the pending-writes
 work, not changed here).
+
+## 2026-10-03 (continued) — learner-validation follow-up: evidence classification, two more defects
+
+Purpose: turn the 12 weak-learner sessions into engineering evidence. Terms used precisely:
+Mathematics is KG-complete, EB-complete, concept-authored (asset contract 917/917 pairs, five
+probes each) and production-converged (24/24 domains byte-identical). Runtime-verified and
+learner-validated apply only to the **sampled lessons below — 12 of 908 concepts, scripted
+weak-learner plans, disposable accounts** — not to the subject. No real-account or longitudinal
+validation exists (a real account was offered; running it was blocked by the session's
+credential safeguard).
+
+"Verified mastery" here = `conceptMasteryVerdict`: not `teachingIntegrityUncertain`, and
+`masteryVerifiedStrict` — at least 1 CHECK and 2 PRACTICE answers graded correct by the
+server against an AUTHORED key (`verifiedCorrectAt*`; model-authored questions never count).
+
+**Classification of the first 12 sessions.**
+- A (healthy): all 12 reached verified mastery; every mastery claim matched server counters.
+- B (confirmed defects): unit-circle stale attribution (defect 5); fraction mirror stub (defect 6);
+  separable — an emptied display-math block (defect 7, below).
+- C (quality concerns, no fix): (1) a learner's "give me a question" in OBSERVE/GUIDE sometimes
+  gets a prose question or an authored explanation instead of a card (separable T3/T4,
+  standard-error T12); (2) authored EXPLANATION assets are served verbatim, in the corpus's
+  CAPS-key style (separable T11, bayes T5) — dense, but authored content, not a code defect;
+  (3) after a correct answer, the next nudge sometimes re-confirms it (standard-error T15,
+  bayes T10) — redundant, not false; (4) bayes T7 was the designed KG-description floor
+  (`conceptFallbackText`), whose trigger can't be established (logs past retention).
+- D (limitations): see the end of this section.
+
+**Long sessions are not a defect.** Per-turn traces:
+- standard-error (18 turns): CHECK at T14, after 3 scripted wrong answers, 1 off-key answer,
+  7 nudges and 3 correct pre-CHECK answers.
+- separable (16): CHECK at T12, after 1 confused message, 1 wrong, 1 off-key, 6 nudges and
+  3 correct pre-CHECK answers.
+- bayes (13): CHECK at T9, after 1 wrong, 5 nudges and 3 correct pre-CHECK answers.
+
+All three then finished in the minimum, 3 graded answers in 4 turns. There was no loop and no
+pool exhaustion. The length is the scripted weak-learner plan plus the designed rule that only
+CHECK/PRACTICE server-graded answers count.
+
+**Unit-circle corpus check.** Every keyed trig probe that names an angle (25) was checked by
+hand (180° → (−1, 0), 60° → (1/2, √3/2), sin 240° = −√3/2, …): all correct. An automated
+angle→point scan of the math assets, EB and chapters found 19 hits, all false positives on
+review (rotations about other centres; correct statements naming the point at 90°). The
+180° → (0, 1) statement was model generation, not content.
+
+**Defect 7 — an answer-leak drop left an empty display block (runtime, all subjects, fixed
+`d6ac7e26`).** separable: "…the equation becomes\n\n\[\n\]\n\nNow we integrate each side."
+above "Separating dy/dx = x/y gives which equation?". `dropAnswerLeaks` removed the answer line
+inside `\[ … \]` and kept the delimiters. An emptied `\[ \]`/`$$ $$` block is now removed,
+with an introducing sentence that has no end punctuation. Regression:
+`answerLeakEmptiedDisplayMath.test.ts`. Reproduced locally before the fix.
+
+**Post-fix validation run** (deploy `d6ac7e26`, two fresh disposable accounts, both deleted):
+the six original lessons plus standard-error, separable and matrix-multiplication — **9/9
+verified mastery, 0 harness findings, 0 empty display blocks.** Two results:
+- **Defect 5 recurred, found and fixed (defect 5b).** Production log 09:36:17 UTC: the guard
+  fired and dropped "how did you arrive at the point (0, 1) for 180°?". The one regeneration
+  (`repairStubReply`), which sees the same history, wrote "Can you walk me through how you
+  decided the point at 180° is (0, 1)?" and it shipped. The next turn self-corrected
+  ("(–1, 0), not (0, 1)") rather than teaching it. Fix: the regenerated text is re-checked,
+  and a repeat is replaced by `confirmGradedAnswer`, built only from the graded card.
+  Regression added to `staleQuestionAttribution.test.ts`.
+- **Matrix-multiplication shipped a bare "That's right."** This is a different path: the
+  gate-contract stub repair was rejected ("repair-asked-a-question-beside-the-card"). It is
+  the class the turn-assembly program measures as K1 (15–27% baseline). This turn's shadow
+  log has live K1 true, assembled K1 false. That program's serve step awaits the owner's
+  decision (`TURN_ASSEMBLY_PHASE1_SPEC.md` §10), so it is recorded here and not patched
+  piecemeal. Defect 6's fix covers only the mirror path of the same class.
+
+**Limitations (D).**
+- 12 + 9 scripted weak-learner sessions on 14 distinct concepts out of 908.
+- No real-account or real-learner traffic.
+- No longitudinal retention.
+- The model is stochastic, so a guard that held in one run is not proof for all runs.
+- Logs older than about 8 h are unreadable (billing limit).
+- The `[stale-question]` guard had no production observation before this run; it is now
+  observed firing.
