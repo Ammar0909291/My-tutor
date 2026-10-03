@@ -1611,5 +1611,28 @@ export function dropAnswerLeaks(text: string, mcq: TutorMCQ, conceptTitle?: stri
     return keptLines.join('\n').trim()
   })
   if (dropped.length === 0) return { text, dropped }
-  return { text: paragraphs.filter((p) => p.length > 0).join('\n\n'), dropped }
+  return { text: dropEmptiedDisplayMath(paragraphs.filter((p) => p.length > 0).join('\n\n'), dropped), dropped }
+}
+
+// A display block whose only line was the answer is left as "\[ \]", and the
+// sentence that introduced it ends mid-thought. Measured (production QA,
+// 2026-10-03, math.de.separable): "…the equation becomes\n\n\[\n\]\n\nNow we
+// integrate each side." above "Separating dy/dx = x/y gives which equation?".
+// The emptied block goes, and so does an introducing sentence that has no
+// end punctuation of its own ("…becomes", "…is:").
+const EMPTY_DISPLAY_MATH = /\\\[\s*\\\]|\$\$\s*\$\$/
+
+function dropEmptiedDisplayMath(text: string, dropped: string[]): string {
+  let out = text
+  for (let m = EMPTY_DISPLAY_MATH.exec(out); m; m = EMPTY_DISPLAY_MATH.exec(out)) {
+    let before = out.slice(0, m.index).trimEnd()
+    const after = out.slice(m.index + m[0].length).replace(/^[ \t]*\n?/, '')
+    if (before && !/[.!?]["”’)*]*$/.test(before)) {
+      const start = Math.max(before.lastIndexOf('\n'), ...[...before.matchAll(/[.!?]["”’)*]*\s+/g)].map((s) => s.index! + s[0].length - 1)) + 1
+      dropped.push(before.slice(start).trim())
+      before = before.slice(0, start).trimEnd()
+    }
+    out = before && after.trim() ? `${before}\n\n${after.trimStart()}` : (before || after.trimStart())
+  }
+  return out.replace(/\n{3,}/g, '\n\n').trim()
 }
