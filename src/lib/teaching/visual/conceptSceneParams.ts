@@ -1110,6 +1110,24 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     ],
   }),
 
+  // LAUNCH READINESS (2026-10-03): the one biology concept the 2026-09-25
+  // campaign left to Tier 3, because a live sweep saw it work. Tier 3 has a
+  // documented stuck mode (bioVisualGapFix.test.ts), so an explicit request
+  // should not depend on it. Grounded strictly in the concept's own EB "Core
+  // Understanding": the day / compensation point / night comparison is its
+  // stated central teaching point, and "respiration never stops" its most
+  // important corrective claim. Existing generator, no new rendering code.
+  'bio.plant.plant-respiration': () => buildCellComparisonScene({
+    conceptId: 'bio.plant.plant-respiration',
+    title: 'Plant Respiration Across a Day',
+    teachingGoal: 'Plants respire 24 hours a day; what changes is whether photosynthesis outweighs it.',
+    groups: [
+      { label: 'Bright day', description: 'photosynthesis rate exceeds respiration rate', items: ['Net CO2 uptake', 'Net O2 release', 'Respiration still running, masked by photosynthesis'] },
+      { label: 'Compensation point', description: 'a light intensity, not a time of day', items: ['Photosynthesis rate equals respiration rate', 'No net gas exchange', 'Both processes running and cancelling out'] },
+      { label: 'Night', description: 'no light, so only respiration continues', items: ['Net CO2 release', 'Net O2 consumption', 'Glycolysis, Krebs cycle, oxidative phosphorylation'] },
+    ],
+  }),
+
   // ══ BIOLOGY VISUAL COVERAGE CAMPAIGN (2026-09-25) ══
   //
   // Live diagnostic sweep (16 concepts, one per Biology domain, driven
