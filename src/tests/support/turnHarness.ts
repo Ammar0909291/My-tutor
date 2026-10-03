@@ -179,7 +179,13 @@ export function createHarness(): Harness {
         state.messages.push(row)
         return row
       },
-      update: (arg: any) => ({ id: arg?.where?.id ?? 'msg' }),
+      // Applies the content change, so "the stored row matches what was shown"
+      // is testable (save-once, 2026-10-03).
+      update: (arg: any) => {
+        const row = state.messages.find((m) => m.id === arg?.where?.id)
+        if (row && typeof arg?.data?.content === 'string') row.content = arg.data.content
+        return { id: arg?.where?.id ?? 'msg' }
+      },
       findFirst: () => null,
     },
     profile: {

@@ -104,3 +104,38 @@ describe('spec §4: one regeneration when a slot fails', () => {
     expect(calls).toBeGreaterThanOrEqual(2)
   }, 180_000)
 })
+
+describe('serve mode (Phase 3, graded turns; owner approval 2026-10-03)', () => {
+  it('serves the assembled turn and stores exactly what was served', async () => {
+    h.routeAI = async (...args: unknown[]) => {
+      if (String(args[1] ?? '').includes('Return ONLY a JSON object')) return { text: SLOTS, provider: 'harness', finishReason: 'stop' }
+      return baseRouteAI(...args)
+    }
+    process.env.TURN_ASSEMBLY_MODE = 'serve'
+    const t = await gradedTap()
+    expect(t).not.toBeNull()
+    const text = textOf(t!)
+    expect(text).toMatch(/^(That's right\.|Correct — well done\.|Yes, exactly right\.)\n\n/)
+    expect(text).toContain('Momentum is conserved in every collision')
+    const line = t!.logs.find((l) => l.includes('[assembled-turn]'))!
+    expect(JSON.parse(line.slice(line.indexOf('{'))).served).toBe('assembled')
+    // Save once: the stored row is the served text plus the card it carried.
+    const { appendMcqToHistoryText } = await import('@/lib/teaching/mcq')
+    const stored = [...h.state.messages].reverse().find((m) => m.role === 'ASSISTANT')!
+    expect(stored.content).toBe(appendMcqToHistoryText(text, (t!.body as { mcq?: never }).mcq ?? null))
+  }, 180_000)
+
+  it('serves the live reply when the slots cannot make a full turn (no stub is ever served)', async () => {
+    h.routeAI = async (...args: unknown[]) => {
+      if (String(args[1] ?? '').includes('Return ONLY a JSON object')) return { text: 'not json', provider: 'harness', finishReason: 'stop' }
+      return baseRouteAI(...args)
+    }
+    process.env.TURN_ASSEMBLY_MODE = 'serve'
+    const t = await gradedTap()
+    expect(t).not.toBeNull()
+    const line = t!.logs.find((l) => l.includes('[assembled-turn]'))!
+    const logged = JSON.parse(line.slice(line.indexOf('{')))
+    if (logged.served === 'assembled') expect(logged.assembled.k1Stub).toBe(false)
+    else expect(textOf(t!)).toBe(logged.liveText.length < 700 ? logged.liveText : textOf(t!))
+  }, 180_000)
+})

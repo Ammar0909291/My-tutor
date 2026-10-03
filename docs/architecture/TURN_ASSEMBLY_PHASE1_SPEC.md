@@ -554,3 +554,179 @@ numbers.
     (`docs/history/turn-assembly-pairs-2026-10-02.md`), then the separate serve approval
     (§10 item 3).
   - Serve stays off until the owner decides.
+
+---
+
+## 12. Phase 3 step 2 — turns that attach a card (design, 2026-10-03)
+
+**Owner approval:** Phase 3 for all turn types, given 2026-10-03.
+
+**Scope.** Every turn whose response carries a card (`mcqHoisted !== null`) and whose served text
+is not the graded assembled turn (§5). Cases:
+- a "quiz me" turn;
+- a teaching turn where the gate attaches its card;
+- a graded turn where serve fell back to the live reply.
+
+**Defect it targets:** K2, a question in the prose beside a card. The Phase-0 rate was 6.6–11.3%
+by subject, and it did not move in 14 days (`turn-quality-baseline-2026-10-02.md`). The existing
+gate-contract stage drops a *trailing* question. A question earlier in the prose survives it,
+for example a confirm-back ("Does that make sense so far?") before the teaching.
+
+**Assembly** (`src/lib/teaching/attachAssembly.ts`, `assembleAttachTurn(prose, cardQuestion)`). No
+model call; deterministic:
+1. Prose with no `?` is left exactly as it is.
+2. Otherwise:
+   - every question **to the learner** is dropped, and so is every home-made option line
+     (`dropLearnerQuestions`);
+   - a question to the learner is one left hanging (nothing but more questions after it in its
+     paragraph), or a confirm-back ("does that make sense", "ready to try", …);
+   - a question the prose answers itself is teaching and stays ("Pressure in pascals? That's
+     kg/(m·s²)."). See §12.1 for why;
+   - the prose ends on exactly one neutral lead-in (`neutralLeadInFor`, which never names a
+     topic, the K4 defect). A closing sentence that already announces the card is replaced by
+     the lead-in, never stacked with it.
+3. A question inside quotation marks is content, not a question to the learner, for example
+   English: *The sentence "Where are you going?" is interrogative.* The turn is then left
+   untouched and stays K2 in the log, rather than losing teaching content.
+
+**Route** (after the graded serve decision, before save-once):
+- **shadow:** log `[assembled-attach]` with K2 and K1 before and after, `changed`, and
+  `served: 'live'`. The reply is unchanged.
+- **serve:** send the assembled text when it changed. A rhetorical `?` left in it does not block
+  serve.
+  - Never on a reply to an answer if assembly would create a K1 stub (under 12 words) that was
+    not there before. K2 is not traded for K1.
+  - Save-once (§6) then stores exactly the served text plus its card.
+- One line per card turn, so the denominator is every card turn, not only the changed ones.
+
+**Measure** (`tallyAssembledTurns.ts`, the `[assembled-attach]` section):
+- K2 on served card turns;
+- changed share;
+- K1 created (must be 0).
+- Target: K2 on card turns under 3% over at least 100 card turns.
+
+**Tests:**
+- `attachAssembly.test.ts` (unit);
+- `attachAssemblyRoute.test.ts`, which covers:
+  - off: no log line;
+  - shadow: byte-identical to off, and the line logged;
+  - serve: no `?`, one lead-in, and the stored row equal to the served text plus its card.
+
+---
+
+## 13. Phase 3 step 3 — lesson open (baseline, 2026-10-03; design follows)
+
+**Path.** Openings are not chat turns. `POST /api/learn/lesson-init` makes one `routeAI` call
+(re-asked once on a navigation refusal), runs its own repairs (unbacked figure reference,
+prediction-answer strip, field-line sign, vision direction), and writes one ASSISTANT row with
+the lesson's `lessonKey`. No card is attached and nothing is graded, so K1/K2 do not apply.
+
+**Baseline** (read-only SQL, production, last 7 days). An opening is the first row of each
+`(sessionId, lessonKey)`, and it is an ASSISTANT row.
+
+| Subject | Openings | 2+ "?" | Navigation refusal | Figure reference | Under 40 words | p50 chars |
+| --- | --- | --- | --- | --- | --- | --- |
+| physics | 677 | 18 | 3 | 0 | 4 | 1,385 |
+| biology | 324 | 6 | 0 | 1 | 0 | 1,471 |
+| chemistry | 77 | 2 | 0 | 0 | 0 | 1,490 |
+| mathematics | 75 | 8 | 0 | 0 | 0 | 1,266 |
+| english | 34 | 2 | 0 | 1 | 0 | 896 |
+
+- **Hand-read of the "2+ ?" class:** 22 openings, about half true.
+  - True cases end on two or three questions to the learner. For example `phys.em.ohms-law`:
+    "what do you expect to happen to the current? … What would the current be? … What do you
+    notice?"
+  - The rest are rhetorical or quoted questions inside the teaching ("we ask, 'How much energy
+    is transferred each second?'").
+- **Estimated true rate:** about 1.5% of openings ask the learner more than one question.
+  Navigation refusal is 0.25%, figure reference 0.17%.
+- **What this means for the gate.** The opening is the healthiest turn type measured so far.
+  An assembled opening must beat these rates in shadow (§7 method, at least 50 turns) before it
+  serves. Otherwise it stays model-written, and that is recorded here with the numbers.
+
+---
+
+## 14. Phase 3 step 4 — completion turns (design, 2026-10-03)
+
+**What the live path sends today.** When a graded answer finalises the lesson, `route.ts`
+replaces the whole reply with `buildLessonCloseText(...)` (the deterministic close, ~12079). It
+then rewrites the stored row (CL-29).
+- So the learner's last answer gets **no verdict and no reason**, only "✓ Lesson finished …".
+- This is K1's shape on the most important answer of the lesson. Phase 0 K1 excluded the close
+  by design, so it never counted.
+
+**The assembled completion turn is already built.** It is the §5 graded assembly with
+`closeText` set:
+
+```
+<verdict line>     from the grade
+<feedback slot>    why the last answer is right or wrong (validated, V1–V6)
+<close>            buildLessonCloseText(...) — no teaching slot, no card
+```
+
+`assembleGradedTurn` drops `teaching` and the lead-in when `closeText` is present. Serve (§11.13)
+sends it under the same fallback rules. Completion agreement is the gate that matters most
+here: the assembled text must close exactly when the live one did.
+
+**Measure.** `[assembled-turn]` lines with `completion: true`:
+- the share served assembled;
+- assembled K1 (0 expected: the feedback slot is required);
+- completion agreement;
+- a hand-read that the close still follows the feedback.
+- Target: at least 50 completion turns.
+
+**Tests.**
+- Already present: `turnAssembly.test.ts` ("completion: …", line ~137). A completing turn is
+  verdict, then feedback, then close, with no teaching and no lead-in.
+- To add: a route-level serve test for a completing tap. It needs the harness to reach
+  mastery, so it is written when the harness supports it. Until then, production
+  `completion: true` lines are the evidence.
+
+---
+
+## 15. Phase 3 step 5 — learner questions (baseline, 2026-10-03)
+
+**Definition.** An ASSISTANT row whose previous row is a USER message ending in `?`
+(12–400 characters). Read-only SQL, production, last 7 days.
+
+| Subject | Turns | Reply under 12 words | Opens with a verdict | With a card | Card and a `?` in the prose |
+| --- | --- | --- | --- | --- | --- |
+| physics | 1,783 | 4 | 2 | 30 | 4 |
+| mathematics | 145 | 28 | 0 | 67 | 4 |
+| chemistry | 94 | 1 | 0 | 11 | 0 |
+| english | 66 | 1 | 0 | 7 | 3 |
+| biology | 40 | 2 | 0 | 6 | 3 |
+
+- **Hand-read of the mathematics "under 12 words" class:** 12 read, **0 true**.
+  - Every one answers a practice request phrased as a question ("can you ask me a
+    question?", "next?").
+  - The reply is a lead-in plus a card, which is the correct turn.
+  - Excluding practice requests, the stub rate on real learner questions is at most 8 of
+    2,128 (0.4%).
+- A false verdict on a question is 2 of 2,128 (0.1%).
+- **Card and a `?` in the prose:** 14 of 121. This is K2, and the §12 attach assembler already
+  covers it, because it runs on every card turn whatever the learner said.
+- **Decision rule (DoD 3):** an assembled answer must beat these rates in shadow. The measured
+  defect rate is already near the floor of what the checks can see, so a slot-filled answer has
+  nothing to win on these checks. It would add a model call and risk stiffness on the one
+  turn type where free text is the point. Learner questions stay model-written, unless a
+  shadow run shows a gain.
+
+### 12.1 First serve window and the rhetorical-question fix (2026-10-03, deploy `0c4cfa8`)
+
+- **Graded turns** (chemistry sampler plus another session's mathematics QA, 25 lines on the
+  serve deploy):
+  - served assembled 25/25; completion agreement 25/25;
+  - served K1 0, served K2 0 (live K2 1/25); fallback 0;
+  - added wait 0 ms.
+- **Card turns:** 15 lines.
+  - Before assembly, K2 was 5/15. Served K2 was 0/15.
+  - **Hand-read of the 5 changed turns:**
+    - 2 were damaged. The first version dropped every `?` sentence, including questions the
+      prose answers itself. "Pressure in pascals? That's kg/(m·s²). Energy in joules?
+      kg·m²/s²." became "That's kg/(m·s²). kg·m²/s².", and "A mixture? No fixed ratio —"
+      became "No fixed ratio —".
+    - 1 left the closing `**` of a dropped bold question ("at 0.**").
+    - 2 were correct: a re-typed card question, and a hanging second question.
+- **Fix:** drop only questions to the learner (hanging, or a confirm-back). A word-less
+  fragment goes with the sentence before it. All four production shapes are now unit tests.

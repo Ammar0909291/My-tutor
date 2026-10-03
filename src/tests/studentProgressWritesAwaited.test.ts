@@ -58,7 +58,7 @@ describe('student_progress writes are settled before the reply', () => {
     const lastPush = ROUTE.lastIndexOf('studentProgressWrites.push(')
     const settle = ROUTE.indexOf('await Promise.all(studentProgressWrites)')
     const r1 = ROUTE.indexOf('await topicProgressEvidenceWrite')
-    const reply = ROUTE.indexOf('return NextResponse.json({\n        success: true, text: cleanText, provider,')
+    const reply = ROUTE.indexOf('return NextResponse.json({\n        success: true, text: servedText, provider,')
     expect(lastPush).toBeGreaterThan(0)
     expect(settle).toBeGreaterThan(lastPush)
     expect(settle).toBeGreaterThan(r1)

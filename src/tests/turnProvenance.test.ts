@@ -92,7 +92,7 @@ describe('the rule is actually wired, end to end', () => {
   })
 
   it('the chat API ships llmCallCount to the client', () => {
-    expect(ROUTE).toMatch(/success: true, text: cleanText, provider,[\s\S]{0,600}llmCallCount,/)
+    expect(ROUTE).toMatch(/success: true, text: servedText, provider,[\s\S]{0,600}llmCallCount,/)
   })
 
   it('the history endpoint selects it, so a restored transcript re-badges too', () => {
