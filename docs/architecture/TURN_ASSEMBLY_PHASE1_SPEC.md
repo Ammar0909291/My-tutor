@@ -727,6 +727,26 @@ the lesson's `lessonKey`. No card is attached and nothing is graded, so K1/K2 do
   An assembled opening must beat these rates in shadow (§7 method, at least 50 turns) before it
   serves. Otherwise it stays model-written, and that is recorded here with the numbers.
 
+### 13.1 Shadow result and decision (2026-10-03, deploys `b87baf2` / `7defba5`)
+
+- **Implementation:**
+  - `assembleOpeningTurn`, classifier shared with §12 (`learnerQuestions.ts`);
+  - wired into `lesson-init` after every repair;
+  - its own switch `TURN_ASSEMBLY_OPEN_MODE`, which defaults to shadow even under global serve
+    (`turnTypeMode`).
+  - Tests: `openingAssembly.test.ts`, which failed before the module existed.
+- **Sample:** **80 openings** (`[assembled-open]`) across all five subjects, from open-only
+  sampler runs on disposable accounts plus other sessions' traffic.
+- **Result:**
+  - openings asking the learner 2+ questions: **live 0/80, assembled 0/80**;
+  - changed 0/80;
+  - openings with no question to the learner at all: 4/80 (not a check in §13; noted only).
+- **Decision (DoD 3 rule: serve only if shadow beats live):** the opening **stays
+  model-written**, and `TURN_ASSEMBLY_OPEN_MODE` stays unset (shadow).
+  - Shadow did not beat live: it equalled it at 0, because the class it targets is about 1.5%
+    of openings in the 7-day baseline (§13), and 80 openings show none of it.
+  - The shadow line stays on, so a rise would be visible.
+
 ---
 
 ## 14. Phase 3 step 4 — completion turns (design, 2026-10-03)
@@ -813,6 +833,32 @@ here: the assembled text must close exactly when the live one did.
     - 2 were correct: a re-typed card question, and a hanging second question.
 - **Fix:** drop only questions to the learner (hanging, or a confirm-back). A word-less
   fragment goes with the sentence before it. All four production shapes are now unit tests.
+
+### 15.1 Shadow result and decision (2026-10-03, deploy `7defba5`)
+
+- **Implementation:**
+  - `assembleQuestionTurn` (`questionAssembly.ts`): drops a verdict on an ungraded question,
+    keeps at most one question back, and never sends a stub;
+  - its own switch `TURN_ASSEMBLY_QUESTION_MODE`, shadow by default;
+  - every learner question logs `[assembled-question]`. One with a card on screen is logged
+    for its checks only, since the attach assembler owns that text.
+  - Tests: `questionAssembly.test.ts` and `questionAssemblyRoute.test.ts`, both failing first.
+- **Sample:** **52 learner-question turns** (17 with a card on screen), from `QA_ASK` runs
+  across physics, mathematics, chemistry, biology and English, on disposable accounts.
+- **Live** (the model's reply as served):
+  - stub 0/52;
+  - verdict on a question 0/52;
+  - two or more questions back 1/52.
+- **Assembled:** changed 1/52.
+  - Hand-read of that one turn: it cut "Same work?" from the contrasting pair "Same work?
+    Same power?" (`phys.mech.power`). The learner loses half of a coherent question. **Not a
+    gain.**
+- **Decision (DoD 3: learner questions may stay model-written if shadow shows no gain):**
+  learner questions **stay model-written**, and `TURN_ASSEMBLY_QUESTION_MODE` stays unset
+  (shadow).
+  - The live defect rates are at the floor the checks can see. The only assembler action seen
+    made a reply slightly worse.
+  - The shadow line stays on.
 
 ---
 
