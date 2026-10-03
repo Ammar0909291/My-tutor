@@ -309,21 +309,20 @@ describe('a branching feedback loop is not a simultaneous sequence', () => {
 
   it('generation reaches the learner with the conditional framing intact, via the same admission gate as any other spec', async () => {
     // Concept id deliberately NOT HOMEOSTASIS.conceptId: the Biology visual
-    // coverage campaign (batch 13) gave bio.physio.homeostasis-thermoregulation
-    // its own Tier 0 CONCEPT_SCENES override, which now wins unconditionally
-    // over generation for that concept, before resolveVisualForTurn's async
-    // generate/critic/admission path is even reached — exactly the intended
-    // end state of that campaign, not a regression (see conceptSceneParams.ts).
-    // This test's own purpose is the GENERATION path itself (a conditionally-
-    // framed process_flow passing the critic and admission gate), which is
-    // orthogonal to which concept it runs against, so it now runs against
-    // bio.plant.plant-respiration — confirmed by the same campaign to have no
-    // Tier 0/1 binding — with a freshly-anchored conditional scene using that
-    // concept's own KG vocabulary (aerobic vs anaerobic respiration) rather
-    // than the thermoregulation content, since the anchor check compares the
-    // generated scene's labels against the RESOLVED concept's own KG text.
+    // coverage campaign gave bio.physio.homeostasis-thermoregulation its own
+    // Tier 0 override, which wins over generation before resolveVisualForTurn's
+    // async generate/critic/admission path is reached. This test's purpose is
+    // the GENERATION path itself, orthogonal to which concept it runs against,
+    // so it needs a concept with no Tier 0/1 binding. It ran against
+    // bio.plant.plant-respiration until launch readiness (2026-10-03) gave that
+    // concept its own Tier 0 scene (every biology concept is now bound —
+    // bioFigureCoverageComplete.test.ts), so it now runs against
+    // chem.kinet.catalysis (no binding), with a conditional scene anchored in
+    // that concept's own KG vocabulary (catalysis, activation energy), since
+    // the anchor check compares the generated labels against the RESOLVED
+    // concept's KG text.
     const d = await resolveVisualForTurn(
-      { message: 'show me a diagram', lessonConceptId: 'bio.plant.plant-respiration', subject: 'biology', learnerRequest: 'diagram' },
+      { message: 'show me a diagram', lessonConceptId: 'cs.algo.flowcharts', subject: 'computer_science', learnerRequest: 'diagram' },
       {
         enabled: () => true,
         policy: 'auto',
@@ -332,12 +331,12 @@ describe('a branching feedback loop is not a simultaneous sequence', () => {
         budgetReader: openBudget,
         generate: async () => ({
           type: 'process_flow',
-          title: 'Aerobic vs anaerobic respiration',
+          title: 'A flowchart with conditional logic',
           steps: [
-            { title: 'Glycolysis converts glucose into pyruvate' },
-            { title: 'Cell checks oxygen availability' },
-            { title: 'If oxygen available: aerobic respiration via Krebs cycle' },
-            { title: 'If oxygen scarce: anaerobic fermentation instead' },
+            { title: 'Start: read the input value' },
+            { title: 'Decision symbol checks the condition' },
+            { title: 'If it holds: the yes branch' },
+            { title: 'If it fails: the no branch, as in pseudocode' },
           ],
         }),
       },
