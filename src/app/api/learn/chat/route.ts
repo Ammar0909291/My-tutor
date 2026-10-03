@@ -2197,6 +2197,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       evidence: import('@/lib/teaching/conversationState').TurnEvidence
       after: import('@/lib/teaching/conversationState').ConversationState
     } | null = null
+    // A tap on a MODEL-WRITTEN card (no authored key): the neutral reason
+    // slot (neutralAssembly.ts, launch-readiness item 1, 2026-10-03).
+    let neutralSlotHoisted: Promise<{
+      facts: import('@/lib/teaching/neutralAssembly').NeutralTurnFacts
+      raw: string; provider: string | null; ms: number; error: string | null; attempts: number
+    }> | null = null
     let turnAssemblyShadowHoisted: Promise<{
       facts: import('@/lib/teaching/turnAssembly').GradedTurnFacts
       raw: string; provider: string | null; ms: number; error: string | null; attempts: number
@@ -6097,6 +6103,47 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 return { facts, raw, provider, ms: Date.now() - startedAt, error: null, attempts }
               } catch (err) {
                 return { facts, raw, provider, ms: Date.now() - startedAt, error: err instanceof Error ? err.message : String(err), attempts }
+              }
+            })()
+          } else if (!probeKeyIsAuthored(pendingMcqHoisted) && assemblyMode !== 'off') {
+            // MODEL-WRITTEN card. MEASURED since serve: 2 taps got only "Here is
+            // your next question." — the unauthored-key repair (below) strips
+            // the model's verdict on purpose, and nothing was left. Ask for a
+            // reason that judges nothing (neutralAssembly.ts); the route serves
+            // it only when the live reply is a stub.
+            const na = await import('@/lib/teaching/neutralAssembly')
+            const nFacts: import('@/lib/teaching/neutralAssembly').NeutralTurnFacts = {
+              question: pendingMcqHoisted.question,
+              options: pendingMcqHoisted.options,
+              chosenIndex: mcqGradeHoisted.chosenIndex,
+            }
+            const startedAt = Date.now()
+            const slotRequest = [{ role: 'user' as const, content: 'Write the JSON object for this answer now.' }]
+            neutralSlotHoisted = (async () => {
+              let raw = ''
+              let provider: string | null = null
+              let codes: string[] = []
+              let attempts = 0
+              try {
+                for (let attempt = 0; attempt < 2; attempt++) {
+                  attempts++
+                  llmCallCount++
+                  const routed = await routeAI(
+                    slotRequest,
+                    na.buildNeutralSlotSystemPrompt(nFacts) + (attempt === 0 ? '' : ta.retryInstruction(codes)),
+                    country, 500, teachingLang,
+                    { userId, subject: learnSession.subject.slug },
+                    groqModelOverride, undefined, forceProvider,
+                  )
+                  raw = routed.text ?? ''
+                  provider = routed.provider ?? null
+                  const parsed = ta.parseSlots(raw)
+                  codes = parsed ? na.validateNeutralSlots(parsed, nFacts) : ['V1-unparseable']
+                  if (codes.length === 0) break
+                }
+                return { facts: nFacts, raw, provider, ms: Date.now() - startedAt, error: null, attempts }
+              } catch (err) {
+                return { facts: nFacts, raw, provider, ms: Date.now() - startedAt, error: err instanceof Error ? err.message : String(err), attempts }
               }
             })()
           }
@@ -13411,6 +13458,45 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           }
         } catch (err) {
           console.warn('[assembled-turn] shadow log skipped:', err)
+        }
+      }
+
+      // A TAP ON A MODEL-WRITTEN CARD gets a reason, never a verdict
+      // (neutralAssembly.ts). Served only when the live reply is a stub (K1):
+      // otherwise the model's own text, already stripped of its verdict by the
+      // unauthored-key repair, is kept. One line per such tap.
+      if (neutralSlotHoisted) {
+        try {
+          const ta = await import('@/lib/teaching/turnAssembly')
+          const na = await import('@/lib/teaching/neutralAssembly')
+          const nMode = ta.turnAssemblyMode()
+          const waitStartedAt = Date.now()
+          const r = await Promise.race([
+            neutralSlotHoisted,
+            new Promise<null>((resolve) => setTimeout(() => resolve(null), nMode === 'serve' ? 8000 : 1500)),
+          ])
+          if (!r) {
+            const liveStub = ta.turnChecks(servedText, Boolean(servedMcq)).k1Stub
+            console.log('[assembled-neutral] ' + JSON.stringify({ conceptId: resolvedConceptId ?? null, event: 'timeout', liveStub, served: 'live', waitedMs: Date.now() - waitStartedAt }))
+          } else {
+            const parsed = ta.parseSlots(r.raw)
+            const codes = r.error && !r.raw ? ['V0-provider-error'] : parsed ? na.validateNeutralSlots(parsed, r.facts) : ['V1-unparseable']
+            const { neutralLeadInFor } = await import('@/lib/teaching/gateAssessmentRenderer')
+            const { assembled, liveStub, serve: serveNeutral } = na.neutralServeDecision({
+              mode: nMode, liveText: servedText, cardOnScreen: Boolean(servedMcq), codes,
+              feedback: parsed?.feedback ?? null, leadIn: servedMcq ? neutralLeadInFor(servedMcq.question) : null,
+            })
+            console.log('[assembled-neutral] ' + JSON.stringify({
+              conceptId: resolvedConceptId ?? null, provider: r.provider, ms: r.ms, attempts: r.attempts,
+              codes, liveStub, served: serveNeutral ? 'assembled' : 'live',
+              // Tutor text only.
+              liveText: servedText.slice(0, 300),
+              ...(assembled ? { assembledText: assembled.slice(0, 500) } : { rawOnFailure: r.raw.slice(0, 400) }),
+            }))
+            if (serveNeutral && assembled) { servedText = assembled; gradedAssembledServed = true }
+          }
+        } catch (err) {
+          console.warn('[assembled-neutral] skipped:', err)
         }
       }
 

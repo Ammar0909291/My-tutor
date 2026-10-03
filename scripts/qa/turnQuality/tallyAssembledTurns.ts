@@ -40,6 +40,9 @@ interface QuestionRec {
   after?: { stub: boolean; verdict: boolean; learnerQuestions: number }
 }
 const question: QuestionRec[] = []
+/** Launch item 1 (2026-10-03): one line per tap on a model-written card. */
+interface NeutralRec { event?: string; codes?: string[]; liveStub?: boolean; served?: 'assembled' | 'live' }
+const neutral: NeutralRec[] = []
 
 const recs: Rec[] = []
 const attach: AttachRec[] = []
@@ -48,6 +51,14 @@ let truncated = 0
 const seen = new Set<string>()
 for (const file of process.argv.slice(2)) {
   for (const line of readFileSync(file, 'utf8').split('\n')) {
+    const nu = line.indexOf('[assembled-neutral] {')
+    if (nu >= 0) {
+      const json = line.slice(nu + '[assembled-neutral] '.length).trim()
+      if (seen.has(json)) continue
+      seen.add(json)
+      try { neutral.push(JSON.parse(json)) } catch { truncated++ }
+      continue
+    }
     const q = line.indexOf('[assembled-question] {')
     if (q >= 0) {
       const json = line.slice(q + '[assembled-question] '.length).trim()
@@ -139,6 +150,15 @@ console.log(JSON.stringify({
     verdictAssembled: pct(question.filter((r) => r.after?.verdict).length, question.length),
     multiQuestionLive: pct(question.filter((r) => (r.before?.learnerQuestions ?? 0) >= 2).length, question.length),
     multiQuestionAssembled: pct(question.filter((r) => (r.after?.learnerQuestions ?? 0) >= 2).length, question.length),
+  },
+  // Taps on model-written cards: a stub live reply is replaced by a neutral reason.
+  neutral: {
+    taps: neutral.length,
+    timeouts: neutral.filter((r) => r.event === 'timeout').length,
+    liveStub: pct(neutral.filter((r) => r.liveStub).length, neutral.length),
+    servedAssembled: pct(neutral.filter((r) => r.served === 'assembled').length, neutral.length),
+    stubServed: pct(neutral.filter((r) => r.liveStub && r.served !== 'assembled').length, neutral.length),
+    rejected: pct(neutral.filter((r) => (r.codes ?? []).length > 0).length, neutral.length),
   },
   byConcept: Object.fromEntries([...recs.reduce((m, r) => m.set(r.conceptId ?? '?', (m.get(r.conceptId ?? '?') ?? 0) + 1), new Map<string, number>())]),
 }, null, 2))
