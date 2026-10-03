@@ -512,3 +512,39 @@ numbers.
 - **Cumulative:**
   - **189 parsed graded turns, `completionAgreement` 189/189**, assembled K2 0;
   - **post-fix 101/101 clean, 0 fallback**.
+
+### 11.12 Windows 14–19 (2026-10-03 07:53–08:36, deploys `f553ffb8` → `87f8df31`)
+
+- **Runs:** disposable accounts, cleaned up after each run.
+  - Chemistry (foundations, then atomic structure), biology, mathematics, physics (mechanics),
+    English twice: phonics, before and after the sampler fix; and a final physics run (forces).
+  - The same deploys also carried another session's mathematics QA.
+- **Turns:** 118 distinct graded shadow turns. The windows were fetched as they closed,
+  combined, and de-duplicated by line.
+- **Result:** every gate number held:
+  - completion agreement 118/118;
+  - fallback 0, regenerations 0, validation codes none;
+  - assembled K1 0 and assembled K2 0;
+  - `waitedMs` max 1 ms; slot call p50 750 ms, max 1.6 s.
+- **The served text** in the same turns had the defects the assembler removes: K1 (stub)
+  3/118 and K2 (a question beside the card) 3/118.
+- **Sampler fixes, script only:**
+  - Cards are now also matched on their option set.
+  - Every exported probe array is loaded. English's adult-band probes are exported as
+    `ENGLISH_ADULT_BAND_BATCH_1`, which the old `*PROBES` name filter skipped.
+  - English went from 2 unmatched cards per run to 0.
+  - The cards still unmatched are written by the model during the lesson: an `[MCQ]` tag, not an
+    authored probe. Checked against both the seed files and `probe_assets`. Shadow correctly
+    never fires on them.
+- **Log retention:** Vercel keeps runtime logs for about one hour on this plan. A window has to
+  be fetched within the hour.
+  - The turns from the 2026-10-02 23:54 and 2026-10-03 00:20 verification runs (about 7) could
+    not be fetched, so they are not counted.
+- **Cumulative:**
+  - **307 parsed graded turns, completion agreement 307/307, assembled K1 and K2 0,
+    fallback 0 since all fixes.**
+  - The 300-turn condition of the §7 shadow → serve gate is met.
+  - The gate's other conditions are unchanged:
+    - the owner's hand-read of 30 pairs (`docs/history/turn-assembly-pairs-2026-10-02.md`);
+    - early completion (§2), which must be built before serve.
+  - Serve stays off until the owner decides.
