@@ -24,6 +24,7 @@
 
 import { createHash } from 'node:crypto'
 import { isClaimChallenge } from './claimChallengeGuard'
+import type { TeachingSignal } from './signals'
 
 export interface TutorMCQ {
   question: string
@@ -593,6 +594,51 @@ export function mcqConfidence(
   const fast = latencyMs !== null && latencyMs <= fastThresholdMs
   if (correct) return fast ? 'high' : 'medium'
   return fast ? 'high' : 'low'
+}
+
+/**
+ * THE TEACHING SIGNAL FROM A GRADED QUESTION — ONLY AN AUTHORED KEY MOVES THE LEARNER.
+ *
+ * Owner-approved (option (b), 2026-10-03). A model-written question may still
+ * be shown and answered, but its key is the model's own guess. Measured in
+ * production QA (math.cat.functor): the learner tapped "image f(S)" — right —
+ * and the invented key graded it wrong. The grade became the turn's signal:
+ * the ladder dropped GUIDE → DEMONSTRATE and CUE fired D2b-CONFIDENT-WRONG
+ * (misconception repair). Certification was already withheld for such keys
+ * (`unauthored-key-not-certifying`); the state move was not.
+ *
+ * With an authored key: unchanged — the grade is ground truth. With an
+ * isolated model-written key: no correctness, no confidence, no misconception
+ * phrase, in either direction, so nothing advances, regresses, counts or
+ * records a misconception. Anything else the model read from the message
+ * (confusion) is kept — it was never the key's.
+ *
+ * SCOPE: Mathematics only, the subject the owner approved it for. Every
+ * mathematics (concept, band) pair holds five authored probes, so the ladder
+ * never depends on a model key there. Elsewhere `conversationState.ts` keeps
+ * its documented rule — an invented key is "counted, never credited" but
+ * still moves the plain ladder so a lesson without authored questions does
+ * not stall.
+ */
+export const MODEL_KEY_ISOLATED_SUBJECTS: ReadonlySet<string> = new Set(['mathematics'])
+
+/** True when this question's key is the model's and must not move the learner. */
+export function modelKeyIsolated(mcq: TutorMCQ | null | undefined, subjectSlug: string | null | undefined): boolean {
+  return !probeKeyIsAuthored(mcq) && MODEL_KEY_ISOLATED_SUBJECTS.has(subjectSlug ?? '')
+}
+
+export function signalFromGrade(
+  signal: TeachingSignal | null,
+  grade: { correct: boolean | null },
+  isolated: boolean,
+  latencyMs: number | null,
+): TeachingSignal {
+  if (isolated) return { ...(signal ?? {}), correctness: undefined, confidence: undefined, phrase: undefined }
+  return {
+    ...(signal ?? {}),
+    correctness: grade.correct ?? undefined,
+    confidence: mcqConfidence(grade.correct === true, latencyMs),
+  }
 }
 
 /**

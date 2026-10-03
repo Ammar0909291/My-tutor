@@ -106,7 +106,7 @@ describe('narrow by construction', () => {
 describe('wiring', () => {
   it('the chat route drops the phrase inside the server-grade block, before evidence is written', () => {
     const src = readFileSync('src/app/api/learn/chat/route.ts', 'utf-8')
-    const graded = src.indexOf('correctness: mcqGradedThisTurn.correct ?? undefined')
+    const graded = src.indexOf('teachingSignal = signalFromGrade(teachingSignal, mcqGradedThisTurn')
     const guard = src.indexOf('phraseRestatesCorrectChoice(teachingSignal.phrase, pendingMcqHoisted, mcqGradedThisTurn, message)')
     const ladder = src.indexOf('misconceptionDetected: teachingSignal?.phrase !== undefined')
     const evidence = src.indexOf('category:  EvidenceCategory.MISCONCEPTION_DETECTED')
