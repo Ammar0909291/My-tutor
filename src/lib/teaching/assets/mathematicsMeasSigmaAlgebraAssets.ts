@@ -44,8 +44,9 @@ export const MATHEMATICS_MEAS_SIGMA_ALGEBRA_EXPLANATIONS: SeedExplanation[] = [
       + 'THE RESTRICTION IS FORCED BY MATHEMATICAL NECESSITY, ONLY ONCE X IS UNCOUNTABLE: for a '
       + 'finite or countably infinite X (like a die-roll Ω={1,...,6}), EVERY subset can safely be '
       + 'assigned a probability — the full power set trivially satisfies all three axioms. For an '
-      + 'UNCOUNTABLE X (like R), it is a genuine, deep theorem that no consistent measure can be '
-      + 'defined on the FULL power set while preserving basic properties like countable additivity '
+      + 'UNCOUNTABLE X (like R), it is a genuine, deep theorem that no countably additive measure '
+      + 'that is translation-invariant and gives every interval its length can be defined on the '
+      + 'FULL power set '
       + '— some subsets (non-measurable, e.g. via the Vitali construction) must be excluded. The '
       + 'σ-algebra is exactly the collection of "well-behaved enough to measure" subsets — never '
       + 'arbitrary extra bookkeeping, but a genuine mathematical necessity that only bites for '
@@ -79,7 +80,7 @@ export const MATHEMATICS_MEAS_SIGMA_ALGEBRA_PROBES: SeedProbe[] = [
     difficulty: ProbeDifficulty.DEVELOPING,
     stem: "Why can't we just use the full power set as the σ-algebra for every set X, including R?",
     choices: [
-      { text: "Because for an UNCOUNTABLE X like R, it is a genuine, deep theorem that no consistent measure can be defined on the full power set while preserving countable additivity — some subsets (non-measurable, via the Vitali construction) must be excluded; this never mattered for finite/countable X, where the full power set trivially works", isCorrect: true },
+      { text: "Because for an UNCOUNTABLE X like R, it is a genuine, deep theorem that no countably additive measure that is translation-invariant and gives every interval its length can be defined on the full power set — some subsets (non-measurable, via the Vitali construction) must be excluded; this never mattered for finite/countable X, where the full power set trivially works", isCorrect: true },
       { text: "The σ-algebra restriction is arbitrary extra bookkeeping — the full power set could be used for any set X without genuine mathematical issues", isCorrect: false, misconceptionId: `${SIGMA_ALGEBRA}:MC-2` },
       { text: "Since the full power set worked fine for the finite die-roll example, it should work equally well as a convention for any set, including uncountable ones", isCorrect: false, misconceptionId: `${SIGMA_ALGEBRA}:MC-2` },
     ],

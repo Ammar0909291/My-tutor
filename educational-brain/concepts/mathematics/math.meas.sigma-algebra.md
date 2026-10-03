@@ -33,8 +33,9 @@ THE RESTRICTION IS FORCED BY MATHEMATICAL NECESSITY, ONLY ONCE $X$ IS UNCOUNTABL
 or countably infinite $X$ (like `math.prob.event`'s own die-roll $\Omega=\{1,\dots,6\}$), EVERY
 subset can safely be assigned a probability — the full power set trivially satisfies all three
 axioms, exactly as `event` already established for finite sample spaces. For an UNCOUNTABLE $X$
-(like $\mathbb R$), it is a genuine, deep theorem that no consistent measure can be defined on the
-FULL power set while preserving basic properties like countable additivity — some subsets
+(like $\mathbb R$), it is a genuine, deep theorem that no countably additive measure that is
+translation-invariant and gives every interval its length can be defined on the FULL power set —
+some subsets
 (non-measurable, e.g. via the Vitali construction) must be excluded. The $\sigma$-algebra is
 exactly the collection of "well-behaved enough to measure" subsets — never arbitrary extra
 bookkeeping, but a genuine mathematical necessity that only bites for uncountable spaces.
@@ -111,8 +112,9 @@ structure on which a measure or probability can later be defined.
   $X=\{1,2,3\}$ passes all axioms directly; $\mathcal G=\{\emptyset,\{1\},\{2\},X\}$ FAILS —
   $\{1\}^c=\{2,3\}\notin\mathcal G$ — despite containing both $\emptyset$ and $X$.
 - **Demonstration 2 (targets MC-2)**: the die-roll $\Omega=\{1,\dots,6\}$'s full power set (64
-  subsets) trivially satisfies all axioms; for $X=[0,1]$, it is a genuine theorem that the full
-  power set CANNOT support a consistent measure — the Borel $\sigma$-algebra is used instead.
+  subsets) trivially satisfies all axioms; for $X=[0,1]$, it is a genuine theorem (Vitali) that the full
+  power set CANNOT support a countably additive, translation-invariant measure giving every interval
+  its length — the Borel $\sigma$-algebra is used instead.
 - **Demonstration 3 (targets MC-3)**: the axioms require closure under COUNTABLE union only —
   an arbitrary (uncountable) union of measurable sets is never guaranteed to remain measurable in
   general.

@@ -2673,9 +2673,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // recognized that ppm means mg per kg", i.e. about the PREVIOUS
           // question, with this block present thousands of tokens earlier.
           if (mcqGradeHoisted && typeof mcqGradeHoisted.correct === 'boolean' && pendingMcqHoisted?.question) {
-            answeredQuestionReminderHoisted =
-              `\n\nTHIS TURN'S ANSWER: the learner's message answered exactly this question — "${pendingMcqHoisted.question.trim().slice(0, 300)}" — ` +
-              `and it was graded ${mcqGradeHoisted.correct ? 'CORRECT' : 'WRONG'}. Your feedback must be about THIS question only; every earlier question is already settled.`
+            // A model-written key is a guess (owner option (b), 2026-10-03): the
+            // model is not told a verdict it would then teach from.
+            const { modelKeyIsolated: reminderKeyIsolated } = await import('@/lib/teaching/mcq')
+            answeredQuestionReminderHoisted = !reminderKeyIsolated(pendingMcqHoisted, learnSession.subject.slug)
+              ? `\n\nTHIS TURN'S ANSWER: the learner's message answered exactly this question — "${pendingMcqHoisted.question.trim().slice(0, 300)}" — ` +
+                `and it was graded ${mcqGradeHoisted.correct ? 'CORRECT' : 'WRONG'}. Your feedback must be about THIS question only; every earlier question is already settled.`
+              : `\n\nTHIS TURN'S ANSWER: the learner's message answered exactly this question — "${pendingMcqHoisted.question.trim().slice(0, 300)}". ` +
+                `Its answer key was not reviewed, so do NOT tell the learner they are right or wrong and do NOT treat the answer as a misconception. ` +
+                `Work the question through with them from the lesson's facts, so they can see for themselves which option holds. Your feedback must be about THIS question only.`
           }
         } catch { /* a missing verdict block only loses the explanation, never the turn */ }
         // Read once, from the same helper the grading branch above uses, so the
@@ -5444,8 +5450,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         const cueSnapshotSignal = (snapshot?.lastSignal && typeof snapshot.lastSignal === 'object')
           ? snapshot.lastSignal as { correctness?: boolean; confidence?: string }
           : null
+        // A model-written key is not evidence (owner option (b), 2026-10-03):
+        // measured, its wrong grade of a right answer fired D2b-CONFIDENT-WRONG.
+        const { modelKeyIsolated: cueKeyIsolated } = await import('@/lib/teaching/mcq')
         const cueLastSignal = mcqGradeHoisted && mcqGradeHoisted.correct !== null
-          ? { correctness: mcqGradeHoisted.correct, confidence: cueSnapshotSignal?.confidence }
+          ? (cueKeyIsolated(pendingMcqHoisted, learnSession.subject.slug)
+              ? null
+              : { correctness: mcqGradeHoisted.correct, confidence: cueSnapshotSignal?.confidence })
           : cueSnapshotSignal
         const understanding = understandStudentTurn({
           // P13: a runtime fact the CUE records and the ladder acts on.
@@ -7084,16 +7095,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       if (pendingMcqHoisted) {
         try {
           if (mcqGradedThisTurn) {
-            const { mcqConfidence } = await import('@/lib/teaching/mcq')
+            const { signalFromGrade, modelKeyIsolated: signalKeyIsolated } = await import('@/lib/teaching/mcq')
             const lastAsst = learnSession.messages.find((m: { role: string }) => m.role === 'ASSISTANT')
             const latencyMs = lastAsst
               ? Math.max(0, turnReceivedAt - new Date((lastAsst as { createdAt: Date }).createdAt).getTime())
               : null
-            teachingSignal = {
-              ...(teachingSignal ?? {}),
-              correctness: mcqGradedThisTurn.correct ?? undefined,
-              confidence: mcqConfidence(mcqGradedThisTurn.correct === true, latencyMs),
-            }
+            // In Mathematics only an authored key moves the learner (owner
+            // option (b), 2026-10-03): a model-written key leaves the signal
+            // neutral — no phase move, no counter, no misconception. See signalFromGrade.
+            teachingSignal = signalFromGrade(teachingSignal, mcqGradedThisTurn, signalKeyIsolated(pendingMcqHoisted, learnSession.subject.slug), latencyMs)
             // Ground truth beats self-report for the phrase too: a correct
             // tap is not misconception evidence (see phraseRestatesCorrectChoice).
             const { phraseRestatesCorrectChoice } = await import('@/lib/teaching/mcq')
