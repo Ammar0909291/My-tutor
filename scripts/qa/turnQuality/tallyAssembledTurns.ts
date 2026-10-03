@@ -53,52 +53,57 @@ const open: OpenRec[] = []
 let truncated = 0
 const seen = new Set<string>()
 for (const file of process.argv.slice(2)) {
+  // De-duplicate on (request header, line), not the line alone: two turns on
+  // one concept can log byte-identical lines (a [fact-check] line with no
+  // flag), and overlapping dumps repeat the same request under the same header.
+  let header = ''
   for (const line of readFileSync(file, 'utf8').split('\n')) {
+    if (line.startsWith('### ')) { header = line; continue }
     const fc = line.indexOf('[fact-check] {')
     if (fc >= 0) {
       const json = line.slice(fc + '[fact-check] '.length).trim()
-      if (seen.has(json)) continue
-      seen.add(json)
+      if (seen.has(header + json)) continue
+      seen.add(header + json)
       try { facts.push(JSON.parse(json)) } catch { truncated++ }
       continue
     }
     const nu = line.indexOf('[assembled-neutral] {')
     if (nu >= 0) {
       const json = line.slice(nu + '[assembled-neutral] '.length).trim()
-      if (seen.has(json)) continue
-      seen.add(json)
+      if (seen.has(header + json)) continue
+      seen.add(header + json)
       try { neutral.push(JSON.parse(json)) } catch { truncated++ }
       continue
     }
     const q = line.indexOf('[assembled-question] {')
     if (q >= 0) {
       const json = line.slice(q + '[assembled-question] '.length).trim()
-      if (seen.has(json)) continue
-      seen.add(json)
+      if (seen.has(header + json)) continue
+      seen.add(header + json)
       try { question.push(JSON.parse(json)) } catch { truncated++ }
       continue
     }
     const o = line.indexOf('[assembled-open] {')
     if (o >= 0) {
       const json = line.slice(o + '[assembled-open] '.length).trim()
-      if (seen.has(json)) continue
-      seen.add(json)
+      if (seen.has(header + json)) continue
+      seen.add(header + json)
       try { open.push(JSON.parse(json)) } catch { truncated++ }
       continue
     }
     const a = line.indexOf('[assembled-attach] {')
     if (a >= 0) {
       const json = line.slice(a + '[assembled-attach] '.length).trim()
-      if (seen.has(json)) continue
-      seen.add(json)
+      if (seen.has(header + json)) continue
+      seen.add(header + json)
       try { attach.push(JSON.parse(json)) } catch { truncated++ }
       continue
     }
     const i = line.indexOf('[assembled-turn] {')
     if (i < 0) continue
     const json = line.slice(i + '[assembled-turn] '.length).trim()
-    if (seen.has(json)) continue // the same line in two overlapping dumps
-    seen.add(json)
+    if (seen.has(header + json)) continue // the same line in two overlapping dumps
+    seen.add(header + json)
     try { recs.push(JSON.parse(json)) } catch { truncated++ }
   }
 }

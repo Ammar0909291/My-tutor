@@ -13,6 +13,16 @@
  * What this does NOT check: numbers, formulas or definitions the authored
  * assets never state as a wrong option. It finds one class of factual error
  * with a precise reference; it never shows prose is correct.
+ *
+ * MEASURED (2026-10-03), so it is NOT served:
+ * - production shadow: 0 flagged of 78 checked turns;
+ * - offline, every authored explanation (known-correct prose) against its
+ *   concept's distractors: 131 of 2,200 flagged with all distractors, 25 of
+ *   2,156 with misconception-probe distractors and the wider hedge list below.
+ *   Hand-read 30 + 25: every one a false positive — the prose DESCRIBES the
+ *   misconception to correct it ("a natural but wrong assumption…", "a common
+ *   instinct is…"), or the distractor is true on its own. Precision 0%, far
+ *   under the 90% serve bar. Kept in shadow to measure, never to change text.
  */
 
 export type FactCheckMode = 'off' | 'shadow' | 'serve'
@@ -27,7 +37,7 @@ const STOP = new Set(('a an the and or but of to in on at by for with from as is
   'has have had having not no nor only also very more most less least each every any all some one two').split(' '))
 const NEGATION = /\b(not|no|never|none|nothing|cannot|can't|isn't|aren't|wasn't|weren't|doesn't|don't|didn't|won't|wouldn't|neither|nor)\b/gi
 // The sentence names the claim as something other than fact.
-const HEDGE = /\b(myth|misconception|mistake|mistaken|wrongly|incorrect(?:ly)?|false|untrue|common (?:error|confusion)|(?:many|some) (?:people|learners|students)|(?:people|learners|students) (?:often )?(?:think|believe|assume)|it is tempting|might (?:seem|think)|may (?:seem|think)|seems? like)\b/i
+const HEDGE = /\b(myth|misconception|mistake|mistaken|wrong|wrongly|incorrect(?:ly)?|false|untrue|trap|error|assum\w*|confus\w*|students?|learners?|tempt\w*|instead|rather than|unlike|if [^.]* were|common (?:error|confusion)|(?:many|some) (?:people|learners|students)|(?:people|learners|students) (?:often )?(?:think|believe|assume)|it is tempting|might (?:seem|think)|may (?:seem|think)|seems? like)\b/i
 
 const stem = (w: string) => (w.length > 4 ? w.replace(/(ing|ed|es|s)$/, '') : w)
 const tokens = (s: string) => new Set((s.toLowerCase().match(/[\p{L}\p{N}]+/gu) ?? []).filter((w) => w.length >= 3 && !STOP.has(w)).map(stem))
@@ -85,7 +95,11 @@ export async function loadFalseStatements(conceptId: string, language = 'en'): P
   if (hit) return hit
   const { prisma } = await import('@/lib/db/prisma')
   const rows = await prisma.assetIdentity.findMany({
-    where: { family: 'PROBE', conceptId, language, status: 'ACTIVE' },
+    // Misconception probes only: their distractors are the misconception as a
+    // sentence. An ordinary mcq distractor is wrong only as an answer to ITS
+    // stem and is often true on its own ("Table and all data are permanently
+    // removed") — measured offline 2026-10-03, see the module header.
+    where: { family: 'PROBE', familyKind: 'misconception_probe', conceptId, language, status: 'ACTIVE' },
     select: { probeAsset: { select: { choices: true } } },
     take: 60,
   })
