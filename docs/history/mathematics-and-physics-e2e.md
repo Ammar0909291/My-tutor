@@ -500,3 +500,72 @@ The authored pool now holds five gradeable probes per (concept, band) pair. With
 model-written questions in Mathematics, or keeping them but stopping an invented key from
 moving phase or firing misconception repair, would remove this class. Both change a
 documented design and are left to the owner.
+
+## 2026-10-03 (continued) — owner-approved: model-key state isolation (option (b)) and the σ-algebra correction
+
+**Model-written keys no longer move the learner in Mathematics (`b76675dc`, deployed in
+`7bd16fbc`).**
+
+*Traced state transition (before):* in the route, `mcqGradedThisTurn.correct` from a
+model-invented key was written into `teachingSignal.correctness`. Consumers of that signal:
+- the ladder (`advanceConversationState`: phase advance or regress, failures, plain counters);
+- the persisted last signal, `misconceptionDetected` (the phrase) and MISCONCEPTION_DETECTED
+  evidence.
+
+Separately:
+- `cueLastSignal` read the same grade, so CUE dispatched D2b-CONFIDENT-WRONG;
+- the prompt's "THIS TURN'S ANSWER … graded WRONG" line handed the model the invented verdict.
+
+Certification was already withheld (`unauthored-key-not-certifying`, the strict counters).
+
+*Owning boundary:* the one place a grade becomes the turn's signal. `signalFromGrade` (mcq.ts)
+leaves the signal neutral for an isolated key: no correctness, confidence or phrase. Two other
+readers use the same predicate:
+- CUE's last signal;
+- the prompt reminder, which now says the key was not reviewed, gives no verdict and asks the
+  model to work the question through.
+
+*Scope:* `MODEL_KEY_ISOLATED_SUBJECTS = {mathematics}`. Every Maths pair has five authored
+probes. Other subjects keep the documented "counted, never credited" ladder rule
+(conversationState.ts), so lessons without authored questions do not stall. Authored keys are
+unchanged in every subject.
+
+*Tests:* `modelKeyStateIsolation.test.ts` (13). It covers:
+- a correct answer with a faulty key, and a wrong answer with a faulty key;
+- a false-premise question, graded either way;
+- authored-key controls;
+- scope and route wiring.
+
+One existing source-anchor test was re-pointed. Full suite 852 files, 17,486 passed;
+`tsc` 0; CI green on `7bd16fbc`.
+
+*Production check* (disposable accounts, deleted). Functor, Banach space and Newton's method all
+reached verified mastery through authored questions. Both model-key grades in the logs left the
+learner unchanged:
+
+| Lesson  | Model key's grade | Ladder correctness | Phase          | CUE                 | Counters / mastery   |
+|---------|-------------------|--------------------|----------------|---------------------|----------------------|
+| functor | wrong             | null               | GUIDE → GUIDE  | D1, not D2b         | none moved           |
+| newton  | right             | null               | GUIDE → GUIDE  | D1, not D2b         | stayed 0             |
+
+A false-premise question cannot be forced in production. It takes the same path, which the
+unit tests cover.
+
+**σ-algebra correction.** Source changed in the explanation asset, the detection probe's correct
+option and the EB entry (lines 37 and 115); no other content touched. The production update is
+two rows, generated verbatim from the edited source, idempotent and guarded on the old text:
+- explanation `4a6218a5…`: content, lengthChars, contentHash `h60f94140`, version +1;
+- probe `10820836…`: `choices[0].text`.
+
+Status at the time of writing: **not yet applied.** Every content-changing write through the
+Supabase connector timed out at its 60 s limit, while reads, no-op updates of the same row and
+the same expression evaluated as a read all returned instantly. There are no triggers and no
+blocking sessions. A pending approval in the connector is the likeliest cause. Production still
+serves the old wording until the two statements are approved and run. Re-verify with the
+read-back query (`position('consistent measure' …) = 0` on both rows).
+
+**Separate owner items, unchanged by this work:** the K1 bare "That's right." and the
+practice-request refusal — causes not yet established.
+
+Scope statement, exactly: *27 concepts across all 24 Mathematics domains have been
+learner-validated through scripted disposable-account production testing.*
