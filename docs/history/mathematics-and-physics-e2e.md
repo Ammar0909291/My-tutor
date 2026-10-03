@@ -383,3 +383,13 @@ verified mastery, 0 harness findings, 0 empty display blocks.** Two results:
 - Logs older than about 8 h are unreadable (billing limit).
 - The `[stale-question]` guard had no production observation before this run; it is now
   observed firing.
+
+**Recheck after defect 5b (deploy `c4146213`, CI green, two fresh disposable unit-circle runs,
+both deleted).** Both reached verified mastery with 0 findings.
+- On the graded-correct 90° turn, run 1 shipped the card-built confirmation ("That's right —
+  the answer to "…θ = 90°?" is (0, 1).").
+- Across both transcripts there are **zero declarative 180° → (0, 1) statements**, and later
+  turns teach (−1, 0).
+- Remaining quality concern (C, not fixed): on a later ungraded nudge, both runs asked "how
+  did you decide the point at 180° should be (0, 1)?". That refers to the learner's real
+  earlier wrong answer, so it is true, but it lingers on an error already corrected.
