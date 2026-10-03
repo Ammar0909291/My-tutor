@@ -46,4 +46,11 @@ describe('assembleAttachTurn', () => {
     const r = assembleAttachTurn(prose, Q)
     expect(r.text.split(neutralLeadInFor(Q)).length - 1).toBe(1)
   })
+
+  it('leaves a quoted example question untouched: it is content, not a question to the learner', () => {
+    const prose = 'The sentence "Where are you going?" is interrogative, because it asks for information.'
+    expect(assembleAttachTurn(prose, Q)).toEqual({ text: prose, changed: false })
+    const curly = 'An interrogative such as \u201cDid she leave?\u201d ends in a question mark.'
+    expect(assembleAttachTurn(curly, Q)).toEqual({ text: curly, changed: false })
+  })
 })

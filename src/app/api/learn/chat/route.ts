@@ -13337,6 +13337,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // full turn: no slot result in time, a completion disagreement, or a
       // stub / a question beside the card (the K1/K2 checks).
       let servedText = cleanText
+      let gradedAssembledServed = false
       if (turnAssemblyShadowHoisted) {
         try {
           const serving = (await import('@/lib/teaching/turnAssembly')).turnAssemblyMode() === 'serve'
@@ -13389,7 +13390,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             const assembledChecks = ta.turnChecks(assembled, mcqHoisted !== null)
             const serveAssembled = serving && completionAgreement !== false
               && !assembledChecks.k1Stub && !assembledChecks.k2QuestionBesideCard
-            if (serveAssembled) servedText = assembled
+            if (serveAssembled) { servedText = assembled; gradedAssembledServed = true }
             console.log('[assembled-turn] ' + JSON.stringify({
               conceptId: resolvedConceptId ?? null,
               provider: r.provider, ms: r.ms, waitedMs, error: r.error, attempts: r.attempts,
@@ -13410,6 +13411,39 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           }
         } catch (err) {
           console.warn('[assembled-turn] shadow log skipped:', err)
+        }
+      }
+
+      // TURN ASSEMBLY, Phase 3 step 2 — a turn that attaches a card (spec §12).
+      // The card is the turn's question, so the prose beside it carries none:
+      // K2 ran at 6.6–11.3% of card turns and did not move in 14 days. Skipped
+      // when the graded assembled turn is served: that one is built without a
+      // question. One line per card turn, so the K2 denominator is every card turn.
+      // The card the learner sees is `servedMcq` (the resolved question), which
+      // can be set when `mcqHoisted` is not.
+      if (servedMcq && !gradedAssembledServed) {
+        try {
+          const ta = await import('@/lib/teaching/turnAssembly')
+          const attachMode = ta.turnAssemblyMode()
+          if (attachMode !== 'off') {
+            const { assembleAttachTurn } = await import('@/lib/teaching/attachAssembly')
+            const attached = assembleAttachTurn(servedText, servedMcq.question)
+            const before = ta.turnChecks(servedText, true)
+            const after = ta.turnChecks(attached.text, true)
+            const graded = gradeForVerdict !== null
+            // K2 is never traded for K1 on a reply to an answer.
+            const serveAttach = attachMode === 'serve' && attached.changed && !after.k2QuestionBesideCard
+              && !(graded && after.k1Stub && !before.k1Stub)
+            console.log('[assembled-attach] ' + JSON.stringify({
+              conceptId: resolvedConceptId ?? null, graded, changed: attached.changed,
+              served: serveAttach ? 'assembled' : 'live', before, after,
+              // Tutor text only. Only when it changed: the rest is the served text.
+              ...(attached.changed ? { beforeText: servedText.slice(0, 500), afterText: attached.text.slice(0, 500) } : {}),
+            }))
+            if (serveAttach) servedText = attached.text
+          }
+        } catch (err) {
+          console.warn('[assembled-attach] skipped:', err)
         }
       }
 

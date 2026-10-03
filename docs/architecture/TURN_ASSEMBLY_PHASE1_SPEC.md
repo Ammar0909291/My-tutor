@@ -554,3 +554,55 @@ numbers.
     (`docs/history/turn-assembly-pairs-2026-10-02.md`), then the separate serve approval
     (§10 item 3).
   - Serve stays off until the owner decides.
+
+---
+
+## 12. Phase 3 step 2 — turns that attach a card (design, 2026-10-03)
+
+**Owner approval:** Phase 3 for all turn types, given 2026-10-03.
+
+**Scope.** Every turn whose response carries a card (`mcqHoisted !== null`) and whose served text
+is not the graded assembled turn (§5). Cases:
+- a "quiz me" turn;
+- a teaching turn where the gate attaches its card;
+- a graded turn where serve fell back to the live reply.
+
+**Defect it targets:** K2, a question in the prose beside a card. The Phase-0 rate was 6.6–11.3%
+by subject, and it did not move in 14 days (`turn-quality-baseline-2026-10-02.md`). The existing
+gate-contract stage drops a *trailing* question. A question earlier in the prose survives it,
+for example a confirm-back ("Does that make sense so far?") before the teaching.
+
+**Assembly** (`src/lib/teaching/attachAssembly.ts`, `assembleAttachTurn(prose, cardQuestion)`). No
+model call; deterministic:
+1. Prose with no `?` is left exactly as it is.
+2. Otherwise:
+   - every sentence carrying `?` is dropped, and so is every home-made option line
+     (`dropQuestionSentences`);
+   - the prose ends on exactly one neutral lead-in (`neutralLeadInFor`, which never names a
+     topic, the K4 defect). A closing sentence that already announces the card is replaced by
+     the lead-in, never stacked with it.
+3. A question inside quotation marks is content, not a question to the learner, for example
+   English: *The sentence "Where are you going?" is interrogative.* The turn is then left
+   untouched and stays K2 in the log, rather than losing teaching content.
+
+**Route** (after the graded serve decision, before save-once):
+- **shadow:** log `[assembled-attach]` with K2 and K1 before and after, `changed`, and
+  `served: 'live'`. The reply is unchanged.
+- **serve:** send the assembled text when it changed and has no `?`.
+  - Never on a reply to an answer if assembly would create a K1 stub (under 12 words) that was
+    not there before. K2 is not traded for K1.
+  - Save-once (§6) then stores exactly the served text plus its card.
+- One line per card turn, so the denominator is every card turn, not only the changed ones.
+
+**Measure** (`tallyAssembledTurns.ts`, the `[assembled-attach]` section):
+- K2 on served card turns;
+- changed share;
+- K1 created (must be 0).
+- Target: K2 on card turns under 3% over at least 100 card turns.
+
+**Tests:**
+- `attachAssembly.test.ts` (unit);
+- `attachAssemblyRoute.test.ts`, which covers:
+  - off: no log line;
+  - shadow: byte-identical to off, and the line logged;
+  - serve: no `?`, one lead-in, and the stored row equal to the served text plus its card.

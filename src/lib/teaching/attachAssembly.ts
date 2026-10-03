@@ -21,9 +21,16 @@ export interface AttachAssembly {
   changed: boolean
 }
 
+/**
+ * A question inside quotation marks is lesson content ("Where are you going?"
+ * as an example of an interrogative), not a question to the learner. Dropping
+ * its sentence would cut teaching, so such a turn is left as it is.
+ */
+const QUOTED_QUESTION = /["\u201c][^"\u201c\u201d\n]*\?[^"\u201c\u201d\n]*["\u201d]/
+
 export function assembleAttachTurn(prose: string, cardQuestion: string): AttachAssembly {
   const original = prose ?? ''
-  if (!original.includes('?')) return { text: original, changed: false }
+  if (!original.includes('?') || QUOTED_QUESTION.test(original)) return { text: original, changed: false }
   const frame = neutralLeadInFor(cardQuestion)
   const body = dropQuestionSentences(original)
   if (!body) return { text: frame, changed: true }
