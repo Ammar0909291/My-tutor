@@ -10655,6 +10655,35 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         } catch { /* non-fatal — a repair must never break a turn */ }
       }
 
+      // ── A RIGHT ANSWER IS NOT CREDITED TO THE PREVIOUS QUESTION ──────────
+      // (2026-10-03, math.trig.unit-circle.) After a correct "(0, 1)" to the
+      // 90° question the reply asked how the learner "decided that the point at
+      // 180° should be (0, 1)" — the question before — and the next turn taught
+      // that as fact. See staleQuestionAttribution.ts.
+      if (!serveLessonComplete && mcqGradeHoisted?.correct === true && pendingMcqHoisted && typeof mcqGradeHoisted.chosenIndex === 'number') {
+        try {
+          const { dropStaleQuestionAttribution, previousCardQuestion } = await import('@/lib/teaching/staleQuestionAttribution')
+          const chosen = pendingMcqHoisted.options[mcqGradeHoisted.chosenIndex]
+          const stale = dropStaleQuestionAttribution({
+            text: cleanText,
+            graded: { question: pendingMcqHoisted.question, options: pendingMcqHoisted.options },
+            chosen: typeof chosen === 'string' ? chosen : '',
+            // historyScope.messages is newest-first (loaded `createdAt desc`).
+            previous: previousCardQuestion(
+              [...historyScope.messages].reverse().filter((m) => m.role !== MessageRole.USER).map((m) => m.content),
+              pendingMcqHoisted.question,
+            ),
+          })
+          if (stale.dropped.length > 0) {
+            let next = stale.text
+            next = (await repairStubReply(next, 'stale-question')) ?? next
+            if (!next.trim()) next = 'That\'s right.'
+            console.log('[stale-question] ' + JSON.stringify({ dropped: stale.dropped.map((d) => d.slice(0, 120)), charsBefore: cleanText.length, charsAfter: next.length }))
+            cleanText = next
+          }
+        } catch { /* non-fatal — a repair must never break a turn */ }
+      }
+
       // THE SAME QUESTION, ON SCREEN, TWICE.
       //
       // When the model writes its question inline as prose AND emits the
