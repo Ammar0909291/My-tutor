@@ -129,3 +129,18 @@
   - `src/tests/bootstrapStopsAtDeadline.test.ts`.
   - `edgeBundleExcludesSeedCorpora` pins now point at `runWithDeadline`, which is where the race
     and the `unref`'d timer now live.
+- **Production check** (deployment `dpl_6ty3wbCteq7SLnmnXMyXrSrkLRnD` at `f553ffb8`,
+  2026-10-03 07:53–07:55 UTC; cold starts triggered by a disposable account):
+  - **Two cold starts hit the 12 s deadline,** at 07:53:26 and 07:53:41. Each logged:
+    - "boot deadline reached — no further DB step starts";
+    - the probe refused with `WorkAbandonedError` before it reached the database;
+    - "asset bootstrap stopped at the boot deadline".
+  - **One cold start finished inside the deadline,** at 07:53:30: "12883/12883 seed identities
+    present, 0 hollow — skipping".
+  - **`pg_stat_activity` during the run:** 0 transactions idle for more than 2 s; the longest
+    was 0.025 s.
+  - **Postgres log, 07:40–08:10 UTC:** 0 "idle-in-transaction timeout" kills. Before the fix
+    there was one, at 23:55:41.
+  - **Cosmetic, not fixed:** a refused probe also logs "cheap completeness probe failed, falling
+    back to full prefetch". It is the probe's own fall-through `catch` seeing the refusal. No query
+    runs: the prefetch is refused next, and the run stops.
