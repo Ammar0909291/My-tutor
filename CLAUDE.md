@@ -94,6 +94,12 @@ never into this file. This file only changes when a LIVE, currently-binding rule
 - The Curriculum Production Pipeline (external) is the ONLY authority for Canonical Subject
   Knowledge Graphs — do not modify curriculum/KG files without an explicit, recorded owner
   exception (precedent: the 2026-07-22 Physics KG extension, `docs/history/curriculum-and-engineering-programs.md`).
+- **Standing owner exception (2026-10-03): coverage-driven KG extension.** No board/exam
+  mapping; instead each subject's KG is extended until the subject is covered. Physics first,
+  core tier first, from `docs/architecture/PHYSICS_KG_GAP_AUDIT.md`. Every new node follows
+  `KG_CONCEPT_GRANULARITY_STANDARD.md` (independently masterable, no history/discovery nodes)
+  and ships with its EB entry and seed content (explanations + 3-probe contract) in the same
+  push. Electronics (transistors, logic gates) stays excluded unless the owner re-decides.
 
 ## Educational Brain governance (read before any teaching-decision or "what to teach next" work)
 - **Authoritative reference**: `docs/architecture/EDUCATIONAL_BRAIN_BIBLE.md` (engine map, data
