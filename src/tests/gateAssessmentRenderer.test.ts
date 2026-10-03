@@ -196,7 +196,10 @@ describe('route wiring — fewer LLM calls, nothing else changed (7,8,9,11,12)',
     // confirmBackRepair.ts) — fires only when a clean-up left no real reply.
     // 6 -> 7 (2026-10-02): the turn-assembly SHADOW slot call (owner G2), graded
     // turns only, behind TURN_ASSEMBLY_MODE=shadow; never reaches the learner.
-    expect((ROUTE.match(/await routeAI\(/g) ?? []).length).toBe(7)
+    // 7 -> 8 (2026-10-03): the neutral reason slot call for a tap on a model-written
+    // card (neutralAssembly.ts, launch-readiness item 1, owner approval), behind
+    // TURN_ASSEMBLY_MODE; it judges nothing and replaces only a stub reply.
+    expect((ROUTE.match(/await routeAI\(/g) ?? []).length).toBe(8)
     expect(ROUTE).toContain("provider = 'gate'")
   })
 
