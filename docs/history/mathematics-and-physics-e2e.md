@@ -252,3 +252,32 @@ topic." Its 16 words beat the 12-word stub threshold, so neither the regeneratio
 empty-reply fallback ran. `splitVisualPointer` (visualAcknowledgement.ts) separates the appended
 pointer; the stub repair and the confirm-back / repeat-guard fallbacks judge the body and re-append
 the pointer. Regression: `stubRepairIgnoresFigurePointer.test.ts`.
+
+## 2026-10-03 — six-lesson weak-learner QA 6/6, depth rows verified byte-identical, stale-question attribution fixed
+
+**Weak-learner QA, all six lessons** (deploy `56076115`, fresh disposable account, deleted):
+fraction-addition, linear-equation-1var, pythagorean-theorem, unit-circle, chain-rule and
+bayes-theorem **all reached verified mastery — 6/6, 0 findings** (previous run 4/6: unit-circle
+had no question left after one miss, bayes ended one answer short). New depth probes were served
+and graded (bayes "1/12, about 8%", unit-circle "(1/2, √3/2)").
+
+**Depth convergence verified against the corpus.** Per-domain aggregate
+`md5(string_agg(slug | md5(stem) | md5(correctValue)))` over production's depth rows equals the
+same aggregate computed from the corpus for all 13 fully-landed domains (arith, nt, found, geom,
+alg, calc, trig, func, seq, linalg, prob, stats, de): byte-identical. 483 rows (abst onward)
+were still pending at the time; the create-only bootstrap continues on each cold start.
+
+**Defect 5 — a right answer credited to the previous question (runtime, fixed).** unit-circle
+T7–T9: the learner answered "(0, 1)" to the 180° card (wrong, server-corrected to (−1, 0)), then
+"(0, 1)" to the 90° card (right). The reply: "That's right. Can you walk me through how you
+decided that the point at 180° should be (0, 1)?" — and T9 taught it: "rotate half a turn (180°)
+you end up straight up … x 0, y 1". The prompt's last-line reminder naming the graded question
+(`5ba7e62a`) was live; it did not prevent this. Fix: `staleQuestionAttribution.ts` — on a
+server-graded CORRECT turn, a sentence that states the chosen option together with a number found
+in the previous card question (read from stored history, where `appendMcqToHistoryText` keeps
+it) but not in the graded one is dropped; a stub left behind takes the existing one regeneration.
+Regression: `staleQuestionAttribution.test.ts` (built from the transcript, plus non-drop cases).
+
+Harness (`mathematicsProductionRuntimeQa.ts`): the "no stated verdict" note now accepts
+"isn’t correct" (curly apostrophe), and "correct answer did not move counters" is noted only in
+CHECK/PRACTICE, where answers count — both were false notes in this run.

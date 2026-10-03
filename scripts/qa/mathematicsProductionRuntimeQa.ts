@@ -180,8 +180,9 @@ async function drive(cookie: string, lessons: Lesson[], plan: Plan) {
     const isWrong = effective === 'misconception' || effective === 'wrong'
     if (k && isWrong && rec.after > rec.before) finding(`${plan.conceptId} T${turn}: FALSE ACCEPT — ${effective} "${short(msg, 60)}" moved counters ${rec.before}->${rec.after}`)
     if (k && isWrong && /^(correct|exactly|well done|that'?s right|great job)/i.test((p.text ?? '').trim())) finding(`${plan.conceptId} T${turn}: praised a ${effective} answer — "${short(p.text, 120)}"`)
-    if (k && !isWrong && rec.after <= rec.before) note(`${plan.conceptId} T${turn}: correct (${effective}) answer did not move counters (${rec.phaseBefore}->${rec.phaseAfter}) — "${short(p.text, 120)}"`)
-    if (k && isWrong && !/\b(not quite|not right|incorrect|isn'?t right|not correct|the answer is|actually)\b/i.test(p.text ?? '')) note(`${plan.conceptId} T${turn}: wrong answer got no stated verdict — "${short(p.text, 120)}"`)
+    // Only CHECK and PRACTICE answers count toward mastery; earlier phases teach.
+    if (k && !isWrong && rec.after <= rec.before && /^(CHECK|PRACTICE)$/.test(rec.phaseBefore ?? '')) note(`${plan.conceptId} T${turn}: correct (${effective}) answer did not move counters (${rec.phaseBefore}->${rec.phaseAfter}) — "${short(p.text, 120)}"`)
+    if (k && isWrong && !/\b(not quite|not right|incorrect|isn['’]?t (?:right|correct)|not correct|the answer is|actually)\b/i.test(p.text ?? '')) note(`${plan.conceptId} T${turn}: wrong answer got no stated verdict — "${short(p.text, 120)}"`)
   }
   const final = p.mastery
   const wrongs = answerLog.filter((a) => a.conceptId === plan.conceptId && (a.intent === 'wrong' || a.intent === 'misconception') && a.keyed).length
