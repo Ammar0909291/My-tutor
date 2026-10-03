@@ -585,6 +585,40 @@ numbers.
   - no stub, no question.
   - The factual content was not checked (Phase 5).
 
+### 11.14 SERVE, windows 3–6 and the DoD 1 verdict (2026-10-03, deploys `0c4cfa8` → `504579c`)
+
+- **Runs:** disposable accounts, deleted after each run:
+  - mathematics 9 graded, English 10;
+  - chemistry 11, physics 12 (later lessons, `QA_START` 6 and 8);
+  - biology 12, English 12 (`QA_START` 8);
+  - plus other sessions' traffic on the same deploys.
+- **Graded turns, cumulative (windows 1–6, de-duplicated lines): 103.**
+  - served assembled **103/103**; completion agreement **103/103**;
+  - served K1 **0/103**, served K2 **0/103**. Live, the model's own text on the same turns:
+    K1 2/103, K2 3/103;
+  - fallback 0, regenerations 0, validation codes none;
+  - slot call p50 735 ms, max 1.38 s; added wait max 1 ms.
+- **Stored row = served text plus its card:** read-only SQL over all 103 served texts.
+  - 100 found by exact 80-character prefix. In all 100, the card block is present exactly
+    when the turn attached one (`cardAttached`). 2 prefixes matched more than one row.
+  - The other 3 were found by ASCII fragment ("Prüfer", IPA such as /ɪ/ and /ʊ/). The
+    prefix compare missed them on a Unicode-normalisation difference between the log and
+    the database. **0 missing.**
+- **5xx:** none in production over the 2 hours covering every window
+  (`get_runtime_logs statusCode=5xx since=2h`).
+- **DoD 1 verdict:** every condition is measured and met on at least 100 served graded turns:
+  - served K1 0%, served K2 0%, both under 1%;
+  - completion agreement 100%;
+  - stored row matches;
+  - no new 5xx.
+- **Phase-0 SQL, the same 7 days split at the switch (11:37 UTC):**
+  - K1 on graded turns: pre-serve 361/2,201 (16.4%), since serve 0/46;
+  - K2 beside a card: pre-serve 327/5,168 (6.3%), since serve 1/128.
+  - The one K2 is a quoted question inside the teaching ("ask, 'What must have happened just
+    before this?'"), so it is a false positive of the heuristic.
+  - The SQL's graded-turn detector sees fewer turns than the logs: it needs the card to have
+    been appended to the previous row, which a re-offered card is not.
+
 ---
 
 ## 12. Phase 3 step 2 — turns that attach a card (design, 2026-10-03)
