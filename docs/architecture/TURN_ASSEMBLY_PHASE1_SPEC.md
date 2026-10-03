@@ -606,3 +606,35 @@ model call; deterministic:
   - off: no log line;
   - shadow: byte-identical to off, and the line logged;
   - serve: no `?`, one lead-in, and the stored row equal to the served text plus its card.
+
+---
+
+## 13. Phase 3 step 3 — lesson open (baseline, 2026-10-03; design follows)
+
+**Path.** Openings are not chat turns. `POST /api/learn/lesson-init` makes one `routeAI` call
+(re-asked once on a navigation refusal), runs its own repairs (unbacked figure reference,
+prediction-answer strip, field-line sign, vision direction), and writes one ASSISTANT row with
+the lesson's `lessonKey`. No card is attached and nothing is graded, so K1/K2 do not apply.
+
+**Baseline** (read-only SQL, production, last 7 days). An opening is the first row of each
+`(sessionId, lessonKey)`, and it is an ASSISTANT row.
+
+| Subject | Openings | 2+ "?" | Navigation refusal | Figure reference | Under 40 words | p50 chars |
+| --- | --- | --- | --- | --- | --- | --- |
+| physics | 677 | 18 | 3 | 0 | 4 | 1,385 |
+| biology | 324 | 6 | 0 | 1 | 0 | 1,471 |
+| chemistry | 77 | 2 | 0 | 0 | 0 | 1,490 |
+| mathematics | 75 | 8 | 0 | 0 | 0 | 1,266 |
+| english | 34 | 2 | 0 | 1 | 0 | 896 |
+
+- **Hand-read of the "2+ ?" class:** 22 openings, about half true.
+  - True cases end on two or three questions to the learner. For example `phys.em.ohms-law`:
+    "what do you expect to happen to the current? … What would the current be? … What do you
+    notice?"
+  - The rest are rhetorical or quoted questions inside the teaching ("we ask, 'How much energy
+    is transferred each second?'").
+- **Estimated true rate:** about 1.5% of openings ask the learner more than one question.
+  Navigation refusal is 0.25%, figure reference 0.17%.
+- **What this means for the gate.** The opening is the healthiest turn type measured so far.
+  An assembled opening must beat these rates in shadow (§7 method, at least 50 turns) before it
+  serves. Otherwise it stays model-written, and that is recorded here with the numbers.
