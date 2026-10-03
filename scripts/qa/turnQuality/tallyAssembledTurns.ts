@@ -33,6 +33,14 @@ interface OpenRec {
   learnerQuestionsBefore?: number; learnerQuestionsAfter?: number
 }
 
+/** Phase 3 step 5 (2026-10-03): one line per learner question with no card. */
+interface QuestionRec {
+  conceptId?: string | null; changed?: boolean; served?: 'assembled' | 'live'
+  before?: { stub: boolean; verdict: boolean; learnerQuestions: number }
+  after?: { stub: boolean; verdict: boolean; learnerQuestions: number }
+}
+const question: QuestionRec[] = []
+
 const recs: Rec[] = []
 const attach: AttachRec[] = []
 const open: OpenRec[] = []
@@ -40,6 +48,14 @@ let truncated = 0
 const seen = new Set<string>()
 for (const file of process.argv.slice(2)) {
   for (const line of readFileSync(file, 'utf8').split('\n')) {
+    const q = line.indexOf('[assembled-question] {')
+    if (q >= 0) {
+      const json = line.slice(q + '[assembled-question] '.length).trim()
+      if (seen.has(json)) continue
+      seen.add(json)
+      try { question.push(JSON.parse(json)) } catch { truncated++ }
+      continue
+    }
     const o = line.indexOf('[assembled-open] {')
     if (o >= 0) {
       const json = line.slice(o + '[assembled-open] '.length).trim()
@@ -111,6 +127,17 @@ console.log(JSON.stringify({
     multiQuestionLive: pct(open.filter((r) => (r.learnerQuestionsBefore ?? 0) >= 2).length, open.length),
     multiQuestionAssembled: pct(open.filter((r) => (r.learnerQuestionsAfter ?? 0) >= 2).length, open.length),
     noQuestionAssembled: pct(open.filter((r) => (r.learnerQuestionsAfter ?? 0) === 0).length, open.length),
+  },
+  // Learner questions (Phase 3 step 5), live vs assembled on the same turns.
+  question: {
+    turns: question.length,
+    changed: pct(question.filter((r) => r.changed).length, question.length),
+    servedAssembled: pct(question.filter((r) => r.served === 'assembled').length, question.length),
+    stubLive: pct(question.filter((r) => r.before?.stub).length, question.length),
+    verdictLive: pct(question.filter((r) => r.before?.verdict).length, question.length),
+    verdictAssembled: pct(question.filter((r) => r.after?.verdict).length, question.length),
+    multiQuestionLive: pct(question.filter((r) => (r.before?.learnerQuestions ?? 0) >= 2).length, question.length),
+    multiQuestionAssembled: pct(question.filter((r) => (r.after?.learnerQuestions ?? 0) >= 2).length, question.length),
   },
   byConcept: Object.fromEntries([...recs.reduce((m, r) => m.set(r.conceptId ?? '?', (m.get(r.conceptId ?? '?') ?? 0) + 1), new Map<string, number>())]),
 }, null, 2))

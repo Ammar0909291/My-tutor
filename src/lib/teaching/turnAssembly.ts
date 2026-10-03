@@ -36,7 +36,7 @@ export function turnAssemblyMode(env: Record<string, string | undefined> = proce
  * raises it, and the global mode caps it, so `off` globally still turns
  * everything off.
  */
-export function turnTypeMode(type: 'open', env: Record<string, string | undefined> = process.env): TurnAssemblyMode {
+export function turnTypeMode(type: 'open' | 'question', env: Record<string, string | undefined> = process.env): TurnAssemblyMode {
   const global = turnAssemblyMode(env)
   if (global === 'off') return 'off'
   const v = (env[`TURN_ASSEMBLY_${type.toUpperCase()}_MODE`] ?? '').trim().toLowerCase()

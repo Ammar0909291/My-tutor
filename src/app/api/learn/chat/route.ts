@@ -13455,6 +13455,35 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         }
       }
 
+      // TURN ASSEMBLY, Phase 3 step 5 — the reply to a learner's question
+      // (spec §15, questionAssembly.ts). The answer stays model-written; the
+      // server enforces only that nothing graded means no verdict, and at most
+      // one question back. Card turns are the attach assembler's (above).
+      // Its own switch, shadow by default (TURN_ASSEMBLY_QUESTION_MODE).
+      if (!servedMcq && gradeForVerdict === null && !turnIntent.wantsPractice
+        && (await import('@/lib/teaching/conversationState')).detectLearnerQuestion(message)) {
+        try {
+          const questionMode = (await import('@/lib/teaching/turnAssembly')).turnTypeMode('question')
+          if (questionMode !== 'off') {
+            const { assembleQuestionTurn } = await import('@/lib/teaching/questionAssembly')
+            const answered = assembleQuestionTurn(servedText)
+            const serveQuestion = questionMode === 'serve' && answered.changed
+            console.log('[assembled-question] ' + JSON.stringify({
+              conceptId: resolvedConceptId ?? null, changed: answered.changed,
+              served: serveQuestion ? 'assembled' : 'live',
+              before: answered.before, after: answered.after,
+              ...(answered.changed ? {
+                removed: answered.removed.map((r) => r.slice(0, 200)).slice(0, 4),
+                afterTail: answered.text.slice(-400),
+              } : {}),
+            }))
+            if (serveQuestion) servedText = answered.text
+          }
+        } catch (err) {
+          console.warn('[assembled-question] skipped:', err)
+        }
+      }
+
       // SAVE ONCE (plan §4 Phase 1 step 5): the stored row is exactly what was
       // shown. The row is written mid-turn and the reply can still change after
       // it — the late repairs above, and the assembled turn in serve mode — so

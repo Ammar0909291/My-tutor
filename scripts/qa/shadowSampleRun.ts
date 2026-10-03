@@ -10,6 +10,7 @@
  *
  *   QA_SUBJECT=chemistry QA_LESSONS=4 QA_QUIZZES=4 npx tsx scripts/qa/shadowSampleRun.ts
  *   QA_SUBJECT=physics QA_OPEN_ONLY=1 QA_LESSONS=20 npx tsx scripts/qa/shadowSampleRun.ts   # openings only
+ *   QA_SUBJECT=physics QA_ASK=1 QA_LESSONS=3 QA_ASKS=4 npx tsx scripts/qa/shadowSampleRun.ts  # learner questions
  */
 import { readdirSync } from 'fs'
 import path from 'path'
@@ -26,6 +27,20 @@ const SUBJECT = process.env.QA_SUBJECT ?? 'chemistry'
 // QA_OPEN_ONLY=1: open lessons and stop (one [assembled-open] line each, one
 // model call each); no quizzes. Openings are cheap, so more are allowed.
 const OPEN_ONLY = process.env.QA_OPEN_ONLY === '1'
+// QA_ASK=1: after opening, ask the tutor QA_ASKS questions (one
+// [assembled-question] line each when no card is on screen); no quizzes.
+const ASK = process.env.QA_ASK === '1'
+const ASKS = Math.min(8, Number(process.env.QA_ASKS ?? 4))
+const LEARNER_QUESTIONS = [
+  'why does that happen?',
+  'can you explain that part again in a different way?',
+  'what is an everyday example of this?',
+  'how is this different from what we did before?',
+  'what is the most common mistake people make with this?',
+  'why does that rule work?',
+  'where would I actually use this?',
+  'what happens if one of the quantities is zero?',
+]
 const LESSONS = Math.min(OPEN_ONLY ? 25 : 6, Number(process.env.QA_LESSONS ?? 4))
 const QUIZZES = Math.min(6, Number(process.env.QA_QUIZZES ?? 4))
 // Skip lesson one (its own locked protocol) and start a little way in.
@@ -99,6 +114,11 @@ async function main() {
     const sid = await createSession(cookie, SUBJECT)
     await openLesson(cookie, sid, { lessonTitle: l.lessonTitle, lessonOrder: l.order, topicSlug: l.topicSlug, unitTitle: l.unitTitle, totalLessons: lessons.length })
     if (OPEN_ONLY) { console.log(`${l.topicSlug}: opened`); continue }
+    if (ASK) {
+      for (const q of LEARNER_QUESTIONS.slice(0, ASKS)) { if (overBudget()) break; await say(cookie, sid, q) }
+      console.log(`${l.topicSlug}: asked ${ASKS}`)
+      continue
+    }
     for (const m of ['ok, continue', 'ok']) await say(cookie, sid, m)
     let done = 0
     for (let tries = 0; tries < QUIZZES * 3 && done < QUIZZES && !overBudget(); tries++) {
