@@ -72,6 +72,31 @@ describe('dropStaleQuestionAttribution', () => {
   })
 })
 
+describe('a claim that the learner chose something else', () => {
+  // Production, 2026-10-03, math.disc.combinations: "120" (wrong) to the
+  // committee card, then "Yes" (right) to the Pascal card.
+  const pascal = { question: 'Can you explain WHY C(n,r)=C(n-1,r-1)+C(n-1,r) is true, beyond just stating the formula?', options: ['Yes', "It's just the formula for combinations of consecutive values of n and r", 'It is simply an algebraic identity that happens to hold when you expand the factorials'] }
+  const committee = 'From 6 men and 4 women, how many 3-person committees contain exactly 1 woman?'
+
+  it('drops the measured claim and the question pointing back at it', () => {
+    const r = dropStaleQuestionAttribution({ text: "That's right. I see you chose 120. How did you work out that number?", graded: pascal, chosen: 'Yes', previous: committee })
+    expect(r.text).toBe("That's right.")
+    expect(r.dropped).toEqual(['I see you chose 120.', 'How did you work out that number?'])
+  })
+
+  it('also with no previous card on record', () => {
+    expect(dropStaleQuestionAttribution({ text: 'Right. You picked 120.', graded: pascal, chosen: 'Yes', previous: null }).text).toBe('Right.')
+  })
+
+  it('leaves the real choice, praise and counts alone', () => {
+    for (const text of ['You picked Yes, which is right.', 'Right, you chose correctly.', "Great — you've answered 2 questions correctly in a row."]) {
+      expect(dropStaleQuestionAttribution({ text, graded: pascal, chosen: 'Yes', previous: committee }).dropped).toEqual([])
+    }
+    const r = dropStaleQuestionAttribution({ text: 'You chose (0, 1) — exactly right.', graded, chosen: '(0, 1)', previous: Q180 })
+    expect(r.dropped).toEqual([])
+  })
+})
+
 describe('when the one regeneration repeats the attribution', () => {
   // Production, 2026-10-03 09:36 UTC, after the first fix shipped: the dropped
   // sentence came back from the regeneration as this.

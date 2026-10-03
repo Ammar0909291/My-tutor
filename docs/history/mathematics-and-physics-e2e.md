@@ -393,3 +393,48 @@ both deleted).** Both reached verified mastery with 0 findings.
 - Remaining quality concern (C, not fixed): on a later ungraded nudge, both runs asked "how
   did you decide the point at 180° should be (0, 1)?". That refers to the learner's real
   earlier wrong answer, so it is true, but it lingers on an error already corrected.
+
+## 2026-10-03 (continued) — third spread: six new domains 6/6, two more defects fixed
+
+**Coverage** (`--plans=third`, deploy `c4146213`, fresh disposable account, deleted):
+nt.prime-factorization, disc.combinations, abst.subgroup, real.convergence-sequences,
+graph.tree and num.newtons-method — **6/6 verified mastery, 0 harness findings.** The
+learner-validated sample is now 20 concepts across 17 of 24 domains, all scripted weak-learner
+runs. Every tutor turn of the six transcripts was read for mathematical correctness. Cayley
+n^(n−2), forest edges n−k, Prüfer degree, ℤ/12ℤ having 6 subgroups, Bolzano–Weierstrass, the
+ε–N choice N=100, and Newton x₁=1.5 / x₂≈1.4167 were all correct.
+
+**Defect 8 — a stale choice named as this turn's (runtime, fixed).** Combinations: "120"
+(wrong) to the committee card, then "Yes" (right) to the Pascal card. The model wrote "That's
+right. I see you chose 120. How did you work out that number?" and the gate contract cut the
+question. The stale-question guard missed it: "120" is neither the chosen option nor in the
+previous stem. It is the same class as defect 5 in a second shape. On a server-graded correct
+turn, the guard now also drops a sentence claiming "you chose / picked / answered X" when X is
+an answer value that is not the chosen option, plus a following "…that number?" sentence. The
+existing repair → re-check → card-built confirmation then runs. Praise, counts ("2 questions
+correctly") and the real choice are untouched. Regression added to
+`staleQuestionAttribution.test.ts`.
+
+**Defect 9 — display math deleted as an "ASCII drawing" (runtime, all subjects, fixed).**
+newtons-method, no figure on screen: the reply shipped "Consider the function\n\nwhose
+derivative is\n\nApplying Newton's iteration\n\nsimplifies to…" with every formula gone. Log:
+`[ascii-diagram] unbacked-ascii-diagram-stripped`. Pass 4b (unfenced stroke drawings) read a
+"\[" / "\]" line as a stroke (no letter or digit, contains "\"), and the formula between as a
+short label. A display-math delimiter line is no longer a stroke. Regression:
+`asciiGuardKeepsDisplayMath.test.ts`, built from the production draft. The other 74 tests
+across the four existing guard test files still pass.
+
+**Recorded for the owner, not fixed (model generation errors; no deterministic verifier
+exists, and building one needs authorization):**
+- prime-factorization T14, an ungraded nudge turn after the 60 card: "they always end with
+  the same prime factors — here 2²×3×7". That is 84, the previous card's value. This is the
+  card mix-up of defects 5/8 on a turn the guard does not cover (it runs only on graded
+  turns).
+- newtons-method T8, a model-authored GUIDE question: "For f(x)=x³−2x, which root will
+  Newton's method converge quadratically?", with the option "x = 0 (a double root)". All
+  three roots of x(x²−2) are simple. Model-authored questions never count toward mastery
+  (`unauthored-key-not-certifying`), but the learner still reads them. With the authored pool
+  at five probes per pair, withholding model-authored questions in Mathematics is a policy
+  option. That is the owner's decision.
+- disc.combinations and matrix-multiplication bare verdicts: the turn-assembly K1 class (see
+  above).

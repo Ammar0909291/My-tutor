@@ -417,6 +417,12 @@ export function isStrokeLine(line: string): boolean {
   const t = line.trim()
   if (t.length === 0 || /[\p{L}\p{N}]/u.test(t)) return false
   if (/^\|?(\s*:?-{3,}:?\s*\|)+\s*(:?-{3,}:?\s*)?$/.test(t)) return false // table separator
+  // A display-math delimiter on its own line is not a stroke. Production,
+  // 2026-10-03, math.num.newtons-method: "\[" / "f(x)=\sqrt[3]{x}=x^{1/3}," /
+  // "\]" read as a stroke drawing with a label, and the reply shipped
+  // "Consider the function\n\nwhose derivative is\n\nApplying Newton's iteration…"
+  // with the formulas gone.
+  if (/^(?:\\\[|\\\]|\$\$)$/.test(t)) return false
   return /[|^/\\↑↓←→↕⇅]/.test(t) && /^[\s|^/\\↑↓←→↕⇅<>+\-=_~.:*()[\]]*$/.test(t)
 }
 
