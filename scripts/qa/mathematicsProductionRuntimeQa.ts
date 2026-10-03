@@ -20,7 +20,7 @@
  * Disposable account only (register -> drive -> delete via liveAccount.ts),
  * deleted at the end unless --keep (keep it to cross-check evidence in the DB).
  *
- * Run: npx tsx scripts/qa/mathematicsProductionRuntimeQa.ts [--only=<id,id>] [--keep] [--plans=wide|third]
+ * Run: npx tsx scripts/qa/mathematicsProductionRuntimeQa.ts [--only=<id,id>] [--keep] [--plans=wide|third|fourth]
  * Real account: QA_EMAIL=… QA_PASSWORD=… (env only; never written, never deleted)
  */
 import { writeFileSync } from 'node:fs'
@@ -134,6 +134,23 @@ const THIRD_PLANS: Plan[] = [
   { conceptId: 'math.num.newtons-method', opener: 'newton method always finds the root, right?',
     answers: ['misconception', 'correct', 'correct', 'wrong', 'correct', 'correct'], maxTurns: 18 },
 ]
+// A fourth spread: the seven domains no set above touches (--plans=fourth).
+const FOURTH_PLANS: Plan[] = [
+  { conceptId: 'math.found.problem-solving-strategies', opener: 'i just try random things until something works, is that ok?',
+    answers: ['question', 'correct', 'correct', 'correct', 'correct'], maxTurns: 18 },
+  { conceptId: 'math.cx.cauchy-riemann', opener: 'if u and v are smooth then f is analytic, right?',
+    answers: ['misconception', 'correct', 'wrong', 'correct', 'correct', 'correct'], maxTurns: 18 },
+  { conceptId: 'math.top.open-sets', opener: 'open set means it has no edge? i dont get it',
+    answers: ['confused', 'correct', 'correct', 'correct', 'correct'], maxTurns: 18 },
+  { conceptId: 'math.meas.sigma-algebra', opener: 'why not just measure every subset, why need sigma algebra?',
+    answers: ['question', 'correct', 'wrong', 'correct', 'correct', 'correct'], maxTurns: 18 },
+  { conceptId: 'math.fnal.banach-space', opener: 'banach space is just any space with a norm?',
+    answers: ['misconception', 'correct', 'correct', 'correct', 'correct'], maxTurns: 18 },
+  { conceptId: 'math.opt.convex-function', opener: 'convex function means it curves up, so x^3 is convex?',
+    answers: ['misconception', 'correct', 'correct', 'wrong', 'correct', 'correct'], maxTurns: 18 },
+  { conceptId: 'math.cat.functor', opener: 'a functor is just a function between sets?',
+    answers: ['misconception', 'correct', 'correct', 'correct', 'correct'], maxTurns: 18 },
+]
 const NUDGES = ['ok i think i get it. can you ask me a question?', 'ok give me one question please', 'yes i follow. next?']
 
 interface AnswerRecord {
@@ -243,7 +260,7 @@ async function main() {
   try {
     const cur = await api(acct.cookie, '/api/curriculum?subject=mathematics')
     const lessons: Lesson[] = cur.lessons ?? []
-    const planSet = process.argv.includes('--plans=wide') ? WIDE_PLANS : process.argv.includes('--plans=third') ? THIRD_PLANS : PLANS
+    const planSet = process.argv.includes('--plans=wide') ? WIDE_PLANS : process.argv.includes('--plans=third') ? THIRD_PLANS : process.argv.includes('--plans=fourth') ? FOURTH_PLANS : PLANS
     for (const plan of planSet.filter((pl) => !only || only.split(',').includes(pl.conceptId))) {
       try { results.push(await drive(acct.cookie, lessons, plan)) } catch (e) { finding(`${plan.conceptId}: run aborted — ${(e as Error).message}`) }
     }
