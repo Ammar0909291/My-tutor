@@ -19,6 +19,7 @@ import { stripAuthoringLabel } from '../../src/lib/teaching/gateProbeContract'
 
 type SeedProbe = { conceptId: string; subjectSlug: string; stem: string; choices?: { text: string; isCorrect?: boolean }[] }
 const norm = (s: string) => s.toLowerCase().replace(/\s+/g, ' ').trim()
+const optionsKey = (options: string[]) => 'opts:' + options.map(norm).sort().join('|')
 
 const SUBJECT = process.env.QA_SUBJECT ?? 'chemistry'
 const LESSONS = Math.min(6, Number(process.env.QA_LESSONS ?? 4))
@@ -45,7 +46,12 @@ async function authoredProbes(): Promise<Map<string, SeedProbe>> {
         // Key on the question as SERVED too: probeToMcq reshapes some stems
         // (English quoting), and 19 of 27 English cards missed the raw-stem key.
         const served = probeToMcq({ stem: p.stem, choices: p.choices as never, conceptId: p.conceptId })
-        if (served) out.set(norm(served.question), p)
+        if (served) {
+          out.set(norm(served.question), p)
+          // And on the option set, when the stem was reshaped past recognition:
+          // options are served verbatim, only reordered.
+          out.set(optionsKey(served.options), p)
+        }
       }
     }
   }
@@ -53,8 +59,11 @@ async function authoredProbes(): Promise<Map<string, SeedProbe>> {
 }
 
 function answer(q: NonNullable<TurnPayload['mcq']>, authored: Map<string, SeedProbe>, right: boolean): string | null {
-  const probe = authored.get(norm(q.question))
-  if (!probe) return null
+  const probe = authored.get(norm(q.question)) ?? authored.get(optionsKey(q.options))
+  if (!probe) {
+    console.log(`unmatched card: ${JSON.stringify({ question: q.question.slice(0, 160), options: q.options })}`)
+    return null
+  }
   const expected = probeToMcq({ stem: probe.stem, choices: probe.choices as never, conceptId: probe.conceptId })
   if (!expected) return null
   const correct = expected.options[expected.correctIndex]
