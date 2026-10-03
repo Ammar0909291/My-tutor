@@ -58,6 +58,13 @@ describe('the bootstrap is wired to it', () => {
     expect(SRC).toMatch(/runWithDeadline\(\s*\(run\) => bootstrapAssets\(run\)/)
     expect(SRC).toMatch(/ASSET_BOOTSTRAP_SETTLE_MS/)
   })
+  it('a probe refused at the deadline stops the run instead of being logged as a probe failure', () => {
+    const fallThrough = SRC.indexOf('cheap completeness probe failed')
+    const rethrow = SRC.lastIndexOf('if (err instanceof WorkAbandonedError) throw err', fallThrough)
+    expect(rethrow).toBeGreaterThan(0)
+    expect(fallThrough - rethrow).toBeLessThan(300)
+  })
+
   it('marks the write phase as one group, so identity and content rows land together', () => {
     const flushStart = SRC.indexOf('run.flushing = true')
     expect(flushStart).toBeGreaterThan(0)

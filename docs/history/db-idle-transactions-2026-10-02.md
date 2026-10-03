@@ -141,6 +141,7 @@
     was 0.025 s.
   - **Postgres log, 07:40–08:10 UTC:** 0 "idle-in-transaction timeout" kills. Before the fix
     there was one, at 23:55:41.
-  - **Cosmetic, not fixed:** a refused probe also logs "cheap completeness probe failed, falling
-    back to full prefetch". It is the probe's own fall-through `catch` seeing the refusal. No query
-    runs: the prefetch is refused next, and the run stops.
+  - **Cosmetic, fixed afterwards:** a refused probe also logged "cheap completeness probe
+    failed, falling back to full prefetch". It was the probe's own fall-through `catch` seeing the
+    refusal; no query ran. That `catch` now re-throws `WorkAbandonedError`, so the run stops with
+    the single "stopped at the boot deadline" line.

@@ -1455,6 +1455,10 @@ async function bootstrapAssets(run: import('./lib/db/stopAfterDeadline').Abandon
           `[instrumentation] asset bootstrap: cheap probe says ${storedCount}/${expectedSlugs.size} present, ${hollowCount} hollow — full prefetch needed`,
         )
       } catch (err) {
+        // A probe refused at the boot deadline did not fail: no query ran, and
+        // the prefetch would be refused too. Stop here instead of logging it
+        // as a probe failure (seen in production 2026-10-03).
+        if (err instanceof WorkAbandonedError) throw err
         // Fall through to the full prefetch. Never treat a failed probe as an
         // answer in either direction.
         console.warn('[instrumentation] asset bootstrap: cheap completeness probe failed, falling back to full prefetch', err)
