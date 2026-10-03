@@ -27,12 +27,27 @@ interface AttachRec {
   after?: { k1Stub: boolean; k2QuestionBesideCard: boolean }
 }
 
+/** Phase 3 step 3 (2026-10-03): one line per lesson opening. */
+interface OpenRec {
+  topicSlug?: string | null; changed?: boolean; served?: 'assembled' | 'live'
+  learnerQuestionsBefore?: number; learnerQuestionsAfter?: number
+}
+
 const recs: Rec[] = []
 const attach: AttachRec[] = []
+const open: OpenRec[] = []
 let truncated = 0
 const seen = new Set<string>()
 for (const file of process.argv.slice(2)) {
   for (const line of readFileSync(file, 'utf8').split('\n')) {
+    const o = line.indexOf('[assembled-open] {')
+    if (o >= 0) {
+      const json = line.slice(o + '[assembled-open] '.length).trim()
+      if (seen.has(json)) continue
+      seen.add(json)
+      try { open.push(JSON.parse(json)) } catch { truncated++ }
+      continue
+    }
     const a = line.indexOf('[assembled-attach] {')
     if (a >= 0) {
       const json = line.slice(a + '[assembled-attach] '.length).trim()
@@ -87,6 +102,15 @@ console.log(JSON.stringify({
     k2Served: pct(attach.filter((r) => (r.served === 'assembled' ? r.after : r.before)?.k2QuestionBesideCard).length, attach.length),
     k2IfAllServed: pct(attach.filter((r) => (r.changed ? r.after : r.before)?.k2QuestionBesideCard).length, attach.length),
     k1CreatedOnGraded: attach.filter((r) => r.served === 'assembled' && r.graded && r.after?.k1Stub && !r.before?.k1Stub).length,
+  },
+  // Lesson openings (Phase 3 step 3): 2+ questions to the learner.
+  open: {
+    openings: open.length,
+    changed: pct(open.filter((r) => r.changed).length, open.length),
+    servedAssembled: pct(open.filter((r) => r.served === 'assembled').length, open.length),
+    multiQuestionLive: pct(open.filter((r) => (r.learnerQuestionsBefore ?? 0) >= 2).length, open.length),
+    multiQuestionAssembled: pct(open.filter((r) => (r.learnerQuestionsAfter ?? 0) >= 2).length, open.length),
+    noQuestionAssembled: pct(open.filter((r) => (r.learnerQuestionsAfter ?? 0) === 0).length, open.length),
   },
   byConcept: Object.fromEntries([...recs.reduce((m, r) => m.set(r.conceptId ?? '?', (m.get(r.conceptId ?? '?') ?? 0) + 1), new Map<string, number>())]),
 }, null, 2))

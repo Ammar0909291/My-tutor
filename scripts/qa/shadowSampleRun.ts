@@ -9,6 +9,7 @@
  * the shadow slot call), plus up to one regeneration.
  *
  *   QA_SUBJECT=chemistry QA_LESSONS=4 QA_QUIZZES=4 npx tsx scripts/qa/shadowSampleRun.ts
+ *   QA_SUBJECT=physics QA_OPEN_ONLY=1 QA_LESSONS=20 npx tsx scripts/qa/shadowSampleRun.ts   # openings only
  */
 import { readdirSync } from 'fs'
 import path from 'path'
@@ -22,7 +23,10 @@ const norm = (s: string) => s.toLowerCase().replace(/\s+/g, ' ').trim()
 const optionsKey = (options: string[]) => 'opts:' + options.map(norm).sort().join('|')
 
 const SUBJECT = process.env.QA_SUBJECT ?? 'chemistry'
-const LESSONS = Math.min(6, Number(process.env.QA_LESSONS ?? 4))
+// QA_OPEN_ONLY=1: open lessons and stop (one [assembled-open] line each, one
+// model call each); no quizzes. Openings are cheap, so more are allowed.
+const OPEN_ONLY = process.env.QA_OPEN_ONLY === '1'
+const LESSONS = Math.min(OPEN_ONLY ? 25 : 6, Number(process.env.QA_LESSONS ?? 4))
 const QUIZZES = Math.min(6, Number(process.env.QA_QUIZZES ?? 4))
 // Skip lesson one (its own locked protocol) and start a little way in.
 const START = Number(process.env.QA_START ?? 2)
@@ -94,6 +98,7 @@ async function main() {
     if (overBudget()) { console.log('time budget reached — stopping'); break }
     const sid = await createSession(cookie, SUBJECT)
     await openLesson(cookie, sid, { lessonTitle: l.lessonTitle, lessonOrder: l.order, topicSlug: l.topicSlug, unitTitle: l.unitTitle, totalLessons: lessons.length })
+    if (OPEN_ONLY) { console.log(`${l.topicSlug}: opened`); continue }
     for (const m of ['ok, continue', 'ok']) await say(cookie, sid, m)
     let done = 0
     for (let tries = 0; tries < QUIZZES * 3 && done < QUIZZES && !overBudget(); tries++) {
