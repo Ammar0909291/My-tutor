@@ -785,6 +785,24 @@ here: the assembled text must close exactly when the live one did.
   mastery, so it is written when the harness supports it. Until then, production
   `completion: true` lines are the evidence.
 
+### 14.1 Result (2026-10-03, serve deploys `0c4cfa8` → `7defba5`)
+
+- **Sample:** **53 completion turns** (`completion: true`). 52 were served assembled; 1 came
+  from the shadow-only deploy before the switch. They came from `QA_ALL_RIGHT=1` runs (lessons
+  driven to their completing turn) in all five subjects.
+- **Completion agreement 53/53.** The assembled text closed the lesson exactly when the live
+  one did.
+- **Live vs assembled, same turns:**
+  - live is the close alone ("That's Apoptosis and Programmed Cell Death finished — nice
+    work…"), with no verdict and no reason for the learner's last answer;
+  - assembled is verdict, then a reason that names the idea, then the same close. Hand-read,
+    `bio.cell.apoptosis`: "Yes, exactly right. / Apoptosis eliminates targeted cells in a
+    regulated manner, shaping structures like digits… / That's Apoptosis and Programmed Cell
+    Death finished — nice work…".
+  - Assembled K1 0/53.
+- **Decision:** shadow beat live, so this turn type is served. It already was, as part of the
+  graded serve (§11.13). No separate switch.
+
 ---
 
 ## 15. Phase 3 step 5 — learner questions (baseline, 2026-10-03)
@@ -898,3 +916,46 @@ graded turns only. Today that is `stale-question` (the previous answer quoted on
 item, R2). A fallback turn (assembly failed, live served) would then lose it. That is the
 trade Phase 4 accepts, and the fallback rate decides it: 0 of 375 so far (307 shadow + 68
 serve).
+
+### 16.1 Phase 4 verdict at 307 served graded turns (2026-10-03)
+
+**Measured:** 366 chat requests carried a served-assembled graded line, and 338 served live
+text (card, question and teaching turns). Counts are de-duplicated requests from every runtime
+log window.
+
+| Repair tag | Fired on served-assembled turns (output discarded) | Fired on live-served turns | Acts on |
+| --- | --- | --- | --- |
+| `gate-contract` | 161 | 146 | every turn type |
+| `visual-acknowledgement` | 45 | 30 | every turn type |
+| `eng-d11` | 31 | 2 | every English turn |
+| `stub-repair` | 21 | 2 | gate-contract and confirm-back stubs, any turn |
+| `mcq-reoffer-unbacked-confirmation` | 0 | 17 | re-offer turns (not graded) |
+| `remediation-grounding` | 0 | 16 | remediation turns |
+| `answer-leak` | 9 | 5 | every card turn |
+| `stale-question` | 2 | 0 | **graded correct taps only** |
+| `topic-drift`, `figure-reference` | 1 each | 0 | every turn type |
+
+**Deleted: none.** Reasons, by rule:
+- **The rule: 0 firings over at least 300 served turns.** No repair the assembler supersedes
+  reaches 0. Repairs run on the live draft before the serve decision (§16), so their tags keep
+  firing even when their output is discarded.
+- **`stale-question` is the only repair that acts on graded turns alone.** Every firing (2/2)
+  fell on a served-assembled turn, so it changed nothing a learner saw. It cannot reach 0
+  firings by the rule while it runs before assembly.
+  - Its only remaining protection is the serve fallback, and that has been **0/316** (0/623
+    counting the shadow period).
+  - It was also extended twice today by another session (`c414621`, `1d3247c`) on the same
+    shared `main`. Deleting code under active work in a parallel session is a coordination
+    call, not one for this loop.
+- **Every other repair fires on live-served turns** (card, teaching, question), where it still
+  protects the learner. Not deletable.
+- Repairs with 0 firings in every window (`empty-reply-net`, `completion-claim`,
+  `claim-challenge`, …) guard rare failures on paths the assembler does not cover. 0 firings in
+  sampler traffic does not show they are unneeded.
+
+**What would make Phase 4 deletions possible (recommended next step, not done):**
+1. Run assembly before the graded-only repairs.
+2. Skip `stale-question` and the graded branch of `stub-repair` when the assembled turn will
+   be served. That also saves their regeneration calls: about 23 extra model calls over 307
+   graded turns.
+3. Their tags then measure firings on the new path, and a deletion can follow the rule.
