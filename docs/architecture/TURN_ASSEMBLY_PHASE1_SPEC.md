@@ -576,8 +576,12 @@ for example a confirm-back ("Does that make sense so far?") before the teaching.
 model call; deterministic:
 1. Prose with no `?` is left exactly as it is.
 2. Otherwise:
-   - every sentence carrying `?` is dropped, and so is every home-made option line
-     (`dropQuestionSentences`);
+   - every question **to the learner** is dropped, and so is every home-made option line
+     (`dropLearnerQuestions`);
+   - a question to the learner is one left hanging (nothing but more questions after it in its
+     paragraph), or a confirm-back ("does that make sense", "ready to try", …);
+   - a question the prose answers itself is teaching and stays ("Pressure in pascals? That's
+     kg/(m·s²)."). See §12.1 for why;
    - the prose ends on exactly one neutral lead-in (`neutralLeadInFor`, which never names a
      topic, the K4 defect). A closing sentence that already announces the card is replaced by
      the lead-in, never stacked with it.
@@ -588,7 +592,8 @@ model call; deterministic:
 **Route** (after the graded serve decision, before save-once):
 - **shadow:** log `[assembled-attach]` with K2 and K1 before and after, `changed`, and
   `served: 'live'`. The reply is unchanged.
-- **serve:** send the assembled text when it changed and has no `?`.
+- **serve:** send the assembled text when it changed. A rhetorical `?` left in it does not block
+  serve.
   - Never on a reply to an answer if assembly would create a K1 stub (under 12 words) that was
     not there before. K2 is not traded for K1.
   - Save-once (§6) then stores exactly the served text plus its card.
@@ -706,3 +711,22 @@ here: the assembled text must close exactly when the live one did.
   nothing to win on these checks. It would add a model call and risk stiffness on the one
   turn type where free text is the point. Learner questions stay model-written, unless a
   shadow run shows a gain.
+
+### 12.1 First serve window and the rhetorical-question fix (2026-10-03, deploy `0c4cfa8`)
+
+- **Graded turns** (chemistry sampler plus another session's mathematics QA, 25 lines on the
+  serve deploy):
+  - served assembled 25/25; completion agreement 25/25;
+  - served K1 0, served K2 0 (live K2 1/25); fallback 0;
+  - added wait 0 ms.
+- **Card turns:** 15 lines.
+  - Before assembly, K2 was 5/15. Served K2 was 0/15.
+  - **Hand-read of the 5 changed turns:**
+    - 2 were damaged. The first version dropped every `?` sentence, including questions the
+      prose answers itself. "Pressure in pascals? That's kg/(m·s²). Energy in joules?
+      kg·m²/s²." became "That's kg/(m·s²). kg·m²/s².", and "A mixture? No fixed ratio —"
+      became "No fixed ratio —".
+    - 1 left the closing `**` of a dropped bold question ("at 0.**").
+    - 2 were correct: a re-typed card question, and a hanging second question.
+- **Fix:** drop only questions to the learner (hanging, or a confirm-back). A word-less
+  fragment goes with the sentence before it. All four production shapes are now unit tests.

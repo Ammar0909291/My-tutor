@@ -53,4 +53,35 @@ describe('assembleAttachTurn', () => {
     const curly = 'An interrogative such as \u201cDid she leave?\u201d ends in a question mark.'
     expect(assembleAttachTurn(curly, Q)).toEqual({ text: curly, changed: false })
   })
+
+  // Production, serve window 2026-10-03 (chem.found.measurement,
+  // chem.found.pure-substances): a question the prose answers itself is
+  // teaching, not a question to the learner. Dropping it left "That's
+  // kg/(m·s²)." and "No fixed ratio —" with nothing to refer to.
+  it('keeps a rhetorical question that the next sentence answers', () => {
+    const prose = 'SI gives us seven base units. Pressure in pascals? That\'s kg/(m·s²). Energy in joules? kg·m²/s². Prefixes scale them.'
+    expect(assembleAttachTurn(prose, Q)).toEqual({ text: prose, changed: false })
+    const mix = 'Compounds have a FIXED ratio. A mixture? No fixed ratio — you can make weak tea or strong tea.'
+    expect(assembleAttachTurn(mix, Q)).toEqual({ text: mix, changed: false })
+  })
+
+  it('drops a confirm-back even when teaching follows it', () => {
+    const r = assembleAttachTurn('Does that make sense so far? Momentum is mass times velocity.', Q)
+    expect(r.text).toBe(`Momentum is mass times velocity.\n\n${neutralLeadInFor(Q)}`)
+  })
+
+  // Production (math.num.newtons-method): the dropped question was bold, and
+  // its closing ** was left behind as "at 0.**".
+  it('drops a hanging bold question without leaving its emphasis markers', () => {
+    const prose = 'The values double each step, moving farther from the root at 0. **What do you notice about the sequence of approximations?**'
+    const r = assembleAttachTurn(prose, Q)
+    expect(r.text).toBe(`The values double each step, moving farther from the root at 0.\n\n${neutralLeadInFor(Q)}`)
+  })
+
+  it('keeps a rhetorical question but still drops the hanging one after it', () => {
+    const prose = 'Pressure in pascals? That\'s kg/(m·s²).\n\nWhich unit would you use for energy?'
+    const r = assembleAttachTurn(prose, Q)
+    expect(r.changed).toBe(true)
+    expect(r.text).toBe(`Pressure in pascals? That's kg/(m·s²).\n\n${neutralLeadInFor(Q)}`)
+  })
 })

@@ -13431,8 +13431,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             const before = ta.turnChecks(servedText, true)
             const after = ta.turnChecks(attached.text, true)
             const graded = gradeForVerdict !== null
-            // K2 is never traded for K1 on a reply to an answer.
-            const serveAttach = attachMode === 'serve' && attached.changed && !after.k2QuestionBesideCard
+            // K2 is never traded for K1 on a reply to an answer. A "?" left in
+            // the result is a rhetorical question the prose answers itself
+            // (attachAssembly.ts), which is teaching, so it does not block serve.
+            const serveAttach = attachMode === 'serve' && attached.changed
               && !(graded && after.k1Stub && !before.k1Stub)
             console.log('[assembled-attach] ' + JSON.stringify({
               conceptId: resolvedConceptId ?? null, graded, changed: attached.changed,
