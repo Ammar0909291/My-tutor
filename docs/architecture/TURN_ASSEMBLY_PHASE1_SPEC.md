@@ -638,3 +638,71 @@ the lesson's `lessonKey`. No card is attached and nothing is graded, so K1/K2 do
 - **What this means for the gate.** The opening is the healthiest turn type measured so far.
   An assembled opening must beat these rates in shadow (§7 method, at least 50 turns) before it
   serves. Otherwise it stays model-written, and that is recorded here with the numbers.
+
+---
+
+## 14. Phase 3 step 4 — completion turns (design, 2026-10-03)
+
+**What the live path sends today.** When a graded answer finalises the lesson, `route.ts`
+replaces the whole reply with `buildLessonCloseText(...)` (the deterministic close, ~12079). It
+then rewrites the stored row (CL-29).
+- So the learner's last answer gets **no verdict and no reason**, only "✓ Lesson finished …".
+- This is K1's shape on the most important answer of the lesson. Phase 0 K1 excluded the close
+  by design, so it never counted.
+
+**The assembled completion turn is already built.** It is the §5 graded assembly with
+`closeText` set:
+
+```
+<verdict line>     from the grade
+<feedback slot>    why the last answer is right or wrong (validated, V1–V6)
+<close>            buildLessonCloseText(...) — no teaching slot, no card
+```
+
+`assembleGradedTurn` drops `teaching` and the lead-in when `closeText` is present. Serve (§11.13)
+sends it under the same fallback rules. Completion agreement is the gate that matters most
+here: the assembled text must close exactly when the live one did.
+
+**Measure.** `[assembled-turn]` lines with `completion: true`:
+- the share served assembled;
+- assembled K1 (0 expected: the feedback slot is required);
+- completion agreement;
+- a hand-read that the close still follows the feedback.
+- Target: at least 50 completion turns.
+
+**Tests.**
+- Already present: `turnAssembly.test.ts` ("completion: …", line ~137). A completing turn is
+  verdict, then feedback, then close, with no teaching and no lead-in.
+- To add: a route-level serve test for a completing tap. It needs the harness to reach
+  mastery, so it is written when the harness supports it. Until then, production
+  `completion: true` lines are the evidence.
+
+---
+
+## 15. Phase 3 step 5 — learner questions (baseline, 2026-10-03)
+
+**Definition.** An ASSISTANT row whose previous row is a USER message ending in `?`
+(12–400 characters). Read-only SQL, production, last 7 days.
+
+| Subject | Turns | Reply under 12 words | Opens with a verdict | With a card | Card and a `?` in the prose |
+| --- | --- | --- | --- | --- | --- |
+| physics | 1,783 | 4 | 2 | 30 | 4 |
+| mathematics | 145 | 28 | 0 | 67 | 4 |
+| chemistry | 94 | 1 | 0 | 11 | 0 |
+| english | 66 | 1 | 0 | 7 | 3 |
+| biology | 40 | 2 | 0 | 6 | 3 |
+
+- **Hand-read of the mathematics "under 12 words" class:** 12 read, **0 true**.
+  - Every one answers a practice request phrased as a question ("can you ask me a
+    question?", "next?").
+  - The reply is a lead-in plus a card, which is the correct turn.
+  - Excluding practice requests, the stub rate on real learner questions is at most 8 of
+    2,128 (0.4%).
+- A false verdict on a question is 2 of 2,128 (0.1%).
+- **Card and a `?` in the prose:** 14 of 121. This is K2, and the §12 attach assembler already
+  covers it, because it runs on every card turn whatever the learner said.
+- **Decision rule (DoD 3):** an assembled answer must beat these rates in shadow. The measured
+  defect rate is already near the floor of what the checks can see, so a slot-filled answer has
+  nothing to win on these checks. It would add a model call and risk stiffness on the one
+  turn type where free text is the point. Learner questions stay model-written, unless a
+  shadow run shows a gain.
