@@ -676,6 +676,25 @@ model call; deterministic:
   - shadow: byte-identical to off, and the line logged;
   - serve: no `?`, one lead-in, and the stored row equal to the served text plus its card.
 
+### 12.2 DoD 2 verdict — card turns (2026-10-03, deploys `0c4cfa8` → `7defba5`)
+
+- **102 card turns** (`[assembled-attach]`, de-duplicated, all serve deploys).
+  - Before assembly, K2 was **12/102 (11.8%)**. That is in line with the Phase-0 baseline of
+    6.6–11.3%.
+  - Served: **2/102 (2.0%)**, under the 3% target.
+  - Both remaining hits are quoted questions inside the teaching, so content and not a
+    question to the learner:
+    - "ask, 'What must have happened just before this?'";
+    - 'the question "which value?" even arise'.
+  - **True K2 served: 0/102.**
+- Changed 10/102. Hand-read since the rhetorical-question fix (`504579c`), all correct:
+  - a bold re-typed card question about the p-orbital figure, removed;
+  - a home-made A–D option list re-typed beside the card (convex functions), removed;
+  - a bold figure question ("Which label in the figure shows that component?"), removed.
+- K1 created on a graded turn: 0.
+- The two damaged turns from window 1 (§12.1) are the only defects found, and they are
+  fixed.
+
 ---
 
 ## 13. Phase 3 step 3 — lesson open (baseline, 2026-10-03; design follows)
