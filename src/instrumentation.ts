@@ -94,24 +94,33 @@ export async function register() {
   // idle time, and since the writes are batched the marginal cost of a larger
   // slice is a bigger INSERT payload rather than more round trips.
   const deadlineMs = Number(process.env.ASSET_BOOTSTRAP_DEADLINE_MS ?? 12000)
-  let onDeadline: ReturnType<typeof setTimeout> | undefined
-  await Promise.race([
-    bootstrapAssets().catch((err) =>
-      console.error('[instrumentation] asset bootstrap failed (non-fatal):', err?.message ?? err)
-    ),
-    new Promise<void>((resolve) => {
-      onDeadline = setTimeout(() => {
-        console.warn(
-          `[instrumentation] asset bootstrap: ${deadlineMs}ms boot deadline reached — ` +
-            'continuing in the background; the next cold start resumes',
-        )
-        resolve()
-      }, deadlineMs)
-      // Never hold the process open on account of this timer.
-      onDeadline.unref?.()
-    }),
-  ])
-  if (onDeadline) clearTimeout(onDeadline)
+  // ── AND WHY NOTHING STARTS AFTER IT (2026-10-03) ──────────────────────────
+  //
+  // Past the deadline this run used to continue "in the background". MEASURED
+  // 2026-10-02 23:54 UTC: it began its completeness probe (a batch
+  // $transaction) after the deadline, the request that cold-started the
+  // instance returned, the instance froze mid-transaction, and the connection
+  // sat "idle in transaction" until Postgres's 60 s limit killed it. Now the
+  // run is marked abandoned at the deadline: its client starts no further step
+  // (stopAfterDeadline), and boot waits up to ASSET_BOOTSTRAP_SETTLE_MS for the
+  // one step already in flight to finish, so nothing is frozen open. The next
+  // cold start resumes exactly as before.
+  const settleMs = Number(process.env.ASSET_BOOTSTRAP_SETTLE_MS ?? 3000)
+  const { runWithDeadline } = await import('./lib/db/stopAfterDeadline')
+  const outcome = await runWithDeadline(
+    (run) => bootstrapAssets(run).catch((err) =>
+      console.error('[instrumentation] asset bootstrap failed (non-fatal):', err?.message ?? err)),
+    {
+      deadlineMs, settleMs,
+      onDeadline: () => console.warn(
+        `[instrumentation] asset bootstrap: ${deadlineMs}ms boot deadline reached — ` +
+          'no further DB step starts; the next cold start resumes',
+      ),
+    },
+  )
+  if (outcome === 'still-running') {
+    console.warn(`[instrumentation] asset bootstrap: a DB step was still running ${settleMs}ms after the deadline`)
+  }
 }
 
 /**
@@ -212,7 +221,7 @@ export function bootstrapPrefetchSlugs(
   return out.size > budget ? null : [...out]
 }
 
-async function bootstrapAssets() {
+async function bootstrapAssets(run: import('./lib/db/stopAfterDeadline').AbandonableRun) {
   try {
     // ONE POOL PER PROCESS, NOT TWO.
     //
@@ -234,7 +243,11 @@ async function bootstrapAssets() {
     // src/lib/db/prisma.ts), so this keeps the P5 fix and drops the extra
     // pool. It is also why there is no $disconnect below: the client belongs
     // to the application, not to this run.
-    const { prisma, withRetry } = await import('./lib/db/prisma')
+    const { prisma: appPrisma, withRetry } = await import('./lib/db/prisma')
+    // Starts no DB step once the boot deadline has passed — see register().
+    const { stopAfterDeadline, WorkAbandonedError } = await import('./lib/db/stopAfterDeadline')
+    const prisma = stopAfterDeadline(appPrisma, run)
+    bootstrapAbandonedError = WorkAbandonedError
 
     {
       // PHASE TIMING (owner-approved 2026-09-25, observability only — no query,
@@ -1949,9 +1962,14 @@ async function bootstrapAssets() {
       // lineage rejects a second row for a slug, and the loser simply writes
       // nothing. It is the same guarantee the per-asset P2002 catch gave, moved
       // into the statement.
-      const flush = async (what: string, run: () => Promise<{ count: number }>) => {
+      // Writes start only before the deadline, and once started they finish as
+      // one group: identity rows then their content rows. Stopping between the
+      // two would leave hollow identities.
+      if (run.abandoned) throw new WorkAbandonedError('asset bootstrap writes')
+      run.flushing = true
+      const flush = async (what: string, write: () => Promise<{ count: number }>) => {
         try {
-          return (await withRetry(run)).count
+          return (await withRetry(write)).count
         } catch (err: any) {
           console.warn(`[instrumentation] asset bootstrap: ${what} failed (retried on next cold start):`, err?.message ?? err)
           return null
@@ -2017,8 +2035,18 @@ async function bootstrapAssets() {
       )
     }
   } catch (err: any) {
+    if (bootstrapAbandonedError && err instanceof bootstrapAbandonedError) {
+      console.log('[instrumentation] asset bootstrap stopped at the boot deadline; the next cold start resumes:', err.message)
+      return
+    }
     // DB not reachable yet (e.g., slow cold start) — non-fatal; the next cold
     // start will retry. assembleLesson() degrades to Groq in the interim.
     console.warn('[instrumentation] asset bootstrap DB error (will retry on next start):', err?.message)
+  } finally {
+    run.flushing = false
   }
 }
+
+// Set once the module is loaded, so the outer catch can tell a deliberate stop
+// from a database error without a static import into the edge bundle.
+let bootstrapAbandonedError: (new (what: string) => Error) | undefined

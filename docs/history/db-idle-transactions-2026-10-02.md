@@ -56,9 +56,8 @@
      - Before the fix, 4 were still running when the turn returned. After it, 0.
 
 ## Not changed
-- **The cold-start asset bootstrap in `src/instrumentation.ts`.** It is still fire-and-forget at
-  `register()` and has its own boot deadline. It may also have left an `explanation_assets`
-  transaction open. Read `docs/history/egress-incidents.md` before touching it.
+- **The cold-start asset bootstrap in `src/instrumentation.ts`.** Fixed afterwards; see
+  "Follow-up: the bootstrap starts no DB step after its deadline" below.
 - **The 500 "AI service" label on DB timeouts.** Fixed afterwards; see the next section.
 
 ## Production verification (2026-10-02 23:54–23:59 UTC)
@@ -100,3 +99,33 @@
   - The real mislabel there was the outer `catch`: a body that failed validation, or was not
     JSON, got 500 "Internal server error". It now gets 400 "Invalid request".
   - Test: `src/tests/coachRouteErrorLabels.test.ts`.
+
+## Follow-up: the bootstrap starts no DB step after its deadline (2026-10-03)
+- **Cause** (the 23:55:41 kill above):
+  - `register()` awaited the bootstrap for 12 s, then let it continue "in the background".
+  - The bootstrap began its completeness probe (a batch `$transaction` of two COUNTs) after the
+    deadline.
+  - The request that cold-started the instance returned, and the instance froze
+    mid-transaction.
+- **New module `src/lib/db/stopAfterDeadline.ts`:**
+  - `stopAfterDeadline(client, run)` wraps the Prisma client. Once `run.abandoned` is set, every
+    model method and every `$`-method throws `WorkAbandonedError` before it reaches the database.
+  - `runWithDeadline(work, { deadlineMs, settleMs })` marks the run abandoned at the deadline.
+    It then waits up to `settleMs` (default 3 s, `ASSET_BOOTSTRAP_SETTLE_MS`) for the step already
+    in flight to finish.
+  - Outcomes: `finished`, `stopped` or `still-running`. Only `still-running` logs a warning;
+    the 60 s Postgres limit stays the backstop for it.
+- **The write phase is one group:**
+  - It starts only if the deadline has not passed.
+  - Once started, it is allowed to finish (`run.flushing`). It writes identity rows, then their
+    content rows, and stopping between the two would leave hollow identities.
+- **Unchanged:** no query was added or changed, so egress is the same. The two-COUNT probe and the
+  bounded prefetch are untouched.
+- **Checked against a real `PrismaClient`:**
+  - live calls reach the engine;
+  - abandoned calls are refused;
+  - the write group passes.
+- **Tests:**
+  - `src/tests/bootstrapStopsAtDeadline.test.ts`.
+  - `edgeBundleExcludesSeedCorpora` pins now point at `runWithDeadline`, which is where the race
+    and the `unref`'d timer now live.

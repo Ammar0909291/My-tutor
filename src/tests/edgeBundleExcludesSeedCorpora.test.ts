@@ -94,16 +94,22 @@ describe('the seed corpora are large enough that this matters', () => {
 describe('the bootstrap is awaited, under a deadline', () => {
   const HOOK = fs.readFileSync(path.join(process.cwd(), 'src/instrumentation.ts'), 'utf8')
 
+  // Since 2026-10-03 the race lives in runWithDeadline (src/lib/db/stopAfterDeadline.ts),
+  // which also stops the run from starting DB steps after the deadline.
+  const RUNNER = fs.readFileSync(path.join(process.cwd(), 'src/lib/db/stopAfterDeadline.ts'), 'utf8')
+
   it('register awaits the run instead of firing and forgetting', () => {
-    expect(HOOK).toMatch(/await Promise\.race\(\[/)
-    expect(HOOK).toMatch(/bootstrapAssets\(\)\.catch\(/)
+    expect(HOOK).toMatch(/await runWithDeadline\(/)
+    expect(HOOK).toMatch(/bootstrapAssets\(run\)\.catch\(/)
+    expect(RUNNER).toMatch(/await Promise\.race\(\[/)
   })
 
   it('the wait is bounded, so an unreachable database cannot delay boot forever', () => {
     expect(HOOK).toMatch(/ASSET_BOOTSTRAP_DEADLINE_MS/)
-    expect(HOOK).toMatch(/setTimeout\(/)
+    expect(HOOK).toMatch(/ASSET_BOOTSTRAP_SETTLE_MS/)
+    expect(RUNNER).toMatch(/setTimeout\(/)
     // The deadline must not become the thing that keeps a process alive.
-    expect(HOOK).toMatch(/\.unref\?\.\(\)/)
+    expect(RUNNER).toMatch(/\.unref\?\.\(\)/)
   })
 
   it('the per-cold-start write budget still exists — the deadline does not replace it', () => {
