@@ -6,7 +6,7 @@
  */
 import { describe, it, expect } from 'vitest'
 import { readFileSync } from 'fs'
-import { dropStaleQuestionAttribution, previousCardQuestion } from '@/lib/teaching/staleQuestionAttribution'
+import { dropStaleQuestionAttribution, previousCardQuestion, confirmGradedAnswer } from '@/lib/teaching/staleQuestionAttribution'
 import { appendMcqToHistoryText } from '@/lib/teaching/mcq'
 
 const Q180 = 'On the unit circle, what are the coordinates of the point at 180°?'
@@ -72,6 +72,27 @@ describe('dropStaleQuestionAttribution', () => {
   })
 })
 
+describe('when the one regeneration repeats the attribution', () => {
+  // Production, 2026-10-03 09:36 UTC, after the first fix shipped: the dropped
+  // sentence came back from the regeneration as this.
+  const regenerated = 'Can you walk me through how you decided the point at 180° is (0, 1)?'
+
+  it('the re-check catches the regenerated text', () => {
+    expect(dropStaleQuestionAttribution({ text: regenerated, graded, chosen: '(0, 1)', previous: Q180 }).dropped).toHaveLength(1)
+  })
+
+  it('the replacement is built from the graded card and carries no stale number', () => {
+    const t = confirmGradedAnswer(Q90, '(0, 1)')
+    expect(t).toBe(`That's right — the answer to "${Q90}" is (0, 1).`)
+    expect(t).not.toMatch(/180/)
+    expect(dropStaleQuestionAttribution({ text: t, graded, chosen: '(0, 1)', previous: Q180 }).dropped).toEqual([])
+  })
+
+  it('degrades to the bare verdict without a question or answer', () => {
+    expect(confirmGradedAnswer('', '(0, 1)')).toBe('That\'s right.')
+  })
+})
+
 describe('the chat route applies it on server-graded correct turns only', () => {
   const ROUTE = readFileSync('src/app/api/learn/chat/route.ts', 'utf-8')
   const block = ROUTE.slice(ROUTE.indexOf('A RIGHT ANSWER IS NOT CREDITED TO THE PREVIOUS QUESTION'), ROUTE.indexOf('// THE SAME QUESTION, ON SCREEN, TWICE.'))
@@ -80,6 +101,12 @@ describe('the chat route applies it on server-graded correct turns only', () => 
     expect(block).toMatch(/mcqGradeHoisted\?\.correct === true/)
     expect(block).toMatch(/\[\.\.\.historyScope\.messages\]\.reverse\(\)/)
     expect(block).toMatch(/repairStubReply\(next, 'stale-question'\)/)
+  })
+
+  it('re-checks the regenerated text and falls back to the graded-card confirmation', () => {
+    const afterRepair = block.slice(block.indexOf("repairStubReply(next, 'stale-question')"))
+    expect(afterRepair).toMatch(/dropStaleQuestionAttribution\(\{ text: next, \.\.\.staleInput \}\)/)
+    expect(afterRepair).toMatch(/confirmGradedAnswer\(staleInput\.graded\.question, staleInput\.chosen\)/)
   })
 
   it('runs after the repeat guard, before the reply is finalised', () => {

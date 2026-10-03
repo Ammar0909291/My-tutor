@@ -10676,23 +10676,28 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // that as fact. See staleQuestionAttribution.ts.
       if (!serveLessonComplete && mcqGradeHoisted?.correct === true && pendingMcqHoisted && typeof mcqGradeHoisted.chosenIndex === 'number') {
         try {
-          const { dropStaleQuestionAttribution, previousCardQuestion } = await import('@/lib/teaching/staleQuestionAttribution')
-          const chosen = pendingMcqHoisted.options[mcqGradeHoisted.chosenIndex]
-          const stale = dropStaleQuestionAttribution({
-            text: cleanText,
+          const { dropStaleQuestionAttribution, previousCardQuestion, confirmGradedAnswer } = await import('@/lib/teaching/staleQuestionAttribution')
+          const chosenOption = pendingMcqHoisted.options[mcqGradeHoisted.chosenIndex]
+          const staleInput = {
             graded: { question: pendingMcqHoisted.question, options: pendingMcqHoisted.options },
-            chosen: typeof chosen === 'string' ? chosen : '',
+            chosen: typeof chosenOption === 'string' ? chosenOption : '',
             // historyScope.messages is newest-first (loaded `createdAt desc`).
             previous: previousCardQuestion(
               [...historyScope.messages].reverse().filter((m) => m.role !== MessageRole.USER).map((m) => m.content),
               pendingMcqHoisted.question,
             ),
-          })
+          }
+          const stale = dropStaleQuestionAttribution({ text: cleanText, ...staleInput })
           if (stale.dropped.length > 0) {
             let next = stale.text
             next = (await repairStubReply(next, 'stale-question')) ?? next
-            if (!next.trim()) next = 'That\'s right.'
-            console.log('[stale-question] ' + JSON.stringify({ dropped: stale.dropped.map((d) => d.slice(0, 120)), charsBefore: cleanText.length, charsAfter: next.length }))
+            // The regeneration sees the same history and can write the same
+            // attribution again (measured, 2026-10-03 09:36 UTC) — re-checked,
+            // and a confirmation built from the graded card replaces it.
+            const again = dropStaleQuestionAttribution({ text: next, ...staleInput })
+            if (again.dropped.length > 0) next = confirmGradedAnswer(staleInput.graded.question, staleInput.chosen)
+            if (!next.trim()) next = confirmGradedAnswer(staleInput.graded.question, staleInput.chosen)
+            console.log('[stale-question] ' + JSON.stringify({ dropped: stale.dropped.map((d) => d.slice(0, 120)), repeatedByRepair: again.dropped.length > 0, charsBefore: cleanText.length, charsAfter: next.length }))
             cleanText = next
           }
         } catch { /* non-fatal — a repair must never break a turn */ }

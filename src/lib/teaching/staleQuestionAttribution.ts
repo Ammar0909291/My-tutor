@@ -103,3 +103,17 @@ export function dropStaleQuestionAttribution(input: StaleAttributionInput): { te
     .join('\n\n')
   return dropped.length ? { text: kept, dropped } : { text, dropped }
 }
+
+/**
+ * The confirmation used when the one regeneration repeats the attribution.
+ * Measured (production, 2026-10-03 09:36 UTC, same unit-circle turn after the
+ * fix above shipped): the sentence was dropped, the regeneration — which sees
+ * the same history — wrote "Can you walk me through how you decided the point
+ * at 180° is (0, 1)?" again. Built only from the graded card, so it is true by
+ * construction.
+ */
+export function confirmGradedAnswer(question: string, chosen: string): string {
+  const q = (question ?? '').trim()
+  const a = (chosen ?? '').trim().replace(/[.\s]+$/, '')
+  return q && a ? `That's right — the answer to "${q}" is ${a}.` : 'That\'s right.'
+}
