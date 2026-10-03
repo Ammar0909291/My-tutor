@@ -38,9 +38,13 @@ async function authoredProbes(): Promise<Map<string, SeedProbe>> {
   const out = new Map<string, SeedProbe>()
   for (const f of readdirSync(dir).filter((f) => f.endsWith('.ts') && !f.endsWith('.test.ts'))) {
     const mod = await import(path.join(dir, f))
-    for (const [name, value] of Object.entries(mod)) {
-      if (!Array.isArray(value) || !name.endsWith('PROBES')) continue
+    for (const value of Object.values(mod)) {
+      // Any exported array of probes, whatever its name: English's adult-band
+      // probes are exported as ENGLISH_ADULT_BAND_BATCH_1, which a `*PROBES`
+      // name filter skipped, leaving those cards unmatched.
+      if (!Array.isArray(value)) continue
       for (const p of value as SeedProbe[]) {
+        if (!p || typeof p.stem !== 'string' || !Array.isArray(p.choices)) continue
         if (p.subjectSlug !== SUBJECT || (p.choices?.length ?? 0) < 2) continue
         out.set(norm(stripAuthoringLabel(p.stem)), p)
         // Key on the question as SERVED too: probeToMcq reshapes some stems
