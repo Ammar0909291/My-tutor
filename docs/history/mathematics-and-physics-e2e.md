@@ -264,8 +264,9 @@ and graded (bayes "1/12, about 8%", unit-circle "(1/2, √3/2)").
 **Depth convergence verified against the corpus.** Per-domain aggregate
 `md5(string_agg(slug | md5(stem) | md5(correctValue)))` over production's depth rows equals the
 same aggregate computed from the corpus for all 13 fully-landed domains (arith, nt, found, geom,
-alg, calc, trig, func, seq, linalg, prob, stats, de): byte-identical. 483 rows (abst onward)
-were still pending at the time; the create-only bootstrap continues on each cold start.
+alg, calc, trig, func, seq, linalg, prob, stats, de): byte-identical. Re-measured at 00:19 UTC
+after the rest landed: **math ACTIVE probes 4,585 = corpus; all 24 domains byte-identical
+(1,833 depth rows)**. Production convergence of the depth campaign is complete.
 
 **Defect 5 — a right answer credited to the previous question (runtime, fixed).** unit-circle
 T7–T9: the learner answered "(0, 1)" to the 180° card (wrong, server-corrected to (−1, 0)), then

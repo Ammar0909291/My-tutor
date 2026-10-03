@@ -215,7 +215,8 @@ Production rendering not yet QA'd (Vercel 403). Full log: `docs/history/physics-
 Headline (measured 2026-10-02): Mathematics EB 908/908 (do not re-author); asset contract
 908/908 concepts, 917/917 (concept, band) pairs, 0 short; probe DEPTH also complete — 917/917
 pairs hold five gradeable probes (`contract-audit --min 5`; 1,833 probes in 24
-`mathematicsDepth*Assets.ts` modules; production converging at ~150 rows per cold start);
+`mathematicsDepth*Assets.ts` modules; production converged 2026-10-03: 4,585 ACTIVE math probes,
+all 24 domains byte-identical to the corpus; six-lesson weak-learner QA 6/6 verified mastery);
 production certification 12/12 PASS across 12 domains. The asset-authoring campaign is DONE — no
 frontier remains. Full record + how to re-verify
 convergence (the bootstrap is create-only, so a content EDIT never reaches production by itself):
