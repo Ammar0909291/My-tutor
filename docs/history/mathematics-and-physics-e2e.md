@@ -438,3 +438,22 @@ exists, and building one needs authorization):**
   option. That is the owner's decision.
 - disc.combinations and matrix-multiplication bare verdicts: the turn-assembly K1 class (see
   above).
+
+**Production recheck of defects 8 and 9** (deploy `7c9d8489`, CI green, fresh disposable
+account, deleted): combinations, newtons-method and prime-factorization — **3/3 verified
+mastery, 0 findings.** Every display-math block survived: combinations' Pascal derivation
+kept both `\[ … \]` blocks after their lead-ins. No stale "you chose X" claims appeared.
+
+**Open observation, root cause partly established (not fixed).** newtons-method, session
+`cmusdeoz40004jk04561eotgw`, turn key 1791031158261, at DEMONSTRATE: the learner asked "ok give
+me one question please" and the reply was "I'm sorry, but I can't provide a question right
+now." (52 chars). The log chain:
+- the authored question was declined ("below-guide-no-surplus", pool 3);
+- the turn took the practice-without-quiz path, which lets the model answer with its own
+  question;
+- CUE dispatched D2b-CONFIDENT-WRONG (misconception repair: elicit the reasoning first);
+- the model refused, and no stub repair covers a plain model turn.
+
+The prompt rule the model was obeying isn't established. One occurrence in about 30 math
+lessons (about 350 tutor turns). Content-free replies in general are the turn-assembly
+program's territory; recorded here for it and for the owner.
