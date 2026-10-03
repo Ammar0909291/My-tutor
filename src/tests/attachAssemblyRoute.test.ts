@@ -83,6 +83,8 @@ describe('attach assembly (Phase 3 step 2)', () => {
     expect(logged).not.toBeNull()
     expect(logged.changed).toBe(true)
     expect(logged.served).toBe('assembled')
+    expect(logged.removed).toContain('Does that make sense so far?')
+    expect(text.endsWith(logged.afterTail)).toBe(true)
     expect(text.startsWith('Momentum is the product of mass and velocity')).toBe(true)
     const { appendMcqToHistoryText } = await import('@/lib/teaching/mcq')
     const stored = [...h.state.messages].reverse().find((m) => m.role === 'ASSISTANT')!

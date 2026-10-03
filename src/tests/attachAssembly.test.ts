@@ -12,7 +12,7 @@ const Q = 'Which quantity stays the same when two carts stick together?'
 describe('assembleAttachTurn', () => {
   it('leaves prose with no question untouched', () => {
     const prose = 'Momentum is mass times velocity, and in a collision the total stays the same.'
-    expect(assembleAttachTurn(prose, Q)).toEqual({ text: prose, changed: false })
+    expect(assembleAttachTurn(prose, Q)).toEqual({ text: prose, changed: false, removed: [] })
   })
 
   it('drops a re-typed card question and ends on the neutral lead-in', () => {
@@ -49,9 +49,9 @@ describe('assembleAttachTurn', () => {
 
   it('leaves a quoted example question untouched: it is content, not a question to the learner', () => {
     const prose = 'The sentence "Where are you going?" is interrogative, because it asks for information.'
-    expect(assembleAttachTurn(prose, Q)).toEqual({ text: prose, changed: false })
+    expect(assembleAttachTurn(prose, Q)).toEqual({ text: prose, changed: false, removed: [] })
     const curly = 'An interrogative such as \u201cDid she leave?\u201d ends in a question mark.'
-    expect(assembleAttachTurn(curly, Q)).toEqual({ text: curly, changed: false })
+    expect(assembleAttachTurn(curly, Q)).toEqual({ text: curly, changed: false, removed: [] })
   })
 
   // Production, serve window 2026-10-03 (chem.found.measurement,
@@ -60,9 +60,9 @@ describe('assembleAttachTurn', () => {
   // kg/(m·s²)." and "No fixed ratio —" with nothing to refer to.
   it('keeps a rhetorical question that the next sentence answers', () => {
     const prose = 'SI gives us seven base units. Pressure in pascals? That\'s kg/(m·s²). Energy in joules? kg·m²/s². Prefixes scale them.'
-    expect(assembleAttachTurn(prose, Q)).toEqual({ text: prose, changed: false })
+    expect(assembleAttachTurn(prose, Q)).toEqual({ text: prose, changed: false, removed: [] })
     const mix = 'Compounds have a FIXED ratio. A mixture? No fixed ratio — you can make weak tea or strong tea.'
-    expect(assembleAttachTurn(mix, Q)).toEqual({ text: mix, changed: false })
+    expect(assembleAttachTurn(mix, Q)).toEqual({ text: mix, changed: false, removed: [] })
   })
 
   it('drops a confirm-back even when teaching follows it', () => {
@@ -83,5 +83,10 @@ describe('assembleAttachTurn', () => {
     const r = assembleAttachTurn(prose, Q)
     expect(r.changed).toBe(true)
     expect(r.text).toBe(`Pressure in pascals? That's kg/(m·s²).\n\n${neutralLeadInFor(Q)}`)
+  })
+
+  it('reports exactly what it dropped, for the log', () => {
+    const r = assembleAttachTurn('Does that make sense so far? Momentum is mass times velocity.\nA) Momentum', Q)
+    expect([...r.removed].sort()).toEqual(['A) Momentum', 'Does that make sense so far?'])
   })
 })

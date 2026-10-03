@@ -24,6 +24,8 @@ export interface AttachAssembly {
   text: string
   /** False when the prose already had no question beside the card. */
   changed: boolean
+  /** What was dropped: questions to the learner and option lines (for the log). */
+  removed: string[]
 }
 
 /**
@@ -43,14 +45,18 @@ const HAS_WORD = /[\p{L}\p{N}]/u
  * fragment with no word in it (the closing "**" of a bold question) goes with
  * the sentence before it, so a dropped question takes its markup along.
  */
-export function dropLearnerQuestions(text: string): { text: string; dropped: boolean } {
+export function dropLearnerQuestions(text: string): { text: string; dropped: boolean; removed: string[] } {
   let dropped = false
+  const removed: string[] = []
   const out = (text ?? '')
     .split(/\n{2,}/)
     .map((para) => {
       const all = para.split('\n')
       const lines = all.filter((line) => !OPTION_LINE.test(line))
-      if (lines.length !== all.length) dropped = true
+      if (lines.length !== all.length) {
+        dropped = true
+        removed.push(...all.filter((line) => OPTION_LINE.test(line)).map((line) => line.trim()))
+      }
       const units: { line: number; text: string }[] = []
       lines.forEach((line, li) => {
         for (const piece of line.match(/[^.!?]+(?:[.!?]+|$)/g) ?? []) {
@@ -64,7 +70,7 @@ export function dropLearnerQuestions(text: string): { text: string; dropped: boo
         if (!isQuestion(u)) return true
         const answeredAfter = units.slice(i + 1).some((v) => !isQuestion(v) && HAS_WORD.test(v.text))
         const keep = answeredAfter && !CONFIRM_BACK.test(u.text)
-        if (!keep) dropped = true
+        if (!keep) { dropped = true; removed.push(u.text.trim()) }
         return keep
       })
       return lines
@@ -75,20 +81,20 @@ export function dropLearnerQuestions(text: string): { text: string; dropped: boo
     .filter(Boolean)
     .join('\n\n')
     .trim()
-  return { text: out, dropped }
+  return { text: out, dropped, removed }
 }
 
 export function assembleAttachTurn(prose: string, cardQuestion: string): AttachAssembly {
   const original = prose ?? ''
-  if (!original.includes('?') || QUOTED_QUESTION.test(original)) return { text: original, changed: false }
+  if (!original.includes('?') || QUOTED_QUESTION.test(original)) return { text: original, changed: false, removed: [] }
   const frame = neutralLeadInFor(cardQuestion)
-  const { text: body, dropped } = dropLearnerQuestions(original)
+  const { text: body, dropped, removed } = dropLearnerQuestions(original)
   // Only rhetorical questions: the prose already asks the learner nothing.
-  if (!dropped) return { text: original, changed: false }
-  if (!body) return { text: frame, changed: true }
+  if (!dropped) return { text: original, changed: false, removed: [] }
+  if (!body) return { text: frame, changed: true, removed }
   // A closing sentence that already announces the card is replaced by the
   // neutral frame; otherwise the frame is added. Never both.
   const neutralised = neutraliseBlindLeadIn(body, cardQuestion)
-  if (neutralised !== body || body.trimEnd().endsWith(frame)) return { text: neutralised, changed: true }
-  return { text: `${body}\n\n${frame}`, changed: true }
+  if (neutralised !== body || body.trimEnd().endsWith(frame)) return { text: neutralised, changed: true, removed }
+  return { text: `${body}\n\n${frame}`, changed: true, removed }
 }

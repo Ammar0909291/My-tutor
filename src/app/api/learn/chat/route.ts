@@ -13439,8 +13439,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             console.log('[assembled-attach] ' + JSON.stringify({
               conceptId: resolvedConceptId ?? null, graded, changed: attached.changed,
               served: serveAttach ? 'assembled' : 'live', before, after,
-              // Tutor text only. Only when it changed: the rest is the served text.
-              ...(attached.changed ? { beforeText: servedText.slice(0, 500), afterText: attached.text.slice(0, 500) } : {}),
+              // Tutor text only, and only when it changed: exactly what was
+              // dropped, and the end of the result (where the dropped question
+              // usually stood), so every change can be hand-read from the log.
+              // The first 500 characters hid the change in long replies.
+              ...(attached.changed ? {
+                removed: attached.removed.map((r) => r.slice(0, 200)).slice(0, 4),
+                afterTail: attached.text.slice(-400),
+              } : {}),
             }))
             if (serveAttach) servedText = attached.text
           }
