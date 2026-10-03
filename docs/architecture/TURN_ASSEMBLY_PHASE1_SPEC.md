@@ -959,3 +959,73 @@ log window.
    be served. That also saves their regeneration calls: about 23 extra model calls over 307
    graded turns.
 3. Their tags then measure firings on the new path, and a deletion can follow the rule.
+
+---
+
+## 17. Final report — the Phase 0 checks re-run (2026-10-03, ~16:05 UTC)
+
+**Query:** `scripts/qa/turnQuality/turn-checks.sql` with the window set to the last 7 days,
+split at the serve switch (2026-10-03 11:37 UTC). Read-only, counts only, all accounts.
+- The "pre" column is the 7 days before serve.
+- The 2026-10-02 baseline (14 days) is in `turn-quality-baseline-2026-10-02.md`.
+- The SQL's graded detector counts a tap only when the previous row carried the card. A
+  re-offered card is not stored again, so it sees fewer graded turns than the logs (§11.14).
+
+### K1 — a stub reply to a tapped answer (graded turns)
+
+| Subject | Baseline 14 d (10-02) | Pre-serve 7 d | Since serve |
+| --- | --- | --- | --- |
+| physics | 317/2,030 (15.6%) | 110/757 (14.5%) | 0/9 |
+| biology | 238/884 (26.9%) | 233/903 (25.8%) | 0/37 |
+| chemistry | 28/188 (14.9%) | 12/156 (7.7%) | 0/7 |
+| english | 4/85 (4.7%) | 0/56 | 0/7 |
+| mathematics | 0/9 | 6/329 (1.8%) | **2/96** |
+| **all** | 587/3,196 (18.4%) | 361/2,201 (16.4%) | **2/156 (1.3%)** |
+
+- **Both mathematics stubs ("Here is your next question.", "Quick check. Think it through
+  before you choose.") answer *model-written* cards.**
+  - Their stems match 0 authored probes, so they are outside the assembler, which needs an
+    authored key (§1).
+  - The shape matches the `unauthored-key-confirmation` repair stripping the model's
+    verdict and leaving nothing.
+  - **Open defect class, not fixed here.**
+- On authored graded turns, the runtime logs give **served K1 0/316** (§11.14 onward).
+
+### K2 — a question beside a card
+
+| Subject | Baseline 14 d | Pre-serve 7 d | Since serve | Hand-read of the since-serve hits |
+| --- | --- | --- | --- | --- |
+| physics | 327/4,976 (6.6%) | 205/3,300 (6.2%) | 1/85 | rhetorical, kept by the classifier (not verified from the stored tail) |
+| biology | 77/915 (8.4%) | 70/957 (7.3%) | 0/81 | — |
+| chemistry | 37/327 (11.3%) | 29/357 (8.1%) | 0/76 | — |
+| english | 14/166 (8.4%) | 9/187 (4.8%) | 1/79 | quoted question in the teaching |
+| mathematics | 8/25 | 14/366 (3.8%) | 3/165 | all 3 quoted questions in the teaching |
+| **all** | 463/6,409 (7.2%) | 327/5,167 (6.3%) | **5/486 (1.0%)** | **0 confirmed questions to the learner** |
+
+### K3, K5, and the turn-type results
+
+- **K3** (previous answer quoted on the next item): since serve **0** in every subject (pre-serve
+  13).
+- **K5** (repeated reply): since serve **0** (pre-serve 126).
+- **K4** (closing sentence announcing the card): the regex counts the server's own neutral
+  lead-ins ("Let's check this one before we go further."), as the baseline already noted.
+  It is not a defect measure, so it is tracked only.
+- **Completion turns:** 53 measured, completion agreement 53/53. The learner's last answer
+  now gets a verdict and a reason before the close (§14.1).
+- **Openings** (80) and **learner questions** (52): shadow showed no gain, so both stay
+  model-written (§13.1, §15.1).
+- **Zero-tolerance:** completion agreement 316/316 on graded turns; no 5xx in any window.
+  Z1/Z2 were not re-run this session: the assembler does not touch grading or mastery writes.
+
+### Definition-of-Done status
+
+| Item | Status |
+| --- | --- |
+| 1 Serve on graded turns, ≥100 | **Met**: 307 served; served K1/K2 0; agreement 100%; stored rows match; no 5xx |
+| 2 Card turns, K2 <3% over ≥100 | **Met**: 102 card turns, 2.0% heuristic, 0 confirmed |
+| 3 Open / completion / question, ≥50 each, serve only if better | **Met as measured**: completion served (53, gain); opening (80) and question (52) no gain, so shadow |
+| 4 Phase 4 deletions | **Evaluated: 0 deletions qualify** (§16.1); the reordering that would allow them is recorded |
+| 5 Final report | This section |
+
+**Phase 5 (factual correctness of teaching prose): not started, separate track.** Nothing in
+this program checks whether a stated fact is true. The hand-reads above judged structure only.
