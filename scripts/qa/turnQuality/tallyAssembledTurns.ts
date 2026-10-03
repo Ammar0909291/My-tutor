@@ -35,7 +35,7 @@ interface OpenRec {
 
 /** Phase 3 step 5 (2026-10-03): one line per learner question with no card. */
 interface QuestionRec {
-  conceptId?: string | null; changed?: boolean; served?: 'assembled' | 'live'
+  conceptId?: string | null; changed?: boolean; served?: 'assembled' | 'live'; cardOnScreen?: boolean
   before?: { stub: boolean; verdict: boolean; learnerQuestions: number }
   after?: { stub: boolean; verdict: boolean; learnerQuestions: number }
 }
@@ -131,6 +131,7 @@ console.log(JSON.stringify({
   // Learner questions (Phase 3 step 5), live vs assembled on the same turns.
   question: {
     turns: question.length,
+    withCardOnScreen: question.filter((r) => r.cardOnScreen).length,
     changed: pct(question.filter((r) => r.changed).length, question.length),
     servedAssembled: pct(question.filter((r) => r.served === 'assembled').length, question.length),
     stubLive: pct(question.filter((r) => r.before?.stub).length, question.length),

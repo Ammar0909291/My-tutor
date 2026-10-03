@@ -74,4 +74,20 @@ describe('learner-question assembly (Phase 3 step 5)', () => {
     const stored = [...h.state.messages].reverse().find((m) => m.role === 'ASSISTANT')!
     expect(stored.content).toBe(textOf(t))
   }, 180_000)
+
+  it('every learner question logs a line, card on screen or not (the attach assembler owns a card turn\'s text)', async () => {
+    process.env.TURN_ASSEMBLY_MODE = 'shadow'
+    h.state.messages = []; h.state.snapshot = {}
+    const res = await driveTurns(h, POST, [
+      { learnerSays: 'ok', modelReplies: 'The normal force acts perpendicular to a surface. It is a contact force.' },
+      { learnerSays: 'quiz me', modelReplies: "Here's one." },
+      { learnerSays: 'why does the table push back on the book?', modelReplies: REPLY },
+    ] as never, { ...LANE, probes: PROBES })
+    const t = res[2]
+    const logged = lineOf(t)
+    expect(logged, 'no [assembled-question] line').not.toBeNull()
+    const card = Boolean((t.body as { mcq?: unknown }).mcq)
+    expect(logged.cardOnScreen).toBe(card)
+    if (card) { expect(logged.changed).toBe(false); expect(logged.served).toBe('live') }
+  }, 180_000)
 })

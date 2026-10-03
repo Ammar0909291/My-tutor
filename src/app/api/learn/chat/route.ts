@@ -13458,18 +13458,24 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // TURN ASSEMBLY, Phase 3 step 5 — the reply to a learner's question
       // (spec §15, questionAssembly.ts). The answer stays model-written; the
       // server enforces only that nothing graded means no verdict, and at most
-      // one question back. Card turns are the attach assembler's (above).
-      // Its own switch, shadow by default (TURN_ASSEMBLY_QUESTION_MODE).
-      if (!servedMcq && gradeForVerdict === null && !turnIntent.wantsPractice
+      // one question back. Its own switch, shadow by default
+      // (TURN_ASSEMBLY_QUESTION_MODE). A question asked while a card is on
+      // screen is logged (checks only) but not changed: the attach assembler
+      // above owns that text. MEASURED 2026-10-03: 13 of 18 sampled learner
+      // questions had a card on screen, so without them the sample is thin.
+      if (gradeForVerdict === null && !turnIntent.wantsPractice
         && (await import('@/lib/teaching/conversationState')).detectLearnerQuestion(message)) {
         try {
           const questionMode = (await import('@/lib/teaching/turnAssembly')).turnTypeMode('question')
           if (questionMode !== 'off') {
-            const { assembleQuestionTurn } = await import('@/lib/teaching/questionAssembly')
-            const answered = assembleQuestionTurn(servedText)
+            const { assembleQuestionTurn, questionTurnChecks } = await import('@/lib/teaching/questionAssembly')
+            const cardOnScreen = Boolean(servedMcq)
+            const answered = cardOnScreen
+              ? { text: servedText, changed: false, removed: [] as string[], before: questionTurnChecks(servedText), after: questionTurnChecks(servedText) }
+              : assembleQuestionTurn(servedText)
             const serveQuestion = questionMode === 'serve' && answered.changed
             console.log('[assembled-question] ' + JSON.stringify({
-              conceptId: resolvedConceptId ?? null, changed: answered.changed,
+              conceptId: resolvedConceptId ?? null, cardOnScreen, changed: answered.changed,
               served: serveQuestion ? 'assembled' : 'live',
               before: answered.before, after: answered.after,
               ...(answered.changed ? {

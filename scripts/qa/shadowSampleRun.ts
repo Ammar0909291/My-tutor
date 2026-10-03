@@ -10,6 +10,7 @@
  *
  *   QA_SUBJECT=chemistry QA_LESSONS=4 QA_QUIZZES=4 npx tsx scripts/qa/shadowSampleRun.ts
  *   QA_SUBJECT=physics QA_OPEN_ONLY=1 QA_LESSONS=20 npx tsx scripts/qa/shadowSampleRun.ts   # openings only
+ *   QA_SUBJECT=physics QA_ALL_RIGHT=1 QA_QUIZZES=8 npx tsx scripts/qa/shadowSampleRun.ts       # run lessons to completion
  *   QA_SUBJECT=physics QA_ASK=1 QA_LESSONS=3 QA_ASKS=4 npx tsx scripts/qa/shadowSampleRun.ts  # learner questions
  */
 import { readdirSync } from 'fs'
@@ -42,7 +43,10 @@ const LEARNER_QUESTIONS = [
   'what happens if one of the quantities is zero?',
 ]
 const LESSONS = Math.min(OPEN_ONLY ? 25 : 6, Number(process.env.QA_LESSONS ?? 4))
-const QUIZZES = Math.min(6, Number(process.env.QA_QUIZZES ?? 4))
+// QA_ALL_RIGHT=1: answer every card correctly, so each lesson runs to its
+// completing turn (one [assembled-turn] line with completion: true).
+const ALL_RIGHT = process.env.QA_ALL_RIGHT === '1'
+const QUIZZES = Math.min(ALL_RIGHT ? 10 : 6, Number(process.env.QA_QUIZZES ?? 4))
 // Skip lesson one (its own locked protocol) and start a little way in.
 const START = Number(process.env.QA_START ?? 2)
 // Stop asking for new quizzes after this long, so the run ends — and deletes its
@@ -108,6 +112,7 @@ async function main() {
   const lessons = ((await cur.json()) as { lessons?: Array<{ topicSlug: string; lessonTitle: string; order: number; unitTitle: string }> }).lessons ?? []
   let graded = 0
   let unauthored = 0
+  let completed = 0
   let right = true
   for (const l of lessons.slice(START, START + LESSONS)) {
     if (overBudget()) { console.log('time budget reached — stopping'); break }
@@ -127,12 +132,12 @@ async function main() {
       const pick = answer(p.mcq, authored, right)
       if (!pick) { unauthored++; await say(cookie, sid, p.mcq.options[0]); continue }
       const r = await say(cookie, sid, pick)
-      graded++; done++; right = !right
-      if (r.lessonComplete?.complete) break
+      graded++; done++; right = ALL_RIGHT ? true : !right
+      if (r.lessonComplete?.complete) { completed++; break }
     }
     console.log(`${l.topicSlug}: ${done} graded`)
   }
-  console.log(JSON.stringify({ subject: SUBJECT, graded, unauthored }))
+  console.log(JSON.stringify({ subject: SUBJECT, graded, unauthored, completed }))
 }
 
 // A kill still deletes the account: SIGTERM/SIGINT run the same cleanup.
