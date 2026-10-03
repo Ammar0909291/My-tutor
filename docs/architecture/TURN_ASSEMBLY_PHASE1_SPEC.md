@@ -760,3 +760,42 @@ here: the assembled text must close exactly when the live one did.
     - 2 were correct: a re-typed card question, and a hanging second question.
 - **Fix:** drop only questions to the learner (hanging, or a confirm-back). A word-less
   fragment goes with the sentence before it. All four production shapes are now unit tests.
+
+---
+
+## 16. Phase 4 — removing repairs (analysis, 2026-10-03)
+
+**Rule (owner, DoD 4):** a repair is deleted only when its log tag shows 0 firings over at least
+300 served turns. Its regression test is then rewritten against the assembler. Each deletion is
+its own commit.
+
+**What "firing" means under serve.** Every repair still runs on the live draft, before the serve
+decision, because the slot result arrives after them. On a graded turn whose assembled text is
+served, a repair's output is discarded. Its tag still fires, but the firing has no effect.
+
+**Measured on the first 68 served graded turns** (windows 1–3; tags in the same request as
+`[assembled-turn] served: assembled`):
+
+| Tag | Turns | Effect on what the learner got |
+| --- | --- | --- |
+| `gate-contract` | 21 | none (live draft discarded) |
+| `stub-repair` | 4 | none, and each one cost an extra model call |
+| `answer-leak` | 2 | none |
+| `stale-question` | 1 | none |
+| `topic-drift` | 1 | none |
+
+**Not deletable, by the rule as written:**
+- **CL-29, the completing-turn row rewrite.** It runs on every completing turn by design.
+  Save-once (§6) now does the same write at the end of the turn. But save-once goes through
+  `boundedDbCall`, which refuses to start a write near the route deadline. CL-29 runs
+  mid-turn, with more budget. Deleting it would reopen the CL-29 defect on deadline-pressed
+  turns, so it stays: superseded in the common case, kept as the earlier write.
+- Every repair that also acts on **non-graded** turns (`gate-contract`, `stub-repair`,
+  `answer-leak`, `topic-drift`, and the visual repairs). They fire on teaching and card turns
+  that serve live text, so their firings are not 0.
+
+**Candidates once 300 served graded turns exist with 0 serve fallbacks:** repairs that act on
+graded turns only. Today that is `stale-question` (the previous answer quoted on the next
+item, R2). A fallback turn (assembly failed, live served) would then lose it. That is the
+trade Phase 4 accepts, and the fallback rate decides it: 0 of 375 so far (307 shadow + 68
+serve).
