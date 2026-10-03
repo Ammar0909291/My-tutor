@@ -94,4 +94,9 @@
   - Provider failures never reached that `catch`; they are served as degraded copy with a 200.
   - Any other error keeps the existing 500.
 - **Test:** `src/tests/dbTimeoutNotLabelledAiError.test.ts`.
-- **Not changed:** `src/app/api/coach/route.ts` has the same generic label on its own `catch`.
+- **The coach route (`src/app/api/coach/route.ts`), checked 2026-10-03:**
+  - Its "AI service" `catch` wraps only the provider call, and the route touches no database, so
+    that label is accurate.
+  - The real mislabel there was the outer `catch`: a body that failed validation, or was not
+    JSON, got 500 "Internal server error". It now gets 400 "Invalid request".
+  - Test: `src/tests/coachRouteErrorLabels.test.ts`.

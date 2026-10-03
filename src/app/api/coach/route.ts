@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { z } from 'zod'
 import { auth } from '@/lib/auth'
 import { chatWithFallback } from '@/lib/ai/client'
 import { AIBudgetExceededError } from '@/lib/ai/budget'
@@ -41,6 +42,11 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: { message: 'AI service temporarily unavailable. Please try again.' } }, { status: 500 })
     }
   } catch (err) {
+    // A body that fails validation or is not JSON is the client's mistake, not
+    // a server fault: answer 400, as /api/learn/chat does for its ZodError.
+    if (err instanceof z.ZodError || err instanceof SyntaxError) {
+      return NextResponse.json({ error: 'Invalid request' }, { status: 400 })
+    }
     console.error('[coach]', err)
     captureError(err, { route: 'api/coach' })
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
