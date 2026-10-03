@@ -2186,6 +2186,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     // Set when the one-question contract (gate-contract, stray-question-alongside-mcq)
     // cut the reply down to a stub; the stub repair below regenerates once.
     let gateContractStubHoisted: string | null = null
+    // The mirror repair's verdict-only reply, repaired once further down (see there).
+    let mirrorStubHoisted: string | null = null
     // TURN ASSEMBLY, Phase 1 — SHADOW (owner G2 2026-10-02). The slot call
     // started after grading; awaited and logged just before the reply.
     // The ladder fold's inputs, kept on shadowed turns so the assembled text's
@@ -10509,6 +10511,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             reason: mirrored.reason,
           }))
           cleanText = mirrored.text
+          // QA 2026-10-03 (math.arith.fraction-addition): the whole reply was
+          // the verdict, a bare "That's right." — no reason given. It takes the
+          // same one regeneration as the gate-contract stub (repairStubReply).
+          mirrorStubHoisted = mirrored.text
         }
       } catch (err) {
         console.warn('[mirror] verdict repair skipped:', err)
@@ -10618,6 +10624,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         try {
           const repaired = await repairStubReply(gateContractStubHoisted, 'gate-contract')
           if (repaired) cleanText = repaired + cleanText.slice(gateContractStubHoisted.length)
+        } catch { /* non-fatal — a repair must never break a turn */ }
+      }
+      // The mirror repair's verdict-only reply ("That's right.", or "Not quite —
+      // the answer is: X") is a stub too; the same one regeneration says why.
+      if (mirrorStubHoisted && cleanText.startsWith(mirrorStubHoisted)) {
+        try {
+          const repaired = await repairStubReply(mirrorStubHoisted, 'mirror')
+          if (repaired) cleanText = repaired + cleanText.slice(mirrorStubHoisted.length)
         } catch { /* non-fatal — a repair must never break a turn */ }
       }
 
