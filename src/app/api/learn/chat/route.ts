@@ -13586,6 +13586,30 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         }
       }
 
+      // PHASE 5 — FACT-CHECK GATE, SHADOW (factCheck.ts, launch-readiness
+      // item 3). Check F1: the served prose states one of this concept's
+      // AUTHORED WRONG ANSWERS as fact. Logged only — it changes no reply
+      // until its precision is measured (>= 90% to serve). One line per
+      // checked turn, so the flag rate has a denominator. The concept's
+      // distractors are cached per warm instance: one small query a concept.
+      if (resolvedConceptId && servedText.trim()) {
+        try {
+          const fc = await import('@/lib/teaching/factCheck')
+          if (fc.factCheckMode() !== 'off') {
+            const statements = await fc.loadFalseStatements(resolvedConceptId, teachingLang)
+            const flags = fc.checkProseAgainstFalseStatements(servedText, statements)
+            console.log('[fact-check] ' + JSON.stringify({
+              conceptId: resolvedConceptId, statements: statements.length, flagged: flags.length,
+              source: gradedAssembledServed ? 'assembled' : 'live',
+              // Tutor text and authored option text only.
+              ...(flags.length > 0 ? { flags: flags.slice(0, 3).map((f) => ({ sentence: f.sentence.slice(0, 240), statement: f.statement.slice(0, 200), share: f.share })) } : {}),
+            }))
+          }
+        } catch (err) {
+          console.warn('[fact-check] skipped:', err)
+        }
+      }
+
       // SAVE ONCE (plan §4 Phase 1 step 5): the stored row is exactly what was
       // shown. The row is written mid-turn and the reply can still change after
       // it — the late repairs above, and the assembled turn in serve mode — so

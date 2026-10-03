@@ -43,6 +43,9 @@ const question: QuestionRec[] = []
 /** Launch item 1 (2026-10-03): one line per tap on a model-written card. */
 interface NeutralRec { event?: string; codes?: string[]; liveStub?: boolean; served?: 'assembled' | 'live' }
 const neutral: NeutralRec[] = []
+/** Phase 5 (2026-10-03): one line per checked turn. */
+interface FactRec { conceptId?: string; statements?: number; flagged?: number; source?: string; flags?: Array<{ sentence: string; statement: string; share: number }> }
+const facts: FactRec[] = []
 
 const recs: Rec[] = []
 const attach: AttachRec[] = []
@@ -51,6 +54,14 @@ let truncated = 0
 const seen = new Set<string>()
 for (const file of process.argv.slice(2)) {
   for (const line of readFileSync(file, 'utf8').split('\n')) {
+    const fc = line.indexOf('[fact-check] {')
+    if (fc >= 0) {
+      const json = line.slice(fc + '[fact-check] '.length).trim()
+      if (seen.has(json)) continue
+      seen.add(json)
+      try { facts.push(JSON.parse(json)) } catch { truncated++ }
+      continue
+    }
     const nu = line.indexOf('[assembled-neutral] {')
     if (nu >= 0) {
       const json = line.slice(nu + '[assembled-neutral] '.length).trim()
@@ -160,6 +171,13 @@ console.log(JSON.stringify({
     stubServed: pct(neutral.filter((r) => r.liveStub && r.served !== 'assembled').length, neutral.length),
     rejected: pct(neutral.filter((r) => (r.codes ?? []).length > 0).length, neutral.length),
   },
+  // Phase 5 fact check (shadow): flag rate over checked turns with authored distractors.
+  factCheck: {
+    checked: facts.length,
+    withDistractors: facts.filter((r) => (r.statements ?? 0) > 0).length,
+    flaggedTurns: pct(facts.filter((r) => (r.flagged ?? 0) > 0).length, facts.filter((r) => (r.statements ?? 0) > 0).length),
+  },
   byConcept: Object.fromEntries([...recs.reduce((m, r) => m.set(r.conceptId ?? '?', (m.get(r.conceptId ?? '?') ?? 0) + 1), new Map<string, number>())]),
 }, null, 2))
+for (const r of facts) for (const f of r.flags ?? []) console.log(`\nFACT FLAG (${r.conceptId}, ${r.source}, share ${f.share}):\n  prose:      ${f.sentence}\n  distractor: ${f.statement}`)
 for (const r of recs) if (r.rawOnFailure) console.log(`\nREJECTED SLOT TEXT (${r.conceptId}, ${(r.codes ?? []).join(" ")}): ${r.rawOnFailure}`)
