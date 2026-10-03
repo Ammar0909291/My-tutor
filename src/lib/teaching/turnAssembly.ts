@@ -30,6 +30,22 @@ export function turnAssemblyMode(env: Record<string, string | undefined> = proce
 }
 
 /**
+ * A turn type added after graded serve (Phase 3 steps 3–5) starts in SHADOW
+ * even when the global mode is serve: the plan serves a type only once its
+ * shadow numbers beat live. `TURN_ASSEMBLY_<TYPE>_MODE` (default `shadow`)
+ * raises it, and the global mode caps it, so `off` globally still turns
+ * everything off.
+ */
+export function turnTypeMode(type: 'open', env: Record<string, string | undefined> = process.env): TurnAssemblyMode {
+  const global = turnAssemblyMode(env)
+  if (global === 'off') return 'off'
+  const v = (env[`TURN_ASSEMBLY_${type.toUpperCase()}_MODE`] ?? '').trim().toLowerCase()
+  const own: TurnAssemblyMode = v === 'off' || v === 'serve' ? v : 'shadow'
+  if (own === 'off') return 'off'
+  return global === 'shadow' ? 'shadow' : own
+}
+
+/**
  * `TURN_ASSEMBLY_SHADOW_RATE` (0..1, default 1): the share of graded turns that
  * get the extra shadow call. Lets the owner cap provider spend if the global
  * AI budget (AI_GLOBAL_RPM) is tight.

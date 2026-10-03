@@ -781,6 +781,39 @@ export async function POST(req: Request) {
     }
 
 
+    // TURN ASSEMBLY, Phase 3 step 3 — the opening asks exactly one question
+    // (spec §13, openingAssembly.ts). MEASURED: about 1.5% of 1,187 openings
+    // ended on two or three questions to the learner, who answers one. Runs
+    // after every repair above, on the text about to be written. Shadow logs
+    // [assembled-open]; serve sends the result. One line per opening, so the
+    // denominator is every opening. No model call.
+    try {
+      // Its own switch, shadow by default: the opening serves only once its
+      // shadow numbers beat live (TURN_ASSEMBLY_OPEN_MODE=serve).
+      const { turnTypeMode } = await import('@/lib/teaching/turnAssembly')
+      const openMode = turnTypeMode('open')
+      if (openMode !== 'off') {
+        const { assembleOpeningTurn } = await import('@/lib/teaching/openingAssembly')
+        const opening = assembleOpeningTurn(routed.text)
+        const serveOpening = openMode === 'serve' && opening.changed && opening.text.length >= 40
+        console.log('[assembled-open] ' + JSON.stringify({
+          topicSlug: topicSlug ?? null, mode, changed: opening.changed,
+          served: serveOpening ? 'assembled' : 'live',
+          learnerQuestionsBefore: opening.learnerQuestionsBefore,
+          learnerQuestionsAfter: opening.learnerQuestionsAfter,
+          // Tutor text only, and only when it changed.
+          ...(opening.changed ? {
+            removed: opening.removed.map((r) => r.slice(0, 200)).slice(0, 4),
+            afterTail: opening.text.slice(-400),
+          } : {}),
+        }))
+        if (serveOpening) routed = { ...routed, text: opening.text }
+      }
+    } catch (err) {
+      // An assembler must never stop a lesson from opening.
+      console.warn('[assembled-open] skipped:', err)
+    }
+
     // LESSON ISOLATION — this IS the "explicit navigation" moment
     // /api/sessions/history's own resolution treats as authoritative
     // (activeLessonSlug, prioritized over the coarser currentLesson
