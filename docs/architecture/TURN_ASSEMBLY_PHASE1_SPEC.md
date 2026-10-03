@@ -544,7 +544,13 @@ numbers.
   - **307 parsed graded turns, completion agreement 307/307, assembled K1 and K2 0,
     fallback 0 since all fixes.**
   - The 300-turn condition of the §7 shadow → serve gate is met.
-  - The gate's other conditions are unchanged:
-    - the owner's hand-read of 30 pairs (`docs/history/turn-assembly-pairs-2026-10-02.md`);
-    - early completion (§2), which must be built before serve.
+  - **§2's own serve condition is met as well:** completion agreement is 100% over the §7
+    sample (307/307). So no separate early fold is needed. The assembled text re-runs the same
+    fold, with the text-derived inputs recomputed, and it closed the lesson exactly when the
+    served text did.
+    - Caveat: only 8 of this window's 118 turns closed a lesson (`completion: true`). The other
+      110 show agreement on not closing.
+  - The one gate condition left is the owner's: a hand-read of 30 pairs
+    (`docs/history/turn-assembly-pairs-2026-10-02.md`), then the separate serve approval
+    (§10 item 3).
   - Serve stays off until the owner decides.
