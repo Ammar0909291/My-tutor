@@ -20,10 +20,11 @@
  * Disposable account only (register -> drive -> delete via liveAccount.ts),
  * deleted at the end unless --keep (keep it to cross-check evidence in the DB).
  *
- * Run: npx tsx scripts/qa/mathematicsProductionRuntimeQa.ts [--only=<id,id>] [--keep]
+ * Run: npx tsx scripts/qa/mathematicsProductionRuntimeQa.ts [--only=<id,id>] [--keep] [--plans=wide]
+ * Real account: QA_EMAIL=… QA_PASSWORD=… (env only; never written, never deleted)
  */
 import { writeFileSync } from 'node:fs'
-import { createQaAccount, deleteQaAccount, BASE } from './liveAccount'
+import { createQaAccount, deleteQaAccount, login, BASE } from './liveAccount'
 import { load } from '../assets/contract-audit'
 import { probeToMcq } from '../../src/lib/teaching/gateAssessment'
 import { hasMalformedLatex } from '../math/certify'
@@ -102,6 +103,21 @@ const PLANS: Plan[] = [
     answers: ['misconception', 'typed', 'correct', 'correct', 'correct'], maxTurns: 18 },
   { conceptId: 'math.prob.bayes-theorem', opener: 'test is 99% accurate so if positive i am 99% sick yes?',
     answers: ['correct', 'correct', 'misconception', 'correct', 'correct'], maxTurns: 18 },
+]
+// A second spread of lessons, different domains, for wider coverage (--plans=wide).
+const WIDE_PLANS: Plan[] = [
+  { conceptId: 'math.stats.standard-error', opener: 'standard error is the same as standard deviation right?',
+    answers: ['misconception', 'correct', 'correct', 'wrong', 'correct', 'correct'], maxTurns: 18 },
+  { conceptId: 'math.linalg.matrix-multiplication', opener: 'can i multiply two matrices just entry by entry?',
+    answers: ['misconception', 'correct', 'correct', 'correct', 'correct'], maxTurns: 18 },
+  { conceptId: 'math.de.separable', opener: 'how do i solve dy/dx = x/y, i dont get it',
+    answers: ['confused', 'correct', 'wrong', 'correct', 'correct', 'correct'], maxTurns: 18 },
+  { conceptId: 'math.func.inverse-functions', opener: 'the inverse of f is just 1/f yes?',
+    answers: ['misconception', 'correct', 'correct', 'correct', 'correct'], maxTurns: 18 },
+  { conceptId: 'math.seq.infinite-geometric-series', opener: '1 + 1/2 + 1/4 + ... must be infinite, it has infinite terms',
+    answers: ['misconception', 'correct', 'wrong', 'correct', 'correct', 'correct'], maxTurns: 18 },
+  { conceptId: 'math.alg.quadratic-formula', opener: 'why is there a plus minus in the formula?',
+    answers: ['question', 'correct', 'correct', 'correct', 'correct'], maxTurns: 18 },
 ]
 const NUDGES = ['ok i think i get it. can you ask me a question?', 'ok give me one question please', 'yes i follow. next?']
 
@@ -198,14 +214,22 @@ async function main() {
   const out = process.env.QA_OUT ?? 'math-qa-run.json'
   await buildKey()
   console.log(`Mathematics weak-learner QA — BASE=${BASE}, key=${KEY.size} stems`)
-  const acct = await createQaAccount('math-weak')
-  if (process.env.QA_CREDS) writeFileSync(process.env.QA_CREDS, JSON.stringify({ email: acct.email, password: acct.password, name: acct.name, cookie: acct.cookie }))
+  // A REAL account (owner-supplied, QA_EMAIL + QA_PASSWORD from the environment
+  // only) is logged into, never deleted, and its credentials are never written.
+  const realEmail = process.env.QA_EMAIL
+  const realPassword = process.env.QA_PASSWORD
+  const real = Boolean(realEmail && realPassword)
+  const acct = real
+    ? { email: realEmail!, password: '', name: 'owner account', cookie: await login(realEmail!, realPassword!) }
+    : await createQaAccount('math-weak')
+  if (!real && process.env.QA_CREDS) writeFileSync(process.env.QA_CREDS, JSON.stringify({ email: acct.email, password: acct.password, name: acct.name, cookie: acct.cookie }))
   console.log(`account=${acct.email}`)
   const results: unknown[] = []
   try {
     const cur = await api(acct.cookie, '/api/curriculum?subject=mathematics')
     const lessons: Lesson[] = cur.lessons ?? []
-    for (const plan of PLANS.filter((pl) => !only || only.split(',').includes(pl.conceptId))) {
+    const planSet = process.argv.includes('--plans=wide') ? WIDE_PLANS : PLANS
+    for (const plan of planSet.filter((pl) => !only || only.split(',').includes(pl.conceptId))) {
       try { results.push(await drive(acct.cookie, lessons, plan)) } catch (e) { finding(`${plan.conceptId}: run aborted — ${(e as Error).message}`) }
     }
   } finally {
@@ -215,7 +239,8 @@ async function main() {
     console.log(`\nFINDINGS (${findings.length})`); findings.forEach((f, i) => console.log(`  ${i + 1}. ${f}`))
     console.log(`\nNOTES (${notes.length})`); notes.forEach((f, i) => console.log(`  ${i + 1}. ${f}`))
     console.log(`\nACCOUNT: ${acct.email}  transcript: ${out}`)
-    if (!keep) console.log(`delete: ${JSON.stringify(await deleteQaAccount(acct))}`)
+    if (real) console.log('real account: kept (never deleted)')
+    else if (!keep) console.log(`delete: ${JSON.stringify(await deleteQaAccount(acct))}`)
   }
 }
 

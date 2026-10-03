@@ -282,3 +282,27 @@ Regression: `staleQuestionAttribution.test.ts` (built from the transcript, plus 
 Harness (`mathematicsProductionRuntimeQa.ts`): the "no stated verdict" note now accepts
 "isn’t correct" (curly apostrophe), and "correct answer did not move counters" is noted only in
 CHECK/PRACTICE, where answers count — both were false notes in this run.
+
+## 2026-10-03 (continued) — wider coverage 6/6, mirror-verdict stub fixed, two operator items
+
+**Wider weak-learner QA** (`--plans=wide`, disposable account, deleted): standard-error,
+matrix-multiplication, separable ODE, inverse-functions, infinite-geometric-series and
+quadratic-formula — **6/6 verified mastery, 0 findings**. With the earlier run, 12 of 12
+weak-learner lessons across 11 domains reach mastery in production. A real owner account was
+offered; the harness gained an env-only real-account mode (`QA_EMAIL`/`QA_PASSWORD`, never
+written, never deleted), but running it was blocked by the session's credential safeguard, so
+the run used a disposable account.
+
+**Defect 6 — a mirror-verdict stub (runtime, fixed).** fraction-addition T4: the learner's
+correct "5/6 — rewrite as 3/6 + 2/6" was mirrored back by the model; `repairMirrorWithVerdict`
+replaced the reply with the server's verdict, and the learner's whole reply was "That's right."
+It runs before `repairStubReply` exists in the route, so it never got the one regeneration the
+gate-contract stub gets. It is now handed over the same way (`mirrorStubHoisted`). Regression:
+`mirrorStubRepaired.test.ts`. Across the two runs this was the only content-free tutor turn
+(12 lessons, ~150 tutor turns).
+
+**Operator items found in production logs (not code):** (1) every welcome email fails — Resend
+is in test mode and only delivers to the account owner's address; a verified sending domain is
+needed at resend.com/domains. (2) A 07:53 UTC cold start hit the 12 s bootstrap deadline before
+its first DB step (benign now that the corpus has fully converged; owned by the pending-writes
+work, not changed here).
