@@ -457,3 +457,46 @@ now." (52 chars). The log chain:
 The prompt rule the model was obeying isn't established. One occurrence in about 30 math
 lessons (about 350 tutor turns). Content-free replies in general are the turn-assembly
 program's territory; recorded here for it and for the owner.
+
+## 2026-10-03 (continued) — fourth spread: all 24 domains now sampled; findings are design/content, not code
+
+**Coverage** (`--plans=fourth`, deploy of `b87baf20`, fresh disposable account, deleted):
+found.problem-solving-strategies, cx.cauchy-riemann, top.open-sets, meas.sigma-algebra,
+fnal.banach-space, opt.convex-function and cat.functor — **7/7 verified mastery, 0 harness
+findings, 0 stubs, 0 empty maths blocks.** The learner-validated sample is now 27 concepts and
+covers **every one of the 24 Mathematics domains** (still scripted weak learners on disposable
+accounts). Every tutor turn was read. These were checked correct:
+- v = 2xy + y as the harmonic conjugate; CR holding only at z = i for x² − y² + 2xi;
+- the interior of {b} is ∅ in the finite topology; 4 sets in σ(A), 2ⁿ for an n-piece partition;
+- ℓᵖ complete for 1 ≤ p ≤ ∞; C[0,1] complete under sup, not L¹;
+- Jensen's inequality; f″(0) = −4 for x⁴ − 2x²; local minima of a convex function are global;
+- Hom(−, X); order reversal for contravariant functors.
+
+**Content defect, for the owner (teaching content is not edited by this campaign).**
+`math.meas.sigma-algebra` has an overstatement in two places:
+- the authored correct option, in `mathematicsMeasSigmaAlgebraAssets.ts`: "no consistent
+  measure can be defined on the full power set while preserving countable additivity";
+- the EB entry, lines 37 and 115.
+
+As stated it is false: counting measure and point masses are countably additive on every
+subset of ℝ. What Vitali's construction rules out is a translation-invariant, countably
+additive measure that gives intervals their length. A one-clause fix: "…no measure that is
+translation-invariant and gives intervals their length can be defined on the full power set…".
+The tutor repeated the overstatement at T8.
+
+**Model-authored questions: three more concrete costs, for the owner's pending decision.**
+The route's own design (the comment by `unauthored-key-not-certifying`) is "SUSPICIOUS, NOT
+SUPPRESSED": a model-invented key still drives the teaching flow, and only certification is
+withheld. It states that wrong feedback is not fixed. This run measured what that costs:
+- **functor:** the learner answered the model's question "Which description matches the power-set
+  functor on f?" with "image f(S)", which is right. The invented key graded it wrong
+  (`correct: false`). The ladder dropped the learner GUIDE → DEMONSTRATE, CUE fired
+  D2b-CONFIDENT-WRONG, and the reply was the bare KG-description fallback.
+- **banach-space:** two wrong answers to model-written questions got no correction at all.
+  The next nudge said "Your answer is correct", about an earlier answer.
+- **newtons-method** (previous section): a model-written question with a false premise.
+
+The authored pool now holds five gradeable probes per (concept, band) pair. Withholding
+model-written questions in Mathematics, or keeping them but stopping an invented key from
+moving phase or firing misconception repair, would remove this class. Both change a
+documented design and are left to the owner.
