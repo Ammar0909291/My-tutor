@@ -6048,7 +6048,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         try {
           const ta = await import('@/lib/teaching/turnAssembly')
           const { probeKeyIsAuthored } = await import('@/lib/teaching/mcq')
-          if (ta.turnAssemblyMode() === 'shadow' && probeKeyIsAuthored(pendingMcqHoisted) && ta.shadowSampled()) {
+          const assemblyMode = ta.turnAssemblyMode()
+          // Serve (Phase 3, owner approval 2026-10-03) assembles every graded
+          // turn; shadow keeps its sample rate.
+          if (probeKeyIsAuthored(pendingMcqHoisted)
+            && (assemblyMode === 'serve' || (assemblyMode === 'shadow' && ta.shadowSampled()))) {
             const facts: import('@/lib/teaching/turnAssembly').GradedTurnFacts = {
               question: pendingMcqHoisted.question,
               options: pendingMcqHoisted.options,
@@ -11055,6 +11059,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
 
       const { appendMcqToHistoryText } = await import('@/lib/teaching/mcq')
       const contentForHistory = appendMcqToHistoryText(cleanText, mcqHoisted)
+      // What the assistant row holds now. Every later rewrite of the reply is
+      // compared against it at the end of the turn (save once, below).
+      let storedAssistantContent = contentForHistory
 
       // LESSON ISOLATION (write side, assistant turn) — same identity, same
       // source (studentProgress.currentLesson), same helper as the user
@@ -12099,6 +12106,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                         where: { id: assistantMessage.id },
                         data: { content: cleanText },
                       })
+                      storedAssistantContent = cleanText
                     } catch (err) {
                       console.warn('[learn/chat] completing-turn row rewrite skipped:', err)
                     }
@@ -13318,17 +13326,23 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // total (.then with both handlers), so this can never fail the turn.
       await Promise.all(studentProgressWrites)
 
-      // TURN ASSEMBLY, Phase 1 — SHADOW. Assemble what the server would have
-      // sent and log it beside what it did send. The served reply is untouched.
-      // Waits at most 1.5 s: the call started early, so it is normally done.
+      // TURN ASSEMBLY — SHADOW logs what the server would have sent beside what
+      // it did send; SERVE (Phase 3, owner approval 2026-10-03) sends it. Serve
+      // falls back to the live reply whenever the assembled one could not be a
+      // full turn: no slot result in time, a completion disagreement, or a
+      // stub / a question beside the card (the K1/K2 checks).
+      let servedText = cleanText
       if (turnAssemblyShadowHoisted) {
         try {
-          // waitedMs is the latency shadow mode adds to the reply: the time this
-          // await holds the response, not the slot call's own duration.
+          const serving = (await import('@/lib/teaching/turnAssembly')).turnAssemblyMode() === 'serve'
+          // waitedMs is the latency this adds to the reply: the time this await
+          // holds the response, not the slot call's own duration. The call
+          // started early, so it is normally done; shadow waits 1.5 s at most,
+          // serve 8 s (measured slot-call max 1.6 s over 307 turns).
           const waitStartedAt = Date.now()
           const r = await Promise.race([
             turnAssemblyShadowHoisted,
-            new Promise<null>((resolve) => setTimeout(() => resolve(null), 1500)),
+            new Promise<null>((resolve) => setTimeout(() => resolve(null), serving ? 8000 : 1500)),
           ])
           const waitedMs = Date.now() - waitStartedAt
           const ta = await import('@/lib/teaching/turnAssembly')
@@ -13367,16 +13381,21 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 completionAgreement = isConceptClosed(counterfactual) === isConceptClosed(f.after)
               } catch { completionAgreement = null }
             }
+            const assembledChecks = ta.turnChecks(assembled, mcqHoisted !== null)
+            const serveAssembled = serving && completionAgreement !== false
+              && !assembledChecks.k1Stub && !assembledChecks.k2QuestionBesideCard
+            if (serveAssembled) servedText = assembled
             console.log('[assembled-turn] ' + JSON.stringify({
               conceptId: resolvedConceptId ?? null,
               provider: r.provider, ms: r.ms, waitedMs, error: r.error, attempts: r.attempts,
               completionAgreement,
+              served: serveAssembled ? 'assembled' : 'live',
               // Why a parse failed is otherwise invisible. Model text only.
               ...(codes.length > 0 ? { rawOnFailure: r.raw.slice(0, 600) } : {}),
               codes, fallback: used.fallback,
               completion: lessonCompletionHoisted !== null, cardAttached: mcqHoisted !== null,
               live: ta.turnChecks(cleanText, mcqHoisted !== null),
-              assembled: ta.turnChecks(assembled, mcqHoisted !== null),
+              assembled: assembledChecks,
               // Tutor text only, never the learner's; [verifier-log] logs drafts the same way.
               // 700 each: at 1,200 the log viewer cut 3 of 10 lines (2026-10-02),
               // and a cut line cannot be parsed at all.
@@ -13389,8 +13408,28 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         }
       }
 
+      // SAVE ONCE (plan §4 Phase 1 step 5): the stored row is exactly what was
+      // shown. The row is written mid-turn and the reply can still change after
+      // it — the late repairs above, and the assembled turn in serve mode — so
+      // a reload or the next turn's history could carry text the learner never
+      // saw (Phase-0 check "saved message differs from what was delivered").
+      {
+        const finalStored = appendMcqToHistoryText(servedText, mcqHoisted)
+        if (assistantMessage?.id && finalStored !== storedAssistantContent) {
+          try {
+            await boundedDbCall(deadline, 'chat-assistant-message-sync', () => prisma.message.update({
+              where: { id: assistantMessage.id },
+              data: { content: finalStored },
+            }))
+            storedAssistantContent = finalStored
+          } catch (err) {
+            console.warn('[learn/chat] stored-row sync skipped:', err)
+          }
+        }
+      }
+
       return NextResponse.json({
-        success: true, text: cleanText, provider,
+        success: true, text: servedText, provider,
         // PROVENANCE SOURCE OF TRUTH. `provider` names the serving branch
         // and has been measured lying: four LESSON_COMPLETE turns carried
         // 'memory' while an LLM had re-rendered them. The client must badge

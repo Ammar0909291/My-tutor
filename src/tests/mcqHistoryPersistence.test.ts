@@ -119,6 +119,6 @@ describe('route.ts wiring: appendMcqToHistoryText persisted, live response untou
   })
 
   it('the JSON response to the client still sends the clean (un-appended) text — the live wizard is unaffected', () => {
-    expect(routeSrc).toMatch(/success: true, text: cleanText, provider/)
+    expect(routeSrc).toMatch(/success: true, text: servedText, provider/)
   })
 })

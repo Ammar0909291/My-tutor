@@ -59,7 +59,7 @@ describe('R1 — the topic-progress evidence write is settled before the reply',
   it('awaits it before the response is returned', () => {
     const capture = ROUTE.indexOf('topicProgressEvidenceWrite = (async () => {')
     const settle = ROUTE.indexOf('await topicProgressEvidenceWrite')
-    const reply = ROUTE.indexOf('return NextResponse.json({\n        success: true, text: cleanText, provider,')
+    const reply = ROUTE.indexOf('return NextResponse.json({\n        success: true, text: servedText, provider,')
     expect(capture).toBeGreaterThan(0)
     expect(settle).toBeGreaterThan(capture)
     expect(reply).toBeGreaterThan(settle)

@@ -16,13 +16,31 @@ interface Rec {
   live?: { k1Stub: boolean; k2QuestionBesideCard: boolean }
   assembled?: { k1Stub: boolean; k2QuestionBesideCard: boolean }
   rawOnFailure?: string
+  /** Serve mode (2026-10-03): which text the learner got. Absent in shadow. */
+  served?: 'assembled' | 'live'
+}
+
+/** Phase 3 step 2 (2026-10-03): one line per turn that attaches a card. */
+interface AttachRec {
+  conceptId?: string | null; graded?: boolean; changed?: boolean; served?: 'assembled' | 'live'
+  before?: { k1Stub: boolean; k2QuestionBesideCard: boolean }
+  after?: { k1Stub: boolean; k2QuestionBesideCard: boolean }
 }
 
 const recs: Rec[] = []
+const attach: AttachRec[] = []
 let truncated = 0
 const seen = new Set<string>()
 for (const file of process.argv.slice(2)) {
   for (const line of readFileSync(file, 'utf8').split('\n')) {
+    const a = line.indexOf('[assembled-attach] {')
+    if (a >= 0) {
+      const json = line.slice(a + '[assembled-attach] '.length).trim()
+      if (seen.has(json)) continue
+      seen.add(json)
+      try { attach.push(JSON.parse(json)) } catch { truncated++ }
+      continue
+    }
     const i = line.indexOf('[assembled-turn] {')
     if (i < 0) continue
     const json = line.slice(i + '[assembled-turn] '.length).trim()
@@ -49,11 +67,27 @@ console.log(JSON.stringify({
   regenerated: pct(count((r) => r.attempts === 2), count((r) => typeof r.attempts === 'number')),
   assembledK1: pct(count((r) => r.assembled?.k1Stub === true)),
   assembledK2: pct(count((r) => r.assembled?.k2QuestionBesideCard === true)),
-  servedK1: pct(count((r) => r.live?.k1Stub === true)),
-  servedK2: pct(count((r) => r.live?.k2QuestionBesideCard === true)),
+  // live = the model-written reply. In shadow it is what the learner got.
+  liveK1: pct(count((r) => r.live?.k1Stub === true)),
+  liveK2: pct(count((r) => r.live?.k2QuestionBesideCard === true)),
+  // What the learner actually got: the assembled text when serve chose it,
+  // otherwise the live reply (shadow, or a serve fallback).
+  servedAssembled: pct(count((r) => r.served === 'assembled')),
+  servedK1: pct(count((r) => (r.served === 'assembled' ? r.assembled : r.live)?.k1Stub === true)),
+  servedK2: pct(count((r) => (r.served === 'assembled' ? r.assembled : r.live)?.k2QuestionBesideCard === true)),
   codes: Object.fromEntries(codes),
   shadowMs: ms.length ? { p50: ms[Math.floor(ms.length / 2)], p95: ms[Math.floor(ms.length * 0.95)], max: ms[ms.length - 1] } : null,
   addedWaitMs: waited.length ? { p50: waited[Math.floor(waited.length / 2)], p95: waited[Math.floor(waited.length * 0.95)], max: waited[waited.length - 1] } : null,
+  // Card turns (Phase 3 step 2). K2 is on what the learner got.
+  attach: {
+    cardTurns: attach.length,
+    changed: pct(attach.filter((r) => r.changed).length, attach.length),
+    servedAssembled: pct(attach.filter((r) => r.served === 'assembled').length, attach.length),
+    k2Before: pct(attach.filter((r) => r.before?.k2QuestionBesideCard).length, attach.length),
+    k2Served: pct(attach.filter((r) => (r.served === 'assembled' ? r.after : r.before)?.k2QuestionBesideCard).length, attach.length),
+    k2IfAllServed: pct(attach.filter((r) => (r.changed ? r.after : r.before)?.k2QuestionBesideCard).length, attach.length),
+    k1CreatedOnGraded: attach.filter((r) => r.served === 'assembled' && r.graded && r.after?.k1Stub && !r.before?.k1Stub).length,
+  },
   byConcept: Object.fromEntries([...recs.reduce((m, r) => m.set(r.conceptId ?? '?', (m.get(r.conceptId ?? '?') ?? 0) + 1), new Map<string, number>())]),
 }, null, 2))
 for (const r of recs) if (r.rawOnFailure) console.log(`\nREJECTED SLOT TEXT (${r.conceptId}, ${(r.codes ?? []).join(" ")}): ${r.rawOnFailure}`)

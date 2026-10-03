@@ -85,7 +85,7 @@ describe('D3 — an unmet picture request is said out loud', () => {
     const memoryServe = route.indexOf("memoryFallbackReasonCode = assembled.explanationFallbackReason")
     const finalMcq = route.indexOf('const servedMcq = probeReleasedThisTurnHoisted')
     const call = route.indexOf('acknowledgeUnavailablePicture({')
-    const response = route.lastIndexOf('return NextResponse.json({\n        success: true, text: cleanText')
+    const response = route.lastIndexOf('return NextResponse.json({\n        success: true, text: servedText')
     expect(memoryServe).toBeGreaterThan(0)
     expect(call).toBeGreaterThan(memoryServe)
     expect(call).toBeGreaterThan(finalMcq)

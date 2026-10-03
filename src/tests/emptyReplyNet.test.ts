@@ -58,7 +58,7 @@ describe('never a blank reply', () => {
     const route = readFileSync('src/app/api/learn/chat/route.ts', 'utf8')
     const net = route.indexOf('[empty-reply-net]')
     const provenance = route.indexOf('// ── PHASE 0: TURN DECISION PROVENANCE')
-    const ret = route.indexOf('success: true, text: cleanText, provider,')
+    const ret = route.indexOf('success: true, text: servedText, provider,')
     expect(net).toBeGreaterThan(route.indexOf('enforceQuestionDeliveryContract(cleanText, finalFallback)'))
     expect(provenance).toBeGreaterThan(net)
     expect(ret).toBeGreaterThan(provenance)

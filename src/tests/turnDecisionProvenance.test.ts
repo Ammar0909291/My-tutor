@@ -110,7 +110,7 @@ describe('the route wiring is observation only', () => {
   it('records at the latest point — after the close replacement, before the response', () => {
     const record = ROUTE.indexOf('[turn-decision] provenance line skipped')
     const closeReplace = ROUTE.lastIndexOf('cleanText = buildLessonCloseText')
-    const respond = ROUTE.indexOf('success: true, text: cleanText, provider,')
+    const respond = ROUTE.indexOf('success: true, text: servedText, provider,')
     expect(closeReplace).toBeGreaterThan(-1)
     expect(record).toBeGreaterThan(closeReplace)
     expect(record).toBeLessThan(respond)
@@ -118,7 +118,10 @@ describe('the route wiring is observation only', () => {
 
   it('the provenance block assigns nothing the turn reads', () => {
     const start = ROUTE.indexOf('// ── PHASE 0: TURN DECISION PROVENANCE')
-    const end = ROUTE.indexOf('success: true, text: cleanText, provider,')
+    // The block ends where the save-once row sync begins (2026-10-03): that
+    // sync is a deliberate write of its own, not part of the provenance log.
+    const saveOnce = ROUTE.indexOf('// SAVE ONCE (plan', start)
+    const end = saveOnce > start ? saveOnce : ROUTE.indexOf('success: true, text: servedText, provider,')
     const block = ROUTE.slice(start, end)
     // No writes to any hoisted turn variable, no persistence, no state update.
     expect(block).not.toMatch(/\bcleanText\s*=[^=]/)
@@ -139,7 +142,10 @@ describe('the route wiring is observation only', () => {
 
   it('provenance failure cannot cost the learner the turn', () => {
     const start = ROUTE.indexOf('// ── PHASE 0: TURN DECISION PROVENANCE')
-    const end = ROUTE.indexOf('success: true, text: cleanText, provider,')
+    // The block ends where the save-once row sync begins (2026-10-03): that
+    // sync is a deliberate write of its own, not part of the provenance log.
+    const saveOnce = ROUTE.indexOf('// SAVE ONCE (plan', start)
+    const end = saveOnce > start ? saveOnce : ROUTE.indexOf('success: true, text: servedText, provider,')
     expect(ROUTE.slice(start, end)).toMatch(/catch \(err\)[\s\S]*console\.warn\('\[turn-decision\]/)
   })
 })
