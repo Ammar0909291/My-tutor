@@ -16,12 +16,22 @@
  * The prompt's last line already names the graded question (5ba7e62a,
  * "THIS TURN'S ANSWER") and was live — a prompt line did not prevent it.
  *
+ * A second shape (production, 2026-10-03, math.disc.combinations): after a
+ * wrong "120" to one card and a right "Yes" to the next, the reply was "That's
+ * right. I see you chose 120. How did you work out that number?" — the old
+ * choice named as this turn's.
+ *
  * ── WHAT THIS DOES ──────────────────────────────────────────────────────────
- * On a server-graded CORRECT turn only, a sentence that states the learner's
- * chosen answer together with a number that appears in the PREVIOUS question
- * but nowhere in the graded one (its stem or options) is dropped. Nothing else
- * is touched: a wrong answer's correction is server-written, and comparing the
- * two questions without restating the answer is left alone.
+ * On a server-graded CORRECT turn only, a sentence is dropped when it
+ *  (a) states the learner's chosen answer together with a number that appears
+ *      in the PREVIOUS question but nowhere in the graded one (its stem or
+ *      options), or
+ *  (b) says the learner chose / picked / answered something that is not the
+ *      chosen option — an answer-like value (it has a digit, or is another
+ *      option of the graded card); a following sentence pointing back at it
+ *      ("…that number?") goes with it.
+ * Nothing else is touched: a wrong answer's correction is server-written, and
+ * comparing the two questions without restating the answer is left alone.
  */
 
 /** Numbers as written in a stem: 180, 180°, 2.5, 3/4 → "180", "2.5", "3/4". */
@@ -81,24 +91,48 @@ export interface StaleAttributionInput {
   previous: string | null
 }
 
+const CLAIMED_CHOICE = /\byou(?:'ve| have)?\s+(?:chose|chosen|picked|selected|answered|went with)\s+(?:option\s+)?(.+?)\s*(?:[.?!,;:]|$)/i
+const BACK_REFERENCE = /\bthat (?:number|answer|choice|value|option|result)\b/i
+
+/** "you chose 120" when 120 is not what was chosen this turn. */
+function claimsOtherChoice(sentence: string, chosen: string, options: readonly string[]): boolean {
+  const m = CLAIMED_CHOICE.exec(sentence)
+  if (!m) return false
+  const claimed = m[1].replace(/[*_"“”‘’']/g, '').trim()
+  const c = squash(claimed)
+  if (!c || containsAnswer(claimed, chosen) || squash(chosen).includes(c)) return false
+  // A value, not a phrase: "120", "(0, 1)", "40 N", "3/4" — never "2 questions correctly".
+  const isValue = /^[-−+(]?[\d\s.,/√π()−+-]*\d[\d\s.,/√π()−+-]*(?:\s?[a-z%°]{1,3})?\)?$/i.test(claimed)
+  const answerLike = isValue || options.some((o) => o !== chosen && squash(o) === c)
+  return answerLike
+}
+
 export function dropStaleQuestionAttribution(input: StaleAttributionInput): { text: string; dropped: string[] } {
   const { text, graded, chosen, previous } = input
-  if (!text || !previous || !chosen) return { text, dropped: [] }
+  if (!text || !chosen) return { text, dropped: [] }
   const current = numbersIn([graded.question, ...graded.options].join(' '))
-  const stale = [...numbersIn(previous)].filter((n) => !current.has(n))
-  if (stale.length === 0) return { text, dropped: [] }
-  const staleRe = new RegExp(`(?<![\\d.\\/])(?:${stale.map((n) => n.replace(/[.\/]/g, (c) => `\\${c}`)).join('|')})(?![\\d.\\/])`)
+  const stale = previous ? [...numbersIn(previous)].filter((n) => !current.has(n)) : []
+  const staleRe = stale.length
+    ? new RegExp(`(?<![\\d.\\/])(?:${stale.map((n) => n.replace(/[.\/]/g, (c) => `\\${c}`)).join('|')})(?![\\d.\\/])`)
+    : null
   const dropped: string[] = []
   const kept = text
     .split(/\n{2,}/)
-    .map((para) => (para.match(/[^.!?]+(?:[.!?]+|$)/g) ?? [para])
-      .filter((sentence) => {
-        const bad = staleRe.test(sentence) && containsAnswer(sentence, chosen)
-        if (bad) dropped.push(sentence.trim())
-        return !bad
-      })
-      .join('')
-      .trim())
+    .map((para) => {
+      let afterClaim = false
+      return (para.match(/[^.!?]+(?:[.!?]+|$)/g) ?? [para])
+        .filter((sentence) => {
+          const claim = claimsOtherChoice(sentence, chosen, graded.options)
+          const bad = claim
+            || (afterClaim && BACK_REFERENCE.test(sentence))
+            || (staleRe !== null && staleRe.test(sentence) && containsAnswer(sentence, chosen))
+          afterClaim = claim
+          if (bad) dropped.push(sentence.trim())
+          return !bad
+        })
+        .join('')
+        .trim()
+    })
     .filter(Boolean)
     .join('\n\n')
   return dropped.length ? { text: kept, dropped } : { text, dropped }

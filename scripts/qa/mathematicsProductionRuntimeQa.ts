@@ -20,7 +20,7 @@
  * Disposable account only (register -> drive -> delete via liveAccount.ts),
  * deleted at the end unless --keep (keep it to cross-check evidence in the DB).
  *
- * Run: npx tsx scripts/qa/mathematicsProductionRuntimeQa.ts [--only=<id,id>] [--keep] [--plans=wide]
+ * Run: npx tsx scripts/qa/mathematicsProductionRuntimeQa.ts [--only=<id,id>] [--keep] [--plans=wide|third]
  * Real account: QA_EMAIL=… QA_PASSWORD=… (env only; never written, never deleted)
  */
 import { writeFileSync } from 'node:fs'
@@ -118,6 +118,21 @@ const WIDE_PLANS: Plan[] = [
     answers: ['misconception', 'correct', 'wrong', 'correct', 'correct', 'correct'], maxTurns: 18 },
   { conceptId: 'math.alg.quadratic-formula', opener: 'why is there a plus minus in the formula?',
     answers: ['question', 'correct', 'correct', 'correct', 'correct'], maxTurns: 18 },
+]
+// A third spread, six domains neither set above touches (--plans=third).
+const THIRD_PLANS: Plan[] = [
+  { conceptId: 'math.nt.prime-factorization', opener: '12 = 3 x 4, so that is the prime factorization right?',
+    answers: ['misconception', 'correct', 'correct', 'correct', 'correct'], maxTurns: 18 },
+  { conceptId: 'math.disc.combinations', opener: 'choosing 2 from 5 is 5 x 4 = 20 ways no?',
+    answers: ['misconception', 'correct', 'wrong', 'correct', 'correct', 'correct'], maxTurns: 18 },
+  { conceptId: 'math.abst.subgroup', opener: 'any subset of a group is a subgroup?',
+    answers: ['misconception', 'correct', 'correct', 'correct', 'correct'], maxTurns: 18 },
+  { conceptId: 'math.real.convergence-sequences', opener: 'what does converge even mean, the terms just get small?',
+    answers: ['confused', 'correct', 'wrong', 'correct', 'correct', 'correct'], maxTurns: 18 },
+  { conceptId: 'math.graph.tree', opener: 'is a tree just any graph with no loops?',
+    answers: ['question', 'correct', 'correct', 'correct', 'correct'], maxTurns: 18 },
+  { conceptId: 'math.num.newtons-method', opener: 'newton method always finds the root, right?',
+    answers: ['misconception', 'correct', 'correct', 'wrong', 'correct', 'correct'], maxTurns: 18 },
 ]
 const NUDGES = ['ok i think i get it. can you ask me a question?', 'ok give me one question please', 'yes i follow. next?']
 
@@ -228,7 +243,7 @@ async function main() {
   try {
     const cur = await api(acct.cookie, '/api/curriculum?subject=mathematics')
     const lessons: Lesson[] = cur.lessons ?? []
-    const planSet = process.argv.includes('--plans=wide') ? WIDE_PLANS : PLANS
+    const planSet = process.argv.includes('--plans=wide') ? WIDE_PLANS : process.argv.includes('--plans=third') ? THIRD_PLANS : PLANS
     for (const plan of planSet.filter((pl) => !only || only.split(',').includes(pl.conceptId))) {
       try { results.push(await drive(acct.cookie, lessons, plan)) } catch (e) { finding(`${plan.conceptId}: run aborted — ${(e as Error).message}`) }
     }
