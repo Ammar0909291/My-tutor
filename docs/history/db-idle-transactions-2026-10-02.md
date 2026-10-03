@@ -59,4 +59,39 @@
 - **The cold-start asset bootstrap in `src/instrumentation.ts`.** It is still fire-and-forget at
   `register()` and has its own boot deadline. It may also have left an `explanation_assets`
   transaction open. Read `docs/history/egress-incidents.md` before touching it.
-- **The 500 "AI service" label on DB timeouts.** It is still open.
+- **The 500 "AI service" label on DB timeouts.** Fixed afterwards; see the next section.
+
+## Production verification (2026-10-02 23:54–23:59 UTC)
+- **Deployment:** `dpl_6bb4bbdds4FRZ5wLua7StJS5XHDF` at `56076115`, which contains `9c34e612`.
+- **Traffic:** a disposable account (`scripts/qa/shadowSampleRun.ts`) drove 2 chemistry lessons
+  with 6 graded answers. The account was deleted afterwards (`reloginBlocked: true`).
+- **Chat requests:** 16 POSTs to `/api/learn/chat`, all 16 returned 200.
+- **`[pending-writes]` warnings:** 0. No reply hit the 3 s cap.
+- **Writes landed, one set per turn:**
+  - 16 distinct `spine_events` turns (71 rows, 16 `AssistantRendered`);
+  - 16 `memory_serving_events`;
+  - 23 `evidence_events`.
+- **`pg_stat_activity` during the run:** sampled 5 times. Every chat connection's
+  "idle in transaction" period was 1.3 s or less.
+- **The 60 s limit fired once,** at 23:55:41 UTC: "terminating connection due to
+  idle-in-transaction timeout".
+  - That backend's last statement was the cold-start bootstrap's two-COUNT completeness probe on
+    `asset_identity`. It runs as a batch `$transaction`.
+  - The same cold start logged "asset bootstrap: 12000ms boot deadline reached — continuing in the
+    background".
+  - So the bootstrap still leaves transactions open when its instance freezes. It is now ended
+    after 60 s instead of holding locks for minutes, but it remains the one known source.
+
+## Follow-up: a DB timeout is no longer labelled an AI error
+- **Cause:** the chat route's inner `catch` turned every error inside a turn into
+  500 "AI service temporarily unavailable". That included the 17:59:59 DB write timeout.
+- **Fix:** that `catch` now re-throws three kinds of error to the outer handler, which already
+  reports them as a retryable 503 with a `kind`:
+  - `TimeoutError` from the DB guards; provider timeouts use a separate `AITimeoutError`;
+  - `RouteDeadlineError`;
+  - DB connection errors (`isDbConnectionError`).
+- **Unchanged:**
+  - Provider failures never reached that `catch`; they are served as degraded copy with a 200.
+  - Any other error keeps the existing 500.
+- **Test:** `src/tests/dbTimeoutNotLabelledAiError.test.ts`.
+- **Not changed:** `src/app/api/coach/route.ts` has the same generic label on its own `catch`.

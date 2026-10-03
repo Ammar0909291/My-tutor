@@ -13447,6 +13447,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         mastery: masterySummary,
       })
     } catch (error: any) {
+      // A database timeout or outage is not an AI failure. Measured 2026-10-02:
+      // `chat-assistant-message timed out after 8000ms` was served as "AI
+      // service temporarily unavailable". The outer catch already reports these
+      // as a retryable 503 with a `kind`; hand them to it.
+      if (error instanceof TimeoutError || error instanceof RouteDeadlineError || isDbConnectionError(error)) {
+        throw error
+      }
       // Global AI budget spent — expected under load, not an error to report.
       if (error instanceof AIBudgetExceededError) {
         return NextResponse.json({ success: false, error: 'High demand right now — please try again in a minute.' }, { status: 429 })
