@@ -676,6 +676,25 @@ model call; deterministic:
   - shadow: byte-identical to off, and the line logged;
   - serve: no `?`, one lead-in, and the stored row equal to the served text plus its card.
 
+### 12.2 DoD 2 verdict — card turns (2026-10-03, deploys `0c4cfa8` → `7defba5`)
+
+- **102 card turns** (`[assembled-attach]`, de-duplicated, all serve deploys).
+  - Before assembly, K2 was **12/102 (11.8%)**. That is in line with the Phase-0 baseline of
+    6.6–11.3%.
+  - Served: **2/102 (2.0%)**, under the 3% target.
+  - Both remaining hits are quoted questions inside the teaching, so content and not a
+    question to the learner:
+    - "ask, 'What must have happened just before this?'";
+    - 'the question "which value?" even arise'.
+  - **True K2 served: 0/102.**
+- Changed 10/102. Hand-read since the rhetorical-question fix (`504579c`), all correct:
+  - a bold re-typed card question about the p-orbital figure, removed;
+  - a home-made A–D option list re-typed beside the card (convex functions), removed;
+  - a bold figure question ("Which label in the figure shows that component?"), removed.
+- K1 created on a graded turn: 0.
+- The two damaged turns from window 1 (§12.1) are the only defects found, and they are
+  fixed.
+
 ---
 
 ## 13. Phase 3 step 3 — lesson open (baseline, 2026-10-03; design follows)
@@ -707,6 +726,26 @@ the lesson's `lessonKey`. No card is attached and nothing is graded, so K1/K2 do
 - **What this means for the gate.** The opening is the healthiest turn type measured so far.
   An assembled opening must beat these rates in shadow (§7 method, at least 50 turns) before it
   serves. Otherwise it stays model-written, and that is recorded here with the numbers.
+
+### 13.1 Shadow result and decision (2026-10-03, deploys `b87baf2` / `7defba5`)
+
+- **Implementation:**
+  - `assembleOpeningTurn`, classifier shared with §12 (`learnerQuestions.ts`);
+  - wired into `lesson-init` after every repair;
+  - its own switch `TURN_ASSEMBLY_OPEN_MODE`, which defaults to shadow even under global serve
+    (`turnTypeMode`).
+  - Tests: `openingAssembly.test.ts`, which failed before the module existed.
+- **Sample:** **80 openings** (`[assembled-open]`) across all five subjects, from open-only
+  sampler runs on disposable accounts plus other sessions' traffic.
+- **Result:**
+  - openings asking the learner 2+ questions: **live 0/80, assembled 0/80**;
+  - changed 0/80;
+  - openings with no question to the learner at all: 4/80 (not a check in §13; noted only).
+- **Decision (DoD 3 rule: serve only if shadow beats live):** the opening **stays
+  model-written**, and `TURN_ASSEMBLY_OPEN_MODE` stays unset (shadow).
+  - Shadow did not beat live: it equalled it at 0, because the class it targets is about 1.5%
+    of openings in the 7-day baseline (§13), and 80 openings show none of it.
+  - The shadow line stays on, so a rise would be visible.
 
 ---
 
@@ -745,6 +784,24 @@ here: the assembled text must close exactly when the live one did.
 - To add: a route-level serve test for a completing tap. It needs the harness to reach
   mastery, so it is written when the harness supports it. Until then, production
   `completion: true` lines are the evidence.
+
+### 14.1 Result (2026-10-03, serve deploys `0c4cfa8` → `7defba5`)
+
+- **Sample:** **53 completion turns** (`completion: true`). 52 were served assembled; 1 came
+  from the shadow-only deploy before the switch. They came from `QA_ALL_RIGHT=1` runs (lessons
+  driven to their completing turn) in all five subjects.
+- **Completion agreement 53/53.** The assembled text closed the lesson exactly when the live
+  one did.
+- **Live vs assembled, same turns:**
+  - live is the close alone ("That's Apoptosis and Programmed Cell Death finished — nice
+    work…"), with no verdict and no reason for the learner's last answer;
+  - assembled is verdict, then a reason that names the idea, then the same close. Hand-read,
+    `bio.cell.apoptosis`: "Yes, exactly right. / Apoptosis eliminates targeted cells in a
+    regulated manner, shaping structures like digits… / That's Apoptosis and Programmed Cell
+    Death finished — nice work…".
+  - Assembled K1 0/53.
+- **Decision:** shadow beat live, so this turn type is served. It already was, as part of the
+  graded serve (§11.13). No separate switch.
 
 ---
 
@@ -795,6 +852,32 @@ here: the assembled text must close exactly when the live one did.
 - **Fix:** drop only questions to the learner (hanging, or a confirm-back). A word-less
   fragment goes with the sentence before it. All four production shapes are now unit tests.
 
+### 15.1 Shadow result and decision (2026-10-03, deploy `7defba5`)
+
+- **Implementation:**
+  - `assembleQuestionTurn` (`questionAssembly.ts`): drops a verdict on an ungraded question,
+    keeps at most one question back, and never sends a stub;
+  - its own switch `TURN_ASSEMBLY_QUESTION_MODE`, shadow by default;
+  - every learner question logs `[assembled-question]`. One with a card on screen is logged
+    for its checks only, since the attach assembler owns that text.
+  - Tests: `questionAssembly.test.ts` and `questionAssemblyRoute.test.ts`, both failing first.
+- **Sample:** **52 learner-question turns** (17 with a card on screen), from `QA_ASK` runs
+  across physics, mathematics, chemistry, biology and English, on disposable accounts.
+- **Live** (the model's reply as served):
+  - stub 0/52;
+  - verdict on a question 0/52;
+  - two or more questions back 1/52.
+- **Assembled:** changed 1/52.
+  - Hand-read of that one turn: it cut "Same work?" from the contrasting pair "Same work?
+    Same power?" (`phys.mech.power`). The learner loses half of a coherent question. **Not a
+    gain.**
+- **Decision (DoD 3: learner questions may stay model-written if shadow shows no gain):**
+  learner questions **stay model-written**, and `TURN_ASSEMBLY_QUESTION_MODE` stays unset
+  (shadow).
+  - The live defect rates are at the floor the checks can see. The only assembler action seen
+    made a reply slightly worse.
+  - The shadow line stays on.
+
 ---
 
 ## 16. Phase 4 — removing repairs (analysis, 2026-10-03)
@@ -833,3 +916,116 @@ graded turns only. Today that is `stale-question` (the previous answer quoted on
 item, R2). A fallback turn (assembly failed, live served) would then lose it. That is the
 trade Phase 4 accepts, and the fallback rate decides it: 0 of 375 so far (307 shadow + 68
 serve).
+
+### 16.1 Phase 4 verdict at 307 served graded turns (2026-10-03)
+
+**Measured:** 366 chat requests carried a served-assembled graded line, and 338 served live
+text (card, question and teaching turns). Counts are de-duplicated requests from every runtime
+log window.
+
+| Repair tag | Fired on served-assembled turns (output discarded) | Fired on live-served turns | Acts on |
+| --- | --- | --- | --- |
+| `gate-contract` | 161 | 146 | every turn type |
+| `visual-acknowledgement` | 45 | 30 | every turn type |
+| `eng-d11` | 31 | 2 | every English turn |
+| `stub-repair` | 21 | 2 | gate-contract and confirm-back stubs, any turn |
+| `mcq-reoffer-unbacked-confirmation` | 0 | 17 | re-offer turns (not graded) |
+| `remediation-grounding` | 0 | 16 | remediation turns |
+| `answer-leak` | 9 | 5 | every card turn |
+| `stale-question` | 2 | 0 | **graded correct taps only** |
+| `topic-drift`, `figure-reference` | 1 each | 0 | every turn type |
+
+**Deleted: none.** Reasons, by rule:
+- **The rule: 0 firings over at least 300 served turns.** No repair the assembler supersedes
+  reaches 0. Repairs run on the live draft before the serve decision (§16), so their tags keep
+  firing even when their output is discarded.
+- **`stale-question` is the only repair that acts on graded turns alone.** Every firing (2/2)
+  fell on a served-assembled turn, so it changed nothing a learner saw. It cannot reach 0
+  firings by the rule while it runs before assembly.
+  - Its only remaining protection is the serve fallback, and that has been **0/316** (0/623
+    counting the shadow period).
+  - It was also extended twice today by another session (`c414621`, `1d3247c`) on the same
+    shared `main`. Deleting code under active work in a parallel session is a coordination
+    call, not one for this loop.
+- **Every other repair fires on live-served turns** (card, teaching, question), where it still
+  protects the learner. Not deletable.
+- Repairs with 0 firings in every window (`empty-reply-net`, `completion-claim`,
+  `claim-challenge`, …) guard rare failures on paths the assembler does not cover. 0 firings in
+  sampler traffic does not show they are unneeded.
+
+**What would make Phase 4 deletions possible (recommended next step, not done):**
+1. Run assembly before the graded-only repairs.
+2. Skip `stale-question` and the graded branch of `stub-repair` when the assembled turn will
+   be served. That also saves their regeneration calls: about 23 extra model calls over 307
+   graded turns.
+3. Their tags then measure firings on the new path, and a deletion can follow the rule.
+
+---
+
+## 17. Final report — the Phase 0 checks re-run (2026-10-03, ~16:05 UTC)
+
+**Query:** `scripts/qa/turnQuality/turn-checks.sql` with the window set to the last 7 days,
+split at the serve switch (2026-10-03 11:37 UTC). Read-only, counts only, all accounts.
+- The "pre" column is the 7 days before serve.
+- The 2026-10-02 baseline (14 days) is in `turn-quality-baseline-2026-10-02.md`.
+- The SQL's graded detector counts a tap only when the previous row carried the card. A
+  re-offered card is not stored again, so it sees fewer graded turns than the logs (§11.14).
+
+### K1 — a stub reply to a tapped answer (graded turns)
+
+| Subject | Baseline 14 d (10-02) | Pre-serve 7 d | Since serve |
+| --- | --- | --- | --- |
+| physics | 317/2,030 (15.6%) | 110/757 (14.5%) | 0/9 |
+| biology | 238/884 (26.9%) | 233/903 (25.8%) | 0/37 |
+| chemistry | 28/188 (14.9%) | 12/156 (7.7%) | 0/7 |
+| english | 4/85 (4.7%) | 0/56 | 0/7 |
+| mathematics | 0/9 | 6/329 (1.8%) | **2/96** |
+| **all** | 587/3,196 (18.4%) | 361/2,201 (16.4%) | **2/156 (1.3%)** |
+
+- **Both mathematics stubs ("Here is your next question.", "Quick check. Think it through
+  before you choose.") answer *model-written* cards.**
+  - Their stems match 0 authored probes, so they are outside the assembler, which needs an
+    authored key (§1).
+  - The shape matches the `unauthored-key-confirmation` repair stripping the model's
+    verdict and leaving nothing.
+  - **Open defect class, not fixed here.**
+- On authored graded turns, the runtime logs give **served K1 0/316** (§11.14 onward).
+
+### K2 — a question beside a card
+
+| Subject | Baseline 14 d | Pre-serve 7 d | Since serve | Hand-read of the since-serve hits |
+| --- | --- | --- | --- | --- |
+| physics | 327/4,976 (6.6%) | 205/3,300 (6.2%) | 1/85 | rhetorical, kept by the classifier (not verified from the stored tail) |
+| biology | 77/915 (8.4%) | 70/957 (7.3%) | 0/81 | — |
+| chemistry | 37/327 (11.3%) | 29/357 (8.1%) | 0/76 | — |
+| english | 14/166 (8.4%) | 9/187 (4.8%) | 1/79 | quoted question in the teaching |
+| mathematics | 8/25 | 14/366 (3.8%) | 3/165 | all 3 quoted questions in the teaching |
+| **all** | 463/6,409 (7.2%) | 327/5,167 (6.3%) | **5/486 (1.0%)** | **0 confirmed questions to the learner** |
+
+### K3, K5, and the turn-type results
+
+- **K3** (previous answer quoted on the next item): since serve **0** in every subject (pre-serve
+  13).
+- **K5** (repeated reply): since serve **0** (pre-serve 126).
+- **K4** (closing sentence announcing the card): the regex counts the server's own neutral
+  lead-ins ("Let's check this one before we go further."), as the baseline already noted.
+  It is not a defect measure, so it is tracked only.
+- **Completion turns:** 53 measured, completion agreement 53/53. The learner's last answer
+  now gets a verdict and a reason before the close (§14.1).
+- **Openings** (80) and **learner questions** (52): shadow showed no gain, so both stay
+  model-written (§13.1, §15.1).
+- **Zero-tolerance:** completion agreement 316/316 on graded turns; no 5xx in any window.
+  Z1/Z2 were not re-run this session: the assembler does not touch grading or mastery writes.
+
+### Definition-of-Done status
+
+| Item | Status |
+| --- | --- |
+| 1 Serve on graded turns, ≥100 | **Met**: 307 served; served K1/K2 0; agreement 100%; stored rows match; no 5xx |
+| 2 Card turns, K2 <3% over ≥100 | **Met**: 102 card turns, 2.0% heuristic, 0 confirmed |
+| 3 Open / completion / question, ≥50 each, serve only if better | **Met as measured**: completion served (53, gain); opening (80) and question (52) no gain, so shadow |
+| 4 Phase 4 deletions | **Evaluated: 0 deletions qualify** (§16.1); the reordering that would allow them is recorded |
+| 5 Final report | This section |
+
+**Phase 5 (factual correctness of teaching prose): not started, separate track.** Nothing in
+this program checks whether a stated fact is true. The hand-reads above judged structure only.

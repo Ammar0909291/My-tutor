@@ -37,3 +37,18 @@ The Vercel env var `OPENROUTER_API_KEY` (id `d8l59odeIQCEdNSj`) has a comment fi
 what looks like a plaintext OpenRouter key (`sk-or-v1-2d42…`). Comments are not encrypted.
 Recommended: rotate the key at OpenRouter, then clear the comment. Seen while reading the
 `TURN_ASSEMBLY_MODE` entry on 2026-10-03.
+
+## Outcome (end of day, 2026-10-03)
+
+See `TURN_ASSEMBLY_PHASE1_SPEC.md` §11.13–§17 for every number.
+- **Served:** graded turns (307 measured, served K1/K2 0), card turns (102, K2 2.0% heuristic,
+  0 confirmed) and completion turns (53, agreement 53/53).
+- **Stay model-written, shadow on:** openings (80) and learner questions (52).
+- **Phase 4:** no deletion qualified. `stale-question` is the only graded-only repair; it is
+  being actively extended by another session.
+- **Open defect found by the final re-run:** a tap on a *model-written* card can get a bare
+  lead-in with no verdict ("Here is your next question."). 2 cases in mathematics since
+  serve. The assembler needs an authored key, so it does not cover these.
+- **QA:** every run used a disposable `qa-*@mytutor-qa.invalid` account, deleted at the end
+  (`deleted: true` in every run log). No real account was used. The owner offered a real
+  account in chat; it was declined and not stored.
