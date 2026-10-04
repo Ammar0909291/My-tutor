@@ -182,6 +182,25 @@ DB check: all 20 new probe identities (5 + 15) have a `probe_assets` row with �
 Observed, pre-existing and unchanged: live chat turns write DRAFT ADULT `core_explanation`
 rows (one per turn; not served), including from these QA sessions.
 
+### End-user readiness pass (2026-10-04)
+
+- **Production data**: all 45 new concepts hold ≥ 2 ACTIVE explanations and 5–6 ACTIVE
+  gradeable probes (scoped DB check, none short).
+- **Live lessons, all 45 new concepts** (`physicsOneConceptLive.ts`, disposable accounts,
+  each deleted with re-login blocked): 45/45 served the concept's own figure, graded the
+  authored quizzes, corrected the deliberate wrong answer with its reason, reached verified
+  mastery and completed the lesson. Three §C-enriched lessons also served their new probe.
+- **Give-away fixed** (`gateAssessment.splitAnswerHeadsPerOption`): an option carrying working
+  behind a bare-letter head ("B — H = nI …") cannot be cut to "B", so it alone kept its
+  working beside cut distractors — live on `phys.em.fields-in-matter`. Such a set is now
+  served whole. Corpus-wide this changes only that item (`chem.org.purification` was already
+  served whole). Test: `probeAnswerHeads.test.ts`.
+- **KG data fixes** (no lesson-order change, remap reports 0 moves): `phys.qm.spin.unlocks`
+  now mirrors `phys.qm.identical-particles` (0 asymmetric edges remain);
+  `phys.mech.stress-strain` and `phys.stat.phase-transitions-critical-phenomena`
+  descriptions rewritten as sentences, same content (0 physics descriptions now fail
+  `readsAsProse`).
+
 ## Next
 
 Physics KG is at 283 and the coverage audit is done. Only the electronics nodes

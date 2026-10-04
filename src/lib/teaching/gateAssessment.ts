@@ -313,6 +313,14 @@ export function splitAnswerHeadsPerOption(options: string[]): { heads: string[];
     const head = m ? m[1].trim() : '', why = m ? m[2].trim() : ''
     if (m && head && why && !/^[A-Da-d][.)]?$/.test(head)) {
       heads.push(head); rationales.push(why); splitAny = true
+    } else if (m && head && why) {
+      // A bare-letter head ("B — H = nI depends only on the free current…")
+      // cannot be served alone (it reads as "tap B"), so this option would be
+      // served WITH its working while the others lose theirs — and when it is
+      // the correct option that hands over the answer. Measured live
+      // 2026-10-04, phys.em.fields-in-matter: served as ["B — H = nI …",
+      // "Both by the same factor", "H"]. Serve every option whole instead.
+      return null
     } else {
       heads.push(o); rationales.push('')
     }

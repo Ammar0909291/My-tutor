@@ -160,6 +160,19 @@ describe('physics only: per-option split (task #2 part b)', () => {
     expect(splitAnswerHeadsPerOption(['Steep — reason', 'steep'])).toBeNull()
   })
 
+  it('serves every option whole when a working-carrying option has a bare-letter head (no lone explained answer)', () => {
+    // phys.em.fields-in-matter, live 2026-10-04: the correct "B — …" could not be
+    // cut to "B", so it alone kept its working beside bare distractors.
+    const opts = [
+      'B — H = nI depends only on the free current, while B = μ_rμ₀H includes the iron\'s magnetisation',
+      'Both by the same factor — H and B are the same field',
+      'H — the iron changes the current',
+    ]
+    expect(splitAnswerHeadsPerOption(opts)).toBeNull()
+    const mcq = probeToMcq({ conceptId: 'phys.em.fields-in-matter', stem: 'Which changes a lot: H or B?', choices: opts.map((text, i) => ({ text, isCorrect: i === 0 })) } as never)!
+    expect([...mcq.options].sort()).toEqual([...opts].sort())
+  })
+
   it('applies to a physics probe, and never to another subject', () => {
     const phys = probeToMcq(EQUAL as never)!
     expect(phys.options[phys.correctIndex]).toBe('Equal')

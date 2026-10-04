@@ -1843,7 +1843,7 @@
       ],
       "related": [],
       "cross_links": [],
-      "description": "Stress is force per unit area; strain is fractional deformation; their ratio defines the elastic modulus of a material.",
+      "description": "Stress is force per unit area, and strain is fractional deformation. Their ratio defines the elastic modulus of a material.",
       "difficulty": "proficient",
       "estimated_hours": 5,
       "bloom": "apply",
@@ -6202,7 +6202,8 @@
       "unlocks": [
         "phys.qm.pauli-exclusion",
         "phys.qm.angular-momentum-addition",
-        "phys.qm.density-matrix"
+        "phys.qm.density-matrix",
+        "phys.qm.identical-particles"
       ]
     },
     {
@@ -7186,7 +7187,7 @@
       ],
       "related": [],
       "cross_links": [],
-      "description": "Near a critical point, thermodynamic quantities diverge as power laws |T\u2212Tc|^\u03b1,\u03b2,\u03b3,\u03bd,\u03b7; universality groups materials into classes sharing critical exponents regardless of microscopic details; the Wilson renormalization group provides the theoretical foundation via scale invariance and fixed points.",
+      "description": "Near a critical point, thermodynamic quantities diverge as power laws |T\u2212Tc|^\u03b1,\u03b2,\u03b3,\u03bd,\u03b7. Universality groups materials into classes sharing critical exponents regardless of microscopic details, and the Wilson renormalization group provides the theoretical foundation via scale invariance and fixed points.",
       "difficulty": "expert",
       "estimated_hours": 12,
       "bloom": "evaluate",
