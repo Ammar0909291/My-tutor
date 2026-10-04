@@ -75,7 +75,7 @@ end of the first remap. Verified exactly against the precomputed expectation:
 `currentLesson` sum 8160 → 8311 (expected 8311); `completedLessons` sum 690 → 702
 (expected 702); completed count 11 → 11; 778 rows; 0 bookmarks.
 
-## Advanced tier, batches 9–12 (2026-10-04, committed on local `main`, not yet landed)
+## Advanced tier, batches 9–12 landed on `main` (2026-10-04, `086b6a05`)
 
 Started under the owner's "keep working". Scope: audit §B minus electronics
 (transistors and logic gates stay excluded by owner rule) and minus special-purpose
@@ -86,7 +86,7 @@ diodes (held back as the owner's decision) — 13 concepts.
 | 9 | `4ba55739` | Earth–Moon–Sun system (`phys.astro.solar-system`), stellar properties, distance ladder, Hall effect |
 | 10 | `2b64aff8` | lasers, radiation safety, communication systems, radiation and antennas |
 | 11 | `c70738f7` | coupled oscillators, nonlinear dynamics and period doubling, fields in matter (+ `amperes-law`, KGCS P1), superconductivity (+ `resistivity`, KGCS P1) |
-| 12 | (this commit) | equivalence principle and curved spacetime (`phys.rel.general-relativity-intro`, + `non-inertial-frames`, KGCS P1) |
+| 12 | `086b6a05` | equivalence principle and curved spacetime (`phys.rel.general-relativity-intro`, + `non-inertial-frames`, KGCS P1) |
 
 Physics KG 269 → 282. Renames to stop cross-subject resolver captures: stellar
 properties (not "magnitude", which is mathematics), nonlinear dynamics named "Nonlinear
@@ -106,14 +106,22 @@ audit 282/282 concepts, 305/305 pairs at 5 probes; pinned + batch tests 397/397.
 
 Known, pre-existing, not touched: `phys.qm.identical-particles` requires `phys.qm.spin`
 but `spin` does not list it in `unlocks` (present before this campaign began).
+Also pre-existing in the original 238 nodes, not touched: `phys.mech.stress-strain` and
+`phys.stat.phase-transitions-critical-phenomena` have descriptions with 2+ semicolons,
+which `remediationGrounding.readsAsProse` will not speak.
 
-Landing these 13 needs one owner-approved remap after deploy:
-`npx tsx scripts/physics/remap-lesson-orders.ts --from ed38b58e` (269 → 282 lessons,
-163 stored order numbers move).
+Landed in one push with a third owner-approved remap (`--from ed38b58e`): 269 → 282
+lessons, 163 stored order numbers move (from lesson 107 up), 2 of 778 physics progress
+rows affected. Run once right after deploy `dpl_HPRhM8ph2VfdLKu2LWNGdUxvowGj`
+(`086b6a05`) went READY. Pre-check (twice, before and after READY): no physics progress
+row written since 2026-10-03 21:11; state equal to the end of the second remap.
+Verified exactly against the precomputed expectation: `currentLesson` sum 8311 → 8317
+(expected 8317); `completedLessons` sum 702 → 712 (expected 712); completed count
+11 → 11; 778 rows; 0 bookmarks.
 
 ## Next
 
-Advanced tier batches 9–12 await an owner-approved landing (above). Remaining from
+Physics KG is at 282. Remaining from
 audit §B: special-purpose diodes (owner's decision); electronics (transistors, logic
 gates) stays excluded. Each future landing needs its own remap run
 right after deploy.
