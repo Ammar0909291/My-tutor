@@ -1,0 +1,413 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.therm.energy-resources-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.therm.energy-resources",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:2948e948654c26b3a380d2366494deaf048becb722be6b86b0b9a10a06d0ce6d",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.therm.energy-resources.md": "sha256:e999efa049cc5f2cd9b27d6885f82fa3e50e5f645b79b330b5d9952d5ac96424"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.therm.energy-resources",
+    "name": "Sources of Energy and Efficiency",
+    "difficultyRaw": "foundational (1)",
+    "bloom": "understand",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "phys.mech.power"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.therm.energy-resources-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.therm.energy-resources (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.therm.energy-resources.md": "sha256:e999efa049cc5f2cd9b27d6885f82fa3e50e5f645b79b330b5d9952d5ac96424"
+      },
+      "contentHash": "sha256:98370f393ccbb4f67244da283f9e4a2aa65d8aefc2b60431a6bd507bc3f3a48e",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.therm.energy-resources.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.energy-resources.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.energy-resources"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.energy-resources\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.energy-resources.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.energy-resources.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.energy-resources"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.energy-resources\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.energy-resources.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.energy-resources.md#TA-3 (addresses MC-ENERGY-USED-UP)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.energy-resources"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.energy-resources\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.energy-resources.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.energy-resources.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.energy-resources"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.energy-resources\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.energy-resources.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.energy-resources.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.energy-resources"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.energy-resources\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.energy-resources.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.energy-resources.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.energy-resources"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.energy-resources\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.energy-resources.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.energy-resources.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.energy-resources"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.energy-resources\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.therm.energy-resources/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "phys.therm.energy-resources",
+      "title": "Learning Objective",
+      "content": "[Boundary statement]\nA student who achieves mastery demonstrates:\n1. Classifies energy sources as renewable (solar, wind, hydro, tidal, geothermal, biomass) or non-renewable (coal, oil, natural gas, nuclear fuel), and traces most of them back to the Sun.\n2. Explains that energy is never used up but transformed, and that \"using\" energy means degrading it to less useful forms, mostly heat in the surroundings; computes efficiency = useful energy out ÷ energy in — e.g. a coal power station receiving 1000 MJ of fuel energy and delivering 350 MJ of electrical energy is 35 % efficient, with 650 MJ leaving as heat.\n3. Uses the kilowatt-hour as an energy unit (1 kWh = 3.6 MJ): a 2 kW heater running for 3 hours uses 6 kWh.\n4. Compares sources on more than one axis — availability, cost, reliability and environmental impact — rather than ranking them as simply \"good\" or \"bad\".\n\nA student who says \"energy gets used up\", or that \"renewable means it has no environmental effect\", has **NOT** achieved mastery — the first contradicts conservation of energy and the second makes every real energy decision look trivial.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.energy-resources.md",
+        "startLine": 17,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "phys.therm.energy-resources/misconception/MC-ENERGY-USED-UP",
+      "kind": "misconception",
+      "conceptId": "phys.therm.energy-resources",
+      "title": "Energy is used up and disappears",
+      "content": "### MC-ENERGY-USED-UP: \"Energy is used up and disappears\"\ntrigger_signal: student says energy is consumed, destroyed or \"gone\" after a device or journey.\nconflict_evidence [P28]: \"The power station took in 1000 MJ and sent out 350 MJ of electricity. If energy can be used up, where are the other 650 MJ? Feel the warm water from the cooling towers.\"\nbridge_text [P30]: \"The 650 MJ are still there — as heat in the cooling water and air. Energy is never destroyed; it is transformed. What runs out is energy in a USEFUL, concentrated form, like the chemical energy in coal.\"\nreplacement_text [P31]: \"Energy in = useful energy out + wasted energy (usually heat). Efficiency = useful out ÷ in, always below 100 %.\"\ndiscrimination_pairs [P33]: [\"energy conserved (1000 MJ in = 350 + 650 MJ out) vs useful energy decreased (350 MJ electricity)\", \"'the battery is flat' (no stored chemical energy left) vs 'the energy vanished' (false)\"]\ns6_path: skip P28; rub hands together and feel them warm — the \"used\" energy is right there.",
+      "localKey": "MC-ENERGY-USED-UP",
+      "language": "en",
+      "refs": [
+        "MC-ENERGY-USED-UP"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.energy-resources.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.therm.energy-resources/misconception/MC-RENEWABLE-MEANS-CLEAN",
+      "kind": "misconception",
+      "conceptId": "phys.therm.energy-resources",
+      "title": "Renewable sources have no environmental or practical drawbacks",
+      "content": "### MC-RENEWABLE-MEANS-CLEAN: \"Renewable sources have no environmental or practical drawbacks\"\ntrigger_signal: student treats renewable as automatically impact-free, or reliable at all times.\nconflict_evidence [P28]: \"A big hydroelectric dam floods a whole valley behind it. Is that no effect at all?\"\nbridge_text [P30]: \"Renewable means the source is replaced naturally on a human timescale — not that it has no cost. Dams flood land and block fish; wind farms take land and can harm birds; solar and wind stop when the Sun sets or the wind drops.\"\nreplacement_text [P31]: \"Compare sources on availability, cost, reliability and impact. Every source has trade-offs; renewables avoid fuel use and running emissions, which is their big advantage.\"\ndiscrimination_pairs [P33]: [\"renewable (replenished: solar, wind, hydro) vs zero-impact (no source is)\", \"intermittent solar and wind vs steady hydro and geothermal\"]\ns6_path: skip P28; list one advantage and one drawback for each of three sources together.",
+      "localKey": "MC-RENEWABLE-MEANS-CLEAN",
+      "language": "en",
+      "refs": [
+        "MC-RENEWABLE-MEANS-CLEAN"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.energy-resources.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.therm.energy-resources/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.energy-resources",
+      "title": "Where the Electricity Comes From",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Where the Electricity Comes From\",\"primitives\":[\"P01\",\"P04\",\"P05\",\"P06\",\"P14\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.energy-resources.md",
+        "startLine": 11,
+        "endLine": 18
+      }
+    },
+    {
+      "assetId": "phys.therm.energy-resources/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.energy-resources",
+      "title": "Renewable and Non-Renewable",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Renewable and Non-Renewable\",\"primitives\":[\"P02\",\"P07\",\"P16\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.energy-resources.md",
+        "startLine": 18,
+        "endLine": 24
+      }
+    },
+    {
+      "assetId": "phys.therm.energy-resources/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.energy-resources",
+      "title": "Energy Is Not Used Up",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Energy Is Not Used Up\",\"primitives\":[\"P02\",\"P13\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-ENERGY-USED-UP\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-ENERGY-USED-UP"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.energy-resources.md",
+        "startLine": 24,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "phys.therm.energy-resources/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.energy-resources",
+      "title": "Efficiency and the kWh",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Efficiency and the kWh\",\"primitives\":[\"P02\",\"P06\",\"P07\",\"P08\",\"P13\",\"P34\",\"P49\",\"P50\",\"P51\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.energy-resources.md",
+        "startLine": 31,
+        "endLine": 40
+      }
+    },
+    {
+      "assetId": "phys.therm.energy-resources/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.energy-resources",
+      "title": "Comparing Sources",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Comparing Sources\",\"primitives\":[\"P02\",\"P17\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.energy-resources.md",
+        "startLine": 40,
+        "endLine": 47
+      }
+    },
+    {
+      "assetId": "phys.therm.energy-resources/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.energy-resources",
+      "title": "Formative Assessment",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Formative Assessment\",\"primitives\":[\"P02\",\"P35\",\"P49\",\"P51\",\"P55\",\"P79\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.energy-resources.md",
+        "startLine": 47,
+        "endLine": 54
+      }
+    },
+    {
+      "assetId": "phys.therm.energy-resources/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.energy-resources",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P28\",\"P41\",\"P54\",\"P55\",\"P62\",\"P68\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.energy-resources.md",
+        "startLine": 54,
+        "endLine": 96
+      }
+    },
+    {
+      "assetId": "phys.therm.energy-resources/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.therm.energy-resources",
+      "title": "Assessment Battery",
+      "content": "| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (classify) | \"Nuclear fuel; geothermal?\" | CORRECT = non-renewable; renewable |\n| P74 (classify) | \"LED vs filament bulb, same light — more efficient?\" | CORRECT = LED |\n| P75 (boundary) | \"110 % efficiency?\" | CORRECT = impossible; output cannot exceed input |\n| P76 (transfer) | \"1.5 kW for 8 h at ₹8/kWh\" | CORRECT = 12 kWh, ₹96 |\n| P77 (generate) | \"Mix for a coastal town; night with no wind\" | CORRECT = names storage or a steady backup |\n| P78 (explain) | \"Energy conserved — why a crisis?\" | CORRECT = useful, concentrated sources run out |\n| P79 (predict) | \"Where does the station's missing energy go?\" | CORRECT = heat in cooling water and air |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.energy-resources.md",
+        "startLine": 179,
+        "endLine": 191
+      }
+    },
+    {
+      "assetId": "phys.therm.energy-resources/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.therm.energy-resources",
+      "title": "Student State Matrix",
+      "content": "| State | Why here | Tell-tale behaviour | Protocol |\n|---|---|---|---|\n| S0 | Can name sources but not classify them | Lists \"electricity\" as a source | Protocol A (Concrete) |\n| S1 | Classification without the physics | Sorts sources correctly but cannot compute an efficiency | Protocol B (Counterexample-first) |\n| S2-ENERGY-USED-UP | Energy consumed and gone | \"The car used up the energy in the petrol\" | Misconception Engine → then Protocol C |\n| S2-RENEWABLE-MEANS-CLEAN | Renewable = no impact | \"Dams and wind farms don't affect anything\" | Misconception Engine → then Protocol C |\n| S3 | Partial — efficiency fine, kWh or comparison not | Computes 35 % but cannot read a bill | Protocol C (Guided Questioning) |\n| S6 | Anxiety on unit conversion | Freezes at kWh ↔ MJ | Protocol F (Low Pressure) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.energy-resources.md",
+        "startLine": 28,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "phys.therm.energy-resources/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.therm.energy-resources",
+      "title": "Diagnostic Battery",
+      "content": "DB-1 (prior-exposure check):\n\"Name three sources of the electricity that reaches your home.\"\n  Names \"the wire / the meter\" or nothing → S0. Enter Protocol A (Concrete).\n  Names coal, solar, hydro… → DB-2.\n\nDB-2 (representation / misconception test):\n\"After a car journey the petrol is gone. Where did its energy go?\"\n  \"Into motion, then heat in the air, road and engine — it still exists, spread out\" → S3. Enter Protocol C.\n  \"Into making the car move\" (stops there) → S1. Enter Protocol B.\n  \"It was used up — it no longer exists\" → SIGNAL:MISCONCEPTION:MC-ENERGY-USED-UP. Enter Misconception Engine.\n  Pause → add S6 flag; Protocol F if anxious, otherwise Protocol A.\n\nDB-3 (comparison check — overlays):\n\"Does a hydroelectric dam have any environmental cost?\"\n  Names flooding of land, effects on rivers and fish → no flag.\n  \"No — it is renewable\" → add SIGNAL:MISCONCEPTION:MC-RENEWABLE-MEANS-CLEAN (repair at TA-5).\n  Confident and wrong on DB-2 → add S7 flag. Override to Protocol G.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-ENERGY-USED-UP",
+        "MC-RENEWABLE-MEANS-CLEAN"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.energy-resources.md",
+        "startLine": 39,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "phys.therm.energy-resources/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.therm.energy-resources",
+      "title": "Prerequisite Check",
+      "content": "PD-1 (for `phys.mech.power`):\n\"A 2000 W heater runs for 10 s. How much energy does it transfer?\"\n  Cannot compute E = P t = 20,000 J → flag PREREQ-GAP-POWER.\n  In-session minimum repair: one P06 (a kettle's rating plate, 2000 W) + one P34 (\"joules per second\") then resume. If power as energy per time is absent, schedule a `phys.mech.power` session (S4 route).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.energy-resources.md",
+        "startLine": 59,
+        "endLine": 66
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -1,0 +1,413 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.wave.echo-and-sonar-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.wave.echo-and-sonar",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:66b5e6da31d4000f8a02b3c824051a9d6cbfca4b4692084ba95b9d065682fe6a",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.wave.echo-and-sonar.md": "sha256:95142977f40419f1653d479ccce2fedd535e73a61724a10e855b724515febd3e"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.wave.echo-and-sonar",
+    "name": "Echo, SONAR and Uses of Ultrasound",
+    "difficultyRaw": "developing (2)",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "phys.wave.sound-waves"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.wave.echo-and-sonar-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.wave.echo-and-sonar (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.wave.echo-and-sonar.md": "sha256:95142977f40419f1653d479ccce2fedd535e73a61724a10e855b724515febd3e"
+      },
+      "contentHash": "sha256:62565e5a9274202f938de463ccc616905493ece85f2c73c1cf32c43380f905b0",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.wave.echo-and-sonar.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.echo-and-sonar.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.echo-and-sonar"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.echo-and-sonar\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.echo-and-sonar.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.echo-and-sonar.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.echo-and-sonar"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.echo-and-sonar\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.echo-and-sonar.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.echo-and-sonar.md#TA-3 (addresses MC-FORGET-ROUND-TRIP)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.echo-and-sonar"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.echo-and-sonar\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.echo-and-sonar.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.echo-and-sonar.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.echo-and-sonar"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.echo-and-sonar\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.echo-and-sonar.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.echo-and-sonar.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.echo-and-sonar"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.echo-and-sonar\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.echo-and-sonar.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.echo-and-sonar.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.echo-and-sonar"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.echo-and-sonar\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.echo-and-sonar.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.echo-and-sonar.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.echo-and-sonar"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.echo-and-sonar\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.wave.echo-and-sonar/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "phys.wave.echo-and-sonar",
+      "title": "Learning Objective",
+      "content": "[Boundary statement]\nA student who achieves mastery demonstrates:\n1. Explains an echo as sound reflected from a surface, and finds the distance to the surface from the echo time using d = v t / 2 — the sound travels there AND back.\n2. Explains why a distinct echo needs the reflector at least about 17 m away in air: the ear separates two sounds only if they arrive about 0.1 s apart, so 2d ≥ 344 m/s × 0.1 s.\n3. Defines ultrasound as sound above about 20 kHz — too high in pitch for humans to hear, not louder — and explains how SONAR uses its echoes to measure depth (v ≈ 1500 m/s in sea water: an echo after 0.8 s means 600 m), plus medical scanning and bat echolocation.\n\nA student who uses d = v t for an echo, or who describes ultrasound as \"very loud sound\", has **NOT** achieved mastery — the round-trip error doubles every SONAR and radar distance, and the loudness error confuses frequency with amplitude throughout acoustics.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.echo-and-sonar.md",
+        "startLine": 17,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.wave.echo-and-sonar/misconception/MC-FORGET-ROUND-TRIP",
+      "kind": "misconception",
+      "conceptId": "phys.wave.echo-and-sonar",
+      "title": "The echo distance is speed × echo time",
+      "content": "### MC-FORGET-ROUND-TRIP: \"The echo distance is speed × echo time\"\ntrigger_signal: student uses d = v t for an echo, giving twice the true distance.\nconflict_evidence [P28]: \"You stand 85 m from a wall; the echo comes back after 0.5 s. Speed × time = 340 × 0.5 = 170 m. But the wall is at 85 m. What did the sound do in those 0.5 s?\"\nbridge_text [P30]: \"It went to the wall AND came back. The 170 m is the whole round trip; the wall is at half that distance.\"\nreplacement_text [P31]: \"For any echo — sound, SONAR, radar — total path = 2 × distance, so d = v t / 2.\"\ndiscrimination_pairs [P33]: [\"echo from a cliff, 2 s (d = 340 m, round trip 680 m) vs thunder heard 2 s after lightning (one way: 680 m)\", \"SONAR 0.8 s (600 m deep) vs a one-way signal in 0.8 s (1200 m)\"]\ns6_path: skip P28; walk the path on paper — one arrow to the wall, one arrow back — and add their lengths.",
+      "localKey": "MC-FORGET-ROUND-TRIP",
+      "language": "en",
+      "refs": [
+        "MC-FORGET-ROUND-TRIP"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.echo-and-sonar.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.wave.echo-and-sonar/misconception/MC-ULTRASOUND-IS-LOUD",
+      "kind": "misconception",
+      "conceptId": "phys.wave.echo-and-sonar",
+      "title": "Ultrasound is very loud (or very quiet) sound",
+      "content": "### MC-ULTRASOUND-IS-LOUD: \"Ultrasound is very loud (or very quiet) sound\"\ntrigger_signal: student explains inaudibility of ultrasound by loudness, or calls ultrasound dangerous because it is loud.\nconflict_evidence [P28]: \"A dog whistle can be blown softly or hard. Either way you hear nothing, but the dog does. If loudness were the reason, blowing harder would let you hear it. Does it?\"\nbridge_text [P30]: \"No — loudness depends on the amplitude of the wave; whether we can hear it at all depends on its frequency. Our ears respond from about 20 Hz to 20 kHz. Ultrasound is above 20 kHz: too high in PITCH, not too loud.\"\nreplacement_text [P31]: \"Ultrasound: frequency above about 20 kHz; infrasound: below about 20 Hz. Either can be strong or weak.\"\ndiscrimination_pairs [P33]: [\"a loud 1 kHz siren (audible, high amplitude) vs a faint 40 kHz bat call (inaudible to us, high frequency)\", \"pitch ↔ frequency vs loudness ↔ amplitude\"]\ns6_path: skip P28; play a tone sweep rising past 15–18 kHz and notice it fades from hearing at the same volume setting.",
+      "localKey": "MC-ULTRASOUND-IS-LOUD",
+      "language": "en",
+      "refs": [
+        "MC-ULTRASOUND-IS-LOUD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.echo-and-sonar.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.wave.echo-and-sonar/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.echo-and-sonar",
+      "title": "The Clap and the Wall",
+      "content": "{\"id\":\"TA-1\",\"title\":\"The Clap and the Wall\",\"primitives\":[\"P01\",\"P04\",\"P05\",\"P06\",\"P14\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.echo-and-sonar.md",
+        "startLine": 11,
+        "endLine": 18
+      }
+    },
+    {
+      "assetId": "phys.wave.echo-and-sonar/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.echo-and-sonar",
+      "title": "There and Back",
+      "content": "{\"id\":\"TA-2\",\"title\":\"There and Back\",\"primitives\":[\"P02\",\"P06\",\"P08\",\"P13\",\"P34\",\"P49\",\"P50\",\"P51\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.echo-and-sonar.md",
+        "startLine": 18,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.wave.echo-and-sonar/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.echo-and-sonar",
+      "title": "SONAR",
+      "content": "{\"id\":\"TA-3\",\"title\":\"SONAR\",\"primitives\":[\"P02\",\"P06\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-FORGET-ROUND-TRIP\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-FORGET-ROUND-TRIP"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.echo-and-sonar.md",
+        "startLine": 27,
+        "endLine": 34
+      }
+    },
+    {
+      "assetId": "phys.wave.echo-and-sonar/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.echo-and-sonar",
+      "title": "Why Small Rooms Have No Echo",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Why Small Rooms Have No Echo\",\"primitives\":[\"P02\",\"P13\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.echo-and-sonar.md",
+        "startLine": 34,
+        "endLine": 40
+      }
+    },
+    {
+      "assetId": "phys.wave.echo-and-sonar/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.echo-and-sonar",
+      "title": "Ultrasound",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Ultrasound\",\"primitives\":[\"P02\",\"P13\",\"P17\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.echo-and-sonar.md",
+        "startLine": 40,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "phys.wave.echo-and-sonar/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.echo-and-sonar",
+      "title": "Formative Assessment",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Formative Assessment\",\"primitives\":[\"P02\",\"P35\",\"P49\",\"P51\",\"P55\",\"P79\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.echo-and-sonar.md",
+        "startLine": 48,
+        "endLine": 55
+      }
+    },
+    {
+      "assetId": "phys.wave.echo-and-sonar/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.echo-and-sonar",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P28\",\"P41\",\"P54\",\"P55\",\"P62\",\"P68\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.echo-and-sonar.md",
+        "startLine": 55,
+        "endLine": 97
+      }
+    },
+    {
+      "assetId": "phys.wave.echo-and-sonar/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.echo-and-sonar",
+      "title": "Assessment Battery",
+      "content": "| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (classify) | \"30 kHz: ultrasound or infrasound? Audible?\" | CORRECT = ultrasound; not audible to humans |\n| P74 (classify) | \"Echo after 2 s in air — distance?\" | CORRECT = 340 m |\n| P75 (boundary) | \"Wall 10 m away — distinct echo?\" | CORRECT = no; delay 0.06 s < 0.1 s |\n| P76 (transfer) | \"Shoal 0.2 s, bed 1.0 s at 1500 m/s\" | CORRECT = 150 m and 750 m |\n| P77 (generate) | \"Speed of sound by echoes\" | CORRECT = measure distance, time many echoes, v = 2d/t |\n| P78 (explain) | \"Why 'ultra'?\" | CORRECT = beyond (above) the audible frequency range |\n| P79 (predict) | \"Bat echo after 0.02 s — closer than 5 m?\" | CORRECT = yes, 3.4 m |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.echo-and-sonar.md",
+        "startLine": 179,
+        "endLine": 191
+      }
+    },
+    {
+      "assetId": "phys.wave.echo-and-sonar/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.wave.echo-and-sonar",
+      "title": "Student State Matrix",
+      "content": "| State | Why here | Tell-tale behaviour | Protocol |\n|---|---|---|---|\n| S0 | Knows echoes exist, no quantities | Cannot say what an echo time measures | Protocol A (Concrete) |\n| S1 | Formula without the round trip | Writes d = vt/2 by rote, cannot explain the 2 | Protocol B (Counterexample-first) |\n| S2-FORGET-ROUND-TRIP | Uses d = v t | Gets 1200 m for a 0.8 s SONAR echo | Misconception Engine → then Protocol C |\n| S2-ULTRASOUND-IS-LOUD | High frequency read as high amplitude | \"Ultrasound is too loud to hear\" | Misconception Engine → then Protocol C |\n| S3 | Partial — echo distance fine, minimum distance or uses not | Correct depth, no idea why small rooms give no echo | Protocol C (Guided Questioning) |\n| S6 | Anxiety on rearranging formulas | Avoids v = d/t variants | Protocol F (Low Pressure) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.echo-and-sonar.md",
+        "startLine": 27,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "phys.wave.echo-and-sonar/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.wave.echo-and-sonar",
+      "title": "Diagnostic Battery",
+      "content": "DB-1 (prior-exposure check):\n\"Have you heard an echo — in a valley, a well, or a large empty hall?\"\n  No → S0. Enter Protocol A (Concrete).\n  Yes → DB-2.\n\nDB-2 (representation / misconception test):\n\"A ship sends a sound pulse down and hears the echo from the sea bed 0.8 s later. Sound travels at 1500 m/s in sea water. How deep is the sea?\"\n  \"600 m — the pulse goes down and back, so half of 1200 m\" → S3. Enter Protocol C.\n  \"600 m\" (no reason) → S1. Enter Protocol B.\n  \"1200 m\" → SIGNAL:MISCONCEPTION:MC-FORGET-ROUND-TRIP. Enter Misconception Engine.\n  Pause → add S6 flag; Protocol F if anxious, otherwise Protocol A.\n\nDB-3 (ultrasound check — overlays):\n\"Why can't we hear the ultrasound a bat makes?\"\n  \"Its frequency is above about 20 kHz, too high for our ears\" → no flag.\n  \"It is too loud / too quiet\" → add SIGNAL:MISCONCEPTION:MC-ULTRASOUND-IS-LOUD (repair at TA-5).\n  Confident and wrong on DB-2 → add S7 flag. Override to Protocol G.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-FORGET-ROUND-TRIP",
+        "MC-ULTRASOUND-IS-LOUD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.echo-and-sonar.md",
+        "startLine": 38,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "phys.wave.echo-and-sonar/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.wave.echo-and-sonar",
+      "title": "Prerequisite Check",
+      "content": "PD-1 (for `phys.wave.sound-waves`):\n\"What is sound, and roughly how fast does it travel in air?\"\n  Cannot describe sound as a travelling vibration (pressure wave) with a finite speed of about 340 m/s → flag PREREQ-GAP-SOUND.\n  In-session minimum repair: one P06 (seeing distant fireworks before hearing them) + one P34 (\"why is there a delay?\") then resume. If sound as a wave with a speed is absent, schedule a `phys.wave.sound-waves` session (S4 route).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.echo-and-sonar.md",
+        "startLine": 58,
+        "endLine": 65
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

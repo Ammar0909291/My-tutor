@@ -4,10 +4,10 @@
   "status": "production",
   "build_date": "2026-06-29",
   "statistics": {
-    "total_concepts": 246,
+    "total_concepts": 250,
     "total_domains": 12,
-    "total_requires_edges": 309,
-    "total_unlocks_edges": 308,
+    "total_requires_edges": 313,
+    "total_unlocks_edges": 312,
     "total_cross_links": 0
   },
   "domains": [
@@ -24,12 +24,12 @@
     {
       "key": "therm",
       "name": "Thermodynamics",
-      "count": 18
+      "count": 21
     },
     {
       "key": "wave",
       "name": "Waves & Oscillations",
-      "count": 17
+      "count": 18
     },
     {
       "key": "opt",
@@ -1072,7 +1072,9 @@
         "NCERT Physics Class 11 Ch.6"
       ],
       "children": [],
-      "unlocks": []
+      "unlocks": [
+        "phys.therm.energy-resources"
+      ]
     },
     {
       "id": "phys.mech.simple-machines",
@@ -2297,8 +2299,93 @@
       ],
       "children": [],
       "unlocks": [
-        "phys.therm.specific-heat"
+        "phys.therm.specific-heat",
+        "phys.therm.newtons-law-of-cooling",
+        "phys.therm.blackbody-radiation"
       ]
+    },
+    {
+      "id": "phys.therm.newtons-law-of-cooling",
+      "name": "Newton's Law of Cooling",
+      "aliases": [
+        "rate of cooling",
+        "cooling curve"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.therm.heat-transfer"
+      ],
+      "related": [
+        "phys.therm.specific-heat",
+        "phys.therm.blackbody-radiation"
+      ],
+      "cross_links": [],
+      "description": "For small temperature differences, a body's rate of cooling is proportional to the excess of its temperature over its surroundings, so its temperature approaches room temperature along a flattening exponential curve.",
+      "difficulty": "proficient",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "NCERT Physics Class 11 Ch.11"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.therm.blackbody-radiation",
+      "name": "Blackbody Radiation: Stefan-Boltzmann and Wien",
+      "aliases": [
+        "blackbody",
+        "Stefan-Boltzmann law",
+        "Wien's displacement law"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.therm.heat-transfer"
+      ],
+      "related": [
+        "phys.em.electromagnetic-waves",
+        "phys.astro.stellar-structure"
+      ],
+      "cross_links": [],
+      "description": "A blackbody absorbs all radiation and is therefore the best emitter; its spectrum peaks at a wavelength inversely proportional to its absolute temperature (Wien) and the total power it radiates is proportional to T^4 (Stefan-Boltzmann).",
+      "difficulty": "proficient",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "NCERT Physics Class 11 Ch.11"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.therm.energy-resources",
+      "name": "Sources of Energy and Efficiency",
+      "aliases": [
+        "renewable energy",
+        "non-renewable energy",
+        "kilowatt-hour"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.power"
+      ],
+      "related": [
+        "phys.mech.conservation-of-energy",
+        "phys.em.electrical-power"
+      ],
+      "cross_links": [],
+      "description": "Energy sources are renewable or non-renewable; energy is transformed rather than used up, efficiency is useful output over input, and electrical energy is measured in kilowatt-hours (1 kWh = 3.6 MJ).",
+      "difficulty": "foundational",
+      "estimated_hours": 2,
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "references": [
+        "NCERT Science Class 10 (Sources of Energy)"
+      ],
+      "children": [],
+      "unlocks": []
     },
     {
       "id": "phys.therm.specific-heat",
@@ -3080,8 +3167,38 @@
       "children": [],
       "unlocks": [
         "phys.wave.doppler-effect",
-        "phys.wave.sound-intensity"
+        "phys.wave.sound-intensity",
+        "phys.wave.echo-and-sonar"
       ]
+    },
+    {
+      "id": "phys.wave.echo-and-sonar",
+      "name": "Echo, SONAR and Uses of Ultrasound",
+      "aliases": [
+        "echo",
+        "sonar",
+        "ultrasound",
+        "echolocation"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.wave.sound-waves"
+      ],
+      "related": [
+        "phys.wave.doppler-effect",
+        "phys.wave.wave-speed"
+      ],
+      "cross_links": [],
+      "description": "An echo is reflected sound; its delay gives distance as d = vt/2 because the sound travels there and back. Ultrasound (above about 20 kHz) is used in SONAR, medical imaging and echolocation.",
+      "difficulty": "developing",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "NCERT Science Class 9 Ch.12"
+      ],
+      "children": [],
+      "unlocks": []
     },
     {
       "id": "phys.wave.sound-intensity",

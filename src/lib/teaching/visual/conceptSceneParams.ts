@@ -108,6 +108,7 @@ import {
 import { buildPowerScene } from '@/lib/teaching/sceneGenerators/physicsCoreScenesB14'
 import { buildDensityScene, buildVernierScene, buildMassWeightScene, buildRectilinearScene } from '@/lib/teaching/sceneGenerators/physicsExtensionScenesB1'
 import { buildExperimentalGraphScene, buildSimpleMachineScene, buildVariationOfGScene, buildTerminalVelocityScene } from '@/lib/teaching/sceneGenerators/physicsExtensionScenesB2'
+import { buildCoolingScene, buildBlackbodyScene, buildEnergyResourcesScene, buildEchoScene } from '@/lib/teaching/sceneGenerators/physicsExtensionScenesB3'
 import {
   buildDisplacementScene, buildVelocityScene, buildAccelerationScene, buildRelativeMotionScene, buildTensionScene,
   buildConservativeForcesScene, buildAngularMomentumScene, buildAngularMomentumConservationScene,
@@ -557,6 +558,11 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'phys.mech.simple-machines':        buildSimpleMachineScene,
   'phys.mech.variation-of-g':         buildVariationOfGScene,
   'phys.mech.terminal-velocity':      buildTerminalVelocityScene,
+  // Coverage-driven KG extension, batch 3 (2026-10-03). See physicsExtensionScenesB3.ts.
+  'phys.therm.newtons-law-of-cooling': buildCoolingScene,
+  'phys.therm.blackbody-radiation': buildBlackbodyScene,
+  'phys.therm.energy-resources': buildEnergyResourcesScene,
+  'phys.wave.echo-and-sonar': buildEchoScene,
   // Batch 15 (2026-09-30): promoted from domain scope. See physicsCoreScenesB15.ts.
   'phys.mech.displacement':           buildDisplacementScene,
   'phys.mech.velocity':               buildVelocityScene,

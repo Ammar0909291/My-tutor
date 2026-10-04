@@ -52468,6 +52468,454 @@ const TERM_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.therm.newtons-law-of-cooling ───────────────────────────────────────
+const NLOC = 'phys.therm.newtons-law-of-cooling'
+const NLOC_SRC = 'docs/curriculum/blueprints/phys.therm.newtons-law-of-cooling.md'
+
+const NLOC_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: NLOC,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Tea at 80 °C in a 20 °C room reads 60 °C after 10 minutes, then about 47, 38 and 32 °C after 20, 30 and 40 minutes: it loses 20 °C in the first ten minutes but only 6 °C in the fourth. Heat flows out because the tea is hotter than the room, and how fast it flows depends on how MUCH hotter. Newton\'s law of cooling: for small temperature differences, the rate of cooling is proportional to the excess temperature over the surroundings, dT/dt = −k(T − T_s). So a body at room temperature does not cool at all, and a 50 °C cup cools five times faster at first in a 0 °C room (50 °C excess) than in a 40 °C room (10 °C excess). Because the rate shrinks with the excess, the excess falls by the same FRACTION in equal times — for the tea, 60 → 40 → 27 → 18 → 12 °C, multiplied by 2/3 every ten minutes. The temperature approaches the room\'s without ever crossing it. Over a short interval, problems use the average form (T₁ − T₂)/t = k[(T₁ + T₂)/2 − T_s]: from 80 → 60 °C in 10 min, 2 = k × 50, so k = 0.04 per minute, and 60 → 40 °C then takes 20 ÷ (0.04 × 30) ≈ 16.7 minutes.',
+    targetedMisconceptions: [`${NLOC}:MC-CONSTANT-RATE`, `${NLOC}:MC-TEMPERATURE-NOT-DIFFERENCE`],
+    source: `${NLOC_SRC} — TA-1 cooling curve, TA-2 difference drives the flow, TA-3 equal fractions, TA-4 average-rate method`,
+  },
+  {
+    conceptId: NLOC,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'It is natural to expect a hot drink to cool at a steady rate — if it lost 20 °C in the first 10 minutes, the next 20 °C should take another 10. Follow that through: at a steady 2 °C per minute the tea would be at 0 °C after 40 minutes and −40 °C after an hour, colder than the room it sits in. That never happens. Heat flows only because the tea is hotter than the room, and as the difference shrinks the flow slows, so each degree takes longer than the last and the tea levels off at room temperature. A related trap is to think the rate depends only on how hot the body is. Picture a cup at 50 °C in a room that is also at 50 °C: it does not cool at all. So the surroundings matter — what drives cooling is the EXCESS temperature, T − T_s. A 50 °C cup in a 0 °C room has a 50 °C excess and cools five times faster at first than the same cup in a 40 °C room, where the excess is only 10 °C.',
+    targetedMisconceptions: [`${NLOC}:MC-CONSTANT-RATE`, `${NLOC}:MC-TEMPERATURE-NOT-DIFFERENCE`],
+    source: `${NLOC_SRC} — MC-CONSTANT-RATE + MC-TEMPERATURE-NOT-DIFFERENCE, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const NLOC_PROBES: SeedProbe[] = [
+  {
+    conceptId: NLOC,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A body cools from 80 °C to 60 °C in 10 minutes in a 20 °C room. Using the average-rate form of Newton\'s law of cooling, about how long does it take to cool from 60 °C to 40 °C?',
+    choices: [
+      { text: 'About 17 minutes', isCorrect: true },
+      { text: '10 minutes — the same 20 °C drop takes the same time', isCorrect: false, misconceptionId: `${NLOC}:MC-CONSTANT-RATE` },
+      { text: 'About 6 minutes', isCorrect: false },
+      { text: '20 minutes — it always takes twice as long', isCorrect: false },
+    ],
+    correctValue: 'about 17 minutes',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${NLOC}:MC-CONSTANT-RATE`],
+    source: `${NLOC_SRC} — TA-4 worked case (k = 2/50 = 0.04 per min; 20/(0.04 × 30) ≈ 16.7 min)`,
+  },
+  {
+    conceptId: NLOC,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A body\'s excess temperature over its surroundings falls from 40 °C to 20 °C in 8 minutes. If Newton\'s law of cooling holds, how long does it take to fall from 20 °C to 10 °C?',
+    choices: [
+      { text: '8 minutes — the excess halves in each equal time', isCorrect: true },
+      { text: '4 minutes — half the temperature drop, so half the time', isCorrect: false, misconceptionId: `${NLOC}:MC-CONSTANT-RATE` },
+      { text: '16 minutes', isCorrect: false },
+      { text: 'It never reaches 10 °C excess', isCorrect: false },
+    ],
+    correctValue: '8 minutes',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${NLOC}:MC-CONSTANT-RATE`],
+    source: `${NLOC_SRC} — §8 P74 classify item (equal fractions in equal times)`,
+  },
+  {
+    conceptId: NLOC,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Tea cools from 80 °C to 60 °C in 10 minutes in a 20 °C room. Will it take more, less or the same time to cool from 60 °C to 40 °C?',
+    choices: [
+      { text: 'More — it is now closer to room temperature, so heat flows out of it more slowly', isCorrect: true },
+      { text: 'The same — it loses heat at a steady rate, 20 °C every 10 minutes', isCorrect: false, misconceptionId: `${NLOC}:MC-CONSTANT-RATE` },
+      { text: 'Less — it has less heat left to lose, so it finishes faster', isCorrect: false },
+    ],
+    correctValue: 'more',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${NLOC}:MC-CONSTANT-RATE`],
+    source: `${NLOC_SRC} — DB-2 item and MC-CONSTANT-RATE trigger_signal`,
+  },
+  {
+    conceptId: NLOC,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Two identical cups of water are both at 50 °C. One is in a room at 40 °C, the other in a room at 0 °C. Which cools faster at first?',
+    choices: [
+      { text: 'The cup in the 0 °C room — its excess temperature is 50 °C instead of 10 °C, so it cools about five times faster at first', isCorrect: true },
+      { text: 'Neither — both are at 50 °C, so they cool at the same rate', isCorrect: false, misconceptionId: `${NLOC}:MC-TEMPERATURE-NOT-DIFFERENCE` },
+      { text: 'The cup in the 40 °C room — warm air carries heat away better', isCorrect: false },
+    ],
+    correctValue: 'the cup in the 0 °C room',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${NLOC}:MC-TEMPERATURE-NOT-DIFFERENCE`],
+    source: `${NLOC_SRC} — DB-3 and TA-2 P41 diagnostic; MC-TEMPERATURE-NOT-DIFFERENCE trigger_signal`,
+  },
+  {
+    conceptId: NLOC,
+    subjectSlug: 'physics',
+    probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A metal block is already at the temperature of the room it sits in. According to Newton\'s law of cooling, what is its rate of cooling?',
+    choices: [
+      { text: 'Zero — with no temperature difference there is no net heat flow', isCorrect: true },
+      { text: 'The same as any other block at that temperature — it keeps cooling slowly', isCorrect: false, misconceptionId: `${NLOC}:MC-TEMPERATURE-NOT-DIFFERENCE` },
+      { text: 'It keeps cooling at a steady rate until it is colder than the room', isCorrect: false, misconceptionId: `${NLOC}:MC-CONSTANT-RATE` },
+    ],
+    correctValue: 'zero',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${NLOC}:MC-TEMPERATURE-NOT-DIFFERENCE`, `${NLOC}:MC-CONSTANT-RATE`],
+    source: `${NLOC_SRC} — §8 P75 boundary item`,
+  },
+]
+
+// ─── phys.therm.blackbody-radiation ──────────────────────────────────────────
+const BBRD = 'phys.therm.blackbody-radiation'
+const BBRD_SRC = 'docs/curriculum/blueprints/phys.therm.blackbody-radiation.md'
+
+const BBRD_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: BBRD,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Heat an iron bar and its glow moves from dull red near 900 K to orange near 1300 K to yellow-white near 1800 K: the colour of the brightest glow tells the temperature. The cleanest case is a blackbody — a body that absorbs every wavelength falling on it. Good absorbers are good emitters, so a perfect absorber is also the best possible emitter, and its spectrum depends only on its temperature. "Black" describes absorption, not appearance: a small hole in a closed box looks black when cold but glows brightly when the box is hot, and the Sun is close to a blackbody. Wien\'s displacement law gives the peak wavelength: λ_max T = b ≈ 2.9 × 10⁻³ m·K. The Sun peaks near 500 nm, so its surface is about 5800 K; a human body at 310 K peaks near 9.4 μm, in the infrared. The Stefan–Boltzmann law gives the total power: P = εσAT⁴, with σ = 5.67 × 10⁻⁸ W m⁻² K⁻⁴ and ε = 1 for a blackbody; the net loss to surroundings at T_s is εσA(T⁴ − T_s⁴). Both laws use the kelvin temperature, and the fourth power is steep: double the kelvin temperature and the radiated power rises 2⁴ = 16 times, while the peak wavelength halves.',
+    targetedMisconceptions: [`${BBRD}:MC-LINEAR-IN-T`, `${BBRD}:MC-BLACKBODY-LOOKS-BLACK`],
+    source: `${BBRD_SRC} — TA-1 colour and temperature, TA-2 the ideal emitter, TA-3 Wien, TA-4 Stefan–Boltzmann`,
+  },
+  {
+    conceptId: BBRD,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two slips spoil most blackbody problems. The first is treating radiated power as if it grew in step with temperature, often with Celsius plugged in. Warm a body from 27 °C to 54 °C: in Celsius the number doubled, but in kelvin it went from 300 K to 327 K — only 9 % hotter — and the radiated power rises by (327/300)⁴, about 41 %. Radiation depends on absolute temperature (a body at 0 K would emit nothing), so the scale must start at absolute zero, and the dependence is a fourth power: 300 K to 600 K multiplies the power by 2⁴ = 16, not 2. The second slip is taking the name literally — "a blackbody must look black, so the bright Sun cannot be one". Look at a small hole in a closed box: cold, it is pitch black, because light that enters never comes back out. Heat the box to 1500 K and the hole glows more brightly than any other surface at that temperature. A blackbody is defined by absorbing everything; because good absorbers are good emitters, a hot one shines with the brightest possible glow for its temperature.',
+    targetedMisconceptions: [`${BBRD}:MC-LINEAR-IN-T`, `${BBRD}:MC-BLACKBODY-LOOKS-BLACK`],
+    source: `${BBRD_SRC} — MC-LINEAR-IN-T + MC-BLACKBODY-LOOKS-BLACK, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const BBRD_PROBES: SeedProbe[] = [
+  {
+    conceptId: BBRD,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'The Sun\'s spectrum peaks at a wavelength of about 500 nm. Using Wien\'s law (λ_max T ≈ 2.9 × 10⁻³ m·K), what is its surface temperature?',
+    choices: [
+      { text: 'About 5800 K', isCorrect: true },
+      { text: 'About 580 K', isCorrect: false },
+      { text: 'About 1.45 × 10⁻⁹ K', isCorrect: false },
+      { text: 'About 5800 °C, then add 273 for kelvin', isCorrect: false },
+    ],
+    correctValue: 'about 5800 K',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [],
+    source: `${BBRD_SRC} — TA-3 P34 (2.9 × 10⁻³ / 500 × 10⁻⁹); 1.45 × 10⁻⁹ multiplies instead of dividing`,
+  },
+  {
+    conceptId: BBRD,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A blackbody is heated from 27 °C to 327 °C. By what factor does the power it radiates increase?',
+    choices: [
+      { text: '16 — the kelvin temperature doubles (300 K to 600 K), and power goes as T⁴', isCorrect: true },
+      { text: 'About 12 — the temperature rose twelvefold', isCorrect: false, misconceptionId: `${BBRD}:MC-LINEAR-IN-T` },
+      { text: '2 — twice the kelvin temperature, twice the power', isCorrect: false, misconceptionId: `${BBRD}:MC-LINEAR-IN-T` },
+      { text: '4', isCorrect: false },
+    ],
+    correctValue: '16',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${BBRD}:MC-LINEAR-IN-T`],
+    source: `${BBRD_SRC} — §8 P74 classify item; 12 is the Celsius ratio, 2 is the linear assumption`,
+  },
+  {
+    conceptId: BBRD,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A star\'s surface temperature (in kelvin) doubles while its size stays the same. By what factor does the power it radiates change?',
+    choices: [
+      { text: 'It increases 16 times, because radiated power is proportional to T⁴', isCorrect: true },
+      { text: 'It doubles, because twice the temperature means twice the radiation', isCorrect: false, misconceptionId: `${BBRD}:MC-LINEAR-IN-T` },
+      { text: 'It stays the same, because the star is the same size', isCorrect: false },
+    ],
+    correctValue: '16 times',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${BBRD}:MC-LINEAR-IN-T`],
+    source: `${BBRD_SRC} — DB-2 item and MC-LINEAR-IN-T trigger_signal`,
+  },
+  {
+    conceptId: BBRD,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'The Sun is dazzlingly bright. Can it be treated as a near-blackbody?',
+    choices: [
+      { text: 'Yes — "blackbody" means a near-perfect absorber, and a perfect absorber is also the best emitter; hot, it glows brightly with a spectrum set by its temperature', isCorrect: true },
+      { text: 'No — a blackbody must look black, and the Sun is bright', isCorrect: false, misconceptionId: `${BBRD}:MC-BLACKBODY-LOOKS-BLACK` },
+      { text: 'No — the Sun reflects most of the light falling on it, like a mirror', isCorrect: false, misconceptionId: `${BBRD}:MC-BLACKBODY-LOOKS-BLACK` },
+    ],
+    correctValue: 'yes',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${BBRD}:MC-BLACKBODY-LOOKS-BLACK`],
+    source: `${BBRD_SRC} — DB-3 name check and MC-BLACKBODY-LOOKS-BLACK conflict_evidence (the heated hole)`,
+  },
+  {
+    conceptId: BBRD,
+    subjectSlug: 'physics',
+    probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A thermal camera shows people clearly in a completely dark room. Which explanation is correct?',
+    choices: [
+      { text: 'A body at about 310 K radiates like a blackbody peaking near 9–10 μm, in the infrared, which the camera detects', isCorrect: true },
+      { text: 'People reflect hidden visible light that our eyes are too weak to see', isCorrect: false },
+      { text: 'Only very hot objects radiate, so the camera must be detecting body heat by contact through the air', isCorrect: false },
+    ],
+    correctValue: 'infrared emission peaking near 9–10 μm',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: `${BBRD_SRC} — §8 P76 transfer item (Wien at 310 K)`,
+  },
+]
+
+// ─── phys.therm.energy-resources ─────────────────────────────────────────────
+const ENRS = 'phys.therm.energy-resources'
+const ENRS_SRC = 'docs/curriculum/blueprints/phys.therm.energy-resources.md'
+
+const ENRS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ENRS,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Electricity is a carrier, not a source: in a coal power station, chemical energy in coal becomes heat, then steam, then the kinetic energy of a turbine, then electrical energy from a generator. Follow almost any source back and you reach the Sun — fossil fuels are the remains of ancient plants that stored sunlight, wind is driven by uneven solar heating, and hydro uses water lifted by evaporation. The exceptions are tidal power (the Moon\'s gravity), geothermal (heat from the Earth\'s interior) and nuclear (energy stored in heavy nuclei). Renewable sources are replaced naturally on a human timescale — solar, wind, hydro, tidal, geothermal, biomass; non-renewable ones took millions of years to form or cannot be replaced — coal, oil, natural gas, nuclear fuel. Energy is never used up: it is transformed and ends up spread out, mostly as heat. Efficiency = useful energy out ÷ energy in; a station turning 1000 MJ of fuel energy into 350 MJ of electricity is 35 % efficient, and the other 650 MJ leave as heat in the cooling water and air. Electricity is billed in kilowatt-hours: 1 kWh = 1000 W × 3600 s = 3.6 MJ, so a 2 kW heater running for 3 hours uses 6 kWh. Every source has trade-offs: solar and wind need no fuel but stop at night or in calm weather; hydro is steady but floods valleys; fossil fuels are reliable but finite and emit carbon dioxide.',
+    targetedMisconceptions: [`${ENRS}:MC-ENERGY-USED-UP`, `${ENRS}:MC-RENEWABLE-MEANS-CLEAN`],
+    source: `${ENRS_SRC} — TA-1 power-station chain, TA-2 renewable/non-renewable, TA-3 conservation, TA-4 efficiency and kWh, TA-5 comparing sources`,
+  },
+  {
+    conceptId: ENRS,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'We talk about "using up" energy, but energy is never destroyed. A power station takes in 1000 MJ of fuel energy and sends out 350 MJ of electricity — if energy could be used up, where are the other 650 MJ? They are still there, as heat in the cooling water and the air; you can feel the warm water from the cooling towers. After a car journey, the petrol\'s energy has become motion and then heat in the engine, the road and the air. What runs out is energy in a USEFUL, concentrated form, which is why we can face an energy crisis even though energy is conserved. A second trap is treating "renewable" as meaning "no drawbacks". Renewable means the source is replaced naturally on a human timescale — not that it is free of cost. A large hydroelectric dam floods a whole valley and blocks fish; wind farms take up land; solar panels produce nothing at night and wind turbines nothing in calm air, so they need storage or backup. Their great advantage is that they burn no fuel and emit nothing while running — but every source has to be weighed on availability, cost, reliability and impact.',
+    targetedMisconceptions: [`${ENRS}:MC-ENERGY-USED-UP`, `${ENRS}:MC-RENEWABLE-MEANS-CLEAN`],
+    source: `${ENRS_SRC} — MC-ENERGY-USED-UP + MC-RENEWABLE-MEANS-CLEAN, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const ENRS_PROBES: SeedProbe[] = [
+  {
+    conceptId: ENRS,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Electricity costs ₹8 per kWh. What does it cost to run a 1.5 kW air conditioner for 8 hours?',
+    choices: [
+      { text: '₹96 (12 kWh)', isCorrect: true },
+      { text: '₹12', isCorrect: false },
+      { text: '₹96,000 (12,000 kWh)', isCorrect: false },
+      { text: '₹42.7', isCorrect: false },
+    ],
+    correctValue: '₹96',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [],
+    source: `${ENRS_SRC} — §8 P76 transfer item (1.5 kW × 8 h = 12 kWh); 12,000 uses watts, 42.7 divides`,
+  },
+  {
+    conceptId: ENRS,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A power station receives 1000 MJ of energy from its fuel and delivers 350 MJ of electrical energy. What is its efficiency, and where is the rest of the energy?',
+    choices: [
+      { text: '35 %; the other 650 MJ leave as heat in the cooling water and air', isCorrect: true },
+      { text: '35 %; the other 650 MJ are destroyed in the generator', isCorrect: false, misconceptionId: `${ENRS}:MC-ENERGY-USED-UP` },
+      { text: '65 %; the electricity is the waste', isCorrect: false },
+      { text: '286 %; output is compared with input the other way round', isCorrect: false },
+    ],
+    correctValue: '35 %, rest as heat',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ENRS}:MC-ENERGY-USED-UP`],
+    source: `${ENRS_SRC} — TA-4 Sankey worked case (350/1000)`,
+  },
+  {
+    conceptId: ENRS,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'After a car journey the petrol in the tank is gone. What has happened to its energy?',
+    choices: [
+      { text: 'It was transformed into motion and then heat in the engine, road and air — it still exists, but spread out and hard to use', isCorrect: true },
+      { text: 'It was used up and no longer exists', isCorrect: false, misconceptionId: `${ENRS}:MC-ENERGY-USED-UP` },
+      { text: 'It is stored in the car, which now has more energy than before', isCorrect: false },
+    ],
+    correctValue: 'transformed and spread out as heat',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${ENRS}:MC-ENERGY-USED-UP`],
+    source: `${ENRS_SRC} — DB-2 item and MC-ENERGY-USED-UP trigger_signal`,
+  },
+  {
+    conceptId: ENRS,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A town plans to replace a coal power station with a large hydroelectric dam. Which statement is accurate?',
+    choices: [
+      { text: 'The dam burns no fuel and emits little while running, but it floods land behind it and affects the river and its fish', isCorrect: true },
+      { text: 'Because hydroelectricity is renewable, the dam has no environmental effects at all', isCorrect: false, misconceptionId: `${ENRS}:MC-RENEWABLE-MEANS-CLEAN` },
+      { text: 'A dam is non-renewable because the water is used up as it flows through the turbines', isCorrect: false, misconceptionId: `${ENRS}:MC-ENERGY-USED-UP` },
+    ],
+    correctValue: 'no fuel, but floods land and affects the river',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ENRS}:MC-RENEWABLE-MEANS-CLEAN`, `${ENRS}:MC-ENERGY-USED-UP`],
+    source: `${ENRS_SRC} — DB-3 comparison check and MC-RENEWABLE-MEANS-CLEAN conflict_evidence`,
+  },
+  {
+    conceptId: ENRS,
+    subjectSlug: 'physics',
+    probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A town runs entirely on solar panels. What problem does it face every night, and what kind of solution addresses it?',
+    choices: [
+      { text: 'The panels produce no electricity at night, so the town needs storage (such as batteries) or a backup source', isCorrect: true },
+      { text: 'No problem — renewable sources supply energy at all times', isCorrect: false, misconceptionId: `${ENRS}:MC-RENEWABLE-MEANS-CLEAN` },
+      { text: 'The panels use up the sunlight during the day, so it is gone at night', isCorrect: false, misconceptionId: `${ENRS}:MC-ENERGY-USED-UP` },
+    ],
+    correctValue: 'no output at night; storage or backup',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ENRS}:MC-RENEWABLE-MEANS-CLEAN`, `${ENRS}:MC-ENERGY-USED-UP`],
+    source: `${ENRS_SRC} — TA-5 P17 contrast and §8 P77 generate item`,
+  },
+]
+
+// ─── phys.wave.echo-and-sonar ────────────────────────────────────────────────
+const ECHO = 'phys.wave.echo-and-sonar'
+const ECHO_SRC = 'docs/curriculum/blueprints/phys.wave.echo-and-sonar.md'
+
+const ECHO_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ECHO,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'An echo is sound reflected from a surface back to where it started. Because sound travels at a definite speed, the delay of the echo measures distance — but the sound goes to the surface AND back. Clap 85 m in front of a large wall and the echo returns after 0.5 s: in that time sound at 340 m/s covers 170 m, the whole round trip, so the wall is at half that. In general 2d = vt, so d = vt/2: an echo from a cliff after 2 s means the cliff is 340 m away. You don\'t hear a separate echo in an ordinary room because the ear blends sounds that arrive less than about 0.1 s apart; for a distinct echo the round trip must be at least 344 × 0.1 ≈ 34 m, so the reflector must be at least about 17 m away. Ultrasound is sound with a frequency above about 20 kHz, the top of human hearing — too high in pitch to hear, not too loud. Its short wavelength gives a narrow beam that reflects well from small objects. SONAR sends ultrasonic pulses down from a ship; in sea water sound travels at about 1500 m/s, so an echo from the sea bed after 0.8 s means a depth of 1500 × 0.8 / 2 = 600 m. Bats hunt by the echoes of their calls, and doctors use ultrasound to image unborn babies because, unlike X-rays, it is not ionising.',
+    targetedMisconceptions: [`${ECHO}:MC-FORGET-ROUND-TRIP`, `${ECHO}:MC-ULTRASOUND-IS-LOUD`],
+    source: `${ECHO_SRC} — TA-1/TA-2 the clap and the wall, TA-3 SONAR, TA-4 minimum distance, TA-5 ultrasound`,
+  },
+  {
+    conceptId: ECHO,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The most common echo mistake is to use distance = speed × time. Test it: you stand 85 m from a wall and the echo comes back after 0.5 s. Speed × time is 340 × 0.5 = 170 m — twice the real distance. In those 0.5 s the sound went to the wall and came back, so the 170 m is the whole round trip and the wall is at half of it. Every echo method — sound, SONAR, radar — uses d = vt/2. A SONAR echo after 0.8 s at 1500 m/s means 600 m of water, not 1200 m. (A one-way signal is different: thunder heard 2 s after lightning means the storm is 680 m away, with no halving.) The second trap is the word "ultra". Ultrasound is not very loud sound. Blow a dog whistle softly or hard: either way you hear nothing, though a dog does. If loudness were the reason, blowing harder would make it audible. Loudness depends on a wave\'s amplitude; whether we can hear it at all depends on its frequency. Our ears respond from about 20 Hz to 20 kHz, and ultrasound lies above that range — beyond our hearing in pitch, whether it is strong or faint.',
+    targetedMisconceptions: [`${ECHO}:MC-FORGET-ROUND-TRIP`, `${ECHO}:MC-ULTRASOUND-IS-LOUD`],
+    source: `${ECHO_SRC} — MC-FORGET-ROUND-TRIP + MC-ULTRASOUND-IS-LOUD, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const ECHO_PROBES: SeedProbe[] = [
+  {
+    conceptId: ECHO,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A fishing boat\'s SONAR hears an echo from a fish shoal after 0.2 s and from the sea bed after 1.0 s. Sound travels at 1500 m/s in sea water. How deep are the shoal and the sea bed?',
+    choices: [
+      { text: 'Shoal 150 m, sea bed 750 m', isCorrect: true },
+      { text: 'Shoal 300 m, sea bed 1500 m', isCorrect: false, misconceptionId: `${ECHO}:MC-FORGET-ROUND-TRIP` },
+      { text: 'Shoal 75 m, sea bed 375 m', isCorrect: false },
+      { text: 'Shoal 7500 m, sea bed 1500 m', isCorrect: false },
+    ],
+    correctValue: 'shoal 150 m, sea bed 750 m',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ECHO}:MC-FORGET-ROUND-TRIP`],
+    source: `${ECHO_SRC} — §8 P76 transfer item (d = vt/2); 75/375 halves twice`,
+  },
+  {
+    conceptId: ECHO,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'You stand 10 m from a large wall and clap (sound travels at 340 m/s). Do you hear a distinct echo?',
+    choices: [
+      { text: 'No — the echo returns after about 0.06 s, less than the 0.1 s the ear needs to separate two sounds', isCorrect: true },
+      { text: 'Yes — every wall reflects sound, so there is always a distinct echo', isCorrect: false },
+      { text: 'Yes — it returns after about 0.6 s', isCorrect: false },
+      { text: 'No — sound does not reflect from walls closer than 17 m', isCorrect: false },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [],
+    source: `${ECHO_SRC} — §8 P75 boundary item (20 m / 340 m/s ≈ 0.06 s < 0.1 s)`,
+  },
+  {
+    conceptId: ECHO,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A ship sends a sound pulse down and hears the echo from the sea bed 0.8 s later. Sound travels at 1500 m/s in sea water. How deep is the sea?',
+    choices: [
+      { text: '600 m — the pulse travelled down and back, 1200 m in all, so the depth is half', isCorrect: true },
+      { text: '1200 m — distance equals speed × time', isCorrect: false, misconceptionId: `${ECHO}:MC-FORGET-ROUND-TRIP` },
+      { text: '1875 m — distance equals speed ÷ time', isCorrect: false },
+    ],
+    correctValue: '600 m',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${ECHO}:MC-FORGET-ROUND-TRIP`],
+    source: `${ECHO_SRC} — DB-2 item and MC-FORGET-ROUND-TRIP trigger_signal`,
+  },
+  {
+    conceptId: ECHO,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why can\'t people hear the ultrasonic calls a bat uses to find insects?',
+    choices: [
+      { text: 'Their frequency is above about 20 kHz, higher in pitch than human ears can detect', isCorrect: true },
+      { text: 'They are far too loud for human ears to register', isCorrect: false, misconceptionId: `${ECHO}:MC-ULTRASOUND-IS-LOUD` },
+      { text: 'They are far too quiet — ultrasound always has a tiny amplitude', isCorrect: false, misconceptionId: `${ECHO}:MC-ULTRASOUND-IS-LOUD` },
+    ],
+    correctValue: 'frequency above about 20 kHz',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ECHO}:MC-ULTRASOUND-IS-LOUD`],
+    source: `${ECHO_SRC} — DB-3 ultrasound check and MC-ULTRASOUND-IS-LOUD conflict_evidence`,
+  },
+  {
+    conceptId: ECHO,
+    subjectSlug: 'physics',
+    probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Lightning strikes and the thunder is heard 2 s later. Separately, a clap echoes back from a cliff after 2 s. Sound travels at 340 m/s. How far away are the lightning and the cliff?',
+    choices: [
+      { text: 'Lightning 680 m (one way); cliff 340 m (there and back)', isCorrect: true },
+      { text: 'Both 680 m — distance is speed × time', isCorrect: false, misconceptionId: `${ECHO}:MC-FORGET-ROUND-TRIP` },
+      { text: 'Both 340 m — always divide by two', isCorrect: false },
+    ],
+    correctValue: 'lightning 680 m, cliff 340 m',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ECHO}:MC-FORGET-ROUND-TRIP`],
+    source: `${ECHO_SRC} — MC-FORGET-ROUND-TRIP discrimination_pairs (echo vs one-way)`,
+  },
+]
+
 // Batch export spreads for the extension (kept with the concepts above).
 const PHYS_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...DENS_EXPLANATIONS,
@@ -52478,6 +52926,10 @@ const PHYS_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...SMCH_EXPLANATIONS,
   ...VARG_EXPLANATIONS,
   ...TERM_EXPLANATIONS,
+  ...NLOC_EXPLANATIONS,
+  ...BBRD_EXPLANATIONS,
+  ...ENRS_EXPLANATIONS,
+  ...ECHO_EXPLANATIONS,
 ]
 
 const PHYS_EXTENSION_PROBES: SeedProbe[] = [
@@ -52489,6 +52941,10 @@ const PHYS_EXTENSION_PROBES: SeedProbe[] = [
   ...SMCH_PROBES,
   ...VARG_PROBES,
   ...TERM_PROBES,
+  ...NLOC_PROBES,
+  ...BBRD_PROBES,
+  ...ENRS_PROBES,
+  ...ECHO_PROBES,
 ]
 
 // ─── Batch export ────────────────────────────────────────────────────────────

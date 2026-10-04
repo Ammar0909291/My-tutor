@@ -1,0 +1,413 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.therm.blackbody-radiation-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.therm.blackbody-radiation",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:9b069dcbbb6c21eba375a0dc6382eb642ca5ac118a6044bf4c7637f220be41e9",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.therm.blackbody-radiation.md": "sha256:6ce5a4cf6aa63cdc2d03a81a571700690a8cee27273c085792ca801d0f64cb60"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.therm.blackbody-radiation",
+    "name": "Blackbody Radiation: Stefan–Boltzmann and Wien",
+    "difficultyRaw": "proficient (3)",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "phys.therm.heat-transfer"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.therm.blackbody-radiation-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.therm.blackbody-radiation (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.therm.blackbody-radiation.md": "sha256:6ce5a4cf6aa63cdc2d03a81a571700690a8cee27273c085792ca801d0f64cb60"
+      },
+      "contentHash": "sha256:279a3ede230f7c274c8ad79346f0c5ae7d1414d41cab1311f9630c1275a65b64",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.therm.blackbody-radiation.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.blackbody-radiation.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.blackbody-radiation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.blackbody-radiation\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.blackbody-radiation.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.blackbody-radiation.md#TA-2 (addresses MC-BLACKBODY-LOOKS-BLACK)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.blackbody-radiation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.blackbody-radiation\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.blackbody-radiation.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.blackbody-radiation.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.blackbody-radiation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.blackbody-radiation\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.blackbody-radiation.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.blackbody-radiation.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.blackbody-radiation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.blackbody-radiation\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.blackbody-radiation.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.blackbody-radiation.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.blackbody-radiation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.blackbody-radiation\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.blackbody-radiation.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.blackbody-radiation.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.blackbody-radiation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.blackbody-radiation\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.blackbody-radiation.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.blackbody-radiation.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.blackbody-radiation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.blackbody-radiation\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.therm.blackbody-radiation/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "phys.therm.blackbody-radiation",
+      "title": "Learning Objective",
+      "content": "[Boundary statement]\nA student who achieves mastery demonstrates:\n1. Describes a blackbody as a perfect absorber and therefore the best possible emitter at every wavelength, and recognises that its spectrum depends only on its temperature — the Sun and a glowing coal are good approximations, whatever their colour looks like.\n2. Uses Wien's displacement law, λ_max T = b ≈ 2.9 × 10⁻³ m·K, with T in kelvin — the Sun (about 5800 K) peaks near 500 nm, a human body (310 K) near 9.4 μm in the infrared.\n3. Uses the Stefan–Boltzmann law, P = εσAT⁴ (σ = 5.67 × 10⁻⁸ W m⁻² K⁻⁴), and the net exchange P = εσA(T⁴ − T_s⁴): doubling the absolute temperature multiplies the radiated power by 16.\n\nA student who uses Celsius in T⁴, who expects twice the temperature to give twice the power, or who says \"a blackbody looks black so it cannot be the Sun\", has **NOT** achieved mastery — those errors break stellar temperatures, thermal imaging and the photon picture in modern physics.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.blackbody-radiation.md",
+        "startLine": 17,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.therm.blackbody-radiation/misconception/MC-LINEAR-IN-T",
+      "kind": "misconception",
+      "conceptId": "phys.therm.blackbody-radiation",
+      "title": "Radiated power is proportional to temperature (or Celsius can be used",
+      "content": "### MC-LINEAR-IN-T: \"Radiated power is proportional to temperature (or Celsius can be used)\"\ntrigger_signal: student expects doubling T to double the power, or substitutes Celsius into T⁴ or λ_max T.\nconflict_evidence [P28]: \"Heat a body from 27 °C to 54 °C. In Celsius it 'doubled'. In kelvin it went from 300 K to 327 K — 9 % hotter. Which one does the atom feel?\"\nbridge_text [P30]: \"Radiation depends on absolute temperature: at 0 K nothing radiates, so the scale must start there — kelvin. And the dependence is steep: P ∝ T⁴, so 300 K → 600 K multiplies the power by 2⁴ = 16.\"\nreplacement_text [P31]: \"Always convert to kelvin. Power ratio = (T₂/T₁)⁴; peak wavelength ratio = T₁/T₂.\"\ndiscrimination_pairs [P33]: [\"300 K → 600 K: power ×16, peak wavelength ×½\", \"27 °C → 54 °C: only 300 → 327 K, power ×1.41\"]\ns6_path: skip P28; compute 2 × 2 × 2 × 2 together, then convert one Celsius value to kelvin.",
+      "localKey": "MC-LINEAR-IN-T",
+      "language": "en",
+      "refs": [
+        "MC-LINEAR-IN-T"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.blackbody-radiation.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.therm.blackbody-radiation/misconception/MC-BLACKBODY-LOOKS-BLACK",
+      "kind": "misconception",
+      "conceptId": "phys.therm.blackbody-radiation",
+      "title": "A blackbody must look black",
+      "content": "### MC-BLACKBODY-LOOKS-BLACK: \"A blackbody must look black\"\ntrigger_signal: student refuses to treat the Sun, a furnace opening or a glowing coal as near-blackbodies because they are bright.\nconflict_evidence [P28]: \"A small hole in a closed box looks pitch black — no light that goes in comes out. Heat the box to 1500 K. Is the hole black now?\"\nbridge_text [P30]: \"No — it glows brighter than any other surface at that temperature. 'Black' means it absorbs everything that falls on it. Because good absorbers are good emitters, it also emits the most possible, with a spectrum set only by its temperature.\"\nreplacement_text [P31]: \"A blackbody is defined by perfect absorption, not by colour. Cold, it looks black; hot, it glows according to Wien and Stefan–Boltzmann. The Sun is close to one.\"\ndiscrimination_pairs [P33]: [\"a cold blackbody (looks black) vs a hot one (glows white-yellow, like the Sun)\", \"a polished silver surface (poor absorber, poor emitter) vs a matt black surface (good absorber, good emitter)\"]\ns6_path: skip P28; compare a black and a shiny can of hot water cooling — the black one cools faster.",
+      "localKey": "MC-BLACKBODY-LOOKS-BLACK",
+      "language": "en",
+      "refs": [
+        "MC-BLACKBODY-LOOKS-BLACK"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.blackbody-radiation.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.therm.blackbody-radiation/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.blackbody-radiation",
+      "title": "Colour Tells Temperature",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Colour Tells Temperature\",\"primitives\":[\"P01\",\"P04\",\"P05\",\"P06\",\"P14\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.blackbody-radiation.md",
+        "startLine": 11,
+        "endLine": 18
+      }
+    },
+    {
+      "assetId": "phys.therm.blackbody-radiation/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.blackbody-radiation",
+      "title": "The Ideal Emitter",
+      "content": "{\"id\":\"TA-2\",\"title\":\"The Ideal Emitter\",\"primitives\":[\"P02\",\"P13\",\"P17\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-BLACKBODY-LOOKS-BLACK\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-BLACKBODY-LOOKS-BLACK"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.blackbody-radiation.md",
+        "startLine": 18,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.therm.blackbody-radiation/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.blackbody-radiation",
+      "title": "Wien's Law",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Wien's Law\",\"primitives\":[\"P02\",\"P06\",\"P07\",\"P08\",\"P13\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.blackbody-radiation.md",
+        "startLine": 27,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "phys.therm.blackbody-radiation/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.blackbody-radiation",
+      "title": "Stefan–Boltzmann",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Stefan–Boltzmann\",\"primitives\":[\"P02\",\"P08\",\"P13\",\"P34\",\"P49\",\"P50\",\"P51\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.blackbody-radiation.md",
+        "startLine": 35,
+        "endLine": 43
+      }
+    },
+    {
+      "assetId": "phys.therm.blackbody-radiation/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.blackbody-radiation",
+      "title": "Net Exchange and You",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Net Exchange and You\",\"primitives\":[\"P02\",\"P13\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.blackbody-radiation.md",
+        "startLine": 43,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "phys.therm.blackbody-radiation/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.blackbody-radiation",
+      "title": "Formative Assessment",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Formative Assessment\",\"primitives\":[\"P02\",\"P35\",\"P49\",\"P51\",\"P55\",\"P79\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.blackbody-radiation.md",
+        "startLine": 49,
+        "endLine": 56
+      }
+    },
+    {
+      "assetId": "phys.therm.blackbody-radiation/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.blackbody-radiation",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P28\",\"P41\",\"P54\",\"P55\",\"P62\",\"P68\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.blackbody-radiation.md",
+        "startLine": 56,
+        "endLine": 98
+      }
+    },
+    {
+      "assetId": "phys.therm.blackbody-radiation/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.therm.blackbody-radiation",
+      "title": "Assessment Battery",
+      "content": "| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (classify) | \"27 °C → 327 °C: power ratio?\" | CORRECT = 16 (300 → 600 K) |\n| P74 (classify) | \"Red star or blue star hotter?\" | CORRECT = blue |\n| P75 (boundary) | \"Body at the same T as surroundings — net power?\" | CORRECT = zero (emits and absorbs equally) |\n| P76 (transfer) | \"Thermal camera in the dark\" | CORRECT = bodies at 310 K emit infrared peaking near 9 μm |\n| P77 (generate) | \"Temperature to peak at 10 μm\" | CORRECT = ≈ 290 K |\n| P78 (explain) | \"Why is a hole in a box a blackbody?\" | CORRECT = light entering is absorbed after many reflections |\n| P79 (predict) | \"Red vs blue star, same size — more power?\" | CORRECT = blue (higher T, T⁴) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.blackbody-radiation.md",
+        "startLine": 180,
+        "endLine": 192
+      }
+    },
+    {
+      "assetId": "phys.therm.blackbody-radiation/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.therm.blackbody-radiation",
+      "title": "Student State Matrix",
+      "content": "| State | Why here | Tell-tale behaviour | Protocol |\n|---|---|---|---|\n| S0 | Radiation known only as \"heat rays\" | No link between temperature and colour | Protocol A (Concrete) |\n| S1 | Laws recited without use | Writes σT⁴ but cannot predict the effect of doubling T | Protocol B (Counterexample-first) |\n| S2-LINEAR-IN-T | Power ∝ T, or Celsius used | \"Twice as hot, twice the power\"; plugs in 100 °C | Misconception Engine → then Protocol C |\n| S2-BLACKBODY-LOOKS-BLACK | Taken literally | \"A blackbody must look black; the Sun can't be one\" | Misconception Engine → then Protocol C |\n| S3 | Partial — Wien fine, Stefan not (or reverse) | Correct λ_max, wrong power ratio | Protocol C (Guided Questioning) |\n| S6 | Anxiety on powers of ten | Freezes at 10⁻³ and T⁴ | Protocol F (Low Pressure) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.blackbody-radiation.md",
+        "startLine": 27,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "phys.therm.blackbody-radiation/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.therm.blackbody-radiation",
+      "title": "Diagnostic Battery",
+      "content": "DB-1 (prior-exposure check):\n\"As an iron bar is heated in a furnace, how does its glow change?\"\n  No idea → S0. Enter Protocol A (Concrete).\n  \"Red, then orange, then white\" → DB-2.\n\nDB-2 (representation / misconception test):\n\"A star's surface temperature doubles. By what factor does the power it radiates per square metre change?\"\n  \"16 — power goes as T⁴\" → S3. Enter Protocol C.\n  \"16\" (no reason) → S1. Enter Protocol B.\n  \"2\" / computes with Celsius → SIGNAL:MISCONCEPTION:MC-LINEAR-IN-T. Enter Misconception Engine.\n  Pause → add S6 flag; Protocol F if anxious, otherwise Protocol A.\n\nDB-3 (name check — overlays):\n\"Is the Sun closer to a blackbody or to a mirror?\"\n  \"A blackbody — it absorbs almost everything that falls on it and emits a temperature spectrum\" → no flag.\n  \"A mirror / neither — it isn't black\" → add SIGNAL:MISCONCEPTION:MC-BLACKBODY-LOOKS-BLACK (repair at TA-2).\n  Confident and wrong on DB-2 → add S7 flag. Override to Protocol G.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-LINEAR-IN-T",
+        "MC-BLACKBODY-LOOKS-BLACK"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.blackbody-radiation.md",
+        "startLine": 38,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "phys.therm.blackbody-radiation/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.therm.blackbody-radiation",
+      "title": "Prerequisite Check",
+      "content": "PD-1 (for `phys.therm.heat-transfer`):\n\"Name the three ways heat moves, and which one works through a vacuum.\"\n  Cannot name radiation as the vacuum-crossing mode → flag PREREQ-GAP-HEAT-TRANSFER.\n  In-session minimum repair: one P06 (feeling the warmth of a fire across a gap, or sunlight through space) + one P34 (\"how does the Sun's heat reach us?\") then resume. If the three modes are absent, schedule a `phys.therm.heat-transfer` session (S4 route).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.blackbody-radiation.md",
+        "startLine": 58,
+        "endLine": 65
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

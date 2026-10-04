@@ -1,0 +1,413 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.therm.newtons-law-of-cooling-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.therm.newtons-law-of-cooling",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:a5114de09a5933ebfb9bf326ba9cbab33e4c376c36f65cee71aea277b5ff5e48",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.therm.newtons-law-of-cooling.md": "sha256:37849eca8b6fcdfb983996770b9bfc80282b11280418f26c3311c0ae42d89e9a"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.therm.newtons-law-of-cooling",
+    "name": "Newton's Law of Cooling",
+    "difficultyRaw": "proficient (3)",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "phys.therm.heat-transfer"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.therm.newtons-law-of-cooling-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.therm.newtons-law-of-cooling (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.therm.newtons-law-of-cooling.md": "sha256:37849eca8b6fcdfb983996770b9bfc80282b11280418f26c3311c0ae42d89e9a"
+      },
+      "contentHash": "sha256:e07eac348aecb6f73356063dd5f67f8da1cdf40760dd5552c8c0c693fb8e05c3",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.therm.newtons-law-of-cooling.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.newtons-law-of-cooling.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.newtons-law-of-cooling"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.newtons-law-of-cooling\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.newtons-law-of-cooling.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.newtons-law-of-cooling.md#TA-2 (addresses MC-TEMPERATURE-NOT-DIFFERENCE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.newtons-law-of-cooling"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.newtons-law-of-cooling\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.newtons-law-of-cooling.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.newtons-law-of-cooling.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.newtons-law-of-cooling"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.newtons-law-of-cooling\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.newtons-law-of-cooling.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.newtons-law-of-cooling.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.newtons-law-of-cooling"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.newtons-law-of-cooling\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.newtons-law-of-cooling.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.newtons-law-of-cooling.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.newtons-law-of-cooling"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.newtons-law-of-cooling\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.newtons-law-of-cooling.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.newtons-law-of-cooling.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.newtons-law-of-cooling"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.newtons-law-of-cooling\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.newtons-law-of-cooling.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.newtons-law-of-cooling.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.newtons-law-of-cooling"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.newtons-law-of-cooling\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.therm.newtons-law-of-cooling/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "phys.therm.newtons-law-of-cooling",
+      "title": "Learning Objective",
+      "content": "[Boundary statement]\nA student who achieves mastery demonstrates:\n1. States that, for small temperature differences, a body's rate of cooling is proportional to the difference between its temperature and its surroundings': dT/dt = −k(T − T_s) — not to its temperature alone.\n2. Predicts the shape of a cooling curve: fast at first, slower and slower, approaching the room temperature without crossing it; equal times give equal FRACTIONS of the excess temperature (T − T_s = (T₀ − T_s)e^(−kt)).\n3. Solves the standard problem with the average-rate form, (T₁ − T₂)/t = k[(T₁ + T₂)/2 − T_s] — e.g. a body cooling from 80 °C to 60 °C in 10 min in a 20 °C room needs about 17 min to cool from 60 °C to 40 °C (16.7 min by the average form, 17.1 min exactly).\n\nA student who expects each 20 °C drop to take the same 10 minutes, or who says a 50 °C body cools just as fast in a 40 °C room as in a 0 °C room, has **NOT** achieved mastery — both lose the idea that the temperature DIFFERENCE drives heat flow, which every later heat-transfer and thermodynamics problem depends on.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.newtons-law-of-cooling.md",
+        "startLine": 17,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.therm.newtons-law-of-cooling/misconception/MC-CONSTANT-RATE",
+      "kind": "misconception",
+      "conceptId": "phys.therm.newtons-law-of-cooling",
+      "title": "A hot body cools at a steady rate",
+      "content": "### MC-CONSTANT-RATE: \"A hot body cools at a steady rate\"\ntrigger_signal: student predicts equal times for equal temperature drops, or draws a straight-line cooling graph.\nconflict_evidence [P28]: \"If the tea kept losing 20 °C every 10 minutes, where would it be after 40 minutes? After an hour?\"\nbridge_text [P30]: \"It would end up colder than the room — at 0 °C, then −40 °C — which never happens. Heat flows only because the tea is hotter than the room; as that difference shrinks, the flow slows.\"\nreplacement_text [P31]: \"Rate of cooling ∝ (T − T_s). Equal times give equal FRACTIONS of the excess temperature, so each degree takes longer than the last, and the body approaches room temperature without crossing it.\"\ndiscrimination_pairs [P33]: [\"80 → 60 °C (excess 60 → 40, fast) vs 60 → 40 °C (excess 40 → 20, slower)\", \"steady straight-line fall (impossible) vs flattening curve (observed)\"]\ns6_path: skip P28; read the measured table together and subtract successive readings.",
+      "localKey": "MC-CONSTANT-RATE",
+      "language": "en",
+      "refs": [
+        "MC-CONSTANT-RATE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.newtons-law-of-cooling.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.therm.newtons-law-of-cooling/misconception/MC-TEMPERATURE-NOT-DIFFERENCE",
+      "kind": "misconception",
+      "conceptId": "phys.therm.newtons-law-of-cooling",
+      "title": "The cooling rate depends only on how hot the body is",
+      "content": "### MC-TEMPERATURE-NOT-DIFFERENCE: \"The cooling rate depends only on how hot the body is\"\ntrigger_signal: student says a body at a given temperature cools equally fast in any surroundings.\nconflict_evidence [P28]: \"A cup at 50 °C in a room at 50 °C. Does it cool at all?\"\nbridge_text [P30]: \"No — with no temperature difference, no heat flows. So the room temperature must matter: what drives cooling is how much hotter the cup is than its surroundings.\"\nreplacement_text [P31]: \"Compare cooling rates by T − T_s: a 50 °C cup cools five times faster at first in a 0 °C room (excess 50) than in a 40 °C room (excess 10).\"\ndiscrimination_pairs [P33]: [\"50 °C in a 0 °C room (excess 50) vs 50 °C in a 40 °C room (excess 10)\", \"a 90 °C cup in a 70 °C room vs a 40 °C cup in a 20 °C room: the same initial rate (same excess)\"]\ns6_path: skip P28; two thermometers, one in ice water and one in warm water, both starting from a hand-warm 35 °C.",
+      "localKey": "MC-TEMPERATURE-NOT-DIFFERENCE",
+      "language": "en",
+      "refs": [
+        "MC-TEMPERATURE-NOT-DIFFERENCE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.newtons-law-of-cooling.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.therm.newtons-law-of-cooling/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.newtons-law-of-cooling",
+      "title": "The Cooling Curve",
+      "content": "{\"id\":\"TA-1\",\"title\":\"The Cooling Curve\",\"primitives\":[\"P01\",\"P04\",\"P05\",\"P06\",\"P14\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.newtons-law-of-cooling.md",
+        "startLine": 11,
+        "endLine": 18
+      }
+    },
+    {
+      "assetId": "phys.therm.newtons-law-of-cooling/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.newtons-law-of-cooling",
+      "title": "The Difference Drives the Flow",
+      "content": "{\"id\":\"TA-2\",\"title\":\"The Difference Drives the Flow\",\"primitives\":[\"P02\",\"P06\",\"P08\",\"P13\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-TEMPERATURE-NOT-DIFFERENCE\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-TEMPERATURE-NOT-DIFFERENCE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.newtons-law-of-cooling.md",
+        "startLine": 18,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.therm.newtons-law-of-cooling/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.newtons-law-of-cooling",
+      "title": "Equal Times, Equal Fractions",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Equal Times, Equal Fractions\",\"primitives\":[\"P02\",\"P13\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.newtons-law-of-cooling.md",
+        "startLine": 27,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "phys.therm.newtons-law-of-cooling/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.newtons-law-of-cooling",
+      "title": "The Average-Rate Method",
+      "content": "{\"id\":\"TA-4\",\"title\":\"The Average-Rate Method\",\"primitives\":[\"P02\",\"P13\",\"P34\",\"P49\",\"P50\",\"P51\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.newtons-law-of-cooling.md",
+        "startLine": 33,
+        "endLine": 40
+      }
+    },
+    {
+      "assetId": "phys.therm.newtons-law-of-cooling/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.newtons-law-of-cooling",
+      "title": "Where the Law Holds",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Where the Law Holds\",\"primitives\":[\"P02\",\"P17\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.newtons-law-of-cooling.md",
+        "startLine": 40,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.therm.newtons-law-of-cooling/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.newtons-law-of-cooling",
+      "title": "Formative Assessment",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Formative Assessment\",\"primitives\":[\"P02\",\"P35\",\"P49\",\"P51\",\"P55\",\"P79\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.newtons-law-of-cooling.md",
+        "startLine": 45,
+        "endLine": 52
+      }
+    },
+    {
+      "assetId": "phys.therm.newtons-law-of-cooling/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.newtons-law-of-cooling",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P28\",\"P41\",\"P54\",\"P55\",\"P62\",\"P68\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.newtons-law-of-cooling.md",
+        "startLine": 52,
+        "endLine": 94
+      }
+    },
+    {
+      "assetId": "phys.therm.newtons-law-of-cooling/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.therm.newtons-law-of-cooling",
+      "title": "Assessment Battery",
+      "content": "| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (classify) | \"Excess 40 → 20 °C in 8 min; 20 → 10 °C?\" | CORRECT = 8 min (equal fractions) |\n| P74 (classify) | \"50 °C cup, 0 °C vs 40 °C room — initial rate ratio?\" | CORRECT = 5 : 1 |\n| P75 (boundary) | \"Object at room temperature — rate?\" | CORRECT = zero |\n| P76 (transfer) | \"Forensic estimate of time since death\" | CORRECT = the known cooling curve of a body toward room temperature |\n| P77 (generate) | \"Curves in 0 °C and 20 °C rooms\" | CORRECT = both flatten, toward 0 and 20 °C; the 0 °C curve falls faster |\n| P78 (explain) | \"Why does the second drop take longer?\" | CORRECT = smaller excess, slower heat flow |\n| P79 (predict) | \"Room at 30 °C — faster or slower from 80 °C?\" | CORRECT = slower (excess 50 instead of 60) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.newtons-law-of-cooling.md",
+        "startLine": 176,
+        "endLine": 188
+      }
+    },
+    {
+      "assetId": "phys.therm.newtons-law-of-cooling/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.therm.newtons-law-of-cooling",
+      "title": "Student State Matrix",
+      "content": "| State | Why here | Tell-tale behaviour | Protocol |\n|---|---|---|---|\n| S0 | Has never looked at a cooling curve | Assumes things cool \"steadily\" | Protocol A (Concrete) |\n| S1 | Formula without the curve | Writes dT/dt = −k(T − T_s) but draws a straight line | Protocol B (Counterexample-first) |\n| S2-CONSTANT-RATE | Cooling at a fixed rate | \"It lost 20 °C in 10 min, so 60 → 40 also takes 10 min\" | Misconception Engine → then Protocol C |\n| S2-TEMPERATURE-NOT-DIFFERENCE | Rate set by how hot the body is | \"A 50 °C cup cools at the same rate in any room\" | Misconception Engine → then Protocol C |\n| S3 | Partial — curve shape fine, calculation not | Correct sketch, cannot set up the average form | Protocol C (Guided Questioning) |\n| S6 | Anxiety on exponentials | Freezes at e^(−kt) | Protocol F (Low Pressure) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.newtons-law-of-cooling.md",
+        "startLine": 27,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "phys.therm.newtons-law-of-cooling/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.therm.newtons-law-of-cooling",
+      "title": "Diagnostic Battery",
+      "content": "DB-1 (prior-exposure check):\n\"Have you watched how quickly a hot drink cools — fastest at the start, or at the same speed throughout?\"\n  No idea → S0. Enter Protocol A (Concrete).\n  Answers → DB-2.\n\nDB-2 (representation / misconception test):\n\"Tea cools from 80 °C to 60 °C in 10 minutes in a 20 °C room. Will it take more, less or the same time to cool from 60 °C to 40 °C? Why?\"\n  \"More — it is closer to room temperature, so it loses heat more slowly\" → S3. Enter Protocol C.\n  \"More\" (no reason) → S1. Enter Protocol B.\n  \"The same, 10 minutes\" → SIGNAL:MISCONCEPTION:MC-CONSTANT-RATE. Enter Misconception Engine.\n  Pause → add S6 flag; Protocol F if anxious, otherwise Protocol A.\n\nDB-3 (surroundings check — overlays):\n\"Two identical cups at 50 °C, one in a 40 °C room and one in a 0 °C room. Which cools faster at first?\"\n  \"The one in the 0 °C room\" → no flag.\n  \"The same — both are at 50 °C\" → add SIGNAL:MISCONCEPTION:MC-TEMPERATURE-NOT-DIFFERENCE (repair at TA-2).\n  Confident and wrong on DB-2 → add S7 flag. Override to Protocol G.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-CONSTANT-RATE",
+        "MC-TEMPERATURE-NOT-DIFFERENCE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.newtons-law-of-cooling.md",
+        "startLine": 38,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "phys.therm.newtons-law-of-cooling/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.therm.newtons-law-of-cooling",
+      "title": "Prerequisite Check",
+      "content": "PD-1 (for `phys.therm.heat-transfer`):\n\"Heat flows between two bodies — in which direction, and what makes the flow stop?\"\n  Cannot say \"from hotter to colder, until they reach the same temperature\" → flag PREREQ-GAP-HEAT-TRANSFER.\n  In-session minimum repair: one P06 (a hot and a cold block in contact, thermometers in each) + one P34 (\"when do the readings stop changing?\") then resume. If heat flow down a temperature difference is absent, schedule a `phys.therm.heat-transfer` session (S4 route).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.newtons-law-of-cooling.md",
+        "startLine": 58,
+        "endLine": 65
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
