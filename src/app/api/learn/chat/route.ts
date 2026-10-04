@@ -13610,6 +13610,23 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         }
       }
 
+      // NUMERIC FACT-CHECK, STEP 3 — SHADOW, N1 + N2 ONLY
+      // (factCheckNumericShadow.ts). Re-checks the served reply's own
+      // arithmetic and "N times more" claims and LOGS the result; servedText is
+      // only read. N3 is not reachable from this module. One line per served
+      // reply so the flag rate has a denominator. NUMERIC_FACT_CHECK_MODE=off
+      // disables it; there is no serve mode.
+      if (servedText.trim()) {
+        try {
+          const ns = await import('@/lib/teaching/factCheckNumericShadow')
+          if (ns.numericFactCheckMode() === 'shadow') {
+            console.log('[numeric-fact-check] ' + JSON.stringify(ns.numericShadowRecord(servedText, resolvedConceptId ?? null)))
+          }
+        } catch (err) {
+          console.warn('[numeric-fact-check] skipped:', err)
+        }
+      }
+
       // SAVE ONCE (plan §4 Phase 1 step 5): the stored row is exactly what was
       // shown. The row is written mid-turn and the reply can still change after
       // it — the late repairs above, and the assembled turn in serve mode — so
