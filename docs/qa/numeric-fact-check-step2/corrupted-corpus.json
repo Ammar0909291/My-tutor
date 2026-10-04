@@ -1,0 +1,2257 @@
+[
+ {
+  "id": "0c7af7f353",
+  "file": "biologyDepthSeedAssets.ts",
+  "conceptId": "bio.mol.nucleic-acid-structure",
+  "matchedLhs": "22% each, so %G + %C ",
+  "originalValue": "56",
+  "corruptedValue": "76.7",
+  "replaceLandedAtMatch": true,
+  "original": "28% — %A = %T = 22% each, so %G + %C = 56%, split equally between G and C",
+  "corrupted": "28% — %A = %T = 22% each, so %G + %C = 76.7%, split equally between G and C",
+  "excerpt": "28% — %A = %T = 22% each, so %G + %C = 76.7%, split equally between G and C",
+  "caughtN1": false,
+  "caughtAny": false,
+  "flags": []
+ },
+ {
+  "id": "e256adeac2",
+  "file": "biologyExtensionSeedAssets.ts",
+  "conceptId": "bio.eco.population-growth-models-quantitative",
+  "matchedLhs": "1 - N/K), a population has N ",
+  "originalValue": "0.9",
+  "corruptedValue": "1.23",
+  "replaceLandedAtMatch": true,
+  "original": "In the logistic model dN/dt = rN(1 - N/K), a population has N = 0.9K. What does this predict about its current growth rate?",
+  "corrupted": "In the logistic model dN/dt = rN(1 - N/K), a population has N = 1.23K. What does this predict about its current growth rate?",
+  "excerpt": "In the logistic model dN/dt = rN(1 - N/K), a population has N = 1.23K. What does this predict about its current growth rate?",
+  "caughtN1": false,
+  "caughtAny": false,
+  "flags": []
+ },
+ {
+  "id": "4840157294",
+  "file": "biologyExtensionSeedAssets.ts",
+  "conceptId": "bio.eco.population-growth-models-quantitative",
+  "matchedLhs": "1 - N/K) is close to 0 at N ",
+  "originalValue": "0.9",
+  "corruptedValue": "1.23",
+  "replaceLandedAtMatch": true,
+  "original": "Much lower than at low N, since (1 - N/K) is close to 0 at N = 0.9K",
+  "corrupted": "Much lower than at low N, since (1 - N/K) is close to 0 at N = 1.23K",
+  "excerpt": "Much lower than at low N, since (1 - N/K) is close to 0 at N = 1.23K",
+  "caughtN1": false,
+  "caughtAny": false,
+  "flags": []
+ },
+ {
+  "id": "dff510d5e5",
+  "file": "biologySeedAssets.ts",
+  "conceptId": "bio.gen.population-genetics",
+  "matchedLhs": "1 (allele frequencies); p² + 2pq + q² ",
+  "originalValue": "1",
+  "corruptedValue": "1.37",
+  "replaceLandedAtMatch": true,
+  "original": "Population genetics studies allele and genotype frequencies in populations and how they change over time. Hardy-Weinberg equilibrium (HWE): in a non-evolving population (large, random mating, no selection/mutation/migration/genetic drift), allele frequencies remain constant across generations. Equations: p + q = 1 (allele frequencies); p² + 2pq + q² = 1 (genotype frequencies — p² = homozygous dominant, 2pq = heterozygous, q² = homozygous recessive). HWE is used to: (1) calculate carrier frequency for recessive diseases from disease incidence; (2) test whether a population IS evolving (deviation from HWE = one of the assumptions violated). Forces that change allele frequencies: Natural selection, Mutation, Gene flow (migration), Genetic drift (random sampling — most powerful in small populations: bottleneck effect, founder effect). Modern synthesis: evolution = change in allele frequencies across generations.",
+  "corrupted": "Population genetics studies allele and genotype frequencies in populations and how they change over time. Hardy-Weinberg equilibrium (HWE): in a non-evolving population (large, random mating, no selection/mutation/migration/genetic drift), allele frequencies remain constant across generations. Equations: p + q = 1.37 (allele frequencies); p² + 2pq + q² = 1 (genotype frequencies — p² = homozygous dominant, 2pq = heterozygous, q² = homozygous recessive). HWE is used to: (1) calculate carrier frequency for recessive diseases from disease incidence; (2) test whether a population IS evolving (deviation from HWE = one of the assumptions violated). Forces that change allele frequencies: Natural selection, Mutation, Gene flow (migration), Genetic drift (random sampling — most powerful in small populations: bottleneck effect, founder effect). Modern synthesis: evolution = change in allele frequencies across generations.",
+  "excerpt": "selection/mutation/migration/genetic drift), allele frequencies remain constant across generations. Equations: p + q = 1.37 (allele frequencies); p² + 2pq + q² = 1 (genotype frequencies — p² = homozyg",
+  "caughtN1": false,
+  "caughtAny": false,
+  "flags": []
+ },
+ {
+  "id": "abe771d869",
+  "file": "chemistryDepthSeedAssets.ts",
+  "conceptId": "chem.anal.gravimetric",
+  "matchedLhs": "1.435/143.5 ",
+  "originalValue": "0.0100",
+  "corruptedValue": "0.0137",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/chem.anal.gravimetric.md — Misconception Registry; n = m/M = 1.435/143.5 = 0.0100 mol, and AgCl carries one chloride per formula unit so the ratio is 1:1 — the whole method depends on that stoichiometric link being stated rather than assumed (probe-depth set, chemistry 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/chem.anal.gravimetric.md — Misconception Registry; n = m/M = 1.435/143.5 = 0.0137 mol, and AgCl carries one chloride per formula unit so the ratio is 1:1 — the whole method depends on that stoichiometric link being stated rather than assumed (probe-depth set, chemistry 2026-08-30)",
+  "excerpt": "docs/curriculum/blueprints/chem.anal.gravimetric.md — Misconception Registry; n = m/M = 1.435/143.5 = 0.0137 mol, and AgCl carries one chloride per formula unit so the ratio is 1:1 — the",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "0.0137 mol",
+    "expected": "0.01",
+    "sentence": "md — Misconception Registry; n = m/M = 1.435/143.5 = 0.0137 mol, and AgCl carries one chloride per formula unit so the ratio is 1:1 — the whole method depends on that stoichiometric link being stated rather than assumed (probe-depth set, chemistry 2026-08-30)",
+    "detail": "3 tokens evaluate to 0.01, stated 0.014"
+   }
+  ]
+ },
+ {
+  "id": "5c04e5a50b",
+  "file": "chemistryDepthSeedAssets.ts",
+  "conceptId": "chem.anal.volumetric",
+  "matchedLhs": "0.0200 × 0.100 ",
+  "originalValue": "2.00",
+  "corruptedValue": "2.74",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/chem.anal.volumetric.md — Misconception Registry; moles of acid = 0.0200 × 0.100 = 2.00e-3, in 0.0250 dm³ of alkali gives 0.0800 mol/dm³. The LARGER volume must hold the LOWER concentration, which is the sanity check that catches the inverted ratio (probe-depth set, chemistry 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/chem.anal.volumetric.md — Misconception Registry; moles of acid = 0.0200 × 0.100 = 2.74e-3, in 0.0250 dm³ of alkali gives 0.0800 mol/dm³. The LARGER volume must hold the LOWER concentration, which is the sanity check that catches the inverted ratio (probe-depth set, chemistry 2026-08-30)",
+  "excerpt": "docs/curriculum/blueprints/chem.anal.volumetric.md — Misconception Registry; moles of acid = 0.0200 × 0.100 = 2.74e-3, in 0.0250 dm³ of alkali gives 0.0800 mol/dm³. The LARGER volume must hold",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "2.74e-3",
+    "expected": "0.002",
+    "sentence": "md — Misconception Registry; moles of acid = 0.0200 × 0.100 = 2.74e-3, in 0.0250 dm³ of alkali gives 0.0800 mol/dm³.",
+    "detail": "3 tokens evaluate to 0.002, stated 0.003"
+   }
+  ]
+ },
+ {
+  "id": "c9e858154e",
+  "file": "chemistryDepthSeedAssets.ts",
+  "conceptId": "chem.atomic.bohr-model",
+  "matchedLhs": "13.6/n² eV. What is the energy of the n ",
+  "originalValue": "2",
+  "corruptedValue": "2.74",
+  "replaceLandedAtMatch": true,
+  "original": "The ground state of hydrogen lies at −13.6 eV, and level energies go as −13.6/n² eV. What is the energy of the n = 2 level?",
+  "corrupted": "The ground state of hydrogen lies at −13.6 eV, and level energies go as −13.6/n² eV. What is the energy of the n = 2.74 level?",
+  "excerpt": "The ground state of hydrogen lies at −13.6 eV, and level energies go as −13.6/n² eV. What is the energy of the n = 2.74 level?",
+  "caughtN1": false,
+  "caughtAny": false,
+  "flags": []
+ },
+ {
+  "id": "547df3ae77",
+  "file": "chemistryDepthSeedAssets.ts",
+  "conceptId": "chem.atomic.photoelectric-effect",
+  "matchedLhs": "5.0 − 3.0 ",
+  "originalValue": "2.0",
+  "corruptedValue": "2.74",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/chem.atomic.photoelectric-effect.md — Misconception Registry; KE_max = hf − φ = 5.0 − 3.0 = 2.0 eV. The 5.0 eV option ignores the escape cost entirely, which is exactly what the work function exists to charge (probe-depth set, chemistry 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/chem.atomic.photoelectric-effect.md — Misconception Registry; KE_max = hf − φ = 5.0 − 3.0 = 2.74 eV. The 5.0 eV option ignores the escape cost entirely, which is exactly what the work function exists to charge (probe-depth set, chemistry 2026-08-30)",
+  "excerpt": "ocs/curriculum/blueprints/chem.atomic.photoelectric-effect.md — Misconception Registry; KE_max = hf − φ = 5.0 − 3.0 = 2.74 eV. The 5.0 eV option ignores the escape cost entirely, which is exactly what",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "2.74 eV",
+    "expected": "2",
+    "sentence": "md — Misconception Registry; KE_max = hf − φ = 5.0 − 3.0 = 2.74 eV.",
+    "detail": "3 tokens evaluate to 2, stated 2.74"
+   }
+  ]
+ },
+ {
+  "id": "46c02948fd",
+  "file": "chemistryDepthSeedAssets.ts",
+  "conceptId": "chem.bond.resonance",
+  "matchedLhs": "1 + 1 + 2)/3 ",
+  "originalValue": "4",
+  "corruptedValue": "5.48",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/chem.bond.resonance.md — Misconception Registry; (1 + 1 + 2)/3 = 4/3: all three bonds are IDENTICAL and intermediate, which is why the ion has three equal bond lengths. The 1.5 option is the benzene answer, correct for two resonance forms and not three (probe-depth set, chemistry 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/chem.bond.resonance.md — Misconception Registry; (1 + 1 + 2)/3 = 5.48/3: all three bonds are IDENTICAL and intermediate, which is why the ion has three equal bond lengths. The 1.5 option is the benzene answer, correct for two resonance forms and not three (probe-depth set, chemistry 2026-08-30)",
+  "excerpt": "docs/curriculum/blueprints/chem.bond.resonance.md — Misconception Registry; (1 + 1 + 2)/3 = 5.48/3: all three bonds are IDENTICAL and intermediate, which is why the ion has",
+  "caughtN1": false,
+  "caughtAny": false,
+  "flags": []
+ },
+ {
+  "id": "d677a9549c",
+  "file": "chemistryDepthSeedAssets.ts",
+  "conceptId": "chem.elect.conductance",
+  "matchedLhs": "1.00e-4 mol cm⁻³, so 0.0100 / 1.00e-4 ",
+  "originalValue": "100",
+  "corruptedValue": "137",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/chem.elect.conductance.md — Misconception Registry; 0.100 mol dm⁻³ is 1.00e-4 mol cm⁻³, so 0.0100 / 1.00e-4 = 100 S cm² mol⁻¹. The unit conversion is the whole difficulty, and skipping it is out by a factor of a thousand (probe-depth set, chemistry 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/chem.elect.conductance.md — Misconception Registry; 0.100 mol dm⁻³ is 1.00e-4 mol cm⁻³, so 0.0100 / 1.00e-4 = 137 S cm² mol⁻¹. The unit conversion is the whole difficulty, and skipping it is out by a factor of a thousand (probe-depth set, chemistry 2026-08-30)",
+  "excerpt": "ueprints/chem.elect.conductance.md — Misconception Registry; 0.100 mol dm⁻³ is 1.00e-4 mol cm⁻³, so 0.0100 / 1.00e-4 = 137 S cm² mol⁻¹. The unit conversion is the whole difficulty, and skipping it is ",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "137",
+    "expected": "100",
+    "sentence": "md — Misconception Registry; 0.100 mol dm⁻³ is 1.00e-4 mol cm⁻³, so 0.0100 / 1.00e-4 = 137 S cm² mol⁻¹.",
+    "detail": "3 tokens evaluate to 100, stated 137"
+   }
+  ]
+ },
+ {
+  "id": "6418753a46",
+  "file": "chemistryDepthSeedAssets.ts",
+  "conceptId": "chem.equil.kw-ph",
+  "matchedLhs": "9, and pH + pOH ",
+  "originalValue": "14",
+  "corruptedValue": "19.2",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/chem.equil.kw-ph.md — Misconception Registry; pH = −log[H⁺] = 9, and pH + pOH = 14 at 25 °C gives pOH = 5. The negative-pH option drops the minus sign in the definition, which is what makes every pH come out inverted (probe-depth set, chemistry 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/chem.equil.kw-ph.md — Misconception Registry; pH = −log[H⁺] = 9, and pH + pOH = 19.2 at 25 °C gives pOH = 5. The negative-pH option drops the minus sign in the definition, which is what makes every pH come out inverted (probe-depth set, chemistry 2026-08-30)",
+  "excerpt": "docs/curriculum/blueprints/chem.equil.kw-ph.md — Misconception Registry; pH = −log[H⁺] = 9, and pH + pOH = 19.2 at 25 °C gives pOH = 5. The negative-pH option drops the minus sign in the d",
+  "caughtN1": false,
+  "caughtAny": false,
+  "flags": []
+ },
+ {
+  "id": "ae42f06d93",
+  "file": "chemistryDepthSeedAssets.ts",
+  "conceptId": "chem.equil.le-chatelier",
+  "matchedLhs": "1 + 3 ",
+  "originalValue": "4",
+  "corruptedValue": "5.48",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/chem.equil.le-chatelier.md — Misconception Registry; 1 + 3 = 4 against 2 — the last option counts only the hydrogen and forgets the nitrogen, which still gives the right DIRECTION for the wrong reason and so cannot be told apart without the count (probe-depth set, chemistry 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/chem.equil.le-chatelier.md — Misconception Registry; 1 + 3 = 5.48 against 2 — the last option counts only the hydrogen and forgets the nitrogen, which still gives the right DIRECTION for the wrong reason and so cannot be told apart without the count (probe-depth set, chemistry 2026-08-30)",
+  "excerpt": "docs/curriculum/blueprints/chem.equil.le-chatelier.md — Misconception Registry; 1 + 3 = 5.48 against 2 — the last option counts only the hydrogen and forgets the nitrog",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "5.48",
+    "expected": "4",
+    "sentence": "md — Misconception Registry; 1 + 3 = 5.48 against 2 — the last option counts only the hydrogen and forgets the nitrogen, which still gives the right DIRECTION for the wrong reason and so cannot be told apart without the count (probe-depth set, chemistry 2026-08-30)",
+    "detail": "3 tokens evaluate to 4, stated 5.48"
+   }
+  ]
+ },
+ {
+  "id": "489afd9c4c",
+  "file": "chemistryDepthSeedAssets.ts",
+  "conceptId": "chem.kinet.integrated-rate",
+  "matchedLhs": "1/2)³ ",
+  "originalValue": "1",
+  "corruptedValue": "1.37",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/chem.kinet.integrated-rate.md — Misconception Registry; three half-lives HALVE three times, giving (1/2)³ = 1/8 — the one-third option treats the decay as linear, which is the same error that makes learners expect a reaction to finish, and first-order decay never does (probe-depth set, chemistry 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/chem.kinet.integrated-rate.md — Misconception Registry; three half-lives HALVE three times, giving (1/2)³ = 1.37/8 — the one-third option treats the decay as linear, which is the same error that makes learners expect a reaction to finish, and first-order decay never does (probe-depth set, chemistry 2026-08-30)",
+  "excerpt": "blueprints/chem.kinet.integrated-rate.md — Misconception Registry; three half-lives HALVE three times, giving (1/2)³ = 1.37/8 — the one-third option treats the decay as linear, which is the same error",
+  "caughtN1": false,
+  "caughtAny": false,
+  "flags": []
+ },
+ {
+  "id": "b357ae3cc2",
+  "file": "chemistryDepthSeedAssets.ts",
+  "conceptId": "chem.dblock.lanthanides",
+  "matchedLhs": "3, giving 2l + 1 ",
+  "originalValue": "7",
+  "corruptedValue": "9.59",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/chem.dblock.lanthanides.md — Misconception Registry; f has l = 3, giving 2l + 1 = 7 orbitals — and 14 electrons is exactly why the lanthanide series is 14 elements long, so the length of the series stops being a fact to memorise; \"five and ten\" is the d subshell answer (probe-depth set, chemistry 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/chem.dblock.lanthanides.md — Misconception Registry; f has l = 3, giving 2l + 1 = 9.59 orbitals — and 14 electrons is exactly why the lanthanide series is 14 elements long, so the length of the series stops being a fact to memorise; \"five and ten\" is the d subshell answer (probe-depth set, chemistry 2026-08-30)",
+  "excerpt": "docs/curriculum/blueprints/chem.dblock.lanthanides.md — Misconception Registry; f has l = 3, giving 2l + 1 = 9.59 orbitals — and 14 electrons is exactly why the lanthanide series is 14 elem",
+  "caughtN1": false,
+  "caughtAny": false,
+  "flags": []
+ },
+ {
+  "id": "d6604e74e8",
+  "file": "chemistryDepthSeedAssets.ts",
+  "conceptId": "chem.dblock.organometallics",
+  "matchedLhs": "8 + 5 × 2 ",
+  "originalValue": "18",
+  "corruptedValue": "24.7",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/chem.dblock.organometallics.md — Misconception Registry; 8 + 5 × 2 = 18, and the count landing on 18 for BOTH Ni(CO)₄ and Fe(CO)₅ despite different metals and different ligand numbers is what makes the rule predictive rather than coincidental — the concept's existing probe does the Ni case, and the gate never re-asks a spent probe (probe-depth set, chemistry 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/chem.dblock.organometallics.md — Misconception Registry; 8 + 5 × 2 = 24.7, and the count landing on 18 for BOTH Ni(CO)₄ and Fe(CO)₅ despite different metals and different ligand numbers is what makes the rule predictive rather than coincidental — the concept's existing probe does the Ni case, and the gate never re-asks a spent probe (probe-depth set, chemistry 2026-08-30)",
+  "excerpt": "docs/curriculum/blueprints/chem.dblock.organometallics.md — Misconception Registry; 8 + 5 × 2 = 24.7, and the count landing on 18 for BOTH Ni(CO)₄ and Fe(CO)₅ despite different",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "24.7",
+    "expected": "18",
+    "sentence": "md — Misconception Registry; 8 + 5 × 2 = 24.7, and the count landing on 18 for BOTH Ni(CO)₄ and Fe(CO)₅ despite different metals and different ligand numbers is what makes the rule predictive rather than coincidental — the concept's existing probe does the Ni case, and the gate never re-asks a spent",
+    "detail": "5 tokens evaluate to 18, stated 24.7"
+   }
+  ]
+ },
+ {
+  "id": "3b6ea8e0bf",
+  "file": "chemistryDepthSeedAssets.ts",
+  "conceptId": "chem.org.pericyclic",
+  "matchedLhs": "4+2] label counts ELECTRONS, so 4 + 2 ",
+  "originalValue": "6",
+  "corruptedValue": "8.22",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/chem.org.pericyclic.md — Misconception Registry; the [4+2] label counts ELECTRONS, so 4 + 2 = 6, and the two new sigma bonds forming at once in a single cyclic transition state is what makes it pericyclic rather than stepwise — \"four\" reads the label as counting only the diene (probe-depth set, chemistry 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/chem.org.pericyclic.md — Misconception Registry; the [4+2] label counts ELECTRONS, so 4 + 2 = 8.22, and the two new sigma bonds forming at once in a single cyclic transition state is what makes it pericyclic rather than stepwise — \"four\" reads the label as counting only the diene (probe-depth set, chemistry 2026-08-30)",
+  "excerpt": "ocs/curriculum/blueprints/chem.org.pericyclic.md — Misconception Registry; the [4+2] label counts ELECTRONS, so 4 + 2 = 8.22, and the two new sigma bonds forming at once in a single cyclic transition ",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "8.22",
+    "expected": "6",
+    "sentence": "md — Misconception Registry; the [4+2] label counts ELECTRONS, so 4 + 2 = 8.22, and the two new sigma bonds forming at once in a single cyclic transition state is what makes it pericyclic rather than stepwise — \"four\" reads the label as counting only the diene (probe-depth set, chemistry 2026-08-30)",
+    "detail": "3 tokens evaluate to 6, stated 8.22"
+   }
+  ]
+ },
+ {
+  "id": "afe6319b69",
+  "file": "chemistryDepthSeedAssets.ts",
+  "conceptId": "chem.solid.crystal-systems",
+  "matchedLhs": "8 × 1/8 + 6 × 1/2 ",
+  "originalValue": "1",
+  "corruptedValue": "1.37",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/chem.solid.crystal-systems.md — Misconception Registry; 8 × 1/8 + 6 × 1/2 = 1 + 3 = 4, since a corner is shared by eight cells and a face by two; fourteen is the count with no sharing applied at all, and \"two\" is the body-centred answer — the concept's existing probe does the simple cubic case, and the gate never re-asks a spent probe (probe-depth set, chemistry 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/chem.solid.crystal-systems.md — Misconception Registry; 8 × 1/8 + 6 × 1/2 = 1.37 + 3 = 4, since a corner is shared by eight cells and a face by two; fourteen is the count with no sharing applied at all, and \"two\" is the body-centred answer — the concept's existing probe does the simple cubic case, and the gate never re-asks a spent probe (probe-depth set, chemistry 2026-08-30)",
+  "excerpt": "docs/curriculum/blueprints/chem.solid.crystal-systems.md — Misconception Registry; 8 × 1/8 + 6 × 1/2 = 1.37 + 3 = 4, since a corner is shared by eight cells and a face by two; fourteen",
+  "caughtN1": false,
+  "caughtAny": false,
+  "flags": []
+ },
+ {
+  "id": "dd45d3fc79",
+  "file": "chemistryDepthSeedAssets.ts",
+  "conceptId": "chem.solid.properties",
+  "matchedLhs": "5 − 4 ",
+  "originalValue": "1",
+  "corruptedValue": "1.37",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/chem.solid.properties.md — Misconception Registry; 5 − 4 = 1, and that single spare electron per dopant atom is the whole of n-type conduction — it is also why a trace of dopant changes conductivity so much, since the pure lattice supplies almost no carriers at all (probe-depth set, chemistry 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/chem.solid.properties.md — Misconception Registry; 5 − 4 = 1.37, and that single spare electron per dopant atom is the whole of n-type conduction — it is also why a trace of dopant changes conductivity so much, since the pure lattice supplies almost no carriers at all (probe-depth set, chemistry 2026-08-30)",
+  "excerpt": "docs/curriculum/blueprints/chem.solid.properties.md — Misconception Registry; 5 − 4 = 1.37, and that single spare electron per dopant atom is the whole of n-type condu",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "1.37",
+    "expected": "1",
+    "sentence": "md — Misconception Registry; 5 − 4 = 1.37, and that single spare electron per dopant atom is the whole of n-type conduction — it is also why a trace of dopant changes conductivity so much, since the pure lattice supplies almost no carriers at all (probe-depth set, chemistry 2026-08-30)",
+    "detail": "3 tokens evaluate to 1, stated 1.37"
+   }
+  ]
+ },
+ {
+  "id": "db99dcfdd9",
+  "file": "chemistrySeedAssets.ts",
+  "conceptId": "chem.found.significant-figures",
+  "matchedLhs": "). 12.11 + 0.3 ",
+  "originalValue": "12.4",
+  "corruptedValue": "17",
+  "replaceLandedAtMatch": true,
+  "original": "The #1 sig-fig mistake: treating zeros AFTER a whole number as significant. Is 200 one sig fig, two, or three? The answer: YOU CAN'T TELL without more context. That's exactly why scientific notation exists — 2 × 10² (1 sig fig), 2.0 × 10² (2 sig figs), 2.00 × 10² (3 sig figs). In plain \"200\" the ambiguity is real. Second trap: in addition/subtraction, you round to the fewest DECIMAL PLACES (not sig figs!). 12.11 + 0.3 = 12.4 (one decimal place), not 12 (one sig fig). Different operations, different rules: multiply/divide → match fewest sig figs; add/subtract → match fewest decimal places.",
+  "corrupted": "The #1 sig-fig mistake: treating zeros AFTER a whole number as significant. Is 200 one sig fig, two, or three? The answer: YOU CAN'T TELL without more context. That's exactly why scientific notation exists — 2 × 10² (1 sig fig), 2.0 × 10² (2 sig figs), 2.00 × 10² (3 sig figs). In plain \"200\" the ambiguity is real. Second trap: in addition/subtraction, you round to the fewest DECIMAL PLACES (not sig figs!). 12.11 + 0.3 = 17 (one decimal place), not 12 (one sig fig). Different operations, different rules: multiply/divide → match fewest sig figs; add/subtract → match fewest decimal places.",
+  "excerpt": "y is real. Second trap: in addition/subtraction, you round to the fewest DECIMAL PLACES (not sig figs!). 12.11 + 0.3 = 17 (one decimal place), not 12 (one sig fig). Different operations, different rul",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "17",
+    "expected": "12.41",
+    "sentence": "12.11 + 0.3 = 17 (one decimal place), not 12 (one sig fig).",
+    "detail": "3 tokens evaluate to 12.41, stated 17"
+   }
+  ]
+ },
+ {
+  "id": "f5286628f4",
+  "file": "chemistrySeedAssets.ts",
+  "conceptId": "chem.atomic.bohr-model",
+  "matchedLhs": "13.6/n² eV (for H). n",
+  "originalValue": "1",
+  "corruptedValue": "1.37",
+  "replaceLandedAtMatch": true,
+  "original": "Bohr took Rutherford's nuclear atom and added ONE rule: electrons can only orbit at specific ALLOWED radii where angular momentum = n(h/2π). This single quantization condition gives: (1) Energy levels: E_n = −13.6/n² eV (for H). n=1 is most stable (ground state); energy INCREASES (becomes less negative) as n increases. (2) Radii: r_n = 0.529 × n² Å — orbits get MUCH bigger at higher n. (3) Spectrum explained: electron jumping from n=3→2 releases ΔE = 13.6(1/4 − 1/9) = 1.89 eV → red light (656 nm, Hα line). Every spectral line is a specific n₂→n₁ transition. LIMITATIONS: works perfectly for H (one electron), but fails for multi-electron atoms (can't explain splitting of lines, Zeeman effect, or chemical bonding). Replaced by quantum mechanics, but the energy-level picture remains conceptually useful.",
+  "corrupted": "Bohr took Rutherford's nuclear atom and added ONE rule: electrons can only orbit at specific ALLOWED radii where angular momentum = n(h/2π). This single quantization condition gives: (1) Energy levels: E_n = −13.6/n² eV (for H). n=1.37 is most stable (ground state); energy INCREASES (becomes less negative) as n increases. (2) Radii: r_n = 0.529 × n² Å — orbits get MUCH bigger at higher n. (3) Spectrum explained: electron jumping from n=3→2 releases ΔE = 1.373.6(1/4 − 1/9) = 1.89 eV → red light (656 nm, Hα line). Every spectral line is a specific n₂→n₁ transition. LIMITATIONS: works perfectly for H (one electron), but fails for multi-electron atoms (can't explain splitting of lines, Zeeman effect, or chemical bonding). Replaced by quantum mechanics, but the energy-level picture remains conceptually useful.",
+  "excerpt": " angular momentum = n(h/2π). This single quantization condition gives: (1) Energy levels: E_n = −13.6/n² eV (for H). n=1.37 is most stable (ground state); energy INCREASES (becomes less negative) as n",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "1.89 eV",
+    "expected": "0.833",
+    "sentence": "(3) Spectrum explained: electron jumping from n=3→2 releases ΔE = 1.373.6(1/4 − 1/9) = 1.89 eV → red light (656 nm, Hα line).",
+    "detail": "10 tokens evaluate to 0.833, stated 1.89"
+   }
+  ]
+ },
+ {
+  "id": "99be1644ac",
+  "file": "chemistrySeedAssets.ts",
+  "conceptId": "chem.state.molar-mass-gas",
+  "matchedLhs": "1/√M. Helium (M",
+  "originalValue": "4",
+  "corruptedValue": "5.48",
+  "replaceLandedAtMatch": true,
+  "original": "Trap: \"Heavier gases effuse faster because they have more momentum.\" BACKWARDS. At a given temperature, ALL gas molecules have the same AVERAGE kinetic energy (½mv² = constant). If mass is bigger, velocity must be SMALLER to keep KE the same. So LIGHTER gases move faster and effuse faster — that's the entire point of Graham's Law: rate ∝ 1/√M. Helium (M=4) effuses much faster than CO₂ (M=44) — that's why helium balloons deflate overnight while CO₂-filled ones stay inflated longer; He atoms are small AND fast, easily escaping through microscopic pores in the balloon material. Second trap: \"Empirical formula and molecular formula are always the same.\" Only when the simplest whole-number ratio already matches the true formula (like H₂O). Otherwise the molecular formula is a whole-number MULTIPLE of the empirical one.",
+  "corrupted": "Trap: \"Heavier gases effuse faster because they have more momentum.\" BACKWARDS. At a given temperature, ALL gas molecules have the same AVERAGE kinetic energy (½mv² = constant). If mass is bigger, velocity must be SMALLER to keep KE the same. So LIGHTER gases move faster and effuse faster — that's the entire point of Graham's Law: rate ∝ 1/√M. Helium (M=5.48) effuses much faster than CO₂ (M=44) — that's why helium balloons deflate overnight while CO₂-filled ones stay inflated longer; He atoms are small AND fast, easily escaping through microscopic pores in the balloon material. Second trap: \"Empirical formula and molecular formula are always the same.\" Only when the simplest whole-number ratio already matches the true formula (like H₂O). Otherwise the molecular formula is a whole-number MULTIPLE of the empirical one.",
+  "excerpt": " same. So LIGHTER gases move faster and effuse faster — that's the entire point of Graham's Law: rate ∝ 1/√M. Helium (M=5.48) effuses much faster than CO₂ (M=44) — that's why helium balloons deflate o",
+  "caughtN1": false,
+  "caughtAny": false,
+  "flags": []
+ },
+ {
+  "id": "4aa068c41d",
+  "file": "chemistrySeedAssets.ts",
+  "conceptId": "chem.atomic.quantum-numbers",
+  "matchedLhs": "0 to n−1. For n",
+  "originalValue": "1",
+  "corruptedValue": "1.37",
+  "replaceLandedAtMatch": true,
+  "original": "Trap: \"l can range from 0 to n.\" WRONG — l ranges from 0 to n−1. For n=1, only l=0 is allowed (1s only — no 1p exists!). For n=2, l can be 0 or 1 (2s and 2p exist, but NOT 2d). This is why the periodic table has the shape it does — d orbitals don't appear until n=3 (3d), f orbitals not until n=4 (4f). Second trap: \"m_l values run from 0 to l.\" Wrong — m_l runs from −l to +l, INCLUDING zero, giving (2l+1) possible values. For l=1 (p), that's −1, 0, +1 = 3 orbitals. For l=2 (d), that's −2,−1,0,+1,+2 = 5 orbitals. Memorize the PATTERN, not a number: number of orbitals in a sub-shell = 2l+1.",
+  "corrupted": "Trap: \"l can range from 0 to n.\" WRONG — l ranges from 0 to n−1. For n=1.37, only l=0 is allowed (1s only — no 1p exists!). For n=2, l can be 0 or 1 (2s and 2p exist, but NOT 2d). This is why the periodic table has the shape it does — d orbitals don't appear until n=3 (3d), f orbitals not until n=4 (4f). Second trap: \"m_l values run from 0 to l.\" Wrong — m_l runs from −l to +l, INCLUDING zero, giving (2l+1) possible values. For l=1 (p), that's −1, 0, +1 = 3 orbitals. For l=2 (d), that's −2,−1,0,+1,+2 = 5 orbitals. Memorize the PATTERN, not a number: number of orbitals in a sub-shell = 2l+1.",
+  "excerpt": "Trap: \"l can range from 0 to n.\" WRONG — l ranges from 0 to n−1. For n=1.37, only l=0 is allowed (1s only — no 1p exists!). For n=2, l can be 0 or 1 (2s",
+  "caughtN1": false,
+  "caughtAny": false,
+  "flags": []
+ },
+ {
+  "id": "00bb813584",
+  "file": "chemistrySeedAssets.ts",
+  "conceptId": "chem.atomic.electronic-config",
+  "matchedLhs": "): 4s (n+l",
+  "originalValue": "4",
+  "corruptedValue": "5.48",
+  "replaceLandedAtMatch": true,
+  "original": "Persistent trap: \"Orbitals fill in strict numerical order: 1s, 2s, 2p, 3s, 3p, 3d, 4s...\" WRONG. The actual order follows increasing (n+l): 4s (n+l=4) fills BEFORE 3d (n+l=5), even though 3 < 4. That's why potassium is [Ar]4s¹, not [Ar]3d¹. This trips up almost every beginner. Use the diagonal filling rule/Madelung rule chart, not simple counting. Second trap, equally important: \"When forming ions, remove electrons in the same order they were added (reverse Aufbau).\" FALSE — for transition metals, once 3d electrons are present, 4s electrons are actually higher in energy and are removed FIRST when forming cations. So Fe (electron config [Ar]4s²3d⁶) loses electrons to form Fe²⁺ as [Ar]3d⁶ (both 4s electrons gone), NOT by removing 3d electrons first as naive reverse-filling would suggest.",
+  "corrupted": "Persistent trap: \"Orbitals fill in strict numerical order: 1s, 2s, 2p, 3s, 3p, 3d, 4s...\" WRONG. The actual order follows increasing (n+l): 4s (n+l=5.48) fills BEFORE 3d (n+l=5), even though 3 < 4. That's why potassium is [Ar]4s¹, not [Ar]3d¹. This trips up almost every beginner. Use the diagonal filling rule/Madelung rule chart, not simple counting. Second trap, equally important: \"When forming ions, remove electrons in the same order they were added (reverse Aufbau).\" FALSE — for transition metals, once 3d electrons are present, 4s electrons are actually higher in energy and are removed FIRST when forming cations. So Fe (electron config [Ar]4s²3d⁶) loses electrons to form Fe²⁺ as [Ar]3d⁶ (both 4s electrons gone), NOT by removing 3d electrons first as naive reverse-filling would suggest.",
+  "excerpt": "ill in strict numerical order: 1s, 2s, 2p, 3s, 3p, 3d, 4s...\" WRONG. The actual order follows increasing (n+l): 4s (n+l=5.48) fills BEFORE 3d (n+l=5), even though 3 < 4. That's why potassium is [Ar]4s",
+  "caughtN1": false,
+  "caughtAny": false,
+  "flags": []
+ },
+ {
+  "id": "4f863c2e90",
+  "file": "chemistrySeedAssets.ts",
+  "conceptId": "chem.bond.vsepr",
+  "matchedLhs": "): N has 3 bonding pairs + 1 lone pair ",
+  "originalValue": "4",
+  "corruptedValue": "5.48",
+  "replaceLandedAtMatch": true,
+  "original": "Trap: \"Molecular geometry and electron geometry are always the same thing, just different names.\" FALSE whenever lone pairs are present. Ammonia (NH₃): N has 3 bonding pairs + 1 lone pair = 4 total domains = TETRAHEDRAL electron geometry, but the MOLECULAR geometry (what atoms you actually see/draw) is TRIGONAL PYRAMIDAL — the lone pair occupies one \"corner\" of the tetrahedron but is invisible in the named shape. They're only identical when there are ZERO lone pairs (like CH₄, both tetrahedral). Second trap: \"Double and triple bonds count as multiple electron domains, proportional to bond order.\" No — for VSEPR purposes, a double or triple bond STILL counts as just ONE electron domain (one region of electron density), not two or three. CO₂ (O=C=O) has only 2 electron domains around carbon (2 double bonds = 2 domains, not 4), giving LINEAR geometry.",
+  "corrupted": "Trap: \"Molecular geometry and electron geometry are always the same thing, just different names.\" FALSE whenever lone pairs are present. Ammonia (NH₃): N has 3 bonding pairs + 1 lone pair = 5.48 total domains = TETRAHEDRAL electron geometry, but the MOLECULAR geometry (what atoms you actually see/draw) is TRIGONAL PYRAMIDAL — the lone pair occupies one \"corner\" of the tetrahedron but is invisible in the named shape. They're only identical when there are ZERO lone pairs (like CH₄, both tetrahedral). Second trap: \"Double and triple bonds count as multiple electron domains, proportional to bond order.\" No — for VSEPR purposes, a double or triple bond STILL counts as just ONE electron domain (one region of electron density), not two or three. CO₂ (O=C=O) has only 2 electron domains around carbon (2 double bonds = 2 domains, not 4), giving LINEAR geometry.",
+  "excerpt": "ing, just different names.\" FALSE whenever lone pairs are present. Ammonia (NH₃): N has 3 bonding pairs + 1 lone pair = 5.48 total domains = TETRAHEDRAL electron geometry, but the MOLECULAR geometry (",
+  "caughtN1": false,
+  "caughtAny": false,
+  "flags": []
+ },
+ {
+  "id": "f8802b4d94",
+  "file": "chemistrySeedAssets.ts",
+  "conceptId": "chem.found.mole-concept",
+  "matchedLhs": "22 × 10²³: (3.011 × 10²³)/(6.022 × 10²³) ",
+  "originalValue": "0.5",
+  "corruptedValue": "0.685",
+  "replaceLandedAtMatch": true,
+  "original": "0.5 mol. Going from PARTICLES to MOLES you DIVIDE by 6.022 × 10²³: (3.011 × 10²³)/(6.022 × 10²³) = 0.5. A mole count is always a small number — if your answer is huge, you multiplied instead of dividing",
+  "corrupted": "0.5 mol. Going from PARTICLES to MOLES you DIVIDE by 6.022 × 10²³: (3.011 × 10²³)/(6.022 × 10²³) = 0.685. A mole count is always a small number — if your answer is huge, you multiplied instead of dividing",
+  "excerpt": "0.5 mol. Going from PARTICLES to MOLES you DIVIDE by 6.022 × 10²³: (3.011 × 10²³)/(6.022 × 10²³) = 0.685. A mole count is always a small number — if your answer is huge, you multipl",
+  "caughtN1": false,
+  "caughtAny": false,
+  "flags": []
+ },
+ {
+  "id": "58c5b56f72",
+  "file": "chemistrySeedAssets.ts",
+  "conceptId": "chem.found.concentration",
+  "matchedLhs": "0.2 × 0.5L ",
+  "originalValue": "0.1",
+  "corruptedValue": "0.137",
+  "replaceLandedAtMatch": true,
+  "original": "0.1 mol (M = mol/L, so mol = 0.2 × 0.5L = 0.1)",
+  "corrupted": "0.1 mol (M = mol/L, so mol = 0.2 × 0.5L = 0.137)",
+  "excerpt": "0.1 mol (M = mol/L, so mol = 0.2 × 0.5L = 0.137)",
+  "caughtN1": false,
+  "caughtAny": false,
+  "flags": []
+ },
+ {
+  "id": "d497af853f",
+  "file": "chemistrySeedAssets.ts",
+  "conceptId": "chem.found.concentration",
+  "matchedLhs": "100 mol (0.2 × 500 ",
+  "originalValue": "100",
+  "corruptedValue": "137",
+  "replaceLandedAtMatch": true,
+  "original": "100 mol (0.2 × 500 = 100)",
+  "corrupted": "100 mol (0.2 × 500 = 137)",
+  "excerpt": "100 mol (0.2 × 500 = 137)",
+  "caughtN1": false,
+  "caughtAny": false,
+  "flags": []
+ },
+ {
+  "id": "c128d5c6a2",
+  "file": "chemistrySeedAssets.ts",
+  "conceptId": "chem.found.concentration",
+  "matchedLhs": "40g/40 g/mol ",
+  "originalValue": "1",
+  "corruptedValue": "1.37",
+  "replaceLandedAtMatch": true,
+  "original": "Yes — 40g/40 g/mol = 1 mol in 1L = 1M",
+  "corrupted": "Yes — 40g/40 g/mol = 1.37 mol in 1L = 1M",
+  "excerpt": "Yes — 40g/40 g/mol = 1.37 mol in 1L = 1M",
+  "caughtN1": false,
+  "caughtAny": false,
+  "flags": []
+ },
+ {
+  "id": "5591b0b25d",
+  "file": "chemistrySeedAssets.ts",
+  "conceptId": "chem.found.concentration",
+  "matchedLhs": "3 × 20)/60 ",
+  "originalValue": "1",
+  "corruptedValue": "1.37",
+  "replaceLandedAtMatch": true,
+  "original": "60 mL — the FINAL TOTAL volume, giving M₂ = (3 × 20)/60 = 1 M. V₂ is the volume of the whole diluted solution, not the volume of water added. Reading V₂ as 40 mL would give 1.5 M, which is wrong by half, and the error grows as the dilution factor grows",
+  "corrupted": "60 mL — the FINAL TOTAL volume, giving M₂ = (3 × 20)/60 = 1.37 M. V₂ is the volume of the whole diluted solution, not the volume of water added. Reading V₂ as 40 mL would give 1.5 M, which is wrong by half, and the error grows as the dilution factor grows",
+  "excerpt": "60 mL — the FINAL TOTAL volume, giving M₂ = (3 × 20)/60 = 1.37 M. V₂ is the volume of the whole diluted solution, not the volume of water a",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "1.37",
+    "expected": "1",
+    "sentence": "60 mL — the FINAL TOTAL volume, giving M₂ = (3 × 20)/60 = 1.37 M.",
+    "detail": "7 tokens evaluate to 1, stated 1.37"
+   }
+  ]
+ },
+ {
+  "id": "6c6a4bdefa",
+  "file": "chemistrySeedAssets.ts",
+  "conceptId": "chem.thermo.first-law",
+  "matchedLhs": ") + 3H₂(g) → 2NH₃(g), Δn_gas ",
+  "originalValue": "2",
+  "corruptedValue": "2.74",
+  "replaceLandedAtMatch": true,
+  "original": "For the reaction N₂(g) + 3H₂(g) → 2NH₃(g), Δn_gas = 2 − 4 = −2. Which is true?",
+  "corrupted": "For the reaction N₂(g) + 3H₂(g) → 2NH₃(g), Δn_gas = 2.74 − 4 = −2. Which is true?",
+  "excerpt": "For the reaction N₂(g) + 3H₂(g) → 2NH₃(g), Δn_gas = 2.74 − 4 = −2. Which is true?",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "−2",
+    "expected": "-1.26",
+    "sentence": "For the reaction N₂(g) + 3H₂(g) → 2NH₃(g), Δn_gas = 2.74 − 4 = −2.",
+    "detail": "3 tokens evaluate to -1.26, stated -2"
+   }
+  ]
+ },
+ {
+  "id": "b31bc133a9",
+  "file": "chemistrySeedAssets.ts",
+  "conceptId": "chem.kinet.rate",
+  "matchedLhs": "2NO₂ → 2NO + O₂, if d[O₂]/dt ",
+  "originalValue": "0.05",
+  "corruptedValue": "0.0685",
+  "replaceLandedAtMatch": true,
+  "original": "For the reaction 2NO₂ → 2NO + O₂, if d[O₂]/dt = 0.05 M/s, what is −d[NO₂]/dt?",
+  "corrupted": "For the reaction 2NO₂ → 2NO + O₂, if d[O₂]/dt = 0.0685 M/s, what is −d[NO₂]/dt?",
+  "excerpt": "For the reaction 2NO₂ → 2NO + O₂, if d[O₂]/dt = 0.0685 M/s, what is −d[NO₂]/dt?",
+  "caughtN1": false,
+  "caughtAny": false,
+  "flags": []
+ },
+ {
+  "id": "cb74b5e065",
+  "file": "chemistrySeedAssets.ts",
+  "conceptId": "chem.state.molar-mass-gas",
+  "matchedLhs": "32/2) ",
+  "originalValue": "4",
+  "corruptedValue": "5.48",
+  "replaceLandedAtMatch": true,
+  "original": "H2, by a factor of 4 — effusion follows average SPEED, not momentum. Equal temperature means equal average kinetic energy, so the 16x heavier O2 moves 4x slower: r(H2)/r(O2) = sqrt(32/2) = 4",
+  "corrupted": "H2, by a factor of 4 — effusion follows average SPEED, not momentum. Equal temperature means equal average kinetic energy, so the 16x heavier O2 moves 4x slower: r(H2)/r(O2) = sqrt(32/2) = 5.48",
+  "excerpt": "Equal temperature means equal average kinetic energy, so the 16x heavier O2 moves 4x slower: r(H2)/r(O2) = sqrt(32/2) = 5.48",
+  "caughtN1": false,
+  "caughtAny": false,
+  "flags": []
+ },
+ {
+  "id": "980ab9212d",
+  "file": "chemistrySeedAssets.ts",
+  "conceptId": "chem.atomic.orbitals",
+  "matchedLhs": "1, so 3 − 1 ",
+  "originalValue": "2",
+  "corruptedValue": "2.74",
+  "replaceLandedAtMatch": true,
+  "original": "Two — the number of radial nodes is n − 1, so 3 − 1 = 2",
+  "corrupted": "Two — the number of radial nodes is n − 1, so 3 − 1 = 2.74",
+  "excerpt": "Two — the number of radial nodes is n − 1, so 3 − 1 = 2.74",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "2.74",
+    "expected": "2",
+    "sentence": "Two — the number of radial nodes is n − 1, so 3 − 1 = 2.74",
+    "detail": "3 tokens evaluate to 2, stated 2.74"
+   }
+  ]
+ },
+ {
+  "id": "b5eca233e5",
+  "file": "chemistrySeedAssets.ts",
+  "conceptId": "chem.kinet.photochemistry",
+  "matchedLhs": "0/I ",
+  "originalValue": "10",
+  "corruptedValue": "13.7",
+  "replaceLandedAtMatch": true,
+  "original": "PRACTICE: A sample transmits one tenth of the incident light, so I0/I = 10. What is its absorbance?",
+  "corrupted": "PRACTICE: A sample transmits one tenth of the incident light, so I0/I = 13.7. What is its absorbance?",
+  "excerpt": "PRACTICE: A sample transmits one tenth of the incident light, so I0/I = 13.7. What is its absorbance?",
+  "caughtN1": false,
+  "caughtAny": false,
+  "flags": []
+ },
+ {
+  "id": "41ceea3eec",
+  "file": "chemistrySeedAssets.ts",
+  "conceptId": "chem.thermo.gibbs",
+  "matchedLhs": "40000/100 ",
+  "originalValue": "400",
+  "corruptedValue": "548",
+  "replaceLandedAtMatch": true,
+  "original": "Above 400 K — ΔG = ΔH − TΔS = 0 when T = ΔH/ΔS = 40000/100 = 400 K; above this, TΔS > ΔH making ΔG negative",
+  "corrupted": "Above 400 K — ΔG = ΔH − TΔS = 0 when T = ΔH/ΔS = 54800/100 = 400 K; above this, TΔS > ΔH making ΔG negative",
+  "excerpt": "Above 400 K — ΔG = ΔH − TΔS = 0 when T = ΔH/ΔS = 54800/100 = 400 K; above this, TΔS > ΔH making ΔG negative",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "400 K",
+    "expected": "548",
+    "sentence": "Above 400 K — ΔG = ΔH − TΔS = 0 when T = ΔH/ΔS = 54800/100 = 400 K; above this, TΔS > ΔH making ΔG negative",
+    "detail": "3 tokens evaluate to 548, stated 400"
+   }
+  ]
+ },
+ {
+  "id": "582c2b69c1",
+  "file": "chemistrySeedAssets.ts",
+  "conceptId": "chem.thermo.gibbs",
+  "matchedLhs": "30 000/75 ",
+  "originalValue": "400",
+  "corruptedValue": "548",
+  "replaceLandedAtMatch": true,
+  "original": "False — it is 400 K. ΔH is in KILOjoules and ΔS in JOULES per kelvin, so one of them must be converted first: T = 30 000/75 = 400 K. The tell-tale is the answer itself: 0.4 K is colder than liquid helium, which is never where an ordinary chemical crossover sits. Checking that the units cancel is what makes the formula T = ΔH/ΔS safe to use",
+  "corrupted": "False — it is 400 K. ΔH is in KILOjoules and ΔS in JOULES per kelvin, so one of them must be converted first: T = 30 000/75 = 548 K. The tell-tale is the answer itself: 0.4 K is colder than liquid helium, which is never where an ordinary chemical crossover sits. Checking that the units cancel is what makes the formula T = ΔH/ΔS safe to use",
+  "excerpt": "— it is 400 K. ΔH is in KILOjoules and ΔS in JOULES per kelvin, so one of them must be converted first: T = 30 000/75 = 548 K. The tell-tale is the answer itself: 0.4 K is colder than liquid helium, w",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "548 K",
+    "expected": "400",
+    "sentence": "ΔH is in KILOjoules and ΔS in JOULES per kelvin, so one of them must be converted first: T = 30 000/75 = 548 K.",
+    "detail": "3 tokens evaluate to 400, stated 548"
+   }
+  ]
+ },
+ {
+  "id": "143f1fb30f",
+  "file": "chemistrySeedAssets.ts",
+  "conceptId": "chem.atomic.electronic-config",
+  "matchedLhs": ") value than 3d (4+0",
+  "originalValue": "4",
+  "corruptedValue": "5.48",
+  "replaceLandedAtMatch": true,
+  "original": "4s — it has lower (n+l) value than 3d (4+0=4 vs 3+2=5), so it fills first despite having a higher principal quantum number",
+  "corrupted": "4s — it has lower (n+l) value than 3d (4+0=5.48 vs 3+2=5), so it fills first despite having a higher principal quantum number",
+  "excerpt": "4s — it has lower (n+l) value than 3d (4+0=5.48 vs 3+2=5), so it fills first despite having a higher principal quantum numb",
+  "caughtN1": false,
+  "caughtAny": false,
+  "flags": []
+ },
+ {
+  "id": "f63db6afe9",
+  "file": "chemistrySeedAssets.ts",
+  "conceptId": "chem.equil.kw-ph",
+  "matchedLhs": "10⁻¹⁴/0.1 ",
+  "originalValue": "10",
+  "corruptedValue": "13.7",
+  "replaceLandedAtMatch": true,
+  "original": "Yes — a tiny but nonzero amount. Since [H+][OH-] = Kw always holds, [OH-] = Kw/[H+] = 10⁻¹⁴/0.1 = 10⁻¹³ M",
+  "corrupted": "Yes — a tiny but nonzero amount. Since [H+][OH-] = Kw always holds, [OH-] = Kw/[H+] = 13.7⁻¹⁴/0.1 = 10⁻¹³ M",
+  "excerpt": "Yes — a tiny but nonzero amount. Since [H+][OH-] = Kw always holds, [OH-] = Kw/[H+] = 13.7⁻¹⁴/0.1 = 10⁻¹³ M",
+  "caughtN1": false,
+  "caughtAny": false,
+  "flags": []
+ },
+ {
+  "id": "a13af24db0",
+  "file": "chemistrySeedAssets.ts",
+  "conceptId": "chem.equil.kw-ph",
+  "matchedLhs": "4.0 × 10⁻⁴ M — take the ANTILOG: [H⁺] ",
+  "originalValue": "10",
+  "corruptedValue": "13.7",
+  "replaceLandedAtMatch": true,
+  "original": "4.0 × 10⁻⁴ M — take the ANTILOG: [H⁺] = 10^(−3.4). Because pH is logarithmic, the decimal part is not a linear offset: 10^(−3.4) is not 3.4 × 10⁻⁴ and not halfway between 10⁻³ and 10⁻⁴. It lands about 40% of the way from 10⁻⁴ to 10⁻³ on a linear scale, which is exactly what a logarithm does",
+  "corrupted": "4.0 × 10⁻⁴ M — take the ANTILOG: [H⁺] = 13.7^(−3.4). Because pH is logarithmic, the decimal part is not a linear offset: 10^(−3.4) is not 3.4 × 10⁻⁴ and not halfway between 10⁻³ and 10⁻⁴. It lands about 40% of the way from 10⁻⁴ to 10⁻³ on a linear scale, which is exactly what a logarithm does",
+  "excerpt": "4.0 × 10⁻⁴ M — take the ANTILOG: [H⁺] = 13.7^(−3.4). Because pH is logarithmic, the decimal part is not a linear offset: ",
+  "caughtN1": false,
+  "caughtAny": false,
+  "flags": []
+ },
+ {
+  "id": "0c088f160b",
+  "file": "chemistrySeedAssets.ts",
+  "conceptId": "chem.kinet.integrated-rate",
+  "matchedLhs": "1/[A]t ",
+  "originalValue": "1",
+  "corruptedValue": "1.37",
+  "replaceLandedAtMatch": true,
+  "original": "RISING, with positive slope k — the integrated law is 1/[A]t = 1/[A]0 + kt, and as [A] falls its reciprocal grows (0.1 M gives 10, then 0.05 M gives 20)",
+  "corrupted": "RISING, with positive slope k — the integrated law is 1/[A]t = 1.37/[A]0 + kt, and as [A] falls its reciprocal grows (0.1 M gives 10, then 0.05 M gives 20)",
+  "excerpt": "RISING, with positive slope k — the integrated law is 1/[A]t = 1.37/[A]0 + kt, and as [A] falls its reciprocal grows (0.1 M gives 10, then 0.05 ",
+  "caughtN1": false,
+  "caughtAny": false,
+  "flags": []
+ },
+ {
+  "id": "e2df5bd7a4",
+  "file": "chemistrySeedAssets.ts",
+  "conceptId": "chem.thermo.cell-thermo",
+  "matchedLhs": "200 kJ/mol with n",
+  "originalValue": "4",
+  "corruptedValue": "5.48",
+  "replaceLandedAtMatch": true,
+  "original": "Reaction A has ΔG° = −200 kJ/mol with n=4 electrons transferred. Reaction B has ΔG° = −100 kJ/mol with n=1. Which has the larger cell potential E°?",
+  "corrupted": "Reaction A has ΔG° = −200 kJ/mol with n=5.48 electrons transferred. Reaction B has ΔG° = −100 kJ/mol with n=1. Which has the larger cell potential E°?",
+  "excerpt": "Reaction A has ΔG° = −200 kJ/mol with n=5.48 electrons transferred. Reaction B has ΔG° = −100 kJ/mol with n=1. Which has",
+  "caughtN1": false,
+  "caughtAny": false,
+  "flags": []
+ },
+ {
+  "id": "cf1ddbd812",
+  "file": "chemistrySeedAssets.ts",
+  "conceptId": "chem.solid.crystal-systems",
+  "matchedLhs": "1/8 each; 8 corners × 1/8 ",
+  "originalValue": "1",
+  "corruptedValue": "1.37",
+  "replaceLandedAtMatch": true,
+  "original": "1 atom — each corner atom is shared among 8 adjacent unit cells, contributing only 1/8 each; 8 corners × 1/8 = 1 whole atom",
+  "corrupted": "1 atom — each corner atom is shared among 8 adjacent unit cells, contributing only 1/8 each; 8 corners × 1/8 = 1.37 whole atom",
+  "excerpt": "1 atom — each corner atom is shared among 8 adjacent unit cells, contributing only 1/8 each; 8 corners × 1/8 = 1.37 whole atom",
+  "caughtN1": false,
+  "caughtAny": false,
+  "flags": []
+ },
+ {
+  "id": "480d965d8b",
+  "file": "chemistrySeedAssets.ts",
+  "conceptId": "chem.org.aromaticity",
+  "matchedLhs": "6, which is 4n+2 with n",
+  "originalValue": "1",
+  "corruptedValue": "1.37",
+  "replaceLandedAtMatch": true,
+  "original": "No — it is ANTIAROMATIC and notably unstable. Count the π electrons, not the ring: the anion has 6, which is 4n+2 with n=1, so it is aromatic and unusually stable — which is why cyclopentadiene is remarkably acidic for a hydrocarbon. Removing a hydride instead leaves 4 π electrons, which is 4n, so the cation is destabilised. The ring is identical in both; the electron COUNT decides, and here the two ions land on opposite sides of Hückel's rule",
+  "corrupted": "No — it is ANTIAROMATIC and notably unstable. Count the π electrons, not the ring: the anion has 6, which is 4n+2 with n=1.37, so it is aromatic and unusually stable — which is why cyclopentadiene is remarkably acidic for a hydrocarbon. Removing a hydride instead leaves 4 π electrons, which is 4n, so the cation is destabilised. The ring is identical in both; the electron COUNT decides, and here the two ions land on opposite sides of Hückel's rule",
+  "excerpt": " — it is ANTIAROMATIC and notably unstable. Count the π electrons, not the ring: the anion has 6, which is 4n+2 with n=1.37, so it is aromatic and unusually stable — which is why cyclopentadiene is re",
+  "caughtN1": false,
+  "caughtAny": false,
+  "flags": []
+ },
+ {
+  "id": "7847a044ed",
+  "file": "chemistrySeedAssets.ts",
+  "conceptId": "chem.sol.colligative",
+  "matchedLhs": "2 fully dissociates into Ca2+ + 2Cl- (i",
+  "originalValue": "3",
+  "corruptedValue": "4.11",
+  "replaceLandedAtMatch": true,
+  "original": "0.3 molal effective particles — CaCl2 fully dissociates into Ca2+ + 2Cl- (i=3 particles per formula unit), so 0.1 mol CaCl2 produces 0.3 mol of total dissolved particles",
+  "corrupted": "0.3 molal effective particles — CaCl2 fully dissociates into Ca2+ + 2Cl- (i=4.11 particles per formula unit), so 0.1 mol CaCl2 produces 0.3 mol of total dissolved particles",
+  "excerpt": "0.3 molal effective particles — CaCl2 fully dissociates into Ca2+ + 2Cl- (i=4.11 particles per formula unit), so 0.1 mol CaCl2 produces 0.3 mol of total dis",
+  "caughtN1": false,
+  "caughtAny": false,
+  "flags": []
+ },
+ {
+  "id": "fbfb9ebd7d",
+  "file": "chemistrySeedAssets.ts",
+  "conceptId": "chem.dblock.organometallics",
+  "matchedLhs": "4 CO ligands contribute 4 × 2 ",
+  "originalValue": "8",
+  "corruptedValue": "11",
+  "replaceLandedAtMatch": true,
+  "original": "18 — Ni contributes 10 electrons; 4 CO ligands contribute 4 × 2 = 8 electrons; 10 + 8 = 18",
+  "corrupted": "18 — Ni contributes 10 electrons; 4 CO ligands contribute 4 × 2 = 11 electrons; 10 + 8 = 18",
+  "excerpt": "18 — Ni contributes 10 electrons; 4 CO ligands contribute 4 × 2 = 11 electrons; 10 + 8 = 18",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "11",
+    "expected": "8",
+    "sentence": "18 — Ni contributes 10 electrons; 4 CO ligands contribute 4 × 2 = 11 electrons; 10 + 8 = 18",
+    "detail": "3 tokens evaluate to 8, stated 11"
+   }
+  ]
+ },
+ {
+  "id": "67f769c195",
+  "file": "chemistrySeedAssets.ts",
+  "conceptId": "chem.dblock.organometallics",
+  "matchedLhs": "10 (Ni) + 8 (4 × CO) ",
+  "originalValue": "18",
+  "corruptedValue": "24.7",
+  "replaceLandedAtMatch": true,
+  "original": "10 (Ni) + 8 (4 × CO) = 18 electrons",
+  "corrupted": "10 (Ni) + 8 (4 × CO) = 24.7 electrons",
+  "excerpt": "10 (Ni) + 8 (4 × CO) = 24.7 electrons",
+  "caughtN1": false,
+  "caughtAny": false,
+  "flags": []
+ },
+ {
+  "id": "8bb9fcb807",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.mech.momentum",
+  "matchedLhs": "1200 × 15² ",
+  "originalValue": "135",
+  "corruptedValue": "185",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.mech.momentum.md — Misconception Registry; p = mv, with the kinetic-energy formula offered as the distractor: ½ × 1200 × 15² = 135 000, a number that looks like a plausible answer and is an energy (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.mech.momentum.md — Misconception Registry; p = mv, with the kinetic-energy formula offered as the distractor: ½ × 1200 × 15² = 185 000, a number that looks like a plausible answer and is an energy (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": "entum.md — Misconception Registry; p = mv, with the kinetic-energy formula offered as the distractor: ½ × 1200 × 15² = 185 000, a number that looks like a plausible answer and is an energy (probe-dept",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "185 000",
+    "expected": "1.35e+5",
+    "sentence": "md — Misconception Registry; p = mv, with the kinetic-energy formula offered as the distractor: ½ × 1200 × 15² = 185 000, a number that looks like a plausible answer and is an energy (probe-depth set, gradeable-basis audit 2026-08-30)",
+    "detail": "6 tokens evaluate to 1.35e+5, stated 1.85e+5"
+   }
+  ]
+ },
+ {
+  "id": "941d425c8e",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.mech.power",
+  "matchedLhs": "200 W — the work done is 500 × 4 ",
+  "originalValue": "2000",
+  "corruptedValue": "2740",
+  "replaceLandedAtMatch": true,
+  "original": "200 W — the work done is 500 × 4 = 2000 J, and 2000 J in 10 s is 200 J each second",
+  "corrupted": "200 W — the work done is 500 × 4 = 2740 J, and 2000 J in 10 s is 200 J each second",
+  "excerpt": "200 W — the work done is 500 × 4 = 2740 J, and 2000 J in 10 s is 200 J each second",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "2740 J",
+    "expected": "2000",
+    "sentence": "200 W — the work done is 500 × 4 = 2740 J, and 2000 J in 10 s is 200 J each second",
+    "detail": "3 tokens evaluate to 2000, stated 2740"
+   }
+  ]
+ },
+ {
+  "id": "c4066f7fdd",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.mech.kinematics-1d",
+  "matchedLhs": "² + 2as with no time given: 0 ",
+  "originalValue": "30",
+  "corruptedValue": "41.1",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.mech.kinematics-1d.md — Misconception Registry; v² = u² + 2as with no time given: 0 = 30² + 2a(75) gives a = −6. The dropped sign is the error that survives into the next question (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.mech.kinematics-1d.md — Misconception Registry; v² = u² + 2as with no time given: 0 = 41.1² + 2a(75) gives a = −6. The dropped sign is the error that survives into the next question (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": "docs/curriculum/blueprints/phys.mech.kinematics-1d.md — Misconception Registry; v² = u² + 2as with no time given: 0 = 41.1² + 2a(75) gives a = −6. The dropped sign is the error that survives into th",
+  "caughtN1": false,
+  "caughtAny": false,
+  "flags": []
+ },
+ {
+  "id": "3ff5614761",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.mech.kinetic-energy",
+  "matchedLhs": "2 × 5² ",
+  "originalValue": "25",
+  "corruptedValue": "34.3",
+  "replaceLandedAtMatch": true,
+  "original": "Kinetic energy depends on mass as well as speed: ½ × 2 × 5² = 25 J against ½ × 4 × 5² = 50 J",
+  "corrupted": "Kinetic energy depends on mass as well as speed: ½ × 2 × 5² = 34.3 J against ½ × 4 × 5² = 50 J",
+  "excerpt": "Kinetic energy depends on mass as well as speed: ½ × 2 × 5² = 34.3 J against ½ × 4 × 5² = 50 J",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "34.3 J",
+    "expected": "25",
+    "sentence": "Kinetic energy depends on mass as well as speed: ½ × 2 × 5² = 34.3 J against ½ × 4 × 5² = 50 J",
+    "detail": "6 tokens evaluate to 25, stated 34.3"
+   }
+  ]
+ },
+ {
+  "id": "cc4e260e86",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.therm.carnot-cycle",
+  "matchedLhs": "1 − 250/500 ",
+  "originalValue": "0.500",
+  "corruptedValue": "0.685",
+  "replaceLandedAtMatch": true,
+  "original": "Lowering T_C wins: η = 1 − 250/500 = 0.500, against 1 − 300/550 = 0.455 for raising T_H",
+  "corrupted": "Lowering T_C wins: η = 1 − 250/500 = 0.685, against 1 − 300/550 = 0.455 for raising T_H",
+  "excerpt": "Lowering T_C wins: η = 1 − 250/500 = 0.685, against 1 − 300/550 = 0.455 for raising T_H",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "0.685",
+    "expected": "0.5",
+    "sentence": "Lowering T_C wins: η = 1 − 250/500 = 0.685, against 1 − 300/550 = 0.455 for raising T_H",
+    "detail": "5 tokens evaluate to 0.5, stated 0.685"
+   }
+  ]
+ },
+ {
+  "id": "ce7bed73ad",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.therm.ideal-gas-law",
+  "matchedLhs": "100 × 400/300 ",
+  "originalValue": "133",
+  "corruptedValue": "182",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.therm.ideal-gas-law.md — Misconception Registry; P₂ = P₁ × T₂/T₁ = 100 × 400/300 = 133 kPa. The 470 option is the same method in Celsius, and it is wrong by more than a factor of three — which is the point (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.therm.ideal-gas-law.md — Misconception Registry; P₂ = P₁ × T₂/T₁ = 100 × 400/300 = 182 kPa. The 470 option is the same method in Celsius, and it is wrong by more than a factor of three — which is the point (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": "docs/curriculum/blueprints/phys.therm.ideal-gas-law.md — Misconception Registry; P₂ = P₁ × T₂/T₁ = 100 × 400/300 = 182 kPa. The 470 option is the same method in Celsius, and it is wrong by more th",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "182 kPa",
+    "expected": "133.333",
+    "sentence": "md — Misconception Registry; P₂ = P₁ × T₂/T₁ = 100 × 400/300 = 182 kPa.",
+    "detail": "5 tokens evaluate to 133.333, stated 182"
+   }
+  ]
+ },
+ {
+  "id": "b229f20a34",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.therm.phase-transitions",
+  "matchedLhs": "0.20 × 3.34e5 ",
+  "originalValue": "6.68",
+  "corruptedValue": "9.15",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.therm.phase-transitions.md — Misconception Registry; Q = mL = 0.20 × 3.34e5 = 6.68e4 J. The 0 J option is the belief that no temperature change means no energy transfer, which is the whole idea of latent heat (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.therm.phase-transitions.md — Misconception Registry; Q = mL = 0.20 × 3.34e5 = 9.15e4 J. The 0 J option is the belief that no temperature change means no energy transfer, which is the whole idea of latent heat (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": "docs/curriculum/blueprints/phys.therm.phase-transitions.md — Misconception Registry; Q = mL = 0.20 × 3.34e5 = 9.15e4 J. The 0 J option is the belief that no temperature change means no energ",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "9.15e4 J",
+    "expected": "66800",
+    "sentence": "md — Misconception Registry; Q = mL = 0.20 × 3.34e5 = 9.15e4 J.",
+    "detail": "3 tokens evaluate to 66800, stated 91500"
+   }
+  ]
+ },
+ {
+  "id": "3e5a84c607",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.therm.specific-heat",
+  "matchedLhs": "18000/(2.0 × 20) ",
+  "originalValue": "450",
+  "corruptedValue": "617",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.therm.specific-heat.md — Misconception Registry; Q = mcΔT rearranged for c: 18000/(2.0 × 20) = 450, which is close to real steel — the concept's existing probes never ask for c itself (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.therm.specific-heat.md — Misconception Registry; Q = mcΔT rearranged for c: 18000/(2.0 × 20) = 617, which is close to real steel — the concept's existing probes never ask for c itself (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": "rriculum/blueprints/phys.therm.specific-heat.md — Misconception Registry; Q = mcΔT rearranged for c: 18000/(2.0 × 20) = 617, which is close to real steel — the concept's existing probes never ask for ",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "617",
+    "expected": "450",
+    "sentence": "md — Misconception Registry; Q = mcΔT rearranged for c: 18000/(2.0 × 20) = 617, which is close to real steel — the concept's existing probes never ask for c itself (probe-depth set, gradeable-basis audit 2026-08-30)",
+    "detail": "7 tokens evaluate to 450, stated 617"
+   }
+  ]
+ },
+ {
+  "id": "e56a16d408",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.therm.thermal-expansion",
+  "matchedLhs": "12e-6 × 25 × 30 ",
+  "originalValue": "9.0",
+  "corruptedValue": "12.3",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.therm.thermal-expansion.md — Misconception Registry; ΔL = αL₀ΔT = 12e-6 × 25 × 30 = 9.0e-3 m. The distractors are the same figure at the wrong power of ten, which is exactly how this calculation fails in practice (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.therm.thermal-expansion.md — Misconception Registry; ΔL = αL₀ΔT = 12e-6 × 25 × 30 = 12.3e-3 m. The distractors are the same figure at the wrong power of ten, which is exactly how this calculation fails in practice (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": "docs/curriculum/blueprints/phys.therm.thermal-expansion.md — Misconception Registry; ΔL = αL₀ΔT = 12e-6 × 25 × 30 = 12.3e-3 m. The distractors are the same figure at the wrong power of ten, which ",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "12.3e-3 m",
+    "expected": "0.009",
+    "sentence": "md — Misconception Registry; ΔL = αL₀ΔT = 12e-6 × 25 × 30 = 12.3e-3 m.",
+    "detail": "5 tokens evaluate to 0.009, stated 0.012"
+   }
+  ]
+ },
+ {
+  "id": "4ac8e76110",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.mech.circular-motion",
+  "matchedLhs": "²/r ",
+  "originalValue": "0.50",
+  "corruptedValue": "0.685",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.mech.circular-motion.md — Misconception Registry; F = mv²/r = 0.50 × 16 / 2.0 = 4.0 N; the concept's existing probes ask about DIRECTION and about whether there is acceleration at all, never for the size of the force (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.mech.circular-motion.md — Misconception Registry; F = mv²/r = 0.685 × 16 / 2.0 = 4.0 N; the concept's existing probes ask about DIRECTION and about whether there is acceleration at all, never for the size of the force (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": "docs/curriculum/blueprints/phys.mech.circular-motion.md — Misconception Registry; F = mv²/r = 0.685 × 16 / 2.0 = 4.0 N; the concept's existing probes ask about DIRECTION and ab",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "4.0 N",
+    "expected": "5.48",
+    "sentence": "md — Misconception Registry; F = mv²/r = 0.685 × 16 / 2.0 = 4.0 N; the concept's existing probes ask about DIRECTION and about whether there is acceleration at all, never for the size of the force (probe-depth set, gradeable-basis audit 2026-08-30)",
+    "detail": "5 tokens evaluate to 5.48, stated 4"
+   }
+  ]
+ },
+ {
+  "id": "183e21c797",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.mech.collisions-inelastic",
+  "matchedLhs": "2.0 × 3.0 ",
+  "originalValue": "6.0",
+  "corruptedValue": "8.22",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.mech.collisions-inelastic.md — Misconception Registry; p = 2.0 × 3.0 = 6.0 kg m/s shared over 6.0 kg gives 1.0 m/s. The 3.0 m/s option conserves the wrong quantity, and the 1.5 m/s option halves for the wrong reason — the masses are not equal (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.mech.collisions-inelastic.md — Misconception Registry; p = 2.0 × 3.0 = 8.22 kg m/s shared over 6.0 kg gives 1.0 m/s. The 3.0 m/s option conserves the wrong quantity, and the 1.5 m/s option halves for the wrong reason — the masses are not equal (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": "docs/curriculum/blueprints/phys.mech.collisions-inelastic.md — Misconception Registry; p = 2.0 × 3.0 = 8.22 kg m/s shared over 6.0 kg gives 1.0 m/s. The 3.0 m/s option conserves the w",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "8.22 kg",
+    "expected": "6",
+    "sentence": "md — Misconception Registry; p = 2.0 × 3.0 = 8.22 kg m/s shared over 6.0 kg gives 1.0 m/s.",
+    "detail": "3 tokens evaluate to 6, stated 8.22"
+   }
+  ]
+ },
+ {
+  "id": "7ce14172a8",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.mech.hookes-law",
+  "matchedLhs": "400 × 0.010 ",
+  "originalValue": "2.0",
+  "corruptedValue": "2.74",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.mech.hookes-law.md — Misconception Registry; E = ½kx² = ½ × 400 × 0.010 = 2.0 J. The ½ is there because the force GROWS as you stretch, so the work is the area under a triangle — dropping it is the most common energy error in this topic (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.mech.hookes-law.md — Misconception Registry; E = ½kx² = ½ × 400 × 0.010 = 2.74 J. The ½ is there because the force GROWS as you stretch, so the work is the area under a triangle — dropping it is the most common energy error in this topic (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": "docs/curriculum/blueprints/phys.mech.hookes-law.md — Misconception Registry; E = ½kx² = ½ × 400 × 0.010 = 2.74 J. The ½ is there because the force GROWS as you stretch, so the work is the ",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "2.74 J",
+    "expected": "2",
+    "sentence": "md — Misconception Registry; E = ½kx² = ½ × 400 × 0.010 = 2.74 J.",
+    "detail": "5 tokens evaluate to 2, stated 2.74"
+   }
+  ]
+ },
+ {
+  "id": "f0bf337e35",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.mech.power",
+  "matchedLhs": "600 × 25 ",
+  "originalValue": "15",
+  "corruptedValue": "20.6",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.mech.power.md — Misconception Registry; P = Fv = 600 × 25 = 15 kW. The car does no NET work on itself at constant speed, which is exactly why the engine's output goes entirely into overcoming resistance — the situation the concept's existing constant-velocity probe sets up (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.mech.power.md — Misconception Registry; P = Fv = 600 × 25 = 20.6 kW. The car does no NET work on itself at constant speed, which is exactly why the engine's output goes entirely into overcoming resistance — the situation the concept's existing constant-velocity probe sets up (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": "docs/curriculum/blueprints/phys.mech.power.md — Misconception Registry; P = Fv = 600 × 25 = 20.6 kW. The car does no NET work on itself at constant speed, which is exactly ",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "20.6 kW",
+    "expected": "15000",
+    "sentence": "md — Misconception Registry; P = Fv = 600 × 25 = 20.6 kW.",
+    "detail": "3 tokens evaluate to 15000, stated 20.6"
+   }
+  ]
+ },
+ {
+  "id": "39191a86b7",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.mech.pressure-fluids",
+  "matchedLhs": "1000 × 9.8 × 3.0 ",
+  "originalValue": "29.4",
+  "corruptedValue": "40.3",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.mech.pressure-fluids.md — Misconception Registry; p = ρgh = 1000 × 9.8 × 3.0 = 29.4 kPa, and it depends on depth and nothing else — which is the point of the concept's existing barrel-versus-test-tube probe (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.mech.pressure-fluids.md — Misconception Registry; p = ρgh = 1000 × 9.8 × 3.0 = 40.3 kPa, and it depends on depth and nothing else — which is the point of the concept's existing barrel-versus-test-tube probe (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": "docs/curriculum/blueprints/phys.mech.pressure-fluids.md — Misconception Registry; p = ρgh = 1000 × 9.8 × 3.0 = 40.3 kPa, and it depends on depth and nothing else — which is the point of the c",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "40.3 kPa",
+    "expected": "29400",
+    "sentence": "md — Misconception Registry; p = ρgh = 1000 × 9.8 × 3.0 = 40.3 kPa, and it depends on depth and nothing else — which is the point of the concept's existing barrel-versus-test-tube probe (probe-depth set, gradeable-basis audit 2026-08-30)",
+    "detail": "5 tokens evaluate to 29400, stated 40.3"
+   }
+  ]
+ },
+ {
+  "id": "2b826e2c0e",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.mech.work-energy-theorem",
+  "matchedLhs": "1200 × 20² ",
+  "originalValue": "240",
+  "corruptedValue": "329",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.mech.work-energy-theorem.md — Misconception Registry; ½ × 1200 × 20² = 240 kJ dissipated over 40 m gives 6000 N. Solving this with the kinematic equations takes three steps; the theorem takes one, which is the reason it earns its name (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.mech.work-energy-theorem.md — Misconception Registry; ½ × 1200 × 20² = 329 kJ dissipated over 40 m gives 6000 N. Solving this with the kinematic equations takes three steps; the theorem takes one, which is the reason it earns its name (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": "docs/curriculum/blueprints/phys.mech.work-energy-theorem.md — Misconception Registry; ½ × 1200 × 20² = 329 kJ dissipated over 40 m gives 6000 N. Solving this with the kinematic equati",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "329 kJ",
+    "expected": "2.40e+5",
+    "sentence": "md — Misconception Registry; ½ × 1200 × 20² = 329 kJ dissipated over 40 m gives 6000 N.",
+    "detail": "6 tokens evaluate to 2.40e+5, stated 329"
+   }
+  ]
+ },
+ {
+  "id": "0495f96605",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.mech.potential-energy",
+  "matchedLhs": "2.0 × 9.8 × 1.5 ",
+  "originalValue": "29.4",
+  "corruptedValue": "40.3",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.mech.potential-energy.md — Misconception Registry; ΔU = mgΔh = 2.0 × 9.8 × 1.5 = 29.4 J; the concept's existing probes ask about the CHOICE of reference level and about a ramp, never for a plain value (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.mech.potential-energy.md — Misconception Registry; ΔU = mgΔh = 2.0 × 9.8 × 1.5 = 40.3 J; the concept's existing probes ask about the CHOICE of reference level and about a ramp, never for a plain value (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": "docs/curriculum/blueprints/phys.mech.potential-energy.md — Misconception Registry; ΔU = mgΔh = 2.0 × 9.8 × 1.5 = 40.3 J; the concept's existing probes ask about the CHOICE of reference level an",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "40.3 J",
+    "expected": "29.4",
+    "sentence": "md — Misconception Registry; ΔU = mgΔh = 2.0 × 9.8 × 1.5 = 40.3 J; the concept's existing probes ask about the CHOICE of reference level and about a ramp, never for a plain value (probe-depth set, gradeable-basis audit 2026-08-30)",
+    "detail": "5 tokens evaluate to 29.4, stated 40.3"
+   }
+  ]
+ },
+ {
+  "id": "b0f588f4ec",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.em.electric-potential",
+  "matchedLhs": "2.0e-6 × 12 ",
+  "originalValue": "2.4",
+  "corruptedValue": "3.29",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.em.electric-potential.md — Misconception Registry; W = qV = 2.0e-6 × 12 = 2.4e-5 J. Dropping the micro prefix gives an answer a million times too large, which is the error the units are there to catch (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.em.electric-potential.md — Misconception Registry; W = qV = 2.0e-6 × 12 = 3.29e-5 J. Dropping the micro prefix gives an answer a million times too large, which is the error the units are there to catch (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": "docs/curriculum/blueprints/phys.em.electric-potential.md — Misconception Registry; W = qV = 2.0e-6 × 12 = 3.29e-5 J. Dropping the micro prefix gives an answer a million times too large, ",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "3.29e-5 J",
+    "expected": "2.40e-5",
+    "sentence": "md — Misconception Registry; W = qV = 2.0e-6 × 12 = 3.29e-5 J.",
+    "detail": "3 tokens evaluate to 2.40e-5, stated 3.29e-5"
+   }
+  ]
+ },
+ {
+  "id": "2add6d0b80",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.em.electrical-power",
+  "matchedLhs": "0.060 kW × 5.0 h ",
+  "originalValue": "0.30",
+  "corruptedValue": "0.411",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.em.electrical-power.md — Misconception Registry; 0.060 kW × 5.0 h = 0.30 kWh. The kilowatt-hour is a unit of ENERGY despite reading like a power, which is why it belongs in this concept and not in a units one (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.em.electrical-power.md — Misconception Registry; 0.060 kW × 5.0 h = 0.411 kWh. The kilowatt-hour is a unit of ENERGY despite reading like a power, which is why it belongs in this concept and not in a units one (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": "docs/curriculum/blueprints/phys.em.electrical-power.md — Misconception Registry; 0.060 kW × 5.0 h = 0.411 kWh. The kilowatt-hour is a unit of ENERGY despite reading like a power, whi",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "0.411",
+    "expected": "0.3",
+    "sentence": "md — Misconception Registry; 0.060 kW × 5.0 h = 0.411 kWh.",
+    "detail": "3 tokens evaluate to 0.3, stated 0.411"
+   }
+  ]
+ },
+ {
+  "id": "478eb1a31f",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.em.emf",
+  "matchedLhs": "1.5/3.0 ",
+  "originalValue": "0.50",
+  "corruptedValue": "0.685",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.em.emf.md — Misconception Registry; I = 1.5/3.0 = 0.50 A, so the internal drop is 0.25 V and the terminals read 1.25 V. The emf appears at the terminals only when no current flows, which is what \"open-circuit reading\" means (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.em.emf.md — Misconception Registry; I = 1.5/3.0 = 0.685 A, so the internal drop is 0.25 V and the terminals read 1.25 V. The emf appears at the terminals only when no current flows, which is what \"open-circuit reading\" means (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": "docs/curriculum/blueprints/phys.em.emf.md — Misconception Registry; I = 1.5/3.0 = 0.685 A, so the internal drop is 0.25 V and the terminals read 1.25 V. The emf app",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "0.685 A",
+    "expected": "0.5",
+    "sentence": "md — Misconception Registry; I = 1.5/3.0 = 0.685 A, so the internal drop is 0.25 V and the terminals read 1.25 V.",
+    "detail": "3 tokens evaluate to 0.5, stated 0.685"
+   }
+  ]
+ },
+ {
+  "id": "fe1d52751e",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.em.energy-capacitor",
+  "matchedLhs": "1.0e-4 × 400 ",
+  "originalValue": "0.020",
+  "corruptedValue": "0.0274",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.em.energy-capacitor.md — Misconception Registry; E = ½CV² = ½ × 1.0e-4 × 400 = 0.020 J. Both wrong options are the formula with one factor missing, and each is out by a different amount (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.em.energy-capacitor.md — Misconception Registry; E = ½CV² = ½ × 1.0e-4 × 400 = 0.0274 J. Both wrong options are the formula with one factor missing, and each is out by a different amount (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": "docs/curriculum/blueprints/phys.em.energy-capacitor.md — Misconception Registry; E = ½CV² = ½ × 1.0e-4 × 400 = 0.0274 J. Both wrong options are the formula with one factor missing, and each is ou",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "0.0274 J",
+    "expected": "0.02",
+    "sentence": "md — Misconception Registry; E = ½CV² = ½ × 1.0e-4 × 400 = 0.0274 J.",
+    "detail": "5 tokens evaluate to 0.02, stated 0.027"
+   }
+  ]
+ },
+ {
+  "id": "eade69149c",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.em.faradays-law",
+  "matchedLhs": "200 × 4.0e-3 / 0.020 ",
+  "originalValue": "40",
+  "corruptedValue": "54.8",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.em.faradays-law.md — Misconception Registry; ε = N ΔΦ/Δt = 200 × 4.0e-3 / 0.020 = 40 V. Omitting N is what makes a 200-turn coil behave like a single loop, and it is the most common slip in this calculation (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.em.faradays-law.md — Misconception Registry; ε = N ΔΦ/Δt = 200 × 4.0e-3 / 0.020 = 54.8 V. Omitting N is what makes a 200-turn coil behave like a single loop, and it is the most common slip in this calculation (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": "docs/curriculum/blueprints/phys.em.faradays-law.md — Misconception Registry; ε = N ΔΦ/Δt = 200 × 4.0e-3 / 0.020 = 54.8 V. Omitting N is what makes a 200-turn coil behave like a single loop, and ",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "54.8 V",
+    "expected": "40",
+    "sentence": "md — Misconception Registry; ε = N ΔΦ/Δt = 200 × 4.0e-3 / 0.020 = 54.8 V.",
+    "detail": "5 tokens evaluate to 40, stated 54.8"
+   }
+  ]
+ },
+ {
+  "id": "cce65f78e8",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.em.kirchhoffs-laws",
+  "matchedLhs": "3.0 + 2.0 − 1.5 ",
+  "originalValue": "3.5",
+  "corruptedValue": "4.79",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.em.kirchhoffs-laws.md — Misconception Registry; 3.0 + 2.0 − 1.5 = 3.5 A. Signs are the whole difficulty of applying the junction rule, and each distractor drops a different one (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.em.kirchhoffs-laws.md — Misconception Registry; 3.0 + 2.0 − 1.5 = 4.79 A. Signs are the whole difficulty of applying the junction rule, and each distractor drops a different one (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": "docs/curriculum/blueprints/phys.em.kirchhoffs-laws.md — Misconception Registry; 3.0 + 2.0 − 1.5 = 4.79 A. Signs are the whole difficulty of applying the junction rule, and each d",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "4.79 A",
+    "expected": "3.5",
+    "sentence": "md — Misconception Registry; 3.0 + 2.0 − 1.5 = 4.79 A.",
+    "detail": "5 tokens evaluate to 3.5, stated 4.79"
+   }
+  ]
+ },
+ {
+  "id": "6233260f38",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.em.lc-circuits",
+  "matchedLhs": "1/√(LC) with LC ",
+  "originalValue": "1.0",
+  "corruptedValue": "1.37",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.em.lc-circuits.md — Misconception Registry; ω = 1/√(LC) with LC = 1.0e-7 s², so ω ≈ 3162 rad/s. Missing the square root gives 1.0e7, which is out by more than three orders of magnitude (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.em.lc-circuits.md — Misconception Registry; ω = 1/√(LC) with LC = 1.37e-7 s², so ω ≈ 3162 rad/s. Missing the square root gives 1.0e7, which is out by more than three orders of magnitude (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": "docs/curriculum/blueprints/phys.em.lc-circuits.md — Misconception Registry; ω = 1/√(LC) with LC = 1.37e-7 s², so ω ≈ 3162 rad/s. Missing the square root gives 1.0e7, which is out b",
+  "caughtN1": false,
+  "caughtAny": false,
+  "flags": []
+ },
+ {
+  "id": "c04b207925",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.em.magnetic-force",
+  "matchedLhs": "0.20 × 3.0 × 0.50 ",
+  "originalValue": "0.30",
+  "corruptedValue": "0.411",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.em.magnetic-force.md — Misconception Registry; F = BIL = 0.20 × 3.0 × 0.50 = 0.30 N — the motor-effect calculation, which the concept's existing parallel-wire probes assume without ever asking for (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.em.magnetic-force.md — Misconception Registry; F = BIL = 0.20 × 3.0 × 0.50 = 0.411 N — the motor-effect calculation, which the concept's existing parallel-wire probes assume without ever asking for (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": "docs/curriculum/blueprints/phys.em.magnetic-force.md — Misconception Registry; F = BIL = 0.20 × 3.0 × 0.50 = 0.411 N — the motor-effect calculation, which the concept's existing parallel-wire",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "0.411 N",
+    "expected": "0.3",
+    "sentence": "md — Misconception Registry; F = BIL = 0.20 × 3.0 × 0.50 = 0.411 N — the motor-effect calculation, which the concept's existing parallel-wire probes assume without ever asking for (probe-depth set, gradeable-basis audit 2026-08-30)",
+    "detail": "5 tokens evaluate to 0.3, stated 0.411"
+   }
+  ]
+ },
+ {
+  "id": "f5cbcc3f28",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.em.ohms-law",
+  "matchedLhs": "6.0/0.25 ",
+  "originalValue": "24",
+  "corruptedValue": "32.9",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.em.ohms-law.md — Misconception Registry; R = V/I = 6.0/0.25 = 24 Ω; the concept's existing probes are all about whether a component OBEYS the law and never ask for a plain resistance (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.em.ohms-law.md — Misconception Registry; R = V/I = 6.0/0.25 = 32.9 Ω; the concept's existing probes are all about whether a component OBEYS the law and never ask for a plain resistance (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": "docs/curriculum/blueprints/phys.em.ohms-law.md — Misconception Registry; R = V/I = 6.0/0.25 = 32.9 Ω; the concept's existing probes are all about whether a component OBEYS th",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "32.9 Ω",
+    "expected": "24",
+    "sentence": "md — Misconception Registry; R = V/I = 6.0/0.25 = 32.9 Ω; the concept's existing probes are all about whether a component OBEYS the law and never ask for a plain resistance (probe-depth set, gradeable-basis audit 2026-08-30)",
+    "detail": "3 tokens evaluate to 24, stated 32.9"
+   }
+  ]
+ },
+ {
+  "id": "5947ba743a",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.em.rc-circuits",
+  "matchedLhs": "2.0e6 × 5.0e-6 ",
+  "originalValue": "10",
+  "corruptedValue": "13.7",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.em.rc-circuits.md — Misconception Registry; τ = RC = 2.0e6 × 5.0e-6 = 10 s. The prefixes cancel exactly, which is the point: megohms with microfarads give seconds (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.em.rc-circuits.md — Misconception Registry; τ = RC = 2.0e6 × 5.0e-6 = 13.7 s. The prefixes cancel exactly, which is the point: megohms with microfarads give seconds (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": "docs/curriculum/blueprints/phys.em.rc-circuits.md — Misconception Registry; τ = RC = 2.0e6 × 5.0e-6 = 13.7 s. The prefixes cancel exactly, which is the point: megohms with microfarads",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "13.7 s",
+    "expected": "10",
+    "sentence": "md — Misconception Registry; τ = RC = 2.0e6 × 5.0e-6 = 13.7 s.",
+    "detail": "3 tokens evaluate to 10, stated 13.7"
+   }
+  ]
+ },
+ {
+  "id": "160dc49056",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.em.self-inductance",
+  "matchedLhs": "0.50 × 16 ",
+  "originalValue": "4.0",
+  "corruptedValue": "5.48",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.em.self-inductance.md — Misconception Registry; E = ½LI² = ½ × 0.50 × 16 = 4.0 J — the exact structural twin of ½CV² for a capacitor, and the half arises for the same reason (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.em.self-inductance.md — Misconception Registry; E = ½LI² = ½ × 0.50 × 16 = 5.48 J — the exact structural twin of ½CV² for a capacitor, and the half arises for the same reason (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": "docs/curriculum/blueprints/phys.em.self-inductance.md — Misconception Registry; E = ½LI² = ½ × 0.50 × 16 = 5.48 J — the exact structural twin of ½CV² for a capacitor, and the half arises ",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "5.48 J",
+    "expected": "4",
+    "sentence": "md — Misconception Registry; E = ½LI² = ½ × 0.50 × 16 = 5.48 J — the exact structural twin of ½CV² for a capacitor, and the half arises for the same reason (probe-depth set, gradeable-basis audit 2026-08-30)",
+    "detail": "5 tokens evaluate to 4, stated 5.48"
+   }
+  ]
+ },
+ {
+  "id": "8a52bd5be7",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.em.wheatstone-bridge",
+  "matchedLhs": "120 × 50 / 200 ",
+  "originalValue": "30",
+  "corruptedValue": "41.1",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.em.wheatstone-bridge.md — Misconception Registry; S = RQ/P = 120 × 50 / 200 = 30 Ω. The 480 Ω option is the same three numbers with the ratio the other way up, which is the error the balance condition's symmetry invites (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.em.wheatstone-bridge.md — Misconception Registry; S = RQ/P = 120 × 50 / 200 = 41.1 Ω. The 480 Ω option is the same three numbers with the ratio the other way up, which is the error the balance condition's symmetry invites (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": "docs/curriculum/blueprints/phys.em.wheatstone-bridge.md — Misconception Registry; S = RQ/P = 120 × 50 / 200 = 41.1 Ω. The 480 Ω option is the same three numbers with the ratio the other way ",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "41.1 Ω",
+    "expected": "30",
+    "sentence": "md — Misconception Registry; S = RQ/P = 120 × 50 / 200 = 41.1 Ω.",
+    "detail": "5 tokens evaluate to 30, stated 41.1"
+   }
+  ]
+ },
+ {
+  "id": "5fe10823a7",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.opt.lens-power",
+  "matchedLhs": "1/f with f in METRES: 1/0.25 ",
+  "originalValue": "4.0",
+  "corruptedValue": "5.48",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.opt.lens-power.md — Misconception Registry; P = 1/f with f in METRES: 1/0.25 = 4.0 D. Leaving the focal length in centimetres gives 0.040 D, an error of exactly one hundred, and the dioptre is defined so that this cannot be fudged (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.opt.lens-power.md — Misconception Registry; P = 1/f with f in METRES: 1/0.25 = 5.48 D. Leaving the focal length in centimetres gives 0.040 D, an error of exactly one hundred, and the dioptre is defined so that this cannot be fudged (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": "docs/curriculum/blueprints/phys.opt.lens-power.md — Misconception Registry; P = 1/f with f in METRES: 1/0.25 = 5.48 D. Leaving the focal length in centimetres gives 0.040 D, an error of exact",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "5.48 D",
+    "expected": "4",
+    "sentence": "md — Misconception Registry; P = 1/f with f in METRES: 1/0.25 = 5.48 D.",
+    "detail": "3 tokens evaluate to 4, stated 5.48"
+   }
+  ]
+ },
+ {
+  "id": "7bc8772542",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.opt.lenses",
+  "matchedLhs": "1/v ",
+  "originalValue": "1",
+  "corruptedValue": "1.37",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.opt.lenses.md — Misconception Registry; 1/v = 1/f + 1/u with u = −15 cm gives 1/v = 1/10 − 1/15 = 1/30, so v = +30 cm and m = v/u = −2. The object sits between f and 2f, which is the case that magnifies — the last option adds the distances, which is the arithmetic shortcut the lens equation exists to replace (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.opt.lenses.md — Misconception Registry; 1/v = 1.37/f + 1/u with u = −15 cm gives 1/v = 1/10 − 1/15 = 1/30, so v = +30 cm and m = v/u = −2. The object sits between f and 2f, which is the case that magnifies — the last option adds the distances, which is the arithmetic shortcut the lens equation exists to replace (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": "docs/curriculum/blueprints/phys.opt.lenses.md — Misconception Registry; 1/v = 1.37/f + 1/u with u = −15 cm gives 1/v = 1/10 − 1/15 = 1/30, so v = +30 cm and m ",
+  "caughtN1": false,
+  "caughtAny": false,
+  "flags": []
+ },
+ {
+  "id": "87e5ab166d",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.opt.refraction",
+  "matchedLhs": "30° / 1.50 ",
+  "originalValue": "0.3333",
+  "corruptedValue": "0.457",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.opt.refraction.md — Misconception Registry; sin r = sin 30° / 1.50 = 0.3333, so r = 19.5°. The 20° option divides the ANGLE rather than its sine, which lands close enough to look right and is a different operation (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.opt.refraction.md — Misconception Registry; sin r = sin 30° / 1.50 = 0.457, so r = 19.5°. The 20° option divides the ANGLE rather than its sine, which lands close enough to look right and is a different operation (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": "docs/curriculum/blueprints/phys.opt.refraction.md — Misconception Registry; sin r = sin 30° / 1.50 = 0.457, so r = 19.5°. The 20° option divides the ANGLE rather than its sine, which ",
+  "caughtN1": false,
+  "caughtAny": false,
+  "flags": []
+ },
+ {
+  "id": "8609340a55",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.opt.total-internal-reflection",
+  "matchedLhs": "1/1.50 ",
+  "originalValue": "0.667",
+  "corruptedValue": "0.914",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.opt.total-internal-reflection.md — Misconception Registry; sin C = 1/1.50 = 0.667, so C = 41.8°. The 48.2° option is its complement, which is what you get from measuring the angle from the surface rather than from the normal (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.opt.total-internal-reflection.md — Misconception Registry; sin C = 1/1.50 = 0.914, so C = 41.8°. The 48.2° option is its complement, which is what you get from measuring the angle from the surface rather than from the normal (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": "docs/curriculum/blueprints/phys.opt.total-internal-reflection.md — Misconception Registry; sin C = 1/1.50 = 0.914, so C = 41.8°. The 48.2° option is its complement, which is what you get fro",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "0.914",
+    "expected": "0.667",
+    "sentence": "md — Misconception Registry; sin C = 1/1.50 = 0.914, so C = 41.8°.",
+    "detail": "3 tokens evaluate to 0.667, stated 0.914"
+   }
+  ]
+ },
+ {
+  "id": "c6fd9b18ab",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.opt.youngs-experiment",
+  "matchedLhs": "600e-9 × 2.0 / 0.50e-3 ",
+  "originalValue": "2.4",
+  "corruptedValue": "3.29",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.opt.youngs-experiment.md — Misconception Registry; y = λD/d = 600e-9 × 2.0 / 0.50e-3 = 2.4 mm. The two wrong powers of ten are what a mishandled milli or nano prefix produces, and the answer is a length you could actually measure with a ruler (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.opt.youngs-experiment.md — Misconception Registry; y = λD/d = 600e-9 × 2.0 / 0.50e-3 = 3.29 mm. The two wrong powers of ten are what a mishandled milli or nano prefix produces, and the answer is a length you could actually measure with a ruler (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": "docs/curriculum/blueprints/phys.opt.youngs-experiment.md — Misconception Registry; y = λD/d = 600e-9 × 2.0 / 0.50e-3 = 3.29 mm. The two wrong powers of ten are what a mishandled milli or nano prefix ",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "3.29 mm",
+    "expected": "0.002",
+    "sentence": "md — Misconception Registry; y = λD/d = 600e-9 × 2.0 / 0.50e-3 = 3.29 mm.",
+    "detail": "5 tokens evaluate to 0.002, stated 3.29"
+   }
+  ]
+ },
+ {
+  "id": "c53cc685b7",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.qm.angular-momentum-addition",
+  "matchedLhs": "2j₁+1)(2j₂+1) ",
+  "originalValue": "9",
+  "corruptedValue": "12.3",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.qm.angular-momentum-addition.md — Misconception Registry; the count must be preserved: (2j₁+1)(2j₂+1) = 9 before coupling, and 5 + 3 + 1 = 9 after. That arithmetic check is the fastest way to catch a wrong decomposition (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.qm.angular-momentum-addition.md — Misconception Registry; the count must be preserved: (2j₁+1)(2j₂+1) = 12.3 before coupling, and 5 + 3 + 1 = 9 after. That arithmetic check is the fastest way to catch a wrong decomposition (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": "blueprints/phys.qm.angular-momentum-addition.md — Misconception Registry; the count must be preserved: (2j₁+1)(2j₂+1) = 12.3 before coupling, and 5 + 3 + 1 = 9 after. That arithmetic check is the fast",
+  "caughtN1": false,
+  "caughtAny": false,
+  "flags": []
+ },
+ {
+  "id": "e62495acb1",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.particle.hadron-quark-model",
+  "matchedLhs": "2/3 + 2/3 − 1/3 ",
+  "originalValue": "1",
+  "corruptedValue": "1.37",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.particle.hadron-quark-model.md — Misconception Registry; 2/3 + 2/3 − 1/3 = 1 exactly. Reproducing the observed integer charge from thirds is the arithmetic that made the quark model credible, and the +5/3 option is the same sum with a dropped sign (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.particle.hadron-quark-model.md — Misconception Registry; 2/3 + 2/3 − 1/3 = 1.37 exactly. Reproducing the observed integer charge from thirds is the arithmetic that made the quark model credible, and the +5/3 option is the same sum with a dropped sign (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": "docs/curriculum/blueprints/phys.particle.hadron-quark-model.md — Misconception Registry; 2/3 + 2/3 − 1/3 = 1.37 exactly. Reproducing the observed integer charge from thirds is the arithmet",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "1.37",
+    "expected": "1",
+    "sentence": "md — Misconception Registry; 2/3 + 2/3 − 1/3 = 1.37 exactly.",
+    "detail": "11 tokens evaluate to 1, stated 1.37"
+   }
+  ]
+ },
+ {
+  "id": "338d302fd0",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.meas.unit-conversion",
+  "matchedLhs": "72 × 1000 / 3600 ",
+  "originalValue": "20",
+  "corruptedValue": "27.4",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.meas.unit-conversion.md — Misconception Registry; 72 × 1000 / 3600 = 20. Two conversions happen at once here and in opposite directions, which is why the factor 3.6 gets inverted so often (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.meas.unit-conversion.md — Misconception Registry; 72 × 1000 / 3600 = 27.4. Two conversions happen at once here and in opposite directions, which is why the factor 3.6 gets inverted so often (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": "docs/curriculum/blueprints/phys.meas.unit-conversion.md — Misconception Registry; 72 × 1000 / 3600 = 27.4. Two conversions happen at once here and in opposite directions, which is wh",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "27.4",
+    "expected": "20",
+    "sentence": "md — Misconception Registry; 72 × 1000 / 3600 = 27.4.",
+    "detail": "5 tokens evaluate to 20, stated 27.4"
+   }
+  ]
+ },
+ {
+  "id": "014d977456",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.mech.normal-force",
+  "matchedLhs": "19.6 + 10 ",
+  "originalValue": "29.6",
+  "corruptedValue": "40.6",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.mech.normal-force.md — Misconception Registry; MC-NORMAL-EQUALS-WEIGHT: vertical balance N = mg + F_hand = 19.6 + 10 = 29.6 N; the normal force is whatever the surface must supply, not the weight (launch-set slack, synthetic-student pool exhaustion 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.mech.normal-force.md — Misconception Registry; MC-NORMAL-EQUALS-WEIGHT: vertical balance N = mg + F_hand = 19.6 + 10 = 40.6 N; the normal force is whatever the surface must supply, not the weight (launch-set slack, synthetic-student pool exhaustion 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": ".mech.normal-force.md — Misconception Registry; MC-NORMAL-EQUALS-WEIGHT: vertical balance N = mg + F_hand = 19.6 + 10 = 40.6 N; the normal force is whatever the surface must supply, not the weight (la",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "40.6 N",
+    "expected": "29.6",
+    "sentence": "md — Misconception Registry; MC-NORMAL-EQUALS-WEIGHT: vertical balance N = mg + F_hand = 19.6 + 10 = 40.6 N; the normal force is whatever the surface must supply, not the weight (launch-set slack, synthetic-student pool exhaustion 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+    "detail": "3 tokens evaluate to 29.6, stated 40.6"
+   }
+  ]
+ },
+ {
+  "id": "315f970156",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.mech.normal-force",
+  "matchedLhs": "9.8 m/s², sin 30° ",
+  "originalValue": "0.5",
+  "corruptedValue": "0.685",
+  "replaceLandedAtMatch": true,
+  "original": "A 10 kg box sits on a level floor. A rope pulls it with a tension of 40 N at 30° ABOVE the horizontal, and the box stays in contact with the floor. What is the normal force from the floor? (g = 9.8 m/s², sin 30° = 0.5)",
+  "corrupted": "A 10 kg box sits on a level floor. A rope pulls it with a tension of 40 N at 30° ABOVE the horizontal, and the box stays in contact with the floor. What is the normal force from the floor? (g = 9.8 m/s², sin 30° = 0.685)",
+  "excerpt": "ontal, and the box stays in contact with the floor. What is the normal force from the floor? (g = 9.8 m/s², sin 30° = 0.685)",
+  "caughtN1": false,
+  "caughtAny": false,
+  "flags": []
+ },
+ {
+  "id": "83cde75806",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.mech.normal-force",
+  "matchedLhs": "40 × sin 30° ",
+  "originalValue": "20",
+  "corruptedValue": "27.4",
+  "replaceLandedAtMatch": true,
+  "original": "78 N — the rope's upward part (40 × sin 30° = 20 N) carries some of the 98 N weight",
+  "corrupted": "78 N — the rope's upward part (40 × sin 30° = 27.4 N) carries some of the 98 N weight",
+  "excerpt": "78 N — the rope's upward part (40 × sin 30° = 27.4 N) carries some of the 98 N weight",
+  "caughtN1": false,
+  "caughtAny": false,
+  "flags": []
+ },
+ {
+  "id": "2d4f082614",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.mech.normal-force",
+  "matchedLhs": "98 − 20 ",
+  "originalValue": "78",
+  "corruptedValue": "107",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.mech.normal-force.md — Misconception Registry; MC-NORMAL-EQUALS-WEIGHT with an angled pull: N + T sin θ = mg gives N = 98 − 20 = 78 N; only the vertical component of the tension changes N (launch-set slack, 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.mech.normal-force.md — Misconception Registry; MC-NORMAL-EQUALS-WEIGHT with an angled pull: N + T sin θ = mg gives N = 98 − 20 = 107 N; only the vertical component of the tension changes N (launch-set slack, 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": "al-force.md — Misconception Registry; MC-NORMAL-EQUALS-WEIGHT with an angled pull: N + T sin θ = mg gives N = 98 − 20 = 107 N; only the vertical component of the tension changes N (launch-set slack, 2",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "107 N",
+    "expected": "78",
+    "sentence": "md — Misconception Registry; MC-NORMAL-EQUALS-WEIGHT with an angled pull: N + T sin θ = mg gives N = 98 − 20 = 107 N; only the vertical component of the tension changes N (launch-set slack, 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+    "detail": "3 tokens evaluate to 78, stated 107"
+   }
+  ]
+ },
+ {
+  "id": "ccfdf7459d",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.mech.acceleration",
+  "matchedLhs": "25 − 10)/5 ",
+  "originalValue": "3",
+  "corruptedValue": "4.11",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.mech.acceleration.md — Misconception Registry; a = Δv/Δt = (25 − 10)/5 = 3 m/s²; dividing the final speed by the time reads acceleration as speed (launch-set slack, synthetic-student pool exhaustion 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.mech.acceleration.md — Misconception Registry; a = Δv/Δt = (25 − 10)/5 = 4.11 m/s²; dividing the final speed by the time reads acceleration as speed (launch-set slack, synthetic-student pool exhaustion 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": "docs/curriculum/blueprints/phys.mech.acceleration.md — Misconception Registry; a = Δv/Δt = (25 − 10)/5 = 4.11 m/s²; dividing the final speed by the time reads acceleration as speed (lau",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "4.11 m/s²",
+    "expected": "3",
+    "sentence": "md — Misconception Registry; a = Δv/Δt = (25 − 10)/5 = 4.11 m/s²; dividing the final speed by the time reads acceleration as speed (launch-set slack, synthetic-student pool exhaustion 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+    "detail": "7 tokens evaluate to 3, stated 4.11"
+   }
+  ]
+ },
+ {
+  "id": "864f048fed",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.mech.newtons-second-law",
+  "matchedLhs": "12/3 ",
+  "originalValue": "4",
+  "corruptedValue": "5.48",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.mech.newtons-second-law.md — Misconception Registry; a = ΣF/m = 12/3 = 4 m/s² (launch-set slack, synthetic-student pool exhaustion 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.mech.newtons-second-law.md — Misconception Registry; a = ΣF/m = 12/3 = 5.48 m/s² (launch-set slack, synthetic-student pool exhaustion 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": "docs/curriculum/blueprints/phys.mech.newtons-second-law.md — Misconception Registry; a = ΣF/m = 12/3 = 5.48 m/s² (launch-set slack, synthetic-student pool exhaustion 2026-09-25) (prob",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "5.48 m/s²",
+    "expected": "4",
+    "sentence": "md — Misconception Registry; a = ΣF/m = 12/3 = 5.48 m/s² (launch-set slack, synthetic-student pool exhaustion 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+    "detail": "3 tokens evaluate to 4, stated 5.48"
+   }
+  ]
+ },
+ {
+  "id": "f69f7a8f94",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.mech.newtons-second-law",
+  "matchedLhs": "3 m/s² — the NET force is 10 − 4 ",
+  "originalValue": "6",
+  "corruptedValue": "8.22",
+  "replaceLandedAtMatch": true,
+  "original": "3 m/s² — the NET force is 10 − 4 = 6 N",
+  "corrupted": "3 m/s² — the NET force is 10 − 4 = 8.22 N",
+  "excerpt": "3 m/s² — the NET force is 10 − 4 = 8.22 N",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "8.22 N",
+    "expected": "6",
+    "sentence": "3 m/s² — the NET force is 10 − 4 = 8.22 N",
+    "detail": "3 tokens evaluate to 6, stated 8.22"
+   }
+  ]
+ },
+ {
+  "id": "45721ded47",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.mech.newtons-second-law",
+  "matchedLhs": "10 − 4 ",
+  "originalValue": "6",
+  "corruptedValue": "8.22",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.mech.newtons-second-law.md — Misconception Registry; ΣF = 10 − 4 = 6 N, so a = 6/2 = 3 m/s²; the second law uses the NET force, not the applied one (launch-set slack, synthetic-student pool exhaustion 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.mech.newtons-second-law.md — Misconception Registry; ΣF = 10 − 4 = 8.22 N, so a = 6/2 = 3 m/s²; the second law uses the NET force, not the applied one (launch-set slack, synthetic-student pool exhaustion 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": "docs/curriculum/blueprints/phys.mech.newtons-second-law.md — Misconception Registry; ΣF = 10 − 4 = 8.22 N, so a = 6/2 = 3 m/s²; the second law uses the NET force, not the applied ",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "8.22 N",
+    "expected": "6",
+    "sentence": "md — Misconception Registry; ΣF = 10 − 4 = 8.22 N, so a = 6/2 = 3 m/s²; the second law uses the NET force, not the applied one (launch-set slack, synthetic-student pool exhaustion 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+    "detail": "3 tokens evaluate to 6, stated 8.22"
+   }
+  ]
+ },
+ {
+  "id": "dcbce11f1b",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.mech.tension",
+  "matchedLhs": "5 × 9.8 ",
+  "originalValue": "49",
+  "corruptedValue": "67.1",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.mech.tension.md — Misconception Registry; at rest the net force is zero, so T = mg = 5 × 9.8 = 49 N (launch-set slack, synthetic-student pool exhaustion 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.mech.tension.md — Misconception Registry; at rest the net force is zero, so T = mg = 5 × 9.8 = 67.1 N (launch-set slack, synthetic-student pool exhaustion 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": "rriculum/blueprints/phys.mech.tension.md — Misconception Registry; at rest the net force is zero, so T = mg = 5 × 9.8 = 67.1 N (launch-set slack, synthetic-student pool exhaustion 2026-09-25) (probe-d",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "67.1 N",
+    "expected": "49",
+    "sentence": "md — Misconception Registry; at rest the net force is zero, so T = mg = 5 × 9.8 = 67.1 N (launch-set slack, synthetic-student pool exhaustion 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+    "detail": "3 tokens evaluate to 49, stated 67.1"
+   }
+  ]
+ },
+ {
+  "id": "b564f1badf",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.mech.friction",
+  "matchedLhs": "0.5 × 98 ",
+  "originalValue": "49",
+  "corruptedValue": "67.1",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.mech.friction.md — Misconception Registry; static friction adjusts to whatever keeps the box still, up to μs N = 0.5 × 98 = 49 N; μs N is a maximum, not the value (launch-set slack, synthetic-student pool exhaustion 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.mech.friction.md — Misconception Registry; static friction adjusts to whatever keeps the box still, up to μs N = 0.5 × 98 = 67.1 N; μs N is a maximum, not the value (launch-set slack, synthetic-student pool exhaustion 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": ".friction.md — Misconception Registry; static friction adjusts to whatever keeps the box still, up to μs N = 0.5 × 98 = 67.1 N; μs N is a maximum, not the value (launch-set slack, synthetic-student po",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "67.1 N",
+    "expected": "49",
+    "sentence": "md — Misconception Registry; static friction adjusts to whatever keeps the box still, up to μs N = 0.5 × 98 = 67.1 N; μs N is a maximum, not the value (launch-set slack, synthetic-student pool exhaustion 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+    "detail": "3 tokens evaluate to 49, stated 67.1"
+   }
+  ]
+ },
+ {
+  "id": "f3e26c2250",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.mech.inclined-plane",
+  "matchedLhs": "9.8 m/s², sin 30° ",
+  "originalValue": "0.5",
+  "corruptedValue": "0.685",
+  "replaceLandedAtMatch": true,
+  "original": "A 4 kg block sits on a frictionless ramp inclined at 30°. What is the part of its weight that acts ALONG the slope? (g = 9.8 m/s², sin 30° = 0.5, cos 30° ≈ 0.87)",
+  "corrupted": "A 4 kg block sits on a frictionless ramp inclined at 30°. What is the part of its weight that acts ALONG the slope? (g = 9.8 m/s², sin 30° = 0.685, cos 30° ≈ 0.87)",
+  "excerpt": "frictionless ramp inclined at 30°. What is the part of its weight that acts ALONG the slope? (g = 9.8 m/s², sin 30° = 0.685, cos 30° ≈ 0.87)",
+  "caughtN1": false,
+  "caughtAny": false,
+  "flags": []
+ },
+ {
+  "id": "bb5323d8da",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.mech.inclined-plane",
+  "matchedLhs": "4 × 9.8 × 0.5 ",
+  "originalValue": "19.6",
+  "corruptedValue": "26.9",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.mech.inclined-plane.md — Misconception Registry; along the slope the weight component is mg sin θ = 4 × 9.8 × 0.5 = 19.6 N; mg cos θ is the component into the surface (launch-set slack, synthetic-student pool exhaustion 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.mech.inclined-plane.md — Misconception Registry; along the slope the weight component is mg sin θ = 4 × 9.8 × 0.5 = 26.9 N; mg cos θ is the component into the surface (launch-set slack, synthetic-student pool exhaustion 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": "hys.mech.inclined-plane.md — Misconception Registry; along the slope the weight component is mg sin θ = 4 × 9.8 × 0.5 = 26.9 N; mg cos θ is the component into the surface (launch-set slack, synthetic-",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "26.9 N",
+    "expected": "19.6",
+    "sentence": "md — Misconception Registry; along the slope the weight component is mg sin θ = 4 × 9.8 × 0.5 = 26.9 N; mg cos θ is the component into the surface (launch-set slack, synthetic-student pool exhaustion 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+    "detail": "5 tokens evaluate to 19.6, stated 26.9"
+   }
+  ]
+ },
+ {
+  "id": "83e0bafcb9",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.mech.impulse",
+  "matchedLhs": "1000 × 20)/4 ",
+  "originalValue": "5000",
+  "corruptedValue": "6850",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.mech.impulse.md — Misconception Registry; FΔt = Δp gives F = (1000 × 20)/4 = 5000 N; a longer stopping time would mean a smaller force (launch-set slack, synthetic-student pool exhaustion 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.mech.impulse.md — Misconception Registry; FΔt = Δp gives F = (1000 × 20)/4 = 6850 N; a longer stopping time would mean a smaller force (launch-set slack, synthetic-student pool exhaustion 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": "docs/curriculum/blueprints/phys.mech.impulse.md — Misconception Registry; FΔt = Δp gives F = (1000 × 20)/4 = 6850 N; a longer stopping time would mean a smaller force (launch-set slack, syn",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "6850 N",
+    "expected": "5000",
+    "sentence": "md — Misconception Registry; FΔt = Δp gives F = (1000 × 20)/4 = 6850 N; a longer stopping time would mean a smaller force (launch-set slack, synthetic-student pool exhaustion 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+    "detail": "7 tokens evaluate to 5000, stated 6850"
+   }
+  ]
+ },
+ {
+  "id": "f3134db751",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.mech.velocity",
+  "matchedLhs": "300/60 ",
+  "originalValue": "5",
+  "corruptedValue": "6.85",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.mech.velocity.md — Misconception Registry; v = Δx/Δt = 300/60 = 5 m/s, north; velocity carries the direction of the displacement (launch-set slack, 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.mech.velocity.md — Misconception Registry; v = Δx/Δt = 300/60 = 6.85 m/s, north; velocity carries the direction of the displacement (launch-set slack, 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": "docs/curriculum/blueprints/phys.mech.velocity.md — Misconception Registry; v = Δx/Δt = 300/60 = 6.85 m/s, north; velocity carries the direction of the displacement (launch-set ",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "6.85 m/s",
+    "expected": "5",
+    "sentence": "md — Misconception Registry; v = Δx/Δt = 300/60 = 6.85 m/s, north; velocity carries the direction of the displacement (launch-set slack, 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+    "detail": "3 tokens evaluate to 5, stated 6.85"
+   }
+  ]
+ },
+ {
+  "id": "019f6f97a5",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.mech.velocity",
+  "matchedLhs": "20/12 ≈ 1.7 m/s east; 60/12 ",
+  "originalValue": "5",
+  "corruptedValue": "6.85",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.mech.velocity.md — Misconception Registry; average velocity = net displacement / time = 20/12 ≈ 1.7 m/s east; 60/12 = 5 m/s is the average speed (launch-set slack, 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.mech.velocity.md — Misconception Registry; average velocity = net displacement / time = 20/12 ≈ 1.7 m/s east; 60/12 = 6.85 m/s is the average speed (launch-set slack, 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": "s.mech.velocity.md — Misconception Registry; average velocity = net displacement / time = 20/12 ≈ 1.7 m/s east; 60/12 = 6.85 m/s is the average speed (launch-set slack, 2026-09-25) (probe-depth set, g",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "6.85 m/s",
+    "expected": "5",
+    "sentence": "md — Misconception Registry; average velocity = net displacement / time = 20/12 ≈ 1.7 m/s east; 60/12 = 6.85 m/s is the average speed (launch-set slack, 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+    "detail": "3 tokens evaluate to 5, stated 6.85"
+   }
+  ]
+ },
+ {
+  "id": "158c138cf7",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.mech.force",
+  "matchedLhs": "300 + 200 − 400 ",
+  "originalValue": "100",
+  "corruptedValue": "137",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.mech.force.md — Misconception Registry; forces along a line add with sign: 300 + 200 − 400 = 100 N in the pushing direction (launch-set slack, 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.mech.force.md — Misconception Registry; forces along a line add with sign: 300 + 200 − 400 = 137 N in the pushing direction (launch-set slack, 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": "urriculum/blueprints/phys.mech.force.md — Misconception Registry; forces along a line add with sign: 300 + 200 − 400 = 137 N in the pushing direction (launch-set slack, 2026-09-25) (probe-depth set, g",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "137 N",
+    "expected": "100",
+    "sentence": "md — Misconception Registry; forces along a line add with sign: 300 + 200 − 400 = 137 N in the pushing direction (launch-set slack, 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+    "detail": "5 tokens evaluate to 100, stated 137"
+   }
+  ]
+ },
+ {
+  "id": "e4cb5fcbc2",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.mech.kinematics-2d",
+  "matchedLhs": "3 × 0.5 ",
+  "originalValue": "1.5",
+  "corruptedValue": "2.06",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.mech.kinematics-2d.md — Misconception Registry; x = vₓt = 3 × 0.5 = 1.5 m; gravity acts only vertically, so vₓ is unchanged (launch-set slack, 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.mech.kinematics-2d.md — Misconception Registry; x = vₓt = 3 × 0.5 = 2.06 m; gravity acts only vertically, so vₓ is unchanged (launch-set slack, 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": "docs/curriculum/blueprints/phys.mech.kinematics-2d.md — Misconception Registry; x = vₓt = 3 × 0.5 = 2.06 m; gravity acts only vertically, so vₓ is unchanged (launch-set slack, 2026",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "2.06 m",
+    "expected": "1.5",
+    "sentence": "md — Misconception Registry; x = vₓt = 3 × 0.5 = 2.06 m; gravity acts only vertically, so vₓ is unchanged (launch-set slack, 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+    "detail": "3 tokens evaluate to 1.5, stated 2.06"
+   }
+  ]
+ },
+ {
+  "id": "44cced7939",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.mech.projectile-motion",
+  "matchedLhs": "2 × 20/10) ",
+  "originalValue": "2",
+  "corruptedValue": "2.74",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.mech.projectile-motion.md — Misconception Registry; vertical motion is independent of horizontal: h = ½gt² gives t = √(2 × 20/10) = 2 s (launch-set slack, 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.mech.projectile-motion.md — Misconception Registry; vertical motion is independent of horizontal: h = ½gt² gives t = √(2 × 20/10) = 2.74 s (launch-set slack, 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": "le-motion.md — Misconception Registry; vertical motion is independent of horizontal: h = ½gt² gives t = √(2 × 20/10) = 2.74 s (launch-set slack, 2026-09-25) (probe-depth set, gradeable-basis audit 202",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "2.74 s",
+    "expected": "2",
+    "sentence": "md — Misconception Registry; vertical motion is independent of horizontal: h = ½gt² gives t = √(2 × 20/10) = 2.74 s (launch-set slack, 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+    "detail": "8 tokens evaluate to 2, stated 2.74"
+   }
+  ]
+ },
+ {
+  "id": "9f6a4ce4c0",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.mech.projectile-motion",
+  "matchedLhs": "10 m/s², sin 30° ",
+  "originalValue": "0.5",
+  "corruptedValue": "0.685",
+  "replaceLandedAtMatch": true,
+  "original": "A ball is kicked from level ground at 20 m/s, 30° above the horizontal. How long is it in the air before it lands on the same level? (g = 10 m/s², sin 30° = 0.5)",
+  "corrupted": "A ball is kicked from level ground at 20 m/s, 30° above the horizontal. How long is it in the air before it lands on the same level? (g = 10 m/s², sin 30° = 0.685)",
+  "excerpt": "0 m/s, 30° above the horizontal. How long is it in the air before it lands on the same level? (g = 10 m/s², sin 30° = 0.685)",
+  "caughtN1": false,
+  "caughtAny": false,
+  "flags": []
+ },
+ {
+  "id": "7de64f5b7a",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.mech.circular-motion",
+  "matchedLhs": "²/r ",
+  "originalValue": "3",
+  "corruptedValue": "4.11",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.mech.circular-motion.md — Misconception Registry; the direction of velocity keeps changing, so a = v²/r = 3²/1 = 9 m/s², pointing to the centre (launch-set slack, 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.mech.circular-motion.md — Misconception Registry; the direction of velocity keeps changing, so a = v²/r = 4.11²/1 = 9 m/s², pointing to the centre (launch-set slack, 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": "ueprints/phys.mech.circular-motion.md — Misconception Registry; the direction of velocity keeps changing, so a = v²/r = 4.11²/1 = 9 m/s², pointing to the centre (launch-set slack, 2026-09-25) (probe-d",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "9 m/s²",
+    "expected": "16.892",
+    "sentence": "md — Misconception Registry; the direction of velocity keeps changing, so a = v²/r = 4.11²/1 = 9 m/s², pointing to the centre (launch-set slack, 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+    "detail": "4 tokens evaluate to 16.892, stated 9"
+   }
+  ]
+ },
+ {
+  "id": "02ba0eed1e",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.mech.kinetic-energy",
+  "matchedLhs": "4 × 9 ",
+  "originalValue": "18",
+  "corruptedValue": "24.7",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.mech.kinetic-energy.md — Misconception Registry; KE = ½mv² = ½ × 4 × 9 = 18 J; kinetic energy grows with the SQUARE of speed (launch-set slack, 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.mech.kinetic-energy.md — Misconception Registry; KE = ½mv² = ½ × 4 × 9 = 24.7 J; kinetic energy grows with the SQUARE of speed (launch-set slack, 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": "docs/curriculum/blueprints/phys.mech.kinetic-energy.md — Misconception Registry; KE = ½mv² = ½ × 4 × 9 = 24.7 J; kinetic energy grows with the SQUARE of speed (launch-set slack, 2026-09",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "24.7 J",
+    "expected": "18",
+    "sentence": "md — Misconception Registry; KE = ½mv² = ½ × 4 × 9 = 24.7 J; kinetic energy grows with the SQUARE of speed (launch-set slack, 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+    "detail": "5 tokens evaluate to 18, stated 24.7"
+   }
+  ]
+ },
+ {
+  "id": "31a9cfdb43",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.mech.potential-energy",
+  "matchedLhs": "5 × 9.8 × 2 ",
+  "originalValue": "98",
+  "corruptedValue": "134",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.mech.potential-energy.md — Misconception Registry; ΔGPE = mgΔh = 5 × 9.8 × 2 = 98 J (launch-set slack, 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.mech.potential-energy.md — Misconception Registry; ΔGPE = mgΔh = 5 × 9.8 × 2 = 134 J (launch-set slack, 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": "docs/curriculum/blueprints/phys.mech.potential-energy.md — Misconception Registry; ΔGPE = mgΔh = 5 × 9.8 × 2 = 134 J (launch-set slack, 2026-09-25) (probe-depth set, gradeable-basis audit 202",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "134 J",
+    "expected": "98",
+    "sentence": "md — Misconception Registry; ΔGPE = mgΔh = 5 × 9.8 × 2 = 134 J (launch-set slack, 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+    "detail": "5 tokens evaluate to 98, stated 134"
+   }
+  ]
+ },
+ {
+  "id": "18eb9c8f58",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.mech.work-energy-theorem",
+  "matchedLhs": "4 m/s — ½ × 2 × v² ",
+  "originalValue": "16",
+  "corruptedValue": "21.9",
+  "replaceLandedAtMatch": true,
+  "original": "4 m/s — ½ × 2 × v² = 16",
+  "corrupted": "4 m/s — ½ × 2 × v² = 21.9",
+  "excerpt": "4 m/s — ½ × 2 × v² = 21.9",
+  "caughtN1": false,
+  "caughtAny": false,
+  "flags": []
+ },
+ {
+  "id": "aa4f8a17e5",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.mech.work-energy-theorem",
+  "matchedLhs": "2 × v² ",
+  "originalValue": "16",
+  "corruptedValue": "21.9",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.mech.work-energy-theorem.md — Misconception Registry; W_net = ΔKE, so ½ × 2 × v² = 16, v² = 16, v = 4 m/s (launch-set slack, 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.mech.work-energy-theorem.md — Misconception Registry; W_net = ΔKE, so ½ × 2 × v² = 21.9, v² = 16, v = 4 m/s (launch-set slack, 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": "docs/curriculum/blueprints/phys.mech.work-energy-theorem.md — Misconception Registry; W_net = ΔKE, so ½ × 2 × v² = 21.9, v² = 16, v = 4 m/s (launch-set slack, 2026-09-25) (probe-depth set, gradea",
+  "caughtN1": false,
+  "caughtAny": false,
+  "flags": []
+ },
+ {
+  "id": "55a38f9e9a",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.mech.conservation-of-energy",
+  "matchedLhs": "2 × 10 × 1.8) ",
+  "originalValue": "6",
+  "corruptedValue": "8.22",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.mech.conservation-of-energy.md — Misconception Registry; energy conservation: mgh = ½mv², mass cancels, v = √(2 × 10 × 1.8) = 6 m/s (launch-set slack, 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.mech.conservation-of-energy.md — Misconception Registry; energy conservation: mgh = ½mv², mass cancels, v = √(2 × 10 × 1.8) = 8.22 m/s (launch-set slack, 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": "onservation-of-energy.md — Misconception Registry; energy conservation: mgh = ½mv², mass cancels, v = √(2 × 10 × 1.8) = 8.22 m/s (launch-set slack, 2026-09-25) (probe-depth set, gradeable-basis audit ",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "8.22 m/s",
+    "expected": "6",
+    "sentence": "md — Misconception Registry; energy conservation: mgh = ½mv², mass cancels, v = √(2 × 10 × 1.8) = 8.22 m/s (launch-set slack, 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+    "detail": "8 tokens evaluate to 6, stated 8.22"
+   }
+  ]
+ },
+ {
+  "id": "611e98c71f",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.mech.power",
+  "matchedLhs": "1200/4 ",
+  "originalValue": "300",
+  "corruptedValue": "411",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.mech.power.md — Misconception Registry; P = E/t = 1200/4 = 300 W; power is the RATE of transferring energy, not the energy (launch-set slack, 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.mech.power.md — Misconception Registry; P = E/t = 1200/4 = 411 W; power is the RATE of transferring energy, not the energy (launch-set slack, 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": "docs/curriculum/blueprints/phys.mech.power.md — Misconception Registry; P = E/t = 1200/4 = 411 W; power is the RATE of transferring energy, not the energy (launch-set slac",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "411 W",
+    "expected": "300",
+    "sentence": "md — Misconception Registry; P = E/t = 1200/4 = 411 W; power is the RATE of transferring energy, not the energy (launch-set slack, 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+    "detail": "3 tokens evaluate to 300, stated 411"
+   }
+  ]
+ },
+ {
+  "id": "f12df1c320",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.mech.momentum",
+  "matchedLhs": "1500 × 20 ",
+  "originalValue": "30",
+  "corruptedValue": "41.1",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.mech.momentum.md — Misconception Registry; p = mv = 1500 × 20 = 30 000 kg·m/s, in the direction of the velocity; ½mv² is kinetic energy, not momentum (launch-set slack, 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.mech.momentum.md — Misconception Registry; p = mv = 1500 × 20 = 41.1 000 kg·m/s, in the direction of the velocity; ½mv² is kinetic energy, not momentum (launch-set slack, 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": "docs/curriculum/blueprints/phys.mech.momentum.md — Misconception Registry; p = mv = 1500 × 20 = 41.1 000 kg·m/s, in the direction of the velocity; ½mv² is kinetic energy, not m",
+  "caughtN1": false,
+  "caughtAny": false,
+  "flags": []
+ },
+ {
+  "id": "09bb5fb944",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.mech.momentum",
+  "matchedLhs": "0.15 × 30 − 0.15 × (−20) ",
+  "originalValue": "7.5",
+  "corruptedValue": "10.3",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.mech.momentum.md — Misconception Registry; taking the new direction as positive: Δp = 0.15 × 30 − 0.15 × (−20) = 7.5 kg·m/s; momentum is a vector, so a reversal adds the two magnitudes (launch-set depth, 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.mech.momentum.md — Misconception Registry; taking the new direction as positive: Δp = 0.15 × 30 − 0.15 × (−20) = 10.3 kg·m/s; momentum is a vector, so a reversal adds the two magnitudes (launch-set depth, 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": "s/phys.mech.momentum.md — Misconception Registry; taking the new direction as positive: Δp = 0.15 × 30 − 0.15 × (−20) = 10.3 kg·m/s; momentum is a vector, so a reversal adds the two magnitudes (launch",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "10.3 kg·m/s",
+    "expected": "7.5",
+    "sentence": "md — Misconception Registry; taking the new direction as positive: Δp = 0.15 × 30 − 0.15 × (−20) = 10.3 kg·m/s; momentum is a vector, so a reversal adds the two magnitudes (launch-set depth, 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+    "detail": "9 tokens evaluate to 7.5, stated 10.3"
+   }
+  ]
+ },
+ {
+  "id": "ec700fdc91",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.mech.friction",
+  "matchedLhs": "29.4 N — μk × N ",
+  "originalValue": "0.3",
+  "corruptedValue": "0.411",
+  "replaceLandedAtMatch": true,
+  "original": "29.4 N — μk × N = 0.3 × 98 N",
+  "corrupted": "29.4 N — μk × N = 0.411 × 98 N",
+  "excerpt": "29.4 N — μk × N = 0.411 × 98 N",
+  "caughtN1": false,
+  "caughtAny": false,
+  "flags": []
+ },
+ {
+  "id": "54c57810ba",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.mech.friction",
+  "matchedLhs": "0.3 × 98 ",
+  "originalValue": "29.4",
+  "corruptedValue": "40.3",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.mech.friction.md — Misconception Registry; on a level floor N = mg = 98 N, so f_k = μk N = 0.3 × 98 = 29.4 N (launch-set depth, 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.mech.friction.md — Misconception Registry; on a level floor N = mg = 98 N, so f_k = μk N = 0.3 × 98 = 40.3 N (launch-set depth, 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": "m/blueprints/phys.mech.friction.md — Misconception Registry; on a level floor N = mg = 98 N, so f_k = μk N = 0.3 × 98 = 40.3 N (launch-set depth, 2026-09-25) (probe-depth set, gradeable-basis audit 20",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "40.3 N",
+    "expected": "29.4",
+    "sentence": "md — Misconception Registry; on a level floor N = mg = 98 N, so f_k = μk N = 0.3 × 98 = 40.3 N (launch-set depth, 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+    "detail": "3 tokens evaluate to 29.4, stated 40.3"
+   }
+  ]
+ },
+ {
+  "id": "ffa4654316",
+  "file": "physicsDepthSeedAssets.ts",
+  "conceptId": "phys.mech.friction",
+  "matchedLhs": "20/(4 × 10) ",
+  "originalValue": "0.5",
+  "corruptedValue": "0.685",
+  "replaceLandedAtMatch": true,
+  "original": "docs/curriculum/blueprints/phys.mech.friction.md — Misconception Registry; the largest static friction is μs N, so μs = 20/(4 × 10) = 0.5 (launch-set depth, 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "corrupted": "docs/curriculum/blueprints/phys.mech.friction.md — Misconception Registry; the largest static friction is μs N, so μs = 20/(4 × 10) = 0.685 (launch-set depth, 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+  "excerpt": "blueprints/phys.mech.friction.md — Misconception Registry; the largest static friction is μs N, so μs = 20/(4 × 10) = 0.685 (launch-set depth, 2026-09-25) (probe-depth set, gradeable-basis audit 2026-",
+  "caughtN1": true,
+  "caughtAny": true,
+  "flags": [
+   {
+    "kind": "arithmetic",
+    "claimed": "0.685",
+    "expected": "0.5",
+    "sentence": "md — Misconception Registry; the largest static friction is μs N, so μs = 20/(4 × 10) = 0.685 (launch-set depth, 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+    "detail": "7 tokens evaluate to 0.5, stated 0.685"
+   }
+  ]
+ }
+]

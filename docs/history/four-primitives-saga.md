@@ -179,3 +179,12 @@ ambiguous lines. This is an indicator only, not the precision measurement.
 
 Not done, waiting on the owner: step 2 (offline precision on real tutor replies, same 90 % bar as
 `factCheck.ts`) and step 3 (production shadow, 1–2 weeks).
+
+## 2026-10-04 — numeric fact-check, step 2 (offline measurement) — owner instruction
+Measured offline only, detector unchanged (`882e0db7`). Full record:
+`docs/qa/numeric-fact-check-step2/REPORT.md` (reproduce with
+`npx tsx scripts/qa/numericFactCheckEval.ts --write`). Clean corpus 3,799 strings, 0 flags.
+Corrupted 113 (Step 1 set, unchanged): 70 caught, 26 correctly abstained, 6 invalid, 12 false
+negatives → recall 69/81 = 85.2 %. Precision: N1+N2 78/78 = 100 %; N3 1/11 = 9.1 % (cannot tell
+a new scenario from a wrong value). Verdict: step 3 shadow may proceed for N1+N2 only (call
+without authored context); N3 not ready. Step 3 waits on the owner.

@@ -1,0 +1,584 @@
+{
+ "summary": {
+  "generatedAt": "2026-10-04T22:18:03.602Z",
+  "clean": {
+   "strings": 3799,
+   "flags": 0,
+   "n3LeaveOneOut": {
+    "stringsChecked": 3799,
+    "concepts": 421,
+    "flags": 8
+   }
+  },
+  "corrupted": {
+   "cases": 113,
+   "caughtN1": 70,
+   "caughtAny": 70
+  },
+  "adversarial": {
+   "cases": 38,
+   "pass": 35,
+   "fail": [
+    "pct-wrong",
+    "pendulum-wrong",
+    "auth-new-scenario"
+   ]
+  }
+ },
+ "cleanFlags": [],
+ "n3LeaveOneOutFlags": [
+  {
+   "id": "a791d0c245",
+   "conceptId": "chem.found.concentration",
+   "kind": "authored",
+   "claimed": "58.5 g",
+   "expected": "40 g",
+   "sentence": "If you dissolve 58.5g NaCl in 1L of water, the total solution volume is MORE than 1L (the salt takes up space), so the molarity is LESS than 1M.",
+   "detail": "same setup as authored \"No — adding 40g of solid to 1L water makes the total volume MORE than 1L.\" (shares 1 L, 1 L)"
+  },
+  {
+   "id": "45da0521e2",
+   "conceptId": "chem.found.concentration",
+   "kind": "authored",
+   "claimed": "40 g",
+   "expected": "58.5 g",
+   "sentence": "No — adding 40g of solid to 1L water makes the total volume MORE than 1L.",
+   "detail": "same setup as authored \"If you dissolve 58.5g NaCl in 1L of water, the total solution volume is MORE than 1L (the salt takes up space), so the molarity is LESS than\" (shares 1 L, 1 L)"
+  },
+  {
+   "id": "27356d8aee",
+   "conceptId": "phys.mech.velocity",
+   "kind": "authored",
+   "claimed": "40 m",
+   "expected": "20 m",
+   "sentence": "A dog runs 40 m east in 8 s, then 20 m back west in 4 s.",
+   "detail": "same setup as authored \"2.5 m/s east — 20 m over the first 8 s\" (shares 8 s, 20 m)"
+  },
+  {
+   "id": "27356d8aee",
+   "conceptId": "phys.mech.velocity",
+   "kind": "authored",
+   "claimed": "4 s",
+   "expected": "8 s",
+   "sentence": "A dog runs 40 m east in 8 s, then 20 m back west in 4 s.",
+   "detail": "same setup as authored \"2.5 m/s east — 20 m over the first 8 s\" (shares 8 s, 20 m)"
+  },
+  {
+   "id": "cb30ae81c3",
+   "conceptId": "phys.mech.impulse",
+   "kind": "authored",
+   "claimed": "0.2 kg",
+   "expected": "0.4 kg",
+   "sentence": "A 0.2 kg ball hits a wall travelling at 6 m/s and bounces straight back at 4 m/s.",
+   "detail": "same setup as authored \"0.4 kg m/s — the ball simply slowed from 6 m/s to 4 m/s\" (shares 6 m/s, 4 m/s)"
+  },
+  {
+   "id": "c4d7e9041a",
+   "conceptId": "phys.mech.impulse",
+   "kind": "authored",
+   "claimed": "0.4 kg",
+   "expected": "0.2 kg",
+   "sentence": "0.4 kg m/s — the ball simply slowed from 6 m/s to 4 m/s",
+   "detail": "same setup as authored \"A 0.2 kg ball hits a wall travelling at 6 m/s and bounces straight back at 4 m/s.\" (shares 6 m/s, 4 m/s)"
+  },
+  {
+   "id": "713f6c174c",
+   "conceptId": "phys.mech.impulse",
+   "kind": "authored",
+   "claimed": "0.5 kg",
+   "expected": "0.2 kg",
+   "sentence": "A 0.5 kg ball hits a wall at 4 m/s and bounces straight back at 6 m/s.",
+   "detail": "same setup as authored \"A 0.2 kg ball hits a wall travelling at 6 m/s and bounces straight back at 4 m/s.\" (shares 4 m/s, 6 m/s)"
+  },
+  {
+   "id": "54a916e6a6",
+   "conceptId": "phys.mech.work",
+   "kind": "authored",
+   "claimed": "−29.4 J",
+   "expected": "29.4 J",
+   "sentence": "md — Misconception Registry; at steady speed your force equals mg = 19.6 N, so W = 19.6 × 1.5 = 29.4 J (gravity does −29.4 J, so the net work is zero) (launch-set slack, 2026-09-25) (probe-depth set, gradeable-basis audit 2026-08-30)",
+   "detail": "same setup as authored \"29.4 J — your force equals its 19.6 N weight, over 1.5 m\" (shares 19.6 N, 29.4 J)"
+  }
+ ],
+ "adversarial": [
+  {
+   "name": "arith-correct",
+   "category": "arithmetic",
+   "prose": "The total resistance is 4 + 6 + 10 = 20 Ω.",
+   "expectFlag": false,
+   "why": "correct sum",
+   "flagged": false,
+   "pass": true,
+   "flags": []
+  },
+  {
+   "name": "arith-wrong-sum",
+   "category": "arithmetic",
+   "prose": "The total resistance is 4 + 6 + 10 = 24 Ω.",
+   "expectFlag": true,
+   "why": "4+6+10 = 20",
+   "flagged": true,
+   "pass": true,
+   "flags": [
+    {
+     "kind": "arithmetic",
+     "claimed": "24 Ω",
+     "expected": "20",
+     "sentence": "The total resistance is 4 + 6 + 10 = 24 Ω.",
+     "detail": "5 tokens evaluate to 20, stated 24"
+    }
+   ]
+  },
+  {
+   "name": "arith-wrong-product",
+   "category": "arithmetic",
+   "prose": "P = VI = 230 × 5 = 1350 W.",
+   "expectFlag": true,
+   "why": "230×5 = 1150",
+   "flagged": true,
+   "pass": true,
+   "flags": [
+    {
+     "kind": "arithmetic",
+     "claimed": "1350 W",
+     "expected": "1150",
+     "sentence": "P = VI = 230 × 5 = 1350 W.",
+     "detail": "3 tokens evaluate to 1150, stated 1350"
+    }
+   ]
+  },
+  {
+   "name": "arith-rounded",
+   "category": "arithmetic",
+   "prose": "v = 100 / 7 = 14.3 m/s.",
+   "expectFlag": false,
+   "why": "correctly rounded to 3 s.f.",
+   "flagged": false,
+   "pass": true,
+   "flags": []
+  },
+  {
+   "name": "unit-prefix-ok",
+   "category": "unit conversion",
+   "prose": "I = 12 / 2400 = 5 mA.",
+   "expectFlag": false,
+   "why": "0.005 A = 5 mA",
+   "flagged": false,
+   "pass": true,
+   "flags": []
+  },
+  {
+   "name": "unit-prefix-wrong",
+   "category": "unit conversion",
+   "prose": "I = 12 / 2400 = 50 mA.",
+   "expectFlag": true,
+   "why": "0.005 A is 5 mA, not 50 mA",
+   "flagged": true,
+   "pass": true,
+   "flags": [
+    {
+     "kind": "arithmetic",
+     "claimed": "50 mA",
+     "expected": "0.005",
+     "sentence": "I = 12 / 2400 = 50 mA.",
+     "detail": "3 tokens evaluate to 0.005, stated 50"
+    }
+   ]
+  },
+  {
+   "name": "unit-minutes",
+   "category": "unit conversion",
+   "prose": "The time is 7200 / 2 = 1 h.",
+   "expectFlag": false,
+   "why": "3600 s = 1 h",
+   "flagged": false,
+   "pass": true,
+   "flags": []
+  },
+  {
+   "name": "unit-definition",
+   "category": "unit conversion",
+   "prose": "1 kWh = 3.6 × 10⁶ J.",
+   "expectFlag": false,
+   "why": "a definition, not arithmetic",
+   "flagged": false,
+   "pass": true,
+   "flags": []
+  },
+  {
+   "name": "pct-ok",
+   "category": "percentage",
+   "prose": "Efficiency = 60/80 = 75 %.",
+   "expectFlag": false,
+   "why": "0.75 = 75 %",
+   "flagged": false,
+   "pass": true,
+   "flags": []
+  },
+  {
+   "name": "pct-wrong",
+   "category": "percentage",
+   "prose": "Efficiency = 60/80 = 80 %.",
+   "expectFlag": true,
+   "why": "60/80 = 75 %",
+   "flagged": false,
+   "pass": false,
+   "flags": []
+  },
+  {
+   "name": "sci-ok",
+   "category": "scientific notation",
+   "prose": "E = 6.63 × 10⁻³⁴ × 5 × 10¹⁴ = 3.3 × 10⁻¹⁹ J.",
+   "expectFlag": false,
+   "why": "product is 3.3e-19",
+   "flagged": false,
+   "pass": true,
+   "flags": []
+  },
+  {
+   "name": "sci-wrong-exponent",
+   "category": "scientific notation",
+   "prose": "E = 6.63 × 10⁻³⁴ × 5 × 10¹⁴ = 3.3 × 10⁻²⁰ J.",
+   "expectFlag": true,
+   "why": "off by ×10 (not an SI-prefix factor)",
+   "flagged": true,
+   "pass": true,
+   "flags": [
+    {
+     "kind": "arithmetic",
+     "claimed": "3.3 × 10⁻²⁰ J",
+     "expected": "3.31e-19",
+     "sentence": "E = 6.63 × 10⁻³⁴ × 5 × 10¹⁴ = 3.3 × 10⁻²⁰ J.",
+     "detail": "3 tokens evaluate to 3.31e-19, stated 3.30e-20"
+    }
+   ]
+  },
+  {
+   "name": "sci-caret",
+   "category": "scientific notation",
+   "prose": "N = 2 x 10^3 × 3 = 6 x 10^3.",
+   "expectFlag": false,
+   "why": "correct",
+   "flagged": false,
+   "pass": true,
+   "flags": []
+  },
+  {
+   "name": "ratio-ok",
+   "category": "times more",
+   "prose": "A 60 W bulb uses 3 times more power than a 20 W bulb.",
+   "expectFlag": false,
+   "why": "60/20 = 3",
+   "flagged": false,
+   "pass": true,
+   "flags": []
+  },
+  {
+   "name": "ratio-wrong",
+   "category": "times more",
+   "prose": "A 60 W bulb uses 30 times more power than a 20 W bulb.",
+   "expectFlag": true,
+   "why": "60/20 = 3, power has no allowed power law",
+   "flagged": true,
+   "pass": true,
+   "flags": [
+    {
+     "kind": "ratio",
+     "claimed": "30 times",
+     "expected": "about 3 (ratio of 60 to 20 W)",
+     "sentence": "A 60 W bulb uses 30 times more power than a 20 W bulb.",
+     "detail": "claimed ×30 vs stated quantities ×3; no allowed power (1) brings them within ×2.5"
+    }
+   ]
+  },
+  {
+   "name": "ratio-lasers",
+   "category": "times more",
+   "prose": "A 5 mW laser pointer emits 3 × 10¹⁵ photons per second. A 1 W torch emits about 10⁹ times more.",
+   "expectFlag": true,
+   "why": "power ratio 200",
+   "flagged": true,
+   "pass": true,
+   "flags": [
+    {
+     "kind": "ratio",
+     "claimed": "10⁹ times",
+     "expected": "about 200 (ratio of 1 to 0.005 W)",
+     "sentence": "A 1 W torch emits about 10⁹ times more.",
+     "detail": "claimed ×1.00e+9 vs stated quantities ×200; no allowed power (1) brings them within ×2.5"
+    }
+   ]
+  },
+  {
+   "name": "ratio-no-inputs",
+   "category": "times more",
+   "prose": "The Sun is about 300 000 times more massive than the Earth.",
+   "expectFlag": false,
+   "why": "only one stated quantity — abstain",
+   "flagged": false,
+   "pass": true,
+   "flags": []
+  },
+  {
+   "name": "inv-square-ok",
+   "category": "inverse-square",
+   "prose": "At 3 m instead of 1 m, the intensity is 9 times less.",
+   "expectFlag": false,
+   "why": "(3/1)² = 9",
+   "flagged": false,
+   "pass": true,
+   "flags": []
+  },
+  {
+   "name": "inv-square-wrong",
+   "category": "inverse-square",
+   "prose": "At 3 m instead of 1 m, the intensity is 27 times less.",
+   "expectFlag": false,
+   "why": "27 = 3³ is an allowed length power under the contract (volume scaling); text alone cannot rule it out — abstain",
+   "flagged": false,
+   "pass": true,
+   "flags": []
+  },
+  {
+   "name": "stefan-ok",
+   "category": "power law",
+   "prose": "A body at 600 K radiates 16 times more than at 300 K.",
+   "expectFlag": false,
+   "why": "2⁴ = 16",
+   "flagged": false,
+   "pass": true,
+   "flags": []
+  },
+  {
+   "name": "stefan-wrong",
+   "category": "power law",
+   "prose": "A body at 600 K radiates 100 times more than at 300 K.",
+   "expectFlag": true,
+   "why": "2⁴ = 16, 2¹ = 2; 100 misses both by > ×2.5",
+   "flagged": true,
+   "pass": true,
+   "flags": [
+    {
+     "kind": "ratio",
+     "claimed": "100 times",
+     "expected": "about 2 (ratio of 600 to 300 K)",
+     "sentence": "A body at 600 K radiates 100 times more than at 300 K.",
+     "detail": "claimed ×100 vs stated quantities ×2; no allowed power (1, 4) brings them within ×2.5"
+    }
+   ]
+  },
+  {
+   "name": "pendulum-ok",
+   "category": "pendulum",
+   "prose": "A 9 m pendulum swings 3 times slower than a 1 m pendulum.",
+   "expectFlag": false,
+   "why": "√9 = 3",
+   "flagged": false,
+   "pass": true,
+   "flags": []
+  },
+  {
+   "name": "pendulum-wrong",
+   "category": "pendulum",
+   "prose": "A 0.25 m pendulum swings 40 times faster than a 1 m pendulum.",
+   "expectFlag": true,
+   "why": "length ratio 4 → allowed 4, 16, 64, 2, 256; 40 within ×2.5 of 16/64 — see note",
+   "flagged": false,
+   "pass": false,
+   "flags": []
+  },
+  {
+   "name": "symbolic",
+   "category": "symbolic",
+   "prose": "From v² = u² + 2as we get s = (v² − u²)/2a.",
+   "expectFlag": false,
+   "why": "no numbers to check",
+   "flagged": false,
+   "pass": true,
+   "flags": []
+  },
+  {
+   "name": "variable-adjacent",
+   "category": "variables",
+   "prose": "Solve 3x + 2 = 11, so x = 3.",
+   "expectFlag": false,
+   "why": "contains a variable — abstain",
+   "flagged": false,
+   "pass": true,
+   "flags": []
+  },
+  {
+   "name": "variable-tail",
+   "category": "variables",
+   "prose": "Then 2 × 9.8 × h = 39.2.",
+   "expectFlag": false,
+   "why": "h unknown — abstain",
+   "flagged": false,
+   "pass": true,
+   "flags": []
+  },
+  {
+   "name": "sqrt-ok",
+   "category": "square root",
+   "prose": "v = √(2 × 9.8 × 5) = 9.9 m/s.",
+   "expectFlag": false,
+   "why": "√98 = 9.90",
+   "flagged": false,
+   "pass": true,
+   "flags": []
+  },
+  {
+   "name": "sqrt-wrong",
+   "category": "square root",
+   "prose": "v = √(2 × 9.8 × 5) = 98 m/s.",
+   "expectFlag": true,
+   "why": "forgot the root: √98 = 9.9",
+   "flagged": true,
+   "pass": true,
+   "flags": [
+    {
+     "kind": "arithmetic",
+     "claimed": "98 m/s",
+     "expected": "9.899",
+     "sentence": "v = √(2 × 9.8 × 5) = 98 m/s.",
+     "detail": "8 tokens evaluate to 9.899, stated 98"
+    }
+   ]
+  },
+  {
+   "name": "trig",
+   "category": "trigonometric",
+   "prose": "F = 50 cos 60° = 25 N.",
+   "expectFlag": false,
+   "why": "trig is outside the evaluator — abstain",
+   "flagged": false,
+   "pass": true,
+   "flags": []
+  },
+  {
+   "name": "trig-sin-wrong",
+   "category": "trigonometric",
+   "prose": "sin 30° = 0.87.",
+   "expectFlag": false,
+   "why": "trig not evaluated by contract — abstain (would be an error, out of scope)",
+   "flagged": false,
+   "pass": true,
+   "flags": []
+  },
+  {
+   "name": "nl-ordinals",
+   "category": "ambiguous language",
+   "prose": "Step 1 = measure, step 2 = record.",
+   "expectFlag": false,
+   "why": "labels, not arithmetic",
+   "flagged": false,
+   "pass": true,
+   "flags": []
+  },
+  {
+   "name": "nl-score",
+   "category": "ambiguous language",
+   "prose": "You got 3 out of 4 = well done!",
+   "expectFlag": false,
+   "why": "no calculation",
+   "flagged": false,
+   "pass": true,
+   "flags": []
+  },
+  {
+   "name": "nl-dates",
+   "category": "ambiguous language",
+   "prose": "Between 1905 and 1915 = ten years of work.",
+   "expectFlag": false,
+   "why": "no operator",
+   "flagged": false,
+   "pass": true,
+   "flags": []
+  },
+  {
+   "name": "nl-hyphen-range",
+   "category": "ambiguous language",
+   "prose": "Use a 5-10 Ω resistor; R = 5 Ω is fine.",
+   "expectFlag": false,
+   "why": "range, not subtraction",
+   "flagged": false,
+   "pass": true,
+   "flags": []
+  },
+  {
+   "name": "auth-conflict",
+   "category": "authored",
+   "prose": "With 9 V across 3 Ω and 6 Ω in series, the current is 3 A.",
+   "authored": [
+    "With 9 V across 3 Ω and 6 Ω in series, the current is 1 A."
+   ],
+   "expectFlag": true,
+   "why": "same setup, 1 A authored",
+   "flagged": true,
+   "pass": true,
+   "flags": [
+    {
+     "kind": "authored",
+     "claimed": "3 A",
+     "expected": "1 A",
+     "sentence": "With 9 V across 3 Ω and 6 Ω in series, the current is 3 A.",
+     "detail": "same setup as authored \"With 9 V across 3 Ω and 6 Ω in series, the current is 1 A.\" (shares 9 V, 3 Ω, 6 Ω)"
+    }
+   ]
+  },
+  {
+   "name": "auth-new-scenario",
+   "category": "new scenario",
+   "prose": "With 18 V across 3 Ω and 6 Ω in series, the current is 2 A.",
+   "authored": [
+    "With 9 V across 3 Ω and 6 Ω in series, the current is 1 A."
+   ],
+   "expectFlag": false,
+   "why": "different voltage — a new scenario, shares only the resistances",
+   "flagged": true,
+   "pass": false,
+   "flags": [
+    {
+     "kind": "authored",
+     "claimed": "18 V",
+     "expected": "9 V",
+     "sentence": "With 18 V across 3 Ω and 6 Ω in series, the current is 2 A.",
+     "detail": "same setup as authored \"With 9 V across 3 Ω and 6 Ω in series, the current is 1 A.\" (shares 3 Ω, 6 Ω)"
+    },
+    {
+     "kind": "authored",
+     "claimed": "2 A",
+     "expected": "1 A",
+     "sentence": "With 18 V across 3 Ω and 6 Ω in series, the current is 2 A.",
+     "detail": "same setup as authored \"With 9 V across 3 Ω and 6 Ω in series, the current is 1 A.\" (shares 3 Ω, 6 Ω)"
+    }
+   ]
+  },
+  {
+   "name": "auth-different-conditions",
+   "category": "authored",
+   "prose": "At 20 °C and 101 kPa a mole of gas fills 24 L.",
+   "authored": [
+    "At 0 °C and 101 kPa a mole of gas fills 22.4 L."
+   ],
+   "expectFlag": false,
+   "why": "different temperature; only one shared quantity",
+   "flagged": false,
+   "pass": true,
+   "flags": []
+  },
+  {
+   "name": "auth-same-value",
+   "category": "authored",
+   "prose": "Across 3 Ω and 6 Ω in series with 9 V the current is 1 A.",
+   "authored": [
+    "With 9 V across 3 Ω and 6 Ω in series, the current is 1 A."
+   ],
+   "expectFlag": false,
+   "why": "agrees",
+   "flagged": false,
+   "pass": true,
+   "flags": []
+  }
+ ]
+}
