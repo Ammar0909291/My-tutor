@@ -1,0 +1,415 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mod.lasers-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mod.lasers",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:d4b345aaee8c50e8477d0506dbb870c0ed8f944665f8156150a0232ff74519fe",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mod.lasers.md": "sha256:ef568ee0abb783197c1659744eafb68e8bb14aa0c1fc10a051d36df7388fe2e0"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.mod.lasers",
+    "name": "Lasers: Stimulated Emission and Population Inversion",
+    "difficultyRaw": "advanced (4)",
+    "bloom": "understand",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "phys.mod.atomic-spectra"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mod.lasers-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mod.lasers (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mod.lasers.md": "sha256:ef568ee0abb783197c1659744eafb68e8bb14aa0c1fc10a051d36df7388fe2e0"
+      },
+      "contentHash": "sha256:c0dec1761f595c31d9f808c89a31842e57e160a65dca14e9e1c1730cdb98dcd3",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mod.lasers.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.lasers.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.lasers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.lasers\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.lasers.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.lasers.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.lasers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.lasers\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.lasers.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.lasers.md#TA-3 (addresses MC-LASER-IS-JUST-BRIGHT-LIGHT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.lasers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.lasers\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.lasers.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.lasers.md#TA-4 (addresses MC-INVERSION-NOT-NEEDED)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.lasers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.lasers\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.lasers.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.lasers.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.lasers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.lasers\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.lasers.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.lasers.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.lasers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.lasers\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.lasers.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.lasers.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.lasers"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.lasers\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mod.lasers/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "phys.mod.lasers",
+      "title": "Learning Objective",
+      "content": "[Boundary statement]\nA student who achieves mastery demonstrates:\n1. Distinguishes the three photon–atom processes: absorption (a photon raises an atom to a higher level), spontaneous emission (an excited atom drops down by itself, emitting a photon in a random direction and phase) and stimulated emission (an incoming photon of exactly the right energy makes an excited atom emit a second photon identical to it — same energy, direction and phase — while the first photon carries on).\n2. Explains why amplification needs a population inversion — more atoms in the upper level than the lower one — and why this never happens in thermal equilibrium (at room temperature the fraction of atoms 1.96 eV up is about e^(−1.96/0.0257) ≈ 10⁻³³); a pump (light or electric discharge) fills a long-lived metastable level faster than it empties, and mirrors at both ends make the light pass many times through the medium, one mirror letting a small fraction out as the beam.\n3. Explains what makes laser light different — monochromatic (one wavelength, e.g. He–Ne at 632.8 nm, photon energy 1.96 eV), coherent (photons in step) and highly directional (divergence ~1 mrad, so the spot at 10 m is about 1 cm) — and computes photon rates: a 1 mW He–Ne laser emits about 3.2 × 10¹⁵ photons per second.\n\nA student who thinks a laser is just very bright light focused by a lens, or that heating a material enough makes it lase, has **NOT** achieved mastery — those ideas miss the physics that makes lasers possible.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.lasers.md",
+        "startLine": 17,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.mod.lasers/misconception/MC-LASER-IS-JUST-BRIGHT-LIGHT",
+      "kind": "misconception",
+      "conceptId": "phys.mod.lasers",
+      "title": "A laser is just very bright light focused into a beam",
+      "content": "### MC-LASER-IS-JUST-BRIGHT-LIGHT: \"A laser is just very bright light focused into a beam\"\ntrigger_signal: student describes a laser as ordinary light made intense or focused by lenses, without stimulated emission or coherence.\nconflict_evidence [P28]: \"A 1 W torch with the best lens still spreads into a wide, multicoloured patch at 10 m, while a 1 mW laser makes a tiny, single-colour spot. If a laser were just bright light, how could a thousand times less power win?\"\nbridge_text [P30]: \"Torch light comes from countless atoms emitting spontaneously — random directions, phases and colours — and no lens can line those up. In a laser, stimulated emission produces photons that are copies of each other: one wavelength, in step, travelling the same way. That coherence keeps the beam narrow and the colour pure.\"\nreplacement_text [P31]: \"Laser light is monochromatic, coherent and directional because it is produced by stimulated emission, not because it is brighter.\"\ndiscrimination_pairs [P33]: [\"torch: spontaneous emission, broad spectrum, random phase, wide beam\", \"laser: stimulated emission, one line (632.8 nm), in phase, ~1 mrad beam\"]\ns6_path: skip P28; compare the two spots on a far wall.",
+      "localKey": "MC-LASER-IS-JUST-BRIGHT-LIGHT",
+      "language": "en",
+      "refs": [
+        "MC-LASER-IS-JUST-BRIGHT-LIGHT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.lasers.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.mod.lasers/misconception/MC-INVERSION-NOT-NEEDED",
+      "kind": "misconception",
+      "conceptId": "phys.mod.lasers",
+      "title": "Heating a material enough will make it lase",
+      "content": "### MC-INVERSION-NOT-NEEDED: \"Heating a material enough will make it lase\"\ntrigger_signal: student expects high temperature (thermal excitation) to put most atoms in the upper level, or omits the need for a population inversion.\nconflict_evidence [P28]: \"At any temperature, in thermal equilibrium, are there more atoms in a higher level or a lower one? At room temperature, what fraction sits 1.96 eV up?\"\nbridge_text [P30]: \"Always more in the lower level — at room temperature the fraction 1.96 eV up is about 10⁻³³, and even very hot gases keep the upper level less full. A photon is then more likely to be absorbed than to stimulate emission, so the light dies away. Amplification needs a population inversion, made by pumping atoms into a long-lived metastable level faster than they leave — a deliberately non-equilibrium state.\"\nreplacement_text [P31]: \"Lasing needs a population inversion (more atoms in the upper level), created by pumping into a metastable level; heating never produces one.\"\ndiscrimination_pairs [P33]: [\"thermal equilibrium: lower level always fuller — light absorbed\", \"pumped metastable level: upper fuller — light amplified\"]\ns6_path: skip P28; picture more \"loaded\" atoms than \"empty\" ones needed to copy photons faster than they are swallowed.",
+      "localKey": "MC-INVERSION-NOT-NEEDED",
+      "language": "en",
+      "refs": [
+        "MC-INVERSION-NOT-NEEDED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.lasers.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.mod.lasers/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.lasers",
+      "title": "Spot vs Blur",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Spot vs Blur\",\"primitives\":[\"P01\",\"P04\",\"P05\",\"P06\",\"P14\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.lasers.md",
+        "startLine": 11,
+        "endLine": 18
+      }
+    },
+    {
+      "assetId": "phys.mod.lasers/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.lasers",
+      "title": "Three Processes",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Three Processes\",\"primitives\":[\"P02\",\"P06\",\"P08\",\"P13\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.lasers.md",
+        "startLine": 18,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "phys.mod.lasers/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.lasers",
+      "title": "Not Just Bright Light",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Not Just Bright Light\",\"primitives\":[\"P02\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-LASER-IS-JUST-BRIGHT-LIGHT\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-LASER-IS-JUST-BRIGHT-LIGHT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.lasers.md",
+        "startLine": 26,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "phys.mod.lasers/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.lasers",
+      "title": "Population Inversion",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Population Inversion\",\"primitives\":[\"P02\",\"P13\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-INVERSION-NOT-NEEDED\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-INVERSION-NOT-NEEDED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.lasers.md",
+        "startLine": 32,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "phys.mod.lasers/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.lasers",
+      "title": "Numbers",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Numbers\",\"primitives\":[\"P02\",\"P34\",\"P49\",\"P50\",\"P51\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.lasers.md",
+        "startLine": 39,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.mod.lasers/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.lasers",
+      "title": "Formative Assessment",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Formative Assessment\",\"primitives\":[\"P02\",\"P35\",\"P49\",\"P51\",\"P55\",\"P79\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.lasers.md",
+        "startLine": 45,
+        "endLine": 52
+      }
+    },
+    {
+      "assetId": "phys.mod.lasers/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.lasers",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P28\",\"P41\",\"P54\",\"P55\",\"P62\",\"P68\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.lasers.md",
+        "startLine": 52,
+        "endLine": 94
+      }
+    },
+    {
+      "assetId": "phys.mod.lasers/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mod.lasers",
+      "title": "Assessment Battery",
+      "content": "| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (classify) | \"Torch, LED, laser\" | CORRECT = only the laser relies on stimulated emission |\n| P74 (classify) | \"Incoming photon in stimulated emission\" | CORRECT = continues, joined by an identical photon |\n| P75 (boundary) | \"Equal populations\" | CORRECT = no net amplification |\n| P76 (transfer) | \"Narrow beam over distance\" | CORRECT = coherent, photons all travelling the same way |\n| P77 (generate) | \"Essential parts\" | CORRECT = gain medium, pump, mirrors (one partly transmitting) |\n| P78 (explain) | \"Metastable level\" | CORRECT = holds atoms long enough to build the inversion |\n| P79 (predict) | \"Two-level system\" | CORRECT = can't exceed equal populations by pumping |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.lasers.md",
+        "startLine": 176,
+        "endLine": 188
+      }
+    },
+    {
+      "assetId": "phys.mod.lasers/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.lasers",
+      "title": "Student State Matrix",
+      "content": "| State | Why here | Tell-tale behaviour | Protocol |\n|---|---|---|---|\n| S0 | Lasers as magic beams | Cannot say how a laser differs from a torch | Protocol A (Concrete) |\n| S1 | \"Stimulated emission\" recited | Cannot say why an inversion is needed | Protocol B (Counterexample-first) |\n| S2-LASER-IS-JUST-BRIGHT-LIGHT | Intensity picture | \"A laser is a very bright, focused torch\" | Misconception Engine → then Protocol C |\n| S2-INVERSION-NOT-NEEDED | Thermal picture | \"Heat it up enough and most atoms are excited\" | Misconception Engine → then Protocol C |\n| S3 | Partial — processes fine | Cannot explain the metastable level or mirrors | Protocol C (Guided Questioning) |\n| S6 | Anxiety on energy-level diagrams | Avoids eV and levels | Protocol F (Low Pressure) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.lasers.md",
+        "startLine": 27,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "phys.mod.lasers/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.lasers",
+      "title": "Diagnostic Battery",
+      "content": "DB-1 (prior-exposure check):\n\"How is a laser pointer's light different from a torch's?\"\n  \"Brighter\" or no idea → DB-2 to probe further.\n  \"One colour, in step, and in a narrow beam\" → DB-2.\n\nDB-2 (representation / misconception test):\n\"Could you make a laser by putting a very bright torch behind a strong lens?\"\n  \"No — a laser's light is produced by stimulated emission, so the photons are identical and in step; a lens cannot make torch light coherent or monochromatic\" → S3. Enter Protocol C.\n  \"No\" (no reason) → S1. Enter Protocol B.\n  \"Yes — a laser is just very bright, focused light\" → SIGNAL:MISCONCEPTION:MC-LASER-IS-JUST-BRIGHT-LIGHT. Enter Misconception Engine.\n  Pause → add S6 flag; Protocol F if anxious, otherwise Protocol A.\n\nDB-3 (inversion check — overlays):\n\"If you heat a gas very hot, will most of its atoms be in the upper level so that it lases?\"\n  \"No — in thermal equilibrium the upper level always holds fewer atoms\" → no flag.\n  \"Yes\" → add SIGNAL:MISCONCEPTION:MC-INVERSION-NOT-NEEDED (repair at TA-4).\n  Confident and wrong on DB-2 → add S7 flag. Override to Protocol G.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-LASER-IS-JUST-BRIGHT-LIGHT",
+        "MC-INVERSION-NOT-NEEDED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.lasers.md",
+        "startLine": 38,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "phys.mod.lasers/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.lasers",
+      "title": "Prerequisite Check",
+      "content": "PD-1 (for `phys.mod.atomic-spectra`):\n\"An atom drops from a level 1.96 eV above the ground state. What wavelength does it emit?\"\n  Cannot say \"E = hc/λ → about 633 nm\" → flag PREREQ-GAP-SPECTRA.\n  In-session minimum repair: one P06 (an energy-level diagram with an emission arrow) + one P34 (\"3.0 eV drop: wavelength?\") then resume. If absent, schedule the missing session (S4 route).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.lasers.md",
+        "startLine": 58,
+        "endLine": 65
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

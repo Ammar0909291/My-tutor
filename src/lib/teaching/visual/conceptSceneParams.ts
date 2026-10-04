@@ -115,6 +115,7 @@ import { buildThinFilmScene, buildGratingScene, buildResolvingPowerScene, buildC
 import { buildLcrScene, buildAcPowerScene, buildAlphaScatteringScene, buildNucleusScene } from '@/lib/teaching/sceneGenerators/physicsExtensionScenesB7'
 import { buildFramesScene, buildContinuityScene, buildSpecificHeatsScene } from '@/lib/teaching/sceneGenerators/physicsExtensionScenesB8'
 import { buildEarthMoonSunScene, buildHrDiagramScene, buildDistanceLadderScene, buildHallScene } from '@/lib/teaching/sceneGenerators/physicsExtensionScenesB9'
+import { buildLaserScene, buildRadiationSafetyScene, buildModulationScene, buildDipoleScene } from '@/lib/teaching/sceneGenerators/physicsExtensionScenesB10'
 import {
   buildDisplacementScene, buildVelocityScene, buildAccelerationScene, buildRelativeMotionScene, buildTensionScene,
   buildConservativeForcesScene, buildAngularMomentumScene, buildAngularMomentumConservationScene,
@@ -598,6 +599,11 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'phys.astro.stellar-properties': buildHrDiagramScene,
   'phys.astro.distance-ladder': buildDistanceLadderScene,
   'phys.em.hall-effect': buildHallScene,
+  // Coverage-driven KG extension, batch 10 (2026-10-03). See physicsExtensionScenesB10.ts.
+  'phys.mod.lasers': buildLaserScene,
+  'phys.mod.radiation-safety': buildRadiationSafetyScene,
+  'phys.em.communication-systems': buildModulationScene,
+  'phys.em.radiation-and-antennas': buildDipoleScene,
   // Batch 15 (2026-09-30): promoted from domain scope. See physicsCoreScenesB15.ts.
   'phys.mech.displacement':           buildDisplacementScene,
   'phys.mech.velocity':               buildVelocityScene,

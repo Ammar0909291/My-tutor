@@ -55492,6 +55492,454 @@ const HALL_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.mod.lasers ─────────────────────────────────────────────────────────
+const LASR = 'phys.mod.lasers'
+const LASR_SRC = 'docs/curriculum/blueprints/phys.mod.lasers.md'
+
+const LASR_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: LASR,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Light and atoms exchange energy in three ways. In absorption, a photon of the right energy lifts an atom to a higher level. In spontaneous emission, an excited atom drops back by itself and emits a photon in a random direction and phase — how ordinary lamps glow. In stimulated emission, a passing photon of exactly the right energy makes an excited atom emit a second photon identical to it — same energy, direction and phase — while the first photon carries on. One photon becomes two: light is amplified. The catch is that a photon meeting a lower-level atom is absorbed, so light grows only if upper-level atoms outnumber lower-level ones — a population inversion. Thermal equilibrium never gives one: at room temperature the fraction of atoms 1.96 eV up is about 10⁻³³. Lasers use a pump (light or an electric discharge) to fill a long-lived metastable level, and mirrors at both ends send the light back and forth through the medium, one mirror letting out the beam. Every photon being a copy makes laser light monochromatic (He–Ne: 632.8 nm, photon energy 1.96 eV), coherent and highly directional. A 1 mW He–Ne laser emits about 3.2 × 10¹⁵ photons per second.',
+    targetedMisconceptions: [`${LASR}:MC-LASER-IS-JUST-BRIGHT-LIGHT`, `${LASR}:MC-INVERSION-NOT-NEEDED`],
+    source: `${LASR_SRC} — TA-2 three processes, TA-4 population inversion, TA-5 photon numbers`,
+  },
+  {
+    conceptId: LASR,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'It is easy to think a laser is simply a very bright light squeezed into a beam. Compare a 1 mW laser pointer with a 1 W torch fitted with the best lens, both aimed at a wall 10 m away. The torch has a thousand times more power, yet it makes a wide, whitish patch while the laser makes a tiny, pure-red spot. Torch light comes from countless atoms emitting spontaneously, each photon at a random moment, in a random direction and with its own colour; no lens can line those up. A laser\'s photons are produced by stimulated emission, so they are copies of one another — one wavelength, in step, travelling the same way. That coherence, not brightness, is what keeps the beam narrow and the colour pure. A second mistaken idea is that heating a material enough would make it lase by putting most of its atoms into the upper level. In thermal equilibrium the lower level always holds more atoms than the upper one, however hot it gets, so a photon is more likely to be absorbed than to stimulate emission and the light dies away. Amplification needs a population inversion, which only pumping atoms into a long-lived metastable level can create.',
+    targetedMisconceptions: [`${LASR}:MC-LASER-IS-JUST-BRIGHT-LIGHT`, `${LASR}:MC-INVERSION-NOT-NEEDED`],
+    source: `${LASR_SRC} — MC-LASER-IS-JUST-BRIGHT-LIGHT + MC-INVERSION-NOT-NEEDED, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const LASR_PROBES: SeedProbe[] = [
+  {
+    conceptId: LASR,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A helium–neon laser emits light of wavelength 632.8 nm. What is the energy of each photon? (hc ≈ 1240 eV·nm)',
+    choices: [
+      { text: 'About 1.96 eV', isCorrect: true },
+      { text: 'About 0.51 eV', isCorrect: false },
+      { text: 'About 19.6 eV', isCorrect: false },
+      { text: 'About 632.8 eV', isCorrect: false },
+    ],
+    correctValue: 'about 1.96 eV',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [],
+    source: `${LASR_SRC} — TA-5 P34 (E = hc/λ = 1240/632.8 eV)`,
+  },
+  {
+    conceptId: LASR,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In stimulated emission, a photon passes an excited atom. What comes out?',
+    choices: [
+      { text: 'Two identical photons — the original and a copy with the same energy, direction and phase', isCorrect: true },
+      { text: 'One photon — the original is absorbed and a new one is emitted in a random direction', isCorrect: false },
+      { text: 'No photons — the atom absorbs the incoming photon', isCorrect: false },
+      { text: 'Two photons of different colours', isCorrect: false },
+    ],
+    correctValue: 'two identical photons',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: `${LASR_SRC} — TA-2 P34 and §7 P74`,
+  },
+  {
+    conceptId: LASR,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Could you make a laser by putting a very bright torch behind a strong lens?',
+    choices: [
+      { text: 'No — laser light comes from stimulated emission, so its photons are identical and in step; a lens cannot make torch light coherent or single-coloured', isCorrect: true },
+      { text: 'Yes — a laser is just very bright, focused light', isCorrect: false, misconceptionId: `${LASR}:MC-LASER-IS-JUST-BRIGHT-LIGHT` },
+      { text: 'Yes, if the torch is powerful enough', isCorrect: false, misconceptionId: `${LASR}:MC-LASER-IS-JUST-BRIGHT-LIGHT` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${LASR}:MC-LASER-IS-JUST-BRIGHT-LIGHT`],
+    source: `${LASR_SRC} — DB-2 golden probe and MC-LASER-IS-JUST-BRIGHT-LIGHT conflict_evidence`,
+  },
+  {
+    conceptId: LASR,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'If you heat a gas until it is very hot, will most of its atoms end up in the upper level so that it lases?',
+    choices: [
+      { text: 'No — in thermal equilibrium the lower level always holds more atoms; a population inversion needs pumping into a metastable level', isCorrect: true },
+      { text: 'Yes — hot enough, most atoms are excited', isCorrect: false, misconceptionId: `${LASR}:MC-INVERSION-NOT-NEEDED` },
+      { text: 'It doesn\'t matter — lasing doesn\'t need more atoms in the upper level', isCorrect: false, misconceptionId: `${LASR}:MC-INVERSION-NOT-NEEDED` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${LASR}:MC-INVERSION-NOT-NEEDED`],
+    source: `${LASR_SRC} — DB-3 inversion check and MC-INVERSION-NOT-NEEDED conflict_evidence`,
+  },
+  {
+    conceptId: LASR,
+    subjectSlug: 'physics',
+    probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What job does the metastable level do in a laser?',
+    choices: [
+      { text: 'Atoms stay in it long enough for the pump to build up more atoms there than in the level below — the population inversion', isCorrect: true },
+      { text: 'It reflects the light back and forth like a mirror', isCorrect: false },
+      { text: 'It absorbs the extra photons so the beam doesn\'t get too bright', isCorrect: false },
+    ],
+    correctValue: 'holds atoms long enough to build the inversion',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: `${LASR_SRC} — TA-4 think-aloud and §8 P78`,
+  },
+]
+
+// ─── phys.mod.radiation-safety ───────────────────────────────────────────────
+const RSAF = 'phys.mod.radiation-safety'
+const RSAF_SRC = 'docs/curriculum/blueprints/phys.mod.radiation-safety.md'
+
+const RSAF_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: RSAF,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Ionising radiation harms tissue by knocking electrons off atoms and damaging DNA. The absorbed dose is the energy absorbed per kilogram, measured in grays (1 Gy = 1 J/kg): a 70 kg person absorbing 0.014 J of gamma radiation receives 0.2 mGy. Alpha particles deposit their energy in a short, dense track and do about 20 times more damage per joule than gamma rays, X-rays or beta particles, so the equivalent dose multiplies the absorbed dose by a weighting factor — 20 for alpha, 1 for the others — and is measured in sieverts. 0.2 mGy of gamma is 0.2 mSv; 0.1 mGy of alpha in lung tissue is 2 mSv. Natural background gives most people about 2–3 mSv a year. Large doses cause radiation sickness; small doses raise long-term cancer risk roughly in proportion to dose. Alpha is stopped by paper or the dead outer layer of skin, so an alpha source outside the body is low risk — but inhaled or swallowed, it deposits all its energy in a few living cells. Exposure is reduced by time (dose ∝ time), distance (from a small source the dose rate falls as 1/r², so doubling the distance quarters it) and shielding (paper for alpha, aluminium for beta, lead or concrete for gamma). Irradiation does not make an object radioactive; contamination — radioactive material on or in it — does.',
+    targetedMisconceptions: [`${RSAF}:MC-IRRADIATED-BECOMES-RADIOACTIVE`, `${RSAF}:MC-ALPHA-ALWAYS-HARMLESS`],
+    source: `${RSAF_SRC} — TA-2 gray and sievert, TA-3 irradiation vs contamination, TA-4 alpha, TA-5 protections`,
+  },
+  {
+    conceptId: RSAF,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'It is often assumed that anything exposed to radiation becomes radioactive itself. Think about a chest X-ray: afterwards you do not set off a radiation detector. X-rays and the gamma rays used to sterilise syringes or treat strawberries deposit energy and are gone, just as a room does not keep glowing after you switch off the light; they are far too low in energy to change the nuclei they pass. Irradiated food is no more radioactive than before. What spreads radioactivity is contamination — radioactive material itself landing on or getting into something, where it keeps emitting until it is removed or decays. A second trap is to think alpha radiation is harmless because a sheet of paper or the outer layer of skin stops it. Being stopped so quickly means an alpha particle dumps all its energy in a very short distance. Outside the body that energy goes into dead skin cells and does little harm. Inside the body — radon breathed into the lungs, or an alpha emitter swallowed — all of it goes into a few living cells, causing intense damage. That is why alpha radiation has a weighting factor of 20 and why radon in homes is a real health concern.',
+    targetedMisconceptions: [`${RSAF}:MC-IRRADIATED-BECOMES-RADIOACTIVE`, `${RSAF}:MC-ALPHA-ALWAYS-HARMLESS`],
+    source: `${RSAF_SRC} — MC-IRRADIATED-BECOMES-RADIOACTIVE + MC-ALPHA-ALWAYS-HARMLESS, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const RSAF_PROBES: SeedProbe[] = [
+  {
+    conceptId: RSAF,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A small gamma source gives a dose rate of 40 μSv/h at 1 m. What is the dose rate at 2 m?',
+    choices: [
+      { text: '10 μSv/h', isCorrect: true },
+      { text: '20 μSv/h', isCorrect: false },
+      { text: '40 μSv/h', isCorrect: false },
+      { text: '80 μSv/h', isCorrect: false },
+    ],
+    correctValue: '10 μSv/h',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [],
+    source: `${RSAF_SRC} — TA-5 P34 (inverse square); 20 μSv/h treats it as 1/r`,
+  },
+  {
+    conceptId: RSAF,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Lung tissue receives an absorbed dose of 0.1 mGy from alpha particles. What is the equivalent dose? (alpha weighting factor 20)',
+    choices: [
+      { text: '2 mSv', isCorrect: true },
+      { text: '0.1 mSv', isCorrect: false },
+      { text: '0.005 mSv', isCorrect: false },
+      { text: '20 mSv', isCorrect: false },
+    ],
+    correctValue: '2 mSv',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: `${RSAF_SRC} — TA-2 P34 (H = D × w_R); 0.1 mSv ignores alpha's extra harm, 0.005 divides`,
+  },
+  {
+    conceptId: RSAF,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Strawberries are treated with gamma rays to kill bacteria. Are they radioactive afterwards?',
+    choices: [
+      { text: 'No — being irradiated does not make them radioactive; only contamination with radioactive material would', isCorrect: true },
+      { text: 'Yes — anything exposed to radiation becomes radioactive', isCorrect: false, misconceptionId: `${RSAF}:MC-IRRADIATED-BECOMES-RADIOACTIVE` },
+      { text: 'Yes, but only for a few days', isCorrect: false, misconceptionId: `${RSAF}:MC-IRRADIATED-BECOMES-RADIOACTIVE` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${RSAF}:MC-IRRADIATED-BECOMES-RADIOACTIVE`],
+    source: `${RSAF_SRC} — DB-1 item and MC-IRRADIATED-BECOMES-RADIOACTIVE conflict_evidence`,
+  },
+  {
+    conceptId: RSAF,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Alpha particles are stopped by a sheet of paper. Is an alpha emitter safe to swallow?',
+    choices: [
+      { text: 'No — inside the body all its energy goes into a few living cells, and alpha does about 20 times more damage per joule', isCorrect: true },
+      { text: 'Yes — alpha radiation can\'t do any harm', isCorrect: false, misconceptionId: `${RSAF}:MC-ALPHA-ALWAYS-HARMLESS` },
+      { text: 'Yes — the stomach lining stops alpha just like paper', isCorrect: false, misconceptionId: `${RSAF}:MC-ALPHA-ALWAYS-HARMLESS` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${RSAF}:MC-ALPHA-ALWAYS-HARMLESS`],
+    source: `${RSAF_SRC} — DB-2 item and MC-ALPHA-ALWAYS-HARMLESS conflict_evidence`,
+  },
+  {
+    conceptId: RSAF,
+    subjectSlug: 'physics',
+    probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What is the difference between an irradiated object and a contaminated one?',
+    choices: [
+      { text: 'An irradiated object was exposed to radiation and does not emit afterwards; a contaminated one has radioactive material on or in it and keeps emitting', isCorrect: true },
+      { text: 'There is no difference — both are radioactive', isCorrect: false },
+      { text: 'An irradiated object is more dangerous than a contaminated one', isCorrect: false },
+    ],
+    correctValue: 'contaminated keeps emitting; irradiated does not',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: `${RSAF_SRC} — §8 P75`,
+  },
+]
+
+// ─── phys.em.communication-systems ───────────────────────────────────────────
+const COMM = 'phys.em.communication-systems'
+const COMM_SRC = 'docs/curriculum/blueprints/phys.em.communication-systems.md'
+
+const COMM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: COMM,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A radio station does not send sound. A microphone turns sound into an electrical signal; the transmitter uses it to shape an electromagnetic wave; the receiver extracts the signal and a speaker turns it back into sound. The audio cannot simply be radiated: an antenna works well only if it is a sizeable fraction of a wavelength, around λ/4 or λ/2. A 1 kHz signal has λ = 300 km, while a 100 MHz carrier has λ = 3 m, so a 0.75 m antenna works. Each station therefore puts its audio onto its own high-frequency carrier — modulation. In amplitude modulation (AM) the carrier\'s amplitude follows the audio; an AM channel needs a bandwidth of twice the highest audio frequency (5 kHz audio → 10 kHz). In frequency modulation (FM) the carrier\'s frequency follows the audio while its amplitude stays constant, so FM resists electrical noise, which mostly changes amplitude. Propagation depends on frequency: low and medium frequencies follow the ground (ground waves); 3–30 MHz short waves are bent back by the ionosphere (sky waves) and reach beyond the horizon, especially at night; above about 30 MHz the waves pass through the ionosphere and travel line of sight (space waves). A transmitter at height h reaches the horizon at d = √(2Rh) — about 36 km for a 100 m mast.',
+    targetedMisconceptions: [`${COMM}:MC-RADIO-IS-SOUND`, `${COMM}:MC-NO-CARRIER-NEEDED`],
+    source: `${COMM_SRC} — TA-2 why a carrier, TA-3 AM and FM, TA-4 propagation, TA-5 horizon`,
+  },
+  {
+    conceptId: COMM,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Because a radio makes sound, it is natural to think that sound travels from the station to the radio. But sound cannot cross a vacuum, and radio messages reach us from astronauts on the Moon and from spacecraft beyond Pluto. What crosses the distance is an electromagnetic wave travelling at 3 × 10⁸ m/s; sound exists only at the two ends, in the microphone and the loudspeaker. A second idea is that the station could skip the carrier and broadcast the audio signal directly as an electromagnetic wave. Try it: a 1 kHz signal has a wavelength of 300 km, and an efficient antenna is about a quarter of a wavelength — 75 km long. Worse, every station would broadcast in the same 20 Hz to 20 kHz range, so a receiver could not tell them apart. Putting each station\'s audio onto its own high-frequency carrier solves both problems at once: a 100 MHz carrier needs only a 0.75 m antenna, and each station occupies its own slot on the dial. Your receiver tunes to one carrier and recovers just that station\'s audio.',
+    targetedMisconceptions: [`${COMM}:MC-RADIO-IS-SOUND`, `${COMM}:MC-NO-CARRIER-NEEDED`],
+    source: `${COMM_SRC} — MC-RADIO-IS-SOUND + MC-NO-CARRIER-NEEDED, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const COMM_PROBES: SeedProbe[] = [
+  {
+    conceptId: COMM,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'An FM transmitter mast is 100 m tall. Roughly how far away is its horizon? (Earth\'s radius R = 6.4 × 10⁶ m, d = √(2Rh))',
+    choices: [
+      { text: 'About 36 km', isCorrect: true },
+      { text: 'About 1.3 km', isCorrect: false },
+      { text: 'About 360 km', isCorrect: false },
+      { text: 'There is no limit — radio waves follow Earth\'s curve', isCorrect: false },
+    ],
+    correctValue: 'about 36 km',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: `${COMM_SRC} — TA-5 P34 (d = √(2 × 6.4 × 10⁶ × 100))`,
+  },
+  {
+    conceptId: COMM,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'An AM station transmits audio containing frequencies up to 5 kHz. What bandwidth does its channel occupy?',
+    choices: [
+      { text: '10 kHz', isCorrect: true },
+      { text: '5 kHz', isCorrect: false },
+      { text: '2.5 kHz', isCorrect: false },
+      { text: 'None — the audio is broadcast without a carrier', isCorrect: false, misconceptionId: `${COMM}:MC-NO-CARRIER-NEEDED` },
+    ],
+    correctValue: '10 kHz',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${COMM}:MC-NO-CARRIER-NEEDED`],
+    source: `${COMM_SRC} — TA-3 P34 (bandwidth = 2 × highest audio frequency)`,
+  },
+  {
+    conceptId: COMM,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What kind of wave travels from a radio station to your radio?',
+    choices: [
+      { text: 'An electromagnetic (radio) wave, which the receiver converts back into sound', isCorrect: true },
+      { text: 'A sound wave that travels very far', isCorrect: false, misconceptionId: `${COMM}:MC-RADIO-IS-SOUND` },
+      { text: 'A very low-pitched sound wave we cannot hear', isCorrect: false, misconceptionId: `${COMM}:MC-RADIO-IS-SOUND` },
+    ],
+    correctValue: 'electromagnetic',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${COMM}:MC-RADIO-IS-SOUND`],
+    source: `${COMM_SRC} — DB-1 item and MC-RADIO-IS-SOUND conflict_evidence`,
+  },
+  {
+    conceptId: COMM,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why don\'t radio stations transmit a 1 kHz audio signal directly as an electromagnetic wave?',
+    choices: [
+      { text: 'Its wavelength is 300 km, so an efficient antenna would be tens of kilometres long, and all stations would overlap — so a high-frequency carrier is modulated instead', isCorrect: true },
+      { text: 'They could — the carrier is just tradition', isCorrect: false, misconceptionId: `${COMM}:MC-NO-CARRIER-NEEDED` },
+      { text: 'Because 1 kHz waves travel too slowly', isCorrect: false },
+    ],
+    correctValue: 'antenna size and channel separation',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${COMM}:MC-NO-CARRIER-NEEDED`],
+    source: `${COMM_SRC} — DB-2 golden probe and MC-NO-CARRIER-NEEDED conflict_evidence`,
+  },
+  {
+    conceptId: COMM,
+    subjectSlug: 'physics',
+    probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why can you often hear distant AM stations at night but FM stations only from nearby?',
+    choices: [
+      { text: 'AM\'s lower frequencies are bent back by the ionosphere (sky waves), especially at night; FM\'s VHF waves pass through it and travel only line of sight', isCorrect: true },
+      { text: 'FM stations switch off at night', isCorrect: false },
+      { text: 'FM waves are sound waves and AM waves are light', isCorrect: false },
+    ],
+    correctValue: 'sky waves vs line of sight',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: `${COMM_SRC} — DB-3 propagation check and TA-4 think-aloud`,
+  },
+]
+
+// ─── phys.em.radiation-and-antennas ──────────────────────────────────────────
+const ANTN = 'phys.em.radiation-and-antennas'
+const ANTN_SRC = 'docs/curriculum/blueprints/phys.em.radiation-and-antennas.md'
+
+const ANTN_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ANTN,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A charge at rest has a static field; a charge moving at constant velocity carries its field along with it, and nothing ripples outward. But when a charge accelerates, a kink forms in its field and travels outward at the speed of light — electromagnetic radiation. So only accelerating charges radiate: a wire carrying steady direct current sends out no radio waves, while an antenna driven by alternating current, whose charges surge back and forth, does — as do electrons moving in circles or braking in an X-ray tube. In a dipole antenna the charges oscillate along the rod. Seen from the side, that acceleration is fully visible and the antenna radiates strongly broadside; seen end-on, there is no sideways acceleration and nothing is radiated along the axis. The wave\'s electric field is parallel to the rod, so a vertical antenna sends vertically polarised waves. A half-wave dipole for 100 MHz is 1.5 m long. Electromagnetic waves also carry momentum, p = E/c, although photons have no mass. Absorbed light gives a radiation pressure I/c; reflected light reverses its momentum and gives 2I/c. Sunlight at Earth (1361 W/m²) presses with about 4.5 μPa on a black surface and 9.1 μPa on a mirror, so a 100 m × 100 m mirror sail feels about 0.09 N.',
+    targetedMisconceptions: [`${ANTN}:MC-STEADY-CURRENT-RADIATES`, `${ANTN}:MC-LIGHT-NO-MOMENTUM`],
+    source: `${ANTN_SRC} — TA-2 acceleration radiates, TA-3 DC vs AC, TA-4 dipole, TA-5 radiation pressure`,
+  },
+  {
+    conceptId: ANTN,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'It seems that any moving charge should send out electromagnetic waves, so a wire carrying current ought to broadcast. But the wires in a torch carry a steady current for hours, and a radio next to them picks up nothing, and the torch loses no energy as radio waves. A charge moving at constant velocity simply carries its field along with it. Radiation needs a change in motion: shake the end of a rope and a kink runs along it, but pull steadily and nothing travels. That is why antennas are fed with alternating current, whose charges keep accelerating back and forth. A second objection is that light has no mass, so it cannot push anything. Yet comet tails always point away from the Sun, whichever way the comet moves, because sunlight pushes the dust; and the Japanese probe IKAROS sailed through space on sunlight alone. Light carries momentum p = E/c — the formula p = mv is only the special case for slow, massive objects. When light is absorbed, its momentum passes to the surface, giving a pressure I/c; when it is reflected, its momentum reverses, so the surface receives twice as much, 2I/c. For sunlight that is only about 9 μPa on a mirror, but over a huge sail and months of travel it adds up.',
+    targetedMisconceptions: [`${ANTN}:MC-STEADY-CURRENT-RADIATES`, `${ANTN}:MC-LIGHT-NO-MOMENTUM`],
+    source: `${ANTN_SRC} — MC-STEADY-CURRENT-RADIATES + MC-LIGHT-NO-MOMENTUM, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const ANTN_PROBES: SeedProbe[] = [
+  {
+    conceptId: ANTN,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Sunlight of intensity 1361 W/m² falls on a perfectly reflecting sail. What radiation pressure does it exert?',
+    choices: [
+      { text: 'About 9.1 μPa', isCorrect: true },
+      { text: 'About 4.5 μPa', isCorrect: false },
+      { text: 'Zero — light has no mass', isCorrect: false, misconceptionId: `${ANTN}:MC-LIGHT-NO-MOMENTUM` },
+      { text: 'About 1361 Pa', isCorrect: false },
+    ],
+    correctValue: 'about 9.1 μPa',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ANTN}:MC-LIGHT-NO-MOMENTUM`],
+    source: `${ANTN_SRC} — TA-5 P34 (2I/c); 4.5 μPa is the absorbing case`,
+  },
+  {
+    conceptId: ANTN,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'How long should a half-wave dipole antenna be for a 100 MHz signal?',
+    choices: [
+      { text: '1.5 m', isCorrect: true },
+      { text: '3 m', isCorrect: false },
+      { text: '0.75 m', isCorrect: false },
+      { text: '50 m', isCorrect: false },
+    ],
+    correctValue: '1.5 m',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [],
+    source: `${ANTN_SRC} — TA-4 P34 (λ = 3 m, λ/2 = 1.5 m); 0.75 m is a quarter-wave`,
+  },
+  {
+    conceptId: ANTN,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A wire carries a steady 2 A direct current from a battery. Does it send out radio waves?',
+    choices: [
+      { text: 'No — the charges move at steady velocity; only accelerating charges radiate', isCorrect: true },
+      { text: 'Yes — moving charges always radiate', isCorrect: false, misconceptionId: `${ANTN}:MC-STEADY-CURRENT-RADIATES` },
+      { text: 'Yes, but only very weakly', isCorrect: false, misconceptionId: `${ANTN}:MC-STEADY-CURRENT-RADIATES` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${ANTN}:MC-STEADY-CURRENT-RADIATES`],
+    source: `${ANTN_SRC} — TA-3 P41 and MC-STEADY-CURRENT-RADIATES conflict_evidence`,
+  },
+  {
+    conceptId: ANTN,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Can sunlight push a spacecraft\'s sail even though photons have no mass?',
+    choices: [
+      { text: 'Yes — light carries momentum p = E/c, so it exerts radiation pressure, twice as much on a mirror', isCorrect: true },
+      { text: 'No — without mass there is no momentum and no push', isCorrect: false, misconceptionId: `${ANTN}:MC-LIGHT-NO-MOMENTUM` },
+      { text: 'Only if the sail heats up and the hot gas pushes it', isCorrect: false, misconceptionId: `${ANTN}:MC-LIGHT-NO-MOMENTUM` },
+    ],
+    correctValue: 'yes',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ANTN}:MC-LIGHT-NO-MOMENTUM`],
+    source: `${ANTN_SRC} — DB-2 golden probe and MC-LIGHT-NO-MOMENTUM conflict_evidence`,
+  },
+  {
+    conceptId: ANTN,
+    subjectSlug: 'physics',
+    probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In which direction does a vertical dipole antenna radiate least, and why?',
+    choices: [
+      { text: 'Straight up and down along its axis — seen end-on, the charges show no sideways acceleration', isCorrect: true },
+      { text: 'Horizontally — the waves go up into the sky', isCorrect: false },
+      { text: 'It radiates equally in every direction', isCorrect: false },
+    ],
+    correctValue: 'along its axis',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: `${ANTN_SRC} — DB-3 pattern check and TA-4 think-aloud`,
+  },
+]
+
 // Batch export spreads for the extension (kept with the concepts above).
 const PHYS_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...DENS_EXPLANATIONS,
@@ -55529,6 +55977,10 @@ const PHYS_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...STAR_EXPLANATIONS,
   ...DLAD_EXPLANATIONS,
   ...HALL_EXPLANATIONS,
+  ...LASR_EXPLANATIONS,
+  ...RSAF_EXPLANATIONS,
+  ...COMM_EXPLANATIONS,
+  ...ANTN_EXPLANATIONS,
 ]
 
 const PHYS_EXTENSION_PROBES: SeedProbe[] = [
@@ -55567,6 +56019,10 @@ const PHYS_EXTENSION_PROBES: SeedProbe[] = [
   ...STAR_PROBES,
   ...DLAD_PROBES,
   ...HALL_PROBES,
+  ...LASR_PROBES,
+  ...RSAF_PROBES,
+  ...COMM_PROBES,
+  ...ANTN_PROBES,
 ]
 
 // ─── Batch export ────────────────────────────────────────────────────────────

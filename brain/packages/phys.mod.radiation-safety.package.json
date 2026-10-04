@@ -1,0 +1,415 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mod.radiation-safety-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mod.radiation-safety",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:c38c9226144aa42bfde2155f65ed914a46b86f614dbfa3a273b267162d2624d7",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mod.radiation-safety.md": "sha256:799f1603db2657ff8ed0a7949ff09751a00e25cad937a61ad09343820be32e6a"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.mod.radiation-safety",
+    "name": "Radiation Dose, Biological Effects and Safety",
+    "difficultyRaw": "proficient (3)",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "phys.mod.radioactivity"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mod.radiation-safety-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mod.radiation-safety (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mod.radiation-safety.md": "sha256:799f1603db2657ff8ed0a7949ff09751a00e25cad937a61ad09343820be32e6a"
+      },
+      "contentHash": "sha256:ac46dc6c3815f32e163ec7b2250be0354e3e6f7bb9bab2d7a764993cb7a0b993",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mod.radiation-safety.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.radiation-safety.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.radiation-safety"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.radiation-safety\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.radiation-safety.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.radiation-safety.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.radiation-safety"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.radiation-safety\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.radiation-safety.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.radiation-safety.md#TA-3 (addresses MC-IRRADIATED-BECOMES-RADIOACTIVE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.radiation-safety"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.radiation-safety\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.radiation-safety.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.radiation-safety.md#TA-4 (addresses MC-ALPHA-ALWAYS-HARMLESS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.radiation-safety"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.radiation-safety\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.radiation-safety.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.radiation-safety.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.radiation-safety"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.radiation-safety\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.radiation-safety.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.radiation-safety.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.radiation-safety"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.radiation-safety\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.radiation-safety.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.radiation-safety.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.radiation-safety"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.radiation-safety\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mod.radiation-safety/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "phys.mod.radiation-safety",
+      "title": "Learning Objective",
+      "content": "[Boundary statement]\nA student who achieves mastery demonstrates:\n1. Uses the dose quantities: absorbed dose D = energy absorbed / mass, in grays (1 Gy = 1 J/kg); equivalent dose H = D × w_R, in sieverts, where the radiation weighting factor w_R is 1 for beta, gamma and X-rays and 20 for alpha particles. A 70 kg person absorbing 0.014 J of gamma radiation receives 0.2 mGy, i.e. 0.2 mSv; 0.1 mGy of alpha in lung tissue is 2 mSv. Typical natural background is about 2–3 mSv per year.\n2. Explains biological effects — ionising radiation damages DNA; large doses cause radiation sickness, while low doses raise long-term cancer risk roughly in proportion to dose — and why alpha emitters are harmless outside the body (stopped by skin) but very dangerous if inhaled or swallowed (all their energy deposited in a few cells).\n3. Applies the three protections — time (dose ∝ exposure time), distance (from a point source, dose rate ∝ 1/r², so doubling the distance quarters it) and shielding (paper stops alpha, a few mm of aluminium stops beta, gamma is reduced by lead or concrete) — and distinguishes irradiation (exposure to radiation, which does not make an object radioactive) from contamination (radioactive material on or in it).\n\nA student who thinks irradiated food becomes radioactive, or that alpha radiation is harmless because it can't get through skin, has **NOT** achieved mastery — those ideas misjudge every real radiation risk.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.radiation-safety.md",
+        "startLine": 17,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.mod.radiation-safety/misconception/MC-IRRADIATED-BECOMES-RADIOACTIVE",
+      "kind": "misconception",
+      "conceptId": "phys.mod.radiation-safety",
+      "title": "Anything exposed to radiation becomes radioactive",
+      "content": "### MC-IRRADIATED-BECOMES-RADIOACTIVE: \"Anything exposed to radiation becomes radioactive\"\ntrigger_signal: student believes irradiated food, medical equipment or patients become radioactive, confusing irradiation with contamination.\nconflict_evidence [P28]: \"After a chest X-ray, do you set off a radiation detector? A light bulb lights a room — does the room glow after you switch it off?\"\nbridge_text [P30]: \"No. Gamma rays and X-rays deposit energy and then are gone; they do not leave radioactive atoms behind (the energies used are far too low to change nuclei). Irradiated strawberries are no more radioactive than before. What does spread radioactivity is contamination: radioactive material itself landing on or getting into something, which keeps emitting.\"\nreplacement_text [P31]: \"Irradiation = exposure to radiation (no lasting radioactivity); contamination = radioactive material present on or in an object (it keeps emitting).\"\ndiscrimination_pairs [P33]: [\"gamma-sterilised syringes: irradiated, not radioactive\", \"radioactive dust on clothes: contaminated, emitting until removed\"]\ns6_path: skip P28; the light-bulb analogy alone.",
+      "localKey": "MC-IRRADIATED-BECOMES-RADIOACTIVE",
+      "language": "en",
+      "refs": [
+        "MC-IRRADIATED-BECOMES-RADIOACTIVE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.radiation-safety.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.mod.radiation-safety/misconception/MC-ALPHA-ALWAYS-HARMLESS",
+      "kind": "misconception",
+      "conceptId": "phys.mod.radiation-safety",
+      "title": "Alpha radiation is harmless because it can't get through skin",
+      "content": "### MC-ALPHA-ALWAYS-HARMLESS: \"Alpha radiation is harmless because it can't get through skin\"\ntrigger_signal: student judges alpha emitters safe in all circumstances because alpha particles are stopped by paper or the outer layer of skin.\nconflict_evidence [P28]: \"Alpha particles are stopped by a few centimetres of air or the dead outer layer of your skin. Where do they dump all their energy when they stop? What if the source is inside your lungs?\"\nbridge_text [P30]: \"They dump it all in a very short track — which is why they are so ionising. Outside the body that energy goes into dead skin cells and does no harm. Inside the body — inhaled radon, swallowed polonium — it all goes into a few living cells, causing intense damage. That is why alpha's weighting factor is 20.\"\nreplacement_text [P31]: \"Alpha emitters are low risk outside the body but highly dangerous if inhaled or ingested; penetration and ionising damage are different things.\"\ndiscrimination_pairs [P33]: [\"alpha source on the bench: stopped by skin — low risk\", \"alpha emitter in the lungs (radon): high dose to nearby cells\"]\ns6_path: skip P28; state the radon example plainly.",
+      "localKey": "MC-ALPHA-ALWAYS-HARMLESS",
+      "language": "en",
+      "refs": [
+        "MC-ALPHA-ALWAYS-HARMLESS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.radiation-safety.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.mod.radiation-safety/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.radiation-safety",
+      "title": "The Lead Screen and the Strawberries",
+      "content": "{\"id\":\"TA-1\",\"title\":\"The Lead Screen and the Strawberries\",\"primitives\":[\"P01\",\"P04\",\"P05\",\"P06\",\"P14\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.radiation-safety.md",
+        "startLine": 11,
+        "endLine": 18
+      }
+    },
+    {
+      "assetId": "phys.mod.radiation-safety/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.radiation-safety",
+      "title": "Gray and Sievert",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Gray and Sievert\",\"primitives\":[\"P02\",\"P06\",\"P08\",\"P13\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.radiation-safety.md",
+        "startLine": 18,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "phys.mod.radiation-safety/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.radiation-safety",
+      "title": "Irradiation vs Contamination",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Irradiation vs Contamination\",\"primitives\":[\"P02\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-IRRADIATED-BECOMES-RADIOACTIVE\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-IRRADIATED-BECOMES-RADIOACTIVE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.radiation-safety.md",
+        "startLine": 26,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "phys.mod.radiation-safety/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.radiation-safety",
+      "title": "Alpha Inside and Outside",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Alpha Inside and Outside\",\"primitives\":[\"P02\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-ALPHA-ALWAYS-HARMLESS\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-ALPHA-ALWAYS-HARMLESS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.radiation-safety.md",
+        "startLine": 32,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "phys.mod.radiation-safety/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.radiation-safety",
+      "title": "Time, Distance, Shielding",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Time, Distance, Shielding\",\"primitives\":[\"P02\",\"P34\",\"P49\",\"P50\",\"P51\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.radiation-safety.md",
+        "startLine": 38,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "phys.mod.radiation-safety/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.radiation-safety",
+      "title": "Formative Assessment",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Formative Assessment\",\"primitives\":[\"P02\",\"P35\",\"P49\",\"P51\",\"P55\",\"P79\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.radiation-safety.md",
+        "startLine": 44,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "phys.mod.radiation-safety/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.radiation-safety",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P28\",\"P41\",\"P54\",\"P55\",\"P62\",\"P68\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.radiation-safety.md",
+        "startLine": 51,
+        "endLine": 93
+      }
+    },
+    {
+      "assetId": "phys.mod.radiation-safety/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mod.radiation-safety",
+      "title": "Assessment Battery",
+      "content": "| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (classify) | \"Gray or sievert for radiation type\" | CORRECT = sievert |\n| P74 (classify) | \"Most shielding needed\" | CORRECT = gamma |\n| P75 (boundary) | \"Contaminated vs irradiated\" | CORRECT = different — contaminated still emits |\n| P76 (transfer) | \"Dentist leaves the room\" | CORRECT = repeated exposures add up for staff; patient gets one small dose |\n| P77 (generate) | \"Safe lab plan\" | CORRECT = minimise time, maximise distance (tongs), shielding, store in lead |\n| P78 (explain) | \"Alpha × 20\" | CORRECT = dense ionisation, more biological damage per joule |\n| P79 (predict) | \"Thickest shielding\" | CORRECT = gamma |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.radiation-safety.md",
+        "startLine": 176,
+        "endLine": 188
+      }
+    },
+    {
+      "assetId": "phys.mod.radiation-safety/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.radiation-safety",
+      "title": "Student State Matrix",
+      "content": "| State | Why here | Tell-tale behaviour | Protocol |\n|---|---|---|---|\n| S0 | Radiation as one vague danger | Cannot say what a sievert measures | Protocol A (Concrete) |\n| S1 | Units recited | Cannot convert Gy to Sv for alpha | Protocol B (Counterexample-first) |\n| S2-IRRADIATED-BECOMES-RADIOACTIVE | Contagion picture | \"Irradiated food is radioactive\" | Misconception Engine → then Protocol C |\n| S2-ALPHA-ALWAYS-HARMLESS | Penetration = danger | \"Alpha can't get through skin, so it's harmless\" | Misconception Engine → then Protocol C |\n| S3 | Partial — units fine | Cannot apply the inverse-square law to dose | Protocol C (Guided Questioning) |\n| S6 | Anxiety on the topic | Treats radiation as frightening and unknowable | Protocol F (Low Pressure) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.radiation-safety.md",
+        "startLine": 27,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "phys.mod.radiation-safety/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.radiation-safety",
+      "title": "Diagnostic Battery",
+      "content": "DB-1 (prior-exposure check):\n\"Strawberries are treated with gamma rays to kill bacteria. Are they radioactive afterwards?\"\n  \"No — irradiation doesn't make them radioactive\" → DB-2.\n  \"Yes\" → SIGNAL:MISCONCEPTION:MC-IRRADIATED-BECOMES-RADIOACTIVE. Enter Misconception Engine.\n  No idea → S0. Enter Protocol A (Concrete).\n\nDB-2 (representation / misconception test):\n\"Alpha particles are stopped by a sheet of paper. Is an alpha emitter safe to swallow?\"\n  \"No — inside the body all its energy goes into nearby cells, and alpha is weighted 20 times\" → S3. Enter Protocol C.\n  \"No\" (no reason) → S1. Enter Protocol B.\n  \"Yes — alpha can't do harm\" → SIGNAL:MISCONCEPTION:MC-ALPHA-ALWAYS-HARMLESS. Enter Misconception Engine.\n  Pause → add S6 flag; Protocol F (calm, factual) otherwise Protocol A.\n\nDB-3 (distance check — overlays):\n\"You move from 1 m to 3 m from a small gamma source. By what factor does your dose rate fall?\"\n  \"9 times\" → no flag.\n  \"3 times\" → note; repair at TA-5.\n  Confident and wrong on DB-2 → add S7 flag. Override to Protocol G.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-IRRADIATED-BECOMES-RADIOACTIVE",
+        "MC-ALPHA-ALWAYS-HARMLESS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.radiation-safety.md",
+        "startLine": 38,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "phys.mod.radiation-safety/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.radiation-safety",
+      "title": "Prerequisite Check",
+      "content": "PD-1 (for `phys.mod.radioactivity`):\n\"Name the three kinds of nuclear radiation and what stops each.\"\n  Cannot say \"alpha — paper; beta — aluminium; gamma — reduced by lead\" → flag PREREQ-GAP-RADIOACTIVITY.\n  In-session minimum repair: one P06 (penetration chart) + one P34 (\"which is most ionising?\") then resume. If absent, schedule the missing session (S4 route).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.radiation-safety.md",
+        "startLine": 59,
+        "endLine": 66
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

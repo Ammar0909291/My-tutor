@@ -4,10 +4,10 @@
   "status": "production",
   "build_date": "2026-06-29",
   "statistics": {
-    "total_concepts": 273,
+    "total_concepts": 277,
     "total_domains": 12,
-    "total_requires_edges": 343,
-    "total_unlocks_edges": 342,
+    "total_requires_edges": 348,
+    "total_unlocks_edges": 347,
     "total_cross_links": 0
   },
   "domains": [
@@ -39,12 +39,12 @@
     {
       "key": "em",
       "name": "Electromagnetism",
-      "count": 44
+      "count": 46
     },
     {
       "key": "mod",
       "name": "Modern Physics",
-      "count": 23
+      "count": 25
     },
     {
       "key": "qm",
@@ -1222,7 +1222,8 @@
       "children": [],
       "unlocks": [
         "phys.mech.center-of-mass",
-        "phys.mech.impulse"
+        "phys.mech.impulse",
+        "phys.em.radiation-and-antennas"
       ]
     },
     {
@@ -5260,8 +5261,69 @@
       "children": [],
       "unlocks": [
         "phys.mod.photoelectric-effect",
-        "phys.rel.postulates"
+        "phys.rel.postulates",
+        "phys.em.communication-systems",
+        "phys.em.radiation-and-antennas"
       ]
+    },
+    {
+      "id": "phys.em.communication-systems",
+      "name": "Modulation and Signal Propagation",
+      "aliases": [
+        "amplitude modulation",
+        "frequency modulation",
+        "carrier wave",
+        "sky wave",
+        "ionosphere"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.em.electromagnetic-waves"
+      ],
+      "related": [
+        "phys.opt.total-internal-reflection"
+      ],
+      "cross_links": [],
+      "description": "Audio signals are carried by a high-frequency carrier wave whose amplitude (AM) or frequency (FM) is varied, because practical antennas must be comparable to the wavelength; low frequencies travel as ground waves, 3-30 MHz waves reflect from the ionosphere as sky waves, and higher frequencies travel line of sight, with range about sqrt(2Rh).",
+      "difficulty": "proficient",
+      "estimated_hours": 2,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "NCERT Physics Class 12 Ch.15"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.em.radiation-and-antennas",
+      "name": "Radiation from Accelerating Charges and Radiation Pressure",
+      "aliases": [
+        "antenna",
+        "dipole antenna",
+        "radiation pressure",
+        "solar sail"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.em.electromagnetic-waves",
+        "phys.mech.momentum"
+      ],
+      "related": [
+        "phys.em.communication-systems"
+      ],
+      "cross_links": [],
+      "description": "Only accelerating charges radiate electromagnetic waves, so an oscillating current in a half-wave dipole antenna radiates most strongly broadside and not at all along its axis; light carries momentum p = E/c, exerting a radiation pressure I/c on an absorbing surface and 2I/c on a reflecting one.",
+      "difficulty": "expert",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Halliday Resnick Ch.33",
+        "Griffiths Electrodynamics Ch.11"
+      ],
+      "children": [],
+      "unlocks": []
     },
     {
       "id": "phys.mod.photoelectric-effect",
@@ -5489,8 +5551,38 @@
       "children": [],
       "unlocks": [
         "phys.mod.radioactivity",
-        "phys.mod.energy-bands"
+        "phys.mod.energy-bands",
+        "phys.mod.lasers"
       ]
+    },
+    {
+      "id": "phys.mod.lasers",
+      "name": "Lasers: Stimulated Emission and Population Inversion",
+      "aliases": [
+        "laser",
+        "stimulated emission",
+        "population inversion",
+        "coherent light"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mod.atomic-spectra"
+      ],
+      "related": [
+        "phys.mod.photons"
+      ],
+      "cross_links": [],
+      "description": "In stimulated emission an incoming photon makes an excited atom emit an identical photon; with more atoms in an upper (metastable) level than below it \u2014 a population inversion, impossible in thermal equilibrium \u2014 light is amplified between two mirrors into a coherent, monochromatic, highly directional beam.",
+      "difficulty": "advanced",
+      "estimated_hours": 2,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "NCERT Physics Class 12 Ch.12",
+        "Halliday Resnick Ch.40"
+      ],
+      "children": [],
+      "unlocks": []
     },
     {
       "id": "phys.mod.x-rays",
@@ -5572,7 +5664,8 @@
       ],
       "children": [],
       "unlocks": [
-        "phys.mod.radioactive-decay"
+        "phys.mod.radioactive-decay",
+        "phys.mod.radiation-safety"
       ]
     },
     {
@@ -5603,6 +5696,36 @@
       "unlocks": [
         "phys.mod.nuclear-reactions"
       ]
+    },
+    {
+      "id": "phys.mod.radiation-safety",
+      "name": "Radiation Dose, Biological Effects and Safety",
+      "aliases": [
+        "radiation dose",
+        "sievert",
+        "gray",
+        "radiation protection"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mod.radioactivity"
+      ],
+      "related": [
+        "phys.mod.radioactive-decay",
+        "phys.mod.x-rays"
+      ],
+      "cross_links": [],
+      "description": "Absorbed dose (gray, J/kg) measures energy deposited; equivalent dose (sievert) weights it by radiation type (alpha 20, beta and gamma 1); exposure is reduced by time, distance (inverse square) and shielding, and being irradiated does not make an object radioactive, unlike contamination.",
+      "difficulty": "proficient",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "NCERT Physics Class 12 Ch.13",
+        "IB Physics"
+      ],
+      "children": [],
+      "unlocks": []
     },
     {
       "id": "phys.mod.nuclear-reactions",

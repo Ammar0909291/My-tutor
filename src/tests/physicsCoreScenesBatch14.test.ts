@@ -71,13 +71,13 @@ const DOMAIN_SCOPED = [
 describe('campaign end state', () => {
   const g = JSON.parse(readFileSync('docs/physics/kg/graph.json', 'utf8'))
   const ids: string[] = (Array.isArray(g) ? g : (g.concepts ?? g.nodes)).map((n: { id: string }) => n.id)
-  // Resolved once and shared: 273 full resolutions are slow under the full suite's parallel load.
+  // Resolved once and shared: 277 full resolutions are slow under the full suite's parallel load.
   let decisions: Map<string, ReturnType<typeof resolveVisual>> | null = null
   const all = () => (decisions ??= new Map(ids.map((id) => [id, resolveVisual({ message: 'show me a diagram', lessonConceptId: id, learnerRequest: 'diagram', subject: 'physics' } as Parameters<typeof resolveVisual>[0])])))
 
-  it('every one of the 273 physics concepts resolves to a figure of that concept', () => {
+  it('every one of the 277 physics concepts resolves to a figure of that concept', () => {
     // 238 until the 2026-10-03 coverage-driven extension; each new concept ships its own figure.
-    expect(ids).toHaveLength(273)
+    expect(ids).toHaveLength(277)
     const none = ids.filter((id) => { const d = all().get(id)!; return !(d.graphical && d.asset?.conceptId === id) })
     expect(none).toEqual([])
   }, 60_000)

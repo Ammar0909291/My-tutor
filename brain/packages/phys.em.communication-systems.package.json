@@ -1,0 +1,415 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.em.communication-systems-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.em.communication-systems",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:5f2bbc23f5dba506137c472914abf7330a9dd278ea279244a2a28a23a3da1de4",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.em.communication-systems.md": "sha256:b8e9483939e70801a745a347198055be7e2abbd732fe563a2a92bb2481be8af7"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.em.communication-systems",
+    "name": "Modulation and Signal Propagation",
+    "difficultyRaw": "proficient (3)",
+    "bloom": "understand",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "phys.em.electromagnetic-waves"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.em.communication-systems-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.em.communication-systems (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.em.communication-systems.md": "sha256:b8e9483939e70801a745a347198055be7e2abbd732fe563a2a92bb2481be8af7"
+      },
+      "contentHash": "sha256:7d2618de7ad8001b0980923b65b339115d7024a74dac40e5e4d674808ab18d29",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.em.communication-systems.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.communication-systems.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.communication-systems"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.communication-systems\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.communication-systems.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.communication-systems.md#TA-2 (addresses MC-RADIO-IS-SOUND)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.communication-systems"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.communication-systems\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.communication-systems.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.communication-systems.md#TA-3 (addresses MC-NO-CARRIER-NEEDED)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.communication-systems"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.communication-systems\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.communication-systems.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.communication-systems.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.communication-systems"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.communication-systems\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.communication-systems.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.communication-systems.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.communication-systems"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.communication-systems\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.communication-systems.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.communication-systems.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.communication-systems"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.communication-systems\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.communication-systems.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.communication-systems.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.communication-systems"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.communication-systems\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.em.communication-systems/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "phys.em.communication-systems",
+      "title": "Learning Objective",
+      "content": "[Boundary statement]\nA student who achieves mastery demonstrates:\n1. Explains why sound is not broadcast directly: radio waves are electromagnetic, not sound, and an efficient antenna must be comparable to the wavelength (about λ/4 or λ/2) — a 1 kHz audio signal has λ = 300 km, while a 100 MHz carrier has λ = 3 m, so a 0.75 m quarter-wave antenna works. The audio is therefore impressed on a high-frequency carrier by modulation.\n2. Distinguishes amplitude modulation (AM: the carrier's amplitude follows the signal) from frequency modulation (FM: the carrier's frequency follows the signal), knows that an AM channel occupies a bandwidth of twice the highest audio frequency (5 kHz audio → 10 kHz), and that FM resists noise better because most interference changes amplitude, not frequency.\n3. Explains propagation by frequency: low and medium frequencies follow the ground (ground waves); 3–30 MHz short waves are reflected by the ionosphere (sky waves), reaching beyond the horizon, especially at night; VHF and above pass through the ionosphere and travel line of sight (space waves), so a transmitter on a tower of height h reaches about d = √(2Rh) — about 36 km for h = 100 m — which is why FM and TV need tall masts or satellites.\n\nA student who thinks radio waves are sound waves, or that audio could simply be transmitted without a carrier, has **NOT** achieved mastery — those ideas misread every broadcast and phone link.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.communication-systems.md",
+        "startLine": 17,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.em.communication-systems/misconception/MC-RADIO-IS-SOUND",
+      "kind": "misconception",
+      "conceptId": "phys.em.communication-systems",
+      "title": "Radio waves are sound waves that travel a long way",
+      "content": "### MC-RADIO-IS-SOUND: \"Radio waves are sound waves that travel a long way\"\ntrigger_signal: student identifies the broadcast wave as sound, because a radio produces sound.\nconflict_evidence [P28]: \"Sound cannot travel through a vacuum, yet radio messages reach us from astronauts on the Moon and from spacecraft beyond Pluto. What kind of wave crosses empty space?\"\nbridge_text [P30]: \"Only electromagnetic waves. A radio station sends electromagnetic waves — radio waves, travelling at 3 × 10⁸ m/s. The receiver decodes them and drives a loudspeaker, which makes the sound you hear. Sound exists only at the two ends: the microphone and the speaker.\"\nreplacement_text [P31]: \"Broadcast radio waves are electromagnetic; sound is converted to an electrical signal, carried on an EM carrier, and turned back into sound by the receiver.\"\ndiscrimination_pairs [P33]: [\"sound: pressure wave in air, 340 m/s, needs a medium\", \"radio wave: electromagnetic, 3 × 10⁸ m/s, crosses vacuum\"]\ns6_path: skip P28; trace the chain microphone → transmitter → radio wave → receiver → speaker.",
+      "localKey": "MC-RADIO-IS-SOUND",
+      "language": "en",
+      "refs": [
+        "MC-RADIO-IS-SOUND"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.communication-systems.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.em.communication-systems/misconception/MC-NO-CARRIER-NEEDED",
+      "kind": "misconception",
+      "conceptId": "phys.em.communication-systems",
+      "title": "The audio signal could be broadcast directly without a carrier",
+      "content": "### MC-NO-CARRIER-NEEDED: \"The audio signal could be broadcast directly without a carrier\"\ntrigger_signal: student thinks modulation is an unnecessary complication and audio-frequency signals could be radiated directly.\nconflict_evidence [P28]: \"A 1 kHz signal has a wavelength of 300 km. An efficient antenna is about a quarter of a wavelength. How long would it be? And if every station broadcast at audio frequencies, how would your radio separate them?\"\nbridge_text [P30]: \"75 km — impossible. And all stations would overlap in the same 20 Hz–20 kHz range. Putting each station's audio on its own high-frequency carrier solves both: a 100 MHz carrier needs only a 0.75 m antenna, and each station occupies its own slot, so a receiver tunes to one carrier and recovers its audio.\"\nreplacement_text [P31]: \"Modulation puts low-frequency information onto a high-frequency carrier: practical antennas and separate channels.\"\ndiscrimination_pairs [P33]: [\"1 kHz direct: λ = 300 km, quarter-wave antenna 75 km\", \"100 MHz carrier: λ = 3 m, antenna 0.75 m\"]\ns6_path: skip P28; the antenna-length comparison alone.",
+      "localKey": "MC-NO-CARRIER-NEEDED",
+      "language": "en",
+      "refs": [
+        "MC-NO-CARRIER-NEEDED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.communication-systems.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.em.communication-systems/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.communication-systems",
+      "title": "AM at Night",
+      "content": "{\"id\":\"TA-1\",\"title\":\"AM at Night\",\"primitives\":[\"P01\",\"P04\",\"P05\",\"P06\",\"P14\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.communication-systems.md",
+        "startLine": 11,
+        "endLine": 18
+      }
+    },
+    {
+      "assetId": "phys.em.communication-systems/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.communication-systems",
+      "title": "Why a Carrier",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Why a Carrier\",\"primitives\":[\"P02\",\"P13\",\"P34\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-RADIO-IS-SOUND\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-RADIO-IS-SOUND"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.communication-systems.md",
+        "startLine": 18,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.em.communication-systems/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.communication-systems",
+      "title": "AM and FM",
+      "content": "{\"id\":\"TA-3\",\"title\":\"AM and FM\",\"primitives\":[\"P02\",\"P06\",\"P08\",\"P13\",\"P34\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-NO-CARRIER-NEEDED\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-NO-CARRIER-NEEDED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.communication-systems.md",
+        "startLine": 27,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "phys.em.communication-systems/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.communication-systems",
+      "title": "Ground, Sky and Space Waves",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Ground, Sky and Space Waves\",\"primitives\":[\"P02\",\"P13\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.communication-systems.md",
+        "startLine": 38,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "phys.em.communication-systems/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.communication-systems",
+      "title": "The Horizon",
+      "content": "{\"id\":\"TA-5\",\"title\":\"The Horizon\",\"primitives\":[\"P02\",\"P34\",\"P49\",\"P50\",\"P51\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.communication-systems.md",
+        "startLine": 44,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "phys.em.communication-systems/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.communication-systems",
+      "title": "Formative Assessment",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Formative Assessment\",\"primitives\":[\"P02\",\"P35\",\"P49\",\"P51\",\"P55\",\"P79\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.communication-systems.md",
+        "startLine": 50,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "phys.em.communication-systems/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.communication-systems",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P28\",\"P41\",\"P54\",\"P55\",\"P62\",\"P68\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.communication-systems.md",
+        "startLine": 57,
+        "endLine": 99
+      }
+    },
+    {
+      "assetId": "phys.em.communication-systems/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.em.communication-systems",
+      "title": "Assessment Battery",
+      "content": "| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (classify) | \"AM varies… FM varies…\" | CORRECT = amplitude; frequency |\n| P74 (classify) | \"Ground, sky, space wave for 1 MHz / 15 MHz / 100 MHz\" | CORRECT = ground; sky; space |\n| P75 (boundary) | \"100 MHz at the ionosphere\" | CORRECT = passes through |\n| P76 (transfer) | \"Phone masts close together\" | CORRECT = high frequencies, line of sight, limited range and capacity per cell |\n| P77 (generate) | \"Ship 2000 km away\" | CORRECT = short wave 3–30 MHz via sky waves |\n| P78 (explain) | \"Carrier ≫ audio\" | CORRECT = antenna size ~λ and channel separation |\n| P79 (predict) | \"4× mast height\" | CORRECT = range doubles |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.communication-systems.md",
+        "startLine": 182,
+        "endLine": 194
+      }
+    },
+    {
+      "assetId": "phys.em.communication-systems/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.em.communication-systems",
+      "title": "Student State Matrix",
+      "content": "| State | Why here | Tell-tale behaviour | Protocol |\n|---|---|---|---|\n| S0 | Radio as \"sound through the air\" | Cannot say what an antenna sends | Protocol A (Concrete) |\n| S1 | AM/FM named | Cannot say why a carrier is needed | Protocol B (Counterexample-first) |\n| S2-RADIO-IS-SOUND | Same name, same thing | \"Radio waves are sound waves that travel far\" | Misconception Engine → then Protocol C |\n| S2-NO-CARRIER-NEEDED | Direct transmission | \"Just send the audio signal straight from the antenna\" | Misconception Engine → then Protocol C |\n| S3 | Partial — modulation fine | Cannot explain sky waves or the horizon range | Protocol C (Guided Questioning) |\n| S6 | Anxiety on waveforms | Avoids graphs of modulated waves | Protocol F (Low Pressure) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.communication-systems.md",
+        "startLine": 27,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "phys.em.communication-systems/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.em.communication-systems",
+      "title": "Diagnostic Battery",
+      "content": "DB-1 (prior-exposure check):\n\"What kind of wave travels from a radio station to your radio?\"\n  \"Sound\" → SIGNAL:MISCONCEPTION:MC-RADIO-IS-SOUND. Enter Misconception Engine.\n  \"Electromagnetic (radio) waves\" → DB-2.\n  No idea → S0. Enter Protocol A (Concrete).\n\nDB-2 (representation / misconception test):\n\"Why don't stations transmit the audio signal (say 1 kHz) directly as an electromagnetic wave?\"\n  \"Its wavelength would be 300 km — antennas must be comparable to λ — so a high-frequency carrier is modulated instead\" → S3. Enter Protocol C.\n  \"They use a carrier\" (no reason) → S1. Enter Protocol B.\n  \"They could — the carrier is unnecessary\" → SIGNAL:MISCONCEPTION:MC-NO-CARRIER-NEEDED. Enter Misconception Engine.\n  Pause → add S6 flag; Protocol F if anxious, otherwise Protocol A.\n\nDB-3 (propagation check — overlays):\n\"Why can you hear distant AM stations at night but FM only from nearby?\"\n  \"Short/medium waves reflect off the ionosphere; FM's VHF waves go straight through and travel line of sight\" → no flag.\n  \"FM is weaker\" → note; repair at TA-5.\n  Confident and wrong on DB-2 → add S7 flag. Override to Protocol G.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-RADIO-IS-SOUND",
+        "MC-NO-CARRIER-NEEDED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.communication-systems.md",
+        "startLine": 38,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "phys.em.communication-systems/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.em.communication-systems",
+      "title": "Prerequisite Check",
+      "content": "PD-1 (for `phys.em.electromagnetic-waves`):\n\"What is the wavelength of a 100 MHz electromagnetic wave, and what speed do all EM waves travel at in vacuum?\"\n  Cannot say \"3 m; c = 3 × 10⁸ m/s\" → flag PREREQ-GAP-EM-WAVES.\n  In-session minimum repair: one P06 (the EM spectrum with radio at the long end) + one P34 (\"1 MHz: wavelength?\") then resume. If absent, schedule the missing session (S4 route).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.communication-systems.md",
+        "startLine": 59,
+        "endLine": 66
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

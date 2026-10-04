@@ -1,0 +1,416 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.em.radiation-and-antennas-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.em.radiation-and-antennas",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:aff7d7ffaaa0cb971f960aa9d5d1554747f338da1091ff8be77103d737c4bf3b",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.em.radiation-and-antennas.md": "sha256:e9bd57faf018faa24f879b77a193c55b40ce883cd0cb6fb344652832ebbf8ca6"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.em.radiation-and-antennas",
+    "name": "Radiation from Accelerating Charges and Radiation Pressure",
+    "difficultyRaw": "expert (5)",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "phys.em.electromagnetic-waves",
+      "phys.mech.momentum"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.em.radiation-and-antennas-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.em.radiation-and-antennas (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.em.radiation-and-antennas.md": "sha256:e9bd57faf018faa24f879b77a193c55b40ce883cd0cb6fb344652832ebbf8ca6"
+      },
+      "contentHash": "sha256:e12fc0eee410d3d17993d3f80acbaa00b12b1519f7887b87b593bdf3837d0987",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.em.radiation-and-antennas.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.radiation-and-antennas.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.radiation-and-antennas"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.radiation-and-antennas\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.radiation-and-antennas.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.radiation-and-antennas.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.radiation-and-antennas"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.radiation-and-antennas\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.radiation-and-antennas.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.radiation-and-antennas.md#TA-3 (addresses MC-STEADY-CURRENT-RADIATES)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.radiation-and-antennas"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.radiation-and-antennas\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.radiation-and-antennas.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.radiation-and-antennas.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.radiation-and-antennas"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.radiation-and-antennas\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.radiation-and-antennas.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.radiation-and-antennas.md#TA-5 (addresses MC-LIGHT-NO-MOMENTUM)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.radiation-and-antennas"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.radiation-and-antennas\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.radiation-and-antennas.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.radiation-and-antennas.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.radiation-and-antennas"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.radiation-and-antennas\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.radiation-and-antennas.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.radiation-and-antennas.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.radiation-and-antennas"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.radiation-and-antennas\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.em.radiation-and-antennas/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "phys.em.radiation-and-antennas",
+      "title": "Learning Objective",
+      "content": "[Boundary statement]\nA student who achieves mastery demonstrates:\n1. States that electromagnetic waves are produced only by ACCELERATING charges: a charge at rest has a static field, a charge moving at constant velocity carries its field along, but when a charge accelerates, a kink in its field travels outward at c — radiation. A steady direct current in a straight wire does not radiate; an alternating current, whose charges oscillate, does.\n2. Applies this to the dipole antenna: charges surging up and down a rod radiate most strongly broadside (perpendicular to the rod) and not at all along its axis, with the electric field of the wave parallel to the rod (vertical rod → vertically polarised wave); a half-wave dipole for 100 MHz is λ/2 = 1.5 m long, and a receiving antenna works best aligned with the wave's electric field.\n3. Uses the momentum of light, p = E/c: a beam of intensity I exerts a radiation pressure I/c on a surface that absorbs it and 2I/c on one that reflects it. Sunlight at Earth (1361 W/m²) gives 4.5 μPa absorbed, 9.1 μPa reflected; a 100 m × 100 m reflecting solar sail feels about 0.09 N — tiny, but unceasing and fuel-free.\n\nA student who thinks any moving charge (including a steady current) radiates, or that light cannot push anything because it has no mass, has **NOT** achieved mastery — those ideas misread antennas and radiation pressure alike.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.radiation-and-antennas.md",
+        "startLine": 17,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.em.radiation-and-antennas/misconception/MC-STEADY-CURRENT-RADIATES",
+      "kind": "misconception",
+      "conceptId": "phys.em.radiation-and-antennas",
+      "title": "Any moving charge, including a steady current, radiates",
+      "content": "### MC-STEADY-CURRENT-RADIATES: \"Any moving charge, including a steady current, radiates\"\ntrigger_signal: student expects a steady direct current, or a charge moving at constant velocity, to emit electromagnetic waves.\nconflict_evidence [P28]: \"A torch's wires carry a steady current for hours. Does a radio next to them pick up a signal? Does the torch lose energy as radio waves?\"\nbridge_text [P30]: \"No. A charge moving at constant velocity carries its field along unchanged — nothing ripples outward. Radiation needs a change in motion: when a charge accelerates, a kink forms in its field and travels away at c. That is why antennas use alternating currents, whose charges keep accelerating back and forth, and why braking electrons in an X-ray tube emit X-rays.\"\nreplacement_text [P31]: \"Only accelerating charges radiate: oscillating, braking, or moving in a curve — not steady motion.\"\ndiscrimination_pairs [P33]: [\"steady DC in a straight wire: no radiation\", \"100 MHz alternating current in a dipole: strong radiation broadside\"]\ns6_path: skip P28; shake a rope — a steady pull sends no wave; a jerk sends one.",
+      "localKey": "MC-STEADY-CURRENT-RADIATES",
+      "language": "en",
+      "refs": [
+        "MC-STEADY-CURRENT-RADIATES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.radiation-and-antennas.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.em.radiation-and-antennas/misconception/MC-LIGHT-NO-MOMENTUM",
+      "kind": "misconception",
+      "conceptId": "phys.em.radiation-and-antennas",
+      "title": "Light can't push anything because it has no mass",
+      "content": "### MC-LIGHT-NO-MOMENTUM: \"Light can't push anything because it has no mass\"\ntrigger_signal: student denies radiation pressure on the grounds that photons are massless, equating momentum strictly with mv.\nconflict_evidence [P28]: \"Comet tails always point away from the Sun, whichever way the comet is moving. Something from the Sun is pushing the dust. And the Japanese probe IKAROS sailed using sunlight alone. How?\"\nbridge_text [P30]: \"Light carries momentum p = E/c even though it has no mass — p = mv is the special case for slow massive things. When light is absorbed its momentum is transferred: pressure I/c. When it is reflected, its momentum reverses, so the surface receives twice as much: 2I/c. For sunlight that is only about 9 μPa on a mirror, but over a huge sail and months of travel it adds up.\"\nreplacement_text [P31]: \"Electromagnetic radiation carries momentum p = E/c; radiation pressure is I/c (absorbed) or 2I/c (reflected).\"\ndiscrimination_pairs [P33]: [\"black surface: 1361/c ≈ 4.5 μPa\", \"mirror: 2 × 1361/c ≈ 9.1 μPa\"]\ns6_path: skip P28; show comet-tail photographs.",
+      "localKey": "MC-LIGHT-NO-MOMENTUM",
+      "language": "en",
+      "refs": [
+        "MC-LIGHT-NO-MOMENTUM"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.radiation-and-antennas.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.em.radiation-and-antennas/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.radiation-and-antennas",
+      "title": "The Whip and the Sail",
+      "content": "{\"id\":\"TA-1\",\"title\":\"The Whip and the Sail\",\"primitives\":[\"P01\",\"P04\",\"P05\",\"P06\",\"P14\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.radiation-and-antennas.md",
+        "startLine": 11,
+        "endLine": 18
+      }
+    },
+    {
+      "assetId": "phys.em.radiation-and-antennas/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.radiation-and-antennas",
+      "title": "Only Acceleration Radiates",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Only Acceleration Radiates\",\"primitives\":[\"P02\",\"P06\",\"P08\",\"P13\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.radiation-and-antennas.md",
+        "startLine": 18,
+        "endLine": 24
+      }
+    },
+    {
+      "assetId": "phys.em.radiation-and-antennas/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.radiation-and-antennas",
+      "title": "DC vs AC",
+      "content": "{\"id\":\"TA-3\",\"title\":\"DC vs AC\",\"primitives\":[\"P02\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-STEADY-CURRENT-RADIATES\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-STEADY-CURRENT-RADIATES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.radiation-and-antennas.md",
+        "startLine": 24,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "phys.em.radiation-and-antennas/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.radiation-and-antennas",
+      "title": "The Dipole Antenna",
+      "content": "{\"id\":\"TA-4\",\"title\":\"The Dipole Antenna\",\"primitives\":[\"P02\",\"P13\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.radiation-and-antennas.md",
+        "startLine": 30,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "phys.em.radiation-and-antennas/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.radiation-and-antennas",
+      "title": "Radiation Pressure",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Radiation Pressure\",\"primitives\":[\"P02\",\"P34\",\"P41\",\"P49\",\"P50\",\"P51\",\"P52\",\"P55\"],\"addresses\":[\"MC-LIGHT-NO-MOMENTUM\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-LIGHT-NO-MOMENTUM"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.radiation-and-antennas.md",
+        "startLine": 36,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.em.radiation-and-antennas/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.radiation-and-antennas",
+      "title": "Formative Assessment",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Formative Assessment\",\"primitives\":[\"P02\",\"P35\",\"P49\",\"P51\",\"P55\",\"P79\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.radiation-and-antennas.md",
+        "startLine": 45,
+        "endLine": 52
+      }
+    },
+    {
+      "assetId": "phys.em.radiation-and-antennas/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.radiation-and-antennas",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P28\",\"P41\",\"P54\",\"P55\",\"P62\",\"P68\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.radiation-and-antennas.md",
+        "startLine": 52,
+        "endLine": 94
+      }
+    },
+    {
+      "assetId": "phys.em.radiation-and-antennas/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.em.radiation-and-antennas",
+      "title": "Assessment Battery",
+      "content": "| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (classify) | \"Which radiate?\" | CORRECT = AC antenna and braking electron; not DC wire or charge at rest |\n| P74 (classify) | \"Mirror vs black sail\" | CORRECT = mirror, ×2 |\n| P75 (boundary) | \"Circular motion at constant speed\" | CORRECT = radiates (centripetal acceleration) |\n| P76 (transfer) | \"X-ray tube\" | CORRECT = electrons decelerate sharply in the target (bremsstrahlung) |\n| P77 (generate) | \"50 MHz receiving antenna\" | CORRECT = vertical half-wave dipole, 3 m long |\n| P78 (explain) | \"Factor 2 for a mirror\" | CORRECT = reflected light's momentum reverses, doubling the change |\n| P79 (predict) | \"Black vs mirror sail\" | CORRECT = mirror |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.radiation-and-antennas.md",
+        "startLine": 177,
+        "endLine": 189
+      }
+    },
+    {
+      "assetId": "phys.em.radiation-and-antennas/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.em.radiation-and-antennas",
+      "title": "Student State Matrix",
+      "content": "| State | Why here | Tell-tale behaviour | Protocol |\n|---|---|---|---|\n| S0 | EM waves \"just exist\" | Cannot say what makes an antenna radiate | Protocol A (Concrete) |\n| S1 | \"Accelerating charges radiate\" recited | Cannot apply it to DC vs AC | Protocol B (Counterexample-first) |\n| S2-STEADY-CURRENT-RADIATES | Motion = radiation | \"A battery-powered wire sends out radio waves\" | Misconception Engine → then Protocol C |\n| S2-LIGHT-NO-MOMENTUM | Massless = no push | \"Light has no mass, so it can't exert a force\" | Misconception Engine → then Protocol C |\n| S3 | Partial — radiation fine | Cannot compute radiation pressure or the antenna pattern | Protocol C (Guided Questioning) |\n| S6 | Anxiety on field pictures | Avoids field-line diagrams | Protocol F (Low Pressure) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.radiation-and-antennas.md",
+        "startLine": 27,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "phys.em.radiation-and-antennas/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.em.radiation-and-antennas",
+      "title": "Diagnostic Battery",
+      "content": "DB-1 (prior-exposure check):\n\"What has to happen to electric charges for them to send out radio waves?\"\n  No idea → S0. Enter Protocol A (Concrete).\n  \"They must accelerate — oscillate\" → DB-2.\n  \"They just have to move\" → SIGNAL:MISCONCEPTION:MC-STEADY-CURRENT-RADIATES. Enter Misconception Engine.\n\nDB-2 (representation / misconception test):\n\"Can sunlight push a spacecraft's sail even though photons have no mass?\"\n  \"Yes — light carries momentum p = E/c, giving radiation pressure (2I/c for a mirror)\" → S3. Enter Protocol C.\n  \"Yes\" (no reason) → S1. Enter Protocol B.\n  \"No — no mass, no push\" → SIGNAL:MISCONCEPTION:MC-LIGHT-NO-MOMENTUM. Enter Misconception Engine.\n  Pause → add S6 flag; Protocol F if anxious, otherwise Protocol A.\n\nDB-3 (pattern check — overlays):\n\"A vertical dipole antenna: in which direction does it radiate least?\"\n  \"Straight up and down, along its axis\" → no flag.\n  \"Equally in all directions\" → note; repair at TA-4.\n  Confident and wrong on DB-2 → add S7 flag. Override to Protocol G.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-STEADY-CURRENT-RADIATES",
+        "MC-LIGHT-NO-MOMENTUM"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.radiation-and-antennas.md",
+        "startLine": 38,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "phys.em.radiation-and-antennas/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.em.radiation-and-antennas",
+      "title": "Prerequisite Check",
+      "content": "PD-1 (for `phys.em.electromagnetic-waves` and `phys.mech.momentum`):\n\"What is an EM wave made of, and what is momentum?\"\n  Cannot say \"linked oscillating E and B fields travelling at c; p = mv, and force = rate of change of momentum\" → flag PREREQ-GAP-EMW-MOMENTUM.\n  In-session minimum repair: one P06 (E and B oscillating at right angles) + one P34 (\"a ball bounces back elastically: momentum change?\") then resume. If absent, schedule the missing session (S4 route).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.radiation-and-antennas.md",
+        "startLine": 59,
+        "endLine": 66
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
