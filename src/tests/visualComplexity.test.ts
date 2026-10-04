@@ -7,7 +7,7 @@
  * checks below matter more than the budget checks.
  */
 import { describe, expect, it } from 'vitest'
-import { budgetLabels, complexityFor, labelsHeldBack } from '@/lib/teaching/visual/visualComplexity'
+import { budgetLabels, complexityFor, isGlyphLabel, labelsHeldBack } from '@/lib/teaching/visual/visualComplexity'
 import { canonicalParametricScene, PARAMETRIC_SCENES, variablesFor } from '@/lib/teaching/visual/parametricScenes'
 import { ROLE } from '@/lib/teaching/sceneGenerators/visualDesign'
 import { normalizeToCanonicalLevel } from '@/lib/curriculum/levels'
@@ -99,6 +99,23 @@ describe('budgeting labels never changes what the figure claims', () => {
     expect(budgetLabels(objects, tight)).toEqual(budgetLabels(objects, tight))
   })
 
+  it('never budgets a one/two-character mark ("+", "−", "N", "α")', () => {
+    const marks: SceneObject[] = Array.from({ length: 12 }, (_, i) => ({ type: 'label', id: `q${i}`, position: [i, 0, 0], text: i % 2 ? '+' : '−', color: ROLE.input }))
+    const tight = { ...complexityFor('beginner'), maxLabels: 2 }
+    const kept = budgetLabels([...objects, ...marks], tight)
+    for (const m of marks) expect(kept).toContain(m)
+    expect(labelsHeldBack([...objects, ...marks], tight)).toBe(2)
+  })
+
+  it('meets the current stage\'s labels first while walking the stages', () => {
+    const tight = { ...complexityFor('beginner'), maxLabels: 2 }
+    const fresh = new Set(objects.filter((o) => o.id === 'l-ref'))
+    const ids = budgetLabels(objects, tight, fresh).filter((o) => o.type === 'label').map((o) => o.id)
+    expect(ids).toContain('l-ref') // the bare name this stage introduces is met on its stage
+    expect(ids).toContain('l-res') // and the answer still beats the rest
+    expect(ids).toHaveLength(2)
+  })
+
   it('never returns an object it was not given', () => {
     const tight = { ...complexityFor('beginner'), maxLabels: 2 }
     for (const o of budgetLabels(objects, tight)) expect(objects).toContain(o)
@@ -115,8 +132,11 @@ describe('against every real figure', () => {
       // Geometry identical at every level.
       expect(shown.filter((o) => o.type !== 'label'), `${kind}/${level}`)
         .toEqual(objects.filter((o) => o.type !== 'label'))
-      // Never more labels than the budget allows.
-      expect(shown.filter((o) => o.type === 'label').length).toBeLessThanOrEqual(policy.maxLabels)
+      // Never more labels than the budget allows (one/two-character marks such
+      // as "+" or a pole letter are geometry, not budgeted names).
+      expect(shown.filter((o) => o.type === 'label' && !isGlyphLabel(o)).length).toBeLessThanOrEqual(policy.maxLabels)
+      // Every mark survives at every level.
+      expect(shown.filter(isGlyphLabel)).toEqual(objects.filter(isGlyphLabel))
       // A beginner is never handed more than two controls.
       expect(variablesFor(kind).slice(0, policy.maxControls).length)
         .toBeLessThanOrEqual(policy.maxControls)

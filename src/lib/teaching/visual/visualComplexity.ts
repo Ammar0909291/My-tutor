@@ -114,23 +114,45 @@ const LABEL_PRIORITY: Record<string, number> = {
   result: 0, input: 1, output: 1, aid: 2, ink: 3, reference: 4,
 }
 
-export function budgetLabels(objects: SceneObject[], policy: VisualComplexityPolicy): SceneObject[] {
-  const labels = objects.filter((o) => o.type === 'label')
+/**
+ * A one- or two-character label is a MARK, not a name: the "+" and "−" of a
+ * charge distribution, a pole letter, "α", "Al". It is drawn as part of the
+ * geometry it sits on, so it is neither counted against the budget nor held
+ * back. MEASURED in the browser (2026-10-04): a charged conductor's thirteen
+ * "+" signs counted as thirteen labels, so the budget hid every charge on the
+ * pointed end of the figure whose whole point is "charge crowds at the point".
+ */
+export function isGlyphLabel(o: SceneObject): boolean {
+  return o.type === 'label' && typeof o.text === 'string' && o.text.trim().length <= 2
+}
+
+/**
+ * Which labels a level meets at once. `fresh` (optional) is the set of objects
+ * the CURRENT stage introduces: when the learner is walking the stages, those
+ * rank ahead of everything revealed earlier, so every label is met on the
+ * stage that introduces it — the promise the held-back note makes ("walk the
+ * stages to meet them one at a time"). MEASURED before this (2026-10-04): the
+ * stable role order always preferred earlier stages, so on 8 of the 45
+ * coverage-extension physics figures some labels were shown at NO stage,
+ * including a special-diodes figure's photodiode and solar-cell notes.
+ */
+export function budgetLabels(objects: SceneObject[], policy: VisualComplexityPolicy, fresh?: ReadonlySet<SceneObject>): SceneObject[] {
+  const labels = objects.filter((o) => o.type === 'label' && !isGlyphLabel(o))
   if (labels.length <= policy.maxLabels) return objects
 
   const keep = new Set(
     labels
-      .map((o, i) => ({ o, i, rank: LABEL_PRIORITY[roleOf(o.color) ?? 'ink'] ?? 3 }))
+      .map((o, i) => ({ o, i, rank: (fresh?.has(o) ? -10 : 0) + (LABEL_PRIORITY[roleOf(o.color) ?? 'ink'] ?? 3) }))
       // Stable within a rank, so the figure does not reshuffle between renders.
       .sort((a, b) => a.rank - b.rank || a.i - b.i)
       .slice(0, policy.maxLabels)
       .map((e) => e.o),
   )
-  return objects.filter((o) => o.type !== 'label' || keep.has(o))
+  return objects.filter((o) => o.type !== 'label' || isGlyphLabel(o) || keep.has(o))
 }
 
 /** How many labels were held back, so the figure can say so rather than hide it. */
 export function labelsHeldBack(objects: SceneObject[], policy: VisualComplexityPolicy): number {
-  const labels = objects.filter((o) => o.type === 'label').length
+  const labels = objects.filter((o) => o.type === 'label' && !isGlyphLabel(o)).length
   return Math.max(0, labels - policy.maxLabels)
 }

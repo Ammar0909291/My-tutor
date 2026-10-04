@@ -108,7 +108,7 @@ describe('the figures', () => {
     expect(gAt(1)).toBeCloseTo(EARTH.g, 10)
     expect(gAt(2)).toBeCloseTo(EARTH.g / 4, 10)
     expect(gAt(1 + EARTH.station / EARTH.R)).toBeCloseTo(8.68, 2)
-    expect(texts(buildVariationOfGScene())).toContain('station: 8.7 m/s²')
+    expect(texts(buildVariationOfGScene())).toContain('station: g ≈ 8.7 m/s²')
   })
   it('Stokes: v_t = 2r²(ρ − σ)g/(9η) ≈ 9.5 mm/s, and doubling r quadruples it', () => {
     expect(terminalVelocity() * 1000).toBeCloseTo(9.5, 1)

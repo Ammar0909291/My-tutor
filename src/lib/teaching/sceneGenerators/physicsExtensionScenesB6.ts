@@ -59,7 +59,7 @@ export function buildGratingScene(): SceneSpec {
     teachingGoal: `Show the orders of a ${GRATING.linesPerMm} lines/mm grating (d = ${slitSpacingUm(GRATING.linesPerMm).toFixed(1)} μm) for ${GRATING.lambdaNm} nm light: m = 1 at ${orderAngleDeg(1).toFixed(1)}°, up to m = ${mMax} because sin θ cannot exceed 1. A finer grating of 1000 lines/mm sends the first order out to ${fine.toFixed(1)}°.`,
     ariaLabel: `A grating on the left with light arriving from the left. Rays leave it at the angles of the orders: straight on for m = 0, then ${orders.slice(1).map((m) => `${orderAngleDeg(m).toFixed(1)} degrees for m = ${m}`).join(', ')}. A dashed comparison ray for a 1000 lines per millimetre grating leaves at ${fine.toFixed(1)} degrees.`,
     steps: [
-      { narration: `A grating with ${GRATING.linesPerMm} lines per mm: the slits are d = ${slitSpacingUm(GRATING.linesPerMm).toFixed(1)} μm apart. Waves from every slit arrive in step where d sin θ = mλ.`, objects: [line(P(X0, -2.4), P(X0, 2.4), ROLE.reference, 0.07), arrow(P(-4.9, 0), P(X0 - 0.05, 0), ROLE.input), label(`${GRATING.lambdaNm} nm`, P(-4.5, 0.4), ROLE.input, 'detail'), ray(0, ROLE.output), label('m = 0', P(X0 + L + 0.2, -0.35), ROLE.output, 'detail')] },
+      { narration: `A grating with ${GRATING.linesPerMm} lines per mm: the slits are d = ${slitSpacingUm(GRATING.linesPerMm).toFixed(1)} μm apart. Waves from every slit arrive in step where d sin θ = mλ.`, objects: [line(P(X0, -2.4), P(X0, 2.4), ROLE.reference, 0.07), arrow(P(-4.9, 0), P(X0 - 0.05, 0), ROLE.input), label(`${GRATING.lambdaNm} nm`, P(-4.5, 0.4), ROLE.input, 'detail'), label(`${GRATING.linesPerMm} lines/mm (d = ${slitSpacingUm(GRATING.linesPerMm).toFixed(1)} μm)`, P(X0, -2.85), ROLE.ink, 'detail'), ray(0, ROLE.output), label('m = 0', P(X0 + L + 0.2, -0.35), ROLE.output, 'detail')] },
       { narration: `The orders: ${orders.slice(1).map((m) => `m = ${m} at ${orderAngleDeg(m).toFixed(1)}°`).join(', ')}. There is no order ${mMax + 1}: it would need sin θ = ${(((mMax + 1) * GRATING.lambdaNm) / (slitSpacingUm(GRATING.linesPerMm) * 1000)).toFixed(2)}, more than 1.`, objects: orders.slice(1).flatMap((m) => [ray(orderAngleDeg(m), ROLE.output), label(`m = ${m}, ${orderAngleDeg(m).toFixed(1)}°`, P(X0 + (L + 0.5) * Math.cos(rad(orderAngleDeg(m))) + 0.7, (L + 0.3) * Math.sin(rad(orderAngleDeg(m)))), ROLE.output, 'detail')]) },
       { narration: `A finer grating, 1000 lines per mm, has d = 1.0 μm — the slits are CLOSER, so the first order moves OUT to ${fine.toFixed(1)}° — exactly where the coarser grating's second order was. Longer wavelengths are diffracted more: in a spectrum red lies furthest out.`, objects: [ray(fine, ROLE.result), label(`1000 lines/mm: m = 1 at ${fine.toFixed(1)}°`, P(0.6, -2.6), ROLE.result, 'primary'), label('d sin θ = mλ', P(0.6, -3.6), ROLE.result, 'detail')] },
     ],
@@ -114,7 +114,20 @@ export function buildConductorScene(): SceneSpec {
   // Teardrop conductor on the right: x = cos t, y = sin t · sin(t/2) — sharp tip at t = 0 (right), blunt end at t = π.
   const drop = (t: number): V3 => P(2.6 + 1.6 * Math.cos(t), 1.2 * Math.sin(t) * Math.sin(t / 2))
   const dropPts = Array.from({ length: 49 }, (_, i) => drop((2 * Math.PI * i) / 48))
-  const tipPlus = [0.35, 0.6, 0.85].flatMap((t) => [drop(t), drop(2 * Math.PI - t)])
+  // Far enough back from the tip that no two signs overlap: crowded signs were
+  // nudged by the label layer and landed INSIDE the outline (browser review).
+  // Each sign sits just OUTSIDE the surface, along the outward normal: placed
+  // exactly on the outline, the label layer nudged some of them inside the
+  // conductor, where no excess charge can be (browser review, 2026-10-04).
+  const onSurface = (t: number): V3 => {
+    const a = drop(t - 0.01), b = drop(t + 0.01), p = drop(t)
+    let nx = b[1] - a[1], ny = -(b[0] - a[0])
+    const len = Math.hypot(nx, ny) || 1
+    nx /= len; ny /= len
+    if (nx * (p[0] - 2.6) + ny * p[1] < 0) { nx = -nx; ny = -ny }
+    return P(p[0] + 0.22 * nx, p[1] + 0.22 * ny)
+  }
+  const tipPlus = [0.6, 1.0, 1.4].flatMap((t) => [onSurface(t), onSurface(2 * Math.PI - t)])
   return {
     id: 'phys-conductor-electrostatics',
     title: 'A charged conductor: zero field inside, charge on the surface',
@@ -125,7 +138,7 @@ export function buildConductorScene(): SceneSpec {
     steps: [
       { narration: 'A charged metal sphere. The free electrons have rearranged until the field inside is zero, and the excess charge sits on the outer surface.', objects: [curve(circlePoints(CX, 0, R, 0, 2 * Math.PI, 48), ROLE.reference), ...angles.map((a) => label('+', P(CX + R * Math.cos(a), R * Math.sin(a)), ROLE.input, 'detail')), label('E = 0', P(CX, 0), ROLE.result, 'primary')] },
       { narration: `Just outside, the field is perpendicular to the surface, with E = σ/ε₀: σ = ${SURFACE.sigma.toExponential(1)} C/m² gives ${E.toExponential(1)} V/m.`, objects: [...angles.map((a) => arrow(P(CX + (R + 0.1) * Math.cos(a), (R + 0.1) * Math.sin(a)), P(CX + (R + 0.9) * Math.cos(a), (R + 0.9) * Math.sin(a)), ROLE.output)), label(`E = σ/ε₀ ≈ ${E.toExponential(1)} V/m`, P(CX, -3.3), ROLE.output, 'detail')] },
-      { narration: 'On a pointed conductor the charge crowds at the tip, where the surface curves most sharply — the field is strongest there. That is how a lightning conductor works; a closed metal shell keeps outside fields out (a Faraday cage).', objects: [curve(dropPts, ROLE.reference), ...tipPlus.map((p) => label('+', p, ROLE.input, 'detail')), label('+', drop(Math.PI - 0.6), ROLE.input, 'detail'), label('+', drop(Math.PI + 0.6), ROLE.input, 'detail'), label('charge crowds at the point', P(2.4, -2.2), ROLE.result, 'primary')] },
+      { narration: 'On a pointed conductor the charge crowds at the tip, where the surface curves most sharply — the field is strongest there. That is how a lightning conductor works; a closed metal shell keeps outside fields out (a Faraday cage).', objects: [curve(dropPts, ROLE.reference), ...tipPlus.map((p) => label('+', p, ROLE.input, 'detail')), label('+', onSurface(Math.PI - 0.6), ROLE.input, 'detail'), label('+', onSurface(Math.PI + 0.6), ROLE.input, 'detail'), label('charge crowds at the point', P(2.4, -2.2), ROLE.result, 'primary')] },
     ],
   }
 }

@@ -212,6 +212,32 @@ Defects seen in model-generated prose (not authored content): the lasers "real e
 1 W torch emits "~10⁹ times more photons" (power ratio is 200×); the wrong-answer note
 mis-described the 0.51 eV slip as "squaring" (it is 632.8/1240, the ratio inverted).
 
+### Browser review of all 45 figures, and UX fixes (2026-10-04)
+
+Every new figure was rendered through the production renderer (`/dev/physics-pilot?concept=…`,
+headless Chromium) and inspected stage by stage. The physics drawn was correct in all 45; the
+UX was not. Fixed:
+
+- **Label budget (platform, `visualComplexity.ts`)**: one/two-character labels ("+", "−", "α",
+  "Al") are marks, not names — no longer counted or hidden (a charged conductor had all 13 of
+  its "+" hidden, so "charge crowds at the point" showed no charge). While walking the stages,
+  labels the current stage introduces rank first (`budgetLabels(…, fresh)` from
+  `ExplainerFigure`), so every label is met on its own stage — before, 8 figures had labels
+  shown at NO stage.
+- **Headline chip (platform, `explainer.ts`)**: with no formula label, a short result-coloured
+  label is used; a narration sentence is never cut into the chip (six figures showed "… 0.01 ×
+  0.5 ×" / "50 V.").
+- **Scenes**: lever drawn to scale (MA 6); grating names the drawn 500 lines/mm grating;
+  superconductor's normal-state branch separated from the normal metal's; GR and special
+  diodes relaid out (9 labels each, formula headlines); household currents to two decimals
+  (4.55 + 9.09 + 6.82 ≈ 20.5 A) with one label per appliance; terminal velocity "radius
+  1 mm"; scattering bar at 600 nm is orange (650 nm was mislabelled), wavelength range in the
+  axis title; scattering and seasons split so no stage brings more than five labels; charges on
+  the pointed conductor sit just outside the surface; standard diverging-lens symbol; layout
+  nits (Moon label, fuel label, LCR label, cells curve within axes, Hubble label).
+- `physicsExtensionFigureUx.test.ts` holds, for all 45: every label met at some stage
+  (beginner and intermediate), complete intermediate view whole, headline ≤ 70 characters.
+
 ## Next
 
 Physics KG is at 283 and the coverage audit is done. Only the electronics nodes

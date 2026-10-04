@@ -23,7 +23,7 @@ export function buildHumanEyeScene(): SceneSpec {
   const lens: SceneObject[] = [curve(Array.from({ length: 24 }, (_, i) => { const t = -Math.PI / 2 + (Math.PI * i) / 23; return P(LX + 0.22 * Math.cos(t), 0.75 * Math.sin(t)) }), ROLE.output), curve(Array.from({ length: 24 }, (_, i) => { const t = Math.PI / 2 + (Math.PI * i) / 23; return P(LX + 0.22 * Math.cos(t), 0.75 * Math.sin(t)) }), ROLE.output)]
   const raysMyopic: SceneObject[] = [line(P(-4.4, Y), P(LX, Y), ROLE.input, 0.03), line(P(-4.4, -Y), P(LX, -Y), ROLE.input, 0.03), line(P(LX, Y), P(FOCUS, 0), ROLE.input, 0.03), line(P(LX, -Y), P(FOCUS, 0), ROLE.input, 0.03), line(P(FOCUS, 0), P(RET - 0.05, -Y * (RET - FOCUS) / (FOCUS - LX)), ROLE.input, 0.02), line(P(FOCUS, 0), P(RET - 0.05, Y * (RET - FOCUS) / (FOCUS - LX)), ROLE.input, 0.02)]
   const GX = -2.2, spread = 0.22
-  const raysCorrected: SceneObject[] = [line(P(GX - 0.15, Y + 0.6), P(GX + 0.15, Y + 0.6), ROLE.result, 0.04), line(P(GX - 0.15, -Y - 0.6), P(GX + 0.15, -Y - 0.6), ROLE.result, 0.04), line(P(GX - 0.06, Y + 0.6), P(GX - 0.06, -Y - 0.6), ROLE.result, 0.03), line(P(GX + 0.06, Y + 0.6), P(GX + 0.06, -Y - 0.6), ROLE.result, 0.03), line(P(GX, Y), P(LX, Y + spread), ROLE.result, 0.03), line(P(GX, -Y), P(LX, -Y - spread), ROLE.result, 0.03), line(P(LX, Y + spread), P(RET, 0), ROLE.result, 0.03), line(P(LX, -Y - spread), P(RET, 0), ROLE.result, 0.03)]
+  const raysCorrected: SceneObject[] = [/* diverging-lens symbol: one line, inward arrowheads */ line(P(GX, Y + 0.6), P(GX, -Y - 0.6), ROLE.result, 0.04), line(P(GX - 0.18, Y + 0.78), P(GX, Y + 0.6), ROLE.result, 0.04), line(P(GX + 0.18, Y + 0.78), P(GX, Y + 0.6), ROLE.result, 0.04), line(P(GX - 0.18, -Y - 0.78), P(GX, -Y - 0.6), ROLE.result, 0.04), line(P(GX + 0.18, -Y - 0.78), P(GX, -Y - 0.6), ROLE.result, 0.04), line(P(GX, Y), P(LX, Y + spread), ROLE.result, 0.03), line(P(GX, -Y), P(LX, -Y - spread), ROLE.result, 0.03), line(P(LX, Y + spread), P(RET, 0), ROLE.result, 0.03), line(P(LX, -Y - spread), P(RET, 0), ROLE.result, 0.03)]
   const p = myopiaPower(), pTxt = `${p < 0 ? '−' : '+'}${Math.abs(p)}`
   return {
     id: 'phys-human-eye',
@@ -42,7 +42,7 @@ export function buildHumanEyeScene(): SceneSpec {
 
 // ── 2. Scattering of light ───────────────────────────────────────────────────
 
-export const SCATTER_WAVELENGTHS = [400, 450, 550, 650, 700]
+export const SCATTER_WAVELENGTHS = [400, 450, 550, 600, 700] // violet, blue, green, orange, red (orange is ~600 nm; 650 nm is already red)
 /** Rayleigh: relative scattering ∝ 1/λ⁴, normalised to red at 700 nm. */
 export function relativeScattering(lambdaNm: number, refNm = 700): number { return Math.pow(refNm / lambdaNm, 4) }
 export function buildScatteringScene(): SceneSpec {
@@ -51,7 +51,7 @@ export function buildScatteringScene(): SceneSpec {
   const names = ['violet', 'blue', 'green', 'orange', 'red']
   const bars: SceneObject[] = SCATTER_WAVELENGTHS.flatMap((l, i) => {
     const h = relativeScattering(l) * SY, x = X0 + 0.7 + i * BW
-    return [line(P(x, Y0), P(x, Y0 + h), colours[i], 0.32), label(`${l}`, P(x, Y0 - 0.4), ROLE.ink, 'detail'), label(names[i], P(x, Y0 + h + 0.35), colours[i], 'detail')]
+    return [line(P(x, Y0), P(x, Y0 + h), colours[i], 0.32), label(names[i], P(x, Y0 + h + 0.35), colours[i], 'detail')]
   })
   const blue = relativeScattering(450)
   return {
@@ -62,7 +62,9 @@ export function buildScatteringScene(): SceneSpec {
     teachingGoal: `Show that air molecules scatter short wavelengths far more strongly (∝ 1/λ⁴): blue light at 450 nm is scattered about ${blue.toFixed(1)} times more than red at 700 nm — so the sky looks blue, and sunlight that has crossed a long path loses its blue and looks red.`,
     ariaLabel: 'A bar chart of how strongly light of each wavelength is scattered by air, compared with red light. Violet at 400 nanometres has the tallest bar, nearly ten times red. Blue is about six times red. Green, orange and red bars get progressively shorter.',
     steps: [
-      { narration: 'How strongly air scatters each colour of sunlight, compared with red light (700 nm = 1).', objects: [arrow(P(X0, Y0), P(X0 + 7.6, Y0), ROLE.reference), arrow(P(X0, Y0), P(X0, Y0 + 5.6), ROLE.reference), label('wavelength (nm)', P(X0 + 6.6, Y0 - 0.85), ROLE.ink, 'detail'), label('scattering vs red', P(X0 + 1.4, Y0 + 5.75), ROLE.ink, 'detail'), ...bars] },
+      { narration: 'How strongly air scatters each colour of sunlight, compared with red light (700 nm = 1).', objects: [arrow(P(X0, Y0), P(X0 + 7.6, Y0), ROLE.reference), arrow(P(X0, Y0), P(X0, Y0 + 5.6), ROLE.reference), label(`wavelength ${SCATTER_WAVELENGTHS[0]} → ${SCATTER_WAVELENGTHS[SCATTER_WAVELENGTHS.length - 1]} nm`, P(X0 + 6.6, Y0 - 0.85), ROLE.ink, 'detail'), label('scattering vs red', P(X0 + 1.4, Y0 + 5.75), ROLE.ink, 'detail')] },
+      // Its own stage, so a beginner's five-label budget meets the axes and then the bars.
+      { narration: 'Violet and blue scatter far more than green, orange and red: the bars fall steeply as the wavelength grows.', objects: [...bars] },
       { narration: `Scattering goes as 1/λ⁴: blue (450 nm) is scattered about (700/450)⁴ ≈ ${blue.toFixed(1)} times more than red. That scattered blue fills the sky.`, objects: [label(`blue ≈ ${blue.toFixed(1)} × red`, P(1.6, 2.6), ROLE.output, 'primary')] },
       { narration: 'Seen the other way, a beam that crosses a lot of air — the setting Sun — has lost most of its blue, so it looks red.', objects: [label('I ∝ 1/λ⁴', P(1.6, 3.6), ROLE.result, 'primary')] },
     ],
@@ -106,7 +108,9 @@ export const CELLS = { n: 4, E: 1.5, r: 0.5 }
 export function seriesCurrent(R: number, c = CELLS): number { return (c.n * c.E) / (R + c.n * c.r) }
 export function parallelCurrent(R: number, c = CELLS): number { return c.E / (R + c.r / c.n) }
 export function buildCellsScene(): SceneSpec {
-  const X0 = -4.0, Y0 = -2.8, SX = 3.2, SY = 0.85, L0 = -1.3, L1 = 1.0
+  // Load axis starts at 0.1 Ω (as the aria text and the '0.1' tick say); from
+  // 0.05 Ω the parallel curve (8.6 A) ran off the top of the axes.
+  const X0 = -4.0, Y0 = -2.8, SX = 3.2, SY = 0.85, L0 = -1.0, L1 = 1.0
   const gx = (R: number) => X0 + (Math.log10(R) - L0) * SX, gy = (I: number) => Y0 + I * SY
   const pts = (f: (R: number) => number): V3[] => Array.from({ length: 48 }, (_, i) => { const R = Math.pow(10, L0 + ((L1 - L0) * i) / 47); return P(gx(R), gy(f(R))) })
   const cross = CELLS.r

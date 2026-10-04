@@ -323,12 +323,18 @@ export function ExplainerFigure({
     // exists to pace a stage walk a simulation does not have — is not applied:
     // measured, it hid the v–t graph's axis labels.
     const inView = objectsForView(stageObjects, view)
-    const staged = simulation.active ? inView : budgetLabels(inView, policy)
+    // While the learner walks the stages, the labels THIS stage introduces are
+    // met first (see budgetLabels' `fresh`); the complete view keeps role order.
+    const shownStage = animatedStage ?? (walking ? stage : null)
+    const fresh = shownStage !== null && shownStage !== undefined
+      ? new Set(drawn.steps[Math.min(drawn.steps.length, Math.max(1, Math.round(shownStage))) - 1]?.objects ?? [])
+      : undefined
+    const staged = simulation.active ? inView : budgetLabels(inView, policy, fresh)
     if (playing?.kind !== 'trace') return staged
     const walked = traceObjects(staged, playing.objectId, progress)
     const head = tracePlayhead(drawn, playing.objectId, progress)
     return head ? [...walked, head] : walked
-  }, [playing, stageObjects, view, drawn, progress, policy, simulation.active])
+  }, [playing, stageObjects, view, drawn, progress, policy, simulation.active, animatedStage, walking, stage])
 
   const heldBackLabels = simulation.active ? 0 : labelsHeldBack(objectsForView(stageObjects, view), policy)
 

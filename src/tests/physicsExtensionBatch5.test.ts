@@ -101,6 +101,8 @@ describe('the figures', () => {
     expect(totalCurrent()).toBeCloseTo(4500 / 220, 10)
     expect(totalCurrent()).toBeGreaterThan(HOUSE.limit)
     expect(texts(buildHouseholdScene())).toContain('total 20.5 A > 15 A')
+    // parts carry two decimals so they visibly sum to the total (4.55 + 9.09 + 6.82)
+    for (const part of ['iron 4.55 A', 'heater 9.09 A', 'kettle 6.82 A']) expect(texts(buildHouseholdScene())).toContain(part)
   })
   it('Atwood: a = 1.96 m/s², T = 23.52 N, between the two weights', () => {
     expect(atwoodAcceleration()).toBeCloseTo(1.96, 10)

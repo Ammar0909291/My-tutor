@@ -109,6 +109,7 @@ describe('the figures', () => {
     expect(orderAngleDeg(2, 300, 700)).toBeGreaterThan(orderAngleDeg(3, 300, 400))
     const t = texts(buildGratingScene())
     expect(t).toContain('m = 3, 64.2°')
+    expect(t).toContain('500 lines/mm (d = 2.0 μm)') // the drawn grating is named on the figure, not only in the narration
     expect(t).toContain('1000 lines/mm: m = 1 at 36.9°')
   })
   it('resolving power: the Airy disc falls to zero at u ≈ 3.832; eye 2.2e-4 rad, 10 cm telescope 6.7e-6 rad', () => {

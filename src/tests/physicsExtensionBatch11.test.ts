@@ -105,7 +105,7 @@ describe('the figures', () => {
     expect(swapTime(p1, p2)).toBeCloseTo(20.16, 2)
     const t = texts(buildCoupledScene())
     expect(t).toContain('out of phase 17.3 rad/s')
-    expect(t).toContain('swap at 20 s')
+    expect(t).toContain('swap time = π/(ω₂ − ω₁) ≈ 20 s')
   })
   it('chaos: r = 2.8 → 0.643; r = 3.2 → 0.513/0.799; r = 3.9 runs 1e-6 apart diverge by step 22; reruns are identical', () => {
     expect(fixedPoint(2.8)).toBeCloseTo(0.6429, 4)

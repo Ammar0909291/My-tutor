@@ -52,7 +52,7 @@ export function buildGeneratorScene(): SceneSpec {
     steps: [
       { narration: `As the coil turns, the flux through it changes and an alternating emf is induced. Its peak is NABω = ${GEN.N} × ${GEN.A} × ${GEN.B} × ${GEN.omega} = ${e0} V.`, objects: [arrow(P(X0, 0), P(X0 + 8.4, 0), ROLE.reference), arrow(P(X0, -4.3), P(X0, 4.4), ROLE.reference), label('time', P(X0 + 8.0, -0.4), ROLE.ink, 'detail'), label('emf (V)', P(X0 + 0.8, 4.5), ROLE.ink, 'detail'), curve(wave(1), ROLE.output), label(`+${e0} V`, P(X0 - 0.6, e0 * SY), ROLE.output, 'detail')] },
       { narration: `Turn it twice as fast: the peak doubles to ${2 * e0} V and the cycles come twice as often.`, objects: [curve(wave(2), ROLE.input), label(`+${2 * e0} V at 2ω`, P(X0 + 4.4, 2 * e0 * SY + 0.35), ROLE.input, 'detail')] },
-      { narration: 'The energy is not created: with a lamp connected, the induced current opposes the turning, and the work you do becomes the electrical energy.', objects: [label('peak emf = N A B ω', P(1.6, -4.6), ROLE.result, 'primary')] },
+      { narration: 'The energy is not created: with a lamp connected, the induced current opposes the turning, and the work you do becomes the electrical energy.', objects: [label(`peak emf = NABω = ${e0} V`, P(1.6, -4.6), ROLE.result, 'primary')] },
     ],
   }
 }
@@ -64,8 +64,11 @@ export const HOUSE = { V: 220, appliances: [{ name: 'iron', P: 1000 }, { name: '
 export function applianceCurrent(P: number, V = HOUSE.V): number { return P / V }
 export function totalCurrent(h = HOUSE): number { return h.appliances.reduce((s, a) => s + applianceCurrent(a.P, h.V), 0) }
 export function buildHouseholdScene(): SceneSpec {
-  const YL = 2.2, YN = -0.4, YE = -2.6, xs = [-1.4, 0.8, 3.0], I = totalCurrent()
-  const app = (x: number, i: number): SceneObject[] => [line(P(x, YL), P(x, YL - 0.7), ROLE.input, 0.03), ...rect(x - 0.55, YN + 0.5, x + 0.55, YL - 0.7, ROLE.ink), line(P(x, YN + 0.5), P(x, YN), ROLE.output, 0.03), label(HOUSE.appliances[i].name, P(x, (YN + YL) / 2 + 0.1), ROLE.ink, 'detail'), label(`${applianceCurrent(HOUSE.appliances[i].P).toFixed(1)} A`, P(x + 0.95, YL - 0.35), ROLE.input, 'detail')]
+  // Name and current share one label (8 labels in all, inside every level's
+  // budget), and the currents carry two decimals so they visibly add up to the
+  // total: 4.55 + 9.09 + 6.82 = 20.46 ≈ 20.5 A (one decimal each read 20.4).
+  const YL = 2.2, YN = -0.4, YE = -2.6, xs = [-1.8, 0.75, 3.3], HW = 1.05, I = totalCurrent()
+  const app = (x: number, i: number): SceneObject[] => [line(P(x, YL), P(x, YL - 0.7), ROLE.input, 0.03), ...rect(x - HW, YN + 0.5, x + HW, YL - 0.7, ROLE.ink), line(P(x, YN + 0.5), P(x, YN), ROLE.output, 0.03), label(`${HOUSE.appliances[i].name} ${applianceCurrent(HOUSE.appliances[i].P).toFixed(2)} A`, P(x, (YN + YL) / 2 + 0.1), ROLE.input, 'detail')]
   return {
     id: 'phys-household-circuit',
     title: 'Household wiring: parallel appliances, protection in the live wire',
@@ -76,7 +79,7 @@ export function buildHouseholdScene(): SceneSpec {
     steps: [
       { narration: `Live (${HOUSE.V} V), neutral (about 0 V) and earth. The fuse or MCB sits in the LIVE wire.`, objects: [line(P(-4.4, YL), P(4.2, YL), ROLE.input, 0.05), line(P(-4.4, YN), P(4.2, YN), ROLE.output, 0.05), line(P(-4.4, YE), P(4.2, YE), ROLE.result, 0.05), label('live', P(-4.0, YL + 0.4), ROLE.input, 'detail'), label('neutral', P(-3.8, YN + 0.4), ROLE.output, 'detail'), label('earth', P(-4.0, YE + 0.4), ROLE.result, 'detail'), ...rect(-3.2, YL - 0.18, -2.5, YL + 0.18, ROLE.aid), label('fuse', P(-2.85, YL - 0.55), ROLE.aid, 'detail')] },
       { narration: 'Each appliance connects between live and neutral — in parallel — so each gets the full voltage and draws its own current, I = P/V.', objects: [...xs.flatMap((x, i) => app(x, i))] },
-      { narration: `Together they draw ${I.toFixed(1)} A, more than the ${HOUSE.limit} A the circuit allows: an overload. The MCB in the live wire trips. The earth wire, joined to the metal cases, carries current only if a fault makes a case live.`, objects: [...xs.map((x) => line(P(x + 0.55, YN + 0.6), P(x + 0.55, YE), ROLE.result, 0.02)), label(`total ${I.toFixed(1)} A > ${HOUSE.limit} A`, P(0.8, 3.4), ROLE.result, 'primary')] },
+      { narration: `Together they draw ${I.toFixed(1)} A, more than the ${HOUSE.limit} A the circuit allows: an overload. The MCB in the live wire trips. The earth wire, joined to the metal cases, carries current only if a fault makes a case live.`, objects: [...xs.map((x) => line(P(x + HW, YN + 0.6), P(x + HW, YE), ROLE.result, 0.02)), label(`total ${I.toFixed(1)} A > ${HOUSE.limit} A`, P(0.8, 3.4), ROLE.result, 'primary')] },
     ],
   }
 }

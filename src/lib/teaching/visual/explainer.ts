@@ -197,7 +197,17 @@ function deriveResult(objects: SceneObject[], narrations: string[]): ExplainerRe
     labels.find((o) => roleOf(o.color) === 'result' && looksLikeFormula(o.text!)) ??
     labels.find((o) => looksLikeFormula(o.text!))
 
-  const text = explicit?.text?.trim() ?? narrations.filter(looksLikeFormula).pop()?.trim()
+  // Next, a short label the author coloured as the result that carries a
+  // number ("average 640 W (apparent 800 VA)") — a stated answer without an
+  // equals sign. Only then a narration, and only one short enough to BE a
+  // headline: MEASURED in the browser (2026-10-04), six physics figures put a
+  // whole narration sentence in the chip, cut mid-formula ("… 0.01 × 0.5 ×" /
+  // "50 V."), because no label carried an "=".
+  const resultLabel = explicit ? undefined
+    : labels.find((o) => roleOf(o.color) === 'result' && /\d/.test(o.text!) && o.text!.trim().length <= 60)
+  if (resultLabel) return { expression: resultLabel.text!.trim() }
+  const narrated = explicit ? undefined : narrations.filter(looksLikeFormula).pop()?.trim()
+  const text = explicit?.text?.trim() ?? (narrated && narrated.length <= 70 ? narrated : undefined)
   if (!text) return undefined
 
   // "τ = 20 N·m, counter-clockwise" → expression "τ =", value "20 N·m, …".
