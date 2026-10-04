@@ -1,0 +1,430 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.meas.linearisation-and-uncertainty-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.meas.linearisation-and-uncertainty",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:7acbb7cea7e8e028d9519a026897bdeb9e453263a250396234a7e1efaf84e4e0",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.meas.linearisation-and-uncertainty.md": "sha256:6d6eca702f1d3ed111df0c884700cbcd15a017f20c775dceb4204e917c7fa379"
+    },
+    "assetCount": 15,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 3,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.meas.linearisation-and-uncertainty",
+    "name": "Linearisation and Uncertainty Propagation",
+    "difficultyRaw": "proficient (3)",
+    "bloom": "analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "phys.meas.significant-figures"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.meas.linearisation-and-uncertainty-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.meas.linearisation-and-uncertainty (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.meas.linearisation-and-uncertainty.md": "sha256:6d6eca702f1d3ed111df0c884700cbcd15a017f20c775dceb4204e917c7fa379"
+      },
+      "contentHash": "sha256:c74b8212f183982b9f701e22efa2a0310270b410a4a8623850ec5bc12ee019f2",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.meas.linearisation-and-uncertainty.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.linearisation-and-uncertainty.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.linearisation-and-uncertainty"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.linearisation-and-uncertainty\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.linearisation-and-uncertainty.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.linearisation-and-uncertainty.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.linearisation-and-uncertainty"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.linearisation-and-uncertainty\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.linearisation-and-uncertainty.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.linearisation-and-uncertainty.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.linearisation-and-uncertainty"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.linearisation-and-uncertainty\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.linearisation-and-uncertainty.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.linearisation-and-uncertainty.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.linearisation-and-uncertainty"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.linearisation-and-uncertainty\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.linearisation-and-uncertainty.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.linearisation-and-uncertainty.md#TA-5 (addresses MC-ABSOLUTE-ADD)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.linearisation-and-uncertainty"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.linearisation-and-uncertainty\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.linearisation-and-uncertainty.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.linearisation-and-uncertainty.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.linearisation-and-uncertainty"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.linearisation-and-uncertainty\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.linearisation-and-uncertainty.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.linearisation-and-uncertainty.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.linearisation-and-uncertainty"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.linearisation-and-uncertainty\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.meas.linearisation-and-uncertainty/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "phys.meas.linearisation-and-uncertainty",
+      "title": "Learning Objective",
+      "content": "[Boundary statement]\nA student who achieves mastery demonstrates:\n1. Linearises a relation so that a straight-line graph tests it and its gradient gives the wanted constant — e.g. for a pendulum T = 2π√(L/g), plots T² against L, a straight line through the origin of gradient 4π²/g, so g = 4π²/gradient.\n2. Draws a best-fit line (not a join-the-dots line) and takes its gradient from a large triangle, reading the intercept as physically meaningful (a systematic error if it should be zero).\n3. Propagates uncertainty: absolute uncertainties add for sums and differences; fractional (relative) uncertainties add for products and quotients; a power multiplies the fractional uncertainty by the exponent — e.g. L = 1.00 ± 0.01 m and T = 2.00 ± 0.02 s give g = 4π²L/T² = 9.9 m/s² with fractional uncertainty 0.01 + 2 × 0.01 = 0.03, so g = 9.9 ± 0.3 m/s².\n\nA student who plots T against L and calls the curve \"a straight-ish line\", or who adds the absolute uncertainties of L and T to get the uncertainty of g, has **NOT** achieved mastery — those errors make every derived constant in the practical curriculum either untested or wrongly stated.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.linearisation-and-uncertainty.md",
+        "startLine": 17,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.meas.linearisation-and-uncertainty/misconception/MC-ABSOLUTE-ADD",
+      "kind": "misconception",
+      "conceptId": "phys.meas.linearisation-and-uncertainty",
+      "title": "Uncertainties always add as absolute values",
+      "content": "### MC-ABSOLUTE-ADD: \"Uncertainties always add as absolute values\"\ntrigger_signal: student adds absolute uncertainties of quantities that are multiplied or divided (ΔL + ΔT for g = 4π²L/T²), often mixing units.\nconflict_evidence [P28]: \"ΔL is 0.01 m and ΔT is 0.02 s. You added them to get 0.03. 0.03 what — metres? seconds? metres per second squared?\"\nbridge_text [P30]: \"Quantities with different units cannot be added. What can be compared is how big each uncertainty is as a FRACTION of its own reading: 0.01 m of 1.00 m is 1 %; 0.02 s of 2.00 s is 1 %. For products and quotients those fractions add.\"\nreplacement_text [P31]: \"Sums and differences: absolute uncertainties add. Products and quotients: fractional uncertainties add. Powers: multiply the fractional uncertainty by the power.\"\ndiscrimination_pairs [P33]: [\"difference of two lengths 12.3 ± 0.1 and 4.1 ± 0.1 cm (absolute: ± 0.2 cm) vs area of 2.0 ± 0.1 m by 3.0 ± 0.1 m (fractional: 5 % + 3.3 %)\", \"speed = distance/time (fractional) vs total length of two rods (absolute)\"]\ns6_path: skip P28; compute the largest and smallest possible g from the extreme readings and look at the spread together.",
+      "localKey": "MC-ABSOLUTE-ADD",
+      "language": "en",
+      "refs": [
+        "MC-ABSOLUTE-ADD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.linearisation-and-uncertainty.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.meas.linearisation-and-uncertainty/misconception/MC-POWER-IGNORED",
+      "kind": "misconception",
+      "conceptId": "phys.meas.linearisation-and-uncertainty",
+      "title": "A squared quantity contributes its uncertainty once",
+      "content": "### MC-POWER-IGNORED: \"A squared quantity contributes its uncertainty once\"\ntrigger_signal: student uses ΔT/T rather than 2ΔT/T for T², or ignores the square root's ½.\nconflict_evidence [P28]: \"T = 2.00 ± 0.02 s, so T could be 2.02 s. Square 2.02. How far is that from 2.00² = 4.00, as a fraction?\"\nbridge_text [P30]: \"2.02² = 4.08 — 2 % above 4.00, although T was only 1 % high. Squaring doubles the fractional uncertainty; a square root halves it.\"\nreplacement_text [P31]: \"For xⁿ, the fractional uncertainty is n × (Δx/x).\"\ndiscrimination_pairs [P33]: [\"T² (2 × 1 % = 2 %) vs T (1 %)\", \"√L (½ × 1 % = 0.5 %) vs L (1 %)\"]\ns6_path: skip P28; square 2.02 together on a calculator and read off the percentage.",
+      "localKey": "MC-POWER-IGNORED",
+      "language": "en",
+      "refs": [
+        "MC-POWER-IGNORED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.linearisation-and-uncertainty.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.meas.linearisation-and-uncertainty/misconception/MC-JOIN-THE-DOTS",
+      "kind": "misconception",
+      "conceptId": "phys.meas.linearisation-and-uncertainty",
+      "title": "Connect every data point; take the gradient from one point",
+      "content": "### MC-JOIN-THE-DOTS: \"Connect every data point; take the gradient from one point\"\ntrigger_signal: student draws a zigzag through every point, or computes the gradient as y/x of a single data point.\nconflict_evidence [P28]: \"Repeat the experiment and every point moves a little. Would your zigzag line, and your gradient, change every time?\"\nbridge_text [P30]: \"Each point carries random error; the law is the trend underneath. A single best-fit straight line, with points scattered on both sides, averages the scatter out.\"\nreplacement_text [P31]: \"Draw one best-fit line; take its gradient from a large triangle on the line, not from data points; read the intercept as information.\"\ndiscrimination_pairs [P33]: [\"best-fit line through scattered points vs zigzag through each point\", \"gradient from a large triangle on the line vs y/x of one data point (wrong when the intercept is not zero)\"]\ns6_path: skip P28; draw the best-fit line together with a transparent ruler, counting points above and below.",
+      "localKey": "MC-JOIN-THE-DOTS",
+      "language": "en",
+      "refs": [
+        "MC-JOIN-THE-DOTS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.linearisation-and-uncertainty.md",
+        "startLine": 19,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.meas.linearisation-and-uncertainty/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.linearisation-and-uncertainty",
+      "title": "A Curve Hides the Law",
+      "content": "{\"id\":\"TA-1\",\"title\":\"A Curve Hides the Law\",\"primitives\":[\"P01\",\"P04\",\"P05\",\"P06\",\"P14\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.linearisation-and-uncertainty.md",
+        "startLine": 11,
+        "endLine": 18
+      }
+    },
+    {
+      "assetId": "phys.meas.linearisation-and-uncertainty/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.linearisation-and-uncertainty",
+      "title": "Linearise",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Linearise\",\"primitives\":[\"P02\",\"P06\",\"P08\",\"P13\",\"P34\",\"P49\",\"P50\",\"P51\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.linearisation-and-uncertainty.md",
+        "startLine": 18,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "phys.meas.linearisation-and-uncertainty/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.linearisation-and-uncertainty",
+      "title": "Best Fit, Not Join the Dots",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Best Fit, Not Join the Dots\",\"primitives\":[\"P02\",\"P13\",\"P17\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.linearisation-and-uncertainty.md",
+        "startLine": 28,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "phys.meas.linearisation-and-uncertainty/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.linearisation-and-uncertainty",
+      "title": "Sums and Differences",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Sums and Differences\",\"primitives\":[\"P02\",\"P06\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.linearisation-and-uncertainty.md",
+        "startLine": 36,
+        "endLine": 42
+      }
+    },
+    {
+      "assetId": "phys.meas.linearisation-and-uncertainty/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.linearisation-and-uncertainty",
+      "title": "Products, Quotients and Powers",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Products, Quotients and Powers\",\"primitives\":[\"P02\",\"P08\",\"P13\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-ABSOLUTE-ADD\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-ABSOLUTE-ADD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.linearisation-and-uncertainty.md",
+        "startLine": 42,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "phys.meas.linearisation-and-uncertainty/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.linearisation-and-uncertainty",
+      "title": "Formative Assessment",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Formative Assessment\",\"primitives\":[\"P02\",\"P35\",\"P49\",\"P51\",\"P55\",\"P79\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.linearisation-and-uncertainty.md",
+        "startLine": 50,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "phys.meas.linearisation-and-uncertainty/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.linearisation-and-uncertainty",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P28\",\"P41\",\"P54\",\"P55\",\"P62\",\"P68\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.linearisation-and-uncertainty.md",
+        "startLine": 57,
+        "endLine": 99
+      }
+    },
+    {
+      "assetId": "phys.meas.linearisation-and-uncertainty/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.meas.linearisation-and-uncertainty",
+      "title": "Assessment Battery",
+      "content": "| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (classify) | \"Square of side 5.0 ± 0.1 cm: area fractional uncertainty?\" | CORRECT = 0.04 (2 × 0.02) |\n| P74 (classify) | \"Difference of 12.3 ± 0.1 and 4.1 ± 0.1 cm: uncertainty?\" | CORRECT = ± 0.2 cm |\n| P75 (boundary) | \"Best-fit line misses the origin by 0.1 s² — g from the gradient?\" | CORRECT = gradient unchanged; the intercept signals a systematic error |\n| P76 (transfer) | \"R = V/I, V = 6.0 ± 0.1 V, I = 2.0 ± 0.1 A\" | CORRECT = 3.0 ± 0.2 Ω (1.7 % + 5 % ≈ 6.7 %) |\n| P77 (generate) | \"s = ½ g t² — which graph?\" | CORRECT = s against t², gradient g/2 |\n| P78 (explain) | \"Why T² against L?\" | CORRECT = makes the law linear; gradient 4π²/g |\n| P79 (predict) | \"L or T dominates Δg?\" | CORRECT = T (its 1 % counts twice) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.linearisation-and-uncertainty.md",
+        "startLine": 193,
+        "endLine": 205
+      }
+    },
+    {
+      "assetId": "phys.meas.linearisation-and-uncertainty/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.meas.linearisation-and-uncertainty",
+      "title": "Student State Matrix",
+      "content": "| State | Why here | Tell-tale behaviour | Protocol |\n|---|---|---|---|\n| S0 | Has only plotted raw data | Plots T against L and stops; no idea what a gradient would mean | Protocol A (Concrete) |\n| S1 | Rules recited, not used | States \"fractional errors add\" but adds absolute ones in a product | Protocol B (Counterexample-first) |\n| S2-ABSOLUTE-ADD | Adds absolute uncertainties everywhere | ΔL + ΔT given as the uncertainty in g | Misconception Engine → then Protocol C |\n| S2-POWER-IGNORED | Treats T² like T | Fractional uncertainty of T² taken as ΔT/T | Misconception Engine → then Protocol C |\n| S3 | Partial — linearisation fine, propagation not (or reverse) | Correct T²–L graph, wrong Δg | Protocol C (Guided Questioning) |\n| S6 | Anxiety on algebra with uncertainties | Freezes at \"±\" | Protocol F (Low Pressure) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.linearisation-and-uncertainty.md",
+        "startLine": 27,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "phys.meas.linearisation-and-uncertainty/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.meas.linearisation-and-uncertainty",
+      "title": "Diagnostic Battery",
+      "content": "DB-1 (prior-exposure check):\n\"Have you drawn a graph from experimental data and used its gradient to find a constant?\"\n  No → S0. Enter Protocol A (Concrete).\n  Yes → DB-2.\n\nDB-2 (representation / misconception test):\n\"T = 2π√(L/g). What would you plot to get a straight line, and what does its gradient tell you?\"\n  \"T² against L; gradient 4π²/g\" → DB-2b.\n  \"T against L\" → S0. Enter Protocol A.\n  Pause / \"I don't know\" → add S6 flag; Protocol F if anxious, otherwise Protocol A.\n\nDB-2b (propagation test):\n\"L = 1.00 ± 0.01 m, T = 2.00 ± 0.02 s. What is the fractional uncertainty in g = 4π²L/T²?\"\n  \"0.03\" (0.01 + 2 × 0.01) → S3 if any hesitation, else straight to TA-6 gate preparation via Protocol C.\n  \"0.02\" (0.01 + 0.01) → SIGNAL:MISCONCEPTION:MC-POWER-IGNORED. Enter Misconception Engine.\n  \"0.03 m/s²\" from ΔL + ΔT, or any absolute sum → SIGNAL:MISCONCEPTION:MC-ABSOLUTE-ADD. Enter Misconception Engine.\n\nDB-3 (confidence calibration):\n\"How confident are you with error propagation — 1 to 5?\"\n  1–2 → add S6 flag.\n  4–5 + DB-2b wrong → add S7 flag. Override to Protocol G (challenge-first).",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-POWER-IGNORED",
+        "MC-ABSOLUTE-ADD"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.linearisation-and-uncertainty.md",
+        "startLine": 38,
+        "endLine": 62
+      }
+    },
+    {
+      "assetId": "phys.meas.linearisation-and-uncertainty/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.meas.linearisation-and-uncertainty",
+      "title": "Prerequisite Check",
+      "content": "PD-1 (for `phys.meas.significant-figures` and, through it, `phys.meas.errors`):\n\"A length is 2.36 ± 0.01 cm. What is its fractional uncertainty, and how many significant figures should the length be quoted to?\"\n  Cannot form Δx/x or cannot tie the quoted digits to the uncertainty → flag PREREQ-GAP-SIGFIGS.\n  In-session minimum repair: one P06 (a ruler reading with its ± half-division) + one P34 (\"what fraction of the reading is the uncertainty?\") then resume. If the learner has no notion of a measurement uncertainty at all, schedule a `phys.meas.errors` session (S4 route).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.linearisation-and-uncertainty.md",
+        "startLine": 62,
+        "endLine": 69
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

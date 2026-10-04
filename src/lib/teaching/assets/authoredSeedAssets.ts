@@ -52021,12 +52021,463 @@ const RECT_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.meas.linearisation-and-uncertainty ───────────────────────────────────────────
+const EXPG = 'phys.meas.linearisation-and-uncertainty'
+const EXPG_SRC = 'docs/curriculum/blueprints/phys.meas.linearisation-and-uncertainty.md'
+
+const EXPG_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: EXPG,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A curve can be fitted by many laws; a straight line cannot hide. So to test a law, rearrange it until it reads y = mx + c and plot those y and x. A pendulum obeys T = 2π√(L/g). T against L is a curve, but squaring both sides gives T² = (4π²/g) L — so T² against L should be a straight line through the origin with gradient 4π²/g, and g = 4π²/gradient. Real data (L from 0.2 to 1.0 m, T from 0.90 to 2.01 s) give a T²–L gradient of about 4.02 s²/m, so g ≈ 9.8 m/s². Each point carries random error, so draw ONE best-fit straight line with points scattered on both sides, and take its gradient from a large triangle on the line — never from a single data point. An intercept where there should be none is information: a systematic error. Uncertainties then travel into the result by two rules. For sums and differences, absolute uncertainties add: 12.3 ± 0.1 cm − 4.1 ± 0.1 cm = 8.2 ± 0.2 cm. For products and quotients, fractional uncertainties add, and a power n multiplies a fractional uncertainty by n. For g = 4π²L/T² with L = 1.00 ± 0.01 m (1 %) and T = 2.00 ± 0.02 s (1 %, squared, so 2 %), g has a 3 % uncertainty: g = 9.9 ± 0.3 m/s².',
+    targetedMisconceptions: [`${EXPG}:MC-ABSOLUTE-ADD`, `${EXPG}:MC-POWER-IGNORED`, `${EXPG}:MC-JOIN-THE-DOTS`],
+    source: `${EXPG_SRC} — TA-2 linearisation, TA-3 best fit, TA-4/TA-5 propagation rules`,
+  },
+  {
+    conceptId: EXPG,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A common slip is to add uncertainties as they stand whatever the formula: for g = 4π²L/T² with ΔL = 0.01 m and ΔT = 0.02 s, writing Δg = 0.03. Ask what unit that 0.03 carries — metres? seconds? Quantities with different units cannot be added. What can be compared is each uncertainty as a fraction of its own reading: 0.01 m of 1.00 m is 1 %, 0.02 s of 2.00 s is also 1 %. For products and quotients, those FRACTIONS add. A second slip is forgetting the power. T is squared, so T could be 2.02 s, and 2.02² = 4.08 — 2 % above 4.00, although T itself was only 1 % high. Squaring doubles a fractional uncertainty (and a square root halves it), so g carries 1 % + 2 × 1 % = 3 %. A third slip is drawing graphs as pictures — a zigzag through every point, and a gradient read as y/x of one point. Repeat the experiment and every point moves, so the zigzag changes every time; the law is the trend underneath. One best-fit line averages the scatter, and its gradient comes from a large triangle on the line; y/x of a single point equals the gradient only if the line passes through the origin.',
+    targetedMisconceptions: [`${EXPG}:MC-ABSOLUTE-ADD`, `${EXPG}:MC-POWER-IGNORED`, `${EXPG}:MC-JOIN-THE-DOTS`],
+    source: `${EXPG_SRC} — MC-ABSOLUTE-ADD + MC-POWER-IGNORED + MC-JOIN-THE-DOTS, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const EXPG_PROBES: SeedProbe[] = [
+  {
+    conceptId: EXPG,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A pendulum obeys T = 2π√(L/g). Which graph gives a straight line through the origin, and what does its gradient equal?',
+    choices: [
+      { text: 'T² against L; gradient 4π²/g', isCorrect: true },
+      { text: 'T against L; gradient 2π/g', isCorrect: false, misconceptionId: `${EXPG}:MC-POWER-IGNORED` },
+      { text: 'T against L²; gradient g', isCorrect: false },
+      { text: 'L against T; gradient g', isCorrect: false },
+    ],
+    correctValue: 'T² against L, gradient 4π²/g',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${EXPG}:MC-POWER-IGNORED`],
+    source: `${EXPG_SRC} — DB-2 item and TA-2 think-aloud (T² = (4π²/g) L)`,
+  },
+  {
+    conceptId: EXPG,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'R = V/I, with V = 6.0 ± 0.1 V and I = 2.0 ± 0.1 A. What is R with its uncertainty?',
+    choices: [
+      { text: '3.0 ± 0.2 Ω', isCorrect: true },
+      { text: '3.0 ± 0.1 Ω', isCorrect: false },
+      { text: '3.0 ± 0.0 Ω — the uncertainties cancel in a quotient', isCorrect: false },
+      { text: '3.0 ± 0.2 V/A — add 0.1 V and 0.1 A', isCorrect: false, misconceptionId: `${EXPG}:MC-ABSOLUTE-ADD` },
+    ],
+    correctValue: '3.0 ± 0.2 Ω',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${EXPG}:MC-ABSOLUTE-ADD`],
+    source: `${EXPG_SRC} — §8 P76 transfer item (1.7 % + 5 % ≈ 6.7 % of 3.0 Ω)`,
+  },
+  {
+    conceptId: EXPG,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'L = 1.00 ± 0.01 m and T = 2.00 ± 0.02 s are used in g = 4π²L/T². What is the fractional uncertainty in g?',
+    choices: [
+      { text: '0.03 — 0.01 from L plus 2 × 0.01 from T, because T is squared', isCorrect: true },
+      { text: '0.02 — 0.01 from L plus 0.01 from T', isCorrect: false, misconceptionId: `${EXPG}:MC-POWER-IGNORED` },
+      { text: '0.03 m/s² — add ΔL = 0.01 and ΔT = 0.02', isCorrect: false, misconceptionId: `${EXPG}:MC-ABSOLUTE-ADD` },
+    ],
+    correctValue: '0.03',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${EXPG}:MC-POWER-IGNORED`, `${EXPG}:MC-ABSOLUTE-ADD`],
+    source: `${EXPG_SRC} — DB-2b item; distractors are the MC-POWER-IGNORED and MC-ABSOLUTE-ADD trigger_signals`,
+  },
+  {
+    conceptId: EXPG,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A student\'s T²–L data scatter a little about a straight line. How should the gradient be found?',
+    choices: [
+      { text: 'Draw one best-fit straight line with points on both sides, and take the gradient from a large triangle on that line', isCorrect: true },
+      { text: 'Join every point with straight segments, so the line passes exactly through all the data', isCorrect: false, misconceptionId: `${EXPG}:MC-JOIN-THE-DOTS` },
+      { text: 'Divide T² by L for the last data point — that is the gradient', isCorrect: false, misconceptionId: `${EXPG}:MC-JOIN-THE-DOTS` },
+    ],
+    correctValue: 'best-fit line, gradient from a large triangle',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${EXPG}:MC-JOIN-THE-DOTS`],
+    source: `${EXPG_SRC} — TA-3 P17 contrast and MC-JOIN-THE-DOTS trigger_signal`,
+  },
+  {
+    conceptId: EXPG,
+    subjectSlug: 'physics',
+    probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'The side of a square is measured as 5.0 ± 0.1 cm. What is the fractional uncertainty in its area?',
+    choices: [
+      { text: '0.04 — the side is known to 2 %, and squaring doubles it', isCorrect: true },
+      { text: '0.02 — the same as the side', isCorrect: false, misconceptionId: `${EXPG}:MC-POWER-IGNORED` },
+      { text: '0.2 cm² — add 0.1 cm for each of the two sides', isCorrect: false, misconceptionId: `${EXPG}:MC-ABSOLUTE-ADD` },
+    ],
+    correctValue: '0.04',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${EXPG}:MC-POWER-IGNORED`, `${EXPG}:MC-ABSOLUTE-ADD`],
+    source: `${EXPG_SRC} — §8 P74 classify item`,
+  },
+]
+
+// ─── phys.mech.simple-machines ───────────────────────────────────────────────
+const SMCH = 'phys.mech.simple-machines'
+const SMCH_SRC = 'docs/curriculum/blueprints/phys.mech.simple-machines.md'
+
+const SMCH_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SMCH,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A simple machine lets a small force do a job that needs a large one — but never for free. A crowbar with an effort arm of 1.2 m and a load arm of 0.2 m lets you lift a 600 N rock by pushing with 100 N. To raise the rock 0.1 m, though, your hand must move 0.6 m. Work in: 100 N × 0.6 m = 60 J. Work out: 600 N × 0.1 m = 60 J. The machine traded force for distance; the work did not shrink. Three numbers describe a machine. Mechanical advantage MA = load ÷ effort says how much it multiplies force. Velocity ratio VR = distance moved by the effort ÷ distance moved by the load is fixed by geometry: effort arm ÷ load arm for a lever, the number of supporting strands for a pulley system, length ÷ height for a ramp. Efficiency = useful work out ÷ work in = MA ÷ VR. An ideal machine has MA = VR; a real one loses work to friction, so MA < VR — a 4-strand block and tackle (VR 4) lifting 800 N with 250 N has MA 3.2 and efficiency 80 %. Levers are named by what is in the middle: class 1, the fulcrum (seesaw, scissors); class 2, the load (wheelbarrow, nutcracker), MA above 1; class 3, the effort (tongs, the forearm), MA below 1 — which gains distance and speed instead of force.',
+    targetedMisconceptions: [`${SMCH}:MC-MACHINE-SAVES-WORK`, `${SMCH}:MC-MA-ALWAYS-GAIN`],
+    source: `${SMCH_SRC} — TA-1/TA-2 crowbar and work, TA-3 efficiency, TA-4 classes of lever, TA-5 pulleys and ramps`,
+  },
+  {
+    conceptId: SMCH,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Machines make jobs easier, and it is tempting to hear that as "machines reduce the work". Check it with the crowbar: you pushed 100 N through 0.6 m, which is 60 J; lifting the rock directly is 600 N through 0.1 m, also 60 J. The force went down six times and the distance went up six times. No machine can make the work out larger than the work in — a real one always loses some to friction, so its efficiency is below 100 %. A second trap is judging every machine by its mechanical advantage alone and calling a lever with MA below 1 useless. Your forearm is a class-3 lever: the biceps pulls with about eight times the force your hand holds. The body is built that way on purpose — the muscle shortens by a few centimetres while the hand sweeps through many times that distance, at many times the speed. MA above 1 gains force; MA below 1 gains distance and speed; and MA of exactly 1, as in a single fixed pulley, can still be useful because it changes the direction of the pull.',
+    targetedMisconceptions: [`${SMCH}:MC-MACHINE-SAVES-WORK`, `${SMCH}:MC-MA-ALWAYS-GAIN`],
+    source: `${SMCH_SRC} — MC-MACHINE-SAVES-WORK + MC-MA-ALWAYS-GAIN, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const SMCH_PROBES: SeedProbe[] = [
+  {
+    conceptId: SMCH,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A block and tackle with 4 supporting strands lifts an 800 N load with a 250 N effort. What are its MA, VR and efficiency?',
+    choices: [
+      { text: 'MA 3.2, VR 4, efficiency 80 %', isCorrect: true },
+      { text: 'MA 4, VR 3.2, efficiency 125 %', isCorrect: false, misconceptionId: `${SMCH}:MC-MACHINE-SAVES-WORK` },
+      { text: 'MA 3.2, VR 4, efficiency 100 % — an ideal pulley', isCorrect: false },
+      { text: 'MA 0.31, VR 4, efficiency 8 %', isCorrect: false },
+    ],
+    correctValue: 'MA 3.2, VR 4, efficiency 80 %',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${SMCH}:MC-MACHINE-SAVES-WORK`],
+    source: `${SMCH_SRC} — TA-3 P34 (800/250, 4 strands); 0.31 is effort/load`,
+  },
+  {
+    conceptId: SMCH,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A car jack: the handle moves 30 cm for every 1 cm the car rises. Pushing with 200 N lifts a 4000 N load. What is its efficiency?',
+    choices: [
+      { text: 'About 67 % (MA 20, VR 30)', isCorrect: true },
+      { text: '150 % (VR 30 ÷ MA 20)', isCorrect: false, misconceptionId: `${SMCH}:MC-MACHINE-SAVES-WORK` },
+      { text: '20 %', isCorrect: false },
+      { text: '5 %', isCorrect: false },
+    ],
+    correctValue: 'about 67 %',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SMCH}:MC-MACHINE-SAVES-WORK`],
+    source: `${SMCH_SRC} — §8 P76 transfer item (4000/200 = 20; 20/30)`,
+  },
+  {
+    conceptId: SMCH,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'With a crowbar you lift a 600 N rock 0.1 m by pushing down with only 100 N. Did you do less work than lifting the rock straight up?',
+    choices: [
+      { text: 'No — your hand moved 0.6 m: 100 N × 0.6 m = 60 J, the same as 600 N × 0.1 m. The force was traded for distance', isCorrect: true },
+      { text: 'Yes — you only used 100 N instead of 600 N, so the crowbar saved five-sixths of the work', isCorrect: false, misconceptionId: `${SMCH}:MC-MACHINE-SAVES-WORK` },
+      { text: 'Yes — machines add some energy of their own to the job', isCorrect: false, misconceptionId: `${SMCH}:MC-MACHINE-SAVES-WORK` },
+    ],
+    correctValue: 'no, the same 60 J',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${SMCH}:MC-MACHINE-SAVES-WORK`],
+    source: `${SMCH_SRC} — DB-2 item and MC-MACHINE-SAVES-WORK conflict_evidence`,
+  },
+  {
+    conceptId: SMCH,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Your forearm is a class-3 lever: the biceps pulls with about eight times the force your hand holds (MA about 1/8). Why is it built this way?',
+    choices: [
+      { text: 'It trades force for distance and speed: a small shortening of the muscle swings the hand through a large distance quickly', isCorrect: true },
+      { text: 'It is simply an inefficient design — a lever with MA below 1 does nothing useful', isCorrect: false, misconceptionId: `${SMCH}:MC-MA-ALWAYS-GAIN` },
+      { text: 'It saves the muscle work, because the hand does most of the lifting', isCorrect: false, misconceptionId: `${SMCH}:MC-MACHINE-SAVES-WORK` },
+    ],
+    correctValue: 'it gains distance and speed',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SMCH}:MC-MA-ALWAYS-GAIN`, `${SMCH}:MC-MACHINE-SAVES-WORK`],
+    source: `${SMCH_SRC} — TA-4 P17 contrast and MC-MA-ALWAYS-GAIN conflict_evidence`,
+  },
+  {
+    conceptId: SMCH,
+    subjectSlug: 'physics',
+    probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A single fixed pulley lifts a 500 N load with a 550 N pull. Which statement is correct?',
+    choices: [
+      { text: 'Its MA is below 1, but it is still useful: it lets you lift by pulling down instead of up', isCorrect: true },
+      { text: 'It is useless — a machine is only worth using if it reduces the force you need', isCorrect: false, misconceptionId: `${SMCH}:MC-MA-ALWAYS-GAIN` },
+      { text: 'It must be faulty — a pulley always halves the force', isCorrect: false },
+    ],
+    correctValue: 'useful for changing the direction of the pull',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SMCH}:MC-MA-ALWAYS-GAIN`],
+    source: `${SMCH_SRC} — §8 P75 boundary item (fixed pulley, MA 500/550)`,
+  },
+]
+
+// ─── phys.mech.variation-of-g ────────────────────────────────────────────────
+const VARG = 'phys.mech.variation-of-g'
+const VARG_SRC = 'docs/curriculum/blueprints/phys.mech.variation-of-g.md'
+
+const VARG_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: VARG,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The 9.8 m/s² we use is g at the Earth\'s surface, not a universal constant. The field strength is g = GM/r², with r measured from the Earth\'s centre, so it falls with height: g_h = g (R/(R + h))², and for small heights g_h ≈ g(1 − 2h/R) — 32 km up, g is only 1 % less. The space station orbits about 400 km up, where g = 9.8 × (6371/6771)² ≈ 8.7 m/s², nearly 90 % of its surface value. Going down is different. Inside a uniform Earth, the shell of rock above you pulls equally in every direction and cancels out; only the ball of mass below your radius pulls. That mass shrinks as r³ while 1/r² grows, so g ∝ r: g_d = g(1 − d/R), falling to zero at the centre. So g is largest at the surface. Weightlessness is free fall, not missing gravity: a scale reads the normal force N, and N = m(g + a) with a the upward acceleration. In a lift accelerating up at 2 m/s², a 60 kg person reads 60 × 11.8 = 708 N; at constant speed, 588 N; in free fall, a = −g and N = 0. Astronauts and their station are falling round the Earth together, so nothing presses on anything.',
+    targetedMisconceptions: [`${VARG}:MC-NO-GRAVITY-IN-ORBIT`, `${VARG}:MC-G-RISES-WITH-DEPTH`],
+    source: `${VARG_SRC} — TA-2 height, TA-4 depth, TA-5 weightlessness and lifts`,
+  },
+  {
+    conceptId: VARG,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Floating astronauts are almost always explained by "there is no gravity up there". Compute it: 400 km up, g = 9.8 × (6371/6771)² ≈ 8.7 m/s² — almost 90 % of the value where you stand. If gravity really vanished, the station would fly off in a straight line; gravity is exactly what keeps bending its path round the Earth. The station is falling all the time, and so is everything in it. Falling together, nothing presses on anything, so a scale between an astronaut\'s feet and the floor reads zero — weightlessness is free fall, not the absence of gravity. The second trap runs the other way: "deeper is closer to the centre, so g gets stronger". At the very centre the whole Earth surrounds you equally in every direction — which way would it pull? Nowhere: g = 0. Inside a uniform Earth the rock above you cancels itself out, and only the shrinking ball below you pulls; its mass falls as r³, faster than 1/r² grows, so g falls steadily from the surface to zero at the centre.',
+    targetedMisconceptions: [`${VARG}:MC-NO-GRAVITY-IN-ORBIT`, `${VARG}:MC-G-RISES-WITH-DEPTH`],
+    source: `${VARG_SRC} — MC-NO-GRAVITY-IN-ORBIT + MC-G-RISES-WITH-DEPTH, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const VARG_PROBES: SeedProbe[] = [
+  {
+    conceptId: VARG,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'At what distance from the Earth\'s centre is g a quarter of its surface value? (R is the Earth\'s radius.)',
+    choices: [
+      { text: '2R — one Earth radius above the surface', isCorrect: true },
+      { text: '4R', isCorrect: false },
+      { text: '1.25R', isCorrect: false },
+      { text: 'R/2 — halfway to the centre', isCorrect: false },
+    ],
+    correctValue: '2R',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [],
+    source: `${VARG_SRC} — §8 P77 generate item (g ∝ 1/r² outside); 4R treats g ∝ 1/r`,
+  },
+  {
+    conceptId: VARG,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A 60 kg person stands on a scale in a lift that is accelerating upward at 2 m/s² (g = 9.8 m/s²). What does the scale read?',
+    choices: [
+      { text: '708 N', isCorrect: true },
+      { text: '588 N', isCorrect: false },
+      { text: '468 N', isCorrect: false },
+      { text: '0 N', isCorrect: false },
+    ],
+    correctValue: '708 N',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: `${VARG_SRC} — TA-5 P34 (N = m(g + a) = 60 × 11.8); 588 N ignores the acceleration, 468 N subtracts it`,
+  },
+  {
+    conceptId: VARG,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'The space station orbits about 400 km above the surface. Why do the astronauts inside float?',
+    choices: [
+      { text: 'Gravity there is still about 8.7 m/s², but the station and the astronauts are falling around the Earth together, so nothing presses on them', isCorrect: true },
+      { text: 'At that height there is no gravity, so nothing pulls them down', isCorrect: false, misconceptionId: `${VARG}:MC-NO-GRAVITY-IN-ORBIT` },
+      { text: 'Gravity is so weak up there — about 1 % of its surface value — that they hardly weigh anything', isCorrect: false, misconceptionId: `${VARG}:MC-NO-GRAVITY-IN-ORBIT` },
+    ],
+    correctValue: 'free fall together; g ≈ 8.7 m/s²',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${VARG}:MC-NO-GRAVITY-IN-ORBIT`],
+    source: `${VARG_SRC} — DB-2 item and MC-NO-GRAVITY-IN-ORBIT conflict_evidence`,
+  },
+  {
+    conceptId: VARG,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Treat the Earth as a uniform ball. What happens to g as you go down from the surface toward the centre?',
+    choices: [
+      { text: 'It falls steadily to zero at the centre: only the mass below you pulls, and it shrinks faster than 1/r² grows', isCorrect: true },
+      { text: 'It rises, and is greatest at the centre, because you are closer to the middle of the Earth', isCorrect: false, misconceptionId: `${VARG}:MC-G-RISES-WITH-DEPTH` },
+      { text: 'It stays exactly 9.8 m/s² all the way down', isCorrect: false },
+    ],
+    correctValue: 'falls linearly to zero',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${VARG}:MC-G-RISES-WITH-DEPTH`],
+    source: `${VARG_SRC} — DB-3 depth check and MC-G-RISES-WITH-DEPTH conflict_evidence`,
+  },
+  {
+    conceptId: VARG,
+    subjectSlug: 'physics',
+    probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A mine shaft is 64 km deep. Treating the Earth as uniform with R = 6400 km and surface g = 9.8 m/s², what is g at the bottom?',
+    choices: [
+      { text: 'About 9.70 m/s² — 1 % less than at the surface', isCorrect: true },
+      { text: 'About 9.90 m/s² — closer to the centre, so stronger', isCorrect: false, misconceptionId: `${VARG}:MC-G-RISES-WITH-DEPTH` },
+      { text: 'About 9.60 m/s² — 2 % less, as for a height of 64 km', isCorrect: false },
+    ],
+    correctValue: 'about 9.70 m/s²',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${VARG}:MC-G-RISES-WITH-DEPTH`],
+    source: `${VARG_SRC} — §8 P76 transfer item (g(1 − d/R) = 9.8 × 0.99); 9.60 applies the height factor 2h/R`,
+  },
+]
+
+// ─── phys.mech.terminal-velocity ─────────────────────────────────────────────
+const TERM = 'phys.mech.terminal-velocity'
+const TERM_SRC = 'docs/curriculum/blueprints/phys.mech.terminal-velocity.md'
+
+const TERM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: TERM,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Drop a steel ball into a tall tube of glycerine: for a moment it speeds up, then it settles to a steady speed. Three forces act — its weight down, the liquid\'s upthrust up, and drag up, against the motion. Weight and upthrust stay the same, but drag grows with speed. At release drag is zero and the ball accelerates hard; as it speeds up, drag grows, the net force shrinks and so does the acceleration. When weight = upthrust + drag, the net force and the acceleration are zero and the speed stays constant: the terminal velocity. For a small sphere in slow flow, drag follows Stokes\' law F = 6πηrv, and balancing gives v_t = 2r²(ρ − σ)g / (9η). A steel ball of radius 1 mm (ρ = 7800 kg/m³) in glycerine (σ = 1260 kg/m³, η = 1.5 Pa·s) settles at about 9.5 mm/s. Weight grows as r³ but drag only as r, so v_t grows as r²: double the radius and the ball falls four times as fast. A skydiver shows the same story in air: she accelerates at about g at first, then levels off at about 55 m/s when drag equals her weight; opening the parachute makes drag exceed her weight, so she slows — still moving down — to a new terminal velocity of a few metres per second.',
+    targetedMisconceptions: [`${TERM}:MC-NO-FORCE-AT-TERMINAL`, `${TERM}:MC-PARACHUTE-GOES-UP`],
+    source: `${TERM_SRC} — TA-1/TA-2 the ball in glycerine and growing drag, TA-3 Stokes v_t, TA-4/TA-5 the skydiver`,
+  },
+  {
+    conceptId: TERM,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'At a steady 55 m/s a skydiver is not speeding up, and it is easy to conclude that no forces act on her. But has her mass changed? Can the Earth pull on her any less? Her weight is still there, and the air is pushing up on her just as hard. Constant velocity does not mean no forces — it means the forces balance, so the net force and the acceleration are zero. The second trap comes when she opens her parachute. Films often seem to show her shooting upward, and the upward net force seems to agree. But she was falling at 55 m/s; an upward net force gives an upward ACCELERATION, which slows a downward motion. She keeps moving down, more and more slowly, until drag falls back to equal her weight at a lower terminal velocity. It is the same as braking a bicycle: you are still moving forward while your acceleration points backward. The films are shot by a camera operator who is still falling fast, so the skydiver appears to rise past the camera.',
+    targetedMisconceptions: [`${TERM}:MC-NO-FORCE-AT-TERMINAL`, `${TERM}:MC-PARACHUTE-GOES-UP`],
+    source: `${TERM_SRC} — MC-NO-FORCE-AT-TERMINAL + MC-PARACHUTE-GOES-UP, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const TERM_PROBES: SeedProbe[] = [
+  {
+    conceptId: TERM,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Two steel balls, of radius 1 mm and 2 mm, fall through the same glycerine at their terminal velocities (Stokes\' law holds). How do their terminal velocities compare?',
+    choices: [
+      { text: 'The 2 mm ball falls 4 times as fast', isCorrect: true },
+      { text: 'The 2 mm ball falls 2 times as fast', isCorrect: false },
+      { text: 'The 2 mm ball falls 8 times as fast — it is 8 times as heavy', isCorrect: false },
+      { text: 'They fall at the same speed', isCorrect: false },
+    ],
+    correctValue: '4 times as fast',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: `${TERM_SRC} — TA-3 P41 and §7 P79 (v_t ∝ r²: weight ∝ r³, drag ∝ r)`,
+  },
+  {
+    conceptId: TERM,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'On a skydiver\'s velocity–time graph from the moment she jumps, where is her acceleration largest?',
+    choices: [
+      { text: 'At the very start, when her speed and so the drag are still zero — about g', isCorrect: true },
+      { text: 'At terminal velocity, when she is moving fastest', isCorrect: false },
+      { text: 'It is the same, g, all the way down', isCorrect: false },
+    ],
+    correctValue: 'at the start',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [],
+    source: `${TERM_SRC} — TA-4 P16 compare (largest at the start; zero on both flat parts)`,
+  },
+  {
+    conceptId: TERM,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A skydiver falls at a steady 55 m/s. Which describes the forces on her?',
+    choices: [
+      { text: 'Her weight acts down and air resistance acts up; they are equal, so the net force is zero', isCorrect: true },
+      { text: 'No forces act on her — that is why her speed is not changing', isCorrect: false, misconceptionId: `${TERM}:MC-NO-FORCE-AT-TERMINAL` },
+      { text: 'Gravity has stopped acting because she has reached her maximum speed', isCorrect: false, misconceptionId: `${TERM}:MC-NO-FORCE-AT-TERMINAL` },
+    ],
+    correctValue: 'weight and drag balance, net force zero',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${TERM}:MC-NO-FORCE-AT-TERMINAL`],
+    source: `${TERM_SRC} — DB-2 item and MC-NO-FORCE-AT-TERMINAL trigger_signal`,
+  },
+  {
+    conceptId: TERM,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Falling at 55 m/s, a skydiver opens her parachute and the drag becomes much larger than her weight. What happens just after?',
+    choices: [
+      { text: 'She keeps moving downward but slows down — the net force and her acceleration point upward', isCorrect: true },
+      { text: 'She moves upward for a while, because the net force on her is upward', isCorrect: false, misconceptionId: `${TERM}:MC-PARACHUTE-GOES-UP` },
+      { text: 'She stops instantly in mid-air', isCorrect: false },
+    ],
+    correctValue: 'moves down, slowing',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${TERM}:MC-PARACHUTE-GOES-UP`],
+    source: `${TERM_SRC} — DB-3 parachute check and MC-PARACHUTE-GOES-UP conflict_evidence`,
+  },
+  {
+    conceptId: TERM,
+    subjectSlug: 'physics',
+    probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A plastic ball whose density exactly equals the liquid\'s density is released at rest inside the liquid. What is its terminal velocity, and why?',
+    choices: [
+      { text: 'Zero — its weight equals the upthrust from the start, so there is no net force to set it moving', isCorrect: true },
+      { text: 'The same as a steel ball of the same size — terminal velocity depends only on the liquid', isCorrect: false },
+      { text: 'Very large — with no net force it keeps speeding up', isCorrect: false, misconceptionId: `${TERM}:MC-NO-FORCE-AT-TERMINAL` },
+    ],
+    correctValue: 'zero',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${TERM}:MC-NO-FORCE-AT-TERMINAL`],
+    source: `${TERM_SRC} — §8 P75 boundary item (ρ = σ gives v_t = 0)`,
+  },
+]
+
 // Batch export spreads for the extension (kept with the concepts above).
 const PHYS_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...DENS_EXPLANATIONS,
   ...MINS_EXPLANATIONS,
   ...MWGT_EXPLANATIONS,
   ...RECT_EXPLANATIONS,
+  ...EXPG_EXPLANATIONS,
+  ...SMCH_EXPLANATIONS,
+  ...VARG_EXPLANATIONS,
+  ...TERM_EXPLANATIONS,
 ]
 
 const PHYS_EXTENSION_PROBES: SeedProbe[] = [
@@ -52034,6 +52485,10 @@ const PHYS_EXTENSION_PROBES: SeedProbe[] = [
   ...MINS_PROBES,
   ...MWGT_PROBES,
   ...RECT_PROBES,
+  ...EXPG_PROBES,
+  ...SMCH_PROBES,
+  ...VARG_PROBES,
+  ...TERM_PROBES,
 ]
 
 // ─── Batch export ────────────────────────────────────────────────────────────

@@ -4,22 +4,22 @@
   "status": "production",
   "build_date": "2026-06-29",
   "statistics": {
-    "total_concepts": 242,
+    "total_concepts": 246,
     "total_domains": 12,
-    "total_requires_edges": 305,
-    "total_unlocks_edges": 304,
+    "total_requires_edges": 309,
+    "total_unlocks_edges": 308,
     "total_cross_links": 0
   },
   "domains": [
     {
       "key": "meas",
       "name": "Measurement & Units",
-      "count": 10
+      "count": 11
     },
     {
       "key": "mech",
       "name": "Classical Mechanics",
-      "count": 61
+      "count": 64
     },
     {
       "key": "therm",
@@ -212,7 +212,9 @@
         "NCERT Physics Class 11 Ch.2"
       ],
       "children": [],
-      "unlocks": []
+      "unlocks": [
+        "phys.meas.linearisation-and-uncertainty"
+      ]
     },
     {
       "id": "phys.meas.measuring-instruments",
@@ -238,6 +240,35 @@
       "references": [
         "NCERT Physics Class 11 Lab Manual",
         "NCERT Physics Class 11 Ch.2"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.meas.linearisation-and-uncertainty",
+      "name": "Linearisation and Uncertainty Propagation",
+      "aliases": [
+        "linearisation",
+        "error propagation",
+        "best-fit line"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.meas.significant-figures"
+      ],
+      "related": [
+        "phys.meas.errors",
+        "phys.wave.pendulum"
+      ],
+      "cross_links": [],
+      "description": "Rearranging a law into y = mx + c turns its graph into a straight line whose gradient gives a constant; uncertainties combine by adding absolute values for sums and fractional values for products, with a power multiplying its fractional uncertainty.",
+      "difficulty": "proficient",
+      "estimated_hours": 3,
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "references": [
+        "NCERT Physics Class 11 Ch.2",
+        "NCERT Physics Lab Manual"
       ],
       "children": [],
       "unlocks": []
@@ -898,7 +929,8 @@
         "phys.mech.kinetic-energy",
         "phys.mech.potential-energy",
         "phys.mech.power",
-        "phys.therm.first-law"
+        "phys.therm.first-law",
+        "phys.mech.simple-machines"
       ]
     },
     {
@@ -1038,6 +1070,36 @@
       "mastery_threshold": 0.8,
       "references": [
         "NCERT Physics Class 11 Ch.6"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.mech.simple-machines",
+      "name": "Simple Machines and Mechanical Advantage",
+      "aliases": [
+        "lever",
+        "pulley",
+        "mechanical advantage",
+        "velocity ratio"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.work"
+      ],
+      "related": [
+        "phys.mech.torque",
+        "phys.mech.power"
+      ],
+      "cross_links": [],
+      "description": "A lever, pulley or inclined plane trades force for distance: mechanical advantage is load over effort, velocity ratio is effort distance over load distance, and efficiency (MA/VR) is below 100% because no machine reduces the work needed.",
+      "difficulty": "developing",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "ICSE Physics Class 10",
+        "NCERT Science Class 9 Ch.11"
       ],
       "children": [],
       "unlocks": []
@@ -1502,8 +1564,37 @@
       ],
       "children": [],
       "unlocks": [
-        "phys.mech.gravitational-potential"
+        "phys.mech.gravitational-potential",
+        "phys.mech.variation-of-g"
       ]
+    },
+    {
+      "id": "phys.mech.variation-of-g",
+      "name": "Variation of g and Weightlessness",
+      "aliases": [
+        "acceleration due to gravity with height",
+        "apparent weight",
+        "weightlessness"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.gravitational-field"
+      ],
+      "related": [
+        "phys.mech.mass-and-weight",
+        "phys.mech.circular-motion"
+      ],
+      "cross_links": [],
+      "description": "g falls with height as 1/r^2 and, for a uniform Earth, falls linearly with depth to zero at the centre; apparent weight is the normal force N = m(g + a), so a body in free fall, such as an orbiting astronaut, is weightless though gravity still acts.",
+      "difficulty": "proficient",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "NCERT Physics Class 11 Ch.7"
+      ],
+      "children": [],
+      "unlocks": []
     },
     {
       "id": "phys.mech.gravitational-potential",
@@ -1817,6 +1908,36 @@
       "estimated_hours": 5,
       "bloom": "apply",
       "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 11 Ch.10"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mech.terminal-velocity"
+      ]
+    },
+    {
+      "id": "phys.mech.terminal-velocity",
+      "name": "Drag and Terminal Velocity",
+      "aliases": [
+        "terminal speed",
+        "drag force",
+        "Stokes terminal velocity"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.viscosity"
+      ],
+      "related": [
+        "phys.mech.newtons-second-law",
+        "phys.mech.buoyancy"
+      ],
+      "cross_links": [],
+      "description": "A body falling through a fluid reaches a constant terminal velocity when drag plus upthrust balance its weight; for a small sphere Stokes' law gives v_t = 2r^2(rho - sigma)g/(9 eta).",
+      "difficulty": "proficient",
+      "estimated_hours": 2,
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
       "references": [
         "NCERT Physics Class 11 Ch.10"
       ],

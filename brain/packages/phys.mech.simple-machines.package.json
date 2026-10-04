@@ -1,0 +1,412 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.simple-machines-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.simple-machines",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:526a9fca8b2286615c1d6407a42b0cc448708569f54d76ee4d323ac7bb4da0fe",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.simple-machines.md": "sha256:7f39eae5346d6e3efc44bd386d690e25b37395acfe50b176f51f4583ad479778"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.mech.simple-machines",
+    "name": "Simple Machines and Mechanical Advantage",
+    "difficultyRaw": "developing (2)",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "phys.mech.work"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.simple-machines-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.simple-machines (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.simple-machines.md": "sha256:7f39eae5346d6e3efc44bd386d690e25b37395acfe50b176f51f4583ad479778"
+      },
+      "contentHash": "sha256:8a6f1e90874501644234cb8dadda447c023ddb21206c6acf54be06cc62109365",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.simple-machines.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.simple-machines.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.simple-machines"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.simple-machines\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.simple-machines.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.simple-machines.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.simple-machines"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.simple-machines\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.simple-machines.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.simple-machines.md#TA-3 (addresses MC-MACHINE-SAVES-WORK)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.simple-machines"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.simple-machines\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.simple-machines.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.simple-machines.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.simple-machines"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.simple-machines\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.simple-machines.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.simple-machines.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.simple-machines"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.simple-machines\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.simple-machines.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.simple-machines.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.simple-machines"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.simple-machines\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.simple-machines.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.simple-machines.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.simple-machines"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.simple-machines\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.simple-machines/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "phys.mech.simple-machines",
+      "title": "Learning Objective",
+      "content": "[Boundary statement]\nA student who achieves mastery demonstrates:\n1. Computes mechanical advantage (MA = load ÷ effort), velocity ratio (VR = distance moved by the effort ÷ distance moved by the load) and efficiency (= MA ÷ VR = useful work out ÷ work in) for a lever, a pulley system and an inclined plane — e.g. a 4-strand block and tackle lifting 800 N with a 250 N effort has VR 4, MA 3.2, efficiency 80 %.\n2. Explains from work in = work out that a machine trades force for distance: an ideal lever with effort arm 1.2 m and load arm 0.2 m lifts a 600 N rock with a 100 N effort, but the effort end moves six times as far.\n3. Classifies levers by the position of fulcrum, load and effort, and explains why a class-3 lever (MA < 1, such as tongs or the forearm) is still useful.\n\nA student who says a machine \"reduces the work needed\" or \"creates extra energy\", or that a machine with MA less than 1 is useless, has **NOT** achieved mastery — a machine never saves work, and that idea is the foundation for energy conservation and efficiency in every later topic.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.simple-machines.md",
+        "startLine": 17,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.mech.simple-machines/misconception/MC-MACHINE-SAVES-WORK",
+      "kind": "misconception",
+      "conceptId": "phys.mech.simple-machines",
+      "title": "A machine reduces the work you have to do",
+      "content": "### MC-MACHINE-SAVES-WORK: \"A machine reduces the work you have to do\"\ntrigger_signal: student says a lever, pulley or ramp \"saves work\" or \"saves energy\", or allows efficiency above 100 %.\nconflict_evidence [P28]: \"With the crowbar you pushed 100 N through 0.6 m. Lifting the rock directly is 600 N through 0.1 m. Work out both.\"\nbridge_text [P30]: \"Both are 60 J. The machine let you use a smaller force, but you had to move it further — by exactly the same factor. Force is traded for distance; the work cannot shrink.\"\nreplacement_text [P31]: \"Work in ≥ useful work out. An ideal machine has MA = VR; a real one loses some work to friction, so MA < VR and efficiency = MA/VR < 100 %.\"\ndiscrimination_pairs [P33]: [\"ideal crowbar: 100 N × 0.6 m = 600 N × 0.1 m vs real block and tackle: 1000 J in, 800 J out\", \"a machine that reduces force (yes) vs a machine that reduces work (never)\"]\ns6_path: skip P28; measure the two distances on a real lever together and multiply.",
+      "localKey": "MC-MACHINE-SAVES-WORK",
+      "language": "en",
+      "refs": [
+        "MC-MACHINE-SAVES-WORK"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.simple-machines.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.mech.simple-machines/misconception/MC-MA-ALWAYS-GAIN",
+      "kind": "misconception",
+      "conceptId": "phys.mech.simple-machines",
+      "title": "A useful machine must have MA greater than 1",
+      "content": "### MC-MA-ALWAYS-GAIN: \"A useful machine must have MA greater than 1\"\ntrigger_signal: student calls tongs, the forearm or a fishing rod \"bad\" or \"pointless\" levers because they need more effort than load.\nconflict_evidence [P28]: \"Your biceps pulls with about eight times the force your hand holds. If MA greater than 1 were the only point, why would the body be built like this?\"\nbridge_text [P30]: \"A machine can trade either way. With MA below 1 the effort moves a short distance and the load moves a long one — the hand moves eight times as far and as fast as the muscle.\"\nreplacement_text [P31]: \"MA > 1 gains force; MA < 1 gains distance and speed; MA = 1 can still change direction (a fixed pulley). Usefulness depends on the job.\"\ndiscrimination_pairs [P33]: [\"nutcracker, class 2, MA > 1 (force) vs tongs, class 3, MA < 1 (reach and control)\", \"fixed pulley MA 1 (direction) vs movable pulley MA 2 (force)\"]\ns6_path: skip P28; hold a book at arm's length and notice how fast the hand can sweep compared with the elbow muscle's small movement.",
+      "localKey": "MC-MA-ALWAYS-GAIN",
+      "language": "en",
+      "refs": [
+        "MC-MA-ALWAYS-GAIN"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.simple-machines.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.mech.simple-machines/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.simple-machines",
+      "title": "The Crowbar",
+      "content": "{\"id\":\"TA-1\",\"title\":\"The Crowbar\",\"primitives\":[\"P01\",\"P04\",\"P05\",\"P06\",\"P14\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.simple-machines.md",
+        "startLine": 11,
+        "endLine": 18
+      }
+    },
+    {
+      "assetId": "phys.mech.simple-machines/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.simple-machines",
+      "title": "Force Traded for Distance",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Force Traded for Distance\",\"primitives\":[\"P02\",\"P06\",\"P08\",\"P13\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.simple-machines.md",
+        "startLine": 18,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.mech.simple-machines/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.simple-machines",
+      "title": "Efficiency",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Efficiency\",\"primitives\":[\"P02\",\"P06\",\"P13\",\"P34\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-MACHINE-SAVES-WORK\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-MACHINE-SAVES-WORK"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.simple-machines.md",
+        "startLine": 27,
+        "endLine": 37
+      }
+    },
+    {
+      "assetId": "phys.mech.simple-machines/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.simple-machines",
+      "title": "Three Classes of Lever",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Three Classes of Lever\",\"primitives\":[\"P02\",\"P07\",\"P16\",\"P17\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.simple-machines.md",
+        "startLine": 37,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.mech.simple-machines/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.simple-machines",
+      "title": "Pulleys and Ramps",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Pulleys and Ramps\",\"primitives\":[\"P02\",\"P16\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.simple-machines.md",
+        "startLine": 45,
+        "endLine": 52
+      }
+    },
+    {
+      "assetId": "phys.mech.simple-machines/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.simple-machines",
+      "title": "Formative Assessment",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Formative Assessment\",\"primitives\":[\"P02\",\"P35\",\"P49\",\"P51\",\"P55\",\"P79\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.simple-machines.md",
+        "startLine": 52,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "phys.mech.simple-machines/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.simple-machines",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P28\",\"P41\",\"P54\",\"P55\",\"P62\",\"P68\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.simple-machines.md",
+        "startLine": 59,
+        "endLine": 101
+      }
+    },
+    {
+      "assetId": "phys.mech.simple-machines/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.simple-machines",
+      "title": "Assessment Battery",
+      "content": "| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (classify) | \"Wheelbarrow, tongs, scissors — classes?\" | CORRECT = 2, 3, 1 |\n| P74 (classify) | \"Single fixed pulley MA (ideal)?\" | CORRECT = 1; changes direction only |\n| P75 (boundary) | \"Fixed pulley lifts 500 N with 550 N — use?\" | CORRECT = changes the direction of the pull; efficiency ≈ 91 % |\n| P76 (transfer) | \"Car jack: 30 cm per 1 cm, 200 N lifts 4000 N — efficiency?\" | CORRECT = MA 20, VR 30, 67 % |\n| P77 (generate) | \"Ideal lever: 900 N with 150 N — arm lengths?\" | CORRECT = effort arm 6 × load arm |\n| P78 (explain) | \"Why efficiency < 100 %?\" | CORRECT = friction (and moving parts) take some work in |\n| P79 (predict) | \"More strands: effort and rope length?\" | CORRECT = effort down, rope length up |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.simple-machines.md",
+        "startLine": 182,
+        "endLine": 194
+      }
+    },
+    {
+      "assetId": "phys.mech.simple-machines/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.simple-machines",
+      "title": "Student State Matrix",
+      "content": "| State | Why here | Tell-tale behaviour | Protocol |\n|---|---|---|---|\n| S0 | No exposure | Knows a crowbar \"makes it easier\" with no quantity attached | Protocol A (Concrete) |\n| S1 | Formulas without the trade-off | Computes MA but cannot say what is given up | Protocol B (Counterexample-first) |\n| S2-MACHINE-SAVES-WORK | Machines save work or energy | \"The lever means you do less work\" | Misconception Engine → then Protocol C |\n| S2-MA-ALWAYS-GAIN | MA must exceed 1 to be useful | Calls tongs or the forearm \"bad levers\" | Misconception Engine → then Protocol C |\n| S3 | Partial — levers fine, pulleys/efficiency not | Correct MA for a lever, wrong VR for a pulley | Protocol C (Guided Questioning) |\n| S6 | Anxiety | Freezes on ratios | Protocol F (Low Pressure) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.simple-machines.md",
+        "startLine": 27,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "phys.mech.simple-machines/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.simple-machines",
+      "title": "Diagnostic Battery",
+      "content": "DB-1 (prior-exposure check):\n\"Have you used a crowbar, a bottle opener or a pulley to make a job easier?\"\n  No → S0. Enter Protocol A (Concrete).\n  Yes → DB-2.\n\nDB-2 (representation / misconception test):\n\"With a crowbar you lift a 600 N rock by pushing with only 100 N. Did you do less work than lifting the rock directly?\"\n  \"No — I pushed with less force but through a longer distance; the work is the same (or more, with friction)\" → S3. Enter Protocol C.\n  \"No\" (no reason) → S1. Enter Protocol B.\n  \"Yes — that's the point of a machine\" → SIGNAL:MISCONCEPTION:MC-MACHINE-SAVES-WORK. Enter Misconception Engine.\n  Pause / \"I don't know\" → add S6 flag; Protocol F if anxious, otherwise Protocol A.\n\nDB-3 (confidence calibration):\n\"How confident are you with machines — 1 to 5?\"\n  1–2 → add S6 flag.\n  4–5 + DB-2 wrong → add S7 flag. Override to Protocol G (challenge-first).",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-MACHINE-SAVES-WORK"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.simple-machines.md",
+        "startLine": 38,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "phys.mech.simple-machines/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.simple-machines",
+      "title": "Prerequisite Check",
+      "content": "PD-1 (for `phys.mech.work`):\n\"How much work is done lifting a 600 N rock through 0.1 m?\"\n  Cannot compute W = F × d = 60 J → flag PREREQ-GAP-WORK.\n  In-session minimum repair: one P06 (lifting a bag through a measured height) + one P34 (\"force times distance moved in its direction\") then resume. If work as force × distance is absent, schedule a `phys.mech.work` session (S4 route).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.simple-machines.md",
+        "startLine": 57,
+        "endLine": 64
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

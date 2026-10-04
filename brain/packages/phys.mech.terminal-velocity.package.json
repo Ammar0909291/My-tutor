@@ -1,0 +1,413 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.terminal-velocity-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.terminal-velocity",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:f3859d7630e2739afe816b70ae7cdebef7773dd1f704a63e4dee599d71e6c0ea",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.terminal-velocity.md": "sha256:332b21a94b9f0d900f990f6ab07562ee110f1caf676ec127976873be44f14c5a"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.mech.terminal-velocity",
+    "name": "Drag and Terminal Velocity",
+    "difficultyRaw": "proficient (3)",
+    "bloom": "analyze",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "phys.mech.viscosity"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.terminal-velocity-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.terminal-velocity (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.terminal-velocity.md": "sha256:332b21a94b9f0d900f990f6ab07562ee110f1caf676ec127976873be44f14c5a"
+      },
+      "contentHash": "sha256:2aae340f027c6be92c14b85d0fa20108fc84a2c70a4666441cc5de2dd32bf220",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.terminal-velocity.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.terminal-velocity.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.terminal-velocity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.terminal-velocity\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.terminal-velocity.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.terminal-velocity.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.terminal-velocity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.terminal-velocity\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.terminal-velocity.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.terminal-velocity.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.terminal-velocity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.terminal-velocity\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.terminal-velocity.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.terminal-velocity.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.terminal-velocity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.terminal-velocity\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.terminal-velocity.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.terminal-velocity.md#TA-5 (addresses MC-PARACHUTE-GOES-UP)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.terminal-velocity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.terminal-velocity\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.terminal-velocity.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.terminal-velocity.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.terminal-velocity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.terminal-velocity\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.terminal-velocity.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.terminal-velocity.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.terminal-velocity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.terminal-velocity\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.terminal-velocity/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "phys.mech.terminal-velocity",
+      "title": "Learning Objective",
+      "content": "[Boundary statement]\nA student who achieves mastery demonstrates:\n1. Explains with free-body diagrams why a body falling through a fluid speeds up less and less and reaches a constant terminal velocity: drag grows with speed until weight = drag + upthrust, the net force is zero and the acceleration is zero.\n2. Derives the terminal velocity of a small sphere from Stokes' law (F = 6πηrv): v_t = 2r²(ρ − σ)g / (9η), and uses it — e.g. a steel ball of radius 1 mm (ρ = 7800 kg/m³) in glycerine (σ = 1260 kg/m³, η = 1.5 Pa·s) falls at about 9.5 mm/s; doubling the radius makes v_t four times larger.\n3. Interprets a skydiver's velocity–time graph: increasing speed with decreasing slope to a first terminal velocity; on opening the parachute, drag exceeds weight, the skydiver DECELERATES (still moving down) to a new, lower terminal velocity.\n\nA student who says \"at terminal velocity no forces act\", or \"opening the parachute makes the skydiver go up\", has **NOT** achieved mastery — both confuse zero net force with zero force and velocity with acceleration, which breaks every later dynamics problem.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.terminal-velocity.md",
+        "startLine": 17,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.mech.terminal-velocity/misconception/MC-NO-FORCE-AT-TERMINAL",
+      "kind": "misconception",
+      "conceptId": "phys.mech.terminal-velocity",
+      "title": "At terminal velocity no forces act on the body",
+      "content": "### MC-NO-FORCE-AT-TERMINAL: \"At terminal velocity no forces act on the body\"\ntrigger_signal: student says forces vanish, or gravity \"stops\", once the speed is constant.\nconflict_evidence [P28]: \"At 55 m/s, does the skydiver have any less mass? Is the Earth any less able to pull on her? Then is her weight still there?\"\nbridge_text [P30]: \"Her weight is still there, and so is the air pushing up on her. Constant velocity does not mean no forces — it means the forces BALANCE, so the net force, and the acceleration, are zero.\"\nreplacement_text [P31]: \"Terminal velocity: weight = drag + upthrust; net force zero; acceleration zero; speed constant.\"\ndiscrimination_pairs [P33]: [\"terminal velocity (three forces, net zero) vs a body far out in deep space (no forces)\", \"accelerating at the start (net force down) vs terminal velocity (net force zero)\"]\ns6_path: skip P28; draw the arrows together at three speeds and watch the up-arrow grow to match the down-arrow.",
+      "localKey": "MC-NO-FORCE-AT-TERMINAL",
+      "language": "en",
+      "refs": [
+        "MC-NO-FORCE-AT-TERMINAL"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.terminal-velocity.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.mech.terminal-velocity/misconception/MC-PARACHUTE-GOES-UP",
+      "kind": "misconception",
+      "conceptId": "phys.mech.terminal-velocity",
+      "title": "Opening the parachute makes the skydiver move upward",
+      "content": "### MC-PARACHUTE-GOES-UP: \"Opening the parachute makes the skydiver move upward\"\ntrigger_signal: student infers the direction of motion from the direction of the net force; often supported by films shot from a camera that keeps falling.\nconflict_evidence [P28]: \"She was falling at 55 m/s. Could any force reverse that instantly? What does an upward net force do to a downward velocity?\"\nbridge_text [P30]: \"An upward net force gives an upward acceleration — it slows the downward motion. She keeps moving down, more and more slowly, until drag falls back to equal her weight. In the films, the camera operator is still falling fast, so she seems to shoot up past the camera.\"\nreplacement_text [P31]: \"Net force decides the acceleration, not the direction of motion. After the parachute opens: still moving down, accelerating up, until a new, lower terminal velocity.\"\ndiscrimination_pairs [P33]: [\"braking a car (moving forward, accelerating backward) vs reversing (moving backward)\", \"parachute just open (down, slowing) vs at the new terminal velocity (down, steady)\"]\ns6_path: skip P28; use the car-braking case first as a shared, everyday example.",
+      "localKey": "MC-PARACHUTE-GOES-UP",
+      "language": "en",
+      "refs": [
+        "MC-PARACHUTE-GOES-UP"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.terminal-velocity.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.mech.terminal-velocity/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.terminal-velocity",
+      "title": "The Ball in Glycerine",
+      "content": "{\"id\":\"TA-1\",\"title\":\"The Ball in Glycerine\",\"primitives\":[\"P01\",\"P04\",\"P05\",\"P06\",\"P14\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.terminal-velocity.md",
+        "startLine": 11,
+        "endLine": 18
+      }
+    },
+    {
+      "assetId": "phys.mech.terminal-velocity/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.terminal-velocity",
+      "title": "Drag Grows with Speed",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Drag Grows with Speed\",\"primitives\":[\"P02\",\"P07\",\"P13\",\"P34\",\"P49\",\"P50\",\"P51\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.terminal-velocity.md",
+        "startLine": 18,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "phys.mech.terminal-velocity/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.terminal-velocity",
+      "title": "Stokes' Terminal Velocity",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Stokes' Terminal Velocity\",\"primitives\":[\"P02\",\"P06\",\"P07\",\"P08\",\"P13\",\"P34\",\"P41\",\"P49\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.terminal-velocity.md",
+        "startLine": 26,
+        "endLine": 37
+      }
+    },
+    {
+      "assetId": "phys.mech.terminal-velocity/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.terminal-velocity",
+      "title": "The Skydiver",
+      "content": "{\"id\":\"TA-4\",\"title\":\"The Skydiver\",\"primitives\":[\"P02\",\"P07\",\"P16\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.terminal-velocity.md",
+        "startLine": 37,
+        "endLine": 43
+      }
+    },
+    {
+      "assetId": "phys.mech.terminal-velocity/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.terminal-velocity",
+      "title": "Opening the Parachute",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Opening the Parachute\",\"primitives\":[\"P02\",\"P13\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-PARACHUTE-GOES-UP\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-PARACHUTE-GOES-UP"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.terminal-velocity.md",
+        "startLine": 43,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "phys.mech.terminal-velocity/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.terminal-velocity",
+      "title": "Formative Assessment",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Formative Assessment\",\"primitives\":[\"P02\",\"P35\",\"P49\",\"P51\",\"P55\",\"P79\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.terminal-velocity.md",
+        "startLine": 50,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "phys.mech.terminal-velocity/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.terminal-velocity",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P28\",\"P41\",\"P54\",\"P55\",\"P62\",\"P68\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.terminal-velocity.md",
+        "startLine": 57,
+        "endLine": 99
+      }
+    },
+    {
+      "assetId": "phys.mech.terminal-velocity/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.terminal-velocity",
+      "title": "Assessment Battery",
+      "content": "| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (classify) | \"At terminal velocity: net force zero or no forces?\" | CORRECT = net force zero; forces balanced |\n| P74 (classify) | \"Where on the skydiver's v–t graph is a = g?\" | CORRECT = at the start (drag zero) |\n| P75 (boundary) | \"Ball density equals the liquid's — v_t?\" | CORRECT = zero; it stays where it is |\n| P76 (transfer) | \"Rising bubble — drag direction?\" | CORRECT = downward; it rises to a terminal velocity |\n| P77 (generate) | \"Sketch v–t for a ball in oil\" | CORRECT = rising curve flattening to v_t |\n| P78 (explain) | \"Why down and slowing after the chute opens?\" | CORRECT = upward net force, upward acceleration |\n| P79 (predict) | \"Radii 1 and 2 mm — ratio of v_t?\" | CORRECT = 1 : 4 |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.terminal-velocity.md",
+        "startLine": 181,
+        "endLine": 193
+      }
+    },
+    {
+      "assetId": "phys.mech.terminal-velocity/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.terminal-velocity",
+      "title": "Student State Matrix",
+      "content": "| State | Why here | Tell-tale behaviour | Protocol |\n|---|---|---|---|\n| S0 | Free fall known, drag not | Expects a falling body to speed up forever | Protocol A (Concrete) |\n| S1 | Formula without force picture | Computes v_t but cannot draw the forces at terminal velocity | Protocol B (Counterexample-first) |\n| S2-NO-FORCE-AT-TERMINAL | Constant speed = no forces | \"At terminal velocity gravity stops acting\" | Misconception Engine → then Protocol C |\n| S2-PARACHUTE-GOES-UP | Acceleration direction = motion direction | \"Opening the chute pulls the skydiver upward\" | Misconception Engine → then Protocol C |\n| S3 | Partial — force balance fine, Stokes or graphs not | Correct diagram, wrong v_t scaling | Protocol C (Guided Questioning) |\n| S6 | Anxiety on the formula | Avoids r² and density differences | Protocol F (Low Pressure) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.terminal-velocity.md",
+        "startLine": 27,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "phys.mech.terminal-velocity/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.terminal-velocity",
+      "title": "Diagnostic Battery",
+      "content": "DB-1 (prior-exposure check):\n\"Have you seen why raindrops don't hit you at hundreds of metres per second?\"\n  No → S0. Enter Protocol A (Concrete).\n  Yes → DB-2.\n\nDB-2 (representation / misconception test):\n\"A skydiver falls at a steady 55 m/s. Draw the forces on her. What is the net force?\"\n  \"Weight down, air resistance up, equal; net force zero\" → S3. Enter Protocol C.\n  \"Net force zero\" (no forces drawn) → S1. Enter Protocol B.\n  \"No forces act — she is not accelerating\" / \"only gravity, it's balanced by her speed\" → SIGNAL:MISCONCEPTION:MC-NO-FORCE-AT-TERMINAL. Enter Misconception Engine.\n  Pause → add S6 flag; Protocol F if anxious, otherwise Protocol A.\n\nDB-3 (parachute check — overlays):\n\"She opens her parachute. Which way does she move just after, and which way does she accelerate?\"\n  \"Still downward, but accelerating upward (slowing down)\" → no flag.\n  \"She moves upward\" → add SIGNAL:MISCONCEPTION:MC-PARACHUTE-GOES-UP (repair at TA-5).\n  Confident and wrong → add S7 flag. Override to Protocol G.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-NO-FORCE-AT-TERMINAL",
+        "MC-PARACHUTE-GOES-UP"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.terminal-velocity.md",
+        "startLine": 38,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "phys.mech.terminal-velocity/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.terminal-velocity",
+      "title": "Prerequisite Check",
+      "content": "PD-1 (for `phys.mech.viscosity`, and through it Newton's second law):\n\"What is Stokes' law for the drag on a small sphere, and how does the drag depend on speed?\"\n  Cannot give F = 6πηrv or that drag rises with speed → flag PREREQ-GAP-VISCOSITY.\n  In-session minimum repair: one P06 (a spoon pulled slowly and quickly through honey) + one P34 (\"faster — more or less resistance?\") then resume. If viscosity is absent, schedule a `phys.mech.viscosity` session (S4 route).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.terminal-velocity.md",
+        "startLine": 58,
+        "endLine": 65
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

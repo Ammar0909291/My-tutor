@@ -1,0 +1,415 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.variation-of-g-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.variation-of-g",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:7e261f19eaffb0c6276fc2f26763dfd83bd4056c0ab4afe36621641178b9ac2e",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.variation-of-g.md": "sha256:74213b92b799995f6dff1a5ae734617952f36e98196e7867d075e54aa0b34b1d"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.mech.variation-of-g",
+    "name": "Variation of g and Weightlessness",
+    "difficultyRaw": "proficient (3)",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "phys.mech.gravitational-field"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.variation-of-g-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.variation-of-g (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.variation-of-g.md": "sha256:74213b92b799995f6dff1a5ae734617952f36e98196e7867d075e54aa0b34b1d"
+      },
+      "contentHash": "sha256:6e72e5ee6de3df9066f8ccd7a76dbf312468fdb28abd82a42224b9a61a5aeb41",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.variation-of-g.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.variation-of-g.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.variation-of-g"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.variation-of-g\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.variation-of-g.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.variation-of-g.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.variation-of-g"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.variation-of-g\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.variation-of-g.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.variation-of-g.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.variation-of-g"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.variation-of-g\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.variation-of-g.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.variation-of-g.md#TA-4 (addresses MC-G-RISES-WITH-DEPTH)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.variation-of-g"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.variation-of-g\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.variation-of-g.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.variation-of-g.md#TA-5 (addresses MC-NO-GRAVITY-IN-ORBIT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.variation-of-g"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.variation-of-g\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.variation-of-g.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.variation-of-g.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.variation-of-g"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.variation-of-g\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.variation-of-g.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.variation-of-g.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.variation-of-g"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.variation-of-g\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.variation-of-g/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "phys.mech.variation-of-g",
+      "title": "Learning Objective",
+      "content": "[Boundary statement]\nA student who achieves mastery demonstrates:\n1. Computes g above the surface from g_h = GM/(R + h)² = g (R/(R + h))², and uses g_h ≈ g(1 − 2h/R) for h ≪ R — e.g. at the space station's height, about 400 km, g is about 8.7 m/s², roughly 89 % of its surface value.\n2. Explains why, for a uniform Earth, g falls linearly with depth, g_d = g(1 − d/R), reaching zero at the centre — only the mass inside the radius r pulls, and it grows as r³ while the distance factor goes as 1/r².\n3. Explains apparent weightlessness as free fall: in an orbiting station, gravity still acts with about 89 % of its surface strength, but the station and everything in it fall together, so nothing presses on anything and a scale reads zero. Applies the same idea to a lift: apparent weight N = m(g + a) with a upward positive.\n\nA student who says \"there is no gravity in orbit\" or \"g gets stronger as you go deeper, because you are closer to the centre\" has **NOT** achieved mastery — both block orbital motion, tides and the meaning of g as a field.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.variation-of-g.md",
+        "startLine": 17,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.mech.variation-of-g/misconception/MC-NO-GRAVITY-IN-ORBIT",
+      "kind": "misconception",
+      "conceptId": "phys.mech.variation-of-g",
+      "title": "There is no gravity in orbit — that is why astronauts float",
+      "content": "### MC-NO-GRAVITY-IN-ORBIT: \"There is no gravity in orbit — that is why astronauts float\"\ntrigger_signal: student explains floating astronauts by an absence or near-absence of gravity at orbital height.\nconflict_evidence [P28]: \"At 400 km up, g = 9.8 × (6371/6771)² ≈ 8.7 m/s² — almost 90 % of its surface value. And the Moon, about sixty times further from the Earth's centre than the station, is held in orbit by Earth's gravity. If there were no gravity at 400 km, what would the station do?\"\nbridge_text [P30]: \"It would fly off in a straight line. Gravity is what keeps bending its path into a circle: the station is falling toward the Earth all the time, and so is everything inside it. Falling together, nothing presses on anything — a scale between your feet and the floor reads zero.\"\nreplacement_text [P31]: \"Weightlessness in orbit is free fall, not the absence of gravity. Apparent weight is the normal force, N = m(g − a_down); in free fall a_down = g, so N = 0.\"\ndiscrimination_pairs [P33]: [\"astronaut in the station (gravity 8.7 m/s², apparent weight zero) vs astronaut in deep space far from any body (gravity ≈ 0)\", \"a lift in free fall (N = 0) vs a lift moving at constant speed (N = mg)\"]\ns6_path: skip P28; drop a plastic bottle with holes full of water — while it falls, the water stops pouring out.",
+      "localKey": "MC-NO-GRAVITY-IN-ORBIT",
+      "language": "en",
+      "refs": [
+        "MC-NO-GRAVITY-IN-ORBIT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.variation-of-g.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.mech.variation-of-g/misconception/MC-G-RISES-WITH-DEPTH",
+      "kind": "misconception",
+      "conceptId": "phys.mech.variation-of-g",
+      "title": "g increases as you go deeper, because you are closer to the centre",
+      "content": "### MC-G-RISES-WITH-DEPTH: \"g increases as you go deeper, because you are closer to the centre\"\ntrigger_signal: student applies GM/r² with the full Earth mass inside the Earth, predicting g largest at the centre.\nconflict_evidence [P28]: \"At the very centre, the whole Earth surrounds you equally in every direction. Which way would you be pulled?\"\nbridge_text [P30]: \"Nowhere — the pulls cancel, so g = 0 at the centre. Inside a uniform Earth, the shell of rock above you pulls equally all round and cancels out; only the ball of mass below radius r pulls, and that shrinks as r³ while 1/r² grows. Net: g ∝ r.\"\nreplacement_text [P31]: \"Above the surface g = GM/r² (falls as 1/r²). Inside a uniform Earth g = g_surface × r/R = g(1 − d/R) (falls linearly to zero). g is largest at the surface.\"\ndiscrimination_pairs [P33]: [\"g at height h (≈ g(1 − 2h/R)) vs g at depth d (g(1 − d/R)): a 32 km climb and a 64 km descent both lower g by 1 %\", \"outside the Earth: all the mass pulls vs inside: only the mass below you pulls\"]\ns6_path: skip P28; a graph of g against r — rising straight line inside, falling curve outside — drawn together.",
+      "localKey": "MC-G-RISES-WITH-DEPTH",
+      "language": "en",
+      "refs": [
+        "MC-G-RISES-WITH-DEPTH"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.variation-of-g.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.mech.variation-of-g/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.variation-of-g",
+      "title": "g Is a Field Value, Not a Constant",
+      "content": "{\"id\":\"TA-1\",\"title\":\"g Is a Field Value, Not a Constant\",\"primitives\":[\"P01\",\"P04\",\"P05\",\"P07\",\"P14\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.variation-of-g.md",
+        "startLine": 11,
+        "endLine": 18
+      }
+    },
+    {
+      "assetId": "phys.mech.variation-of-g/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.variation-of-g",
+      "title": "Height",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Height\",\"primitives\":[\"P02\",\"P07\",\"P08\",\"P13\",\"P34\",\"P49\",\"P50\",\"P51\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.variation-of-g.md",
+        "startLine": 18,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.mech.variation-of-g/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.variation-of-g",
+      "title": "Latitude and Rotation",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Latitude and Rotation\",\"primitives\":[\"P02\",\"P13\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.variation-of-g.md",
+        "startLine": 27,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "phys.mech.variation-of-g/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.variation-of-g",
+      "title": "Depth",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Depth\",\"primitives\":[\"P02\",\"P13\",\"P17\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-G-RISES-WITH-DEPTH\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-G-RISES-WITH-DEPTH"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.variation-of-g.md",
+        "startLine": 33,
+        "endLine": 41
+      }
+    },
+    {
+      "assetId": "phys.mech.variation-of-g/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.variation-of-g",
+      "title": "Weightless, Not Gravity-Free",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Weightless, Not Gravity-Free\",\"primitives\":[\"P02\",\"P13\",\"P34\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-NO-GRAVITY-IN-ORBIT\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-NO-GRAVITY-IN-ORBIT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.variation-of-g.md",
+        "startLine": 41,
+        "endLine": 50
+      }
+    },
+    {
+      "assetId": "phys.mech.variation-of-g/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.variation-of-g",
+      "title": "Formative Assessment",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Formative Assessment\",\"primitives\":[\"P02\",\"P35\",\"P49\",\"P51\",\"P55\",\"P79\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.variation-of-g.md",
+        "startLine": 50,
+        "endLine": 57
+      }
+    },
+    {
+      "assetId": "phys.mech.variation-of-g/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.variation-of-g",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P28\",\"P41\",\"P54\",\"P55\",\"P62\",\"P68\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.variation-of-g.md",
+        "startLine": 57,
+        "endLine": 99
+      }
+    },
+    {
+      "assetId": "phys.mech.variation-of-g/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.variation-of-g",
+      "title": "Assessment Battery",
+      "content": "| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (classify) | \"g at 400 km: ~0, ~4.9 or ~8.7 m/s²?\" | CORRECT = ~8.7 m/s² |\n| P74 (classify) | \"Lift at constant speed, 60 kg: scale?\" | CORRECT = 588 N (no acceleration) |\n| P75 (boundary) | \"g at the Earth's centre?\" | CORRECT = 0 |\n| P76 (transfer) | \"64 km deep, R = 6400 km: g?\" | CORRECT = 9.8 × 0.99 ≈ 9.70 m/s² |\n| P77 (generate) | \"Height where g is a quarter of surface g?\" | CORRECT = h = R (r = 2R) |\n| P78 (explain) | \"Why does g fall with depth?\" | CORRECT = only the mass below pulls; it shrinks as r³ |\n| P79 (predict) | \"Cable snaps: scale reading?\" | CORRECT = zero (free fall) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.variation-of-g.md",
+        "startLine": 181,
+        "endLine": 193
+      }
+    },
+    {
+      "assetId": "phys.mech.variation-of-g/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.variation-of-g",
+      "title": "Student State Matrix",
+      "content": "| State | Why here | Tell-tale behaviour | Protocol |\n|---|---|---|---|\n| S0 | g treated as a constant | Has never asked whether g changes | Protocol A (Concrete) |\n| S1 | Formula without consequences | Writes GM/r² but cannot say what happens down a mine | Protocol B (Counterexample-first) |\n| S2-NO-GRAVITY-IN-ORBIT | Weightless = gravity-free | \"Astronauts float because there's no gravity up there\" | Misconception Engine → then Protocol C |\n| S2-G-RISES-WITH-DEPTH | Closer = stronger, everywhere | \"g is largest at the Earth's centre\" | Misconception Engine → then Protocol C |\n| S3 | Partial — height fine, depth or lifts not | Correct g_h, wrong g_d | Protocol C (Guided Questioning) |\n| S6 | Anxiety on powers and ratios | Avoids (R/(R + h))² | Protocol F (Low Pressure) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.variation-of-g.md",
+        "startLine": 27,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "phys.mech.variation-of-g/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.variation-of-g",
+      "title": "Diagnostic Battery",
+      "content": "DB-1 (prior-exposure check):\n\"Is g exactly 9.8 m/s² everywhere on and around the Earth?\"\n  \"Yes\" / no idea → S0. Enter Protocol A (Concrete).\n  \"No, it changes with height\" → DB-2.\n\nDB-2 (representation / misconception test):\n\"The space station orbits about 400 km up. Roughly how strong is gravity there compared with the surface, and why do astronauts float?\"\n  \"About 90 % — they float because they and the station are falling together\" → S3. Enter Protocol C.\n  \"A bit less\" (no reason for floating) → S1. Enter Protocol B.\n  \"Zero / almost no gravity\" → SIGNAL:MISCONCEPTION:MC-NO-GRAVITY-IN-ORBIT. Enter Misconception Engine.\n  Pause → add S6 flag; Protocol F if anxious, otherwise Protocol A.\n\nDB-3 (depth check — overlays):\n\"Going down a deep mine, does g increase, decrease or stay the same?\"\n  \"Decrease (for a uniform Earth)\" → no flag.\n  \"Increase — closer to the centre\" → add SIGNAL:MISCONCEPTION:MC-G-RISES-WITH-DEPTH (repair at TA-4).\n  Confident and wrong on DB-2 → add S7 flag. Override to Protocol G.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-NO-GRAVITY-IN-ORBIT",
+        "MC-G-RISES-WITH-DEPTH"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.variation-of-g.md",
+        "startLine": 38,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "phys.mech.variation-of-g/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.variation-of-g",
+      "title": "Prerequisite Check",
+      "content": "PD-1 (for `phys.mech.gravitational-field`):\n\"What is the gravitational field strength at distance r from the centre of a planet of mass M?\"\n  Cannot give g = GM/r² → flag PREREQ-GAP-FIELD.\n  In-session minimum repair: one P07 (field lines thinning with distance) + one P34 (\"double r — what happens to g?\") then resume. If the inverse-square field is absent, schedule a `phys.mech.gravitational-field` session (S4 route).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.variation-of-g.md",
+        "startLine": 58,
+        "endLine": 65
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

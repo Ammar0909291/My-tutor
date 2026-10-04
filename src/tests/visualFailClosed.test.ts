@@ -58,8 +58,12 @@ const HIJACK_CASES = [
   {
     concept: 'phys.mech.viscosity',
     label: 'Viscosity',
+    // Reworded 2026-10-03: the original prose named "terminal velocity",
+    // which became a KG concept of its own (phys.mech.terminal-velocity), so
+    // a learner message naming it now legitimately resolves to it. The hijack
+    // keyword ("initial velocity") is kept.
     prose:
-      'A sphere falling through a fluid reaches terminal velocity; the ' +
+      'A sphere falling through a fluid settles to a steady speed; the ' +
       'initial velocity is zero.',
     usedToRouteTo: 'projectile',
   },

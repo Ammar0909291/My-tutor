@@ -107,6 +107,7 @@ import {
 } from '@/lib/teaching/sceneGenerators/physicsCoreScenesB13'
 import { buildPowerScene } from '@/lib/teaching/sceneGenerators/physicsCoreScenesB14'
 import { buildDensityScene, buildVernierScene, buildMassWeightScene, buildRectilinearScene } from '@/lib/teaching/sceneGenerators/physicsExtensionScenesB1'
+import { buildExperimentalGraphScene, buildSimpleMachineScene, buildVariationOfGScene, buildTerminalVelocityScene } from '@/lib/teaching/sceneGenerators/physicsExtensionScenesB2'
 import {
   buildDisplacementScene, buildVelocityScene, buildAccelerationScene, buildRelativeMotionScene, buildTensionScene,
   buildConservativeForcesScene, buildAngularMomentumScene, buildAngularMomentumConservationScene,
@@ -551,6 +552,11 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'phys.meas.measuring-instruments':  buildVernierScene,
   'phys.mech.mass-and-weight':        buildMassWeightScene,
   'phys.opt.rectilinear-propagation': buildRectilinearScene,
+  // Coverage-driven KG extension, batch 2 (2026-10-03). See physicsExtensionScenesB2.ts.
+  'phys.meas.linearisation-and-uncertainty':    buildExperimentalGraphScene,
+  'phys.mech.simple-machines':        buildSimpleMachineScene,
+  'phys.mech.variation-of-g':         buildVariationOfGScene,
+  'phys.mech.terminal-velocity':      buildTerminalVelocityScene,
   // Batch 15 (2026-09-30): promoted from domain scope. See physicsCoreScenesB15.ts.
   'phys.mech.displacement':           buildDisplacementScene,
   'phys.mech.velocity':               buildVelocityScene,

@@ -286,8 +286,8 @@ describe('the real 45-slot divergence cannot produce a duplicate', () => {
     // 429 → 437 (2026-10-03): the coverage-driven physics KG extension,
     // batch 1, adds four NEW concepts whose mcq and misconception_probe slots
     // are ladders from birth (two rungs each). Their base slugs name no row
-    // that ever existed, so Step 0.8 has nothing to refuse for them.
-    expect(bAband.size).toBe(437)
+    // that ever existed, so Step 0.8 has nothing to refuse for them. Batch 2: → 445.
+    expect(bAband.size).toBe(445)
     // `mAband` reads EVERY file in the assets directory (`allFiles()`), so
     // its size grows continuously and legitimately as any subject's seed
     // corpus is authored — physics/chemistry/biology/mathematics all add

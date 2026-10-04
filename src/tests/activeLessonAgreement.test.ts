@@ -182,9 +182,9 @@ describe('SCENARIO 5 · F1 — lesson-init entry-mode agrees with every other su
     expect(currentLesson).toBe(5)
     // Order 18 in the 238-concept KG this was measured on. The 2026-10-03
     // coverage extension placed three new nodes before it (density,
-    // measuring-instruments, mass-and-weight), so the same lesson is now 21;
+    // measuring-instruments, mass-and-weight), so the same lesson is now 22;
     // the divergence the scenario replays is unchanged.
-    expect(orderOf(NEWTONS_FIRST_LAW)).toBe(21)
+    expect(orderOf(NEWTONS_FIRST_LAW)).toBe(22)
   })
 
   it('resolveActiveLesson (the fix) resolves the SAME lesson every other surface does', () => {
@@ -193,9 +193,9 @@ describe('SCENARIO 5 · F1 — lesson-init entry-mode agrees with every other su
     const client = resolveActiveLesson(lessons, { currentLesson, completedLessons: [], activeLessonSlug: active })
 
     expect(server?.topicSlug).toBe(NEWTONS_FIRST_LAW)
-    expect(dash?.order).toBe(21)
+    expect(dash?.order).toBe(22)
     expect(client?.topicSlug).toBe(NEWTONS_FIRST_LAW)
-    expect(client?.order).toBe(21)
+    expect(client?.order).toBe(22)
   })
 
   it('decideLessonEntryMode, fed the FIXED resolver, decides against the real active lesson (order 18), not order 5', () => {
