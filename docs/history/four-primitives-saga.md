@@ -197,3 +197,10 @@ insufficient evidence → precision 6.3 % (N1 4.5 %, N2 25 %). False positives a
 format (LaTeX, list bullets, Unicode minus signs, algebra "x", implicit-product precedence).
 Recommendation: NEEDS IMPROVEMENT; no enforcement. Full record:
 `docs/qa/numeric-fact-check-step3/REPORT.md`. Detector unchanged; Step 4 not started.
+
+## 2026-10-04 — NUMERIC FACT-CHECK EXPERIMENT: CLOSED — NOT READY FOR ENFORCEMENT (owner)
+Shadow switched off (code default now `off`; only `NUMERIC_FACT_CHECK_MODE=shadow` re-enables, not
+set in Vercel). N1/N2 enforcement NOT APPROVED; N3 NOT APPROVED. Code, tests and evidence kept.
+Good on authored content, failed on production prose (precision 6.3 %); it did confirm real
+numerical errors exist in tutor replies (laser ratio, 9 J vs 11 J, ×10 wavelength). No parser
+patch or new architecture started. Record: `docs/qa/numeric-fact-check-step3/CLOSURE.md`.

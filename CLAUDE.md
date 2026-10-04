@@ -26,6 +26,10 @@ never into this file. This file only changes when a LIVE, currently-binding rule
   the adopted plan. Do not invent one.
 - If genuinely unsure whether a task is in-scope under this plan, ask before proceeding rather
   than defaulting to "continue the last autonomous campaign."
+- **Numeric fact-check experiment (N1/N2/N3): CLOSED — NOT READY FOR ENFORCEMENT (owner,
+  2026-10-04).** Production precision 6.3 %; shadow OFF by default; N1/N2 enforcement and N3 NOT
+  APPROVED. Do not patch the parser or build new numeric verification without a fresh owner
+  instruction. Record: `docs/qa/numeric-fact-check-step3/CLOSURE.md`.
 
 ## Reporting preference (ALWAYS follow — updated 2026-07-17)
 - After EVERY prompt/task — including non-coding tasks (audits, Q&A, memory updates) — ALWAYS

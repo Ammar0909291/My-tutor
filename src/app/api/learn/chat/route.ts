@@ -13614,8 +13614,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // (factCheckNumericShadow.ts). Re-checks the served reply's own
       // arithmetic and "N times more" claims and LOGS the result; servedText is
       // only read. N3 is not reachable from this module. One line per served
-      // reply so the flag rate has a denominator. NUMERIC_FACT_CHECK_MODE=off
-      // disables it; there is no serve mode.
+      // reply so the flag rate has a denominator. EXPERIMENT CLOSED 2026-10-04
+      // (precision 6.3 %, not ready for enforcement): OFF unless
+      // NUMERIC_FACT_CHECK_MODE=shadow is set explicitly; there is no serve mode.
       if (servedText.trim()) {
         try {
           const ns = await import('@/lib/teaching/factCheckNumericShadow')
