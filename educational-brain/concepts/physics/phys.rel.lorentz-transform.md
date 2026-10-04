@@ -73,6 +73,8 @@ relativistic Doppler formula, confirming that a photon's energy genuinely
 differs when measured in different relatively-moving frames, contrary to
 the assumption that energy (being "just a scalar number") stays fixed.
 
+Light from a moving source shows the relativistic Doppler effect. For a source receding at speed βc, f_obs = f_src √((1 − β)/(1 + β)): at β = 0.6 the observed frequency halves, so 600 nm light arrives at 1200 nm; approaching at the same speed, it doubles. The square root combines the classical Doppler factor with the time dilation of the source's clock.
+
 ## Mental Models
 
 **Beginner**: "Velocities always add simply, u=u'+v, even near light
@@ -285,3 +287,4 @@ No cross-subject connection found beyond physics itself.
 ## Version History
 
 - 2026-07-23 (physics EB Wave 13): initial authoring.
+- 2026-10-04 (coverage-driven KG extension, audit §C): added relativistic Doppler effect to Core Understanding, with one probe.

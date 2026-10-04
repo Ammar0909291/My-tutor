@@ -57,6 +57,8 @@ tracing out B gives ρ_A=(1/2)I — a maximally MIXED quantum state (not a
 that A was entangled with B; the more entangled the joint state, the
 more mixed the reduced subsystem becomes.
 
+Entanglement shows up directly in the density matrix. For the Bell state (|00⟩ + |11⟩)/√2 the two-qubit state is pure, yet tracing out either qubit leaves ρ = I/2, the maximally mixed state: each qubit alone looks completely random, while the pair is perfectly correlated. Bell inequalities test this: local hidden-variable theories give |S| ≤ 2 in the CHSH form, while quantum mechanics reaches 2√2 ≈ 2.83, as experiments confirm.
+
 ## Mental Models
 
 **Beginner**: "A mixed state is just a superposition written differently
@@ -282,3 +284,4 @@ science (quantum computing decoherence modeling via density matrices)
 ## Version History
 
 - 2026-07-23 (physics EB Wave 17): initial authoring.
+- 2026-10-04 (coverage-driven KG extension, audit §C): added entanglement and Bell inequalities to Core Understanding, with one probe.

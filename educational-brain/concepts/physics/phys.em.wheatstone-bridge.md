@@ -45,6 +45,8 @@ relationship, not an equality requirement (the equal-resistor case is
 merely one trivial special case among infinitely many valid balanced
 configurations).
 
+A meter bridge is a Wheatstone bridge built from a 1 m uniform wire. The unknown R and a known S sit in the two gaps, and a jockey slides along the wire until the galvanometer reads zero. At balance R/S = l/(100 − l), with l in centimetres measured from R's end, because the wire's resistance is proportional to its length. With S = 6 Ω and balance at l = 40 cm, R = 6 × 40/60 = 4 Ω.
+
 ## Mental Models
 
 **Beginner**: "The Wheatstone bridge measures the battery's voltage or
@@ -224,3 +226,4 @@ No cross-subject connection found beyond physics itself.
 ## Version History
 
 - 2026-07-23 (physics EB Wave 9): initial authoring.
+- 2026-10-04 (coverage-driven KG extension, audit §C): added meter bridge to Core Understanding, with one probe.

@@ -51,6 +51,8 @@ produces a much larger force on the larger piston — with no violation of
 energy conservation, since the large piston moves a correspondingly smaller
 distance (force is multiplied, but work in equals work out).
 
+The atmosphere presses on everything at about 1.01 × 10⁵ Pa at sea level. A mercury barometer measures it: the air's pressure on the open dish holds up a column of mercury about 760 mm tall, since ρgh = 13 600 × 9.8 × 0.76 ≈ 1.01 × 10⁵ Pa, with near-vacuum above the column. Water is 13.6 times less dense, so a water barometer would need a tube about 10.3 m tall.
+
 ## Mental Models
 
 **Beginner (arriving model)**: "Pressure pushes down, like weight." This
@@ -340,3 +342,4 @@ here.
 ## Version History
 
 - 2026-07-22 (this session, physics EB Wave 6): initial authoring.
+- 2026-10-04 (coverage-driven KG extension, audit §C): added barometer and atmospheric pressure to Core Understanding, with one probe.

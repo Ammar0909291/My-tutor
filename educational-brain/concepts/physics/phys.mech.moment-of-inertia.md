@@ -49,6 +49,8 @@ DIFFERENT, off-center pivot WITHOUT adding the Md² correction term
 systematically underestimates the true moment of inertia about that
 pivot.
 
+For a flat lamina lying in the x–y plane, the perpendicular-axis theorem gives I_z = I_x + I_y about three mutually perpendicular axes through one point. A thin ring has I = MR² about its central axis, so about any diameter I = MR²/2; a uniform disc has MR²/2 about its axis and MR²/4 about a diameter. The radius of gyration k is defined by I = Mk²: for a disc about its axis, k = R/√2 ≈ 0.71R.
+
 ## Mental Models
 
 **Beginner**: "Moment of inertia depends only on total mass — a heavier
@@ -223,3 +225,4 @@ No cross-subject connection found beyond physics itself.
 ## Version History
 
 - 2026-07-23 (physics EB Wave 9): initial authoring.
+- 2026-10-04 (coverage-driven KG extension, audit §C): added perpendicular-axis theorem and radius of gyration to Core Understanding, with one probe.

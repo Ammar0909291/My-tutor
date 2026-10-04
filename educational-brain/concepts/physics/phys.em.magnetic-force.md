@@ -40,6 +40,8 @@ The practical consequence of this combination: in a region with both E and B fie
 
 The Lorentz force also explains why charged particles spiral in magnetic fields in the presence of plasma: the component of velocity parallel to B is unaffected (no magnetic force), while the perpendicular component circles. The combination is a helix along the field direction. This is how charged particles are trapped in Earth's magnetic field, creating the Van Allen belts.
 
+Two long parallel wires carrying currents exert forces on each other: each sits in the other's magnetic field, so F/L = μ₀I₁I₂/(2πd). Currents in the same direction attract and opposite currents repel. With 1 A in each wire 1 m apart, F/L = 2 × 10⁻⁷ N/m — the basis of the ampere's definition until 2019, when the SI fixed the elementary charge at 1.602 176 634 × 10⁻¹⁹ C instead.
+
 ## Mental Models
 
 **Stage 1 — Beginner**: A magnetic field exerts a force on a moving charged particle. The force is always perpendicular to the particle's velocity — this is why a charged particle in a magnetic field travels in a circle: the force always points "sideways," never speeding up or slowing down the particle, just changing its direction. The direction of the force depends on the sign of the charge and the directions of the velocity and the field.
@@ -263,3 +265,4 @@ A second gap: the KG description does not mention circular motion or the cyclotr
 ## Version History
 
 - **v1.0** (2026-07-29): Initial full-standard entry. Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.
+- 2026-10-04 (coverage-driven KG extension, audit §C): added force between parallel currents and the ampere to Core Understanding, with one probe.

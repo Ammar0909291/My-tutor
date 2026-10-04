@@ -48,6 +48,8 @@ with little added stress) or, pushed further, fractures; unlike the
 elastic region, plastic deformation does NOT reverse when the applied
 stress is removed.
 
+A stretched wire stores elastic potential energy. In the elastic region the load rises steadily from zero to F as the extension grows to x, so the work done is the area under the force–extension line: U = ½Fx. A wire stretched by 1.0 mm under a final load of 100 N stores ½ × 100 × 0.001 = 0.05 J. Dividing by the wire's volume gives the energy density, ½ × stress × strain.
+
 ## Mental Models
 
 **Beginner**: "Stress and strain are just fancier words for force and
@@ -219,3 +221,4 @@ Flagged for the Curriculum Production Pipeline's backlog, not fixed here.
 ## Version History
 
 - 2026-07-22 (physics EB Wave 7): initial authoring.
+- 2026-10-04 (coverage-driven KG extension, audit §C): added elastic potential energy of a stretched wire to Core Understanding, with one probe.

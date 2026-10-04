@@ -48,6 +48,8 @@ generates additional charge carriers across the band gap, a dominant
 effect that overwhelms any increased scattering) — these are genuinely
 opposite responses arising from different physical mechanisms.
 
+Small resistors carry their value as coloured bands. The first two bands are digits and the third is a power-of-ten multiplier, using black 0, brown 1, red 2, orange 3, yellow 4, green 5, blue 6, violet 7, grey 8, white 9; a gold fourth band means ±5 % and silver ±10 %. Yellow, violet, orange, gold reads 47 × 10³ Ω = 47 kΩ ± 5 %.
+
 ## Mental Models
 
 **Beginner**: "A longer wire has less resistance, since there's 'more
@@ -235,3 +237,4 @@ No genuine cross-SUBJECT connection found; the strongest connection
 ## Version History
 
 - 2026-07-22 (physics EB Wave 7): initial authoring.
+- 2026-10-04 (coverage-driven KG extension, audit §C): added resistor colour code to Core Understanding, with one probe.

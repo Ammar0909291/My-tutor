@@ -37,6 +37,8 @@ Snell's law describes the geometry: n₁sinθ₁ = n₂sinθ₂. Both angles are
 
 Total internal reflection is the crucial consequence: when light travels from slow to fast (n₂ < n₁) and the angle of incidence exceeds a critical angle θ_c = arcsin(n₂/n₁), Snell's law has no solution — no refracted ray exists, and all light reflects back inside. This is the principle behind optical fibres (glass core, lower-n cladding; light bounces along the fibre indefinitely), diamond brilliance (high n = 2.42 → very small critical angle, most light reflects internally and exits through the top), and the apparent shallowness of pools.
 
+The atmosphere bends starlight and sunlight too. Air gets less dense with height, so light from the Sun near the horizon curves down towards the observer: the Sun is seen about 2 minutes before it actually rises above the horizon, and for about 2 minutes after it has set. Stars twinkle because moving pockets of air of slightly different refractive index keep shifting the path of light from a point source; planets look like tiny discs, so their flickers average out and they shine steadily.
+
 ## Mental Models
 
 **Stage 1 — Beginner**: When light passes from one transparent material to another (like from air into water), it bends. This is why a straw in a glass of water looks broken, and why swimming pools look shallower than they are. The bending happens because light travels at different speeds in different materials — slower in denser materials.
@@ -258,3 +260,4 @@ A second gap: the KG does not mention the critical angle or total internal refle
 ## Version History
 
 - **v1.0** (2026-07-29): Initial full-standard entry. Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.
+- 2026-10-04 (coverage-driven KG extension, audit §C): added atmospheric refraction: twinkling and advance sunrise to Core Understanding, with one probe.

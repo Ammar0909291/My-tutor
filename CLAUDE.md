@@ -81,8 +81,8 @@ never into this file. This file only changes when a LIVE, currently-binding rule
   Engine code per subject; `curriculumKgRegistration.test.ts` fails CI if a KG exists on disk but
   isn't registered):
   - mathematics → `docs/mathematics/kg/graph.json` (908 concepts, prefix `math.`)
-  - physics → `docs/physics/kg/graph.json` (282 concepts, 12 domains, prefix `phys.` — grew from
-    238 via the 2026-10-04 coverage-driven core + advanced tiers; see `docs/history/physics-kg-coverage-extension.md`)
+  - physics → `docs/physics/kg/graph.json` (283 concepts, 12 domains, prefix `phys.` — grew from
+    238 via the 2026-10-04 coverage-driven core + advanced tiers + §C enrichment; see `docs/history/physics-kg-coverage-extension.md`)
   - chemistry → `docs/chemistry/kg/graph.json` (186 concepts, prefix `chem.`)
   - computer_science → `docs/computer-science/kg/graph.json` (119 concepts, prefix `cs.`)
   - biology → `docs/biology/kg/graph.json` (199 concepts, 18 domains, prefix `bio.` — grew from

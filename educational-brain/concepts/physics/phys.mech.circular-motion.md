@@ -29,6 +29,8 @@ The centripetal force F = mv²/r is not a new type of force — it is simply the
 
 The common error is the "centrifugal force" confusion: the feeling of being pushed outward in a turning car. This is not a real force pushing you out — it is inertia. Your body wants to go straight; the car is pushing you inward (the seat and door exert a centripetal force on you). From inside the car (a non-inertial frame), it feels like something is pushing you outward. From an inertial frame outside, you are simply being pushed inward while wanting to go straight. Centrifugal force is a fictitious force that appears in the rotating frame's description; it does not appear in a proper inertial-frame analysis.
 
+A conical pendulum shows the centripetal force at work: a bob on a string of length L swings in a horizontal circle with the string at angle θ to the vertical. Two forces act, tension and weight. T cos θ balances mg, and the horizontal part T sin θ points to the centre and supplies mv²/r, giving tan θ = v²/(rg) and period T = 2π√(L cos θ/g): 1.42 s for L = 1.0 m at θ = 60°.
+
 ## Mental Models
 
 **Stage 1 — Concrete (ball on a string)**
@@ -263,3 +265,4 @@ The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages runtime-served e
 ## Version History
 
 - **v1.0** (2026-07-29): Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.
+- 2026-10-04 (coverage-driven KG extension, audit §C): added conical pendulum to Core Understanding, with one probe.

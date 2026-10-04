@@ -37,6 +37,8 @@ Sound requires a medium — it cannot travel through vacuum. The speed of sound 
 
 The frequency of a sound wave determines its pitch: higher frequency → higher pitch. The amplitude determines its loudness: larger pressure fluctuations → louder sound. The speed of sound in a given medium is fixed and independent of frequency — high-pitched sounds and low-pitched sounds travel at the same speed (which is why thunder and lightning are perceived with the same delay regardless of the pitch of the thunder).
 
+Two instruments playing the same note equally loudly still sound different. The note's pitch is set by its fundamental frequency and its loudness by the amplitude, but each instrument adds its own mix of overtones (harmonics), giving a different waveform. The ear hears that mix as quality, or timbre: a flute's tone is close to a pure sine wave, while a violin's is rich in harmonics.
+
 ## Mental Models
 
 **Stage 1 — Beginner**: Sound is produced by a vibrating object (a speaker, a guitar string, vocal cords). The vibration pushes air molecules, which push the next set, creating a disturbance that travels outward. Your ears detect the disturbance and your brain interprets it as sound. No air → no sound (space is silent).
@@ -258,3 +260,4 @@ Two gaps: (1) The KG does not mention the audible frequency range (20 Hz–20 kH
 ## Version History
 
 - **v1.0** (2026-07-29): Initial full-standard entry. Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.
+- 2026-10-04 (coverage-driven KG extension, audit §C): added timbre and quality of sound to Core Understanding, with one probe.

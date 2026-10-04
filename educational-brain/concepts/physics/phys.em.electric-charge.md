@@ -41,6 +41,8 @@ Two rules govern interactions between charges. Opposite charges attract each oth
 
 Charge is also quantised — it comes only in discrete packets. The smallest possible free charge is the charge of one electron: e = 1.6 × 10⁻¹⁹ coulombs. You cannot have half an electron's worth of charge. Every charged object has a charge that is an exact integer multiple of this value. The macroscopic charges we deal with (nanocoulombs, microcoulombs) are enormous numbers of individual elementary charges — a nanocoulomb is approximately 6 billion electrons — but the underlying discreteness is always there.
 
+Earthing a charged conductor connects it to the Earth, an enormous conductor whose potential stays effectively zero: charge flows along the wire until the conductor is at the Earth's potential, leaving it practically uncharged. Lightning is a huge discharge between a charged cloud and the ground; a lightning conductor, a pointed metal rod joined to a buried plate, gives that charge an easy path to earth instead of through a building.
+
 ## Mental Models
 
 **Stage 1 — Beginner**: Everything is made of atoms. Atoms contain a positive nucleus and negative electrons surrounding it. When two objects are rubbed together, electrons can transfer from one to the other. The object that gains electrons becomes negatively charged; the one that loses electrons becomes positively charged. Like charges repel; unlike charges attract.
@@ -280,3 +282,4 @@ The KG does not mention the distinction between conductors and insulators — a 
 ## Version History
 
 - **v1.0** (2026-07-29): Initial full-standard entry. Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.
+- 2026-10-04 (coverage-driven KG extension, audit §C): added lightning and earthing to Core Understanding, with one probe.

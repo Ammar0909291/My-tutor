@@ -119,9 +119,39 @@ Verified exactly against the precomputed expectation: `currentLesson` sum 8311 �
 (expected 8317); `completedLessons` sum 702 → 712 (expected 712); completed count
 11 → 11; 778 rows; 0 bookmarks.
 
+## Batch 13 and audit §C enrichment (2026-10-04) — extension finished
+
+Owner instruction: "Finish it". Scope applied: the last held advanced-tier node (special
+diodes) plus all fifteen §C enrichments. Transistors and logic gates stay excluded by
+the standing owner rule; the black-holes and stellar-evolution edges stay unchanged (no
+added edge is strictly necessary, KGCS P1).
+
+| Commit | Content |
+|---|---|
+| `39d1eaa9` | batch 13: `phys.mod.special-diodes` (Zener regulator, LED band gap, photodiode, solar cell); requires `diode-rectification` (I–V curve, KGCS P2 over `pn-junction`) and `ohms-law` (KGCS P1). No "LED" alias — it would match the English word "led". |
+| (this commit) | §C: fifteen existing concepts each get one Core Understanding paragraph and one probe |
+
+§C mechanics:
+- **Probes** go only into an existing ladder (a new difficulty rung: nine) or a brand-new
+  `true_false`/`short_answer` slot (six). None joins a singleton slot, which would
+  re-identify a seeded row and trip the bootstrap's abandoned-slug guard (P-10). The
+  legacy collision ratchet rises by exactly the nine rungs (645 → 654); the live resolver
+  still maps every probe to a unique slug.
+- **Paragraphs** carry no governing wording and no back-reference opener, so
+  `packCoreUnderstanding` admits them only into spare budget and can never displace an
+  already-exposed unit (checked before/after for all fifteen). Six are exposed to the
+  tutor's authoritative channel (moment of inertia, stress–strain, pressure in fluids,
+  Wheatstone bridge, resistivity, sound waves); nine sit in already-full entries and stay
+  in the EB file only, with the probe carrying the topic into lessons.
+- The bootstrap is create-only: the fifteen new probes reach production as new
+  identities on the next cold start; the EB paragraphs ship with the deploy.
+- `physicsCoverageEnrichment.test.ts` pins all of the above.
+
+Physics KG: 283 concepts. The coverage audit is complete apart from the two
+owner-excluded electronics nodes.
+
 ## Next
 
-Physics KG is at 282. Remaining from
-audit §B: special-purpose diodes (owner's decision); electronics (transistors, logic
-gates) stays excluded. Each future landing needs its own remap run
-right after deploy.
+Physics KG is at 283 and the coverage audit is done. Only the electronics nodes
+(transistors, logic gates) remain, excluded by owner rule. Any future node landing
+needs its own remap run right after deploy.

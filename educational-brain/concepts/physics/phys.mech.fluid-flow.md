@@ -28,6 +28,8 @@ This explains everyday flows. A thumb over the end of a hose shrinks the opening
 
 At low speeds a fluid moves in smooth layers: each particle follows the path of the one ahead, along streamlines that never cross (a particle cannot have two velocities at one point). This is streamline or laminar flow. Above a critical speed the flow breaks into irregular swirls and eddies — turbulent flow, as in rising smoke that breaks up or white water. The Reynolds number Re = ρvD/η (density, speed, pipe diameter, viscosity) judges which: in a pipe, flow is streamline below about 2000. For water (η = 10⁻³ Pa·s) in a 2 cm pipe, Re reaches 2000 at only about 0.1 m/s.
 
+Whether flow is smooth or turbulent depends on the Reynolds number, Re = ρvD/η, which compares inertia with viscosity. In a pipe, flow is laminar below about 2000 and turbulent above about 3000. Water (η = 1.0 × 10⁻³ Pa·s) at 1.0 m/s in a 2.0 cm pipe has Re = 1000 × 1.0 × 0.02/0.001 = 20 000, which is turbulent; slowed to 0.1 m/s it has Re = 2000, at the edge of laminar flow.
+
 ## Mental Models
 
 - **Beginner (arriving)**: squeezing a flow slows it; flow gets used up along a pipe.
@@ -226,3 +228,4 @@ node.
 ## Version History
 
 - **v1.0** (2026-10-03): Initial full-standard entry, written with the KG node under the coverage-driven extension.
+- 2026-10-04 (coverage-driven KG extension, audit §C): added Reynolds number to Core Understanding, with one probe.

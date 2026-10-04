@@ -160,6 +160,9 @@ describe('authoredSeedAssets — canonical slug uniqueness', () => {
     //         misconception_probe ladder from birth — two legacy collisions
     //         per concept, nothing orphaned).
     // -> 645 (batch 13 of the same extension, same shape).
+    // -> 654 (audit §C enrichment of fifteen existing concepts: nine new
+    //         rungs on existing ladders, one collision each; six fresh
+    //         true_false/short_answer slots add none, nothing orphaned).
     // -> 643 (batch 12 of the same extension, same shape).
     // -> 641 (batch 11 of the same extension, same shape).
     // -> 633 (batch 10 of the same extension, same shape).
@@ -179,7 +182,7 @@ describe('authoredSeedAssets — canonical slug uniqueness', () => {
     // asserts it maps every authored probe to a unique slug (0 discarded) —
     // that is the real invariant. This stays a ratchet on the legacy measure
     // so an accidental collision still cannot pass unnoticed.
-    const KNOWN_DISCARDED = 645
+    const KNOWN_DISCARDED = 654
     const slugs = ALL_PROBES.filter((p) => isPhysics(p.conceptId)).map(probeSlug)
     expect(discarded(slugs)).toBeLessThanOrEqual(KNOWN_DISCARDED)
   })

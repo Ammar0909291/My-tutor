@@ -32,6 +32,8 @@ Comparing this to the ideal gas law PV = nRT gives the key result: average kinet
 
 The root mean square speed follows: v_rms = √(3k_BT/m), where m is the mass of one molecule. At room temperature, nitrogen molecules move at roughly 500 m/s. Lighter molecules (hydrogen) move faster at the same temperature; heavier molecules (CO₂) move slower. This explains effusion (lighter gases escape faster through a tiny hole) and the composition of planetary atmospheres (light gases like hydrogen escape Earth's gravity over geological time; heavy gases are retained).
 
+Molecules travel a short distance between collisions. The mean free path is λ = 1/(√2 π d² n), with d the molecular diameter and n the number density. For air at room conditions, d ≈ 3.7 × 10⁻¹⁰ m and n ≈ 2.7 × 10²⁵ m⁻³ give λ ≈ 6 × 10⁻⁸ m, about 60 nm or some 160 molecular diameters, which is why gases mix by diffusion slowly despite molecular speeds of hundreds of metres a second.
+
 ## Mental Models
 
 ### Stage 1 — Intuitive (no formalism)
@@ -309,3 +311,4 @@ The AssetIdentity pipeline (`src/lib/teaching/assets/`) manages runtime-served e
 ## Version History
 
 - **v1.0** (2026-07-29): Migrated from pre-standard format to EDUCATIONAL_BRAIN_STANDARD.md v1.0 21-section structure. All sections verified against Quality Gates 1–8.
+- 2026-10-04 (coverage-driven KG extension, audit §C): added mean free path to Core Understanding, with one probe.

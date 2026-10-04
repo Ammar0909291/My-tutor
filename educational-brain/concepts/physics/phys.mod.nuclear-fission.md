@@ -54,6 +54,8 @@ neutron per fission, after all losses, triggers a new fission, not that
 the entire uranium mass converts to energy — but Δm/m≈0.09% (0.215 u out
 of 235 u); 99.91% of the mass-energy remains in the fission products.
 
+A thermal reactor controls its chain reaction with two parts. The moderator, such as water, heavy water or graphite, slows the fast neutrons released by fission (about 2 MeV) to thermal energies (about 0.025 eV), where uranium-235 is far more likely to capture them and split. Control rods of boron or cadmium absorb neutrons; moving them in or out keeps, on average, exactly one neutron from each fission going on to cause another, so the power stays steady.
+
 ## Mental Models
 
 **Beginner**: "A malfunctioning reactor could explode like a bomb;
@@ -267,3 +269,4 @@ the same BE/A diagram; this EB entry and `phys.mod.nuclear-fusion`
 ## Version History
 
 - 2026-07-23 (physics EB Wave 17): initial authoring.
+- 2026-10-04 (coverage-driven KG extension, audit §C): added reactor moderators and control rods to Core Understanding, with one probe.
