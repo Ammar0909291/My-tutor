@@ -1,0 +1,415 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.therm.specific-heats-of-gases-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.therm.specific-heats-of-gases",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:15fe4fec0762d3247b1b0ef4d5e44c29546d9ae1d76257755c658c6148602328",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.therm.specific-heats-of-gases.md": "sha256:1e628e6d24eb1c2e1fc3703e8770ff1cd92b48100483e442137a155559063aff"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.therm.specific-heats-of-gases",
+    "name": "Cp, Cv, Mayer's Relation and Gamma",
+    "difficultyRaw": "proficient (3)",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "phys.therm.first-law"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.therm.specific-heats-of-gases-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.therm.specific-heats-of-gases (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.therm.specific-heats-of-gases.md": "sha256:1e628e6d24eb1c2e1fc3703e8770ff1cd92b48100483e442137a155559063aff"
+      },
+      "contentHash": "sha256:31c45b0a44f6202f6a2a52e60b4205e26878cf751e29f84fdd9ff8fb15640a5c",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.therm.specific-heats-of-gases.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.specific-heats-of-gases.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.specific-heats-of-gases"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.specific-heats-of-gases\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.specific-heats-of-gases.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.specific-heats-of-gases.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.specific-heats-of-gases"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.specific-heats-of-gases\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.specific-heats-of-gases.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.specific-heats-of-gases.md#TA-3 (addresses MC-CP-EQUALS-CV)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.specific-heats-of-gases"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.specific-heats-of-gases\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.specific-heats-of-gases.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.specific-heats-of-gases.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.specific-heats-of-gases"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.specific-heats-of-gases\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.specific-heats-of-gases.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.specific-heats-of-gases.md#TA-5 (addresses MC-GAMMA-SAME-ALL-GASES)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.specific-heats-of-gases"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.specific-heats-of-gases\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.specific-heats-of-gases.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.specific-heats-of-gases.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.specific-heats-of-gases"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.specific-heats-of-gases\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.therm.specific-heats-of-gases.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.therm.specific-heats-of-gases.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.therm.specific-heats-of-gases"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.therm.specific-heats-of-gases\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.therm.specific-heats-of-gases/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "phys.therm.specific-heats-of-gases",
+      "title": "Learning Objective",
+      "content": "[Boundary statement]\nA student who achieves mastery demonstrates:\n1. Defines the molar heat capacities Cv (heat per mole per kelvin at constant volume) and Cp (at constant pressure) and explains, from the first law Q = ΔU + W, why Cp > Cv: at constant volume no work is done and all the heat raises the internal energy; at constant pressure the gas also expands and does work pΔV = nRΔT, so more heat is needed for the same temperature rise — Mayer's relation, Cp − Cv = R.\n2. Uses equipartition — each degree of freedom carries ½RT per mole, so Cv = (f/2)R: monatomic gases (f = 3) have Cv = 1.5R ≈ 12.5 J mol⁻¹ K⁻¹, Cp = 2.5R, γ = Cp/Cv = 5/3; diatomic gases near room temperature (f = 5) have Cv = 2.5R ≈ 20.8, Cp = 3.5R ≈ 29.1, γ = 7/5.\n3. Applies it — heating 2 mol of nitrogen by 10 K needs about 416 J at constant volume but 582 J at constant pressure; the 166 J difference, nRΔT, is the work done pushing the piston back.\n\nA student who thinks a gas has one heat capacity whatever the conditions, or that γ is the same for every gas, has **NOT** achieved mastery — those ideas break adiabatic processes, the speed of sound and engine analysis.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.specific-heats-of-gases.md",
+        "startLine": 17,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.therm.specific-heats-of-gases/misconception/MC-CP-EQUALS-CV",
+      "kind": "misconception",
+      "conceptId": "phys.therm.specific-heats-of-gases",
+      "title": "A gas has a single heat capacity whatever the conditions",
+      "content": "### MC-CP-EQUALS-CV: \"A gas has a single heat capacity whatever the conditions\"\ntrigger_signal: student treats the heat needed to warm a gas as independent of whether volume or pressure is held fixed, carrying over the single 'specific heat' of solids and liquids.\nconflict_evidence [P28]: \"Heated at constant pressure, the gas pushes a piston up and lifts a weight. That takes energy. Heated in a sealed can, nothing moves. If both get the same heat, where does the energy to lift the weight come from?\"\nbridge_text [P30]: \"It must come from the heat, so at constant pressure more heat is needed for the same temperature rise: the internal energy still rises by nCvΔT (it depends only on temperature), and on top of that the gas does work pΔV = nRΔT. Hence Cp = Cv + R. For solids and liquids the expansion is tiny, so the two are nearly equal — which is why the difference is easy to overlook.\"\nreplacement_text [P31]: \"Gases have two molar heat capacities: Cv (no work) and Cp = Cv + R (with expansion work).\"\ndiscrimination_pairs [P33]: [\"2 mol N₂, +10 K at constant V: ≈ 416 J\", \"the same at constant p: ≈ 582 J — the extra 166 J is work\"]\ns6_path: skip P28; show the two energy-flow diagrams side by side.",
+      "localKey": "MC-CP-EQUALS-CV",
+      "language": "en",
+      "refs": [
+        "MC-CP-EQUALS-CV"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.specific-heats-of-gases.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.therm.specific-heats-of-gases/misconception/MC-GAMMA-SAME-ALL-GASES",
+      "kind": "misconception",
+      "conceptId": "phys.therm.specific-heats-of-gases",
+      "title": "γ is the same (1.4) for every gas",
+      "content": "### MC-GAMMA-SAME-ALL-GASES: \"γ is the same (1.4) for every gas\"\ntrigger_signal: student uses γ = 1.4 for any gas, including monatomic gases, having memorised the value for air.\nconflict_evidence [P28]: \"Helium atoms can't rotate in any way that stores energy; nitrogen molecules can tumble about two axes. Which gas needs more heat per kelvin at constant volume? So can their Cp/Cv be equal?\"\nbridge_text [P30]: \"Nitrogen stores extra energy in rotation, so its Cv is larger: 2.5R against helium's 1.5R. Both Cp values are Cv + R, so γ = (Cv + R)/Cv = 1 + R/Cv differs: 5/3 ≈ 1.67 for helium, 7/5 = 1.4 for nitrogen and air. 1.4 is the value for diatomic gases, not a universal constant.\"\nreplacement_text [P31]: \"γ = 1 + 2/f: 5/3 for monatomic gases (f = 3), 7/5 for diatomic gases near room temperature (f = 5).\"\ndiscrimination_pairs [P33]: [\"helium, argon: γ = 1.67\", \"nitrogen, oxygen, air: γ = 1.40\"]\ns6_path: skip P28; a two-row table of f, Cv, Cp, γ.",
+      "localKey": "MC-GAMMA-SAME-ALL-GASES",
+      "language": "en",
+      "refs": [
+        "MC-GAMMA-SAME-ALL-GASES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.specific-heats-of-gases.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.therm.specific-heats-of-gases/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.specific-heats-of-gases",
+      "title": "The Can and the Piston",
+      "content": "{\"id\":\"TA-1\",\"title\":\"The Can and the Piston\",\"primitives\":[\"P01\",\"P04\",\"P05\",\"P06\",\"P14\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.specific-heats-of-gases.md",
+        "startLine": 11,
+        "endLine": 18
+      }
+    },
+    {
+      "assetId": "phys.therm.specific-heats-of-gases/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.specific-heats-of-gases",
+      "title": "Cv and Cp",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Cv and Cp\",\"primitives\":[\"P02\",\"P06\",\"P08\",\"P13\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.specific-heats-of-gases.md",
+        "startLine": 18,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "phys.therm.specific-heats-of-gases/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.specific-heats-of-gases",
+      "title": "One Gas, Two Heat Capacities",
+      "content": "{\"id\":\"TA-3\",\"title\":\"One Gas, Two Heat Capacities\",\"primitives\":[\"P02\",\"P34\",\"P41\",\"P49\",\"P50\",\"P51\",\"P52\",\"P55\"],\"addresses\":[\"MC-CP-EQUALS-CV\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-CP-EQUALS-CV"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.specific-heats-of-gases.md",
+        "startLine": 26,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "phys.therm.specific-heats-of-gases/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.specific-heats-of-gases",
+      "title": "Where Cv Comes From",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Where Cv Comes From\",\"primitives\":[\"P02\",\"P13\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.specific-heats-of-gases.md",
+        "startLine": 35,
+        "endLine": 41
+      }
+    },
+    {
+      "assetId": "phys.therm.specific-heats-of-gases/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.specific-heats-of-gases",
+      "title": "γ Depends on the Gas",
+      "content": "{\"id\":\"TA-5\",\"title\":\"γ Depends on the Gas\",\"primitives\":[\"P02\",\"P13\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-GAMMA-SAME-ALL-GASES\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-GAMMA-SAME-ALL-GASES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.specific-heats-of-gases.md",
+        "startLine": 41,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "phys.therm.specific-heats-of-gases/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.specific-heats-of-gases",
+      "title": "Formative Assessment",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Formative Assessment\",\"primitives\":[\"P02\",\"P35\",\"P49\",\"P51\",\"P55\",\"P79\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.specific-heats-of-gases.md",
+        "startLine": 48,
+        "endLine": 55
+      }
+    },
+    {
+      "assetId": "phys.therm.specific-heats-of-gases/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.therm.specific-heats-of-gases",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P28\",\"P41\",\"P54\",\"P55\",\"P62\",\"P68\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.specific-heats-of-gases.md",
+        "startLine": 55,
+        "endLine": 97
+      }
+    },
+    {
+      "assetId": "phys.therm.specific-heats-of-gases/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.therm.specific-heats-of-gases",
+      "title": "Assessment Battery",
+      "content": "| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (classify) | \"γ = 1.4\" | CORRECT = diatomic |\n| P74 (classify) | \"Which needs more heat for +10 K: constant p or constant V?\" | CORRECT = constant p |\n| P75 (boundary) | \"Cp ≈ Cv for solids\" | CORRECT = expansion work is negligible |\n| P76 (transfer) | \"Sound in helium\" | CORRECT = v ∝ √(γRT/M); larger γ (and much smaller M) |\n| P77 (generate) | \"Show Cp ≠ Cv\" | CORRECT = heat equal amounts of gas in a sealed can and a free-piston cylinder; compare temperature rises |\n| P78 (explain) | \"Origin of R\" | CORRECT = work pΔV = nRΔT at constant pressure |\n| P79 (predict) | \"γ = 1.67\" | CORRECT = monatomic |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.specific-heats-of-gases.md",
+        "startLine": 179,
+        "endLine": 191
+      }
+    },
+    {
+      "assetId": "phys.therm.specific-heats-of-gases/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.therm.specific-heats-of-gases",
+      "title": "Student State Matrix",
+      "content": "| State | Why here | Tell-tale behaviour | Protocol |\n|---|---|---|---|\n| S0 | Only \"specific heat of a substance\" known | Cannot say why conditions matter | Protocol A (Concrete) |\n| S1 | Cp − Cv = R recited | Cannot say where the R comes from | Protocol B (Counterexample-first) |\n| S2-CP-EQUALS-CV | One heat capacity per substance | \"Heating a gas takes the same energy either way\" | Misconception Engine → then Protocol C |\n| S2-GAMMA-SAME-ALL-GASES | γ memorised as 1.4 | \"γ is 1.4 for every gas\" | Misconception Engine → then Protocol C |\n| S3 | Partial — Mayer fine, equipartition not | Cannot predict γ for helium | Protocol C (Guided Questioning) |\n| S6 | Anxiety on symbols | Avoids subscripts and fractions | Protocol F (Low Pressure) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.specific-heats-of-gases.md",
+        "startLine": 27,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "phys.therm.specific-heats-of-gases/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.therm.specific-heats-of-gases",
+      "title": "Diagnostic Battery",
+      "content": "DB-1 (prior-exposure check):\n\"Does it take the same heat to warm a gas by 10 K in a sealed rigid can as in a cylinder with a freely moving piston?\"\n  \"The same\" or no idea → S0. Enter Protocol A (Concrete).\n  \"More with the piston — the gas also does work pushing it\" → DB-2.\n\nDB-2 (representation / misconception test):\n\"For an ideal gas, Cp − Cv = ? and why?\"\n  \"R — at constant pressure the gas also does work pΔV = nRΔT\" → S3. Enter Protocol C.\n  \"R\" (no reason) → S1. Enter Protocol B.\n  \"Zero — a gas has one heat capacity\" → SIGNAL:MISCONCEPTION:MC-CP-EQUALS-CV. Enter Misconception Engine.\n  Pause → add S6 flag; Protocol F if anxious, otherwise Protocol A.\n\nDB-3 (γ check — overlays):\n\"Is γ = Cp/Cv the same for helium and for nitrogen?\"\n  \"No — 5/3 for monatomic helium, 7/5 for diatomic nitrogen\" → no flag.\n  \"Yes, 1.4 for all gases\" → add SIGNAL:MISCONCEPTION:MC-GAMMA-SAME-ALL-GASES (repair at TA-5).\n  Confident and wrong on DB-2 → add S7 flag. Override to Protocol G.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-CP-EQUALS-CV",
+        "MC-GAMMA-SAME-ALL-GASES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.specific-heats-of-gases.md",
+        "startLine": 38,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "phys.therm.specific-heats-of-gases/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.therm.specific-heats-of-gases",
+      "title": "Prerequisite Check",
+      "content": "PD-1 (for `phys.therm.first-law`):\n\"State the first law. A gas absorbs 500 J and does 200 J of work. ΔU?\"\n  Cannot say \"Q = ΔU + W; ΔU = 300 J\" → flag PREREQ-GAP-FIRST-LAW.\n  In-session minimum repair: one P06 (energy-flow diagram for a heated piston) + one P34 (\"Q = 300 J, W = 100 J: ΔU?\") then resume. If absent, schedule the missing session (S4 route).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.therm.specific-heats-of-gases.md",
+        "startLine": 58,
+        "endLine": 65
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

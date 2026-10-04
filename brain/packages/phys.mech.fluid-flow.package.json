@@ -1,0 +1,414 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.fluid-flow-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.fluid-flow",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:a1ae735671e0ea2491a92a7d0238a3c8802915e84358d14a69e41cc1bbfcb1d4",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.fluid-flow.md": "sha256:582dfb54b574d2360348fe5dd34e1e9e5e6c408be7fa9afe4503a7e019a2327b"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.mech.fluid-flow",
+    "name": "Equation of Continuity, Streamline and Turbulent Flow",
+    "difficultyRaw": "proficient (3)",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "phys.mech.pressure-fluids"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.fluid-flow-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.fluid-flow (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.fluid-flow.md": "sha256:582dfb54b574d2360348fe5dd34e1e9e5e6c408be7fa9afe4503a7e019a2327b"
+      },
+      "contentHash": "sha256:b93f216ac2b4666abc6fbde18e45d29ca73d2b59434f79910256f364c1cb0c36",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.fluid-flow.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.fluid-flow.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.fluid-flow"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.fluid-flow\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.fluid-flow.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.fluid-flow.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.fluid-flow"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.fluid-flow\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.fluid-flow.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.fluid-flow.md#TA-3 (addresses MC-NARROWER-SLOWER, MC-FLOW-RATE-CHANGES)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.fluid-flow"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.fluid-flow\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.fluid-flow.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.fluid-flow.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.fluid-flow"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.fluid-flow\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.fluid-flow.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.fluid-flow.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.fluid-flow"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.fluid-flow\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.fluid-flow.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.fluid-flow.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.fluid-flow"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.fluid-flow\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.fluid-flow.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.fluid-flow.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.fluid-flow"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.fluid-flow\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.fluid-flow/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "phys.mech.fluid-flow",
+      "title": "Learning Objective",
+      "content": "[Boundary statement]\nA student who achieves mastery demonstrates:\n1. Explains that in steady flow of an incompressible fluid no fluid piles up or disappears, so the same volume passes every cross-section each second: the volume flow rate Q = Av is constant, A₁v₁ = A₂v₂ — the equation of continuity.\n2. Applies it — water flowing at 1.5 m/s through a 4 cm² pipe (0.6 L/s) speeds up to 6 m/s where the pipe narrows to 1 cm²; a thumb over a hose makes the water leave faster; a falling stream of tap water narrows because it speeds up.\n3. Distinguishes streamline flow (smooth layers, each particle following the path of the one ahead — streamlines never cross) from turbulent flow (irregular eddies), and states that flow becomes turbulent above a critical speed, judged by the Reynolds number Re = ρvD/η — roughly streamline below 2000 in a pipe, so water in a 2 cm pipe becomes turbulent above about 0.1 m/s.\n\nA student who thinks a fluid slows down where a pipe narrows, or that the flow rate falls along a pipe as fluid is \"used up\", has **NOT** achieved mastery — those ideas block Bernoulli's principle and every pipe, artery and river problem.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.fluid-flow.md",
+        "startLine": 17,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.mech.fluid-flow/misconception/MC-NARROWER-SLOWER",
+      "kind": "misconception",
+      "conceptId": "phys.mech.fluid-flow",
+      "title": "A fluid slows down where a pipe narrows",
+      "content": "### MC-NARROWER-SLOWER: \"A fluid slows down where a pipe narrows\"\ntrigger_signal: student predicts a lower speed in a constriction, reasoning that the fluid is \"squeezed\" or finds it \"harder to get through\".\nconflict_evidence [P28]: \"If water slowed in the narrow part, less water would cross it each second than arrives from the wide part. Where would the extra water go, in a full, rigid pipe?\"\nbridge_text [P30]: \"Nowhere — water hardly compresses and the pipe cannot bulge, so it cannot pile up. The only way the same volume can get through a smaller opening each second is to move faster. That is why your thumb over the hose makes the jet faster, and a river races through a gorge.\"\nreplacement_text [P31]: \"A₁v₁ = A₂v₂: speed is inversely proportional to cross-sectional area — a quarter of the area, four times the speed.\"\ndiscrimination_pairs [P33]: [\"wide section, 4 cm²: 1.5 m/s\", \"narrow section, 1 cm²: 6 m/s — same 0.6 L/s\"]\ns6_path: skip P28; watch the hose jet with and without a thumb.",
+      "localKey": "MC-NARROWER-SLOWER",
+      "language": "en",
+      "refs": [
+        "MC-NARROWER-SLOWER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.fluid-flow.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.mech.fluid-flow/misconception/MC-FLOW-RATE-CHANGES",
+      "kind": "misconception",
+      "conceptId": "phys.mech.fluid-flow",
+      "title": "The flow rate falls along a pipe as fluid is used up",
+      "content": "### MC-FLOW-RATE-CHANGES: \"The flow rate falls along a pipe as fluid is used up\"\ntrigger_signal: student expects less fluid per second to leave a leak-free pipe than enters it, as though flowing consumes fluid.\nconflict_evidence [P28]: \"Fill a pipe completely with water. If 0.6 L entered each second but only 0.5 L left, where would the other 0.1 L go each second?\"\nbridge_text [P30]: \"It would have to pile up inside — impossible in a full, rigid pipe — or leak out. In steady flow the pipe neither gains nor loses water, so exactly as much leaves each second as enters. Friction can reduce the pressure along a pipe, but not the volume flowing per second.\"\nreplacement_text [P31]: \"In steady incompressible flow, Q = Av is the same at every section; only the speed changes where the area changes.\"\ndiscrimination_pairs [P33]: [\"flow rate Q: the same everywhere along the pipe\", \"speed v: changes with area\"]\ns6_path: skip P28; fill a jug from both ends of the same hose in turn — same time.",
+      "localKey": "MC-FLOW-RATE-CHANGES",
+      "language": "en",
+      "refs": [
+        "MC-FLOW-RATE-CHANGES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.fluid-flow.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.mech.fluid-flow/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.fluid-flow",
+      "title": "The Hose and the Thumb",
+      "content": "{\"id\":\"TA-1\",\"title\":\"The Hose and the Thumb\",\"primitives\":[\"P01\",\"P04\",\"P05\",\"P06\",\"P14\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.fluid-flow.md",
+        "startLine": 11,
+        "endLine": 18
+      }
+    },
+    {
+      "assetId": "phys.mech.fluid-flow/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.fluid-flow",
+      "title": "The Equation of Continuity",
+      "content": "{\"id\":\"TA-2\",\"title\":\"The Equation of Continuity\",\"primitives\":[\"P02\",\"P06\",\"P08\",\"P13\",\"P34\",\"P49\",\"P50\",\"P51\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.fluid-flow.md",
+        "startLine": 18,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.mech.fluid-flow/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.fluid-flow",
+      "title": "Faster, Not Slower",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Faster, Not Slower\",\"primitives\":[\"P02\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-FLOW-RATE-CHANGES\",\"MC-NARROWER-SLOWER\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-NARROWER-SLOWER",
+        "MC-FLOW-RATE-CHANGES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.fluid-flow.md",
+        "startLine": 27,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "phys.mech.fluid-flow/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.fluid-flow",
+      "title": "Rivers and Arteries",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Rivers and Arteries\",\"primitives\":[\"P02\",\"P13\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.fluid-flow.md",
+        "startLine": 36,
+        "endLine": 42
+      }
+    },
+    {
+      "assetId": "phys.mech.fluid-flow/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.fluid-flow",
+      "title": "Streamline and Turbulent Flow",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Streamline and Turbulent Flow\",\"primitives\":[\"P02\",\"P13\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.fluid-flow.md",
+        "startLine": 42,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "phys.mech.fluid-flow/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.fluid-flow",
+      "title": "Formative Assessment",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Formative Assessment\",\"primitives\":[\"P02\",\"P35\",\"P49\",\"P51\",\"P55\",\"P79\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.fluid-flow.md",
+        "startLine": 48,
+        "endLine": 55
+      }
+    },
+    {
+      "assetId": "phys.mech.fluid-flow/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.fluid-flow",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P28\",\"P41\",\"P54\",\"P55\",\"P62\",\"P68\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.fluid-flow.md",
+        "startLine": 55,
+        "endLine": 97
+      }
+    },
+    {
+      "assetId": "phys.mech.fluid-flow/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.fluid-flow",
+      "title": "Assessment Battery",
+      "content": "| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (classify) | \"Smooth smoke vs swirls\" | CORRECT = swirls are turbulent |\n| P74 (classify) | \"Narrow section: faster or slower?\" | CORRECT = faster |\n| P75 (boundary) | \"Can streamlines cross?\" | CORRECT = no — a particle can't have two velocities at one point |\n| P76 (transfer) | \"Capillaries slow\" | CORRECT = their total area is much larger than the aorta's |\n| P77 (generate) | \"Nozzle for 3× speed\" | CORRECT = exit area 2/3 cm² |\n| P78 (explain) | \"Why Av constant\" | CORRECT = incompressible, no piling up, same volume per second |\n| P79 (predict) | \"Diameter halves\" | CORRECT = speed ×4 |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.fluid-flow.md",
+        "startLine": 179,
+        "endLine": 191
+      }
+    },
+    {
+      "assetId": "phys.mech.fluid-flow/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.fluid-flow",
+      "title": "Student State Matrix",
+      "content": "| State | Why here | Tell-tale behaviour | Protocol |\n|---|---|---|---|\n| S0 | No model of flow | Cannot say why a hose squirts further when squeezed | Protocol A (Concrete) |\n| S1 | A₁v₁ = A₂v₂ recited | Cannot say why it must hold | Protocol B (Counterexample-first) |\n| S2-NARROWER-SLOWER | Squeezing = slowing | \"Water slows down in the narrow part — it's harder to get through\" | Misconception Engine → then Protocol C |\n| S2-FLOW-RATE-CHANGES | Fluid consumed | \"Less water flows out at the far end of the pipe\" | Misconception Engine → then Protocol C |\n| S3 | Partial — continuity fine, flow types not | Cannot explain turbulence | Protocol C (Guided Questioning) |\n| S6 | Anxiety on unit conversions | Avoids cm² to m² | Protocol F (Low Pressure) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.fluid-flow.md",
+        "startLine": 27,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "phys.mech.fluid-flow/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.fluid-flow",
+      "title": "Diagnostic Battery",
+      "content": "DB-1 (prior-exposure check):\n\"Why does water squirt further when you put your thumb over the end of a hose?\"\n  No idea, or \"more pressure from the thumb\" → S0. Enter Protocol A (Concrete).\n  \"The opening is smaller, so the water must come out faster\" → DB-2.\n\nDB-2 (representation / misconception test):\n\"Water flows at 1.5 m/s through a pipe of cross-section 4 cm², which then narrows to 1 cm². How fast does it flow in the narrow part?\"\n  \"6 m/s — the same volume per second must pass, so A × v stays 6 cm²·m/s\" → S3. Enter Protocol C.\n  \"6 m/s\" (no reason) → S1. Enter Protocol B.\n  \"Slower — about 0.4 m/s, it's squeezed\" → SIGNAL:MISCONCEPTION:MC-NARROWER-SLOWER. Enter Misconception Engine.\n  Pause → add S6 flag; Protocol F if anxious, otherwise Protocol A.\n\nDB-3 (flow-rate check — overlays):\n\"In a long horizontal pipe with steady flow and no leaks, is the volume of water leaving each second less than the volume entering?\"\n  \"No — the same; water can't pile up or vanish\" → no flag.\n  \"Yes — some is used up along the way\" → add SIGNAL:MISCONCEPTION:MC-FLOW-RATE-CHANGES (repair at TA-3).\n  Confident and wrong on DB-2 → add S7 flag. Override to Protocol G.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-NARROWER-SLOWER",
+        "MC-FLOW-RATE-CHANGES"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.fluid-flow.md",
+        "startLine": 38,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "phys.mech.fluid-flow/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.fluid-flow",
+      "title": "Prerequisite Check",
+      "content": "PD-1 (for `phys.mech.pressure-fluids`):\n\"What is pressure, and how does it act in a fluid?\"\n  Cannot say \"force per area, acting in all directions\" → flag PREREQ-GAP-PRESSURE.\n  In-session minimum repair: one P06 (water jets from holes at different depths) + one P34 (\"100 N on 0.02 m²: pressure?\") then resume. If absent, schedule the missing session (S4 route).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.fluid-flow.md",
+        "startLine": 58,
+        "endLine": 65
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

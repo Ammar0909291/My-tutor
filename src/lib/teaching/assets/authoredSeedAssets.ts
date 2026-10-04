@@ -54708,6 +54708,342 @@ const NUCL_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.mech.non-inertial-frames ───────────────────────────────────────────
+const NINF = 'phys.mech.non-inertial-frames'
+const NINF_SRC = 'docs/curriculum/blueprints/phys.mech.non-inertial-frames.md'
+
+const NINF_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: NINF,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Newton\'s laws hold as they stand only in inertial frames — frames that are not accelerating. When a bus brakes, a standing passenger lurches forward although nothing pushed them: from the roadside, the bus slowed and the passenger simply kept moving. From inside the bus the passenger seems to accelerate with no force acting, because the bus is a non-inertial frame. Newton\'s laws can still be used inside an accelerating frame if every body of mass m is given an extra pseudo force −ma, opposite to the frame\'s acceleration a. A pseudo force has no physical agent and no reaction partner. Bathroom scales read the normal force, not gravity: in a lift accelerating upward at 2 m/s², a 60 kg person reads N = m(g + a) = 60 × 11.8 = 708 N; accelerating downward at 2 m/s², 468 N; at steady speed, 588 N; in free fall, zero — which is why astronauts falling around the Earth with their station feel weightless. A pendulum in a car accelerating at 3 m/s² hangs tilted back by tan⁻¹(3/9.8) ≈ 17°. A rotating frame is accelerating too: a 60 kg passenger in a car taking a 50 m bend at 15 m/s feels pushed outward by m v²/r = 270 N — the centrifugal pseudo force of the car\'s frame. From the road there is no outward force: the seat or door pushes the passenger inward, supplying the centripetal force.',
+    targetedMisconceptions: [`${NINF}:MC-CENTRIFUGAL-IN-INERTIAL-FRAME`, `${NINF}:MC-SCALE-ALWAYS-READS-MG`],
+    source: `${NINF_SRC} — TA-2 frames and pseudo force, TA-3 lift, TA-4 pendulum, TA-5 centrifugal force`,
+  },
+  {
+    conceptId: NINF,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'In a car going round a bend you feel thrown outward, so it seems a real centrifugal force must act on you. Test it: whirl a ball on a string and let go. If a real outward force had been acting, the ball would fly straight outward along the radius. Instead it flies off along the tangent — the direction it was already moving — because once the string stops pulling inward, nothing acts on it. And try naming the object that exerts the outward force: there is none. Seen from the road, the only horizontal force on a passenger is the inward push of the seat or door, which keeps bending their path; the outward "push" is their body trying to go straight while the car turns under them. Only in the car\'s own rotating frame do we add an outward pseudo force m v²/r to make Newton\'s laws work. A second trap is to think scales always show your weight. If a lift cable snapped and you fell with the lift, your feet would not press on the scales at all — they would read zero, although gravity still pulls you with mg. Scales measure the normal force. When the lift accelerates upward the floor must push harder than mg: N = m(g + a), 708 N for 60 kg at 2 m/s².',
+    targetedMisconceptions: [`${NINF}:MC-CENTRIFUGAL-IN-INERTIAL-FRAME`, `${NINF}:MC-SCALE-ALWAYS-READS-MG`],
+    source: `${NINF_SRC} — MC-CENTRIFUGAL-IN-INERTIAL-FRAME + MC-SCALE-ALWAYS-READS-MG, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const NINF_PROBES: SeedProbe[] = [
+  {
+    conceptId: NINF,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A 60 kg person stands on bathroom scales in a lift accelerating upward at 2 m/s². What do the scales read? (g = 9.8 m/s²)',
+    choices: [
+      { text: '708 N', isCorrect: true },
+      { text: '588 N', isCorrect: false, misconceptionId: `${NINF}:MC-SCALE-ALWAYS-READS-MG` },
+      { text: '468 N', isCorrect: false },
+      { text: '120 N', isCorrect: false },
+    ],
+    correctValue: '708 N',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${NINF}:MC-SCALE-ALWAYS-READS-MG`],
+    source: `${NINF_SRC} — DB-3 item and TA-3 P41 (N = m(g + a)); 468 N uses g − a, 120 N is ma alone`,
+  },
+  {
+    conceptId: NINF,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A small mass hangs on a string from the roof of a car accelerating forward at 3 m/s². How does it hang?',
+    choices: [
+      { text: 'Tilted backward by about 17°', isCorrect: true },
+      { text: 'Tilted forward by about 17°', isCorrect: false },
+      { text: 'Straight down — the acceleration doesn\'t affect it', isCorrect: false },
+      { text: 'Tilted backward by about 73°', isCorrect: false },
+    ],
+    correctValue: 'backward, about 17°',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: `${NINF_SRC} — TA-4 P34 (tan θ = a/g = 3/9.8); 73° inverts the ratio`,
+  },
+  {
+    conceptId: NINF,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A car goes round a bend at steady speed. Seen from the road, which horizontal force acts on a passenger?',
+    choices: [
+      { text: 'An inward force from the seat or door — the centripetal force; there is no outward force in this frame', isCorrect: true },
+      { text: 'An outward centrifugal force that throws the passenger towards the door', isCorrect: false, misconceptionId: `${NINF}:MC-CENTRIFUGAL-IN-INERTIAL-FRAME` },
+      { text: 'Both an inward and an equal outward force, so they balance', isCorrect: false, misconceptionId: `${NINF}:MC-CENTRIFUGAL-IN-INERTIAL-FRAME` },
+    ],
+    correctValue: 'an inward force only',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${NINF}:MC-CENTRIFUGAL-IN-INERTIAL-FRAME`],
+    source: `${NINF_SRC} — DB-2 golden probe and MC-CENTRIFUGAL-IN-INERTIAL-FRAME trigger_signal`,
+  },
+  {
+    conceptId: NINF,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A lift\'s cable snaps and the lift falls freely with a person standing on bathroom scales inside. What do the scales read?',
+    choices: [
+      { text: 'Zero — person and scales fall together, so there is no normal force, although gravity still acts', isCorrect: true },
+      { text: 'The person\'s weight, mg — scales always show your weight', isCorrect: false, misconceptionId: `${NINF}:MC-SCALE-ALWAYS-READS-MG` },
+      { text: 'Twice the person\'s weight', isCorrect: false },
+    ],
+    correctValue: 'zero',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${NINF}:MC-SCALE-ALWAYS-READS-MG`],
+    source: `${NINF_SRC} — MC-SCALE-ALWAYS-READS-MG conflict_evidence and TA-3 P34`,
+  },
+  {
+    conceptId: NINF,
+    subjectSlug: 'physics',
+    probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why does a pseudo force have no Newton\'s-third-law reaction partner?',
+    choices: [
+      { text: 'No object exerts it — it is added only because the frame of reference is accelerating', isCorrect: true },
+      { text: 'Its reaction acts on the vehicle, which is why the vehicle slows down', isCorrect: false },
+      { text: 'Its reaction is the body\'s weight', isCorrect: false },
+    ],
+    correctValue: 'no object exerts it',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: `${NINF_SRC} — TA-2 think-aloud and §8 P78`,
+  },
+]
+
+// ─── phys.mech.fluid-flow ────────────────────────────────────────────────────
+const FLOW = 'phys.mech.fluid-flow'
+const FLOW_SRC = 'docs/curriculum/blueprints/phys.mech.fluid-flow.md'
+
+const FLOW_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: FLOW,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Water hardly compresses, and in steady flow through a full pipe it cannot pile up anywhere or vanish. So every second the same volume of water must cross every section of the pipe. That volume per second, the volume flow rate, is the cross-sectional area times the speed: Q = Av. Hence A₁v₁ = A₂v₂ — the equation of continuity. Where a pipe narrows, the water must speed up; where it widens, the water slows. Water flowing at 1.5 m/s through a 4 cm² pipe carries 4 × 10⁻⁴ × 1.5 = 6 × 10⁻⁴ m³ each second (0.6 litres per second); where the pipe narrows to 1 cm², it must flow at 6 m/s to carry the same 0.6 L/s. Halving a pipe\'s diameter quarters its area, so the speed rises four times. A thumb over a hose makes the jet faster; a falling tap stream speeds up and so gets thinner; a river races through a gorge. At low speeds a fluid moves in smooth layers along streamlines that never cross — streamline (laminar) flow. Above a critical speed it breaks into eddies — turbulent flow. The Reynolds number Re = ρvD/η decides: in a pipe, flow is streamline below about 2000. For water (η = 10⁻³ Pa·s) in a 2 cm pipe, Re reaches 2000 at only about 0.1 m/s.',
+    targetedMisconceptions: [`${FLOW}:MC-NARROWER-SLOWER`, `${FLOW}:MC-FLOW-RATE-CHANGES`],
+    source: `${FLOW_SRC} — TA-2 continuity, TA-3 narrow sections, TA-4 everyday flows, TA-5 streamline and turbulent flow`,
+  },
+  {
+    conceptId: FLOW,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'It seems natural that water should slow down where a pipe narrows — it is "squeezed" and harder to get through. Ask what that would mean. If the water slowed in the narrow part, less water would cross it each second than arrives from the wide part behind. In a full, rigid pipe the extra water has nowhere to go: water hardly compresses and the pipe cannot bulge. The only way the same volume can get through a smaller opening each second is to move faster — which is exactly what you see when you put your thumb over a hose. With a quarter of the area the water must move four times as fast: 1.5 m/s in a 4 cm² pipe becomes 6 m/s in a 1 cm² section. The opposite trap is to think the flow rate falls along a pipe, as if flowing used some of the water up. If 0.6 litres entered each second but only 0.5 litres left, the other 0.1 litres would have to pile up inside every second, which is impossible in steady flow without a leak. The volume flow rate Q = Av is the same at every section; only the speed changes where the area changes. Friction can lower the pressure along a pipe, but not the volume passing each second.',
+    targetedMisconceptions: [`${FLOW}:MC-NARROWER-SLOWER`, `${FLOW}:MC-FLOW-RATE-CHANGES`],
+    source: `${FLOW_SRC} — MC-NARROWER-SLOWER + MC-FLOW-RATE-CHANGES, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const FLOW_PROBES: SeedProbe[] = [
+  {
+    conceptId: FLOW,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Water flows at 1.5 m/s through a pipe of cross-section 4 cm², which then narrows to 1 cm². How fast does it flow in the narrow part?',
+    choices: [
+      { text: '6 m/s', isCorrect: true },
+      { text: '0.375 m/s', isCorrect: false, misconceptionId: `${FLOW}:MC-NARROWER-SLOWER` },
+      { text: '1.5 m/s', isCorrect: false },
+      { text: '3 m/s', isCorrect: false },
+    ],
+    correctValue: '6 m/s',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${FLOW}:MC-NARROWER-SLOWER`],
+    source: `${FLOW_SRC} — DB-2 golden probe and TA-2 P34 (A₁v₁ = A₂v₂); 0.375 m/s inverts the ratio`,
+  },
+  {
+    conceptId: FLOW,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'The diameter of a pipe carrying water in steady flow halves. By what factor does the water\'s speed change?',
+    choices: [
+      { text: 'It becomes 4 times faster', isCorrect: true },
+      { text: 'It becomes 2 times faster', isCorrect: false },
+      { text: 'It halves', isCorrect: false, misconceptionId: `${FLOW}:MC-NARROWER-SLOWER` },
+      { text: 'It does not change', isCorrect: false },
+    ],
+    correctValue: '×4',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${FLOW}:MC-NARROWER-SLOWER`],
+    source: `${FLOW_SRC} — TA-6 P79 (area ∝ d²); ×2 forgets to square the diameter`,
+  },
+  {
+    conceptId: FLOW,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why does water squirt faster when you put your thumb over part of the end of a hose?',
+    choices: [
+      { text: 'The same volume must leave each second through a smaller opening, so it must move faster', isCorrect: true },
+      { text: 'It doesn\'t really — narrowing the opening slows the water; it only looks faster', isCorrect: false, misconceptionId: `${FLOW}:MC-NARROWER-SLOWER` },
+      { text: 'Your thumb adds energy to the water', isCorrect: false },
+    ],
+    correctValue: 'same volume per second through a smaller area',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${FLOW}:MC-NARROWER-SLOWER`],
+    source: `${FLOW_SRC} — DB-1 item and MC-NARROWER-SLOWER bridge_text`,
+  },
+  {
+    conceptId: FLOW,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In a long horizontal pipe with steady flow and no leaks, is the volume of water leaving each second less than the volume entering?',
+    choices: [
+      { text: 'No — the same volume leaves as enters each second; water cannot pile up in a full pipe', isCorrect: true },
+      { text: 'Yes — some of the water is used up as it flows along', isCorrect: false, misconceptionId: `${FLOW}:MC-FLOW-RATE-CHANGES` },
+      { text: 'Yes — friction slows the flow, so less comes out', isCorrect: false, misconceptionId: `${FLOW}:MC-FLOW-RATE-CHANGES` },
+    ],
+    correctValue: 'no, the same',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${FLOW}:MC-FLOW-RATE-CHANGES`],
+    source: `${FLOW_SRC} — DB-3 flow-rate check and MC-FLOW-RATE-CHANGES conflict_evidence`,
+  },
+  {
+    conceptId: FLOW,
+    subjectSlug: 'physics',
+    probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why does blood flow slowly in the capillaries even though each capillary is tiny?',
+    choices: [
+      { text: 'There are so many that their total cross-sectional area is far larger than the aorta\'s, so by continuity the blood moves slowly', isCorrect: true },
+      { text: 'Because blood is used up as it travels', isCorrect: false },
+      { text: 'Because narrow tubes always slow a fluid down', isCorrect: false },
+    ],
+    correctValue: 'total area is much larger',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: `${FLOW_SRC} — TA-4 think-aloud and §8 P76`,
+  },
+]
+
+// ─── phys.therm.specific-heats-of-gases ──────────────────────────────────────
+const CPCV = 'phys.therm.specific-heats-of-gases'
+const CPCV_SRC = 'docs/curriculum/blueprints/phys.therm.specific-heats-of-gases.md'
+
+const CPCV_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CPCV,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The heat needed to warm a gas depends on what it is allowed to do while it warms. The molar heat capacity at constant volume, Cv, is the heat per mole per kelvin when the gas is sealed in a rigid container: nothing moves, no work is done, and by the first law all the heat goes into internal energy, Q = nCvΔT. The molar heat capacity at constant pressure, Cp, is the heat per mole per kelvin when the gas pushes a free piston and expands. The internal energy of an ideal gas depends only on temperature, so it rises by the same nCvΔT — but the gas also does work pΔV = nRΔT. So nCpΔT = nCvΔT + nRΔT, and Cp − Cv = R (Mayer\'s relation). Kinetic theory predicts Cv: each degree of freedom carries ½RT per mole. A monatomic gas (helium, argon) can only move in three directions, so Cv = 1.5R ≈ 12.5 J mol⁻¹ K⁻¹ and Cp = 2.5R; a diatomic gas (nitrogen, oxygen) can also rotate about two axes, so Cv = 2.5R ≈ 20.8 and Cp = 3.5R ≈ 29.1 J mol⁻¹ K⁻¹. The ratio γ = Cp/Cv = 1 + 2/f is 5/3 for monatomic gases and 7/5 for diatomic ones. Warming 2 mol of nitrogen by 10 K takes about 416 J at constant volume but 582 J at constant pressure; the extra 166 J = nRΔT is the work done pushing the piston.',
+    targetedMisconceptions: [`${CPCV}:MC-CP-EQUALS-CV`, `${CPCV}:MC-GAMMA-SAME-ALL-GASES`],
+    source: `${CPCV_SRC} — TA-2 Cv and Cp, TA-3 heat at constant V and p, TA-4 equipartition, TA-5 γ`,
+  },
+  {
+    conceptId: CPCV,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Solids and liquids are given a single specific heat, so it seems a gas should have one too. Picture the gas heated two ways. In a sealed rigid can, nothing moves. In a cylinder with a free piston, the gas expands, pushes the piston up and can lift a weight — and lifting a weight takes energy. If both received the same heat, where would the energy to lift the weight come from? It must come from the heat. So at constant pressure more heat is needed for the same temperature rise: the internal energy rises by the same nCvΔT, and on top of that the gas does work pΔV = nRΔT. That is why Cp = Cv + R. Solids and liquids barely expand, which is why their two heat capacities are almost equal and the difference is easy to miss. A second trap is to use γ = 1.4 for every gas, because it is the value for air. A helium atom cannot store energy by rotating; a nitrogen molecule can tumble about two axes. So nitrogen needs more heat per kelvin: Cv = 2.5R against helium\'s 1.5R. With Cp = Cv + R for both, γ = 1 + R/Cv is 7/5 = 1.40 for nitrogen and air, but 5/3 ≈ 1.67 for helium and argon.',
+    targetedMisconceptions: [`${CPCV}:MC-CP-EQUALS-CV`, `${CPCV}:MC-GAMMA-SAME-ALL-GASES`],
+    source: `${CPCV_SRC} — MC-CP-EQUALS-CV + MC-GAMMA-SAME-ALL-GASES, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const CPCV_PROBES: SeedProbe[] = [
+  {
+    conceptId: CPCV,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'How much heat is needed to warm 2 mol of nitrogen (a diatomic gas, Cv = 2.5R) by 10 K at constant pressure? (R = 8.31 J mol⁻¹ K⁻¹)',
+    choices: [
+      { text: 'About 582 J', isCorrect: true },
+      { text: 'About 416 J', isCorrect: false, misconceptionId: `${CPCV}:MC-CP-EQUALS-CV` },
+      { text: 'About 166 J', isCorrect: false },
+      { text: 'About 249 J', isCorrect: false },
+    ],
+    correctValue: 'about 582 J',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CPCV}:MC-CP-EQUALS-CV`],
+    source: `${CPCV_SRC} — TA-3 P34 (Q = n(Cv + R)ΔT); 416 J uses Cv, 166 J is the work alone, 249 J uses 1.5R`,
+  },
+  {
+    conceptId: CPCV,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What is the ratio γ = Cp/Cv for helium, a monatomic gas?',
+    choices: [
+      { text: '5/3 ≈ 1.67', isCorrect: true },
+      { text: '7/5 = 1.40', isCorrect: false, misconceptionId: `${CPCV}:MC-GAMMA-SAME-ALL-GASES` },
+      { text: '4/3 ≈ 1.33', isCorrect: false },
+      { text: '1 — Cp and Cv are equal', isCorrect: false, misconceptionId: `${CPCV}:MC-CP-EQUALS-CV` },
+    ],
+    correctValue: '5/3',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${CPCV}:MC-GAMMA-SAME-ALL-GASES`, `${CPCV}:MC-CP-EQUALS-CV`],
+    source: `${CPCV_SRC} — TA-4 P34 (Cv = 1.5R, Cp = 2.5R)`,
+  },
+  {
+    conceptId: CPCV,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Does it take the same heat to warm a gas by 10 K in a sealed rigid can as in a cylinder with a freely moving piston?',
+    choices: [
+      { text: 'No — more with the piston, because the gas also does work pushing it as it expands', isCorrect: true },
+      { text: 'Yes — a gas has one heat capacity whatever the conditions', isCorrect: false, misconceptionId: `${CPCV}:MC-CP-EQUALS-CV` },
+      { text: 'No — less with the piston, because the expanding gas cools itself', isCorrect: false },
+    ],
+    correctValue: 'more with the piston',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${CPCV}:MC-CP-EQUALS-CV`],
+    source: `${CPCV_SRC} — DB-1 item and MC-CP-EQUALS-CV conflict_evidence`,
+  },
+  {
+    conceptId: CPCV,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Is γ = Cp/Cv the same for helium and for nitrogen?',
+    choices: [
+      { text: 'No — 5/3 for monatomic helium, 7/5 for diatomic nitrogen, which can also store energy by rotating', isCorrect: true },
+      { text: 'Yes — γ is 1.4 for every gas', isCorrect: false, misconceptionId: `${CPCV}:MC-GAMMA-SAME-ALL-GASES` },
+      { text: 'Yes — both are ideal gases, so all their properties match', isCorrect: false, misconceptionId: `${CPCV}:MC-GAMMA-SAME-ALL-GASES` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CPCV}:MC-GAMMA-SAME-ALL-GASES`],
+    source: `${CPCV_SRC} — DB-3 γ check and MC-GAMMA-SAME-ALL-GASES trigger_signal`,
+  },
+  {
+    conceptId: CPCV,
+    subjectSlug: 'physics',
+    probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Where does the R in Mayer\'s relation, Cp − Cv = R, come from?',
+    choices: [
+      { text: 'At constant pressure the gas also does work pΔV = nRΔT as it expands, so each mole needs R more heat per kelvin', isCorrect: true },
+      { text: 'It is the energy lost to the container walls', isCorrect: false },
+      { text: 'It is a correction for the gas not being ideal', isCorrect: false },
+    ],
+    correctValue: 'expansion work pΔV = nRΔT',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: `${CPCV_SRC} — TA-2 think-aloud and §8 P78`,
+  },
+]
+
 // Batch export spreads for the extension (kept with the concepts above).
 const PHYS_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...DENS_EXPLANATIONS,
@@ -54738,6 +55074,9 @@ const PHYS_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...ACPW_EXPLANATIONS,
   ...ATMD_EXPLANATIONS,
   ...NUCL_EXPLANATIONS,
+  ...NINF_EXPLANATIONS,
+  ...FLOW_EXPLANATIONS,
+  ...CPCV_EXPLANATIONS,
 ]
 
 const PHYS_EXTENSION_PROBES: SeedProbe[] = [
@@ -54769,6 +55108,9 @@ const PHYS_EXTENSION_PROBES: SeedProbe[] = [
   ...ACPW_PROBES,
   ...ATMD_PROBES,
   ...NUCL_PROBES,
+  ...NINF_PROBES,
+  ...FLOW_PROBES,
+  ...CPCV_PROBES,
 ]
 
 // ─── Batch export ────────────────────────────────────────────────────────────

@@ -113,6 +113,7 @@ import { buildHumanEyeScene, buildScatteringScene, buildSystemEnergyScene, build
 import { buildGalvanometerScene, buildGeneratorScene, buildHouseholdScene, buildAtwoodScene } from '@/lib/teaching/sceneGenerators/physicsExtensionScenesB5'
 import { buildThinFilmScene, buildGratingScene, buildResolvingPowerScene, buildConductorScene } from '@/lib/teaching/sceneGenerators/physicsExtensionScenesB6'
 import { buildLcrScene, buildAcPowerScene, buildAlphaScatteringScene, buildNucleusScene } from '@/lib/teaching/sceneGenerators/physicsExtensionScenesB7'
+import { buildFramesScene, buildContinuityScene, buildSpecificHeatsScene } from '@/lib/teaching/sceneGenerators/physicsExtensionScenesB8'
 import {
   buildDisplacementScene, buildVelocityScene, buildAccelerationScene, buildRelativeMotionScene, buildTensionScene,
   buildConservativeForcesScene, buildAngularMomentumScene, buildAngularMomentumConservationScene,
@@ -587,6 +588,10 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'phys.em.ac-power': buildAcPowerScene,
   'phys.mod.atomic-models': buildAlphaScatteringScene,
   'phys.mod.nucleus-size-and-force': buildNucleusScene,
+  // Coverage-driven KG extension, batch 8 (2026-10-03). See physicsExtensionScenesB8.ts.
+  'phys.mech.non-inertial-frames': buildFramesScene,
+  'phys.mech.fluid-flow': buildContinuityScene,
+  'phys.therm.specific-heats-of-gases': buildSpecificHeatsScene,
   // Batch 15 (2026-09-30): promoted from domain scope. See physicsCoreScenesB15.ts.
   'phys.mech.displacement':           buildDisplacementScene,
   'phys.mech.velocity':               buildVelocityScene,

@@ -4,10 +4,10 @@
   "status": "production",
   "build_date": "2026-06-29",
   "statistics": {
-    "total_concepts": 266,
+    "total_concepts": 269,
     "total_domains": 12,
-    "total_requires_edges": 333,
-    "total_unlocks_edges": 332,
+    "total_requires_edges": 337,
+    "total_unlocks_edges": 336,
     "total_cross_links": 0
   },
   "domains": [
@@ -19,12 +19,12 @@
     {
       "key": "mech",
       "name": "Classical Mechanics",
-      "count": 65
+      "count": 67
     },
     {
       "key": "therm",
       "name": "Thermodynamics",
-      "count": 21
+      "count": 22
     },
     {
       "key": "wave",
@@ -580,7 +580,8 @@
       ],
       "children": [],
       "unlocks": [
-        "phys.rel.postulates"
+        "phys.rel.postulates",
+        "phys.mech.non-inertial-frames"
       ]
     },
     {
@@ -610,7 +611,8 @@
       "children": [],
       "unlocks": [
         "phys.mech.angular-kinematics",
-        "phys.mech.orbital-mechanics"
+        "phys.mech.orbital-mechanics",
+        "phys.mech.non-inertial-frames"
       ]
     },
     {
@@ -927,6 +929,37 @@
       "mastery_threshold": 0.8,
       "references": [
         "NCERT Physics Class 11 Ch.5"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.mech.non-inertial-frames",
+      "name": "Non-inertial Frames and Pseudo Forces",
+      "aliases": [
+        "pseudo force",
+        "fictitious force",
+        "centrifugal force",
+        "accelerating frame"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.relative-motion",
+        "phys.mech.circular-motion"
+      ],
+      "related": [
+        "phys.mech.newtons-first-law",
+        "phys.mech.free-body-diagram"
+      ],
+      "cross_links": [],
+      "description": "Newton's laws hold only in inertial frames; in a frame accelerating at a, they can be used if every body is given a pseudo force -ma opposite to the frame's acceleration, which explains apparent weight in lifts, being thrown forward in a braking bus, and the centrifugal force m v^2/r felt in a rotating frame.",
+      "difficulty": "proficient",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "NCERT Physics Class 11 Ch.5",
+        "HC Verma Ch.5"
       ],
       "children": [],
       "unlocks": []
@@ -1842,9 +1875,9 @@
       ],
       "children": [],
       "unlocks": [
-        "phys.mech.bernoulli",
         "phys.mech.buoyancy",
-        "phys.mech.surface-tension"
+        "phys.mech.surface-tension",
+        "phys.mech.fluid-flow"
       ]
     },
     {
@@ -1872,6 +1905,36 @@
       "unlocks": []
     },
     {
+      "id": "phys.mech.fluid-flow",
+      "name": "Equation of Continuity, Streamline and Turbulent Flow",
+      "aliases": [
+        "equation of continuity",
+        "streamline flow",
+        "turbulent flow",
+        "volume flow rate"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.pressure-fluids"
+      ],
+      "related": [
+        "phys.mech.viscosity"
+      ],
+      "cross_links": [],
+      "description": "For steady flow of an incompressible fluid the volume flow rate Av is the same at every cross-section, so a fluid speeds up where a pipe narrows; flow is streamline (layers sliding smoothly) at low speeds and becomes turbulent above a critical speed, judged by the Reynolds number.",
+      "difficulty": "proficient",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "NCERT Physics Class 11 Ch.10"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mech.bernoulli"
+      ]
+    },
+    {
       "id": "phys.mech.bernoulli",
       "name": "Bernoulli's Equation and Fluid Flow",
       "aliases": [
@@ -1880,8 +1943,8 @@
       ],
       "parent": null,
       "requires": [
-        "phys.mech.pressure-fluids",
-        "phys.mech.conservation-of-energy"
+        "phys.mech.conservation-of-energy",
+        "phys.mech.fluid-flow"
       ],
       "related": [
         "phys.mech.viscosity"
@@ -2586,7 +2649,8 @@
       ],
       "children": [],
       "unlocks": [
-        "phys.therm.thermodynamic-processes"
+        "phys.therm.thermodynamic-processes",
+        "phys.therm.specific-heats-of-gases"
       ]
     },
     {
@@ -2647,6 +2711,35 @@
         "phys.therm.heat-engines",
         "phys.therm.second-law"
       ]
+    },
+    {
+      "id": "phys.therm.specific-heats-of-gases",
+      "name": "Cp, Cv, Mayer's Relation and Gamma",
+      "aliases": [
+        "molar specific heat",
+        "Mayer relation",
+        "ratio of specific heats",
+        "Cp and Cv"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.therm.first-law"
+      ],
+      "related": [
+        "phys.therm.kinetic-theory",
+        "phys.therm.thermodynamic-processes"
+      ],
+      "cross_links": [],
+      "description": "A gas heated at constant pressure also does work as it expands, so its molar heat capacity Cp exceeds Cv by exactly R (Mayer's relation, Cp - Cv = R); from equipartition Cv = (f/2)R, giving gamma = Cp/Cv = 5/3 for monatomic and 7/5 for diatomic gases.",
+      "difficulty": "proficient",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "NCERT Physics Class 11 Ch.12-13"
+      ],
+      "children": [],
+      "unlocks": []
     },
     {
       "id": "phys.therm.second-law",

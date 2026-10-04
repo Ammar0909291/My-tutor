@@ -1,0 +1,416 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.non-inertial-frames-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.non-inertial-frames",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:257afa42ce718310ebf6845ef7ad3bba3506382a6e54cc3f1b79857589f5b888",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.non-inertial-frames.md": "sha256:ca61bb49fc6afdcaac9d78b23c0044e72e560578953d450da32e661d04a6d056"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.mech.non-inertial-frames",
+    "name": "Non-inertial Frames and Pseudo Forces",
+    "difficultyRaw": "proficient (3)",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "phys.mech.relative-motion",
+      "phys.mech.circular-motion"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.non-inertial-frames-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.non-inertial-frames (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.non-inertial-frames.md": "sha256:ca61bb49fc6afdcaac9d78b23c0044e72e560578953d450da32e661d04a6d056"
+      },
+      "contentHash": "sha256:a62ceff001f5831b2f9eb09446536b06a9626d3cd130fa94e9f432acb81b08b8",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.non-inertial-frames.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.non-inertial-frames.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.non-inertial-frames"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.non-inertial-frames\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.non-inertial-frames.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.non-inertial-frames.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.non-inertial-frames"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.non-inertial-frames\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.non-inertial-frames.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.non-inertial-frames.md#TA-3 (addresses MC-SCALE-ALWAYS-READS-MG)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.non-inertial-frames"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.non-inertial-frames\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.non-inertial-frames.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.non-inertial-frames.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.non-inertial-frames"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.non-inertial-frames\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.non-inertial-frames.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.non-inertial-frames.md#TA-5 (addresses MC-CENTRIFUGAL-IN-INERTIAL-FRAME)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.non-inertial-frames"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.non-inertial-frames\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.non-inertial-frames.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.non-inertial-frames.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.non-inertial-frames"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.non-inertial-frames\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.non-inertial-frames.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.non-inertial-frames.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.non-inertial-frames"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.non-inertial-frames\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.non-inertial-frames/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "phys.mech.non-inertial-frames",
+      "title": "Learning Objective",
+      "content": "[Boundary statement]\nA student who achieves mastery demonstrates:\n1. Distinguishes inertial frames (not accelerating — Newton's laws hold as they are) from non-inertial frames (accelerating or rotating), and explains that in a frame accelerating at a, Newton's second law can still be used if every body of mass m is given an extra pseudo force −ma, opposite to the frame's acceleration — a force with no physical agent and no reaction partner.\n2. Applies it — a 60 kg person in a lift accelerating upward at 2 m/s² reads 60 × (9.8 + 2) = 708 N on the scales, 468 N when the lift accelerates downward at 2 m/s², and zero in free fall; a pendulum hanging in a car accelerating at 3 m/s² tilts back by tan⁻¹(3/9.8) ≈ 17°.\n3. Explains the centrifugal force — in a car taking a 50 m radius bend at 15 m/s, a 60 kg passenger feels pushed outward by m v²/r = 270 N in the car's frame, while from the ground the passenger simply tends to keep going straight and the seat or door supplies the inward (centripetal) force.\n\nA student who places a real outward centrifugal force on a body viewed from the ground, or who thinks scales always read mg, has **NOT** achieved mastery — those ideas misread every lift, bend and spin dryer.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.non-inertial-frames.md",
+        "startLine": 17,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.mech.non-inertial-frames/misconception/MC-CENTRIFUGAL-IN-INERTIAL-FRAME",
+      "kind": "misconception",
+      "conceptId": "phys.mech.non-inertial-frames",
+      "title": "A real outward centrifugal force acts on a body moving in a circle",
+      "content": "### MC-CENTRIFUGAL-IN-INERTIAL-FRAME: \"A real outward centrifugal force acts on a body moving in a circle\"\ntrigger_signal: student includes an outward centrifugal force in a free-body diagram drawn from an inertial (ground) frame, or says it throws objects outward along the radius.\nconflict_evidence [P28]: \"If a real outward force acted on a ball whirled on a string, then when the string breaks the ball should fly straight outward along the radius. Which way does it actually go? And which object exerts this outward force?\"\nbridge_text [P30]: \"It flies off along the tangent — the direction it was already moving — because once the string stops pulling inward, no force acts. No object exerts an outward force. From the ground, the only horizontal force is the inward pull (centripetal force) that keeps bending the path. The 'outward push' you feel in a turning car is your body trying to go straight while the car turns under you; in the car's rotating frame we describe that as a pseudo force m v²/r outward.\"\nreplacement_text [P31]: \"Centrifugal force exists only as a pseudo force in a rotating frame; in an inertial frame only real forces act, and their resultant points inward.\"\ndiscrimination_pairs [P33]: [\"ground frame: inward centripetal force from seat/door, no outward force\", \"car's frame: outward pseudo force m v²/r balances the inward force\"]\ns6_path: skip P28; watch a video of mud flying off a bicycle wheel along tangents.",
+      "localKey": "MC-CENTRIFUGAL-IN-INERTIAL-FRAME",
+      "language": "en",
+      "refs": [
+        "MC-CENTRIFUGAL-IN-INERTIAL-FRAME"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.non-inertial-frames.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.mech.non-inertial-frames/misconception/MC-SCALE-ALWAYS-READS-MG",
+      "kind": "misconception",
+      "conceptId": "phys.mech.non-inertial-frames",
+      "title": "Bathroom scales always show your weight mg",
+      "content": "### MC-SCALE-ALWAYS-READS-MG: \"Bathroom scales always show your weight mg\"\ntrigger_signal: student predicts the same scale reading in an accelerating lift as at rest, treating the reading as the gravitational force rather than the normal force.\nconflict_evidence [P28]: \"If the lift cable snapped and you fell with the lift, would your feet still press on the scales? What would they read?\"\nbridge_text [P30]: \"Your feet would not press at all — you and the scales fall together, so the reading is zero, yet gravity still pulls you with mg. The scales measure the normal force, not gravity. Accelerating upward, the floor must push harder than mg to accelerate you: N = m(g + a) = 708 N for 60 kg at 2 m/s². In the lift's frame this is the pseudo force ma adding to your weight.\"\nreplacement_text [P31]: \"A scale reads the normal force (apparent weight): N = m(g + a) for upward acceleration, m(g − a) for downward, zero in free fall.\"\ndiscrimination_pairs [P33]: [\"lift at rest or steady speed: 588 N\", \"accelerating up at 2 m/s²: 708 N; down: 468 N; free fall: 0\"]\ns6_path: skip P28; stand on scales in a real lift and watch the reading as it starts and stops.",
+      "localKey": "MC-SCALE-ALWAYS-READS-MG",
+      "language": "en",
+      "refs": [
+        "MC-SCALE-ALWAYS-READS-MG"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.non-inertial-frames.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.mech.non-inertial-frames/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.non-inertial-frames",
+      "title": "The Lurching Passenger",
+      "content": "{\"id\":\"TA-1\",\"title\":\"The Lurching Passenger\",\"primitives\":[\"P01\",\"P04\",\"P05\",\"P06\",\"P14\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.non-inertial-frames.md",
+        "startLine": 11,
+        "endLine": 18
+      }
+    },
+    {
+      "assetId": "phys.mech.non-inertial-frames/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.non-inertial-frames",
+      "title": "Inertial and Non-inertial Frames",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Inertial and Non-inertial Frames\",\"primitives\":[\"P02\",\"P06\",\"P08\",\"P13\",\"P34\",\"P49\",\"P50\",\"P51\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.non-inertial-frames.md",
+        "startLine": 18,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.mech.non-inertial-frames/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.non-inertial-frames",
+      "title": "The Lift",
+      "content": "{\"id\":\"TA-3\",\"title\":\"The Lift\",\"primitives\":[\"P02\",\"P34\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-SCALE-ALWAYS-READS-MG\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-SCALE-ALWAYS-READS-MG"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.non-inertial-frames.md",
+        "startLine": 27,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "phys.mech.non-inertial-frames/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.non-inertial-frames",
+      "title": "The Tilted Pendulum",
+      "content": "{\"id\":\"TA-4\",\"title\":\"The Tilted Pendulum\",\"primitives\":[\"P02\",\"P13\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.non-inertial-frames.md",
+        "startLine": 35,
+        "endLine": 41
+      }
+    },
+    {
+      "assetId": "phys.mech.non-inertial-frames/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.non-inertial-frames",
+      "title": "Centrifugal Force",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Centrifugal Force\",\"primitives\":[\"P02\",\"P34\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-CENTRIFUGAL-IN-INERTIAL-FRAME\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-CENTRIFUGAL-IN-INERTIAL-FRAME"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.non-inertial-frames.md",
+        "startLine": 41,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "phys.mech.non-inertial-frames/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.non-inertial-frames",
+      "title": "Formative Assessment",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Formative Assessment\",\"primitives\":[\"P02\",\"P35\",\"P49\",\"P51\",\"P55\",\"P79\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.non-inertial-frames.md",
+        "startLine": 49,
+        "endLine": 56
+      }
+    },
+    {
+      "assetId": "phys.mech.non-inertial-frames/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.non-inertial-frames",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P28\",\"P41\",\"P54\",\"P55\",\"P62\",\"P68\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.non-inertial-frames.md",
+        "startLine": 56,
+        "endLine": 98
+      }
+    },
+    {
+      "assetId": "phys.mech.non-inertial-frames/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.non-inertial-frames",
+      "title": "Assessment Battery",
+      "content": "| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (classify) | \"Steady train, braking train, merry-go-round\" | CORRECT = inertial, non-inertial, non-inertial |\n| P74 (classify) | \"Ground frame: is there an outward force on the passenger?\" | CORRECT = no |\n| P75 (boundary) | \"Lift moving up at steady speed\" | CORRECT = 588 N (a = 0) |\n| P76 (transfer) | \"Water in a swung bucket\" | CORRECT = ground: weight + base push supply mv²/r; bucket frame: outward pseudo force |\n| P77 (generate) | \"Accelerometer from a hanging mass\" | CORRECT = measure tilt θ; a = g tan θ |\n| P78 (explain) | \"No reaction partner\" | CORRECT = no object exerts it; it comes from the frame's acceleration |\n| P79 (predict) | \"Astronauts weightless\" | CORRECT = free fall together; normal force zero |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.non-inertial-frames.md",
+        "startLine": 180,
+        "endLine": 192
+      }
+    },
+    {
+      "assetId": "phys.mech.non-inertial-frames/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.non-inertial-frames",
+      "title": "Student State Matrix",
+      "content": "| State | Why here | Tell-tale behaviour | Protocol |\n|---|---|---|---|\n| S0 | Frames never considered | Cannot say why passengers lurch in a braking bus | Protocol A (Concrete) |\n| S1 | \"Pseudo force = −ma\" recited | Cannot say in which frame it belongs | Protocol B (Counterexample-first) |\n| S2-CENTRIFUGAL-IN-INERTIAL-FRAME | Felt force taken as real | Draws an outward centrifugal force in a ground-frame free-body diagram | Misconception Engine → then Protocol C |\n| S2-SCALE-ALWAYS-READS-MG | Weight = reading | \"The scales show your weight, mg, whatever the lift does\" | Misconception Engine → then Protocol C |\n| S3 | Partial — lifts fine, rotation not | Cannot explain a spin dryer both ways | Protocol C (Guided Questioning) |\n| S6 | Anxiety on free-body diagrams | Avoids choosing a frame | Protocol F (Low Pressure) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.non-inertial-frames.md",
+        "startLine": 27,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "phys.mech.non-inertial-frames/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.non-inertial-frames",
+      "title": "Diagnostic Battery",
+      "content": "DB-1 (prior-exposure check):\n\"A bus brakes suddenly and the standing passengers lurch forward. What pushed them?\"\n  \"Something pushed them forward\" or no idea → S0. Enter Protocol A (Concrete).\n  \"Nothing pushed them — the bus slowed and they kept moving\" → DB-2.\n\nDB-2 (representation / misconception test):\n\"A car goes round a bend at steady speed. Seen from the road, which horizontal force acts on a passenger?\"\n  \"An inward force from the seat or door — the centripetal force; the outward push is only felt in the car's frame\" → S3. Enter Protocol C.\n  \"An inward force\" (no reason) → S1. Enter Protocol B.\n  \"An outward centrifugal force throws the passenger outward\" → SIGNAL:MISCONCEPTION:MC-CENTRIFUGAL-IN-INERTIAL-FRAME. Enter Misconception Engine.\n  Pause → add S6 flag; Protocol F if anxious, otherwise Protocol A.\n\nDB-3 (lift check — overlays):\n\"A 60 kg person stands on scales in a lift accelerating upward at 2 m/s². What do the scales read?\"\n  \"708 N — more than mg\" → no flag.\n  \"588 N — the scales always show mg\" → add SIGNAL:MISCONCEPTION:MC-SCALE-ALWAYS-READS-MG (repair at TA-3).\n  Confident and wrong on DB-2 → add S7 flag. Override to Protocol G.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-CENTRIFUGAL-IN-INERTIAL-FRAME",
+        "MC-SCALE-ALWAYS-READS-MG"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.non-inertial-frames.md",
+        "startLine": 38,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "phys.mech.non-inertial-frames/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.non-inertial-frames",
+      "title": "Prerequisite Check",
+      "content": "PD-1 (for `phys.mech.relative-motion` and `phys.mech.circular-motion`):\n\"A ball is dropped inside a train moving at steady speed — where does it land? And what force keeps a car moving in a circle?\"\n  Cannot say \"straight below\" and \"an inward (centripetal) force, mv²/r\" → flag PREREQ-GAP-FRAMES-CIRCULAR.\n  In-session minimum repair: one P06 (the ball in the steady train, seen from both frames) + one P34 (\"15 m/s round a 50 m bend: centripetal acceleration?\") then resume. If absent, schedule the missing session (S4 route).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.non-inertial-frames.md",
+        "startLine": 58,
+        "endLine": 65
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
