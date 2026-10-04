@@ -1,0 +1,415 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.em.electrostatic-potential-energy-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.em.electrostatic-potential-energy",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:9a533343b5a87ee779ad9407aafc3aebb4ac338e3e9c814d4873892be8ac8388",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.em.electrostatic-potential-energy.md": "sha256:cf7621e604dd2d137d7a38342b0bd57c62af205346c98c77810f3f82678fd4b6"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.em.electrostatic-potential-energy",
+    "name": "Potential Energy of a System of Charges",
+    "difficultyRaw": "proficient (3)",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "phys.em.electric-potential"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.em.electrostatic-potential-energy-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.em.electrostatic-potential-energy (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.em.electrostatic-potential-energy.md": "sha256:cf7621e604dd2d137d7a38342b0bd57c62af205346c98c77810f3f82678fd4b6"
+      },
+      "contentHash": "sha256:708501b0a6e826160071c8b1d6b5655a935913ff4cac450204dd956f3fbddef5",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.em.electrostatic-potential-energy.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electrostatic-potential-energy.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electrostatic-potential-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electrostatic-potential-energy\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.electrostatic-potential-energy.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electrostatic-potential-energy.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electrostatic-potential-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electrostatic-potential-energy\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.electrostatic-potential-energy.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electrostatic-potential-energy.md#TA-3 (addresses MC-DOUBLE-COUNT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electrostatic-potential-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electrostatic-potential-energy\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.electrostatic-potential-energy.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electrostatic-potential-energy.md#TA-4 (addresses MC-SIGN-IGNORED)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electrostatic-potential-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electrostatic-potential-energy\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.electrostatic-potential-energy.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electrostatic-potential-energy.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electrostatic-potential-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electrostatic-potential-energy\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.electrostatic-potential-energy.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electrostatic-potential-energy.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electrostatic-potential-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electrostatic-potential-energy\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.electrostatic-potential-energy.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.electrostatic-potential-energy.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.electrostatic-potential-energy"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.electrostatic-potential-energy\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.em.electrostatic-potential-energy/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "phys.em.electrostatic-potential-energy",
+      "title": "Learning Objective",
+      "content": "[Boundary statement]\nA student who achieves mastery demonstrates:\n1. Defines the electrostatic potential energy of a system as the work an external agent does to assemble it, slowly, from charges infinitely far apart, and computes it for a pair: U = k q₁q₂ / r — e.g. +2 μC and +3 μC, 0.3 m apart: U = 9 × 10⁹ × 6 × 10⁻¹² / 0.3 = 0.18 J.\n2. Computes U for three or more charges as the sum over every distinct PAIR, each counted once (three charges → three pairs; n charges → n(n − 1)/2 pairs), keeping the signs of the charges.\n3. Interprets the sign: U > 0 for like charges (work had to be done to push them together; they fly apart if released), U < 0 for unlike charges (they pull together; work is needed to separate them). Relates it to potential: bringing q to a point at potential V takes work qV.\n\nA student who counts each pair twice, drops the signs and adds magnitudes, or says \"the energy belongs to the charge that was moved\", has **NOT** achieved mastery — those errors break binding energy in atoms and nuclei, capacitor energy, and the energy of ionic crystals.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electrostatic-potential-energy.md",
+        "startLine": 17,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.em.electrostatic-potential-energy/misconception/MC-DOUBLE-COUNT",
+      "kind": "misconception",
+      "conceptId": "phys.em.electrostatic-potential-energy",
+      "title": "Add up every charge's energy with every other charge",
+      "content": "### MC-DOUBLE-COUNT: \"Add up every charge's energy with every other charge\"\ntrigger_signal: student computes each charge's interaction with all the others and sums over charges, counting every pair twice (6kq²/a for the equilateral triangle).\nconflict_evidence [P28]: \"Build the triangle one charge at a time. The first costs nothing. The second costs kq²/a. The third costs 2kq²/a — it is pushed against both. What is the total work?\"\nbridge_text [P30]: \"3kq²/a. The work to assemble the system is the energy it stores, and each interaction was paid for exactly once — when the second of the two charges arrived. Summing 'each charge with every other' pays every pair twice.\"\nreplacement_text [P31]: \"U = sum over distinct pairs of k qᵢqⱼ / rᵢⱼ. Three charges: three pairs; n charges: n(n − 1)/2 pairs.\"\ndiscrimination_pairs [P33]: [\"three charges: 3 pairs (correct) vs 6 terms (double count)\", \"four charges at a square's corners: 4 sides + 2 diagonals = 6 pairs\"]\ns6_path: skip P28; draw the triangle and draw a line for each pair — count the lines.",
+      "localKey": "MC-DOUBLE-COUNT",
+      "language": "en",
+      "refs": [
+        "MC-DOUBLE-COUNT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electrostatic-potential-energy.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.em.electrostatic-potential-energy/misconception/MC-SIGN-IGNORED",
+      "kind": "misconception",
+      "conceptId": "phys.em.electrostatic-potential-energy",
+      "title": "Electrostatic potential energy is always positive",
+      "content": "### MC-SIGN-IGNORED: \"Electrostatic potential energy is always positive\"\ntrigger_signal: student adds magnitudes, or reports U > 0 for an attracting pair.\nconflict_evidence [P28]: \"A +q and a −q are held apart and then let go. They rush together and speed up. Where did their kinetic energy come from, if their potential energy was positive and keeps... what does it do?\"\nbridge_text [P30]: \"As they rush together, U must fall while kinetic energy rises. With U = kq₁q₂/r and q₁q₂ negative, U is negative and becomes MORE negative as r shrinks — exactly what releases the kinetic energy. The sign carries the physics.\"\nreplacement_text [P31]: \"Keep the signs of the charges. U > 0: like charges, the system tends to fly apart. U < 0: unlike charges, the system is bound; you must supply |U| to separate it.\"\ndiscrimination_pairs [P33]: [\"+q, +q: U > 0, released they fly apart\", \"+q, −q: U < 0, released they pull together; hydrogen atom bound\"]\ns6_path: skip P28; use two magnets — like poles push apart when released, unlike poles snap together — and attach the sign to each case.",
+      "localKey": "MC-SIGN-IGNORED",
+      "language": "en",
+      "refs": [
+        "MC-SIGN-IGNORED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electrostatic-potential-energy.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.em.electrostatic-potential-energy/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electrostatic-potential-energy",
+      "title": "Building a System Costs Work",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Building a System Costs Work\",\"primitives\":[\"P01\",\"P04\",\"P05\",\"P06\",\"P14\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electrostatic-potential-energy.md",
+        "startLine": 11,
+        "endLine": 18
+      }
+    },
+    {
+      "assetId": "phys.em.electrostatic-potential-energy/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electrostatic-potential-energy",
+      "title": "The Pair Formula",
+      "content": "{\"id\":\"TA-2\",\"title\":\"The Pair Formula\",\"primitives\":[\"P02\",\"P06\",\"P08\",\"P13\",\"P34\",\"P49\",\"P50\",\"P51\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electrostatic-potential-energy.md",
+        "startLine": 18,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.em.electrostatic-potential-energy/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electrostatic-potential-energy",
+      "title": "Three Charges — Count Pairs",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Three Charges — Count Pairs\",\"primitives\":[\"P02\",\"P13\",\"P34\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-DOUBLE-COUNT\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-DOUBLE-COUNT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electrostatic-potential-energy.md",
+        "startLine": 27,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "phys.em.electrostatic-potential-energy/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electrostatic-potential-energy",
+      "title": "What the Sign Means",
+      "content": "{\"id\":\"TA-4\",\"title\":\"What the Sign Means\",\"primitives\":[\"P02\",\"P13\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-SIGN-IGNORED\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-SIGN-IGNORED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electrostatic-potential-energy.md",
+        "startLine": 36,
+        "endLine": 43
+      }
+    },
+    {
+      "assetId": "phys.em.electrostatic-potential-energy/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electrostatic-potential-energy",
+      "title": "Work to Rearrange",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Work to Rearrange\",\"primitives\":[\"P02\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electrostatic-potential-energy.md",
+        "startLine": 43,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "phys.em.electrostatic-potential-energy/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electrostatic-potential-energy",
+      "title": "Formative Assessment",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Formative Assessment\",\"primitives\":[\"P02\",\"P35\",\"P49\",\"P51\",\"P55\",\"P79\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electrostatic-potential-energy.md",
+        "startLine": 48,
+        "endLine": 55
+      }
+    },
+    {
+      "assetId": "phys.em.electrostatic-potential-energy/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.electrostatic-potential-energy",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P28\",\"P41\",\"P54\",\"P55\",\"P62\",\"P68\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electrostatic-potential-energy.md",
+        "startLine": 55,
+        "endLine": 97
+      }
+    },
+    {
+      "assetId": "phys.em.electrostatic-potential-energy/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.em.electrostatic-potential-energy",
+      "title": "Assessment Battery",
+      "content": "| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (classify) | \"Three charges: 3kq²/a or 6kq²/a?\" | CORRECT = 3kq²/a |\n| P74 (classify) | \"+q and −q: sign of U?\" | CORRECT = negative |\n| P75 (boundary) | \"Charges infinitely far apart — U?\" | CORRECT = zero (reference) |\n| P76 (transfer) | \"Hydrogen atom — sign of U?\" | CORRECT = negative; the atom is bound |\n| P77 (generate) | \"Three charges with U = 0\" | CORRECT = e.g. +q and +q a distance d apart with −q/4 at the midpoint: kq²/d − 2 × kq²/(2d) = 0 |\n| P78 (explain) | \"Where is the energy stored?\" | CORRECT = in the arrangement (the field), not in one charge |\n| P79 (predict) | \"Alternating square — sign?\" | CORRECT = negative |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electrostatic-potential-energy.md",
+        "startLine": 179,
+        "endLine": 191
+      }
+    },
+    {
+      "assetId": "phys.em.electrostatic-potential-energy/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.em.electrostatic-potential-energy",
+      "title": "Student State Matrix",
+      "content": "| State | Why here | Tell-tale behaviour | Protocol |\n|---|---|---|---|\n| S0 | Potential known, system energy not | Cannot say what \"energy of a system\" means | Protocol A (Concrete) |\n| S1 | Pair formula without assembly picture | Writes kq₁q₂/r but cannot handle three charges | Protocol B (Counterexample-first) |\n| S2-DOUBLE-COUNT | Energy per charge, not per pair | Adds each charge's \"energy with every other\" — every pair twice | Misconception Engine → then Protocol C |\n| S2-SIGN-IGNORED | Magnitudes only | U always positive; cannot say whether released charges fly apart | Misconception Engine → then Protocol C |\n| S3 | Partial — pairs fine, sign meaning not (or reverse) | Correct sum, wrong physical interpretation | Protocol C (Guided Questioning) |\n| S6 | Anxiety on powers of ten | Freezes at μC and 10⁹ | Protocol F (Low Pressure) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electrostatic-potential-energy.md",
+        "startLine": 27,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "phys.em.electrostatic-potential-energy/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.em.electrostatic-potential-energy",
+      "title": "Diagnostic Battery",
+      "content": "DB-1 (prior-exposure check):\n\"How much work does it take to bring a charge q from very far away to a point where the potential is V?\"\n  No idea → S0. Enter Protocol A (Concrete).\n  \"qV\" → DB-2.\n\nDB-2 (representation / misconception test):\n\"Three equal charges q sit at the corners of an equilateral triangle of side a. What is the electrostatic potential energy of the system?\"\n  \"3kq²/a — three pairs\" → S3. Enter Protocol C.\n  \"3kq²/a\" (no reasoning) → S1. Enter Protocol B.\n  \"6kq²/a — each charge interacts with two others\" → SIGNAL:MISCONCEPTION:MC-DOUBLE-COUNT. Enter Misconception Engine.\n  Pause → add S6 flag; Protocol F if anxious, otherwise Protocol A.\n\nDB-3 (sign check — overlays):\n\"A +q and a −q are held 1 cm apart. Is U positive or negative, and what happens when they are released?\"\n  \"Negative — they attract and pull together; work is needed to separate them\" → no flag.\n  \"Positive — energy is always positive\" → add SIGNAL:MISCONCEPTION:MC-SIGN-IGNORED (repair at TA-4).\n  Confident and wrong on DB-2 → add S7 flag. Override to Protocol G.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-DOUBLE-COUNT",
+        "MC-SIGN-IGNORED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electrostatic-potential-energy.md",
+        "startLine": 38,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "phys.em.electrostatic-potential-energy/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.em.electrostatic-potential-energy",
+      "title": "Prerequisite Check",
+      "content": "PD-1 (for `phys.em.electric-potential`):\n\"What is the potential at distance r from a point charge Q, and what does it mean?\"\n  Cannot give V = kQ/r as work per unit charge from infinity → flag PREREQ-GAP-POTENTIAL.\n  In-session minimum repair: one P07 (potential falling off around a point charge) + one P34 (\"work to bring +1 C from infinity to r?\") then resume. If potential is absent, schedule a `phys.em.electric-potential` session (S4 route).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.electrostatic-potential-energy.md",
+        "startLine": 58,
+        "endLine": 65
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

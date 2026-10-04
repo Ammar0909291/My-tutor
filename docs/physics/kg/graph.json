@@ -4,10 +4,10 @@
   "status": "production",
   "build_date": "2026-06-29",
   "statistics": {
-    "total_concepts": 250,
+    "total_concepts": 254,
     "total_domains": 12,
-    "total_requires_edges": 313,
-    "total_unlocks_edges": 312,
+    "total_requires_edges": 317,
+    "total_unlocks_edges": 316,
     "total_cross_links": 0
   },
   "domains": [
@@ -34,12 +34,12 @@
     {
       "key": "opt",
       "name": "Optics",
-      "count": 16
+      "count": 18
     },
     {
       "key": "em",
       "name": "Electromagnetism",
-      "count": 35
+      "count": 37
     },
     {
       "key": "mod",
@@ -3330,7 +3330,8 @@
       "unlocks": [
         "phys.opt.reflection",
         "phys.opt.refraction",
-        "phys.opt.wave-optics"
+        "phys.opt.wave-optics",
+        "phys.opt.scattering-of-light"
       ]
     },
     {
@@ -3500,8 +3501,38 @@
       ],
       "children": [],
       "unlocks": [
-        "phys.opt.optical-instruments"
+        "phys.opt.optical-instruments",
+        "phys.opt.human-eye"
       ]
+    },
+    {
+      "id": "phys.opt.human-eye",
+      "name": "The Human Eye and Defects of Vision",
+      "aliases": [
+        "myopia",
+        "hypermetropia",
+        "accommodation",
+        "near point"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.opt.lens-power"
+      ],
+      "related": [
+        "phys.opt.optical-instruments",
+        "phys.opt.lenses"
+      ],
+      "cross_links": [],
+      "description": "The eye focuses a real image on the retina by changing the shape of its lens (accommodation); myopia is corrected with a diverging lens and hypermetropia with a converging lens, of power found from the far or near point.",
+      "difficulty": "developing",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "NCERT Science Class 10 (The Human Eye and the Colourful World)"
+      ],
+      "children": [],
+      "unlocks": []
     },
     {
       "id": "phys.opt.optical-instruments",
@@ -3550,6 +3581,34 @@
       "mastery_threshold": 0.75,
       "references": [
         "NCERT Physics Class 12 Ch.9"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.opt.scattering-of-light",
+      "name": "Scattering of Light: Blue Sky, Red Sunset, Tyndall Effect",
+      "aliases": [
+        "Rayleigh scattering",
+        "Tyndall effect",
+        "why the sky is blue"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.opt.nature-of-light"
+      ],
+      "related": [
+        "phys.opt.dispersion",
+        "phys.opt.polarization"
+      ],
+      "cross_links": [],
+      "description": "Small particles scatter short wavelengths much more strongly (intensity proportional to 1/lambda^4), which makes the sky blue and the setting Sun red; larger particles scatter all colours equally, and scattering makes a beam visible in a colloid (Tyndall effect).",
+      "difficulty": "developing",
+      "estimated_hours": 2,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "NCERT Science Class 10 (The Human Eye and the Colourful World)"
       ],
       "children": [],
       "unlocks": []
@@ -3892,8 +3951,36 @@
       "children": [],
       "unlocks": [
         "phys.em.capacitance",
-        "phys.em.ohms-law"
+        "phys.em.ohms-law",
+        "phys.em.electrostatic-potential-energy"
       ]
+    },
+    {
+      "id": "phys.em.electrostatic-potential-energy",
+      "name": "Potential Energy of a System of Charges",
+      "aliases": [
+        "electrostatic potential energy",
+        "energy of a system of charges"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.em.electric-potential"
+      ],
+      "related": [
+        "phys.em.energy-capacitor",
+        "phys.em.coulombs-law"
+      ],
+      "cross_links": [],
+      "description": "The potential energy of a system of charges is the work needed to assemble it from infinity: U = k q1 q2 / r for each distinct pair, summed with signs, positive for like charges and negative for bound unlike charges.",
+      "difficulty": "proficient",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "NCERT Physics Class 12 Ch.2"
+      ],
+      "children": [],
+      "unlocks": []
     },
     {
       "id": "phys.em.capacitance",
@@ -4220,6 +4307,36 @@
       "estimated_hours": 4,
       "bloom": "apply",
       "mastery_threshold": 0.8,
+      "references": [
+        "NCERT Physics Class 12 Ch.3"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.em.cells-combination"
+      ]
+    },
+    {
+      "id": "phys.em.cells-combination",
+      "name": "Cells in Series and Parallel",
+      "aliases": [
+        "combination of cells",
+        "battery pack",
+        "internal resistance of cells"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.em.emf"
+      ],
+      "related": [
+        "phys.em.dc-circuits",
+        "phys.em.kirchhoffs-laws"
+      ],
+      "cross_links": [],
+      "description": "n identical cells in series give emf nE and internal resistance nr; m in parallel give emf E and internal resistance r/m, so series gives more current for large loads and parallel for loads small compared with r.",
+      "difficulty": "proficient",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
       "references": [
         "NCERT Physics Class 12 Ch.3"
       ],

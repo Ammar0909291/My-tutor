@@ -265,6 +265,8 @@ const CONCEPT_VISUALS: Record<string, VisualEntry> = {
   'phys.em.ac-basics':                { primary: 'circuit_diagram', all: ['circuit_diagram'] },
   'phys.em.self-inductance':          { primary: 'circuit_diagram', all: ['circuit_diagram'] },
   'phys.em.mutual-inductance':        { primary: 'circuit_diagram', all: ['circuit_diagram'] },
+  // Coverage-driven KG extension (2026-10-03): new circuit concepts.
+  'phys.em.cells-combination':        { primary: 'circuit_diagram', all: ['circuit_diagram'] },
   // P0 audit: 21 phys.em concepts are electrostatics/magnetism, NOT circuits
   // — electric-charge, coulombs-law, electric-field, electric-dipole,
   // gauss-law, electric-potential, capacitance, dielectrics, energy-

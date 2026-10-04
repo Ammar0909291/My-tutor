@@ -1,0 +1,415 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.em.cells-combination-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.em.cells-combination",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:4fa87ff38ea3edaaa7be597c6639f6c2d2a1bcb10ff262de60f71cb28aec27f1",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.em.cells-combination.md": "sha256:56ea88fde6e74e9acf68703a1da603eff8e8f7840686ef3d9c94039020516fe0"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.em.cells-combination",
+    "name": "Cells in Series and Parallel",
+    "difficultyRaw": "proficient (3)",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "phys.em.emf"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.em.cells-combination-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.em.cells-combination (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.em.cells-combination.md": "sha256:56ea88fde6e74e9acf68703a1da603eff8e8f7840686ef3d9c94039020516fe0"
+      },
+      "contentHash": "sha256:3c02f21d709fe50dd6845e3a6f8392323ee1e56367c63adfa409d17d40c46efd",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.em.cells-combination.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.cells-combination.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.cells-combination"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.cells-combination\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.cells-combination.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.cells-combination.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.cells-combination"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.cells-combination\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.cells-combination.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.cells-combination.md#TA-3 (addresses MC-PARALLEL-ADDS-EMF)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.cells-combination"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.cells-combination\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.cells-combination.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.cells-combination.md#TA-4 (addresses MC-SERIES-ALWAYS-BETTER)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.cells-combination"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.cells-combination\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.cells-combination.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.cells-combination.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.cells-combination"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.cells-combination\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.cells-combination.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.cells-combination.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.cells-combination"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.cells-combination\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.cells-combination.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.cells-combination.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.cells-combination"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.cells-combination\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.em.cells-combination/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "phys.em.cells-combination",
+      "title": "Learning Objective",
+      "content": "[Boundary statement]\nA student who achieves mastery demonstrates:\n1. Combines n identical cells (emf E, internal resistance r) in series: emf nE, internal resistance nr, current I = nE / (R + nr); and m identical cells in parallel: emf E (NOT mE), internal resistance r/m, current I = E / (R + r/m).\n2. Computes both arrangements for a given load — e.g. four 1.5 V cells, r = 0.5 Ω each, with R = 10 Ω: series 6 / (10 + 2) = 0.50 A; parallel 1.5 / (10 + 0.125) ≈ 0.15 A; with R = 0.1 Ω: series 6 / 2.1 ≈ 2.9 A; parallel 1.5 / 0.225 ≈ 6.7 A.\n3. Chooses the arrangement from the load: series when R ≫ r (the extra emf wins), parallel when R ≪ r (the lower internal resistance wins), and explains that parallel cells also share the current, so each lasts longer.\n\nA student who says \"four 1.5 V cells in parallel give 6 V\", or that \"series always gives the bigger current\", has **NOT** achieved mastery — both ignore internal resistance and break every battery-pack and power-supply problem.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.cells-combination.md",
+        "startLine": 17,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.em.cells-combination/misconception/MC-PARALLEL-ADDS-EMF",
+      "kind": "misconception",
+      "conceptId": "phys.em.cells-combination",
+      "title": "Cells in parallel add their emfs",
+      "content": "### MC-PARALLEL-ADDS-EMF: \"Cells in parallel add their emfs\"\ntrigger_signal: student gives nE for cells in parallel.\nconflict_evidence [P28]: \"In parallel, all four positive terminals are joined by one wire and all four negative terminals by another. A voltmeter across those two wires — what does it measure the potential difference between?\"\nbridge_text [P30]: \"Between the positive and negative terminal of ANY one cell — they are all connected to the same two wires. So the combination's emf is that of one cell, 1.5 V. What parallel changes is the internal resistance: four paths, r/4.\"\nreplacement_text [P31]: \"Series: emfs add, internal resistances add. Parallel (identical cells): emf stays E, internal resistance becomes r/m.\"\ndiscrimination_pairs [P33]: [\"four 1.5 V cells in series: 6 V, 2 Ω vs in parallel: 1.5 V, 0.125 Ω\", \"a torch (cells in series for voltage) vs a power bank (cells in parallel for capacity)\"]\ns6_path: skip P28; measure two real cells side by side with a voltmeter — 1.5 V, the same as one.",
+      "localKey": "MC-PARALLEL-ADDS-EMF",
+      "language": "en",
+      "refs": [
+        "MC-PARALLEL-ADDS-EMF"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.cells-combination.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.em.cells-combination/misconception/MC-SERIES-ALWAYS-BETTER",
+      "kind": "misconception",
+      "conceptId": "phys.em.cells-combination",
+      "title": "Series always gives the bigger current",
+      "content": "### MC-SERIES-ALWAYS-BETTER: \"Series always gives the bigger current\"\ntrigger_signal: student picks series for every load, reasoning only from total emf.\nconflict_evidence [P28]: \"Load 0.1 Ω. Series: 6 V / (0.1 + 2) Ω ≈ 2.9 A. Parallel: 1.5 V / (0.1 + 0.125) Ω ≈ 6.7 A. Which is bigger?\"\nbridge_text [P30]: \"Parallel — because with such a small load, the cells' own internal resistance is most of the circuit. Series adds four lots of internal resistance; parallel divides it by four.\"\nreplacement_text [P31]: \"Compare R with r: R ≫ r → series (extra emf wins); R ≪ r → parallel (lower internal resistance wins).\"\ndiscrimination_pairs [P33]: [\"10 Ω lamp: series 0.50 A > parallel 0.15 A\", \"0.1 Ω wire: parallel 6.7 A > series 2.9 A\"]\ns6_path: skip P28; tabulate both currents for the two loads together and circle the larger one in each row.",
+      "localKey": "MC-SERIES-ALWAYS-BETTER",
+      "language": "en",
+      "refs": [
+        "MC-SERIES-ALWAYS-BETTER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.cells-combination.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.em.cells-combination/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.cells-combination",
+      "title": "Two Ways to Wire Four Cells",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Two Ways to Wire Four Cells\",\"primitives\":[\"P01\",\"P04\",\"P05\",\"P07\",\"P14\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.cells-combination.md",
+        "startLine": 11,
+        "endLine": 18
+      }
+    },
+    {
+      "assetId": "phys.em.cells-combination/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.cells-combination",
+      "title": "Series",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Series\",\"primitives\":[\"P02\",\"P07\",\"P08\",\"P13\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.cells-combination.md",
+        "startLine": 18,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "phys.em.cells-combination/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.cells-combination",
+      "title": "Parallel",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Parallel\",\"primitives\":[\"P02\",\"P08\",\"P13\",\"P34\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-PARALLEL-ADDS-EMF\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-PARALLEL-ADDS-EMF"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.cells-combination.md",
+        "startLine": 26,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "phys.em.cells-combination/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.cells-combination",
+      "title": "Choosing by the Load",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Choosing by the Load\",\"primitives\":[\"P02\",\"P13\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-SERIES-ALWAYS-BETTER\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-SERIES-ALWAYS-BETTER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.cells-combination.md",
+        "startLine": 36,
+        "endLine": 43
+      }
+    },
+    {
+      "assetId": "phys.em.cells-combination/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.cells-combination",
+      "title": "Sharing the Load",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Sharing the Load\",\"primitives\":[\"P02\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.cells-combination.md",
+        "startLine": 43,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "phys.em.cells-combination/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.cells-combination",
+      "title": "Formative Assessment",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Formative Assessment\",\"primitives\":[\"P02\",\"P35\",\"P49\",\"P51\",\"P55\",\"P79\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.cells-combination.md",
+        "startLine": 48,
+        "endLine": 55
+      }
+    },
+    {
+      "assetId": "phys.em.cells-combination/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.cells-combination",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P28\",\"P41\",\"P54\",\"P55\",\"P62\",\"P68\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.cells-combination.md",
+        "startLine": 55,
+        "endLine": 97
+      }
+    },
+    {
+      "assetId": "phys.em.cells-combination/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.em.cells-combination",
+      "title": "Assessment Battery",
+      "content": "| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (classify) | \"Four 1.5 V cells in parallel — emf?\" | CORRECT = 1.5 V |\n| P74 (classify) | \"Series or parallel for R ≪ r?\" | CORRECT = parallel |\n| P75 (boundary) | \"Ideal cells (r = 0) — parallel ever better?\" | CORRECT = no; series always gives more current, parallel only shares it |\n| P76 (transfer) | \"Six 2 V cells in series\" | CORRECT = 12 V; a car starter needs high voltage |\n| P77 (generate) | \"Packs for a 0.2 Ω motor and a 20 Ω lamp\" | CORRECT = parallel (or mixed) for the motor, series for the lamp, with currents |\n| P78 (explain) | \"Why series for large loads, parallel for small?\" | CORRECT = which of emf or internal resistance dominates |\n| P79 (predict) | \"One cell reversed in parallel\" | CORRECT = circulating current between the cells, wasted energy |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.cells-combination.md",
+        "startLine": 179,
+        "endLine": 191
+      }
+    },
+    {
+      "assetId": "phys.em.cells-combination/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.em.cells-combination",
+      "title": "Student State Matrix",
+      "content": "| State | Why here | Tell-tale behaviour | Protocol |\n|---|---|---|---|\n| S0 | Single cells only | Cannot say what wiring cells side by side does | Protocol A (Concrete) |\n| S1 | Formulas without choice | Computes both currents but cannot say which suits a load | Protocol B (Counterexample-first) |\n| S2-PARALLEL-ADDS-EMF | Every combination adds voltage | \"Parallel cells give 6 V\" | Misconception Engine → then Protocol C |\n| S2-SERIES-ALWAYS-BETTER | Internal resistance ignored | \"Series always gives more current\" | Misconception Engine → then Protocol C |\n| S3 | Partial — series fine, parallel not | Correct nE/(R + nr), wrong parallel internal resistance | Protocol C (Guided Questioning) |\n| S6 | Anxiety on fractions of resistance | Freezes at r/m | Protocol F (Low Pressure) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.cells-combination.md",
+        "startLine": 27,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "phys.em.cells-combination/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.em.cells-combination",
+      "title": "Diagnostic Battery",
+      "content": "DB-1 (prior-exposure check):\n\"Have you seen how cells are put into a torch or a remote — end to end, or side by side?\"\n  No idea → S0. Enter Protocol A (Concrete).\n  Yes → DB-2.\n\nDB-2 (representation / misconception test):\n\"Four identical 1.5 V cells are connected in parallel. What is the emf of the combination?\"\n  \"1.5 V — parallel cells keep the emf of one; only the internal resistance changes\" → S3. Enter Protocol C.\n  \"1.5 V\" (no reason) → S1. Enter Protocol B.\n  \"6 V\" → SIGNAL:MISCONCEPTION:MC-PARALLEL-ADDS-EMF. Enter Misconception Engine.\n  Pause → add S6 flag; Protocol F if anxious, otherwise Protocol A.\n\nDB-3 (choice check — overlays):\n\"For a load of only 0.1 Ω, which gives more current: four cells (r = 0.5 Ω each) in series or in parallel?\"\n  \"Parallel — the internal resistance dominates\" → no flag.\n  \"Series — more volts, more current\" → add SIGNAL:MISCONCEPTION:MC-SERIES-ALWAYS-BETTER (repair at TA-4).\n  Confident and wrong on DB-2 → add S7 flag. Override to Protocol G.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-PARALLEL-ADDS-EMF",
+        "MC-SERIES-ALWAYS-BETTER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.cells-combination.md",
+        "startLine": 38,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "phys.em.cells-combination/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.em.cells-combination",
+      "title": "Prerequisite Check",
+      "content": "PD-1 (for `phys.em.emf`, and through it DC circuits):\n\"A cell has emf 1.5 V and internal resistance 0.5 Ω. What current flows through a 10 Ω resistor, and what is the terminal voltage?\"\n  Cannot give I = E/(R + r) ≈ 0.14 A and V = E − Ir → flag PREREQ-GAP-EMF.\n  In-session minimum repair: one P07 (a cell drawn as an ideal emf plus a small resistor) + one P34 (\"total resistance in the loop?\") then resume. If emf and internal resistance are absent, schedule a `phys.em.emf` session (S4 route).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.cells-combination.md",
+        "startLine": 58,
+        "endLine": 65
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

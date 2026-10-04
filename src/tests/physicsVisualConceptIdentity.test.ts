@@ -74,6 +74,8 @@ describe('phys.em: the circuit/field split is honoured', () => {
     'phys.em.amperes-law', 'phys.em.solenoid', 'phys.em.magnetic-materials',
     'phys.em.magnetic-dipole', 'phys.em.magnetic-flux', 'phys.em.faradays-law',
     'phys.em.lenzs-law', 'phys.em.maxwells-equations', 'phys.em.electromagnetic-waves',
+    // coverage-driven KG extension (2026-10-03)
+    'phys.em.electrostatic-potential-energy',
   ]
   const CIRCUITS = [
     'phys.em.electric-current', 'phys.em.ohms-law', 'phys.em.dc-circuits',
@@ -81,6 +83,8 @@ describe('phys.em: the circuit/field split is honoured', () => {
     'phys.em.potentiometer', 'phys.em.electrical-power', 'phys.em.emf',
     'phys.em.rc-circuits', 'phys.em.lc-circuits', 'phys.em.ac-basics',
     'phys.em.self-inductance', 'phys.em.mutual-inductance',
+    // coverage-driven KG extension (2026-10-03)
+    'phys.em.cells-combination',
   ]
 
   it('every real KG concept in this list is accounted for (no drift from the KG)', () => {
@@ -195,10 +199,14 @@ describe('coverage floor — this fix must not regress below its own result', ()
     // charges, p = qd, the field, the forces, and the torque τ = pE sinθ, all
     // re-derivable as the learner moves a slider), not a stretched substitute,
     // so the floor rises by exactly one rather than being reinterpreted.
+    //
+    // 77 -> 78 (coverage-driven KG extension, 2026-10-03): the new circuit
+    // concept 'phys.em.cells-combination' gets the same exact circuit_diagram
+    // entry as 'phys.em.emf' — a real circuit concept, not a blanket default.
     const covered = PHYS.filter((c) => lookupConceptVisual(c.id) !== null).length
-    expect(covered).toBeGreaterThanOrEqual(77)
-    // And the addition really was exactly one: nothing else silently changed.
-    expect(covered).toBe(77)
+    expect(covered).toBeGreaterThanOrEqual(78)
+    // And each addition really was exactly one: nothing else silently changed.
+    expect(covered).toBe(78)
   })
 
   it('zero orphan keys and zero duplicates remain physics-specific to this fix', () => {

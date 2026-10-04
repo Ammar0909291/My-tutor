@@ -109,6 +109,7 @@ import { buildPowerScene } from '@/lib/teaching/sceneGenerators/physicsCoreScene
 import { buildDensityScene, buildVernierScene, buildMassWeightScene, buildRectilinearScene } from '@/lib/teaching/sceneGenerators/physicsExtensionScenesB1'
 import { buildExperimentalGraphScene, buildSimpleMachineScene, buildVariationOfGScene, buildTerminalVelocityScene } from '@/lib/teaching/sceneGenerators/physicsExtensionScenesB2'
 import { buildCoolingScene, buildBlackbodyScene, buildEnergyResourcesScene, buildEchoScene } from '@/lib/teaching/sceneGenerators/physicsExtensionScenesB3'
+import { buildHumanEyeScene, buildScatteringScene, buildSystemEnergyScene, buildCellsScene } from '@/lib/teaching/sceneGenerators/physicsExtensionScenesB4'
 import {
   buildDisplacementScene, buildVelocityScene, buildAccelerationScene, buildRelativeMotionScene, buildTensionScene,
   buildConservativeForcesScene, buildAngularMomentumScene, buildAngularMomentumConservationScene,
@@ -563,6 +564,11 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'phys.therm.blackbody-radiation': buildBlackbodyScene,
   'phys.therm.energy-resources': buildEnergyResourcesScene,
   'phys.wave.echo-and-sonar': buildEchoScene,
+  // Coverage-driven KG extension, batch 4 (2026-10-03). See physicsExtensionScenesB4.ts.
+  'phys.opt.human-eye': buildHumanEyeScene,
+  'phys.opt.scattering-of-light': buildScatteringScene,
+  'phys.em.electrostatic-potential-energy': buildSystemEnergyScene,
+  'phys.em.cells-combination': buildCellsScene,
   // Batch 15 (2026-09-30): promoted from domain scope. See physicsCoreScenesB15.ts.
   'phys.mech.displacement':           buildDisplacementScene,
   'phys.mech.velocity':               buildVelocityScene,

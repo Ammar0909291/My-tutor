@@ -52916,6 +52916,454 @@ const ECHO_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.opt.human-eye ──────────────────────────────────────────────────────
+const HEYE = 'phys.opt.human-eye'
+const HEYE_SRC = 'docs/curriculum/blueprints/phys.opt.human-eye.md'
+
+const HEYE_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: HEYE,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The eye is a converging lens system: the cornea and the eye lens form a real, inverted image on the retina. The lens-to-retina distance is fixed, so to focus at different distances the eye changes its focal length instead — accommodation. The ciliary muscles squeeze the lens fatter (shorter focal length, more power) for near objects and let it relax thinner for distant ones; the lens does not move back and forth like a camera lens. A normal eye sees clearly from its near point, about 25 cm, to its far point at infinity. In myopia (short sight) the eye has too much power for distant light: rays from a distant object meet in front of the retina and the far point is closer than infinity. A diverging lens removes power so that distant objects appear to be at the far point; its focal length is minus the far-point distance — a 2 m far point needs f = −2 m, a power of −0.5 D. In hypermetropia (long sight) the eye has too little power for near light: rays from a near object would meet behind the retina and the near point is farther than 25 cm. A converging lens adds power, taking an object at 25 cm and forming its virtual image at the near point: for a 100 cm near point, 1/f = 1/25 − 1/100 = 3/100 per cm, so f ≈ 33 cm and the power is +3 D. With age the lens stiffens and accommodation fades — presbyopia — often corrected with bifocals.',
+    targetedMisconceptions: [`${HEYE}:MC-WRONG-LENS-TYPE`, `${HEYE}:MC-FOCUS-BY-MOVING`],
+    source: `${HEYE_SRC} — TA-1 image on the retina, TA-2 accommodation, TA-3 myopia, TA-4 hypermetropia, TA-5 presbyopia`,
+  },
+  {
+    conceptId: HEYE,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'It is tempting to think glasses "make a weak eye stronger", so every defect needs a converging, magnifying lens. Look at what a short-sighted eye actually does: light from a distant tree already comes to a focus in FRONT of the retina — the eye bends the light too much. Add a converging lens and the focus moves even further forward, making things worse. The correction must take power away: a diverging lens spreads the rays slightly before they enter the eye, so the focus lands on the retina. Only a long-sighted eye, which bends near light too little, needs a converging lens to add power. So read the sign: a negative prescription (−1.5 D) is a diverging lens for short sight; a positive one (+2 D) is a converging lens for long sight or reading. A second trap comes from the camera analogy. A camera focuses by moving its lens; your eye cannot — the lens is held in place by fibres inside an eyeball only about 2.5 cm long. Instead the ciliary muscles change the lens\'s SHAPE: fatter and more curved for near objects, thinner for distant ones. That changing focal length is accommodation.',
+    targetedMisconceptions: [`${HEYE}:MC-WRONG-LENS-TYPE`, `${HEYE}:MC-FOCUS-BY-MOVING`],
+    source: `${HEYE_SRC} — MC-WRONG-LENS-TYPE + MC-FOCUS-BY-MOVING, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const HEYE_PROBES: SeedProbe[] = [
+  {
+    conceptId: HEYE,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A short-sighted person\'s far point is 2 m. What lens corrects their distance vision?',
+    choices: [
+      { text: 'A diverging lens of focal length −2 m (power −0.5 D)', isCorrect: true },
+      { text: 'A converging lens of focal length +2 m (power +0.5 D)', isCorrect: false, misconceptionId: `${HEYE}:MC-WRONG-LENS-TYPE` },
+      { text: 'A diverging lens of power −2 D', isCorrect: false },
+      { text: 'A converging lens of power +2 D', isCorrect: false, misconceptionId: `${HEYE}:MC-WRONG-LENS-TYPE` },
+    ],
+    correctValue: 'diverging, f = −2 m, −0.5 D',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${HEYE}:MC-WRONG-LENS-TYPE`],
+    source: `${HEYE_SRC} — TA-3 worked case (f = −far point); −2 D confuses f with P`,
+  },
+  {
+    conceptId: HEYE,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A long-sighted person\'s near point is 100 cm. What power of reading glasses lets them read a book held at 25 cm?',
+    choices: [
+      { text: '+3 D (1/f = 1/25 − 1/100 per cm, so f ≈ 33 cm)', isCorrect: true },
+      { text: '−3 D', isCorrect: false, misconceptionId: `${HEYE}:MC-WRONG-LENS-TYPE` },
+      { text: '+5 D (1/25 + 1/100 per cm)', isCorrect: false },
+      { text: '+1 D (f = 100 cm)', isCorrect: false },
+    ],
+    correctValue: '+3 D',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${HEYE}:MC-WRONG-LENS-TYPE`],
+    source: `${HEYE_SRC} — TA-4 worked case (u = −25 cm, v = −100 cm); +5 D is the sign slip`,
+  },
+  {
+    conceptId: HEYE,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A short-sighted person cannot see distant objects clearly. Which lens corrects this, and why?',
+    choices: [
+      { text: 'A diverging lens — the eye focuses distant light in front of the retina, so some of its bending power must be removed', isCorrect: true },
+      { text: 'A converging lens — it makes the weak eye stronger, like a magnifying glass', isCorrect: false, misconceptionId: `${HEYE}:MC-WRONG-LENS-TYPE` },
+      { text: 'No lens can help; only surgery corrects short sight', isCorrect: false },
+    ],
+    correctValue: 'diverging lens',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${HEYE}:MC-WRONG-LENS-TYPE`],
+    source: `${HEYE_SRC} — DB-2 item and MC-WRONG-LENS-TYPE trigger_signal`,
+  },
+  {
+    conceptId: HEYE,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'You look up from a book to a tree far away, and the tree becomes sharp. What did your eye do?',
+    choices: [
+      { text: 'The ciliary muscles relaxed, letting the lens become thinner with a longer focal length; the lens stayed in place', isCorrect: true },
+      { text: 'The lens moved closer to the retina, as a camera lens does', isCorrect: false, misconceptionId: `${HEYE}:MC-FOCUS-BY-MOVING` },
+      { text: 'The retina moved forward to meet the image', isCorrect: false, misconceptionId: `${HEYE}:MC-FOCUS-BY-MOVING` },
+    ],
+    correctValue: 'lens became thinner (longer focal length)',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${HEYE}:MC-FOCUS-BY-MOVING`],
+    source: `${HEYE_SRC} — DB-3 accommodation check and MC-FOCUS-BY-MOVING conflict_evidence`,
+  },
+  {
+    conceptId: HEYE,
+    subjectSlug: 'physics',
+    probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A prescription reads −1.5 D. Which defect does it correct?',
+    choices: [
+      { text: 'Short sight (myopia) — negative power means a diverging lens, which removes excess bending power', isCorrect: true },
+      { text: 'Long sight (hypermetropia) — the eye is weak, so its number is negative', isCorrect: false, misconceptionId: `${HEYE}:MC-WRONG-LENS-TYPE` },
+      { text: 'Presbyopia — reading glasses always have negative power', isCorrect: false, misconceptionId: `${HEYE}:MC-WRONG-LENS-TYPE` },
+    ],
+    correctValue: 'myopia',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${HEYE}:MC-WRONG-LENS-TYPE`],
+    source: `${HEYE_SRC} — TA-6 P79 predict item`,
+  },
+]
+
+// ─── phys.opt.scattering-of-light ────────────────────────────────────────────
+const LSCT = 'phys.opt.scattering-of-light'
+const LSCT_SRC = 'docs/curriculum/blueprints/phys.opt.scattering-of-light.md'
+
+const LSCT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: LSCT,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'When light meets tiny particles, some of it is redirected in every direction — scattered. A torch beam through clear water is almost invisible from the side, but add a few drops of milk and it glows. For particles much smaller than the wavelength, such as air molecules, scattering grows steeply as the wavelength shrinks: intensity ∝ 1/λ⁴. Blue light at about 450 nm is scattered about (700/450)⁴ ≈ 6 times more strongly than red at about 700 nm. So air molecules scatter the blue part of sunlight across the whole sky: wherever you look away from the Sun you see scattered light, mostly blue. The sky over a desert is just as blue, and on the Moon, with no air, the sky is black. The direct beam loses that blue as it travels. At noon sunlight crosses little air and the Sun looks white-yellow; at sunrise and sunset it crosses tens of times more, so most of the blue is scattered out of the beam on the way and the Sun looks red. Red is used for danger signals because it is scattered least and carries farthest. Larger particles — cloud droplets, the fat in milk — are bigger than the wavelength and scatter all colours about equally, so clouds look white. And whenever a beam passes through smoke, dust or a colloid, the particles scatter light toward you and its path becomes visible: the Tyndall effect.',
+    targetedMisconceptions: [`${LSCT}:MC-SKY-REFLECTS-SEA`, `${LSCT}:MC-SUNSET-ADDS-RED`],
+    source: `${LSCT_SRC} — TA-1 visible beam, TA-2 1/λ⁴, TA-3 blue sky, TA-4 red sunset, TA-5 clouds and Tyndall`,
+  },
+  {
+    conceptId: LSCT,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A popular explanation is that the sky is blue because it reflects the sea. But the sky over the Sahara, more than a thousand kilometres from any sea, is just as deep a blue — and on the Moon, with no air at all, the daytime sky is black. The blue comes from the air itself: air molecules scatter short wavelengths about six times more strongly than red, so the light reaching you from the sky away from the Sun is mostly blue. If anything it is the other way round: the sea looks blue partly because it reflects the sky. A second story is that the setting Sun gives out more red light. Satellites above the atmosphere measure the Sun\'s colour all day, and it does not change. What changes is the path: at sunset sunlight crosses tens of times more air than at noon, and along that long path most of the blue is scattered sideways out of the direct beam. What reaches your eye is what is left — red and orange. Nothing is added; blue is removed. The blue sky and the red sunset are one process seen two ways: scattered light (blue) and transmitted light (reddened), exactly as a milky tank of water glows bluish from the side and shines orange out of its end.',
+    targetedMisconceptions: [`${LSCT}:MC-SKY-REFLECTS-SEA`, `${LSCT}:MC-SUNSET-ADDS-RED`],
+    source: `${LSCT_SRC} — MC-SKY-REFLECTS-SEA + MC-SUNSET-ADDS-RED, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const LSCT_PROBES: SeedProbe[] = [
+  {
+    conceptId: LSCT,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'For scattering by air molecules (intensity ∝ 1/λ⁴), how many times more strongly is light of wavelength 400 nm scattered than light of 800 nm?',
+    choices: [
+      { text: '16 times', isCorrect: true },
+      { text: '2 times', isCorrect: false },
+      { text: '4 times', isCorrect: false },
+      { text: 'The same — scattering does not depend on wavelength', isCorrect: false },
+    ],
+    correctValue: '16',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [],
+    source: `${LSCT_SRC} — TA-2 P34 ((800/400)⁴ = 16)`,
+  },
+  {
+    conceptId: LSCT,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Clouds are made of water droplets that scatter sunlight. Why do clouds look white rather than blue?',
+    choices: [
+      { text: 'The droplets are much larger than the wavelength of light, so they scatter all colours about equally', isCorrect: true },
+      { text: 'Clouds reflect the white sea surface below them', isCorrect: false, misconceptionId: `${LSCT}:MC-SKY-REFLECTS-SEA` },
+      { text: 'Water absorbs all colours except white', isCorrect: false },
+      { text: 'Clouds give off their own white light', isCorrect: false },
+    ],
+    correctValue: 'large droplets scatter all colours equally',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${LSCT}:MC-SKY-REFLECTS-SEA`],
+    source: `${LSCT_SRC} — TA-5 P17 contrast (particle size vs wavelength)`,
+  },
+  {
+    conceptId: LSCT,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Is the sky blue over a desert a thousand kilometres from any sea, and why?',
+    choices: [
+      { text: 'Yes — air molecules scatter blue sunlight far more than red, so the sky\'s colour comes from the air itself', isCorrect: true },
+      { text: 'Much less blue — the sky gets its colour by reflecting the ocean', isCorrect: false, misconceptionId: `${LSCT}:MC-SKY-REFLECTS-SEA` },
+      { text: 'No — deserts have no water vapour, so the sky is white there', isCorrect: false },
+    ],
+    correctValue: 'yes, scattering by air',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${LSCT}:MC-SKY-REFLECTS-SEA`],
+    source: `${LSCT_SRC} — DB-3 sky check and MC-SKY-REFLECTS-SEA conflict_evidence`,
+  },
+  {
+    conceptId: LSCT,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why does the Sun look reddish at sunset but yellow-white at noon?',
+    choices: [
+      { text: 'At sunset its light crosses much more air, so most of the blue is scattered out of the beam before it reaches us', isCorrect: true },
+      { text: 'The Sun gives out more red light in the evening', isCorrect: false, misconceptionId: `${LSCT}:MC-SUNSET-ADDS-RED` },
+      { text: 'The air adds red colour to sunlight in the evening', isCorrect: false, misconceptionId: `${LSCT}:MC-SUNSET-ADDS-RED` },
+    ],
+    correctValue: 'longer path scatters out the blue',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${LSCT}:MC-SUNSET-ADDS-RED`],
+    source: `${LSCT_SRC} — DB-2 item and MC-SUNSET-ADDS-RED trigger_signal`,
+  },
+  {
+    conceptId: LSCT,
+    subjectSlug: 'physics',
+    probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A torch shines through a tank of water with a little milk in it. Seen from the side the beam looks bluish; the light coming out of the far end looks orange. What does this model?',
+    choices: [
+      { text: 'The blue sky (light scattered sideways) and the red sunset (light that has travelled a long way with its blue removed)', isCorrect: true },
+      { text: 'The torch changes colour as its battery runs down', isCorrect: false },
+      { text: 'The milk adds orange colour to the light as it passes through', isCorrect: false, misconceptionId: `${LSCT}:MC-SUNSET-ADDS-RED` },
+    ],
+    correctValue: 'blue sky and red sunset',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${LSCT}:MC-SUNSET-ADDS-RED`],
+    source: `${LSCT_SRC} — TA-1 demonstration and MC-SUNSET-ADDS-RED discrimination_pairs`,
+  },
+]
+
+// ─── phys.em.electrostatic-potential-energy ──────────────────────────────────
+const ESPE = 'phys.em.electrostatic-potential-energy'
+const ESPE_SRC = 'docs/curriculum/blueprints/phys.em.electrostatic-potential-energy.md'
+
+const ESPE_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ESPE,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Pushing two like charges together takes work, and that work is stored — not in either charge, but in the arrangement. The electrostatic potential energy of a system is the work an external agent must do to assemble it slowly from charges that start infinitely far apart. The first charge costs nothing, because there is no field yet. The second, q₂, must be brought to a point where q₁ makes potential kq₁/r, costing q₂ × kq₁/r. So a pair stores U = kq₁q₂/r: for +2 μC and +3 μC 0.3 m apart, U = 9 × 10⁹ × 6 × 10⁻¹² / 0.3 = 0.18 J. For more charges, keep assembling one at a time: the third charge is pushed against both of the first two. The total is a sum over every distinct PAIR, each counted once — three equal charges at the corners of an equilateral triangle of side a have U = 3kq²/a, and n charges have n(n − 1)/2 pairs. Keep the signs. For like charges U > 0: the system was pushed together, and released it flies apart. For unlike charges U < 0: they pull together, and an agent must supply |U| to separate them — the system is bound, like the electron and proton in a hydrogen atom. Rearranging charges costs the change in U: moving the 2 μC and 3 μC charges from 0.3 m to 0.1 m apart takes 0.54 − 0.18 = 0.36 J.',
+    targetedMisconceptions: [`${ESPE}:MC-DOUBLE-COUNT`, `${ESPE}:MC-SIGN-IGNORED`],
+    source: `${ESPE_SRC} — TA-1/TA-2 assembly and the pair formula, TA-3 pair counting, TA-4 sign, TA-5 rearrangement`,
+  },
+  {
+    conceptId: ESPE,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'For three equal charges at the corners of an equilateral triangle, a common answer is 6kq²/a: each charge interacts with two others, so three charges times two. Build the triangle one charge at a time instead. The first charge costs nothing. The second costs kq²/a. The third is pushed against both of the others: 2kq²/a. Total: 3kq²/a. The work to assemble the system IS its energy, and each interaction was paid for exactly once — when the second of the two charges arrived. Adding up "each charge with every other" pays every pair twice. The second trap is dropping the signs, as if potential energy were always positive. Hold a +q and a −q apart and let go: they rush together, gaining kinetic energy. That energy must come from a fall in potential energy — and with U = kq₁q₂/r and q₁q₂ negative, U is negative and becomes MORE negative as they approach. The sign carries the physics: positive U means the charges would fly apart; negative U means the system is bound, and it takes work to pull it apart.',
+    targetedMisconceptions: [`${ESPE}:MC-DOUBLE-COUNT`, `${ESPE}:MC-SIGN-IGNORED`],
+    source: `${ESPE_SRC} — MC-DOUBLE-COUNT + MC-SIGN-IGNORED, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const ESPE_PROBES: SeedProbe[] = [
+  {
+    conceptId: ESPE,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Charges of +2 μC and +3 μC are 0.3 m apart (k = 9 × 10⁹ N m² C⁻²). What is the electrostatic potential energy of the pair?',
+    choices: [
+      { text: '0.18 J', isCorrect: true },
+      { text: '0.6 J', isCorrect: false },
+      { text: '0.054 J', isCorrect: false },
+      { text: '−0.18 J — potential energy is negative for charges', isCorrect: false },
+    ],
+    correctValue: '0.18 J',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [],
+    source: `${ESPE_SRC} — TA-2 worked case; 0.6 J divides by r², 0.054 J multiplies by r`,
+  },
+  {
+    conceptId: ESPE,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'The +2 μC and +3 μC charges are pushed from 0.3 m apart to 0.1 m apart. How much work does the external agent do?',
+    choices: [
+      { text: '0.36 J (0.54 J − 0.18 J)', isCorrect: true },
+      { text: '0.54 J', isCorrect: false },
+      { text: '−0.36 J — the charges do the work', isCorrect: false },
+      { text: '0.72 J', isCorrect: false, misconceptionId: `${ESPE}:MC-DOUBLE-COUNT` },
+    ],
+    correctValue: '0.36 J',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ESPE}:MC-DOUBLE-COUNT`],
+    source: `${ESPE_SRC} — TA-5 P34 (ΔU = 0.54 − 0.18)`,
+  },
+  {
+    conceptId: ESPE,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Three equal charges q sit at the corners of an equilateral triangle of side a. What is the electrostatic potential energy of the system?',
+    choices: [
+      { text: '3kq²/a — there are three pairs, each counted once', isCorrect: true },
+      { text: '6kq²/a — each of the three charges interacts with two others', isCorrect: false, misconceptionId: `${ESPE}:MC-DOUBLE-COUNT` },
+      { text: 'kq²/a — only the last charge brought in costs work', isCorrect: false },
+    ],
+    correctValue: '3kq²/a',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ESPE}:MC-DOUBLE-COUNT`],
+    source: `${ESPE_SRC} — DB-2 item and MC-DOUBLE-COUNT trigger_signal`,
+  },
+  {
+    conceptId: ESPE,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A +q and a −q are held 1 cm apart. What is the sign of their electrostatic potential energy, and what happens when they are released?',
+    choices: [
+      { text: 'Negative — they pull together, and work would be needed to separate them', isCorrect: true },
+      { text: 'Positive — potential energy is always positive, so they fly apart', isCorrect: false, misconceptionId: `${ESPE}:MC-SIGN-IGNORED` },
+      { text: 'Positive — energy is positive, but they still pull together', isCorrect: false, misconceptionId: `${ESPE}:MC-SIGN-IGNORED` },
+    ],
+    correctValue: 'negative; they pull together',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${ESPE}:MC-SIGN-IGNORED`],
+    source: `${ESPE_SRC} — DB-3 sign check and MC-SIGN-IGNORED conflict_evidence`,
+  },
+  {
+    conceptId: ESPE,
+    subjectSlug: 'physics',
+    probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'How many distinct pairs contribute to the electrostatic potential energy of a system of four point charges?',
+    choices: [
+      { text: '6 — four sides and two diagonals for a square, n(n − 1)/2 in general', isCorrect: true },
+      { text: '12 — each of the four charges pairs with three others', isCorrect: false, misconceptionId: `${ESPE}:MC-DOUBLE-COUNT` },
+      { text: '4 — one for each charge', isCorrect: false },
+    ],
+    correctValue: '6',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ESPE}:MC-DOUBLE-COUNT`],
+    source: `${ESPE_SRC} — TA-3 P34 (pairs for four and n charges)`,
+  },
+]
+
+// ─── phys.em.cells-combination ───────────────────────────────────────────────
+const CELL = 'phys.em.cells-combination'
+const CELL_SRC = 'docs/curriculum/blueprints/phys.em.cells-combination.md'
+
+const CELL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CELL,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A real cell behaves like an ideal emf E with a small internal resistance r. Connect n identical cells in series — end to end — and both add: the emf is nE and the internal resistance nr, so the current through a load R is I = nE / (R + nr). Four 1.5 V cells with r = 0.5 Ω each give 6 V and 2 Ω; through a 10 Ω lamp, I = 6 / 12 = 0.50 A. Connect m identical cells in parallel — all positive terminals joined, all negative terminals joined — and the emf does NOT add: the two common wires are connected across every cell, so the potential difference between them is that of one cell, E. What changes is the internal resistance: m equal paths in parallel give r/m. The same four cells in parallel give 1.5 V and 0.125 Ω, so the 10 Ω lamp gets 1.5 / 10.125 ≈ 0.15 A — and each cell supplies only a quarter of it, so a parallel pack lasts longer. Which arrangement gives more current depends on the load. When R is much larger than r, the extra emf of series wins. When R is much smaller than r, internal resistance dominates and parallel wins: with a 0.1 Ω load, series gives 6 / 2.1 ≈ 2.9 A but parallel gives 1.5 / 0.225 ≈ 6.7 A.',
+    targetedMisconceptions: [`${CELL}:MC-PARALLEL-ADDS-EMF`, `${CELL}:MC-SERIES-ALWAYS-BETTER`],
+    source: `${CELL_SRC} — TA-2 series, TA-3 parallel, TA-4 choosing by the load, TA-5 sharing`,
+  },
+  {
+    conceptId: CELL,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Torches put cells end to end, so it is easy to think that more cells always means more volts, however they are wired. Trace the parallel wiring: all four positive terminals are joined by one wire and all four negative terminals by another. A voltmeter across those two wires measures the potential difference between the terminals of ANY one cell — 1.5 V, not 6 V. Cells in parallel keep the emf of one cell; what parallel changes is the internal resistance, divided by the number of cells. A second trap is to think series always gives the bigger current because it has the bigger emf. That ignores the internal resistance, which series adds up. Try a very small load of 0.1 Ω with four cells of 1.5 V and 0.5 Ω each. Series: 6 V across 0.1 + 2 = 2.1 Ω, about 2.9 A. Parallel: 1.5 V across 0.1 + 0.125 = 0.225 Ω, about 6.7 A. With such a small load, the cells\' own resistance is most of the circuit, so dividing it wins. The rule is to compare the load with the internal resistance: series when R ≫ r, parallel when R ≪ r.',
+    targetedMisconceptions: [`${CELL}:MC-PARALLEL-ADDS-EMF`, `${CELL}:MC-SERIES-ALWAYS-BETTER`],
+    source: `${CELL_SRC} — MC-PARALLEL-ADDS-EMF + MC-SERIES-ALWAYS-BETTER, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const CELL_PROBES: SeedProbe[] = [
+  {
+    conceptId: CELL,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Four identical cells, each of emf 1.5 V and internal resistance 0.5 Ω, are connected in series to a 10 Ω resistor. What current flows?',
+    choices: [
+      { text: '0.50 A', isCorrect: true },
+      { text: '0.60 A — 6 V across the 10 Ω resistor alone', isCorrect: false, misconceptionId: `${CELL}:MC-SERIES-ALWAYS-BETTER` },
+      { text: '0.15 A', isCorrect: false },
+      { text: '0.14 A', isCorrect: false },
+    ],
+    correctValue: '0.50 A',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${CELL}:MC-SERIES-ALWAYS-BETTER`],
+    source: `${CELL_SRC} — TA-2 worked case (6 / (10 + 2)); 0.60 A ignores internal resistance`,
+  },
+  {
+    conceptId: CELL,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'The same four cells (1.5 V, 0.5 Ω each) are now connected in parallel to the 10 Ω resistor. What current flows, and how much does each cell supply?',
+    choices: [
+      { text: 'About 0.15 A in total, about 0.037 A from each cell', isCorrect: true },
+      { text: 'About 0.59 A in total — 6 V across 10.125 Ω', isCorrect: false, misconceptionId: `${CELL}:MC-PARALLEL-ADDS-EMF` },
+      { text: 'About 0.15 A from each cell, 0.6 A in total', isCorrect: false },
+      { text: 'About 0.13 A — the internal resistance is 2 Ω', isCorrect: false },
+    ],
+    correctValue: 'about 0.15 A total, 0.037 A per cell',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CELL}:MC-PARALLEL-ADDS-EMF`],
+    source: `${CELL_SRC} — TA-3 P34 and TA-5 P34 (1.5 / 10.125; ÷ 4)`,
+  },
+  {
+    conceptId: CELL,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Four identical 1.5 V cells are connected in parallel. What is the emf of the combination?',
+    choices: [
+      { text: '1.5 V — the common wires sit across every cell, so the emf is that of one cell; only the internal resistance changes', isCorrect: true },
+      { text: '6 V — the four emfs add', isCorrect: false, misconceptionId: `${CELL}:MC-PARALLEL-ADDS-EMF` },
+      { text: '0.375 V — the emf is shared among four cells', isCorrect: false },
+    ],
+    correctValue: '1.5 V',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${CELL}:MC-PARALLEL-ADDS-EMF`],
+    source: `${CELL_SRC} — DB-2 item and MC-PARALLEL-ADDS-EMF conflict_evidence`,
+  },
+  {
+    conceptId: CELL,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Four cells (1.5 V, 0.5 Ω each) must drive a 0.1 Ω load. Which arrangement gives the larger current?',
+    choices: [
+      { text: 'Parallel — about 6.7 A, against about 2.9 A in series, because the internal resistance dominates such a small load', isCorrect: true },
+      { text: 'Series — it has the bigger emf, so it always gives more current', isCorrect: false, misconceptionId: `${CELL}:MC-SERIES-ALWAYS-BETTER` },
+      { text: 'They give the same current', isCorrect: false },
+    ],
+    correctValue: 'parallel',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CELL}:MC-SERIES-ALWAYS-BETTER`],
+    source: `${CELL_SRC} — DB-3 and TA-4 P41 diagnostic; MC-SERIES-ALWAYS-BETTER conflict_evidence`,
+  },
+  {
+    conceptId: CELL,
+    subjectSlug: 'physics',
+    probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'When should identical cells be connected in series rather than in parallel to get the largest current through a load R?',
+    choices: [
+      { text: 'When R is much larger than a cell\'s internal resistance r — then the extra emf wins', isCorrect: true },
+      { text: 'Always — series always gives more current', isCorrect: false, misconceptionId: `${CELL}:MC-SERIES-ALWAYS-BETTER` },
+      { text: 'Never — parallel always gives more current because the emfs add', isCorrect: false, misconceptionId: `${CELL}:MC-PARALLEL-ADDS-EMF` },
+    ],
+    correctValue: 'when R ≫ r',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CELL}:MC-SERIES-ALWAYS-BETTER`, `${CELL}:MC-PARALLEL-ADDS-EMF`],
+    source: `${CELL_SRC} — TA-4 think-aloud (R vs r rule)`,
+  },
+]
+
 // Batch export spreads for the extension (kept with the concepts above).
 const PHYS_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...DENS_EXPLANATIONS,
@@ -52930,6 +53378,10 @@ const PHYS_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...BBRD_EXPLANATIONS,
   ...ENRS_EXPLANATIONS,
   ...ECHO_EXPLANATIONS,
+  ...HEYE_EXPLANATIONS,
+  ...LSCT_EXPLANATIONS,
+  ...ESPE_EXPLANATIONS,
+  ...CELL_EXPLANATIONS,
 ]
 
 const PHYS_EXTENSION_PROBES: SeedProbe[] = [
@@ -52945,6 +53397,10 @@ const PHYS_EXTENSION_PROBES: SeedProbe[] = [
   ...BBRD_PROBES,
   ...ENRS_PROBES,
   ...ECHO_PROBES,
+  ...HEYE_PROBES,
+  ...LSCT_PROBES,
+  ...ESPE_PROBES,
+  ...CELL_PROBES,
 ]
 
 // ─── Batch export ────────────────────────────────────────────────────────────
