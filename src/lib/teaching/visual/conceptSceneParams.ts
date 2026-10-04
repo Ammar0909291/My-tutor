@@ -112,6 +112,7 @@ import { buildCoolingScene, buildBlackbodyScene, buildEnergyResourcesScene, buil
 import { buildHumanEyeScene, buildScatteringScene, buildSystemEnergyScene, buildCellsScene } from '@/lib/teaching/sceneGenerators/physicsExtensionScenesB4'
 import { buildGalvanometerScene, buildGeneratorScene, buildHouseholdScene, buildAtwoodScene } from '@/lib/teaching/sceneGenerators/physicsExtensionScenesB5'
 import { buildThinFilmScene, buildGratingScene, buildResolvingPowerScene, buildConductorScene } from '@/lib/teaching/sceneGenerators/physicsExtensionScenesB6'
+import { buildLcrScene, buildAcPowerScene, buildAlphaScatteringScene, buildNucleusScene } from '@/lib/teaching/sceneGenerators/physicsExtensionScenesB7'
 import {
   buildDisplacementScene, buildVelocityScene, buildAccelerationScene, buildRelativeMotionScene, buildTensionScene,
   buildConservativeForcesScene, buildAngularMomentumScene, buildAngularMomentumConservationScene,
@@ -581,6 +582,11 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'phys.opt.diffraction-grating': buildGratingScene,
   'phys.opt.resolving-power': buildResolvingPowerScene,
   'phys.em.conductors-electrostatics': buildConductorScene,
+  // Coverage-driven KG extension, batch 7 (2026-10-03). See physicsExtensionScenesB7.ts.
+  'phys.em.lcr-circuits': buildLcrScene,
+  'phys.em.ac-power': buildAcPowerScene,
+  'phys.mod.atomic-models': buildAlphaScatteringScene,
+  'phys.mod.nucleus-size-and-force': buildNucleusScene,
   // Batch 15 (2026-09-30): promoted from domain scope. See physicsCoreScenesB15.ts.
   'phys.mech.displacement':           buildDisplacementScene,
   'phys.mech.velocity':               buildVelocityScene,

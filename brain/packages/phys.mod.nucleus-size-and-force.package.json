@@ -1,0 +1,415 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mod.nucleus-size-and-force-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mod.nucleus-size-and-force",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:1938710e4502697f67e4126144b5a41efd49128590992bb77733a6833d166a42",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mod.nucleus-size-and-force.md": "sha256:a2ff7f272447cf59295bec7876881138aec26fe3e12608db0196f150cb81ee57"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.mod.nucleus-size-and-force",
+    "name": "Nuclear Composition, Size, Density and Nuclear Force",
+    "difficultyRaw": "proficient (3)",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "phys.mod.atomic-models"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mod.nucleus-size-and-force-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mod.nucleus-size-and-force (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mod.nucleus-size-and-force.md": "sha256:a2ff7f272447cf59295bec7876881138aec26fe3e12608db0196f150cb81ee57"
+      },
+      "contentHash": "sha256:84fe06b2249efd880b5cf8523d9da40da2be510f80d04e8380aff5138df5c5b3",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mod.nucleus-size-and-force.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.nucleus-size-and-force.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.nucleus-size-and-force"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.nucleus-size-and-force\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.nucleus-size-and-force.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.nucleus-size-and-force.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.nucleus-size-and-force"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.nucleus-size-and-force\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.nucleus-size-and-force.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.nucleus-size-and-force.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.nucleus-size-and-force"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.nucleus-size-and-force\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.nucleus-size-and-force.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.nucleus-size-and-force.md#TA-4 (addresses MC-HEAVY-NUCLEI-DENSER)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.nucleus-size-and-force"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.nucleus-size-and-force\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.nucleus-size-and-force.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.nucleus-size-and-force.md#TA-5 (addresses MC-GRAVITY-HOLDS-NUCLEUS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.nucleus-size-and-force"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.nucleus-size-and-force\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.nucleus-size-and-force.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.nucleus-size-and-force.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.nucleus-size-and-force"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.nucleus-size-and-force\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.nucleus-size-and-force.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.nucleus-size-and-force.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.nucleus-size-and-force"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.nucleus-size-and-force\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mod.nucleus-size-and-force/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "phys.mod.nucleus-size-and-force",
+      "title": "Learning Objective",
+      "content": "[Boundary statement]\nA student who achieves mastery demonstrates:\n1. Describes a nucleus by its atomic number Z (protons) and mass number A (protons + neutrons), with N = A − Z neutrons; isotopes share Z but differ in N — ³⁵Cl and ³⁷Cl both have 17 protons, with 18 and 20 neutrons.\n2. Uses R = R₀ A^(1/3), R₀ ≈ 1.2 fm (1 fm = 10⁻¹⁵ m), to find nuclear sizes — about 4.6 fm for iron-56 and 7.4 fm for uranium-238 — and explains why the nuclear density is the same for every nucleus: volume ∝ R³ ∝ A, and mass ∝ A, so ρ ≈ 2.3 × 10¹⁷ kg/m³ whatever the nucleus — about 10¹⁴ times the density of water.\n3. Explains the nuclear force — protons repel electrically, gravity is about 10³⁶ times weaker than that repulsion, so a different force must hold the nucleus together: strongly attractive between any two nucleons (protons or neutrons) at about 1–2 fm, negligible beyond a few femtometres, and repulsive at very short range.\n\nA student who thinks heavier nuclei are denser, or that gravity or the electrons hold the nucleus together, has **NOT** achieved mastery — those ideas block binding energy, radioactivity and fission.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.nucleus-size-and-force.md",
+        "startLine": 17,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.mod.nucleus-size-and-force/misconception/MC-HEAVY-NUCLEI-DENSER",
+      "kind": "misconception",
+      "conceptId": "phys.mod.nucleus-size-and-force",
+      "title": "Heavier nuclei are denser",
+      "content": "### MC-HEAVY-NUCLEI-DENSER: \"Heavier nuclei are denser\"\ntrigger_signal: student expects nuclear density to increase with mass number, treating \"heavier\" as \"denser\".\nconflict_evidence [P28]: \"Uranium-238 has 238 times the mass of a hydrogen nucleus. Its radius is 238^(1/3) ≈ 6.2 times larger. How many times larger is its volume?\"\nbridge_text [P30]: \"6.2³ ≈ 238 — exactly as many times larger as its mass. Mass and volume both grow in proportion to A, so A cancels: every nucleus has about the same density, 2.3 × 10¹⁷ kg/m³. Nucleons pack like marbles in a bag — more marbles, a bigger bag, the same packing.\"\nreplacement_text [P31]: \"R = R₀A^(1/3) ⇒ V ∝ A ⇒ nuclear density ≈ 2.3 × 10¹⁷ kg/m³ for all nuclei.\"\ndiscrimination_pairs [P33]: [\"hydrogen: R ≈ 1.2 fm, ρ ≈ 2.3 × 10¹⁷ kg/m³\", \"uranium-238: R ≈ 7.4 fm, ρ ≈ 2.3 × 10¹⁷ kg/m³\"]\ns6_path: skip P28; a bag of 10 marbles vs a bag of 1000 — same marbles, same packing.",
+      "localKey": "MC-HEAVY-NUCLEI-DENSER",
+      "language": "en",
+      "refs": [
+        "MC-HEAVY-NUCLEI-DENSER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.nucleus-size-and-force.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.mod.nucleus-size-and-force/misconception/MC-GRAVITY-HOLDS-NUCLEUS",
+      "kind": "misconception",
+      "conceptId": "phys.mod.nucleus-size-and-force",
+      "title": "Gravity (or the electrons) holds the nucleus together",
+      "content": "### MC-GRAVITY-HOLDS-NUCLEUS: \"Gravity (or the electrons) holds the nucleus together\"\ntrigger_signal: student attributes the stability of the nucleus to gravity between nucleons or to attraction by the orbiting electrons.\nconflict_evidence [P28]: \"Compare the electric repulsion and the gravitational attraction between two protons — both fall off as 1/r². Which is bigger, and by how much?\"\nbridge_text [P30]: \"The electric repulsion is about 10³⁶ times the gravitational attraction, at any distance. The electrons are far outside the nucleus and pull on the protons, not push them together. Something else — the nuclear force — must be strongly attractive between nucleons at 1–2 fm, and it must die away within a few femtometres, or it would drag neighbouring nuclei together too.\"\nreplacement_text [P31]: \"The nuclear force: strongly attractive between any two nucleons at ~1–2 fm, negligible beyond a few fm, repulsive at very short range; independent of charge.\"\ndiscrimination_pairs [P33]: [\"two protons 1 fm apart: nuclear attraction wins\", \"two protons 10 fm apart: only the electric repulsion remains\"]\ns6_path: skip P28; state the 10³⁶ ratio and the short range plainly.",
+      "localKey": "MC-GRAVITY-HOLDS-NUCLEUS",
+      "language": "en",
+      "refs": [
+        "MC-GRAVITY-HOLDS-NUCLEUS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.nucleus-size-and-force.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.mod.nucleus-size-and-force/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.nucleus-size-and-force",
+      "title": "A Teaspoon of Nucleus",
+      "content": "{\"id\":\"TA-1\",\"title\":\"A Teaspoon of Nucleus\",\"primitives\":[\"P01\",\"P04\",\"P05\",\"P06\",\"P14\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.nucleus-size-and-force.md",
+        "startLine": 11,
+        "endLine": 18
+      }
+    },
+    {
+      "assetId": "phys.mod.nucleus-size-and-force/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.nucleus-size-and-force",
+      "title": "Z, A and N",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Z, A and N\",\"primitives\":[\"P02\",\"P06\",\"P08\",\"P13\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.nucleus-size-and-force.md",
+        "startLine": 18,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "phys.mod.nucleus-size-and-force/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.nucleus-size-and-force",
+      "title": "Size",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Size\",\"primitives\":[\"P02\",\"P13\",\"P34\",\"P49\",\"P50\",\"P51\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.nucleus-size-and-force.md",
+        "startLine": 26,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "phys.mod.nucleus-size-and-force/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.nucleus-size-and-force",
+      "title": "Same Density for Every Nucleus",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Same Density for Every Nucleus\",\"primitives\":[\"P02\",\"P34\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-HEAVY-NUCLEI-DENSER\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-HEAVY-NUCLEI-DENSER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.nucleus-size-and-force.md",
+        "startLine": 33,
+        "endLine": 41
+      }
+    },
+    {
+      "assetId": "phys.mod.nucleus-size-and-force/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.nucleus-size-and-force",
+      "title": "The Nuclear Force",
+      "content": "{\"id\":\"TA-5\",\"title\":\"The Nuclear Force\",\"primitives\":[\"P02\",\"P13\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-GRAVITY-HOLDS-NUCLEUS\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-GRAVITY-HOLDS-NUCLEUS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.nucleus-size-and-force.md",
+        "startLine": 41,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "phys.mod.nucleus-size-and-force/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.nucleus-size-and-force",
+      "title": "Formative Assessment",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Formative Assessment\",\"primitives\":[\"P02\",\"P35\",\"P49\",\"P51\",\"P55\",\"P79\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.nucleus-size-and-force.md",
+        "startLine": 48,
+        "endLine": 55
+      }
+    },
+    {
+      "assetId": "phys.mod.nucleus-size-and-force/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.nucleus-size-and-force",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P28\",\"P41\",\"P54\",\"P55\",\"P62\",\"P68\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.nucleus-size-and-force.md",
+        "startLine": 55,
+        "endLine": 97
+      }
+    },
+    {
+      "assetId": "phys.mod.nucleus-size-and-force/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mod.nucleus-size-and-force",
+      "title": "Assessment Battery",
+      "content": "| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (classify) | \"Same Z, different A\" | CORRECT = isotopes |\n| P74 (classify) | \"U-238 vs H: denser?\" | CORRECT = about the same |\n| P75 (boundary) | \"Protons 10 fm apart\" | CORRECT = electric force dominates; nuclear force negligible |\n| P76 (transfer) | \"Neutron stars\" | CORRECT = nuclear density, ~10¹⁷ kg/m³ |\n| P77 (generate) | \"Radius for A = 125\" | CORRECT = 1.2 × 5 = 6.0 fm |\n| P78 (explain) | \"Why not gravity\" | CORRECT = 10³⁶ times weaker than the repulsion |\n| P79 (predict) | \"8 × A → radius?\" | CORRECT = doubles |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.nucleus-size-and-force.md",
+        "startLine": 179,
+        "endLine": 191
+      }
+    },
+    {
+      "assetId": "phys.mod.nucleus-size-and-force/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.nucleus-size-and-force",
+      "title": "Student State Matrix",
+      "content": "| State | Why here | Tell-tale behaviour | Protocol |\n|---|---|---|---|\n| S0 | Nucleus as a dot | Cannot name its parts | Protocol A (Concrete) |\n| S1 | Formula recited | Writes R = R₀A^(1/3) but cannot say why density is constant | Protocol B (Counterexample-first) |\n| S2-HEAVY-NUCLEI-DENSER | Heavier = denser | \"Uranium nuclei are much denser than hydrogen nuclei\" | Misconception Engine → then Protocol C |\n| S2-GRAVITY-HOLDS-NUCLEUS | Familiar forces only | \"Gravity (or the electrons) holds the nucleus together\" | Misconception Engine → then Protocol C |\n| S3 | Partial — composition fine | Cannot explain why the force must be short-range | Protocol C (Guided Questioning) |\n| S6 | Anxiety on cube roots and powers | Avoids the calculation | Protocol F (Low Pressure) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.nucleus-size-and-force.md",
+        "startLine": 27,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "phys.mod.nucleus-size-and-force/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.nucleus-size-and-force",
+      "title": "Diagnostic Battery",
+      "content": "DB-1 (prior-exposure check):\n\"What is a nucleus made of?\"\n  No idea → S0. Enter Protocol A (Concrete).\n  \"Protons and neutrons\" → DB-2.\n\nDB-2 (representation / misconception test):\n\"A uranium-238 nucleus has 238 nucleons; a hydrogen nucleus has 1. Is the uranium nucleus denser?\"\n  \"No — its volume grows in proportion to A as well, so the density is about the same\" → S3. Enter Protocol C.\n  \"No\" (no reason) → S1. Enter Protocol B.\n  \"Yes — much denser, it's heavier\" → SIGNAL:MISCONCEPTION:MC-HEAVY-NUCLEI-DENSER. Enter Misconception Engine.\n  Pause → add S6 flag; Protocol F if anxious, otherwise Protocol A.\n\nDB-3 (force check — overlays):\n\"Protons repel each other strongly. What holds a nucleus together?\"\n  \"A short-range attractive nuclear force between nucleons\" → no flag.\n  \"Gravity\" or \"the electrons pull it together\" → add SIGNAL:MISCONCEPTION:MC-GRAVITY-HOLDS-NUCLEUS (repair at TA-5).\n  Confident and wrong on DB-2 → add S7 flag. Override to Protocol G.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-HEAVY-NUCLEI-DENSER",
+        "MC-GRAVITY-HOLDS-NUCLEUS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.nucleus-size-and-force.md",
+        "startLine": 38,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "phys.mod.nucleus-size-and-force/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.nucleus-size-and-force",
+      "title": "Prerequisite Check",
+      "content": "PD-1 (for `phys.mod.atomic-models`):\n\"What did alpha scattering show about where an atom's mass and positive charge are?\"\n  Cannot say \"concentrated in a tiny nucleus\" → flag PREREQ-GAP-NUCLEAR-ATOM.\n  In-session minimum repair: one P06 (the scattering result) + one P34 (\"atom ~10⁻¹⁰ m; nucleus?\") then resume. If absent, schedule the missing session (S4 route).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.nucleus-size-and-force.md",
+        "startLine": 58,
+        "endLine": 65
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

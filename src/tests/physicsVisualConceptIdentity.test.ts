@@ -86,6 +86,7 @@ describe('phys.em: the circuit/field split is honoured', () => {
     'phys.em.self-inductance', 'phys.em.mutual-inductance',
     // coverage-driven KG extension (2026-10-03)
     'phys.em.cells-combination', 'phys.em.moving-coil-galvanometer', 'phys.em.domestic-electricity',
+    'phys.em.lcr-circuits', 'phys.em.ac-power',
   ]
 
   it('every real KG concept in this list is accounted for (no drift from the KG)', () => {
@@ -206,10 +207,12 @@ describe('coverage floor — this fix must not regress below its own result', ()
     // entry as 'phys.em.emf' — a real circuit concept, not a blanket default.
     // 78 -> 80 (batch 5): likewise 'phys.em.moving-coil-galvanometer' (meter
     // conversion circuits) and 'phys.em.domestic-electricity' (household wiring).
+    // 80 -> 82 (batch 7): 'phys.em.lcr-circuits' and 'phys.em.ac-power', both AC
+    // circuit concepts.
     const covered = PHYS.filter((c) => lookupConceptVisual(c.id) !== null).length
-    expect(covered).toBeGreaterThanOrEqual(80)
+    expect(covered).toBeGreaterThanOrEqual(82)
     // And each addition really was exactly one: nothing else silently changed.
-    expect(covered).toBe(80)
+    expect(covered).toBe(82)
   })
 
   it('zero orphan keys and zero duplicates remain physics-specific to this fix', () => {

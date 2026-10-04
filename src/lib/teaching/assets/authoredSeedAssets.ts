@@ -54260,6 +54260,454 @@ const CNDR_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.em.lcr-circuits ────────────────────────────────────────────────────
+const LCRC = 'phys.em.lcr-circuits'
+const LCRC_SRC = 'docs/curriculum/blueprints/phys.em.lcr-circuits.md'
+
+const LCRC_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: LCRC,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'In a series AC circuit the same current flows through the resistor, the inductor and the capacitor, but their voltages do not rise and fall together. An inductor opposes changes of current, so its reactance grows with frequency, X_L = ωL, and its voltage LEADS the current by 90°. A capacitor passes AC more easily the faster it alternates, X_C = 1/(ωC), and its voltage LAGS the current by 90°. The resistor\'s voltage is in step with the current. V_L and V_C therefore point opposite ways and both sit at right angles to V_R, so the voltages add like the sides of a right triangle: V = √(V_R² + (V_L − V_C)²), and the impedance is Z = √(R² + (X_L − X_C)²). With R = 40 Ω, L = 0.2 H and C = 50 μF at ω = 400 rad/s: X_L = 80 Ω, X_C = 50 Ω and Z = √(40² + 30²) = 50 Ω. On 200 V rms the current is 4 A, lagging the supply by tan⁻¹(30/40) ≈ 37° because X_L > X_C. At one frequency X_L = X_C: ω₀ = 1/√(LC) ≈ 316 rad/s here. The reactances cancel, Z = R is at its MINIMUM and the current at its MAXIMUM (200/40 = 5 A), in phase with the supply — series resonance. The sharpness of the peak is the quality factor Q = ω₀L/R: about 1.6 here, 6.3 with R = 10 Ω. A radio tunes by moving ω₀ to the station it wants.',
+    targetedMisconceptions: [`${LCRC}:MC-IMPEDANCE-SUM`, `${LCRC}:MC-RESONANCE-MAX-IMPEDANCE`],
+    source: `${LCRC_SRC} — TA-2 reactance, TA-3 phase, TA-4 impedance, TA-5 resonance and Q`,
+  },
+  {
+    conceptId: LCRC,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Resistors in series add, so it is natural to write the impedance of a series LCR circuit as R + X_L + X_C. Check it against meters: across R, L and C they read 160 V, 320 V and 200 V, yet the supply reads only 200 V. If the voltages simply added, the supply would need 680 V. They do not add because they do not peak at the same moment: V_L leads the current by a quarter cycle and V_C lags it by a quarter cycle, so they partly cancel (320 − 200 = 120 V), and what is left is at right angles to V_R. The supply is √(160² + 120²) = 200 V. Dividing by the 4 A current gives the same right triangle in ohms: Z = √(40² + 30²) = 50 Ω, not 170 Ω. A second trap is to think the impedance is greatest at resonance, because "resonance" sounds like something becoming maximal. At resonance X_L = X_C, so X_L − X_C = 0 and Z = √(R² + 0) = R — the SMALLEST impedance the circuit can have. What peaks is the current, I = V/R. That is how a tuning circuit picks out one station: at its frequency the current is large, at every other frequency the impedance is larger and the current smaller.',
+    targetedMisconceptions: [`${LCRC}:MC-IMPEDANCE-SUM`, `${LCRC}:MC-RESONANCE-MAX-IMPEDANCE`],
+    source: `${LCRC_SRC} — MC-IMPEDANCE-SUM + MC-RESONANCE-MAX-IMPEDANCE, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const LCRC_PROBES: SeedProbe[] = [
+  {
+    conceptId: LCRC,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A series circuit has R = 40 Ω, an inductive reactance of 80 Ω and a capacitive reactance of 50 Ω. What is its impedance?',
+    choices: [
+      { text: '50 Ω', isCorrect: true },
+      { text: '170 Ω', isCorrect: false, misconceptionId: `${LCRC}:MC-IMPEDANCE-SUM` },
+      { text: '70 Ω', isCorrect: false, misconceptionId: `${LCRC}:MC-IMPEDANCE-SUM` },
+      { text: '10 Ω', isCorrect: false },
+    ],
+    correctValue: '50 Ω',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${LCRC}:MC-IMPEDANCE-SUM`],
+    source: `${LCRC_SRC} — DB-2 item and TA-4 P41 (√(40² + 30²)); 170 Ω adds all three, 70 Ω adds R to X_L − X_C`,
+  },
+  {
+    conceptId: LCRC,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A series circuit has L = 0.2 H and C = 50 μF. At what angular frequency does it resonate?',
+    choices: [
+      { text: 'About 316 rad/s', isCorrect: true },
+      { text: 'About 100 000 rad/s', isCorrect: false },
+      { text: 'About 50 rad/s', isCorrect: false },
+      { text: 'About 10 rad/s', isCorrect: false },
+    ],
+    correctValue: 'about 316 rad/s',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: `${LCRC_SRC} — TA-5 P34 (ω₀ = 1/√(0.2 × 5 × 10⁻⁵)); 100 000 is 1/(LC) without the root, 50 is f₀ in Hz`,
+  },
+  {
+    conceptId: LCRC,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Meters across the resistor, inductor and capacitor of a series AC circuit read 160 V, 320 V and 200 V. What is the supply voltage?',
+    choices: [
+      { text: '200 V — V_L and V_C partly cancel, and the remaining 120 V combines with 160 V at right angles', isCorrect: true },
+      { text: '680 V — the voltages around a series circuit add up', isCorrect: false, misconceptionId: `${LCRC}:MC-IMPEDANCE-SUM` },
+      { text: '280 V — 160 V plus the difference 120 V', isCorrect: false, misconceptionId: `${LCRC}:MC-IMPEDANCE-SUM` },
+    ],
+    correctValue: '200 V',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${LCRC}:MC-IMPEDANCE-SUM`],
+    source: `${LCRC_SRC} — TA-3 P34 and MC-IMPEDANCE-SUM conflict_evidence`,
+  },
+  {
+    conceptId: LCRC,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'At the resonant frequency of a series LCR circuit, is the current largest or smallest?',
+    choices: [
+      { text: 'Largest — X_L and X_C cancel, so the impedance falls to R, its minimum', isCorrect: true },
+      { text: 'Smallest — the impedance peaks at resonance', isCorrect: false, misconceptionId: `${LCRC}:MC-RESONANCE-MAX-IMPEDANCE` },
+      { text: 'Zero — the inductor and capacitor block each other completely', isCorrect: false, misconceptionId: `${LCRC}:MC-RESONANCE-MAX-IMPEDANCE` },
+    ],
+    correctValue: 'largest',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${LCRC}:MC-RESONANCE-MAX-IMPEDANCE`],
+    source: `${LCRC_SRC} — DB-3 resonance check and MC-RESONANCE-MAX-IMPEDANCE trigger_signal`,
+  },
+  {
+    conceptId: LCRC,
+    subjectSlug: 'physics',
+    probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why does a radio with a lower-resistance tuning circuit separate neighbouring stations better?',
+    choices: [
+      { text: 'A smaller R gives a higher Q (Q = ω₀L/R), so the resonance peak is taller and narrower and stations at nearby frequencies get much less current', isCorrect: true },
+      { text: 'A smaller R lets more current through at every frequency equally', isCorrect: false },
+      { text: 'A smaller R changes the resonant frequency to match the station', isCorrect: false },
+    ],
+    correctValue: 'higher Q, sharper peak',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: `${LCRC_SRC} — TA-5 think-aloud (Q) and §8 P76`,
+  },
+]
+
+// ─── phys.em.ac-power ────────────────────────────────────────────────────────
+const ACPW = 'phys.em.ac-power'
+const ACPW_SRC = 'docs/curriculum/blueprints/phys.em.ac-power.md'
+
+const ACPW_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ACPW,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'In a resistor, current and voltage rise and fall together, so the power p = vi is positive all the time and its average is V_rms I_rms. When the current is out of step with the voltage by an angle φ, the product vi turns negative for part of every cycle: then the circuit hands energy BACK to the supply, as an inductor\'s magnetic field or a capacitor\'s electric field gives up what it stored. Averaged over a cycle, the power actually taken is P = V_rms I_rms cos φ, where the power factor cos φ = R/Z. Only the resistance dissipates energy, so equivalently P = I_rms² R. For a series circuit with R = 40 Ω and Z = 50 Ω on 200 V rms, the current is 4 A, the power factor is 0.8 and the power is 200 × 4 × 0.8 = 640 W — the same as 4² × 40. The product V_rms I_rms = 800 VA is the apparent power, what the wires must carry. In a pure inductor or capacitor φ = 90° and cos φ = 0: current flows — 2.5 A through an 80 Ω inductor on 200 V — but the average power is zero. This "wattless" current still flows through the supply cables and heats them, so a low power factor is costly: a 640 W motor at 200 V draws 4 A at power factor 0.8 but only 3.2 A at power factor 1. Adding capacitors to inductive loads raises the power factor towards 1.',
+    targetedMisconceptions: [`${ACPW}:MC-POWER-IS-VI`, `${ACPW}:MC-WATTLESS-NO-CURRENT`],
+    source: `${ACPW_SRC} — TA-2 average power, TA-3 apparent power, TA-4 wattless current, TA-5 power factor`,
+  },
+  {
+    conceptId: ACPW,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'From DC circuits it seems that power is always voltage times current. Try it on a pure inductor connected to 200 V AC: an ammeter reads 2.5 A, so P = VI would be 500 W, and the inductor should get hot. It stays cold. With the current a quarter cycle behind the voltage, the inductor stores energy in its magnetic field for half of each cycle and gives all of it back to the supply in the other half; averaged over a cycle it takes nothing. In general only the part of the current in step with the voltage does work, so the average power is P = V_rms I_rms cos φ — 640 W, not 800 W, for 200 V and 4 A at power factor 0.8. V_rms I_rms is the apparent power, measured in volt-amperes. The opposite trap is to hear "wattless current" and think no current flows. The 2.5 A is perfectly real: it surges back and forth through the inductor and through every metre of the supply cable, heating the cable as I²R. It is called wattless only because the inductor itself takes no average power. That is exactly why electricity companies penalise poor power factors: they must carry, and lose heat on, current that delivers no useful energy.',
+    targetedMisconceptions: [`${ACPW}:MC-POWER-IS-VI`, `${ACPW}:MC-WATTLESS-NO-CURRENT`],
+    source: `${ACPW_SRC} — MC-POWER-IS-VI + MC-WATTLESS-NO-CURRENT, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const ACPW_PROBES: SeedProbe[] = [
+  {
+    conceptId: ACPW,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'An AC circuit carries 4 A rms at 200 V rms, with a power factor of 0.8. What average power does it take?',
+    choices: [
+      { text: '640 W', isCorrect: true },
+      { text: '800 W', isCorrect: false, misconceptionId: `${ACPW}:MC-POWER-IS-VI` },
+      { text: '480 W', isCorrect: false },
+      { text: '0 W', isCorrect: false },
+    ],
+    correctValue: '640 W',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${ACPW}:MC-POWER-IS-VI`],
+    source: `${ACPW_SRC} — DB-2 item and TA-3 P41 (200 × 4 × 0.8); 800 W ignores cos φ, 480 W uses sin φ`,
+  },
+  {
+    conceptId: ACPW,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A motor needs 640 W from a 200 V supply. What current does it draw at power factor 0.8, and at power factor 1?',
+    choices: [
+      { text: '4 A at 0.8 and 3.2 A at 1 — a poorer power factor needs more current', isCorrect: true },
+      { text: '3.2 A in both cases — the power is the same', isCorrect: false, misconceptionId: `${ACPW}:MC-POWER-IS-VI` },
+      { text: '2.56 A at 0.8 and 3.2 A at 1', isCorrect: false },
+      { text: '3.2 A at 0.8 and 4 A at 1', isCorrect: false },
+    ],
+    correctValue: '4 A and 3.2 A',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ACPW}:MC-POWER-IS-VI`],
+    source: `${ACPW_SRC} — TA-5 P34 (I = P/(V cos φ)); 2.56 A multiplies by cos φ instead of dividing`,
+  },
+  {
+    conceptId: ACPW,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A pure inductor connected to 200 V AC carries 2.5 A. Is current really flowing, and what average power does it take?',
+    choices: [
+      { text: 'Yes, 2.5 A flows, but the average power is zero — energy stored each half cycle is returned', isCorrect: true },
+      { text: 'No real current flows — that is what "wattless" means', isCorrect: false, misconceptionId: `${ACPW}:MC-WATTLESS-NO-CURRENT` },
+      { text: 'Yes, and it takes 500 W, which heats the inductor', isCorrect: false, misconceptionId: `${ACPW}:MC-POWER-IS-VI` },
+    ],
+    correctValue: 'yes, 2.5 A; zero average power',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${ACPW}:MC-WATTLESS-NO-CURRENT`, `${ACPW}:MC-POWER-IS-VI`],
+    source: `${ACPW_SRC} — DB-3 wattless check and MC-WATTLESS-NO-CURRENT conflict_evidence`,
+  },
+  {
+    conceptId: ACPW,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why do electricity companies charge factories extra for a poor power factor?',
+    choices: [
+      { text: 'A poor power factor means more current for the same useful power, and that extra current heats the supply cables', isCorrect: true },
+      { text: 'They should not — wattless current is no current, so it costs nothing to supply', isCorrect: false, misconceptionId: `${ACPW}:MC-WATTLESS-NO-CURRENT` },
+      { text: 'Because the factory uses more watts than its meter shows', isCorrect: false },
+    ],
+    correctValue: 'extra current, extra line losses',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ACPW}:MC-WATTLESS-NO-CURRENT`],
+    source: `${ACPW_SRC} — DB-1 item and §8 P76`,
+  },
+  {
+    conceptId: ACPW,
+    subjectSlug: 'physics',
+    probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What is the power factor of a series LCR circuit at resonance, and why?',
+    choices: [
+      { text: '1 — at resonance Z = R, so cos φ = R/Z = 1 and the current is in phase with the voltage', isCorrect: true },
+      { text: '0 — the inductor and capacitor cancel, so no power is taken', isCorrect: false },
+      { text: '0.5 — the power is shared between L and C', isCorrect: false },
+    ],
+    correctValue: '1',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: `${ACPW_SRC} — TA-6 P79 predict item`,
+  },
+]
+
+// ─── phys.mod.atomic-models ──────────────────────────────────────────────────
+const ATMD = 'phys.mod.atomic-models'
+const ATMD_SRC = 'docs/curriculum/blueprints/phys.mod.atomic-models.md'
+
+const ATMD_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ATMD,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Around 1900 the atom was pictured, following Thomson, as a sphere of positive charge with electrons embedded in it. Geiger and Marsden, working with Rutherford, fired fast alpha particles (charge +2e) at gold foil a few hundred atoms thick and counted where they went. Almost all went straight through or were deflected by a degree or two. But about 1 in 8000 was turned through more than 90°, and a few came almost straight back. Thomson\'s model cannot do this: its positive charge is spread through the whole atom, so its field is weak everywhere, and the electrons are far too light to stop an alpha particle. Rutherford concluded that all the positive charge and nearly all the mass are concentrated in a tiny central nucleus. Most alpha particles pass through the mostly empty atom far from any nucleus and are barely deflected; the rare one heading almost straight at a nucleus meets an enormous repulsion at close range and is turned back. The nucleus is about 10⁻¹⁵ to 10⁻¹⁴ m across in an atom about 10⁻¹⁰ m across — a marble in the middle of a football stadium. Coulomb\'s law gives a limit: a head-on alpha stops where its kinetic energy has all become potential energy, K = k(2e)(Ze)/r₀. For 7.7 MeV on gold (Z = 79), r₀ ≈ 3.0 × 10⁻¹⁴ m, so the gold nucleus is smaller than that.',
+    targetedMisconceptions: [`${ATMD}:MC-MOST-ALPHAS-DEFLECT`, `${ATMD}:MC-NUCLEUS-FILLS-ATOM`],
+    source: `${ATMD_SRC} — TA-2 Thomson model, TA-3 result, TA-4 size, TA-5 closest approach`,
+  },
+  {
+    conceptId: ATMD,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'The alpha-scattering experiment is often remembered as "the alpha particles bounced off the nucleus", as if most of them did. The counts say the opposite: for every alpha particle turned back through more than 90°, roughly eight thousand went straight through or were barely deflected. If most had bounced back, the foil would have to be almost solid with nuclei, and the atom could not be mostly empty space. The experiment needs both observations. The many that pass straight through show that the atom is mostly empty; the rare few that bounce back show that, when an alpha does come close, it meets something tiny, massive and highly charged. The same counts fix the nucleus\'s size, which textbook pictures exaggerate so it can be seen. If the nucleus filled a large part of the atom, alpha particles would hit nuclei constantly and large deflections would be common. Because they are so rare, the nucleus must present a tiny target — about 10⁻¹⁴ m across in an atom about 10⁻¹⁰ m across, ten thousand times smaller. Picture the atom as a football stadium: the nucleus is a marble at the centre, yet it holds nearly all the mass.',
+    targetedMisconceptions: [`${ATMD}:MC-MOST-ALPHAS-DEFLECT`, `${ATMD}:MC-NUCLEUS-FILLS-ATOM`],
+    source: `${ATMD_SRC} — MC-MOST-ALPHAS-DEFLECT + MC-NUCLEUS-FILLS-ATOM, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const ATMD_PROBES: SeedProbe[] = [
+  {
+    conceptId: ATMD,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'An alpha particle of kinetic energy 7.7 MeV heads straight for a gold nucleus (Z = 79). Roughly how close does it get before turning back?',
+    choices: [
+      { text: 'About 3 × 10⁻¹⁴ m', isCorrect: true },
+      { text: 'About 1 × 10⁻¹⁰ m — the size of the atom', isCorrect: false, misconceptionId: `${ATMD}:MC-NUCLEUS-FILLS-ATOM` },
+      { text: 'About 1.5 × 10⁻¹⁴ m', isCorrect: false },
+      { text: 'It reaches the centre — nothing stops it', isCorrect: false },
+    ],
+    correctValue: 'about 3 × 10⁻¹⁴ m',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ATMD}:MC-NUCLEUS-FILLS-ATOM`],
+    source: `${ATMD_SRC} — TA-5 P34 (r₀ = k(2e)(79e)/K); 1.5 × 10⁻¹⁴ m drops the alpha's factor of 2`,
+  },
+  {
+    conceptId: ATMD,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why could Thomson\'s "plum pudding" model not explain alpha particles bouncing straight back from gold foil?',
+    choices: [
+      { text: 'Its positive charge was spread through the whole atom, so its field was far too weak to reverse a fast alpha particle', isCorrect: true },
+      { text: 'It had no electrons to bounce the alpha particles back', isCorrect: false },
+      { text: 'It predicted that every alpha particle would bounce back', isCorrect: false, misconceptionId: `${ATMD}:MC-MOST-ALPHAS-DEFLECT` },
+      { text: 'Its atoms were too far apart in the foil', isCorrect: false },
+    ],
+    correctValue: 'spread-out charge, weak field',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${ATMD}:MC-MOST-ALPHAS-DEFLECT`],
+    source: `${ATMD_SRC} — TA-2 think-aloud and P34`,
+  },
+  {
+    conceptId: ATMD,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In Rutherford\'s experiment, what happened to MOST of the alpha particles fired at the gold foil?',
+    choices: [
+      { text: 'They went straight through or were barely deflected — the atom is mostly empty space', isCorrect: true },
+      { text: 'Most bounced back off the nuclei', isCorrect: false, misconceptionId: `${ATMD}:MC-MOST-ALPHAS-DEFLECT` },
+      { text: 'Most were deflected through large angles', isCorrect: false, misconceptionId: `${ATMD}:MC-MOST-ALPHAS-DEFLECT` },
+    ],
+    correctValue: 'went straight through',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${ATMD}:MC-MOST-ALPHAS-DEFLECT`],
+    source: `${ATMD_SRC} — DB-2 golden probe and MC-MOST-ALPHAS-DEFLECT trigger_signal`,
+  },
+  {
+    conceptId: ATMD,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'If an atom were the size of a football stadium, roughly how big would its nucleus be?',
+    choices: [
+      { text: 'About the size of a marble at the centre', isCorrect: true },
+      { text: 'About the size of the pitch', isCorrect: false, misconceptionId: `${ATMD}:MC-NUCLEUS-FILLS-ATOM` },
+      { text: 'About half the stadium', isCorrect: false, misconceptionId: `${ATMD}:MC-NUCLEUS-FILLS-ATOM` },
+    ],
+    correctValue: 'a marble',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ATMD}:MC-NUCLEUS-FILLS-ATOM`],
+    source: `${ATMD_SRC} — DB-3 scale check and MC-NUCLEUS-FILLS-ATOM conflict_evidence`,
+  },
+  {
+    conceptId: ATMD,
+    subjectSlug: 'physics',
+    probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What does the distance of closest approach of an alpha particle tell us about the nucleus?',
+    choices: [
+      { text: 'An upper limit on its radius — the alpha particle turned back without reaching it, so the nucleus is smaller than that distance', isCorrect: true },
+      { text: 'Its exact radius', isCorrect: false },
+      { text: 'The size of the whole atom', isCorrect: false },
+    ],
+    correctValue: 'an upper limit on the radius',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: `${ATMD_SRC} — TA-5 think-aloud and §8 P75`,
+  },
+]
+
+// ─── phys.mod.nucleus-size-and-force ─────────────────────────────────────────
+const NUCL = 'phys.mod.nucleus-size-and-force'
+const NUCL_SRC = 'docs/curriculum/blueprints/phys.mod.nucleus-size-and-force.md'
+
+const NUCL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: NUCL,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A nucleus is made of protons and neutrons, together called nucleons. The atomic number Z counts the protons and fixes the element; the mass number A counts all the nucleons; so there are N = A − Z neutrons. Uranium-238 has 92 protons and 146 neutrons. Nuclei with the same Z but different N are isotopes — chlorine-35 and chlorine-37 both have 17 protons. Nucleons pack together like marbles in a bag, each taking about the same volume, so a nucleus\'s volume is proportional to A and its radius to the cube root of A: R = R₀A^(1/3), with R₀ ≈ 1.2 fm (1 fm = 10⁻¹⁵ m). Iron-56 has R ≈ 4.6 fm; uranium-238 has R ≈ 7.4 fm. Because volume grows exactly as fast as mass, A cancels and every nucleus has nearly the same density, about 2.3 × 10¹⁷ kg/m³ — some 10¹⁴ times the density of water. Something must hold the nucleus together, because the protons repel each other strongly. Gravity between two protons is about 10³⁶ times weaker than their electric repulsion, and the electrons are far outside the nucleus. The binding comes from the nuclear force: it acts between any two nucleons, protons and neutrons alike; it is much stronger than the electric repulsion at about 1–2 fm; and it dies away within a few femtometres, so it does not pull neighbouring atoms\' nuclei together. At still shorter range it becomes repulsive, which fixes the packing density.',
+    targetedMisconceptions: [`${NUCL}:MC-HEAVY-NUCLEI-DENSER`, `${NUCL}:MC-GRAVITY-HOLDS-NUCLEUS`],
+    source: `${NUCL_SRC} — TA-2 composition, TA-3 size, TA-4 density, TA-5 nuclear force`,
+  },
+  {
+    conceptId: NUCL,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Heavier things usually seem denser, so a uranium nucleus with 238 nucleons feels as if it should be far denser than a hydrogen nucleus with one. Work out the sizes. Uranium-238 has a radius 238^(1/3) ≈ 6.2 times that of a single proton, so its volume is 6.2³ ≈ 238 times larger — exactly as many times larger as its mass. Mass and volume grow together, so the density is the same for both, about 2.3 × 10¹⁷ kg/m³. More marbles make a bigger bag, not a tighter one: heavier nuclei are bigger, not denser. The second trap is the force that holds a nucleus together. Gravity and the electrons are the obvious candidates, but neither works. Compare the forces between two protons: their electric repulsion is about 10³⁶ times their gravitational attraction, at every distance, so gravity cannot win. The electrons sit far outside the nucleus and pull outward on the protons, if anything. A different force is needed — the nuclear force. It attracts every pair of nucleons, neutrons as well as protons, far more strongly than the electric repulsion at 1–2 fm, but it fades to almost nothing beyond a few femtometres. That short range is why it can bind a nucleus without gluing neighbouring nuclei together.',
+    targetedMisconceptions: [`${NUCL}:MC-HEAVY-NUCLEI-DENSER`, `${NUCL}:MC-GRAVITY-HOLDS-NUCLEUS`],
+    source: `${NUCL_SRC} — MC-HEAVY-NUCLEI-DENSER + MC-GRAVITY-HOLDS-NUCLEUS, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const NUCL_PROBES: SeedProbe[] = [
+  {
+    conceptId: NUCL,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Using R = R₀A^(1/3) with R₀ = 1.2 fm, what is the radius of an iron-56 nucleus?',
+    choices: [
+      { text: 'About 4.6 fm', isCorrect: true },
+      { text: 'About 67 fm', isCorrect: false },
+      { text: 'About 9.0 fm', isCorrect: false },
+      { text: '1.2 fm — every nucleus has the same radius', isCorrect: false },
+    ],
+    correctValue: 'about 4.6 fm',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: `${NUCL_SRC} — TA-3 P34 (1.2 × 56^(1/3)); 67 fm multiplies by A, 9.0 fm uses √A, 1.2 fm forgets the A^(1/3) growth`,
+  },
+  {
+    conceptId: NUCL,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'How many protons and neutrons are in a uranium-238 nucleus (Z = 92)?',
+    choices: [
+      { text: '92 protons and 146 neutrons', isCorrect: true },
+      { text: '92 protons and 238 neutrons', isCorrect: false },
+      { text: '146 protons and 92 neutrons', isCorrect: false },
+      { text: '238 protons and 92 neutrons', isCorrect: false },
+    ],
+    correctValue: '92 and 146',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [],
+    source: `${NUCL_SRC} — TA-2 P34 (N = A − Z)`,
+  },
+  {
+    conceptId: NUCL,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A uranium-238 nucleus has 238 nucleons; a hydrogen nucleus has 1. Is the uranium nucleus denser?',
+    choices: [
+      { text: 'No — its volume is also about 238 times larger, so the density is about the same', isCorrect: true },
+      { text: 'Yes — it is 238 times heavier, so it is much denser', isCorrect: false, misconceptionId: `${NUCL}:MC-HEAVY-NUCLEI-DENSER` },
+      { text: 'Yes — gravity squeezes the larger nucleus more tightly', isCorrect: false, misconceptionId: `${NUCL}:MC-GRAVITY-HOLDS-NUCLEUS` },
+    ],
+    correctValue: 'no, about the same',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${NUCL}:MC-HEAVY-NUCLEI-DENSER`, `${NUCL}:MC-GRAVITY-HOLDS-NUCLEUS`],
+    source: `${NUCL_SRC} — DB-2 golden probe and MC-HEAVY-NUCLEI-DENSER conflict_evidence`,
+  },
+  {
+    conceptId: NUCL,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'The protons in a nucleus repel each other strongly. What holds the nucleus together?',
+    choices: [
+      { text: 'The nuclear force — strongly attractive between all nucleons at 1–2 fm, but very short-range', isCorrect: true },
+      { text: 'Gravity between the nucleons', isCorrect: false, misconceptionId: `${NUCL}:MC-GRAVITY-HOLDS-NUCLEUS` },
+      { text: 'The attraction of the electrons around the nucleus', isCorrect: false, misconceptionId: `${NUCL}:MC-GRAVITY-HOLDS-NUCLEUS` },
+    ],
+    correctValue: 'the nuclear force',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${NUCL}:MC-GRAVITY-HOLDS-NUCLEUS`],
+    source: `${NUCL_SRC} — DB-3 force check and MC-GRAVITY-HOLDS-NUCLEUS trigger_signal`,
+  },
+  {
+    conceptId: NUCL,
+    subjectSlug: 'physics',
+    probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Two protons are 10 fm apart. Which force between them dominates, and why?',
+    choices: [
+      { text: 'The electric repulsion — the nuclear force has died away beyond a few femtometres', isCorrect: true },
+      { text: 'The nuclear force — it is always the strongest force', isCorrect: false },
+      { text: 'Gravity — at that distance the other forces cancel', isCorrect: false },
+    ],
+    correctValue: 'electric repulsion',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: `${NUCL_SRC} — TA-5 think-aloud and §8 P75`,
+  },
+]
+
 // Batch export spreads for the extension (kept with the concepts above).
 const PHYS_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...DENS_EXPLANATIONS,
@@ -54286,6 +54734,10 @@ const PHYS_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...GRAT_EXPLANATIONS,
   ...RESP_EXPLANATIONS,
   ...CNDR_EXPLANATIONS,
+  ...LCRC_EXPLANATIONS,
+  ...ACPW_EXPLANATIONS,
+  ...ATMD_EXPLANATIONS,
+  ...NUCL_EXPLANATIONS,
 ]
 
 const PHYS_EXTENSION_PROBES: SeedProbe[] = [
@@ -54313,6 +54765,10 @@ const PHYS_EXTENSION_PROBES: SeedProbe[] = [
   ...GRAT_PROBES,
   ...RESP_PROBES,
   ...CNDR_PROBES,
+  ...LCRC_PROBES,
+  ...ACPW_PROBES,
+  ...ATMD_PROBES,
+  ...NUCL_PROBES,
 ]
 
 // ─── Batch export ────────────────────────────────────────────────────────────

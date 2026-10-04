@@ -184,11 +184,11 @@ describe('I-1 — isolation is per ACCOUNT, not per process', () => {
 describe('I-3 — the manifest is reproducible and complete', () => {
   const { rows, audit } = buildManifest()
 
-  it('is exactly the 448-concept Tier A population', () => {
+  it('is exactly the 452-concept Tier A population', () => {
     // 424 (238 physics) until the 2026-10-03 coverage-driven physics KG
     // extension added physics concepts (batches 1–2).
-    expect(rows.length).toBe(448)
-    expect(rows.filter((r) => r.subject === 'physics').length).toBe(262)
+    expect(rows.length).toBe(452)
+    expect(rows.filter((r) => r.subject === 'physics').length).toBe(266)
     expect(rows.filter((r) => r.subject === 'chemistry').length).toBe(186)
   })
 
@@ -210,6 +210,6 @@ describe('I-3 — the manifest is reproducible and complete', () => {
     const onDisk = readFileSync('scripts/certification/tierA-manifest.json', 'utf-8')
     expect(onDisk).toBe(serialiseManifest(rows))
     expect(manifestHash(rows))
-      .toBe('1ef63af4805e927d7cb9117a412b8de8f8eabda92c157c147c31dad06633e136')
+      .toBe('dc000985baa391986c86e040ce9616b04538f92783b9cdb868bdcd889853f363')
   })
 })

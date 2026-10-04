@@ -1,0 +1,415 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mod.atomic-models-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mod.atomic-models",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:000963cebb693b7a3af726d288136649791ccb0e66768dedfdf59bfd84e76e53",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mod.atomic-models.md": "sha256:5bb76571d59aeb58141e0c48c89de992852cde735e2072fde0788d0014e3884f"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.mod.atomic-models",
+    "name": "Nuclear Model of the Atom and Alpha Scattering",
+    "difficultyRaw": "proficient (3)",
+    "bloom": "understand",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "phys.em.coulombs-law"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mod.atomic-models-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mod.atomic-models (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mod.atomic-models.md": "sha256:5bb76571d59aeb58141e0c48c89de992852cde735e2072fde0788d0014e3884f"
+      },
+      "contentHash": "sha256:9bb8be6d0df393d2d6ffe7f6e8ceba253a461efda8268d3c8682615d826d1c5d",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mod.atomic-models.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.atomic-models.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.atomic-models"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.atomic-models\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.atomic-models.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.atomic-models.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.atomic-models"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.atomic-models\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.atomic-models.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.atomic-models.md#TA-3 (addresses MC-MOST-ALPHAS-DEFLECT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.atomic-models"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.atomic-models\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.atomic-models.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.atomic-models.md#TA-4 (addresses MC-NUCLEUS-FILLS-ATOM)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.atomic-models"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.atomic-models\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.atomic-models.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.atomic-models.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.atomic-models"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.atomic-models\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.atomic-models.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.atomic-models.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.atomic-models"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.atomic-models\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.atomic-models.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.atomic-models.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.atomic-models"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.atomic-models\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mod.atomic-models/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "phys.mod.atomic-models",
+      "title": "Learning Objective",
+      "content": "[Boundary statement]\nA student who achieves mastery demonstrates:\n1. Describes the alpha-scattering experiment and its result — when alpha particles are fired at gold foil a few hundred atoms thick, almost all pass straight through or are deflected slightly, but about 1 in several thousand is turned through more than 90°, some straight back.\n2. Explains why this rules out Thomson's model (positive charge spread through the atom, with electrons embedded: its weak, spread-out field could only nudge a fast alpha particle) and leads to Rutherford's nuclear model — all the positive charge and nearly all the mass in a tiny nucleus, about 1/10 000 to 1/100 000 of the atom's diameter, with electrons outside and mostly empty space between.\n3. Uses energy conservation with Coulomb's law to find the distance of closest approach for a head-on collision, r₀ = k(2e)(Ze)/K — about 3 × 10⁻¹⁴ m for a 7.7 MeV alpha on gold (Z = 79) — an upper limit on the nuclear radius.\n\nA student who thinks most alpha particles bounced back, or that the nucleus fills most of the atom, has **NOT** achieved mastery — those ideas invert the experiment's evidence.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.atomic-models.md",
+        "startLine": 17,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.mod.atomic-models/misconception/MC-MOST-ALPHAS-DEFLECT",
+      "kind": "misconception",
+      "conceptId": "phys.mod.atomic-models",
+      "title": "Most alpha particles bounced back off the nuclei",
+      "content": "### MC-MOST-ALPHAS-DEFLECT: \"Most alpha particles bounced back off the nuclei\"\ntrigger_signal: student reports that most or many alpha particles were strongly deflected or reflected, inverting the experiment's result.\nconflict_evidence [P28]: \"If most alpha particles bounced back, what would that say about how much of the foil is filled by nuclei? Could the atom then be mostly empty space?\"\nbridge_text [P30]: \"The counts show the opposite: almost all went straight through or were barely deflected, and only about 1 in 8000 turned through more than 90°. Most passing through says the atom is mostly empty; the rare bounce-back says that, when an alpha does get close, it meets something tiny, massive and highly charged. Both observations are needed.\"\nreplacement_text [P31]: \"Most alpha particles pass straight through (mostly empty space); a very few are scattered through large angles (a tiny, dense, positive nucleus).\"\ndiscrimination_pairs [P33]: [\"most pass through → atom mostly empty\", \"a rare few bounce back → tiny concentrated nucleus\"]\ns6_path: skip P28; show the tally: thousands through, one back.",
+      "localKey": "MC-MOST-ALPHAS-DEFLECT",
+      "language": "en",
+      "refs": [
+        "MC-MOST-ALPHAS-DEFLECT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.atomic-models.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.mod.atomic-models/misconception/MC-NUCLEUS-FILLS-ATOM",
+      "kind": "misconception",
+      "conceptId": "phys.mod.atomic-models",
+      "title": "The nucleus takes up a large part of the atom",
+      "content": "### MC-NUCLEUS-FILLS-ATOM: \"The nucleus takes up a large part of the atom\"\ntrigger_signal: student pictures the nucleus as a sizeable fraction of the atom's size, as in textbook diagrams drawn far from scale.\nconflict_evidence [P28]: \"If the nucleus filled a large part of the atom, how often would an alpha particle hit one? Would almost all pass through?\"\nbridge_text [P30]: \"They would hit nuclei constantly. Since only 1 in thousands is strongly deflected, the nucleus must present a tiny target: about 10⁻¹⁴ m across in an atom about 10⁻¹⁰ m across — a marble at the centre of a stadium. Diagrams draw it big only so it can be seen.\"\nreplacement_text [P31]: \"The nucleus is about 1/10 000 to 1/100 000 of the atom's diameter yet holds nearly all its mass.\"\ndiscrimination_pairs [P33]: [\"atom: ~10⁻¹⁰ m\", \"nucleus: ~10⁻¹⁵–10⁻¹⁴ m\"]\ns6_path: skip P28; the stadium-and-marble picture alone.",
+      "localKey": "MC-NUCLEUS-FILLS-ATOM",
+      "language": "en",
+      "refs": [
+        "MC-NUCLEUS-FILLS-ATOM"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.atomic-models.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.mod.atomic-models/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.atomic-models",
+      "title": "Mapping the Unseen",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Mapping the Unseen\",\"primitives\":[\"P01\",\"P04\",\"P05\",\"P06\",\"P14\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.atomic-models.md",
+        "startLine": 11,
+        "endLine": 18
+      }
+    },
+    {
+      "assetId": "phys.mod.atomic-models/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.atomic-models",
+      "title": "Thomson's Model",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Thomson's Model\",\"primitives\":[\"P02\",\"P13\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.atomic-models.md",
+        "startLine": 18,
+        "endLine": 24
+      }
+    },
+    {
+      "assetId": "phys.mod.atomic-models/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.atomic-models",
+      "title": "The Result",
+      "content": "{\"id\":\"TA-3\",\"title\":\"The Result\",\"primitives\":[\"P02\",\"P06\",\"P13\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-MOST-ALPHAS-DEFLECT\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-MOST-ALPHAS-DEFLECT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.atomic-models.md",
+        "startLine": 24,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "phys.mod.atomic-models/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.atomic-models",
+      "title": "How Small Is the Nucleus?",
+      "content": "{\"id\":\"TA-4\",\"title\":\"How Small Is the Nucleus?\",\"primitives\":[\"P02\",\"P06\",\"P08\",\"P13\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-NUCLEUS-FILLS-ATOM\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-NUCLEUS-FILLS-ATOM"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.atomic-models.md",
+        "startLine": 32,
+        "endLine": 40
+      }
+    },
+    {
+      "assetId": "phys.mod.atomic-models/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.atomic-models",
+      "title": "Distance of Closest Approach",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Distance of Closest Approach\",\"primitives\":[\"P02\",\"P13\",\"P34\",\"P49\",\"P50\",\"P51\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.atomic-models.md",
+        "startLine": 40,
+        "endLine": 47
+      }
+    },
+    {
+      "assetId": "phys.mod.atomic-models/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.atomic-models",
+      "title": "Formative Assessment",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Formative Assessment\",\"primitives\":[\"P02\",\"P35\",\"P49\",\"P51\",\"P55\",\"P79\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.atomic-models.md",
+        "startLine": 47,
+        "endLine": 54
+      }
+    },
+    {
+      "assetId": "phys.mod.atomic-models/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.atomic-models",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P28\",\"P41\",\"P54\",\"P55\",\"P62\",\"P68\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.atomic-models.md",
+        "startLine": 54,
+        "endLine": 96
+      }
+    },
+    {
+      "assetId": "phys.mod.atomic-models/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mod.atomic-models",
+      "title": "Assessment Battery",
+      "content": "| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (classify) | \"Which observation needs a nucleus?\" | CORRECT = the rare large-angle scattering |\n| P74 (classify) | \"Thomson or Rutherford: charge spread out?\" | CORRECT = Thomson |\n| P75 (boundary) | \"Closest approach: radius or limit?\" | CORRECT = an upper limit on the nuclear radius |\n| P76 (transfer) | \"Electron spiral puzzle\" | CORRECT = an orbiting charge should radiate and lose energy — leads to Bohr |\n| P77 (generate) | \"Test for small nuclei\" | CORRECT = scattering experiment counting large-angle deflections |\n| P78 (explain) | \"Why most passed through\" | CORRECT = atom mostly empty space |\n| P79 (predict) | \"More energetic alpha\" | CORRECT = closer approach (r₀ ∝ 1/K) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.atomic-models.md",
+        "startLine": 178,
+        "endLine": 190
+      }
+    },
+    {
+      "assetId": "phys.mod.atomic-models/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.atomic-models",
+      "title": "Student State Matrix",
+      "content": "| State | Why here | Tell-tale behaviour | Protocol |\n|---|---|---|---|\n| S0 | Atom as a tiny solid ball | Has no picture of atomic structure | Protocol A (Concrete) |\n| S1 | Result recited | Says \"nucleus discovered\" but cannot connect it to the scattering data | Protocol B (Counterexample-first) |\n| S2-MOST-ALPHAS-DEFLECT | Story distorted | \"Most alpha particles bounced back off the nucleus\" | Misconception Engine → then Protocol C |\n| S2-NUCLEUS-FILLS-ATOM | Textbook diagrams | \"The nucleus takes up a good part of the atom\" | Misconception Engine → then Protocol C |\n| S3 | Partial — qualitative fine | Cannot compute the closest approach | Protocol C (Guided Questioning) |\n| S6 | Anxiety on large/small numbers | Avoids powers of ten | Protocol F (Low Pressure) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.atomic-models.md",
+        "startLine": 27,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "phys.mod.atomic-models/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.atomic-models",
+      "title": "Diagnostic Battery",
+      "content": "DB-1 (prior-exposure check):\n\"What is inside an atom, and how do we know?\"\n  No idea, or \"a solid ball\" → S0. Enter Protocol A (Concrete).\n  \"A nucleus with electrons around it\" → DB-2.\n\nDB-2 (representation / misconception test):\n\"In Rutherford's experiment, what happened to MOST of the alpha particles fired at the gold foil?\"\n  \"They went straight through, because the atom is mostly empty space; only a very few bounced back\" → S3. Enter Protocol C.\n  \"Went straight through\" (no reason) → S1. Enter Protocol B.\n  \"Most bounced back off the nuclei\" → SIGNAL:MISCONCEPTION:MC-MOST-ALPHAS-DEFLECT. Enter Misconception Engine.\n  Pause → add S6 flag; Protocol F if anxious, otherwise Protocol A.\n\nDB-3 (scale check — overlays):\n\"If an atom were the size of a football stadium, how big would its nucleus be?\"\n  \"About the size of a pea or a marble at the centre\" → no flag.\n  \"About the size of the pitch\" or \"half the stadium\" → add SIGNAL:MISCONCEPTION:MC-NUCLEUS-FILLS-ATOM (repair at TA-4).\n  Confident and wrong on DB-2 → add S7 flag. Override to Protocol G.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-MOST-ALPHAS-DEFLECT",
+        "MC-NUCLEUS-FILLS-ATOM"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.atomic-models.md",
+        "startLine": 38,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "phys.mod.atomic-models/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.atomic-models",
+      "title": "Prerequisite Check",
+      "content": "PD-1 (for `phys.em.coulombs-law`):\n\"How does the repulsion between two positive charges change if their separation halves?\"\n  Cannot say \"four times larger\" → flag PREREQ-GAP-COULOMB.\n  In-session minimum repair: one P06 (two like charges with force arrows at two separations) + one P34 (\"distance tripled: force?\") then resume. If absent, schedule the missing session (S4 route).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.atomic-models.md",
+        "startLine": 58,
+        "endLine": 65
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

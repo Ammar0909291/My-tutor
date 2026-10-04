@@ -1,0 +1,415 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.em.lcr-circuits-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.em.lcr-circuits",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:6ef7a434cfc0f17937e9d2381e504009016ee3e882c7547749317b6f7bf99fa0",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.em.lcr-circuits.md": "sha256:ab3de2fbc7476003858fa403e03398bd27af55e0300a7a9682e514695fbc598f"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.em.lcr-circuits",
+    "name": "Series LCR Circuit: Impedance, Resonance and Q Factor",
+    "difficultyRaw": "advanced (4)",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "phys.em.lc-circuits"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.em.lcr-circuits-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.em.lcr-circuits (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.em.lcr-circuits.md": "sha256:ab3de2fbc7476003858fa403e03398bd27af55e0300a7a9682e514695fbc598f"
+      },
+      "contentHash": "sha256:1f3295bd204b405d8230275d807509d3b4dabfde00854febc4b141bbd6fc4eb1",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.em.lcr-circuits.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.lcr-circuits.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.lcr-circuits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.lcr-circuits\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.lcr-circuits.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.lcr-circuits.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.lcr-circuits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.lcr-circuits\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.lcr-circuits.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.lcr-circuits.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.lcr-circuits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.lcr-circuits\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.lcr-circuits.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.lcr-circuits.md#TA-4 (addresses MC-IMPEDANCE-SUM)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.lcr-circuits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.lcr-circuits\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.lcr-circuits.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.lcr-circuits.md#TA-5 (addresses MC-RESONANCE-MAX-IMPEDANCE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.lcr-circuits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.lcr-circuits\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.lcr-circuits.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.lcr-circuits.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.lcr-circuits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.lcr-circuits\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.lcr-circuits.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.lcr-circuits.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.lcr-circuits"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.lcr-circuits\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.em.lcr-circuits/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "phys.em.lcr-circuits",
+      "title": "Learning Objective",
+      "content": "[Boundary statement]\nA student who achieves mastery demonstrates:\n1. Explains that in a series AC circuit the same current flows through R, L and C, but the inductor's voltage leads that current by 90°, the capacitor's lags it by 90°, and the resistor's is in phase — so the voltages add as phasors, not as numbers, giving Z = √(R² + (X_L − X_C)²) with X_L = ωL and X_C = 1/(ωC).\n2. Computes it — R = 40 Ω, L = 0.2 H, C = 50 μF at ω = 400 rad/s: X_L = 80 Ω, X_C = 50 Ω, Z = 50 Ω; with 200 V rms the current is 4 A and it lags the supply voltage by φ = tan⁻¹(30/40) ≈ 37°.\n3. Explains resonance — at ω₀ = 1/√(LC) (here ≈ 316 rad/s) X_L = X_C, they cancel, Z = R is a MINIMUM and the current a MAXIMUM (5 A); the sharpness is the Q factor, Q = ω₀L/R = (1/R)√(L/C), larger for smaller R — the principle of radio tuning.\n\nA student who adds R, X_L and X_C as plain numbers, or thinks the impedance is greatest at resonance, has **NOT** achieved mastery — those ideas misread every tuned circuit.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.lcr-circuits.md",
+        "startLine": 17,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.em.lcr-circuits/misconception/MC-IMPEDANCE-SUM",
+      "kind": "misconception",
+      "conceptId": "phys.em.lcr-circuits",
+      "title": "Resistance and reactances add like resistors in series",
+      "content": "### MC-IMPEDANCE-SUM: \"Resistance and reactances add like resistors in series\"\ntrigger_signal: student computes the impedance of a series LCR circuit as R + X_L + X_C (or R + X_L − X_C) by plain addition.\nconflict_evidence [P28]: \"Meters across R, L and C read 160 V, 320 V and 200 V, but the supply reads 200 V. If the voltages simply added, the supply would have to be 680 V. What is going on?\"\nbridge_text [P30]: \"The three voltages do not peak at the same moment. V_L leads the current by 90°, V_C lags by 90°, V_R is in step. V_L and V_C partly cancel (320 − 200 = 120 V) and what is left is at right angles to V_R, so the supply is √(160² + 120²) = 200 V. Dividing by the current gives the same right triangle in ohms.\"\nreplacement_text [P31]: \"Z = √(R² + (X_L − X_C)²); reactances subtract from each other and combine with R at right angles.\"\ndiscrimination_pairs [P33]: [\"resistors in series: R₁ + R₂\", \"series LCR: √(R² + (X_L − X_C)²) — 40, 80 and 50 Ω give 50 Ω, not 170 Ω\"]\ns6_path: skip P28; draw the right triangle with sides 40 and 30 and measure the hypotenuse.",
+      "localKey": "MC-IMPEDANCE-SUM",
+      "language": "en",
+      "refs": [
+        "MC-IMPEDANCE-SUM"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.lcr-circuits.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.em.lcr-circuits/misconception/MC-RESONANCE-MAX-IMPEDANCE",
+      "kind": "misconception",
+      "conceptId": "phys.em.lcr-circuits",
+      "title": "At resonance the impedance is largest and the current smallest",
+      "content": "### MC-RESONANCE-MAX-IMPEDANCE: \"At resonance the impedance is largest and the current smallest\"\ntrigger_signal: student expects the impedance of a series LCR circuit to peak at resonance (or the current to dip), associating \"resonance\" with \"something becomes maximal\" without asking which quantity.\nconflict_evidence [P28]: \"At resonance X_L = X_C. What is X_L − X_C then, and what does that leave in Z = √(R² + (X_L − X_C)²)?\"\nbridge_text [P30]: \"X_L − X_C = 0, so Z = R — the SMALLEST it can ever be. The current, V/Z, is therefore the LARGEST. What is maximal at resonance is the current (and the energy swinging between L and C), which is why a radio picks out the station whose frequency matches.\"\nreplacement_text [P31]: \"In a series LCR circuit at ω₀ = 1/√(LC): Z = R (minimum), I = V/R (maximum), current in phase with the supply.\"\ndiscrimination_pairs [P33]: [\"series LCR at resonance: Z minimum, I maximum\", \"off resonance either way: Z larger, I smaller\"]\ns6_path: skip P28; read the peak off the current–frequency graph.",
+      "localKey": "MC-RESONANCE-MAX-IMPEDANCE",
+      "language": "en",
+      "refs": [
+        "MC-RESONANCE-MAX-IMPEDANCE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.lcr-circuits.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.em.lcr-circuits/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.lcr-circuits",
+      "title": "Tuning a Radio",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Tuning a Radio\",\"primitives\":[\"P01\",\"P04\",\"P05\",\"P06\",\"P14\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.lcr-circuits.md",
+        "startLine": 11,
+        "endLine": 18
+      }
+    },
+    {
+      "assetId": "phys.em.lcr-circuits/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.lcr-circuits",
+      "title": "Reactance",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Reactance\",\"primitives\":[\"P02\",\"P06\",\"P08\",\"P13\",\"P34\",\"P49\",\"P50\",\"P51\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.lcr-circuits.md",
+        "startLine": 18,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.em.lcr-circuits/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.lcr-circuits",
+      "title": "Phase",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Phase\",\"primitives\":[\"P02\",\"P06\",\"P13\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.lcr-circuits.md",
+        "startLine": 27,
+        "endLine": 34
+      }
+    },
+    {
+      "assetId": "phys.em.lcr-circuits/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.lcr-circuits",
+      "title": "Impedance",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Impedance\",\"primitives\":[\"P02\",\"P34\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-IMPEDANCE-SUM\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-IMPEDANCE-SUM"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.lcr-circuits.md",
+        "startLine": 34,
+        "endLine": 42
+      }
+    },
+    {
+      "assetId": "phys.em.lcr-circuits/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.lcr-circuits",
+      "title": "Resonance and Q",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Resonance and Q\",\"primitives\":[\"P02\",\"P13\",\"P34\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-RESONANCE-MAX-IMPEDANCE\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-RESONANCE-MAX-IMPEDANCE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.lcr-circuits.md",
+        "startLine": 42,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "phys.em.lcr-circuits/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.lcr-circuits",
+      "title": "Formative Assessment",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Formative Assessment\",\"primitives\":[\"P02\",\"P35\",\"P49\",\"P51\",\"P55\",\"P79\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.lcr-circuits.md",
+        "startLine": 51,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "phys.em.lcr-circuits/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.lcr-circuits",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P28\",\"P41\",\"P54\",\"P55\",\"P62\",\"P68\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.lcr-circuits.md",
+        "startLine": 58,
+        "endLine": 100
+      }
+    },
+    {
+      "assetId": "phys.em.lcr-circuits/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.em.lcr-circuits",
+      "title": "Assessment Battery",
+      "content": "| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (classify) | \"Below resonance: inductive or capacitive?\" | CORRECT = capacitive (X_C > X_L; current leads) |\n| P74 (classify) | \"Series LCR at resonance: Z max or min?\" | CORRECT = minimum, Z = R |\n| P75 (boundary) | \"Phase angle at ω₀\" | CORRECT = zero |\n| P76 (transfer) | \"Lower-resistance tuner\" | CORRECT = higher Q, narrower peak, better selectivity |\n| P77 (generate) | \"C for 0.2 H at 500 rad/s\" | CORRECT = C = 1/(ω²L) = 20 μF |\n| P78 (explain) | \"Why not R + X_L + X_C\" | CORRECT = phasors at 90°; V_L and V_C opposite |\n| P79 (predict) | \"Above resonance\" | CORRECT = X_L > X_C; current lags |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.lcr-circuits.md",
+        "startLine": 182,
+        "endLine": 194
+      }
+    },
+    {
+      "assetId": "phys.em.lcr-circuits/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.em.lcr-circuits",
+      "title": "Student State Matrix",
+      "content": "| State | Why here | Tell-tale behaviour | Protocol |\n|---|---|---|---|\n| S0 | Only DC resistance known | Cannot say what a capacitor does to AC | Protocol A (Concrete) |\n| S1 | Formula recited | Writes Z = √(R² + (X_L − X_C)²) but cannot say why the square root | Protocol B (Counterexample-first) |\n| S2-IMPEDANCE-SUM | Ohms add | \"Z = R + X_L + X_C\" | Misconception Engine → then Protocol C |\n| S2-RESONANCE-MAX-IMPEDANCE | Resonance = something big | \"At resonance the impedance peaks, so the current is smallest\" | Misconception Engine → then Protocol C |\n| S3 | Partial — Z fine, resonance not | Cannot find ω₀ or explain Q | Protocol C (Guided Questioning) |\n| S6 | Anxiety on phasors | Avoids diagrams with angles | Protocol F (Low Pressure) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.lcr-circuits.md",
+        "startLine": 27,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "phys.em.lcr-circuits/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.em.lcr-circuits",
+      "title": "Diagnostic Battery",
+      "content": "DB-1 (prior-exposure check):\n\"How does a radio pick out one station when all of them reach the aerial at once?\"\n  No idea → S0. Enter Protocol A (Concrete).\n  \"A tuned circuit responds strongly at one frequency\" → DB-2.\n\nDB-2 (representation / misconception test):\n\"In a series circuit R = 40 Ω, X_L = 80 Ω and X_C = 50 Ω. What is the impedance?\"\n  \"50 Ω — √(40² + 30²), because the reactive voltages are 90° out of phase with the resistor's\" → S3. Enter Protocol C.\n  \"50 Ω\" (no reason) → S1. Enter Protocol B.\n  \"170 Ω\" or \"70 Ω\" → SIGNAL:MISCONCEPTION:MC-IMPEDANCE-SUM. Enter Misconception Engine.\n  Pause → add S6 flag; Protocol F if anxious, otherwise Protocol A.\n\nDB-3 (resonance check — overlays):\n\"At the resonant frequency of a series LCR circuit, is the current largest or smallest?\"\n  \"Largest — X_L and X_C cancel, so Z = R\" → no flag.\n  \"Smallest — the impedance peaks at resonance\" → add SIGNAL:MISCONCEPTION:MC-RESONANCE-MAX-IMPEDANCE (repair at TA-5).\n  Confident and wrong on DB-2 → add S7 flag. Override to Protocol G.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-IMPEDANCE-SUM",
+        "MC-RESONANCE-MAX-IMPEDANCE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.lcr-circuits.md",
+        "startLine": 38,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "phys.em.lcr-circuits/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.em.lcr-circuits",
+      "title": "Prerequisite Check",
+      "content": "PD-1 (for `phys.em.lc-circuits`):\n\"What is the natural frequency of an LC circuit, and what happens to the energy as it oscillates?\"\n  Cannot say \"f = 1/(2π√LC), energy passes between the capacitor's field and the inductor's field\" → flag PREREQ-GAP-LC.\n  In-session minimum repair: one P06 (the LC energy swing) + one P34 (\"L = 0.2 H, C = 50 μF: ω₀?\") then resume. If absent, schedule the missing session (S4 route).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.lcr-circuits.md",
+        "startLine": 58,
+        "endLine": 65
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

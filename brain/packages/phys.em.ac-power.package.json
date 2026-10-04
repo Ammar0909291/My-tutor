@@ -1,0 +1,415 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.em.ac-power-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.em.ac-power",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:942df45c3a4354f66dcc89b924c36feb392cd93828efc24fb7bca1047a26037d",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.em.ac-power.md": "sha256:151fda77077e897bda7f2a0c0d048e9a4ca164dc8693adbe8cab8a904c6d8e36"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.em.ac-power",
+    "name": "Power in AC Circuits, Power Factor and Wattless Current",
+    "difficultyRaw": "advanced (4)",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "phys.em.lcr-circuits"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.em.ac-power-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.em.ac-power (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.em.ac-power.md": "sha256:151fda77077e897bda7f2a0c0d048e9a4ca164dc8693adbe8cab8a904c6d8e36"
+      },
+      "contentHash": "sha256:c7ece1b5826d789ec3747eca31ec93b7737b47f83908e89678637093b1859d81",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.em.ac-power.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.ac-power.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.ac-power"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.ac-power\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.ac-power.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.ac-power.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.ac-power"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.ac-power\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.ac-power.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.ac-power.md#TA-3 (addresses MC-POWER-IS-VI)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.ac-power"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.ac-power\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.ac-power.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.ac-power.md#TA-4 (addresses MC-WATTLESS-NO-CURRENT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.ac-power"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.ac-power\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.ac-power.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.ac-power.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.ac-power"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.ac-power\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.ac-power.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.ac-power.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.ac-power"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.ac-power\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.ac-power.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.ac-power.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.ac-power"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.ac-power\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.em.ac-power/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "phys.em.ac-power",
+      "title": "Learning Objective",
+      "content": "[Boundary statement]\nA student who achieves mastery demonstrates:\n1. Explains that when current and voltage are out of step by φ, part of each cycle the circuit returns energy to the supply, so the average power is P = V_rms I_rms cos φ, where cos φ = R/Z is the power factor — and that only the resistance dissipates energy (P = I_rms² R).\n2. Computes it — the series circuit with R = 40 Ω, Z = 50 Ω on 200 V rms carries 4 A, has cos φ = 0.8, and takes 200 × 4 × 0.8 = 640 W, the same as 4² × 40; the apparent power V_rms I_rms = 800 VA is larger.\n3. Explains wattless current — a pure inductor or capacitor (φ = 90°, cos φ = 0) carries current but takes no average power — and why a low power factor is costly: the same useful power needs more current, so more heating in the transmission lines; adding a capacitor to an inductive load raises the power factor.\n\nA student who thinks AC power is always V_rms × I_rms, or that a wattless current is no current at all, has **NOT** achieved mastery — those ideas misread every power bill and power-factor correction.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.ac-power.md",
+        "startLine": 17,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.em.ac-power/misconception/MC-POWER-IS-VI",
+      "kind": "misconception",
+      "conceptId": "phys.em.ac-power",
+      "title": "AC power is always V_rms × I_rms",
+      "content": "### MC-POWER-IS-VI: \"AC power is always V_rms × I_rms\"\ntrigger_signal: student computes the average power of a reactive AC circuit as V_rms I_rms, ignoring the phase difference.\nconflict_evidence [P28]: \"A pure inductor on 200 V carries 2.5 A. If P = VI, it would take 500 W and get hot. It stays cold. Where is the 500 W?\"\nbridge_text [P30]: \"There is no 500 W. With current and voltage a quarter cycle apart, the inductor stores energy in its field for half of each cycle and gives it all back for the other half. Averaged over a cycle, nothing is used. In general only the in-phase part of the current does work: P = V_rms I_rms cos φ.\"\nreplacement_text [P31]: \"Average AC power = V_rms I_rms cos φ = I_rms² R; V_rms I_rms is the apparent power (VA), larger whenever cos φ < 1.\"\ndiscrimination_pairs [P33]: [\"resistor: φ = 0, P = V_rms I_rms\", \"the 40 Ω / 50 Ω circuit: 800 VA apparent, 640 W real\"]\ns6_path: skip P28; compare the warm resistor and the cold inductor carrying equal currents.",
+      "localKey": "MC-POWER-IS-VI",
+      "language": "en",
+      "refs": [
+        "MC-POWER-IS-VI"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.ac-power.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.em.ac-power/misconception/MC-WATTLESS-NO-CURRENT",
+      "kind": "misconception",
+      "conceptId": "phys.em.ac-power",
+      "title": "A wattless current is no current at all",
+      "content": "### MC-WATTLESS-NO-CURRENT: \"A wattless current is no current at all\"\ntrigger_signal: student treats \"wattless current\" as meaning no current flows, or as harmless to the supply.\nconflict_evidence [P28]: \"An ammeter in series with a pure inductor on 200 V reads 2.5 A. Is current flowing? Do the supply cables carry it?\"\nbridge_text [P30]: \"A real 2.5 A flows back and forth, and the cables carry it — and heat up because of it (I²R in the wires). It is 'wattless' only because the inductor itself takes no AVERAGE power. That is exactly why low power factors waste transmission capacity.\"\nreplacement_text [P31]: \"Wattless current: real current, 90° out of phase with the voltage, giving zero average power in the reactive component but real losses in the supply wires.\"\ndiscrimination_pairs [P33]: [\"inductor: 2.5 A flows, 0 W average\", \"the supply cable carrying it: I²R heating, not zero\"]\ns6_path: skip P28; read the ammeter in the inductor circuit.",
+      "localKey": "MC-WATTLESS-NO-CURRENT",
+      "language": "en",
+      "refs": [
+        "MC-WATTLESS-NO-CURRENT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.ac-power.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.em.ac-power/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.ac-power",
+      "title": "The Power-Factor Penalty",
+      "content": "{\"id\":\"TA-1\",\"title\":\"The Power-Factor Penalty\",\"primitives\":[\"P01\",\"P04\",\"P05\",\"P06\",\"P14\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.ac-power.md",
+        "startLine": 11,
+        "endLine": 18
+      }
+    },
+    {
+      "assetId": "phys.em.ac-power/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.ac-power",
+      "title": "Average Power",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Average Power\",\"primitives\":[\"P02\",\"P06\",\"P08\",\"P13\",\"P34\",\"P49\",\"P50\",\"P51\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.ac-power.md",
+        "startLine": 18,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.em.ac-power/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.ac-power",
+      "title": "Not Simply VI",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Not Simply VI\",\"primitives\":[\"P02\",\"P13\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-POWER-IS-VI\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-POWER-IS-VI"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.ac-power.md",
+        "startLine": 27,
+        "endLine": 34
+      }
+    },
+    {
+      "assetId": "phys.em.ac-power/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.ac-power",
+      "title": "Wattless Current",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Wattless Current\",\"primitives\":[\"P02\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-WATTLESS-NO-CURRENT\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-WATTLESS-NO-CURRENT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.ac-power.md",
+        "startLine": 34,
+        "endLine": 40
+      }
+    },
+    {
+      "assetId": "phys.em.ac-power/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.ac-power",
+      "title": "Why Power Factor Matters",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Why Power Factor Matters\",\"primitives\":[\"P02\",\"P13\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.ac-power.md",
+        "startLine": 40,
+        "endLine": 46
+      }
+    },
+    {
+      "assetId": "phys.em.ac-power/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.ac-power",
+      "title": "Formative Assessment",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Formative Assessment\",\"primitives\":[\"P02\",\"P35\",\"P49\",\"P51\",\"P55\",\"P79\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.ac-power.md",
+        "startLine": 46,
+        "endLine": 53
+      }
+    },
+    {
+      "assetId": "phys.em.ac-power/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.ac-power",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P28\",\"P41\",\"P54\",\"P55\",\"P62\",\"P68\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.ac-power.md",
+        "startLine": 53,
+        "endLine": 95
+      }
+    },
+    {
+      "assetId": "phys.em.ac-power/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.em.ac-power",
+      "title": "Assessment Battery",
+      "content": "| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (classify) | \"Which component dissipates energy?\" | CORRECT = only the resistor |\n| P74 (classify) | \"Power factor at resonance\" | CORRECT = 1 |\n| P75 (boundary) | \"φ = 90°\" | CORRECT = zero average power |\n| P76 (transfer) | \"Why companies prefer cos φ ≈ 1\" | CORRECT = less current for the same power, smaller line losses |\n| P77 (generate) | \"Reduce the penalty\" | CORRECT = add capacitors to cancel the motors' inductive reactance |\n| P78 (explain) | \"Why cos φ\" | CORRECT = energy returned to the supply part of each cycle |\n| P79 (predict) | \"Series resonance power factor\" | CORRECT = 1 |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.ac-power.md",
+        "startLine": 177,
+        "endLine": 189
+      }
+    },
+    {
+      "assetId": "phys.em.ac-power/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.em.ac-power",
+      "title": "Student State Matrix",
+      "content": "| State | Why here | Tell-tale behaviour | Protocol |\n|---|---|---|---|\n| S0 | Only P = VI known | Has never met phase in power | Protocol A (Concrete) |\n| S1 | Formula recited | Writes cos φ but cannot say what it means | Protocol B (Counterexample-first) |\n| S2-POWER-IS-VI | DC habit | \"P = V_rms I_rms, always\" | Misconception Engine → then Protocol C |\n| S2-WATTLESS-NO-CURRENT | Word taken literally | \"Wattless current means no current flows\" | Misconception Engine → then Protocol C |\n| S3 | Partial — formula fine, consequences not | Cannot explain power-factor correction | Protocol C (Guided Questioning) |\n| S6 | Anxiety on phase | Avoids trigonometry | Protocol F (Low Pressure) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.ac-power.md",
+        "startLine": 27,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "phys.em.ac-power/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.em.ac-power",
+      "title": "Diagnostic Battery",
+      "content": "DB-1 (prior-exposure check):\n\"Why might an electricity company charge a factory extra for a 'poor power factor'?\"\n  No idea → S0. Enter Protocol A (Concrete).\n  \"The factory draws more current than the power it uses needs\" → DB-2.\n\nDB-2 (representation / misconception test):\n\"An AC circuit carries 4 A rms at 200 V rms, with the current lagging the voltage by 37° (cos φ = 0.8). What average power does it take?\"\n  \"640 W — V I cos φ, because for part of each cycle energy flows back to the supply\" → S3. Enter Protocol C.\n  \"640 W\" (no reason) → S1. Enter Protocol B.\n  \"800 W — P = VI\" → SIGNAL:MISCONCEPTION:MC-POWER-IS-VI. Enter Misconception Engine.\n  Pause → add S6 flag; Protocol F if anxious, otherwise Protocol A.\n\nDB-3 (wattless check — overlays):\n\"A pure inductor connected to 200 V AC carries 2.5 A. Is current flowing? What average power does it take?\"\n  \"Yes, 2.5 A flows, but the average power is zero\" → no flag.\n  \"No current really flows — it is wattless\" → add SIGNAL:MISCONCEPTION:MC-WATTLESS-NO-CURRENT (repair at TA-4).\n  Confident and wrong on DB-2 → add S7 flag. Override to Protocol G.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-POWER-IS-VI",
+        "MC-WATTLESS-NO-CURRENT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.ac-power.md",
+        "startLine": 38,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "phys.em.ac-power/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.em.ac-power",
+      "title": "Prerequisite Check",
+      "content": "PD-1 (for `phys.em.lcr-circuits`):\n\"R = 40 Ω, X_L = 80 Ω, X_C = 50 Ω in series. Impedance, and does the current lead or lag?\"\n  Cannot say \"50 Ω, lags\" → flag PREREQ-GAP-LCR.\n  In-session minimum repair: one P06 (the impedance triangle) + one P34 (\"Z for R = 30, X = 40 Ω?\") then resume. If absent, schedule the missing session (S4 route).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.ac-power.md",
+        "startLine": 58,
+        "endLine": 65
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -4,10 +4,10 @@
   "status": "production",
   "build_date": "2026-06-29",
   "statistics": {
-    "total_concepts": 262,
+    "total_concepts": 266,
     "total_domains": 12,
-    "total_requires_edges": 329,
-    "total_unlocks_edges": 328,
+    "total_requires_edges": 333,
+    "total_unlocks_edges": 332,
     "total_cross_links": 0
   },
   "domains": [
@@ -39,12 +39,12 @@
     {
       "key": "em",
       "name": "Electromagnetism",
-      "count": 41
+      "count": 43
     },
     {
       "key": "mod",
       "name": "Modern Physics",
-      "count": 21
+      "count": 23
     },
     {
       "key": "qm",
@@ -3960,8 +3960,8 @@
       "children": [],
       "unlocks": [
         "phys.em.electric-field",
-        "phys.mod.bohr-model",
-        "phys.particle.four-forces"
+        "phys.particle.four-forces",
+        "phys.mod.atomic-models"
       ]
     },
     {
@@ -5012,6 +5012,68 @@
         "NCERT Physics Class 12 Ch.7"
       ],
       "children": [],
+      "unlocks": [
+        "phys.em.lcr-circuits"
+      ]
+    },
+    {
+      "id": "phys.em.lcr-circuits",
+      "name": "Series LCR Circuit: Impedance, Resonance and Q Factor",
+      "aliases": [
+        "LCR circuit",
+        "impedance",
+        "reactance",
+        "series resonance"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.em.lc-circuits"
+      ],
+      "related": [
+        "phys.wave.forced-oscillations",
+        "phys.em.rc-circuits"
+      ],
+      "cross_links": [],
+      "description": "In a series LCR circuit driven by AC the inductor and capacitor have reactances X_L = wL and X_C = 1/(wC) whose voltages are out of phase with the resistor's, so the impedance is Z = sqrt(R^2 + (X_L - X_C)^2); at resonance X_L = X_C, Z = R and the current peaks, more sharply for a higher Q factor.",
+      "difficulty": "advanced",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "NCERT Physics Class 12 Ch.7",
+        "Halliday Resnick Ch.31"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.em.ac-power"
+      ]
+    },
+    {
+      "id": "phys.em.ac-power",
+      "name": "Power in AC Circuits, Power Factor and Wattless Current",
+      "aliases": [
+        "power factor",
+        "average power AC",
+        "wattless current"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.em.lcr-circuits"
+      ],
+      "related": [
+        "phys.em.electrical-power",
+        "phys.em.domestic-electricity"
+      ],
+      "cross_links": [],
+      "description": "In an AC circuit the average power is P = V_rms I_rms cos(phi), where the power factor cos(phi) = R/Z; a pure inductor or capacitor takes current but no average power (wattless current), so low power factors waste transmission capacity.",
+      "difficulty": "advanced",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "NCERT Physics Class 12 Ch.7"
+      ],
+      "children": [],
       "unlocks": []
     },
     {
@@ -5215,6 +5277,37 @@
       ]
     },
     {
+      "id": "phys.mod.atomic-models",
+      "name": "Nuclear Model of the Atom and Alpha Scattering",
+      "aliases": [
+        "Rutherford model",
+        "alpha particle scattering",
+        "Thomson model",
+        "gold foil experiment"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.em.coulombs-law"
+      ],
+      "related": [
+        "phys.mod.bohr-model"
+      ],
+      "cross_links": [],
+      "description": "Alpha particles fired at thin gold foil mostly pass straight through, but a few are scattered through large angles, which the spread-out Thomson model cannot explain; Rutherford concluded that the positive charge and almost all the mass are concentrated in a tiny nucleus, with a distance of closest approach giving an upper limit on its size.",
+      "difficulty": "proficient",
+      "estimated_hours": 2,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "NCERT Physics Class 12 Ch.12"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mod.bohr-model",
+        "phys.mod.nucleus-size-and-force"
+      ]
+    },
+    {
       "id": "phys.mod.bohr-model",
       "name": "Bohr Model of the Hydrogen Atom",
       "aliases": [
@@ -5223,8 +5316,8 @@
       ],
       "parent": null,
       "requires": [
-        "phys.em.coulombs-law",
-        "phys.mod.photons"
+        "phys.mod.photons",
+        "phys.mod.atomic-models"
       ],
       "related": [
         "phys.mod.atomic-spectra"
@@ -5291,6 +5384,35 @@
       "mastery_threshold": 0.75,
       "references": [
         "NCERT Physics Class 12 Ch.11"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.mod.nucleus-size-and-force",
+      "name": "Nuclear Composition, Size, Density and Nuclear Force",
+      "aliases": [
+        "nuclear radius",
+        "nuclear density",
+        "strong nuclear force",
+        "isotopes"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mod.atomic-models"
+      ],
+      "related": [
+        "phys.mod.binding-energy",
+        "phys.mod.radioactivity"
+      ],
+      "cross_links": [],
+      "description": "A nucleus of mass number A contains Z protons and A - Z neutrons, with radius R = R0 A^(1/3) (R0 about 1.2 fm), so every nucleus has nearly the same enormous density, about 2.3 x 10^17 kg/m^3; a short-range, strongly attractive nuclear force between nucleons overcomes the protons' electric repulsion.",
+      "difficulty": "proficient",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "NCERT Physics Class 12 Ch.13"
       ],
       "children": [],
       "unlocks": []
