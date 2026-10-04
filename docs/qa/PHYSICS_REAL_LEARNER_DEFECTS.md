@@ -133,6 +133,16 @@ Categories: Teaching · Adaptation · Lesson flow · Visuals · Numerical/factua
 - **Also:** the µ (micro) prefix is quizzed but never taught; three near-duplicate kelvin/temperature cards were asked (*"Is the SI base unit for temperature the degree Celsius or the kelvin?"*, *"Why is kelvin…?"*, *"Which of these is the SI base unit for temperature?"*).
 - **Reproducible:** yes (observed twice in one session). **Related:** PCD-033. **Status:** OPEN
 
+### PHYS-018 — [P1] [Lesson flow/Teaching] Cards and figures from OTHER lessons appear when lessons run at the same time on one account
+- **Date:** 2026-10-04 ≈23:50 UTC · **Concepts:** `phys.meas.scalars-vectors` (2), `phys.meas.dimensions` (3), `phys.meas.errors` (4), `phys.meas.measuring-instruments` (6)
+- **Learner did:** three lessons were open at once on the same account (three sessions in parallel, as a learner with several tabs/devices would).
+- **Tutor did:** the "Scalar and Vector Quantities" lesson opened correctly, then attached the "Seven SI base units" figure, asked the µF / SI-base-unit / force-units cards from lesson 1, and the "Measurement error" figure and worn-ruler cards from lesson 4. "Dimensional Analysis" showed the same lesson-1 and lesson-4 cards. "Vernier Calipers" showed the "Linearise, fit, read the gradient" figure and cards from lesson 7.
+- **Control:** the same account driven ONE lesson at a time (order 8, "Vector Addition and Resolution") showed only its own figure and cards.
+- **Why a defect:** a learner is taught and quizzed on a different lesson's content, and mastery was recorded for lessons 2, 3, 4, 6 and 7 although they were mostly answered with other lessons' cards.
+- **Expected:** each session serves only its own concept. **Actual:** content leaks across sessions of the same account when they overlap.
+- **Reproducible:** yes in the 3-parallel run (4 of 5 concurrent lessons); not reproduced sequentially. **Scope:** unknown (probably per-account serving state; real impact needs a multi-tab learner). **Related:** PCD-004 (earlier concurrency finding). **Status:** OPEN
+- **Method note:** all lessons after this one were run sequentially, one at a time. Orders 1-7 were driven in the parallel run and 5 of them are affected; order 5 did not complete and is re-driven sequentially.
+
 ## Out-of-scope observations (Chemistry) from the earlier four-lesson session — preserved, not counted
 
 These were found by the same learner on 2026-10-04 and are recorded so they are not lost. They are **Chemistry**, outside this file's Physics scope, and are not included in the Physics counts above.
