@@ -159,6 +159,29 @@ numbering. Cold-start bootstrap at 16:39 UTC created `phys.mod.special-diodes` (
 5 probes) and exactly fifteen new probe identities on the fifteen §C concepts (one each), with
 0 status changes to existing identities on those concepts — nothing orphaned.
 
+### Live production QA (2026-10-04, after `944bac5c`)
+
+Owner asked to validate on a named real account; logging in with the password pasted in chat
+was blocked by the session's credential-safety classifier, so the same harness
+(`scripts/qa/physicsOneConceptLive.ts`) ran on disposable `qa-*@mytutor-qa.invalid`
+accounts, each deleted afterwards with re-login proven blocked. Every lesson: own figure
+served on 3 turns, authored quizzes graded from the seed key, one deliberate wrong answer
+corrected with its reason, verified mastery (check 1/1, practice 2/2), lesson complete.
+
+| Concept | Lesson | Figure | Note |
+|---|---|---|---|
+| `phys.mod.special-diodes` | 215 | `phys-special-diodes` | all 5 authored probes served |
+| `phys.rel.general-relativity-intro` | 243 | `phys-general-relativity` | misconception probe keeps its reasons (two "No —" heads would collide) — not a give-away |
+| `phys.wave.coupled-oscillators` | 115 | `phys-coupled-oscillators` | |
+| `phys.astro.stellar-properties` | 260 | `phys-hr-diagram` | |
+| `phys.em.wheatstone-bridge` | 158 | existing | §C meter-bridge probe served, graded correct |
+| `phys.therm.kinetic-theory` | 90 | existing | §C mean-free-path probe served, graded correct |
+| `phys.mech.circular-motion` | 19 | existing | §C conical-pendulum probe served, graded correct |
+
+DB check: all 20 new probe identities (5 + 15) have a `probe_assets` row with ≥ 2 choices.
+Observed, pre-existing and unchanged: live chat turns write DRAFT ADULT `core_explanation`
+rows (one per turn; not served), including from these QA sessions.
+
 ## Next
 
 Physics KG is at 283 and the coverage audit is done. Only the electronics nodes
