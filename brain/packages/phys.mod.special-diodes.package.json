@@ -1,0 +1,416 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mod.special-diodes-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mod.special-diodes",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:f7a009a960f4bc185c420f1f070e2eb983f7558d8ac5a23307b498ead50a54c4",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mod.special-diodes.md": "sha256:832f133abbd4163ebb80ff8fc8993c74655a2e849c4edbfe6d924c7acab98703"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.mod.special-diodes",
+    "name": "Special-Purpose Diodes: Zener, LED, Photodiode, Solar Cell",
+    "difficultyRaw": "expert (5)",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "phys.mod.diode-rectification",
+      "phys.em.ohms-law"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mod.special-diodes-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mod.special-diodes (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mod.special-diodes.md": "sha256:832f133abbd4163ebb80ff8fc8993c74655a2e849c4edbfe6d924c7acab98703"
+      },
+      "contentHash": "sha256:9a918041ab3914d641f4eb7c5fe64848bfbeaa5547f5d156f83fd90f76b66211",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mod.special-diodes.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.special-diodes.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.special-diodes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.special-diodes\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.special-diodes.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.special-diodes.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.special-diodes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.special-diodes\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.special-diodes.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.special-diodes.md#TA-3 (addresses MC-ZENER-BREAKDOWN-DESTROYS)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.special-diodes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.special-diodes\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.special-diodes.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.special-diodes.md#TA-4 (addresses MC-LED-COLOUR-FROM-CASE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.special-diodes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.special-diodes\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.special-diodes.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.special-diodes.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.special-diodes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.special-diodes\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.special-diodes.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.special-diodes.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.special-diodes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.special-diodes\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.special-diodes.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.special-diodes.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.special-diodes"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.special-diodes\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mod.special-diodes/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "phys.mod.special-diodes",
+      "title": "Learning Objective",
+      "content": "[Boundary statement]\nA student who achieves mastery demonstrates:\n1. Explains the Zener diode: a heavily doped junction made to break down in reverse at a sharp, fixed voltage V_Z without damage, so that with a series resistor it holds a load at V_Z — and computes the currents: a 12 V supply, 100 Ω series resistor, 6.2 V Zener and 620 Ω load give 58 mA through the resistor, 10 mA through the load and 48 mA through the Zener.\n2. Explains the light-emitting diode: forward-biased, electrons drop across the band gap and give out photons of energy close to E_g, so λ ≈ 1240/E_g(eV) nm — 1.9 eV gives about 653 nm (red), 2.7 eV about 459 nm (blue) — the colour set by the semiconductor, not the case; computes a current-limiting resistor (5 V supply, 2.0 V red LED, 20 mA → 150 Ω).\n3. Distinguishes the photodiode (reverse-biased; light with photon energy above E_g makes electron–hole pairs and a reverse current proportional to the light; silicon, E_g = 1.12 eV, stops responding beyond about 1107 nm) from the solar cell (no bias; the junction field separates light-made pairs, giving about 0.6 V for silicon and delivering power — 20 % of 1000 W/m² is 200 W/m²).\n\nA student who thinks reverse breakdown always destroys a diode, or that an LED's colour comes from its tinted plastic, has **NOT** achieved mastery — those ideas miss what makes these diodes useful.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.special-diodes.md",
+        "startLine": 17,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.mod.special-diodes/misconception/MC-ZENER-BREAKDOWN-DESTROYS",
+      "kind": "misconception",
+      "conceptId": "phys.mod.special-diodes",
+      "title": "Reverse breakdown always destroys a diode, so no diode can work there",
+      "content": "### MC-ZENER-BREAKDOWN-DESTROYS: \"Reverse breakdown always destroys a diode, so no diode can work there\"\ntrigger_signal: student says a diode in reverse breakdown is always damaged, or cannot explain how a Zener operates in reverse.\nconflict_evidence [P28]: \"Voltage regulators in chargers run Zener diodes in reverse breakdown for years. If breakdown always destroyed a diode, how could they?\"\nbridge_text [P30]: \"What destroys a diode is not breakdown itself but too much current and heat. A Zener is heavily doped so that it breaks down sharply at a fixed V_Z, and a series resistor limits the current — 48 mA in the 12 V example, well within its rating. In breakdown the voltage hardly changes however much the current changes, which is exactly what a regulator needs.\"\nreplacement_text [P31]: \"A Zener diode is designed to work in reverse breakdown at a fixed voltage; a series resistor limits its current so it is not damaged.\"\ndiscrimination_pairs [P33]: [\"rectifier diode: breakdown avoided — current unlimited, overheats\", \"Zener: breakdown used — current limited by a resistor, voltage held at V_Z\"]\ns6_path: skip P28; show the regulator holding 6.2 V as the supply moves from 10 V to 14 V.",
+      "localKey": "MC-ZENER-BREAKDOWN-DESTROYS",
+      "language": "en",
+      "refs": [
+        "MC-ZENER-BREAKDOWN-DESTROYS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.special-diodes.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.mod.special-diodes/misconception/MC-LED-COLOUR-FROM-CASE",
+      "kind": "misconception",
+      "conceptId": "phys.mod.special-diodes",
+      "title": "An LED's colour comes from its coloured plastic case",
+      "content": "### MC-LED-COLOUR-FROM-CASE: \"An LED's colour comes from its coloured plastic case\"\ntrigger_signal: student attributes LED colour to the case or a filter, or expects any LED to give white light without it.\nconflict_evidence [P28]: \"Clear-cased LEDs glow red, green or blue. If the case made the colour, what colour would a clear one be?\"\nbridge_text [P30]: \"The colour comes from the semiconductor. An electron crossing the band gap gives a photon of energy about E_g, so λ = 1240/E_g nm: 1.9 eV gives about 653 nm, red; 2.7 eV gives about 459 nm, blue. A tinted case only helps you see which LED it is; changing the material changes the colour.\"\nreplacement_text [P31]: \"An LED's colour is set by its band gap (λ ≈ 1240/E_g nm), not by its case.\"\ndiscrimination_pairs [P33]: [\"band gap 1.9 eV: red, about 653 nm\", \"band gap 2.7 eV: blue, about 459 nm\"]\ns6_path: skip P28; line up three clear LEDs and name each colour.",
+      "localKey": "MC-LED-COLOUR-FROM-CASE",
+      "language": "en",
+      "refs": [
+        "MC-LED-COLOUR-FROM-CASE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.special-diodes.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.mod.special-diodes/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.special-diodes",
+      "title": "Four Jobs",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Four Jobs\",\"primitives\":[\"P01\",\"P04\",\"P05\",\"P06\",\"P14\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.special-diodes.md",
+        "startLine": 11,
+        "endLine": 18
+      }
+    },
+    {
+      "assetId": "phys.mod.special-diodes/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.special-diodes",
+      "title": "The Zener Regulator",
+      "content": "{\"id\":\"TA-2\",\"title\":\"The Zener Regulator\",\"primitives\":[\"P02\",\"P06\",\"P08\",\"P13\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.special-diodes.md",
+        "startLine": 18,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "phys.mod.special-diodes/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.special-diodes",
+      "title": "Breakdown Need Not Destroy",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Breakdown Need Not Destroy\",\"primitives\":[\"P02\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-ZENER-BREAKDOWN-DESTROYS\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-ZENER-BREAKDOWN-DESTROYS"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.special-diodes.md",
+        "startLine": 26,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "phys.mod.special-diodes/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.special-diodes",
+      "title": "LEDs and Colour",
+      "content": "{\"id\":\"TA-4\",\"title\":\"LEDs and Colour\",\"primitives\":[\"P02\",\"P13\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-LED-COLOUR-FROM-CASE\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-LED-COLOUR-FROM-CASE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.special-diodes.md",
+        "startLine": 32,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "phys.mod.special-diodes/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.special-diodes",
+      "title": "Light In — Photodiode and Solar Cell",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Light In — Photodiode and Solar Cell\",\"primitives\":[\"P02\",\"P34\",\"P49\",\"P50\",\"P51\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.special-diodes.md",
+        "startLine": 39,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.mod.special-diodes/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.special-diodes",
+      "title": "Formative Assessment",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Formative Assessment\",\"primitives\":[\"P02\",\"P35\",\"P49\",\"P51\",\"P55\",\"P79\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.special-diodes.md",
+        "startLine": 45,
+        "endLine": 52
+      }
+    },
+    {
+      "assetId": "phys.mod.special-diodes/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.special-diodes",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P28\",\"P41\",\"P54\",\"P55\",\"P62\",\"P68\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.special-diodes.md",
+        "startLine": 52,
+        "endLine": 94
+      }
+    },
+    {
+      "assetId": "phys.mod.special-diodes/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mod.special-diodes",
+      "title": "Assessment Battery",
+      "content": "| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (classify) | \"Bias of each device\" | CORRECT = Zener reverse, LED forward, photodiode reverse, solar cell none |\n| P74 (classify) | \"Zener current at 12 V\" | CORRECT = 48 mA |\n| P75 (boundary) | \"Supply below V_Z\" | CORRECT = no regulation; Zener off |\n| P76 (transfer) | \"Green at 540 nm\" | CORRECT = about 2.3 eV |\n| P77 (generate) | \"Design a regulator\" | CORRECT = Zener 6.2 V across load, series resistor ~100 Ω |\n| P78 (explain) | \"Solar cell, no battery\" | CORRECT = junction field separates light-made pairs |\n| P79 (predict) | \"Si photodiode at 1300 nm\" | CORRECT = no — beyond the 1107 nm cutoff |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.special-diodes.md",
+        "startLine": 180,
+        "endLine": 192
+      }
+    },
+    {
+      "assetId": "phys.mod.special-diodes/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.special-diodes",
+      "title": "Student State Matrix",
+      "content": "| State | Why here | Tell-tale behaviour | Protocol |\n|---|---|---|---|\n| S0 | Diodes only as one-way valves | Cannot name a use beyond rectification | Protocol A (Concrete) |\n| S1 | Names recited | Cannot say what sets V_Z or an LED's colour | Protocol B (Counterexample-first) |\n| S2-ZENER-BREAKDOWN-DESTROYS | Rectifier picture | \"Reverse breakdown burns out a diode\" | Misconception Engine → then Protocol C |\n| S2-LED-COLOUR-FROM-CASE | Filter picture | \"The plastic makes it red\" | Misconception Engine → then Protocol C |\n| S3 | Partial — ideas fine | Cannot compute regulator currents or λ | Protocol C (Guided Questioning) |\n| S6 | Anxiety on band diagrams | Avoids eV | Protocol F (Low Pressure) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.special-diodes.md",
+        "startLine": 27,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "phys.mod.special-diodes/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.special-diodes",
+      "title": "Diagnostic Battery",
+      "content": "DB-1 (prior-exposure check):\n\"Apart from turning AC into DC, what else can diodes do?\"\n  No idea → DB-2 to probe further.\n  \"Make light, sense light, regulate voltage, make electricity from sunlight\" → DB-2.\n\nDB-2 (representation / misconception test):\n\"Can a diode be used deliberately in reverse breakdown?\"\n  \"Yes — a Zener diode is designed to break down at a fixed voltage, and a series resistor limits the current, so it regulates voltage\" → S3. Enter Protocol C.\n  \"Yes\" (no reason) → S1. Enter Protocol B.\n  \"No — reverse breakdown always destroys a diode\" → SIGNAL:MISCONCEPTION:MC-ZENER-BREAKDOWN-DESTROYS. Enter Misconception Engine.\n  Pause → add S6 flag; Protocol F if anxious, otherwise Protocol A.\n\nDB-3 (LED check — overlays):\n\"Take the red plastic case off a red LED. What colour is its light?\"\n  \"Still red — the semiconductor's band gap sets the colour\" → no flag.\n  \"White, the case colours it\" → add SIGNAL:MISCONCEPTION:MC-LED-COLOUR-FROM-CASE (repair at TA-4).\n  Confident and wrong on DB-2 → add S7 flag. Override to Protocol G.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-ZENER-BREAKDOWN-DESTROYS",
+        "MC-LED-COLOUR-FROM-CASE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.special-diodes.md",
+        "startLine": 38,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "phys.mod.special-diodes/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.special-diodes",
+      "title": "Prerequisite Check",
+      "content": "PD-1 (for `phys.mod.diode-rectification`):\n\"In which bias does a diode conduct readily, and what happens in reverse bias?\"\n  Cannot say \"forward conducts; reverse blocks until breakdown\" → flag PREREQ-GAP-DIODE.\n  In-session minimum repair: one P06 (the diode I–V curve) + one P34 (\"which bias conducts?\") then resume.\n\nPD-2 (for `phys.em.ohms-law`):\n\"5.8 V across a 100 Ω resistor: current?\"\n  Cannot say \"58 mA\" → flag PREREQ-GAP-OHM. Repair: one P34 on I = V/R.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.special-diodes.md",
+        "startLine": 58,
+        "endLine": 69
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

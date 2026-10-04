@@ -118,6 +118,7 @@ import { buildEarthMoonSunScene, buildHrDiagramScene, buildDistanceLadderScene, 
 import { buildLaserScene, buildRadiationSafetyScene, buildModulationScene, buildDipoleScene } from '@/lib/teaching/sceneGenerators/physicsExtensionScenesB10'
 import { buildCoupledScene, buildChaosScene, buildFieldsInMatterScene, buildSuperconductivityScene } from '@/lib/teaching/sceneGenerators/physicsExtensionScenesB11'
 import { buildGeneralRelativityScene } from '@/lib/teaching/sceneGenerators/physicsExtensionScenesB12'
+import { buildSpecialDiodesScene } from '@/lib/teaching/sceneGenerators/physicsExtensionScenesB13'
 import {
   buildDisplacementScene, buildVelocityScene, buildAccelerationScene, buildRelativeMotionScene, buildTensionScene,
   buildConservativeForcesScene, buildAngularMomentumScene, buildAngularMomentumConservationScene,
@@ -613,6 +614,8 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'phys.mod.superconductivity': buildSuperconductivityScene,
   // Coverage-driven KG extension, batch 12 (2026-10-03). See physicsExtensionScenesB12.ts.
   'phys.rel.general-relativity-intro': buildGeneralRelativityScene,
+  // Coverage-driven KG extension, batch 13 (2026-10-03). See physicsExtensionScenesB13.ts.
+  'phys.mod.special-diodes': buildSpecialDiodesScene,
   // Batch 15 (2026-09-30): promoted from domain scope. See physicsCoreScenesB15.ts.
   'phys.mech.displacement':           buildDisplacementScene,
   'phys.mech.velocity':               buildVelocityScene,

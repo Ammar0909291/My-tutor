@@ -56500,6 +56500,119 @@ const GREL_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.mod.special-diodes ─────────────────────────────────────────────────
+const SDIO = 'phys.mod.special-diodes'
+const SDIO_SRC = 'docs/curriculum/blueprints/phys.mod.special-diodes.md'
+
+const SDIO_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SDIO,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Special-purpose diodes put the same p-n junction to new jobs. A Zener diode is heavily doped so that in reverse bias it breaks down sharply at a fixed voltage V_Z. Breakdown itself does no harm — only too much current does — so a series resistor limits the current and the Zener holds the voltage across it steady. With a 12 V supply, a 100 Ω resistor, a 6.2 V Zener and a 620 Ω load: the resistor drops 5.8 V, so 58 mA flows; the load takes 6.2/620 = 10 mA and the Zener the other 48 mA. Raise the supply to 14 V and the Zener just takes 68 mA; the load stays at 6.2 V. A light-emitting diode (LED) is forward-biased: electrons falling across the band gap give photons of energy close to E_g, so λ ≈ 1240/E_g nm — about 653 nm (red) for 1.9 eV, 459 nm (blue) for 2.7 eV. From 5 V, a red LED dropping 2.0 V at 20 mA needs a (5 − 2.0)/0.020 = 150 Ω resistor. A photodiode is reverse-biased: photons above E_g make electron–hole pairs and a current proportional to the light (silicon, E_g = 1.12 eV, stops beyond about 1107 nm). A solar cell has no bias: its built-in field separates the pairs, giving about 0.6 V and delivering power — 20 % of 1000 W/m² is 200 W/m².',
+    targetedMisconceptions: [`${SDIO}:MC-ZENER-BREAKDOWN-DESTROYS`, `${SDIO}:MC-LED-COLOUR-FROM-CASE`],
+    source: `${SDIO_SRC} — TA-2 Zener regulator, TA-4 LEDs and colour, TA-5 photodiode and solar cell`,
+  },
+  {
+    conceptId: SDIO,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'It is natural to think reverse breakdown always destroys a diode — rectifier lessons warn about it. But what destroys a diode is too much current and the heat it makes, not breakdown itself. A Zener diode is heavily doped so that it breaks down sharply at a fixed voltage, and a series resistor limits its current: in a 12 V circuit with a 100 Ω resistor and a 6.2 V Zener feeding a 10 mA load, the Zener carries 48 mA, well within its rating. In breakdown its voltage hardly changes however much its current changes, which is exactly what a regulator needs — chargers use Zeners this way for years. A second idea is that an LED gets its colour from its plastic case. Yet clear-cased LEDs glow red, green or blue. The colour comes from the semiconductor: an electron crossing the band gap gives a photon of energy about E_g, so λ ≈ 1240/E_g nm — 1.9 eV gives about 653 nm, red; 2.7 eV about 459 nm, blue. A tinted case only shows you which LED it is; changing the material changes the colour.',
+    targetedMisconceptions: [`${SDIO}:MC-ZENER-BREAKDOWN-DESTROYS`, `${SDIO}:MC-LED-COLOUR-FROM-CASE`],
+    source: `${SDIO_SRC} — MC-ZENER-BREAKDOWN-DESTROYS + MC-LED-COLOUR-FROM-CASE, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const SDIO_PROBES: SeedProbe[] = [
+  {
+    conceptId: SDIO,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A 12 V supply feeds a 620 Ω load through a 100 Ω resistor, with a 6.2 V Zener diode across the load. What current flows through the Zener?',
+    choices: [
+      { text: '48 mA', isCorrect: true },
+      { text: '58 mA', isCorrect: false },
+      { text: '10 mA', isCorrect: false },
+      { text: '120 mA', isCorrect: false },
+    ],
+    correctValue: '48 mA',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [],
+    source: `${SDIO_SRC} — TA-2 think-aloud (58 mA − 10 mA); 58 mA is the resistor current, 10 mA the load's`,
+  },
+  {
+    conceptId: SDIO,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'An LED is made from a semiconductor with a band gap of 2.7 eV. About what wavelength does it emit (λ ≈ 1240/E_g nm)?',
+    choices: [
+      { text: 'About 459 nm (blue)', isCorrect: true },
+      { text: 'About 653 nm (red)', isCorrect: false },
+      { text: 'About 1107 nm (infrared)', isCorrect: false },
+      { text: 'About 3348 nm', isCorrect: false },
+    ],
+    correctValue: 'about 459 nm',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: `${SDIO_SRC} — TA-4 think-aloud (1240/2.7); 3348 multiplies instead of divides`,
+  },
+  {
+    conceptId: SDIO,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Can a diode be used deliberately in reverse breakdown?',
+    choices: [
+      { text: 'Yes — a Zener diode breaks down at a fixed voltage, and a series resistor limits its current so it is not damaged', isCorrect: true },
+      { text: 'No — reverse breakdown always destroys a diode', isCorrect: false, misconceptionId: `${SDIO}:MC-ZENER-BREAKDOWN-DESTROYS` },
+      { text: 'Only for a moment, before it burns out', isCorrect: false, misconceptionId: `${SDIO}:MC-ZENER-BREAKDOWN-DESTROYS` },
+    ],
+    correctValue: 'yes',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${SDIO}:MC-ZENER-BREAKDOWN-DESTROYS`],
+    source: `${SDIO_SRC} — DB-2 golden probe and MC-ZENER-BREAKDOWN-DESTROYS conflict_evidence`,
+  },
+  {
+    conceptId: SDIO,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'You remove the red plastic case from a red LED. What colour is its light now?',
+    choices: [
+      { text: 'Still red — the semiconductor\'s band gap sets the colour', isCorrect: true },
+      { text: 'White — the red case was colouring it', isCorrect: false, misconceptionId: `${SDIO}:MC-LED-COLOUR-FROM-CASE` },
+      { text: 'It stops giving light without its case', isCorrect: false },
+    ],
+    correctValue: 'still red',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SDIO}:MC-LED-COLOUR-FROM-CASE`],
+    source: `${SDIO_SRC} — DB-3 and MC-LED-COLOUR-FROM-CASE conflict_evidence`,
+  },
+  {
+    conceptId: SDIO,
+    subjectSlug: 'physics',
+    probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Which device works with no bias at all, separating light-made charge pairs with its own junction field to deliver power?',
+    choices: [
+      { text: 'A solar cell', isCorrect: true },
+      { text: 'A photodiode — it is reverse-biased and senses light rather than delivering power', isCorrect: false },
+      { text: 'A Zener diode', isCorrect: false },
+      { text: 'A light-emitting diode', isCorrect: false },
+    ],
+    correctValue: 'a solar cell',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: `${SDIO_SRC} — TA-5 and §7 P74/P78`,
+  },
+]
+
 // Batch export spreads for the extension (kept with the concepts above).
 const PHYS_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...DENS_EXPLANATIONS,
@@ -56546,6 +56659,7 @@ const PHYS_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...FMAT_EXPLANATIONS,
   ...SUPC_EXPLANATIONS,
   ...GREL_EXPLANATIONS,
+  ...SDIO_EXPLANATIONS,
 ]
 
 const PHYS_EXTENSION_PROBES: SeedProbe[] = [
@@ -56593,6 +56707,7 @@ const PHYS_EXTENSION_PROBES: SeedProbe[] = [
   ...FMAT_PROBES,
   ...SUPC_PROBES,
   ...GREL_PROBES,
+  ...SDIO_PROBES,
 ]
 
 // ─── Batch export ────────────────────────────────────────────────────────────

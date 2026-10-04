@@ -4,10 +4,10 @@
   "status": "production",
   "build_date": "2026-06-29",
   "statistics": {
-    "total_concepts": 282,
+    "total_concepts": 283,
     "total_domains": 12,
-    "total_requires_edges": 360,
-    "total_unlocks_edges": 359,
+    "total_requires_edges": 362,
+    "total_unlocks_edges": 361,
     "total_cross_links": 0
   },
   "domains": [
@@ -44,7 +44,7 @@
     {
       "key": "mod",
       "name": "Modern Physics",
-      "count": 26
+      "count": 27
     },
     {
       "key": "qm",
@@ -4449,7 +4449,8 @@
         "phys.em.ac-basics",
         "phys.em.dc-circuits",
         "phys.em.electrical-power",
-        "phys.em.resistivity"
+        "phys.em.resistivity",
+        "phys.mod.special-diodes"
       ]
     },
     {
@@ -8126,6 +8127,40 @@
       "mastery_threshold": 0.7,
       "references": [
         "NCERT Physics Class 12 Ch.14"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mod.special-diodes"
+      ]
+    },
+    {
+      "id": "phys.mod.special-diodes",
+      "name": "Special-Purpose Diodes: Zener, LED, Photodiode, Solar Cell",
+      "aliases": [
+        "zener diode",
+        "light-emitting diode",
+        "photodiode",
+        "solar cell",
+        "voltage regulator"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mod.diode-rectification",
+        "phys.em.ohms-law"
+      ],
+      "related": [
+        "phys.mod.energy-bands",
+        "phys.mod.photons"
+      ],
+      "cross_links": [],
+      "description": "A Zener diode is built to work in reverse breakdown at a fixed voltage, so with a series resistor it regulates voltage. A light-emitting diode gives out photons of energy close to the band gap when forward-biased, and a reverse-biased photodiode passes a current set by the light falling on it. A solar cell, with no bias, separates light-made charge pairs and delivers power.",
+      "difficulty": "expert",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "NCERT Physics Class 12 Ch.14",
+        "OpenStax University Physics Vol.3 Ch.9"
       ],
       "children": [],
       "unlocks": []
