@@ -149,3 +149,33 @@ Asked to "fix" factual slips, the session offered three options; the owner chose
 remains deferred. Record: `docs/history/learner-intent-interpreter-ab-experiment.md`
 ("Closing the open items").
 
+
+## 2026-10-04 — owner go-ahead: numeric fact-check (proposal item 1), step 1 of 3
+Explicit fresh owner instruction ("Go ahead start working on step first. Then will do step 2 and
+3.") on proposal item 1 — catching wrong NUMBERS in the tutor's free prose — un-pauses the
+**numeric** check of the V2 Physics Verifier (§4.2) only. The other V2 checks and Durable Learner
+State stay deferred.
+
+Trigger: a live `phys.mod.lasers` lesson (2026-10-04) where the model's own example said a 1 W
+torch emits "roughly 10⁹ times more photons" than a 5 mW laser (the power ratio is 200). Authored
+content was correct; the free prose around it was not, and nothing checked it.
+
+Step 1 (this entry, done): `src/lib/teaching/factCheckNumeric.ts`, pure functions beside
+`factCheck.ts`'s F1, **not wired into any route**. Three abstain-by-default detectors:
+- N1 arithmetic — a written calculation is re-evaluated (tolerance max(2 %/5 % after ≈, half the
+  last stated digit); SI-prefix, percent and minute/hour conversions accepted). Abstains on
+  variables/functions next to the expression, angles, symbolic equations, bare-number definitions.
+- N2 ratio claims — "N times more/less …" vs the ratio of the two stated same-kind quantities in
+  the same or previous sentence, allowing unit-appropriate powers (inverse square, T⁴, √L).
+- N3 authored conflict — a quantity differing from an authored sentence that shares ≥2 other
+  quantities with it (same setup).
+
+Evidence at commit: `src/tests/factCheckNumeric.test.ts` (39 tests, incl. the live lasers
+sentence). Corpus smoke run over every authored physics + chemistry asset string (3,799 strings,
+633 with "=", 63 with "times"): first run 18 N1 false positives (½, bare 10⁻⁹, variables,
+sqrt/sin, parenthetical asides) — all fixed and pinned as tests — final run **0 flags**. Mutation
+check (authored results ×1.37): 70/113 caught; the misses are abstentions on symbolic or
+ambiguous lines. This is an indicator only, not the precision measurement.
+
+Not done, waiting on the owner: step 2 (offline precision on real tutor replies, same 90 % bar as
+`factCheck.ts`) and step 3 (production shadow, 1–2 weeks).
