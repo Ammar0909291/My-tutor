@@ -1,0 +1,411 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.opt.rectilinear-propagation-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.opt.rectilinear-propagation",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:896c2ed70f2bfc64fdca8d4b7548a63bde5a2b79c60d2f308dfd51ae057aa23d",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.opt.rectilinear-propagation.md": "sha256:96391dd2c8f36d234b3fac2566eefb0d1b4877ea9d9b1f6e64ea72887341ec50"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.opt.rectilinear-propagation",
+    "name": "Rectilinear Propagation: Shadows, Eclipses and the Pinhole Camera",
+    "difficultyRaw": "foundational (1)",
+    "bloom": "understand",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 2,
+    "prerequisites": [],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.opt.rectilinear-propagation-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.opt.rectilinear-propagation (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.opt.rectilinear-propagation.md": "sha256:96391dd2c8f36d234b3fac2566eefb0d1b4877ea9d9b1f6e64ea72887341ec50"
+      },
+      "contentHash": "sha256:df04ba8121c68ba32e75434539c6810fa3db006f20750890792b0b695ccf9653",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.opt.rectilinear-propagation.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.rectilinear-propagation.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.rectilinear-propagation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.rectilinear-propagation\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.rectilinear-propagation.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.rectilinear-propagation.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.rectilinear-propagation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.rectilinear-propagation\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.rectilinear-propagation.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.rectilinear-propagation.md#TA-3 (addresses MC-SHADOW-IS-IMAGE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.rectilinear-propagation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.rectilinear-propagation\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.rectilinear-propagation.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.rectilinear-propagation.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.rectilinear-propagation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.rectilinear-propagation\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.rectilinear-propagation.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.rectilinear-propagation.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.rectilinear-propagation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.rectilinear-propagation\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.rectilinear-propagation.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.rectilinear-propagation.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.rectilinear-propagation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.rectilinear-propagation\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.rectilinear-propagation.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.rectilinear-propagation.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.rectilinear-propagation"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.rectilinear-propagation\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.opt.rectilinear-propagation/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "phys.opt.rectilinear-propagation",
+      "title": "Learning Objective",
+      "content": "[Boundary statement]\nA student who achieves mastery demonstrates:\n1. States that light travels in straight lines through a uniform medium and uses straight rays from the source past the edges of an object to predict the position and size of its shadow.\n2. Distinguishes the umbra (no light from the source reaches it) from the penumbra (light from only part of an extended source reaches it), and uses them to explain total and partial solar eclipses and a lunar eclipse.\n3. Explains why a pinhole camera forms an inverted image, computes its size with similar triangles (image height / object height = image distance / object distance), and predicts that a larger hole gives a brighter but blurrier image.\n\nA student who says a shadow is \"a dark copy of the object\" or that the pinhole image is upright, or who explains the Moon's phases by the Earth's shadow, has **NOT** achieved mastery — without the straight-ray model, every ray diagram in reflection, refraction and lenses is drawn without a reason.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.rectilinear-propagation.md",
+        "startLine": 17,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.opt.rectilinear-propagation/misconception/MC-SHADOW-IS-IMAGE",
+      "kind": "misconception",
+      "conceptId": "phys.opt.rectilinear-propagation",
+      "title": "A shadow is a dark copy or picture of the object",
+      "content": "### MC-SHADOW-IS-IMAGE: \"A shadow is a dark copy or picture of the object\"\ntrigger_signal: student expects a shadow to carry the object's colour or surface features, or describes it as something the object \"sends out\".\nconflict_evidence [P28]: \"Shine a torch on a red ball and on a blue ball of the same size. Are their shadows red and blue?\"\nbridge_text [P30]: \"A shadow is not something the object makes — it is a place light cannot reach because the object blocks the straight rays. Blocked light has no colour; that is why every shadow is dark.\"\nreplacement_text [P31]: \"To find a shadow, draw straight rays from the source past the object's edges. The shadow is everything behind the object that those rays cannot reach.\"\ndiscrimination_pairs [P33]: [\"shadow of a coloured ball (dark, the outline only) vs its image in a mirror (coloured, detailed)\", \"point source (sharp umbra only) vs extended source (umbra plus penumbra)\"]\ns6_path: skip P28; make shadows of differently coloured objects together and notice they look the same.",
+      "localKey": "MC-SHADOW-IS-IMAGE",
+      "language": "en",
+      "refs": [
+        "MC-SHADOW-IS-IMAGE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.rectilinear-propagation.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.opt.rectilinear-propagation/misconception/MC-PHASES-ARE-SHADOW",
+      "kind": "misconception",
+      "conceptId": "phys.opt.rectilinear-propagation",
+      "title": "The Moon's phases are the Earth's shadow",
+      "content": "### MC-PHASES-ARE-SHADOW: \"The Moon's phases are the Earth's shadow\"\ntrigger_signal: student explains a crescent or half Moon as part of the Moon being in the Earth's shadow.\nconflict_evidence [P28]: \"For the Earth's shadow to fall on the Moon, the Earth must be between the Sun and the Moon. At a crescent Moon, the Moon appears close to the Sun in the sky. Is the Earth between them then?\"\nbridge_text [P30]: \"Half of the Moon is always lit by the Sun. As it orbits, we see different amounts of that lit half. A crescent means we are looking mostly at the dark half. The Earth's shadow only reaches the Moon at a full Moon, in a lunar eclipse.\"\nreplacement_text [P31]: \"Phases: how much of the sunlit half faces us. Lunar eclipse: the Moon passes through the Earth's shadow, only possible at full Moon.\"\ndiscrimination_pairs [P33]: [\"crescent Moon (viewing angle, every month) vs lunar eclipse (Earth's shadow, a few times a year)\", \"a shadow edge on the Moon in an eclipse (curved, from the round Earth) vs the terminator at a phase\"]\ns6_path: skip P28; a lamp and a ball moved around the learner's head in a dark room — the learner sees the phases form with no shadow involved.",
+      "localKey": "MC-PHASES-ARE-SHADOW",
+      "language": "en",
+      "refs": [
+        "MC-PHASES-ARE-SHADOW"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.rectilinear-propagation.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.opt.rectilinear-propagation/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.rectilinear-propagation",
+      "title": "Sources and Straight Lines",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Sources and Straight Lines\",\"primitives\":[\"P01\",\"P04\",\"P05\",\"P06\",\"P14\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.rectilinear-propagation.md",
+        "startLine": 11,
+        "endLine": 18
+      }
+    },
+    {
+      "assetId": "phys.opt.rectilinear-propagation/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.rectilinear-propagation",
+      "title": "Shadows from Straight Rays",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Shadows from Straight Rays\",\"primitives\":[\"P02\",\"P06\",\"P08\",\"P13\",\"P34\",\"P49\",\"P50\",\"P51\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.rectilinear-propagation.md",
+        "startLine": 18,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "phys.opt.rectilinear-propagation/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.rectilinear-propagation",
+      "title": "Umbra and Penumbra",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Umbra and Penumbra\",\"primitives\":[\"P02\",\"P06\",\"P13\",\"P17\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-SHADOW-IS-IMAGE\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-SHADOW-IS-IMAGE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.rectilinear-propagation.md",
+        "startLine": 28,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "phys.opt.rectilinear-propagation/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.rectilinear-propagation",
+      "title": "Eclipses",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Eclipses\",\"primitives\":[\"P02\",\"P07\",\"P16\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.rectilinear-propagation.md",
+        "startLine": 38,
+        "endLine": 46
+      }
+    },
+    {
+      "assetId": "phys.opt.rectilinear-propagation/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.rectilinear-propagation",
+      "title": "Phases Are Not Shadows",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Phases Are Not Shadows\",\"primitives\":[\"P02\",\"P13\",\"P17\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.rectilinear-propagation.md",
+        "startLine": 46,
+        "endLine": 53
+      }
+    },
+    {
+      "assetId": "phys.opt.rectilinear-propagation/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.rectilinear-propagation",
+      "title": "The Pinhole Camera",
+      "content": "{\"id\":\"TA-6\",\"title\":\"The Pinhole Camera\",\"primitives\":[\"P02\",\"P06\",\"P08\",\"P13\",\"P14\",\"P34\",\"P35\",\"P49\",\"P51\",\"P55\",\"P79\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.rectilinear-propagation.md",
+        "startLine": 53,
+        "endLine": 66
+      }
+    },
+    {
+      "assetId": "phys.opt.rectilinear-propagation/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.rectilinear-propagation",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P28\",\"P35\",\"P36\",\"P41\",\"P54\",\"P55\",\"P62\",\"P68\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.rectilinear-propagation.md",
+        "startLine": 66,
+        "endLine": 108
+      }
+    },
+    {
+      "assetId": "phys.opt.rectilinear-propagation/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.opt.rectilinear-propagation",
+      "title": "Assessment Battery",
+      "content": "| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (classify) | \"Crescent Moon: Earth's shadow or viewing angle?\" | CORRECT = viewing angle |\n| P74 (classify) | \"Small torch or large lamp — which gives a penumbra?\" | CORRECT = large lamp (extended source) |\n| P75 (boundary) | \"Observer in the Moon's penumbra during a solar eclipse?\" | CORRECT = partial eclipse |\n| P76 (transfer) | \"1.5 m person, 3 m from a 15 cm pinhole camera — image?\" | CORRECT = 7.5 cm, inverted |\n| P77 (generate) | \"Coin shadow three times the coin's size — distances?\" | CORRECT = source–wall distance three times source–coin distance |\n| P78 (explain) | \"Why does a large lamp give a fuzzy edge?\" | CORRECT = parts of the lamp are blocked, parts visible |\n| P79 (predict) | \"Bigger pinhole — brighter? sharper?\" | CORRECT = brighter, blurrier |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.rectilinear-propagation.md",
+        "startLine": 189,
+        "endLine": 201
+      }
+    },
+    {
+      "assetId": "phys.opt.rectilinear-propagation/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.opt.rectilinear-propagation",
+      "title": "Student State Matrix",
+      "content": "| State | Why here | Tell-tale behaviour | Protocol |\n|---|---|---|---|\n| S0 | No ray model | Describes shadows as \"dark areas\" with no source–object–screen geometry | Protocol A (Concrete) |\n| S1 | Rule without geometry | \"Light goes straight\" but cannot predict shadow size or pinhole inversion | Protocol B (Counterexample-first) |\n| S2-SHADOW-IS-IMAGE | Shadow as a copy | Expects a shadow to show colour or features; draws shadows from the object outward | Misconception Engine → then Protocol C |\n| S2-PHASES-ARE-SHADOW | Phases = eclipse | Says the crescent Moon is the Earth's shadow | Misconception Engine → then Protocol C |\n| S3 | Partial — shadows fine; eclipses or pinhole not | Correct umbra; upright pinhole image | Protocol C (Guided Questioning) |\n| S6 | Anxiety on geometry | Avoids drawing rays | Protocol F (Low Pressure) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.rectilinear-propagation.md",
+        "startLine": 27,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "phys.opt.rectilinear-propagation/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.opt.rectilinear-propagation",
+      "title": "Diagnostic Battery",
+      "content": "DB-1 (prior-exposure check):\n\"Have you thought about why shadows form and why they have the shape they do?\"\n  No → S0. Enter Protocol A (Concrete).\n  Yes → DB-2.\n\nDB-2 (representation / misconception test):\n\"A torch shines on a ball in front of a wall. Draw or describe where the shadow falls and why it is that size.\"\n  Draws straight rays from the torch grazing the ball's edges to the wall → S3. Enter Protocol C.\n  \"Behind the ball, round\" (no rays) → S1. Enter Protocol B.\n  \"The shadow is a dark picture of the ball\" / expects colour or features → SIGNAL:MISCONCEPTION:MC-SHADOW-IS-IMAGE. Enter Misconception Engine.\n  Pause / \"I don't know\" → add S6 flag; Protocol F if anxious, otherwise Protocol A.\n\nDB-3 (phases check — overlays):\n\"Why does the Moon look like a crescent some nights?\"\n  \"We see only part of its sunlit half\" → no flag.\n  \"The Earth's shadow covers part of it\" → add SIGNAL:MISCONCEPTION:MC-PHASES-ARE-SHADOW (repair at TA-5).\n  Confidence 4–5 with a wrong DB-2 → add S7 flag. Override to Protocol G.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-SHADOW-IS-IMAGE",
+        "MC-PHASES-ARE-SHADOW"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.rectilinear-propagation.md",
+        "startLine": 38,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "phys.opt.rectilinear-propagation/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.opt.rectilinear-propagation",
+      "title": "Prerequisite Check",
+      "content": "PD-1 (no KG prerequisite — entry node of the optics domain):\n\"Can you name something that gives out its own light, and something we see only because light falls on it?\"\n  Cannot separate luminous from non-luminous → in-session minimum repair at TA-1 (the sun/torch vs the Moon/book contrast). No session suspension: this concept is a root.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.rectilinear-propagation.md",
+        "startLine": 58,
+        "endLine": 64
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

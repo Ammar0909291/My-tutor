@@ -4,22 +4,22 @@
   "status": "production",
   "build_date": "2026-06-29",
   "statistics": {
-    "total_concepts": 238,
+    "total_concepts": 242,
     "total_domains": 12,
-    "total_requires_edges": 301,
-    "total_unlocks_edges": 300,
+    "total_requires_edges": 305,
+    "total_unlocks_edges": 304,
     "total_cross_links": 0
   },
   "domains": [
     {
       "key": "meas",
       "name": "Measurement & Units",
-      "count": 8
+      "count": 10
     },
     {
       "key": "mech",
       "name": "Classical Mechanics",
-      "count": 60
+      "count": 61
     },
     {
       "key": "therm",
@@ -34,7 +34,7 @@
     {
       "key": "opt",
       "name": "Optics",
-      "count": 15
+      "count": 16
     },
     {
       "key": "em",
@@ -104,7 +104,8 @@
         "phys.meas.unit-conversion",
         "phys.mech.displacement",
         "phys.therm.temperature",
-        "phys.wave.wave-properties"
+        "phys.wave.wave-properties",
+        "phys.meas.density"
       ]
     },
     {
@@ -185,7 +186,8 @@
       ],
       "children": [],
       "unlocks": [
-        "phys.meas.significant-figures"
+        "phys.meas.significant-figures",
+        "phys.meas.measuring-instruments"
       ]
     },
     {
@@ -207,6 +209,34 @@
       "bloom": "apply",
       "mastery_threshold": 0.75,
       "references": [
+        "NCERT Physics Class 11 Ch.2"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.meas.measuring-instruments",
+      "name": "Vernier Calipers and Screw Gauge",
+      "aliases": [
+        "vernier caliper",
+        "micrometer screw gauge",
+        "least count"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.meas.errors"
+      ],
+      "related": [
+        "phys.meas.significant-figures"
+      ],
+      "cross_links": [],
+      "description": "A vernier caliper and a screw gauge read lengths finer than their main scale: the least count sets the smallest readable step, and a zero error must be subtracted from every reading.",
+      "difficulty": "developing",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "NCERT Physics Class 11 Lab Manual",
         "NCERT Physics Class 11 Ch.2"
       ],
       "children": [],
@@ -294,6 +324,36 @@
       ],
       "children": [],
       "unlocks": []
+    },
+    {
+      "id": "phys.meas.density",
+      "name": "Density and Relative Density",
+      "aliases": [
+        "mass density",
+        "specific gravity"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.meas.units"
+      ],
+      "related": [
+        "phys.mech.buoyancy",
+        "phys.mech.pressure-fluids"
+      ],
+      "cross_links": [],
+      "description": "Density is mass per unit volume (rho = m/V); relative density compares a substance's density with that of water and decides whether it sinks or floats.",
+      "difficulty": "foundational",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.7,
+      "references": [
+        "NCERT Science Class 8 & 9",
+        "Halliday Resnick Ch.14"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.mech.pressure-fluids"
+      ]
     },
     {
       "id": "phys.mech.displacement",
@@ -549,8 +609,38 @@
       "children": [],
       "unlocks": [
         "phys.mech.newtons-first-law",
-        "phys.mech.newtons-second-law"
+        "phys.mech.newtons-second-law",
+        "phys.mech.mass-and-weight"
       ]
+    },
+    {
+      "id": "phys.mech.mass-and-weight",
+      "name": "Mass, Weight and Free Fall",
+      "aliases": [
+        "weight",
+        "acceleration due to gravity",
+        "free fall"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.force"
+      ],
+      "related": [
+        "phys.mech.newtons-second-law",
+        "phys.mech.universal-gravitation"
+      ],
+      "cross_links": [],
+      "description": "Mass is the amount of matter in a body and is the same everywhere; weight is the gravitational force on it, W = mg, which changes with g. Without air resistance all bodies fall with the same acceleration g.",
+      "difficulty": "foundational",
+      "estimated_hours": 2,
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "references": [
+        "NCERT Science Class 9 Ch.10",
+        "Halliday Resnick Ch.5"
+      ],
+      "children": [],
+      "unlocks": []
     },
     {
       "id": "phys.mech.newtons-first-law",
@@ -1610,7 +1700,8 @@
       ],
       "parent": null,
       "requires": [
-        "phys.mech.newtons-second-law"
+        "phys.mech.newtons-second-law",
+        "phys.meas.density"
       ],
       "related": [
         "phys.mech.buoyancy"
@@ -2942,6 +3033,33 @@
       "mastery_threshold": 0.8,
       "references": [
         "NCERT Physics Class 11 Ch.15"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.opt.rectilinear-propagation",
+      "name": "Rectilinear Propagation: Shadows, Eclipses and the Pinhole Camera",
+      "aliases": [
+        "light travels in straight lines",
+        "umbra and penumbra",
+        "pinhole camera"
+      ],
+      "parent": null,
+      "requires": [],
+      "related": [
+        "phys.opt.nature-of-light",
+        "phys.opt.reflection"
+      ],
+      "cross_links": [],
+      "description": "Light travels in straight lines through a uniform medium, so an opaque object casts a shadow (umbra, and a penumbra for an extended source), eclipses occur when the Sun, Earth and Moon line up, and a pinhole camera forms an inverted image.",
+      "difficulty": "foundational",
+      "estimated_hours": 2,
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "references": [
+        "NCERT Science Class 6 Ch.11",
+        "NCERT Science Class 7"
       ],
       "children": [],
       "unlocks": []

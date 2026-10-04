@@ -1,0 +1,414 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.meas.density-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.meas.density",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:ff8129fb234f864da633fe386d305a582a6d5ae9df0898c5c728f575f578cb91",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.meas.density.md": "sha256:fdb8cf3e9cd6545f10dc5463cc550b7be6a9909d88799d7d6c7527da88185573"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.meas.density",
+    "name": "Density and Relative Density",
+    "difficultyRaw": "foundational (1)",
+    "bloom": "apply",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "phys.meas.units"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.meas.density-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.meas.density (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.meas.density.md": "sha256:fdb8cf3e9cd6545f10dc5463cc550b7be6a9909d88799d7d6c7527da88185573"
+      },
+      "contentHash": "sha256:3e7c01715fbb5a3309891140c438ea01fc22bf7ff99b315855c073d53338863b",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.meas.density.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.density.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.density"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.density\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.density.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.density.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.density"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.density\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.density.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.density.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.density"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.density\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.density.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.density.md#TA-4 (addresses MC-HEAVY-IS-DENSE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.density"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.density\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.density.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.density.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.density"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.density\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.density.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.density.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.density"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.density\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.density.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.density.md#TA-7 (addresses MC-HEAVY-IS-DENSE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.density"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.density\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.meas.density/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "phys.meas.density",
+      "title": "Learning Objective",
+      "content": "[Boundary statement]\nA student who achieves mastery demonstrates:\n1. Computes density from mass and volume (rho = m/V) with units, and rearranges it to find a mass (m = rho V) or a volume (V = m/rho) — e.g. 540 g of aluminium filling 200 cm³ has rho = 2.7 g/cm³.\n2. States that density is a property of the **material**, not of the object: cutting a block in half halves its mass and its volume and leaves its density unchanged.\n3. Uses relative density (rho_substance / rho_water, no unit) to decide whether a solid sinks or floats in water — and converts between g/cm³ and kg/m³ (1 g/cm³ = 1000 kg/m³).\n\nA student who can plug numbers into rho = m/V but says \"a big log is denser than a small pebble because it is heavier\", or \"the half block is half as dense\", has **NOT** achieved mastery — confusing density with mass or weight breaks every floating, pressure (P = rho g h) and buoyancy problem downstream.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.density.md",
+        "startLine": 17,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.meas.density/misconception/MC-HEAVY-IS-DENSE",
+      "kind": "misconception",
+      "conceptId": "phys.meas.density",
+      "title": "A heavier object is a denser object",
+      "content": "### MC-HEAVY-IS-DENSE: \"A heavier object is a denser object\"\ntrigger_signal: student ranks density by total mass or weight — \"the iron block and the wood block are both 1 kg so they are equally dense\", \"the log is heavier so it is denser than the pebble\".\nconflict_evidence [P28]: \"A 2 kg log floats. A 5 g iron nail sinks. If heavier meant denser, the log should sink and the nail should float. What else is different between them?\"\nbridge_text [P30]: \"Density is not how much mass an object has in total — it is how much mass is packed into each cubic centimetre. The log has lots of mass spread through a huge volume; the nail has a little mass packed into a tiny volume.\"\nreplacement_text [P31]: \"To compare density, compare mass PER unit volume: rho = m/V. Total mass alone tells you nothing about density.\"\ndiscrimination_pairs [P33]: [\"1 kg of wood (big block) vs 1 kg of iron (small block): same mass, iron far denser\", \"a large aluminium beam vs a small aluminium spoon: very different masses, same density\"]\ns6_path: skip P28; use two equal-size cubes on a balance and go directly to the bridge text as a shared observation.",
+      "localKey": "MC-HEAVY-IS-DENSE",
+      "language": "en",
+      "refs": [
+        "MC-HEAVY-IS-DENSE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.density.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.meas.density/misconception/MC-SIZE-CHANGES-DENSITY",
+      "kind": "misconception",
+      "conceptId": "phys.meas.density",
+      "title": "Cutting an object changes its density",
+      "content": "### MC-SIZE-CHANGES-DENSITY: \"Cutting an object changes its density\"\ntrigger_signal: student says half a block has half the density, or that a bigger piece of the same material is denser.\nconflict_evidence [P28]: \"Cut a 200 cm³, 540 g aluminium block in half. Each half is 100 cm³ and 270 g. Work out the density of one half.\"\nbridge_text [P30]: \"Cutting halves the mass AND halves the volume, so mass divided by volume is unchanged: 270/100 = 540/200 = 2.7 g/cm³.\"\nreplacement_text [P31]: \"Density is a property of the material. Any piece of pure aluminium, any size, has density 2.7 g/cm³.\"\ndiscrimination_pairs [P33]: [\"half a block of aluminium (same density) vs a block of a different metal (different density)\", \"a cut cork (same density) vs a cork with a nail pushed in (average density changed)\"]\ns6_path: skip P28; present the two halves side by side and compute both densities together.",
+      "localKey": "MC-SIZE-CHANGES-DENSITY",
+      "language": "en",
+      "refs": [
+        "MC-SIZE-CHANGES-DENSITY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.density.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.meas.density/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.density",
+      "title": "Same Size, Different Mass",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Same Size, Different Mass\",\"primitives\":[\"P01\",\"P04\",\"P05\",\"P06\",\"P14\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.density.md",
+        "startLine": 11,
+        "endLine": 18
+      }
+    },
+    {
+      "assetId": "phys.meas.density/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.density",
+      "title": "Mass per Unit Volume",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Mass per Unit Volume\",\"primitives\":[\"P02\",\"P06\",\"P08\",\"P13\",\"P34\",\"P49\",\"P50\",\"P51\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.density.md",
+        "startLine": 18,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "phys.meas.density/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.density",
+      "title": "Density Belongs to the Material",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Density Belongs to the Material\",\"primitives\":[\"P02\",\"P06\",\"P13\",\"P17\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.density.md",
+        "startLine": 28,
+        "endLine": 37
+      }
+    },
+    {
+      "assetId": "phys.meas.density/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.density",
+      "title": "Sink or Float, and Relative Density",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Sink or Float, and Relative Density\",\"primitives\":[\"P02\",\"P07\",\"P08\",\"P16\",\"P21\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-HEAVY-IS-DENSE\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-HEAVY-IS-DENSE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.density.md",
+        "startLine": 37,
+        "endLine": 47
+      }
+    },
+    {
+      "assetId": "phys.meas.density/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.density",
+      "title": "Units — g/cm³ and kg/m³",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Units — g/cm³ and kg/m³\",\"primitives\":[\"P02\",\"P13\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.density.md",
+        "startLine": 47,
+        "endLine": 53
+      }
+    },
+    {
+      "assetId": "phys.meas.density/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.density",
+      "title": "Formative Assessment",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Formative Assessment\",\"primitives\":[\"P02\",\"P35\",\"P49\",\"P51\",\"P55\",\"P79\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.density.md",
+        "startLine": 53,
+        "endLine": 60
+      }
+    },
+    {
+      "assetId": "phys.meas.density/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.density",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P17\",\"P28\",\"P30\",\"P35\",\"P36\",\"P41\",\"P54\",\"P55\",\"P62\",\"P68\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P85\",\"P90\",\"P91\"],\"addresses\":[\"MC-HEAVY-IS-DENSE\"]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [
+        "MC-HEAVY-IS-DENSE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.density.md",
+        "startLine": 60,
+        "endLine": 102
+      }
+    },
+    {
+      "assetId": "phys.meas.density/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.meas.density",
+      "title": "Assessment Battery",
+      "content": "| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (classify) | \"Cutting a cork in half — does its density change?\" | CORRECT = no; mass and volume both halve |\n| P74 (classify) | \"Relative density 0.6 — sinks or floats in water?\" | CORRECT = floats (less than 1) |\n| P75 (boundary) | \"Relative density exactly 1.0 in water?\" | CORRECT = neither rises nor sinks; stays where placed (fully submerged) |\n| P76 (transfer) | \"Gold is 19.3 g/cm³. Mass of a 0.5 cm³ ring?\" | CORRECT = 9.65 g (m = rho V) |\n| P77 (generate) | \"Give a mass and volume for an object that floats in water.\" | CORRECT = m/V < 1 g/cm³ |\n| P78 (explain) | \"What is the difference between a heavy object and a dense one?\" | CORRECT = total mass vs mass per unit volume |\n| P79 (predict) | \"50 cm³, 150 g stone — float or sink?\" | CORRECT = sinks (3 g/cm³ > 1 g/cm³) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.density.md",
+        "startLine": 185,
+        "endLine": 197
+      }
+    },
+    {
+      "assetId": "phys.meas.density/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.meas.density",
+      "title": "Student State Matrix",
+      "content": "| State | Why here | Tell-tale behaviour | Protocol |\n|---|---|---|---|\n| S0 | No exposure to density | Cannot say what \"denser\" means beyond \"heavier\" | Protocol A (Concrete) |\n| S1 | Formula without meaning | Computes m/V correctly but cannot predict sink/float or explain \"same material, same density\" | Protocol B (Counterexample-first) |\n| S2-HEAVY-IS-DENSE | Density = heaviness | Says the heavier object is denser regardless of size; a ship \"should sink because it is heavy\" | Misconception Engine → then Protocol C |\n| S2-SIZE-CHANGES-DENSITY | Density scales with amount | Says a half block has half the density | Misconception Engine → then Protocol C |\n| S3 | Partial — m/V fine; fails units or relative density | Mixes g/cm³ and kg/m³; cannot use relative density | Protocol C (Guided Questioning) |\n| S6 | Anxiety on division with units | Freezes at \"find the density\"; avoids the formula | Protocol F (Low Pressure) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.density.md",
+        "startLine": 27,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "phys.meas.density/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.meas.density",
+      "title": "Diagnostic Battery",
+      "content": "DB-1 (prior-exposure check — routes S0 before content is tested):\n\"Have you met the word 'density' before — for example, why some things float and others sink?\"\n  No → S0. Enter Protocol A (Concrete).\n  Yes → DB-2.\n\nDB-2 (representation / misconception test):\n\"A 1 kg block of wood and a 1 kg block of iron. Which is denser, and how can you tell without weighing them?\"\n  \"Iron — the iron block is much smaller for the same mass\" → S3. Enter Protocol C.\n  \"Iron\" (no reason / \"iron is heavy\") → S1. Enter Protocol B.\n  \"Same — they are both 1 kg\" → SIGNAL:MISCONCEPTION:MC-HEAVY-IS-DENSE. Enter Misconception Engine.\n  Pause / \"I don't know\" → add S6 flag. Ask: \"Are you comfortable dividing one number by another?\"\n      No → S6. Enter Protocol F.\n      Yes → S0. Enter Protocol A.\n\nDB-3 (confidence calibration — overlays S6/S7):\n\"How confident are you with density — 1 to 5?\"\n  1–2 → add S6 flag; apply S6 adaptations to the selected protocol.\n  4–5 + DB-2 showed HEAVY-IS-DENSE → add S7 flag. Override to Protocol G (challenge-first).",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-HEAVY-IS-DENSE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.density.md",
+        "startLine": 38,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "phys.meas.density/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.meas.density",
+      "title": "Prerequisite Check",
+      "content": "PD-1 (for `phys.meas.units`):\n\"What are the SI units of mass and of volume?\"\n  Cannot name kg and m³ (or g and cm³) → flag PREREQ-GAP-UNITS.\n  In-session minimum repair: one P06 anchor (a 1 cm cube = 1 cm³ = 1 mL of water) + one P34 (\"how many 1 cm cubes fill a 2 × 3 × 4 cm box?\") then resume. If the learner cannot treat volume as a measured quantity at all, suspend and schedule a `phys.meas.units` session (S4 route).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.density.md",
+        "startLine": 59,
+        "endLine": 66
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

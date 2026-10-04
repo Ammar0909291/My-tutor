@@ -106,6 +106,7 @@ import {
   buildAngularMomentumAdditionScene, buildBornScene, buildSMatrixScene, buildDensityMatrixScene,
 } from '@/lib/teaching/sceneGenerators/physicsCoreScenesB13'
 import { buildPowerScene } from '@/lib/teaching/sceneGenerators/physicsCoreScenesB14'
+import { buildDensityScene, buildVernierScene, buildMassWeightScene, buildRectilinearScene } from '@/lib/teaching/sceneGenerators/physicsExtensionScenesB1'
 import {
   buildDisplacementScene, buildVelocityScene, buildAccelerationScene, buildRelativeMotionScene, buildTensionScene,
   buildConservativeForcesScene, buildAngularMomentumScene, buildAngularMomentumConservationScene,
@@ -545,6 +546,11 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'phys.qm.density-matrix':           buildDensityMatrixScene,
   // Batch 14 (2026-09-30). See physicsCoreScenesB14.ts.
   'phys.mech.power':                    buildPowerScene,
+  // Coverage-driven KG extension, batch 1 (2026-10-03). See physicsExtensionScenesB1.ts.
+  'phys.meas.density':                buildDensityScene,
+  'phys.meas.measuring-instruments':  buildVernierScene,
+  'phys.mech.mass-and-weight':        buildMassWeightScene,
+  'phys.opt.rectilinear-propagation': buildRectilinearScene,
   // Batch 15 (2026-09-30): promoted from domain scope. See physicsCoreScenesB15.ts.
   'phys.mech.displacement':           buildDisplacementScene,
   'phys.mech.velocity':               buildVelocityScene,

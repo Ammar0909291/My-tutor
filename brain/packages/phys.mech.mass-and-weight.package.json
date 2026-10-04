@@ -1,0 +1,415 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.mass-and-weight-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.mass-and-weight",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:30075b10f2e06356072d844dabf45e7bcb5c71f10f31e727d83b2b92e3d215a7",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.mass-and-weight.md": "sha256:893af78008ffd9c7bb30fc8d55b3e50bf3fbe5792bbc42fc2880de93fdd2450e"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.mech.mass-and-weight",
+    "name": "Mass, Weight and Free Fall",
+    "difficultyRaw": "foundational (1)",
+    "bloom": "understand",
+    "masteryThreshold": 0.7,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "phys.mech.force"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.mass-and-weight-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.mass-and-weight (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.mass-and-weight.md": "sha256:893af78008ffd9c7bb30fc8d55b3e50bf3fbe5792bbc42fc2880de93fdd2450e"
+      },
+      "contentHash": "sha256:54ee5675f0b8932bb509bcbbb4c619b83bbe9ee5483ea15786da9142e3841895",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.mass-and-weight.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.mass-and-weight.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.mass-and-weight"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.mass-and-weight\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.mass-and-weight.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.mass-and-weight.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.mass-and-weight"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.mass-and-weight\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.mass-and-weight.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.mass-and-weight.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.mass-and-weight"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.mass-and-weight\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.mass-and-weight.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.mass-and-weight.md#TA-4 (addresses MC-MASS-IS-WEIGHT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.mass-and-weight"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.mass-and-weight\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.mass-and-weight.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.mass-and-weight.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.mass-and-weight"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.mass-and-weight\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.mass-and-weight.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.mass-and-weight.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.mass-and-weight"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.mass-and-weight\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.mass-and-weight.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.mass-and-weight.md#TA-7 (addresses MC-HEAVIER-FALLS-FASTER)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.mass-and-weight"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.mass-and-weight\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.mass-and-weight/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "phys.mech.mass-and-weight",
+      "title": "Learning Objective",
+      "content": "[Boundary statement]\nA student who achieves mastery demonstrates:\n1. Distinguishes mass (amount of matter, in kg, the same everywhere) from weight (the gravitational force on a body, in newtons, which depends on where it is).\n2. Computes weight with W = mg, where g is the gravitational field strength (about 9.8 N/kg on Earth, about 1.6 N/kg on the Moon): a 60 kg person weighs about 590 N on Earth and about 97 N on the Moon, and still has a mass of 60 kg on both.\n3. States and explains that, without air resistance, all bodies fall with the same acceleration g (9.8 m/s² near Earth) whatever their mass — and that air resistance, not mass, is why a feather falls slowly in air.\n\nA student who can compute W = mg but says \"a 10 kg stone falls faster than a 1 kg stone in a vacuum\", or \"on the Moon your mass is less\", has **NOT** achieved mastery — mass/weight confusion and heavier-falls-faster both break Newton's second law, projectile motion and gravitation downstream.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.mass-and-weight.md",
+        "startLine": 17,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.mech.mass-and-weight/misconception/MC-MASS-IS-WEIGHT",
+      "kind": "misconception",
+      "conceptId": "phys.mech.mass-and-weight",
+      "title": "Mass and weight are the same thing",
+      "content": "### MC-MASS-IS-WEIGHT: \"Mass and weight are the same thing\"\ntrigger_signal: student says mass changes on the Moon, gives weight in kilograms as the physics answer, or says an astronaut in orbit \"has no mass\".\nconflict_evidence [P28]: \"On the Moon, the 5 kg bag still balances 5 kg of standard masses on a beam balance. If its mass had dropped, the beam would tip. What does that tell you?\"\nbridge_text [P30]: \"Mass is the amount of matter — it does not depend on where you are. Weight is how hard gravity pulls on that matter, so it depends on g.\"\nreplacement_text [P31]: \"Mass in kg, the same everywhere. Weight W = mg in newtons, different on different worlds.\"\ndiscrimination_pairs [P33]: [\"60 kg on Earth and 60 kg on the Moon (mass) vs 590 N and 97 N (weight)\", \"beam balance (compares masses, same reading on the Moon) vs spring balance (measures the pull, less on the Moon)\"]\ns6_path: skip P28; show both balances side by side on the two worlds as a shared observation.",
+      "localKey": "MC-MASS-IS-WEIGHT",
+      "language": "en",
+      "refs": [
+        "MC-MASS-IS-WEIGHT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.mass-and-weight.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.mech.mass-and-weight/misconception/MC-HEAVIER-FALLS-FASTER",
+      "kind": "misconception",
+      "conceptId": "phys.mech.mass-and-weight",
+      "title": "Heavier objects fall faster",
+      "content": "### MC-HEAVIER-FALLS-FASTER: \"Heavier objects fall faster\"\ntrigger_signal: student predicts the heavier object lands first when there is no air, or says g is bigger for heavier bodies.\nconflict_evidence [P28]: \"On the Moon there is no air. A hammer and a feather were dropped together there. If heavier fell faster, the hammer would land first. They landed together. What does that tell you?\"\nbridge_text [P30]: \"The heavier body is pulled harder, but it is harder to speed up by exactly the same factor. Ten times the mass means ten times the pull and ten times the resistance to speeding up — the same acceleration.\"\nreplacement_text [P31]: \"Without air resistance, every body falls with the same acceleration g, about 9.8 m/s² near Earth. In air, a light spread-out object like a feather falls slower because air resistance matters more for it.\"\ndiscrimination_pairs [P33]: [\"hammer and feather in a vacuum (land together) vs in air (feather drifts)\", \"a crumpled sheet of paper vs a flat sheet (same mass, different air resistance)\"]\ns6_path: skip P28; drop a book with a sheet of paper resting on top of it — they fall together, a home demonstration with no confrontation.",
+      "localKey": "MC-HEAVIER-FALLS-FASTER",
+      "language": "en",
+      "refs": [
+        "MC-HEAVIER-FALLS-FASTER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.mass-and-weight.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.mech.mass-and-weight/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.mass-and-weight",
+      "title": "The Bag on Two Worlds",
+      "content": "{\"id\":\"TA-1\",\"title\":\"The Bag on Two Worlds\",\"primitives\":[\"P01\",\"P04\",\"P05\",\"P06\",\"P14\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.mass-and-weight.md",
+        "startLine": 11,
+        "endLine": 18
+      }
+    },
+    {
+      "assetId": "phys.mech.mass-and-weight/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.mass-and-weight",
+      "title": "Mass and Weight",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Mass and Weight\",\"primitives\":[\"P02\",\"P06\",\"P13\",\"P16\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.mass-and-weight.md",
+        "startLine": 18,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "phys.mech.mass-and-weight/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.mass-and-weight",
+      "title": "W = mg",
+      "content": "{\"id\":\"TA-3\",\"title\":\"W = mg\",\"primitives\":[\"P02\",\"P06\",\"P08\",\"P13\",\"P34\",\"P49\",\"P50\",\"P51\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.mass-and-weight.md",
+        "startLine": 25,
+        "endLine": 34
+      }
+    },
+    {
+      "assetId": "phys.mech.mass-and-weight/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.mass-and-weight",
+      "title": "Weightless, Not Massless",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Weightless, Not Massless\",\"primitives\":[\"P02\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-MASS-IS-WEIGHT\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-MASS-IS-WEIGHT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.mass-and-weight.md",
+        "startLine": 34,
+        "endLine": 40
+      }
+    },
+    {
+      "assetId": "phys.mech.mass-and-weight/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.mass-and-weight",
+      "title": "Free Fall",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Free Fall\",\"primitives\":[\"P02\",\"P06\",\"P13\",\"P14\",\"P17\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.mass-and-weight.md",
+        "startLine": 40,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "phys.mech.mass-and-weight/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.mass-and-weight",
+      "title": "Formative Assessment",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Formative Assessment\",\"primitives\":[\"P02\",\"P35\",\"P49\",\"P51\",\"P55\",\"P79\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.mass-and-weight.md",
+        "startLine": 48,
+        "endLine": 55
+      }
+    },
+    {
+      "assetId": "phys.mech.mass-and-weight/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.mass-and-weight",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P28\",\"P41\",\"P54\",\"P55\",\"P62\",\"P68\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P85\",\"P90\",\"P91\"],\"addresses\":[\"MC-HEAVIER-FALLS-FASTER\"]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [
+        "MC-HEAVIER-FALLS-FASTER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.mass-and-weight.md",
+        "startLine": 55,
+        "endLine": 97
+      }
+    },
+    {
+      "assetId": "phys.mech.mass-and-weight/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.mass-and-weight",
+      "title": "Assessment Battery",
+      "content": "| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (classify) | \"A bathroom scale reads '60 kg' — strictly, mass or weight?\" | CORRECT = it measures the force (weight) and divides by Earth's g to display kg |\n| P74 (classify) | \"Unit of weight?\" | CORRECT = newton |\n| P75 (boundary) | \"Feather and coin in a vacuum tube?\" | CORRECT = land together |\n| P76 (transfer) | \"900 kg rover on Mars, g ≈ 3.7 N/kg?\" | CORRECT = ≈3330 N; mass 900 kg |\n| P77 (generate) | \"Planet where 50 kg weighs 250 N — g?\" | CORRECT = 5 N/kg |\n| P78 (explain) | \"Why does a heavier object not fall faster without air?\" | CORRECT = bigger pull, but proportionally harder to accelerate |\n| P79 (predict) | \"Bowling ball and tennis ball from 2 m in a room?\" | CORRECT = almost together; in a vacuum exactly together |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.mass-and-weight.md",
+        "startLine": 180,
+        "endLine": 192
+      }
+    },
+    {
+      "assetId": "phys.mech.mass-and-weight/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.mass-and-weight",
+      "title": "Student State Matrix",
+      "content": "| State | Why here | Tell-tale behaviour | Protocol |\n|---|---|---|---|\n| S0 | No distinction made | Uses \"weight\" for kilograms; has never met newtons as weight | Protocol A (Concrete) |\n| S1 | Formula without meaning | Computes mg but cannot say what changes on the Moon | Protocol B (Counterexample-first) |\n| S2-HEAVIER-FALLS-FASTER | Aristotelian fall | Says the heavier ball lands first with no air | Misconception Engine → then Protocol C |\n| S2-MASS-IS-WEIGHT | Mass and weight the same | \"Your mass is less on the Moon\"; weight in kg | Misconception Engine → then Protocol C |\n| S3 | Partial — mass/weight fine, free fall not (or reverse) | Correct W = mg, wrong on falling | Protocol C (Guided Questioning) |\n| S6 | Anxiety | Freezes on \"newtons\" | Protocol F (Low Pressure) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.mass-and-weight.md",
+        "startLine": 27,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "phys.mech.mass-and-weight/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.mass-and-weight",
+      "title": "Diagnostic Battery",
+      "content": "DB-1 (prior-exposure check):\n\"Have you heard that mass and weight are different things in physics?\"\n  No → S0. Enter Protocol A (Concrete).\n  Yes → DB-2.\n\nDB-2 (representation / misconception test):\n\"An astronaut has a mass of 60 kg on Earth. What is her mass on the Moon, and is her weight the same there?\"\n  \"60 kg; weight is less because the Moon's gravity is weaker\" → S3. Enter Protocol C.\n  \"60 kg\" (no reason about weight) → S1. Enter Protocol B.\n  \"Less than 60 kg\" / \"about 10 kg\" → SIGNAL:MISCONCEPTION:MC-MASS-IS-WEIGHT. Enter Misconception Engine.\n  Pause / \"I don't know\" → add S6 flag. Ask: \"Is it OK if we start with a bag of rice and a scale?\"\n      → S6 (if anxious) Protocol F; otherwise S0 Protocol A.\n\nDB-3 (free-fall check — overlays):\n\"A 10 kg ball and a 1 kg ball are dropped together where there is no air. Which lands first?\"\n  \"Together\" → no flag.\n  \"The 10 kg ball\" → add SIGNAL:MISCONCEPTION:MC-HEAVIER-FALLS-FASTER (run its repair at TA-5).\n  Confidence 4–5 with a wrong answer → add S7 flag. Override to Protocol G (challenge-first).",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-MASS-IS-WEIGHT",
+        "MC-HEAVIER-FALLS-FASTER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.mass-and-weight.md",
+        "startLine": 38,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "phys.mech.mass-and-weight/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.mass-and-weight",
+      "title": "Prerequisite Check",
+      "content": "PD-1 (for `phys.mech.force`):\n\"What is a force, and what unit is it measured in?\"\n  Cannot say \"a push or pull, in newtons\" → flag PREREQ-GAP-FORCE.\n  In-session minimum repair: one P06 (push a trolley, pull a spring balance) + one P34 (\"is the pull of the Earth on you a force?\") then resume. If the learner has no notion of force as an interaction, schedule a `phys.mech.force` session (S4 route).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.mass-and-weight.md",
+        "startLine": 59,
+        "endLine": 66
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

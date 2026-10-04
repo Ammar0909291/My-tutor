@@ -66,9 +66,15 @@ describe('the resolver can name what the learner asked about', () => {
   })
 
   it('still returns null for a topic the curriculum genuinely lacks', () => {
-    // There is no Density concept in the physics KG. Null is the honest answer
-    // and the off-curriculum path handles it — guessing would be worse.
-    expect(resolveRequestedConceptId('What is density?', PHYS_LESSON, 'physics')).toBeNull()
+    // Transistors are deliberately outside the physics KG (electronics stays
+    // excluded, CLAUDE.md 2026-10-03). Null is the honest answer and the
+    // off-curriculum path handles it — guessing would be worse. (This fixture
+    // was "density" until the 2026-10-03 extension added phys.meas.density.)
+    expect(resolveRequestedConceptId('What is a transistor?', PHYS_LESSON, 'physics')).toBeNull()
+  })
+
+  it('names density now that the physics KG teaches it', () => {
+    expect(resolveRequestedConceptId('What is density?', PHYS_LESSON, 'physics')).toBe('phys.meas.density')
   })
 
   it('does not turn incidental vocabulary into a request', () => {

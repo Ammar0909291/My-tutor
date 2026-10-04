@@ -283,7 +283,11 @@ describe('the real 45-slot divergence cannot produce a duplicate', () => {
     // `bAband` is pinned exactly: BOOTSTRAP_FILES is a small, fixed list
     // (six files) untouched by ordinary content authoring, so this count is
     // a genuine, stable regression signal — unchanged since §9v/§9w.
-    expect(bAband.size).toBe(429)
+    // 429 → 437 (2026-10-03): the coverage-driven physics KG extension,
+    // batch 1, adds four NEW concepts whose mcq and misconception_probe slots
+    // are ladders from birth (two rungs each). Their base slugs name no row
+    // that ever existed, so Step 0.8 has nothing to refuse for them.
+    expect(bAband.size).toBe(437)
     // `mAband` reads EVERY file in the assets directory (`allFiles()`), so
     // its size grows continuously and legitimately as any subject's seed
     // corpus is authored — physics/chemistry/biology/mathematics all add

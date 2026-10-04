@@ -1,0 +1,414 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.meas.measuring-instruments-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.meas.measuring-instruments",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:6dbd8e21d49d368fbbd2b1d4fb948cc4f25f6eba2466429cde847dc8350d064d",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.meas.measuring-instruments.md": "sha256:75aec81ee9e670db9d3c8c579dbd6d24e92bf2754d805468bb88f6ad38dcb79e"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.meas.measuring-instruments",
+    "name": "Vernier Calipers and Screw Gauge",
+    "difficultyRaw": "developing (2)",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "phys.meas.errors"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.meas.measuring-instruments-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.meas.measuring-instruments (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.meas.measuring-instruments.md": "sha256:75aec81ee9e670db9d3c8c579dbd6d24e92bf2754d805468bb88f6ad38dcb79e"
+      },
+      "contentHash": "sha256:3ec44ca30f2dce7239754ab3d2f7187a3643bdefc20d071379059b1e470a457f",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.meas.measuring-instruments.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.measuring-instruments.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.measuring-instruments"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.measuring-instruments\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.measuring-instruments.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.measuring-instruments.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.measuring-instruments"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.measuring-instruments\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.measuring-instruments.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.measuring-instruments.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.measuring-instruments"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.measuring-instruments\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.measuring-instruments.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.measuring-instruments.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.measuring-instruments"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.measuring-instruments\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.measuring-instruments.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.measuring-instruments.md#TA-5 (addresses MC-ZERO-SIGN)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.measuring-instruments"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.measuring-instruments\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.measuring-instruments.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.measuring-instruments.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.measuring-instruments"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.measuring-instruments\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.meas.measuring-instruments.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.meas.measuring-instruments.md#TA-7 (addresses MC-RAW-DIVISION)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.meas.measuring-instruments"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.meas.measuring-instruments\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.meas.measuring-instruments/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "phys.meas.measuring-instruments",
+      "title": "Learning Objective",
+      "content": "[Boundary statement]\nA student who achieves mastery demonstrates:\n1. Derives the least count of a vernier caliper (1 main-scale division − 1 vernier-scale division; e.g. 10 VSD = 9 MSD gives 1 mm − 0.9 mm = 0.1 mm) and of a screw gauge (pitch ÷ number of circular-scale divisions; e.g. 0.5 mm ÷ 50 = 0.01 mm).\n2. Takes a reading as main-scale reading + (coinciding division × least count): e.g. main scale 23 mm, 6th vernier division coincides → 23 + 6 × 0.1 = 23.6 mm.\n3. Finds the zero error with the jaws (or faces) closed and corrects every reading: true value = observed reading − zero error, keeping the sign of the zero error.\n\nA student who can recite \"MSR + VSR × LC\" but adds the vernier division number directly (23 + 6 = 29 mm), or adds a positive zero error instead of subtracting it, has **NOT** achieved mastery — the procedure without the least-count meaning gives readings wrong by whole millimetres, which no error analysis downstream can rescue.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.measuring-instruments.md",
+        "startLine": 17,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.meas.measuring-instruments/misconception/MC-RAW-DIVISION",
+      "kind": "misconception",
+      "conceptId": "phys.meas.measuring-instruments",
+      "title": "Add the coinciding vernier division number directly",
+      "content": "### MC-RAW-DIVISION: \"Add the coinciding vernier division number directly\"\ntrigger_signal: student adds the division number to the main-scale reading without multiplying by the least count (23 mm + 6 = 29 mm), or appends it as a digit in the wrong place (23.06 mm with LC 0.1 mm).\nconflict_evidence [P28]: \"The vernier zero sits between the 23 mm and 24 mm marks. Your answer, 29 mm, is past the 24 mm mark. Can the jaws be open wider than where the zero is?\"\nbridge_text [P30]: \"The vernier only measures the gap between the 23 mm mark and its own zero — a gap smaller than 1 mm. Each vernier division is worth one least count, 0.1 mm, so the 6th division means 0.6 mm.\"\nreplacement_text [P31]: \"Reading = main-scale reading + (coinciding division × least count).\"\ndiscrimination_pairs [P33]: [\"6th division on LC 0.1 mm → +0.6 mm vs 6th division on LC 0.05 mm → +0.30 mm\", \"main scale 23 mm + 0.6 mm = 23.6 mm vs main scale 23 mm + 6 mm = 29 mm (impossible, past the 24 mm mark)\"]\ns6_path: skip P28; count the vernier steps aloud in tenths: \"one tenth, two tenths … six tenths of a millimetre\".",
+      "localKey": "MC-RAW-DIVISION",
+      "language": "en",
+      "refs": [
+        "MC-RAW-DIVISION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.measuring-instruments.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.meas.measuring-instruments/misconception/MC-ZERO-SIGN",
+      "kind": "misconception",
+      "conceptId": "phys.meas.measuring-instruments",
+      "title": "Add the zero error to the reading",
+      "content": "### MC-ZERO-SIGN: \"Add the zero error to the reading\"\ntrigger_signal: student corrects a positive zero error by adding it (23.6 + 0.2 = 23.8 mm), or ignores the sign of a negative zero error.\nconflict_evidence [P28]: \"With the jaws closed — nothing between them — the instrument reads +0.2 mm. Is it reading too much or too little?\"\nbridge_text [P30]: \"It reads 0.2 mm too much even for zero length, so it reads 0.2 mm too much for every object. We take that extra off.\"\nreplacement_text [P31]: \"True reading = observed reading − zero error, with the zero error's own sign: subtract a positive error, and subtracting a negative error adds it.\"\ndiscrimination_pairs [P33]: [\"zero error +0.2 mm, reading 23.6 → 23.4 mm\", \"zero error −0.03 mm, reading 4.78 → 4.81 mm\"]\ns6_path: skip P28; \"the instrument starts at 0.2 instead of 0, so we take 0.2 away from every reading.\"",
+      "localKey": "MC-ZERO-SIGN",
+      "language": "en",
+      "refs": [
+        "MC-ZERO-SIGN"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.measuring-instruments.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.meas.measuring-instruments/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.measuring-instruments",
+      "title": "The Limit of a Ruler",
+      "content": "{\"id\":\"TA-1\",\"title\":\"The Limit of a Ruler\",\"primitives\":[\"P01\",\"P04\",\"P05\",\"P06\",\"P14\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.measuring-instruments.md",
+        "startLine": 11,
+        "endLine": 18
+      }
+    },
+    {
+      "assetId": "phys.meas.measuring-instruments/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.measuring-instruments",
+      "title": "How the Vernier Works",
+      "content": "{\"id\":\"TA-2\",\"title\":\"How the Vernier Works\",\"primitives\":[\"P02\",\"P06\",\"P08\",\"P13\",\"P34\",\"P49\",\"P50\",\"P51\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.measuring-instruments.md",
+        "startLine": 18,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "phys.meas.measuring-instruments/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.measuring-instruments",
+      "title": "A Different Vernier",
+      "content": "{\"id\":\"TA-3\",\"title\":\"A Different Vernier\",\"primitives\":[\"P02\",\"P16\",\"P21\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.measuring-instruments.md",
+        "startLine": 28,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "phys.meas.measuring-instruments/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.measuring-instruments",
+      "title": "The Screw Gauge",
+      "content": "{\"id\":\"TA-4\",\"title\":\"The Screw Gauge\",\"primitives\":[\"P02\",\"P06\",\"P08\",\"P13\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.measuring-instruments.md",
+        "startLine": 33,
+        "endLine": 41
+      }
+    },
+    {
+      "assetId": "phys.meas.measuring-instruments/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.measuring-instruments",
+      "title": "Zero Error",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Zero Error\",\"primitives\":[\"P02\",\"P06\",\"P13\",\"P17\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-ZERO-SIGN\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-ZERO-SIGN"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.measuring-instruments.md",
+        "startLine": 41,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "phys.meas.measuring-instruments/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.measuring-instruments",
+      "title": "Formative Assessment",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Formative Assessment\",\"primitives\":[\"P02\",\"P35\",\"P49\",\"P51\",\"P55\",\"P79\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.measuring-instruments.md",
+        "startLine": 51,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "phys.meas.measuring-instruments/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.meas.measuring-instruments",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P28\",\"P41\",\"P54\",\"P55\",\"P62\",\"P68\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P85\"],\"addresses\":[\"MC-RAW-DIVISION\"]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [
+        "MC-RAW-DIVISION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.measuring-instruments.md",
+        "startLine": 58,
+        "endLine": 100
+      }
+    },
+    {
+      "assetId": "phys.meas.measuring-instruments/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.meas.measuring-instruments",
+      "title": "Assessment Battery",
+      "content": "| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (classify) | \"LC 0.01 cm; reported 2.367 cm — acceptable?\" | CORRECT = no; digits beyond the least count are not measured |\n| P74 (classify) | \"Which instrument for a wire's diameter: vernier or screw gauge?\" | CORRECT = screw gauge (finer least count) |\n| P75 (boundary) | \"Zero error +0.1 mm, observed 15.3 mm. True?\" | CORRECT = 15.2 mm |\n| P76 (transfer) | \"Pitch 1 mm, 100 divisions, main 2 mm, thimble 47?\" | CORRECT = 2.47 mm |\n| P77 (generate) | \"Design a vernier with LC 0.02 mm.\" | CORRECT = 50 divisions spanning 49 mm |\n| P78 (explain) | \"Why is LC = 1 MSD − 1 VSD?\" | CORRECT = each step of coincidence corresponds to that difference |\n| P79 (predict) | \"Can a 0.1 mm vernier report 23.65 mm?\" | CORRECT = no |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.measuring-instruments.md",
+        "startLine": 183,
+        "endLine": 195
+      }
+    },
+    {
+      "assetId": "phys.meas.measuring-instruments/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.meas.measuring-instruments",
+      "title": "Student State Matrix",
+      "content": "| State | Why here | Tell-tale behaviour | Protocol |\n|---|---|---|---|\n| S0 | Never used either instrument | Cannot say why a ruler cannot measure 0.1 mm | Protocol A (Concrete) |\n| S1 | Formula recited, meaning absent | Writes MSR + VSR × LC but cannot derive LC for a new vernier | Protocol B (Counterexample-first) |\n| S2-RAW-DIVISION | Adds the division number | 23 mm + 6 → 29 mm | Misconception Engine → then Protocol C |\n| S2-ZERO-SIGN | Zero error added, not subtracted | Reports reading + zero error | Misconception Engine → then Protocol C |\n| S3 | Partial — vernier fine, screw gauge not (or the reverse) | Reads one instrument, fails the other | Protocol C (Guided Questioning) |\n| S6 | Anxiety on small decimals | Avoids readings below 1 mm | Protocol F (Low Pressure) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.measuring-instruments.md",
+        "startLine": 27,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "phys.meas.measuring-instruments/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.meas.measuring-instruments",
+      "title": "Diagnostic Battery",
+      "content": "DB-1 (prior-exposure check):\n\"Have you used a vernier caliper or a screw gauge — in a lab, or seen one?\"\n  No → S0. Enter Protocol A (Concrete).\n  Yes → DB-2.\n\nDB-2 (representation / misconception test):\n\"A vernier has least count 0.1 mm. The main scale reads 23 mm and the 6th vernier division lines up. What is the length?\"\n  \"23.6 mm\" + explains \"6 × 0.1 mm added to 23 mm\" → S3. Enter Protocol C.\n  \"23.6 mm\" (no reason) → S1. Enter Protocol B.\n  \"29 mm\" or \"23.06 mm\" → SIGNAL:MISCONCEPTION:MC-RAW-DIVISION. Enter Misconception Engine.\n  Pause / \"I don't know\" → add S6 flag. Ask: \"Are you comfortable multiplying by 0.1?\"\n      No → S6. Enter Protocol F.\n      Yes → S0. Enter Protocol A.\n\nDB-3 (confidence calibration):\n\"How confident are you reading these instruments — 1 to 5?\"\n  1–2 → add S6 flag.\n  4–5 + DB-2 wrong → add S7 flag. Override to Protocol G (challenge-first).",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-RAW-DIVISION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.measuring-instruments.md",
+        "startLine": 38,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "phys.meas.measuring-instruments/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.meas.measuring-instruments",
+      "title": "Prerequisite Check",
+      "content": "PD-1 (for `phys.meas.errors`):\n\"What does the smallest division of a ruler tell you about how precisely it can measure?\"\n  Cannot connect the smallest division to the uncertainty of a reading → flag PREREQ-GAP-ERRORS.\n  In-session minimum repair: one P06 (a ruler with 1 mm marks; a pencil end between marks) + one P34 (\"can you say whether it is 12.3 or 12.4 mm?\") then resume. If the learner has no notion of measurement uncertainty, schedule a `phys.meas.errors` session (S4 route).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.meas.measuring-instruments.md",
+        "startLine": 59,
+        "endLine": 66
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

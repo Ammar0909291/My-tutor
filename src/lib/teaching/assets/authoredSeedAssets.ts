@@ -51565,6 +51565,477 @@ const EMFC_ASSESS_PROBES: SeedProbe[] = [
   },
 ]
 
+// ═══ Physics coverage-driven KG extension (2026-10-03) ═══════════════════════
+// New concepts from docs/architecture/PHYSICS_KG_GAP_AUDIT.md §A, each shipped
+// with its blueprint, Educational Brain entry and full probe set in the same
+// commit (CLAUDE.md, "Standing owner exception (2026-10-03)"). Five gradeable
+// probes per concept at HIGH — the physics probe-depth target, not just the
+// three-probe contract floor — and every documented blueprint misconception is
+// probed with a mapped distractor from the first commit.
+
+// ─── phys.meas.density ───────────────────────────────────────────────────────
+const DENS = 'phys.meas.density'
+const DENS_SRC = 'docs/curriculum/blueprints/phys.meas.density.md'
+
+const DENS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: DENS,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Take two cubes the same size, 10 cm³ each: one of wood with a mass of about 6 g, one of aluminium with a mass of 27 g. Same volume, very different mass. Density measures exactly that difference — how much mass is packed into each unit of volume: rho = m/V. Wood packs 0.6 g into every cubic centimetre; aluminium packs 2.7 g. Density belongs to the MATERIAL, not to the object: cut the aluminium block in half and both its mass and its volume halve, so mass ÷ volume is unchanged — any piece of aluminium, a beam or a spoon, is 2.7 g/cm³. Density decides floating: an object floats in a liquid if its density is less than the liquid\'s and sinks if it is greater. Relative density compares a substance with water, rho_substance / rho_water; a density divided by a density has no unit, and below 1 means it floats in water. Water is 1 g/cm³ = 1000 kg/m³, so one cubic metre of water has a mass of one tonne. Rearranged, the same relation gives a mass (m = rho V: a 0.5 cm³ gold ring at 19.3 g/cm³ has mass 9.65 g) or a volume (V = m/rho).',
+    targetedMisconceptions: [`${DENS}:MC-HEAVY-IS-DENSE`, `${DENS}:MC-SIZE-CHANGES-DENSITY`],
+    source: `${DENS_SRC} — TA-1/TA-2 same-size blocks, TA-3 cut block, TA-4 sink/float and relative density, TA-5 units`,
+  },
+  {
+    conceptId: DENS,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A natural intuition is that a heavier object is a denser one. Test it: a 2 kg log floats on a pond, while a 5 g iron nail sinks. If heavier meant denser, the log would sink and the nail would float. What differs is how the mass is spread: the log has a lot of mass spread through a huge volume, the nail a little mass packed into a tiny volume. Density is not how much mass an object has in total — it is how much mass sits in EACH cubic centimetre, rho = m/V. So 1 kg of wood and 1 kg of iron have the same mass but not the same density: the iron block is far smaller, so it is far denser. A second trap is to think density changes with the amount of material — that half a block has half the density. Work it out: a 540 g, 200 cm³ aluminium block is 2.7 g/cm³; cut in half, each half is 270 g in 100 cm³ — still 2.7 g/cm³. Mass and volume both halved, so their ratio did not move. Density is a property of what the object is made of, not of how big it is.',
+    targetedMisconceptions: [`${DENS}:MC-HEAVY-IS-DENSE`, `${DENS}:MC-SIZE-CHANGES-DENSITY`],
+    source: `${DENS_SRC} — MC-HEAVY-IS-DENSE + MC-SIZE-CHANGES-DENSITY, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const DENS_PROBES: SeedProbe[] = [
+  {
+    conceptId: DENS,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A block has a mass of 540 g and a volume of 200 cm³. What is its density?',
+    choices: [
+      { text: '2.7 g/cm³', isCorrect: true },
+      { text: '0.37 g/cm³', isCorrect: false },
+      { text: '108,000 g/cm³', isCorrect: false },
+      { text: '540 g/cm³ — density is the mass of the block', isCorrect: false, misconceptionId: `${DENS}:MC-HEAVY-IS-DENSE` },
+    ],
+    correctValue: '2.7 g/cm³',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${DENS}:MC-HEAVY-IS-DENSE`],
+    source: `${DENS_SRC} — TA-2 P34 worked case (540 g / 200 cm³); 0.37 is V/m, 108,000 is m×V`,
+  },
+  {
+    conceptId: DENS,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Gold has a density of 19.3 g/cm³. A gold ring has a volume of 0.5 cm³. What is its mass?',
+    choices: [
+      { text: '9.65 g', isCorrect: true },
+      { text: '38.6 g', isCorrect: false },
+      { text: '0.026 g', isCorrect: false },
+      { text: '19.3 g — every piece of gold has the same mass', isCorrect: false },
+    ],
+    correctValue: '9.65 g',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: `${DENS_SRC} — §8 P76 transfer item (m = rho V = 19.3 × 0.5); 38.6 is rho/V, 0.026 is V/rho`,
+  },
+  {
+    conceptId: DENS,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'You have a 1 kg block of wood and a 1 kg block of iron. Which is denser, and how can you tell without weighing them?',
+    choices: [
+      { text: 'Iron — the iron block is much smaller, so the same 1 kg is packed into less volume: more mass in each cubic centimetre', isCorrect: true },
+      { text: 'Neither — they both have a mass of 1 kg, so they have the same density', isCorrect: false, misconceptionId: `${DENS}:MC-HEAVY-IS-DENSE` },
+      { text: 'Wood — the wood block is bigger, so it has more material in it', isCorrect: false, misconceptionId: `${DENS}:MC-HEAVY-IS-DENSE` },
+    ],
+    correctValue: 'iron, same mass in a smaller volume',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${DENS}:MC-HEAVY-IS-DENSE`],
+    source: `${DENS_SRC} — DB-2 item and MC-HEAVY-IS-DENSE trigger_signal ("both 1 kg so equally dense")`,
+  },
+  {
+    conceptId: DENS,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'An aluminium block of mass 540 g and volume 200 cm³ is cut exactly in half. What is the density of one half?',
+    choices: [
+      { text: '2.7 g/cm³ — the mass and the volume both halve, so their ratio is unchanged', isCorrect: true },
+      { text: '1.35 g/cm³ — half the block, so half the density', isCorrect: false, misconceptionId: `${DENS}:MC-SIZE-CHANGES-DENSITY` },
+      { text: '5.4 g/cm³ — the smaller piece is more compact', isCorrect: false, misconceptionId: `${DENS}:MC-SIZE-CHANGES-DENSITY` },
+    ],
+    correctValue: '2.7 g/cm³',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${DENS}:MC-SIZE-CHANGES-DENSITY`],
+    source: `${DENS_SRC} — MC-SIZE-CHANGES-DENSITY conflict_evidence (270 g / 100 cm³)`,
+  },
+  {
+    conceptId: DENS,
+    subjectSlug: 'physics',
+    probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Steel has a relative density of about 7.9, yet a steel ship floats on water. Which explanation is correct?',
+    choices: [
+      { text: 'The hull encloses a large volume of air, so the ship\'s AVERAGE density — total mass divided by total volume — is less than water\'s', isCorrect: true },
+      { text: 'The ship is so big and heavy that the water has to hold it up', isCorrect: false, misconceptionId: `${DENS}:MC-HEAVY-IS-DENSE` },
+      { text: 'Steel becomes less dense when it is made into a large sheet', isCorrect: false, misconceptionId: `${DENS}:MC-SIZE-CHANGES-DENSITY` },
+    ],
+    correctValue: 'the average density of hull plus enclosed air is less than water',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${DENS}:MC-HEAVY-IS-DENSE`, `${DENS}:MC-SIZE-CHANGES-DENSITY`],
+    source: `${DENS_SRC} — TA-4 P41 diagnostic (the steel ship) and §9 interval 5`,
+  },
+]
+
+// ─── phys.meas.measuring-instruments ─────────────────────────────────────────
+const MINS = 'phys.meas.measuring-instruments'
+const MINS_SRC = 'docs/curriculum/blueprints/phys.meas.measuring-instruments.md'
+
+const MINS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: MINS,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A ruler with millimetre marks cannot tell 23.6 mm from 23.7 mm. A vernier caliper adds a sliding scale whose divisions are slightly shorter than the main ones: in the usual design, 10 vernier divisions span 9 mm, so each is 0.9 mm — exactly 0.1 mm shorter than a main division. When the jaws open 0.6 mm past a main mark, it is the 6th vernier mark that lines up with a main mark. The least count, the smallest length the instrument can read, is therefore 1 main-scale division − 1 vernier division = 0.1 mm, and a reading is the main-scale mark just before the vernier zero plus (coinciding division × least count): 23 mm and the 6th division give 23 + 6 × 0.1 = 23.6 mm. A screw gauge does the same with a screw: one full turn moves the spindle one pitch, say 0.5 mm, and with 50 divisions on the thimble each division is 0.5 ÷ 50 = 0.01 mm. A main scale of 4.5 mm and a thimble reading of 28 give 4.5 + 28 × 0.01 = 4.78 mm. Before measuring, close the jaws: a non-zero reading is a zero error, present in every reading, so true value = observed reading − zero error, keeping its sign. Report to the least count — a 0.1 mm vernier gives 23.6 mm, never 23.65 mm.',
+    targetedMisconceptions: [`${MINS}:MC-RAW-DIVISION`, `${MINS}:MC-ZERO-SIGN`],
+    source: `${MINS_SRC} — TA-2 vernier principle, TA-4 screw gauge, TA-5 zero error`,
+  },
+  {
+    conceptId: MINS,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Two slips account for most wrong readings. The first is adding the coinciding vernier division as if it were millimetres: main scale 23 mm, 6th division lines up, answer "29 mm". Check where the vernier zero actually sits — between the 23 mm and 24 mm marks. The jaws cannot be open 29 mm when the zero is short of 24 mm. The vernier only measures the gap between the 23 mm mark and its own zero, a gap smaller than one millimetre, and each vernier division is worth one least count, 0.1 mm. Six divisions are 0.6 mm, so the length is 23.6 mm. The second slip is the zero error\'s sign. If the closed jaws already read +0.2 mm, the instrument reads 0.2 mm too much for nothing at all — and so 0.2 mm too much for every object. A rod that reads 23.6 mm is really 23.6 − 0.2 = 23.4 mm. Adding the error makes it worse, not better. The rule is true value = observed − zero error, with the error\'s own sign: a negative zero error of −0.03 mm turns 4.78 mm into 4.81 mm.',
+    targetedMisconceptions: [`${MINS}:MC-RAW-DIVISION`, `${MINS}:MC-ZERO-SIGN`],
+    source: `${MINS_SRC} — MC-RAW-DIVISION + MC-ZERO-SIGN, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const MINS_PROBES: SeedProbe[] = [
+  {
+    conceptId: MINS,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A screw gauge has a pitch of 0.5 mm and 50 divisions on its circular scale. What is its least count?',
+    choices: [
+      { text: '0.01 mm', isCorrect: true },
+      { text: '0.5 mm', isCorrect: false },
+      { text: '0.1 mm', isCorrect: false },
+      { text: '25 mm', isCorrect: false },
+    ],
+    correctValue: '0.01 mm',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [],
+    source: `${MINS_SRC} — TA-4 think-aloud (0.5 ÷ 50); 0.5 mm is the pitch, 25 is pitch × divisions`,
+  },
+  {
+    conceptId: MINS,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A vernier scale has 20 divisions that together span 19 mm of the main scale (main-scale divisions are 1 mm). What is its least count?',
+    choices: [
+      { text: '0.05 mm', isCorrect: true },
+      { text: '0.1 mm', isCorrect: false },
+      { text: '0.95 mm', isCorrect: false },
+      { text: '1 mm', isCorrect: false },
+    ],
+    correctValue: '0.05 mm',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: `${MINS_SRC} — TA-3 P16 (1 MSD − 1 VSD = 1 − 0.95); 0.1 mm is the remembered value, 0.95 mm is one VSD`,
+  },
+  {
+    conceptId: MINS,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A vernier caliper has a least count of 0.1 mm. The main scale reads 23 mm just before the vernier zero, and the 6th vernier division lines up with a main-scale mark. What is the length?',
+    choices: [
+      { text: '23.6 mm', isCorrect: true },
+      { text: '29 mm', isCorrect: false, misconceptionId: `${MINS}:MC-RAW-DIVISION` },
+      { text: '23.06 mm', isCorrect: false, misconceptionId: `${MINS}:MC-RAW-DIVISION` },
+    ],
+    correctValue: '23.6 mm',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${MINS}:MC-RAW-DIVISION`],
+    source: `${MINS_SRC} — DB-2 item and MC-RAW-DIVISION trigger_signal (29 mm, 23.06 mm)`,
+  },
+  {
+    conceptId: MINS,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'With its jaws closed, a vernier caliper reads +0.2 mm. It then reads 23.6 mm across a rod. What is the rod\'s true length?',
+    choices: [
+      { text: '23.4 mm — the instrument reads 0.2 mm too much, so subtract it', isCorrect: true },
+      { text: '23.8 mm — add the zero error to correct the reading', isCorrect: false, misconceptionId: `${MINS}:MC-ZERO-SIGN` },
+      { text: '23.6 mm — a zero error only matters when nothing is in the jaws', isCorrect: false },
+    ],
+    correctValue: '23.4 mm',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${MINS}:MC-ZERO-SIGN`],
+    source: `${MINS_SRC} — TA-5 P17 contrast and MC-ZERO-SIGN conflict_evidence`,
+  },
+  {
+    conceptId: MINS,
+    subjectSlug: 'physics',
+    probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A screw gauge has a least count of 0.01 mm and a zero error of −0.03 mm. Its main scale shows 4.5 mm and the circular scale reads 28. What is the true diameter of the wire?',
+    choices: [
+      { text: '4.81 mm', isCorrect: true },
+      { text: '4.75 mm', isCorrect: false, misconceptionId: `${MINS}:MC-ZERO-SIGN` },
+      { text: '32.5 mm', isCorrect: false, misconceptionId: `${MINS}:MC-RAW-DIVISION` },
+      { text: '4.78 mm', isCorrect: false },
+    ],
+    correctValue: '4.81 mm',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${MINS}:MC-ZERO-SIGN`, `${MINS}:MC-RAW-DIVISION`],
+    source: `${MINS_SRC} — TA-5 P41 diagnostic (4.78 − (−0.03) = 4.81); 4.75 adds the error's sign the wrong way, 32.5 adds 28 raw`,
+  },
+]
+
+// ─── phys.mech.mass-and-weight ───────────────────────────────────────────────
+const MWGT = 'phys.mech.mass-and-weight'
+const MWGT_SRC = 'docs/curriculum/blueprints/phys.mech.mass-and-weight.md'
+
+const MWGT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: MWGT,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Mass and weight are different quantities. Mass is the amount of matter in a body, in kilograms, and it is the same on Earth, on the Moon and in deep space. Weight is the force with which gravity pulls on that body, in newtons, and it depends on where the body is. The link is W = mg, where g is the gravitational field strength — the pull on each kilogram: about 9.8 N/kg near Earth\'s surface and about 1.6 N/kg on the Moon. A 60 kg person weighs about 60 × 9.8 ≈ 590 N on Earth and about 60 × 1.6 ≈ 97 N on the Moon, and has a mass of 60 kg on both. That is why a beam balance, which compares one mass with another, reads the same on the Moon, while a spring balance, which measures the pull, reads less. Free fall then holds a surprise: with no air resistance, every body falls with the same acceleration. A 10 kg ball is pulled ten times harder than a 1 kg ball, but it is also ten times harder to speed up, so the two effects cancel and both fall with acceleration g ≈ 9.8 m/s² near Earth — the same number as the field strength, since 1 N/kg is the same unit as 1 m/s². In air, a feather falls slowly because air resistance is large compared with its small weight, not because light things fall slower.',
+    targetedMisconceptions: [`${MWGT}:MC-MASS-IS-WEIGHT`, `${MWGT}:MC-HEAVIER-FALLS-FASTER`],
+    source: `${MWGT_SRC} — TA-1/TA-2 the bag on two worlds and two balances, TA-3 W = mg, TA-5 free fall`,
+  },
+  {
+    conceptId: MWGT,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Everyday speech says "my weight is 60 kg", which makes mass and weight sound like one quantity — and then anything that changes weight seems to change mass. Test it on the Moon: a 5 kg bag of rice still exactly balances 5 kg of standard masses on a beam balance there. If its mass had dropped, the beam would tip. The amount of rice did not change; only the Moon\'s weaker pull on it did. Mass, in kilograms, is the same everywhere; weight, W = mg in newtons, changes with g. A second strong intuition is that heavier things fall faster. On the Moon, with no air, a hammer and a feather dropped together landed together. The heavier body IS pulled harder — but it is also harder to speed up, by exactly the same factor: ten times the mass means ten times the pull and ten times the resistance to speeding up, so the acceleration is the same, g. On Earth a feather lags only because air resistance matters far more for something so light and spread out; rest a sheet of paper flat on a book and drop them, and the book shields it from the air — they fall together.',
+    targetedMisconceptions: [`${MWGT}:MC-MASS-IS-WEIGHT`, `${MWGT}:MC-HEAVIER-FALLS-FASTER`],
+    source: `${MWGT_SRC} — MC-MASS-IS-WEIGHT + MC-HEAVIER-FALLS-FASTER, conflict_evidence/bridge_text/replacement_text and s6_path demonstration`,
+  },
+]
+
+const MWGT_PROBES: SeedProbe[] = [
+  {
+    conceptId: MWGT,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Take g = 9.8 N/kg on Earth. What is the weight of a 2 kg bag of sugar on Earth?',
+    choices: [
+      { text: '19.6 N', isCorrect: true },
+      { text: '2 kg', isCorrect: false, misconceptionId: `${MWGT}:MC-MASS-IS-WEIGHT` },
+      { text: '9.8 N', isCorrect: false },
+      { text: '0.2 N', isCorrect: false },
+    ],
+    correctValue: '19.6 N',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${MWGT}:MC-MASS-IS-WEIGHT`],
+    source: `${MWGT_SRC} — TA-3 W = mg; 9.8 N is g alone (the pull on one kg), 0.2 is m/g`,
+  },
+  {
+    conceptId: MWGT,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'On a newly discovered planet, a student of mass 50 kg has a weight of 250 N. What is the gravitational field strength g there?',
+    choices: [
+      { text: '5 N/kg', isCorrect: true },
+      { text: '12,500 N/kg', isCorrect: false },
+      { text: '0.2 N/kg', isCorrect: false },
+      { text: '9.8 N/kg — g is the same everywhere', isCorrect: false },
+    ],
+    correctValue: '5 N/kg',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: `${MWGT_SRC} — §8 P77 generate item (g = W/m = 250/50); 0.2 is m/W`,
+  },
+  {
+    conceptId: MWGT,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'An astronaut has a mass of 60 kg on Earth. On the Moon, where g is about 1.6 N/kg, what are her mass and her weight?',
+    choices: [
+      { text: 'Mass 60 kg; weight about 97 N (on Earth it was about 590 N)', isCorrect: true },
+      { text: 'Mass about 10 kg; weight about 97 N — both drop on the Moon', isCorrect: false, misconceptionId: `${MWGT}:MC-MASS-IS-WEIGHT` },
+      { text: 'Mass 60 kg; weight 60 kg — mass and weight are the same thing', isCorrect: false, misconceptionId: `${MWGT}:MC-MASS-IS-WEIGHT` },
+    ],
+    correctValue: 'mass 60 kg, weight about 97 N',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${MWGT}:MC-MASS-IS-WEIGHT`],
+    source: `${MWGT_SRC} — DB-2 item and MC-MASS-IS-WEIGHT trigger_signal ("mass changes on the Moon")`,
+  },
+  {
+    conceptId: MWGT,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A 10 kg ball and a 1 kg ball are released together from the same height in a vacuum chamber, with no air at all. What happens?',
+    choices: [
+      { text: 'They land together — the 10 kg ball is pulled ten times harder but is also ten times harder to speed up, so both fall with acceleration g', isCorrect: true },
+      { text: 'The 10 kg ball lands first because a stronger pull makes it fall faster', isCorrect: false, misconceptionId: `${MWGT}:MC-HEAVIER-FALLS-FASTER` },
+      { text: 'The 1 kg ball lands first because it is easier to move', isCorrect: false },
+    ],
+    correctValue: 'they land together',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${MWGT}:MC-HEAVIER-FALLS-FASTER`],
+    source: `${MWGT_SRC} — DB-3 free-fall check and MC-HEAVIER-FALLS-FASTER bridge_text`,
+  },
+  {
+    conceptId: MWGT,
+    subjectSlug: 'physics',
+    probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A feather and a coin are dropped in a tall glass tube. With air in the tube the coin lands first; after the air is pumped out they land together. What does this show?',
+    choices: [
+      { text: 'Air resistance, not mass, made the feather slow: without air every body falls with the same acceleration g', isCorrect: true },
+      { text: 'Removing the air made the coin lighter, so it slowed down to match the feather', isCorrect: false, misconceptionId: `${MWGT}:MC-MASS-IS-WEIGHT` },
+      { text: 'Heavier things fall faster only when there is air to push them down', isCorrect: false, misconceptionId: `${MWGT}:MC-HEAVIER-FALLS-FASTER` },
+    ],
+    correctValue: 'air resistance caused the difference; in a vacuum all fall with g',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${MWGT}:MC-HEAVIER-FALLS-FASTER`, `${MWGT}:MC-MASS-IS-WEIGHT`],
+    source: `${MWGT_SRC} — §8 P75 boundary item (vacuum tube) and TA-5 P17 contrast`,
+  },
+]
+
+// ─── phys.opt.rectilinear-propagation ────────────────────────────────────────
+const RECT = 'phys.opt.rectilinear-propagation'
+const RECT_SRC = 'docs/curriculum/blueprints/phys.opt.rectilinear-propagation.md'
+
+const RECT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: RECT,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Light leaves a source — the Sun, a flame, a torch — and travels in straight lines through a uniform medium until something stops it. You cannot see a candle through a bent pipe, and three cards with holes show the flame only when the holes are exactly in line. A shadow follows directly: an opaque object blocks the straight rays that reach it, so the region behind it gets no light from the source. Draw rays from the source grazing the object\'s edges and you have the shadow\'s outline; for a small source, shadow size / object size = (source-to-screen distance) / (source-to-object distance), so the shadow grows as the object moves toward the source. A large (extended) source gives two regions: the umbra, where no part of the source can be seen, and around it the penumbra, where part of the source is blocked and part is visible. Eclipses are the same geometry: in a solar eclipse the Moon is between the Sun and the Earth — people in its umbra see a total eclipse, people in its penumbra a partial one; in a lunar eclipse the Earth is between them and the Moon passes into the Earth\'s shadow, which can only happen at full Moon. A pinhole camera also follows from straight rays: a ray from the top of an object passes through the hole and lands low, one from the bottom lands high, so the image is inverted, and by similar triangles image height / object height = image distance / object distance. A 10 m tree 50 m away gives a 4 cm image in a 20 cm box.',
+    targetedMisconceptions: [`${RECT}:MC-SHADOW-IS-IMAGE`, `${RECT}:MC-PHASES-ARE-SHADOW`],
+    source: `${RECT_SRC} — TA-1 straight lines, TA-2 shadows, TA-3 umbra/penumbra, TA-4 eclipses, TA-6 pinhole camera`,
+  },
+  {
+    conceptId: RECT,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Shadows look like dark copies of the objects that make them, so it is natural to think of a shadow as something the object sends out. Try a red ball and a blue ball of the same size in front of a torch: both shadows are equally dark, with no colour at all. A shadow is not a picture of the object — it is a place the straight rays from the source cannot reach, and missing light has no colour. That is why you find a shadow by drawing rays from the source past the object\'s edges, never by tracing the object outward. A second, very common confusion is that the Moon\'s phases are the Earth\'s shadow. For the Earth\'s shadow to fall on the Moon, the Earth has to be between the Sun and the Moon — but at a thin crescent the Moon appears close to the Sun in the sky, so the Earth is nowhere near between them. Half of the Moon is always lit by the Sun; the phase is simply how much of that lit half faces us, and at a crescent we are looking mostly at the dark half. The Earth\'s shadow reaches the Moon only at full Moon, during a lunar eclipse — a few times a year, not every night.',
+    targetedMisconceptions: [`${RECT}:MC-SHADOW-IS-IMAGE`, `${RECT}:MC-PHASES-ARE-SHADOW`],
+    source: `${RECT_SRC} — MC-SHADOW-IS-IMAGE + MC-PHASES-ARE-SHADOW, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const RECT_PROBES: SeedProbe[] = [
+  {
+    conceptId: RECT,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A pinhole camera 20 cm long is pointed at a tree 10 m tall standing 50 m away. What image forms on the screen?',
+    choices: [
+      { text: 'A 4 cm image, upside down', isCorrect: true },
+      { text: 'A 4 cm image, the right way up', isCorrect: false },
+      { text: 'A 2.5 m image, upside down', isCorrect: false },
+      { text: 'A dark 10 m outline of the tree', isCorrect: false, misconceptionId: `${RECT}:MC-SHADOW-IS-IMAGE` },
+    ],
+    correctValue: '4 cm, inverted',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${RECT}:MC-SHADOW-IS-IMAGE`],
+    source: `${RECT_SRC} — TA-6 P34 (10 m × 0.2 m / 50 m = 0.04 m); 2.5 m inverts the ratio`,
+  },
+  {
+    conceptId: RECT,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A small torch lights a ball in front of a wall. The ball is moved closer to the torch while the wall stays put. What happens to the ball\'s shadow on the wall?',
+    choices: [
+      { text: 'It gets bigger — the rays grazing the ball\'s edges spread out more before they reach the wall', isCorrect: true },
+      { text: 'It gets smaller — the ball is further from the wall', isCorrect: false },
+      { text: 'It stays the same size — a shadow is always the size of the object', isCorrect: false, misconceptionId: `${RECT}:MC-SHADOW-IS-IMAGE` },
+    ],
+    correctValue: 'bigger',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${RECT}:MC-SHADOW-IS-IMAGE`],
+    source: `${RECT_SRC} — TA-2 P34 (shadow size / object size = source–screen / source–object)`,
+  },
+  {
+    conceptId: RECT,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A torch shines on a red ball and on a blue ball of the same size, one after the other. What do their shadows look like?',
+    choices: [
+      { text: 'Both are the same dark shape — a shadow is just the region the blocked light cannot reach, so it carries no colour', isCorrect: true },
+      { text: 'A reddish shadow and a bluish shadow — each shadow is a dark copy of its ball', isCorrect: false, misconceptionId: `${RECT}:MC-SHADOW-IS-IMAGE` },
+      { text: 'The red ball\'s shadow is darker because red objects send out more shadow', isCorrect: false, misconceptionId: `${RECT}:MC-SHADOW-IS-IMAGE` },
+    ],
+    correctValue: 'both dark, no colour',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${RECT}:MC-SHADOW-IS-IMAGE`],
+    source: `${RECT_SRC} — MC-SHADOW-IS-IMAGE conflict_evidence (red and blue balls)`,
+  },
+  {
+    conceptId: RECT,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'One evening the Moon is a thin crescent low in the west, close to where the Sun has just set. What makes it look like a crescent?',
+    choices: [
+      { text: 'Half the Moon is always sunlit; from where we stand we see only a thin sliver of that lit half', isCorrect: true },
+      { text: 'The Earth\'s shadow is covering most of the Moon', isCorrect: false, misconceptionId: `${RECT}:MC-PHASES-ARE-SHADOW` },
+      { text: 'A lunar eclipse is happening, so only an edge is still lit', isCorrect: false, misconceptionId: `${RECT}:MC-PHASES-ARE-SHADOW` },
+    ],
+    correctValue: 'we see only a sliver of the sunlit half',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${RECT}:MC-PHASES-ARE-SHADOW`],
+    source: `${RECT_SRC} — DB-3 phases check and MC-PHASES-ARE-SHADOW conflict_evidence (crescent near the Sun)`,
+  },
+  {
+    conceptId: RECT,
+    subjectSlug: 'physics',
+    probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'During a solar eclipse, an observer stands in the Moon\'s penumbra rather than its umbra. What does she see?',
+    choices: [
+      { text: 'A partial eclipse — the Moon blocks only part of the Sun from where she stands', isCorrect: true },
+      { text: 'A total eclipse — any point in the Moon\'s shadow sees the Sun completely covered', isCorrect: false },
+      { text: 'The Earth\'s shadow moving across the Sun', isCorrect: false, misconceptionId: `${RECT}:MC-PHASES-ARE-SHADOW` },
+    ],
+    correctValue: 'a partial eclipse',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${RECT}:MC-PHASES-ARE-SHADOW`],
+    source: `${RECT_SRC} — §8 P75 boundary item (penumbra during a solar eclipse)`,
+  },
+]
+
+// Batch export spreads for the extension (kept with the concepts above).
+const PHYS_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
+  ...DENS_EXPLANATIONS,
+  ...MINS_EXPLANATIONS,
+  ...MWGT_EXPLANATIONS,
+  ...RECT_EXPLANATIONS,
+]
+
+const PHYS_EXTENSION_PROBES: SeedProbe[] = [
+  ...DENS_PROBES,
+  ...MINS_PROBES,
+  ...MWGT_PROBES,
+  ...RECT_PROBES,
+]
+
 // ─── Batch export ────────────────────────────────────────────────────────────
 
 export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
@@ -52062,6 +52533,7 @@ export const AUTHORED_EXPLANATIONS: SeedExplanation[] = [
   ...ESEM_EXPLANATIONS,
   ...PNJC_EXPLANATIONS,
   ...DREC_EXPLANATIONS,
+  ...PHYS_EXTENSION_EXPLANATIONS,
 ]
 
 // ─── MOAT STAGE 2 — phys.mod coverage batch ──────────────────────────────────
@@ -53658,4 +54130,5 @@ export const AUTHORED_PROBES: SeedProbe[] = [
   ...POTM_ASSESS_PROBES,
   ...EPWR_ASSESS_PROBES,
   ...EMFC_ASSESS_PROBES,
+  ...PHYS_EXTENSION_PROBES,
 ]

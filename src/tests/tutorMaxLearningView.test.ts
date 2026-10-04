@@ -115,7 +115,9 @@ describe('4 — lesson list "current" highlight agrees with the authoritative ac
 
   it('fixture reproduces the divergence', () => {
     expect(currentLesson).toBe(5)
-    expect(orderOf(NEWTONS_FIRST_LAW)).toBe(18)
+    // 18 in the 238-concept KG it was measured on; 21 since the 2026-10-03
+    // extension placed three nodes before it. Same divergence.
+    expect(orderOf(NEWTONS_FIRST_LAW)).toBe(21)
   })
 
   it('computeLessonLockState fed the RAW progress (the bug) marks the STALE lesson current, not the one on screen', () => {
