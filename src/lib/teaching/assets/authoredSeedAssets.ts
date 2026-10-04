@@ -55044,6 +55044,454 @@ const CPCV_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.astro.solar-system ─────────────────────────────────────────────────
+const ESYS = 'phys.astro.solar-system'
+const ESYS_SRC = 'docs/curriculum/blueprints/phys.astro.solar-system.md'
+
+const ESYS_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: ESYS,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Earth\'s axis is tilted 23.4° and keeps pointing the same way in space all year. In June the northern hemisphere leans towards the Sun: the noon Sun climbs high and the days are long. At 28.6°N the noon Sun stands 84.8° high in June but only 38.0° in December, and a slanting beam spreads the same sunlight over about 1.6 times more ground — so winter is colder. Distance is not the cause: Earth is closest to the Sun in early January. The Moon always has one half lit by the Sun; as it orbits Earth every 29.5 days we see different amounts of that lit half — none at new moon, half at the quarters, all at full moon. A solar eclipse happens when the Moon\'s shadow falls on Earth, only possible at new moon; a lunar eclipse when the Moon passes through Earth\'s shadow, only at full moon. They are not monthly because the Moon\'s orbit is tilted about 5°. Tides come from the DIFFERENCE in the Moon\'s gravity across Earth: the near side is pulled more than the centre, and the centre more than the far side, stretching the oceans into two bulges, so most coasts get two high tides about every 12 h 25 min. The Sun pulls Earth about 180 times harder than the Moon, but tidal effects fall off as 1/d³, so the Moon\'s tidal effect is about 2.2 times the Sun\'s. When the two line up at new and full moon, they give spring tides.',
+    targetedMisconceptions: [`${ESYS}:MC-SEASONS-DISTANCE`, `${ESYS}:MC-PHASES-EARTH-SHADOW`],
+    source: `${ESYS_SRC} — TA-2 tilt, TA-3 not distance, TA-4 phases and eclipses, TA-5 tides`,
+  },
+  {
+    conceptId: ESYS,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'It seems obvious that summer comes when Earth is nearer the Sun, as you are warmer nearer a fire. Two facts rule this out. When it is summer in India it is winter in Australia, though both are the same distance from the Sun. And Earth is actually closest to the Sun in early January — during the northern winter. The distance changes only about 3% through the year. What really changes is the tilt: Earth\'s axis leans 23.4°, so for half the year the northern hemisphere leans towards the Sun, with a high noon Sun, concentrated sunlight and long days, and for the other half it leans away. A second common picture is that the Moon\'s phases are Earth\'s shadow creeping across it. But Earth\'s shadow points directly away from the Sun, so the Moon can only enter it when it is on the far side of Earth — at full moon — and then the result is a lunar eclipse, not a crescent. The phases happen because one half of the Moon is always sunlit and, as the Moon orbits, we look at that lit half from different angles: all of it at full moon, none at new moon, half of it at the quarters.',
+    targetedMisconceptions: [`${ESYS}:MC-SEASONS-DISTANCE`, `${ESYS}:MC-PHASES-EARTH-SHADOW`],
+    source: `${ESYS_SRC} — MC-SEASONS-DISTANCE + MC-PHASES-EARTH-SHADOW, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const ESYS_PROBES: SeedProbe[] = [
+  {
+    conceptId: ESYS,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Earth\'s axis is tilted 23.4°. How high is the noon Sun in June at latitude 28.6°N?',
+    choices: [
+      { text: 'About 84.8°', isCorrect: true },
+      { text: 'About 38.0°', isCorrect: false },
+      { text: 'About 61.4°', isCorrect: false },
+      { text: 'Always 90° — the Sun is overhead at noon everywhere', isCorrect: false },
+    ],
+    correctValue: 'about 84.8°',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [],
+    source: `${ESYS_SRC} — TA-2 P34 (90 − 28.6 + 23.4); 38.0° is December, 61.4° ignores the tilt`,
+  },
+  {
+    conceptId: ESYS,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'The Sun pulls on Earth about 180 times harder than the Moon does. Why does the Moon still cause bigger tides?',
+    choices: [
+      { text: 'Tides depend on the difference in pull across Earth, which falls off as 1/d³ — and the Moon is much closer', isCorrect: true },
+      { text: 'The Moon\'s gravity acts only on water, not on rock', isCorrect: false },
+      { text: 'The Sun\'s pull is blocked by Earth\'s atmosphere', isCorrect: false },
+      { text: 'It doesn\'t — the Sun causes the bigger tides', isCorrect: false },
+    ],
+    correctValue: 'tidal effect ∝ 1/d³',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: `${ESYS_SRC} — TA-5 P34 (tidal ratio Moon/Sun ≈ 2.2)`,
+  },
+  {
+    conceptId: ESYS,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why is it warmer in summer than in winter?',
+    choices: [
+      { text: 'Earth\'s tilted axis makes the Sun higher in the sky and the days longer in summer', isCorrect: true },
+      { text: 'Earth is closer to the Sun in summer', isCorrect: false, misconceptionId: `${ESYS}:MC-SEASONS-DISTANCE` },
+      { text: 'The Sun gives out more energy in summer', isCorrect: false },
+    ],
+    correctValue: 'axial tilt',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${ESYS}:MC-SEASONS-DISTANCE`],
+    source: `${ESYS_SRC} — DB-1 item and MC-SEASONS-DISTANCE conflict_evidence`,
+  },
+  {
+    conceptId: ESYS,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What causes the phases of the Moon?',
+    choices: [
+      { text: 'As the Moon orbits, we see different amounts of the half that is always lit by the Sun', isCorrect: true },
+      { text: 'Earth\'s shadow covers different amounts of the Moon', isCorrect: false, misconceptionId: `${ESYS}:MC-PHASES-EARTH-SHADOW` },
+      { text: 'Clouds on the Moon block parts of it', isCorrect: false },
+    ],
+    correctValue: 'our changing view of the sunlit half',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${ESYS}:MC-PHASES-EARTH-SHADOW`],
+    source: `${ESYS_SRC} — DB-2 item and MC-PHASES-EARTH-SHADOW trigger_signal`,
+  },
+  {
+    conceptId: ESYS,
+    subjectSlug: 'physics',
+    probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Can a lunar eclipse happen when the Moon is a half moon?',
+    choices: [
+      { text: 'No — Earth\'s shadow points away from the Sun, so the Moon can only enter it at full moon', isCorrect: true },
+      { text: 'Yes — a half moon is half in Earth\'s shadow already', isCorrect: false },
+      { text: 'Yes — eclipses can happen at any phase', isCorrect: false },
+    ],
+    correctValue: 'no, only at full moon',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: `${ESYS_SRC} — TA-4 P34 and §8 P75`,
+  },
+]
+
+// ─── phys.astro.stellar-properties ───────────────────────────────────────────
+const STAR = 'phys.astro.stellar-properties'
+const STAR_SRC = 'docs/curriculum/blueprints/phys.astro.stellar-properties.md'
+
+const STAR_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: STAR,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A star\'s luminosity L is the total power it radiates; its apparent brightness b is the power per square metre reaching us, b = L/(4πd²). A star can look bright simply because it is near. Stars radiate roughly as blackbodies, so L = 4πR²σT⁴: the Sun (R = 6.96 × 10⁸ m, T = 5772 K) has L ≈ 3.8 × 10²⁶ W; a star of the same size but twice as hot is 16 times as luminous; a 3500 K star 100 times as luminous as the Sun must be about 10 × (5772/3500)² ≈ 27 times its radius — a red giant. Colour gives temperature through Wien\'s law, λ_max = 2.898 × 10⁻³ m·K / T: Betelgeuse (~3500 K) peaks near 830 nm and looks red, the Sun near 500 nm, Rigel (~12 000 K) near 240 nm and looks blue-white. Red stars are the coolest. Magnitudes run backwards: smaller numbers are brighter, and 5 magnitudes is exactly a factor of 100. Absolute magnitude is the apparent magnitude at 10 parsecs. The HR diagram plots luminosity up against temperature, which increases to the LEFT. Most stars lie on the main sequence; cool but luminous stars at the top right must be huge giants; hot but faint stars at the bottom left must be tiny white dwarfs.',
+    targetedMisconceptions: [`${STAR}:MC-APPARENT-IS-LUMINOSITY`, `${STAR}:MC-RED-STARS-HOTTER`],
+    source: `${STAR_SRC} — TA-2 colour, TA-3 luminosity vs brightness, TA-4 size, TA-5 magnitudes and HR diagram`,
+  },
+  {
+    conceptId: STAR,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'It is natural to assume that the brightest-looking star in the sky gives out the most light. Think of a car\'s headlights a kilometre away: they look fainter than a torch in your hand, yet they emit far more light. Their light is spread over a sphere a kilometre in radius, and brightness falls as 1/d²: b = L/(4πd²). Stars lie at hugely different distances, so how bright one looks tells you little about how luminous it is until you know its distance. Sirius is the brightest star in our sky mainly because it is near, about 2.6 parsecs away. A second trap comes from taps and maps that label red as hot and blue as cold. For glowing bodies it is the other way round. Heat a poker: it glows dull red first, then orange, then yellow-white as it gets hotter. A hotter body radiates most strongly at shorter wavelengths — Wien\'s law, λ_max ∝ 1/T. So red Betelgeuse, at about 3500 K, is much cooler than the Sun, and blue-white Rigel, at about 12 000 K, is much hotter. Star colours run from red (coolest) through orange, yellow and white to blue (hottest).',
+    targetedMisconceptions: [`${STAR}:MC-APPARENT-IS-LUMINOSITY`, `${STAR}:MC-RED-STARS-HOTTER`],
+    source: `${STAR_SRC} — MC-APPARENT-IS-LUMINOSITY + MC-RED-STARS-HOTTER, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const STAR_PROBES: SeedProbe[] = [
+  {
+    conceptId: STAR,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A star has the same radius as the Sun but twice its surface temperature. How does its luminosity compare with the Sun\'s?',
+    choices: [
+      { text: '16 times greater', isCorrect: true },
+      { text: '2 times greater', isCorrect: false },
+      { text: '4 times greater', isCorrect: false },
+      { text: 'The same — luminosity depends only on size', isCorrect: false },
+    ],
+    correctValue: '16 times',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [],
+    source: `${STAR_SRC} — TA-4 P34 (L ∝ R²T⁴)`,
+  },
+  {
+    conceptId: STAR,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A star of surface temperature 3500 K is 100 times as luminous as the Sun (5772 K). Roughly how many times the Sun\'s radius is it?',
+    choices: [
+      { text: 'About 27', isCorrect: true },
+      { text: 'About 10', isCorrect: false },
+      { text: 'About 0.37 — a cooler star must be smaller', isCorrect: false },
+      { text: 'About 100', isCorrect: false },
+    ],
+    correctValue: 'about 27',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: `${STAR_SRC} — TA-4 P34 (R/R☉ = √(L/L☉)(T☉/T)²); 10 ignores the temperature factor`,
+  },
+  {
+    conceptId: STAR,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Betelgeuse looks red and Rigel looks blue-white. Which has the hotter surface?',
+    choices: [
+      { text: 'Rigel — hotter bodies radiate most strongly at shorter, bluer wavelengths', isCorrect: true },
+      { text: 'Betelgeuse — red means hot', isCorrect: false, misconceptionId: `${STAR}:MC-RED-STARS-HOTTER` },
+      { text: 'They must be the same temperature — colour depends only on distance', isCorrect: false },
+    ],
+    correctValue: 'Rigel',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${STAR}:MC-RED-STARS-HOTTER`],
+    source: `${STAR_SRC} — DB-2 item and MC-RED-STARS-HOTTER conflict_evidence`,
+  },
+  {
+    conceptId: STAR,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Two stars look equally bright in the night sky. Must they give out the same amount of light?',
+    choices: [
+      { text: 'No — one may be more luminous but farther away; brightness falls as 1/d²', isCorrect: true },
+      { text: 'Yes — equal brightness means equal luminosity', isCorrect: false, misconceptionId: `${STAR}:MC-APPARENT-IS-LUMINOSITY` },
+      { text: 'Yes, as long as they are the same colour', isCorrect: false, misconceptionId: `${STAR}:MC-APPARENT-IS-LUMINOSITY` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${STAR}:MC-APPARENT-IS-LUMINOSITY`],
+    source: `${STAR_SRC} — DB-1 item and MC-APPARENT-IS-LUMINOSITY trigger_signal`,
+  },
+  {
+    conceptId: STAR,
+    subjectSlug: 'physics',
+    probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A white dwarf is hotter than the Sun but far less luminous. What must be true of its size?',
+    choices: [
+      { text: 'It must be very small — L = 4πR²σT⁴, so a hot but faint star has a tiny radius', isCorrect: true },
+      { text: 'It must be very large', isCorrect: false },
+      { text: 'Nothing — size does not affect luminosity', isCorrect: false },
+    ],
+    correctValue: 'very small',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: `${STAR_SRC} — TA-6 P79 predict item`,
+  },
+]
+
+// ─── phys.astro.distance-ladder ──────────────────────────────────────────────
+const DLAD = 'phys.astro.distance-ladder'
+const DLAD_SRC = 'docs/curriculum/blueprints/phys.astro.distance-ladder.md'
+
+const DLAD_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: DLAD,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'No single method measures every astronomical distance, so astronomers build a ladder. First rung, parallax: as Earth moves around the Sun, a nearby star shifts against much more distant stars, like your thumb jumping when you blink each eye. The parallax angle p is half the yearly shift, and d (parsecs) = 1/p (arcseconds); 1 parsec = 3.086 × 10¹⁶ m = 3.26 light-years. Proxima Centauri has p = 0.768″, so it is 1.30 pc away. A smaller parallax means a farther star, and beyond a few thousand parsecs the angle is too small to measure. Second rung, standard candles: objects of known luminosity — Cepheid variables, whose pulsation period reveals their luminosity, and type Ia supernovae. Known luminosity and measured brightness give distance by b = L/(4πd²), or with magnitudes m − M = 5 log₁₀(d / 10 pc): a Cepheid with M = −4 seen at m = 21 is 10⁶ pc away. They are calibrated on nearby examples measured by parallax. Third rung, Hubble\'s law: distant galaxies are redshifted, z = Δλ/λ ≈ v/c, and their speed grows in proportion to distance, v = H₀d with H₀ ≈ 70 km/s per Mpc. Hydrogen\'s 656.3 nm line seen at 669.4 nm gives z ≈ 0.020, v ≈ 6000 km/s, d ≈ 86 Mpc. In a uniform expansion every galaxy sees the others receding, so there is no centre; 1/H₀ ≈ 14 billion years estimates the universe\'s age.',
+    targetedMisconceptions: [`${DLAD}:MC-PARALLAX-BIGGER-FARTHER`, `${DLAD}:MC-REDSHIFT-MEANS-WE-ARE-CENTRE`],
+    source: `${DLAD_SRC} — TA-2 parallax, TA-4 standard candles, TA-5 Hubble's law`,
+  },
+  {
+    conceptId: DLAD,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A bigger angle can feel like a bigger distance, so it is tempting to think a star with a larger parallax is farther away. Try it with your thumb: hold it close to your face and blink one eye then the other, and it jumps a lot against the background; hold it at arm\'s length and it jumps much less. Nearer things shift more. Stars behave the same way as Earth carries us across its orbit, so distance is the inverse of the angle, d = 1/p: a parallax of 0.5″ means 2 parsecs, while 0.1″ means 10 parsecs. A second trap is to conclude from the redshifts that we sit at the centre of the universe, because almost every galaxy is moving away from us. Draw dots on a balloon and blow it up. Stand on any dot: every other dot moves away from it, and the farther ones move away faster — exactly Hubble\'s law, v = H₀d. Yet no dot is the centre of the balloon\'s surface. A uniform expansion looks the same from every galaxy, so observers anywhere would see the same pattern. The redshifts tell us that space is expanding, not that our place is special.',
+    targetedMisconceptions: [`${DLAD}:MC-PARALLAX-BIGGER-FARTHER`, `${DLAD}:MC-REDSHIFT-MEANS-WE-ARE-CENTRE`],
+    source: `${DLAD_SRC} — MC-PARALLAX-BIGGER-FARTHER + MC-REDSHIFT-MEANS-WE-ARE-CENTRE, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const DLAD_PROBES: SeedProbe[] = [
+  {
+    conceptId: DLAD,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A galaxy\'s hydrogen line, 656.3 nm in the laboratory, is observed at 669.4 nm. Using H₀ = 70 km/s per Mpc, roughly how far away is it?',
+    choices: [
+      { text: 'About 86 Mpc', isCorrect: true },
+      { text: 'About 0.02 Mpc', isCorrect: false },
+      { text: 'About 420 000 Mpc', isCorrect: false },
+      { text: 'About 8.6 Mpc', isCorrect: false },
+    ],
+    correctValue: 'about 86 Mpc',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: `${DLAD_SRC} — TA-5 P34 (z ≈ 0.020, v ≈ 6000 km/s, d = v/H₀); 420 000 multiplies by H₀`,
+  },
+  {
+    conceptId: DLAD,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A star has a parallax of 0.25 arcseconds. How far away is it?',
+    choices: [
+      { text: '4 parsecs', isCorrect: true },
+      { text: '0.25 parsecs', isCorrect: false, misconceptionId: `${DLAD}:MC-PARALLAX-BIGGER-FARTHER` },
+      { text: '25 parsecs', isCorrect: false },
+      { text: '0.25 light-years', isCorrect: false },
+    ],
+    correctValue: '4 pc',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${DLAD}:MC-PARALLAX-BIGGER-FARTHER`],
+    source: `${DLAD_SRC} — §9 interval 1 (d = 1/p); 0.25 pc treats distance as proportional to the angle`,
+  },
+  {
+    conceptId: DLAD,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Star A has a parallax of 0.5″ and star B a parallax of 0.1″. Which is farther away?',
+    choices: [
+      { text: 'Star B — 10 pc against 2 pc; a smaller parallax means a farther star', isCorrect: true },
+      { text: 'Star A — it has the larger angle', isCorrect: false, misconceptionId: `${DLAD}:MC-PARALLAX-BIGGER-FARTHER` },
+      { text: 'They are at the same distance — parallax depends only on Earth\'s orbit', isCorrect: false },
+    ],
+    correctValue: 'star B',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${DLAD}:MC-PARALLAX-BIGGER-FARTHER`],
+    source: `${DLAD_SRC} — DB-2 golden probe and MC-PARALLAX-BIGGER-FARTHER conflict_evidence`,
+  },
+  {
+    conceptId: DLAD,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Almost every galaxy is moving away from us, faster the farther it is. Does this mean we are at the centre of the universe?',
+    choices: [
+      { text: 'No — in a uniform expansion every galaxy sees all the others receding the same way', isCorrect: true },
+      { text: 'Yes — everything is flying away from us', isCorrect: false, misconceptionId: `${DLAD}:MC-REDSHIFT-MEANS-WE-ARE-CENTRE` },
+      { text: 'Yes — the Big Bang happened near the Milky Way', isCorrect: false, misconceptionId: `${DLAD}:MC-REDSHIFT-MEANS-WE-ARE-CENTRE` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${DLAD}:MC-REDSHIFT-MEANS-WE-ARE-CENTRE`],
+    source: `${DLAD_SRC} — DB-3 expansion check and MC-REDSHIFT-MEANS-WE-ARE-CENTRE conflict_evidence`,
+  },
+  {
+    conceptId: DLAD,
+    subjectSlug: 'physics',
+    probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why must the luminosities of Cepheid variables be calibrated with parallax before Cepheids can be used to measure distances?',
+    choices: [
+      { text: 'Their period–luminosity law is fixed from nearby Cepheids whose distances are known from parallax — each rung rests on the one below', isCorrect: true },
+      { text: 'Because Cepheids are too faint to see without parallax', isCorrect: false },
+      { text: 'They don\'t need calibration — their brightness gives distance directly', isCorrect: false },
+    ],
+    correctValue: 'calibrated on nearby parallax distances',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: `${DLAD_SRC} — §8 P76`,
+  },
+]
+
+// ─── phys.em.hall-effect ─────────────────────────────────────────────────────
+const HALL = 'phys.em.hall-effect'
+const HALL_SRC = 'docs/curriculum/blueprints/phys.em.hall-effect.md'
+
+const HALL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: HALL,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Send a current along a flat strip and apply a magnetic field B perpendicular to it. The charge carriers drift along the strip at speed v_d, and the magnetic force qv_d × B pushes them towards one edge. They pile up there, leaving the opposite edge with the opposite charge, and that separation creates an electric field across the strip that pushes back. The pile-up stops as soon as the electric force balances the magnetic force, qE = qv_dB; then a steady Hall voltage stands across the strip. Using I = nqv_dA with A = wt, the Hall voltage is V_H = IB/(nqt), where n is the carrier density and t the thickness. In copper (n = 8.5 × 10²⁸ m⁻³), a strip 0.1 mm thick carrying 5 A in 1.0 T gives only about 3.7 μV, because with so many carriers each drifts very slowly. In a semiconductor with n ≈ 10²² m⁻³, just 10 mA in 0.5 T gives about 31 mV. The sign of the Hall voltage reveals the sign of the carriers: electrons and holes, drifting opposite ways for the same current, are pushed to the same edge, but make it negative or positive, so n-type and p-type samples give opposite Hall voltages. Because V_H ∝ B, semiconductor Hall probes measure magnetic fields in phones, cars and laboratories.',
+    targetedMisconceptions: [`${HALL}:MC-HALL-SIGN-INDEPENDENT-OF-CARRIER`, `${HALL}:MC-MORE-CARRIERS-BIGGER-HALL`],
+    source: `${HALL_SRC} — TA-2 balance and V_H, TA-3 carrier density, TA-4 sign, TA-5 probes`,
+  },
+  {
+    conceptId: HALL,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Copper has vastly more free electrons than a semiconductor, so it seems copper should give the larger Hall voltage. Ask how fast the carriers drift. To carry the same current, I = nqv_dA, a material with ten million times more carriers needs each carrier to move ten million times more slowly. The magnetic force on each carrier, qv_dB, is proportional to that drift speed, so in copper the sideways push — and the field needed to balance it — is tiny. That is why V_H = IB/(nqt) has n in the denominator, and why Hall probes are made from semiconductors: about 3.7 μV from copper against tens of millivolts from a semiconductor. A second trap is to think the Hall voltage has the same sign in every material, since the current and field are the same. Work it out for the carriers. For the same conventional current, electrons drift one way and positive holes drift the other. Reversing both the charge and the velocity leaves qv × B unchanged, so both kinds of carrier are pushed to the same edge — but that edge becomes negative with electrons and positive with holes. The Hall voltage therefore flips sign between n-type and p-type material, which is exactly how it reveals what the carriers are.',
+    targetedMisconceptions: [`${HALL}:MC-HALL-SIGN-INDEPENDENT-OF-CARRIER`, `${HALL}:MC-MORE-CARRIERS-BIGGER-HALL`],
+    source: `${HALL_SRC} — MC-MORE-CARRIERS-BIGGER-HALL + MC-HALL-SIGN-INDEPENDENT-OF-CARRIER, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const HALL_PROBES: SeedProbe[] = [
+  {
+    conceptId: HALL,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A copper strip 0.1 mm thick (n = 8.5 × 10²⁸ m⁻³) carries 5 A in a 1.0 T field perpendicular to it. What is the Hall voltage? (q = 1.6 × 10⁻¹⁹ C)',
+    choices: [
+      { text: 'About 3.7 μV', isCorrect: true },
+      { text: 'About 3.7 mV', isCorrect: false },
+      { text: 'About 31 mV', isCorrect: false },
+      { text: 'Zero — copper has too many carriers for any effect', isCorrect: false },
+    ],
+    correctValue: 'about 3.7 μV',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: `${HALL_SRC} — TA-2 P34 (V_H = IB/(nqt)); 3.7 mV uses t in mm`,
+  },
+  {
+    conceptId: HALL,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A Hall probe reads 12 mV in a 0.4 T field. What field makes it read 30 mV?',
+    choices: [
+      { text: '1.0 T', isCorrect: true },
+      { text: '0.16 T', isCorrect: false },
+      { text: '0.4 T — the reading does not depend on the field', isCorrect: false },
+      { text: '2.5 T', isCorrect: false },
+    ],
+    correctValue: '1.0 T',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [],
+    source: `${HALL_SRC} — TA-5 P34 (V_H ∝ B)`,
+  },
+  {
+    conceptId: HALL,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'The same current and field are applied to a copper strip and to an equally thick semiconductor strip. Which shows the larger Hall voltage?',
+    choices: [
+      { text: 'The semiconductor — with fewer carriers, each drifts faster and feels a larger magnetic force', isCorrect: true },
+      { text: 'Copper — it has more carriers, so more charge piles up', isCorrect: false, misconceptionId: `${HALL}:MC-MORE-CARRIERS-BIGGER-HALL` },
+      { text: 'They are equal — the same current and field give the same Hall voltage', isCorrect: false },
+    ],
+    correctValue: 'the semiconductor',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${HALL}:MC-MORE-CARRIERS-BIGGER-HALL`],
+    source: `${HALL_SRC} — DB-2 golden probe and MC-MORE-CARRIERS-BIGGER-HALL conflict_evidence`,
+  },
+  {
+    conceptId: HALL,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'An n-type and a p-type semiconductor carry current in the same direction in the same magnetic field. Do their Hall voltages have the same sign?',
+    choices: [
+      { text: 'No — opposite: both kinds of carrier gather on the same edge, but electrons make it negative and holes make it positive', isCorrect: true },
+      { text: 'Yes — the same current in the same field always gives the same sign', isCorrect: false, misconceptionId: `${HALL}:MC-HALL-SIGN-INDEPENDENT-OF-CARRIER` },
+      { text: 'Only the n-type sample shows a Hall voltage at all', isCorrect: false },
+    ],
+    correctValue: 'opposite signs',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${HALL}:MC-HALL-SIGN-INDEPENDENT-OF-CARRIER`],
+    source: `${HALL_SRC} — DB-3 sign check and MC-HALL-SIGN-INDEPENDENT-OF-CARRIER conflict_evidence`,
+  },
+  {
+    conceptId: HALL,
+    subjectSlug: 'physics',
+    probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why does the charge on the edge of the strip stop building up?',
+    choices: [
+      { text: 'The piled-up charge creates a transverse electric field whose force balances the magnetic force, qE = qv_dB', isCorrect: true },
+      { text: 'The strip runs out of carriers', isCorrect: false },
+      { text: 'It doesn\'t — the charge keeps growing as long as the current flows', isCorrect: false },
+    ],
+    correctValue: 'electric force balances magnetic force',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: `${HALL_SRC} — TA-2 think-aloud and TA-6 P35`,
+  },
+]
+
 // Batch export spreads for the extension (kept with the concepts above).
 const PHYS_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...DENS_EXPLANATIONS,
@@ -55077,6 +55525,10 @@ const PHYS_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...NINF_EXPLANATIONS,
   ...FLOW_EXPLANATIONS,
   ...CPCV_EXPLANATIONS,
+  ...ESYS_EXPLANATIONS,
+  ...STAR_EXPLANATIONS,
+  ...DLAD_EXPLANATIONS,
+  ...HALL_EXPLANATIONS,
 ]
 
 const PHYS_EXTENSION_PROBES: SeedProbe[] = [
@@ -55111,6 +55563,10 @@ const PHYS_EXTENSION_PROBES: SeedProbe[] = [
   ...NINF_PROBES,
   ...FLOW_PROBES,
   ...CPCV_PROBES,
+  ...ESYS_PROBES,
+  ...STAR_PROBES,
+  ...DLAD_PROBES,
+  ...HALL_PROBES,
 ]
 
 // ─── Batch export ────────────────────────────────────────────────────────────

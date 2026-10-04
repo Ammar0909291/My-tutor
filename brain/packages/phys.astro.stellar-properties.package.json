@@ -1,0 +1,415 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.astro.stellar-properties-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.astro.stellar-properties",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:72131e98e845f52f60810d2de25d5c307127e05240a91cb056f5db9d15f12bab",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.astro.stellar-properties.md": "sha256:b3b86113eb29ecd98e081bd0451da7330d455834e271eca8662b41978213b21f"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.astro.stellar-properties",
+    "name": "Stellar Luminosity, Colour and the HR Diagram",
+    "difficultyRaw": "advanced (4)",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "phys.therm.blackbody-radiation"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.astro.stellar-properties-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.astro.stellar-properties (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.astro.stellar-properties.md": "sha256:b3b86113eb29ecd98e081bd0451da7330d455834e271eca8662b41978213b21f"
+      },
+      "contentHash": "sha256:3f6707db888bea12f258fce3edf716c702fafb7f1d0ba55b35e084837e0546e5",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.astro.stellar-properties.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.astro.stellar-properties.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.astro.stellar-properties"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.astro.stellar-properties\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.astro.stellar-properties.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.astro.stellar-properties.md#TA-2 (addresses MC-RED-STARS-HOTTER)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.astro.stellar-properties"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.astro.stellar-properties\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.astro.stellar-properties.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.astro.stellar-properties.md#TA-3 (addresses MC-APPARENT-IS-LUMINOSITY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.astro.stellar-properties"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.astro.stellar-properties\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.astro.stellar-properties.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.astro.stellar-properties.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.astro.stellar-properties"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.astro.stellar-properties\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.astro.stellar-properties.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.astro.stellar-properties.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.astro.stellar-properties"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.astro.stellar-properties\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.astro.stellar-properties.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.astro.stellar-properties.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.astro.stellar-properties"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.astro.stellar-properties\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.astro.stellar-properties.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.astro.stellar-properties.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.astro.stellar-properties"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.astro.stellar-properties\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.astro.stellar-properties/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "phys.astro.stellar-properties",
+      "title": "Learning Objective",
+      "content": "[Boundary statement]\nA student who achieves mastery demonstrates:\n1. Distinguishes luminosity L (the total power a star emits) from apparent brightness b = L/(4πd²) (the power per square metre reaching us), and uses the Stefan–Boltzmann law L = 4πR²σT⁴: the Sun (R = 6.96 × 10⁸ m, T = 5772 K) has L ≈ 3.8 × 10²⁶ W; a star of the same radius but twice the temperature is 16 times as luminous; a red giant of 3500 K and 100 L☉ must be about 27 times the Sun's radius.\n2. Reads a star's colour as its surface temperature through Wien's law λ_max = 2.898 × 10⁻³ m·K / T: Betelgeuse (≈3500 K) peaks near 830 nm and looks red; the Sun (5772 K) near 500 nm; Rigel (≈12 000 K) near 240 nm and looks blue-white — red stars are the COOLEST.\n3. Uses the magnitude scale (smaller numbers are brighter; 5 magnitudes = a factor of 100 in brightness; absolute magnitude is the apparent magnitude at 10 parsecs) and reads the Hertzsprung–Russell diagram — luminosity against temperature, with temperature increasing to the LEFT — locating the main sequence, the giants (cool but luminous, so large) and the white dwarfs (hot but faint, so small).\n\nA student who thinks a brighter-looking star must emit more power, or that red stars are hotter than blue ones, has **NOT** achieved mastery — those ideas misread every star chart and HR diagram.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.stellar-properties.md",
+        "startLine": 17,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.astro.stellar-properties/misconception/MC-APPARENT-IS-LUMINOSITY",
+      "kind": "misconception",
+      "conceptId": "phys.astro.stellar-properties",
+      "title": "A star that looks brighter must emit more light",
+      "content": "### MC-APPARENT-IS-LUMINOSITY: \"A star that looks brighter must emit more light\"\ntrigger_signal: student equates apparent brightness with luminosity, ignoring distance.\nconflict_evidence [P28]: \"A car's headlights a kilometre away look fainter than a torch in your hand. Does the torch give out more light?\"\nbridge_text [P30]: \"No — the headlights emit far more, but their light is spread over a sphere of radius 1 km. Apparent brightness falls as 1/d²: b = L/(4πd²). Stars are at hugely different distances, so how bright one looks tells you little about its luminosity until you know its distance. Sirius looks brightest of all because it is near (2.6 pc), not because it is the most luminous.\"\nreplacement_text [P31]: \"Luminosity L is a star's total power; apparent brightness b = L/(4πd²) depends on distance too.\"\ndiscrimination_pairs [P33]: [\"luminosity: watts emitted, a property of the star\", \"apparent brightness: watts per m² arriving, depends on L and d\"]\ns6_path: skip P28; compare a phone torch at arm's length and across a room.",
+      "localKey": "MC-APPARENT-IS-LUMINOSITY",
+      "language": "en",
+      "refs": [
+        "MC-APPARENT-IS-LUMINOSITY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.stellar-properties.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.astro.stellar-properties/misconception/MC-RED-STARS-HOTTER",
+      "kind": "misconception",
+      "conceptId": "phys.astro.stellar-properties",
+      "title": "Red stars are the hottest",
+      "content": "### MC-RED-STARS-HOTTER: \"Red stars are the hottest\"\ntrigger_signal: student ranks red stars as hotter than blue ones, carrying over 'red = hot, blue = cold' colour conventions.\nconflict_evidence [P28]: \"Heat a poker: first it glows dull red, then orange, then yellow-white. Which glow means hotter?\"\nbridge_text [P30]: \"White-hot is hotter than red-hot. A hotter body radiates more at shorter wavelengths — Wien's law, λ_max ∝ 1/T. A 3500 K star peaks in the red and infrared; a 12 000 K star peaks in the blue and ultraviolet. Taps label hot red and cold blue by convention, but for glowing bodies it is the other way round.\"\nreplacement_text [P31]: \"Star colour runs red (coolest, ~3000 K) → orange → yellow → white → blue (hottest, >10 000 K).\"\ndiscrimination_pairs [P33]: [\"Betelgeuse, red: ~3500 K, peak ~830 nm\", \"Rigel, blue-white: ~12 000 K, peak ~240 nm\"]\ns6_path: skip P28; look at a dimmed bulb (orange) and a bright one (white).",
+      "localKey": "MC-RED-STARS-HOTTER",
+      "language": "en",
+      "refs": [
+        "MC-RED-STARS-HOTTER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.stellar-properties.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.astro.stellar-properties/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.astro.stellar-properties",
+      "title": "Two Stars in Orion",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Two Stars in Orion\",\"primitives\":[\"P01\",\"P04\",\"P05\",\"P06\",\"P14\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.stellar-properties.md",
+        "startLine": 11,
+        "endLine": 18
+      }
+    },
+    {
+      "assetId": "phys.astro.stellar-properties/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.astro.stellar-properties",
+      "title": "Colour Is Temperature",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Colour Is Temperature\",\"primitives\":[\"P02\",\"P06\",\"P08\",\"P13\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-RED-STARS-HOTTER\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-RED-STARS-HOTTER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.stellar-properties.md",
+        "startLine": 18,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.astro.stellar-properties/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.astro.stellar-properties",
+      "title": "Luminosity vs Brightness",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Luminosity vs Brightness\",\"primitives\":[\"P02\",\"P34\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-APPARENT-IS-LUMINOSITY\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-APPARENT-IS-LUMINOSITY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.stellar-properties.md",
+        "startLine": 27,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "phys.astro.stellar-properties/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.astro.stellar-properties",
+      "title": "Size from L and T",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Size from L and T\",\"primitives\":[\"P02\",\"P34\",\"P49\",\"P50\",\"P51\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.stellar-properties.md",
+        "startLine": 35,
+        "endLine": 41
+      }
+    },
+    {
+      "assetId": "phys.astro.stellar-properties/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.astro.stellar-properties",
+      "title": "Magnitudes and the HR Diagram",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Magnitudes and the HR Diagram\",\"primitives\":[\"P02\",\"P13\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.stellar-properties.md",
+        "startLine": 41,
+        "endLine": 47
+      }
+    },
+    {
+      "assetId": "phys.astro.stellar-properties/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.astro.stellar-properties",
+      "title": "Formative Assessment",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Formative Assessment\",\"primitives\":[\"P02\",\"P35\",\"P49\",\"P51\",\"P55\",\"P79\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.stellar-properties.md",
+        "startLine": 47,
+        "endLine": 54
+      }
+    },
+    {
+      "assetId": "phys.astro.stellar-properties/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.astro.stellar-properties",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P28\",\"P41\",\"P54\",\"P55\",\"P62\",\"P68\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.stellar-properties.md",
+        "startLine": 54,
+        "endLine": 96
+      }
+    },
+    {
+      "assetId": "phys.astro.stellar-properties/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.astro.stellar-properties",
+      "title": "Assessment Battery",
+      "content": "| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (classify) | \"HR regions\" | CORRECT = white dwarf bottom left, giant top right, Sun on main sequence |\n| P74 (classify) | \"Red vs blue — hotter?\" | CORRECT = blue |\n| P75 (boundary) | \"Magnitude −1.5 vs 0.0\" | CORRECT = −1.5 brighter |\n| P76 (transfer) | \"Poker colours\" | CORRECT = hotter → shorter peak wavelength → whiter |\n| P77 (generate) | \"Same L, 4× T\" | CORRECT = radius 1/16 |\n| P78 (explain) | \"Cool but luminous\" | CORRECT = very large radius |\n| P79 (predict) | \"White dwarf size\" | CORRECT = tiny |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.stellar-properties.md",
+        "startLine": 179,
+        "endLine": 191
+      }
+    },
+    {
+      "assetId": "phys.astro.stellar-properties/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.astro.stellar-properties",
+      "title": "Student State Matrix",
+      "content": "| State | Why here | Tell-tale behaviour | Protocol |\n|---|---|---|---|\n| S0 | Stars as identical points | Cannot say what makes one star brighter | Protocol A (Concrete) |\n| S1 | Formulas recited | Writes L = 4πR²σT⁴ but cannot use it to compare stars | Protocol B (Counterexample-first) |\n| S2-APPARENT-IS-LUMINOSITY | Looks brighter = more powerful | \"Sirius looks brightest, so it emits the most\" | Misconception Engine → then Protocol C |\n| S2-RED-STARS-HOTTER | Red = hot | \"Red stars are the hottest — red means hot\" | Misconception Engine → then Protocol C |\n| S3 | Partial — L and colour fine | Cannot read the HR diagram's regions | Protocol C (Guided Questioning) |\n| S6 | Anxiety on powers of ten | Avoids T⁴ and logarithms | Protocol F (Low Pressure) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.stellar-properties.md",
+        "startLine": 27,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "phys.astro.stellar-properties/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.astro.stellar-properties",
+      "title": "Diagnostic Battery",
+      "content": "DB-1 (prior-exposure check):\n\"Two stars look equally bright in the sky. Must they give out the same amount of light?\"\n  \"Yes\" → SIGNAL:MISCONCEPTION:MC-APPARENT-IS-LUMINOSITY. Enter Misconception Engine.\n  \"No — one could be nearer\" → DB-2.\n  No idea → S0. Enter Protocol A (Concrete).\n\nDB-2 (representation / misconception test):\n\"Betelgeuse is red; Rigel is blue-white. Which has the hotter surface?\"\n  \"Rigel — hotter bodies peak at shorter wavelengths (Wien's law)\" → S3. Enter Protocol C.\n  \"Rigel\" (no reason) → S1. Enter Protocol B.\n  \"Betelgeuse — red means hot\" → SIGNAL:MISCONCEPTION:MC-RED-STARS-HOTTER. Enter Misconception Engine.\n  Pause → add S6 flag; Protocol F if anxious, otherwise Protocol A.\n\nDB-3 (magnitude check — overlays):\n\"A star of magnitude 1 and one of magnitude 6: which is brighter, and by how much?\"\n  \"Magnitude 1, by a factor of 100\" → no flag.\n  \"Magnitude 6 — bigger number\" → note; repair at TA-5.\n  Confident and wrong on DB-2 → add S7 flag. Override to Protocol G.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-APPARENT-IS-LUMINOSITY",
+        "MC-RED-STARS-HOTTER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.stellar-properties.md",
+        "startLine": 38,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "phys.astro.stellar-properties/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.astro.stellar-properties",
+      "title": "Prerequisite Check",
+      "content": "PD-1 (for `phys.therm.blackbody-radiation`):\n\"How do a hot body's total radiated power and its peak wavelength change as it gets hotter?\"\n  Cannot say \"power ∝ T⁴; peak shifts to shorter wavelength\" → flag PREREQ-GAP-BLACKBODY.\n  In-session minimum repair: one P06 (blackbody curves at three temperatures) + one P34 (\"T doubles: power?\") then resume. If absent, schedule the missing session (S4 route).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.astro.stellar-properties.md",
+        "startLine": 59,
+        "endLine": 66
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -114,6 +114,7 @@ import { buildGalvanometerScene, buildGeneratorScene, buildHouseholdScene, build
 import { buildThinFilmScene, buildGratingScene, buildResolvingPowerScene, buildConductorScene } from '@/lib/teaching/sceneGenerators/physicsExtensionScenesB6'
 import { buildLcrScene, buildAcPowerScene, buildAlphaScatteringScene, buildNucleusScene } from '@/lib/teaching/sceneGenerators/physicsExtensionScenesB7'
 import { buildFramesScene, buildContinuityScene, buildSpecificHeatsScene } from '@/lib/teaching/sceneGenerators/physicsExtensionScenesB8'
+import { buildEarthMoonSunScene, buildHrDiagramScene, buildDistanceLadderScene, buildHallScene } from '@/lib/teaching/sceneGenerators/physicsExtensionScenesB9'
 import {
   buildDisplacementScene, buildVelocityScene, buildAccelerationScene, buildRelativeMotionScene, buildTensionScene,
   buildConservativeForcesScene, buildAngularMomentumScene, buildAngularMomentumConservationScene,
@@ -592,6 +593,11 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'phys.mech.non-inertial-frames': buildFramesScene,
   'phys.mech.fluid-flow': buildContinuityScene,
   'phys.therm.specific-heats-of-gases': buildSpecificHeatsScene,
+  // Coverage-driven KG extension, batch 9 (2026-10-03). See physicsExtensionScenesB9.ts.
+  'phys.astro.solar-system': buildEarthMoonSunScene,
+  'phys.astro.stellar-properties': buildHrDiagramScene,
+  'phys.astro.distance-ladder': buildDistanceLadderScene,
+  'phys.em.hall-effect': buildHallScene,
   // Batch 15 (2026-09-30): promoted from domain scope. See physicsCoreScenesB15.ts.
   'phys.mech.displacement':           buildDisplacementScene,
   'phys.mech.velocity':               buildVelocityScene,

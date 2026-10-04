@@ -4,10 +4,10 @@
   "status": "production",
   "build_date": "2026-06-29",
   "statistics": {
-    "total_concepts": 269,
+    "total_concepts": 273,
     "total_domains": 12,
-    "total_requires_edges": 337,
-    "total_unlocks_edges": 336,
+    "total_requires_edges": 343,
+    "total_unlocks_edges": 342,
     "total_cross_links": 0
   },
   "domains": [
@@ -39,7 +39,7 @@
     {
       "key": "em",
       "name": "Electromagnetism",
-      "count": 43
+      "count": 44
     },
     {
       "key": "mod",
@@ -64,7 +64,7 @@
     {
       "key": "astro",
       "name": "Astrophysics",
-      "count": 6
+      "count": 9
     },
     {
       "key": "particle",
@@ -1603,7 +1603,8 @@
       "children": [],
       "unlocks": [
         "phys.astro.stellar-structure",
-        "phys.mech.gravitational-field"
+        "phys.mech.gravitational-field",
+        "phys.astro.solar-system"
       ]
     },
     {
@@ -2452,7 +2453,9 @@
         "NCERT Physics Class 11 Ch.11"
       ],
       "children": [],
-      "unlocks": []
+      "unlocks": [
+        "phys.astro.stellar-properties"
+      ]
     },
     {
       "id": "phys.therm.energy-resources",
@@ -3374,7 +3377,9 @@
         "NCERT Physics Class 11 Ch.15"
       ],
       "children": [],
-      "unlocks": []
+      "unlocks": [
+        "phys.astro.distance-ladder"
+      ]
     },
     {
       "id": "phys.wave.beats",
@@ -3425,7 +3430,9 @@
         "NCERT Science Class 7"
       ],
       "children": [],
-      "unlocks": []
+      "unlocks": [
+        "phys.astro.solar-system"
+      ]
     },
     {
       "id": "phys.opt.nature-of-light",
@@ -4707,8 +4714,36 @@
       "unlocks": [
         "phys.em.biot-savart",
         "phys.em.moving-coil-galvanometer",
-        "phys.em.motors-and-generators"
+        "phys.em.motors-and-generators",
+        "phys.em.hall-effect"
       ]
+    },
+    {
+      "id": "phys.em.hall-effect",
+      "name": "The Hall Effect",
+      "aliases": [
+        "Hall voltage",
+        "Hall probe",
+        "charge carrier sign"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.em.magnetic-force"
+      ],
+      "related": [
+        "phys.mod.extrinsic-semiconductors"
+      ],
+      "cross_links": [],
+      "description": "When current flows through a conductor in a perpendicular magnetic field, the magnetic force pushes the carriers to one side until a transverse Hall voltage V_H = IB/(nqt) balances it; its sign reveals whether the carriers are negative or positive and its size their density, and Hall probes use it to measure magnetic fields.",
+      "difficulty": "advanced",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Halliday Resnick Ch.28"
+      ],
+      "children": [],
+      "unlocks": []
     },
     {
       "id": "phys.em.moving-coil-galvanometer",
@@ -6926,6 +6961,98 @@
       "references": [
         "Newman & Barkema Monte Carlo Methods in Statistical Physics Ch.1-4",
         "Pathria Statistical Mechanics Ch.16"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.astro.solar-system",
+      "name": "The Earth-Moon-Sun System: Seasons, Phases, Eclipses and Tides",
+      "aliases": [
+        "seasons",
+        "phases of the moon",
+        "eclipses",
+        "tides"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.universal-gravitation",
+        "phys.opt.rectilinear-propagation"
+      ],
+      "related": [
+        "phys.mech.keplers-laws"
+      ],
+      "cross_links": [],
+      "description": "Seasons come from the tilt of Earth's axis (23.4 degrees), which changes the Sun's noon height and day length, not from Earth's distance to the Sun; the Moon's phases are the changing view of its sunlit half; eclipses occur when Sun, Earth and Moon line up at new or full moon; tides come from the difference in the Moon's (and Sun's) gravity across the Earth, raising two bulges.",
+      "difficulty": "foundational",
+      "estimated_hours": 2,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "NCERT Science Class 8",
+        "Halliday Resnick Ch.13"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.astro.stellar-properties",
+      "name": "Stellar Luminosity, Colour and the HR Diagram",
+      "aliases": [
+        "stellar luminosity",
+        "star brightness",
+        "Hertzsprung-Russell diagram",
+        "star colour and temperature"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.therm.blackbody-radiation"
+      ],
+      "related": [
+        "phys.astro.stellar-evolution"
+      ],
+      "cross_links": [],
+      "description": "A star's luminosity L = 4 pi R^2 sigma T^4 is set by its radius and surface temperature, its colour by Wien's law, and its apparent brightness by L/(4 pi d^2); magnitudes run backwards (5 magnitudes = 100 times fainter), and plotting luminosity against temperature on the HR diagram separates main-sequence stars, giants and white dwarfs.",
+      "difficulty": "advanced",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Halliday Resnick Ch.44",
+        "IB Physics Option D"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.astro.distance-ladder"
+      ]
+    },
+    {
+      "id": "phys.astro.distance-ladder",
+      "name": "Parallax, Standard Candles and Hubble's Law",
+      "aliases": [
+        "stellar parallax",
+        "parsec",
+        "standard candle",
+        "Hubble law",
+        "redshift"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.astro.stellar-properties",
+        "phys.wave.doppler-effect"
+      ],
+      "related": [
+        "phys.astro.cosmology"
+      ],
+      "cross_links": [],
+      "description": "Astronomical distances are built up in steps: parallax gives nearby stars directly (d in parsecs = 1/p in arcseconds); standard candles of known luminosity (Cepheids, type Ia supernovae) give farther distances from the inverse-square law; and for distant galaxies Hubble's law v = H0 d links redshift to distance.",
+      "difficulty": "advanced",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "IB Physics Option D",
+        "Halliday Resnick Ch.44"
       ],
       "children": [],
       "unlocks": []
