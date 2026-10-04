@@ -201,6 +201,17 @@ rows (one per turn; not served), including from these QA sessions.
   descriptions rewritten as sentences, same content (0 physics descriptions now fail
   `readsAsProse`).
 
+### Owner-account experience run (2026-10-04)
+
+Two extended-physics lessons driven on an owner-supplied real account (credentials passed as
+environment variables only), with natural learner turns (`QA_FULL=1` prints whole replies):
+`phys.mod.lasers` (verified mastery, 11 turns) and `phys.astro.solar-system` (verified mastery,
+9 turns). Figures and figure references were accurate; authored probes graded correctly.
+Defects seen in model-generated prose (not authored content): the lasers "real example" said a
+5 mW He–Ne gives ~3 × 10¹⁵ photons/s (correct 1.6 × 10¹⁶; 3.2 × 10¹⁵ is for 1 mW) and that a
+1 W torch emits "~10⁹ times more photons" (power ratio is 200×); the wrong-answer note
+mis-described the 0.51 eV slip as "squaring" (it is 632.8/1240, the ratio inverted).
+
 ## Next
 
 Physics KG is at 283 and the coverage audit is done. Only the electronics nodes

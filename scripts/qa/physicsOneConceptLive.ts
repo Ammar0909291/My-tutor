@@ -17,6 +17,7 @@
  *
  *   QA_EMAIL=… QA_PASSWORD=… npx tsx scripts/qa/physicsOneConceptLive.ts
  *   QA_DISPOSABLE=1 npx tsx scripts/qa/physicsOneConceptLive.ts   # throwaway qa-* account, deleted at the end
+ *   QA_FULL=1 …                                                   # print whole tutor replies, not 160-char heads
  */
 import { readdirSync } from 'fs'
 import path from 'path'
@@ -27,7 +28,8 @@ import { stripAuthoringLabel } from '../../src/lib/teaching/gateProbeContract'
 
 type SeedProbe = { conceptId: string; subjectSlug: string; stem: string; choices?: { text: string; isCorrect?: boolean }[] }
 const norm = (s: string) => s.toLowerCase().replace(/\s+/g, ' ').trim()
-const short = (s: string | undefined, n = 160) => (s ?? '').replace(/\s+/g, ' ').slice(0, n)
+const FULL = process.env.QA_FULL === '1' // print whole tutor replies (for experience reviews)
+const short = (s: string | undefined, n = 160) => (s ?? '').replace(/\s+/g, ' ').slice(0, FULL ? undefined : n)
 
 async function physicsProbes(): Promise<Map<string, SeedProbe>> {
   const dir = path.resolve(__dirname, '../../src/lib/teaching/assets')
