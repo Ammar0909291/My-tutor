@@ -110,6 +110,7 @@ import { buildDensityScene, buildVernierScene, buildMassWeightScene, buildRectil
 import { buildExperimentalGraphScene, buildSimpleMachineScene, buildVariationOfGScene, buildTerminalVelocityScene } from '@/lib/teaching/sceneGenerators/physicsExtensionScenesB2'
 import { buildCoolingScene, buildBlackbodyScene, buildEnergyResourcesScene, buildEchoScene } from '@/lib/teaching/sceneGenerators/physicsExtensionScenesB3'
 import { buildHumanEyeScene, buildScatteringScene, buildSystemEnergyScene, buildCellsScene } from '@/lib/teaching/sceneGenerators/physicsExtensionScenesB4'
+import { buildGalvanometerScene, buildGeneratorScene, buildHouseholdScene, buildAtwoodScene } from '@/lib/teaching/sceneGenerators/physicsExtensionScenesB5'
 import {
   buildDisplacementScene, buildVelocityScene, buildAccelerationScene, buildRelativeMotionScene, buildTensionScene,
   buildConservativeForcesScene, buildAngularMomentumScene, buildAngularMomentumConservationScene,
@@ -569,6 +570,11 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'phys.opt.scattering-of-light': buildScatteringScene,
   'phys.em.electrostatic-potential-energy': buildSystemEnergyScene,
   'phys.em.cells-combination': buildCellsScene,
+  // Coverage-driven KG extension, batch 5 (2026-10-03). See physicsExtensionScenesB5.ts.
+  'phys.em.moving-coil-galvanometer': buildGalvanometerScene,
+  'phys.em.motors-and-generators': buildGeneratorScene,
+  'phys.em.domestic-electricity': buildHouseholdScene,
+  'phys.mech.constraint-motion': buildAtwoodScene,
   // Batch 15 (2026-09-30): promoted from domain scope. See physicsCoreScenesB15.ts.
   'phys.mech.displacement':           buildDisplacementScene,
   'phys.mech.velocity':               buildVelocityScene,

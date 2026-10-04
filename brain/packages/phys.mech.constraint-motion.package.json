@@ -1,0 +1,415 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mech.constraint-motion-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mech.constraint-motion",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:abbec2e63371c10ba6cc0f51cd7ebf9a1c7131d1da4183f6c2915f98be6fe83a",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mech.constraint-motion.md": "sha256:339fd539042a7ca20019a0c5ff03cc49c31d40a5427ae16810def41bcf64ed0c"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.mech.constraint-motion",
+    "name": "Connected Bodies, Pulleys and Constraint Relations",
+    "difficultyRaw": "proficient (3)",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "phys.mech.tension"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mech.constraint-motion-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mech.constraint-motion (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mech.constraint-motion.md": "sha256:339fd539042a7ca20019a0c5ff03cc49c31d40a5427ae16810def41bcf64ed0c"
+      },
+      "contentHash": "sha256:be88f4d39ca61f176a537f9329790e25fffd2b7edd24f8d7784bad39facaa0e3",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mech.constraint-motion.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.constraint-motion.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.constraint-motion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.constraint-motion\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.constraint-motion.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.constraint-motion.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.constraint-motion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.constraint-motion\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.constraint-motion.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.constraint-motion.md#TA-3 (addresses MC-TENSION-EQUALS-WEIGHT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.constraint-motion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.constraint-motion\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.constraint-motion.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.constraint-motion.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.constraint-motion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.constraint-motion\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.constraint-motion.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.constraint-motion.md#TA-5 (addresses MC-MOVABLE-PULLEY-SAME-A)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.constraint-motion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.constraint-motion\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.constraint-motion.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.constraint-motion.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.constraint-motion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.constraint-motion\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mech.constraint-motion.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mech.constraint-motion.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mech.constraint-motion"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mech.constraint-motion\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mech.constraint-motion/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "phys.mech.constraint-motion",
+      "title": "Learning Objective",
+      "content": "[Boundary statement]\nA student who achieves mastery demonstrates:\n1. Solves connected-body problems by drawing a free-body diagram for EACH body, writing Newton's second law for each, and adding the constraint that an inextensible string makes the connected bodies move with the same magnitude of acceleration — e.g. an Atwood machine with 3 kg and 2 kg: a = (m₁ − m₂)g / (m₁ + m₂) = 9.8/5 = 1.96 m/s², T = 2m₁m₂g / (m₁ + m₂) = 23.52 N.\n2. Explains why the tension lies BETWEEN the two weights (19.6 N < 23.52 N < 29.4 N): it is less than the heavier weight (that mass accelerates down) and more than the lighter weight (that mass accelerates up).\n3. Writes constraint relations for movable pulleys from string length — a block hanging from a movable pulley moves half as far, and has half the acceleration, of the free end of the string: x_block = x_end / 2, a_block = a_end / 2.\n\nA student who sets the tension equal to one of the weights, or gives the block on a movable pulley the same acceleration as the rope's end, has **NOT** achieved mastery — those two errors account for most wrong answers in pulley and connected-body problems.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.constraint-motion.md",
+        "startLine": 17,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.mech.constraint-motion/misconception/MC-TENSION-EQUALS-WEIGHT",
+      "kind": "misconception",
+      "conceptId": "phys.mech.constraint-motion",
+      "title": "The string tension equals the weight of one of the masses",
+      "content": "### MC-TENSION-EQUALS-WEIGHT: \"The string tension equals the weight of one of the masses\"\ntrigger_signal: student sets T = m₁g or m₂g in a system that is accelerating.\nconflict_evidence [P28]: \"Suppose T = 29.4 N, the 3 kg mass's weight. What is the net force on the 3 kg mass then? And on the 2 kg mass?\"\nbridge_text [P30]: \"On the 3 kg mass the net force would be zero — it couldn't accelerate down — while the 2 kg mass would have a 9.8 N net upward force. That can't be: they are tied together. The tension must be less than 29.4 N (so the 3 kg accelerates down) and more than 19.6 N (so the 2 kg accelerates up).\"\nreplacement_text [P31]: \"Write F = ma for each body separately with the same T and the same magnitude of a; solve together. Tension equals a weight only when that body is not accelerating.\"\ndiscrimination_pairs [P33]: [\"masses held still (T = weight) vs released Atwood machine (19.6 N < T < 29.4 N)\", \"equal masses moving at constant speed (T = mg) vs unequal masses (T between the weights)\"]\ns6_path: skip P28; draw both free-body diagrams with arrow lengths, and compare the up-arrow with each down-arrow.",
+      "localKey": "MC-TENSION-EQUALS-WEIGHT",
+      "language": "en",
+      "refs": [
+        "MC-TENSION-EQUALS-WEIGHT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.constraint-motion.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.mech.constraint-motion/misconception/MC-MOVABLE-PULLEY-SAME-A",
+      "kind": "misconception",
+      "conceptId": "phys.mech.constraint-motion",
+      "title": "A block on a movable pulley moves as far, and as fast, as the rope's end",
+      "content": "### MC-MOVABLE-PULLEY-SAME-A: \"A block on a movable pulley moves as far, and as fast, as the rope's end\"\ntrigger_signal: student uses the same displacement or acceleration for the block and the free end of the string.\nconflict_evidence [P28]: \"Two strands hold the movable pulley. Pull 2 m of string out at the top. If the block also rose 2 m, both strands would be 2 m shorter — 4 m of string removed. Where would the extra 2 m come from?\"\nbridge_text [P30]: \"Nowhere — the string's length is fixed. Pulling out 2 m shortens the two strands by 2 m in total, 1 m each, so the block rises 1 m. Positions, velocities and accelerations are all related the same way: the block's is half the free end's.\"\nreplacement_text [P31]: \"Constraint relations come from constant string length: write the total length in terms of positions, then differentiate. Movable pulley: x_block = x_end/2, a_block = a_end/2.\"\ndiscrimination_pairs [P33]: [\"fixed pulley: both ends move the same distance\", \"movable pulley with two supporting strands: block moves half the distance of the free end\"]\ns6_path: skip P28; use a real string and a movable pulley (or a loop of string round a pencil) and measure.",
+      "localKey": "MC-MOVABLE-PULLEY-SAME-A",
+      "language": "en",
+      "refs": [
+        "MC-MOVABLE-PULLEY-SAME-A"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.constraint-motion.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.mech.constraint-motion/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.constraint-motion",
+      "title": "Two Masses, One String",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Two Masses, One String\",\"primitives\":[\"P01\",\"P04\",\"P05\",\"P06\",\"P14\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.constraint-motion.md",
+        "startLine": 11,
+        "endLine": 18
+      }
+    },
+    {
+      "assetId": "phys.mech.constraint-motion/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.constraint-motion",
+      "title": "One Diagram per Body",
+      "content": "{\"id\":\"TA-2\",\"title\":\"One Diagram per Body\",\"primitives\":[\"P02\",\"P06\",\"P07\",\"P08\",\"P13\",\"P34\",\"P49\",\"P50\",\"P51\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.constraint-motion.md",
+        "startLine": 18,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "phys.mech.constraint-motion/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.constraint-motion",
+      "title": "Where the Tension Lies",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Where the Tension Lies\",\"primitives\":[\"P02\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-TENSION-EQUALS-WEIGHT\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-TENSION-EQUALS-WEIGHT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.constraint-motion.md",
+        "startLine": 28,
+        "endLine": 34
+      }
+    },
+    {
+      "assetId": "phys.mech.constraint-motion/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.constraint-motion",
+      "title": "A Block on a Table",
+      "content": "{\"id\":\"TA-4\",\"title\":\"A Block on a Table\",\"primitives\":[\"P02\",\"P07\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.constraint-motion.md",
+        "startLine": 34,
+        "endLine": 40
+      }
+    },
+    {
+      "assetId": "phys.mech.constraint-motion/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.constraint-motion",
+      "title": "The Movable Pulley Constraint",
+      "content": "{\"id\":\"TA-5\",\"title\":\"The Movable Pulley Constraint\",\"primitives\":[\"P02\",\"P07\",\"P13\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-MOVABLE-PULLEY-SAME-A\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-MOVABLE-PULLEY-SAME-A"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.constraint-motion.md",
+        "startLine": 40,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "phys.mech.constraint-motion/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.constraint-motion",
+      "title": "Formative Assessment",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Formative Assessment\",\"primitives\":[\"P02\",\"P35\",\"P49\",\"P51\",\"P55\",\"P79\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.constraint-motion.md",
+        "startLine": 48,
+        "endLine": 55
+      }
+    },
+    {
+      "assetId": "phys.mech.constraint-motion/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mech.constraint-motion",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P28\",\"P41\",\"P54\",\"P55\",\"P62\",\"P68\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.constraint-motion.md",
+        "startLine": 55,
+        "endLine": 97
+      }
+    },
+    {
+      "assetId": "phys.mech.constraint-motion/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mech.constraint-motion",
+      "title": "Assessment Battery",
+      "content": "| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (classify) | \"Movable pulley: same, half or double acceleration?\" | CORRECT = half |\n| P74 (classify) | \"Atwood T: equal to a weight or between?\" | CORRECT = between |\n| P75 (boundary) | \"Equal masses moving at 1 m/s\" | CORRECT = continue at constant speed (a = 0) |\n| P76 (transfer) | \"800 kg lift, 600 kg counterweight\" | CORRECT = a = 200 × 9.8/1400 = 1.4 m/s² |\n| P77 (generate) | \"Atwood with a = g/3\" | CORRECT = m₁ = 2m₂ (e.g. 2 kg and 1 kg) |\n| P78 (explain) | \"Why one equation per body?\" | CORRECT = each body has its own net force; the string links them |\n| P79 (predict) | \"Nearly equal masses\" | CORRECT = a → 0, T → mg |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.constraint-motion.md",
+        "startLine": 179,
+        "endLine": 191
+      }
+    },
+    {
+      "assetId": "phys.mech.constraint-motion/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.constraint-motion",
+      "title": "Student State Matrix",
+      "content": "| State | Why here | Tell-tale behaviour | Protocol |\n|---|---|---|---|\n| S0 | Single bodies only | Cannot set up two bodies at once | Protocol A (Concrete) |\n| S1 | Formula recited | Quotes the Atwood formula but cannot derive or adapt it | Protocol B (Counterexample-first) |\n| S2-TENSION-EQUALS-WEIGHT | Tension taken as a weight | \"T = m₁g\" (or m₂g) in an accelerating system | Misconception Engine → then Protocol C |\n| S2-MOVABLE-PULLEY-SAME-A | Constraint ignored | Block on a movable pulley given the rope end's acceleration | Misconception Engine → then Protocol C |\n| S3 | Partial — fixed pulleys fine, movable pulleys not | Correct Atwood, wrong movable-pulley relation | Protocol C (Guided Questioning) |\n| S6 | Anxiety on simultaneous equations | Freezes with two unknowns | Protocol F (Low Pressure) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.constraint-motion.md",
+        "startLine": 27,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "phys.mech.constraint-motion/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.constraint-motion",
+      "title": "Diagnostic Battery",
+      "content": "DB-1 (prior-exposure check):\n\"Have you solved a problem with two blocks joined by a string?\"\n  No → S0. Enter Protocol A (Concrete).\n  Yes → DB-2.\n\nDB-2 (representation / misconception test):\n\"A 3 kg and a 2 kg mass hang over a frictionless pulley and are released. Is the tension in the string 29.4 N, 19.6 N, or something in between? Why?\"\n  \"In between — the heavier mass accelerates down so T < 29.4 N; the lighter accelerates up so T > 19.6 N\" → S3. Enter Protocol C.\n  \"In between\" (no reason) → S1. Enter Protocol B.\n  \"29.4 N\" or \"19.6 N\" → SIGNAL:MISCONCEPTION:MC-TENSION-EQUALS-WEIGHT. Enter Misconception Engine.\n  Pause → add S6 flag; Protocol F if anxious, otherwise Protocol A.\n\nDB-3 (movable-pulley check — overlays):\n\"A block hangs from a movable pulley; one end of the string is fixed to the ceiling and you pull the other end up 2 m. How far does the block rise?\"\n  \"1 m — both strand lengths share the change\" → no flag.\n  \"2 m\" → add SIGNAL:MISCONCEPTION:MC-MOVABLE-PULLEY-SAME-A (repair at TA-5).\n  Confident and wrong on DB-2 → add S7 flag. Override to Protocol G.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-TENSION-EQUALS-WEIGHT",
+        "MC-MOVABLE-PULLEY-SAME-A"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.constraint-motion.md",
+        "startLine": 38,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "phys.mech.constraint-motion/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mech.constraint-motion",
+      "title": "Prerequisite Check",
+      "content": "PD-1 (for `phys.mech.tension`, and through it free-body diagrams and F = ma):\n\"A 2 kg mass hangs from a string and is pulled up with an acceleration of 1 m/s². What is the tension?\"\n  Cannot write T − mg = ma → T = 21.6 N → flag PREREQ-GAP-TENSION.\n  In-session minimum repair: one P07 (free-body diagram of the hanging mass) + one P34 (\"net force up = ?\") then resume. If tension or F = ma for one body is absent, schedule a `phys.mech.tension` session (S4 route).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mech.constraint-motion.md",
+        "startLine": 58,
+        "endLine": 65
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

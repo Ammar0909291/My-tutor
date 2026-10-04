@@ -1,0 +1,416 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.em.motors-and-generators-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.em.motors-and-generators",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:df82a3e730040b00ae03453c1ef43b159b302ad060613406e1d8ec596e9d59ba",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.em.motors-and-generators.md": "sha256:2713ddb3881d3d809b8f29507fd84837cba0a952ec42e4ceb848282ab0eb1908"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.em.motors-and-generators",
+    "name": "Electric Motor and Generator",
+    "difficultyRaw": "developing (2)",
+    "bloom": "understand",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "phys.em.magnetic-force",
+      "phys.em.faradays-law"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.em.motors-and-generators-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.em.motors-and-generators (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.em.motors-and-generators.md": "sha256:2713ddb3881d3d809b8f29507fd84837cba0a952ec42e4ceb848282ab0eb1908"
+      },
+      "contentHash": "sha256:2d436225ab1f23ad5a7643798c167e1fcdf4213c4bc089c71c80e68308fe69a7",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.em.motors-and-generators.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.motors-and-generators.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.motors-and-generators"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.motors-and-generators\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.motors-and-generators.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.motors-and-generators.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.motors-and-generators"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.motors-and-generators\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.motors-and-generators.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.motors-and-generators.md#TA-3 (addresses MC-NO-COMMUTATOR-NEEDED)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.motors-and-generators"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.motors-and-generators\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.motors-and-generators.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.motors-and-generators.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.motors-and-generators"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.motors-and-generators\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.motors-and-generators.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.motors-and-generators.md#TA-5 (addresses MC-GENERATOR-CREATES-ENERGY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.motors-and-generators"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.motors-and-generators\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.motors-and-generators.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.motors-and-generators.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.motors-and-generators"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.motors-and-generators\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.motors-and-generators.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.motors-and-generators.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.motors-and-generators"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.motors-and-generators\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.em.motors-and-generators/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "phys.em.motors-and-generators",
+      "title": "Learning Objective",
+      "content": "[Boundary statement]\nA student who achieves mastery demonstrates:\n1. Explains a DC motor: a current-carrying coil in a magnetic field feels forces that turn it (electrical → kinetic energy), and the split-ring commutator reverses the current every half turn so the coil keeps turning the same way.\n2. Explains a generator: turning a coil in a magnetic field changes the magnetic flux through it, which induces an emf (kinetic → electrical energy); slip rings give alternating current (AC generator), a commutator gives a one-direction pulsating output (DC dynamo). The peak emf of a coil of N turns, area A, rotating at angular speed ω in field B is NABω — e.g. 100 turns, 0.01 m², 0.5 T, ω = 100 rad/s: 50 V.\n3. Recognises the motor and generator as the same machine run in opposite directions, distinguishing which law applies: the force on a current (motor) versus electromagnetic induction (generator).\n\nA student who says \"a generator creates electricity from nothing\", or that a motor's coil keeps turning without the commutator, has **NOT** achieved mastery — those break energy conservation and the reason AC and DC machines differ.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.motors-and-generators.md",
+        "startLine": 17,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.em.motors-and-generators/misconception/MC-GENERATOR-CREATES-ENERGY",
+      "kind": "misconception",
+      "conceptId": "phys.em.motors-and-generators",
+      "title": "A generator creates electrical energy",
+      "content": "### MC-GENERATOR-CREATES-ENERGY: \"A generator creates electrical energy\"\ntrigger_signal: student says a generator \"makes\" electricity with no extra effort, or that turning it is equally easy whatever it powers.\nconflict_evidence [P28]: \"Connect the generator's output to a motor that turns the generator's own shaft. If generators created energy, it would run forever and light a lamp too. Does that ever work?\"\nbridge_text [P30]: \"Never. The current induced in the coil feels a force in the magnetic field that opposes the turning — Lenz's law. The more current you draw, the harder you must push. All the electrical energy comes from the work done turning the shaft, minus losses.\"\nreplacement_text [P31]: \"A generator converts kinetic energy to electrical energy; a motor converts electrical energy to kinetic energy. Neither creates energy, and both lose some as heat.\"\ndiscrimination_pairs [P33]: [\"generator with no load (easy to turn, no current) vs lighting a lamp (harder to turn)\", \"dynamo on a bicycle: pedalling is harder with the light on\"]\ns6_path: skip P28; turn a hand-cranked generator with the lamp disconnected and then connected, and feel the difference.",
+      "localKey": "MC-GENERATOR-CREATES-ENERGY",
+      "language": "en",
+      "refs": [
+        "MC-GENERATOR-CREATES-ENERGY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.motors-and-generators.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.em.motors-and-generators/misconception/MC-NO-COMMUTATOR-NEEDED",
+      "kind": "misconception",
+      "conceptId": "phys.em.motors-and-generators",
+      "title": "Once current flows, the motor coil just keeps turning",
+      "content": "### MC-NO-COMMUTATOR-NEEDED: \"Once current flows, the motor coil just keeps turning\"\ntrigger_signal: student ignores the reversal of torque after half a turn, or cannot say what the split ring does.\nconflict_evidence [P28]: \"After half a turn, the side of the coil that was near the N pole is near the S pole. If its current had not reversed, which way would the force on it push now?\"\nbridge_text [P30]: \"Backwards — the torque would reverse and the coil would rock back and settle. The split-ring commutator swaps the connections every half turn, so the current in the coil reverses exactly when needed and the torque keeps turning it the same way.\"\nreplacement_text [P31]: \"DC motor: split-ring commutator reverses the coil current every half turn. AC generator: slip rings keep each end connected to the same output terminal, giving alternating current.\"\ndiscrimination_pairs [P33]: [\"split ring (motor keeps turning; dynamo gives one-direction output) vs slip rings (AC output)\", \"coil without commutator: rocks to rest vs with commutator: continuous rotation\"]\ns6_path: skip P28; turn a paper model coil by hand through half a turn and redraw the force arrows with and without swapping the current.",
+      "localKey": "MC-NO-COMMUTATOR-NEEDED",
+      "language": "en",
+      "refs": [
+        "MC-NO-COMMUTATOR-NEEDED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.motors-and-generators.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.em.motors-and-generators/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.motors-and-generators",
+      "title": "The Coil Between the Poles",
+      "content": "{\"id\":\"TA-1\",\"title\":\"The Coil Between the Poles\",\"primitives\":[\"P01\",\"P04\",\"P05\",\"P06\",\"P14\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.motors-and-generators.md",
+        "startLine": 11,
+        "endLine": 18
+      }
+    },
+    {
+      "assetId": "phys.em.motors-and-generators/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.motors-and-generators",
+      "title": "The Motor",
+      "content": "{\"id\":\"TA-2\",\"title\":\"The Motor\",\"primitives\":[\"P02\",\"P13\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.motors-and-generators.md",
+        "startLine": 18,
+        "endLine": 24
+      }
+    },
+    {
+      "assetId": "phys.em.motors-and-generators/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.motors-and-generators",
+      "title": "Why the Split Ring",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Why the Split Ring\",\"primitives\":[\"P02\",\"P13\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-NO-COMMUTATOR-NEEDED\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-NO-COMMUTATOR-NEEDED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.motors-and-generators.md",
+        "startLine": 24,
+        "endLine": 31
+      }
+    },
+    {
+      "assetId": "phys.em.motors-and-generators/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.motors-and-generators",
+      "title": "The Generator",
+      "content": "{\"id\":\"TA-4\",\"title\":\"The Generator\",\"primitives\":[\"P02\",\"P06\",\"P08\",\"P13\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.motors-and-generators.md",
+        "startLine": 31,
+        "endLine": 40
+      }
+    },
+    {
+      "assetId": "phys.em.motors-and-generators/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.motors-and-generators",
+      "title": "No Free Energy",
+      "content": "{\"id\":\"TA-5\",\"title\":\"No Free Energy\",\"primitives\":[\"P02\",\"P13\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-GENERATOR-CREATES-ENERGY\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-GENERATOR-CREATES-ENERGY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.motors-and-generators.md",
+        "startLine": 40,
+        "endLine": 47
+      }
+    },
+    {
+      "assetId": "phys.em.motors-and-generators/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.motors-and-generators",
+      "title": "Formative Assessment",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Formative Assessment\",\"primitives\":[\"P02\",\"P35\",\"P49\",\"P51\",\"P55\",\"P79\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.motors-and-generators.md",
+        "startLine": 47,
+        "endLine": 54
+      }
+    },
+    {
+      "assetId": "phys.em.motors-and-generators/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.motors-and-generators",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P28\",\"P41\",\"P54\",\"P55\",\"P62\",\"P68\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.motors-and-generators.md",
+        "startLine": 54,
+        "endLine": 96
+      }
+    },
+    {
+      "assetId": "phys.em.motors-and-generators/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.em.motors-and-generators",
+      "title": "Assessment Battery",
+      "content": "| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (classify) | \"Slip rings vs split ring\" | CORRECT = slip rings → AC; split ring keeps a DC motor turning |\n| P74 (classify) | \"Motor: which law? Generator: which law?\" | CORRECT = force on a current; electromagnetic induction |\n| P75 (boundary) | \"Generator with no load — hard to turn?\" | CORRECT = easy; no current, no opposing force (only friction) |\n| P76 (transfer) | \"Regenerative braking\" | CORRECT = kinetic energy → electrical energy stored in the battery |\n| P77 (generate) | \"Double peak emf without spinning faster\" | CORRECT = double N, A or B |\n| P78 (explain) | \"Why harder to turn with more current?\" | CORRECT = induced current feels an opposing force (Lenz) |\n| P79 (predict) | \"Double turning speed\" | CORRECT = peak emf and frequency both double |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.motors-and-generators.md",
+        "startLine": 178,
+        "endLine": 190
+      }
+    },
+    {
+      "assetId": "phys.em.motors-and-generators/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.em.motors-and-generators",
+      "title": "Student State Matrix",
+      "content": "| State | Why here | Tell-tale behaviour | Protocol |\n|---|---|---|---|\n| S0 | Machines as black boxes | Cannot say what is inside a fan motor | Protocol A (Concrete) |\n| S1 | Parts named, roles missing | Names commutator and slip rings but cannot say what each does | Protocol B (Counterexample-first) |\n| S2-GENERATOR-CREATES-ENERGY | Energy from nothing | \"The generator makes electricity; you don't need to push harder\" | Misconception Engine → then Protocol C |\n| S2-NO-COMMUTATOR-NEEDED | Torque direction ignored | \"The coil just keeps spinning once the current is on\" | Misconception Engine → then Protocol C |\n| S3 | Partial — motor fine, generator not (or reverse) | Explains the motor, not induction | Protocol C (Guided Questioning) |\n| S6 | Anxiety on flux and ω | Avoids the emf formula | Protocol F (Low Pressure) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.motors-and-generators.md",
+        "startLine": 27,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "phys.em.motors-and-generators/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.em.motors-and-generators",
+      "title": "Diagnostic Battery",
+      "content": "DB-1 (prior-exposure check):\n\"Have you seen inside a toy motor, or a bicycle dynamo?\"\n  No → S0. Enter Protocol A (Concrete).\n  Yes → DB-2.\n\nDB-2 (representation / misconception test):\n\"A generator lights a lamp. When the lamp is switched on, does turning the generator get harder, easier, or stay the same? Why?\"\n  \"Harder — the electrical energy must come from the work you do turning it\" → S3. Enter Protocol C.\n  \"Harder\" (no reason) → S1. Enter Protocol B.\n  \"The same — the generator makes the electricity\" → SIGNAL:MISCONCEPTION:MC-GENERATOR-CREATES-ENERGY. Enter Misconception Engine.\n  Pause → add S6 flag; Protocol F if anxious, otherwise Protocol A.\n\nDB-3 (commutator check — overlays):\n\"In a DC motor, what would happen after half a turn if the current in the coil never reversed?\"\n  \"The forces would turn it back; it would rock and stop\" → no flag.\n  \"It would keep spinning\" → add SIGNAL:MISCONCEPTION:MC-NO-COMMUTATOR-NEEDED (repair at TA-3).\n  Confident and wrong on DB-2 → add S7 flag. Override to Protocol G.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-GENERATOR-CREATES-ENERGY",
+        "MC-NO-COMMUTATOR-NEEDED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.motors-and-generators.md",
+        "startLine": 38,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "phys.em.motors-and-generators/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.em.motors-and-generators",
+      "title": "Prerequisite Check",
+      "content": "PD-1 (for `phys.em.magnetic-force` and `phys.em.faradays-law`):\n\"What happens to a current-carrying wire across a magnetic field? And what induces an emf in a coil?\"\n  Cannot say \"a force, F = BIL\" and \"a changing magnetic flux\" → flag PREREQ-GAP-FORCE-INDUCTION.\n  In-session minimum repair: one P06 (a wire jumping between magnet poles when a current flows; a magnet pushed into a coil deflecting a meter) + one P34 (\"which one turns electricity into motion, which motion into electricity?\") then resume. If either is absent, schedule the missing session (S4 route).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.motors-and-generators.md",
+        "startLine": 58,
+        "endLine": 65
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

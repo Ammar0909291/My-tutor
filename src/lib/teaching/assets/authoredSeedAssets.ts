@@ -53364,6 +53364,454 @@ const CELL_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.em.moving-coil-galvanometer ────────────────────────────────────────
+const GALV = 'phys.em.moving-coil-galvanometer'
+const GALV_SRC = 'docs/curriculum/blueprints/phys.em.moving-coil-galvanometer.md'
+
+const GALV_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: GALV,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A moving-coil galvanometer is a rectangular coil of N turns that can rotate between curved magnet poles around a soft-iron core. When a current I flows, the two sides of the coil across the field feel equal and opposite forces, a couple with torque τ = NIAB (A is the coil\'s area). The curved poles and core make the field radial, so the coil\'s plane always lies along the field and the torque stays NIAB at every angle. A spiral spring twists back with torque kφ, so at balance NIAB = kφ and the deflection φ = (NAB/k) I is proportional to the current — an evenly spaced scale. On its own it is delicate: a typical galvanometer with G = 50 Ω reaches full scale at only I_g = 2 mA. To make an ammeter reading up to 1 A, connect a small SHUNT in PARALLEL: at full scale 2 mA goes through the coil and 0.998 A through the shunt, both at the same voltage, so S = I_g G / (I − I_g) = 0.002 × 50 / 0.998 ≈ 0.1 Ω. The ammeter then has a very low resistance, as an instrument in series must. To make a voltmeter reading up to 10 V, connect a large resistance in SERIES so that 10 V drives exactly 2 mA: R = V/I_g − G = 10/0.002 − 50 = 4950 Ω. The voltmeter then has a high resistance, as an instrument connected in parallel must, so it draws almost no current.',
+    targetedMisconceptions: [`${GALV}:MC-SHUNT-IN-SERIES`, `${GALV}:MC-VOLTMETER-LOW-R`],
+    source: `${GALV_SRC} — TA-1/TA-2 coil, radial field and linear scale, TA-4 ammeter, TA-5 voltmeter`,
+  },
+  {
+    conceptId: GALV,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Adding a resistor usually means putting it in series, so it is natural to put an ammeter\'s extra resistor in series with the coil. Follow the current: in series, all of the 1 A you want to measure would have to pass through a coil that reaches full scale at 2 mA — five hundred times too much — and it would burn out. The shunt\'s job is to carry most of the current AROUND the coil, so it must be in PARALLEL, and small, so that almost all the current prefers it: with 0.1 Ω beside the 50 Ω coil, 0.998 A takes the shunt and only 2 mA passes through the coil. The opposite trap catches voltmeters: "a voltmeter needs current to flow through it, so it should have a low resistance". But a voltmeter is connected in parallel with the thing it measures. If a 100 Ω voltmeter were put across a 10 kΩ resistor, most of the current would take the voltmeter instead and the voltage across the resistor would collapse — the meter would change the very quantity it measures. A voltmeter must draw as little current as possible, so it gets a large series resistance — thousands of ohms — while an ammeter, which sits in series, must have almost none.',
+    targetedMisconceptions: [`${GALV}:MC-SHUNT-IN-SERIES`, `${GALV}:MC-VOLTMETER-LOW-R`],
+    source: `${GALV_SRC} — MC-SHUNT-IN-SERIES + MC-VOLTMETER-LOW-R, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const GALV_PROBES: SeedProbe[] = [
+  {
+    conceptId: GALV,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A galvanometer of resistance 50 Ω gives full-scale deflection at 2 mA. What series resistance converts it into a voltmeter reading 0–10 V?',
+    choices: [
+      { text: '4950 Ω', isCorrect: true },
+      { text: '5000 Ω', isCorrect: false },
+      { text: '0.1 Ω', isCorrect: false, misconceptionId: `${GALV}:MC-VOLTMETER-LOW-R` },
+      { text: '20 Ω', isCorrect: false },
+    ],
+    correctValue: '4950 Ω',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${GALV}:MC-VOLTMETER-LOW-R`],
+    source: `${GALV_SRC} — TA-5 P34 (R = 10/0.002 − 50); 5000 Ω forgets the coil, 0.1 Ω is the ammeter shunt`,
+  },
+  {
+    conceptId: GALV,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'The same 50 Ω, 2 mA galvanometer is to read currents up to 1 A. What shunt is needed, and how is it connected?',
+    choices: [
+      { text: 'About 0.1 Ω, in parallel with the coil', isCorrect: true },
+      { text: 'About 0.1 Ω, in series with the coil', isCorrect: false, misconceptionId: `${GALV}:MC-SHUNT-IN-SERIES` },
+      { text: 'About 4950 Ω, in parallel with the coil', isCorrect: false },
+      { text: 'About 450 Ω, in series with the coil', isCorrect: false, misconceptionId: `${GALV}:MC-SHUNT-IN-SERIES` },
+    ],
+    correctValue: 'about 0.1 Ω in parallel',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${GALV}:MC-SHUNT-IN-SERIES`],
+    source: `${GALV_SRC} — TA-4 think-aloud (S = 0.002 × 50 / 0.998)`,
+  },
+  {
+    conceptId: GALV,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A galvanometer reads full scale at 2 mA. To measure currents up to 1 A, how must the extra resistor be connected, and should it be large or small?',
+    choices: [
+      { text: 'Small, and in parallel — so most of the current bypasses the coil', isCorrect: true },
+      { text: 'Small, and in series — the resistor protects the coil by limiting the current', isCorrect: false, misconceptionId: `${GALV}:MC-SHUNT-IN-SERIES` },
+      { text: 'Large, and in series — a big resistance keeps the current low', isCorrect: false, misconceptionId: `${GALV}:MC-SHUNT-IN-SERIES` },
+    ],
+    correctValue: 'small, in parallel',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${GALV}:MC-SHUNT-IN-SERIES`],
+    source: `${GALV_SRC} — DB-2 item and MC-SHUNT-IN-SERIES trigger_signal`,
+  },
+  {
+    conceptId: GALV,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Should a voltmeter have a high or a low resistance, and why?',
+    choices: [
+      { text: 'High — it is connected in parallel and must draw almost no current, or it would change the voltage it measures', isCorrect: true },
+      { text: 'Low — current has to flow through the meter for it to read anything', isCorrect: false, misconceptionId: `${GALV}:MC-VOLTMETER-LOW-R` },
+      { text: 'Low — a low resistance makes the reading more sensitive', isCorrect: false, misconceptionId: `${GALV}:MC-VOLTMETER-LOW-R` },
+    ],
+    correctValue: 'high',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${GALV}:MC-VOLTMETER-LOW-R`],
+    source: `${GALV_SRC} — DB-3 voltmeter check and MC-VOLTMETER-LOW-R conflict_evidence`,
+  },
+  {
+    conceptId: GALV,
+    subjectSlug: 'physics',
+    probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why is the scale of a moving-coil galvanometer evenly spaced?',
+    choices: [
+      { text: 'The radial field keeps the torque on the coil equal to NIAB at every angle; balanced against the spring\'s kφ, this makes the deflection proportional to the current', isCorrect: true },
+      { text: 'Because a shunt in series spreads the current evenly through the coil', isCorrect: false },
+      { text: 'Because the spring gets weaker as it twists, which happens to even out the scale', isCorrect: false },
+    ],
+    correctValue: 'radial field → constant torque NIAB → φ ∝ I',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: `${GALV_SRC} — TA-2 P34 and §8 P78`,
+  },
+]
+
+// ─── phys.em.motors-and-generators ───────────────────────────────────────────
+const MOGE = 'phys.em.motors-and-generators'
+const MOGE_SRC = 'docs/curriculum/blueprints/phys.em.motors-and-generators.md'
+
+const MOGE_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: MOGE,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Put a rectangular coil on an axle between the poles of a magnet and send a current through it. The two sides across the field carry current in opposite directions, so the magnetic forces on them (F = BIL) point opposite ways and turn the coil: electrical energy becomes kinetic energy. That is a motor. After half a turn the sides have swapped places, and if the current kept its direction the forces would turn the coil back. A split-ring commutator reverses the current in the coil every half turn, so the torque always turns it the same way. Now turn the same coil by hand. As it rotates, the magnetic flux through it keeps changing, and a changing flux induces an emf (Faraday\'s law): kinetic energy becomes electrical energy — a generator. With slip rings, each end of the coil stays on its own output terminal and the output alternates (AC); with a commutator it pulses in one direction (DC dynamo). A coil of N turns and area A spinning at angular speed ω in a field B has a peak emf of NABω: 100 turns of 0.01 m² at 100 rad/s in 0.5 T give 50 V, and spinning twice as fast doubles both the peak emf and the frequency. Neither machine creates energy: a generator delivering current becomes harder to turn, because the induced current feels a force opposing the rotation.',
+    targetedMisconceptions: [`${MOGE}:MC-GENERATOR-CREATES-ENERGY`, `${MOGE}:MC-NO-COMMUTATOR-NEEDED`],
+    source: `${MOGE_SRC} — TA-2 motor, TA-3 split ring, TA-4 generator and NABω, TA-5 energy`,
+  },
+  {
+    conceptId: MOGE,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      '"Generator" sounds like a machine that makes electricity, as if from nothing. Imagine connecting a generator\'s output to a motor that turns the generator\'s own shaft, with a lamp in the circuit too. If generators created energy, this would run forever and light the lamp for free. It never works. When a generator drives a current, that current in the coil feels a magnetic force that opposes the turning (Lenz\'s law), so the more current you draw, the harder you must push; with nothing connected, no current flows and it turns easily. All the electrical energy comes from the work done turning the shaft, minus losses as heat. A second gap is the commutator. Once current flows, it can seem that the motor coil will simply keep spinning. Redraw the forces after half a turn: the side that was near the north pole is now near the south pole. If its current had not reversed, the force on it would now push the coil backwards, and it would rock to a stop. The split-ring commutator swaps the connections exactly every half turn, so the current in the coil reverses and the torque keeps the coil turning one way.',
+    targetedMisconceptions: [`${MOGE}:MC-GENERATOR-CREATES-ENERGY`, `${MOGE}:MC-NO-COMMUTATOR-NEEDED`],
+    source: `${MOGE_SRC} — MC-GENERATOR-CREATES-ENERGY + MC-NO-COMMUTATOR-NEEDED, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const MOGE_PROBES: SeedProbe[] = [
+  {
+    conceptId: MOGE,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A generator coil has 100 turns of area 0.01 m² and rotates at 100 rad/s in a 0.5 T field. What is its peak emf?',
+    choices: [
+      { text: '50 V', isCorrect: true },
+      { text: '0.5 V', isCorrect: false },
+      { text: '5000 V', isCorrect: false },
+      { text: '0.05 V', isCorrect: false },
+    ],
+    correctValue: '50 V',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [],
+    source: `${MOGE_SRC} — TA-4 P34 (NABω = 100 × 0.01 × 0.5 × 100)`,
+  },
+  {
+    conceptId: MOGE,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'An AC generator is made to spin twice as fast. What happens to its output?',
+    choices: [
+      { text: 'Both the peak emf and the frequency double', isCorrect: true },
+      { text: 'The peak emf doubles; the frequency stays the same', isCorrect: false },
+      { text: 'The frequency doubles; the peak emf stays the same', isCorrect: false },
+      { text: 'Nothing changes — the output depends only on the magnet', isCorrect: false },
+    ],
+    correctValue: 'peak emf and frequency both double',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: `${MOGE_SRC} — TA-6 P79 predict item (emf = NABω; f = ω/2π)`,
+  },
+  {
+    conceptId: MOGE,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A hand-cranked generator lights a lamp. When the lamp is switched on, does turning the generator get harder, easier, or stay the same?',
+    choices: [
+      { text: 'Harder — the induced current opposes the rotation, and the lamp\'s energy comes from the work you do turning it', isCorrect: true },
+      { text: 'The same — the generator makes the electricity itself', isCorrect: false, misconceptionId: `${MOGE}:MC-GENERATOR-CREATES-ENERGY` },
+      { text: 'Easier — the current helps push the coil round', isCorrect: false, misconceptionId: `${MOGE}:MC-GENERATOR-CREATES-ENERGY` },
+    ],
+    correctValue: 'harder',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${MOGE}:MC-GENERATOR-CREATES-ENERGY`],
+    source: `${MOGE_SRC} — DB-2 item and MC-GENERATOR-CREATES-ENERGY conflict_evidence`,
+  },
+  {
+    conceptId: MOGE,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In a DC motor, what would happen after half a turn if the current in the coil never reversed?',
+    choices: [
+      { text: 'The forces would now turn the coil backwards, so it would rock and come to rest — the split ring prevents this', isCorrect: true },
+      { text: 'Nothing — once the current flows, the coil keeps spinning the same way', isCorrect: false, misconceptionId: `${MOGE}:MC-NO-COMMUTATOR-NEEDED` },
+      { text: 'It would spin faster, because the current builds up', isCorrect: false, misconceptionId: `${MOGE}:MC-NO-COMMUTATOR-NEEDED` },
+    ],
+    correctValue: 'it would rock and stop',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${MOGE}:MC-NO-COMMUTATOR-NEEDED`],
+    source: `${MOGE_SRC} — DB-3 commutator check and MC-NO-COMMUTATOR-NEEDED conflict_evidence`,
+  },
+  {
+    conceptId: MOGE,
+    subjectSlug: 'physics',
+    probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'An electric car slows down by switching its motor to work as a generator. Where does the car\'s kinetic energy go?',
+    choices: [
+      { text: 'It is converted into electrical energy and stored in the battery (with some lost as heat)', isCorrect: true },
+      { text: 'Nowhere — the generator creates extra energy, so the car gains energy while braking', isCorrect: false, misconceptionId: `${MOGE}:MC-GENERATOR-CREATES-ENERGY` },
+      { text: 'It is destroyed by the magnets', isCorrect: false },
+    ],
+    correctValue: 'into electrical energy in the battery',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${MOGE}:MC-GENERATOR-CREATES-ENERGY`],
+    source: `${MOGE_SRC} — §8 P76 transfer item (regenerative braking)`,
+  },
+]
+
+// ─── phys.em.domestic-electricity ────────────────────────────────────────────
+const DOME = 'phys.em.domestic-electricity'
+const DOME_SRC = 'docs/curriculum/blueprints/phys.em.domestic-electricity.md'
+
+const DOME_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: DOME,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Household electricity in India comes at about 220 V AC, 50 Hz, through three wires. The live wire (red or brown) carries the alternating high voltage; the neutral (black or blue) is kept close to 0 V and completes the circuit; the earth wire (green, or green and yellow) is connected to the ground and normally carries no current. Appliances are wired in parallel between live and neutral, so each gets the full 220 V and can be switched independently. Switches, fuses and MCBs always go in the live wire, so that breaking the circuit cuts the appliance off from the high voltage. A fuse is a thin wire that melts when the current exceeds its rating, and the rating must sit just above the appliance\'s normal current I = P/V: a 2 kW kettle on 220 V draws about 9.1 A, so it needs 10 A protection — a 5 A fuse would blow every time, and a 30 A fuse would not blow even when a fault overheated the cable. Two faults cause dangerous currents: overloading (too many appliances on one circuit — 4.5 kW on 220 V is about 20.5 A) and a short circuit (live touching neutral, so the resistance is almost zero). Earthing protects against a third: if the live wire touches an appliance\'s metal case, a large current flows through the low-resistance earth wire, blowing the fuse or tripping the MCB at once, instead of passing through a person.',
+    targetedMisconceptions: [`${DOME}:MC-FUSE-ANYWHERE`, `${DOME}:MC-BIGGER-FUSE-SAFER`],
+    source: `${DOME_SRC} — TA-1 three wires, TA-2 parallel wiring, TA-3 fuses, TA-4 ratings, TA-5 faults and earthing`,
+  },
+  {
+    conceptId: DOME,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Because the same current flows in the live and neutral wires, it can seem that a fuse could go in either. Trace what happens when it blows. With the fuse in the neutral, the current stops — but the appliance\'s wiring is still joined to the live wire at 220 V. Anyone who touches a faulty part completes a path to earth through their body. With the fuse in the live wire, a blown fuse disconnects the appliance from the high voltage altogether. That is why fuses, MCBs and switches always go in the live. The second trap is thinking a higher-rated fuse is safer because it will not blow. Picture a thin lamp cable that is safe up to 5 A, protected by a 30 A fuse. A fault draws 12 A: the cable overheats and can start a fire, while the 30 A fuse stays intact. A fuse is MEANT to blow — that is the protection. Choose the standard rating just above the appliance\'s normal current, I = P/V: for a 2 kW kettle on 220 V, about 9.1 A, so 10 A — high enough not to blow in normal use, low enough to blow quickly on a fault.',
+    targetedMisconceptions: [`${DOME}:MC-FUSE-ANYWHERE`, `${DOME}:MC-BIGGER-FUSE-SAFER`],
+    source: `${DOME_SRC} — MC-FUSE-ANYWHERE + MC-BIGGER-FUSE-SAFER, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const DOME_PROBES: SeedProbe[] = [
+  {
+    conceptId: DOME,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A 1 kW iron, a 2 kW heater and a 1.5 kW kettle are all switched on together on one 15 A circuit at 220 V. What happens?',
+    choices: [
+      { text: 'The total current is about 20.5 A — more than 15 A, so the circuit is overloaded and the MCB should trip', isCorrect: true },
+      { text: 'Nothing — each appliance draws its own current separately, so the circuit limit does not matter', isCorrect: false },
+      { text: 'The total current is about 6.8 A, well within 15 A', isCorrect: false },
+      { text: 'It is fine as long as a 30 A fuse is fitted instead', isCorrect: false, misconceptionId: `${DOME}:MC-BIGGER-FUSE-SAFER` },
+    ],
+    correctValue: 'about 20.5 A, overload',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${DOME}:MC-BIGGER-FUSE-SAFER`],
+    source: `${DOME_SRC} — TA-6 P79 predict item (4500 W / 220 V)`,
+  },
+  {
+    conceptId: DOME,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why are household appliances connected in parallel rather than in series?',
+    choices: [
+      { text: 'Each gets the full 220 V and can be switched on and off independently', isCorrect: true },
+      { text: 'Parallel wiring uses less current in total', isCorrect: false },
+      { text: 'In parallel, one fuse can be placed in the neutral for all of them', isCorrect: false, misconceptionId: `${DOME}:MC-FUSE-ANYWHERE` },
+      { text: 'Series wiring would give each appliance more than 220 V', isCorrect: false },
+    ],
+    correctValue: 'full voltage each, independent switching',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${DOME}:MC-FUSE-ANYWHERE`],
+    source: `${DOME_SRC} — TA-2 think-aloud (parallel wiring)`,
+  },
+  {
+    conceptId: DOME,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why must the fuse or MCB be placed in the live wire rather than the neutral?',
+    choices: [
+      { text: 'So that when it breaks, the appliance is disconnected from the 220 V live wire; a blown fuse in the neutral would leave the appliance live and dangerous', isCorrect: true },
+      { text: 'It doesn\'t matter — the same current flows in both wires, so either position protects equally', isCorrect: false, misconceptionId: `${DOME}:MC-FUSE-ANYWHERE` },
+      { text: 'Because the neutral wire never carries any current', isCorrect: false },
+    ],
+    correctValue: 'so a blown fuse removes the high voltage',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${DOME}:MC-FUSE-ANYWHERE`],
+    source: `${DOME_SRC} — DB-2 item and MC-FUSE-ANYWHERE conflict_evidence`,
+  },
+  {
+    conceptId: DOME,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A 2 kW kettle runs on 220 V. Which fuse should protect it: 5 A, 10 A or 30 A?',
+    choices: [
+      { text: '10 A — the kettle normally draws about 9.1 A, so 10 A will not blow in use but will blow on a fault', isCorrect: true },
+      { text: '30 A — a bigger fuse is safer because it will not blow', isCorrect: false, misconceptionId: `${DOME}:MC-BIGGER-FUSE-SAFER` },
+      { text: '5 A — the smallest fuse always gives the best protection', isCorrect: false },
+    ],
+    correctValue: '10 A',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${DOME}:MC-BIGGER-FUSE-SAFER`],
+    source: `${DOME_SRC} — DB-3 rating check and MC-BIGGER-FUSE-SAFER conflict_evidence`,
+  },
+  {
+    conceptId: DOME,
+    subjectSlug: 'physics',
+    probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'The live wire inside an earthed washing machine comes loose and touches its metal case. What happens?',
+    choices: [
+      { text: 'A large current flows through the low-resistance earth wire, blowing the fuse or tripping the MCB, so the case is cut off from the supply', isCorrect: true },
+      { text: 'Nothing — the earth wire carries current all the time anyway', isCorrect: false },
+      { text: 'The case stays live until someone touches it, because a fuse in the neutral cannot detect the fault', isCorrect: false, misconceptionId: `${DOME}:MC-FUSE-ANYWHERE` },
+    ],
+    correctValue: 'large current to earth, fuse blows',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${DOME}:MC-FUSE-ANYWHERE`],
+    source: `${DOME_SRC} — TA-5 P34 (earthing)`,
+  },
+]
+
+// ─── phys.mech.constraint-motion ─────────────────────────────────────────────
+const CNST = 'phys.mech.constraint-motion'
+const CNST_SRC = 'docs/curriculum/blueprints/phys.mech.constraint-motion.md'
+
+const CNST_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CNST,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'When bodies are tied together by a string, each still obeys F = ma on its own. The string adds two facts: a light string over a frictionless pulley pulls with the same tension T at both ends, and an inextensible string makes the connected bodies move with the same magnitude of acceleration. So draw a free-body diagram for EACH body, write F = ma for each in its own direction of motion, and solve together. In an Atwood machine with 3 kg and 2 kg over a pulley, the 3 kg mass accelerates down and the 2 kg up: 29.4 − T = 3a and T − 19.6 = 2a. Adding gives 9.8 = 5a, so a = 1.96 m/s², and T = 19.6 + 2 × 1.96 = 23.52 N. In general a = (m₁ − m₂)g/(m₁ + m₂) and T = 2m₁m₂g/(m₁ + m₂). The tension lies between the two weights: less than 29.4 N so the heavier mass can accelerate down, more than 19.6 N so the lighter one can accelerate up. A 4 kg block on a smooth table pulled over the edge by a hanging 1 kg mass works the same way: T = 4a and 9.8 − T = 1a, so a = 1.96 m/s² and T = 7.84 N. With a movable pulley the accelerations differ, and the fixed length of string decides how: pulling 2 m of string out shortens the two supporting strands by 1 m each, so the block rises 1 m, and its acceleration is half that of the free end.',
+    targetedMisconceptions: [`${CNST}:MC-TENSION-EQUALS-WEIGHT`, `${CNST}:MC-MOVABLE-PULLEY-SAME-A`],
+    source: `${CNST_SRC} — TA-2 one diagram per body, TA-3 tension between the weights, TA-4 table system, TA-5 movable pulley`,
+  },
+  {
+    conceptId: CNST,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A hanging mass at rest pulls its string with a force equal to its weight, so in an Atwood machine it is tempting to say the tension is 29.4 N, the weight of the 3 kg mass. Test it. If T were 29.4 N, the net force on the 3 kg mass would be zero — it could not accelerate downward — while the 2 kg mass would feel 9.8 N upward. But they are tied together and must move together. The tension must be less than 29.4 N, so the heavier mass accelerates down, and more than 19.6 N, so the lighter one accelerates up: solving both equations gives 23.52 N. Tension equals a weight only when that body is not accelerating. A second trap appears with a movable pulley: assuming the block moves as far and as fast as the end of the rope you pull. The pulley hangs on two strands of string. If you pull 2 m of string out and the block also rose 2 m, both strands would have to shorten by 2 m — 4 m of string removed. The string\'s length is fixed, so the 2 m is shared: each strand shortens by 1 m and the block rises 1 m. Its velocity and acceleration are likewise half those of the free end.',
+    targetedMisconceptions: [`${CNST}:MC-TENSION-EQUALS-WEIGHT`, `${CNST}:MC-MOVABLE-PULLEY-SAME-A`],
+    source: `${CNST_SRC} — MC-TENSION-EQUALS-WEIGHT + MC-MOVABLE-PULLEY-SAME-A, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const CNST_PROBES: SeedProbe[] = [
+  {
+    conceptId: CNST,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A 5 kg mass and a 3 kg mass hang over a light, frictionless pulley (g = 9.8 m/s²). What is their acceleration?',
+    choices: [
+      { text: '2.45 m/s²', isCorrect: true },
+      { text: '9.8 m/s² — the heavier mass falls freely', isCorrect: false },
+      { text: '3.92 m/s²', isCorrect: false },
+      { text: '0 m/s² — the tension balances the heavier weight', isCorrect: false, misconceptionId: `${CNST}:MC-TENSION-EQUALS-WEIGHT` },
+    ],
+    correctValue: '2.45 m/s²',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${CNST}:MC-TENSION-EQUALS-WEIGHT`],
+    source: `${CNST_SRC} — TA-2 P34 ((5 − 3) × 9.8 / 8); 3.92 divides by 5 instead of 8`,
+  },
+  {
+    conceptId: CNST,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A 4 kg block on a smooth table is joined by a string over a pulley at the edge to a hanging 1 kg mass (g = 9.8 m/s²). What is the tension in the string?',
+    choices: [
+      { text: '7.84 N', isCorrect: true },
+      { text: '9.8 N — the weight of the hanging mass', isCorrect: false, misconceptionId: `${CNST}:MC-TENSION-EQUALS-WEIGHT` },
+      { text: '39.2 N — the weight of the block', isCorrect: false, misconceptionId: `${CNST}:MC-TENSION-EQUALS-WEIGHT` },
+      { text: '1.96 N', isCorrect: false },
+    ],
+    correctValue: '7.84 N',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CNST}:MC-TENSION-EQUALS-WEIGHT`],
+    source: `${CNST_SRC} — TA-4 P34 (a = 1.96 m/s², T = 4a)`,
+  },
+  {
+    conceptId: CNST,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A 3 kg and a 2 kg mass hang over a frictionless pulley and are released. Is the tension in the string 29.4 N, 19.6 N, or something in between?',
+    choices: [
+      { text: 'In between (23.52 N) — less than 29.4 N so the 3 kg accelerates down, more than 19.6 N so the 2 kg accelerates up', isCorrect: true },
+      { text: '29.4 N — the string holds the weight of the heavier mass', isCorrect: false, misconceptionId: `${CNST}:MC-TENSION-EQUALS-WEIGHT` },
+      { text: '19.6 N — the string only has to hold the lighter mass', isCorrect: false, misconceptionId: `${CNST}:MC-TENSION-EQUALS-WEIGHT` },
+    ],
+    correctValue: 'in between, 23.52 N',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${CNST}:MC-TENSION-EQUALS-WEIGHT`],
+    source: `${CNST_SRC} — DB-2 item and MC-TENSION-EQUALS-WEIGHT conflict_evidence`,
+  },
+  {
+    conceptId: CNST,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A block hangs from a movable pulley. One end of the string is fixed to the ceiling; you pull the other end up by 2 m. How far does the block rise?',
+    choices: [
+      { text: '1 m — the 2 m of string is shared between the two strands holding the pulley', isCorrect: true },
+      { text: '2 m — everything on the string moves the same distance', isCorrect: false, misconceptionId: `${CNST}:MC-MOVABLE-PULLEY-SAME-A` },
+      { text: '4 m — a movable pulley doubles the motion', isCorrect: false },
+    ],
+    correctValue: '1 m',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CNST}:MC-MOVABLE-PULLEY-SAME-A`],
+    source: `${CNST_SRC} — DB-3 movable-pulley check and MC-MOVABLE-PULLEY-SAME-A conflict_evidence`,
+  },
+  {
+    conceptId: CNST,
+    subjectSlug: 'physics',
+    probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In a movable-pulley system, the free end of the string accelerates upward at 2 m/s². What is the acceleration of the block hanging from the pulley?',
+    choices: [
+      { text: '1 m/s² upward — half the free end\'s acceleration, from the fixed string length', isCorrect: true },
+      { text: '2 m/s² upward — the block moves with the string', isCorrect: false, misconceptionId: `${CNST}:MC-MOVABLE-PULLEY-SAME-A` },
+      { text: '4 m/s² upward', isCorrect: false },
+    ],
+    correctValue: '1 m/s²',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CNST}:MC-MOVABLE-PULLEY-SAME-A`],
+    source: `${CNST_SRC} — TA-5 think-aloud and §9 interval 4 (a_block = a_end/2)`,
+  },
+]
+
 // Batch export spreads for the extension (kept with the concepts above).
 const PHYS_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...DENS_EXPLANATIONS,
@@ -53382,6 +53830,10 @@ const PHYS_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...LSCT_EXPLANATIONS,
   ...ESPE_EXPLANATIONS,
   ...CELL_EXPLANATIONS,
+  ...GALV_EXPLANATIONS,
+  ...MOGE_EXPLANATIONS,
+  ...DOME_EXPLANATIONS,
+  ...CNST_EXPLANATIONS,
 ]
 
 const PHYS_EXTENSION_PROBES: SeedProbe[] = [
@@ -53401,6 +53853,10 @@ const PHYS_EXTENSION_PROBES: SeedProbe[] = [
   ...LSCT_PROBES,
   ...ESPE_PROBES,
   ...CELL_PROBES,
+  ...GALV_PROBES,
+  ...MOGE_PROBES,
+  ...DOME_PROBES,
+  ...CNST_PROBES,
 ]
 
 // ─── Batch export ────────────────────────────────────────────────────────────

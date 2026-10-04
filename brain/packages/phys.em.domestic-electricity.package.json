@@ -1,0 +1,415 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.em.domestic-electricity-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.em.domestic-electricity",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:48324cadb62b18536b204948e7bdb0360bad33115442232e638bbdce8a60240a",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.em.domestic-electricity.md": "sha256:ea009a6cfb1e7358791c3b4504ddc569507567018bb1667aee61e7ed895cf657"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.em.domestic-electricity",
+    "name": "Household Circuits, Fuses, Earthing and Safety",
+    "difficultyRaw": "developing (2)",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "phys.em.electrical-power"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.em.domestic-electricity-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.em.domestic-electricity (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.em.domestic-electricity.md": "sha256:ea009a6cfb1e7358791c3b4504ddc569507567018bb1667aee61e7ed895cf657"
+      },
+      "contentHash": "sha256:4240a544851e54b6eff5b6c04a7752671e6584486898506835b5658a8083d35b",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.em.domestic-electricity.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.domestic-electricity.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.domestic-electricity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.domestic-electricity\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.domestic-electricity.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.domestic-electricity.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.domestic-electricity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.domestic-electricity\"",
+        "effect": {
+          "actionClass": "FORMULA_INTRODUCTION"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.domestic-electricity.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.domestic-electricity.md#TA-3 (addresses MC-FUSE-ANYWHERE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.domestic-electricity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.domestic-electricity\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.domestic-electricity.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.domestic-electricity.md#TA-4 (addresses MC-BIGGER-FUSE-SAFER)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.domestic-electricity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.domestic-electricity\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.domestic-electricity.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.domestic-electricity.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.domestic-electricity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.domestic-electricity\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.domestic-electricity.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.domestic-electricity.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.domestic-electricity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.domestic-electricity\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.domestic-electricity.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.domestic-electricity.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.domestic-electricity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.domestic-electricity\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.em.domestic-electricity/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "phys.em.domestic-electricity",
+      "title": "Learning Objective",
+      "content": "[Boundary statement]\nA student who achieves mastery demonstrates:\n1. Describes household wiring: live, neutral and earth wires (in India, a 220 V, 50 Hz supply); appliances connected in PARALLEL so each gets the full voltage and can be switched independently; switches and fuses or MCBs placed in the LIVE wire.\n2. Chooses a fuse or MCB rating from the appliance's current, I = P/V, picking the next standard rating just above it — e.g. a 2 kW kettle on 220 V draws about 9.1 A, so a 10 A (not 5 A, not 30 A) protection is right — and explains overloading (too many appliances on one circuit) and short circuits (live touching neutral) as causes of dangerously large currents.\n3. Explains earthing: the metal body of an appliance is connected to earth, so if the live wire touches the casing a large current flows to earth through the low-resistance earth wire and blows the fuse or trips the MCB, instead of passing through a person.\n\nA student who puts the fuse in the neutral wire, chooses a 30 A fuse \"to be safe\", or says the earth wire carries current all the time, has **NOT** achieved mastery — each of these can leave a live, dangerous appliance in a real home.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.domestic-electricity.md",
+        "startLine": 17,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.em.domestic-electricity/misconception/MC-FUSE-ANYWHERE",
+      "kind": "misconception",
+      "conceptId": "phys.em.domestic-electricity",
+      "title": "The fuse can go in the live or the neutral — the same current flows in both",
+      "content": "### MC-FUSE-ANYWHERE: \"The fuse can go in the live or the neutral — the same current flows in both\"\ntrigger_signal: student says fuse or switch position does not matter.\nconflict_evidence [P28]: \"Put the fuse in the neutral. A fault makes it blow. The appliance's wiring is still joined to the live wire at 220 V. Is it safe to touch now?\"\nbridge_text [P30]: \"No — the current has stopped, but the appliance is still connected to 220 V. A person who touches it completes a path to earth through their body. With the fuse in the live, a blown fuse cuts the appliance off from the high voltage altogether.\"\nreplacement_text [P31]: \"Fuses, MCBs and switches always go in the live wire, so that breaking the circuit removes the high voltage from the appliance.\"\ndiscrimination_pairs [P33]: [\"fuse in live blows → appliance at 0 V (safe)\", \"fuse in neutral blows → appliance still at 220 V (dangerous)\"]\ns6_path: skip P28; trace the live wire's path into the appliance on a diagram and mark where 220 V still reaches when each fuse position is broken.",
+      "localKey": "MC-FUSE-ANYWHERE",
+      "language": "en",
+      "refs": [
+        "MC-FUSE-ANYWHERE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.domestic-electricity.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.em.domestic-electricity/misconception/MC-BIGGER-FUSE-SAFER",
+      "kind": "misconception",
+      "conceptId": "phys.em.domestic-electricity",
+      "title": "A higher-rated fuse is safer because it doesn't blow",
+      "content": "### MC-BIGGER-FUSE-SAFER: \"A higher-rated fuse is safer because it doesn't blow\"\ntrigger_signal: student picks the largest available rating, or treats a blown fuse as the danger.\nconflict_evidence [P28]: \"A thin lamp cable is safe up to 5 A. It is protected by a 30 A fuse. A fault draws 12 A. What happens to the cable, and to the fuse?\"\nbridge_text [P30]: \"The cable overheats and can start a fire, while the 30 A fuse stays intact. A fuse is meant to blow — that is the protection. It must blow just above the normal current, before wiring or the appliance is damaged.\"\nreplacement_text [P31]: \"Choose the standard rating just ABOVE the appliance's normal current I = P/V: a 2 kW kettle at 220 V (≈ 9.1 A) gets 10 A.\"\ndiscrimination_pairs [P33]: [\"10 A fuse on a 9.1 A kettle: blows on a fault, not in normal use\", \"5 A fuse on the same kettle: blows every time it is used; 30 A: never blows until too late\"]\ns6_path: skip P28; compute the kettle's current together and line it up against 5, 10 and 30 A on a number line.",
+      "localKey": "MC-BIGGER-FUSE-SAFER",
+      "language": "en",
+      "refs": [
+        "MC-BIGGER-FUSE-SAFER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.domestic-electricity.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.em.domestic-electricity/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.domestic-electricity",
+      "title": "The Three Wires",
+      "content": "{\"id\":\"TA-1\",\"title\":\"The Three Wires\",\"primitives\":[\"P01\",\"P04\",\"P05\",\"P06\",\"P14\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.domestic-electricity.md",
+        "startLine": 11,
+        "endLine": 18
+      }
+    },
+    {
+      "assetId": "phys.em.domestic-electricity/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.domestic-electricity",
+      "title": "Parallel Wiring",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Parallel Wiring\",\"primitives\":[\"P02\",\"P07\",\"P13\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.domestic-electricity.md",
+        "startLine": 18,
+        "endLine": 25
+      }
+    },
+    {
+      "assetId": "phys.em.domestic-electricity/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.domestic-electricity",
+      "title": "Fuses and MCBs",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Fuses and MCBs\",\"primitives\":[\"P02\",\"P13\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-FUSE-ANYWHERE\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-FUSE-ANYWHERE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.domestic-electricity.md",
+        "startLine": 25,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "phys.em.domestic-electricity/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.domestic-electricity",
+      "title": "Choosing a Rating",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Choosing a Rating\",\"primitives\":[\"P02\",\"P06\",\"P07\",\"P08\",\"P13\",\"P34\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-BIGGER-FUSE-SAFER\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-BIGGER-FUSE-SAFER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.domestic-electricity.md",
+        "startLine": 32,
+        "endLine": 42
+      }
+    },
+    {
+      "assetId": "phys.em.domestic-electricity/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.domestic-electricity",
+      "title": "Overload, Short Circuit, Earthing",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Overload, Short Circuit, Earthing\",\"primitives\":[\"P02\",\"P13\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.domestic-electricity.md",
+        "startLine": 42,
+        "endLine": 48
+      }
+    },
+    {
+      "assetId": "phys.em.domestic-electricity/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.domestic-electricity",
+      "title": "Formative Assessment",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Formative Assessment\",\"primitives\":[\"P02\",\"P35\",\"P49\",\"P51\",\"P55\",\"P79\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.domestic-electricity.md",
+        "startLine": 48,
+        "endLine": 55
+      }
+    },
+    {
+      "assetId": "phys.em.domestic-electricity/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.domestic-electricity",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P28\",\"P41\",\"P54\",\"P55\",\"P62\",\"P68\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.domestic-electricity.md",
+        "startLine": 55,
+        "endLine": 97
+      }
+    },
+    {
+      "assetId": "phys.em.domestic-electricity/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.em.domestic-electricity",
+      "title": "Assessment Battery",
+      "content": "| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (classify) | \"(a) live touches neutral, (b) too many heaters\" | CORRECT = short circuit; overload |\n| P74 (classify) | \"Appliances in series or parallel at home?\" | CORRECT = parallel |\n| P75 (boundary) | \"Fuse rated exactly at normal current?\" | CORRECT = poor — it may blow in normal use (switch-on surges); pick just above |\n| P76 (transfer) | \"Two-wire plastic hair dryer\" | CORRECT = double insulated; no exposed metal to become live |\n| P77 (generate) | \"Appliances on a 10 A circuit\" | CORRECT = total P ≤ 2200 W at 220 V |\n| P78 (explain) | \"Fuse in the live — why?\" | CORRECT = a blown fuse then disconnects the appliance from 220 V |\n| P79 (predict) | \"4.5 kW on a 15 A circuit\" | CORRECT = ≈ 20.5 A — overload |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.domestic-electricity.md",
+        "startLine": 179,
+        "endLine": 191
+      }
+    },
+    {
+      "assetId": "phys.em.domestic-electricity/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.em.domestic-electricity",
+      "title": "Student State Matrix",
+      "content": "| State | Why here | Tell-tale behaviour | Protocol |\n|---|---|---|---|\n| S0 | Plugs and switches as black boxes | Cannot name the three wires | Protocol A (Concrete) |\n| S1 | Names without reasons | Names live/neutral/earth but cannot say why the fuse is in the live | Protocol B (Counterexample-first) |\n| S2-FUSE-ANYWHERE | Fuse position irrelevant | \"The fuse can go in neutral; current is the same\" | Misconception Engine → then Protocol C |\n| S2-BIGGER-FUSE-SAFER | Rating reasoning inverted | \"A 30 A fuse is safer because it won't blow\" | Misconception Engine → then Protocol C |\n| S3 | Partial — wiring fine, rating or earthing not | Correct diagram, wrong fuse choice | Protocol C (Guided Questioning) |\n| S6 | Anxiety on P = VI | Avoids the rating calculation | Protocol F (Low Pressure) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.domestic-electricity.md",
+        "startLine": 27,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "phys.em.domestic-electricity/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.em.domestic-electricity",
+      "title": "Diagnostic Battery",
+      "content": "DB-1 (prior-exposure check):\n\"Can you name the three wires in a household plug and the colour of each?\"\n  No → S0. Enter Protocol A (Concrete).\n  Yes → DB-2.\n\nDB-2 (representation / misconception test):\n\"Why must the fuse or MCB be in the live wire rather than the neutral?\"\n  \"If it were in the neutral, a blown fuse would still leave the appliance connected to the live — still dangerous to touch\" → S3. Enter Protocol C.\n  \"Because it's the rule\" (no reason) → S1. Enter Protocol B.\n  \"It doesn't matter — the same current flows in both\" → SIGNAL:MISCONCEPTION:MC-FUSE-ANYWHERE. Enter Misconception Engine.\n  Pause → add S6 flag; Protocol F if anxious, otherwise Protocol A.\n\nDB-3 (rating check — overlays):\n\"A 2 kW kettle on 220 V. Which fuse: 5 A, 10 A or 30 A?\"\n  \"10 A — the kettle draws about 9 A\" → no flag.\n  \"30 A — a bigger fuse is safer\" → add SIGNAL:MISCONCEPTION:MC-BIGGER-FUSE-SAFER (repair at TA-4).\n  Confident and wrong on DB-2 → add S7 flag. Override to Protocol G.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-FUSE-ANYWHERE",
+        "MC-BIGGER-FUSE-SAFER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.domestic-electricity.md",
+        "startLine": 38,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "phys.em.domestic-electricity/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.em.domestic-electricity",
+      "title": "Prerequisite Check",
+      "content": "PD-1 (for `phys.em.electrical-power`):\n\"A heater rated 1100 W runs on 220 V. What current does it draw?\"\n  Cannot give I = P/V = 5 A → flag PREREQ-GAP-POWER.\n  In-session minimum repair: one P06 (an appliance rating plate) + one P34 (\"power = voltage × current; rearrange\") then resume. If P = VI is absent, schedule a `phys.em.electrical-power` session (S4 route).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.domestic-electricity.md",
+        "startLine": 58,
+        "endLine": 65
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

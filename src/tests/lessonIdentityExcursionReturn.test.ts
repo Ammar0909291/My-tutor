@@ -101,9 +101,9 @@ function clientLesson(progress: {
 describe('the reproduced production state: advanced learner, no progress row', () => {
   it('the placement entry order really is lesson 32, Conservative Forces', () => {
     const entry = computeCurriculumEntryOrder(graph, normalizeToCanonicalLevel('advanced'))
-    // Lesson 32 in the KG this was measured on; 37 since the 2026-10-03
+    // Lesson 32 in the KG this was measured on; 38 since the 2026-10-03
     // coverage extension inserted three earlier nodes. Same lesson.
-    expect(entry).toBe(37)
+    expect(entry).toBe(38)
     expect(lessons[entry - 1].lessonTitle).toBe('Conservative and Non-Conservative Forces')
   })
 
@@ -112,7 +112,7 @@ describe('the reproduced production state: advanced learner, no progress row', (
     const client = clientLesson(null, 'advanced')
     expect(server.topicSlug).toBe(client!.topicSlug)
     expect(server.lessonTitle).toBe('Conservative and Non-Conservative Forces')
-    expect(server.order).toBe(37)
+    expect(server.order).toBe(38)
   })
 
   it('REGRESSION GUARD: the server must not fall back to lesson 1 any more', () => {

@@ -75,7 +75,7 @@ describe('phys.em: the circuit/field split is honoured', () => {
     'phys.em.magnetic-dipole', 'phys.em.magnetic-flux', 'phys.em.faradays-law',
     'phys.em.lenzs-law', 'phys.em.maxwells-equations', 'phys.em.electromagnetic-waves',
     // coverage-driven KG extension (2026-10-03)
-    'phys.em.electrostatic-potential-energy',
+    'phys.em.electrostatic-potential-energy', 'phys.em.motors-and-generators',
   ]
   const CIRCUITS = [
     'phys.em.electric-current', 'phys.em.ohms-law', 'phys.em.dc-circuits',
@@ -84,7 +84,7 @@ describe('phys.em: the circuit/field split is honoured', () => {
     'phys.em.rc-circuits', 'phys.em.lc-circuits', 'phys.em.ac-basics',
     'phys.em.self-inductance', 'phys.em.mutual-inductance',
     // coverage-driven KG extension (2026-10-03)
-    'phys.em.cells-combination',
+    'phys.em.cells-combination', 'phys.em.moving-coil-galvanometer', 'phys.em.domestic-electricity',
   ]
 
   it('every real KG concept in this list is accounted for (no drift from the KG)', () => {
@@ -203,10 +203,12 @@ describe('coverage floor — this fix must not regress below its own result', ()
     // 77 -> 78 (coverage-driven KG extension, 2026-10-03): the new circuit
     // concept 'phys.em.cells-combination' gets the same exact circuit_diagram
     // entry as 'phys.em.emf' — a real circuit concept, not a blanket default.
+    // 78 -> 80 (batch 5): likewise 'phys.em.moving-coil-galvanometer' (meter
+    // conversion circuits) and 'phys.em.domestic-electricity' (household wiring).
     const covered = PHYS.filter((c) => lookupConceptVisual(c.id) !== null).length
-    expect(covered).toBeGreaterThanOrEqual(78)
+    expect(covered).toBeGreaterThanOrEqual(80)
     // And each addition really was exactly one: nothing else silently changed.
-    expect(covered).toBe(78)
+    expect(covered).toBe(80)
   })
 
   it('zero orphan keys and zero duplicates remain physics-specific to this fix', () => {

@@ -4,10 +4,10 @@
   "status": "production",
   "build_date": "2026-06-29",
   "statistics": {
-    "total_concepts": 254,
+    "total_concepts": 258,
     "total_domains": 12,
-    "total_requires_edges": 317,
-    "total_unlocks_edges": 316,
+    "total_requires_edges": 323,
+    "total_unlocks_edges": 322,
     "total_cross_links": 0
   },
   "domains": [
@@ -19,7 +19,7 @@
     {
       "key": "mech",
       "name": "Classical Mechanics",
-      "count": 64
+      "count": 65
     },
     {
       "key": "therm",
@@ -39,7 +39,7 @@
     {
       "key": "em",
       "name": "Electromagnetism",
-      "count": 37
+      "count": 40
     },
     {
       "key": "mod",
@@ -845,6 +845,37 @@
         "NCERT Physics Class 11 Ch.5"
       ],
       "children": [],
+      "unlocks": [
+        "phys.mech.constraint-motion"
+      ]
+    },
+    {
+      "id": "phys.mech.constraint-motion",
+      "name": "Connected Bodies, Pulleys and Constraint Relations",
+      "aliases": [
+        "Atwood machine",
+        "connected bodies",
+        "pulley systems"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.mech.tension"
+      ],
+      "related": [
+        "phys.mech.free-body-diagram",
+        "phys.mech.friction"
+      ],
+      "cross_links": [],
+      "description": "Connected bodies are solved with one free-body diagram and one F = ma equation per body, linked by equal tension and the string's constraint; in an Atwood machine the tension lies between the two weights, and a movable pulley halves the block's motion.",
+      "difficulty": "proficient",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "NCERT Physics Class 11 Ch.5",
+        "HC Verma Ch.5"
+      ],
+      "children": [],
       "unlocks": []
     },
     {
@@ -1350,7 +1381,8 @@
       "children": [],
       "unlocks": [
         "phys.mech.equilibrium",
-        "phys.mech.moment-of-inertia"
+        "phys.mech.moment-of-inertia",
+        "phys.em.moving-coil-galvanometer"
       ]
     },
     {
@@ -4286,6 +4318,37 @@
         "NCERT Physics Class 10 Ch.12"
       ],
       "children": [],
+      "unlocks": [
+        "phys.em.domestic-electricity"
+      ]
+    },
+    {
+      "id": "phys.em.domestic-electricity",
+      "name": "Household Circuits, Fuses, Earthing and Safety",
+      "aliases": [
+        "household wiring",
+        "fuse",
+        "earthing",
+        "MCB"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.em.electrical-power"
+      ],
+      "related": [
+        "phys.em.ac-basics",
+        "phys.therm.energy-resources"
+      ],
+      "cross_links": [],
+      "description": "Household appliances are wired in parallel between live and neutral, with switches and fuses or MCBs in the live wire rated just above I = P/V; earthing sends fault current to ground so the fuse blows instead of a person being shocked.",
+      "difficulty": "developing",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "NCERT Science Class 10"
+      ],
+      "children": [],
       "unlocks": []
     },
     {
@@ -4426,8 +4489,40 @@
       ],
       "children": [],
       "unlocks": [
-        "phys.em.biot-savart"
+        "phys.em.biot-savart",
+        "phys.em.moving-coil-galvanometer",
+        "phys.em.motors-and-generators"
       ]
+    },
+    {
+      "id": "phys.em.moving-coil-galvanometer",
+      "name": "Galvanometer, Ammeter and Voltmeter Conversion",
+      "aliases": [
+        "moving coil galvanometer",
+        "shunt",
+        "ammeter",
+        "voltmeter"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.em.magnetic-force",
+        "phys.mech.torque"
+      ],
+      "related": [
+        "phys.em.dc-circuits",
+        "phys.em.ohms-law"
+      ],
+      "cross_links": [],
+      "description": "In a radial field a current-carrying coil feels a torque NIAB balanced by a spring, so its deflection is proportional to current; a small parallel shunt converts it to an ammeter and a large series resistance to a voltmeter.",
+      "difficulty": "proficient",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "NCERT Physics Class 12 Ch.4"
+      ],
+      "children": [],
+      "unlocks": []
     },
     {
       "id": "phys.em.biot-savart",
@@ -4622,7 +4717,8 @@
         "phys.em.ac-basics",
         "phys.em.lenzs-law",
         "phys.em.maxwells-equations",
-        "phys.em.self-inductance"
+        "phys.em.self-inductance",
+        "phys.em.motors-and-generators"
       ]
     },
     {
@@ -4644,6 +4740,37 @@
       "bloom": "understand",
       "mastery_threshold": 0.8,
       "references": [
+        "NCERT Physics Class 12 Ch.6"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.em.motors-and-generators",
+      "name": "Electric Motor and Generator",
+      "aliases": [
+        "electric motor",
+        "AC generator",
+        "dynamo",
+        "commutator"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.em.magnetic-force",
+        "phys.em.faradays-law"
+      ],
+      "related": [
+        "phys.em.lenzs-law",
+        "phys.em.ac-basics"
+      ],
+      "cross_links": [],
+      "description": "A motor turns because of the force on a current-carrying coil in a magnetic field, with a commutator reversing the current each half turn; a generator turns a coil in a field to induce an emf of peak NABw, converting kinetic to electrical energy.",
+      "difficulty": "developing",
+      "estimated_hours": 2,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "NCERT Science Class 10",
         "NCERT Physics Class 12 Ch.6"
       ],
       "children": [],
