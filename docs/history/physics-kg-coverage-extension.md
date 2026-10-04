@@ -129,7 +129,7 @@ added edge is strictly necessary, KGCS P1).
 | Commit | Content |
 |---|---|
 | `39d1eaa9` | batch 13: `phys.mod.special-diodes` (Zener regulator, LED band gap, photodiode, solar cell); requires `diode-rectification` (I–V curve, KGCS P2 over `pn-junction`) and `ohms-law` (KGCS P1). No "LED" alias — it would match the English word "led". |
-| (this commit) | §C: fifteen existing concepts each get one Core Understanding paragraph and one probe |
+| `944bac5c` | §C: fifteen existing concepts each get one Core Understanding paragraph and one probe |
 
 §C mechanics:
 - **Probes** go only into an existing ladder (a new difficulty rung: nine) or a brand-new
@@ -149,6 +149,15 @@ added edge is strictly necessary, KGCS P1).
 
 Physics KG: 283 concepts. The coverage audit is complete apart from the two
 owner-excluded electronics nodes.
+
+Landed on `main` at `944bac5c` (owner-approved), deploy `dpl_8FdbDG1ZJbHQgSqk6AqTVRhhQQSp`
+READY. The lesson-order remap (`--from b7e4e01e`: lessons 215–282 shift by one) was **not
+run, because it was a verified no-op**: before the push and again after READY, 0 of 779 physics
+progress rows held any lesson ≥ 215 (highest `currentLesson` 177, highest completed 176),
+0 bookmarks. Running it after deploy could only have mis-shifted a row written under the new
+numbering. Cold-start bootstrap at 16:39 UTC created `phys.mod.special-diodes` (2 explanations,
+5 probes) and exactly fifteen new probe identities on the fifteen §C concepts (one each), with
+0 status changes to existing identities on those concepts — nothing orphaned.
 
 ## Next
 
