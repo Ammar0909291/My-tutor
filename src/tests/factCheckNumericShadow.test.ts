@@ -93,11 +93,13 @@ describe('safety contract', () => {
     expect(JSON.stringify(r)).not.toMatch(/userId|sessionId|email|password|secret|apiKey|bearer/i)
   })
 
-  it('mode: shadow by default, off only when set; no serve mode exists', () => {
-    expect(numericFactCheckMode()).toBe('shadow')
-    process.env.NUMERIC_FACT_CHECK_MODE = 'off'
+  it('mode: OFF by default (experiment closed 2026-10-04); only an explicit "shadow" enables it; no serve mode exists', () => {
     expect(numericFactCheckMode()).toBe('off')
     process.env.NUMERIC_FACT_CHECK_MODE = 'serve'
+    expect(numericFactCheckMode()).toBe('off')
+    process.env.NUMERIC_FACT_CHECK_MODE = 'on'
+    expect(numericFactCheckMode()).toBe('off')
+    process.env.NUMERIC_FACT_CHECK_MODE = 'shadow'
     expect(numericFactCheckMode()).toBe('shadow')
   })
 })

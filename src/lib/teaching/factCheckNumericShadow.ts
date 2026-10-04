@@ -13,15 +13,19 @@
  *    an edited reply, request a retry, or touch grading/mastery/progress.
  *  - The record carries tutor text and the concept id only — no learner text,
  *    no user/session id, no email.
- *  - There is no serve mode. NUMERIC_FACT_CHECK_MODE=off disables it; any
- *    other value (or unset) means shadow.
+ *  - There is no serve mode.
+ *
+ * EXPERIMENT CLOSED 2026-10-04 — NOT READY FOR ENFORCEMENT (owner). Production
+ * precision 6.3 % (docs/qa/numeric-fact-check-step3/REPORT.md). The shadow is
+ * OFF by default; it runs only if NUMERIC_FACT_CHECK_MODE=shadow is set
+ * explicitly. N1/N2 enforcement and N3 are NOT APPROVED.
  */
 import { checkArithmetic, checkRatioClaims, type NumericFlag } from './factCheckNumeric'
 
 export type NumericShadowMode = 'off' | 'shadow'
 
 export function numericFactCheckMode(): NumericShadowMode {
-  return process.env.NUMERIC_FACT_CHECK_MODE?.trim().toLowerCase() === 'off' ? 'off' : 'shadow'
+  return process.env.NUMERIC_FACT_CHECK_MODE?.trim().toLowerCase() === 'shadow' ? 'shadow' : 'off'
 }
 
 export interface NumericShadowFinding {
