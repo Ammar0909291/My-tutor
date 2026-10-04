@@ -1,0 +1,417 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.em.fields-in-matter-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.em.fields-in-matter",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:084fbd748d96490a02c3f792b51193920cc813350fedfa0502f2409644e1a21f",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.em.fields-in-matter.md": "sha256:a5cb23b5acb2a49e2529a3eaba63ed5e6bc30ea0ec1c96ea383ad2c7e6e995ed"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.em.fields-in-matter",
+    "name": "Fields in Matter: D, H and Boundary Conditions",
+    "difficultyRaw": "expert (5)",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "phys.em.dielectrics",
+      "phys.em.magnetic-materials",
+      "phys.em.amperes-law"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.em.fields-in-matter-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.em.fields-in-matter (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.em.fields-in-matter.md": "sha256:a5cb23b5acb2a49e2529a3eaba63ed5e6bc30ea0ec1c96ea383ad2c7e6e995ed"
+      },
+      "contentHash": "sha256:1709cf5f67fc6ba65ac62c94aaa10e3fab9121903ea05e6c43b3c79ce314bae9",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.em.fields-in-matter.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.fields-in-matter.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.fields-in-matter"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.fields-in-matter\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.fields-in-matter.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.fields-in-matter.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.fields-in-matter"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.fields-in-matter\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.fields-in-matter.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.fields-in-matter.md#TA-3 (addresses MC-DIELECTRIC-STRENGTHENS-E)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.fields-in-matter"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.fields-in-matter\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.fields-in-matter.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.fields-in-matter.md#TA-4 (addresses MC-H-SAME-AS-B)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.fields-in-matter"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.fields-in-matter\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.fields-in-matter.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.fields-in-matter.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.fields-in-matter"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.fields-in-matter\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.fields-in-matter.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.fields-in-matter.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.fields-in-matter"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.fields-in-matter\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.fields-in-matter.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.fields-in-matter.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.fields-in-matter"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.fields-in-matter\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.em.fields-in-matter/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "phys.em.fields-in-matter",
+      "title": "Learning Objective",
+      "content": "[Boundary statement]\nA student who achieves mastery demonstrates:\n1. Explains that a dielectric in a field becomes polarised — its molecules' charges shift slightly, leaving bound surface charge that opposes the applied field — described by the polarisation P (dipole moment per volume); the electric displacement D = ε₀E + P obeys Gauss's law with FREE charge only, ∮D·dA = Q_free, and in a linear dielectric D = ε_rε₀E. For a parallel-plate capacitor with free charge density 1.0 × 10⁻⁶ C/m² and ε_r = 4: D = 1.0 × 10⁻⁶ C/m², E = D/(ε_rε₀) ≈ 2.8 × 10⁴ V/m — a quarter of the 1.13 × 10⁵ V/m without the slab — and P = D − ε₀E = 7.5 × 10⁻⁷ C/m² of bound charge per area.\n2. Explains the magnetic counterpart: magnetised matter carries bound currents described by the magnetisation M; the magnetising field H = B/μ₀ − M obeys Ampère's law with FREE current only, ∮H·dl = I_free, and in a linear material B = μ_rμ₀H. In a long solenoid with 1000 turns per metre carrying 2 A, H = nI = 2000 A/m whether or not there is a core; with an iron core of μ_r = 500, B = μ_rμ₀H ≈ 1.26 T instead of about 2.5 mT without it.\n3. States and uses the boundary conditions at an interface with no free surface charge or current: the normal components of D and B are continuous, and the tangential components of E and H are continuous — so field lines bend at a boundary (like refraction) and the normal E jumps by the ratio of permittivities.\n\nA student who thinks inserting a dielectric strengthens the electric field between fixed charges, or treats H and B as the same field with different letters, has **NOT** achieved mastery — those ideas break capacitor and electromagnet design.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.fields-in-matter.md",
+        "startLine": 17,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.em.fields-in-matter/misconception/MC-DIELECTRIC-STRENGTHENS-E",
+      "kind": "misconception",
+      "conceptId": "phys.em.fields-in-matter",
+      "title": "Inserting a dielectric strengthens the electric field",
+      "content": "### MC-DIELECTRIC-STRENGTHENS-E: \"Inserting a dielectric strengthens the electric field\"\ntrigger_signal: student predicts that a dielectric slab between fixed free charges increases the electric field, reasoning that the material \"adds charge\".\nconflict_evidence [P28]: \"An isolated charged capacitor's voltage drops when glass slides in. V = Ed. What must have happened to E?\"\nbridge_text [P30]: \"E fell. The glass polarises: next to the positive plate a layer of negative bound charge appears, next to the negative plate a positive one. Those bound charges produce a field opposing the plates' field, so the total E inside drops by the factor ε_r. The free charge — and so D — is unchanged.\"\nreplacement_text [P31]: \"For fixed free charge, a dielectric reduces E by ε_r (D unchanged); for fixed voltage, it lets the plates hold ε_r times more charge.\"\ndiscrimination_pairs [P33]: [\"vacuum: σ_f = 10⁻⁶ C/m² gives E ≈ 1.13 × 10⁵ V/m\", \"glass, ε_r = 4: same σ_f gives E ≈ 2.8 × 10⁴ V/m\"]\ns6_path: skip P28; show the bound-charge diagram and the voltmeter reading.",
+      "localKey": "MC-DIELECTRIC-STRENGTHENS-E",
+      "language": "en",
+      "refs": [
+        "MC-DIELECTRIC-STRENGTHENS-E"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.fields-in-matter.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.em.fields-in-matter/misconception/MC-H-SAME-AS-B",
+      "kind": "misconception",
+      "conceptId": "phys.em.fields-in-matter",
+      "title": "H and B are the same field in different units",
+      "content": "### MC-H-SAME-AS-B: \"H and B are the same field in different units\"\ntrigger_signal: student treats H and B as interchangeable, expecting both to change by the same factor when a magnetic material is inserted.\nconflict_evidence [P28]: \"A solenoid with 2000 ampere-turns per metre gets an iron core; the current is unchanged. Ampère's law for H counts only free current. Has the free current changed? So has H? What about B?\"\nbridge_text [P30]: \"The free current is unchanged, so H = nI = 2000 A/m stays the same. But the iron's aligned atomic moments add bound currents, so B = μ_rμ₀H jumps from about 2.5 mT to about 1.26 T. H tracks the free currents we control; B is the total field, including the material's response. They are different quantities: B = μ₀(H + M).\"\nreplacement_text [P31]: \"H is set by free currents (∮H·dl = I_free); B = μ₀(H + M) includes the material's magnetisation.\"\ndiscrimination_pairs [P33]: [\"air-core solenoid: H = 2000 A/m, B ≈ 2.5 mT\", \"iron core (μ_r = 500): H = 2000 A/m, B ≈ 1.26 T\"]\ns6_path: skip P28; compare the two numbers side by side.",
+      "localKey": "MC-H-SAME-AS-B",
+      "language": "en",
+      "refs": [
+        "MC-H-SAME-AS-B"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.fields-in-matter.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.em.fields-in-matter/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.fields-in-matter",
+      "title": "Glass and Iron",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Glass and Iron\",\"primitives\":[\"P01\",\"P04\",\"P05\",\"P06\",\"P14\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.fields-in-matter.md",
+        "startLine": 11,
+        "endLine": 18
+      }
+    },
+    {
+      "assetId": "phys.em.fields-in-matter/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.fields-in-matter",
+      "title": "Polarisation and D",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Polarisation and D\",\"primitives\":[\"P02\",\"P06\",\"P08\",\"P13\",\"P34\",\"P49\",\"P50\",\"P51\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.fields-in-matter.md",
+        "startLine": 18,
+        "endLine": 28
+      }
+    },
+    {
+      "assetId": "phys.em.fields-in-matter/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.fields-in-matter",
+      "title": "Weaker, Not Stronger",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Weaker, Not Stronger\",\"primitives\":[\"P02\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-DIELECTRIC-STRENGTHENS-E\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-DIELECTRIC-STRENGTHENS-E"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.fields-in-matter.md",
+        "startLine": 28,
+        "endLine": 34
+      }
+    },
+    {
+      "assetId": "phys.em.fields-in-matter/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.fields-in-matter",
+      "title": "Magnetisation and H",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Magnetisation and H\",\"primitives\":[\"P02\",\"P13\",\"P34\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-H-SAME-AS-B\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-H-SAME-AS-B"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.fields-in-matter.md",
+        "startLine": 34,
+        "endLine": 43
+      }
+    },
+    {
+      "assetId": "phys.em.fields-in-matter/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.fields-in-matter",
+      "title": "Boundary Conditions",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Boundary Conditions\",\"primitives\":[\"P02\",\"P13\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.fields-in-matter.md",
+        "startLine": 43,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "phys.em.fields-in-matter/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.fields-in-matter",
+      "title": "Formative Assessment",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Formative Assessment\",\"primitives\":[\"P02\",\"P35\",\"P49\",\"P51\",\"P55\",\"P79\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.fields-in-matter.md",
+        "startLine": 49,
+        "endLine": 56
+      }
+    },
+    {
+      "assetId": "phys.em.fields-in-matter/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.fields-in-matter",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P28\",\"P41\",\"P54\",\"P55\",\"P62\",\"P68\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.fields-in-matter.md",
+        "startLine": 56,
+        "endLine": 98
+      }
+    },
+    {
+      "assetId": "phys.em.fields-in-matter/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.em.fields-in-matter",
+      "title": "Assessment Battery",
+      "content": "| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (classify) | \"Free current only: B or H?\" | CORRECT = H |\n| P74 (classify) | \"Free charge only: E or D?\" | CORRECT = D |\n| P75 (boundary) | \"Normal E across vacuum–glass\" | CORRECT = not continuous (normal D is) |\n| P76 (transfer) | \"Iron cores\" | CORRECT = large μ_r multiplies B for the same current |\n| P77 (generate) | \"More charge at same V\" | CORRECT = high-ε_r dielectric; D = ε_rε₀V/d larger |\n| P78 (explain) | \"Dielectric reduces E\" | CORRECT = bound surface charge opposes the free charge's field |\n| P79 (predict) | \"Field line bending\" | CORRECT = away from the normal in the higher-ε_r medium |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.fields-in-matter.md",
+        "startLine": 180,
+        "endLine": 192
+      }
+    },
+    {
+      "assetId": "phys.em.fields-in-matter/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.em.fields-in-matter",
+      "title": "Student State Matrix",
+      "content": "| State | Why here | Tell-tale behaviour | Protocol |\n|---|---|---|---|\n| S0 | Only vacuum fields known | Cannot say what a dielectric does inside | Protocol A (Concrete) |\n| S1 | D = ε₀E + P recited | Cannot say why D depends only on free charge | Protocol B (Counterexample-first) |\n| S2-DIELECTRIC-STRENGTHENS-E | \"More stuff, more field\" | \"The glass slab makes the field stronger\" | Misconception Engine → then Protocol C |\n| S2-H-SAME-AS-B | Letters interchangeable | \"H is just B in different units\" | Misconception Engine → then Protocol C |\n| S3 | Partial — D and H fine | Cannot apply boundary conditions | Protocol C (Guided Questioning) |\n| S6 | Anxiety on vector fields | Avoids flux and circulation integrals | Protocol F (Low Pressure) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.fields-in-matter.md",
+        "startLine": 27,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "phys.em.fields-in-matter/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.em.fields-in-matter",
+      "title": "Diagnostic Battery",
+      "content": "DB-1 (prior-exposure check):\n\"A charged, isolated capacitor has a glass slab slid between its plates. What happens to the voltage between the plates?\"\n  \"It falls — the field inside is reduced\" → DB-2.\n  \"It rises\" or no idea → S0. Enter Protocol A (Concrete).\n\nDB-2 (representation / misconception test):\n\"With the same free charge on the plates, is the electric field inside the glass bigger or smaller than it was in vacuum?\"\n  \"Smaller, by ε_r — bound surface charges on the glass oppose it\" → S3. Enter Protocol C.\n  \"Smaller\" (no reason) → S1. Enter Protocol B.\n  \"Bigger — the glass adds its own charges\" → SIGNAL:MISCONCEPTION:MC-DIELECTRIC-STRENGTHENS-E. Enter Misconception Engine.\n  Pause → add S6 flag; Protocol F if anxious, otherwise Protocol A.\n\nDB-3 (H check — overlays):\n\"A solenoid's current is unchanged but an iron core is inserted. Which changes a lot: H or B?\"\n  \"B — H = nI depends only on the free current\" → no flag.\n  \"Both by the same factor — H and B are the same thing\" → add SIGNAL:MISCONCEPTION:MC-H-SAME-AS-B (repair at TA-4).\n  Confident and wrong on DB-2 → add S7 flag. Override to Protocol G.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-DIELECTRIC-STRENGTHENS-E",
+        "MC-H-SAME-AS-B"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.fields-in-matter.md",
+        "startLine": 38,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "phys.em.fields-in-matter/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.em.fields-in-matter",
+      "title": "Prerequisite Check",
+      "content": "PD-1 (for `phys.em.dielectrics`, `phys.em.magnetic-materials`, `phys.em.amperes-law`):\n\"What does a dielectric do to a capacitor's capacitance? What is μ_r? State Ampère's law.\"\n  Cannot say \"raises it by ε_r; relative permeability; ∮B·dl = μ₀I\" → flag PREREQ-GAP-MATTER-FIELDS.\n  In-session minimum repair: one P06 (molecules aligning in a dielectric) + one P34 (\"ε_r = 3: new capacitance?\") then resume. If absent, schedule the missing session (S4 route).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.fields-in-matter.md",
+        "startLine": 58,
+        "endLine": 65
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

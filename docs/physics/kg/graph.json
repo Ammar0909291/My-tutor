@@ -4,10 +4,10 @@
   "status": "production",
   "build_date": "2026-06-29",
   "statistics": {
-    "total_concepts": 277,
+    "total_concepts": 281,
     "total_domains": 12,
-    "total_requires_edges": 348,
-    "total_unlocks_edges": 347,
+    "total_requires_edges": 357,
+    "total_unlocks_edges": 356,
     "total_cross_links": 0
   },
   "domains": [
@@ -29,7 +29,7 @@
     {
       "key": "wave",
       "name": "Waves & Oscillations",
-      "count": 18
+      "count": 20
     },
     {
       "key": "opt",
@@ -39,12 +39,12 @@
     {
       "key": "em",
       "name": "Electromagnetism",
-      "count": 46
+      "count": 47
     },
     {
       "key": "mod",
       "name": "Modern Physics",
-      "count": 25
+      "count": 26
     },
     {
       "key": "qm",
@@ -2938,7 +2938,8 @@
       "unlocks": [
         "phys.wave.pendulum",
         "phys.wave.shm-energy",
-        "phys.wave.spring-mass"
+        "phys.wave.spring-mass",
+        "phys.wave.coupled-oscillators"
       ]
     },
     {
@@ -3062,6 +3063,37 @@
       "mastery_threshold": 0.8,
       "references": [
         "NCERT Physics Class 11 Ch.14"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.wave.nonlinear-dynamics"
+      ]
+    },
+    {
+      "id": "phys.wave.nonlinear-dynamics",
+      "name": "Nonlinear Dynamics and Period Doubling",
+      "aliases": [
+        "nonlinear oscillations",
+        "logistic map",
+        "period doubling",
+        "chaotic pendulum"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.wave.forced-oscillations"
+      ],
+      "related": [
+        "phys.wave.shm"
+      ],
+      "cross_links": [],
+      "description": "When restoring forces are not proportional to displacement, systems can behave very differently from simple harmonic motion: periods depend on amplitude, period-doubling appears, and chaotic systems \u2014 deterministic but with sensitive dependence on initial conditions, as in the logistic map at r = 3.9 or a driven pendulum \u2014 make long-term prediction impossible though they are not random.",
+      "difficulty": "expert",
+      "estimated_hours": 2,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Strogatz, Nonlinear Dynamics and Chaos",
+        "Taylor, Classical Mechanics Ch.12"
       ],
       "children": [],
       "unlocks": []
@@ -3266,6 +3298,38 @@
       "mastery_threshold": 0.8,
       "references": [
         "NCERT Physics Class 11 Ch.15"
+      ],
+      "children": [],
+      "unlocks": [
+        "phys.wave.coupled-oscillators"
+      ]
+    },
+    {
+      "id": "phys.wave.coupled-oscillators",
+      "name": "Coupled Oscillators and Normal Modes",
+      "aliases": [
+        "normal modes",
+        "coupled pendulums",
+        "mode frequencies",
+        "energy exchange between oscillators"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.wave.shm",
+        "phys.wave.standing-waves"
+      ],
+      "related": [
+        "phys.wave.forced-oscillations"
+      ],
+      "cross_links": [],
+      "description": "Oscillators linked by a coupling move in normal modes, patterns in which every part oscillates at one shared frequency; a system has as many modes as degrees of freedom (two masses between springs: sqrt(k/m) and sqrt(3k/m)), any motion is a superposition of modes, and weakly coupled pendulums swap energy at the beat frequency; a string's modes are its standing waves.",
+      "difficulty": "expert",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "French, Vibrations and Waves Ch.5",
+        "Halliday Resnick Ch.15"
       ],
       "children": [],
       "unlocks": []
@@ -4294,7 +4358,9 @@
         "NCERT Physics Class 12 Ch.2"
       ],
       "children": [],
-      "unlocks": []
+      "unlocks": [
+        "phys.em.fields-in-matter"
+      ]
     },
     {
       "id": "phys.em.energy-capacitor",
@@ -4406,7 +4472,9 @@
         "NCERT Physics Class 12 Ch.3"
       ],
       "children": [],
-      "unlocks": []
+      "unlocks": [
+        "phys.mod.superconductivity"
+      ]
     },
     {
       "id": "phys.em.dc-circuits",
@@ -4830,7 +4898,8 @@
       "children": [],
       "unlocks": [
         "phys.em.maxwells-equations",
-        "phys.em.solenoid"
+        "phys.em.solenoid",
+        "phys.em.fields-in-matter"
       ]
     },
     {
@@ -4885,8 +4954,40 @@
       ],
       "children": [],
       "unlocks": [
-        "phys.em.magnetic-dipole"
+        "phys.em.magnetic-dipole",
+        "phys.em.fields-in-matter",
+        "phys.mod.superconductivity"
       ]
+    },
+    {
+      "id": "phys.em.fields-in-matter",
+      "name": "Fields in Matter: D, H and Boundary Conditions",
+      "aliases": [
+        "electric displacement",
+        "polarisation",
+        "magnetising field H",
+        "boundary conditions for fields"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.em.dielectrics",
+        "phys.em.magnetic-materials",
+        "phys.em.amperes-law"
+      ],
+      "related": [
+        "phys.em.maxwells-equations"
+      ],
+      "cross_links": [],
+      "description": "In matter, bound charges and currents are handled through the polarisation P and magnetisation M: D = e0E + P obeys Gauss's law with free charge only, H = B/mu0 - M obeys Ampere's law with free current only, so a dielectric reduces E by er and an iron core multiplies B by mur; at boundaries the normal D and B and the tangential E and H are continuous.",
+      "difficulty": "expert",
+      "estimated_hours": 3,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Griffiths, Introduction to Electrodynamics Ch.4 and 6"
+      ],
+      "children": [],
+      "unlocks": []
     },
     {
       "id": "phys.em.magnetic-dipole",
@@ -7829,8 +7930,40 @@
       ],
       "children": [],
       "unlocks": [
-        "phys.mod.semiconductor-classification"
+        "phys.mod.semiconductor-classification",
+        "phys.mod.superconductivity"
       ]
+    },
+    {
+      "id": "phys.mod.superconductivity",
+      "name": "Superconductivity",
+      "aliases": [
+        "superconductor",
+        "Meissner effect",
+        "critical temperature",
+        "Cooper pairs"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.em.resistivity",
+        "phys.em.magnetic-materials",
+        "phys.mod.energy-bands"
+      ],
+      "related": [
+        "phys.mod.semiconductor-classification"
+      ],
+      "cross_links": [],
+      "description": "Below a critical temperature some materials lose all electrical resistance, so currents persist indefinitely, and they expel magnetic fields (the Meissner effect), which distinguishes them from mere perfect conductors; superconductivity is destroyed above a critical field or current, and is explained by electrons pairing into Cooper pairs with an energy gap.",
+      "difficulty": "expert",
+      "estimated_hours": 2,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Halliday Resnick Ch.41",
+        "Kittel, Introduction to Solid State Physics Ch.10"
+      ],
+      "children": [],
+      "unlocks": []
     },
     {
       "id": "phys.mod.semiconductor-classification",

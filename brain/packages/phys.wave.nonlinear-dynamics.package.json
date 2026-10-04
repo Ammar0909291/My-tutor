@@ -1,0 +1,415 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.wave.nonlinear-dynamics-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.wave.nonlinear-dynamics",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:b23ab00765fd9852c4eabbe4537673fb02308b4cfe348c47f4a3808756163d71",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.wave.nonlinear-dynamics.md": "sha256:f0326580b08cc5572aaebe79b0a75c66a8f4e0218a50098cabace0a096ac00bb"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.wave.nonlinear-dynamics",
+    "name": "Nonlinear Dynamics and Period Doubling",
+    "difficultyRaw": "expert (5)",
+    "bloom": "understand",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "phys.wave.forced-oscillations"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.wave.nonlinear-dynamics-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.wave.nonlinear-dynamics (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.wave.nonlinear-dynamics.md": "sha256:f0326580b08cc5572aaebe79b0a75c66a8f4e0218a50098cabace0a096ac00bb"
+      },
+      "contentHash": "sha256:1db6f5e0e909cf099cbf0a703c3f2b4e4401ef61ddcd513c91a7e85478745f7a",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.wave.nonlinear-dynamics.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.nonlinear-dynamics.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.nonlinear-dynamics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.nonlinear-dynamics\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.nonlinear-dynamics.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.nonlinear-dynamics.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.nonlinear-dynamics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.nonlinear-dynamics\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.nonlinear-dynamics.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.nonlinear-dynamics.md#TA-3",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.nonlinear-dynamics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.nonlinear-dynamics\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.nonlinear-dynamics.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.nonlinear-dynamics.md#TA-4 (addresses MC-CHAOS-MEANS-RANDOM)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.nonlinear-dynamics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.nonlinear-dynamics\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.nonlinear-dynamics.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.nonlinear-dynamics.md#TA-5 (addresses MC-SMALL-ERROR-SMALL-EFFECT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.nonlinear-dynamics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.nonlinear-dynamics\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.nonlinear-dynamics.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.nonlinear-dynamics.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.nonlinear-dynamics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.nonlinear-dynamics\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.nonlinear-dynamics.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.nonlinear-dynamics.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.nonlinear-dynamics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.nonlinear-dynamics\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.wave.nonlinear-dynamics/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "phys.wave.nonlinear-dynamics",
+      "title": "Learning Objective",
+      "content": "[Boundary statement]\nA student who achieves mastery demonstrates:\n1. Explains what makes a system nonlinear — a restoring force (or rule) not proportional to displacement — and its first consequences: superposition no longer holds, and a pendulum's period grows with amplitude (at 90° amplitude it is about 18% longer than the small-swing period), so the simple-harmonic results are only small-amplitude approximations.\n2. Follows the route to chaos in the logistic map x_{n+1} = r x_n (1 − x_n): at r = 2.8 every start settles to the fixed point 1 − 1/r ≈ 0.643; at r = 3.2 the values alternate between about 0.513 and 0.799 (period doubling); at r = 3.9 they never settle — chaos.\n3. Explains chaos precisely: deterministic (the rule has no randomness — the same start always gives the same sequence) yet with sensitive dependence on initial conditions, so a difference of one part in a million (0.200000 vs 0.200001 at r = 3.9) grows to a completely different sequence within about 20 steps. Long-term prediction is impossible in practice because initial conditions are never known exactly — the reason weather forecasts fail beyond about two weeks, and why driven damped pendulums can swing chaotically.\n\nA student who thinks chaotic means random, or that a tiny error in the starting point always leaves only a tiny error in the prediction, has **NOT** achieved mastery — those ideas miss what chaos theory actually discovered.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.nonlinear-dynamics.md",
+        "startLine": 17,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.wave.nonlinear-dynamics/misconception/MC-CHAOS-MEANS-RANDOM",
+      "kind": "misconception",
+      "conceptId": "phys.wave.nonlinear-dynamics",
+      "title": "Chaotic systems behave randomly",
+      "content": "### MC-CHAOS-MEANS-RANDOM: \"Chaotic systems behave randomly\"\ntrigger_signal: student equates chaos with randomness or chance, ignoring that chaotic systems follow exact deterministic rules.\nconflict_evidence [P28]: \"Run x_{n+1} = 3.9 x_n (1 − x_n) from exactly 0.2 on a computer, twice. Compare the sequences digit by digit. Does any randomness enter the rule?\"\nbridge_text [P30]: \"The two runs are identical — every digit. Nothing in the rule is random; given the start, the whole future is fixed. What makes it chaotic is that any difference in the start, however small, grows rapidly, so the sequence LOOKS irregular and cannot be predicted far ahead in practice. Chaos is deterministic unpredictability, not chance.\"\nreplacement_text [P31]: \"Chaos = deterministic rules + sensitive dependence on initial conditions; same start, same future; slightly different start, very different future.\"\ndiscrimination_pairs [P33]: [\"dice roll: genuinely random outcome\", \"logistic map at r = 3.9: exact rule, irregular-looking but repeatable sequence\"]\ns6_path: skip P28; show the two identical printouts.",
+      "localKey": "MC-CHAOS-MEANS-RANDOM",
+      "language": "en",
+      "refs": [
+        "MC-CHAOS-MEANS-RANDOM"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.nonlinear-dynamics.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.wave.nonlinear-dynamics/misconception/MC-SMALL-ERROR-SMALL-EFFECT",
+      "kind": "misconception",
+      "conceptId": "phys.wave.nonlinear-dynamics",
+      "title": "A tiny error in the start gives only a tiny error later",
+      "content": "### MC-SMALL-ERROR-SMALL-EFFECT: \"A tiny error in the start gives only a tiny error later\"\ntrigger_signal: student assumes prediction errors stay proportional to initial measurement errors, so better measurement always allows proportionally better long-term prediction.\nconflict_evidence [P28]: \"Start two runs at 0.200000 and 0.200001 with r = 3.9. Look at the difference after 5, 10, 20 steps.\"\nbridge_text [P30]: \"It grows roughly exponentially — by about step 20 the two runs are as different as two random numbers. In a linear system a small error stays small; in a chaotic one it explodes. Measuring the start ten times more precisely only adds a few more predictable steps, which is why weather forecasts fail beyond about two weeks however good the instruments.\"\nreplacement_text [P31]: \"In chaotic systems initial errors grow exponentially, limiting long-term prediction no matter how good the measurement.\"\ndiscrimination_pairs [P33]: [\"r = 2.8: starts 0.2 and 0.3 both settle to 0.643 — errors shrink\", \"r = 3.9: starts 10⁻⁶ apart diverge completely by ~step 20\"]\ns6_path: skip P28; show the prepared difference table.",
+      "localKey": "MC-SMALL-ERROR-SMALL-EFFECT",
+      "language": "en",
+      "refs": [
+        "MC-SMALL-ERROR-SMALL-EFFECT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.nonlinear-dynamics.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.wave.nonlinear-dynamics/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.nonlinear-dynamics",
+      "title": "Two Releases",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Two Releases\",\"primitives\":[\"P01\",\"P04\",\"P05\",\"P06\",\"P14\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.nonlinear-dynamics.md",
+        "startLine": 11,
+        "endLine": 18
+      }
+    },
+    {
+      "assetId": "phys.wave.nonlinear-dynamics/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.nonlinear-dynamics",
+      "title": "Nonlinear Means Not Proportional",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Nonlinear Means Not Proportional\",\"primitives\":[\"P02\",\"P13\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.nonlinear-dynamics.md",
+        "startLine": 18,
+        "endLine": 24
+      }
+    },
+    {
+      "assetId": "phys.wave.nonlinear-dynamics/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.nonlinear-dynamics",
+      "title": "The Logistic Map",
+      "content": "{\"id\":\"TA-3\",\"title\":\"The Logistic Map\",\"primitives\":[\"P02\",\"P06\",\"P08\",\"P13\",\"P34\",\"P49\",\"P50\",\"P51\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.nonlinear-dynamics.md",
+        "startLine": 24,
+        "endLine": 33
+      }
+    },
+    {
+      "assetId": "phys.wave.nonlinear-dynamics/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.nonlinear-dynamics",
+      "title": "Deterministic, Not Random",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Deterministic, Not Random\",\"primitives\":[\"P02\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-CHAOS-MEANS-RANDOM\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-CHAOS-MEANS-RANDOM"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.nonlinear-dynamics.md",
+        "startLine": 33,
+        "endLine": 39
+      }
+    },
+    {
+      "assetId": "phys.wave.nonlinear-dynamics/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.nonlinear-dynamics",
+      "title": "Sensitive Dependence",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Sensitive Dependence\",\"primitives\":[\"P02\",\"P13\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-SMALL-ERROR-SMALL-EFFECT\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-SMALL-ERROR-SMALL-EFFECT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.nonlinear-dynamics.md",
+        "startLine": 39,
+        "endLine": 46
+      }
+    },
+    {
+      "assetId": "phys.wave.nonlinear-dynamics/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.nonlinear-dynamics",
+      "title": "Formative Assessment",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Formative Assessment\",\"primitives\":[\"P02\",\"P35\",\"P49\",\"P51\",\"P55\",\"P79\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.nonlinear-dynamics.md",
+        "startLine": 46,
+        "endLine": 53
+      }
+    },
+    {
+      "assetId": "phys.wave.nonlinear-dynamics/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.nonlinear-dynamics",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P28\",\"P41\",\"P54\",\"P55\",\"P62\",\"P68\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.nonlinear-dynamics.md",
+        "startLine": 53,
+        "endLine": 95
+      }
+    },
+    {
+      "assetId": "phys.wave.nonlinear-dynamics/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.nonlinear-dynamics",
+      "title": "Assessment Battery",
+      "content": "| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (classify) | \"r = 2.8, 3.2, 3.9\" | CORRECT = fixed point, period 2, chaos |\n| P74 (classify) | \"Random or deterministic?\" | CORRECT = deterministic |\n| P75 (boundary) | \"Small-amplitude pendulum\" | CORRECT = not chaotic — nearly linear SHM |\n| P76 (transfer) | \"Weather beyond two weeks\" | CORRECT = sensitive dependence on initial conditions |\n| P77 (generate) | \"Computer experiment\" | CORRECT = two runs from starts differing by 10⁻⁶; plot the difference |\n| P78 (explain) | \"Better measurement\" | CORRECT = errors grow exponentially; each 10× improvement adds only a few steps |\n| P79 (predict) | \"r = 2.8, starts 0.2 and 0.3\" | CORRECT = converge to 0.643 |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.nonlinear-dynamics.md",
+        "startLine": 178,
+        "endLine": 190
+      }
+    },
+    {
+      "assetId": "phys.wave.nonlinear-dynamics/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.wave.nonlinear-dynamics",
+      "title": "Student State Matrix",
+      "content": "| State | Why here | Tell-tale behaviour | Protocol |\n|---|---|---|---|\n| S0 | Only linear (SHM) systems met | Assumes all oscillators behave like SHM | Protocol A (Concrete) |\n| S1 | \"Butterfly effect\" recited | Cannot say what is deterministic about chaos | Protocol B (Counterexample-first) |\n| S2-CHAOS-MEANS-RANDOM | Everyday meaning | \"Chaotic systems behave randomly\" | Misconception Engine → then Protocol C |\n| S2-SMALL-ERROR-SMALL-EFFECT | Linear intuition | \"Measure the start a bit better and the prediction is just a bit off\" | Misconception Engine → then Protocol C |\n| S3 | Partial — chaos idea fine | Cannot describe period doubling or nonlinearity | Protocol C (Guided Questioning) |\n| S6 | Anxiety on iteration | Avoids repeated calculation | Protocol F (Low Pressure) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.nonlinear-dynamics.md",
+        "startLine": 27,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "phys.wave.nonlinear-dynamics/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.wave.nonlinear-dynamics",
+      "title": "Diagnostic Battery",
+      "content": "DB-1 (prior-exposure check):\n\"A double pendulum is released twice from what looks like exactly the same position. Will it follow the same path both times?\"\n  \"Yes, if the start is the same\" → DB-2.\n  \"No — tiny differences grow\" → DB-2.\n  No idea → S0. Enter Protocol A (Concrete).\n\nDB-2 (representation / misconception test):\n\"The logistic map x_{n+1} = 3.9 x_n (1 − x_n) is run twice from exactly 0.2. Will the two sequences be the same?\"\n  \"Yes — the rule is deterministic; only a different start, however slight, diverges\" → S3. Enter Protocol C.\n  \"Yes\" (no reason) → S1. Enter Protocol B.\n  \"No — chaos is random\" → SIGNAL:MISCONCEPTION:MC-CHAOS-MEANS-RANDOM. Enter Misconception Engine.\n  Pause → add S6 flag; Protocol F if anxious, otherwise Protocol A.\n\nDB-3 (sensitivity check — overlays):\n\"Two runs start at 0.200000 and 0.200001. After 30 steps, will they still differ only by about 0.000001?\"\n  \"No — the difference grows until the sequences are unrelated\" → no flag.\n  \"Yes\" → add SIGNAL:MISCONCEPTION:MC-SMALL-ERROR-SMALL-EFFECT (repair at TA-5).\n  Confident and wrong on DB-2 → add S7 flag. Override to Protocol G.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-CHAOS-MEANS-RANDOM",
+        "MC-SMALL-ERROR-SMALL-EFFECT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.nonlinear-dynamics.md",
+        "startLine": 38,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "phys.wave.nonlinear-dynamics/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.wave.nonlinear-dynamics",
+      "title": "Prerequisite Check",
+      "content": "PD-1 (for `phys.wave.forced-oscillations`):\n\"What does a driving force do to a damped oscillator, and when is the response largest?\"\n  Cannot say \"it settles to oscillate at the driving frequency; largest near the natural frequency (resonance)\" → flag PREREQ-GAP-FORCED.\n  In-session minimum repair: one P06 (a resonance curve) + one P34 (\"driving far from resonance: big or small amplitude?\") then resume. If absent, schedule the missing session (S4 route).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.nonlinear-dynamics.md",
+        "startLine": 59,
+        "endLine": 66
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

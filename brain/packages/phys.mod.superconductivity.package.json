@@ -1,0 +1,417 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.mod.superconductivity-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.mod.superconductivity",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:76d5e2c269c9bb40f14b51cbdab595586dc2082e90414cdd17392c861650f099",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.mod.superconductivity.md": "sha256:5ac6ab95d88af8fab44cecee00f00c650f8101e9049b2e2e448e42c1f5e7e324"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.mod.superconductivity",
+    "name": "Superconductivity",
+    "difficultyRaw": "expert (5)",
+    "bloom": "understand",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "phys.em.resistivity",
+      "phys.em.magnetic-materials",
+      "phys.mod.energy-bands"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.mod.superconductivity-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.mod.superconductivity (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.mod.superconductivity.md": "sha256:5ac6ab95d88af8fab44cecee00f00c650f8101e9049b2e2e448e42c1f5e7e324"
+      },
+      "contentHash": "sha256:daadfff9cadd8253890bf3a2d1b75ba1d72146d0007bcdb3951690022e49dd37",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.mod.superconductivity.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.superconductivity.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.superconductivity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.superconductivity\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.superconductivity.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.superconductivity.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.superconductivity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.superconductivity\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.superconductivity.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.superconductivity.md#TA-3 (addresses MC-JUST-A-VERY-GOOD-CONDUCTOR)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.superconductivity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.superconductivity\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.superconductivity.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.superconductivity.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.superconductivity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.superconductivity\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.superconductivity.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.superconductivity.md#TA-5 (addresses MC-ANY-FIELD-ALLOWED)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.superconductivity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.superconductivity\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.superconductivity.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.superconductivity.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.superconductivity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.superconductivity\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.mod.superconductivity.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.mod.superconductivity.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.mod.superconductivity"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.mod.superconductivity\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.mod.superconductivity/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "phys.mod.superconductivity",
+      "title": "Learning Objective",
+      "content": "[Boundary statement]\nA student who achieves mastery demonstrates:\n1. Describes the two defining properties: below a critical temperature T_c a superconductor's DC resistance falls to exactly zero — not merely very low — so a current set up in a ring flows for years without a battery (mercury, T_c = 4.2 K, discovered by Kamerlingh Onnes in 1911; YBCO, T_c ≈ 92 K, above the 77 K of liquid nitrogen); and it expels magnetic fields from its interior (the Meissner effect, a perfect diamagnet), which is why a magnet floats above it.\n2. Explains why the Meissner effect shows superconductivity is more than perfect conductivity: a merely perfect conductor would TRAP whatever field it held when it lost its resistance, whereas a superconductor pushes the field out on cooling, whatever its history — and that superconductivity is destroyed above a critical field, B_c(T) ≈ B_c(0)[1 − (T/T_c)²] (lead: B_c(0) = 0.080 T, T_c = 7.2 K, so B_c ≈ 0.053 T at 4.2 K), or above a critical current.\n3. Explains the microscopic picture qualitatively: in conventional superconductors electrons form Cooper pairs (bound weakly through vibrations of the lattice), all pairs share one quantum state separated from excited states by an energy gap, so small scatterings cannot slow them and there is no resistance; and names uses — MRI magnets (niobium–titanium wire at 4.2 K), maglev, SQUID magnetometers, and lossless power cables.\n\nA student who thinks a superconductor is just an extremely good conductor, or that it stays superconducting in any magnetic field, has **NOT** achieved mastery — those ideas miss what makes the state a distinct phase.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.superconductivity.md",
+        "startLine": 17,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.mod.superconductivity/misconception/MC-JUST-A-VERY-GOOD-CONDUCTOR",
+      "kind": "misconception",
+      "conceptId": "phys.mod.superconductivity",
+      "title": "A superconductor is just an extremely good conductor",
+      "content": "### MC-JUST-A-VERY-GOOD-CONDUCTOR: \"A superconductor is just an extremely good conductor\"\ntrigger_signal: student treats superconductivity as the far end of ordinary conduction (very low resistance) rather than a distinct state with zero resistance and field expulsion.\nconflict_evidence [P28]: \"Cool a disc below T_c while a magnet already rests on it. A perfect conductor would keep the field it already had inside — the magnet would stay put. What do we see?\"\nbridge_text [P30]: \"The magnet is pushed up: the disc actively expels the field as it becomes superconducting — the Meissner effect. A perfect conductor can't do that; it can only resist CHANGES in field. And a normal metal's resistance levels off at a small value as it cools, while a superconductor's drops abruptly to exactly zero at T_c. It is a different phase of matter, like ice versus very cold water.\"\nreplacement_text [P31]: \"Superconductivity is a distinct phase: exactly zero resistance plus field expulsion (Meissner effect), below T_c.\"\ndiscrimination_pairs [P33]: [\"ultra-pure copper at 4 K: small but nonzero resistance; no field expulsion\", \"lead at 4 K: zero resistance; expels fields below B_c\"]\ns6_path: skip P28; show the resistance graph with its sudden drop.",
+      "localKey": "MC-JUST-A-VERY-GOOD-CONDUCTOR",
+      "language": "en",
+      "refs": [
+        "MC-JUST-A-VERY-GOOD-CONDUCTOR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.superconductivity.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.mod.superconductivity/misconception/MC-ANY-FIELD-ALLOWED",
+      "kind": "misconception",
+      "conceptId": "phys.mod.superconductivity",
+      "title": "A superconductor stays superconducting in any field or current",
+      "content": "### MC-ANY-FIELD-ALLOWED: \"A superconductor stays superconducting in any field or current\"\ntrigger_signal: student assumes superconductivity, once reached, survives arbitrarily strong magnetic fields or currents.\nconflict_evidence [P28]: \"Expelling a field costs energy, and the bigger the field, the more it costs. Is there a field strong enough that it's cheaper for the material to go normal?\"\nbridge_text [P30]: \"Yes — the critical field B_c. Above it the material reverts to normal and lets the field in. B_c is largest near absolute zero and falls to zero at T_c: B_c(T) ≈ B_c(0)[1 − (T/T_c)²]; for lead, about 0.053 T at 4.2 K. A large current makes its own field, so there is also a critical current. When an MRI coil exceeds either, it 'quenches': resistance returns and the stored energy turns to heat.\"\nreplacement_text [P31]: \"Superconductivity exists only below T_c AND below a critical field and current.\"\ndiscrimination_pairs [P33]: [\"lead at 4.2 K in 0.04 T: superconducting\", \"lead at 4.2 K in 0.06 T: normal\"]\ns6_path: skip P28; plot B_c against T as a dome-shaped boundary.",
+      "localKey": "MC-ANY-FIELD-ALLOWED",
+      "language": "en",
+      "refs": [
+        "MC-ANY-FIELD-ALLOWED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.superconductivity.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.mod.superconductivity/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.superconductivity",
+      "title": "The Floating Magnet",
+      "content": "{\"id\":\"TA-1\",\"title\":\"The Floating Magnet\",\"primitives\":[\"P01\",\"P04\",\"P05\",\"P06\",\"P14\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.superconductivity.md",
+        "startLine": 11,
+        "endLine": 18
+      }
+    },
+    {
+      "assetId": "phys.mod.superconductivity/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.superconductivity",
+      "title": "Zero Resistance",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Zero Resistance\",\"primitives\":[\"P02\",\"P06\",\"P08\",\"P13\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.superconductivity.md",
+        "startLine": 18,
+        "endLine": 26
+      }
+    },
+    {
+      "assetId": "phys.mod.superconductivity/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.superconductivity",
+      "title": "More Than a Perfect Conductor",
+      "content": "{\"id\":\"TA-3\",\"title\":\"More Than a Perfect Conductor\",\"primitives\":[\"P02\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-JUST-A-VERY-GOOD-CONDUCTOR\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-JUST-A-VERY-GOOD-CONDUCTOR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.superconductivity.md",
+        "startLine": 26,
+        "endLine": 32
+      }
+    },
+    {
+      "assetId": "phys.mod.superconductivity/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.superconductivity",
+      "title": "Cooper Pairs",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Cooper Pairs\",\"primitives\":[\"P02\",\"P13\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.superconductivity.md",
+        "startLine": 32,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "phys.mod.superconductivity/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.superconductivity",
+      "title": "Critical Field and Current",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Critical Field and Current\",\"primitives\":[\"P02\",\"P34\",\"P41\",\"P49\",\"P50\",\"P51\",\"P52\",\"P55\"],\"addresses\":[\"MC-ANY-FIELD-ALLOWED\"]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [
+        "MC-ANY-FIELD-ALLOWED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.superconductivity.md",
+        "startLine": 38,
+        "endLine": 47
+      }
+    },
+    {
+      "assetId": "phys.mod.superconductivity/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.superconductivity",
+      "title": "Formative Assessment",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Formative Assessment\",\"primitives\":[\"P02\",\"P35\",\"P49\",\"P51\",\"P55\",\"P79\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.superconductivity.md",
+        "startLine": 47,
+        "endLine": 54
+      }
+    },
+    {
+      "assetId": "phys.mod.superconductivity/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.mod.superconductivity",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P28\",\"P41\",\"P54\",\"P55\",\"P62\",\"P68\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.superconductivity.md",
+        "startLine": 54,
+        "endLine": 96
+      }
+    },
+    {
+      "assetId": "phys.mod.superconductivity/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.mod.superconductivity",
+      "title": "Assessment Battery",
+      "content": "| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (classify) | \"Observations vs explanation\" | CORRECT = zero R and Meissner observed; Cooper pairs explain |\n| P74 (classify) | \"Superconductor or perfect conductor: expels field?\" | CORRECT = superconductor |\n| P75 (boundary) | \"B_c at T_c\" | CORRECT = zero |\n| P76 (transfer) | \"MRI quench\" | CORRECT = coil goes normal; huge stored energy turns to heat, helium boils off |\n| P77 (generate) | \"Prove superconductor\" | CORRECT = cool in a field and show the field is expelled (magnet lifts) |\n| P78 (explain) | \"No slowing\" | CORRECT = scattering would need at least the gap energy to break a pair |\n| P79 (predict) | \"Cooled in a field\" | CORRECT = field expelled |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.superconductivity.md",
+        "startLine": 179,
+        "endLine": 191
+      }
+    },
+    {
+      "assetId": "phys.mod.superconductivity/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.superconductivity",
+      "title": "Student State Matrix",
+      "content": "| State | Why here | Tell-tale behaviour | Protocol |\n|---|---|---|---|\n| S0 | Superconductors as \"very cold wires\" | Cannot name the Meissner effect | Protocol A (Concrete) |\n| S1 | \"Zero resistance\" recited | Cannot explain levitation | Protocol B (Counterexample-first) |\n| S2-JUST-A-VERY-GOOD-CONDUCTOR | Continuum picture | \"It's like copper, only much better\" | Misconception Engine → then Protocol C |\n| S2-ANY-FIELD-ALLOWED | No limits pictured | \"Once superconducting, it handles any field or current\" | Misconception Engine → then Protocol C |\n| S3 | Partial — properties fine | Cannot give the Cooper-pair picture | Protocol C (Guided Questioning) |\n| S6 | Anxiety on quantum ideas | Avoids the microscopic explanation | Protocol F (Low Pressure) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.superconductivity.md",
+        "startLine": 27,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "phys.mod.superconductivity/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.superconductivity",
+      "title": "Diagnostic Battery",
+      "content": "DB-1 (prior-exposure check):\n\"What happens to a superconductor's resistance below its critical temperature?\"\n  No idea → S0. Enter Protocol A (Concrete).\n  \"It becomes exactly zero\" → DB-2.\n  \"It becomes very small\" → note; probe at DB-2.\n\nDB-2 (representation / misconception test):\n\"Why does a magnet float above a superconductor but not above an extremely good conductor like ultra-pure copper?\"\n  \"The superconductor expels magnetic fields (Meissner effect); a mere perfect conductor would just trap the field it had\" → S3. Enter Protocol C.\n  \"Because it's superconducting\" (no mechanism) → S1. Enter Protocol B.\n  \"A superconductor is just a better conductor — copper would float the magnet too if it were cold and pure enough\" → SIGNAL:MISCONCEPTION:MC-JUST-A-VERY-GOOD-CONDUCTOR. Enter Misconception Engine.\n  Pause → add S6 flag; Protocol F if anxious, otherwise Protocol A.\n\nDB-3 (limits check — overlays):\n\"An MRI's superconducting coil is pushed to a much higher current and field. Does it stay superconducting?\"\n  \"Not necessarily — above a critical field or current it reverts to normal (a quench)\" → no flag.\n  \"Yes, always\" → add SIGNAL:MISCONCEPTION:MC-ANY-FIELD-ALLOWED (repair at TA-5).\n  Confident and wrong on DB-2 → add S7 flag. Override to Protocol G.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-JUST-A-VERY-GOOD-CONDUCTOR",
+        "MC-ANY-FIELD-ALLOWED"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.superconductivity.md",
+        "startLine": 38,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "phys.mod.superconductivity/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.mod.superconductivity",
+      "title": "Prerequisite Check",
+      "content": "PD-1 (for `phys.em.resistivity`, `phys.em.magnetic-materials`, `phys.mod.energy-bands`):\n\"What causes resistance in a metal? What is a diamagnet? What is a band gap?\"\n  Cannot say \"electrons scattering off vibrating ions and defects; a material weakly repelled by fields; a forbidden energy range\" → flag PREREQ-GAP-SOLIDS.\n  In-session minimum repair: one P06 (resistivity of a metal falling with temperature) + one P34 (\"why does copper's resistance drop when cooled?\") then resume. If absent, schedule the missing session (S4 route).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.mod.superconductivity.md",
+        "startLine": 59,
+        "endLine": 66
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

@@ -78,6 +78,7 @@ describe('phys.em: the circuit/field split is honoured', () => {
     'phys.em.electrostatic-potential-energy', 'phys.em.motors-and-generators',
     'phys.em.conductors-electrostatics', 'phys.em.hall-effect',
     'phys.em.communication-systems', 'phys.em.radiation-and-antennas',
+    'phys.em.fields-in-matter',
   ]
   const CIRCUITS = [
     'phys.em.electric-current', 'phys.em.ohms-law', 'phys.em.dc-circuits',

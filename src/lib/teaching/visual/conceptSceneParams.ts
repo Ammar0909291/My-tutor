@@ -116,6 +116,7 @@ import { buildLcrScene, buildAcPowerScene, buildAlphaScatteringScene, buildNucle
 import { buildFramesScene, buildContinuityScene, buildSpecificHeatsScene } from '@/lib/teaching/sceneGenerators/physicsExtensionScenesB8'
 import { buildEarthMoonSunScene, buildHrDiagramScene, buildDistanceLadderScene, buildHallScene } from '@/lib/teaching/sceneGenerators/physicsExtensionScenesB9'
 import { buildLaserScene, buildRadiationSafetyScene, buildModulationScene, buildDipoleScene } from '@/lib/teaching/sceneGenerators/physicsExtensionScenesB10'
+import { buildCoupledScene, buildChaosScene, buildFieldsInMatterScene, buildSuperconductivityScene } from '@/lib/teaching/sceneGenerators/physicsExtensionScenesB11'
 import {
   buildDisplacementScene, buildVelocityScene, buildAccelerationScene, buildRelativeMotionScene, buildTensionScene,
   buildConservativeForcesScene, buildAngularMomentumScene, buildAngularMomentumConservationScene,
@@ -604,6 +605,11 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'phys.mod.radiation-safety': buildRadiationSafetyScene,
   'phys.em.communication-systems': buildModulationScene,
   'phys.em.radiation-and-antennas': buildDipoleScene,
+  // Coverage-driven KG extension, batch 11 (2026-10-03). See physicsExtensionScenesB11.ts.
+  'phys.wave.coupled-oscillators': buildCoupledScene,
+  'phys.wave.nonlinear-dynamics': buildChaosScene,
+  'phys.em.fields-in-matter': buildFieldsInMatterScene,
+  'phys.mod.superconductivity': buildSuperconductivityScene,
   // Batch 15 (2026-09-30): promoted from domain scope. See physicsCoreScenesB15.ts.
   'phys.mech.displacement':           buildDisplacementScene,
   'phys.mech.velocity':               buildVelocityScene,

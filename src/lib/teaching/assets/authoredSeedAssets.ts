@@ -55940,6 +55940,454 @@ const ANTN_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.wave.coupled-oscillators ───────────────────────────────────────────
+const COUP = 'phys.wave.coupled-oscillators'
+const COUP_SRC = 'docs/curriculum/blueprints/phys.wave.coupled-oscillators.md'
+
+const COUP_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: COUP,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'When oscillators are linked so that each pushes or pulls on the other, there are special patterns of motion — normal modes — in which every part oscillates sinusoidally at one shared frequency, and a system has as many modes as it has degrees of freedom. For two equal masses m between three equal springs k (wall–m–m–wall), moving both masses together leaves the middle spring unstretched, so ω₁ = √(k/m); moving them in opposite directions stretches the middle spring by twice each displacement, so ω₂ = √(3k/m). With k = 10 N/m and m = 0.1 kg these are 10 rad/s and 17.3 rad/s — the out-of-phase mode is faster. Any motion is a superposition of the modes, each running at its own frequency. Start one of two weakly coupled pendulums alone and you excite both modes equally; with slightly different frequencies (3.130 and 3.286 rad/s) they drift in and out of step like beats, and the swinging passes completely to the other pendulum and back, a full swap every π/(ω₂ − ω₁) ≈ 20 s. N masses give N modes; a stretched string, a chain of countless tiny masses, has countless modes — its standing waves f₁, 2f₁, 3f₁, … — and molecular vibrations and the swaying of buildings are normal modes too.',
+    targetedMisconceptions: [`${COUP}:MC-ONE-FREQUENCY-PER-SYSTEM`, `${COUP}:MC-ENERGY-STAYS-PUT`],
+    source: `${COUP_SRC} — TA-2 normal modes, TA-3 energy exchange, TA-4 superposition, TA-5 standing waves`,
+  },
+  {
+    conceptId: COUP,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A single mass on a spring has one natural frequency, so it seems a coupled system should have one too. Look at what the coupling spring does. Move two coupled masses the same way and the middle spring never stretches: each mass feels only its outer spring, ω₁ = √(k/m). Move them in opposite directions and the middle spring stretches by twice each displacement, adding to the restoring force: ω₂ = √(3k/m). Two patterns, two different frequencies — one for each degree of freedom. A second expectation is that if you start only one of two coupled pendulums, it keeps the energy and the other barely moves. Watch for a minute: after about 20 seconds the first pendulum is almost still and the second is swinging fully, and then it swaps back. Starting one pendulum alone is really half of each normal mode, and because the two modes have slightly different frequencies they drift out of step and back again, carrying the energy from one pendulum to the other. Weaker coupling only makes the swap slower; it still happens completely.',
+    targetedMisconceptions: [`${COUP}:MC-ONE-FREQUENCY-PER-SYSTEM`, `${COUP}:MC-ENERGY-STAYS-PUT`],
+    source: `${COUP_SRC} — MC-ONE-FREQUENCY-PER-SYSTEM + MC-ENERGY-STAYS-PUT, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const COUP_PROBES: SeedProbe[] = [
+  {
+    conceptId: COUP,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Two masses of 0.1 kg sit between three springs of 10 N/m (wall–m–m–wall). What are the angular frequencies of the two normal modes?',
+    choices: [
+      { text: '10 rad/s and about 17.3 rad/s', isCorrect: true },
+      { text: '10 rad/s only', isCorrect: false, misconceptionId: `${COUP}:MC-ONE-FREQUENCY-PER-SYSTEM` },
+      { text: '10 rad/s and 20 rad/s', isCorrect: false },
+      { text: '5 rad/s and 10 rad/s', isCorrect: false },
+    ],
+    correctValue: '10 and 17.3 rad/s',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${COUP}:MC-ONE-FREQUENCY-PER-SYSTEM`],
+    source: `${COUP_SRC} — TA-2 P34 (√(k/m), √(3k/m)); 20 rad/s uses 4k`,
+  },
+  {
+    conceptId: COUP,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A string\'s fundamental mode is at 110 Hz. What are the frequencies of its next two normal modes?',
+    choices: [
+      { text: '220 Hz and 330 Hz', isCorrect: true },
+      { text: '165 Hz and 220 Hz', isCorrect: false },
+      { text: 'It has no other modes', isCorrect: false },
+      { text: '110 Hz and 110 Hz', isCorrect: false },
+    ],
+    correctValue: '220 and 330 Hz',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [],
+    source: `${COUP_SRC} — TA-5 P34 (string modes are its harmonics)`,
+  },
+  {
+    conceptId: COUP,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Two identical pendulums hang from a slack string. You set one swinging, hold the other still, then let go. What happens over the next minute?',
+    choices: [
+      { text: 'The second gradually takes over the swinging while the first slows nearly to rest, and then the energy swaps back', isCorrect: true },
+      { text: 'The first keeps swinging and the second only twitches', isCorrect: false, misconceptionId: `${COUP}:MC-ENERGY-STAYS-PUT` },
+      { text: 'Both quickly settle to swinging with half the energy each and stay that way', isCorrect: false, misconceptionId: `${COUP}:MC-ENERGY-STAYS-PUT` },
+    ],
+    correctValue: 'energy swaps back and forth',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${COUP}:MC-ENERGY-STAYS-PUT`],
+    source: `${COUP_SRC} — DB-1 item and MC-ENERGY-STAYS-PUT conflict_evidence`,
+  },
+  {
+    conceptId: COUP,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Two coupled masses: at how many different frequencies can the system oscillate in a pure, repeating pattern?',
+    choices: [
+      { text: 'Two — one normal mode per degree of freedom', isCorrect: true },
+      { text: 'One — like any oscillator, it has one natural frequency', isCorrect: false, misconceptionId: `${COUP}:MC-ONE-FREQUENCY-PER-SYSTEM` },
+      { text: 'Any frequency at all', isCorrect: false },
+    ],
+    correctValue: 'two',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${COUP}:MC-ONE-FREQUENCY-PER-SYSTEM`],
+    source: `${COUP_SRC} — DB-2 golden probe and MC-ONE-FREQUENCY-PER-SYSTEM trigger_signal`,
+  },
+  {
+    conceptId: COUP,
+    subjectSlug: 'physics',
+    probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why is the out-of-phase mode of two coupled masses faster than the in-phase mode?',
+    choices: [
+      { text: 'In the out-of-phase mode the coupling spring is stretched and adds to the restoring force; in the in-phase mode it never stretches', isCorrect: true },
+      { text: 'Because the masses are lighter when moving in opposite directions', isCorrect: false },
+      { text: 'It isn\'t — both modes have the same frequency', isCorrect: false },
+    ],
+    correctValue: 'coupling spring adds restoring force',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: `${COUP_SRC} — TA-2 think-aloud and §8 P78`,
+  },
+]
+
+// ─── phys.wave.nonlinear-dynamics ────────────────────────────────────────────
+const CHAO = 'phys.wave.nonlinear-dynamics'
+const CHAO_SRC = 'docs/curriculum/blueprints/phys.wave.nonlinear-dynamics.md'
+
+const CHAO_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CHAO,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Simple harmonic motion needs a restoring force exactly proportional to displacement. A pendulum\'s is proportional to sin θ, which matches θ only for small swings, so its period grows with amplitude — about 18% longer at a 90° swing. Systems whose forces or rules are not proportional are nonlinear: superposition fails and new behaviour appears. The logistic map, x_{n+1} = r x_n (1 − x_n), shows the range. At r = 2.8 every start settles to the fixed point 1 − 1/r ≈ 0.643. At r = 3.2 the values settle into flipping between about 0.513 and 0.799 — period doubling. Increase r further and the period doubles again and again until, for example at r = 3.9, the values never repeat: chaos. Chaos is deterministic — run the rule twice from exactly the same start and you get exactly the same sequence — but it has sensitive dependence on initial conditions: starts of 0.200000 and 0.200001 at r = 3.9 diverge until, after about 20 steps, the two sequences are unrelated. Since real starting conditions are never known exactly, long-term prediction is impossible in practice; measuring ten times better buys only a few more steps. Driven damped pendulums, double pendulums and the atmosphere behave the same way, which is why weather forecasts fail beyond about two weeks.',
+    targetedMisconceptions: [`${CHAO}:MC-CHAOS-MEANS-RANDOM`, `${CHAO}:MC-SMALL-ERROR-SMALL-EFFECT`],
+    source: `${CHAO_SRC} — TA-2 nonlinearity, TA-3 logistic map, TA-4 determinism, TA-5 sensitive dependence`,
+  },
+  {
+    conceptId: CHAO,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'In everyday speech "chaotic" means random, so it is easy to assume chaotic systems behave by chance. Run x_{n+1} = 3.9 x_n (1 − x_n) on a computer twice, both times from exactly 0.2, and compare the sequences digit by digit: they are identical. Nothing in the rule is random — given the start, the whole future is fixed. What makes the system chaotic is what happens when the start is changed even slightly. That leads to the second trap: the idea that a tiny error at the start leaves only a tiny error later, so better measurement always gives proportionally better predictions. Start two runs at 0.200000 and 0.200001. The difference does not stay at one millionth; it grows roughly exponentially, and after about 20 steps the runs are as different as two unrelated numbers. Compare r = 2.8, where starts of 0.2 and 0.3 both settle to 0.643 and errors shrink. In a chaotic system, measuring the start ten times more precisely adds only a few more predictable steps, which is why the atmosphere cannot be forecast in detail more than about two weeks ahead, no matter how good the instruments.',
+    targetedMisconceptions: [`${CHAO}:MC-CHAOS-MEANS-RANDOM`, `${CHAO}:MC-SMALL-ERROR-SMALL-EFFECT`],
+    source: `${CHAO_SRC} — MC-CHAOS-MEANS-RANDOM + MC-SMALL-ERROR-SMALL-EFFECT, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const CHAO_PROBES: SeedProbe[] = [
+  {
+    conceptId: CHAO,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'For the logistic map x_{n+1} = r x_n (1 − x_n) with r = 2.8, where do the values settle?',
+    choices: [
+      { text: 'At the fixed point 1 − 1/r ≈ 0.643', isCorrect: true },
+      { text: 'At about 0.357', isCorrect: false },
+      { text: 'They never settle — r = 2.8 is chaotic', isCorrect: false },
+      { text: 'At 0', isCorrect: false },
+    ],
+    correctValue: 'about 0.643',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [],
+    source: `${CHAO_SRC} — TA-3 P34 (x = r x(1 − x) → x = 1 − 1/r)`,
+  },
+  {
+    conceptId: CHAO,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Two runs of the logistic map at r = 3.9 start at 0.200000 and 0.200001. What are they like after about 30 steps?',
+    choices: [
+      { text: 'Completely different — the tiny starting difference has grown exponentially', isCorrect: true },
+      { text: 'Still about 0.000001 apart', isCorrect: false, misconceptionId: `${CHAO}:MC-SMALL-ERROR-SMALL-EFFECT` },
+      { text: 'Exactly equal — they started so close', isCorrect: false, misconceptionId: `${CHAO}:MC-SMALL-ERROR-SMALL-EFFECT` },
+      { text: 'Both settled at 0.643', isCorrect: false },
+    ],
+    correctValue: 'completely different',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CHAO}:MC-SMALL-ERROR-SMALL-EFFECT`],
+    source: `${CHAO_SRC} — DB-3 sensitivity check (divergence by ~step 22)`,
+  },
+  {
+    conceptId: CHAO,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'The logistic map x_{n+1} = 3.9 x_n (1 − x_n) is run twice from exactly 0.2. Will the two sequences be the same?',
+    choices: [
+      { text: 'Yes — the rule is deterministic; only a different start, however slight, would diverge', isCorrect: true },
+      { text: 'No — chaotic systems behave randomly', isCorrect: false, misconceptionId: `${CHAO}:MC-CHAOS-MEANS-RANDOM` },
+      { text: 'Only by luck', isCorrect: false, misconceptionId: `${CHAO}:MC-CHAOS-MEANS-RANDOM` },
+    ],
+    correctValue: 'yes, identical',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${CHAO}:MC-CHAOS-MEANS-RANDOM`],
+    source: `${CHAO_SRC} — DB-2 golden probe and MC-CHAOS-MEANS-RANDOM conflict_evidence`,
+  },
+  {
+    conceptId: CHAO,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Weather is governed by deterministic physical laws. Why can\'t better instruments make detailed forecasts a month ahead?',
+    choices: [
+      { text: 'The atmosphere is chaotic: tiny uncertainties in the starting state grow exponentially, so each improvement in measurement adds only a little forecast time', isCorrect: true },
+      { text: 'Because weather is fundamentally random', isCorrect: false, misconceptionId: `${CHAO}:MC-CHAOS-MEANS-RANDOM` },
+      { text: 'They could — instruments just need to be a bit more accurate', isCorrect: false, misconceptionId: `${CHAO}:MC-SMALL-ERROR-SMALL-EFFECT` },
+    ],
+    correctValue: 'sensitive dependence on initial conditions',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CHAO}:MC-SMALL-ERROR-SMALL-EFFECT`, `${CHAO}:MC-CHAOS-MEANS-RANDOM`],
+    source: `${CHAO_SRC} — §8 P76 and MC-SMALL-ERROR-SMALL-EFFECT bridge_text`,
+  },
+  {
+    conceptId: CHAO,
+    subjectSlug: 'physics',
+    probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Is a pendulum\'s period exactly the same for a 5° swing and a 90° swing?',
+    choices: [
+      { text: 'No — the restoring force is proportional to sin θ, not θ, so large swings take longer (about 18% longer at 90°)', isCorrect: true },
+      { text: 'Yes — a pendulum\'s period never depends on amplitude', isCorrect: false },
+      { text: 'No — large swings are faster', isCorrect: false },
+    ],
+    correctValue: 'no, longer at 90°',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: `${CHAO_SRC} — TA-2 think-aloud and P34`,
+  },
+]
+
+// ─── phys.em.fields-in-matter ────────────────────────────────────────────────
+const FMAT = 'phys.em.fields-in-matter'
+const FMAT_SRC = 'docs/curriculum/blueprints/phys.em.fields-in-matter.md'
+
+const FMAT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: FMAT,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Matter responds to fields. In a dielectric, each molecule\'s charges shift slightly apart — it polarises — leaving bound charge on its surfaces: negative next to a positive plate, positive next to a negative one. That bound charge opposes the applied field, so E inside is weaker. The polarisation P (dipole moment per volume) measures the response, and the electric displacement D = ε₀E + P obeys Gauss\'s law with free charge only, ∮D·dA = Q_free; in a linear dielectric D = ε_rε₀E. For free charge density 1.0 × 10⁻⁶ C/m² and glass with ε_r = 4: D = 1.0 × 10⁻⁶ C/m², E ≈ 2.8 × 10⁴ V/m (a quarter of the 1.13 × 10⁵ V/m with no glass), P = 7.5 × 10⁻⁷ C/m². In magnetic materials, aligned atomic moments act like bound surface currents, measured by the magnetisation M. The magnetising field H = B/μ₀ − M obeys Ampère\'s law with free current only, ∮H·dl = I_free, and in a linear material B = μ_rμ₀H. In a solenoid with 1000 turns per metre carrying 2 A, H = 2000 A/m whatever the core; with iron of μ_r = 500, B ≈ 1.26 T instead of 2.5 mT. At a boundary with no free surface charge or current, normal D and B and tangential E and H are continuous, so field lines bend as they cross.',
+    targetedMisconceptions: [`${FMAT}:MC-DIELECTRIC-STRENGTHENS-E`, `${FMAT}:MC-H-SAME-AS-B`],
+    source: `${FMAT_SRC} — TA-2 polarisation and D, TA-4 magnetisation and H, TA-5 boundary conditions`,
+  },
+  {
+    conceptId: FMAT,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Adding material between charged plates can sound like adding more field. Check it: slide a glass slab into an isolated charged capacitor and its voltage drops. Since V = Ed, the field inside has fallen. The glass polarises: next to the positive plate a layer of negative bound charge appears, and next to the negative plate a positive one. Those bound charges make a field opposing the plates\' field, so the total E drops by the factor ε_r while the free charge — and so D — stays the same. A second trap is to treat H and B as the same field in different units. Put an iron core into a solenoid without changing the current. Ampère\'s law for H counts only the free current in the wire, which has not changed, so H = nI stays at, say, 2000 A/m. But the iron\'s aligned atomic moments act as extra bound currents, so B = μ_rμ₀H leaps from about 2.5 mT to about 1.26 T for μ_r = 500. H follows the free currents we control; B = μ₀(H + M) includes the material\'s response. They are genuinely different quantities, which is why one changes and the other does not.',
+    targetedMisconceptions: [`${FMAT}:MC-DIELECTRIC-STRENGTHENS-E`, `${FMAT}:MC-H-SAME-AS-B`],
+    source: `${FMAT_SRC} — MC-DIELECTRIC-STRENGTHENS-E + MC-H-SAME-AS-B, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const FMAT_PROBES: SeedProbe[] = [
+  {
+    conceptId: FMAT,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A parallel-plate capacitor carries free charge density 1.0 × 10⁻⁶ C/m² and is filled with glass of ε_r = 4. What is the electric field in the glass? (ε₀ = 8.85 × 10⁻¹² F/m)',
+    choices: [
+      { text: 'About 2.8 × 10⁴ V/m', isCorrect: true },
+      { text: 'About 1.13 × 10⁵ V/m', isCorrect: false },
+      { text: 'About 4.5 × 10⁵ V/m', isCorrect: false, misconceptionId: `${FMAT}:MC-DIELECTRIC-STRENGTHENS-E` },
+      { text: 'Zero', isCorrect: false },
+    ],
+    correctValue: 'about 2.8 × 10⁴ V/m',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${FMAT}:MC-DIELECTRIC-STRENGTHENS-E`],
+    source: `${FMAT_SRC} — TA-2 P34 (E = D/(ε_rε₀)); 4.5 × 10⁵ multiplies by ε_r, 1.13 × 10⁵ ignores the glass`,
+  },
+  {
+    conceptId: FMAT,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'An electric field of 1.0 × 10⁵ V/m meets a vacuum–glass boundary at right angles (glass ε_r = 4, no free surface charge). What is the field just inside the glass?',
+    choices: [
+      { text: '2.5 × 10⁴ V/m — the normal component of D is continuous', isCorrect: true },
+      { text: '1.0 × 10⁵ V/m — the field is continuous', isCorrect: false },
+      { text: '4.0 × 10⁵ V/m', isCorrect: false },
+      { text: 'Zero — glass blocks the field', isCorrect: false },
+    ],
+    correctValue: '2.5 × 10⁴ V/m',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [],
+    source: `${FMAT_SRC} — TA-5 P34 (normal D continuous)`,
+  },
+  {
+    conceptId: FMAT,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'With the same free charge on a capacitor\'s plates, is the electric field inside an inserted glass slab bigger or smaller than it was in vacuum?',
+    choices: [
+      { text: 'Smaller, by ε_r — bound surface charges on the glass oppose the plates\' field', isCorrect: true },
+      { text: 'Bigger — the glass adds its own charges to the field', isCorrect: false, misconceptionId: `${FMAT}:MC-DIELECTRIC-STRENGTHENS-E` },
+      { text: 'The same — a dielectric has no free charges', isCorrect: false },
+    ],
+    correctValue: 'smaller',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${FMAT}:MC-DIELECTRIC-STRENGTHENS-E`],
+    source: `${FMAT_SRC} — DB-2 golden probe and MC-DIELECTRIC-STRENGTHENS-E conflict_evidence`,
+  },
+  {
+    conceptId: FMAT,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'An iron core is inserted into a solenoid while the current stays the same. Which changes a lot: H or B?',
+    choices: [
+      { text: 'B — H = nI depends only on the free current, while B = μ_rμ₀H includes the iron\'s magnetisation', isCorrect: true },
+      { text: 'Both by the same factor — H and B are the same field', isCorrect: false, misconceptionId: `${FMAT}:MC-H-SAME-AS-B` },
+      { text: 'H — the iron changes the current', isCorrect: false, misconceptionId: `${FMAT}:MC-H-SAME-AS-B` },
+    ],
+    correctValue: 'B',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${FMAT}:MC-H-SAME-AS-B`],
+    source: `${FMAT_SRC} — DB-3 H check and MC-H-SAME-AS-B conflict_evidence`,
+  },
+  {
+    conceptId: FMAT,
+    subjectSlug: 'physics',
+    probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why is Gauss\'s law written for D rather than E inside a dielectric?',
+    choices: [
+      { text: 'D = ε₀E + P accounts for the bound charge, so its flux depends only on the free charge we control', isCorrect: true },
+      { text: 'Because E is zero inside a dielectric', isCorrect: false },
+      { text: 'Because D and E are the same inside matter', isCorrect: false },
+    ],
+    correctValue: 'D sees only free charge',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: `${FMAT_SRC} — TA-2 think-aloud and TA-6 P35`,
+  },
+]
+
+// ─── phys.mod.superconductivity ──────────────────────────────────────────────
+const SUPC = 'phys.mod.superconductivity'
+const SUPC_SRC = 'docs/curriculum/blueprints/phys.mod.superconductivity.md'
+
+const SUPC_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: SUPC,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'As most metals cool, their resistance falls smoothly and levels off at a small value set by impurities. A superconductor is different: below its critical temperature T_c its resistance drops abruptly to exactly zero, so a current started in a superconducting ring flows for years without a battery. Mercury superconducts below 4.2 K (Kamerlingh Onnes, 1911); ceramic YBCO below about 92 K, above the 77 K of cheap liquid nitrogen. A superconductor also expels magnetic fields from its interior — the Meissner effect — which is why a magnet floats above it. This makes it more than a perfect conductor: a perfect conductor cooled while sitting in a field would trap that field, but a superconductor pushes it out as it passes T_c. The state has limits: it is destroyed above a critical magnetic field, B_c(T) ≈ B_c(0)[1 − (T/T_c)²] — for lead, B_c(0) = 0.080 T and T_c = 7.2 K give about 0.053 T at 4.2 K — and above a critical current. In conventional superconductors, electrons bind weakly into Cooper pairs through tiny distortions of the lattice; all the pairs share one quantum state, separated from excited states by an energy gap, so small scatterings cannot slow them and there is no resistance. Superconductors run MRI magnets, maglev trains, particle accelerators and SQUID magnetometers.',
+    targetedMisconceptions: [`${SUPC}:MC-JUST-A-VERY-GOOD-CONDUCTOR`, `${SUPC}:MC-ANY-FIELD-ALLOWED`],
+    source: `${SUPC_SRC} — TA-2 zero resistance, TA-3 Meissner effect, TA-4 Cooper pairs, TA-5 critical field`,
+  },
+  {
+    conceptId: SUPC,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'It is tempting to think of a superconductor as copper with its resistance turned all the way down. Two observations show it is a different state of matter. First, a normal metal\'s resistance levels off at a small, nonzero value as it is cooled, while a superconductor\'s drops abruptly to exactly zero at T_c. Second, cool a disc below T_c while a magnet already rests on it. A merely perfect conductor would resist any change in field, so it would keep the field it already had and the magnet would stay put. Instead the magnet is pushed up: the superconductor actively expels the field — the Meissner effect — whatever its history. That is a property no ordinary conductor has, however pure. A second mistaken idea is that once superconducting, a material handles any field or current. Expelling a field costs energy, and above a critical field it becomes cheaper for the material to go normal and let the field in. For lead at 4.2 K that happens at about 0.053 T. A large current creates its own field, so there is also a critical current. When a superconducting magnet exceeds its limits it quenches: resistance returns and its stored energy is suddenly released as heat.',
+    targetedMisconceptions: [`${SUPC}:MC-JUST-A-VERY-GOOD-CONDUCTOR`, `${SUPC}:MC-ANY-FIELD-ALLOWED`],
+    source: `${SUPC_SRC} — MC-JUST-A-VERY-GOOD-CONDUCTOR + MC-ANY-FIELD-ALLOWED, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const SUPC_PROBES: SeedProbe[] = [
+  {
+    conceptId: SUPC,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Lead has B_c(0) = 0.080 T and T_c = 7.2 K. Using B_c(T) = B_c(0)[1 − (T/T_c)²], what is its critical field at 4.2 K?',
+    choices: [
+      { text: 'About 0.053 T', isCorrect: true },
+      { text: '0.080 T', isCorrect: false },
+      { text: 'About 0.033 T', isCorrect: false },
+      { text: 'Zero', isCorrect: false },
+    ],
+    correctValue: 'about 0.053 T',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: `${SUPC_SRC} — TA-5 P34 (0.080 × (1 − 0.340)); 0.033 T forgets to square, 0.080 T ignores the temperature dependence`,
+  },
+  {
+    conceptId: SUPC,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why is YBCO, with T_c ≈ 92 K, especially useful compared with mercury (T_c = 4.2 K)?',
+    choices: [
+      { text: 'It can be kept superconducting with cheap liquid nitrogen (77 K) instead of liquid helium', isCorrect: true },
+      { text: 'It has a higher resistance, which is safer', isCorrect: false },
+      { text: 'It works at room temperature', isCorrect: false },
+      { text: 'It does not need to be cooled at all', isCorrect: false },
+    ],
+    correctValue: 'liquid nitrogen cooling',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [],
+    source: `${SUPC_SRC} — TA-2 P34`,
+  },
+  {
+    conceptId: SUPC,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why does a magnet float above a superconductor but not above an extremely good conductor like ultra-pure copper?',
+    choices: [
+      { text: 'The superconductor expels magnetic fields (the Meissner effect); a mere perfect conductor would just trap the field it already had', isCorrect: true },
+      { text: 'A superconductor is just a better conductor — very pure, cold copper would float the magnet too', isCorrect: false, misconceptionId: `${SUPC}:MC-JUST-A-VERY-GOOD-CONDUCTOR` },
+      { text: 'Because the superconductor is colder than the copper', isCorrect: false, misconceptionId: `${SUPC}:MC-JUST-A-VERY-GOOD-CONDUCTOR` },
+    ],
+    correctValue: 'the Meissner effect',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${SUPC}:MC-JUST-A-VERY-GOOD-CONDUCTOR`],
+    source: `${SUPC_SRC} — DB-2 golden probe and MC-JUST-A-VERY-GOOD-CONDUCTOR conflict_evidence`,
+  },
+  {
+    conceptId: SUPC,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'An MRI\'s superconducting coil is pushed to a much higher current and field. Does it stay superconducting?',
+    choices: [
+      { text: 'Not necessarily — above a critical field or current it returns to normal (a quench)', isCorrect: true },
+      { text: 'Yes — once superconducting it can carry any current', isCorrect: false, misconceptionId: `${SUPC}:MC-ANY-FIELD-ALLOWED` },
+      { text: 'Yes, as long as it stays below T_c', isCorrect: false, misconceptionId: `${SUPC}:MC-ANY-FIELD-ALLOWED` },
+    ],
+    correctValue: 'not necessarily',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${SUPC}:MC-ANY-FIELD-ALLOWED`],
+    source: `${SUPC_SRC} — DB-3 limits check and MC-ANY-FIELD-ALLOWED conflict_evidence`,
+  },
+  {
+    conceptId: SUPC,
+    subjectSlug: 'physics',
+    probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why can\'t small scatterings off the lattice slow down a supercurrent?',
+    choices: [
+      { text: 'The electrons are bound in Cooper pairs sharing one quantum state; knocking a pair out would need at least the energy gap, which small scatterings cannot supply', isCorrect: true },
+      { text: 'Because the lattice stops vibrating at low temperature', isCorrect: false },
+      { text: 'Because there are no electrons in a superconductor', isCorrect: false },
+    ],
+    correctValue: 'Cooper pairs and the energy gap',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: `${SUPC_SRC} — TA-4 think-aloud and §8 P78`,
+  },
+]
+
 // Batch export spreads for the extension (kept with the concepts above).
 const PHYS_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...DENS_EXPLANATIONS,
@@ -55981,6 +56429,10 @@ const PHYS_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...RSAF_EXPLANATIONS,
   ...COMM_EXPLANATIONS,
   ...ANTN_EXPLANATIONS,
+  ...COUP_EXPLANATIONS,
+  ...CHAO_EXPLANATIONS,
+  ...FMAT_EXPLANATIONS,
+  ...SUPC_EXPLANATIONS,
 ]
 
 const PHYS_EXTENSION_PROBES: SeedProbe[] = [
@@ -56023,6 +56475,10 @@ const PHYS_EXTENSION_PROBES: SeedProbe[] = [
   ...RSAF_PROBES,
   ...COMM_PROBES,
   ...ANTN_PROBES,
+  ...COUP_PROBES,
+  ...CHAO_PROBES,
+  ...FMAT_PROBES,
+  ...SUPC_PROBES,
 ]
 
 // ─── Batch export ────────────────────────────────────────────────────────────

@@ -1,0 +1,416 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.wave.coupled-oscillators-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.wave.coupled-oscillators",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:f9905c7c705d52672cc1842af47a2e60abe6a6fe508a2307ea7040a8298e39bd",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.wave.coupled-oscillators.md": "sha256:6eb4840a471743d76fca96b30659a1f5bc15043737aece48f59cefafe581b694"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.wave.coupled-oscillators",
+    "name": "Coupled Oscillators and Normal Modes",
+    "difficultyRaw": "expert (5)",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "phys.wave.shm",
+      "phys.wave.standing-waves"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.wave.coupled-oscillators-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.wave.coupled-oscillators (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.wave.coupled-oscillators.md": "sha256:6eb4840a471743d76fca96b30659a1f5bc15043737aece48f59cefafe581b694"
+      },
+      "contentHash": "sha256:75509c85d587a965290447ff342127a8f29820980a900e4d371dbf093294c8b3",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.wave.coupled-oscillators.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.coupled-oscillators.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.coupled-oscillators"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.coupled-oscillators\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.coupled-oscillators.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.coupled-oscillators.md#TA-2 (addresses MC-ONE-FREQUENCY-PER-SYSTEM)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.coupled-oscillators"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.coupled-oscillators\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.coupled-oscillators.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.coupled-oscillators.md#TA-3 (addresses MC-ENERGY-STAYS-PUT)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.coupled-oscillators"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.coupled-oscillators\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.coupled-oscillators.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.coupled-oscillators.md#TA-4",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.coupled-oscillators"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.coupled-oscillators\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.coupled-oscillators.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.coupled-oscillators.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.coupled-oscillators"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.coupled-oscillators\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.coupled-oscillators.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.coupled-oscillators.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.coupled-oscillators"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.coupled-oscillators\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.wave.coupled-oscillators.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.wave.coupled-oscillators.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.wave.coupled-oscillators"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.wave.coupled-oscillators\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.wave.coupled-oscillators/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "phys.wave.coupled-oscillators",
+      "title": "Learning Objective",
+      "content": "[Boundary statement]\nA student who achieves mastery demonstrates:\n1. Explains normal modes: when oscillators are coupled, there are special patterns of motion — normal modes — in which every part oscillates sinusoidally at the SAME frequency, and a system has as many modes as it has degrees of freedom. For two equal masses m between three equal springs k (wall–m–m–wall), the in-phase mode has ω₁ = √(k/m) (the middle spring never stretches) and the out-of-phase mode ω₂ = √(3k/m): with k = 10 N/m and m = 0.1 kg, 10 rad/s and 17.3 rad/s.\n2. Explains that any motion of a linear coupled system is a superposition of its normal modes, so starting one oscillator alone excites both modes; for weakly coupled pendulums (ω₁ = 3.130 rad/s, ω₂ = 3.286 rad/s) the two modes drift in and out of step and the energy passes completely from one pendulum to the other and back, a full swap every π/(ω₂ − ω₁) ≈ 20 s.\n3. Connects modes to standing waves: a stretched string is a chain of infinitely many coupled oscillators, and its normal modes are exactly its standing-wave harmonics, f_n = n f₁.\n\nA student who thinks a coupled system has just one natural frequency, or that the energy stays in the oscillator that was struck, has **NOT** achieved mastery — those ideas misread molecules, bridges and musical instruments alike.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.coupled-oscillators.md",
+        "startLine": 17,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.wave.coupled-oscillators/misconception/MC-ONE-FREQUENCY-PER-SYSTEM",
+      "kind": "misconception",
+      "conceptId": "phys.wave.coupled-oscillators",
+      "title": "A coupled system has one natural frequency",
+      "content": "### MC-ONE-FREQUENCY-PER-SYSTEM: \"A coupled system has one natural frequency\"\ntrigger_signal: student assigns a single natural frequency to a system of coupled oscillators, carrying over the single mass-on-spring result.\nconflict_evidence [P28]: \"Move both masses the same way: does the middle spring stretch? Now move them opposite ways: what does the middle spring do? Can both patterns have the same restoring force?\"\nbridge_text [P30]: \"In phase, the middle spring is never stretched, so each mass feels just one spring: ω₁ = √(k/m). Out of phase, the middle spring is stretched by twice each displacement and pulls back extra hard: ω₂ = √(3k/m). Two different patterns, two different frequencies — one for each degree of freedom.\"\nreplacement_text [P31]: \"A coupled system has one normal-mode frequency per degree of freedom; general motion is a mix of modes.\"\ndiscrimination_pairs [P33]: [\"single mass on a spring: one frequency √(k/m)\", \"two coupled masses: √(k/m) and √(3k/m)\"]\ns6_path: skip P28; act out the two patterns with two people holding a stretchy band.",
+      "localKey": "MC-ONE-FREQUENCY-PER-SYSTEM",
+      "language": "en",
+      "refs": [
+        "MC-ONE-FREQUENCY-PER-SYSTEM"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.coupled-oscillators.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.wave.coupled-oscillators/misconception/MC-ENERGY-STAYS-PUT",
+      "kind": "misconception",
+      "conceptId": "phys.wave.coupled-oscillators",
+      "title": "The oscillator that is struck keeps the energy",
+      "content": "### MC-ENERGY-STAYS-PUT: \"The oscillator that is struck keeps the energy\"\ntrigger_signal: student predicts that only the initially displaced oscillator keeps moving while its coupled partner barely responds.\nconflict_evidence [P28]: \"Watch two coupled pendulums for a full minute after starting only one. Where is the energy after 20 seconds?\"\nbridge_text [P30]: \"In the other pendulum. Starting one alone is a mix of the in-phase and out-of-phase modes with slightly different frequencies; as they drift apart in phase, the motion moves to the second pendulum, then drifts back. The swap takes π/(ω₂ − ω₁) — about 20 s here — however weak the coupling; weak coupling only makes it slower.\"\nreplacement_text [P31]: \"Energy passes back and forth between coupled oscillators at the beat frequency of their normal modes.\"\ndiscrimination_pairs [P33]: [\"t = 0: first pendulum swinging, second still\", \"t ≈ 20 s: first still, second swinging\"]\ns6_path: skip P28; watch the simulation alone.",
+      "localKey": "MC-ENERGY-STAYS-PUT",
+      "language": "en",
+      "refs": [
+        "MC-ENERGY-STAYS-PUT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.coupled-oscillators.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.wave.coupled-oscillators/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.coupled-oscillators",
+      "title": "Two Pendulums on a String",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Two Pendulums on a String\",\"primitives\":[\"P01\",\"P04\",\"P05\",\"P06\",\"P14\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.coupled-oscillators.md",
+        "startLine": 11,
+        "endLine": 18
+      }
+    },
+    {
+      "assetId": "phys.wave.coupled-oscillators/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.coupled-oscillators",
+      "title": "Normal Modes",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Normal Modes\",\"primitives\":[\"P02\",\"P06\",\"P08\",\"P13\",\"P34\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-ONE-FREQUENCY-PER-SYSTEM\"]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [
+        "MC-ONE-FREQUENCY-PER-SYSTEM"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.coupled-oscillators.md",
+        "startLine": 18,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "phys.wave.coupled-oscillators/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.coupled-oscillators",
+      "title": "Energy Exchange",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Energy Exchange\",\"primitives\":[\"P02\",\"P13\",\"P34\",\"P41\",\"P49\",\"P50\",\"P51\",\"P52\",\"P55\"],\"addresses\":[\"MC-ENERGY-STAYS-PUT\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-ENERGY-STAYS-PUT"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.coupled-oscillators.md",
+        "startLine": 30,
+        "endLine": 40
+      }
+    },
+    {
+      "assetId": "phys.wave.coupled-oscillators/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.coupled-oscillators",
+      "title": "Superposition",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Superposition\",\"primitives\":[\"P02\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.coupled-oscillators.md",
+        "startLine": 40,
+        "endLine": 45
+      }
+    },
+    {
+      "assetId": "phys.wave.coupled-oscillators/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.coupled-oscillators",
+      "title": "From Two to Many — Standing Waves",
+      "content": "{\"id\":\"TA-5\",\"title\":\"From Two to Many — Standing Waves\",\"primitives\":[\"P02\",\"P13\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.coupled-oscillators.md",
+        "startLine": 45,
+        "endLine": 51
+      }
+    },
+    {
+      "assetId": "phys.wave.coupled-oscillators/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.coupled-oscillators",
+      "title": "Formative Assessment",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Formative Assessment\",\"primitives\":[\"P02\",\"P35\",\"P49\",\"P51\",\"P55\",\"P79\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.coupled-oscillators.md",
+        "startLine": 51,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "phys.wave.coupled-oscillators/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.wave.coupled-oscillators",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P28\",\"P41\",\"P54\",\"P55\",\"P62\",\"P68\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.coupled-oscillators.md",
+        "startLine": 58,
+        "endLine": 100
+      }
+    },
+    {
+      "assetId": "phys.wave.coupled-oscillators/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.wave.coupled-oscillators",
+      "title": "Assessment Battery",
+      "content": "| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (classify) | \"Three masses: modes?\" | CORRECT = three |\n| P74 (classify) | \"Which mode is faster?\" | CORRECT = out-of-phase |\n| P75 (boundary) | \"Zero coupling\" | CORRECT = never swap (identical frequencies) |\n| P76 (transfer) | \"CO₂ infrared\" | CORRECT = molecular vibrations are normal modes at fixed frequencies |\n| P77 (generate) | \"Excite only the out-of-phase mode\" | CORRECT = equal and opposite initial displacements |\n| P78 (explain) | \"Out-of-phase faster\" | CORRECT = the coupling spring adds restoring force |\n| P79 (predict) | \"Stiffer coupling\" | CORRECT = faster swap |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.coupled-oscillators.md",
+        "startLine": 183,
+        "endLine": 195
+      }
+    },
+    {
+      "assetId": "phys.wave.coupled-oscillators/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.wave.coupled-oscillators",
+      "title": "Student State Matrix",
+      "content": "| State | Why here | Tell-tale behaviour | Protocol |\n|---|---|---|---|\n| S0 | Only single oscillators known | Cannot predict what coupling does | Protocol A (Concrete) |\n| S1 | \"Normal mode\" recited | Cannot find the modes of a simple system | Protocol B (Counterexample-first) |\n| S2-ONE-FREQUENCY-PER-SYSTEM | Single-oscillator habit | \"The coupled system has one natural frequency\" | Misconception Engine → then Protocol C |\n| S2-ENERGY-STAYS-PUT | Local thinking | \"The pendulum you push keeps swinging; the other barely moves\" | Misconception Engine → then Protocol C |\n| S3 | Partial — modes fine | Cannot link modes to standing waves | Protocol C (Guided Questioning) |\n| S6 | Anxiety on simultaneous equations | Avoids two-variable algebra | Protocol F (Low Pressure) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.coupled-oscillators.md",
+        "startLine": 27,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "phys.wave.coupled-oscillators/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.wave.coupled-oscillators",
+      "title": "Diagnostic Battery",
+      "content": "DB-1 (prior-exposure check):\n\"Two identical pendulums hang from a slack string. You set one swinging and hold the other still, then let go. What happens over the next minute?\"\n  \"The second starts swinging as the first slows, then they swap back\" → DB-2.\n  \"The first keeps swinging; the second just twitches\" → SIGNAL:MISCONCEPTION:MC-ENERGY-STAYS-PUT. Enter Misconception Engine.\n  No idea → S0. Enter Protocol A (Concrete).\n\nDB-2 (representation / misconception test):\n\"Two masses m between three springs k (wall–m–m–wall). At how many different frequencies can the system oscillate in a pure, repeating pattern?\"\n  \"Two — in phase at √(k/m) and out of phase at √(3k/m)\" → S3. Enter Protocol C.\n  \"Two\" (no values) → S1. Enter Protocol B.\n  \"One — like any oscillator\" → SIGNAL:MISCONCEPTION:MC-ONE-FREQUENCY-PER-SYSTEM. Enter Misconception Engine.\n  Pause → add S6 flag; Protocol F if anxious, otherwise Protocol A.\n\nDB-3 (string check — overlays):\n\"How many normal modes does a guitar string have?\"\n  \"Infinitely many — its harmonics\" → no flag.\n  \"One\" → note; repair at TA-5.\n  Confident and wrong on DB-2 → add S7 flag. Override to Protocol G.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-ENERGY-STAYS-PUT",
+        "MC-ONE-FREQUENCY-PER-SYSTEM"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.coupled-oscillators.md",
+        "startLine": 38,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "phys.wave.coupled-oscillators/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.wave.coupled-oscillators",
+      "title": "Prerequisite Check",
+      "content": "PD-1 (for `phys.wave.shm` and `phys.wave.standing-waves`):\n\"What is the angular frequency of a mass m on a spring k? What are the allowed frequencies of a string fixed at both ends?\"\n  Cannot say \"ω = √(k/m); f_n = n f₁\" → flag PREREQ-GAP-SHM-STANDING.\n  In-session minimum repair: one P06 (a mass on a spring; a string's first three harmonics) + one P34 (\"k = 40 N/m, m = 0.1 kg: ω?\") then resume. If absent, schedule the missing session (S4 route).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.wave.coupled-oscillators.md",
+        "startLine": 59,
+        "endLine": 66
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}
