@@ -30,7 +30,7 @@ describe('physics blueprint corpus — every blueprint compiles', () => {
     // (6) KG extension; it grows with each batch of the 2026-10-03
     // coverage-driven extension. A loose >= threshold would let future regressions pass
     // silently; an exact count catches any dropped blueprint immediately.
-    expect(physicsConceptIds.length).toBe(281)
+    expect(physicsConceptIds.length).toBe(282)
   })
 
   it('compiles every physics blueprint to a valid DRAFT package', () => {

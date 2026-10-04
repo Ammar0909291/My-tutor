@@ -56388,6 +56388,118 @@ const SUPC_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.rel.general-relativity-intro ───────────────────────────────────────
+const GREL = 'phys.rel.general-relativity-intro'
+const GREL_SRC = 'docs/curriculum/blueprints/phys.rel.general-relativity-intro.md'
+
+const GREL_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: GREL,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'In a closed, windowless room you feel your normal weight. You could be at rest on Earth, or in a rocket in deep space accelerating at 9.8 m/s². Drop two balls of different mass: on Earth they fall together; in the rocket the floor rushes up to meet both at once. Every experiment gives the same result, and Einstein made this a principle — the equivalence principle: in a small laboratory, uniform gravity and acceleration are indistinguishable (and a freely falling lab is like one floating in empty space, which is why orbiting astronauts feel weightless). It predicts new effects. A light beam crossing an accelerating lift curves downward inside, so gravity must bend light too, although light has no mass: starlight grazing the Sun bends by 1.75″, confirmed in 1919. Light climbing out of gravity is redshifted, so clocks lower down run slow, by a fraction gh/c² near Earth — 2.5 × 10⁻¹⁵ over a 22.5 m tower. GPS clocks gain about 45.7 μs a day from weaker gravity and lose 7.2 μs from their speed; the net +38.5 μs must be corrected or positions drift about 11 km a day. General relativity explains this: mass and energy curve spacetime, and free objects and light follow the straightest paths through it. Squeeze a mass inside r_s = 2GM/c² — 2.95 km for the Sun — and not even light escapes: a black hole.',
+    targetedMisconceptions: [`${GREL}:MC-BOX-CAN-TELL-GRAVITY`, `${GREL}:MC-LIGHT-UNBENT-BY-GRAVITY`],
+    source: `${GREL_SRC} — TA-2 equivalence principle, TA-4 light bending and clocks, TA-5 GPS and curved spacetime`,
+  },
+  {
+    conceptId: GREL,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'It feels as though some clever experiment inside a closed room would reveal whether you are on Earth or in an accelerating rocket. Try each one. Drop a heavy ball and a light one: in the rocket the floor rushes up to meet both together, and on Earth both fall together. Stand on a scale: the floor pushes with mg in both. Swing a pendulum: the same period in both. None of them differs, because all objects fall at the same rate in gravity, exactly as they appear to in an accelerating frame. That is the equivalence principle — and it holds for every experiment in a small enough room (only over very large regions do tidal differences give gravity away). A second objection is that gravity cannot affect light, because light has no mass. Shine a beam straight across a lift accelerating upward: while the light crosses, the lift moves up, so the beam hits the far wall lower than it started — inside, its path is curved. If gravity and acceleration are equivalent, gravity must bend light too. It does: Eddington measured starlight bending by 1.75 arcseconds at the Sun\'s edge in 1919, and gravitational lenses bend the light of whole galaxies. Gravity acts on everything moving through spacetime, light included.',
+    targetedMisconceptions: [`${GREL}:MC-BOX-CAN-TELL-GRAVITY`, `${GREL}:MC-LIGHT-UNBENT-BY-GRAVITY`],
+    source: `${GREL_SRC} — MC-BOX-CAN-TELL-GRAVITY + MC-LIGHT-UNBENT-BY-GRAVITY, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const GREL_PROBES: SeedProbe[] = [
+  {
+    conceptId: GREL,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'GPS satellite clocks gain about 45.7 μs per day because gravity is weaker up there, and lose about 7.2 μs per day because of their orbital speed. What is their net drift?',
+    choices: [
+      { text: 'About +38.5 μs per day', isCorrect: true },
+      { text: 'About +52.9 μs per day', isCorrect: false },
+      { text: 'About −7.2 μs per day', isCorrect: false },
+      { text: 'Zero — clocks keep the same time everywhere', isCorrect: false },
+    ],
+    correctValue: 'about +38.5 μs per day',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [],
+    source: `${GREL_SRC} — TA-5 P34 (45.7 − 7.2); 52.9 adds the two effects`,
+  },
+  {
+    conceptId: GREL,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What is the Schwarzschild radius r_s = 2GM/c² for an object with the Sun\'s mass (2.0 × 10³⁰ kg)?',
+    choices: [
+      { text: 'About 3 km', isCorrect: true },
+      { text: 'About 700 000 km — the Sun\'s actual radius', isCorrect: false },
+      { text: 'About 3 m', isCorrect: false },
+      { text: 'About 9 mm', isCorrect: false },
+    ],
+    correctValue: 'about 3 km',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: `${GREL_SRC} — §1 objective 3 (r_s ≈ 2.95 km); 9 mm is Earth's`,
+  },
+  {
+    conceptId: GREL,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'You wake up in a windowless room and feel your normal weight. Could you actually be in a rocket accelerating at 9.8 m/s² in deep space?',
+    choices: [
+      { text: 'Yes — no experiment inside a small closed room can tell uniform gravity from acceleration', isCorrect: true },
+      { text: 'No — dropping a heavy and a light ball would show the difference', isCorrect: false, misconceptionId: `${GREL}:MC-BOX-CAN-TELL-GRAVITY` },
+      { text: 'No — a pendulum would swing differently in the rocket', isCorrect: false, misconceptionId: `${GREL}:MC-BOX-CAN-TELL-GRAVITY` },
+    ],
+    correctValue: 'yes',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${GREL}:MC-BOX-CAN-TELL-GRAVITY`],
+    source: `${GREL_SRC} — DB-1 golden probe and MC-BOX-CAN-TELL-GRAVITY conflict_evidence`,
+  },
+  {
+    conceptId: GREL,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Can gravity bend a beam of light, given that light has no mass?',
+    choices: [
+      { text: 'Yes — light crossing an accelerating lift curves, so by equivalence gravity bends it; in general relativity light follows curved spacetime', isCorrect: true },
+      { text: 'No — gravity only acts on objects with mass', isCorrect: false, misconceptionId: `${GREL}:MC-LIGHT-UNBENT-BY-GRAVITY` },
+      { text: 'Only when light passes through a medium like glass', isCorrect: false, misconceptionId: `${GREL}:MC-LIGHT-UNBENT-BY-GRAVITY` },
+    ],
+    correctValue: 'yes',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${GREL}:MC-LIGHT-UNBENT-BY-GRAVITY`],
+    source: `${GREL_SRC} — DB-2 item and MC-LIGHT-UNBENT-BY-GRAVITY conflict_evidence`,
+  },
+  {
+    conceptId: GREL,
+    subjectSlug: 'physics',
+    probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'In general relativity, why does the Moon orbit the Earth?',
+    choices: [
+      { text: 'Earth\'s mass curves spacetime, and the Moon follows the straightest possible path through that curved spacetime', isCorrect: true },
+      { text: 'Invisible strings of force pull it round', isCorrect: false },
+      { text: 'The Moon has no mass, so it just drifts', isCorrect: false },
+    ],
+    correctValue: 'straightest path in curved spacetime',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: `${GREL_SRC} — TA-5 think-aloud and §8 P78`,
+  },
+]
+
 // Batch export spreads for the extension (kept with the concepts above).
 const PHYS_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...DENS_EXPLANATIONS,
@@ -56433,6 +56545,7 @@ const PHYS_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...CHAO_EXPLANATIONS,
   ...FMAT_EXPLANATIONS,
   ...SUPC_EXPLANATIONS,
+  ...GREL_EXPLANATIONS,
 ]
 
 const PHYS_EXTENSION_PROBES: SeedProbe[] = [
@@ -56479,6 +56592,7 @@ const PHYS_EXTENSION_PROBES: SeedProbe[] = [
   ...CHAO_PROBES,
   ...FMAT_PROBES,
   ...SUPC_PROBES,
+  ...GREL_PROBES,
 ]
 
 // ─── Batch export ────────────────────────────────────────────────────────────

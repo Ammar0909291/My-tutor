@@ -4,10 +4,10 @@
   "status": "production",
   "build_date": "2026-06-29",
   "statistics": {
-    "total_concepts": 281,
+    "total_concepts": 282,
     "total_domains": 12,
-    "total_requires_edges": 357,
-    "total_unlocks_edges": 356,
+    "total_requires_edges": 360,
+    "total_unlocks_edges": 359,
     "total_cross_links": 0
   },
   "domains": [
@@ -54,7 +54,7 @@
     {
       "key": "rel",
       "name": "Special Relativity",
-      "count": 8
+      "count": 9
     },
     {
       "key": "stat",
@@ -962,7 +962,9 @@
         "HC Verma Ch.5"
       ],
       "children": [],
-      "unlocks": []
+      "unlocks": [
+        "phys.rel.general-relativity-intro"
+      ]
     },
     {
       "id": "phys.mech.work",
@@ -1605,7 +1607,8 @@
       "unlocks": [
         "phys.astro.stellar-structure",
         "phys.mech.gravitational-field",
-        "phys.astro.solar-system"
+        "phys.astro.solar-system",
+        "phys.rel.general-relativity-intro"
       ]
     },
     {
@@ -3322,7 +3325,7 @@
         "phys.wave.forced-oscillations"
       ],
       "cross_links": [],
-      "description": "Oscillators linked by a coupling move in normal modes, patterns in which every part oscillates at one shared frequency; a system has as many modes as degrees of freedom (two masses between springs: sqrt(k/m) and sqrt(3k/m)), any motion is a superposition of modes, and weakly coupled pendulums swap energy at the beat frequency; a string's modes are its standing waves.",
+      "description": "Oscillators linked by a coupling move in normal modes, patterns in which every part oscillates at one shared frequency. A system has as many modes as degrees of freedom (two masses between springs: sqrt(k/m) and sqrt(3k/m)), and any motion is a superposition of modes. Weakly coupled pendulums swap energy at the beat frequency, and a string's modes are its standing waves.",
       "difficulty": "expert",
       "estimated_hours": 2,
       "bloom": "apply",
@@ -5816,7 +5819,7 @@
         "phys.mod.x-rays"
       ],
       "cross_links": [],
-      "description": "Absorbed dose (gray, J/kg) measures energy deposited; equivalent dose (sievert) weights it by radiation type (alpha 20, beta and gamma 1); exposure is reduced by time, distance (inverse square) and shielding, and being irradiated does not make an object radioactive, unlike contamination.",
+      "description": "Absorbed dose (gray, J/kg) measures energy deposited, and equivalent dose (sievert) weights it by radiation type (alpha 20, beta and gamma 1). Exposure is reduced by time, distance (inverse square) and shielding. Being irradiated does not make an object radioactive, unlike contamination.",
       "difficulty": "proficient",
       "estimated_hours": 2,
       "bloom": "apply",
@@ -6749,8 +6752,41 @@
       "children": [],
       "unlocks": [
         "phys.astro.black-holes",
-        "phys.astro.cosmology"
+        "phys.astro.cosmology",
+        "phys.rel.general-relativity-intro"
       ]
+    },
+    {
+      "id": "phys.rel.general-relativity-intro",
+      "name": "Equivalence Principle and Curved Spacetime",
+      "aliases": [
+        "general relativity",
+        "equivalence principle",
+        "gravitational time dilation",
+        "gravitational lensing"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.rel.spacetime",
+        "phys.mech.universal-gravitation",
+        "phys.mech.non-inertial-frames"
+      ],
+      "related": [
+        "phys.astro.black-holes",
+        "phys.astro.gravitational-waves"
+      ],
+      "cross_links": [],
+      "description": "No experiment in a small closed lab can tell uniform gravity from acceleration (the equivalence principle). So light bends near masses and clocks run slower lower down (by gh/c^2), and general relativity describes gravity as spacetime curved by mass-energy, explaining GPS clock corrections, gravitational lensing and black holes (Schwarzschild radius 2GM/c^2).",
+      "difficulty": "expert",
+      "estimated_hours": 3,
+      "bloom": "understand",
+      "mastery_threshold": 0.75,
+      "references": [
+        "Halliday Resnick Ch.37",
+        "Hartle, Gravity Ch.1-2"
+      ],
+      "children": [],
+      "unlocks": []
     },
     {
       "id": "phys.stat.probability-basics",
@@ -7207,7 +7243,7 @@
         "phys.mech.keplers-laws"
       ],
       "cross_links": [],
-      "description": "Seasons come from the tilt of Earth's axis (23.4 degrees), which changes the Sun's noon height and day length, not from Earth's distance to the Sun; the Moon's phases are the changing view of its sunlit half; eclipses occur when Sun, Earth and Moon line up at new or full moon; tides come from the difference in the Moon's (and Sun's) gravity across the Earth, raising two bulges.",
+      "description": "Seasons come from the tilt of Earth's axis (23.4 degrees), which changes the Sun's noon height and day length, not from Earth's distance to the Sun. The Moon's phases are the changing view of its sunlit half. Eclipses occur when Sun, Earth and Moon line up at new or full moon, and tides come from the difference in the Moon's (and Sun's) gravity across the Earth.",
       "difficulty": "foundational",
       "estimated_hours": 2,
       "bloom": "understand",
@@ -7269,7 +7305,7 @@
         "phys.astro.cosmology"
       ],
       "cross_links": [],
-      "description": "Astronomical distances are built up in steps: parallax gives nearby stars directly (d in parsecs = 1/p in arcseconds); standard candles of known luminosity (Cepheids, type Ia supernovae) give farther distances from the inverse-square law; and for distant galaxies Hubble's law v = H0 d links redshift to distance.",
+      "description": "Astronomical distances are built up in steps. Parallax gives nearby stars directly (d in parsecs = 1/p in arcseconds), and standard candles of known luminosity (Cepheids, type Ia supernovae) give farther distances from the inverse-square law. For distant galaxies, Hubble's law v = H0 d links redshift to distance.",
       "difficulty": "advanced",
       "estimated_hours": 2,
       "bloom": "apply",

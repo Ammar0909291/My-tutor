@@ -1929,9 +1929,17 @@
  },
  {
   "subject": "physics",
+  "conceptId": "phys.rel.general-relativity-intro",
+  "lessonTitle": "Equivalence Principle and Curved Spacetime",
+  "lessonOrder": 242,
+  "unitTitle": "Special Relativity",
+  "unit": 9
+ },
+ {
+  "subject": "physics",
   "conceptId": "phys.stat.probability-basics",
   "lessonTitle": "Probability Distributions in Physics",
-  "lessonOrder": 242,
+  "lessonOrder": 243,
   "unitTitle": "Statistical Mechanics",
   "unit": 10
  },
@@ -1939,7 +1947,7 @@
   "subject": "physics",
   "conceptId": "phys.stat.boltzmann-factor",
   "lessonTitle": "Boltzmann Factor and Statistical Weight",
-  "lessonOrder": 243,
+  "lessonOrder": 244,
   "unitTitle": "Statistical Mechanics",
   "unit": 10
  },
@@ -1947,7 +1955,7 @@
   "subject": "physics",
   "conceptId": "phys.stat.partition-function",
   "lessonTitle": "Partition Function",
-  "lessonOrder": 244,
+  "lessonOrder": 245,
   "unitTitle": "Statistical Mechanics",
   "unit": 10
  },
@@ -1955,7 +1963,7 @@
   "subject": "physics",
   "conceptId": "phys.stat.maxwell-boltzmann",
   "lessonTitle": "Maxwell-Boltzmann Speed Distribution",
-  "lessonOrder": 245,
+  "lessonOrder": 246,
   "unitTitle": "Statistical Mechanics",
   "unit": 10
  },
@@ -1963,7 +1971,7 @@
   "subject": "physics",
   "conceptId": "phys.stat.fermi-dirac",
   "lessonTitle": "Fermi-Dirac Statistics",
-  "lessonOrder": 246,
+  "lessonOrder": 247,
   "unitTitle": "Statistical Mechanics",
   "unit": 10
  },
@@ -1971,7 +1979,7 @@
   "subject": "physics",
   "conceptId": "phys.stat.bose-einstein",
   "lessonTitle": "Bose-Einstein Statistics",
-  "lessonOrder": 247,
+  "lessonOrder": 248,
   "unitTitle": "Statistical Mechanics",
   "unit": 10
  },
@@ -1979,7 +1987,7 @@
   "subject": "physics",
   "conceptId": "phys.stat.entropy-statistical",
   "lessonTitle": "Statistical Definition of Entropy",
-  "lessonOrder": 248,
+  "lessonOrder": 249,
   "unitTitle": "Statistical Mechanics",
   "unit": 10
  },
@@ -1987,7 +1995,7 @@
   "subject": "physics",
   "conceptId": "phys.stat.free-energy",
   "lessonTitle": "Helmholtz and Gibbs Free Energy",
-  "lessonOrder": 249,
+  "lessonOrder": 250,
   "unitTitle": "Statistical Mechanics",
   "unit": 10
  },
@@ -1995,7 +2003,7 @@
   "subject": "physics",
   "conceptId": "phys.stat.grand-canonical-ensemble",
   "lessonTitle": "Grand Canonical Ensemble",
-  "lessonOrder": 250,
+  "lessonOrder": 251,
   "unitTitle": "Statistical Mechanics",
   "unit": 10
  },
@@ -2003,7 +2011,7 @@
   "subject": "physics",
   "conceptId": "phys.stat.chemical-potential",
   "lessonTitle": "Chemical Potential and Thermodynamic Equilibrium",
-  "lessonOrder": 251,
+  "lessonOrder": 252,
   "unitTitle": "Statistical Mechanics",
   "unit": 10
  },
@@ -2011,7 +2019,7 @@
   "subject": "physics",
   "conceptId": "phys.stat.fluctuations-correlations",
   "lessonTitle": "Fluctuations, Response Functions, and Correlations",
-  "lessonOrder": 252,
+  "lessonOrder": 253,
   "unitTitle": "Statistical Mechanics",
   "unit": 10
  },
@@ -2019,7 +2027,7 @@
   "subject": "physics",
   "conceptId": "phys.stat.phase-transitions",
   "lessonTitle": "Phase Transitions and Landau Mean-Field Theory",
-  "lessonOrder": 253,
+  "lessonOrder": 254,
   "unitTitle": "Statistical Mechanics",
   "unit": 10
  },
@@ -2027,7 +2035,7 @@
   "subject": "physics",
   "conceptId": "phys.stat.ising-model",
   "lessonTitle": "Ising Model",
-  "lessonOrder": 254,
+  "lessonOrder": 255,
   "unitTitle": "Statistical Mechanics",
   "unit": 10
  },
@@ -2035,7 +2043,7 @@
   "subject": "physics",
   "conceptId": "phys.stat.phase-transitions-critical-phenomena",
   "lessonTitle": "Critical Phenomena, Scaling Laws, and Universality",
-  "lessonOrder": 255,
+  "lessonOrder": 256,
   "unitTitle": "Statistical Mechanics",
   "unit": 10
  },
@@ -2043,7 +2051,7 @@
   "subject": "physics",
   "conceptId": "phys.stat.monte-carlo-basics",
   "lessonTitle": "Monte Carlo Methods in Statistical Physics",
-  "lessonOrder": 256,
+  "lessonOrder": 257,
   "unitTitle": "Statistical Mechanics",
   "unit": 10
  },
@@ -2051,7 +2059,7 @@
   "subject": "physics",
   "conceptId": "phys.astro.solar-system",
   "lessonTitle": "The Earth-Moon-Sun System: Seasons, Phases, Eclipses and Tides",
-  "lessonOrder": 257,
+  "lessonOrder": 258,
   "unitTitle": "Astrophysics",
   "unit": 11
  },
@@ -2059,7 +2067,7 @@
   "subject": "physics",
   "conceptId": "phys.astro.stellar-properties",
   "lessonTitle": "Stellar Luminosity, Colour and the HR Diagram",
-  "lessonOrder": 258,
+  "lessonOrder": 259,
   "unitTitle": "Astrophysics",
   "unit": 11
  },
@@ -2067,7 +2075,7 @@
   "subject": "physics",
   "conceptId": "phys.astro.distance-ladder",
   "lessonTitle": "Parallax, Standard Candles and Hubble's Law",
-  "lessonOrder": 259,
+  "lessonOrder": 260,
   "unitTitle": "Astrophysics",
   "unit": 11
  },
@@ -2075,7 +2083,7 @@
   "subject": "physics",
   "conceptId": "phys.astro.stellar-structure",
   "lessonTitle": "Stellar Structure and the Main Sequence",
-  "lessonOrder": 260,
+  "lessonOrder": 261,
   "unitTitle": "Astrophysics",
   "unit": 11
  },
@@ -2083,7 +2091,7 @@
   "subject": "physics",
   "conceptId": "phys.astro.stellar-evolution",
   "lessonTitle": "Stellar Evolution and End States",
-  "lessonOrder": 261,
+  "lessonOrder": 262,
   "unitTitle": "Astrophysics",
   "unit": 11
  },
@@ -2091,7 +2099,7 @@
   "subject": "physics",
   "conceptId": "phys.astro.cosmology",
   "lessonTitle": "Big Bang Cosmology",
-  "lessonOrder": 262,
+  "lessonOrder": 263,
   "unitTitle": "Astrophysics",
   "unit": 11
  },
@@ -2099,7 +2107,7 @@
   "subject": "physics",
   "conceptId": "phys.astro.dark-matter",
   "lessonTitle": "Dark Matter and Dark Energy",
-  "lessonOrder": 263,
+  "lessonOrder": 264,
   "unitTitle": "Astrophysics",
   "unit": 11
  },
@@ -2107,7 +2115,7 @@
   "subject": "physics",
   "conceptId": "phys.astro.black-holes",
   "lessonTitle": "Black Holes and Schwarzschild Radius",
-  "lessonOrder": 264,
+  "lessonOrder": 265,
   "unitTitle": "Astrophysics",
   "unit": 11
  },
@@ -2115,7 +2123,7 @@
   "subject": "physics",
   "conceptId": "phys.astro.gravitational-waves",
   "lessonTitle": "Gravitational Waves",
-  "lessonOrder": 265,
+  "lessonOrder": 266,
   "unitTitle": "Astrophysics",
   "unit": 11
  },
@@ -2123,7 +2131,7 @@
   "subject": "physics",
   "conceptId": "phys.particle.four-forces",
   "lessonTitle": "Four Fundamental Forces",
-  "lessonOrder": 266,
+  "lessonOrder": 267,
   "unitTitle": "Particle Physics",
   "unit": 12
  },
@@ -2131,7 +2139,7 @@
   "subject": "physics",
   "conceptId": "phys.particle.particle-classification",
   "lessonTitle": "Particle Classification: Hadrons and Leptons",
-  "lessonOrder": 267,
+  "lessonOrder": 268,
   "unitTitle": "Particle Physics",
   "unit": 12
  },
@@ -2139,7 +2147,7 @@
   "subject": "physics",
   "conceptId": "phys.particle.antimatter",
   "lessonTitle": "Antimatter and Antiparticles",
-  "lessonOrder": 268,
+  "lessonOrder": 269,
   "unitTitle": "Particle Physics",
   "unit": 12
  },
@@ -2147,7 +2155,7 @@
   "subject": "physics",
   "conceptId": "phys.particle.quarks",
   "lessonTitle": "Quarks",
-  "lessonOrder": 269,
+  "lessonOrder": 270,
   "unitTitle": "Particle Physics",
   "unit": 12
  },
@@ -2155,7 +2163,7 @@
   "subject": "physics",
   "conceptId": "phys.particle.leptons",
   "lessonTitle": "Leptons",
-  "lessonOrder": 270,
+  "lessonOrder": 271,
   "unitTitle": "Particle Physics",
   "unit": 12
  },
@@ -2163,7 +2171,7 @@
   "subject": "physics",
   "conceptId": "phys.particle.neutrinos",
   "lessonTitle": "Neutrinos",
-  "lessonOrder": 271,
+  "lessonOrder": 272,
   "unitTitle": "Particle Physics",
   "unit": 12
  },
@@ -2171,7 +2179,7 @@
   "subject": "physics",
   "conceptId": "phys.particle.hadron-quark-model",
   "lessonTitle": "Quark Model of Hadrons: Baryons and Mesons",
-  "lessonOrder": 272,
+  "lessonOrder": 273,
   "unitTitle": "Particle Physics",
   "unit": 12
  },
@@ -2179,7 +2187,7 @@
   "subject": "physics",
   "conceptId": "phys.particle.gauge-bosons",
   "lessonTitle": "Gauge Bosons and Force Carriers",
-  "lessonOrder": 273,
+  "lessonOrder": 274,
   "unitTitle": "Particle Physics",
   "unit": 12
  },
@@ -2187,7 +2195,7 @@
   "subject": "physics",
   "conceptId": "phys.particle.strong-interaction",
   "lessonTitle": "The Strong Interaction and Color Charge",
-  "lessonOrder": 274,
+  "lessonOrder": 275,
   "unitTitle": "Particle Physics",
   "unit": 12
  },
@@ -2195,7 +2203,7 @@
   "subject": "physics",
   "conceptId": "phys.particle.weak-interaction",
   "lessonTitle": "The Weak Interaction",
-  "lessonOrder": 275,
+  "lessonOrder": 276,
   "unitTitle": "Particle Physics",
   "unit": 12
  },
@@ -2203,7 +2211,7 @@
   "subject": "physics",
   "conceptId": "phys.particle.electroweak-unification",
   "lessonTitle": "Electroweak Unification",
-  "lessonOrder": 276,
+  "lessonOrder": 277,
   "unitTitle": "Particle Physics",
   "unit": 12
  },
@@ -2211,7 +2219,7 @@
   "subject": "physics",
   "conceptId": "phys.particle.higgs-mechanism",
   "lessonTitle": "The Higgs Mechanism",
-  "lessonOrder": 277,
+  "lessonOrder": 278,
   "unitTitle": "Particle Physics",
   "unit": 12
  },
@@ -2219,7 +2227,7 @@
   "subject": "physics",
   "conceptId": "phys.particle.conservation-laws",
   "lessonTitle": "Conservation Laws in Particle Interactions",
-  "lessonOrder": 278,
+  "lessonOrder": 279,
   "unitTitle": "Particle Physics",
   "unit": 12
  },
@@ -2227,7 +2235,7 @@
   "subject": "physics",
   "conceptId": "phys.particle.feynman-diagrams",
   "lessonTitle": "Feynman Diagrams (Qualitative)",
-  "lessonOrder": 279,
+  "lessonOrder": 280,
   "unitTitle": "Particle Physics",
   "unit": 12
  },
@@ -2235,7 +2243,7 @@
   "subject": "physics",
   "conceptId": "phys.particle.accelerators-detectors",
   "lessonTitle": "Particle Accelerators and Detectors",
-  "lessonOrder": 280,
+  "lessonOrder": 281,
   "unitTitle": "Particle Physics",
   "unit": 12
  },
@@ -2243,7 +2251,7 @@
   "subject": "physics",
   "conceptId": "phys.particle.standard-model",
   "lessonTitle": "The Standard Model",
-  "lessonOrder": 281,
+  "lessonOrder": 282,
   "unitTitle": "Particle Physics",
   "unit": 12
  },

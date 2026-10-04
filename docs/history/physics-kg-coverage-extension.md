@@ -75,8 +75,45 @@ end of the first remap. Verified exactly against the precomputed expectation:
 `currentLesson` sum 8160 → 8311 (expected 8311); `completedLessons` sum 690 → 702
 (expected 702); completed count 11 → 11; 778 rows; 0 bookmarks.
 
+## Advanced tier, batches 9–12 (2026-10-04, committed on local `main`, not yet landed)
+
+Started under the owner's "keep working". Scope: audit §B minus electronics
+(transistors and logic gates stay excluded by owner rule) and minus special-purpose
+diodes (held back as the owner's decision) — 13 concepts.
+
+| Batch | Commit | Concepts |
+|---|---|---|
+| 9 | `4ba55739` | Earth–Moon–Sun system (`phys.astro.solar-system`), stellar properties, distance ladder, Hall effect |
+| 10 | `2b64aff8` | lasers, radiation safety, communication systems, radiation and antennas |
+| 11 | `c70738f7` | coupled oscillators, nonlinear dynamics and period doubling, fields in matter (+ `amperes-law`, KGCS P1), superconductivity (+ `resistivity`, KGCS P1) |
+| 12 | (this commit) | equivalence principle and curved spacetime (`phys.rel.general-relativity-intro`, + `non-inertial-frames`, KGCS P1) |
+
+Physics KG 269 → 282. Renames to stop cross-subject resolver captures: stellar
+properties (not "magnitude", which is mathematics), nonlinear dynamics named "Nonlinear
+Dynamics and Period Doubling" so "what is chaos?" in mathematics still resolves to
+`math.de.chaos`. Batch 12 adds two physics-only resolver hits ("equivalence
+principle", "curved spacetime"); "what is an equivalence relation?" and "what is
+curvature?" in mathematics still resolve to their own concepts.
+
+Batch 12 also rewrites five new descriptions as sentences: the GR one was over the
+400-character limit for speakable prose (`blueprintSpineIsProse.test.ts`), and four
+from batches 9–11 (coupled oscillators, radiation safety, Earth–Moon–Sun system,
+distance ladder) used 2+ semicolons, which `remediationGrounding.readsAsProse` rejects
+as syllabus outlines. Packages and the Tier A manifest are unaffected.
+
+Validation for batch 12: `tsc` clean; seed dry-run 13191 items, 0 duplicates; contract
+audit 282/282 concepts, 305/305 pairs at 5 probes; pinned + batch tests 397/397.
+
+Known, pre-existing, not touched: `phys.qm.identical-particles` requires `phys.qm.spin`
+but `spin` does not list it in `unlocks` (present before this campaign began).
+
+Landing these 13 needs one owner-approved remap after deploy:
+`npx tsx scripts/physics/remap-lesson-orders.ts --from ed38b58e` (269 → 282 lessons,
+163 stored order numbers move).
+
 ## Next
 
-The advanced tier (16 concepts, audit §B) is the owner's later call; electronics
-(transistors, logic gates) stays excluded. Each future landing needs its own remap run
+Advanced tier batches 9–12 await an owner-approved landing (above). Remaining from
+audit §B: special-purpose diodes (owner's decision); electronics (transistors, logic
+gates) stays excluded. Each future landing needs its own remap run
 right after deploy.

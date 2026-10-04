@@ -1,0 +1,417 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.rel.general-relativity-intro-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.rel.general-relativity-intro",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:4d9524e347b28fa0a029a16708d1a9474f8045d3ae6dec015a21c385249b9159",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.rel.general-relativity-intro.md": "sha256:db7f6c242dceee42cc5df95601cbce9ca5f99b7fffd52ba7ade7e52dbb31b38c"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.rel.general-relativity-intro",
+    "name": "Equivalence Principle and Curved Spacetime",
+    "difficultyRaw": "expert (5)",
+    "bloom": "understand",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 3,
+    "prerequisites": [
+      "phys.rel.spacetime",
+      "phys.mech.universal-gravitation",
+      "phys.mech.non-inertial-frames"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.rel.general-relativity-intro-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.rel.general-relativity-intro (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.rel.general-relativity-intro.md": "sha256:db7f6c242dceee42cc5df95601cbce9ca5f99b7fffd52ba7ade7e52dbb31b38c"
+      },
+      "contentHash": "sha256:272f88b4851c0ff76828a0f390e976ba43b0bd776396b9fe97c366dcef538a4e",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.rel.general-relativity-intro.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.rel.general-relativity-intro.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.rel.general-relativity-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.rel.general-relativity-intro\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.rel.general-relativity-intro.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.rel.general-relativity-intro.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.rel.general-relativity-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.rel.general-relativity-intro\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.rel.general-relativity-intro.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.rel.general-relativity-intro.md#TA-3 (addresses MC-BOX-CAN-TELL-GRAVITY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.rel.general-relativity-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.rel.general-relativity-intro\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.rel.general-relativity-intro.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.rel.general-relativity-intro.md#TA-4 (addresses MC-LIGHT-UNBENT-BY-GRAVITY)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.rel.general-relativity-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.rel.general-relativity-intro\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.rel.general-relativity-intro.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.rel.general-relativity-intro.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.rel.general-relativity-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.rel.general-relativity-intro\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.rel.general-relativity-intro.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.rel.general-relativity-intro.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.rel.general-relativity-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.rel.general-relativity-intro\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.rel.general-relativity-intro.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.rel.general-relativity-intro.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.rel.general-relativity-intro"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.rel.general-relativity-intro\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.rel.general-relativity-intro/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "phys.rel.general-relativity-intro",
+      "title": "Learning Objective",
+      "content": "[Boundary statement]\nA student who achieves mastery demonstrates:\n1. States the equivalence principle — no experiment inside a small, closed laboratory can distinguish being at rest in a uniform gravitational field from accelerating at the same rate in empty space; and, equivalently, a freely falling laboratory is locally indistinguishable from one floating in deep space — and uses it to predict new effects.\n2. Derives two consequences qualitatively and uses their sizes: light must bend in a gravitational field (a beam crossing an accelerating lift curves, so it must curve near Earth too) — starlight grazing the Sun is deflected by 1.75″, confirmed in 1919; and clocks lower in a gravitational field run slower, by a fractional amount gh/c² near Earth's surface (2.5 × 10⁻¹⁵ over the 22.5 m Pound–Rebka tower). GPS satellite clocks gain about 45.7 μs per day from weaker gravity and lose about 7.2 μs per day from their speed (special relativity) — a net +38.5 μs per day that must be corrected or positions drift by about 11 km a day.\n3. Describes general relativity's picture: mass and energy curve spacetime, and freely falling objects (and light) follow the straightest possible paths through it — \"matter tells spacetime how to curve; spacetime tells matter how to move\" — so gravity is not a force in the usual sense; extreme curvature gives black holes, whose horizon has the Schwarzschild radius r_s = 2GM/c² (2.95 km for the Sun's mass, 8.9 mm for Earth's).\n\nA student who thinks a sealed-lab experiment could tell gravity from acceleration, or that light cannot be affected by gravity because it has no mass, has **NOT** achieved mastery — those ideas block every result of general relativity.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.general-relativity-intro.md",
+        "startLine": 17,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.rel.general-relativity-intro/misconception/MC-BOX-CAN-TELL-GRAVITY",
+      "kind": "misconception",
+      "conceptId": "phys.rel.general-relativity-intro",
+      "title": "Some experiment inside a closed lab could tell gravity from acceleration",
+      "content": "### MC-BOX-CAN-TELL-GRAVITY: \"Some experiment inside a closed lab could tell gravity from acceleration\"\ntrigger_signal: student proposes that dropping objects, pendulums, scales or similar local experiments would reveal whether a sealed laboratory is in a gravitational field or accelerating.\nconflict_evidence [P28]: \"Name your experiment. Drop a heavy ball and a light one: in the accelerating rocket, the floor rushes up to meet both together. On Earth, both fall together too. Weigh yourself: the floor pushes with mg in both. Swing a pendulum: the same period in both. Which result differs?\"\nbridge_text [P30]: \"None does. Every mechanical experiment gives the same result because all objects fall at the same rate in gravity, exactly as they appear to in an accelerating frame. Einstein raised this to a principle covering ALL physics, including light and clocks — and then followed its consequences. (Only over large regions do tidal differences reveal real gravity; locally, equivalence is exact.)\"\nreplacement_text [P31]: \"Locally, uniform gravity and acceleration are physically indistinguishable — the equivalence principle.\"\ndiscrimination_pairs [P33]: [\"small sealed lab: gravity and acceleration indistinguishable\", \"lab spanning a planet: tidal stretching reveals true gravity\"]\ns6_path: skip P28; run the two lifts side by side in a simulation.",
+      "localKey": "MC-BOX-CAN-TELL-GRAVITY",
+      "language": "en",
+      "refs": [
+        "MC-BOX-CAN-TELL-GRAVITY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.general-relativity-intro.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.rel.general-relativity-intro/misconception/MC-LIGHT-UNBENT-BY-GRAVITY",
+      "kind": "misconception",
+      "conceptId": "phys.rel.general-relativity-intro",
+      "title": "Light cannot be bent by gravity because it has no mass",
+      "content": "### MC-LIGHT-UNBENT-BY-GRAVITY: \"Light cannot be bent by gravity because it has no mass\"\ntrigger_signal: student denies gravitational bending of light (or gravitational effects on light) on the grounds that photons are massless.\nconflict_evidence [P28]: \"Shine a beam straight across a lift that is accelerating upward. While the light crosses, the lift moves up. Where does the beam hit the far wall — level with where it started, or lower? So what does the path look like inside?\"\nbridge_text [P30]: \"Lower — inside the lift the beam curves downward. By the equivalence principle, the same must happen in a gravitational field, so gravity bends light even though light has no mass. General relativity explains why: gravity is curved spacetime, and light follows it. Eddington measured starlight bending by 1.75″ at the Sun's edge in 1919, and gravitational lenses now bend whole galaxies' light.\"\nreplacement_text [P31]: \"Gravity affects everything that moves through spacetime, light included; starlight grazing the Sun bends by 1.75″.\"\ndiscrimination_pairs [P33]: [\"Newton with massless light: no bending\", \"general relativity and observation: 1.75″ at the solar limb\"]\ns6_path: skip P28; show a gravitational-lensing image (an Einstein ring).",
+      "localKey": "MC-LIGHT-UNBENT-BY-GRAVITY",
+      "language": "en",
+      "refs": [
+        "MC-LIGHT-UNBENT-BY-GRAVITY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.general-relativity-intro.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.rel.general-relativity-intro/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.rel.general-relativity-intro",
+      "title": "Einstein's Lift",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Einstein's Lift\",\"primitives\":[\"P01\",\"P04\",\"P05\",\"P06\",\"P14\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.general-relativity-intro.md",
+        "startLine": 11,
+        "endLine": 18
+      }
+    },
+    {
+      "assetId": "phys.rel.general-relativity-intro/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.rel.general-relativity-intro",
+      "title": "The Equivalence Principle",
+      "content": "{\"id\":\"TA-2\",\"title\":\"The Equivalence Principle\",\"primitives\":[\"P02\",\"P06\",\"P08\",\"P13\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.general-relativity-intro.md",
+        "startLine": 18,
+        "endLine": 24
+      }
+    },
+    {
+      "assetId": "phys.rel.general-relativity-intro/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.rel.general-relativity-intro",
+      "title": "No Experiment Can Tell",
+      "content": "{\"id\":\"TA-3\",\"title\":\"No Experiment Can Tell\",\"primitives\":[\"P02\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-BOX-CAN-TELL-GRAVITY\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-BOX-CAN-TELL-GRAVITY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.general-relativity-intro.md",
+        "startLine": 24,
+        "endLine": 30
+      }
+    },
+    {
+      "assetId": "phys.rel.general-relativity-intro/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.rel.general-relativity-intro",
+      "title": "Light Bends, Clocks Slow",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Light Bends, Clocks Slow\",\"primitives\":[\"P02\",\"P13\",\"P34\",\"P41\",\"P49\",\"P50\",\"P51\",\"P52\",\"P55\"],\"addresses\":[\"MC-LIGHT-UNBENT-BY-GRAVITY\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-LIGHT-UNBENT-BY-GRAVITY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.general-relativity-intro.md",
+        "startLine": 30,
+        "endLine": 40
+      }
+    },
+    {
+      "assetId": "phys.rel.general-relativity-intro/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.rel.general-relativity-intro",
+      "title": "GPS and Curved Spacetime",
+      "content": "{\"id\":\"TA-5\",\"title\":\"GPS and Curved Spacetime\",\"primitives\":[\"P02\",\"P13\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.general-relativity-intro.md",
+        "startLine": 40,
+        "endLine": 46
+      }
+    },
+    {
+      "assetId": "phys.rel.general-relativity-intro/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.rel.general-relativity-intro",
+      "title": "Formative Assessment",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Formative Assessment\",\"primitives\":[\"P02\",\"P35\",\"P49\",\"P51\",\"P55\",\"P79\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.general-relativity-intro.md",
+        "startLine": 46,
+        "endLine": 53
+      }
+    },
+    {
+      "assetId": "phys.rel.general-relativity-intro/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.rel.general-relativity-intro",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P28\",\"P41\",\"P54\",\"P55\",\"P62\",\"P68\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.general-relativity-intro.md",
+        "startLine": 53,
+        "endLine": 95
+      }
+    },
+    {
+      "assetId": "phys.rel.general-relativity-intro/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.rel.general-relativity-intro",
+      "title": "Assessment Battery",
+      "content": "| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (classify) | \"From equivalence alone\" | CORRECT = light bending and clock slowing (qualitatively); black holes need full GR |\n| P74 (classify) | \"Higher or lower clock faster?\" | CORRECT = higher |\n| P75 (boundary) | \"Planet-sized lab\" | CORRECT = tidal effects reveal gravity; equivalence is local |\n| P76 (transfer) | \"GPS clock adjustment\" | CORRECT = net +38 μs/day from GR and SR |\n| P77 (generate) | \"Test time dilation\" | CORRECT = compare precise clocks at different heights (or Pound–Rebka) |\n| P78 (explain) | \"Why the Moon orbits\" | CORRECT = it follows the straightest path in spacetime curved by Earth |\n| P79 (predict) | \"Orbiting astronaut\" | CORRECT = free fall is locally like no gravity |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.general-relativity-intro.md",
+        "startLine": 178,
+        "endLine": 190
+      }
+    },
+    {
+      "assetId": "phys.rel.general-relativity-intro/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.rel.general-relativity-intro",
+      "title": "Student State Matrix",
+      "content": "| State | Why here | Tell-tale behaviour | Protocol |\n|---|---|---|---|\n| S0 | Gravity only as Newton's force | Cannot say what the equivalence principle claims | Protocol A (Concrete) |\n| S1 | \"Spacetime is curved\" recited | Cannot derive light bending or clock rates | Protocol B (Counterexample-first) |\n| S2-BOX-CAN-TELL-GRAVITY | Hidden difference | \"Drop a ball in the lift — that would show which it is\" | Misconception Engine → then Protocol C |\n| S2-LIGHT-UNBENT-BY-GRAVITY | Massless = immune | \"Light has no mass, so gravity can't bend it\" | Misconception Engine → then Protocol C |\n| S3 | Partial — principle fine | Cannot compute gh/c² or explain GPS | Protocol C (Guided Questioning) |\n| S6 | Anxiety on relativity | Treats the topic as incomprehensible | Protocol F (Low Pressure) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.general-relativity-intro.md",
+        "startLine": 27,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "phys.rel.general-relativity-intro/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.rel.general-relativity-intro",
+      "title": "Diagnostic Battery",
+      "content": "DB-1 (prior-exposure check):\n\"You wake up in a windowless room and feel your normal weight. Could you be in a rocket accelerating at 9.8 m/s² in deep space instead of on Earth?\"\n  \"Yes — there'd be no way to tell\" → DB-2.\n  \"No — I could do an experiment to check\" → SIGNAL:MISCONCEPTION:MC-BOX-CAN-TELL-GRAVITY. Enter Misconception Engine.\n  No idea → S0. Enter Protocol A (Concrete).\n\nDB-2 (representation / misconception test):\n\"Can gravity bend a beam of light, given that light has no mass?\"\n  \"Yes — an accelerating lift bends light, so by equivalence gravity must; in GR light follows curved spacetime\" → S3. Enter Protocol C.\n  \"Yes\" (no reason) → S1. Enter Protocol B.\n  \"No — gravity only acts on mass\" → SIGNAL:MISCONCEPTION:MC-LIGHT-UNBENT-BY-GRAVITY. Enter Misconception Engine.\n  Pause → add S6 flag; Protocol F if anxious, otherwise Protocol A.\n\nDB-3 (clock check — overlays):\n\"Do clocks on a mountaintop and at sea level tick at exactly the same rate?\"\n  \"No — the higher clock runs slightly faster\" → no flag.\n  \"Yes — time is the same everywhere\" → note; repair at TA-4.\n  Confident and wrong on DB-1 → add S7 flag. Override to Protocol G.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-BOX-CAN-TELL-GRAVITY",
+        "MC-LIGHT-UNBENT-BY-GRAVITY"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.general-relativity-intro.md",
+        "startLine": 38,
+        "endLine": 59
+      }
+    },
+    {
+      "assetId": "phys.rel.general-relativity-intro/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.rel.general-relativity-intro",
+      "title": "Prerequisite Check",
+      "content": "PD-1 (for `phys.rel.spacetime`, `phys.mech.universal-gravitation`, `phys.mech.non-inertial-frames`):\n\"What is a spacetime diagram? How does gravity depend on mass and distance? What pseudo force acts in an accelerating lift?\"\n  Cannot say \"events plotted in space and time, worldlines; F = GMm/r²; −ma, opposite to the acceleration\" → flag PREREQ-GAP-GR.\n  In-session minimum repair: one P06 (a lift accelerating upward with a pseudo force drawn) + one P34 (\"scale reading in a lift accelerating up at g?\") then resume. If absent, schedule the missing session (S4 route).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.rel.general-relativity-intro.md",
+        "startLine": 59,
+        "endLine": 66
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

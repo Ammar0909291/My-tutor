@@ -1,7 +1,7 @@
 /**
  * Physics Curriculum-Scale Runtime Validation
  *
- * Validates every one of the 281 Physics concepts through the REAL
+ * Validates every one of the 282 Physics concepts through the REAL
  * Educational Brain Runtime pipeline:
  *
  *   KG → Blueprint → EB Entry → Seed Assets → CUE → Decision Engine →
@@ -102,10 +102,10 @@ function runFullPipeline(
 
 // ─── Layer 1: Knowledge Graph Resolution ─────────────────────────────────────
 
-describe('Layer 1: KG Resolution — all 281 physics concepts', () => {
-  it('loads exactly 281 concepts from graph.json', () => {
+describe('Layer 1: KG Resolution — all 282 physics concepts', () => {
+  it('loads exactly 282 concepts from graph.json', () => {
     // 238 until the 2026-10-03 coverage-driven extension, which adds concepts batch by batch.
-    expect(ALL_PHYSICS_CONCEPTS.length).toBe(281)
+    expect(ALL_PHYSICS_CONCEPTS.length).toBe(282)
   })
 
   it('every concept resolves via getKGNode()', () => {
@@ -146,7 +146,7 @@ describe('Layer 1: KG Resolution — all 281 physics concepts', () => {
 
 // ─── Layer 2: Blueprint Loading ──────────────────────────────────────────────
 
-describe('Layer 2: Blueprint Loading — all 281 physics concepts', () => {
+describe('Layer 2: Blueprint Loading — all 282 physics concepts', () => {
   it('every concept has a loadable blueprint (metadata)', () => {
     const missing: string[] = []
     for (const concept of ALL_PHYSICS_CONCEPTS) {
@@ -168,7 +168,7 @@ describe('Layer 2: Blueprint Loading — all 281 physics concepts', () => {
 
 // ─── Layer 3: Educational Brain Entry Loading ────────────────────────────────
 
-describe('Layer 3: EB Entry Loading — all 281 physics concepts', () => {
+describe('Layer 3: EB Entry Loading — all 282 physics concepts', () => {
   it('every concept has a loadable EB context entry', () => {
     const missing: string[] = []
     for (const concept of ALL_PHYSICS_CONCEPTS) {
@@ -181,7 +181,7 @@ describe('Layer 3: EB Entry Loading — all 281 physics concepts', () => {
 
 // ─── Layer 4: Seed Asset Availability ────────────────────────────────────────
 
-describe('Layer 4: Seed Assets — all 281 physics concepts', () => {
+describe('Layer 4: Seed Assets — all 282 physics concepts', () => {
   let authoredContent: string
 
   beforeAll(() => {
@@ -653,7 +653,7 @@ describe('Layer 12: Crash Safety — no exceptions across full pipeline', () => 
     { label: 'give_up', msg: 'I give up', signal: null, failures: 2, recoveryKey: 'give_up' as const },
   ] as const
 
-  it(`all 281 concepts × ${STUDENT_BEHAVIORS.length} behaviors = ${281 * STUDENT_BEHAVIORS.length} pipelines without crash`, () => {
+  it(`all 282 concepts × ${STUDENT_BEHAVIORS.length} behaviors = ${282 * STUDENT_BEHAVIORS.length} pipelines without crash`, () => {
     const crashes: { id: string; behavior: string; error: string }[] = []
 
     for (const concept of ALL_PHYSICS_CONCEPTS) {
