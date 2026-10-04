@@ -55,11 +55,28 @@ the database.
   write: `currentLesson` sum 6823 → 8160 (expected 8160); `completedLessons` sum
   595 → 690 (expected 690); completed count 11 → 11; 778 rows; 0 bookmarks.
 
-## Remaining core tier (drafted, not yet landed)
+## Batches 7–8 landed on `main` (2026-10-04, `139a0b51`) — core tier complete
 
-Batch 7: `phys.em.lcr-circuits` (requires `lc-circuits`), `phys.em.ac-power`,
-`phys.mod.atomic-models` (`bohr-model` re-pointed to it; its `coulombs-law` edge
-reduced away), `phys.mod.nucleus-size-and-force`. Batch 8:
-`phys.mech.non-inertial-frames`, `phys.mech.fluid-flow` (`bernoulli` re-pointed to
-it), `phys.therm.specific-heats-of-gases`. Each landing on `main` needs its own remap
-run right after deploy (the script, `--from` the pre-landing `origin/main`).
+| Batch | Commit | Concepts |
+|---|---|---|
+| 7 | `ce893437` | series LCR circuit (requires `lc-circuits`), AC power, nuclear atom and alpha scattering (`bohr-model` re-pointed to it, `coulombs-law` edge reduced away), nucleus size and force |
+| 8 | `139a0b51` | non-inertial frames (requires `relative-motion` + `circular-motion`), equation of continuity (`bernoulli` re-pointed to it, `pressure-fluids` edge reduced away), specific heats of gases |
+
+Physics KG 262 → 269: all 31 core-tier concepts from the gap audit are now in the KG.
+Validation per batch as above (batch 8: full suite 17606/17618, only the 3 pre-existing
+cleanup timeouts; seed dry-run 13100 items, 0 duplicates; contract audit 269/269,
+292/292 at 5 probes). Landed in one push with a second owner-approved remap
+(`--from c765e335`): 262 → 269 lessons, 232 order numbers move (all from lesson 31 up),
+147 of 778 physics progress rows affected.
+
+Run once right after deploy `dpl_8bbvhwxs5qyAjagzZUonu9Lj43W3` (`139a0b51`) went READY.
+Pre-check: no physics progress row written since 2026-10-03 21:11; state equal to the
+end of the first remap. Verified exactly against the precomputed expectation:
+`currentLesson` sum 8160 → 8311 (expected 8311); `completedLessons` sum 690 → 702
+(expected 702); completed count 11 → 11; 778 rows; 0 bookmarks.
+
+## Next
+
+The advanced tier (16 concepts, audit §B) is the owner's later call; electronics
+(transistors, logic gates) stays excluded. Each future landing needs its own remap run
+right after deploy.
