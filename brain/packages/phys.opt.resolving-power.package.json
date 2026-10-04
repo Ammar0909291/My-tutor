@@ -1,0 +1,416 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.opt.resolving-power-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.opt.resolving-power",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:159b1e465e3f38864d4d263684ec1c2d39c78f57013bd49911eb2b8b64b71084",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.opt.resolving-power.md": "sha256:7b28080c3fbc7e69997e88f23176d7580615b9ead5ce0e52793cc40053ae1e8e"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.opt.resolving-power",
+    "name": "Resolving Power of Optical Instruments",
+    "difficultyRaw": "advanced (4)",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "phys.opt.diffraction",
+      "phys.opt.optical-instruments"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.opt.resolving-power-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.opt.resolving-power (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.opt.resolving-power.md": "sha256:7b28080c3fbc7e69997e88f23176d7580615b9ead5ce0e52793cc40053ae1e8e"
+      },
+      "contentHash": "sha256:5537bfb88951e4646b01f63c7930a3ec0f08c394a3d6a3076e5b01c5bc005c88",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.opt.resolving-power.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.resolving-power.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.resolving-power"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.resolving-power\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.resolving-power.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.resolving-power.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.resolving-power"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.resolving-power\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.resolving-power.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.resolving-power.md#TA-3 (addresses MC-SMALLER-APERTURE-SHARPER)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.resolving-power"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.resolving-power\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.resolving-power.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.resolving-power.md#TA-4 (addresses MC-MAGNIFICATION-IS-RESOLUTION)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.resolving-power"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.resolving-power\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.resolving-power.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.resolving-power.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.resolving-power"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.resolving-power\"",
+        "effect": {
+          "actionClass": "GUIDED_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.resolving-power.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.resolving-power.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.resolving-power"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.resolving-power\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.opt.resolving-power.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.opt.resolving-power.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.opt.resolving-power"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.opt.resolving-power\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.opt.resolving-power/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "phys.opt.resolving-power",
+      "title": "Learning Objective",
+      "content": "[Boundary statement]\nA student who achieves mastery demonstrates:\n1. Explains that a lens or mirror of aperture D turns each point of an object into a small diffraction pattern (an Airy disc), and that two points can be told apart only if their patterns do not overlap too much — Rayleigh's criterion: the smallest resolvable angle is θ_min ≈ 1.22 λ/D.\n2. Computes it — a telescope of aperture 10 cm at 550 nm resolves θ ≈ 6.7 × 10⁻⁶ rad; the eye, with a 3 mm pupil, about 2.2 × 10⁻⁴ rad, so it can just separate two headlights about 1.5 m apart from roughly 7 km away.\n3. Explains how resolution is improved — a larger aperture (big telescope mirrors), a shorter wavelength (blue light, electron microscopes), or a higher-index medium (oil-immersion microscopes) — and that extra magnification beyond this limit only enlarges the blur.\n\nA student who thinks more magnification always reveals more detail, or that a smaller aperture gives a sharper image, has **NOT** achieved mastery — those ideas misread every telescope and microscope design choice.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.resolving-power.md",
+        "startLine": 17,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.opt.resolving-power/misconception/MC-MAGNIFICATION-IS-RESOLUTION",
+      "kind": "misconception",
+      "conceptId": "phys.opt.resolving-power",
+      "title": "More magnification always reveals more detail",
+      "content": "### MC-MAGNIFICATION-IS-RESOLUTION: \"More magnification always reveals more detail\"\ntrigger_signal: student expects a stronger eyepiece or digital zoom to reveal detail beyond the instrument's resolution limit.\nconflict_evidence [P28]: \"Take a blurry photo and enlarge it three times. Do new details appear, or does the blur just get bigger?\"\nbridge_text [P30]: \"The blur gets bigger. An instrument's detail is fixed by how finely its objective can separate points — each point is already a diffraction disc of size 1.22 λ/D. Magnifying afterwards enlarges the discs along with everything else.\"\nreplacement_text [P31]: \"Resolution is set by aperture and wavelength (θ_min ≈ 1.22 λ/D). Magnification beyond what makes that detail visible to the eye is 'empty magnification'.\"\ndiscrimination_pairs [P33]: [\"bigger objective aperture: finer detail (more resolution)\", \"stronger eyepiece on the same objective: bigger image, same detail\"]\ns6_path: skip P28; zoom a phone photo until pixels show — the zoom adds size, not information.",
+      "localKey": "MC-MAGNIFICATION-IS-RESOLUTION",
+      "language": "en",
+      "refs": [
+        "MC-MAGNIFICATION-IS-RESOLUTION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.resolving-power.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.opt.resolving-power/misconception/MC-SMALLER-APERTURE-SHARPER",
+      "kind": "misconception",
+      "conceptId": "phys.opt.resolving-power",
+      "title": "A smaller opening gives a sharper image",
+      "content": "### MC-SMALLER-APERTURE-SHARPER: \"A smaller opening gives a sharper image\"\ntrigger_signal: student expects reducing a telescope's or camera's aperture to improve the separation of fine detail, carrying over pinhole-camera intuition.\nconflict_evidence [P28]: \"Light through a narrower slit spreads MORE. If a telescope's aperture shrinks, does each star's diffraction disc get smaller or larger?\"\nbridge_text [P30]: \"Larger — θ ≈ 1.22 λ/D grows as D shrinks. The discs of two close stars overlap more and merge. A pinhole sharpens a geometric image only until diffraction takes over; for resolving fine detail, a bigger aperture is better.\"\nreplacement_text [P31]: \"Resolution improves with LARGER aperture and SHORTER wavelength.\"\ndiscrimination_pairs [P33]: [\"10 cm telescope: 6.7 × 10⁻⁶ rad\", \"3 mm pupil: 2.2 × 10⁻⁴ rad — about 33 times coarser\"]\ns6_path: skip P28; look at a distant lamp through a tiny pinhole in card — it blurs into a fuzzy disc.",
+      "localKey": "MC-SMALLER-APERTURE-SHARPER",
+      "language": "en",
+      "refs": [
+        "MC-SMALLER-APERTURE-SHARPER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.resolving-power.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.opt.resolving-power/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.resolving-power",
+      "title": "Headlights in the Distance",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Headlights in the Distance\",\"primitives\":[\"P01\",\"P04\",\"P05\",\"P06\",\"P14\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.resolving-power.md",
+        "startLine": 11,
+        "endLine": 18
+      }
+    },
+    {
+      "assetId": "phys.opt.resolving-power/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.resolving-power",
+      "title": "Every Point Becomes a Disc",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Every Point Becomes a Disc\",\"primitives\":[\"P02\",\"P06\",\"P08\",\"P13\",\"P34\",\"P49\",\"P50\",\"P51\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.resolving-power.md",
+        "startLine": 18,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.opt.resolving-power/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.resolving-power",
+      "title": "Bigger Aperture, Finer Detail",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Bigger Aperture, Finer Detail\",\"primitives\":[\"P02\",\"P34\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-SMALLER-APERTURE-SHARPER\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-SMALLER-APERTURE-SHARPER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.resolving-power.md",
+        "startLine": 27,
+        "endLine": 35
+      }
+    },
+    {
+      "assetId": "phys.opt.resolving-power/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.resolving-power",
+      "title": "Magnification Is Not Resolution",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Magnification Is Not Resolution\",\"primitives\":[\"P02\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-MAGNIFICATION-IS-RESOLUTION\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-MAGNIFICATION-IS-RESOLUTION"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.resolving-power.md",
+        "startLine": 35,
+        "endLine": 41
+      }
+    },
+    {
+      "assetId": "phys.opt.resolving-power/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.resolving-power",
+      "title": "Improving Microscopes",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Improving Microscopes\",\"primitives\":[\"P02\",\"P13\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.resolving-power.md",
+        "startLine": 41,
+        "endLine": 47
+      }
+    },
+    {
+      "assetId": "phys.opt.resolving-power/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.resolving-power",
+      "title": "Formative Assessment",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Formative Assessment\",\"primitives\":[\"P02\",\"P35\",\"P49\",\"P51\",\"P55\",\"P79\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.resolving-power.md",
+        "startLine": 47,
+        "endLine": 54
+      }
+    },
+    {
+      "assetId": "phys.opt.resolving-power/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.opt.resolving-power",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P28\",\"P41\",\"P54\",\"P55\",\"P62\",\"P68\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.resolving-power.md",
+        "startLine": 54,
+        "endLine": 96
+      }
+    },
+    {
+      "assetId": "phys.opt.resolving-power/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.opt.resolving-power",
+      "title": "Assessment Battery",
+      "content": "| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (classify) | \"Blue or red for finer resolution?\" | CORRECT = blue (shorter λ) |\n| P74 (classify) | \"Bigger aperture: finer or coarser detail?\" | CORRECT = finer |\n| P75 (boundary) | \"Separation exactly θ_min\" | CORRECT = just resolved (Rayleigh limit) |\n| P76 (transfer) | \"Virus with a light microscope\" | CORRECT = ~100 nm is below the ~λ/2 limit for visible light; needs electrons |\n| P77 (generate) | \"Aperture for 1 × 10⁻⁶ rad at 500 nm\" | CORRECT = D ≈ 1.22 × 500e-9 / 1e-6 ≈ 0.61 m |\n| P78 (explain) | \"Why magnification doesn't help\" | CORRECT = blur discs are enlarged too |\n| P79 (predict) | \"Headlights 1.5 m apart\" | CORRECT = ~7 km |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.resolving-power.md",
+        "startLine": 178,
+        "endLine": 190
+      }
+    },
+    {
+      "assetId": "phys.opt.resolving-power/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.opt.resolving-power",
+      "title": "Student State Matrix",
+      "content": "| State | Why here | Tell-tale behaviour | Protocol |\n|---|---|---|---|\n| S0 | Instruments seen as magnifiers only | Cannot say why a bigger telescope is better | Protocol A (Concrete) |\n| S1 | Formula recited | Writes 1.22λ/D but cannot predict the effect of D or λ | Protocol B (Counterexample-first) |\n| S2-MAGNIFICATION-IS-RESOLUTION | Detail from magnification | \"Just magnify more to see finer detail\" | Misconception Engine → then Protocol C |\n| S2-SMALLER-APERTURE-SHARPER | Pinhole intuition | \"A smaller opening makes a sharper image\" | Misconception Engine → then Protocol C |\n| S3 | Partial — telescopes fine, microscopes not | Cannot explain oil immersion or electron microscopes | Protocol C (Guided Questioning) |\n| S6 | Anxiety on small angles | Avoids radians and powers of ten | Protocol F (Low Pressure) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.resolving-power.md",
+        "startLine": 27,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "phys.opt.resolving-power/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.opt.resolving-power",
+      "title": "Diagnostic Battery",
+      "content": "DB-1 (prior-exposure check):\n\"Why do astronomers build telescopes with mirrors many metres across?\"\n  \"To magnify more\" or no idea → S0. Enter Protocol A (Concrete).\n  \"To collect more light / see finer detail\" → DB-2.\n\nDB-2 (representation / misconception test):\n\"A microscope image looks blurry at 1000×. Will a stronger eyepiece giving 3000× reveal finer details?\"\n  \"No — the detail is limited by diffraction at the objective; more magnification just enlarges the blur\" → S3. Enter Protocol C.\n  \"No\" (no reason) → S1. Enter Protocol B.\n  \"Yes — more magnification shows more detail\" → SIGNAL:MISCONCEPTION:MC-MAGNIFICATION-IS-RESOLUTION. Enter Misconception Engine.\n  Pause → add S6 flag; Protocol F if anxious, otherwise Protocol A.\n\nDB-3 (aperture check — overlays):\n\"If a telescope's aperture were made smaller, would two close stars be easier or harder to separate?\"\n  \"Harder — a smaller aperture spreads each star into a bigger diffraction disc\" → no flag.\n  \"Easier — a smaller hole gives a sharper image\" → add SIGNAL:MISCONCEPTION:MC-SMALLER-APERTURE-SHARPER (repair at TA-3).\n  Confident and wrong on DB-2 → add S7 flag. Override to Protocol G.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-MAGNIFICATION-IS-RESOLUTION",
+        "MC-SMALLER-APERTURE-SHARPER"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.resolving-power.md",
+        "startLine": 38,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "phys.opt.resolving-power/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.opt.resolving-power",
+      "title": "Prerequisite Check",
+      "content": "PD-1 (for `phys.opt.diffraction` and `phys.opt.optical-instruments`):\n\"How does the spread of light through a slit change if the slit is made narrower? And what does a telescope's objective do?\"\n  Cannot say \"it spreads more\" and \"collects light and forms an image\" → flag PREREQ-GAP-DIFFRACTION-INSTRUMENTS.\n  In-session minimum repair: one P06 (a laser through slits of two widths) + one P34 (\"narrower slit: wider or narrower central spot?\") then resume. If either is absent, schedule the missing session (S4 route).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.opt.resolving-power.md",
+        "startLine": 58,
+        "endLine": 65
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

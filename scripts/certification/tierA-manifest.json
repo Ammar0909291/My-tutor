@@ -1033,9 +1033,17 @@
  },
  {
   "subject": "physics",
+  "conceptId": "phys.opt.thin-film-interference",
+  "lessonTitle": "Thin-film Interference",
+  "lessonOrder": 130,
+  "unitTitle": "Optics",
+  "unit": 5
+ },
+ {
+  "subject": "physics",
   "conceptId": "phys.opt.diffraction",
   "lessonTitle": "Diffraction of Light",
-  "lessonOrder": 130,
+  "lessonOrder": 131,
   "unitTitle": "Optics",
   "unit": 5
  },
@@ -1043,7 +1051,23 @@
   "subject": "physics",
   "conceptId": "phys.opt.single-slit",
   "lessonTitle": "Single-Slit Diffraction",
-  "lessonOrder": 131,
+  "lessonOrder": 132,
+  "unitTitle": "Optics",
+  "unit": 5
+ },
+ {
+  "subject": "physics",
+  "conceptId": "phys.opt.diffraction-grating",
+  "lessonTitle": "Diffraction Grating and Spectra",
+  "lessonOrder": 133,
+  "unitTitle": "Optics",
+  "unit": 5
+ },
+ {
+  "subject": "physics",
+  "conceptId": "phys.opt.resolving-power",
+  "lessonTitle": "Resolving Power of Optical Instruments",
+  "lessonOrder": 134,
   "unitTitle": "Optics",
   "unit": 5
  },
@@ -1051,7 +1075,7 @@
   "subject": "physics",
   "conceptId": "phys.opt.polarization",
   "lessonTitle": "Polarization of Light",
-  "lessonOrder": 132,
+  "lessonOrder": 135,
   "unitTitle": "Optics",
   "unit": 5
  },
@@ -1059,7 +1083,7 @@
   "subject": "physics",
   "conceptId": "phys.opt.brewsters-law",
   "lessonTitle": "Brewster's Law and Malus's Law",
-  "lessonOrder": 133,
+  "lessonOrder": 136,
   "unitTitle": "Optics",
   "unit": 5
  },
@@ -1067,7 +1091,7 @@
   "subject": "physics",
   "conceptId": "phys.em.electric-charge",
   "lessonTitle": "Electric Charge and Conservation",
-  "lessonOrder": 134,
+  "lessonOrder": 137,
   "unitTitle": "Electromagnetism",
   "unit": 6
  },
@@ -1075,7 +1099,7 @@
   "subject": "physics",
   "conceptId": "phys.em.coulombs-law",
   "lessonTitle": "Coulomb's Law",
-  "lessonOrder": 135,
+  "lessonOrder": 138,
   "unitTitle": "Electromagnetism",
   "unit": 6
  },
@@ -1083,7 +1107,7 @@
   "subject": "physics",
   "conceptId": "phys.em.electric-field",
   "lessonTitle": "Electric Field and Field Lines",
-  "lessonOrder": 136,
+  "lessonOrder": 139,
   "unitTitle": "Electromagnetism",
   "unit": 6
  },
@@ -1091,7 +1115,7 @@
   "subject": "physics",
   "conceptId": "phys.em.electric-dipole",
   "lessonTitle": "Electric Dipole",
-  "lessonOrder": 137,
+  "lessonOrder": 140,
   "unitTitle": "Electromagnetism",
   "unit": 6
  },
@@ -1099,7 +1123,7 @@
   "subject": "physics",
   "conceptId": "phys.em.gauss-law",
   "lessonTitle": "Gauss's Law",
-  "lessonOrder": 138,
+  "lessonOrder": 141,
   "unitTitle": "Electromagnetism",
   "unit": 6
  },
@@ -1107,7 +1131,7 @@
   "subject": "physics",
   "conceptId": "phys.em.electric-potential",
   "lessonTitle": "Electric Potential and Potential Difference",
-  "lessonOrder": 139,
+  "lessonOrder": 142,
   "unitTitle": "Electromagnetism",
   "unit": 6
  },
@@ -1115,7 +1139,15 @@
   "subject": "physics",
   "conceptId": "phys.em.electrostatic-potential-energy",
   "lessonTitle": "Potential Energy of a System of Charges",
-  "lessonOrder": 140,
+  "lessonOrder": 143,
+  "unitTitle": "Electromagnetism",
+  "unit": 6
+ },
+ {
+  "subject": "physics",
+  "conceptId": "phys.em.conductors-electrostatics",
+  "lessonTitle": "Conductors, Shielding and Van de Graaff",
+  "lessonOrder": 144,
   "unitTitle": "Electromagnetism",
   "unit": 6
  },
@@ -1123,7 +1155,7 @@
   "subject": "physics",
   "conceptId": "phys.em.capacitance",
   "lessonTitle": "Capacitance and Capacitors",
-  "lessonOrder": 141,
+  "lessonOrder": 145,
   "unitTitle": "Electromagnetism",
   "unit": 6
  },
@@ -1131,7 +1163,7 @@
   "subject": "physics",
   "conceptId": "phys.em.dielectrics",
   "lessonTitle": "Dielectrics and Polarization",
-  "lessonOrder": 142,
+  "lessonOrder": 146,
   "unitTitle": "Electromagnetism",
   "unit": 6
  },
@@ -1139,7 +1171,7 @@
   "subject": "physics",
   "conceptId": "phys.em.energy-capacitor",
   "lessonTitle": "Energy Stored in a Capacitor",
-  "lessonOrder": 143,
+  "lessonOrder": 147,
   "unitTitle": "Electromagnetism",
   "unit": 6
  },
@@ -1147,7 +1179,7 @@
   "subject": "physics",
   "conceptId": "phys.em.electric-current",
   "lessonTitle": "Electric Current and Drift Velocity",
-  "lessonOrder": 144,
+  "lessonOrder": 148,
   "unitTitle": "Electromagnetism",
   "unit": 6
  },
@@ -1155,7 +1187,7 @@
   "subject": "physics",
   "conceptId": "phys.em.ohms-law",
   "lessonTitle": "Ohm's Law and Resistance",
-  "lessonOrder": 145,
+  "lessonOrder": 149,
   "unitTitle": "Electromagnetism",
   "unit": 6
  },
@@ -1163,7 +1195,7 @@
   "subject": "physics",
   "conceptId": "phys.em.resistivity",
   "lessonTitle": "Resistivity and Conductivity",
-  "lessonOrder": 146,
+  "lessonOrder": 150,
   "unitTitle": "Electromagnetism",
   "unit": 6
  },
@@ -1171,7 +1203,7 @@
   "subject": "physics",
   "conceptId": "phys.em.dc-circuits",
   "lessonTitle": "Series and Parallel Circuits",
-  "lessonOrder": 147,
+  "lessonOrder": 151,
   "unitTitle": "Electromagnetism",
   "unit": 6
  },
@@ -1179,7 +1211,7 @@
   "subject": "physics",
   "conceptId": "phys.em.kirchhoffs-laws",
   "lessonTitle": "Kirchhoff's Current and Voltage Laws",
-  "lessonOrder": 148,
+  "lessonOrder": 152,
   "unitTitle": "Electromagnetism",
   "unit": 6
  },
@@ -1187,7 +1219,7 @@
   "subject": "physics",
   "conceptId": "phys.em.wheatstone-bridge",
   "lessonTitle": "Wheatstone Bridge",
-  "lessonOrder": 149,
+  "lessonOrder": 153,
   "unitTitle": "Electromagnetism",
   "unit": 6
  },
@@ -1195,7 +1227,7 @@
   "subject": "physics",
   "conceptId": "phys.em.potentiometer",
   "lessonTitle": "Potentiometer",
-  "lessonOrder": 150,
+  "lessonOrder": 154,
   "unitTitle": "Electromagnetism",
   "unit": 6
  },
@@ -1203,7 +1235,7 @@
   "subject": "physics",
   "conceptId": "phys.em.electrical-power",
   "lessonTitle": "Electrical Power and Joule Heating",
-  "lessonOrder": 151,
+  "lessonOrder": 155,
   "unitTitle": "Electromagnetism",
   "unit": 6
  },
@@ -1211,7 +1243,7 @@
   "subject": "physics",
   "conceptId": "phys.em.domestic-electricity",
   "lessonTitle": "Household Circuits, Fuses, Earthing and Safety",
-  "lessonOrder": 152,
+  "lessonOrder": 156,
   "unitTitle": "Electromagnetism",
   "unit": 6
  },
@@ -1219,7 +1251,7 @@
   "subject": "physics",
   "conceptId": "phys.em.emf",
   "lessonTitle": "EMF, Internal Resistance, and Terminal Voltage",
-  "lessonOrder": 153,
+  "lessonOrder": 157,
   "unitTitle": "Electromagnetism",
   "unit": 6
  },
@@ -1227,7 +1259,7 @@
   "subject": "physics",
   "conceptId": "phys.em.cells-combination",
   "lessonTitle": "Cells in Series and Parallel",
-  "lessonOrder": 154,
+  "lessonOrder": 158,
   "unitTitle": "Electromagnetism",
   "unit": 6
  },
@@ -1235,7 +1267,7 @@
   "subject": "physics",
   "conceptId": "phys.em.rc-circuits",
   "lessonTitle": "RC Circuits: Charging and Discharging",
-  "lessonOrder": 155,
+  "lessonOrder": 159,
   "unitTitle": "Electromagnetism",
   "unit": 6
  },
@@ -1243,7 +1275,7 @@
   "subject": "physics",
   "conceptId": "phys.em.magnetic-field",
   "lessonTitle": "Magnetic Field and Field Lines",
-  "lessonOrder": 156,
+  "lessonOrder": 160,
   "unitTitle": "Electromagnetism",
   "unit": 6
  },
@@ -1251,7 +1283,7 @@
   "subject": "physics",
   "conceptId": "phys.em.magnetic-force",
   "lessonTitle": "Magnetic Force on Moving Charges — Lorentz Force",
-  "lessonOrder": 157,
+  "lessonOrder": 161,
   "unitTitle": "Electromagnetism",
   "unit": 6
  },
@@ -1259,7 +1291,7 @@
   "subject": "physics",
   "conceptId": "phys.em.moving-coil-galvanometer",
   "lessonTitle": "Galvanometer, Ammeter and Voltmeter Conversion",
-  "lessonOrder": 158,
+  "lessonOrder": 162,
   "unitTitle": "Electromagnetism",
   "unit": 6
  },
@@ -1267,7 +1299,7 @@
   "subject": "physics",
   "conceptId": "phys.em.biot-savart",
   "lessonTitle": "Biot-Savart Law",
-  "lessonOrder": 159,
+  "lessonOrder": 163,
   "unitTitle": "Electromagnetism",
   "unit": 6
  },
@@ -1275,7 +1307,7 @@
   "subject": "physics",
   "conceptId": "phys.em.amperes-law",
   "lessonTitle": "Ampere's Circuital Law",
-  "lessonOrder": 160,
+  "lessonOrder": 164,
   "unitTitle": "Electromagnetism",
   "unit": 6
  },
@@ -1283,7 +1315,7 @@
   "subject": "physics",
   "conceptId": "phys.em.solenoid",
   "lessonTitle": "Magnetic Field of a Solenoid and Toroid",
-  "lessonOrder": 161,
+  "lessonOrder": 165,
   "unitTitle": "Electromagnetism",
   "unit": 6
  },
@@ -1291,7 +1323,7 @@
   "subject": "physics",
   "conceptId": "phys.em.magnetic-materials",
   "lessonTitle": "Dia-, Para-, and Ferromagnetism",
-  "lessonOrder": 162,
+  "lessonOrder": 166,
   "unitTitle": "Electromagnetism",
   "unit": 6
  },
@@ -1299,7 +1331,7 @@
   "subject": "physics",
   "conceptId": "phys.em.magnetic-dipole",
   "lessonTitle": "Magnetic Dipole and Earth's Magnetism",
-  "lessonOrder": 163,
+  "lessonOrder": 167,
   "unitTitle": "Electromagnetism",
   "unit": 6
  },
@@ -1307,7 +1339,7 @@
   "subject": "physics",
   "conceptId": "phys.em.magnetic-flux",
   "lessonTitle": "Magnetic Flux",
-  "lessonOrder": 164,
+  "lessonOrder": 168,
   "unitTitle": "Electromagnetism",
   "unit": 6
  },
@@ -1315,7 +1347,7 @@
   "subject": "physics",
   "conceptId": "phys.em.faradays-law",
   "lessonTitle": "Faraday's Law of Electromagnetic Induction",
-  "lessonOrder": 165,
+  "lessonOrder": 169,
   "unitTitle": "Electromagnetism",
   "unit": 6
  },
@@ -1323,7 +1355,7 @@
   "subject": "physics",
   "conceptId": "phys.em.lenzs-law",
   "lessonTitle": "Lenz's Law and Induced EMF Direction",
-  "lessonOrder": 166,
+  "lessonOrder": 170,
   "unitTitle": "Electromagnetism",
   "unit": 6
  },
@@ -1331,7 +1363,7 @@
   "subject": "physics",
   "conceptId": "phys.em.motors-and-generators",
   "lessonTitle": "Electric Motor and Generator",
-  "lessonOrder": 167,
+  "lessonOrder": 171,
   "unitTitle": "Electromagnetism",
   "unit": 6
  },
@@ -1339,7 +1371,7 @@
   "subject": "physics",
   "conceptId": "phys.em.self-inductance",
   "lessonTitle": "Self-Inductance",
-  "lessonOrder": 168,
+  "lessonOrder": 172,
   "unitTitle": "Electromagnetism",
   "unit": 6
  },
@@ -1347,7 +1379,7 @@
   "subject": "physics",
   "conceptId": "phys.em.mutual-inductance",
   "lessonTitle": "Mutual Inductance and Transformers",
-  "lessonOrder": 169,
+  "lessonOrder": 173,
   "unitTitle": "Electromagnetism",
   "unit": 6
  },
@@ -1355,7 +1387,7 @@
   "subject": "physics",
   "conceptId": "phys.em.ac-basics",
   "lessonTitle": "Alternating Current: Peak and RMS Values",
-  "lessonOrder": 170,
+  "lessonOrder": 174,
   "unitTitle": "Electromagnetism",
   "unit": 6
  },
@@ -1363,7 +1395,7 @@
   "subject": "physics",
   "conceptId": "phys.em.lc-circuits",
   "lessonTitle": "LC Oscillations and Resonance",
-  "lessonOrder": 171,
+  "lessonOrder": 175,
   "unitTitle": "Electromagnetism",
   "unit": 6
  },
@@ -1371,7 +1403,7 @@
   "subject": "physics",
   "conceptId": "phys.em.maxwells-equations",
   "lessonTitle": "Maxwell's Equations and Displacement Current",
-  "lessonOrder": 172,
+  "lessonOrder": 176,
   "unitTitle": "Electromagnetism",
   "unit": 6
  },
@@ -1379,7 +1411,7 @@
   "subject": "physics",
   "conceptId": "phys.em.electromagnetic-waves",
   "lessonTitle": "Electromagnetic Waves and the EM Spectrum",
-  "lessonOrder": 173,
+  "lessonOrder": 177,
   "unitTitle": "Electromagnetism",
   "unit": 6
  },
@@ -1387,7 +1419,7 @@
   "subject": "physics",
   "conceptId": "phys.mod.photoelectric-effect",
   "lessonTitle": "Photoelectric Effect",
-  "lessonOrder": 174,
+  "lessonOrder": 178,
   "unitTitle": "Modern Physics",
   "unit": 7
  },
@@ -1395,7 +1427,7 @@
   "subject": "physics",
   "conceptId": "phys.mod.photons",
   "lessonTitle": "Photons and Quantization of Light",
-  "lessonOrder": 175,
+  "lessonOrder": 179,
   "unitTitle": "Modern Physics",
   "unit": 7
  },
@@ -1403,7 +1435,7 @@
   "subject": "physics",
   "conceptId": "phys.mod.compton-effect",
   "lessonTitle": "Compton Scattering",
-  "lessonOrder": 176,
+  "lessonOrder": 180,
   "unitTitle": "Modern Physics",
   "unit": 7
  },
@@ -1411,7 +1443,7 @@
   "subject": "physics",
   "conceptId": "phys.mod.de-broglie",
   "lessonTitle": "de Broglie Hypothesis — Matter Waves",
-  "lessonOrder": 177,
+  "lessonOrder": 181,
   "unitTitle": "Modern Physics",
   "unit": 7
  },
@@ -1419,7 +1451,7 @@
   "subject": "physics",
   "conceptId": "phys.mod.wave-particle-duality",
   "lessonTitle": "Wave-Particle Duality",
-  "lessonOrder": 178,
+  "lessonOrder": 182,
   "unitTitle": "Modern Physics",
   "unit": 7
  },
@@ -1427,7 +1459,7 @@
   "subject": "physics",
   "conceptId": "phys.mod.bohr-model",
   "lessonTitle": "Bohr Model of the Hydrogen Atom",
-  "lessonOrder": 179,
+  "lessonOrder": 183,
   "unitTitle": "Modern Physics",
   "unit": 7
  },
@@ -1435,7 +1467,7 @@
   "subject": "physics",
   "conceptId": "phys.mod.atomic-spectra",
   "lessonTitle": "Atomic Spectra and Energy Levels",
-  "lessonOrder": 180,
+  "lessonOrder": 184,
   "unitTitle": "Modern Physics",
   "unit": 7
  },
@@ -1443,7 +1475,7 @@
   "subject": "physics",
   "conceptId": "phys.mod.x-rays",
   "lessonTitle": "X-Rays and Their Properties",
-  "lessonOrder": 181,
+  "lessonOrder": 185,
   "unitTitle": "Modern Physics",
   "unit": 7
  },
@@ -1451,7 +1483,7 @@
   "subject": "physics",
   "conceptId": "phys.mod.radioactivity",
   "lessonTitle": "Radioactivity: Alpha, Beta, Gamma Decay",
-  "lessonOrder": 182,
+  "lessonOrder": 186,
   "unitTitle": "Modern Physics",
   "unit": 7
  },
@@ -1459,7 +1491,7 @@
   "subject": "physics",
   "conceptId": "phys.mod.radioactive-decay",
   "lessonTitle": "Radioactive Decay Law and Half-Life",
-  "lessonOrder": 183,
+  "lessonOrder": 187,
   "unitTitle": "Modern Physics",
   "unit": 7
  },
@@ -1467,7 +1499,7 @@
   "subject": "physics",
   "conceptId": "phys.mod.nuclear-reactions",
   "lessonTitle": "Nuclear Reactions and Q-Value",
-  "lessonOrder": 184,
+  "lessonOrder": 188,
   "unitTitle": "Modern Physics",
   "unit": 7
  },
@@ -1475,7 +1507,7 @@
   "subject": "physics",
   "conceptId": "phys.mod.binding-energy",
   "lessonTitle": "Nuclear Binding Energy and Mass Defect",
-  "lessonOrder": 185,
+  "lessonOrder": 189,
   "unitTitle": "Modern Physics",
   "unit": 7
  },
@@ -1483,7 +1515,7 @@
   "subject": "physics",
   "conceptId": "phys.mod.nuclear-fission",
   "lessonTitle": "Nuclear Fission and Chain Reactions",
-  "lessonOrder": 186,
+  "lessonOrder": 190,
   "unitTitle": "Modern Physics",
   "unit": 7
  },
@@ -1491,7 +1523,7 @@
   "subject": "physics",
   "conceptId": "phys.mod.nuclear-fusion",
   "lessonTitle": "Nuclear Fusion and Stellar Energy",
-  "lessonOrder": 187,
+  "lessonOrder": 191,
   "unitTitle": "Modern Physics",
   "unit": 7
  },
@@ -1499,7 +1531,7 @@
   "subject": "physics",
   "conceptId": "phys.mod.nuclear-models",
   "lessonTitle": "Nuclear Models: Shell Model",
-  "lessonOrder": 188,
+  "lessonOrder": 192,
   "unitTitle": "Modern Physics",
   "unit": 7
  },
@@ -1507,7 +1539,7 @@
   "subject": "physics",
   "conceptId": "phys.mod.energy-bands",
   "lessonTitle": "Energy Bands in Solids",
-  "lessonOrder": 189,
+  "lessonOrder": 193,
   "unitTitle": "Modern Physics",
   "unit": 7
  },
@@ -1515,7 +1547,7 @@
   "subject": "physics",
   "conceptId": "phys.mod.semiconductor-classification",
   "lessonTitle": "Conductors, Insulators, and Semiconductors",
-  "lessonOrder": 190,
+  "lessonOrder": 194,
   "unitTitle": "Modern Physics",
   "unit": 7
  },
@@ -1523,7 +1555,7 @@
   "subject": "physics",
   "conceptId": "phys.mod.intrinsic-semiconductors",
   "lessonTitle": "Intrinsic Semiconductors",
-  "lessonOrder": 191,
+  "lessonOrder": 195,
   "unitTitle": "Modern Physics",
   "unit": 7
  },
@@ -1531,7 +1563,7 @@
   "subject": "physics",
   "conceptId": "phys.mod.extrinsic-semiconductors",
   "lessonTitle": "Extrinsic Semiconductors: Doping and Carrier Types",
-  "lessonOrder": 192,
+  "lessonOrder": 196,
   "unitTitle": "Modern Physics",
   "unit": 7
  },
@@ -1539,7 +1571,7 @@
   "subject": "physics",
   "conceptId": "phys.mod.pn-junction",
   "lessonTitle": "The p-n Junction",
-  "lessonOrder": 193,
+  "lessonOrder": 197,
   "unitTitle": "Modern Physics",
   "unit": 7
  },
@@ -1547,7 +1579,7 @@
   "subject": "physics",
   "conceptId": "phys.mod.diode-rectification",
   "lessonTitle": "Diode Rectifying Behavior",
-  "lessonOrder": 194,
+  "lessonOrder": 198,
   "unitTitle": "Modern Physics",
   "unit": 7
  },
@@ -1555,7 +1587,7 @@
   "subject": "physics",
   "conceptId": "phys.qm.wave-function",
   "lessonTitle": "Wave Function and Probability Interpretation",
-  "lessonOrder": 195,
+  "lessonOrder": 199,
   "unitTitle": "Quantum Mechanics",
   "unit": 8
  },
@@ -1563,7 +1595,7 @@
   "subject": "physics",
   "conceptId": "phys.qm.schrodinger-equation",
   "lessonTitle": "Time-Dependent Schrödinger Equation",
-  "lessonOrder": 196,
+  "lessonOrder": 200,
   "unitTitle": "Quantum Mechanics",
   "unit": 8
  },
@@ -1571,7 +1603,7 @@
   "subject": "physics",
   "conceptId": "phys.qm.uncertainty-principle",
   "lessonTitle": "Heisenberg's Uncertainty Principle",
-  "lessonOrder": 197,
+  "lessonOrder": 201,
   "unitTitle": "Quantum Mechanics",
   "unit": 8
  },
@@ -1579,7 +1611,7 @@
   "subject": "physics",
   "conceptId": "phys.qm.operators",
   "lessonTitle": "Quantum Operators and Observables",
-  "lessonOrder": 198,
+  "lessonOrder": 202,
   "unitTitle": "Quantum Mechanics",
   "unit": 8
  },
@@ -1587,7 +1619,7 @@
   "subject": "physics",
   "conceptId": "phys.qm.particle-in-box",
   "lessonTitle": "Particle in an Infinite Square Well",
-  "lessonOrder": 199,
+  "lessonOrder": 203,
   "unitTitle": "Quantum Mechanics",
   "unit": 8
  },
@@ -1595,7 +1627,7 @@
   "subject": "physics",
   "conceptId": "phys.qm.harmonic-oscillator-qm",
   "lessonTitle": "Quantum Harmonic Oscillator",
-  "lessonOrder": 200,
+  "lessonOrder": 204,
   "unitTitle": "Quantum Mechanics",
   "unit": 8
  },
@@ -1603,7 +1635,7 @@
   "subject": "physics",
   "conceptId": "phys.qm.hydrogen-atom-qm",
   "lessonTitle": "Quantum Treatment of Hydrogen Atom",
-  "lessonOrder": 201,
+  "lessonOrder": 205,
   "unitTitle": "Quantum Mechanics",
   "unit": 8
  },
@@ -1611,7 +1643,7 @@
   "subject": "physics",
   "conceptId": "phys.qm.spin",
   "lessonTitle": "Electron Spin and the Stern-Gerlach Experiment",
-  "lessonOrder": 202,
+  "lessonOrder": 206,
   "unitTitle": "Quantum Mechanics",
   "unit": 8
  },
@@ -1619,7 +1651,7 @@
   "subject": "physics",
   "conceptId": "phys.qm.pauli-exclusion",
   "lessonTitle": "Pauli Exclusion Principle",
-  "lessonOrder": 203,
+  "lessonOrder": 207,
   "unitTitle": "Quantum Mechanics",
   "unit": 8
  },
@@ -1627,7 +1659,7 @@
   "subject": "physics",
   "conceptId": "phys.qm.quantum-tunneling",
   "lessonTitle": "Quantum Tunneling",
-  "lessonOrder": 204,
+  "lessonOrder": 208,
   "unitTitle": "Quantum Mechanics",
   "unit": 8
  },
@@ -1635,7 +1667,7 @@
   "subject": "physics",
   "conceptId": "phys.qm.perturbation-theory",
   "lessonTitle": "Time-Independent Perturbation Theory",
-  "lessonOrder": 205,
+  "lessonOrder": 209,
   "unitTitle": "Quantum Mechanics",
   "unit": 8
  },
@@ -1643,7 +1675,7 @@
   "subject": "physics",
   "conceptId": "phys.qm.selection-rules",
   "lessonTitle": "Selection Rules and Transition Probabilities",
-  "lessonOrder": 206,
+  "lessonOrder": 210,
   "unitTitle": "Quantum Mechanics",
   "unit": 8
  },
@@ -1651,7 +1683,7 @@
   "subject": "physics",
   "conceptId": "phys.qm.variational-method",
   "lessonTitle": "Variational Method and Variational Principle",
-  "lessonOrder": 207,
+  "lessonOrder": 211,
   "unitTitle": "Quantum Mechanics",
   "unit": 8
  },
@@ -1659,7 +1691,7 @@
   "subject": "physics",
   "conceptId": "phys.qm.wkb-approximation",
   "lessonTitle": "WKB Approximation (Semiclassical Limit)",
-  "lessonOrder": 208,
+  "lessonOrder": 212,
   "unitTitle": "Quantum Mechanics",
   "unit": 8
  },
@@ -1667,7 +1699,7 @@
   "subject": "physics",
   "conceptId": "phys.qm.identical-particles",
   "lessonTitle": "Identical Particles and the Symmetrization Postulate",
-  "lessonOrder": 209,
+  "lessonOrder": 213,
   "unitTitle": "Quantum Mechanics",
   "unit": 8
  },
@@ -1675,7 +1707,7 @@
   "subject": "physics",
   "conceptId": "phys.qm.angular-momentum-addition",
   "lessonTitle": "Addition of Angular Momenta and Clebsch-Gordan Coefficients",
-  "lessonOrder": 210,
+  "lessonOrder": 214,
   "unitTitle": "Quantum Mechanics",
   "unit": 8
  },
@@ -1683,7 +1715,7 @@
   "subject": "physics",
   "conceptId": "phys.qm.scattering-theory-born-approximation",
   "lessonTitle": "Scattering Theory and the Born Approximation",
-  "lessonOrder": 211,
+  "lessonOrder": 215,
   "unitTitle": "Quantum Mechanics",
   "unit": 8
  },
@@ -1691,7 +1723,7 @@
   "subject": "physics",
   "conceptId": "phys.qm.s-matrix-basics",
   "lessonTitle": "S-Matrix and Scattering Amplitudes",
-  "lessonOrder": 212,
+  "lessonOrder": 216,
   "unitTitle": "Quantum Mechanics",
   "unit": 8
  },
@@ -1699,7 +1731,7 @@
   "subject": "physics",
   "conceptId": "phys.qm.density-matrix",
   "lessonTitle": "Density Matrix and Mixed Quantum States",
-  "lessonOrder": 213,
+  "lessonOrder": 217,
   "unitTitle": "Quantum Mechanics",
   "unit": 8
  },
@@ -1707,7 +1739,7 @@
   "subject": "physics",
   "conceptId": "phys.rel.postulates",
   "lessonTitle": "Postulates of Special Relativity",
-  "lessonOrder": 214,
+  "lessonOrder": 218,
   "unitTitle": "Special Relativity",
   "unit": 9
  },
@@ -1715,7 +1747,7 @@
   "subject": "physics",
   "conceptId": "phys.rel.simultaneity",
   "lessonTitle": "Relativity of Simultaneity",
-  "lessonOrder": 215,
+  "lessonOrder": 219,
   "unitTitle": "Special Relativity",
   "unit": 9
  },
@@ -1723,7 +1755,7 @@
   "subject": "physics",
   "conceptId": "phys.rel.time-dilation",
   "lessonTitle": "Time Dilation",
-  "lessonOrder": 216,
+  "lessonOrder": 220,
   "unitTitle": "Special Relativity",
   "unit": 9
  },
@@ -1731,7 +1763,7 @@
   "subject": "physics",
   "conceptId": "phys.rel.length-contraction",
   "lessonTitle": "Length Contraction",
-  "lessonOrder": 217,
+  "lessonOrder": 221,
   "unitTitle": "Special Relativity",
   "unit": 9
  },
@@ -1739,7 +1771,7 @@
   "subject": "physics",
   "conceptId": "phys.rel.lorentz-transform",
   "lessonTitle": "Lorentz Transformations",
-  "lessonOrder": 218,
+  "lessonOrder": 222,
   "unitTitle": "Special Relativity",
   "unit": 9
  },
@@ -1747,7 +1779,7 @@
   "subject": "physics",
   "conceptId": "phys.rel.relativistic-momentum",
   "lessonTitle": "Relativistic Momentum and Energy",
-  "lessonOrder": 219,
+  "lessonOrder": 223,
   "unitTitle": "Special Relativity",
   "unit": 9
  },
@@ -1755,7 +1787,7 @@
   "subject": "physics",
   "conceptId": "phys.rel.mass-energy",
   "lessonTitle": "Mass-Energy Equivalence: E=mc²",
-  "lessonOrder": 220,
+  "lessonOrder": 224,
   "unitTitle": "Special Relativity",
   "unit": 9
  },
@@ -1763,7 +1795,7 @@
   "subject": "physics",
   "conceptId": "phys.rel.spacetime",
   "lessonTitle": "Spacetime Interval and Four-Vectors",
-  "lessonOrder": 221,
+  "lessonOrder": 225,
   "unitTitle": "Special Relativity",
   "unit": 9
  },
@@ -1771,7 +1803,7 @@
   "subject": "physics",
   "conceptId": "phys.stat.probability-basics",
   "lessonTitle": "Probability Distributions in Physics",
-  "lessonOrder": 222,
+  "lessonOrder": 226,
   "unitTitle": "Statistical Mechanics",
   "unit": 10
  },
@@ -1779,7 +1811,7 @@
   "subject": "physics",
   "conceptId": "phys.stat.boltzmann-factor",
   "lessonTitle": "Boltzmann Factor and Statistical Weight",
-  "lessonOrder": 223,
+  "lessonOrder": 227,
   "unitTitle": "Statistical Mechanics",
   "unit": 10
  },
@@ -1787,7 +1819,7 @@
   "subject": "physics",
   "conceptId": "phys.stat.partition-function",
   "lessonTitle": "Partition Function",
-  "lessonOrder": 224,
+  "lessonOrder": 228,
   "unitTitle": "Statistical Mechanics",
   "unit": 10
  },
@@ -1795,7 +1827,7 @@
   "subject": "physics",
   "conceptId": "phys.stat.maxwell-boltzmann",
   "lessonTitle": "Maxwell-Boltzmann Speed Distribution",
-  "lessonOrder": 225,
+  "lessonOrder": 229,
   "unitTitle": "Statistical Mechanics",
   "unit": 10
  },
@@ -1803,7 +1835,7 @@
   "subject": "physics",
   "conceptId": "phys.stat.fermi-dirac",
   "lessonTitle": "Fermi-Dirac Statistics",
-  "lessonOrder": 226,
+  "lessonOrder": 230,
   "unitTitle": "Statistical Mechanics",
   "unit": 10
  },
@@ -1811,7 +1843,7 @@
   "subject": "physics",
   "conceptId": "phys.stat.bose-einstein",
   "lessonTitle": "Bose-Einstein Statistics",
-  "lessonOrder": 227,
+  "lessonOrder": 231,
   "unitTitle": "Statistical Mechanics",
   "unit": 10
  },
@@ -1819,7 +1851,7 @@
   "subject": "physics",
   "conceptId": "phys.stat.entropy-statistical",
   "lessonTitle": "Statistical Definition of Entropy",
-  "lessonOrder": 228,
+  "lessonOrder": 232,
   "unitTitle": "Statistical Mechanics",
   "unit": 10
  },
@@ -1827,7 +1859,7 @@
   "subject": "physics",
   "conceptId": "phys.stat.free-energy",
   "lessonTitle": "Helmholtz and Gibbs Free Energy",
-  "lessonOrder": 229,
+  "lessonOrder": 233,
   "unitTitle": "Statistical Mechanics",
   "unit": 10
  },
@@ -1835,7 +1867,7 @@
   "subject": "physics",
   "conceptId": "phys.stat.grand-canonical-ensemble",
   "lessonTitle": "Grand Canonical Ensemble",
-  "lessonOrder": 230,
+  "lessonOrder": 234,
   "unitTitle": "Statistical Mechanics",
   "unit": 10
  },
@@ -1843,7 +1875,7 @@
   "subject": "physics",
   "conceptId": "phys.stat.chemical-potential",
   "lessonTitle": "Chemical Potential and Thermodynamic Equilibrium",
-  "lessonOrder": 231,
+  "lessonOrder": 235,
   "unitTitle": "Statistical Mechanics",
   "unit": 10
  },
@@ -1851,7 +1883,7 @@
   "subject": "physics",
   "conceptId": "phys.stat.fluctuations-correlations",
   "lessonTitle": "Fluctuations, Response Functions, and Correlations",
-  "lessonOrder": 232,
+  "lessonOrder": 236,
   "unitTitle": "Statistical Mechanics",
   "unit": 10
  },
@@ -1859,7 +1891,7 @@
   "subject": "physics",
   "conceptId": "phys.stat.phase-transitions",
   "lessonTitle": "Phase Transitions and Landau Mean-Field Theory",
-  "lessonOrder": 233,
+  "lessonOrder": 237,
   "unitTitle": "Statistical Mechanics",
   "unit": 10
  },
@@ -1867,7 +1899,7 @@
   "subject": "physics",
   "conceptId": "phys.stat.ising-model",
   "lessonTitle": "Ising Model",
-  "lessonOrder": 234,
+  "lessonOrder": 238,
   "unitTitle": "Statistical Mechanics",
   "unit": 10
  },
@@ -1875,7 +1907,7 @@
   "subject": "physics",
   "conceptId": "phys.stat.phase-transitions-critical-phenomena",
   "lessonTitle": "Critical Phenomena, Scaling Laws, and Universality",
-  "lessonOrder": 235,
+  "lessonOrder": 239,
   "unitTitle": "Statistical Mechanics",
   "unit": 10
  },
@@ -1883,7 +1915,7 @@
   "subject": "physics",
   "conceptId": "phys.stat.monte-carlo-basics",
   "lessonTitle": "Monte Carlo Methods in Statistical Physics",
-  "lessonOrder": 236,
+  "lessonOrder": 240,
   "unitTitle": "Statistical Mechanics",
   "unit": 10
  },
@@ -1891,7 +1923,7 @@
   "subject": "physics",
   "conceptId": "phys.astro.stellar-structure",
   "lessonTitle": "Stellar Structure and the Main Sequence",
-  "lessonOrder": 237,
+  "lessonOrder": 241,
   "unitTitle": "Astrophysics",
   "unit": 11
  },
@@ -1899,7 +1931,7 @@
   "subject": "physics",
   "conceptId": "phys.astro.stellar-evolution",
   "lessonTitle": "Stellar Evolution and End States",
-  "lessonOrder": 238,
+  "lessonOrder": 242,
   "unitTitle": "Astrophysics",
   "unit": 11
  },
@@ -1907,7 +1939,7 @@
   "subject": "physics",
   "conceptId": "phys.astro.cosmology",
   "lessonTitle": "Big Bang Cosmology",
-  "lessonOrder": 239,
+  "lessonOrder": 243,
   "unitTitle": "Astrophysics",
   "unit": 11
  },
@@ -1915,7 +1947,7 @@
   "subject": "physics",
   "conceptId": "phys.astro.dark-matter",
   "lessonTitle": "Dark Matter and Dark Energy",
-  "lessonOrder": 240,
+  "lessonOrder": 244,
   "unitTitle": "Astrophysics",
   "unit": 11
  },
@@ -1923,7 +1955,7 @@
   "subject": "physics",
   "conceptId": "phys.astro.black-holes",
   "lessonTitle": "Black Holes and Schwarzschild Radius",
-  "lessonOrder": 241,
+  "lessonOrder": 245,
   "unitTitle": "Astrophysics",
   "unit": 11
  },
@@ -1931,7 +1963,7 @@
   "subject": "physics",
   "conceptId": "phys.astro.gravitational-waves",
   "lessonTitle": "Gravitational Waves",
-  "lessonOrder": 242,
+  "lessonOrder": 246,
   "unitTitle": "Astrophysics",
   "unit": 11
  },
@@ -1939,7 +1971,7 @@
   "subject": "physics",
   "conceptId": "phys.particle.four-forces",
   "lessonTitle": "Four Fundamental Forces",
-  "lessonOrder": 243,
+  "lessonOrder": 247,
   "unitTitle": "Particle Physics",
   "unit": 12
  },
@@ -1947,7 +1979,7 @@
   "subject": "physics",
   "conceptId": "phys.particle.particle-classification",
   "lessonTitle": "Particle Classification: Hadrons and Leptons",
-  "lessonOrder": 244,
+  "lessonOrder": 248,
   "unitTitle": "Particle Physics",
   "unit": 12
  },
@@ -1955,7 +1987,7 @@
   "subject": "physics",
   "conceptId": "phys.particle.antimatter",
   "lessonTitle": "Antimatter and Antiparticles",
-  "lessonOrder": 245,
+  "lessonOrder": 249,
   "unitTitle": "Particle Physics",
   "unit": 12
  },
@@ -1963,7 +1995,7 @@
   "subject": "physics",
   "conceptId": "phys.particle.quarks",
   "lessonTitle": "Quarks",
-  "lessonOrder": 246,
+  "lessonOrder": 250,
   "unitTitle": "Particle Physics",
   "unit": 12
  },
@@ -1971,7 +2003,7 @@
   "subject": "physics",
   "conceptId": "phys.particle.leptons",
   "lessonTitle": "Leptons",
-  "lessonOrder": 247,
+  "lessonOrder": 251,
   "unitTitle": "Particle Physics",
   "unit": 12
  },
@@ -1979,7 +2011,7 @@
   "subject": "physics",
   "conceptId": "phys.particle.neutrinos",
   "lessonTitle": "Neutrinos",
-  "lessonOrder": 248,
+  "lessonOrder": 252,
   "unitTitle": "Particle Physics",
   "unit": 12
  },
@@ -1987,7 +2019,7 @@
   "subject": "physics",
   "conceptId": "phys.particle.hadron-quark-model",
   "lessonTitle": "Quark Model of Hadrons: Baryons and Mesons",
-  "lessonOrder": 249,
+  "lessonOrder": 253,
   "unitTitle": "Particle Physics",
   "unit": 12
  },
@@ -1995,7 +2027,7 @@
   "subject": "physics",
   "conceptId": "phys.particle.gauge-bosons",
   "lessonTitle": "Gauge Bosons and Force Carriers",
-  "lessonOrder": 250,
+  "lessonOrder": 254,
   "unitTitle": "Particle Physics",
   "unit": 12
  },
@@ -2003,7 +2035,7 @@
   "subject": "physics",
   "conceptId": "phys.particle.strong-interaction",
   "lessonTitle": "The Strong Interaction and Color Charge",
-  "lessonOrder": 251,
+  "lessonOrder": 255,
   "unitTitle": "Particle Physics",
   "unit": 12
  },
@@ -2011,7 +2043,7 @@
   "subject": "physics",
   "conceptId": "phys.particle.weak-interaction",
   "lessonTitle": "The Weak Interaction",
-  "lessonOrder": 252,
+  "lessonOrder": 256,
   "unitTitle": "Particle Physics",
   "unit": 12
  },
@@ -2019,7 +2051,7 @@
   "subject": "physics",
   "conceptId": "phys.particle.electroweak-unification",
   "lessonTitle": "Electroweak Unification",
-  "lessonOrder": 253,
+  "lessonOrder": 257,
   "unitTitle": "Particle Physics",
   "unit": 12
  },
@@ -2027,7 +2059,7 @@
   "subject": "physics",
   "conceptId": "phys.particle.higgs-mechanism",
   "lessonTitle": "The Higgs Mechanism",
-  "lessonOrder": 254,
+  "lessonOrder": 258,
   "unitTitle": "Particle Physics",
   "unit": 12
  },
@@ -2035,7 +2067,7 @@
   "subject": "physics",
   "conceptId": "phys.particle.conservation-laws",
   "lessonTitle": "Conservation Laws in Particle Interactions",
-  "lessonOrder": 255,
+  "lessonOrder": 259,
   "unitTitle": "Particle Physics",
   "unit": 12
  },
@@ -2043,7 +2075,7 @@
   "subject": "physics",
   "conceptId": "phys.particle.feynman-diagrams",
   "lessonTitle": "Feynman Diagrams (Qualitative)",
-  "lessonOrder": 256,
+  "lessonOrder": 260,
   "unitTitle": "Particle Physics",
   "unit": 12
  },
@@ -2051,7 +2083,7 @@
   "subject": "physics",
   "conceptId": "phys.particle.accelerators-detectors",
   "lessonTitle": "Particle Accelerators and Detectors",
-  "lessonOrder": 257,
+  "lessonOrder": 261,
   "unitTitle": "Particle Physics",
   "unit": 12
  },
@@ -2059,7 +2091,7 @@
   "subject": "physics",
   "conceptId": "phys.particle.standard-model",
   "lessonTitle": "The Standard Model",
-  "lessonOrder": 258,
+  "lessonOrder": 262,
   "unitTitle": "Particle Physics",
   "unit": 12
  },

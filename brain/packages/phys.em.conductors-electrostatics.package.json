@@ -1,0 +1,415 @@
+{
+  "status": "DRAFT",
+  "manifest": {
+    "packageId": "phys.em.conductors-electrostatics-package",
+    "packageVersion": "0.1.0-draft",
+    "conceptId": "phys.em.conductors-electrostatics",
+    "compiler": "blueprint-frontend@0.3.0-physics-migration",
+    "language": "en",
+    "contentHash": "sha256:eb80d162f10ad07e73c7b762a133f760d5174bf4067fe2f3fbf8dbfd0990fb69",
+    "sourceLock": {
+      "docs/curriculum/blueprints/phys.em.conductors-electrostatics.md": "sha256:5a6de600ec3fff5acdb724295104f2ae2691dcf783da593e24d20c543c28ae85"
+    },
+    "assetCount": 14,
+    "assetCounts": {
+      "learning_objective": 1,
+      "misconception": 2,
+      "teaching_action_meta": 7,
+      "mastery_probe": 1,
+      "teaching_note": 3
+    },
+    "ruleCount": 7
+  },
+  "concept": {
+    "conceptId": "phys.em.conductors-electrostatics",
+    "name": "Conductors, Shielding and Van de Graaff",
+    "difficultyRaw": "advanced (4)",
+    "bloom": "apply",
+    "masteryThreshold": 0.75,
+    "estimatedHours": 2,
+    "prerequisites": [
+      "phys.em.electric-potential"
+    ],
+    "status": "READY"
+  },
+  "rulePack": {
+    "manifest": {
+      "packId": "phys.em.conductors-electrostatics-dispatch",
+      "packVersion": "0.1.0-draft",
+      "description": "Blueprint-compiled draft dispatch pack for phys.em.conductors-electrostatics (Phase 1 front-end; DRAFT only)",
+      "compiler": "eos-brain-compiler@0.1.0-c4",
+      "compiledAtIso": "1970-01-01T00:00:00.000Z",
+      "sourceLock": {
+        "docs/curriculum/blueprints/phys.em.conductors-electrostatics.md": "sha256:5a6de600ec3fff5acdb724295104f2ae2691dcf783da593e24d20c543c28ae85"
+      },
+      "contentHash": "sha256:df5402e76aee6b0fb8f9136ebe08c5d6e9ce6a59f4d28e1ce8637ed21af27d46",
+      "ruleCount": 7,
+      "bandCounts": {
+        "3": 7
+      }
+    },
+    "rules": [
+      {
+        "ruleId": "B3.dispatch.phys.em.conductors-electrostatics.TA-1",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.conductors-electrostatics.md#TA-1",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.conductors-electrostatics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.conductors-electrostatics\"",
+        "effect": {
+          "actionClass": "DIAGNOSTIC_PROBE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.conductors-electrostatics.TA-2",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.conductors-electrostatics.md#TA-2",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.conductors-electrostatics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.conductors-electrostatics\"",
+        "effect": {
+          "actionClass": "CONCRETE_HOOK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.conductors-electrostatics.TA-3",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.conductors-electrostatics.md#TA-3 (addresses MC-FIELD-INSIDE-CONDUCTOR)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.conductors-electrostatics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.conductors-electrostatics\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.conductors-electrostatics.TA-4",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.conductors-electrostatics.md#TA-4 (addresses MC-CHARGE-UNIFORM-ON-SURFACE)",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.conductors-electrostatics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.conductors-electrostatics\"",
+        "effect": {
+          "actionClass": "PREREQUISITE_CHECK"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.conductors-electrostatics.TA-5",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.conductors-electrostatics.md#TA-5",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.conductors-electrostatics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.conductors-electrostatics\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.conductors-electrostatics.TA-6",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.conductors-electrostatics.md#TA-6",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.conductors-electrostatics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.conductors-electrostatics\"",
+        "effect": {
+          "actionClass": "INDEPENDENT_PRACTICE"
+        }
+      },
+      {
+        "ruleId": "B3.dispatch.phys.em.conductors-electrostatics.TA-7",
+        "band": 3,
+        "specificity": 1,
+        "mandatory": false,
+        "citation": "docs/curriculum/blueprints/phys.em.conductors-electrostatics.md#TA-7",
+        "guardAst": {
+          "kind": "eq",
+          "field": "currentConceptId",
+          "value": "phys.em.conductors-electrostatics"
+        },
+        "guardReads": [
+          "currentConceptId"
+        ],
+        "guardDescribe": "currentConceptId=\"phys.em.conductors-electrostatics\"",
+        "effect": {
+          "actionClass": "MISCONCEPTION_REPAIR"
+        }
+      }
+    ]
+  },
+  "assets": [
+    {
+      "assetId": "phys.em.conductors-electrostatics/learning_objective/1",
+      "kind": "learning_objective",
+      "conceptId": "phys.em.conductors-electrostatics",
+      "title": "Learning Objective",
+      "content": "[Boundary statement]\nA student who achieves mastery demonstrates:\n1. Explains that in a conductor in electrostatic equilibrium the field inside the metal is zero — any field would push the free electrons until their rearrangement cancels it — so the whole conductor is at one potential and any excess charge sits on its outer surface.\n2. States that the field just outside is perpendicular to the surface with magnitude E = σ/ε₀, and that charge crowds at sharp points, where the field is strongest — the basis of lightning conductors and corona discharge.\n3. Applies these to shielding — a closed conducting shell keeps the field out of the space it encloses (a Faraday cage: a car in a thunderstorm, a lift losing phone signal) — and to the Van de Graaff generator, which keeps carrying charge into a hollow dome because charge delivered inside moves to the outer surface.\n\nA student who thinks the field inside a charged metal is strong, or that charge spreads evenly over any shaped conductor, has **NOT** achieved mastery — those ideas misread shielding, lightning conductors and every electrostatic machine.",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.conductors-electrostatics.md",
+        "startLine": 17,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.em.conductors-electrostatics/misconception/MC-FIELD-INSIDE-CONDUCTOR",
+      "kind": "misconception",
+      "conceptId": "phys.em.conductors-electrostatics",
+      "title": "A charged conductor has a strong field inside it",
+      "content": "### MC-FIELD-INSIDE-CONDUCTOR: \"A charged conductor has a strong field inside it\"\ntrigger_signal: student places a nonzero electric field inside the metal (or the enclosed hollow) of a charged conductor in electrostatic equilibrium.\nconflict_evidence [P28]: \"Suppose there were a field inside the metal. The metal is full of free electrons. What would they do — and could the situation be 'equilibrium' while they move?\"\nbridge_text [P30]: \"They would drift until their rearrangement produced an opposing field. They stop only when the total field inside is zero. That is what equilibrium means for a conductor, so the excess charge ends up on the outer surface and the inside is field-free.\"\nreplacement_text [P31]: \"In electrostatic equilibrium: E = 0 inside a conductor, the conductor is an equipotential, and excess charge lies on the outer surface.\"\ndiscrimination_pairs [P33]: [\"inside the metal or its enclosed hollow: E = 0\", \"just outside the surface: E = σ/ε₀, perpendicular to the surface\"]\ns6_path: skip P28; a radio or phone inside a closed metal tin loses its signal.",
+      "localKey": "MC-FIELD-INSIDE-CONDUCTOR",
+      "language": "en",
+      "refs": [
+        "MC-FIELD-INSIDE-CONDUCTOR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.conductors-electrostatics.md",
+        "startLine": 3,
+        "endLine": 11
+      }
+    },
+    {
+      "assetId": "phys.em.conductors-electrostatics/misconception/MC-CHARGE-UNIFORM-ON-SURFACE",
+      "kind": "misconception",
+      "conceptId": "phys.em.conductors-electrostatics",
+      "title": "Charge spreads evenly over any conductor",
+      "content": "### MC-CHARGE-UNIFORM-ON-SURFACE: \"Charge spreads evenly over any conductor\"\ntrigger_signal: student assumes equal surface charge density everywhere on a non-spherical conductor, ignoring curvature.\nconflict_evidence [P28]: \"If charge were spread evenly over a pear-shaped conductor, would its surface still be at one potential? Why are lightning conductors made pointed?\"\nbridge_text [P30]: \"Keeping the whole surface at one potential needs MORE charge per area where the surface curves sharply. So charge crowds at points, the field there is strongest, and air near a point can break down — the corona glow and the lightning conductor's action.\"\nreplacement_text [P31]: \"Surface charge density is greatest where the curvature is greatest; only an isolated sphere has uniform σ.\"\ndiscrimination_pairs [P33]: [\"isolated sphere: uniform σ\", \"pear shape: σ largest at the pointed end\"]\ns6_path: skip P28; a Van de Graaff sparks most readily from sharp edges.",
+      "localKey": "MC-CHARGE-UNIFORM-ON-SURFACE",
+      "language": "en",
+      "refs": [
+        "MC-CHARGE-UNIFORM-ON-SURFACE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.conductors-electrostatics.md",
+        "startLine": 11,
+        "endLine": 19
+      }
+    },
+    {
+      "assetId": "phys.em.conductors-electrostatics/teaching_action_meta/TA-1",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.conductors-electrostatics",
+      "title": "Lightning and the Car",
+      "content": "{\"id\":\"TA-1\",\"title\":\"Lightning and the Car\",\"primitives\":[\"P01\",\"P04\",\"P05\",\"P06\",\"P14\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-1",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.conductors-electrostatics.md",
+        "startLine": 11,
+        "endLine": 18
+      }
+    },
+    {
+      "assetId": "phys.em.conductors-electrostatics/teaching_action_meta/TA-2",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.conductors-electrostatics",
+      "title": "Electrons Rearrange Until the Field Is Gone",
+      "content": "{\"id\":\"TA-2\",\"title\":\"Electrons Rearrange Until the Field Is Gone\",\"primitives\":[\"P02\",\"P06\",\"P08\",\"P13\",\"P34\",\"P49\",\"P50\",\"P51\",\"P52\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-2",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.conductors-electrostatics.md",
+        "startLine": 18,
+        "endLine": 27
+      }
+    },
+    {
+      "assetId": "phys.em.conductors-electrostatics/teaching_action_meta/TA-3",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.conductors-electrostatics",
+      "title": "Where the Charge Goes",
+      "content": "{\"id\":\"TA-3\",\"title\":\"Where the Charge Goes\",\"primitives\":[\"P02\",\"P13\",\"P34\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-FIELD-INSIDE-CONDUCTOR\"]}",
+      "localKey": "TA-3",
+      "language": "en",
+      "refs": [
+        "MC-FIELD-INSIDE-CONDUCTOR"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.conductors-electrostatics.md",
+        "startLine": 27,
+        "endLine": 36
+      }
+    },
+    {
+      "assetId": "phys.em.conductors-electrostatics/teaching_action_meta/TA-4",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.conductors-electrostatics",
+      "title": "Sharp Points",
+      "content": "{\"id\":\"TA-4\",\"title\":\"Sharp Points\",\"primitives\":[\"P02\",\"P34\",\"P41\",\"P49\",\"P55\"],\"addresses\":[\"MC-CHARGE-UNIFORM-ON-SURFACE\"]}",
+      "localKey": "TA-4",
+      "language": "en",
+      "refs": [
+        "MC-CHARGE-UNIFORM-ON-SURFACE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.conductors-electrostatics.md",
+        "startLine": 36,
+        "endLine": 44
+      }
+    },
+    {
+      "assetId": "phys.em.conductors-electrostatics/teaching_action_meta/TA-5",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.conductors-electrostatics",
+      "title": "Shielding and the Van de Graaff",
+      "content": "{\"id\":\"TA-5\",\"title\":\"Shielding and the Van de Graaff\",\"primitives\":[\"P02\",\"P34\",\"P49\",\"P55\"],\"addresses\":[]}",
+      "localKey": "TA-5",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.conductors-electrostatics.md",
+        "startLine": 44,
+        "endLine": 49
+      }
+    },
+    {
+      "assetId": "phys.em.conductors-electrostatics/teaching_action_meta/TA-6",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.conductors-electrostatics",
+      "title": "Formative Assessment",
+      "content": "{\"id\":\"TA-6\",\"title\":\"Formative Assessment\",\"primitives\":[\"P02\",\"P35\",\"P49\",\"P51\",\"P55\",\"P79\"],\"addresses\":[]}",
+      "localKey": "TA-6",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.conductors-electrostatics.md",
+        "startLine": 49,
+        "endLine": 56
+      }
+    },
+    {
+      "assetId": "phys.em.conductors-electrostatics/teaching_action_meta/TA-7",
+      "kind": "teaching_action_meta",
+      "conceptId": "phys.em.conductors-electrostatics",
+      "title": "Mastery Gate",
+      "content": "{\"id\":\"TA-7\",\"title\":\"Mastery Gate\",\"primitives\":[\"P02\",\"P28\",\"P41\",\"P54\",\"P55\",\"P62\",\"P68\",\"P74\",\"P75\",\"P76\",\"P77\",\"P78\",\"P85\"],\"addresses\":[]}",
+      "localKey": "TA-7",
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.conductors-electrostatics.md",
+        "startLine": 56,
+        "endLine": 98
+      }
+    },
+    {
+      "assetId": "phys.em.conductors-electrostatics/mastery_probe/1",
+      "kind": "mastery_probe",
+      "conceptId": "phys.em.conductors-electrostatics",
+      "title": "Assessment Battery",
+      "content": "| Probe | Item | Expected signal |\n|---|---|---|\n| P74 (classify) | \"Sharp tip or flat face — stronger field?\" | CORRECT = sharp tip |\n| P74 (classify) | \"Field inside a charged hollow metal sphere\" | CORRECT = zero |\n| P75 (boundary) | \"Just inside vs just outside\" | CORRECT = 0 inside; σ/ε₀ outside, perpendicular |\n| P76 (transfer) | \"Car in a thunderstorm\" | CORRECT = Faraday cage; charge stays on the outer metal |\n| P77 (generate) | \"Shield equipment\" | CORRECT = enclose it in a closed, earthed metal box or mesh |\n| P78 (explain) | \"Why charge sits outside\" | CORRECT = charges repel to maximise separation; E = 0 inside forces it |\n| P79 (predict) | \"Charged sphere touched inside a hollow conductor\" | CORRECT = all its charge moves to the outer surface |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.conductors-electrostatics.md",
+        "startLine": 180,
+        "endLine": 192
+      }
+    },
+    {
+      "assetId": "phys.em.conductors-electrostatics/teaching_note/1",
+      "kind": "teaching_note",
+      "conceptId": "phys.em.conductors-electrostatics",
+      "title": "Student State Matrix",
+      "content": "| State | Why here | Tell-tale behaviour | Protocol |\n|---|---|---|---|\n| S0 | Conductors seen only in circuits | Has never thought about static charge on metal | Protocol A (Concrete) |\n| S1 | Rules recited | Says \"E = 0 inside\" but cannot say why | Protocol B (Counterexample-first) |\n| S2-FIELD-INSIDE-CONDUCTOR | Charge = field everywhere | \"A charged metal sphere has a strong field inside it\" | Misconception Engine → then Protocol C |\n| S2-CHARGE-UNIFORM-ON-SURFACE | Symmetry overgeneralised | \"Charge spreads evenly over any conductor\" | Misconception Engine → then Protocol C |\n| S3 | Partial — E = 0 fine, shapes not | Cannot explain lightning conductors | Protocol C (Guided Questioning) |\n| S6 | Anxiety on field arguments | Avoids reasoning about where charges go | Protocol F (Low Pressure) |",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.conductors-electrostatics.md",
+        "startLine": 27,
+        "endLine": 38
+      }
+    },
+    {
+      "assetId": "phys.em.conductors-electrostatics/teaching_note/2",
+      "kind": "teaching_note",
+      "conceptId": "phys.em.conductors-electrostatics",
+      "title": "Diagnostic Battery",
+      "content": "DB-1 (prior-exposure check):\n\"Why are people inside a car usually safe when lightning strikes it?\"\n  \"Rubber tyres\" or no idea → S0. Enter Protocol A (Concrete).\n  \"The charge stays on the metal outside\" → DB-2.\n\nDB-2 (representation / misconception test):\n\"A hollow metal sphere is given a large positive charge. What is the electric field at a point inside the metal or inside the hollow?\"\n  \"Zero — free electrons rearrange until the field inside is cancelled; the charge sits on the outside\" → S3. Enter Protocol C.\n  \"Zero\" (no reason) → S1. Enter Protocol B.\n  \"Strong — it is full of charge\" → SIGNAL:MISCONCEPTION:MC-FIELD-INSIDE-CONDUCTOR. Enter Misconception Engine.\n  Pause → add S6 flag; Protocol F if anxious, otherwise Protocol A.\n\nDB-3 (shape check — overlays):\n\"A pear-shaped metal object is charged. Is the charge spread evenly, or concentrated somewhere?\"\n  \"Concentrated at the pointed end\" → no flag.\n  \"Evenly over the surface\" → add SIGNAL:MISCONCEPTION:MC-CHARGE-UNIFORM-ON-SURFACE (repair at TA-4).\n  Confident and wrong on DB-2 → add S7 flag. Override to Protocol G.",
+      "localKey": null,
+      "language": "en",
+      "refs": [
+        "MC-FIELD-INSIDE-CONDUCTOR",
+        "MC-CHARGE-UNIFORM-ON-SURFACE"
+      ],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.conductors-electrostatics.md",
+        "startLine": 38,
+        "endLine": 58
+      }
+    },
+    {
+      "assetId": "phys.em.conductors-electrostatics/teaching_note/3",
+      "kind": "teaching_note",
+      "conceptId": "phys.em.conductors-electrostatics",
+      "title": "Prerequisite Check",
+      "content": "PD-1 (for `phys.em.electric-potential`):\n\"Which way does a free positive charge move in an electric field, and what is the potential difference between two points with no field between them?\"\n  Cannot say \"along the field\" and \"zero\" → flag PREREQ-GAP-POTENTIAL.\n  In-session minimum repair: one P06 (field lines and equipotentials around a point charge) + one P34 (\"no field along a path — any potential change?\") then resume. If absent, schedule the missing session (S4 route).",
+      "localKey": null,
+      "language": "en",
+      "refs": [],
+      "span": {
+        "file": "docs/curriculum/blueprints/phys.em.conductors-electrostatics.md",
+        "startLine": 58,
+        "endLine": 65
+      }
+    }
+  ],
+  "extensionPoints": {
+    "diagrams": [],
+    "animations": [],
+    "simulations": []
+  }
+}

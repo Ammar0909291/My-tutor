@@ -53812,6 +53812,454 @@ const CNST_PROBES: SeedProbe[] = [
   },
 ]
 
+// ─── phys.opt.thin-film-interference ─────────────────────────────────────────
+const TFLM = 'phys.opt.thin-film-interference'
+const TFLM_SRC = 'docs/curriculum/blueprints/phys.opt.thin-film-interference.md'
+
+const TFLM_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: TFLM,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A soap film or an oil slick acts like two mirrors very close together. Light reflects partly from the top surface; the rest enters the film, reflects from the bottom surface and comes back out, travelling about twice the thickness, 2t, further. Inside the film light has a shorter wavelength, λ/n, so what matters is the optical path difference 2nt. The two reflections interfere: some wavelengths are reinforced and others cancelled, and because which ones depends on the thickness, a film of varying thickness shows bands of colour. One more ingredient decides which: when light reflects off a medium of HIGHER refractive index, the reflected wave is flipped — a phase change of half a wavelength — like a rope pulse coming back upside down from a fixed end; reflection off a lower-index medium causes no flip. For a soap film in air the top reflection flips and the bottom one does not, so the film is bright when 2nt = (m + ½)λ and dark when 2nt = mλ. As the film drains far thinner than a wavelength, 2nt → 0 and the two reflections cancel: the top turns black just before it bursts. The thinnest soap film (n = 1.33) that strongly reflects 600 nm light has t = 600/(4 × 1.33) ≈ 113 nm. A lens coating of magnesium fluoride (n = 1.38) on glass (n = 1.5) gives BOTH reflections a flip, so they cancel when 2nt = λ/2, t = λ/(4n): about 100 nm for 550 nm light.',
+    targetedMisconceptions: [`${TFLM}:MC-NO-PHASE-SHIFT`, `${TFLM}:MC-COLOURS-BY-DISPERSION`],
+    source: `${TFLM_SRC} — TA-2 two reflections and 2nt, TA-3 phase flip, TA-4 soap film, TA-5 coating`,
+  },
+  {
+    conceptId: TFLM,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'In two-slit interference, zero path difference means a bright fringe, so it seems a film much thinner than a wavelength — almost no path difference — should look bright. Watch a soap film drain in a vertical wire loop: just before it bursts, its top turns BLACK. The reason is that reflection is not always neutral. Light reflecting off a medium of higher refractive index (air → soap) is flipped by half a wavelength, while light reflecting off a lower-index medium (soap → air) is not. With one reflection flipped and the path difference nearly zero, the two reflected waves arrive exactly out of step and cancel. So always count the flips before choosing a condition: one flip, and 2nt = mλ is dark; two flips or none, and 2nt = mλ is bright. A second trap is to think the film splits light into colours like a prism. A prism separates colours because its refractive index depends on wavelength; make a prism thinner and its colours just fade. A soap film\'s colours come from interference: each thickness reinforces some wavelengths and cancels others, which is why the colours lie in bands that follow the thickness and drift down as the film drains.',
+    targetedMisconceptions: [`${TFLM}:MC-NO-PHASE-SHIFT`, `${TFLM}:MC-COLOURS-BY-DISPERSION`],
+    source: `${TFLM_SRC} — MC-NO-PHASE-SHIFT + MC-COLOURS-BY-DISPERSION, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const TFLM_PROBES: SeedProbe[] = [
+  {
+    conceptId: TFLM,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A magnesium fluoride coating (n = 1.38) on glass (n = 1.5) is to cancel the reflection of 550 nm light. What is the thinnest coating that works?',
+    choices: [
+      { text: 'About 100 nm (t = λ/4n)', isCorrect: true },
+      { text: 'About 138 nm (t = λ/4, ignoring n)', isCorrect: false },
+      { text: 'About 199 nm (t = λ/2n)', isCorrect: false, misconceptionId: `${TFLM}:MC-NO-PHASE-SHIFT` },
+      { text: 'About 550 nm (one whole wavelength)', isCorrect: false },
+    ],
+    correctValue: 'about 100 nm',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${TFLM}:MC-NO-PHASE-SHIFT`],
+    source: `${TFLM_SRC} — TA-5 P34 (both reflections flip; 2nt = λ/2 → t = 550/(4 × 1.38)); λ/2n treats one flip`,
+  },
+  {
+    conceptId: TFLM,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What is the thinnest soap film (n = 1.33) in air that strongly reflects light of wavelength 600 nm?',
+    choices: [
+      { text: 'About 113 nm', isCorrect: true },
+      { text: 'About 226 nm', isCorrect: false, misconceptionId: `${TFLM}:MC-NO-PHASE-SHIFT` },
+      { text: 'About 150 nm', isCorrect: false },
+      { text: 'Zero thickness — no path difference means bright', isCorrect: false, misconceptionId: `${TFLM}:MC-NO-PHASE-SHIFT` },
+    ],
+    correctValue: 'about 113 nm',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${TFLM}:MC-NO-PHASE-SHIFT`],
+    source: `${TFLM_SRC} — TA-4 P34 (one flip; bright 2nt = λ/2 → t = 600/(4 × 1.33)); 226 nm uses 2nt = λ, 150 nm forgets n`,
+  },
+  {
+    conceptId: TFLM,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A soap film is drained until it is far thinner than a wavelength of light. Does it look bright or dark in reflected light?',
+    choices: [
+      { text: 'Dark — one reflection is flipped by half a wavelength and the path difference is nearly zero, so they cancel', isCorrect: true },
+      { text: 'Bright — with almost no path difference, the two reflections are in step', isCorrect: false, misconceptionId: `${TFLM}:MC-NO-PHASE-SHIFT` },
+      { text: 'Brightly coloured — the thinnest films show the strongest colours', isCorrect: false, misconceptionId: `${TFLM}:MC-NO-PHASE-SHIFT` },
+    ],
+    correctValue: 'dark',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${TFLM}:MC-NO-PHASE-SHIFT`],
+    source: `${TFLM_SRC} — DB-2 item and MC-NO-PHASE-SHIFT conflict_evidence`,
+  },
+  {
+    conceptId: TFLM,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'What produces the colours of a soap film?',
+    choices: [
+      { text: 'Interference between light reflected from its two surfaces — each thickness reinforces some wavelengths and cancels others', isCorrect: true },
+      { text: 'Dispersion — the film splits white light into colours like a prism', isCorrect: false, misconceptionId: `${TFLM}:MC-COLOURS-BY-DISPERSION` },
+      { text: 'Refraction — each colour bends by a different amount as it enters the film', isCorrect: false, misconceptionId: `${TFLM}:MC-COLOURS-BY-DISPERSION` },
+    ],
+    correctValue: 'interference',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${TFLM}:MC-COLOURS-BY-DISPERSION`],
+    source: `${TFLM_SRC} — DB-3 item and MC-COLOURS-BY-DISPERSION trigger_signal`,
+  },
+  {
+    conceptId: TFLM,
+    subjectSlug: 'physics',
+    probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why is the optical path difference in a thin film 2nt rather than 2t?',
+    choices: [
+      { text: 'Inside the film the wavelength is λ/n, so the extra distance 2t holds 2nt/λ wavelengths — as many as a distance 2nt in air', isCorrect: true },
+      { text: 'Because the light goes through the film n times', isCorrect: false },
+      { text: 'Because light travels faster inside the film', isCorrect: false },
+    ],
+    correctValue: 'wavelength in the film is λ/n',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: `${TFLM_SRC} — TA-2 think-aloud (optical path 2nt) and §8 P78`,
+  },
+]
+
+// ─── phys.opt.diffraction-grating ────────────────────────────────────────────
+const GRAT = 'phys.opt.diffraction-grating'
+const GRAT_SRC = 'docs/curriculum/blueprints/phys.opt.diffraction-grating.md'
+
+const GRAT_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: GRAT,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A diffraction grating is a plate ruled with thousands of equally spaced slits, typically hundreds per millimetre. Light from neighbouring slits, a distance d apart, travels paths that differ by d sinθ at angle θ. When that difference is a whole number of wavelengths, the waves from ALL the slits arrive in step and add to a bright maximum: d sinθ = mλ, with m = 0, 1, 2… The spacing comes from the line density: 500 lines per mm means d = 1/500 mm = 2.0 μm, so 600 nm light has its first order at sinθ = 0.6/2.0 = 0.3, θ ≈ 17.5°. Because sinθ cannot exceed 1, the highest order is the largest whole number not above d/λ — here 3.33, so orders up to 3 on each side. With thousands of slits, even a tiny departure from the exact angle puts distant slits out of step, so a grating\'s maxima are far sharper than two-slit fringes — ideal for measuring wavelengths. A finer grating has more lines per mm and a SMALLER d, so it spreads the orders to LARGER angles: at 1000 lines per mm, d = 1.0 μm and the first order of 600 nm light is at sinθ = 0.6, θ ≈ 37°, with no second order at all. In white light each order becomes a spectrum; since sinθ = mλ/d, longer wavelengths go further out — violet nearest the centre, red furthest. Higher orders overlap: second-order red (2 × 700 = 1400 nm) lands beyond third-order violet (3 × 400 = 1200 nm).',
+    targetedMisconceptions: [`${GRAT}:MC-MORE-LINES-SMALLER-ANGLE`, `${GRAT}:MC-RED-LEAST-DEVIATED`],
+    source: `${GRAT_SRC} — TA-2 grating equation, TA-3 maximum order, TA-4 line density, TA-5 spectra`,
+  },
+  {
+    conceptId: GRAT,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      '"More lines per millimetre" sounds like "more crowded", so it seems a finer grating should squeeze its bright orders closer together. Work out the spacing first. 500 lines in a millimetre are 2.0 μm apart; 1000 lines in a millimetre are only 1.0 μm apart. In d sinθ = mλ, a smaller d needs a LARGER sinθ for the same wavelength: the first order of 600 nm light moves from sinθ = 0.3 (17.5°) out to sinθ = 0.6 (37°). More lines per millimetre means the slits are closer together, so the orders spread further out. The second trap comes from prisms. A prism bends violet MORE than red, because glass has a larger refractive index for violet, so in a prism spectrum red is the least deviated. A grating works differently: its angles come from sinθ = mλ/d, and red light has the longer wavelength, so red is diffracted MOST. In a grating spectrum violet lies nearest the central white maximum and red furthest out — the reverse of a prism. Checking which has the longer wavelength, and so the bigger sinθ, settles the order every time.',
+    targetedMisconceptions: [`${GRAT}:MC-MORE-LINES-SMALLER-ANGLE`, `${GRAT}:MC-RED-LEAST-DEVIATED`],
+    source: `${GRAT_SRC} — MC-MORE-LINES-SMALLER-ANGLE + MC-RED-LEAST-DEVIATED, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const GRAT_PROBES: SeedProbe[] = [
+  {
+    conceptId: GRAT,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Light of wavelength 600 nm falls on a grating with 500 lines per mm. At what angle is the first-order maximum?',
+    choices: [
+      { text: 'About 17.5°', isCorrect: true },
+      { text: 'About 1.7°', isCorrect: false },
+      { text: 'About 36.9°', isCorrect: false, misconceptionId: `${GRAT}:MC-MORE-LINES-SMALLER-ANGLE` },
+      { text: '0.3°', isCorrect: false },
+    ],
+    correctValue: 'about 17.5°',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${GRAT}:MC-MORE-LINES-SMALLER-ANGLE`],
+    source: `${GRAT_SRC} — TA-2 P34 (d = 2.0 μm, sinθ = 0.3); 36.9° uses d = 1.0 μm, 0.3° reads sinθ as θ`,
+  },
+  {
+    conceptId: GRAT,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A grating has 500 lines per mm. What is the highest order of 600 nm light that can be seen?',
+    choices: [
+      { text: '3', isCorrect: true },
+      { text: '4', isCorrect: false },
+      { text: '1', isCorrect: false },
+      { text: 'There is no limit — any order can be seen far enough out', isCorrect: false },
+    ],
+    correctValue: '3',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: `${GRAT_SRC} — TA-3 P34 (sinθ = mλ/d ≤ 1 → m ≤ 3.33)`,
+  },
+  {
+    conceptId: GRAT,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A grating with 500 lines per mm is replaced by one with 1000 lines per mm. Do the bright orders move closer to the centre or further out?',
+    choices: [
+      { text: 'Further out — the slits are closer together (smaller d), so sinθ = mλ/d is larger', isCorrect: true },
+      { text: 'Closer to the centre — more lines crowd the pattern together', isCorrect: false, misconceptionId: `${GRAT}:MC-MORE-LINES-SMALLER-ANGLE` },
+      { text: 'They stay where they are — only the brightness changes', isCorrect: false },
+    ],
+    correctValue: 'further out',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${GRAT}:MC-MORE-LINES-SMALLER-ANGLE`],
+    source: `${GRAT_SRC} — DB-2 golden probe and MC-MORE-LINES-SMALLER-ANGLE conflict_evidence`,
+  },
+  {
+    conceptId: GRAT,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'White light passes through a diffraction grating. In the first-order spectrum, which colour is closest to the central maximum?',
+    choices: [
+      { text: 'Violet — the shortest wavelength has the smallest sinθ = λ/d', isCorrect: true },
+      { text: 'Red — as in a prism, red is deviated least', isCorrect: false, misconceptionId: `${GRAT}:MC-RED-LEAST-DEVIATED` },
+      { text: 'All colours arrive at the same angle', isCorrect: false },
+    ],
+    correctValue: 'violet',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${GRAT}:MC-RED-LEAST-DEVIATED`],
+    source: `${GRAT_SRC} — DB-3 item and MC-RED-LEAST-DEVIATED trigger_signal`,
+  },
+  {
+    conceptId: GRAT,
+    subjectSlug: 'physics',
+    probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why are the bright lines from a grating much sharper than the fringes from two slits?',
+    choices: [
+      { text: 'With thousands of slits, a tiny change of angle from the exact maximum puts the waves from distant slits out of step, so they cancel', isCorrect: true },
+      { text: 'Because a grating uses brighter light than a double slit', isCorrect: false },
+      { text: 'Because the slits of a grating are wider', isCorrect: false },
+    ],
+    correctValue: 'many slits cancel away from the exact angle',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: `${GRAT_SRC} — TA-2 think-aloud (sharp maxima) and §8 P78`,
+  },
+]
+
+// ─── phys.opt.resolving-power ────────────────────────────────────────────────
+const RESP = 'phys.opt.resolving-power'
+const RESP_SRC = 'docs/curriculum/blueprints/phys.opt.resolving-power.md'
+
+const RESP_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: RESP,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'Even a perfect lens cannot form a perfect point image. Light entering a circular opening of diameter D diffracts, so a distant star appears as a small bright disc with faint rings around it, whose angular radius is about 1.22 λ/D. Two close stars give two such discs; if they overlap too much they merge into one blob. Rayleigh\'s criterion sets the limit: two points are just resolved when the centre of one disc falls on the first dark ring of the other, at an angular separation θ_min ≈ 1.22 λ/D (in radians). A LARGER aperture gives smaller discs and finer detail: a telescope of aperture 10 cm at 550 nm has θ_min = 1.22 × 550 × 10⁻⁹ / 0.10 ≈ 6.7 × 10⁻⁶ rad, while the eye, with a 3 mm pupil, manages only about 2.2 × 10⁻⁴ rad — some 33 times coarser. So two car headlights 1.5 m apart can just be told apart from about 1.5 / 2.2 × 10⁻⁴ ≈ 7 km; further away they merge. A SHORTER wavelength also helps: blue light resolves finer detail than red, and electron microscopes, whose electrons have wavelengths thousands of times shorter than light\'s, resolve detail thousands of times finer. Resolution is not magnification: once the diffraction discs are big enough to see, magnifying further only enlarges the blur.',
+    targetedMisconceptions: [`${RESP}:MC-MAGNIFICATION-IS-RESOLUTION`, `${RESP}:MC-SMALLER-APERTURE-SHARPER`],
+    source: `${RESP_SRC} — TA-2 Airy disc and Rayleigh criterion, TA-3 aperture, TA-4 magnification, TA-5 microscopes`,
+  },
+  {
+    conceptId: RESP,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'It seems that a stronger eyepiece, or more zoom, should always reveal more detail. Take a blurry photo and enlarge it three times: no new detail appears — the blur just gets bigger. An instrument\'s detail is fixed earlier, at its objective lens or mirror, where diffraction turns every point into a disc of angular size about 1.22 λ/D. Magnifying afterwards enlarges the discs along with everything else; beyond the point where the eye can see them, extra magnification is "empty". To see finer detail you need a larger aperture or a shorter wavelength, not a stronger eyepiece. The opposite trap comes from the pinhole camera, where a smaller hole gives a sharper picture, suggesting that narrowing a telescope would sharpen it too. But light through a narrower opening spreads MORE: shrink D and each star\'s disc grows, the discs of two close stars overlap, and they merge. A pinhole sharpens a geometric image only until diffraction takes over. For separating close points, bigger is better — which is exactly why astronomers build telescope mirrors many metres across.',
+    targetedMisconceptions: [`${RESP}:MC-MAGNIFICATION-IS-RESOLUTION`, `${RESP}:MC-SMALLER-APERTURE-SHARPER`],
+    source: `${RESP_SRC} — MC-MAGNIFICATION-IS-RESOLUTION + MC-SMALLER-APERTURE-SHARPER, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const RESP_PROBES: SeedProbe[] = [
+  {
+    conceptId: RESP,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A telescope has an aperture of 10 cm. Using light of wavelength 550 nm, what is the smallest angle it can resolve?',
+    choices: [
+      { text: 'About 6.7 × 10⁻⁶ rad', isCorrect: true },
+      { text: 'About 6.7 × 10⁻³ rad', isCorrect: false },
+      { text: 'About 2.2 × 10⁻⁴ rad', isCorrect: false, misconceptionId: `${RESP}:MC-SMALLER-APERTURE-SHARPER` },
+      { text: 'About 5.5 × 10⁻⁶ rad', isCorrect: false },
+    ],
+    correctValue: 'about 6.7 × 10⁻⁶ rad',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${RESP}:MC-SMALLER-APERTURE-SHARPER`],
+    source: `${RESP_SRC} — TA-3 P34 (1.22 × 550e-9 / 0.10); 2.2 × 10⁻⁴ rad is the 3 mm eye, 5.5 × 10⁻⁶ drops the 1.22`,
+  },
+  {
+    conceptId: RESP,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A telescope must just separate two stars 1 × 10⁻⁶ rad apart, observed at 500 nm. What aperture does it need?',
+    choices: [
+      { text: 'About 0.61 m', isCorrect: true },
+      { text: 'About 0.5 m', isCorrect: false },
+      { text: 'About 6.1 cm', isCorrect: false },
+      { text: 'Any aperture — a strong enough eyepiece will separate them', isCorrect: false, misconceptionId: `${RESP}:MC-MAGNIFICATION-IS-RESOLUTION` },
+    ],
+    correctValue: 'about 0.61 m',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${RESP}:MC-MAGNIFICATION-IS-RESOLUTION`],
+    source: `${RESP_SRC} — §8 P77 (D = 1.22 × 500e-9 / 1e-6); 0.5 m drops the 1.22`,
+  },
+  {
+    conceptId: RESP,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A microscope image looks blurry at 1000×. Will a stronger eyepiece giving 3000× reveal finer details?',
+    choices: [
+      { text: 'No — the detail is limited by diffraction at the objective; more magnification only enlarges the blur', isCorrect: true },
+      { text: 'Yes — more magnification always shows more detail', isCorrect: false, misconceptionId: `${RESP}:MC-MAGNIFICATION-IS-RESOLUTION` },
+      { text: 'Yes — as long as the image is bright enough', isCorrect: false, misconceptionId: `${RESP}:MC-MAGNIFICATION-IS-RESOLUTION` },
+    ],
+    correctValue: 'no',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${RESP}:MC-MAGNIFICATION-IS-RESOLUTION`],
+    source: `${RESP_SRC} — DB-2 item and MC-MAGNIFICATION-IS-RESOLUTION conflict_evidence`,
+  },
+  {
+    conceptId: RESP,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'If a telescope\'s aperture were made smaller, would two close stars be easier or harder to separate?',
+    choices: [
+      { text: 'Harder — a smaller aperture spreads each star into a bigger diffraction disc', isCorrect: true },
+      { text: 'Easier — a smaller opening gives a sharper image, like a pinhole camera', isCorrect: false, misconceptionId: `${RESP}:MC-SMALLER-APERTURE-SHARPER` },
+      { text: 'No change — only the magnification matters', isCorrect: false, misconceptionId: `${RESP}:MC-MAGNIFICATION-IS-RESOLUTION` },
+    ],
+    correctValue: 'harder',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${RESP}:MC-SMALLER-APERTURE-SHARPER`, `${RESP}:MC-MAGNIFICATION-IS-RESOLUTION`],
+    source: `${RESP_SRC} — DB-3 aperture check and MC-SMALLER-APERTURE-SHARPER trigger_signal`,
+  },
+  {
+    conceptId: RESP,
+    subjectSlug: 'physics',
+    probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why can an electron microscope show far finer detail than a light microscope?',
+    choices: [
+      { text: 'Its electrons have a wavelength thousands of times shorter than light\'s, and the diffraction limit is proportional to the wavelength', isCorrect: true },
+      { text: 'Because it magnifies more', isCorrect: false },
+      { text: 'Because electrons are brighter than light', isCorrect: false },
+    ],
+    correctValue: 'much shorter wavelength',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: `${RESP_SRC} — TA-5 think-aloud (electron microscope) and §7 P76`,
+  },
+]
+
+// ─── phys.em.conductors-electrostatics ───────────────────────────────────────
+const CNDR = 'phys.em.conductors-electrostatics'
+const CNDR_SRC = 'docs/curriculum/blueprints/phys.em.conductors-electrostatics.md'
+
+const CNDR_EXPLANATIONS: SeedExplanation[] = [
+  {
+    conceptId: CNDR,
+    subjectSlug: 'physics',
+    familyKind: 'core_explanation',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'A metal contains free electrons that move whenever there is an electric field. Give a conductor extra charge, or put it in a field, and the electrons drift — but only until their new arrangement cancels the field inside the metal. When they stop, the conductor is in electrostatic equilibrium: the field everywhere inside it is zero, and since no work is done moving a charge through it, the whole conductor is at one potential. Excess charge repels itself as far out as it can, so it all sits on the outer surface. Just outside, the field is perpendicular to the surface (a sideways part would push surface charges along) with size E = σ/ε₀, where σ is the charge per unit area: σ = 2.0 × 10⁻⁶ C/m² gives about 2.3 × 10⁵ V/m. On an irregular conductor the charge is NOT spread evenly: keeping the surface at one potential needs the most charge per area where it curves most sharply, so the field is strongest at points and can ionise the air there — the principle of the pointed lightning conductor. Because the field inside a closed conducting shell is zero, the space inside is shielded from outside fields — a Faraday cage. People in a car struck by lightning are safe because the charge flows over the outer metal body to the ground, not because of the tyres. A Van de Graaff generator carries charge inside a hollow dome; charge delivered inside moves straight to the outer surface, so the dome can keep collecting more.',
+    targetedMisconceptions: [`${CNDR}:MC-FIELD-INSIDE-CONDUCTOR`, `${CNDR}:MC-CHARGE-UNIFORM-ON-SURFACE`],
+    source: `${CNDR_SRC} — TA-2 E = 0 inside, TA-3 surface charge and σ/ε₀, TA-4 sharp points, TA-5 shielding and Van de Graaff`,
+  },
+  {
+    conceptId: CNDR,
+    subjectSlug: 'physics',
+    familyKind: 'misconception_repair',
+    gradeBand: GradeBand.HIGH,
+    content:
+      'It is natural to picture a charged metal sphere as full of charge, with a strong field inside it. Ask what the metal\'s free electrons would do if there WERE a field inside: they would move. They keep moving until their rearrangement produces an opposing field, and they stop only when the total field inside is zero. That is what equilibrium means for a conductor. So the field inside the metal, and inside any hollow it encloses, is zero, and the excess charge sits on the outer surface — which is why a radio sealed in a metal box goes silent, and why a car protects its passengers from lightning. A second trap is to assume the charge spreads evenly over any shape, as it does on a sphere. If the charge on a pear-shaped conductor were spread evenly, its surface would not all be at the same potential, and the charges would move. To keep one potential everywhere, more charge must gather where the surface curves sharply. That is why charge crowds at the pointed end, why the field is strongest there, and why lightning conductors and the sparks from a Van de Graaff come from points and edges rather than flat faces.',
+    targetedMisconceptions: [`${CNDR}:MC-FIELD-INSIDE-CONDUCTOR`, `${CNDR}:MC-CHARGE-UNIFORM-ON-SURFACE`],
+    source: `${CNDR_SRC} — MC-FIELD-INSIDE-CONDUCTOR + MC-CHARGE-UNIFORM-ON-SURFACE, conflict_evidence/bridge_text/replacement_text`,
+  },
+]
+
+const CNDR_PROBES: SeedProbe[] = [
+  {
+    conceptId: CNDR,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'The surface charge density on part of a charged conductor is 2.0 × 10⁻⁶ C/m². What is the electric field just outside that part? (ε₀ = 8.85 × 10⁻¹² F/m)',
+    choices: [
+      { text: 'About 2.3 × 10⁵ V/m, perpendicular to the surface', isCorrect: true },
+      { text: 'About 1.1 × 10⁵ V/m, perpendicular to the surface', isCorrect: false },
+      { text: 'About 2.3 × 10⁵ V/m, along the surface', isCorrect: false },
+      { text: 'Zero — the field of a conductor is always zero', isCorrect: false },
+    ],
+    correctValue: 'about 2.3 × 10⁵ V/m, perpendicular',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [],
+    source: `${CNDR_SRC} — TA-3 P34 (E = σ/ε₀); 1.1 × 10⁵ uses σ/2ε₀, the sheet-of-charge result`,
+  },
+  {
+    conceptId: CNDR,
+    subjectSlug: 'physics',
+    probeKind: 'mcq',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A small charged metal ball is touched to the INSIDE wall of a hollow metal conductor. What happens to the ball\'s charge?',
+    choices: [
+      { text: 'All of it moves to the outer surface of the hollow conductor', isCorrect: true },
+      { text: 'It spreads evenly through the whole thickness of the metal', isCorrect: false, misconceptionId: `${CNDR}:MC-FIELD-INSIDE-CONDUCTOR` },
+      { text: 'It stays on the inner wall where it was touched', isCorrect: false, misconceptionId: `${CNDR}:MC-FIELD-INSIDE-CONDUCTOR` },
+      { text: 'Half stays on the ball and half moves to the conductor', isCorrect: false },
+    ],
+    correctValue: 'all moves to the outer surface',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CNDR}:MC-FIELD-INSIDE-CONDUCTOR`],
+    source: `${CNDR_SRC} — TA-6 P79 predict item (the Van de Graaff principle)`,
+  },
+  {
+    conceptId: CNDR,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A hollow metal sphere is given a large positive charge. What is the electric field at a point inside the hollow?',
+    choices: [
+      { text: 'Zero — the free electrons rearrange until the field inside is cancelled; the charge sits on the outer surface', isCorrect: true },
+      { text: 'Strongest at the centre — the sphere is full of charge', isCorrect: false, misconceptionId: `${CNDR}:MC-FIELD-INSIDE-CONDUCTOR` },
+      { text: 'The same as just outside the sphere', isCorrect: false, misconceptionId: `${CNDR}:MC-FIELD-INSIDE-CONDUCTOR` },
+    ],
+    correctValue: 'zero',
+    difficulty: ProbeDifficulty.DEVELOPING,
+    targetedMisconceptions: [`${CNDR}:MC-FIELD-INSIDE-CONDUCTOR`],
+    source: `${CNDR_SRC} — DB-2 item and MC-FIELD-INSIDE-CONDUCTOR conflict_evidence`,
+  },
+  {
+    conceptId: CNDR,
+    subjectSlug: 'physics',
+    probeKind: 'misconception_probe',
+    gradeBand: GradeBand.HIGH,
+    stem: 'A pear-shaped metal object is given a charge. Where is the charge per unit area greatest?',
+    choices: [
+      { text: 'At the pointed end, where the surface curves most sharply', isCorrect: true },
+      { text: 'It is spread evenly over the whole surface', isCorrect: false, misconceptionId: `${CNDR}:MC-CHARGE-UNIFORM-ON-SURFACE` },
+      { text: 'At the broad, rounded end, where there is more room', isCorrect: false, misconceptionId: `${CNDR}:MC-CHARGE-UNIFORM-ON-SURFACE` },
+    ],
+    correctValue: 'at the pointed end',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [`${CNDR}:MC-CHARGE-UNIFORM-ON-SURFACE`],
+    source: `${CNDR_SRC} — DB-3 shape check and MC-CHARGE-UNIFORM-ON-SURFACE trigger_signal`,
+  },
+  {
+    conceptId: CNDR,
+    subjectSlug: 'physics',
+    probeKind: 'short_answer',
+    gradeBand: GradeBand.HIGH,
+    stem: 'Why are people inside a car usually safe when lightning strikes it?',
+    choices: [
+      { text: 'The metal body acts as a Faraday cage: the charge flows over the outer surface to the ground and the field inside stays zero', isCorrect: true },
+      { text: 'The rubber tyres insulate the car from the ground', isCorrect: false },
+      { text: 'Lightning cannot strike moving objects', isCorrect: false },
+    ],
+    correctValue: 'Faraday cage — charge stays on the outer metal',
+    difficulty: ProbeDifficulty.PROFICIENT,
+    targetedMisconceptions: [],
+    source: `${CNDR_SRC} — DB-1 item and §8 P76`,
+  },
+]
+
 // Batch export spreads for the extension (kept with the concepts above).
 const PHYS_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...DENS_EXPLANATIONS,
@@ -53834,6 +54282,10 @@ const PHYS_EXTENSION_EXPLANATIONS: SeedExplanation[] = [
   ...MOGE_EXPLANATIONS,
   ...DOME_EXPLANATIONS,
   ...CNST_EXPLANATIONS,
+  ...TFLM_EXPLANATIONS,
+  ...GRAT_EXPLANATIONS,
+  ...RESP_EXPLANATIONS,
+  ...CNDR_EXPLANATIONS,
 ]
 
 const PHYS_EXTENSION_PROBES: SeedProbe[] = [
@@ -53857,6 +54309,10 @@ const PHYS_EXTENSION_PROBES: SeedProbe[] = [
   ...MOGE_PROBES,
   ...DOME_PROBES,
   ...CNST_PROBES,
+  ...TFLM_PROBES,
+  ...GRAT_PROBES,
+  ...RESP_PROBES,
+  ...CNDR_PROBES,
 ]
 
 // ─── Batch export ────────────────────────────────────────────────────────────

@@ -111,6 +111,7 @@ import { buildExperimentalGraphScene, buildSimpleMachineScene, buildVariationOfG
 import { buildCoolingScene, buildBlackbodyScene, buildEnergyResourcesScene, buildEchoScene } from '@/lib/teaching/sceneGenerators/physicsExtensionScenesB3'
 import { buildHumanEyeScene, buildScatteringScene, buildSystemEnergyScene, buildCellsScene } from '@/lib/teaching/sceneGenerators/physicsExtensionScenesB4'
 import { buildGalvanometerScene, buildGeneratorScene, buildHouseholdScene, buildAtwoodScene } from '@/lib/teaching/sceneGenerators/physicsExtensionScenesB5'
+import { buildThinFilmScene, buildGratingScene, buildResolvingPowerScene, buildConductorScene } from '@/lib/teaching/sceneGenerators/physicsExtensionScenesB6'
 import {
   buildDisplacementScene, buildVelocityScene, buildAccelerationScene, buildRelativeMotionScene, buildTensionScene,
   buildConservativeForcesScene, buildAngularMomentumScene, buildAngularMomentumConservationScene,
@@ -575,6 +576,11 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'phys.em.motors-and-generators': buildGeneratorScene,
   'phys.em.domestic-electricity': buildHouseholdScene,
   'phys.mech.constraint-motion': buildAtwoodScene,
+  // Coverage-driven KG extension, batch 6 (2026-10-03). See physicsExtensionScenesB6.ts.
+  'phys.opt.thin-film-interference': buildThinFilmScene,
+  'phys.opt.diffraction-grating': buildGratingScene,
+  'phys.opt.resolving-power': buildResolvingPowerScene,
+  'phys.em.conductors-electrostatics': buildConductorScene,
   // Batch 15 (2026-09-30): promoted from domain scope. See physicsCoreScenesB15.ts.
   'phys.mech.displacement':           buildDisplacementScene,
   'phys.mech.velocity':               buildVelocityScene,

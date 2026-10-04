@@ -76,6 +76,7 @@ describe('phys.em: the circuit/field split is honoured', () => {
     'phys.em.lenzs-law', 'phys.em.maxwells-equations', 'phys.em.electromagnetic-waves',
     // coverage-driven KG extension (2026-10-03)
     'phys.em.electrostatic-potential-energy', 'phys.em.motors-and-generators',
+    'phys.em.conductors-electrostatics',
   ]
   const CIRCUITS = [
     'phys.em.electric-current', 'phys.em.ohms-law', 'phys.em.dc-circuits',

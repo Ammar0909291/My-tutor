@@ -4,10 +4,10 @@
   "status": "production",
   "build_date": "2026-06-29",
   "statistics": {
-    "total_concepts": 258,
+    "total_concepts": 262,
     "total_domains": 12,
-    "total_requires_edges": 323,
-    "total_unlocks_edges": 322,
+    "total_requires_edges": 329,
+    "total_unlocks_edges": 328,
     "total_cross_links": 0
   },
   "domains": [
@@ -34,12 +34,12 @@
     {
       "key": "opt",
       "name": "Optics",
-      "count": 18
+      "count": 21
     },
     {
       "key": "em",
       "name": "Electromagnetism",
-      "count": 40
+      "count": 41
     },
     {
       "key": "mod",
@@ -3450,7 +3450,8 @@
       "unlocks": [
         "phys.opt.dispersion",
         "phys.opt.lenses",
-        "phys.opt.total-internal-reflection"
+        "phys.opt.total-internal-reflection",
+        "phys.opt.thin-film-interference"
       ]
     },
     {
@@ -3590,7 +3591,9 @@
         "NCERT Physics Class 12 Ch.9"
       ],
       "children": [],
-      "unlocks": []
+      "unlocks": [
+        "phys.opt.resolving-power"
+      ]
     },
     {
       "id": "phys.opt.dispersion",
@@ -3703,8 +3706,38 @@
       ],
       "children": [],
       "unlocks": [
-        "phys.opt.diffraction"
+        "phys.opt.diffraction",
+        "phys.opt.thin-film-interference"
       ]
+    },
+    {
+      "id": "phys.opt.thin-film-interference",
+      "name": "Thin-film Interference",
+      "aliases": [
+        "soap film colours",
+        "anti-reflection coating",
+        "oil film"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.opt.youngs-experiment",
+        "phys.opt.refraction"
+      ],
+      "related": [
+        "phys.opt.diffraction-grating"
+      ],
+      "cross_links": [],
+      "description": "Light reflected from the two surfaces of a thin film interferes with optical path difference 2nt; counting the half-wave phase flips on reflection from a denser medium decides which thicknesses are bright, explaining soap-film colours and quarter-wave anti-reflection coatings t = lambda/(4n).",
+      "difficulty": "advanced",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "NCERT Physics Class 12 Ch.10",
+        "Halliday Resnick Ch.35"
+      ],
+      "children": [],
+      "unlocks": []
     },
     {
       "id": "phys.opt.diffraction",
@@ -3731,7 +3764,9 @@
       ],
       "children": [],
       "unlocks": [
-        "phys.opt.single-slit"
+        "phys.opt.single-slit",
+        "phys.opt.diffraction-grating",
+        "phys.opt.resolving-power"
       ]
     },
     {
@@ -3754,6 +3789,64 @@
       "mastery_threshold": 0.8,
       "references": [
         "NCERT Physics Class 12 Ch.10"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.opt.diffraction-grating",
+      "name": "Diffraction Grating and Spectra",
+      "aliases": [
+        "grating equation",
+        "grating spectrum",
+        "lines per mm"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.opt.diffraction"
+      ],
+      "related": [
+        "phys.opt.dispersion",
+        "phys.opt.youngs-experiment"
+      ],
+      "cross_links": [],
+      "description": "A grating of many equally spaced slits gives sharp maxima where d sin(theta) = m lambda with d = 1/N; finer gratings spread orders further, the highest order is limited by sin(theta) <= 1, and longer wavelengths are diffracted most, giving spectra.",
+      "difficulty": "advanced",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "NCERT Physics Class 12 Ch.10",
+        "Halliday Resnick Ch.36"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.opt.resolving-power",
+      "name": "Resolving Power of Optical Instruments",
+      "aliases": [
+        "Rayleigh criterion",
+        "diffraction limit",
+        "limit of resolution"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.opt.diffraction",
+        "phys.opt.optical-instruments"
+      ],
+      "related": [
+        "phys.opt.diffraction-grating"
+      ],
+      "cross_links": [],
+      "description": "Diffraction at an aperture of diameter D spreads each point into an Airy disc, so two points are just resolved at an angular separation of about 1.22 lambda/D; larger apertures and shorter wavelengths resolve finer detail, while extra magnification adds none.",
+      "difficulty": "advanced",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "NCERT Physics Class 12 Ch.10",
+        "Halliday Resnick Ch.36"
       ],
       "children": [],
       "unlocks": []
@@ -3984,7 +4077,8 @@
       "unlocks": [
         "phys.em.capacitance",
         "phys.em.ohms-law",
-        "phys.em.electrostatic-potential-energy"
+        "phys.em.electrostatic-potential-energy",
+        "phys.em.conductors-electrostatics"
       ]
     },
     {
@@ -4010,6 +4104,35 @@
       "mastery_threshold": 0.75,
       "references": [
         "NCERT Physics Class 12 Ch.2"
+      ],
+      "children": [],
+      "unlocks": []
+    },
+    {
+      "id": "phys.em.conductors-electrostatics",
+      "name": "Conductors, Shielding and Van de Graaff",
+      "aliases": [
+        "Faraday cage",
+        "electrostatic shielding",
+        "Van de Graaff generator"
+      ],
+      "parent": null,
+      "requires": [
+        "phys.em.electric-potential"
+      ],
+      "related": [
+        "phys.em.gauss-law",
+        "phys.em.capacitance"
+      ],
+      "cross_links": [],
+      "description": "In electrostatic equilibrium the field inside a conductor is zero, the conductor is an equipotential and excess charge sits on its outer surface, with E = sigma/epsilon0 just outside and charge crowding at sharp points; closed conducting shells shield their interior.",
+      "difficulty": "advanced",
+      "estimated_hours": 2,
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "references": [
+        "NCERT Physics Class 12 Ch.2",
+        "Halliday Resnick Ch.23"
       ],
       "children": [],
       "unlocks": []
