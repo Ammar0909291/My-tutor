@@ -188,3 +188,12 @@ Corrupted 113 (Step 1 set, unchanged): 70 caught, 26 correctly abstained, 6 inva
 negatives → recall 69/81 = 85.2 %. Precision: N1+N2 78/78 = 100 %; N3 1/11 = 9.1 % (cannot tell
 a new scenario from a wrong value). Verdict: step 3 shadow may proceed for N1+N2 only (call
 without authored context); N3 not ready. Step 3 waits on the owner.
+
+## 2026-10-04 — numeric fact-check, step 3 (production shadow, N1 + N2) — owner instruction
+Deployed `695a589b`: log-only N1+N2 on every served chat reply; N3 unreachable. Live shadow 34
+replies, 0 flags, no errors. Production replay through the same function over 14,069 distinct
+stored tutor sentences (19,394 occurrences): 49 findings, 3 real errors, 45 false positives, 1
+insufficient evidence → precision 6.3 % (N1 4.5 %, N2 25 %). False positives are almost all input
+format (LaTeX, list bullets, Unicode minus signs, algebra "x", implicit-product precedence).
+Recommendation: NEEDS IMPROVEMENT; no enforcement. Full record:
+`docs/qa/numeric-fact-check-step3/REPORT.md`. Detector unchanged; Step 4 not started.

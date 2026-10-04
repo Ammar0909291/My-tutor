@@ -1,0 +1,906 @@
+[
+ {
+  "n": 1,
+  "occurrences": 1,
+  "nonQaAccount": false,
+  "firstSeen": "2026-09-28",
+  "text": "Adding them gives **‑0.66 + 4.67 ≈ 4.01 kg·m s⁻¹**, essentially the same as before (the tiny difference is just rounding).",
+  "findings": [
+   {
+    "detector": "N1",
+    "type": "arithmetic",
+    "claimed": "4.01",
+    "expected": "5.33",
+    "reason": "3 tokens evaluate to 5.33, stated 4.01",
+    "sentence": "Adding them gives **‑0.66 + 4.67 ≈ 4.01 kg·m s⁻¹**, essentially the same as before (the tiny difference is just rounding).",
+    "class": 2,
+    "review": "U+2011 non-breaking hyphen used as minus (\"‑0.66\") not read as minus; 4.01 is correct"
+   }
+  ]
+ },
+ {
+  "n": 2,
+  "occurrences": 1,
+  "nonQaAccount": false,
+  "firstSeen": "2026-10-03",
+  "text": "\\Sigma(\\text{broken}) &= 4(413) + 242 = 1\\,652 + 242 = 1\\,894\\ \\text{kJ mol}^{-1} \\\\",
+  "findings": [
+   {
+    "detector": "N1",
+    "type": "arithmetic",
+    "claimed": "1",
+    "expected": "1894",
+    "reason": "6 tokens evaluate to 1894, stated 1",
+    "sentence": "\\Sigma(\\text{broken}) &= 4(413) + 242 = 1\\,652 + 242 = 1\\,894\\ \\text{kJ mol}^{-1} \\\\",
+    "class": 2,
+    "review": "LaTeX thin-space digit group \"1\\,652\" read as 1; 4(413)+242 = 1 894 is correct"
+   }
+  ]
+ },
+ {
+  "n": 3,
+  "occurrences": 1,
+  "nonQaAccount": false,
+  "firstSeen": "2026-09-28",
+  "text": "- 4 × 2 = 8  ",
+  "findings": [
+   {
+    "detector": "N1",
+    "type": "arithmetic",
+    "claimed": "8",
+    "expected": "-8",
+    "reason": "4 tokens evaluate to -8, stated 8",
+    "sentence": "- 4 × 2 = 8",
+    "class": 2,
+    "review": "list bullet \"- \" read as a minus sign; 4 × 2 = 8 is correct"
+   }
+  ]
+ },
+ {
+  "n": 4,
+  "occurrences": 1,
+  "nonQaAccount": false,
+  "firstSeen": "2026-10-03",
+  "text": "Check: 3+2+1+1+1=8=2×4=2(n-1) ✓.",
+  "findings": [
+   {
+    "detector": "N1",
+    "type": "arithmetic",
+    "claimed": "2",
+    "expected": "8",
+    "reason": "3 tokens evaluate to 8, stated 2",
+    "sentence": "Check: 3+2+1+1+1=8=2×4=2(n-1) ✓.",
+    "class": 2,
+    "review": "right-hand side \"2(n-1)\" cut to \"2\" (variable after an opening bracket); 8 = 2 × 4 is correct"
+   }
+  ]
+ },
+ {
+  "n": 5,
+  "occurrences": 1,
+  "nonQaAccount": true,
+  "firstSeen": "2026-08-18",
+  "text": "If you have 2x - 4 = 10, what value of x makes this equation true?",
+  "findings": [
+   {
+    "detector": "N1",
+    "type": "arithmetic",
+    "claimed": "10",
+    "expected": "-8",
+    "reason": "4 tokens evaluate to -8, stated 10",
+    "sentence": "If you have 2x - 4 = 10, what value of x makes this equation true?",
+    "class": 2,
+    "review": "algebra variable \"x\" in \"2x - 4\" read as a multiplication sign; problem statement, not arithmetic"
+   }
+  ]
+ },
+ {
+  "n": 6,
+  "occurrences": 1,
+  "nonQaAccount": true,
+  "firstSeen": "2026-10-04",
+  "text": "- 1 + 3 + 5 + 7 = 16 = 4²",
+  "findings": [
+   {
+    "detector": "N1",
+    "type": "arithmetic",
+    "claimed": "16",
+    "expected": "14",
+    "reason": "8 tokens evaluate to 14, stated 16",
+    "sentence": "- 1 + 3 + 5 + 7 = 16 = 4²",
+    "class": 2,
+    "review": "list bullet read as minus; 1+3+5+7 = 16 is correct"
+   }
+  ]
+ },
+ {
+  "n": 7,
+  "occurrences": 1,
+  "nonQaAccount": false,
+  "firstSeen": "2026-08-28",
+  "text": "½(2)(3²) + ½(1)(2²) = 9 J.",
+  "findings": [
+   {
+    "detector": "N1",
+    "type": "arithmetic",
+    "claimed": "9",
+    "expected": "11",
+    "reason": "17 tokens evaluate to 11, stated 9",
+    "sentence": "½(2)(3²) + ½(1)(2²) = 9 J.",
+    "class": 1,
+    "review": "½(2)(3²) + ½(1)(2²) = 9 + 2 = 11 J, stated 9 J — real arithmetic error (elsewhere the same lesson states 9 J + 2 J = 11 J)"
+   }
+  ]
+ },
+ {
+  "n": 8,
+  "occurrences": 1,
+  "nonQaAccount": false,
+  "firstSeen": "2026-09-13",
+  "text": " FC = 6 – 4 – ½ × 6 = 6 – 4 – 3 = **–1**",
+  "findings": [
+   {
+    "detector": "N1",
+    "type": "arithmetic",
+    "claimed": "6",
+    "expected": "3",
+    "reason": "3 tokens evaluate to 3, stated 6",
+    "sentence": "FC = 6 – 4 – ½ × 6 = 6 – 4 – 3 = **–1**",
+    "class": 2,
+    "review": "en dash \"–\" used as minus not read as minus; 6 − 4 − 3 = −1 is correct"
+   }
+  ]
+ },
+ {
+  "n": 9,
+  "occurrences": 1,
+  "nonQaAccount": false,
+  "firstSeen": "2026-10-04",
+  "text": "D) efficiency = 350 / 1000 = 35 %",
+  "findings": [
+   {
+    "detector": "N1",
+    "type": "arithmetic",
+    "claimed": "35",
+    "expected": "0.35",
+    "reason": "3 tokens evaluate to 0.35, stated 35",
+    "sentence": "D) efficiency = 350 / 1000 = 35 %",
+    "class": 2,
+    "review": "narrow no-break space (U+202F) before \"%\" not accepted as a unit gap, so the ×100 percent conversion is not applied; 350/1000 = 35 % is correct"
+   }
+  ]
+ },
+ {
+  "n": 10,
+  "occurrences": 1,
+  "nonQaAccount": false,
+  "firstSeen": "2026-10-04",
+  "text": "- Across the top, in green, the relationship **“efficiency = 350 / 1000 = 35 %”** tells us how much of the input ends up as useful electricity.",
+  "findings": [
+   {
+    "detector": "N1",
+    "type": "arithmetic",
+    "claimed": "35",
+    "expected": "0.35",
+    "reason": "3 tokens evaluate to 0.35, stated 35",
+    "sentence": "- Across the top, in green, the relationship **“efficiency = 350 / 1000 = 35 %”** tells us how much of the input ends up as useful electricity.",
+    "class": 2,
+    "review": "same as #9 (U+202F before \"%\")"
+   }
+  ]
+ },
+ {
+  "n": 11,
+  "occurrences": 1,
+  "nonQaAccount": false,
+  "firstSeen": "2026-09-11",
+  "text": "\\( r_1 = 0.529 \\times 1^2 = 0.529 \\) Å.",
+  "findings": [
+   {
+    "detector": "N1",
+    "type": "arithmetic",
+    "claimed": "0.529",
+    "expected": "1",
+    "reason": "3 tokens evaluate to 1, stated 0.529",
+    "sentence": "\\( r_1 = 0.529 \\times 1^2 = 0.529 \\) Å.",
+    "class": 2,
+    "review": "LaTeX \"\\times\" not read as multiplication; 0.529 × 1² = 0.529 is correct"
+   }
+  ]
+ },
+ {
+  "n": 12,
+  "occurrences": 1,
+  "nonQaAccount": false,
+  "firstSeen": "2026-09-06",
+  "text": "The overall formation constant β₃ is the product of the three stepwise constants, so β₃ = 10⁴ × 10³ × 10² = 10⁹.",
+  "findings": [
+   {
+    "detector": "N1",
+    "type": "arithmetic",
+    "claimed": "10",
+    "expected": "1.00e+9",
+    "reason": "5 tokens evaluate to 1.00e+9, stated 10",
+    "sentence": "The overall formation constant β₃ is the product of the three stepwise constants, so β₃ = 10⁴ × 10³ × 10² = 10⁹.",
+    "class": 2,
+    "review": "bare power of ten \"10⁹\" followed by a full stop not parsed (read as 10); 10⁴ × 10³ × 10² = 10⁹ is correct"
+   }
+  ]
+ },
+ {
+  "n": 13,
+  "occurrences": 1,
+  "nonQaAccount": false,
+  "firstSeen": "2026-09-02",
+  "text": "\\( \\text{KE} = \\tfrac12 \\times 10 \\times 12^2 = 720 \\text{ joules}.",
+  "findings": [
+   {
+    "detector": "N1",
+    "type": "arithmetic",
+    "claimed": "720",
+    "expected": "144",
+    "reason": "3 tokens evaluate to 144, stated 720",
+    "sentence": "\\( \\text{KE} = \\tfrac12 \\times 10 \\times 12^2 = 720 \\text{ joules}.",
+    "class": 2,
+    "review": "LaTeX \"\\tfrac12 \\times\" not read; ½ × 10 × 12² = 720 is correct"
+   }
+  ]
+ },
+ {
+  "n": 14,
+  "occurrences": 1,
+  "nonQaAccount": false,
+  "firstSeen": "2026-10-04",
+  "text": "The calculation gives F = (0.50)(4.0)^2 / 2.0 = 4.0 N, which matches the required centripetal force.",
+  "findings": [
+   {
+    "detector": "N1",
+    "type": "arithmetic",
+    "claimed": "4.0 N",
+    "expected": "2",
+    "reason": "10 tokens evaluate to 2, stated 4",
+    "sentence": "The calculation gives F = (0.50)(4.0)^2 / 2.0 = 4.0 N, which matches the required centripetal force.",
+    "class": 2,
+    "review": "implicit product binds before the exponent: (0.50)(4.0)^2 evaluated as (0.50×4.0)²; 0.50 × 16 / 2.0 = 4.0 is correct"
+   }
+  ]
+ },
+ {
+  "n": 15,
+  "occurrences": 1,
+  "nonQaAccount": false,
+  "firstSeen": "2026-09-28",
+  "text": "Adding these post‑collision momenta gives ‑0.66 + 4.67 ≈ 4.01 kilogram‑metres per second to the right – essentially the same total as before (the tiny difference is just rounding).",
+  "findings": [
+   {
+    "detector": "N1",
+    "type": "arithmetic",
+    "claimed": "4.01",
+    "expected": "5.33",
+    "reason": "3 tokens evaluate to 5.33, stated 4.01",
+    "sentence": "Adding these post‑collision momenta gives ‑0.66 + 4.67 ≈ 4.01 kilogram‑metres per second to the right – essentially the same total as before (the tiny difference is just rounding).",
+    "class": 2,
+    "review": "U+2011 minus, as #1"
+   }
+  ]
+ },
+ {
+  "n": 16,
+  "occurrences": 1,
+  "nonQaAccount": false,
+  "firstSeen": "2026-08-26",
+  "text": "- 1 ÷ 3 = 0.333… → 0.\\(\\overline{3}\\) (the 3 repeats forever) ",
+  "findings": [
+   {
+    "detector": "N1",
+    "type": "arithmetic",
+    "claimed": "0.333",
+    "expected": "-0.333",
+    "reason": "4 tokens evaluate to -0.333, stated 0.333",
+    "sentence": "- 1 ÷ 3 = 0.333… → 0.",
+    "class": 2,
+    "review": "list bullet read as minus; 1 ÷ 3 = 0.333… is correct"
+   }
+  ]
+ },
+ {
+  "n": 17,
+  "occurrences": 1,
+  "nonQaAccount": false,
+  "firstSeen": "2026-09-13",
+  "text": "FC = 6 – 4 – ½ × 2 = 6 – 4 – 1 = **–1**.)",
+  "findings": [
+   {
+    "detector": "N1",
+    "type": "arithmetic",
+    "claimed": "6",
+    "expected": "1",
+    "reason": "3 tokens evaluate to 1, stated 6",
+    "sentence": "FC = 6 – 4 – ½ × 2 = 6 – 4 – 1 = **–1**.",
+    "class": 2,
+    "review": "en dash minus, as #8"
+   }
+  ]
+ },
+ {
+  "n": 18,
+  "occurrences": 1,
+  "nonQaAccount": false,
+  "firstSeen": "2026-09-10",
+  "text": "\\(K = \\tfrac{1}{2} m v^2 = \\tfrac{1}{2} \\times 5 \\times 6^2 = 90\\) joules, not \\(5 \\times 6\\).",
+  "findings": [
+   {
+    "detector": "N1",
+    "type": "arithmetic",
+    "claimed": "90",
+    "expected": "36",
+    "reason": "3 tokens evaluate to 36, stated 90",
+    "sentence": "\\(K = \\tfrac{1}{2} m v^2 = \\tfrac{1}{2} \\times 5 \\times 6^2 = 90\\) joules, not \\(5 \\times 6\\).",
+    "class": 2,
+    "review": "LaTeX \"\\tfrac{1}{2} \\times\" not read; ½ × 5 × 6² = 90 is correct"
+   }
+  ]
+ },
+ {
+  "n": 19,
+  "occurrences": 1,
+  "nonQaAccount": false,
+  "firstSeen": "2026-09-13",
+  "text": "So for \\(\\text{He}^{+}\\) the ground state (\\(n=1\\)) energy is \\(-13.6 \\times 2^2 = -54.4\\,\\text{eV}\\).",
+  "findings": [
+   {
+    "detector": "N1",
+    "type": "arithmetic",
+    "claimed": "-54.4",
+    "expected": "4",
+    "reason": "3 tokens evaluate to 4, stated -54.4",
+    "sentence": "So for \\(\\text{He}^{+}\\) the ground state (\\(n=1\\)) energy is \\(-13.6 \\times 2^2 = -54.4\\,\\text{eV}\\).",
+    "class": 2,
+    "review": "LaTeX \"\\times\" not read; −13.6 × 2² = −54.4 is correct"
+   }
+  ]
+ },
+ {
+  "n": 20,
+  "occurrences": 1,
+  "nonQaAccount": false,
+  "firstSeen": "2026-08-30",
+  "text": "- 2.5 × 1 000 = 2 500.",
+  "findings": [
+   {
+    "detector": "N1",
+    "type": "arithmetic",
+    "claimed": "2 500",
+    "expected": "-2500",
+    "reason": "4 tokens evaluate to -2500, stated 2500",
+    "sentence": "- 2.5 × 1 000 = 2 500.",
+    "class": 2,
+    "review": "list bullet read as minus; 2.5 × 1 000 = 2 500 is correct"
+   }
+  ]
+ },
+ {
+  "n": 21,
+  "occurrences": 1,
+  "nonQaAccount": false,
+  "firstSeen": "2026-09-11",
+  "text": "For 0.1 mol L⁻¹ CaCl₂, Ca²⁺ contributes \\(0.1 \\times 2^2 = 0.4\\) and each Cl⁻ contributes \\(0.2 \\times 1^2 = 0.2\\).",
+  "findings": [
+   {
+    "detector": "N1",
+    "type": "arithmetic",
+    "claimed": "0.4",
+    "expected": "4",
+    "reason": "3 tokens evaluate to 4, stated 0.4",
+    "sentence": "For 0.1 mol L⁻¹ CaCl₂, Ca²⁺ contributes \\(0.1 \\times 2^2 = 0.4\\) and each Cl⁻ contributes \\(0.2 \\times 1^2 = 0.2\\).",
+    "class": 2,
+    "review": "LaTeX \"\\times\"; 0.1 × 2² = 0.4 is correct"
+   },
+   {
+    "detector": "N1",
+    "type": "arithmetic",
+    "claimed": "0.2",
+    "expected": "1",
+    "reason": "3 tokens evaluate to 1, stated 0.2",
+    "sentence": "For 0.1 mol L⁻¹ CaCl₂, Ca²⁺ contributes \\(0.1 \\times 2^2 = 0.4\\) and each Cl⁻ contributes \\(0.2 \\times 1^2 = 0.2\\).",
+    "class": 2,
+    "review": "LaTeX \"\\times\"; 0.2 × 1² = 0.2 is correct"
+   }
+  ]
+ },
+ {
+  "n": 22,
+  "occurrences": 1,
+  "nonQaAccount": false,
+  "firstSeen": "2026-09-10",
+  "text": "The axis is \\(d=\\frac{L}{2}=0.5\\;\\text{m}\\) from the centre, so \\(I_{\\text{end}} = 0.167 + 2(0.5)^2 = 0.",
+  "findings": [
+   {
+    "detector": "N1",
+    "type": "arithmetic",
+    "claimed": "0",
+    "expected": "1.167",
+    "reason": "8 tokens evaluate to 1.167, stated 0",
+    "sentence": "The axis is \\(d=\\frac{L}{2}=0.5\\;\\text{m}\\) from the centre, so \\(I_{\\text{end}} = 0.167 + 2(0.5)^2 = 0.",
+    "class": 4,
+    "review": "replay split cut the stated result to \"0.\"; the evaluation also used the implicit-product/exponent precedence defect (2(0.5)² → 1). The true value 0.667 cannot be confirmed from the replayed text"
+   }
+  ]
+ },
+ {
+  "n": 23,
+  "occurrences": 1,
+  "nonQaAccount": false,
+  "firstSeen": "2026-09-06",
+  "text": "So 10⁴ × 10³ × 10² = 10⁹.",
+  "findings": [
+   {
+    "detector": "N1",
+    "type": "arithmetic",
+    "claimed": "10",
+    "expected": "1.00e+9",
+    "reason": "5 tokens evaluate to 1.00e+9, stated 10",
+    "sentence": "So 10⁴ × 10³ × 10² = 10⁹.",
+    "class": 2,
+    "review": "bare power of ten before a full stop, as #12"
+   }
+  ]
+ },
+ {
+  "n": 24,
+  "occurrences": 5,
+  "nonQaAccount": false,
+  "firstSeen": "2026-09-04",
+  "text": "A) No — the secondary maxima DECAY under a sinc² envelope.\nThe first sits near α ≈ 3π/2 with I/I₀ ≈ 4/(9π²) ≈ 0.045 — about 22× dimmer than the central peak; the second near α ≈ 5π/2 with I/I₀ ≈ 4/(25π²) ≈ 0.016, about 61× dimmer.",
+  "findings": [
+   {
+    "detector": "N1",
+    "type": "arithmetic",
+    "claimed": "0.045",
+    "expected": "0.005",
+    "reason": "7 tokens evaluate to 0.005, stated 0.045",
+    "sentence": "The first sits near α ≈ 3π/2 with I/I₀ ≈ 4/(9π²) ≈ 0.045 — about 22× dimmer than the central peak; the second near α ≈ 5π/2 with I/I₀ ≈ 4/(25π²) ≈ 0.016, about 61× dimmer.",
+    "class": 2,
+    "review": "implicit product binds before the exponent: 9π² evaluated as (9π)²; 4/(9π²) = 0.045 is correct"
+   },
+   {
+    "detector": "N1",
+    "type": "arithmetic",
+    "claimed": "0.016",
+    "expected": "6.48e-4",
+    "reason": "7 tokens evaluate to 6.48e-4, stated 0.016",
+    "sentence": "The first sits near α ≈ 3π/2 with I/I₀ ≈ 4/(9π²) ≈ 0.045 — about 22× dimmer than the central peak; the second near α ≈ 5π/2 with I/I₀ ≈ 4/(25π²) ≈ 0.016, about 61× dimmer.",
+    "class": 2,
+    "review": "same defect; 4/(25π²) = 0.016 is correct"
+   }
+  ]
+ },
+ {
+  "n": 25,
+  "occurrences": 1,
+  "nonQaAccount": false,
+  "firstSeen": "2026-09-11",
+  "text": "λ ≈ 6.626 × 10⁻³⁴ ÷ (0.145 × 40) ≈ 1.1 × 10⁻³⁵ metres.",
+  "findings": [
+   {
+    "detector": "N1",
+    "type": "arithmetic",
+    "claimed": "1.1 × 10⁻³⁵",
+    "expected": "1.14e-34",
+    "reason": "7 tokens evaluate to 1.14e-34, stated 1.10e-35",
+    "sentence": "λ ≈ 6.626 × 10⁻³⁴ ÷ (0.145 × 40) ≈ 1.1 × 10⁻³⁵ metres.",
+    "class": 1,
+    "review": "6.626 × 10⁻³⁴ ÷ (0.145 × 40) = 1.14 × 10⁻³⁴, stated 1.1 × 10⁻³⁵ — real error, off by a factor of 10"
+   }
+  ]
+ },
+ {
+  "n": 26,
+  "occurrences": 1,
+  "nonQaAccount": true,
+  "firstSeen": "2026-08-18",
+  "text": "What is the unique solution for x in the equation 3x - 5 = 10?",
+  "findings": [
+   {
+    "detector": "N1",
+    "type": "arithmetic",
+    "claimed": "10",
+    "expected": "-15",
+    "reason": "4 tokens evaluate to -15, stated 10",
+    "sentence": "What is the unique solution for x in the equation 3x - 5 = 10?",
+    "class": 2,
+    "review": "algebra variable \"x\" read as ×; problem statement"
+   }
+  ]
+ },
+ {
+  "n": 27,
+  "occurrences": 1,
+  "nonQaAccount": false,
+  "firstSeen": "2026-10-02",
+  "text": "Now try solving the equation 4x − 5 = 19 using the same steps and let me know what you get.",
+  "findings": [
+   {
+    "detector": "N1",
+    "type": "arithmetic",
+    "claimed": "19",
+    "expected": "-20",
+    "reason": "4 tokens evaluate to -20, stated 19",
+    "sentence": "Now try solving the equation 4x − 5 = 19 using the same steps and let me know what you get.",
+    "class": 2,
+    "review": "algebra variable \"x\" read as ×; problem statement"
+   }
+  ]
+ },
+ {
+  "n": 28,
+  "occurrences": 1,
+  "nonQaAccount": false,
+  "firstSeen": "2026-09-28",
+  "text": "Final momentum = 2 kg × (‑0.33 m s⁻¹) + 1 kg × 4.67 m s⁻¹ = **‑0.66 + 4.67 ≈ 4.01 kg·m s⁻¹**.",
+  "findings": [
+   {
+    "detector": "N1",
+    "type": "arithmetic",
+    "claimed": "4.01",
+    "expected": "5.33",
+    "reason": "3 tokens evaluate to 5.33, stated 4.01",
+    "sentence": "Final momentum = 2 kg × (‑0.33 m s⁻¹) + 1 kg × 4.67 m s⁻¹ = **‑0.66 + 4.67 ≈ 4.01 kg·m s⁻¹**.",
+    "class": 2,
+    "review": "U+2011 minus, as #1"
+   }
+  ]
+ },
+ {
+  "n": 29,
+  "occurrences": 1,
+  "nonQaAccount": false,
+  "firstSeen": "2026-08-29",
+  "text": "Initially it’s \\(\\tfrac12\\times4\\times 2^2 = 8\\ \\text{J}\\); finally it’s \\(\\tfrac12\\times1\\times 8^2 = 32\\ \\text{J}\\).",
+  "findings": [
+   {
+    "detector": "N1",
+    "type": "arithmetic",
+    "claimed": "8",
+    "expected": "4",
+    "reason": "3 tokens evaluate to 4, stated 8",
+    "sentence": "Initially it’s \\(\\tfrac12\\times4\\times 2^2 = 8\\ \\text{J}\\); finally it’s \\(\\tfrac12\\times1\\times 8^2 = 32\\ \\text{J}\\).",
+    "class": 2,
+    "review": "LaTeX \"\\tfrac12\\times\"; ½ × 4 × 2² = 8 is correct"
+   },
+   {
+    "detector": "N1",
+    "type": "arithmetic",
+    "claimed": "32",
+    "expected": "64",
+    "reason": "3 tokens evaluate to 64, stated 32",
+    "sentence": "Initially it’s \\(\\tfrac12\\times4\\times 2^2 = 8\\ \\text{J}\\); finally it’s \\(\\tfrac12\\times1\\times 8^2 = 32\\ \\text{J}\\).",
+    "class": 2,
+    "review": "LaTeX; ½ × 1 × 8² = 32 is correct"
+   }
+  ]
+ },
+ {
+  "n": 30,
+  "occurrences": 1,
+  "nonQaAccount": false,
+  "firstSeen": "2026-09-28",
+  "text": "- 3 × 1 = 3  ",
+  "findings": [
+   {
+    "detector": "N1",
+    "type": "arithmetic",
+    "claimed": "3",
+    "expected": "-3",
+    "reason": "4 tokens evaluate to -3, stated 3",
+    "sentence": "- 3 × 1 = 3",
+    "class": 2,
+    "review": "list bullet read as minus; 3 × 1 = 3 is correct"
+   }
+  ]
+ },
+ {
+  "n": 31,
+  "occurrences": 1,
+  "nonQaAccount": true,
+  "firstSeen": "2026-10-04",
+  "text": "- 1 + 3 = 4 = 2²  ",
+  "findings": [
+   {
+    "detector": "N1",
+    "type": "arithmetic",
+    "claimed": "4",
+    "expected": "2",
+    "reason": "4 tokens evaluate to 2, stated 4",
+    "sentence": "- 1 + 3 = 4 = 2²",
+    "class": 2,
+    "review": "list bullet read as minus; 1 + 3 = 4 is correct"
+   }
+  ]
+ },
+ {
+  "n": 32,
+  "occurrences": 1,
+  "nonQaAccount": true,
+  "firstSeen": "2026-08-18",
+  "text": "If we substitute x = 3 into the equation 3x - 1 = 8, what do the left and right sides evaluate to?",
+  "findings": [
+   {
+    "detector": "N1",
+    "type": "arithmetic",
+    "claimed": "8",
+    "expected": "-3",
+    "reason": "4 tokens evaluate to -3, stated 8",
+    "sentence": "If we substitute x = 3 into the equation 3x - 1 = 8, what do the left and right sides evaluate to?",
+    "class": 2,
+    "review": "algebra variable \"x\" read as ×; problem statement"
+   }
+  ]
+ },
+ {
+  "n": 33,
+  "occurrences": 1,
+  "nonQaAccount": false,
+  "firstSeen": "2026-08-26",
+  "text": "- 1 ÷ 7 = 0.142857142857… → 0.\\(\\overline{142857}\\) (the six‑digit block repeats)",
+  "findings": [
+   {
+    "detector": "N1",
+    "type": "arithmetic",
+    "claimed": "0.142857142857",
+    "expected": "-0.143",
+    "reason": "4 tokens evaluate to -0.143, stated 0.143",
+    "sentence": "- 1 ÷ 7 = 0.142857142857… → 0.",
+    "class": 2,
+    "review": "list bullet read as minus; 1 ÷ 7 = 0.142857… is correct"
+   }
+  ]
+ },
+ {
+  "n": 34,
+  "occurrences": 1,
+  "nonQaAccount": false,
+  "firstSeen": "2026-10-04",
+  "text": "Most stars lie on the main sequence; cool but luminous stars at the top right must be huge giants; hot but faint stars at the bottom left must be tiny white dwarfs.\nA star of surface temperature 3500 K is 100 times as luminous as the Sun (5772 K).",
+  "findings": [
+   {
+    "detector": "N2",
+    "type": "ratio",
+    "claimed": "100 times",
+    "expected": "about 1.649 (ratio of 5772 to 3500 K)",
+    "reason": "claimed ×100 vs stated quantities ×1.649; no allowed power (1, 4) brings them within ×2.5",
+    "sentence": "A star of surface temperature 3500 K is 100 times as luminous as the Sun (5772 K).",
+    "class": 2,
+    "review": "N2: luminosity depends on radius as well as temperature (L ∝ R²T⁴); the 3500 K star is a giant, so \"100 times as luminous\" is correct — the two stated temperatures do not determine the ratio"
+   }
+  ]
+ },
+ {
+  "n": 35,
+  "occurrences": 1,
+  "nonQaAccount": false,
+  "firstSeen": "2026-08-26",
+  "text": "- 1 ÷ 6 = 0.1666… → 0.1\\(\\overline{6}\\) (the 6 repeats) ",
+  "findings": [
+   {
+    "detector": "N1",
+    "type": "arithmetic",
+    "claimed": "0.1666",
+    "expected": "-0.167",
+    "reason": "4 tokens evaluate to -0.167, stated 0.167",
+    "sentence": "- 1 ÷ 6 = 0.1666… → 0.1\\(\\overline{6}\\) (the 6 repeats)",
+    "class": 2,
+    "review": "list bullet read as minus; 1 ÷ 6 = 0.1666… is correct"
+   }
+  ]
+ },
+ {
+  "n": 36,
+  "occurrences": 1,
+  "nonQaAccount": false,
+  "firstSeen": "2026-10-04",
+  "text": "A star can look bright simply because it is near.\nStars radiate roughly as blackbodies, so L = 4πR²σT⁴: the Sun (R = 6.96 × 10⁸ m, T = 5772 K) has L ≈ 3.8 × 10²⁶ W; a star of the same size but twice as hot is 16 times as luminous; a 3500 K star 100 times as luminous as the Sun must be about 10 × (5772/3500)² ≈ 27 times its radius — a red giant.",
+  "findings": [
+   {
+    "detector": "N2",
+    "type": "ratio",
+    "claimed": "100 times",
+    "expected": "about 1.649 (ratio of 5772 to 3500 K)",
+    "reason": "claimed ×100 vs stated quantities ×1.649; no allowed power (1, 4) brings them within ×2.5",
+    "sentence": "Stars radiate roughly as blackbodies, so L = 4πR²σT⁴: the Sun (R = 6.96 × 10⁸ m, T = 5772 K) has L ≈ 3.8 × 10²⁶ W; a star of the same size but twice as hot is 16 times as luminous; a 3500 K star 100 times as luminous as the Sun must be abou",
+    "class": 2,
+    "review": "N2: same as #34 (radius not stated, giant star)"
+   }
+  ]
+ },
+ {
+  "n": 37,
+  "occurrences": 1,
+  "nonQaAccount": false,
+  "firstSeen": "2026-09-13",
+  "text": " FC = 6 – 8 – ½ × 4 = 6 – 8 – 2 = **–2**",
+  "findings": [
+   {
+    "detector": "N1",
+    "type": "arithmetic",
+    "claimed": "6",
+    "expected": "2",
+    "reason": "3 tokens evaluate to 2, stated 6",
+    "sentence": "FC = 6 – 8 – ½ × 4 = 6 – 8 – 2 = **–2**",
+    "class": 2,
+    "review": "en dash minus, as #8"
+   }
+  ]
+ },
+ {
+  "n": 38,
+  "occurrences": 1,
+  "nonQaAccount": false,
+  "firstSeen": "2026-10-02",
+  "text": "g\\bigl(\\lambda x_{1}+(1-\\lambda)x_{2}\\bigr)=2\\cdot2.2+1=5.4,",
+  "findings": [
+   {
+    "detector": "N1",
+    "type": "arithmetic",
+    "claimed": "5.4",
+    "expected": "3",
+    "reason": "3 tokens evaluate to 3, stated 5.4",
+    "sentence": "g\\bigl(\\lambda x_{1}+(1-\\lambda)x_{2}\\bigr)=2\\cdot2.2+1=5.4,",
+    "class": 2,
+    "review": "LaTeX \"\\cdot\" not read; 2 · 2.2 + 1 = 5.4 is correct"
+   }
+  ]
+ },
+ {
+  "n": 39,
+  "occurrences": 1,
+  "nonQaAccount": true,
+  "firstSeen": "2026-08-18",
+  "text": "What is the unique solution for x in the equation 4x - 8 = 12?",
+  "findings": [
+   {
+    "detector": "N1",
+    "type": "arithmetic",
+    "claimed": "12",
+    "expected": "-32",
+    "reason": "4 tokens evaluate to -32, stated 12",
+    "sentence": "What is the unique solution for x in the equation 4x - 8 = 12?",
+    "class": 2,
+    "review": "algebra variable \"x\" read as ×; problem statement"
+   }
+  ]
+ },
+ {
+  "n": 40,
+  "occurrences": 1,
+  "nonQaAccount": false,
+  "firstSeen": "2026-09-28",
+  "text": "**Do the arithmetic** – \\(72 \\times 1000 = 72{,}000\\); \\(72{,}000 / 3600 = 20\\).",
+  "findings": [
+   {
+    "detector": "N1",
+    "type": "arithmetic",
+    "claimed": "20",
+    "expected": "0",
+    "reason": "3 tokens evaluate to 0, stated 20",
+    "sentence": "**Do the arithmetic** – \\(72 \\times 1000 = 72{,}000\\); \\(72{,}000 / 3600 = 20\\).",
+    "class": 2,
+    "review": "LaTeX \"72{,}000\" not parsed; 72 000 / 3600 = 20 is correct"
+   }
+  ]
+ },
+ {
+  "n": 41,
+  "occurrences": 1,
+  "nonQaAccount": true,
+  "firstSeen": "2026-10-04",
+  "text": "- 1 + 3 + 5 = 9 = 3²  ",
+  "findings": [
+   {
+    "detector": "N1",
+    "type": "arithmetic",
+    "claimed": "9",
+    "expected": "7",
+    "reason": "6 tokens evaluate to 7, stated 9",
+    "sentence": "- 1 + 3 + 5 = 9 = 3²",
+    "class": 2,
+    "review": "list bullet read as minus; 1 + 3 + 5 = 9 is correct"
+   }
+  ]
+ },
+ {
+  "n": 42,
+  "occurrences": 1,
+  "nonQaAccount": false,
+  "firstSeen": "2026-09-10",
+  "text": " Total = –0.66 + 4.67 ≈ 4 kg·m/s (to the right).",
+  "findings": [
+   {
+    "detector": "N1",
+    "type": "arithmetic",
+    "claimed": "4",
+    "expected": "5.33",
+    "reason": "3 tokens evaluate to 5.33, stated 4",
+    "sentence": "Total = –0.66 + 4.67 ≈ 4 kg·m/s (to the right).",
+    "class": 2,
+    "review": "en dash minus \"–0.66\"; −0.66 + 4.67 ≈ 4 is correct"
+   }
+  ]
+ },
+ {
+  "n": 43,
+  "occurrences": 6,
+  "nonQaAccount": true,
+  "firstSeen": "2026-08-18",
+  "text": "A student solving 5x − 3 = 12 writes \"5x = 12 − 3 = 9\" as their first step.",
+  "findings": [
+   {
+    "detector": "N1",
+    "type": "arithmetic",
+    "claimed": "12",
+    "expected": "-15",
+    "reason": "4 tokens evaluate to -15, stated 12",
+    "sentence": "A student solving 5x − 3 = 12 writes \"5x = 12 − 3 = 9\" as their first step.",
+    "class": 2,
+    "review": "algebra variable \"x\" read as ×; quoted student step \"12 − 3 = 9\" is itself correct arithmetic"
+   }
+  ]
+ },
+ {
+  "n": 44,
+  "occurrences": 1,
+  "nonQaAccount": false,
+  "firstSeen": "2026-10-04",
+  "text": "You added the Earth's tilt to the complement of the latitude, giving 90‑28.6+23.4 = 84.8°.",
+  "findings": [
+   {
+    "detector": "N1",
+    "type": "arithmetic",
+    "claimed": "84.8 °",
+    "expected": "52",
+    "reason": "3 tokens evaluate to 52, stated 84.8",
+    "sentence": "You added the Earth's tilt to the complement of the latitude, giving 90‑28.6+23.4 = 84.8°.",
+    "class": 2,
+    "review": "U+2011 minus \"90‑28.6\"; 90 − 28.6 + 23.4 = 84.8 is correct arithmetic"
+   }
+  ]
+ },
+ {
+  "n": 45,
+  "occurrences": 1,
+  "nonQaAccount": false,
+  "firstSeen": "2026-10-04",
+  "text": "The absorbed dose is the energy absorbed per kilogram, measured in grays (1 Gy = 1 J/kg): a 70 kg person absorbing 0.014 J of gamma radiation receives 0.2 mGy.\nAlpha particles deposit their energy in a short, dense track and do about 20 times more damage per joule than gamma rays, X-rays or beta particles, so the equivalent dose multiplies the absorbed dose by a weighting factor — 20 for alpha, 1 for the others — and is measured in sieverts.",
+  "findings": [
+   {
+    "detector": "N2",
+    "type": "ratio",
+    "claimed": "20 times",
+    "expected": "about 5000 (ratio of 1 to 2.00e-4 Gy)",
+    "reason": "claimed ×20 vs stated quantities ×5000; no allowed power (1) brings them within ×2.5",
+    "sentence": "Alpha particles deposit their energy in a short, dense track and do about 20 times more damage per joule than gamma rays, X-rays or beta particles, so the equivalent dose multiplies the absorbed dose by a weighting factor — 20 for alpha, 1 ",
+    "class": 2,
+    "review": "N2: window took \"1 Gy\" and \"0.2 mGy\" from the previous sentence, unrelated to the alpha/gamma damage ratio (20 is the correct weighting factor)"
+   }
+  ]
+ },
+ {
+  "n": 46,
+  "occurrences": 1,
+  "nonQaAccount": false,
+  "firstSeen": "2026-10-04",
+  "text": "**Concrete example:** A 5‑milliwatt helium‑neon laser pointer emits about 3 × 10¹⁵ photons per second, all at the single wavelength 632.8 nm, producing a spot only a few millimetres wide even a few metres away.\nA typical 1‑watt LED flashlight emits roughly 10⁹ times more photons, but they span a broad spectrum and spread out over a wide area, so the light looks “white” and the beam quickly widens.",
+  "findings": [
+   {
+    "detector": "N2",
+    "type": "ratio",
+    "claimed": "10⁹ times",
+    "expected": "about 200 (ratio of 1 to 0.005 W)",
+    "reason": "claimed ×1.00e+9 vs stated quantities ×200; no allowed power (1) brings them within ×2.5",
+    "sentence": "A typical 1‑watt LED flashlight emits roughly 10⁹ times more photons, but they span a broad spectrum and spread out over a wide area, so the light looks “white” and the beam quickly widens.",
+    "class": 1,
+    "review": "N2: 1 W vs 5 mW is a power ratio of 200, \"10⁹ times more photons\" is wrong (the Step 1 trigger, phys.mod.lasers, 2026-10-04)"
+   }
+  ]
+ }
+]
