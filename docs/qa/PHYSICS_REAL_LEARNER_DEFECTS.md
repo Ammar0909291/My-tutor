@@ -37,9 +37,12 @@ basic Physics knowledge, sometimes confused, sometimes wrong, asks "explain simp
   established.
 
 <!-- SUMMARY:START -->
-## Summary
+## Summary (progress snapshot, 2026-10-05)
 
-(generated — see the commit that last touched this file)
+- Lessons driven (full sessions, sequential): 19 of 283 (orders 1-20 region; order 2 and orders 3/4/6/7 were first driven in a 3-parallel run, see PHYS-018). Not tested: the rest.
+- Mastered in-session: 11; ended needs-review: 8. Needs-review results are mostly the scripted persona answering too many cards wrong (~7/10 on some lessons) - a learning-difficulty/harness effect, NOT counted as defects.
+- Defects recorded: 18 (P0: 0 - P1: see entries - P2/P3: see entries). Fixed: 0. Open: 18.
+- Transcripts reviewed so far in depth: orders 1, 2, 3, 4, 8, 9, 134, 237 plus flag-scan of orders 5-20. Orders 10-20 showed no new defect beyond recurrences (picture-description fallback, empty-empathy replies to "why? i am confused", 2-option cards with an obviously longer correct option).
 <!-- SUMMARY:END -->
 
 ## Severity key
