@@ -10733,6 +10733,29 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         } catch { /* non-fatal — a repair must never break a turn */ }
       }
 
+      // CHEM-044 / CHEM-024: the kernel blocked every question this turn
+      // (QL1 — nothing taught yet), no card is on screen, and the learner asked
+      // nothing; a reply that sets a problem or asks about an attempt never
+      // made keeps only its teaching. A reply left with no teaching gets the
+      // same one regeneration as the gate-contract cut, which forbids a question.
+      if (resolvedLegalityBlockedReason === 'QL1_NO_ANSWERABLE_SOURCE' && mcqHoisted === null && resolvedQuestionServed === null
+        && !(await import('@/lib/teaching/conversationState')).detectLearnerQuestion(learnerAuthoredMessage)
+        && !(await import('@/lib/teaching/mcq')).readsAsRequestToTutor(learnerAuthoredMessage)) {
+        try {
+          const { dropUntaughtWorkDemands, needsRepair } = await import('@/lib/teaching/confirmBackRepair')
+          const cut = dropUntaughtWorkDemands(cleanText)
+          if (cut.removed.length > 0) {
+            const repaired = needsRepair(cut.text) ? await repairStubReply(cut.text, 'gate-contract') : null
+            console.warn('[ql1-work-demand] ' + JSON.stringify({
+              conceptId: resolvedConceptId ?? null, removed: cut.removed.map((r) => r.slice(0, 160)).slice(0, 4),
+              charsBefore: cleanText.length, charsAfter: (repaired ?? cut.text).length, regenerated: repaired !== null,
+            }))
+            if (repaired) cleanText = repaired
+            else if (!needsRepair(cut.text)) cleanText = cut.text
+          }
+        } catch { /* non-fatal — a repair must never break a turn */ }
+      }
+
       // ── A PARAGRAPH THE LEARNER HAS ALREADY READ IS NOT SENT AGAIN ────────
       // (2026-09-28, the C7 repeat channel.) The model recites a long authored
       // paragraph served earlier in the session even with the already-served

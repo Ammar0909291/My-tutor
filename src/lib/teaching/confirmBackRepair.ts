@@ -138,3 +138,41 @@ export function dropQuestionSentences(text: string): string {
     .replace(/\u0000(\d+)\u0000/g, (_, i) => tags[Number(i)])
     .trim()
 }
+
+/**
+ * CHEM-044 / CHEM-024 (2026-10-05, chemistry real-learner run: #40, #58, #78
+ * and 12 more lessons, turn 1): on the turn the question-legality kernel had
+ * blocked ANY question (QL1 — "nothing has been taught yet this session"), the
+ * first reply after "ok" was an untaught multi-part problem ("Using the
+ * ideal-gas law, what pressure would you predict? Now apply the van der Waals
+ * equation with a = 3.59 … b = 0.0427 …") or presupposed an attempt never made
+ * ("Can you walk me through how you thought you could calculate…"). The turn
+ * directive already says "no question"; this is the deterministic partner.
+ *
+ * Removes the sentences that ask the learner something or demand work from
+ * them (calculate/predict/apply/work out…, "walk me through how you…"), and
+ * keeps every sentence that teaches. Pure.
+ */
+const WORK_DEMAND_RE = /\b(?:calculate|compute|predict|work\s+out|determine|derive|solve|apply\s+the|explain\s+(?:why|how)|use\s+the\s+[\w\s-]{0,30}(?:law|equation|formula)|walk\s+me\s+through|how\s+did\s+you|how\s+you\s+(?:thought|decided|got|worked)|show\s+(?:me\s+)?your\s+(?:working|work|steps))\b/i
+const ADDRESSED_RE = /\b(?:you|your)\b|^\s*(?:now\s+|then\s+|finally,?\s+)?(?:calculate|compute|predict|work\s+out|determine|derive|solve|apply|use|find|explain)\b/i
+
+export function dropUntaughtWorkDemands(text: string): { text: string; removed: string[] } {
+  const removed: string[] = []
+  const out = (text ?? '')
+    .split(/\n{2,}/)
+    // A full stop ends a sentence only before a space or the end, so "a = 3.59"
+    // and "1.00 L" stay inside their sentence.
+    .map((para) => para.split('\n').map((line) => (line.match(/(?:[^.!?]|[.!?](?=\S))+(?:[.!?]+|$)/g) ?? [])
+      .filter((sentence) => {
+        const asks = sentence.includes('?')
+        const demands = WORK_DEMAND_RE.test(sentence) && ADDRESSED_RE.test(sentence)
+        if (asks || demands) { if (sentence.trim()) removed.push(sentence.trim()); return false }
+        return true
+      })
+      .join('')
+      .trim()).filter(Boolean).join('\n'))
+    .filter(Boolean)
+    .join('\n\n')
+    .trim()
+  return { text: removed.length ? out : text, removed }
+}
