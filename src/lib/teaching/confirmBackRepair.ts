@@ -176,3 +176,31 @@ export function dropUntaughtWorkDemands(text: string): { text: string; removed: 
     .trim()
   return { text: removed.length ? out : text, removed }
 }
+
+/**
+ * CHEM-079 (2026-10-05, chemistry real-learner run: #20, #78, #81, #3 and
+ * more): the reply to "ok" or to a request ("show me step by step") was a
+ * lone question about a belief or an attempt the learner never stated this
+ * turn — "How did you decide that elements in the same row … should have very
+ * similar chemical behavior?", "Can you walk me through how you thought you
+ * could calculate …?". Only the question sentences that PRESUPPOSE a learner
+ * attempt are removed; any other question, and every teaching sentence, stays.
+ */
+const PRESUPPOSED_ATTEMPT_RE = /\b(?:how\s+did\s+you\s+(?:decide|get|work|figure|arrive|come\s+up|choose|pick|know|reach)|walk\s+me\s+through\s+(?:how|what|why)\s+you|how\s+you\s+(?:thought|decided|got|worked|figured|arrived|chose)|what\s+(?:made|led)\s+you\s+(?:think|decide|choose|pick|say)|why\s+did\s+you\s+(?:think|decide|choose|pick|say))\b/i
+
+export function dropPresupposedAttemptQuestions(text: string): { text: string; removed: string[] } {
+  const removed: string[] = []
+  const out = (text ?? '')
+    .split(/\n{2,}/)
+    .map((para) => para.split('\n').map((line) => (line.match(/(?:[^.!?]|[.!?](?=\S))+(?:[.!?]+|$)/g) ?? [])
+      .filter((sentence) => {
+        if (sentence.includes('?') && PRESUPPOSED_ATTEMPT_RE.test(sentence)) { removed.push(sentence.trim()); return false }
+        return true
+      })
+      .join('')
+      .trim()).filter(Boolean).join('\n'))
+    .filter(Boolean)
+    .join('\n\n')
+    .trim()
+  return { text: removed.length ? out : text, removed }
+}

@@ -794,6 +794,14 @@ const EXPLAIN_DIFF_RE = new RegExp([
   //    topic name or an unrelated request.
   String.raw`\bin\s+other\s+words\b`,
 
+  // ── "TOO MANY WORDS" (CHEM-001, 2026-10-05: 101 occurrences in 89 chemistry
+  //    lessons answered with a gate card or a LONGER reply). It is the same
+  //    ask — say it again, shorter — so it takes the same rung, which keeps the
+  //    quiz card off this turn; adaptationRequest.ts then bounds the length.
+  String.raw`\btoo\s+(?:many|much)\s+(?:words?|text|writing)\b`,
+  String.raw`^\s*(?:it'?s\s+|its\s+|this\s+is\s+|that'?s\s+)?(?:way\s+)?too\s+long\b`,
+  String.raw`\b(?:less|fewer)\s+words\b`,
+
   // ── "TEACH ME FROM THE START/BEGINNING" — the third and fourth Principle
   //    13-named triggers, also zero coverage before this fix. Deliberately
   //    NOT folded into the bare end-anchored "teach me" pattern below (whose

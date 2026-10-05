@@ -24,6 +24,7 @@
 
 import { createHash } from 'node:crypto'
 import { isClaimChallenge } from './claimChallengeGuard'
+import { typesetCaretNotation } from '@/lib/text/plainNotation'
 import type { TeachingSignal } from './signals'
 
 export interface TutorMCQ {
@@ -218,7 +219,15 @@ function parseJsonMcqFallback(text: string): { mcq: TutorMCQ | null; cleanText: 
   const deduped = new Set(options.map((o) => o.toLowerCase()))
   if (deduped.size !== options.length) return { mcq: null, cleanText }
 
-  return { mcq: { question, options, correctIndex }, cleanText }
+  // CHEM-004 (2026-10-05, #40 t17/t23): "He or NH₃? Why?" with the options
+  // "He" / "NH₃" — a reasoning question no option answers, passable by a coin
+  // toss. A model-written two-option card that asks WHY is not served; the
+  // prose around it stays.
+  if (options.length === 2 && /\b(?:why|explain|justify|reason)\b/i.test(question)) return { mcq: null, cleanText }
+
+  // CHEM-129: Fe^{2+}/MnO_4^- typeset before the probe is persisted, so the
+  // stored and the tapped option stay byte-identical and grading is unchanged.
+  return { mcq: { question: typesetCaretNotation(question), options: options.map(typesetCaretNotation), correctIndex }, cleanText }
 }
 
 /**
@@ -285,7 +294,15 @@ export function parseMcqTag(text: string): { mcq: TutorMCQ | null; cleanText: st
   const deduped = new Set(options.map((o) => o.toLowerCase()))
   if (deduped.size !== options.length) return { mcq: null, cleanText }
 
-  return { mcq: { question, options, correctIndex }, cleanText }
+  // CHEM-004 (2026-10-05, #40 t17/t23): "He or NH₃? Why?" with the options
+  // "He" / "NH₃" — a reasoning question no option answers, passable by a coin
+  // toss. A model-written two-option card that asks WHY is not served; the
+  // prose around it stays.
+  if (options.length === 2 && /\b(?:why|explain|justify|reason)\b/i.test(question)) return { mcq: null, cleanText }
+
+  // CHEM-129: Fe^{2+}/MnO_4^- typeset before the probe is persisted, so the
+  // stored and the tapped option stay byte-identical and grading is unchanged.
+  return { mcq: { question: typesetCaretNotation(question), options: options.map(typesetCaretNotation), correctIndex }, cleanText }
 }
 
 /**

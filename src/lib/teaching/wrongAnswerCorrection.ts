@@ -80,7 +80,7 @@ export interface WrongAnswerCorrectionResult {
   text: string
   /** True when a correction was added — for the turn log only. */
   added: boolean
-  reason: 'added' | 'not-graded-wrong' | 'no-key' | 'already-corrected'
+  reason: 'added' | 'not-graded-wrong' | 'no-key' | 'already-corrected' | 'verdict-moved-first'
 }
 
 /** Typographic punctuation normalised before matching, exactly as
@@ -177,6 +177,14 @@ export function stateCorrectionForWrongAnswer(
     && STATES_INCORRECT.test(flat)
     && namesTheAnswer(flat, input.probe as TutorMcqLike, answer)
   ) {
+    // CHEM-028 (2026-10-05): a correction buried after a lecture on a new
+    // example is not a verdict the learner sees. The verdict comes first: when
+    // the opening sentence does not say it, a bare "Not quite." leads (the
+    // answer is already named further on, so it is not repeated).
+    const opening = flatten(text.trim().split(/(?<=[.!?])\s+|\n+/)[0] ?? '')
+    if (!STATES_INCORRECT.test(opening)) {
+      return { text: `Not quite. ${stripLeadingFalseConfirmation(text).trim()}`, added: true, reason: 'verdict-moved-first' }
+    }
     return { text: input.text, added: false, reason: 'already-corrected' }
   }
 

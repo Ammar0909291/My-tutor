@@ -6293,7 +6293,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // and re-serving a general explanation asset is the failure the learner
       // just reported. Nothing is generated, so the provider is not called.
       if (!serveLessonComplete && remediationCardText) {
-        text = remediationCardText
+        // CHEM-003: authored emphasis capitals and "covered earlier" pointers are
+        // reviewer notes, not learner text.
+        text = (await import('@/lib/teaching/authoredProseForLearner')).authoredProseForLearner(remediationCardText)
         provider = 'memory'
         memoryFallbackReasonCode = 'curated_remediation_card'
         try { (await import('@/lib/understanding/brainMetrics')).recordServe('memory') } catch { /* observability only */ }
@@ -6307,7 +6309,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           ` chars=${text.length}`
         )
       } else if (!serveLessonComplete && assembled && serveFromMemory) {
-        text = assembled.text
+        text = (await import('@/lib/teaching/authoredProseForLearner')).authoredProseForLearner(assembled.text)
         // The authored probe is this turn's ACTUAL question when it is a
         // multiple-choice item: tappable for the learner, and gradeable next
         // turn against the authored key. It used to be appended to the asset
@@ -8398,6 +8400,25 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           if (deClaimed !== cleanText) {
             console.log('[unauthored-key-confirmation-stripped] the model\'s own opening claim was removed — the grade came from an invented key')
             cleanText = deClaimed
+          }
+        } catch { /* non-fatal — a repair must never break a turn */ }
+      }
+      // CHEM-075 (2026-10-05): nothing was graded and the learner answered
+      // nothing — "ok", "give me example" — yet replies opened "That's
+      // correct—…", "That calculation is spot-on", "Great, you've followed the
+      // calculations so far". Same opening-sentence strip. A typed "yes"/"no"
+      // can be a real answer to the model's own question, so it is left alone.
+      if (resolvedGrade === null && !/^\s*(?:yes|yeah|yep|no|nope)\b/i.test(learnerAuthoredMessage)) {
+        try {
+          const { isBareAcknowledgement } = await import('@/lib/teaching/masteryGate')
+          const { readsAsRequestToTutor } = await import('@/lib/teaching/mcq')
+          if (isBareAcknowledgement(learnerAuthoredMessage) || readsAsRequestToTutor(learnerAuthoredMessage)) {
+            const { stripLeadingFalseConfirmation } = await import('@/lib/teaching/answerConfirmation')
+            const deClaimed = stripLeadingFalseConfirmation(cleanText)
+            if (deClaimed !== cleanText && deClaimed.trim()) {
+              console.log('[non-answer-praise-stripped] opening praise removed — the learner gave no answer this turn')
+              cleanText = deClaimed
+            }
           }
         } catch { /* non-fatal — a repair must never break a turn */ }
       }
@@ -10756,6 +10777,29 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         } catch { /* non-fatal — a repair must never break a turn */ }
       }
 
+      // CHEM-079: after "ok" or a request, a question about an attempt or a
+      // belief the learner never stated ("How did you decide…?", "walk me
+      // through how you thought…") is removed; a reply left with no teaching
+      // gets the same one regeneration, which allows no question.
+      if (mcqGradeHoisted === null && !serveLessonComplete) {
+        try {
+          const { isBareAcknowledgement } = await import('@/lib/teaching/masteryGate')
+          const { readsAsRequestToTutor } = await import('@/lib/teaching/mcq')
+          if (isBareAcknowledgement(learnerAuthoredMessage) || readsAsRequestToTutor(learnerAuthoredMessage)) {
+            const { dropPresupposedAttemptQuestions, needsRepair } = await import('@/lib/teaching/confirmBackRepair')
+            const cut = dropPresupposedAttemptQuestions(cleanText)
+            if (cut.removed.length > 0) {
+              const repaired = needsRepair(cut.text) ? await repairStubReply(cut.text, 'gate-contract') : null
+              console.warn('[presupposed-attempt] ' + JSON.stringify({
+                conceptId: resolvedConceptId ?? null, removed: cut.removed.map((r) => r.slice(0, 160)).slice(0, 3), regenerated: repaired !== null,
+              }))
+              if (repaired) cleanText = repaired
+              else if (!needsRepair(cut.text)) cleanText = cut.text
+            }
+          }
+        } catch { /* non-fatal — a repair must never break a turn */ }
+      }
+
       // ── A PARAGRAPH THE LEARNER HAS ALREADY READ IS NOT SENT AGAIN ────────
       // (2026-09-28, the C7 repeat channel.) The model recites a long authored
       // paragraph served earlier in the session even with the already-served
@@ -11160,6 +11204,79 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // answer is deliberately not marked in this text, matching what the
       // live wizard shows before a tap. Shared, unit-tested helper —
       // src/tests/mcqHistoryPersistence.test.ts — rather than inline logic.
+      // CHEM-001 / CHEM-015: "too many words", "example with numbers", "step by
+      // step" — the reply must have the asked-for shape. Shorter is a trim to
+      // whole sentences; numbers/steps get one regeneration with the shape
+      // stated, kept only if it complies. See adaptationRequest.ts.
+      if (!serveLessonComplete && provider !== 'degraded') {
+        try {
+          const ad = await import('@/lib/teaching/adaptationRequest')
+          const kind = ad.adaptationKind(learnerAuthoredMessage)
+          const { splitVisualPointer: splitAd } = await import('@/lib/teaching/visual/visualAcknowledgement')
+          const { body: adBody, pointer: adPointer } = splitAd(cleanText)
+          const { mostRecentAssistantText: prevAd } = await import('@/lib/teaching/remediationOutputContract')
+          const previousReply = prevAd(learnSession.messages, MessageRole.ASSISTANT)
+          if (kind && adBody.trim() && !ad.honoursAdaptation(kind, adBody, previousReply)) {
+            let next: string | null = null
+            if (kind === 'shorter') {
+              next = ad.trimToWordBudget(adBody, ad.shorterBudget(previousReply))
+            } else {
+              llmCallCount++ // instrumentation only (adaptation repair)
+              const routedAd = await routeAI(
+                [...historyMessages, { role: 'user', content: message }],
+                systemPrompt + ad.adaptationAppendix(kind) + resolvedOutputLanguageBlock,
+                country, 2048, teachingLang,
+                { userId, subject: learnSession.subject.slug },
+                groqModelOverride, undefined, forceProvider,
+              )
+              const { stripResidualMachineTags: sweepAd } = await import('@/lib/teaching/residualTagSweep')
+              const { stripMcqTags } = await import('@/lib/teaching/mcq')
+              const retry = sweepAd(stripMcqTags(routedAd.text ?? '')).trim()
+              if (retry && ad.honoursAdaptation(kind, retry, previousReply)) next = retry
+            }
+            console.log('[adaptation-check] ' + JSON.stringify({ kind, honoured: false, repaired: next !== null, charsBefore: adBody.length, charsAfter: next?.length ?? null }))
+            if (next) cleanText = adPointer ? `${next}\n\n${adPointer}` : next
+          }
+        } catch { /* non-fatal — a repair must never break a turn */ }
+      }
+
+      // CHEM-041 / CHEM-039: an empathy opener only for a struggle the learner
+      // voiced and never twice in four replies; an analogy at most twice in
+      // four replies (past that, one regeneration without one). See reuseCaps.ts.
+      if (!serveLessonComplete && provider !== 'degraded' && provider !== 'memory') {
+        try {
+          const caps = await import('@/lib/teaching/reuseCaps')
+          const priorTutor = learnSession.messages
+            .filter((m) => m.role === MessageRole.ASSISTANT && typeof m.content === 'string')
+            .map((m) => m.content as string)
+          const emp = caps.stripEmpathyOpener(cleanText, learnerAuthoredMessage, priorTutor)
+          if (emp.stripped) {
+            console.log('[empathy-opener-cap] stripped a repeated or unprompted empathy opener')
+            cleanText = emp.text
+          }
+          if (caps.usesAnalogy(cleanText) && caps.analogyCapReached(priorTutor)) {
+            llmCallCount++ // instrumentation only (analogy cap)
+            const routedNa = await routeAI(
+              [...historyMessages, { role: 'user', content: message }],
+              systemPrompt + caps.NO_ANALOGY_APPENDIX + resolvedOutputLanguageBlock,
+              country, 2048, teachingLang,
+              { userId, subject: learnSession.subject.slug },
+              groqModelOverride, undefined, forceProvider,
+            )
+            const { stripResidualMachineTags: sweepNa } = await import('@/lib/teaching/residualTagSweep')
+            const { stripMcqTags: stripNa } = await import('@/lib/teaching/mcq')
+            const retry = sweepNa(stripNa(routedNa.text ?? '')).trim()
+            const kept = retry && !caps.usesAnalogy(retry) && (retry.match(/\S+/g) ?? []).length >= 12
+            console.log('[analogy-cap] ' + JSON.stringify({ regenerated: true, kept }))
+            if (kept) {
+              const { splitVisualPointer: splitNa } = await import('@/lib/teaching/visual/visualAcknowledgement')
+              const naPointer = splitNa(cleanText).pointer
+              cleanText = naPointer ? `${retry}\n\n${naPointer}` : retry
+            }
+          }
+        } catch { /* non-fatal — a repair must never break a turn */ }
+      }
+
       // RESIDUAL MACHINE-TAG SWEEP — the last line of defence before this text
       // becomes both the learner's bubble and durable history.
       //
@@ -11178,6 +11295,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // class that produced the MCQ duplication directly beneath this.
       const { stripResidualMachineTags } = await import('@/lib/teaching/residualTagSweep')
       cleanText = stripResidualMachineTags(cleanText)
+      // CHEM-065/CHEM-129: no pipe table, no caret/brace notation outside math —
+      // the lesson renderer shows both literally. Same single variable, same reason.
+      cleanText = (await import('@/lib/text/plainNotation')).plainNotation(cleanText)
 
       const { appendMcqToHistoryText } = await import('@/lib/teaching/mcq')
       const contentForHistory = appendMcqToHistoryText(cleanText, mcqHoisted)

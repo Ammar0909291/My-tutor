@@ -83,6 +83,24 @@ export const CONFIRMS_CORRECT = new RegExp([
 ].join('|'), 'i')
 
 /**
+ * PRAISE THE C5 DETECTOR DOES NOT COUNT AS A CONFIRMATION — used only to strip
+ * an unbacked opening (stripLeadingFalseConfirmation), never to decide that a
+ * correct answer was already confirmed, so CONFIRMS_CORRECT and its scorer copy
+ * (confirmationDetectorParity) are unchanged.
+ *
+ * CHEM-134/CHEM-075 (2026-10-05): measured on wrong or non-answers — "That's a
+ * solid observation—you've picked out the chloride ion" (wrong SN1 tap),
+ * "Great, you've captured the key idea", "you've hit on the exact mechanism",
+ * "That calculation is spot‑on" (non-breaking hyphen), "Great, you've followed
+ * the calculations so far" (to "ok").
+ */
+const UNBACKED_PRAISE = new RegExp([
+  '\\bspot[\\-\u2010\u2011]on\\b',
+  '\\b(?:solid|great|good|sharp|excellent|astute|keen) (?:observation|point|thinking|reasoning|insight)\\b',
+  "\\b(?:you'?ve|you have) (?:(?:correctly|rightly) )?(?:captured|hit on|nailed|pinpointed|picked out|followed)\\b",
+].join('|'), 'i')
+
+/**
  * THE OPENING CLAIM MUST NOT OUTRUN THE GRADE.
  *
  * ── THE DEFECT ──────────────────────────────────────────────────────────────
@@ -119,7 +137,7 @@ export function stripLeadingFalseConfirmation(text: string): string {
   if (!trimmed) return text
   const sentences = trimmed.split(/(?<=[.!?])\s+/)
   const [first, ...rest] = sentences
-  if (!first || !affirmsTheLearner(first)) return text
+  if (!first || !(affirmsTheLearner(first) || UNBACKED_PRAISE.test(flatten(first)))) return text
   return rest.join(' ').trim()
 }
 
@@ -277,13 +295,16 @@ export function confirmCorrectAnswer(input: ConfirmationInput): ConfirmationResu
   const undenied = stripLeadingFalseDenial(text)
   const denied = undenied !== text
   text = undenied
-  if (!denied && statesCorrect(text)) return { text, added: false }
+  // CHEM-028 (2026-10-05): the verdict comes first — a confirmation that only
+  // appears after a paragraph on something else is not one the learner reads.
+  const opening = text.trim().split(/(?<=[.!?])\s+|\n+/)[0] ?? ''
+  if (!denied && statesCorrect(opening)) return { text, added: false }
   if (text.trim().length === 0) {
     const n0 = input.priorConfirmations
     const i0 = Number.isFinite(n0) && (n0 as number) >= 0 ? Math.floor(n0 as number) % PHRASINGS.length : 0
     return { text: PHRASINGS[i0], added: true }
   }
-  if (statesCorrect(text)) return { text, added: true }
+  if (statesCorrect(opening) && statesCorrect(text)) return { text, added: true }
 
   const n = input.priorConfirmations
   const index = Number.isFinite(n) && (n as number) >= 0 ? Math.floor(n as number) % PHRASINGS.length : 0
