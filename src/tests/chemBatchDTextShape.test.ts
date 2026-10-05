@@ -59,6 +59,12 @@ describe('CHEM-143 orphaned card markup with the answer key', () => {
     const t = '<!" a="Filter precipitate" b="Wash precipitate" c="Dry/ignite to constant mass" d="Dissolve sample in solvent" correct="A"-->'
     expect(stripResidualMachineTags(t).trim()).toBe('')
   })
+  it('CHEM-032: the same shape after prose keeps the prose and drops the key', () => {
+    const t = 'Chlorine (Cl) fills the p-block on the right side of the table. <!" a="s-block" b="p-block" c="d-block" d="f-block" correct="B"-->'
+    const out = stripResidualMachineTags(t)
+    expect(out).not.toMatch(/correct=|<!/)
+    expect(out).toContain('Chlorine (Cl) fills the p-block on the right side of the table.')
+  })
 })
 
 describe('CHEM-134/CHEM-075 praise the grade does not back', () => {
