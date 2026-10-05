@@ -11214,6 +11214,23 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // answer is deliberately not marked in this text, matching what the
       // live wizard shows before a tap. Shared, unit-tested helper —
       // src/tests/mcqHistoryPersistence.test.ts — rather than inline logic.
+      // ONE regeneration with an appendix, shared by the adaptation-shape check
+      // (CHEM-015) and the analogy cap (CHEM-039) below: a single provider call
+      // site; each caller keeps the result only if it complies.
+      const regenerateWithAppendix = async (appendix: string): Promise<string> => {
+        llmCallCount++ // instrumentation only (shape / analogy repair)
+        const routedRe = await routeAI(
+          [...historyMessages, { role: 'user', content: message }],
+          systemPrompt + appendix + resolvedOutputLanguageBlock,
+          country, 2048, teachingLang,
+          { userId, subject: learnSession.subject.slug },
+          groqModelOverride, undefined, forceProvider,
+        )
+        const { stripResidualMachineTags: sweepRe } = await import('@/lib/teaching/residualTagSweep')
+        const { stripMcqTags: stripRe } = await import('@/lib/teaching/mcq')
+        return sweepRe(stripRe(routedRe.text ?? '')).trim()
+      }
+
       // CHEM-001 / CHEM-015: "too many words", "example with numbers", "step by
       // step" — the reply must have the asked-for shape. Shorter is a trim to
       // whole sentences; numbers/steps get one regeneration with the shape
@@ -11231,17 +11248,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             if (kind === 'shorter') {
               next = ad.trimToWordBudget(adBody, ad.shorterBudget(previousReply))
             } else {
-              llmCallCount++ // instrumentation only (adaptation repair)
-              const routedAd = await routeAI(
-                [...historyMessages, { role: 'user', content: message }],
-                systemPrompt + ad.adaptationAppendix(kind) + resolvedOutputLanguageBlock,
-                country, 2048, teachingLang,
-                { userId, subject: learnSession.subject.slug },
-                groqModelOverride, undefined, forceProvider,
-              )
-              const { stripResidualMachineTags: sweepAd } = await import('@/lib/teaching/residualTagSweep')
-              const { stripMcqTags } = await import('@/lib/teaching/mcq')
-              const retry = sweepAd(stripMcqTags(routedAd.text ?? '')).trim()
+              const retry = await regenerateWithAppendix(ad.adaptationAppendix(kind))
               if (retry && ad.honoursAdaptation(kind, retry, previousReply)) next = retry
             }
             console.log('[adaptation-check] ' + JSON.stringify({ kind, honoured: false, repaired: next !== null, charsBefore: adBody.length, charsAfter: next?.length ?? null }))
@@ -11265,17 +11272,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             cleanText = emp.text
           }
           if (caps.usesAnalogy(cleanText) && caps.analogyCapReached(priorTutor)) {
-            llmCallCount++ // instrumentation only (analogy cap)
-            const routedNa = await routeAI(
-              [...historyMessages, { role: 'user', content: message }],
-              systemPrompt + caps.NO_ANALOGY_APPENDIX + resolvedOutputLanguageBlock,
-              country, 2048, teachingLang,
-              { userId, subject: learnSession.subject.slug },
-              groqModelOverride, undefined, forceProvider,
-            )
-            const { stripResidualMachineTags: sweepNa } = await import('@/lib/teaching/residualTagSweep')
-            const { stripMcqTags: stripNa } = await import('@/lib/teaching/mcq')
-            const retry = sweepNa(stripNa(routedNa.text ?? '')).trim()
+            const retry = await regenerateWithAppendix(caps.NO_ANALOGY_APPENDIX)
             const kept = retry && !caps.usesAnalogy(retry) && (retry.match(/\S+/g) ?? []).length >= 12
             console.log('[analogy-cap] ' + JSON.stringify({ regenerated: true, kept }))
             if (kept) {

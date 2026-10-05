@@ -162,7 +162,10 @@ describe('the route holds on a NON-remediation turn', () => {
     // 7 -> 8 (2026-10-03): the neutral reason slot call for a tap on a model-written
     // card (neutralAssembly.ts, launch-readiness item 1, owner approval), behind
     // TURN_ASSEMBLY_MODE; it judges nothing and replaces only a stub reply.
-    expect((ROUTE.match(/await routeAI\(/g) ?? []).length).toBe(8)
+    // 8 -> 9 (2026-10-05, CHEM-015/CHEM-039): one shared regeneration with an appendix
+    // (regenerateWithAppendix) for an unhonoured "with numbers"/"step by step" request
+    // and for the analogy cap; kept only if the retry complies.
+    expect((ROUTE.match(/await routeAI\(/g) ?? []).length).toBe(9)
     // The refusal reason lives in the lookup, which is where the boundary is.
     const cards = readFileSync(join(process.cwd(), 'src/lib/teaching/remediationCards.ts'), 'utf8')
     expect(cards).toContain('draft-not-promoted')
@@ -236,7 +239,10 @@ describe('a held turn that teaches past the card is rejected', () => {
     // 7 -> 8 (2026-10-03): the neutral reason slot call for a tap on a model-written
     // card (neutralAssembly.ts, launch-readiness item 1, owner approval), behind
     // TURN_ASSEMBLY_MODE; it judges nothing and replaces only a stub reply.
-    expect((ROUTE.match(/await routeAI\(/g) ?? []).length).toBe(8)
+    // 8 -> 9 (2026-10-05, CHEM-015/CHEM-039): one shared regeneration with an appendix
+    // (regenerateWithAppendix) for an unhonoured "with numbers"/"step by step" request
+    // and for the analogy cap; kept only if the retry complies.
+    expect((ROUTE.match(/await routeAI\(/g) ?? []).length).toBe(9)
   })
 })
 
