@@ -153,7 +153,8 @@ Categories: Teaching · Adaptation · Lesson flow · Visuals · Numerical/factua
 - **Why a defect:** the learner asked for an example; the reply is a one-line definition, more abstract than the opening, with no object, number or situation.
 - **Expected:** a concrete example (e.g. a box on a ramp with a stated angle and mass). **Actual:** no example; next turn the learner had to ask again.
 - **Recurrence:** order 74 (`The Hamiltonian and Legendre Transform`): *"Let me put it in the simplest words I have."* followed by *"The Hamiltonian H = Σpᵢṡᵢ − L is obtained from the Lagrangian by a Legendre transform; canonical momenta… are conjugate…"* (more advanced than the lesson, no example). Order 64 (Pressure in Fluids): *"give me example"* → *"Take a look at the arrows that emanate from a single point inside the water in the figure"* (one sentence, no example).
-- **Reproducible:** yes (3 lessons); same family as PHYS-002/PHYS-014. **Status:** OPEN
+- **Further recurrences (orders 76, 77, 78):** the identical opener *"Let me put it in the simplest words I have."* followed by a one-sentence abstract definition, no example; order 82 (Heat Transfer): one sentence about the red arrow in the figure, no example. Total so far: 8 of 85 lessons.
+- **Reproducible:** yes (8 lessons); same family as PHYS-002/PHYS-014. **Status:** OPEN
 
 ### PHYS-020 — [P3] [UX/Lesson flow] Multiple-choice question posed as inline "A) B) C) D)" prose instead of an answer card
 - **Date:** 2026-10-05 · **Concepts/lessons:** `Elastic Collisions` (order 43), `Torque` (order 47)
@@ -173,7 +174,7 @@ Categories: Teaching · Adaptation · Lesson flow · Visuals · Numerical/factua
 - **Learner:** *"ok i understand. next question please"*
 - **Tutor (provider=`degraded`, reason `practice_without_quiz`):** *"Let's take one small step together. I'll walk through it with you and pause whenever it helps.\n\nWe can continue from here whenever you're ready."* — no question, no card, no teaching.
 - **Why a defect:** the learner asked for the next question and received a stock hold message; the lesson did not advance on that turn.
-- **Expected:** the next question card. **Actual:** content-free hold. **Reproducible:** observed once in 61 lessons (the content-free hold is already a known open class — see CLAUDE.md "content-free hold"; this is a fresh production occurrence). **Status:** OPEN
+- **Expected:** the next question card. **Actual:** content-free hold. **Reproducible:** observed twice in 85 lessons (order 55; again order 76 `Poisson Brackets and Phase Space Dynamics`, same text, on *"ok. can you ask me a question now?"*) (the content-free hold is already a known open class — see CLAUDE.md "content-free hold"; this is a fresh production occurrence). **Status:** OPEN
 
 ### PHYS-023 — [P1] [Visuals/UX/Teaching] Raw card markup leaks into the tutor text, revealing the answer key; the card attached is a different, unrelated question
 - **Date:** 2026-10-05 · **Concepts/lessons:** `Generalized Coordinates and Configuration Space` (order 71), `The Euler-Lagrange Equation and Hamilton's Principle` (order 72)
