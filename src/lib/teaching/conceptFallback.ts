@@ -12,14 +12,24 @@
  * KG descriptions come in two shapes: a sentence ("An LC circuit oscillates at
  * resonant frequency…") and a syllabus list ("Balancing chemical equations;
  * mole ratios; limiting reagent…"). The list reads as a fragment on its own, so
- * it is introduced as what the lesson covers. Pure.
+ * it is said as one plain sentence about what the lesson looks at. Pure.
  */
 export function conceptFallbackText(title: string, description: string): string {
   const d = description.trim().replace(/\s+/g, ' ')
   const t = title.trim()
   if (d.length === 0) return t
   const isList = d.includes(';') || !/[.!?]$/.test(d)
-  return isList ? `${t} covers: ${d.replace(/[.;]\s*$/, '')}.` : d
+  if (!isList) return d
+  // CHEM-064 (2026-10-05, chemistry real-learner run): "Pure Substances and
+  // Mixtures covers: Elements and compounds as pure substances; homogeneous and
+  // heterogeneous mixtures; separation techniques." reached learners as a
+  // reply — a syllabus line, with its machine-looking "covers:" label. The list
+  // is now said as one plain sentence: "In this lesson on X we will look at a,
+  // b and c."
+  const items = d.replace(/[.;]\s*$/, '').split(/\s*;\s*/).filter(Boolean)
+    .map((item, i) => (i === 0 ? item.charAt(0).toLowerCase() + item.slice(1) : item))
+  const list = items.length > 1 ? `${items.slice(0, -1).join(', ')} and ${items[items.length - 1]}` : items[0]
+  return `In this lesson on ${t} we will look at ${list}.`
 }
 
 /** Said instead of repeating the concept fallback on consecutive turns (see route.ts). */

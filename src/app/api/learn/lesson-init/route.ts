@@ -758,8 +758,24 @@ export async function POST(req: Request) {
     // the learner did an hour ago. That holds for every mode — a `resume`
     // opening is mid-lesson, not post-lesson.
     try {
-      const { claimsCompletionInProse, stripCompletionClaims } =
+      const { claimsCompletionInProse, stripCompletionClaims, rendersLessonClosingFormat } =
         await import('@/lib/teaching/stanceEnforcement')
+      // CHEM-027 (2026-10-05, #97 and #116, both gemini): the opening WAS the
+      // product's lesson-closing format — "🎉 Excellent work! … ✓ What you
+      // mastered … ✓ What's coming" — which the sentence rule below cannot see
+      // (no "completed this lesson" sentence). The chat route already detects
+      // the format by its own section labels; an opening may never render it,
+      // and stripping its sections would still leave the celebration, so the
+      // whole opening is replaced by the curriculum's own concept opening.
+      if (rendersLessonClosingFormat(routed.text)) {
+        const { getKGNode } = await import('@/lib/curriculum/knowledgeGraph')
+        const { pointerOnlyFallback } = await import('@/lib/teaching/figureReference')
+        const node = topicSlug ? getKGNode(topicSlug) : null
+        if (node?.title && node.description) {
+          console.warn('[lesson-init] ' + JSON.stringify({ event: 'closing-format-opening-replaced', topicSlug, mode, provider: routed.provider }))
+          routed = { ...routed, text: pointerOnlyFallback(node.title, node.description) }
+        }
+      }
       const hadTag = /\[LESSON_COMPLETE\]/i.test(routed.text)
       const hadClaim = claimsCompletionInProse(routed.text)
       if (hadTag || hadClaim) {

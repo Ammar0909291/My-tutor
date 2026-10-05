@@ -122,8 +122,10 @@ describe('P5 — the gate-internal withhold says the concept, not "Let\'s stay w
     const { conceptFallbackText } = await import('@/lib/teaching/conceptFallback')
     expect(conceptFallbackText('LC Oscillations and Resonance', 'An LC circuit oscillates at resonant frequency f = 1/(2π√LC) as energy alternates between inductor and capacitor.'))
       .toBe('An LC circuit oscillates at resonant frequency f = 1/(2π√LC) as energy alternates between inductor and capacitor.')
+    // Changed 2026-10-06 (CHEM-064): the "X covers: a; b; c" label reached
+    // learners as a reply; the list is now one plain sentence.
     expect(conceptFallbackText('Stoichiometry', 'Balancing chemical equations; mole ratios; limiting reagent; theoretical and percent yield calculations.'))
-      .toBe('Stoichiometry covers: Balancing chemical equations; mole ratios; limiting reagent; theoretical and percent yield calculations.')
+      .toBe('In this lesson on Stoichiometry we will look at balancing chemical equations, mole ratios, limiting reagent and theoretical and percent yield calculations.')
   })
   it('with the concept supplied: no grade -> the concept; a grade stands alone', async () => {
     const { withholdUngradedGateQuestion } = await import('@/lib/teaching/gateAssessment')
