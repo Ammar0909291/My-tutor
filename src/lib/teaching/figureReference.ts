@@ -774,3 +774,30 @@ export function stripUnbackedFigureReferences(
     return { text, stripped: false, removed: [] }
   }
 }
+
+/**
+ * CHEM-036 / CHEM-117 / CHEM-086 (2026-10-05, chemistry real-learner run):
+ * "i dont understand this picture" in a lesson with NO figure was answered as
+ * if one existed — "it can be confusing when the picture seems to say
+ * 'nothing is happening'… We'll circle back to the picture in a moment", a
+ * bathtub story, a treasure map. The pointer stripper above only knows
+ * locator shapes ("in the figure on your screen"); a sentence that talks
+ * about "the picture" as a thing on screen is a different shape.
+ *
+ * For that one turn kind (the learner asked about a figure, none is on
+ * screen): every sentence that refers to a picture/figure/diagram as present
+ * goes, and the reply opens by saying there is none. Teaching sentences stay.
+ */
+const PRESENT_FIGURE_RE = /\b(?:the|this|that|your)\s+(?:picture|figure|diagram|image|drawing|graph|chart|illustration)\b/i
+const HONEST_NONE_RE = /\b(?:no|not\s+(?:a|any)|don'?t\s+have\s+(?:a|any)|isn'?t\s+(?:a|any))\s+(?:picture|figure|diagram|image)\b/i
+export const NO_FIGURE_ON_SCREEN = 'There is no picture in this lesson yet, so let me say it in words.'
+
+export function answerFigureQuestionWithoutFigure(text: string): { text: string; changed: boolean } {
+  const src = (text ?? '').trim()
+  if (HONEST_NONE_RE.test(src)) return { text, changed: false }
+  const kept = (src.match(/(?:[^.!?\n]|[.!?](?=\S))+(?:[.!?]+|$)/g) ?? [])
+    .map((s) => s.trim())
+    .filter((s) => s && !PRESENT_FIGURE_RE.test(s))
+    .join(' ')
+  return { text: kept ? `${NO_FIGURE_ON_SCREEN} ${kept}` : NO_FIGURE_ON_SCREEN, changed: true }
+}

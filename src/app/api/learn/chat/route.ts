@@ -10397,6 +10397,16 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           }))
           cleanText = leftovers.text
         }
+        // CHEM-036/117/086: the learner asked about "this picture" and there
+        // is none — the reply says so and does not talk about one.
+        if (!figureOnScreen && figureQuestionHoisted) {
+          const { answerFigureQuestionWithoutFigure } = await import('@/lib/teaching/figureReference')
+          const honest = answerFigureQuestionWithoutFigure(cleanText)
+          if (honest.changed) {
+            console.warn('[figure-reference] ' + JSON.stringify({ event: 'figure-question-without-figure', conceptId: resolvedConceptId ?? null }))
+            cleanText = honest.text
+          }
+        }
         // A turn that was ONLY a pointer at nothing is replaced by the
         // concept's own KG description rather than shipped as-is.
         // Also when the diagram guard left NOTHING (the reply was only a

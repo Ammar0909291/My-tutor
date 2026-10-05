@@ -834,6 +834,64 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     ],
   }),
 
+  // CHEM Batch E (2026-10-05, chemistry real-learner run). Existing
+  // generators only; every label is taken from the concept's own EB entry
+  // (educational-brain/concepts/chemistry/<id>.md, Core Understanding).
+  // CHEM-086: "Phase Diagrams" served no figure on any of 18 turns.
+  'chem.state.phase-diagram': () => buildCellComparisonScene({
+    conceptId: 'chem.state.phase-diagram',
+    title: 'Reading a Phase Diagram: Pressure against Temperature',
+    teachingGoal: 'Every P–T point lies in one region (solid, liquid or gas); on a boundary curve two phases coexist; at the triple point all three do; beyond the critical point liquid and gas become one supercritical fluid.',
+    groups: [
+      { label: 'Three regions', description: 'every P–T point is solid, liquid or gas', items: ['solid: low T, high P', 'gas: high T, low P'] },
+      { label: 'Boundary curves', description: 'along a curve two phases coexist', items: ['solid–gas: sublimation (dry ice)', 'liquid–gas: vapour pressure; read the boiling point', 'solid–liquid: melting; slopes backwards for water'] },
+      { label: 'Triple point', description: 'all three phases coexist', items: ['water: 273.16 K, 611 Pa'] },
+      { label: 'Critical point', description: 'end of the liquid–gas curve; beyond it a supercritical fluid', items: ['CO₂: 304 K, 73 atm', 'water: 647 K, 218 atm'] },
+    ],
+  }),
+  // CHEM-046: "Real Gases and van der Waals Equation" was shown the ideal
+  // Boyle's-law hyperbola, the opposite of the concept.
+  'chem.state.real-gases': () => buildCellComparisonScene({
+    conceptId: 'chem.state.real-gases',
+    title: 'Why Real Gases Deviate: Z = PV/(nRT)',
+    teachingGoal: 'An ideal gas has Z = 1; real molecules attract (Z < 1 at moderate pressure) and take up space (Z > 1 at high pressure); van der Waals corrects both.',
+    groups: [
+      { label: 'Ideal gas', description: 'point particles, no attractions', items: ['Z = 1 at every pressure'] },
+      { label: 'Moderate pressure', description: 'attractions pull molecules back from the walls', items: ['lower pressure than ideal', 'Z < 1'] },
+      { label: 'High pressure', description: 'the molecules’ own volume matters', items: ['less free space than the container', 'Z > 1'] },
+      { label: 'van der Waals', description: '(P + a/Vm²)(Vm − b) = RT', items: ['a/Vm²: adds back pressure lost to attractions', 'b: removes the volume the molecules occupy'] },
+    ],
+  }),
+  // CHEM-022: "Nucleic Acids" got a DNA-replication flow chart and taught
+  // replication instead of the DNA/RNA structure the lesson is about.
+  'chem.bio.nucleic-acids': () => buildCellComparisonScene({
+    conceptId: 'chem.bio.nucleic-acids',
+    title: 'DNA and RNA Differ in Three Ways; Base Pairs Fit by Shape',
+    teachingGoal: 'DNA and RNA differ in base (T vs U), sugar (deoxyribose vs ribose, the 2′-OH) and strandedness; A–T (2 H-bonds) and G–C (3 H-bonds) each pair a purine with a pyrimidine.',
+    groups: [
+      { label: 'DNA', description: 'usually a double-stranded helix', items: ['bases A, T, G, C', 'sugar: deoxyribose, no 2′-OH'] },
+      { label: 'RNA', description: 'usually a single strand', items: ['bases A, U, G, C', 'sugar: ribose; its 2′-OH makes the backbone easier to hydrolyse'] },
+      { label: 'Base pairs', description: 'one purine + one pyrimidine keeps the helix width constant', items: ['A–T: 2 hydrogen bonds', 'G–C: 3 hydrogen bonds'] },
+    ],
+  }),
+  // CHEM-060: Ionization Energy was shown a generic three-electron-shell
+  // model, which cannot show a trend. Na, Mg, Al, P, S from the EB entry;
+  // Si 786, Cl 1251, Ar 1520 kJ/mol are standard reference values.
+  'chem.period.ionization-energy': () => buildStatisticsBarChartScene({
+    chartTitle: 'First ionisation energy across period 3 (kJ/mol): rising, with dips at Al and S',
+    quantity: { name: 'first ionisation energy (kJ/mol)', kind: 'magnitude' },
+    bars: [
+      { label: 'Na 496', frequency: 496 },
+      { label: 'Mg 738', frequency: 738 },
+      { label: 'Al 577', frequency: 577 },
+      { label: 'Si 786', frequency: 786 },
+      { label: 'P 1011', frequency: 1011 },
+      { label: 'S 999', frequency: 999 },
+      { label: 'Cl 1251', frequency: 1251 },
+      { label: 'Ar 1520', frequency: 1520 },
+    ],
+  }),
+
   // Archetype C — the system-boundary/energy-balance diagram.
   'chem.thermo.system': () => buildSystemBoundaryScene('closed'),
   'chem.thermo.first-law': () => buildChemFirstLawScene(100, -40),
