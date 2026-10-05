@@ -840,6 +840,7 @@ export async function POST(req: Request) {
       const { clearEpisodeForLessonOpen } = await import('@/lib/teaching/sessionLifecycle')
       const { clearVisualSessionForNewClientView } = await import('@/lib/teaching/visual/session')
       const { clearTransientStateForNewAttempt } = await import('@/lib/teaching/attemptIsolation')
+      const { clearRenderedRealityForLessonOpen } = await import('@/lib/teaching/renderedRealityModel')
       // PCD-004: `writeSnapshotDelta` is now statically imported above; only
       // the version source changes here — see snapshotVersionCursor.
       // P3, extended to the opening turn: this endpoint's own question was
@@ -875,6 +876,7 @@ export async function POST(req: Request) {
           ...clearEpisodeForLessonOpen(),
           ...clearVisualSessionForNewClientView(),
           ...(attemptIsFreshStart ? clearTransientStateForNewAttempt() : {}),
+          ...clearRenderedRealityForLessonOpen(), // CHEM-130: new lesson, empty screen
           questionLedger: recordQuestions(readQuestionLedger(snapshot?.questionLedger), routed.text),
         },
         // Every other key here is pure state replacement (the same two nulls

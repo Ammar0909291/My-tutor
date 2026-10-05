@@ -53,6 +53,20 @@ export type RRMLog = RRMEntry[]
 // Read / Write helpers (contextSnapshot integration)
 // ---------------------------------------------------------------------------
 
+/**
+ * CHEM-130 (2026-10-05, chemistry real-learner run, account 7): "i dont
+ * understand this picture" in lessons #125 and #130 — neither had a figure —
+ * was answered about the Wilkinson's-catalyst figure served in lesson #123.
+ * A tab resumes its own session for the next lesson, and lesson-init cleared
+ * `visualSession` but not this log, so the RENDERED REALITY block went on
+ * telling the tutor "CURRENT VISUAL: Wilkinson's catalyst" as the ground truth
+ * of the learner's screen. A new lesson is a new screen: the log starts empty,
+ * and the block then says no visual is displayed.
+ */
+export function clearRenderedRealityForLessonOpen(): Record<string, unknown> {
+  return { renderedRealityLog: [] }
+}
+
 export function readRRM(snapshot: Record<string, unknown> | null): RRMLog {
   if (!snapshot) return []
   const raw = snapshot.renderedRealityLog
