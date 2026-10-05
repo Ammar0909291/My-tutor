@@ -4,14 +4,14 @@
 ## Summary (generated from the entries below; counts verified automatically)
 
 - Total lessons in Biology curriculum (`/api/curriculum?subject=biology`): 199
-- Total lessons studied (full lesson session driven, ≥3 turns): 83
-- Total lessons covered (≥1 account): 83  (41.7 %)
-- Total defects: 31
+- Total lessons studied (full lesson session driven, ≥3 turns): 108
+- Total lessons covered (≥1 account): 108  (54.3 %)
+- Total defects: 34
 - P0: 0
 - P1: 3
-- P2: 19
-- P3: 9
-- Open: 31
+- P2: 21
+- P3: 10
+- Open: 34
 - Fixed: 0
 <!-- SUMMARY:END -->
 
@@ -109,7 +109,7 @@ Mastery/progress · Concurrency/session isolation.
 - Actual behaviour: The lesson closes as needs-review on the request.
 - Why it is a defect: The learner is ejected when asking for help; same mechanism as CHEM-016 in Chemistry.
 - Reproducibility: Seen in the first 8 Biology lessons; counted at the end of the run.
-- Also observed (68 occurrences in 64 lessons): #61 (A4) tt18/t18; #141 (A8) tt19/t19; #161 (A9) tt17/t17; #21 (A2) tt20/t20; #63 (A3) tt26; #3 (A1) t16; #4 (A1) t23; #5 (A1) t20; #7 (A1) t16; #8 (A1) t21; #9 (A1) t13; #182 (A10) t26; #185 (A10) t21; #186 (A10) t19; #187 (A10) t24; #188 (A10) t22; #23 (A2) t15; #24 (A2) t19; #25 (A2) t23; #26 (A2) t21; #27 (A2) t18; #28 (A2) t22; #29 (A2) t14; #41 (A3) t19; #42 (A3) t23; #43 (A3) t22; #44 (A3) t22; #45 (A3) t26; #47 (A3) t24; #48 (A3) t19; #62 (A4) t20; #63 (A4) t25; #64 (A4) t21; #65 (A4) t23; #66 (A4) t16; #67 (A4) t16; #82 (A5) t17; #83 (A5) t20; #84 (A5) t25; #85 (A5) t23; #86 (A5) t26; #87 (A5) t19; #102 (A6) t27; #103 (A6) t23; #104 (A6) t21; #105 (A6) t23; #106 (A6) t14; #107 (A6) t20; #108 (A6) t24; #124 (A7) t20; #125 (A7) t22; #126 (A7) t20; #127 (A7) t22; #128 (A7) t21; #143 (A8) t21; #145 (A8) t17; #147 (A8) t22; #148 (A8) t12; #149 (A8) t18; #162 (A9) t21; #163 (A9) t21; #165 (A9) t22; #166 (A9) t22; #167 (A9) t19
+- Also observed (87 occurrences in 83 lessons): #61 (A4) tt18/t18; #141 (A8) tt19/t19; #161 (A9) tt17/t17; #21 (A2) tt20/t20; #63 (A3) tt26; #3 (A1) t16; #4 (A1) t23; #5 (A1) t20; #7 (A1) t16; #8 (A1) t21; #9 (A1) t13; #10 (A1) t21; #12 (A1) t16; #182 (A10) t26; #185 (A10) t21; #186 (A10) t19; #187 (A10) t24; #188 (A10) t22; #190 (A10) t20; #191 (A10) t19; #23 (A2) t15; #24 (A2) t19; #25 (A2) t23; #26 (A2) t21; #27 (A2) t18; #28 (A2) t22; #29 (A2) t14; #30 (A2) t24; #41 (A3) t19; #42 (A3) t23; #43 (A3) t22; #44 (A3) t22; #45 (A3) t26; #47 (A3) t24; #48 (A3) t19; #49 (A3) t23; #62 (A4) t20; #63 (A4) t25; #64 (A4) t21; #65 (A4) t23; #66 (A4) t16; #67 (A4) t16; #70 (A4) t12; #82 (A5) t17; #83 (A5) t20; #84 (A5) t25; #85 (A5) t23; #86 (A5) t26; #87 (A5) t19; #88 (A5) t18; #89 (A5) t18; #90 (A5) t19; #102 (A6) t27; #103 (A6) t23; #104 (A6) t21; #105 (A6) t23; #106 (A6) t14; #107 (A6) t20; #108 (A6) t24; #109 (A6) t24; #110 (A6) t26; #124 (A7) t20; #125 (A7) t22; #126 (A7) t20; #127 (A7) t22; #128 (A7) t21; #129 (A7) t24; #130 (A7) t17; #131 (A7) t20; #143 (A8) t21; #145 (A8) t17; #147 (A8) t22; #148 (A8) t12; #149 (A8) t18; #150 (A8) t23; #162 (A9) t21; #163 (A9) t21; #165 (A9) t22; #166 (A9) t22; #167 (A9) t19; #168 (A9) t16; #169 (A9) t18; #170 (A9) t19
 - Notes on occurrences: #61 tt18: Paused on "explain again" (mastery CHECK, not verified) · #141 tt19: Paused on "continue" · #161 tt17: Paused on "explain simpler" · #21 tt20: Paused on "i dont understand this picture" · #63 tt26: Paused on "quiz me" after 25 turns
 - Related defect: —
 - Status: OPEN
@@ -128,7 +128,7 @@ Mastery/progress · Concurrency/session isolation.
 - Actual behaviour: The same empathy opener is attached to most "i dont understand / explain again / why?" replies.
 - Why it is a defect: Repetitive filler; no adaptation.
 - Reproducibility: Seen in every lesson read so far.
-- Also observed (205 occurrences in 76 lessons): #101 (A6) tt5,t12/t5/t12/t14; #141 (A8) tt2,t5,t12,t18/t5/t12/t18; #121 (A7) tt9,t11/t9/t11; #21 (A2) tt12,t16,t17/t12/t16/t17; #1 (A1) t2/t7/t10; #2 (A1) t2/t6/t15/t18; #3 (A1) t11/t15; #4 (A1) t8/t12; #5 (A1) t3/t14; #6 (A1) t5; #7 (A1) t5/t9/t13; #8 (A1) t3/t9; #182 (A10) t5/t7/t18/t19/t25; #183 (A10) t6/t7; #185 (A10) t7/t14/t20; #186 (A10) t2/t8/t11/t14/t16; #187 (A10) t7/t9/t22; #188 (A10) t4/t5/t8/t10/t15; #189 (A10) t3/t6/t9/t22; #22 (A2) t3; #23 (A2) t13; #24 (A2) t18; #25 (A2) t2/t3/t14; #26 (A2) t4/t7/t10/t11/t18; #27 (A2) t2/t5/t15; #28 (A2) t9/t21; #29 (A2) t12; #41 (A3) t17; #42 (A3) t3/t6/t16; #43 (A3) t2/t3/t9/t20; #44 (A3) t3/t4/t11/t19/t20; #45 (A3) t19/t25; #46 (A3) t4/t12/t13; #47 (A3) t4/t18; #48 (A3) t2/t5/t18; #61 (A4) t14; #62 (A4) t16; #63 (A4) t3/t7/t15/t17/t19; #64 (A4) t10/t11/t12; #65 (A4) t18/t19; #66 (A4) t13/t14; #67 (A4) t7; #69 (A4) t3/t4/t7; #81 (A5) t10; #82 (A5) t12; #84 (A5) t10/t12/t16; #85 (A5) t6/t7/t9/t17; #86 (A5) t2/t4/t8/t12/t22; #87 (A5) t7/t11; #102 (A6) t18/t26; #103 (A6) t9/t12/t18; #104 (A6) t6/t13/t17/t18; #105 (A6) t15/t19/t22; #106 (A6) t11; #107 (A6) t6/t7/t15/t18; #108 (A6) t3/t10/t21; #123 (A7) t3; #124 (A7) t15; #125 (A7) t7/t8/t14/t21; #126 (A7) t6/t13/t16/t18; #127 (A7) t4/t5/t16/t18; #128 (A7) t2/t6/t19/t20; #142 (A8) t2/t3/t6; #143 (A8) t7/t18; #144 (A8) t5/t7; #145 (A8) t3; #146 (A8) t6; #147 (A8) t4/t6/t8/t19; #149 (A8) t12; #161 (A9) t14; #162 (A9) t12/t13; #163 (A9) t4/t20; #164 (A9) t4/t14/t17; #165 (A9) t11/t21; #166 (A9) t2/t5/t9/t11; #167 (A9) t2/t4/t9/t18
+- Also observed (270 occurrences in 99 lessons): #101 (A6) tt5,t12/t5/t12/t14; #141 (A8) tt2,t5,t12,t18/t5/t12/t18; #121 (A7) tt9,t11/t9/t11; #21 (A2) tt12,t16,t17/t12/t16/t17; #1 (A1) t2/t7/t10; #2 (A1) t2/t6/t15/t18; #3 (A1) t11/t15; #4 (A1) t8/t12; #5 (A1) t3/t14; #6 (A1) t5; #7 (A1) t5/t9/t13; #8 (A1) t3/t9; #10 (A1) t9/t10/t17/t18; #12 (A1) t4; #182 (A10) t5/t7/t18/t19/t25; #183 (A10) t6/t7; #185 (A10) t7/t14/t20; #186 (A10) t2/t8/t11/t14/t16; #187 (A10) t7/t9/t22; #188 (A10) t4/t5/t8/t10/t15; #189 (A10) t3/t6/t9/t22; #190 (A10) t12/t15; #191 (A10) t18; #22 (A2) t3; #23 (A2) t13; #24 (A2) t18; #25 (A2) t2/t3/t14; #26 (A2) t4/t7/t10/t11/t18; #27 (A2) t2/t5/t15; #28 (A2) t9/t21; #29 (A2) t12; #30 (A2) t3/t4/t10/t13/t17/t23; #31 (A2) t2/t8/t15/t17/t22; #41 (A3) t17; #42 (A3) t3/t6/t16; #43 (A3) t2/t3/t9/t20; #44 (A3) t3/t4/t11/t19/t20; #45 (A3) t19/t25; #46 (A3) t4/t12/t13; #47 (A3) t4/t18; #48 (A3) t2/t5/t18; #49 (A3) t5/t18/t20; #50 (A3) t9; #61 (A4) t14; #62 (A4) t16; #63 (A4) t3/t7/t15/t17/t19; #64 (A4) t10/t11/t12; #65 (A4) t18/t19; #66 (A4) t13/t14; #67 (A4) t7; #69 (A4) t3/t4/t7; #71 (A4) t8; #72 (A4) t4/t6/t11/t22; #81 (A5) t10; #82 (A5) t12; #84 (A5) t10/t12/t16; #85 (A5) t6/t7/t9/t17; #86 (A5) t2/t4/t8/t12/t22; #87 (A5) t7/t11; #88 (A5) t2/t3/t8/t9; #89 (A5) t2/t6; #90 (A5) t2/t4/t12; #102 (A6) t18/t26; #103 (A6) t9/t12/t18; #104 (A6) t6/t13/t17/t18; #105 (A6) t15/t19/t22; #106 (A6) t11; #107 (A6) t6/t7/t15/t18; #108 (A6) t3/t10/t21; #109 (A6) t3/t4/t9/t14/t18/t23; #110 (A6) t3/t7/t19/t25; #123 (A7) t3; #124 (A7) t15; #125 (A7) t7/t8/t14/t21; #126 (A7) t6/t13/t16/t18; #127 (A7) t4/t5/t16/t18; #128 (A7) t2/t6/t19/t20; #129 (A7) t12/t19; #130 (A7) t15/t16; #131 (A7) t5/t16/t18; #142 (A8) t2/t3/t6; #143 (A8) t7/t18; #144 (A8) t5/t7; #145 (A8) t3; #146 (A8) t6; #147 (A8) t4/t6/t8/t19; #149 (A8) t12; #150 (A8) t6/t7/t9/t10/t17; #151 (A8) t11; #161 (A9) t14; #162 (A9) t12/t13; #163 (A9) t4/t20; #164 (A9) t4/t14/t17; #165 (A9) t11/t21; #166 (A9) t2/t5/t9/t11; #167 (A9) t2/t4/t9/t18; #168 (A9) t15; #169 (A9) t7/t8; #170 (A9) t3/t18
 - Notes on occurrences: #101 tt5,t12: "I hear you…" · #141 tt2,t5,t12,t18: "I hear you…" / "I’m sorry you’re feeling stuck"; 🌱 emoji · #121 tt9,t11: "I hear you…" · #21 tt12,t16,t17: "I hear you…"
 - Related defect: —
 - Status: OPEN
@@ -147,7 +147,7 @@ Mastery/progress · Concurrency/session isolation.
 - Actual behaviour: Analogy loops with near-identical structure.
 - Why it is a defect: A learner who did not understand receives the same idea repeated.
 - Reproducibility: Seen in every lesson read so far.
-- Also observed (14 occurrences in 14 lessons): #61 (A4) t16; #101 (A6) tt3,t6,t12,t14; #141 (A8) tt1,t2,t5,t11,t12,t13,t15; #161 (A9) tt6,t12; #121 (A7) tt6,t9,t18; #81 (A5) tt2,t5,t9,t10; #21 (A2) tt4,t17,t18; #188 (A10) t-; #25 (A2) t-; #42 (A3) t-; #44 (A3) t-; #65 (A4) t-; #108 (A6) t-; #167 (A9) t-
+- Also observed (17 occurrences in 17 lessons): #61 (A4) t16; #101 (A6) tt3,t6,t12,t14; #141 (A8) tt1,t2,t5,t11,t12,t13,t15; #161 (A9) tt6,t12; #121 (A7) tt6,t9,t18; #81 (A5) tt2,t5,t9,t10; #21 (A2) tt4,t17,t18; #188 (A10) t-; #190 (A10) t-; #25 (A2) t-; #42 (A3) t-; #44 (A3) t-; #65 (A4) t-; #108 (A6) t-; #109 (A6) t-; #110 (A6) t-; #167 (A9) t-
 - Notes on occurrences: #61 t16: family photo album analogy · #101 tt3,t6,t12,t14: delivery driver / truck / two courses / deck of cards analogies · #141 tt1,t2,t5,t11,t12,t13,t15: mailbox / billboard / restaurant / castle walls / front desk analogies · #161 tt6,t12: grocery list / highway analogies · #121 tt6,t9,t18: kitchen sink / bathtub-soap analogies · #81 tt2,t5,t9,t10: snowball / microphone-speaker / thermostat / rubber band analogies · #21 tt4,t17,t18: dough loaves / deck of cards / bread loaf analogies
 - Related defect: —
 - Status: OPEN
@@ -166,7 +166,7 @@ Mastery/progress · Concurrency/session isolation.
 - Actual behaviour: A promise of a question, or an unrelated topic.
 - Why it is a defect: The learner asked for the next step and got none.
 - Reproducibility: Seen in #1 and #41.
-- Also observed (51 occurrences in 48 lessons): #101 (A6) t13; #141 (A8) t9; #21 (A2) t13; #4 (A1) t13; #5 (A1) t5; #6 (A1) t11; #7 (A1) t7; #8 (A1) t6; #9 (A1) t6; #182 (A10) t13; #183 (A10) t12; #186 (A10) t4; #187 (A10) t12; #188 (A10) t18; #189 (A10) t5; #22 (A2) t6; #24 (A2) t10; #25 (A2) t6; #28 (A2) t13; #41 (A3) t8; #42 (A3) t9; #45 (A3) t10; #46 (A3) t8; #62 (A4) t19; #63 (A4) t12; #64 (A4) t14; #67 (A4) t10; #69 (A4) t11; #83 (A5) t11; #84 (A5) t17; #86 (A5) t5; #87 (A5) t8; #103 (A6) t13; #104 (A6) t20; #106 (A6) t5; #108 (A6) t19; #122 (A7) t8; #123 (A7) t15; #124 (A7) t3; #125 (A7) t12; #126 (A7) t10; #128 (A7) t7; #144 (A8) t9; #146 (A8) t9; #147 (A8) t14; #163 (A9) t19; #164 (A9) t6; #167 (A9) t14
+- Also observed (69 occurrences in 66 lessons): #101 (A6) t13; #141 (A8) t9; #21 (A2) t13; #4 (A1) t13; #5 (A1) t5; #6 (A1) t11; #7 (A1) t7; #8 (A1) t6; #9 (A1) t6; #11 (A1) t7; #12 (A1) t3; #182 (A10) t13; #183 (A10) t12; #186 (A10) t4; #187 (A10) t12; #188 (A10) t18; #189 (A10) t5; #190 (A10) t16; #191 (A10) t9; #22 (A2) t6; #24 (A2) t10; #25 (A2) t6; #28 (A2) t13; #31 (A2) t9; #41 (A3) t8; #42 (A3) t9; #45 (A3) t10; #46 (A3) t8; #50 (A3) t10; #62 (A4) t19; #63 (A4) t12; #64 (A4) t14; #67 (A4) t10; #69 (A4) t11; #71 (A4) t11; #72 (A4) t18; #83 (A5) t11; #84 (A5) t17; #86 (A5) t5; #87 (A5) t8; #88 (A5) t11; #90 (A5) t10; #103 (A6) t13; #104 (A6) t20; #106 (A6) t5; #108 (A6) t19; #110 (A6) t4; #122 (A7) t8; #123 (A7) t15; #124 (A7) t3; #125 (A7) t12; #126 (A7) t10; #128 (A7) t7; #129 (A7) t15; #130 (A7) t4; #131 (A7) t12; #144 (A8) t9; #146 (A8) t9; #147 (A8) t14; #150 (A8) t18; #151 (A8) t9; #163 (A9) t19; #164 (A9) t6; #167 (A9) t14; #169 (A9) t12; #170 (A9) t7
 - Notes on occurrences: #101 t13: raw authored paragraph on "ok" (flower structure…) · #141 t9: raw MHC paragraph on "next question please" · #21 t13: raw authored paragraph on "quiz me"
 - Related defect: —
 - Status: OPEN
@@ -185,7 +185,7 @@ Mastery/progress · Concurrency/session isolation.
 - Actual behaviour: A dense multi-class paragraph.
 - Why it is a defect: Wall of text for a weak-English learner (CHEM-003 equivalent).
 - Reproducibility: Seen in #41 t8; count at end.
-- Also observed (13 occurrences in 11 lessons): #61 (A4) t17; #161 (A9) tt16; #121 (A7) t12; #1 (A1) t10; #183 (A10) t8; #185 (A10) t16; #24 (A2) t7; #43 (A3) t12; #62 (A4) t17; #123 (A7) t5; #149 (A8) t17
+- Also observed (15 occurrences in 13 lessons): #61 (A4) t17; #161 (A9) tt16; #121 (A7) t12; #1 (A1) t10; #183 (A10) t8; #185 (A10) t16; #24 (A2) t7; #43 (A3) t12; #49 (A3) t2; #62 (A4) t17; #123 (A7) t5; #149 (A8) t17; #169 (A9) t17
 - Notes on occurrences: #61 t17: "ok" -> "let’s see if you can pick out one" with no card · #161 tt16: "next question please" -> a recap of the learner’s own typed line · #121 t12: "next question please" -> "I’ll have the next question ready… Just let me know when you’d like to move on"
 - Related defect: —
 - Status: OPEN
@@ -204,7 +204,7 @@ Mastery/progress · Concurrency/session isolation.
 - Actual behaviour: "Wrong"/"Correct" are ambiguous labels for a weak-English reader.
 - Why it is a defect: Same ambiguity recorded as CHEM-140 in Chemistry.
 - Reproducibility: Seen in #1 (twice).
-- Also observed (40 occurrences in 24 lessons): #81 (A5) tt7,t12/t7/t12; #1 (A1) t11/t16; #9 (A1) t4/t8; #183 (A10) t13/t15; #186 (A10) t5/t17; #25 (A2) t10/t20; #26 (A2) t7; #27 (A2) t9/t11; #28 (A2) t3/t17; #29 (A2) t8; #45 (A3) t4/t20; #46 (A3) t8; #47 (A3) t16/t21; #48 (A3) t10/t15; #82 (A5) t8/t15; #84 (A5) t18; #85 (A5) t11; #86 (A5) t15; #105 (A6) t13/t17; #106 (A6) t6/t8; #122 (A7) t4/t10; #143 (A8) t9; #144 (A8) t21; #164 (A9) t19
+- Also observed (45 occurrences in 27 lessons): #81 (A5) tt7,t12/t7/t12; #1 (A1) t11/t16; #9 (A1) t4/t8; #183 (A10) t13/t15; #186 (A10) t5/t17; #190 (A10) t17; #191 (A10) t4/t12; #25 (A2) t10/t20; #26 (A2) t7; #27 (A2) t9/t11; #28 (A2) t3/t17; #29 (A2) t8; #30 (A2) t15/t20; #45 (A3) t4/t20; #46 (A3) t8; #47 (A3) t16/t21; #48 (A3) t10/t15; #82 (A5) t8/t15; #84 (A5) t18; #85 (A5) t11; #86 (A5) t15; #105 (A6) t13/t17; #106 (A6) t6/t8; #122 (A7) t4/t10; #143 (A8) t9; #144 (A8) t21; #164 (A9) t19
 - Notes on occurrences: #81 tt7,t12: options "Not necessarily / Correct"
 - Related defect: —
 - Status: OPEN
@@ -223,7 +223,7 @@ Mastery/progress · Concurrency/session isolation.
 - Actual behaviour: Fallback text instead of an answer.
 - Why it is a defect: Load-related loss of answers; cause uncertain.
 - Reproducibility: Count at end.
-- Also observed (141 occurrences in 55 lessons): #23 (A2) tt2,t6/t2/t6/t12/t14; #84 (A5) t1/t11/t12/t18/t21/t22/t24; #186 (A10) t15/t16; #144 (A8) t19/t3/t8/t20; #27 (A2) t1; #105 (A6) t4/t7; #127 (A7) t1/t21; #147 (A8) t13/t20; #126 (A7) t12; #188 (A10) t6/t17; #1 (A1) t13; #2 (A1) t17; #4 (A1) t4/t16/t17/t18/t19/t20; #5 (A1) t19; #9 (A1) t12; #183 (A10) t3; #185 (A10) t3/t6/t18; #187 (A10) t4/t21/t23; #189 (A10) t7/t11/t14/t16/t21/t27; #24 (A2) t6/t7; #25 (A2) t18; #29 (A2) t6; #42 (A3) t22; #43 (A3) t12/t21; #44 (A3) t6/t21/t22; #45 (A3) t6/t9/t13/t24; #47 (A3) t10/t13; #62 (A4) t17/t18; #63 (A4) t16/t18/t24/t25; #64 (A4) t2/t6; #65 (A4) t3/t22; #67 (A4) t1; #83 (A5) t18; #85 (A5) t2/t4/t16/t18/t19; #86 (A5) t3/t13/t25; #87 (A5) t10/t11; #102 (A6) t14/t19/t24; #103 (A6) t5/t7/t20; #104 (A6) t1/t7; #108 (A6) t22; #122 (A7) t7; #123 (A7) t2/t5/t10; #124 (A7) t2/t3/t10/t14; #125 (A7) t4/t10; #128 (A7) t10/t14; #143 (A8) t3/t15/t16; #145 (A8) t13; #146 (A8) t2; #148 (A8) t6/t11; #149 (A8) t14/t16; #162 (A9) t19/t20; #163 (A9) t3/t16; #164 (A9) t9; #165 (A9) t3/t4/t6/t16; #166 (A9) t21/t22
+- Also observed (172 occurrences in 71 lessons): #23 (A2) tt2,t6/t2/t6/t12/t14; #84 (A5) t1/t11/t12/t18/t21/t22/t24; #186 (A10) t15/t16; #144 (A8) t19/t3/t8/t20; #27 (A2) t1; #105 (A6) t4/t7; #127 (A7) t1/t21; #147 (A8) t13/t20; #126 (A7) t12; #188 (A10) t6/t17; #1 (A1) t13; #2 (A1) t17; #4 (A1) t4/t16/t17/t18/t19/t20; #5 (A1) t19; #9 (A1) t12; #10 (A1) t8; #11 (A1) t4; #183 (A10) t3; #185 (A10) t3/t6/t18; #187 (A10) t4/t21/t23; #189 (A10) t7/t11/t14/t16/t21/t27; #190 (A10) t4/t10/t11; #191 (A10) t3/t8; #24 (A2) t6/t7; #25 (A2) t18; #29 (A2) t6; #30 (A2) t1; #42 (A3) t22; #43 (A3) t12/t21; #44 (A3) t6/t21/t22; #45 (A3) t6/t9/t13/t24; #47 (A3) t10/t13; #49 (A3) t8; #50 (A3) t13; #62 (A4) t17/t18; #63 (A4) t16/t18/t24/t25; #64 (A4) t2/t6; #65 (A4) t3/t22; #67 (A4) t1; #71 (A4) t5; #72 (A4) t1; #83 (A5) t18; #85 (A5) t2/t4/t16/t18/t19; #86 (A5) t3/t13/t25; #87 (A5) t10/t11; #88 (A5) t4/t6/t7; #102 (A6) t14/t19/t24; #103 (A6) t5/t7/t20; #104 (A6) t1/t7; #108 (A6) t22; #109 (A6) t5/t7/t20; #110 (A6) t8/t13; #122 (A7) t7; #123 (A7) t2/t5/t10; #124 (A7) t2/t3/t10/t14; #125 (A7) t4/t10; #128 (A7) t10/t14; #129 (A7) t1/t2/t7/t23/t24; #143 (A8) t3/t15/t16; #145 (A8) t13; #146 (A8) t2; #148 (A8) t6/t11; #149 (A8) t14/t16; #162 (A9) t19/t20; #163 (A9) t3/t16; #164 (A9) t9; #165 (A9) t3/t4/t6/t16; #166 (A9) t21/t22; #168 (A9) t2/t4/t14; #169 (A9) t3; #170 (A9) t13
 - Notes on occurrences: #23 tt2,t6: degraded replies on "show me step by step" and "give me example with numbers" · #84 t1: lesson opens with a degraded fallback reply · #186 t15: degraded reply on "show me step by step" with a stray figure line · #144 t19: degraded reply on "give me example with numbers" · #27 t1: lesson opens with a degraded fallback · #105 t4: degraded reply on "give me example with numbers" · #127 t1: lesson opens with a degraded fallback · #147 t13: degraded reply on "give me example"
 - Related defect: —
 - Status: OPEN
@@ -259,7 +259,7 @@ Mastery/progress · Concurrency/session isolation.
 - Actual behaviour: The lesson-goal string from the curriculum is shown as the whole reply.
 - Why it is a defect: Raw metadata, no teaching (same as CHEM-064).
 - Reproducibility: Observed once (#61 t6); count at end.
-- Also observed (9 occurrences in 8 lessons): #141 (A8) t8; #22 (A2) t4; #2 (A2) tt4; #2 (A1) t4; #3 (A1) t13; #61 (A4) t6; #84 (A5) t4; #102 (A6) t6
+- Also observed (12 occurrences in 11 lessons): #141 (A8) t8; #22 (A2) t4; #2 (A2) tt4; #2 (A1) t4; #3 (A1) t13; #61 (A4) t6; #84 (A5) t4; #89 (A5) t7; #102 (A6) t6; #109 (A6) t2; #168 (A9) t12
 - Notes on occurrences: #141 t8: "quiz me" -> "MHC and Antigen Presentation covers: MHC class I (all nucleated cells…)…" · #22 t4: raw lesson-goal string as the reply to a card answer (#22 t4) · #2 tt4: card answer "Cellular organisation" -> reply is the raw lesson goal "Growth, reproduction, metabolism, … evolution as the defining properties…"
 - Related defect: —
 - Status: OPEN
@@ -297,8 +297,8 @@ Mastery/progress · Concurrency/session isolation.
 - Actual behaviour: A verdict-style explanation for a different question; looks like a reply to a card from elsewhere.
 - Why it is a defect: Same mechanism as CHEM-035: the reply is written for a card the learner did not get.
 - Reproducibility: Observed once (#141 t4); count at end.
-- Also observed (1 occurrence in 1 lesson): #86 (A5) t19
-- Notes on occurrences: #86 t19: "show me step by step" -> "That’s right—when a muscle needs more force, it brings in progressively larger motor units. Please select the correct statement about…" (verdict on a prior card and a new card instead of steps)
+- Also observed (2 occurrences in 2 lessons): #86 (A5) t19; #49 (A3) tex
+- Notes on occurrences: #86 t19: "show me step by step" -> "That’s right—when a muscle needs more force, it brings in progressively larger motor units. Please select the correct statement about…" (verdict on a prior card and a new card instead of steps) · #49 tex: "give me example" answered with "That’s correct — the ratio you identified is indeed 3 tall : 1 short" (verdict on an earlier answer)
 - Related defect: —
 - Status: OPEN
 
@@ -369,7 +369,7 @@ Mastery/progress · Concurrency/session isolation.
 - Actual behaviour: A neutral description and a move to the next topic.
 - Why it is a defect: The learner cannot tell if they were right (CHEM-028 equivalent).
 - Reproducibility: Seen in #181 t3 and #161 t3.
-- Also observed (13 occurrences in 12 lessons): #1 (A1) t17; #9 (A1) t9; #181 (A10) t4; #45 (A3) t5/t21; #62 (A4) t14; #69 (A4) t13; #105 (A6) t17; #108 (A6) t16; #121 (A7) t20; #122 (A7) t5; #142 (A8) t14; #144 (A8) t22
+- Also observed (17 occurrences in 16 lessons): #1 (A1) t17; #9 (A1) t9; #10 (A1) t5; #12 (A1) t13; #181 (A10) t4; #45 (A3) t5/t21; #62 (A4) t14; #69 (A4) t13; #105 (A6) t17; #108 (A6) t16; #121 (A7) t20; #122 (A7) t5; #142 (A8) t14; #144 (A8) t22; #151 (A8) t15; #170 (A9) t11
 - Related defect: —
 - Status: OPEN
 
@@ -406,7 +406,7 @@ Mastery/progress · Concurrency/session isolation.
 - Actual behaviour: Verbatim repeats (options sometimes reordered).
 - Why it is a defect: Mastery can be reached by remembering an answer already given (CHEM-033 equivalent).
 - Reproducibility: Counted automatically over all lessons at the end.
-- Also observed (87 occurrences in 61 lessons): #1 (A1) t16; #2 (A1) t18; #3 (A1) t6; #5 (A1) t10/t11; #6 (A1) t13; #7 (A1) t11; #8 (A1) t17; #9 (A1) t8/t9; #182 (A10) t21/t22; #183 (A10) t15; #186 (A10) t17; #187 (A10) t19; #189 (A10) t24/t28/t29; #21 (A2) t10/t13; #22 (A2) t11; #23 (A2) t9/t10; #24 (A2) t15; #25 (A2) t19/t20; #27 (A2) t11; #28 (A2) t17/t18; #29 (A2) t10; #41 (A3) t14; #43 (A3) t14/t15; #45 (A3) t20/t21; #46 (A3) t13; #47 (A3) t20/t21; #48 (A3) t15; #61 (A4) t11; #62 (A4) t13; #63 (A4) t21/t25; #64 (A4) t17; #65 (A4) t14; #66 (A4) t10/t11; #67 (A4) t12; #81 (A5) t12; #82 (A5) t14/t15; #83 (A5) t13; #85 (A5) t13/t14; #86 (A5) t17/t20; #87 (A5) t15/t16; #101 (A6) t16; #102 (A6) t11; #105 (A6) t16/t17; #106 (A6) t8; #107 (A6) t16; #108 (A6) t19; #121 (A7) t19/t20; #122 (A7) t10; #123 (A7) t17; #124 (A7) t17; #125 (A7) t15/t16; #128 (A7) t12; #141 (A8) t16; #142 (A8) t13; #148 (A8) t9; #149 (A8) t8; #161 (A9) t9/t10; #162 (A9) t17; #163 (A9) t11/t12; #165 (A9) t13/t14; #166 (A9) t17/t18
+- Also observed (120 occurrences in 80 lessons): #1 (A1) t16; #2 (A1) t18; #3 (A1) t6; #5 (A1) t10/t11; #6 (A1) t13; #7 (A1) t11; #8 (A1) t17; #9 (A1) t8/t9; #11 (A1) t9/t10; #12 (A1) t12/t13; #182 (A10) t21/t22; #183 (A10) t15; #186 (A10) t17; #187 (A10) t19; #189 (A10) t24/t28/t29; #191 (A10) t12/t15/t16; #21 (A2) t10/t13; #22 (A2) t11; #23 (A2) t9/t10; #24 (A2) t15; #25 (A2) t19/t20; #27 (A2) t11; #28 (A2) t17/t18; #29 (A2) t10; #30 (A2) t20; #31 (A2) t23/t24/t25; #41 (A3) t14; #43 (A3) t14/t15; #45 (A3) t20/t21; #46 (A3) t13; #47 (A3) t20/t21; #48 (A3) t15; #49 (A3) t15/t16; #50 (A3) t13/t14/t15; #61 (A4) t11; #62 (A4) t13; #63 (A4) t21/t25; #64 (A4) t17; #65 (A4) t14; #66 (A4) t10/t11; #67 (A4) t12; #70 (A4) t8; #71 (A4) t18; #72 (A4) t25; #81 (A5) t12; #82 (A5) t14/t15; #83 (A5) t13; #85 (A5) t13/t14; #86 (A5) t17/t20; #87 (A5) t15/t16; #88 (A5) t13/t14; #89 (A5) t13; #90 (A5) t16; #101 (A6) t16; #102 (A6) t11; #105 (A6) t16/t17; #106 (A6) t8; #107 (A6) t16; #108 (A6) t19; #121 (A7) t19/t20; #122 (A7) t10; #123 (A7) t17; #124 (A7) t17; #125 (A7) t15/t16; #128 (A7) t12; #129 (A7) t21; #130 (A7) t9/t10; #141 (A8) t16; #142 (A8) t13; #148 (A8) t9; #149 (A8) t8; #150 (A8) t20/t21; #151 (A8) t13/t14; #161 (A9) t9/t10; #162 (A9) t17; #163 (A9) t11/t12; #165 (A9) t13/t14; #166 (A9) t17/t18; #169 (A9) t14; #170 (A9) t11/t15
 - Related defect: —
 - Status: OPEN
 
@@ -424,7 +424,7 @@ Mastery/progress · Concurrency/session isolation.
 - Actual behaviour: Counted automatically at the end.
 - Why it is a defect: Verified mastery on 2-option cards is weak evidence (CHEM-004 equivalent).
 - Reproducibility: Percentages computed over all cards at the end.
-- Also observed (121 occurrences in 78 lessons): #1 (A1) t11/t16; #2 (A1) t9/t10; #3 (A1) t4/t6; #5 (A1) t8; #6 (A1) t6/t13; #7 (A1) t9; #8 (A1) t6/t17; #9 (A1) t4/t8; #181 (A10) t3; #182 (A10) t19; #183 (A10) t13/t15; #184 (A10) t4; #186 (A10) t5/t17; #187 (A10) t14; #189 (A10) t11/t24; #21 (A2) t6/t13; #22 (A2) t10; #23 (A2) t4/t7/t9; #24 (A2) t10; #25 (A2) t10/t20; #26 (A2) t7; #27 (A2) t9/t11; #28 (A2) t3/t17; #29 (A2) t8; #41 (A3) t11; #42 (A3) t13; #43 (A3) t6/t15; #45 (A3) t4/t20; #46 (A3) t8; #47 (A3) t16/t21; #48 (A3) t10/t15; #61 (A4) t8; #62 (A4) t6/t13; #63 (A4) t4/t21; #64 (A4) t8/t17; #65 (A4) t13; #66 (A4) t9/t11; #67 (A4) t10; #68 (A4) t3; #69 (A4) t12; #81 (A5) t7/t12; #82 (A5) t8/t15; #83 (A5) t6/t13; #84 (A5) t18; #85 (A5) t11; #86 (A5) t15; #87 (A5) t8/t15; #101 (A6) t9/t16; #102 (A6) t8; #103 (A6) t15; #105 (A6) t13/t17; #106 (A6) t6/t8; #107 (A6) t15; #108 (A6) t3/t19; #121 (A7) t4/t19; #122 (A7) t4/t10; #123 (A7) t15; #124 (A7) t7/t17; #125 (A7) t12/t16; #126 (A7) t10; #127 (A7) t14; #128 (A7) t11; #141 (A8) t9/t16; #142 (A8) t8/t13; #143 (A8) t9; #144 (A8) t21; #145 (A8) t5; #146 (A8) t9; #147 (A8) t11; #148 (A8) t3/t9; #149 (A8) t3; #161 (A9) t3/t9; #162 (A9) t5/t17; #163 (A9) t6/t11; #164 (A9) t19; #165 (A9) t9/t14; #166 (A9) t13/t18; #167 (A9) t11
+- Also observed (160 occurrences in 103 lessons): #1 (A1) t11/t16; #2 (A1) t9/t10; #3 (A1) t4/t6; #5 (A1) t8; #6 (A1) t6/t13; #7 (A1) t9; #8 (A1) t6/t17; #9 (A1) t4/t8; #10 (A1) t4; #11 (A1) t7; #12 (A1) t4/t12; #181 (A10) t3; #182 (A10) t19; #183 (A10) t13/t15; #184 (A10) t4; #186 (A10) t5/t17; #187 (A10) t14; #189 (A10) t11/t24; #190 (A10) t17; #191 (A10) t4/t12; #21 (A2) t6/t13; #22 (A2) t10; #23 (A2) t4/t7/t9; #24 (A2) t10; #25 (A2) t10/t20; #26 (A2) t7; #27 (A2) t9/t11; #28 (A2) t3/t17; #29 (A2) t8; #30 (A2) t15/t20; #31 (A2) t13/t24; #41 (A3) t11; #42 (A3) t13; #43 (A3) t6/t15; #45 (A3) t4/t20; #46 (A3) t8; #47 (A3) t16/t21; #48 (A3) t10/t15; #49 (A3) t11; #50 (A3) t10/t15; #61 (A4) t8; #62 (A4) t6/t13; #63 (A4) t4/t21; #64 (A4) t8/t17; #65 (A4) t13; #66 (A4) t9/t11; #67 (A4) t10; #68 (A4) t3; #69 (A4) t12; #70 (A4) t4/t8; #71 (A4) t3/t18; #72 (A4) t19/t25; #81 (A5) t7/t12; #82 (A5) t8/t15; #83 (A5) t6/t13; #84 (A5) t18; #85 (A5) t11; #86 (A5) t15; #87 (A5) t8/t15; #88 (A5) t4/t13; #89 (A5) t11; #90 (A5) t15; #101 (A6) t9/t16; #102 (A6) t8; #103 (A6) t15; #105 (A6) t13/t17; #106 (A6) t6/t8; #107 (A6) t15; #108 (A6) t3/t19; #109 (A6) t7; #110 (A6) t14; #121 (A7) t4/t19; #122 (A7) t4/t10; #123 (A7) t15; #124 (A7) t7/t17; #125 (A7) t12/t16; #126 (A7) t10; #127 (A7) t14; #128 (A7) t11; #129 (A7) t9/t21; #130 (A7) t4/t9; #131 (A7) t8; #141 (A8) t9/t16; #142 (A8) t8/t13; #143 (A8) t9; #144 (A8) t21; #145 (A8) t5; #146 (A8) t9; #147 (A8) t11; #148 (A8) t3/t9; #149 (A8) t3; #150 (A8) t4/t20; #151 (A8) t9/t14; #161 (A9) t3/t9; #162 (A9) t5/t17; #163 (A9) t6/t11; #164 (A9) t19; #165 (A9) t9/t14; #166 (A9) t13/t18; #167 (A9) t11; #168 (A9) t8; #169 (A9) t13; #170 (A9) t8/t15
 - Related defect: —
 - Status: OPEN
 
@@ -638,6 +638,57 @@ Mastery/progress · Concurrency/session isolation.
 - Related defect: —
 - Status: OPEN
 
+### BIO-032 — Worked numbers that do not compute or contradict basic biology: K⁺ ΔG (−7.5 kJ/mol claimed; correct arithmetic gives −15.5 with the sign used, and −2 kJ/mol with the correct electrical sign), 75 %/67 % trophic transfer, fibroblast speed 12 µm/min
+
+- Severity: P2
+- Category: Numerical/factual
+- Date/time: 2026-10-05 19:22 UTC
+- Account: Account 2
+- Biology concept: `bio.cell.membrane-transport-energetics (also #10, #29)`
+- Lesson/order: #30
+- Learner message: give me example with numbers
+- Tutor response: #30 t?: "ΔG = 2.58 ln(5/150) + (1)(96.5)(−0.07) ≈ −7.5 kJ mol⁻¹" (inside 150 mM, outside 5 mM, −70 mV inside; K⁺ moving out). #10: "Sunlight ≈ 1 000 J; algae 200 J; zooplankton obtain roughly 150 J of that; small fish gain about 100 J; the remaining 50 J are lost as heat at each step". #29: "fibroblast extends a lamellipodium at 0.2 µm s⁻¹ (= 12 µm/min)… actin polymerizes at roughly 1 µm min⁻¹… the cell moves about 12 µm in one minute".
+- Expected behaviour: #30: 2.58 × ln(5/150) = −8.8, and the electrical term for K⁺ leaving a cell with inside-negative potential is +6.8, so ΔG ≈ −2 kJ/mol. #10: about 10 % transfer between trophic levels (e.g. 200 → 20 → 2 J). #29: fibroblasts crawl ~0.5 µm/min; 1 µm/min polymerization cannot give 12 µm/min.
+- Actual behaviour: Arithmetic and sign errors (#30), 75 % and 67 % transfer efficiencies with an unexplained "remaining 50 J" (#10), and internally inconsistent speeds (#29).
+- Why it is a defect: The learner who asked for numbers gets numbers that contradict the principle being taught (the 10 % rule, ΔG sign conventions).
+- Reproducibility: Observed in #10, #29, #30 (three lessons).
+- Related defect: —
+- Status: OPEN
+
+### BIO-033 — Plant respiration example: mitochondria "consuming 3 µmol CO₂ and releasing the same amount of O₂" (respiration consumes O₂ and releases CO₂)
+
+- Severity: P2
+- Category: Biology correctness
+- Date/time: 2026-10-05 19:17 UTC
+- Account: Account 5
+- Biology concept: `bio.plant.plant-respiration`
+- Lesson/order: #88
+- Learner message: give me example with numbers
+- Tutor response: "…its mitochondria keep respiring, consuming 3 µmol CO₂ and releasing the same amount of O₂. The net effect is a 7 µmol CO₂ uptake (10 – 3) and a 7 µmol O₂ release…"
+- Expected behaviour: Respiration consumes O₂ and releases CO₂; net CO₂ uptake = gross uptake − respiratory release.
+- Actual behaviour: The gases are reversed for respiration.
+- Why it is a defect: Reverses the core reaction of the lesson in the worked example.
+- Reproducibility: Observed once (#88 num).
+- Related defect: —
+- Status: OPEN
+
+### BIO-034 — Smaller factual/magnitude errors in examples: lung pressure drop 760→750 mmHg for a 2.5→3.0 L volume change; xylem tension "−0.1 MPa per metre"; an oak tree given arbuscular (Glomus) mycorrhiza; "about 20 billion neurons fire" in the frontal lobe
+
+- Severity: P3
+- Category: Numerical/factual
+- Date/time: 2026-10-05 19:30 UTC
+- Account: Account 4
+- Biology concept: `bio.physio.respiratory-system (also #89, #168, #190)`
+- Lesson/order: #72
+- Learner message: give me example (with numbers)
+- Tutor response: #72: "thoracic volume rising from 2.5 L to 3.0 L… pressure inside drops from 760 mm Hg to about 750 mm Hg". #89: "tension of roughly –0.1 MPa for each metre of water column". #168: "a forest oak tree whose roots are wrapped by… Glomus intraradices… forms an arbuscule". #190: "Frontal lobe… about 20 billion neurons fire".
+- Expected behaviour: #72: real intrapulmonary pressure falls only 1–3 mmHg in quiet breathing (Boyle on these volumes would predict ~127 mmHg). #89: hydrostatic gradient is ≈ 0.01 MPa/m. #168: oaks form ectomycorrhiza, not arbuscular mycorrhiza. #190: the whole human cortex has ~16 billion neurons.
+- Actual behaviour: Each example contains a wrong magnitude or association.
+- Why it is a defect: Wrong numbers or associations taught as facts.
+- Reproducibility: Seen in four lessons (one each).
+- Related defect: —
+- Status: OPEN
+
 ## Coverage by lesson
 
 Result per account in brackets: turns driven, and how the lesson closed (mastered / needs-review = "Let's pause … worth another look later").
@@ -654,9 +705,9 @@ Result per account in brackets: turns driven, and how the lesson closed (mastere
 | 7 | `bio.found.microscopy-basics` | Microscopy and Laboratory Techniques | A1 (17t, needs-review) | yes | BIO-002, BIO-003, BIO-005, BIO-018, BIO-019 |
 | 8 | `bio.found.biomes-levels-of-organisation` | Levels of Biological Organisation | A1 (22t, needs-review) | yes | BIO-002, BIO-003, BIO-005, BIO-018, BIO-019, BIO-031 |
 | 9 | `bio.found.scientific-method-in-biology` | The Scientific Method in Biology | A1 (14t, needs-review) | yes | BIO-002, BIO-005, BIO-007, BIO-008, BIO-016, BIO-018, BIO-019 |
-| 10 | `bio.found.unifying-themes-in-biology` | Unifying Themes in Biology | **not covered** | — | — |
-| 11 | `bio.cell.cell-theory` | Cell Theory | **not covered** | — | — |
-| 12 | `bio.cell.prokaryotic-cell` | Prokaryotic Cell Structure | **not covered** | — | — |
+| 10 | `bio.found.unifying-themes-in-biology` | Unifying Themes in Biology | A1 (22t, needs-review) | yes | BIO-002, BIO-003, BIO-008, BIO-016, BIO-019 |
+| 11 | `bio.cell.cell-theory` | Cell Theory | A1 (12t, needs-review) | yes | BIO-005, BIO-008, BIO-018, BIO-019 |
+| 12 | `bio.cell.prokaryotic-cell` | Prokaryotic Cell Structure | A1 (17t, needs-review) | yes | BIO-002, BIO-003, BIO-005, BIO-016, BIO-018, BIO-019 |
 | 13 | `bio.cell.eukaryotic-cell` | Eukaryotic Cell Structure | **not covered** | — | — |
 | 14 | `bio.cell.cell-membrane-transport` | Cell Membrane and Transport | **not covered** | — | — |
 | 15 | `bio.cell.nucleus-chromosomes` | Nucleus and Chromosomes | **not covered** | — | — |
@@ -674,8 +725,8 @@ Result per account in brackets: turns driven, and how the lesson closed (mastere
 | 27 | `bio.cell.cell-adhesion-tissue-organization` | Cell Adhesion and Tissue Organisation | A2 (19t, needs-review) | yes | BIO-002, BIO-003, BIO-007, BIO-008, BIO-018, BIO-019 |
 | 28 | `bio.cell.cell-junctions-extracellular-matrix` | Cell Junctions and the Extracellular Matrix | A2 (23t, needs-review) | yes | BIO-002, BIO-003, BIO-005, BIO-007, BIO-018, BIO-019 |
 | 29 | `bio.cell.cytoskeleton-motility` | Cytoskeletal Motility | A2 (15t, needs-review) | yes | BIO-002, BIO-003, BIO-007, BIO-008, BIO-018, BIO-019 |
-| 30 | `bio.cell.membrane-transport-energetics` | Energetics of Membrane Transport | **not covered** | — | — |
-| 31 | `bio.mol.biomolecule-types` | Types of Biomolecules | **not covered** | — | — |
+| 30 | `bio.cell.membrane-transport-energetics` | Energetics of Membrane Transport | A2 (25t, needs-review) | yes | BIO-002, BIO-003, BIO-007, BIO-008, BIO-018, BIO-019, BIO-032 |
+| 31 | `bio.mol.biomolecule-types` | Types of Biomolecules | A2 (27t, mastered) | yes | BIO-003, BIO-005, BIO-018, BIO-019 |
 | 32 | `bio.mol.carbohydrates-lipids` | Carbohydrates and Lipids | **not covered** | — | — |
 | 33 | `bio.mol.proteins-structure` | Proteins and Protein Structure | **not covered** | — | — |
 | 34 | `bio.mol.enzymes` | Enzymes and Enzyme Kinetics | **not covered** | — | — |
@@ -693,8 +744,8 @@ Result per account in brackets: turns driven, and how the lesson closed (mastere
 | 46 | `bio.mol.chromatin-structure-genome-organization` | Chromatin Structure and 3D Genome Organisation | A3 (15t, needs-review) | yes | BIO-003, BIO-005, BIO-007, BIO-018, BIO-019 |
 | 47 | `bio.mol.metabolic-regulation-integration` | Metabolic Regulation and Integration | A3 (25t, needs-review) | yes | BIO-002, BIO-003, BIO-007, BIO-008, BIO-018, BIO-019, BIO-028 |
 | 48 | `bio.mol.protein-quality-control-autophagy` | Protein Quality Control and Autophagy | A3 (20t, needs-review) | yes | BIO-002, BIO-003, BIO-007, BIO-018, BIO-019 |
-| 49 | `bio.gen.mendelian-genetics` | Mendelian Genetics | **not covered** | — | — |
-| 50 | `bio.gen.gene-interactions` | Gene Interactions and Extensions of Mendelism | **not covered** | — | — |
+| 49 | `bio.gen.mendelian-genetics` | Mendelian Genetics | A3 (24t, needs-review) | yes | BIO-002, BIO-003, BIO-006, BIO-008, BIO-012, BIO-018, BIO-019 |
+| 50 | `bio.gen.gene-interactions` | Gene Interactions and Extensions of Mendelism | A3 (17t, mastered) | yes | BIO-003, BIO-005, BIO-008, BIO-018, BIO-019 |
 | 51 | `bio.gen.chromosomal-theory-linkage` | Chromosomal Theory and Linkage | **not covered** | — | — |
 | 52 | `bio.gen.pedigree-human-genetics` | Pedigree Analysis and Human Genetic Disorders | **not covered** | — | — |
 | 53 | `bio.gen.mutations` | Mutations | **not covered** | — | — |
@@ -714,9 +765,9 @@ Result per account in brackets: turns driven, and how the lesson closed (mastere
 | 67 | `bio.evo.coevolution-species-interactions` | Coevolution and Species Interactions | A4 (17t, needs-review) | yes | BIO-002, BIO-003, BIO-005, BIO-008, BIO-018, BIO-019, BIO-028 |
 | 68 | `bio.evo.convergent-evolution-homoplasy` | Convergent Evolution and Homoplasy | A4 (7t, mastered) | yes | BIO-019 |
 | 69 | `bio.evo.macroevolution-extinction` | Macroevolution and Mass Extinction | A4 (15t, mastered) | yes | BIO-003, BIO-005, BIO-016, BIO-019 |
-| 70 | `bio.evo.phylogeography-biogeography` | Phylogeography and Historical Biogeography | **not covered** | — | — |
-| 71 | `bio.physio.digestive-system` | Human Digestive System | **not covered** | — | — |
-| 72 | `bio.physio.respiratory-system` | Human Respiratory System | **not covered** | — | — |
+| 70 | `bio.evo.phylogeography-biogeography` | Phylogeography and Historical Biogeography | A4 (13t, needs-review) | yes | BIO-002, BIO-018, BIO-019 |
+| 71 | `bio.physio.digestive-system` | Human Digestive System | A4 (20t, mastered) | yes | BIO-003, BIO-005, BIO-008, BIO-018, BIO-019 |
+| 72 | `bio.physio.respiratory-system` | Human Respiratory System | A4 (27t, mastered) | yes | BIO-003, BIO-005, BIO-008, BIO-018, BIO-019, BIO-034 |
 | 73 | `bio.physio.circulatory-system` | Human Circulatory System | **not covered** | — | — |
 | 74 | `bio.physio.excretory-system` | Excretory System and Osmoregulation | **not covered** | — | — |
 | 75 | `bio.physio.nervous-system` | Nervous System and Neural Control | **not covered** | — | — |
@@ -732,9 +783,9 @@ Result per account in brackets: turns driven, and how the lesson closed (mastere
 | 85 | `bio.physio.lymphatic-system-detail` | The Lymphatic System | A5 (25t, needs-review) | yes | BIO-002, BIO-003, BIO-007, BIO-008, BIO-018, BIO-019, BIO-027 |
 | 86 | `bio.physio.muscle-physiology-energetics` | Muscle Physiology and Energetics | A5 (27t, needs-review) | yes | BIO-002, BIO-003, BIO-005, BIO-007, BIO-008, BIO-012, BIO-018, BIO-019, BIO-029 |
 | 87 | `bio.plant.photosynthesis` | Photosynthesis | A5 (21t, needs-review) | yes | BIO-002, BIO-003, BIO-005, BIO-008, BIO-018, BIO-019 |
-| 88 | `bio.plant.plant-respiration` | Respiration in Plants | **not covered** | — | — |
-| 89 | `bio.plant.plant-water-relations` | Plant Water Relations | **not covered** | — | — |
-| 90 | `bio.plant.mineral-nutrition` | Mineral Nutrition in Plants | **not covered** | — | — |
+| 88 | `bio.plant.plant-respiration` | Respiration in Plants | A5 (21t, needs-review) | yes | BIO-002, BIO-003, BIO-005, BIO-008, BIO-018, BIO-019, BIO-033 |
+| 89 | `bio.plant.plant-water-relations` | Plant Water Relations | A5 (19t, needs-review) | yes | BIO-002, BIO-003, BIO-010, BIO-018, BIO-019 |
+| 90 | `bio.plant.mineral-nutrition` | Mineral Nutrition in Plants | A5 (20t, needs-review) | yes | BIO-002, BIO-003, BIO-005, BIO-018, BIO-019 |
 | 91 | `bio.plant.plant-growth-hormones` | Plant Growth and Hormones | **not covered** | — | — |
 | 92 | `bio.plant.mycorrhizae-plant-symbioses` | Mycorrhizae and Root Symbioses | **not covered** | — | — |
 | 93 | `bio.plant.phytochrome-photoperiodic-flowering` | Phytochrome and the Molecular Basis of Photoperiodic Flowering | **not covered** | — | — |
@@ -753,8 +804,8 @@ Result per account in brackets: turns driven, and how the lesson closed (mastere
 | 106 | `bio.repro.hormonal-regulation-reproduction-detail` | Hormonal Regulation of Reproduction | A6 (15t, needs-review) | yes | BIO-002, BIO-003, BIO-005, BIO-007, BIO-018, BIO-019 |
 | 107 | `bio.dev.gametogenesis-fertilisation-dev` | Fundamentals of Animal Development | A6 (21t, needs-review) | yes | BIO-002, BIO-003, BIO-018, BIO-019 |
 | 108 | `bio.dev.morphogenesis-differentiation` | Morphogenesis and Cell Differentiation | A6 (25t, needs-review) | yes | BIO-002, BIO-003, BIO-004, BIO-005, BIO-008, BIO-016, BIO-018, BIO-019, BIO-022 |
-| 109 | `bio.dev.stem-cells-regeneration` | Stem Cells and Regeneration | **not covered** | — | — |
-| 110 | `bio.dev.aging-senescence-biology` | Biology of Ageing and Senescence | **not covered** | — | — |
+| 109 | `bio.dev.stem-cells-regeneration` | Stem Cells and Regeneration | A6 (25t, needs-review) | yes | BIO-002, BIO-003, BIO-004, BIO-008, BIO-010, BIO-019 |
+| 110 | `bio.dev.aging-senescence-biology` | Biology of Ageing and Senescence | A6 (27t, needs-review) | yes | BIO-002, BIO-003, BIO-004, BIO-005, BIO-008, BIO-019 |
 | 111 | `bio.dev.organogenesis` | Organogenesis | **not covered** | — | — |
 | 112 | `bio.dev.regeneration-biology` | Regeneration Biology | **not covered** | — | — |
 | 113 | `bio.eco.organism-environment` | Organisms and their Environment | **not covered** | — | — |
@@ -773,9 +824,9 @@ Result per account in brackets: turns driven, and how the lesson closed (mastere
 | 126 | `bio.eco.predator-prey-dynamics` | Predator-Prey Population Dynamics | A7 (21t, needs-review) | yes | BIO-002, BIO-003, BIO-005, BIO-008, BIO-017, BIO-019 |
 | 127 | `bio.micro.microbial-diversity` | Microbial Diversity | A7 (23t, needs-review) | yes | BIO-002, BIO-003, BIO-008, BIO-019 |
 | 128 | `bio.micro.microbial-growth-culture` | Microbial Growth and Culture Techniques | A7 (22t, needs-review) | yes | BIO-001, BIO-002, BIO-003, BIO-005, BIO-008, BIO-018, BIO-019 |
-| 129 | `bio.micro.microbes-in-human-welfare` | Microbes in Human Welfare | **not covered** | — | — |
-| 130 | `bio.micro.pathogenic-microbes` | Pathogenic Microorganisms and Disease | **not covered** | — | — |
-| 131 | `bio.micro.viral-replication` | Viral Replication and Lifecycle | **not covered** | — | — |
+| 129 | `bio.micro.microbes-in-human-welfare` | Microbes in Human Welfare | A7 (27t, needs-review) | yes | BIO-002, BIO-003, BIO-005, BIO-008, BIO-018, BIO-019 |
+| 130 | `bio.micro.pathogenic-microbes` | Pathogenic Microorganisms and Disease | A7 (18t, needs-review) | yes | BIO-002, BIO-003, BIO-005, BIO-018, BIO-019 |
+| 131 | `bio.micro.viral-replication` | Viral Replication and Lifecycle | A7 (21t, needs-review) | yes | BIO-002, BIO-003, BIO-005, BIO-019 |
 | 132 | `bio.micro.horizontal-gene-transfer` | Horizontal Gene Transfer | **not covered** | — | — |
 | 133 | `bio.micro.antimicrobial-resistance` | Antimicrobial Resistance | **not covered** | — | — |
 | 134 | `bio.micro.archaea-extremophiles` | Archaea and Extremophiles | **not covered** | — | — |
@@ -794,8 +845,8 @@ Result per account in brackets: turns driven, and how the lesson closed (mastere
 | 147 | `bio.biotech.genomics-proteomics` | Genomics and Proteomics | A8 (23t, needs-review) | yes | BIO-002, BIO-003, BIO-005, BIO-008, BIO-019 |
 | 148 | `bio.biotech.crispr-genome-editing` | CRISPR and Genome Editing | A8 (14t, needs-review) | yes | BIO-002, BIO-008, BIO-018, BIO-019 |
 | 149 | `bio.biotech.agricultural-forensic-biotechnology` | Agricultural and Forensic Biotechnology | A8 (19t, needs-review) | yes | BIO-002, BIO-003, BIO-006, BIO-008, BIO-018, BIO-019 |
-| 150 | `bio.biotech.bioprocess-engineering` | Bioprocess Engineering | **not covered** | — | — |
-| 151 | `bio.biotech.gene-therapy-detail` | Gene Therapy | **not covered** | — | — |
+| 150 | `bio.biotech.bioprocess-engineering` | Bioprocess Engineering | A8 (24t, needs-review) | yes | BIO-002, BIO-003, BIO-005, BIO-018, BIO-019 |
+| 151 | `bio.biotech.gene-therapy-detail` | Gene Therapy | A8 (16t, mastered) | yes | BIO-003, BIO-005, BIO-016, BIO-018, BIO-019 |
 | 152 | `bio.bioinfo.bioinformatics-intro` | Introduction to Bioinformatics | **not covered** | — | — |
 | 153 | `bio.bioinfo.sequence-alignment` | Sequence Alignment | **not covered** | — | — |
 | 154 | `bio.bioinfo.phylogenetics-computational` | Computational Phylogenetics | **not covered** | — | — |
@@ -812,9 +863,9 @@ Result per account in brackets: turns driven, and how the lesson closed (mastere
 | 165 | `bio.div.three-domain-system` | Three Domain System | A9 (24t, needs-review) | yes | BIO-002, BIO-003, BIO-008, BIO-018, BIO-019 |
 | 166 | `bio.div.endosymbiotic-theory` | Endosymbiotic Theory | A9 (24t, needs-review) | yes | BIO-002, BIO-003, BIO-008, BIO-018, BIO-019 |
 | 167 | `bio.div.protist-diversity` | Eukaryotic Supergroups and Protist Diversity | A9 (20t, needs-review) | yes | BIO-002, BIO-003, BIO-004, BIO-005, BIO-019 |
-| 168 | `bio.div.fungal-biology` | Fungal Biology | **not covered** | — | — |
-| 169 | `bio.div.plant-diversity-alternation-of-generations` | Plant Diversity and Alternation of Generations | **not covered** | — | — |
-| 170 | `bio.div.cladistics-phylogenetic-thinking` | Cladistics and Phylogenetic Thinking | **not covered** | — | — |
+| 168 | `bio.div.fungal-biology` | Fungal Biology | A9 (17t, needs-review) | yes | BIO-002, BIO-003, BIO-008, BIO-010, BIO-019 |
+| 169 | `bio.div.plant-diversity-alternation-of-generations` | Plant Diversity and Alternation of Generations | A9 (19t, needs-review) | yes | BIO-002, BIO-003, BIO-005, BIO-006, BIO-008, BIO-018, BIO-019 |
+| 170 | `bio.div.cladistics-phylogenetic-thinking` | Cladistics and Phylogenetic Thinking | A9 (20t, needs-review) | yes | BIO-002, BIO-003, BIO-005, BIO-008, BIO-016, BIO-018, BIO-019 |
 | 171 | `bio.div.animal-body-plans-symmetry` | Animal Body Plans and Symmetry | **not covered** | — | — |
 | 172 | `bio.div.arthropod-diversity` | Arthropod Diversity | **not covered** | — | — |
 | 173 | `bio.div.chordate-vertebrate-diversity` | Chordate and Vertebrate Diversity Overview | **not covered** | — | — |
@@ -834,8 +885,8 @@ Result per account in brackets: turns driven, and how the lesson closed (mastere
 | 187 | `bio.behav.social-behavior-eusociality` | Social Behaviour and Eusociality | A10 (25t, needs-review) | yes | BIO-002, BIO-003, BIO-005, BIO-008, BIO-018, BIO-019, BIO-021 |
 | 188 | `bio.neuro.audition-vestibular-system` | Audition and the Vestibular System | A10 (23t, needs-review) | yes | BIO-002, BIO-003, BIO-004, BIO-005, BIO-008, BIO-030 |
 | 189 | `bio.neuro.autonomic-stress-physiology` | Autonomic and Stress Physiology | A10 (30t, no-complete) | yes | BIO-003, BIO-005, BIO-008, BIO-018, BIO-019 |
-| 190 | `bio.neuro.brain-regional-organization` | Regional Organisation of the Brain | **not covered** | — | — |
-| 191 | `bio.neuro.cognitive-neuroscience-consciousness` | Cognitive Neuroscience and Consciousness | **not covered** | — | — |
+| 190 | `bio.neuro.brain-regional-organization` | Regional Organisation of the Brain | A10 (22t, needs-review) | yes | BIO-002, BIO-003, BIO-004, BIO-005, BIO-007, BIO-008, BIO-019 |
+| 191 | `bio.neuro.cognitive-neuroscience-consciousness` | Cognitive Neuroscience and Consciousness | A10 (20t, needs-review) | yes | BIO-002, BIO-003, BIO-005, BIO-007, BIO-008, BIO-018, BIO-019 |
 | 192 | `bio.neuro.learning-memory-neurobiology` | The Neurobiology of Learning and Memory | **not covered** | — | — |
 | 193 | `bio.neuro.neural-circuits-computation` | Neural Circuits and Computation | **not covered** | — | — |
 | 194 | `bio.neuro.neurodegenerative-disease` | Neurodegenerative Disease | **not covered** | — | — |
