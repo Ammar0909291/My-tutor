@@ -4,14 +4,14 @@
 ## Summary (generated from the entries below; counts verified automatically)
 
 - Total lessons in Chemistry curriculum (`/api/curriculum?subject=chemistry`): 186
-- Total lessons studied (full lesson session driven, ≥3 turns): 109
-- Total lessons covered (≥1 account): 109  (58.6 %)
-- Total defects: 114
+- Total lessons studied (full lesson session driven, ≥3 turns): 144
+- Total lessons covered (≥1 account): 144  (77.4 %)
+- Total defects: 138
 - P0: 0
 - P1: 11
-- P2: 65
-- P3: 38
-- Open: 114
+- P2: 80
+- P3: 47
+- Open: 138
 - Fixed: 0
 <!-- SUMMARY:END -->
 
@@ -94,7 +94,7 @@ Mastery/progress · Concurrency/session isolation.
 - Actual behaviour: The learner's complaint is not acted on: the reply is a quiz card (#96 t3, #133 t2) or a LONGER wall of text plus a new card (#39 t5). Never shorter.
 - Why it is a defect: The learner asked for less text and received a test or more text; the adaptation request is silently ignored.
 - Reproducibility: Reproduced on 3 accounts in 3 lessons (#39, #96, #133) in the first run.
-- Also observed (60 occurrences in 50 lessons): #39 (A3) t5; #133 (A8) t2; #97 (A6) t6; #116 (A7) t7; #20 (A2) t14; #58 (A4) t2; #134 (A8) t4; #40 (A3) t18; #3 (A1) t11; #135 (A8) t3; #171 (A10) t13; #4 (A1) t4; #6 (A1) t5; #7 (A1) t12; #10 (A1) t16; #11 (A1) t2; #12 (A1) t6; #170 (A10) t2; #175 (A10) t12; #176 (A10) t12; #177 (A10) t10; #179 (A10) t2; #23 (A2) t3; #24 (A2) t7; #27 (A2) t2; #28 (A2) t2; #29 (A2) t5; #41 (A3) t18; #64 (A4) t6; #65 (A4) t19; #66 (A4) t8; #67 (A4) t4; #79 (A5) t14; #80 (A5) t9; #81 (A5) t13; #82 (A5) t8; #83 (A5) t3; #84 (A5) t2; #87 (A5) t2; #88 (A5) t2; #96 (A6) t3; #99 (A6) t10; #106 (A6) t8; #108 (A6) t2; #125 (A7) t14; #136 (A8) t19; #137 (A8) t17; #141 (A8) t8; #155 (A9) t11; #159 (A9) t9
+- Also observed (80 occurrences in 69 lessons): #39 (A3) t5; #133 (A8) t2; #97 (A6) t6; #116 (A7) t7; #20 (A2) t14; #58 (A4) t2; #134 (A8) t4; #40 (A3) t18; #3 (A1) t11; #135 (A8) t3; #171 (A10) t13; #181 (A10) tt10/t10; #4 (A1) t4; #6 (A1) t5; #7 (A1) t12; #10 (A1) t16; #11 (A1) t2; #12 (A1) t6; #13 (A1) t3; #170 (A10) t2; #175 (A10) t12; #176 (A10) t12; #177 (A10) t10; #179 (A10) t2; #180 (A10) t11; #23 (A2) t3; #24 (A2) t7; #27 (A2) t2; #28 (A2) t2; #29 (A2) t5; #30 (A2) t7; #31 (A2) t2; #41 (A3) t18; #49 (A3) t9; #64 (A4) t6; #65 (A4) t19; #66 (A4) t8; #67 (A4) t4; #69 (A4) t6; #70 (A4) t10; #79 (A5) t14; #80 (A5) t9; #81 (A5) t13; #82 (A5) t8; #83 (A5) t3; #84 (A5) t2; #87 (A5) t2; #88 (A5) t2; #89 (A5) t7; #90 (A5) t7; #91 (A5) t6; #96 (A6) t3; #99 (A6) t10; #106 (A6) t8; #108 (A6) t2; #110 (A6) t7; #111 (A6) t2; #112 (A6) t6; #125 (A7) t14; #127 (A7) t3; #131 (A7) t5; #136 (A8) t19; #137 (A8) t17; #141 (A8) t8; #145 (A8) t13; #155 (A9) t11; #159 (A9) t9; #161 (A9) t15; #164 (A9) t12
 - Notes on occurrences: #39 t5: reply longer than the previous turn + new MCQ; also misattributes the learner's earlier wrong answer ("I hear you saying helium atoms are heavier") · #133 t2: gate card · #97 t6: gate card · #116 t7: gate card whose stem+options are ~60 words (more text, not less) · #20 t14: "let's keep it very short" then a card re-asking an already-answered question · #58 t2: gate card ("Let's see how Equilibrium Concept is sitting") · #134 t4: gate card · #40 t18: gate card
 - Related defect: —
 - Status: OPEN
@@ -113,7 +113,7 @@ Mastery/progress · Concurrency/session isolation.
 - Actual behaviour: A fresh MCQ card is attached to the "already finished" message (same pattern in every completed lesson observed: #1, #39, #77, #96, #115, #133, #169, #170).
 - Why it is a defect: Contradictory: tells the learner the lesson is finished while presenting an unanswered quiz card for it; card text may even re-ask a question already answered.
 - Reproducibility: Reproduced in every completed lesson observed so far (systemic).
-- Also observed (72 occurrences in 57 lessons): #1 (A1) tafter-complete/t15.5; #39 (A3) tafter-complete/t9.5; #77 (A5) tafter-complete/t13.5; #96 (A6) tafter-complete/t11.5; #115 (A7) tafter-complete/t11.5; #2 (A1) tafter-complete/t8.5; #78 (A5) tafter-complete/t6.5; #97 (A6) tafter-complete/t9.5; #116 (A7) tafter-complete/t10.5; #169 (A10) tafter-complete/t6.5; #170 (A10) tafter-complete/t6.5; #133 (A8) tafter-complete/t6.5; #58 (A4) tafter-complete; #134 (A8) tafter-complete/t17.5; #98 (A6) tafter-complete/t6.5; #135 (A8) tafter-complete/t7.5; #3 (A1) t18.5; #4 (A1) t16.5; #5 (A1) t13.5; #6 (A1) t12.5; #8 (A1) t11.5; #9 (A1) t7.5; #11 (A1) t13.5; #171 (A10) t25.5; #173 (A10) t11.5; #174 (A10) t6.5; #175 (A10) t18.5; #176 (A10) t17.5; #20 (A2) t18.5; #22 (A2) t12.5; #24 (A2) t12.5; #25 (A2) t6.5; #26 (A2) t10.5; #28 (A2) t22.5; #43 (A3) t17.5; #64 (A4) t19.5; #67 (A4) t9.5; #80 (A5) t14.5; #82 (A5) t16.5; #83 (A5) t13.5; #84 (A5) t20.5; #85 (A5) t7.5; #100 (A6) t8.5; #101 (A6) t23.5; #104 (A6) t20.5; #105 (A6) t10.5; #119 (A7) t17.5; #120 (A7) t9.5; #124 (A7) t7.5; #126 (A7) t6.5; #136 (A8) t24.5; #138 (A8) t19.5; #139 (A8) t19.5; #142 (A8) t13.5; #153 (A9) t6.5; #157 (A9) t11.5; #158 (A9) t7.5
+- Also observed (81 occurrences in 66 lessons): #1 (A1) tafter-complete/t15.5; #39 (A3) tafter-complete/t9.5; #77 (A5) tafter-complete/t13.5; #96 (A6) tafter-complete/t11.5; #115 (A7) tafter-complete/t11.5; #2 (A1) tafter-complete/t8.5; #78 (A5) tafter-complete/t6.5; #97 (A6) tafter-complete/t9.5; #116 (A7) tafter-complete/t10.5; #169 (A10) tafter-complete/t6.5; #170 (A10) tafter-complete/t6.5; #133 (A8) tafter-complete/t6.5; #58 (A4) tafter-complete; #134 (A8) tafter-complete/t17.5; #98 (A6) tafter-complete/t6.5; #135 (A8) tafter-complete/t7.5; #3 (A1) t18.5; #4 (A1) t16.5; #5 (A1) t13.5; #6 (A1) t12.5; #8 (A1) t11.5; #9 (A1) t7.5; #11 (A1) t13.5; #171 (A10) t25.5; #173 (A10) t11.5; #174 (A10) t6.5; #175 (A10) t18.5; #176 (A10) t17.5; #180 (A10) t20.5; #182 (A10) t21.5; #20 (A2) t18.5; #22 (A2) t12.5; #24 (A2) t12.5; #25 (A2) t6.5; #26 (A2) t10.5; #28 (A2) t22.5; #43 (A3) t17.5; #64 (A4) t19.5; #67 (A4) t9.5; #80 (A5) t14.5; #82 (A5) t16.5; #83 (A5) t13.5; #84 (A5) t20.5; #85 (A5) t7.5; #91 (A5) t18.5; #100 (A6) t8.5; #101 (A6) t23.5; #104 (A6) t20.5; #105 (A6) t10.5; #109 (A6) t17.5; #111 (A6) t17.5; #112 (A6) t10.5; #119 (A7) t17.5; #120 (A7) t9.5; #124 (A7) t7.5; #126 (A7) t6.5; #128 (A7) t7.5; #129 (A7) t8.5; #136 (A8) t24.5; #138 (A8) t19.5; #139 (A8) t19.5; #142 (A8) t13.5; #153 (A9) t6.5; #157 (A9) t11.5; #158 (A9) t7.5; #163 (A9) t8.5
 - Notes on occurrences: #1 tafter-complete: card attached to already-finished message · #39 tafter-complete: card attached to already-finished message · #77 tafter-complete: card attached to already-finished message · #96 tafter-complete: card attached to already-finished message · #115 tafter-complete: card attached to already-finished message · #58 tafter-complete: paused lesson: "on pause" message (no card here)
 - Related defect: —
 - Status: OPEN
@@ -132,7 +132,7 @@ Mastery/progress · Concurrency/session isolation.
 - Actual behaviour: A single dense paragraph of internal-style notes with ALL-CAPS emphasis, jargon, and cross-references ("covered earlier", "atmosphere chemistry unit", "arenes reactivity concept") then a quiz card.
 - Why it is a defect: Not adapted to a weak-English learner, reads as an internal note, cites nonexistent prior lessons, and tests material in the same breath.
 - Reproducibility: Reproduced in #39 t3, #77 t5, #115 t8, #151 t6 (4 accounts) — systemic.
-- Also observed (61 occurrences in 54 lessons): #39 (A3) t3; #77 (A5) t5; #115 (A7) t8; #20 (A2) t8; #40 (A3) t12; #79 (A5) t7; #117 (A7) t14; #171 (A10) t8; #3 (A1) t15; #4 (A1) t8; #7 (A1) t7; #10 (A1) t4; #11 (A1) t10; #12 (A1) t3; #172 (A10) t17; #173 (A10) t8; #176 (A10) t14; #177 (A10) t14; #179 (A10) t4; #22 (A2) t9; #24 (A2) t5; #26 (A2) t7; #41 (A3) t5; #42 (A3) t5; #61 (A4) t14; #62 (A4) t8; #63 (A4) t11; #64 (A4) t11; #65 (A4) t11; #66 (A4) t9; #67 (A4) t4; #80 (A5) t11; #81 (A5) t9; #83 (A5) t8; #87 (A5) t7; #88 (A5) t10; #102 (A6) t12; #104 (A6) t19; #105 (A6) t7; #107 (A6) t8; #118 (A7) t13; #119 (A7) t14; #136 (A8) t9; #137 (A8) t11; #139 (A8) t7; #141 (A8) t6; #142 (A8) t9; #151 (A9) t6; #152 (A9) t17; #155 (A9) t12; #156 (A9) t7; #157 (A9) t8; #159 (A9) t10; #160 (A9) t6
+- Also observed (95 occurrences in 73 lessons): #39 (A3) t3; #77 (A5) t5; #115 (A7) t8; #20 (A2) t8; #40 (A3) t12; #79 (A5) t7; #117 (A7) t14; #171 (A10) t8; #88 (A5) t10; #109 (A6) t4; #128 (A7) t3; #49 (A3) t15; #89 (A5) t12; #181 (A10) t6; #31 (A2) t22; #50 (A3) t10; #111 (A6) t7; #90 (A5) t15; #15 (A1) t14; #71 (A4) t12; #131 (A7) t3; #144 (A8) t9; #182 (A10) t4; #164 (A9) t16; #3 (A1) t15; #4 (A1) t8; #7 (A1) t7; #10 (A1) t4; #11 (A1) t10; #12 (A1) t3; #13 (A1) t4; #172 (A10) t17; #173 (A10) t8; #176 (A10) t14; #177 (A10) t14; #179 (A10) t4; #180 (A10) t8; #22 (A2) t9; #24 (A2) t5; #26 (A2) t7; #30 (A2) t6; #41 (A3) t5; #42 (A3) t5; #61 (A4) t14; #62 (A4) t8; #63 (A4) t11; #64 (A4) t11; #65 (A4) t11; #66 (A4) t9; #67 (A4) t4; #80 (A5) t11; #81 (A5) t9; #83 (A5) t8; #87 (A5) t7; #102 (A6) t12; #104 (A6) t19; #105 (A6) t7; #107 (A6) t8; #118 (A7) t13; #119 (A7) t14; #136 (A8) t9; #137 (A8) t11; #139 (A8) t7; #141 (A8) t6; #142 (A8) t9; #143 (A8) t8; #151 (A9) t6; #152 (A9) t17; #155 (A9) t12; #156 (A9) t7; #157 (A9) t8; #159 (A9) t10; #160 (A9) t6
 - Notes on occurrences: #39 t3: ALL-CAPS dump on "quiz me": Graham's law, empirical/molecular formula, uranium enrichment in one block · #77 t5: ALL-CAPS dump incl. "EMF arises…" on "quiz me" · #115 t8: dump says "OZONE… covered earlier in the atmosphere chemistry unit" · #20 t8: ALL-CAPS Moseley/periods/groups/blocks dump on "quiz me" · #40 t12: memory dump on "ok" · #79 t7: ALL-CAPS dump ("FARADAY'S LAWS quan…") on "next question please" · #117 t14: ALL-CAPS dump on "ok" · #171 t8: ALL-CAPS dump: "connecting to the diols/polyols concept covered earlier… (carboxylic acids, covered earlier)"
 - Related defect: —
 - Status: OPEN
@@ -151,8 +151,8 @@ Mastery/progress · Concurrency/session isolation.
 - Actual behaviour: All three mastery-counting cards were binary; a random guesser passes with probability 1/8. Same shape in #1 (2 of 3), #96 (2 of 3), #133 (t6 2-option), #77 (4 of 6).
 - Why it is a defect: "Mastered" is shown to the learner on evidence that is largely chance, so mastery does not reflect understanding.
 - Reproducibility: Systemic: most lessons end on 2-option cards.
-- Also observed (85 occurrences in 82 lessons): #1 (A1) tt13-14/t-; #96 (A6) tt9-11/t-; #133 (A8) tt6/t-; #98 (A6) tt3-t6; #40 (A3) tt17,t23; #5 (A1) t-; #6 (A1) t-; #8 (A1) t-; #9 (A1) t-; #11 (A1) t-; #12 (A1) t-; #169 (A10) t-; #171 (A10) t-; #172 (A10) t-; #174 (A10) t-; #20 (A2) t-; #21 (A2) t-; #22 (A2) t-; #23 (A2) t-; #24 (A2) t-; #25 (A2) t-; #26 (A2) t-; #27 (A2) t-; #28 (A2) t-; #29 (A2) t-; #41 (A3) t-; #43 (A3) t-; #44 (A3) t-; #45 (A3) t-; #46 (A3) t-; #47 (A3) t-; #59 (A4) t-; #61 (A4) t-; #62 (A4) t-; #63 (A4) t-; #64 (A4) t-; #65 (A4) t-; #66 (A4) t-; #67 (A4) t-; #77 (A5) t-; #78 (A5) t-; #79 (A5) t-; #80 (A5) t-; #81 (A5) t-; #82 (A5) t-; #83 (A5) t-; #84 (A5) t-; #85 (A5) t-; #86 (A5) t-; #100 (A6) t-; #101 (A6) t-; #102 (A6) t-; #103 (A6) t-; #104 (A6) t-; #105 (A6) t-; #106 (A6) t-; #107 (A6) t-; #108 (A6) t-; #115 (A7) t-; #116 (A7) t-; #117 (A7) t-; #118 (A7) t-; #120 (A7) t-; #121 (A7) t-; #124 (A7) t-; #125 (A7) t-; #126 (A7) t-; #134 (A8) t-; #136 (A8) t-; #137 (A8) t-; #139 (A8) t-; #140 (A8) t-; #141 (A8) t-; #142 (A8) t-; #151 (A9) t-; #152 (A9) t-; #153 (A9) t-; #154 (A9) t-; #156 (A9) t-; #157 (A9) t-; #159 (A9) t-; #160 (A9) t-
-- Notes on occurrences: #1 tt13-14: 2 of 3 counted cards are 2-option · #96 tt9-11: two of three counted cards 2-option, one with an absurd distractor ("This is impossible") · #133 tt6: 2-option card closes the lesson · #98 tt3-t6: 3 of 4 counted cards are trivial or binary · #40 tt17,t23: 2-option "He or NH₃? Why?" card whose options give no "why"
+- Also observed (114 occurrences in 109 lessons): #1 (A1) tt13-14/t-; #96 (A6) tt9-11/t-; #133 (A8) tt6/t-; #98 (A6) tt3-t6; #40 (A3) tt17,t23; #49 (A3) tt15/t-; #129 (A7) tt2,t5,t6/t-; #5 (A1) t-; #6 (A1) t-; #8 (A1) t-; #9 (A1) t-; #11 (A1) t-; #12 (A1) t-; #15 (A1) t-; #169 (A10) t-; #171 (A10) t-; #172 (A10) t-; #174 (A10) t-; #181 (A10) t-; #20 (A2) t-; #21 (A2) t-; #22 (A2) t-; #23 (A2) t-; #24 (A2) t-; #25 (A2) t-; #26 (A2) t-; #27 (A2) t-; #28 (A2) t-; #29 (A2) t-; #30 (A2) t-; #31 (A2) t-; #41 (A3) t-; #43 (A3) t-; #44 (A3) t-; #45 (A3) t-; #46 (A3) t-; #47 (A3) t-; #48 (A3) t-; #59 (A4) t-; #61 (A4) t-; #62 (A4) t-; #63 (A4) t-; #64 (A4) t-; #65 (A4) t-; #66 (A4) t-; #67 (A4) t-; #68 (A4) t-; #69 (A4) t-; #70 (A4) t-; #77 (A5) t-; #78 (A5) t-; #79 (A5) t-; #80 (A5) t-; #81 (A5) t-; #82 (A5) t-; #83 (A5) t-; #84 (A5) t-; #85 (A5) t-; #86 (A5) t-; #89 (A5) t-; #90 (A5) t-; #91 (A5) t-; #100 (A6) t-; #101 (A6) t-; #102 (A6) t-; #103 (A6) t-; #104 (A6) t-; #105 (A6) t-; #106 (A6) t-; #107 (A6) t-; #108 (A6) t-; #109 (A6) t-; #110 (A6) t-; #111 (A6) t-; #112 (A6) t-; #115 (A7) t-; #116 (A7) t-; #117 (A7) t-; #118 (A7) t-; #120 (A7) t-; #121 (A7) t-; #124 (A7) t-; #125 (A7) t-; #126 (A7) t-; #127 (A7) t-; #128 (A7) t-; #130 (A7) t-; #131 (A7) t-; #132 (A7) t-; #134 (A8) t-; #136 (A8) t-; #137 (A8) t-; #139 (A8) t-; #140 (A8) t-; #141 (A8) t-; #142 (A8) t-; #143 (A8) t-; #145 (A8) t-; #151 (A9) t-; #152 (A9) t-; #153 (A9) t-; #154 (A9) t-; #156 (A9) t-; #157 (A9) t-; #159 (A9) t-; #160 (A9) t-; #162 (A9) t-; #163 (A9) t-; #164 (A9) t-
+- Notes on occurrences: #1 tt13-14: 2 of 3 counted cards are 2-option · #96 tt9-11: two of three counted cards 2-option, one with an absurd distractor ("This is impossible") · #133 tt6: 2-option card closes the lesson · #98 tt3-t6: 3 of 4 counted cards are trivial or binary · #40 tt17,t23: 2-option "He or NH₃? Why?" card whose options give no "why" · #49 tt15: "Is heat (q) a state function or a path function? Justify." as a 2-option card; options contain no justification · #129 tt2,t5,t6: four of five cards are 2-option; mastery reached at t8
 - Related defect: —
 - Status: OPEN
 
@@ -342,8 +342,8 @@ Mastery/progress · Concurrency/session isolation.
 - Actual behaviour: No numbers; generic analogy. (#96 t5: "show me step by step" returned three plain sentences, no steps.)
 - Why it is a defect: Request not honoured.
 - Reproducibility: Seen in #115 t7 and #96 t5.
-- Also observed (40 occurrences in 33 lessons): #96 (A6) t5/t6; #20 (A2) t11; #58 (A4) t13; #171 (A10) t17; #10 (A1) t8; #21 (A2) t2; #23 (A2) t2; #28 (A2) t5/t12; #29 (A2) t5; #41 (A3) t4; #42 (A3) t2; #43 (A3) t9; #44 (A3) t7; #46 (A3) t3/t11; #47 (A3) t8; #64 (A4) t16; #65 (A4) t11; #81 (A5) t7; #82 (A5) t10; #99 (A6) t9; #102 (A6) t6; #108 (A6) t8; #115 (A7) t7; #118 (A7) t9; #119 (A7) t13; #122 (A7) t14; #138 (A8) t17; #139 (A8) t10; #141 (A8) t2; #152 (A9) t10; #154 (A9) t10; #159 (A9) t3; #160 (A9) t15
-- Notes on occurrences: #96 t5: step-by-step request answered in 3 unnumbered sentences · #20 t11: "show me step by step" -> "How did you decide that elements in the same row … should have very similar chemical behavior?" (a Socratic question about a card answer from 5 turns earlier) · #58 t13: "give me example with numbers" -> ΔG° = -RT ln K with K=10, no numeric result given ("a negative number of kilojoules per mole") · #171 t17: "give me example with numbers" -> three-pronged anchor analogy, no numbers
+- Also observed (49 occurrences in 41 lessons): #96 (A6) t5/t6; #20 (A2) t11; #58 (A4) t13; #171 (A10) t17; #88 (A5) tt7; #163 (A9) t2; #10 (A1) t8; #181 (A10) t10; #21 (A2) t2; #23 (A2) t2; #28 (A2) t5/t12; #29 (A2) t5; #30 (A2) t10; #41 (A3) t4; #42 (A3) t2; #43 (A3) t9; #44 (A3) t7; #46 (A3) t3/t11; #47 (A3) t8; #49 (A3) t8; #64 (A4) t16; #65 (A4) t11; #69 (A4) t9; #81 (A5) t7; #82 (A5) t10; #99 (A6) t9; #102 (A6) t6; #108 (A6) t8; #115 (A7) t7; #118 (A7) t9; #119 (A7) t13; #122 (A7) t14; #138 (A8) t17; #139 (A8) t10; #141 (A8) t2; #152 (A9) t10; #154 (A9) t10; #159 (A9) t3; #160 (A9) t15; #162 (A9) t10; #164 (A9) t5
+- Notes on occurrences: #96 t5: step-by-step request answered in 3 unnumbered sentences · #20 t11: "show me step by step" -> "How did you decide that elements in the same row … should have very similar chemical behavior?" (a Socratic question about a card answer from 5 turns earlier) · #58 t13: "give me example with numbers" -> ΔG° = -RT ln K with K=10, no numeric result given ("a negative number of kilojoules per mole") · #171 t17: "give me example with numbers" -> three-pronged anchor analogy, no numbers · #88 tt7: "example with numbers" answered with a Pt hydrogenation example; numeric content present (partial) · #163 t2: "give me example with numbers" -> kitchen-sponge analogy (the table with numbers follows later in the same reply)
 - Related defect: —
 - Status: OPEN
 
@@ -361,8 +361,8 @@ Mastery/progress · Concurrency/session isolation.
 - Actual behaviour: mastery.checkCorrect/practiceCorrect stayed 0 through 17 turns despite 3 correct card answers (t4, t8, t13); lesson closed on the first "i dont know" at t17, marked needs-review.
 - Why it is a defect: Progress does not reflect learner performance; a weak learner is ejected from the lesson.
 - Reproducibility: Observed once (#151); counters reset pattern worth re-checking on other accounts.
-- Also observed (55 occurrences in 49 lessons): #58 (A4) tt15/t15; #152 (A9) tt27/t27; #171 (A10) tt25/t25; #155 (A9) tt30/t30; #123 (A7) tt8/t8; #156 (A9) tt11/t11; #7 (A1) t19; #12 (A1) t21; #172 (A10) t26; #177 (A10) t21; #178 (A10) t10; #179 (A10) t20; #21 (A2) t17; #23 (A2) t16; #27 (A2) t14; #28 (A2) t22; #29 (A2) t19; #41 (A3) t24; #42 (A3) t18; #45 (A3) t9; #46 (A3) t26; #47 (A3) t11; #60 (A4) t13; #61 (A4) t24; #62 (A4) t16; #63 (A4) t18; #64 (A4) t19; #65 (A4) t25; #66 (A4) t19; #81 (A5) t17; #84 (A5) t20; #87 (A5) t29; #88 (A5) t22; #99 (A6) t19; #102 (A6) t19; #103 (A6) t14; #104 (A6) t20; #108 (A6) t17; #118 (A7) t18; #121 (A7) t19; #122 (A7) t22; #125 (A7) t25; #136 (A8) t24; #137 (A8) t25; #138 (A8) t19; #141 (A8) t28; #151 (A9) t17; #154 (A9) t19; #160 (A9) t17
-- Notes on occurrences: #58 tt15: third-person: counters c=0 p=0 throughout 15 turns despite right answers at t4 and t8; "i dont understand" at t15 ends the lesson "Let's pause Equilibrium Concept here for now" (needsReview) · #152 tt27: counters 0/0 for 27 turns despite correct card answers at t12, t18, t23; lesson ended "Let's pause Ethers here for now" in reply to "continue" · #171 tt25: paused right after a CORRECT answer at c1/p1: "Correct — well done… Let's pause Lipids here for now" (needsReview) after 25 turns · #155 tt30: counters c0/p0 for 30 turns despite right answers at t6, t13, t18; lesson paused on "i dont understand this picture" · #123 tt8: paused after 8 turns right after three consecutive wrong answers (t6, t7, t8) — "Not quite" and pause in the same message · #156 tt11: paused after three consecutive wrong answers (t9, t10, t11) at c1/p0
+- Also observed (114 occurrences in 79 lessons): #58 (A4) tt15/t15; #152 (A9) tt27/t27; #171 (A10) tt25/t25; #155 (A9) tt30/t30; #123 (A7) tt8/t8; #156 (A9) tt11/t11; #68 (A4) tt14/t14; #88 (A5) tt22/t22; #109 (A6) tt17/t17; #143 (A8) tt16/t16; #127 (A7) tt18/t18; #161 (A9) tt22/t22; #180 (A10) tt20/t20; #30 (A2) tt25/t25; #49 (A3) tt17/t17; #89 (A5) tt21/t21; #110 (A6) tt19/t19; #181 (A10) tt16/t16; #162 (A9) tt15/t15; #70 (A4) tt14/t14; #31 (A2) tt30/t30; #14 (A1) tt19/t19; #50 (A3) tt20/t20; #130 (A7) tt18/t18; #111 (A6) tt17/t17; #90 (A5) tt23/t23; #15 (A1) tt20/t20; #71 (A4) tt21/t21; #131 (A7) tt16/t16; #144 (A8) tt25/t25; #145 (A8) tt15/t15; #182 (A10) tt21/t21; #132 (A7) tt9.5/t9; #91 (A5) tt18/t18; #164 (A9) tt20/t20; #7 (A1) t19; #12 (A1) t21; #13 (A1) t17; #172 (A10) t26; #177 (A10) t21; #178 (A10) t10; #179 (A10) t20; #21 (A2) t17; #23 (A2) t16; #27 (A2) t14; #28 (A2) t22; #29 (A2) t19; #41 (A3) t24; #42 (A3) t18; #45 (A3) t9; #46 (A3) t26; #47 (A3) t11; #48 (A3) t12; #60 (A4) t13; #61 (A4) t24; #62 (A4) t16; #63 (A4) t18; #64 (A4) t19; #65 (A4) t25; #66 (A4) t19; #81 (A5) t17; #84 (A5) t20; #87 (A5) t29; #99 (A6) t19; #102 (A6) t19; #103 (A6) t14; #104 (A6) t20; #108 (A6) t17; #118 (A7) t18; #121 (A7) t19; #122 (A7) t22; #125 (A7) t25; #136 (A8) t24; #137 (A8) t25; #138 (A8) t19; #141 (A8) t28; #151 (A9) t17; #154 (A9) t19; #160 (A9) t17
+- Notes on occurrences: #58 tt15: third-person: counters c=0 p=0 throughout 15 turns despite right answers at t4 and t8; "i dont understand" at t15 ends the lesson "Let's pause Equilibrium Concept here for now" (needsReview) · #152 tt27: counters 0/0 for 27 turns despite correct card answers at t12, t18, t23; lesson ended "Let's pause Ethers here for now" in reply to "continue" · #171 tt25: paused right after a CORRECT answer at c1/p1: "Correct — well done… Let's pause Lipids here for now" (needsReview) after 25 turns · #155 tt30: counters c0/p0 for 30 turns despite right answers at t6, t13, t18; lesson paused on "i dont understand this picture" · #123 tt8: paused after 8 turns right after three consecutive wrong answers (t6, t7, t8) — "Not quite" and pause in the same message · #156 tt11: paused after three consecutive wrong answers (t9, t10, t11) at c1/p0 · #68 tt14: Paused after "why?" with CHECK phase after several correct answers · #88 tt22: Paused at c0p0 after "continue"
 - Related defect: —
 - Status: OPEN
 
@@ -471,8 +471,8 @@ Mastery/progress · Concurrency/session isolation.
 - Actual behaviour: The only figure is a DNA-replication flow chart. The tutor then teaches replication steps instead of nucleotide structure and the DNA/RNA difference; nucleotide parts (sugar/phosphate/base) from the opening are never revisited.
 - Why it is a defect: Visual does not match the lesson concept; the lesson drifts to the figure's topic, and an after-lesson card asks "Do DNA and RNA differ only in having T instead of U?" which was not taught.
 - Reproducibility: Seen on #170 and #115 (Contact Process figure for Group 16) — 2 accounts.
-- Also observed (4 occurrences in 4 lessons): #115 (A7) tt1; #151 (A9) tt1; #20 (A2) tt1/t8; #79 (A5) tt1
-- Notes on occurrences: #115 tt1: Contact Process figure for "Group 16 — Oxygen Family" (see CHEM-006) · #151 tt1: Cumene-process flowchart for "Phenols" (weaker: related but not the lesson's acid/EAS content) · #20 tt1/t8: "Periodic Trends: Na vs Cl" figure for the modern-periodic-law lesson · #79 tt1: "Electrolysis of Molten NaCl" for "Electrolysis and Faraday's Laws": no charge/mass/Faraday element; the quantitative lesson content is not pictured
+- Also observed (5 occurrences in 5 lessons): #115 (A7) tt1; #151 (A9) tt1; #20 (A2) tt1/t8; #79 (A5) tt1; #14 (A1) t16
+- Notes on occurrences: #115 tt1: Contact Process figure for "Group 16 — Oxygen Family" (see CHEM-006) · #151 tt1: Cumene-process flowchart for "Phenols" (weaker: related but not the lesson's acid/EAS content) · #20 tt1/t8: "Periodic Trends: Na vs Cl" figure for the modern-periodic-law lesson · #79 tt1: "Electrolysis of Molten NaCl" for "Electrolysis and Faraday's Laws": no charge/mass/Faraday element; the quantitative lesson content is not pictured · #14 t16: "quiz me" -> "Take a look at the figure beside this message — it's a general illustration related to the topic" (generic Bohr-shell figure for Quantum Numbers)
 - Related defect: —
 - Status: OPEN
 
@@ -579,8 +579,8 @@ Mastery/progress · Concurrency/session isolation.
 - Actual behaviour: No acknowledgement that the answer was wrong; introduces an unrelated gold-sol example and moves on; counters stay 0/0.
 - Why it is a defect: Learner cannot tell whether they were right; inconsistent with the "Not quite — the answer is…" feedback used elsewhere.
 - Reproducibility: Observed once (#97 t3).
-- Also observed (49 occurrences in 38 lessons): #20 (A2) t4; #58 (A4) t7/t5; #3 (A1) t5; #171 (A10) t3; #5 (A1) t5; #6 (A1) t9; #8 (A1) t8; #11 (A1) t5; #12 (A1) t12; #172 (A10) t4; #175 (A10) t15; #176 (A10) t8; #179 (A10) t9; #22 (A2) t5; #59 (A4) t5; #62 (A4) t14; #65 (A4) t8/t23; #79 (A5) t3; #80 (A5) t5; #81 (A5) t12/t16; #82 (A5) t6; #84 (A5) t8; #85 (A5) t4; #97 (A6) t3; #99 (A6) t5; #102 (A6) t3/t7; #107 (A6) t3; #117 (A7) t5; #118 (A7) t5; #119 (A7) t4/t7; #121 (A7) t4; #123 (A7) t4; #125 (A7) t6; #138 (A8) t3/t8/t10; #139 (A8) t3; #142 (A8) t4; #152 (A9) t5; #155 (A9) t4
-- Notes on occurrences: #20 t4: correct answer to "Which element comes first?" gets no verdict, only unrelated text + raw markup (CHEM-032) + next card · #58 t7: wrong answer: 90-word paragraph, no "Not quite", then new card · #3 t5: wrong answer ("mixed nuts") -> "How did you decide that a bowl of mixed nuts is a homogeneous mixture?" (no verdict); "that was actually a trick option I put in there!" at t7 · #171 t3: wrong answer to "Which label indicates the site of the ester bonds…?" -> only "You selected “Saturated fatty acid” as the label for the ester-bond site." + next card
+- Also observed (78 occurrences in 54 lessons): #20 (A2) t4; #58 (A4) t7/t5; #3 (A1) t5; #171 (A10) t3; #143 (A8) t4; #161 (A9) tt3, t10/t3/t10; #180 (A10) t4; #30 (A2) t15; #70 (A4) t3; #130 (A7) tt6, t9/t6/t9; #71 (A4) tt3, t18/t3/t18; #5 (A1) t5; #6 (A1) t9; #8 (A1) t8; #11 (A1) t5; #12 (A1) t12; #14 (A1) t5; #172 (A10) t4; #175 (A10) t15; #176 (A10) t8; #179 (A10) t9; #182 (A10) t21; #22 (A2) t5; #50 (A3) t4; #59 (A4) t5; #62 (A4) t14; #65 (A4) t8/t23; #68 (A4) t3; #79 (A5) t3; #80 (A5) t5; #81 (A5) t12/t16; #82 (A5) t6; #84 (A5) t8; #85 (A5) t4; #89 (A5) t10; #91 (A5) t15; #97 (A6) t3; #99 (A6) t5; #102 (A6) t3/t7; #107 (A6) t3; #111 (A6) t17; #117 (A7) t5; #118 (A7) t5; #119 (A7) t4/t7; #121 (A7) t4; #123 (A7) t4; #125 (A7) t6; #138 (A8) t3/t8/t10; #139 (A8) t3; #142 (A8) t4; #144 (A8) t16; #152 (A9) t5; #155 (A9) t4; #164 (A9) t8
+- Notes on occurrences: #20 t4: correct answer to "Which element comes first?" gets no verdict, only unrelated text + raw markup (CHEM-032) + next card · #58 t7: wrong answer: 90-word paragraph, no "Not quite", then new card · #3 t5: wrong answer ("mixed nuts") -> "How did you decide that a bowl of mixed nuts is a homogeneous mixture?" (no verdict); "that was actually a trick option I put in there!" at t7 · #171 t3: wrong answer to "Which label indicates the site of the ester bonds…?" -> only "You selected “Saturated fatty acid” as the label for the ester-bond site." + next card · #143 t4: "Haloarene" for "What type of haloalkane is CH₃CH₂CH₂Cl?" gets no verdict; reply is a haloarene lecture · #161 tt3, t10: answer picked on stilbene / styrene card gets no verdict; tutor re-explains the Wittig reaction · #180 t4: "Deposition and Acid Rain Formation" for "Which step creates ozone?" gets no verdict; reply is an acid-rain story · #30 t15: "Spherical" on "Which shape best describes an s orbital?" -> "Great, you mentioned spherical" + probing question; no verdict
 - Related defect: —
 - Status: OPEN
 
@@ -667,8 +667,8 @@ Mastery/progress · Concurrency/session isolation.
 - Actual behaviour: In #20 every distinct card is asked twice; after a wrong first attempt the correct text was displayed in the feedback, and the repeat is credited as mastery evidence. Same shape: #2 (t2/t7), #77 (t5/t13), #116 (t2/t10), #151 (t2/t12).
 - Why it is a defect: "Mastered" can be earned by echoing the answer just shown; mastery does not reflect understanding.
 - Reproducibility: Reproduced in 5 lessons on 5 accounts (systemic).
-- Also observed (75 occurrences in 64 lessons): #2 (A1) tt2/t7/t-; #77 (A5) tt5/t13/t-; #116 (A7) tt2/t10/t-; #151 (A9) tt2/t12/t-; #134 (A8) tt4/t17/t-; #40 (A3) tt3/t19, t12/t20, t13/t21, t17/t23/t-; #3 (A1) tt2/t18/t-; #59 (A4) tt7/t10, t9/t11-12/t-; #79 (A5) tt4/t16, t5/t17-18, t8/t19, t9/t20, t14/t20-21/t-; #117 (A7) tt3/t16, t4?, t3-t19/t-; #171 (A10) tt4/t20, t5/t21, t8/t23, t14/t24, t15/t25/t-; #4 (A1) t-; #7 (A1) t-; #11 (A1) t-; #172 (A10) t-; #173 (A10) t-; #175 (A10) t-; #176 (A10) t-; #177 (A10) t-; #178 (A10) t-; #179 (A10) t-; #20 (A2) t-; #21 (A2) t-; #23 (A2) t-; #27 (A2) t-; #28 (A2) t-; #29 (A2) t-; #41 (A3) t-; #43 (A3) t-; #44 (A3) t-; #45 (A3) t-; #46 (A3) t-; #60 (A4) t-; #61 (A4) t-; #63 (A4) t-; #65 (A4) t-; #66 (A4) t-; #67 (A4) t-; #80 (A5) t-; #82 (A5) t-; #83 (A5) t-; #86 (A5) t-; #87 (A5) t-; #88 (A5) t-; #100 (A6) t-; #101 (A6) t-; #102 (A6) t-; #103 (A6) t-; #106 (A6) t-; #107 (A6) t-; #119 (A7) t-; #120 (A7) t-; #125 (A7) t-; #136 (A8) t-; #137 (A8) t-; #139 (A8) t-; #140 (A8) t-; #141 (A8) t-; #142 (A8) t-; #152 (A9) t-; #155 (A9) t-; #156 (A9) t-; #159 (A9) t-; #160 (A9) t-
-- Notes on occurrences: #134 tt4/t17: final mastery card is the t4 card verbatim; after-complete card is the t6 card · #40 tt3/t19, t12/t20, t13/t21, t17/t23: every card repeated; mastery completes on the repeats · #3 tt2/t18: final mastery card is the t2 card · #59 tt7/t10, t9/t11-12: cards repeated · #79 tt4/t16, t5/t17-18, t8/t19, t9/t20, t14/t20-21: every card repeated · #117 tt3/t16, t4?, t3-t19: full-shell, neon-sign and applications cards all repeated; mastery on the repeats · #171 tt4/t20, t5/t21, t8/t23, t14/t24, t15/t25: cards repeated
+- Also observed (111 occurrences in 86 lessons): #2 (A1) tt2/t7/t-; #77 (A5) tt5/t13/t-; #116 (A7) tt2/t10/t-; #151 (A9) tt2/t12/t-; #134 (A8) tt4/t17/t-; #40 (A3) tt3/t19, t12/t20, t13/t21, t17/t23/t-; #3 (A1) tt2/t18/t-; #59 (A4) tt7/t10, t9/t11-12/t-; #79 (A5) tt4/t16, t5/t17-18, t8/t19, t9/t20, t14/t20-21/t-; #117 (A7) tt3/t16, t4?, t3-t19/t-; #171 (A10) tt4/t20, t5/t21, t8/t23, t14/t24, t15/t25/t-; #143 (A8) tt4/t13, t5/t14, t8/t15/t-; #30 (A2) tt3/t21, t4/t22, t8/t23/t-; #69 (A4) tt7/t14, t8/t15, t13/t16/t-; #89 (A5) tt12/t18/t-; #162 (A9) tt3/t8, t5/t11, t6/t12/t-; #31 (A2) tt3/t23, t4/t24, t7/t28, t6/t27/t-; #50 (A3) tt14/t15/t-; #90 (A5) tt7/t13, t8/t16, t9/t17/t-; #15 (A1) tt5/t18, t8/t19, t4/t16/t-; #131 (A7) tt3/t9, t4/t10/t-; #144 (A8) tt2/t22, t3/t23/t-; #145 (A8) tt9/t14, t10/t15/t-; #182 (A10) tt5/t14, t8/t18, t10/t19/t-; #132 (A7) tt3/t8, t5/t9/t-; #4 (A1) t-; #7 (A1) t-; #11 (A1) t-; #13 (A1) t-; #14 (A1) t-; #172 (A10) t-; #173 (A10) t-; #175 (A10) t-; #176 (A10) t-; #177 (A10) t-; #178 (A10) t-; #179 (A10) t-; #180 (A10) t-; #20 (A2) t-; #21 (A2) t-; #23 (A2) t-; #27 (A2) t-; #28 (A2) t-; #29 (A2) t-; #41 (A3) t-; #43 (A3) t-; #44 (A3) t-; #45 (A3) t-; #46 (A3) t-; #48 (A3) t-; #60 (A4) t-; #61 (A4) t-; #63 (A4) t-; #65 (A4) t-; #66 (A4) t-; #67 (A4) t-; #68 (A4) t-; #70 (A4) t-; #80 (A5) t-; #82 (A5) t-; #83 (A5) t-; #86 (A5) t-; #87 (A5) t-; #88 (A5) t-; #100 (A6) t-; #101 (A6) t-; #102 (A6) t-; #103 (A6) t-; #106 (A6) t-; #107 (A6) t-; #119 (A7) t-; #120 (A7) t-; #125 (A7) t-; #129 (A7) t-; #136 (A8) t-; #137 (A8) t-; #139 (A8) t-; #140 (A8) t-; #141 (A8) t-; #142 (A8) t-; #152 (A9) t-; #155 (A9) t-; #156 (A9) t-; #159 (A9) t-; #160 (A9) t-; #161 (A9) t-
+- Notes on occurrences: #134 tt4/t17: final mastery card is the t4 card verbatim; after-complete card is the t6 card · #40 tt3/t19, t12/t20, t13/t21, t17/t23: every card repeated; mastery completes on the repeats · #3 tt2/t18: final mastery card is the t2 card · #59 tt7/t10, t9/t11-12: cards repeated · #79 tt4/t16, t5/t17-18, t8/t19, t9/t20, t14/t20-21: every card repeated · #117 tt3/t16, t4?, t3-t19: full-shell, neon-sign and applications cards all repeated; mastery on the repeats · #171 tt4/t20, t5/t21, t8/t23, t14/t24, t15/t25: cards repeated · #143 tt4/t13, t5/t14, t8/t15: cards repeated verbatim
 - Related defect: —
 - Status: OPEN
 
@@ -686,7 +686,7 @@ Mastery/progress · Concurrency/session isolation.
 - Actual behaviour: Figure titled "Periodic Trends: Na vs Cl"; the tutor itself calls it "general"; later says "sodium, marked in blue as `Na (period 3, group 1)`" with raw backticks.
 - Why it is a defect: Visual and its description are not tied to the lesson concept; filler text.
 - Reproducibility: Observed twice in #20.
-- Also observed (18 occurrences in 12 lessons): #40 (A3) tt16/t16; #59 (A4) tt5/t5; #10 (A1) t1/t13/t18; #11 (A1) t1/t6; #177 (A10) t4; #20 (A2) t1/t8; #21 (A2) t15; #22 (A2) t8; #23 (A2) t15; #29 (A2) t1; #60 (A4) t3; #107 (A6) t7
+- Also observed (21 occurrences in 15 lessons): #40 (A3) tt16/t16; #59 (A4) tt5/t5; #10 (A1) t1/t13/t18; #11 (A1) t1/t6; #14 (A1) t16; #177 (A10) t4; #20 (A2) t1/t8; #21 (A2) t15; #22 (A2) t8; #23 (A2) t15; #29 (A2) t1; #60 (A4) t3; #90 (A5) t15; #91 (A5) t13; #107 (A6) t7
 - Notes on occurrences: #40 tt16: "Take a look at the labelled figure beside this message — it shows Gas Laws." · #59 tt5: "…the labelled figure beside this message — it shows Equilibrium Constants Kc and Kp. Study it while I explain." (generic caption; figure title is "Calculating Kc, Kp and Using ICE Tables")
 - Related defect: —
 - Status: OPEN
@@ -705,8 +705,8 @@ Mastery/progress · Concurrency/session isolation.
 - Actual behaviour: The reply talks about the answer given two cards earlier ("No" to the 95 %/5 % card); the answer to the current card gets no feedback at all. The next learner message is then treated as a reply to that stale question.
 - Why it is a defect: The learner's actual answer is ignored and a stale answer is replayed back to them.
 - Reproducibility: Observed once (#58 t5).
-- Also observed (1 occurrence in 1 lesson): #152 (A9) t6
-- Notes on occurrences: #152 t6: verdict "That's right – the Williamson ether synthesis needs a primary alkyl halide" arrives a turn late, in reply to "too many words"
+- Also observed (2 occurrences in 2 lessons): #152 (A9) t6; #161 (A9) t13
+- Notes on occurrences: #152 t6: verdict "That's right – the Williamson ether synthesis needs a primary alkyl halide" arrives a turn late, in reply to "too many words" · #161 t13: "next question please" answered with "That’s right – the secondary carbon… migrates" (stale previous answer)
 - Related defect: —
 - Status: OPEN
 
@@ -724,8 +724,8 @@ Mastery/progress · Concurrency/session isolation.
 - Actual behaviour: No figure was served in the entire lesson; the tutor invents a picture and promises to return to it, then never does.
 - Why it is a defect: Misleads the learner about what is on screen.
 - Reproducibility: Observed in #58; #96 t7 (also no figure) answered without admitting there is no picture.
-- Also observed (42 occurrences in 24 lessons): #134 (A8) t8; #59 (A4) t2; #117 (A7) t7; #40 (A3) t10; #41 (A3) t10/t24; #42 (A3) t10/t16; #58 (A4) t10; #61 (A4) t6/t22; #62 (A4) t11; #63 (A4) t10; #64 (A4) t3/t17; #65 (A4) t19/t20/t24; #81 (A5) t5; #96 (A6) t7; #99 (A6) t3/t19; #106 (A6) t2; #108 (A6) t13/t15; #118 (A7) t14; #121 (A7) t16/t18; #125 (A7) t19/t21/t25; #136 (A8) t6/t21; #137 (A8) t9/t23; #154 (A9) t11/t19; #159 (A9) t3/t16
-- Notes on occurrences: #134 t8: "i dont understand this picture" — no figure in the lesson; tutor answers with a baton analogy and never says there is no picture · #59 t2: "i dont understand this picture" at t2 although the first figure appears only at t5; tutor replies with a recipe analogy · #117 t7: "i dont understand this picture" — lesson has no figure; tutor answers with a landlord/deposit analogy
+- Also observed (77 occurrences in 38 lessons): #134 (A8) t8; #59 (A4) t2; #117 (A7) t7; #68 (A4) t13; #109 (A6) t3; #143 (A8) t2; #110 (A6) t18/t12; #31 (A2) tt15,t21,t30/t15/t21/t26/t30; #130 (A7) tt13,t14,t18/t13/t18; #15 (A1) t2; #71 (A4) t6/t17/t21; #164 (A9) tt11,t16,t20/t11/t16/t20; #181 (A10) t14/t16; #30 (A2) t9; #40 (A3) t10; #41 (A3) t10/t24; #42 (A3) t10/t16; #58 (A4) t10; #61 (A4) t6/t22; #62 (A4) t11; #63 (A4) t10; #64 (A4) t3/t17; #65 (A4) t19/t20/t24; #81 (A5) t5; #96 (A6) t7; #99 (A6) t3/t19; #106 (A6) t2; #108 (A6) t13/t15; #112 (A6) t4; #118 (A7) t14; #121 (A7) t16/t18; #125 (A7) t19/t21/t25; #127 (A7) t2/t15/t18; #136 (A8) t6/t21; #137 (A8) t9/t23; #154 (A9) t11/t19; #159 (A9) t3/t16; #161 (A9) t2
+- Notes on occurrences: #134 t8: "i dont understand this picture" — no figure in the lesson; tutor answers with a baton analogy and never says there is no picture · #59 t2: "i dont understand this picture" at t2 although the first figure appears only at t5; tutor replies with a recipe analogy · #117 t7: "i dont understand this picture" — lesson has no figure; tutor answers with a landlord/deposit analogy · #68 t13: picture asked, no figure on lesson · #109 t3: "i dont understand this picture" answered with a balloon analogy before any figure was shown (figure first appeared t11) · #143 t2: picture asked, no figure; "let's set it aside" + toy-car analogy · #110 t18: picture asked, no figure on lesson · #31 tt15,t21,t30: "i dont understand this picture" three times, no figure on lesson
 - Related defect: —
 - Status: OPEN
 
@@ -777,8 +777,8 @@ Mastery/progress · Concurrency/session isolation.
 - Actual behaviour: Source is placed on an existing O–H bond; the arrowhead "toward the hydrogen atom receiving them" confuses source and sink and contradicts the lesson's own rule that arrows start at a lone pair/bond that donates.
 - Why it is a defect: Objectively wrong mechanism example in the lesson on arrow notation.
 - Reproducibility: Observed once (#134 t2).
-- Also observed (49 occurrences in 45 lessons): #40 (A3) tt8-t11/t-; #117 (A7) tt7-t13/t-; #152 (A9) tt9,t13,t14,t19,t20,t24,t26/t-; #171 (A10) tt10-t13,t22/t-; #1 (A1) t-; #5 (A1) t-; #10 (A1) t-; #12 (A1) t-; #172 (A10) t-; #176 (A10) t-; #177 (A10) t-; #179 (A10) t-; #21 (A2) t-; #28 (A2) t-; #29 (A2) t-; #41 (A3) t-; #42 (A3) t-; #43 (A3) t-; #46 (A3) t-; #61 (A4) t-; #62 (A4) t-; #63 (A4) t-; #64 (A4) t-; #65 (A4) t-; #81 (A5) t-; #84 (A5) t-; #87 (A5) t-; #88 (A5) t-; #99 (A6) t-; #101 (A6) t-; #104 (A6) t-; #107 (A6) t-; #118 (A7) t-; #121 (A7) t-; #122 (A7) t-; #125 (A7) t-; #134 (A8) t-; #136 (A8) t-; #137 (A8) t-; #139 (A8) t-; #141 (A8) t-; #151 (A9) t-; #154 (A9) t-; #155 (A9) t-; #159 (A9) t-
-- Notes on occurrences: #40 tt8-t11: subway car / dance floor / elevator / packed room analogies (4 near-identical crowd analogies) for "explain simpler/again/i dont understand" · #117 tt7-t13: landlord deposit / bank vault / vault door / house with deadbolt / purse of coins — five metaphors for the same ionisation-energy point · #152 tt9,t13,t14,t19,t20,t24,t26: electronics room, holding hands, winter mitten, Lego house, Lego bridge, river bridge, sandwich · #171 tt10-t13,t22: three-pronged plug / fork with fruit / butter with chocolate sticks / rope knots / fork with skewers — five analogies for saponification; tutor itself says "it can feel confusing when the same idea is presented a few times"
+- Also observed (90 occurrences in 68 lessons): #40 (A3) tt8-t11/t-; #117 (A7) tt7-t13/t-; #152 (A9) tt9,t13,t14,t19,t20,t24,t26/t-; #171 (A10) tt10-t13,t22/t-; #88 (A5) tt4,t6,t9,t14,t15/t-; #109 (A6) tt3,t8,t10,t12,t15/t-; #127 (A7) tt8,t11,t13/t-; #161 (A9) tt6,t12; #180 (A10) tt2,t13,t18/t-; #30 (A2) tt5,t10,t11,t13,t17/t-; #49 (A3) tt6,t7; #89 (A5) tt8,t11,t20/t-; #110 (A6) tt5,t9,t16,t18/t-; #181 (A10) tt5,t8,t13,t14/t-; #70 (A4) tt9,t12; #31 (A2) tt8,t11,t15,t19,t21,t25,t29/t-; #14 (A1) tt6,t9,t11,t13,t18/t-; #50 (A3) tt4,t7,t9,t12,t19/t-; #130 (A7) tt6,t7,t13,t14,t16/t-; #112 (A6) tt4,t5; #90 (A5) tt2,t3,t6,t18,t22/t-; #71 (A4) tt6,t7,t9,t11,t15,t20/t-; #144 (A8) tt5,t8,t11,t14,t18,t24/t-; #182 (A10) tt3,t6,t16,t20/t-; #91 (A5) tt6,t9,t10,t13,t17/t-; #164 (A9) tt2,t4,t7,t10,t11,t13,t15,t19/t-; #1 (A1) t-; #5 (A1) t-; #10 (A1) t-; #12 (A1) t-; #15 (A1) t-; #172 (A10) t-; #176 (A10) t-; #177 (A10) t-; #179 (A10) t-; #21 (A2) t-; #28 (A2) t-; #29 (A2) t-; #41 (A3) t-; #42 (A3) t-; #43 (A3) t-; #46 (A3) t-; #61 (A4) t-; #62 (A4) t-; #63 (A4) t-; #64 (A4) t-; #65 (A4) t-; #68 (A4) t-; #81 (A5) t-; #84 (A5) t-; #87 (A5) t-; #99 (A6) t-; #101 (A6) t-; #104 (A6) t-; #107 (A6) t-; #118 (A7) t-; #121 (A7) t-; #122 (A7) t-; #125 (A7) t-; #134 (A8) t-; #136 (A8) t-; #137 (A8) t-; #139 (A8) t-; #141 (A8) t-; #151 (A9) t-; #154 (A9) t-; #155 (A9) t-; #159 (A9) t-
+- Notes on occurrences: #40 tt8-t11: subway car / dance floor / elevator / packed room analogies (4 near-identical crowd analogies) for "explain simpler/again/i dont understand" · #117 tt7-t13: landlord deposit / bank vault / vault door / house with deadbolt / purse of coins — five metaphors for the same ionisation-energy point · #152 tt9,t13,t14,t19,t20,t24,t26: electronics room, holding hands, winter mitten, Lego house, Lego bridge, river bridge, sandwich · #171 tt10-t13,t22: three-pronged plug / fork with fruit / butter with chocolate sticks / rope knots / fork with skewers — five analogies for saponification; tutor itself says "it can feel confusing when the same idea is presented a few times" · #88 tt4,t6,t9,t14,t15: ramp / revolving door / city street / shuttle bus analogies repeated · #109 tt3,t8,t10,t12,t15: helium balloon / magnet / parking garage analogies; balloon analogy internally incoherent ("short arm so the knot is tighter") · #127 tt8,t11,t13: chain-of-people passing a ball analogy repeated three times · #161 tt6,t12: garden-ditch bridge / relay-race baton analogies
 - Related defect: —
 - Status: OPEN
 
@@ -813,8 +813,8 @@ Mastery/progress · Concurrency/session isolation.
 - Actual behaviour: Learner who just said "ok" is told it is "genuinely tricky" and given another analogy. Same opener returned for "give me example with numbers" (#58 t13, #115 t7) and "maybe yes?" (#20 t12).
 - Why it is a defect: Template phrases triggered regardless of what the learner said; patronising and off-target.
 - Reproducibility: Reproduced on 4 accounts (#134, #58, #115, #20).
-- Also observed (24 occurrences in 18 lessons): #58 (A4) t13; #115 (A7) t7; #20 (A2) t12; #40 (A3) t5; #3 (A1) t9; #172 (A10) t8; #61 (A4) t7; #62 (A4) t13; #64 (A4) t5/t18; #84 (A5) t16; #101 (A6) t6; #104 (A6) t10/t13; #118 (A7) t15/t16; #122 (A7) t9/t13; #134 (A8) t9; #138 (A8) t13; #154 (A9) t14; #155 (A9) t17
-- Notes on occurrences: #58 t13: "This is genuinely tricky, test4, and it's completely normal to want to see how the math actually works" to "give me example with numbers" · #40 t5: "test3, I hear you — let's break it down into a tiny, simple piece" to "why?"; same opener on t8, t10, t11
+- Also observed (32 occurrences in 26 lessons): #58 (A4) t13; #115 (A7) t7; #20 (A2) t12; #40 (A3) t5; #180 (A10) tt2,t11,t16,t18; #128 (A7) t2; #69 (A4) tt2,t5; #110 (A6) tt5,t7,t8,t9,t18; #181 (A10) tt5,t8,t14; #111 (A6) tt12,t14,t15; #112 (A6) tt2,t3; #182 (A10) tt2,t3,t6,t7; #3 (A1) t9; #172 (A10) t8; #61 (A4) t7; #62 (A4) t13; #64 (A4) t5/t18; #84 (A5) t16; #101 (A6) t6; #104 (A6) t10/t13; #118 (A7) t15/t16; #122 (A7) t9/t13; #134 (A8) t9; #138 (A8) t13; #154 (A9) t14; #155 (A9) t17
+- Notes on occurrences: #58 t13: "This is genuinely tricky, test4, and it's completely normal to want to see how the math actually works" to "give me example with numbers" · #40 t5: "test3, I hear you — let's break it down into a tiny, simple piece" to "why?"; same opener on t8, t10, t11 · #180 tt2,t11,t16,t18: "I hear you—it can feel overwhelming…" opener · #128 t2: "I hear you—it’s frustrating when something feels like a wall" on "why?" · #69 tt2,t5: "I hear you’re still feeling stuck…" on "explain again"/"i dont understand" · #110 tt5,t7,t8,t9,t18: "I hear you—…" openers · #181 tt5,t8,t14: "I hear you—…" openers · #111 tt12,t14,t15: "I hear you—…" openers
 - Related defect: —
 - Status: OPEN
 
@@ -866,8 +866,8 @@ Mastery/progress · Concurrency/session isolation.
 - Actual behaviour: A three-part homework problem with constants the learner has not met, as the very first teaching turn. Same shape: #58 t1 ("Calculate the reaction quotient Q… which way will it shift?"), #78 t1 ("walk me through how you thought you could calculate…").
 - Why it is a defect: No scaffolding for a weak learner; the lesson starts with a test of untaught material.
 - Reproducibility: Reproduced in 3 lessons on 3 accounts (#40, #58, #78).
-- Also observed (5 occurrences in 5 lessons): #58 (A4) t1; #78 (A5) t1; #81 (A5) t1; #62 (A4) t1; #7 (A1) t1
-- Notes on occurrences: #58 t1: Q for A + B ⇌ C, K = 16 asked before Q is taught · #78 t1: "walk me through how you thought you could calculate the limiting molar conductivity of acetic acid?" · #81 t1: first reply asks about "the copper pipe, the steel tank, and the steel fitting immersed in hard water" — a scenario never introduced (opening was about a bike chain) · #62 t1: first reply: "Imagine a beaker of water that contains the phosphate ion HPO₄²⁻… it can donate or accept a proton" (amphiprotic species) before acid/base is defined · #7 t1: first reply: "move straight into the calculation… Balance the chemical equation … thermite"
+- Also observed (8 occurrences in 8 lessons): #58 (A4) t1; #78 (A5) t1; #81 (A5) t1; #62 (A4) t1; #7 (A1) t1; #109 (A6) t1; #31 (A2) t1; #112 (A6) t1
+- Notes on occurrences: #58 t1: Q for A + B ⇌ C, K = 16 asked before Q is taught · #78 t1: "walk me through how you thought you could calculate the limiting molar conductivity of acetic acid?" · #81 t1: first reply asks about "the copper pipe, the steel tank, and the steel fitting immersed in hard water" — a scenario never introduced (opening was about a bike chain) · #62 t1: first reply: "Imagine a beaker of water that contains the phosphate ion HPO₄²⁻… it can donate or accept a proton" (amphiprotic species) before acid/base is defined · #7 t1: first reply: "move straight into the calculation… Balance the chemical equation … thermite" · #109 t1: Reply to "ok" is an unprompted task: assign oxidation states in two Na₂O₂ reactions (not yet taught) · #31 t1: "ok" -> unprompted task: draw Lewis/VSEPR for SF₄ and decide polarity · #112 t1: "ok" -> unprompted BF₃/NF₃ question
 - Related defect: —
 - Status: OPEN
 
@@ -1214,8 +1214,8 @@ Mastery/progress · Concurrency/session isolation.
 - Actual behaviour: The lesson's syllabus line (internal lesson goal) is the entire reply; no steps.
 - Why it is a defect: Internal curriculum text shown as a tutor answer; request ignored.
 - Reproducibility: Observed once (#99 t9); searched all transcripts so far — no other occurrence.
-- Also observed (4 occurrences in 4 lessons): #175 (A10) t10; #10 (A1) t19; #65 (A4) t23; #160 (A9) t1
-- Notes on occurrences: #175 t10: reply to "ok": "Condensation Polymerization covers: Step-growth; loss of small molecule; nylon-6, nylon-6,6, Dacron (PET), Bakelite, melamine-formaldehyde." · #10 t19: degraded fallback: "Subatomic Particles covers: Properties of proton…" — the raw syllabus line is one of the degraded-mode texts, not only a model reply · #65 t23: reply to a card answer (CH₃COONH₄) = "Salt Hydrolysis covers: Hydrolysis of salts from weak acid/strong base, strong acid/weak base, both weak; pH calculation." (provider groq, so not only degraded mode) · #160 t1: FIRST teaching reply after "ok" is only: "Carboxylic Acid Derivatives covers: Acyl chlorides, anhydrides, esters, amides; reactivity order; nucleophilic acyl substitution; saponification." (provider groq)
+- Also observed (12 occurrences in 12 lessons): #175 (A10) t10; #10 (A1) t19; #65 (A4) t23; #160 (A9) t1; #127 (A7) t14; #30 (A2) t14; #89 (A5) t10; #110 (A6) t6; #162 (A9) t10; #31 (A2) t16; #144 (A8) t13; #91 (A5) t5
+- Notes on occurrences: #175 t10: reply to "ok": "Condensation Polymerization covers: Step-growth; loss of small molecule; nylon-6, nylon-6,6, Dacron (PET), Bakelite, melamine-formaldehyde." · #10 t19: degraded fallback: "Subatomic Particles covers: Properties of proton…" — the raw syllabus line is one of the degraded-mode texts, not only a model reply · #65 t23: reply to a card answer (CH₃COONH₄) = "Salt Hydrolysis covers: Hydrolysis of salts from weak acid/strong base, strong acid/weak base, both weak; pH calculation." (provider groq, so not only degraded mode) · #160 t1: FIRST teaching reply after "ok" is only: "Carboxylic Acid Derivatives covers: Acyl chlorides, anhydrides, esters, amides; reactivity order; nucleophilic acyl substitution; saponification." (provider groq) · #127 t14: "quiz me" -> "Inductive and Mesomeric Effects covers: …" · #30 t14: "give me example with numbers" -> "Molecular Orbital Theory covers: LCAO; …" · #89 t10: third answer on the "Which step directly requires a photon?" card -> "Photochemical Reactions covers: …" · #110 t6: "quiz me" -> "Alkaline Earth Metals covers: Properties; diagonal relationship Be–Al; …"
 - Related defect: —
 - Status: OPEN
 
@@ -1233,8 +1233,8 @@ Mastery/progress · Concurrency/session isolation.
 - Actual behaviour: Pipe/dash table markup in the reply text. LessonScreen.tsx (renderMarkdown) handles code blocks, quotes, headings, lists and paragraphs only. Judged from the renderer source, not seen in a browser.
 - Why it is a defect: Raw markup visible to the learner.
 - Reproducibility: Seen in 3 replies: #22 t8, #117 t6, #118 t4.
-- Also observed (5 occurrences in 5 lessons): #117 (A7) t6; #118 (A7) t4; #63 (A4) t9; #139 (A8) t3; #160 (A9) t5
-- Notes on occurrences: #117 t6: table of IE values · #118 t4: table · #63 t9: ICE table as markdown pipes · #139 t3: "Numbers you can remember" table in markdown pipes · #160 t5: rate-constant table in markdown pipes
+- Also observed (8 occurrences in 8 lessons): #117 (A7) t6; #118 (A7) t4; #63 (A4) t9; #139 (A8) t3; #160 (A9) t5; #127 (A7) t9; #70 (A4) t2; #163 (A9) tt2,t4
+- Notes on occurrences: #117 t6: table of IE values · #118 t4: table · #63 t9: ICE table as markdown pipes · #139 t3: "Numbers you can remember" table in markdown pipes · #160 t5: rate-constant table in markdown pipes · #127 t9: pipe table in "example with numbers" reply · #70 t2: caret/brace notation in a card (see CHEM-129) · #163 tt2,t4: pipe tables in two replies
 - Related defect: —
 - Status: OPEN
 
@@ -1477,8 +1477,8 @@ Mastery/progress · Concurrency/session isolation.
 - Actual behaviour: A single Socratic question about a belief the learner did not state in this turn (it refers to a wrong card answer 5 turns earlier or to nothing at all).
 - Why it is a defect: The learner asks for help and receives an unanswerable question.
 - Reproducibility: Reproduced on 4 accounts: #20 t11, #78 t1, #81 t7 ("What do you notice about a piece of iron…"), #3 t5 / #58 t5 (as the reply to a wrong card answer).
-- Also observed (6 occurrences in 6 lessons): #78 (A5) t1; #81 (A5) t7; #3 (A1) t5; #58 (A4) t5; #86 (A5) t1; #107 (A6) t13
-- Notes on occurrences: #78 t1: "Can you walk me through how you thought you could calculate the limiting molar conductivity of acetic acid?" (reply to "ok") · #81 t7: "What do you notice about a piece of iron when you put it in salty water versus plain fresh water?" (reply to "show me step by step") · #3 t5: "How did you decide that a bowl of mixed nuts is a homogeneous mixture?" (reply to a wrong card answer, no verdict) · #58 t5: "I see you chose “No.” Could you walk me through how you decided…" (reply to a different card) · #86 t1: "How did you decide that using T = 25 °C was fine? Walk me through the steps you took to reach “nothing is wrong.”" (reply to "ok") · #107 t13: "what is this?" -> "Are you wondering why Mg²⁺ can’t serve as the light‑absorbing part… or do you want a quick definition of…?" (clarifying question instead of describing the picture)
+- Also observed (13 occurrences in 13 lessons): #78 (A5) t1; #81 (A5) t7; #3 (A1) t5; #58 (A4) t5; #86 (A5) t1; #107 (A6) t13; #180 (A10) t16; #30 (A2) t24; #49 (A3) t13; #110 (A6) t1; #111 (A6) t15; #163 (A9) t3; #91 (A5) tt11,t12
+- Notes on occurrences: #78 t1: "Can you walk me through how you thought you could calculate the limiting molar conductivity of acetic acid?" (reply to "ok") · #81 t7: "What do you notice about a piece of iron when you put it in salty water versus plain fresh water?" (reply to "show me step by step") · #3 t5: "How did you decide that a bowl of mixed nuts is a homogeneous mixture?" (reply to a wrong card answer, no verdict) · #58 t5: "I see you chose “No.” Could you walk me through how you decided…" (reply to a different card) · #86 t1: "How did you decide that using T = 25 °C was fine? Walk me through the steps you took to reach “nothing is wrong.”" (reply to "ok") · #107 t13: "what is this?" -> "Are you wondering why Mg²⁺ can’t serve as the light‑absorbing part… or do you want a quick definition of…?" (clarifying question instead of describing the picture) · #180 t16: "why?" -> "what do you notice is being released there?" alone · #30 t24: "explain simpler" -> "You mentioned it might be an experimental error—can you walk me through the reasoning…?" (no simpler explanation)
 - Related defect: —
 - Status: OPEN
 
@@ -1965,8 +1965,8 @@ Mastery/progress · Concurrency/session isolation.
 - Actual behaviour: Between ~15:05 and ~15:19 UTC (≈25 min after all ten accounts began driving lessons in parallel, ~1 turn per 5–10 s per account) the share of "degraded" turns rose from isolated cases to 19/31 turns in #10, 16/31 in #177, 9/31 in #28, 8/31 in #45; max 8 consecutive degraded turns (#177). After the load was stopped for ~3 min a single session was served by groq normally. The five fallback texts above reached the learner; one is the raw curriculum goal line ("… covers: …").
 - Why it is a defect: A small concurrent load (10 accounts) is enough to push every provider in the chain into fallback; the fallback content is a placeholder that neither teaches nor reports an error consistently, and the lesson keeps counting turns. (Cause not established — provider rate limit/spend limit are candidates; no server logs were read.)
 - Reproducibility: Reproduced in 5 lessons on 5 accounts in the same 15-minute window; not reproducible with one account after a pause. The run was stopped when the pattern appeared (no further hammering) and resumed with a 25 s back-off and per-turn think-time.
-- Also observed (36 occurrences in 31 lessons): #177 (A10) tt?/t-; #28 (A2) tt?/t-; #45 (A3) tt?/tmultiple/t-; #158 (A9) tt?/t-; #10 (A1) t-; #11 (A1) t-; #12 (A1) t-; #175 (A10) t-; #178 (A10) t-; #179 (A10) t-; #29 (A2) t-; #44 (A3) t-; #46 (A3) t-; #47 (A3) t-; #65 (A4) t-; #66 (A4) t-; #67 (A4) t-; #87 (A5) t-; #88 (A5) t-; #106 (A6) t-; #107 (A6) t-; #108 (A6) t-; #122 (A7) t-; #123 (A7) t-; #124 (A7) t-; #125 (A7) t-; #140 (A8) t-; #141 (A8) t-; #142 (A8) t-; #159 (A9) t-; #160 (A9) t-
-- Notes on occurrences: #177 tt?: 16 of 31 turns degraded, longest streak 8 · #28 tt?: 9 of 31 turns degraded, longest streak 6 · #45 tt?: 8 of 31 turns degraded · #158 tt?: 3 degraded turns · #45 tmultiple: degraded open + 4 degraded turns; the final degraded replies ("Let me ask you something concrete…", "I\x27m still getting my thoughts together…") are followed by "Let\x27s pause Vapour Pressure of Solutions here for now" — lesson marked needs-review although the learner was at c1/p1
+- Also observed (91 occurrences in 60 lessons): #177 (A10) tt?/t-; #28 (A2) tt?/t-; #45 (A3) tt?/tmultiple/t-; #158 (A9) tt?/t-; #68 (A4) tt1,t5,t6,t7/t-; #88 (A5) tt2,t3,t10,t12,t14/t-; #109 (A6) tt1,t2,t7,t9,t12,t13/t-; #127 (A7) tt8,t13,t15,t17,t18/t-; #143 (A8) tt1,t5,t10,t12,t13/t-; #161 (A9) tt2,t4,t16,t21/t-; #180 (A10) tt13,t19/t-; #30 (A2) tt4,t6,t10,t14,t15,t20,t22/t-; #69 (A4) tt3,t7,t9,t11/t-; #49 (A3) tt8,t9,t10/t-; #89 (A5) tt7,t10,t17,t19,t21/t-; #110 (A6) tt1,t4,t12,t16/t-; #181 (A10) tt10,t13/t-; #162 (A9) tt6,t15/t-; #70 (A4) tt4,t7,t8,t11/t-; #31 (A2) tt1,t7,t12,t24,t26,t28/t-; #14 (A1) tt3,t5,t7,t9,t12,t14,t17,t18/t-; #50 (A3) tt11,t13,t14,t16/t-; #130 (A7) tt16,t18/t-; #15 (A1) tt9,t11,t15,t17,t18,t19/t-; #71 (A4) tt1,t4,t8,t17/t-; #131 (A7) tt9,t10/t-; #144 (A8) tt4,t14,t23,t24/t-; #182 (A10) tt9,t10,t11/t-; #91 (A5) tt7,t9,t10/t-; #164 (A9) tt5,t15,t16/t-; #10 (A1) t-; #11 (A1) t-; #12 (A1) t-; #13 (A1) t-; #175 (A10) t-; #178 (A10) t-; #179 (A10) t-; #29 (A2) t-; #44 (A3) t-; #46 (A3) t-; #47 (A3) t-; #48 (A3) t-; #65 (A4) t-; #66 (A4) t-; #67 (A4) t-; #87 (A5) t-; #90 (A5) t-; #106 (A6) t-; #107 (A6) t-; #108 (A6) t-; #111 (A6) t-; #122 (A7) t-; #123 (A7) t-; #124 (A7) t-; #125 (A7) t-; #140 (A8) t-; #141 (A8) t-; #142 (A8) t-; #159 (A9) t-; #160 (A9) t-
+- Notes on occurrences: #177 tt?: 16 of 31 turns degraded, longest streak 8 · #28 tt?: 9 of 31 turns degraded, longest streak 6 · #45 tt?: 8 of 31 turns degraded · #158 tt?: 3 degraded turns · #45 tmultiple: degraded open + 4 degraded turns; the final degraded replies ("Let me ask you something concrete…", "I\x27m still getting my thoughts together…") are followed by "Let\x27s pause Vapour Pressure of Solutions here for now" — lesson marked needs-review although the learner was at c1/p1 · #68 tt1,t5,t6,t7: degraded fallback replies · #88 tt2,t3,t10,t12,t14: degraded fallback replies; t14 "what's one thing you notice or find surprising" on "give me example" · #109 tt1,t2,t7,t9,t12,t13: degraded fallback replies incl. raw "covers:" line (t9) and "what's one thing you notice" (t2)
 - Related defect: —
 - Status: OPEN
 
@@ -2089,6 +2089,414 @@ Mastery/progress · Concurrency/session isolation.
 - Related defect: —
 - Status: OPEN
 
+### CHEM-115 — Titration opener says phenolphthalein turns pink at the half-equivalence point (pH ≈ 4.75) and that acid + conjugate base are already a buffer before any NaOH is added
+
+- Severity: P2
+- Category: Chemistry correctness
+- Date/time: 2026-10-05 15:47 UTC
+- Account: Account 4
+- Chemistry concept: `chem.equil.titration`
+- Lesson/order: #68
+- Learner message: ok
+- Tutor response: "…the solution in the flask stays colourless at first because the acid and its conjugate base (acetate) form a buffer… When about half of the acid has been neutralised, the mixture turns faint pink‑purple, marking the half‑equivalence point where [CH₃COO⁻] = [CH₃COOH] and the pH equals the acid’s pKa."
+- Expected behaviour: Phenolphthalein stays colourless until pH ≈ 8.2, i.e. only near the equivalence point; no acetate is present before NaOH is added.
+- Actual behaviour: The first teaching reply tells a weak learner the indicator changes colour at pH ≈ 4.75 and that a buffer exists from the start.
+- Why it is a defect: Directly contradicts the lesson's own later statement (phenolphthalein range 8.2–10) and builds the endpoint/half-equivalence confusion the lesson is meant to remove.
+- Reproducibility: Observed once (#68 t1).
+- Related defect: —
+- Status: OPEN
+
+### CHEM-116 — Equivalence-point pH of 0.1 M acetic acid + 0.1 M NaOH given as "around 9.3" and as the card's top option, while the same lesson later computes 8.7
+
+- Severity: P2
+- Category: Numerical/factual
+- Date/time: 2026-10-05 15:47 UTC
+- Account: Account 4
+- Chemistry concept: `chem.equil.titration`
+- Lesson/order: #68
+- Learner message: explain simpler
+- Tutor response: t2: "the pH is above 7 (around 9.3 for 0.1 M solutions)" and a card "What is the pH at the equivalence point…?" with options "≈ 9.3 (basic) / ≈ 7.0 / ≈ 5.5 / ≈ 10.0"; t11/t12 later: "…the resulting pH is about 8.7".
+- Expected behaviour: One consistent value (≈ 8.7: [CH₃COO⁻] = 0.05 M, Kb = 5.6×10⁻¹⁰, pOH ≈ 5.3).
+- Actual behaviour: Two different values in one lesson; the card offers no option equal to the lesson's own worked answer (8.7). A learner who computes it correctly has no matching choice.
+- Why it is a defect: Numerical contradiction within a lesson; the card cannot be answered by correct calculation.
+- Reproducibility: Observed once (#68 t2 vs t11/t12).
+- Related defect: —
+- Status: OPEN
+
+### CHEM-117 — "I dont understand this picture" on a lesson with no figure gets a bathtub/drain analogy that is chemically backwards
+
+- Severity: P3
+- Category: Teaching
+- Date/time: 2026-10-05 15:47 UTC
+- Account: Account 4
+- Chemistry concept: `chem.equil.titration`
+- Lesson/order: #68
+- Learner message: i dont understand this picture
+- Tutor response: "Think of a bathtub that’s being filled with water (the acid) while a drain (the base) is opened… the drain itself lets a little extra water flow back into the tub, making the level a bit higher than the neutral mark…"
+- Expected behaviour: Say there is no picture on screen and offer a titration-curve description.
+- Actual behaviour: No picture was ever shown on this lesson; the tutor replies as if one exists and invents an analogy in which the base is a drain and "water flows back into the tub".
+- Why it is a defect: Plays along with a non-existent figure and gives a misleading analogy for acid–base neutralisation.
+- Reproducibility: Observed once (#68 t13).
+- Related defect: —
+- Status: OPEN
+
+### CHEM-118 — "Too many words" simplification of the alkali-metal/water reaction invents hydride (H⁻) formation
+
+- Severity: P2
+- Category: Chemistry correctness
+- Date/time: 2026-10-05 15:45 UTC
+- Account: Account 6
+- Chemistry concept: `chem.sblock.alkali`
+- Lesson/order: #109
+- Learner message: too many words
+- Tutor response: "2. Water’s response – The water molecule accepts that electron. One hydrogen atom grabs the extra electron, turning into a hydride (H⁻), while the remaining part of the water becomes a hydroxide ion (OH⁻). 3. … two H⁻ ions combine to make hydrogen gas (H₂)."
+- Expected behaviour: Electrons reduce H₂O (or H⁺) to H₂ gas and OH⁻; no free hydride ions are formed. Two H⁻ cannot "combine" to make H₂ without being oxidised.
+- Actual behaviour: A mechanistically wrong three-step story is given as "the whole reaction".
+- Why it is a defect: Teaches a false mechanism to a learner who asked for a shorter version; it also conflicts with the balanced equation shown earlier in the same lesson.
+- Reproducibility: Observed once (#109 t14).
+- Related defect: —
+- Status: OPEN
+
+### CHEM-119 — Wittig opener and example: methylenetriphenylphosphorane (or "Ph₃P=CHCH₃ from methyltriphenylphosphonium bromide") + benzaldehyde is said to give trans-stilbene
+
+- Severity: P2
+- Category: Chemistry correctness
+- Date/time: 2026-10-05 15:46 UTC
+- Account: Account 9
+- Chemistry concept: `chem.carb.named-reactions`
+- Lesson/order: #161
+- Learner message: ok / give me example
+- Tutor response: t1: "…methyltriphenylphosphonium bromide with a strong base… benzaldehyde… delivering the alkene product, here trans‑stilbene". t2: "ylide made from methyltriphenylphosphonium bromide… we get the ylide Ph₃P=CHCH₃… The product is trans‑stilbene (C₆H₅‑CH=CH‑C₆H₅)." Card t2: "Which of the following best describes the major product of this Wittig reaction?" with "trans-Stilbene" among the options.
+- Expected behaviour: Ph₃P=CH₂ + PhCHO gives styrene (C₆H₅CH=CH₂); Ph₃P=CHCH₃ would give 1-phenylpropene; trans-stilbene needs a benzylic ylide (Ph₃P=CHPh).
+- Actual behaviour: Reagent and product are mismatched in the first reply, again in the worked example (a CH₃CH= ylide cannot yield stilbene), and the same wrong product is then used as a card option; the later t9 example (same reagents) gives styrene, so the lesson contradicts itself.
+- Why it is a defect: The lesson's headline example teaches an impossible transformation and then contradicts itself.
+- Reproducibility: Observed once (#161 t1, t2, t3).
+- Related defect: —
+- Status: OPEN
+
+### CHEM-120 — Card treats "(E)-styrene" as the correct product and "a mixture of (E)- and (Z)-styrene" as a distractor, but styrene has no E/Z isomers; example also claims a "(E)-styrene" isolated yield
+
+- Severity: P3
+- Category: Questions
+- Date/time: 2026-10-05 15:46 UTC
+- Account: Account 9
+- Chemistry concept: `chem.carb.named-reactions`
+- Lesson/order: #161
+- Learner message: give me example with numbers
+- Tutor response: "…you isolate (E)‑styrene (C₆H₅‑CH=CH₂) in an 85 % isolated yield." Card t9 options: "(E)-Styrene (C6H5‑CH=CH2) / A mixture of (E)- and (Z)-styrene / 1‑Phenyl‑ethanol (C6H5‑CH2‑CH2OH) / Benzyl chloride (C6H5‑CH2Cl)".
+- Expected behaviour: Styrene (no stereodescriptor); a stereo-distractor that does not exist should not be offered. "1-Phenylethanol" is also drawn as C₆H₅‑CH₂‑CH₂OH, which is 2-phenylethanol.
+- Actual behaviour: Meaningless stereodescriptor on a terminal alkene, a non-existent isomer mixture as a distractor, and a name/formula mismatch in another option.
+- Why it is a defect: Teaches wrong nomenclature; a careful learner cannot reason to the "right" option.
+- Reproducibility: Observed once (#161 t9, t10).
+- Related defect: —
+- Status: OPEN
+
+### CHEM-121 — O₂ worked example uses "ten valence electrons (five from each O)" and fills the N₂ configuration, giving bond order 3 for O₂; the same lesson elsewhere says O₂ has bond order 2 and two unpaired π* electrons
+
+- Severity: P2
+- Category: Chemistry correctness
+- Date/time: 2026-10-05 15:46 UTC
+- Account: Account 2
+- Chemistry concept: `chem.bond.mo-theory`
+- Lesson/order: #30
+- Learner message: give me example
+- Tutor response: "Now place the ten valence electrons (five from each O) into the molecular orbitals… σ 2s² σ* 2s² σ 2p (bonding)² π 2p (bonding)⁴ π* 2p (antibonding)² σ* 2p⁰ … ½ (8 – 2) = 3. This predicts a strong bond…" (Later, t8: "bond order of O₂ (2)"; card t19: O₂ with 10 bonding / 6 antibonding electrons has bond order 2; card t7: O₂ has two unpaired π* electrons.)
+- Expected behaviour: Oxygen has 6 valence electrons; O₂ has 12 → σ2s² σ*2s² σ2p² π2p⁴ π*2p² (two unpaired), bond order 2.
+- Actual behaviour: Wrong electron count, a 10-electron (N₂-like) filling presented as O₂, bond order 3, and no unpaired electrons mentioned, contradicting the lesson's own paramagnetism card.
+- Why it is a defect: The requested worked example for the lesson's flagship molecule is wrong and contradicts other lesson content.
+- Reproducibility: Observed once (#30 t12).
+- Related defect: —
+- Status: OPEN
+
+### CHEM-122 — Wrong-answer verdict reads "Not quite — the answer is: Not quite — …" (the authored explanation is inserted where the correct option should be)
+
+- Severity: P3
+- Category: UX
+- Date/time: 2026-10-05 15:46 UTC
+- Account: Account 2
+- Chemistry concept: `chem.bond.mo-theory`
+- Lesson/order: #30
+- Learner message: Yes (to "Does equal bond order mean equal bond length and equal stability?")
+- Tutor response: "Not quite — the answer is: Not quite — bond order predicts the TREND within a series, not identity across different molecules. N₂ and NO⁺ are isoelectronic…" (identical on the t21 repeat of the card)
+- Expected behaviour: "Not quite — the answer is: Not quite" (option text), followed by the explanation, or just the explanation.
+- Actual behaviour: The correct option text and the explanation are fused, so the sentence names no clear answer and repeats "Not quite".
+- Why it is a defect: Confusing, hard-to-read feedback for a weak-English learner.
+- Reproducibility: Observed twice in #30 (t3, t21); only one lesson seen so far.
+- Related defect: —
+- Status: OPEN
+
+### CHEM-123 — Oxidation-state opener says Mn in KMnO₄ "will gain seven electrons when it is reduced"
+
+- Severity: P3
+- Category: Chemistry correctness
+- Date/time: 2026-10-05 15:53 UTC
+- Account: Account 4
+- Chemistry concept: `chem.redox.oxidation-state`
+- Lesson/order: #69
+- Learner message: ok
+- Tutor response: "…manganese must carry a +7 oxidation state… it simply tells us that, in any reaction where KMnO₄ participates, manganese will gain seven electrons when it is reduced."
+- Expected behaviour: Mn(VII) is reduced to Mn²⁺ (5 e⁻, acidic), MnO₂ (3 e⁻, neutral) or MnO₄²⁻ (1 e⁻); never by 7 e⁻ to Mn(0). An oxidation state is not a count of electrons that will be gained.
+- Actual behaviour: Equates the oxidation number with the number of electrons gained "in any reaction".
+- Why it is a defect: Reinforces the misconception that oxidation state = electrons transferred, in the lesson that is meant to remove it.
+- Reproducibility: Observed once (#69 t1).
+- Related defect: —
+- Status: OPEN
+
+### CHEM-124 — Worked ozone example: 6.0×10²⁸ O₃ molecules is converted to "1.2×10⁶ g (1.2 tonnes)"; correct mass is ≈ 4.8×10⁶ g
+
+- Severity: P2
+- Category: Numerical/factual
+- Date/time: 2026-10-05 15:54 UTC
+- Account: Account 10
+- Chemistry concept: `chem.env.ozone`
+- Lesson/order: #181
+- Learner message: give me example with numbers
+- Tutor response: "…6.02 × 10²³ × 10⁵ ≈ 6.0 × 10²⁸ O₃ molecules. In mass terms, that corresponds to roughly 1.2 × 10⁶ grams (about 1.2 tonnes) of ozone removed…"
+- Expected behaviour: 6.0×10²⁸ molecules ÷ 6.02×10²³ mol⁻¹ × 48 g mol⁻¹ ≈ 4.8×10⁶ g (≈ 4.8 tonnes).
+- Actual behaviour: The stated mass is a factor of 4 too small; the multiplication to 6.0×10²⁸ molecules is right, the conversion to mass is not.
+- Why it is a defect: The one numeric result the learner asked for is wrong; a learner who checks it will fail to reproduce it.
+- Reproducibility: Observed once (#181 t9).
+- Related defect: —
+- Status: OPEN
+
+### CHEM-125 — BaSO₄ low solubility explained by "a much stronger lattice energy" for the larger Ba²⁺; lattice energy actually decreases down the group
+
+- Severity: P2
+- Category: Chemistry correctness
+- Date/time: 2026-10-05 15:53 UTC
+- Account: Account 6
+- Chemistry concept: `chem.sblock.alkaline-earth`
+- Lesson/order: #110
+- Learner message: give me example with numbers
+- Tutor response: "…The dramatically lower Ksp for BaSO₄ shows that sulphate solubility decreases down the group, because the larger Ba²⁺ ion leads to a much stronger lattice energy that outweighs the hydration gain."
+- Expected behaviour: Lattice energy falls with larger cations; sulphate solubility drops because hydration energy falls faster than lattice energy with increasing cation size.
+- Actual behaviour: States the opposite trend for lattice energy (larger ion → stronger lattice).
+- Why it is a defect: Teaches a false trend in the same breath as the correct solubility trend.
+- Reproducibility: Observed once (#110 t11).
+- Related defect: —
+- Status: OPEN
+
+### CHEM-126 — Ca + 2H₂O → Ca(OH)₂ + H₂ given as "about −65 kJ mol⁻¹"; real value ≈ −413 kJ mol⁻¹
+
+- Severity: P2
+- Category: Numerical/factual
+- Date/time: 2026-10-05 15:53 UTC
+- Account: Account 6
+- Chemistry concept: `chem.sblock.alkaline-earth`
+- Lesson/order: #110
+- Learner message: give me example with numbers
+- Tutor response: "The reaction releases about ‑65 kJ mol⁻¹ (exothermic)…"
+- Expected behaviour: ΔH ≈ −414 kJ mol⁻¹ (ΔfH°: Ca(OH)₂(s) −986, H₂O(l) −286).
+- Actual behaviour: About six times too small.
+- Why it is a defect: Wrong thermochemical number in a numbers-requested example.
+- Reproducibility: Observed once (#110 t11).
+- Related defect: —
+- Status: OPEN
+
+### CHEM-127 — Calcium said to lose its "two outer 2s electrons" (it is 4s), contradicting the same lesson's "[Ar] 4s²"
+
+- Severity: P3
+- Category: Chemistry correctness
+- Date/time: 2026-10-05 15:53 UTC
+- Account: Account 6
+- Chemistry concept: `chem.sblock.alkaline-earth`
+- Lesson/order: #110
+- Learner message: give me example
+- Tutor response: "…the metal gives up its two outer 2s electrons and forms calcium ions (Ca²⁺)."
+- Expected behaviour: 4s electrons (as stated at t11).
+- Actual behaviour: Wrong shell number; also "the electrons… reduce the hydrogen atoms of water" (reduces H⁺/H₂O, not atoms).
+- Why it is a defect: Internal contradiction on a basic configuration.
+- Reproducibility: Observed once (#110 t13).
+- Related defect: —
+- Status: OPEN
+
+### CHEM-128 — Cyclobutanone ¹H NMR described as one CH₂ signal plus "a separate singlet for the carbonyl-adjacent proton"
+
+- Severity: P2
+- Category: Chemistry correctness
+- Date/time: 2026-10-05 15:56 UTC
+- Account: Account 9
+- Chemistry concept: `chem.carb.spectro`
+- Lesson/order: #162
+- Learner message: give me example
+- Tutor response: "In the ¹H NMR, the two pairs of methylene protons on the ring are equivalent, giving a single signal for the CH₂ groups (about 2 ppm) and a separate singlet for the carbonyl‑adjacent proton (if any)."
+- Expected behaviour: Cyclobutanone has two CH₂ environments: α-CH₂ (≈ 3.0 ppm, triplet) and β-CH₂ (≈ 2.0 ppm, quintet); there is no carbonyl-adjacent CH proton (the α-carbons are CH₂).
+- Actual behaviour: The α and β methylene groups are called equivalent, and a non-existent "carbonyl-adjacent proton" singlet is added.
+- Why it is a defect: The learner asked for an example of reading NMR; the example gives a wrong spectrum for a molecule whose structure was just stated.
+- Reproducibility: Observed once (#162 t9).
+- Related defect: —
+- Status: OPEN
+
+### CHEM-129 — Answer cards show raw markup for ions and subscripts (Fe^{2+}, MnO_4^-, Q_sp, K_n, Δn_gas) that the lesson renderer does not typeset
+
+- Severity: P3
+- Category: UX
+- Date/time: 2026-10-05 15:59 UTC
+- Account: Account 4
+- Chemistry concept: `chem.redox.balancing`
+- Lesson/order: #70
+- Learner message: give me example
+- Tutor response: Card: "Which species is being oxidized in the half‑reaction Fe^{2+} → Fe^{3+}?" with options "Fe^{2+} / Fe^{3+} / MnO_4^- / Mn^{2+}".
+- Expected behaviour: Fe²⁺ / Fe³⁺ / MnO₄⁻ / Mn²⁺ (Unicode, as most other cards use) or math rendered through the supported \( \) delimiters.
+- Actual behaviour: LaTeX-style carets and braces appear as literal text in the question and the clickable options.
+- Why it is a defect: Hard to read for a weak-English learner; the same card family elsewhere uses Unicode, so the style is inconsistent.
+- Reproducibility: Observed on #70 (t2); lesser forms (Q_sp, K_n, Δn_gas) on #66 t3/t13, #106 t6, #50 t10.
+- Related defect: —
+- Status: OPEN
+
+### CHEM-130 — "I dont understand this picture" on a lesson with no figure is answered about the Wilkinson's-catalyst figure from a different, earlier lesson session of the same account
+
+- Severity: P2
+- Category: Concurrency/session isolation
+- Date/time: 2026-10-05 15:59 UTC
+- Account: Account 7
+- Chemistry concept: `chem.org.purification`
+- Lesson/order: #130
+- Learner message: i dont understand this picture
+- Tutor response: #130 t13: "I hear you — that image can feel a bit overwhelming. Let’s think of the Wilkinson’s catalyst like a reusable kitchen sponge… In the hydrogenation cycle, the catalyst (the “sponge”)…". Same on #125 (Carbon Hybridization) t19: "Let’s think of Wilkinson’s catalyst as a “hydrogen‑adding kitchen robot”…". Neither lesson had a figure; the Wilkinson figure was served in lesson #123 (Organometallic Chemistry) of the same account (session started 15:11 UTC; #125 at 15:26; #130 at 15:59).
+- Expected behaviour: Say there is no picture in this lesson (or describe this lesson's own material). Content from an earlier lesson/session should not be treated as the current screen.
+- Actual behaviour: The reply explains a hydrogenation-cycle diagram that is not on screen and not part of the lesson.
+- Why it is a defect: The tutor's idea of "the picture" is carried across lessons/sessions; this is stale context leaking between sessions of one account. Found by scanning all 126 transcripts for other-lesson figure titles in "picture" replies: only these two hits (both account 7, both the #123 figure). No cross-account hit.
+- Reproducibility: Observed twice (account 7: #125 t19, #130 t13). Not tested on other accounts beyond the transcript scan.
+- Related defect: —
+- Status: OPEN
+
+### CHEM-131 — Water-density opener says the ice lattice forms as water cools from 4 °C toward 0 °C and "collapses" on warming from 0 to 4 °C
+
+- Severity: P2
+- Category: Chemistry correctness
+- Date/time: 2026-10-05 16:02 UTC
+- Account: Account 6
+- Chemistry concept: `chem.sblock.water`
+- Lesson/order: #111
+- Learner message: ok
+- Tutor response: "As the temperature drops from about 4 °C toward 0 °C, the water molecules begin to arrange themselves into a regular hexagonal pattern held together by four hydrogen bonds per molecule. In this ice lattice… When the temperature rises from 0 °C to about 4 °C, the hydrogen‑bond network slightly collapses…"
+- Expected behaviour: Liquid water between 4 °C and 0 °C is not an ice lattice; the lattice appears on freezing at 0 °C. The 0→4 °C density increase is a property of liquid water (collapse of ice-like clusters), not of ice.
+- Actual behaviour: Treats the 4→0 °C liquid range as the formation of the ice lattice and conflates it with the density maximum.
+- Why it is a defect: The first teaching reply of the lesson blurs the two points the lesson exists to separate (freezing at 0 °C; density maximum at 4 °C).
+- Reproducibility: Observed once (#111 t1).
+- Related defect: —
+- Status: OPEN
+
+### CHEM-132 — Boron-family opener asks why "BF₃ forms a stable adduct with NF₃" (a poor Lewis base) and says B and N have "similar electronegativities"
+
+- Severity: P2
+- Category: Chemistry correctness
+- Date/time: 2026-10-05 16:08 UTC
+- Account: Account 6
+- Chemistry concept: `chem.pblock.group13`
+- Lesson/order: #112
+- Learner message: ok
+- Tutor response: "Imagine a sealed tube filled with boron trifluoride (BF₃)… nitrogen trifluoride (NF₃)… Why does BF₃ form a stable adduct with NF₃ even though nitrogen and boron are in the same period and have similar electronegativities? Which species acts as the Lewis acid and which as the Lewis base?"
+- Expected behaviour: NF₃ is essentially non-basic (electron-poor N lone pair) and does not form a stable adduct with BF₃ (NH₃ does); B (2.04) and N (3.04) differ a lot in electronegativity.
+- Actual behaviour: The first reply is an unprompted question built on a false premise and a false electronegativity claim.
+- Why it is a defect: A weak learner cannot answer a question whose premise is wrong; it also contradicts the lesson's own later BF₃·NH₃ card.
+- Reproducibility: Observed once (#112 t1).
+- Related defect: —
+- Status: OPEN
+
+### CHEM-133 — "Crystal Systems" lesson drifts: replies to "ok" and "next question please" teach metallic bonding, and the seven crystal systems are barely taught
+
+- Severity: P3
+- Category: Lesson flow
+- Date/time: 2026-10-05 16:01 UTC
+- Account: Account 5
+- Chemistry concept: `chem.solid.crystal-systems`
+- Lesson/order: #90
+- Learner message: ok / next question please
+- Tutor response: t20 "ok": "Metallic bonding is the attraction that holds metal atoms together in a solid… sea of electrons…". t21 "next question please": "Think of a simple metal spoon you use every day…". Turns t1–t19 are almost entirely FCC atoms-per-cell counting; the named systems (triclinic, monoclinic, orthorhombic …) occur only in passing.
+- Expected behaviour: Stay on the lesson objective ("tell which of the seven crystal systems a crystal belongs to"); metallic bonding belongs to a later lesson.
+- Actual behaviour: The first reply is a figure walk-through of an FCC cell, and two later "continue"-type messages move to a different topic.
+- Why it is a defect: Lesson objective in the opener ("seven basic crystal systems") is not what is taught or quizzed.
+- Reproducibility: Observed once (#90).
+- Related defect: —
+- Status: OPEN
+
+### CHEM-134 — Wrong answer to "which species’ concentration appears in the SN1 rate law?" is praised as "a solid observation" and never corrected
+
+- Severity: P2
+- Category: Teaching
+- Date/time: 2026-10-05 15:54 UTC
+- Account: Account 8
+- Chemistry concept: `chem.hal.sn1`
+- Lesson/order: #144
+- Learner message: Chloride ion (the leaving group)
+- Tutor response: Card: "In this SN1 reaction, which species’ concentration appears in the rate law?" (options: water / chloride ion / tert-butyl chloride / tert-butyl carbocation). Reply: "That’s a solid observation—you’ve picked out the chloride ion as the leaving group in the SN1 pathway. When the C–Cl bond breaks, the carbon temporarily becomes a carbocation…" then the next card.
+- Expected behaviour: Not quite — the rate law contains [tert-butyl chloride] only (the example just worked says rate = k[t-BuCl]).
+- Actual behaviour: The incorrect option is affirmed; the correct species is never named. Mastery counters stay at 0/0.
+- Why it is a defect: A wrong answer is rewarded and the misconception (leaving group concentration in the rate law) is left standing.
+- Reproducibility: Observed once (#144 t16). Related: CHEM-075 (non-answers affirmed), CHEM-028 (no verdict).
+- Related defect: —
+- Status: OPEN
+
+### CHEM-135 — Iodoform explanation says primary alcohols "such as ethanol" give the test; only ethanol (not primary alcohols in general) does
+
+- Severity: P3
+- Category: Chemistry correctness
+- Date/time: 2026-10-05 16:06 UTC
+- Account: Account 7
+- Chemistry concept: `chem.org.qualitative-analysis`
+- Lesson/order: #131
+- Learner message: a methyl ketone, or a CH₃CH(OH)– group that can be oxidised to one
+- Tutor response: t9 reply: "…Beyond methyl ketones, primary alcohols such as ethanol also give a positive iodoform test because they are first oxidized to acet[aldehyde]…" while the card just answered lists "any primary alcohol" as a wrong option.
+- Expected behaviour: Ethanol is the only primary alcohol that gives a positive iodoform test (propan-1-ol, methanol do not — as the lesson itself says earlier).
+- Actual behaviour: Over-generalises to "primary alcohols", contradicting the card's own key.
+- Why it is a defect: Undermines the correct answer the learner just chose.
+- Reproducibility: Observed once (#131 t9).
+- Related defect: —
+- Status: OPEN
+
+### CHEM-136 — Amine basicity example gives pKb 3.4 / 3.1 / 2.9 for CH₃NH₂ / (CH₃)₂NH / (CH₃)₃N and concludes "primary < secondary < tertiary" in basicity
+
+- Severity: P2
+- Category: Chemistry correctness
+- Date/time: 2026-10-05 16:02 UTC
+- Account: Account 9
+- Chemistry concept: `chem.carb.amines`
+- Lesson/order: #163
+- Learner message: give me example with numbers / maybe yes?
+- Tutor response: t2 and t4 tables: "Methylamine pKb 3.4; Dimethylamine 3.1; Trimethylamine 2.9 … the tertiary amine has the smallest pKb, so it is the strongest base, followed by the secondary and then the primary amine… the basicity trend primary < secondary < tertiary." (t2 also prints the scale name as "pK₆₅ (pKb)".)
+- Expected behaviour: Aqueous pKb: CH₃NH₂ 3.36, (CH₃)₂NH 3.27, (CH₃)₃N 4.19; trimethylamine is the weakest of the three in water (solvation of the ammonium ion), which the lesson's own later card states ("bulky tertiary amine's cation is harder to solvate").
+- Actual behaviour: Trimethylamine value is invented (2.9) and the ordering is reversed for the tertiary amine; the same lesson later teaches the opposite.
+- Why it is a defect: A wrong number table and wrong trend in the example the learner asked for; contradicts the lesson's own card.
+- Reproducibility: Observed twice in #163 (t2, t4).
+- Related defect: —
+- Status: OPEN
+
+### CHEM-137 — Eutrophication example: BOD 12 mg/L is said to lower 8 mg/L dissolved oxygen "to roughly 3 mg/L"
+
+- Severity: P3
+- Category: Numerical/factual
+- Date/time: 2026-10-05 16:01 UTC
+- Account: Account 10
+- Chemistry concept: `chem.env.water-soil`
+- Lesson/order: #182
+- Learner message: give me example with numbers
+- Tutor response: "…pushes the Biochemical Oxygen Demand (BOD) up to 12 mg L⁻¹. Because the lake’s water originally held about 8 mg L⁻¹ of dissolved oxygen, the high BOD draws the oxygen level down to roughly 3 mg L⁻¹…" then asks why the drop is so dramatic.
+- Expected behaviour: 12 mg/L demand exceeds the 8 mg/L supply, so oxygen would be exhausted (≈ 0 mg/L, anoxia), or the figures should be chosen so the arithmetic closes (e.g. BOD 5 mg/L → 3 mg/L).
+- Actual behaviour: The numbers do not combine to the stated result.
+- Why it is a defect: The worked example's arithmetic is inconsistent, in a lesson whose goal is to teach the BOD/dissolved-oxygen relationship.
+- Reproducibility: Observed once (#182 t12).
+- Related defect: —
+- Status: OPEN
+
+### CHEM-138 — NMR feedback says "A CH₃ gives three signals while an OH gives one, so the CH₃ peak is larger"; also equates peak height with integration
+
+- Severity: P2
+- Category: Chemistry correctness
+- Date/time: 2026-10-05 16:12 UTC
+- Account: Account 7
+- Chemistry concept: `chem.org.spectroscopy`
+- Lesson/order: #132
+- Learner message: Yes (to a card on whether a taller CH₃ peak means that group is more important/reactive)
+- Tutor response: "Not quite — the answer is: No — NMR peak intensity (integration) is proportional to the NUMBER of equivalent hydrogens… The peak height shows how many equivalent hydrogens are present, not how reactive they are. A CH₃ gives three signals while an OH gives one, so the CH₃ peak is larger." (t9: "The taller CH₃ peak reflects three equivalent protons…")
+- Expected behaviour: A CH₃ group gives ONE signal whose integral corresponds to 3 H; integration (area), not height, is proportional to the number of H.
+- Actual behaviour: Says CH₃ "gives three signals" and conflates height with integration, in the corrective explanation itself.
+- Why it is a defect: The correction teaches a false statement about the very quantity the card tests.
+- Reproducibility: Observed twice (#132 t5, t9).
+- Related defect: —
+- Status: OPEN
+
 ## Coverage by lesson
 
 Result per account in brackets: turns driven, and how the lesson closed (mastered / needs-review = "Let's pause … worth another look later").
@@ -2108,9 +2516,9 @@ Result per account in brackets: turns driven, and how the lesson closed (mastere
 | 10 | `chem.atomic.subatomic-particles` | Subatomic Particles | A1 (22t, no-complete) | yes | CHEM-001, CHEM-003, CHEM-015, CHEM-034, CHEM-039, CHEM-060, CHEM-064, CHEM-101, CHEM-107 |
 | 11 | `chem.atomic.electromagnetic-radiation` | Electromagnetic Radiation | A1 (16t, mastered) | yes | CHEM-001, CHEM-002, CHEM-003, CHEM-004, CHEM-028, CHEM-033, CHEM-034, CHEM-060, CHEM-107 |
 | 12 | `chem.atomic.atomic-spectra` | Atomic Spectra | A1 (24t, needs-review) | yes | CHEM-001, CHEM-003, CHEM-004, CHEM-016, CHEM-028, CHEM-039, CHEM-060, CHEM-107 |
-| 13 | `chem.atomic.bohr-model` | Bohr Model of the Atom | **not covered** | — | — |
-| 14 | `chem.atomic.quantum-numbers` | Quantum Numbers | **not covered** | — | — |
-| 15 | `chem.atomic.orbitals` | Atomic Orbitals | **not covered** | — | — |
+| 13 | `chem.atomic.bohr-model` | Bohr Model of the Atom | A1 (22t, needs-review) | yes | CHEM-001, CHEM-003, CHEM-016, CHEM-033, CHEM-107 |
+| 14 | `chem.atomic.quantum-numbers` | Quantum Numbers | A1 (27t, needs-review) | yes | CHEM-016, CHEM-022, CHEM-028, CHEM-033, CHEM-034, CHEM-039, CHEM-107 |
+| 15 | `chem.atomic.orbitals` | Atomic Orbitals | A1 (22t, needs-review) | yes | CHEM-003, CHEM-004, CHEM-016, CHEM-033, CHEM-036, CHEM-039, CHEM-107 |
 | 16 | `chem.atomic.electronic-config` | Electronic Configuration | **not covered** | — | — |
 | 17 | `chem.atomic.photoelectric-effect` | Photoelectric Effect and Dual Nature | **not covered** | — | — |
 | 18 | `chem.atomic.quantum-mech-model` | Quantum Mechanical Model | **not covered** | — | — |
@@ -2125,8 +2533,8 @@ Result per account in brackets: turns driven, and how the lesson closed (mastere
 | 27 | `chem.bond.covalent-bonding` | Covalent Bonding | A2 (15t, needs-review) | yes | CHEM-001, CHEM-004, CHEM-016, CHEM-033, CHEM-061 |
 | 28 | `chem.bond.vsepr` | VSEPR Theory | A2 (29t, needs-review) | yes | CHEM-001, CHEM-002, CHEM-004, CHEM-015, CHEM-016, CHEM-033, CHEM-039, CHEM-100, CHEM-101, CHEM-107 |
 | 29 | `chem.bond.hybridization` | Hybridization | A2 (28t, needs-review) | yes | CHEM-001, CHEM-004, CHEM-015, CHEM-016, CHEM-033, CHEM-034, CHEM-039, CHEM-107 |
-| 30 | `chem.bond.mo-theory` | Molecular Orbital Theory | **not covered** | — | — |
-| 31 | `chem.bond.polar-molecules` | Polarity and Dipole Moment | **not covered** | — | — |
+| 30 | `chem.bond.mo-theory` | Molecular Orbital Theory | A2 (29t, needs-review) | yes | CHEM-001, CHEM-003, CHEM-004, CHEM-015, CHEM-016, CHEM-028, CHEM-033, CHEM-036, CHEM-039, CHEM-064, CHEM-079, CHEM-107, CHEM-121, CHEM-122 |
+| 31 | `chem.bond.polar-molecules` | Polarity and Dipole Moment | A2 (35t, needs-review) | none | CHEM-001, CHEM-003, CHEM-004, CHEM-016, CHEM-033, CHEM-036, CHEM-039, CHEM-044, CHEM-064, CHEM-107 |
 | 32 | `chem.bond.intermolecular` | Intermolecular Forces | **not covered** | — | — |
 | 33 | `chem.bond.metallic-bonding` | Metallic Bonding | **not covered** | — | — |
 | 34 | `chem.bond.resonance` | Resonance Structures | **not covered** | — | — |
@@ -2143,9 +2551,9 @@ Result per account in brackets: turns driven, and how the lesson closed (mastere
 | 45 | `chem.sol.vapour-pressure` | Vapour Pressure of Solutions | A3 (13t, needs-review) | none | CHEM-004, CHEM-016, CHEM-033, CHEM-101, CHEM-107 |
 | 46 | `chem.sol.colligative` | Colligative Properties | A3 (33t, needs-review) | yes | CHEM-004, CHEM-015, CHEM-016, CHEM-033, CHEM-039, CHEM-107 |
 | 47 | `chem.sol.osmosis` | Osmosis and Osmotic Pressure | A3 (14t, needs-review) | yes | CHEM-004, CHEM-015, CHEM-016, CHEM-107 |
-| 48 | `chem.sol.activity` | Activity and Non-ideal Solutions | **not covered** | — | — |
-| 49 | `chem.thermo.system` | System, Surroundings and State Functions | **not covered** | — | — |
-| 50 | `chem.thermo.first-law` | First Law of Thermodynamics | **not covered** | — | — |
+| 48 | `chem.sol.activity` | Activity and Non-ideal Solutions | A3 (13t, needs-review) | none | CHEM-004, CHEM-016, CHEM-033, CHEM-107 |
+| 49 | `chem.thermo.system` | System, Surroundings and State Functions | A3 (21t, needs-review) | yes | CHEM-001, CHEM-003, CHEM-004, CHEM-015, CHEM-016, CHEM-039, CHEM-079, CHEM-107 |
+| 50 | `chem.thermo.first-law` | First Law of Thermodynamics | A3 (25t, needs-review) | yes | CHEM-003, CHEM-016, CHEM-028, CHEM-033, CHEM-039, CHEM-107 |
 | 51 | `chem.thermo.enthalpy` | Enthalpy and Hess's Law | **not covered** | — | — |
 | 52 | `chem.thermo.bond-enthalpy` | Bond Enthalpy | **not covered** | — | — |
 | 53 | `chem.thermo.entropy` | Entropy and Second Law | **not covered** | — | — |
@@ -2163,10 +2571,10 @@ Result per account in brackets: turns driven, and how the lesson closed (mastere
 | 65 | `chem.equil.hydrolysis` | Salt Hydrolysis | A4 (31t, needs-review) | none | CHEM-001, CHEM-003, CHEM-004, CHEM-015, CHEM-016, CHEM-028, CHEM-033, CHEM-036, CHEM-039, CHEM-064, CHEM-081, CHEM-107 |
 | 66 | `chem.equil.solubility` | Solubility Equilibria | A4 (22t, needs-review) | none | CHEM-001, CHEM-003, CHEM-004, CHEM-016, CHEM-033, CHEM-107, CHEM-112 |
 | 67 | `chem.equil.complex-equil` | Complex Ion Equilibria | A4 (12t, mastered) | none | CHEM-001, CHEM-002, CHEM-003, CHEM-004, CHEM-033, CHEM-107 |
-| 68 | `chem.equil.titration` | Acid–Base Titrations | **not covered** | — | — |
-| 69 | `chem.redox.oxidation-state` | Oxidation State | **not covered** | — | — |
-| 70 | `chem.redox.balancing` | Balancing Redox Equations | **not covered** | — | — |
-| 71 | `chem.redox.disproportionation` | Disproportionation | **not covered** | — | — |
+| 68 | `chem.equil.titration` | Acid–Base Titrations | A4 (16t, needs-review) | none | CHEM-004, CHEM-016, CHEM-028, CHEM-033, CHEM-036, CHEM-039, CHEM-107, CHEM-115, CHEM-116, CHEM-117 |
+| 69 | `chem.redox.oxidation-state` | Oxidation State | A4 (19t, mastered) | none | CHEM-001, CHEM-004, CHEM-015, CHEM-033, CHEM-041, CHEM-107, CHEM-123 |
+| 70 | `chem.redox.balancing` | Balancing Redox Equations | A4 (15t, needs-review) | none | CHEM-001, CHEM-004, CHEM-016, CHEM-028, CHEM-033, CHEM-039, CHEM-065, CHEM-107, CHEM-129 |
+| 71 | `chem.redox.disproportionation` | Disproportionation | A4 (25t, needs-review) | none | CHEM-003, CHEM-016, CHEM-028, CHEM-036, CHEM-039, CHEM-107 |
 | 72 | `chem.redox.activity-series` | Electrochemical Activity Series | **not covered** | — | — |
 | 73 | `chem.redox.titrations` | Redox Titrations | **not covered** | — | — |
 | 74 | `chem.elect.galvanic-cell` | Galvanic Cell | **not covered** | — | — |
@@ -2183,10 +2591,10 @@ Result per account in brackets: turns driven, and how the lesson closed (mastere
 | 85 | `chem.kinet.integrated-rate` | Integrated Rate Laws | A5 (8t, mastered) | none | CHEM-002, CHEM-004, CHEM-028 |
 | 86 | `chem.kinet.arrhenius` | Arrhenius Equation | A5 (13t, mastered) | none | CHEM-004, CHEM-033, CHEM-079 |
 | 87 | `chem.kinet.mechanism` | Reaction Mechanisms | A5 (33t, needs-review) | yes | CHEM-001, CHEM-003, CHEM-016, CHEM-033, CHEM-039, CHEM-107, CHEM-110 |
-| 88 | `chem.kinet.catalysis` | Catalysis | A5 (26t, needs-review) | yes | CHEM-001, CHEM-003, CHEM-016, CHEM-033, CHEM-039, CHEM-107 |
-| 89 | `chem.kinet.photochemistry` | Photochemical Reactions | **not covered** | — | — |
-| 90 | `chem.solid.crystal-systems` | Crystal Systems | **not covered** | — | — |
-| 91 | `chem.solid.packing` | Close Packing and Efficiency | **not covered** | — | — |
+| 88 | `chem.kinet.catalysis` | Catalysis | A5 (26t, needs-review) | yes | CHEM-001, CHEM-003, CHEM-015, CHEM-016, CHEM-033, CHEM-039, CHEM-107 |
+| 89 | `chem.kinet.photochemistry` | Photochemical Reactions | A5 (27t, needs-review) | yes | CHEM-001, CHEM-003, CHEM-004, CHEM-016, CHEM-028, CHEM-033, CHEM-039, CHEM-064, CHEM-107 |
+| 90 | `chem.solid.crystal-systems` | Crystal Systems | A5 (24t, needs-review) | yes | CHEM-001, CHEM-003, CHEM-004, CHEM-016, CHEM-033, CHEM-034, CHEM-039, CHEM-107, CHEM-133 |
+| 91 | `chem.solid.packing` | Close Packing and Efficiency | A5 (21t, needs-review) | yes | CHEM-001, CHEM-002, CHEM-004, CHEM-016, CHEM-028, CHEM-034, CHEM-039, CHEM-064, CHEM-079, CHEM-107 |
 | 92 | `chem.solid.ionic-solids` | Ionic Crystal Structures | **not covered** | — | — |
 | 93 | `chem.solid.defects` | Crystal Defects | **not covered** | — | — |
 | 94 | `chem.solid.properties` | Electrical and Magnetic Properties | **not covered** | — | — |
@@ -2204,10 +2612,10 @@ Result per account in brackets: turns driven, and how the lesson closed (mastere
 | 106 | `chem.coord.stability` | Stability Constants | A6 (11t, no-complete) | yes | CHEM-001, CHEM-004, CHEM-033, CHEM-036, CHEM-107 |
 | 107 | `chem.coord.applications` | Applications of Coordination Chemistry | A6 (23t, no-complete) | yes | CHEM-003, CHEM-004, CHEM-028, CHEM-033, CHEM-034, CHEM-039, CHEM-079, CHEM-101, CHEM-107, CHEM-109 |
 | 108 | `chem.sblock.hydrogen` | Hydrogen | A6 (22t, needs-review) | none | CHEM-001, CHEM-004, CHEM-015, CHEM-016, CHEM-036, CHEM-107, CHEM-113 |
-| 109 | `chem.sblock.alkali` | Alkali Metals | **not covered** | — | — |
-| 110 | `chem.sblock.alkaline-earth` | Alkaline Earth Metals | **not covered** | — | — |
-| 111 | `chem.sblock.water` | Chemistry of Water | **not covered** | — | — |
-| 112 | `chem.pblock.group13` | Group 13 — Boron Family | **not covered** | — | — |
+| 109 | `chem.sblock.alkali` | Alkali Metals | A6 (22t, needs-review) | yes | CHEM-002, CHEM-003, CHEM-004, CHEM-016, CHEM-036, CHEM-039, CHEM-044, CHEM-107, CHEM-118 |
+| 110 | `chem.sblock.alkaline-earth` | Alkaline Earth Metals | A6 (23t, needs-review) | none | CHEM-001, CHEM-004, CHEM-016, CHEM-036, CHEM-039, CHEM-041, CHEM-064, CHEM-079, CHEM-107, CHEM-125, CHEM-126, CHEM-127 |
+| 111 | `chem.sblock.water` | Chemistry of Water | A6 (18t, needs-review) | none | CHEM-001, CHEM-002, CHEM-003, CHEM-004, CHEM-016, CHEM-028, CHEM-041, CHEM-079, CHEM-107, CHEM-131 |
+| 112 | `chem.pblock.group13` | Group 13 — Boron Family | A6 (11t, mastered) | none | CHEM-001, CHEM-002, CHEM-004, CHEM-036, CHEM-039, CHEM-041, CHEM-044, CHEM-132 |
 | 113 | `chem.pblock.group14` | Group 14 — Carbon Family | **not covered** | — | — |
 | 114 | `chem.pblock.group15` | Group 15 — Nitrogen Family | **not covered** | — | — |
 | 115 | `chem.pblock.group16` | Group 16 — Oxygen Family | A7 (12t, mastered) | yes | CHEM-002, CHEM-003, CHEM-004, CHEM-005, CHEM-006, CHEM-014, CHEM-015, CHEM-022, CHEM-041 |
@@ -2222,12 +2630,12 @@ Result per account in brackets: turns driven, and how the lesson closed (mastere
 | 124 | `chem.org.iupac` | IUPAC Nomenclature | A7 (9t, mastered) | none | CHEM-002, CHEM-004, CHEM-101, CHEM-107 |
 | 125 | `chem.org.hybridization` | Carbon Hybridization | A7 (36t, needs-review) | none | CHEM-001, CHEM-004, CHEM-016, CHEM-028, CHEM-033, CHEM-036, CHEM-039, CHEM-107 |
 | 126 | `chem.org.isomerism` | Structural and Stereoisomerism | A7 (7t, mastered) | none | CHEM-002, CHEM-004 |
-| 127 | `chem.org.electronic-effects` | Inductive and Mesomeric Effects | **not covered** | — | — |
-| 128 | `chem.org.reactive-intermediates` | Reactive Intermediates | **not covered** | — | — |
-| 129 | `chem.org.mechanisms` | Organic Reaction Mechanisms | **not covered** | — | — |
-| 130 | `chem.org.purification` | Purification Techniques | **not covered** | — | — |
-| 131 | `chem.org.qualitative-analysis` | Qualitative Organic Analysis | **not covered** | — | — |
-| 132 | `chem.org.spectroscopy` | Introduction to Spectroscopy | **not covered** | — | — |
+| 127 | `chem.org.electronic-effects` | Inductive and Mesomeric Effects | A7 (25t, needs-review) | none | CHEM-001, CHEM-004, CHEM-016, CHEM-036, CHEM-039, CHEM-064, CHEM-065, CHEM-107 |
+| 128 | `chem.org.reactive-intermediates` | Reactive Intermediates | A7 (8t, mastered) | none | CHEM-002, CHEM-003, CHEM-004, CHEM-041 |
+| 129 | `chem.org.mechanisms` | Organic Reaction Mechanisms | A7 (9t, mastered) | none | CHEM-002, CHEM-004, CHEM-033 |
+| 130 | `chem.org.purification` | Purification Techniques | A7 (21t, needs-review) | none | CHEM-004, CHEM-016, CHEM-028, CHEM-036, CHEM-039, CHEM-107, CHEM-130 |
+| 131 | `chem.org.qualitative-analysis` | Qualitative Organic Analysis | A7 (17t, needs-review) | none | CHEM-001, CHEM-003, CHEM-004, CHEM-016, CHEM-033, CHEM-107, CHEM-135 |
+| 132 | `chem.org.spectroscopy` | Introduction to Spectroscopy | A7 (10t, needs-review) | none | CHEM-004, CHEM-016, CHEM-033, CHEM-138 |
 | 133 | `chem.org.aromaticity` | Aromaticity | A8 (7t, mastered) | yes | CHEM-001, CHEM-002, CHEM-004 |
 | 134 | `chem.org.arrow-pushing` | Electron Flow and Arrow Notation | A8 (18t, mastered) | none | CHEM-001, CHEM-002, CHEM-004, CHEM-033, CHEM-036, CHEM-039, CHEM-040, CHEM-041, CHEM-055 |
 | 135 | `chem.org.pericyclic` | Pericyclic Reactions | A8 (8t, mastered) | yes | CHEM-001, CHEM-002, CHEM-005, CHEM-052 |
@@ -2238,9 +2646,9 @@ Result per account in brackets: turns driven, and how the lesson closed (mastere
 | 140 | `chem.hyd.conformations` | Conformational Analysis | A8 (11t, mastered) | none | CHEM-004, CHEM-033, CHEM-107, CHEM-108 |
 | 141 | `chem.hyd.petroleum` | Petroleum Refining | A8 (35t, needs-review) | yes | CHEM-001, CHEM-003, CHEM-004, CHEM-015, CHEM-016, CHEM-033, CHEM-039, CHEM-107, CHEM-111 |
 | 142 | `chem.hyd.polycyclic` | Polycyclic and Heterocyclic Systems | A8 (14t, mastered) | yes | CHEM-002, CHEM-003, CHEM-004, CHEM-028, CHEM-033, CHEM-107 |
-| 143 | `chem.hal.introduction` | Haloalkanes and Haloarenes | **not covered** | — | — |
-| 144 | `chem.hal.sn1` | SN1 Mechanism | **not covered** | — | — |
-| 145 | `chem.hal.sn2` | SN2 Mechanism | **not covered** | — | — |
+| 143 | `chem.hal.introduction` | Haloalkanes and Haloarenes | A8 (19t, needs-review) | none | CHEM-003, CHEM-004, CHEM-016, CHEM-028, CHEM-033, CHEM-036, CHEM-107 |
+| 144 | `chem.hal.sn1` | SN1 Mechanism | A8 (28t, needs-review) | yes | CHEM-003, CHEM-016, CHEM-028, CHEM-033, CHEM-039, CHEM-064, CHEM-107, CHEM-134 |
+| 145 | `chem.hal.sn2` | SN2 Mechanism | A8 (16t, needs-review) | yes | CHEM-001, CHEM-004, CHEM-016, CHEM-033 |
 | 146 | `chem.hal.elimination` | Elimination Reactions | **not covered** | — | — |
 | 147 | `chem.hal.haloarenes` | Haloarenes | **not covered** | — | — |
 | 148 | `chem.hal.grignard` | Grignard and Organolithium Reagents | **not covered** | — | — |
@@ -2256,10 +2664,10 @@ Result per account in brackets: turns driven, and how the lesson closed (mastere
 | 158 | `chem.carb.alpha-reactions` | Alpha-Carbon Reactions | A9 (9t, mastered) | yes | CHEM-002, CHEM-107 |
 | 159 | `chem.carb.carboxylic` | Carboxylic Acids | A9 (27t, no-complete) | none | CHEM-001, CHEM-003, CHEM-004, CHEM-015, CHEM-033, CHEM-036, CHEM-039, CHEM-107 |
 | 160 | `chem.carb.derivatives` | Carboxylic Acid Derivatives | A9 (18t, needs-review) | yes | CHEM-003, CHEM-004, CHEM-015, CHEM-016, CHEM-033, CHEM-064, CHEM-065, CHEM-107, CHEM-114 |
-| 161 | `chem.carb.named-reactions` | Named Carbonyl Reactions | **not covered** | — | — |
-| 162 | `chem.carb.spectro` | Spectroscopic ID of Carbonyls | **not covered** | — | — |
-| 163 | `chem.nitro.amines` | Amines | **not covered** | — | — |
-| 164 | `chem.nitro.diazonium` | Diazonium Salts | **not covered** | — | — |
+| 161 | `chem.carb.named-reactions` | Named Carbonyl Reactions | A9 (26t, needs-review) | yes | CHEM-001, CHEM-016, CHEM-028, CHEM-033, CHEM-035, CHEM-036, CHEM-039, CHEM-107, CHEM-119, CHEM-120 |
+| 162 | `chem.carb.spectro` | Spectroscopic ID of Carbonyls | A9 (17t, needs-review) | none | CHEM-004, CHEM-015, CHEM-016, CHEM-033, CHEM-064, CHEM-107, CHEM-128 |
+| 163 | `chem.nitro.amines` | Amines | A9 (9t, mastered) | yes | CHEM-002, CHEM-004, CHEM-015, CHEM-065, CHEM-079, CHEM-136 |
+| 164 | `chem.nitro.diazonium` | Diazonium Salts | A9 (23t, needs-review) | none | CHEM-001, CHEM-003, CHEM-004, CHEM-015, CHEM-016, CHEM-028, CHEM-036, CHEM-039, CHEM-107 |
 | 165 | `chem.nitro.nitro-compounds` | Nitro Compounds | **not covered** | — | — |
 | 166 | `chem.nitro.heterocycles` | Nitrogen Heterocycles | **not covered** | — | — |
 | 167 | `chem.nitro.amino-acids` | Amino Acids | **not covered** | — | — |
@@ -2275,9 +2683,9 @@ Result per account in brackets: turns driven, and how the lesson closed (mastere
 | 177 | `chem.poly.properties` | Polymer Properties | A10 (24t, needs-review) | yes | CHEM-001, CHEM-003, CHEM-016, CHEM-033, CHEM-034, CHEM-039, CHEM-107 |
 | 178 | `chem.poly.biodegradable` | Biodegradable and Functional Polymers | A10 (11t, needs-review) | yes | CHEM-016, CHEM-033, CHEM-107 |
 | 179 | `chem.env.atmosphere` | Atmosphere and Composition | A10 (26t, needs-review) | yes | CHEM-001, CHEM-003, CHEM-016, CHEM-028, CHEM-033, CHEM-039, CHEM-107 |
-| 180 | `chem.env.air-pollution` | Air Pollution | **not covered** | — | — |
-| 181 | `chem.env.ozone` | Ozone Depletion | **not covered** | — | — |
-| 182 | `chem.env.water-soil` | Water and Soil Pollution | **not covered** | — | — |
+| 180 | `chem.env.air-pollution` | Air Pollution | A10 (23t, needs-review) | yes | CHEM-001, CHEM-002, CHEM-003, CHEM-016, CHEM-028, CHEM-033, CHEM-039, CHEM-041, CHEM-079, CHEM-107 |
+| 181 | `chem.env.ozone` | Ozone Depletion | A10 (19t, needs-review) | none | CHEM-001, CHEM-003, CHEM-004, CHEM-015, CHEM-016, CHEM-036, CHEM-039, CHEM-041, CHEM-107, CHEM-124 |
+| 182 | `chem.env.water-soil` | Water and Soil Pollution | A10 (22t, needs-review) | yes | CHEM-002, CHEM-003, CHEM-016, CHEM-028, CHEM-033, CHEM-039, CHEM-041, CHEM-107, CHEM-137 |
 | 183 | `chem.anal.gravimetric` | Gravimetric Analysis | **not covered** | — | — |
 | 184 | `chem.anal.volumetric` | Volumetric Analysis | **not covered** | — | — |
 | 185 | `chem.anal.chromatography` | Chromatography | **not covered** | — | — |
