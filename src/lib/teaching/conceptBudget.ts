@@ -122,7 +122,16 @@ export function qualifiesForBudgetExtension(state: ConversationState): boolean {
   // signal uses (conversationState: consecutiveFailures >= 2). The extension
   // still buys only turns — mastery stays server-graded.
   if ((state.consecutiveFailures ?? 0) >= 2) return false
-  return state.phase === 'CHECK' || state.phase === 'PRACTICE' || state.phase === 'TRANSFER'
+  if (state.phase === 'CHECK' || state.phase === 'PRACTICE' || state.phase === 'TRANSFER') return true
+  // CHEM-016 (2026-10-05, chem.alc.phenols, production rows read-only): a
+  // learner answering right, wrong, right, wrong, right, wrong had THREE
+  // graded-correct answers, yet each right answer at GUIDE only lifted the
+  // ladder to CHECK and the next miss dropped it back — so at the base budget
+  // the phase was GUIDE, the extension was refused, and the lesson closed
+  // "Let's pause Phenols here for now" with counters 0/0. Two or more correct
+  // answers at GUIDE is a learner converting, not stalling. Still turns only:
+  // nothing here moves a mastery counter.
+  return state.phase === 'GUIDE' && (state.correctAnswersTotal ?? 0) >= 2
 }
 
 /** The turn allowance in force for this concept, base plus any granted

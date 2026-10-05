@@ -250,3 +250,32 @@ describe('a learner who converted at GUIDE is not denied the extension', () => {
     expect(stalled.correctAtPractice).toBe(0)
   })
 })
+
+/**
+ * CHEM-016 (2026-10-05, chem.alc.phenols, account 9, production rows read
+ * read-only): right/wrong alternating answers kept the ladder bouncing
+ * GUIDE <-> CHECK, so the base budget expired at GUIDE with three graded-correct
+ * answers and counters 0/0, and the lesson closed as "paused".
+ */
+describe('CHEM-016: a learner converting at GUIDE gets the extension', () => {
+  it('two or more correct answers at GUIDE, not spiralling, qualifies', () => {
+    expect(qualifiesForBudgetExtension(progressing({
+      phase: 'GUIDE', correctAtCheck: 0, correctAtPractice: 0, correctAnswersTotal: 3, consecutiveFailures: 1,
+    }))).toBe(true)
+  })
+  it('one correct answer at GUIDE, or two misses in a row, still does not', () => {
+    expect(qualifiesForBudgetExtension(progressing({
+      phase: 'GUIDE', correctAtCheck: 0, correctAtPractice: 0, correctAnswersTotal: 1,
+    }))).toBe(false)
+    expect(qualifiesForBudgetExtension(progressing({
+      phase: 'GUIDE', correctAtCheck: 0, correctAtPractice: 0, correctAnswersTotal: 3, consecutiveFailures: 2,
+    }))).toBe(false)
+  })
+  it('the extension certifies nothing: the mastery counters are untouched', () => {
+    const s = progressing({ phase: 'GUIDE', correctAtCheck: 0, correctAtPractice: 0, correctAnswersTotal: 3 })
+    expect(qualifiesForBudgetExtension(s)).toBe(true)
+    expect(evaluateConceptBudget({ ...s, budgetExtensionGranted: true }).status).not.toBe('exhausted')
+    expect(s.correctAtCheck).toBe(0)
+    expect(s.correctAtPractice).toBe(0)
+  })
+})
