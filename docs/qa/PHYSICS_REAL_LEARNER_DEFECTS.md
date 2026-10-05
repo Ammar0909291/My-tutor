@@ -160,6 +160,20 @@ Categories: Teaching · Adaptation · Lesson flow · Visuals · Numerical/factua
 - **Why a defect:** every other check in these lessons is an answer card with tappable options; here the learner must type a letter or the text, and the answer is not graded as a card/probe. The worked example's numbers in order 43 were checked and are correct (v1' = -0.33 m/s, v2' = +4.67 m/s).
 - **Expected:** the question arrives as a card. **Actual:** prose options. **Reproducible:** yes (2 lessons). **Status:** OPEN
 
+### PHYS-021 — [P1] [Adaptation/Visuals] SYSTEMIC: "i dont understand this picture. what is it showing?" is answered by defining the word "showing" or with generic empathy, not by describing the figure
+- **Date:** 2026-10-05 · **Scope of observation:** solo sequential run, orders 1-61. The learner message was identical in every lesson (the same sentence PHYS-003 recorded for Young's experiment).
+- **Observed in at least 16 of 61 lessons** (orders 1, 5, 6, 16, 18, 21, 24, 26, 29, 30, 38, 40, 44, 50, 54, 60): the reply either (a) explains what "show"/"showing" means (e.g. order 6: *"Think of 'showing' as the way a tool or a picture makes information visible to you."*, order 54: *"Think of 'showing' like giving someone a quick, hands-on demo of how a new kitchen gadget works."*, order 60: *"It's a visual way of showing a physics idea…"*, order 50: *"let's look at what 'showing' means in a learning context"*), (b) opens with *"I hear you're feeling stuck with the picture—let's look at it from a different angle"* and then answers generically, or (c) in order 1 asks *"Could you tell me what you see in it?"*. Many other lessons answer with a plausible-but-generic analogy ("Imagine a block…", "Think of a weather map…", order 30) that does not name the labels, values or axes of the attached figure.
+- **Why a defect:** the learner (low English) asked about the picture on screen. The picture's actual labels/numbers are available to the tutor (it quotes them in other turns) but are not used here. The learner leaves without being able to read the figure.
+- **Expected:** name what the figure shows, label by label ("the red arrow is…, the number 6 is…"). **Actual:** definition of "show" / empathy / a generic story.
+- **Reproducible:** yes, in about a quarter of lessons with an identical trigger message (the persona uses this sentence by design; the real learner's wording will vary — wording-sensitivity not tested). **Related:** PHYS-003, PCD-031. **Status:** OPEN
+
+### PHYS-022 — [P1] [Lesson flow] Content-free "degraded" turn when the learner asks for the next question
+- **Date:** 2026-10-05 · **Concept:** `phys.grav.field` · **Lesson:** Gravitational Field and Field Lines (order 55)
+- **Learner:** *"ok i understand. next question please"*
+- **Tutor (provider=`degraded`, reason `practice_without_quiz`):** *"Let's take one small step together. I'll walk through it with you and pause whenever it helps.\n\nWe can continue from here whenever you're ready."* — no question, no card, no teaching.
+- **Why a defect:** the learner asked for the next question and received a stock hold message; the lesson did not advance on that turn.
+- **Expected:** the next question card. **Actual:** content-free hold. **Reproducible:** observed once in 61 lessons (the content-free hold is already a known open class — see CLAUDE.md "content-free hold"; this is a fresh production occurrence). **Status:** OPEN
+
 ## Out-of-scope observations (Chemistry) from the earlier four-lesson session — preserved, not counted
 
 These were found by the same learner on 2026-10-04 and are recorded so they are not lost. They are **Chemistry**, outside this file's Physics scope, and are not included in the Physics counts above.
