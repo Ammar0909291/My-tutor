@@ -677,7 +677,15 @@ const SCRIPTS: Record<FailureStateKey, { general: string; lessonOne?: string; pr
       'simplified. Switch to a direct demonstration or explanation with a ' +
       'concrete example instead, with no question attached to the end of ' +
       'your response. Tone: calm and steady — never defensive, never matching ' +
-      'their intensity, never chiding them for how they said it.',
+      'their intensity, never chiding them for how they said it. ' +
+      // PHYS-008 (2026-10-05, phys.opt.youngs-experiment): "the bright peaks
+      // are equal distance. i already said this before. the middle one is the
+      // biggest" got "I'm sorry you're feeling stuck" — the learner was not
+      // stuck; they had answered, twice.
+      'If they say they ALREADY said or answered it, they are not stuck and ' +
+      'not confused — never say they are. Take the answer they gave (it is ' +
+      'often restated in the same message): say plainly what is right in it, ' +
+      'and move on to the next idea.',
     lessonOne:
       'Apologize once, briefly, then STOP asking anything this turn and the ' +
       'next. Demonstrate the idea plainly, start to finish. A beginner who is ' +

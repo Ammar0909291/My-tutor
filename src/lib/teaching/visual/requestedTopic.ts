@@ -430,6 +430,18 @@ export const DISCOURSE_NOUNS = new Set([
   // survive (each needs only the OTHER word, which is not discourse), and the
   // narrow, single-concept cost matches the one `point` already accepted.
   'line',
+  // PHYS-001 / PHYS-021 (2026-10-05, physics real-learner run, phys.opt.
+  // youngs-experiment and 16 more lessons): "i dont understand this picture.
+  // what is the picture showing?" named the topic "picture showing" ("what is
+  // it showing?" -> "showing"). `picture` is a medium word, `showing` was not,
+  // so ONE word survived, a knowledge-gap excursion opened on it, and the tutor
+  // taught what "showing" means ("Think of 'showing' as the way a tool or a
+  // picture makes information visible") or what a picture is ("A picture is a
+  // visual representation…") — and the excursion was still open when the
+  // learner answered the next confirm-back with "yes", so the lesson stayed
+  // on pictures for three turns. The verbs that ask what a figure SAYS are
+  // about the figure, never a subject.
+  'show', 'shows', 'showing', 'shown', 'mean', 'means',
   // HOW TO DELIVER IT, NOT WHAT TO TEACH — the manner adverbs.
   //
   // Measured 2026-08-29, physics `phys.qm.hydrogen-atom-qm`, a struggling-
