@@ -152,7 +152,8 @@ Categories: Teaching · Adaptation · Lesson flow · Visuals · Numerical/factua
 - **Tutor (provider=groq, reason `learner_needs_reply`):** *"Let me put it in the simplest words I have.\n\nMotion on an inclined plane is analysed by resolving gravitational and normal forces along and perpendicular to the slope."*
 - **Why a defect:** the learner asked for an example; the reply is a one-line definition, more abstract than the opening, with no object, number or situation.
 - **Expected:** a concrete example (e.g. a box on a ramp with a stated angle and mass). **Actual:** no example; next turn the learner had to ask again.
-- **Reproducible:** observed once here; same family as PHYS-002/PHYS-014. **Status:** OPEN
+- **Recurrence:** order 74 (`The Hamiltonian and Legendre Transform`): *"Let me put it in the simplest words I have."* followed by *"The Hamiltonian H = Σpᵢṡᵢ − L is obtained from the Lagrangian by a Legendre transform; canonical momenta… are conjugate…"* (more advanced than the lesson, no example). Order 64 (Pressure in Fluids): *"give me example"* → *"Take a look at the arrows that emanate from a single point inside the water in the figure"* (one sentence, no example).
+- **Reproducible:** yes (3 lessons); same family as PHYS-002/PHYS-014. **Status:** OPEN
 
 ### PHYS-020 — [P3] [UX/Lesson flow] Multiple-choice question posed as inline "A) B) C) D)" prose instead of an answer card
 - **Date:** 2026-10-05 · **Concepts/lessons:** `Elastic Collisions` (order 43), `Torque` (order 47)
@@ -173,6 +174,13 @@ Categories: Teaching · Adaptation · Lesson flow · Visuals · Numerical/factua
 - **Tutor (provider=`degraded`, reason `practice_without_quiz`):** *"Let's take one small step together. I'll walk through it with you and pause whenever it helps.\n\nWe can continue from here whenever you're ready."* — no question, no card, no teaching.
 - **Why a defect:** the learner asked for the next question and received a stock hold message; the lesson did not advance on that turn.
 - **Expected:** the next question card. **Actual:** content-free hold. **Reproducible:** observed once in 61 lessons (the content-free hold is already a known open class — see CLAUDE.md "content-free hold"; this is a fresh production occurrence). **Status:** OPEN
+
+### PHYS-023 — [P1] [Visuals/UX/Teaching] Raw card markup leaks into the tutor text, revealing the answer key; the card attached is a different, unrelated question
+- **Date:** 2026-10-05 · **Concepts/lessons:** `Generalized Coordinates and Configuration Space` (order 71), `The Euler-Lagrange Equation and Hamilton's Principle` (order 72)
+- **Learner did:** answered a figure-label card, then received the feedback turn.
+- **Tutor (provider=groq):** the feedback paragraph ends with a stray `**` and then the visible raw text `<!" a="x" b="y" c="constraint: x² + y² = L²" d="θ" correct="C"-->` followed by a **different** card (*"Which statement correctly describes a conservative force?"*). In order 72 the leaked text is `<!" a="L = T + V" b="L = T − V" c="L = V − T" d="L = T only" correct="B"-->` followed by a card *"Which expression correctly defines the Lagrangian…"*.
+- **Why a defect:** (1) raw markup shown to the learner; (2) it carries `correct="C"` / `correct="B"`, i.e. an answer key, before the learner answers (in order 72 the key `B` matches the next card's correct option "L = T − V"); (3) in order 71 the card that follows is about conservative forces, not about the generalised-coordinate figure just discussed.
+- **Expected:** no markup in text; one card on the lesson's topic. **Actual:** as above. **Reproducible:** yes, 2 of 4 lessons in the Lagrangian unit (orders 71-74). **Status:** OPEN
 
 ## Out-of-scope observations (Chemistry) from the earlier four-lesson session — preserved, not counted
 
