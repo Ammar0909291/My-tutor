@@ -68,6 +68,31 @@ export function assembleNeutralTurn(a: { feedback: string; leadIn: string | null
 }
 
 /**
+ * CHEM-035 (2026-10-05, chem.equil.concept #58, production row read-only): the
+ * learner tapped "The concentrations of all species remain unchanged." on a
+ * model-written card and the reply was "I see you chose “No.” Could you walk
+ * me through how you decided that a mixture with 95 % reactants…" — a
+ * different, two-cards-old answer. True when the live reply attributes a
+ * QUOTED answer to the learner ("you chose/picked/selected/answered/said …")
+ * that is neither the option they tapped nor its letter.
+ */
+export function misattributesChoice(liveText: string, options: string[], chosenIndex: number): boolean {
+  const norm = (t: string) => t.toLowerCase().replace(/[“”"'‘’.]/g, '').replace(/\s+/g, ' ').trim()
+  const chosen = norm(options[chosenIndex] ?? '')
+  const letter = chosenIndex >= 0 && chosenIndex < 26 ? String.fromCharCode(97 + chosenIndex) : ''
+  const re = /\byou\s+(?:chose|picked|selected|answered|said|went\s+with)\s*[:,]?\s*[“"‘']([^”"’']{1,160})[”"’']/gi
+  let m: RegExpExecArray | null
+  while ((m = re.exec(liveText ?? '')) !== null) {
+    const quoted = norm(m[1])
+    if (!quoted) continue
+    if (quoted === letter || quoted === `${letter})` || quoted === `option ${letter}`) continue
+    if (chosen && (chosen === quoted || chosen.includes(quoted) || quoted.includes(chosen))) continue
+    return true
+  }
+  return false
+}
+
+/**
  * Whether the neutral turn replaces the live reply. Only a stub is replaced
  * (K1: under 12 words — production: "Here is your next question.", the gate
  * contract's fallback lead-in after the model's own option list was cut); any
@@ -80,10 +105,12 @@ export function neutralServeDecision(a: {
   codes: string[]
   feedback: string | null
   leadIn: string | null
+  /** CHEM-035: the live reply quotes an answer the learner did not give. */
+  liveMisattributes?: boolean
 }): { assembled: string | null; liveStub: boolean; serve: boolean } {
   const words = (t: string) => t.split(/\s+/).filter((w) => /[\p{L}\p{N}]/u.test(w)).length
   const liveStub = words(a.liveText ?? '') < 12
   const assembled = a.codes.length === 0 && a.feedback ? assembleNeutralTurn({ feedback: a.feedback, leadIn: a.leadIn }) : null
-  const serve = a.mode === 'serve' && liveStub && assembled !== null && words(assembled) >= 12
+  const serve = a.mode === 'serve' && (liveStub || a.liveMisattributes === true) && assembled !== null && words(assembled) >= 12
   return { assembled, liveStub, serve }
 }

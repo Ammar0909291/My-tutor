@@ -13529,13 +13529,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             const parsed = ta.parseSlots(r.raw)
             const codes = r.error && !r.raw ? ['V0-provider-error'] : parsed ? na.validateNeutralSlots(parsed, r.facts) : ['V1-unparseable']
             const { neutralLeadInFor } = await import('@/lib/teaching/gateAssessmentRenderer')
+            const liveMisattributes = na.misattributesChoice(servedText, r.facts.options, r.facts.chosenIndex)
             const { assembled, liveStub, serve: serveNeutral } = na.neutralServeDecision({
               mode: nMode, liveText: servedText, cardOnScreen: Boolean(servedMcq), codes,
               feedback: parsed?.feedback ?? null, leadIn: servedMcq ? neutralLeadInFor(servedMcq.question) : null,
+              liveMisattributes,
             })
             console.log('[assembled-neutral] ' + JSON.stringify({
               conceptId: resolvedConceptId ?? null, provider: r.provider, ms: r.ms, attempts: r.attempts,
-              codes, liveStub, served: serveNeutral ? 'assembled' : 'live',
+              codes, liveStub, liveMisattributes, served: serveNeutral ? 'assembled' : 'live',
               // Tutor text only.
               liveText: servedText.slice(0, 300),
               ...(assembled ? { assembledText: assembled.slice(0, 500) } : { rawOnFailure: r.raw.slice(0, 400) }),
