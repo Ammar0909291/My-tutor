@@ -146,6 +146,20 @@ Categories: Teaching · Adaptation · Lesson flow · Visuals · Numerical/factua
 - **Reproducible:** yes in the 3-parallel run (4 of 5 concurrent lessons); not reproduced sequentially. **Scope:** unknown (probably per-account serving state; real impact needs a multi-tab learner). **Related:** PCD-004 (earlier concurrency finding). **Status:** OPEN
 - **Method note:** all lessons after this one were run sequentially, one at a time. Orders 1-7 were driven in the parallel run and 5 of them are affected; order 5 did not complete and is re-driven sequentially.
 
+### PHYS-019 — [P2] [Adaptation] "give me example" answered with one abstract sentence, no example
+- **Date:** 2026-10-05 · **Concept:** `phys.mech.inclined-planes` · **Lesson:** Motion on Inclined Planes (order 30), solo sequential run
+- **Learner:** *"give me example"*
+- **Tutor (provider=groq, reason `learner_needs_reply`):** *"Let me put it in the simplest words I have.\n\nMotion on an inclined plane is analysed by resolving gravitational and normal forces along and perpendicular to the slope."*
+- **Why a defect:** the learner asked for an example; the reply is a one-line definition, more abstract than the opening, with no object, number or situation.
+- **Expected:** a concrete example (e.g. a box on a ramp with a stated angle and mass). **Actual:** no example; next turn the learner had to ask again.
+- **Reproducible:** observed once here; same family as PHYS-002/PHYS-014. **Status:** OPEN
+
+### PHYS-020 — [P3] [UX/Lesson flow] Multiple-choice question posed as inline "A) B) C) D)" prose instead of an answer card
+- **Date:** 2026-10-05 · **Concepts/lessons:** `Elastic Collisions` (order 43), `Torque` (order 47)
+- **Tutor (provider=groq, reason `learner_needs_reply`):** after a worked collision example ends with *"Which ball ends up moving faster after the collision? A) The heavier (2 kg) ball B) The lighter (1 kg) ball C) Both have the same speed D) Both are at rest"* as plain text; no `mcq` object in the payload. Order 47 does the same (A-D "larger/smaller/same/zero").
+- **Why a defect:** every other check in these lessons is an answer card with tappable options; here the learner must type a letter or the text, and the answer is not graded as a card/probe. The worked example's numbers in order 43 were checked and are correct (v1' = -0.33 m/s, v2' = +4.67 m/s).
+- **Expected:** the question arrives as a card. **Actual:** prose options. **Reproducible:** yes (2 lessons). **Status:** OPEN
+
 ## Out-of-scope observations (Chemistry) from the earlier four-lesson session — preserved, not counted
 
 These were found by the same learner on 2026-10-04 and are recorded so they are not lost. They are **Chemistry**, outside this file's Physics scope, and are not included in the Physics counts above.
