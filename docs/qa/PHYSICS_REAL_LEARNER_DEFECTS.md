@@ -39,12 +39,14 @@ basic Physics knowledge, sometimes confused, sometimes wrong, asks "explain simp
   established.
 
 <!-- SUMMARY:START -->
-## Summary (progress snapshot, 2026-10-05)
+## Summary (end of run, 2026-10-06)
 
-- Lessons driven (full sessions, sequential): 19 of 283 (orders 1-20 region; order 2 and orders 3/4/6/7 were first driven in a 3-parallel run, see PHYS-018). Not tested: the rest.
-- Mastered in-session: 11; ended needs-review: 8. Needs-review results are mostly the scripted persona answering too many cards wrong (~7/10 on some lessons) - a learning-difficulty/harness effect, NOT counted as defects.
-- Defects recorded: 18 (P0: 0 - P1: see entries - P2/P3: see entries). Fixed: 0. Open: 18.
-- Transcripts reviewed so far in depth: orders 1, 2, 3, 4, 8, 9, 134, 237 plus flag-scan of orders 5-20. Orders 10-20 showed no new defect beyond recurrences (picture-description fallback, empty-empathy replies to "why? i am confused", 2-option cards with an obviously longer correct option).
+- Lessons driven: 281 of 283 distinct orders (285 sessions; some re-driven on the second account). Not driven: orders 229 and 259 (already MASTERED on account 2 before the run) — recorded as skipped; orders 134 and 237 were driven on the second account / earlier.
+- Mastered in at least one session: 184 of 281. The rest ended needs-review; mostly because the scripted persona answered ~half the cards wrong, so this is NOT counted as a defect.
+- Turns driven: 5,190 (402 served from stored "memory" cards, 87 degraded stock turns).
+- Defects recorded: 24 (PHYS-001 to PHYS-024) plus an out-of-scope Chemistry appendix (CHEM-A1..A8). Fixed: 0. Open: 24.
+- Not tested: real browser controls (Predict/Practice/Test me/sliders/phone layout), the PHYS-021 trigger with natural wording, factual correctness of most numerical content outside the lessons read in depth (orders 1-9, 43, 55, 71-72, 76-78, 103, 134, 237 plus flag scans of all others).
+- Review depth: about 20 transcripts read closely; the other ~260 were scanned by automated flags (degraded, truncated, raw markup, repeats) and spot checks. A clean flag scan is NOT evidence of correctness.
 <!-- SUMMARY:END -->
 
 ## Severity key
@@ -155,8 +157,8 @@ Categories: Teaching · Adaptation · Lesson flow · Visuals · Numerical/factua
 - **Why a defect:** the learner asked for an example; the reply is a one-line definition, more abstract than the opening, with no object, number or situation.
 - **Expected:** a concrete example (e.g. a box on a ramp with a stated angle and mass). **Actual:** no example; next turn the learner had to ask again.
 - **Recurrence:** order 74 (`The Hamiltonian and Legendre Transform`): *"Let me put it in the simplest words I have."* followed by *"The Hamiltonian H = Σpᵢṡᵢ − L is obtained from the Lagrangian by a Legendre transform; canonical momenta… are conjugate…"* (more advanced than the lesson, no example). Order 64 (Pressure in Fluids): *"give me example"* → *"Take a look at the arrows that emanate from a single point inside the water in the figure"* (one sentence, no example).
-- **Further recurrences (orders 76, 77, 78):** the identical opener *"Let me put it in the simplest words I have."* followed by a one-sentence abstract definition, no example; order 82 (Heat Transfer): one sentence about the red arrow in the figure, no example. Total so far: 8 of 85 lessons.
-- **Reproducible:** yes (8 lessons); same family as PHYS-002/PHYS-014. **Status:** OPEN
+- **Further recurrences (orders 76, 77, 78):** the identical opener *"Let me put it in the simplest words I have."* followed by a one-sentence abstract definition, no example; order 82 (Heat Transfer): one sentence about the red arrow in the figure, no example. Final count: the opener *"Let me put it in the simplest words I have."* directly followed the learner's *"give me example"* in 41 of the 272 sessions where that message was sent (31 on account 1, 10 on account 2).
+- **Reproducible:** yes (41 sessions); same family as PHYS-002/PHYS-014. **Status:** OPEN
 
 ### PHYS-020 — [P3] [UX/Lesson flow] Multiple-choice question posed as inline "A) B) C) D)" prose instead of an answer card
 - **Date:** 2026-10-05 · **Concepts/lessons:** `Elastic Collisions` (order 43), `Torque` (order 47)
@@ -189,7 +191,7 @@ Categories: Teaching · Adaptation · Lesson flow · Visuals · Numerical/factua
 - **Date:** 2026-10-05/06 · **Lessons:** account 1 orders 215 (21 of 45 turns degraded; also Gemini fallback appearing in the same lesson), 216 (3), 217 (6); account 2 orders 2 (13 of 28 turns), 3 (4), 4 (5). Before order 215, degraded turns were rare (about 1 %).
 - **Tutor (provider=`degraded`):** the same stock text — *"Let's take one small step together. I'll walk through it with you and pause whenever it helps. We can continue from here whenever you're ready."* — or a card turn whose lead-in is *"Take a look at the figure beside this message — it's a general illustration related to the topic."* The lesson 2 ("Scalar and Vector Quantities") run on account 2 also attached the *Vector Addition 3-4-5* figure as that "general illustration".
 - **Why a defect:** whole stretches of a lesson contain no teaching, the learner's questions get no answer, and the lesson becomes repetitive (the tool also flagged VERBATIM-REPEAT 2x in order 2).
-- **Cause not established:** the bursts began when both accounts were being driven concurrently (two simultaneous chats from this machine) and Gemini started appearing as provider, which is consistent with the Groq limit being hit; I did not read production logs. A single real learner would probably not trigger it, so severity under real load is **uncertain**.
+- **Cause not established:** the bursts began when both accounts were being driven concurrently (two simultaneous chats from this machine) and Gemini started appearing as provider, which is consistent with the Groq limit being hit; I did not read production logs. Later, order 6 on account 2 degraded (8 flags) with only that one worker running, so concurrency alone does not explain it; severity under real load is **uncertain**. Run-wide: 87 of 5,190 turns (1.7 %) were degraded; most were in 11 lessons.
 - **Expected:** a real answer or an honest "try again in a moment" message. **Actual:** a stock "we can continue" line. **Reproducible:** yes in this run (6 lessons). **Related:** PHYS-022, CLAUDE.md "content-free hold". **Status:** OPEN (cause unknown)
 
 ## Out-of-scope observations (Chemistry) from the earlier four-lesson session — preserved, not counted
