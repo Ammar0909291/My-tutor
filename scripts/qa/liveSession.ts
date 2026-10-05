@@ -61,11 +61,16 @@ export async function post(pathname: string, body: unknown, cookie: string): Pro
   return (await res.json()) as TurnPayload
 }
 
-export async function createSession(cookie: string, subjectSlug: string): Promise<string> {
+/**
+ * `tabId` is what a real browser tab sends (LessonScreen.tsx, PCD-004A). Without
+ * it the server resumes the account's most recent session, so two lessons
+ * driven at once without it share ONE session (PHYS-018's 3-parallel run).
+ */
+export async function createSession(cookie: string, subjectSlug: string, tabId?: string): Promise<string> {
   const res = await fetch(`${BASE}/api/sessions`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', cookie },
-    body: JSON.stringify({ subjectSlug }),
+    body: JSON.stringify(tabId ? { subjectSlug, tabId } : { subjectSlug }),
   })
   if (!res.ok) throw new Error(`/api/sessions -> HTTP ${res.status}: ${(await res.text()).slice(0, 300)}`)
   const body = (await res.json()) as { data?: { id?: string }; id?: string }
