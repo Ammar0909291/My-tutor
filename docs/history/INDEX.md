@@ -41,6 +41,7 @@ log.
 | `turn-assembly-pairs-2026-10-02.md` | Turn assembly shadow: 30 served-vs-assembled reply pairs (post-fix windows 6–11, four subjects) for the owner's spec §7 hand-read. |
 | `turn-assembly-serve-2026-10-03.md` | Turn assembly Phase 3 serve rollout: incident log (the attach assembler cut rhetorical questions, fixed in `504579c`), and an owner security note about a key visible in a Vercel env comment. |
 | `launch-readiness-2026-10-03.md` | Launch readiness: per-subject verdicts (physics/biology/chemistry/english), the six launch items with production numbers, the fact-check precision result (0%, stays shadow), owner-only actions, pilot recommendation. |
+| `physics-real-learner-fixes-2026-10-05.md` | Fixes for PHYS-001..024 (real-learner physics run): root causes with file references, commits, the degraded-turn cause from production logs (Groq 429 + Gemini 402 + no OpenRouter key), PHYS-018 not reproduced, owner proposals for PHYS-011/012/016/020, and the security note about a committed password. |
 | `physics-kg-coverage-extension.md` | Coverage-driven physics KG extension (owner exception 2026-10-03): all 31 core-tier concepts (238 → 269) landed on `main` 2026-10-04 in two pushes, each with an owner-approved lesson-order remap (359, then 147, of 778 physics progress rows), verified exactly. |
 
 ## Live pointers (not history — check these first for CURRENT state)

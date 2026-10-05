@@ -39,14 +39,26 @@ basic Physics knowledge, sometimes confused, sometimes wrong, asks "explain simp
   established.
 
 <!-- SUMMARY:START -->
-## Summary (end of run, 2026-10-06)
+## Summary (end of run, 2026-10-06; fix pass 2026-10-05/06)
 
 - Lessons driven: 281 of 283 distinct orders (285 sessions; some re-driven on the second account). Not driven: orders 229 and 259 (already MASTERED on account 2 before the run) — recorded as skipped; orders 134 and 237 were driven on the second account / earlier.
 - Mastered in at least one session: 184 of 281. The rest ended needs-review; mostly because the scripted persona answered ~half the cards wrong, so this is NOT counted as a defect.
 - Turns driven: 5,190 (402 served from stored "memory" cards, 87 degraded stock turns).
-- Defects recorded: 24 (PHYS-001 to PHYS-024) plus an out-of-scope Chemistry appendix (CHEM-A1..A8). Fixed: 0. Open: 24.
+- Defects recorded: 24 (PHYS-001 to PHYS-024) plus an out-of-scope Chemistry appendix (CHEM-A1..A8).
+- **Fix pass (2026-10-05/06):** FIXED 13 (001, 002, 003, 005, 008, 013 first half, 014, 015, 019, 021, 022 + 024 code part, 023) · NOT REPRODUCED 1 (018) · DEFERRED 10 (004, 006, 007, 009, 010, 017; owner decision: 011, 012, 016, 020). Commits and causes on each entry's **Fix:** line; full record `docs/history/physics-real-learner-fixes-2026-10-05.md`.
 - Not tested: real browser controls (Predict/Practice/Test me/sliders/phone layout), the PHYS-021 trigger with natural wording, factual correctness of most numerical content outside the lessons read in depth (orders 1-9, 43, 55, 71-72, 76-78, 103, 134, 237 plus flag scans of all others).
 - Review depth: about 20 transcripts read closely; the other ~260 were scanned by automated flags (degraded, truncated, raw markup, repeats) and spot checks. A clean flag scan is NOT evidence of correctness.
+
+### Production re-drive after the fixes (2026-10-05 ~18:30 UTC, deploy `cf71a4b`, one disposable account, deleted after)
+`scripts/qa/physDefectRedrive.ts`, orders 71, 72, 134, 237, 55, 30, 9 — 77 turns with the persona's own messages. All transcripts read.
+- **PHYS-023:** 0 raw markup / answer keys in 77 turns (orders 71, 72 included). The leak needs the stub-repair retry path, which is rare, so absence here is weak evidence; the root cause was reproduced and fixed offline.
+- **PHYS-021/003:** "i dont understand this picture. what is the picture showing?" was answered label-by-label from the figure in 4 of 6 non-degraded replies (orders 72, 134, 237, 30). Orders 55 and 9 still answered generically — improved, not eliminated. 0 definitions of "showing".
+- **PHYS-001:** the following "yes" stayed on the lesson in both observed cases (orders 71, 55); no "what is a picture" excursion.
+- **PHYS-019/002:** "give me example" got a concrete example in 5 of 5 non-degraded replies; 0 "simplest words" after an example request. "example with numbers" carried numbers in 4 of 5 (order 55 gave an analogy only). One "simplest words" fallback remains on a different trigger ("quiz me" after "explain simpler" on a held card, order 72).
+- **PHYS-014:** "explain simpler. what is gamma and how i get 1.25?" was answered on the first reply with γ = 1/√(1 − 0.6²) = 1.25, step by step.
+- **PHYS-012:** the spaceship example gave "1 hour 40 minutes" (correct) — model variance, not a fix.
+- **PHYS-005/015:** the order-237 opening had no reference to a missing picture (one observation).
+- **PHYS-022/024:** 0 of 77 turns carried the old stock template; 19 of 77 (25 %) were degraded and carried the honest "my answer didn't come through" copy. The rate is load-driven: in that window Groq served a flat ~29 replies/min against ~38/min of total traffic (other QA sessions), Gemini returned 402 and OpenRouter has no key. Whether the new burst-limit retry fired could not be read back (Vercel log queries timed out under the load). A degraded figure turn still appended "Study it while I explain" — fixed in `2fb77a9`.
 <!-- SUMMARY:END -->
 
 ## Severity key
@@ -64,81 +76,98 @@ Categories: Teaching · Adaptation · Lesson flow · Visuals · Numerical/factua
 - **Why a defect:** a confirmation abandons the lesson topic; the topic is lost although the learner explicitly asks to return; two further turns are wasted.
 - **Expected:** "yes" confirms the previous statement and the lesson continues on double-slit interference.
 - **Actual:** unrelated generic lesson on "what a picture is", persisting after complaint. The stale trigger was the earlier learner message *"i dont understand this picture. what is the picture showing?"*.
-- **Reproducible:** observed once in full; the same message sequence is the repro. **Related:** PCD-017/PCD-018 (derailment cascades). **Status:** OPEN
+- **Reproducible:** observed once in full; the same message sequence is the repro. **Related:** PCD-017/PCD-018 (derailment cascades). **Status:** FIXED
+- **Fix:** 253d90a — "what is the picture showing?" named the topic "picture showing" (`namedTopicUnknownTo`, `src/lib/teaching/visual/requestedTopic.ts`), which opened a knowledge-gap excursion on "picture"; the "yes" then confirmed it. show/showing/mean are now discourse words. Test: `src/tests/phys001FlowDefects.test.ts`.
 
 ### PHYS-002 — [P1] [Adaptation] "give me example with numbers" answered by a stored paragraph with no numbers
 - **Date:** 2026-10-04 · **Concept:** `phys.opt.youngs-experiment` · **Lesson:** order 134
 - **Learner:** *"ok. give me example with numbers please"*
 - **Tutor (provider=memory, reason `curated_remediation_card`):** *"Light through two fine slits does not make two bright patches on the far wall. It makes a long row of evenly spaced stripes. Every point on that wall is reached by light from both slits…"* — no numbers, a third restatement of the same idea.
 - **Expected:** a numeric worked example (e.g. d, D, λ → fringe spacing).
-- **Actual:** the request was not honoured. **Reproducible:** yes — same card family also ignored a specific question in PHYS-014. **Related:** PCD-015/PCD-033. **Status:** OPEN
+- **Actual:** the request was not honoured. **Reproducible:** yes — same card family also ignored a specific question in PHYS-014. **Related:** PCD-015/PCD-033. **Status:** FIXED
+- **Fix:** 9ed725b — the curated remediation card was served verbatim on the first remediation turn regardless of the request (`route.ts` H6 block, provider=memory). An ask for an example/numbers/steps now makes the card yield (`asksForWorkedDetail`). Test: `src/tests/phys019WorkedDetailRequest.test.ts`.
 
 ### PHYS-003 — [P1] [Adaptation/Visuals] "What is the picture showing?" answered with text that never describes the picture
 - **Concept:** `phys.opt.youngs-experiment` · **Lesson:** order 134
 - **Learner:** *"i dont understand this picture. what is the picture showing?"*
 - **Tutor:** *"When particles (such as light photons or electrons) travel through those openings, each opening acts like a new source of waves. Where the waves arrive in step… "* — begins mid-thought ("those openings" has no antecedent), describes nothing in the figure, no figure attached on that turn.
-- **Expected:** a description of the figure (axes/labels/what to look at). **Status:** OPEN · **Reproducible:** observed once.
+- **Expected:** a description of the figure (axes/labels/what to look at). **Status:** FIXED · **Reproducible:** observed once.
+- **Fix:** 5b53ec8 + 253d90a — same cause as PHYS-021 (re-explain strategy and recovery script that ignore the figure; excursion on "picture showing"). Test: `src/tests/phys021FigureQuestion.test.ts`.
 
 ### PHYS-004 — [P1] [Visuals/Numerical-factual trust] Tutor narration contradicts the visual that was served
 - **Concept:** `phys.opt.youngs-experiment` · **Lesson:** order 134
 - **Tutor:** first *"In the diagram you're looking at, a single beam of light shines on a barrier with two very narrow, closely spaced slits. Behind the slits a screen…"*; the attached figure was a card `double_slit`, then a model-made graph `{"type":"graph","equation":"cos(x*1000)^2","xLabel":"Position on screen (m)"}`. Asked about the slits the tutor said *"The two slits themselves aren't drawn in the picture"*, then later *"In the figure you're looking at, the two narrow openings are the slits… the flat surface at the far right of the setup"*. Axis called "(m)" in the spec and *"arbitrary units"* in a later reply; a beginner is shown the raw formula *"cos²(1000x)"*.
 - **Why a defect:** the text says there is a setup diagram with slits; the figure is an intensity graph; the tutor contradicts itself about whether slits are drawn and about axis units.
-- **Expected:** narration matches the figure actually attached. **Status:** OPEN · **Reproducible:** observed (3 turns). **Related:** PCD-031 (phantom figure reference), PCD-018.
+- **Expected:** narration matches the figure actually attached. **Status:** DEFERRED · **Reproducible:** observed (3 turns). **Related:** PCD-031 (phantom figure reference), PCD-018.
+- **Fix:** partly addressed by 5b53ec8 (a figure question now gets "describe only what WHAT THE LEARNER SEES lists"). The model-generated `cos(x*1000)^2` graph, its axis units and the "slits not drawn" contradiction come from the Tier-3 generated figure and free model narration; not changed. Needs its own look at generated-graph specs.
 
 ### PHYS-005 — [P2] [Lesson flow/Visuals] Opening asks the learner to look at a picture that is not shown
 - **Concept:** `phys.opt.youngs-experiment` (also seen in `phys.rel.time-dilation`, order 237: "Looking at the two watches in the car-and-kitchen picture…", and in `phys.meas.units` order 1) 
 - **Tutor opening (Young's):** *"What do you notice about the bright and dark bands when you look at the pattern on the screen?"* — no figure in the payload. After the learner says *"i dont see any picture"* the next reply says *"In the diagram you're looking at…"* and the figure arrives.
-- **Expected:** the figure is attached when the question refers to it. **Reproducible:** yes (3 of 3 lessons opened in this way). **Related:** PCD-031. **Status:** OPEN
+- **Expected:** the figure is attached when the question refers to it. **Reproducible:** yes (3 of 3 lessons opened in this way). **Related:** PCD-031. **Status:** FIXED
+- **Fix:** 5b53ec8 — the opening stripper missed a figure noun with modifiers ("in the car-and-kitchen picture"); it now removes it and rewrites the leftover "Looking at the …". Young's "the pattern on the screen" names the experiment's screen, not a figure, and is left alone. Test: `src/tests/phys021FigureQuestion.test.ts`.
 
 ### PHYS-006 — [P2] [Lesson flow/Teaching] Questions asked before the required concept is taught
 - **Concept:** `phys.opt.youngs-experiment` · **Lesson:** order 134
 - **Cards:** *"In a double-slit pattern, which order m labels the FIRST dark fringe next to the central bright one?"* (notation "order m" and (m+½)λ never taught; explained only after the learner asked *"what is m? you did not tell me about m. i dont know"*); *"A thin glass slab is placed in front of slit S₁ only … Where does the central bright fringe appear?"* (optical path through glass never taught; explained only after *"i dont know this one. we did not learn about glass in front of slit"*).
-- **Expected:** teaching precedes the check. **Reproducible:** yes (also order 237, see PHYS-016). **Status:** OPEN
+- **Expected:** teaching precedes the check. **Reproducible:** yes (also order 237, see PHYS-016). **Status:** DEFERRED
+- **Fix:** question order vs teaching (authored-probe selection before its prerequisite idea is taught) needs a sequencing design; not changed in this pass.
 
 ### PHYS-007 — [P2] [Lesson flow] The same question is asked repeatedly
-- **Concept:** `phys.opt.youngs-experiment`: *"What did Young's double-slit experiment establish about the nature of light?"* asked 3 times (correct answer already given), the "order m" card twice, *"what do you notice about the spacing of the bright peaks?"* three times (learner: *"i already said this before"*). **Related:** PCD-019. **Status:** OPEN
+- **Concept:** `phys.opt.youngs-experiment`: *"What did Young's double-slit experiment establish about the nature of light?"* asked 3 times (correct answer already given), the "order m" card twice, *"what do you notice about the spacing of the bright peaks?"* three times (learner: *"i already said this before"*). **Related:** PCD-019. **Status:** DEFERRED
+- **Fix:** not changed. Note from the re-drive probe: an UNANSWERED card is deliberately re-offered on every "quiz me" until answered; the repeat of already-answered questions is a separate, unfixed ledger issue.
 
 ### PHYS-008 — [P3] [Adaptation] Wrong tone: "I'm sorry you're feeling stuck" when the learner points out repetition
-- **Learner:** *"the bright peaks are equal distance. i already said this before. the middle one is the biggest"* → *"I'm sorry you're feeling stuck—let's take a quick step back."* **Status:** OPEN
+- **Learner:** *"the bright peaks are equal distance. i already said this before. the middle one is the biggest"* → *"I'm sorry you're feeling stuck—let's take a quick step back."* **Status:** FIXED
+- **Fix:** 253d90a — "i already said this" is (rightly) `frustrated`; the script now says the learner is not stuck and their restated answer is taken (`recoveryGuard.ts`). Prompt-level. Test: `src/tests/phys001FlowDefects.test.ts`.
 
 ### PHYS-009 — [P3] [Teaching/Adaptation] First explanation too advanced for the declared learner level
-- **Concept:** `phys.opt.youngs-experiment`. After the learner correctly described bright/dark bands, the reply introduced phase, path difference, constructive/destructive interference and β = λD/d in one block. A simpler pond analogy followed only after *"explain simpler please. i dont understand in phase and path difference"* (that adaptation worked). **Status:** OPEN (low)
+- **Concept:** `phys.opt.youngs-experiment`. After the learner correctly described bright/dark bands, the reply introduced phase, path difference, constructive/destructive interference and β = λD/d in one block. A simpler pond analogy followed only after *"explain simpler please. i dont understand in phase and path difference"* (that adaptation worked). **Status:** DEFERRED
+- **Fix:** P3, model register; not changed.
 
 ### PHYS-010 — [P3] [Numerical/factual] Symbol drift inside one lesson (β, D → y, L)
-- Same lesson: fringe width called β with screen distance D, later feedback uses y = λL/d for the same quantity. **Status:** OPEN
+- Same lesson: fringe width called β with screen distance D, later feedback uses y = λL/d for the same quantity. **Status:** DEFERRED
+- **Fix:** P3, model notation drift; not changed.
 
 ### PHYS-011 — [P1] [Numerical/factual] "Proper time is the LONGEST time" — stated twice, contradicts the lesson
 - **Date:** 2026-10-04 ≈22:55 UTC · **Concept:** `phys.rel.time-dilation` · **Lesson:** Time Dilation (order 237)
 - **Learner:** answered the card *"What is PROPER time?"* correctly (*"The time measured by a clock travelling with the object"*).
 - **Tutor (feedback, 2 different turns):** *"…is the longest time measured between the same two events compared to any other inertial frame."* and *"…equals the longest elapsed time measured between the events. All other inertial frames will record a shorter time due to time dilation."*
 - **Why a defect:** proper time is the **shortest** interval; other frames measure **longer** times (Δt = γΔτ, which the same lesson teaches). It also contradicts the stored card shown earlier ("The shortest time between two events is always the one measured by a clock present at both").
-- **Reproducible:** yes (2 separate replies). **Related:** PCD-041 (self-contradiction). **Status:** OPEN
+- **Reproducible:** yes (2 separate replies). **Related:** PCD-041 (self-contradiction). **Status:** DEFERRED — owner decision
+- **Fix:** text path found: a SERVED graded turn from the turn assembler — "That's right." + feedback slot + the model-written TEACHING slot, which said "longest" (rows 2026-10-04 22:55:05 and 22:57:54). Slots are validated structurally only. Proposal (prompt guard, not numeric verification): pass the concept's authored misconceptions (here MC-2 PROPER-TIME-IS-LONGER) to the slot prompt as "never state these as fact", or omit the free teaching slot on a correct answer. Not built.
 
 ### PHYS-012 — [P1] [Numerical/factual] Spaceship example: 1.67 hours stated as "one hour and forty-four minutes"
 - **Concept:** `phys.rel.time-dilation` · **Lesson:** order 237
 - **Learner:** *"this one is hard for me. can you give me example first, a simple one with a fast spaceship?"*
 - **Tutor:** γ ≈ 1.67 (correct) then *"…the Earth clocks record about one hour and forty‑four minutes."* 1.67 h = 1 h 40 min.
-- **Reproducible:** observed once (arithmetic). **Status:** OPEN
+- **Reproducible:** observed once (arithmetic). **Status:** DEFERRED — owner decision
+- **Fix:** free model prose on an example request (provider=groq, ESCALATE_TO_LLM). Numeric verification is closed (N1/N2/N3). Proposal: a prompt rule to show any hours-to-minutes conversion step ("0.67 × 60 = 40 min"). Not built.
 
 ### PHYS-013 — [P1] [Adaptation] Learner's correct arithmetic challenge met with filler, then a false excuse
-- **Learner:** *"thank you. but i am confused. 1.67 hours, i do 0.67 x 60 = 40 minutes. you said 44 minutes. which is right?"* → *"I hear you—these numbers can feel tricky right before the idea clicks."* (no answer). Learner: *"you did not answer me. is it 40 minutes or 44 minutes?"* → *"…The 44‑minute figure came from a slightly different speed factor that was rounded differently…"* (not true: it was an arithmetic slip; no such factor appears). **Status:** OPEN · **Related:** PCD-033
+- **Learner:** *"thank you. but i am confused. 1.67 hours, i do 0.67 x 60 = 40 minutes. you said 44 minutes. which is right?"* → *"I hear you—these numbers can feel tricky right before the idea clicks."* (no answer). Learner: *"you did not answer me. is it 40 minutes or 44 minutes?"* → *"…The 44‑minute figure came from a slightly different speed factor that was rounded differently…"* (not true: it was an arithmetic slip; no such factor appears). **Status:** FIXED (first half) · **Related:** PCD-033
+- **Fix:** 9ed725b — the message read as `confused`, and the recovery script ("No new content this turn") produced filler. When the learner's own words carry a question, the script now says answer it first, check their arithmetic, admit a slip. The invented excuse is model text — see the PHYS-011/012 owner proposal.
 
 ### PHYS-014 — [P1] [Adaptation] "Explain simpler. what is gamma and how i get 1.25?" ignored for three turns
 - **Concept:** `phys.rel.time-dilation` · **Lesson:** order 237
 - **Learner:** *"explain simpler. what is gamma and how i get 1.25?"* → stored muon-lifetime paragraph (provider=memory, `curated_remediation_card`). Learner: *"i dont understand the muon story. i asked how to calculate gamma. where 1.25 come from?"* → *"Let me put it in the simplest words I have. A moving clock runs slower… γ = 1/√(1−v²/c²). Tell me which part of that is the fuzzy one…"*. Only the 4th message (*"the fuzzy part is 1.25. v is 0.6c. how i put 0.6 in the formula? show me step by step"*) produced the step-by-step (correct).
-- **Expected:** the first reply explains γ and the 1.25. **Reproducible:** yes (same family as PHYS-002). **Related:** PCD-033/PCD-015. **Status:** OPEN
+- **Expected:** the first reply explains γ and the 1.25. **Reproducible:** yes (same family as PHYS-002). **Related:** PCD-033/PCD-015. **Status:** FIXED
+- **Fix:** 9ed725b — same cause as PHYS-002, plus the held card's notation bound rejected the step-by-step γ calculation as `went-beyond-card` (reproduced). Test: `src/tests/phys019WorkedDetailRequest.test.ts`.
 
 ### PHYS-015 — [P2] [Lesson flow/Visuals] Opening refers to a "car-and-kitchen picture" that does not exist
-- Covered by PHYS-005 (kept as a separate entry because it is a different concept; same root class). **Status:** OPEN
+- Covered by PHYS-005 (kept as a separate entry because it is a different concept; same root class). **Status:** FIXED
+- **Fix:** 5b53ec8 — see PHYS-005.
 
 ### PHYS-016 — [P2] [Lesson flow/Teaching] Weak or unfair questions in Time Dilation
-- *Hafele-Keating* card had two options, one absurd ("optical illusion…"); the train card offered a fully worked solution versus a bare formula (answer obvious by completeness); that worked option states (γ−1) ≈ 5×10⁻¹⁴ where β²/2 = 5.6×10⁻¹⁴; the GPS and "PROPER time" cards were re-asked after being answered; the train card needs binomial approximation never taught. **Status:** OPEN
+- *Hafele-Keating* card had two options, one absurd ("optical illusion…"); the train card offered a fully worked solution versus a bare formula (answer obvious by completeness); that worked option states (γ−1) ≈ 5×10⁻¹⁴ where β²/2 = 5.6×10⁻¹⁴; the GPS and "PROPER time" cards were re-asked after being answered; the train card needs binomial approximation never taught. **Status:** DEFERRED — owner decision
+- **Fix:** the Hafele-Keating card is authored (`authoredSeedAssets.ts`, TDIL_PROBES, two options). The train card is NOT in the corpus (model-written). The bootstrap is create-only, so a corpus edit needs an owner-approved production row update to reach learners; proposal: add two plausible distractors to the Hafele-Keating card. Not changed.
 
 ### PHYS-017 — [P2] [Lesson flow] Same-concept lesson 1 (SI Units): question text and attached card are about different things
 - **Date:** 2026-10-04 ≈23:20 UTC · **Concept:** `phys.meas.units` · **Lesson:** SI Units and Measurement (order 1), first attempt
 - **Tutor:** *"Sure, here's a question for you. Imagine two friends each measuring the same rope. One counts hand-spans… "* with attached card *"A component is labelled 4.7 µF (microfarads). Written in farads, what is that?"*; later *"Remember, the SI unit for electric current is the ampere… Here's a question for you:"* with a card about the gram vs kilogram.
 - **Also:** the µ (micro) prefix is quizzed but never taught; three near-duplicate kelvin/temperature cards were asked (*"Is the SI base unit for temperature the degree Celsius or the kelvin?"*, *"Why is kelvin…?"*, *"Which of these is the SI base unit for temperature?"*).
-- **Reproducible:** yes (observed twice in one session). **Related:** PCD-033. **Status:** OPEN
+- **Reproducible:** yes (observed twice in one session). **Related:** PCD-033. **Status:** DEFERRED
+- **Fix:** the model's own prose question beside a different server-attached card; not changed in this pass.
 
 ### PHYS-018 — [P1] [Lesson flow/Teaching] Cards and figures from OTHER lessons appear when lessons run at the same time on one account
 - **Date:** 2026-10-04 ≈23:50 UTC · **Concepts:** `phys.meas.scalars-vectors` (2), `phys.meas.dimensions` (3), `phys.meas.errors` (4), `phys.meas.measuring-instruments` (6)
@@ -147,8 +176,9 @@ Categories: Teaching · Adaptation · Lesson flow · Visuals · Numerical/factua
 - **Control:** the same account driven ONE lesson at a time (order 8, "Vector Addition and Resolution") showed only its own figure and cards.
 - **Why a defect:** a learner is taught and quizzed on a different lesson's content, and mastery was recorded for lessons 2, 3, 4, 6 and 7 although they were mostly answered with other lessons' cards.
 - **Expected:** each session serves only its own concept. **Actual:** content leaks across sessions of the same account when they overlap.
-- **Reproducible:** yes in the 3-parallel run (4 of 5 concurrent lessons); not reproduced sequentially. **Scope:** unknown (probably per-account serving state; real impact needs a multi-tab learner). **Related:** PCD-004 (earlier concurrency finding). **Status:** OPEN
+- **Reproducible:** yes in the 3-parallel run (4 of 5 concurrent lessons); not reproduced sequentially. **Scope:** unknown (probably per-account serving state; real impact needs a multi-tab learner). **Related:** PCD-004 (earlier concurrency finding). **Status:** NOT REPRODUCED
 - **Method note:** all lessons after this one were run sequentially, one at a time. Orders 1-7 were driven in the parallel run and 5 of them are affected; order 5 did not complete and is re-driven sequentially.
+- **Fix:** two and three lessons driven in parallel on one disposable account, without a tabId (the original driver's shape): separate sessions, 0 foreign cards, each lesson's own figure (`scripts/qa/parallelLessonIsolation.ts`, 2026-10-05). The PCD-004 session pointer holds. The original run's exact driver shape is unknown.
 
 ### PHYS-019 — [P2] [Adaptation] "give me example" answered with one abstract sentence, no example
 - **Date:** 2026-10-05 · **Concept:** `phys.mech.inclined-planes` · **Lesson:** Motion on Inclined Planes (order 30), solo sequential run
@@ -158,41 +188,47 @@ Categories: Teaching · Adaptation · Lesson flow · Visuals · Numerical/factua
 - **Expected:** a concrete example (e.g. a box on a ramp with a stated angle and mass). **Actual:** no example; next turn the learner had to ask again.
 - **Recurrence:** order 74 (`The Hamiltonian and Legendre Transform`): *"Let me put it in the simplest words I have."* followed by *"The Hamiltonian H = Σpᵢṡᵢ − L is obtained from the Lagrangian by a Legendre transform; canonical momenta… are conjugate…"* (more advanced than the lesson, no example). Order 64 (Pressure in Fluids): *"give me example"* → *"Take a look at the arrows that emanate from a single point inside the water in the figure"* (one sentence, no example).
 - **Further recurrences (orders 76, 77, 78):** the identical opener *"Let me put it in the simplest words I have."* followed by a one-sentence abstract definition, no example; order 82 (Heat Transfer): one sentence about the red arrow in the figure, no example. Final count: the opener *"Let me put it in the simplest words I have."* directly followed the learner's *"give me example"* in 41 of the 272 sessions where that message was sent (31 on account 1, 10 on account 2).
-- **Reproducible:** yes (41 sessions); same family as PHYS-002/PHYS-014. **Status:** OPEN
+- **Reproducible:** yes (41 sessions); same family as PHYS-002/PHYS-014. **Status:** FIXED
+- **Fix:** 9ed725b — cause: while a curated card is held, the output floor rejects a worked example carrying notation (`went-beyond-card`) and falls back to "Let me put it in the simplest words I have." + the KG definition (42 of 45 such fallbacks in 3 days followed an "example" message). The card now yields to an example request.
 
 ### PHYS-020 — [P3] [UX/Lesson flow] Multiple-choice question posed as inline "A) B) C) D)" prose instead of an answer card
 - **Date:** 2026-10-05 · **Concepts/lessons:** `Elastic Collisions` (order 43), `Torque` (order 47)
 - **Tutor (provider=groq, reason `learner_needs_reply`):** after a worked collision example ends with *"Which ball ends up moving faster after the collision? A) The heavier (2 kg) ball B) The lighter (1 kg) ball C) Both have the same speed D) Both are at rest"* as plain text; no `mcq` object in the payload. Order 47 does the same (A-D "larger/smaller/same/zero").
 - **Why a defect:** every other check in these lessons is an answer card with tappable options; here the learner must type a letter or the text, and the answer is not graded as a card/probe. The worked example's numbers in order 43 were checked and are correct (v1' = -0.33 m/s, v2' = +4.67 m/s).
-- **Expected:** the question arrives as a card. **Actual:** prose options. **Reproducible:** yes (5 lessons: 43, 47, 90 `Kinetic Theory of Gases`, 221 `Quantum Harmonic Oscillator`, 222 `Quantum Treatment of Hydrogen Atom`, all as prose A-D). **Status:** OPEN
+- **Expected:** the question arrives as a card. **Actual:** prose options. **Reproducible:** yes (5 lessons: 43, 47, 90 `Kinetic Theory of Gases`, 221 `Quantum Harmonic Oscillator`, 222 `Quantum Treatment of Hydrogen Atom`, all as prose A-D). **Status:** DEFERRED — owner decision
+- **Fix:** prose A-D options are already detected (`hasProseMultipleChoice`); by design they are not graded (no key). Turning them into cards would serve more unkeyed cards — a design decision.
 
 ### PHYS-021 — [P1] [Adaptation/Visuals] SYSTEMIC: "i dont understand this picture. what is it showing?" is answered by defining the word "showing" or with generic empathy, not by describing the figure
 - **Date:** 2026-10-05 · **Scope of observation:** solo sequential run, orders 1-61. The learner message was identical in every lesson (the same sentence PHYS-003 recorded for Young's experiment).
 - **Observed in at least 16 of 61 lessons** (orders 1, 5, 6, 16, 18, 21, 24, 26, 29, 30, 38, 40, 44, 50, 54, 60): the reply either (a) explains what "show"/"showing" means (e.g. order 6: *"Think of 'showing' as the way a tool or a picture makes information visible to you."*, order 54: *"Think of 'showing' like giving someone a quick, hands-on demo of how a new kitchen gadget works."*, order 60: *"It's a visual way of showing a physics idea…"*, order 50: *"let's look at what 'showing' means in a learning context"*), (b) opens with *"I hear you're feeling stuck with the picture—let's look at it from a different angle"* and then answers generically, or (c) in order 1 asks *"Could you tell me what you see in it?"*. Many other lessons answer with a plausible-but-generic analogy ("Imagine a block…", "Think of a weather map…", order 30) that does not name the labels, values or axes of the attached figure.
 - **Why a defect:** the learner (low English) asked about the picture on screen. The picture's actual labels/numbers are available to the tutor (it quotes them in other turns) but are not used here. The learner leaves without being able to read the figure.
 - **Expected:** name what the figure shows, label by label ("the red arrow is…, the number 6 is…"). **Actual:** definition of "show" / empathy / a generic story.
-- **Reproducible:** yes, in about a quarter of lessons with an identical trigger message (the persona uses this sentence by design; the real learner's wording will vary — wording-sensitivity not tested). **Related:** PHYS-003, PCD-031. **Status:** OPEN
+- **Reproducible:** yes, in about a quarter of lessons with an identical trigger message (the persona uses this sentence by design; the real learner's wording will vary — wording-sensitivity not tested). **Related:** PHYS-003, PCD-031. **Status:** FIXED
+- **Fix:** 5b53ec8 + 253d90a — causes: explain_differently strategies (simpler wording = define "showing", analogy, guided discovery), the dont_understand recovery script ("CHANGE REPRESENTATION … story"), the held-figure "do NOT re-describe it" rule, and an excursion on the topic "picture showing".
 
 ### PHYS-022 — [P1] [Lesson flow] Content-free "degraded" turn when the learner asks for the next question
 - **Date:** 2026-10-05 · **Concept:** `phys.grav.field` · **Lesson:** Gravitational Field and Field Lines (order 55)
 - **Learner:** *"ok i understand. next question please"*
 - **Tutor (provider=`degraded`, reason `practice_without_quiz`):** *"Let's take one small step together. I'll walk through it with you and pause whenever it helps.\n\nWe can continue from here whenever you're ready."* — no question, no card, no teaching.
 - **Why a defect:** the learner asked for the next question and received a stock hold message; the lesson did not advance on that turn.
-- **Expected:** the next question card. **Actual:** content-free hold. **Reproducible:** observed seven times in about 210 lesson sessions across two accounts (orders 55, 76, 118, 162 `EMF, Internal Resistance, and Terminal Voltage`, 163 `Cells in Series and Parallel`, 232 `Scattering Theory and the Born Approximation`, 238 `Length Contraction` — same stock text each time) (the content-free hold is already a known open class — see CLAUDE.md "content-free hold"; this is a fresh production occurrence). **Status:** OPEN
+- **Expected:** the next question card. **Actual:** content-free hold. **Reproducible:** observed seven times in about 210 lesson sessions across two accounts (orders 55, 76, 118, 162 `EMF, Internal Resistance, and Terminal Voltage`, 163 `Cells in Series and Parallel`, 232 `Scattering Theory and the Born Approximation`, 238 `Length Contraction` — same stock text each time) (the content-free hold is already a known open class — see CLAUDE.md "content-free hold"; this is a fresh production occurrence). **Status:** FIXED (code) + OWNER ACTION
+- **Fix:** 562c3c3 — production logs 2026-10-05 16:21 UTC: Groq 429 burst limit (~100 ms), Gemini 402 "prepayment credits are depleted", OpenRouter no key, so the chain was exhausted. One bounded retry of a fast burst 429; the first outage turn now says the answer did not come through. Gemini billing and the OpenRouter key are owner actions. `2fb77a9`: a degraded turn no longer appends a figure pointer. Production re-drive: 0/77 stock templates, 19/77 honest degraded turns under saturated Groq (see summary).
 
 ### PHYS-023 — [P1] [Visuals/UX/Teaching] Raw card markup leaks into the tutor text, revealing the answer key; the card attached is a different, unrelated question
 - **Date:** 2026-10-05 · **Concepts/lessons:** `Generalized Coordinates and Configuration Space` (order 71), `The Euler-Lagrange Equation and Hamilton's Principle` (order 72)
 - **Learner did:** answered a figure-label card, then received the feedback turn.
 - **Tutor (provider=groq):** the feedback paragraph ends with a stray `**` and then the visible raw text `<!" a="x" b="y" c="constraint: x² + y² = L²" d="θ" correct="C"-->` followed by a **different** card (*"Which statement correctly describes a conservative force?"*). In order 72 the leaked text is `<!" a="L = T + V" b="L = T − V" c="L = V − T" d="L = T only" correct="B"-->` followed by a card *"Which expression correctly defines the Lagrangian…"*.
 - **Why a defect:** (1) raw markup shown to the learner; (2) it carries `correct="C"` / `correct="B"`, i.e. an answer key, before the learner answers (in order 72 the key `B` matches the next card's correct option "L = T − V"); (3) in order 71 the card that follows is about conservative forces, not about the generalised-coordinate figure just discussed.
-- **Expected:** no markup in text; one card on the lesson's topic. **Actual:** as above. **Reproducible:** yes — orders 71, 72 and again order 234 (`Density Matrix and Mixed Quantum States`, second account: `<!" a="Definite relative phases between components" b=… correct=…-->`), so also outside the Lagrangian unit. **Status:** OPEN
+- **Expected:** no markup in text; one card on the lesson's topic. **Actual:** as above. **Reproducible:** yes — orders 71, 72 and again order 234 (`Density Matrix and Mixed Quantum States`, second account: `<!" a="Definite relative phases between components" b=… correct=…-->`), so also outside the Lagrangian unit. **Status:** FIXED
+- **Fix:** 72abee7 — `dropQuestionSentences` (`confirmBackRepair.ts`, stub-repair retry) split "<!--MCQ" at the "!", leaving `<!" a=… correct="B"-->`; reproduced exactly. Tags are now never split; the residual sweep also removes an orphaned answer-key tail. 8 production rows had the shape (4 subjects). The different card was the original reply's card; the leaked one was the retry's second card. Test: `src/tests/phys023CardMarkupLeak.test.ts`.
 
 ### PHYS-024 — [P1] [Lesson flow/Teaching] Bursts of stock "degraded" turns replace teaching for most of a lesson (probably provider rate limiting while two accounts were driven at once)
 - **Date:** 2026-10-05/06 · **Lessons:** account 1 orders 215 (21 of 45 turns degraded; also Gemini fallback appearing in the same lesson), 216 (3), 217 (6); account 2 orders 2 (13 of 28 turns), 3 (4), 4 (5). Before order 215, degraded turns were rare (about 1 %).
 - **Tutor (provider=`degraded`):** the same stock text — *"Let's take one small step together. I'll walk through it with you and pause whenever it helps. We can continue from here whenever you're ready."* — or a card turn whose lead-in is *"Take a look at the figure beside this message — it's a general illustration related to the topic."* The lesson 2 ("Scalar and Vector Quantities") run on account 2 also attached the *Vector Addition 3-4-5* figure as that "general illustration".
 - **Why a defect:** whole stretches of a lesson contain no teaching, the learner's questions get no answer, and the lesson becomes repetitive (the tool also flagged VERBATIM-REPEAT 2x in order 2).
 - **Cause not established:** the bursts began when both accounts were being driven concurrently (two simultaneous chats from this machine) and Gemini started appearing as provider, which is consistent with the Groq limit being hit; I did not read production logs. Later, order 6 on account 2 degraded (8 flags) with only that one worker running, so concurrency alone does not explain it; severity under real load is **uncertain**. Run-wide: 87 of 5,190 turns (1.7 %) were degraded; most were in 11 lessons.
-- **Expected:** a real answer or an honest "try again in a moment" message. **Actual:** a stock "we can continue" line. **Reproducible:** yes in this run (6 lessons). **Related:** PHYS-022, CLAUDE.md "content-free hold". **Status:** OPEN (cause unknown)
+- **Expected:** a real answer or an honest "try again in a moment" message. **Actual:** a stock "we can continue" line. **Reproducible:** yes in this run (6 lessons). **Related:** PHYS-022, CLAUDE.md "content-free hold". **Status:** FIXED (code) + OWNER ACTION
+- **Fix:** 562c3c3 — same cause as PHYS-022.
 
 ## Out-of-scope observations (Chemistry) from the earlier four-lesson session — preserved, not counted
 
