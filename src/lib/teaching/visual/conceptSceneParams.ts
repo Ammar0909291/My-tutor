@@ -813,6 +813,27 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     ],
   }),
 
+  // CHEM-006 (2026-10-05, #115, account 7): the Group 16 lesson's ONLY figure
+  // was a cached, model-generated "Contact Process for Sulfuric Acid" flow —
+  // an industrial process, not the group — and the tutor taught to it, so the
+  // group's own content (trends, why oxygen differs) arrived only as quiz
+  // cards. A Tier-0 figure of the group's defining anomaly takes precedence:
+  // the Group 16 hydrides' boiling points. H₂O 100 °C and H₂S −60 °C are the EB
+  // entry's own figures (chem.pblock.group16.md); H₂Se −41 °C and H₂Te −2 °C
+  // are standard reference values, consistent with the authored probe ("H2S,
+  // H2Se and H2Te boil higher as they get heavier, yet H2O boils highest").
+  // Kelvin so every bar is positive; magnitude mode (a temperature, not a count).
+  'chem.pblock.group16': () => buildStatisticsBarChartScene({
+    chartTitle: 'Boiling points of the Group 16 hydrides (K): water is the outlier',
+    quantity: { name: 'boiling point (K)', kind: 'magnitude' },
+    bars: [
+      { label: 'H2O 373 K', frequency: 373 },
+      { label: 'H2S 213 K', frequency: 213 },
+      { label: 'H2Se 232 K', frequency: 232 },
+      { label: 'H2Te 271 K', frequency: 271 },
+    ],
+  }),
+
   // Archetype C — the system-boundary/energy-balance diagram.
   'chem.thermo.system': () => buildSystemBoundaryScene('closed'),
   'chem.thermo.first-law': () => buildChemFirstLawScene(100, -40),
