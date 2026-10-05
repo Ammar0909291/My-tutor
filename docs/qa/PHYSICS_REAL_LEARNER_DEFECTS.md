@@ -160,7 +160,7 @@ Categories: Teaching · Adaptation · Lesson flow · Visuals · Numerical/factua
 - **Date:** 2026-10-05 · **Concepts/lessons:** `Elastic Collisions` (order 43), `Torque` (order 47)
 - **Tutor (provider=groq, reason `learner_needs_reply`):** after a worked collision example ends with *"Which ball ends up moving faster after the collision? A) The heavier (2 kg) ball B) The lighter (1 kg) ball C) Both have the same speed D) Both are at rest"* as plain text; no `mcq` object in the payload. Order 47 does the same (A-D "larger/smaller/same/zero").
 - **Why a defect:** every other check in these lessons is an answer card with tappable options; here the learner must type a letter or the text, and the answer is not graded as a card/probe. The worked example's numbers in order 43 were checked and are correct (v1' = -0.33 m/s, v2' = +4.67 m/s).
-- **Expected:** the question arrives as a card. **Actual:** prose options. **Reproducible:** yes (2 lessons). **Status:** OPEN
+- **Expected:** the question arrives as a card. **Actual:** prose options. **Reproducible:** yes (3 lessons: 43, 47, and 90 `Kinetic Theory of Gases`, which asks the pressure-formula question as prose A-D). **Status:** OPEN
 
 ### PHYS-021 — [P1] [Adaptation/Visuals] SYSTEMIC: "i dont understand this picture. what is it showing?" is answered by defining the word "showing" or with generic empathy, not by describing the figure
 - **Date:** 2026-10-05 · **Scope of observation:** solo sequential run, orders 1-61. The learner message was identical in every lesson (the same sentence PHYS-003 recorded for Young's experiment).
@@ -174,7 +174,7 @@ Categories: Teaching · Adaptation · Lesson flow · Visuals · Numerical/factua
 - **Learner:** *"ok i understand. next question please"*
 - **Tutor (provider=`degraded`, reason `practice_without_quiz`):** *"Let's take one small step together. I'll walk through it with you and pause whenever it helps.\n\nWe can continue from here whenever you're ready."* — no question, no card, no teaching.
 - **Why a defect:** the learner asked for the next question and received a stock hold message; the lesson did not advance on that turn.
-- **Expected:** the next question card. **Actual:** content-free hold. **Reproducible:** observed twice in 85 lessons (order 55; again order 76 `Poisson Brackets and Phase Space Dynamics`, same text, on *"ok. can you ask me a question now?"*) (the content-free hold is already a known open class — see CLAUDE.md "content-free hold"; this is a fresh production occurrence). **Status:** OPEN
+- **Expected:** the next question card. **Actual:** content-free hold. **Reproducible:** observed three times in 125 lessons (order 55; order 76 `Poisson Brackets and Phase Space Dynamics`, same text, on *"ok. can you ask me a question now?"*; order 118 `Sound Intensity and the Decibel Scale`, same text) (the content-free hold is already a known open class — see CLAUDE.md "content-free hold"; this is a fresh production occurrence). **Status:** OPEN
 
 ### PHYS-023 — [P1] [Visuals/UX/Teaching] Raw card markup leaks into the tutor text, revealing the answer key; the card attached is a different, unrelated question
 - **Date:** 2026-10-05 · **Concepts/lessons:** `Generalized Coordinates and Configuration Space` (order 71), `The Euler-Lagrange Equation and Hamilton's Principle` (order 72)
