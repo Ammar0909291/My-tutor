@@ -94,6 +94,48 @@ const UNSCOPED_REPEAT_FLOOR_CHARS = 200
  * learner's text, so this cannot drift from the decision the prompt was built
  * around.
  */
+/**
+ * PHYS-002 / PHYS-014 / PHYS-019 (2026-10-05, physics real-learner run): A
+ * REQUEST FOR WORKED DETAIL OUTRANKS THE CURATED CARD FOR THAT TURN.
+ *
+ * "give me example", "give me example with numbers please" and "explain
+ * simpler. what is gamma and how i get 1.25?" are remediation turns
+ * (REPHRASE_REQUEST / CONFUSION), so the curated card owned them: served
+ * verbatim on the first one (provider=memory — "Light through two fine slits
+ * does not make two bright patches…", no numbers), then HELD, with the output
+ * floor rejecting any reply carrying notation as `went-beyond-card`. A worked
+ * example nearly always carries some (θ, `mg sin θ`, `γ = 1/√(1 − v²/c²)`), so
+ * the draft and its one regeneration were both rejected and the learner got
+ * "Let me put it in the simplest words I have." plus the KG definition — 42 of
+ * the 45 such fallbacks in production over three days followed an "example"
+ * message. The card exists for a learner who says they do not understand; a
+ * learner who names the kind of help they want has already said what will
+ * help, and the card cannot give it.
+ *
+ * True for an explicit example request (the caller passes the request kind) or
+ * an ask for numbers, a calculation, the steps, or where a stated number comes
+ * from. Plain confusion ("i dont understand", "explain again") stays false, so
+ * the card keeps every turn it was written for.
+ */
+const WORKED_DETAIL_RE = new RegExp(
+  [
+    String.raw`\b(?:with|use|using|in|show|put)\s+(?:some\s+|the\s+|real\s+)?numbers?\b`,
+    String.raw`\bnumbers?\s+(?:example|please|pls)\b`,
+    String.raw`\bcalculat\w*`,
+    String.raw`\bstep[\s-]+by[\s-]+step\b`,
+    String.raw`\bshow\s+(?:me\s+)?(?:the\s+)?(?:steps|working|workings|maths?|math)\b`,
+    String.raw`\bhow\s+(?:do\s+|did\s+|can\s+|could\s+|to\s+)?(?:i|you|we)?\s*(?:get|got|find|work\s+out|calculate)\s+(?:the\s+)?(?:\d|answer|value|result|it\b)`,
+    String.raw`\bwhere\s+(?:does\s+|did\s+|do\s+)?(?:the\s+)?\d[\d.,]*\s+comes?\s+from\b`,
+    String.raw`\bhow\s+(?:do\s+)?i\s+put\s+[\d.]+`,
+  ].join('|'),
+  'i',
+)
+
+export function asksForWorkedDetail(message: string, learnerRequest?: string | null): boolean {
+  if (learnerRequest === 'real_life_example') return true
+  return WORKED_DETAIL_RE.test(message ?? '')
+}
+
 export function isRemediationTurn(conversationDecisionType: string | null | undefined): boolean {
   return conversationDecisionType === 'CONFUSION'
     || conversationDecisionType === 'REPHRASE_REQUEST'

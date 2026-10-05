@@ -749,6 +749,14 @@ export interface RecoveryScopeOptions {
    * the learner left still unable to read it. The affect law is unchanged.
    */
   figureOnScreenQuestion?: boolean
+  /**
+   * PHYS-013 (2026-10-05, phys.rel.time-dilation): "but i am confused. 1.67
+   * hours, i do 0.67 x 60 = 40 minutes. you said 44 minutes. which is right?"
+   * read as 'confused', and the script ("No new content this turn … validate,
+   * shrink") produced "I hear you—these numbers can feel tricky" with no
+   * answer. The learner had asked a direct question, and was right.
+   */
+  learnerAskedAQuestion?: boolean
 }
 
 export function buildRecoveryBlock(
@@ -838,12 +846,23 @@ export function buildRecoveryBlock(
       '(validate, shrink, bank one win) stays the same.'
   }
 
+  const answerFirst = scope?.learnerAskedAQuestion === true
+    ? '- THE SAME MESSAGE ASKS YOU A DIRECT QUESTION. Answer it FIRST, in one or ' +
+      'two plain sentences, before anything else: a confused learner who asks ' +
+      'which value is right needs the right value. Check any arithmetic they ' +
+      'show and say plainly whether it is correct. If the question points at ' +
+      'a mistake in something you said earlier, say which value is correct and ' +
+      'that the earlier one was a slip — never invent a reason for it.\n'
+    : ''
   return (
     '\n\nRECOVERY — PREEMPTS EVERYTHING ABOVE (the student just voiced a ' +
     'failure state; their stated state is ground truth — never argue with it, ' +
     'never second-guess it, never answer it with a question):\n' +
+    answerFirst +
     `- ${body}\n` +
-    '- No new content this turn. No assessment. No calibration questions. ' +
+    (answerFirst
+      ? '- No new content beyond that answer. No assessment. No calibration questions. '
+      : '- No new content this turn. No assessment. No calibration questions. ') +
     'One goal only: validate, shrink, and bank one small genuine win.\n' +
     '- Tone: calm, warm, unhurried. Do not become MORE energetic or jokey — ' +
     'matched energy; playfulness on struggle reads as mockery.' +

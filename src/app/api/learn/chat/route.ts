@@ -4199,6 +4199,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             {
               excursionTargetTitle: excursionTeachingTitleHoisted,
               figureOnScreenQuestion: figureQuestionHoisted && visualDecisionHoisted?.graphical === true,
+              // PHYS-013: a "?" in the learner's own words is a question to
+              // answer, whatever failure state it also voices.
+              learnerAskedAQuestion: /\?/.test(learnerAuthoredMessage)
+                || (await import('@/lib/teaching/conversationState')).detectLearnerQuestion(learnerAuthoredMessage),
             },
           )
         }
@@ -5833,7 +5837,17 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             const lookup = cardOnTopic
               ? findRemediationCard(conceptForCard)
               : { servable: false as const, reason: 'off-topic-for-lesson' as const }
-            if (lookup.servable) {
+            // PHYS-002 / PHYS-014 / PHYS-019: a learner who asks for an example,
+            // numbers, a calculation or the steps has named the help they want;
+            // the card cannot give it, so it does not own this turn (no verbatim
+            // serve, no hold, no notation bound). See asksForWorkedDetail.
+            const { asksForWorkedDetail } = await import('@/lib/teaching/remediationOutputContract')
+            const workedDetailAsked = asksForWorkedDetail(learnerAuthoredMessage, learnerRequestHoisted)
+            if (lookup.servable && workedDetailAsked) {
+              console.log('[remediation-card] ' + JSON.stringify({
+                event: 'yielded-to-learner-request', conceptId: lookup.card.conceptId, learnerRequest: learnerRequestHoisted,
+              }))
+            } else if (lookup.servable) {
               const cardId = `card:${lookup.card.conceptId}`
               const { hasServedExplanation } = await import('@/lib/teaching/teachingHistory')
               const already = teachingHistoryHoisted
