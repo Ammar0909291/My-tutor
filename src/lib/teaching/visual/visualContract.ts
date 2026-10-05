@@ -87,6 +87,13 @@ export function buildVisualContractBlock(
   opts: {
     learnerAskedForAVisual?: boolean
     /**
+     * PHYS-021 / PHYS-003: the learner asked what the figure on screen shows
+     * ("i dont understand this picture. what is it showing?"). Supplied by the
+     * chat route from `asksAboutTheFigure`; optional, so every other caller is
+     * unchanged.
+     */
+    learnerAskedAboutTheFigure?: boolean
+    /**
      * The SPECIFIC form the learner asked for this turn, when they named one.
      * Reported only — it never selects, reorders or vetoes a figure. See the
      * mismatch rule below.
@@ -130,7 +137,7 @@ export function buildVisualContractBlock(
       // Answering it costs one clause and claims nothing false: the figure is
       // still absent, the explanation still carries the teaching, and the
       // tutor is forbidden — below — from promising one later.
-      (opts.learnerAskedForAVisual
+      ((opts.learnerAskedForAVisual || opts.learnerAskedAboutTheFigure)
         ? '(5) THE LEARNER ASKED TO BE SHOWN SOMETHING AND NO FIGURE IS ' +
           'AVAILABLE THIS TURN. Acknowledge that in ONE short clause before ' +
           'you continue — plainly, without apologising at length and without ' +
@@ -276,7 +283,24 @@ export function buildVisualContractBlock(
   // now, from state the engine already keeps: `session.turns` is the held
   // count, 0 on the turn a figure first appears.
   const heldTurns = decision.session?.turns ?? 0
-  if (heldTurns > 0 && opts.learnerAskedForAVisual) {
+  if (opts.learnerAskedAboutTheFigure) {
+    // PHYS-021 / PHYS-003 / PHYS-004 (2026-10-05): "i dont understand this
+    // picture. what is it showing?" got a definition of the word "showing", a
+    // weather-map story, or "tell me what you see" in 16 of 61 lessons, while
+    // the figure's own labels sat in the block above. On a held figure the
+    // rule below also said "do NOT re-describe it" — the one turn on which
+    // re-describing is the answer.
+    lines.push(
+      'THE LEARNER IS ASKING WHAT THE FIGURE ON THEIR SCREEN SHOWS. Answer FROM ' +
+      'THIS FIGURE: go through it part by part, naming each label, arrow and ' +
+      'number listed in WHAT THE LEARNER SEES exactly as written there, and say ' +
+      'in one short, plain sentence what each part means for this idea. Then ' +
+      'say in one sentence what the whole picture tells us. Do NOT define ' +
+      'English words such as "show" or "picture", do NOT replace the figure ' +
+      'with a story or analogy, do NOT describe anything the block above does ' +
+      'not list, and do NOT ask the learner what they see.',
+    )
+  } else if (heldTurns > 0 && opts.learnerAskedForAVisual) {
     // P0-B — THE ONE TURN ON WHICH SILENCE IS THE WRONG ANSWER.
     //
     // "Do NOT re-introduce or re-describe it" is right on an ordinary

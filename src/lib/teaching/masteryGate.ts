@@ -594,6 +594,42 @@ const MEDIUM_REQUEST_RE = new RegExp(
 )
 
 /**
+ * PHYS-021 / PHYS-003 (2026-10-05, real-learner physics run): A QUESTION ABOUT
+ * THE FIGURE ALREADY ON SCREEN — "i dont understand this picture. what is it
+ * showing?" — is neither a request for a new picture nor a request to have the
+ * concept re-explained another way. It was classified explain_differently
+ * (confusion outranks a named medium, pinned in three tests and kept), so the
+ * server picked a re-explain strategy that never looks at the figure: SIMPLER
+ * WORDING produced a definition of the word "showing", ANALOGY a weather-map
+ * story, GUIDED DISCOVERY "tell me what you see" — in 16 of 61 lessons.
+ *
+ * This reports the narrower reading so the route can answer FROM the figure.
+ * It does not change `detectLearnerRequest`. True when the message names the
+ * figure (a medium noun, or "it/this … showing") together with not
+ * understanding it or asking what it shows/means; false for a request to be
+ * shown one ("show me a picture"), which `asksForAVisual` owns.
+ */
+const FIGURE_REF = `(?:(?:this|the|that|your|ur|these)\\s+(?:\\w+\\s+)?${MEDIUM_NOUN}s?|\\b${MEDIUM_NOUN}s?)`
+const FIGURE_CONFUSION_RE = new RegExp(
+  [
+    `\\b(?:don'?t|dont|do\\s+not|not|can'?t|cannot|didn'?t)\\s+(?:\\w+\\s+){0,2}?(?:understand|get|read|follow)\\s+(?:\\w+\\s+){0,2}?${FIGURE_REF}`,
+    `\\b(?:confused|confusing|lost)\\s+(?:\\w+\\s+){0,3}?${FIGURE_REF}`,
+    `${FIGURE_REF}\\s+(?:is\\s+)?(?:confusing|confuses\\s+me|makes\\s+no\\s+sense)`,
+    `\\bwhat\\s+(?:is|does|do|are)\\s+(?:it|this|that|they)\\s+(?:show|shows|showing)\\b`,
+    `\\bwhat\\s+(?:is|does|do|are)\\s+${FIGURE_REF}\\s+(?:\\w+\\s+)?(?:show|shows|showing|mean|means|say|saying|tell|telling)\\b`,
+    `\\b(?:explain|describe)\\s+(?:me\\s+)?(?:this|the|that)\\s+(?:\\w+\\s+)?${MEDIUM_NOUN}\\b`,
+    `\\bwhat\\s+am\\s+i\\s+(?:looking\\s+at|seeing)\\b`,
+  ].join('|'),
+  'i',
+)
+
+export function asksAboutTheFigure(text: string): boolean {
+  const t = (text ?? '').trim()
+  if (!t || asksForAVisual(t)) return false
+  return FIGURE_CONFUSION_RE.test(t)
+}
+
+/**
  * A medium noun used as a VERB is not a request: "picture this", "graph it".
  * Checked before the verb rule so the one construction that reads as a request
  * but never is cannot slip through it.

@@ -429,8 +429,13 @@ function honestifyFigureOffer(sentence: string): string | null {
   return HONEST_FIGURE_OFFER_LEAD_IN + rest
 }
 
+// PHYS-005/PHYS-015 (2026-10-05, phys.rel.time-dilation opening): "Looking at
+// the two watches in the car-and-kitchen picture, …" opened a lesson with no
+// figure. The locator only allowed the figure noun straight after the
+// determiner; up to two modifier words (a hyphenated compound counts as one)
+// are now allowed between them.
 const EMBEDDED_LOCATOR_RE =
-  /(?<=[A-Za-z0-9])\s+(?:in|on)\s+(?:the|this|that)\s+(?:figure|diagram|picture|image|graph|chart|illustration)\b(?!\s+(?:you|we|i|they|that|which)\b)/gi
+  /(?<=[A-Za-z0-9])\s+(?:in|on)\s+(?:the|this|that)\s+(?:[A-Za-z][\w-]*\s+){0,2}?(?:figure|diagram|picture|image|graph|chart|illustration)\b(?!\s+(?:you|we|i|they|that|which)\b)/gi
 
 const CLAUSE_BOUNDARY_RE = /(?:[—–]|(?<=\s)-(?=\s)|,)\s*/g
 
@@ -596,6 +601,10 @@ export function stripUnbackedFigureReferences(
       EMBEDDED_LOCATOR_RE.lastIndex = 0
     }
     if (embeddedRemoved.length > 0) {
+      // The clause led into a figure that is not there ("Looking at the two
+      // watches in the … picture, …"): without the locator it still points.
+      working = working.replace(/(^|[.!?]\s+|\n)(Looking|Look)\s+at\s+(?=(?:the|these|those|this|that)\b)/g,
+        (_, pre: string, verb: string) => `${pre}${verb === 'Look' ? 'Think about' : 'Thinking about'} `)
       const rest = stripUnbackedFigureReferences(working, false)
       return {
         text: rest.text,

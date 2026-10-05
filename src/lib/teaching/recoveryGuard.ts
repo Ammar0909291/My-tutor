@@ -741,6 +741,14 @@ export interface RecoveryScopeOptions {
    * TEACH IT AGAIN, never a reason to take it away.
    */
   excursionTargetTitle?: string | null
+  /**
+   * PHYS-021 (2026-10-05): the failure state is about the FIGURE on screen
+   * ("i dont understand this picture. what is it showing?") and a figure is
+   * attached. The base script ("CHANGE REPRESENTATION entirely — concrete
+   * example, demonstration, story") then replaced the figure with a story;
+   * the learner left still unable to read it. The affect law is unchanged.
+   */
+  figureOnScreenQuestion?: boolean
 }
 
 export function buildRecoveryBlock(
@@ -751,7 +759,15 @@ export function buildRecoveryBlock(
   scope?: RecoveryScopeOptions,
 ): string {
   const script = SCRIPTS[key]
-  const body = (isFirstLesson && script.lessonOne) ? script.lessonOne
+  const figureQuestion = scope?.figureOnScreenQuestion === true
+    && (key === 'dont_understand' || key === 'confused' || key === 'dont_know')
+  const body = figureQuestion
+    ? 'Say "okay — let\'s go through the picture together" with zero surprise, ' +
+      'then READ THE FIGURE WITH THEM: name its parts one at a time, using the ' +
+      'labels and numbers listed in the VISUAL CONTRACT block, and say in plain ' +
+      'words what each one means. The figure IS the representation this turn — ' +
+      'do NOT swap it for a story or analogy, and do NOT define words.'
+    : (isFirstLesson && script.lessonOne) ? script.lessonOne
     : (preDemonstration && script.preDemonstration) ? script.preDemonstration
     : script.general
 
@@ -793,6 +809,14 @@ export function buildRecoveryBlock(
         'example or analogy already used for it. Shrink to the single smallest ' +
         'piece that can be shown, and show it — no questions this turn beyond ' +
         'the doubt check above.'
+    }
+  } else if (figureQuestion) {
+    // A question about the picture in front of them is answered from the
+    // picture, never by closing the concept or moving to another point.
+    if (sessionFailureCount >= 1) {
+      escalation =
+        '\n- REPEATED STRUGGLE: use fewer, shorter sentences than last time and ' +
+        'start from the single most important label in the figure.'
     }
   } else if (sessionFailureCount >= 4) {
     escalation =

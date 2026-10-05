@@ -2337,6 +2337,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
     //   mastery summary, AND the snapshot persist (never folded twice).
     let masteryGatePendingHoisted = false
     let learnerRequestHoisted: import('@/lib/teaching/masteryGate').LearnerRequest | null = null
+    // PHYS-021 / PHYS-003: the learner asked what the figure on screen shows.
+    // Read beside the request kind, which it does not change (masteryGate.ts).
+    let figureQuestionHoisted = false
     let conversationStateAfterTurnHoisted: import('@/lib/teaching/conversationState').ConversationState | null = null
     // S1 — this turn's appended entry into the history ring (V-DUP-*/
     // V-OSCILLATE rules' persisted state), merged into the final snapshot
@@ -3716,6 +3719,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // directive so they override the phase's default move. A diagram
           // request also overrides Phase G's ask-turn visual suppression.
           learnerRequestHoisted = turnIntent.learnerRequest  // Phase 1
+          figureQuestionHoisted = (await import('@/lib/teaching/masteryGate')).asksAboutTheFigure(learnerAuthoredMessage)
           // Visualization Registry Phase 2: an explicit "show me a diagram"
           // request with a known visual is FORCED to render server-side —
           // never left to the LLM's discretion to emit (or skip) the tag.
@@ -3893,6 +3897,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // the turn read as though nothing was asked.
               systemPrompt += buildVisualContractBlock(decision, {
                 learnerAskedForAVisual: learnerRequestHoisted === 'diagram',
+                learnerAskedAboutTheFigure: figureQuestionHoisted,
                 requestedForm: turnIntent.visualForm,  // Phase 1
               })
               if (decision.payload?.renderer === 'card') {
@@ -3934,6 +3939,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 // silence would read to them exactly like being ignored.
                 systemPrompt += buildVisualContractBlock(decision, {
                   learnerAskedForAVisual: learnerRequestHoisted === 'diagram',
+                  learnerAskedAboutTheFigure: figureQuestionHoisted,
                 })
               } catch {
                 // Even the no-figure path failed. Leave the decision null; the
@@ -4115,6 +4121,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 selectedStrategyHoisted = Math.max(2, selectNextStrategy(teachingHistoryHoisted))
                 if (selectedStrategyHoisted < 2) selectedStrategyHoisted = 4
               }
+              // PHYS-021: confusion ABOUT the figure on screen is answered from
+              // that figure — STRATEGY 3 (visual demonstration) teaches to it —
+              // never by simpler wording (a definition of "showing"), an
+              // analogy, or guided discovery ("tell me what you see").
+              if (figureQuestionHoisted && visualDecisionHoisted?.graphical) selectedStrategyHoisted = 3
               systemPrompt += buildLearnerRequestBlock(
                 learnerRequestHoisted, availableVisualHoisted, remediationTier,
                 hasEstablishedExample, selectedStrategyHoisted,
@@ -4185,7 +4196,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // Recovery still owns HOW to answer distress and still preempts
             // every teaching instruction. It must not also decide to abandon
             // a concept the learner asked for — see RecoveryScopeOptions.
-            { excursionTargetTitle: excursionTeachingTitleHoisted },
+            {
+              excursionTargetTitle: excursionTeachingTitleHoisted,
+              figureOnScreenQuestion: figureQuestionHoisted && visualDecisionHoisted?.graphical === true,
+            },
           )
         }
 
