@@ -112,7 +112,17 @@ const OPTION_LINE = /^\s*(?:[A-D][).:]|\([A-D]\))\s/
  */
 export function dropQuestionSentences(text: string): string {
   if (!/\?/.test(text ?? '')) return text
-  return (text ?? '')
+  // PHYS-023 (2026-10-05, phys orders 71/72/234): the sentence split below
+  // ends a "sentence" at the "!" of "<!--", so a retry that wrote its own card
+  // tag lost only `--MCQ q="…?"` and kept `<!" a="…" … correct="B"-->` —
+  // options AND answer key — in a shape no tag parser or sweep recognised.
+  // A tag is never split: one that asks a question is dropped whole (a card
+  // already follows, so a second one cannot ship); any other tag is kept whole.
+  const tags: string[] = []
+  const masked = (text ?? '')
+    .replace(/<!--[\s\S]*?-->/g, (tag) => (tag.includes('?') ? '' : `\u0000${tags.push(tag) - 1}\u0000`))
+  if (!/\?/.test(masked)) return masked.replace(/\u0000(\d+)\u0000/g, (_, i) => tags[Number(i)]).replace(/\n{3,}/g, '\n\n').trim()
+  return masked
     .split(/\n{2,}/)
     .map((para) => para
       .split('\n')
@@ -125,5 +135,6 @@ export function dropQuestionSentences(text: string): string {
       .join('\n'))
     .filter(Boolean)
     .join('\n\n')
+    .replace(/\u0000(\d+)\u0000/g, (_, i) => tags[Number(i)])
     .trim()
 }

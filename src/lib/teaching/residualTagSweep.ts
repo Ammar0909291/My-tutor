@@ -264,6 +264,18 @@ function stripStandaloneMachineJson(text: string): string {
  * a trailing line that was never prose to begin with. Anchored to end-of-text
  * so it can only ever eat the tail.
  */
+/**
+ * PHYS-023 (2026-10-05, physics orders 71, 72, 234; production rows since
+ * 2026-10-02 in four subjects): a card tag whose NAME was cut away upstream —
+ * `<!" a="L = T + V" b="L = T − V" … correct="B"-->`, options and answer key
+ * in plain view. The cut was confirmBackRepair.ts's sentence split ending a
+ * sentence at the "!" of "<!--" (fixed there); this is the backstop for any
+ * other path that leaves the same tail. Keyed on the answer key itself: one or
+ * more single-letter attributes, then `correct="A-D"`, then the terminator — a
+ * shape prose never takes. A stray bold marker directly before it goes too.
+ */
+const ORPHAN_ANSWER_KEY_RE = /(?:\*\*\s*)?(?:<!?-{0,3}"?\s*)?(?:\b[a-z]="[^"\n]*"\s*)+correct="[A-Da-d]"\s*-->/g
+
 const UNTERMINATED_TRAILING_RE = /\n?[ \t]*<!--\s*[A-Z]{2}[A-Za-z0-9_]+\b[^>]*$/
 
 /**
@@ -362,7 +374,7 @@ export function stripResidualMachineTags(text: string): string {
   // regex rather than a substring.
   if (
     !MACHINE_TAG_OPENER_RE.test(text) && !/<visual\b/i.test(text) && !text.includes('[') && !text.includes('{')
-    && !text.includes('Stage') && !text.includes('Lesson')
+    && !text.includes('Stage') && !text.includes('Lesson') && !text.includes('correct="')
   ) return text
   let out = text
   for (let pass = 0; pass < 4; pass++) {
@@ -370,6 +382,7 @@ export function stripResidualMachineTags(text: string): string {
       .replace(MACHINE_TAG_RE, '')
       .replace(RAW_VISUAL_ELEMENT_RE, '')
       .replace(BRACKET_MACHINE_TAG_RE, '')
+      .replace(ORPHAN_ANSWER_KEY_RE, '')
     if (next === out) break
     out = next
   }
@@ -391,6 +404,7 @@ export function hasResidualMachineTag(text: string): boolean {
   // excludes it: it is a live client control tag, not residue.
   return MACHINE_TAG_OPENER_RE.test(text)
     || /<visual\b/i.test(text)
+    || new RegExp(ORPHAN_ANSWER_KEY_RE.source).test(text)
     || new RegExp(BRACKET_MACHINE_TAG_RE.source).test(text)
     // The JSON shape, same reasoning as the bracket shape above: a detector
     // blind to it would report a leak like this file's own header example as
