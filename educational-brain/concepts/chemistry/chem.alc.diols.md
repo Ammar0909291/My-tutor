@@ -34,7 +34,7 @@ Describe the structural features and naming of diols and polyols, explain the en
 2. **"OsO₄ gives anti addition, like Br₂"** (Type 5 — instruction-induced: anti addition is taught first and more prominently for Br₂/H₂O; students over-apply it to every dihydroxylation).
    - Probe: "What diol is obtained when cis-but-2-ene reacts with OsO₄ and then H₂O₂ workup?"
    - Characteristic phrase: "OsO₄ adds anti like Br₂ so the OHs are on opposite faces"
-   - Intervention: OsO₄ reacts via a concerted [3+2] cycloaddition forming a cyclic osmate ester; BOTH oxygens are delivered from the SAME face → syn diol. Cis-but-2-ene + OsO₄ → (2R,3R)- and (2S,3S)-butane-2,3-diol (the meso compound would come from anti addition and trans starting alkene — help students draw this out).
+   - Intervention: OsO₄ reacts via a concerted [3+2] cycloaddition forming a cyclic osmate ester; BOTH oxygens are delivered from the SAME face → syn diol. Cis-but-2-ene + OsO₄ → meso-butane-2,3-diol; trans-but-2-ene + OsO₄ → the (2R,3R)/(2S,3S) pair. Anti addition reverses both outcomes (cis → the (R,R)/(S,S) pair, trans → meso) — help students draw this out. (Corrected 2026-10-06, CHEM-076: this line previously gave the cis alkene the (R,R)/(S,S) pair.)
 
 3. **"The pinacol rearrangement converts a diol into an ether or an alkene, not a ketone"** (Type 2 — perceptual intuition: seeing two OHs and an acid, students think condensation to ether or dehydration to alkene — the typical outcomes of monoalcohol under acid — rather than the 1,2-shift rearrangement to a carbonyl).
    - Probe: "What is the major product of treating pinacol (2,3-dimethylbutane-2,3-diol) with dilute H₂SO₄?"

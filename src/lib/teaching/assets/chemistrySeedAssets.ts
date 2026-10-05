@@ -11003,10 +11003,12 @@ const COORDNOM_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.UNDERGRADUATE,
     stem: "You are naming [Co(NH₃)₄Cl₂]⁺, which has four ammine ligands and two chlorido ligands. Which ligand name is written first?",
     choices: [
-      { text: "chlorido — ligands are cited in ALPHABETICAL order of ligand name (chlorido before ammine), and the multiplying prefixes di-, tetra- are ignored when alphabetising. How many of each ligand there are never decides the order", isCorrect: true },
-      { text: "ammine — the most numerous ligand (here four NH₃) is listed first, then the less common ones", isCorrect: false, misconceptionId: `${COORDNOM}:MC1` },
+      // CHEM-096 (2026-10-05): the key was inverted — alphabetical order puts ammine (a) before chlorido (c).
+      { text: "ammine — ligands are cited in ALPHABETICAL order of ligand name (ammine before chlorido, a before c), and the multiplying prefixes tetra-, di- are ignored when alphabetising: tetraamminedichloridocobalt(III). How many of each ligand there are never decides the order", isCorrect: true },
+      { text: "ammine — because the most numerous ligand (here four NH₃) is always listed first, then the less common ones", isCorrect: false, misconceptionId: `${COORDNOM}:MC1` },
+      { text: "chlorido — the anionic ligand is always named before the neutral ones", isCorrect: false },
     ],
-    correctValue: "chlorido first — alphabetical order, not abundance",
+    correctValue: "ammine first — alphabetical order (a before c), not abundance",
     difficulty: ProbeDifficulty.ADVANCED,
     targetedMisconceptions: [`${COORDNOM}:MC1`],
     source: `${COORDNOM_SRC} — MC-1: ligand order believed to follow abundance/commonness rather than the alphabetical rule`,
@@ -16850,10 +16852,11 @@ const DIOL_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.HIGH,
     stem: 'PRACTICE: cis-But-2-ene is treated with OsO4. Is the diol product meso or the (R,R)/(S,S) pair?',
     choices: [
-      { text: 'The (2R,3R) and (2S,3S) pair — OsO4 adds through a concerted [3+2] cycloaddition delivering both oxygens to the SAME face (syn). Anti addition, like Br2, is what would have produced the meso diol', isCorrect: true },
-      { text: 'Meso — OsO4 adds anti across the double bond, in the same way bromine does', isCorrect: false, misconceptionId: `${DIOL}:MC2` },
+      // CHEM-076 (2026-10-05): the key was inverted — syn addition to a CIS alkene gives the MESO diol.
+      { text: 'Meso — OsO4 adds through a concerted [3+2] cycloaddition delivering both oxygens to the SAME face (syn), and syn addition to a cis alkene gives the meso diol. The (R,R)/(S,S) pair needs anti addition to the cis alkene, or syn addition to the trans alkene', isCorrect: true },
+      { text: 'The (2R,3R) and (2S,3S) pair — because OsO4 adds anti across the double bond, in the same way bromine does', isCorrect: false, misconceptionId: `${DIOL}:MC2` },
     ],
-    correctValue: 'the (R,R)/(S,S) pair — syn addition',
+    correctValue: 'meso — syn addition to a cis alkene',
     difficulty: ProbeDifficulty.ADVANCED,
     targetedMisconceptions: [`${DIOL}:MC2`],
     source: `${DIOL_SRC} — MC2, distractor-mapped`,
