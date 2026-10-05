@@ -94,3 +94,11 @@ describe('the first degraded turn is honest', () => {
     expect(t).not.toContain('?')
   })
 })
+
+describe('a degraded turn carries no figure pointer (PHYS-022 production re-drive)', () => {
+  it('ensureVisualAcknowledged is skipped when the provider is degraded', () => {
+    const { readFileSync } = require('fs') as typeof import('fs')
+    const SRC = readFileSync('src/app/api/learn/chat/route.ts', 'utf8')
+    expect(SRC).toMatch(/const ack = degradedForAck\(provider\)\s*\? \{ appended: false, text: cleanText \}\s*: ensureVisualAcknowledged\(/)
+  })
+})

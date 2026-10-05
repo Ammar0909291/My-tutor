@@ -10486,7 +10486,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       try {
         const { ensureVisualAcknowledged } = await import('@/lib/teaching/visual/visualAcknowledgement')
         // Typed Turn Contract Batch 5: reuses `resolvedVisualDecision`.
-        const ack = ensureVisualAcknowledged(cleanText, resolvedVisualDecision, figureIntroducedThisTurn && visualFired, serveLessonComplete || /\[LESSON_COMPLETE\]/i.test(cleanText))
+        // PHYS-022 re-drive (2026-10-05): a degraded turn ("my answer didn't
+        // come through") must not go on to say "Study it while I explain" —
+        // there is no explanation coming.
+        const { isDegradedProvider: degradedForAck } = await import('@/lib/eos-runtime/degradedMode')
+        const ack = degradedForAck(provider)
+          ? { appended: false, text: cleanText }
+          : ensureVisualAcknowledged(cleanText, resolvedVisualDecision, figureIntroducedThisTurn && visualFired, serveLessonComplete || /\[LESSON_COMPLETE\]/i.test(cleanText))
         if (ack.appended) {
           console.warn('[visual-acknowledgement] ' + JSON.stringify({
             event: 'unacknowledged-figure-introduced',
