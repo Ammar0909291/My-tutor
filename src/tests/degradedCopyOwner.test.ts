@@ -26,8 +26,12 @@ describe('the catalog owns the escalation rule for both channels', () => {
     expect(degradedRung(3.9)).toBe(3)
   })
 
-  it('server rung 1 returns null — the K5 teaching template owns that turn', () => {
-    expect(degradedCopy({ channel: 'server_degraded', consecutiveFailures: 1 })).toBeNull()
+  // Changed 2026-10-06 (PHYS-022/PHYS-024): rung 1 has honest copy of its own
+  // instead of handing the turn to the content-free K5 template.
+  it('server rung 1 is honest outage copy, distinct from rung 2', () => {
+    const first = degradedCopy({ channel: 'server_degraded', consecutiveFailures: 1 })
+    expect(first).toMatch(/didn't come through/)
+    expect(first).not.toBe(degradedCopy({ channel: 'server_degraded', consecutiveFailures: 2 }))
   })
 
   it('server escalates on 2, then again on 3+', () => {
@@ -63,16 +67,17 @@ describe('the catalog owns the escalation rule for both channels', () => {
 })
 
 describe('both consumers read from the catalog — no private wording survives', () => {
-  it('renderOutage returns exactly the catalog copy past rung 1', () => {
-    for (const n of [2, 3, 8]) {
+  it('renderOutage returns exactly the catalog copy on every rung', () => {
+    for (const n of [1, 2, 3, 8]) {
       expect(renderOutage(n, BASE, CTX))
         .toBe(degradedCopy({ channel: 'server_degraded', consecutiveFailures: n }))
     }
   })
 
-  it('renderOutage still serves the K5 teaching template on rung 1 (unchanged UX)', () => {
-    expect(renderOutage(1, BASE, CTX)).toBe(renderFallback(BASE, CTX))
-    expect(renderOutage(1, BASE, CTX)).toMatch(/one small step together/)
+  // Changed 2026-10-06 (PHYS-022/PHYS-024): see the rung-1 note above.
+  it('renderOutage no longer serves the K5 teaching template on rung 1', () => {
+    expect(renderOutage(1, BASE, CTX)).not.toBe(renderFallback(BASE, CTX))
+    expect(renderOutage(1, BASE, CTX)).not.toMatch(/one small step together/)
   })
 
   it('pickRecoveryMessage returns exactly the catalog copy, every language and rung', () => {

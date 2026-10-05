@@ -78,13 +78,19 @@ export interface DegradedCopyRequest {
  * rather than silently papered over: the client channel is localised because
  * it always was, and the server channel is not because it never was.
  *
- * Rung 1 is absent on purpose. The first server-degraded turn is served by the
- * K5 teaching TEMPLATE ladder (renderFallback: SHOW_EASIEST_LEGAL /
- * ECHO_MICROWIN / WARM_CLOSE), which is teaching-shaped content chosen from the
- * policy chain — not apology copy — and therefore stays owned by
- * templateFallback.ts. This catalog owns only the escalation past that point.
+ * Rung 1 (PHYS-022/PHYS-024, 2026-10-05). It used to be absent: the first
+ * server-degraded turn was the K5 teaching template "Let's take one small step
+ * together. I'll walk through it with you and pause whenever it helps. We can
+ * continue from here whenever you're ready." A real-learner run met it 87
+ * times in 5,190 turns, as the answer to "next question please" and to direct
+ * questions. It promises a step that never comes and says nothing true about
+ * what happened (production logs: Groq 429, Gemini 402, no OpenRouter key).
+ * The first rung now says plainly that the answer did not come through and
+ * what to do; it still does not blame the learner.
  */
-const SERVER_COPY: Record<'second' | 'later', string> = {
+const SERVER_COPY: Record<'first' | 'second' | 'later', string> = {
+  first:
+    "Sorry — my answer didn't come through just now. Please send your message again in a moment; your progress is saved.",
   second:
     "I'm still getting my thoughts together on that one — give me a moment and try again.",
   // Third and beyond: stop pretending this is a teaching turn. Silence about an
@@ -118,16 +124,14 @@ const CLIENT_COPY: Record<TeachingLang, { first: string; later: string }> = {
 /**
  * The one lookup both channels use. Never throws.
  *
- * server_degraded at rung 1 returns null — the caller must render the K5
- * teaching template instead (see SERVER_COPY's note). Returning null rather
- * than a string keeps that decision explicit at the call site instead of
- * hiding a teaching template inside a copy catalog.
+ * server_degraded has copy on every rung (rung 1 since PHYS-022, see
+ * SERVER_COPY's note). The return type stays nullable for callers.
  */
 export function degradedCopy(req: DegradedCopyRequest): string | null {
   const n = degradedRung(req.consecutiveFailures)
 
   if (req.channel === 'server_degraded') {
-    if (n === 1) return null
+    if (n === 1) return SERVER_COPY.first
     return n === 2 ? SERVER_COPY.second : SERVER_COPY.later
   }
 

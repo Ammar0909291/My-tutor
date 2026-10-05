@@ -83,6 +83,36 @@ export interface FailoverRouterOptions {
   deadlineMs?: number
 }
 
+/**
+ * PHYS-022/PHYS-024 (2026-10-05, production logs 16:21 UTC): the whole chain
+ * failed on most degraded turns because Groq answered `429 Rate limit
+ * exceeded` in about 100 ms (a per-minute burst limit, not the daily quota),
+ * Gemini answered `402 Payment Required — prepayment credits are depleted`,
+ * and OpenRouter has no key. The learner got the stock "Let's take one small
+ * step together" template although Groq would have answered a second later.
+ *
+ * A BURST rate limit that came back FAST gets one more try after the
+ * provider's own Retry-After (bounded) once the chain is exhausted. Only a
+ * fast rejection qualifies: a timeout never gets a second full attempt (the
+ * PCD-002 / SEV-1 arithmetic above), and AIQuotaError (daily quota) never
+ * clears in seconds. The retry is raced against the same chain deadline.
+ */
+const RATE_LIMIT_FAST_MS = 1_500
+const RATE_LIMIT_BACKOFF_DEFAULT_MS = 2_000
+const RATE_LIMIT_BACKOFF_MAX_MS = 4_000
+
+/** Retry-After in ms from the provider SDK's error, when it carries one. */
+export function retryAfterMs(err: unknown): number | null {
+  const cause = (err as { cause?: unknown })?.cause as { headers?: unknown } | undefined
+  const h = cause?.headers as Record<string, string> | { get?: (k: string) => string | null } | undefined
+  if (!h) return null
+  const raw = typeof (h as { get?: unknown }).get === 'function'
+    ? (h as { get: (k: string) => string | null }).get('retry-after')
+    : (h as Record<string, string>)['retry-after']
+  const n = Number(raw)
+  return Number.isFinite(n) && n >= 0 ? Math.round(n * 1000) : null
+}
+
 function isRetryable(err: unknown): boolean {
   if (err instanceof AIProviderError) return err.retryable
   return false
@@ -205,6 +235,7 @@ export function createFailoverRouter(opts: FailoverRouterOptions) {
     // PCD-002. One wall clock for the whole chain — see AI_CHAIN_DEADLINE_MS.
     const chainStart = Date.now()
     const tried: string[] = []
+    const rateLimited: Array<{ provider: AIProvider; err: AIProviderError; elapsedMs: number }> = []
     const remainingMs = () => deadlineMs - (Date.now() - chainStart)
     const outOfTime = () => remainingMs() < MIN_ATTEMPT_MS
 
@@ -253,10 +284,14 @@ export function createFailoverRouter(opts: FailoverRouterOptions) {
       }
       tried.push(provider.name)
 
+      const attemptStart = Date.now()
       try {
         return await attemptWithinBudget(provider, req)
       } catch (err: any) {
         recordFailure(provider.name, failureKind(err))
+        if (err instanceof AIProviderError && err.name === 'AIRateLimitError') {
+          rateLimited.push({ provider, err, elapsedMs: Date.now() - attemptStart })
+        }
         console.warn(`[ai/router] ${provider.name} failed: ${err.message}`)
         lastErr = err
 
@@ -283,6 +318,23 @@ export function createFailoverRouter(opts: FailoverRouterOptions) {
         if (next) {
           recordFailover()
           console.log(`[ai/router] failing over to ${next.name}`)
+        }
+      }
+    }
+
+    // PHYS-022/PHYS-024: one bounded retry of a provider that refused with a
+    // fast burst rate limit, before the caller serves a degraded template.
+    const limited = rateLimited.find((r) => r.elapsedMs <= RATE_LIMIT_FAST_MS)
+    if (limited) {
+      const waitMs = Math.min(retryAfterMs(limited.err) ?? RATE_LIMIT_BACKOFF_DEFAULT_MS, RATE_LIMIT_BACKOFF_MAX_MS)
+      if (remainingMs() > waitMs + MIN_ATTEMPT_MS) {
+        console.log(`[ai/router] ${JSON.stringify({ event: 'rate-limit-retry', provider: limited.provider.name, wait_ms: waitMs })}`)
+        await new Promise((r) => setTimeout(r, waitMs))
+        try {
+          return await attemptWithinBudget(limited.provider, req)
+        } catch (retryErr: any) {
+          recordFailure(limited.provider.name, failureKind(retryErr))
+          console.warn(`[ai/router] ${limited.provider.name} rate-limit retry failed: ${retryErr.message}`)
         }
       }
     }

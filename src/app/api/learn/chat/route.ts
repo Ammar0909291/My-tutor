@@ -6976,7 +6976,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         console.error('[learn/chat] empty response from model, finish_reason:', finishReason ?? 'unknown')
         const { degradedTurn } = await import('@/lib/eos-runtime')
         const degraded = degradedTurn({ register: contentRegister, learnerText: message })
-        text = degraded.text
+        // PHYS-022: the same honest outage copy as the all-providers-down path,
+        // never the content-free "one small step together" template.
+        const { degradedCopy } = await import('@/lib/teaching/degradedCopy')
+        text = degradedCopy({ channel: 'server_degraded', consecutiveFailures: 1 }) ?? degraded.text
         provider = degraded.provider
         finishReason = degraded.finishReason
       }

@@ -12,8 +12,15 @@ const ctx = { register: 'beginner' as const, learnerText: 'Got it' }
 const BASE = chooseFallback(['SHOW_EASIEST_LEGAL'])
 
 describe('outage escalation — never the same text twice', () => {
-  it('the first outage still uses the existing template (no behaviour change)', () => {
-    expect(renderOutage(1, BASE, ctx)).toBe(renderFallback(BASE, ctx))
+  // Changed 2026-10-06 (PHYS-022/PHYS-024): the first outage used to be the
+  // K5 template "Let's take one small step together…", met 87 times in a
+  // 5,190-turn real-learner run as the answer to direct requests. It now says
+  // honestly that the answer did not come through.
+  it('the first outage is honest, not the content-free teaching template', () => {
+    expect(renderOutage(1, BASE, ctx)).not.toBe(renderFallback(BASE, ctx))
+    expect(renderOutage(1, BASE, ctx)).toMatch(/didn't come through/)
+    expect(renderOutage(1, BASE, ctx)).toMatch(/send your message again/)
+    expect(renderOutage(1, BASE, ctx)).not.toMatch(/one small step|We can continue from here/)
   })
 
   it('the second outage does NOT repeat the first', () => {
