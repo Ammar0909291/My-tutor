@@ -35,8 +35,8 @@ import { mergeCookies, csrfTokenFromJar } from '../math/certify'
 
 const BASE = process.env.APP_URL ?? 'https://my-tutor-flame.vercel.app'
 
-const ACCOUNT_GROQ = { email: 'suaibamr1@gmail.com', password: 'papa@786', provider: 'groq' as const }
-const ACCOUNT_GEMINI = { email: 'suaibamr3@gmail.com', password: 'papa@786', provider: 'gemini' as const }
+const ACCOUNT_GROQ = { email: 'suaibamr1@gmail.com', password: process.env.QA_PASSWORD ?? '', provider: 'groq' as const }
+const ACCOUNT_GEMINI = { email: 'suaibamr3@gmail.com', password: process.env.QA_PASSWORD ?? '', provider: 'gemini' as const }
 
 const SUBJECT = 'physics'
 const TOPIC_SLUG = 'phys.mech.newtons-second-law'

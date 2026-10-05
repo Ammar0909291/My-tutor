@@ -25,7 +25,7 @@ import { mergeCookies, csrfTokenFromJar } from '../math/certify'
 
 const BASE = process.env.APP_URL ?? 'https://my-tutor-flame.vercel.app'
 const EMAIL = 'suaibamr1@gmail.com'
-const PASSWORD = 'papa@786'
+const PASSWORD = process.env.QA_PASSWORD ?? '' // never commit a password (redacted 2026-10-06)
 
 interface CurriculumLesson {
   topicSlug: string

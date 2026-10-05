@@ -238,8 +238,8 @@ For EACH batch in the design doc's plan, in order:
    unauthored-key fix).
 4. Run `npm run build` — must succeed.
 5. Commit on `main` (never a feature branch), push.
-6. Live-verify on the real account (email: suaibamr1@gmail.com, password:
-   papa@786) for any batch that touches a path a learner can actually hit
+6. Live-verify on the real account (email: suaibamr1@gmail.com, password: supplied live in chat, never written down)
+   for any batch that touches a path a learner can actually hit
    in a normal lesson turn (confirmation language, mastery gate input,
    visual attachment) — don't just trust offline tests for those; this
    project's own history shows offline-only verification has missed real
