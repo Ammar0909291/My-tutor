@@ -21,6 +21,8 @@ basic Physics knowledge, sometimes confused, sometimes wrong, asks "explain simp
 
 ## Method and limits (read before trusting any count)
 
+- **Two accounts were used from 2026-10-05**, both supplied by the owner in chat: account 1 drove orders 1-218, account 2 drove orders 219-283, one lesson at a time per account. (Order 2-7 were first driven in a 3-parallel run on account 1; see PHYS-018.)
+
 - Driven through the app's own HTTP API (`/api/sessions`, `/api/learn/lesson-init`, `/api/learn/chat`) as the
   logged-in learner. A real browser was **not** available in the sandbox (Chromium cannot verify the egress
   proxy's certificate), so **in-app controls could not be clicked**: Predict / Practice / Test me, the
@@ -160,7 +162,7 @@ Categories: Teaching · Adaptation · Lesson flow · Visuals · Numerical/factua
 - **Date:** 2026-10-05 · **Concepts/lessons:** `Elastic Collisions` (order 43), `Torque` (order 47)
 - **Tutor (provider=groq, reason `learner_needs_reply`):** after a worked collision example ends with *"Which ball ends up moving faster after the collision? A) The heavier (2 kg) ball B) The lighter (1 kg) ball C) Both have the same speed D) Both are at rest"* as plain text; no `mcq` object in the payload. Order 47 does the same (A-D "larger/smaller/same/zero").
 - **Why a defect:** every other check in these lessons is an answer card with tappable options; here the learner must type a letter or the text, and the answer is not graded as a card/probe. The worked example's numbers in order 43 were checked and are correct (v1' = -0.33 m/s, v2' = +4.67 m/s).
-- **Expected:** the question arrives as a card. **Actual:** prose options. **Reproducible:** yes (3 lessons: 43, 47, and 90 `Kinetic Theory of Gases`, which asks the pressure-formula question as prose A-D). **Status:** OPEN
+- **Expected:** the question arrives as a card. **Actual:** prose options. **Reproducible:** yes (5 lessons: 43, 47, 90 `Kinetic Theory of Gases`, 221 `Quantum Harmonic Oscillator`, 222 `Quantum Treatment of Hydrogen Atom`, all as prose A-D). **Status:** OPEN
 
 ### PHYS-021 — [P1] [Adaptation/Visuals] SYSTEMIC: "i dont understand this picture. what is it showing?" is answered by defining the word "showing" or with generic empathy, not by describing the figure
 - **Date:** 2026-10-05 · **Scope of observation:** solo sequential run, orders 1-61. The learner message was identical in every lesson (the same sentence PHYS-003 recorded for Young's experiment).
@@ -174,14 +176,14 @@ Categories: Teaching · Adaptation · Lesson flow · Visuals · Numerical/factua
 - **Learner:** *"ok i understand. next question please"*
 - **Tutor (provider=`degraded`, reason `practice_without_quiz`):** *"Let's take one small step together. I'll walk through it with you and pause whenever it helps.\n\nWe can continue from here whenever you're ready."* — no question, no card, no teaching.
 - **Why a defect:** the learner asked for the next question and received a stock hold message; the lesson did not advance on that turn.
-- **Expected:** the next question card. **Actual:** content-free hold. **Reproducible:** observed three times in 125 lessons (order 55; order 76 `Poisson Brackets and Phase Space Dynamics`, same text, on *"ok. can you ask me a question now?"*; order 118 `Sound Intensity and the Decibel Scale`, same text) (the content-free hold is already a known open class — see CLAUDE.md "content-free hold"; this is a fresh production occurrence). **Status:** OPEN
+- **Expected:** the next question card. **Actual:** content-free hold. **Reproducible:** observed seven times in about 210 lesson sessions across two accounts (orders 55, 76, 118, 162 `EMF, Internal Resistance, and Terminal Voltage`, 163 `Cells in Series and Parallel`, 232 `Scattering Theory and the Born Approximation`, 238 `Length Contraction` — same stock text each time) (the content-free hold is already a known open class — see CLAUDE.md "content-free hold"; this is a fresh production occurrence). **Status:** OPEN
 
 ### PHYS-023 — [P1] [Visuals/UX/Teaching] Raw card markup leaks into the tutor text, revealing the answer key; the card attached is a different, unrelated question
 - **Date:** 2026-10-05 · **Concepts/lessons:** `Generalized Coordinates and Configuration Space` (order 71), `The Euler-Lagrange Equation and Hamilton's Principle` (order 72)
 - **Learner did:** answered a figure-label card, then received the feedback turn.
 - **Tutor (provider=groq):** the feedback paragraph ends with a stray `**` and then the visible raw text `<!" a="x" b="y" c="constraint: x² + y² = L²" d="θ" correct="C"-->` followed by a **different** card (*"Which statement correctly describes a conservative force?"*). In order 72 the leaked text is `<!" a="L = T + V" b="L = T − V" c="L = V − T" d="L = T only" correct="B"-->` followed by a card *"Which expression correctly defines the Lagrangian…"*.
 - **Why a defect:** (1) raw markup shown to the learner; (2) it carries `correct="C"` / `correct="B"`, i.e. an answer key, before the learner answers (in order 72 the key `B` matches the next card's correct option "L = T − V"); (3) in order 71 the card that follows is about conservative forces, not about the generalised-coordinate figure just discussed.
-- **Expected:** no markup in text; one card on the lesson's topic. **Actual:** as above. **Reproducible:** yes, 2 of 4 lessons in the Lagrangian unit (orders 71-74). **Status:** OPEN
+- **Expected:** no markup in text; one card on the lesson's topic. **Actual:** as above. **Reproducible:** yes — orders 71, 72 and again order 234 (`Density Matrix and Mixed Quantum States`, second account: `<!" a="Definite relative phases between components" b=… correct=…-->`), so also outside the Lagrangian unit. **Status:** OPEN
 
 ## Out-of-scope observations (Chemistry) from the earlier four-lesson session — preserved, not counted
 
