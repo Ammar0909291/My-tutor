@@ -7136,10 +7136,14 @@ const TDIL_PROBES: SeedProbe[] = [
     choices: [
       { text: 'Time dilation is a real physical effect — the clocks genuinely accumulated different elapsed times, verified after reuniting', isCorrect: true },
       { text: 'It was an optical illusion caused by the finite speed of light reaching the clocks', isCorrect: false, misconceptionId: `${TDIL}:MC-1` },
+      // PHYS-016 (2026-10-06): the card had one absurd distractor, so it was
+      // passable by elimination. A second, plausible one from the EB entry's
+      // own MC-4 (time dilation only matters near light speed).
+      { text: 'Nothing real — an airliner is far too slow for time dilation; the difference must be ordinary clock drift', isCorrect: false, misconceptionId: `${TDIL}:MC-4` },
     ],
     correctValue: 'real physical effect',
     difficulty: ProbeDifficulty.PROFICIENT,
-    targetedMisconceptions: [`${TDIL}:MC-1`],
+    targetedMisconceptions: [`${TDIL}:MC-1`, `${TDIL}:MC-4`],
     source: `${TDIL_SRC} — MC-1 probe question verbatim, distractor-mapped`,
   },
   {
