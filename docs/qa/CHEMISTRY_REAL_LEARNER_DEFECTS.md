@@ -11,11 +11,18 @@
 - P1: 12
 - P2: 85
 - P3: 53
-- Open: 134
-- Fixed: 16
-- Open (of which partially fixed): 13
+- Open: 133
+- Fixed: 17
+- Open (of which partially fixed): 12
 - Open (of which fixed in repo, production not converged): 9
 <!-- SUMMARY:END -->
+
+**Fix pass (2026-10-05/06, batches A–F, commits dc88764 … dee8428):** each entry's **Status** / **Fix:** line names its commit, cause and evidence. Live re-check on production, disposable accounts deleted afterwards, `scripts/qa/chemDefectRedrive.ts` + `scripts/qa/sessionShareProbe.ts`:
+- 3 concurrent lessons on one account, one tabId each (a3455f6): 3 sessions, each its own lesson, figure and cards (CHEM-148 browser shape isolated; the tab-less driver shape is an owner decision).
+- P1 lessons #115, #151, #78, #97, #58, #40, #79, #153, #102, #6, #10 + 10 sample lessons (a3455f6, 273 turns, 0 degraded): 0 answer-key leaks, 0 pipe tables, 0 "covers:" lines, 0 closing-format openings, 0 presupposing questions after "ok"/a request, 21/21 "with numbers" and 21/21 "step by step" honoured; found three regressions in this pass's own work (trim undone by the analogy cap, model card on "too many words", reviewer capitals in corrections/cards), fixed in 9f5cf6f, 91dba1c, dee8428.
+- 10 further sample lessons + re-check of #1, #31, #42, #58 (90cf2ce, 182 turns): 0 flags; "too many words" 0/14 over budget, 0/14 with a card; 14/14 numbers and steps honoured.
+- Not verified live: production rendering of the four new curated figures; the dee8428 card-capitals change (tests only); the 9 "fixed in repo" probe rows, which need an owner-approved `scripts/assets/converge-probe-edits.ts --apply` run (slugs on each entry).
+- Seen live, still open: #96 (chem.surface.adsorption) a picture question was answered "Could you describe what you see in it?" — the server held a figure state, so the no-figure answer did not apply; not root-caused.
 
 ## Scope
 
@@ -107,7 +114,7 @@ Mastery/progress · Concurrency/session isolation.
 - Notes on occurrences: #39 t5: reply longer than the previous turn + new MCQ; also misattributes the learner's earlier wrong answer ("I hear you saying helium atoms are heavier") · #133 t2: gate card · #97 t6: gate card · #116 t7: gate card whose stem+options are ~60 words (more text, not less) · #20 t14: "let's keep it very short" then a card re-asking an already-answered question · #58 t2: gate card ("Let's see how Equilibrium Concept is sitting") · #134 t4: gate card · #40 t18: gate card
 - Related defect: —
 - Status: FIXED
-- Fix: d5397b1 — "too many words" now takes the explain-again rung (masteryGate.ts EXPLAIN_DIFF_RE), which keeps the gate card off the turn, and the reply is trimmed to whole sentences within min(60 words, 60 % of the reply complained about) (adaptationRequest.ts). Tests: src/tests/chemBatchDAdaptation.test.ts. Verified by test only.
+- Fix: d5397b1 + 9f5cf6f + 91dba1c — "too many words" takes the explain-again rung (no authored card), the reply is trimmed to whole sentences within min(60 words, 60 % of the previous reply), the analogy/empathy caps run BEFORE the trim (on a3455f6 the analogy regeneration had undone it: 1,361 → 117 → 798 chars), and a model-written card is held back. Tests: src/tests/chemBatchDAdaptation.test.ts, src/tests/chemBatchEVisuals.test.ts. Live re-check on 90cf2ce (14 lessons): 0/14 replies over budget, 0/14 with a card (before the follow-ups, on a3455f6: 9/21 long, 8/21 with a card).
 
 ### CHEM-002 — After a lesson is complete, the next message gets "You've already finished" AND a new quiz card
 
@@ -358,8 +365,8 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (55 occurrences in 46 lessons): #96 (A6) t5/t6; #20 (A2) t11; #58 (A4) t13; #171 (A10) t17; #88 (A5) tt7; #163 (A9) t2; #181 (A10) t10; #183 (A10) t10; #21 (A2) t2; #23 (A2) t2; #28 (A2) t5/t12; #29 (A2) t5; #30 (A2) t10; #33 (A2) t9/t10; #35 (A2) t17; #37 (A2) t2; #41 (A3) t4; #42 (A3) t2; #43 (A3) t9; #44 (A3) t7; #46 (A3) t3/t11; #47 (A3) t8; #49 (A3) t8; #55 (A3) t16; #64 (A4) t16; #65 (A4) t11; #69 (A4) t9; #81 (A5) t7; #82 (A5) t10; #99 (A6) t9; #102 (A6) t6; #108 (A6) t8; #113 (A6) t14; #114 (A6) t2; #115 (A7) t7; #118 (A7) t9; #119 (A7) t13; #122 (A7) t14; #138 (A8) t17; #139 (A8) t10; #141 (A8) t2; #152 (A9) t10; #154 (A9) t10; #160 (A9) t15; #162 (A9) t10; #164 (A9) t5
 - Notes on occurrences: #96 t5: step-by-step request answered in 3 unnumbered sentences · #20 t11: "show me step by step" -> "How did you decide that elements in the same row … should have very similar chemical behavior?" (a Socratic question about a card answer from 5 turns earlier) · #58 t13: "give me example with numbers" -> ΔG° = -RT ln K with K=10, no numeric result given ("a negative number of kilojoules per mole") · #171 t17: "give me example with numbers" -> three-pronged anchor analogy, no numbers · #88 tt7: "example with numbers" answered with a Pt hydrogenation example; numeric content present (partial) · #163 t2: "give me example with numbers" -> kitchen-sponge analogy (the table with numbers follows later in the same reply)
 - Related defect: —
-- Status: PARTIALLY FIXED
-- Fix: d5397b1 — a reply to "with numbers" with fewer than two numbers, or to "step by step" with fewer than two step lines, gets one regeneration with the shape stated; the retry is kept only if it complies (adaptationRequest.ts, logged [adaptation-check]). Not guaranteed: when the retry also fails, the original ships. Test: src/tests/chemBatchDAdaptation.test.ts.
+- Status: FIXED
+- Fix: d5397b1 — a reply to "with numbers" with fewer than two numbers, or to "step by step" with fewer than two step lines, gets one regeneration with the shape stated, kept only if it complies (adaptationRequest.ts, logged [adaptation-check]). Test: src/tests/chemBatchDAdaptation.test.ts. Live re-check 2026-10-05/06 (disposable accounts, 35 lessons): 35/35 "with numbers" and 35/35 "step by step" replies had the asked-for shape; production logged the repairs (e.g. steps 93 → 875 chars).
 
 ### CHEM-016 — Three correct card answers earned no mastery credit (counters stayed 0/0) and the lesson ended as "paused" after one "i dont know"
 
