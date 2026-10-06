@@ -21,6 +21,8 @@
  *   noSteps     "step by step" answered with < 2 step lines  (CHEM-015)
  *   lateVerdict "Not quite" present but not first            (CHEM-028)
  *   degraded    provider=degraded
+ *   quizNoCard / twoOption / unkeyedCard / degradedCardSwap / repeatAnswered
+ *               systemic re-checks (CHEM-061, 004, 048, 146, 033/017)
  */
 import { writeFileSync } from 'fs'
 import { BASE, createQaAccount, deleteQaAccount, type QaAccount } from './liveAccount'
@@ -75,6 +77,10 @@ function flags(p: TurnPayload, learner: string, prevTutor: string, figureSeen: b
   if (/\\\(\s*\d[^)]*[A-Za-z]{4,}/.test(t)) f.push('moneyAsMath')
   if (/beside this message/.test(t) && /beside this message/.test(prevTutor)) f.push('captionRepeat')
   if (/system is set up|wanted to first acknowledge|repeat(?:ing)? the (?:same|earlier) explanation/i.test(t)) f.push('metaTalk')
+  // Systemic re-check signals (2026-10-06): CHEM-061, CHEM-004, CHEM-048.
+  if (/^quiz me$/i.test(learner) && !p.mcq) f.push('quizNoCard')
+  if (p.mcq && p.mcq.options.length === 2) f.push('twoOption')
+  if (p.mcq && !(typeof (p.mcq as { assetId?: unknown }).assetId === 'string')) f.push('unkeyedCard')
   return f
 }
 
@@ -108,6 +114,7 @@ async function main() {
     let card: TurnPayload['mcq'] = open.mcq ?? null
     let prevTutor = openText
     let n = 0
+    const answered = new Set<string>()
     for (const beat of BEATS) {
       let msg = beat
       if (beat.startsWith('@card')) {
@@ -122,6 +129,11 @@ async function main() {
       const f = flags(p, msg, prevTutor, figureSeen)
       if (figureLabel(p)) figureSeen = true
       for (const x of f) { tally[x] = (tally[x] ?? 0) + 1; lf.push(x) }
+      // CHEM-146: a degraded reply that replaces an unanswered card.
+      if (p.provider === 'degraded' && card && p.mcq && p.mcq.question !== card.question && !beat.startsWith('@card')) { f.push('degradedCardSwap'); tally.degradedCardSwap = (tally.degradedCardSwap ?? 0) + 1; lf.push('degradedCardSwap') }
+      // CHEM-033/017: the same card shown again after it was answered.
+      if (p.mcq && answered.has(p.mcq.question)) { f.push('repeatAnswered'); tally.repeatAnswered = (tally.repeatAnswered ?? 0) + 1; lf.push('repeatAnswered') }
+      if (beat.startsWith('@card') && card) answered.add(card.question)
       card = p.mcq ?? null
       prevTutor = String(p.text ?? '')
       log.push(`[learner] ${msg}\n[tutor provider=${p.provider} fig=${figureLabel(p) ?? 'none'} card=${p.mcq ? JSON.stringify(p.mcq.question.slice(0, 140)) + ' ' + JSON.stringify(p.mcq.options.map((o) => o.slice(0, 40))) : 'none'} flags=${f.join(',') || '-'}]\n${p.text ?? ''}`)
