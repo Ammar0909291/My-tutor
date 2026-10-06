@@ -17,6 +17,14 @@
 - Open (of which fixed in repo, production not converged): 0
 <!-- SUMMARY:END -->
 
+**Fix pass (2026-10-06, commits c4a6afc, 62f7821; plus the shared chemistry fixes d5397b1/dee8428):** each entry's **Status** / **Fix:** line names its commit, cause and evidence. Live re-drive on production (6f6ccaa), two disposable accounts (deleted afterwards), one tabId per lesson, lessons #1, 3, 21, 22, 41, 61, 82, 101, 102, 120, 121, 141, 161, 181 — 14 lessons, 181 turns:
+- 0 lessons paused on a help request (BIO-002), 0 "Wrong"/"Correct" options (007), 0 stray backslashes (014), 0 third-person feedback (015), 0 money-as-maths (039), 0 repeated stock captions (020), 0 meta-talk (001), 0 pipe tables (022).
+- "with numbers" / "step by step": 12/14 and 12/14 honoured; 3 of the 4 misses were degraded turns, 1 a one-line step (#141) the single regeneration did not fix.
+- 16/181 turns degraded (9 %) — provider capacity (BIO-008).
+- Found live and fixed in 62f7821: #120 Applied Ecology still taught from the food chain (BIO-017).
+- BIO-012/026 not reproduced with per-tab sessions (#3, #141).
+- Not verified: production DB rows (Supabase connector unauthorised this session); browser rendering of the new figures.
+
 ## Scope
 
 The complete Biology curriculum of the deployed app (`my-tutor-flame.vercel.app`), following the app's own lesson order
@@ -317,8 +325,8 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (4 occurrences in 4 lessons): #86 (A5) t19; #49 (A3) tex; #52 (A3) tex; #77 (A4) tnum
 - Notes on occurrences: #86 t19: "show me step by step" -> "That’s right—when a muscle needs more force, it brings in progressively larger motor units. Please select the correct statement about…" (verdict on a prior card and a new card instead of steps) · #49 tex: "give me example" answered with "That’s correct — the ratio you identified is indeed 3 tall : 1 short" (verdict on an earlier answer) · #52 tex: "give me example" -> "That’s right — an affected father passes his single X‑linked recessive allele to every daughter…" (verdict on an earlier answer) · #77 tnum: "give me example with numbers" -> "That’s a common mix‑up—bone is living tissue…" (reply to an earlier card, not the request)
 - Related defect: —
-- Status: OPEN — cause not established
-- Fix: Replies verdict a card from elsewhere. In this run each account drove its lessons without a tabId, so (BIO-042) they resumed one shared session; whether the foreign card came from another lesson in that session could not be checked (production DB connector unauthorised this session; logs past the billing window). Related fixes: CHEM-035 neutral reply on a misattributed tap (0b3b0fb), verdict-first (d5397b1). Needs a live repro with per-tab sessions.
+- Status: OPEN — not reproduced with per-tab sessions
+- Fix: Live re-drive 2026-10-06 (6f6ccaa, disposable account, one tabId per lesson): in #141 every verdict matched its own card. The run that logged it drove each account's lessons without a tabId, which resumes one shared session (BIO-042); that shape is the likely source. Kept open until the owner decides BIO-042. Related fixes: 0b3b0fb (CHEM-035), d5397b1 (verdict first).
 
 ### BIO-013 — "what is this?" answered with a counter-question instead of a description ("Do you mean the FBA box or the Kinetic models box?")
 
@@ -413,7 +421,7 @@ Mastery/progress · Concurrency/session isolation.
 - Notes on occurrences: #123 tt1,t6: untitled food-chain figure for Landscape and Conservation Ecology; t6 "picture the food‑chain line you see on the screen" · #124 tt1,t14: untitled food-chain figure for Microbial Ecology; t14 "keeping the food‑chain picture in mind (the line of boxes… from producer to consumer)" · #125 tt1,t3,t9,t11: untitled food-chain figure for Quantitative Models of Population Growth; replies say "the food‑chain picture you see" · #126 tt1,t8,t14: untitled food-chain figure for Predator-Prey Dynamics ("the food‑chain picture… plant → rabbit → fox")
 - Related defect: —
 - Status: FIXED
-- Fix: c4a6afc — the five ecology lessons taught from the generic 'bio.eco' food chain get curated Tier-0 figures from existing generators, labels from each EB entry: sulfur cycle (biogeochemistry-advanced), fragmentation/corridors (landscape-conservation), microbes in the cycles (microbial-ecology), exponential vs logistic (population-growth-models), coupled predator–prey (predator-prey-dynamics). Test: src/tests/bioRealLearnerFixes.test.ts. Production rendering not checked.
+- Fix: c4a6afc + 62f7821 — six ecology lessons taught from the generic 'bio.eco' food chain get curated Tier-0 figures from existing generators, labels from each EB entry: sulfur cycle, fragmentation and corridors, microbes in the cycles, exponential vs logistic, coupled predator–prey, and (found live 2026-10-06, #120) the four ecosystem-service categories. Test: src/tests/bioRealLearnerFixes.test.ts. Live re-drive of #121 on 6f6ccaa served a figure; production rendering of the new scenes not inspected in a browser.
 
 ### BIO-018 — The same card is shown again word for word within one lesson, and mastery completes on the repeats
 
@@ -581,8 +589,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: The learner is told something unrelated to what they answered (CHEM-035 equivalent).
 - Reproducibility: Observed once (#3 t7).
 - Related defect: —
-- Status: OPEN — cause not established
-- Fix: Same as BIO-012: the previous card's verdict on the current answer; not reproducible from the transcript alone; shared-session driver shape suspected (BIO-042). Needs a live repro with per-tab sessions.
+- Status: OPEN — not reproduced with per-tab sessions
+- Fix: Live re-drive 2026-10-06: in #3 the "most specific rank" card got its own verdict ("Not quite — the answer is: Species") and the next card was not graded with it. Shared-session driver shape suspected (BIO-042). Kept open until BIO-042 is decided.
 
 ### BIO-027 — Lymphatic example: "1.5 litres of interstitial fluid leak out of capillaries every hour… lymphatics return 1.4 litres"
 
