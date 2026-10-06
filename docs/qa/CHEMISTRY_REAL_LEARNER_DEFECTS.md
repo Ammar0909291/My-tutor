@@ -11,10 +11,10 @@
 - P1: 12
 - P2: 85
 - P3: 53
-- Open: 108
-- Fixed: 42
+- Open: 112
+- Fixed: 38
 - Open (of which partially fixed): 13
-- Open (of which fixed in repo, production not converged): 0
+- Open (of which fixed in repo, production not converged): 4
 <!-- SUMMARY:END -->
 
 **Fix pass (2026-10-05/06, batches A–F, commits dc88764 … dee8428):** each entry's **Status** / **Fix:** line names its commit, cause and evidence. Live re-check on production, disposable accounts deleted afterwards, `scripts/qa/chemDefectRedrive.ts` + `scripts/qa/sessionShareProbe.ts`:
@@ -23,6 +23,29 @@
 - 10 further sample lessons + re-check of #1, #31, #42, #58 (90cf2ce, 182 turns): 0 flags; "too many words" 0/14 over budget, 0/14 with a card; 14/14 numbers and steps honoured.
 - Not verified live: production rendering of the four new curated figures; the dee8428 card-capitals change (tests only); the 9 "fixed in repo" probe rows, which need an owner-approved `scripts/assets/converge-probe-edits.ts --apply` run (slugs on each entry).
 - Seen live, still open: #96 (chem.surface.adsorption) a picture question was answered "Could you describe what you see in it?" — the server held a figure state, so the no-figure answer did not apply; not root-caused.
+
+## Production redrive 2026-10-06 (controlled load, deploy 05b7868)
+
+One disposable account, one lesson at a time, one tab id per lesson, 2.5 s between turns
+(scripts/qa/chemDefectRedrive.ts). Chemistry #151, 21, 165, 133, 64, 77, 42, 115, 79
+(117 turns) + biology #21 + physics #134 (13 turns each). All accounts deleted.
+Figure and visual decisions cross-checked against production runtime logs (VISUAL_TURN).
+
+- CHEM-107/146: 1 degraded turn in 117 (#42, an answer tap got "didn't come through", no
+  verdict); 0 cards swapped by a degraded reply. Not reproducible at controlled load.
+- CHEM-061: "quiz me" got a card in 9/9 lessons. Separate finding: 9 of 143 turns offered
+  a check "when you're ready" while a card was on screen (CHEM-021 mechanism) — fix e09efe5,
+  committed and pushed, NOT DEPLOYED (Vercel: "Account is blocked").
+- CHEM-149: figure served in 7/9 (log-verified); #165 and #64 get none — production reason
+  "no-figure:critic-reject-cached" (no curated figure; generated one rejected and cached).
+- CHEM-004: 16 of 35 distinct cards had 2 options (12 authored, 4 model-written).
+- CHEM-048: about 13 of 35 distinct cards were model-written (no authored key).
+- CHEM-033/017, BIO-018, PHYS-007: 0 answered cards shown again; no concept switch occurred,
+  so the fixed path was not exercised (inconclusive).
+- CHEM-148/BIO-042: the private-mode browser path could not be driven from the sandbox
+  (egress proxy blocked the browser's script loads).
+- Harness fix (94961cc): a figure sent as its type string (3-D card figures) had been
+  reported as "no figure"; two "pretends to see a picture" flags were false positives.
 
 ## Scope
 
@@ -174,7 +197,7 @@ Mastery/progress · Concurrency/session isolation.
 - Notes on occurrences: #1 tt13-14: 2 of 3 counted cards are 2-option · #96 tt9-11: two of three counted cards 2-option, one with an absurd distractor ("This is impossible") · #133 tt6: 2-option card closes the lesson · #98 tt3-t6: 3 of 4 counted cards are trivial or binary · #40 tt17,t23: 2-option "He or NH₃? Why?" card whose options give no "why" · #49 tt15: "Is heat (q) a state function or a path function? Justify." as a 2-option card; options contain no justification · #129 tt2,t5,t6: four of five cards are 2-option; mastery reached at t8 · #53 tt2,t14: options "Incorrect / Correct" on a claim card (no Yes/No or True/False wording)
 - Related defect: —
 - Status: PARTIALLY FIXED
-- Fix: d5397b1 — a model-written two-option card that asks "why" ("He or NH₃? Why?") is no longer served (mcq.ts parseMcqTag). Not fixed: the observed mastery cards are AUTHORED true/false probes (e.g. chem.pblock.group16 "Can oxygen form OF6?"), part of the 3-probe contract. Changing which cards count toward mastery is an owner decision. Test: src/tests/chemBatchDTextShape.test.ts.
+- Fix: d5397b1 — production redrive 2026-10-06: 16 of 35 distinct cards served had 2 options; 12 of those 16 are authored probes (true/false and yes/no items of the 3-probe contract), 4 model-written. Whether a 2-option card may count toward mastery is an OWNER DECISION (also BIO-019); not changed.
 
 ### CHEM-005 — Cards test facts/terms that the lesson has not yet taught
 
@@ -406,8 +429,8 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (3 occurrences in 3 lessons): #2 (A1) tt2/t7; #116 (A7) tt2/t10; #20 (A2) tt14-t18
 - Notes on occurrences: #2 tt2/t7: same card twice, the repeat is the final mastery card · #116 tt2/t10: "Can iodine (I₂) displace chlorine from NaCl?" asked twice, last card of lesson; after-complete card repeats the HF card · #20 tt14-t18: every card repeated
 - Related defect: —
-- Status: FIXED
-- Fix: 957978b — same cause and fix as CHEM-033 (the phenol EAS card asked twice after a concept switch). The repeated pKa point is model prose and is not checked.
+- Status: FIXED IN REPO — awaiting production verification
+- Fix: 957978b — same mechanism and status as CHEM-033 (phenols #151 re-driven 2026-10-06: no answered card repeated; no concept switch occurred, so inconclusive). The repeated pKa point is model prose and is not checked.
 
 ### CHEM-018 — Wrong-answer feedback talks about the student in the third person ("The learner assumed…")
 
@@ -482,8 +505,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Mixed signals.
 - Reproducibility: Observed once (#77 t8).
 - Related defect: —
-- Status: FIXED
-- Fix: 5fad26c — with a card attached, "Let me know what you'd like to do next" and the offer of a later practice problem are dropped (dropDeferredPracticeOffer). Test: src/tests/chemOpenDefectsBatchG.test.ts.
+- Status: FIXED IN REPO — awaiting deployment (Vercel account blocked)
+- Fix: 5fad26c, e09efe5 — production redrive 2026-10-06 found the same mechanism in other wording beside an attached card in 9 of 143 turns ("When you feel ready, just let me know and we'll move on to a short multiple‑choice quiz", "…I'll give you the first question", "Let's pause the quiz…"), and showed the drop never ran when the card was a held one re-offered under the reply. e09efe5 widens the phrase set and runs the same drop on the card actually served. Test: src/tests/redriveDeferralBesideCard.test.ts. NOT DEPLOYED: Vercel refused the build for e09efe5 ("Account is blocked", Fluid Active CPU); production still serves 05b7868, so the production re-test is pending.
 
 ### CHEM-022 — Figure served for a lesson belongs to a different (adjacent/downstream) concept than the lesson being taught
 
@@ -704,8 +727,8 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (137 occurrences in 105 lessons): #2 (A1) tt2/t7/t-; #77 (A5) tt5/t13/t-; #116 (A7) tt2/t10/t-; #151 (A9) tt2/t12/t-; #134 (A8) tt4/t17/t-; #40 (A3) tt3/t19, t12/t20, t13/t21, t17/t23/t-; #3 (A1) tt2/t18/t-; #59 (A4) tt7/t10, t9/t11-12/t-; #79 (A5) tt4/t16, t5/t17-18, t8/t19, t9/t20, t14/t20-21/t-; #117 (A7) tt3/t16, t4?, t3-t19/t-; #171 (A10) tt4/t20, t5/t21, t8/t23, t14/t24, t15/t25/t-; #143 (A8) tt4/t13, t5/t14, t8/t15/t-; #30 (A2) tt3/t21, t4/t22, t8/t23/t-; #69 (A4) tt7/t14, t8/t15, t13/t16/t-; #89 (A5) tt12/t18/t-; #162 (A9) tt3/t8, t5/t11, t6/t12/t-; #31 (A2) tt3/t23, t4/t24, t7/t28, t6/t27/t-; #50 (A3) tt14/t15/t-; #90 (A5) tt7/t13, t8/t16, t9/t17/t-; #15 (A1) tt5/t18, t8/t19, t4/t16/t-; #131 (A7) tt3/t9, t4/t10/t-; #144 (A8) tt2/t22, t3/t23/t-; #145 (A8) tt9/t14, t10/t15/t-; #182 (A10) tt5/t14, t8/t18, t10/t19/t-; #132 (A7) tt3/t8, t5/t9/t-; #51 (A3) tt3/t11, t4/t12, t7/t13, t8/t14/t-; #183 (A10) tt4/t16, t5/t17, t15/t19/t-; #94 (A5) tt4/t14, t5/t15, t10/t13/t-; #165 (A9) tt5/t15, t9/t16, t4/t14/t-; #74 (A4) tt3/t15, t4/t16, t5/t17/t-; #149 (A8) tt3/t18, t4/t18/t-; #57 (A3) tt5/t20, t5/t21/t-; #4 (A1) t-; #7 (A1) t-; #11 (A1) t-; #13 (A1) t-; #14 (A1) t-; #17 (A1) t-; #18 (A1) t-; #172 (A10) t-; #173 (A10) t-; #175 (A10) t-; #176 (A10) t-; #177 (A10) t-; #178 (A10) t-; #179 (A10) t-; #180 (A10) t-; #184 (A10) t-; #186 (A10) t-; #20 (A2) t-; #21 (A2) t-; #23 (A2) t-; #27 (A2) t-; #28 (A2) t-; #29 (A2) t-; #33 (A2) t-; #35 (A2) t-; #36 (A2) t-; #41 (A3) t-; #43 (A3) t-; #44 (A3) t-; #45 (A3) t-; #46 (A3) t-; #48 (A3) t-; #53 (A3) t-; #54 (A3) t-; #55 (A3) t-; #56 (A3) t-; #60 (A4) t-; #61 (A4) t-; #63 (A4) t-; #65 (A4) t-; #66 (A4) t-; #67 (A4) t-; #68 (A4) t-; #70 (A4) t-; #80 (A5) t-; #82 (A5) t-; #83 (A5) t-; #86 (A5) t-; #87 (A5) t-; #88 (A5) t-; #100 (A6) t-; #101 (A6) t-; #102 (A6) t-; #103 (A6) t-; #106 (A6) t-; #119 (A7) t-; #120 (A7) t-; #125 (A7) t-; #129 (A7) t-; #136 (A8) t-; #137 (A8) t-; #139 (A8) t-; #140 (A8) t-; #141 (A8) t-; #142 (A8) t-; #148 (A8) t-; #150 (A8) t-; #152 (A9) t-; #155 (A9) t-; #156 (A9) t-; #159 (A9) t-; #160 (A9) t-; #161 (A9) t-
 - Notes on occurrences: #134 tt4/t17: final mastery card is the t4 card verbatim; after-complete card is the t6 card · #40 tt3/t19, t12/t20, t13/t21, t17/t23: every card repeated; mastery completes on the repeats · #3 tt2/t18: final mastery card is the t2 card · #59 tt7/t10, t9/t11-12: cards repeated · #79 tt4/t16, t5/t17-18, t8/t19, t9/t20, t14/t20-21: every card repeated · #117 tt3/t16, t4?, t3-t19: full-shell, neon-sign and applications cards all repeated; mastery on the repeats · #171 tt4/t20, t5/t21, t8/t23, t14/t24, t15/t25: cards repeated · #143 tt4/t13, t5/t14, t8/t15: cards repeated verbatim
 - Related defect: —
-- Status: FIXED
-- Fix: 957978b — cause: TeachingHistory held one concept, so a turn on another concept reset the asked/missed/re-asked/served ledger and answered cards were asked again. The ledgers of concepts left behind are now kept in the same session snapshot and restored when the concept returns (capped at 24 concepts; session-scoped, not the deferred durable learner-state primitive). Test: src/tests/chem033LedgerSurvivesConceptSwitch.test.ts.
+- Status: FIXED IN REPO — awaiting production verification
+- Fix: 957978b — the asked-question ledger is kept per concept for the session and restored on return (unit test src/tests/chem033LedgerSurvivesConceptSwitch.test.ts; deployed 05b7868). Production redrive 2026-10-06 (9 chemistry lessons, 117 turns, one tab per lesson): 0 answered cards shown again — but no concept switch occurred in the run, so the fixed path itself was not exercised. Inconclusive.
 
 ### CHEM-034 — Figure caption is a generic placeholder ("it's a general illustration related to the topic") and the figure ("Periodic Trends: Na vs Cl") does not match the lesson "Modern Periodic Law and Table"
 
@@ -979,7 +1002,7 @@ Mastery/progress · Concurrency/session isolation.
 - Reproducibility: Observed once (#79 t3); the no-verdict pattern is CHEM-028.
 - Related defect: —
 - Status: OPEN — owner decision
-- Fix: The card ("In the molten-NaCl cell, which species is oxidized at the anode?") is model-written, not in the corpus, so its key is unverified and, by design, no verdict or correction is stated (route.ts correctForConfirmation, 2026-09-14). Correcting such answers needs either trusting model keys or authoring this item — an owner decision. The reply's description of a different cell than the figure is model output.
+- Fix: Production redrive 2026-10-06: about 13 of 35 distinct cards were model-written (no authored key; several are figure-label cards). Whether unkeyed AI-written cards are graded is an OWNER DECISION (also PHYS-020); not changed.
 
 ### CHEM-049 — "Show me step by step" for the 193 000 C answer silently changes the problem from 1 mol Cu (n = 2) to 2 mol Na (n = 1)
 
@@ -1208,7 +1231,7 @@ Mastery/progress · Concurrency/session isolation.
 - Notes on occurrences: #99 t18: "quiz me" answered with a prose recap, no card · #7 t17: reply to a learner message: "You\x27ve built a solid understanding of using mole ratios, so let\x27s test the reasoning behind it." — no question follows · #27 t11: "next question please" -> "…let’s apply what you’ve learned to decide which description fits the molecule you just built." (no question) · #27 t14: "quiz me" -> "Let\x27s pause Covalent Bonding here for now" at c3/p1 (needs p2)
 - Related defect: —
 - Status: PARTIALLY FIXED
-- Fix: 5fad26c — the promise "Let's see if you can apply that reasoning." with no question after it is removed (no false promise). Not fixed: the "quiz me" turn itself still depends on the gate having a probe to serve on that turn.
+- Fix: 5fad26c, e09efe5 — production redrive 2026-10-06: "quiz me" got a card in 9 of 9 lessons (0 quiz-me turns without a card); one reply (#79) said "Let's pause the quiz… when you feel ready… a short multiple‑choice quiz" beside the card — fix e09efe5 is in the repo but NOT deployed (Vercel account blocked; see CHEM-021). Kept PARTIALLY FIXED: a quiz-me turn still depends on a card being available.
 
 ### CHEM-062 — Lead–acid anode half-reaction is wrong/unbalanced: "Pb(s) → PbSO₄(s) + 2e⁻ + SO₄²⁻"
 
@@ -2027,7 +2050,7 @@ Mastery/progress · Concurrency/session isolation.
 - Notes on occurrences: #177 tt?: 16 of 31 turns degraded, longest streak 8 · #28 tt?: 9 of 31 turns degraded, longest streak 6 · #45 tt?: 8 of 31 turns degraded · #158 tt?: 3 degraded turns · #45 tmultiple: degraded open + 4 degraded turns; the final degraded replies ("Let me ask you something concrete…", "I\x27m still getting my thoughts together…") are followed by "Let\x27s pause Vapour Pressure of Solutions here for now" — lesson marked needs-review although the learner was at c1/p1 · #68 tt1,t5,t6,t7: degraded fallback replies · #88 tt2,t3,t10,t12,t14: degraded fallback replies; t14 "what's one thing you notice or find surprising" on "give me example" · #109 tt1,t2,t7,t9,t12,t13: degraded fallback replies incl. raw "covers:" line (t9) and "what's one thing you notice" (t2)
 - Related defect: —
 - Status: OPEN — provider capacity; owner action
-- Fix: No code cause beyond 562c3c3 (2026-10-05 17:33 UTC, PHYS-022/024: one bounded retry of a fast Groq burst 429 inside the chain deadline; the first degraded turn now says honestly that the answer did not come through). Production assistant rows by provider (read-only SQL, 2026-10-05 UTC hours): 15:00 — 2,167 turns, 476 degraded (22 %), gemini 328; 16:00 — 854, 85 degraded, gemini 0; after the fix, 18:00 — 1,196, 131 degraded (11 %); 19:00 — 1,400, 127 degraded (9 %); 22:00 — 326, 1 degraded. Gemini has served no turn since 16:00 (402 "prepayment credits are depleted") and OpenRouter has no key, so under concurrent QA load a Groq burst limit leaves nothing to fail over to. Owner actions: top up Gemini credits, add OPENROUTER_API_KEY, or raise the Groq tier. Chain kept Groq → Gemini → OpenRouter; AI_PROVIDER_MODE=gemini_only not used.
+- Fix: No code cause beyond 562c3c3. Production redrive 2026-10-06 at controlled load (one learner, sequential): 1 degraded turn in 117 (#42, an answer tap "Four" got "my answer didn't come through" and no verdict). Provider gaps unchanged: OPENROUTER_API_KEY missing (health endpoint), Gemini 402 earlier. Owner: provider keys/credits.
 
 ### CHEM-108 — Newman-projection item keyed "Four" for "how many bonds does the FRONT carbon show?" while the explanation says only three are drawn (the C–C bond "is not drawn")
 
@@ -2700,7 +2723,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Contradictory feedback and an unanswered question; the learner cannot tell what was graded.
 - Reproducibility: Observed once (#165 t3–t4).
 - Related defect: —
-- Status: OPEN
+- Status: OPEN — not reproduced at controlled load
+- Fix: Production redrive 2026-10-06: 0 degraded turns replaced a card (0 degradedCardSwap in 117 turns; the single degraded turn carried no card). Mechanism remains the degraded path under provider overload (CHEM-107); re-test only under real concurrent load, which this loop deliberately avoided.
 
 ### CHEM-147 — Card key and feedback say lead has "three stable isotopes" (206, 207, 208); lead has four (also 204)
 
@@ -2735,8 +2759,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Per-account lesson context is shared across simultaneously open sessions, so a learner with two tabs (or a phone and a laptop) is taught the wrong lesson while progress is recorded against the one named in the session.
 - Reproducibility: Reproduced in 2 of 2 same-account probes: account 1 (orders 3, 5, 8: #5 and #8 taught #3 content) and account 5 (orders 20 Modern Periodic Law, 22 Ionization Energy, 25 Valency and Oxidation State: #20 and #22 taught #25 content — valency, sulfur [Ne]3s²3p⁴, "Valency and Oxidation State covers: …"; #22 t9 and #25 t9 were also a deferral and a degraded message). The lesson that supplies the content differs between probes, so the lead session is not simply the first or last. Not observed across accounts: 4 accounts running lesson #30 simultaneously with unique marker words showed no foreign marker in any reply (the tutor never echoed its own marker either, so this is weak evidence of isolation, not proof).
 - Related defect: —
-- Status: FIXED
-- Fix: f685494 (+ dc88764) — the QA driver sent no tab id; a real browser in private mode also sent none (sessionStorage throws). getTabId() now falls back to window.name (per tab, survives reload, never overwrites a foreign name), so every browser tab has its own session. Test: src/tests/bio042TabIdentityNoStorage.test.ts.
+- Status: FIXED IN REPO — awaiting production verification
+- Fix: f685494 (+ dc88764) — getTabId() falls back to window.name when sessionStorage throws (private mode), so each browser tab keeps its own session. Unit-tested (src/tests/bio042TabIdentityNoStorage.test.ts) and deployed (05b7868, READY). Production re-test 2026-10-06 NOT achieved: the sandbox's egress proxy blocked the browser's script loads (ERR_TOO_MANY_RETRIES, 0 JS chunks), so the private-mode path could not be driven. Needs one real private-window check with two tabs.
 
 ### CHEM-149 — Systemic: 74 of 186 observed lessons (40 %) never serve a figure, including diagram-dependent topics (phase diagrams, mechanisms, titration, electron-pushing, molecular shapes)
 
@@ -2754,7 +2778,7 @@ Mastery/progress · Concurrency/session isolation.
 - Reproducibility: Observed on each of the 74 lessons (one observation each). Absence was judged over the full lesson, including turns where the learner asked about the picture.
 - Related defect: —
 - Status: PARTIALLY FIXED
-- Fix: 440b55c — four of the listed lessons now get a curated figure (phase diagram, real gases, nucleic acids, ionization energy), and a picture question with no figure is answered honestly (CHEM-036). Most of the 74 figure-less lessons still have none; a figure per lesson is a content campaign, not a defect fix.
+- Fix: 440b55c — production redrive 2026-10-06 (log-verified): figure served in 7 of 9 re-driven lessons (incl. #21 and the earlier no-figure #42). No figure for #165 chem.nitro.nitro-compounds and #64 chem.equil.buffer: production VISUAL_TURN reason "no-figure:critic-reject-cached" — no curated (Tier 0/1) figure, and the generated one was rejected by the figure critic and the rejection cached. Fix is per-concept figure authoring (content), not a code mechanism; remaining cluster, not patched individually.
 
 ### CHEM-150 — Served card/answer wording differs from the authored repo wording in 12 lessons (13 cards): production corpus has not converged with the repository
 
