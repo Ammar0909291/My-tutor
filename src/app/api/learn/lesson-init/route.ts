@@ -892,6 +892,12 @@ export async function POST(req: Request) {
           ...clearEpisodeForLessonOpen(),
           ...clearVisualSessionForNewClientView(),
           ...(attemptIsFreshStart ? clearTransientStateForNewAttempt() : {}),
+          // CHEM-033/BIO-018/PHYS-007: a fresh attempt clears THIS lesson's
+          // teaching history, never the asked-question ledgers of the other
+          // concepts this session already worked on (teachingHistoryForNewAttempt).
+          ...(attemptIsFreshStart
+            ? (await import('@/lib/teaching/teachingHistory')).teachingHistoryForNewAttempt(snapshot?.teachingHistory, topicSlug ?? null)
+            : {}),
           ...clearRenderedRealityForLessonOpen(), // CHEM-130: new lesson, empty screen
           questionLedger: recordQuestions(readQuestionLedger(snapshot?.questionLedger), routed.text),
         },

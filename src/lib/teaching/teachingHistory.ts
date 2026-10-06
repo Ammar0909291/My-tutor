@@ -517,6 +517,32 @@ export function clearTeachingHistoryForNewAttempt(): Record<string, unknown> {
   return { teachingHistory: null }
 }
 
+/**
+ * CHEM-033 / CHEM-017 / BIO-018 / PHYS-007 — production, 2026-10-06 (session
+ * cmuwsmggu…, disposable account): lesson A → lesson B in the same tab → back
+ * to A. Opening B is a fresh attempt, and the new-attempt boundary above
+ * nulled the WHOLE teaching history, so A's asked-question ledger — and the
+ * per-concept archive that keeps it across a concept switch — was gone before
+ * the learner returned, and A's answered cards were served again.
+ *
+ * The boundary is right for the lesson being (re)started and wrong for every
+ * other concept. This keeps exactly the question/explanation ledgers of the
+ * OTHER concepts (archived, as readTeachingHistory restores them) and nothing
+ * of the lesson now starting, so a restart of A still starts A clean.
+ * Session-scoped, bounded like the archive itself.
+ */
+export function teachingHistoryForNewAttempt(prev: unknown, startingConceptId: string | null): Record<string, unknown> {
+  const h = prev && typeof prev === 'object' && Array.isArray((prev as TeachingHistory).strategiesUsed)
+    ? (prev as TeachingHistory) : null
+  if (!h) return clearTeachingHistoryForNewAttempt()
+  const archive = readLedgerArchive(h.ledgerByConcept)
+  if (h.conceptId) archive[h.conceptId] = ledgerOf(h)
+  if (startingConceptId) delete archive[startingConceptId]
+  const kept = trimArchive(archive, startingConceptId)
+  if (Object.keys(kept).length === 0) return clearTeachingHistoryForNewAttempt()
+  return { teachingHistory: { ...initialTeachingHistory(null), ledgerByConcept: kept } }
+}
+
 const strings = (v: unknown): string[] => (Array.isArray(v) ? v.filter((x): x is string => typeof x === 'string') : [])
 
 function ledgerOf(h: Partial<TeachingHistory>): ConceptLedger {
