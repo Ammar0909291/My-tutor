@@ -11,10 +11,10 @@
 - P1: 12
 - P2: 85
 - P3: 53
-- Open: 133
-- Fixed: 17
-- Open (of which partially fixed): 12
-- Open (of which fixed in repo, production not converged): 9
+- Open: 108
+- Fixed: 42
+- Open (of which partially fixed): 13
+- Open (of which fixed in repo, production not converged): 0
 <!-- SUMMARY:END -->
 
 **Fix pass (2026-10-05/06, batches A–F, commits dc88764 … dee8428):** each entry's **Status** / **Fix:** line names its commit, cause and evidence. Live re-check on production, disposable accounts deleted afterwards, `scripts/qa/chemDefectRedrive.ts` + `scripts/qa/sessionShareProbe.ts`:
@@ -133,7 +133,8 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (110 occurrences in 95 lessons): #1 (A1) tafter-complete/t15.5; #39 (A3) tafter-complete/t9.5; #77 (A5) tafter-complete/t13.5; #96 (A6) tafter-complete/t11.5; #115 (A7) tafter-complete/t11.5; #2 (A1) tafter-complete/t8.5; #78 (A5) tafter-complete/t6.5; #97 (A6) tafter-complete/t9.5; #116 (A7) tafter-complete/t10.5; #169 (A10) tafter-complete/t6.5; #170 (A10) tafter-complete/t6.5; #133 (A8) tafter-complete/t6.5; #58 (A4) tafter-complete; #134 (A8) tafter-complete/t17.5; #98 (A6) tafter-complete/t6.5; #135 (A8) tafter-complete/t7.5; #3 (A1) t18.5; #4 (A1) t16.5; #5 (A1) t13.5; #6 (A1) t12.5; #8 (A1) t11.5; #9 (A1) t7.5; #10 (A1) t9.5; #11 (A1) t13.5; #16 (A1) t8.5; #17 (A1) t14.5; #18 (A1) t8.5; #19 (A1) t7.5; #171 (A10) t25.5; #173 (A10) t11.5; #174 (A10) t6.5; #175 (A10) t18.5; #176 (A10) t17.5; #180 (A10) t20.5; #182 (A10) t21.5; #184 (A10) t25.5; #185 (A10) t9.5; #186 (A10) t9.5; #20 (A2) t18.5; #22 (A2) t12.5; #24 (A2) t12.5; #25 (A2) t6.5; #26 (A2) t10.5; #28 (A2) t22.5; #32 (A2) t20.5; #33 (A2) t23.5; #34 (A2) t7.5; #36 (A2) t13.5; #43 (A3) t17.5; #52 (A3) t6.5; #53 (A3) t18.5; #54 (A3) t8.5; #55 (A3) t20.5; #64 (A4) t19.5; #67 (A4) t9.5; #73 (A4) t17.5; #75 (A4) t20.5; #76 (A4) t7.5; #80 (A5) t14.5; #82 (A5) t16.5; #83 (A5) t13.5; #84 (A5) t20.5; #85 (A5) t7.5; #91 (A5) t18.5; #92 (A5) t6.5; #94 (A5) t15.5; #95 (A5) t6.5; #100 (A6) t8.5; #101 (A6) t23.5; #104 (A6) t20.5; #105 (A6) t10.5; #109 (A6) t17.5; #111 (A6) t17.5; #112 (A6) t10.5; #114 (A6) t12.5; #119 (A7) t17.5; #120 (A7) t9.5; #124 (A7) t7.5; #126 (A7) t6.5; #128 (A7) t7.5; #129 (A7) t8.5; #136 (A8) t24.5; #138 (A8) t19.5; #139 (A8) t19.5; #142 (A8) t13.5; #146 (A8) t19.5; #148 (A8) t11.5; #149 (A8) t18.5; #153 (A9) t6.5; #157 (A9) t11.5; #158 (A9) t7.5; #163 (A9) t8.5; #165 (A9) t16.5; #167 (A9) t7.5; #168 (A9) t9.5
 - Notes on occurrences: #1 tafter-complete: card attached to already-finished message · #39 tafter-complete: card attached to already-finished message · #77 tafter-complete: card attached to already-finished message · #96 tafter-complete: card attached to already-finished message · #115 tafter-complete: card attached to already-finished message · #58 tafter-complete: paused lesson: "on pause" message (no card here)
 - Related defect: —
-- Status: OPEN
+- Status: FIXED
+- Fix: 5fad26c — the gate still picked a probe on the "already finished" turn, and it was attached under the close. The close is now the whole turn (route: serveLessonComplete withholds the card). Test: src/tests/chemOpenDefectsBatchG.test.ts.
 
 ### CHEM-003 — "memory" turns dump the raw authored explanation as the tutor reply (wall of text, ALL-CAPS, references to units "covered earlier")
 
@@ -405,7 +406,8 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (3 occurrences in 3 lessons): #2 (A1) tt2/t7; #116 (A7) tt2/t10; #20 (A2) tt14-t18
 - Notes on occurrences: #2 tt2/t7: same card twice, the repeat is the final mastery card · #116 tt2/t10: "Can iodine (I₂) displace chlorine from NaCl?" asked twice, last card of lesson; after-complete card repeats the HF card · #20 tt14-t18: every card repeated
 - Related defect: —
-- Status: OPEN
+- Status: FIXED
+- Fix: 957978b — same cause and fix as CHEM-033 (the phenol EAS card asked twice after a concept switch). The repeated pKa point is model prose and is not checked.
 
 ### CHEM-018 — Wrong-answer feedback talks about the student in the third person ("The learner assumed…")
 
@@ -424,7 +426,8 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (7 occurrences in 6 lessons): #97 (A6) t4; #7 (A1) t3; #53 (A3) t3; #54 (A3) t4; #77 (A5) t10; #156 (A9) t9
 - Notes on occurrences: #97 t4: "The learner identified the correct terminology…"
 - Related defect: —
-- Status: OPEN
+- Status: FIXED
+- Fix: c4a6afc (BIO-015) — a sentence that starts "The learner/The student" is rewritten to the second person ("You assumed…"), on the served text and the assembled graded text. The observed #77 sentence verified in src/tests/chemOpenDefectsBatchG.test.ts.
 
 ### CHEM-019 — "explain simpler" answered with leftover "That's right —" as if the learner had just answered
 
@@ -441,7 +444,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Confusing feedback and a small analogy error.
 - Reproducibility: Observed once (#151 t14).
 - Related defect: —
-- Status: OPEN
+- Status: FIXED
+- Fix: d5397b1 (CHEM-075) — "explain simpler" reads as a request (readsAsRequestToTutor), and on an ungraded request turn the opening "That's right —" sentence is stripped. Verified on the #151 text in src/tests/chemOpenDefectsBatchG.test.ts. The "five seats" analogy slip is model prose and is not checked.
 
 ### CHEM-020 — Reply promises a "quick check — pick the statement…" but no card is attached
 
@@ -460,7 +464,8 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (1 occurrence in 1 lesson): #122 (A7) t12
 - Notes on occurrences: #122 t12: "I hear you—it’s okay to feel stuck. Let’s simplify things with a quick choice." — no choice/card follows
 - Related defect: —
-- Status: OPEN
+- Status: FIXED
+- Fix: 5fad26c — "Here's a quick check—pick the statement…" with no card is an undelivered check; it is removed (the concept fallback teaches when nothing else is left). gateAssessment.ts INSTRUCTS_A_CHOICE. Test: src/tests/chemOpenDefectsBatchG.test.ts.
 
 ### CHEM-021 — Reply asks the learner what to do next while a quiz card is attached ("let me know what you'd like to do next")
 
@@ -477,7 +482,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Mixed signals.
 - Reproducibility: Observed once (#77 t8).
 - Related defect: —
-- Status: OPEN
+- Status: FIXED
+- Fix: 5fad26c — with a card attached, "Let me know what you'd like to do next" and the offer of a later practice problem are dropped (dropDeferredPracticeOffer). Test: src/tests/chemOpenDefectsBatchG.test.ts.
 
 ### CHEM-022 — Figure served for a lesson belongs to a different (adjacent/downstream) concept than the lesson being taught
 
@@ -568,7 +574,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Confusing wording for a low-English learner, repeated.
 - Reproducibility: Observed once (#2, two occurrences).
 - Related defect: —
-- Status: OPEN
+- Status: FIXED
+- Fix: Converged 2026-10-06 — the garbled stem ("the hold the forces between them have ______") was already corrected in the repo; production now serves "the hold of the forces between them ______" (chem.found.states-of-matter:fill_blank:en:high:foundational). Backup: docs/qa/backups/probe-converge-2026-10-06-b.json.
 
 ### CHEM-027 — Completion summary ("🎉 Excellent work! … What you mastered … What's coming") is shown at lesson start or mid-lesson, before the topic is mastered
 
@@ -697,8 +704,8 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (137 occurrences in 105 lessons): #2 (A1) tt2/t7/t-; #77 (A5) tt5/t13/t-; #116 (A7) tt2/t10/t-; #151 (A9) tt2/t12/t-; #134 (A8) tt4/t17/t-; #40 (A3) tt3/t19, t12/t20, t13/t21, t17/t23/t-; #3 (A1) tt2/t18/t-; #59 (A4) tt7/t10, t9/t11-12/t-; #79 (A5) tt4/t16, t5/t17-18, t8/t19, t9/t20, t14/t20-21/t-; #117 (A7) tt3/t16, t4?, t3-t19/t-; #171 (A10) tt4/t20, t5/t21, t8/t23, t14/t24, t15/t25/t-; #143 (A8) tt4/t13, t5/t14, t8/t15/t-; #30 (A2) tt3/t21, t4/t22, t8/t23/t-; #69 (A4) tt7/t14, t8/t15, t13/t16/t-; #89 (A5) tt12/t18/t-; #162 (A9) tt3/t8, t5/t11, t6/t12/t-; #31 (A2) tt3/t23, t4/t24, t7/t28, t6/t27/t-; #50 (A3) tt14/t15/t-; #90 (A5) tt7/t13, t8/t16, t9/t17/t-; #15 (A1) tt5/t18, t8/t19, t4/t16/t-; #131 (A7) tt3/t9, t4/t10/t-; #144 (A8) tt2/t22, t3/t23/t-; #145 (A8) tt9/t14, t10/t15/t-; #182 (A10) tt5/t14, t8/t18, t10/t19/t-; #132 (A7) tt3/t8, t5/t9/t-; #51 (A3) tt3/t11, t4/t12, t7/t13, t8/t14/t-; #183 (A10) tt4/t16, t5/t17, t15/t19/t-; #94 (A5) tt4/t14, t5/t15, t10/t13/t-; #165 (A9) tt5/t15, t9/t16, t4/t14/t-; #74 (A4) tt3/t15, t4/t16, t5/t17/t-; #149 (A8) tt3/t18, t4/t18/t-; #57 (A3) tt5/t20, t5/t21/t-; #4 (A1) t-; #7 (A1) t-; #11 (A1) t-; #13 (A1) t-; #14 (A1) t-; #17 (A1) t-; #18 (A1) t-; #172 (A10) t-; #173 (A10) t-; #175 (A10) t-; #176 (A10) t-; #177 (A10) t-; #178 (A10) t-; #179 (A10) t-; #180 (A10) t-; #184 (A10) t-; #186 (A10) t-; #20 (A2) t-; #21 (A2) t-; #23 (A2) t-; #27 (A2) t-; #28 (A2) t-; #29 (A2) t-; #33 (A2) t-; #35 (A2) t-; #36 (A2) t-; #41 (A3) t-; #43 (A3) t-; #44 (A3) t-; #45 (A3) t-; #46 (A3) t-; #48 (A3) t-; #53 (A3) t-; #54 (A3) t-; #55 (A3) t-; #56 (A3) t-; #60 (A4) t-; #61 (A4) t-; #63 (A4) t-; #65 (A4) t-; #66 (A4) t-; #67 (A4) t-; #68 (A4) t-; #70 (A4) t-; #80 (A5) t-; #82 (A5) t-; #83 (A5) t-; #86 (A5) t-; #87 (A5) t-; #88 (A5) t-; #100 (A6) t-; #101 (A6) t-; #102 (A6) t-; #103 (A6) t-; #106 (A6) t-; #119 (A7) t-; #120 (A7) t-; #125 (A7) t-; #129 (A7) t-; #136 (A8) t-; #137 (A8) t-; #139 (A8) t-; #140 (A8) t-; #141 (A8) t-; #142 (A8) t-; #148 (A8) t-; #150 (A8) t-; #152 (A9) t-; #155 (A9) t-; #156 (A9) t-; #159 (A9) t-; #160 (A9) t-; #161 (A9) t-
 - Notes on occurrences: #134 tt4/t17: final mastery card is the t4 card verbatim; after-complete card is the t6 card · #40 tt3/t19, t12/t20, t13/t21, t17/t23: every card repeated; mastery completes on the repeats · #3 tt2/t18: final mastery card is the t2 card · #59 tt7/t10, t9/t11-12: cards repeated · #79 tt4/t16, t5/t17-18, t8/t19, t9/t20, t14/t20-21: every card repeated · #117 tt3/t16, t4?, t3-t19: full-shell, neon-sign and applications cards all repeated; mastery on the repeats · #171 tt4/t20, t5/t21, t8/t23, t14/t24, t15/t25: cards repeated · #143 tt4/t13, t5/t14, t8/t15: cards repeated verbatim
 - Related defect: —
-- Status: OPEN — cause found; owner decision
-- Fix: Production evidence (read-only, 2026-10-05 13:00–18:30): 305 learner×authored-probe pairs were graded twice in one session; 185 have another concept's evidence in between. TeachingHistory holds ONE concept (teachingHistory.ts readTeachingHistory resets on a conceptId change), so a prerequisite review or excursion wipes the asked-question ledger and spent probes are re-asked. The fail→pass repeats also include the owner-approved (G2, 2026-09-24) one re-ask of a missed question. Making the ledger survive a concept switch is per-concept durable learner state, one of the deferred four primitives — not started without an owner instruction.
+- Status: FIXED
+- Fix: 957978b — cause: TeachingHistory held one concept, so a turn on another concept reset the asked/missed/re-asked/served ledger and answered cards were asked again. The ledgers of concepts left behind are now kept in the same session snapshot and restored when the concept returns (capped at 24 concepts; session-scoped, not the deferred durable learner-state primitive). Test: src/tests/chem033LedgerSurvivesConceptSwitch.test.ts.
 
 ### CHEM-034 — Figure caption is a generic placeholder ("it's a general illustration related to the topic") and the figure ("Periodic Trends: Na vs Cl") does not match the lesson "Modern Periodic Law and Table"
 
@@ -1200,7 +1207,8 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (4 occurrences in 3 lessons): #99 (A6) t18; #7 (A1) t17; #27 (A2) t11/t14
 - Notes on occurrences: #99 t18: "quiz me" answered with a prose recap, no card · #7 t17: reply to a learner message: "You\x27ve built a solid understanding of using mole ratios, so let\x27s test the reasoning behind it." — no question follows · #27 t11: "next question please" -> "…let’s apply what you’ve learned to decide which description fits the molecule you just built." (no question) · #27 t14: "quiz me" -> "Let\x27s pause Covalent Bonding here for now" at c3/p1 (needs p2)
 - Related defect: —
-- Status: OPEN
+- Status: PARTIALLY FIXED
+- Fix: 5fad26c — the promise "Let's see if you can apply that reasoning." with no question after it is removed (no false promise). Not fixed: the "quiz me" turn itself still depends on the gate having a probe to serve on that turn.
 
 ### CHEM-062 — Lead–acid anode half-reaction is wrong/unbalanced: "Pb(s) → PbSO₄(s) + 2e⁻ + SO₄²⁻"
 
@@ -1291,7 +1299,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Looks like broken markup / a price to the learner.
 - Reproducibility: Observed once in 40 transcripts (#4 t3).
 - Related defect: —
-- Status: OPEN
+- Status: FIXED
+- Fix: 5fad26c — a bare number held between two dollars ("$0.450$") is shown as the plain number; money ("$5 and $10") and real maths ("$v_0$") unchanged (mathDelimiters.ts). Test: src/tests/chemOpenDefectsBatchG.test.ts.
 
 ### CHEM-067 — MCQ stem says "Show your unit-cancellation steps" but the card is a pick-one question whose correct option already contains the working
 
@@ -1376,7 +1385,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Looks like a glitch; confusing for the learner.
 - Reproducibility: Observed once (#118 t1).
 - Related defect: —
-- Status: OPEN
+- Status: FIXED
+- Fix: 5fad26c — a parenthesis that repeats the words before it ("silicon tetrachloride (silicon tetrachloride)") is removed in plainNotation; a formula gloss "(SiCl₄)" is kept. Test: src/tests/chemOpenDefectsBatchG.test.ts.
 
 ### CHEM-072 — Malformed 2-option card: "NaCl just dissolves in water. Why does SiCl4 fume and hydrolyse violently instead?" — options "Because NaCl is IONIC" / "It does not"
 
@@ -1466,8 +1476,8 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (1 occurrence in 1 lesson): #137 (A8) tt14-t21
 - Notes on occurrences: #137 tt14-t21: Corroborating contradiction: lesson #137 (account 8) correctly teaches that anti addition of Br₂ to cis-but-2-ene gives the racemic (d,l) pair, the opposite of the #153 card text "Anti addition, like Br₂, is what would have produced the meso diol"
 - Related defect: —
-- Status: FIXED IN REPO — production row not converged
-- Fix: 9160c3d — the authored key said OsO₄ on cis-but-2-ene gives the (R,R)/(S,S) pair; syn addition to a cis alkene gives the meso diol. Probe (chem.alc.diols:step_check:en:high) and the EB intervention line corrected. Test: src/tests/chemWrongKeys.test.ts. Production still serves the old key (read-only SQL, version 1, ACTIVE; the bootstrap is create-only) until scripts/assets/converge-probe-edits.ts --apply is run with owner approval.
+- Status: FIXED
+- Fix: 9160c3d — the authored key said OsO₄ on cis-but-2-ene gives the (R,R)/(S,S) pair; syn addition to a cis alkene gives the meso diol. Probe (chem.alc.diols:step_check:en:high) and the EB intervention line corrected. Test: src/tests/chemWrongKeys.test.ts. Production still serves the old key (read-only SQL, version 1, ACTIVE; the bootstrap is create-only) until scripts/assets/converge-probe-edits.ts --apply is run with owner approval. Converged to production 2026-10-06 (owner-approved write; read-back verified; backup docs/qa/backups/probe-converge-2026-10-06.json).
 
 ### CHEM-077 — Methoxide opening of propylene oxide: attack at the "less-hindered terminal CH₂" is said to give "2-methoxy-1-propanol" (it gives 1-methoxy-2-propanol); invented rate constant k ≈ 1×10⁴ M⁻¹ s⁻¹
 
@@ -1501,7 +1511,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Dead-end message; learner is told it is "tricky" after saying "ok".
 - Reproducibility: Observed once (#154 t14).
 - Related defect: —
-- Status: OPEN
+- Status: FIXED
+- Fix: 5fad26c — "…let me try a completely different angle." with nothing after it is an undelivered promise; a reply that is only that line gets the concept fallback instead of a dead end. Test: src/tests/chemOpenDefectsBatchG.test.ts.
 
 ### CHEM-079 — "show me step by step" / "ok" answered with a lone probing question that presupposes something the learner never said ("How did you decide…", "Can you walk me through how you thought…")
 
@@ -1679,8 +1690,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Out-of-date factual claim.
 - Reproducibility: Observed once (#42 t7).
 - Related defect: —
-- Status: FIXED IN REPO — production row not converged
-- Fix: 7476752 — the seed option and the EB entry said the triple point defines the kelvin; both now say it did until the 2019 SI redefinition (chem.state.phase-diagram:misconception_probe:en:high). The observed sentence was model output drawing on that claim. Test: src/tests/chemBatchFContent.test.ts.
+- Status: FIXED
+- Fix: 7476752 — the seed option and the EB entry said the triple point defines the kelvin; both now say it did until the 2019 SI redefinition (chem.state.phase-diagram:misconception_probe:en:high). The observed sentence was model output drawing on that claim. Test: src/tests/chemBatchFContent.test.ts. Converged to production 2026-10-06 (owner-approved write; read-back verified; backup docs/qa/backups/probe-converge-2026-10-06.json).
 
 ### CHEM-089 — Orders of magnitude misstated for water ionisation: "one hundred-millionth of a mole" for 1×10⁻⁷ M, and "two out of every ten million molecules" ionised (≈ 2 in a billion)
 
@@ -1733,8 +1744,8 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (1 occurrence in 1 lesson): #6 (A1) t9
 - Notes on occurrences: #6 t9: mid-lesson "✓ What you mastered — you can now explain why we use the mole as a counting bridge…" appended to a card-answer reply at t9
 - Related defect: —
-- Status: FIXED IN REPO — production row not converged
-- Fix: 9160c3d — the repo item (chem.found.mole-concept:mcq:en:high) was already corrected, but production still serves the old key (read-only SQL, version 1, ACTIVE): the bootstrap is create-only. scripts/assets/converge-probe-edits.ts reports drift read-only; --apply updates only named slugs after writing a JSON backup; --restore undoes it. Not run against production — needs owner approval.
+- Status: FIXED
+- Fix: 9160c3d — the repo item (chem.found.mole-concept:mcq:en:high) was already corrected, but production still serves the old key (read-only SQL, version 1, ACTIVE): the bootstrap is create-only. scripts/assets/converge-probe-edits.ts reports drift read-only; --apply updates only named slugs after writing a JSON backup; --restore undoes it. Not run against production — needs owner approval. Converged to production 2026-10-06 (owner-approved write; read-back verified; backup docs/qa/backups/probe-converge-2026-10-06.json).
 
 ### CHEM-092 — Garbled electrode label in the Copper Electroplating figure: "Cu (pure, impure at cathode) (anode)"; one copper figure stands for the whole "Industrial Electrolysis" lesson (chloralkali, Hall–Héroult, Down's cell)
 
@@ -1768,7 +1779,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Typo-level glitch in generated text; seen once in 59 lessons.
 - Reproducibility: Observed once (#82 t7).
 - Related defect: —
-- Status: OPEN
+- Status: FIXED
+- Fix: 5fad26c — the learner's name glued to the word before it ("workstest5!") is separated ("works, test5!"), only for a name of 3+ characters that is capitalised or carries a digit, right before punctuation (secondPerson.ts separateGluedName). Test: src/tests/chemOpenDefectsBatchG.test.ts.
 
 ### CHEM-094 — Opening example says a copper wire dipped in water "reacts with the water and the surface dissolves, turning the liquid a vivid blue"
 
@@ -1819,8 +1831,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: The core naming rule of the lesson is taught backwards and rewarded; contradicted within the same lesson by the "tetraamminedichloridocobalt(III)" card.
 - Reproducibility: Static key — occurs for every learner served this card (served in #102 t12 on account 6).
 - Related defect: —
-- Status: FIXED IN REPO — production row not converged
-- Fix: 9160c3d — the key said chlorido is written before ammine; alphabetical order gives tetraamminedichloridocobalt(III) (a before c). Probe chem.coord.nomenclature:checkpoint:en:undergraduate corrected; the EB entry was already right. Test: src/tests/chemWrongKeys.test.ts. Production still serves the old key until the owner-approved convergence run.
+- Status: FIXED
+- Fix: 9160c3d — the key said chlorido is written before ammine; alphabetical order gives tetraamminedichloridocobalt(III) (a before c). Probe chem.coord.nomenclature:checkpoint:en:undergraduate corrected; the EB entry was already right. Test: src/tests/chemWrongKeys.test.ts. Production still serves the old key until the owner-approved convergence run. Converged to production 2026-10-06 (owner-approved write; read-back verified; backup docs/qa/backups/probe-converge-2026-10-06.json).
 
 ### CHEM-097 — Chromate/dichromate worked example uses K ≈ 10³ (real value ≈ 10¹⁴), producing only 10⁻³ M dichromate at pH 2 — contradicting the lesson's "acid turns yellow chromate orange"
 
@@ -1926,7 +1938,8 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (1 occurrence in 1 lesson): #122 (A7) t17
 - Notes on occurrences: #122 t17: "you\x27ve hit a frustrating wall… let\x27s close this topic for today and give your brain a fresh start. Next up, we will dive into a brand-new…" (reply to "explain again"); lesson continues t18–t22
 - Related defect: —
-- Status: OPEN
+- Status: FIXED
+- Fix: 5fad26c — on a turn that does not complete the lesson, invented session-end sentences ("our session time is wrapping up", "see you next time") are removed with the meta-talk sweep (reuseCaps.ts). Test: src/tests/chemOpenDefectsBatchG.test.ts.
 
 ### CHEM-103 — A wrong card answer that was just corrected ("rate = k[A][B]") is later praised as "exactly the correct form… a solid start"
 
@@ -2031,8 +2044,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Question wording and key contradict each other; a learner who counts what a Newman projection shows (three) is marked wrong.
 - Reproducibility: Static item; observed once (#140 t2–t8).
 - Related defect: —
-- Status: FIXED IN REPO — production row not converged
-- Fix: 7476752 — the stem now asks for the total bonds on the front carbon, counting the C–C bond not drawn, so "Four" matches the explanation (chem.hyd.conformations:step_check:en:undergraduate). Test: src/tests/chemBatchFContent.test.ts.
+- Status: FIXED
+- Fix: 7476752 — the stem now asks for the total bonds on the front carbon, counting the C–C bond not drawn, so "Four" matches the explanation (chem.hyd.conformations:step_check:en:undergraduate). Test: src/tests/chemBatchFContent.test.ts. Converged to production 2026-10-06 (owner-approved write; read-back verified; backup docs/qa/backups/probe-converge-2026-10-06.json).
 
 ### CHEM-109 — Ill-posed figure card: "In the cisplatin figure, which two ligands are adjacent to each other?" (options: two NH₃ / two Cl / one NH₃ and one Cl / none) — in a cis square-planar complex every pair of neighbours is adjacent
 
@@ -2100,8 +2113,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Learners who compute correctly are penalised; learners who pick the non-answer are rewarded without learning the number.
 - Reproducibility: Static item; observed once (#66 t9).
 - Related defect: —
-- Status: FIXED IN REPO — production row not converged
-- Fix: 7476752 — "Which has HIGHER molar solubility?" keyed "Cannot assume" while its own working found Salt B; the card now asks whether Ksp alone decides and keys "No — calculate s" (Salt B ≈ 100× more soluble) (chem.equil.solubility:mcq:en:high). Test: src/tests/chemBatchFContent.test.ts.
+- Status: FIXED
+- Fix: 7476752 — "Which has HIGHER molar solubility?" keyed "Cannot assume" while its own working found Salt B; the card now asks whether Ksp alone decides and keys "No — calculate s" (Salt B ≈ 100× more soluble) (chem.equil.solubility:mcq:en:high). Test: src/tests/chemBatchFContent.test.ts. Converged to production 2026-10-06 (owner-approved write; read-back verified; backup docs/qa/backups/probe-converge-2026-10-06.json).
 
 ### CHEM-113 — Hydrogen combustion energy miscalculated: "−571 kJ… per gram ≈ 286 kJ/g… 286 MJ/kg (≈ 142 MJ/kg)… a 1 g pellet gives 286 kJ — enough to heat 70 g of water by 40 °C"
 
@@ -2272,8 +2285,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Confusing, hard-to-read feedback for a weak-English learner.
 - Reproducibility: Observed twice in #30 (t3, t21); only one lesson seen so far.
 - Related defect: —
-- Status: FIXED IN REPO — production row not converged
-- Fix: 7476752 — the correct option began "Not quite —", so the verdict read "Not quite — the answer is: Not quite —"; now "No —" (chem.bond.mo-theory:checkpoint:en:undergraduate), and no correct option in the chemistry corpus starts with "Not quite". Test: src/tests/chemBatchFContent.test.ts.
+- Status: FIXED
+- Fix: 7476752 — the correct option began "Not quite —", so the verdict read "Not quite — the answer is: Not quite —"; now "No —" (chem.bond.mo-theory:checkpoint:en:undergraduate), and no correct option in the chemistry corpus starts with "Not quite". Test: src/tests/chemBatchFContent.test.ts. Converged to production 2026-10-06 (owner-approved write; read-back verified; backup docs/qa/backups/probe-converge-2026-10-06.json).
 
 ### CHEM-123 — Oxidation-state opener says Mn in KMnO₄ "will gain seven electrons when it is reduced"
 
@@ -2565,8 +2578,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Ambiguous option wording on a graded card.
 - Reproducibility: Observed once (#32 t4–t5).
 - Related defect: —
-- Status: FIXED IN REPO — production row not converged
-- Fix: 7476752 — the yes/no card's wrong option read "Correct —"; now "Yes —" (slug chem.bond.intermolecular:step_check:en:high). Test: src/tests/chemBatchEVisuals.test.ts. Production keeps the old text until the owner-approved convergence run.
+- Status: FIXED
+- Fix: 7476752 — the yes/no card's wrong option read "Correct —"; now "Yes —" (slug chem.bond.intermolecular:step_check:en:high). Test: src/tests/chemBatchEVisuals.test.ts. Production keeps the old text until the owner-approved convergence run. Converged to production 2026-10-06 (owner-approved write; read-back verified; backup docs/qa/backups/probe-converge-2026-10-06.json).
 
 ### CHEM-140 — Intermolecular-force numbers differ inside one lesson: HCl dipole–dipole "~10 kJ/mol" in the table vs "roughly 5 kJ/mol" in the next explanation; N₂ dispersion "~5 kJ/mol"
 
@@ -2652,7 +2665,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Distancing, confusing wording for a weak-English learner; shows the reply was written for a different audience.
 - Reproducibility: Seen in 7 replies across 7 lessons (accounts 1, 3, 3, 3, 5, 6, 9).
 - Related defect: —
-- Status: OPEN
+- Status: FIXED
+- Fix: c4a6afc (BIO-015) + 5fad26c — sentence-start "The learner correctly noted" → "You correctly noted"; mid-sentence "the student's explanation/answer/…" → "your explanation" (secondPerson.ts). Test: src/tests/chemOpenDefectsBatchG.test.ts.
 
 ### CHEM-145 — P₄ described as having "four identical single bonds"; the tetrahedron has six P–P bonds (the lesson's own later reply and card say six)
 
@@ -2703,8 +2717,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: A factual error in the authored key that the learner is rewarded for repeating.
 - Reproducibility: Observed once (#186 t4–t5).
 - Related defect: —
-- Status: FIXED IN REPO — production row not converged
-- Fix: 7476752 — lead has four stable isotopes (²⁰⁴Pb too): seed (chem.anal.spectroscopy:checkpoint:en:undergraduate) and EB entry corrected. docs/curriculum/blueprints/chem.anal.spectroscopy.md (curriculum data) still says three — left for the curriculum owner. Test: src/tests/chemBatchFContent.test.ts.
+- Status: FIXED
+- Fix: 7476752 — lead has four stable isotopes (²⁰⁴Pb too): seed (chem.anal.spectroscopy:checkpoint:en:undergraduate) and EB entry corrected. docs/curriculum/blueprints/chem.anal.spectroscopy.md (curriculum data) still says three — left for the curriculum owner. Test: src/tests/chemBatchFContent.test.ts. Converged to production 2026-10-06 (owner-approved write; read-back verified; backup docs/qa/backups/probe-converge-2026-10-06.json).
 
 ### CHEM-148 — Three lessons open at once on one account: lessons 5 and 8 are taught with lesson 3's content, figure and "covers:" line
 
@@ -2721,8 +2735,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Per-account lesson context is shared across simultaneously open sessions, so a learner with two tabs (or a phone and a laptop) is taught the wrong lesson while progress is recorded against the one named in the session.
 - Reproducibility: Reproduced in 2 of 2 same-account probes: account 1 (orders 3, 5, 8: #5 and #8 taught #3 content) and account 5 (orders 20 Modern Periodic Law, 22 Ionization Energy, 25 Valency and Oxidation State: #20 and #22 taught #25 content — valency, sulfur [Ne]3s²3p⁴, "Valency and Oxidation State covers: …"; #22 t9 and #25 t9 were also a deferral and a degraded message). The lesson that supplies the content differs between probes, so the lead session is not simply the first or last. Not observed across accounts: 4 accounts running lesson #30 simultaneously with unique marker words showed no foreign marker in any reply (the tutor never echoed its own marker either, so this is weak evidence of isolation, not proof).
 - Related defect: —
-- Status: OPEN — cause reproduced; owner decision
-- Fix: dc88764 — reproduced live on a disposable account (scripts/qa/sessionShareProbe.ts): with no tabId the three lessons shared 1 session and were all taught the last-opened lesson; with distinct tabIds they got 3 sessions, each with its own figure and cards. Cause: PCD-004A's deliberate rule that a request without tab identity resumes the newest session (sessionLessonPointer.ts chooseResumableSession). A real browser always sends a tabId (tabIdentity.ts), so browsers are isolated; the QA driver sent none. Isolating tab-less clients changes that protocol and is left to the owner. Rule pinned in src/tests/chem148SessionIsolation.test.ts.
+- Status: FIXED
+- Fix: f685494 (+ dc88764) — the QA driver sent no tab id; a real browser in private mode also sent none (sessionStorage throws). getTabId() now falls back to window.name (per tab, survives reload, never overwrites a foreign name), so every browser tab has its own session. Test: src/tests/bio042TabIdentityNoStorage.test.ts.
 
 ### CHEM-149 — Systemic: 74 of 186 observed lessons (40 %) never serve a figure, including diagram-dependent topics (phase diagrams, mechanisms, titration, electron-pushing, molecular shapes)
 
@@ -2757,7 +2771,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Edits to authored content do not reach production by themselves (create-only bootstrap, as noted in CLAUDE.md); the one content difference (#6) is a wrong key still live.
 - Reproducibility: Checked automatically on all cards observed in 182 lessons; only cards whose stems matched an authored probe were compared, so the true number may be higher.
 - Related defect: —
-- Status: OPEN
+- Status: FIXED
+- Fix: Converged 2026-10-06 (owner-approved production write). Read-only drift check of every ACTIVE probe in chemistry, physics and biology against the corpus (hash comparison, no row content pulled): 10 rows converged first (backup docs/qa/backups/probe-converge-2026-10-06.json), then 55 more (52 chemistry, 2 physics, 1 biology; backup docs/qa/backups/probe-converge-2026-10-06-b.json). Re-check: 55/55 match; no answer key moved to a different option. Undo: npx tsx scripts/assets/converge-probe-edits.ts --restore <backup>.
 
 ## Systemic observations (counts computed from the transcripts)
 

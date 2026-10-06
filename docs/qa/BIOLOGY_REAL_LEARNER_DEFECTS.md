@@ -11,8 +11,8 @@
 - P1: 4
 - P2: 22
 - P3: 16
-- Open: 29
-- Fixed: 13
+- Open: 27
+- Fixed: 15
 - Open (of which partially fixed): 4
 - Open (of which fixed in repo, production not converged): 0
 <!-- SUMMARY:END -->
@@ -439,8 +439,8 @@ Mastery/progress · Concurrency/session isolation.
 - Reproducibility: Counted automatically over all lessons at the end.
 - Also observed (233 occurrences in 142 lessons): #1 (A1) t16; #2 (A1) t18; #3 (A1) t6; #5 (A1) t10/t11; #6 (A1) t13; #7 (A1) t11; #8 (A1) t17; #9 (A1) t8/t9; #11 (A1) t9/t10; #12 (A1) t12/t13; #13 (A1) t14; #14 (A1) t11; #15 (A1) t16; #16 (A1) t20/t24/t25; #19 (A1) t19/t20; #20 (A1) t11/t12; #182 (A10) t21/t22; #183 (A10) t15; #186 (A10) t17; #187 (A10) t19; #189 (A10) t24/t28/t29; #191 (A10) t12/t15/t16; #193 (A10) t8/t9; #194 (A10) t8; #197 (A10) t18/t19; #198 (A10) t17; #21 (A2) t10/t13; #22 (A2) t11; #23 (A2) t9/t10; #24 (A2) t15; #25 (A2) t19/t20; #27 (A2) t11; #28 (A2) t17/t18; #29 (A2) t10; #30 (A2) t20; #31 (A2) t23/t24/t25; #32 (A2) t15/t16; #33 (A2) t15; #34 (A2) t19/t23/t24; #35 (A2) t10/t11; #36 (A2) t10/t11/t12; #37 (A2) t12/t16; #39 (A2) t23/t24; #40 (A2) t9; #41 (A3) t14; #43 (A3) t14/t15; #45 (A3) t20/t21; #46 (A3) t13; #47 (A3) t20/t21; #48 (A3) t15; #49 (A3) t15/t16; #50 (A3) t13/t14/t15; #51 (A3) t10/t11; #53 (A3) t14/t15/t16; #55 (A3) t16/t17/t18; #57 (A3) t15; #58 (A3) t9; #60 (A3) t18/t19; #61 (A4) t11; #62 (A4) t13; #63 (A4) t21/t25; #64 (A4) t17; #65 (A4) t14; #66 (A4) t10/t11; #67 (A4) t12; #70 (A4) t8; #71 (A4) t18; #72 (A4) t25; #73 (A4) t18/t19; #75 (A4) t12; #77 (A4) t11; #78 (A4) t14; #79 (A4) t13/t14; #80 (A4) t9/t10/t18; #81 (A5) t12; #82 (A5) t14/t15; #83 (A5) t13; #85 (A5) t13/t14; #86 (A5) t17/t20; #87 (A5) t15/t16; #88 (A5) t13/t14; #89 (A5) t13; #90 (A5) t16; #91 (A5) t12/t13; #92 (A5) t14/t15; #93 (A5) t24/t25; #94 (A5) t17; #96 (A5) t10/t11; #98 (A5) t11/t12; #99 (A5) t14/t18/t19; #100 (A5) t18/t19; #101 (A6) t16; #102 (A6) t11; #105 (A6) t16/t17; #106 (A6) t8; #107 (A6) t16; #108 (A6) t19; #112 (A6) t8/t9; #113 (A6) t7; #118 (A6) t11/t12; #120 (A6) t16/t17; #121 (A7) t19/t20; #122 (A7) t10; #123 (A7) t17; #124 (A7) t17; #125 (A7) t15/t16; #128 (A7) t12; #129 (A7) t21; #130 (A7) t9/t10; #132 (A7) t13/t16/t17; #135 (A7) t8; #136 (A7) t17/t18/t19; #137 (A7) t19/t20; #139 (A7) t11; #140 (A7) t14; #141 (A8) t16; #142 (A8) t13; #148 (A8) t9; #149 (A8) t8; #150 (A8) t20/t21; #151 (A8) t13/t14; #152 (A8) t6/t8; #153 (A8) t20/t21; #155 (A8) t17/t18/t19; #156 (A8) t11; #158 (A8) t25; #159 (A8) t18/t19; #160 (A8) t12/t15; #161 (A9) t9/t10; #162 (A9) t17; #163 (A9) t11/t12; #165 (A9) t13/t14; #166 (A9) t17/t18; #169 (A9) t14; #170 (A9) t11/t15; #171 (A9) t13/t14; #172 (A9) t20/t21; #173 (A9) t14; #175 (A9) t11/t12; #176 (A9) t16/t17; #178 (A9) t9; #180 (A9) t12/t13
 - Related defect: —
-- Status: OPEN — owner decision
-- Fix: Same mechanism as CHEM-033: TeachingHistory holds one concept, so a concept switch resets the asked-question ledger; a durable per-concept ledger is a deferred primitive. In this run the shared-session driver shape (BIO-042) also interleaved lessons.
+- Status: FIXED
+- Fix: 957978b — same mechanism as CHEM-033: the asked-question ledger held one concept and was reset by a concept switch. Ledgers of concepts left behind are kept in the session snapshot and restored on return (session-scoped, capped at 24). Test: src/tests/chem033LedgerSurvivesConceptSwitch.test.ts.
 
 ### BIO-019 — Most cards have only 2 options (Yes/No, True/False, two statements), so guessing succeeds 50 % of the time
 
@@ -879,8 +879,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: A learner with two tabs or two devices is taught the wrong lesson while progress is recorded against the lesson named in the session (same defect as CHEM-148 in the Chemistry log).
 - Reproducibility: Reproduced 2 of 2 same-account probes (accounts 1 and 5). Cross-account: 4 accounts (1, 6, 7, 9) opened lesson #30 simultaneously with unique marker words — no foreign marker in any reply (the tutor never echoed its own marker either: weak evidence of isolation, not proof).
 - Related defect: —
-- Status: OPEN — owner decision
-- Fix: Same cause as CHEM-148: a request without tab identity resumes the newest session (sessionLessonPointer.ts, PCD-004A); the QA driver sent none. New finding: a REAL browser also sends none when storage is unavailable (private mode — tabIdentity getTabId() returns null), so two private-mode tabs share one session. No server-only fix is safe: without identity, a reload and a second tab look the same. Proposed fix (owner decision): an in-memory per-page tab id in tabIdentity.ts when storage is unavailable — at the cost of a fresh session on a private-mode reload.
+- Status: FIXED
+- Fix: f685494 — a real browser in private mode sent no tab id (sessionStorage throws), so tabs shared the newest session. getTabId() now falls back to window.name: a per-tab id that survives a reload and is never written over a foreign window.name. The QA driver's own case (no tab id at all) is the CHEM-148 driver shape. Test: src/tests/bio042TabIdentityNoStorage.test.ts.
 
 ## Systemic observations (counts computed from the transcripts)
 
