@@ -24,8 +24,8 @@ describe('the production item', () => {
     const mcq = probeToMcq(cuAg)!
     expect(mcq).not.toBeNull()
     expect(mcq.options.some((o) => o === 'Yes' || o === 'Yes here')).toBe(false)
-    expect(mcq.options.join(' ')).toContain('COMPARISON')
-    expect(mcq.options[mcq.correctIndex]).toContain('COMPARISON')
+    expect(mcq.options.join(' ')).toContain('comparison') // capitals lowered at serve (CHEM-003, 2026-10-05)
+    expect(mcq.options[mcq.correctIndex]).toContain('comparison')
   })
 })
 

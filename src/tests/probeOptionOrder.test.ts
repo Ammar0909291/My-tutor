@@ -7,6 +7,7 @@
  * graded correct on every authored question. probeToMcq now presents a
  * deterministic, question-keyed permutation.
  */
+import { lowerEmphasis } from '@/lib/teaching/authoredProseForLearner'
 import { describe, expect, it } from 'vitest'
 import { presentationOrder, probeToMcq } from '@/lib/teaching/gateAssessment'
 import { BIOLOGY_PROBES } from '@/lib/teaching/assets/biologySeedAssets'
@@ -47,11 +48,15 @@ describe('the served order', () => {
     // authored text exactly, so the key still moves with its choice.
     const full = (m: NonNullable<typeof served[number]['m']>, i: number) =>
       m.rationales?.[i] ? `${m.options[i]} — ${m.rationales[i]}` : m.options[i]
+    // The author's capitals-for-emphasis are lowered at serve (CHEM-003,
+    // 2026-10-05, lowerEmphasis); the text is otherwise the authored text.
     for (const { p, m } of served) {
-      const authored = p.choices!.find((c) => c.isCorrect)!.text.trim()
-      expect(full(m!, m!.correctIndex).replace(/\s[—–]\s/, ' — ')).toBe(authored.replace(/\s[—–]\s/, ' — '))
-      expect(m!.options.map((_, i) => full(m!, i).replace(/\s[—–]\s/, ' — ')).sort())
-        .toEqual(p.choices!.map((c) => c.text.trim().replace(/\s[—–]\s/, ' — ')).sort())
+      // Compared case-insensitively: a split rationale starts its own sentence.
+      const authored = p.choices!.find((c) => c.isCorrect)!.text.trim().toLowerCase()
+      expect(full(m!, m!.correctIndex).replace(/\s[—–]\s/, ' — ').toLowerCase()).toBe(authored.replace(/\s[—–]\s/, ' — '))
+      expect(m!.options.map((_, i) => full(m!, i).replace(/\s[—–]\s/, ' — ').toLowerCase()).sort())
+        .toEqual(p.choices!.map((c) => c.text.trim().toLowerCase().replace(/\s[—–]\s/, ' — ')).sort())
+      expect(full(m!, m!.correctIndex)).toBe(lowerEmphasis(full(m!, m!.correctIndex)))
     }
   })
 

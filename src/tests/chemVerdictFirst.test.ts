@@ -49,3 +49,15 @@ describe('the correction carries no reviewer capitals (CHEM-003, live re-drive)'
     expect(r.text).not.toMatch(/HYDROGEN|LOWEST/)
   })
 })
+
+describe('authored card text carries no reviewer capitals (CHEM-003, live re-drive #68)', () => {
+  it('probeToMcq lowers emphasis in question and options; the key is unchanged', async () => {
+    const { probeToMcq } = await import('@/lib/teaching/gateAssessment')
+    const m = probeToMcq({ stem: 'In a titration, is the endpoint the same thing as the equivalence point?', choices: [
+      { text: 'No. The EQUIVALENCE point is chemical; the ENDPOINT is where the indicator changes', isCorrect: true },
+      { text: 'Yes, they are always identical', isCorrect: false },
+    ] } as never)!
+    expect(m.options.join(' ')).not.toMatch(/EQUIVALENCE|ENDPOINT/)
+    expect(m.options[m.correctIndex]).toMatch(/^No\. The equivalence point is chemical/)
+  })
+})

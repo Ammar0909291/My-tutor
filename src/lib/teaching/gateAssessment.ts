@@ -55,6 +55,7 @@
  * read as one rather than be papered over with a server-invented question.
  */
 
+import { lowerEmphasis } from './authoredProseForLearner'
 import { stripAuthoringLabel, containsOptionList, OPTION_LINE_RE } from './gateProbeContract'
 import { hasProseMultipleChoice } from './proseMcqGuard'
 import { askedAnswerableQuestion } from './answerableTurn'
@@ -206,12 +207,17 @@ export function probeToMcq(probe: ConvertibleProbe): TutorMCQ | null {
   // what this adds is the ability for next turn's PROBE_OUTCOME to name which
   // authored probe it scored. Spread last and conditionally so a probe without
   // an assetId produces a byte-identical object to the previous behaviour.
+  // CHEM-003 (live re-drive 2026-10-05, #68): authored card text keeps the
+  // author's capitals ("No. The EQUIVALENCE point is chemical…"). Capitals
+  // only — lowerEmphasis is fingerprint-neutral (memoryFingerprint lower-cases),
+  // so the asked-question ledger and the re-ask rule are unaffected; the order
+  // above stays keyed on the authored question.
   return {
-    question,
-    options: shownOptions,
+    question: lowerEmphasis(question),
+    options: shownOptions.map(lowerEmphasis),
     correctIndex: shownCorrect,
     ...(probe.assetId ? { assetId: probe.assetId } : {}),
-    ...(split ? { rationales: order.map((i) => split.rationales[i]) } : {}),
+    ...(split ? { rationales: order.map((i) => lowerEmphasis(split.rationales[i])) } : {}),
   }
 }
 

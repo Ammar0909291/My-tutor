@@ -40,7 +40,7 @@ const FORMULA_RE = /^[CHONRSPX]+$/
 const SHORT_EMPHASIS = new Set(['TWO', 'AND', 'NOT', 'ALL', 'ONE', 'ANY', 'BUT', 'ARE', 'CAN', 'HAS', 'ITS', 'OWN', 'THE', 'FEW', 'BOTH', 'NON', 'NOR', 'ALL', 'NOW', 'YET', 'TOO', 'OUT'])
 const ROMAN_RE = /^[IVXLCDM]+$/
 
-function lowerEmphasis(text: string): string {
+export function lowerEmphasis(text: string): string {
   return text.replace(/(?<![\p{L}\p{N}])\p{Lu}{3,}(?![\p{L}\p{N}])/gu, (w, offset: number, whole: string) => {
     if (ACRONYMS.has(w) || ROMAN_RE.test(w) || (FORMULA_RE.test(w) && w.length <= 6)) return w
     if (NAMES.has(w)) return w[0] + w.slice(1).toLowerCase()
