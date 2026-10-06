@@ -1082,6 +1082,13 @@ export function requestedExampleForm(message: string): ExampleForm {
   return REAL_LIFE_FORM_RE.test(message ?? '') ? 'real_life' : 'concrete'
 }
 
+// PHYS-012 (2026-10-06): an example request answered γ ≈ 1.67, then "one hour
+// and forty-four minutes" (1.67 h is 1 h 40 min) — a conversion done silently.
+// Written out, the step can be checked by the learner and by the model itself.
+const ARITHMETIC_SHOWN =
+  'If the example uses numbers, write out every arithmetic step, including each unit conversion ' +
+  '(for example 0.67 h × 60 = 40 min), never only its result. '
+
 function concreteExampleDirective(hasEstablishedExample: boolean): string {
   const continuity = hasEstablishedExample
     ? 'An example for this concept has ALREADY been given earlier this lesson (tracked server-side). If the student is now asking for a DIFFERENT, more specific or more formal example — they may name it — give exactly that one; otherwise go deeper into the one already given rather than switching to an unrelated scenario.'
@@ -1093,6 +1100,7 @@ function concreteExampleDirective(hasEstablishedExample: boolean): string {
     'a particular physical system with actual values — and work it through so they can see the concept ' +
     'operating on it. If they named a specific object or structure, that IS the example: use exactly it. ' +
     'Do NOT substitute an everyday analogy or a story for it. ' +
+    ARITHMETIC_SHOWN +
     continuity
   )
 }
@@ -1107,6 +1115,7 @@ function realLifeExampleDirective(hasEstablishedExample: boolean): string {
     continuity + ' ' +
     'Give ONE vivid everyday scenario they have personally experienced, walk the ' +
     'concept through that scenario start to finish, and connect back in one sentence. ' +
+    ARITHMETIC_SHOWN +
     'No definitions this turn.'
   )
 }

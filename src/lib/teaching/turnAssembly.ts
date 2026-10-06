@@ -69,7 +69,16 @@ export interface GradedTurnFacts {
   conceptTitle?: string | null
   /** Option texts from EARLIER cards in this session (V5). */
   earlierOptions?: string[]
+  /**
+   * PHYS-011 (2026-10-06): the concept's authored misconceptions, as the
+   * sentences its misconception probes offer as wrong options. On a correct
+   * answer the teaching slot wrote "proper time is the LONGEST time" — this
+   * concept's own MC-2 — twice. Listed in the prompt as never-true.
+   */
+  knownWrong?: string[]
 }
+
+const MAX_KNOWN_WRONG = 6
 
 export interface TurnSlots {
   feedback: string | null
@@ -105,8 +114,15 @@ export function buildSlotSystemPrompt(f: GradedTurnFacts): string {
     '- teaching: null, or ONE short paragraph (under 80 words) that takes the lesson one small step further from this idea.',
     '- Neither field may contain a question or a question mark. Do not set a problem or list options. Do not mention any other question.',
     '- Use easy words and short sentences.',
+    ...knownWrongLines(f.knownWrong),
   ]
   return lines.filter((l) => l !== '').join('\n')
+}
+
+function knownWrongLines(known: string[] | undefined): string[] {
+  const list = (known ?? []).map((k) => k.trim()).filter(Boolean).slice(0, MAX_KNOWN_WRONG)
+  if (list.length === 0) return []
+  return ['- These are known WRONG beliefs about this topic. Never write any of them as true, in either field:', ...list.map((k) => `  * ${k.slice(0, 200)}`)]
 }
 
 /** V1: the model's reply as slots, or null when it is not the agreed JSON. */

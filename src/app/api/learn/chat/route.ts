@@ -6116,6 +6116,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               rationales: pendingMcqHoisted.rationales,
               earlierOptions: ta.previousCardOptions(historyMessages.filter((m) => m.role === 'assistant').map((m) => m.content)),
             }
+            // PHYS-011: the concept's authored misconceptions, never to be
+            // stated as true. The same cached per-concept query the fact-check
+            // shadow below already runs (one small read a concept per instance).
+            if (resolvedConceptId) {
+              try {
+                facts.knownWrong = await (await import('@/lib/teaching/factCheck')).loadFalseStatements(resolvedConceptId, teachingLang)
+              } catch { /* the slots work without it */ }
+            }
             const startedAt = Date.now()
             // NO CONVERSATION HISTORY. Measured in shadow (2026-10-02, physics
             // sample): with the recent turns sent as chat, the model continued
