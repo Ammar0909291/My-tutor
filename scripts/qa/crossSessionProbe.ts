@@ -86,12 +86,12 @@ async function partD(subject: string, orderA: number, orderB: number) {
   }
   const step = async (msg: string) => { await sleep(2500); return record(msg, await say(acct!.cookie, sid, msg)) }
   const answer = async () => { if (!card) return false; answered.add(card.question); return step(card.options[0]) }
-  record('open A', await openLesson(acct!.cookie, sid, ref(orderA)))
+  record('open A (next)', await openLesson(acct!.cookie, sid, ref(orderA), 'en', 'next'))
   for (let i = 0; i < 3; i++) { await step('quiz me'); await answer() }
   const answeredInA = answered.size
-  record('open B (same session)', await openLesson(acct!.cookie, sid, ref(orderB)))
+  record('open B (next, same session)', await openLesson(acct!.cookie, sid, ref(orderB), 'en', 'next'))
   await step('quiz me'); await answer()
-  record('back to A (same session)', await openLesson(acct!.cookie, sid, ref(orderA)))
+  record('back to A (resume, same session)', await openLesson(acct!.cookie, sid, ref(orderA), 'en', 'resume'))
   let repeats = 0
   for (let i = 0; i < 3; i++) { if (await step('quiz me')) repeats++; if (await answer()) repeats++ }
   console.log(JSON.stringify({ part: 'D', subject, orderA, orderB, sessionId: sid, answeredInA, repeatsAfterReturn: repeats }))
@@ -108,9 +108,7 @@ async function main() {
     await partC('physics', 134, 'wait, what is diffraction? explain diffraction first please')
   }
   if ((process.env.QA_PARTS ?? 'BC').includes('D')) {
-    await partD('chemistry', 151, 152)
-    await partD('biology', 21, 22)
-    await partD('physics', 134, 135)
+    for (const [subj, a, b] of (process.env.QA_SWITCH ?? 'chemistry:151:152').split(',').map((x) => x.split(':'))) await partD(subj, Number(a), Number(b))
   }
   console.log('READY-FOR-DB-READ (touch ' + GO + ' to delete the account)')
   for (let i = 0; i < 240 && !existsSync(GO); i++) await sleep(5000)

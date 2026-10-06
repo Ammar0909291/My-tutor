@@ -95,10 +95,13 @@ export async function openLesson(
    *  every existing probe used; ru/hi carry their own NAVIGATION RULE and
    *  their own opening instruction, so they are separately reachable. */
   teachingLanguage: 'en' | 'ru' | 'hi' = 'en',
+  /** The client sends 'next' for a lesson not yet started and 'resume' for
+   *  one in progress (lessonInitModeFor); 'restart' clears the lesson. */
+  mode: 'restart' | 'review' | 'resume' | 'next' = 'restart',
 ): Promise<TurnPayload> {
   return post('/api/learn/lesson-init', {
     sessionId,
-    mode: 'restart',
+    mode,
     lessonTitle: lesson.lessonTitle,
     lessonOrder: lesson.lessonOrder,
     topicSlug: lesson.topicSlug,
