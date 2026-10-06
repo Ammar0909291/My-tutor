@@ -100,6 +100,16 @@ export function normalizeMathDelimiters(text: string): string {
           i = end + 1
           continue
         }
+        // CHEM-066 (2026-10-05, chem.found.measurement): "something like
+        // $0.450$ kilograms". A bare number held tight between two dollars
+        // ("$0.450$", no space inside) is maths markup round a number, not an
+        // amount: an amount has one sign ("$5"), and "$5 and $10" has prose
+        // between them. The number is shown plain.
+        if (!/\d/.test(text[end + 1] ?? '') && /^\d[\d.,]*$/.test(inner) && !/\d/.test(text[i - 1] ?? '')) {
+          out.push(inner)
+          i = end + 1
+          continue
+        }
       }
     }
 

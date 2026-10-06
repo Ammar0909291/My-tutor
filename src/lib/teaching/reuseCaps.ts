@@ -72,11 +72,19 @@ export const NO_ANALOGY_APPENDIX =
  */
 const META_TALK_RE = /\b(?:the\s+system\s+(?:is\s+set\s+up|won(?:'|’)t|doesn(?:'|’)t)|(?:avoid|not|didn(?:'|’)t|did\s+not)\s+(?:just\s+)?repeat(?:ing)?\s+(?:the\s+)?(?:same|earlier|previous)\s+explanation|why\s+i(?:(?:'|’)m|\s+am|\s+haven(?:'|’)t|\s+have\s+not|\s+didn(?:'|’)t)\s+(?:not\s+)?(?:just\s+)?(?:given|giving|repeating|repeated|shown|showing)|i\s+wanted\s+to\s+first\s+acknowledge|repeat\s+the\s+same\s+explanation\s+verbatim)\b/i
 
+/**
+ * CHEM-102 (2026-10-05, chem.equil.buffer #64): mid-lesson, "Since our session
+ * time is wrapping up, let's pause here… See you next time!" — no session limit
+ * exists, and the next turn kept teaching. The caller runs this only when the
+ * lesson is not completing this turn.
+ */
+const INVENTED_SESSION_END_RE = /\b(?:(?:our|this|the)\s+(?:session|lesson)(?:\s+time)?\s+is\s+(?:wrapping\s+up|ending|almost\s+(?:over|up|done)|coming\s+to\s+an\s+end|nearly\s+(?:over|up))|(?:i(?:'|’)ll\s+)?see\s+you\s+next\s+time|until\s+next\s+time)\b/i
+
 export function stripMetaTalk(text: string): { text: string; removed: string[] } {
   const src = (text ?? '').trim()
   const removed: string[] = []
   const kept = src.split(/\n{2,}/).map((para) => (para.match(/(?:[^.!?]|[.!?](?=\S))+(?:[.!?]+|$)/g) ?? [para])
-    .filter((s) => { if (META_TALK_RE.test(s)) { removed.push(s.trim()); return false } return true })
+    .filter((s) => { if (META_TALK_RE.test(s) || INVENTED_SESSION_END_RE.test(s)) { removed.push(s.trim()); return false } return true })
     .join('').trim()).filter(Boolean).join('\n\n')
   if (removed.length === 0 || (kept.match(/\S+/g) ?? []).length < 8) return { text, removed: [] }
   return { text: kept, removed }

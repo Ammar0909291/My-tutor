@@ -1486,7 +1486,12 @@ const POINTS_AT_MISSING_OPTIONS =
  * never touched, and nothing is dropped if it would leave the reply empty.
  */
 const DEFERS_PRACTICE =
-  /^(?:(?:and|so|now)\s+)?(?:(?:just|please|feel free to)\s+)?(?:let me know|tell me|whenever you(?:'|’)re ready|when you(?:'|’)re ready|if you(?:'|’)d like|if you want)\b[^.!?]{0,90}\b(?:another|more|next|a)\s+(?:[a-z-]+\s+){0,2}(?:problem|question|quiz|check|one)\b[^.!?]{0,40}[.!]?$/i
+  /^(?:(?:and|so|now)\s+)?(?:(?:just|please|feel free to)\s+)?(?:let me know|tell me|whenever you(?:'|’)re ready|when you(?:'|’)re ready|if you(?:'|’)d like|if you want)\b[^.!?]{0,90}\b(?:another|more|next|a)\s+(?:[a-z-]+\s+){0,2}(?:problem|question|quiz|check|one)\b[^.!?]{0,80}[.!]?$/i
+// CHEM-021 (2026-10-05, #77): "Whenever you're ready, we can try a short
+// practice problem… or we can move on to the next idea. Let me know what you'd
+// like to do next." with a True/False card attached — a choice AND a card.
+const ASKS_WHAT_NEXT =
+  /^(?:(?:and|so|just|please)\s+)?(?:let me know|tell me)\s+(?:what|how)\s+you(?:'|’)d\s+like\s+to\s+(?:do|go|continue)(?:\s+next)?[.!]?$/i
 
 export function dropDeferredPracticeOffer(text: string, cardAttached: boolean): string {
   const t = typeof text === 'string' ? text : ''
@@ -1494,7 +1499,7 @@ export function dropDeferredPracticeOffer(text: string, cardAttached: boolean): 
   const paragraphs = t.split(/\n{2,}/)
   const out = paragraphs.map((para) => {
     const sentences = para.split(/(?<=[.!?])\s+/)
-    return sentences.filter((s) => !DEFERS_PRACTICE.test(s.trim())).join(' ')
+    return sentences.filter((s) => !DEFERS_PRACTICE.test(s.trim()) && !ASKS_WHAT_NEXT.test(s.trim())).join(' ')
   }).filter((p) => p.trim().length > 0).join('\n\n').trim()
   return out.length > 0 ? out : t
 }
@@ -1537,8 +1542,10 @@ const ANNOUNCES_A_CHECK =
 // "Pick the statement that best captures it." with nothing to pick
 // (phys.therm.third-law r2 s11, 2026-09-28) — an instruction to choose is a
 // promise of options.
+// CHEM-020 (2026-10-05, #151): "Here's a quick check—pick the statement that
+// best explains why phenol is a stronger acid than ethanol." with no card.
 const INSTRUCTS_A_CHOICE =
-  /^(?:(?:now|ok(?:ay)?|alright|so)[,\s]+)?(?:pick|choose|select|tap)\s+(?:the\s+)?(?:one|option|statement|answer|choice|best)\b[^.!?]{0,80}[.!]?$/i
+  /^(?:(?:now|ok(?:ay)?|alright|so)[,\s]+|here(?:'|’)s\s+(?:a\s+)?(?:quick\s+)?(?:check|question|quiz)\s*[—–:,-]\s*)?(?:pick|choose|select|tap)\s+(?:the\s+)?(?:one|option|statement|answer|choice|best)\b[^.!?]{0,80}[.!]?$/i
 
 const ANNOUNCES_A_CHECK_COLON = /^(?:[^.!?]{0,30}[,—–-]\s*)?here(?:(?:'|’)s| is)\b/i
 const ANNOUNCED_CHECK_NOUN_COLON = /\b(?:a|your|another|the next)\b[^.!?:]{0,40}\b(?:check|quiz|question|test)\b[^.!?:]{0,60}:$/i
@@ -1552,8 +1559,17 @@ const ANNOUNCED_CHECK_NOUN_COLON = /\b(?:a|your|another|the next)\b[^.!?:]{0,40}
 const PROMISES_A_CHOICE = /^(?:[^.!?]{0,30}[,—–-]\s*)?let(?:'|’)s\b[^.!?]{0,60}\b(?:quick\s+choice|choice|pick\s+out|choose\s+(?:one|the|between))\b[^.!?]{0,60}[.!]?$/i
 const PROMISES_A_LATER_QUESTION = /\b(?:i(?:'|’)ll|i\s+will)\s+(?:present|give|show|have|send|ask|bring)\b[^.!?]{0,40}\b(?:next\s+)?(?:question|check|quiz)\b|\blet\s+me\s+know\s+when\s+you(?:'|’)d\s+like\s+to\s+move\s+on\b/i
 const PROMISES_A_WALKTHROUGH = /^(?:(?:sure|ok(?:ay)?|alright|great)[,\s—–-]*)?let(?:'|’)s\s+(?:walk|go)\s+through\b[^.!?]{0,90}(?:one\s+(?:part|step)\s+at\s+a\s+time|together|step\s+by\s+step)[^.!?]{0,30}[.!]?$/i
+// CHEM-061 (2026-10-05, #21, "quiz me"): "Let's see if you can apply that
+// reasoning." then a figure caption and no question.
+const PROMISES_A_TRY = /^(?:[^.!?]{0,30}[,—–-]\s*)?let(?:'|’)s\s+see\s+(?:if|whether)\s+you\s+can\b[^.!?:]{0,60}[.!]?$/i
+// CHEM-078 (2026-10-05, #154, "ok"): the whole reply was "test0, this is
+// genuinely tricky — let me try a completely different angle." A lead-in to an
+// explanation; with nothing after it, a dead end (the fallback teaches instead).
+const PROMISES_A_NEW_ANGLE = /\blet\s+me\s+(?:try|take|give\s+you)\s+(?:a\s+|an\s+)?(?:completely\s+|totally\s+|whole\s+)?(?:different|new|another|fresh)\s+(?:angle|way|approach|explanation)\b[^.!?]{0,30}[.!]?$/i
 const announcesACheck = (sentence: string): boolean =>
   PROMISES_A_CHOICE.test(sentence)
+  || PROMISES_A_TRY.test(sentence)
+  || PROMISES_A_NEW_ANGLE.test(sentence)
   || PROMISES_A_LATER_QUESTION.test(sentence)
   || PROMISES_A_WALKTHROUGH.test(sentence)
   || ANNOUNCES_A_CHECK.test(sentence)

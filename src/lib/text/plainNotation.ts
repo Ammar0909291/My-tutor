@@ -87,7 +87,23 @@ export function flattenPipeTables(text: string): string {
   return out.join('\n')
 }
 
-/** Both rewrites; what every learner-facing string passes through. */
+/**
+ * CHEM-071 (2026-10-05, #118): "silicon tetrachloride (silicon tetrachloride)",
+ * "hydrogen chloride (hydrogen chloride) gas" — a gloss that repeats the words
+ * before it. The parenthesis goes when it equals the same number of words
+ * just before it (case-insensitive); a parenthesis with anything else in it
+ * (a formula, an abbreviation) is kept.
+ */
+export function collapseEchoedGloss(text: string): string {
+  if (!text || !text.includes('(')) return text
+  return text.replace(/\s*\(([^()\n]{2,60})\)/g, (m, inner: string, offset: number, all: string) => {
+    const words = inner.trim().split(/\s+/)
+    const before = all.slice(0, offset).trimEnd().split(/\s+/).slice(-words.length)
+    return before.join(' ').toLowerCase() === words.join(' ').toLowerCase() ? '' : m
+  })
+}
+
+/** All three rewrites; what every learner-facing string passes through. */
 export function plainNotation(text: string): string {
-  return typesetCaretNotation(flattenPipeTables(text))
+  return collapseEchoedGloss(typesetCaretNotation(flattenPipeTables(text)))
 }

@@ -6741,6 +6741,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         }
       }
       mcqHoisted = gateMcqHoisted ?? mcqParse.mcq
+      // CHEM-002 (2026-10-05, every completed lesson observed): "You've already
+      // finished Aromaticity… Press 'Start next lesson'" arrived WITH a new
+      // card for the finished lesson — the gate had still picked a probe. The
+      // close is the whole turn; re-opening is lesson-init's job (restart/review).
+      if (serveLessonComplete) mcqHoisted = null
       // Separate override, same shape and same reason as the CLOSING one just
       // below. See inventedProbeGuard.ts.
       if (modelProbeWithheld) mcqHoisted = null
@@ -11355,6 +11360,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       cleanText = (await import('@/lib/text/plainNotation')).plainNotation(cleanText)
       // BIO-015: feedback is said to the learner, never about "the learner".
       cleanText = (await import('@/lib/text/secondPerson')).toSecondPerson(cleanText)
+      // CHEM-093: "how electroplating workstest5!" — the name glued to a word.
+      cleanText = (await import('@/lib/text/secondPerson')).separateGluedName(cleanText, profile?.displayName ?? session.user.name ?? null)
 
       const { appendMcqToHistoryText } = await import('@/lib/teaching/mcq')
       const contentForHistory = appendMcqToHistoryText(cleanText, mcqHoisted)
