@@ -61,6 +61,8 @@ describe('wiring', () => {
   })
   it('lesson-init applies the carry-over on a fresh attempt, after the generic clear', () => {
     const src = readFileSync('src/app/api/learn/lesson-init/route.ts', 'utf8')
-    expect(src).toMatch(/\.\.\.\(attemptIsFreshStart \? clearTransientStateForNewAttempt\(\) : \{\}\),[\s\S]{0,400}teachingHistoryForNewAttempt\(snapshot\?\.teachingHistory, topicSlug \?\? null\)/)
+    expect(src).toMatch(/const ledgersCarried = attemptIsFreshStart\s+\? \(await import\('@\/lib\/teaching\/teachingHistory'\)\)\.teachingHistoryForNewAttempt\(snapshot\?\.teachingHistory, topicSlug \?\? null\)/)
+    // applied AFTER the generic clear in the same delta, so it overrides its null
+    expect(src.indexOf('...ledgersCarried,')).toBeGreaterThan(src.indexOf('...(attemptIsFreshStart ? clearTransientStateForNewAttempt() : {}),'))
   })
 })

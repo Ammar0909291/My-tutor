@@ -883,6 +883,12 @@ export async function POST(req: Request) {
       // excursion, the objective and the narrative arc) — see
       // attemptIsolation.ts, which is the single statement of this boundary
       // and of what it deliberately leaves alone.
+      // CHEM-033/BIO-018/PHYS-007: a fresh attempt clears THIS lesson's
+      // teaching history, never the asked-question ledgers of the other
+      // concepts this session already worked on. Overrides the null above.
+      const ledgersCarried = attemptIsFreshStart
+        ? (await import('@/lib/teaching/teachingHistory')).teachingHistoryForNewAttempt(snapshot?.teachingHistory, topicSlug ?? null)
+        : {}
       await writeSnapshotDelta(prisma, {
         sessionId,
         // PCD-004: the cursor, not the ingress version — the session-pointer
@@ -892,14 +898,9 @@ export async function POST(req: Request) {
           ...clearEpisodeForLessonOpen(),
           ...clearVisualSessionForNewClientView(),
           ...(attemptIsFreshStart ? clearTransientStateForNewAttempt() : {}),
-          // CHEM-033/BIO-018/PHYS-007: a fresh attempt clears THIS lesson's
-          // teaching history, never the asked-question ledgers of the other
-          // concepts this session already worked on (teachingHistoryForNewAttempt).
-          ...(attemptIsFreshStart
-            ? (await import('@/lib/teaching/teachingHistory')).teachingHistoryForNewAttempt(snapshot?.teachingHistory, topicSlug ?? null)
-            : {}),
           ...clearRenderedRealityForLessonOpen(), // CHEM-130: new lesson, empty screen
           questionLedger: recordQuestions(readQuestionLedger(snapshot?.questionLedger), routed.text),
+          ...ledgersCarried,
         },
         // Every other key here is pure state replacement (the same two nulls
         // as before). questionLedger is the one ACCUMULATIVE field in this
