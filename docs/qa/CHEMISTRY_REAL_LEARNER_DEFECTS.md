@@ -14,7 +14,7 @@
 - Open: 112
 - Fixed: 38
 - Open (of which partially fixed): 13
-- Open (of which fixed in repo, production not converged): 4
+- Open (of which fixed in repo, production not converged): 3
 <!-- SUMMARY:END -->
 
 **Fix pass (2026-10-05/06, batches A–F, commits dc88764 … dee8428):** each entry's **Status** / **Fix:** line names its commit, cause and evidence. Live re-check on production, disposable accounts deleted afterwards, `scripts/qa/chemDefectRedrive.ts` + `scripts/qa/sessionShareProbe.ts`:
@@ -429,8 +429,8 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (3 occurrences in 3 lessons): #2 (A1) tt2/t7; #116 (A7) tt2/t10; #20 (A2) tt14-t18
 - Notes on occurrences: #2 tt2/t7: same card twice, the repeat is the final mastery card · #116 tt2/t10: "Can iodine (I₂) displace chlorine from NaCl?" asked twice, last card of lesson; after-complete card repeats the HF card · #20 tt14-t18: every card repeated
 - Related defect: —
-- Status: FIXED IN REPO — awaiting production verification
-- Fix: 957978b — same mechanism and status as CHEM-033 (phenols #151 re-driven 2026-10-06: no answered card repeated; no concept switch occurred, so inconclusive). The repeated pKa point is model prose and is not checked.
+- Status: FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Fix: 957978b + afa7322 — same mechanism as CHEM-033, reproduced in production on the same lesson (chem.alc.phenols, A → B → A in one tab). Not deployed (Vercel 402); production re-test pending.
 
 ### CHEM-018 — Wrong-answer feedback talks about the student in the third person ("The learner assumed…")
 
@@ -727,8 +727,8 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (137 occurrences in 105 lessons): #2 (A1) tt2/t7/t-; #77 (A5) tt5/t13/t-; #116 (A7) tt2/t10/t-; #151 (A9) tt2/t12/t-; #134 (A8) tt4/t17/t-; #40 (A3) tt3/t19, t12/t20, t13/t21, t17/t23/t-; #3 (A1) tt2/t18/t-; #59 (A4) tt7/t10, t9/t11-12/t-; #79 (A5) tt4/t16, t5/t17-18, t8/t19, t9/t20, t14/t20-21/t-; #117 (A7) tt3/t16, t4?, t3-t19/t-; #171 (A10) tt4/t20, t5/t21, t8/t23, t14/t24, t15/t25/t-; #143 (A8) tt4/t13, t5/t14, t8/t15/t-; #30 (A2) tt3/t21, t4/t22, t8/t23/t-; #69 (A4) tt7/t14, t8/t15, t13/t16/t-; #89 (A5) tt12/t18/t-; #162 (A9) tt3/t8, t5/t11, t6/t12/t-; #31 (A2) tt3/t23, t4/t24, t7/t28, t6/t27/t-; #50 (A3) tt14/t15/t-; #90 (A5) tt7/t13, t8/t16, t9/t17/t-; #15 (A1) tt5/t18, t8/t19, t4/t16/t-; #131 (A7) tt3/t9, t4/t10/t-; #144 (A8) tt2/t22, t3/t23/t-; #145 (A8) tt9/t14, t10/t15/t-; #182 (A10) tt5/t14, t8/t18, t10/t19/t-; #132 (A7) tt3/t8, t5/t9/t-; #51 (A3) tt3/t11, t4/t12, t7/t13, t8/t14/t-; #183 (A10) tt4/t16, t5/t17, t15/t19/t-; #94 (A5) tt4/t14, t5/t15, t10/t13/t-; #165 (A9) tt5/t15, t9/t16, t4/t14/t-; #74 (A4) tt3/t15, t4/t16, t5/t17/t-; #149 (A8) tt3/t18, t4/t18/t-; #57 (A3) tt5/t20, t5/t21/t-; #4 (A1) t-; #7 (A1) t-; #11 (A1) t-; #13 (A1) t-; #14 (A1) t-; #17 (A1) t-; #18 (A1) t-; #172 (A10) t-; #173 (A10) t-; #175 (A10) t-; #176 (A10) t-; #177 (A10) t-; #178 (A10) t-; #179 (A10) t-; #180 (A10) t-; #184 (A10) t-; #186 (A10) t-; #20 (A2) t-; #21 (A2) t-; #23 (A2) t-; #27 (A2) t-; #28 (A2) t-; #29 (A2) t-; #33 (A2) t-; #35 (A2) t-; #36 (A2) t-; #41 (A3) t-; #43 (A3) t-; #44 (A3) t-; #45 (A3) t-; #46 (A3) t-; #48 (A3) t-; #53 (A3) t-; #54 (A3) t-; #55 (A3) t-; #56 (A3) t-; #60 (A4) t-; #61 (A4) t-; #63 (A4) t-; #65 (A4) t-; #66 (A4) t-; #67 (A4) t-; #68 (A4) t-; #70 (A4) t-; #80 (A5) t-; #82 (A5) t-; #83 (A5) t-; #86 (A5) t-; #87 (A5) t-; #88 (A5) t-; #100 (A6) t-; #101 (A6) t-; #102 (A6) t-; #103 (A6) t-; #106 (A6) t-; #119 (A7) t-; #120 (A7) t-; #125 (A7) t-; #129 (A7) t-; #136 (A8) t-; #137 (A8) t-; #139 (A8) t-; #140 (A8) t-; #141 (A8) t-; #142 (A8) t-; #148 (A8) t-; #150 (A8) t-; #152 (A9) t-; #155 (A9) t-; #156 (A9) t-; #159 (A9) t-; #160 (A9) t-; #161 (A9) t-
 - Notes on occurrences: #134 tt4/t17: final mastery card is the t4 card verbatim; after-complete card is the t6 card · #40 tt3/t19, t12/t20, t13/t21, t17/t23: every card repeated; mastery completes on the repeats · #3 tt2/t18: final mastery card is the t2 card · #59 tt7/t10, t9/t11-12: cards repeated · #79 tt4/t16, t5/t17-18, t8/t19, t9/t20, t14/t20-21: every card repeated · #117 tt3/t16, t4?, t3-t19: full-shell, neon-sign and applications cards all repeated; mastery on the repeats · #171 tt4/t20, t5/t21, t8/t23, t14/t24, t15/t25: cards repeated · #143 tt4/t13, t5/t14, t8/t15: cards repeated verbatim
 - Related defect: —
-- Status: FIXED IN REPO — awaiting production verification
-- Fix: 957978b — the asked-question ledger is kept per concept for the session and restored on return (unit test src/tests/chem033LedgerSurvivesConceptSwitch.test.ts; deployed 05b7868). Production redrive 2026-10-06 (9 chemistry lessons, 117 turns, one tab per lesson): 0 answered cards shown again — but no concept switch occurred in the run, so the fixed path itself was not exercised. Inconclusive.
+- Status: FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Fix: 957978b + afa7322. Production 2026-10-06 (disposable account, deploy 05b7868): REPRODUCED through the real client path — lesson A chem.alc.phenols (mode next) → lesson B chem.alc.ethers in the same tab (mode next) → back to A (mode resume): the answered EAS card was served again with unused authored probes still in the pool. Stored state confirmed the cause: opening B was a fresh attempt and lesson-init's new-attempt clear nulled the whole teaching history, so A's ledger was gone before the return (957978b's per-concept archive only survives switches inside one attempt). afa7322 makes lesson-init carry the OTHER concepts' ledgers across a fresh attempt (teachingHistoryForNewAttempt); a restart of A still starts A clean. Test: src/tests/ledgerSurvivesLessonSwitch.test.ts. NOT DEPLOYED: Vercel API 402 'Your Team exceeded our fair use limits and has been blocked'; production re-test pending. (An in-lesson excursion does not switch the ledger concept, so it is not this path.)
 
 ### CHEM-034 — Figure caption is a generic placeholder ("it's a general illustration related to the topic") and the figure ("Periodic Trends: Na vs Cl") does not match the lesson "Modern Periodic Law and Table"
 
@@ -2050,7 +2050,7 @@ Mastery/progress · Concurrency/session isolation.
 - Notes on occurrences: #177 tt?: 16 of 31 turns degraded, longest streak 8 · #28 tt?: 9 of 31 turns degraded, longest streak 6 · #45 tt?: 8 of 31 turns degraded · #158 tt?: 3 degraded turns · #45 tmultiple: degraded open + 4 degraded turns; the final degraded replies ("Let me ask you something concrete…", "I\x27m still getting my thoughts together…") are followed by "Let\x27s pause Vapour Pressure of Solutions here for now" — lesson marked needs-review although the learner was at c1/p1 · #68 tt1,t5,t6,t7: degraded fallback replies · #88 tt2,t3,t10,t12,t14: degraded fallback replies; t14 "what's one thing you notice or find surprising" on "give me example" · #109 tt1,t2,t7,t9,t12,t13: degraded fallback replies incl. raw "covers:" line (t9) and "what's one thing you notice" (t2)
 - Related defect: —
 - Status: OPEN — provider capacity; owner action
-- Fix: No code cause beyond 562c3c3. Production redrive 2026-10-06 at controlled load (one learner, sequential): 1 degraded turn in 117 (#42, an answer tap "Four" got "my answer didn't come through" and no verdict). Provider gaps unchanged: OPENROUTER_API_KEY missing (health endpoint), Gemini 402 earlier. Owner: provider keys/credits.
+- Fix: No code cause beyond 562c3c3. Production 2026-10-06 targeted probes: 6 degraded live replies in 36 turns while another session was running a Mathematics QA campaign on the same production deployment; graded answers still received their verdict. OPENROUTER_API_KEY missing (health endpoint). Owner: provider keys/credits and concurrent QA load.
 
 ### CHEM-108 — Newman-projection item keyed "Four" for "how many bonds does the FRONT carbon show?" while the explanation says only three are drawn (the C–C bond "is not drawn")
 
@@ -2723,8 +2723,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Contradictory feedback and an unanswered question; the learner cannot tell what was graded.
 - Reproducibility: Observed once (#165 t3–t4).
 - Related defect: —
-- Status: OPEN — not reproduced at controlled load
-- Fix: Production redrive 2026-10-06: 0 degraded turns replaced a card (0 degradedCardSwap in 117 turns; the single degraded turn carried no card). Mechanism remains the degraded path under provider overload (CHEM-107); re-test only under real concurrent load, which this loop deliberately avoided.
+- Status: OPEN — root cause not established
+- Fix: Production 2026-10-06 (targeted probes, 3 subjects): in every degraded live reply to a graded answer (5 observed), the learner still received the server's verdict and the correct answer — the graded-turn assembler serves the verdict even when the live model reply fails — and no card was swapped. The earlier case (#42, 2026-10-06 redrive: an answer tap got only "didn't come through") was not reproduced and its logs had expired (1-hour retention), so its cause (likely the 8 s assembler wait timing out) is not established. Not patched without evidence.
 
 ### CHEM-147 — Card key and feedback say lead has "three stable isotopes" (206, 207, 208); lead has four (also 204)
 
@@ -2759,8 +2759,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Per-account lesson context is shared across simultaneously open sessions, so a learner with two tabs (or a phone and a laptop) is taught the wrong lesson while progress is recorded against the one named in the session.
 - Reproducibility: Reproduced in 2 of 2 same-account probes: account 1 (orders 3, 5, 8: #5 and #8 taught #3 content) and account 5 (orders 20 Modern Periodic Law, 22 Ionization Energy, 25 Valency and Oxidation State: #20 and #22 taught #25 content — valency, sulfur [Ne]3s²3p⁴, "Valency and Oxidation State covers: …"; #22 t9 and #25 t9 were also a deferral and a degraded message). The lesson that supplies the content differs between probes, so the lead session is not simply the first or last. Not observed across accounts: 4 accounts running lesson #30 simultaneously with unique marker words showed no foreign marker in any reply (the tutor never echoed its own marker either, so this is weak evidence of isolation, not proof).
 - Related defect: —
-- Status: FIXED IN REPO — awaiting production verification
-- Fix: f685494 (+ dc88764) — getTabId() falls back to window.name when sessionStorage throws (private mode), so each browser tab keeps its own session. Unit-tested (src/tests/bio042TabIdentityNoStorage.test.ts) and deployed (05b7868, READY). Production re-test 2026-10-06 NOT achieved: the sandbox's egress proxy blocked the browser's script loads (ERR_TOO_MANY_RETRIES, 0 JS chunks), so the private-mode path could not be driven. Needs one real private-window check with two tabs.
+- Status: DEPLOYED — server path production-verified; private-mode browser path unverified
+- Fix: f685494 (+ dc88764), deployed in 05b7868. Production 2026-10-06 (crossSessionProbe part B): two tab ids → two separate sessions; a reload with the same tab id resumed the same session for each tab; each tab taught its own lesson (atomic radius / concentration cell). The private-mode client fallback (window.name) could not be exercised: the sandbox browser's traffic through the egress proxy fails intermittently (ERR_TOO_MANY_RETRIES, 502), so the page never reached the session request. Needs one real private-window check with two tabs.
 
 ### CHEM-149 — Systemic: 74 of 186 observed lessons (40 %) never serve a figure, including diagram-dependent topics (phase diagrams, mechanisms, titration, electron-pushing, molecular shapes)
 
