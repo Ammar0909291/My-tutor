@@ -82,7 +82,30 @@ export interface TeachingHistory {
   mcqMissed: string[]
   /** Fingerprints already given their one re-ask. Never re-asked again. */
   mcqReasked: string[]
+  /**
+   * CHEM-033 / BIO-018 / PHYS-007 (2026-10-06, owner-approved "fix the open
+   * defects"): this record holds ONE concept, and a turn on another concept (a
+   * prerequisite review, an excursion) replaced it with a fresh one — so every
+   * question the learner had already answered was askable again when the
+   * lesson came back (production, chemistry run: 305 learner × probe pairs
+   * graded twice in one session, 185 with another concept in between).
+   *
+   * The question and explanation ledgers of the concepts left behind are kept
+   * here, in the same session snapshot, and restored when that concept
+   * returns. Session-scoped only — not the deferred durable learner-state
+   * primitive. Bounded to the most recent MAX_ARCHIVED_CONCEPTS.
+   */
+  ledgerByConcept?: Record<string, ConceptLedger>
 }
+
+/** The parts of the record that say "already asked / already served". */
+export interface ConceptLedger {
+  mcqAsked: string[]
+  mcqMissed: string[]
+  mcqReasked: string[]
+  explanationsServed: string[]
+}
+const MAX_ARCHIVED_CONCEPTS = 24
 
 export type ConfidenceReading = 'high' | 'medium' | 'low'
 
@@ -122,6 +145,15 @@ export function readTeachingHistory(
         ...initialTeachingHistory(currentConceptId),
         ...s,
       }
+    }
+    // A different concept: archive its ledger, restore this one's.
+    const archive = readLedgerArchive(s.ledgerByConcept)
+    if (s.conceptId) archive[s.conceptId] = ledgerOf(s)
+    const restored = currentConceptId ? archive[currentConceptId] : undefined
+    return {
+      ...initialTeachingHistory(currentConceptId),
+      ...(restored ?? {}),
+      ledgerByConcept: trimArchive(archive, currentConceptId),
     }
   }
   return initialTeachingHistory(currentConceptId)
@@ -483,4 +515,31 @@ export function buildTeachingMemoryBlock(h: TeachingHistory | null | undefined):
  */
 export function clearTeachingHistoryForNewAttempt(): Record<string, unknown> {
   return { teachingHistory: null }
+}
+
+const strings = (v: unknown): string[] => (Array.isArray(v) ? v.filter((x): x is string => typeof x === 'string') : [])
+
+function ledgerOf(h: Partial<TeachingHistory>): ConceptLedger {
+  return {
+    mcqAsked: strings(h.mcqAsked),
+    mcqMissed: strings(h.mcqMissed),
+    mcqReasked: strings(h.mcqReasked),
+    explanationsServed: strings(h.explanationsServed),
+  }
+}
+
+function readLedgerArchive(raw: unknown): Record<string, ConceptLedger> {
+  const out: Record<string, ConceptLedger> = {}
+  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return out
+  for (const [k, v] of Object.entries(raw as Record<string, unknown>)) {
+    if (k && v && typeof v === 'object') out[k] = ledgerOf(v as Partial<TeachingHistory>)
+  }
+  return out
+}
+
+/** The current concept's entry is dropped (it lives on the record itself);
+ *  the rest are capped, most recently archived last (insertion order). */
+function trimArchive(archive: Record<string, ConceptLedger>, currentConceptId: string | null): Record<string, ConceptLedger> {
+  const entries = Object.entries(archive).filter(([k]) => k !== currentConceptId)
+  return Object.fromEntries(entries.slice(-MAX_ARCHIVED_CONCEPTS))
 }
