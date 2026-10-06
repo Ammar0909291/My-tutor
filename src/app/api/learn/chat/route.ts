@@ -6727,6 +6727,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // Separate override, same shape and same reason as the CLOSING one just
       // below. See inventedProbeGuard.ts.
       if (modelProbeWithheld) mcqHoisted = null
+      // CHEM-001 (live re-drive, 2026-10-05): "too many words" drew a MODEL-written
+      // card in 4 of 10 lessons ("Which coloured label marks the point…?") — the
+      // explain-again rung already denies the authored probe; the model's own
+      // card is the same "more to read", so it is held back too.
+      if (mcqHoisted !== null && gateMcqHoisted === null && mcqHoisted === mcqParse.mcq
+        && (await import('@/lib/teaching/adaptationRequest')).adaptationKind(learnerAuthoredMessage) === 'shorter') {
+        console.warn('[gate-assessment] ' + JSON.stringify({ event: 'model-probe-withheld', reason: 'learner-asked-for-shorter', conceptId: resolvedConceptId ?? null }))
+        mcqHoisted = null
+      }
       // A RELIEVED PROBE YIELDS TO A CLARIFYING QUESTION (2026-09-26, live QA).
       // Relief rides on a question-owned turn; when the model answered with
       // ONLY a clarifying question, the ungraded-question withhold deleted it

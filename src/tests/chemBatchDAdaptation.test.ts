@@ -64,3 +64,9 @@ describe('route wiring', () => {
     expect(ROUTE).toMatch(/next = ad\.trimToWordBudget\(adBody, ad\.shorterBudget\(previousReply\)\)/)
   })
 })
+
+describe('live re-drive: no model-written card on "too many words"', () => {
+  it('route holds the model card back when the learner asked for shorter', () => {
+    expect(ROUTE).toMatch(/adaptationKind\(learnerAuthoredMessage\) === 'shorter'\) \{\n\s+console\.warn\('\[gate-assessment\] ' \+ JSON\.stringify\(\{ event: 'model-probe-withheld', reason: 'learner-asked-for-shorter'/)
+  })
+})
