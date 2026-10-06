@@ -46,6 +46,7 @@ basic Physics knowledge, sometimes confused, sometimes wrong, asks "explain simp
 - Turns driven: 5,190 (402 served from stored "memory" cards, 87 degraded stock turns).
 - Defects recorded: 24 (PHYS-001 to PHYS-024) plus an out-of-scope Chemistry appendix (CHEM-A1..A8).
 - **Fix pass (2026-10-05/06):** FIXED 13 (001, 002, 003, 005, 008, 013 first half, 014, 015, 019, 021, 022 + 024 code part, 023) · NOT REPRODUCED 1 (018) · DEFERRED 10 (004, 006, 007, 009, 010, 017; owner decision: 011, 012, 016, 020). Commits and causes on each entry's **Fix:** line; full record `docs/history/physics-real-learner-fixes-2026-10-05.md`.
+- **Follow-up pass (2026-10-06, owner: "fix the open defects if they improve the app"):** FIXED +1 (007, the asked-question ledger survives a concept switch) · PARTIALLY FIXED 3 (011 and 012 prompt guards; 016 Hafele-Keating distractor, converged to production) · still DEFERRED 6 (004, 006, 009, 010, 017; owner decision: 020). Totals now: FIXED 14 · PARTIALLY FIXED 3 · NOT REPRODUCED 1 · DEFERRED 6.
 - Not tested: real browser controls (Predict/Practice/Test me/sliders/phone layout), the PHYS-021 trigger with natural wording, factual correctness of most numerical content outside the lessons read in depth (orders 1-9, 43, 55, 71-72, 76-78, 103, 134, 237 plus flag scans of all others).
 - Review depth: about 20 transcripts read closely; the other ~260 were scanned by automated flags (degraded, truncated, raw markup, repeats) and spot checks. A clean flag scan is NOT evidence of correctness.
 
@@ -114,8 +115,8 @@ Categories: Teaching · Adaptation · Lesson flow · Visuals · Numerical/factua
 - **Fix:** question order vs teaching (authored-probe selection before its prerequisite idea is taught) needs a sequencing design; not changed in this pass.
 
 ### PHYS-007 — [P2] [Lesson flow] The same question is asked repeatedly
-- **Concept:** `phys.opt.youngs-experiment`: *"What did Young's double-slit experiment establish about the nature of light?"* asked 3 times (correct answer already given), the "order m" card twice, *"what do you notice about the spacing of the bright peaks?"* three times (learner: *"i already said this before"*). **Related:** PCD-019. **Status:** DEFERRED
-- **Fix:** not changed. Note from the re-drive probe: an UNANSWERED card is deliberately re-offered on every "quiz me" until answered; the repeat of already-answered questions is a separate, unfixed ledger issue.
+- **Concept:** `phys.opt.youngs-experiment`: *"What did Young's double-slit experiment establish about the nature of light?"* asked 3 times (correct answer already given), the "order m" card twice, *"what do you notice about the spacing of the bright peaks?"* three times (learner: *"i already said this before"*). **Related:** PCD-019. **Status:** FIXED
+- **Fix:** 957978b — cause: the asked-question ledger (TeachingHistory) held one concept and was reset by a turn on another concept, so answered cards came back. The ledgers of concepts left behind are kept in the session snapshot and restored on return (session-scoped, capped at 24 concepts). An UNANSWERED card is still re-offered on "quiz me" by design. Test: src/tests/chem033LedgerSurvivesConceptSwitch.test.ts.
 
 ### PHYS-008 — [P3] [Adaptation] Wrong tone: "I'm sorry you're feeling stuck" when the learner points out repetition
 - **Learner:** *"the bright peaks are equal distance. i already said this before. the middle one is the biggest"* → *"I'm sorry you're feeling stuck—let's take a quick step back."* **Status:** FIXED
@@ -134,15 +135,15 @@ Categories: Teaching · Adaptation · Lesson flow · Visuals · Numerical/factua
 - **Learner:** answered the card *"What is PROPER time?"* correctly (*"The time measured by a clock travelling with the object"*).
 - **Tutor (feedback, 2 different turns):** *"…is the longest time measured between the same two events compared to any other inertial frame."* and *"…equals the longest elapsed time measured between the events. All other inertial frames will record a shorter time due to time dilation."*
 - **Why a defect:** proper time is the **shortest** interval; other frames measure **longer** times (Δt = γΔτ, which the same lesson teaches). It also contradicts the stored card shown earlier ("The shortest time between two events is always the one measured by a clock present at both").
-- **Reproducible:** yes (2 separate replies). **Related:** PCD-041 (self-contradiction). **Status:** DEFERRED — owner decision
-- **Fix:** text path found: a SERVED graded turn from the turn assembler — "That's right." + feedback slot + the model-written TEACHING slot, which said "longest" (rows 2026-10-04 22:55:05 and 22:57:54). Slots are validated structurally only. Proposal (prompt guard, not numeric verification): pass the concept's authored misconceptions (here MC-2 PROPER-TIME-IS-LONGER) to the slot prompt as "never state these as fact", or omit the free teaching slot on a correct answer. Not built.
+- **Reproducible:** yes (2 separate replies). **Related:** PCD-041 (self-contradiction). **Status:** PARTIALLY FIXED
+- **Fix:** c9a8688 — the graded-turn slot prompt now lists the concept's authored misconceptions (its misconception-probe distractors, e.g. MC-2 "proper time … must be the longer") as "known WRONG beliefs — never write any of them as true", from the same cached per-concept read the fact-check shadow uses. A prompt guard on model prose: it lowers the risk, it does not verify the output. Test: src/tests/phys011KnownWrongInSlots.test.ts.
 
 ### PHYS-012 — [P1] [Numerical/factual] Spaceship example: 1.67 hours stated as "one hour and forty-four minutes"
 - **Concept:** `phys.rel.time-dilation` · **Lesson:** order 237
 - **Learner:** *"this one is hard for me. can you give me example first, a simple one with a fast spaceship?"*
 - **Tutor:** γ ≈ 1.67 (correct) then *"…the Earth clocks record about one hour and forty‑four minutes."* 1.67 h = 1 h 40 min.
-- **Reproducible:** observed once (arithmetic). **Status:** DEFERRED — owner decision
-- **Fix:** free model prose on an example request (provider=groq, ESCALATE_TO_LLM). Numeric verification is closed (N1/N2/N3). Proposal: a prompt rule to show any hours-to-minutes conversion step ("0.67 × 60 = 40 min"). Not built.
+- **Reproducible:** observed once (arithmetic). **Status:** PARTIALLY FIXED
+- **Fix:** c9a8688 — both example directives (concrete and real-life) now require every arithmetic step and unit conversion to be written out ("0.67 h × 60 = 40 min"), so a slip is visible and checkable. Prompt rule on model prose; numeric verification stays closed (N1/N2/N3). Test: src/tests/phys011KnownWrongInSlots.test.ts.
 
 ### PHYS-013 — [P1] [Adaptation] Learner's correct arithmetic challenge met with filler, then a false excuse
 - **Learner:** *"thank you. but i am confused. 1.67 hours, i do 0.67 x 60 = 40 minutes. you said 44 minutes. which is right?"* → *"I hear you—these numbers can feel tricky right before the idea clicks."* (no answer). Learner: *"you did not answer me. is it 40 minutes or 44 minutes?"* → *"…The 44‑minute figure came from a slightly different speed factor that was rounded differently…"* (not true: it was an arithmetic slip; no such factor appears). **Status:** FIXED (first half) · **Related:** PCD-033
@@ -159,8 +160,8 @@ Categories: Teaching · Adaptation · Lesson flow · Visuals · Numerical/factua
 - **Fix:** 5b53ec8 — see PHYS-005.
 
 ### PHYS-016 — [P2] [Lesson flow/Teaching] Weak or unfair questions in Time Dilation
-- *Hafele-Keating* card had two options, one absurd ("optical illusion…"); the train card offered a fully worked solution versus a bare formula (answer obvious by completeness); that worked option states (γ−1) ≈ 5×10⁻¹⁴ where β²/2 = 5.6×10⁻¹⁴; the GPS and "PROPER time" cards were re-asked after being answered; the train card needs binomial approximation never taught. **Status:** DEFERRED — owner decision
-- **Fix:** the Hafele-Keating card is authored (`authoredSeedAssets.ts`, TDIL_PROBES, two options). The train card is NOT in the corpus (model-written). The bootstrap is create-only, so a corpus edit needs an owner-approved production row update to reach learners; proposal: add two plausible distractors to the Hafele-Keating card. Not changed.
+- *Hafele-Keating* card had two options, one absurd ("optical illusion…"); the train card offered a fully worked solution versus a bare formula (answer obvious by completeness); that worked option states (γ−1) ≈ 5×10⁻¹⁴ where β²/2 = 5.6×10⁻¹⁴; the GPS and "PROPER time" cards were re-asked after being answered; the train card needs binomial approximation never taught. **Status:** PARTIALLY FIXED
+- **Fix:** 1e8b961 — the Hafele-Keating card (authored, TDIL_PROBES) gets a plausible third option (MC-4 "an airliner is far too slow for time dilation; ordinary clock drift"), converged to production 2026-10-06 (backup docs/qa/backups/probe-converge-2026-10-06.json). Re-asking answered cards (GPS, PROPER time) is fixed by 957978b (see PHYS-007). Not fixed: the train card is model-written (not in the corpus), and its binomial-approximation step is untaught.
 
 ### PHYS-017 — [P2] [Lesson flow] Same-concept lesson 1 (SI Units): question text and attached card are about different things
 - **Date:** 2026-10-04 ≈23:20 UTC · **Concept:** `phys.meas.units` · **Lesson:** SI Units and Measurement (order 1), first attempt
