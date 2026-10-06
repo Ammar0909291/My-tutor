@@ -17,7 +17,8 @@
  * behave as one, i.e. the pre-PCD-004A behaviour.
  *
  * TOTAL: private mode, disabled storage and a partial `crypto` all degrade to
- * a usable id (or to `null`, which the server reads as "no preference").
+ * a usable id; `null` only outside a browser (the server reads that as "no
+ * preference").
  */
 const KEY = 'mytutor:tabId'
 
@@ -38,9 +39,19 @@ function randomId(): string {
 /**
  * This tab's id, minted once and reused for the tab's lifetime (including
  * across refreshes, which is what keeps a refresh a RESUME rather than a new
- * session). Returns null only when there is no usable storage at all, and the
- * server then behaves exactly as it did before this existed.
+ * session).
+ *
+ * BIO-042 / CHEM-148 (2026-10-06, owner-approved): with storage unavailable
+ * (private mode, storage disabled) this used to return null, the server then
+ * resumed the NEWEST session for every request, and two such tabs opening
+ * different lessons were all taught one lesson. `window.name` is per-tab, is
+ * kept across reloads of that tab and works without storage, so it carries
+ * the id there; only if that too fails is an id kept for the page's lifetime
+ * (a reload then starts a new session — the documented, accepted trade-off).
  */
+const NAME_PREFIX = 'mytutor:tab:'
+let pageLifetimeId: string | null = null
+
 export function getTabId(): string | null {
   if (typeof window === 'undefined') return null
   try {
@@ -50,10 +61,18 @@ export function getTabId(): string | null {
     window.sessionStorage.setItem(KEY, fresh)
     return fresh
   } catch {
-    // Private mode / storage disabled. Deliberately NOT falling back to an
-    // in-memory id: that would be regenerated on every refresh, so a refresh
-    // would stop matching its own session and would silently start creating a
-    // new one each time — worse than having no preference at all.
-    return null
+    // Private mode / storage disabled — see the note above.
+  }
+  try {
+    const name = typeof window.name === 'string' ? window.name : ''
+    if (name.startsWith(NAME_PREFIX) && name.length > NAME_PREFIX.length) return name.slice(NAME_PREFIX.length)
+    const fresh = pageLifetimeId ?? randomId()
+    // Never overwrite a name something else set; only claim an empty one.
+    if (name === '') window.name = NAME_PREFIX + fresh
+    pageLifetimeId = fresh
+    return fresh
+  } catch {
+    pageLifetimeId = pageLifetimeId ?? randomId()
+    return pageLifetimeId
   }
 }

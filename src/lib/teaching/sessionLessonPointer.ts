@@ -321,8 +321,9 @@ export function chooseResumableSession(input: {
 
   // NO TAB IDENTITY ⇒ NO PREFERENCE, so claims must not exclude anything and
   // the most recent session is resumed exactly as before PCD-004A. This is not
-  // a rare path: an older client sends nothing, and `getTabId()` returns null
-  // whenever storage is unavailable (private mode). Without this guard every
+  // a rare path: an older client or a non-browser caller sends nothing. (A
+  // private-mode browser used to send nothing too; since 2026-10-06, BIO-042,
+  // `getTabId()` keeps a per-tab id in window.name there.) Without this guard every
   // such request fell through to `create-new` and made a NEW session on every
   // load — the precise regression this rule exists to avoid. Caught by
   // sessionTabIdentity.test.ts, which held this module's own documented
