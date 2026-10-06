@@ -1485,8 +1485,14 @@ const POINTS_AT_MISSING_OPTIONS =
  * future practice is dropped, and only when a card is attached; teaching is
  * never touched, and nothing is dropped if it would leave the reply empty.
  */
+// Redrive 2026-10-06 (production, card on screen): "When you feel ready, just
+// let me know and we'll move on to a short multiple‑choice quiz…", "…and I'll
+// give you the first question." — "feel ready", "the first", and a non-ASCII
+// hyphen inside "multiple‑choice" were outside the phrase list.
 const DEFERS_PRACTICE =
-  /^(?:(?:and|so|now)\s+)?(?:(?:just|please|feel free to)\s+)?(?:let me know|tell me|whenever you(?:'|’)re ready|when you(?:'|’)re ready|if you(?:'|’)d like|if you want)\b[^.!?]{0,90}\b(?:another|more|next|a)\s+(?:[a-z-]+\s+){0,2}(?:problem|question|quiz|check|one)\b[^.!?]{0,80}[.!]?$/i
+  /^(?:(?:and|so|now)\s+)?(?:(?:just|please|feel free to)\s+)?(?:let me know|tell me|whenever you(?:'|’)re ready|when you(?:'|’)re ready|when you feel ready|if you(?:'|’)d like|if you want)\b[^.!?]{0,90}\b(?:another|more|next|a|the first|the next)\s+(?:[\p{L}\p{Pd}‑-]+\s+){0,2}(?:problem|question|quiz|check|one)\b[^.!?]{0,80}[.!]?$/iu
+// "Let's pause the quiz for a moment so…" with the quiz card attached.
+const PAUSES_THE_QUIZ = /^let(?:'|’)s\s+(?:pause|hold off on|put aside)\s+the\s+(?:quiz|questions?|check)\b[^.!?]{0,160}[.!]?$/i
 // CHEM-021 (2026-10-05, #77): "Whenever you're ready, we can try a short
 // practice problem… or we can move on to the next idea. Let me know what you'd
 // like to do next." with a True/False card attached — a choice AND a card.
@@ -1499,7 +1505,7 @@ export function dropDeferredPracticeOffer(text: string, cardAttached: boolean): 
   const paragraphs = t.split(/\n{2,}/)
   const out = paragraphs.map((para) => {
     const sentences = para.split(/(?<=[.!?])\s+/)
-    return sentences.filter((s) => !DEFERS_PRACTICE.test(s.trim()) && !ASKS_WHAT_NEXT.test(s.trim())).join(' ')
+    return sentences.filter((s) => !DEFERS_PRACTICE.test(s.trim()) && !ASKS_WHAT_NEXT.test(s.trim()) && !PAUSES_THE_QUIZ.test(s.trim())).join(' ')
   }).filter((p) => p.trim().length > 0).join('\n\n').trim()
   return out.length > 0 ? out : t
 }

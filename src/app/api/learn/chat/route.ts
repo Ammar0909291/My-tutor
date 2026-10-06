@@ -13376,6 +13376,20 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       const servedMcq = probeReleasedThisTurnHoisted
         ? undefined
         : (mcqForClient(resolvedQuestionServedFinal) ?? undefined)
+      // Redrive 2026-10-06: a HELD card re-offered under this reply is attached
+      // here, after the earlier "card on screen" drop (which only sees a card
+      // this turn produced) — "Let me know when you're ready to try a quick
+      // check" reached the learner beside it. Same drop, on what is served.
+      if (servedMcq) {
+        try {
+          const { dropDeferredPracticeOffer } = await import('@/lib/teaching/gateAssessment')
+          const trimmed = dropDeferredPracticeOffer(cleanText, true)
+          if (trimmed !== cleanText) {
+            console.log('[mcq] ' + JSON.stringify({ event: 'deferred-practice-offer-dropped', stage: 'served-card', conceptId: resolvedConceptId ?? null }))
+            cleanText = trimmed
+          }
+        } catch { /* a wording repair never breaks a turn */ }
+      }
       // ONE RECORD OF THIS VISUAL TURN (visual/turnRecord.ts): decision, tier,
       // reason and — read from the figure fields this response carries, and
       // nothing else — whether the learner actually receives a figure. The
