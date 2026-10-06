@@ -59,6 +59,7 @@
  * authored answer is strictly better than returning nothing.
  */
 import { stripLeadingFalseConfirmation } from './answerConfirmation'
+import { authoredProseForLearner } from './authoredProseForLearner'
 
 export interface TutorMcqLike {
   options?: unknown
@@ -192,7 +193,9 @@ export function stateCorrectionForWrongAnswer(
   // authored working was held back until the answer was graded. Now it is,
   // so the correction carries it — never a bare "the answer is: X".
   const why = correctRationale(input.probe)
-  const correction = why ? `Not quite — the answer is: ${answer} — ${why}` : `Not quite — the answer is: ${answer}`
+  // CHEM-003 (live re-drive 2026-10-05): the authored option is reviewer text —
+  // "HYDROGEN BONDING… the LOWEST boiling point" — lowered like any served asset.
+  const correction = authoredProseForLearner(why ? `Not quite — the answer is: ${answer} — ${why}` : `Not quite — the answer is: ${answer}`)
   // The model's own opening praise cannot stand under a correction. MEASURED
   // (production, 2026-09-27): replies to wrong answers opened "Great, you've
   // spotted …" — prepending the correction alone would leave "Not quite — the

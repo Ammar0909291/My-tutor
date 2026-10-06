@@ -58,3 +58,18 @@ describe('CHEM-139: a yes/no question is answered yes or no', () => {
     expect(p.choices!.map((c) => c.text.split(' — ')[0])).toEqual(['No', 'Yes'])
   })
 })
+
+describe('live re-drive follow-ups (2026-10-05)', () => {
+  it('a reply that was all about the missing picture gets the concept description, not a bare promise', () => {
+    const r = answerFigureQuestionWithoutFigure('The picture shows arrows on each bond. Let me know so I can describe it clearly for you.', 'In this lesson on Polarity we will look at dipoles.')
+    expect(r.text).toBe(`${NO_FIGURE_ON_SCREEN} In this lesson on Polarity we will look at dipoles.`)
+  })
+  it('route: the analogy/empathy caps run BEFORE the "too many words" trim, so a regeneration cannot undo it', () => {
+    const ROUTE = readFileSync('src/app/api/learn/chat/route.ts', 'utf8')
+    const caps = ROUTE.indexOf("const caps = await import('@/lib/teaching/reuseCaps')")
+    const shape = ROUTE.indexOf("const ad = await import('@/lib/teaching/adaptationRequest')")
+    expect(caps).toBeGreaterThan(0)
+    expect(shape).toBeGreaterThan(caps)
+    expect(ROUTE.indexOf('const regenerateWithAppendix = async')).toBeLessThan(caps)
+  })
+})

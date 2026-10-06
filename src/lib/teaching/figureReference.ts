@@ -792,12 +792,20 @@ const PRESENT_FIGURE_RE = /\b(?:the|this|that|your)\s+(?:picture|figure|diagram|
 const HONEST_NONE_RE = /\b(?:no|not\s+(?:a|any)|don'?t\s+have\s+(?:a|any)|isn'?t\s+(?:a|any))\s+(?:picture|figure|diagram|image)\b/i
 export const NO_FIGURE_ON_SCREEN = 'There is no picture in this lesson yet, so let me say it in words.'
 
-export function answerFigureQuestionWithoutFigure(text: string): { text: string; changed: boolean } {
+export function answerFigureQuestionWithoutFigure(text: string, conceptFallback?: string | null): { text: string; changed: boolean } {
   const src = (text ?? '').trim()
   if (HONEST_NONE_RE.test(src)) return { text, changed: false }
   const kept = (src.match(/(?:[^.!?\n]|[.!?](?=\S))+(?:[.!?]+|$)/g) ?? [])
     .map((s) => s.trim())
     .filter((s) => s && !PRESENT_FIGURE_RE.test(s))
+    // "Let me know so I can describe it clearly for you." — measured live
+    // (2026-10-05, chem.bond.polar-molecules): what is left after the picture
+    // talk goes is often a promise, not teaching.
+    .filter((s) => !/^(?:let me know|tell me|just say)\b/i.test(s))
     .join(' ')
-  return { text: kept ? `${NO_FIGURE_ON_SCREEN} ${kept}` : NO_FIGURE_ON_SCREEN, changed: true }
+  // A reply that was ALL about the missing picture leaves nothing to read:
+  // the concept's own description (retrieval, not invention) takes its place.
+  const thin = (kept.match(/\S+/g) ?? []).length < 15
+  const body = thin && conceptFallback ? [kept, conceptFallback].filter(Boolean).join(' ') : kept
+  return { text: body ? `${NO_FIGURE_ON_SCREEN} ${body}` : NO_FIGURE_ON_SCREEN, changed: true }
 }

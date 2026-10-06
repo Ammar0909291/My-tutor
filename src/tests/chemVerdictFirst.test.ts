@@ -40,3 +40,12 @@ describe('verdict first', () => {
     expect(stateCorrectionForWrongAnswer({ text: 'Both look clear.', correct: null, probe: probe as never }).added).toBe(false)
   })
 })
+
+describe('the correction carries no reviewer capitals (CHEM-003, live re-drive)', () => {
+  it('authored option text is lowered in the prepended correction', () => {
+    const p = { question: 'Is that because water molecules pack tightly?', options: ['No — water breaks the trend because of HYDROGEN BONDING; size alone predicts the LOWEST boiling point', 'Yes'], correctIndex: 0 }
+    const r = stateCorrectionForWrongAnswer({ text: '', correct: false, probe: p as never })
+    expect(r.text).toMatch(/hydrogen bonding/)
+    expect(r.text).not.toMatch(/HYDROGEN|LOWEST/)
+  })
+})

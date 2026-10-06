@@ -10401,7 +10401,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // is none — the reply says so and does not talk about one.
         if (!figureOnScreen && figureQuestionHoisted) {
           const { answerFigureQuestionWithoutFigure } = await import('@/lib/teaching/figureReference')
-          const honest = answerFigureQuestionWithoutFigure(cleanText)
+          let fallbackForFigure: string | null = null
+          if (resolvedConceptId) {
+            const { getKGNode } = await import('@/lib/curriculum/knowledgeGraph')
+            const node = getKGNode(resolvedConceptId)
+            if (node?.title && node.description) fallbackForFigure = (await import('@/lib/teaching/conceptFallback')).conceptFallbackText(node.title, node.description)
+          }
+          const honest = answerFigureQuestionWithoutFigure(cleanText, fallbackForFigure)
           if (honest.changed) {
             console.warn('[figure-reference] ' + JSON.stringify({ event: 'figure-question-without-figure', conceptId: resolvedConceptId ?? null }))
             cleanText = honest.text
@@ -11231,33 +11237,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         return sweepRe(stripRe(routedRe.text ?? '')).trim()
       }
 
-      // CHEM-001 / CHEM-015: "too many words", "example with numbers", "step by
-      // step" — the reply must have the asked-for shape. Shorter is a trim to
-      // whole sentences; numbers/steps get one regeneration with the shape
-      // stated, kept only if it complies. See adaptationRequest.ts.
-      if (!serveLessonComplete && provider !== 'degraded') {
-        try {
-          const ad = await import('@/lib/teaching/adaptationRequest')
-          const kind = ad.adaptationKind(learnerAuthoredMessage)
-          const { splitVisualPointer: splitAd } = await import('@/lib/teaching/visual/visualAcknowledgement')
-          const { body: adBody, pointer: adPointer } = splitAd(cleanText)
-          const { mostRecentAssistantText: prevAd } = await import('@/lib/teaching/remediationOutputContract')
-          const previousReply = prevAd(learnSession.messages, MessageRole.ASSISTANT)
-          if (kind && adBody.trim() && !ad.honoursAdaptation(kind, adBody, previousReply)) {
-            let next: string | null = null
-            if (kind === 'shorter') {
-              next = ad.trimToWordBudget(adBody, ad.shorterBudget(previousReply))
-            } else {
-              const retry = await regenerateWithAppendix(ad.adaptationAppendix(kind))
-              if (retry && ad.honoursAdaptation(kind, retry, previousReply)) next = retry
-            }
-            console.log('[adaptation-check] ' + JSON.stringify({ kind, honoured: false, repaired: next !== null, charsBefore: adBody.length, charsAfter: next?.length ?? null }))
-            if (next) cleanText = adPointer ? `${next}\n\n${adPointer}` : next
-          }
-        } catch { /* non-fatal — a repair must never break a turn */ }
-      }
-
       // CHEM-041 / CHEM-039: an empathy opener only for a struggle the learner
+      // (runs BEFORE the shape check: a regeneration here must never undo the
+      // "too many words" trim — measured live 2026-10-05, 1,361 -> 117 -> 798 chars)
       // voiced and never twice in four replies; an analogy at most twice in
       // four replies (past that, one regeneration without one). See reuseCaps.ts.
       if (!serveLessonComplete && provider !== 'degraded' && provider !== 'memory') {
@@ -11280,6 +11262,32 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               const naPointer = splitNa(cleanText).pointer
               cleanText = naPointer ? `${retry}\n\n${naPointer}` : retry
             }
+          }
+        } catch { /* non-fatal — a repair must never break a turn */ }
+      }
+
+      // CHEM-001 / CHEM-015: "too many words", "example with numbers", "step by
+      // step" — the reply must have the asked-for shape. Shorter is a trim to
+      // whole sentences; numbers/steps get one regeneration with the shape
+      // stated, kept only if it complies. See adaptationRequest.ts.
+      if (!serveLessonComplete && provider !== 'degraded') {
+        try {
+          const ad = await import('@/lib/teaching/adaptationRequest')
+          const kind = ad.adaptationKind(learnerAuthoredMessage)
+          const { splitVisualPointer: splitAd } = await import('@/lib/teaching/visual/visualAcknowledgement')
+          const { body: adBody, pointer: adPointer } = splitAd(cleanText)
+          const { mostRecentAssistantText: prevAd } = await import('@/lib/teaching/remediationOutputContract')
+          const previousReply = prevAd(learnSession.messages, MessageRole.ASSISTANT)
+          if (kind && adBody.trim() && !ad.honoursAdaptation(kind, adBody, previousReply)) {
+            let next: string | null = null
+            if (kind === 'shorter') {
+              next = ad.trimToWordBudget(adBody, ad.shorterBudget(previousReply))
+            } else {
+              const retry = await regenerateWithAppendix(ad.adaptationAppendix(kind))
+              if (retry && ad.honoursAdaptation(kind, retry, previousReply)) next = retry
+            }
+            console.log('[adaptation-check] ' + JSON.stringify({ kind, honoured: false, repaired: next !== null, charsBefore: adBody.length, charsAfter: next?.length ?? null }))
+            if (next) cleanText = adPointer ? `${next}\n\n${adPointer}` : next
           }
         } catch { /* non-fatal — a repair must never break a turn */ }
       }
