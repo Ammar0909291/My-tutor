@@ -4,14 +4,14 @@
 ## Summary (generated from the entries below; counts verified automatically)
 
 - Total lessons in Mathematics curriculum (`/api/curriculum?subject=mathematics`): 908
-- Total lessons studied (full lesson session driven, ≥3 turns): 93
-- Total lessons covered (≥1 account): 93  (10.2 %)
-- Total defects: 24
+- Total lessons studied (full lesson session driven, ≥3 turns): 166
+- Total lessons covered (≥1 account): 166  (18.3 %)
+- Total defects: 25
 - P0: 0
 - P1: 2
-- P2: 17
+- P2: 18
 - P3: 5
-- Open: 24
+- Open: 25
 - Fixed: 0
 <!-- SUMMARY:END -->
 
@@ -67,6 +67,12 @@ answers deliberately wrong), sometimes confused; uses "explain simpler", "give m
   in headless Chromium (local `next dev`, no database) and screenshotted; text outside its drawing box was counted automatically;
   (3) a sample of the screenshots was reviewed by eye and compared with the concept taught. Pixel-exact rendering on real devices
   and the production CDN was **not tested**.
+- **The deployed app changed while this run was in progress** (other sessions fix Chemistry/Biology on the same `main`, and Vercel deploys
+  every push). Production deployments seen during the run (UTC, from the Vercel API): `42b44da` live since 03:32 on 2026-10-06 (Chemistry
+  fixes, already live when the Mathematics run started at about 07:41); `6f6ccaa` from 08:25 (includes the Biology fixes `c4a6afc`:
+  cards, wording, promises, figures, budget close); later deployments carried documentation only. Each transcript records its start time;
+  the register compares mechanism rates for lessons started before and after 08:27 (see "Deployment changes during the run"). The
+  Chemistry/Biology fixes are subject-scoped, so they were not expected to change Mathematics, and the comparison below is what was measured.
 - Systemic mechanisms (empathy openers, analogy loops, repeated cards, pauses, degraded replies, curriculum-goal dumps, wrong-concept
   figures, math-delimiter errors) are **linked automatically** from all transcripts by pattern; their occurrence lists are computed,
   not hand-picked. One-off content errors were found by reading each transcript; a regex check of simple "a op b = c" arithmetic
@@ -99,7 +105,7 @@ P0 = learning completely blocked · P1 = seriously damages learning/trust · P2 
 - Actual behaviour: The lesson is closed as needs-review in the middle of the lesson.
 - Why it is a defect: The learner is ejected from a lesson they have not finished; same mechanism as CHEM-016 and BIO-002.
 - Reproducibility: Seen on the first 10 finished Mathematics lessons; counted at the end of the run.
-- Also observed (42 occurrences in 42 lessons): #2 (A1) t22; #6 (A1) t22; #7 (A1) t13; #8 (A1) t18; #9 (A1) t24; #820 (A10) t29; #821 (A10) t19; #824 (A10) t21; #825 (A10) t16; #826 (A10) t23; #92 (A2) t18; #93 (A2) t22; #98 (A2) t23; #183 (A3) t14; #276 (A4) t26; #277 (A4) t13; #278 (A4) t24; #280 (A4) t14; #281 (A4) t17; #282 (A4) t26; #283 (A4) t13; #368 (A5) t18; #369 (A5) t13; #370 (A5) t25; #457 (A6) t21; #459 (A6) t19; #462 (A6) t20; #463 (A6) t24; #464 (A6) t22; #548 (A7) t7; #549 (A7) t15; #552 (A7) t19; #553 (A7) t23; #554 (A7) t29; #557 (A7) t22; #639 (A8) t18; #642 (A8) t28; #733 (A9) t22; #734 (A9) t19; #735 (A9) t22; #736 (A9) t28; #737 (A9) t23
+- Also observed (72 occurrences in 72 lessons): #2 (A1) t22; #6 (A1) t22; #7 (A1) t13; #8 (A1) t18; #9 (A1) t24; #14 (A1) t19; #15 (A1) t19; #820 (A10) t29; #821 (A10) t19; #824 (A10) t21; #825 (A10) t16; #826 (A10) t23; #831 (A10) t21; #833 (A10) t19; #92 (A2) t18; #93 (A2) t22; #98 (A2) t23; #103 (A2) t23; #105 (A2) t26; #183 (A3) t14; #192 (A3) t29; #196 (A3) t19; #198 (A3) t23; #200 (A3) t14; #276 (A4) t26; #277 (A4) t13; #278 (A4) t24; #280 (A4) t14; #281 (A4) t17; #282 (A4) t26; #283 (A4) t13; #285 (A4) t21; #368 (A5) t18; #369 (A5) t13; #370 (A5) t25; #377 (A5) t20; #379 (A5) t19; #380 (A5) t22; #381 (A5) t16; #457 (A6) t21; #459 (A6) t19; #462 (A6) t20; #463 (A6) t24; #464 (A6) t22; #468 (A6) t21; #469 (A6) t23; #471 (A6) t30; #548 (A7) t7; #549 (A7) t15; #552 (A7) t19; #553 (A7) t23; #554 (A7) t29; #557 (A7) t22; #559 (A7) t19; #560 (A7) t26; #561 (A7) t22; #563 (A7) t19; #639 (A8) t18; #642 (A8) t28; #650 (A8) t20; #651 (A8) t22; #653 (A8) t26; #733 (A9) t22; #734 (A9) t19; #735 (A9) t22; #736 (A9) t28; #737 (A9) t23; #739 (A9) t19; #740 (A9) t20; #741 (A9) t18; #742 (A9) t24; #743 (A9) t19
 - Related defect: —
 - Status: OPEN
 
@@ -117,7 +123,7 @@ P0 = learning completely blocked · P1 = seriously damages learning/trust · P2 
 - Actual behaviour: No verdict and no explanation; a generic sentence plus a new card.
 - Why it is a defect: The learner is never told they were wrong and gets no correction; same as BIO-016.
 - Reproducibility: Seen in lesson 639 turn 15.
-- Also observed (54 occurrences in 39 lessons): #94 (A2) t12/t9; #6 (A1) t9/t20; #1 (A1) t4; #4 (A1) t4; #5 (A1) t5; #9 (A1) t11; #820 (A10) t9; #821 (A10) t4/t7/t10/t13; #822 (A10) t16; #824 (A10) t6; #825 (A10) t4; #826 (A10) t3/t9; #93 (A2) t11; #184 (A3) t3; #187 (A3) t11/t16/t24; #189 (A3) t4/t14; #190 (A3) t10; #275 (A4) t3; #276 (A4) t5; #278 (A4) t5/t21; #280 (A4) t3; #282 (A4) t24; #370 (A5) t12; #372 (A5) t5/t10; #374 (A5) t7; #456 (A6) t4; #458 (A6) t9; #459 (A6) t11; #462 (A6) t8; #464 (A6) t6; #547 (A7) t4; #549 (A7) t3; #553 (A7) t5; #639 (A8) t15; #640 (A8) t4; #643 (A8) t12; #646 (A8) t6/t15; #731 (A9) t10/t17; #733 (A9) t20
+- Also observed (90 occurrences in 69 lessons): #94 (A2) t12/t9; #6 (A1) t9/t20; #1 (A1) t4; #4 (A1) t4; #5 (A1) t5; #9 (A1) t11; #10 (A1) t27; #11 (A1) t4; #12 (A1) t6/t13; #16 (A1) t4; #17 (A1) t3/t11; #18 (A1) t3; #19 (A1) t5; #820 (A10) t9; #821 (A10) t4/t7/t10/t13; #822 (A10) t16; #824 (A10) t6; #825 (A10) t4; #826 (A10) t3/t9; #828 (A10) t15; #831 (A10) t13; #833 (A10) t3/t16; #834 (A10) t4/t17; #93 (A2) t11; #102 (A2) t3; #106 (A2) t9; #184 (A3) t3; #187 (A3) t11/t16/t24; #189 (A3) t4/t14; #190 (A3) t10; #275 (A4) t3; #276 (A4) t5; #278 (A4) t5/t21; #280 (A4) t3; #282 (A4) t24; #288 (A4) t4; #290 (A4) t3; #370 (A5) t12; #372 (A5) t5/t10; #374 (A5) t7; #375 (A5) t22; #456 (A6) t4; #458 (A6) t9; #459 (A6) t11; #462 (A6) t8; #464 (A6) t6; #468 (A6) t14; #469 (A6) t7; #471 (A6) t3; #547 (A7) t4; #549 (A7) t3; #553 (A7) t5; #558 (A7) t8; #560 (A7) t7/t21; #561 (A7) t13; #563 (A7) t10; #639 (A8) t15; #640 (A8) t4; #643 (A8) t12; #646 (A8) t6/t15; #648 (A8) t7/t15; #649 (A8) t17; #651 (A8) t14; #652 (A8) t11; #653 (A8) t15; #731 (A9) t10/t17; #733 (A9) t20; #738 (A9) t4; #743 (A9) t13
 - Notes on occurrences: #94 t12: Correct card answer ("Because the ones digit of the top number is smaller…") answered with an addition story about 7 + 5 apples, no verdict · #6 t9: Card answer "Solve Math Problem" -> "the two equations you wrote for the garden" (the learner wrote nothing)
 - Related defect: —
 - Status: OPEN
@@ -136,7 +142,7 @@ P0 = learning completely blocked · P1 = seriously damages learning/trust · P2 
 - Actual behaviour: The same question is repeated with shuffled options.
 - Why it is a defect: A repeated card is answered from memory; it inflates correct counts and wastes learner time; same as BIO-018.
 - Reproducibility: Seen in several of the first 10 lessons (92, 547, 729).
-- Also observed (120 occurrences in 51 lessons): #1 (A1) t24.5; #3 (A1) t7/t8.5; #4 (A1) t21/t22.5; #7 (A1) t7/t8; #820 (A10) t26; #822 (A10) t21/t22.5; #825 (A10) t11/t12; #827 (A10) t21/t22/t23.5; #92 (A2) t9/t10; #94 (A2) t27/t28; #96 (A2) t24/t25/t26.5; #97 (A2) t21/t24/t25/t26; #98 (A2) t18/t19; #184 (A3) t22/t23/t24/t25.5; #185 (A3) t12.5; #187 (A3) t29/t30; #189 (A3) t26; #190 (A3) t19/t20/t21/t22.5; #275 (A4) t10/t11.5; #276 (A4) t15/t19/t22/t23; #277 (A4) t7/t8; #279 (A4) t17.5; #280 (A4) t11/t12; #281 (A4) t11/t12/t13; #283 (A4) t9/t10; #366 (A5) t8; #367 (A5) t18/t19/t20.5; #368 (A5) t8/t9/t12; #370 (A5) t19/t20/t21; #371 (A5) t10/t11; #373 (A5) t13/t14/t18/t23; #457 (A6) t11/t12/t13/t14; #458 (A6) t16.5; #460 (A6) t21/t26/t27/t28/t29; #461 (A6) t7/t8.5; #465 (A6) t9.5; #547 (A7) t12/t13.5; #549 (A7) t10/t11; #550 (A7) t17; #553 (A7) t17/t18/t19; #554 (A7) t24; #556 (A7) t18.5; #642 (A8) t22/t23/t24/t25; #643 (A8) t22/t23/t24/t25.5; #647 (A8) t24/t30; #729 (A9) t11/t12.5; #730 (A9) t13/t14/t15.5; #731 (A9) t22/t23/t24.5; #732 (A9) t9/t10.5; #734 (A9) t10; #736 (A9) t18/t19/t20/t21
+- Also observed (203 occurrences in 85 lessons): #1 (A1) t24.5; #3 (A1) t7/t8.5; #4 (A1) t21/t22.5; #7 (A1) t7/t8; #10 (A1) t17/t27; #16 (A1) t13/t14/t15.5; #17 (A1) t15/t16/t17.5; #820 (A10) t26; #822 (A10) t21/t22.5; #825 (A10) t11/t12; #827 (A10) t21/t22/t23.5; #828 (A10) t20/t23/t24.5; #829 (A10) t24/t25/t26/t27.5; #830 (A10) t7/t8.5; #832 (A10) t13/t14.5; #834 (A10) t23/t24.5; #92 (A2) t9/t10; #94 (A2) t27/t28; #96 (A2) t24/t25/t26.5; #97 (A2) t21/t24/t25/t26; #98 (A2) t18/t19; #100 (A2) t8.5; #102 (A2) t13/t14.5; #103 (A2) t20; #106 (A2) t26; #184 (A3) t22/t23/t24/t25.5; #185 (A3) t12.5; #187 (A3) t29/t30; #189 (A3) t26; #190 (A3) t19/t20/t21/t22.5; #192 (A3) t25; #193 (A3) t15/t16/t17; #200 (A3) t9/t10; #275 (A4) t10/t11.5; #276 (A4) t15/t19/t22/t23; #277 (A4) t7/t8; #279 (A4) t17.5; #280 (A4) t11/t12; #281 (A4) t11/t12/t13; #283 (A4) t9/t10; #284 (A4) t15/t16/t17/t18; #286 (A4) t15.5; #287 (A4) t14/t15.5; #288 (A4) t7/t18/t19/t20.5; #290 (A4) t24/t25/t26/t27.5; #366 (A5) t8; #367 (A5) t18/t19/t20.5; #368 (A5) t8/t9/t12; #370 (A5) t19/t20/t21; #371 (A5) t10/t11; #373 (A5) t13/t14/t18/t23; #376 (A5) t8/t12/t13; #377 (A5) t10/t11/t12/t13; #381 (A5) t13/t14; #457 (A6) t11/t12/t13/t14; #458 (A6) t16.5; #460 (A6) t21/t26/t27/t28/t29; #461 (A6) t7/t8.5; #465 (A6) t9.5; #466 (A6) t12/t13/t14/t15; #467 (A6) t16/t17.5; #469 (A6) t13/t14; #471 (A6) t25; #547 (A7) t12/t13.5; #549 (A7) t10/t11; #550 (A7) t17; #553 (A7) t17/t18/t19; #554 (A7) t24; #556 (A7) t18.5; #562 (A7) t17/t18.5; #564 (A7) t22/t23/t24.5; #642 (A8) t22/t23/t24/t25; #643 (A8) t22/t23/t24/t25.5; #647 (A8) t24/t30; #648 (A8) t21/t22.5; #649 (A8) t21/t25; #650 (A8) t12/t13/t14; #653 (A8) t20/t21/t22; #729 (A9) t11/t12.5; #730 (A9) t13/t14/t15.5; #731 (A9) t22/t23/t24.5; #732 (A9) t9/t10.5; #734 (A9) t10; #736 (A9) t18/t19/t20/t21; #741 (A9) t8/t12/t13
 - Related defect: —
 - Status: OPEN
 
@@ -158,7 +164,7 @@ P0 = learning completely blocked · P1 = seriously damages learning/trust · P2 
 - Related defect: —
 - Status: OPEN
 
-### MATH-005 — "show me step by step" is answered with a new question instead of steps
+### MATH-005 — "show me step by step" / "give me example" is answered with a new question instead of the steps or the example
 
 - Severity: P2
 - Category: Lesson flow
@@ -167,12 +173,12 @@ P0 = learning completely blocked · P1 = seriously damages learning/trust · P2 
 - Mathematics concept: `math.meas.simple-function`
 - Lesson/order: #820
 - Learner message: show me step by step
-- Tutor response: "Which term in the expression \(4\cdot\mathbf 1_{[0,2)} + 1\cdot\mathbf 1_{[2,4)} + 0\cdot\mathbf 1_{[4,5]}\) corresponds to the interval \([2,4)\)?"
+- Tutor response: "Which term in the expression \(4\cdot\mathbf 1_{[0,2)} + 1\cdot\mathbf 1_{[2,4)} + 0\cdot\mathbf 1_{[4,5]}\) corresponds to the interval \([2,4)\)?" Also lesson 651: "show me step by step" -> "Can you walk me through the steps you’d take to compute the regression coefficients…?"; "give me example with numbers" -> "Can you walk me through the reasoning behind that idea?"
 - Expected behaviour: A numbered worked example, as in other lessons.
 - Actual behaviour: A counter-question about a term.
 - Why it is a defect: The learner asked to be shown, and is quizzed instead.
 - Reproducibility: Seen in lesson 820 turn 11.
-- Also observed (2 occurrences in 2 lessons): #820 (A10) t11; #97 (A2) t6
+- Also observed (5 occurrences in 4 lessons): #820 (A10) t11; #97 (A2) t6; #284 (A4) t9; #651 (A8) t5/t9
 - Related defect: —
 - Status: OPEN
 
@@ -190,7 +196,7 @@ P0 = learning completely blocked · P1 = seriously damages learning/trust · P2 
 - Actual behaviour: A canned apology; the learner must resend.
 - Why it is a defect: Groq failed (provider=degraded) and nothing recovered it; the learner loses the turn. Counted per instance.
 - Reproducibility: Seen repeatedly under 10-account load.
-- Also observed (120 occurrences in 49 lessons): #5 (A1) t7; #7 (A1) t11/t12; #8 (A1) t16/t17; #9 (A1) t15/t18/t20; #821 (A10) t1; #822 (A10) t14/t18; #824 (A10) t3; #826 (A10) t11/t12/t19/t21; #827 (A10) t1/t10/t12; #93 (A2) t5; #94 (A2) t30; #97 (A2) t21/t29; #98 (A2) t5/t6/t9/t10/t15; #186 (A3) t5; #187 (A3) t1/t2/t13/t14/t17; #189 (A3) t11/t30; #191 (A3) t1/t3/t5; #276 (A4) t25/t26; #277 (A4) t11; #278 (A4) t1/t3/t9/t22; #279 (A4) t3; #281 (A4) t7; #282 (A4) t1/t2/t6/t7/t14/t21; #283 (A4) t12; #368 (A5) t16; #369 (A5) t2; #372 (A5) t17; #373 (A5) t17/t25; #460 (A6) t14/t19; #463 (A6) t2/t3/t8/t11/t12/t22; #464 (A6) t18/t21; #465 (A6) t2; #549 (A7) t5; #552 (A7) t6/t15; #554 (A7) t17/t27; #556 (A7) t2/t6/t10/t11; #557 (A7) t1/t14/t15; #639 (A8) t9; #640 (A8) t2/t15; #642 (A8) t8/t11/t14/t18/t20; #643 (A8) t15; #646 (A8) t2/t13; #647 (A8) t4/t12/t13/t21; #730 (A9) t4/t7; #731 (A9) t15; #733 (A9) t9/t18; #735 (A9) t17; #736 (A9) t4/t14/t23; #737 (A9) t7/t11/t12/t15/t16/t17/t21
+- Also observed (221 occurrences in 92 lessons): #5 (A1) t7; #7 (A1) t11/t12; #8 (A1) t16/t17; #9 (A1) t15/t18/t20; #12 (A1) t1; #19 (A1) t3; #821 (A10) t1; #822 (A10) t14/t18; #824 (A10) t3; #826 (A10) t11/t12/t19/t21; #827 (A10) t1/t10/t12; #828 (A10) t7/t10/t11; #829 (A10) t1; #831 (A10) t1; #834 (A10) t6; #93 (A2) t5; #94 (A2) t30; #97 (A2) t21/t29; #98 (A2) t5/t6/t9/t10/t15; #99 (A2) t6/t7/t11/t13/t19/t20/t21/t22/t23; #101 (A2) t14; #103 (A2) t11/t13; #105 (A2) t2/t16/t19/t20/t21; #106 (A2) t16/t18/t29; #186 (A3) t5; #187 (A3) t1/t2/t13/t14/t17; #189 (A3) t11/t30; #191 (A3) t1/t3/t5; #192 (A3) t1/t7/t8/t12/t14/t15/t21/t25/t27/t28; #193 (A3) t2; #194 (A3) t18; #195 (A3) t5; #198 (A3) t10; #199 (A3) t4; #276 (A4) t25/t26; #277 (A4) t11; #278 (A4) t1/t3/t9/t22; #279 (A4) t3; #281 (A4) t7; #282 (A4) t1/t2/t6/t7/t14/t21; #283 (A4) t12; #284 (A4) t1; #285 (A4) t6/t8/t10/t19; #288 (A4) t2/t3; #368 (A5) t16; #369 (A5) t2; #372 (A5) t17; #373 (A5) t17/t25; #375 (A5) t1/t4/t11/t14/t15/t17/t19; #376 (A5) t12; #380 (A5) t21; #381 (A5) t3/t6; #460 (A6) t14/t19; #463 (A6) t2/t3/t8/t11/t12/t22; #464 (A6) t18/t21; #465 (A6) t2; #466 (A6) t11; #468 (A6) t2; #470 (A6) t19; #471 (A6) t5/t28; #549 (A7) t5; #552 (A7) t6/t15; #554 (A7) t17/t27; #556 (A7) t2/t6/t10/t11; #557 (A7) t1/t14/t15; #558 (A7) t6/t10; #559 (A7) t7; #561 (A7) t5/t6/t11; #562 (A7) t5; #563 (A7) t1; #564 (A7) t9/t20; #639 (A8) t9; #640 (A8) t2/t15; #642 (A8) t8/t11/t14/t18/t20; #643 (A8) t15; #646 (A8) t2/t13; #647 (A8) t4/t12/t13/t21; #648 (A8) t2/t8/t9/t10/t11/t12; #650 (A8) t6; #651 (A8) t10/t11; #653 (A8) t2/t8/t10; #730 (A9) t4/t7; #731 (A9) t15; #733 (A9) t9/t18; #735 (A9) t17; #736 (A9) t4/t14/t23; #737 (A9) t7/t11/t12/t15/t16/t17/t21; #738 (A9) t7/t13/t15/t18; #740 (A9) t3; #741 (A9) t17; #742 (A9) t3/t12; #743 (A9) t15
 - Related defect: —
 - Status: OPEN
 
@@ -242,7 +248,7 @@ P0 = learning completely blocked · P1 = seriously damages learning/trust · P2 
 - Actual behaviour: A half-sentence that refers to a missing question, and no teaching.
 - Why it is a defect: The first message of the lesson teaches nothing and is confusing for a new learner.
 - Reproducibility: Seen in lesson 185 turn 1.
-- Also observed (15 occurrences in 14 lessons): #732 (A9) t1; #278 (A4) t1; #279 (A1) t1; #8 (A1) t1; #820 (A10) t1; #822 (A10) t1; #97 (A2) t1; #185 (A3) t1; #279 (A4) t1; #281 (A4) t1; #283 (A4) t1; #462 (A6) t1; #647 (A8) t1; #735 (A9) t1
+- Also observed (16 occurrences in 15 lessons): #732 (A9) t1; #278 (A4) t1; #279 (A1) t1; #8 (A1) t1; #820 (A10) t1; #822 (A10) t1; #97 (A2) t1; #185 (A3) t1; #279 (A4) t1; #281 (A4) t1; #283 (A4) t1; #462 (A6) t1; #470 (A6) t1; #647 (A8) t1; #735 (A9) t1
 - Notes on occurrences: #732 t1: Opener is the single sentence "Consider the set of all rational numbers whose square is less than 2." — no teaching follows · #278 t1: Opener replaced by degraded apology · #279 t1: Opener is only "Take a look at the figure beside this message — it\x27s a general illustration related to the topic." · #8 t1: Opener "Now rewrite the same idea using mathematical language: m = 5 kg" — refers to an idea never introduced in this lesson
 - Related defect: —
 - Status: OPEN
@@ -261,8 +267,8 @@ P0 = learning completely blocked · P1 = seriously damages learning/trust · P2 
 - Actual behaviour: A 2D triangle/rectangle/circle card unrelated to solids, volume or Euler's formula.
 - Why it is a defect: The learner is told to study a figure that does not show the concept; surface area, volume and polyhedra cannot be seen in it. Rendered with the app's own VisualCard (screenshot reviewed).
 - Reproducibility: Every lesson that carries visual=geometry_shape.
-- Also observed (10 occurrences in 9 lessons): #278 (A4) t16/t-; #274 (A4) t-; #275 (A4) t-; #276 (A4) t-; #277 (A4) t-; #279 (A4) t-; #280 (A4) t-; #282 (A4) t-; #283 (A4) t-
-- Notes on occurrences: #278 t16: Lesson Coordinate Plane: "i dont understand this picture" is answered by describing triangle/square/rectangle/circle/pentagon/hexagon labels — the Geometry Shapes card is the only figure
+- Also observed (18 occurrences in 17 lessons): #278 (A4) t16/t-; #287 (A7) t1; #274 (A4) t-; #275 (A4) t-; #276 (A4) t-; #277 (A4) t-; #279 (A4) t-; #280 (A4) t-; #282 (A4) t-; #283 (A4) t-; #284 (A4) t-; #285 (A4) t-; #286 (A4) t-; #287 (A4) t-; #288 (A4) t-; #289 (A4) t-; #290 (A4) t-
+- Notes on occurrences: #278 t16: Lesson Coordinate Plane: "i dont understand this picture" is answered by describing triangle/square/rectangle/circle/pentagon/hexagon labels — the Geometry Shapes card is the only figure · #287 t1: Tutor: "among the shapes you see a stretched circle, the ellipse, sitting next to the square, triangle and regular circle" — the Geometry Shapes card in the lesson shows no ellipse (Ellipse lesson)
 - Related defect: —
 - Status: OPEN
 
@@ -280,7 +286,7 @@ P0 = learning completely blocked · P1 = seriously damages learning/trust · P2 
 - Actual behaviour: The same x-y grid with an unrelated dot.
 - Why it is a defect: The picture cannot help understand the concept, and the tutor builds sentences around it to justify it.
 - Reproducibility: Every lesson that carries visual=coordinate_plane.
-- Also observed (17 occurrences in 16 lessons): #641 (A8) t1/t-; #183 (A3) t-; #185 (A3) t-; #186 (A3) t-; #188 (A3) t-; #190 (A3) t-; #191 (A3) t-; #638 (A8) t-; #639 (A8) t-; #640 (A8) t-; #642 (A8) t-; #643 (A8) t-; #644 (A8) t-; #645 (A8) t-; #646 (A8) t-; #647 (A8) t-
+- Also observed (33 occurrences in 32 lessons): #641 (A8) t1/t-; #183 (A3) t-; #185 (A3) t-; #186 (A3) t-; #188 (A3) t-; #190 (A3) t-; #191 (A3) t-; #192 (A3) t-; #193 (A3) t-; #194 (A3) t-; #195 (A3) t-; #196 (A3) t-; #197 (A3) t-; #198 (A3) t-; #199 (A3) t-; #200 (A3) t-; #380 (A5) t-; #381 (A5) t-; #638 (A8) t-; #639 (A8) t-; #640 (A8) t-; #642 (A8) t-; #643 (A8) t-; #644 (A8) t-; #645 (A8) t-; #646 (A8) t-; #647 (A8) t-; #648 (A8) t-; #649 (A8) t-; #651 (A8) t-; #652 (A8) t-; #653 (A8) t-
 - Notes on occurrences: #641 t1: Tutor: "Imagine the coordinate-plane figure on your screen as a picture of the null-hypothesis distribution (the bell curve)…" — the figure is an x-y grid with one dot, no bell curve
 - Related defect: —
 - Status: OPEN
@@ -299,7 +305,7 @@ P0 = learning completely blocked · P1 = seriously damages learning/trust · P2 
 - Actual behaviour: A fixed −5…5 line.
 - Why it is a defect: The tutor refers to points that are not on the figure.
 - Reproducibility: Every lesson that carries visual=number_line.
-- Also observed (5 occurrences in 5 lessons): #92 (A2) t-; #93 (A2) t-; #94 (A2) t-; #95 (A2) t-; #735 (A9) t-
+- Also observed (12 occurrences in 12 lessons): #92 (A2) t-; #93 (A2) t-; #94 (A2) t-; #95 (A2) t-; #99 (A2) t-; #101 (A2) t-; #102 (A2) t-; #103 (A2) t-; #104 (A2) t-; #105 (A2) t-; #106 (A2) t-; #735 (A9) t-
 - Related defect: —
 - Status: OPEN
 
@@ -352,7 +358,7 @@ P0 = learning completely blocked · P1 = seriously damages learning/trust · P2 
 - Actual behaviour: An unclosed display-math opener in the middle of a numbered list.
 - Why it is a defect: The client renders KaTeX only for balanced delimiters; the list after the opener will show as broken math or raw backslash text.
 - Reproducibility: Detected automatically by counting delimiters in every tutor reply; seen in 549 t14 and 457 t10.
-- Also observed (5 occurrences in 5 lessons): #457 (A6) t10; #464 (A6) t14; #549 (A7) t14; #554 (A7) t15; #557 (A7) t21
+- Also observed (6 occurrences in 6 lessons): #457 (A6) t10; #464 (A6) t14; #549 (A7) t14; #554 (A7) t15; #557 (A7) t21; #559 (A7) t8
 - Related defect: —
 - Status: OPEN
 
@@ -370,7 +376,7 @@ P0 = learning completely blocked · P1 = seriously damages learning/trust · P2 
 - Actual behaviour: A feeling statement and an emoji.
 - Why it is a defect: A struggling learner gets no help for the turn; same family as BIO-011 / CHEM canned empathy.
 - Reproducibility: Seen in lesson 5 turn 2; counted automatically.
-- Also observed (7 occurrences in 7 lessons): #4 (A1) t2; #5 (A1) t2; #820 (A10) t12; #822 (A10) t11; #826 (A10) t7; #276 (A4) t2; #638 (A8) t5
+- Also observed (8 occurrences in 8 lessons): #4 (A1) t2; #5 (A1) t2; #19 (A1) t2; #820 (A10) t12; #822 (A10) t11; #826 (A10) t7; #276 (A4) t2; #638 (A8) t5
 - Related defect: —
 - Status: OPEN
 
@@ -388,7 +394,7 @@ P0 = learning completely blocked · P1 = seriously damages learning/trust · P2 
 - Actual behaviour: The same stock opener on many different requests, and the learner's account label ("test4") used as a name.
 - Why it is a defect: Reads as scripted; same as BIO-003.
 - Reproducibility: Counted automatically over all Mathematics replies.
-- Also observed (127 occurrences in 70 lessons): #1 (A1) t2/t15/t16; #2 (A1) t15; #4 (A1) t2/t8; #5 (A1) t2; #6 (A1) t12/t21; #8 (A1) t6/t12; #9 (A1) t12/t14; #820 (A10) t3/t12/t20; #821 (A10) t16; #822 (A10) t2/t11; #824 (A10) t16; #825 (A10) t15; #826 (A10) t7/t13; #827 (A10) t2/t14; #92 (A2) t2/t16; #93 (A2) t4/t9/t17; #94 (A2) t4; #96 (A2) t9/t18; #97 (A2) t2/t30; #98 (A2) t12/t22; #183 (A3) t3; #184 (A3) t12/t20; #185 (A3) t3; #187 (A3) t2/t14/t19/t27; #189 (A3) t12/t19/t24/t29; #190 (A3) t13; #274 (A4) t5/t7; #276 (A4) t2/t8; #277 (A4) t12; #278 (A4) t10/t11/t16; #279 (A4) t4/t12; #281 (A4) t16; #282 (A4) t2/t17; #283 (A4) t12; #367 (A5) t7/t15; #370 (A5) t3/t9; #371 (A5) t2; #372 (A5) t12; #373 (A5) t3/t26; #374 (A5) t12/t16; #456 (A6) t2; #457 (A6) t18; #458 (A6) t6/t7; #459 (A6) t9/t16; #460 (A6) t2/t3/t23; #462 (A6) t2/t10; #463 (A6) t15/t22; #464 (A6) t4/t13/t20; #547 (A7) t2; #550 (A7) t16; #552 (A7) t7; #553 (A7) t8; #554 (A7) t11; #556 (A7) t7/t8; #557 (A7) t9; #638 (A8) t5; #639 (A8) t6; #640 (A8) t7/t11/t19; #642 (A8) t3/t4; #643 (A8) t7; #645 (A8) t4/t7/t14/t16; #646 (A8) t7/t12/t19; #647 (A8) t7/t14/t27; #729 (A9) t4; #730 (A9) t3; #731 (A9) t2/t3/t8; #733 (A9) t15; #735 (A9) t12; #736 (A9) t9/t15; #737 (A9) t12/t20
+- Also observed (240 occurrences in 129 lessons): #1 (A1) t2/t15/t16; #2 (A1) t15; #4 (A1) t2/t8; #5 (A1) t2; #6 (A1) t12/t21; #8 (A1) t6/t12; #9 (A1) t12/t14; #10 (A1) t13/t21; #12 (A1) t13; #13 (A1) t3/t5; #14 (A1) t12/t18; #15 (A1) t8; #19 (A1) t2; #820 (A10) t3/t12/t20; #821 (A10) t16; #822 (A10) t2/t11; #824 (A10) t16; #825 (A10) t15; #826 (A10) t7/t13; #827 (A10) t2/t14; #828 (A10) t6; #829 (A10) t15; #831 (A10) t3/t8; #833 (A10) t6/t14/t18; #834 (A10) t11; #92 (A2) t2/t16; #93 (A2) t4/t9/t17; #94 (A2) t4; #96 (A2) t9/t18; #97 (A2) t2/t30; #98 (A2) t12/t22; #99 (A2) t2/t15/t20/t26; #101 (A2) t5/t13; #102 (A2) t9/t10; #103 (A2) t12; #105 (A2) t6/t11/t20; #106 (A2) t13/t19/t30; #183 (A3) t3; #184 (A3) t12/t20; #185 (A3) t3; #187 (A3) t2/t14/t19/t27; #189 (A3) t12/t19/t24/t29; #190 (A3) t13; #192 (A3) t23/t28; #194 (A3) t12; #195 (A3) t3; #196 (A3) t11/t13/t16; #198 (A3) t11/t17/t21/t22; #199 (A3) t3; #274 (A4) t5/t7; #276 (A4) t2/t8; #277 (A4) t12; #278 (A4) t10/t11/t16; #279 (A4) t4/t12; #281 (A4) t16; #282 (A4) t2/t17; #283 (A4) t12; #284 (A4) t2; #285 (A4) t11/t20; #286 (A4) t6/t7; #287 (A4) t10; #288 (A4) t10; #289 (A4) t8; #290 (A4) t9/t14/t22; #367 (A5) t7/t15; #370 (A5) t3/t9; #371 (A5) t2; #372 (A5) t12; #373 (A5) t3/t26; #374 (A5) t12/t16; #375 (A5) t12; #377 (A5) t17/t18; #378 (A5) t3/t6; #379 (A5) t7/t14; #380 (A5) t4/t10/t17; #381 (A5) t7; #456 (A6) t2; #457 (A6) t18; #458 (A6) t6/t7; #459 (A6) t9/t16; #460 (A6) t2/t3/t23; #462 (A6) t2/t10; #463 (A6) t15/t22; #464 (A6) t4/t13/t20; #467 (A6) t4; #468 (A6) t18/t19; #469 (A6) t4/t16; #470 (A6) t6/t11/t12/t17; #471 (A6) t10/t13/t15; #547 (A7) t2; #550 (A7) t16; #552 (A7) t7; #553 (A7) t8; #554 (A7) t11; #556 (A7) t7/t8; #557 (A7) t9; #558 (A7) t2/t11; #559 (A7) t12; #560 (A7) t10/t24; #561 (A7) t6/t15; #562 (A7) t3/t8; #563 (A7) t5/t6; #564 (A7) t6/t12/t14; #638 (A8) t5; #639 (A8) t6; #640 (A8) t7/t11/t19; #642 (A8) t3/t4; #643 (A8) t7; #645 (A8) t4/t7/t14/t16; #646 (A8) t7/t12/t19; #647 (A8) t7/t14/t27; #648 (A8) t11; #649 (A8) t10/t15/t23; #650 (A8) t5; #651 (A8) t8/t19; #652 (A8) t9; #653 (A8) t12/t17/t25; #729 (A9) t4; #730 (A9) t3; #731 (A9) t2/t3/t8; #733 (A9) t15; #735 (A9) t12; #736 (A9) t9/t15; #737 (A9) t12/t20; #738 (A9) t6/t14/t22; #739 (A9) t6/t14; #740 (A9) t11; #742 (A9) t11/t18; #743 (A9) t7/t18
 - Related defect: —
 - Status: OPEN
 
@@ -406,7 +412,7 @@ P0 = learning completely blocked · P1 = seriously damages learning/trust · P2 
 - Actual behaviour: A new, loosely related analogy per request; "what is this?" (turn 6) is answered with the LEGO analogy instead of describing the figure.
 - Why it is a defect: The analogy replaces the maths; the learner never gets the simpler explanation; same as BIO-004.
 - Reproducibility: Counted automatically (3+ analogy replies in one lesson).
-- Also observed (29 occurrences in 29 lessons): #1 (A1) t-; #2 (A1) t-; #6 (A1) t-; #9 (A1) t-; #820 (A10) t-; #825 (A10) t-; #826 (A10) t-; #827 (A10) t-; #93 (A2) t-; #94 (A2) t-; #96 (A2) t-; #97 (A2) t-; #187 (A3) t-; #189 (A3) t-; #276 (A4) t-; #278 (A4) t-; #370 (A5) t-; #373 (A5) t-; #374 (A5) t-; #457 (A6) t-; #459 (A6) t-; #462 (A6) t-; #553 (A7) t-; #554 (A7) t-; #639 (A8) t-; #640 (A8) t-; #731 (A9) t-; #733 (A9) t-; #735 (A9) t-
+- Also observed (49 occurrences in 49 lessons): #1 (A1) t-; #2 (A1) t-; #6 (A1) t-; #9 (A1) t-; #10 (A1) t-; #820 (A10) t-; #825 (A10) t-; #826 (A10) t-; #827 (A10) t-; #828 (A10) t-; #829 (A10) t-; #831 (A10) t-; #833 (A10) t-; #93 (A2) t-; #94 (A2) t-; #96 (A2) t-; #97 (A2) t-; #99 (A2) t-; #103 (A2) t-; #105 (A2) t-; #106 (A2) t-; #187 (A3) t-; #189 (A3) t-; #192 (A3) t-; #194 (A3) t-; #198 (A3) t-; #276 (A4) t-; #278 (A4) t-; #289 (A4) t-; #290 (A4) t-; #370 (A5) t-; #373 (A5) t-; #374 (A5) t-; #375 (A5) t-; #380 (A5) t-; #457 (A6) t-; #459 (A6) t-; #462 (A6) t-; #471 (A6) t-; #553 (A7) t-; #554 (A7) t-; #559 (A7) t-; #560 (A7) t-; #564 (A7) t-; #639 (A8) t-; #640 (A8) t-; #731 (A9) t-; #733 (A9) t-; #735 (A9) t-
 - Related defect: —
 - Status: OPEN
 
@@ -442,7 +448,7 @@ P0 = learning completely blocked · P1 = seriously damages learning/trust · P2 
 - Actual behaviour: A promise to send one; the learner has already asked.
 - Why it is a defect: The learner must ask twice; same as BIO-005.
 - Reproducibility: Seen in lesson 552 turn 13; counted automatically.
-- Also observed (3 occurrences in 3 lessons): #7 (A1) t11; #552 (A7) t13; #557 (A7) t15
+- Also observed (5 occurrences in 5 lessons): #7 (A1) t11; #552 (A7) t13; #557 (A7) t15; #738 (A9) t16; #742 (A9) t12
 - Related defect: —
 - Status: OPEN
 
@@ -460,7 +466,7 @@ P0 = learning completely blocked · P1 = seriously damages learning/trust · P2 
 - Actual behaviour: A justification of the tutor's previous action.
 - Why it is a defect: The learner asked about the idea, not about the tutor; same as BIO-001.
 - Reproducibility: Counted automatically.
-- Also observed (2 occurrences in 2 lessons): #1 (A1) t15; #552 (A7) t14
+- Also observed (3 occurrences in 3 lessons): #1 (A1) t15; #284 (A4) t5; #552 (A7) t14
 - Related defect: —
 - Status: OPEN
 
@@ -496,7 +502,7 @@ P0 = learning completely blocked · P1 = seriously damages learning/trust · P2 
 - Actual behaviour: The lesson-goal string from the curriculum, verbatim.
 - Why it is a defect: Same as BIO-010: internal curriculum metadata shown as speech; the learner's answer is ignored.
 - Reproducibility: Seen in lesson 372 turn 10; counted automatically.
-- Also observed (4 occurrences in 4 lessons): #370 (A5) t8; #372 (A5) t10; #463 (A6) t13; #734 (A9) t17
+- Also observed (35 occurrences in 27 lessons): #12 (A1) t10; #15 (A1) t6; #17 (A1) t9; #826 (A10) t20; #829 (A10) t2; #833 (A10) t16; #97 (A2) t9; #99 (A2) t28; #187 (A3) t16; #192 (A3) t8/t15; #198 (A3) t13; #282 (A4) t24; #285 (A4) t14; #288 (A4) t11; #370 (A5) t8; #372 (A5) t10; #463 (A6) t3/t13; #469 (A6) t20; #645 (A8) t6; #646 (A8) t15; #647 (A8) t20; #648 (A8) t1; #650 (A8) t17; #653 (A8) t3; #734 (A9) t17; #737 (A9) t18; #738 (A9) t16
 - Related defect: —
 - Status: OPEN
 
@@ -517,20 +523,72 @@ P0 = learning completely blocked · P1 = seriously damages learning/trust · P2 
 - Related defect: —
 - Status: OPEN
 
+### MATH-025 — Tutor describes things "you can see" in the figure that the figure does not contain (a cloud of dots, an ellipse)
+
+- Severity: P2
+- Category: Visuals
+- Date/time: 2026-10-06 09:19 UTC
+- Account: Account 8
+- Mathematics concept: `math.stats.linear-regression`
+- Lesson/order: #650
+- Learner message: (lesson opened)
+- Tutor response: "On the coordinate‑plane figure you can see a cloud of dots scattered across the grid. Most of the points seem to rise as you move from left to right…" — the figure served is the generic Coordinate Plane card with a single dot at (2, 3). In Ellipse (287): "among the shapes you see a stretched circle, the ellipse, sitting next to the square, triangle and regular circle" — the Geometry Shapes card has no ellipse.
+- Expected behaviour: Describe only what is drawn, or serve a scatter plot / ellipse.
+- Actual behaviour: The tutor narrates an imaginary picture.
+- Why it is a defect: The learner looks for the dots, cannot find them and concludes they are the problem; trust in the "figure beside this message" is lost.
+- Reproducibility: Seen in lessons 650 and 287 (screenshots of the served figure reviewed).
+- Related defect: —
+- Status: OPEN
+
 ## Systemic observations (counts computed from the transcripts)
 
-Computed over 93 lesson transcripts (1729 learner turns, one reply each; degraded retries included as separate replies):
+Computed over 166 lesson transcripts (3143 learner turns, one reply each; degraded retries included as separate replies):
 
-- Reply provider: groq 1445 (84 %), memory 56 (3 %), degraded 181 (10 %), gate 47 (3 %).
-- Cards (mcq) shown: 584; options per card: 2 options 23, 3 options 319, 4 options 242.
-- Lesson close: 36 closed as "mastered", 52 as "needs review" (59 % of closed lessons ended on a pause, MATH-001).
-- Lessons with a figure: 52 of 93; with no figure on any turn: 41.
-- Per account (lessons / learner turns / mastered / needs-review): A1 9/177/4/5 · A2 7/163/2/3 · A3 9/167/5/2 · A4 10/186/2/8 · A5 10/183/3/7 · A6 10/193/5/5 · A7 11/194/4/7 · A8 10/196/4/5 · A9 9/187/4/5 · A10 8/171/3/5.
+- Reply provider: groq 2614 (83 %), memory 113 (4 %), degraded 326 (10 %), gate 90 (3 %).
+- Cards (mcq) shown: 1030; options per card: 2 options 37, 3 options 564, 4 options 429.
+- Lesson close: 63 closed as "mastered", 96 as "needs review" (60 % of closed lessons ended on a pause, MATH-001).
+- Lessons with a figure: 84 of 166; with no figure on any turn: 82.
+- Per account (lessons / learner turns / mastered / needs-review): A1 19/346/9/10 · A2 15/330/6/5 · A3 18/335/7/9 · A4 17/326/7/10 · A5 17/318/4/13 · A6 16/326/6/10 · A7 18/346/7/11 · A8 16/339/6/9 · A9 15/319/4/11 · A10 15/317/7/8.
 
 
 ## Concurrency and isolation tests
 
 _Not yet run — scheduled after the main run (same-account parallel sessions, cross-account marker test)._
+
+## Deployment changes during the run
+
+Lessons started before 08:27 UTC on 2026-10-06 (deployment `42b44da`): 62; started after (deployment `6f6ccaa`, Biology fixes live): 104. Share of lessons in each group in which each automatically-linked mechanism occurred:
+
+| defect | before | after |
+|---|---|---|
+| MATH-001 | 44 % | 43 % |
+| MATH-002 | 45 % | 39 % |
+| MATH-003 | 58 % | 47 % |
+| MATH-004 | 2 % | 1 % |
+| MATH-005 | 2 % | 3 % |
+| MATH-006 | 42 % | 63 % |
+| MATH-007 | 0 % | 0 % |
+| MATH-008 | 0 % | 0 % |
+| MATH-009 | 11 % | 7 % |
+| MATH-010 | 11 % | 9 % |
+| MATH-011 | 16 % | 21 % |
+| MATH-012 | 8 % | 7 % |
+| MATH-013 | 23 % | 0 % |
+| MATH-014 | 0 % | 0 % |
+| MATH-015 | 5 % | 3 % |
+| MATH-016 | 10 % | 2 % |
+| MATH-017 | 71 % | 82 % |
+| MATH-018 | 32 % | 28 % |
+| MATH-019 | 3 % | 0 % |
+| MATH-020 | 2 % | 4 % |
+| MATH-021 | 3 % | 1 % |
+| MATH-022 | 0 % | 1 % |
+| MATH-023 | 5 % | 23 % |
+| MATH-024 | 0 % | 0 % |
+| MATH-025 | 0 % | 0 % |
+
+The two groups cover different parts of the curriculum (lessons are split by account block), so a difference is not by itself evidence that a fix worked or failed; visual-type rows differ mainly because of lesson type. No Mathematics mechanism changed in a way that points at the Biology fixes.
+
 
 ## Coverage by lesson
 
@@ -548,16 +606,16 @@ Result per account in brackets: turns driven, and how the lesson closed (mastere
 | 7 | `math.found.generalization` | Generalization | A1 (15t, needs-review) | none | MATH-001, MATH-003, MATH-006, MATH-020 |
 | 8 | `math.found.mathematical-language` | Mathematical Language | A1 (21t, needs-review) | none | MATH-001, MATH-006, MATH-009, MATH-017 |
 | 9 | `math.found.mathematical-notation` | Mathematical Notation | A1 (25t, needs-review) | none | MATH-001, MATH-002, MATH-006, MATH-017, MATH-018 |
-| 10 | `math.found.variable` | Variable | **not covered** | — | — |
-| 11 | `math.found.mathematical-symbols` | Mathematical Symbols | **not covered** | — | — |
-| 12 | `math.found.reading-mathematics` | Reading Mathematics | **not covered** | — | — |
-| 13 | `math.found.logic` | Mathematical Logic | **not covered** | — | — |
-| 14 | `math.found.proposition` | Proposition | **not covered** | — | — |
-| 15 | `math.found.logical-connectives` | Logical Connectives | **not covered** | — | — |
-| 16 | `math.found.truth-table` | Truth Table | **not covered** | — | — |
-| 17 | `math.found.predicate-logic` | Predicate Logic | **not covered** | — | — |
-| 18 | `math.found.predicate` | Predicate | **not covered** | — | — |
-| 19 | `math.found.quantifiers` | Quantifiers | **not covered** | — | — |
+| 10 | `math.found.variable` | Variable | A1 (29t, needs-review) | none | MATH-002, MATH-003, MATH-017, MATH-018 |
+| 11 | `math.found.mathematical-symbols` | Mathematical Symbols | A1 (10t, needs-review) | none | MATH-002 |
+| 12 | `math.found.reading-mathematics` | Reading Mathematics | A1 (24t, needs-review) | none | MATH-002, MATH-006, MATH-017, MATH-023 |
+| 13 | `math.found.logic` | Mathematical Logic | A1 (11t, mastered) | none | MATH-017 |
+| 14 | `math.found.proposition` | Proposition | A1 (20t, needs-review) | none | MATH-001, MATH-017 |
+| 15 | `math.found.logical-connectives` | Logical Connectives | A1 (20t, needs-review) | none | MATH-001, MATH-017, MATH-023 |
+| 16 | `math.found.truth-table` | Truth Table | A1 (16t, mastered) | none | MATH-002, MATH-003 |
+| 17 | `math.found.predicate-logic` | Predicate Logic | A1 (18t, mastered) | none | MATH-002, MATH-003, MATH-023 |
+| 18 | `math.found.predicate` | Predicate | A1 (10t, mastered) | none | MATH-002 |
+| 19 | `math.found.quantifiers` | Quantifiers | A1 (11t, mastered) | none | MATH-002, MATH-006, MATH-016, MATH-017 |
 | 20 | `math.found.logical-equivalence` | Logical Equivalence | **not covered** | — | — |
 | 21 | `math.found.rules-of-inference` | Rules of Inference | **not covered** | — | — |
 | 22 | `math.found.proof` | Mathematical Proof | **not covered** | — | — |
@@ -635,16 +693,16 @@ Result per account in brackets: turns driven, and how the lesson closed (mastere
 | 94 | `math.arith.subtraction` | Subtraction | A2 (30t, no-complete) | yes | MATH-002, MATH-003, MATH-006, MATH-012, MATH-017, MATH-018 |
 | 95 | `math.arith.borrowing` | Borrowing (Regrouping in Subtraction) | A2 (7t, mastered) | yes | MATH-012 |
 | 96 | `math.arith.negative-numbers` | Negative Numbers | A2 (27t, mastered) | yes | MATH-003, MATH-017, MATH-018 |
-| 97 | `math.arith.number-line` | Number Line | A2 (30t, no-complete) | yes | MATH-003, MATH-005, MATH-006, MATH-009, MATH-017, MATH-018 |
+| 97 | `math.arith.number-line` | Number Line | A2 (30t, no-complete) | yes | MATH-003, MATH-005, MATH-006, MATH-009, MATH-017, MATH-018, MATH-023 |
 | 98 | `math.arith.ordering` | Ordering Numbers | A2 (27t, needs-review) | yes | MATH-001, MATH-003, MATH-006, MATH-017 |
-| 99 | `math.arith.absolute-value` | Absolute Value | **not covered** | — | — |
-| 100 | `math.arith.integer-arithmetic` | Integer Arithmetic | **not covered** | — | — |
-| 101 | `math.arith.multiplication` | Multiplication | **not covered** | — | — |
-| 102 | `math.arith.multiplication-table` | Multiplication Table | **not covered** | — | — |
-| 103 | `math.arith.long-multiplication` | Long Multiplication | **not covered** | — | — |
-| 104 | `math.arith.mental-multiplication` | Mental Multiplication | **not covered** | — | — |
-| 105 | `math.arith.division` | Division | **not covered** | — | — |
-| 106 | `math.arith.long-division` | Long Division | **not covered** | — | — |
+| 99 | `math.arith.absolute-value` | Absolute Value | A2 (34t, no-complete) | yes | MATH-006, MATH-012, MATH-017, MATH-018, MATH-023 |
+| 100 | `math.arith.integer-arithmetic` | Integer Arithmetic | A2 (9t, mastered) | yes | MATH-003 |
+| 101 | `math.arith.multiplication` | Multiplication | A2 (20t, mastered) | yes | MATH-006, MATH-012, MATH-017 |
+| 102 | `math.arith.multiplication-table` | Multiplication Table | A2 (15t, mastered) | yes | MATH-002, MATH-003, MATH-012, MATH-017 |
+| 103 | `math.arith.long-multiplication` | Long Multiplication | A2 (24t, needs-review) | yes | MATH-001, MATH-003, MATH-006, MATH-012, MATH-017, MATH-018 |
+| 104 | `math.arith.mental-multiplication` | Mental Multiplication | A2 (7t, mastered) | yes | MATH-012 |
+| 105 | `math.arith.division` | Division | A2 (28t, needs-review) | yes | MATH-001, MATH-006, MATH-012, MATH-017, MATH-018 |
+| 106 | `math.arith.long-division` | Long Division | A2 (30t, no-complete) | yes | MATH-002, MATH-003, MATH-006, MATH-012, MATH-017, MATH-018 |
 | 107 | `math.arith.remainder` | Remainder | **not covered** | — | — |
 | 108 | `math.arith.divisor-dividend` | Divisor and Dividend | **not covered** | — | — |
 | 109 | `math.arith.order-of-operations` | Order of Operations | **not covered** | — | — |
@@ -725,20 +783,20 @@ Result per account in brackets: turns driven, and how the lesson closed (mastere
 | 184 | `math.alg.linear-equation-1var` | Linear Equation in One Variable | A3 (26t, needs-review) | yes | MATH-002, MATH-003, MATH-007, MATH-008, MATH-017 |
 | 185 | `math.alg.inequality-1var` | Linear Inequality in One Variable | A3 (13t, mastered) | yes | MATH-003, MATH-009, MATH-011, MATH-017 |
 | 186 | `math.alg.absolute-value-equations` | Absolute Value Equations and Inequalities | A3 (10t, mastered) | yes | MATH-006, MATH-011 |
-| 187 | `math.alg.linear-equation-2var` | Linear Equation in Two Variables | A3 (32t, no-complete) | yes | MATH-002, MATH-003, MATH-006, MATH-017, MATH-018 |
+| 187 | `math.alg.linear-equation-2var` | Linear Equation in Two Variables | A3 (32t, no-complete) | yes | MATH-002, MATH-003, MATH-006, MATH-017, MATH-018, MATH-023 |
 | 188 | `math.alg.inequality-2var` | Linear Inequality in Two Variables | A3 (7t, mastered) | yes | MATH-011 |
 | 189 | `math.alg.system-linear-equations` | Systems of Linear Equations | A3 (30t, no-complete) | yes | MATH-002, MATH-003, MATH-006, MATH-017, MATH-018 |
 | 190 | `math.alg.substitution-method` | Substitution Method | A3 (23t, mastered) | yes | MATH-002, MATH-003, MATH-011, MATH-017 |
 | 191 | `math.alg.elimination-method` | Elimination Method | A3 (11t, mastered) | yes | MATH-006, MATH-011 |
-| 192 | `math.alg.system-3var` | Systems of 3 Equations in 3 Variables | **not covered** | — | — |
-| 193 | `math.alg.polynomial` | Polynomial | **not covered** | — | — |
-| 194 | `math.alg.degree` | Degree of a Polynomial | **not covered** | — | — |
-| 195 | `math.alg.polynomial-operations` | Polynomial Operations | **not covered** | — | — |
-| 196 | `math.alg.polynomial-division` | Polynomial Division | **not covered** | — | — |
-| 197 | `math.alg.remainder-theorem` | Remainder Theorem | **not covered** | — | — |
-| 198 | `math.alg.factor-theorem` | Factor Theorem | **not covered** | — | — |
-| 199 | `math.alg.factoring` | Factoring Polynomials | **not covered** | — | — |
-| 200 | `math.alg.factoring-gcf` | Factoring out the GCF | **not covered** | — | — |
+| 192 | `math.alg.system-3var` | Systems of 3 Equations in 3 Variables | A3 (34t, needs-review) | yes | MATH-001, MATH-003, MATH-006, MATH-011, MATH-017, MATH-018, MATH-023 |
+| 193 | `math.alg.polynomial` | Polynomial | A3 (19t, needs-review) | yes | MATH-003, MATH-006, MATH-011 |
+| 194 | `math.alg.degree` | Degree of a Polynomial | A3 (22t, needs-review) | yes | MATH-006, MATH-011, MATH-017, MATH-018 |
+| 195 | `math.alg.polynomial-operations` | Polynomial Operations | A3 (12t, needs-review) | yes | MATH-006, MATH-011, MATH-017 |
+| 196 | `math.alg.polynomial-division` | Polynomial Division | A3 (20t, needs-review) | yes | MATH-001, MATH-011, MATH-017 |
+| 197 | `math.alg.remainder-theorem` | Remainder Theorem | A3 (8t, mastered) | yes | MATH-011 |
+| 198 | `math.alg.factor-theorem` | Factor Theorem | A3 (24t, needs-review) | yes | MATH-001, MATH-006, MATH-011, MATH-017, MATH-018, MATH-023 |
+| 199 | `math.alg.factoring` | Factoring Polynomials | A3 (14t, mastered) | yes | MATH-006, MATH-011, MATH-017 |
+| 200 | `math.alg.factoring-gcf` | Factoring out the GCF | A3 (15t, needs-review) | yes | MATH-001, MATH-003, MATH-011 |
 | 201 | `math.alg.factoring-trinomials` | Factoring Trinomials | **not covered** | — | — |
 | 202 | `math.alg.factoring-special` | Special Factoring Patterns | **not covered** | — | — |
 | 203 | `math.alg.quadratic-equation` | Quadratic Equation | **not covered** | — | — |
@@ -820,15 +878,15 @@ Result per account in brackets: turns driven, and how the lesson closed (mastere
 | 279 | `math.geom.x-y-coordinates` | Cartesian Coordinates | A4 (18t, mastered) | yes | MATH-003, MATH-006, MATH-009, MATH-010, MATH-017 |
 | 280 | `math.geom.quadrants` | Quadrants | A4 (15t, needs-review) | yes | MATH-001, MATH-002, MATH-003, MATH-010 |
 | 281 | `math.geom.distance-formula` | Distance Formula | A4 (18t, needs-review) | yes | MATH-001, MATH-003, MATH-006, MATH-009, MATH-017 |
-| 282 | `math.geom.midpoint-formula` | Midpoint Formula | A4 (30t, needs-review) | yes | MATH-001, MATH-002, MATH-006, MATH-010, MATH-017 |
+| 282 | `math.geom.midpoint-formula` | Midpoint Formula | A4 (30t, needs-review) | yes | MATH-001, MATH-002, MATH-006, MATH-010, MATH-017, MATH-023 |
 | 283 | `math.geom.slope` | Slope | A4 (15t, needs-review) | yes | MATH-001, MATH-003, MATH-006, MATH-009, MATH-010, MATH-017 |
-| 284 | `math.geom.line-equation` | Equations of Lines | **not covered** | — | — |
-| 285 | `math.geom.conic-sections` | Conic Sections | **not covered** | — | — |
-| 286 | `math.geom.parabola` | Parabola | **not covered** | — | — |
-| 287 | `math.geom.ellipse` | Ellipse | **not covered** | — | — |
-| 288 | `math.geom.hyperbola` | Hyperbola | **not covered** | — | — |
-| 289 | `math.geom.polar-coordinates` | Polar Coordinates | **not covered** | — | — |
-| 290 | `math.geom.polar-curves` | Polar Curves | **not covered** | — | — |
+| 284 | `math.geom.line-equation` | Equations of Lines | A4 (20t, mastered) | yes | MATH-003, MATH-005, MATH-006, MATH-010, MATH-017, MATH-021 |
+| 285 | `math.geom.conic-sections` | Conic Sections | A4 (22t, needs-review) | yes | MATH-001, MATH-006, MATH-010, MATH-017, MATH-023 |
+| 286 | `math.geom.parabola` | Parabola | A4 (16t, mastered) | yes | MATH-003, MATH-010, MATH-017 |
+| 287 | `math.geom.ellipse` | Ellipse | A4 (16t, mastered) | yes | MATH-003, MATH-010, MATH-017 |
+| 288 | `math.geom.hyperbola` | Hyperbola | A4 (22t, mastered) | yes | MATH-002, MATH-003, MATH-006, MATH-010, MATH-017, MATH-023 |
+| 289 | `math.geom.polar-coordinates` | Polar Coordinates | A4 (16t, mastered) | yes | MATH-010, MATH-017, MATH-018 |
+| 290 | `math.geom.polar-curves` | Polar Curves | A4 (28t, needs-review) | yes | MATH-002, MATH-003, MATH-010, MATH-017, MATH-018 |
 | 291 | `math.geom.transformations` | Geometric Transformations | **not covered** | — | — |
 | 292 | `math.geom.translation` | Translation | **not covered** | — | — |
 | 293 | `math.geom.rotation` | Rotation | **not covered** | — | — |
@@ -913,13 +971,13 @@ Result per account in brackets: turns driven, and how the lesson closed (mastere
 | 372 | `math.seq.comparison-test` | Comparison Test | A5 (20t, needs-review) | none | MATH-002, MATH-006, MATH-017, MATH-023 |
 | 373 | `math.seq.ratio-test` | Ratio Test | A5 (28t, needs-review) | none | MATH-003, MATH-006, MATH-017, MATH-018 |
 | 374 | `math.seq.root-test` | Root Test | A5 (20t, needs-review) | none | MATH-002, MATH-017, MATH-018 |
-| 375 | `math.seq.integral-test` | Integral Test | **not covered** | — | — |
-| 376 | `math.seq.alternating-series` | Alternating Series | **not covered** | — | — |
-| 377 | `math.seq.absolute-convergence` | Absolute and Conditional Convergence | **not covered** | — | — |
-| 378 | `math.seq.harmonic-series` | Harmonic Series | **not covered** | — | — |
-| 379 | `math.seq.telescoping-series` | Telescoping Series | **not covered** | — | — |
-| 380 | `math.calc.limits` | Limit of a Function | **not covered** | — | — |
-| 381 | `math.calc.limit-laws` | Limit Laws | **not covered** | — | — |
+| 375 | `math.seq.integral-test` | Integral Test | A5 (25t, needs-review) | none | MATH-002, MATH-006, MATH-017, MATH-018 |
+| 376 | `math.seq.alternating-series` | Alternating Series | A5 (15t, needs-review) | none | MATH-003, MATH-006 |
+| 377 | `math.seq.absolute-convergence` | Absolute and Conditional Convergence | A5 (21t, needs-review) | none | MATH-001, MATH-003, MATH-017 |
+| 378 | `math.seq.harmonic-series` | Harmonic Series | A5 (14t, mastered) | none | MATH-017 |
+| 379 | `math.seq.telescoping-series` | Telescoping Series | A5 (20t, needs-review) | none | MATH-001, MATH-017 |
+| 380 | `math.calc.limits` | Limit of a Function | A5 (23t, needs-review) | yes | MATH-001, MATH-006, MATH-011, MATH-017, MATH-018 |
+| 381 | `math.calc.limit-laws` | Limit Laws | A5 (17t, needs-review) | yes | MATH-001, MATH-003, MATH-006, MATH-011, MATH-017 |
 | 382 | `math.calc.one-sided-limits` | One-Sided Limits | **not covered** | — | — |
 | 383 | `math.calc.limits-at-infinity` | Limits at Infinity | **not covered** | — | — |
 | 384 | `math.calc.squeeze-theorem` | Squeeze Theorem | **not covered** | — | — |
@@ -1004,12 +1062,12 @@ Result per account in brackets: turns driven, and how the lesson closed (mastere
 | 463 | `math.de.separable` | Separable Differential Equation | A6 (29t, needs-review) | none | MATH-001, MATH-006, MATH-017, MATH-023 |
 | 464 | `math.de.linear-first-order` | Linear First-Order ODE | A6 (23t, needs-review) | none | MATH-001, MATH-002, MATH-006, MATH-015, MATH-017, MATH-022, MATH-024 |
 | 465 | `math.de.exact-ode` | Exact Differential Equation | A6 (10t, mastered) | none | MATH-003, MATH-006 |
-| 466 | `math.de.bernoulli` | Bernoulli Equation | **not covered** | — | — |
-| 467 | `math.de.homogeneous-ode` | Homogeneous First-Order ODE | **not covered** | — | — |
-| 468 | `math.de.slope-field` | Slope Field | **not covered** | — | — |
-| 469 | `math.de.euler-method` | Euler's Method | **not covered** | — | — |
-| 470 | `math.de.second-order-ode` | Second-Order ODE | **not covered** | — | — |
-| 471 | `math.de.second-order-linear` | Second-Order Linear ODE | **not covered** | — | — |
+| 466 | `math.de.bernoulli` | Bernoulli Equation | A6 (17t, needs-review) | none | MATH-003, MATH-006 |
+| 467 | `math.de.homogeneous-ode` | Homogeneous First-Order ODE | A6 (18t, mastered) | none | MATH-003, MATH-017 |
+| 468 | `math.de.slope-field` | Slope Field | A6 (22t, needs-review) | none | MATH-001, MATH-002, MATH-006, MATH-017 |
+| 469 | `math.de.euler-method` | Euler's Method | A6 (24t, needs-review) | none | MATH-001, MATH-002, MATH-003, MATH-017, MATH-023 |
+| 470 | `math.de.second-order-ode` | Second-Order ODE | A6 (21t, needs-review) | none | MATH-006, MATH-009, MATH-017 |
+| 471 | `math.de.second-order-linear` | Second-Order Linear ODE | A6 (31t, needs-review) | none | MATH-001, MATH-002, MATH-003, MATH-006, MATH-017, MATH-018 |
 | 472 | `math.de.second-order-homogeneous` | Homogeneous Second-Order Linear ODE | **not covered** | — | — |
 | 473 | `math.de.wronskian` | Wronskian | **not covered** | — | — |
 | 474 | `math.de.char-equation` | Characteristic Equation | **not covered** | — | — |
@@ -1096,13 +1154,13 @@ Result per account in brackets: turns driven, and how the lesson closed (mastere
 | 555 | `math.linalg.jordan-form` | Jordan Normal Form | A7 (8t, mastered) | none | — |
 | 556 | `math.linalg.spectral-theorem` | Spectral Theorem | A7 (21t, mastered) | none | MATH-003, MATH-006, MATH-017 |
 | 557 | `math.linalg.positive-definite` | Positive Definite Matrix | A7 (24t, needs-review) | none | MATH-001, MATH-006, MATH-015, MATH-017, MATH-020 |
-| 558 | `math.linalg.cholesky` | Cholesky Decomposition | **not covered** | — | — |
-| 559 | `math.linalg.inner-product` | Inner Product | **not covered** | — | — |
-| 560 | `math.linalg.inner-product-space` | Inner Product Space | **not covered** | — | — |
-| 561 | `math.linalg.orthogonal-basis` | Orthogonal and Orthonormal Basis | **not covered** | — | — |
-| 562 | `math.linalg.gram-schmidt` | Gram-Schmidt Process | **not covered** | — | — |
-| 563 | `math.linalg.projection` | Orthogonal Projection | **not covered** | — | — |
-| 564 | `math.linalg.least-squares` | Least Squares | **not covered** | — | — |
+| 558 | `math.linalg.cholesky` | Cholesky Decomposition | A7 (17t, mastered) | none | MATH-002, MATH-006, MATH-017 |
+| 559 | `math.linalg.inner-product` | Inner Product | A7 (20t, needs-review) | none | MATH-001, MATH-006, MATH-015, MATH-017, MATH-018 |
+| 560 | `math.linalg.inner-product-space` | Inner Product Space | A7 (27t, needs-review) | none | MATH-001, MATH-002, MATH-017, MATH-018 |
+| 561 | `math.linalg.orthogonal-basis` | Orthogonal and Orthonormal Basis | A7 (24t, needs-review) | none | MATH-001, MATH-002, MATH-006, MATH-017 |
+| 562 | `math.linalg.gram-schmidt` | Gram-Schmidt Process | A7 (19t, mastered) | none | MATH-003, MATH-006, MATH-017 |
+| 563 | `math.linalg.projection` | Orthogonal Projection | A7 (20t, needs-review) | none | MATH-001, MATH-002, MATH-006, MATH-017 |
+| 564 | `math.linalg.least-squares` | Least Squares | A7 (25t, mastered) | none | MATH-003, MATH-006, MATH-017, MATH-018 |
 | 565 | `math.linalg.qr-factorization` | QR Factorization | **not covered** | — | — |
 | 566 | `math.linalg.svd` | Singular Value Decomposition | **not covered** | — | — |
 | 567 | `math.linalg.singular-values` | Singular Values | **not covered** | — | — |
@@ -1183,15 +1241,15 @@ Result per account in brackets: turns driven, and how the lesson closed (mastere
 | 642 | `math.stats.type-errors` | Type I and Type II Errors | A8 (29t, needs-review) | yes | MATH-001, MATH-003, MATH-006, MATH-011, MATH-017 |
 | 643 | `math.stats.power` | Power of a Test | A8 (26t, mastered) | yes | MATH-002, MATH-003, MATH-006, MATH-011, MATH-017 |
 | 644 | `math.stats.z-test` | z-Test | A8 (8t, mastered) | yes | MATH-011 |
-| 645 | `math.stats.t-test` | t-Test | A8 (21t, needs-review) | yes | MATH-011, MATH-017 |
-| 646 | `math.stats.chi-squared-test` | Chi-Squared Test | A8 (21t, needs-review) | yes | MATH-002, MATH-006, MATH-011, MATH-017 |
-| 647 | `math.stats.anova` | Analysis of Variance | A8 (31t, no-complete) | yes | MATH-003, MATH-006, MATH-009, MATH-011, MATH-017 |
-| 648 | `math.stats.two-way-anova` | Two-Way ANOVA | **not covered** | — | — |
-| 649 | `math.stats.correlation` | Sample Correlation | **not covered** | — | — |
-| 650 | `math.stats.linear-regression` | Simple Linear Regression | **not covered** | — | — |
-| 651 | `math.stats.multiple-regression` | Multiple Linear Regression | **not covered** | — | — |
-| 652 | `math.stats.covariance-matrix` | Covariance Matrix | **not covered** | — | — |
-| 653 | `math.stats.normal-distribution` | Normal Distribution (Statistics) | **not covered** | — | — |
+| 645 | `math.stats.t-test` | t-Test | A8 (21t, needs-review) | yes | MATH-011, MATH-017, MATH-023 |
+| 646 | `math.stats.chi-squared-test` | Chi-Squared Test | A8 (21t, needs-review) | yes | MATH-002, MATH-006, MATH-011, MATH-017, MATH-023 |
+| 647 | `math.stats.anova` | Analysis of Variance | A8 (31t, no-complete) | yes | MATH-003, MATH-006, MATH-009, MATH-011, MATH-017, MATH-023 |
+| 648 | `math.stats.two-way-anova` | Two-Way ANOVA | A8 (25t, mastered) | yes | MATH-002, MATH-003, MATH-006, MATH-011, MATH-017, MATH-023 |
+| 649 | `math.stats.correlation` | Sample Correlation | A8 (27t, needs-review) | yes | MATH-002, MATH-003, MATH-011, MATH-017 |
+| 650 | `math.stats.linear-regression` | Simple Linear Regression | A8 (21t, needs-review) | yes | MATH-001, MATH-003, MATH-006, MATH-017, MATH-023, MATH-025 |
+| 651 | `math.stats.multiple-regression` | Multiple Linear Regression | A8 (24t, needs-review) | yes | MATH-001, MATH-002, MATH-005, MATH-006, MATH-011, MATH-017 |
+| 652 | `math.stats.covariance-matrix` | Covariance Matrix | A8 (18t, mastered) | yes | MATH-002, MATH-011, MATH-017 |
+| 653 | `math.stats.normal-distribution` | Normal Distribution (Statistics) | A8 (28t, needs-review) | yes | MATH-001, MATH-002, MATH-003, MATH-006, MATH-011, MATH-017, MATH-023 |
 | 654 | `math.stats.normal-approximation` | Normal Approximation | **not covered** | — | — |
 | 655 | `math.stats.nonparametric` | Nonparametric Tests | **not covered** | — | — |
 | 656 | `math.stats.bayesian-inference` | Bayesian Statistics | **not covered** | — | — |
@@ -1275,13 +1333,13 @@ Result per account in brackets: turns driven, and how the lesson closed (mastere
 | 734 | `math.real.convergence-sequences` | Convergence of Sequences | A9 (20t, needs-review) | none | MATH-001, MATH-003, MATH-023 |
 | 735 | `math.real.cauchy-sequence` | Cauchy Sequence | A9 (23t, needs-review) | yes | MATH-001, MATH-006, MATH-009, MATH-012, MATH-017, MATH-018, MATH-019 |
 | 736 | `math.real.series-rigorous` | Series (Rigorous) | A9 (30t, needs-review) | none | MATH-001, MATH-003, MATH-006, MATH-017 |
-| 737 | `math.real.absolute-convergence` | Absolute Convergence | A9 (26t, needs-review) | none | MATH-001, MATH-006, MATH-017 |
-| 738 | `math.real.metric-space` | Metric Space | **not covered** | — | — |
-| 739 | `math.real.open-sets` | Open and Closed Sets | **not covered** | — | — |
-| 740 | `math.real.completeness-metric` | Completeness of Metric Spaces | **not covered** | — | — |
-| 741 | `math.real.compactness` | Compactness | **not covered** | — | — |
-| 742 | `math.real.connectedness` | Connectedness | **not covered** | — | — |
-| 743 | `math.real.continuity-rigorous` | Continuity (ε-δ) | **not covered** | — | — |
+| 737 | `math.real.absolute-convergence` | Absolute Convergence | A9 (26t, needs-review) | none | MATH-001, MATH-006, MATH-017, MATH-023 |
+| 738 | `math.real.metric-space` | Metric Space | A9 (26t, needs-review) | none | MATH-002, MATH-006, MATH-017, MATH-020, MATH-023 |
+| 739 | `math.real.open-sets` | Open and Closed Sets | A9 (20t, needs-review) | none | MATH-001, MATH-017 |
+| 740 | `math.real.completeness-metric` | Completeness of Metric Spaces | A9 (21t, needs-review) | none | MATH-001, MATH-006, MATH-017 |
+| 741 | `math.real.compactness` | Compactness | A9 (19t, needs-review) | none | MATH-001, MATH-003, MATH-006 |
+| 742 | `math.real.connectedness` | Connectedness | A9 (25t, needs-review) | none | MATH-001, MATH-006, MATH-017, MATH-020 |
+| 743 | `math.real.continuity-rigorous` | Continuity (ε-δ) | A9 (21t, needs-review) | none | MATH-001, MATH-002, MATH-006, MATH-017 |
 | 744 | `math.real.uniform-continuity` | Uniform Continuity | **not covered** | — | — |
 | 745 | `math.real.lipschitz-continuity` | Lipschitz Continuity | **not covered** | — | — |
 | 746 | `math.real.extreme-value-theorem` | Extreme Value Theorem | **not covered** | — | — |
@@ -1364,15 +1422,15 @@ Result per account in brackets: turns driven, and how the lesson closed (mastere
 | 823 | `math.meas.lp-space` | Lᵖ Spaces | A10 (7t, mastered) | none | — |
 | 824 | `math.meas.l2-space` | L² Space | A10 (22t, needs-review) | none | MATH-001, MATH-002, MATH-006, MATH-017 |
 | 825 | `math.meas.product-measure` | Product Measure and Fubini's Theorem | A10 (17t, needs-review) | none | MATH-001, MATH-002, MATH-003, MATH-017, MATH-018 |
-| 826 | `math.meas.radon-nikodym` | Radon-Nikodym Theorem | A10 (26t, needs-review) | none | MATH-001, MATH-002, MATH-004, MATH-006, MATH-016, MATH-017, MATH-018 |
+| 826 | `math.meas.radon-nikodym` | Radon-Nikodym Theorem | A10 (26t, needs-review) | none | MATH-001, MATH-002, MATH-004, MATH-006, MATH-016, MATH-017, MATH-018, MATH-023 |
 | 827 | `math.meas.abstract-measure-spaces` | Abstract Measure Spaces | A10 (24t, mastered) | none | MATH-003, MATH-006, MATH-017, MATH-018 |
-| 828 | `math.fnal.normed-space` | Normed Space | **not covered** | — | — |
-| 829 | `math.fnal.completeness` | Completeness | **not covered** | — | — |
-| 830 | `math.fnal.banach-space` | Banach Space | **not covered** | — | — |
-| 831 | `math.fnal.hilbert-space` | Hilbert Space | **not covered** | — | — |
-| 832 | `math.fnal.bounded-operator` | Bounded Linear Operator | **not covered** | — | — |
-| 833 | `math.fnal.dual-space-functional` | Dual Space | **not covered** | — | — |
-| 834 | `math.fnal.hahn-banach` | Hahn-Banach Theorem | **not covered** | — | — |
+| 828 | `math.fnal.normed-space` | Normed Space | A10 (27t, needs-review) | none | MATH-002, MATH-003, MATH-006, MATH-017, MATH-018 |
+| 829 | `math.fnal.completeness` | Completeness | A10 (28t, mastered) | none | MATH-003, MATH-006, MATH-017, MATH-018, MATH-023 |
+| 830 | `math.fnal.banach-space` | Banach Space | A10 (9t, mastered) | none | MATH-003 |
+| 831 | `math.fnal.hilbert-space` | Hilbert Space | A10 (22t, needs-review) | none | MATH-001, MATH-002, MATH-006, MATH-017, MATH-018 |
+| 832 | `math.fnal.bounded-operator` | Bounded Linear Operator | A10 (15t, mastered) | none | MATH-003 |
+| 833 | `math.fnal.dual-space-functional` | Dual Space | A10 (20t, needs-review) | none | MATH-001, MATH-002, MATH-017, MATH-018, MATH-023 |
+| 834 | `math.fnal.hahn-banach` | Hahn-Banach Theorem | A10 (25t, mastered) | none | MATH-002, MATH-003, MATH-006, MATH-017 |
 | 835 | `math.fnal.open-mapping-theorem` | Open Mapping Theorem | **not covered** | — | — |
 | 836 | `math.fnal.closed-graph-theorem` | Closed Graph Theorem | **not covered** | — | — |
 | 837 | `math.fnal.uniform-boundedness` | Uniform Boundedness Principle | **not covered** | — | — |
