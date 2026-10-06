@@ -115,7 +115,7 @@ describe('BIO-022 pipe tables (CHEM-065 rewrite)', () => {
 })
 
 describe('BIO-017 ecology lessons get their own figure, not the generic food chain', () => {
-  for (const id of ['bio.eco.biogeochemistry-advanced', 'bio.eco.landscape-conservation-ecology', 'bio.eco.microbial-ecology', 'bio.eco.population-growth-models-quantitative', 'bio.eco.predator-prey-dynamics']) {
+  for (const id of ['bio.eco.applied-ecology-ecosystem-services', 'bio.eco.biogeochemistry-advanced', 'bio.eco.landscape-conservation-ecology', 'bio.eco.microbial-ecology', 'bio.eco.population-growth-models-quantitative', 'bio.eco.predator-prey-dynamics']) {
     it(id, () => {
       expect(CONCEPT_SCENE_OVERRIDES).toContain(id)
       const spec = buildCanonicalScene(null, id)

@@ -898,6 +898,19 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   // equations and predator–prey coupling onto producers → herbivores →
   // carnivores. Existing generators only; every label from the concept's own
   // EB entry (educational-brain/concepts/biology/<id>.md, Core Understanding).
+  // Same defect, found by the 2026-10-06 live re-drive (#120): the food chain
+  // served for Applied Ecology and Ecosystem Services.
+  'bio.eco.applied-ecology-ecosystem-services': () => buildCellComparisonScene({
+    conceptId: 'bio.eco.applied-ecology-ecosystem-services',
+    title: 'Four Kinds of Ecosystem Services',
+    teachingGoal: 'A service belongs to a category by what it does for people: a product, a regulated process, an underlying process the others need, or a non-material benefit.',
+    groups: [
+      { label: 'Provisioning', description: 'direct products taken from ecosystems', items: ['food, timber, fresh water, medicines'] },
+      { label: 'Regulating', description: 'benefits from regulating natural processes', items: ['flood control by wetlands', 'pollination, water purification'] },
+      { label: 'Supporting', description: 'underlying processes the other three need', items: ['nutrient cycling, soil formation, primary production'] },
+      { label: 'Cultural', description: 'non-material benefits', items: ['recreation, beauty, spiritual and educational value'] },
+    ],
+  }),
   'bio.eco.biogeochemistry-advanced': () => buildCellPathwayScene({
     conceptId: 'bio.eco.biogeochemistry-advanced',
     title: 'The Sulfur Cycle: A Fourth Nutrient Cycle',
