@@ -8,6 +8,7 @@
  * deterministic, question-keyed permutation.
  */
 import { lowerEmphasis } from '@/lib/teaching/authoredProseForLearner'
+import { isVerdictHead, plainVerdictHead } from '@/lib/teaching/gateAssessment'
 import { describe, expect, it } from 'vitest'
 import { presentationOrder, probeToMcq } from '@/lib/teaching/gateAssessment'
 import { BIOLOGY_PROBES } from '@/lib/teaching/assets/biologySeedAssets'
@@ -52,10 +53,13 @@ describe('the served order', () => {
     // 2026-10-05, lowerEmphasis); the text is otherwise the authored text.
     for (const { p, m } of served) {
       // Compared case-insensitively: a split rationale starts its own sentence.
-      const authored = p.choices!.find((c) => c.isCorrect)!.text.trim().toLowerCase()
-      expect(full(m!, m!.correctIndex).replace(/\s[—–]\s/, ' — ').toLowerCase()).toBe(authored.replace(/\s[—–]\s/, ' — '))
-      expect(m!.options.map((_, i) => full(m!, i).replace(/\s[—–]\s/, ' — ').toLowerCase()).sort())
-        .toEqual(p.choices!.map((c) => c.text.trim().toLowerCase().replace(/\s[—–]\s/, ' — ')).sort())
+      // BIO-007 (2026-10-06): a bare verdict head is served as a plain answer
+      // ("Correct" -> "Yes, that is correct"); the rationale is unchanged.
+      const asServed = (t: string) => { const h = t.match(/^([\s\S]+?)\s[—–]\s([\s\S]+)$/); return h && isVerdictHead(h[1]) ? `${plainVerdictHead(h[1])} — ${h[2]}` : t }
+      const authored = asServed(p.choices!.find((c) => c.isCorrect)!.text.trim()).toLowerCase()
+      expect(asServed(full(m!, m!.correctIndex)).replace(/\s[—–]\s/, ' — ').toLowerCase()).toBe(authored.replace(/\s[—–]\s/, ' — '))
+      expect(m!.options.map((_, i) => asServed(full(m!, i)).replace(/\s[—–]\s/, ' — ').toLowerCase()).sort())
+        .toEqual(p.choices!.map((c) => asServed(c.text.trim()).toLowerCase().replace(/\s[—–]\s/, ' — ')).sort())
       expect(full(m!, m!.correctIndex)).toBe(lowerEmphasis(full(m!, m!.correctIndex)))
     }
   })

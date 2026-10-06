@@ -254,8 +254,12 @@ export function parseMcqTag(text: string): { mcq: TutorMCQ | null; cleanText: st
 
   const attrs = m[1]
   const read = (key: string): string | undefined => {
-    const am = attrs.match(new RegExp(`\\b${key}\\s*=\\s*"([^"]*)"`, 'i'))
-    const v = am?.[1]?.trim()
+    // BIO-014 (2026-10-05, bio.behav.foraging-behavior): a value with an
+    // escaped quote — a="Risk‑prone: prefers the higher‑variance \"gamble\""
+    // — was cut at the \" and served as "…higher‑variance \". An escaped
+    // quote is part of the value; it is shown as a plain quote.
+    const am = attrs.match(new RegExp(`\\b${key}\\s*=\\s*"((?:[^"\\\\]|\\\\.)*)"`, 'i'))
+    const v = am?.[1]?.replace(/\\(["\\])/g, '$1').trim()
     return v ? v : undefined
   }
 

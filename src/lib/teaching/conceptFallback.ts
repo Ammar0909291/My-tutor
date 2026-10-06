@@ -19,7 +19,15 @@ export function conceptFallbackText(title: string, description: string): string 
   const t = title.trim()
   if (d.length === 0) return t
   const isList = d.includes(';') || !/[.!?]$/.test(d)
-  if (!isList) return d
+  // BIO-010 (2026-10-05, biology run #61, #2, #22): "Fossil record, comparative
+  // anatomy — homologous and analogous structures, embryology, biogeography and
+  // molecular evidence supporting common descent." was the whole reply — a
+  // syllabus phrase with a full stop, not a sentence. Only a description that
+  // reads as a sentence (it has a verb) is said as it is.
+  const isSentence = /\b(?:is|are|was|were|has|have|can|cannot|means?|describes?|explains?|shows?|refers?|happens?|occurs?|forms?|moves?|makes?|uses?|gives?|depends?)\b/i.test(d)
+  const isSyllabus = !isSentence && (d.match(/,/g) ?? []).length >= 2 && /^[^,.]{1,40},/.test(d)
+  if (!isList && !isSyllabus) return d
+  if (!isList) return `In this lesson on ${t} we will look at ${d.charAt(0).toLowerCase()}${d.slice(1).replace(/[.!?]+$/, '')}.`
   // CHEM-064 (2026-10-05, chemistry real-learner run): "Pure Substances and
   // Mixtures covers: Elements and compounds as pure substances; homogeneous and
   // heterogeneous mixtures; separation techniques." reached learners as a

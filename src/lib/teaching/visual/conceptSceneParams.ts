@@ -892,6 +892,68 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     ],
   }),
 
+  // BIO-017 (2026-10-05, biology real-learner run #121, #123–#126): these five
+  // lessons got only the 'bio.eco' domain default — an untitled food chain —
+  // and the tutor forced the sulfur cycle, habitat corridors, microbes, growth
+  // equations and predator–prey coupling onto producers → herbivores →
+  // carnivores. Existing generators only; every label from the concept's own
+  // EB entry (educational-brain/concepts/biology/<id>.md, Core Understanding).
+  'bio.eco.biogeochemistry-advanced': () => buildCellPathwayScene({
+    conceptId: 'bio.eco.biogeochemistry-advanced',
+    title: 'The Sulfur Cycle: A Fourth Nutrient Cycle',
+    teachingGoal: 'Sulfur moves between atmospheric, oceanic and land reservoirs and living things by the same logic as the carbon, nitrogen and phosphorus cycles, with microbes doing much of the work.',
+    cyclic: true,
+    stages: [
+      { name: 'Release', description: 'volcanoes and rocks release sulfur into air, water and soil' },
+      { name: 'Sulfate in soil and sea', description: 'the abiotic reservoir plants draw on' },
+      { name: 'Into living things', description: 'built into biological molecules such as certain amino acids' },
+      { name: 'Microbes transform it', description: 'specific microorganisms reduce and oxidise sulfur compounds' },
+    ],
+  }),
+  'bio.eco.landscape-conservation-ecology': () => buildCellComparisonScene({
+    conceptId: 'bio.eco.landscape-conservation-ecology',
+    title: 'Fragmentation Harms Through Lost Connectivity',
+    teachingGoal: 'Breaking a habitat into isolated patches stops organisms moving between them; corridors and stepping stones restore the movement paths without adding patch area.',
+    groups: [
+      { label: 'Continuous habitat', description: 'organisms move freely across one large area', items: ['dispersal, mates, gene flow all possible'] },
+      { label: 'Fragmented patches', description: 'the same area broken into small, isolated patches', items: ['movement between patches is cut', 'lost local populations are not recolonised'] },
+      { label: 'Corridors and stepping stones', description: 'restore the movement paths, not the patch area', items: ['corridor: a continuous strip joining patches', 'stepping stones: small patches close enough to cross in sequence'] },
+    ],
+  }),
+  'bio.eco.microbial-ecology': () => buildCellHubScene({
+    conceptId: 'bio.eco.microbial-ecology',
+    hubLabel: 'Microbes',
+    title: 'Microbes Drive the Nutrient Cycles',
+    teachingGoal: 'Bacteria, archaea and microbial eukaryotes perform the transformations larger organisms cannot; without them nutrients stay locked in unusable forms.',
+    spokes: [
+      { name: 'Nitrogen fixation', description: 'air N₂ into forms plants can use' },
+      { name: 'Nitrification', description: 'ammonium to nitrite and nitrate' },
+      { name: 'Denitrification', description: 'nitrate back to N₂ gas' },
+      { name: 'Decomposition', description: 'organic matter broken down, nutrients released' },
+      { name: 'Sulfur cycling', description: 'sulfur compounds reduced and oxidised' },
+      { name: 'Biofilms', description: 'organised communities in a self-made matrix, not loose cells' },
+    ],
+  }),
+  'bio.eco.population-growth-models-quantitative': () => buildCellComparisonScene({
+    conceptId: 'bio.eco.population-growth-models-quantitative',
+    title: 'Two Growth Models: Exponential and Logistic',
+    teachingGoal: 'dN/dt = rN grows without limit; dN/dt = rN(1 − N/K) grows almost exponentially while N is small and slows to zero as N approaches the carrying capacity K.',
+    groups: [
+      { label: 'Exponential', description: 'dN/dt = rN', items: ['growth rate proportional to N', 'J-shaped, no upper limit', 'realistic only with unlimited resources'] },
+      { label: 'Logistic', description: 'dN/dt = rN(1 − N/K)', items: ['N small: (1 − N/K) ≈ 1, near-exponential', 'N → K: (1 − N/K) → 0, growth stops', 'S-shaped curve levelling at K'] },
+    ],
+  }),
+  'bio.eco.predator-prey-dynamics': () => buildCellComparisonScene({
+    conceptId: 'bio.eco.predator-prey-dynamics',
+    title: 'Predator and Prey: Two Coupled Equations',
+    teachingGoal: 'In the Lotka–Volterra model each population’s growth rate depends on BOTH populations at once — the coupling that makes the two rise and fall together.',
+    groups: [
+      { label: 'Prey equation', description: 'its growth rate depends on the predators too', items: ['rises with its own reproduction', 'falls with predation, which grows with predator numbers'] },
+      { label: 'Predator equation', description: 'its growth rate depends on the prey too', items: ['rises with prey available to eat', 'falls with its own natural mortality'] },
+      { label: 'Predation rate', description: 'two distinct parts', items: ['functional response: prey killed per predator as prey density changes', 'numerical response: how predator numbers change'] },
+    ],
+  }),
+
   // Archetype C — the system-boundary/energy-balance diagram.
   'chem.thermo.system': () => buildSystemBoundaryScene('closed'),
   'chem.thermo.first-law': () => buildChemFirstLawScene(100, -40),

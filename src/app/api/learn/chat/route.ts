@@ -3720,6 +3720,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // request also overrides Phase G's ask-turn visual suppression.
           learnerRequestHoisted = turnIntent.learnerRequest  // Phase 1
           figureQuestionHoisted = (await import('@/lib/teaching/masteryGate')).asksAboutTheFigure(learnerAuthoredMessage)
+          // BIO-013 (2026-10-05, bio.sys.metabolic-network-modelling #161): a bare
+          // "what is this?" with a figure on screen was answered "Do you mean the
+          // FBA box or the Kinetic models box?" — it is a question about the
+          // figure, answered from the figure (PHYS-021 contract). Only while a
+          // figure is held; otherwise "this" is the lesson idea and nothing changes.
+          if (!figureQuestionHoisted && /^\s*(?:and\s+)?what\s+(?:is|'s)\s+(?:this|that|it)\s*\??\s*$/i.test(learnerAuthoredMessage)
+            && typeof ((learnSession.contextSnapshot as { visualSession?: { conceptId?: unknown } } | null)?.visualSession?.conceptId) === 'string') {
+            figureQuestionHoisted = true
+          }
           // Visualization Registry Phase 2: an explicit "show me a diagram"
           // request with a known visual is FORCED to render server-side —
           // never left to the LLM's discretion to emit (or skip) the tag.
@@ -10536,9 +10545,18 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // come through") must not go on to say "Study it while I explain" —
         // there is no explanation coming.
         const { isDegradedProvider: degradedForAck } = await import('@/lib/eos-runtime/degradedMode')
+        // BIO-020 (2026-10-05, biology run, 111 occurrences): a figure re-attached
+        // later in the same lesson was announced again with the stock line
+        // ("Take a look at the process beside this message — it shows …") after
+        // replies about something else. Announced once per lesson, unless the
+        // learner asked to see a picture.
         const ack = degradedForAck(provider)
           ? { appended: false, text: cleanText }
-          : ensureVisualAcknowledged(cleanText, resolvedVisualDecision, figureIntroducedThisTurn && visualFired, serveLessonComplete || /\[LESSON_COMPLETE\]/i.test(cleanText))
+          : ensureVisualAcknowledged(cleanText, resolvedVisualDecision,
+            figureIntroducedThisTurn && visualFired
+              && (learnerRequestHoisted === 'diagram'
+                || !snapshotRRMLog.some((e) => e.matchedConcept != null && e.matchedConcept === (resolvedVisualDecision?.asset?.conceptId ?? resolvedConceptId))),
+            serveLessonComplete || /\[LESSON_COMPLETE\]/i.test(cleanText))
         if (ack.appended) {
           console.warn('[visual-acknowledgement] ' + JSON.stringify({
             event: 'unacknowledged-figure-introduced',
@@ -11257,6 +11275,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           const priorTutor = learnSession.messages
             .filter((m) => m.role === MessageRole.ASSISTANT && typeof m.content === 'string')
             .map((m) => m.content as string)
+          const meta = caps.stripMetaTalk(cleanText)
+          if (meta.removed.length > 0) {
+            console.log('[meta-talk-stripped] ' + JSON.stringify({ removed: meta.removed.map((r) => r.slice(0, 120)).slice(0, 3) }))
+            cleanText = meta.text
+          }
           const emp = caps.stripEmpathyOpener(cleanText, learnerAuthoredMessage, priorTutor)
           if (emp.stripped) {
             console.log('[empathy-opener-cap] stripped a repeated or unprompted empathy opener')
@@ -11322,6 +11345,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // CHEM-065/CHEM-129: no pipe table, no caret/brace notation outside math —
       // the lesson renderer shows both literally. Same single variable, same reason.
       cleanText = (await import('@/lib/text/plainNotation')).plainNotation(cleanText)
+      // BIO-015: feedback is said to the learner, never about "the learner".
+      cleanText = (await import('@/lib/text/secondPerson')).toSecondPerson(cleanText)
 
       const { appendMcqToHistoryText } = await import('@/lib/teaching/mcq')
       const contentForHistory = appendMcqToHistoryText(cleanText, mcqHoisted)
@@ -12207,7 +12232,17 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // second source of truth. After a real restart, lesson-init has
               // opened an IN_PROGRESS attempt, this flag is false, and
               // recording resumes exactly as before.
-              if (isConceptClosed(stateForOutcome) && !resolvedLessonCompleted) {
+              // BIO-002: the budget never closes a lesson on the turn the
+              // learner asked for help — that request is answered first.
+              const { deferCloseForRequest } = await import('@/lib/teaching/conceptBudget')
+              const { detectLearnerRequest: dlrForClose, asksForPractice: askedForClose, asksAboutTheFigure: figForClose } = await import('@/lib/teaching/masteryGate')
+              const requestThisTurn = dlrForClose(learnerAuthoredMessage) !== null
+                || (await import('@/lib/teaching/adaptationRequest')).adaptationKind(learnerAuthoredMessage) !== null
+                || (await import('@/lib/teaching/mcq')).readsAsRequestToTutor(learnerAuthoredMessage)
+                || askedForClose(learnerAuthoredMessage) || figForClose(learnerAuthoredMessage)
+              const closeDeferred = deferCloseForRequest(stateForOutcome, requestThisTurn)
+              if (closeDeferred) console.log('[budget-close-deferred] ' + JSON.stringify({ conceptId: stateForOutcome.conceptId, reason: 'learner-request' }))
+              if (isConceptClosed(stateForOutcome) && !resolvedLessonCompleted && !closeDeferred) {
                 // LessonContext addresses lessons by order within the
                 // subject's curriculum; lessonKeyFor renders that into the
                 // single key format so one lesson cannot be recorded twice
@@ -13854,6 +13889,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         }
       }
 
+      // BIO-015: the assembled texts too are said to the learner, not about them.
+      servedText = (await import('@/lib/text/secondPerson')).toSecondPerson(servedText)
       return NextResponse.json({
         success: true, text: servedText, provider,
         // PROVENANCE SOURCE OF TRUTH. `provider` names the serving branch

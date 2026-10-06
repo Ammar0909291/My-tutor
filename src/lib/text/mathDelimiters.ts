@@ -87,7 +87,15 @@ export function normalizeMathDelimiters(text: string): string {
       }
       if (end !== -1) {
         const inner = text.slice(i + 1, end)
-        if (looksLikeMath(inner)) {
+        // BIO-039 (2026-10-05, bio.eco.applied-ecology-ecosystem-services): "At a
+        // market price of $200 per cubic metre … = 5 × 100 × 200 = **$100 000
+        // per year**" became \(200 per cubic metre … = **\)100 000. Two money
+        // signs, not maths: a closing "$" with a digit right after it opens an
+        // amount, and a span that starts with an amount and runs on in prose
+        // words is prose.
+        const currency = /\d/.test(text[end + 1] ?? '')
+          || (/^\s*\d/.test(inner) && /[A-Za-z]{4,}/.test(inner.replace(/\\[A-Za-z]+/g, '')))
+        if (!currency && looksLikeMath(inner)) {
           out.push(`\\(${inner.trim()}\\)`)
           i = end + 1
           continue

@@ -411,3 +411,23 @@ export function buildLessonFlowBlock(state: ConversationState): string {
   if (lines.length === 0) return ''
   return '\n\nLESSON FLOW (mandatory):\n' + lines.join('\n')
 }
+
+/**
+ * BIO-002 (2026-10-05, biology real-learner run: 149 of 199 lessons closed as
+ * needs-review, 142 of them ON a plain help request — "explain again",
+ * "explain simpler", "i dont understand this picture", "quiz me"): the turn
+ * budget ran out on the very turn the learner asked for help, and the reply to
+ * the request was replaced by "Let's pause … here for now".
+ *
+ * When the ONLY reason to close is the turn budget (not mastery, not repeated
+ * failure) and the learner's message this turn is an explicit request, the
+ * close waits: the request is answered and the concept closes on the next
+ * turn that is not a request. ABSOLUTE_TURN_CEILING still ends it, so this can
+ * never loop. No counter moves and nothing is certified.
+ */
+export function deferCloseForRequest(state: ConversationState, learnerMadeARequest: boolean): boolean {
+  if (!learnerMadeARequest || isAuthoritativelyMastered(state)) return false
+  const b = evaluateConceptBudget(state)
+  if (b.status !== 'exhausted' || b.reason !== 'turns') return false
+  return (state.turnsTotalOnConcept ?? state.turnsOnConcept ?? 0) < ABSOLUTE_TURN_CEILING
+}

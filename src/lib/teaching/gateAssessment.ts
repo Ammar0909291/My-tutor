@@ -258,6 +258,30 @@ const headWords = (h: string) =>
  * after the dash. When one head is another plus only hedge words, the split is
  * refused and the full text is served as before.
  */
+/**
+ * BIO-007 (2026-10-05, bio.found.what-is-biology #1, #81): an option
+ * authored as "Correct — biology is more than memorising names" was served as
+ * its head alone, so the card read "Wrong" / "Correct" — and a weak reader
+ * cannot tell whether "Correct" means the claim or their choice. A head that is
+ * only a verdict word is served as a plain answer ("Yes, that is correct" /
+ * "No, that is wrong") — still short, so the length cue stays removed.
+ */
+const VERDICT_HEAD_RE = /^(?:correct|incorrect|wrong|right|not\s+(?:necessarily|quite|really|always)|partly|partially(?:\s+(?:right|correct))?)[\s.!,:;]*$/i
+export function isVerdictHead(head: string): boolean {
+  return VERDICT_HEAD_RE.test((head ?? '').trim())
+}
+/** A verdict head said as an answer a weak reader cannot misread. Keeps the head
+ *  short, so the length cue the split removes does not come back. */
+export function plainVerdictHead(head: string): string {
+  const h = (head ?? '').trim().toLowerCase().replace(/[\s.!,:;]+$/, '')
+  if (/^(?:correct|right)$/.test(h)) return 'Yes, that is correct'
+  if (/^(?:incorrect|wrong)$/.test(h)) return 'No, that is wrong'
+  if (/^not\s+(?:necessarily|always)$/.test(h)) return 'Not always, it depends'
+  if (/^not\s+(?:quite|really)$/.test(h)) return 'No, not quite'
+  if (/^partly|^partially/.test(h)) return 'Partly'
+  return head
+}
+
 function headsDiscriminate(heads: string[]): boolean {
   const sets = heads.map(headWords)
   for (let i = 0; i < sets.length; i++) {
@@ -284,7 +308,9 @@ export function splitAnswerHeads(options: string[]): { heads: string[]; rational
   if (new Set(heads.map((h) => norm(h).toLowerCase())).size !== heads.length) return null
   if (heads.some((h) => norm(h).length === 0)) return null
   if (!headsDiscriminate(heads)) return null
-  return { heads, rationales }
+  const plain = heads.map((h) => (isVerdictHead(h) ? plainVerdictHead(h) : h))
+  if (new Set(plain.map((h) => norm(h).toLowerCase())).size !== plain.length) return null
+  return { heads: plain, rationales }
 }
 
 /**
@@ -335,7 +361,9 @@ export function splitAnswerHeadsPerOption(options: string[]): { heads: string[];
   if (new Set(heads.map((h) => norm(h).toLowerCase())).size !== heads.length) return null
   if (heads.some((h) => norm(h).length === 0)) return null
   if (!headsDiscriminate(heads)) return null
-  return { heads, rationales }
+  const plain = heads.map((h) => (isVerdictHead(h) ? plainVerdictHead(h) : h))
+  if (new Set(plain.map((h) => norm(h).toLowerCase())).size !== plain.length) return null
+  return { heads: plain, rationales }
 }
 
 /**
@@ -1514,8 +1542,21 @@ const INSTRUCTS_A_CHOICE =
 
 const ANNOUNCES_A_CHECK_COLON = /^(?:[^.!?]{0,30}[,—–-]\s*)?here(?:(?:'|’)s| is)\b/i
 const ANNOUNCED_CHECK_NOUN_COLON = /\b(?:a|your|another|the next)\b[^.!?:]{0,40}\b(?:check|quiz|question|test)\b[^.!?:]{0,60}:$/i
+// BIO-005 / BIO-011 / BIO-006 (2026-10-05, biology run): promises with nothing
+// after them — "Let's make it easier with a quick choice." (#101, no card),
+// "When you feel set, just let me know and I'll present the next question for
+// you." (#1), "I'll have the next question ready… Just let me know when you'd
+// like to move on" (#121), "let's see if you can pick out one" (#61, no card),
+// "Sure, let's walk through the figure together, focusing on one part at a
+// time." and nothing else (#82).
+const PROMISES_A_CHOICE = /^(?:[^.!?]{0,30}[,—–-]\s*)?let(?:'|’)s\b[^.!?]{0,60}\b(?:quick\s+choice|choice|pick\s+out|choose\s+(?:one|the|between))\b[^.!?]{0,60}[.!]?$/i
+const PROMISES_A_LATER_QUESTION = /\b(?:i(?:'|’)ll|i\s+will)\s+(?:present|give|show|have|send|ask|bring)\b[^.!?]{0,40}\b(?:next\s+)?(?:question|check|quiz)\b|\blet\s+me\s+know\s+when\s+you(?:'|’)d\s+like\s+to\s+move\s+on\b/i
+const PROMISES_A_WALKTHROUGH = /^(?:(?:sure|ok(?:ay)?|alright|great)[,\s—–-]*)?let(?:'|’)s\s+(?:walk|go)\s+through\b[^.!?]{0,90}(?:one\s+(?:part|step)\s+at\s+a\s+time|together|step\s+by\s+step)[^.!?]{0,30}[.!]?$/i
 const announcesACheck = (sentence: string): boolean =>
-  ANNOUNCES_A_CHECK.test(sentence)
+  PROMISES_A_CHOICE.test(sentence)
+  || PROMISES_A_LATER_QUESTION.test(sentence)
+  || PROMISES_A_WALKTHROUGH.test(sentence)
+  || ANNOUNCES_A_CHECK.test(sentence)
   || INSTRUCTS_A_CHOICE.test(sentence)
   || (ANNOUNCES_A_CHECK_COLON.test(sentence) && ANNOUNCED_CHECK_NOUN_COLON.test(sentence))
 

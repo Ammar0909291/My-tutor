@@ -58,5 +58,26 @@ export function analogyCapReached(priorTutor: readonly string[]): boolean {
 
 export const NO_ANALOGY_APPENDIX =
   '\n\nNO ANALOGY THIS TURN. The learner has already had several comparisons and stories in this lesson. '
-  + 'Explain the idea directly, in plain words, with the lesson\'s own chemistry — the actual particles, '
+  + 'Explain the idea directly, in plain words, with the lesson\'s own subject matter — the actual things involved, '
   + 'numbers or observations. No "think of it like", no "imagine", no metaphor.'
+
+/**
+ * BIO-001 (2026-10-05, biology run #41, #61, #121, #142): "why?" was answered
+ * with the tutor's account of its own process — "because I wanted to first
+ * acknowledge how you're feeling…", "I didn't repeat the same explanation
+ * verbatim", "Because the system is set up to avoid repeating the same
+ * explanation…", "I hear you're wondering why I'm not just repeating the
+ * earlier explanation". Those sentences go; the teaching stays. A reply left
+ * with fewer than 8 words is not touched (the caller's repairs own that case).
+ */
+const META_TALK_RE = /\b(?:the\s+system\s+(?:is\s+set\s+up|won(?:'|’)t|doesn(?:'|’)t)|(?:avoid|not|didn(?:'|’)t|did\s+not)\s+(?:just\s+)?repeat(?:ing)?\s+(?:the\s+)?(?:same|earlier|previous)\s+explanation|why\s+i(?:(?:'|’)m|\s+am|\s+haven(?:'|’)t|\s+have\s+not|\s+didn(?:'|’)t)\s+(?:not\s+)?(?:just\s+)?(?:given|giving|repeating|repeated|shown|showing)|i\s+wanted\s+to\s+first\s+acknowledge|repeat\s+the\s+same\s+explanation\s+verbatim)\b/i
+
+export function stripMetaTalk(text: string): { text: string; removed: string[] } {
+  const src = (text ?? '').trim()
+  const removed: string[] = []
+  const kept = src.split(/\n{2,}/).map((para) => (para.match(/(?:[^.!?]|[.!?](?=\S))+(?:[.!?]+|$)/g) ?? [para])
+    .filter((s) => { if (META_TALK_RE.test(s)) { removed.push(s.trim()); return false } return true })
+    .join('').trim()).filter(Boolean).join('\n\n')
+  if (removed.length === 0 || (kept.match(/\S+/g) ?? []).length < 8) return { text, removed: [] }
+  return { text: kept, removed }
+}
