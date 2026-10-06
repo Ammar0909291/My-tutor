@@ -37,6 +37,8 @@ export function carriesFigure(p: TurnPayload): boolean {
 /** A short, human-readable name for whatever figure is attached, if any. */
 export function figureLabel(p: TurnPayload): string | null {
   const probe = (v: unknown): string | null => {
+    // A 'card' figure (the 3-D registry figures) is sent as its type string.
+    if (typeof v === 'string' && v.trim()) return `visual=${v.trim()}`
     if (!v || typeof v !== 'object') return null
     const o = v as Record<string, unknown>
     for (const k of ['title', 'name', 'type', 'kind', 'id', 'conceptId', 'renderer']) {
