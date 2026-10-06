@@ -2,6 +2,9 @@
  * Targeted production verification (2026-10-06) of the cross-session fixes:
  *   B — CHEM-148/BIO-042 (server half): two tab ids → two sessions; a reload
  *       (same tab id) resumes the same session.
+ *   D — the same, through the path a real concept switch takes: lesson A →
+ *       answer cards → lesson B in the SAME session (Next) → back to A
+ *       (Previous) → keep quizzing (QA_PARTS=D runs only this).
  *   C — CHEM-033/017, BIO-018, PHYS-007: answer cards, take a real excursion
  *       to another concept, come back, keep quizzing; an answered card must
  *       not come back. Session ids are printed so the stored ledger
@@ -68,13 +71,47 @@ async function partC(subject: string, order: number, excursion: string) {
   for (const l of log) console.log('   ' + l)
 }
 
+async function partD(subject: string, orderA: number, orderB: number) {
+  const ls = await lessonsFor(subject)
+  const ref = (o: number) => { const l = ls.find((x) => x.order === o)!; return { lessonTitle: l.lessonTitle, lessonOrder: l.order, topicSlug: l.topicSlug, unitTitle: l.unitTitle, totalLessons: ls.length } }
+  const sid = await createSession(acct!.cookie, subject, `probe-switch-${subject}`)
+  const answered = new Set<string>()
+  const log: string[] = []
+  let card: TurnPayload['mcq'] = null
+  const record = (tag: string, p: TurnPayload) => {
+    const repeat = !!(p.mcq && answered.has(p.mcq.question))
+    log.push(`${tag.slice(0, 40)} -> provider=${p.provider} card=${p.mcq ? JSON.stringify(p.mcq.question.slice(0, 70)) : 'none'}${repeat ? ' REPEAT-OF-ANSWERED' : ''} | ${head(p)}`)
+    card = p.mcq ?? null
+    return repeat
+  }
+  const step = async (msg: string) => { await sleep(2500); return record(msg, await say(acct!.cookie, sid, msg)) }
+  const answer = async () => { if (!card) return false; answered.add(card.question); return step(card.options[0]) }
+  record('open A', await openLesson(acct!.cookie, sid, ref(orderA)))
+  for (let i = 0; i < 3; i++) { await step('quiz me'); await answer() }
+  const answeredInA = answered.size
+  record('open B (same session)', await openLesson(acct!.cookie, sid, ref(orderB)))
+  await step('quiz me'); await answer()
+  record('back to A (same session)', await openLesson(acct!.cookie, sid, ref(orderA)))
+  let repeats = 0
+  for (let i = 0; i < 3; i++) { if (await step('quiz me')) repeats++; if (await answer()) repeats++ }
+  console.log(JSON.stringify({ part: 'D', subject, orderA, orderB, sessionId: sid, answeredInA, repeatsAfterReturn: repeats }))
+  for (const l of log) console.log('   ' + l)
+}
+
 async function main() {
   acct = await createQaAccount('xsession')
   await fetch(`${BASE}/api/onboarding`, { method: 'POST', headers: { 'Content-Type': 'application/json', cookie: acct.cookie }, body: JSON.stringify({ subjectSlug: 'chemistry', currentLevel: 'beginner', voiceChoice: 'male', teachingLanguage: 'en', selfDescription: 'I am learning.' }) })
-  await partB()
-  await partC('chemistry', 151, 'wait, what is resonance? explain resonance first please')
-  await partC('biology', 21, 'wait, what is DNA replication? explain that first please')
-  await partC('physics', 134, 'wait, what is diffraction? explain diffraction first please')
+  if ((process.env.QA_PARTS ?? 'BC').includes('B')) await partB()
+  if ((process.env.QA_PARTS ?? 'BC').includes('C')) {
+    await partC('chemistry', 151, 'wait, what is resonance? explain resonance first please')
+    await partC('biology', 21, 'wait, what is DNA replication? explain that first please')
+    await partC('physics', 134, 'wait, what is diffraction? explain diffraction first please')
+  }
+  if ((process.env.QA_PARTS ?? 'BC').includes('D')) {
+    await partD('chemistry', 151, 152)
+    await partD('biology', 21, 22)
+    await partD('physics', 134, 135)
+  }
   console.log('READY-FOR-DB-READ (touch ' + GO + ' to delete the account)')
   for (let i = 0; i < 240 && !existsSync(GO); i++) await sleep(5000)
 }
