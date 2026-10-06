@@ -11,8 +11,10 @@
 - P1: 4
 - P2: 22
 - P3: 16
-- Open: 42
-- Fixed: 0
+- Open: 29
+- Fixed: 13
+- Open (of which partially fixed): 4
+- Open (of which fixed in repo, production not converged): 0
 <!-- SUMMARY:END -->
 
 ## Scope
@@ -97,7 +99,8 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (10 occurrences in 9 lessons): #61 (A4) t14; #121 (A7) t7; #142 (A8) t3; #16 (A1) t18; #41 (A3) t4; #42 (A3) t3; #93 (A5) t15; #128 (A7) t2; #176 (A9) t7
 - Notes on occurrences: #61 t14: "why?" -> "I mentioned that we’d already covered the idea of homologous structures earlier, so I didn’t repeat the same explanation verbatim." · #121 t7: "why?" -> "Because the system is set up to avoid repeating the same explanation, we need to give you a fresh, simpler way to look at the idea." · #142 t3: "give me example" -> "I hear you’re wondering why I’m not just repeating the earlier explanation"
 - Related defect: —
-- Status: OPEN
+- Status: FIXED
+- Fix: c4a6afc — sentences in which the tutor explains its own process ("the system is set up to avoid repeating…", "I wanted to first acknowledge…") are removed from model replies (reuseCaps.ts stripMetaTalk, logged [meta-talk-stripped]). Test: src/tests/bioRealLearnerFixes.test.ts.
 
 ### BIO-002 — Lessons end with "Let's pause … worth another look later" on a plain help request, with mastery incomplete
 
@@ -116,7 +119,8 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (142 occurrences in 137 lessons): #61 (A4) tt18/t18; #141 (A8) tt19/t19; #161 (A9) tt17/t17; #21 (A2) tt20/t20; #63 (A4) tt26/t25; #3 (A1) t16; #4 (A1) t23; #5 (A1) t20; #7 (A1) t16; #8 (A1) t21; #9 (A1) t13; #10 (A1) t21; #12 (A1) t16; #13 (A1) t20; #14 (A1) t14; #16 (A1) t29; #17 (A1) t19; #18 (A1) t20; #19 (A1) t23; #182 (A10) t26; #185 (A10) t21; #186 (A10) t19; #187 (A10) t24; #188 (A10) t22; #190 (A10) t20; #191 (A10) t19; #192 (A10) t8; #193 (A10) t13; #195 (A10) t19; #196 (A10) t21; #199 (A10) t18; #23 (A2) t15; #24 (A2) t19; #25 (A2) t23; #26 (A2) t21; #27 (A2) t18; #28 (A2) t22; #29 (A2) t14; #30 (A2) t24; #32 (A2) t21; #34 (A2) t27; #35 (A2) t16; #38 (A2) t12; #41 (A3) t19; #42 (A3) t23; #43 (A3) t22; #44 (A3) t22; #45 (A3) t26; #47 (A3) t24; #48 (A3) t19; #49 (A3) t23; #52 (A3) t19; #54 (A3) t19; #56 (A3) t20; #57 (A3) t18; #58 (A3) t13; #62 (A4) t20; #64 (A4) t21; #65 (A4) t23; #66 (A4) t16; #67 (A4) t16; #70 (A4) t12; #74 (A4) t16; #78 (A4) t19; #79 (A4) t21; #80 (A4) t26; #82 (A5) t17; #83 (A5) t20; #84 (A5) t25; #85 (A5) t23; #86 (A5) t26; #87 (A5) t19; #88 (A5) t18; #89 (A5) t18; #90 (A5) t19; #91 (A5) t19; #92 (A5) t17; #95 (A5) t12; #96 (A5) t16; #99 (A5) t24; #102 (A6) t27; #103 (A6) t23; #104 (A6) t21; #105 (A6) t23; #106 (A6) t14; #107 (A6) t20; #108 (A6) t24; #109 (A6) t24; #110 (A6) t26; #111 (A6) t19; #112 (A6) t15; #115 (A6) t19; #119 (A6) t19; #124 (A7) t20; #125 (A7) t22; #126 (A7) t20; #127 (A7) t22; #128 (A7) t21; #129 (A7) t24; #130 (A7) t17; #131 (A7) t20; #132 (A7) t26; #133 (A7) t22; #135 (A7) t15; #136 (A7) t24; #137 (A7) t24; #139 (A7) t15; #140 (A7) t17; #143 (A8) t21; #145 (A8) t17; #147 (A8) t22; #148 (A8) t12; #149 (A8) t18; #150 (A8) t23; #152 (A8) t16; #153 (A8) t24; #154 (A8) t9; #155 (A8) t25; #156 (A8) t19; #157 (A8) t21; #158 (A8) t29; #160 (A8) t19; #162 (A9) t21; #163 (A9) t21; #165 (A9) t22; #166 (A9) t22; #167 (A9) t19; #168 (A9) t16; #169 (A9) t18; #170 (A9) t19; #171 (A9) t18; #172 (A9) t24; #175 (A9) t20; #177 (A9) t19; #178 (A9) t15; #179 (A9) t20; #180 (A9) t21
 - Notes on occurrences: #61 tt18: Paused on "explain again" (mastery CHECK, not verified) · #141 tt19: Paused on "continue" · #161 tt17: Paused on "explain simpler" · #21 tt20: Paused on "i dont understand this picture" · #63 tt26: Paused on "quiz me" after 25 turns
 - Related defect: —
-- Status: OPEN
+- Status: FIXED
+- Fix: c4a6afc — the turn budget (12 + one 6-turn extension) is designed; the defect was the close firing ON the help-request turn, replacing the reply with "Let's pause …". When the budget is the only closing reason and the learner's message is a request (explain again/simpler, a picture question, quiz me, an adaptation ask), the request is answered and the close waits for a non-request turn; ABSOLUTE_TURN_CEILING (30) still ends it (conceptBudget.ts deferCloseForRequest, logged [budget-close-deferred]). Test: src/tests/bioRealLearnerFixes.test.ts. The 75 % needs-review rate itself also reflects the persona's ~20 turns per lesson vs the budget — the budget size is owner policy.
 
 ### BIO-003 — Canned empathy openers unrelated to the message ("I hear you’re feeling stuck, so let’s…")
 
@@ -135,7 +139,8 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (473 occurrences in 175 lessons): #101 (A6) tt5,t12/t5/t12/t14; #141 (A8) tt2,t5,t12,t18/t5/t12/t18; #121 (A7) tt9,t11/t9/t11; #21 (A2) tt12,t16,t17/t12/t16/t17; #1 (A1) t2/t7/t10; #2 (A1) t2/t6/t15/t18; #3 (A1) t11/t15; #4 (A1) t8/t12; #5 (A1) t3/t14; #6 (A1) t5; #7 (A1) t5/t9/t13; #8 (A1) t3/t9; #10 (A1) t9/t10/t17/t18; #12 (A1) t4; #13 (A1) t4/t6/t18; #14 (A1) t4/t13; #15 (A1) t4/t9/t10; #16 (A1) t16/t20; #17 (A1) t12/t15/t16; #18 (A1) t12/t15; #19 (A1) t10/t18; #20 (A1) t3/t11; #182 (A10) t5/t7/t18/t19/t25; #183 (A10) t6/t7; #185 (A10) t7/t14/t20; #186 (A10) t2/t8/t11/t14/t16; #187 (A10) t7/t9/t22; #188 (A10) t4/t5/t8/t10/t15; #189 (A10) t3/t6/t9/t22; #190 (A10) t12/t15; #191 (A10) t18; #193 (A10) t3/t5/t12; #195 (A10) t6/t8/t9/t13/t17; #196 (A10) t3/t4/t11/t13/t15; #197 (A10) t7/t15/t16; #198 (A10) t4/t5; #199 (A10) t9/t17; #22 (A2) t3; #23 (A2) t13; #24 (A2) t18; #25 (A2) t2/t3/t14; #26 (A2) t4/t7/t10/t11/t18; #27 (A2) t2/t5/t15; #28 (A2) t9/t21; #29 (A2) t12; #30 (A2) t3/t4/t10/t13/t17/t23; #31 (A2) t2/t8/t15/t17/t22; #32 (A2) t10; #33 (A2) t3/t12; #34 (A2) t10/t11/t14/t17/t22; #35 (A2) t3/t15; #37 (A2) t14/t16; #38 (A2) t2/t4/t5; #39 (A2) t10/t11/t14/t16/t21; #41 (A3) t17; #42 (A3) t3/t6/t16; #43 (A3) t2/t3/t9/t20; #44 (A3) t3/t4/t11/t19/t20; #45 (A3) t19/t25; #46 (A3) t4/t12/t13; #47 (A3) t4/t18; #48 (A3) t2/t5/t18; #49 (A3) t5/t18/t20; #50 (A3) t9; #52 (A3) t9/t10/t13/t17; #53 (A3) t6/t9/t10; #54 (A3) t2/t12/t17; #55 (A3) t4; #56 (A3) t3/t7/t18; #57 (A3) t3/t6; #58 (A3) t12; #59 (A3) t5/t7/t15/t18; #60 (A3) t8/t9/t10/t13; #61 (A4) t14; #62 (A4) t16; #63 (A4) t3/t7/t15/t17/t19; #64 (A4) t10/t11/t12; #65 (A4) t18/t19; #66 (A4) t13/t14; #67 (A4) t7; #69 (A4) t3/t4/t7; #71 (A4) t8; #72 (A4) t4/t6/t11/t22; #73 (A4) t3/t7/t10; #74 (A4) t9/t11; #75 (A4) t2/t3; #76 (A4) t2/t8/t12; #78 (A4) t17; #79 (A4) t5/t18/t19; #80 (A4) t12/t13/t14/t20; #81 (A5) t10; #82 (A5) t12; #84 (A5) t10/t12/t16; #85 (A5) t6/t7/t9/t17; #86 (A5) t2/t4/t8/t12/t22; #87 (A5) t7/t11; #88 (A5) t2/t3/t8/t9; #89 (A5) t2/t6; #90 (A5) t2/t4/t12; #91 (A5) t4/t8; #92 (A5) t12; #93 (A5) t3/t7/t13/t15/t17/t22; #94 (A5) t5/t9/t13; #95 (A5) t5; #96 (A5) t14; #98 (A5) t9; #99 (A5) t12/t21; #100 (A5) t8/t9/t11; #102 (A6) t18/t26; #103 (A6) t9/t12/t18; #104 (A6) t6/t13/t17/t18; #105 (A6) t15/t19/t22; #106 (A6) t11; #107 (A6) t6/t7/t15/t18; #108 (A6) t3/t10/t21; #109 (A6) t3/t4/t9/t14/t18/t23; #110 (A6) t3/t7/t19/t25; #111 (A6) t11/t12/t16; #112 (A6) t12; #113 (A6) t2/t3; #115 (A6) t8/t12/t15/t16/t18; #119 (A6) t7/t11/t15; #120 (A6) t3/t6; #123 (A7) t3; #124 (A7) t15; #125 (A7) t7/t8/t14/t21; #126 (A7) t6/t13/t16/t18; #127 (A7) t4/t5/t16/t18; #128 (A7) t2/t6/t19/t20; #129 (A7) t12/t19; #130 (A7) t15/t16; #131 (A7) t5/t16/t18; #132 (A7) t5/t15/t22; #133 (A7) t8/t9; #136 (A7) t14/t21/t23; #137 (A7) t9/t12/t23; #138 (A7) t5/t10/t11; #139 (A7) t10/t14; #140 (A7) t2/t7; #142 (A8) t2/t3/t6; #143 (A8) t7/t18; #144 (A8) t5/t7; #145 (A8) t3; #146 (A8) t6; #147 (A8) t4/t6/t8/t19; #149 (A8) t12; #150 (A8) t6/t7/t9/t10/t17; #151 (A8) t11; #152 (A8) t14; #153 (A8) t9/t10/t17; #155 (A8) t3/t21/t22; #156 (A8) t6/t13; #157 (A8) t3/t10/t12/t13/t16; #158 (A8) t2/t5/t6/t10/t22; #159 (A8) t6; #160 (A8) t2/t9/t10/t18; #161 (A9) t14; #162 (A9) t12/t13; #163 (A9) t4/t20; #164 (A9) t4/t14/t17; #165 (A9) t11/t21; #166 (A9) t2/t5/t9/t11; #167 (A9) t2/t4/t9/t18; #168 (A9) t15; #169 (A9) t7/t8; #170 (A9) t3/t18; #171 (A9) t8/t12/t16; #172 (A9) t10/t11/t13/t18; #173 (A9) t2/t8; #175 (A9) t16/t17; #176 (A9) t2/t7; #177 (A9) t3/t7/t10; #178 (A9) t2/t12; #179 (A9) t19; #180 (A9) t3/t4/t10/t16
 - Notes on occurrences: #101 tt5,t12: "I hear you…" · #141 tt2,t5,t12,t18: "I hear you…" / "I’m sorry you’re feeling stuck"; 🌱 emoji · #121 tt9,t11: "I hear you…" · #21 tt12,t16,t17: "I hear you…"
 - Related defect: —
-- Status: OPEN
+- Status: FIXED
+- Fix: d5397b1 (CHEM-041) — empathy openers need a voiced struggle and never repeat within four replies (reuseCaps.ts); the run predates the deploy. Test: src/tests/bioRealLearnerFixes.test.ts with the observed opener.
 
 ### BIO-004 — The same analogy is reused for "explain simpler/again" (pizza, kitchen, post-it, library…)
 
@@ -154,7 +159,8 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (25 occurrences in 25 lessons): #61 (A4) t16; #101 (A6) tt3,t6,t12,t14; #141 (A8) tt1,t2,t5,t11,t12,t13,t15; #161 (A9) tt6,t12; #121 (A7) tt6,t9,t18; #81 (A5) tt2,t5,t9,t10; #21 (A2) tt4,t17,t18; #16 (A1) t-; #188 (A10) t-; #190 (A10) t-; #196 (A10) t-; #25 (A2) t-; #34 (A2) t-; #42 (A3) t-; #44 (A3) t-; #65 (A4) t-; #108 (A6) t-; #109 (A6) t-; #110 (A6) t-; #136 (A7) t-; #155 (A8) t-; #157 (A8) t-; #158 (A8) t-; #159 (A8) t-; #167 (A9) t-
 - Notes on occurrences: #61 t16: family photo album analogy · #101 tt3,t6,t12,t14: delivery driver / truck / two courses / deck of cards analogies · #141 tt1,t2,t5,t11,t12,t13,t15: mailbox / billboard / restaurant / castle walls / front desk analogies · #161 tt6,t12: grocery list / highway analogies · #121 tt6,t9,t18: kitchen sink / bathtub-soap analogies · #81 tt2,t5,t9,t10: snowball / microphone-speaker / thermostat / rubber band analogies · #21 tt4,t17,t18: dough loaves / deck of cards / bread loaf analogies
 - Related defect: —
-- Status: OPEN
+- Status: PARTIALLY FIXED
+- Fix: d5397b1 (CHEM-039) — past two analogies in four replies, one regeneration without an analogy (kept only if it has none). Not guaranteed when the retry also uses one.
 
 ### BIO-005 — "next question please" / "ok" gets a content-free reply or a different topic instead of a question
 
@@ -173,7 +179,8 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (120 occurrences in 117 lessons): #101 (A6) t13; #141 (A8) t9; #21 (A2) t13; #4 (A1) t13; #5 (A1) t5; #6 (A1) t11; #7 (A1) t7; #8 (A1) t6; #9 (A1) t6; #11 (A1) t7; #12 (A1) t3; #13 (A1) t8; #14 (A1) t9; #15 (A1) t14; #19 (A1) t7; #182 (A10) t13; #183 (A10) t12; #186 (A10) t4; #187 (A10) t12; #188 (A10) t18; #189 (A10) t5; #190 (A10) t16; #191 (A10) t9; #195 (A10) t7; #196 (A10) t5; #197 (A10) t17; #199 (A10) t12; #22 (A2) t6; #24 (A2) t10; #25 (A2) t6; #28 (A2) t13; #31 (A2) t9; #34 (A2) t13; #36 (A2) t10; #37 (A2) t5; #39 (A2) t15; #41 (A3) t8; #42 (A3) t9; #45 (A3) t10; #46 (A3) t8; #50 (A3) t10; #52 (A3) t16; #53 (A3) t7; #57 (A3) t10; #59 (A3) t8; #60 (A3) t17; #62 (A4) t19; #63 (A4) t12; #64 (A4) t14; #67 (A4) t10; #69 (A4) t11; #71 (A4) t11; #72 (A4) t18; #74 (A4) t10; #75 (A4) t5; #77 (A4) t11; #79 (A4) t8; #80 (A4) t9; #83 (A5) t11; #84 (A5) t17; #86 (A5) t5; #87 (A5) t8; #88 (A5) t11; #90 (A5) t10; #91 (A5) t10; #93 (A5) t23; #94 (A5) t6; #98 (A5) t10; #99 (A5) t14; #100 (A5) t10; #103 (A6) t13; #104 (A6) t20; #106 (A6) t5; #108 (A6) t19; #110 (A6) t4; #113 (A6) t4; #114 (A6) t9; #119 (A6) t18; #120 (A6) t7; #122 (A7) t8; #123 (A7) t15; #124 (A7) t3; #125 (A7) t12; #126 (A7) t10; #128 (A7) t7; #129 (A7) t15; #130 (A7) t4; #131 (A7) t12; #132 (A7) t16; #133 (A7) t6; #135 (A7) t6; #137 (A7) t5; #138 (A7) t13; #139 (A7) t6; #144 (A8) t9; #146 (A8) t9; #147 (A8) t14; #150 (A8) t18; #151 (A8) t9; #153 (A8) t8; #155 (A8) t11; #157 (A8) t6; #158 (A8) t3; #159 (A8) t5; #160 (A8) t4; #163 (A9) t19; #164 (A9) t6; #167 (A9) t14; #169 (A9) t12; #170 (A9) t7; #171 (A9) t13; #172 (A9) t7; #173 (A9) t10; #175 (A9) t18; #176 (A9) t12; #177 (A9) t14; #180 (A9) t8
 - Notes on occurrences: #101 t13: raw authored paragraph on "ok" (flower structure…) · #141 t9: raw MHC paragraph on "next question please" · #21 t13: raw authored paragraph on "quiz me"
 - Related defect: —
-- Status: OPEN
+- Status: FIXED
+- Fix: c4a6afc — on a turn with no card, promises with nothing after them ("I'll present the next question", "let me know when you'd like to move on", "let's see if you can pick out one") are removed; a reply that was only a promise gets the concept fallback (gateAssessment.ts enforceQuestionDeliveryContract). The raw-paragraph variants are CHEM-003's serve-time cleanup (d5397b1). Test: src/tests/bioRealLearnerFixes.test.ts.
 
 ### BIO-006 — Raw authored explanation dumped as the reply ("memory" provider) on "ok"
 
@@ -192,7 +199,8 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (19 occurrences in 17 lessons): #61 (A4) t17; #161 (A9) tt16; #121 (A7) t12; #1 (A1) t10; #13 (A1) t17; #183 (A10) t8; #185 (A10) t16; #24 (A2) t7; #43 (A3) t12; #49 (A3) t2; #59 (A3) t2; #62 (A4) t17; #79 (A4) t17; #123 (A7) t5; #137 (A7) t11; #149 (A8) t17; #169 (A9) t17
 - Notes on occurrences: #61 t17: "ok" -> "let’s see if you can pick out one" with no card · #161 tt16: "next question please" -> a recap of the learner’s own typed line · #121 t12: "next question please" -> "I’ll have the next question ready… Just let me know when you’d like to move on"
 - Related defect: —
-- Status: OPEN
+- Status: PARTIALLY FIXED
+- Fix: d5397b1/dee8428 (CHEM-003) — memory-served authored text loses ALL-CAPS emphasis and cross-unit pointers at serve time. Serving the authored explanation on "ok" is the Explanation Memory design; its density is content, not changed here.
 
 ### BIO-007 — Claim cards with options "Wrong" / "Correct"
 
@@ -211,7 +219,8 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (84 occurrences in 53 lessons): #81 (A5) tt7,t12/t7/t12; #1 (A1) t11/t16; #9 (A1) t4/t8; #183 (A10) t13/t15; #186 (A10) t5/t17; #190 (A10) t17; #191 (A10) t4/t12; #193 (A10) t6; #194 (A10) t6; #197 (A10) t12/t19; #198 (A10) t15; #199 (A10) t13; #25 (A2) t10/t20; #26 (A2) t7; #27 (A2) t9/t11; #28 (A2) t3/t17; #29 (A2) t8; #30 (A2) t15/t20; #45 (A3) t4/t20; #46 (A3) t8; #47 (A3) t16/t21; #48 (A3) t10/t15; #57 (A3) t13; #59 (A3) t20; #80 (A4) t4/t9; #82 (A5) t8/t15; #84 (A5) t18; #85 (A5) t11; #86 (A5) t15; #93 (A5) t11/t24; #94 (A5) t15; #97 (A5) t4; #98 (A5) t4/t11; #99 (A5) t5/t14; #105 (A6) t13/t17; #106 (A6) t6/t8; #122 (A7) t4/t10; #133 (A7) t16; #134 (A7) t5; #135 (A7) t3/t8; #136 (A7) t8/t17; #143 (A8) t9; #144 (A8) t21; #156 (A8) t9/t11; #164 (A9) t19; #171 (A9) t6/t13; #172 (A9) t5/t20; #174 (A9) t8; #175 (A9) t3/t11; #176 (A9) t9/t16; #177 (A9) t14; #179 (A9) t12; #180 (A9) t8/t12
 - Notes on occurrences: #81 tt7,t12: options "Not necessarily / Correct"
 - Related defect: —
-- Status: OPEN
+- Status: FIXED
+- Fix: c4a6afc — the authored options were "Correct — …" / "Wrong — …"; the answer-head split served the bare verdict word. A verdict head is now served as "Yes, that is correct" / "No, that is wrong" ("Not necessarily" -> "Not always, it depends"), still short so the length cue stays removed (gateAssessment.ts plainVerdictHead). Test: src/tests/bioRealLearnerFixes.test.ts; probeOptionOrder.test.ts updated.
 
 ### BIO-008 — Degraded fallback replies ("Sorry — my answer didn't come through just now…") under ten concurrent learners
 
@@ -230,7 +239,8 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (175 occurrences in 73 lessons): #23 (A2) tt2,t6/t2/t6/t12/t14; #84 (A5) t1/t11/t12/t18/t21/t22/t24; #186 (A10) t15/t16; #144 (A8) t19/t3/t8/t20; #27 (A2) t1; #105 (A6) t4/t7; #127 (A7) t1/t21; #147 (A8) t13/t20; #126 (A7) t12; #188 (A10) t6/t17; #1 (A1) t13; #2 (A1) t17; #4 (A1) t4/t16/t17/t18/t19/t20; #5 (A1) t19; #9 (A1) t12; #10 (A1) t8; #11 (A1) t4; #17 (A1) t18; #183 (A10) t3; #185 (A10) t3/t6/t18; #187 (A10) t4/t21/t23; #189 (A10) t7/t11/t14/t16/t21/t27; #190 (A10) t4/t10/t11; #191 (A10) t3/t8; #198 (A10) t6/t7; #24 (A2) t6/t7; #25 (A2) t18; #29 (A2) t6; #30 (A2) t1; #42 (A3) t22; #43 (A3) t12/t21; #44 (A3) t6/t21/t22; #45 (A3) t6/t9/t13/t24; #47 (A3) t10/t13; #49 (A3) t8; #50 (A3) t13; #62 (A4) t17/t18; #63 (A4) t16/t18/t24/t25; #64 (A4) t2/t6; #65 (A4) t3/t22; #67 (A4) t1; #71 (A4) t5; #72 (A4) t1; #83 (A5) t18; #85 (A5) t2/t4/t16/t18/t19; #86 (A5) t3/t13/t25; #87 (A5) t10/t11; #88 (A5) t4/t6/t7; #102 (A6) t14/t19/t24; #103 (A6) t5/t7/t20; #104 (A6) t1/t7; #108 (A6) t22; #109 (A6) t5/t7/t20; #110 (A6) t8/t13; #122 (A7) t7; #123 (A7) t2/t5/t10; #124 (A7) t2/t3/t10/t14; #125 (A7) t4/t10; #128 (A7) t10/t14; #129 (A7) t1/t2/t7/t23/t24; #143 (A8) t3/t15/t16; #145 (A8) t13; #146 (A8) t2; #148 (A8) t6/t11; #149 (A8) t14/t16; #162 (A9) t19/t20; #163 (A9) t3/t16; #164 (A9) t9; #165 (A9) t3/t4/t6/t16; #166 (A9) t21/t22; #168 (A9) t2/t4/t14; #169 (A9) t3; #170 (A9) t13
 - Notes on occurrences: #23 tt2,t6: degraded replies on "show me step by step" and "give me example with numbers" · #84 t1: lesson opens with a degraded fallback reply · #186 t15: degraded reply on "show me step by step" with a stray figure line · #144 t19: degraded reply on "give me example with numbers" · #27 t1: lesson opens with a degraded fallback · #105 t4: degraded reply on "give me example with numbers" · #127 t1: lesson opens with a degraded fallback · #147 t13: degraded reply on "give me example"
 - Related defect: —
-- Status: OPEN
+- Status: OPEN — owner action
+- Fix: Same as CHEM-107: provider capacity — Gemini 402 (credits depleted), no OpenRouter key, Groq burst limits under ten concurrent learners; bounded retry + honest copy shipped in 562c3c3. Owner: top up Gemini / add OPENROUTER_API_KEY / raise the Groq tier.
 
 ### BIO-009 — Cytochrome c example: protein length and difference counts are inconsistent between replies and wrong (100 vs 154 residues; human–mouse 5; human–yeast 30 vs 45)
 
@@ -247,7 +257,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Invented numbers presented as "real" and inconsistent across replies.
 - Reproducibility: Observed once (#61 t13 vs t15).
 - Related defect: —
-- Status: OPEN
+- Status: OPEN — numeric fact-check closed
+- Fix: Model-generated numbers in a worked example; the authored cytochrome c figures (0 and 45 differences) are defensible. Numeric verification (N1/N2/N3) is CLOSED — NOT READY FOR ENFORCEMENT (owner, 2026-10-04); not patched.
 
 ### BIO-010 — Raw curriculum goal returned as the tutor reply ("Fossil record, comparative anatomy — homologous and analogous structures, embryology, biogeography…")
 
@@ -266,7 +277,8 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (16 occurrences in 14 lessons): #141 (A8) t8; #22 (A2) t4; #2 (A1) tt4/t4; #3 (A1) t13; #195 (A10) t16; #61 (A4) t6; #76 (A4) t4; #84 (A5) t4; #89 (A5) t7; #102 (A6) t6; #109 (A6) t2; #132 (A7) t24; #133 (A7) t4; #168 (A9) t12
 - Notes on occurrences: #141 t8: "quiz me" -> "MHC and Antigen Presentation covers: MHC class I (all nucleated cells…)…" · #22 t4: raw lesson-goal string as the reply to a card answer (#22 t4) · #2 tt4: card answer "Cellular organisation" -> reply is the raw lesson goal "Growth, reproduction, metabolism, … evolution as the defining properties…"
 - Related defect: —
-- Status: OPEN
+- Status: FIXED
+- Fix: c4a6afc — the concept fallback served a KG syllabus phrase with a full stop ("Fossil record, comparative anatomy — …") verbatim; such a comma-list phrase is now framed "In this lesson on X we will look at …" (conceptFallback.ts); the "covers:" form was already fixed by 3ac46db (CHEM-064). Test: src/tests/bioRealLearnerFixes.test.ts.
 
 ### BIO-011 — "i dont know" answered with a promise of a step that never appears ("Let’s make it easier with a quick choice.")
 
@@ -285,7 +297,8 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (9 occurrences in 9 lessons): #81 (A5) t1; #21 (A2) t9; #62 (A4) t1; #82 (A5) tt1,t10; #83 (A5) t1; #103 (A6) t1; #143 (A8) t1; #145 (A8) t1; #164 (A9) t1
 - Notes on occurrences: #81 t1: "ok" -> only "What do you notice about…?" (first reply is a question) · #21 t9: "explain simpler" -> "How did you figure that each daughter cell would end up with 23 chromosomes?" (re-asks an old wrong answer) · #62 t1: "ok" -> only "What do you notice about that arrow?" · #82 tt1,t10: "ok" -> "What do you notice about this piece of information…?"; "show me step by step" -> "Sure, let’s walk through the figure together, focusing on one part at a time." and nothing else · #83 t1: "ok" -> only "What do you notice about this vasodilation response in the diagram?" · #103 t1: "ok" -> only "What do you notice about this arrow?" · #143 t1: "ok" -> only "What do you notice about how this label and its line are presented?" · #145 t1: "ok" -> only "What do you notice about this orange heading?"
 - Related defect: —
-- Status: OPEN
+- Status: PARTIALLY FIXED
+- Fix: c4a6afc — "Let's make it easier with a quick choice." with no card and "let's walk through the figure together…" with nothing after are removed (same contract as BIO-005). The lone first-turn question after "ok" is CHEM-044/079 (ef772e6, d5397b1). Not covered: "How did you figure that…" after a card answer. Test: src/tests/bioRealLearnerFixes.test.ts.
 
 ### BIO-012 — "why?" answered about a card that has not been shown ("The rejection occurs because the recipient’s T cells recognize the donor’s MHC…") — reply addresses a question the learner never saw
 
@@ -304,7 +317,8 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (4 occurrences in 4 lessons): #86 (A5) t19; #49 (A3) tex; #52 (A3) tex; #77 (A4) tnum
 - Notes on occurrences: #86 t19: "show me step by step" -> "That’s right—when a muscle needs more force, it brings in progressively larger motor units. Please select the correct statement about…" (verdict on a prior card and a new card instead of steps) · #49 tex: "give me example" answered with "That’s correct — the ratio you identified is indeed 3 tall : 1 short" (verdict on an earlier answer) · #52 tex: "give me example" -> "That’s right — an affected father passes his single X‑linked recessive allele to every daughter…" (verdict on an earlier answer) · #77 tnum: "give me example with numbers" -> "That’s a common mix‑up—bone is living tissue…" (reply to an earlier card, not the request)
 - Related defect: —
-- Status: OPEN
+- Status: OPEN — cause not established
+- Fix: Replies verdict a card from elsewhere. In this run each account drove its lessons without a tabId, so (BIO-042) they resumed one shared session; whether the foreign card came from another lesson in that session could not be checked (production DB connector unauthorised this session; logs past the billing window). Related fixes: CHEM-035 neutral reply on a misattributed tap (0b3b0fb), verdict-first (d5397b1). Needs a live repro with per-tab sessions.
 
 ### BIO-013 — "what is this?" answered with a counter-question instead of a description ("Do you mean the FBA box or the Kinetic models box?")
 
@@ -321,7 +335,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: A learner who asks "what is this?" cannot be expected to name a box.
 - Reproducibility: Observed once (#161 t2).
 - Related defect: —
-- Status: OPEN
+- Status: FIXED
+- Fix: c4a6afc — a bare "what is this?" while a figure is held is read as a question about the figure, so the PHYS-021 contract (read the figure's labels, never ask the learner what they see) applies. Test: src/tests/bioRealLearnerFixes.test.ts (route wiring).
 
 ### BIO-014 — Card option text is cut mid-phrase and ends in a stray backslash ("Risk‑prone: prefers the higher‑variance \")
 
@@ -338,7 +353,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Looks broken to the learner (same family as CHEM-082).
 - Reproducibility: Observed once (#181 t2).
 - Related defect: —
-- Status: OPEN
+- Status: FIXED
+- Fix: c4a6afc — a model card attribute with an escaped quote (a="… higher‑variance \"gamble\"") was cut at the \" and served with a trailing backslash; the value now keeps it as a plain quote (mcq.ts parseMcqTag). Test: src/tests/bioRealLearnerFixes.test.ts.
 
 ### BIO-015 — Feedback refers to the learner in the third person ("The learner correctly recognized…", "The student’s claim is inaccurate")
 
@@ -357,7 +373,8 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (4 occurrences in 4 lessons): #102 (A6) t8; #2 (A1) t3; #3 (A1) t3; #143 (A8) tt8
 - Notes on occurrences: #102 t8: "Follicular phase" for "which term appears in the menstrual cycle diagram?" -> a garden analogy, no verdict · #2 t3: card answer gets a raw goal string instead of a verdict · #3 t3: answer "Domain" -> "Now, looking at the hierarchy again: Quick check." with no verdict · #143 tt8: answer "Tumour necrosis factor (TNF)" -> "This question checks your understanding of…" no verdict
 - Related defect: —
-- Status: OPEN
+- Status: FIXED
+- Fix: c4a6afc — a sentence starting "The learner …" / "The student's …" is rewritten to "You …" / "Your …" with the verb agreed, in the final reply and in the served assembled text (src/lib/text/secondPerson.ts). Test: src/tests/bioRealLearnerFixes.test.ts.
 
 ### BIO-016 — Wrong card answer gets no verdict; the reply describes the picked option as if it were the answer
 
@@ -375,7 +392,8 @@ Mastery/progress · Concurrency/session isolation.
 - Reproducibility: Seen in #181 t3 and #161 t3.
 - Also observed (24 occurrences in 23 lessons): #1 (A1) t17; #9 (A1) t9; #10 (A1) t5; #12 (A1) t13; #15 (A1) t16; #20 (A1) t9; #181 (A10) t4; #37 (A2) t6; #45 (A3) t5/t21; #54 (A3) t10; #62 (A4) t14; #69 (A4) t13; #77 (A4) t7; #105 (A6) t17; #108 (A6) t16; #121 (A7) t20; #122 (A7) t5; #135 (A7) t9; #142 (A8) t14; #144 (A8) t22; #151 (A8) t15; #153 (A8) t11; #170 (A9) t11
 - Related defect: —
-- Status: OPEN
+- Status: PARTIALLY FIXED
+- Fix: d5397b1 (CHEM-028) — on an authored key the verdict leads. The observed card was model-written (figure labels as options); an unauthored key stays verdict-free by design — owner decision (same as CHEM-048/134).
 
 ### BIO-017 — "Advanced Biogeochemical Cycling" is taught from an untitled food-chain figure (producers → herbivores → carnivores); the sulfur/nitrogen cycle is forced onto it
 
@@ -394,7 +412,8 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (4 occurrences in 4 lessons): #123 (A7) tt1,t6; #124 (A7) tt1,t14; #125 (A7) tt1,t3,t9,t11; #126 (A7) tt1,t8,t14
 - Notes on occurrences: #123 tt1,t6: untitled food-chain figure for Landscape and Conservation Ecology; t6 "picture the food‑chain line you see on the screen" · #124 tt1,t14: untitled food-chain figure for Microbial Ecology; t14 "keeping the food‑chain picture in mind (the line of boxes… from producer to consumer)" · #125 tt1,t3,t9,t11: untitled food-chain figure for Quantitative Models of Population Growth; replies say "the food‑chain picture you see" · #126 tt1,t8,t14: untitled food-chain figure for Predator-Prey Dynamics ("the food‑chain picture… plant → rabbit → fox")
 - Related defect: —
-- Status: OPEN
+- Status: FIXED
+- Fix: c4a6afc — the five ecology lessons taught from the generic 'bio.eco' food chain get curated Tier-0 figures from existing generators, labels from each EB entry: sulfur cycle (biogeochemistry-advanced), fragmentation/corridors (landscape-conservation), microbes in the cycles (microbial-ecology), exponential vs logistic (population-growth-models), coupled predator–prey (predator-prey-dynamics). Test: src/tests/bioRealLearnerFixes.test.ts. Production rendering not checked.
 
 ### BIO-018 — The same card is shown again word for word within one lesson, and mastery completes on the repeats
 
@@ -412,7 +431,8 @@ Mastery/progress · Concurrency/session isolation.
 - Reproducibility: Counted automatically over all lessons at the end.
 - Also observed (233 occurrences in 142 lessons): #1 (A1) t16; #2 (A1) t18; #3 (A1) t6; #5 (A1) t10/t11; #6 (A1) t13; #7 (A1) t11; #8 (A1) t17; #9 (A1) t8/t9; #11 (A1) t9/t10; #12 (A1) t12/t13; #13 (A1) t14; #14 (A1) t11; #15 (A1) t16; #16 (A1) t20/t24/t25; #19 (A1) t19/t20; #20 (A1) t11/t12; #182 (A10) t21/t22; #183 (A10) t15; #186 (A10) t17; #187 (A10) t19; #189 (A10) t24/t28/t29; #191 (A10) t12/t15/t16; #193 (A10) t8/t9; #194 (A10) t8; #197 (A10) t18/t19; #198 (A10) t17; #21 (A2) t10/t13; #22 (A2) t11; #23 (A2) t9/t10; #24 (A2) t15; #25 (A2) t19/t20; #27 (A2) t11; #28 (A2) t17/t18; #29 (A2) t10; #30 (A2) t20; #31 (A2) t23/t24/t25; #32 (A2) t15/t16; #33 (A2) t15; #34 (A2) t19/t23/t24; #35 (A2) t10/t11; #36 (A2) t10/t11/t12; #37 (A2) t12/t16; #39 (A2) t23/t24; #40 (A2) t9; #41 (A3) t14; #43 (A3) t14/t15; #45 (A3) t20/t21; #46 (A3) t13; #47 (A3) t20/t21; #48 (A3) t15; #49 (A3) t15/t16; #50 (A3) t13/t14/t15; #51 (A3) t10/t11; #53 (A3) t14/t15/t16; #55 (A3) t16/t17/t18; #57 (A3) t15; #58 (A3) t9; #60 (A3) t18/t19; #61 (A4) t11; #62 (A4) t13; #63 (A4) t21/t25; #64 (A4) t17; #65 (A4) t14; #66 (A4) t10/t11; #67 (A4) t12; #70 (A4) t8; #71 (A4) t18; #72 (A4) t25; #73 (A4) t18/t19; #75 (A4) t12; #77 (A4) t11; #78 (A4) t14; #79 (A4) t13/t14; #80 (A4) t9/t10/t18; #81 (A5) t12; #82 (A5) t14/t15; #83 (A5) t13; #85 (A5) t13/t14; #86 (A5) t17/t20; #87 (A5) t15/t16; #88 (A5) t13/t14; #89 (A5) t13; #90 (A5) t16; #91 (A5) t12/t13; #92 (A5) t14/t15; #93 (A5) t24/t25; #94 (A5) t17; #96 (A5) t10/t11; #98 (A5) t11/t12; #99 (A5) t14/t18/t19; #100 (A5) t18/t19; #101 (A6) t16; #102 (A6) t11; #105 (A6) t16/t17; #106 (A6) t8; #107 (A6) t16; #108 (A6) t19; #112 (A6) t8/t9; #113 (A6) t7; #118 (A6) t11/t12; #120 (A6) t16/t17; #121 (A7) t19/t20; #122 (A7) t10; #123 (A7) t17; #124 (A7) t17; #125 (A7) t15/t16; #128 (A7) t12; #129 (A7) t21; #130 (A7) t9/t10; #132 (A7) t13/t16/t17; #135 (A7) t8; #136 (A7) t17/t18/t19; #137 (A7) t19/t20; #139 (A7) t11; #140 (A7) t14; #141 (A8) t16; #142 (A8) t13; #148 (A8) t9; #149 (A8) t8; #150 (A8) t20/t21; #151 (A8) t13/t14; #152 (A8) t6/t8; #153 (A8) t20/t21; #155 (A8) t17/t18/t19; #156 (A8) t11; #158 (A8) t25; #159 (A8) t18/t19; #160 (A8) t12/t15; #161 (A9) t9/t10; #162 (A9) t17; #163 (A9) t11/t12; #165 (A9) t13/t14; #166 (A9) t17/t18; #169 (A9) t14; #170 (A9) t11/t15; #171 (A9) t13/t14; #172 (A9) t20/t21; #173 (A9) t14; #175 (A9) t11/t12; #176 (A9) t16/t17; #178 (A9) t9; #180 (A9) t12/t13
 - Related defect: —
-- Status: OPEN
+- Status: OPEN — owner decision
+- Fix: Same mechanism as CHEM-033: TeachingHistory holds one concept, so a concept switch resets the asked-question ledger; a durable per-concept ledger is a deferred primitive. In this run the shared-session driver shape (BIO-042) also interleaved lessons.
 
 ### BIO-019 — Most cards have only 2 options (Yes/No, True/False, two statements), so guessing succeeds 50 % of the time
 
@@ -430,7 +450,8 @@ Mastery/progress · Concurrency/session isolation.
 - Reproducibility: Percentages computed over all cards at the end.
 - Also observed (290 occurrences in 190 lessons): #1 (A1) t11/t16; #2 (A1) t9/t10; #3 (A1) t4/t6; #5 (A1) t8; #6 (A1) t6/t13; #7 (A1) t9; #8 (A1) t6/t17; #9 (A1) t4/t8; #10 (A1) t4; #11 (A1) t7; #12 (A1) t4/t12; #13 (A1) t9; #14 (A1) t9; #15 (A1) t15; #16 (A1) t3/t20; #18 (A1) t8; #19 (A1) t15/t20; #20 (A1) t5/t11; #181 (A10) t3; #182 (A10) t19; #183 (A10) t13/t15; #184 (A10) t4; #186 (A10) t5/t17; #187 (A10) t14; #189 (A10) t11/t24; #190 (A10) t17; #191 (A10) t4/t12; #192 (A10) t3; #193 (A10) t6; #194 (A10) t6; #197 (A10) t12/t19; #198 (A10) t15; #199 (A10) t13; #21 (A2) t6/t13; #22 (A2) t10; #23 (A2) t4/t7/t9; #24 (A2) t10; #25 (A2) t10/t20; #26 (A2) t7; #27 (A2) t9/t11; #28 (A2) t3/t17; #29 (A2) t8; #30 (A2) t15/t20; #31 (A2) t13/t24; #32 (A2) t14; #33 (A2) t14; #34 (A2) t4/t8/t19/t24; #35 (A2) t8; #36 (A2) t4/t10; #37 (A2) t3/t12; #38 (A2) t7; #39 (A2) t22; #40 (A2) t7; #41 (A3) t11; #42 (A3) t13; #43 (A3) t6/t15; #45 (A3) t4/t20; #46 (A3) t8; #47 (A3) t16/t21; #48 (A3) t10/t15; #49 (A3) t11; #50 (A3) t10/t15; #51 (A3) t3/t10; #53 (A3) t7/t16; #54 (A3) t9; #55 (A3) t12/t18; #56 (A3) t11/t12; #57 (A3) t13; #58 (A3) t6; #59 (A3) t20; #60 (A3) t15/t19; #61 (A4) t8; #62 (A4) t6/t13; #63 (A4) t4/t21; #64 (A4) t8/t17; #65 (A4) t13; #66 (A4) t9/t11; #67 (A4) t10; #68 (A4) t3; #69 (A4) t12; #70 (A4) t4/t8; #71 (A4) t3/t18; #72 (A4) t19/t25; #73 (A4) t17; #74 (A4) t3; #75 (A4) t5/t12; #76 (A4) t10; #77 (A4) t4; #78 (A4) t3/t14; #79 (A4) t11; #80 (A4) t4/t9; #81 (A5) t7/t12; #82 (A5) t8/t15; #83 (A5) t6/t13; #84 (A5) t18; #85 (A5) t11; #86 (A5) t15; #87 (A5) t8/t15; #88 (A5) t4/t13; #89 (A5) t11; #90 (A5) t15; #91 (A5) t11/t13; #92 (A5) t6/t14; #93 (A5) t11/t24; #94 (A5) t15; #95 (A5) t7; #96 (A5) t4/t10; #97 (A5) t4; #98 (A5) t4/t11; #99 (A5) t5/t14; #100 (A5) t17; #101 (A6) t9/t16; #102 (A6) t8; #103 (A6) t15; #105 (A6) t13/t17; #106 (A6) t6/t8; #107 (A6) t15; #108 (A6) t3/t19; #109 (A6) t7; #110 (A6) t14; #111 (A6) t4; #112 (A6) t4/t8; #113 (A6) t4/t6; #114 (A6) t9; #115 (A6) t5; #116 (A6) t4; #117 (A6) t5; #118 (A6) t4/t11; #119 (A6) t9; #120 (A6) t10/t16; #121 (A7) t4/t19; #122 (A7) t4/t10; #123 (A7) t15; #124 (A7) t7/t17; #125 (A7) t12/t16; #126 (A7) t10; #127 (A7) t14; #128 (A7) t11; #129 (A7) t9/t21; #130 (A7) t4/t9; #131 (A7) t8; #132 (A7) t9/t16; #133 (A7) t16; #134 (A7) t5; #135 (A7) t3/t8; #136 (A7) t8/t17; #137 (A7) t14/t20; #138 (A7) t13; #139 (A7) t7; #140 (A7) t12; #141 (A8) t9/t16; #142 (A8) t8/t13; #143 (A8) t9; #144 (A8) t21; #145 (A8) t5; #146 (A8) t9; #147 (A8) t11; #148 (A8) t3/t9; #149 (A8) t3; #150 (A8) t4/t20; #151 (A8) t9/t14; #152 (A8) t3; #153 (A8) t10/t20; #154 (A8) t4; #155 (A8) t9/t17; #156 (A8) t9/t11; #157 (A8) t6; #158 (A8) t15/t25; #159 (A8) t8/t18; #160 (A8) t7/t12; #161 (A9) t3/t9; #162 (A9) t5/t17; #163 (A9) t6/t11; #164 (A9) t19; #165 (A9) t9/t14; #166 (A9) t13/t18; #167 (A9) t11; #168 (A9) t8; #169 (A9) t13; #170 (A9) t8/t15; #171 (A9) t6/t13; #172 (A9) t5/t20; #173 (A9) t6/t14; #174 (A9) t8; #175 (A9) t3/t11; #176 (A9) t9/t16; #177 (A9) t14; #178 (A9) t6; #179 (A9) t12; #180 (A9) t8/t12
 - Related defect: —
-- Status: OPEN
+- Status: OPEN — owner decision
+- Fix: Same as CHEM-004: the 2-option cards are authored true/false probes of the 3-probe contract; whether they may count toward mastery is policy. A model-written two-option "why" card is no longer served (d5397b1).
 
 ### BIO-020 — A stock caption sentence ("Take a look at the figure/process/comparison beside this message — it shows <lesson title>. Follow it step by step.") is appended to replies that are not about the figure, including degraded fallbacks
 
@@ -448,7 +469,8 @@ Mastery/progress · Concurrency/session isolation.
 - Reproducibility: Counted automatically from all transcripts (see occurrences).
 - Also observed (111 occurrences in 88 lessons): #3 (A1) t8/t15; #4 (A1) t19; #10 (A1) t15; #12 (A1) t1/t8; #13 (A1) t8; #15 (A1) t8; #18 (A1) t8; #19 (A1) t15; #183 (A10) t8; #186 (A10) t15; #188 (A10) t1/t8/t15; #189 (A10) t8/t15; #190 (A10) t8; #191 (A10) t15; #195 (A10) t8; #22 (A2) t8; #25 (A2) t8/t15; #26 (A2) t15; #27 (A2) t1/t8; #30 (A2) t15; #31 (A2) t15; #33 (A2) t1; #37 (A2) t8; #39 (A2) t15/t22; #41 (A3) t8; #42 (A3) t22; #44 (A3) t22; #45 (A3) t15; #46 (A3) t8; #47 (A3) t8; #51 (A3) t8; #52 (A3) t15; #55 (A3) t8/t15; #59 (A3) t8; #61 (A4) t8; #64 (A4) t8/t15; #65 (A4) t22; #67 (A4) t1; #69 (A4) t8; #71 (A4) t1/t15; #74 (A4) t1/t15; #76 (A4) t8; #77 (A4) t8; #78 (A4) t8; #79 (A4) t1/t8; #83 (A5) t8/t15; #84 (A5) t1/t8/t13; #85 (A5) t21; #86 (A5) t15; #87 (A5) t8; #88 (A5) t7; #89 (A5) t8; #92 (A5) t8; #93 (A5) t15; #94 (A5) t8/t15; #102 (A6) t8/t26; #104 (A6) t1; #105 (A6) t21; #106 (A6) t1; #108 (A6) t15; #109 (A6) t15; #111 (A6) t8; #127 (A7) t1; #128 (A7) t1; #129 (A7) t1; #131 (A7) t15; #132 (A7) t1/t15; #133 (A7) t8; #136 (A7) t22; #137 (A7) t22; #140 (A7) t8; #143 (A8) t8; #144 (A8) t8; #147 (A8) t8/t15; #149 (A8) t8; #150 (A8) t8/t15; #153 (A8) t8; #154 (A8) t8; #156 (A8) t8; #159 (A8) t8/t15; #162 (A9) t8; #164 (A9) t1; #166 (A9) t15/t22; #169 (A9) t1; #170 (A9) t15; #172 (A9) t8; #175 (A9) t15; #176 (A9) t15
 - Related defect: —
-- Status: OPEN
+- Status: FIXED
+- Fix: c4a6afc — the stock line is appended only when a figure is introduced this turn, and figures were re-attached later in the same lesson; a figure already shown in this lesson (rendered-reality log, per lesson since CHEM-130) is not announced again unless the learner asked to see a picture. Degraded turns carry no pointer since 562c3c3. Test: src/tests/bioRealLearnerFixes.test.ts; visualAcknowledgement.test.ts updated.
 
 ### BIO-021 — A request is answered with a different lesson's concept (step-by-step in a Meiosis lesson walks through mitosis)
 
@@ -467,7 +489,8 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (3 occurrences in 3 lessons): #103 (A6) t17; #45 (A3) t15; #187 (A10) t16
 - Notes on occurrences: #103 t17: "show me step by step" in Fertilisation and Embryonic Development -> a menstrual-cycle calendar walk-through (follicular phase, ovulation) · #45 t15: "show me step by step" in Alternative Splicing -> transcription "zipper" explanation · #187 t16: "show me step by step" in Social Behaviour and Eusociality -> flowers attracting bees (a courtship/display analogy)
 - Related defect: —
-- Status: OPEN
+- Status: OPEN — model behaviour
+- Fix: Step-by-step requests answered with a neighbouring concept (mitosis in a meiosis lesson). The step-shape check (CHEM-015) enforces steps, not the topic; no deterministic topic check exists.
 
 ### BIO-022 — Markdown pipe tables in tutor replies; the lesson renderer has no table support
 
@@ -486,7 +509,8 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (6 occurrences in 6 lessons): #82 (A5) t11; #84 (A5) t7; #186 (A10) t9; #108 (A6) tnum; #177 (A9) tnum; #179 (A9) tnum
 - Notes on occurrences: #82 t11: pipe table in numbers example · #84 t7: pipe table in "give me example with numbers" · #186 t9: pipe table (peacock tail) · #108 tnum: pipe table · #177 tnum: pipe table (mammalian reproductive strategies) · #179 tnum: pipe table (crow experiment)
 - Related defect: —
-- Status: OPEN
+- Status: FIXED
+- Fix: d5397b1 (CHEM-065) — markdown pipe tables are rewritten as plain lines in the final reply sweep. Test: src/tests/bioRealLearnerFixes.test.ts.
 
 ### BIO-023 — Human Reproductive System lesson drifts into musical/speech rhythm (tempo, meter, English stress-timed "The cat chased the mouse") after the words "rhythm method"
 
@@ -503,7 +527,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Off-topic teaching in a Biology lesson; possible context bleed from the English subject on the same account (uncertain: the English transcript was not inspected). The trigger text came from a scripted free-text answer quoting the card option "calendar-only rhythm methods".
 - Reproducibility: Observed once (#102 t20–t23).
 - Related defect: —
-- Status: OPEN
+- Status: OPEN — cause not established
+- Fix: Observed once (#102 t20–t23). The drift sentences match English-subject assets (stress-timed rhythm, "The cat chased the mouse"), suggesting a cross-subject lookup, but the request logs are past the billing window and the DB connector was unauthorised this session. Related: PHYS-001 knowledge-gap fix (253d90a).
 
 ### BIO-024 — Stickleback fixed-action-pattern example: the sign stimulus is "the bright red belly of a receptive female"
 
@@ -520,7 +545,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Misstates the textbook sign-stimulus example the lesson is built on.
 - Reproducibility: Observed once (#183 t11).
 - Related defect: —
-- Status: OPEN
+- Status: OPEN — model output
+- Fix: The stickleback example is model-written (no authored text gives the female the red belly); no deterministic check of biology facts in model prose exists.
 
 ### BIO-025 — Classification example: "Kingdom Animalia – about 30 million described animal species"
 
@@ -537,7 +563,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Wrong order of magnitude for a basic figure.
 - Reproducibility: Observed once (#3 t14).
 - Related defect: —
-- Status: OPEN
+- Status: OPEN — numeric fact-check closed
+- Fix: Model-generated number; numeric verification is CLOSED (owner, 2026-10-04).
 
 ### BIO-026 — The reply grades the previous card, not the one just answered ("That’s right—species is the most specific rank" to an answer about beetle genera)
 
@@ -554,7 +581,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: The learner is told something unrelated to what they answered (CHEM-035 equivalent).
 - Reproducibility: Observed once (#3 t7).
 - Related defect: —
-- Status: OPEN
+- Status: OPEN — cause not established
+- Fix: Same as BIO-012: the previous card's verdict on the current answer; not reproducible from the transcript alone; shared-session driver shape suspected (BIO-042). Needs a live repro with per-tab sessions.
 
 ### BIO-027 — Lymphatic example: "1.5 litres of interstitial fluid leak out of capillaries every hour… lymphatics return 1.4 litres"
 
@@ -571,7 +599,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Order-of-magnitude error in the one number the learner asked for.
 - Reproducibility: Observed once (#85 t10).
 - Related defect: —
-- Status: OPEN
+- Status: OPEN — numeric fact-check closed
+- Fix: Model-generated numbers; numeric verification is CLOSED (owner, 2026-10-04).
 
 ### BIO-028 — Invented data presented as real gene/experiment facts in "example with numbers" (BLNK four-exon sizes; eyeless enhancer stripe 0.8→0.6 mm; dN/dS = 20/4 = 5)
 
@@ -590,7 +619,8 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (2 occurrences in 2 lessons): #47 (A3) tnum; #67 (A4) tnum
 - Notes on occurrences: #47 tnum: invented effect sizes presented as facts ("insulin doubles PFK-1 activity, triples glycogen synthase… glucose-6-phosphatase to 50 %") · #67 tnum: "A few thousand years ago the fastest cheetahs ran about 90 km/h… rose to 110" (invented arms-race data)
 - Related defect: —
-- Status: OPEN
+- Status: OPEN — numeric fact-check closed
+- Fix: Invented data in model examples; numeric verification is CLOSED (owner, 2026-10-04).
 
 ### BIO-029 — Textbook quantities wrong by an order of magnitude in worked examples (phosphocreatine 0.5 mol/kg of muscle; hen egg yolk "about 10 % of the weight")
 
@@ -607,7 +637,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Wrong magnitudes taught as facts.
 - Reproducibility: Observed in #86 and #105.
 - Related defect: —
-- Status: OPEN
+- Status: OPEN — numeric fact-check closed
+- Fix: Model-generated magnitudes; numeric verification is CLOSED (owner, 2026-10-04).
 
 ### BIO-030 — Audition example: a 1 kHz tone at 80 dB SPL is said to have a pressure variation of "about 0.02 Pa"
 
@@ -624,7 +655,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: The level and the pressure do not match.
 - Reproducibility: Observed once (#188 t7).
 - Related defect: —
-- Status: OPEN
+- Status: OPEN — numeric fact-check closed
+- Fix: Model-generated number; numeric verification is CLOSED (owner, 2026-10-04).
 
 ### BIO-031 — Arithmetic and magnitude errors inside worked "example with numbers" replies (mitochondria per cell, heart volume, degradation time, extinction rates)
 
@@ -641,7 +673,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Numbers the learner asked for are wrong or self-contradictory.
 - Reproducibility: Observed in #8, #48, #69 (three lessons).
 - Related defect: —
-- Status: OPEN
+- Status: OPEN — numeric fact-check closed
+- Fix: Model arithmetic/magnitude errors; numeric verification is CLOSED (owner, 2026-10-04).
 
 ### BIO-032 — Worked numbers that do not compute or contradict basic biology: K⁺ ΔG (−7.5 kJ/mol claimed; correct arithmetic gives −15.5 with the sign used, and −2 kJ/mol with the correct electrical sign), 75 %/67 % trophic transfer, fibroblast speed 12 µm/min
 
@@ -658,7 +691,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: The learner who asked for numbers gets numbers that contradict the principle being taught (the 10 % rule, ΔG sign conventions).
 - Reproducibility: Observed in #10, #29, #30 (three lessons).
 - Related defect: —
-- Status: OPEN
+- Status: OPEN — numeric fact-check closed
+- Fix: Model arithmetic/sign errors; numeric verification is CLOSED (owner, 2026-10-04).
 
 ### BIO-033 — Plant respiration example: mitochondria "consuming 3 µmol CO₂ and releasing the same amount of O₂" (respiration consumes O₂ and releases CO₂)
 
@@ -675,7 +709,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Reverses the core reaction of the lesson in the worked example.
 - Reproducibility: Observed once (#88 num).
 - Related defect: —
-- Status: OPEN
+- Status: OPEN — model output
+- Fix: Model-written plant-respiration example with O₂/CO₂ swapped; no authored text carries it.
 
 ### BIO-034 — Smaller factual/magnitude errors in examples: lung pressure drop 760→750 mmHg for a 2.5→3.0 L volume change; xylem tension "−0.1 MPa per metre"; an oak tree given arbuscular (Glomus) mycorrhiza; "about 20 billion neurons fire" in the frontal lobe
 
@@ -692,7 +727,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Wrong numbers or associations taught as facts.
 - Reproducibility: Seen in four lessons (one each).
 - Related defect: —
-- Status: OPEN
+- Status: OPEN — numeric fact-check closed
+- Fix: Model-generated magnitudes (the oak/arbuscular slip is model prose; the authored mycorrhiza entry is correct); numeric verification is CLOSED.
 
 ### BIO-035 — More worked-example errors: nitrogen fixation off by ~10³ (10⁸ cells × 10⁻⁹ mol/cell/h = 0.1 mol/h, not "1 mmol/day"), nodule mass 2 g for a 5 mm nodule, tripalmitin MW ignoring condensation (860 vs 807), phage P1 infecting Streptococcus pneumoniae
 
@@ -709,7 +745,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Numbers and organisms given as fact do not hold up.
 - Reproducibility: Seen in #92, #32, #132.
 - Related defect: —
-- Status: OPEN
+- Status: OPEN — numeric fact-check closed
+- Fix: Model arithmetic errors; numeric verification is CLOSED (owner, 2026-10-04).
 
 ### BIO-036 — Action-potential repolarisation: "pulling the voltage down roughly 1 mV for every 0.5 mM K⁺ that leaves"
 
@@ -726,7 +763,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Teaches a wrong mechanism for the numbers asked for.
 - Reproducibility: Observed once (#75 num).
 - Related defect: —
-- Status: OPEN
+- Status: OPEN — numeric fact-check closed
+- Fix: Model-generated number; numeric verification is CLOSED (owner, 2026-10-04).
 
 ### BIO-037 — Microbiome example credits Bacteroides with turning fibre into vitamin K₂ and butyrate
 
@@ -743,7 +781,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Oversimplified/incorrect attribution presented as the lesson example.
 - Reproducibility: Observed once (#135 ex, num).
 - Related defect: —
-- Status: OPEN
+- Status: OPEN — model output
+- Fix: Model-written microbiome claim; no authored text credits Bacteroides with K₂/butyrate.
 
 ### BIO-038 — Neutrophil "ingest and destroy roughly 10⁶ bacteria per hour" each; transcription example sequence contains in-frame stop codons from codon 3
 
@@ -760,7 +799,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Example numbers/sequences undermine the concept being taught.
 - Reproducibility: Observed in #137 and #37.
 - Related defect: —
-- Status: OPEN
+- Status: OPEN — numeric fact-check closed
+- Fix: Model-generated numbers/sequence; numeric verification is CLOSED (owner, 2026-10-04).
 
 ### BIO-039 — Dollar amounts are turned into math delimiters: "At a market price of \(200 per cubic metre… = 5 × 100 × 200 = **\)100 000 per year**"
 
@@ -777,7 +817,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Currency becomes unreadable in the one example about money.
 - Reproducibility: Observed once (#120 num).
 - Related defect: —
-- Status: OPEN
+- Status: FIXED
+- Fix: c4a6afc — the single-dollar maths converter (mathDelimiters.ts) read "$200 per cubic metre … = **$100 000" as one maths span. A closing "$" followed by a digit is a currency sign, and an amount-led span that runs on in prose is prose. Real inline maths still converts. Test: src/tests/bioRealLearnerFixes.test.ts.
 
 ### BIO-040 — Organism/magnitude slips: trout gill area "30 cm²" (hundreds–thousands of cm²), "Selasphorus rufus (ruby‑throated hummingbird)" (S. rufus is the rufous hummingbird), monotreme "21 days" gestation
 
@@ -794,7 +835,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Specific facts given as real data are incorrect.
 - Reproducibility: Observed in #80, #178, #177.
 - Related defect: —
-- Status: OPEN
+- Status: OPEN — numeric fact-check closed
+- Fix: Model-generated magnitudes/names; numeric verification is CLOSED (owner, 2026-10-04).
 
 ### BIO-041 — Vaccine efficacy misread: "95 % effective → about 950 of 1,000 vaccinated people develop protective immunity"; lac repressor Kd given as 0.1 µM
 
@@ -811,7 +853,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Wrong interpretation of a public-health figure and a wrong constant.
 - Reproducibility: Observed in #139 and #39.
 - Related defect: —
-- Status: OPEN
+- Status: OPEN — numeric fact-check closed
+- Fix: Model misreading of efficacy and a Kd; numeric verification is CLOSED (owner, 2026-10-04).
 
 ### BIO-042 — Three lessons open at once on one account: all three are taught the content and figure of one of them
 
@@ -828,7 +871,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: A learner with two tabs or two devices is taught the wrong lesson while progress is recorded against the lesson named in the session (same defect as CHEM-148 in the Chemistry log).
 - Reproducibility: Reproduced 2 of 2 same-account probes (accounts 1 and 5). Cross-account: 4 accounts (1, 6, 7, 9) opened lesson #30 simultaneously with unique marker words — no foreign marker in any reply (the tutor never echoed its own marker either: weak evidence of isolation, not proof).
 - Related defect: —
-- Status: OPEN
+- Status: OPEN — owner decision
+- Fix: Same cause as CHEM-148: a request without tab identity resumes the newest session (sessionLessonPointer.ts, PCD-004A); the QA driver sent none. New finding: a REAL browser also sends none when storage is unavailable (private mode — tabIdentity getTabId() returns null), so two private-mode tabs share one session. No server-only fix is safe: without identity, a reload and a second tab look the same. Proposed fix (owner decision): an in-memory per-page tab id in tabIdentity.ts when storage is unavailable — at the cost of a fresh session on a private-mode reload.
 
 ## Systemic observations (counts computed from the transcripts)
 

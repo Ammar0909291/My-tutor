@@ -1,5 +1,5 @@
 /**
- * Re-drive of chemistry lessons after the CHEM Batch A–F fixes, on a
+ * Re-drive of chemistry (or QA_SUBJECT) lessons after the CHEM Batch A–F fixes, on a
  * DISPOSABLE account, with the real-learner persona's own messages. Each lesson
  * gets its own session with its own tabId, as a browser tab does. Flags each
  * reply's observable defect signature and writes the full transcript.
@@ -26,7 +26,7 @@ import { writeFileSync } from 'fs'
 import { BASE, createQaAccount, deleteQaAccount, type QaAccount } from './liveAccount'
 import { createSession, openLesson, say, figureLabel, type TurnPayload } from './liveSession'
 
-const SUBJECT = 'chemistry'
+const SUBJECT = process.env.QA_SUBJECT ?? 'chemistry'
 const ORDERS = (process.env.QA_ORDERS ?? '115,151,78').split(',').map(Number)
 const OUT = process.env.QA_OUT ?? '/tmp/claude-0/sp/chem-redrive.txt'
 const THINK_MS = Number(process.env.QA_THINK_MS ?? 2500)
@@ -67,6 +67,14 @@ function flags(p: TurnPayload, learner: string, prevTutor: string, figureSeen: b
   if (/step by step/.test(learner) && (t.match(/^\s*(?:(?:step\s*)?\d+\s*[.):—-]|[-•*]\s+\S)/gim) ?? []).length < 2) f.push('noSteps')
   if (/not quite/i.test(t) && !/^\s*not quite/i.test(t)) f.push('lateVerdict')
   if (p.provider === 'degraded') f.push('degraded')
+  // Biology run signatures (BIO-002, 007, 014, 015, 039, 020, 001).
+  if (/let(?:'|’)s pause/i.test(t) && !/^(?:ok|continue|next question please)$/i.test(learner)) f.push('pauseOnRequest')
+  if (p.mcq && p.mcq.options.some((o) => /^(?:wrong|correct|incorrect)$/i.test(o.trim()))) f.push('verdictOption')
+  if (p.mcq && p.mcq.options.some((o) => /\\\s*$/.test(o))) f.push('backslashOption')
+  if (/(?:^|[.!?]\s+)The (?:learner|student)\b/.test(t)) f.push('thirdPerson')
+  if (/\\\(\s*\d[^)]*[A-Za-z]{4,}/.test(t)) f.push('moneyAsMath')
+  if (/beside this message/.test(t) && /beside this message/.test(prevTutor)) f.push('captionRepeat')
+  if (/system is set up|wanted to first acknowledge|repeat(?:ing)? the (?:same|earlier) explanation/i.test(t)) f.push('metaTalk')
   return f
 }
 
@@ -78,7 +86,7 @@ async function main() {
   const cookie = acct.cookie
   const ob = await fetch(`${BASE}/api/onboarding`, {
     method: 'POST', headers: { 'Content-Type': 'application/json', cookie },
-    body: JSON.stringify({ subjectSlug: SUBJECT, currentLevel: 'beginner', voiceChoice: 'male', teachingLanguage: 'en', selfDescription: 'My English is not so good. I know basic chemistry.' }),
+    body: JSON.stringify({ subjectSlug: SUBJECT, currentLevel: 'beginner', voiceChoice: 'male', teachingLanguage: 'en', selfDescription: `My English is not so good. I know basic ${SUBJECT}.` }),
   })
   console.log(`onboarding ${ob.status}`)
   const lessons = ((await (await fetch(`${BASE}/api/curriculum?subject=${SUBJECT}`, { headers: { cookie } })).json()) as { lessons: Array<{ topicSlug: string; lessonTitle: string; order: number; unitTitle: string }> }).lessons
