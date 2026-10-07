@@ -30,6 +30,7 @@
  */
 
 import { visibleCurveFraction } from '@/lib/visuals/graphView'
+import { isNonNegativeAxis } from '@/lib/visuals/graphAxis'
 import { generateJSON } from '@/lib/ai/client'
 import { validateSceneSpec } from '@/lib/teaching/sceneSpecValidator'
 import { isRuntimeSceneGenerationAllowed } from './flag'
@@ -867,8 +868,10 @@ export function validateGeneratedFigure(
     return result.ok ? { ok: true, figure: { kind: 'scene', scene: result.scene }, cached: false } : result
   }
   if (kind === 'spec') {
-    const spec = parseVisualSpec(raw)
+    let spec = parseVisualSpec(raw)
     if (!spec) return { ok: false, reason: 'structurally-invalid' }
+    // ENGL-017: a time axis with no authored domain opens on 0…10, not −10…10.
+    if (spec.type === 'graph' && !spec.domain && isNonNegativeAxis(spec.xLabel)) spec = { ...spec, domain: [0, 10] }
     if (!isSpecAnchoredToConcept(spec, ctx)) return { ok: false, reason: 'not-anchored-to-concept' }
     // A GENERATED graph must say what its axes mean.
     //

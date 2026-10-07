@@ -47,6 +47,7 @@ import { Html } from '@react-three/drei'
 import type { Theme } from '@/components/Providers'
 import type { Vec3 } from '@/lib/teaching/sceneSpec'
 import { LABEL_LINE_HEIGHT_RATIO } from '@/lib/teaching/visual/layout'
+import { readableTextColor } from '@/lib/teaching/sceneGenerators/visualDesign'
 
 /**
  * RESPONSIVE SIZE, ONE RULE FOR EVERY SCENE.
@@ -106,7 +107,8 @@ export function SceneLabel({ text, position, color, theme, tier, maxWidthPx }: S
           fontSize: `clamp(${(FLOOR_PX * scale).toFixed(2)}px, ${(IDEAL_VW * scale).toFixed(2)}vw, ${(CEILING_PX * scale).toFixed(2)}px)`,
           fontWeight: heading ? 800 : 700,
           letterSpacing: heading ? '0.02em' : undefined,
-          color,
+          // ENGL-017: label text never drops below 4.5:1 on the figure surface.
+          color: readableTextColor(color, theme === 'light' ? 'light' : 'dark'),
           // `width`, not `maxWidth`: drei's <Html> wrapper is a zero-width
           // absolutely-positioned box, so an inline-block inside it shrinks to
           // its minimum content width — measured, that wrapped a caption to ONE

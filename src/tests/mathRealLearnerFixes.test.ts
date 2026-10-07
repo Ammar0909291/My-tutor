@@ -227,7 +227,7 @@ describe('MATH-018 one story, then simpler maths', () => {
     const prior = ['Think of making a LEGO house: each brick is one step.', 'A model is an equation that stands for a situation.']
     expect(analogyCapReached(prior, 1)).toBe(true)
     expect(analogyCapReached(prior)).toBe(false)
-    expect(ROUTE).toMatch(/caps\.analogyCapReached\(priorTutor, learnSession\.subject\.slug === 'mathematics' \? 1 : 2\)/)
+    expect(ROUTE).toMatch(/caps\.analogyCapReached\(priorTutor, \['mathematics', 'english'\]\.includes\(learnSession\.subject\.slug\) \? 1 : 2\)/)
   })
 })
 
