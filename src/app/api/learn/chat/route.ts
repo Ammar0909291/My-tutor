@@ -910,6 +910,9 @@ async function handleChatTurn(req: Request, deadline: RouteDeadline): Promise<Re
     // to the JSON response once cleanText is finalized.
     let lessonCompletionHoisted:
       import('@/lib/teaching/lessonCompletion').LessonCompletionPayload | null = null
+    // MATH-001: the close text alone, without a kept verdict, for the graded-turn
+    // assembler (which writes its own verdict line above it).
+    let lessonCloseTextOnlyHoisted: string | null = null
     // P3: the session's asked-question ledger, read from contextSnapshot before
     // the prompt is built and re-persisted with this turn's questions folded in.
     let questionLedgerHoisted: import('@/lib/teaching/repetitionGuard').QuestionLedger =
@@ -10430,7 +10433,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         }
         // CHEM-036/117/086: the learner asked about "this picture" and there
         // is none — the reply says so and does not talk about one.
-        if (!figureOnScreen && figureQuestionHoisted) {
+        // MATH-019 (2026-10-06, math #460 t24, #735, #774): "There is no picture
+        // in this lesson yet" in a lesson whose opening carried a figure — the
+        // held-figure session does not record a figure sent with the lesson
+        // opening. The rendered-reality log does (the same signal the unmet
+        // picture-request acknowledgement reads below), so a figure already
+        // shown for this concept is never denied.
+        const figureShownForConcept = resolvedConceptId !== null && resolvedConceptId !== undefined
+          && snapshotRRMLog.some((e) => e.matchedConcept === resolvedConceptId)
+        if (!figureOnScreen && figureQuestionHoisted && !figureShownForConcept) {
           const { answerFigureQuestionWithoutFigure } = await import('@/lib/teaching/figureReference')
           let fallbackForFigure: string | null = null
           if (resolvedConceptId) {
@@ -11298,7 +11309,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             console.log('[empathy-opener-cap] stripped a repeated or unprompted empathy opener')
             cleanText = emp.text
           }
-          if (caps.usesAnalogy(cleanText) && caps.analogyCapReached(priorTutor)) {
+          if (caps.usesAnalogy(cleanText) && caps.analogyCapReached(priorTutor, learnSession.subject.slug === 'mathematics' ? 1 : 2)) {
             const retry = await regenerateWithAppendix(caps.NO_ANALOGY_APPENDIX)
             const kept = retry && !caps.usesAnalogy(retry) && (retry.match(/\S+/g) ?? []).length >= 12
             console.log('[analogy-cap] ' + JSON.stringify({ regenerated: true, kept }))
@@ -12255,6 +12266,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 || (await import('@/lib/teaching/adaptationRequest')).adaptationKind(learnerAuthoredMessage) !== null
                 || (await import('@/lib/teaching/mcq')).readsAsRequestToTutor(learnerAuthoredMessage)
                 || askedForClose(learnerAuthoredMessage) || figForClose(learnerAuthoredMessage)
+                // MATH-001: a bare "why?" asks for the reason (21 closes on it).
+                || (await import('@/lib/teaching/replyHygiene')).isBareWhyQuestion(learnerAuthoredMessage)
               const closeDeferred = deferCloseForRequest(stateForOutcome, requestThisTurn)
               if (closeDeferred) console.log('[budget-close-deferred] ' + JSON.stringify({ conceptId: stateForOutcome.conceptId, reason: 'learner-request' }))
               if (isConceptClosed(stateForOutcome) && !resolvedLessonCompleted && !closeDeferred) {
@@ -12387,9 +12400,18 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                     // source — buildLessonCloseText is the one builder the
                     // already-complete serve path uses too.
                     const { buildLessonCloseText } = await import('@/lib/teaching/lessonCompletion')
+                    // MATH-001 (2026-10-06, math #639 t18 and 6 other lessons):
+                    // the turn that closes the lesson can also be the turn that
+                    // GRADED a card answer, and the close replaced the verdict —
+                    // the learner never learned whether that last answer was
+                    // right. The server's own verdict paragraph stays, first.
+                    const { verdictParagraphToKeep } = await import('@/lib/teaching/lessonCompletion')
+                    const keptVerdict = mcqGradeHoisted !== null ? verdictParagraphToKeep(cleanText) : null
                     cleanText = buildLessonCloseText(finalOutcome.lessonTitle, summaryForClose, {
                       lang: teachingLang, conceptId: resolvedConceptId,
                     })
+                    lessonCloseTextOnlyHoisted = cleanText
+                    if (keptVerdict) cleanText = `${keptVerdict}\n\n${cleanText}`
                     // Nothing that solicits a further answer may ride along:
                     // a tappable question or a hint would re-open the lesson
                     // the learner has just been told is finished.
@@ -13425,6 +13447,56 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           cleanText = ack.text
         }
       } catch { /* non-fatal — a repair must never break a turn */ }
+      // ── THE LAST LOOK AT A MODEL-WRITTEN REPLY (replyHygiene.ts) ──────────
+      // Mathematics real-learner run, 2026-10-06: the earlier caps ran, and a
+      // later regeneration (shape, picture contract) brought the same "I hear
+      // you…" opener back (MATH-017); "why?" still got the tutor's account of
+      // itself (MATH-021); a help request got a verdict on an earlier card
+      // (MATH-026); the opening turn began "If not, …" (MATH-009); "\[" with
+      // no "\]" swallowed the rest of a reply (MATH-015). Model-written turns
+      // only — never memory, gate, a close or a degraded notice.
+      if (!serveLessonComplete && !lessonCompletionHoisted && !['memory', 'gate', 'degraded', 'deterministic', 'fallback'].includes(provider)) {
+        try {
+          const caps = await import('@/lib/teaching/reuseCaps')
+          const hy = await import('@/lib/teaching/replyHygiene')
+          const priorTutorHy = learnSession.messages
+            .filter((m) => m.role === MessageRole.ASSISTANT && typeof m.content === 'string')
+            .map((m) => m.content as string)
+          const done: string[] = []
+          const meta = caps.stripMetaTalk(cleanText)
+          if (meta.removed.length > 0) { cleanText = meta.text; done.push('meta-talk') }
+          const emp = caps.stripEmpathyOpener(cleanText, learnerAuthoredMessage, priorTutorHy)
+          if (emp.stripped) { cleanText = emp.text; done.push('empathy-opener') }
+          if (mcqGradeHoisted === null) {
+            const { readsAsRequestToTutor } = await import('@/lib/teaching/mcq')
+            const { detectLearnerRequest, asksForPractice } = await import('@/lib/teaching/masteryGate')
+            const { adaptationKind } = await import('@/lib/teaching/adaptationRequest')
+            const asked = readsAsRequestToTutor(learnerAuthoredMessage) || detectLearnerRequest(learnerAuthoredMessage) !== null
+              || adaptationKind(learnerAuthoredMessage) !== null || asksForPractice(learnerAuthoredMessage)
+              || hy.isBareWhyQuestion(learnerAuthoredMessage)
+            if (asked) {
+              const v = hy.dropVerdictOnUngradedRequest(cleanText)
+              if (v.dropped) { cleanText = v.text; done.push('verdict-on-request') }
+            }
+          }
+          // MATH-002 residual (2026-10-06, after the 10:08 deploy: 41 of 1,198
+          // server-graded wrong answers): the analogy and shape regenerations
+          // replace the reply with a fresh draft, and the server's verdict at
+          // its head went with it — "Imagine you have a sheet of paper…" as the
+          // whole reaction to a wrong tap. On an authored key the verdict is
+          // put back in front.
+          if (gradeForVerdict !== null && pendingMcqHoisted && Array.isArray(pendingMcqHoisted.options)
+            && typeof pendingMcqHoisted.correctIndex === 'number') {
+            const restored = hy.restoreServerVerdict(cleanText, gradeForVerdict.correct, pendingMcqHoisted.options[pendingMcqHoisted.correctIndex] ?? null)
+            if (restored !== cleanText) { cleanText = restored; done.push('verdict-restored') }
+          }
+          const orphan = hy.dropOrphanConditionalOpener(cleanText)
+          if (orphan.dropped) { cleanText = orphan.text; done.push('orphan-conditional') }
+          const bal = hy.balanceMathDelimiters(cleanText)
+          if (bal.repaired) { cleanText = bal.text; done.push('math-delimiters') }
+          if (done.length > 0) console.log('[reply-hygiene] ' + JSON.stringify({ conceptId: resolvedConceptId ?? null, done }))
+        } catch { /* a wording repair never breaks a turn */ }
+      }
       if (!servedMcq) {
         const { enforceQuestionDeliveryContract, WITHHELD_QUESTION_CONTINUATION_TEXT } = await import('@/lib/teaching/gateAssessment')
         // The fallback when NOTHING survives. "Let's stay with this idea for a
@@ -13495,6 +13567,83 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             console.warn('[fallback-repeat] ' + JSON.stringify({ conceptId: resolvedConceptId ?? null }))
           }
         } catch { /* non-fatal — a repair must never break a turn */ }
+      }
+
+      // ── THE TEACHING FLOOR (MATH-004/005/016/020/022/023/027) ───────────
+      // After every repair: the learner asked for help (or said they do not
+      // know, or asked "why?"), no card is on screen, and what is left is a
+      // stub ("Let's take a tiny step together.", "Sure!"), a formula fragment
+      // ("=\mu Q(x)\)?"), nothing but a counter-question, or the concept's
+      // syllabus line. Measured after the 10:08 deploy on 2026-10-06: 47
+      // syllabus-line replies and 23 stubs in mathematics alone, most on the
+      // recovery path. The learner gets an AUTHORED explanation of the concept
+      // they have not already read; when every authored one has been shown,
+      // the reply is left as it was.
+      if (!servedMcq && !serveLessonComplete && !lessonCompletionHoisted && provider !== 'degraded' && resolvedConceptId) {
+        try {
+          const hy = await import('@/lib/teaching/replyHygiene')
+          const { readsAsRequestToTutor } = await import('@/lib/teaching/mcq')
+          const { detectLearnerRequest, asksForPractice } = await import('@/lib/teaching/masteryGate')
+          const { adaptationKind } = await import('@/lib/teaching/adaptationRequest')
+          const requestKind = detectLearnerRequest(learnerAuthoredMessage)
+          const adaptation = adaptationKind(learnerAuthoredMessage)
+          // MATH-009: the lesson's first "ok" is owed the lesson too — an
+          // opening reply of "If not, please let me know what you'd like to
+          // focus on." or a lone figure pointer taught nothing (64 lessons).
+          const { isBareAcknowledgement } = await import('@/lib/teaching/masteryGate')
+          const openingTurn = isBareAcknowledgement(learnerAuthoredMessage)
+            && !learnSession.messages.some((m) => m.role === MessageRole.USER
+              && (m as { lessonKey?: string | null }).lessonKey === resolvedLessonKeyThisTurn)
+          const wantsTeaching = openingTurn || hy.learnerWantsTeaching(learnerAuthoredMessage, {
+            request: readsAsRequestToTutor(learnerAuthoredMessage) || requestKind !== null || adaptation !== null,
+            practice: asksForPractice(learnerAuthoredMessage),
+          })
+          if (wantsTeaching) {
+            const { splitVisualPointer } = await import('@/lib/teaching/visual/visualAcknowledgement')
+            const { body, pointer } = splitVisualPointer(cleanText)
+            const { getKGNode } = await import('@/lib/curriculum/knowledgeGraph')
+            const node = getKGNode(resolvedConceptId)
+            const { conceptFallbackText, FALLBACK_REPEAT_TEXT } = await import('@/lib/teaching/conceptFallback')
+            const syllabusLine = node?.title && node.description ? conceptFallbackText(node.title, node.description) : null
+            const trimmedBody = body.trim()
+            const isFallback = trimmedBody === syllabusLine || trimmedBody === FALLBACK_REPEAT_TEXT
+              || trimmedBody === "Good — let's keep going."
+            if (isFallback || hy.isStubReply(trimmedBody)) {
+              const { findUnseenExplanationContent } = await import('@/lib/teaching/assets/explanationMemory')
+              const priorTutorFloor = learnSession.messages
+                .filter((m) => m.role === MessageRole.ASSISTANT && typeof m.content === 'string')
+                .map((m) => m.content as string)
+              const authored = await findUnseenExplanationContent({
+                conceptId: resolvedConceptId,
+                language: teachingLang,
+                userMessage: learnerAuthoredMessage,
+                priorTutorTexts: priorTutorFloor,
+                preferKinds: hy.preferredExplanationKinds(adaptation, requestKind),
+              })
+              // Mathematics carries one authored core explanation per concept
+              // (913 ACTIVE for 908 concepts, measured 2026-10-07), usually
+              // served early in the lesson. With nothing unseen to serve, ONE
+              // regeneration with the missing piece stated; kept only if it
+              // teaches and does not recite an earlier reply.
+              let regenerated: string | null = null
+              if (!authored) {
+                try {
+                  const retry = await regenerateWithAppendix(hy.TEACHING_FLOOR_APPENDIX)
+                  const { dropRepeatedParagraphs } = await import('@/lib/teaching/historyCompaction')
+                  const unrepeated = retry ? dropRepeatedParagraphs(retry, priorTutorFloor).text : ''
+                  if (unrepeated && !hy.isStubReply(unrepeated) && !/\?\s*$/.test(unrepeated.trim())) regenerated = unrepeated
+                } catch { /* keep what we had */ }
+              }
+              console.log('[teaching-floor] ' + JSON.stringify({
+                conceptId: resolvedConceptId, replaced: authored !== null || regenerated !== null,
+                source: authored ? 'authored' : regenerated ? 'regenerated' : null, wasFallback: isFallback,
+                stubChars: trimmedBody.length, assetId: authored?.assetId ?? null,
+              }))
+              const floorText = authored?.content.trim() ?? regenerated
+              if (floorText) cleanText = pointer ? `${floorText}\n\n${pointer}` : floorText
+            }
+          }
+        } catch { /* a repair must never break a turn */ }
       }
 
       // ── PHASE 0: TURN DECISION PROVENANCE ────────────────────────────
@@ -13692,7 +13841,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               verdictLine,
               slots: used.slots,
               leadIn: mcqHoisted ? neutralLeadInFor(mcqHoisted.question) : null,
-              closeText: lessonCompletionHoisted ? cleanText : null,
+              closeText: lessonCompletionHoisted ? (lessonCloseTextOnlyHoisted ?? cleanText) : null,
             })
             // Would the ASSEMBLED text close the concept exactly when the served
             // one did? Re-fold with the text-derived inputs recomputed on it.

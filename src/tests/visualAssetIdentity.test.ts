@@ -256,10 +256,11 @@ describe('derived identity is visible and counted', () => {
   it('a domain-prefix binding is admitted but marked derived', () => {
     // math.arith.* -> number_line is a PREFIX rule: it names the domain, not
     // this concept. M2 keeps it (deleting coverage is out of scope) and labels
-    // it, so M3 can find every one of them.
+    // it, so M3 can find every one of them. (long-division until MATH-012,
+    // 2026-10-06: the -5..5 line no longer stands in for it.)
     const d = resolveVisual({
       message: 'explain with diagram',
-      lessonConceptId: 'math.arith.long-division',
+      lessonConceptId: 'math.arith.negative-numbers',
       subject: 'mathematics',
       learnerRequest: 'diagram',
     })

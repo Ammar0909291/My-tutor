@@ -48,7 +48,8 @@ describe('CHEM-036/117: a question about a picture that is not there', () => {
   })
   it('route: only when no figure is on screen and the learner asked about one', () => {
     const ROUTE = readFileSync('src/app/api/learn/chat/route.ts', 'utf8')
-    expect(ROUTE).toMatch(/if \(!figureOnScreen && figureQuestionHoisted\) \{\n\s+const \{ answerFigureQuestionWithoutFigure \}/)
+    // + MATH-019: never when a figure was already shown for the concept.
+    expect(ROUTE).toMatch(/if \(!figureOnScreen && figureQuestionHoisted && !figureShownForConcept\) \{\n\s+const \{ answerFigureQuestionWithoutFigure \}/)
   })
 })
 

@@ -45,15 +45,22 @@ export function stripEmpathyOpener(text: string, learnerMessage: string, priorTu
   return { text: rest, stripped: true }
 }
 
-const ANALOGY_RE = /\b(?:think\s+of\s+(?:it|this|them|a|an|the)\b|imagine\s+(?:a|an|you|that|your)\b|(?:it'?s|is|are)\s+(?:a\s+bit\s+|just\s+|kind\s+of\s+|rather\s+)?like\s+(?:a|an|when|your)\b|picture\s+(?:a|an)\b|analogy|metaphor)/i
+// MATH-018: "Think of making a LEGO house", "like planning a road trip" — gerund forms.
+const ANALOGY_RE = /\b(?:think\s+of\s+(?:it|this|them|a|an|the)\b|think\s+of\s+\w+ing\b|\blike\s+(?:planning|making|building|baking|cooking|packing|sorting|organi[sz]ing)\b|imagine\s+(?:a|an|you|that|your)\b|(?:it'?s|is|are)\s+(?:a\s+bit\s+|just\s+|kind\s+of\s+|rather\s+)?like\s+(?:a|an|when|your)\b|picture\s+(?:a|an)\b|analogy|metaphor)/i
 
 export function usesAnalogy(text: string): boolean {
   return ANALOGY_RE.test(text ?? '')
 }
 
-/** True when two of the last four tutor replies (newest first) already used an analogy. */
-export function analogyCapReached(priorTutor: readonly string[]): boolean {
-  return priorTutor.slice(0, 4).filter(usesAnalogy).length >= 2
+/**
+ * True when `limit` of the last four tutor replies (newest first) already used
+ * an analogy. MATH-018 (2026-10-06, mathematics run: LEGO house, dinner party,
+ * road trip, pizza — a new story for every "explain simpler" in 226 lessons):
+ * the caller passes 1 for mathematics, where "simpler" means simpler maths and
+ * a small number example, not another story.
+ */
+export function analogyCapReached(priorTutor: readonly string[], limit = 2): boolean {
+  return priorTutor.slice(0, 4).filter(usesAnalogy).length >= limit
 }
 
 export const NO_ANALOGY_APPENDIX =
@@ -69,8 +76,11 @@ export const NO_ANALOGY_APPENDIX =
  * explanation…", "I hear you're wondering why I'm not just repeating the
  * earlier explanation". Those sentences go; the teaching stays. A reply left
  * with fewer than 8 words is not touched (the caller's repairs own that case).
+ * MATH-021 (2026-10-06, mathematics #552 t14, #1 t15): "I asked for the next
+ * question so we can check…", "I asked you to resend because the system didn't
+ * register…", "I put that placeholder in because the system was telling me…".
  */
-const META_TALK_RE = /\b(?:the\s+system\s+(?:is\s+set\s+up|won(?:'|’)t|doesn(?:'|’)t)|(?:avoid|not|didn(?:'|’)t|did\s+not)\s+(?:just\s+)?repeat(?:ing)?\s+(?:the\s+)?(?:same|earlier|previous)\s+explanation|why\s+i(?:(?:'|’)m|\s+am|\s+haven(?:'|’)t|\s+have\s+not|\s+didn(?:'|’)t)\s+(?:not\s+)?(?:just\s+)?(?:given|giving|repeating|repeated|shown|showing)|i\s+wanted\s+to\s+first\s+acknowledge|repeat\s+the\s+same\s+explanation\s+verbatim)\b/i
+const META_TALK_RE = /\b(?:the\s+system\s+(?:is\s+set\s+up|won(?:'|’)t|doesn(?:'|’)t)|(?:avoid|not|didn(?:'|’)t|did\s+not)\s+(?:just\s+)?repeat(?:ing)?\s+(?:the\s+)?(?:same|earlier|previous)\s+explanation|why\s+i(?:(?:'|’)m|\s+am|\s+haven(?:'|’)t|\s+have\s+not|\s+didn(?:'|’)t)\s+(?:not\s+)?(?:just\s+)?(?:given|giving|repeating|repeated|shown|showing)|i\s+wanted\s+to\s+first\s+acknowledge|repeat\s+the\s+same\s+explanation\s+verbatim|i\s+asked\s+(?:you\s+)?(?:for\s+the\s+next\s+question|to\s+resend|you\s+to\s+resend)|i\s+put\s+(?:that|this|the)\s+(?:placeholder|note|line|sentence)\s+in|the\s+system\s+(?:was\s+telling\s+me|told\s+me|didn(?:'|’)t\s+register|did\s+not\s+register|wants?\s+me|asked\s+me))\b/i
 
 /**
  * CHEM-102 (2026-10-05, chem.equil.buffer #64): mid-lesson, "Since our session

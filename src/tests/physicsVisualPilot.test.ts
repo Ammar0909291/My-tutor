@@ -293,7 +293,8 @@ describe('nothing outside the pilot changed', () => {
   })
 
   it('domain illustrations are still domain-scoped', () => {
-    expect(ask('math.calc.limits').asset?.scope).toBe('domain')
+    // math.calc.limits until MATH-011 (2026-10-06) removed its stock card.
+    expect(ask('math.geom.angle-types').asset?.scope).toBe('domain')
   })
 })
 

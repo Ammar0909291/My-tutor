@@ -200,6 +200,42 @@ export async function findBestExplanation(
   }
 }
 
+/**
+ * THE TEACHING FLOOR'S SOURCE (MATH-004/005/016/023/027, 2026-10-06).
+ *
+ * When every repair has run and the reply to a help request is a stub ("Let's
+ * take a tiny step together.", "Sure!"), a formula fragment, nothing but a
+ * counter-question, or the concept's syllabus line, the learner is owed real
+ * teaching. This returns an ACTIVE authored explanation of the concept that is
+ * not already in the recent tutor messages (replyHygiene.pickUnseenExplanation)
+ * and that passes the same learner-admission boundary as every other serve.
+ * Null on a miss or any failure — the caller keeps what it had.
+ */
+export async function findUnseenExplanationContent(input: {
+  conceptId: string
+  language: string
+  userMessage: string
+  priorTutorTexts: readonly string[]
+  preferKinds: readonly string[]
+}): Promise<{ assetId: string; content: string; familyKind: string } | null> {
+  try {
+    const rows = await prisma.assetIdentity.findMany({
+      where: { family: AssetFamily.EXPLANATION, conceptId: input.conceptId, language: input.language, status: AssetStatus.ACTIVE },
+      select: { assetId: true, familyKind: true, qualityScore: true, explanationAsset: { select: { content: true } } },
+      take: 50,
+    })
+    const { pickUnseenExplanation } = await import('@/lib/teaching/replyHygiene')
+    const candidates = rows
+      .filter((r) => r.explanationAsset?.content && admitForLearner({ content: r.explanationAsset.content, userMessage: input.userMessage }).admit)
+      .map((r) => ({ assetId: r.assetId, content: r.explanationAsset!.content, familyKind: r.familyKind, qualityScore: r.qualityScore }))
+    const pick = pickUnseenExplanation(candidates, input.priorTutorTexts, input.preferKinds) as (typeof candidates)[number] | null
+    return pick ? { assetId: pick.assetId, content: pick.content, familyKind: pick.familyKind } : null
+  } catch (err) {
+    console.warn('[explanationMemory] findUnseenExplanationContent failed:', err)
+    return null
+  }
+}
+
 export interface CaptureExplanationInput {
   conceptId: string
   subjectSlug: string
