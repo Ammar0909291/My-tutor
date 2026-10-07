@@ -458,28 +458,30 @@ export function auditGraph(spec: SceneSpec): { isGraph: boolean; findings: Findi
   type Arrow = (typeof arrows)[number]
   // EVERY axis pair — a figure may hold several graphs (panels), and a curve is
   // judged against the pair it is drawn on, not against whichever came first.
+  // A pair is a horizontal and a vertical ARROW whose lines CROSS at the start of
+  // the horizontal (the y-axis stands at the time axis's origin), wherever along
+  // the vertical that is: a displacement axis runs above and below its baseline.
+  const horizontals = arrows.filter((a) => Math.abs((a.to as P3)[1] - (a.from as P3)[1]) <= 0.05 && Math.abs((a.to as P3)[0] - (a.from as P3)[0]) >= 3)
+  const verticals = arrows.filter((a) => Math.abs((a.to as P3)[0] - (a.from as P3)[0]) <= 0.05 && Math.abs((a.to as P3)[1] - (a.from as P3)[1]) >= 3)
   const pairs: Array<{ h: Arrow; v: Arrow }> = []
-  for (const h of arrows) {
-    const hf = h.from as P3, ht = h.to as P3
-    if (Math.abs(ht[1] - hf[1]) > 0.05 || Math.abs(ht[0] - hf[0]) < 3) continue
-    for (const v of arrows) {
+  for (const h of horizontals) {
+    const hf = h.from as P3
+    for (const v of verticals) {
       const vf = v.from as P3, vt = v.to as P3
-      if (Math.abs(vt[0] - vf[0]) > 0.05 || Math.abs(vt[1] - vf[1]) < 3) continue
-      if (Math.hypot(hf[0] - vf[0], hf[1] - vf[1]) < 0.05) pairs.push({ h, v })
+      const crossesAtStart = Math.abs(vf[0] - hf[0]) <= 0.35
+      const within = hf[1] >= Math.min(vf[1], vt[1]) - 0.35 && hf[1] <= Math.max(vf[1], vt[1]) + 0.35
+      if (crossesAtStart && within) pairs.push({ h, v })
     }
   }
-  // An axis may be drawn in two halves from one origin (a displacement axis has an
-  // up arrow and a down arrow); the axes' extent is the union of every arrow that
-  // starts at the pair's origin along the same line.
+  // The extent of an axis drawn in several arrows (an up half and a down half).
   const box = (pr: { h: Arrow; v: Arrow }) => {
-    const origin = pr.h.from as P3
-    const sharesOrigin = (a: Arrow) => Math.hypot((a.from as P3)[0] - origin[0], (a.from as P3)[1] - origin[1]) < 0.05
-    const xs: number[] = [origin[0]], ys: number[] = [origin[1]]
-    for (const a of arrows) {
-      if (!sharesOrigin(a)) continue
+    const hf = pr.h.from as P3, ht = pr.h.to as P3, vf = pr.v.from as P3, vt = pr.v.to as P3
+    const xs: number[] = [hf[0], ht[0]], ys: number[] = [vf[1], vt[1]]
+    for (const a of verticals) {
       const f = a.from as P3, t = a.to as P3
-      if (Math.abs(t[1] - f[1]) <= 0.05) xs.push(t[0])
-      else if (Math.abs(t[0] - f[0]) <= 0.05) ys.push(t[1])
+      if (Math.abs(f[0] - vf[0]) > 0.05) continue
+      const lo = Math.min(f[1], t[1]), hi = Math.max(f[1], t[1])
+      if (hi >= Math.min(...ys) - 0.35 && lo <= Math.max(...ys) + 0.35) ys.push(f[1], t[1])
     }
     return { x0: Math.min(...xs), x1: Math.max(...xs), y0: Math.min(...ys), y1: Math.max(...ys) }
   }

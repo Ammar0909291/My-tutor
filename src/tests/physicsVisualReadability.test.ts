@@ -291,7 +291,7 @@ describe('admitVisualAsset fails closed on a payload blocker, on every tier', ()
   ] as const) {
     it(`refuses ${name} — for an authored AND a generated figure`, () => {
       for (const provenance of ['generator', 'engine'] as const) {
-        const r = admitVisualAsset(intent, asset(scene([...objects]), provenance))
+        const r = admitVisualAsset(intent, asset(scene([...objects] as unknown as SceneSpec['steps'][number]['objects']), provenance))
         expect(r.ok).toBe(false)
         if (!r.ok) {
           expect(r.reason).toBe('failed-audit')

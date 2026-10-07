@@ -15,6 +15,7 @@ import { resolveVisual } from '../../../src/lib/teaching/visual/resolveVisual'
 import { auditGraph, auditRenderedState, auditSceneData, rollup, type Finding, type Verdict } from '../../../src/lib/teaching/visual/figureAudit'
 import { checkFigureTexts } from '../../../src/lib/teaching/visual/figureSemantics'
 import { servedFingerprint } from './fingerprint'
+import { CHECKED_KINDS, checkKind, type KindReport } from './kindChecks'
 import type { RenderRecord, ViewportName, ThemeName } from './render'
 import type { SceneSpec } from '../../../src/lib/teaching/sceneSpec'
 
@@ -25,6 +26,20 @@ const outDir = resolve(arg('out', inDir)!)
 
 /** Test files whose assertions are about the PHYSICS a physics figure draws. */
 const PHYSICS_ASSERTING = /^(physicsCoreScenesBatch\d+|physicsExtensionBatch\d+|physicsVisualPilot|physicsCoverageEnrichment|newtonSecondLawSimulation|pendulumPeriodSimulation|electricDipoleScene|parametricSceneInteraction)\.test\.ts$/
+
+/** Per-kind parameter-domain sweep, run once. */
+const kindReports = new Map<string, KindReport>()
+function kindReport(kind: string): KindReport | null {
+  if (!CHECKED_KINDS[kind]) return null
+  if (!kindReports.has(kind)) kindReports.set(kind, checkKind(kind))
+  return kindReports.get(kind)!
+}
+
+/** Time-stepped simulations are verified by their own deterministic suites. */
+const SIMULATION_TESTS: Record<string, string> = {
+  newton_second_law: 'newtonSecondLawSimulation.test.ts',
+  pendulum_period: 'pendulumPeriodSimulation.test.ts',
+}
 
 function physicsEvidence(row: InventoryRow, sceneId: string | null): string[] {
   const dir = resolve('src/tests')
@@ -120,6 +135,16 @@ function main(): void {
     }
     const sem = checkFigureTexts(texts)
     const evidence = physicsEvidence(row, sceneId)
+    // The independent physics re-derivation, over the whole slider domain.
+    const kr = row.parametricKind ? kindReport(row.parametricKind) : null
+    if (kr) {
+      if (kr.failures.length) {
+        for (const f of kr.failures.slice(0, 3)) findings.push({ id: 'SM-03', dimension: 'semantic', severity: 'FAIL', message: `${kr.kind} at ${JSON.stringify(f.params)}: ${f.problems[0]}` })
+      } else {
+        evidence.push(`kindChecks:${kr.kind} (${kr.built} states re-derived, ${kr.refusedByValidator} refused by the generator's validator)`)
+      }
+    }
+    if (row.parametricKind && SIMULATION_TESTS[row.parametricKind]) evidence.push(SIMULATION_TESTS[row.parametricKind])
     const contradictions = sem.results.flatMap((r) => r.contradictions.map((c) => ({ r, c })))
     for (const { r, c } of contradictions) {
       findings.push({ id: 'SM-01', dimension: 'semantic', severity: 'FAIL', message: `"${r.text}": ${c.reason}`, evidence: { a: c.a, b: c.b } })
