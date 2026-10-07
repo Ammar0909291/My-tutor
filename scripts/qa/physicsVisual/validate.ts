@@ -165,7 +165,12 @@ function main(): void {
     const dims: Record<string, Verdict> = {}
     for (const dim of ['structural', 'readability', 'contrast', 'layout', 'graph', 'semantic', 'interactive'] as const) {
       const fs = findings.filter((f) => f.dimension === dim)
-      dims[dim] = dim === 'semantic' ? semVerdict : rollup(fs)
+      // `interactive` = every state a learner can drive the figure into (slider
+      // extremes and combinations, simulation run/pause/step/reset/finished),
+      // judged by the same rules as the default frame.
+      dims[dim] = dim === 'semantic' ? semVerdict
+        : dim === 'interactive' ? rollup(findings.filter((f) => f.state && f.state !== 'default'))
+        : rollup(fs)
     }
     const dedup = dedupe(findings)
     reports.push({
