@@ -15,6 +15,7 @@ import type { ProcessFlowSpec } from '@/lib/visuals/visualSpec'
 import { createMasteryEmitter, type VisualMasteryContext, type VisualMasterySignal } from '@/lib/visuals/visualMastery'
 import { useLanguage } from '@/components/ui/LanguageToggle'
 import { localizeVisualLabel, type VisualLang } from '@/lib/visuals/visualLabels'
+import { layoutStep, TITLE_LINE_H, NOTE_LINE_H } from '@/lib/visuals/processFlowLayout'
 
 const STEP_W = 150
 const STEP_H = 56
@@ -172,26 +173,32 @@ function ReorderFeedback({ interactive, isCorrect, hasChallenge }: { interactive
 function VerticalFlow({ spec, wrapRef, width, steps, displayTitle, badgeLabel, interactive, swap, isCorrect, hasChallenge }: FlowProps) {
   const boxW = Math.min(STEP_W + 60, width - 16)
   const cx = width / 2
-  const h = steps.length * STEP_H + (steps.length - 1) * GAP + 16
+  // MATH-013: each box is as tall as its wrapped text (processFlowLayout.ts).
+  const layouts = steps.map((step) => layoutStep(step, boxW))
+  const tops: number[] = []
+  let acc = 8
+  for (const l of layouts) { tops.push(acc); acc += l.height + GAP }
+  const h = acc - GAP + 8
 
   return (
     <Card title={displayTitle} badge={badgeLabel}>
       <div ref={wrapRef} style={{ width: '100%' }}>
         <svg width={width} height={h} role="img" aria-label={`${displayTitle} process flow`} style={{ display: 'block' }}>
           {steps.map((step, i) => {
-            const y = i * (STEP_H + GAP) + 8
+            const y = tops[i]
+            const boxH = layouts[i].height
             return (
               <g key={i}>
-                <StepBox x={cx - boxW / 2} y={y} w={boxW} h={STEP_H} index={i} step={step} />
+                <StepBox x={cx - boxW / 2} y={y} w={boxW} h={boxH} index={i} step={step} />
                 {interactive && (
                   <ReorderButtons
-                    x={cx + boxW / 2 + 4} y={y + STEP_H / 2}
+                    x={cx + boxW / 2 + 4} y={y + boxH / 2}
                     onUp={() => swap(i, i - 1)} onDown={() => swap(i, i + 1)}
                     upDisabled={i === 0} downDisabled={i === steps.length - 1}
                   />
                 )}
                 {i < steps.length - 1 && (
-                  <Arrow x1={cx} y1={y + STEP_H} x2={cx} y2={y + STEP_H + GAP} vertical />
+                  <Arrow x1={cx} y1={y + boxH} x2={cx} y2={y + boxH + GAP} vertical />
                 )}
               </g>
             )
@@ -207,7 +214,9 @@ function HorizontalFlow({ spec, wrapRef, width, steps, displayTitle, badgeLabel,
   const n = steps.length
   const totalW = n * STEP_W + (n - 1) * GAP
   const startX = Math.max(8, (width - totalW) / 2)
-  const h = STEP_H + 16 + (interactive ? 20 : 0)
+  // MATH-013: one row, as tall as its tallest wrapped step.
+  const rowH = Math.max(STEP_H, ...steps.map((step) => layoutStep(step, STEP_W).height))
+  const h = rowH + 16 + (interactive ? 20 : 0)
 
   return (
     <Card title={displayTitle} badge={badgeLabel}>
@@ -218,17 +227,17 @@ function HorizontalFlow({ spec, wrapRef, width, steps, displayTitle, badgeLabel,
             const y = 8
             return (
               <g key={i}>
-                <StepBox x={x} y={y} w={STEP_W} h={STEP_H} index={i} step={step} />
+                <StepBox x={x} y={y} w={STEP_W} h={rowH} index={i} step={step} />
                 {interactive && (
                   <ReorderButtons
-                    x={x + STEP_W / 2} y={y + STEP_H + 14}
+                    x={x + STEP_W / 2} y={y + rowH + 14}
                     onUp={() => swap(i, i - 1)} onDown={() => swap(i, i + 1)}
                     upDisabled={i === 0} downDisabled={i === n - 1}
                     horizontal
                   />
                 )}
                 {i < n - 1 && (
-                  <Arrow x1={x + STEP_W} y1={y + STEP_H / 2} x2={x + STEP_W + GAP} y2={y + STEP_H / 2} vertical={false} />
+                  <Arrow x1={x + STEP_W} y1={y + rowH / 2} x2={x + STEP_W + GAP} y2={y + rowH / 2} vertical={false} />
                 )}
               </g>
             )
@@ -279,17 +288,23 @@ function reorderBtnStyle(disabled: boolean): React.CSSProperties {
 
 // ── shared pieces ────────────────────────────────────────────────────────────
 function StepBox({ x, y, w, h, index, step }: { x: number; y: number; w: number; h: number; index: number; step: ProcessFlowSpec['steps'][number] }) {
+  // MATH-013: the text column starts right of the badge and wraps inside the
+  // box, so the badge never covers the title and the note never crosses the edge.
+  const l = layoutStep(step, w)
+  const tx = x + l.textX
+  const titleTop = y + 10 + 11
+  const noteFirstBaseline = titleTop + (l.titleLines.length - 1) * TITLE_LINE_H + 13
   return (
     <g>
       <rect x={x} y={y} width={w} height={h} rx={10} fill="var(--coral-muted, rgba(247,129,102,0.16))" stroke="var(--coral, #F78166)" strokeWidth={2} />
       <circle cx={x + 16} cy={y + 16} r={10} fill="var(--coral, #F78166)" />
       <text x={x + 16} y={y + 20} fontSize={11} fontWeight={700} textAnchor="middle" fill="#fff">{index + 1}</text>
-      <text x={x + w / 2} y={step.note ? y + h / 2 - 2 : y + h / 2 + 4} fontSize={12} fontWeight={700} textAnchor="middle" fill="var(--text-secondary, #1f2328)">
-        {step.title}
+      <text x={tx} y={titleTop} fontSize={12} fontWeight={700} fill="var(--text-secondary, #1f2328)">
+        {l.titleLines.map((line, k) => <tspan key={k} x={tx} dy={k === 0 ? 0 : TITLE_LINE_H}>{line}</tspan>)}
       </text>
-      {step.note && (
-        <text x={x + w / 2} y={y + h / 2 + 16} fontSize={9.5} textAnchor="middle" fill="var(--text-dim, #888)">
-          {step.note}
+      {l.noteLines.length > 0 && (
+        <text x={tx} y={noteFirstBaseline} fontSize={9.5} fill="var(--text-dim, #888)">
+          {l.noteLines.map((line, k) => <tspan key={k} x={tx} dy={k === 0 ? 0 : NOTE_LINE_H}>{line}</tspan>)}
         </text>
       )}
     </g>

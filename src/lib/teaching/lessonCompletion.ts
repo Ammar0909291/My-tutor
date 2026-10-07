@@ -161,6 +161,23 @@ export function buildCompletionPayload(
 }
 
 /**
+ * MATH-001 (2026-10-06): the server's verdict on a card answered on the very
+ * turn that closes the lesson — "That's right." / "Not quite — the answer is:
+ * X …" — the first paragraph of the drafted reply. Returned so the caller can
+ * keep it above the close; null when the draft does not open with a verdict.
+ * Only the verdict paragraph is kept: anything after it (a new question, more
+ * teaching) is what the close exists to stop.
+ */
+export function verdictParagraphToKeep(draft: string): string | null {
+  const first = (draft ?? '').trim().split(/\n{2,}/)[0]?.trim() ?? ''
+  if (!first) return null
+  const norm = first.replace(/[’ʼ]/g, "'")
+  if (!/^(?:not quite\b|that's (?:right|correct)\b|correct\b|yes, exactly\b)/i.test(norm)) return null
+  // A verdict paragraph that runs on into a question is cut at the question.
+  return first.replace(/\s*[^.!?]*\?\s*$/, '').trim() || null
+}
+
+/**
  * The lesson close, rendered deterministically from persisted evidence.
  *
  * WHY THIS IS A RUNTIME VALUE AND NOT A PROMPT INSTRUCTION. The completion

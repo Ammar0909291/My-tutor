@@ -1,4 +1,5 @@
 import { consumeAIBudget } from '@/lib/ai/budget'
+import { looksLikeHandle } from '@/lib/teaching/replyHygiene'
 import { captureError } from '@/lib/monitoring'
 import { getAIRouter, MAX_HISTORY_MESSAGES } from '@/lib/ai/router'
 
@@ -204,6 +205,11 @@ export function buildTutorSystemPrompt(
   _subjectType?: string,
   contentRegister: ContentRegister = 'beginner',
 ) {
+  // MATH-028 (2026-10-06, mathematics run): learners were addressed by their
+  // login label ("test4", "test 10") and once by a mangled one ("test0" to the
+  // test9 account). A handle or an e-mail prefix is not a name; without a real
+  // one the tutor addresses nobody by name.
+  const hasRealName = !looksLikeHandle(studentName) && studentName.trim().toLowerCase() !== 'student'
   const notationBlock = notationRulesBlock(contentRegister, teachingLanguage)
   // Mastery-gate rework: completion is EVIDENCE-gated, never acknowledgement-
   // gated. "Understood" / "got it" / "done" / "next" are acknowledgements, not
@@ -247,7 +253,7 @@ Communicate ONLY in English unless the student explicitly asks otherwise.
 Your goal is to teach step by step, adapting explanations to the student's level.
 You teach the concept identified by the CONCEPT ANCHOR block (injected below). THE STUDENT'S OWN QUESTION OUTRANKS THE LESSON PLAN: if they ask about something else, or say they are confused about something else, teach THAT — properly, at full standard, for as many turns as they need — and return to the anchored concept only once they say they are satisfied. Never answer a genuine question in one or two sentences so you can get back to the lesson, and never tell a student their question belongs to a different topic.
 
-Student name: ${studentName} — address the student by this name. Do NOT use their self-description/level/goals text below as a name, even if it reads like one.
+${hasRealName ? `Student name: ${studentName} — address the student by this name.` : 'Student name: not known — do NOT address the student by any name or username.'} Do NOT use their self-description/level/goals text below as a name, even if it reads like one.
 Student level: ${studentLevel}
 Learning goals: ${goals}${memory}${lessonBlock}
 Principles:
@@ -287,7 +293,7 @@ NAVIGATION RULE: You are a teaching agent only — you do not control lesson nav
 केवल हिंदी में बात करें, जब तक छात्र स्पष्ट रूप से कुछ और न माँगे।
 Aap woh concept padhate hain jo CONCEPT ANCHOR block (neeche inject hoga) mein hai. Us concept par rahein jab tak student koi genuine sawaal kisi aur topic ke baare mein na pooche — tab chhota sa (1–2 sentence) jawab dein aur wapas anchored concept par aayein.
 
-छात्र का नाम: ${studentName} — छात्र को इसी नाम से संबोधित करें। नीचे दिए गए स्तर/लक्ष्य विवरण से नाम न निकालें, भले ही वह नाम जैसा लगे।
+${hasRealName ? `छात्र का नाम: ${studentName} — छात्र को इसी नाम से संबोधित करें।` : 'छात्र का नाम ज्ञात नहीं — छात्र को किसी नाम या यूज़रनेम से संबोधित न करें।'} नीचे दिए गए स्तर/लक्ष्य विवरण से नाम न निकालें, भले ही वह नाम जैसा लगे।
 छात्र का स्तर: ${studentLevel}
 सीखने के लक्ष्य: ${goals}${memory}${lessonBlock}
 
@@ -313,7 +319,7 @@ NAVIGATION RULE: Aap sirf teaching agent hain — lesson navigation aapke haath 
 Твоя задача — обучать студента шаг за шагом.
 Ты преподаёшь концепцию, указанную в блоке CONCEPT ANCHOR (добавляется ниже). Оставайся на этой концепции, если только студент не задаёт вопрос о чём-то другом — тогда ответь кратко (1–2 предложения) и вернись к основной теме.
 
-Имя студента: ${studentName} — обращайся к студенту по этому имени. НЕ извлекай имя из описания уровня/целей ниже, даже если оно похоже на имя.
+${hasRealName ? `Имя студента: ${studentName} — обращайся к студенту по этому имени.` : 'Имя студента неизвестно — НЕ обращайся к студенту по имени или логину.'} НЕ извлекай имя из описания уровня/целей ниже, даже если оно похоже на имя.
 Уровень студента: ${studentLevel}
 Цели обучения: ${goals}${memorySection}${lessonBlock}
 

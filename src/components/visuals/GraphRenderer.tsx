@@ -1,4 +1,5 @@
 'use client'
+import { isCountAxis, countAxisPoints } from '@/lib/visuals/graphAxis'
 import { FIGURE_TEXT_FLOOR_PX } from '@/components/school/visuals/useFigureLegibility'
 /**
  * GraphRenderer — Visual Learning Sprint B (Math Graph Engine MVP).
@@ -232,8 +233,19 @@ export function GraphRenderer({
   // When a linear model is active, plot from the live m/b state (plain
   // arithmetic) rather than re-parsing text on every drag frame.
   const evalFn = model ? (x: number) => model.m * x + model.b : compiled?.eval
+  // MATH-014: a count on the x-axis is drawn as points at n = 1, 2, 3, … only.
+  const countAxis = isCountAxis(spec.xLabel)
+  const countPoints = useMemo(() => {
+    if (!evalFn || !countAxis) return [] as { sx: number; sy: number }[]
+    return countAxisPoints(fromSx(0), fromSx(w))
+      .map((n) => ({ n, y: evalFn(n) }))
+      .filter((p) => Number.isFinite(p.y))
+      .map((p) => ({ sx: toSx(p.n), sy: toSy(p.y) }))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [compiled, model, w, h, view, countAxis])
+
   const pathD = useMemo(() => {
-    if (!evalFn) return ''
+    if (!evalFn || countAxis) return ''
     let d = ''
     let penDown = false
     const prevYRef = { v: NaN }
@@ -325,7 +337,8 @@ export function GraphRenderer({
               10px tick labels, and given the plot background so a tick digit
               underneath can never collide with a word. */}
           {spec.xLabel?.trim() && (
-            <text x={w - 6} y={h - 6} fontSize={11} textAnchor="end" fontWeight={600}
+            // MATH-014: above the zoom buttons (bottom-right, 24 px + 8 px inset).
+            <text x={w - 6} y={h - 40} fontSize={11} textAnchor="end" fontWeight={600}
                   fill="var(--text-secondary, #6b7280)" stroke="var(--surface, #0d1117)" strokeWidth={3}
                   paintOrder="stroke">{spec.xLabel.trim()}</text>
           )}
@@ -336,6 +349,9 @@ export function GraphRenderer({
           )}
           {/* curve */}
           <path d={pathD} fill="none" stroke="var(--coral, #F78166)" strokeWidth={2.5} strokeLinejoin="round" strokeLinecap="round" />
+          {countPoints.map((p, i) => (
+            <circle key={`n${i}`} cx={p.sx} cy={p.sy} r={3.5} fill="var(--coral, #F78166)" />
+          ))}
           {/* Sprint F: drag handles for the linear model (interactive only) */}
           {model && (
             <>

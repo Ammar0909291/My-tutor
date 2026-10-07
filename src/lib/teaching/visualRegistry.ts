@@ -19,6 +19,7 @@
 
 import type { VisualType } from '@/lib/school/visuals/visualTypes'
 import type { SceneGeneratorKind } from './sceneGenerators/sceneRouter'
+import { getKGNode } from '@/lib/curriculum/knowledgeGraph'
 
 export interface VisualEntry {
   /** Primary visual (the one decideVisualFirst should prefer). */
@@ -530,6 +531,12 @@ const CONCEPT_VISUALS: Record<string, VisualEntry> = {
   'math.geom.polygon':               { primary: 'geometry_shape', all: ['geometry_shape'] },
   'math.geom.area-perimeter':         { primary: 'geometry_shape', all: ['geometry_shape'] },
   'math.geom.surface-area-volume':    { primary: 'three_geometric_solids', all: ['three_geometric_solids', 'geometry_shape'] },
+  // MATH-010 (2026-10-06): Surface Area, Volume and Three-Dimensional Solids
+  // reached the flat Geometry Shapes card through the 'math.geom' default.
+  // The solids card draws a cube, a sphere, a cylinder and a cone.
+  'math.geom.surface-area':           { primary: 'three_geometric_solids', all: ['three_geometric_solids'] },
+  'math.geom.volume':                 { primary: 'three_geometric_solids', all: ['three_geometric_solids'] },
+  'math.geom.solid-3d':               { primary: 'three_geometric_solids', all: ['three_geometric_solids'] },
   'math.geom.3d-geometry':            { primary: 'three_geometric_solids', all: ['three_geometric_solids'] },
   'math.geom.transformations':        { primary: 'three_transformations', all: ['three_transformations', 'geometry_shape'] },
   'math.geom.heights-distances':      { primary: 'geometry_shape', all: ['geometry_shape'], sceneGenerator: 'heights_and_distances' },
@@ -822,6 +829,42 @@ export const DOMAIN_CARD_HOME: Readonly<Partial<Record<VisualType, readonly stri
   three_computer_architecture:   ['cs.found'],
 }
 
+/**
+ * A FIXED CARD MAY STAND FOR A DOMAIN ONLY WHERE IT SHOWS THE CONCEPT.
+ *
+ * Mathematics real-learner run (2026-10-06, MATH-010/011/012/025): the three
+ * mathematics stock cards are fixed drawings — Coordinate Plane is an empty
+ * grid with one point at (2, 3); Geometry Shapes is a triangle, a rectangle and
+ * a circle; Number Line runs -5..5 with a dot at 0 — and the domain rules
+ * handed them to 281 concepts they do not depict: Surface Area, Volume and
+ * Platonic Solids got three flat shapes; Hypothesis Testing, Linear Equation in
+ * One Variable and Linear Regression got the empty grid (the tutor then
+ * described "a cloud of dots" and "the bell curve" that were not there);
+ * column addition and Cauchy sequences got -5..5. A domain-default stock card
+ * now serves only a concept whose own KG title is something the card draws;
+ * every other concept gets NO FIGURE, which is safer than the wrong one (the
+ * rule DOMAIN_CARD_HOME already applies to whole domains). Exact bindings
+ * (CONCEPT_VISUALS) are untouched.
+ */
+const STOCK_CARD_SUBJECT: Readonly<Partial<Record<VisualType, { draws: RegExp; never?: RegExp }>>> = {
+  coordinate_plane: { draws: /\b(?:coordinate|cartesian|plot|plotting|ordered pairs?|quadrants?|distance formula|midpoint)\b/i },
+  geometry_shape: {
+    draws: /\b(?:triangles?|rectangles?|squares?|circles?|polygons?|quadrilaterals?|angles?|perimeter|shapes?|congruen\w*|similar)\b/i,
+    never: /\b(?:formulas?|identit\w*|equation|surface|volume|solids?|three-dimensional|3d|polyhedr\w*|theorems)\b/i,
+  },
+  number_line: { draws: /\b(?:number line|integers?|negative|absolute value|ordering|compar\w*|opposites?)\b/i },
+}
+
+export function genericCardDepictsConcept(conceptId: string, card: VisualType): boolean {
+  if (!conceptId.startsWith('math.')) return true
+  const rule = STOCK_CARD_SUBJECT[card]
+  if (!rule) return true
+  const title = getKGNode(conceptId)?.title ?? ''
+  // An id the KG does not know reaches no learner; nothing to judge it by.
+  if (!title) return true
+  return rule.draws.test(title) && !(rule.never?.test(title) ?? false)
+}
+
 /** Does this domain rule's card illustrate the domain it is bound to? */
 export function domainRuleIsFaithful(rule: { prefix: string; primary: VisualType }): boolean {
   return (DOMAIN_CARD_HOME[rule.primary] ?? []).includes(rule.prefix)
@@ -850,6 +893,7 @@ export function lookupConceptVisualBinding(
     // The first matching rule decides, as before — but an unfaithful rule
     // decides NO FIGURE rather than falling through to a broader one.
     if (!domainRuleIsFaithful({ prefix: rule.prefix, primary: rule.entry.primary })) return null
+    if (!genericCardDepictsConcept(conceptId, rule.entry.primary)) return null
     return { entry: rule.entry, scope: rule.prefix, tier: 'domain' }
   }
 

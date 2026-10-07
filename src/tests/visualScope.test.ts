@@ -55,10 +55,13 @@ describe('scope is decided by provenance and audit, never by words', () => {
 })
 
 describe('a domain illustration still renders', () => {
+  // MATH-010/011/012 (2026-10-06): limits, circle theorems and long division
+  // no longer get a stock card — it did not draw them (genericCardDepictsConcept).
+  // The domain cases below are concepts the stock card does draw.
   const DOMAIN_CASES = [
-    'math.calc.limits',
-    'math.geom.circle-theorems',
-    'math.arith.long-division',
+    'math.geom.angle-types',
+    'math.arith.negative-numbers',
+    'math.trig.unit-circle',
     'math.alg.quadratic-equations',
     'math.stat.mean-median-mode',
     'chem.atomic.isotopes',
@@ -75,16 +78,22 @@ describe('a domain illustration still renders', () => {
   })
 })
 
+describe('MATH-010/011/012: a stock card that does not draw the concept is not attached', () => {
+  it.each(['math.calc.limits', 'math.geom.circle-theorems', 'math.arith.long-division'])('%s gets no stock card', (conceptId) => {
+    expect(ask(conceptId).asset?.provenance ?? null).not.toBe('domain-default')
+  })
+})
+
 describe('a domain illustration cannot claim to be the concept', () => {
   it('the contract says GENERAL ILLUSTRATION and explicitly denies the claim', () => {
-    const block = contract('math.calc.limits')
+    const block = contract('math.arith.negative-numbers')
     expect(block).toContain('GENERAL ILLUSTRATION')
     expect(block).toContain('NOT a figure of')
     expect(block).toContain('Do NOT say "this diagram shows')
   })
 
   it('it never asserts the figure IS a figure of the concept', () => {
-    for (const id of ['math.calc.limits', 'math.geom.circle-theorems', 'math.arith.long-division']) {
+    for (const id of ['math.geom.angle-types', 'math.arith.negative-numbers', 'math.trig.unit-circle']) {
       const title = getKGNode(id)?.title
       if (!title) continue
       const block = contract(id)
@@ -94,7 +103,7 @@ describe('a domain illustration cannot claim to be the concept', () => {
   })
 
   it('it does not tell the model the figure leads the explanation', () => {
-    const block = contract('math.calc.limits')
+    const block = contract('math.arith.negative-numbers')
     expect(block).toContain('Your WORDS carry this explanation')
     expect(block).not.toContain('the figure leads, the words support it')
   })

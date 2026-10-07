@@ -82,12 +82,15 @@ describe('negative control — a GENUINE frequency distribution is untouched', (
     ],
   })
 
-  it('still teaches mode, mean and frequency exactly as before', () => {
+  it('still teaches mode, total and frequency', () => {
     const text = wholeFigureText(stats())
     expect(text).toMatch(/Frequency Distribution/)
     expect(text).toMatch(/is the mode/)
     expect(text).toMatch(/observations/)
-    expect(text).toMatch(/mean/)
+    // MATH-031 (2026-10-06): "mean index ≈ 1.75" named a statistic no lesson
+    // teaches; the third step now reads the total, which a learner can check.
+    expect(text).toMatch(/total = /)
+    expect(text).not.toMatch(/mean index/)
   })
 
   it('mode is still the tallest bar, computed not asserted', () => {

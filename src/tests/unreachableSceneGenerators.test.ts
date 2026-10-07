@@ -111,7 +111,9 @@ describe('a generator with no concept to attach to is left alone', () => {
     // concept exists in any KG. Inventing curriculum to retire an orphan is
     // exactly the wrong trade, so this one stays on the backlog.
     expect(getConceptSceneGenerator('math.geom.heights-distances')).toBe('heights_and_distances')
-    expect(getConceptVisualType('math.trig.basic-ratios')).toBe('geometry_shape')
+    // MATH-010/011 (2026-10-06): the stock shapes card no longer stands in
+    // for a concept its title does not name (genericCardDepictsConcept).
+    expect(getConceptVisualType('math.trig.basic-ratios')).toBeNull()
   })
 })
 

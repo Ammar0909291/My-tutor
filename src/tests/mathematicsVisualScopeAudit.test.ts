@@ -88,10 +88,11 @@ describe('the orphan number-line keys now reach real concepts', () => {
     expect(INSUFFICIENT_FOR_CONCEPT.has('math.found.real-numbers')).toBe(true)
   })
 
-  it('trig identities was deliberately NOT repointed — it would be a downgrade', () => {
-    // The real id already resolves to geometry_shape via a domain default.
-    // Repointing its orphan would replace a real figure with a bare grid.
-    expect(getConceptVisualType('math.trig.trig-identities')).toBe('geometry_shape')
+  it('trig identities was deliberately NOT repointed, and no stock card stands in for it', () => {
+    // Repointing its orphan would attach a bare grid. Since MATH-010/011
+    // (2026-10-06) the 'math.trig' domain default no longer serves it either:
+    // three flat shapes do not depict an identity (genericCardDepictsConcept).
+    expect(getConceptVisualType('math.trig.trig-identities')).toBeNull()
   })
 })
 
@@ -138,7 +139,8 @@ describe('orphan keys are repaired only when the mapping is unambiguous', () => 
     // 'math.trig.trigonometric-identities' (a bare coordinate_plane) matches
     // 'math.trig.trig-identities' exactly — but that concept already resolves
     // to geometry_shape through a domain default, so repointing would replace
-    // a real figure with an empty grid.
-    expect(getConceptVisualType('math.trig.trig-identities')).toBe('geometry_shape')
+    // a real figure with an empty grid. (Since MATH-010/011 that default no
+    // longer serves it either — no figure, never the empty grid.)
+    expect(getConceptVisualType('math.trig.trig-identities')).not.toBe('coordinate_plane')
   })
 })

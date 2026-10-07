@@ -127,7 +127,12 @@ describe('WRONG DOMAIN VISUAL CANNOT BE SERVED', () => {
     const b = lookupConceptVisualBinding('bio.eco.population-ecology')
     expect(b?.tier).toBe('domain')
     expect(b?.entry.primary).toBe('food_chain')
-    expect(lookupConceptVisualBinding('math.calc.limits')?.entry.primary).toBe('coordinate_plane')
+    // MATH-011 (2026-10-06): the empty grid does not depict a limit, so the
+    // 'math.calc' default no longer serves Limit of a Function; a stock card
+    // still serves a concept it draws (genericCardDepictsConcept).
+    expect(lookupConceptVisualBinding('math.calc.limits')).toBeNull()
+    expect(lookupConceptVisualBinding('math.geom.angle-types')?.entry.primary).toBe('geometry_shape')
+    expect(lookupConceptVisualBinding('math.arith.negative-numbers')?.entry.primary).toBe('number_line')
   })
 })
 

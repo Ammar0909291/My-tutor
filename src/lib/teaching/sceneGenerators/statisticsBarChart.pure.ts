@@ -143,9 +143,14 @@ export function buildStatisticsBarChartScene(params: StatisticsParams): SceneSpe
   const geo = computeGeometry(params)
   const labelPos: Vec3 = [round((geo.bars.length - 1) * BAR_SPACING * 0.5), -2.5, 0]
 
+  // MATH-031 (2026-10-06, math.stats.data-visualization #627): the bars were
+  // drawn at the default 0.04 bond thickness — four hairlines — with no count
+  // anywhere, so a beginner could not read a single frequency. Bars are now a
+  // third of the spacing wide and each carries its count above it.
   const barObjects: SceneObject[] = geo.bars.flatMap((b, i) => [
-    { type: 'bond', id: `bar-${i}`, from: [b.x, 0, 0], to: [b.x, b.top, 0], color: '#3b82f6' } as SceneObject,
+    { type: 'bond', id: `bar-${i}`, from: [b.x, 0, 0], to: [b.x, b.top, 0], color: '#3b82f6', thickness: BAR_SPACING * 0.3 } as SceneObject,
     { type: 'label', id: `cat-${i}`, position: [b.x, -0.8, 0], text: b.label, color: '#475569' } as SceneObject,
+    { type: 'label', id: `count-${i}`, position: [b.x, b.top + 0.6, 0], text: String(b.frequency), color: '#1e3a8a' } as SceneObject,
   ])
 
   const modeIdx = geo.bars.findIndex((b) => b.label === geo.modeLabel)
@@ -165,7 +170,7 @@ export function buildStatisticsBarChartScene(params: StatisticsParams): SceneSpe
       {
         narration: `The tallest bar, "${geo.modeLabel}", has the largest ${q} at ${geo.modeFrequency}.`,
         objects: [
-          { type: 'label', id: 'modeLabel', position: [geo.bars[modeIdx].x, geo.bars[modeIdx].top + 1.2, 0], text: `largest: ${geo.modeLabel}`, color: '#f59e0b', properties: { largestLabel: geo.modeLabel, largestValue: geo.modeFrequency } },
+          { type: 'label', id: 'modeLabel', position: [geo.bars[modeIdx].x, geo.bars[modeIdx].top + 1.8, 0], text: `largest: ${geo.modeLabel}`, color: '#f59e0b', properties: { largestLabel: geo.modeLabel, largestValue: geo.modeFrequency } },
         ],
       },
     ]
@@ -188,13 +193,16 @@ export function buildStatisticsBarChartScene(params: StatisticsParams): SceneSpe
     {
       narration: `The tallest bar, "${geo.modeLabel}" with a frequency of ${geo.modeFrequency}, is the mode — the most frequently occurring category.`,
       objects: [
-        { type: 'label', id: 'modeLabel', position: [geo.bars[modeIdx].x, geo.bars[modeIdx].top + 1.2, 0], text: `mode: ${geo.modeLabel}`, color: '#f59e0b', properties: { modeLabel: geo.modeLabel, modeFrequency: geo.modeFrequency } },
+        { type: 'label', id: 'modeLabel', position: [geo.bars[modeIdx].x, geo.bars[modeIdx].top + 1.8, 0], text: `most common: ${geo.modeLabel}`, color: '#f59e0b', properties: { modeLabel: geo.modeLabel, modeFrequency: geo.modeFrequency } },
       ],
     },
     {
-      narration: `The mean category index is ${round(geo.mean, 2)} (out of ${params.bars.length} categories), found by Σ(index×frequency) / Σfrequency over all ${geo.totalFrequency} observations.`,
+      // MATH-031: "mean index ≈ 1.75" named a statistic no lesson teaches.
+      // The readout is now the total a beginner can check by adding the bars;
+      // the checked properties (mean, total) are unchanged.
+      narration: `Adding the heights of all ${params.bars.length} bars gives the total: ${geo.totalFrequency} observations.`,
       objects: [
-        { type: 'label', id: 'meanLabel', position: labelPos, text: `mean index ≈ ${round(geo.mean, 2)}, total = ${geo.totalFrequency}`, color: '#ef4444', properties: { mean: round(geo.mean, 6), totalFrequency: geo.totalFrequency } },
+        { type: 'label', id: 'meanLabel', position: labelPos, text: `total = ${geo.totalFrequency}`, color: '#ef4444', properties: { mean: round(geo.mean, 6), totalFrequency: geo.totalFrequency } },
       ],
     },
   ]
@@ -203,7 +211,7 @@ export function buildStatisticsBarChartScene(params: StatisticsParams): SceneSpe
     id: `statistics-${params.chartTitle.replace(/\s+/g, '-')}`,
     title: `Frequency Distribution: ${params.chartTitle}`,
     sceneType: 'diagram',
-    teachingGoal: 'Show how a frequency distribution is visualized as a bar chart, and how the mean and mode are derived from the underlying frequencies.',
+    teachingGoal: 'Show how a frequency distribution is visualized as a bar chart: one bar per group, its height the count, the tallest the most common group.',
     cameraDistance: VISUAL_MAX_HEIGHT * 3,
     ariaLabel: `A bar chart titled "${params.chartTitle}" with ${params.bars.length} categories, mode "${geo.modeLabel}" and total frequency ${geo.totalFrequency}.`,
     steps,

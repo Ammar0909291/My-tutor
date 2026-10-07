@@ -71,12 +71,18 @@ export interface VisualAid {
   description: string
 }
 
+// MATH-025 / MATH-029 (2026-10-06): the four stock mathematics cards are
+// FIXED drawings, and the description is what the tutor is told the learner
+// sees. "An x-y axis system for plotting points and lines" let the tutor
+// describe "a cloud of dots", "the bell curve" and "a sine curve" on an empty
+// grid; "filled squares represent a percentage value" let it narrate 35 shaded
+// squares on a grid that shows 65. The descriptions now say exactly what is drawn.
 export const VISUAL_META: Record<VisualType, { title: string; description: string }> = {
-  number_line:      { title: 'Number Line',       description: 'A horizontal line showing numbers and their positions relative to zero' },
+  number_line:      { title: 'Number Line',       description: 'A horizontal line from -5 to 5 with integer ticks and a dot at 0 — no other numbers are marked' },
   fraction_bar:     { title: 'Fraction Bar',       description: 'A bar divided into equal parts to show fractions visually' },
-  percentage_grid:  { title: 'Percentage Grid',    description: 'A 10×10 grid where filled squares represent a percentage value' },
-  coordinate_plane: { title: 'Coordinate Plane',   description: 'An x-y axis system for plotting points and lines' },
-  geometry_shape:   { title: 'Geometry Shapes',    description: 'Common 2D geometric shapes with labelled properties' },
+  percentage_grid:  { title: 'Percentage Grid',    description: 'A 10×10 grid with 65 of the 100 squares shaded, captioned "65% = 65 out of 100"' },
+  coordinate_plane: { title: 'Coordinate Plane',   description: 'An x-y grid with ticks from -4 to 4 and one point plotted at (2, 3) — no line, curve or other points are drawn' },
+  geometry_shape:   { title: 'Geometry Shapes',    description: 'Three flat shapes: a triangle labelled "3 sides" and "∠A + ∠B + ∠C = 180°", a rectangle, and a circle with its radius r marked' },
   food_chain:       { title: 'Food Chain',         description: 'A linear sequence showing how energy flows from producers to consumers' },
   water_cycle:      { title: 'Water Cycle',        description: 'The continuous movement of water through evaporation, condensation, and precipitation' },
   solar_system:     { title: 'Solar System',       description: 'The Sun and the eight planets in their orbital paths' },

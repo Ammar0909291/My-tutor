@@ -105,11 +105,14 @@ const LC_TITLE = 'Crystal Defects'
 const lcFigureA: GeneratedFigure = { kind: 'scene', scene: pointScene(LC_TITLE, ['Schottky defect', 'Frenkel defect']) }
 const lcFigureB: GeneratedFigure = { kind: 'scene', scene: pointScene(LC_TITLE, ['Frenkel defect', 'Schottky defect', 'non-stoichiometric defect']) }
 
-// A subject-wide card concept (registry:domain-default:math.calc:coordinate_plane).
-const LIMITS = 'math.calc.limits'
+// A subject-wide card concept (registry:domain-default:math.geom:geometry_shape).
+// Was math.calc.limits until MATH-011 (2026-10-06) stopped the empty grid
+// standing in for limits; the LIMITS / limitsApproved names are kept so the
+// history of each test below stays readable.
+const LIMITS = 'math.geom.angle-types'
 const limitsApproved: GeneratedFigure = {
   kind: 'scene',
-  scene: pointScene('Limit of a Function', ['f(x) arbitrarily close', 'limit L', 'x close to a']),
+  scene: pointScene('Types of Angles', ['acute angle', 'right angle', 'obtuse angle']),
 }
 // A faithful figure of a DIFFERENT concept (validation must refuse it for limits).
 const photosynthesisFigure: GeneratedFigure = {
@@ -272,7 +275,7 @@ describe('B. approved beats a SUBJECT-WIDE card; exact and Tier 0 still beat app
       hasApprovedFigure: async () => true, findApprovedFigure: async () => photosynthesisFigure, generate: noGeneration,
     })
     expect(tierOf(d)).toBe('tier1-domain')
-    expect(d.provenance).toBe('registry:domain-default:math.calc:coordinate_plane')
+    expect(d.provenance).toBe('registry:domain-default:math.geom:geometry_shape')
   })
 
   it('subject-wide + approved lookup returns nothing -> the card, never generation', async () => {

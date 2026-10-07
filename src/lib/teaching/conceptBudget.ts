@@ -428,6 +428,12 @@ export function buildLessonFlowBlock(state: ConversationState): string {
 export function deferCloseForRequest(state: ConversationState, learnerMadeARequest: boolean): boolean {
   if (!learnerMadeARequest || isAuthoritativelyMastered(state)) return false
   const b = evaluateConceptBudget(state)
-  if (b.status !== 'exhausted' || b.reason !== 'turns') return false
+  // MATH-001 (2026-10-06, mathematics run: 121 of 387 closes landed ON a help
+  // request — "i dont understand this picture", "why?", "explain simpler" at
+  // turns 8-25, well inside the turn budget): the attempts and failures exits
+  // closed on the request just as the turn budget used to. Every budget
+  // reason now waits one turn for a request to be answered; the ceiling still
+  // ends the concept.
+  if (b.status !== 'exhausted' || b.reason === null) return false
   return (state.turnsTotalOnConcept ?? state.turnsOnConcept ?? 0) < ABSOLUTE_TURN_CEILING
 }
