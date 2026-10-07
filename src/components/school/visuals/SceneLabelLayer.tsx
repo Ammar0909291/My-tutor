@@ -147,10 +147,13 @@ export function SceneLabelLayer({ labels, obstacles = [], cameraDistance, theme 
       text: s.text,
       position: screenToWorld(s.x, s.y, viewport, cameraDistance),
       color: labels[i]?.color ?? DEFAULT_LABEL_COLOR,
-      tier: labels[i]?.tier,
+      // A label the solver had to step down a typographic tier is drawn at the
+      // tier it was planned at; the box it reserved is only true at that size.
+      tier: s.tier ?? labels[i]?.tier,
+      plate: s.onGeometry === true,
       // The width the solver reserved, so the painted box matches the planned
       // one. Null for every label that fits on a line — almost all of them.
-      maxWidthPx: labelWrapWidth(s.text, viewport, labels[i]?.tier) ?? undefined,
+      maxWidthPx: s.wrapPx ?? labelWrapWidth(s.text, viewport, s.tier ?? labels[i]?.tier) ?? undefined,
     }))
   }, [labels, obstacles, cameraDistance, size.width, size.height, windowWidth])
 
@@ -165,6 +168,7 @@ export function SceneLabelLayer({ labels, obstacles = [], cameraDistance, theme 
           theme={theme}
           tier={p.tier}
           maxWidthPx={p.maxWidthPx}
+          plate={p.plate}
         />
       ))}
     </>

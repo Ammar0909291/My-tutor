@@ -24,6 +24,7 @@ import { chromium, type Browser, type Page } from 'playwright'
 import { mkdirSync, writeFileSync, existsSync, readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { buildInventory, type InventoryRow } from './inventory'
+import { AUDIT_THRESHOLDS } from '../../../src/lib/teaching/visual/figureAudit'
 
 export type ViewportName = 'mobile' | 'desktop' | 'desktop-column'
 export type ThemeName = 'dark' | 'light'
@@ -84,6 +85,8 @@ export interface StateRecord {
   pixels: PixelResult
   missingGlyphs: string[]
   shot: string | null
+  /** Times the capture was retaken because the canvas had not painted yet (see `capture`). */
+  blankRetries?: number
 }
 export interface RenderRecord {
   conceptId: string
@@ -200,7 +203,33 @@ async function glyphCheck(page: Page, m: Measure): Promise<string[]> {
 }
 
 /** Measure the current state: DOM, then the background pixels behind the text. */
+/**
+ * A canvas that has not painted its first frame is not a defect of the figure:
+ * under software GL and several parallel contexts the first frame of a scene can
+ * land a second or two after the DOM settles, and the audit then measured an
+ * empty canvas (seen once in the 849-render run: phys.meas.units, re-rendered
+ * clean). So a capture that finds NO ink and NO labels is retaken, up to twice,
+ * after a pause. A figure that is genuinely blank stays blank across all three
+ * looks and is still reported FAIL; the retry count is recorded on the state.
+ */
 export async function capture(page: Page, pixPage: Page, state: string, params: Record<string, string>, shotPath: string | null): Promise<StateRecord> {
+  let rec = await captureOnce(page, pixPage, state, params, shotPath)
+  let retries = 0
+  while (retries < 2 && looksUnpainted(rec)) {
+    retries++
+    await page.waitForTimeout(1200)
+    rec = await captureOnce(page, pixPage, state, params, shotPath)
+  }
+  if (retries) rec.blankRetries = retries
+  return rec
+}
+
+function looksUnpainted(r: StateRecord): boolean {
+  const ink = r.pixels.scene?.inkFraction
+  return ink !== undefined && ink < AUDIT_THRESHOLDS.minSceneInkFraction && !r.measure.texts.some((t) => t.region === 'scene-label')
+}
+
+async function captureOnce(page: Page, pixPage: Page, state: string, params: Record<string, string>, shotPath: string | null): Promise<StateRecord> {
   const measure: Measure = await page.evaluate(() => (window as unknown as { __audit: { measure: () => Measure } }).__audit.measure())
   const missing = await glyphCheck(page, measure)
 

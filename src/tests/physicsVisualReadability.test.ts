@@ -14,7 +14,9 @@ import { admitVisualAsset, makeVisualAsset } from '@/lib/teaching/visual/asset'
 import { auditGraph, auditSceneData, contrastRatio, payloadBlockers, type Rgb } from '@/lib/teaching/visual/figureAudit'
 import { checkFigureTexts } from '@/lib/teaching/visual/figureSemantics'
 import { checkRendering } from '@/lib/teaching/visual/figureCritic'
-import { cameraDistanceToContain, sceneTextObjects } from '@/lib/teaching/visual/layout'
+import { cameraDistanceToContain, placeSceneLabels, sceneTextObjects, solveLabelPlacement, viewportFromCanvas } from '@/lib/teaching/visual/layout'
+import { CHECKED_KINDS, sweepStates } from '../../scripts/qa/physicsVisual/kindChecks'
+import { validateSceneSpec } from '@/lib/teaching/sceneSpecValidator'
 import { liftToContrast, meshColor, readableTextColor, themeColor } from '@/lib/teaching/sceneGenerators/visualDesign'
 import {
   buildKinematicsGraphScene, checkKinematicsConsistency, type KinematicsParams,
@@ -331,6 +333,124 @@ describe('every physics concept is served a figure that passes the payload gate'
     }
     expect(problems).toEqual([])
   }, 120_000)
+})
+
+// ── PHYS-VIS-08 — labels that overlapped, were clipped, or sat on a body ──────
+//   Measured at 390px: "g (m/s²)" under the 290px heading of Variation of g
+//   (91 %), "G" under a 12-word caption (85 %), the electric-dipole torque and
+//   net-force captions stacked on each other (60-100 %) at every slider extreme,
+//   the x/y/z axis letters cut 5-10 % by the canvas edge, and "v2f=-0.33" printed
+//   over a same-hue sphere at 2.3:1.
+describe('PHYS-VIS-08 label placement leaves no label on another, off the canvas, or unreadable', () => {
+  const SIZES: Array<[number, number, number]> = [[282, 260, 390], [560, 430, 1280]]   // canvas w, h, window w measured in Chromium
+
+  /** The figure as a learner sees it at stage n: everything revealed so far. */
+  function revealed(spec: SceneSpec): SceneSpec[] {
+    const cum: SceneSpec['steps'][number]['objects'] = []
+    return spec.steps.map((step) => { cum.push(...step.objects); return { ...spec, steps: [{ objects: [...cum] }] } })
+  }
+
+  it('every served physics scene, at every stage, at phone and desktop size, places every label', () => {
+    const unplaced: string[] = []
+    for (const id of physicsIds()) {
+      const d = served(id)
+      if (d.payload?.renderer !== 'scene') continue
+      for (const view of revealed(d.payload.sceneSpec)) {
+        for (const [w, h, bw] of SIZES) {
+          const r = placeSceneLabels(view, viewportFromCanvas(w, h, bw))
+          if (r.unresolved) unplaced.push(`${id} ${w}x${h}: ${r.labels.filter((l) => !l.ok).map((l) => l.text).join(' | ')}`)
+        }
+      }
+    }
+    expect(unplaced).toEqual([])
+  }, 120_000)
+
+  it('every state a learner can drive a parametric figure into places every label', () => {
+    const unplaced: string[] = []
+    for (const [kind, k] of Object.entries(CHECKED_KINDS)) {
+      for (const params of sweepStates(kind)) {
+        const typed = k.validate(k.adapt ? k.adapt(params as never) : { ...(k.fixed ?? {}), ...params })
+        if (!typed) continue
+        let spec: SceneSpec
+        try { spec = k.build(typed as never) } catch { continue }
+        if (!validateSceneSpec(spec).valid) continue
+        for (const view of revealed(spec)) {
+          for (const [w, h, bw] of SIZES) {
+            const r = placeSceneLabels(view, viewportFromCanvas(w, h, bw))
+            if (r.unresolved) unplaced.push(`${kind} ${JSON.stringify(params)} ${w}x${h}`)
+          }
+        }
+      }
+    }
+    expect(unplaced).toEqual([])
+  }, 240_000)
+
+  const label = (text: string, x: number, y: number, size?: number): SceneSpec['steps'][number]['objects'][number] =>
+    ({ type: 'label', text, position: [x, y, 0], ...(size ? { size } : {}) })
+  const sceneOf = (objects: SceneSpec['steps'][number]['objects']): SceneSpec =>
+    ({ id: 't', title: 't', sceneType: 'diagram', cameraDistance: 13, steps: [{ objects }] })
+
+  it('no planned label box touches the canvas edge (the axis letters were cut by 0.6-1.2px)', () => {
+    const vp = viewportFromCanvas(282, 260, 390)
+    // Anchored right on the bottom-left corner, where the triad's letters sit.
+    const r = placeSceneLabels(sceneOf([label('x', -9.5, -8.9), label('y', -9.9, -8.2), label('z', -9.9, -9.4)]), vp)
+    for (const l of r.labels) {
+      expect(l.ok).toBe(true)
+      expect(l.y).toBeLessThanOrEqual(vp.hostHeight - 2 - 6)   // half a 10px label + the 2px inset
+      expect(l.x).toBeGreaterThanOrEqual(2 + 3)
+    }
+  })
+
+  it('a label that cannot clear a body is flagged so the renderer can back it with the surface colour', () => {
+    const vp = viewportFromCanvas(282, 260, 390)
+    const big = { type: 'node', id: 'b', position: [0, 0, 0], radius: 40, color: '#3b82f6' } as SceneSpec['steps'][number]['objects'][number]
+    const r = placeSceneLabels(sceneOf([big, label('v2f=-0.33', 0, 0)]), vp)
+    expect(r.labels[0].onGeometry).toBe(true)
+    const free = placeSceneLabels(sceneOf([label('alone', 0, 0)]), vp)
+    expect(free.labels[0].onGeometry).toBe(false)
+  })
+
+  it('a label that fits nowhere at full width is wrapped narrower rather than left on its neighbour', () => {
+    // A 200x100 canvas whose left 120px is three stacked captions; a 180px-wide label
+    // has no clear row anywhere, but the 80px column on the right is free.
+    const left = (y: number) => ({ text: `row${y}`, x: 60, y, halfW: 56, halfH: 13 })
+    const items = [left(15), left(50), left(85), {
+      text: 'every word of this caption must stay on screen', x: 100, y: 50, halfW: 90, halfH: 10,
+      fallbacks: [{ halfW: 36, halfH: 40, wrapPx: 72 }],
+    }]
+    const r = solveLabelPlacement(items, [], { width: 200, height: 100 })
+    const wrapped = r.labels[3]
+    expect(r.unresolved).toBe(0)
+    expect(wrapped.ok).toBe(true)
+    expect(wrapped.wrapPx).toBe(72)
+    expect(wrapped.x - 36).toBeGreaterThanOrEqual(116)   // clear of the stacked captions on the left
+  })
+
+  it('a heading that fits nowhere steps down one tier, never below the floor, instead of overlapping', () => {
+    const items = [
+      { text: 'a', x: 100, y: 24, halfW: 98, halfH: 18 },
+      { text: 'b', x: 100, y: 76, halfW: 98, halfH: 18 },
+      { text: 'heading', x: 100, y: 50, halfW: 60, halfH: 18, fallbacks: [{ halfW: 40, halfH: 5, tier: 1 }] },
+    ]
+    const r = solveLabelPlacement(items, [], { width: 200, height: 100 })
+    expect(r.labels[2].ok).toBe(true)
+    expect(r.labels[2].tier).toBe(1)
+  })
+
+  it('a real figure that crowded its caption (galvanometer at 390px) now places every label at every stage', () => {
+    const d = served('phys.em.moving-coil-galvanometer')
+    if (d.payload?.renderer !== 'scene') throw new Error('expected a scene')
+    for (const view of revealed(d.payload.sceneSpec)) {
+      expect(placeSceneLabels(view, viewportFromCanvas(282, 260, 390)).unresolved).toBe(0)
+    }
+  })
+
+  it('a label that already has room keeps its authored position (placement is strictly additive)', () => {
+    const vp = viewportFromCanvas(560, 430, 1280)
+    const r = placeSceneLabels(sceneOf([label('clear', 0, 2)]), vp)
+    expect(r.labels[0].movedPx).toBe(0)
+    expect(r.labels[0].wrapPx).toBeUndefined()
+  })
 })
 
 // ── helpers ──────────────────────────────────────────────────────────────────

@@ -61,7 +61,8 @@ export function EnergyLevelDiagram({ revealStep = Infinity }: { revealStep?: num
         <g className={anim.reveal}>
           <rect x={205} y={120} width={80} height={26} fill="#111827" rx={3} />
           <line x1={236} y1={120} x2={236} y2={146} stroke="#F59E0B" strokeWidth={2.5} />
-          <text x={245} y={138} fontSize={8} fill="#F59E0B" fontWeight={700}>spectral line</text>
+          {/* Centred under the detector: from x=245 the 13 characters ran past the viewBox edge and the last letter was cut. */}
+          <text x={245} y={159} fontSize={8} fill="#F59E0B" fontWeight={700} textAnchor="middle">spectral line</text>
         </g>
       )}
       <defs>

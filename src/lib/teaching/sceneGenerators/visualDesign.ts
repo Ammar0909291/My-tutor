@@ -283,7 +283,7 @@ function parseHex(hex: string): [number, number, number] | null {
 // authored; only TEXT is held to 4.5:1 against the figure surface, by mixing
 // the authored hue toward white (dark) or black (light) until it clears.
 
-const FIGURE_SURFACE = { dark: '#243329', light: '#FAF7EE' } as const
+export const FIGURE_SURFACE = { dark: '#243329', light: '#FAF7EE' } as const
 
 const NAMED: Record<string, string> = {
   black: '#000000', white: '#ffffff', red: '#ff0000', green: '#008000', blue: '#0000ff',
