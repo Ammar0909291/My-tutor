@@ -12,8 +12,9 @@ import { readdirSync, readFileSync, writeFileSync, mkdirSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { buildInventory, type InventoryRow } from './inventory'
 import { resolveVisual } from '../../../src/lib/teaching/visual/resolveVisual'
-import { auditRenderedState, auditSceneData, rollup, type Finding, type Verdict } from '../../../src/lib/teaching/visual/figureAudit'
+import { auditGraph, auditRenderedState, auditSceneData, rollup, type Finding, type Verdict } from '../../../src/lib/teaching/visual/figureAudit'
 import { checkFigureTexts } from '../../../src/lib/teaching/visual/figureSemantics'
+import { servedFingerprint } from './fingerprint'
 import type { RenderRecord, ViewportName, ThemeName } from './render'
 import type { SceneSpec } from '../../../src/lib/teaching/sceneSpec'
 
@@ -77,13 +78,16 @@ function main(): void {
   const reports: ConceptReport[] = []
   const wantedVps = (arg('viewports', 'mobile,desktop,desktop-column')!).split(',') as ViewportName[]
   const wantedThemes = (arg('themes', 'dark,light')!).split(',') as ThemeName[]
+  const lightVps = (arg('light-viewports', 'mobile')!).split(',')
 
   for (const row of inv) {
     const recs = records.get(row.conceptId) ?? []
     const findings: ConceptReport['findings'] = []
     const missing: string[] = []
     for (const vp of wantedVps) for (const th of wantedThemes) {
-      if (!recs.find((r) => r.viewport === vp && r.theme === th)) missing.push(`${vp}/${th}`)
+      // The light theme is rendered where contrast is hardest (see render.ts --light-viewports).
+      if (th === 'light' && !lightVps.includes(vp)) continue
+      if (!recs.find((r) => r.viewport === vp && r.theme === th && !(r as { variant?: string }).variant)) missing.push(`${vp}/${th}`)
     }
     let renderedStates = 0
     for (const r of recs) {
@@ -100,6 +104,7 @@ function main(): void {
 
     // Data-level structure + semantics from the SceneSpec the resolver serves.
     let sceneId: string | null = null
+    let isGraph = false
     let texts: string[] = []
     if (row.figureClass === 'scene') {
       const d = resolveVisual({ message: 'show me a diagram', lessonConceptId: row.conceptId, learnerRequest: 'diagram', subject: 'physics' } as never)
@@ -107,6 +112,9 @@ function main(): void {
         const spec: SceneSpec = d.payload.sceneSpec
         sceneId = spec.id
         for (const f of auditSceneData(spec)) findings.push(f)
+        const g = auditGraph(spec)
+        isGraph = g.isGraph
+        for (const f of g.findings) findings.push(f)
         texts = spec.steps.flatMap((s) => s.objects.map((o) => o.text ?? '')).filter(Boolean)
       }
     }
@@ -137,7 +145,7 @@ function main(): void {
     const dedup = dedupe(findings)
     reports.push({
       conceptId: row.conceptId, title: row.title, figureClass: row.figureClass, authorship: row.authorship,
-      scope: row.scope, interactive: row.interactive, isGraph: row.isGraph,
+      scope: row.scope, interactive: row.interactive, isGraph,
       verdict: rollup(dedup), byViewport, dimensions: dims,
       semantic: { verdict: semVerdict, evidence, arithmeticChecked: sem.checked, contradictions: sem.contradictions },
       findings: dedup, renderedStates, missingRenders: missing,
@@ -164,6 +172,23 @@ function main(): void {
     failureClusters: [...clusters.entries()].sort((a, b) => b[1].concepts.size - a[1].concepts.size).map(([k, v]) => ({ rule: k, findings: v.count, concepts: v.concepts.size, sample: v.sample })),
   }
   mkdirSync(outDir, { recursive: true })
+  // The compact, committable record: one row per concept, enough to re-derive every
+  // count in the report and to prove (by fingerprint) that it describes what ships.
+  const { fingerprint } = servedFingerprint()
+  const compact = {
+    generatedAt: new Date().toISOString(),
+    fingerprint,
+    viewports: wantedVps, themes: wantedThemes,
+    summary: { concepts: summary.concepts, verdicts: summary.verdicts, byViewport: summary.byViewport, byDimension: summary.byDimension, withMissingRenders: summary.withMissingRenders },
+    concepts: reports.map((r) => ({
+      id: r.conceptId, verdict: r.verdict, class: r.figureClass, authorship: r.authorship, scope: r.scope,
+      interactive: r.interactive, graph: r.isGraph, dims: r.dimensions, byViewport: r.byViewport,
+      semantic: r.semantic.verdict, states: r.renderedStates,
+      fail: r.findings.filter((f) => f.severity === 'FAIL').length,
+      review: [...new Set(r.findings.filter((f) => f.severity === 'REVIEW').map((f) => `${f.id}: ${f.message}`))].slice(0, 4),
+    })),
+  }
+  writeFileSync(resolve(outDir, 'audit-summary.json'), JSON.stringify(compact, null, 1))
   writeFileSync(resolve(outDir, 'verdicts.json'), JSON.stringify(reports, null, 1))
   writeFileSync(resolve(outDir, 'verdict-summary.json'), JSON.stringify(summary, null, 2))
   console.log(JSON.stringify(summary, null, 2))

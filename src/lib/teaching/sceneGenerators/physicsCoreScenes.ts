@@ -1014,7 +1014,9 @@ export function buildDampedOscillationScene(): SceneSpec {
     teachingGoal: 'Show an oscillation whose amplitude shrinks exponentially, always inside the envelope ±A e^(−bt).',
     ariaLabel: 'A graph of displacement against time. The curve oscillates but each swing is smaller than the last, staying between two dashed curves that shrink exponentially toward zero.',
     steps: [
-      { narration: 'Displacement against time for an oscillator with friction or air resistance.', objects: axes(X0, Y0, 4.6, 3.2, 'time', 'displacement') },
+      { narration: 'Displacement against time for an oscillator with friction or air resistance.', objects: [...axes(X0, Y0, 4.6, 3.2, 'time', 'displacement'),
+        // Displacement is signed: the axis runs below the baseline too, so the negative swings sit ON it, not under it.
+        arrow(P(X0, Y0), P(X0, -3.0), ROLE.reference)] },
       { narration: 'Each swing is smaller than the one before.', objects: [curve(fnPath((x) => Y0 + env(x) * Math.cos(W * (x - X0)), X0, 4.2, 120), ROLE.output)] },
       { narration: 'The peaks follow an exponential envelope, A e^(−bt): energy is steadily lost to the resistive force.', objects: [curve(fnPath((x) => Y0 + env(x), X0, 4.2), ROLE.input), curve(fnPath((x) => Y0 - env(x), X0, 4.2), ROLE.input), label('envelope A e^(−bt)', P(1.6, 1.4), ROLE.input, 'primary')] },
     ],

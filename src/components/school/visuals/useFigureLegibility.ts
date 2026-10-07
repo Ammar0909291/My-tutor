@@ -42,12 +42,97 @@
 
 import { useCallback, useEffect, useRef } from 'react'
 import { placeSvgLabels, svgUserUnitScale } from './svgLabelPlacement'
+import { liftToContrast } from '@/lib/teaching/sceneGenerators/visualDesign'
 
 /** The same floor SceneLabel enforces for the 3D half. One number, one engine. */
 export const FIGURE_TEXT_FLOOR_PX = 10
 
 /** Remembers each text's authored size so repeated passes stay idempotent. */
 const AUTHORED_ATTR = 'data-authored-font'
+/** …and its authored fill, and the theme that fill was resolved in. */
+const AUTHORED_FILL_ATTR = 'data-authored-fill'
+const FILL_THEME_ATTR = 'data-authored-fill-theme'
+
+/** WCAG AA for normal text — the bar ENGL-017 already holds scene labels to. */
+const TEXT_CONTRAST_MIN = 4.5
+
+type Rgba = [number, number, number, number]
+
+/** A computed colour (`rgb()`/`rgba()`, which is all getComputedStyle returns here) to numbers. */
+function parseRgba(css: string): Rgba | null {
+  const m = /^rgba?\(\s*([\d.]+)[,\s]+([\d.]+)[,\s]+([\d.]+)(?:\s*[,/]\s*([\d.]+%?))?\s*\)$/.exec(css.trim())
+  if (!m) return null
+  const a = m[4] === undefined ? 1 : m[4].endsWith('%') ? parseFloat(m[4]) / 100 : parseFloat(m[4])
+  return [Number(m[1]), Number(m[2]), Number(m[3]), a]
+}
+
+/**
+ * What a label is actually painted ON: the top-most opaque thing under its
+ * centre — a filled SVG shape the figure drew, else the nearest HTML ancestor
+ * with a solid background (the card). Never the label itself.
+ */
+function backdropBehind(el: SVGTextElement): [number, number, number] | null {
+  const r = el.getBoundingClientRect()
+  if (r.width === 0 || r.height === 0) return null
+  const stack = document.elementsFromPoint(r.left + r.width / 2, r.top + r.height / 2)
+  for (const e of stack) {
+    if (e === el || el.contains(e) || e.contains(el) && e instanceof SVGElement && !(e instanceof SVGSVGElement)) continue
+    if (e instanceof SVGElement && !(e instanceof SVGSVGElement)) {
+      if (e instanceof SVGTextElement || e instanceof SVGTSpanElement) continue
+      const cs = getComputedStyle(e)
+      const fill = cs.fill !== 'none' ? parseRgba(cs.fill) : null
+      if (fill && fill[3] * parseFloat(cs.fillOpacity || '1') * parseFloat(cs.opacity || '1') >= 0.9) return [fill[0], fill[1], fill[2]]
+      continue
+    }
+    for (let a: Element | null = e; a; a = a.parentElement) {
+      const bg = parseRgba(getComputedStyle(a).backgroundColor)
+      if (bg && bg[3] >= 0.9) return [bg[0], bg[1], bg[2]]
+    }
+  }
+  return null
+}
+
+/**
+ * RULE 3 — TEXT HOLDS 4.5:1 ON WHAT IT SITS ON.
+ *
+ * The 19 SVG cards hard-code mid-tone hues for their TEXT (#3B82F6, #8B5CF6,
+ * #22A06B …) on a figure surface that is #243329 in the dark theme. Measured in
+ * Chromium, "Friction" was 3.6:1, "Normal (N)" 3.1:1 and "Applied" 4.0:1 — the
+ * same defect ENGL-017 fixed for scene labels, in the half of the engine that
+ * fix does not reach. The hue is kept and mixed toward white/black only as far
+ * as legibility needs; text that already reads is not touched.
+ */
+function applyTextContrast(el: SVGTextElement): void {
+  const theme = document.documentElement.getAttribute('data-theme') ?? ''
+  // A theme flip changes what the authored fill RESOLVES to; forget the cache.
+  if (el.hasAttribute(FILL_THEME_ATTR) && el.getAttribute(FILL_THEME_ATTR) !== theme) {
+    el.style.fill = ''
+    el.removeAttribute(AUTHORED_FILL_ATTR)
+  }
+  let authored = el.getAttribute(AUTHORED_FILL_ATTR)
+  if (!authored) {
+    authored = getComputedStyle(el).fill
+    el.setAttribute(AUTHORED_FILL_ATTR, authored)
+    el.setAttribute(FILL_THEME_ATTR, theme)
+  }
+  const fg = parseRgba(authored)
+  if (!fg) return
+  const bg = backdropBehind(el)
+  if (!bg) return
+  // Translucent FILL (fill-opacity / an rgba fill) is judged as it composites.
+  // Element `opacity` is deliberately NOT read: figures animate it (the reveal
+  // fade-in), and a pass that caught a label at 0.2 would "fix" a fade.
+  const alpha = Math.min(1, Math.max(0, fg[3] * parseFloat(getComputedStyle(el).fillOpacity || '1')))
+  const over = (c: number, b: number) => c * alpha + b * (1 - alpha)
+  const composite: [number, number, number] = [over(fg[0], bg[0]), over(fg[1], bg[1]), over(fg[2], bg[2])]
+  const lifted = liftToContrast(composite, bg, TEXT_CONTRAST_MIN)
+  const unchanged = lifted[0] === composite[0] && lifted[1] === composite[1] && lifted[2] === composite[2]
+  const next = unchanged ? '' : `rgb(${lifted[0]}, ${lifted[1]}, ${lifted[2]})`
+  if (el.style.fill !== next) el.style.fill = next
+  // A lifted colour already includes the translucency it was lifted for.
+  const nextOpacity = !unchanged && alpha < 1 ? '1' : ''
+  if (el.style.fillOpacity !== nextOpacity) el.style.fillOpacity = nextOpacity
+}
 
 function applyLegibility(root: HTMLElement): void {
   const svgs = root.querySelectorAll('svg')
@@ -76,6 +161,7 @@ function applyLegibility(root: HTMLElement): void {
       const target = Math.max(authored, minUserUnits)
       const next = `${target.toFixed(2)}px`
       if (el.style.fontSize !== next) el.style.fontSize = next
+      applyTextContrast(el)
     }
 
     // 3. LABELS DO NOT SIT ON EACH OTHER. Same solver as the 3D half, fed the

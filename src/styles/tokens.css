@@ -46,6 +46,10 @@
   /* Text/icon colour that sits ON a --coral fill. White on chalk-yellow is
      ~1.7:1; the dark brown the tutor window already uses is ~9:1. */
   --on-accent:    #241B08;
+  /* Emphasis amber for figure result values and working lines. 6.2:1 on the
+     chalkboard surface; the light theme below darkens it (amber on cream was
+     2.0:1, in 181 of 283 physics figures). */
+  --accent-amber: #F59E0B;
 
   --blue:          #8FD1C4;
   --blue-muted:    rgba(143,209,196,0.10);
@@ -96,6 +100,8 @@
   --accent-primary-glow: rgba(39,107,76,0.30);
   --border-accent: rgba(39,107,76,0.4);
   --on-accent:    #FFFFFF;
+  /* amber-800: 6.6:1 on the whiteboard (#FAF7EE), 6.1:1 on the paper desk. */
+  --accent-amber: #92400E;
 
   --blue:          #2D58B0;
   --blue-muted:    rgba(59,111,217,0.10);

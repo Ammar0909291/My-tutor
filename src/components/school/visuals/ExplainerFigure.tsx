@@ -40,7 +40,7 @@ import type { SceneSpec } from '@/lib/teaching/sceneSpec'
 import { deriveExplainer } from '@/lib/teaching/visual/explainer'
 import { availableModes, redactExplainer, redactText, stageView, withheldValues, type SceneMode } from '@/lib/teaching/visual/sceneStage'
 import { controlsFor, defaultValueOf, rebuildScene, variablesFor, type SceneParams, type SceneVariable } from '@/lib/teaching/visual/parametricScenes'
-import { themeColor } from '@/lib/teaching/sceneGenerators/visualDesign'
+import { meshColor, readableTextColor, themeColor } from '@/lib/teaching/sceneGenerators/visualDesign'
 import {
   availableAnimations, stageAt, sweepFrame, traceObjects, tracePlayhead,
   type SceneAnimation,
@@ -54,7 +54,7 @@ import {
 import { budgetLabels, complexityFor, labelsHeldBack } from '@/lib/teaching/visual/visualComplexity'
 import { normalizeToCanonicalLevel } from '@/lib/curriculum/levels'
 import { useSimulation, type SimulationHost } from './useSimulation'
-import { cameraDistanceForAspect } from '@/lib/teaching/visual/layout'
+import { cameraDistanceForAspect, cameraDistanceToContain } from '@/lib/teaching/visual/layout'
 import { SimulationControls } from './SimulationControls'
 
 const MODE_LABEL: Record<SceneMode, string> = {
@@ -246,9 +246,11 @@ export function ExplainerFigure({
   // whole run and the camera never re-zooms mid-run.
   const stageRef = useRef<HTMLDivElement>(null)
   const [sceneAspect, setSceneAspect] = useState<number | null>(null)
+  // Measured for EVERY scene, not only simulations: a figure framed for 4:3 can
+  // be wider than a phone's near-square canvas (see cameraDistanceToContain).
   useEffect(() => {
     const stageEl = stageRef.current
-    if (!simulation.active || !stageEl || typeof ResizeObserver === 'undefined') return
+    if (!stageEl || typeof ResizeObserver === 'undefined') return
     const measure = () => {
       const box = stageEl.querySelector<HTMLElement>('[data-scene-box]')?.getBoundingClientRect()
       if (box && box.width > 0 && box.height > 0) setSceneAspect(Math.round((box.width / box.height) * 100) / 100)
@@ -257,10 +259,13 @@ export function ExplainerFigure({
     const observer = new ResizeObserver(measure)
     observer.observe(stageEl)
     return () => observer.disconnect()
-  }, [simulation.active])
-  // Not memoised: one pass over a few dozen coordinates, and `drawn` is itself
-  // rebuilt per render in the sweep branch, so a memo keyed on it buys nothing.
-  const framedDistance = simulation.active && sceneAspect ? cameraDistanceForAspect(drawn, sceneAspect) : null
+  }, [])
+  // A simulation comes CLOSER to use the canvas (never mid-run: it depends on
+  // the fixed box and the canvas, not the tick); every other figure goes FURTHER
+  // only when, at this canvas shape, it would not fit.
+  const framedDistance = sceneAspect
+    ? (simulation.active ? cameraDistanceForAspect(drawn, sceneAspect) : cameraDistanceToContain(drawn, sceneAspect))
+    : null
   const framed = framedDistance === null || framedDistance === drawn.cameraDistance
     ? drawn
     : { ...drawn, cameraDistance: framedDistance }
@@ -538,7 +543,7 @@ export function ExplainerFigure({
               {working.map((line, i) => (
                 <p key={`${line}-${i}`} className={styles.workingLine}>
                   {linkSymbols(line, explainer.legend ?? []).map((token, j) => (
-                    <span key={j} style={token.color ? { color: themeColor(token.color, theme), fontWeight: 800 } : undefined}>
+                    <span key={j} style={token.color ? { color: readableTextColor(themeColor(token.color, theme) ?? token.color, theme), fontWeight: 800 } : undefined}>
                       {token.text}
                     </span>
                   ))}
@@ -808,7 +813,7 @@ export function ExplainerFigure({
                       onClick={() => setPinnedColor(active ? null : row.color)}
                       title={active ? 'Show the whole figure again' : `Focus on ${row.label}`}
                     >
-                      <Swatch shape={row.shape} color={themeColor(row.color, theme) ?? row.color} />
+                      <Swatch shape={row.shape} color={meshColor(row.color, theme) ?? row.color} />
                       <span>{row.label}</span>
                     </button>
                   )

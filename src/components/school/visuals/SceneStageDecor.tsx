@@ -22,27 +22,61 @@ import { SceneLabel } from './SceneLabel'
 import type { Theme } from '@/components/Providers'
 import { dimColor, ROLE, themeColor } from '@/lib/teaching/sceneGenerators/visualDesign'
 
+type Bounds = { minX: number; maxX: number; minY: number; maxY: number; span: number }
+
 interface SceneStageDecorProps {
   /** The box the figure's own geometry occupies, in scene units. */
-  bounds: { minX: number; maxX: number; minY: number; maxY: number; span: number }
+  bounds: Bounds
   grid?: boolean
   axes?: boolean
   axisLabels?: { x?: string; y?: string; z?: string }
   theme: Theme
+  /**
+   * Draw the axis letters here. SceneSpecRenderer turns this off and hands the
+   * same letters (`stageAxisLabels`) to the label layer instead, so they are
+   * placed by the SAME solver as every other label — inside the canvas and clear
+   * of the figure's own text. Drawn here they were invisible to that solver: at
+   * 390px "y" sat on the τ label of the torque figure (93 % overlap) and "x" was
+   * cut in half by the canvas edge.
+   */
+  drawLabels?: boolean
 }
 
-/** Axis colours follow the universal convention: x red, y green, z blue. */
-const AXIS = { x: ROLE.input, y: ROLE.result, z: ROLE.output } as const
-
-export function SceneStageDecor({ bounds, grid = true, axes = true, axisLabels, theme }: SceneStageDecorProps) {
-  // The ground sits just under the figure's lowest point, and spans the
-  // figure's own width — so it reads as the surface the figure stands on
-  // rather than as a plane floating somewhere near it.
+/** The ground plane / triad geometry, shared by the decor and the label layer. */
+export function stageDecorLayout(bounds: Bounds) {
   const pad = bounds.span * 0.08
   const floor = bounds.minY - pad
   const x0 = bounds.minX - pad
   const x1 = bounds.maxX + pad
   const depth = (x1 - x0) / 2
+  const axisLen = bounds.span * 0.13
+  const origin: [number, number, number] = [x0, floor, depth * 0.72]
+  return { pad, floor, x0, x1, depth, axisLen, origin }
+}
+
+/** The axis letters as world-space labels, for the label layer. */
+export function stageAxisLabels(
+  bounds: Bounds, theme: Theme, axisLabels?: { x?: string; y?: string; z?: string },
+): { text: string; position: [number, number, number]; color: string }[] {
+  const { axisLen, origin } = stageDecorLayout(bounds)
+  return (['x', 'y', 'z'] as const).map((k) => {
+    const to: [number, number, number] = k === 'x' ? [axisLen, 0, 0] : k === 'y' ? [0, axisLen, 0] : [0, 0, axisLen]
+    return {
+      text: axisLabels?.[k] ?? k,
+      position: [origin[0] + to[0] * 1.22, origin[1] + to[1] * 1.22, origin[2] + to[2] * 1.22] as [number, number, number],
+      color: themeColor(AXIS[k], theme) ?? AXIS[k],
+    }
+  })
+}
+
+/** Axis colours follow the universal convention: x red, y green, z blue. */
+const AXIS = { x: ROLE.input, y: ROLE.result, z: ROLE.output } as const
+
+export function SceneStageDecor({ bounds, grid = true, axes = true, axisLabels, theme, drawLabels = true }: SceneStageDecorProps) {
+  // The ground sits just under the figure's lowest point, and spans the
+  // figure's own width — so it reads as the surface the figure stands on
+  // rather than as a plane floating somewhere near it.
+  const { floor, x0, x1, depth } = stageDecorLayout(bounds)
 
   // Whole-unit divisions keep the grid a readable ruler rather than a texture:
   // roughly ten cells across, snapped so a line falls on a round value.
@@ -66,8 +100,7 @@ export function SceneStageDecor({ bounds, grid = true, axes = true, axisLabels, 
   // attempt) put it straight through the result label — the decor is added at
   // render time and so is invisible to the label placement solver, which can
   // only avoid what the SCENE declares.
-  const axisLen = bounds.span * 0.13
-  const origin: [number, number, number] = [x0, floor, depth * 0.72]
+  const { axisLen, origin } = stageDecorLayout(bounds)
 
   return (
     <group>
@@ -84,12 +117,14 @@ export function SceneStageDecor({ bounds, grid = true, axes = true, axisLabels, 
             return (
               <group key={k}>
                 <Line points={[[0, 0, 0], to]} color={color} lineWidth={2} />
-                <SceneLabel
-                  text={axisLabels?.[k] ?? k}
-                  position={[to[0] * 1.22, to[1] * 1.22, to[2] * 1.22]}
-                  color={color}
-                  theme={theme}
-                />
+                {drawLabels && (
+                  <SceneLabel
+                    text={axisLabels?.[k] ?? k}
+                    position={[to[0] * 1.22, to[1] * 1.22, to[2] * 1.22]}
+                    color={color}
+                    theme={theme}
+                  />
+                )}
               </group>
             )
           })}

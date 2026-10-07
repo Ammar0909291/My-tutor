@@ -104,14 +104,58 @@ const arg = (name: string, dflt?: string): string | undefined => {
 }
 const flag = (name: string) => args.includes(`--${name}`)
 
-const INPAGE = readFileSync(resolve(__dirname, 'inpage.js'), 'utf8')
-const BASE = arg('base', 'http://localhost:3000')!
+/**
+ * Software WebGL, and NO background throttling: with several contexts open
+ * Chromium otherwise treats all but one as backgrounded and stops their
+ * animation frames, so a figure never finishes placing its labels.
+ */
+export const CHROMIUM_ARGS = [
+  '--use-angle=swiftshader', '--use-gl=angle', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist',
+  '--disable-renderer-backgrounding', '--disable-background-timer-throttling', '--disable-backgrounding-occluded-windows',
+]
+
+const TRACE = process.env.AUDIT_TRACE === '1'
+export function lap(label: string, t0: number): number {
+  const now = Date.now()
+  if (TRACE) console.log(`   ${label.padEnd(18)} ${((now - t0) / 1000).toFixed(2)}s`)
+  return now
+}
+
+export const INPAGE = readFileSync(resolve(__dirname, 'inpage.js'), 'utf8')
+export const BASE = arg('base', 'http://localhost:3000')!
 
 async function inject(page: Page): Promise<void> {
   await page.addInitScript(INPAGE)
 }
 
-async function settle(page: Page, renderer: string, expectLabels = false): Promise<void> {
+/** A browser context for one viewport/theme, with the in-page auditor and the animation-clock cap installed. */
+export async function openContext(browser: Browser, vp: ViewportName, theme: ThemeName) {
+  const cfg = VIEWPORT_CONFIG[vp]
+  const ctx = await browser.newContext({ viewport: { width: cfg.width, height: cfg.height }, deviceScaleFactor: 1, reducedMotion: 'no-preference' })
+  await ctx.addInitScript((th: string) => { try { localStorage.setItem('mytutor_theme', th) } catch { /* ignore */ } }, theme)
+  await ctx.addInitScript(INPAGE)
+  // Software GL repainting at 60fps is what makes a render slow, not the work
+  // being measured. Cap the animation clock at ~8fps: layout, label placement
+  // and every painted pixel are identical, only the idle repaint rate changes.
+  // Plain string, not a function: tsx/esbuild wraps named functions in a `__name`
+  // helper that does not exist inside the page (same reason inpage.js is JS).
+  await ctx.addInitScript({
+    content: `
+      (function () {
+        var raf = window.requestAnimationFrame.bind(window);
+        window.requestAnimationFrame = function (cb) { return window.setTimeout(function () { raf(cb); }, 120); };
+        // Frame counter: drei <Html> re-places every label on the render loop, so a
+        // measurement is only valid once REAL frames have run since the last change.
+        window.__frames = 0;
+        function tick() { window.__frames++; window.requestAnimationFrame(tick); }
+        window.requestAnimationFrame(tick);
+      })();
+    `,
+  })
+  return ctx
+}
+
+export async function settle(page: Page, renderer: string, expectLabels = false): Promise<void> {
   // A scene's labels are placed by a solver that runs after the canvas has a
   // size; a card animates through its steps. Both are "settled" when the text
   // boxes stop moving for three consecutive looks.
@@ -120,6 +164,9 @@ async function settle(page: Page, renderer: string, expectLabels = false): Promi
   let stable = 0
   if (renderer === 'card') await page.waitForTimeout(3000)
   while (Date.now() < deadline) {
+    // Let real frames run between looks (see the counter in openContext).
+    const f0 = await page.evaluate(() => (window as unknown as { __frames?: number }).__frames ?? 0)
+    await page.waitForFunction((n) => ((window as unknown as { __frames?: number }).__frames ?? 0) >= n, f0 + 3, { timeout: 10_000 }).catch(() => undefined)
     const sig = await page.evaluate(() => {
       const m = (window as unknown as { __audit: { measure: () => Measure } }).__audit.measure()
       if (m.error) return 'err'
@@ -135,8 +182,9 @@ async function settle(page: Page, renderer: string, expectLabels = false): Promi
     if (sig !== 'err' && sig === prev && labelsIn > 0) stable++
     else stable = 0
     prev = sig
-    if (stable >= 2) return
-    await page.waitForTimeout(300)
+    // One equal pair of looks, each preceded by >= 3 real frames, is settled.
+    if (stable >= 1) return
+    await page.waitForTimeout(100)
   }
 }
 
@@ -152,7 +200,7 @@ async function glyphCheck(page: Page, m: Measure): Promise<string[]> {
 }
 
 /** Measure the current state: DOM, then the background pixels behind the text. */
-async function capture(page: Page, pixPage: Page, state: string, params: Record<string, string>, shotPath: string | null): Promise<StateRecord> {
+export async function capture(page: Page, pixPage: Page, state: string, params: Record<string, string>, shotPath: string | null): Promise<StateRecord> {
   const measure: Measure = await page.evaluate(() => (window as unknown as { __audit: { measure: () => Measure } }).__audit.measure())
   const missing = await glyphCheck(page, measure)
 
@@ -195,7 +243,7 @@ async function capture(page: Page, pixPage: Page, state: string, params: Record<
 }
 
 /** The figure's value sliders, with their ranges, read from the live DOM. */
-async function readSliders(page: Page): Promise<Array<{ index: number; label: string; min: number; max: number; step: number; value: number }>> {
+export async function readSliders(page: Page): Promise<Array<{ index: number; label: string; min: number; max: number; step: number; value: number }>> {
   return page.evaluate(() => {
     const frame = document.querySelector('[data-audit-frame]')!
     return Array.from(frame.querySelectorAll('input[type="range"]')).map((el, index) => {
@@ -209,7 +257,7 @@ async function readSliders(page: Page): Promise<Array<{ index: number; label: st
   })
 }
 
-async function setSlider(page: Page, index: number, value: number): Promise<void> {
+export async function setSlider(page: Page, index: number, value: number): Promise<void> {
   await page.evaluate(({ index: i, value: v }) => {
     const frame = document.querySelector('[data-audit-frame]')!
     const el = frame.querySelectorAll('input[type="range"]')[i] as HTMLInputElement
@@ -224,28 +272,24 @@ async function setSlider(page: Page, index: number, value: number): Promise<void
 async function renderOne(browser: Browser, row: InventoryRow, vp: ViewportName, theme: ThemeName, outDir: string, withStates: boolean): Promise<RenderRecord> {
   const t0 = Date.now()
   const cfg = VIEWPORT_CONFIG[vp]
-  const ctx = await browser.newContext({ viewport: { width: cfg.width, height: cfg.height }, deviceScaleFactor: 1, reducedMotion: 'no-preference' })
-  await ctx.addInitScript((th: string) => { try { localStorage.setItem('mytutor_theme', th) } catch { /* ignore */ } }, theme)
-  await ctx.addInitScript(INPAGE)
-  // Software GL repainting at 60fps is what makes a render slow, not the work
-  // being measured. Cap the animation clock at ~8fps: layout, label placement
-  // and every painted pixel are identical, only the idle repaint rate changes.
-  await ctx.addInitScript(() => {
-    const raf = window.requestAnimationFrame.bind(window)
-    window.requestAnimationFrame = (cb: FrameRequestCallback) => window.setTimeout(() => raf(cb), 120) as unknown as number
-  })
+  const ctx = await openContext(browser, vp, theme)
   const page = await ctx.newPage()
   const pixPage = await ctx.newPage()
   await pixPage.goto('about:blank')
   const rec: RenderRecord = { conceptId: row.conceptId, viewport: vp, theme, ok: false, renderer: null, provenance: null, elapsedMs: 0, states: [] }
   const tag = `${row.conceptId}__${vp}__${theme}`
   try {
+    let tl = Date.now()
     await page.goto(`${BASE}/dev/physics-audit?concept=${encodeURIComponent(row.conceptId)}&fw=${cfg.frameW}`, { waitUntil: 'domcontentloaded', timeout: 120_000 })
+    tl = lap('goto', tl)
     await page.waitForSelector('[data-audit-frame]', { timeout: 60_000 })
+    tl = lap('frame', tl)
     const renderer = await page.getAttribute('[data-audit-renderer]', 'data-audit-renderer')
     rec.renderer = renderer
     if (renderer === 'scene') await page.waitForSelector('[data-scene-box] canvas', { timeout: 60_000 })
+    tl = lap('canvas', tl)
     await settle(page, renderer ?? 'none', renderer === 'scene' && row.textObjects > 0)
+    tl = lap('settle', tl)
     // Make sure webfonts are in before measuring text.
     await page.evaluate(() => document.fonts?.ready)
     await page.waitForTimeout(300)
@@ -253,6 +297,7 @@ async function renderOne(browser: Browser, row: InventoryRow, vp: ViewportName, 
     const shotsDir = resolve(outDir, 'shots')
     mkdirSync(shotsDir, { recursive: true })
     const first = await capture(page, pixPage, 'default', {}, resolve(shotsDir, `${tag}.png`))
+    tl = lap('capture', tl)
     rec.provenance = first.measure.provenance
     rec.states.push(first)
 
@@ -307,7 +352,12 @@ async function main(): Promise<void> {
     rows = rows.filter((_, idx) => idx % n === i)
   }
   const tasks: Array<{ row: InventoryRow; vp: ViewportName; theme: ThemeName; file: string }> = []
+  // Geometry, label placement and overlap do not depend on the theme; only colour
+  // does. The light theme is therefore rendered where contrast is hardest (the
+  // phone), not at every width.
+  const lightVps = (arg('light-viewports', 'mobile')!).split(',')
   for (const row of rows) for (const vp of vps) for (const theme of themes) {
+    if (theme === 'light' && !lightVps.includes(vp)) continue
     const file = resolve(outDir, 'results', `${row.conceptId}__${vp}__${theme}.json`)
     if (skipDone && existsSync(file)) continue
     tasks.push({ row, vp, theme, file })
@@ -319,7 +369,7 @@ async function main(): Promise<void> {
 
   const browser = await chromium.launch({
     executablePath: process.env.PW_CHROMIUM_PATH ?? '/opt/pw-browsers/chromium',
-    args: ['--use-angle=swiftshader', '--use-gl=angle', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'],
+    args: CHROMIUM_ARGS,
   })
   let next = 0
   let done = 0

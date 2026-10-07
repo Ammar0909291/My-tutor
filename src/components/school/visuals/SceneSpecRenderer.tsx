@@ -19,9 +19,9 @@ import { MolecularNode3D } from './MolecularNode3D'
 import { SceneLabelLayer, type LayerLabel } from './SceneLabelLayer'
 import { pathSegments, visibleObjects, type SceneObject, type SceneSpec } from '@/lib/teaching/sceneSpec'
 import { sceneTextObjects } from '@/lib/teaching/visual/layout'
-import { dimColor, themeColor } from '@/lib/teaching/sceneGenerators/visualDesign'
+import { dimColor, meshColor, themeColor } from '@/lib/teaching/sceneGenerators/visualDesign'
 import { emphasisOf } from '@/lib/teaching/visual/sceneStage'
-import { SceneStageDecor } from './SceneStageDecor'
+import { SceneStageDecor, stageAxisLabels } from './SceneStageDecor'
 import { useTheme, type Theme } from '@/components/Providers'
 
 /** Plain (headless) connecting cylinder between two atoms — a chemical bond has no direction/arrowhead. */
@@ -56,7 +56,7 @@ function renderObject(obj: SceneObject, key: number, theme: Theme, focusIds: Rea
   // object is in focus, which is the pre-existing behaviour exactly.
   const color = emphasisOf(obj, focusIds) === 'context'
     ? dimColor(obj.color, theme)
-    : themeColor(obj.color, theme)
+    : meshColor(obj.color, theme)
   switch (obj.type) {
     case 'point':
     case 'node':
@@ -158,15 +158,15 @@ function renderObject(obj: SceneObject, key: number, theme: Theme, focusIds: Rea
  * restored visual re-solves correctly on a different device.
  */
 function PlacedLabels({
-  objects, cameraDistance, theme, focusIds,
-}: { objects: SceneObject[]; cameraDistance: number; theme: Theme; focusIds: ReadonlySet<string> }) {
+  objects, cameraDistance, theme, focusIds, extra,
+}: { objects: SceneObject[]; cameraDistance: number; theme: Theme; focusIds: ReadonlySet<string>; extra?: LayerLabel[] }) {
   const { labels, obstacles } = useMemo(() => {
     const scene: SceneSpec = {
       id: 'labels', title: '', sceneType: 'diagram', cameraDistance,
       steps: [{ objects }],
     }
     return {
-      labels: sceneTextObjects(scene).map(({ text, position, object }): LayerLabel => ({
+      labels: [...sceneTextObjects(scene).map(({ text, position, object }): LayerLabel => ({
         text,
         position,
         color: (emphasisOf(object, focusIds) === 'context'
@@ -176,11 +176,14 @@ function PlacedLabels({
         // an extent, so it must not drive typography.
         tier: object.type === 'label' ? object.size : undefined,
       })),
+      // The stage decor's axis letters go LAST: authored text has first claim on
+      // free space, and the letters yield to it instead of landing on it.
+      ...(extra ?? [])],
       // Every object is something to stay clear of, including the ones that
       // carry text — the layer strips that text so nothing is counted twice.
       obstacles: objects,
     }
-  }, [objects, cameraDistance, theme, focusIds])
+  }, [objects, cameraDistance, theme, focusIds, extra])
 
   return <SceneLabelLayer labels={labels} obstacles={obstacles} cameraDistance={cameraDistance} theme={theme} />
 }
@@ -261,6 +264,15 @@ export function SceneSpecRenderer({
   const bounds = sceneBounds(objects, spec.cameraDistance ?? 7)
   const decor = spec.stage
   const spatial = (decor?.grid !== false || decor?.axes !== false) && decorOverride !== false
+  // The triad's letters are labels like any other: handed to the label layer so
+  // the one solver keeps them on the canvas and off the figure's own text.
+  const decorLabels = useMemo(
+    () => (decor && spatial && decor.axes !== false
+      ? stageAxisLabels(bounds, theme, decor.axisLabels).map((l) => ({ text: l.text, position: l.position, color: l.color }))
+      : undefined),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [decor, spatial, theme, bounds.minX, bounds.maxX, bounds.minY, bounds.maxY, bounds.span],
+  )
   return (
     <ThreeDVisual
       revealStep={revealStep}
@@ -285,10 +297,11 @@ export function SceneSpecRenderer({
             axes={decor.axes !== false}
             axisLabels={decor.axisLabels}
             theme={theme}
+            drawLabels={false}
           />
         )}
         {objects.map((obj, i) => renderObject(obj, i, theme, focusIds))}
-        <PlacedLabels objects={objects} cameraDistance={spec.cameraDistance ?? 7} theme={theme} focusIds={focusIds} />
+        <PlacedLabels objects={objects} cameraDistance={spec.cameraDistance ?? 7} theme={theme} focusIds={focusIds} extra={decorLabels} />
       </group>
     </ThreeDVisual>
   )

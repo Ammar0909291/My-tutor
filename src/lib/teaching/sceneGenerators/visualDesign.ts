@@ -328,3 +328,54 @@ export function readableTextColor(color: string, theme: 'dark' | 'light'): strin
   }
   return theme === 'dark' ? '#ffffff' : '#000000'
 }
+
+/**
+ * `fg` lifted until it holds `min`:1 on an ARBITRARY backdrop (the 2D SVG cards,
+ * whose text can sit on the board or on a box a figure paints itself).
+ *
+ * `readableTextColor` above answers the same question for scene labels against
+ * the two known figure surfaces; this is the general form. Same method: keep the
+ * authored hue, mix it toward white (dark backdrop) or black (light backdrop)
+ * in steps until it clears, so a figure that already reads well is untouched and
+ * one that does not keeps its colour identity as far as legibility allows.
+ */
+export function liftToContrast(
+  fg: [number, number, number],
+  bg: [number, number, number],
+  min = 4.5,
+): [number, number, number] {
+  if (ratio(fg, bg) >= min) return fg
+  // Black and white contrast equally with a backdrop of relative luminance
+  // ~0.179: darker than that, lift toward white; lighter, toward black.
+  const target = luminance(bg) > 0.179 ? 0 : 255
+  for (let t = 0.05; t <= 1.0001; t += 0.05) {
+    const mixed = fg.map((v) => Math.round(v + (target - v) * t)) as [number, number, number]
+    if (ratio(mixed, bg) >= min) return mixed
+  }
+  return [target, target, target]
+}
+
+/**
+ * The colour a figure DRAWS a graphic in (an arrow, a curve, a body, a legend
+ * swatch): `themeColor`'s answer, held to 3:1 on the figure surface — WCAG
+ * 1.4.11, for a graphic that carries meaning.
+ *
+ * `themeColor` itself still returns every non-palette colour untouched (the
+ * stored value is a wire format; two tests pin that). This is the separate,
+ * render-time step for the colours it passes through. Measured over the physics
+ * corpus: amber `#f59e0b` is 2.0:1 on the light board (the acceleration curve,
+ * a projectile's peak), `#eab308` 1.8:1 (mirrors, lenses), `#93c5fd` 1.7:1
+ * (vector figures) and `#64748b` 2.8:1 on the dark one. Only what falls short is
+ * lifted, as little as it takes; a colour that cannot be parsed is unchanged.
+ * Text has its own, stricter floor: `readableTextColor`.
+ */
+export function meshColor(color: string | null | undefined, theme: 'dark' | 'light'): string | undefined {
+  const resolved = themeColor(color, theme)
+  if (!resolved) return undefined
+  const rgb = toRgb(resolved)
+  if (!rgb) return resolved
+  const surface = toRgb(FIGURE_SURFACE[theme])!
+  if (ratio(rgb, surface) >= 3) return resolved
+  const lifted = liftToContrast(rgb, surface, 3)
+  return '#' + lifted.map((v) => v.toString(16).padStart(2, '0')).join('')
+}

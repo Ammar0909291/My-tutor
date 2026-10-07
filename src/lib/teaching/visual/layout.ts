@@ -255,12 +255,28 @@ export function sceneTextObjects(scene: SceneSpec): { text: string; position: Ve
   return out
 }
 
+/** A body at least this big (scene units) is labelled from above it, not on it. */
+const BODY_LABEL_MIN_RADIUS = 0.45
+/** Clear space between a body's surface and the label above it. */
+const BODY_LABEL_GAP = 0.55
+
 /**
  * Where an object's text is drawn. A label carries `position`; a vector, arrow
  * or bond labels its midpoint, which is what the renderer does.
  */
 function anchorOf(obj: SceneObject): Vec3 | null {
-  if (obj.position) return obj.position
+  if (obj.position) {
+    // TEXT NEVER SITS INSIDE A BODY. A label anchored on the centre of a solid
+    // sphere is painted ON the sphere, and its colour is chosen against the
+    // board, not against the sphere: "m1=2" on the green collision sphere
+    // measured 2.1:1, "m1+m2=3" on the purple one 4.0:1, and the solver cannot
+    // move it clear because its own anchor is inside the obstacle. A body big
+    // enough to hold the label (radius >= 0.45 scene units) names itself from
+    // just above its surface instead; small markers keep the label on them.
+    const r = obj.type === 'node' || obj.type === 'particle' || obj.type === 'point' ? (obj.radius ?? 0) : 0
+    if (r >= BODY_LABEL_MIN_RADIUS) return [obj.position[0], obj.position[1] + r + BODY_LABEL_GAP, obj.position[2]]
+    return obj.position
+  }
   if (obj.from && obj.to) {
     return [
       (obj.from[0] + obj.to[0]) / 2,
@@ -517,6 +533,59 @@ export function fitSceneToFrame(scene: SceneSpec): SceneSpec {
 }
 
 /**
+ * Bounding box of everything the scene DRAWS, including the body of a sphere —
+ * `sceneExtent` above measures anchors only, which is right for deciding how
+ * well a figure fills its frame but not for deciding whether it fits: a node of
+ * radius 2.5 at the edge sticks out 2.5 units past its coordinate.
+ */
+function drawnExtent(scene: SceneSpec): Extent | null {
+  let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity
+  for (const step of scene.steps ?? []) {
+    for (const obj of step.objects ?? []) {
+      const pad = obj.type === 'node' ? (obj.radius ?? 0.3)
+        : obj.type === 'point' || obj.type === 'particle' ? (obj.radius ?? 0.1)
+        : 0
+      const points = [obj.position, obj.from, obj.to, ...(obj.points ?? [])].filter(Boolean) as Vec3[]
+      for (const p of points) {
+        minX = Math.min(minX, p[0] - pad); maxX = Math.max(maxX, p[0] + pad)
+        minY = Math.min(minY, p[1] - pad); maxY = Math.max(maxY, p[1] + pad)
+      }
+    }
+  }
+  return minX > maxX ? null : { minX, maxX, minY, maxY }
+}
+
+/**
+ * The camera distance at which a scene FITS a canvas of the ACTUAL shape.
+ *
+ * Every figure is framed server-side for a 4:3 canvas, because the server cannot
+ * know the learner's screen. On a phone the canvas is nearly square (measured
+ * 282 × 260, 1.08:1), so a figure that is wide for its height overflows the
+ * sides: measured in Chromium at 390px, the dielectric capacitor, the
+ * dimensional-analysis equation row and the collision spheres were cut off at
+ * the canvas edge. `cameraDistanceForAspect` below only ever moves the camera
+ * CLOSER, which cannot fix that.
+ *
+ * This is the other direction: given the measured aspect, the distance at which
+ * the drawn extent (spheres included), about the origin the camera looks at,
+ * stays inside TARGET_FRAME_FILL of both axes. It only ever moves the camera
+ * FURTHER — a figure that already fits is returned at its own distance, so
+ * desktop is untouched — and it moves nothing else: same geometry, same labels,
+ * same relationships, smaller on a smaller canvas.
+ */
+export function cameraDistanceToContain(scene: SceneSpec, aspect: number): number {
+  const own = scene.cameraDistance ?? DEFAULT_CAMERA_DISTANCE
+  const extent = drawnExtent(scene)
+  if (!extent || !Number.isFinite(aspect) || aspect <= 0) return own
+  const tan = Math.tan(FOV_RADIANS / 2)
+  const halfX = Math.max(Math.abs(extent.minX), Math.abs(extent.maxX))
+  const halfY = Math.max(Math.abs(extent.minY), Math.abs(extent.maxY))
+  const needed = Math.max(halfX / (TARGET_FRAME_FILL * tan * aspect), halfY / (TARGET_FRAME_FILL * tan))
+  if (!Number.isFinite(needed) || needed <= own) return own
+  return Math.round(needed * 10) / 10
+}
+
+/**
  * The camera distance at which a scene fills a canvas of the ACTUAL shape.
  *
  * `fitSceneToFrame` frames every figure for a 4:3 canvas, because the server
@@ -611,6 +680,9 @@ export interface PlacementResult {
  * whose anchor is already clear never moves at all.
  */
 const MAX_DISPLACEMENT_FRACTION = 0.30
+
+/** The reach a label may use ONLY when nothing within the normal reach is safe. */
+const ESCALATED_DISPLACEMENT_FRACTION = 0.65
 
 /** Clearance kept between a label and anything it must avoid. */
 const PADDING_PX = 2
@@ -819,6 +891,33 @@ export function solveLabelPlacement(
       // The authored position, clear of everything, is unbeatable — stop early
       // so an already-good label is provably never moved.
       if (score === 0) break
+    }
+
+    // ESCALATE, ONLY FOR A LABEL THAT WOULD OTHERWISE LAND ON ANOTHER LABEL.
+    // Nothing safe within the normal reach used to mean "leave it where the
+    // author put it" — i.e. printed over its neighbour. Measured at 390px:
+    // "g (m/s²)" under the 290px heading of Variation of g (91 % overlap), "G"
+    // under a 12-word instrument caption (85 %). A label that moves further from
+    // its anchor still says what it says; two labels on top of each other say
+    // neither. Every label placed within the normal reach is untouched, so no
+    // figure that already passes can change.
+    if (!best) {
+      const wide = candidateOffsets(Math.min(bounds.width, bounds.height) * ESCALATED_DISPLACEMENT_FRACTION)
+      for (const { dx, dy } of wide) {
+        if (Math.hypot(dx, dy) <= maxDisplacement) continue // already tried
+        const x = ax + dx
+        const y = ay + dy
+        const candidate = box(x, y)
+        if (candidate.left < 0 || candidate.right > bounds.width ||
+            candidate.top < 0 || candidate.bottom > bounds.height) continue
+        if (placedBoxes.some((p) => boxesOverlap(candidate, p))) continue
+        const geometryHits = Math.min(
+          obstacles.reduce((n, o) => n + (boxesOverlap(candidate, o, 0) ? 1 : 0), 0),
+          GEOMETRY_HIT_CAP,
+        )
+        const score = geometryHits * GEOMETRY_WEIGHT + Math.hypot(dx, dy)
+        if (!best || score < best.score) best = { x, y, score }
+      }
     }
 
     if (best) {

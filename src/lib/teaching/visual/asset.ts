@@ -36,6 +36,7 @@
 import type { VisualPayload, RendererKind, Representation, EducationalPurpose } from './types'
 import { describeVisualPayload, type VisualSemantics } from './visualSemantics'
 import { scopeForAsset, type VisualScope } from './scope'
+import { payloadBlockers } from './figureAudit'
 
 /**
  * Where an asset came from, and — read through IDENTITY_STRENGTH below —
@@ -142,6 +143,8 @@ export type AdmissionRejection =
   | 'identity-mismatch'
   | 'renderer-payload-mismatch'
   | 'malformed-payload'
+  /** The payload carries a blocker the audit refuses to ship (leakage, NaN geometry, a self-contradicting equation). */
+  | 'failed-audit'
 
 export type AdmissionResult =
   | { ok: true; asset: VisualAsset }
@@ -214,6 +217,17 @@ export function admitVisualAsset(intent: VisualIntent, asset: VisualAsset | null
       reason: 'malformed-payload',
       detail: `${asset.payload.renderer} payload has nothing to draw`,
     }
+  }
+
+  // FAIL CLOSED, on EVERY tier. A payload that carries a blocker — non-finite
+  // geometry, a broken reference, an internal id or answer key in visible text,
+  // raw LaTeX, an equation that contradicts itself — is not drawn, not repaired
+  // and not replaced with another concept's figure: NO FIGURE, with the reason
+  // on record. Authored, approved and generated figures all pass through here,
+  // so none is held to a weaker bar than another (figureAudit.payloadBlockers).
+  const blockers = payloadBlockers(asset.payload)
+  if (blockers.length > 0) {
+    return { ok: false, reason: 'failed-audit', detail: blockers.slice(0, 3).join('; ') }
   }
 
   return { ok: true, asset }

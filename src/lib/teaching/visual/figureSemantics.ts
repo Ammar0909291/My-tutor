@@ -156,6 +156,9 @@ function evaluate(tokens: Tok[], bindings: Bindings, preferVars: boolean, stripU
         // bound it as a variable, so after a number it is a factor, not a unit.
         if (preferVars && bindings[t.s]) return q
         const u = unitOf(t.s)
+        // A word that is not a unit but IS a bound symbol ends the unit tail:
+        // "2 m v" is two metres times the figure's `v`, read as units.
+        if (!u && bindings[t.s]) return q
         if (!u) throw new Unevaluable(`unknown unit ${t.s}`)
         i++
         q = applyUnit(q, u, +1)

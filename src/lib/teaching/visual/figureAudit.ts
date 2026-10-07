@@ -20,8 +20,9 @@
  */
 
 import { validateSceneSpec } from '@/lib/teaching/sceneSpecValidator'
-import { containsRawLatex } from '@/lib/teaching/visual/figureCritic'
+import { checkFigureTexts } from '@/lib/teaching/visual/figureSemantics'
 import type { SceneSpec } from '@/lib/teaching/sceneSpec'
+import type { VisualPayload } from '@/lib/teaching/visual/types'
 
 // ── thresholds (explicit, one place) ─────────────────────────────────────────
 
@@ -176,14 +177,27 @@ function textIntersection(a: AuditText, b: AuditText): { px2: number; share: num
 /** A single axis-triad letter drawn by the stage decor, not authored teaching text. */
 const isDecorAxisLetter = (t: AuditText) => t.region === 'scene-label' && /^[xyz]$/i.test(t.text.trim())
 
+/**
+ * Raw LaTeX in text a renderer draws as plain characters. (Single definition:
+ * `figureCritic` re-exports it, so the generated-figure critic and the audit
+ * cannot disagree about what counts.)
+ */
+const LATEX_MARKERS = /\\(?:frac|sqrt|cdot|times|alpha|beta|gamma|theta|pi|mu|Delta|sum|int)\b|\$[^$]+\$|\\\(|\\\[/
+
+export function containsRawLatex(text: string): boolean {
+  return LATEX_MARKERS.test(text)
+}
+
 /** Text that must never reach a learner (internal ids, debug leakage, placeholders). */
 const FORBIDDEN_TEXT: Array<[string, RegExp]> = [
   ['internal-id', /\b(?:phys|math|chem|bio|cs|eng)\.[a-z0-9_-]+\.[a-z0-9_.-]+\b/i],
   ['internal-id', /\b(?:generator|registry|scene):[\w:.-]+/i],
-  ['debug', /\b(?:undefined|NaN|Infinity|\[object \w+\]|null)\b/],
+  // JS stringification leaks. "null point" and "at infinity" are physics, so
+  // `null` is not a leak word and `Infinity` only counts as the capitalised JS value.
+  ['debug', /\b(?:undefined|NaN)\b|\[object \w+\]|(?<![A-Za-z])-?Infinity(?![A-Za-z])/],
   ['debug', /\b(?:TODO|FIXME|lorem ipsum|placeholder|debug|TBD|XXX)\b/i],
   ['debug', /\{\{|\}\}|\$\{/],
-  ['answer-key', /\b(?:correct\s*=|answerIndex|isCorrect|correctIndex|answer\s*key)\b/i],
+  ['answer-key', /\b(?:answerIndex|isCorrect|correctIndex|answer\s*key)\b|\bcorrect\s*=\s*["']/i],
 ]
 
 export function forbiddenTextHits(text: string): string[] {
@@ -359,4 +373,169 @@ export function auditSceneData(spec: SceneSpec): Finding[] {
     }
   })
   return out
+}
+
+
+// ── the admission gate's view: blockers a payload carries by itself ──────────
+
+/**
+ * The reasons a payload must not reach a learner, decidable from the payload
+ * ALONE (no browser). This is what `admitVisualAsset` calls, for every tier —
+ * curated, generator, approved and generated — so a generated figure meets
+ * exactly the bar an authored one does.
+ *
+ *   scene  malformed structure (NaN / Infinity / missing endpoints / broken
+ *          focus references), empty labels, internal-id / debug / answer-key
+ *          leakage, raw LaTeX, and an equation the figure contradicts itself on
+ *   spec   the same leakage and LaTeX rules over its title, axis names, steps
+ *   card   nothing: a card's content is source code, not data
+ *
+ * Whether the picture is READABLE once drawn (clipping, overlap, contrast) can
+ * only be known by drawing it; that is `auditRenderedState`, enforced in CI by
+ * the render audit — a figure that fails it cannot merge.
+ */
+export function payloadBlockers(payload: VisualPayload): string[] {
+  const out: string[] = []
+  if (payload.renderer === 'scene') {
+    for (const f of auditSceneData(payload.sceneSpec)) if (f.severity === 'FAIL') out.push(`${f.id} ${f.message}`)
+    const texts = [payload.sceneSpec.title, ...payload.sceneSpec.steps.flatMap((s) => s.objects.map((o) => o.text ?? ''))].filter(Boolean)
+    for (const t of texts) if (containsRawLatex(t)) out.push(`ST-08 raw LaTeX in "${t.slice(0, 40)}"`)
+    const sem = checkFigureTexts(payload.sceneSpec.steps.flatMap((s) => s.objects.map((o) => o.text ?? '')).filter(Boolean))
+    for (const r of sem.results) for (const c of r.contradictions) out.push(`SM-01 "${r.text.slice(0, 50)}": ${c.reason}`)
+  } else if (payload.renderer === 'spec') {
+    const spec = payload.visualSpec as unknown as Record<string, unknown>
+    const strings: string[] = []
+    for (const k of ['title', 'xLabel', 'yLabel']) if (typeof spec[k] === 'string') strings.push(spec[k] as string)
+    if (Array.isArray(spec.steps)) {
+      for (const st of spec.steps as Array<{ title?: unknown; note?: unknown }>) {
+        if (typeof st.title === 'string') strings.push(st.title)
+        if (typeof st.note === 'string') strings.push(st.note)
+      }
+    }
+    for (const t of strings) {
+      const hits = forbiddenTextHits(t)
+      if (hits.length) out.push(`ST-04 "${t.slice(0, 40)}" looks like ${hits.join('/')} leakage`)
+      if (containsRawLatex(t)) out.push(`ST-08 raw LaTeX in "${t.slice(0, 40)}"`)
+    }
+  }
+  return out
+}
+
+// ── graph validation (axes, labels, the curve itself) ───────────────────────
+
+type P3 = [number, number, number]
+
+/** Perpendicular distance from `p` to the segment a→b, and where along it (0..len) the foot falls. */
+function alongAxis(p: P3, a: P3, b: P3): { perp: number; t: number; len: number } {
+  const len = Math.hypot(b[0] - a[0], b[1] - a[1]) || 1
+  const ux = (b[0] - a[0]) / len, uy = (b[1] - a[1]) / len
+  const dx = p[0] - a[0], dy = p[1] - a[1]
+  return { perp: Math.abs(dx * uy - dy * ux), t: dx * ux + dy * uy, len }
+}
+
+/**
+ * Is this scene a graph, and if so is it a USABLE one?
+ *
+ * A graph is declared the way every authored plot declares one: two ARROWS from
+ * one origin, one horizontal and one vertical (the `axes()` pattern), plus a
+ * densely sampled curve spanning most of the horizontal axis — or any scene
+ * that declares itself `sceneType: 'plot'`. (Circuits, field-line figures and
+ * force diagrams also contain perpendicular segments; arrows from a shared
+ * origin with a curve across them is what separates a graph from those.)
+ *
+ *   GR-01  a plot has two axes (a curve on no axes cannot be read, only seen)
+ *   GR-02  each axis is NAMED — a label with a letter beside its tip or along it
+ *   GR-04  the plotted curve stays inside the axes it is drawn against
+ *
+ * Measured motivation: the Kinematics graphs figure drew position, velocity and
+ * acceleration as three curves normalised to one box with NO axes, NO units and
+ * NO scale — three coloured lines and a corner of equations. None of the
+ * payload validators object to that; GR-01 does.
+ */
+export function auditGraph(spec: SceneSpec): { isGraph: boolean; findings: Finding[] } {
+  const objs = spec.steps.flatMap((s) => s.objects)
+  const arrows = objs.filter((o) => (o.type === 'arrow' || o.type === 'vector') && o.from && o.to)
+  type Arrow = (typeof arrows)[number]
+  // EVERY axis pair — a figure may hold several graphs (panels), and a curve is
+  // judged against the pair it is drawn on, not against whichever came first.
+  const pairs: Array<{ h: Arrow; v: Arrow }> = []
+  for (const h of arrows) {
+    const hf = h.from as P3, ht = h.to as P3
+    if (Math.abs(ht[1] - hf[1]) > 0.05 || Math.abs(ht[0] - hf[0]) < 3) continue
+    for (const v of arrows) {
+      const vf = v.from as P3, vt = v.to as P3
+      if (Math.abs(vt[0] - vf[0]) > 0.05 || Math.abs(vt[1] - vf[1]) < 3) continue
+      if (Math.hypot(hf[0] - vf[0], hf[1] - vf[1]) < 0.05) pairs.push({ h, v })
+    }
+  }
+  // An axis may be drawn in two halves from one origin (a displacement axis has an
+  // up arrow and a down arrow); the axes' extent is the union of every arrow that
+  // starts at the pair's origin along the same line.
+  const box = (pr: { h: Arrow; v: Arrow }) => {
+    const origin = pr.h.from as P3
+    const sharesOrigin = (a: Arrow) => Math.hypot((a.from as P3)[0] - origin[0], (a.from as P3)[1] - origin[1]) < 0.05
+    const xs: number[] = [origin[0]], ys: number[] = [origin[1]]
+    for (const a of arrows) {
+      if (!sharesOrigin(a)) continue
+      const f = a.from as P3, t = a.to as P3
+      if (Math.abs(t[1] - f[1]) <= 0.05) xs.push(t[0])
+      else if (Math.abs(t[0] - f[0]) <= 0.05) ys.push(t[1])
+    }
+    return { x0: Math.min(...xs), x1: Math.max(...xs), y0: Math.min(...ys), y1: Math.max(...ys) }
+  }
+  const curves = objs.filter((o) => (o.type === 'path' || o.type === 'trajectory') && (o.points?.length ?? 0) >= 12)
+  // A plotted curve spans most of one pair's horizontal axis AND starts on it.
+  const plotted: Array<{ c: (typeof curves)[number]; pair: (typeof pairs)[number] }> = []
+  for (const c of curves) {
+    const pts = c.points as P3[]
+    const xs = pts.map((p) => p[0]), ys = pts.map((p) => p[1])
+    const cx = (Math.min(...xs) + Math.max(...xs)) / 2, cy = (Math.min(...ys) + Math.max(...ys)) / 2
+    let best: (typeof pairs)[number] | null = null
+    let bestD = Infinity
+    for (const pr of pairs) {
+      const b = box(pr)
+      if (Math.max(...xs) - Math.min(...xs) < 0.4 * (b.x1 - b.x0)) continue
+      // the curve's centre must sit within the axes' box — padded generously BELOW
+      // (an oscillation drawn on an axis that stops at its baseline dips under it
+      // and is still that graph) and barely ABOVE (a curve higher than the axes is
+      // some other panel's)
+      const h = Math.max(b.y1 - b.y0, 1)
+      if (cx < b.x0 - 1 || cx > b.x1 + 1 || cy < b.y0 - 0.6 * h || cy > b.y1 + 0.15 * h) continue
+      const d = Math.hypot(cx - (b.x0 + b.x1) / 2, cy - (b.y0 + b.y1) / 2)
+      if (d < bestD) { bestD = d; best = pr }
+    }
+    if (best) plotted.push({ c, pair: best })
+  }
+  const isGraph = spec.sceneType === 'plot' || plotted.length > 0
+  const out: Finding[] = []
+  if (!isGraph) return { isGraph: false, findings: out }
+  if (pairs.length === 0) {
+    out.push({ id: 'GR-01', dimension: 'graph', severity: 'FAIL', message: 'a graph is drawn with no pair of axes (no scale, no meaning for position)' })
+    return { isGraph, findings: out }
+  }
+  const labels = objs.filter((o) => o.type === 'label' && o.position && /[A-Za-zα-ωΔ]/.test(o.text ?? ''))
+  const named = (axis: Arrow) => {
+    const a = axis.from as P3, b = axis.to as P3
+    return labels.some((l) => {
+      const { perp, t, len } = alongAxis(l.position as P3, a, b)
+      // beside the tip, or alongside the axis (under / left of it)
+      return perp <= 2.4 && t >= -2.5 && t <= len + 4
+    })
+  }
+  const checked = new Set<(typeof pairs)[number]>()
+  const TOL = 1.0
+  for (const { c, pair } of plotted) {
+    if (!checked.has(pair)) {
+      checked.add(pair)
+      if (!named(pair.h)) out.push({ id: 'GR-02', dimension: 'graph', severity: 'FAIL', message: 'the horizontal axis has no name beside it' })
+      if (!named(pair.v)) out.push({ id: 'GR-02', dimension: 'graph', severity: 'FAIL', message: 'the vertical axis has no name beside it' })
+    }
+    const b = box(pair)
+    const pts = c.points as P3[]
+    const xs = pts.map((p) => p[0]), ys = pts.map((p) => p[1])
+    if (Math.min(...xs) < b.x0 - TOL || Math.max(...xs) > b.x1 + TOL || Math.min(...ys) < b.y0 - TOL || Math.max(...ys) > b.y1 + TOL) {
+      out.push({ id: 'GR-04', dimension: 'graph', severity: 'FAIL', message: 'a plotted curve leaves the axes it is drawn against', evidence: { id: c.id } })
+    }
+  }
+  return { isGraph, findings: out }
 }
