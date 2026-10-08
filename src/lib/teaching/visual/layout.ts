@@ -228,6 +228,17 @@ export function wrapPxOf(object: SceneObject, viewport: Viewport, cameraDistance
   if (typeof u === 'number' && Number.isFinite(u) && u > 0) candidates.push(u * pixelsPerUnit(viewport, cameraDistance))
   return candidates.length ? Math.max(MIN_AUTHORED_WRAP_PX, Math.min(...candidates)) : undefined
 }
+/**
+ * An authored wrap width, kept only where it actually wraps THIS text. Text that already fits inside it keeps its
+ * natural one-line box: painting every authored caption in a box as wide as its column made neighbouring boxes
+ * overlap and edge boxes run past the canvas even though the words themselves did not (measured), and it no longer
+ * matched the box the solver planned (`labelExtent` only wraps text wider than the override).
+ */
+export function wrapPxIfNeeded(text: string, viewport: Viewport, tier: number | undefined, wrapPx: number | undefined): number | undefined {
+  if (wrapPx === undefined) return undefined
+  const singleLine = text.length * widthRatioFor(text) * fontPxFor(viewport, tier)
+  return singleLine > wrapPx ? wrapPx : undefined
+}
 /** Narrower than this a caption wraps one short word per line, which reads worse than overflowing a little. */
 const MIN_AUTHORED_WRAP_PX = 76
 

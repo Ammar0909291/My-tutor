@@ -50,7 +50,7 @@ import { SceneLabel } from './SceneLabel'
 import type { Theme } from '@/components/Providers'
 import type { SceneObject, SceneSpec, Vec3 } from '@/lib/teaching/sceneSpec'
 import {
-  labelWrapWidth, placeSceneLabels, screenToWorld, viewportFromCanvas, wrapPxOf,
+  labelWrapWidth, placeSceneLabels, screenToWorld, viewportFromCanvas, wrapPxIfNeeded, wrapPxOf,
 } from '@/lib/teaching/visual/layout'
 
 /** A label a figure wants drawn, in the figure's own world coordinates. */
@@ -152,7 +152,7 @@ export function SceneLabelLayer({ labels: authored, lateLabels, obstacles = [], 
         : {}),
     }))
     // An authored wrap (a column's own width) is planned by the solver and painted by SceneLabel at the SAME px.
-    const authoredWrapPx = labelObjects.map((o) => wrapPxOf(o, viewport, cameraDistance))
+    const authoredWrapPx = labelObjects.map((o) => wrapPxIfNeeded(o.text ?? '', viewport, o.size, wrapPxOf(o, viewport, cameraDistance)))
     const scene: SceneSpec = {
       id: 'label-layer',
       title: '',
