@@ -788,6 +788,23 @@ function captionsOnSpheres(scene: SceneSpec, viewport: Viewport): number {
 }
 
 /**
+ * How many captions with an authored column width the solver moved sideways OUT of their column. A caption pushed far
+ * from its anchor reads as belonging to the neighbouring group (measured: "Protein complexes (fully)" printed under the
+ * wrong group at 390px) — worse than overlapping, because nothing looks wrong. Counted so the stage grows until the
+ * captions can stay where they were authored.
+ */
+function captionsOutOfColumn(scene: SceneSpec, viewport: Viewport): number {
+  const textObjects = sceneTextObjects(scene)
+  const camera = scene.cameraDistance ?? DEFAULT_CAMERA_DISTANCE
+  let count = 0
+  placeSceneLabels(scene, viewport).labels.forEach((l, i) => {
+    const wrapPx = wrapPxOf(textObjects[i].object, viewport, camera)
+    if (wrapPx !== undefined && Math.abs(l.x - l.anchorX) > Math.max(24, 0.3 * wrapPx)) count++
+  })
+  return count
+}
+
+/**
  * The shortest stage height at which this figure reads at this width.
  *
  * Width is fixed by the lesson column, but HEIGHT is not: a phone's stage is a
@@ -810,7 +827,7 @@ export function stageHeightToFit(
   const violationsAt = (h: number): number => {
     const viewport = viewportFromCanvas(hostWidth, h, browserWidth)
     const framed = { ...scene, cameraDistance: cameraDistanceToContainFigure(scene, viewport) }
-    return checkSceneLayout(framed, viewport).violations.length + captionsOnSpheres(framed, viewport)
+    return checkSceneLayout(framed, viewport).violations.length + captionsOnSpheres(framed, viewport) + captionsOutOfColumn(framed, viewport)
   }
   const atBase = violationsAt(baseHeight)
   if (atBase === 0) return baseHeight

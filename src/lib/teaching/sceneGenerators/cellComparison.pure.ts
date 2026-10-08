@@ -57,9 +57,6 @@ const ITEM_PITCH = ITEM_SPACING * 1.6
 const GRID_FROM_GROUPS_BIO = 3
 const GRID_FROM_GROUPS_LEGACY = 5
 const GRID_COLUMN_SPACING = 6.5
-// Room for the second row's header caption (it sits above its sphere) between the
-// last caption of the row above and the sphere below it.
-const GRID_ROW_GAP_BIO = 3.4
 const GRID_ROW_GAP_LEGACY = 1.8
 const GRID_CAMERA_DISTANCE = 20
 
@@ -73,6 +70,44 @@ const WRAP_THREE_COLUMNS = 0.28
 
 function columnsFor(groupCount: number, gridFrom: number): number {
   return groupCount < gridFrom ? groupCount : Math.ceil(groupCount / 2)
+}
+
+// ── Biology: item spacing follows the caption, not a fixed pitch ───────────────────────────────────────────────
+// Items used to sit a fixed 1.76 units apart however many lines their wrapped caption needed, so in a grid (three or
+// more groups) a three-line caption ran into the next item and the next ROW's header (measured at 390px). A
+// caption's height is estimated from its length and the width it may wrap to (greedy word wrap, ~3.2 characters
+// per scene unit of width, one line ≈ 0.68 units), and the next item starts below it. The estimate is deliberately a
+// little generous: a figure with spare room is better than one with captions on top of each other.
+const CHARS_PER_UNIT = 3.2
+const LINE_UNITS = 0.68
+const SLOT_PAD = 0.62
+/** Two-column grids (three or four groups) are spaced wider: their captions wrap to a column of this pitch. */
+const GRID_TWO_COLUMN_SPACING = 10
+/** Clearance for the next row's header caption, which sits above its sphere. */
+const HEADER_CLEAR = 1.7
+
+function estimateLines(text: string, charsPerLine: number): number {
+  let lines = 1
+  let width = 0
+  for (const word of text.split(/\s+/)) {
+    if (width === 0) width = word.length
+    else if (width + 1 + word.length <= charsPerLine) width += 1 + word.length
+    else { lines++; width = word.length }
+  }
+  return lines
+}
+
+/** Centre offsets (below the header) of each item's caption, and the bottom of the last one. */
+function itemCenters(items: readonly string[], wrapUnits: number): { centers: number[]; bottom: number } {
+  const charsPerLine = Math.max(8, Math.floor(wrapUnits * CHARS_PER_UNIT))
+  const slots = items.map((t) => Math.max(ITEM_PITCH, estimateLines(t, charsPerLine) * LINE_UNITS + SLOT_PAD))
+  const centers: number[] = []
+  let c = ITEM_PITCH
+  slots.forEach((slot, k) => {
+    if (k > 0) c += (slots[k - 1] + slot) / 2
+    centers.push(round(c))
+  })
+  return { centers, bottom: slots.length ? c + slots[slots.length - 1] / 2 : 0 }
 }
 
 interface GroupPlace { x: number; headerY: number }
@@ -96,16 +131,40 @@ function placeGroups(groups: readonly ComparisonGroup[], gridFrom: number, rowGa
   })
 }
 
+/** Biology: the same placement, with each row as tall as its tallest group's wrapped captions need. */
+function placeGroupsBio(groups: readonly ComparisonGroup[], layouts: readonly { bottom: number }[]): GroupPlace[] {
+  if (groups.length < GRID_FROM_GROUPS_BIO) {
+    const offset = ((groups.length - 1) * GROUP_SPACING) / 2
+    return groups.map((_, gi) => ({ x: round(gi * GROUP_SPACING - offset), headerY: 2.5 }))
+  }
+  const columns = Math.ceil(groups.length / 2)
+  const pitch = columns <= 2 ? GRID_TWO_COLUMN_SPACING : GRID_COLUMN_SPACING
+  const rows = Math.ceil(groups.length / columns)
+  const rowHeights = Array.from({ length: rows }, (_, r) =>
+    Math.max(...groups.slice(r * columns, (r + 1) * columns).map((_, k) => layouts[r * columns + k].bottom)) + HEADER_CLEAR + 0.8)
+  const total = rowHeights.reduce((a, b) => a + b, 0)
+  let y = total / 2
+  const rowTop = rowHeights.map((h) => { const t = y; y -= h; return t })
+  return groups.map((_, gi) => {
+    const row = Math.floor(gi / columns)
+    const col = gi % columns
+    const inRow = Math.min(columns, groups.length - row * columns)
+    return { x: round(col * pitch - ((inRow - 1) * pitch) / 2), headerY: round(rowTop[row]) }
+  })
+}
+
 export function buildCellComparisonScene(params: CellComparisonParams): SceneSpec {
   const { conceptId, title, teachingGoal, groups } = params
   const bio = isBiologyScene(conceptId)
   const gridFrom = bio ? GRID_FROM_GROUPS_BIO : GRID_FROM_GROUPS_LEGACY
-  const places = placeGroups(groups, gridFrom, bio ? GRID_ROW_GAP_BIO : GRID_ROW_GAP_LEGACY)
+  const columnPitch = groups.length < gridFrom ? GROUP_SPACING : (columnsFor(groups.length, gridFrom) <= 2 ? GRID_TWO_COLUMN_SPACING : GRID_COLUMN_SPACING)
+  const wrapUnits = round(columnPitch - 0.8)
+  const layouts = groups.map((g) => itemCenters(g.items, wrapUnits))
+  const places = bio ? placeGroupsBio(groups, layouts) : placeGroups(groups, gridFrom, GRID_ROW_GAP_LEGACY)
   // Biology captions wrap to their column: a share of the canvas AND the column pitch. A share of the canvas alone
   // let desktop captions run wider than the pitch, and the next column's captions interleaved with them.
   const wrapFraction = columnsFor(groups.length, gridFrom) <= 2 ? WRAP_TWO_COLUMNS : WRAP_THREE_COLUMNS
-  const columnPitch = groups.length < gridFrom ? GROUP_SPACING : GRID_COLUMN_SPACING
-  const captionWrap = { labelWrapFraction: wrapFraction, labelWrapUnits: round(columnPitch - 0.8) }
+  const captionWrap = { labelWrapFraction: wrapFraction, labelWrapUnits: wrapUnits }
 
   const steps: SceneStep[] = groups.map((group, gi) => {
     const { x, headerY } = places[gi]
@@ -121,7 +180,7 @@ export function buildCellComparisonScene(params: CellComparisonParams): SceneSpe
       objects.push({ type: 'path', id: `group-${gi}-stub`, points: [headerPos, [x, round(headerY - GROUP_RADIUS - 0.45), 0] as Vec3], color: ITEM_COLOR })
     }
     group.items.forEach((item, ii) => {
-      const pos: Vec3 = [x, round(headerY - (ii + 1) * ITEM_PITCH), 0]
+      const pos: Vec3 = [x, round(headerY - (bio ? layouts[gi].centers[ii] : (ii + 1) * ITEM_PITCH)), 0]
       objects.push({ type: 'label', id: `group-${gi}-item-${ii}`, position: pos, text: item, color: ITEM_COLOR, ...(bio ? { properties: captionWrap } : {}) })
       if (!bio) objects.push({ type: 'path', id: `group-${gi}-line-${ii}`, points: [headerPos, pos], color: ITEM_COLOR })
     })

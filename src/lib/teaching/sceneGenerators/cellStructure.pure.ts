@@ -56,6 +56,9 @@ const PART_RING_RADIUS = 2.8
 // Part captions wrap to roughly the ring's own width, so a long name stays inside
 // the boundary instead of running over it.
 const WRAP_FRACTION = 0.3
+// …and no wider than the ring's interior at the height the caption sits: a caption longer than the chord ran across the
+// boundary line (measured on desktop, where a share of the canvas is wider than the ring).
+const WRAP_UNITS = 5.4
 const BOUNDARY_COLOR = '#9AA5B8'
 const PART_COLOR = '#4C8DFF'
 const PART_RADIUS = 0.75
@@ -73,7 +76,7 @@ export function buildCellStructureScene(params: CellStructureParams): SceneSpec 
   const boundaryStep: SceneStep = {
     narration: boundaryNarration ?? `${subject}: the ${boundaryLabel.toLowerCase()} marks the outer boundary.`,
     objects: [
-      { type: 'path', id: 'boundary', points: ring, color: BOUNDARY_COLOR, thickness: 0.07, radius: 0.04, text: boundaryLabel, properties: { labelOffset: [0, 0.55, 0], labelWrapFraction: WRAP_FRACTION } },
+      { type: 'path', id: 'boundary', points: ring, color: BOUNDARY_COLOR, thickness: 0.07, radius: 0.04, text: boundaryLabel, properties: { labelOffset: [0, 0.55, 0], labelWrapFraction: WRAP_FRACTION, labelWrapUnits: WRAP_UNITS } },
     ],
   }
 
@@ -83,7 +86,7 @@ export function buildCellStructureScene(params: CellStructureParams): SceneSpec 
     const objects: SceneObject[] = [
       // The caption goes on the outward side of its part, so it is painted
       // against the figure's surface rather than on the sphere it names.
-      { type: 'node', id: `part-${i}`, position, radius: PART_RADIUS, color: PART_COLOR, text: part.name, properties: { ...captionBeside(PART_RADIUS, position[1] >= 0 ? 'above' : 'below'), labelWrapFraction: WRAP_FRACTION } },
+      { type: 'node', id: `part-${i}`, position, radius: PART_RADIUS, color: PART_COLOR, text: part.name, properties: { ...captionBeside(PART_RADIUS, position[1] >= 0 ? 'above' : 'below'), labelWrapFraction: WRAP_FRACTION, labelWrapUnits: WRAP_UNITS } },
       { type: 'path', id: `spoke-${i}`, points: [[0, 0, 0] as Vec3, position], color: BOUNDARY_COLOR },
     ]
     return { narration: `${part.name}: ${part.description}`, objects }

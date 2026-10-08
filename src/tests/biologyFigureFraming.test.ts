@@ -190,7 +190,7 @@ describe('captions sit beside their sphere, not on it', () => {
     const two = buildCellComparisonScene({ conceptId: 'bio.t', title: 'T', teachingGoal: 'g', groups: groups(2) })
     expect(labelOf(two).properties).toMatchObject({ labelWrapFraction: 0.42, labelWrapUnits: 4.7 })
     const four = buildCellComparisonScene({ conceptId: 'bio.t', title: 'T', teachingGoal: 'g', groups: groups(4) })
-    expect(labelOf(four).properties).toMatchObject({ labelWrapFraction: 0.42, labelWrapUnits: 5.7 }) // two columns, 6.5 apart
+    expect(labelOf(four).properties).toMatchObject({ labelWrapFraction: 0.42, labelWrapUnits: 9.2 }) // two columns, 10 apart
     const six = buildCellComparisonScene({ conceptId: 'bio.t', title: 'T', teachingGoal: 'g', groups: groups(6) })
     expect(labelOf(six).properties).toMatchObject({ labelWrapFraction: 0.28, labelWrapUnits: 5.7 }) // three columns
   })
