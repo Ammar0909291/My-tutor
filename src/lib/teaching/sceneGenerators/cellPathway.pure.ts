@@ -23,7 +23,7 @@
  */
 
 import type { SceneObject, SceneSpec, SceneStep, Vec3 } from '../sceneSpec'
-import { round } from './shared'
+import { captionBeside, round } from './shared'
 
 export interface PathwayStage {
   name: string
@@ -48,8 +48,13 @@ const NODE_COLOR = '#4C8DFF'
 const ARROW_COLOR = '#9AA5B8'
 const SPACING = 4.5
 
+const NODE_RADIUS = 0.8
+
+// A stage's name is painted above its sphere (below it for a stage drawn in the
+// lower half), against the figure's surface — not in the sphere's own colour on
+// the sphere, which MEASURED 2.7–4.5 : 1 in Chromium.
 function node(id: string, position: Vec3, text: string): SceneObject {
-  return { type: 'node', id, position, radius: 0.8, color: NODE_COLOR, text }
+  return { type: 'node', id, position, radius: NODE_RADIUS, color: NODE_COLOR, text, properties: captionBeside(NODE_RADIUS, position[1] < 0 ? 'below' : 'above') }
 }
 function arrow(id: string, from: Vec3, to: Vec3): SceneObject {
   return { type: 'arrow', id, from, to, color: ARROW_COLOR, thickness: 0.05 }

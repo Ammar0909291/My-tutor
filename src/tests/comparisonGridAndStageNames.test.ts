@@ -73,17 +73,29 @@ describe('a pathway step names the stage it describes', () => {
   })
 })
 
-describe('comparisons of five or more groups use two rows', () => {
+describe('comparisons of three or more groups use two rows', () => {
   const group = (i: number): ComparisonGroup => ({ label: `G${i}`, description: 'd', items: [`Item ${i}`] })
   const build = (n: number) => buildCellComparisonScene({
     conceptId: 'test.grid', title: 'T', teachingGoal: 'g', groups: Array.from({ length: n }, (_, i) => group(i)),
   })
 
-  it('four groups: one row, 5.5 apart, headers at y = 2.5 (unchanged)', () => {
-    const h = headers(build(4))
-    expect(h.map((p) => p[1])).toEqual([2.5, 2.5, 2.5, 2.5])
-    expect(h.map((p) => p[0])).toEqual([-8.25, -2.75, 2.75, 8.25])
-    expect(build(4).cameraDistance).toBe(18)
+  it('one or two groups: one row, 5.5 apart, headers at y = 2.5 (unchanged)', () => {
+    const h = headers(build(2))
+    expect(h.map((p) => p[1])).toEqual([2.5, 2.5])
+    expect(h.map((p) => p[0])).toEqual([-2.75, 2.75])
+    expect(build(2).cameraDistance).toBe(18)
+  })
+
+  // 2026-10-08 (Biology visual render audit): three and four groups used to sit in ONE row. A row of
+  // three or four columns cannot hold their captions at phone width (each column gets a quarter of a
+  // 358px canvas), so they now use the same two-row grid as five and six, with at most two columns
+  // for three or four groups so each caption can wrap to about 40% of the canvas.
+  it.each([3, 4])('%i groups: two rows of at most two columns', (n) => {
+    const h = headers(build(n))
+    const rows = [...new Set(h.map((p) => p[1]))]
+    expect(rows).toHaveLength(2)
+    for (const y of rows) expect(h.filter((p) => p[1] === y).length).toBeLessThanOrEqual(2)
+    expect(h[0][1]).toBeGreaterThan(h[n - 1][1])
   })
 
   it.each([5, 6])('%i groups: two rows of at most three columns, inside |x| <= 6.5', (n) => {

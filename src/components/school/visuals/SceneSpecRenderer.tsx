@@ -18,7 +18,7 @@ import { Vector3D } from './Vector3D'
 import { MolecularNode3D } from './MolecularNode3D'
 import { SceneLabelLayer, type LayerLabel } from './SceneLabelLayer'
 import { pathSegments, visibleObjects, type SceneObject, type SceneSpec } from '@/lib/teaching/sceneSpec'
-import { sceneTextObjects } from '@/lib/teaching/visual/layout'
+import { sceneTextObjects, wrapFractionOf } from '@/lib/teaching/visual/layout'
 import { dimColor, themeColor } from '@/lib/teaching/sceneGenerators/visualDesign'
 import { emphasisOf } from '@/lib/teaching/visual/sceneStage'
 import { SceneStageDecor } from './SceneStageDecor'
@@ -175,6 +175,7 @@ function PlacedLabels({
         // `size` is a typographic tier ONLY on label objects; elsewhere it is
         // an extent, so it must not drive typography.
         tier: object.type === 'label' ? object.size : undefined,
+        wrapFraction: wrapFractionOf(object),
       })),
       // Every object is something to stay clear of, including the ones that
       // carry text — the layer strips that text so nothing is counted twice.

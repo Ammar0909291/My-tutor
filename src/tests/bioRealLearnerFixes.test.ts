@@ -115,7 +115,11 @@ describe('BIO-022 pipe tables (CHEM-065 rewrite)', () => {
 })
 
 describe('BIO-017 ecology lessons get their own figure, not the generic food chain', () => {
-  for (const id of ['bio.eco.applied-ecology-ecosystem-services', 'bio.eco.biogeochemistry-advanced', 'bio.eco.landscape-conservation-ecology', 'bio.eco.microbial-ecology', 'bio.eco.population-growth-models-quantitative', 'bio.eco.predator-prey-dynamics']) {
+  // 2026-10-08: the seven bio.eco concepts below were served the same generic food-chain card by the 'bio.eco'
+  // domain default (organism-environment, population-ecology, nutrient-cycling, biodiversity-conservation,
+  // environmental-issues, community-ecology, global-change-biology); a concept-authored scene outranks it.
+  for (const id of ['bio.eco.applied-ecology-ecosystem-services', 'bio.eco.biogeochemistry-advanced', 'bio.eco.landscape-conservation-ecology', 'bio.eco.microbial-ecology', 'bio.eco.population-growth-models-quantitative', 'bio.eco.predator-prey-dynamics',
+    'bio.eco.organism-environment', 'bio.eco.population-ecology', 'bio.eco.nutrient-cycling', 'bio.eco.biodiversity-conservation', 'bio.eco.environmental-issues', 'bio.eco.community-ecology', 'bio.eco.global-change-biology']) {
     it(id, () => {
       expect(CONCEPT_SCENE_OVERRIDES).toContain(id)
       const spec = buildCanonicalScene(null, id)

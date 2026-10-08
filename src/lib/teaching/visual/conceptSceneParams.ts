@@ -892,6 +892,97 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     ],
   }),
 
+  // 2026-10-08 Biology visual render audit: seven bio.eco concepts were served the
+  // GENERIC food-chain CARD (the 'bio.eco' domain default). A food chain shows who
+  // eats whom; none of these concepts is a feeding relationship — habitat/niche,
+  // growth curves, cycling matter, levels of biodiversity, distinct environmental
+  // mechanisms, community interactions, climate responses. A concept-authored scene
+  // outranks the domain card, so each is replaced here, grounded strictly in the
+  // concept's own Educational Brain "Core Understanding".
+  'bio.eco.organism-environment': () => buildCellComparisonScene({
+    conceptId: 'bio.eco.organism-environment',
+    title: 'Habitat, Niche, and How Organisms Respond to Their Environment',
+    teachingGoal: 'Habitat is a place and niche is a role; environmental factors are abiotic or biotic; and an organism responds to its environment either by heritable adaptation over generations or by reversible acclimatisation within one lifetime.',
+    groups: [
+      { label: 'Habitat', description: 'the physical PLACE an organism lives, its address', items: ['Two species can share a habitat, such as one pond'] },
+      { label: 'Niche', description: 'the functional ROLE in that place, like a profession rather than a location', items: ['What it eats, when it is active, how it interacts', 'Two species cannot indefinitely share the exact same niche'] },
+      { label: 'Abiotic factors', description: 'non-living factors in the environment', items: ['Temperature, light, water', 'Soil chemistry, pH'] },
+      { label: 'Biotic factors', description: 'living factors in the environment', items: ['Food sources, predators', 'Competitors, parasites, mutualists'] },
+      { label: 'Adaptation', description: 'a heritable, genetically encoded trait shaped by natural selection over many generations', items: ['E.g. a cactus’s spines and water-storing stem'] },
+      { label: 'Acclimatisation', description: 'a reversible adjustment within one individual’s lifetime, with no genetic change and no transmission to offspring', items: ['E.g. more red blood cells at high altitude'] },
+    ],
+  }),
+  'bio.eco.population-ecology': () => buildCellComparisonScene({
+    conceptId: 'bio.eco.population-ecology',
+    title: 'Population Growth and Species Interactions',
+    teachingGoal: 'A population is described by measurable attributes and grows exponentially only without limits; in reality density-dependent factors level it off at the carrying capacity, and different species interact in classifiable ways.',
+    groups: [
+      { label: 'Exponential growth', description: 'a J-shaped curve, doubling at a fixed rate, only under idealised unlimited resources', items: ['Fixed doubling rate'] },
+      { label: 'Logistic growth', description: 'an S-shaped curve: density-dependent factors progressively slow growth', items: ['Limiting food, disease in crowds, predators, competition', 'Levels off at the carrying capacity K', 'K changes when environmental conditions change'] },
+      { label: 'Population attributes', description: 'measurable features of all the individuals of one species in an area', items: ['Density, birth rate, death rate', 'Age structure, sex ratio'] },
+      { label: 'Species interactions', description: 'characteristic, classifiable ways populations affect each other', items: ['Competition: both harmed', 'Predation: predator gains, prey harmed', 'Parasitism: parasite gains, host harmed', 'Mutualism: both benefit', 'Commensalism: one benefits, one unaffected'] },
+    ],
+  }),
+  'bio.eco.nutrient-cycling': () => buildCellPathwayScene({
+    conceptId: 'bio.eco.nutrient-cycling',
+    title: 'The Nitrogen Cycle: Matter Cycles, Energy Does Not',
+    teachingGoal: 'The same nitrogen atoms cycle between air, soil, water and living things indefinitely, with different bacteria doing the key conversions; energy, by contrast, flows one way and is lost as heat.',
+    cyclic: true,
+    stages: [
+      { name: 'Nitrogen fixation', description: 'bacteria, free-living in soil and in legume root nodules, convert atmospheric N2 into ammonia (NH3), the first usable form' },
+      { name: 'Nitrification', description: 'nitrifying bacteria convert ammonia into nitrites and then nitrates, the form most plants absorb' },
+      { name: 'Plant uptake', description: 'plants absorb nitrates through their roots; animals get nitrogen by eating plants or other animals' },
+      { name: 'Decomposition', description: 'decomposers return nitrogen compounds to the soil when organisms die and are broken down' },
+      { name: 'Denitrification', description: 'denitrifying bacteria convert soil nitrogen compounds back into N2 gas, completing the cycle' },
+    ],
+  }),
+  'bio.eco.biodiversity-conservation': () => buildCellHubScene({
+    conceptId: 'bio.eco.biodiversity-conservation',
+    hubLabel: 'Biodiversity',
+    title: 'Biodiversity: Levels, Threats and Protection',
+    teachingGoal: 'Biodiversity is the variety of life at three levels; it is threatened today at a rate far above the natural background rate, mainly by human activity; and it is protected both in and outside its natural habitat.',
+    spokes: [
+      { name: 'Genetic diversity', description: 'variation among individuals within a single species' },
+      { name: 'Species diversity', description: 'the number and relative abundance of different species in an area' },
+      { name: 'Ecosystem diversity', description: 'the variety of distinct habitat types and ecological communities across a landscape' },
+      { name: 'Threats (HIPCO)', description: 'Habitat loss, Invasive species, Pollution, Climate change and Overexploitation drive extinction at about 100 to 1,000 times the natural background rate' },
+      { name: 'In-situ conservation', description: 'protecting species within their natural habitat, such as protected areas and national parks, preserving their ecological context' },
+      { name: 'Ex-situ conservation', description: 'protecting species outside their natural habitat, such as zoos, botanical gardens and seed banks: a safeguard, not a substitute for wild populations' },
+    ],
+  }),
+  'bio.eco.environmental-issues': () => buildCellComparisonScene({
+    conceptId: 'bio.eco.environmental-issues',
+    title: 'Environmental Issues: Different Causes, Different Mechanisms',
+    teachingGoal: 'Climate change, ozone depletion, eutrophication and deforestation are often conflated but operate through distinct causal mechanisms, so each must be understood on its own terms.',
+    groups: [
+      { label: 'Climate change', description: 'burning fossil fuels raises atmospheric CO2, which enhances the greenhouse effect', items: ['Infrared radiation trapped in the lower atmosphere: warming', 'Altered rainfall, sea level, timing of breeding and migration'] },
+      { label: 'Ozone depletion', description: 'a separate mechanism: CFCs destroy ozone in the stratosphere', items: ['More UV reaches the surface: DNA damage, skin cancer, cataracts', 'Montreal Protocol (1989) phased out CFCs; ozone is recovering'] },
+      { label: 'Eutrophication', description: 'excess nitrogen and phosphorus, often from agricultural runoff, enter a body of water', items: ['Explosive algal bloom', 'Decomposers of the dead algae use up dissolved oxygen', 'Hypoxic dead zones: most aquatic animals cannot survive'] },
+      { label: 'Deforestation', description: 'one cause with several simultaneous consequences', items: ['Wildlife habitat destroyed: biodiversity loss', 'Carbon sink removed and stored carbon released', 'Water cycles disrupted; more soil erosion'] },
+    ],
+  }),
+  'bio.eco.community-ecology': () => buildCellComparisonScene({
+    conceptId: 'bio.eco.community-ecology',
+    title: 'Community Ecology: Interactions, Keystones, Disturbance, Succession',
+    teachingGoal: 'Species interactions are classified by their effect on each partner; keystone species and moderate disturbance have counter-intuitive effects on diversity; and communities change over time through succession.',
+    groups: [
+      { label: 'Species interactions', description: 'classified by the effect on each participant', items: ['Competition: both harmed (−/−)', 'Predation or parasitism: one harmed, one helped (−/+)', 'Mutualism: both helped (+/+)', 'Commensalism: one helped, one unaffected (+/0)', 'Amensalism: one harmed, one unaffected (−/0)'] },
+      { label: 'Keystone species', description: 'an effect far out of proportion to its abundance; removing one can trigger a trophic cascade', items: ['Yellowstone wolves: elk controlled, riparian plants recover, biodiversity rises'] },
+      { label: 'Intermediate disturbance', description: 'species diversity peaks at moderate disturbance, not at the lowest level', items: ['Too little: the strongest competitor excludes the others', 'Too much: species are eliminated outright', 'Moderate: exclusion never completes, so diversity is highest'] },
+      { label: 'Succession', description: 'communities change over time', items: ['Pioneer species colonise bare substrate (primary succession)', 'A sequence of seral stages', 'A climax community'] },
+    ],
+  }),
+  'bio.eco.global-change-biology': () => buildCellComparisonScene({
+    conceptId: 'bio.eco.global-change-biology',
+    title: 'Global Change: Distinct Biological Responses',
+    teachingGoal: 'Phenological shifts and range shifts are separate responses to climate change; ocean acidification harms calcifiers by one specific chemical mechanism; and biotic homogenisation is a loss of regional distinctiveness.',
+    groups: [
+      { label: 'Phenological shift', description: 'a change in the TIMING of recurring life-cycle events', items: ['Flowering date, migration timing, breeding onset', 'Typically the same geographic location'] },
+      { label: 'Range shift', description: 'a change in GEOGRAPHIC distribution', items: ['Poleward or upslope as suitable climate moves', 'Spatial relocation, not rescheduling', 'Can occur independently of, or together with, a phenological shift'] },
+      { label: 'Ocean acidification', description: 'a specific carbonate-chemistry effect, not generic pollution damage', items: ['More CO2 dissolves, forming carbonic acid: lower pH', 'Fewer carbonate ions in seawater', 'Shells and skeletons harder and costlier to build; they can dissolve'] },
+      { label: 'Biotic homogenisation', description: 'different regional communities become progressively more similar', items: ['Restricted native species replaced by generalist and invasive ones', 'Regional distinctiveness is lost even if local species counts stay similar'] },
+    ],
+  }),
   // BIO-017 (2026-10-05, biology real-learner run #121, #123–#126): these five
   // lessons got only the 'bio.eco' domain default — an untitled food chain —
   // and the tutor forced the sulfur cycle, habitat corridors, microbes, growth
@@ -917,10 +1008,9 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     teachingGoal: 'Sulfur moves between atmospheric, oceanic and land reservoirs and living things by the same logic as the carbon, nitrogen and phosphorus cycles, with microbes doing much of the work.',
     cyclic: true,
     stages: [
-      { name: 'Release', description: 'volcanoes and rocks release sulfur into air, water and soil' },
-      { name: 'Sulfate in soil and sea', description: 'the abiotic reservoir plants draw on' },
+      { name: 'Abiotic reservoirs', description: 'sulfur in the air, sea and soil (for example sulfate), topped up by volcanic and geological release' },
       { name: 'Into living things', description: 'built into biological molecules such as certain amino acids' },
-      { name: 'Microbes transform it', description: 'specific microorganisms reduce and oxidise sulfur compounds' },
+      { name: 'Microbial transformation', description: 'specific microorganisms reduce and oxidise sulfur compounds (sulfate reduction and oxidation), moving sulfur between living things and the abiotic reservoirs' },
     ],
   }),
   'bio.eco.landscape-conservation-ecology': () => buildCellComparisonScene({
@@ -963,7 +1053,7 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     groups: [
       { label: 'Prey equation', description: 'its growth rate depends on the predators too', items: ['rises with its own reproduction', 'falls with predation, which grows with predator numbers'] },
       { label: 'Predator equation', description: 'its growth rate depends on the prey too', items: ['rises with prey available to eat', 'falls with its own natural mortality'] },
-      { label: 'Predation rate', description: 'two distinct parts', items: ['functional response: prey killed per predator as prey density changes', 'numerical response: how predator numbers change'] },
+      { label: 'Predation rate', description: 'two distinct parts: individual predator behaviour versus change in the predator population, over a longer timescale', items: ['functional response: prey killed per individual predator as prey density changes', 'numerical response: how predator numbers change in response to prey availability'] },
     ],
   }),
 
@@ -1041,7 +1131,8 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   // timeline (Schleiden & Schwann, then Virchow).
   'bio.cell.cell-theory': () => buildTimelineScene({
     events: [
-      { year: 1838, event: 'Schleiden and Schwann: all living things are made of one or more cells' },
+      { year: 1838, event: 'Schleiden: plants are built from cells' },
+      { year: 1839, event: 'Schwann: extended it to animals' },
       { year: 1855, event: 'Virchow: cells arise only from pre-existing cells' },
     ],
   }),
@@ -1071,9 +1162,9 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     title: 'Eukaryotic Cell Structure',
     teachingGoal: 'Contrast plant and animal cells while recognising the compartmentalised organelles they share.',
     groups: [
-      { label: 'Shared by both', description: 'both cell types compartmentalise their functions into membrane-bound organelles', items: ['Plasma membrane', 'Membrane-bound nucleus', 'Cytoplasm with organelles'] },
-      { label: 'Plant cell only', description: 'plant cells add structures animal cells lack', items: ['Cell wall', 'Chloroplast', 'Large central vacuole'] },
-      { label: 'Animal cell only', description: 'animal cells lack a wall, chloroplast, or large vacuole', items: ['No cell wall', 'No chloroplast', 'Small/no vacuole'] },
+      { label: 'Shared by both', description: 'both cell types compartmentalise their functions into membrane-bound organelles', items: ['Plasma membrane', 'Membrane-bound nucleus', 'Mitochondria', 'Endoplasmic reticulum', 'Golgi apparatus', 'Ribosomes'] },
+      { label: 'Plant cell (additionally)', description: 'plant cells add a cellulose cell wall, chloroplasts and a large central vacuole — but not every plant cell has every one: a root cell, never exposed to light, lacks chloroplasts', items: ['Cellulose cell wall', 'Chloroplasts (absent from root cells)', 'Large central vacuole'] },
+      { label: 'Animal cell (additionally)', description: 'animal cells add centrioles and lysosomes', items: ['Centrioles', 'Lysosomes'] },
     ],
   }),
 
@@ -1092,13 +1183,13 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     conceptId: 'bio.cell.nucleus-chromosomes',
     subject: 'Nucleus and Chromosomes',
     boundaryLabel: 'Nuclear envelope',
-    teachingGoal: 'Locate the nucleolus and chromatin inside the nucleus, and name the parts of a chromosome.',
+    boundaryNarration: 'Nucleus and Chromosomes: the nuclear envelope, a double membrane, bounds the nucleus.',
+    teachingGoal: 'Locate the nuclear pores, nucleolus and chromatin inside the nucleus, and see that chromosomes are chromatin condensed for cell division.',
     parts: [
-      { name: 'Nucleolus', description: 'a dense region inside the nucleus where ribosomes are assembled' },
-      { name: 'Chromatin', description: 'the loosely packed form of DNA and protein filling the nucleus' },
-      { name: 'Centromere', description: 'the constriction point joining sister chromatids of a condensed chromosome' },
-      { name: 'Telomere', description: 'the protective cap at each end of a chromosome' },
-      { name: 'Sister chromatids', description: 'the two identical copies of a replicated chromosome' },
+      { name: 'Nuclear pores', description: 'regulate molecular traffic across the envelope (mRNA out, proteins in)' },
+      { name: 'Nucleolus', description: 'the site of rRNA synthesis and ribosome subunit assembly' },
+      { name: 'Chromatin', description: "genomic DNA wrapped around histone proteins, loosely packed and transcriptionally accessible for most of the cell's life" },
+      { name: 'Chromosomes', description: 'when the cell prepares to divide, chromatin condenses into countable chromosomes — one chromatid before S-phase replication, two identical sister chromatids joined at a centromere after it; telomeres at the ends protect against end-degradation' },
     ],
   }),
 
@@ -1132,13 +1223,15 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'bio.cell.endomembrane-system': () => buildCellPathwayScene({
     conceptId: 'bio.cell.endomembrane-system',
     title: 'Endomembrane System',
-    teachingGoal: 'Trace a protein from synthesis through modification, packaging and secretion.',
+    teachingGoal: 'Trace a secretory-pathway protein from the rough ER, via a transport vesicle, through the Golgi apparatus to its destination.',
     stages: [
-      { name: 'Rough ER', description: 'ribosomes on the rough endoplasmic reticulum synthesise the protein' },
-      { name: 'Smooth ER', description: 'the smooth endoplasmic reticulum synthesises lipids and processes the protein further' },
-      { name: 'Golgi apparatus', description: 'modifies, sorts and packages the protein into vesicles' },
-      { name: 'Vesicle', description: 'buds off from the Golgi, carrying its cargo to its destination' },
-      { name: 'Lysosome / secretion', description: 'the vesicle becomes a lysosome or fuses with the plasma membrane to secrete its contents' },
+      { name: 'Rough ER', description: 'ribosomes directed here by a signal sequence make secretory, membrane and lysosomal proteins into the ER lumen; cytoplasmic proteins are made on free ribosomes and never enter this system' },
+      { name: 'Transport vesicle', description: 'buds off the ER and carries its cargo to the Golgi apparatus' },
+      { name: 'Golgi apparatus', description: 'receives the cargo, modifies it (glycosylation), sorts it and dispatches it to its final destination' },
+    ],
+    branchEnd: [
+      { name: 'Lysosome', description: 'acid hydrolases carry out intracellular digestion of the material delivered to it' },
+      { name: 'Plasma membrane / secretion', description: 'the cargo reaches the cell surface or is secreted outside the cell' },
     ],
   }),
 
@@ -1214,11 +1307,11 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'bio.cell.anaerobic-respiration-fermentation': () => buildCellComparisonScene({
     conceptId: 'bio.cell.anaerobic-respiration-fermentation',
     title: 'Anaerobic Respiration and Fermentation',
-    teachingGoal: 'Contrast the ATP yield and products of aerobic and anaerobic pathways when oxygen is limiting.',
+    teachingGoal: 'Fermentation makes no extra ATP: its function is to regenerate NAD+ so glycolysis can keep running when oxygen is limiting.',
     groups: [
-      { label: 'Aerobic respiration', description: 'oxygen present, high ATP yield', items: ['Full breakdown of glucose', 'High ATP yield'] },
-      { label: 'Lactic acid fermentation', description: 'oxygen limited, occurs in animal muscle and lactic acid bacteria', items: ['Glucose -> lactic acid', 'Low ATP yield'] },
-      { label: 'Alcoholic fermentation', description: 'oxygen absent, occurs in yeast', items: ['Glucose -> ethanol + CO2', 'Low ATP yield'] },
+      { label: 'Aerobic respiration', description: 'oxygen present: it is the final electron acceptor of oxidative phosphorylation', items: ['Full breakdown of glucose', 'About 30-32 ATP per glucose'] },
+      { label: 'Lactic acid fermentation', description: 'oxygen limited, occurs in animal muscle during intense exercise and in lactic acid bacteria; it regenerates NAD+ so glycolysis can continue', items: ['Pyruvate -> lactic acid (one step)', 'Purpose: regenerate NAD+', 'No ATP beyond glycolysis (2 per glucose)'] },
+      { label: 'Alcoholic fermentation', description: 'oxygen absent, occurs in yeast and some other microorganisms; it regenerates NAD+ so glycolysis can continue', items: ['Pyruvate -> ethanol + CO2 (two steps)', 'Purpose: regenerate NAD+', 'No ATP beyond glycolysis (2 per glucose)'] },
     ],
   }),
 
@@ -1244,27 +1337,26 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   // Loss of adhesion (EMT) is one shared event that leads to two different
   // outcomes depending on context — a branching END, the mirror image of
   // apoptosis's branching START above.
-  'bio.cell.cell-adhesion-tissue-organization': () => buildCellPathwayScene({
+  'bio.cell.cell-adhesion-tissue-organization': () => buildCellComparisonScene({
     conceptId: 'bio.cell.cell-adhesion-tissue-organization',
     title: 'Cell Adhesion and Tissue Organisation',
-    teachingGoal: 'Trace how the same loss of cell adhesion underlies both normal development and pathological invasion.',
-    stages: [
-      { name: 'Adhesion molecules', description: 'cadherins, selectins and integrins hold cells together and to the matrix' },
-      { name: 'Epithelial-mesenchymal transition', description: 'cells reversibly lose adhesion and polarity' },
-    ],
-    branchEnd: [
-      { name: 'Normal development', description: 'the same loss of adhesion drives gastrulation and wound healing.' },
-      { name: 'Pathological invasion', description: 'the same loss of adhesion underlies cancer cells invading nearby tissue.' },
+    teachingGoal: 'Tell the three adhesion families apart by what each one binds, and see that loss of adhesion (EMT) is one mechanism at work in both normal development and cancer.',
+    groups: [
+      { label: 'Cadherins', description: 'cell-to-cell adhesion by homophilic binding: a cadherin binds an identical cadherin on an adjacent cell, typically calcium-dependent, holding cells of the same type together into a tissue', items: ['Binds: an identical cadherin on the next cell', 'Calcium-dependent', 'Holds same-type cells together'] },
+      { label: 'Selectins', description: "transient, weaker adhesion: they bind specific carbohydrate (sugar) structures on an adjacent cell's surface, giving rapid, reversible “catch-and-roll” adhesion", items: ['Binds: specific carbohydrates (sugars)', 'Transient and reversible', 'e.g. white blood cells sticking to vessel walls in inflammation'] },
+      { label: 'Integrins', description: 'cell-to-extracellular-matrix adhesion: they bind matrix proteins such as fibronectin or collagen rather than another cell, anchoring the cell to its structural scaffold', items: ['Binds: matrix proteins (fibronectin, collagen)', 'Anchors a cell to its matrix, not to neighbours'] },
+      { label: 'Loss of adhesion (EMT)', description: 'in epithelial-mesenchymal transition, epithelial cells reversibly lose cell-cell adhesion and polarity and become mobile; the same mechanism serves normal development and, when dysregulated, drives cancer', items: ['Normal: gastrulation', 'Normal: wound healing, then MET restores the sheet', 'Pathological: cancer cells detach, invade, metastasise'] },
     ],
   }),
 
   'bio.cell.cell-junctions-extracellular-matrix': () => buildCellComparisonScene({
     conceptId: 'bio.cell.cell-junctions-extracellular-matrix',
     title: 'Cell Junctions and the Extracellular Matrix',
-    teachingGoal: 'Distinguish the junctions that connect cells from the matrix that surrounds them.',
+    teachingGoal: 'Distinguish the junctions that connect cells from the matrix that surrounds them, and the integrin receptors that link cells to that matrix.',
     groups: [
       { label: 'Cell junctions', description: 'structures connecting adjacent cells', items: ['Tight junctions (seal)', 'Desmosomes (anchor)', 'Gap junctions (communicate)'] },
-      { label: 'Extracellular matrix', description: 'the structural and signalling scaffold outside the cell', items: ['Collagen', 'Proteoglycans', 'Fibronectin', 'Integrin receptors'] },
+      { label: 'Extracellular matrix', description: 'the structural and signalling scaffold outside the cell', items: ['Collagen', 'Proteoglycans', 'Fibronectin'] },
+      { label: 'Cell-matrix link', description: 'transmembrane receptors on the cell that bind matrix components outside and the cytoskeleton inside, and pass signals into the cell', items: ['Integrin receptors'] },
     ],
   }),
 
@@ -1437,10 +1529,11 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     conceptId: 'bio.found.binomial-nomenclature',
     subject: 'Scientific Name Format',
     boundaryLabel: 'Homo sapiens',
+    boundaryNarration: 'Scientific Name Format: the full binomial, Homo sapiens, is the whole name.',
     teachingGoal: 'The genus may be abbreviated after its first use; the species epithet is NEVER used alone — it only identifies anything within its genus.',
     parts: [
       { name: 'Genus: Homo', description: 'capitalised; may be abbreviated to H. after its first full use in a document' },
-      { name: 'species: sapiens', description: 'lowercase; never used alone, and never capitalised' },
+      { name: 'Species epithet: sapiens', description: 'lowercase, never capitalised; never used alone, because it identifies a species only within its genus' },
       { name: 'Whole name italicised', description: 'the entire binomial is italicised (or underlined by hand)' },
     ],
   }),
@@ -1458,10 +1551,10 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
 
   'bio.found.microscopy-basics': () => buildCellComparisonScene({
     conceptId: 'bio.found.microscopy-basics',
-    title: 'Magnification vs. Resolution: Two Independent Properties',
+    title: 'Light vs. Electron Microscopy: Resolution Limits',
     teachingGoal: 'Increasing magnification past the resolution limit only enlarges the existing blur — it reveals no new detail.',
     groups: [
-      { label: 'Light microscope', description: 'limited by the wavelength of visible light', items: ['Resolution ceiling ≈ 200 nm'] },
+      { label: 'Light microscope', description: 'limited by the wavelength of visible light', items: ['Resolution ceiling ≈ 200 nm, however much the image is magnified'] },
       { label: 'Electron microscope', description: 'uses electrons, a much shorter effective wavelength', items: ['Resolution ≈ 0.1 nm — 2000× finer', 'Resolves a membrane or organelle’s internal architecture'] },
     ],
   }),
@@ -1583,6 +1676,7 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
       { label: 'Codominance', description: 'BOTH alleles are fully expressed side by side, not blended', items: ['AB blood type: both A and B antigens present'] },
       { label: 'Multiple alleles', description: 'more than two allelic variants circulate in the population', items: ['ABO blood group: Iᴬ, Iᴮ, i → 4 phenotypes'] },
       { label: 'Epistasis', description: 'one gene’s expression masks a DIFFERENT gene entirely', items: ['Labrador coat colour: ee at the E locus masks the B locus'] },
+      { label: 'Polygenic inheritance', description: 'a trait is controlled by MANY genes acting together, giving continuous, graded variation rather than a few discrete categories', items: ['Human height', 'Skin colour'] },
     ],
   }),
 
@@ -1673,11 +1767,12 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   // Batch 3 (bio.evo, 3 concepts; bio.physio, 8 concepts — bio.plant.plant-
   // respiration confirmed already working via Tier 3 live in the diagnostic
   // sweep, so it is deliberately left unauthored here):
-  'bio.evo.natural-selection': () => buildCellPathwayScene({
+  'bio.evo.natural-selection': () => buildCellHubScene({
     conceptId: 'bio.evo.natural-selection',
-    title: 'Natural Selection: Four Necessary Conditions',
+    hubLabel: 'Natural selection in a population',
+    title: 'Natural Selection: Four Conditions That Must All Hold Together',
     teachingGoal: '"Fitness" means reproductive success in the CURRENT environment specifically — not strength, speed, or any generic superiority.',
-    stages: [
+    spokes: [
       { name: 'Variation', description: 'individuals within the population differ in heritable traits' },
       { name: 'Heredity', description: 'that variation is passed from parents to offspring' },
       { name: 'Differential reproduction', description: 'some heritable variants confer greater survival/reproductive success in the current environment' },
@@ -1697,14 +1792,15 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
 
   'bio.evo.human-evolution': () => buildCellPathwayScene({
     conceptId: 'bio.evo.human-evolution',
-    title: 'Hominin Milestones in Chronological Order',
+    title: 'Hominin Milestones in Chronological Order (a timeline, not a ladder)',
     teachingGoal: 'Humans evolved from a common ancestor SHARED with chimpanzees, not from chimpanzees themselves — evolution is not a ladder with humans at the top.',
     stages: [
+      { name: 'Common ancestor', description: '≈ 6–7 million years ago, shared by humans and chimpanzees — it is NOT a modern chimpanzee, and both lineages have evolved independently ever since' },
       { name: 'Bipedalism', description: '≈ 4 million years ago, Australopithecus afarensis (“Lucy”) — hands freed for tool use, before brain size increased' },
       { name: 'Brain expansion', description: '≈ 2 million years ago, Homo habilis, associated with the first stone tools' },
       { name: 'Homo erectus', description: '≈ 1.9 million years ago — first hominin to leave Africa, controlled fire' },
       { name: 'Homo sapiens', description: '≈ 300,000 years ago in Africa; behaviourally modern traits appear later, ≈ 100,000–70,000 years ago' },
-      { name: 'Out of Africa', description: '≈ 60,000–70,000 years ago, migration out of Africa and interbreeding with Neanderthals/Denisovans' },
+      { name: 'Out of Africa', description: '≈ 60,000–70,000 years ago, migration out of Africa and interbreeding with Neanderthals/Denisovans. These are milestones on one branch among millions, not rungs of a ladder: no species is more evolved than another' },
     ],
   }),
 
@@ -1746,7 +1842,7 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     teachingGoal: 'Selectivity comes from REABSORPTION, not filtration — glucose and urea are filtered together, non-selectively, then glucose is reclaimed afterward.',
     stages: [
       { name: 'Ultrafiltration', description: 'high blood pressure in the glomerulus forces small molecules (water, glucose, urea, ions) into the Bowman’s capsule — non-selective' },
-      { name: 'Selective reabsorption', description: 'essentially all glucose, most water, and useful ions are actively reabsorbed back into the blood' },
+      { name: 'Selective reabsorption', description: 'essentially all glucose and the useful ions are actively reabsorbed back into the blood in the proximal tubule and loop of Henle, and most of the water follows by osmosis — this is where the selectivity lives, not in filtration' },
       { name: 'Secretion', description: 'some substances (H⁺ ions, certain drugs) are actively secreted directly into the tubule' },
     ],
   }),
@@ -1803,9 +1899,9 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     title: 'The Cohesion-Tension Mechanism',
     teachingGoal: 'Water is not pumped up the plant — no pump exists anywhere. Removing the leaves stops water movement almost immediately, because the pulling force is lost.',
     stages: [
-      { name: 'Transpiration', description: 'water evaporates from leaf stomata, creating tension — a pulling force — at the top of the xylem' },
-      { name: 'Cohesion and adhesion', description: 'water molecules stick to each other (cohesion) and to the xylem walls (adhesion), moving as one unbroken column' },
-      { name: 'Water enters the roots', description: 'osmosis pulls water from the soil (higher water potential) into root hair cells (lower water potential)' },
+      { name: 'Transpiration', description: 'water evaporates from leaf stomata, creating tension — a pulling force — at the top of the xylem column; this pull, not a pump, is what moves water UP from the roots to the leaves' },
+      { name: 'Cohesion and adhesion', description: 'water molecules stick to each other (cohesion) and to the xylem walls (adhesion), so the whole column is pulled upward as one unbroken string' },
+      { name: 'Water enters the roots', description: 'as the column is pulled up, water moves by osmosis down its water-potential gradient from the soil (higher water potential) into root hair cells (lower water potential)' },
     ],
   }),
 
@@ -1840,7 +1936,7 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
       { label: 'Binary fission', description: 'one parent cell divides into two equal daughter cells', items: ['Bacteria'] },
       { label: 'Budding', description: 'a new individual forms as a physical outgrowth, then detaches', items: ['Yeast, Hydra'] },
       { label: 'Fragmentation', description: 'a broken-off piece regenerates into a complete new individual', items: ['Starfish, flatworms'] },
-      { label: 'Sporulation', description: 'spores germinate into new individuals', items: ['Fungi, ferns'] },
+      { label: 'Sporulation', description: 'spores germinate into new individuals', items: ['Fungi'] },
       { label: 'Vegetative propagation', description: 'new plants grow from non-reproductive structures', items: ['Potato tubers, strawberry stolons'] },
       { label: 'Parthenogenesis', description: 'an unfertilised egg develops directly into an adult', items: ['Some insects and reptiles'] },
     ],
@@ -1851,11 +1947,11 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     title: 'Double Fertilisation: Two Fusions, Two Products',
     teachingGoal: 'This is genuinely a DOUBLE event producing two distinct products from two separate fusions — not one fertilisation event with one outcome.',
     stages: [
-      { name: 'Pollen tube delivers two sperm nuclei', description: 'after pollination, the pollen tube grows down the style to reach the ovule' },
+      { name: 'Pollen tube delivers two sperm nuclei', description: 'after pollination, the pollen tube grows down the style to reach the ovule, where both sperm nuclei are used in the same event' },
     ],
     branchEnd: [
-      { name: 'Sperm 1 + egg cell', description: 'forms the diploid zygote' },
-      { name: 'Sperm 2 + polar nuclei', description: 'forms the TRIPLOID endosperm, the seed’s food store' },
+      { name: 'Sperm 1 + egg cell', description: 'forms the diploid zygote (fusion 1 of 2, in the same event)' },
+      { name: 'Sperm 2 + polar nuclei', description: 'forms the TRIPLOID endosperm, the seed’s food store (fusion 2 of 2, in the same event)' },
     ],
   }),
 
@@ -1891,7 +1987,7 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     title: 'Contraceptive Methods by Mechanism',
     teachingGoal: 'Condoms provide the ONLY STI protection among contraceptive methods — every other method prevents pregnancy only.',
     groups: [
-      { label: 'Barrier', description: 'physically prevents sperm from reaching the egg', items: ['Condoms, diaphragm — the only STI protection'] },
+      { label: 'Barrier', description: 'physically prevents sperm from reaching the egg', items: ['Condoms: the only method that also protects against STIs', 'Diaphragm: no STI protection'] },
       { label: 'Hormonal', description: 'prevents ovulation (primary mechanism), alters cervical mucus', items: ['The pill, patch, injection, implant'] },
       { label: 'IUD', description: 'copper (toxic to sperm) or hormonal', items: [] },
       { label: 'Emergency contraception', description: 'high-dose progesterone to DELAY ovulation', items: ['Not an abortifacient — does not end an existing pregnancy'] },
@@ -2107,13 +2203,13 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     teachingGoal: '"The protein-structure problem is solved" is incorrect — AlphaFold2 predicts one static conformation, not the full functional picture.',
     groups: [
       { label: 'What it predicts well', description: 'the single lowest-energy conformation of an isolated protein', items: ['Near-experimental accuracy for many protein families'] },
-      { label: 'What it does NOT capture', description: 'reliably', items: ['Conformational ensembles (multiple functional states)', 'Ligand-bound states (induced fit)', 'Intrinsically disordered regions', 'Protein complexes (fully)'] },
+      { label: 'What it does NOT capture reliably', description: 'these go beyond the single static conformation it predicts', items: ['Conformational ensembles (multiple functional states)', 'Ligand-bound states (induced fit)', 'Intrinsically disordered regions', 'Protein complexes (fully)'] },
     ],
   }),
 
   'bio.sys.systems-biology-intro': () => buildCellHubScene({
     conceptId: 'bio.sys.systems-biology-intro',
-    hubLabel: 'Emergent Network Behaviour',
+    hubLabel: 'Systems biology: behaviour lives in the network',
     title: 'Four Key Concepts in Systems Biology',
     teachingGoal: 'A phenomenon like the circadian clock is not located "in" any single gene — it exists in the feedback TOPOLOGY among interacting genes.',
     spokes: [
@@ -2202,14 +2298,14 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     ],
   }),
 
-  'bio.div.plant-diversity-alternation-of-generations': () => buildCellPathwayScene({
+  'bio.div.plant-diversity-alternation-of-generations': () => buildCellComparisonScene({
     conceptId: 'bio.div.plant-diversity-alternation-of-generations',
-    title: 'The Trend Toward Sporophyte Dominance',
+    title: 'Which Generation Dominates? Mosses, Ferns and Seed Plants',
     teachingGoal: 'Reducing the gametophyte to a microscopic, protected structure removes the need for a water film for sperm to swim — freeing seed plants to colonise dry land.',
-    stages: [
-      { name: 'Mosses', description: 'the gametophyte is dominant (the visible green plant); the sporophyte is a small, dependent stalk' },
-      { name: 'Ferns', description: 'dominance reverses — the large fern IS the sporophyte; the gametophyte is a tiny, independent prothallus' },
-      { name: 'Seed plants', description: 'the gametophyte is microscopic and entirely dependent on the sporophyte (pollen grain, embryo sac)' },
+    groups: [
+      { label: 'Mosses', description: 'the gametophyte (n) is dominant (the visible green plant); the sporophyte (2n) is a small, dependent stalk', items: ['Gametophyte: dominant', 'Sporophyte: small dependent stalk', 'Sperm needs a water film to swim'] },
+      { label: 'Ferns', description: 'dominance reverses — the large fern IS the sporophyte (2n); the gametophyte (n) is a tiny, independent prothallus', items: ['Sporophyte: dominant', 'Gametophyte: tiny independent prothallus', 'Sperm needs a water film to swim'] },
+      { label: 'Seed plants', description: 'the gametophyte is microscopic and entirely dependent on the sporophyte (pollen grain, embryo sac)', items: ['Sporophyte: dominant', 'Gametophyte: microscopic, dependent', 'No water film needed — free for dry land'] },
     ],
   }),
 
@@ -2434,6 +2530,7 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     conceptId: 'bio.behav.social-behavior-eusociality',
     subject: 'Eusociality',
     boundaryLabel: 'Eusociality (all three required together)',
+    boundaryNarration: 'Eusociality is defined by three features that must ALL be present together.',
     teachingGoal: 'No single feature alone qualifies a species as eusocial — all three must be present together.',
     parts: [
       { name: 'Reproductive division of labour', description: 'only a small subset (queens) reproduce; workers do not' },
@@ -2532,10 +2629,11 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     title: 'Regenerative Capacity Varies — But Shares One Mechanism: Blastema Formation',
     teachingGoal: 'Mammals are not LACKING the machinery — they evolved to favour rapid scarring over slower, more extensive blastema-based regrowth.',
     groups: [
-      { label: 'Planarians', description: 'whole-body regeneration from a small fragment', items: [] },
-      { label: 'Axolotls', description: 'regenerate entire limbs (bone, muscle, nerve, skin)', items: [] },
-      { label: 'Zebrafish', description: 'regenerate fin AND heart tissue', items: [] },
-      { label: 'Mammals', description: 'favour rapid scarring over blastema-based regrowth', items: ['Trade-off: fast wound closure vs. full structural restoration'] },
+      { label: 'Planarians', description: 'whole-body regeneration from a small fragment', items: ['Via blastema formation'] },
+      { label: 'Axolotls', description: 'regenerate entire limbs (bone, muscle, nerve, skin)', items: ['Via blastema formation'] },
+      { label: 'Zebrafish', description: 'regenerate fin AND heart tissue', items: ['Via blastema formation'] },
+      { label: 'Mammals', description: 'limited, not absent: stem cells and some regeneration (liver, wound healing) remain, but rapid scarring is favoured over slower blastema-based regrowth', items: ['Trade-off: fast wound closure vs. full structural restoration'] },
+      { label: 'Blastema (the shared mechanism)', description: 'a mass of dedifferentiated, proliferative cells that forms at the site of injury, then re-differentiates to rebuild the missing structure, following positional cues like those of embryonic development', items: ['Cells near the wound dedifferentiate', 'Stem-cell-like, proliferative mass', 'Re-differentiates to rebuild the structure'] },
     ],
   }),
 
@@ -2565,7 +2663,8 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'bio.div.chordate-vertebrate-diversity': () => buildCellStructureScene({
     conceptId: 'bio.div.chordate-vertebrate-diversity',
     subject: 'Phylum Chordata',
-    boundaryLabel: 'Chordate embryonic hallmarks',
+    boundaryLabel: 'Phylum Chordata',
+    boundaryNarration: 'Phylum Chordata is defined by four hallmark features that appear in the embryo; not all stay visible in the adult — for example, the notochord is largely replaced by the vertebral column in vertebrates.',
     teachingGoal: 'These four features are defining because they appear during EMBRYONIC development — many are later modified or lost in the adult (e.g. the notochord is replaced by the vertebral column).',
     parts: [
       { name: 'Notochord', description: 'a flexible, rod-like structure providing longitudinal support' },
@@ -2578,7 +2677,8 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'bio.div.echinoderm-deuterostome-diversity': () => buildCellStructureScene({
     conceptId: 'bio.div.echinoderm-deuterostome-diversity',
     subject: 'Echinodermata',
-    boundaryLabel: 'Echinodermata (a deuterostome, despite its adult form)',
+    boundaryLabel: 'Echinodermata',
+    boundaryNarration: "Echinodermata are deuterostomes, even though their adult form looks nothing like a chordate's; four features define the phylum.",
     teachingGoal: 'Pentaradial symmetry is SECONDARILY DERIVED — echinoderms evolved from a bilateral ancestor and re-evolved radial symmetry; their larvae are bilateral.',
     parts: [
       { name: 'Deuterostome development', description: 'the blastopore becomes the anus — the shared signature linking echinoderms to chordates' },
@@ -2643,7 +2743,7 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     title: 'Coevolution vs Parallel Adaptation',
     teachingGoal: "Genuine coevolution requires each species' change to be a RESPONSE TO the other species' change — not merely two species independently adapting to a shared environment.",
     groups: [
-      { label: 'Coevolution (reciprocal)', description: 'each species evolution influences, and responds to, the other', items: ['Predator-prey arms race', 'Host-parasite arms race', 'Mutualistic pollinator specialisation'] },
+      { label: 'Coevolution (reciprocal)', description: "each species' evolution influences, and responds to, the other", items: ['Predator-prey arms race', 'Host-parasite arms race', 'Mutualistic pollinator specialisation'] },
       { label: 'Parallel adaptation (independent)', description: 'both species respond to the same external pressure, not to each other', items: ['Similar traits from a shared environment', 'No reciprocal influence between species'] },
     ],
   }),
@@ -2683,10 +2783,12 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     title: 'The Scientific Method: Testing Explanations Against Evidence',
     teachingGoal: 'A falsified hypothesis is not a failed experiment — it is a genuine result that narrows the space of possible explanations, exactly as a confirmed hypothesis does.',
     stages: [
-      { name: 'Observation', description: 'prompts a specific, testable hypothesis' },
+      { name: 'Observation', description: 'prompts a hypothesis' },
+      { name: 'Hypothesis', description: 'a specific, testable, falsifiable proposed explanation' },
       { name: 'Controlled experiment', description: 'varies one independent variable, holds control variables constant, measures the dependent variable against a control group' },
       { name: 'Statistical evaluation', description: 'checks sample size and whether the result could plausibly be due to chance' },
-      { name: 'Replication and peer review', description: 'independent researchers reproduce the result; experts scrutinise methods before publication' },
+      { name: 'Peer review', description: "independent experts scrutinise the study's methods and conclusions before publication — a necessary check, not a formality" },
+      { name: 'Independent replication', description: 'other researchers obtain the same result; only then is a finding provisionally trusted' },
     ],
   }),
 
@@ -2809,7 +2911,7 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
 
   'bio.micro.microbial-metabolism-diversity': () => buildCellHubScene({
     conceptId: 'bio.micro.microbial-metabolism-diversity',
-    hubLabel: 'Alternative metabolic strategies enable survival without light, oxygen, or organic carbon',
+    hubLabel: 'Alternative metabolic strategies, each avoiding a different dependency',
     title: 'Metabolic Versatility: Three Strategies Behind Extremophile Survival',
     teachingGoal: 'This metabolic versatility is the specific, causal basis of extremophile survival — each strategy avoids depending on a resource unavailable in that extreme environment.',
     spokes: [
@@ -2904,7 +3006,7 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   // Batch 12 (bio.neuro, 9 concepts; bio.physio, 3 concepts):
   'bio.neuro.cognitive-neuroscience-consciousness': () => buildCellHubScene({
     conceptId: 'bio.neuro.cognitive-neuroscience-consciousness',
-    hubLabel: 'Cognitive neuroscience of consciousness: three distinct lines of evidence',
+    hubLabel: 'Cognitive neuroscience of consciousness: three distinct ideas',
     title: 'Attention, Neural Correlates, and Split-Brain Evidence',
     teachingGoal: 'Identifying a neural CORRELATE of a conscious experience is not the same as EXPLAINING why that brain activity produces subjective experience at all.',
     spokes: [
@@ -2926,8 +3028,8 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
 
   'bio.neuro.neural-circuits-computation': () => buildCellHubScene({
     conceptId: 'bio.neuro.neural-circuits-computation',
-    hubLabel: 'Four recurring circuit motifs, each a distinct computation',
-    title: 'Neural Circuit Motifs: Inhibition, Coding, and Rhythm',
+    hubLabel: 'Neural circuit computation: inhibition, coding, rhythm',
+    title: 'Neural Circuit Computation: Inhibition, Coding, and Rhythm',
     teachingGoal: 'Inhibition is not merely a "brake" — it is an active, shaping computational element, whether sharpening timing (feedforward) or sharpening contrast (lateral).',
     spokes: [
       { name: 'Feedforward inhibition', description: 'excitation reaches the target directly and via a delayed inhibitory relay, sharpening response timing' },
@@ -3104,8 +3206,8 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     stages: [
       { name: 'Root hair infection', description: 'rhizobium bacteria infect legume root hairs' },
       { name: 'Nodule formation', description: 'specialised root structures form, housing the bacteria' },
-      { name: 'Nitrogen fixation', description: 'nitrogenase converts atmospheric N2 into biologically usable ammonia' },
-      { name: 'Oxygen protection', description: 'leghaemoglobin binds free oxygen, protecting nitrogenase from inactivation' },
+      { name: 'Low-oxygen nodule', description: "leghaemoglobin, made by the plant, binds free oxygen tightly, keeping the nodule's free oxygen low so nitrogenase is not irreversibly inactivated, while still supplying enough bound oxygen for the bacteria's own respiration" },
+      { name: 'Nitrogen fixation', description: 'nitrogenase converts atmospheric N2 into biologically usable ammonia — it can work only because free oxygen is kept low' },
     ],
   }),
 
@@ -3206,6 +3308,7 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
       { name: 'Hypothalamus', description: 'secretes GnRH in pulsatile bursts' },
       { name: 'Anterior pituitary', description: 'GnRH stimulates release of luteinising hormone (LH) and follicle-stimulating hormone (FSH)' },
       { name: 'Gonads', description: 'LH and FSH regulate gamete production and sex hormone secretion' },
+      { name: 'Gonadal hormones', description: 'oestrogen, progesterone or testosterone feed back to regulate the hypothalamus and the pituitary, completing the regulatory loop' },
     ],
   }),
 

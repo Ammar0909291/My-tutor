@@ -28,3 +28,14 @@ export interface ConsistencyResult {
   ok: boolean
   errors: string[]
 }
+
+/**
+ * `properties` for a text-bearing sphere whose caption should sit CLEAR of it,
+ * above (`up`) or below it — see `withLabelOffset` in visual/layout.ts. The text
+ * stays on the object (legend, narration and tests read it there); only where it
+ * is painted moves. `gap` is the distance past the sphere's own edge.
+ */
+export function captionBeside(radius: number, side: 'above' | 'below', gap = 0.5): { labelOffset: [number, number, number] } {
+  const dy = round(radius + gap)
+  return { labelOffset: [0, side === 'above' ? dy : -dy, 0] }
+}

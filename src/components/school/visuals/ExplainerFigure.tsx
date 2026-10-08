@@ -54,7 +54,7 @@ import {
 import { budgetLabels, complexityFor, labelsHeldBack } from '@/lib/teaching/visual/visualComplexity'
 import { normalizeToCanonicalLevel } from '@/lib/curriculum/levels'
 import { useSimulation, type SimulationHost } from './useSimulation'
-import { cameraDistanceForAspect } from '@/lib/teaching/visual/layout'
+import { cameraDistanceForAspect, cameraDistanceToContain, stageHeightToFit, viewportFromCanvas } from '@/lib/teaching/visual/layout'
 import { SimulationControls } from './SimulationControls'
 
 const MODE_LABEL: Record<SceneMode, string> = {
@@ -245,22 +245,61 @@ export function ExplainerFigure({
   // depends on the fixed box and the canvas, not the tick, so it holds for a
   // whole run and the camera never re-zooms mid-run.
   const stageRef = useRef<HTMLDivElement>(null)
-  const [sceneAspect, setSceneAspect] = useState<number | null>(null)
+  const [sceneBox, setSceneBox] = useState<{ w: number; h: number } | null>(null)
   useEffect(() => {
     const stageEl = stageRef.current
-    if (!simulation.active || !stageEl || typeof ResizeObserver === 'undefined') return
+    if (!stageEl || typeof ResizeObserver === 'undefined') return
     const measure = () => {
       const box = stageEl.querySelector<HTMLElement>('[data-scene-box]')?.getBoundingClientRect()
-      if (box && box.width > 0 && box.height > 0) setSceneAspect(Math.round((box.width / box.height) * 100) / 100)
+      if (box && box.width > 0 && box.height > 0) {
+        const w = Math.round(box.width), h = Math.round(box.height)
+        setSceneBox((prev) => (prev && prev.w === w && prev.h === h ? prev : { w, h }))
+      }
     }
     measure()
     const observer = new ResizeObserver(measure)
     observer.observe(stageEl)
     return () => observer.disconnect()
-  }, [simulation.active])
+  }, [])
+  const sceneAspect = sceneBox ? Math.round((sceneBox.w / sceneBox.h) * 100) / 100 : null
+
+  // ── a figure that cannot read at the stage's natural height gets a taller one ─
+  // Captions are a fixed pixel size, so on a phone's short 4:3 stage a figure with
+  // many captions cannot be made to fit by moving the camera: the geometry shrinks
+  // and the captions collide. Height is the one free dimension (width is the
+  // lesson column's), so the stage grows only as far as the SAME placement solver
+  // the renderer runs needs it to — nothing is dropped, nothing is shrunk below
+  // the readable size — and never in the expanded view, which sizes itself.
+  const [fitStage, setFitStage] = useState<{ w: number; h: number } | null>(null)
+  // `drawn` is rebuilt every render while a slider animation plays; the search must not re-run per frame, so it
+  // reads the latest figure through a ref and re-runs only when the box or WHICH figure this is changes.
+  const drawnRef = useRef(drawn)
+  drawnRef.current = drawn
+  const figureId = drawn.id
+  useEffect(() => { setFitStage(null) }, [figureId])
+  useEffect(() => {
+    if (!sceneBox || simulation.active) return
+    if (fitStage && fitStage.w !== sceneBox.w) { setFitStage(null); return } // re-measure the natural height at the new width
+    if (fitStage) return // the grown height is stable for this width: it does not depend on the measured box
+    const browserW = typeof window === 'undefined' ? sceneBox.w : window.innerWidth
+    const maxH = Math.min(600, Math.round((typeof window === 'undefined' ? 800 : window.innerHeight) * 0.7))
+    const h = stageHeightToFit(drawnRef.current, sceneBox.w, sceneBox.h, browserW, Math.max(maxH, sceneBox.h))
+    if (h > sceneBox.h) setFitStage({ w: sceneBox.w, h })
+  }, [sceneBox, simulation.active, fitStage, figureId])
   // Not memoised: one pass over a few dozen coordinates, and `drawn` is itself
   // rebuilt per render in the sweep branch, so a memo keyed on it buys nothing.
-  const framedDistance = simulation.active && sceneAspect ? cameraDistanceForAspect(drawn, sceneAspect) : null
+  //
+  // A simulation comes CLOSER to fill a wide canvas; every other figure is only
+  // ever moved FURTHER, and only as far as it takes to keep its geometry and its
+  // labels inside the canvas it is actually drawn in (cameraDistanceToContain).
+  // The server frames a scene for a 4:3 canvas from its coordinates alone, so it
+  // cannot see a sphere's radius or a caption's width: measured at 390px, the
+  // outer spheres of every two-group comparison were cut off by the canvas edge.
+  const framedDistance = !sceneBox
+    ? null
+    : simulation.active
+      ? cameraDistanceForAspect(drawn, sceneAspect ?? 4 / 3)
+      : cameraDistanceToContain(drawn, viewportFromCanvas(sceneBox.w, sceneBox.h, typeof window === 'undefined' ? undefined : window.innerWidth))
   const framed = framedDistance === null || framedDistance === drawn.cameraDistance
     ? drawn
     : { ...drawn, cameraDistance: framedDistance }
@@ -492,7 +531,11 @@ export function ExplainerFigure({
       </header>
 
       <div className={styles.body}>
-        <div className={styles.stage} ref={stageRef}>
+        <div
+          className={styles.stage}
+          ref={stageRef}
+          style={fitStage && !expanded ? ({ '--fig-scene-h': `${fitStage.h}px`, '--fig-scene-aspect': `${fitStage.w} / ${fitStage.h}` } as React.CSSProperties) : undefined}
+        >
           <SceneSpecRenderer
             spec={framed}
             objects={drawnObjects}

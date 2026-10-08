@@ -62,6 +62,8 @@ export interface LayerLabel {
   color?: string
   /** Typographic tier — a multiplier, exactly as SceneLabel means it. */
   tier?: number
+  /** Opt-in share of the canvas width one line may use before wrapping (see `wrapFractionOf`). */
+  wrapFraction?: number
 }
 
 const DEFAULT_LABEL_COLOR = '#5B8DEF'
@@ -136,6 +138,7 @@ export function SceneLabelLayer({ labels, obstacles = [], cameraDistance, theme 
             text: l.text,
             position: flatten(l.position, cameraDistance),
             size: l.tier,
+            ...(l.wrapFraction ? { properties: { labelWrapFraction: l.wrapFraction } } : {}),
           })),
         ],
       }],
@@ -150,7 +153,7 @@ export function SceneLabelLayer({ labels, obstacles = [], cameraDistance, theme 
       tier: labels[i]?.tier,
       // The width the solver reserved, so the painted box matches the planned
       // one. Null for every label that fits on a line — almost all of them.
-      maxWidthPx: labelWrapWidth(s.text, viewport, labels[i]?.tier) ?? undefined,
+      maxWidthPx: labelWrapWidth(s.text, viewport, labels[i]?.tier, labels[i]?.wrapFraction) ?? undefined,
     }))
   }, [labels, obstacles, cameraDistance, size.width, size.height, windowWidth])
 

@@ -71,6 +71,9 @@ export function buildEcologicalPyramidScene(params: EcologicalPyramidParams): Sc
       text: `${label}: ${energies[i]}`,
       color: colors[i % colors.length],
       size: width,
+      // The caption sits just above its bar, in the gap to the bar above. At the bar's centre it was the
+      // bar's own colour ON the bar (2.4 : 1 measured on the green producers bar).
+      properties: { labelOffset: [0, 1.3, 0] },
     }
     const narration =
       i === 0
@@ -90,6 +93,9 @@ export function buildEcologicalPyramidScene(params: EcologicalPyramidParams): Sc
     id: `ecological-pyramid-${params.trophicLevels.join('-')}`,
     title: `Ecological Pyramid: ${params.trophicLevels.join(' → ')}`,
     sceneType: 'diagram',
+    // No ground grid or axis triad: an ecological pyramid is a stack of trophic levels, not a spatial scene, and the
+    // triad's x / y / z captions were MEASURED printed over the figure (one outside the canvas).
+    stage: { grid: false, axes: false },
     teachingGoal: 'Show how available energy decreases by roughly 90% at each successive trophic level (the 10% law).',
     cameraDistance: BASE_WIDTH * 3,
     ariaLabel: `An ecological energy pyramid with ${n} trophic levels: ${params.trophicLevels.join(', ')}, each holding about one-tenth the energy of the level below.`,

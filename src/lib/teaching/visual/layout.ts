@@ -164,18 +164,18 @@ const MAX_LINE_FRACTION = 0.92
  * solver reserved for it. Two different answers would put the text back where
  * the model cannot see it.
  */
-export function labelWrapWidth(text: string, viewport: Viewport, tier?: number): number | null {
+export function labelWrapWidth(text: string, viewport: Viewport, tier?: number, fraction: number = MAX_LINE_FRACTION): number | null {
   const fontPx = fontPxFor(viewport, tier)
   const singleLine = text.length * widthRatioFor(text) * fontPx
-  const available = viewport.hostWidth * MAX_LINE_FRACTION
+  const available = viewport.hostWidth * fraction
   return singleLine > available ? available : null
 }
 
 /** The box that text will occupy, from its own resolved font size. */
-function labelExtent(text: string, viewport: Viewport, tier?: number): { halfW: number; halfH: number } {
+function labelExtent(text: string, viewport: Viewport, tier?: number, fraction?: number): { halfW: number; halfH: number } {
   const fontPx = fontPxFor(viewport, tier)
   const singleLine = text.length * widthRatioFor(text) * fontPx
-  const wrapAt = labelWrapWidth(text, viewport, tier)
+  const wrapAt = labelWrapWidth(text, viewport, tier, fraction)
   if (wrapAt === null) {
     return { halfW: singleLine / 2, halfH: (fontPx * LINE_HEIGHT_RATIO) / 2 }
   }
@@ -203,6 +203,21 @@ function labelExtent(text: string, viewport: Viewport, tier?: number): { halfW: 
 /** A label object's typographic tier; `size` means an extent on every other type. */
 function tierOf(object: SceneObject): number | undefined {
   return object.type === 'label' ? object.size : undefined
+}
+
+/**
+ * `properties.labelWrapFraction` — an OPT-IN share of the canvas width (0.1–0.92)
+ * this object's text may occupy on one line before it wraps. The default is
+ * `MAX_LINE_FRACTION` (a caption may use almost the whole canvas), which is right
+ * for a lone caption and wrong for a figure laid out in COLUMNS: two columns of
+ * captions each as wide as the canvas cannot sit side by side, so the only way to
+ * contain them is to pull the camera back until the figure is a dot. A column
+ * layout says how wide its own captions may be, and the solver, the renderer and
+ * the containment rule all read it here.
+ */
+export function wrapFractionOf(object: SceneObject): number | undefined {
+  const f = object.properties?.labelWrapFraction
+  return typeof f === 'number' && Number.isFinite(f) && f >= 0.1 && f <= MAX_LINE_FRACTION ? f : undefined
 }
 
 /**
@@ -256,20 +271,41 @@ export function sceneTextObjects(scene: SceneSpec): { text: string; position: Ve
 }
 
 /**
+ * `properties.labelOffset` — an OPT-IN [dx, dy, dz] (scene units) that moves an
+ * object's TEXT off the object it describes, leaving the object where it is.
+ *
+ * A text-bearing node is labelled at its centre by default, which is right for
+ * an atom symbol inside an atom and wrong for a caption on a sphere much
+ * smaller than the caption: the text is drawn in the node's own colour ON the
+ * node, MEASURED at 2.2–4.5 : 1 against it (blue text on a blue sphere) across
+ * every Biology hub, pathway, comparison and structure figure. A generator that
+ * wants its caption clear of the sphere says so here; every object that does not
+ * is anchored exactly as before. One definition of the anchor, so the solver,
+ * the renderer and the layout model cannot disagree about where the text is.
+ */
+function withLabelOffset(obj: SceneObject, at: Vec3): Vec3 {
+  const off = obj.properties?.labelOffset
+  if (Array.isArray(off) && off.length === 3 && off.every((n) => typeof n === 'number' && Number.isFinite(n))) {
+    return [at[0] + (off[0] as number), at[1] + (off[1] as number), at[2] + (off[2] as number)]
+  }
+  return at
+}
+
+/**
  * Where an object's text is drawn. A label carries `position`; a vector, arrow
  * or bond labels its midpoint, which is what the renderer does.
  */
 function anchorOf(obj: SceneObject): Vec3 | null {
-  if (obj.position) return obj.position
-  if (obj.from && obj.to) {
-    return [
+  let base: Vec3 | null = null
+  if (obj.position) base = obj.position
+  else if (obj.from && obj.to) {
+    base = [
       (obj.from[0] + obj.to[0]) / 2,
       (obj.from[1] + obj.to[1]) / 2,
       (obj.from[2] + obj.to[2]) / 2,
     ]
-  }
-  if (obj.points?.length) return obj.points[Math.floor(obj.points.length / 2)]
-  return null
+  } else if (obj.points?.length) base = obj.points[Math.floor(obj.points.length / 2)]
+  return base ? withLabelOffset(obj, base) : null
 }
 
 /**
@@ -285,7 +321,7 @@ export function projectLabelBoxes(scene: SceneSpec, viewport: Viewport): LabelBo
     // drei's <Html center> centres the box on its anchor.
     const screenX = cx + position[0] * scale
     const screenY = cy - position[1] * scale
-    const { halfW, halfH } = labelExtent(text, viewport, tierOf(object))
+    const { halfW, halfH } = labelExtent(text, viewport, tierOf(object), wrapFractionOf(object))
     return {
       text,
       left: screenX - halfW,
@@ -315,9 +351,10 @@ export function checkSceneLayout(scene: SceneSpec, viewport: Viewport): LayoutRe
   // placement solver, so checking authored anchors would be checking a
   // position no one is shown — the model and the runtime must agree.
   const placement = placeSceneLabels(scene, viewport)
-  const tiers = sceneTextObjects(scene).map(({ object }) => tierOf(object))
+  const textObjects = sceneTextObjects(scene)
+  const tiers = textObjects.map(({ object }) => tierOf(object))
   const boxes: LabelBox[] = placement.labels.map((l, i) => {
-    const { halfW, halfH } = labelExtent(l.text, viewport, tiers[i])
+    const { halfW, halfH } = labelExtent(l.text, viewport, tiers[i], textObjects[i] ? wrapFractionOf(textObjects[i].object) : undefined)
     return { text: l.text, left: l.x - halfW, right: l.x + halfW, top: l.y - halfH, bottom: l.y + halfH }
   })
   const violations: LayoutViolation[] = []
@@ -543,6 +580,156 @@ export function cameraDistanceForAspect(scene: SceneSpec, aspect: number): numbe
   return Math.min(own, Math.round(needed * 10) / 10)
 }
 
+// ── Containment: never let the geometry or its labels leave the canvas ─────────
+/** Share of each half-axis the contents may occupy; the rest is breathing room. */
+const CONTAIN_FILL = 0.94
+/**
+ * The furthest the camera may be pulled back from the scene's own distance.
+ * A caption nearly as wide as the canvas leaves almost no room to offset it, and
+ * containing it would shrink the figure to a dot (a 1,284-unit camera was
+ * measured on one timeline scene); past this the label layer's wrapping and the
+ * placement solver are the right tools, not a smaller figure.
+ */
+const MAX_PULLBACK = 2.2
+
+/**
+ * The camera distance at which every drawn thing — each object's own extent AND
+ * each label's painted box — fits inside a canvas of the ACTUAL size.
+ *
+ * `fitSceneToFrame` frames a scene on the server for a 4:3 canvas from its
+ * COORDINATES alone, so it cannot see a sphere's radius or how wide a caption
+ * paints. MEASURED in Chromium at 390px, every two-group Biology comparison
+ * (57 figures) had its outer spheres cut off by the canvas edge and its item
+ * captions truncated ("…ockout (loss of function)"), because the two columns
+ * were framed by their height and the 358px canvas is far narrower than the
+ * captions need.
+ *
+ * Only ever moves the camera FURTHER away than the scene's own distance, and
+ * only by as much as containment needs: a figure that already fits — the
+ * hand-tuned physics pilots included — is returned at its own distance, byte for
+ * byte. Nothing is moved, rescaled or relabelled; the same figure is drawn
+ * smaller, with its labels held at their readable pixel size.
+ *
+ * Label extents come from the same model the placement solver uses (wrapped
+ * width included), so the room reserved here is the room the solver is given.
+ */
+export function cameraDistanceToContain(scene: SceneSpec, viewport: Viewport): number {
+  const own = scene.cameraDistance ?? DEFAULT_CAMERA_DISTANCE
+  const halfW = (viewport.hostWidth / 2) * CONTAIN_FILL
+  const halfH = (viewport.hostHeight / 2) * CONTAIN_FILL
+  if (!(halfW > 0) || !(halfH > 0)) return own
+
+  // The scale (px per scene unit) this scene must not exceed to fit; start at the
+  // scale its own camera gives and only ever reduce it.
+  const tan = Math.tan(FOV_RADIANS / 2)
+  const ownScale = viewport.hostHeight / (2 * tan * own)
+  let scale = ownScale
+
+  // Distance `v` (scene units) from the centre, plus `margin` px that do not
+  // scale (a label's painted half-box) and `r` scene units that do (a radius).
+  const limit = (v: number, r: number, marginPx: number, half: number) => {
+    const reach = Math.abs(v) + r
+    if (reach <= 0) return
+    const room = half - marginPx
+    // A label wider than the canvas cannot be contained by moving the camera;
+    // the label layer wraps it instead, and `labelExtent` already reflects that.
+    if (room <= 0) return
+    scale = Math.min(scale, room / reach)
+  }
+
+  for (const step of scene.steps ?? []) {
+    for (const obj of step.objects ?? []) {
+      const r = typeof obj.radius === 'number' && obj.type !== 'bar' ? obj.radius : 0
+      const pts = [obj.position, obj.from, obj.to, ...(obj.points ?? [])].filter(Boolean) as Vec3[]
+      for (const p of pts) {
+        limit(p[0], r, 0, halfW)
+        limit(p[1], r, 0, halfH)
+      }
+    }
+  }
+  for (const { text, position, object } of sceneTextObjects(scene)) {
+    const { halfW: lw, halfH: lh } = labelExtent(text, viewport, tierOf(object), wrapFractionOf(object))
+    limit(position[0], 0, Math.min(lw, halfW * 0.98), halfW)
+    limit(position[1], 0, Math.min(lh, halfH * 0.98), halfH)
+  }
+
+  if (scale >= ownScale - 1e-6) return own
+  const needed = viewport.hostHeight / (2 * tan * scale)
+  return Math.round(Math.min(needed, own * MAX_PULLBACK) * 10) / 10
+}
+
+/**
+ * How many captions the solver left painted ON a sphere (a node, point or
+ * particle that carries a radius). Text over the object it does not describe is
+ * the one overlap `checkSceneLayout` does not count and a learner reads as a
+ * mistake: a caption on a sphere is no longer a caption of that sphere's
+ * neighbour, and measures well below readable contrast against it.
+ */
+function captionsOnSpheres(scene: SceneSpec, viewport: Viewport): number {
+  const scale = pixelsPerUnit(viewport, scene.cameraDistance ?? DEFAULT_CAMERA_DISTANCE)
+  const cx = viewport.hostWidth / 2
+  const cy = viewport.hostHeight / 2
+  const spheres: { x: number; y: number; r: number }[] = []
+  for (const step of scene.steps ?? []) {
+    for (const obj of step.objects ?? []) {
+      if ((obj.type === 'node' || obj.type === 'point' || obj.type === 'particle') && obj.position && typeof obj.radius === 'number') {
+        spheres.push({ x: cx + obj.position[0] * scale, y: cy - obj.position[1] * scale, r: obj.radius * scale })
+      }
+    }
+  }
+  if (spheres.length === 0) return 0
+  const textObjects = sceneTextObjects(scene)
+  const placed = placeSceneLabels(scene, viewport).labels
+  let count = 0
+  placed.forEach((l, i) => {
+    const { halfW, halfH } = labelExtent(l.text, viewport, tierOf(textObjects[i].object), wrapFractionOf(textObjects[i].object))
+    // The sphere's OWN caption is anchored beside it, so a hit means the text is on a sphere.
+    for (const sp of spheres) {
+      const nx = Math.max(l.x - halfW, Math.min(sp.x, l.x + halfW))
+      const ny = Math.max(l.y - halfH, Math.min(sp.y, l.y + halfH))
+      if (Math.hypot(sp.x - nx, sp.y - ny) < sp.r * 0.9) { count++; break }
+    }
+  })
+  return count
+}
+
+/**
+ * The shortest stage height at which this figure reads at this width.
+ *
+ * Width is fixed by the lesson column, but HEIGHT is not: a phone's stage is a
+ * 4:3 box, and a figure whose captions are a fixed pixel size cannot be made to
+ * fit by moving the camera once the canvas is that short — the geometry shrinks,
+ * the captions do not, and they collide. MEASURED at 390px: every Biology
+ * comparison of three or more groups, and every long-caption two-group one, had
+ * labels printed over each other.
+ *
+ * Searches taller stages in `step` px increments, from `baseHeight` up to
+ * `maxHeight`, running the SAME containment rule and the SAME placement solver the
+ * renderer will run (so the answer is the layout the learner gets, not a
+ * model of it), and returns the first height with no out-of-bounds label and no
+ * label collision. When none is clean it returns the height with the fewest
+ * violations, and `baseHeight` when growing helps nothing. Never shrinks.
+ */
+export function stageHeightToFit(
+  scene: SceneSpec, hostWidth: number, baseHeight: number, browserWidth: number, maxHeight: number, step = 40,
+): number {
+  const violationsAt = (h: number): number => {
+    const viewport = viewportFromCanvas(hostWidth, h, browserWidth)
+    const framed = { ...scene, cameraDistance: cameraDistanceToContain(scene, viewport) }
+    return checkSceneLayout(framed, viewport).violations.length + captionsOnSpheres(framed, viewport)
+  }
+  const atBase = violationsAt(baseHeight)
+  if (atBase === 0) return baseHeight
+  let best = baseHeight
+  let bestViolations = atBase
+  for (let h = baseHeight + step; h <= maxHeight; h += step) {
+    const v = violationsAt(h)
+    if (v < bestViolations) { best = h; bestViolations = v }
+    if (v === 0) return h
+  }
+  return best
+}
+
 // ── Label placement solver ───────────────────────────────────────────────────
 /**
  * THE PLACEMENT CONTRACT.
@@ -711,12 +898,14 @@ function candidateOffsets(maxRadius: number): { dx: number; dy: number }[] {
 export function placeSceneLabels(scene: SceneSpec, viewport: Viewport): PlacementResult {
   const scale = pixelsPerUnit(viewport, scene.cameraDistance ?? DEFAULT_CAMERA_DISTANCE)
   const anchors = projectLabelBoxes(scene, viewport)
-  const tiers = sceneTextObjects(scene).map(({ object }) => tierOf(object))
+  const textObjects = sceneTextObjects(scene)
+  const tiers = textObjects.map(({ object }) => tierOf(object))
+  const fractions = textObjects.map(({ object }) => wrapFractionOf(object))
 
   // The 3D projection: world units through the camera frustum. Everything after
   // this line is the shared solver, which never learns which projection it got.
   const items: PlacementItem[] = anchors.map((anchor, index) => {
-    const { halfW, halfH } = labelExtent(anchor.text, viewport, tiers[index])
+    const { halfW, halfH } = labelExtent(anchor.text, viewport, tiers[index], fractions[index])
     return {
       text: anchor.text,
       x: (anchor.left + anchor.right) / 2,
