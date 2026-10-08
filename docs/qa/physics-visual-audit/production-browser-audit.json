@@ -1,0 +1,302 @@
+{
+ "base": "https://my-tutor-flame.vercel.app",
+ "at": "2026-10-08T13:07:06.139Z",
+ "deployment": {
+  "sha": "c2cba6ae6d69c601a5a82406bd53a848102c0d31",
+  "id": "dpl_8dhQ4cU4knAoimkytLPTNZevTjo9"
+ },
+ "note": "Default state of each figure in the real /learn page of the deployed app (disposable account, deleted). One navigation timeout (orbital-mechanics mobile/dark, net::ERR_TIMED_OUT) was re-run and passed; the 4 orbital-mechanics rows are from that re-run.",
+ "tally": {
+  "PASS": 36
+ },
+ "rows": [
+  {
+   "conceptId": "phys.meas.vector-addition",
+   "vp": "mobile",
+   "theme": "dark",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": []
+  },
+  {
+   "conceptId": "phys.meas.vector-addition",
+   "vp": "mobile",
+   "theme": "light",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": []
+  },
+  {
+   "conceptId": "phys.meas.vector-addition",
+   "vp": "desktop-column",
+   "theme": "dark",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": []
+  },
+  {
+   "conceptId": "phys.meas.vector-addition",
+   "vp": "desktop-column",
+   "theme": "light",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": []
+  },
+  {
+   "conceptId": "phys.mech.kinematics-1d",
+   "vp": "mobile",
+   "theme": "dark",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": []
+  },
+  {
+   "conceptId": "phys.mech.kinematics-1d",
+   "vp": "mobile",
+   "theme": "light",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": []
+  },
+  {
+   "conceptId": "phys.mech.kinematics-1d",
+   "vp": "desktop-column",
+   "theme": "dark",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": []
+  },
+  {
+   "conceptId": "phys.mech.kinematics-1d",
+   "vp": "desktop-column",
+   "theme": "light",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": []
+  },
+  {
+   "conceptId": "phys.em.electric-dipole",
+   "vp": "mobile",
+   "theme": "dark",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": []
+  },
+  {
+   "conceptId": "phys.em.electric-dipole",
+   "vp": "mobile",
+   "theme": "light",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": []
+  },
+  {
+   "conceptId": "phys.em.electric-dipole",
+   "vp": "desktop-column",
+   "theme": "dark",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": []
+  },
+  {
+   "conceptId": "phys.em.electric-dipole",
+   "vp": "desktop-column",
+   "theme": "light",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": []
+  },
+  {
+   "conceptId": "phys.mech.torque",
+   "vp": "mobile",
+   "theme": "dark",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": []
+  },
+  {
+   "conceptId": "phys.mech.torque",
+   "vp": "mobile",
+   "theme": "light",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": []
+  },
+  {
+   "conceptId": "phys.mech.torque",
+   "vp": "desktop-column",
+   "theme": "dark",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": []
+  },
+  {
+   "conceptId": "phys.mech.torque",
+   "vp": "desktop-column",
+   "theme": "light",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": []
+  },
+  {
+   "conceptId": "phys.mech.newtons-second-law",
+   "vp": "mobile",
+   "theme": "dark",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": []
+  },
+  {
+   "conceptId": "phys.mech.newtons-second-law",
+   "vp": "mobile",
+   "theme": "light",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": []
+  },
+  {
+   "conceptId": "phys.mech.newtons-second-law",
+   "vp": "desktop-column",
+   "theme": "dark",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": []
+  },
+  {
+   "conceptId": "phys.mech.newtons-second-law",
+   "vp": "desktop-column",
+   "theme": "light",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": []
+  },
+  {
+   "conceptId": "phys.wave.pendulum",
+   "vp": "mobile",
+   "theme": "dark",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": []
+  },
+  {
+   "conceptId": "phys.wave.pendulum",
+   "vp": "mobile",
+   "theme": "light",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": []
+  },
+  {
+   "conceptId": "phys.wave.pendulum",
+   "vp": "desktop-column",
+   "theme": "dark",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": []
+  },
+  {
+   "conceptId": "phys.wave.pendulum",
+   "vp": "desktop-column",
+   "theme": "light",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": []
+  },
+  {
+   "conceptId": "phys.mech.variation-of-g",
+   "vp": "mobile",
+   "theme": "dark",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": []
+  },
+  {
+   "conceptId": "phys.mech.variation-of-g",
+   "vp": "mobile",
+   "theme": "light",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": []
+  },
+  {
+   "conceptId": "phys.mech.variation-of-g",
+   "vp": "desktop-column",
+   "theme": "dark",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": []
+  },
+  {
+   "conceptId": "phys.mech.variation-of-g",
+   "vp": "desktop-column",
+   "theme": "light",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": []
+  },
+  {
+   "conceptId": "phys.em.moving-coil-galvanometer",
+   "vp": "mobile",
+   "theme": "dark",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": []
+  },
+  {
+   "conceptId": "phys.em.moving-coil-galvanometer",
+   "vp": "mobile",
+   "theme": "light",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": []
+  },
+  {
+   "conceptId": "phys.em.moving-coil-galvanometer",
+   "vp": "desktop-column",
+   "theme": "dark",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": []
+  },
+  {
+   "conceptId": "phys.em.moving-coil-galvanometer",
+   "vp": "desktop-column",
+   "theme": "light",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": []
+  },
+  {
+   "conceptId": "phys.mech.orbital-mechanics",
+   "vp": "mobile",
+   "theme": "dark",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": []
+  },
+  {
+   "conceptId": "phys.mech.orbital-mechanics",
+   "vp": "mobile",
+   "theme": "light",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": []
+  },
+  {
+   "conceptId": "phys.mech.orbital-mechanics",
+   "vp": "desktop-column",
+   "theme": "dark",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": []
+  },
+  {
+   "conceptId": "phys.mech.orbital-mechanics",
+   "vp": "desktop-column",
+   "theme": "light",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": []
+  }
+ ]
+}

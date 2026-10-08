@@ -155,7 +155,17 @@ Patterns matching the English ENGL-016/017 defects (raw LaTeX in a label, label 
 
 ## 13. Production status
 
-See the final report for the push and deploy outcome; production on entry was `b07037f` (English fixes), an ancestor of this branch — a fast-forward cannot overwrite it. The dev render page `/dev/physics-audit` is `notFound()` when `NODE_ENV === 'production'`, so production rendering cannot be driven by this harness; production verification needs a real signed-in lesson session (disposable QA account).
+Deployed: `main` fast-forwarded `b07037f` (English fixes) → `c2cba6a`; Vercel deployment `dpl_8dhQ4cU4knAoimkytLPTNZevTjo9` built from `c2cba6a` and is **READY** on the production alias. The English fixes are an ancestor of the deployed commit, so they were not overwritten. Deployed only after: 0 FAIL in the full browser re-audit, the new regression tests, the full suite (905 files), tsc, ESLint and `npm run build` all green.
+
+Verified again in production, as a disposable learner (account created through the app, deleted afterwards):
+
+1. **Served figure = audited figure** (`production-verification.json`): for 10 repaired concepts the scene sent over the wire for "show me a diagram" is byte-identical to what `resolveVisual` serves from this commit (9/9 scenes; the 10th, Bohr model, is the `energy_level_diagram` card), with 0 payload blockers and 0 data FAILs.
+2. **Rendered in the real production lesson page** (`production-browser-audit.json`): the deployed app's `/learn` page, in Chromium, 390 px and 1280 px, dark and light, 9 concepts x 4 = **36 renders, 36 PASS**, measured with the same in-page auditor and the same rules as the dev-page audit. One navigation timeout (`net::ERR_TIMED_OUT`, orbital-mechanics mobile/dark) was re-run and passed. Default state only; slider and simulation sweeps were done on the dev page (§10) because the dev page cannot exist in production.
+3. `/dev/physics-audit` answers 404 in production (it is `notFound()` outside development).
+
+Not verified in production: the 158 cached generated figures (no way to enumerate them), the 274 concepts not in the sample of 9, and non-default slider states. Those rest on the local audit of the same source.
+
+**Blast radius beyond Physics (read this).** The label solver, `SceneLabel` plate, `useFigureLegibility` text lift and `cameraDistanceToContain` are shared components. They are additive and fail-safe (they act only where a label previously overlapped, sat on a body, or text was under 4.5:1), the full suite including the other subjects' visual tests is green, but **other subjects' figures were not browser-audited** and may look slightly different (e.g. a label that used to sit on a body now sits on a small surface-colour plate; SVG text lifted to 4.5:1). Production rollback target if needed: deployment `dpl_9KsxZ4GFAvL1igMK8v33ZnqaLo8t` (`b07037f`).
 
 ## 14. Remaining failures
 
@@ -179,4 +189,5 @@ Branch `claude/hopeful-franklin-ga706b` (ahead of `origin/main` `b07037f`):
 * `d343331` Physics visual audit: interactive dimension rolls up non-default states; add audit freshness gate test
 * `aecc7d7` fix(visual): label solver finds a clear box for every label …
 * `ae33b54` fix(visual): keep the ground plane and axis triad inside the canvas; plate decor letters; make the orbit figure visible
-* (this commit) per-concept audit fingerprints, `merge-audit.ts`, committed audit record, this report
+* `c2cba6a` docs(qa): Physics visual quality report, committed render audit (283 concepts, 0 FAIL), per-concept freshness gate — **deployed**
+* (this commit) production verification scripts and records

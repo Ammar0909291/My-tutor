@@ -81,6 +81,13 @@ REVIEW_REQUIRED, never PASS. No threshold was lowered to reach a number (`AUDIT_
 12. **Harness**: a canvas that has not painted its first frame is retaken (twice) before it can be called
     blank (one transient seen: `phys.meas.units`, re-rendered clean).
 
+## Production (2026-10-08)
+
+`main` `b07037f` -> `c2cba6a`, deployment `dpl_8dhQ4cU4knAoimkytLPTNZevTjo9` READY. Verified over the wire (10 concepts: served scene
+identical to the audited one, 0 blockers) and in the real production `/learn` page (9 concepts x 390/1280 x dark/light = 36/36 PASS):
+`scripts/qa/physicsProductionVisualVerify.ts`, `scripts/qa/physicsProductionBrowserAudit.ts`; records in `docs/qa/physics-visual-audit/`.
+Shared components (label solver, label plate, SVG text lift) also affect other subjects' figures; those were not browser-audited.
+
 ## What stays REVIEW_REQUIRED (21) — honest, not hidden
 
 * 13 figures: **no deterministic physics assertion covers them** (SM-02) — cards and a few scenes. A person
