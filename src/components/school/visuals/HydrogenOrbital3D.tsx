@@ -10,9 +10,29 @@
  */
 import { useMemo } from 'react'
 import { ThreeDVisual } from './ThreeDVisual'
+import { SceneLabelLayer, type LayerLabel } from './SceneLabelLayer'
+import type { SceneObject } from '@/lib/teaching/sceneSpec'
+import { useTheme, type Theme } from '@/components/Providers'
+
+const CAMERA_DISTANCE = 9
+const CLOUD_COLOR = { '1s': '#4DD0E1', '2s': '#FFD166', '2p': '#81C784' } as const
+
+/**
+ * Which orbital each cloud is, as text. The steps name them one at a time, but the final
+ * side-by-side view showed three coloured clouds with nothing saying which was which — a
+ * meaning carried by colour alone. `x` is where each cloud is drawn in the comparison view; the
+ * label sits just below the cloud's own extent. (Labelled figures do not auto-rotate: under
+ * rotation a label placed once would drift off its cloud — the rule SceneLabelLayer states and
+ * every other labelled 3D card here follows. Manual orbit is unchanged.)
+ */
+export const ORBITAL_LABELS: ReadonlyArray<{ text: '1s' | '2s' | '2p'; x: number; extent: number }> = [
+  { text: '1s', x: -3.2, extent: 0.8 },
+  { text: '2s', x: 0, extent: 1.2 },
+  { text: '2p', x: 3.2, extent: 1.6 },   // the lobes reach 1.12 × the cloud radius (1.4)
+]
 
 /** Fibonacci-sphere point cloud, optionally radially modulated for shells/lobes. */
-function cloudPoints(
+export function cloudPoints(
   count: number,
   radius: number,
   shape: '1s' | '2s' | '2p',
@@ -67,7 +87,7 @@ function Nucleus({ position = [0, 0, 0] as [number, number, number] }) {
   )
 }
 
-function Scene({ revealStep }: { revealStep: number }) {
+function Scene({ revealStep, theme }: { revealStep: number; theme: Theme }) {
   const showNucleus = revealStep >= 1
   const show1s = revealStep >= 2
   const show2s = revealStep >= 3
@@ -82,6 +102,28 @@ function Scene({ revealStep }: { revealStep: number }) {
   const cmp1s = useMemo(() => cloudPoints(180, 0.8, '1s'), [])
   const cmp2s = useMemo(() => cloudPoints(200, 1.2, '2s'), [])
   const cmp2p = useMemo(() => cloudPoints(200, 1.4, '2p'), [])
+
+  // The single-orbital steps are named too; each cloud's radius is the one it is drawn with above.
+  const { labels, obstacles } = useMemo(() => {
+    const labels: LayerLabel[] = []
+    const obstacles: SceneObject[] = []
+    if (compare) {
+      for (const o of ORBITAL_LABELS) {
+        obstacles.push({ type: 'node', position: [o.x, 0, 0], radius: o.extent })
+        labels.push({ text: o.text, position: [o.x, -(o.extent + 0.55), 0], color: CLOUD_COLOR[o.text] })
+      }
+    } else if (show2p) {
+      obstacles.push({ type: 'node', position: [0, 0, 0], radius: 2.5 })
+      labels.push({ text: '2p', position: [0, -3.0, 0], color: CLOUD_COLOR['2p'] })
+    } else if (show2s) {
+      obstacles.push({ type: 'node', position: [0, 0, 0], radius: 2.0 })
+      labels.push({ text: '2s', position: [0, -2.55, 0], color: CLOUD_COLOR['2s'] })
+    } else if (show1s) {
+      obstacles.push({ type: 'node', position: [0, 0, 0], radius: 1.0 })
+      labels.push({ text: '1s', position: [0, -1.55, 0], color: CLOUD_COLOR['1s'] })
+    }
+    return { labels, obstacles }
+  }, [compare, show1s, show2s, show2p])
 
   if (compare) {
     return (
@@ -98,6 +140,7 @@ function Scene({ revealStep }: { revealStep: number }) {
           <Nucleus />
           <Cloud points={cmp2p} color="#81C784" />
         </group>
+        <SceneLabelLayer labels={labels} obstacles={obstacles} cameraDistance={CAMERA_DISTANCE} theme={theme} />
       </group>
     )
   }
@@ -108,18 +151,21 @@ function Scene({ revealStep }: { revealStep: number }) {
       {show1s && !show2s && <Cloud points={c1s} color="#4DD0E1" />}
       {show2s && !show2p && <Cloud points={c2s} color="#FFD166" />}
       {show2p && <Cloud points={c2p} color="#81C784" />}
+      <SceneLabelLayer labels={labels} obstacles={obstacles} cameraDistance={CAMERA_DISTANCE} theme={theme} />
     </group>
   )
 }
 
 export function HydrogenOrbital3D({ revealStep = Infinity }: { revealStep?: number }) {
+  const { theme } = useTheme()
   return (
     <ThreeDVisual
       revealStep={revealStep}
-      cameraDistance={9}
+      cameraDistance={CAMERA_DISTANCE}
+      autoRotate={false}
       ariaLabel="3D hydrogen orbital explorer: the nucleus, the 1s probability cloud, the larger 2s cloud, the lobed 2p orbital, and a side-by-side comparison — showing electrons as probability clouds rather than planetary orbits"
     >
-      <Scene revealStep={revealStep} />
+      <Scene revealStep={revealStep} theme={theme} />
     </ThreeDVisual>
   )
 }
