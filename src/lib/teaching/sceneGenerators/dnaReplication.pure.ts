@@ -106,7 +106,7 @@ export function buildDNAReplicationScene(): SceneSpec {
     // The newest lagging piece's primer, just laid down near the fork.
     line([OKAZAKI[0].primer![0], -Y_NEW, 0], [OKAZAKI[0].primer![1], -Y_NEW, 0], PRIMER, 0.08),
     dot([-1.0, -Y_NEW, 0], ENZYME, 0.18),
-    label('primase', [-1.9, -3.2, 0], ENZYME, 'primary'),
+    label('primase', [-1.4, -2.35, 0], ENZYME, 'primary'),
     label('RNA primer', [4.0, 0.6, 0], PRIMER, 'detail'),
   ]
 

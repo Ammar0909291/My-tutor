@@ -97,6 +97,10 @@ export function buildCellComparisonScene(params: CellComparisonParams): SceneSpe
   const { conceptId, title, teachingGoal, groups } = params
   const places = placeGroups(groups)
   const wrapFraction = columnsFor(groups.length) <= 2 ? WRAP_TWO_COLUMNS : WRAP_THREE_COLUMNS
+  // A caption is also no wider than ITS COLUMN: a share of the canvas alone let desktop captions run wider than
+  // the column pitch, and the next column's captions interleaved with them line by line.
+  const columnPitch = groups.length < GRID_FROM_GROUPS ? GROUP_SPACING : GRID_COLUMN_SPACING
+  const captionWrap = { labelWrapFraction: wrapFraction, labelWrapUnits: round(columnPitch - 0.8) }
 
   const steps: SceneStep[] = groups.map((group, gi) => {
     const { x, headerY } = places[gi]
@@ -104,7 +108,7 @@ export function buildCellComparisonScene(params: CellComparisonParams): SceneSpe
     const headerPos: Vec3 = [x, headerY, 0]
     const objects: SceneObject[] = [
       // The group's name goes above its sphere, clear of it and of the item column below.
-      { type: 'node', id: `group-${gi}`, position: headerPos, radius: GROUP_RADIUS, color, text: group.label, properties: { ...captionBeside(GROUP_RADIUS, 'above'), labelWrapFraction: wrapFraction } },
+      { type: 'node', id: `group-${gi}`, position: headerPos, radius: GROUP_RADIUS, color, text: group.label, properties: { ...captionBeside(GROUP_RADIUS, 'above'), ...captionWrap } },
     ]
     // A short stub hanging from the sphere ties the column to its header. It stops
     // clear of the first caption: a connector run to each caption's centre was
@@ -114,7 +118,7 @@ export function buildCellComparisonScene(params: CellComparisonParams): SceneSpe
     }
     group.items.forEach((item, ii) => {
       const pos: Vec3 = [x, round(headerY - (ii + 1) * ITEM_PITCH), 0]
-      objects.push({ type: 'label', id: `group-${gi}-item-${ii}`, position: pos, text: item, color: ITEM_COLOR, properties: { labelWrapFraction: wrapFraction } })
+      objects.push({ type: 'label', id: `group-${gi}-item-${ii}`, position: pos, text: item, color: ITEM_COLOR, properties: captionWrap })
     })
     return { narration: `${group.label}: ${group.description}`, objects }
   })

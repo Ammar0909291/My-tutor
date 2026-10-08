@@ -40,7 +40,7 @@ import type { SceneSpec } from '@/lib/teaching/sceneSpec'
 import { deriveExplainer } from '@/lib/teaching/visual/explainer'
 import { availableModes, redactExplainer, redactText, stageView, withheldValues, type SceneMode } from '@/lib/teaching/visual/sceneStage'
 import { controlsFor, defaultValueOf, rebuildScene, variablesFor, type SceneParams, type SceneVariable } from '@/lib/teaching/visual/parametricScenes'
-import { themeColor } from '@/lib/teaching/sceneGenerators/visualDesign'
+import { meshColor, readableTextColor, themeColor } from '@/lib/teaching/sceneGenerators/visualDesign'
 import {
   availableAnimations, stageAt, sweepFrame, traceObjects, tracePlayhead,
   type SceneAnimation,
@@ -54,7 +54,7 @@ import {
 import { budgetLabels, complexityFor, labelsHeldBack } from '@/lib/teaching/visual/visualComplexity'
 import { normalizeToCanonicalLevel } from '@/lib/curriculum/levels'
 import { useSimulation, type SimulationHost } from './useSimulation'
-import { cameraDistanceForAspect, cameraDistanceToContain, stageHeightToFit, viewportFromCanvas } from '@/lib/teaching/visual/layout'
+import { cameraDistanceForAspect, cameraDistanceToContain, cameraDistanceToContainFigure, stageHeightToFit, viewportFromCanvas } from '@/lib/teaching/visual/layout'
 import { SimulationControls } from './SimulationControls'
 
 const MODE_LABEL: Record<SceneMode, string> = {
@@ -245,6 +245,8 @@ export function ExplainerFigure({
   // depends on the fixed box and the canvas, not the tick, so it holds for a
   // whole run and the camera never re-zooms mid-run.
   const stageRef = useRef<HTMLDivElement>(null)
+  // Measured for EVERY scene, not only simulations: a figure framed for 4:3 can
+  // be wider than a phone's near-square canvas (see cameraDistanceToContain).
   const [sceneBox, setSceneBox] = useState<{ w: number; h: number } | null>(null)
   useEffect(() => {
     const stageEl = stageRef.current
@@ -299,7 +301,12 @@ export function ExplainerFigure({
     ? null
     : simulation.active
       ? cameraDistanceForAspect(drawn, sceneAspect ?? 4 / 3)
-      : cameraDistanceToContain(drawn, viewportFromCanvas(sceneBox.w, sceneBox.h, typeof window === 'undefined' ? undefined : window.innerWidth))
+      // Both rules only ever move the camera FURTHER: the aspect rule (geometry incl. a sphere's body) and the
+      // viewport rule (also each caption's painted box); the larger distance satisfies both.
+      : Math.max(
+          cameraDistanceToContain(drawn, sceneAspect ?? 4 / 3),
+          cameraDistanceToContainFigure(drawn, viewportFromCanvas(sceneBox.w, sceneBox.h, typeof window === 'undefined' ? undefined : window.innerWidth)),
+        )
   const framed = framedDistance === null || framedDistance === drawn.cameraDistance
     ? drawn
     : { ...drawn, cameraDistance: framedDistance }
@@ -581,7 +588,7 @@ export function ExplainerFigure({
               {working.map((line, i) => (
                 <p key={`${line}-${i}`} className={styles.workingLine}>
                   {linkSymbols(line, explainer.legend ?? []).map((token, j) => (
-                    <span key={j} style={token.color ? { color: themeColor(token.color, theme), fontWeight: 800 } : undefined}>
+                    <span key={j} style={token.color ? { color: readableTextColor(themeColor(token.color, theme) ?? token.color, theme), fontWeight: 800 } : undefined}>
                       {token.text}
                     </span>
                   ))}
@@ -851,7 +858,7 @@ export function ExplainerFigure({
                       onClick={() => setPinnedColor(active ? null : row.color)}
                       title={active ? 'Show the whole figure again' : `Focus on ${row.label}`}
                     >
-                      <Swatch shape={row.shape} color={themeColor(row.color, theme) ?? row.color} />
+                      <Swatch shape={row.shape} color={meshColor(row.color, theme) ?? row.color} />
                       <span>{row.label}</span>
                     </button>
                   )

@@ -111,9 +111,9 @@ export function buildGravitationOrbitScene(params: GravitationParams): SceneSpec
       {
         narration: `A satellite orbits a central body of mass ${params.centralMass} kg at a radius of ${params.orbitRadius} m.`,
         objects: [
-          { type: 'node', id: 'centralBody', position: [0, 0, 0], text: 'M', color: '#f59e0b', radius: 0.6 },
-          { type: 'path', id: 'orbit', points: geo.circle, color: '#64748b' },
-          { type: 'node', id: 'satellite', position: geo.satellite, text: 'satellite', color: '#3b82f6', radius: 0.4 },
+          { type: 'node', id: 'centralBody', position: [0, 0, 0], text: 'M', color: '#f59e0b', radius: 1.0 },
+          { type: 'path', id: 'orbit', points: geo.circle, color: '#94a3b8', radius: 0.12 },
+          { type: 'node', id: 'satellite', position: geo.satellite, text: 'satellite', color: '#3b82f6', radius: 0.7 },
         ],
       },
       {

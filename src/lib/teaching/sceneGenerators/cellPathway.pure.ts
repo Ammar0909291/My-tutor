@@ -54,10 +54,26 @@ const NODE_RADIUS = 0.8
 // lower half), against the figure's surface — not in the sphere's own colour on
 // the sphere, which MEASURED 2.7–4.5 : 1 in Chromium.
 function node(id: string, position: Vec3, text: string): SceneObject {
-  return { type: 'node', id, position, radius: NODE_RADIUS, color: NODE_COLOR, text, properties: captionBeside(NODE_RADIUS, position[1] < 0 ? 'below' : 'above') }
+  return { type: 'node', id, position, radius: NODE_RADIUS, color: NODE_COLOR, text, properties: { ...captionBeside(NODE_RADIUS, position[1] < 0 ? 'below' : 'above'), labelWrapUnits: SPACING - 0.6 } }
 }
+/**
+ * A connector between two stages, running from one sphere's SURFACE to the next one's. It used to run
+ * centre to centre, so its arrowhead ended inside the destination sphere and no pathway showed a
+ * direction at all — order was carried by caption position alone (measured: no arrowhead visible on any
+ * Biology pathway). The head now stops just short of the sphere it points at.
+ */
 function arrow(id: string, from: Vec3, to: Vec3): SceneObject {
-  return { type: 'arrow', id, from, to, color: ARROW_COLOR, thickness: 0.05 }
+  const dx = to[0] - from[0]
+  const dy = to[1] - from[1]
+  const len = Math.hypot(dx, dy) || 1
+  const gap = NODE_RADIUS + 0.25
+  const [ux, uy] = [dx / len, dy / len]
+  return {
+    type: 'arrow', id,
+    from: [round(from[0] + ux * gap), round(from[1] + uy * gap), 0],
+    to: [round(to[0] - ux * gap), round(to[1] - uy * gap), 0],
+    color: ARROW_COLOR, thickness: 0.05,
+  }
 }
 
 /**
@@ -143,7 +159,12 @@ export function buildCellPathwayScene(params: CellPathwayParams): SceneSpec {
     const firstPos: Vec3 = [round(mainStartX), 0, 0]
     steps.push({
       narration: `The cycle returns to ${stages[0].name}: the sequence repeats.`,
-      objects: [{ type: 'path', id: 'cycle-return', points: [lastPos, [lastPos[0], -2.5, 0] as Vec3, [firstPos[0], -2.5, 0] as Vec3, firstPos], color: ARROW_COLOR }],
+      // The return runs down from the last stage, back along the bottom, and ARROWS up into the first stage; the
+      // closing leg is an arrow (a bare polyline ended in no head, so the loop showed no direction).
+      objects: [
+        { type: 'path', id: 'cycle-return', points: [[lastPos[0], round(-NODE_RADIUS - 0.1), 0] as Vec3, [lastPos[0], -2.5, 0] as Vec3, [firstPos[0], -2.5, 0] as Vec3], color: ARROW_COLOR },
+        arrow('cycle-return-arrow', [firstPos[0], -2.5, 0], firstPos),
+      ],
     })
   }
 

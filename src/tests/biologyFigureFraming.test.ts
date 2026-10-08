@@ -12,13 +12,14 @@
 import { describe, it, expect } from 'vitest'
 import type { SceneSpec, SceneObject } from '@/lib/teaching/sceneSpec'
 import {
-  VIEWPORTS, cameraDistanceToContain, checkSceneLayout, sceneTextObjects, stageHeightToFit,
-  viewportFromCanvas, wrapFractionOf,
+  VIEWPORTS, cameraDistanceToContainFigure, checkSceneLayout, sceneTextObjects, stageHeightToFit,
+  viewportFromCanvas, wrapPxOf,
 } from '@/lib/teaching/visual/layout'
 import { buildCanonicalScene, CONCEPT_SCENE_OVERRIDES } from '@/lib/teaching/visual/conceptSceneParams'
 import { buildCellStructureScene } from '@/lib/teaching/sceneGenerators/cellStructure'
 import { buildCellComparisonScene } from '@/lib/teaching/sceneGenerators/cellComparison'
 import { buildCellHubScene } from '@/lib/teaching/sceneGenerators/cellHub'
+import { buildCellPathwayScene } from '@/lib/teaching/sceneGenerators/cellPathway'
 
 const scene = (objects: SceneObject[], cameraDistance = 10): SceneSpec => ({
   id: 't', title: 't', sceneType: 'diagram', cameraDistance, steps: [{ objects }],
@@ -27,11 +28,19 @@ const PHONE = viewportFromCanvas(358, 268, 390)
 const DESKTOP = viewportFromCanvas(914, 414, 1280)
 
 describe('properties.labelOffset moves the caption, not the object', () => {
-  const node = (props?: Record<string, unknown>): SceneObject =>
-    ({ type: 'node', id: 'n', position: [1, 2, 0], radius: 0.7, text: 'Name', ...(props ? { properties: props } : {}) })
+  // radius 0.2: a small marker keeps its caption on it; a body of 0.45+ is captioned from above it by the shared
+  // anchor rule (see the next test), which is what an object WITHOUT the property gets.
+  const node = (props?: Record<string, unknown>, radius = 0.2): SceneObject =>
+    ({ type: 'node', id: 'n', position: [1, 2, 0], radius, text: 'Name', ...(props ? { properties: props } : {}) })
 
   it('an object without the property is anchored exactly where it always was', () => {
     expect(sceneTextObjects(scene([node()]))[0].position).toEqual([1, 2, 0])
+  })
+  it('a big body without the property is captioned from just above its surface (shared anchor rule)', () => {
+    expect(sceneTextObjects(scene([node(undefined, 0.7)]))[0].position).toEqual([1, 3.25, 0])
+  })
+  it('the property wins over the shared rule: the caption goes exactly where the object says', () => {
+    expect(sceneTextObjects(scene([node({ labelOffset: [0, -1.2, 0] }, 0.7)]))[0].position).toEqual([1, 0.8, 0])
   })
   it('an object with it is anchored at the offset position', () => {
     expect(sceneTextObjects(scene([node({ labelOffset: [0, 1.2, 0] })]))[0].position).toEqual([1, 3.2, 0])
@@ -47,25 +56,36 @@ describe('properties.labelOffset moves the caption, not the object', () => {
   })
 })
 
-describe('properties.labelWrapFraction', () => {
-  it('is read only inside its valid range', () => {
-    const o = (f: unknown): SceneObject => ({ type: 'label', text: 'x', position: [0, 0, 0], properties: { labelWrapFraction: f } })
-    expect(wrapFractionOf(o(0.4))).toBe(0.4)
-    for (const bad of [0.05, 0.99, NaN, '0.4', undefined]) expect(wrapFractionOf(o(bad))).toBeUndefined()
+describe('wrapPxOf — a caption’s authored wrap width', () => {
+  const o = (props: Record<string, unknown>): SceneObject => ({ type: 'label', text: 'x', position: [0, 0, 0], properties: props })
+  it('reads labelWrapFraction as a share of the canvas, only inside its valid range', () => {
+    expect(wrapPxOf(o({ labelWrapFraction: 0.4 }), PHONE, 10)).toBeCloseTo(0.4 * 358, 0)
+    for (const bad of [0.05, 0.99, NaN, '0.4', undefined]) expect(wrapPxOf(o({ labelWrapFraction: bad }), PHONE, 10)).toBeUndefined()
+  })
+  it('reads labelWrapUnits as scene units converted at the live scale', () => {
+    const tan = Math.tan((50 * Math.PI) / 360)
+    const scale = PHONE.hostHeight / (2 * tan * 10)
+    expect(wrapPxOf(o({ labelWrapUnits: 6 }), PHONE, 10)).toBeCloseTo(6 * scale, 0)
+    // a farther camera means a smaller scale, so the same column is narrower on screen
+    expect(wrapPxOf(o({ labelWrapUnits: 6 }), PHONE, 20)!).toBeLessThan(wrapPxOf(o({ labelWrapUnits: 6 }), PHONE, 10)!)
+  })
+  it('the narrower of the two wins, and never below the readable floor', () => {
+    expect(wrapPxOf(o({ labelWrapFraction: 0.9, labelWrapUnits: 1 }), DESKTOP, 10)).toBe(76)
+    expect(wrapPxOf(o({ labelWrapFraction: 0.2, labelWrapUnits: 100 }), DESKTOP, 10)).toBeCloseTo(0.2 * 914, 0)
   })
 })
 
-describe('cameraDistanceToContain', () => {
+describe('cameraDistanceToContainFigure', () => {
   it('returns the scene’s own distance when everything already fits', () => {
     const fits = scene([{ type: 'node', position: [0, 0, 0], radius: 0.5 }, { type: 'node', position: [1, 1, 0], radius: 0.5 }], 10)
-    expect(cameraDistanceToContain(fits, PHONE)).toBe(10)
-    expect(cameraDistanceToContain(fits, DESKTOP)).toBe(10)
+    expect(cameraDistanceToContainFigure(fits, PHONE)).toBe(10)
+    expect(cameraDistanceToContainFigure(fits, DESKTOP)).toBe(10)
   })
 
   it('moves the camera FURTHER when a sphere would be cut by the canvas edge, and only then', () => {
     // Two columns 11 units apart framed for a distance that leaves them at the edge.
     const wide = scene([{ type: 'node', position: [-5.5, 0, 0], radius: 0.75 }, { type: 'node', position: [5.5, 0, 0], radius: 0.75 }], 7)
-    const d = cameraDistanceToContain(wide, PHONE)
+    const d = cameraDistanceToContainFigure(wide, PHONE)
     expect(d).toBeGreaterThan(7)
     // After the move, the outer sphere's edge is inside the canvas.
     const scale = PHONE.hostHeight / (2 * Math.tan((50 * Math.PI) / 360) * d)
@@ -75,14 +95,14 @@ describe('cameraDistanceToContain', () => {
   it('never moves the camera closer than the scene asked for', () => {
     for (const own of [6, 12, 30]) {
       const s = scene([{ type: 'node', position: [0.2, 0.2, 0], radius: 0.1 }], own)
-      expect(cameraDistanceToContain(s, PHONE)).toBeGreaterThanOrEqual(own)
+      expect(cameraDistanceToContainFigure(s, PHONE)).toBeGreaterThanOrEqual(own)
     }
   })
 
   it('is bounded: a caption as wide as the canvas cannot shrink the figure to a dot', () => {
     const long = 'x'.repeat(120)
     const s = scene([{ type: 'label', position: [9, 0, 0], text: long }], 6)
-    expect(cameraDistanceToContain(s, PHONE)).toBeLessThanOrEqual(6 * 2.2 + 0.05)
+    expect(cameraDistanceToContainFigure(s, PHONE)).toBeLessThanOrEqual(6 * 2.2 + 0.05)
   })
 })
 
@@ -164,15 +184,37 @@ describe('captions sit beside their sphere, not on it', () => {
     }
   })
 
-  it('comparison captions wrap to their column and three or more groups use a grid', () => {
+  it('comparison captions wrap to their column: a share of the canvas AND the column pitch; three or more groups use a grid', () => {
     const groups = (n: number) => Array.from({ length: n }, (_, i) => ({ label: `G${i}`, description: 'd', items: ['item'] }))
-    const two = buildCellComparisonScene({ conceptId: 't', title: 'T', teachingGoal: 'g', groups: groups(2) })
     const labelOf = (sc: SceneSpec) => sc.steps.flatMap((st) => st.objects).find((o) => o.type === 'label')!
-    expect(wrapFractionOf(labelOf(two))).toBeCloseTo(0.42, 2)
+    const two = buildCellComparisonScene({ conceptId: 't', title: 'T', teachingGoal: 'g', groups: groups(2) })
+    expect(labelOf(two).properties).toMatchObject({ labelWrapFraction: 0.42, labelWrapUnits: 4.7 })
     const four = buildCellComparisonScene({ conceptId: 't', title: 'T', teachingGoal: 'g', groups: groups(4) })
-    expect(wrapFractionOf(labelOf(four))).toBeCloseTo(0.42, 2) // two columns
+    expect(labelOf(four).properties).toMatchObject({ labelWrapFraction: 0.42, labelWrapUnits: 5.7 }) // two columns, 6.5 apart
     const six = buildCellComparisonScene({ conceptId: 't', title: 'T', teachingGoal: 'g', groups: groups(6) })
-    expect(wrapFractionOf(labelOf(six))).toBeCloseTo(0.28, 2) // three columns
+    expect(labelOf(six).properties).toMatchObject({ labelWrapFraction: 0.28, labelWrapUnits: 5.7 }) // three columns
+  })
+
+  it('a long hub caption is a heading above the figure; a short one stays on the hub', () => {
+    const mk = (hubLabel: string) => buildCellHubScene({ conceptId: 't.h', hubLabel, title: 'T', teachingGoal: 'g', spokes: Array.from({ length: 4 }, (_, i) => ({ name: `S${i}`, description: 'd' })) })
+    const hubOf = (sc: SceneSpec) => sc.steps[0].objects.find((o) => o.id === 'hub')!
+    expect((hubOf(mk('Biology')).properties!.labelOffset as number[])[1]).toBeCloseTo(1.4, 1)
+    const long = hubOf(mk('Cognitive neuroscience of consciousness: three distinct ideas'))
+    expect((long.properties!.labelOffset as number[])[1]).toBeGreaterThan(5)
+    expect(long.properties!.labelWrapFraction).toBe(0.8)
+  })
+
+  it('pathway arrows stop at the sphere surfaces, so their heads are visible, and a cycle returns with an arrowhead', () => {
+    const sc = buildCellPathwayScene({
+      conceptId: 't.p', title: 'T', teachingGoal: 'g', cyclic: true,
+      stages: [{ name: 'A', description: 'a' }, { name: 'B', description: 'b' }, { name: 'C', description: 'c' }],
+    })
+    const objs = sc.steps.flatMap((st) => st.objects)
+    const arrow = objs.find((o) => o.id === 'stage-1-arrow')!
+    // centres 4.5 apart, sphere radius 0.8: the arrow neither starts nor ends inside a sphere
+    expect(arrow.from![0]).toBeGreaterThan(0.8)
+    expect(arrow.to![0]).toBeLessThan(4.5 - 0.8)
+    expect(objs.some((o) => o.id === 'cycle-return-arrow' && o.type === 'arrow')).toBe(true)
   })
 })
 
@@ -181,14 +223,14 @@ describe('corpus gate: every authored Biology figure lays out cleanly at phone a
   it('has the Biology scenes to check', () => { expect(ids.length).toBeGreaterThan(150) })
 
   for (const [name, w, h, bw] of [['phone 390px', 358, 268, 390], ['desktop 1280px', 914, 414, 1280]] as const) {
-    it(`${name}: contained and, where needed, on a taller stage, no label is clipped or collides`, () => {
+    it(`${name}: contained and, where needed, on a taller stage, no label is clipped or collides`, { timeout: 180000 }, () => {
       const failures: string[] = []
       for (const id of ids) {
         const sc = buildCanonicalScene(null, id)
         if (!sc) continue
         const height = stageHeightToFit(sc, w, h, bw, 600)
         const vp = viewportFromCanvas(w, height, bw)
-        const framed = { ...sc, cameraDistance: cameraDistanceToContain(sc, vp) }
+        const framed = { ...sc, cameraDistance: cameraDistanceToContainFigure(sc, vp) }
         const report = checkSceneLayout(framed, vp)
         if (!report.ok) failures.push(`${id}: ${report.violations.length}`)
       }

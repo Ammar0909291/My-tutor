@@ -115,9 +115,17 @@ export function stageView(spec: SceneSpec, stage: number, mode: SceneMode = 'exp
 
   const kept = all.filter((o) => !withheldIn(mode, o))
 
+  // A focus id that names nothing drawn must not decide emphasis: if EVERY id a
+  // stage names is absent (a generator that omits an object at some parameter
+  // value — the dipole's angle arc at θ = 0° — but still lists it), the old set
+  // was non-empty and matched nothing, which dims the whole figure. Dangling ids
+  // are dropped; if none survive, the whole scene is in focus.
+  const present = new Set(all.map((o) => o.id).filter((id): id is string => Boolean(id)))
+  const focus = (step?.focus ?? []).filter((id) => Boolean(id) && present.has(id))
+
   return {
     objects: kept,
-    focusIds: new Set((step?.focus ?? []).filter(Boolean)),
+    focusIds: new Set(focus),
     withheldCount: all.length - kept.length,
     narration: step?.narration?.trim() || null,
     intent: step?.intent ?? null,
