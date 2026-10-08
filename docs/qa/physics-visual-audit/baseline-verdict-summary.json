@@ -1,0 +1,121 @@
+{
+  "concepts": 283,
+  "verdicts": {
+    "FAIL": 192,
+    "PASS": 90,
+    "REVIEW_REQUIRED": 1
+  },
+  "byViewport": {
+    "mobile": {
+      "FAIL": 191,
+      "PASS": 91,
+      "REVIEW_REQUIRED": 1
+    },
+    "desktop-column": {
+      "REVIEW_REQUIRED": 8,
+      "FAIL": 28,
+      "PASS": 247
+    }
+  },
+  "byDimension": {
+    "structural": {
+      "REVIEW_REQUIRED": 3,
+      "PASS": 280
+    },
+    "readability": {
+      "PASS": 270,
+      "FAIL": 10,
+      "REVIEW_REQUIRED": 3
+    },
+    "contrast": {
+      "FAIL": 184,
+      "PASS": 99
+    },
+    "layout": {
+      "PASS": 244,
+      "FAIL": 17,
+      "REVIEW_REQUIRED": 22
+    },
+    "graph": {
+      "PASS": 280,
+      "FAIL": 3
+    },
+    "semantic": {
+      "PASS": 266,
+      "REVIEW_REQUIRED": 14,
+      "FAIL": 3
+    },
+    "interactive": {
+      "PASS": 283
+    }
+  },
+  "withMissingRenders": 0,
+  "failureClusters": [
+    {
+      "rule": "CT-01 [chrome]",
+      "findings": 199,
+      "concepts": 181,
+      "sample": "\"1 kg·m/s²\" has 2.00:1 against its backdrop (needs 4.5:1)"
+    },
+    {
+      "rule": "CT-01 [svg-text]",
+      "findings": 135,
+      "concepts": 12,
+      "sample": "\"Applied\" has 3.99:1 against its backdrop (needs 4.5:1)"
+    },
+    {
+      "rule": "LY-01",
+      "findings": 79,
+      "concepts": 10,
+      "sample": "\"x\" overlaps \"A (1 at 0°)\" (43% of the smaller)"
+    },
+    {
+      "rule": "RD-02 [scene-label]",
+      "findings": 32,
+      "concepts": 8,
+      "sample": "\"x\" is clipped (32% visible)"
+    },
+    {
+      "rule": "LY-06",
+      "findings": 31,
+      "concepts": 8,
+      "sample": "drawing is cut off at the canvas edge (5.0% of the border is ink)"
+    },
+    {
+      "rule": "SM-03",
+      "findings": 9,
+      "concepts": 3,
+      "sample": "kinematics_graphs at {\"initialVelocity\":-10,\"acceleration\":-5,\"duration\":1,\"initialPosition\":0}: GR-01 a graph is drawn with no pair of axes (no scale, no meaning for position)"
+    },
+    {
+      "rule": "CT-01 [scene-label]",
+      "findings": 65,
+      "concepts": 3,
+      "sample": "\"m1=2\" has 2.98:1 against its backdrop (needs 4.5:1)"
+    },
+    {
+      "rule": "LY-02",
+      "findings": 6,
+      "concepts": 3,
+      "sample": "\"v1f=2.09\" sits on drawn geometry (63% of its box)"
+    },
+    {
+      "rule": "GR-01",
+      "findings": 2,
+      "concepts": 2,
+      "sample": "a graph is drawn with no pair of axes (no scale, no meaning for position)"
+    },
+    {
+      "rule": "RD-02 [svg-text]",
+      "findings": 2,
+      "concepts": 2,
+      "sample": "\"spectral line\" is clipped (88% visible)"
+    },
+    {
+      "rule": "GR-04",
+      "findings": 1,
+      "concepts": 1,
+      "sample": "a plotted curve leaves the axes it is drawn against"
+    }
+  ]
+}

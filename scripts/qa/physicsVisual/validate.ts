@@ -14,7 +14,7 @@ import { buildInventory, type InventoryRow } from './inventory'
 import { resolveVisual } from '../../../src/lib/teaching/visual/resolveVisual'
 import { auditGraph, auditRenderedState, auditSceneData, rollup, type Finding, type Verdict } from '../../../src/lib/teaching/visual/figureAudit'
 import { checkFigureTexts } from '../../../src/lib/teaching/visual/figureSemantics'
-import { servedFingerprint } from './fingerprint'
+import { servedFingerprints } from './fingerprint'
 import { CHECKED_KINDS, checkKind, type KindReport } from './kindChecks'
 import type { RenderRecord, ViewportName, ThemeName } from './render'
 import type { SceneSpec } from '../../../src/lib/teaching/sceneSpec'
@@ -204,10 +204,12 @@ function main(): void {
   mkdirSync(outDir, { recursive: true })
   // The compact, committable record: one row per concept, enough to re-derive every
   // count in the report and to prove (by fingerprint) that it describes what ships.
-  const { fingerprint } = servedFingerprint()
+  const { fingerprint, fingerprints } = servedFingerprints()
   const compact = {
     generatedAt: new Date().toISOString(),
     fingerprint,
+    // One per concept, so a change to one figure names exactly the concepts to re-audit.
+    fingerprints,
     viewports: wantedVps, themes: wantedThemes,
     summary: { concepts: summary.concepts, verdicts: summary.verdicts, byViewport: summary.byViewport, byDimension: summary.byDimension, withMissingRenders: summary.withMissingRenders },
     concepts: reports.map((r) => ({

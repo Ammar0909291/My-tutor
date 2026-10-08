@@ -1,0 +1,7753 @@
+{
+ "generatedAt": "2026-10-08T12:35:12.789Z",
+ "fingerprint": "9dd61ac7c44955376cb1fab93f589726441ff6caa2b0b45c7c1170abb85b9433",
+ "fingerprints": {
+  "phys.meas.units": "689b537633be33f5",
+  "phys.meas.scalars-vectors": "566feb21908a8419",
+  "phys.meas.dimensions": "7074ce404130e2ae",
+  "phys.meas.errors": "89c17ab9dbd93a52",
+  "phys.meas.significant-figures": "9866b32c888265ed",
+  "phys.meas.measuring-instruments": "b3b912f3d66b0c23",
+  "phys.meas.linearisation-and-uncertainty": "3e0b1fa2e66c764a",
+  "phys.meas.vector-addition": "94ce95ad933dea95",
+  "phys.meas.vector-products": "1c43e91a88b428d3",
+  "phys.meas.unit-conversion": "59a0e1117f97963b",
+  "phys.meas.density": "84e809f68353b0da",
+  "phys.mech.displacement": "a429dea1734a1099",
+  "phys.mech.velocity": "afaa3adae2211547",
+  "phys.mech.acceleration": "a8cdc385d050e29e",
+  "phys.mech.kinematics-1d": "424e7b8499da74c7",
+  "phys.mech.kinematics-2d": "3c31d648fd1536ea",
+  "phys.mech.projectile-motion": "1b41a320328c1c9b",
+  "phys.mech.relative-motion": "43d3945969c4f7e0",
+  "phys.mech.circular-motion": "f350192b90e3977d",
+  "phys.mech.force": "4e5a26bd7d8380a4",
+  "phys.mech.mass-and-weight": "d75a02d5766510be",
+  "phys.mech.newtons-first-law": "4c37a84370a20e0a",
+  "phys.mech.newtons-second-law": "741aaa37a67c60a6",
+  "phys.mech.newtons-third-law": "e2e096e34c7583b1",
+  "phys.mech.free-body-diagram": "7f1b35324190ae18",
+  "phys.mech.friction": "3863d886b0e992dc",
+  "phys.mech.tension": "a99d45b7cdda94bb",
+  "phys.mech.constraint-motion": "67c9d615477b14d1",
+  "phys.mech.normal-force": "2c0ebf797fef3fb8",
+  "phys.mech.inclined-plane": "9fe037d450388b51",
+  "phys.mech.non-inertial-frames": "59a2ad230f715fb1",
+  "phys.mech.work": "b992dbfe7350cef1",
+  "phys.mech.kinetic-energy": "2e2bcf296967d2a8",
+  "phys.mech.potential-energy": "7e1660f6733cc55d",
+  "phys.mech.work-energy-theorem": "7d941ce065ece31d",
+  "phys.mech.conservation-of-energy": "6c2b4a979d7f504f",
+  "phys.mech.power": "e692398cd78b9b55",
+  "phys.mech.simple-machines": "4906f3e014cff03f",
+  "phys.mech.conservative-forces": "70854de93acb4187",
+  "phys.mech.momentum": "2321b736427c50b4",
+  "phys.mech.impulse": "0d1e235d4be30b9a",
+  "phys.mech.conservation-of-momentum": "ce557fd5e74f989e",
+  "phys.mech.collisions-elastic": "20243996cb065e3a",
+  "phys.mech.collisions-inelastic": "565be851cd589309",
+  "phys.mech.center-of-mass": "701edb2078552d9f",
+  "phys.mech.angular-kinematics": "d07e7f6883503d2b",
+  "phys.mech.torque": "ad41def24b024093",
+  "phys.mech.moment-of-inertia": "02a99d5fcc8df22d",
+  "phys.mech.rotational-dynamics": "7b54d8b91649d0b3",
+  "phys.mech.angular-momentum": "c5fb54988d720a63",
+  "phys.mech.conservation-of-angular-momentum": "af2ff74bf06466af",
+  "phys.mech.rolling-motion": "85c75f5be608e6ff",
+  "phys.mech.equilibrium": "3b2cc9f6713aa505",
+  "phys.mech.universal-gravitation": "840f4e3c89445820",
+  "phys.mech.gravitational-field": "7ad541dfbec5a83e",
+  "phys.mech.variation-of-g": "fbcf45431b597840",
+  "phys.mech.gravitational-potential": "ef540c6849b89c3a",
+  "phys.mech.orbital-mechanics": "505759594a8d4491",
+  "phys.mech.keplers-laws": "721a5e91763379eb",
+  "phys.mech.escape-velocity": "294eb0a104f9a375",
+  "phys.mech.satellites": "caafb12215581512",
+  "phys.mech.hookes-law": "006e49eebf7ac5bb",
+  "phys.mech.stress-strain": "2335b283e62ef73e",
+  "phys.mech.pressure-fluids": "3419332b4d00330d",
+  "phys.mech.buoyancy": "b70fe1cb1c2965b8",
+  "phys.mech.fluid-flow": "cb99564d9b395b3c",
+  "phys.mech.bernoulli": "709da79e0557bcdb",
+  "phys.mech.surface-tension": "d23b2f8dce03dbb9",
+  "phys.mech.viscosity": "3fccfd3b006099cd",
+  "phys.mech.terminal-velocity": "831573b2b4846b92",
+  "phys.mech.generalized-coordinates": "3ea5bbd2d1fd6ef6",
+  "phys.mech.euler-lagrange-equation": "4f35050f399b02e5",
+  "phys.mech.cyclic-coordinates-conservation-laws": "6dcf4489937eb559",
+  "phys.mech.hamiltonian": "ac537dfdd8487413",
+  "phys.mech.hamiltons-equations": "71c0bd2e182fd540",
+  "phys.mech.poisson-brackets": "eae8a1c118ac1495",
+  "phys.mech.canonical-transformations": "f09ddf44d0fb3f1f",
+  "phys.mech.hamilton-jacobi-equation": "c0fa3924f7002d4d",
+  "phys.therm.temperature": "997dff34f4a64faf",
+  "phys.therm.zeroth-law": "5ae7e2e4c19d5453",
+  "phys.therm.thermal-expansion": "26009d8052501f63",
+  "phys.therm.heat-transfer": "0593ce4979861757",
+  "phys.therm.newtons-law-of-cooling": "f5179670e4c7bd51",
+  "phys.therm.blackbody-radiation": "85e1d2beea8d0790",
+  "phys.therm.energy-resources": "4f05b79263ebb5be",
+  "phys.therm.specific-heat": "6ba7fcf86cad7487",
+  "phys.therm.calorimetry": "50772928248b7e14",
+  "phys.therm.phase-transitions": "4411a290dc36a8a4",
+  "phys.therm.ideal-gas-law": "e160f02da51f0558",
+  "phys.therm.kinetic-theory": "969661717f08d2d2",
+  "phys.therm.first-law": "81efe21388e1ee12",
+  "phys.therm.internal-energy": "aa67c16ec7c68ebd",
+  "phys.therm.thermodynamic-processes": "7a669d45f76c48c1",
+  "phys.therm.specific-heats-of-gases": "475d50fdea8c2c17",
+  "phys.therm.second-law": "a3e36e371a4cd8f7",
+  "phys.therm.entropy": "7e2b024a177de4a4",
+  "phys.therm.heat-engines": "5874d6e24235e236",
+  "phys.therm.carnot-cycle": "b523dac80379e13d",
+  "phys.therm.refrigerators": "62412817d9928bf2",
+  "phys.therm.third-law": "366a624e35a0ef59",
+  "phys.wave.shm": "503fc853dc7b6195",
+  "phys.wave.shm-energy": "cf2df31a6bf9edd8",
+  "phys.wave.pendulum": "815307eea30045e8",
+  "phys.wave.spring-mass": "e2a539ee42b3fd9c",
+  "phys.wave.damped-oscillations": "fd6141b9f1250032",
+  "phys.wave.forced-oscillations": "28f19586293ed879",
+  "phys.wave.nonlinear-dynamics": "aeb58a84da82644d",
+  "phys.wave.wave-properties": "a3c41d76f9f39e02",
+  "phys.wave.transverse-waves": "11bc7e3dc6b2bfc3",
+  "phys.wave.longitudinal-waves": "b7c5bb1152ee80ec",
+  "phys.wave.wave-speed": "b1b9d03353fefc26",
+  "phys.wave.superposition": "e8dacc66017b6cf0",
+  "phys.wave.interference": "72b8703152c3ead9",
+  "phys.wave.standing-waves": "1485b1ff40284211",
+  "phys.wave.coupled-oscillators": "539bab2d5a6e573d",
+  "phys.wave.sound-waves": "b27a96508bbfcc39",
+  "phys.wave.echo-and-sonar": "79ef2d64e8e7e13d",
+  "phys.wave.sound-intensity": "d52300c2abf59a63",
+  "phys.wave.doppler-effect": "c90e1889b6c90228",
+  "phys.wave.beats": "972a6e9abc0ef35d",
+  "phys.opt.rectilinear-propagation": "15494fc8e192bbaa",
+  "phys.opt.nature-of-light": "739ca3b0ff550906",
+  "phys.opt.reflection": "3a46252e5a9cec47",
+  "phys.opt.mirrors": "20a113211c64cf5c",
+  "phys.opt.refraction": "68fa7432ad15d062",
+  "phys.opt.total-internal-reflection": "a784035ad52541f4",
+  "phys.opt.lenses": "28ef426566002db0",
+  "phys.opt.lens-power": "93cd938bc590188f",
+  "phys.opt.human-eye": "d58a3f32074479f4",
+  "phys.opt.optical-instruments": "fa031acff9dc20eb",
+  "phys.opt.dispersion": "2e29aaa29035803c",
+  "phys.opt.scattering-of-light": "c094e2e0267322af",
+  "phys.opt.wave-optics": "6baf822b77e9c9cf",
+  "phys.opt.youngs-experiment": "7faf2716133a524d",
+  "phys.opt.thin-film-interference": "92d3dbb5367222db",
+  "phys.opt.diffraction": "29bf7e0bcd857854",
+  "phys.opt.single-slit": "115b4fe3937db16e",
+  "phys.opt.diffraction-grating": "5180472ed206dac4",
+  "phys.opt.resolving-power": "dc97d01dd5f726db",
+  "phys.opt.polarization": "6a32a306d160bb8d",
+  "phys.opt.brewsters-law": "3d61d547ca2e6920",
+  "phys.em.electric-charge": "cdbaa243136ca37a",
+  "phys.em.coulombs-law": "58fad958094808f1",
+  "phys.em.electric-field": "068fcaa9200e5bc0",
+  "phys.em.electric-dipole": "d4a5fea886942c61",
+  "phys.em.gauss-law": "cd1b3ca187dcf9be",
+  "phys.em.electric-potential": "dbfe76c2e856f0fc",
+  "phys.em.electrostatic-potential-energy": "88f79d64978dda2c",
+  "phys.em.conductors-electrostatics": "7bd72cd69176bfbe",
+  "phys.em.capacitance": "145b9b6d7e1ce4a0",
+  "phys.em.dielectrics": "c5a95fc31f3160ed",
+  "phys.em.energy-capacitor": "01b9a84678e8d99f",
+  "phys.em.electric-current": "ed7db6713453be99",
+  "phys.em.ohms-law": "8a9736c9dd319ef4",
+  "phys.em.resistivity": "11b7584443dc7919",
+  "phys.em.dc-circuits": "32828ce587e1810e",
+  "phys.em.kirchhoffs-laws": "779dfdcb92a66381",
+  "phys.em.wheatstone-bridge": "c0cce2b21102c7a0",
+  "phys.em.potentiometer": "30612fa98d9bcf4c",
+  "phys.em.electrical-power": "c53af3d3eac08462",
+  "phys.em.domestic-electricity": "375572ebdeedfc32",
+  "phys.em.emf": "68e8bd7e8380125e",
+  "phys.em.cells-combination": "52e80b877e21b20b",
+  "phys.em.rc-circuits": "1a6e7e0f9cfdba34",
+  "phys.em.magnetic-field": "7cb840bb772cea21",
+  "phys.em.magnetic-force": "aeecd778058970cd",
+  "phys.em.hall-effect": "c0f48c1012c8175c",
+  "phys.em.moving-coil-galvanometer": "4146af453a53a8b3",
+  "phys.em.biot-savart": "9f429131ca658085",
+  "phys.em.amperes-law": "4afb4baece813f3b",
+  "phys.em.solenoid": "7da197f560afe369",
+  "phys.em.magnetic-materials": "5a27cf993c0ecf46",
+  "phys.em.fields-in-matter": "f1a2779f12326393",
+  "phys.em.magnetic-dipole": "620e5f296441751e",
+  "phys.em.magnetic-flux": "83fbea05af6039de",
+  "phys.em.faradays-law": "6010117ab1fabbe8",
+  "phys.em.lenzs-law": "1663e73bf881c84e",
+  "phys.em.motors-and-generators": "3f01a5b45f979704",
+  "phys.em.self-inductance": "39b71c41b0c4adba",
+  "phys.em.mutual-inductance": "425abbb201375149",
+  "phys.em.ac-basics": "9798a09aee1733fe",
+  "phys.em.lc-circuits": "43a05dd0e10054ee",
+  "phys.em.lcr-circuits": "f4e22379712e88c1",
+  "phys.em.ac-power": "0ac9c1a9b802e10a",
+  "phys.em.maxwells-equations": "17def0879718ec73",
+  "phys.em.electromagnetic-waves": "474eda9e57d66159",
+  "phys.em.communication-systems": "2b964d2cfc6b2119",
+  "phys.em.radiation-and-antennas": "99e58d1466fb105c",
+  "phys.mod.photoelectric-effect": "38afda00220b271a",
+  "phys.mod.photons": "962d33cb049f11fc",
+  "phys.mod.compton-effect": "422faafd660f6c8e",
+  "phys.mod.de-broglie": "9c47c0499cad5fce",
+  "phys.mod.wave-particle-duality": "ea1ebdbfedd0d835",
+  "phys.mod.atomic-models": "19110796afc9dc93",
+  "phys.mod.bohr-model": "13d232364d76d959",
+  "phys.mod.atomic-spectra": "0ec2ef1d302c319c",
+  "phys.mod.lasers": "942365597ece79b7",
+  "phys.mod.x-rays": "2ab33193ac91717d",
+  "phys.mod.nucleus-size-and-force": "ead200955b15cdf1",
+  "phys.mod.radioactivity": "59a06b04dcc3cbfa",
+  "phys.mod.radioactive-decay": "05b4c829e0acad7a",
+  "phys.mod.radiation-safety": "9eddaeb17fe62f1f",
+  "phys.mod.nuclear-reactions": "1378f62eb4cdbe3a",
+  "phys.mod.binding-energy": "5e4e11d32b68879d",
+  "phys.mod.nuclear-fission": "869ab86abeef9ebc",
+  "phys.mod.nuclear-fusion": "f38ff7f58b318f4f",
+  "phys.mod.nuclear-models": "b323fb72bd53d547",
+  "phys.qm.wave-function": "b6c89f6b990ac787",
+  "phys.qm.schrodinger-equation": "19242458c89e4de2",
+  "phys.qm.uncertainty-principle": "3dc3959899d65013",
+  "phys.qm.operators": "7311cd5e30f401b9",
+  "phys.qm.particle-in-box": "d58fb6169ded2e19",
+  "phys.qm.harmonic-oscillator-qm": "a5c27eec385817d7",
+  "phys.qm.hydrogen-atom-qm": "155e1e2cfeee0482",
+  "phys.qm.spin": "cef10ee68731e7db",
+  "phys.qm.pauli-exclusion": "5f01cb2b6a36c491",
+  "phys.qm.quantum-tunneling": "ba1213fb95c85c55",
+  "phys.qm.perturbation-theory": "61a96687526fe8a0",
+  "phys.qm.selection-rules": "102e39983dacc3aa",
+  "phys.qm.variational-method": "ded274bebcc7cb78",
+  "phys.qm.wkb-approximation": "1fb9d06e3c6c6c52",
+  "phys.qm.identical-particles": "9508af5aaaa08062",
+  "phys.qm.angular-momentum-addition": "40b3746deac2ec18",
+  "phys.qm.scattering-theory-born-approximation": "00dd4d7490aa7cc0",
+  "phys.qm.s-matrix-basics": "9140cc8fea94b610",
+  "phys.qm.density-matrix": "8d71d8d199df7a3d",
+  "phys.rel.postulates": "b75a298036e1f2a8",
+  "phys.rel.simultaneity": "5b233ee765b04565",
+  "phys.rel.time-dilation": "ba0bb2ddecc640d4",
+  "phys.rel.length-contraction": "3ddf2d75c004d5f7",
+  "phys.rel.lorentz-transform": "2e40d01d3a6bc5e5",
+  "phys.rel.relativistic-momentum": "379135f7c0fc9a53",
+  "phys.rel.mass-energy": "be0101704ed35cc8",
+  "phys.rel.spacetime": "ea1f241fbf483d7f",
+  "phys.rel.general-relativity-intro": "8251591aaaea414a",
+  "phys.stat.probability-basics": "71f24a3f769ccc04",
+  "phys.stat.boltzmann-factor": "37c4ad0debaaf7c4",
+  "phys.stat.partition-function": "ce6dd8b4ac4ea6f9",
+  "phys.stat.maxwell-boltzmann": "ad96225659df0aff",
+  "phys.stat.fermi-dirac": "b9e64eb021e023a0",
+  "phys.stat.bose-einstein": "9d9962fa5c95e0de",
+  "phys.stat.entropy-statistical": "82f2de053a5f2a9f",
+  "phys.stat.free-energy": "56625b4c7e8bee01",
+  "phys.stat.grand-canonical-ensemble": "d68e780fdae4040a",
+  "phys.stat.chemical-potential": "d06bb51fda2879e0",
+  "phys.stat.fluctuations-correlations": "6225ac9ba11a34e8",
+  "phys.stat.phase-transitions": "863149a1527c7478",
+  "phys.stat.ising-model": "3eba506cba3ae662",
+  "phys.stat.phase-transitions-critical-phenomena": "65320fa030bfeb24",
+  "phys.stat.monte-carlo-basics": "d3f06a73b5bc6c8b",
+  "phys.astro.solar-system": "10b15d4a3f6d317e",
+  "phys.astro.stellar-properties": "443f952f0cda6c3e",
+  "phys.astro.distance-ladder": "50ba4ff543dadcc8",
+  "phys.astro.stellar-structure": "939b5d8e1b36b443",
+  "phys.astro.stellar-evolution": "f7e6a7e02cb3ae55",
+  "phys.astro.cosmology": "f84128d15a6984ca",
+  "phys.astro.dark-matter": "302e5e8eb1cf174b",
+  "phys.astro.black-holes": "490e6b7ad6401905",
+  "phys.astro.gravitational-waves": "e27b5e2d6c3d6c0e",
+  "phys.particle.four-forces": "a184595fc6ce9252",
+  "phys.particle.particle-classification": "bca62cb6bb85032f",
+  "phys.particle.antimatter": "cab7b833e6640dff",
+  "phys.particle.quarks": "04ca0a5cf97ac565",
+  "phys.particle.leptons": "14704d6d0d956d3e",
+  "phys.particle.neutrinos": "f777b773927ca18d",
+  "phys.particle.hadron-quark-model": "411f8179faf09409",
+  "phys.particle.gauge-bosons": "a5ae2f682725c4a9",
+  "phys.particle.strong-interaction": "8066cc849b050026",
+  "phys.particle.weak-interaction": "111aa8b9ae2e2fad",
+  "phys.particle.electroweak-unification": "35a322625a4cc3c3",
+  "phys.particle.higgs-mechanism": "661866a5227258bb",
+  "phys.particle.conservation-laws": "d1b6dd7b6cd971d8",
+  "phys.particle.feynman-diagrams": "7464d60e64a50695",
+  "phys.particle.accelerators-detectors": "45903127994915a6",
+  "phys.particle.standard-model": "8083e051ea6c60c9",
+  "phys.mod.energy-bands": "0603ffaef9bdad23",
+  "phys.mod.superconductivity": "fdab5088893db28b",
+  "phys.mod.semiconductor-classification": "8be6dec0c74efd38",
+  "phys.mod.intrinsic-semiconductors": "64c139d78e39ca67",
+  "phys.mod.extrinsic-semiconductors": "092f33226eeafb9f",
+  "phys.mod.pn-junction": "0cad0325602f7de2",
+  "phys.mod.diode-rectification": "37c80454330a6565",
+  "phys.mod.special-diodes": "8bbfab1a5d70ca99"
+ },
+ "viewports": [
+  "mobile",
+  "desktop-column"
+ ],
+ "themes": [
+  "dark",
+  "light"
+ ],
+ "summary": {
+  "concepts": 283,
+  "verdicts": {
+   "REVIEW_REQUIRED": 21,
+   "PASS": 262
+  },
+  "byViewport": {
+   "mobile": {
+    "PASS": 277,
+    "REVIEW_REQUIRED": 6
+   },
+   "desktop-column": {
+    "REVIEW_REQUIRED": 6,
+    "PASS": 277
+   }
+  },
+  "byDimension": {
+   "structural": {
+    "REVIEW_REQUIRED": 6,
+    "PASS": 277
+   },
+   "readability": {
+    "PASS": 283
+   },
+   "contrast": {
+    "PASS": 283
+   },
+   "layout": {
+    "PASS": 279,
+    "REVIEW_REQUIRED": 4
+   },
+   "graph": {
+    "PASS": 283
+   },
+   "semantic": {
+    "PASS": 269,
+    "REVIEW_REQUIRED": 14
+   },
+   "interactive": {
+    "PASS": 281,
+    "REVIEW_REQUIRED": 2
+   }
+  },
+  "withMissingRenders": 0
+ },
+ "concepts": [
+  {
+   "id": "phys.meas.units",
+   "verdict": "REVIEW_REQUIRED",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "REVIEW_REQUIRED",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "REVIEW_REQUIRED"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": [
+    "ST-03: the canvas holds text only, no drawn geometry (ink 0.25%)"
+   ]
+  },
+  {
+   "id": "phys.meas.scalars-vectors",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "shared-generator-default",
+   "scope": "domain",
+   "interactive": true,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 27,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.meas.dimensions",
+   "verdict": "REVIEW_REQUIRED",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "REVIEW_REQUIRED",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "REVIEW_REQUIRED",
+    "desktop-column": "REVIEW_REQUIRED"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": [
+    "ST-03: the canvas holds text only, no drawn geometry (ink 0.00%)"
+   ]
+  },
+  {
+   "id": "phys.meas.errors",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.meas.significant-figures",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.meas.measuring-instruments",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.meas.linearisation-and-uncertainty",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.meas.vector-addition",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "shared-generator-default",
+   "scope": "concept",
+   "interactive": true,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 27,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.meas.vector-products",
+   "verdict": "REVIEW_REQUIRED",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "REVIEW_REQUIRED",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "REVIEW_REQUIRED",
+   "states": 3,
+   "fail": 0,
+   "review": [
+    "SM-02: no deterministic physics assertion covers this figure (no arithmetic chain, no physics test)"
+   ]
+  },
+  {
+   "id": "phys.meas.unit-conversion",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.meas.density",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.displacement",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.velocity",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.acceleration",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.kinematics-1d",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "shared-generator-default",
+   "scope": "concept",
+   "interactive": true,
+   "graph": true,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 23,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.kinematics-2d",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "shared-generator-default",
+   "scope": "domain",
+   "interactive": true,
+   "graph": true,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 23,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.projectile-motion",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "shared-generator-default",
+   "scope": "concept",
+   "interactive": true,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 19,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.relative-motion",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.circular-motion",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "shared-generator-default",
+   "scope": "concept",
+   "interactive": true,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 19,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.force",
+   "verdict": "PASS",
+   "class": "card",
+   "authorship": "curated-card",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.mass-and-weight",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.newtons-first-law",
+   "verdict": "PASS",
+   "class": "card",
+   "authorship": "curated-card",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.newtons-second-law",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "shared-generator-default",
+   "scope": "concept",
+   "interactive": true,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 67,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.newtons-third-law",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.free-body-diagram",
+   "verdict": "REVIEW_REQUIRED",
+   "class": "card",
+   "authorship": "curated-card",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "REVIEW_REQUIRED",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "REVIEW_REQUIRED",
+   "states": 3,
+   "fail": 0,
+   "review": [
+    "SM-02: no deterministic physics assertion covers this figure (no arithmetic chain, no physics test)"
+   ]
+  },
+  {
+   "id": "phys.mech.friction",
+   "verdict": "REVIEW_REQUIRED",
+   "class": "card",
+   "authorship": "curated-card",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "REVIEW_REQUIRED",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "REVIEW_REQUIRED",
+   "states": 3,
+   "fail": 0,
+   "review": [
+    "SM-02: no deterministic physics assertion covers this figure (no arithmetic chain, no physics test)"
+   ]
+  },
+  {
+   "id": "phys.mech.tension",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.constraint-motion",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.normal-force",
+   "verdict": "REVIEW_REQUIRED",
+   "class": "card",
+   "authorship": "curated-card",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "REVIEW_REQUIRED",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "REVIEW_REQUIRED",
+   "states": 3,
+   "fail": 0,
+   "review": [
+    "SM-02: no deterministic physics assertion covers this figure (no arithmetic chain, no physics test)"
+   ]
+  },
+  {
+   "id": "phys.mech.inclined-plane",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.non-inertial-frames",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.work",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.kinetic-energy",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.potential-energy",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.work-energy-theorem",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.conservation-of-energy",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.power",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.simple-machines",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.conservative-forces",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.momentum",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "shared-generator-default",
+   "scope": "domain",
+   "interactive": true,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 27,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.impulse",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": true,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.conservation-of-momentum",
+   "verdict": "REVIEW_REQUIRED",
+   "class": "card",
+   "authorship": "curated-card",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "REVIEW_REQUIRED",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "REVIEW_REQUIRED",
+   "states": 3,
+   "fail": 0,
+   "review": [
+    "SM-02: no deterministic physics assertion covers this figure (no arithmetic chain, no physics test)"
+   ]
+  },
+  {
+   "id": "phys.mech.collisions-elastic",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "shared-generator-default",
+   "scope": "concept",
+   "interactive": true,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 27,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.collisions-inelastic",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.center-of-mass",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.angular-kinematics",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.torque",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "shared-generator-default",
+   "scope": "concept",
+   "interactive": true,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 23,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.moment-of-inertia",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.rotational-dynamics",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "shared-generator-default",
+   "scope": "domain",
+   "interactive": true,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 23,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.angular-momentum",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.conservation-of-angular-momentum",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.rolling-motion",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.equilibrium",
+   "verdict": "REVIEW_REQUIRED",
+   "class": "card",
+   "authorship": "curated-card",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "REVIEW_REQUIRED",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "REVIEW_REQUIRED",
+   "states": 3,
+   "fail": 0,
+   "review": [
+    "SM-02: no deterministic physics assertion covers this figure (no arithmetic chain, no physics test)"
+   ]
+  },
+  {
+   "id": "phys.mech.universal-gravitation",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "shared-generator-default",
+   "scope": "domain",
+   "interactive": true,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 19,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.gravitational-field",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "shared-generator-default",
+   "scope": "domain",
+   "interactive": true,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 19,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.variation-of-g",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": true,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.gravitational-potential",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.orbital-mechanics",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "shared-generator-default",
+   "scope": "concept",
+   "interactive": true,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 19,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.keplers-laws",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.escape-velocity",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.satellites",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.hookes-law",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.stress-strain",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": true,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.pressure-fluids",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.buoyancy",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.fluid-flow",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.bernoulli",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.surface-tension",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.viscosity",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.terminal-velocity",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": true,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.generalized-coordinates",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.euler-lagrange-equation",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": true,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.cyclic-coordinates-conservation-laws",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.hamiltonian",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.hamiltons-equations",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.poisson-brackets",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.canonical-transformations",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mech.hamilton-jacobi-equation",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": true,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.therm.temperature",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.therm.zeroth-law",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.therm.thermal-expansion",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.therm.heat-transfer",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.therm.newtons-law-of-cooling",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": true,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.therm.blackbody-radiation",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": true,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.therm.energy-resources",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.therm.specific-heat",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.therm.calorimetry",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.therm.phase-transitions",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.therm.ideal-gas-law",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": true,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.therm.kinetic-theory",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.therm.first-law",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.therm.internal-energy",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.therm.thermodynamic-processes",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": true,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.therm.specific-heats-of-gases",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.therm.second-law",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.therm.entropy",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.therm.heat-engines",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.therm.carnot-cycle",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": true,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.therm.refrigerators",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.therm.third-law",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": true,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.wave.shm",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "shared-generator-default",
+   "scope": "domain",
+   "interactive": true,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 19,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.wave.shm-energy",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "shared-generator-default",
+   "scope": "domain",
+   "interactive": true,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 19,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.wave.pendulum",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "shared-generator-default",
+   "scope": "concept",
+   "interactive": true,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 83,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.wave.spring-mass",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.wave.damped-oscillations",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": true,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.wave.forced-oscillations",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": true,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.wave.nonlinear-dynamics",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.wave.wave-properties",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.wave.transverse-waves",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.wave.longitudinal-waves",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.wave.wave-speed",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.wave.superposition",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.wave.interference",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.wave.standing-waves",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.wave.coupled-oscillators",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.wave.sound-waves",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.wave.echo-and-sonar",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.wave.sound-intensity",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.wave.doppler-effect",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.wave.beats",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.opt.rectilinear-propagation",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.opt.nature-of-light",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.opt.reflection",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.opt.mirrors",
+   "verdict": "REVIEW_REQUIRED",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "REVIEW_REQUIRED",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "REVIEW_REQUIRED",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": [
+    "LY-02: \"P\" overlaps drawn geometry (22% of its box)",
+    "LY-02: \"P\" overlaps drawn geometry (33% of its box)",
+    "LY-02: \"F\" overlaps drawn geometry (28% of its box)"
+   ]
+  },
+  {
+   "id": "phys.opt.refraction",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.opt.total-internal-reflection",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.opt.lenses",
+   "verdict": "REVIEW_REQUIRED",
+   "class": "scene",
+   "authorship": "shared-generator-default",
+   "scope": "concept",
+   "interactive": true,
+   "graph": false,
+   "dims": {
+    "structural": "REVIEW_REQUIRED",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "REVIEW_REQUIRED",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "REVIEW_REQUIRED"
+   },
+   "byViewport": {
+    "mobile": "REVIEW_REQUIRED",
+    "desktop-column": "REVIEW_REQUIRED"
+   },
+   "semantic": "PASS",
+   "states": 23,
+   "fail": 0,
+   "review": [
+    "ST-03: the canvas holds text only, no drawn geometry (ink 0.26%)",
+    "LY-02: \"F\" overlaps drawn geometry (27% of its box)",
+    "LY-02: \"P\" overlaps drawn geometry (25% of its box)",
+    "LY-02: \"F\" overlaps drawn geometry (31% of its box)"
+   ]
+  },
+  {
+   "id": "phys.opt.lens-power",
+   "verdict": "REVIEW_REQUIRED",
+   "class": "scene",
+   "authorship": "shared-generator-default",
+   "scope": "domain",
+   "interactive": true,
+   "graph": false,
+   "dims": {
+    "structural": "REVIEW_REQUIRED",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "REVIEW_REQUIRED",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "REVIEW_REQUIRED"
+   },
+   "byViewport": {
+    "mobile": "REVIEW_REQUIRED",
+    "desktop-column": "REVIEW_REQUIRED"
+   },
+   "semantic": "PASS",
+   "states": 23,
+   "fail": 0,
+   "review": [
+    "ST-03: the canvas holds text only, no drawn geometry (ink 0.26%)",
+    "LY-02: \"F\" overlaps drawn geometry (27% of its box)",
+    "LY-02: \"P\" overlaps drawn geometry (25% of its box)",
+    "LY-02: \"F\" overlaps drawn geometry (31% of its box)"
+   ]
+  },
+  {
+   "id": "phys.opt.human-eye",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.opt.optical-instruments",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.opt.dispersion",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.opt.scattering-of-light",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.opt.wave-optics",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.opt.youngs-experiment",
+   "verdict": "PASS",
+   "class": "card",
+   "authorship": "curated-card",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.opt.thin-film-interference",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.opt.diffraction",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.opt.single-slit",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.opt.diffraction-grating",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.opt.resolving-power",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.opt.polarization",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.opt.brewsters-law",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.em.electric-charge",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.em.coulombs-law",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.em.electric-field",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.em.electric-dipole",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": true,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 27,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.em.gauss-law",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.em.electric-potential",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.em.electrostatic-potential-energy",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.em.conductors-electrostatics",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.em.capacitance",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.em.dielectrics",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.em.energy-capacitor",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.em.electric-current",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "shared-generator-default",
+   "scope": "domain",
+   "interactive": true,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 23,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.em.ohms-law",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "shared-generator-default",
+   "scope": "domain",
+   "interactive": true,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 23,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.em.resistivity",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.em.dc-circuits",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "shared-generator-default",
+   "scope": "domain",
+   "interactive": true,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 23,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.em.kirchhoffs-laws",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.em.wheatstone-bridge",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.em.potentiometer",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.em.electrical-power",
+   "verdict": "PASS",
+   "class": "card",
+   "authorship": "curated-card",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.em.domestic-electricity",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.em.emf",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.em.cells-combination",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": true,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.em.rc-circuits",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": true,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.em.magnetic-field",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.em.magnetic-force",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.em.hall-effect",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.em.moving-coil-galvanometer",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.em.biot-savart",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.em.amperes-law",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.em.solenoid",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.em.magnetic-materials",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.em.fields-in-matter",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.em.magnetic-dipole",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.em.magnetic-flux",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.em.faradays-law",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.em.lenzs-law",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.em.motors-and-generators",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": true,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.em.self-inductance",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.em.mutual-inductance",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.em.ac-basics",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.em.lc-circuits",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": true,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.em.lcr-circuits",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": true,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.em.ac-power",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.em.maxwells-equations",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.em.electromagnetic-waves",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.em.communication-systems",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.em.radiation-and-antennas",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mod.photoelectric-effect",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mod.photons",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mod.compton-effect",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mod.de-broglie",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mod.wave-particle-duality",
+   "verdict": "REVIEW_REQUIRED",
+   "class": "card",
+   "authorship": "curated-card",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "REVIEW_REQUIRED",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "REVIEW_REQUIRED",
+   "states": 3,
+   "fail": 0,
+   "review": [
+    "SM-02: no deterministic physics assertion covers this figure (no arithmetic chain, no physics test)"
+   ]
+  },
+  {
+   "id": "phys.mod.atomic-models",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mod.bohr-model",
+   "verdict": "PASS",
+   "class": "card",
+   "authorship": "curated-card",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mod.atomic-spectra",
+   "verdict": "PASS",
+   "class": "card",
+   "authorship": "curated-card",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mod.lasers",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mod.x-rays",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mod.nucleus-size-and-force",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": true,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mod.radioactivity",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mod.radioactive-decay",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": true,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mod.radiation-safety",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": true,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mod.nuclear-reactions",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mod.binding-energy",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mod.nuclear-fission",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mod.nuclear-fusion",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mod.nuclear-models",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.qm.wave-function",
+   "verdict": "REVIEW_REQUIRED",
+   "class": "card",
+   "authorship": "curated-card",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "REVIEW_REQUIRED",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "REVIEW_REQUIRED",
+   "states": 3,
+   "fail": 0,
+   "review": [
+    "SM-02: no deterministic physics assertion covers this figure (no arithmetic chain, no physics test)"
+   ]
+  },
+  {
+   "id": "phys.qm.schrodinger-equation",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.qm.uncertainty-principle",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.qm.operators",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.qm.particle-in-box",
+   "verdict": "REVIEW_REQUIRED",
+   "class": "card",
+   "authorship": "curated-card",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "REVIEW_REQUIRED",
+    "graph": "PASS",
+    "semantic": "REVIEW_REQUIRED",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "REVIEW_REQUIRED",
+    "desktop-column": "PASS"
+   },
+   "semantic": "REVIEW_REQUIRED",
+   "states": 3,
+   "fail": 0,
+   "review": [
+    "LY-02: \"infinite square well\" overlaps drawn geometry (23% of its box)",
+    "SM-02: no deterministic physics assertion covers this figure (no arithmetic chain, no physics test)"
+   ]
+  },
+  {
+   "id": "phys.qm.harmonic-oscillator-qm",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.qm.hydrogen-atom-qm",
+   "verdict": "REVIEW_REQUIRED",
+   "class": "card",
+   "authorship": "curated-card",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "REVIEW_REQUIRED",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "REVIEW_REQUIRED",
+   "states": 3,
+   "fail": 0,
+   "review": [
+    "SM-02: no deterministic physics assertion covers this figure (no arithmetic chain, no physics test)"
+   ]
+  },
+  {
+   "id": "phys.qm.spin",
+   "verdict": "REVIEW_REQUIRED",
+   "class": "card",
+   "authorship": "curated-card",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "REVIEW_REQUIRED",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "REVIEW_REQUIRED",
+   "states": 3,
+   "fail": 0,
+   "review": [
+    "SM-02: no deterministic physics assertion covers this figure (no arithmetic chain, no physics test)"
+   ]
+  },
+  {
+   "id": "phys.qm.pauli-exclusion",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.qm.quantum-tunneling",
+   "verdict": "REVIEW_REQUIRED",
+   "class": "card",
+   "authorship": "curated-card",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "REVIEW_REQUIRED",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "REVIEW_REQUIRED",
+   "states": 3,
+   "fail": 0,
+   "review": [
+    "SM-02: no deterministic physics assertion covers this figure (no arithmetic chain, no physics test)"
+   ]
+  },
+  {
+   "id": "phys.qm.perturbation-theory",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": true,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.qm.selection-rules",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.qm.variational-method",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": true,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.qm.wkb-approximation",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.qm.identical-particles",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": true,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.qm.angular-momentum-addition",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.qm.scattering-theory-born-approximation",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": true,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.qm.s-matrix-basics",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.qm.density-matrix",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.rel.postulates",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.rel.simultaneity",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.rel.time-dilation",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.rel.length-contraction",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.rel.lorentz-transform",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.rel.relativistic-momentum",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": true,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.rel.mass-energy",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.rel.spacetime",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.rel.general-relativity-intro",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.stat.probability-basics",
+   "verdict": "REVIEW_REQUIRED",
+   "class": "card",
+   "authorship": "curated-card",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "REVIEW_REQUIRED",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "REVIEW_REQUIRED",
+   "states": 3,
+   "fail": 0,
+   "review": [
+    "SM-02: no deterministic physics assertion covers this figure (no arithmetic chain, no physics test)"
+   ]
+  },
+  {
+   "id": "phys.stat.boltzmann-factor",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": true,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.stat.partition-function",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.stat.maxwell-boltzmann",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": true,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.stat.fermi-dirac",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": true,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.stat.bose-einstein",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": true,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.stat.entropy-statistical",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.stat.free-energy",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.stat.grand-canonical-ensemble",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.stat.chemical-potential",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.stat.fluctuations-correlations",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.stat.phase-transitions",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.stat.ising-model",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.stat.phase-transitions-critical-phenomena",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": true,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.stat.monte-carlo-basics",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.astro.solar-system",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.astro.stellar-properties",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": true,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.astro.distance-ladder",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.astro.stellar-structure",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.astro.stellar-evolution",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.astro.cosmology",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.astro.dark-matter",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": true,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.astro.black-holes",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.astro.gravitational-waves",
+   "verdict": "REVIEW_REQUIRED",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "REVIEW_REQUIRED",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "REVIEW_REQUIRED",
+   "states": 3,
+   "fail": 0,
+   "review": [
+    "SM-02: no deterministic physics assertion covers this figure (no arithmetic chain, no physics test)"
+   ]
+  },
+  {
+   "id": "phys.particle.four-forces",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.particle.particle-classification",
+   "verdict": "REVIEW_REQUIRED",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "REVIEW_REQUIRED",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "REVIEW_REQUIRED"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": [
+    "ST-03: the canvas holds text only, no drawn geometry (ink 0.27%)"
+   ]
+  },
+  {
+   "id": "phys.particle.antimatter",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.particle.quarks",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.particle.leptons",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.particle.neutrinos",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": true,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.particle.hadron-quark-model",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.particle.gauge-bosons",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.particle.strong-interaction",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.particle.weak-interaction",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.particle.electroweak-unification",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": true,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.particle.higgs-mechanism",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.particle.conservation-laws",
+   "verdict": "REVIEW_REQUIRED",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "REVIEW_REQUIRED",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "REVIEW_REQUIRED",
+    "desktop-column": "REVIEW_REQUIRED"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": [
+    "ST-03: the canvas holds text only, no drawn geometry (ink 0.00%)"
+   ]
+  },
+  {
+   "id": "phys.particle.feynman-diagrams",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.particle.accelerators-detectors",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.particle.standard-model",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mod.energy-bands",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mod.superconductivity",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": true,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mod.semiconductor-classification",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mod.intrinsic-semiconductors",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": true,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mod.extrinsic-semiconductors",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mod.pn-junction",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mod.diode-rectification",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "phys.mod.special-diodes",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 3,
+   "fail": 0,
+   "review": []
+  }
+ ]
+}
