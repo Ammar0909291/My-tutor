@@ -167,7 +167,16 @@ const CONCEPT_VISUALS: Record<string, VisualEntry> = {
   // elastic/inelastic also correctly inherit the 'collision' scene
   // generator the orphaned 'phys.mech.collisions' key was clearly intended
   // for but could never reach (KG has no 'phys.mech.collisions' concept).
-  'phys.mech.conservation-of-momentum': { primary: 'three_momentum_collision', all: ['three_momentum_collision'] },
+  // Conservation of momentum is the one concept in this family that the 3D card
+  // could not teach: it draws unlabeled spheres and arrows, so nothing on screen
+  // says the total is the same before and after — and its sphere sizes (the only
+  // mass cue) implied masses for which the drawn velocities did NOT conserve
+  // momentum. It now takes the 'collision' generator like its siblings: masses and
+  // velocities are printed, the generator re-derives the total from the DRAWN vectors
+  // (checkCollisionConsistency), and the learner can switch between an elastic and a
+  // perfectly inelastic collision — the EB's own "individual speeds change, the sum
+  // does not" example. The card stays the primary/fallback.
+  'phys.mech.conservation-of-momentum': { primary: 'three_momentum_collision', all: ['three_momentum_collision'], sceneGenerator: 'collision' },
   'phys.mech.collisions-elastic':     { primary: 'three_momentum_collision', all: ['three_momentum_collision'], sceneGenerator: 'collision' },
   'phys.mech.collisions-inelastic':   { primary: 'three_momentum_collision', all: ['three_momentum_collision'], sceneGenerator: 'collision' },
   // Gravitation/orbital concepts pair with the same gravitation_orbit scene
