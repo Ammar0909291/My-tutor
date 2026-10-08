@@ -168,7 +168,7 @@ describe('captions sit beside their sphere, not on it', () => {
 
   it('comparison: no connector runs through a caption — only a short stub under the header', () => {
     const cmp = buildCellComparisonScene({
-      conceptId: 't.c', title: 'T', teachingGoal: 'g',
+      conceptId: 'bio.t.c', title: 'T', teachingGoal: 'g',
       groups: [
         { label: 'A', description: 'a', items: ['one', 'two', 'three'] },
         { label: 'B', description: 'b', items: ['four', 'five'] },
@@ -187,11 +187,11 @@ describe('captions sit beside their sphere, not on it', () => {
   it('comparison captions wrap to their column: a share of the canvas AND the column pitch; three or more groups use a grid', () => {
     const groups = (n: number) => Array.from({ length: n }, (_, i) => ({ label: `G${i}`, description: 'd', items: ['item'] }))
     const labelOf = (sc: SceneSpec) => sc.steps.flatMap((st) => st.objects).find((o) => o.type === 'label')!
-    const two = buildCellComparisonScene({ conceptId: 't', title: 'T', teachingGoal: 'g', groups: groups(2) })
+    const two = buildCellComparisonScene({ conceptId: 'bio.t', title: 'T', teachingGoal: 'g', groups: groups(2) })
     expect(labelOf(two).properties).toMatchObject({ labelWrapFraction: 0.42, labelWrapUnits: 4.7 })
-    const four = buildCellComparisonScene({ conceptId: 't', title: 'T', teachingGoal: 'g', groups: groups(4) })
+    const four = buildCellComparisonScene({ conceptId: 'bio.t', title: 'T', teachingGoal: 'g', groups: groups(4) })
     expect(labelOf(four).properties).toMatchObject({ labelWrapFraction: 0.42, labelWrapUnits: 5.7 }) // two columns, 6.5 apart
-    const six = buildCellComparisonScene({ conceptId: 't', title: 'T', teachingGoal: 'g', groups: groups(6) })
+    const six = buildCellComparisonScene({ conceptId: 'bio.t', title: 'T', teachingGoal: 'g', groups: groups(6) })
     expect(labelOf(six).properties).toMatchObject({ labelWrapFraction: 0.28, labelWrapUnits: 5.7 }) // three columns
   })
 
@@ -206,7 +206,7 @@ describe('captions sit beside their sphere, not on it', () => {
 
   it('pathway arrows stop at the sphere surfaces, so their heads are visible, and a cycle returns with an arrowhead', () => {
     const sc = buildCellPathwayScene({
-      conceptId: 't.p', title: 'T', teachingGoal: 'g', cyclic: true,
+      conceptId: 'bio.t.p', title: 'T', teachingGoal: 'g', cyclic: true,
       stages: [{ name: 'A', description: 'a' }, { name: 'B', description: 'b' }, { name: 'C', description: 'c' }],
     })
     const objs = sc.steps.flatMap((st) => st.objects)

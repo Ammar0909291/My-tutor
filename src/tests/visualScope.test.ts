@@ -66,7 +66,8 @@ describe('a domain illustration still renders', () => {
     'math.stat.mean-median-mode',
     'chem.atomic.isotopes',
     'cs.algo.dynamic-programming',
-    'bio.eco.nutrient-cycling',
+    // (no bio.* sample: since the 2026-10-08 Biology render audit every bio.eco concept that used the generic
+    // food-chain domain card has a scene of its own, so no Biology concept is served the domain card any more.)
   ]
 
   it.each(DOMAIN_CASES)('%s keeps its picture', (conceptId) => {

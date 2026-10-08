@@ -304,7 +304,7 @@ export function ExplainerFigure({
       // Both rules only ever move the camera FURTHER: the aspect rule (geometry incl. a sphere's body) and the
       // viewport rule (also each caption's painted box); the larger distance satisfies both.
       : Math.max(
-          cameraDistanceToContain(drawn, sceneAspect ?? 4 / 3),
+          sceneAspect === null ? 0 : cameraDistanceToContain(drawn, sceneAspect),
           cameraDistanceToContainFigure(drawn, viewportFromCanvas(sceneBox.w, sceneBox.h, typeof window === 'undefined' ? undefined : window.innerWidth)),
         )
   const framed = framedDistance === null || framedDistance === drawn.cameraDistance

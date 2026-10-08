@@ -23,7 +23,7 @@
  */
 
 import type { SceneObject, SceneSpec, SceneStep, Vec3 } from '../sceneSpec'
-import { captionBeside, round } from './shared'
+import { captionBeside, isBiologyScene, round } from './shared'
 
 export interface PathwayStage {
   name: string
@@ -50,19 +50,21 @@ const SPACING = 4.5
 
 const NODE_RADIUS = 0.8
 
-// A stage's name is painted above its sphere (below it for a stage drawn in the
-// lower half), against the figure's surface — not in the sphere's own colour on
-// the sphere, which MEASURED 2.7–4.5 : 1 in Chromium.
-function node(id: string, position: Vec3, text: string): SceneObject {
+// Biology: a stage's name is painted above its sphere (below it for a stage drawn in the lower half), against the
+// figure's surface — not in the sphere's own colour on the sphere, which MEASURED 2.7–4.5 : 1 in Chromium — and no
+// wider than one node pitch, so neighbouring captions cannot run into each other.
+function bioNode(id: string, position: Vec3, text: string): SceneObject {
   return { type: 'node', id, position, radius: NODE_RADIUS, color: NODE_COLOR, text, properties: { ...captionBeside(NODE_RADIUS, position[1] < 0 ? 'below' : 'above'), labelWrapUnits: SPACING - 0.6 } }
 }
+function legacyNode(id: string, position: Vec3, text: string): SceneObject {
+  return { type: 'node', id, position, radius: NODE_RADIUS, color: NODE_COLOR, text }
+}
 /**
- * A connector between two stages, running from one sphere's SURFACE to the next one's. It used to run
- * centre to centre, so its arrowhead ended inside the destination sphere and no pathway showed a
- * direction at all — order was carried by caption position alone (measured: no arrowhead visible on any
- * Biology pathway). The head now stops just short of the sphere it points at.
+ * Biology: a connector from one sphere's SURFACE to the next one's. It used to run centre to centre, so its arrowhead
+ * ended inside the destination sphere and no pathway showed a direction at all — order was carried by caption position
+ * alone (measured: no arrowhead visible on any Biology pathway). The head now stops just short of the sphere it points at.
  */
-function arrow(id: string, from: Vec3, to: Vec3): SceneObject {
+function bioArrow(id: string, from: Vec3, to: Vec3): SceneObject {
   const dx = to[0] - from[0]
   const dy = to[1] - from[1]
   const len = Math.hypot(dx, dy) || 1
@@ -74,6 +76,9 @@ function arrow(id: string, from: Vec3, to: Vec3): SceneObject {
     to: [round(to[0] - ux * gap), round(to[1] - uy * gap), 0],
     color: ARROW_COLOR, thickness: 0.05,
   }
+}
+function legacyArrow(id: string, from: Vec3, to: Vec3): SceneObject {
+  return { type: 'arrow', id, from, to, color: ARROW_COLOR, thickness: 0.05 }
 }
 
 /**
@@ -100,6 +105,9 @@ function branchLines(a: PathwayStage, b: PathwayStage): string {
 
 export function buildCellPathwayScene(params: CellPathwayParams): SceneSpec {
   const { conceptId, title, teachingGoal, cyclic, branchStart, stages, branchEnd } = params
+  const bio = isBiologyScene(conceptId)
+  const node = bio ? bioNode : legacyNode
+  const arrow = bio ? bioArrow : legacyArrow
   const steps: SceneStep[] = []
 
   // x=0 is reserved for a branching start (two parallel nodes); the shared
@@ -159,12 +167,14 @@ export function buildCellPathwayScene(params: CellPathwayParams): SceneSpec {
     const firstPos: Vec3 = [round(mainStartX), 0, 0]
     steps.push({
       narration: `The cycle returns to ${stages[0].name}: the sequence repeats.`,
-      // The return runs down from the last stage, back along the bottom, and ARROWS up into the first stage; the
-      // closing leg is an arrow (a bare polyline ended in no head, so the loop showed no direction).
-      objects: [
-        { type: 'path', id: 'cycle-return', points: [[lastPos[0], round(-NODE_RADIUS - 0.1), 0] as Vec3, [lastPos[0], -2.5, 0] as Vec3, [firstPos[0], -2.5, 0] as Vec3], color: ARROW_COLOR },
-        arrow('cycle-return-arrow', [firstPos[0], -2.5, 0], firstPos),
-      ],
+      objects: bio
+        // The return runs down from the last stage, back along the bottom, and ARROWS up into the first stage; the
+        // closing leg is an arrow (a bare polyline ended in no head, so the loop showed no direction).
+        ? [
+            { type: 'path', id: 'cycle-return', points: [[lastPos[0], round(-NODE_RADIUS - 0.1), 0] as Vec3, [lastPos[0], -2.5, 0] as Vec3, [firstPos[0], -2.5, 0] as Vec3], color: ARROW_COLOR },
+            arrow('cycle-return-arrow', [firstPos[0], -2.5, 0], firstPos),
+          ]
+        : [{ type: 'path', id: 'cycle-return', points: [lastPos, [lastPos[0], -2.5, 0] as Vec3, [firstPos[0], -2.5, 0] as Vec3, firstPos], color: ARROW_COLOR }],
     })
   }
 

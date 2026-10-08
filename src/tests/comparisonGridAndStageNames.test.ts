@@ -73,29 +73,44 @@ describe('a pathway step names the stage it describes', () => {
   })
 })
 
-describe('comparisons of three or more groups use two rows', () => {
+describe('comparisons of five or more groups use two rows', () => {
   const group = (i: number): ComparisonGroup => ({ label: `G${i}`, description: 'd', items: [`Item ${i}`] })
   const build = (n: number) => buildCellComparisonScene({
     conceptId: 'test.grid', title: 'T', teachingGoal: 'g', groups: Array.from({ length: n }, (_, i) => group(i)),
   })
 
-  it('one or two groups: one row, 5.5 apart, headers at y = 2.5 (unchanged)', () => {
-    const h = headers(build(2))
-    expect(h.map((p) => p[1])).toEqual([2.5, 2.5])
-    expect(h.map((p) => p[0])).toEqual([-2.75, 2.75])
-    expect(build(2).cameraDistance).toBe(18)
+  it('four groups: one row, 5.5 apart, headers at y = 2.5 (unchanged for every non-Biology concept)', () => {
+    const h = headers(build(4))
+    expect(h.map((p) => p[1])).toEqual([2.5, 2.5, 2.5, 2.5])
+    expect(h.map((p) => p[0])).toEqual([-8.25, -2.75, 2.75, 8.25])
+    expect(build(4).cameraDistance).toBe(18)
   })
 
-  // 2026-10-08 (Biology visual render audit): three and four groups used to sit in ONE row. A row of
-  // three or four columns cannot hold their captions at phone width (each column gets a quarter of a
-  // 358px canvas), so they now use the same two-row grid as five and six, with at most two columns
-  // for three or four groups so each caption can wrap to about 40% of the canvas.
-  it.each([3, 4])('%i groups: two rows of at most two columns', (n) => {
-    const h = headers(build(n))
+  // 2026-10-08 (Biology visual render audit): in a BIOLOGY figure three and four groups used to sit in ONE row.
+  // A row of three or four columns cannot hold their captions at phone width (each column gets a quarter of a
+  // 358px canvas), so Biology comparisons of three or more groups use the same two-row grid as five and six, with
+  // at most two columns for three or four groups so each caption can wrap to its column. Other subjects' figures
+  // (a few Chemistry comparisons share this generator) are unchanged: the grid starts at five groups for them.
+  const buildBio = (n: number) => buildCellComparisonScene({
+    conceptId: 'bio.test.grid', title: 'T', teachingGoal: 'g', groups: Array.from({ length: n }, (_, i) => group(i)),
+  })
+  it.each([3, 4])('Biology, %i groups: two rows of at most two columns', (n) => {
+    const h = headers(buildBio(n))
     const rows = [...new Set(h.map((p) => p[1]))]
     expect(rows).toHaveLength(2)
     for (const y of rows) expect(h.filter((p) => p[1] === y).length).toBeLessThanOrEqual(2)
     expect(h[0][1]).toBeGreaterThan(h[n - 1][1])
+  })
+  it('Biology, one or two groups: one row, 5.5 apart, headers at y = 2.5', () => {
+    const h = headers(buildBio(2))
+    expect(h.map((p) => p[1])).toEqual([2.5, 2.5])
+    expect(h.map((p) => p[0])).toEqual([-2.75, 2.75])
+  })
+  it('a non-Biology comparison is byte-identical to the original layout: no offsets, no wrap, a connector per item', () => {
+    const sc = build(2)
+    const objs = sc.steps.flatMap((st) => st.objects)
+    expect(objs.some((o) => o.properties !== undefined)).toBe(false)
+    expect(objs.filter((o) => o.type === 'path')).toHaveLength(2) // one per item, header → caption
   })
 
   it.each([5, 6])('%i groups: two rows of at most three columns, inside |x| <= 6.5', (n) => {

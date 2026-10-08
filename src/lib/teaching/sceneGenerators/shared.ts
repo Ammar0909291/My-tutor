@@ -39,3 +39,12 @@ export function captionBeside(radius: number, side: 'above' | 'below', gap = 0.5
   const dy = round(radius + gap)
   return { labelOffset: [0, side === 'above' ? dy : -dy, 0] }
 }
+
+/**
+ * The 2026-10 Biology visual render audit changed how the shared cell generators LAY OUT a figure (captions
+ * beside their spheres, captions wrapped to their column, connectors that stop at a sphere's surface, a grid for
+ * three or more groups). Those generators also serve a handful of non-Biology concepts (one Physics, a few
+ * Chemistry), whose figures have their own audit and committed fingerprints — so the new layout is applied to
+ * Biology scenes ONLY, and every other subject's output stays byte-identical until its own audit adopts it.
+ */
+export const isBiologyScene = (conceptId: string): boolean => conceptId.startsWith('bio.')

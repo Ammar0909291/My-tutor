@@ -14,7 +14,7 @@
  */
 
 import type { SceneObject, SceneSpec, SceneStep, Vec3 } from '../sceneSpec'
-import { captionBeside, round } from './shared'
+import { captionBeside, isBiologyScene, round } from './shared'
 
 export interface ComparisonGroup {
   /** The category's own name — e.g. "Passive transport", "Kinesin". */
@@ -53,11 +53,14 @@ const ITEM_PITCH = ITEM_SPACING * 1.6
 // with more width per label, and the camera steps back from 18 to 20 so the
 // outer labels keep a margin at phone width (7.5 still clipped "Roundworms" at
 // 390px). Four or fewer groups keep the single row unchanged, byte for byte.
-const GRID_FROM_GROUPS = 3
+// Biology figures (see `isBiologyScene`) use the grid from THREE groups; every other subject keeps the original FIVE.
+const GRID_FROM_GROUPS_BIO = 3
+const GRID_FROM_GROUPS_LEGACY = 5
 const GRID_COLUMN_SPACING = 6.5
 // Room for the second row's header caption (it sits above its sphere) between the
 // last caption of the row above and the sphere below it.
-const GRID_ROW_GAP = 3.4
+const GRID_ROW_GAP_BIO = 3.4
+const GRID_ROW_GAP_LEGACY = 1.8
 const GRID_CAMERA_DISTANCE = 20
 
 // Captions wrap to their COLUMN. A caption may use almost the whole canvas by
@@ -68,20 +71,20 @@ const GRID_CAMERA_DISTANCE = 20
 const WRAP_TWO_COLUMNS = 0.42
 const WRAP_THREE_COLUMNS = 0.28
 
-function columnsFor(groupCount: number): number {
-  return groupCount < GRID_FROM_GROUPS ? groupCount : Math.ceil(groupCount / 2)
+function columnsFor(groupCount: number, gridFrom: number): number {
+  return groupCount < gridFrom ? groupCount : Math.ceil(groupCount / 2)
 }
 
 interface GroupPlace { x: number; headerY: number }
 
-function placeGroups(groups: readonly ComparisonGroup[]): GroupPlace[] {
-  if (groups.length < GRID_FROM_GROUPS) {
+function placeGroups(groups: readonly ComparisonGroup[], gridFrom: number, rowGap: number): GroupPlace[] {
+  if (groups.length < gridFrom) {
     const offset = ((groups.length - 1) * GROUP_SPACING) / 2
     return groups.map((_, gi) => ({ x: round(gi * GROUP_SPACING - offset), headerY: 2.5 }))
   }
   const columns = Math.ceil(groups.length / 2)
   const maxItems = Math.max(...groups.map((g) => g.items.length))
-  const rowHeight = (maxItems + 1) * ITEM_PITCH + GRID_ROW_GAP
+  const rowHeight = (maxItems + 1) * ITEM_PITCH + rowGap
   // Centre the block vertically: first header to last item.
   const top = (rowHeight + maxItems * ITEM_PITCH) / 2
   return groups.map((_, gi) => {
@@ -95,11 +98,13 @@ function placeGroups(groups: readonly ComparisonGroup[]): GroupPlace[] {
 
 export function buildCellComparisonScene(params: CellComparisonParams): SceneSpec {
   const { conceptId, title, teachingGoal, groups } = params
-  const places = placeGroups(groups)
-  const wrapFraction = columnsFor(groups.length) <= 2 ? WRAP_TWO_COLUMNS : WRAP_THREE_COLUMNS
-  // A caption is also no wider than ITS COLUMN: a share of the canvas alone let desktop captions run wider than
-  // the column pitch, and the next column's captions interleaved with them line by line.
-  const columnPitch = groups.length < GRID_FROM_GROUPS ? GROUP_SPACING : GRID_COLUMN_SPACING
+  const bio = isBiologyScene(conceptId)
+  const gridFrom = bio ? GRID_FROM_GROUPS_BIO : GRID_FROM_GROUPS_LEGACY
+  const places = placeGroups(groups, gridFrom, bio ? GRID_ROW_GAP_BIO : GRID_ROW_GAP_LEGACY)
+  // Biology captions wrap to their column: a share of the canvas AND the column pitch. A share of the canvas alone
+  // let desktop captions run wider than the pitch, and the next column's captions interleaved with them.
+  const wrapFraction = columnsFor(groups.length, gridFrom) <= 2 ? WRAP_TWO_COLUMNS : WRAP_THREE_COLUMNS
+  const columnPitch = groups.length < gridFrom ? GROUP_SPACING : GRID_COLUMN_SPACING
   const captionWrap = { labelWrapFraction: wrapFraction, labelWrapUnits: round(columnPitch - 0.8) }
 
   const steps: SceneStep[] = groups.map((group, gi) => {
@@ -107,18 +112,18 @@ export function buildCellComparisonScene(params: CellComparisonParams): SceneSpe
     const color = GROUP_COLORS[gi % GROUP_COLORS.length]
     const headerPos: Vec3 = [x, headerY, 0]
     const objects: SceneObject[] = [
-      // The group's name goes above its sphere, clear of it and of the item column below.
-      { type: 'node', id: `group-${gi}`, position: headerPos, radius: GROUP_RADIUS, color, text: group.label, properties: { ...captionBeside(GROUP_RADIUS, 'above'), ...captionWrap } },
+      // Biology: the group's name goes above its sphere, clear of it and of the item column below.
+      { type: 'node', id: `group-${gi}`, position: headerPos, radius: GROUP_RADIUS, color, text: group.label, ...(bio ? { properties: { ...captionBeside(GROUP_RADIUS, 'above'), ...captionWrap } } : {}) },
     ]
-    // A short stub hanging from the sphere ties the column to its header. It stops
-    // clear of the first caption: a connector run to each caption's centre was
-    // MEASURED striking through every caption above the last.
-    if (group.items.length > 0) {
+    // Biology: a short stub hanging from the sphere ties the column to its header. It stops clear of the first
+    // caption: a connector run to each caption's centre was MEASURED striking through every caption above the last.
+    if (bio && group.items.length > 0) {
       objects.push({ type: 'path', id: `group-${gi}-stub`, points: [headerPos, [x, round(headerY - GROUP_RADIUS - 0.45), 0] as Vec3], color: ITEM_COLOR })
     }
     group.items.forEach((item, ii) => {
       const pos: Vec3 = [x, round(headerY - (ii + 1) * ITEM_PITCH), 0]
-      objects.push({ type: 'label', id: `group-${gi}-item-${ii}`, position: pos, text: item, color: ITEM_COLOR, properties: captionWrap })
+      objects.push({ type: 'label', id: `group-${gi}-item-${ii}`, position: pos, text: item, color: ITEM_COLOR, ...(bio ? { properties: captionWrap } : {}) })
+      if (!bio) objects.push({ type: 'path', id: `group-${gi}-line-${ii}`, points: [headerPos, pos], color: ITEM_COLOR })
     })
     return { narration: `${group.label}: ${group.description}`, objects }
   })
@@ -128,7 +133,7 @@ export function buildCellComparisonScene(params: CellComparisonParams): SceneSpe
     title,
     sceneType: 'comparison',
     teachingGoal,
-    cameraDistance: groups.length >= GRID_FROM_GROUPS ? GRID_CAMERA_DISTANCE : 18,
+    cameraDistance: groups.length >= gridFrom ? GRID_CAMERA_DISTANCE : 18,
     ariaLabel: `A comparison of ${groups.length} categories for ${title}: ${groups.map((g) => g.label).join(' vs ')}.`,
     steps,
   }
