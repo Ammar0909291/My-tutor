@@ -159,7 +159,7 @@ function renderObject(obj: SceneObject, key: number, theme: Theme, focusIds: Rea
  */
 function PlacedLabels({
   objects, cameraDistance, theme, focusIds, extra,
-}: { objects: SceneObject[]; cameraDistance: number; theme: Theme; focusIds: ReadonlySet<string>; extra?: LayerLabel[] }) {
+}: { objects: SceneObject[]; cameraDistance: number; theme: Theme; focusIds: ReadonlySet<string>; extra?: (aspect: number) => LayerLabel[] }) {
   const { labels, obstacles } = useMemo(() => {
     const scene: SceneSpec = {
       id: 'labels', title: '', sceneType: 'diagram', cameraDistance,
@@ -176,16 +176,16 @@ function PlacedLabels({
         // an extent, so it must not drive typography.
         tier: object.type === 'label' ? object.size : undefined,
       })),
-      // The stage decor's axis letters go LAST: authored text has first claim on
-      // free space, and the letters yield to it instead of landing on it.
-      ...(extra ?? [])],
+      ],
       // Every object is something to stay clear of, including the ones that
       // carry text — the layer strips that text so nothing is counted twice.
       obstacles: objects,
     }
-  }, [objects, cameraDistance, theme, focusIds, extra])
+  }, [objects, cameraDistance, theme, focusIds])
 
-  return <SceneLabelLayer labels={labels} obstacles={obstacles} cameraDistance={cameraDistance} theme={theme} />
+  // The stage decor's axis letters go LAST: authored text has first claim on
+  // free space, and the letters yield to it instead of landing on it.
+  return <SceneLabelLayer labels={labels} lateLabels={extra} obstacles={obstacles} cameraDistance={cameraDistance} theme={theme} />
 }
 
 
@@ -200,9 +200,9 @@ function PlacedLabels({
  * triad was cut off and the grid was a sliver at the bottom edge. A scene is
  * rarely centred on the origin, so a radius is the wrong shape of answer.
  */
-interface SceneBounds { minX: number; maxX: number; minY: number; maxY: number; span: number }
+export interface SceneBounds { minX: number; maxX: number; minY: number; maxY: number; span: number }
 
-function sceneBounds(objects: SceneObject[], cameraDistance: number): SceneBounds {
+export function sceneBounds(objects: SceneObject[], cameraDistance: number): SceneBounds {
   let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity
   const consider = (v?: [number, number, number]) => {
     if (!v) return
@@ -268,10 +268,11 @@ export function SceneSpecRenderer({
   // the one solver keeps them on the canvas and off the figure's own text.
   const decorLabels = useMemo(
     () => (decor && spatial && decor.axes !== false
-      ? stageAxisLabels(bounds, theme, decor.axisLabels).map((l) => ({ text: l.text, position: l.position, color: l.color }))
+      ? (aspect: number) => stageAxisLabels(bounds, theme, decor.axisLabels, spec.cameraDistance ?? 7, aspect)
+          .map((l) => ({ text: l.text, position: l.position, color: l.color, plate: true }))
       : undefined),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [decor, spatial, theme, bounds.minX, bounds.maxX, bounds.minY, bounds.maxY, bounds.span],
+    [decor, spatial, theme, spec.cameraDistance, bounds.minX, bounds.maxX, bounds.minY, bounds.maxY, bounds.span],
   )
   return (
     <ThreeDVisual
@@ -298,6 +299,7 @@ export function SceneSpecRenderer({
             axisLabels={decor.axisLabels}
             theme={theme}
             drawLabels={false}
+            cameraDistance={spec.cameraDistance ?? 7}
           />
         )}
         {objects.map((obj, i) => renderObject(obj, i, theme, focusIds))}

@@ -17,6 +17,7 @@
  * palette, so it recedes behind the figure instead of competing with it.
  */
 import { useMemo } from 'react'
+import { useThree } from '@react-three/fiber'
 import { Line } from '@react-three/drei'
 import { SceneLabel } from './SceneLabel'
 import type { Theme } from '@/components/Providers'
@@ -40,25 +41,71 @@ interface SceneStageDecorProps {
    * cut in half by the canvas edge.
    */
   drawLabels?: boolean
+  /** The camera's distance, so the decor can be kept inside the frame (see `stageDecorLayout`). */
+  cameraDistance?: number
 }
 
-/** The ground plane / triad geometry, shared by the decor and the label layer. */
-export function stageDecorLayout(bounds: Bounds) {
+/** Half the camera's vertical field of view (the scene camera is a 50° perspective). */
+const HALF_FOV_TAN = Math.tan((50 * Math.PI) / 360)
+/** The decor may use at most this much of the frame's half-height; the rest is margin. */
+const DECOR_FRAME_FILL = 0.94
+
+/** How far toward the camera (z) a point `extent` units below the centre can sit and still project inside the frame. */
+function nearestZInFrame(extent: number, cameraDistance: number): number {
+  const limit = HALF_FOV_TAN * cameraDistance * DECOR_FRAME_FILL
+  return extent >= limit ? 0 : cameraDistance * (1 - extent / limit)
+}
+
+/**
+ * The ground plane / triad geometry, shared by the decor and the label layer.
+ *
+ * `cameraDistance`, when given, keeps the decor INSIDE the frame. The ground's
+ * near edge and the triad sit toward the camera (positive z) and perspective
+ * magnifies them; measured with the fitted scenes of the 8 figures that draw a
+ * triad, the near edge projected 1.3x-2.2x past the bottom of the canvas and the
+ * triad 1.4x-2.0x, so the ground was cut off and most of the triad was out of
+ * frame (the electric dipole and torque figures at their slider extremes
+ * worst). The depth is pulled back only as far as the frame needs, and the
+ * triad is stood a little clear of the figure's own corner so it does not sit
+ * on the origin the figure is drawn from. Without a camera distance the layout
+ * is the original one.
+ */
+export function stageDecorLayout(bounds: Bounds, cameraDistance?: number, aspect = 1) {
   const pad = bounds.span * 0.08
   const floor = bounds.minY - pad
   const x0 = bounds.minX - pad
   const x1 = bounds.maxX + pad
   const depth = (x1 - x0) / 2
   const axisLen = bounds.span * 0.13
-  const origin: [number, number, number] = [x0, floor, depth * 0.72]
-  return { pad, floor, x0, x1, depth, axisLen, origin }
+  let originZ = depth * 0.72
+  let nearEdge = depth
+  let originX = x0
+  let originY = floor
+  if (cameraDistance && cameraDistance > 0) {
+    const frameHalf = HALF_FOV_TAN * cameraDistance
+    nearEdge = Math.min(depth, nearestZInFrame(Math.abs(floor), cameraDistance))
+    // Stood clear of the figure's corner, but never below the frame.
+    originX = x0 - axisLen * 0.6
+    originY = -Math.min(Math.abs(floor) + axisLen * 0.6, frameHalf * DECOR_FRAME_FILL)
+    // The z axis reaches axisLen further toward the camera than the origin.
+    originZ = Math.min(originZ, Math.max(0, nearestZInFrame(Math.abs(originY), cameraDistance) - axisLen))
+    // At z = 0 the z axis' tip (axisLen nearer the camera) is still magnified; if the
+    // origin sits so low that the tip would leave the frame, lift the origin.
+    originY = -Math.min(Math.abs(originY), (frameHalf * DECOR_FRAME_FILL * (cameraDistance - originZ - axisLen)) / cameraDistance)
+    // ...and inside the frame's width too: on a wide canvas the figure's corner is
+    // far out, and a triad stood beside it ran along (and past) the left edge.
+    const scale = cameraDistance / Math.max(1e-6, cameraDistance - originZ)
+    originX = Math.max(originX, -(frameHalf * Math.max(aspect, 0.5) * DECOR_FRAME_FILL) / scale)
+  }
+  const origin: [number, number, number] = [originX, originY, originZ]
+  return { pad, floor, x0, x1, depth, nearEdge, axisLen, origin }
 }
 
 /** The axis letters as world-space labels, for the label layer. */
 export function stageAxisLabels(
-  bounds: Bounds, theme: Theme, axisLabels?: { x?: string; y?: string; z?: string },
+  bounds: Bounds, theme: Theme, axisLabels?: { x?: string; y?: string; z?: string }, cameraDistance?: number, aspect = 1,
 ): { text: string; position: [number, number, number]; color: string }[] {
-  const { axisLen, origin } = stageDecorLayout(bounds)
+  const { axisLen, origin } = stageDecorLayout(bounds, cameraDistance, aspect)
   return (['x', 'y', 'z'] as const).map((k) => {
     const to: [number, number, number] = k === 'x' ? [axisLen, 0, 0] : k === 'y' ? [0, axisLen, 0] : [0, 0, axisLen]
     return {
@@ -72,11 +119,13 @@ export function stageAxisLabels(
 /** Axis colours follow the universal convention: x red, y green, z blue. */
 const AXIS = { x: ROLE.input, y: ROLE.result, z: ROLE.output } as const
 
-export function SceneStageDecor({ bounds, grid = true, axes = true, axisLabels, theme, drawLabels = true }: SceneStageDecorProps) {
+export function SceneStageDecor({ bounds, grid = true, axes = true, axisLabels, theme, drawLabels = true, cameraDistance }: SceneStageDecorProps) {
   // The ground sits just under the figure's lowest point, and spans the
   // figure's own width — so it reads as the surface the figure stands on
   // rather than as a plane floating somewhere near it.
-  const { floor, x0, x1, depth } = stageDecorLayout(bounds)
+  const size = useThree((st) => st.size)
+  const aspect = size.width / Math.max(1, size.height)
+  const { floor, x0, x1, depth, nearEdge } = stageDecorLayout(bounds, cameraDistance, aspect)
 
   // Whole-unit divisions keep the grid a readable ruler rather than a texture:
   // roughly ten cells across, snapped so a line falls on a round value.
@@ -84,14 +133,14 @@ export function SceneStageDecor({ bounds, grid = true, axes = true, axisLabels, 
   const lines = useMemo(() => {
     const out: { points: [number, number, number][] }[] = []
     if (!grid) return out
-    for (let z = -depth; z <= depth + 1e-6; z += cell) {
+    for (let z = -depth; z <= nearEdge + 1e-6; z += cell) {
       out.push({ points: [[x0, floor, z], [x1, floor, z]] })
     }
     for (let x = x0; x <= x1 + 1e-6; x += cell) {
-      out.push({ points: [[x, floor, -depth], [x, floor, depth]] })
+      out.push({ points: [[x, floor, -depth], [x, floor, nearEdge]] })
     }
     return out
-  }, [grid, x0, x1, floor, depth, cell])
+  }, [grid, x0, x1, floor, depth, nearEdge, cell])
 
   const gridColor = dimColor(ROLE.reference, theme) ?? '#334155'
   // The triad is a CORNER marker: it sits at the near-left corner of the ground
@@ -100,7 +149,7 @@ export function SceneStageDecor({ bounds, grid = true, axes = true, axisLabels, 
   // attempt) put it straight through the result label — the decor is added at
   // render time and so is invisible to the label placement solver, which can
   // only avoid what the SCENE declares.
-  const { axisLen, origin } = stageDecorLayout(bounds)
+  const { axisLen, origin } = stageDecorLayout(bounds, cameraDistance, aspect)
 
   return (
     <group>

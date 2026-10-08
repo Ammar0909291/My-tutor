@@ -14,9 +14,11 @@ import { admitVisualAsset, makeVisualAsset } from '@/lib/teaching/visual/asset'
 import { auditGraph, auditSceneData, contrastRatio, payloadBlockers, type Rgb } from '@/lib/teaching/visual/figureAudit'
 import { checkFigureTexts } from '@/lib/teaching/visual/figureSemantics'
 import { checkRendering } from '@/lib/teaching/visual/figureCritic'
-import { cameraDistanceToContain, placeSceneLabels, sceneTextObjects, solveLabelPlacement, viewportFromCanvas } from '@/lib/teaching/visual/layout'
+import { cameraDistanceToContain, fitSceneToFrame, placeSceneLabels, sceneTextObjects, solveLabelPlacement, viewportFromCanvas } from '@/lib/teaching/visual/layout'
 import { CHECKED_KINDS, sweepStates } from '../../scripts/qa/physicsVisual/kindChecks'
 import { validateSceneSpec } from '@/lib/teaching/sceneSpecValidator'
+import { stageDecorLayout } from '@/components/school/visuals/SceneStageDecor'
+import { sceneBounds } from '@/components/school/visuals/SceneSpecRenderer'
 import { liftToContrast, meshColor, readableTextColor, themeColor } from '@/lib/teaching/sceneGenerators/visualDesign'
 import {
   buildKinematicsGraphScene, checkKinematicsConsistency, type KinematicsParams,
@@ -450,6 +452,75 @@ describe('PHYS-VIS-08 label placement leaves no label on another, off the canvas
     const r = placeSceneLabels(sceneOf([label('clear', 0, 2)]), vp)
     expect(r.labels[0].movedPx).toBe(0)
     expect(r.labels[0].wrapPx).toBeUndefined()
+  })
+})
+
+// ── PHYS-VIS-09 — the ground plane and axis triad were cut off by the canvas ─
+//   Measured on the fitted scenes of the 8 figures that draw a triad: the ground's
+//   near edge projected 1.3x-2.2x past the bottom of the canvas and the triad
+//   1.4x-2.0x, so the grid was a clipped sliver and most of the triad was out of
+//   frame (electric dipole and torque at their slider extremes worst; LY-06 in
+//   the browser audit at electric-dipole / all=max).
+describe('PHYS-VIS-09 the stage decor stays inside the frame', () => {
+  const HALF_TAN = Math.tan((50 * Math.PI) / 360)
+  const ASPECTS = [282 / 260, 566 / 272]   // phone and desktop-column canvases, measured in Chromium
+
+  function decorStates(): Array<{ tag: string; scene: SceneSpec }> {
+    const out: Array<{ tag: string; scene: SceneSpec }> = []
+    for (const id of physicsIds()) {
+      const d = served(id)
+      if (d.payload?.renderer === 'scene' && d.payload.sceneSpec.stage && d.payload.sceneSpec.stage.axes !== false) out.push({ tag: id, scene: d.payload.sceneSpec })
+    }
+    for (const kind of ['electric_dipole', 'torque_diagram', 'vector', 'electric_circuit']) {
+      const k = CHECKED_KINDS[kind]
+      for (const params of sweepStates(kind)) {
+        const typed = k.validate(k.adapt ? k.adapt(params as never) : { ...(k.fixed ?? {}), ...params })
+        if (!typed) continue
+        let spec: SceneSpec
+        try { spec = k.build(typed as never) } catch { continue }
+        if (validateSceneSpec(spec).valid && spec.stage) out.push({ tag: `${kind} ${JSON.stringify(params)}`, scene: spec })
+      }
+    }
+    return out
+  }
+
+  it('every figure that draws a ground and triad keeps both inside the canvas at phone and desktop shape', () => {
+    const outside: string[] = []
+    for (const { tag, scene } of decorStates()) {
+      const fitted = fitSceneToFrame(scene)
+      const objects = fitted.steps.flatMap((s) => s.objects)
+      const bounds = sceneBounds(objects, fitted.cameraDistance ?? 7)
+      for (const aspect of ASPECTS) {
+        const d = cameraDistanceToContain({ ...fitted, steps: [{ objects }] }, aspect)
+        const layout = stageDecorLayout(bounds, d, aspect)
+        const half = HALF_TAN * d
+        const y = (worldY: number, z: number) => Math.abs(worldY) * d / (d - z) / half
+        const gridNear = y(layout.floor, layout.nearEdge)
+        const triad = Math.max(y(layout.origin[1], layout.origin[2]), y(layout.origin[1], layout.origin[2] + layout.axisLen))
+        // A figure whose own floor is already outside the frame cannot be helped by the decor.
+        if (Math.abs(layout.floor) >= half) continue
+        if (gridNear > 1.0001) outside.push(`${tag} @${aspect.toFixed(2)}: ground near edge at ${gridNear.toFixed(2)} of the frame`)
+        if (triad > 1.0001) outside.push(`${tag} @${aspect.toFixed(2)}: triad at ${triad.toFixed(2)} of the frame`)
+        const triadX = Math.abs(layout.origin[0]) * d / (d - layout.origin[2]) / (half * aspect)
+        if (triadX > 1.0001) outside.push(`${tag} @${aspect.toFixed(2)}: triad ${triadX.toFixed(2)} of the frame's width`)
+      }
+    }
+    expect(outside).toEqual([])
+  }, 120_000)
+
+  it('without a camera distance the layout is the original one (no figure changes shape by accident)', () => {
+    const b = { minX: -5, maxX: 5, minY: -3, maxY: 3, span: 10 }
+    const l = stageDecorLayout(b)
+    expect(l.nearEdge).toBe(l.depth)
+    expect(l.origin[0]).toBe(l.x0)
+    expect(l.origin[1]).toBe(l.floor)
+    expect(l.origin[2]).toBeCloseTo(l.depth * 0.72, 9)
+  })
+
+  it('a decor that already fits is left alone', () => {
+    const b = { minX: -2, maxX: 2, minY: -1, maxY: 1, span: 4 }
+    const far = stageDecorLayout(b, 200)
+    expect(far.nearEdge).toBe(far.depth)
   })
 })
 
