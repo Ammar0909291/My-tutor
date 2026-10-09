@@ -194,7 +194,8 @@ npx tsc --noEmit       # pre-existing stripe/subscription errors are expected on
 ## Where to find live subject/asset state (don't trust a number in this file — regenerate it)
 - Physics visual render audit (2026-10-08): every served physics figure is rendered in Chromium (390 px + 1280 px,
   both themes) and verdicted; `physicsVisualAudit.test.ts` FAILS, naming the concepts, when a served physics figure
-  changes without a re-audit. Re-audit only those concepts (`render.ts --concepts` → `validate.ts` → `merge-audit.ts`):
+  changes without a re-audit. The 21 figures the machine leaves REVIEW_REQUIRED carry a human decision in
+  `docs/qa/physics-visual-audit/semantic-review.json` (`physicsSemanticReview.test.ts` enforces it; 2026-10-08). Re-audit only those concepts (`render.ts --concepts` → `validate.ts` → `merge-audit.ts`):
   `docs/history/physics-visual-readability-gate.md`; report `docs/qa/PHYSICS_VISUAL_QUALITY_REPORT.md`.
 - Mathematics: `npx tsx scripts/math/state.ts`
 - Physics: `npx tsx scripts/physics/state.ts`
