@@ -13,7 +13,8 @@
  * sweeps are in the dev-page audit; this proves the deployed bundle paints the
  * audited figure legibly in the real page chrome.
  *
- *   npx tsx scripts/qa/physicsProductionBrowserAudit.ts [--out file.json] [--shots dir] [--only id,id]
+ *   npx tsx scripts/qa/physicsProductionBrowserAudit.ts [--out file.json] [--shots dir] [--only id,id] [--say "message"]
+ *   (a card in the lesson shows as many steps as the tutor's reply has sentences, so ask for a long reply with --say to see every step)
  */
 import { chromium } from 'playwright'
 import { mkdirSync, writeFileSync } from 'node:fs'
@@ -27,6 +28,13 @@ const CONCEPTS = [
   'phys.meas.vector-addition', 'phys.mech.kinematics-1d', 'phys.em.electric-dipole', 'phys.mech.torque',
   'phys.mech.newtons-second-law', 'phys.wave.pendulum', 'phys.mech.variation-of-g',
   'phys.em.moving-coil-galvanometer', 'phys.mech.orbital-mechanics',
+  // 2026-10-08 REVIEW_REQUIRED follow-up: every concept whose figure (or shared card / generator) changed.
+  // Cards (force diagram, double slit, wave function, potential well, tunneling, orbitals) have no
+  // [data-scene-box]; they are framed by their own `aria-label="Visual aid: …"` root.
+  'phys.mech.force', 'phys.mech.free-body-diagram', 'phys.mech.friction', 'phys.mech.normal-force', 'phys.mech.equilibrium',
+  'phys.mech.conservation-of-momentum', 'phys.opt.mirrors', 'phys.opt.lenses', 'phys.opt.lens-power',
+  'phys.mod.wave-particle-duality', 'phys.opt.youngs-experiment', 'phys.qm.wave-function', 'phys.qm.particle-in-box',
+  'phys.qm.hydrogen-atom-qm', 'phys.qm.quantum-tunneling', 'phys.particle.particle-classification',
 ]
 const VIEWS: Array<{ vp: 'mobile' | 'desktop-column'; width: number; height: number }> = [
   { vp: 'mobile', width: 390, height: 2600 },
@@ -56,7 +64,7 @@ async function main() {
         if (!l) { rows.push({ conceptId: id, vp: '-', theme: '-', verdict: 'NOT_RUN', fails: [], reviews: [], note: 'not in production curriculum' }); continue }
         const sid = await createSession(acct.cookie, 'physics')
         await openLesson(acct.cookie, sid, { lessonTitle: l.lessonTitle, lessonOrder: l.order, topicSlug: id, unitTitle: l.unitTitle, totalLessons: lessons.length })
-        await say(acct.cookie, sid, 'Show me a diagram')
+        await say(acct.cookie, sid, arg('say') ?? 'Show me a diagram')
         for (const v of VIEWS) for (const theme of THEMES) {
           // Same theme key, in-page auditor and animation-clock cap as the dev-page harness.
           const base = await openContext(browser, v.vp === 'mobile' ? 'mobile' : 'desktop-column', theme)
@@ -66,9 +74,19 @@ async function main() {
           const pix = await base.newPage()
           try {
             await page.goto(`${BASE}/learn?subject=physics`, { waitUntil: 'domcontentloaded', timeout: 60_000 })
-            await page.waitForSelector('[data-scene-box]', { timeout: 60_000 })
-            // Mark the figure's own frame: the nearest ancestor of the canvas box that also holds its controls.
+            await page.waitForSelector('[data-scene-box], [aria-label^="Visual aid:"]', { timeout: 60_000 })
+            // Mark the figure's own frame: the nearest ancestor of the canvas box that also holds its controls
+            // (a scene), or the card's own root (a card).
+            // A card is identified by ITS OWN root (only VisualCard sets this label). `[data-scene-box]` cannot decide it:
+            // ThreeDVisual sets it too, so a 3D card (e.g. the orbital explorer) also contains one.
+            const kind = await page.evaluate(() => (document.querySelector('[aria-label^="Visual aid:"]') ? 'card' : 'scene'))
             const marked = await page.evaluate(() => {
+              const card = document.querySelector('[aria-label^="Visual aid:"]')
+              if (card) {
+                card.setAttribute('data-audit-frame', '')
+                card.scrollIntoView({ block: 'start' })
+                return true
+              }
               const box = document.querySelector('[data-scene-box]')
               let el: Element | null = box
               while (el && el.parentElement) {
@@ -81,17 +99,35 @@ async function main() {
               return true
             })
             if (!marked) throw new Error('figure frame not found')
-            await settle(page, 'scene', true)
+            // In the lesson a card is driven by the tutor's narration: one beat per sentence, 0.7 s each (VisualCard),
+            // so a measurement taken on arrival sees a PARTIAL figure (one measured: friction with only the box on
+            // screen). Run it at 1.5x and let the whole narration play out. (The main button cannot be used as the
+            // "finished" signal: in narration mode it keeps reading "Pause" after the last beat.) The screenshot is the
+            // evidence that the LAST step is drawn.
+            if (kind === 'card') {
+              await page.locator('[data-audit-frame] button', { hasText: /^1\.5x$/ }).first().click({ timeout: 10_000 }).catch(() => undefined)
+              // Wait until the picture stops changing (three identical frames six seconds apart): the narration's length
+              // differs per tutor reply, so a fixed wait caught some cards on step 3 or 4 of 5.
+              const frame = page.locator('[data-audit-frame]')
+              let prev = '', same = 0
+              const t0 = Date.now()
+              while (Date.now() - t0 < 150_000 && same < 3) {
+                await page.waitForTimeout(6_000)
+                const now = (await frame.screenshot()).toString('base64')
+                if (now === prev) same++; else { same = 0; prev = now }
+              }
+            }
+            await settle(page, kind, kind === 'scene')
             const shot = shots ? resolve(shots, `${id}__${v.vp}__${theme}.png`) : null
             const st = await capture(page, pix, 'default', {}, shot)
-            const findings = auditRenderedState(st, { expectsScene: true })
+            const findings = auditRenderedState(st, { expectsScene: kind === 'scene' })
             const fails = findings.filter((f) => f.severity === 'FAIL').map((f) => `${f.id} ${f.message}`)
             const reviews = findings.filter((f) => f.severity === 'REVIEW').map((f) => `${f.id} ${f.message}`)
             rows.push({ conceptId: id, vp: v.vp, theme, verdict: fails.length ? 'FAIL' : reviews.length ? 'REVIEW_REQUIRED' : 'PASS', fails, reviews })
           } catch (e) {
             rows.push({ conceptId: id, vp: v.vp, theme, verdict: 'NOT_RUN', fails: [], reviews: [], note: String(e).split('\n')[0].slice(0, 160) })
           }
-          console.log(`${id.padEnd(36)} ${v.vp.padEnd(15)} ${theme.padEnd(5)} ${rows[rows.length - 1].verdict} ${rows[rows.length - 1].fails.slice(0, 2).join(' | ')}`)
+          console.log(`${id.padEnd(36)} ${v.vp.padEnd(15)} ${theme.padEnd(5)} ${rows[rows.length - 1].verdict} ${rows[rows.length - 1].fails.slice(0, 2).join(' | ')}${rows[rows.length - 1].note ? ` [${rows[rows.length - 1].note}]` : ''}`)
           await base.close()
         }
       }

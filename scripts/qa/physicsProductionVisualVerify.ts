@@ -25,6 +25,8 @@ const CONCEPTS = [
   'phys.meas.vector-addition', 'phys.mech.kinematics-1d', 'phys.em.electric-dipole', 'phys.mech.torque',
   'phys.mech.newtons-second-law', 'phys.wave.pendulum', 'phys.mod.bohr-model', 'phys.mech.variation-of-g',
   'phys.em.moving-coil-galvanometer', 'phys.mech.orbital-mechanics',
+  // 2026-10-08 REVIEW_REQUIRED follow-up: the scene-served concepts whose figure changed.
+  'phys.opt.mirrors', 'phys.opt.lenses', 'phys.opt.lens-power', 'phys.mech.conservation-of-momentum', 'phys.particle.particle-classification',
 ]
 
 function sceneOf(p: unknown): SceneSpec | null {
