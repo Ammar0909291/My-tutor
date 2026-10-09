@@ -51,10 +51,42 @@ export function buildFourForcesScene(): SceneSpec {
 
 // ── 2. Particle classification ───────────────────────────────────────────────
 
+/**
+ * The tree, as data: every node's name, where it sits, and what it is a child of.
+ * (Exported so a test can read the structure the figure DRAWS rather than the labels it prints.)
+ *
+ * MEASURED at 390px and 1280px: with "hadrons: made of quarks" and "leptons: fundamental"
+ * (20+ characters each) only 4.8 units apart, the label solver had to push them ~100px
+ * apart, and the tree came out scrambled — "leptons" printed above "particles", "hadrons"
+ * below its own children. The names are now short and sit above their qualifiers, spaced so
+ * that every label keeps its place under its parent at both widths.
+ */
+export const PARTICLE_TREE: Array<{ id: string; name: string; note?: string; at: V3; parent: string | null; step: 1 | 2 | 3 }> = [
+  { id: 'particles', name: 'particles', at: P(0, 4.2), parent: null, step: 1 },
+  { id: 'hadrons', name: 'hadrons', note: 'made of quarks', at: P(-3.1, 2.6), parent: 'particles', step: 1 },
+  { id: 'leptons', name: 'leptons', note: 'fundamental', at: P(3.1, 2.6), parent: 'particles', step: 1 },
+  { id: 'baryons', name: 'baryons', note: 'p, n', at: P(-4.5, -1.4), parent: 'hadrons', step: 2 },
+  { id: 'mesons', name: 'mesons', note: 'π, K', at: P(-1.7, -1.4), parent: 'hadrons', step: 2 },
+  { id: 'lepton-list', name: 'e, μ, τ, ν', at: P(3.1, -1.4), parent: 'leptons', step: 3 },
+]
+
 /** KG: "hadrons (composite particles built from quarks, subject to the strong force) or leptons (fundamental particles not subject to the strong force)." */
 export function buildParticleClassificationScene(): SceneSpec {
-  const root: V3 = P(0, 3.2), had: V3 = P(-2.4, 1.2), lep: V3 = P(2.4, 1.2), bar: V3 = P(-3.6, -1.0), mes: V3 = P(-1.2, -1.0)
-  const edge = (a: V3, b: V3) => line(P(a[0], a[1] - 0.35), P(b[0], b[1] + 0.35), ROLE.aid, 0.03)
+  const node = (id: string) => PARTICLE_TREE.find((n) => n.id === id)!
+  // An edge runs from just under the parent's (name + note) to just over the child's name.
+  const edge = (childId: string) => {
+    const child = node(childId), parent = node(child.parent!)
+    const below = parent.note ? 1.95 : 0.45
+    return line(P(parent.at[0], parent.at[1] - below), P(child.at[0], child.at[1] + 0.45), ROLE.aid, 0.03)
+  }
+  // One name per node. A branch carries its qualifier on a second line under the name; the leaves'
+  // examples (p, n / π, K) live in the step narration instead of as two more labels, which keeps
+  // the figure inside the explainer's nine-label budget (physicsFigureLabelBudget): past it the
+  // renderer holds back the lowest-priority labels, and "particles", the root, is the first to go.
+  // (Folding an example into its leaf's label — "mesons: π, K" — was measured: the two leaves are
+  // then wider than the room between them and one is pushed 24-30 px off its place.)
+  const nameOf = (id: string, role: string, tier: 'primary' | 'detail') => label(node(id).name, node(id).at, role, tier)
+  const noteOf = (id: string, role: string) => label(node(id).note!, P(node(id).at[0], node(id).at[1] - 1.25), role, 'detail')
   return {
     id: 'phys-particle-classification',
     title: 'Classifying particles',
@@ -63,9 +95,9 @@ export function buildParticleClassificationScene(): SceneSpec {
     teachingGoal: 'Show the basic family tree: hadrons (made of quarks, feel the strong force) split into baryons and mesons; leptons are fundamental and do not feel the strong force.',
     ariaLabel: 'A tree. Particles divide into hadrons and leptons. Hadrons divide into baryons, such as the proton and neutron, and mesons, such as the pion. Leptons include the electron, muon and neutrinos.',
     steps: [
-      { narration: 'Particles fall into two big families.', objects: [label('particles', root, ROLE.ink, 'primary'), edge(root, had), edge(root, lep), label('hadrons: made of quarks', had, ROLE.input, 'primary'), label('leptons: fundamental', lep, ROLE.output, 'primary')] },
-      { narration: 'Hadrons feel the strong force. Baryons are made of three quarks, mesons of a quark and an antiquark.', objects: [edge(had, bar), edge(had, mes), label('baryons: p, n', bar, ROLE.input, 'detail'), label('mesons: π, K', mes, ROLE.input, 'detail')] },
-      { narration: 'Leptons do not feel the strong force: the electron, muon, tau and their neutrinos.', objects: [edge(lep, P(2.4, -1.0)), label('e, μ, τ, ν', P(2.4, -1.0), ROLE.output, 'detail'), label('strong force: hadrons only', P(0, -3.2), ROLE.result, 'primary')] },
+      { narration: 'Particles fall into two big families.', objects: [nameOf('particles', ROLE.ink, 'primary'), edge('hadrons'), edge('leptons'), nameOf('hadrons', ROLE.input, 'primary'), noteOf('hadrons', ROLE.input), nameOf('leptons', ROLE.output, 'primary'), noteOf('leptons', ROLE.output)] },
+      { narration: `Hadrons feel the strong force. Baryons (${node('baryons').note}) are made of three quarks; mesons (${node('mesons').note}) of a quark and an antiquark.`, objects: [edge('baryons'), edge('mesons'), nameOf('baryons', ROLE.input, 'detail'), nameOf('mesons', ROLE.input, 'detail')] },
+      { narration: 'Leptons do not feel the strong force: the electron, muon, tau and their neutrinos.', objects: [edge('lepton-list'), nameOf('lepton-list', ROLE.output, 'detail'), label('strong force: hadrons only', P(0, -4.7), ROLE.result, 'primary')] },
     ],
   }
 }

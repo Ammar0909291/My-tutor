@@ -42,6 +42,7 @@
 
 import { compileExpression } from '@/lib/visuals/mathParser'
 import { isLayoutSafe, checkSceneLayoutAllViewports } from './layout'
+import { containsRawLatex, payloadBlockers } from './figureAudit'
 import { generateJSON } from '@/lib/ai/client'
 import type { ArchetypeContext } from './archetypes'
 import type { GeneratedFigure } from './visualEngine'
@@ -168,6 +169,16 @@ export function figureText(figure: GeneratedFigure): string[] {
  * describe as a curve.
  */
 export function checkRendering(figure: GeneratedFigure): { verdict: DimensionVerdict; reason: string } {
+  // The SAME payload blockers the admission gate applies to every authored
+  // figure (figureAudit.payloadBlockers): a generated figure is held to no
+  // weaker a bar than an authored one.
+  const blockers = payloadBlockers(
+    figure.kind === 'scene'
+      ? { renderer: 'scene', sceneSpec: figure.scene }
+      : { renderer: 'spec', visualSpec: figure.spec },
+  )
+  if (blockers.length) return { verdict: 'fail', reason: `payload blocked: ${blockers[0]}` }
+
   if (figure.kind === 'scene') {
     if (!isLayoutSafe(figure.scene)) {
       const reports = checkSceneLayoutAllViewports(figure.scene)
@@ -225,21 +236,7 @@ export function checkRendering(figure: GeneratedFigure): { verdict: DimensionVer
  * the source and can see what the notation MEANS — which is exactly the class of
  * defect a deterministic check catches better than a model does.
  */
-const LATEX_MARKERS = new RegExp([
-  // commands (maths, and the chemistry ones that appeared in generated figures: arrows, \ce, \text, \mathrm)
-  String.raw`\\(?:frac|sqrt|cdot|times|alpha|beta|gamma|theta|pi|mu|Delta|sum|int|rightarrow|leftrightarrow|rightleftharpoons|to|ce|text|mathrm|left|right)\b`,
-  // delimiters
-  String.raw`\$[^$]+\$|\\\(|\\\[`,
-  // brace sub/superscript markup the renderers print literally: Fe^{2+}, K_{sp}, SO_4^{2-}.
-  // Deliberately NOT bare `x^2` / `H_2O` / `H^+`: `figureText` includes a graph's `equation`, where
-  // `y = x^2` is the notation the expression parser compiles. Those plain forms are typeset, not
-  // rejected — see `typesetSceneChemistry`.
-  String.raw`[_^]\{`,
-].join('|'))
-
-export function containsRawLatex(text: string): boolean {
-  return LATEX_MARKERS.test(text)
-}
+export { containsRawLatex } // single definition lives in figureAudit; re-exported for existing importers
 
 /**
  * GROUNDING — can the tutor talk about this figure from what it carries?

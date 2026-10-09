@@ -171,15 +171,11 @@ export function labelWrapWidth(text: string, viewport: Viewport, tier?: number):
   return singleLine > available ? available : null
 }
 
-/**
- * The box that text will occupy, from its own resolved font size. `wrapAtOverride` (a width the placement
- * solver chose, see `WrapAlternative`) replaces the default "wrap only when wider than the canvas" rule; omitted,
- * every existing caller gets exactly the answer it always got.
- */
-function labelExtent(text: string, viewport: Viewport, tier?: number, wrapAtOverride?: number | null): { halfW: number; halfH: number } {
+/** The box that text will occupy, from its own resolved font size. */
+function labelExtent(text: string, viewport: Viewport, tier?: number, wrapOverride?: number): { halfW: number; halfH: number } {
   const fontPx = fontPxFor(viewport, tier)
   const singleLine = text.length * widthRatioFor(text) * fontPx
-  const wrapAt = wrapAtOverride !== undefined ? wrapAtOverride : labelWrapWidth(text, viewport, tier)
+  const wrapAt = wrapOverride ?? labelWrapWidth(text, viewport, tier)
   if (wrapAt === null) {
     return { halfW: singleLine / 2, halfH: (fontPx * LINE_HEIGHT_RATIO) / 2 }
   }
@@ -202,34 +198,6 @@ function labelExtent(text: string, viewport: Viewport, tier?: number, wrapAtOver
     }
   }
   return { halfW: wrapAt / 2, halfH: (lines * fontPx * LINE_HEIGHT_RATIO) / 2 }
-}
-
-/**
- * Narrower layouts to try for a label that cannot be placed at its natural width, widest first.
- *
- * The widths are fractions of the width the label would otherwise have, never narrower than its longest word (a
- * word is never split) — so wrapping can change only where lines break, not what is said or how big it is. A label
- * that is already as narrow as its longest word gets none.
- */
-const WRAP_FRACTIONS = [0.72, 0.52, 0.38] as const
-
-function wrapAlternativesFor(text: string, viewport: Viewport, tier?: number): WrapAlternative[] {
-  const fontPx = fontPxFor(viewport, tier)
-  const perChar = widthRatioFor(text) * fontPx
-  const natural = text.length * perChar
-  const current = labelWrapWidth(text, viewport, tier) ?? natural
-  const longestWord = Math.max(...text.split(/\s+/).map((w) => w.length)) * perChar
-  const floor = Math.ceil(longestWord + 4)
-  const out: WrapAlternative[] = []
-  let last = current
-  for (const f of WRAP_FRACTIONS) {
-    const wrapPx = Math.max(Math.round(Math.min(current, natural) * f), floor)
-    if (wrapPx >= last - 2) continue
-    last = wrapPx
-    const { halfW, halfH } = labelExtent(text, viewport, tier, wrapPx)
-    out.push({ wrapPx, halfW, halfH })
-  }
-  return out
 }
 
 /** A label object's typographic tier; `size` means an extent on every other type. */
@@ -287,12 +255,28 @@ export function sceneTextObjects(scene: SceneSpec): { text: string; position: Ve
   return out
 }
 
+/** A body at least this big (scene units) is labelled from above it, not on it. */
+const BODY_LABEL_MIN_RADIUS = 0.45
+/** Clear space between a body's surface and the label above it. */
+const BODY_LABEL_GAP = 0.55
+
 /**
  * Where an object's text is drawn. A label carries `position`; a vector, arrow
  * or bond labels its midpoint, which is what the renderer does.
  */
 function anchorOf(obj: SceneObject): Vec3 | null {
-  if (obj.position) return obj.position
+  if (obj.position) {
+    // TEXT NEVER SITS INSIDE A BODY. A label anchored on the centre of a solid
+    // sphere is painted ON the sphere, and its colour is chosen against the
+    // board, not against the sphere: "m1=2" on the green collision sphere
+    // measured 2.1:1, "m1+m2=3" on the purple one 4.0:1, and the solver cannot
+    // move it clear because its own anchor is inside the obstacle. A body big
+    // enough to hold the label (radius >= 0.45 scene units) names itself from
+    // just above its surface instead; small markers keep the label on them.
+    const r = obj.type === 'node' || obj.type === 'particle' || obj.type === 'point' ? (obj.radius ?? 0) : 0
+    if (r >= BODY_LABEL_MIN_RADIUS) return [obj.position[0], obj.position[1] + r + BODY_LABEL_GAP, obj.position[2]]
+    return obj.position
+  }
   if (obj.from && obj.to) {
     return [
       (obj.from[0] + obj.to[0]) / 2,
@@ -349,8 +333,7 @@ export function checkSceneLayout(scene: SceneSpec, viewport: Viewport): LayoutRe
   const placement = placeSceneLabels(scene, viewport)
   const tiers = sceneTextObjects(scene).map(({ object }) => tierOf(object))
   const boxes: LabelBox[] = placement.labels.map((l, i) => {
-    // The width the solver chose (a wrapped retry) is the width the renderer paints, so it is the box to check.
-    const { halfW, halfH } = labelExtent(l.text, viewport, tiers[i], l.wrapPx)
+    const { halfW, halfH } = labelExtent(l.text, viewport, tiers[i])
     return { text: l.text, left: l.x - halfW, right: l.x + halfW, top: l.y - halfH, bottom: l.y + halfH }
   })
   const violations: LayoutViolation[] = []
@@ -579,6 +562,59 @@ export function fitSceneToFrame(scene: SceneSpec): SceneSpec {
 }
 
 /**
+ * Bounding box of everything the scene DRAWS, including the body of a sphere —
+ * `sceneExtent` above measures anchors only, which is right for deciding how
+ * well a figure fills its frame but not for deciding whether it fits: a node of
+ * radius 2.5 at the edge sticks out 2.5 units past its coordinate.
+ */
+function drawnExtent(scene: SceneSpec): Extent | null {
+  let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity
+  for (const step of scene.steps ?? []) {
+    for (const obj of step.objects ?? []) {
+      const pad = obj.type === 'node' ? (obj.radius ?? 0.3)
+        : obj.type === 'point' || obj.type === 'particle' ? (obj.radius ?? 0.1)
+        : 0
+      const points = [obj.position, obj.from, obj.to, ...(obj.points ?? [])].filter(Boolean) as Vec3[]
+      for (const p of points) {
+        minX = Math.min(minX, p[0] - pad); maxX = Math.max(maxX, p[0] + pad)
+        minY = Math.min(minY, p[1] - pad); maxY = Math.max(maxY, p[1] + pad)
+      }
+    }
+  }
+  return minX > maxX ? null : { minX, maxX, minY, maxY }
+}
+
+/**
+ * The camera distance at which a scene FITS a canvas of the ACTUAL shape.
+ *
+ * Every figure is framed server-side for a 4:3 canvas, because the server cannot
+ * know the learner's screen. On a phone the canvas is nearly square (measured
+ * 282 × 260, 1.08:1), so a figure that is wide for its height overflows the
+ * sides: measured in Chromium at 390px, the dielectric capacitor, the
+ * dimensional-analysis equation row and the collision spheres were cut off at
+ * the canvas edge. `cameraDistanceForAspect` below only ever moves the camera
+ * CLOSER, which cannot fix that.
+ *
+ * This is the other direction: given the measured aspect, the distance at which
+ * the drawn extent (spheres included), about the origin the camera looks at,
+ * stays inside TARGET_FRAME_FILL of both axes. It only ever moves the camera
+ * FURTHER — a figure that already fits is returned at its own distance, so
+ * desktop is untouched — and it moves nothing else: same geometry, same labels,
+ * same relationships, smaller on a smaller canvas.
+ */
+export function cameraDistanceToContain(scene: SceneSpec, aspect: number): number {
+  const own = scene.cameraDistance ?? DEFAULT_CAMERA_DISTANCE
+  const extent = drawnExtent(scene)
+  if (!extent || !Number.isFinite(aspect) || aspect <= 0) return own
+  const tan = Math.tan(FOV_RADIANS / 2)
+  const halfX = Math.max(Math.abs(extent.minX), Math.abs(extent.maxX))
+  const halfY = Math.max(Math.abs(extent.minY), Math.abs(extent.maxY))
+  const needed = Math.max(halfX / (TARGET_FRAME_FILL * tan * aspect), halfY / (TARGET_FRAME_FILL * tan))
+  if (!Number.isFinite(needed) || needed <= own) return own
+  return Math.round(needed * 10) / 10
+}
+
+/**
  * The camera distance at which a scene fills a canvas of the ACTUAL shape.
  *
  * `fitSceneToFrame` frames every figure for a 4:3 canvas, because the server
@@ -652,11 +688,15 @@ export interface PlacedLabel {
   ok: boolean
   reason?: 'no-safe-placement'
   /**
-   * Set ONLY when the solver had to wrap this label narrower than its default to find it a safe spot. The renderer
-   * must paint it at exactly this width (`SceneLabel`'s `maxWidthPx`) so the box drawn is the box that was planned.
-   * Absent for every label that placed at its natural width — which is almost all of them.
+   * True when the chosen box still overlaps drawn geometry (a body larger than
+   * any clear spot within reach). The renderer gives such a label a backing
+   * plate so its text keeps 4.5:1 whatever colour sits behind it.
    */
+  onGeometry?: boolean
+  /** Set when the label was wrapped narrower than its natural width to fit; the renderer must use the same width. */
   wrapPx?: number
+  /** Set when the label had to step down to this typographic tier to fit; the renderer must draw it at that tier. */
+  tier?: number
 }
 
 export interface PlacementResult {
@@ -679,6 +719,9 @@ export interface PlacementResult {
  * whose anchor is already clear never moves at all.
  */
 const MAX_DISPLACEMENT_FRACTION = 0.30
+
+/** Widths, as a fraction of the canvas, a label may be wrapped to when nothing else fits. */
+const NARROW_WRAP_FRACTIONS = [0.7, 0.5, 0.35]
 
 /** Clearance kept between a label and anything it must avoid. */
 const PADDING_PX = 2
@@ -765,6 +808,38 @@ function candidateOffsets(maxRadius: number): { dx: number; dy: number }[] {
 }
 
 /**
+ * Offsets for a label that found nothing within the normal reach: a fine grid
+ * across the whole canvas, nearest first.
+ *
+ * The normal search samples rings 6px apart, which is right for a label with
+ * room and wrong for one that must squeeze into the last gap. Measured on the
+ * dipole figure at 390px (all five stages shown): the only band left for the
+ * torque caption was 34px tall against a 31px caption plus 2px clearance each
+ * side, so the one centre that fits sat between two ring samples and the
+ * caption was left on top of its neighbour. A 2px grid finds it. Used only
+ * after the ordinary search came back empty, so every label that already had a
+ * safe spot is placed exactly as before.
+ */
+const escalatedOffsetCache = new Map<string, { dx: number; dy: number }[]>()
+function escalatedOffsets(bounds: { width: number; height: number }): { dx: number; dy: number }[] {
+  const key = `${bounds.width}x${bounds.height}`
+  const hit = escalatedOffsetCache.get(key)
+  if (hit) return hit
+  const step = 2
+  const out: { dx: number; dy: number; d: number }[] = []
+  for (let dy = -Math.ceil(bounds.height / step) * step; dy <= bounds.height; dy += step) {
+    for (let dx = -Math.ceil(bounds.width / step) * step; dx <= bounds.width; dx += step) {
+      const d = Math.hypot(dx, dy)
+      out.push({ dx, dy, d })
+    }
+  }
+  out.sort((a, b) => a.d - b.d || a.dy - b.dy || a.dx - b.dx)
+  if (escalatedOffsetCache.size > 32) escalatedOffsetCache.clear()
+  escalatedOffsetCache.set(key, out)
+  return out
+}
+
+/**
  * Solve label positions for one scene at one viewport.
  *
  * Priority order, applied as hard constraints then a deterministic score:
@@ -785,12 +860,33 @@ export function placeSceneLabels(scene: SceneSpec, viewport: Viewport): Placemen
   // this line is the shared solver, which never learns which projection it got.
   const items: PlacementItem[] = anchors.map((anchor, index) => {
     const { halfW, halfH } = labelExtent(anchor.text, viewport, tiers[index])
+    const fallbacks: NonNullable<PlacementItem['fallbacks']> = []
+    const tier0 = tiers[index]
+    const steppedDown = typeof tier0 === 'number' && tier0 > 1 ? 1 : undefined
+    const wraps = /\s/.test(anchor.text.trim())
+    // Same tier, narrower wrap first; only then a smaller tier (natural, then wrapped).
+    for (const tier of [tier0, steppedDown]) {
+      if (tier === undefined && tier !== tier0) continue
+      const isStep = tier !== tier0
+      if (isStep) {
+        const e = labelExtent(anchor.text, viewport, tier)
+        fallbacks.push({ halfW: e.halfW, halfH: e.halfH, tier, wrapPx: labelWrapWidth(anchor.text, viewport, tier) ?? undefined })
+      }
+      if (!wraps) continue
+      const natural = isStep ? labelExtent(anchor.text, viewport, tier).halfW * 2 : halfW * 2
+      for (const fraction of NARROW_WRAP_FRACTIONS) {
+        const wrapPx = viewport.hostWidth * fraction
+        if (wrapPx >= natural) continue // not narrower than it already is
+        const e = labelExtent(anchor.text, viewport, tier, wrapPx)
+        fallbacks.push({ halfW: e.halfW, halfH: e.halfH, wrapPx, ...(isStep ? { tier } : {}) })
+      }
+    }
     return {
       text: anchor.text,
       x: (anchor.left + anchor.right) / 2,
       y: (anchor.top + anchor.bottom) / 2,
       halfW, halfH,
-      wrapAlternatives: wrapAlternativesFor(anchor.text, viewport, tiers[index]),
+      ...(fallbacks.length ? { fallbacks } : {}),
     }
   })
 
@@ -812,19 +908,25 @@ export interface PlacementItem {
   halfW: number
   halfH: number
   /**
-   * Narrower, taller boxes for the SAME text, widest first. Tried only when the natural box has no safe placement.
-   * Wrapping keeps every word and never shrinks the type — the two things this solver is forbidden to do — so it is
-   * the one remaining way to make room. Optional: a caller that supplies none (the SVG pass) is unchanged.
+   * The same text in a box that may fit where the natural one cannot, tried in
+   * order and ONLY when the label has no clear spot at its natural size anywhere
+   * on the canvas: first wrapped narrower (a taller, slimmer box fits a gap a wide
+   * one cannot — every word kept), then one typographic tier smaller (a heading
+   * stepped down to body size, never below the 10px floor). A label that fits
+   * where it is authored never reaches these.
    */
-  wrapAlternatives?: readonly WrapAlternative[]
+  fallbacks?: Array<{ halfW: number; halfH: number; wrapPx?: number; tier?: number }>
 }
 
-/** One narrower layout of a label: the width to wrap at, and the box that produces. */
-export interface WrapAlternative {
-  wrapPx: number
-  halfW: number
-  halfH: number
-}
+/**
+ * A label's planned box must sit this far inside the canvas, not merely on it.
+ * The browser positions a label by projecting its anchor and rounding to a
+ * device pixel, and its text box is a hair taller than the line box the solver
+ * reserves; a box planned flush against the edge was painted 0.6-1.2px past it
+ * and the last row of the glyph was cut (the axis letters at the bottom-left
+ * corner of the triad, 90-95 % visible at 390px). Two pixels covers both.
+ */
+const EDGE_INSET_PX = 2
 
 /**
  * THE SOLVER. Projection-blind by construction: it is handed screen-space
@@ -869,23 +971,23 @@ export function solveLabelPlacement(
   for (const { item, index } of order) {
     const ax = item.x
     const ay = item.y
-    const boxOf = (halfW: number, halfH: number) => (x: number, y: number): Box => ({
-      left: x - halfW, right: x + halfW, top: y - halfH, bottom: y + halfH,
-    })
-    let box = boxOf(item.halfW, item.halfH)
+    let extent: { halfW: number; halfH: number } = item
     let wrapPx: number | undefined
+    let tier: number | undefined
+    const box = (x: number, y: number): Box => ({
+      left: x - extent.halfW, right: x + extent.halfW, top: y - extent.halfH, bottom: y + extent.halfH,
+    })
 
-    const search = (): { x: number; y: number; score: number } | null => {
-    let best: { x: number; y: number; score: number } | null = null
+    let best: { x: number; y: number; score: number; hits: number } | null = null
 
     for (const { dx, dy } of offsets) {
       const x = ax + dx
       const y = ay + dy
       const candidate = box(x, y)
 
-      // 1. hard: inside the figure
-      if (candidate.left < 0 || candidate.right > bounds.width ||
-          candidate.top < 0 || candidate.bottom > bounds.height) continue
+      // 1. hard: inside the figure, a hair clear of its edge
+      if (candidate.left < EDGE_INSET_PX || candidate.right > bounds.width - EDGE_INSET_PX ||
+          candidate.top < EDGE_INSET_PX || candidate.bottom > bounds.height - EDGE_INSET_PX) continue
       // 2. hard: clear of labels already placed this pass
       if (placedBoxes.some((p) => boxesOverlap(candidate, p))) continue
 
@@ -900,25 +1002,45 @@ export function solveLabelPlacement(
         GEOMETRY_HIT_CAP,
       )
       const score = geometryHits * GEOMETRY_WEIGHT + Math.hypot(dx, dy)
-      if (!best || score < best.score) best = { x, y, score }
+      if (!best || score < best.score) best = { x, y, score, hits: geometryHits }
       // The authored position, clear of everything, is unbeatable — stop early
       // so an already-good label is provably never moved.
       if (score === 0) break
     }
-    return best
-    }
 
-    let best = search()
-    // No safe spot at the natural width. Before giving up and leaving the label clipped or on top of its neighbour,
-    // try it wrapped narrower: same words, same type size, a box that may fit where the wide one cannot. Reached only
-    // after the natural box has failed, so a figure that places cleanly is byte-identical to before.
-    if (!best && item.wrapAlternatives) {
-      for (const alt of item.wrapAlternatives) {
-        box = boxOf(alt.halfW, alt.halfH)
-        best = search()
-        if (best) { wrapPx = alt.wrapPx; break }
+    // ESCALATE, ONLY FOR A LABEL THAT WOULD OTHERWISE LAND ON ANOTHER LABEL.
+    // Nothing safe within the normal reach used to mean "leave it where the
+    // author put it" — i.e. printed over its neighbour. Measured at 390px:
+    // "g (m/s²)" under the 290px heading of Variation of g (91 % overlap), "G"
+    // under a 12-word instrument caption (85 %). A label that moves further from
+    // its anchor still says what it says; two labels on top of each other say
+    // neither. Every label placed within the normal reach is untouched, so no
+    // figure that already passes can change.
+    if (!best) {
+      // At its natural width first, then wrapped progressively narrower: the same
+      // words in a taller, slimmer box, which fits a gap a wide one cannot.
+      const attempts: Array<{ halfW: number; halfH: number; wrapPx?: number; tier?: number }> = [item, ...(item.fallbacks ?? [])]
+      for (const attempt of attempts) {
+        extent = attempt
+        wrapPx = attempt.wrapPx
+        tier = attempt.tier
+        for (const { dx, dy } of escalatedOffsets(bounds)) {
+          const x = ax + dx
+          const y = ay + dy
+          const candidate = box(x, y)
+          if (candidate.left < EDGE_INSET_PX || candidate.right > bounds.width - EDGE_INSET_PX ||
+              candidate.top < EDGE_INSET_PX || candidate.bottom > bounds.height - EDGE_INSET_PX) continue
+          if (placedBoxes.some((p) => boxesOverlap(candidate, p))) continue
+          const geometryHits = Math.min(
+            obstacles.reduce((n, o) => n + (boxesOverlap(candidate, o, 0) ? 1 : 0), 0),
+            GEOMETRY_HIT_CAP,
+          )
+          const score = geometryHits * GEOMETRY_WEIGHT + Math.hypot(dx, dy)
+          if (!best || score < best.score) best = { x, y, score, hits: geometryHits }
+        }
+        if (best) break
       }
-      if (!best) box = boxOf(item.halfW, item.halfH)
+      if (!best) { extent = item; wrapPx = undefined; tier = undefined }
     }
 
     if (best) {
@@ -927,7 +1049,9 @@ export function solveLabelPlacement(
         text: item.text, anchorX: ax, anchorY: ay, x: best.x, y: best.y,
         movedPx: Math.round(Math.hypot(best.x - ax, best.y - ay)),
         ok: true,
-        ...(wrapPx !== undefined ? { wrapPx } : {}),
+        onGeometry: best.hits > 0,
+        ...(wrapPx ? { wrapPx } : {}),
+        ...(tier !== undefined ? { tier } : {}),
       }
     } else {
       // FAIL VISIBLY: keep the authored position, report it, never hide.

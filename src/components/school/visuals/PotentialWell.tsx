@@ -3,28 +3,47 @@
 // Builds an infinite square well, its quantized energy levels, and the first
 // stationary-state wavefunctions. Reuses Sprint R.1 progressive reveal.
 // Steps: 1 well walls → 2 ground level E1 → 3 E2 → 4 E3 → 5 ψ on each level.
+// Levels are drawn to scale (Eₙ = n²E₁) and each ψₙ has n half-wavelengths, zero at the walls.
 
 import anim from './visualAnim.module.css'
 
+/** The drawing's geometry (viewBox units). */
+export const POTENTIAL_WELL = {
+  wallL: 70, wallR: 230, floor: 150, top: 10,
+  /** Height of the n = 1 level above the floor; level n is drawn n² of these up. */
+  unit: 14,
+  /** Peak of each stationary-state wave, in px about its own level. */
+  amp: 9,
+  samples: 40,
+} as const
+
+const LEVEL_COLOURS = ['#22A06B', '#3B9EFF', '#8B5CF6'] as const
+
+/**
+ * The three levels, drawn TO SCALE: Eₙ = n²E₁, so level n sits n² units above the floor.
+ * (The first version "compressed" them — 20, 55, 100 above the floor, i.e. 1 : 2.75 : 5 —
+ * while labelling them E₂ = 4E₁ and E₃ = 9E₁, so the picture contradicted its own labels.)
+ */
+export function wellLevels() {
+  const { floor, unit } = POTENTIAL_WELL
+  return [1, 2, 3].map((n) => ({ n, y: floor - unit * n * n, color: LEVEL_COLOURS[n - 1] }))
+}
+
+/** ψₙ across the well: n half-wavelengths, vanishing at both walls. Positive = above the level line. */
+export function wellWave(n: number): Array<{ x: number; psi: number }> {
+  const { wallL, wallR, samples } = POTENTIAL_WELL
+  return Array.from({ length: samples + 1 }, (_, i) => {
+    const t = i / samples
+    return { x: wallL + t * (wallR - wallL), psi: Math.sin(t * Math.PI * n) }
+  })
+}
+
 export function PotentialWell({ revealStep = Infinity }: { revealStep?: number }) {
   const show = (s: number) => revealStep >= s
-  const wallL = 70, wallR = 230, floor = 150, top = 20
-  // energies scale as n² (E1, E2=4E1, E3=9E1) — drawn compressed to fit.
-  const levels = [
-    { n: 1, y: 130, color: '#22A06B' },
-    { n: 2, y: 95, color: '#3B9EFF' },
-    { n: 3, y: 50, color: '#8B5CF6' },
-  ]
-  // half-wavelength standing wave for level n across the well
-  const wavePath = (n: number, y: number) => {
-    const N = 40, A = 12
-    return Array.from({ length: N + 1 }, (_, i) => {
-      const t = i / N
-      const px = wallL + t * (wallR - wallL)
-      const py = y - Math.sin(t * Math.PI * n) * A
-      return `${i === 0 ? 'M' : 'L'} ${px.toFixed(1)} ${py.toFixed(1)}`
-    }).join(' ')
-  }
+  const { wallL, wallR, floor, top, amp } = POTENTIAL_WELL
+  const levels = wellLevels()
+  const wavePath = (n: number, y: number) =>
+    wellWave(n).map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x.toFixed(1)} ${(y - p.psi * amp).toFixed(1)}`).join(' ')
   return (
     <svg viewBox="0 0 300 170" width="100%" style={{ maxWidth: 340 }} aria-hidden="true">
       {/* Step 1 — infinite well walls */}

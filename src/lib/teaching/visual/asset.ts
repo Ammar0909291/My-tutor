@@ -38,6 +38,7 @@ import { describeVisualPayload, type VisualSemantics } from './visualSemantics'
 import { scopeForAsset, type VisualScope } from './scope'
 import { typesetPayloadChemistry } from './typesetSceneChemistry'
 import { chemistryAdmissionFailure } from './chemistryAdmission'
+import { payloadBlockers } from './figureAudit'
 
 /**
  * Where an asset came from, and — read through IDENTITY_STRENGTH below —
@@ -146,6 +147,8 @@ export type AdmissionRejection =
   | 'malformed-payload'
   /** A chemistry figure with a deterministic FAIL from `chemistryFigureAudit` (chemistryAdmission.ts). */
   | 'chemistry-validation-failed'
+  /** The payload carries a blocker the audit refuses to ship (leakage, NaN geometry, a self-contradicting equation). */
+  | 'failed-audit'
 
 export type AdmissionResult =
   | { ok: true; asset: VisualAsset }
@@ -226,7 +229,19 @@ export function admitVisualAsset(intent: VisualIntent, asset: VisualAsset | null
     }
   }
 
-  // Chemistry figures also face the deterministic chemistry validators, whatever tier built them.
+  // FAIL CLOSED, on EVERY tier. A payload that carries a blocker — non-finite
+  // geometry, a broken reference, an internal id or answer key in visible text,
+  // raw LaTeX, an equation that contradicts itself — is not drawn, not repaired
+  // and not replaced with another concept's figure: NO FIGURE, with the reason
+  // on record. Authored, approved and generated figures all pass through here,
+  // so none is held to a weaker bar than another (figureAudit.payloadBlockers).
+  const blockers = payloadBlockers(asset.payload)
+  if (blockers.length > 0) {
+    return { ok: false, reason: 'failed-audit', detail: blockers.slice(0, 3).join('; ') }
+  }
+
+  // Chemistry figures also face the deterministic chemistry validators, whatever tier built them. This is the same gate
+  // with a subject-specific predicate behind it, not a second one: it runs after the subject-agnostic blockers above.
   const chemistry = chemistryAdmissionFailure(asset.conceptId, asset.payload)
   if (chemistry) {
     return { ok: false, reason: 'chemistry-validation-failed', detail: chemistry }

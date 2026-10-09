@@ -17,9 +17,12 @@ import { useTheme, type Theme } from '@/components/Providers'
 const CAMERA_DISTANCE = 10
 const X_AXIS: [[number, number, number], [number, number, number]] = [[-3, -1.6, 0], [3, -1.6, 0]]
 const Y_AXIS: [[number, number, number], [number, number, number]] = [[-3, -1.6, 0], [-3, 2, 0]]
-const BINS = [-2.4, -1.8, -1.2, -0.6, 0, 0.6, 1.2, 1.8, 2.4]
+export const BINS = [-2.4, -1.8, -1.2, -0.6, 0, 0.6, 1.2, 1.8, 2.4]
 // Bell-shaped counts (normal distribution), peak in the middle.
-const COUNTS = [1, 2, 3, 4, 5, 4, 3, 2, 1]
+export const COUNTS = [1, 2, 3, 4, 5, 4, 3, 2, 1]
+/** Where the red "mean" line is drawn: the centre of the symmetric data. */
+export const MEAN_X = 0
+export const MEAN_LABEL = 'Mean at center (symmetric normal distribution) — spread is the width'
 
 function Scene({ revealStep, theme }: { revealStep: number; theme: Theme }) {
   const showAxes = revealStep >= 1
@@ -44,9 +47,9 @@ function Scene({ revealStep, theme }: { revealStep: number; theme: Theme }) {
       })
     }
     if (showStats) {
-      obstacles.push({ type: 'vector', from: [0, -1.6, 0], to: [0, 1.4, 0] })
+      obstacles.push({ type: 'vector', from: [MEAN_X, -1.6, 0], to: [MEAN_X, 1.4, 0] })
       labels.push({
-        text: 'Mean at center (symmetric normal distribution) — spread is the width',
+        text: MEAN_LABEL,
         position: [0, -2.2, 0],
         color: '#FF6B6B',
       })
@@ -88,7 +91,7 @@ function Scene({ revealStep, theme }: { revealStep: number; theme: Theme }) {
 
       {showStats && (
         <group>
-          <Vector3D start={[0, -1.6, 0]} end={[0, 1.4, 0]} color="#FF6B6B" thickness={0.025} />
+          <Vector3D start={[MEAN_X, -1.6, 0]} end={[MEAN_X, 1.4, 0]} color="#FF6B6B" thickness={0.025} />
         </group>
       )}
       <SceneLabelLayer labels={labels} obstacles={obstacles} cameraDistance={CAMERA_DISTANCE} theme={theme} />

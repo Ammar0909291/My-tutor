@@ -18,6 +18,7 @@
 
 import type { SceneObject, SceneSpec, Vec3 } from '../sceneSpec'
 import { round, strictNumber, type ConsistencyResult } from './shared'
+import { arrow, label as textLabel, ROLE } from './visualDesign'
 
 // ── Parameters (the ONLY thing the LLM extracts) ─────────────────────────────
 
@@ -66,28 +67,6 @@ function velocityAt(p: KinematicsParams, t: number): number {
   return p.initialVelocity + p.acceleration * t
 }
 
-interface SampledCurve {
-  ts: number[]
-  xs: number[]
-  vs: number[]
-  sxTime: number
-  sxPos: number
-  sxVel: number
-}
-
-function sampleCurves(p: KinematicsParams): SampledCurve {
-  const ts: number[] = []
-  for (let i = 0; i <= CURVE_SAMPLES; i++) ts.push((i / CURVE_SAMPLES) * p.duration)
-  const xs = ts.map((t) => positionAt(p, t))
-  const vs = ts.map((t) => velocityAt(p, t))
-
-  const sxTime = VISUAL_MAX / Math.max(p.duration, 1e-9)
-  const sxPos = VISUAL_MAX / Math.max(...xs.map(Math.abs), 1e-9)
-  const sxVel = VISUAL_MAX / Math.max(...vs.map(Math.abs), 1e-9)
-
-  return { ts, xs, vs, sxTime, sxPos, sxVel }
-}
-
 /** Build a 3-step kinematics SceneSpec: position-time, then velocity-time, then acceleration-time. */
 /**
  * WRITE THE EQUATION THE WAY A TEACHER WOULD WRITE IT.
@@ -129,46 +108,127 @@ export function constant(value: number): string | null {
   return v === 0 ? null : String(v)
 }
 
-/** How far above the curve end a label sits, so it never overprints the line. */
-const LABEL_LIFT = 1.4
+/**
+ * THREE GRAPHS, EACH WITH ITS OWN AXES.
+ *
+ * Position, velocity and acceleration used to be three curves normalised to the
+ * SAME ±14 box and drawn on one unlabelled plane: no axes, no units, no scale,
+ * and the acceleration line always sat at the top whatever its value. Measured
+ * in Chromium at 390px: three coloured lines and a stack of equations in the
+ * corner, nothing saying what either axis was. A learner could not read a value
+ * off it or tell that the curves were on different scales — which they were.
+ *
+ * Now each quantity is its own small graph, stacked, sharing ONE time scale so
+ * "when" lines up across them, with an axis arrow each way, the axis names with
+ * units, and the end values written on the axes. Each y-range always includes 0
+ * and the zero line is where the time axis is drawn, so a negative velocity
+ * visibly goes below the axis.
+ */
+const PANEL_W = 20          // length of every time axis, scene units
+const AXIS_X = -10          // x of the vertical axes
+const PANEL_H = 7           // height of each graph's value range
+/** Bottom edge of the three graphs, top to bottom: x–t, v–t, a–t. */
+const PANEL_BOTTOMS = [8, -3.5, -15] as const
+
+interface Panel {
+  key: 'position' | 'velocity' | 'acceleration'
+  bottom: number
+  lo: number
+  hi: number
+  /** Scene y for a value. */
+  y: (v: number) => number
+}
+
+function panelFor(key: Panel['key'], i: number, values: number[]): Panel {
+  let lo = Math.min(0, ...values)
+  let hi = Math.max(0, ...values)
+  if (hi - lo < 1e-9) { lo = -1; hi = 1 } // a value that is 0 throughout still gets a drawn range
+  const bottom = PANEL_BOTTOMS[i]
+  return { key, bottom, lo, hi, y: (v) => bottom + ((v - lo) / (hi - lo)) * PANEL_H }
+}
+
+interface Layout {
+  ts: number[]
+  xs: number[]
+  vs: number[]
+  /** Scene units per second — one scale for all three graphs. */
+  sxTime: number
+  panels: [Panel, Panel, Panel]
+}
+
+function sampleCurves(p: KinematicsParams): Layout {
+  const ts: number[] = []
+  for (let i = 0; i <= CURVE_SAMPLES; i++) ts.push((i / CURVE_SAMPLES) * p.duration)
+  const xs = ts.map((t) => positionAt(p, t))
+  const vs = ts.map((t) => velocityAt(p, t))
+  const sxTime = PANEL_W / Math.max(p.duration, 1e-9)
+  return {
+    ts, xs, vs, sxTime,
+    panels: [
+      panelFor('position', 0, xs),
+      panelFor('velocity', 1, vs),
+      panelFor('acceleration', 2, [p.acceleration]),
+    ],
+  }
+}
+
+/** A number as it would be written on an axis: no float noise, no trailing zeros. */
+function tick(v: number): string {
+  const r = round(v, 2)
+  return (Object.is(r, -0) ? 0 : r).toString().replace('-', '−')
+}
+
+const AXIS_UNITS = { position: 'x (m)', velocity: 'v (m/s)', acceleration: 'a (m/s²)' } as const
+
+/** The panel's axes, their names and the end values written on them. */
+function axisObjects(panel: Panel, duration: number): SceneObject[] {
+  const zero = panel.y(0)
+  const top = panel.bottom + PANEL_H
+  const end = AXIS_X + PANEL_W
+  const out: SceneObject[] = [
+    arrow([AXIS_X, zero, 0], [end, zero, 0], ROLE.reference),
+    arrow([AXIS_X, panel.bottom, 0], [AXIS_X, top, 0], ROLE.reference),
+    textLabel('t (s)', [round(end + 2.4), round(zero), 0], ROLE.ink, 'detail'),
+    textLabel(AXIS_UNITS[panel.key], [AXIS_X, round(top + 1.3), 0], ROLE.ink, 'detail'),
+    textLabel(tick(duration), [end, round(zero - 1.2), 0], ROLE.ink, 'detail'),
+    textLabel(tick(panel.hi), [AXIS_X - 1.9, round(top), 0], ROLE.ink, 'detail'),
+  ]
+  // 0 is named wherever the time axis does not run along the bottom edge.
+  if (panel.lo < 0) {
+    out.push(textLabel('0', [AXIS_X - 1.2, round(zero), 0], ROLE.ink, 'detail'))
+    out.push(textLabel(tick(panel.lo), [AXIS_X - 1.9, panel.bottom, 0], ROLE.ink, 'detail'))
+  } else {
+    out.push(textLabel('0', [AXIS_X - 1.2, round(zero), 0], ROLE.ink, 'detail'))
+  }
+  return out
+}
 
 /**
- * THREE UNLABELLED CURVES ARE THREE COLOURED LINES.
- *
- * Position, velocity and acceleration were drawn as bare paths distinguished
- * only by colour, so the learner had nothing telling them which was which and
- * `fromScene` — which reads LABELS — reported the whole scene to the tutor as
- * "3 plotted curves". A tutor that cannot name the curve it is teaching from
- * cannot point at it either. Same defect and fix as electricCircuit's
- * component labels.
- *
- * The label rides the curve's LAST sampled point, i.e. the right-hand end,
- * which is where a reader's eye leaves the line and where a legend would sit.
+ * The curve's equation, as the graph's title. It rides the top of its own graph
+ * (not the curve's end), so it can never sit on the line it names, and
+ * `fromScene` — which reads LABELS — can still name which curve is which.
  */
-function curveLabel(id: string, points: Vec3[], text: string, color: string): SceneObject {
-  const end = points[points.length - 1] ?? [0, 0, 0]
+function curveLabel(id: string, panel: Panel, text: string, color: string): SceneObject {
   return {
     type: 'label',
     id,
-    position: [round(end[0]), round(end[1] + LABEL_LIFT), 0] as Vec3,
+    position: [2.5, round(panel.bottom + PANEL_H + 1.3), 0] as Vec3,
     text,
     color,
     properties: { labels: id.replace(/-label$/, '') },
   }
 }
 
+/** Build a 3-step kinematics SceneSpec: position-time, then velocity-time, then acceleration-time. */
 export function buildKinematicsGraphScene(params: KinematicsParams): SceneSpec {
   const s = sampleCurves(params)
+  const [pos, vel, acc] = s.panels
 
-  const positionPoints: Vec3[] = s.ts.map((t, i) => [round(t * s.sxTime), round(s.xs[i] * s.sxPos), 0])
-  const velocityPoints: Vec3[] = s.ts.map((t, i) => [round(t * s.sxTime), round(s.vs[i] * s.sxVel), 0])
-  // Acceleration is constant — a flat line across the same time domain, scaled
-  // by its own bound (or 1 if acceleration is exactly 0, to avoid a 0/0 scale).
-  const sxAccel = VISUAL_MAX / Math.max(Math.abs(params.acceleration), 1e-9)
-  const accelerationPoints: Vec3[] = [
-    [0, round(params.acceleration * sxAccel), 0],
-    [round(VISUAL_MAX), round(params.acceleration * sxAccel), 0],
-  ]
+  const at = (t: number, panel: Panel, v: number): Vec3 => [round(AXIS_X + t * s.sxTime), round(panel.y(v)), 0]
+  const positionPoints: Vec3[] = s.ts.map((t, i) => at(t, pos, s.xs[i]))
+  const velocityPoints: Vec3[] = s.ts.map((t, i) => at(t, vel, s.vs[i]))
+  // Acceleration is constant — a flat line across the same time domain.
+  const accelerationPoints: Vec3[] = [at(0, acc, params.acceleration), at(params.duration, acc, params.acceleration)]
 
   return {
     id: `kinematics-${params.initialVelocity}-${params.acceleration}-${params.duration}`,
@@ -176,27 +236,30 @@ export function buildKinematicsGraphScene(params: KinematicsParams): SceneSpec {
     sceneType: 'plot',
     teachingGoal: 'Show how position, velocity, and acceleration each vary with time under constant acceleration.',
     cameraDistance: VISUAL_MAX * 3,
-    ariaLabel: 'Three graphs: position vs time, velocity vs time, and acceleration vs time, for uniformly accelerated motion.',
+    ariaLabel: 'Three graphs, each with its own axes: position vs time, velocity vs time, and acceleration vs time, for uniformly accelerated motion.',
     steps: [
       {
         narration: `This is the position-time graph: x = ${params.initialPosition} + ${params.initialVelocity}t + 0.5(${params.acceleration})t², a ${params.acceleration === 0 ? 'straight line' : params.acceleration > 0 ? 'curve bending upward' : 'curve bending downward'} since acceleration is ${params.acceleration === 0 ? 'zero' : 'constant and non-zero'}.`,
         objects: [
+          ...axisObjects(pos, params.duration),
           { type: 'path', id: 'position-curve', points: positionPoints, color: '#3b82f6' },
-          curveLabel('position-curve-label', positionPoints, `x–t: x = ${polynomial([constant(params.initialPosition), term(params.initialVelocity, 't'), term(params.acceleration / 2, 't²')])}`, '#3b82f6'),
+          curveLabel('position-curve-label', pos, `x–t: x = ${polynomial([constant(params.initialPosition), term(params.initialVelocity, 't'), term(params.acceleration / 2, 't²')])}`, '#3b82f6'),
         ],
       },
       {
         narration: `This is the velocity-time graph: v = ${params.initialVelocity} + ${params.acceleration}t — ${params.acceleration === 0 ? 'a flat line, since velocity is constant' : 'a straight line, since velocity changes at a constant rate'}.`,
         objects: [
+          ...axisObjects(vel, params.duration),
           { type: 'path', id: 'velocity-curve', points: velocityPoints, color: '#22c55e' },
-          curveLabel('velocity-curve-label', velocityPoints, `v–t: v = ${polynomial([constant(params.initialVelocity), term(params.acceleration, 't')])}`, '#22c55e'),
+          curveLabel('velocity-curve-label', vel, `v–t: v = ${polynomial([constant(params.initialVelocity), term(params.acceleration, 't')])}`, '#22c55e'),
         ],
       },
       {
         narration: `This is the acceleration-time graph: a flat line at a = ${params.acceleration} m/s², since acceleration is constant throughout.`,
         objects: [
+          ...axisObjects(acc, params.duration),
           { type: 'path', id: 'acceleration-curve', points: accelerationPoints, color: '#f59e0b' },
-          curveLabel('acceleration-curve-label', accelerationPoints, `a–t: a = ${params.acceleration} m/s² (constant)`, '#f59e0b'),
+          curveLabel('acceleration-curve-label', acc, `a–t: a = ${params.acceleration} m/s² (constant)`, '#f59e0b'),
         ],
       },
     ],
@@ -217,14 +280,16 @@ export function checkKinematicsConsistency(spec: SceneSpec, params: KinematicsPa
   if (!acceleration || !acceleration.points) return { ok: false, errors: ['missing acceleration-curve object'] }
 
   const s = sampleCurves(params)
-  const tolPos = VISUAL_MAX * 0.02
-  const tolVel = VISUAL_MAX * 0.02
+  const [pos, vel, acc] = s.panels
+  const at = (t: number, panel: Panel, v: number): Vec3 => [round(AXIS_X + t * s.sxTime), round(panel.y(v)), 0]
+  const tolPos = PANEL_H * 0.02
+  const tolVel = PANEL_H * 0.02
 
   if (position.points.length !== s.ts.length) {
     errors.push(`position-curve has ${position.points.length} points, expected ${s.ts.length}`)
   } else {
     for (let i = 0; i < s.ts.length; i++) {
-      const expected: Vec3 = [round(s.ts[i] * s.sxTime), round(s.xs[i] * s.sxPos), 0]
+      const expected: Vec3 = at(s.ts[i], pos, s.xs[i])
       if (Math.abs(position.points[i][0] - expected[0]) > tolPos || Math.abs(position.points[i][1] - expected[1]) > tolPos) {
         errors.push(`position-curve point ${i} (${position.points[i][0]}, ${position.points[i][1]}) does not match re-derived (${expected[0]}, ${expected[1]})`)
       }
@@ -235,15 +300,14 @@ export function checkKinematicsConsistency(spec: SceneSpec, params: KinematicsPa
     errors.push(`velocity-curve has ${velocity.points.length} points, expected ${s.ts.length}`)
   } else {
     for (let i = 0; i < s.ts.length; i++) {
-      const expected: Vec3 = [round(s.ts[i] * s.sxTime), round(s.vs[i] * s.sxVel), 0]
+      const expected: Vec3 = at(s.ts[i], vel, s.vs[i])
       if (Math.abs(velocity.points[i][0] - expected[0]) > tolVel || Math.abs(velocity.points[i][1] - expected[1]) > tolVel) {
         errors.push(`velocity-curve point ${i} (${velocity.points[i][0]}, ${velocity.points[i][1]}) does not match re-derived (${expected[0]}, ${expected[1]})`)
       }
     }
   }
 
-  const sxAccel = VISUAL_MAX / Math.max(Math.abs(params.acceleration), 1e-9)
-  const expectedAccelY = round(params.acceleration * sxAccel)
+  const expectedAccelY = at(0, acc, params.acceleration)[1]
   if (acceleration.points.length !== 2) {
     errors.push(`acceleration-curve has ${acceleration.points.length} points, expected 2 (a flat line)`)
   } else if (Math.abs(acceleration.points[0][1] - expectedAccelY) > tolVel || Math.abs(acceleration.points[1][1] - expectedAccelY) > tolVel) {

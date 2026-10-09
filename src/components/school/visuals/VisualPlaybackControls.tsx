@@ -37,8 +37,9 @@ export function VisualPlaybackControls({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    // `--on-accent`, not '#fff': the dark theme's --coral is chalk-yellow (#E8B84B), and white on it is 1.84:1
-    // (measured 2026-10-08); tokens.css defines --on-accent for exactly this fill (~9:1).
+    // On a --coral fill the glyph must use --on-accent: the dark theme's coral is
+    // chalk-yellow, where a literal white measured 1.84:1 (the repo's own token
+    // note: "White on chalk-yellow is ~1.7:1"). Fallback keeps the old white.
     color: 'var(--on-accent, #fff)',
     background: 'var(--coral, #FF6B5E)',
     boxShadow: '0 2px 0 rgba(0,0,0,0.18)',
@@ -108,6 +109,9 @@ export function VisualPlaybackControls({
                 cursor: 'pointer',
                 borderRadius: 999,
                 padding: '3px 8px',
+                // WCAG 2.2 target size: the speed chips measured 38x21, 26x21 px.
+                minHeight: 24,
+                minWidth: 24,
                 fontSize: 10,
                 fontWeight: 800,
                 color: active ? 'var(--on-accent, #fff)' : 'var(--text-secondary, #aaa)',

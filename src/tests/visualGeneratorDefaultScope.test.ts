@@ -111,6 +111,13 @@ describe('the remaining gap is enumerated and may only shrink', () => {
     'math.geom.triangle',
     'phys.mech.circular-motion',
     'phys.mech.collisions-elastic',
+    // Judged 2026-10-08 (REVIEW_REQUIRED follow-up), against the EB's central claim — "the total
+    // momentum of an isolated system is the same before and after, though each body's changes":
+    // the shared instance is a collision whose masses and velocities are PRINTED, with elastic /
+    // perfectly-inelastic switchable, and checkCollisionConsistency re-derives the total from the
+    // DRAWN vectors (physicsCardSemantics.test.ts does the same independently). It replaced a 3D card
+    // of unlabeled spheres whose arrows did not conserve momentum for the masses their sizes implied.
+    'phys.mech.conservation-of-momentum',
     'phys.mech.kinematics-1d',
     // ADR 16 G3 (2026-09-29), judged against the KG description "The net force on a
     // body equals the product of its mass and acceleration: F = ma": the shared
