@@ -49,7 +49,7 @@
    "initial": "SM-02: no physics assertion (shared force_diagram card)",
    "decision": "FIXED→PASS",
    "finding": "Three real defects in the drawing: the friction arrow-head pointed AT the body (same way as the applied force — the marker was drawn pointing left and orient=auto turned it round again); applied (45) was longer than friction (40), an unbalanced body; and the body floated 20 units above the ground so the normal force had no contact.",
-   "fix": "ForceDiagram.tsx: marker polygon along +x, one length per opposing pair, body rests on the ground line; labels lifted clear of the heads.",
+   "fix": "ForceDiagram.tsx: marker polygon along +x, one length per opposing pair, body rests on the ground line; labels lifted clear of the heads; 2026-10-09: the ground was raised 10 units because seating the body on it had pushed the weight arrow's head 5 units past the bottom of the drawing, where it was cut flat (found only by viewing the completed production render; pinned by the 'every arrow-head lies inside the drawing' test).",
    "evidence": [
     {
      "file": "src/tests/physicsCardSemantics.test.ts",
@@ -62,7 +62,7 @@
    "initial": "SM-02: no physics assertion (shared force_diagram card)",
    "decision": "FIXED→PASS",
    "finding": "Same card: friction now points opposite the applied force, from the contact side, with the head away from the body; equal length to the applied force (static friction holding the body).",
-   "fix": "As free-body-diagram.",
+   "fix": "As free-body-diagram; 2026-10-09: the ground was raised 10 units because seating the body on it had pushed the weight arrow's head 5 units past the bottom of the drawing, where it was cut flat (found only by viewing the completed production render; pinned by the 'every arrow-head lies inside the drawing' test).",
    "evidence": [
     {
      "file": "src/tests/physicsCardSemantics.test.ts",
@@ -75,20 +75,20 @@
    "initial": "SM-02: no physics assertion (shared force_diagram card)",
    "decision": "FIXED→PASS",
    "finding": "The body now rests on the surface, so the normal force has a contact it acts at; it is perpendicular to the surface, upward, and the same length as the weight (true for a level surface with no vertical applied force).",
-   "fix": "As free-body-diagram.",
+   "fix": "As free-body-diagram; 2026-10-09: the ground was raised 10 units because seating the body on it had pushed the weight arrow's head 5 units past the bottom of the drawing, where it was cut flat (found only by viewing the completed production render; pinned by the 'every arrow-head lies inside the drawing' test).",
    "evidence": [
     {
      "file": "src/tests/physicsCardSemantics.test.ts",
      "describe": "the shared force diagram draws what each of its four concepts says"
     }
    ],
-   "remaining": "Only the level-surface case is drawn: that N ≠ mg on a slope or with a vertical push is not shown and must come from the tutor's text."
+   "remaining": "Only the level-surface case is drawn: that N ≠ mg on a slope or with a vertical push is not shown and must come from the tutor's text. In the lesson the card shows as many steps as the reply has lines, so a short reply never draws the normal arrow (pre-existing; see report §18)."
   },
   "phys.mech.equilibrium": {
    "initial": "SM-02: no physics assertion (shared force_diagram card)",
    "decision": "FIXED→PASS",
    "finding": "The diagram was unbalanced (applied 45 vs friction 40). It now has four forces in two equal opposite pairs through the body — net force and net torque zero — which is what 'equilibrium is balanced forces, not no forces' needs.",
-   "fix": "As free-body-diagram.",
+   "fix": "As free-body-diagram; 2026-10-09: the ground was raised 10 units because seating the body on it had pushed the weight arrow's head 5 units past the bottom of the drawing, where it was cut flat (found only by viewing the completed production render; pinned by the 'every arrow-head lies inside the drawing' test).",
    "evidence": [
     {
      "file": "src/tests/physicsCardSemantics.test.ts",
@@ -138,18 +138,21 @@
   },
   "phys.opt.lens-power": {
    "initial": "ST-03 text only, LY-02: P / F overlap the axis",
-   "decision": "REVIEW_REQUIRED",
-   "reason": "The served figure is a correct single-lens ray diagram (the same one as phys.opt.lenses, now with O, signed numbers and the lens drawn), but the concept's two claims — power P = 1/f in dioptres and P = P₁ + P₂ for lenses in contact — are not depicted at all. scope.ts has recorded this since before this review ('one lens; P = P1 + P2 needs a combination'). Closing it means authoring a new figure from the Educational Brain's worked numbers (+5 D & −2 D → +3 D), which is new content, not a fix to what is drawn.",
-   "ownerDecision": "Author a lens-power / combination figure, or accept the single-lens figure as an adjacent illustration.",
-   "fix": "The shared lens fixes above apply (the 'P' that could read as power is now 'O').",
+   "decision": "FIXED→PASS",
+   "closedOn": "2026-10-09 (the 2026-10-08 review left it REVIEW_REQUIRED for an owner decision; the lesson was then read and the decision made)",
+   "finding": "The lesson explicitly teaches both relationships: the KG node (\"The power of a lens is the reciprocal of focal length in metres; combined lenses have powers that add algebraically\"), the Educational Brain's Core Understanding and Mental Models stages 2-3 (P = 1/f in dioptres; P_total = P₁ + P₂ for thin lenses in contact), and the blueprint's Level 2. The served figure was the single-lens ray diagram of phys.opt.lenses — correct, but it showed neither power nor a combination (scope.ts had demoted it for that reason). The concept's own claims, not an adjacent one, were missing.",
+   "fix": "New authored figure, lensPower.ts, served through CONCEPT_SCENES (no new engine or renderer): row 1, one converging lens, f = 0.50 m → P = 1/f = +2 D; row 2, a +5 D converging and a −2 D diverging lens in contact, the first lens alone (aid ray, F₁) and the pair together, P₁ + P₂ = +3 D, f = 0.33 m, 'powers add, focal lengths do not', and the thin-lens-in-contact limit. The numbers are the EB's own worked ones. The registry row lost its ray_optics generator (it would have given this concept the sliders of phys.opt.lenses) and the scope.ts demotion was removed.",
    "evidence": [
+    {
+     "file": "src/tests/physicsCardSemantics.test.ts",
+     "describe": "lens power figure: the printed powers are the ones its drawn rays have, and they add"
+    },
     {
      "file": "src/tests/physicsCardSemantics.test.ts",
      "describe": "ray-optics figures print u, f and v that satisfy"
     }
    ],
-   "remaining": "Stays REVIEW_REQUIRED until the owner decides.",
-   "finding": "Everything the figure draws is correct (the printed u, f, v satisfy 1/f = 1/v − 1/u; rays pass through F and the image), but it is the same single-lens diagram as phys.opt.lenses: it shows no power in dioptres and no combination of lenses."
+   "remaining": "Static figure (no sliders): the learner cannot vary f₁ and f₂. Only thin lenses in contact are drawn — the separated-lens correction (EB: P = P₁ + P₂ − d·P₁P₂) is named in the figure's limit but not drawn. The machine semantic PASS comes from its test-file-name heuristic; the real evidence is the slope-derived test cited here."
   },
   "phys.mod.wave-particle-duality": {
    "initial": "SM-02: no physics assertion (double_slit card)",

@@ -354,10 +354,13 @@ describe('the repair path is the general one, not a special case', () => {
     // concepts, thermodynamic-processes, carnot-cycle, resistivity, emf,
     // schrodinger-equation, selection-rules) each own an authored figure that
     // draws what their verdict said was missing — physicsCoreScenesB15.ts.
-    expect(INSUFFICIENT_FOR_CONCEPT.size).toBe(26)
+    // 26 -> 25 (2026-10-09): a REPAIR. phys.opt.lens-power owns an authored P = 1/f and
+    // P = P1 + P2 figure (lensPower.ts), so the "one lens" verdict no longer describes it.
+    expect(INSUFFICIENT_FOR_CONCEPT.size).toBe(25)
     expect(INSUFFICIENT_FOR_CONCEPT.has('phys.therm.carnot-cycle')).toBe(false)
     expect(INSUFFICIENT_FOR_CONCEPT.has('phys.mech.hookes-law')).toBe(false)
     expect(INSUFFICIENT_FOR_CONCEPT.has('phys.opt.refraction')).toBe(false)
+    expect(INSUFFICIENT_FOR_CONCEPT.has('phys.opt.lens-power')).toBe(false)
     expect(INSUFFICIENT_FOR_CONCEPT.has('bio.mol.dna-replication')).toBe(false)
     expect([...INSUFFICIENT_FOR_CONCEPT].some((id) => id.startsWith('chem.'))).toBe(true)
     // The queue now tracks mathematics too, which it did not before.

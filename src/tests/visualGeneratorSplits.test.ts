@@ -209,7 +209,9 @@ describe('cases the audit found that B2 deliberately did NOT approximate', () =>
   // sweep's contribution here is the second one below, which pins WHY it is
   // safe — see visualSemanticMoatPhysicsChemistry.test.ts.
   const REQUIRES_AUTHORING = [
-    'phys.opt.lens-power',            // needs a lens COMBINATION
+    // AUTHORED 2026-10-09, so no longer here: 'phys.opt.lens-power' ("needs a lens COMBINATION") now owns
+    // a P = 1/f and P = P1 + P2 figure in CONCEPT_SCENES (lensPower.ts) — physicsCardSemantics.test.ts
+    // re-derives each printed power from the drawn rays and pins it at concept scope.
     // AUTHORED 2026-09-30 (physics batch 2), so no longer here:
     // 'phys.mech.impulse' ("needs a force-time curve") — physicsCoreScenesBatch2.test.ts.
     'phys.wave.shm-energy',           // needs a KE/PE energy split
@@ -245,9 +247,9 @@ describe('cases the audit found that B2 deliberately did NOT approximate', () =>
     expect(ask(conceptId).asset?.scope, conceptId).toBe('domain')
   })
 
-  it('none of the remaining eleven was silently given another concept\'s override', () => {
+  it('none of the remaining ten was silently given another concept\'s override', () => {
     // The original invariant, unchanged and still covering every entry (twelve,
-    // until bio.mol.dna-replication was authored its own figure): B2
+    // until bio.mol.dna-replication, then phys.opt.lens-power, were authored their own figures): B2
     // must not have handed any of them a neighbour's authored parameters.
     for (const conceptId of REQUIRES_AUTHORING) {
       expect(CONCEPT_SCENE_OVERRIDES, conceptId).not.toContain(conceptId)
