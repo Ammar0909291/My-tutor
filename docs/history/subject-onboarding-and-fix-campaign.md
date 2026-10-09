@@ -1204,3 +1204,32 @@ Owner instruction: "Fix" for the QA report. Physics only.
   - P9: model wording.
   - P11–P13: separate investigations.
 - Tests: `hardPhysicsLiveQaFixes.test.ts`.
+
+## 2026-10-07/09 — owner decisions and the last code-fixable real-learner defects (2350ff6)
+
+Owner instruction: "fix everything don't leave open anything". Four policy questions were put to the owner and
+answered in chat (2026-10-07):
+
+- **Check pass** instead of the closed N1/N2/N3 parser: `factCheckPass.ts` — a reply or lesson opening that carries
+  numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy
+  of itself (length ratio 0.6–1.6, ≥ 60 % of the original's words kept, 7 s budget, any failure keeps the original).
+  Chat route 9 → 10 `routeAI` call sites, lesson-init 2 → 3.
+- **Only authored cards**: `decideModelProbe({ authoredCardsOnly: AUTHORED_CARDS_ONLY })`, `mcq.AUTHORED_ONLY_INSTRUCTION`,
+  `proseMcqGuard.stripProseMultipleChoice`.
+- **2-option cards practice only, where reachable**: `turnContract.certifiesMastery`, hoisted once in the route as
+  `certifiedForMastery`; pool read by `assets/probePool.ts` (one concept, take 60). Measured 2026-10-07: concepts with
+  ≥ 3 authored 3+-option cards — bio 0/199, chem 34/186, phys 117/283, eng 0/215, cs 0/119, math 886/908.
+- **Stay until mastery**: `conceptBudget.STAY_UNTIL_MASTERY` (allowance = 30-turn ceiling; `legacyTurnBudget` kept).
+
+Remaining defects fixed in the same commit: lesson drift guard + lesson scope rule (`lessonDriftGuard.ts`), verdict on
+"ok" incl. a name vocative, praise of a corrected answer, dropped title word (`replyHygiene.ts`), analogy cap 1 for all
+subjects, process-flow lists rejected (`figureCritic.processFlowIsAList`), full process-step text (`conceptText.ts`,
+`archetypes.ts`), figure pointer names the drawn figure, curated figures for `chem.found.matter` and
+`chem.bond.ionic-bonding` (the latter left the retired register, 15 → 14), authored explanation served when every
+provider is down (chat and lesson-init), cards about taught content first (`preferTaughtProbes`), dashboard at phone
+width, seven authored chemistry cards corrected. Tests: `ownerDecisions20261007.test.ts`,
+`remainingDefectFixes20261007.test.ts`.
+
+Not done, owner action: production convergence of the seven edited chemistry probes (create-only bootstrap; needs an
+approved `converge-probe-edits.ts --apply`); deployment (Vercel 402, team blocked since 05b7868); provider capacity.
+Statuses per entry: the five `docs/qa/*_REAL_LEARNER_DEFECTS.md` logs (no entry left OPEN).

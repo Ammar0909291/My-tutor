@@ -100,7 +100,7 @@ Categories: Teaching · Adaptation · Lesson flow · Visuals · Numerical/factua
 - **Tutor:** first *"In the diagram you're looking at, a single beam of light shines on a barrier with two very narrow, closely spaced slits. Behind the slits a screen…"*; the attached figure was a card `double_slit`, then a model-made graph `{"type":"graph","equation":"cos(x*1000)^2","xLabel":"Position on screen (m)"}`. Asked about the slits the tutor said *"The two slits themselves aren't drawn in the picture"*, then later *"In the figure you're looking at, the two narrow openings are the slits… the flat surface at the far right of the setup"*. Axis called "(m)" in the spec and *"arbitrary units"* in a later reply; a beginner is shown the raw formula *"cos²(1000x)"*.
 - **Why a defect:** the text says there is a setup diagram with slits; the figure is an intensity graph; the tutor contradicts itself about whether slits are drawn and about axis units.
 - **Expected:** narration matches the figure actually attached. **Status:** DEFERRED · **Reproducible:** observed (3 turns). **Related:** PCD-031 (phantom figure reference), PCD-018.
-- **Fix:** partly addressed by 5b53ec8 (a figure question now gets "describe only what WHAT THE LEARNER SEES lists"). The model-generated `cos(x*1000)^2` graph, its axis units and the "slits not drawn" contradiction come from the Tier-3 generated figure and free model narration; not changed. Needs its own look at generated-graph specs.
+- **Fix:** partly addressed by 5b53ec8 (a figure question now gets "describe only what WHAT THE LEARNER SEES lists"). The model-generated `cos(x*1000)^2` graph, its axis units and the "slits not drawn" contradiction come from the Tier-3 generated figure and free model narration; not changed. Needs its own look at generated-graph specs. **2026-10-07 pass (2350ff6):** Unchanged in substance: the figure pointer now names the figure's own title, but what the reply claims the figure shows is model narration and no deterministic check compares the two. Needs its own design (narration grounded in the figure's semantics).
 
 ### PHYS-005 — [P2] [Lesson flow/Visuals] Opening asks the learner to look at a picture that is not shown
 - **Concept:** `phys.opt.youngs-experiment` (also seen in `phys.rel.time-dilation`, order 237: "Looking at the two watches in the car-and-kitchen picture…", and in `phys.meas.units` order 1) 
@@ -111,8 +111,8 @@ Categories: Teaching · Adaptation · Lesson flow · Visuals · Numerical/factua
 ### PHYS-006 — [P2] [Lesson flow/Teaching] Questions asked before the required concept is taught
 - **Concept:** `phys.opt.youngs-experiment` · **Lesson:** order 134
 - **Cards:** *"In a double-slit pattern, which order m labels the FIRST dark fringe next to the central bright one?"* (notation "order m" and (m+½)λ never taught; explained only after the learner asked *"what is m? you did not tell me about m. i dont know"*); *"A thin glass slab is placed in front of slit S₁ only … Where does the central bright fringe appear?"* (optical path through glass never taught; explained only after *"i dont know this one. we did not learn about glass in front of slit"*).
-- **Expected:** teaching precedes the check. **Reproducible:** yes (also order 237, see PHYS-016). **Status:** DEFERRED
-- **Fix:** question order vs teaching (authored-probe selection before its prerequisite idea is taught) needs a sequencing design; not changed in this pass.
+- **Expected:** teaching precedes the check. **Reproducible:** yes (also order 237, see PHYS-016). **Status:** PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- **Fix:** question order vs teaching (authored-probe selection before its prerequisite idea is taught) needs a sequencing design; not changed in this pass. **2026-10-07 pass (2350ff6):** Card selection prefers cards whose stem and key words the learner has already met in the lesson (`teachingActionRepository.preferTaughtProbes`; a quantity in the key must already have been stated); with none qualifying every card stays available, so a card on untaught notation can still come when it is the only one left. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### PHYS-007 — [P2] [Lesson flow] The same question is asked repeatedly
 - **Concept:** `phys.opt.youngs-experiment`: *"What did Young's double-slit experiment establish about the nature of light?"* asked 3 times (correct answer already given), the "order m" card twice, *"what do you notice about the spacing of the bright peaks?"* three times (learner: *"i already said this before"*). **Related:** PCD-019. **Status:** FIXED IN REPO — awaiting deployment (Vercel blocked)
@@ -124,11 +124,11 @@ Categories: Teaching · Adaptation · Lesson flow · Visuals · Numerical/factua
 
 ### PHYS-009 — [P3] [Teaching/Adaptation] First explanation too advanced for the declared learner level
 - **Concept:** `phys.opt.youngs-experiment`. After the learner correctly described bright/dark bands, the reply introduced phase, path difference, constructive/destructive interference and β = λD/d in one block. A simpler pond analogy followed only after *"explain simpler please. i dont understand in phase and path difference"* (that adaptation worked). **Status:** DEFERRED
-- **Fix:** P3, model register; not changed.
+- **Fix:** P3, model register; not changed. **2026-10-07 pass (2350ff6):** Unchanged: model register on the first explanation (P3). The lesson-scope rule added in this pass orders the syllabus parts but does not set the register.
 
 ### PHYS-010 — [P3] [Numerical/factual] Symbol drift inside one lesson (β, D → y, L)
-- Same lesson: fringe width called β with screen distance D, later feedback uses y = λL/d for the same quantity. **Status:** DEFERRED
-- **Fix:** P3, model notation drift; not changed.
+- Same lesson: fringe width called β with screen distance D, later feedback uses y = λL/d for the same quantity. **Status:** PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- **Fix:** P3, model notation drift; not changed. **2026-10-07 pass (2350ff6):** The worked-example rules in the chat and opening prompts now require the same symbol for the same quantity for the whole lesson (`factCheckPass.WORKED_EXAMPLE_RULES`). Prompt-level; the check pass compares within one reply only.
 
 ### PHYS-011 — [P1] [Numerical/factual] "Proper time is the LONGEST time" — stated twice, contradicts the lesson
 - **Date:** 2026-10-04 ≈22:55 UTC · **Concept:** `phys.rel.time-dilation` · **Lesson:** Time Dilation (order 237)
@@ -167,8 +167,8 @@ Categories: Teaching · Adaptation · Lesson flow · Visuals · Numerical/factua
 - **Date:** 2026-10-04 ≈23:20 UTC · **Concept:** `phys.meas.units` · **Lesson:** SI Units and Measurement (order 1), first attempt
 - **Tutor:** *"Sure, here's a question for you. Imagine two friends each measuring the same rope. One counts hand-spans… "* with attached card *"A component is labelled 4.7 µF (microfarads). Written in farads, what is that?"*; later *"Remember, the SI unit for electric current is the ampere… Here's a question for you:"* with a card about the gram vs kilogram.
 - **Also:** the µ (micro) prefix is quizzed but never taught; three near-duplicate kelvin/temperature cards were asked (*"Is the SI base unit for temperature the degree Celsius or the kelvin?"*, *"Why is kelvin…?"*, *"Which of these is the SI base unit for temperature?"*).
-- **Reproducible:** yes (observed twice in one session). **Related:** PCD-033. **Status:** DEFERRED
-- **Fix:** the model's own prose question beside a different server-attached card; not changed in this pass.
+- **Reproducible:** yes (observed twice in one session). **Related:** PCD-033. **Status:** PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- **Fix:** the model's own prose question beside a different server-attached card; not changed in this pass. **2026-10-07 pass (2350ff6):** With only authored cards served, the prompt now tells the model not to write or announce a question of its own ("Never announce a question that you are not asking … the app introduces it", `mcq.AUTHORED_ONLY_INSTRUCTION`), and lettered prose questions are removed. Prompt-level for an unlettered announced question.
 
 ### PHYS-018 — [P1] [Lesson flow/Teaching] Cards and figures from OTHER lessons appear when lessons run at the same time on one account
 - **Date:** 2026-10-04 ≈23:50 UTC · **Concepts:** `phys.meas.scalars-vectors` (2), `phys.meas.dimensions` (3), `phys.meas.errors` (4), `phys.meas.measuring-instruments` (6)
@@ -196,8 +196,8 @@ Categories: Teaching · Adaptation · Lesson flow · Visuals · Numerical/factua
 - **Date:** 2026-10-05 · **Concepts/lessons:** `Elastic Collisions` (order 43), `Torque` (order 47)
 - **Tutor (provider=groq, reason `learner_needs_reply`):** after a worked collision example ends with *"Which ball ends up moving faster after the collision? A) The heavier (2 kg) ball B) The lighter (1 kg) ball C) Both have the same speed D) Both are at rest"* as plain text; no `mcq` object in the payload. Order 47 does the same (A-D "larger/smaller/same/zero").
 - **Why a defect:** every other check in these lessons is an answer card with tappable options; here the learner must type a letter or the text, and the answer is not graded as a card/probe. The worked example's numbers in order 43 were checked and are correct (v1' = -0.33 m/s, v2' = +4.67 m/s).
-- **Expected:** the question arrives as a card. **Actual:** prose options. **Reproducible:** yes (5 lessons: 43, 47, 90 `Kinetic Theory of Gases`, 221 `Quantum Harmonic Oscillator`, 222 `Quantum Treatment of Hydrogen Atom`, all as prose A-D). **Status:** DEFERRED — owner decision
-- **Fix:** prose A-D options are already detected (`hasProseMultipleChoice`); by design they are not graded (no key). Turning them into cards would serve more unkeyed cards — a design decision.
+- **Expected:** the question arrives as a card. **Actual:** prose options. **Reproducible:** yes (5 lessons: 43, 47, 90 `Kinetic Theory of Gases`, 221 `Quantum Harmonic Oscillator`, 222 `Quantum Treatment of Hydrogen Atom`, all as prose A-D). **Status:** FIXED IN REPO — awaiting deployment (Vercel blocked)
+- **Fix:** prose A-D options are already detected (`hasProseMultipleChoice`); by design they are not graded (no key). Turning them into cards would serve more unkeyed cards — a design decision. **2026-10-07 pass (2350ff6):** Owner decision 2026-10-07: only authored cards are asked. A prose A)/B)/C)/D) question is removed with the question that introduced it (`proseMcqGuard.stripProseMultipleChoice`), the prompt forbids lettered options (`mcq.AUTHORED_ONLY_INSTRUCTION`), and a model-written card is never served. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### PHYS-021 — [P1] [Adaptation/Visuals] SYSTEMIC: "i dont understand this picture. what is it showing?" is answered by defining the word "showing" or with generic empathy, not by describing the figure
 - **Date:** 2026-10-05 · **Scope of observation:** solo sequential run, orders 1-61. The learner message was identical in every lesson (the same sentence PHYS-003 recorded for Young's experiment).

@@ -11,12 +11,10 @@
 - P1: 1
 - P2: 12
 - P3: 4
-- Status after the 2026-10-07 fix pass (6ff5a40 + shared 532055e/afa7322; none deployed, none production-verified):
-  - FIXED IN REPO: 9 (003, 005, 006, 007, 011, 012, 013, 014, 016)
-  - PARTIALLY FIXED IN REPO: 6 (001, 008, 009, 010, 015, 017)
-  - NOT A DEFECT: 1 (004, owner-decided single re-ask)
-  - OPEN: 1 (002, provider capacity — owner action)
-  - DEPLOYED: 0 · PRODUCTION-VERIFIED: 0
+- Status (2026-10-07 pass, 2350ff6; nothing in this pass is production-verified — Vercel deploys blocked; totals = 17 entries):
+  - FIXED IN REPO: 10
+  - PARTIALLY FIXED IN REPO: 6
+  - NOT A DEFECT: 1
 <!-- SUMMARY:END -->
 
 ## Scope
@@ -107,8 +105,8 @@ P0 = learning completely blocked · P1 = seriously damages learning/trust · P2 
 - Reproducibility: Seen in the first lessons; counted over all English lessons at the end.
 - Also observed (73 occurrences in 73 lessons): #1 (A1) t22; #2 (A1) t24; #3 (A1) t24; #7 (A1) t15; #8 (A1) t14; #10 (A1) t29; #11 (A1) t21; #21 (A1) t20; #203 (A10) t25; #205 (A10) t25; #216 (A10) t18; #24 (A2) t16; #25 (A2) t20; #26 (A2) t22; #27 (A2) t17; #32 (A2) t15; #36 (A2) t20; #37 (A2) t27; #38 (A2) t22; #40 (A2) t22; #41 (A2) t20; #42 (A2) t21; #48 (A3) t22; #49 (A3) t20; #50 (A3) t25; #53 (A3) t17; #54 (A3) t23; #55 (A3) t23; #56 (A3) t22; #58 (A3) t21; #64 (A3) t20; #65 (A3) t21; #67 (A4) t19; #81 (A4) t21; #85 (A4) t23; #87 (A4) t24; #88 (A4) t23; #90 (A5) t25; #91 (A5) t23; #92 (A5) t17; #93 (A5) t24; #94 (A5) t18; #98 (A5) t28; #105 (A5) t29; #106 (A5) t24; #107 (A5) t22; #112 (A6) t22; #120 (A6) t24; #122 (A6) t19; #126 (A6) t19; #128 (A6) t17; #130 (A6) t19; #135 (A7) t28; #137 (A7) t19; #138 (A7) t24; #143 (A7) t28; #147 (A7) t19; #156 (A8) t29; #159 (A8) t25; #161 (A8) t19; #170 (A8) t19; #172 (A8) t22; #178 (A9) t24; #181 (A9) t23; #182 (A9) t14; #183 (A9) t22; #185 (A9) t18; #188 (A9) t21; #189 (A9) t29; #190 (A9) t21; #191 (A9) t22; #192 (A9) t29; #195 (A9) t20
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel has built nothing since 05b7868, 2026-10-06 10:08 UTC; pushes of afa7322, 532055e and 6ff5a40 started no build)
-- Fix: Shared mechanism MATH-001, fixed in 532055e after this run's code version: the budget close waits one turn for a help request whatever budget reason fired, a bare "why?" counts, and a verdict graded on the closing turn stays above the close. Not changed: closes after "continue"/an answer at the end of the turn budget (12 + 6 turns, 3 teaching attempts) — owner policy. Test: src/tests/mathRealLearnerFixes.test.ts (MATH-001). Production-verified: no.
+- Status: FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Fix: Shared mechanism MATH-001, fixed in 532055e after this run's code version: the budget close waits one turn for a help request whatever budget reason fired, a bare "why?" counts, and a verdict graded on the closing turn stays above the close. Not changed: closes after "continue"/an answer at the end of the turn budget (12 + 6 turns, 3 teaching attempts) — owner policy. Test: src/tests/mathRealLearnerFixes.test.ts (MATH-001). Production-verified: no. **2026-10-07 pass (2350ff6):** Owner decision 2026-10-07 (stay until mastery): an engaged learner's turn allowance is the 30-turn ceiling (`conceptBudget.STAY_UNTIL_MASTERY`, `effectiveTurnBudget`; the 12 + 6 budget is kept as `legacyTurnBudget`). The attempts and consecutive-failures exits still move a struggling concept to review, and an explicit stop still ends the session. Test: src/tests/ownerDecisions20261007.test.ts. This covers the part not covered by 532055e: a close after "continue" or an answer while mastery is incomplete.
 
 ### ENGL-002 — Degraded fallback replies ("Sorry — my answer didn't come through just now…", "I'm still getting my thoughts together on that one") instead of an answer — the Groq call failed
 
@@ -126,8 +124,8 @@ P0 = learning completely blocked · P1 = seriously damages learning/trust · P2 
 - Reproducibility: Counted automatically over all English transcripts.
 - Also observed (230 occurrences in 101 lessons): #1 (A1) t4; #2 (A1) t2/t13/t22; #3 (A1) t1/t17/t22; #5 (A1) t1/t7; #10 (A1) t15; #11 (A1) t19; #13 (A1) t5; #14 (A1) t17/t18; #15 (A1) t25/t27/t29; #16 (A1) t4; #17 (A1) t1/t30; #200 (A10) t1/t6; #201 (A10) t1; #202 (A10) t9; #203 (A10) t13/t16/t19/t21/t24; #205 (A10) t1/t2/t3; #207 (A10) t8/t18/t20; #208 (A10) t18/t20; #209 (A10) t5; #210 (A10) t1/t2; #211 (A10) t1; #213 (A10) t5; #214 (A10) t3/t19; #215 (A10) t13; #26 (A2) t3/t16; #27 (A2) t14; #34 (A2) t1/t5/t11/t12; #36 (A2) t3/t9; #38 (A2) t2/t4/t8/t9; #39 (A2) t13/t15/t19/t27; #45 (A3) t16; #46 (A3) t2/t4/t9/t10/t12; #47 (A3) t3/t14/t15; #48 (A3) t2/t15; #49 (A3) t6/t7/t11/t13; #54 (A3) t17; #56 (A3) t8; #61 (A3) t3; #63 (A3) t1/t19; #67 (A4) t16; #69 (A4) t5/t6/t8; #70 (A4) t1/t2/t9; #71 (A4) t2/t3/t10; #72 (A4) t1/t6; #73 (A4) t5; #75 (A4) t6/t8; #80 (A4) t1; #81 (A4) t8/t14/t19; #85 (A4) t1; #86 (A4) t1; #87 (A4) t2/t13; #88 (A4) t2/t4/t18; #90 (A5) t3/t4/t6/t15/t18; #91 (A5) t5/t22; #92 (A5) t15; #93 (A5) t6/t20; #98 (A5) t2/t7/t8/t12/t16/t26; #99 (A5) t2; #101 (A5) t9; #102 (A5) t1/t2/t10/t11/t30; #103 (A5) t20/t23; #105 (A5) t11/t21; #106 (A5) t17/t19/t21; #107 (A5) t16; #111 (A6) t16/t20/t21/t22/t25; #112 (A6) t1/t7; #113 (A6) t3/t13/t15/t17/t20/t25/t27; #115 (A6) t15; #116 (A6) t10/t17; #117 (A6) t1/t7; #119 (A6) t2; #120 (A6) t6/t11/t15; #125 (A6) t6; #126 (A6) t18; #135 (A7) t9/t19/t25; #137 (A7) t15/t16; #139 (A7) t2/t3/t4; #140 (A7) t3/t8; #144 (A7) t2/t3; #145 (A7) t3; #148 (A7) t3/t6/t12/t14; #149 (A7) t1/t7; #152 (A7) t7; #156 (A8) t7/t19/t20/t23; #159 (A8) t5; #160 (A8) t12/t14; #164 (A8) t11/t14/t16/t20; #167 (A8) t1/t4/t5/t9/t27; #169 (A8) t3; #170 (A8) t17; #178 (A9) t5/t8/t11/t15; #179 (A9) t2; #181 (A9) t2/t19; #183 (A9) t13; #186 (A9) t7; #188 (A9) t9/t10/t12; #189 (A9) t1/t2/t3/t5/t13/t27; #192 (A9) t9/t27; #193 (A9) t9/t10; #194 (A9) t1/t6; #195 (A9) t16
 - Related defect: —
-- Status: OPEN — provider capacity; owner action (as MATH-006)
-- Fix: The Groq call failed (provider=degraded, 442 of 3,832 replies). Not a code path this pass can fix: provider quota/rate limits are Groq-console/GROQ_API_KEY configuration (CLAUDE.md, owner 2026-09-25). No code change.
+- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked) + OWNER ACTION (provider capacity)
+- Fix: The Groq call failed (provider=degraded, 442 of 3,832 replies). Not a code path this pass can fix: provider quota/rate limits are Groq-console/GROQ_API_KEY configuration (CLAUDE.md, owner 2026-09-25). No code change. **2026-10-07 pass (2350ff6):** With every provider down, the concept's own authored explanation that the learner has not yet seen is served instead of the outage copy (chat: `findUnseenExplanationContent` in the all-providers-down branch, which then does not count as an outage turn; lesson-init: the authored explanation opens the lesson under its title). The outage copy remains only when no unseen authored explanation is left. Provider capacity itself (Gemini credits, OPENROUTER_API_KEY, Groq tier) is still an owner action. Test: src/tests/remainingDefectFixes20261007.test.ts.
 
 ### ENGL-003 — A card answer gets no verdict: the reply is a definition, an unrelated explanation or a stock line instead of right/wrong
 
