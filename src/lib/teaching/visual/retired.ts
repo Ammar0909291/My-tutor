@@ -205,6 +205,54 @@ export const RETIRED_VISUAL_BINDINGS: Readonly<Record<string, string>> = {
     'interstitial or a substitution — a departure from that perfection. The figure shows ' +
     'the absence of the thing being taught.',
 
+  // ── chemistry: domain-default cards judged unfaithful by the 2026-10-09 closure review (R4) ───────────
+  // Twelve concepts were served a domain-default card. Each was judged on whether the card depicts the CONCEPT; these six do not.
+  'chem.atomic.electromagnetic-radiation':
+    'Rendered the nucleus-and-shells atom card (domain default of chem.atomic). Electromagnetic radiation is waves and photons — wavelength, frequency, the spectrum — none of which an atom model contains.',
+  'chem.atomic.photoelectric-effect':
+    'Rendered the nucleus-and-shells atom card (domain default of chem.atomic). The photoelectric effect is light of a threshold frequency ejecting electrons from a metal surface; the figure shows neither light nor a surface.',
+  'chem.period.classification':
+    'Rendered the electron-shell card (domain default of chem.period). Early classification (Döbereiner triads, Newlands\' octaves, Mendeleev\'s table) was by atomic mass and properties and PREDATES the electron; a shell diagram is the later explanation, not the concept.',
+  'chem.period.electron-affinity':
+    'Rendered the electron-shell card (domain default of chem.period). Electron affinity and electronegativity are energies / attractions for an extra or shared electron; the figure carries no energy, no attraction and no second atom.',
+  'chem.solid.ionic-solids':
+    'Rendered a single-colour simple-cubic lattice (domain default of chem.solid). An ionic crystal (NaCl, CsCl) is TWO ion types in a specific arrangement and coordination; a one-colour monatomic simple cubic lattice states the opposite.',
+  'chem.solid.properties':
+    'Rendered a simple-cubic lattice (domain default of chem.solid). Electrical and magnetic properties of solids (conductors, semiconductors, para-/ferromagnetism) are about bands and electron spins, not lattice geometry.',
+
+  // ── chemistry: Tier-3 generated figures retired by the 2026-10-09 closure review ──────────────
+  // These concepts had NO curated binding; a generated figure was cached in production and would have been served.
+  // Each was read by two independent reviewers against authoritative chemistry; the content fingerprint is recorded in
+  // RETIRED_ASSET_FINGERPRINTS, so a regenerated figure with new content is a replacement and is judged afresh.
+  'chem.found.matter':
+    'Tier-3 generated scene (retired 2026-10-09). The compound pair and the mixture pair are drawn with identical geometry (two radius-0.5 spheres 0.5 apart), so the \'chemically bonded\' versus \'not bonded\' distinction the figure exists to show is not in the picture.',
+  'chem.state.molar-mass-gas':
+    'Tier-3 generated process flow (retired 2026-10-09). \'Calculate molecular mass from empirical formula\' is not a procedure: an empirical formula gives only the empirical-formula mass; the molecular mass needs the measured molar mass (M = dRT/P) and n = M / M_empirical.',
+  'chem.equil.titration':
+    'Tier-3 generated graph (retired 2026-10-09). pH = 7 + 3 / (1 + exp(-5(x-5))) starts at pH 7.00, has its midpoint at pH 8.5 and plateaus at 10: not an acid-base titration curve (strong acid starts near pH 1, weak acid near 3, equivalence pH set by the salt formed).',
+  'chem.sblock.water':
+    'Tier-3 generated scene (retired 2026-10-09). H-O-H is drawn at 120.0 degrees for both H2O and D2O (real ~104.5 degrees, two lone pairs on O); the figure also mixes unrelated content (heavy water, hard-water ions, a floating \'Amphoteric\' label).',
+  'chem.pblock.group15':
+    'Tier-3 generated process flow (retired 2026-10-09). The Haber loop is shown separating unreacted gases by pressure-swing adsorption; after NH3 is condensed the unreacted N2/H2 (single-pass conversion ~15-20 %) are RECYCLED to the reactor. The figure is also the Haber process, not the nitrogen family.',
+  'chem.dblock.oxo-species':
+    'Tier-3 generated graph (retired 2026-10-09). The equation 10^(x - 1.7) makes [Cr2O7 2-]/[CrO4 2-] RISE with pH; for 2 CrO4 2- + 2 H+ <=> Cr2O7 2- + H2O dichromate dominates in acid and chromate in base, so the ratio must FALL with pH.',
+  'chem.org.hybridization':
+    'Tier-3 generated scene (retired 2026-10-09). The sp carbon\'s two \'pi\' arrows point to +z and -z (collinear: one p orbital); two pi bonds use perpendicular p orbitals (py and pz).',
+  'chem.org.electronic-effects':
+    'Tier-3 generated scene (retired 2026-10-09). The \'-I\' arrow runs from the electron-withdrawing group toward the chain; the inductive-effect arrow points TOWARD the withdrawing group, so as drawn it shows +I. The \'M\' arrow is a straight arrow along a sigma bond with no pi system.',
+  'chem.hyd.alkynes':
+    'Tier-3 generated process flow (retired 2026-10-09). \'Acidic Character: Protonation of the Triple Bond\' is false: the acidity of a terminal alkyne (pKa ~25) is DEPROTONATION of the sp C-H to an acetylide; protonating the triple bond is electrophilic addition.',
+  'chem.hyd.arenes':
+    'Tier-3 generated process flow (retired 2026-10-09). \'NO2+ from HNO3 & AlCl3\' names the wrong reagent: the nitronium ion comes from HNO3 with concentrated H2SO4; AlCl3 is the Lewis acid of Friedel-Crafts alkylation/acylation and halogenation.',
+  'chem.carb.ketones':
+    'Tier-3 generated scene (retired 2026-10-09). The \'ketone\' is one bare stick and the \'enol\' an L of two sticks: no C=O, C=C, O-H or R groups, and keto-enol tautomerism (an equilibrium) is drawn as a single one-way arrow.',
+  'chem.nitro.amines':
+    'Tier-3 generated scene (retired 2026-10-09). \'Basicity primary < secondary < tertiary\' holds only in the gas phase; in water the conjugate-acid pKa values give secondary > primary ~ tertiary (MeNH2 10.66, Me2NH 10.73, Me3N 9.8).',
+  'chem.bio.proteins':
+    'Tier-3 generated scene (retired 2026-10-09). A disulfide bridge is narrated as secondary structure (it is tertiary); haemoglobin is shown as a single sphere with \'two subunits\' (it is an alpha2-beta2 tetramer); the helix is a straight line and the disulfide lies exactly on the chain.',
+  'chem.hyd.polycyclic':
+    'Tier-3 generated scene (retired 2026-10-09). A ring labelled \'Furan\' has no oxygen drawn (a distorted five-vertex ring) and no fused/polycyclic system appears, so the figure shows neither of the two things in the concept title.',
+
   // ── computer science ────────────────────────────────────────────────────
   'cs.found.number-systems':
     'Rendered the 3D data-structures card (arrays, linked lists, stacks, queues). Number ' +
@@ -269,15 +317,35 @@ export const RETIRED_ASSET_FINGERPRINTS: Readonly<Record<string, readonly string
   'chem.solid.amorphous': ['ffdc76ff'], // card:three_crystal_lattice
   'chem.bond.mo-theory': ['f4a1f0cb9'], // card:three_bond_formation
   'chem.bond.polar-molecules': ['f4a1f0cb9'], // card:three_bond_formation
-  'chem.bond.intermolecular': ['f4a1f0cb9'], // card:three_bond_formation
+  'chem.bond.intermolecular': ['f4a1f0cb9', 'f3860c52a'], // card:three_bond_formation + Tier-3 generated: intermolecular forces drawn as identical covalent-looking sticks; the H-bond panel has no O or H
   'chem.bond.resonance': ['f4a1f0cb9'], // card:three_bond_formation
   'chem.bond.coordinate-bond': ['f4a1f0cb9'], // card:three_bond_formation
   'chem.atomic.orbitals': ['ff29a2223'], // card:three_atomic_structure
-  'chem.atomic.quantum-mech-model': ['ff29a2223'], // card:three_atomic_structure
+  'chem.atomic.quantum-mech-model': ['ff29a2223', 'f2f1d8837'], // card:three_atomic_structure + Tier-3 generated graph: psi(x)=sin(x) with a "Position (m)" axis over +/-10 m
   'chem.solid.defects': ['ffdc76ff'], // card:three_crystal_lattice
   'cs.found.number-systems': ['fa1791b62'], // card:three_data_structure
   'cs.algo.flowcharts': ['f5c9e4fe6'], // card:three_algorithm_visualization
   'cs.algo.np-completeness': ['f5c9e4fe6'], // card:three_algorithm_visualization
+  'chem.atomic.electromagnetic-radiation': ['ff29a2223'], // domain-default card three_atomic_structure
+  'chem.atomic.photoelectric-effect': ['ff29a2223'], // domain-default card three_atomic_structure
+  'chem.period.classification': ['f8b26bd2'], // domain-default card three_electron_shells
+  'chem.period.electron-affinity': ['f8b26bd2'], // domain-default card three_electron_shells
+  'chem.solid.ionic-solids': ['ffdc76ff'], // domain-default card three_crystal_lattice
+  'chem.solid.properties': ['ffdc76ff'], // domain-default card three_crystal_lattice
+  'chem.found.matter': ['fd4ab73b9'], // Tier-3 generated: compound and mixture drawn identically (two half-overlapping spheres each)
+  'chem.state.molar-mass-gas': ['fa285b2e2'], // Tier-3 generated flow: "calculate molecular mass from empirical formula" (needs the measured molar mass)
+  'chem.equil.titration': ['fda07a237'], // Tier-3 generated graph: a "titration curve" that starts at pH 7 and ends at pH 10
+  'chem.sblock.water': ['f46177674'], // Tier-3 generated: H-O-H drawn at 120 degrees (real 104.5) for H2O and D2O
+  'chem.pblock.group15': ['f625132ae'], // Tier-3 generated flow: Haber loop separates unreacted gases by pressure-swing adsorption (they are recycled)
+  'chem.dblock.oxo-species': ['f4735963e'], // Tier-3 generated graph: dichromate/chromate ratio rises with pH (it falls)
+  'chem.org.hybridization': ['f6005d9c3'], // Tier-3 generated: the two pi bonds of sp carbon drawn collinear (they are perpendicular)
+  'chem.org.electronic-effects': ['f1d2cf5f1'], // Tier-3 generated: the -I arrow points away from the electron-withdrawing group
+  'chem.hyd.alkynes': ['fab861c0a'], // Tier-3 generated flow: terminal-alkyne acidity as "protonation of the triple bond" (it is deprotonation)
+  'chem.hyd.arenes': ['f21199c8c'], // Tier-3 generated flow: NO2+ from HNO3 and AlCl3 (it needs concentrated H2SO4)
+  'chem.carb.ketones': ['f7cb46efb'], // Tier-3 generated: the "ketone" and "enol" are bare sticks with no C=O, C=C or OH
+  'chem.nitro.amines': ['f1af5182e'], // Tier-3 generated: "basicity primary < secondary < tertiary" (gas-phase order, wrong in water)
+  'chem.bio.proteins': ['f4a228c14'], // Tier-3 generated: a disulfide bridge as secondary structure; haemoglobin with two subunits (it is a tetramer)
+  'chem.hyd.polycyclic': ['f183f0236'], // Tier-3 generated: a ring labelled "furan" with no oxygen and no polycyclic system
 }
 
 /** Assets that are never concept-specific, so never a replacement. */

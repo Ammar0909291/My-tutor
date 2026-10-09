@@ -12,7 +12,7 @@ import { readFileSync } from 'node:fs'
 import type { SceneObject, SceneSpec } from '@/lib/teaching/sceneSpec'
 import {
   auditChemistryCard, auditChemistryPayload, auditChemistryScene, auditChemistrySpec, auditManifestEntry,
-  categoriesOf, classifyDrawnGeometry, collectSceneTexts, detectFamily, elementByName, ELEMENTS_TABLE, extractEquations,
+  categoriesOf, classifyDrawnGeometry, PERIODIC_REFERENCE, collectSceneTexts, detectFamily, elementByName, ELEMENTS_TABLE, extractEquations,
   extractEquilibriumSeries, normalizeChemScripts, parseFormulaBody, parseSpecies, placementOf, shellOccupancy, scanLearnerText,
   validateColorOnlyEncoding, validateEnergyProfile, validateEquilibriumSeries, validateGraphSpec, validateMechanismArrows,
   validateNotation, validateNumberLineSpec, validateProcessFlowSpec, validateProcessScene, validateReactionSchemes,
@@ -371,16 +371,33 @@ describe('G — reaction schemes', () => {
 
 // ═════════════════════════════════════════════════════════════════════════════
 describe('E — molecular structure', () => {
-  it('passes every shipped VSEPR molecule except CO₂, whose bond order is not encoded (REVIEW, not FAIL)', () => {
-    for (const name of ['water', 'ammonia', 'methane', 'hydrogen sulfide', 'boron trifluoride']) {
+  it('passes every shipped VSEPR molecule — CO₂ now encodes its double bonds and the bent / pyramidal ones draw their lone pairs (R2)', () => {
+    for (const name of ['water', 'ammonia', 'methane', 'hydrogen sulfide', 'boron trifluoride', 'carbon dioxide']) {
       const r = verifyMolecularStructure(mol(name))
       expect(r.findings.filter((x) => x.severity !== 'INFO'), name).toEqual([])
-      expect(r.verified).toEqual(expect.arrayContaining(['valence/octet', 'atom-multiset-equals-formula', 'vsepr-geometry-from-coordinates', 'bond-angle-label-equals-drawn']))
+      expect(r.verified, name).toEqual(expect.arrayContaining(['valence/octet', 'atom-multiset-equals-formula', 'vsepr-geometry-from-coordinates', 'bond-angle-label-equals-drawn']))
     }
-    const co2 = verifyMolecularStructure(mol('carbon dioxide'))
-    expect(codes(co2)).toEqual(['E-RADICAL'])
-    expect(co2.findings[0].severity).toBe('REVIEW')
-    expect(co2.verified).toContain('vsepr-geometry-from-coordinates')
+    for (const name of ['water', 'hydrogen sulfide', 'ammonia']) {
+      expect(verifyMolecularStructure(mol(name)).verified, name).toEqual(expect.arrayContaining(['lone-pair-count-equals-vsepr', 'lone-pair-clear-of-bonds']))
+    }
+    // Without the double bonds CO₂ is still the REVIEW it used to be: the oxygens would be radicals.
+    const single = clone(mol('carbon dioxide'))
+    for (const st of single.steps) for (const o of st.objects) if (o.type === 'bond') delete o.properties
+    expect(codes(verifyMolecularStructure(single))).toEqual(['E-RADICAL'])
+  })
+
+  it('FAILS a wrong number of drawn lone pairs and a lone pair drawn on top of a bond', () => {
+    const water = clone(mol('water'))
+    const lp = water.steps.flatMap((st) => st.objects).filter((o) => o.properties?.kind === 'lone-pair')
+    expect(lp).toHaveLength(2)
+    const extra = clone(water); extra.steps[2].objects.push({ type: 'particle', id: 'lp9', position: [0, -3, -3], radius: 0.38, properties: { kind: 'lone-pair' } })
+    expect(codes(verifyMolecularStructure(extra))).toContain('E-LONE-PAIR-COUNT')
+    const fewer = clone(water); fewer.steps[2].objects = fewer.steps[2].objects.slice(0, 1)
+    expect(codes(verifyMolecularStructure(fewer))).toContain('E-LONE-PAIR-COUNT')
+    const onBond = mutate(water, (o) => o.id === 'lp0', (o) => { o.position = [3, 2, 0] })
+    expect(codes(verifyMolecularStructure(onBond))).toContain('E-LONE-PAIR-PLACEMENT')
+    const ammonia = clone(mol('ammonia')); ammonia.steps[2].objects.push({ type: 'particle', id: 'lp1', position: [0, 3, 0], radius: 0.38, properties: { kind: 'lone-pair' } })
+    expect(codes(verifyMolecularStructure(ammonia))).toContain('E-LONE-PAIR-COUNT')
   })
 
   it('FAILS an impossible valence (a 3-bonded water)', () => {
@@ -561,10 +578,39 @@ describe('I — periodic and element visuals', () => {
     expect(codes(verifyPeriodicTrendFigure(rel))).toContain('I-TREND-RELATION')
   })
 
-  it('leaves a pair that placement cannot decide as UNVERIFIED rather than guessing', () => {
-    const r = verifyPeriodicTrendFigure(buildPeriodicTrendScene({ element1Symbol: 'Li', element2Symbol: 'Cl' }))
+  it('a pair placement cannot order is checked against the pinned reference table — verified when right, FAIL when wrong, honest when the scales split (R6)', () => {
+    const ok = verifyPeriodicTrendFigure(buildPeriodicTrendScene({ element1Symbol: 'Li', element2Symbol: 'Cl' }))
+    expect(ok.findings).toEqual([])
+    expect(ok.verified).toEqual(expect.arrayContaining(['atomic-radius-claim-matches-reference-table', 'electronegativity-claim-matches-reference-table']))
+    expect(ok.unverified).toEqual([])
+    // A wrong winner is caught …
+    const wrong = mutate(buildPeriodicTrendScene({ element1Symbol: 'Li', element2Symbol: 'Cl' }), (o) => o.id === 'higher-electronegativity', (o) => { o.text = 'Higher electronegativity: Li' })
+    expect(codes(verifyPeriodicTrendFigure(wrong))).toContain('I-TREND-CLAIM')
+    // … and for the 8 pairs where calculated and covalent radii disagree the figure must SAY so.
+    const split = buildPeriodicTrendScene({ element1Symbol: 'H', element2Symbol: 'O' })
+    const label = split.steps.flatMap((st) => st.objects).find((o) => o.id === 'larger-radius')!.text
+    expect(label).toBe('Larger atomic radius depends on the scale: H (calculated), O (covalent)')
+    const r = verifyPeriodicTrendFigure(split)
     expect(r.findings).toEqual([])
-    expect(r.unverified.join(' ')).toMatch(/not decidable/)
+    expect(r.verified).toContain('scale-dependent-radius-claim-matches-reference-table')
+    const flat = mutate(split, (o) => o.id === 'larger-radius', (o) => { o.text = 'Larger atomic radius: H' })
+    expect(codes(verifyPeriodicTrendFigure(flat))).toContain('I-TREND-CLAIM')
+  })
+
+  it('the generator table equals the pinned reference table value for value (editing one without the other fails)', () => {
+    for (const e of TREND_ELEMENTS) {
+      expect(PERIODIC_REFERENCE[e.symbol], e.symbol).toEqual({ en: e.electronegativity, calculatedPm: e.atomicRadiusPm, covalentPm: e.covalentRadiusPm })
+    }
+    expect(Object.keys(PERIODIC_REFERENCE).sort()).toEqual(TREND_ELEMENTS.map((e) => e.symbol).sort())
+  })
+
+  it('exactly 8 unordered pairs split the two radius scales (and every other pair agrees), so the honest label is rare and deliberate', () => {
+    const split: string[] = []
+    for (let i = 0; i < TREND_ELEMENTS.length; i++) for (let j = i + 1; j < TREND_ELEMENTS.length; j++) {
+      const a = TREND_ELEMENTS[i], b = TREND_ELEMENTS[j]
+      if (Math.sign(a.atomicRadiusPm - b.atomicRadiusPm) !== Math.sign(a.covalentRadiusPm - b.covalentRadiusPm)) split.push(`${a.symbol}-${b.symbol}`)
+    }
+    expect(split.sort()).toEqual(['B-Cl', 'Be-Cl', 'Be-P', 'Be-S', 'Be-Si', 'H-F', 'H-O', 'Li-Mg'].sort())
   })
 
   it('verifies cubic unit cells by the sharing rule and flags a wrong atoms-per-cell label', () => {
@@ -583,7 +629,12 @@ describe('I — periodic and element visuals', () => {
   })
 
   it('flags categories told apart only by colour (REVIEW) and not when they are labelled or single', () => {
-    expect(sev(validateColorOnlyEncoding(buildLatticeScene(lookupLattice('bcc')!)), 'I-COLOR-ONLY')).toBe('REVIEW')
+    // R7 (2026-10-09): the generator now labels each atom class beside one of its atoms, so BCC / FCC are keyed and pass …
+    for (const k of ['bcc', 'fcc']) expect(validateColorOnlyEncoding(buildLatticeScene(lookupLattice(k)!)).findings, k).toEqual([])
+    // … while the same figure WITHOUT those key labels is still caught.
+    const unkeyed = clone(buildLatticeScene(lookupLattice('bcc')!))
+    for (const st of unkeyed.steps) st.objects = st.objects.filter((o) => !/^key-/.test(o.id ?? ''))
+    expect(sev(validateColorOnlyEncoding(unkeyed), 'I-COLOR-ONLY')).toBe('REVIEW')
     expect(validateColorOnlyEncoding(buildLatticeScene(lookupLattice('simple cubic')!)).findings).toEqual([])
     expect(validateColorOnlyEncoding(mol('water')).findings).toEqual([])
     const labelled = mk([
@@ -902,15 +953,20 @@ describe('E — electrochemical cells, system boundaries, the first law', () => 
     const inside = mutate(buildSystemBoundaryScene('closed'), (o) => o.text === 'heat in', (o) => { o.from = [0, 0, 0]; o.to = [1, 0, 0] })
     expect(codes(verifySystemBoundaryFigure(inside))).toContain('E-SYS-ARROW')
   })
-  it('verifies the first law arithmetic, sign convention and arrow direction — and flags the missing unit', () => {
+  it('verifies the first law arithmetic, sign convention and arrow direction — the figure now states its unit (R8) and a unit-less copy is still flagged', () => {
     const r = verifyFirstLawFigure(buildFirstLawScene(100, -40))
-    expect(r.findings.map((f) => f.code)).toEqual(['L-UNIT-MISSING'])
+    expect(r.findings.map((f) => f.code)).toEqual([])
+    const bare = mutate(mutate(mutate(buildFirstLawScene(100, -40), (o) => /^q = /.test(o.text ?? ''), (o) => { o.text = o.text!.replace(' J', '') }),
+      (o) => /^w = /.test(o.text ?? ''), (o) => { o.text = o.text!.replace(' J', '') }), (o) => /^ΔU = /.test(o.text ?? ''), (o) => { o.text = o.text!.replace(' J', '') })
+    for (const st of bare.steps) st.narration = st.narration.replace(/ J(?=[.\s])/g, '')
+    bare.teachingGoal = (bare.teachingGoal ?? '').replace(/ J(?=[.,\s])/g, ''); bare.ariaLabel = (bare.ariaLabel ?? '').replace(/ J(?=[.,\s])/g, '')
+    expect(codes(verifyFirstLawFigure(bare))).toContain('L-UNIT-MISSING')
     expect(r.verified).toEqual(expect.arrayContaining(['delta-u-equals-q-plus-w', 'arrow-direction-matches-sign']))
     const wrong = mutate(buildFirstLawScene(100, -40), (o) => /^ΔU = /.test(o.text ?? ''), (o) => { o.text = 'ΔU = 70' })
     expect(codes(verifyFirstLawFigure(wrong))).toContain('E-FIRSTLAW-ARITHMETIC')
     const sign = clone(buildFirstLawScene(100, -40)); sign.steps[1].narration = 'Heat: q = 100. Positive means heat flows out.'
     expect(codes(verifyFirstLawFigure(sign))).toContain('E-FIRSTLAW-SIGN')
-    const dir = mutate(buildFirstLawScene(100, -40), (o) => o.text === 'q = +100', (o) => { const f = o.from!; o.from = o.to!; o.to = f })
+    const dir = mutate(buildFirstLawScene(100, -40), (o) => o.text === 'q = +100 J', (o) => { const f = o.from!; o.from = o.to!; o.to = f })
     expect(codes(verifyFirstLawFigure(dir))).toContain('E-FIRSTLAW-SIGN')
     const unit = clone(buildFirstLawScene(100, -40)); unit.steps[0].narration = 'Internal energy U (kJ) changes only through heat and work crossing the boundary.'
     expect(codes(verifyFirstLawFigure(unit))).not.toContain('L-UNIT-MISSING')
@@ -930,7 +986,9 @@ describe('the verdict rule', () => {
     const cell = auditChemistryScene(cellScene())
     expect(cell.findings.filter((f) => f.severity !== 'INFO')).toEqual([])
     expect(cell.verdict).toBe('REVIEW_REQUIRED')
-    expect(auditChemistryScene(buildFirstLawScene(100, -40)).verdict).toBe('REVIEW_REQUIRED')
+    // The first-law figure used to be REVIEW only because it printed no unit (R8). It now states joules on every number, and
+    // everything else it asserts (ΔU = q + w, the signs, the arrow directions) is checked — so PASS is the honest verdict.
+    expect(auditChemistryScene(buildFirstLawScene(100, -40)).verdict).toBe('PASS')
   })
   it('FAIL beats REVIEW; INFO never changes a verdict', () => {
     const bad = mutate(cellScene(), (o) => o.type === 'label' && /spontaneous/.test(o.text ?? ''), (o) => { o.text = o.text!.replace(/(?<!non-)spontaneous/, 'non-spontaneous') })
@@ -977,7 +1035,13 @@ describe('the verdict rule', () => {
   it('promises a title term the drawing does not carry (REVIEW)', () => {
     const hexa = buildCoordinationComplexScene({ name: 'Hexaamminecobalt(III) — sp3d2 / d2sp3 Hybridization', centralMetal: 'Co', charge: '3+', geometry: 'octahedral', ligands: [{ formula: 'NH3', count: 6 }], coordinationNumber: 6 })
     expect(sev(auditChemistryScene(hexa), 'U-CLAIM-NOT-DRAWN')).toBe('REVIEW')
-    expect(sev(auditChemistryScene(mol('water'), { parametricEffects: ['lone pairs squeeze the bond angle'] }), 'U-CLAIM-NOT-DRAWN')).toBe('REVIEW')
+    // The molecule figures now DRAW lone pairs (R2), so the effect text "lone pairs squeeze the bond angle" is carried by the drawing …
+    expect(codes(auditChemistryScene(mol('water'), { parametricEffects: ['lone pairs squeeze the bond angle'] }))).not.toContain('U-CLAIM-NOT-DRAWN')
+    expect(codes(auditChemistryScene(mol('methane'), { parametricEffects: ['lone pairs squeeze the bond angle'] }))).not.toContain('U-CLAIM-NOT-DRAWN')
+    // … and a copy with the lone-pair objects and labels removed is still caught.
+    const bare = clone(mol('water'))
+    for (const st of bare.steps) st.objects = st.objects.filter((o) => o.properties?.kind !== 'lone-pair' && o.id !== 'lone-pair-count')
+    expect(sev(auditChemistryScene(bare, { parametricEffects: ['lone pairs squeeze the bond angle'] }), 'U-CLAIM-NOT-DRAWN')).toBe('REVIEW')
     expect(codes(auditChemistryScene(mol('water')))).not.toContain('U-CLAIM-NOT-DRAWN')
   })
 })

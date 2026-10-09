@@ -67,6 +67,12 @@ export interface ElectrochemicalCellParams {
    * "Na+ in solution" there asserts exactly the aqueous chemistry the cell excludes.
    */
   medium?: 'aqueous' | 'molten'
+  /**
+   * One sentence saying this cell is ONE EXAMPLE of a lesson that covers several processes (R3: batteries, industrial
+   * electrolysis, electrolysis + Faraday's laws are each served a single scene). Said in the first narration and the caption —
+   * words only, so no label is added and no layout changes.
+   */
+  scopeNote?: string
 }
 
 const GAS_CONSTANT = 8.314
@@ -242,7 +248,7 @@ export function buildElectrochemicalCellScene(p: ElectrochemicalCellParams): Sce
 
   const steps = [
     {
-      narration: `${p.name}: ${divided ? 'two half-cells joined by a salt bridge' : 'two electrodes in one electrolyte'}.`,
+      narration: `${p.name}: ${divided ? 'two half-cells joined by a salt bridge' : 'two electrodes in one electrolyte'}.${p.scopeNote ? ` ${p.scopeNote}` : ''}`,
       objects: step1,
       intent: 'establish' as const,
     },
@@ -275,7 +281,7 @@ export function buildElectrochemicalCellScene(p: ElectrochemicalCellParams): Sce
     // The x/y/z triad names no quantity in this figure (a molecule / lattice / shell has no meaningful axes) and its letters
     // collided with the atom labels at the origin (measured 2026-10-08: x|y|z|O stacked at stage 1). Grid left as it was.
     stage: { axes: false },
-    teachingGoal: `Show ${divided ? 'a divided galvanic cell' : 'an electrolytic cell'}: the anode/cathode half-reactions, the direction of electron flow, and ${d.cellEmf !== null ? 'the resulting cell EMF' : 'how the cell is driven'}.`,
+    teachingGoal: `Show ${divided ? 'a divided galvanic cell' : 'an electrolytic cell'}: the anode/cathode half-reactions, the direction of electron flow, and ${d.cellEmf !== null ? 'the resulting cell EMF' : 'how the cell is driven'}.${p.scopeNote ? ` ${p.scopeNote}` : ''}`,
     cameraDistance: 18,
     ariaLabel: `${p.name}: an electrochemical cell with a ${p.anode.material} anode and a ${p.cathode.material} cathode${divided ? ', connected by a salt bridge' : ''}, with electrons flowing from anode to cathode through the external wire.${d.cellEmf !== null ? ` Cell EMF is ${d.cellEmf} volts, ${d.spontaneous ? 'spontaneous' : 'non-spontaneous'}.` : ''}`,
     steps,

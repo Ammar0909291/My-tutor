@@ -1,0 +1,60 @@
+[
+ {
+  "assetId": "vis_chem_found_significant_figures_v1",
+  "conceptId": "chem.found.significant-figures",
+  "language": "en",
+  "gradeBand": "ADULT",
+  "status": "ACTIVE",
+  "version": 1,
+  "created": "2026-08-10",
+  "renderer": "VISUAL_SPEC",
+  "specPayload": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Identify all non-zero digits"
+    },
+    {
+     "title": "Check for trapped zeros between non-zero digits"
+    },
+    {
+     "title": "Evaluate leading zeros as never significant"
+    },
+    {
+     "title": "Determine trailing zeros based on decimal presence"
+    }
+   ],
+   "title": "Determining Significant Figures in a Measurement"
+  },
+  "a11yDescription": "Figure: Determining Significant Figures in a Measurement"
+ },
+ {
+  "assetId": "vis_chem_found_stoichiometry_v1",
+  "conceptId": "chem.found.stoichiometry",
+  "language": "en",
+  "gradeBand": "ADULT",
+  "status": "ACTIVE",
+  "version": 1,
+  "created": "2026-08-10",
+  "renderer": "VISUAL_SPEC",
+  "specPayload": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Balance the chemical equation"
+    },
+    {
+     "title": "Convert given mass to moles"
+    },
+    {
+     "title": "Apply molar mole ratios"
+    },
+    {
+     "title": "Calculate theoretical and percent yield"
+    }
+   ],
+   "title": "Stoichiometric Calculation Steps"
+  },
+  "a11yDescription": "Figure: Stoichiometric Calculation Steps"
+ }
+]

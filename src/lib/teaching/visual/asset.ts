@@ -37,7 +37,7 @@ import type { VisualPayload, RendererKind, Representation, EducationalPurpose } 
 import { describeVisualPayload, type VisualSemantics } from './visualSemantics'
 import { scopeForAsset, type VisualScope } from './scope'
 import { typesetPayloadChemistry } from './typesetSceneChemistry'
-import { chemistryAdmissionFailure } from './chemistryAdmission'
+import { chemistryAdmissionFailure, repairChemistryPayload } from './chemistryAdmission'
 import { payloadBlockers } from './figureAudit'
 
 /**
@@ -167,7 +167,7 @@ export function makeVisualAsset(input: {
   // domain/kind default, approved, generated, restored) — so the renderer, the tutor contract and
   // the semantics below are all fed the same `Zn²⁺`, never `Zn2+`. Non-chemistry and card payloads
   // come back as the same object.
-  const payload = typesetPayloadChemistry(input.conceptId, input.payload)
+  const payload = repairChemistryPayload(input.conceptId, typesetPayloadChemistry(input.conceptId, input.payload))
   return {
     ...input,
     payload,

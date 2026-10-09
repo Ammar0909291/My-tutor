@@ -298,12 +298,14 @@ function StepBox({ x, y, w, h, index, step }: { x: number; y: number; w: number;
     <g>
       <rect x={x} y={y} width={w} height={h} rx={10} fill="var(--coral-muted, rgba(247,129,102,0.16))" stroke="var(--coral, #F78166)" strokeWidth={2} />
       <circle cx={x + 16} cy={y + 16} r={10} fill="var(--coral, #F78166)" />
-      <text x={x + 16} y={y + 20} fontSize={11} fontWeight={700} textAnchor="middle" fill="#fff">{index + 1}</text>
-      <text x={tx} y={titleTop} fontSize={12} fontWeight={700} fill="var(--text-secondary, #1f2328)">
+      {/* The numeral lives ON the badge by design: `data-fixed-label` keeps the shared label solver (svgLabelPlacement) from treating the badge circle as an obstacle and pushing the numeral off it (measured: 22 px left, 9 px down, outside the node). Ink is the accent's own ink token — white on the dark theme's amber badge measured 1.9:1. */}
+      <text x={x + 16} y={y + 20} fontSize={11} fontWeight={700} textAnchor="middle" fill="var(--sb-accent-ink, #fff)" data-fixed-label="">{index + 1}</text>
+      {/* Title and note sit on a TRANSLUCENT accent fill, which the legibility pass's backdrop probe does not composite; on the dark theme --text-secondary (#A9B0A6) / --text-dim (#9DA89A) over that fill measured 4.43:1 / ~4.0:1 (< 4.5:1). --text-primary holds >= 4.5:1 on both themes. */}
+      <text x={tx} y={titleTop} fontSize={12} fontWeight={700} fill="var(--text-primary, #1f2328)">
         {l.titleLines.map((line, k) => <tspan key={k} x={tx} dy={k === 0 ? 0 : TITLE_LINE_H}>{line}</tspan>)}
       </text>
       {l.noteLines.length > 0 && (
-        <text x={tx} y={noteFirstBaseline} fontSize={9.5} fill="var(--text-dim, #888)">
+        <text x={tx} y={noteFirstBaseline} fontSize={9.5} fill="var(--text-primary, #1f2328)">
           {l.noteLines.map((line, k) => <tspan key={k} x={tx} dy={k === 0 ? 0 : NOTE_LINE_H}>{line}</tspan>)}
         </text>
       )}

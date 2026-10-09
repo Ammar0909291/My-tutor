@@ -15,20 +15,38 @@ import type { SceneObject } from '@/lib/teaching/sceneSpec'
 import { useTheme, type Theme } from '@/components/Providers'
 
 const CAMERA_DISTANCE = 8
+/**
+ * ONE REAL, NEUTRAL ATOM: magnesium-24 — 12 protons, 12 neutrons, 12 electrons in the shells 2, 8, 2 (R19).
+ * The card used to draw 3 protons + 3 neutrons with 2 + 4 + 4 = 10 electrons: a charged atom with a shell filling no element
+ * has (L at 4 of 8 while M already holds 4). The numbers below are an actual element, and the drawing says which.
+ */
 const SHELL_RADII = [1.0, 1.7, 2.4]
-const SHELL_COUNTS = [2, 4, 4]
+const SHELL_COUNTS = [2, 8, 2]
+const PROTONS = 12
+const NEUTRONS = 12
+/** The atom the card draws, exported so a test can hold its numbers to the periodic table. */
+export const ATOM_MODEL = { symbol: 'Mg', protons: PROTONS, neutrons: NEUTRONS, shellElectrons: SHELL_COUNTS } as const
+
+/** `n` points evenly spread on a sphere of radius `r` (Fibonacci lattice) — deterministic, no overlap at this size. */
+function sphereOffsets(n: number, r: number): [number, number, number][] {
+  const golden = Math.PI * (3 - Math.sqrt(5))
+  return Array.from({ length: n }, (_, i) => {
+    const y = 1 - (2 * (i + 0.5)) / n
+    const rad = Math.sqrt(Math.max(0, 1 - y * y))
+    const th = golden * i
+    return [Math.cos(th) * rad * r, y * r, Math.sin(th) * rad * r] as [number, number, number]
+  })
+}
+const NUCLEON_OFFSETS = sphereOffsets(PROTONS + NEUTRONS, 0.2)
 
 function NucleusParticles({ show }: { show: boolean }) {
   if (!show) return null
-  const offsets: [number, number, number][] = [
-    [0.12, 0.08, 0], [-0.1, 0.1, 0.05], [0.05, -0.12, -0.05],
-    [-0.12, -0.05, 0.08], [0, 0.1, -0.1], [0.08, -0.05, 0.1],
-  ]
   return (
     <group>
-      {offsets.map((o, i) => (
+      {NUCLEON_OFFSETS.map((o, i) => (
         <mesh key={i} position={o}>
-          <sphereGeometry args={[0.08, 12, 12]} />
+          <sphereGeometry args={[0.075, 12, 12]} />
+          {/* even indices are protons (red), odd are neutrons (blue): 12 of each */}
           <meshStandardMaterial color={i % 2 === 0 ? '#FF6B6B' : '#5B8DEF'} />
         </mesh>
       ))}
@@ -81,7 +99,8 @@ function Scene({ revealStep, theme }: { revealStep: number; theme: Theme }) {
       obstacles.push({ type: 'point', position: [Math.cos(a) * r, 0, Math.sin(a) * r], radius: 0.08 })
     }
   })
-  if (completed) labels.push({ text: 'Completed atom', position: [0, -2.9, 0], color: '#FFB74D' })
+  if (showProtonsNeutrons) labels.push({ text: `${PROTONS} protons + ${NEUTRONS} neutrons`, position: [0, 0.75, 0], color: '#FFB74D' })
+  if (completed) labels.push({ text: `Neutral Mg-24 atom: ${PROTONS} protons = ${SHELL_COUNTS.reduce((a, b) => a + b, 0)} electrons (${SHELL_COUNTS.join(', ')})`, position: [0, -2.9, 0], color: '#FFB74D' })
 
   return (
     <group>
@@ -118,7 +137,7 @@ export function AtomicStructure3D({ revealStep = Infinity }: { revealStep?: numb
       revealStep={revealStep}
       cameraDistance={CAMERA_DISTANCE}
       autoRotate={false}
-      ariaLabel="3D atomic structure: a nucleus with protons and neutrons, surrounded by electron shells with orbiting electrons"
+      ariaLabel="3D atomic structure: a magnesium-24 atom — a nucleus of 12 protons and 12 neutrons, surrounded by 12 electrons in shells of 2, 8 and 2"
     >
       <Scene revealStep={revealStep} theme={theme} />
     </ThreeDVisual>

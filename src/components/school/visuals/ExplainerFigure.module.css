@@ -438,6 +438,16 @@
   cursor: not-allowed;
 }
 
+/* An option that cannot be picked NOW because it is the partner control's choice (a comparison of an element with itself).
+ * It stays legible — full-contrast dim text, struck through, dashed border — instead of the 0.4-opacity "disabled" look,
+ * which measured 1.78:1 on the light card and read as broken rather than as "already taken". */
+.chip.chipTaken:disabled {
+  opacity: 1;
+  color: var(--text-dim);
+  border-style: dashed;
+  text-decoration: line-through;
+}
+
 /* An answer the learner can choose (a simulation's prediction options): full
    contrast and a visible border, unlike the dim secondary chip, which was
    measured to read as greyed-out beside the disabled Pause/Reset. */

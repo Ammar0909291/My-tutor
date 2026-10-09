@@ -111,6 +111,17 @@ export interface NumericVariable extends VariableBase {
 export interface ChoiceVariable extends VariableBase {
   kind: 'choice'
   options: readonly { value: string; label: string }[]
+  /**
+   * The key of a PARTNER choice this one must differ from — a comparison needs two different things. An option equal to
+   * the partner's current value is not offered (`choiceOptionAvailable`); it used to be pressable and built nothing, so
+   * the frame silently kept the last figure (a periodic-trend comparison of an element with itself).
+   */
+  distinctFrom?: string
+}
+
+/** May this option be chosen now? False only when it would make the variable equal to its `distinctFrom` partner. */
+export function choiceOptionAvailable(variable: ChoiceVariable, optionValue: string, values: Readonly<Record<string, number | string>>): boolean {
+  return !variable.distinctFrom || String(values[variable.distinctFrom]) !== optionValue
 }
 
 export type SceneVariable = NumericVariable | ChoiceVariable
@@ -565,8 +576,8 @@ export const PARAMETRIC_SCENES: Readonly<Record<string, ParametricScene>> = {
   periodic_trends: {
     defaults: { element1Symbol: 'Na', element2Symbol: 'Cl' },
     variables: [
-      { key: 'element1Symbol', label: 'Element A', kind: 'choice', options: PERIODIC_CHOICES, effect: 'radius grows DOWN a group and shrinks ACROSS a period' },
-      { key: 'element2Symbol', label: 'Element B', kind: 'choice', options: PERIODIC_CHOICES, effect: 'comparing two elements is how a trend becomes visible at all' },
+      { key: 'element1Symbol', label: 'Element A', kind: 'choice', options: PERIODIC_CHOICES, distinctFrom: 'element2Symbol', effect: 'radius grows DOWN a group and shrinks ACROSS a period' },
+      { key: 'element2Symbol', label: 'Element B', kind: 'choice', options: PERIODIC_CHOICES, distinctFrom: 'element1Symbol', effect: 'comparing two elements is how a trend becomes visible at all' },
     ],
     build: (p) => guarded(validatePeriodicTrendParams, buildPeriodicTrendScene)({
       element1Symbol: String(p.element1Symbol), element2Symbol: String(p.element2Symbol),

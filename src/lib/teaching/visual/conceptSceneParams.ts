@@ -107,6 +107,7 @@ import {
   buildAngularMomentumAdditionScene, buildBornScene, buildSMatrixScene, buildDensityMatrixScene,
 } from '@/lib/teaching/sceneGenerators/physicsCoreScenesB13'
 import { buildPowerScene } from '@/lib/teaching/sceneGenerators/physicsCoreScenesB14'
+import { buildClosePackingScene } from '@/lib/teaching/sceneGenerators/crystalLattice.pure'
 import { buildDensityScene, buildVernierScene, buildMassWeightScene, buildRectilinearScene } from '@/lib/teaching/sceneGenerators/physicsExtensionScenesB1'
 import { buildExperimentalGraphScene, buildSimpleMachineScene, buildVariationOfGScene, buildTerminalVelocityScene } from '@/lib/teaching/sceneGenerators/physicsExtensionScenesB2'
 import { buildCoolingScene, buildBlackbodyScene, buildEnergyResourcesScene, buildEchoScene } from '@/lib/teaching/sceneGenerators/physicsExtensionScenesB3'
@@ -691,6 +692,7 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     externalVoltage: 4,
     medium: 'molten', // no water: "Na+ in solution" would draw the aqueous cell this one is contrasted with
     name: 'Electrolysis of Molten NaCl',
+    scopeNote: "This is one example (a molten salt); Faraday's laws, m = M·I·t / (n·F), say how much of each product forms.",
   }),
   'chem.elect.industrial': () => buildElectrochemicalCellScene({
     cellType: 'electrolytic',
@@ -701,6 +703,7 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     electronsTransferred: 2,
     externalVoltage: 2,
     name: 'Copper Electroplating',
+    scopeNote: 'This is one example of industrial electrolysis; aluminium extraction (Hall–Héroult), chlor-alkali and electrolytic refining use the same kind of cell with other electrodes and electrolytes.',
   }),
   'chem.elect.batteries': () => buildElectrochemicalCellScene({
     cellType: 'galvanic',
@@ -709,6 +712,7 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     cathode: { material: 'MnO2 / carbon rod', ion: 'NH4+' },
     electronsTransferred: 2,
     name: 'Zinc–Carbon Dry Cell (Primary Battery)',
+    scopeNote: 'This is one example (a non-rechargeable cell); secondary cells such as lead–acid and lithium-ion, and fuel cells, follow the same anode/cathode logic with other electrodes and electrolytes.',
   }),
 
   // Archetype B — one energy-level/cycle generator serves Hess's Law, the
@@ -732,11 +736,11 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     paths: [
       { name: 'Direct', steps: [{ label: 'NaCl(s)', delta: -411, deltaLabel: 'ΔHf° = −411 kJ/mol' }] },
       { name: 'Via ions', steps: [
-        { label: 'Na(g) + ½Cl2(g)', delta: 107, deltaLabel: 'sublimation ΔHsub = +107' },
-        { label: 'Na+(g) + e− + ½Cl2(g)', delta: 496, deltaLabel: 'ionization IE = +496' },
-        { label: 'Na+(g) + e− + Cl(g)', delta: 122, deltaLabel: 'dissociation ½ΔHdiss = +122' },
-        { label: 'Na+(g) + Cl−(g)', delta: -349, deltaLabel: 'electron affinity EA = −349' },
-        { label: 'NaCl(s)', delta: -787, deltaLabel: 'lattice energy U = −787' },
+        { label: 'Na(g) + ½Cl2(g)', delta: 107, deltaLabel: 'sublimation ΔHsub = +107 kJ/mol' },
+        { label: 'Na+(g) + e− + ½Cl2(g)', delta: 496, deltaLabel: 'ionization IE = +496 kJ/mol' },
+        { label: 'Na+(g) + e− + Cl(g)', delta: 122, deltaLabel: 'dissociation ½ΔHdiss = +122 kJ/mol' },
+        { label: 'Na+(g) + Cl−(g)', delta: -349, deltaLabel: 'electron affinity EA = −349 kJ/mol' },
+        { label: 'NaCl(s)', delta: -787, deltaLabel: 'lattice energy U = −787 kJ/mol' },
       ] },
     ],
   }),
@@ -776,6 +780,11 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   // not a count. The tutor read that narration and taught from it. Both
   // bindings now declare what the bar heights ARE, which switches the
   // generator to comparison chrome; the numbers are untouched.
+  // R4 (2026-10-09): "Close Packing and Efficiency" was served the one-colour SIMPLE-cubic card — the least efficient, and not a
+  // close-packed structure. Cubic close packing IS the face-centred cubic cell (4 atoms per cell: the number the 74 % efficiency
+  // is computed from), which the existing lattice generator draws and the chemistry audit verifies (sharing rule 8·⅛ + 6·½ = 4).
+  'chem.solid.packing': () => buildClosePackingScene(),
+
   'chem.coord.stability': () => buildStatisticsBarChartScene({
     chartTitle: 'log Kf: the chelate effect',
     quantity: { name: 'log Kf', kind: 'magnitude' },

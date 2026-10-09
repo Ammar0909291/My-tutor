@@ -94,29 +94,36 @@ export function checkSystemBoundaryConsistency(spec: SceneSpec, systemType: Syst
  * `qv`/`qp`). The arrow direction is derived from the sign, never hardcoded,
  * so the figure can never show heat "entering" a system whose q is negative.
  */
+/**
+ * The unit the first-law figure's numbers are in. The figure is generic (q and w are slider values), so it states ONE energy
+ * unit on every number it prints — a bare "q = +100" is a quantity with no dimension (R8). Joules: the SI unit, and the
+ * scale (|q|, |w| ≤ 100) of the small-system examples the figure is used for.
+ */
+const FIRST_LAW_UNIT = 'J'
+
 export function buildFirstLawScene(q: number, w: number): SceneSpec {
   const deltaU = round(q + w, 2)
   const boundary = box(-3, -3, 3, 3, ROLE.reference)
   const qArrow = q >= 0
-    ? arrow([-5, 1, 0], [-3, 1, 0], ROLE.input, `q = ${q >= 0 ? '+' : ''}${q}`)
-    : arrow([-3, 1, 0], [-5, 1, 0], ROLE.output, `q = ${q}`)
+    ? arrow([-5, 1, 0], [-3, 1, 0], ROLE.input, `q = ${q >= 0 ? '+' : ''}${q} ${FIRST_LAW_UNIT}`)
+    : arrow([-3, 1, 0], [-5, 1, 0], ROLE.output, `q = ${q} ${FIRST_LAW_UNIT}`)
   const wArrow = w >= 0
-    ? arrow([-5, -1, 0], [-3, -1, 0], ROLE.input, `w = ${w >= 0 ? '+' : ''}${w}`)
-    : arrow([-3, -1, 0], [-5, -1, 0], ROLE.output, `w = ${w}`)
+    ? arrow([-5, -1, 0], [-3, -1, 0], ROLE.input, `w = ${w >= 0 ? '+' : ''}${w} ${FIRST_LAW_UNIT}`)
+    : arrow([-3, -1, 0], [-5, -1, 0], ROLE.output, `w = ${w} ${FIRST_LAW_UNIT}`)
 
   return {
     id: 'chem-first-law',
     title: 'First Law of Thermodynamics',
     sceneType: 'diagram',
-    teachingGoal: `Show ΔU = q + w for a system receiving q = ${q} and w = ${w}, giving ΔU = ${deltaU}.`,
+    teachingGoal: `Show ΔU = q + w for a system receiving q = ${q} ${FIRST_LAW_UNIT} and w = ${w} ${FIRST_LAW_UNIT}, giving ΔU = ${deltaU} ${FIRST_LAW_UNIT}.`,
     cameraDistance: 16,
-    ariaLabel: `A system with heat q = ${q} and work w = ${w} crossing its boundary, giving a change in internal energy delta U = ${deltaU}.`,
+    ariaLabel: `A system with heat q = ${q} ${FIRST_LAW_UNIT} and work w = ${w} ${FIRST_LAW_UNIT} crossing its boundary, giving a change in internal energy delta U = ${deltaU} ${FIRST_LAW_UNIT}.`,
     stage: { grid: false, axes: false },
     steps: [
       { narration: 'Internal energy U changes only through heat and work crossing the boundary.', objects: [...boundary, label('system, U', [0, 0, 0], ROLE.ink, 'primary')] },
-      { narration: `Heat: q = ${q}. Positive means heat flows in.`, objects: [qArrow] },
-      { narration: `Work: w = ${w}. Positive means work is done on the system.`, objects: [wArrow] },
-      { narration: `ΔU = q + w = ${q} + ${w} = ${deltaU}.`, objects: [heading(`ΔU = ${deltaU}`, [0, 4, 0], ROLE.result)] },
+      { narration: `Heat: q = ${q} ${FIRST_LAW_UNIT}. Positive means heat flows in.`, objects: [qArrow] },
+      { narration: `Work: w = ${w} ${FIRST_LAW_UNIT}. Positive means work is done on the system.`, objects: [wArrow] },
+      { narration: `ΔU = q + w = ${q} + ${w} = ${deltaU} ${FIRST_LAW_UNIT}.`, objects: [heading(`ΔU = ${deltaU} ${FIRST_LAW_UNIT}`, [0, 4, 0], ROLE.result)] },
     ],
   }
 }

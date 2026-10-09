@@ -219,7 +219,7 @@ describe('A. retirement retires an ARTIFACT, on every tier', () => {
     }
   })
 
-  it('no retirement row was removed by this lifecycle (15 rows of evidence)', () => {
+  it('no retirement row was removed by this lifecycle (29 rows of evidence)', () => {
     // 25 -> 24 (2026-09-30): phys.opt.reflection was removed from the register once it owned
     // a faithful incident/normal/equal-angles figure (physicsCoreScenesBatch1.test.ts).
     // 24 -> 22 (2026-09-30): phys.em.rc-circuits and phys.em.ac-basics were removed once they
@@ -229,7 +229,9 @@ describe('A. retirement retires an ARTIFACT, on every tier', () => {
     // 20 -> 15 (2026-09-30): the last five physics circuit concepts (wheatstone-bridge, potentiometer,
     // self-inductance, mutual-inductance, lc-circuits) left once they owned faithful figures
     // (physicsCoreScenesBatch9.test.ts). Only chemistry and CS rows remain.
-    expect(Object.keys(RETIRED_VISUAL_BINDINGS)).toHaveLength(15)
+    // 15 -> 29 (2026-10-09): 14 chemistry concepts whose cached Tier-3 GENERATED figure was found wrong (two further
+    // chemistry concepts already on the register gained a second retired asset). Rows were only added.
+    expect(Object.keys(RETIRED_VISUAL_BINDINGS)).toHaveLength(29)
   })
 })
 

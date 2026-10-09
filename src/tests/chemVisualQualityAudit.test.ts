@@ -108,8 +108,12 @@ describe('spatial chemistry figures do not draw a meaningless x/y/z triad', () =
     }
   })
 
-  it('the grid is left as it was (only the lettered triad is removed)', () => {
-    expect(buildMoleculeScene(lookupMolecule('water')!).stage?.grid).toBeUndefined()
+  it('molecule and unit-cell figures also drop the floor grid (R16, 2026-10-09); the other spatial figures keep theirs', () => {
+    // The grid used to be left alone (2026-10-08). It ran under the bottom label of every molecule / unit cell and was the pixel
+    // set that label was measured against (3.9–4.5:1 in a minority bucket); these two figures have no floor, so it is gone.
+    expect(buildMoleculeScene(lookupMolecule('water')!).stage?.grid).toBe(false)
+    expect(buildLatticeScene(lookupLattice('fcc')!).stage?.grid).toBe(false)
+    expect(buildElectronShellScene(lookupElement('Na')!).stage?.grid).toBeUndefined()
   })
 })
 
