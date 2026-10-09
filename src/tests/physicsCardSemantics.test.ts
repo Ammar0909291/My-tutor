@@ -28,6 +28,7 @@ import { buildRayOpticsScene, checkRayOpticsConsistency, type OpticsType } from 
 import { WaveFunctionPlot, WAVE_FUNCTION, waveFunctionPoints } from '@/components/school/visuals/WaveFunctionPlot'
 import { buildVectorProductsScene, VECTOR_PRODUCTS_PARAMS } from '@/lib/teaching/sceneGenerators/vectorProducts'
 import { buildSiUnitsScene, buildDimensionsScene } from '@/lib/teaching/sceneGenerators/physicsCoreScenesB7'
+import { LENS_POWER_PARAMS, buildLensPowerScene as buildLensPowerSceneAgain } from '@/lib/teaching/sceneGenerators/lensPower'
 import { buildParticleConservationScene } from '@/lib/teaching/sceneGenerators/physicsCoreScenesB10'
 
 /** A card's SVG as markup, every step revealed — what the learner finally sees. */
@@ -136,6 +137,21 @@ describe('the shared force diagram draws what each of its four concepts says', (
     expect(weight.x1).toBe(cx)
     expect(normal.x1).toBe(cx)
     expect(Math.abs(applied.x1 - cx)).toBe(boxW / 2)
+  })
+
+  it('every arrow-head lies inside the drawing: none is cut off by the edge of the card', () => {
+    const { width, height, headReach } = FORCE_DIAGRAM
+    expect(svg).toContain(`viewBox="0 0 ${width} ${height}"`)
+    for (const l of lines) {
+      const len = Math.hypot(l.x2 - l.x1, l.y2 - l.y1)
+      const tip = [l.x2 + ((l.x2 - l.x1) / len) * headReach, l.y2 + ((l.y2 - l.y1) / len) * headReach]
+      expect(tip[0], `${l.marker} tip x`).toBeGreaterThanOrEqual(0)
+      expect(tip[0], `${l.marker} tip x`).toBeLessThanOrEqual(width)
+      expect(tip[1], `${l.marker} tip y`).toBeGreaterThanOrEqual(0)
+      expect(tip[1], `${l.marker} tip y`).toBeLessThanOrEqual(height)
+    }
+    // ...and the labels beside them (the weight label is the lowest text)
+    for (const m of svg.matchAll(/<text\b[^>]*\sy="([\d.]+)"/g)) expect(Number(m[1])).toBeLessThanOrEqual(height)
   })
 
   it('the body rests ON the ground (a normal force needs a contact)', () => {
@@ -844,5 +860,125 @@ describe('gravitational-waves figure: the stages are in physical order and none 
   it('the detector measures strain h = ΔL/L (a ratio), of order 10⁻²¹', () => {
     expect(narration).toContain('h = ΔL/L')
     expect(narration).toContain('10⁻²¹')
+  })
+})
+
+// ── phys.opt.lens-power ──────────────────────────────────────────────────────
+// KG / EB / blueprint: P = 1/f with f in METRES (dioptres, sign + for converging, − for diverging);
+// thin lenses in contact: P_total = P₁ + P₂ (and NOT f_total = f₁ + f₂). The EB's worked numbers are
+// f = 0.5 m → +2 D, and +5 D with −2 D → +3 D. Every power the figure prints is re-derived here from the
+// SLOPE of the rays it draws: a parallel ray at height h leaves a thin lens of power P with slope −h·P/scale.
+describe('lens power figure: the printed powers are the ones its drawn rays have, and they add', () => {
+  const { scale, x0, ySingle, yPair, rayHeight: h, pSingle, pFirst, pSecond, pTotal } = LENS_POWER_PARAMS
+  const served = () => {
+    const d = resolveVisual({ message: 'show me a diagram', lessonConceptId: 'phys.opt.lens-power', learnerRequest: 'diagram', subject: 'physics' } as never)
+    if (d.payload?.renderer !== 'scene') throw new Error('expected a scene for lens power')
+    return { d, spec: d.payload.sceneSpec as SceneSpec }
+  }
+  const objById = (id: string) => sceneObjects(served().spec).find((o) => o.id === id) as (SceneObj & { from?: number[]; to?: number[] }) | undefined
+  /** The power a drawn outgoing ray has: slope = −h·P/scale, with h its height above its axis at the lens. */
+  const powerOf = (id: string, yAxis: number) => {
+    const r = objById(id)!
+    const height = r.from![1] - yAxis
+    const slope = (r.to![1] - r.from![1]) / (r.to![0] - r.from![0])
+    return (-slope * scale) / height
+  }
+  const text = () => sceneTexts(served().spec)
+  const numberIn = (t: string) => Number(/([+−-]?\d+(?:\.\d+)?)\s*D/.exec(t.replace('−', '-'))?.[1])
+
+  it('is served as an authored figure of THIS concept — not the single-lens sliders of phys.opt.lenses', () => {
+    const { d, spec } = served()
+    expect(d.asset?.scope).toBe('concept')
+    expect(spec.id).toBe('phys-lens-power')
+    expect(spec.parametric).toBeUndefined()
+  })
+
+  it('one lens: the drawn rays have power 1/f — the focus is where the printed f says, and the printed P is 1/f', () => {
+    for (const id of ['ray-single-out-upper', 'ray-single-out-lower']) expect(powerOf(id, ySingle)).toBeCloseTo(pSingle, 6)
+    const focus = objById('focus-single')!.position as number[]
+    const fMetres = (focus[0] - x0) / scale
+    expect(fMetres).toBeCloseTo(0.5, 6)
+    expect(1 / fMetres).toBeCloseTo(pSingle, 6)
+    // each outgoing ray really passes through that focus
+    for (const id of ['ray-single-out-upper', 'ray-single-out-lower']) {
+      const r = objById(id)!
+      const t = (focus[0] - r.from![0]) / (r.to![0] - r.from![0])
+      expect(r.from![1] + t * (r.to![1] - r.from![1])).toBeCloseTo(ySingle, 6)
+    }
+    expect(text()).toContain('f = 0.50 m')
+    expect(text()).toContain('P = 1/f = +2 D')
+  })
+
+  it('the rays arrive parallel to the axis and are bent AT the lens plane', () => {
+    for (const [id, yAxis, side] of [['ray-single-in-upper', ySingle, 1], ['ray-single-in-lower', ySingle, -1], ['ray-pair-in-upper', yPair, 1], ['ray-pair-in-lower', yPair, -1]] as const) {
+      const r = objById(id)!
+      expect(r.from![1]).toBeCloseTo(r.to![1], 9)                 // parallel to the axis
+      expect(r.to![0]).toBeCloseTo(x0, 9)                         // ends at the lens plane
+      expect(r.to![1] - yAxis).toBeCloseTo(side * h, 9)           // at the stated height
+    }
+    for (const id of ['ray-single-out-upper', 'ray-pair-out-upper', 'ray-first-alone']) expect(objById(id)!.from![0]).toBeCloseTo(x0, 9)
+  })
+
+  it('two lenses in contact: the +5 D lens alone has power 5, the pair has power 3, and the difference is the −2 D lens', () => {
+    const alone = powerOf('ray-first-alone', yPair)
+    const together = powerOf('ray-pair-out-upper', yPair)
+    expect(alone).toBeCloseTo(pFirst, 6)
+    expect(together).toBeCloseTo(pTotal, 6)
+    expect(powerOf('ray-pair-out-lower', yPair)).toBeCloseTo(pTotal, 6)
+    // what the second lens ADDS to the bend is its own power, with the sign the figure prints
+    expect(together - alone).toBeCloseTo(pSecond, 6)
+    // and the first lens's own focus is where +5 D puts it
+    expect(((objById('focus-first')!.position as number[])[0] - x0) / scale).toBeCloseTo(1 / pFirst, 6)
+    expect(((objById('focus-pair')!.position as number[])[0] - x0) / scale).toBeCloseTo(1 / pTotal, 6)
+  })
+
+  it('every number printed beside a lens is its power with the right sign, and the printed sum is the sum', () => {
+    const t = text()
+    expect(t).toContain('+5 D')
+    expect(t).toContain('−2 D')
+    expect(numberIn('+5 D') + numberIn('−2 D')).toBe(numberIn(t.find((x) => x.startsWith('P₁ + P₂'))!))
+    expect(pFirst + pSecond).toBe(pTotal)
+    expect(t).toContain('f = 0.33 m')
+    // converging lenses are positive, diverging negative — and the symbols agree
+    const widest = (id: string) => { const pts = objById(id)!.points as number[][]; const cx = pts.reduce((a, p) => a + p[0], 0) / pts.length; return { centre: Math.abs(pts.find((p) => Math.abs(p[1] - (pts[0][1] + pts[Math.floor(pts.length / 4)][1]) / 2) < 0.2)![0] - cx), ends: Math.abs(pts[0][0] - cx) } }
+    expect(widest('lens-first').centre).toBeGreaterThan(widest('lens-first').ends)     // biconvex: widest in the middle
+    expect(widest('lens-second').centre).toBeLessThan(widest('lens-second').ends)      // biconcave: pinched in the middle
+  })
+
+  it('powers add and focal lengths do not: the figure\'s own numbers rule out the misconception', () => {
+    const f1 = 1 / pFirst, f2 = 1 / pSecond, fTotal = 1 / pTotal
+    expect(f1 + f2).not.toBeCloseTo(fTotal, 3)                   // 0.20 + (−0.50) = −0.30, not 0.33
+    expect(1 / f1 + 1 / f2).toBeCloseTo(1 / fTotal, 9)           // 1/f = 1/f₁ + 1/f₂
+    const { spec } = served()
+    const narration = spec.steps.map((s) => s.narration).join(' ')
+    expect(narration).toMatch(/Powers add, focal lengths do not/)
+    expect(narration).toMatch(/Thin lenses in contact only/)     // the stated limit (EB: Why Students Fail #3)
+    expect(narration).toMatch(/METRES/)                           // the unit trap (EB: Why Students Fail #1)
+  })
+
+  it('the explanation panel\'s lines repeat the same arithmetic, and the legend names what the colours mean', () => {
+    const { spec } = served()
+    const lines = spec.explainer!.panels!.flatMap((p) => p.lines ?? [])
+    expect(lines).toContain('f = 0.50 m → P = +2 D')
+    expect(lines.some((l) => l.includes('+5 + (−2) = +3 D → f = 0.33 m'))).toBe(true)
+    expect(spec.explainer!.legend!.map((l) => l.label)).toEqual(['Parallel ray in', 'Ray out', 'First lens alone', 'Focus'])
+  })
+
+  it('stays inside the authoring bounds, the label budget and every narration limit; labels keep their place at every width', () => {
+    const { spec } = served()
+    for (const o of sceneObjects(spec)) for (const p of [o.position, o.from, o.to, ...(o.points ?? [])].filter(Boolean) as number[][]) for (const c of p) expect(Math.abs(c)).toBeLessThanOrEqual(5)
+    const labels = sceneObjects(spec).filter((o) => o.type === 'label')
+    expect(labels.length).toBeLessThanOrEqual(complexityFor('intermediate').maxLabels)
+    for (const st of spec.steps) expect((st.narration ?? '').length).toBeLessThan(220)
+    expect(JSON.stringify(buildLensPowerSceneAgain())).toBe(JSON.stringify(spec))   // deterministic: a rehydrated session matches
+    for (const [w, hh, bw] of [[282, 260, 390], [566, 272, 1280], [566, 380, 1280]] as Array<[number, number, number]>) {
+      const cum: SceneSpec['steps'][number]['objects'] = []
+      for (const step of spec.steps) {
+        cum.push(...step.objects)
+        const placed = placeSceneLabels({ ...spec, steps: [{ objects: [...cum] }] }, viewportFromCanvas(w, hh, bw))
+        expect(placed.unresolved).toBe(0)
+        for (const l of placed.labels) expect(l.movedPx, `${w}x${hh}: "${l.text}" moved ${l.movedPx}px`).toBeLessThanOrEqual(30)
+      }
+    }
   })
 })

@@ -1,6 +1,6 @@
 {
- "generatedAt": "2026-10-08T19:09:56.497Z",
- "fingerprint": "454ee4bcad2d864b863edbbf8ddd005d04af3df250e552f9ff3a30eb2dc65d71",
+ "generatedAt": "2026-10-09T04:28:51.669Z",
+ "fingerprint": "e5dbf2b276b8559ee19bfa01012d05e06e80362d64104eeb3cf46c4f9ae414bc",
  "fingerprints": {
   "phys.meas.units": "689b537633be33f5",
   "phys.meas.scalars-vectors": "566feb21908a8419",
@@ -129,7 +129,7 @@
   "phys.opt.refraction": "68fa7432ad15d062",
   "phys.opt.total-internal-reflection": "a784035ad52541f4",
   "phys.opt.lenses": "cb5e461a9fcaeb24",
-  "phys.opt.lens-power": "d0c2787e25a23d27",
+  "phys.opt.lens-power": "dd9c9d648c855272",
   "phys.opt.human-eye": "d58a3f32074479f4",
   "phys.opt.optical-instruments": "fa031acff9dc20eb",
   "phys.opt.dispersion": "2e29aaa29035803c",
@@ -297,17 +297,17 @@
  "summary": {
   "concepts": 283,
   "verdicts": {
-   "REVIEW_REQUIRED": 19,
-   "PASS": 264
+   "REVIEW_REQUIRED": 18,
+   "PASS": 265
   },
   "byViewport": {
    "mobile": {
-    "PASS": 278,
-    "REVIEW_REQUIRED": 5
+    "PASS": 279,
+    "REVIEW_REQUIRED": 4
    },
    "desktop-column": {
-    "REVIEW_REQUIRED": 5,
-    "PASS": 278
+    "REVIEW_REQUIRED": 4,
+    "PASS": 279
    }
   },
   "byDimension": {
@@ -322,8 +322,8 @@
     "PASS": 283
    },
    "layout": {
-    "PASS": 280,
-    "REVIEW_REQUIRED": 3
+    "PASS": 281,
+    "REVIEW_REQUIRED": 2
    },
    "graph": {
     "PASS": 283
@@ -333,8 +333,8 @@
     "REVIEW_REQUIRED": 13
    },
    "interactive": {
-    "PASS": 281,
-    "REVIEW_REQUIRED": 2
+    "PASS": 282,
+    "REVIEW_REQUIRED": 1
    }
   },
   "withMissingRenders": 0
@@ -3665,34 +3665,29 @@
   },
   {
    "id": "phys.opt.lens-power",
-   "verdict": "REVIEW_REQUIRED",
+   "verdict": "PASS",
    "class": "scene",
-   "authorship": "shared-generator-default",
-   "scope": "domain",
-   "interactive": true,
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
    "graph": false,
    "dims": {
     "structural": "PASS",
     "readability": "PASS",
     "contrast": "PASS",
-    "layout": "REVIEW_REQUIRED",
+    "layout": "PASS",
     "graph": "PASS",
     "semantic": "PASS",
-    "interactive": "REVIEW_REQUIRED"
+    "interactive": "PASS"
    },
    "byViewport": {
-    "mobile": "REVIEW_REQUIRED",
-    "desktop-column": "REVIEW_REQUIRED"
+    "mobile": "PASS",
+    "desktop-column": "PASS"
    },
    "semantic": "PASS",
-   "states": 23,
+   "states": 3,
    "fail": 0,
-   "review": [
-    "LY-02: \"F\" overlaps drawn geometry (27% of its box)",
-    "LY-02: \"O\" overlaps drawn geometry (27% of its box)",
-    "LY-02: \"O\" overlaps drawn geometry (24% of its box)",
-    "LY-02: \"F\" overlaps drawn geometry (24% of its box)"
-   ]
+   "review": []
   },
   {
    "id": "phys.opt.human-eye",

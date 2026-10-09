@@ -191,11 +191,9 @@ export const INSUFFICIENT_FOR_CONCEPT: ReadonlySet<string> = new Set([
   // PROMOTED 2026-09-30 (physics batch 15, physicsCoreScenesB15.ts): 'phys.mech.displacement' — was: bare -5..5 number line; no start, no end, no path
   // PROMOTED 2026-09-30 (physics batch 15, physicsCoreScenesB15.ts): 'phys.mech.tension' — was: force diagram with no string, rope or tension arrow
   // PROMOTED 2026-09-30 (physics batch 15, physicsCoreScenesB15.ts): 'phys.em.emf' — was: bulb circuit; V = E - I*r needs r drawn inside the cell
-  // Found by asserting the condition rather than assuming it: B2's own
-  // "requires authoring" list already recorded this one as needing a lens
-  // COMBINATION, but it was never demoted, so it kept claiming to BE a figure
-  // of the concept while showing the shared single-lens instance.
-  'phys.opt.lens-power',             // one lens; P = P1 + P2 needs a combination
+  // REMOVED 2026-10-09: 'phys.opt.lens-power' ("one lens; P = P1 + P2 needs a combination") now owns an
+  // authored P = 1/f and P = P1 + P2 figure in CONCEPT_SCENES (lensPower.ts), so the verdict no longer
+  // describes what the concept renders — the intended exit from this set.
   // Round 4 read the contract's own "WHAT THE LEARNER SEES" text for every
   // card-backed figure carrying the STRONG contract, and compared it with the
   // concept's claim. Two named a thing the card's own description does not

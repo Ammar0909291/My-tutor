@@ -233,7 +233,10 @@ const CONCEPT_VISUALS: Record<string, VisualEntry> = {
   // already models (a single thin lens, object/image/focal-length) — power
   // is just 1/f of that identical lens, not a different phenomenon. Reuses
   // the lenses mapping rather than inventing a second entry for one formula.
-  'phys.opt.lens-power':              { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'ray_optics' },
+  // No sceneGenerator on purpose (2026-10-09): a ray_optics row would give this concept the single-lens
+  // sliders of phys.opt.lenses. Its own figure — P = 1/f and P = P1 + P2 — is authored in CONCEPT_SCENES
+  // (lensPower.ts), which is consulted before the card, exactly as for phys.meas.vector-products.
+  'phys.opt.lens-power':              { primary: 'force_diagram', all: ['force_diagram'] },
   // Young's Double-Slit Experiment IS the double_slit visual — exact title
   // match, and the visual's own description ("particles... build up a
   // wave-like interference pattern") is this experiment. Deliberately NOT

@@ -1,0 +1,577 @@
+{
+ "purpose": "Production browser verification for the Physics final review closure (2026-10-09): normal-force fifth step and lens-power, on the deployed app, real /learn page, disposable learners (all deleted).",
+ "base": "https://my-tutor-flame.vercel.app",
+ "runs": [
+  {
+   "run": "Z1",
+   "what": "phys.mech.normal-force, fixed harness, --require-normal",
+   "deployment": "dpl_EBE7hccxEBbr4daYxPCdTUQfMYhF (main 34def29, READY)",
+   "at": "2026-10-09T08:55:44.845Z",
+   "rows": [
+    {
+     "conceptId": "phys.mech.normal-force",
+     "viewport": "mobile",
+     "theme": "dark",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": [],
+     "repliesSegments": 6,
+     "attempts": 1,
+     "normalArrowDrawn": true,
+     "normalArrow": {
+      "tailScreenPx": [
+       195,
+       1170.2
+      ],
+      "headScreenPx": [
+       195,
+       1130.8
+      ],
+      "perpendicularToGround": true,
+      "pointsUp": true,
+      "headAboveBox": true,
+      "labelText": "Normal (N)"
+     },
+     "weightArrow": {
+      "tailScreenPx": [
+       195,
+       1215.3
+      ],
+      "headScreenPx": [
+       195,
+       1254.7
+      ]
+     }
+    },
+    {
+     "conceptId": "phys.mech.normal-force",
+     "viewport": "mobile",
+     "theme": "light",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": [],
+     "repliesSegments": 6,
+     "attempts": 1,
+     "normalArrowDrawn": true,
+     "normalArrow": {
+      "tailScreenPx": [
+       195,
+       1170.2
+      ],
+      "headScreenPx": [
+       195,
+       1130.8
+      ],
+      "perpendicularToGround": true,
+      "pointsUp": true,
+      "headAboveBox": true,
+      "labelText": "Normal (N)"
+     },
+     "weightArrow": {
+      "tailScreenPx": [
+       195,
+       1215.3
+      ],
+      "headScreenPx": [
+       195,
+       1254.7
+      ]
+     }
+    },
+    {
+     "conceptId": "phys.mech.normal-force",
+     "viewport": "desktop-column",
+     "theme": "dark",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": [],
+     "repliesSegments": 6,
+     "attempts": 1,
+     "normalArrowDrawn": true,
+     "normalArrow": {
+      "tailScreenPx": [
+       980,
+       762.6
+      ],
+      "headScreenPx": [
+       980,
+       700.3
+      ],
+      "perpendicularToGround": true,
+      "pointsUp": true,
+      "headAboveBox": true,
+      "labelText": "Normal (N)"
+     },
+     "weightArrow": {
+      "tailScreenPx": [
+       980,
+       833.8
+      ],
+      "headScreenPx": [
+       980,
+       896.1
+      ]
+     }
+    },
+    {
+     "conceptId": "phys.mech.normal-force",
+     "viewport": "desktop-column",
+     "theme": "light",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": [],
+     "repliesSegments": 6,
+     "attempts": 1,
+     "normalArrowDrawn": true,
+     "normalArrow": {
+      "tailScreenPx": [
+       980,
+       762.6
+      ],
+      "headScreenPx": [
+       980,
+       700.3
+      ],
+      "perpendicularToGround": true,
+      "pointsUp": true,
+      "headAboveBox": true,
+      "labelText": "Normal (N)"
+     },
+     "weightArrow": {
+      "tailScreenPx": [
+       980,
+       833.8
+      ],
+      "headScreenPx": [
+       980,
+       896.1
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "run": "Y1",
+   "what": "normal-force (3-step reply: partial card) and equilibrium (5-step), fixed-before harness",
+   "deployment": "dpl_EBE7hccxEBbr4daYxPCdTUQfMYhF (main 34def29, READY)",
+   "at": "2026-10-09T08:48:42.421Z",
+   "rows": [
+    {
+     "conceptId": "phys.mech.normal-force",
+     "viewport": "mobile",
+     "theme": "dark",
+     "verdict": "FAIL",
+     "fails": [
+      "CT-01 \"Applied\" has 3.99:1 against its backdrop (needs 4.5:1)",
+      "CT-01 \"Friction\" has 3.61:1 against its backdrop (needs 4.5:1)"
+     ],
+     "reviews": [],
+     "repliesSegments": 5,
+     "attempts": 4,
+     "normalArrowDrawn": false
+    },
+    {
+     "conceptId": "phys.mech.normal-force",
+     "viewport": "mobile",
+     "theme": "light",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": [],
+     "repliesSegments": 5,
+     "attempts": 4,
+     "normalArrowDrawn": false
+    },
+    {
+     "conceptId": "phys.mech.normal-force",
+     "viewport": "desktop-column",
+     "theme": "dark",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": [],
+     "repliesSegments": 5,
+     "attempts": 4,
+     "normalArrowDrawn": false
+    },
+    {
+     "conceptId": "phys.mech.normal-force",
+     "viewport": "desktop-column",
+     "theme": "light",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": [],
+     "repliesSegments": 5,
+     "attempts": 4,
+     "normalArrowDrawn": false
+    },
+    {
+     "conceptId": "phys.mech.equilibrium",
+     "viewport": "mobile",
+     "theme": "dark",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": [],
+     "repliesSegments": 5,
+     "attempts": 1,
+     "normalArrowDrawn": true,
+     "normalArrow": {
+      "tailScreenPx": [
+       195,
+       1124.4
+      ],
+      "headScreenPx": [
+       195,
+       1084.9
+      ],
+      "perpendicularToGround": true,
+      "pointsUp": true,
+      "headAboveBox": true,
+      "labelText": "Normal (N)"
+     },
+     "weightArrow": {
+      "tailScreenPx": [
+       195,
+       1169.4
+      ],
+      "headScreenPx": [
+       195,
+       1208.9
+      ]
+     }
+    },
+    {
+     "conceptId": "phys.mech.equilibrium",
+     "viewport": "mobile",
+     "theme": "light",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": [],
+     "repliesSegments": 5,
+     "attempts": 1,
+     "normalArrowDrawn": true,
+     "normalArrow": {
+      "tailScreenPx": [
+       195,
+       1124.4
+      ],
+      "headScreenPx": [
+       195,
+       1084.9
+      ],
+      "perpendicularToGround": true,
+      "pointsUp": true,
+      "headAboveBox": true,
+      "labelText": "Normal (N)"
+     },
+     "weightArrow": {
+      "tailScreenPx": [
+       195,
+       1169.4
+      ],
+      "headScreenPx": [
+       195,
+       1208.9
+      ]
+     }
+    },
+    {
+     "conceptId": "phys.mech.equilibrium",
+     "viewport": "desktop-column",
+     "theme": "dark",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": [],
+     "repliesSegments": 5,
+     "attempts": 1,
+     "normalArrowDrawn": true,
+     "normalArrow": {
+      "tailScreenPx": [
+       980,
+       729.7
+      ],
+      "headScreenPx": [
+       980,
+       667.4
+      ],
+      "perpendicularToGround": true,
+      "pointsUp": true,
+      "headAboveBox": true,
+      "labelText": "Normal (N)"
+     },
+     "weightArrow": {
+      "tailScreenPx": [
+       980,
+       800.9
+      ],
+      "headScreenPx": [
+       980,
+       863.2
+      ]
+     }
+    },
+    {
+     "conceptId": "phys.mech.equilibrium",
+     "viewport": "desktop-column",
+     "theme": "light",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": [],
+     "repliesSegments": 5,
+     "attempts": 1,
+     "normalArrowDrawn": true,
+     "normalArrow": {
+      "tailScreenPx": [
+       980,
+       729.7
+      ],
+      "headScreenPx": [
+       980,
+       667.4
+      ],
+      "perpendicularToGround": true,
+      "pointsUp": true,
+      "headAboveBox": true,
+      "labelText": "Normal (N)"
+     },
+     "weightArrow": {
+      "tailScreenPx": [
+       980,
+       800.9
+      ],
+      "headScreenPx": [
+       980,
+       863.2
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "run": "X3",
+   "what": "phys.opt.lens-power",
+   "deployment": "dpl_EBE7hccxEBbr4daYxPCdTUQfMYhF (main 34def29, READY)",
+   "at": "2026-10-09T05:26:04.547Z",
+   "rows": [
+    {
+     "conceptId": "phys.opt.lens-power",
+     "viewport": "mobile",
+     "theme": "dark",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": [],
+     "repliesSegments": 14,
+     "attempts": 1
+    },
+    {
+     "conceptId": "phys.opt.lens-power",
+     "viewport": "mobile",
+     "theme": "light",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": [],
+     "repliesSegments": 14,
+     "attempts": 1
+    },
+    {
+     "conceptId": "phys.opt.lens-power",
+     "viewport": "desktop-column",
+     "theme": "dark",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": [],
+     "repliesSegments": 14,
+     "attempts": 1
+    },
+    {
+     "conceptId": "phys.opt.lens-power",
+     "viewport": "desktop-column",
+     "theme": "light",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": [],
+     "repliesSegments": 14,
+     "attempts": 1
+    }
+   ]
+  },
+  {
+   "run": "N3 (PRE head-clip fix)",
+   "what": "phys.mech.normal-force, deployment BEFORE the weight-head fix (groundY 130); PASS here missed the clipped weight head, which was found by viewing the screenshots",
+   "deployment": "a production build from before the weight-head fix (72c25ec)",
+   "at": "2026-10-09T04:24:47.728Z",
+   "rows": [
+    {
+     "conceptId": "phys.mech.normal-force",
+     "viewport": "mobile",
+     "theme": "dark",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": [],
+     "repliesSegments": 5,
+     "attempts": 1,
+     "normalArrowDrawn": true,
+     "normalArrow": {
+      "tailScreenPx": [
+       195,
+       1173.5
+      ],
+      "headScreenPx": [
+       195,
+       1134.1
+      ],
+      "perpendicularToGround": true,
+      "pointsUp": true,
+      "headAboveBox": true,
+      "labelText": "Normal (N)"
+     },
+     "weightArrow": {
+      "tailScreenPx": [
+       195,
+       1218.6
+      ],
+      "headScreenPx": [
+       195,
+       1258
+      ]
+     }
+    },
+    {
+     "conceptId": "phys.mech.normal-force",
+     "viewport": "mobile",
+     "theme": "light",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": [],
+     "repliesSegments": 5,
+     "attempts": 1,
+     "normalArrowDrawn": true,
+     "normalArrow": {
+      "tailScreenPx": [
+       195,
+       1173.5
+      ],
+      "headScreenPx": [
+       195,
+       1134.1
+      ],
+      "perpendicularToGround": true,
+      "pointsUp": true,
+      "headAboveBox": true,
+      "labelText": "Normal (N)"
+     },
+     "weightArrow": {
+      "tailScreenPx": [
+       195,
+       1218.6
+      ],
+      "headScreenPx": [
+       195,
+       1258
+      ]
+     }
+    },
+    {
+     "conceptId": "phys.mech.normal-force",
+     "viewport": "desktop-column",
+     "theme": "dark",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": [],
+     "repliesSegments": 5,
+     "attempts": 1,
+     "normalArrowDrawn": true,
+     "normalArrow": {
+      "tailScreenPx": [
+       980,
+       772.4
+      ],
+      "headScreenPx": [
+       980,
+       710.1
+      ],
+      "perpendicularToGround": true,
+      "pointsUp": true,
+      "headAboveBox": true,
+      "labelText": "Normal (N)"
+     },
+     "weightArrow": {
+      "tailScreenPx": [
+       980,
+       843.6
+      ],
+      "headScreenPx": [
+       980,
+       905.9
+      ]
+     }
+    },
+    {
+     "conceptId": "phys.mech.normal-force",
+     "viewport": "desktop-column",
+     "theme": "light",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": [],
+     "repliesSegments": 5,
+     "attempts": 1,
+     "normalArrowDrawn": true,
+     "normalArrow": {
+      "tailScreenPx": [
+       980,
+       772.4
+      ],
+      "headScreenPx": [
+       980,
+       710.1
+      ],
+      "perpendicularToGround": true,
+      "pointsUp": true,
+      "headAboveBox": true,
+      "labelText": "Normal (N)"
+     },
+     "weightArrow": {
+      "tailScreenPx": [
+       980,
+       843.6
+      ],
+      "headScreenPx": [
+       980,
+       905.9
+      ]
+     }
+    }
+   ]
+  }
+ ],
+ "runsRecordedFromLogOnly": [
+  {
+   "concept": "phys.mech.force",
+   "segments": 5,
+   "attempts": 1,
+   "normalArrowDrawn": true,
+   "verdicts": "4/4 PASS (mobile+desktop-column x dark+light)",
+   "source": "x1.log"
+  },
+  {
+   "concept": "phys.mech.free-body-diagram",
+   "segments": 7,
+   "attempts": 1,
+   "normalArrowDrawn": true,
+   "verdicts": "4/4 PASS",
+   "source": "x1.log"
+  },
+  {
+   "concept": "phys.mech.friction",
+   "segments": 5,
+   "attempts": 1,
+   "normalArrowDrawn": true,
+   "verdicts": "4/4 PASS",
+   "source": "x2.log"
+  }
+ ],
+ "harnessFindings": [
+  "The lesson page lists the lesson's messages from EVERY session (history is lesson-scoped; ending a session does not hide it - verified with three sessions, two ended, page still held all three replies), so a retry adds another card. The harness framed document.querySelector(...) = the FIRST card, so 18 retries on normal-force/equilibrium kept measuring the first, short reply (\"normal arrow drawn in the page = false\" every time). Fixed in scripts/qa/physicsProductionBrowserAudit.ts: the LAST card is framed. Retry path verified: equilibrium replies of 3,7,3,9 lines measured a card that draws the normal arrow (the first, 3-line card cannot); normal-force replies 4,6,4,3 measured the last 3-line card and correctly drew no normal arrow. Run Z1 (6-line reply, first attempt) reached all five steps.",
+  "A card shows as many steps as the page's own narration has segments; a 3-sentence reply leaves steps 4-5 unseen. That is the lesson card's design (visualStepForSegment), not a diagram defect; a pass is only claimed for a step that was seen."
+ ],
+ "contrastObservation": "CT-01 FAIL on \"Applied\" (3.99:1 dark / 3.11:1 light) and \"Friction\" (3.61:1 dark / 3.43:1 light) - exactly the authored, un-lifted colours - in 4 of about 40 harness measurements for this closure, each on a page holding several cards (retries), measured on an OLDER card (the harness framed the first card). ROOT CAUSE (reproduced in production, offscreen probe): useFigureLegibility finds the text backdrop with document.elementsFromPoint, which only hits what is inside the viewport; a card mounted outside the viewport (an older figure above the fold of a restored lesson) gets no contrast lift and nothing re-runs the pass when it is scrolled into view (three cards on a 390x844 page: the in-view card lifted, the two older ones all 'plain', still plain 6 s after scrolling the first into view). Pre-existing, in shared code used by every subject's 2D figures; NOT fixed in this closure - owner decision (proposed fix: re-run the pass when the figure enters the viewport, an IntersectionObserver in the hook). Every single-card page lifted (run Z1, the Y1 equilibrium run of one attempt, the one-attempt probe, 18 direct probes).",
+ "disposableAccounts": "every run ended with \"disposable account deleted = true\"; two accounts orphaned when a worker restart killed runs X1/X2 were found by email pattern, logged into with the generated credentials and deleted through DELETE /api/user/delete-account (deleted=true, relogin blocked)."
+}

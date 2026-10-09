@@ -17,13 +17,21 @@ import { useLanguage } from '@/components/ui/LanguageToggle'
  *    for friction holding a body still;
  *  - the body floated 20 units above the ground, so the "normal force from the surface"
  *    had no contact to come from.
+ * And one thing the first FIX got wrong, seen only in the deployed page: seating the body on the ground
+ * (y = 130) pushed the weight arrow's head 5 units past the bottom of the 170-unit drawing, where it was
+ * cut flat. Each arrow's head extends HEAD_REACH beyond the end of its line (markers scale with the
+ * stroke), so the ground is now 120 and every head lies inside the drawing.
  */
 export const FORCE_DIAGRAM = {
   cx: 150, boxW: 60, boxH: 40,
   /** The ground line; the body's underside sits ON it. */
-  groundY: 130,
+  groundY: 120,
   /** One arrow length per force pair, so equal pairs read as balanced. */
   horizontalLen: 45, verticalLen: 35,
+  /** The drawing's own size (its viewBox). */
+  width: 300, height: 170,
+  /** How far an arrow-head's tip lies beyond the end of its line: marker 8 units x stroke 2.5, half of it past the ref point. */
+  headReach: 10,
 } as const
 
 /** A horizontal arrow's label sits this far above its line — clear of the 20-unit arrow-head (markers scale with stroke width). */
@@ -36,7 +44,7 @@ export function ForceDiagram({ revealStep = Infinity }: { revealStep?: number })
   const show = (s: number) => revealStep >= s
 
   return (
-    <svg viewBox="0 0 300 170" width="100%" style={{ maxWidth: 320 }} aria-hidden="true">
+    <svg viewBox={`0 0 ${FORCE_DIAGRAM.width} ${FORCE_DIAGRAM.height}`} width="100%" style={{ maxWidth: 320 }} aria-hidden="true">
       {/* Step 1 — ground + object */}
       {show(1) && (
         <g className={anim.reveal}>
