@@ -2396,6 +2396,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           return phase === 'CHECK' || phase === 'PRACTICE'
         })()
         systemPrompt += buildMcqInstruction({ atMasteryGate: gatePhaseNow })
+        // Owner decision 2026-10-07: worked examples are computed and checked (factCheckPass.ts).
+        systemPrompt += (await import('@/lib/teaching/factCheckPass')).WORKED_EXAMPLE_RULES
+        // CHEM-042 / CHEM-073: the lesson's syllabus line, taught part by part.
+        try {
+          const { getKGNode: kgScope } = await import('@/lib/curriculum/knowledgeGraph')
+          const nodeScope = resolvedConceptId ? kgScope(resolvedConceptId) : null
+          systemPrompt += (await import('@/lib/teaching/lessonDriftGuard')).lessonScopeRule(nodeScope?.title, nodeScope?.description)
+        } catch { /* the prompt is complete without it */ }
 
         // Prose-MCQ guard (defect observed live, 2026-08-16). When the tutor's
         // previous turn asked a multiple-choice question in prose WITHOUT the
@@ -5282,6 +5290,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             ? recordMcqAskedForGate(history, pendingMcqHoisted.question)
             : history
           const probe = await findBestProbe(memoryState, {
+            // CHEM-005: prefer a card about what this lesson has already taught.
+            taughtText: learnSession.messages
+              .filter((m) => m.role === MessageRole.ASSISTANT && typeof m.content === 'string'
+                && (m as { lessonKey?: string | null }).lessonKey === lessonKeyThisTurnHoisted)
+              .map((m) => m.content as string).join('\n'),
             // Never re-ask a question this concept has already spent. 145 of
             // physics's 238 concepts carry only two gradeable authored probes
             // while closing a concept needs three graded answers, so running
@@ -6596,13 +6609,36 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // actively asking it to start; by the third consecutive outage the
           // learner is told plainly that something is wrong on our side.
           const prevOutages = typeof snapshot?.consecutiveOutages === 'number' ? snapshot.consecutiveOutages : 0
-          consecutiveOutagesHoisted = prevOutages + 1
+          // CHEM-107 / MATH-006 / BIO-008 (ten concurrent learners: up to 8
+          // degraded turns in a row, "Let's take one small step together…"):
+          // with every provider down, the concept's own authored explanation
+          // the learner has not yet seen is real teaching that needs no
+          // model. It is served first; the outage copy only when none is left.
+          let authoredOutage: { assetId: string; content: string } | null = null
+          if (resolvedConceptId) {
+            try {
+              const { findUnseenExplanationContent } = await import('@/lib/teaching/assets/explanationMemory')
+              authoredOutage = await findUnseenExplanationContent({
+                conceptId: resolvedConceptId,
+                language: teachingLang,
+                userMessage: message,
+                priorTutorTexts: learnSession.messages
+                  .filter((m) => m.role === MessageRole.ASSISTANT && typeof m.content === 'string')
+                  .map((m) => m.content as string),
+                preferKinds: [],
+              })
+            } catch { authoredOutage = null }
+          }
+          consecutiveOutagesHoisted = authoredOutage ? prevOutages : prevOutages + 1
           const { renderOutage, chooseFallback } = await import('@/lib/kernel/verifier/templateFallback')
-          const outageText = renderOutage(
-            consecutiveOutagesHoisted,
-            chooseFallback(['SHOW_EASIEST_LEGAL']),
-            { register: contentRegister, learnerText: message },
-          )
+          const outageText = authoredOutage
+            ? authoredOutage.content.trim()
+            : renderOutage(
+              consecutiveOutagesHoisted,
+              chooseFallback(['SHOW_EASIEST_LEGAL']),
+              { register: contentRegister, learnerText: message },
+            )
+          console.log('[outage-authored] ' + JSON.stringify({ conceptId: resolvedConceptId ?? null, served: authoredOutage !== null, assetId: authoredOutage?.assetId ?? null }))
           routed = { text: outageText, provider: degraded.provider, finishReason: degraded.finishReason }
         }
         text = routed.text
@@ -6709,7 +6745,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // all is a failure" (masteryReachability).
       let modelProbeWithheld: import('@/lib/teaching/inventedProbeGuard').ModelProbeVerdict | null = null
       {
-        const { decideModelProbe } = await import('@/lib/teaching/inventedProbeGuard')
+        const { decideModelProbe, AUTHORED_CARDS_ONLY } = await import('@/lib/teaching/inventedProbeGuard')
         // A LEARNER'S EXACT QUESTION MUST NOT COME BACK VERBATIM. Real-
         // student session (2026-09): the model confirmed a just-graded
         // correct answer and, in the SAME reply, wrote out the identical
@@ -6720,6 +6756,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // a model-WRITTEN tag until now.
         const { hasAskedMcq: hasAskedMcqForModelProbe } = await import('@/lib/teaching/teachingHistory')
         const d = decideModelProbe({
+          authoredCardsOnly: AUTHORED_CARDS_ONLY,
           // The ORIGINAL predicate, deliberately NOT the gate's E1-widened
           // copy: GUIDE and the mastery gates only. See the field's own note.
           probeWouldCountThisPhase: probeWouldCountThisPhaseHoisted,
@@ -7807,6 +7844,20 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         resolvedGrade !== null && resolvedGrade.kind === 'graded' && mayStateVerdict(resolvedGrade)
           ? resolvedGrade
           : null
+      // CHEM-004 / BIO-019 (owner, 2026-10-07): a 2-option card is practice only
+      // where the concept holds enough 3+-option authored cards to reach
+      // verified mastery without it. Read only when a 2-option card was graded.
+      let threePlusOptionPoolHoisted: number | null = null
+      if (gradeForVerdict !== null && resolvedConceptId && Array.isArray(pendingMcqHoisted?.options)
+        && pendingMcqHoisted.options.length < 3) {
+        threePlusOptionPoolHoisted = await (await import('@/lib/teaching/assets/probePool'))
+          .countThreePlusOptionProbes(resolvedConceptId, teachingLang)
+      }
+      // The ONE derivation of "this turn may bank a verified mastery credit",
+      // read by both folds and the [ladder] log: certifies(resolvedGrade),
+      // narrowed by the 2-option rule above.
+      const certifiedForMastery: boolean = (await import('@/lib/teaching/turnContract'))
+        .certifiesMastery(resolvedGrade, pendingMcqHoisted?.options?.length ?? null, threePlusOptionPoolHoisted)
       // `signalVerificationStatusHoisted` is RESULT-classified but both its
       // writes (L6514/L6562-ish, both inside this same D1 block) happen
       // BEFORE the delivery-compile point — the same "safe to migrate"
@@ -9914,7 +9965,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // the proof. `masteryCounterInvariant.test.ts` and A4 (design doc
             // §5.1) both depend on this field; re-verified unchanged by this
             // substitution, not just asserted.
-            serverGraded: certifies(resolvedGrade),
+            // + CHEM-004/BIO-019 (owner, 2026-10-07): a 2-option card is practice only.
+            serverGraded: certifiedForMastery,
             // Counted, never credited — see the downgrade above.
             unauthoredKey: resolvedGrade !== null && !certifies(resolvedGrade),
             parityViolation: parityViolationThisTurn,
@@ -10077,7 +10129,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // already-hoisted values the fold used — no second calculation.
             verifiedCheck: conversationStateAfterTurnHoisted?.verifiedCorrectAtCheck ?? null,
             verifiedPractice: conversationStateAfterTurnHoisted?.verifiedCorrectAtPractice ?? null,
-            serverGraded: certifies(resolvedGrade),
+            serverGraded: certifiedForMastery,
             // ── PHASE 7N-2: WHY `move` WAS WHAT IT WAS ──────────────────────
             //
             // Phase 7M-B proved, in production, that a learner can ask to be
@@ -11309,7 +11361,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             console.log('[empathy-opener-cap] stripped a repeated or unprompted empathy opener')
             cleanText = emp.text
           }
-          if (caps.usesAnalogy(cleanText) && caps.analogyCapReached(priorTutor, learnSession.subject.slug === 'mathematics' ? 1 : 2)) {
+          // CHEM-040 / CHEM-055: "i dont understand / why? / explain simpler"
+          // answered with a fourth relay-baton analogy — one analogy in four
+          // replies for every subject (was two outside mathematics).
+          if (caps.usesAnalogy(cleanText) && caps.analogyCapReached(priorTutor, 1)) {
             const retry = await regenerateWithAppendix(caps.NO_ANALOGY_APPENDIX)
             const kept = retry && !caps.usesAnalogy(retry) && (retry.match(/\S+/g) ?? []).length >= 12
             console.log('[analogy-cap] ' + JSON.stringify({ regenerated: true, kept }))
@@ -12531,7 +12586,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // fold above). Same source, so both folds agree on whether this
               // turn may bank a verified mastery credit. `certifies(resolvedGrade)`
               // — see the primary fold's Batch 3 comment for the proof.
-              serverGraded: certifies(resolvedGrade),
+              // + CHEM-004/BIO-019: same 2-option rule as the primary fold.
+              serverGraded: certifiedForMastery,
               parityViolation: !!(resolvedEvidenceMove === 'ask' && !fallbackAskedQ),
               // Same guard as the upstream fold — the two must not disagree
               // about whether an outage template taught anything.
@@ -13474,10 +13530,50 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             const asked = readsAsRequestToTutor(learnerAuthoredMessage) || detectLearnerRequest(learnerAuthoredMessage) !== null
               || adaptationKind(learnerAuthoredMessage) !== null || asksForPractice(learnerAuthoredMessage)
               || hy.isBareWhyQuestion(learnerAuthoredMessage)
+              // CHEM-031: "ok" -> "test2, that's correct—iron fills the 3d subshell…"
+              || hy.isPlainAcknowledgement(learnerAuthoredMessage)
             if (asked) {
               const v = hy.dropVerdictOnUngradedRequest(cleanText)
               if (v.dropped) { cleanText = v.text; done.push('verdict-on-request') }
             }
+            // CHEM-103: an answer the server marked wrong in this lesson is not
+            // praised later ("`rate = k[A][B]`, which is exactly the correct form…").
+            const wrongAnswers: string[] = []
+            const msgs = learnSession.messages
+            for (let i = 0; i + 1 < msgs.length; i++) {
+              const m = msgs[i], prev = msgs[i + 1]
+              if ((m as { lessonKey?: string | null }).lessonKey !== resolvedLessonKeyThisTurn) continue
+              if (m.role === MessageRole.ASSISTANT && typeof m.content === 'string' && /^\s*not quite\b/i.test(m.content)
+                && prev.role === MessageRole.USER && typeof prev.content === 'string') wrongAnswers.push(prev.content)
+            }
+            const praise = hy.dropPraiseOfCorrectedAnswer(cleanText, wrongAnswers)
+            if (praise.dropped.length > 0) { cleanText = praise.text; done.push('praise-of-corrected-answer') }
+          }
+          // CHEM-047: "the van Waals equation" — a word of the lesson's own
+          // name dropped; put back from the KG title.
+          try {
+            const { getKGNode: kgTw } = await import('@/lib/curriculum/knowledgeGraph')
+            const tw = hy.restoreTitleWords(cleanText, resolvedConceptId ? kgTw(resolvedConceptId)?.title : null)
+            if (tw.repaired) { cleanText = tw.text; done.push('title-words') }
+          } catch { /* keep the reply */ }
+          // CHEM-133 / BIO-023 / CHEM-073: a reply to "ok" / "next" / "give me
+          // example" that names nothing of the lesson drifted off it (metallic
+          // bonding in Crystal Systems; musical rhythm in Human Reproduction).
+          // One regeneration with the lesson stated, kept only if on the lesson.
+          if (mcqGradeHoisted === null && !mcqHoisted) {
+            try {
+              const dg = await import('@/lib/teaching/lessonDriftGuard')
+              const { getKGNode: kgDg } = await import('@/lib/curriculum/knowledgeGraph')
+              const nodeDg = resolvedConceptId ? kgDg(resolvedConceptId) : null
+              const { splitVisualPointer: splitDg } = await import('@/lib/teaching/visual/visualAcknowledgement')
+              const partsDg = splitDg(cleanText)
+              if (nodeDg && dg.isOffLesson({ learnerMessage: learnerAuthoredMessage, reply: partsDg.body, conceptTitle: nodeDg.title, conceptDescription: nodeDg.description })) {
+                const retry = await regenerateWithAppendix(dg.stayOnLessonAppendix(nodeDg.title, nodeDg.description))
+                const kept = !!retry && dg.mentionsConcept(retry, dg.conceptAnchors(nodeDg.title, nodeDg.description))
+                console.log('[lesson-drift] ' + JSON.stringify({ conceptId: resolvedConceptId, regenerated: true, kept }))
+                if (kept) { cleanText = partsDg.pointer ? `${retry}\n\n${partsDg.pointer}` : retry; done.push('lesson-drift') }
+              }
+            } catch { /* keep the reply */ }
           }
           // MATH-002 residual (2026-10-06, after the 10:08 deploy: 41 of 1,198
           // server-graded wrong answers): the analogy and shape regenerations
@@ -13490,10 +13586,42 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             const restored = hy.restoreServerVerdict(cleanText, gradeForVerdict.correct, pendingMcqHoisted.options[pendingMcqHoisted.correctIndex] ?? null)
             if (restored !== cleanText) { cleanText = restored; done.push('verdict-restored') }
           }
+          // Owner decision 2026-10-07 (CHEM-048 / PHYS-020): only authored
+          // cards are asked — a multiple-choice question written into the
+          // prose has no reviewed key and goes; the teaching stays.
+          const { stripProseMultipleChoice } = await import('@/lib/teaching/proseMcqGuard')
+          const prose = stripProseMultipleChoice(cleanText)
+          if (prose.stripped) { cleanText = prose.text; done.push('prose-multiple-choice') }
           const orphan = hy.dropOrphanConditionalOpener(cleanText)
           if (orphan.dropped) { cleanText = orphan.text; done.push('orphan-conditional') }
           const bal = hy.balanceMathDelimiters(cleanText)
           if (bal.repaired) { cleanText = bal.text; done.push('math-delimiters') }
+          // ── THE CHECK PASS (owner decision 2026-10-07; factCheckPass.ts) ──
+          // A reply carrying numbers, equations or a worked example is
+          // recomputed by a second call and replaced only by a corrected copy
+          // of itself; any failure keeps the reply (≈50 logged factual
+          // defects: MATH-007/008, CHEM-007…145, BIO-009…041).
+          try {
+            const fc = await import('@/lib/teaching/factCheckPass')
+            const { getKGNode: kgFc } = await import('@/lib/curriculum/knowledgeGraph')
+            const { splitVisualPointer: splitFc } = await import('@/lib/teaching/visual/visualAcknowledgement')
+            const parts = splitFc(cleanText)
+            const r = await fc.runFactCheckPass({
+              text: parts.body,
+              conceptTitle: resolvedConceptId ? (kgFc(resolvedConceptId)?.title ?? null) : null,
+              ask: async (system, user) => {
+                llmCallCount++ // instrumentation only (check pass)
+                const routedFc = await routeAI([{ role: 'user', content: user }], system, country, 2048, teachingLang,
+                  { userId, subject: learnSession.subject.slug }, groqModelOverride, undefined, forceProvider)
+                return routedFc.text ?? null
+              },
+            })
+            console.log('[fact-check-pass] ' + JSON.stringify({ conceptId: resolvedConceptId ?? null, checked: r.checked, corrected: r.corrected, reason: r.reason }))
+            if (r.corrected) {
+              cleanText = parts.pointer ? `${r.text}\n\n${parts.pointer}` : r.text
+              done.push('fact-check-corrected')
+            }
+          } catch { /* the check never breaks a turn */ }
           if (done.length > 0) console.log('[reply-hygiene] ' + JSON.stringify({ conceptId: resolvedConceptId ?? null, done }))
         } catch { /* a wording repair never breaks a turn */ }
       }
@@ -13639,7 +13767,13 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 source: authored ? 'authored' : regenerated ? 'regenerated' : null, wasFallback: isFallback,
                 stubChars: trimmedBody.length, assetId: authored?.assetId ?? null,
               }))
-              const floorText = authored?.content.trim() ?? regenerated
+              let floorText = authored?.content.trim() ?? regenerated
+              // "quiz me" with every authored card for this concept already
+              // used (owner decision 2026-10-07: only authored cards are asked)
+              // is told so, instead of being promised a question that never comes.
+              if (floorText && asksForPractice(learnerAuthoredMessage) && authoredPoolExhaustedHoisted && node?.title) {
+                floorText = `You have answered every practice question I have on ${node.title} in this lesson, so here is the idea once more.\n\n${floorText}`
+              }
               if (floorText) cleanText = pointer ? `${floorText}\n\n${pointer}` : floorText
             }
           }

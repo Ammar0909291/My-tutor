@@ -93,7 +93,9 @@ function processFlow(ctx: ArchetypeContext, orientation: 'vertical' | 'horizonta
   const spec = parseVisualSpec({
     type: 'process_flow',
     title: clamp(ctx.title, 80),
-    steps: steps.slice(0, 12).map((s) => ({ title: s })),
+    // A step longer than a box title (60) keeps a short title with an
+    // ellipsis and its full wording in the note, never a cut-off phrase.
+    steps: steps.slice(0, 12).map((s) => (s.length <= 60 ? { title: s } : { title: `${clamp(s, 58)}…`, note: s })),
     orientation,
   })
   return spec ? { renderer: 'spec', visualSpec: spec } : null

@@ -135,6 +135,39 @@ export function hasProseMultipleChoice(text: string): boolean {
 }
 
 /**
+ * OWNER DECISION (2026-10-07, CHEM-048 / PHYS-020 / MATH-002): only authored
+ * cards are asked. A multiple-choice question the model writes into its prose
+ * ("Which of these…? A) … B) … C) …") has no reviewed key, so it is removed:
+ * every lettered option line, every sentence carrying an inline A)…B) run,
+ * and the question sentence that introduced them. The teaching around it
+ * stays. Returns the text unchanged when there is no prose multiple choice.
+ */
+export function stripProseMultipleChoice(text: string): { text: string; stripped: boolean } {
+  if (!hasProseMultipleChoice(text)) return { text, stripped: false }
+  const paras = text.split(/\n{2,}/)
+  const out: string[] = []
+  for (const para of paras) {
+    const lines = para.split('\n')
+    const optionLines = lines.filter((l) => OPTION_LINE.test(l))
+    let kept = lines.filter((l) => !OPTION_LINE.test(l)).join('\n')
+    // Sentences with an inline lettered run.
+    const sentences = kept.match(/(?:[^.!?\n]|[.!?](?=\S))+(?:[.!?]+|$)/g) ?? [kept]
+    const inline = sentences.filter((s) => { INLINE_OPTION_RE.lastIndex = 0; let n = 0; while (INLINE_OPTION_RE.exec(s)) n++; return n >= 2 })
+    kept = sentences.filter((s) => !inline.includes(s)).join('').trim()
+    if (optionLines.length >= 2 || inline.length > 0) {
+      // The question that introduced the options is the last question left.
+      const sents = kept.match(/(?:[^.!?\n]|[.!?](?=\S))+(?:[.!?]+|$)/g) ?? []
+      let lastQ = -1
+      sents.forEach((s, i) => { if (/\?\s*$/.test(s)) lastQ = i })
+      if (lastQ >= 0) sents.splice(lastQ, 1)
+      kept = sents.join('').trim()
+    }
+    if (kept) out.push(kept)
+  }
+  return { text: out.join('\n\n').trim(), stripped: true }
+}
+
+/**
  * A one-line prompt directive that the model can read when the PREVIOUS turn
  * asked a prose-only MCQ. The suppression above prevents false evidence from
  * being written; this reduces the harm the LEARNER SEES by asking the model

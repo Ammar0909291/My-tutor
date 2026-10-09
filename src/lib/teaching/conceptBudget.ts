@@ -137,8 +137,27 @@ export function qualifiesForBudgetExtension(state: ConversationState): boolean {
 /** The turn allowance in force for this concept, base plus any granted
  *  extension. The ONLY place the extension changes behaviour. */
 export function effectiveTurnBudget(state: ConversationState): number {
+  if (STAY_UNTIL_MASTERY) return ABSOLUTE_TURN_CEILING
+  return legacyTurnBudget(state)
+}
+
+/** The 12-turn base plus the one-time extension — the allowance before the
+ *  2026-10-07 stay-until-mastery decision, kept for when it is switched off. */
+export function legacyTurnBudget(state: ConversationState): number {
   return CONCEPT_TURN_BUDGET + (state.budgetExtensionGranted ? BUDGET_EXTENSION_TURNS : 0)
 }
+
+/**
+ * OWNER DECISION (2026-10-07, MATH-001: 387 of 908 mathematics lessons closed
+ * "Let's pause … on pause — you haven't mastered it yet", 173 of them on the
+ * learner's "continue"): a learner who is still engaged stays in the lesson
+ * until mastery is verified or the absolute ceiling. The turn allowance is
+ * therefore the ceiling itself; the attempts and failures exits (a learner
+ * failing repeatedly under assessment) still move the concept to review, and
+ * an explicit stop still ends the session. The 12 + 6 budget and its
+ * extension remain defined for the switch-off case.
+ */
+export const STAY_UNTIL_MASTERY = true
 
 /**
  * The absolute ceiling on ALL turns spent on one concept, learner-initiated
@@ -147,6 +166,9 @@ export function effectiveTurnBudget(state: ConversationState): number {
  * questions a learner asks, a concept still closes by here.
  */
 export const ABSOLUTE_TURN_CEILING = 2 * CONCEPT_TURN_BUDGET + BUDGET_EXTENSION_TURNS
+
+/** The turn allowance a concept actually gets under the policy in force. */
+export const TURN_BUDGET_IN_FORCE: number = STAY_UNTIL_MASTERY ? ABSOLUTE_TURN_CEILING : CONCEPT_TURN_BUDGET
 
 /** Consecutive failures after which continuing is more costly than moving on. */
 export const MAX_CONSECUTIVE_FAILURES = 3

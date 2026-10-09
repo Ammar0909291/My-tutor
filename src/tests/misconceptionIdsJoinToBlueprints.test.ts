@@ -905,7 +905,8 @@ describe('probes whose id joined but whose content did not', () => {
 
     expect(tagOf('chem.elect.corrosion', 'tinned) steel can')).toEqual(['MC1'])
     expect(tagOf('chem.elect.corrosion', 'drop of water sits on an iron plate')).toEqual(['MC2'])
-    expect(tagOf('chem.elect.corrosion', '"cathodic protection" is so called')).toEqual(['MC3'])
+    // CHEM-081 (2026-10-07): the stem was reworded to one unambiguous statement.
+    expect(tagOf('chem.elect.corrosion', 'in cathodic protection, the steel being protected is made the cathode')).toEqual(['MC3'])
 
     expect(tagOf('chem.elect.conductance', 'Kohlrausch')).toEqual(['MC2'])
 

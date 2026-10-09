@@ -4,7 +4,7 @@ import {
   type ConversationState, type TurnEvidence,
 } from '@/lib/teaching/conversationState'
 import {
-  CONCEPT_TURN_BUDGET, MAX_TEACHING_ATTEMPTS, MAX_CONSECUTIVE_FAILURES,
+  TURN_BUDGET_IN_FORCE, MAX_TEACHING_ATTEMPTS, MAX_CONSECUTIVE_FAILURES,
   evaluateConceptBudget, hasDemonstratedMastery, questionPurpose, buildLessonFlowBlock,
 } from '@/lib/teaching/conceptBudget'
 import {
@@ -49,12 +49,12 @@ describe('evaluateConceptBudget', () => {
   })
 
   it('warns before cutting off, so the concept can be closed deliberately', () => {
-    expect(evaluateConceptBudget(st({ turnsOnConcept: CONCEPT_TURN_BUDGET - 1 })).status)
+    expect(evaluateConceptBudget(st({ turnsOnConcept: TURN_BUDGET_IN_FORCE - 1 })).status)
       .toBe('final_attempt')
   })
 
   it('exhausts on turns and marks for review', () => {
-    const b = evaluateConceptBudget(st({ turnsOnConcept: CONCEPT_TURN_BUDGET }))
+    const b = evaluateConceptBudget(st({ turnsOnConcept: TURN_BUDGET_IN_FORCE }))
     expect(b.status).toBe('exhausted')
     expect(b.reason).toBe('turns')
     expect(b.markForReview).toBe(true)
@@ -94,7 +94,7 @@ describe('evaluateConceptBudget', () => {
   it('the turns backstop still closes an unassessed learner — no infinite loop', () => {
     const b = evaluateConceptBudget(st({
       consecutiveFailures: MAX_CONSECUTIVE_FAILURES, correctAtCheck: 0, correctAtPractice: 0,
-      turnsOnConcept: CONCEPT_TURN_BUDGET,
+      turnsOnConcept: TURN_BUDGET_IN_FORCE,
     }))
     expect(b.status).toBe('exhausted')
     expect(b.reason).toBe('turns')
@@ -117,7 +117,7 @@ describe('evaluateConceptBudget', () => {
     // comment describes — matching the same convention every `conceptOutcome`
     // fixture in this file already uses.
     const b = evaluateConceptBudget(st({
-      turnsOnConcept: CONCEPT_TURN_BUDGET + 5,
+      turnsOnConcept: TURN_BUDGET_IN_FORCE + 5,
       remediationCount: 9,
       consecutiveFailures: 0,
       correctAtCheck: 1,
@@ -129,7 +129,7 @@ describe('evaluateConceptBudget', () => {
 
   it('reports remaining turns and never goes negative', () => {
     expect(evaluateConceptBudget(st({ turnsOnConcept: 3 })).turnsRemaining)
-      .toBe(CONCEPT_TURN_BUDGET - 3)
+      .toBe(TURN_BUDGET_IN_FORCE - 3)
     expect(evaluateConceptBudget(st({ turnsOnConcept: 999 })).turnsRemaining).toBe(0)
   })
 })
@@ -193,12 +193,12 @@ describe('buildLessonFlowBlock', () => {
   })
 
   it('announces the final attempt', () => {
-    expect(buildLessonFlowBlock(st({ turnsOnConcept: CONCEPT_TURN_BUDGET - 1 })))
+    expect(buildLessonFlowBlock(st({ turnsOnConcept: TURN_BUDGET_IN_FORCE - 1 })))
       .toMatch(/LAST attempt/)
   })
 
   it('closes the concept and moves on when the budget is spent', () => {
-    const block = buildLessonFlowBlock(st({ turnsOnConcept: CONCEPT_TURN_BUDGET }))
+    const block = buildLessonFlowBlock(st({ turnsOnConcept: TURN_BUDGET_IN_FORCE }))
     expect(block).toMatch(/budget for this concept is SPENT/)
     expect(block).toMatch(/move to the next concept/)
     expect(block).toMatch(/Do NOT ask another question/)
@@ -209,7 +209,7 @@ describe('buildLessonFlowBlock', () => {
     // marks a MASTERED concept for review" test above — `correctAtCheck: 1`
     // makes this the genuinely, reachably mastered state the test describes.
     const block = buildLessonFlowBlock(st({
-      turnsOnConcept: CONCEPT_TURN_BUDGET + 3, correctAtCheck: 1, correctAtPractice: 2,
+      turnsOnConcept: TURN_BUDGET_IN_FORCE + 3, correctAtCheck: 1, correctAtPractice: 2,
     }))
     expect(block).not.toMatch(/SPENT/)
   })

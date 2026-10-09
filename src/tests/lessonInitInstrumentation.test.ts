@@ -79,7 +79,8 @@ describe('4 — instrumentation introduces no provider call', () => {
     // conditional — so the guard is asserted alongside the count. Relaxing the
     // count to "at least one" would have hidden exactly what this test exists
     // to catch.
-    expect((INIT.match(/await routeAI\(/g) ?? []).length).toBe(2)
+    // 2 -> 3 (2026-10-07, owner decision): the check pass on the opening (factCheckPass.ts).
+    expect((INIT.match(/await routeAI\(/g) ?? []).length).toBe(3)
     expect(INIT).toContain('if (isNavigationRefusalOpening(routed.text))')
   })
 
@@ -103,7 +104,8 @@ describe('4 — instrumentation introduces no provider call', () => {
     // 8 -> 9 (2026-10-05, CHEM-015/CHEM-039): one shared regeneration with an appendix
     // (regenerateWithAppendix) for an unhonoured "with numbers"/"step by step" request
     // and for the analogy cap; kept only if the retry complies.
-    expect((CHAT.match(/await routeAI\(/g) ?? []).length).toBe(9)
+    // 9 -> 10 (2026-10-07, owner decision): the check pass (factCheckPass.ts).
+    expect((CHAT.match(/await routeAI\(/g) ?? []).length).toBe(10)
   })
 })
 

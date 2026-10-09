@@ -207,20 +207,12 @@ describe('the MCQ tag is mandatory at a mastery gate', () => {
     }
   })
 
-  it('says WHY, so the model is not merely being told to obey a format', () => {
+  it('at a gate the server attaches the authored card; the model writes none (owner decision 2026-10-07)', () => {
+    // Was: the gate clause told the model its prose question "cannot be
+    // recorded" and the tag was mandatory. Only authored cards are asked now,
+    // and the gate's own authored probe is attached by the server.
     const gate = buildMcqInstruction({ atMasteryGate: true })
-    expect(gate).toContain('MASTERY CHECK DUE THIS TURN')
-    expect(gate).toContain('cannot be recorded')
-    expect(gate).toContain('cannot advance')
-  })
-
-  it('never weakens the base contract', () => {
-    const base = buildMcqInstruction()
-    const gate = buildMcqInstruction({ atMasteryGate: true })
-    expect(base).not.toContain('MASTERY CHECK DUE')
-    expect(gate).toContain('ASSESSMENT FORMAT (mandatory)')
-    // The gate clause is additive — every rule in the base contract survives.
-    expect(gate.length).toBeGreaterThan(base.length)
-    expect(gate.endsWith(base)).toBe(true)
+    expect(gate).toBe(buildMcqInstruction())
+    expect(gate).toMatch(/do NOT write multiple-choice questions/)
   })
 })

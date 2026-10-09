@@ -667,7 +667,21 @@ export function signalFromGrade(
  * carve-outs are the cases where forcing options would destroy the
  * pedagogy the engine depends on elsewhere.
  */
+/** Owner decision 2026-10-07: the model never writes a quiz card. */
+export const AUTHORED_CARDS_ONLY_PROMPT = true
+export const AUTHORED_ONLY_INSTRUCTION =
+  '\n\nQUIZ CARDS (mandatory): do NOT write multiple-choice questions, quiz cards, '
+  + 'lettered options (A) B) C)) or an <!--MCQ--> tag. The app attaches its own reviewed '
+  + 'question card when one is due. Never announce a question that you are not asking '
+  + '("here is a quick check", "try this question") — if a card is attached, the app '
+  + 'introduces it. You may end with at most one short open question when it helps.'
+
 export function buildMcqInstruction(opts: { atMasteryGate?: boolean } = {}): string {
+  // OWNER DECISION (2026-10-07, CHEM-048 / PHYS-020 / MATH-002): only
+  // authored cards are asked. The server attaches the reviewed card; a card the
+  // model writes is never shown (inventedProbeGuard AUTHORED_CARDS_ONLY), so the
+  // model is told not to write one — and not to announce one either.
+  if (AUTHORED_CARDS_ONLY_PROMPT) return AUTHORED_ONLY_INSTRUCTION
   // AT A MASTERY GATE THE TAG IS NOT OPTIONAL.
   //
   // Measured in production, corpus audit Topic 3: at phase GUIDE the tutor

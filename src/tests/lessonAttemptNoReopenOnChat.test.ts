@@ -37,7 +37,7 @@ import {
 import { recordConceptOutcome, isConceptClosed } from '@/lib/teaching/lessonAttempt'
 import { shouldFinalizeLesson, requiredConceptsForLesson } from '@/lib/teaching/lessonCompletion'
 import { initialConversationState, type ConversationState } from '@/lib/teaching/conversationState'
-import { CONCEPT_TURN_BUDGET } from '@/lib/teaching/conceptBudget'
+import { TURN_BUDGET_IN_FORCE } from '@/lib/teaching/conceptBudget'
 
 function fakeDb() {
   const rows: any[] = []
@@ -72,7 +72,7 @@ const CONCEPT = 'phys.meas.units'
  *  nothing mastered, the concept flagged for review. */
 const CLOSED: ConversationState = {
   ...initialConversationState(CONCEPT),
-  turnsOnConcept: CONCEPT_TURN_BUDGET,
+  turnsOnConcept: TURN_BUDGET_IN_FORCE,
 }
 
 /** One chat turn's outcome-recording, as route.ts performs it. `lessonClosed`

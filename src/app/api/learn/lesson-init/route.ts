@@ -475,7 +475,16 @@ export async function POST(req: Request) {
       llmCallCount++
       routed = await routeAI(
         [...historyMessages, { role: 'user', content: instruction }],
-        systemPrompt,
+        // Owner decision 2026-10-07: worked examples are computed and checked.
+        systemPrompt + (await import('@/lib/teaching/factCheckPass')).WORKED_EXAMPLE_RULES
+          // CHEM-042 / CHEM-073: open on the lesson's own syllabus line.
+          + (await (async () => {
+            try {
+              const { getKGNode } = await import('@/lib/curriculum/knowledgeGraph')
+              const node = topicSlug ? getKGNode(topicSlug) : null
+              return (await import('@/lib/teaching/lessonDriftGuard')).lessonScopeRule(node?.title, node?.description)
+            } catch { return '' }
+          })()),
         country,
         1200,
         teachingLanguage,
@@ -516,7 +525,21 @@ export async function POST(req: Request) {
         aiError instanceof Error ? aiError.message : String(aiError))
       const { degradedTurn } = await import('@/lib/eos-runtime')
       const degraded = degradedTurn({ register: 'beginner', learnerText: instruction })
-      routed = { text: degraded.text, provider: degraded.provider, finishReason: degraded.finishReason }
+      // CHEM-101: the lesson opened on "Let's take one small step together…"
+      // — no topic, no goal. The concept's own authored explanation opens
+      // it instead when one exists (no model needed); the template otherwise.
+      let openingText = degraded.text
+      if (topicSlug) {
+        try {
+          const { findUnseenExplanationContent } = await import('@/lib/teaching/assets/explanationMemory')
+          const authored = await findUnseenExplanationContent({
+            conceptId: topicSlug, language: teachingLanguage, userMessage: instruction, priorTutorTexts: [], preferKinds: [],
+          })
+          if (authored) openingText = lessonTitle ? `**${lessonTitle}**\n\n${authored.content.trim()}` : authored.content.trim()
+          console.log('[outage-authored] ' + JSON.stringify({ topicSlug, surface: 'lesson-init', served: authored !== null }))
+        } catch { /* the template stands */ }
+      }
+      routed = { text: openingText, provider: degraded.provider, finishReason: degraded.finishReason }
     }
 
     // ── THE OPENING TURN CANNOT SHOW A FIGURE ───────────────────────────────
@@ -555,6 +578,37 @@ export async function POST(req: Request) {
     } catch (err) {
       // A repair must never stop a lesson from opening.
       console.warn('[lesson-init] figure-reference check skipped:', err)
+    }
+
+    // ── THE CHECK PASS ON THE OPENING (owner decision 2026-10-07) ─────────
+    // Openers carried false scenarios and numbers (CHEM-025 cloudy salt water,
+    // CHEM-094 copper dissolving in water, CHEM-115 phenolphthalein, CHEM-131
+    // ice lattice, CHEM-132 BF₃·NF₃). Same pass as the chat turn
+    // (factCheckPass.ts); any failure keeps the opening as it was.
+    if (routed.provider !== 'degraded') {
+      try {
+        const fc = await import('@/lib/teaching/factCheckPass')
+        const r = await fc.runFactCheckPass({
+          text: routed.text,
+          conceptTitle: lessonTitle ?? null,
+          ask: async (system, user) => {
+            llmCallCount++
+            const res = await routeAI([{ role: 'user', content: user }], system, country, 1200, teachingLanguage,
+              { userId, subject: learnSession.subject.slug })
+            return res.text ?? null
+          },
+        })
+        console.log('[fact-check-pass] ' + JSON.stringify({ topicSlug, surface: 'lesson-init', checked: r.checked, corrected: r.corrected, reason: r.reason }))
+        if (r.corrected) routed = { ...routed, text: r.text }
+      } catch { /* the check never stops a lesson from opening */ }
+      // CHEM-047: "Real Gases and the van Waals Equation" — a word of the
+      // lesson's own name dropped in the opening; put back from the KG title.
+      try {
+        const { getKGNode } = await import('@/lib/curriculum/knowledgeGraph')
+        const { restoreTitleWords } = await import('@/lib/teaching/replyHygiene')
+        const tw = restoreTitleWords(routed.text, (topicSlug ? getKGNode(topicSlug)?.title : null) ?? lessonTitle ?? null)
+        if (tw.repaired) routed = { ...routed, text: tw.text }
+      } catch { /* keep the opening */ }
     }
 
     // ── THE SAME OUTPUT CHECKS THE CHAT TURN RUNS ─────────────────────────

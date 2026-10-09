@@ -393,10 +393,13 @@ const MEAS_PROBES: SeedProbe[] = [
     subjectSlug: 'chemistry',
     probeKind: 'misconception_probe',
     gradeBand: GradeBand.HIGH,
-    stem: 'Convert 0.025 kg to milligrams. Show your unit-cancellation steps.',
+    // CHEM-067 (2026-10-07): the stem asked for working on a pick-one card and
+    // the right option carried the working; a third option removes the coin flip.
+    stem: 'Convert 0.025 kg to milligrams.',
     choices: [
-      { text: '25,000 mg (0.025 kg × 1000 g/kg × 1000 mg/g)', isCorrect: true },
-      { text: '25 mg (just move the decimal three places)', isCorrect: false, misconceptionId: `${MEAS}:MC3` },
+      { text: '25,000 mg', isCorrect: true },
+      { text: '25 mg', isCorrect: false, misconceptionId: `${MEAS}:MC3` },
+      { text: '2,500 mg', isCorrect: false },
     ],
     correctValue: '25000 mg',
     difficulty: ProbeDifficulty.DEVELOPING,
@@ -6312,9 +6315,11 @@ const LECHAT_PROBES: SeedProbe[] = [
     probeKind: 'misconception_probe',
     gradeBand: GradeBand.HIGH,
     stem: 'For an exothermic reaction A ⇌ B + heat, does raising the temperature increase or decrease K?',
+    // CHEM-070 (2026-10-07): "increase or decrease K?" offered no "increase".
     choices: [
-      { text: 'Decrease K — treating heat as a product, adding more heat shifts equilibrium backward (toward reactant A), meaning at the new (higher) temperature, less product is favored, so K decreases', isCorrect: true },
-      { text: 'K is unaffected by temperature — only concentration and pressure changes affect K', isCorrect: false, misconceptionId: `${LECHAT}:MC2` },
+      { text: 'Decrease K — heat acts like a product, so heating shifts the equilibrium back toward A', isCorrect: true },
+      { text: 'Increase K — the reaction speeds up when heated, so more B forms', isCorrect: false },
+      { text: 'K is unaffected — only concentration and pressure change K', isCorrect: false, misconceptionId: `${LECHAT}:MC2` },
     ],
     correctValue: 'K decreases for exothermic reactions when heated',
     difficulty: ProbeDifficulty.ADVANCED,
@@ -14150,12 +14155,14 @@ const CORR_PROBES: SeedProbe[] = [
     subjectSlug: 'chemistry',
     probeKind: 'true_false',
     gradeBand: GradeBand.HIGH,
-    stem: "True or false: \"cathodic protection\" is so called because it protects the cathode of the corrosion cell.",
+    // CHEM-081 (2026-10-07): "so called because it protects the cathode" was
+    // debatable either way. The statement is now unambiguous.
+    stem: "True or false: in cathodic protection, the steel being protected is made the cathode of the corrosion cell, so the attached more reactive metal corrodes instead.",
     choices: [
-      { text: "False — it protects the structure BY MAKING IT the cathode. A more reactive metal (or an impressed current) is attached so the steel is forced to be the cathode, where reduction happens and no metal is lost; the sacrificial anode corrodes instead. The name describes the role the protected object is pushed into, not the thing being protected", isCorrect: true },
-      { text: "True — the technique works by shielding the cathode from attack, which is where corrosion would otherwise occur", isCorrect: false, misconceptionId: `${CORR}:MC3` },
+      { text: "True — a more reactive metal (or an impressed current) forces the steel to be the cathode, where reduction happens and no metal is lost; the sacrificial anode corrodes instead", isCorrect: true },
+      { text: "False — the steel stays the anode; the attached metal only shields the cathode from attack", isCorrect: false, misconceptionId: `${CORR}:MC3` },
     ],
-    correctValue: "False — the protected structure is MADE the cathode; the sacrificial anode corrodes",
+    correctValue: "True — the protected structure is MADE the cathode; the sacrificial anode corrodes",
     difficulty: ProbeDifficulty.PROFICIENT,
     targetedMisconceptions: [`${CORR}:MC3`],
     source: `${CORR_SRC} — MC-3: "cathodic protection" parsed as protecting a cathode rather than as forcing the structure to become one`,
@@ -19053,10 +19060,13 @@ const PBLOCK_PROBES: SeedProbe[] = [
     subjectSlug: 'chemistry',
     probeKind: 'step_check',
     gradeBand: GradeBand.HIGH,
-    stem: 'PRACTICE: NaCl just dissolves in water. Why does SiCl4 fume and hydrolyse violently instead?',
+    // CHEM-072 (2026-10-07): "Why…?" was answered by "It does not", and the
+    // key leaned on the dated d-orbital picture. Three explanations now.
+    stem: 'PRACTICE: NaCl just dissolves in water, but SiCl4 fumes and reacts violently with it. Which explanation is right?',
     choices: [
-      { text: 'Because NaCl is IONIC — its ions simply hydrate, with no covalent bonds to break — while SiCl4 is COVALENT and silicon has vacant d orbitals, so water\'s lone pair attacks the silicon and the Si-Cl bonds are cleaved', isCorrect: true },
-      { text: 'It does not — SiCl4 is a simple chloride like NaCl and dissolves in the same way', isCorrect: false, misconceptionId: `${PBLOCK}:MC2` },
+      { text: 'NaCl is ionic, so its ions simply become surrounded by water; SiCl4 is covalent, and water attacks the silicon and breaks the Si–Cl bonds (hydrolysis), giving HCl fumes', isCorrect: true },
+      { text: 'Both are simple chlorides that dissolve the same way — the fumes are just SiCl4 evaporating', isCorrect: false, misconceptionId: `${PBLOCK}:MC2` },
+      { text: 'SiCl4 is ionic like NaCl, but its Si⁴⁺ ion is so highly charged that dissolving it releases a burst of heat', isCorrect: false },
     ],
     correctValue: 'ionic hydration vs covalent hydrolysis',
     difficulty: ProbeDifficulty.PROFICIENT,
@@ -19758,11 +19768,13 @@ const PERICYC_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.UNDERGRADUATE,
     stem: 'Why does cyclopentadiene react much more readily as a Diels–Alder diene than (E,E)-hexa-2,4-diene?',
     choices: [
-      { text: 'Cyclopentadiene is locked in the s-cis conformation; (E,E)-hexa-2,4-diene is locked in s-trans and cannot achieve the required geometry', isCorrect: true },
+      // CHEM-052 (2026-10-07): an acyclic diene is not locked — it rotates
+      // about C2–C3 but mostly sits in the lower-energy s-trans form.
+      { text: 'Cyclopentadiene\'s ring holds it in the s-cis conformation; (E,E)-hexa-2,4-diene can rotate to s-cis, but mostly sits in the lower-energy s-trans form, so few molecules have the required geometry', isCorrect: true },
       { text: 'Cyclopentadiene has more pi electrons available for overlap with the dienophile', isCorrect: false, misconceptionId: `${PERICYC}:MC1` },
       { text: 'The ring strain in cyclopentadiene lowers the activation energy for [4+2] cycloaddition', isCorrect: false },
     ],
-    correctValue: 'Cyclopentadiene locked s-cis; (E,E) locked s-trans',
+    correctValue: 'Cyclopentadiene held s-cis by its ring; (E,E) mostly s-trans',
     difficulty: ProbeDifficulty.ADVANCED,
     targetedMisconceptions: [`${PERICYC}:MC1`],
     source: `${PERICYC_SRC} — s-cis conformation requirement for Diels-Alder diene`,
@@ -20657,9 +20669,11 @@ const NACID_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.HIGH,
     stem: 'A DNA strand has the base sequence 5\'-ATGCCC-3\'. What is the complementary strand, written 5\'→3\'?',
     choices: [
-      { text: '5\'-GGGCAT-3\' (complement antiparallel: A pairs T, T pairs A, G pairs C)', isCorrect: true },
-      { text: '5\'-TACGGG-3\' (complement written in same direction)', isCorrect: false, misconceptionId: `${NACID}:MC1` },
-      { text: '5\'-ATGCCC-3\' (identical sequence)', isCorrect: false, misconceptionId: `${NACID}:MC1` },
+      // CHEM-023 (2026-10-07): the options carried their own reasoning
+      // ("complement antiparallel: …"), which gave the key away.
+      { text: '5\'-GGGCAT-3\'', isCorrect: true },
+      { text: '5\'-TACGGG-3\'', isCorrect: false, misconceptionId: `${NACID}:MC1` },
+      { text: '5\'-ATGCCC-3\'', isCorrect: false, misconceptionId: `${NACID}:MC1` },
     ],
     correctValue: '5\'-GGGCAT-3\'',
     difficulty: ProbeDifficulty.PROFICIENT,

@@ -42,7 +42,7 @@
  */
 import { describe, it, expect } from 'vitest'
 import { initialConversationState, type ConversationState } from '@/lib/teaching/conversationState'
-import { CONCEPT_TURN_BUDGET } from '@/lib/teaching/conceptBudget'
+import { TURN_BUDGET_IN_FORCE } from '@/lib/teaching/conceptBudget'
 import {
   startLessonAttempt, recordConceptOutcome, summaryFromAttempt, isConceptClosed,
 } from '@/lib/teaching/lessonAttempt'
@@ -59,7 +59,7 @@ function st(id: string, over: Partial<ConversationState> = {}): ConversationStat
 // both, matching what a genuinely-mastered lesson actually holds.
 const mastered = (id: string) => st(id, { correctAtCheck: 1, correctAtPractice: 2 })
 const exhaustedNoEvidence = (id: string) =>
-  st(id, { turnsOnConcept: CONCEPT_TURN_BUDGET, correctAtCheck: 0, correctAtPractice: 0 })
+  st(id, { turnsOnConcept: TURN_BUDGET_IN_FORCE, correctAtCheck: 0, correctAtPractice: 0 })
 const T0 = new Date('2026-08-22T10:00:00Z')
 
 describe('P0-A — A: genuine mastery -> completion allowed', () => {

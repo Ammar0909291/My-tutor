@@ -2679,14 +2679,16 @@ const CHEM_F: SeedProbe[] = [
   {
     conceptId: 'chem.surface.emulsions', subjectSlug: S, probeKind: 'numeric',
     gradeBand: GradeBand.HIGH, difficulty: ProbeDifficulty.PROFICIENT,
-    stem: 'Mayonnaise is an oil-in-water emulsion. Which liquid is the dispersed phase and which is the continuous one?',
+    // CHEM-043 (2026-10-07): the stem said "oil-in-water" and then asked which
+    // phase was dispersed. It now describes the mixture and asks for the type.
+    stem: 'Mayonnaise is made by whisking oil into egg yolk and vinegar (mostly water) until the oil is broken into tiny droplets. What kind of emulsion is it?',
     choices: [
-      { text: 'Oil dispersed, water continuous', isCorrect: true },
-      { text: 'Water dispersed, oil continuous', isCorrect: false },
-      { text: 'Both are continuous', isCorrect: false },
-      { text: 'Neither — the two have mixed completely', isCorrect: false },
+      { text: 'Oil-in-water: oil droplets dispersed through water', isCorrect: true },
+      { text: 'Water-in-oil: water droplets dispersed through oil', isCorrect: false },
+      { text: 'Not an emulsion — the oil has dissolved in the water', isCorrect: false },
+      { text: 'A foam — gas bubbles dispersed through a liquid', isCorrect: false },
     ],
-    correctValue: 'oil dispersed in continuous water',
+    correctValue: 'oil-in-water: oil dispersed in continuous water',
     targetedMisconceptions: [],
     source: src('chem.surface.emulsions', 'the name states the answer — "oil-IN-water" — and butter is the reverse case, so the naming convention is worth having before the concept\'s existing separation probe asks why the two phases come back apart'),
   },

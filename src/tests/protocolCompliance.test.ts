@@ -211,7 +211,8 @@ describe('MEASUREMENT ONLY — no remedy, no provider call', () => {
     // 8 -> 9 (2026-10-05, CHEM-015/CHEM-039): one shared regeneration with an appendix
     // (regenerateWithAppendix) for an unhonoured "with numbers"/"step by step" request
     // and for the analogy cap; kept only if the retry complies.
-    expect((ROUTE.match(/await routeAI\(/g) ?? []).length).toBe(9)
+    // 9 -> 10 (2026-10-07, owner decision): the check pass (factCheckPass.ts).
+    expect((ROUTE.match(/await routeAI\(/g) ?? []).length).toBe(10)
   })
 
   it('nothing branches on the violation to change what the learner is served', () => {

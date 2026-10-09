@@ -58,6 +58,33 @@ interface ProbeCandidateRow extends MatchableAsset {
   probeAsset: { stem: string; choices: unknown; correctValue: string | null } | null
 }
 
+const STOP = new Set(['which', 'what', 'their', 'there', 'these', 'those', 'about', 'would', 'could', 'should', 'because', 'where', 'while', 'after', 'before', 'other', 'every', 'given', 'answer', 'correct', 'statement', 'following', 'true', 'false', 'roughly', 'times', 'between'])
+const NUMBERISH = /\d+(?:[.,]\d+)?|\b(?:two|three|four|five|six|seven|eight|nine|ten|twelve|twenty|hundred|thousand|million)\b/g
+const contentWords = (t: string): string[] => Array.from(new Set((t.toLowerCase().match(/[a-z][a-z-]{4,}/g) ?? []).filter((w) => !STOP.has(w))))
+
+/**
+ * The subset of `rows` whose stem and key words the learner has already met in
+ * `taughtText` (at least half of them), or all `rows` when none qualify. Pure.
+ */
+export function preferTaughtProbes<T extends { probeAsset: { stem: string; choices: unknown } | null }>(rows: T[], taughtText: string): T[] {
+  const taught = taughtText.toLowerCase()
+  if (!taught.trim()) return rows
+  const covered = rows.filter((row) => {
+    const p = row.probeAsset
+    if (!p) return false
+    const right = Array.isArray(p.choices) ? (p.choices as Array<{ text?: string; isCorrect?: boolean }>).find((c) => c?.isCorrect)?.text ?? '' : ''
+    // A quantity in the key ("about ten times", "≈ 9.3") must have been
+    // stated already — it cannot be reasoned to from the words alone.
+    const quantities = right.toLowerCase().match(NUMBERISH) ?? []
+    if (quantities.some((q) => !taught.includes(q))) return false
+    const words = contentWords(`${p.stem} ${right}`)
+    if (words.length === 0) return true
+    const met = words.filter((w) => taught.includes(w.slice(0, Math.max(5, w.length - 2)))).length
+    return met / words.length >= 0.5
+  })
+  return covered.length > 0 ? covered : rows
+}
+
 export async function findBestProbe(state: StudentState, options: MatchOptions = {}): Promise<ProbeMatch | null> {
   try {
     const candidates = await prisma.assetIdentity.findMany({
@@ -151,7 +178,11 @@ export async function findBestProbe(state: StudentState, options: MatchOptions =
       return reask && Array.isArray(c) && c.length > 1 ? [...c.slice(1), c[0]] : c
     }
 
-    const best = pickBest(state, rows, options)
+    // CHEM-005 (2026-10-07): a card about something not yet taught ("roughly
+    // how many times stronger is chemisorption?" before either energy was
+    // mentioned) is passed over while a card about taught content remains.
+    const pool = options.taughtText ? preferTaughtProbes(rows, options.taughtText) : rows
+    const best = pickBest(state, pool, options)
     if (best) {
       return {
         assetId: best.asset.assetId,
@@ -168,7 +199,7 @@ export async function findBestProbe(state: StudentState, options: MatchOptions =
     // Grade-band fallback: authored probe for the right concept is always
     // better than Groq generating one — serve the best available grade band.
     if (rows.length > 0) {
-      const fallback = pickBest(state, rows, options, 0)
+      const fallback = pickBest(state, pool, options, 0) ?? pickBest(state, rows, options, 0)
       if (fallback) {
         return {
           assetId: fallback.asset.assetId,

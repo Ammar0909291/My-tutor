@@ -74,9 +74,11 @@ export const RETIRED_VISUAL_BINDINGS: Readonly<Record<string, string>> = {
   'chem.found.states-of-matter':
     'Rendered a crystal lattice, which depicts the solid state only and actively ' +
     'misrepresents liquids and gases — the contrast the concept exists to teach.',
-  'chem.bond.ionic-bonding':
-    'The bond-formation card animates electron SHARING between two atoms. Ionic bonding ' +
-    'is electron TRANSFER producing oppositely charged ions.',
+  // chem.bond.ionic-bonding — RESOLVED (2026-10-07, CHEM-095): the bond-formation
+  // card animated electron SHARING; the concept now owns an electron-TRANSFER
+  // scene (conceptSceneParams.ts CONCEPT_SCENES). Removed from both tables, as
+  // the bio.cell rows below were, because the retirement would otherwise make
+  // the new Tier 0 scene unreachable.
   'chem.bond.metallic-bonding':
     'The same card animates a discrete two-atom bond. Metallic bonding is a delocalised ' +
     'electron sea over a lattice of cations.',
@@ -264,7 +266,6 @@ export function retirementReason(conceptId: string): string | null {
 // RETIRED_VISUAL_BINDINGS in lock-step and reports which rows are REPLACED.
 export const RETIRED_ASSET_FINGERPRINTS: Readonly<Record<string, readonly string[]>> = {
   'chem.found.states-of-matter': ['ffdc76ff'], // card:three_crystal_lattice
-  'chem.bond.ionic-bonding': ['f4a1f0cb9'], // card:three_bond_formation
   'chem.bond.metallic-bonding': ['f4a1f0cb9'], // card:three_bond_formation
   'chem.solid.amorphous': ['ffdc76ff'], // card:three_crystal_lattice
   'chem.bond.mo-theory': ['f4a1f0cb9'], // card:three_bond_formation

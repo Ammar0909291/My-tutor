@@ -30,6 +30,15 @@ never into this file. This file only changes when a LIVE, currently-binding rule
   2026-10-04).** Production precision 6.3 %; shadow OFF by default; N1/N2 enforcement and N3 NOT
   APPROVED. Do not patch the parser or build new numeric verification without a fresh owner
   instruction. Record: `docs/qa/numeric-fact-check-step3/CLOSURE.md`.
+- **Owner decisions 2026-10-07 (in chat, "fix everything"):** (1) a model CHECK PASS is approved
+  instead of the closed parser — replies/openers with numbers, equations or worked examples are
+  recomputed by a second model call and replaced only by a corrected copy (`factCheckPass.ts`);
+  the N1/N2/N3 parser stays closed. (2) Only AUTHORED cards are asked — model-written cards and
+  inline A)/B)/C) questions are never shown (`inventedProbeGuard.AUTHORED_CARDS_ONLY`,
+  `mcq.AUTHORED_ONLY_INSTRUCTION`). (3) 2-option cards are practice only WHERE the concept holds
+  ≥3 authored 3+-option cards (`turnContract.certifiesMastery`); elsewhere they still count until
+  more cards are authored. (4) An engaged learner stays in the lesson until mastery or the 30-turn
+  ceiling (`conceptBudget.STAY_UNTIL_MASTERY`); attempts/failures exits still move a concept to review.
 
 ## Reporting preference (ALWAYS follow — updated 2026-07-17)
 - After EVERY prompt/task — including non-coding tasks (audits, Q&A, memory updates) — ALWAYS

@@ -31,7 +31,7 @@ import {
   clearLadderForNewAttempt, readConversationState, initialConversationState,
   type ConversationState,
 } from '@/lib/teaching/conversationState'
-import { evaluateConceptBudget, CONCEPT_TURN_BUDGET } from '@/lib/teaching/conceptBudget'
+import { evaluateConceptBudget, TURN_BUDGET_IN_FORCE } from '@/lib/teaching/conceptBudget'
 import {
   isConceptClosed, recordConceptOutcome, startLessonAttempt,
 } from '@/lib/teaching/lessonAttempt'
@@ -46,7 +46,7 @@ function spentLadder(conceptId: string): ConversationState {
   return {
     ...initialConversationState(conceptId),
     phase: 'GUIDE',
-    turnsOnConcept: CONCEPT_TURN_BUDGET + 1,   // past the hard budget
+    turnsOnConcept: TURN_BUDGET_IN_FORCE + 1,   // past the hard budget
     consecutiveFailures: 2,
     taughtThisSession: true,
     demonstrated: true,
@@ -62,7 +62,7 @@ const attemptFor = (conceptId: string) =>
 describe('Phase 7L — A. the exact production relapse', () => {
   it('REPRODUCES IT: a stale ladder closes and finalises the lesson on turn one', () => {
     const stale = readConversationState(spentLadder(TIR), TIR)   // same concept => NO reset
-    expect(stale.turnsOnConcept).toBeGreaterThan(CONCEPT_TURN_BUDGET)
+    expect(stale.turnsOnConcept).toBeGreaterThan(TURN_BUDGET_IN_FORCE)
 
     const budget = evaluateConceptBudget(stale)
     expect(budget.status).toBe('exhausted')

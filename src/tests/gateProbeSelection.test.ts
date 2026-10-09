@@ -121,22 +121,25 @@ describe('5-6 — existing selection behaviour is untouched', () => {
     // Filtering after pickBest would still lose the turn whenever an
     // unconvertible probe outscored a usable one — which is what production did.
     const filterAt = SELECTOR.indexOf('if (!options.requireMcq) return true')
-    const rankAt = SELECTOR.indexOf('const best = pickBest(state, rows, options)')
+    const rankAt = SELECTOR.indexOf('const best = pickBest(state, pool, options)')
     expect(filterAt).toBeGreaterThan(-1)
     expect(rankAt).toBeGreaterThan(filterAt)
   })
 
   it('ranking, difficulty and grade-band fallback are unchanged', () => {
-    expect(SELECTOR).toContain('const best = pickBest(state, rows, options)')
+    expect(SELECTOR).toContain('const best = pickBest(state, pool, options)')
     expect(SELECTOR).toContain('difficulty: c.probeAsset!.difficulty')
     // The fallback reuses the SAME filtered rows, so it cannot reintroduce an
     // unconvertible probe by the back door.
-    expect(SELECTOR).toContain('const fallback = pickBest(state, rows, options, 0)')
+    // CHEM-005 (2026-10-07): `pool` is the same filtered rows, narrowed to
+    // cards about taught content when any qualify; the fallback still ends on `rows`.
+    expect(SELECTOR).toContain('const pool = options.taughtText ? preferTaughtProbes(rows, options.taughtText) : rows')
+    expect(SELECTOR).toContain('const fallback = pickBest(state, pool, options, 0) ?? pickBest(state, rows, options, 0)')
   })
 
   it('the already-asked exclusion still applies, and still before ranking', () => {
     const excludeAt = SELECTOR.indexOf('options.excludeProbeStem?.(row.probeAsset!.stem)')
-    const rankAt = SELECTOR.indexOf('const best = pickBest(state, rows, options)')
+    const rankAt = SELECTOR.indexOf('const best = pickBest(state, pool, options)')
     expect(excludeAt).toBeGreaterThan(-1)
     expect(rankAt).toBeGreaterThan(excludeAt)
   })

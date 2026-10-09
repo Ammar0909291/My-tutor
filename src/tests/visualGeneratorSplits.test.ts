@@ -189,7 +189,7 @@ describe('B2 changed nothing else', () => {
     expect(ask('chem.solid.defects').graphical).toBe(false)
     // (phys.opt.reflection left the register 2026-09-30 with its own faithful figure.)
     // (the physics circuit concepts left the register 2026-09-30, batch 9.)
-    expect(ask('chem.bond.ionic-bonding').graphical).toBe(false)
+    expect(ask('chem.bond.metallic-bonding').graphical).toBe(false)
   })
 })
 

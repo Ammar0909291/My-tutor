@@ -37,7 +37,7 @@ import {
 } from '@/lib/teaching/conversationState'
 import {
   evaluateConceptBudget, qualifiesForBudgetExtension, hasDemonstratedMastery,
-  isAuthoritativelyMastered, CONCEPT_TURN_BUDGET,
+  isAuthoritativelyMastered, TURN_BUDGET_IN_FORCE,
 } from '@/lib/teaching/conceptBudget'
 import { isConceptClosed, recordConceptOutcome, startLessonAttempt } from '@/lib/teaching/lessonAttempt'
 import { conceptOutcome } from '@/lib/teaching/lessonSummary'
@@ -100,7 +100,7 @@ describe('A. exact threshold — the reported production shape', () => {
 
   it('the budget extension remains available — this learner has not "already finished"', () => {
     // Simulate having spent the base budget without the extension yet granted.
-    const atBudget: ConversationState = { ...s, turnsOnConcept: CONCEPT_TURN_BUDGET, consecutiveFailures: 0 }
+    const atBudget: ConversationState = { ...s, turnsOnConcept: TURN_BUDGET_IN_FORCE, consecutiveFailures: 0 }
     expect(qualifiesForBudgetExtension(atBudget)).toBe(true)
   })
 })
@@ -133,21 +133,21 @@ describe('C. the happy path is completely unaffected', () => {
   })
 
   it('the budget extension correctly reports unavailable — there is nothing left to extend', () => {
-    const atBudget: ConversationState = { ...s, turnsOnConcept: CONCEPT_TURN_BUDGET }
+    const atBudget: ConversationState = { ...s, turnsOnConcept: TURN_BUDGET_IN_FORCE }
     expect(qualifiesForBudgetExtension(atBudget)).toBe(false)
   })
 })
 
 describe('D. genuine exhaustion still closes the concept, honestly, once turns truly run out', () => {
   it('turns backstop fires even while plain-mastered-but-unverified — bounded, not an infinite hold', () => {
-    const s: ConversationState = { ...driveToTransfer({ unauthored: true }), turnsOnConcept: CONCEPT_TURN_BUDGET + 6 }
+    const s: ConversationState = { ...driveToTransfer({ unauthored: true }), turnsOnConcept: TURN_BUDGET_IN_FORCE + 6 }
     expect(isConceptClosed(s)).toBe(true) // now closes — via genuine exhaustion, not premature short-circuit
     expect(evaluateConceptBudget(s).status).toBe('exhausted')
     expect(evaluateConceptBudget(s).reason).toBe('turns')
   })
 
   it('conceptOutcome marks this specific shape answeredButUnverified — the honest-reason signal', () => {
-    const s: ConversationState = { ...driveToTransfer({ unauthored: true }), turnsOnConcept: CONCEPT_TURN_BUDGET + 6 }
+    const s: ConversationState = { ...driveToTransfer({ unauthored: true }), turnsOnConcept: TURN_BUDGET_IN_FORCE + 6 }
     const outcome = conceptOutcome(s, 'Pronoun-Antecedent Agreement')
     expect(outcome.status).toBe('needs_review')
     expect(outcome.answeredButUnverified).toBe(true)
@@ -245,7 +245,7 @@ describe('G. fresh vs. persisted session — the fix reads only ConversationStat
 
 describe('H. repeated turn — recordConceptOutcome stays idempotent under the new closing test', () => {
   it('folding the same concept twice does not double-count or flip an already-closed verdict', () => {
-    const s: ConversationState = { ...driveToTransfer({ unauthored: true }), turnsOnConcept: CONCEPT_TURN_BUDGET + 6 }
+    const s: ConversationState = { ...driveToTransfer({ unauthored: true }), turnsOnConcept: TURN_BUDGET_IN_FORCE + 6 }
     let attempt = startLessonAttempt('eng.grammar.pronoun-antecedent-agreement', 'Pronoun-Antecedent Agreement', new Date())
     attempt = recordConceptOutcome(attempt, s, 'Pronoun-Antecedent Agreement')
     const firstFold = attempt

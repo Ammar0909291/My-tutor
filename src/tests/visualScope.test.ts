@@ -171,9 +171,9 @@ describe('the three acceptable states, and nothing else', () => {
     // so it must not come back as "a general illustration" either.
     // (bio.cell.apoptosis was retired here until the 2026-09-24 Biology cell
     // visual replacement gave it its own faithful Tier 0 scene — see
-    // bioCellVisualReplacement.test.ts; chem.bond.ionic-bonding is still
+    // bioCellVisualReplacement.test.ts; chem.bond.metallic-bonding is still
     // retired and stands in its place as this test's biology-adjacent example.)
-    for (const id of ['chem.bond.ionic-bonding', 'cs.found.number-systems', 'chem.solid.defects']) {
+    for (const id of ['chem.bond.metallic-bonding', 'cs.found.number-systems', 'chem.solid.defects']) {
       expect(ask(id).graphical, id).toBe(false)
     }
   })

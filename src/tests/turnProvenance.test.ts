@@ -148,7 +148,10 @@ describe('nothing else was changed', () => {
     // 8 -> 9 (2026-10-05, CHEM-015/CHEM-039): one shared regeneration with an appendix
     // (regenerateWithAppendix) for an unhonoured "with numbers"/"step by step" request
     // and for the analogy cap; kept only if the retry complies.
-    expect((ROUTE.match(/await routeAI\(/g) ?? []).length).toBe(9)
+    // 9 -> 10 (2026-10-07, owner decision): the check pass (factCheckPass.ts) —
+    // one call on a reply that carries numbers, equations or a worked example;
+    // it can only replace the reply with a corrected copy of itself.
+    expect((ROUTE.match(/await routeAI\(/g) ?? []).length).toBe(10)
   })
 
   it('grading, evidence and the MCQ attach line are untouched', () => {

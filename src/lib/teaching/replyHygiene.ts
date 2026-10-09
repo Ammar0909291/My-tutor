@@ -52,7 +52,11 @@ const VERDICT_OPENER_RE = /^(?:correct|that(?:'|’)?s (?:right|correct)|not qui
  */
 export function dropVerdictOnUngradedRequest(text: string): { text: string; dropped: string | null } {
   const { first, rest } = splitFirstSentence(text)
-  if (!first || !VERDICT_OPENER_RE.test(first.replace(/^[\s*_]+/, ''))) return { text, dropped: null }
+  const head = first.replace(/^[\s*_]+/, '')
+  // CHEM-031: "test2, that's correct—iron fills the 3d subshell…" — the
+  // learner's name in front of the verdict hid it from the check.
+  const afterName = head.replace(/^[A-Za-z][\w.-]{0,24},\s+/, '')
+  if (!first || !(VERDICT_OPENER_RE.test(head) || VERDICT_OPENER_RE.test(afterName))) return { text, dropped: null }
   if (words(rest) < 8) return { text, dropped: null }
   return { text: rest, dropped: first }
 }
@@ -260,4 +264,74 @@ export function looksLikeHandle(name: string | null | undefined): boolean {
   if (/[@_.]|\d/.test(n)) return true
   if (/^(?:test|user|student|learner|guest|demo|admin)\b/i.test(n)) return true
   return false
+}
+
+// ── CHEM-031 — a verdict on "ok" ────────────────────────────────────────────
+/**
+ * "ok", "got it", "next", "continue" … answer nothing, so nothing in them can
+ * be "correct". "yes" / "sure" are left out: they can answer a yes/no
+ * question the tutor asked.
+ */
+export function isPlainAcknowledgement(message: string): boolean {
+  const t = (message ?? '').trim().toLowerCase().replace(/[\s!.…,;:)]+$/u, '')
+  return /^(?:ok(?:ay)?|k+|got it|i got it|i see|alright|all right|cool|fine|nice|great|good|thanks|thank you|thx|understood|i understand|makes sense|done|continue|go on|go ahead|next(?: (?:one|question|step|part|topic))?(?: please)?|понял|поняла|хорошо|ок|дальше|понятно|theek hai|accha|aage)$/.test(t)
+}
+
+// ── CHEM-103 — praise for an answer the server marked wrong ────────────────
+const PRAISE_RE = /\b(?:correct|right|exactly|solid start|well done|good job|great job|spot on|nicely done|perfect)\b/i
+const norm = (t: string): string => (t ?? '').toLowerCase().replace(/[`*_"'’“”]/g, '').replace(/\s+/g, ' ').trim()
+
+/**
+ * "You've already written the basic rate-law expression `rate = k[A][B]`,
+ * which is exactly the correct form… That's a solid start!" — two turns after
+ * the server marked that very answer "Not quite — the answer is: rate =
+ * k[A]²[B]¹" (chem.kinet.rate-law #84). A sentence that quotes an answer the
+ * learner got wrong in this lesson and praises it is dropped, together with a
+ * following bare praise sentence ("That's a solid start!"). `wrongAnswers` are
+ * the learner's own answers the server graded wrong; answers shorter than four
+ * characters are ignored (they would match by accident).
+ */
+export function dropPraiseOfCorrectedAnswer(text: string, wrongAnswers: string[]): { text: string; dropped: string[] } {
+  const wrong = wrongAnswers.map(norm).filter((w) => w.length >= 4)
+  if (wrong.length === 0) return { text, dropped: [] }
+  const dropped: string[] = []
+  const paras = (text ?? '').split(/\n{2,}/).map((para) => {
+    const sents = sentencesOf(para)
+    const keep: string[] = []
+    let droppedPrev = false
+    for (const sent of sents) {
+      const n = norm(sent)
+      const praisesWrong = PRAISE_RE.test(sent) && wrong.some((w) => n.includes(w))
+      const barePraiseAfter = droppedPrev && PRAISE_RE.test(sent) && words(sent) <= 6
+      if (praisesWrong || barePraiseAfter) { dropped.push(sent.trim()); droppedPrev = true; continue }
+      droppedPrev = false
+      keep.push(sent)
+    }
+    return keep.join('').trim()
+  }).filter(Boolean)
+  if (dropped.length === 0) return { text, dropped: [] }
+  const out = paras.join('\n\n')
+  return words(out) >= 8 ? { text: out, dropped } : { text, dropped: [] }
+}
+
+// ── CHEM-047 — a word dropped from the lesson's own name ────────────────────
+/**
+ * "Real Gases and the van Waals Equation" for "Real Gases and van der Waals
+ * Equation": the opening named the lesson with a word missing. Every run of
+ * three title words "a b c" whose middle word is lost ("a c", not already "a b
+ * c") is put back. Only the lesson's own title is used, so nothing is invented.
+ */
+export function restoreTitleWords(text: string, title: string | null | undefined): { text: string; repaired: boolean } {
+  const tw = (title ?? '').split(/\s+/).filter(Boolean)
+  let out = text ?? ''
+  let repaired = false
+  const esc = (w: string): string => w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+  for (let i = 0; i + 2 < tw.length; i++) {
+    const [a, b, c] = [tw[i], tw[i + 1], tw[i + 2]]
+    if (a.length < 2 || c.length < 3 || /^(?:and|or|the|of|in|to|a|an)$/i.test(b)) continue
+    const re = new RegExp(`\\b${esc(a)}\\s+${esc(c)}\\b`, 'gi')
+    if (!re.test(out)) continue
+    out = out.replace(re, (m) => { repaired = true; return m.replace(/\s+/, ` ${b} `) })
+  }
+  return { text: out, repaired }
 }

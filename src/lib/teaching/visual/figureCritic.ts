@@ -210,9 +210,33 @@ export function checkRendering(figure: GeneratedFigure): { verdict: DimensionVer
     return { verdict: 'pass', reason: 'range and highlights are drawable' }
   }
 
+  if (spec.type === 'process_flow' && processFlowIsAList(spec)) {
+    return { verdict: 'fail', reason: 'process flow drawn for a list of separate items — the arrows would claim a sequence' }
+  }
+
   // process_flow and geometry are constrained by their schemas (step count,
   // title length, positive dimensions), which the engine already enforced.
   return { verdict: 'pass', reason: 'schema-constrained renderer' }
+}
+
+/**
+ * CHEM-083 (2026-10-05, chem.org.ethers): a process_flow titled "Key Reactions
+ * Involving Ethers" chained Williamson synthesis → cleavage with HX → epoxide
+ * opening → "Diethyl ether as common solvent". A flow's arrows say each box
+ * leads to the next; a catalogue of separate reactions, types, examples or
+ * uses is not a sequence, and its last box was not even a step. Rejected when
+ * the title names a catalogue (and not a process), or when most boxes are
+ * self-contained reactions ("a + b → c") — each a complete process of its own.
+ */
+export function processFlowIsAList(spec: { title?: unknown; steps?: unknown }): boolean {
+  const title = typeof spec.title === 'string' ? spec.title : ''
+  const steps = Array.isArray(spec.steps) ? (spec.steps as Array<{ title?: string; note?: string }>) : []
+  const sequenceWord = /\b(?:steps?|stages?|process|mechanism|cycle|pathway|procedure|sequence|how\b|formation|synthesis of|route|workflow|algorithm)\b/i
+  const catalogueWord = /\b(?:(?:key|main|common|important|major)\s+)?(?:reactions|types|kinds|examples|uses|applications|properties|methods|tests|features|categories|classes|members)\b/i
+  if (sequenceWord.test(title)) return false
+  if (catalogueWord.test(title)) return true
+  const selfContained = steps.filter((s) => /\S\s*\+\s*\S[^→]*(?:→|->|⟶)/.test(`${s.title ?? ''} ${s.note ?? ''}`)).length
+  return steps.length >= 3 && selfContained >= Math.ceil(steps.length * 0.75)
 }
 
 /**

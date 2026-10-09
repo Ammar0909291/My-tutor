@@ -14,8 +14,8 @@
  */
 import { describe, it, expect } from 'vitest'
 import {
-  evaluateConceptBudget, qualifiesForBudgetExtension, effectiveTurnBudget,
-  CONCEPT_TURN_BUDGET, BUDGET_EXTENSION_TURNS,
+  evaluateConceptBudget, qualifiesForBudgetExtension, legacyTurnBudget, effectiveTurnBudget,
+  CONCEPT_TURN_BUDGET, BUDGET_EXTENSION_TURNS, ABSOLUTE_TURN_CEILING,
 } from '@/lib/teaching/conceptBudget'
 import {
   advanceConversationState, initialConversationState, readConversationState,
@@ -94,11 +94,11 @@ describe('5. the extension is granted at most once', () => {
     let s = progressing({ turnsOnConcept: CONCEPT_TURN_BUDGET - 1 })
     s = advanceConversationState(s, CORRECT)          // reaches the base budget
     expect(s.budgetExtensionGranted).toBe(true)
-    expect(effectiveTurnBudget(s)).toBe(CONCEPT_TURN_BUDGET + BUDGET_EXTENSION_TURNS)
+    expect(legacyTurnBudget(s)).toBe(CONCEPT_TURN_BUDGET + BUDGET_EXTENSION_TURNS)
 
     // Many more turns: still exactly one grant, cap unchanged.
     for (let i = 0; i < 8; i++) s = advanceConversationState(s, CORRECT)
-    expect(effectiveTurnBudget(s)).toBe(18)
+    expect(legacyTurnBudget(s)).toBe(18)
   })
 
   it('is not granted on the turn the learner fails a SECOND time in a row', () => {
@@ -112,11 +112,14 @@ describe('5. the extension is granted at most once', () => {
 })
 
 describe('6/7/8 — what the extended budget does and does not change', () => {
-  it('6. an extended learner without mastery closes at 18, marked for review', () => {
-    const extended = progressing({ budgetExtensionGranted: true, turnsOnConcept: 17 })
+  it('6. since the 2026-10-07 stay-until-mastery decision a learner without mastery closes only at the ceiling', () => {
+    // Was: an extended learner closed at 18 (legacyTurnBudget, still asserted
+    // in 5 and 9). The allowance in force is now the absolute ceiling.
+    const extended = progressing({ budgetExtensionGranted: true, turnsOnConcept: 18 })
     expect(evaluateConceptBudget(extended).status).not.toBe('exhausted')
+    expect(effectiveTurnBudget(extended)).toBe(ABSOLUTE_TURN_CEILING)
 
-    const spent = { ...extended, turnsOnConcept: 18 }
+    const spent = { ...extended, turnsOnConcept: ABSOLUTE_TURN_CEILING }
     const budget = evaluateConceptBudget(spent)
     expect(budget.status).toBe('exhausted')
     expect(budget.reason).toBe('turns')
@@ -133,8 +136,9 @@ describe('6/7/8 — what the extended budget does and does not change', () => {
     expect(budget.markForReview).toBe(false)
   })
 
-  it('8. an UNextended learner still exhausts at 12 and is marked for review', () => {
-    const budget = evaluateConceptBudget(progressing({ correctAtCheck: 0 }))
+  it('8. an unextended learner at 12 turns is no longer closed; at the ceiling it is, marked for review', () => {
+    expect(evaluateConceptBudget(progressing({ correctAtCheck: 0 })).status).not.toBe('exhausted')
+    const budget = evaluateConceptBudget(progressing({ correctAtCheck: 0, turnsOnConcept: ABSOLUTE_TURN_CEILING }))
     expect(budget.status).toBe('exhausted')
     expect(budget.reason).toBe('turns')
     expect(budget.markForReview).toBe(true)
@@ -154,7 +158,7 @@ describe('9. the flag survives serialization and restoration', () => {
     const granted = progressing({ budgetExtensionGranted: true })
     const restored = readConversationState(JSON.parse(JSON.stringify(granted)), CONCEPT)
     expect(restored.budgetExtensionGranted).toBe(true)
-    expect(effectiveTurnBudget(restored)).toBe(18)
+    expect(legacyTurnBudget(restored)).toBe(18)
   })
 
   it('a pre-existing snapshot without the field defaults to false — no migration', () => {
@@ -162,7 +166,7 @@ describe('9. the flag survives serialization and restoration', () => {
     delete legacy.budgetExtensionGranted
     const restored = readConversationState(legacy, CONCEPT)
     expect(restored.budgetExtensionGranted).toBe(false)
-    expect(effectiveTurnBudget(restored)).toBe(CONCEPT_TURN_BUDGET)
+    expect(legacyTurnBudget(restored)).toBe(CONCEPT_TURN_BUDGET)
   })
 
   it('a different concept resets it, like every other per-concept counter', () => {
@@ -213,7 +217,7 @@ describe('a learner who converted at GUIDE is not denied the extension', () => {
       consecutiveFailures: 0,
     }
     expect(qualifiesForBudgetExtension(stalled)).toBe(true)
-    expect(effectiveTurnBudget({ ...stalled, budgetExtensionGranted: true }))
+    expect(legacyTurnBudget({ ...stalled, budgetExtensionGranted: true }))
       .toBe(CONCEPT_TURN_BUDGET + BUDGET_EXTENSION_TURNS)
   })
 

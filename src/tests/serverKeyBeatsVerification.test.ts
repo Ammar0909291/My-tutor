@@ -141,7 +141,9 @@ describe('C. the route skips verification only for a server-owned key', () => {
     const foldAt = route.indexOf('const turnEvidenceForLadder:')
     expect(foldAt).toBeGreaterThan(-1)
     const foldBlock = route.slice(foldAt, foldAt + 2500)
-    expect(foldBlock).toContain('serverGraded: certifies(resolvedGrade)')
+    // 2026-10-07 (owner, CHEM-004/BIO-019): the hoisted certifiesMastery(resolvedGrade, …).
+    expect(foldBlock).toContain('serverGraded: certifiedForMastery')
+    expect(route).toMatch(/const certifiedForMastery: boolean = \(await import\('@\/lib\/teaching\/turnContract'\)\)\s*\.certifiesMastery\(resolvedGrade,/)
   })
 
   it('the unauthored-key downgrade is still reached — it is a separate block', () => {

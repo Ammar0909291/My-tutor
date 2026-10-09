@@ -59,7 +59,12 @@
  * silence when there is no alternative; it does not beat a reviewed one.
  */
 
+/** Owner decision 2026-10-07: every card shown carries an authored key. */
+export const AUTHORED_CARDS_ONLY = true
+
 export type ModelProbeVerdict =
+  /** Owner decision 2026-10-07 — only authored cards are asked. */
+  | 'authored-only-policy'
   /** Below GUIDE: an invented key cannot reach the record here, and silencing
    *  the model would only make the lesson passive. */
   | 'phase-does-not-count'
@@ -87,6 +92,9 @@ export interface ModelProbeDecision {
 }
 
 export interface ModelProbeInput {
+  /** Owner decision 2026-10-07: a model-written card is never served. The
+   *  route sets this from AUTHORED_CARDS_ONLY. */
+  authoredCardsOnly?: boolean
   /**
    * Is this a phase where a question would actually COUNT — GUIDE or a mastery
    * gate (`isProbeAttachablePhase`, in its original un-widened sense)?
@@ -188,6 +196,13 @@ export function decideModelProbe(input: ModelProbeInput): ModelProbeDecision {
   // reason (a wrong invented KEY cannot corrupt mastery below GUIDE) that
   // has nothing to do with whether the QUESTION itself is a repeat.
   if (input.modelProbeAlreadyAsked) return { serve: false, reason: 'model-probe-already-asked' }
+  // OWNER DECISION (2026-10-07, CHEM-048 / PHYS-020 / MATH-002): only
+  // authored cards are asked. A model-written card has no reviewed key, so the
+  // learner's answer could get no verdict (or a wrong one); it is never shown,
+  // in any phase, whether or not an authored alternative exists.
+  // The route passes `authoredCardsOnly: AUTHORED_CARDS_ONLY`; without the
+  // field the decision below is the pre-2026-10-07 one, unchanged.
+  if (input.authoredCardsOnly === true) return { serve: false, reason: 'authored-only-policy' }
   // Scoped to where the harm is. See probeWouldCountThisPhase.
   if (!input.probeWouldCountThisPhase) return { serve: true, reason: 'phase-does-not-count' }
   // Ordered so the STRONGEST evidence decides first: knowing a reviewed item

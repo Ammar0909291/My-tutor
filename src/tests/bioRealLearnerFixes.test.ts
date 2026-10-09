@@ -13,7 +13,7 @@ import { conceptFallbackText } from '@/lib/teaching/conceptFallback'
 import { stripMetaTalk, stripEmpathyOpener, usesAnalogy, analogyCapReached } from '@/lib/teaching/reuseCaps'
 import { buildCanonicalScene, CONCEPT_SCENE_OVERRIDES } from '@/lib/teaching/visual/conceptSceneParams'
 import { validateSceneSpec } from '@/lib/teaching/sceneSpecValidator'
-import { deferCloseForRequest, ABSOLUTE_TURN_CEILING, CONCEPT_TURN_BUDGET } from '@/lib/teaching/conceptBudget'
+import { deferCloseForRequest, ABSOLUTE_TURN_CEILING, TURN_BUDGET_IN_FORCE } from '@/lib/teaching/conceptBudget'
 import { initialConversationState } from '@/lib/teaching/conversationState'
 import { flattenPipeTables } from '@/lib/text/plainNotation'
 
@@ -126,7 +126,9 @@ describe('BIO-017 ecology lessons get their own figure, not the generic food cha
 })
 
 describe('BIO-002 the budget never closes a lesson on a help request', () => {
-  const spent = { ...initialConversationState('bio.mol.noncoding-rna'), conceptId: 'bio.mol.noncoding-rna', turnsOnConcept: CONCEPT_TURN_BUDGET + 6, turnsTotalOnConcept: CONCEPT_TURN_BUDGET + 6 } as never
+  // Since the 2026-10-07 owner decision (stay until mastery) the turn budget
+  // IS the ceiling, so a budget close before it comes from the attempts exit.
+  const spent = { ...initialConversationState('bio.mol.noncoding-rna'), conceptId: 'bio.mol.noncoding-rna', turnsOnConcept: 18, turnsTotalOnConcept: 18, remediationCount: 9, correctAtCheck: 1 } as never
   it('defers on a request, not on "ok", and never past the ceiling', () => {
     expect(deferCloseForRequest(spent, true)).toBe(true)
     expect(deferCloseForRequest(spent, false)).toBe(false)

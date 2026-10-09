@@ -173,7 +173,7 @@ describe('non-regression: everything this fix must not touch', () => {
   })
 
   it('an unrelated still-retired concept remains retired', () => {
-    expect(isRetiredVisualBinding('chem.bond.ionic-bonding')).toBe(true)
-    expect(ask('chem.bond.ionic-bonding').graphical).toBe(false)
+    expect(isRetiredVisualBinding('chem.bond.metallic-bonding')).toBe(true)
+    expect(ask('chem.bond.metallic-bonding').graphical).toBe(false)
   })
 })

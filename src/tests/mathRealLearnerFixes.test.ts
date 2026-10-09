@@ -11,7 +11,7 @@ import {
   preferredExplanationKinds, looksLikeHandle, restoreServerVerdict,
 } from '@/lib/teaching/replyHygiene'
 import { stripMetaTalk, stripEmpathyOpener, analogyCapReached } from '@/lib/teaching/reuseCaps'
-import { deferCloseForRequest, CONCEPT_TURN_BUDGET, ABSOLUTE_TURN_CEILING, MAX_TEACHING_ATTEMPTS } from '@/lib/teaching/conceptBudget'
+import { deferCloseForRequest, TURN_BUDGET_IN_FORCE, ABSOLUTE_TURN_CEILING, MAX_TEACHING_ATTEMPTS, evaluateConceptBudget } from '@/lib/teaching/conceptBudget'
 import { initialConversationState } from '@/lib/teaching/conversationState'
 import { verdictParagraphToKeep } from '@/lib/teaching/lessonCompletion'
 import { lookupConceptVisualBinding, getConceptVisualType } from '@/lib/teaching/visualRegistry'
@@ -29,8 +29,11 @@ describe('MATH-001 the budget close', () => {
     const attempts = { ...base, turnsOnConcept: 10, turnsTotalOnConcept: 10, remediationCount: MAX_TEACHING_ATTEMPTS + 1, correctAtCheck: 1 } as never
     expect(deferCloseForRequest(attempts, true)).toBe(true)
     expect(deferCloseForRequest(attempts, false)).toBe(false)
-    const turns = { ...base, turnsOnConcept: CONCEPT_TURN_BUDGET + 6, turnsTotalOnConcept: CONCEPT_TURN_BUDGET + 6 } as never
-    expect(deferCloseForRequest(turns, true)).toBe(true)
+    // Owner decision 2026-10-07 (stay until mastery): the turn budget is the
+    // ceiling itself, so a learner still answering at turn 18 is not closed at all.
+    const engaged = { ...base, turnsOnConcept: 18, turnsTotalOnConcept: 18 } as never
+    expect(evaluateConceptBudget(engaged).status).not.toBe('exhausted')
+    expect(TURN_BUDGET_IN_FORCE).toBe(ABSOLUTE_TURN_CEILING)
     const ceiling = { ...base, turnsOnConcept: ABSOLUTE_TURN_CEILING, turnsTotalOnConcept: ABSOLUTE_TURN_CEILING, remediationCount: 9, correctAtCheck: 1 } as never
     expect(deferCloseForRequest(ceiling, true)).toBe(false)
   })
@@ -90,7 +93,7 @@ describe('MATH-004/005/016/020/022/023/027 a stub is not a reply', () => {
     expect(floor).toBeGreaterThan(ROUTE.indexOf('THE FALLBACK SENTENCE IS NOT SAID TWICE'))
     expect(floor).toBeLessThan(ROUTE.indexOf('PHASE 0: TURN DECISION PROVENANCE'))
     expect(ROUTE).toMatch(/if \(!servedMcq && !serveLessonComplete && !lessonCompletionHoisted && provider !== 'degraded' && resolvedConceptId\) \{/)
-    expect(ROUTE).toMatch(/const floorText = authored\?\.content\.trim\(\) \?\? regenerated/)
+    expect(ROUTE).toMatch(/let floorText = authored\?\.content\.trim\(\) \?\? regenerated/)
     // with nothing unseen, one regeneration — kept only if it teaches and recites nothing
     expect(ROUTE).toMatch(/const retry = await regenerateWithAppendix\(hy\.TEACHING_FLOOR_APPENDIX\)/)
     expect(ROUTE).toMatch(/if \(unrepeated && !hy\.isStubReply\(unrepeated\) && !\/\\\?\\s\*\$\/\.test\(unrepeated\.trim\(\)\)\) regenerated = unrepeated/)
@@ -227,7 +230,8 @@ describe('MATH-018 one story, then simpler maths', () => {
     const prior = ['Think of making a LEGO house: each brick is one step.', 'A model is an equation that stands for a situation.']
     expect(analogyCapReached(prior, 1)).toBe(true)
     expect(analogyCapReached(prior)).toBe(false)
-    expect(ROUTE).toMatch(/caps\.analogyCapReached\(priorTutor, learnSession\.subject\.slug === 'mathematics' \? 1 : 2\)/)
+    // CHEM-040 / CHEM-055 (2026-10-07): the cap of one now applies to every subject.
+    expect(ROUTE).toMatch(/caps\.analogyCapReached\(priorTutor, 1\)/)
   })
 })
 

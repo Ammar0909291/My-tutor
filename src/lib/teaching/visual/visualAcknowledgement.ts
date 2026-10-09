@@ -143,11 +143,21 @@ export function ensureVisualAcknowledged(
     const kind = asset.scope === 'domain' || !asset.representation
       ? 'figure'
       : asset.representation.replace(/_/g, ' ')
-    const what = clamp(asset.conceptTitle, 60)
+    // CHEM-063 (2026-10-05, chem.elect.batteries): "it shows Batteries and
+    // Fuel Cells" under a Zinc–Carbon Dry Cell figure while the reply taught
+    // the lead–acid battery — the pointer named the LESSON, not the figure.
+    // The figure's own title says what is drawn; the concept title is the
+    // fallback when the figure carries none.
+    const drawnTitle = figureTitleOf(decision)
+    const what = clamp(drawnTitle ?? asset.conceptTitle, 60)
 
     const pointer =
       asset.scope === 'domain'
-        ? `Take a look at the ${kind} beside this message — it's a general illustration related to the topic.`
+        // CHEM-034: the bare "general illustration" caption told the learner
+        // nothing; it now says what is drawn when the figure has a title.
+        ? (drawnTitle
+          ? `Take a look at the ${kind} beside this message — it shows ${clamp(drawnTitle, 60)}, background for this topic rather than a picture of it.`
+          : `Take a look at the ${kind} beside this message — it's a general illustration related to the topic.`)
         : servedSimulation(decision)
           // A simulation is run, not watched: say how to start it.
           ? `Try the experiment beside this message — it shows ${what}. Make a prediction first, then press Run and compare.`
@@ -157,6 +167,13 @@ export function ensureVisualAcknowledged(
   } catch {
     return { text, appended: false }
   }
+}
+
+/** The title the figure itself carries (scene or spec), if any. */
+function figureTitleOf(decision: VisualDecision): string | null {
+  const p = (decision as { payload?: { sceneSpec?: { title?: unknown }; visualSpec?: { title?: unknown } } | null }).payload
+  const t = p?.sceneSpec?.title ?? p?.visualSpec?.title
+  return typeof t === 'string' && t.trim() ? t.trim() : null
 }
 
 /** The pointer ensureVisualAcknowledged appends, matched by its fixed openings

@@ -685,7 +685,10 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   }),
   'chem.elect.industrial': () => buildElectrochemicalCellScene({
     cellType: 'electrolytic',
-    anode: { material: 'Cu (pure, impure at cathode)', ion: 'Cu2+' },
+    // CHEM-092: was 'Cu (pure, impure at cathode)', drawn as "Cu (pure, impure
+    // at cathode) (anode)" — the refining description glued onto a plating cell.
+    // In electroplating the anode is a copper bar that dissolves.
+    anode: { material: 'Cu', ion: 'Cu2+' },
     cathode: { material: 'object to be plated', ion: 'Cu2+' },
     electronsTransferred: 2,
     externalVoltage: 2,
@@ -838,6 +841,34 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   // generators only; every label is taken from the concept's own EB entry
   // (educational-brain/concepts/chemistry/<id>.md, Core Understanding).
   // CHEM-086: "Phase Diagrams" served no figure on any of 18 turns.
+  // CHEM-095: the introductory "Ionic Bonding" lesson was taught from a
+  // live-generated five-box Born–Haber "cycle" (sublimation … lattice
+  // formation) before the learner had met the ionic bond. The concept's
+  // figure is the electron transfer itself.
+  'chem.bond.ionic-bonding': () => buildCellPathwayScene({
+    conceptId: 'chem.bond.ionic-bonding',
+    title: 'Ionic Bonding: One Electron Moves from Na to Cl',
+    teachingGoal: 'A metal atom gives an electron to a non-metal atom; the two ions have opposite charges and attract — that attraction is the ionic bond.',
+    stages: [
+      { name: 'Na atom (2,8,1)', description: 'sodium has one electron in its outer shell' },
+      { name: 'Electron transferred', description: 'Na gives that electron to Cl (2,8,7)' },
+      { name: 'Na⁺ (2,8) and Cl⁻ (2,8,8)', description: 'each ion now has a full outer shell; charges +1 and −1' },
+      { name: 'Opposite charges attract', description: 'the electrostatic attraction is the ionic bond; ions pack in a lattice (NaCl)' },
+    ],
+  }),
+  // CHEM-013: the live-generated "Nature of Matter" scene drew a compound and
+  // a mixture the same way (two touching spheres each). Each class gets its
+  // own column, worded from the EB entry's Core Understanding.
+  'chem.found.matter': () => buildCellComparisonScene({
+    conceptId: 'chem.found.matter',
+    title: 'Elements, Compounds and Mixtures',
+    teachingGoal: 'An element has one kind of atom; a compound has two or more elements chemically combined in a fixed ratio; a mixture holds substances that keep their own properties and can be separated physically.',
+    groups: [
+      { label: 'Element', description: 'pure: one kind of atom', items: ['e.g. iron, oxygen (O₂)', 'fixed melting and boiling point'] },
+      { label: 'Compound', description: 'pure: elements chemically bonded in a fixed ratio', items: ['e.g. water, H₂O — always 8 g O : 1 g H', 'separated only by a chemical reaction'] },
+      { label: 'Mixture', description: 'two or more substances, not bonded', items: ['e.g. salt water, air', 'any ratio; each part keeps its properties', 'separated physically (filter, evaporate, distil)'] },
+    ],
+  }),
   'chem.state.phase-diagram': () => buildCellComparisonScene({
     conceptId: 'chem.state.phase-diagram',
     title: 'Reading a Phase Diagram: Pressure against Temperature',

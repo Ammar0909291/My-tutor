@@ -27,12 +27,12 @@ import {
 import { recordConceptOutcome, isConceptClosed } from '@/lib/teaching/lessonAttempt'
 import { shouldFinalizeLesson, requiredConceptsForLesson } from '@/lib/teaching/lessonCompletion'
 import { initialConversationState, type ConversationState } from '@/lib/teaching/conversationState'
-import { CONCEPT_TURN_BUDGET } from '@/lib/teaching/conceptBudget'
+import { TURN_BUDGET_IN_FORCE } from '@/lib/teaching/conceptBudget'
 
 const ARGS = { userId: 'u1', subjectSlug: 'physics', lessonKey: 'lesson:8' }
 const CONCEPT = 'phys.meas.unit-conversion'
 const CLOSED: ConversationState = {
-  ...initialConversationState(CONCEPT), turnsOnConcept: CONCEPT_TURN_BUDGET,
+  ...initialConversationState(CONCEPT), turnsOnConcept: TURN_BUDGET_IN_FORCE,
 }
 
 function fakeDb() {

@@ -166,7 +166,8 @@ describe('Phase 6 P2 — semantically wrong bindings are suppressed before any t
     // than the concept requires.
     // (phys.opt.reflection left the register 2026-09-30 with its own faithful figure.)
     // (the physics circuit concepts left the register 2026-09-30, batch 9.)
-    expect(isRetiredVisualBinding('chem.bond.ionic-bonding')).toBe(true)
+    // (chem.bond.ionic-bonding left the register 2026-10-07 with its own electron-transfer figure, CHEM-095.)
+    expect(isRetiredVisualBinding('chem.bond.metallic-bonding')).toBe(true)
     // (phys.mech.keplers-laws left the register 2026-09-30 with its own faithful figure.)
     expect(isRetiredVisualBinding('chem.solid.defects')).toBe(true)
   })

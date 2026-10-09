@@ -29,6 +29,7 @@ import { initialConversationState, type ConversationState } from '@/lib/teaching
 import { readFileSync } from 'fs'
 import path from 'path'
 import { isConceptClosed } from '@/lib/teaching/lessonAttempt'
+import { TURN_BUDGET_IN_FORCE } from '@/lib/teaching/conceptBudget'
 
 const USER = 'u1'
 const SUBJ = 'physics'
@@ -105,7 +106,8 @@ const state = (conceptId: string, mastered: boolean): ConversationState => {
   return mastered
     ? { ...s, phase: 'TRANSFER', correctAtCheck: 1, correctAtPractice: 2, turnsOnConcept: 6,
         evidence: { ...s.evidence, serverGraded: true } }
-    : { ...s, phase: 'GUIDE', consecutiveFailures: 3, turnsOnConcept: 12, attempts: 6 }
+    // Stay-until-mastery (owner, 2026-10-07): the spent budget is the turn allowance in force.
+    : { ...s, phase: 'GUIDE', consecutiveFailures: 3, turnsOnConcept: TURN_BUDGET_IN_FORCE, turnsTotalOnConcept: TURN_BUDGET_IN_FORCE, attempts: 6 }
 }
 
 const KEY = lessonKeyFor({ lessonOrder: 12 })!
