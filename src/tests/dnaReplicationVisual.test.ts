@@ -102,12 +102,22 @@ describe('4. the geometry says what the concept says', () => {
     }
   })
 
-  it('the templates are antiparallel: 3′ over 5′ at the parental end, 5′ over 3′ at the far end', () => {
+  it('the templates are antiparallel, and each new strand runs antiparallel to ITS template', () => {
+    // 2026-10-08: the four polarity labels were INVERTED relative to the drawn synthesis (the top
+    // strand was labelled 3′ at the fork side, which made the drawn leading strand run PARALLEL to
+    // its own template). The leading-strand template is read 3′→5′ in the direction the fork moves
+    // (leftward): its 3′ end is the far (right) end, its 5′ end the fork side.
     const at = (t: string) => objs.filter((o) => o.type === 'label' && o.text === t).map((o) => o.position!)
-    const left3 = at('3′').find((p) => p[0] < 0)!, left5 = at('5′').find((p) => p[0] < 0)!
-    const right5 = at('5′').find((p) => p[0] > 0)!, right3 = at('3′').find((p) => p[0] > 0)!
-    expect(left3[1]).toBeGreaterThan(left5[1])   // top strand starts 3′
-    expect(right5[1]).toBeGreaterThan(right3[1]) // and ends 5′
+    const left5 = at('5′').find((p) => p[0] < 0)!, left3 = at('3′').find((p) => p[0] < 0)!
+    const right3 = at('3′').find((p) => p[0] > 0)!, right5 = at('5′').find((p) => p[0] > 0)!
+    expect(left5[1]).toBeGreaterThan(left3[1])   // top strand: 5′ at the parental end …
+    expect(right3[1]).toBeGreaterThan(right5[1]) // … and 3′ at the far end (the other end of that same strand)
+    // Antiparallel: the leading strand's 5′ start (arrow tail, far right) sits against the top template's
+    // 3′ end (far right), and it grows toward the template's 5′ end (the fork side).
+    expect(top[0].from![0]).toBeGreaterThan(0)
+    expect(top[0].to![0]).toBeLessThan(top[0].from![0])
+    // The lagging fragments start (5′) at the left, against the bottom template's 3′ end, and grow right.
+    expect(bottom.every((a) => a.from![0] < a.to![0])).toBe(true)
   })
 
   it('leading strand: ONE continuous piece whose growing 3′ end points at the fork', () => {

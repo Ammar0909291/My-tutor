@@ -1,0 +1,1800 @@
+{
+ "note": "Baseline (pre-repair) Biology semantic review, 2026-10-08. One verdict per concept from the Educational Brain Core Understanding + KG description vs the figure the learner was served. Statuses PASS / FAIL / REVIEW_REQUIRED; FAIL and REVIEW_REQUIRED entries list the concrete issue and the proposed fix. The repairs are in conceptSceneParams.ts.",
+ "reviewed": 199,
+ "verdicts": [
+  {
+   "id": "bio.cell.cell-theory",
+   "semantic": "FAIL",
+   "category": "cell",
+   "issues": [
+    "Event 1 reads '1838: Schleiden and Schwann: all living things are made of one or more cells'. EB dates Schleiden to 1838 (plants) and Schwann to 1839 (extended it to animals); the figure merges two people and two dates into 1838 and credits the general 'all living things' statement to that year.",
+    "Only 2 timeline events are drawn, but EB says three separate contributions built the generalisation in sequence (Schleiden 1838, Schwann 1839, Virchow 1855); the plant -> animal -> 'cells only from cells' progression is lost."
+   ],
+   "fix": "Timeline 1838-1855 with 3 events: '1838 - Schleiden: plants are built from cells'; '1839 - Schwann: extended to animals, so all organisms are built from one or more cells'; '1855 - Virchow: omnis cellula e cellula - cells arise only from pre-existing cells (rules out spontaneous generation of NEW cells today; says nothing about how the first cells arose)'.",
+   "advisory": []
+  },
+  {
+   "id": "bio.cell.prokaryotic-cell",
+   "semantic": "PASS",
+   "category": "cell",
+   "issues": [],
+   "fix": null,
+   "advisory": [
+    "EB essentials only implied: 70S ribosomes (vs eukaryotic 80S) and 'no membrane-bound nucleus or organelles' are not stated outright (the nucleoid step says 'unbound by a nuclear membrane'); cytoplasm is not shown as a part."
+   ]
+  },
+  {
+   "id": "bio.cell.eukaryotic-cell",
+   "semantic": "FAIL",
+   "category": "cell",
+   "issues": [
+    "Group 'Animal cell only' lists only absences ('No cell wall', 'No chloroplast', 'Small/no vacuole'). EB's animal-specific structures (centrioles, lysosomes) are missing, so a group titled 'only' contains nothing animal cells actually have.",
+    "'Shared by both' omits the organelles EB names as shared (mitochondria, endoplasmic reticulum, Golgi apparatus, ribosomes); mitochondria appear nowhere in the figure.",
+    "'Chloroplast' sits under 'Plant cell only' with no caveat; EB explicitly warns that a plant root cell genuinely lacks chloroplasts, so the figure invites the 'every plant cell has chloroplasts' misconception."
+   ],
+   "fix": "Three groups of positive structures. 'Shared by both' (membrane-bound organelles = compartmentalisation): Plasma membrane; Membrane-bound nucleus; Mitochondria; Endoplasmic reticulum; Golgi apparatus; Ribosomes. 'Plant cell (additionally)': Cellulose cell wall; Chloroplasts (absent from non-photosynthetic plant cells, e.g. roots); Large central vacuole. 'Animal cell (additionally)': Centrioles; Lysosomes. Replace the three 'No ...' items with these.",
+   "advisory": []
+  },
+  {
+   "id": "bio.cell.cell-membrane-transport",
+   "semantic": "PASS",
+   "category": "cell",
+   "issues": [],
+   "fix": null,
+   "advisory": [
+    "Fluid-mosaic bilayer (hydrophilic heads out, tails in) is not depicted; Na+/K+ pump stoichiometry (3 Na+ out, 2 K+ in) not shown. Grouping of passive / active / bulk is correct."
+   ]
+  },
+  {
+   "id": "bio.cell.nucleus-chromosomes",
+   "semantic": "FAIL",
+   "category": "cell",
+   "issues": [
+    "Wrong part-whole level: the whole is 'Nuclear envelope' but three of the five parts ('Centromere', 'Telomere', 'Sister chromatids') are features of a condensed/replicated chromosome, not parts of the nuclear envelope.",
+    "'Chromatin' and 'Sister chromatids' / 'Centromere' are shown as simultaneously present static parts, but EB's central point is that chromosome structure is state-dependent: loose chromatin for most of the cell's life; condensed chromosomes only when preparing to divide; one chromatid before S phase, two sister chromatids joined at the centromere after replication.",
+    "EB's opening facts are not shown: the envelope is a double membrane with nuclear pores (mRNA out, proteins in). Karyotype / 46 chromosomes as 23 pairs is also absent."
+   ],
+   "fix": "Two linked structures. (1) Whole = Nucleus (boundary: Nuclear envelope, a double membrane). Parts: Nuclear pores (regulate traffic: mRNA out, proteins in); Nucleolus (rRNA synthesis, ribosome-subunit assembly); Chromatin (DNA wrapped on histones, loosely packed and transcriptionally accessible most of the cell's life). (2) Whole = Condensed chromosome (forms when the cell prepares to divide). Parts: Sister chromatids (two identical copies, present only after S-phase replication; a single chromatid before S); Centromere (joins the sister chromatids); Telomeres (protective repetitive caps at both ends). Optional note: humans have 46 chromosomes = 23 pairs (22 autosome pairs + XX/XY); a karyotype is the full ordered set.",
+   "advisory": []
+  },
+  {
+   "id": "bio.cell.mitochondria-energy",
+   "semantic": "PASS",
+   "category": "cell",
+   "issues": [],
+   "fix": null,
+   "advisory": [
+    "Structure is correct. Not stated: electron transport chain and ATP synthase sit in the inner membrane/cristae (bulk of ATP) vs Krebs cycle in the matrix; semi-autonomy (own circular DNA, 70S ribosomes) not shown."
+   ]
+  },
+  {
+   "id": "bio.cell.chloroplast-structure",
+   "semantic": "PASS",
+   "category": "cell",
+   "issues": [],
+   "fix": null,
+   "advisory": [
+    "Structure is correct. Not stated: light reactions occur in the thylakoid membranes (pigments embedded there); stroma step already names the light-independent (Calvin) reactions."
+   ]
+  },
+  {
+   "id": "bio.cell.endomembrane-system",
+   "semantic": "FAIL",
+   "category": "cell",
+   "issues": [
+    "Stage 2 'Smooth ER: the smooth endoplasmic reticulum synthesises lipids and processes the protein further' is false for the protein route: secretory proteins pass from the rough ER (via vesicles) to the Golgi; the smooth ER makes lipids and detoxifies and is not a stage in the protein pathway. The chain 'Rough ER -> Smooth ER -> Golgi apparatus' misrepresents the route.",
+    "No ER-to-Golgi transport vesicle is drawn; the only vesicle shown buds from the Golgi. EB: vesicles bud off the ER and carry cargo to the Golgi.",
+    "EB's central corrective claim is missing and step 1 implies the opposite: 'ribosomes on the rough endoplasmic reticulum synthesise the protein' suggests every protein starts here. EB: only secretory-pathway proteins (membrane, secreted, lysosomal) are made on rough-ER ribosomes (signal sequence); cytoplasmic proteins are made on free ribosomes and never enter this system.",
+    "Final stage 'Lysosome / secretion' merges two different destinations; vacuoles (storage, plant turgor) are absent."
+   ],
+   "fix": "Ordered pathway (linear): 'Rough ER' (ribosomes directed by a signal sequence make secretory, membrane and lysosomal proteins into the ER lumen) -> 'Transport vesicle' (buds from the ER, carries cargo to the Golgi) -> 'Golgi apparatus' (receives, modifies by glycosylation, SORTS and dispatches) -> destinations: 'Lysosome' (acid hydrolases digest delivered material) / 'Plasma membrane or secretion'. Drop 'Smooth ER' as a stage; show it as a side annotation (synthesises lipids, detoxifies) and add Vacuole (stores water/nutrients/waste; plant central vacuole maintains turgor). Add a note: cytoplasmic proteins are made on free ribosomes and never enter this pathway.",
+   "advisory": []
+  },
+  {
+   "id": "bio.cell.cytoskeleton",
+   "semantic": "PASS",
+   "category": "cell",
+   "issues": [],
+   "fix": null,
+   "advisory": [
+    "Three filament types and their roles are correct. EB's central corrective (the cytoskeleton is dynamic - subunits constantly added/removed - not a fixed skeleton) is not shown."
+   ]
+  },
+  {
+   "id": "bio.cell.cell-cycle",
+   "semantic": "PASS",
+   "category": "cell-division",
+   "issues": [],
+   "fix": null,
+   "advisory": [
+    "Cyclic return G1->S->G2->M->G1 is correctly drawn. Only 'the G2 checkpoint' is named (properly the G2/M checkpoint); the G1/S and spindle-assembly checkpoints and the interphase (G1+S+G2) vs M-phase grouping are not shown."
+   ]
+  },
+  {
+   "id": "bio.cell.mitosis",
+   "semantic": "PASS",
+   "category": "cell-division",
+   "issues": [],
+   "fix": null,
+   "advisory": [
+    "Stage order and the 2 x diploid (2N) identical outcome are correct. The generator draws only labelled nodes (no chromosome glyphs), so chromosome/chromatid depiction cannot be judged. Telophase text 'the cell prepares to divide' omits chromosome decondensation and that cytokinesis (cleavage furrow / cell plate) typically overlaps telophase."
+   ]
+  },
+  {
+   "id": "bio.cell.meiosis",
+   "semantic": "PASS",
+   "category": "cell-division",
+   "issues": [],
+   "fix": null,
+   "advisory": [
+    "Stage order (I then II), homologue vs sister-chromatid separation, crossing over in prophase I, and 4 haploid distinct cells are all correct. Reductional (MI) vs equational (MII) labels and independent assortment are not named."
+   ]
+  },
+  {
+   "id": "bio.cell.cell-signalling",
+   "semantic": "PASS",
+   "category": "cell",
+   "issues": [],
+   "fix": null,
+   "advisory": [
+    "Four-step sequence matches EB. Not shown: surface receptors for hydrophilic signals vs intracellular receptors for hydrophobic (steroid) signals, and the endocrine/paracrine/autocrine/synaptic types."
+   ]
+  },
+  {
+   "id": "bio.cell.apoptosis",
+   "semantic": "PASS",
+   "category": "cell",
+   "issues": [],
+   "fix": null,
+   "advisory": [
+    "Two triggers converging on caspase cascade -> cell death is correctly drawn as a branch/convergence. Not shown: no inflammation / clean phagocyte clearance, and the too-little (cancer) vs too-much (neurodegeneration) disease directions."
+   ]
+  },
+  {
+   "id": "bio.cell.anaerobic-respiration-fermentation",
+   "semantic": "FAIL",
+   "category": "respiration",
+   "issues": [
+    "NAD+ regeneration - which EB states is fermentation's essential function ('regenerate NAD+ from NADH ... allowing glycolysis to CONTINUE') - appears nowhere in the figure; fermentation is shown only as a 'Low ATP yield' variant of respiration, which is the misconception EB corrects.",
+    "'Low ATP yield' is attached to the 'Lactic acid fermentation' and 'Alcoholic fermentation' groups as if fermentation produces the ATP; per EB the 2 ATP/glucose come from glycolysis and fermentation itself adds no net ATP.",
+    "Glycolysis - the oxygen-independent step common to all three routes - is not shown, so the reason O2 matters (final electron acceptor of oxidative phosphorylation) is not conveyed."
+   ],
+   "fix": "Keep the three columns but add the defining function. 'Aerobic respiration': glycolysis -> pyruvate oxidation -> citric acid cycle -> oxidative phosphorylation (needs O2 as final electron acceptor); ~30-32 ATP per glucose. Common first step: 'Glycolysis (no O2 needed): net 2 ATP, converts NAD+ to NADH'. 'Lactic acid fermentation' (muscle in intense exercise; lactic acid bacteria): pyruvate -> lactate in one step, regenerating NAD+. 'Alcoholic fermentation' (yeast): pyruvate -> ethanol + CO2 in two steps, regenerating NAD+. Replace the fermentation 'Low ATP yield' items with 'Purpose: regenerate NAD+ so glycolysis keeps running' and 'No net ATP beyond glycolysis (2 ATP/glucose total)'.",
+   "advisory": []
+  },
+  {
+   "id": "bio.cell.cancer-biology-hallmarks",
+   "semantic": "PASS",
+   "category": "cell",
+   "issues": [],
+   "fix": null,
+   "advisory": []
+  },
+  {
+   "id": "bio.cell.cell-adhesion-tissue-organization",
+   "semantic": "FAIL",
+   "category": "cell",
+   "issues": [
+    "EB's essential content - each adhesion family's specific binding logic (cadherins: homophilic cell-cell, Ca2+-dependent; selectins: transient 'catch-and-roll' binding to carbohydrates; integrins: cell-to-matrix binding fibronectin/collagen) - is collapsed into one node 'Adhesion molecules: cadherins, selectins and integrins hold cells together and to the matrix' with no partner or function information.",
+    "Wrong structure type: three coexisting, non-interchangeable adhesion families are drawn as stage 1 of a process ('Adhesion molecules' -> 'Epithelial-mesenchymal transition'), implying adhesion molecules turn into EMT. The families belong in a comparison/hub; only EMT -> outcomes is a process."
+   ],
+   "fix": "Split into two. (A) Comparison, three groups: 'Cadherins' - cell-to-cell, homophilic (bind identical cadherin on adjacent cell), calcium-dependent, hold same-type cells together; 'Selectins' - transient weaker cell-to-cell adhesion by binding specific carbohydrates, 'catch-and-roll' e.g. white blood cells on vessel walls; 'Integrins' - cell-to-extracellular-matrix, bind fibronectin/collagen, anchor the cell to its scaffold. (B) Pathway: 'Epithelial cell (adherent, polarised sheet)' -> 'EMT (reversible: loses cell-cell adhesion via reduced cadherin function, and apical-basal polarity; becomes mobile)' -> branch to 'Normal: gastrulation, wound healing (then MET restores epithelium)' and 'Pathological: cancer cells detach, invade, metastasise'.",
+   "advisory": []
+  },
+  {
+   "id": "bio.cell.cell-junctions-extracellular-matrix",
+   "semantic": "FAIL",
+   "category": "cell",
+   "issues": [
+    "'Integrin receptors' is listed as a member of the group 'Extracellular matrix: the structural and signalling scaffold outside the cell'. Per EB the ECM is collagen, proteoglycans and fibronectin; integrins are transmembrane receptors on the CELL that bind matrix components outside and the cytoskeleton inside. Wrong group membership."
+   ],
+   "fix": "Group 'Extracellular matrix (scaffold outside cells)': Collagen (tensile strength); Proteoglycans (compressive resistance, hydration); Fibronectin (linking glycoprotein). Move 'Integrin receptors' out to a separate linking item/group 'Cell-matrix link: Integrin receptors (transmembrane; bind matrix outside, cytoskeleton inside; carry signals into the cell)'. Cell-junction group is correct (Tight = seal, Desmosomes = anchor, Gap = communicate).",
+   "advisory": []
+  },
+  {
+   "id": "bio.cell.cytoskeleton-motility",
+   "semantic": "PASS",
+   "category": "cell",
+   "issues": [],
+   "fix": null,
+   "advisory": []
+  },
+  {
+   "id": "bio.cell.membrane-transport-energetics",
+   "semantic": "PASS",
+   "category": "cell",
+   "issues": [],
+   "fix": null,
+   "advisory": [
+    "Passive / primary active / secondary active classification is correct. 'Symport' and 'Antiport' are not defined (same-direction vs opposite-direction movement of the two substances)."
+   ]
+  },
+  {
+   "id": "bio.mol.biomolecule-types",
+   "semantic": "PASS",
+   "category": "molecular",
+   "issues": [],
+   "fix": null,
+   "advisory": [
+    "Four groups correct and match EB. EB's elemental signature simplifies: phospholipids (a lipid) also contain P and N, so 'P => nucleic acid' is a heuristic only."
+   ]
+  },
+  {
+   "id": "bio.mol.carbohydrates-lipids",
+   "semantic": "PASS",
+   "category": "molecular",
+   "issues": [],
+   "fix": null,
+   "advisory": [
+    "Chitin (structural, modified glucose derivative) and phospholipid amphipathic structure are in EB but not drawn. Alpha/beta linkage and digestibility statements are correct."
+   ]
+  },
+  {
+   "id": "bio.mol.proteins-structure",
+   "semantic": "PASS",
+   "category": "molecular",
+   "issues": [],
+   "fix": null,
+   "advisory": [
+    "Hierarchy of four levels is correct and ordered. Arrows could imply every protein passes through a quaternary stage; step 4 narration correctly limits it to multi-chain proteins (e.g. haemoglobin)."
+   ]
+  },
+  {
+   "id": "bio.mol.enzymes",
+   "semantic": "PASS",
+   "category": "molecular",
+   "issues": [],
+   "fix": null,
+   "advisory": [
+    "Competitive vs non-competitive content is correct and matches EB. Figure covers only inhibition; active site / induced fit / activation energy / temperature-pH / Vmax are not shown."
+   ]
+  },
+  {
+   "id": "bio.mol.nucleic-acid-structure",
+   "semantic": "PASS",
+   "category": "dna-rna",
+   "issues": [],
+   "fix": null,
+   "advisory": [
+    "DNA vs RNA (deoxyribose/ribose; A,T,G,C vs A,U,G,C; double vs single stranded) is correct. A-T (2 H-bonds) / G-C (3 H-bonds) pairing and antiparallel strands are only named, not drawn."
+   ]
+  },
+  {
+   "id": "bio.mol.dna-replication",
+   "semantic": "FAIL",
+   "category": "dna-rna",
+   "issues": [
+    "Template polarity labels are inverted relative to the drawn synthesis. Top template is labelled 3' at the parental/fork end (label '3′' at (-5,1.7)) and 5' at the free right end (label '5′' at (5,3)); bottom is 5' left / 3' right. Yet the leading strand is drawn on the TOP template, built 5'->3' leftwards toward the fork from a primer at its right end. A strand grown 5'->3' toward the fork has its 3' end at the fork, so it can only be antiparallel to a template whose 5' end is at the fork. As labelled, the new strand would run parallel to its template.",
+    "By the real rule the leading-strand template is read 3'->5' in the direction of fork movement, so its 3' end is at the free (replicated) end. The labelled top template has its 3' end at the parental end, i.e. it is the lagging-strand template; likewise the bottom label makes it the leading one.",
+    "Self-contradiction: step 2 says 'the top template runs 3′ to 5′ away from the fork, the bottom one 5′ to 3′', but step 4 says on the top template 5'->3' 'points toward the fork' and step 5 says on the bottom template 5'->3' 'points away from the fork'; both are true only if the labels in step 2 are the other way round. The figure therefore teaches the central 5'->3' / antiparallel logic of leading vs lagging strands inconsistently.",
+    "Source pointer (read-only observation): src/lib/teaching/sceneGenerators/dnaReplication.pure.ts - header GEOMETRY comment, the four label('3′'/'5′') calls near lines 88-91, and the narrations near lines 145-147 and 163."
+   ],
+   "fix": "Swap the four polarity labels: parental end top '5′', parental end bottom '3′'; free (right) end top '3′', free end bottom '5′'. Step 2 narration: 'Each separated strand is now a template. They run in opposite directions: the top template runs 5′ to 3′ away from the fork (its 3′ end is at the free end), the bottom one 3′ to 5′.' Keep steps 3-6 as is (primer at the top template's 3′ free end; DNA polymerase builds the leading strand 5′->3′ continuously toward the fork; on the bottom template Okazaki fragments are built 5′->3′ away from the fork from new primers nearer the fork, joined by ligase; semiconservative summary). Also correct the header GEOMETRY comment and the one-line scene summary ('the top one 3′ to 5′ from the fork, the bottom one 5′ to 3′').",
+   "advisory": []
+  },
+  {
+   "id": "bio.mol.transcription",
+   "semantic": "PASS",
+   "category": "dna-rna",
+   "issues": [],
+   "fix": null,
+   "advisory": [
+    "Order initiation -> elongation -> termination -> eukaryotic processing is correct. Template vs coding strand and U-for-T are only in prose, not drawn."
+   ]
+  },
+  {
+   "id": "bio.mol.translation-genetic-code",
+   "semantic": "PASS",
+   "category": "dna-rna",
+   "issues": [],
+   "fix": null,
+   "advisory": [
+    "Initiation/elongation/termination content is correct (AUG/P site; A site; release factor). Elongation repeats per codon (not drawn as a loop, narration says 'moves one codon forward'). mRNA-carries-code vs tRNA-carries-amino-acid distinction is not drawn."
+   ]
+  },
+  {
+   "id": "bio.mol.gene-regulation",
+   "semantic": "PASS",
+   "category": "dna-rna",
+   "issues": [],
+   "fix": null,
+   "advisory": [
+    "lac operon OFF/ON content is correct. Title 'Negative-Feedback Regulation' follows EB wording; strictly the repressor/inducer logic is negative (inducible) control. Eukaryotic regulation (enhancers acting at a distance, chromatin) is not shown - the figure covers only the prokaryotic half of the concept."
+   ]
+  },
+  {
+   "id": "bio.mol.epigenetics",
+   "semantic": "PASS",
+   "category": "dna-rna",
+   "issues": [],
+   "fix": null,
+   "advisory": [
+    "Three mechanisms correct per EB. Hub names the outcome ('Cell-Type-Specific Gene Expression'), not 'epigenetic regulation'; the defining point that marks change expression without altering the DNA sequence is not stated in the figure."
+   ]
+  },
+  {
+   "id": "bio.mol.noncoding-rna",
+   "semantic": "PASS",
+   "category": "dna-rna",
+   "issues": [],
+   "fix": null,
+   "advisory": []
+  },
+  {
+   "id": "bio.mol.signal-transduction-pathways",
+   "semantic": "PASS",
+   "category": "molecular",
+   "issues": [],
+   "fix": null,
+   "advisory": [
+    "Reception -> transduction -> response is correct. Amplification (one receptor, thousands of downstream molecules) and the surface-receptor-not-entry point are not drawn."
+   ]
+  },
+  {
+   "id": "bio.mol.dna-damage-repair",
+   "semantic": "PASS",
+   "category": "dna-rna",
+   "issues": [],
+   "fix": null,
+   "advisory": []
+  },
+  {
+   "id": "bio.mol.bioenergetics",
+   "semantic": "PASS",
+   "category": "molecular",
+   "issues": [],
+   "fix": null,
+   "advisory": []
+  },
+  {
+   "id": "bio.mol.alternative-splicing-rna-diversity",
+   "semantic": "PASS",
+   "category": "dna-rna",
+   "issues": [],
+   "fix": null,
+   "advisory": []
+  },
+  {
+   "id": "bio.mol.chromatin-structure-genome-organization",
+   "semantic": "PASS",
+   "category": "dna-rna",
+   "issues": [],
+   "fix": null,
+   "advisory": [
+    "Nucleosome -> higher-order folding -> TAD ordering is acceptable. EB's key point (enhancer need not be linearly adjacent to its target; 3D architecture is distinct from chemical marks) is not shown."
+   ]
+  },
+  {
+   "id": "bio.mol.metabolic-regulation-integration",
+   "semantic": "PASS",
+   "category": "molecular",
+   "issues": [],
+   "fix": null,
+   "advisory": [
+    "Insulin (fed) vs glucagon (fasted) content is correct. Allosteric regulation and end-product feedback inhibition of an early/rate-limiting enzyme (first half of EB) are not shown."
+   ]
+  },
+  {
+   "id": "bio.mol.protein-quality-control-autophagy",
+   "semantic": "PASS",
+   "category": "molecular",
+   "issues": [],
+   "fix": null,
+   "advisory": []
+  },
+  {
+   "id": "bio.gen.mendelian-genetics",
+   "semantic": "PASS",
+   "category": "genetics",
+   "issues": [],
+   "fix": null,
+   "advisory": [
+    "Punnett cells (AA, Aa, Aa, aa) are in the correct row/column positions and the 3 dominant : 1 recessive ratio matches. Genotype ratio 1:2:1 is not stated; dihybrid 9:3:3:1 not shown."
+   ]
+  },
+  {
+   "id": "bio.gen.gene-interactions",
+   "semantic": "FAIL",
+   "category": "genetics",
+   "issues": [
+    "Polygenic inheritance - one of the five patterns EB (and the KG) names: traits controlled by MANY genes acting together (e.g. human height, skin colour) giving continuous graded variation - is missing; the figure titled 'Extensions of Mendelism' shows only four groups.",
+    "Incomplete dominance group has no example (EB: heterozygote is an intermediate blend), unlike the other three groups; the EB's reaction-norm point (same genotype, different environment, different phenotype) is also absent."
+   ],
+   "fix": "Add a fifth group: 'Polygenic inheritance: many genes acting together -> continuous, graded phenotype (e.g. human height, skin colour)'. Give incomplete dominance an example item (heterozygote is an intermediate blend of the two homozygous phenotypes). Optional sixth note: 'Reaction norm - one genotype gives a range of phenotypes depending on environment (identical twins can differ)'. Existing four groups are correct.",
+   "advisory": []
+  },
+  {
+   "id": "bio.gen.chromosomal-theory-linkage",
+   "semantic": "PASS",
+   "category": "genetics",
+   "issues": [],
+   "fix": null,
+   "advisory": [
+    "Linkage vs distance content is correct. 'Recombine ~ 50%' strictly applies to unlinked/very distant genes (loosely linked genes recombine less than 50%, approaching it). Sex determination / sex-linked inheritance and centimorgan mapping are not shown."
+   ]
+  },
+  {
+   "id": "bio.gen.pedigree-human-genetics",
+   "semantic": "PASS",
+   "category": "genetics",
+   "issues": [],
+   "fix": null,
+   "advisory": [
+    "Four patterns match EB. X-linked recessive item 'Affected father -> all daughters are carriers, no sons affected' could be read as 'no sons are ever affected' (sons of a carrier mother can be); EB says the father passes his X to none of his sons. X-linked dominant step says 'the same sex asymmetry' without saying 'same as X-linked recessive'. Pedigree symbol conventions are not shown."
+   ]
+  },
+  {
+   "id": "bio.gen.mutations",
+   "semantic": "PASS",
+   "category": "genetics",
+   "issues": [],
+   "fix": null,
+   "advisory": []
+  },
+  {
+   "id": "bio.gen.population-genetics",
+   "semantic": "PASS",
+   "category": "genetics",
+   "issues": [],
+   "fix": null,
+   "advisory": [
+    "Four forces correct. HWE equations (p+q=1; p^2+2pq+q^2=1) and the 'null hypothesis for evolution' framing are not shown."
+   ]
+  },
+  {
+   "id": "bio.gen.genetic-engineering",
+   "semantic": "PASS",
+   "category": "genetics",
+   "issues": [],
+   "fix": null,
+   "advisory": []
+  },
+  {
+   "id": "bio.gen.transposable-elements",
+   "semantic": "PASS",
+   "category": "genetics",
+   "issues": [],
+   "fix": null,
+   "advisory": []
+  },
+  {
+   "id": "bio.gen.conservation-genetics",
+   "semantic": "PASS",
+   "category": "genetics",
+   "issues": [],
+   "fix": null,
+   "advisory": []
+  },
+  {
+   "id": "bio.gen.genetic-testing-counseling",
+   "semantic": "PASS",
+   "category": "genetics",
+   "issues": [],
+   "fix": null,
+   "advisory": [
+    "Carrier screening vs prenatal diagnosis timing and purpose are correct. NIPT sits under 'Prenatal diagnostic testing' though it is a screening test; the item label 'screening only' handles this."
+   ]
+  },
+  {
+   "id": "bio.gen.quantitative-genetics-heritability",
+   "semantic": "PASS",
+   "category": "genetics",
+   "issues": [],
+   "fix": null,
+   "advisory": [
+    "Broad (all genetic variance) vs narrow (additive only) is correct. 'H2' / 'h2' are plain text (H squared / h squared intended). EB's central point (heritability is population-specific, not a fixed property of a trait) is not shown."
+   ]
+  },
+  {
+   "id": "bio.dev.gametogenesis-fertilisation-dev",
+   "semantic": "PASS",
+   "category": "other",
+   "issues": [],
+   "fix": null,
+   "advisory": [
+    "4 sperm vs 1 egg + polar bodies and unequal cytokinesis are correct per EB. EB's central corrective (an unfertilised egg is arrested at metaphase II; meiosis II completes only at fertilisation) is not shown. KG description (zygote to adult, cleavage, totipotency) differs from the EB content the figure follows."
+   ]
+  },
+  {
+   "id": "bio.dev.morphogenesis-differentiation",
+   "semantic": "PASS",
+   "category": "other",
+   "issues": [],
+   "fix": null,
+   "advisory": [
+    "Morphogen gradient -> determination -> physical sculpting is correct. EB's central corrective (differentiation is NOT gene loss; all somatic cells keep identical genomes) and Hox conservation are not shown."
+   ]
+  },
+  {
+   "id": "bio.dev.stem-cells-regeneration",
+   "semantic": "PASS",
+   "category": "other",
+   "issues": [],
+   "fix": null,
+   "advisory": [
+    "Totipotent > pluripotent > multipotent hierarchy is correct. The two defining capacities (self-renewal + differentiation), niche and iPSCs are not shown."
+   ]
+  },
+  {
+   "id": "bio.dev.aging-senescence-biology",
+   "semantic": "PASS",
+   "category": "other",
+   "issues": [],
+   "fix": null,
+   "advisory": [
+    "Senescence vs apoptosis is correct per EB. Apoptosis group has no item row; telomere shortening / Hayflick limit and the hallmarks of ageing are not shown."
+   ]
+  },
+  {
+   "id": "bio.dev.organogenesis",
+   "semantic": "PASS",
+   "category": "other",
+   "issues": [],
+   "fix": null,
+   "advisory": [
+    "Reciprocal induction is correctly drawn as a closed two-way loop (cyclic return present). Limb-bud (AER) and neural-tube worked examples are not shown."
+   ]
+  },
+  {
+   "id": "bio.dev.regeneration-biology",
+   "semantic": "REVIEW_REQUIRED",
+   "category": "other",
+   "issues": [
+    "EB's central unifying claim - blastema formation (a mass of dedifferentiated, proliferative cells at the injury site that re-differentiates to rebuild the structure) is the SHARED mechanism - appears only in the scene title; none of the four groups or narrations states or explains it (planarian/axolotl/zebrafish groups give only the outcome), so the learner never sees what a blastema is.",
+    "Mammals group ('favour rapid scarring over blastema-based regrowth', trade-off item) matches EB but omits that mammals retain stem cells and some regeneration (liver, wound healing); alone it could read as 'mammals cannot regenerate at all'."
+   ],
+   "fix": "Add a shared-mechanism element linked to all organism groups: 'Blastema formation (shared): cells near the wound dedifferentiate into a proliferative, stem-cell-like mass at the injury site, then re-differentiate to rebuild the missing structure using positional cues like those of embryonic development'. Mammals item: 'Limited, not absent: stem cells and some regeneration (liver, wound healing) remain; rapid scarring is favoured over slower blastema-based regrowth (trade-off: fast wound closure vs full structural restoration)'.",
+   "advisory": []
+  },
+  {
+   "id": "bio.found.what-is-biology",
+   "semantic": "PASS",
+   "category": "other",
+   "issues": [],
+   "fix": null,
+   "advisory": []
+  },
+  {
+   "id": "bio.found.characteristics-of-life",
+   "semantic": "PASS",
+   "category": "other",
+   "issues": [],
+   "fix": null,
+   "advisory": []
+  },
+  {
+   "id": "bio.found.classification-need",
+   "semantic": "PASS",
+   "category": "taxonomy",
+   "issues": [],
+   "fix": null,
+   "advisory": [
+    "Eight ranks in correct order (Domain -> ... -> Species) with correct examples (Animalia, Chordata, Mammalia, Carnivora, Felidae, Panthera). It is a nested hierarchy, so the arrows mean 'narrower', not a time-ordered process; Domain has no example."
+   ]
+  },
+  {
+   "id": "bio.found.five-kingdom",
+   "semantic": "PASS",
+   "category": "taxonomy",
+   "issues": [],
+   "fix": null,
+   "advisory": [
+    "Five groups (Monera, Protista, Fungi, Plantae, Animalia) with correct attributes. Item rows show only some of the three criteria (e.g. Protista shows 'Unicellular' but not 'Eukaryotic'); EB's fungi-resemble-plants-but-are-closer-to-animals point is not shown."
+   ]
+  },
+  {
+   "id": "bio.found.binomial-nomenclature",
+   "semantic": "FAIL",
+   "category": "taxonomy",
+   "issues": [
+    "Step 1 narration reads 'Scientific Name Format: the homo sapiens marks the outer boundary.' - the binomial is written lower-case in a lesson whose rule is 'genus capitalised, whole name italicised'; the sentence is also meaningless as written.",
+    "Part label 'species: sapiens' presents the epithet as 'the species'. EB: 'sapiens' is the species EPITHET and identifies a species only together with its genus (the whole binomial is the species name).",
+    "'Whole name italicised' is a typographic rule, not a structural part of the name, so the whole/parts diagram mixes name components with formatting."
+   ],
+   "fix": "Step 1: 'Scientific Name Format: the full binomial, Homo sapiens, is the whole name.' Parts: 'Genus: Homo - capitalised; may be abbreviated to H. after its first full use in a document'; 'Species epithet: sapiens - lowercase; never used alone, because it identifies a species only within its genus'; formatting rule as an annotation rather than a part: 'The whole name is italicised (or underlined by hand)'.",
+   "advisory": []
+  },
+  {
+   "id": "bio.found.viruses-viroids-lichens",
+   "semantic": "PASS",
+   "category": "taxonomy",
+   "issues": [],
+   "fix": null,
+   "advisory": []
+  },
+  {
+   "id": "bio.found.microscopy-basics",
+   "semantic": "FAIL",
+   "category": "other",
+   "issues": [
+    "Title/content mismatch: the title says 'Magnification vs. Resolution: Two Independent Properties' but the two groups are 'Light microscope' vs 'Electron microscope'. Magnification is never shown or defined, so the figure does not present the two properties the title names.",
+    "EB's central points are absent: increasing magnification past the resolution limit only enlarges the blur (no new detail), and staining adds contrast without changing the resolution limit."
+   ],
+   "fix": "Comparison with groups 'Magnification' (how many times larger the image appears) and 'Resolution' (smallest distance at which two points are still seen as separate), plus the item 'Magnifying beyond the resolution limit only enlarges the blur'. Then examples: 'Light microscope: resolution ceiling ~200 nm (limited by wavelength of visible light) regardless of magnification' and 'Electron microscope: ~0.1 nm (about 2000x finer; resolves a membrane or an organelle's internal architecture)'. Add 'Staining: adds optical contrast to near-transparent material; does not change the resolution limit'. Alternatively retitle the current figure 'Light vs. Electron Microscopy: Resolution Limits'. The numbers shown (200 nm, 0.1 nm, 2000x) are correct.",
+   "advisory": []
+  },
+  {
+   "id": "bio.found.biomes-levels-of-organisation",
+   "semantic": "PASS",
+   "category": "other",
+   "issues": [],
+   "fix": null,
+   "advisory": [
+    "Twelve levels Molecules -> Biosphere in correct order with correct population/community/ecosystem definitions. Hierarchy of nested levels drawn as arrows ('composes into'), not a time process."
+   ]
+  },
+  {
+   "id": "bio.found.scientific-method-in-biology",
+   "semantic": "FAIL",
+   "category": "process",
+   "issues": [
+    "No 'Hypothesis' stage: EB's sequence is observation -> hypothesis (specific, testable, falsifiable explanation) -> controlled experiment. The figure folds it into the Observation narration ('prompts a specific, testable hypothesis'), so the central object of the method is never a step.",
+    "Drawn as an open one-way chain. EB stresses that a falsified hypothesis is a valuable result that narrows the explanations (so the next move is to revise and retest) and that findings are only provisionally trusted until replicated; no return/feedback path exists.",
+    "Final node merges 'Replication and peer review' with narration 'independent researchers reproduce the result; experts scrutinise methods before publication' - peer review precedes publication and replication follows it, so the combined order is muddled."
+   ],
+   "fix": "Pathway with a feedback loop (cyclic/return path): 'Observation' -> 'Hypothesis (specific, testable, falsifiable)' -> 'Controlled experiment (vary exactly one independent variable; hold control variables constant; measure the dependent variable; compare with a control group)' -> 'Statistical evaluation (adequate sample size; could chance explain the result?)' -> 'Peer review (independent experts scrutinise methods/conclusions - a necessary check)' -> 'Independent replication (other researchers obtain the same result) -> provisionally accepted'. Return path: 'Hypothesis falsified or not replicated -> revise explanation and retest (a falsified hypothesis is a genuine, valuable result)'.",
+   "advisory": []
+  },
+  {
+   "id": "bio.found.unifying-themes-in-biology",
+   "semantic": "PASS",
+   "category": "other",
+   "issues": [],
+   "fix": null,
+   "advisory": []
+  },
+  {
+   "id": "bio.physio.digestive-system",
+   "semantic": "PASS",
+   "category": "physiology",
+   "issues": [],
+   "fix": null
+  },
+  {
+   "id": "bio.physio.respiratory-system",
+   "semantic": "PASS",
+   "category": "physiology",
+   "issues": [
+    "ADVISORY (non-blocking): Figure shows only the ventilation-vs-gas-exchange distinction; alveolar adaptations (surface area, one-cell walls, capillary network) and the 'exhaled air still ~16% O2' fact are not drawn. 'O2 in, CO2 out' is body-perspective (O2 into blood, CO2 into alveolar air) but nothing in it is false."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.physio.circulatory-system",
+   "semantic": "PASS",
+   "category": "physiology",
+   "issues": [
+    "ADVISORY (non-blocking): The EB's 'single most important rule' (arteries = away from heart, veins = toward, not oxygen content) is only hinted at by 'Pulmonary artery carries DEOXYGENATED blood'; the pulmonary-vein (oxygenated) counterpart is not shown. All stated flow paths and O2/CO2 directions are correct."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.physio.excretory-system",
+   "semantic": "REVIEW_REQUIRED",
+   "category": "physiology",
+   "issues": [
+    "Step 2 narration 'essentially all glucose, most water, and useful ions are actively reabsorbed back into the blood' says water is ACTIVELY reabsorbed. Glucose and ions are actively/co-transported; water follows passively by osmosis (and ADH-regulated in the collecting duct). The wording is copied from the EB, so the error originates in the EB but the figure teaches it.",
+    "ADVISORY (non-blocking): The EB's headline claim 'selectivity comes from reabsorption, not filtration' and 'urine = concentrated urea solution' are only implicit (step 1 says 'non-selective', step 2 says 'Selective reabsorption')."
+   ],
+   "fix": "Step 2 narration -> 'Selective reabsorption: essentially all glucose and the useful ions are actively reabsorbed back into the blood (water follows by osmosis) in the proximal tubule and loop of Henle - this is where the system's selectivity lives, not in filtration'. Stage order Ultrafiltration -> Selective reabsorption -> Secretion is as in the EB and can stay. Owner may prefer to fix the EB sentence at the same time."
+  },
+  {
+   "id": "bio.physio.nervous-system",
+   "semantic": "PASS",
+   "category": "physiology",
+   "issues": [
+    "ADVISORY (non-blocking): Figure covers the action-potential cycle only (cyclic flag correct, ion directions correct). Threshold / all-or-nothing, CNS-PNS split and the synaptic electrical-chemical-electrical conversion are not shown."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.physio.endocrine-system",
+   "semantic": "PASS",
+   "category": "physiology",
+   "issues": [],
+   "fix": null
+  },
+  {
+   "id": "bio.physio.musculoskeletal-system",
+   "semantic": "PASS",
+   "category": "physiology",
+   "issues": [
+    "ADVISORY (non-blocking): Only the sliding-filament sequence is drawn (order and A-band-constant statement correct); bone remodelling and antagonistic pairs are not shown."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.physio.immune-system-intro",
+   "semantic": "PASS",
+   "category": "physiology",
+   "issues": [],
+   "fix": null
+  },
+  {
+   "id": "bio.physio.blood-physiology-hemostasis",
+   "semantic": "PASS",
+   "category": "physiology",
+   "issues": [
+    "ADVISORY (non-blocking): Haemostasis order (vascular spasm -> platelet plug -> coagulation) is correct; haematopoiesis and ABO/Rh transfusion logic from the EB are not shown."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.physio.comparative-animal-physiology",
+   "semantic": "PASS",
+   "category": "physiology",
+   "issues": [
+    "ADVISORY (non-blocking): Hub of four gas-exchange strategies is correctly a hub (coexisting list) and all four descriptions are correct; open vs closed circulation and osmoregulation parts of the EB/KG are not shown."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.physio.endocrine-disorders-feedback",
+   "semantic": "PASS",
+   "category": "cycles",
+   "issues": [
+    "ADVISORY (non-blocking): Positive-feedback loop is correctly marked cyclic and ordered (cervix stretch -> oxytocin -> stronger contractions -> more stretch). Step 4 'the sequence repeats' omits that the escalation ends when delivery removes the stretch stimulus; hyper/hypo, primary/secondary and receptor-mutation content is not drawn."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.physio.exercise-physiology",
+   "semantic": "PASS",
+   "category": "physiology",
+   "issues": [],
+   "fix": null
+  },
+  {
+   "id": "bio.physio.homeostasis-thermoregulation",
+   "semantic": "PASS",
+   "category": "physiology",
+   "issues": [
+    "ADVISORY (non-blocking): Group name 'Heat-gain responses' includes vasoconstriction, which conserves rather than gains heat (the item text itself says 'conserving heat'; EB wording is 'heat-generation and heat-conservation'). The hypothalamic set-point / negative-feedback loop is not drawn."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.physio.integumentary-system",
+   "semantic": "PASS",
+   "category": "physiology",
+   "issues": [
+    "ADVISORY (non-blocking): Wound-healing order (haemostasis -> inflammation -> proliferation -> remodelling) is correct; the three skin layers and the four skin functions from the EB are not shown."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.physio.lymphatic-system-detail",
+   "semantic": "PASS",
+   "category": "physiology",
+   "issues": [
+    "ADVISORY (non-blocking): Dual-role comparison is correct; the one-way flow direction (tissues -> central veins), emphasised in the EB, is not drawn."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.physio.muscle-physiology-energetics",
+   "semantic": "PASS",
+   "category": "respiration",
+   "issues": [],
+   "fix": null
+  },
+  {
+   "id": "bio.neuro.audition-vestibular-system",
+   "semantic": "PASS",
+   "category": "physiology",
+   "issues": [
+    "ADVISORY (non-blocking): Sound path outer -> middle -> inner ear (cochlea) is correct; the vestibular/balance half of the concept is not shown."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.neuro.autonomic-stress-physiology",
+   "semantic": "PASS",
+   "category": "physiology",
+   "issues": [
+    "ADVISORY (non-blocking): HPA chain hypothalamus -> pituitary -> adrenal -> cortisol is correct and matches the EB's 'sequential causal chain'; the fast sympathetic/parasympathetic arm and the acute-adaptive vs chronic-damaging (allostatic load) message are not shown."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.neuro.brain-regional-organization",
+   "semantic": "PASS",
+   "category": "physiology",
+   "issues": [
+    "ADVISORY (non-blocking): Four lobes and their functions are correct. The figure draws only the cortex scale; the forebrain/midbrain/hindbrain scheme (and that the lobes sit WITHIN the forebrain) and the limbic system are not shown."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.neuro.cognitive-neuroscience-consciousness",
+   "semantic": "FAIL",
+   "category": "physiology",
+   "issues": [
+    "Hub label / step 1 'Cognitive neuroscience of consciousness: three distinct lines of evidence' mislabels the spokes: 'Top-down control' (attention/executive function) is a cognitive control mechanism and 'Neural correlates of consciousness' is a research programme; only 'Split-brain evidence' is experimental evidence (EB: attention and executive function are 'top-down cognitive control mechanisms'; NCC is 'an active research programme'). Low severity - hub wording only; spoke narrations are accurate."
+   ],
+   "fix": "Hub node text and step 1 narration -> 'Cognitive neuroscience of consciousness: three distinct ideas - top-down control, neural correlates, and split-brain evidence' (or 'a control mechanism, a research programme, and an experimental paradigm'). Keep the three spokes and their narrations unchanged."
+  },
+  {
+   "id": "bio.neuro.learning-memory-neurobiology",
+   "semantic": "PASS",
+   "category": "physiology",
+   "issues": [
+    "ADVISORY (non-blocking): Declarative vs procedural comparison is correct (hippocampus for formation, consolidates to cortex; procedural = basal ganglia/cerebellum, preserved after hippocampal damage). The EB's opening content, synaptic plasticity (LTP/LTD) and the Hebbian rule, is not shown."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.neuro.neural-circuits-computation",
+   "semantic": "FAIL",
+   "category": "physiology",
+   "issues": [
+    "Hub label / step 1 'Four recurring circuit motifs, each a distinct computation' is wrong for the 'Rate vs temporal coding' spoke: EB says rate coding and temporal coding are two 'coding strategies' neurons can use ('non-mutually-exclusive'), not circuit motifs; only feedforward and lateral inhibition are motifs, and CPGs are a circuit-level rhythm example. Scene title 'Neural Circuit Motifs: Inhibition, Coding, and Rhythm' repeats the category error. Low severity - label wording only; spoke narrations are accurate."
+   ],
+   "fix": "Hub node text and step 1 narration -> 'Neural circuit computation: two inhibitory motifs, two coding strategies, and rhythm-generating circuits'; scene title -> 'Neural Circuit Computation: Inhibition, Coding, and Rhythm'. Spokes unchanged (optionally add 'non-mutually-exclusive' to the Rate vs temporal coding narration)."
+  },
+  {
+   "id": "bio.neuro.neurodegenerative-disease",
+   "semantic": "PASS",
+   "category": "physiology",
+   "issues": [
+    "ADVISORY (non-blocking): Amyloid-beta (extracellular) vs tau (intracellular) is correct; Parkinson's (selective dopaminergic loss in substantia nigra) and the shared misfolding theme are not shown."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.neuro.neurodevelopment",
+   "semantic": "PASS",
+   "category": "process",
+   "issues": [],
+   "fix": null
+  },
+  {
+   "id": "bio.neuro.neurotransmitter-systems",
+   "semantic": "PASS",
+   "category": "physiology",
+   "issues": [
+    "ADVISORY (non-blocking): Ionotropic vs metabotropic is correct; glutamate/GABA pair and 'receptor determines excitatory vs inhibitory' are not shown."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.neuro.sensory-transduction",
+   "semantic": "PASS",
+   "category": "physiology",
+   "issues": [
+    "ADVISORY (non-blocking): Four receptor categories correctly drawn as a hub (list); the graded receptor potential, adaptation and frequency coding are not shown."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.neuro.sleep-circadian-biology",
+   "semantic": "PASS",
+   "category": "cycles",
+   "issues": [
+    "ADVISORY (non-blocking): Molecular clock loop is correct and marked cyclic (CLOCK/BMAL1 -> PER/CRY accumulate -> inhibit CLOCK/BMAL1 -> PER/CRY decline -> repeat); NREM/REM stages and the SCN pacemaker are not shown."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.neuro.vision-visual-system",
+   "semantic": "PASS",
+   "category": "physiology",
+   "issues": [
+    "ADVISORY (non-blocking): Cornea/lens -> retina -> bipolar/ganglion -> optic nerve -> visual cortex is correct; the EB's distinctive point that photoreceptors depolarise in the dark and hyperpolarise in light is not stated."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.immuno.innate-adaptive-immunity",
+   "semantic": "PASS",
+   "category": "physiology",
+   "issues": [
+    "ADVISORY (non-blocking): Correct and the title carries the EB's 'cooperate, not sequential' claim; complement and physical barriers are not listed under innate."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.immuno.antibody-structure-function",
+   "semantic": "PASS",
+   "category": "physiology",
+   "issues": [
+    "ADVISORY (non-blocking): Five isotype roles are all correct; Y-shaped heavy/light-chain structure and 'antibodies do not directly kill pathogens' (neutralisation, opsonisation, complement, agglutination) are not shown."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.immuno.vaccination-immunisation",
+   "semantic": "PASS",
+   "category": "physiology",
+   "issues": [
+    "ADVISORY (non-blocking): Five vaccine types and examples are correct; herd immunity and 'mRNA cannot alter DNA' are not shown."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.immuno.immune-disorders",
+   "semantic": "PASS",
+   "category": "physiology",
+   "issues": [],
+   "fix": null
+  },
+  {
+   "id": "bio.immuno.mhc-antigen-presentation",
+   "semantic": "PASS",
+   "category": "physiology",
+   "issues": [
+    "ADVISORY (non-blocking): Class I vs II (all nucleated cells / inside peptides / CD8 vs APCs only / extracellular / CD4) is correct; MHC restriction and transplant rejection are not shown."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.immuno.cancer-immunology-immunotherapy",
+   "semantic": "PASS",
+   "category": "physiology",
+   "issues": [],
+   "fix": null
+  },
+  {
+   "id": "bio.immuno.cytokines-immune-signaling",
+   "semantic": "PASS",
+   "category": "physiology",
+   "issues": [
+    "ADVISORY (non-blocking): Three classes correct as a hub; innate-adaptive coordination and cytokine storm are not shown."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.immuno.t-cell-development-tolerance",
+   "semantic": "PASS",
+   "category": "process",
+   "issues": [
+    "ADVISORY (non-blocking): Order positive -> negative selection (thymus, central tolerance) -> peripheral tolerance is correct, but the scene title 'T Cell Selection in the Thymus: Two Sequential Tests' does not match a 3-stage chain whose last stage is outside the thymus and is a separate system per the EB (narration of step 3 does say 'escape the thymus')."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.plant.photosynthesis",
+   "semantic": "PASS",
+   "category": "photosynthesis",
+   "issues": [],
+   "fix": null
+  },
+  {
+   "id": "bio.plant.plant-respiration",
+   "semantic": "PASS",
+   "category": "respiration",
+   "issues": [],
+   "fix": null
+  },
+  {
+   "id": "bio.plant.plant-water-relations",
+   "semantic": "REVIEW_REQUIRED",
+   "category": "physiology",
+   "issues": [
+    "Stage order Transpiration -> Cohesion and adhesion -> Water enters the roots is the causal order of the pull (leaf to root) but is the reverse of the actual water-flow direction (roots to leaves in xylem). Arrows drawn leaf-to-root with no stated 'upward' flow can be read as water moving down the plant; nowhere in the narration does it say the column moves UP from roots to leaves (EB: 'the entire water column moves upward as one continuous, unbroken string whenever it is pulled from the top'). No statement is false, but xylem direction is ambiguous.",
+    "Step 3 'osmosis pulls water from the soil...' - osmosis is passive down the water-potential gradient; it is the transpiration pull that draws water in. Minor wording."
+   ],
+   "fix": "Either (a) keep the causal order and make direction explicit: step 1 'Transpiration: water evaporates from leaf stomata, creating tension - a pulling force - at the TOP of the xylem column'; step 2 'Cohesion and adhesion: water molecules stick to each other (cohesion) and to the xylem walls (adhesion), so the whole column is pulled UPWARD as one unbroken string'; step 3 'Water enters the roots: as the column is pulled up, water moves by osmosis down its water-potential gradient from soil (higher) into root hair cells (lower)'; add 'no pump - water flows roots to leaves' to the title/step 1; or (b) reorder in flow direction: Water enters roots (osmosis) -> rises as one cohesive column in xylem -> pulled by transpiration tension at leaf stomata."
+  },
+  {
+   "id": "bio.plant.mineral-nutrition",
+   "semantic": "PASS",
+   "category": "physiology",
+   "issues": [
+    "ADVISORY (non-blocking): Macro/micro contents match the EB; nutrient mobility (N old leaves first vs Mg young leaves first) and active-transport uptake are not shown."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.plant.plant-growth-hormones",
+   "semantic": "PASS",
+   "category": "physiology",
+   "issues": [
+    "ADVISORY (non-blocking): Five hormone roles and 'ethylene is a gas' are correct; auxin concentration/tissue dependence (shoot vs root) is not shown."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.plant.mycorrhizae-plant-symbioses",
+   "semantic": "FAIL",
+   "category": "process",
+   "issues": [
+    "Stage order is causally wrong: 'Nitrogen fixation: nitrogenase converts atmospheric N2...' is followed (arrow) by 'Oxygen protection: leghaemoglobin binds free oxygen, protecting nitrogenase from inactivation'. Per the EB nitrogenase is IRREVERSIBLY INACTIVATED by O2, so the low-oxygen nodule environment (leghaemoglobin) must be in place for nitrogenase to function at all - it is a precondition of/concurrent with fixation, not a later step. The chain implies protection happens after fixation.",
+    "ADVISORY (non-blocking): The mycorrhiza half of the concept (arbuscular = hyphae penetrate root cells vs ectomycorrhizal = sheath + Hartig net outside cells, both trading sugars for water/minerals) is entirely absent although the concept is titled 'Mycorrhizae and Root Symbioses'."
+   ],
+   "fix": "Reorder the four stages: (1) 'Root hair infection: rhizobium bacteria infect legume root hairs'; (2) 'Nodule formation: specialised root structures form, housing the bacteria'; (3) 'Low-oxygen nodule: leghaemoglobin (plant-made, haemoglobin-like) binds free oxygen tightly, keeping free O2 low so nitrogenase is not irreversibly inactivated, while still supplying bound O2 for the bacteria's respiration'; (4) 'Nitrogen fixation: nitrogenase converts atmospheric N2 into biologically usable ammonia'. If the 4-stage order is kept, change step 4 narration to state that leghaemoglobin protection operates continuously during, and is required for, fixation."
+  },
+  {
+   "id": "bio.plant.phytochrome-photoperiodic-flowering",
+   "semantic": "PASS",
+   "category": "process",
+   "issues": [
+    "ADVISORY (non-blocking): Leaf detection -> florigen (FT) made in leaves -> vascular transport -> shoot apex response is correct; Pr/Pfr red/far-red interconversion and 'short-day plant = long-night plant' are not spelled out."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.plant.plant-biotechnology-applications",
+   "semantic": "PASS",
+   "category": "molecular",
+   "issues": [
+    "ADVISORY (non-blocking): Agrobacterium logic is correct (natural T-DNA transfer -> replace tumour genes with gene of interest -> deliver engineered T-DNA); stage 1 is background rather than a procedural step, and micropropagation/totipotency, transgenic traits and marker-assisted breeding are not shown."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.plant.plant-defense-mechanisms",
+   "semantic": "PASS",
+   "category": "physiology",
+   "issues": [
+    "ADVISORY (non-blocking): Structural vs chemical contents are correct; constitutive vs induced (which cuts across both) is not shown."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.plant.plant-stress-physiology",
+   "semantic": "PASS",
+   "category": "physiology",
+   "issues": [],
+   "fix": null
+  },
+  {
+   "id": "bio.plant.plant-tissue-systems",
+   "semantic": "PASS",
+   "category": "physiology",
+   "issues": [
+    "ADVISORY (non-blocking): Three tissue systems (dermal outer covering, ground bulk, vascular long-distance transport) are correct; the meristematic vs permanent split is not shown, so the 'Plant Body' framing covers permanent tissue systems only."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.plant.secondary-growth-anatomy",
+   "semantic": "PASS",
+   "category": "physiology",
+   "issues": [],
+   "fix": null
+  },
+  {
+   "id": "bio.plant.seed-germination-dormancy",
+   "semantic": "PASS",
+   "category": "physiology",
+   "issues": [
+    "ADVISORY (non-blocking): Seed coat / embryo / endosperm-or-cotyledon food reserve are correct; physiological vs physical dormancy and germination triggers are not shown."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.repro.asexual-reproduction",
+   "semantic": "REVIEW_REQUIRED",
+   "category": "other",
+   "issues": [
+    "Group 'Sporulation: spores germinate into new individuals' with example 'Fungi, ferns' under the title 'Six Methods of Asexual Reproduction' (EB: offspring are 'clones'): fern spores are haploid products of meiosis in the sporophyte and develop into gametophytes (alternation of generations, part of the sexual life cycle), so they are not clonal asexual offspring. Fungal spores can be mitotic (conidia) or sexual. Wording is copied from the EB, so the imprecision is EB-sourced but the figure teaches it."
+   ],
+   "fix": "Change the Sporulation example label to 'Fungi (e.g. bread mould)' and keep the narration 'Sporulation: spores germinate into new individuals'; drop 'ferns' unless the owner wants a caveat that fern spores arise by meiosis. The other five methods and examples are correct."
+  },
+  {
+   "id": "bio.repro.sexual-reproduction-plants",
+   "semantic": "REVIEW_REQUIRED",
+   "category": "process",
+   "issues": [
+    "Step 2 narration 'The same shared stage can lead to two different outcomes.' reads as alternatives (either/or). In double fertilisation BOTH fusions always occur together (EB: 'a double event producing two distinct products ... not a single fertilisation event with one outcome'). Branch structure itself is right (one pollen tube delivering two sperm -> two fusions); only the 'can lead to' wording is misleading.",
+    "ADVISORY (non-blocking): Branch end-nodes show the fusion pairs (Sperm 1 + egg cell / Sperm 2 + polar nuclei) and name the products only in the narration (diploid zygote, triploid endosperm); flower structure, pollination vs fertilisation and dispersal are not shown."
+   ],
+   "fix": "Step 2 narration -> 'Both sperm nuclei are used in the same event. Sperm 1 + egg cell: forms the diploid zygote. Sperm 2 + polar nuclei: forms the TRIPLOID endosperm, the seed's food store.' Optionally append '-> diploid zygote' and '-> triploid endosperm' to the two branch node labels."
+  },
+  {
+   "id": "bio.repro.human-reproductive-system",
+   "semantic": "PASS",
+   "category": "cycles",
+   "issues": [
+    "ADVISORY (non-blocking): Menstrual cycle is correct and marked cyclic (follicular: FSH, oestrogen rises -> oestrogen-triggered LH surge and ovulation -> luteal: corpus luteum, progesterone -> degeneration, menstruation -> repeat); male/female anatomy and gametogenesis from the EB are not shown."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.repro.fertilisation-development",
+   "semantic": "PASS",
+   "category": "process",
+   "issues": [
+    "ADVISORY (non-blocking): Order fertilisation (capacitation, acrosome, cortical reaction) -> cleavage (morula, blastocyst) -> implantation -> gastrulation -> neurulation -> organogenesis is correct; the placenta / no-mixing-of-blood point is not shown."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.repro.reproductive-health",
+   "semantic": "FAIL",
+   "category": "physiology",
+   "issues": [
+    "Barrier group item 'Condoms, diaphragm - the only STI protection' states (grammatically) that both condoms and diaphragm are the only STI protection. EB: 'condoms provide the only STI protection among contraceptive methods - every other contraceptive method listed ... provides no STI protection at all'; the diaphragm is listed in the EB as a barrier method with NO STI protection. The label wrongly attributes STI protection to the diaphragm.",
+    "ADVISORY (non-blocking): Emergency contraception text 'high-dose progesterone' mirrors the EB wording (clinically a progestin such as levonorgestrel); not changed here."
+   ],
+   "fix": "Barrier item -> 'Condoms, diaphragm' and add a separate callout/item 'Only condoms also protect against STIs - every other method (diaphragm included) gives none'. Keep the other groups (Hormonal: prevents ovulation as primary mechanism, alters cervical mucus; IUD: copper or hormonal; Emergency contraception: delays ovulation, not an abortifacient)."
+  },
+  {
+   "id": "bio.repro.animal-reproductive-strategies",
+   "semantic": "PASS",
+   "category": "physiology",
+   "issues": [
+    "ADVISORY (non-blocking): Oviparity / viviparity / ovoviviparity are correct on both criteria (location of development AND nutrient source); parental-investment trade-off and r/K are not shown."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.repro.hormonal-regulation-reproduction-detail",
+   "semantic": "REVIEW_REQUIRED",
+   "category": "cycles",
+   "issues": [
+    "Loop-closing step 4 'The cycle returns to Hypothalamus: the sequence repeats.' presents the return as a repeat of the GnRH -> LH/FSH -> gonad sequence. EB: the loop is closed by gonadal hormones (oestrogen, progesterone, testosterone) FEEDING BACK to regulate the hypothalamus AND the pituitary. The feedback signal is never named, so the learner sees a clock-like repeat instead of hormonal feedback regulation (cyclic flag itself is correct; steps 1-3 are correct, pulsatile GnRH is mentioned)."
+   ],
+   "fix": "Step 4 narration -> 'Feedback: the gonadal sex hormones (oestrogen, progesterone, testosterone) feed back to regulate the hypothalamus and pituitary, completing the regulatory loop.' Keep the cyclic return path; optionally label the return arrow 'sex-hormone feedback'."
+  },
+  {
+   "id": "bio.eco.organism-environment",
+   "semantic": "FAIL",
+   "category": "ecology",
+   "issues": [
+    "Served the generic domain-default food-chain CARD (grass -> rabbit -> fox style, visualType=food_chain, 'not concept-authored'). A trophic food chain does not depict this concept and would teach nothing about it (mismatch). EB concept is habitat (place) vs niche (role), abiotic vs biotic factors, and adaptation vs acclimatisation; none of these is a feeding relationship."
+   ],
+   "fix": "Generator: cell-comparison, title 'Habitat, Niche and Two Timescales of Response', 6 groups. (1) 'Habitat' - 'the physical PLACE an organism lives: its address'; item 'two species can share a habitat (e.g. the same pond)'. (2) 'Niche' - 'the functional ROLE in that place: like a profession, not a location'; items 'what it eats', 'when it is active', 'how it reproduces and interacts with other species', 'two species cannot indefinitely occupy the exact same niche in one habitat (competitive exclusion)'. (3) 'Abiotic factors' - 'non-living: temperature, light, water, soil chemistry, pH'. (4) 'Biotic factors' - 'living: food sources, predators, competitors, parasites, mutualists'. (5) 'Adaptation' - 'heritable, genetically encoded trait shaped by natural selection over many generations'; item 'cactus spines and water-storing stem'. (6) 'Acclimatisation' - 'reversible physiological adjustment within one individual's lifetime; no genetic change, not passed to offspring'; item 'more red blood cells at high altitude'."
+  },
+  {
+   "id": "bio.eco.population-ecology",
+   "semantic": "FAIL",
+   "category": "ecology",
+   "issues": [
+    "Served the generic domain-default food-chain CARD (grass -> rabbit -> fox style, visualType=food_chain, 'not concept-authored'). A trophic food chain does not depict this concept and would teach nothing about it (mismatch). EB concept is population attributes, exponential (J) vs logistic (S) growth to carrying capacity K, and the five classifiable species interactions."
+   ],
+   "fix": "Generator: cell-comparison, title 'Population Growth and Species Interactions', 4 groups. (1) 'Exponential growth' - 'J-shaped, fixed doubling rate; only under idealised unlimited resources'. (2) 'Logistic growth' - 'S-shaped: density-DEPENDENT factors (limiting food, disease spreading in crowds, predators drawn to abundant prey, intensified competition) progressively slow growth'; items 'levels off at carrying capacity K, the maximum population the environment can sustainably support', 'K is not fixed: it changes when environmental conditions change'. (3) 'Population attributes' - 'density (number per unit area), birth rate, death rate, age structure, sex ratio'. (4) 'Species interactions' - items 'competition: both harmed', 'predation: predator benefits, prey harmed', 'parasitism: parasite benefits, host harmed (usually not killed outright)', 'mutualism: both benefit', 'commensalism: one benefits, the other unaffected' (if the generator caps items at 4, merge predation+parasitism as 'predation/parasitism: one benefits, one harmed')."
+  },
+  {
+   "id": "bio.eco.ecosystem-structure-function",
+   "semantic": "PASS",
+   "category": "ecology",
+   "issues": [
+    "NOTE (non-blocking): Figure shows only the 10% law (Producers 10000 -> Herbivores 1000 -> Carnivores 100; ~90% lost as heat). EB's producers/consumers/decomposers roles, food chains/webs, and 'matter cycles but energy flows one way' are not in the figure; nothing shown is false.",
+    "NOTE (non-blocking): 'Producers capture 10000 units of energy from the sun' is an illustrative number with unspecified units."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.eco.nutrient-cycling",
+   "semantic": "FAIL",
+   "category": "cycles",
+   "issues": [
+    "Served the generic domain-default food-chain CARD (grass -> rabbit -> fox style, visualType=food_chain, 'not concept-authored'). A trophic food chain does not depict this concept and would teach nothing about it (mismatch). The EB concept is matter CYCLING (carbon and the multi-step nitrogen cycle, bacteria-mediated), the opposite of a one-way energy chain; a food chain would reinforce the energy-vs-matter confusion this concept corrects."
+   ],
+   "fix": "Generator: cell-pathway with cyclic=true, title 'The Nitrogen Cycle: Matter Cycles, Energy Does Not'. Stages: (1) 'Nitrogen fixation' - 'N2 is 78% of air but most organisms cannot use it; free-living soil bacteria and bacteria in legume root nodules convert N2 into ammonia (NH3), the first usable form'. (2) 'Nitrification' - 'nitrifying bacteria convert ammonia into nitrites and then nitrates, the form plants mostly absorb'. (3) 'Uptake' - 'plants absorb nitrates through their roots; animals obtain nitrogen indirectly by eating plants or other animals'. (4) 'Decomposition' - 'decomposers return nitrogen compounds to the soil when organisms die and are broken down'. (5) 'Denitrification' - 'denitrifying bacteria convert soil nitrogen compounds back into N2 gas, completing the cycle'. Closing step: 'The cycle returns to nitrogen fixation: the same nitrogen atoms are reused indefinitely.' (Carbon cycle, if wanted as a second figure: photosynthesis fixes atmospheric CO2; respiration, decomposition and combustion return it; plants get most of their body mass from air CO2, not soil.)"
+  },
+  {
+   "id": "bio.eco.biodiversity-conservation",
+   "semantic": "FAIL",
+   "category": "ecology",
+   "issues": [
+    "Served the generic domain-default food-chain CARD (grass -> rabbit -> fox style, visualType=food_chain, 'not concept-authored'). A trophic food chain does not depict this concept and would teach nothing about it (mismatch). EB concept is the three levels of biodiversity, why it matters, HIPCO threats (100-1000x background extinction) and in-situ vs ex-situ conservation."
+   ],
+   "fix": "Generator: cell-hub, title 'Biodiversity: Levels, Threats and Protection', hub 'Biodiversity: the variety of life'. 6 spokes. 'Genetic diversity' - 'variation among individuals WITHIN one species'. 'Species diversity' - 'number and relative abundance (evenness) of species in an area'. 'Ecosystem diversity' - 'variety of distinct habitat types and ecological communities across a landscape'. 'Threats (HIPCO)' - 'Habitat loss, Invasive species, Pollution, Climate change, Overexploitation; human-driven extinction runs about 100-1,000 times the natural background rate'. 'In-situ conservation' - 'protect species in their natural habitat (protected areas, national parks), keeping their ecological context'. 'Ex-situ conservation' - 'protect species outside their habitat (zoos, botanical gardens, seed banks): a safeguard, not a substitute for functioning wild populations'."
+  },
+  {
+   "id": "bio.eco.environmental-issues",
+   "semantic": "FAIL",
+   "category": "ecology",
+   "issues": [
+    "Served the generic domain-default food-chain CARD (grass -> rabbit -> fox style, visualType=food_chain, 'not concept-authored'). A trophic food chain does not depict this concept and would teach nothing about it (mismatch). The EB's whole point is that climate change, ozone depletion and eutrophication (and deforestation) are DISTINCT causal mechanisms; a single food chain conflates/ignores them."
+   ],
+   "fix": "Generator: cell-comparison, title 'Environmental Issues: Different Causes, Different Mechanisms', 4 groups. (1) 'Climate change' - 'burning fossil fuels raises atmospheric CO2, strengthening the greenhouse effect'; items 'CO2 traps infrared radiation in the lower atmosphere: warming', 'altered rainfall, sea level and timing of breeding/migration (phenology)'. (2) 'Ozone depletion' - 'a SEPARATE mechanism: CFCs destroy ozone in the stratosphere'; items 'more UV reaches the surface: DNA damage, skin cancer, cataracts', 'Montreal Protocol (1989) phased out CFCs; ozone is recovering'. (3) 'Eutrophication' - 'excess nitrogen and phosphorus (often farm runoff) enter water'; items 'explosive algal bloom', 'dead algae decomposed by microbes, which use up dissolved oxygen faster than it is replaced', 'hypoxic dead zones: most aquatic animals cannot survive (more nutrients ends in less oxygen and less biodiversity)'. (4) 'Deforestation' - 'one cause, several consequences'; items 'habitat destroyed: biodiversity loss', 'carbon sink removed and stored carbon released: more CO2', 'water cycles disrupted; more soil erosion'."
+  },
+  {
+   "id": "bio.eco.community-ecology",
+   "semantic": "FAIL",
+   "category": "ecology",
+   "issues": [
+    "Served the generic domain-default food-chain CARD (grass -> rabbit -> fox style, visualType=food_chain, 'not concept-authored'). A trophic food chain does not depict this concept and would teach nothing about it (mismatch). EB teaching targets are keystone species/trophic cascades and the intermediate disturbance hypothesis (both counter-intuitive), plus interaction types (-/-, -/+, +/+, +/0, -/0) and succession; a simple food chain would even reinforce the naive 'predators only reduce biodiversity' view."
+   ],
+   "fix": "Generator: cell-comparison, title 'Community Ecology: Interactions, Keystones, Disturbance, Succession', 4 groups. (1) 'Species interactions' - 'classified by effect on each partner'; items 'competition -/- (both harmed)', 'predation/parasitism -/+ (one harmed, one helped)', 'mutualism +/+', 'commensalism +/0', 'amensalism -/0'. (2) 'Keystone species' - 'effect far out of proportion to abundance; removal can trigger a trophic cascade'; item 'Yellowstone: wolves return, elk are controlled, less overgrazing of riparian plants, plants recover, less erosion and a changed river: overall biodiversity INCREASES'. (3) 'Intermediate disturbance' - 'diversity peaks at MODERATE disturbance'; items 'too little: competitive exclusion, the strongest competitor dominates', 'too much: species eliminated outright', 'moderate: exclusion never completes and species survive, so diversity is highest in the middle'. (4) 'Succession' - 'community change over time'; items 'pioneer species colonise bare substrate (primary succession)', 'a sequence of seral stages', 'climax community'."
+  },
+  {
+   "id": "bio.eco.applied-ecology-ecosystem-services",
+   "semantic": "PASS",
+   "category": "ecology",
+   "issues": [
+    "NOTE (non-blocking): Classification is correct (provisioning/regulating/supporting/cultural, examples match EB). EB's non-market valuation, non-economic valuation and EIA are not shown; climate regulation via carbon sequestration is not listed under Regulating (not required)."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.eco.biogeochemistry-advanced",
+   "semantic": "REVIEW_REQUIRED",
+   "category": "cycles",
+   "issues": [
+    "Cycle closure is not a real biological transition: step 4 'Microbes transform it: specific microorganisms reduce and oxidise sulfur compounds' is followed by step 5 'The cycle returns to Release: the sequence repeats', i.e. microbial transformation is drawn as leading back to 'Release: volcanoes and rocks release sulfur into air, water and soil'. EB describes volcanic/geological release as one INPUT to abiotic reservoirs, with microbes moving sulfur between abiotic reservoirs and biological pools, not feeding volcanic release.",
+    "Stage order 'Into living things' -> 'Microbes transform it' hides that microbes also act between abiotic forms (sulfate reduction/oxidation) before uptake; the linear loop over-simplifies.",
+    "Coverage: EB spends two of its three paragraphs on anthropogenic N/P loading as a change in RATE and QUANTITY and on the eutrophication mechanism, which EB says 'must be traced as a SEQUENTIAL causal chain'; the figure covers only the sulfur cycle (not false, but the sequential chain EB insists on is not drawn)."
+   ],
+   "fix": "Option A (fix the cycle): cell-pathway cyclic=true, title 'The Sulfur Cycle: A Fourth Nutrient Cycle', 3 stages: (1) 'Abiotic reservoirs' - 'sulfur in air, sea and soil (e.g. sulfate), topped up by volcanic and geological release'; (2) 'Into living things' - 'built into biological molecules such as certain amino acids'; (3) 'Microbial transformation' - 'specific microorganisms reduce (sulfate reduction) and oxidise sulfur compounds, returning sulfur to the abiotic reservoirs'; closing step 'The cycle returns to the abiotic reservoirs: same logic as the carbon, nitrogen and phosphorus cycles'. Option B (EB's sequential chain, as a linear cell-pathway, cyclic=false, title 'Eutrophication: A Four-Step Causal Chain'): (1) 'Nutrient input' - 'excess nitrogen/phosphorus from fertiliser runoff enters a water body: a change in RATE and QUANTITY of nutrients that already cycle naturally'; (2) 'Algal bloom' - 'normally nutrient-limited algae grow explosively'; (3) 'Decomposition uses up oxygen' - 'when the bloom dies, decomposer microorganisms consume the dead material and use up dissolved oxygen'; (4) 'Hypoxia / dead zone' - 'oxygen falls so low most fish and invertebrates cannot survive; the nutrients alone do not kill them, the chain does'."
+  },
+  {
+   "id": "bio.eco.global-change-biology",
+   "semantic": "FAIL",
+   "category": "ecology",
+   "issues": [
+    "Served the generic domain-default food-chain CARD (grass -> rabbit -> fox style, visualType=food_chain, 'not concept-authored'). A trophic food chain does not depict this concept and would teach nothing about it (mismatch). EB concept is two DISTINCT climate responses (phenological shift = timing; range shift = geography), the ocean-acidification carbonate-chemistry mechanism, and biotic homogenisation."
+   ],
+   "fix": "Generator: cell-comparison, title 'Global Change: Distinct Biological Responses', 4 groups. (1) 'Phenological shift' - 'a change in the TIMING of recurring life-cycle events'; items 'flowering date, migration timing, breeding onset', 'typically the same geographic location'. (2) 'Range shift' - 'a change in GEOGRAPHIC distribution'; items 'poleward or upslope as suitable climate moves', 'spatial relocation, not rescheduling', 'can occur independently of, or together with, a phenological shift in the same species'. (3) 'Ocean acidification' - 'a specific carbonate-chemistry effect, not generic pollution'; items 'more atmospheric CO2 dissolves: carbonic acid, lower pH', 'fewer carbonate ions in seawater', 'shells and skeletons (corals, molluscs, some plankton) harder and costlier to build, and can dissolve'. (4) 'Biotic homogenisation' - 'different regional communities become MORE SIMILAR'; items 'native, restricted species replaced by generalist and invasive species', 'regional distinctiveness is lost even if the local species count stays similar'."
+  },
+  {
+   "id": "bio.eco.landscape-conservation-ecology",
+   "semantic": "PASS",
+   "category": "ecology",
+   "issues": [
+    "NOTE (non-blocking): Wording is slightly absolute vs EB ('impairs'): 'movement between patches is cut' and 'lost local populations are not recolonised' - consider 'movement between patches is impaired' / 'lost local populations are less likely to be recolonised'.",
+    "NOTE (non-blocking): Metapopulation dynamics (extinction-colonisation balance) and restoration ecology are in EB/KG but not in the figure."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.eco.microbial-ecology",
+   "semantic": "PASS",
+   "category": "ecology",
+   "issues": [
+    "NOTE (non-blocking): Title 'Microbes Drive the Nutrient Cycles' does not cover the 'Biofilms' spoke (a lifestyle, not a nutrient-cycle process); extremophiles and soil/gut microbiome case studies from EB are absent. All five cycle spokes are accurate."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.eco.population-growth-models-quantitative",
+   "semantic": "PASS",
+   "category": "ecology",
+   "issues": [
+    "NOTE (non-blocking): Equations, J vs S shape, (1-N/K) logic and 'realistic only with unlimited resources' all match EB. 'growth stops' is shorthand for growth RATE -> 0 as N -> K. r/K selection and integration to get N(t) not shown."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.eco.predator-prey-dynamics",
+   "semantic": "REVIEW_REQUIRED",
+   "category": "ecology",
+   "issues": [
+    "EB calls the boom-bust cycle (predator cycle lagging prey, emergent from the COUPLING with no external disturbance) 'the most important, often counter-intuitive' point; the figure never shows a cycle or any cyclic/feedback structure.",
+    "Side-by-side comparison groups ('Prey equation' | 'Predator equation') present the two equations as independent contrasted items; the coupling EB calls essential appears only in the group headings' text, with no link between groups.",
+    "Incomplete definition: group-2-item-1 'numerical response: how predator numbers change' omits the driver; EB: how the predator POPULATION's size changes in response to prey availability (reproduction/migration, longer timescale). Also group-2-item-0 omits that functional response is an individual-behaviour property (e.g. handling time)."
+   ],
+   "fix": "Preferred: cell-pathway cyclic=true, title 'One Predator-Prey Cycle (emerges from the coupled equations)', stages: (1) 'Abundant prey' - 'food supply is plentiful'; (2) 'Predators increase' - 'numerical response: the predator population grows with prey availability'; (3) 'Prey are depleted' - 'more predators means more predation'; (4) 'Predators decline' - 'too little food for the larger predator population'; (5) 'Prey recover' - 'predation pressure is reduced, so prey rise again'; closing step 'The cycle restarts; predator peaks lag prey peaks and no external disturbance is needed.' If the comparison is kept: group-2-item-0 'functional response: prey killed per predator as PREY DENSITY changes (individual behaviour, e.g. handling time)'; group-2-item-1 'numerical response: how the PREDATOR POPULATION changes in response to prey availability (reproduction/migration, slower)'; and add a first-step narration 'The two equations are COUPLED: each depends on both populations.'"
+  },
+  {
+   "id": "bio.evo.origin-of-life",
+   "semantic": "PASS",
+   "category": "evolution",
+   "issues": [
+    "NOTE (non-blocking): Order (inorganic -> organic -> RNA world -> membrane enclosure -> natural selection) matches EB. EB stresses the exact mechanism remains scientifically unresolved; narration states stages as settled fact - consider 'leading hypothesis' wording in the title or step 1."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.evo.evidence-for-evolution",
+   "semantic": "PASS",
+   "category": "evolution",
+   "issues": [],
+   "fix": null
+  },
+  {
+   "id": "bio.evo.natural-selection",
+   "semantic": "FAIL",
+   "category": "evolution",
+   "issues": [
+    "List of simultaneously-required conditions drawn as a PROCESS: EB says natural selection requires 'four conditions to all hold simultaneously within a population', but the scene (title 'Natural Selection: Four Necessary Conditions') draws a pathway with arrows Variation -> Heredity -> Differential reproduction -> Time (stage-1-arrow ... stage-3-arrow). Arrows imply each condition causes/follows the previous one in time (e.g. 'Variation' produces 'Heredity'), and the fourth item 'Time' is an outcome span, not a step.",
+    "Needs a hub (umbrella idea + independent conditions), not a pathway."
+   ],
+   "fix": "Generator: cell-hub (no arrows), title 'Natural Selection: Four Conditions That Must All Hold Together', hub 'Natural selection (acts on a POPULATION over generations)'. 4 spokes: 'Variation' - 'individuals in the population differ in heritable traits'; 'Heredity' - 'that variation is passed from parents to offspring'; 'Differential reproduction' - 'in the current environment some heritable variants give greater survival and/or reproductive success'; 'Time' - 'across many generations the successful traits become more common in the population, because their carriers leave more descendants'. (Optional second figure: cyclic generation loop for the peppered-moth example - population varies, predators eat more of the poorly camouflaged variant, survivors reproduce, next generation has a shifted colour ratio; no individual moth changes colour.)"
+  },
+  {
+   "id": "bio.evo.modern-synthesis-speciation",
+   "semantic": "PASS",
+   "category": "evolution",
+   "issues": [
+    "NOTE (non-blocking): Allopatric/sympatric content is correct. EB's definition 'evolution = change in allele frequencies', pre- vs post-zygotic isolating mechanisms, and that isolation can persist after the barrier is removed are not shown."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.evo.human-evolution",
+   "semantic": "REVIEW_REQUIRED",
+   "category": "evolution",
+   "issues": [
+    "EB's 'central corrective claim' ('humans evolved from chimpanzees' is incorrect; common ancestor ~6-7 Mya that no longer exists) is absent: the chain starts at 'Bipedalism' with no common-ancestor node.",
+    "A single linear arrow chain Bipedalism -> Brain expansion -> Homo erectus -> Homo sapiens -> Out of Africa reads as a 'ladder of progress' ending in modern humans, which EB explicitly rejects ('evolution is not a ladder of progress'); it also mixes traits (Bipedalism, Brain expansion), species (Homo erectus, Homo sapiens) and an event (Out of Africa) as equivalent stages.",
+    "Dates/facts shown otherwise match EB (~4 Mya Lucy; ~2 Mya H. habilis; ~1.9 Mya H. erectus; ~300 kya H. sapiens; 60-70 kya Out of Africa)."
+   ],
+   "fix": "Keep cell-pathway as a timeline but (a) add a first stage 'Common ancestor' - 'humans and chimpanzees share a common ancestor ~6-7 million years ago; it is NOT a modern chimpanzee, and both lineages have evolved independently since'; (b) retitle 'Hominin Milestones in Chronological Order (a timeline, not a ladder)'; (c) label stage 2 'Brain expansion (Homo habilis)' and stage 1 'Bipedalism (Australopithecus afarensis)'; (d) add to the final narration: 'These are branches of a bushy tree, not steps toward humans; no species is more evolved than another.'"
+  },
+  {
+   "id": "bio.evo.molecular-evolution",
+   "semantic": "PASS",
+   "category": "evolution",
+   "issues": [
+    "NOTE (non-blocking): Purifying selection (histone H4) vs neutral evolution matches EB exactly. The molecular-clock proportionality (divergence ~ time) is not shown."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.evo.evo-devo",
+   "semantic": "PASS",
+   "category": "evolution",
+   "issues": [
+    "NOTE (non-blocking): Regulatory-vs-coding message matches EB. Hox genes, the conserved toolkit and the Pax6 mouse-gene-in-fly experiment are not shown."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.evo.coevolution-species-interactions",
+   "semantic": "PASS",
+   "category": "evolution",
+   "issues": [
+    "NOTE (non-blocking): Minor grammar in step 1 narration: 'each species evolution' should be 'each species' evolution'. Red Queen hypothesis not shown."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.evo.convergent-evolution-homoplasy",
+   "semantic": "PASS",
+   "category": "evolution",
+   "issues": [],
+   "fix": null
+  },
+  {
+   "id": "bio.evo.macroevolution-extinction",
+   "semantic": "PASS",
+   "category": "evolution",
+   "issues": [
+    "NOTE (non-blocking): Gradualism vs punctuated equilibrium is correct; background vs mass ('Big Five') extinction from EB/KG is not shown."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.evo.phylogeography-biogeography",
+   "semantic": "PASS",
+   "category": "evolution",
+   "issues": [],
+   "fix": null
+  },
+  {
+   "id": "bio.micro.microbial-diversity",
+   "semantic": "PASS",
+   "category": "taxonomy",
+   "issues": [],
+   "fix": null
+  },
+  {
+   "id": "bio.micro.microbial-growth-culture",
+   "semantic": "PASS",
+   "category": "process",
+   "issues": [],
+   "fix": null
+  },
+  {
+   "id": "bio.micro.microbes-in-human-welfare",
+   "semantic": "PASS",
+   "category": "other",
+   "issues": [],
+   "fix": null
+  },
+  {
+   "id": "bio.micro.pathogenic-microbes",
+   "semantic": "PASS",
+   "category": "other",
+   "issues": [],
+   "fix": null
+  },
+  {
+   "id": "bio.micro.viral-replication",
+   "semantic": "PASS",
+   "category": "process",
+   "issues": [
+    "NOTE (non-blocking): Lytic vs lysogenic content is correct. Retroviruses/reverse transcriptase and the 'viruses replicate, they do not reproduce' point are not shown."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.micro.horizontal-gene-transfer",
+   "semantic": "PASS",
+   "category": "genetics",
+   "issues": [
+    "NOTE (non-blocking): Three mechanisms are correct. How HGT spreads antibiotic-resistance genes is not shown."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.micro.antimicrobial-resistance",
+   "semantic": "PASS",
+   "category": "molecular",
+   "issues": [
+    "NOTE (non-blocking): Three mechanisms are correct. EB's key corrective idea (resistance mutations arise independently of the antibiotic and pre-exist at low frequency; the antibiotic only selects) is not in the figure."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.micro.archaea-extremophiles",
+   "semantic": "PASS",
+   "category": "taxonomy",
+   "issues": [
+    "NOTE (non-blocking): Four extremophile categories match EB. The molecular features that justify Archaea as a separate domain (ether-linked lipids, eukaryote-like RNA polymerase, histone-like proteins) and Taq polymerase are not shown."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.micro.human-microbiome-detail",
+   "semantic": "PASS",
+   "category": "physiology",
+   "issues": [
+    "NOTE (non-blocking): Three host interactions are correct. Diet-driven composition and dysbiosis are not shown."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.micro.microbial-metabolism-diversity",
+   "semantic": "PASS",
+   "category": "other",
+   "issues": [
+    "NOTE (non-blocking): Hub text 'enable survival without light, oxygen, or organic carbon' sits beside the 'Anoxygenic photosynthesis' spoke, which uses light; EB means the strategies collectively cover environments lacking one or other resource. Consider 'each strategy removes a different dependency'."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.div.three-domain-system",
+   "semantic": "PASS",
+   "category": "taxonomy",
+   "issues": [],
+   "fix": null
+  },
+  {
+   "id": "bio.div.endosymbiotic-theory",
+   "semantic": "PASS",
+   "category": "cell",
+   "issues": [],
+   "fix": null
+  },
+  {
+   "id": "bio.div.protist-diversity",
+   "semantic": "PASS",
+   "category": "taxonomy",
+   "issues": [],
+   "fix": null
+  },
+  {
+   "id": "bio.div.fungal-biology",
+   "semantic": "PASS",
+   "category": "taxonomy",
+   "issues": [
+    "NOTE (non-blocking): Three ecological roles are correct. Chitin cell walls, absorptive heterotrophy and the hyphae/mycelium body (EB's defining features) are not in the figure."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.div.plant-diversity-alternation-of-generations",
+   "semantic": "REVIEW_REQUIRED",
+   "category": "taxonomy",
+   "issues": [
+    "The concept's headline (every plant life cycle alternates a diploid sporophyte making spores by meiosis and a haploid gametophyte making gametes by mitosis) is not shown; there is no cycle at all.",
+    "Arrows Mosses -> Ferns -> Seed plants (stage-1-arrow, stage-2-arrow) can read as mosses turning into ferns turning into seed plants (a ladder); these are separate living lineages and the scene labels them as stages of a process.",
+    "Dominance statements themselves are correct (mosses gametophyte-dominant; ferns sporophyte-dominant with tiny prothallus; seed plants microscopic dependent gametophyte). The EB's reason - free-living gametophytes need water for swimming sperm, seed plants escape this - is missing."
+   ],
+   "fix": "Add/replace with a cyclic alternation figure: cell-pathway cyclic=true, title 'Alternation of Generations': (1) 'Sporophyte (2n)' - 'diploid multicellular plant'; (2) 'Meiosis makes spores (n)' - 'the sporophyte produces haploid spores by meiosis'; (3) 'Gametophyte (n)' - 'a haploid multicellular plant grows from a spore'; (4) 'Mitosis makes gametes' - 'the gametophyte produces egg and sperm by mitosis'; (5) 'Fertilisation' - 'egg + sperm form a diploid zygote that grows into a new sporophyte'; closing 'the cycle repeats'. Keep the existing 3-group view as a comparison (not arrows), retitled 'Which generation dominates? A trend across separate plant lineages': Mosses - gametophyte dominant, sporophyte a small dependent stalk; Ferns - sporophyte dominant, gametophyte a tiny independent prothallus; Seed plants - gametophyte microscopic and dependent (pollen grain, embryo sac); add 'free-living gametophytes need water for sperm to swim, so bryophytes and ferns stay in moist habitats; reduced gametophytes free seed plants for dry land'."
+  },
+  {
+   "id": "bio.div.cladistics-phylogenetic-thinking",
+   "semantic": "PASS",
+   "category": "taxonomy",
+   "issues": [],
+   "fix": null
+  },
+  {
+   "id": "bio.div.animal-body-plans-symmetry",
+   "semantic": "PASS",
+   "category": "taxonomy",
+   "issues": [
+    "NOTE (non-blocking): Acoelomate/pseudocoelomate/coelomate definitions are correct. Figure covers body cavities only; radial vs bilateral symmetry (the concept title), diploblastic/triploblastic and protostome/deuterostome are not shown (title 'Three Body Cavity Types' is honest)."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.div.arthropod-diversity",
+   "semantic": "PASS",
+   "category": "taxonomy",
+   "issues": [
+    "NOTE (non-blocking): Class features are correct. The exoskeleton -> moulting (ecdysis) causal link, EB's headline, is not shown."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.div.chordate-vertebrate-diversity",
+   "semantic": "REVIEW_REQUIRED",
+   "category": "taxonomy",
+   "issues": [
+    "Step-1 narration is the generic cell-structure template and is wrong/meaningless for a phylum: 'Phylum Chordata: the chordate embryonic hallmarks marks the outer boundary.' (plural subject + 'marks'; a phylum has no 'outer boundary'). The whole is also labelled 'Chordate embryonic hallmarks' while the parts are the four hallmarks, which is circular.",
+    "Content of the four parts (notochord, dorsal hollow nerve cord, pharyngeal slits, post-anal tail) is correct and 'embryonic' is stated; EB's point that some hallmarks are lost/modified in adults (notochord replaced by the backbone) is not stated."
+   ],
+   "fix": "Boundary node label 'Phylum Chordata'; step-1 narration 'Phylum Chordata is defined by four hallmark features that appear in the embryo; not all stay visible in the adult (e.g. the notochord is largely replaced by the backbone in vertebrates).' Parts and part narrations unchanged. (The offending text comes from the shared template in src/lib/teaching/sceneGenerators/cellStructure.pure.ts: `${subject}: the ${boundaryLabel.toLowerCase()} marks the outer boundary.` - a per-scene narration override or generator change is needed.)"
+  },
+  {
+   "id": "bio.div.echinoderm-deuterostome-diversity",
+   "semantic": "REVIEW_REQUIRED",
+   "category": "taxonomy",
+   "issues": [
+    "Step-1 narration is the generic cell-structure template and is garbled: 'Echinodermata: the echinodermata (a deuterostome, despite its adult form) marks the outer boundary.' A phylum has no 'outer boundary'; subject is repeated.",
+    "Content of the four parts is correct (blastopore becomes the anus; pentaradial symmetry secondarily derived, larvae bilateral; water vascular system; calcium-carbonate endoskeleton)."
+   ],
+   "fix": "Boundary node label 'Echinodermata'; step-1 narration 'Echinodermata are deuterostomes, even though adults look nothing like chordates. Four defining features:'. Parts unchanged. (Same shared template as above: cellStructure.pure.ts.)"
+  },
+  {
+   "id": "bio.div.fish-amphibian-diversity",
+   "semantic": "PASS",
+   "category": "taxonomy",
+   "issues": [
+    "NOTE (non-blocking): Three fish groups are correct (jaws + skeleton criterion). Amphibian water-to-land prerequisites (limbs, lungs), metamorphosis and amphibians' reproductive dependence on water are not shown; left-to-right order jawless -> cartilaginous -> bony should not be read as a progression."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.div.invertebrate-diversity-major-phyla",
+   "semantic": "PASS",
+   "category": "taxonomy",
+   "issues": [],
+   "fix": null
+  },
+  {
+   "id": "bio.div.mammalian-diversity",
+   "semantic": "PASS",
+   "category": "taxonomy",
+   "issues": [
+    "NOTE (non-blocking): Three reproductive strategies are correct. Left-to-right monotreme -> marsupial -> placental must not read as a progression (EB: three solutions within one clade, not 'primitive to advanced'); the four defining mammal features appear only inside the monotreme narration."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.div.reptile-bird-diversity",
+   "semantic": "PASS",
+   "category": "taxonomy",
+   "issues": [
+    "NOTE (non-blocking): Bird adaptations to flight (low mass, unidirectional airflow/air sacs, high metabolic rate) match EB. The amniotic egg and 'birds are nested within theropod dinosaurs/Reptilia' - the EB's headline claims - are not in the figure."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.behav.animal-cognition",
+   "semantic": "PASS",
+   "category": "other",
+   "issues": [
+    "NOTE (non-blocking): Morgan's Canon comparison is correct. Novel-solution-to-novel-problem logic and the contested status of theory of mind are not shown."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.behav.animal-communication",
+   "semantic": "PASS",
+   "category": "other",
+   "issues": [
+    "NOTE (non-blocking): Three modalities match EB. Honest signalling/handicap principle (EB's counter-intuitive core) is not shown."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.behav.foraging-behavior",
+   "semantic": "PASS",
+   "category": "other",
+   "issues": [
+    "NOTE (non-blocking): Risk-sensitive foraging (secure -> risk-averse, desperate -> risk-prone) is correct. The marginal value theorem (leave a patch while food remains, when marginal rate falls to the habitat average) and optimal-foraging cost-benefit framing are not shown."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.behav.human-behavioral-ecology-evolutionary-psych",
+   "semantic": "PASS",
+   "category": "other",
+   "issues": [
+    "NOTE (non-blocking): Genetic vs cultural evolution (speed, 'alongside not instead of') matches EB. EB's central methodological point (evolutionary explanations of human behaviour are hypotheses needing evidence; claimed universals are contested) is not shown."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.behav.innate-behavior-instinct",
+   "semantic": "PASS",
+   "category": "other",
+   "issues": [],
+   "fix": null
+  },
+  {
+   "id": "bio.behav.kin-selection-altruism",
+   "semantic": "PASS",
+   "category": "other",
+   "issues": [],
+   "fix": null
+  },
+  {
+   "id": "bio.behav.learning-and-behavior",
+   "semantic": "PASS",
+   "category": "other",
+   "issues": [],
+   "fix": null
+  },
+  {
+   "id": "bio.behav.mating-systems-sexual-selection",
+   "semantic": "PASS",
+   "category": "other",
+   "issues": [
+    "NOTE (non-blocking): Intra- vs intersexual selection is correct. Sexual and natural selection pulling in opposite directions (peacock tail) and mating-system types are not shown."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.behav.social-behavior-eusociality",
+   "semantic": "REVIEW_REQUIRED",
+   "category": "other",
+   "issues": [
+    "Step-1 narration is the generic cell-structure template and is wrong/meaningless here: 'Eusociality: the eusociality (all three required together) marks the outer boundary.' (subject repeated; a colony/concept has no 'outer boundary').",
+    "Content of the three criteria is correct and 'all three required together' is conveyed (reproductive division of labour; overlapping generations; cooperative brood care)."
+   ],
+   "fix": "Boundary node label 'Eusociality'; step-1 narration 'Eusociality is defined by three features that must ALL be present together:'. Parts unchanged. (Same shared template: cellStructure.pure.ts.)"
+  },
+  {
+   "id": "bio.sys.systems-biology-intro",
+   "semantic": "PASS",
+   "category": "other",
+   "issues": [
+    "NOTE (non-blocking): Hub 'Emergent Network Behaviour' duplicates the spoke 'Emergence'; consider hub 'Systems biology: behaviour lives in the network'. Spoke content (feedback, modularity, robustness vs fragility/bow-tie, emergence) is correct."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.sys.gene-regulatory-networks",
+   "semantic": "PASS",
+   "category": "other",
+   "issues": [
+    "NOTE (non-blocking): Three motifs are correct. EB's key point that a GRN is dynamic (same topology can behave differently) is not shown."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.sys.metabolic-network-modelling",
+   "semantic": "PASS",
+   "category": "other",
+   "issues": [],
+   "fix": null
+  },
+  {
+   "id": "bio.sys.synthetic-biology",
+   "semantic": "PASS",
+   "category": "process",
+   "issues": [
+    "NOTE (non-blocking): Arrows Parts -> Devices -> Systems denote the composition hierarchy (parts compose devices compose systems), not a time process; narration could say so. The design-build-test-learn cycle (EB) is not shown and, if added, must be marked cyclic."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.sys.evolutionary-systems-biology",
+   "semantic": "PASS",
+   "category": "evolution",
+   "issues": [],
+   "fix": null
+  },
+  {
+   "id": "bio.sys.quantitative-systems-modeling",
+   "semantic": "PASS",
+   "category": "process",
+   "issues": [],
+   "fix": null
+  },
+  {
+   "id": "bio.biotech.biotech-principles",
+   "semantic": "PASS",
+   "category": "other",
+   "issues": [],
+   "fix": null
+  },
+  {
+   "id": "bio.biotech.biotech-process-applications",
+   "semantic": "PASS",
+   "category": "other",
+   "issues": [
+    "NOTE (non-blocking): Applications shown are correct (gene-therapy vector note matches EB). The recombinant-DNA toolkit (restriction enzymes cut, ligase joins - two distinct sequential steps) is not shown."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.biotech.genomics-proteomics",
+   "semantic": "PASS",
+   "category": "molecular",
+   "issues": [],
+   "fix": null
+  },
+  {
+   "id": "bio.biotech.crispr-genome-editing",
+   "semantic": "PASS",
+   "category": "molecular",
+   "issues": [
+    "NOTE (non-blocking): NHEJ vs HDR content is correct (NHEJ default, error-prone, knockout; HDR needs donor template, S/G2 only, less efficient, knock-in). Both are alternative repairs of the SAME Cas9-induced double-strand break, but the DSB (guide RNA + PAM-adjacent cut of both strands) is not shown, so the branch point is implicit; optionally add a first group 'Cas9 + guide RNA' - 'cuts both strands: double-strand break' feeding the two repair routes."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.biotech.agricultural-forensic-biotechnology",
+   "semantic": "PASS",
+   "category": "other",
+   "issues": [],
+   "fix": null
+  },
+  {
+   "id": "bio.biotech.bioprocess-engineering",
+   "semantic": "PASS",
+   "category": "process",
+   "issues": [
+    "NOTE (non-blocking): Downstream order (cell separation -> purification -> formulation) is correct. Bioreactor parameter control (aeration, agitation, temperature, pH) and scale-up challenges are not shown."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.biotech.gene-therapy-detail",
+   "semantic": "PASS",
+   "category": "other",
+   "issues": [
+    "NOTE (non-blocking): Viral vs non-viral trade-off is correct. Ex vivo vs in vivo strategies are not shown."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.bioinfo.bioinformatics-intro",
+   "semantic": "PASS",
+   "category": "other",
+   "issues": [],
+   "fix": null
+  },
+  {
+   "id": "bio.bioinfo.sequence-alignment",
+   "semantic": "PASS",
+   "category": "other",
+   "issues": [],
+   "fix": null
+  },
+  {
+   "id": "bio.bioinfo.phylogenetics-computational",
+   "semantic": "PASS",
+   "category": "process",
+   "issues": [],
+   "fix": null
+  },
+  {
+   "id": "bio.bioinfo.structural-bioinformatics",
+   "semantic": "PASS",
+   "category": "other",
+   "issues": [
+    "NOTE (non-blocking): Content matches EB. Group-1 narration 'What it does NOT capture: reliably' is awkward; use 'What it does NOT capture reliably'. PDB resolution (lower A = finer detail), homology modelling, docking and MD are not shown."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.bioinfo.comparative-genomics",
+   "semantic": "PASS",
+   "category": "genetics",
+   "issues": [
+    "NOTE (non-blocking): Orthologs vs paralogs is correct. Synteny as evidence of shared ancestry is not shown."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.bioinfo.genome-sequencing-technologies",
+   "semantic": "PASS",
+   "category": "other",
+   "issues": [
+    "NOTE (non-blocking): Short- vs long-read trade-off is correct. Sanger sequencing and de novo vs reference-guided assembly are not shown."
+   ],
+   "fix": null
+  },
+  {
+   "id": "bio.bioinfo.multiomics-statistical-genomics",
+   "semantic": "PASS",
+   "category": "process",
+   "issues": [
+    "NOTE (non-blocking): Transcriptomics -> proteomics -> metabolomics is a legitimate information-flow order and the narration stresses layers can differ; arrows must be read as molecular levels, not a lab workflow. The multiple-testing problem is not shown."
+   ],
+   "fix": null
+  }
+ ]
+}

@@ -50,7 +50,7 @@ import { SceneLabel } from './SceneLabel'
 import type { Theme } from '@/components/Providers'
 import type { SceneObject, SceneSpec, Vec3 } from '@/lib/teaching/sceneSpec'
 import {
-  labelWrapWidth, placeSceneLabels, screenToWorld, viewportFromCanvas,
+  labelWrapWidth, placeSceneLabels, screenToWorld, viewportFromCanvas, wrapPxIfNeeded, wrapPxOf,
 } from '@/lib/teaching/visual/layout'
 
 /** A label a figure wants drawn, in the figure's own world coordinates. */
@@ -69,6 +69,10 @@ export interface LayerLabel {
    * x and y lines (39 % of the letter's box on ink in the browser).
    */
   plate?: boolean
+  /** Opt-in share of the canvas width one line may use before wrapping (see `wrapPxOf`). */
+  wrapFraction?: number
+  /** Opt-in wrap width in SCENE UNITS — a column's own width — converted at the live scale (see `wrapPxOf`). */
+  wrapUnits?: number
 }
 
 const DEFAULT_LABEL_COLOR = '#5B8DEF'
@@ -138,6 +142,17 @@ export function SceneLabelLayer({ labels: authored, lateLabels, obstacles = [], 
   const placed = useMemo(() => {
     if (labels.length === 0) return []
     const viewport = viewportFromCanvas(size.width, size.height, windowWidth)
+    const labelObjects = labels.map((l): SceneObject => ({
+      type: 'label',
+      text: l.text,
+      position: flatten(l.position, cameraDistance),
+      size: l.tier,
+      ...(l.wrapFraction || l.wrapUnits
+        ? { properties: { ...(l.wrapFraction ? { labelWrapFraction: l.wrapFraction } : {}), ...(l.wrapUnits ? { labelWrapUnits: l.wrapUnits } : {}) } }
+        : {}),
+    }))
+    // An authored wrap (a column's own width) is planned by the solver and painted by SceneLabel at the SAME px.
+    const authoredWrapPx = labelObjects.map((o) => wrapPxIfNeeded(o.text ?? '', viewport, o.size, wrapPxOf(o, viewport, cameraDistance)))
     const scene: SceneSpec = {
       id: 'label-layer',
       title: '',
@@ -146,12 +161,7 @@ export function SceneLabelLayer({ labels: authored, lateLabels, obstacles = [], 
       steps: [{
         objects: [
           ...obstacles.map((o) => flattenObstacle(o, cameraDistance)),
-          ...labels.map((l): SceneObject => ({
-            type: 'label',
-            text: l.text,
-            position: flatten(l.position, cameraDistance),
-            size: l.tier,
-          })),
+          ...labelObjects,
         ],
       }],
     }
@@ -168,7 +178,7 @@ export function SceneLabelLayer({ labels: authored, lateLabels, obstacles = [], 
       plate: labels[i]?.plate === true || s.onGeometry === true,
       // The width the solver reserved, so the painted box matches the planned
       // one. Null for every label that fits on a line — almost all of them.
-      maxWidthPx: s.wrapPx ?? labelWrapWidth(s.text, viewport, s.tier ?? labels[i]?.tier) ?? undefined,
+      maxWidthPx: s.wrapPx ?? authoredWrapPx[i] ?? labelWrapWidth(s.text, viewport, s.tier ?? labels[i]?.tier) ?? undefined,
     }))
   }, [labels, obstacles, cameraDistance, size.width, size.height, windowWidth])
 

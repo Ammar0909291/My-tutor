@@ -175,6 +175,8 @@ function PlacedLabels({
         // `size` is a typographic tier ONLY on label objects; elsewhere it is
         // an extent, so it must not drive typography.
         tier: object.type === 'label' ? object.size : undefined,
+        wrapFraction: typeof object.properties?.labelWrapFraction === 'number' ? object.properties.labelWrapFraction : undefined,
+        wrapUnits: typeof object.properties?.labelWrapUnits === 'number' ? object.properties.labelWrapUnits : undefined,
       })),
       ],
       // Every object is something to stay clear of, including the ones that

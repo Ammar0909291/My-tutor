@@ -144,6 +144,9 @@ export function buildElectronShellScene(def: ElementDef): SceneSpec {
     id: `electron-shells-${def.symbol.toLowerCase()}`,
     title: `${def.name} (${def.symbol}, Z=${def.z}) — electron configuration ${def.shells.join(', ')}`,
     sceneType: 'diagram',
+    // The x/y/z triad names no quantity in this figure (a molecule / lattice / shell has no meaningful axes) and its letters
+    // collided with the atom labels at the origin (measured 2026-10-08: x|y|z|O stacked at stage 1). Grid left as it was.
+    stage: { axes: false },
     teachingGoal: `Show the Bohr-model electron shells of ${def.name}: ${config}, with ${valence} valence electron${valence === 1 ? '' : 's'}.`,
     cameraDistance: VISUAL_MAX * 2.6,
     ariaLabel: `${def.name}, atomic number ${def.z}, with electrons arranged in shells of ${def.shells.join(', ')}.`,

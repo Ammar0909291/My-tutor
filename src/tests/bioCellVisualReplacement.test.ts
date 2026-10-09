@@ -280,7 +280,11 @@ describe('non-regression: everything this campaign must not touch', () => {
     }
   })
 
-  it('the bio.eco domain fallback is unaffected — still resolves to food_chain', () => {
+  it('the bio.eco domain fallback row is unaffected — it is still the registered binding, and a concept-authored scene now outranks it', () => {
+    // 2026-10-08: population-ecology and community-ecology used to SERVE this generic food-chain card
+    // (a feeding relationship is not what either concept is about). The registry row is untouched
+    // (reviewable, reversible, still the binding any bio.eco concept without its own scene would get),
+    // but Tier 0 — a scene authored for the concept — wins over it, so the learner is served the scene.
     for (const id of ['bio.eco.population-ecology', 'bio.eco.community-ecology']) {
       const binding = lookupConceptVisualBinding(id)
       expect(binding?.tier, id).toBe('domain')
@@ -288,7 +292,7 @@ describe('non-regression: everything this campaign must not touch', () => {
       expect(binding?.entry.primary, id).toBe('food_chain')
       const d = ask(id)
       expect(d.graphical, id).toBe(true)
-      expect(d.provenance, id).toBe('registry:domain-default:bio.eco:food_chain')
+      expect(d.provenance, id).toBe(`generator:${id}:concept-authored`)
     }
   })
 

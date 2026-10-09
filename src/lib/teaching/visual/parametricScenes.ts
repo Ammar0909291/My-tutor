@@ -62,7 +62,7 @@ import { buildEconomicsCurveScene, validateEconomicsParams } from '@/lib/teachin
 import { buildCircuitScene, validateCircuitParams } from '@/lib/teaching/sceneGenerators/electricCircuit.pure'
 import { buildGravitationOrbitScene, validateGravitationParams } from '@/lib/teaching/sceneGenerators/gravitationOrbit.pure'
 import { buildLogicGateScene, validateLogicGateParams } from '@/lib/teaching/sceneGenerators/logicGate.pure'
-import { buildPeriodicTrendScene, validatePeriodicTrendParams } from '@/lib/teaching/sceneGenerators/periodicTrends.pure'
+import { ELEMENTS as PERIODIC_TREND_ELEMENTS, buildPeriodicTrendScene, validatePeriodicTrendParams } from '@/lib/teaching/sceneGenerators/periodicTrends.pure'
 import { buildPunnettSquareScene, validatePunnettParams } from '@/lib/teaching/sceneGenerators/punnettSquare.pure'
 import { buildDNAStructureScene, validateDNAStructureParams } from '@/lib/teaching/sceneGenerators/dnaStructure.pure'
 import { buildEcologicalPyramidScene, validateEcologicalPyramidParams } from '@/lib/teaching/sceneGenerators/ecologicalPyramid.pure'
@@ -245,9 +245,14 @@ function dropLeadingZeros(coefficients: number[]): number[] {
   return first < 0 ? [0] : coefficients.slice(first)
 }
 
-/** Elements the trend generator has data for, in periodic order. */
-const PERIODIC_CHOICES = ['Li', 'Be', 'B', 'C', 'N', 'O', 'F', 'Ne', 'Na', 'Mg', 'Al', 'Si', 'P', 'S', 'Cl', 'Ar', 'K', 'Ca']
-  .map((symbol) => ({ value: symbol, label: symbol }))
+/**
+ * Elements the trend generator has data for, in periodic order — DERIVED from the generator's own table.
+ *
+ * It used to be a hand-typed list that offered Ne and Ar (the table has no row for either: noble gases have no
+ * electronegativity) and left out H (which it does have). Every Ne/Ar press built nothing — the frame silently kept
+ * the last figure — and H could never be chosen (measured 2026-10-08: 66 ordered pairs unbuildable).
+ */
+const PERIODIC_CHOICES = PERIODIC_TREND_ELEMENTS.map((e) => ({ value: e.symbol, label: e.symbol }))
 
 /** The three genotype cases a monohybrid cross can take. */
 const GENOTYPE_CHOICES = [

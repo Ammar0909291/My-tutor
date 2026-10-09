@@ -23,7 +23,7 @@
  */
 
 import type { SceneObject, SceneSpec } from '../sceneSpec'
-import { ROLE, arrow, box, heading, label, line } from './visualDesign'
+import { ROLE, arrow, box, label, line } from './visualDesign'
 import { round, type ConsistencyResult } from './shared'
 
 export type CellType = 'galvanic' | 'electrolytic'
@@ -61,6 +61,12 @@ export interface ElectrochemicalCellParams {
    * salt bridge, so drawing one would misrepresent its construction.
    */
   divided?: boolean
+  /**
+   * What the ions are dissolved IN. Defaults to an aqueous solution; a molten-salt
+   * cell (e.g. electrolysis of molten NaCl) has no water and no "solution" — drawing
+   * "Na+ in solution" there asserts exactly the aqueous chemistry the cell excludes.
+   */
+  medium?: 'aqueous' | 'molten'
 }
 
 const GAS_CONSTANT = 8.314
@@ -98,6 +104,7 @@ export function validateElectrochemicalCellParams(raw: unknown): Electrochemical
     temperature: (o.temperature as number | undefined) ?? 298,
     externalVoltage: o.externalVoltage as number | undefined,
     divided: typeof o.divided === 'boolean' ? o.divided : undefined,
+    medium: o.medium === 'molten' || o.medium === 'aqueous' ? o.medium : undefined,
     name: (o.name as string).trim(),
   }
 }
@@ -148,6 +155,8 @@ export function deriveCell(p: ElectrochemicalCellParams): CellDerivation {
 const BEAKER_Y0 = -3
 const BEAKER_Y1 = 1.4
 const LIQUID_Y1 = 0.6
+/** Result headline lane: clear of the ion labels inside the beaker (BEAKER_Y0 + 0.7) and the beaker floor. */
+const RESULT_Y = BEAKER_Y0 - 1.5
 
 function beaker(x0: number, x1: number): SceneObject[] {
   return [
@@ -158,6 +167,18 @@ function beaker(x0: number, x1: number): SceneObject[] {
 
 function electrodeRod(x: number, topY: number, color: string): SceneObject {
   return line([x, BEAKER_Y0 + 0.4, 0], [x, topY, 0], color, 0.09)
+}
+
+/** "1" · "0.01" · "0.001" — the concentration as a learner would write it (no trailing ".0"). */
+export function formatConcentration(c: number): string {
+  return String(Number(c.toPrecision(3)))
+}
+
+/** The ion label under an electrode: the species, where it is, and — when the cell's EMF depends on it — how much. */
+function ionLabel(e: ElectrodeSpec, medium: ElectrochemicalCellParams['medium']): string {
+  const where = medium === 'molten' ? 'in the melt' : 'in solution'
+  const amount = isFiniteNumber(e.concentration) ? ` (${formatConcentration(e.concentration)} M)` : ''
+  return `${e.ion} ${where}${amount}`
 }
 
 export function buildElectrochemicalCellScene(p: ElectrochemicalCellParams): SceneSpec {
@@ -187,15 +208,15 @@ export function buildElectrochemicalCellScene(p: ElectrochemicalCellParams): Sce
     step1.push(label('salt bridge', [0, LIQUID_Y1 + 1.05, 0], ROLE.aid, 'detail'))
   } else {
     step1.push(...beaker(-5, 5))
-    step1.push(label(`electrolyte`, [0, BEAKER_Y0 + 1, 0], ROLE.reference, 'detail'))
+    step1.push(label(p.medium === 'molten' ? 'molten electrolyte' : 'electrolyte', [0, BEAKER_Y0 + 1, 0], ROLE.reference, 'detail'))
   }
 
   step2.push(electrodeRod(anodeX, wireTopY, ROLE.input))
   step2.push(electrodeRod(cathodeX, wireTopY, ROLE.output))
   step2.push(label(`${p.anode.material} (anode)`, [anodeX, wireTopY + 0.5, 0], ROLE.input, 'primary'))
   step2.push(label(`${p.cathode.material} (cathode)`, [cathodeX, wireTopY + 0.5, 0], ROLE.output, 'primary'))
-  step2.push(label(`${p.anode.ion} in solution`, [anodeX, BEAKER_Y0 + 0.7, 0], ROLE.input, 'detail'))
-  step2.push(label(`${p.cathode.ion} in solution`, [cathodeX, BEAKER_Y0 + 0.7, 0], ROLE.output, 'detail'))
+  step2.push(label(ionLabel(p.anode, p.medium), [anodeX, BEAKER_Y0 + 0.7, 0], ROLE.input, 'detail'))
+  step2.push(label(ionLabel(p.cathode, p.medium), [cathodeX, BEAKER_Y0 + 0.7, 0], ROLE.output, 'detail'))
 
   // Wire connecting the electrode tops, routed above the salt bridge label so
   // nothing overlaps, plus the external-circuit electron flow arrow.
@@ -207,7 +228,9 @@ export function buildElectrochemicalCellScene(p: ElectrochemicalCellParams): Sce
   step3.push(label('e⁻ flow', [(anodeX + cathodeX) / 2, wireY + 0.45, 0], ROLE.result, 'detail'))
 
   if (p.cellType === 'electrolytic' && isFiniteNumber(p.externalVoltage)) {
-    step3.push(label(`external source: ${p.externalVoltage} V`, [0, wireY + 0.9, 0], ROLE.aid, 'primary'))
+    // Two rows above the wire: row +0.45 is the "e⁻ flow" label, and the electrode names sit just below the wire's
+    // ends — at +0.9 this 'primary' sentence (270px wide) landed on "C (graphite) (anode)" and on "e⁻ flow".
+    step3.push(label(`external source: ${p.externalVoltage} V`, [0, wireY + 1.7, 0], ROLE.aid, 'primary'))
   }
 
   const resultParts: string[] = []
@@ -236,7 +259,10 @@ export function buildElectrochemicalCellScene(p: ElectrochemicalCellParams): Sce
     ...(resultParts.length > 0
       ? [{
           narration: resultParts.join(', ') + '.',
-          objects: [heading(resultParts.join('  ·  '), [0, BEAKER_Y1 + 2, 0], d.spontaneous === false ? ROLE.input : ROLE.result)],
+          // Its own lane BELOW the beakers. It used to sit at BEAKER_Y1 + 2 — the row of the electrode names
+          // and under the wire — so at 390px the headline answer was drawn on top of "Zn (anode)", "Cu (cathode)"
+          // and "e⁻ flow" (measured in Chromium, 2026-10-08).
+          objects: [label(resultParts.join('  ·  '), [0, RESULT_Y, 0], d.spontaneous === false ? ROLE.input : ROLE.result, 'detail')],
           intent: 'resolve' as const,
         }]
       : []),
@@ -246,6 +272,9 @@ export function buildElectrochemicalCellScene(p: ElectrochemicalCellParams): Sce
     id: `electrochemical-cell-${p.name.toLowerCase().replace(/\s+/g, '-')}`,
     title: p.name,
     sceneType: 'diagram',
+    // The x/y/z triad names no quantity in this figure (a molecule / lattice / shell has no meaningful axes) and its letters
+    // collided with the atom labels at the origin (measured 2026-10-08: x|y|z|O stacked at stage 1). Grid left as it was.
+    stage: { axes: false },
     teachingGoal: `Show ${divided ? 'a divided galvanic cell' : 'an electrolytic cell'}: the anode/cathode half-reactions, the direction of electron flow, and ${d.cellEmf !== null ? 'the resulting cell EMF' : 'how the cell is driven'}.`,
     cameraDistance: 18,
     ariaLabel: `${p.name}: an electrochemical cell with a ${p.anode.material} anode and a ${p.cathode.material} cathode${divided ? ', connected by a salt bridge' : ''}, with electrons flowing from anode to cathode through the external wire.${d.cellEmf !== null ? ` Cell EMF is ${d.cellEmf} volts, ${d.spontaneous ? 'spontaneous' : 'non-spontaneous'}.` : ''}`,
@@ -275,6 +304,17 @@ export function checkElectrochemicalCellConsistency(spec: SceneSpec, p: Electroc
     if (!allText.includes(expectedSpontaneity)) {
       errors.push(`scene does not state the derived spontaneity (${expectedSpontaneity})`)
     }
+  }
+
+  // A concentration that sets the EMF (Nernst, concentration cells) must be on the figure:
+  // an EMF the learner cannot trace to a visible quantity is a number to memorise.
+  for (const [side, e] of [['anode', p.anode], ['cathode', p.cathode]] as const) {
+    if (isFiniteNumber(e.concentration) && !allText.includes(`${formatConcentration(e.concentration)} M`)) {
+      errors.push(`scene does not show the ${side} concentration (${formatConcentration(e.concentration)} M)`)
+    }
+  }
+  if (p.medium === 'molten' && /in solution/i.test(allText)) {
+    errors.push('a molten-salt cell is labelled "in solution"')
   }
 
   // The electron-flow arrow must point from the anode's side of the diagram
