@@ -37,7 +37,9 @@ export function VisualPlaybackControls({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    color: '#fff',
+    // `--on-accent`, not '#fff': the dark theme's --coral is chalk-yellow (#E8B84B), and white on it is 1.84:1
+    // (measured 2026-10-08); tokens.css defines --on-accent for exactly this fill (~9:1).
+    color: 'var(--on-accent, #fff)',
     background: 'var(--coral, #FF6B5E)',
     boxShadow: '0 2px 0 rgba(0,0,0,0.18)',
     lineHeight: 1,
@@ -108,7 +110,7 @@ export function VisualPlaybackControls({
                 padding: '3px 8px',
                 fontSize: 10,
                 fontWeight: 800,
-                color: active ? '#fff' : 'var(--text-secondary, #aaa)',
+                color: active ? 'var(--on-accent, #fff)' : 'var(--text-secondary, #aaa)',
                 background: active ? 'var(--coral, #FF6B5E)' : 'transparent',
               }}
             >

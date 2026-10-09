@@ -171,11 +171,15 @@ export function labelWrapWidth(text: string, viewport: Viewport, tier?: number):
   return singleLine > available ? available : null
 }
 
-/** The box that text will occupy, from its own resolved font size. */
-function labelExtent(text: string, viewport: Viewport, tier?: number): { halfW: number; halfH: number } {
+/**
+ * The box that text will occupy, from its own resolved font size. `wrapAtOverride` (a width the placement
+ * solver chose, see `WrapAlternative`) replaces the default "wrap only when wider than the canvas" rule; omitted,
+ * every existing caller gets exactly the answer it always got.
+ */
+function labelExtent(text: string, viewport: Viewport, tier?: number, wrapAtOverride?: number | null): { halfW: number; halfH: number } {
   const fontPx = fontPxFor(viewport, tier)
   const singleLine = text.length * widthRatioFor(text) * fontPx
-  const wrapAt = labelWrapWidth(text, viewport, tier)
+  const wrapAt = wrapAtOverride !== undefined ? wrapAtOverride : labelWrapWidth(text, viewport, tier)
   if (wrapAt === null) {
     return { halfW: singleLine / 2, halfH: (fontPx * LINE_HEIGHT_RATIO) / 2 }
   }
@@ -198,6 +202,34 @@ function labelExtent(text: string, viewport: Viewport, tier?: number): { halfW: 
     }
   }
   return { halfW: wrapAt / 2, halfH: (lines * fontPx * LINE_HEIGHT_RATIO) / 2 }
+}
+
+/**
+ * Narrower layouts to try for a label that cannot be placed at its natural width, widest first.
+ *
+ * The widths are fractions of the width the label would otherwise have, never narrower than its longest word (a
+ * word is never split) — so wrapping can change only where lines break, not what is said or how big it is. A label
+ * that is already as narrow as its longest word gets none.
+ */
+const WRAP_FRACTIONS = [0.72, 0.52, 0.38] as const
+
+function wrapAlternativesFor(text: string, viewport: Viewport, tier?: number): WrapAlternative[] {
+  const fontPx = fontPxFor(viewport, tier)
+  const perChar = widthRatioFor(text) * fontPx
+  const natural = text.length * perChar
+  const current = labelWrapWidth(text, viewport, tier) ?? natural
+  const longestWord = Math.max(...text.split(/\s+/).map((w) => w.length)) * perChar
+  const floor = Math.ceil(longestWord + 4)
+  const out: WrapAlternative[] = []
+  let last = current
+  for (const f of WRAP_FRACTIONS) {
+    const wrapPx = Math.max(Math.round(Math.min(current, natural) * f), floor)
+    if (wrapPx >= last - 2) continue
+    last = wrapPx
+    const { halfW, halfH } = labelExtent(text, viewport, tier, wrapPx)
+    out.push({ wrapPx, halfW, halfH })
+  }
+  return out
 }
 
 /** A label object's typographic tier; `size` means an extent on every other type. */
@@ -317,7 +349,8 @@ export function checkSceneLayout(scene: SceneSpec, viewport: Viewport): LayoutRe
   const placement = placeSceneLabels(scene, viewport)
   const tiers = sceneTextObjects(scene).map(({ object }) => tierOf(object))
   const boxes: LabelBox[] = placement.labels.map((l, i) => {
-    const { halfW, halfH } = labelExtent(l.text, viewport, tiers[i])
+    // The width the solver chose (a wrapped retry) is the width the renderer paints, so it is the box to check.
+    const { halfW, halfH } = labelExtent(l.text, viewport, tiers[i], l.wrapPx)
     return { text: l.text, left: l.x - halfW, right: l.x + halfW, top: l.y - halfH, bottom: l.y + halfH }
   })
   const violations: LayoutViolation[] = []
@@ -432,6 +465,33 @@ function sceneExtent(scene: SceneSpec): Extent | null {
   return minX > maxX ? null : { minX, maxX, minY, maxY }
 }
 
+/**
+ * The camera distance at which every drawable point stays inside `fill` of the frame once PERSPECTIVE is counted.
+ *
+ * `fitSceneToFrame` sized the frame from the geometry's x/y extent alone, as if every point sat on the focal plane (z = 0).
+ * A point `z` units nearer the camera is magnified by d / (d − z), so a 3D figure fitted that way pushed its near atoms out of
+ * the canvas: measured in Chromium (2026-10-08) the third hydrogen of ammonia (z = +6.4 at a fitted distance of 11.5, a 2.25×
+ * magnification) and its bond ran off the top-left corner at both 1280 and 390px, while the learner was told "it bonds to
+ * 3 H atoms". Solving |y|·d / (d − z) ≤ fill·d·tan(fov/2) for d gives  d ≥ |y| / (fill·tan) + z  (and the same for x).
+ *
+ * Only points NEARER than the focal plane (z > 0) constrain it. Returns null when there are none, so a flat scene — every
+ * scene before this existed — keeps the original formula and its exact output.
+ */
+function perspectiveDistance(scene: SceneSpec, cx: number, cy: number, fill: number, aspect: number): number | null {
+  const tan = Math.tan(FOV_RADIANS / 2)
+  let needed = -Infinity
+  for (const step of scene.steps ?? []) {
+    for (const obj of step.objects ?? []) {
+      const points = [obj.position, obj.from, obj.to, ...(obj.points ?? [])].filter(Boolean) as Vec3[]
+      for (const p of points) {
+        if (!(p[2] > 0)) continue
+        needed = Math.max(needed, Math.abs(p[1] - cy) / (fill * tan) + p[2], Math.abs(p[0] - cx) / (fill * tan * aspect) + p[2])
+      }
+    }
+  }
+  return needed === -Infinity ? null : needed
+}
+
 /** Half-extents of the camera frustum at the z = 0 plane, for a 4:3 canvas. */
 function frustum(cameraDistance: number): { halfW: number; halfH: number } {
   const halfH = Math.tan(FOV_RADIANS / 2) * cameraDistance
@@ -495,7 +555,9 @@ export function fitSceneToFrame(scene: SceneSpec): SceneSpec {
   const tan = Math.tan(FOV_RADIANS / 2)
   const neededForHeight = spanY / (2 * TARGET_FRAME_FILL * tan)
   const neededForWidth = spanX / (2 * TARGET_FRAME_FILL * tan * (4 / 3))
-  const distance = Math.max(neededForHeight, neededForWidth)
+  const flatDistance = Math.max(neededForHeight, neededForWidth)
+  const depthDistance = perspectiveDistance(scene, cx, cy, TARGET_FRAME_FILL, 4 / 3)
+  const distance = depthDistance === null ? flatDistance : Math.max(flatDistance, depthDistance)
   if (!Number.isFinite(distance) || distance <= 0) return scene
 
   const shift = (p: Vec3): Vec3 => [p[0] - cx, p[1] - cy, p[2]]
@@ -589,6 +651,12 @@ export interface PlacedLabel {
   /** False when no safe placement existed; the authored position is kept. */
   ok: boolean
   reason?: 'no-safe-placement'
+  /**
+   * Set ONLY when the solver had to wrap this label narrower than its default to find it a safe spot. The renderer
+   * must paint it at exactly this width (`SceneLabel`'s `maxWidthPx`) so the box drawn is the box that was planned.
+   * Absent for every label that placed at its natural width — which is almost all of them.
+   */
+  wrapPx?: number
 }
 
 export interface PlacementResult {
@@ -722,6 +790,7 @@ export function placeSceneLabels(scene: SceneSpec, viewport: Viewport): Placemen
       x: (anchor.left + anchor.right) / 2,
       y: (anchor.top + anchor.bottom) / 2,
       halfW, halfH,
+      wrapAlternatives: wrapAlternativesFor(anchor.text, viewport, tiers[index]),
     }
   })
 
@@ -740,6 +809,19 @@ export interface PlacementItem {
   x: number
   y: number
   /** Half the rendered box, in screen px. */
+  halfW: number
+  halfH: number
+  /**
+   * Narrower, taller boxes for the SAME text, widest first. Tried only when the natural box has no safe placement.
+   * Wrapping keeps every word and never shrinks the type — the two things this solver is forbidden to do — so it is
+   * the one remaining way to make room. Optional: a caller that supplies none (the SVG pass) is unchanged.
+   */
+  wrapAlternatives?: readonly WrapAlternative[]
+}
+
+/** One narrower layout of a label: the width to wrap at, and the box that produces. */
+export interface WrapAlternative {
+  wrapPx: number
   halfW: number
   halfH: number
 }
@@ -787,10 +869,13 @@ export function solveLabelPlacement(
   for (const { item, index } of order) {
     const ax = item.x
     const ay = item.y
-    const box = (x: number, y: number): Box => ({
-      left: x - item.halfW, right: x + item.halfW, top: y - item.halfH, bottom: y + item.halfH,
+    const boxOf = (halfW: number, halfH: number) => (x: number, y: number): Box => ({
+      left: x - halfW, right: x + halfW, top: y - halfH, bottom: y + halfH,
     })
+    let box = boxOf(item.halfW, item.halfH)
+    let wrapPx: number | undefined
 
+    const search = (): { x: number; y: number; score: number } | null => {
     let best: { x: number; y: number; score: number } | null = null
 
     for (const { dx, dy } of offsets) {
@@ -820,6 +905,21 @@ export function solveLabelPlacement(
       // so an already-good label is provably never moved.
       if (score === 0) break
     }
+    return best
+    }
+
+    let best = search()
+    // No safe spot at the natural width. Before giving up and leaving the label clipped or on top of its neighbour,
+    // try it wrapped narrower: same words, same type size, a box that may fit where the wide one cannot. Reached only
+    // after the natural box has failed, so a figure that places cleanly is byte-identical to before.
+    if (!best && item.wrapAlternatives) {
+      for (const alt of item.wrapAlternatives) {
+        box = boxOf(alt.halfW, alt.halfH)
+        best = search()
+        if (best) { wrapPx = alt.wrapPx; break }
+      }
+      if (!best) box = boxOf(item.halfW, item.halfH)
+    }
 
     if (best) {
       placedBoxes.push(box(best.x, best.y))
@@ -827,6 +927,7 @@ export function solveLabelPlacement(
         text: item.text, anchorX: ax, anchorY: ay, x: best.x, y: best.y,
         movedPx: Math.round(Math.hypot(best.x - ax, best.y - ay)),
         ok: true,
+        ...(wrapPx !== undefined ? { wrapPx } : {}),
       }
     } else {
       // FAIL VISIBLY: keep the authored position, report it, never hide.

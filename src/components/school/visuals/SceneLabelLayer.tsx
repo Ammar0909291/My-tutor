@@ -150,7 +150,9 @@ export function SceneLabelLayer({ labels, obstacles = [], cameraDistance, theme 
       tier: labels[i]?.tier,
       // The width the solver reserved, so the painted box matches the planned
       // one. Null for every label that fits on a line — almost all of them.
-      maxWidthPx: labelWrapWidth(s.text, viewport, labels[i]?.tier) ?? undefined,
+      // A label the solver had to wrap narrower to find it a safe spot carries that width (`wrapPx`); every
+      // other label keeps the default rule.
+      maxWidthPx: s.wrapPx ?? labelWrapWidth(s.text, viewport, labels[i]?.tier) ?? undefined,
     }))
   }, [labels, obstacles, cameraDistance, size.width, size.height, windowWidth])
 

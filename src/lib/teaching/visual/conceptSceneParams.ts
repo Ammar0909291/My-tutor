@@ -681,11 +681,14 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     cathode: { material: 'Fe (steel)', ion: 'Na+' },
     electronsTransferred: 2,
     externalVoltage: 4,
+    medium: 'molten', // no water: "Na+ in solution" would draw the aqueous cell this one is contrasted with
     name: 'Electrolysis of Molten NaCl',
   }),
   'chem.elect.industrial': () => buildElectrochemicalCellScene({
     cellType: 'electrolytic',
-    anode: { material: 'Cu (pure, impure at cathode)', ion: 'Cu2+' },
+    // The builder appends "(anode)" / "(cathode)"; the old material text carried its own parenthesis
+    // ("Cu (pure, impure at cathode) (anode)") and was wrong for both plating and refining.
+    anode: { material: 'Cu', ion: 'Cu2+' },
     cathode: { material: 'object to be plated', ion: 'Cu2+' },
     electronsTransferred: 2,
     externalVoltage: 2,
@@ -743,7 +746,9 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'chem.coord.werner':       () => buildCoordinationComplexScene(HEXAAMMINECOBALT),
   'chem.coord.nomenclature': () => buildCoordinationComplexScene(HEXAAMMINECOBALT),
   'chem.coord.bonding':      () => buildCoordinationComplexScene({
-    ...HEXAAMMINECOBALT, name: 'Hexaamminecobalt(III) — sp3d2 / d2sp3 Hybridization',
+    // The figure draws the octahedral geometry that d2sp3 hybridisation produces; it draws no orbitals,
+    // so the title must not promise "sp3d2 / d2sp3 Hybridization" (that stays with the tutor's words).
+    ...HEXAAMMINECOBALT, name: 'Hexaamminecobalt(III) — octahedral geometry',
   }),
   'chem.coord.isomerism': () => buildCoordinationComplexScene(CISPLATIN),
   // Cisplatin's biological activity is literally cis/trans-dependent — the
@@ -840,10 +845,11 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   // CHEM-086: "Phase Diagrams" served no figure on any of 18 turns.
   'chem.state.phase-diagram': () => buildCellComparisonScene({
     conceptId: 'chem.state.phase-diagram',
+    gridFromGroups: 4, // four groups of long clauses: a 2x2 grid, not four columns ~85px apart on a phone
     title: 'Reading a Phase Diagram: Pressure against Temperature',
     teachingGoal: 'Every P–T point lies in one region (solid, liquid or gas); on a boundary curve two phases coexist; at the triple point all three do; beyond the critical point liquid and gas become one supercritical fluid.',
     groups: [
-      { label: 'Three regions', description: 'every P–T point is solid, liquid or gas', items: ['solid: low T, high P', 'gas: high T, low P'] },
+      { label: 'Three regions', description: 'every P–T point is solid, liquid or gas', items: ['solid: low T, high P', 'liquid: between the two', 'gas: high T, low P'] },
       { label: 'Boundary curves', description: 'along a curve two phases coexist', items: ['solid–gas: sublimation (dry ice)', 'liquid–gas: vapour pressure; read the boiling point', 'solid–liquid: melting; slopes backwards for water'] },
       { label: 'Triple point', description: 'all three phases coexist', items: ['water: 273.16 K, 611 Pa'] },
       { label: 'Critical point', description: 'end of the liquid–gas curve; beyond it a supercritical fluid', items: ['CO₂: 304 K, 73 atm', 'water: 647 K, 218 atm'] },
@@ -853,6 +859,7 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   // Boyle's-law hyperbola, the opposite of the concept.
   'chem.state.real-gases': () => buildCellComparisonScene({
     conceptId: 'chem.state.real-gases',
+    gridFromGroups: 4, // four groups of long clauses: a 2x2 grid, not four columns ~85px apart on a phone
     title: 'Why Real Gases Deviate: Z = PV/(nRT)',
     teachingGoal: 'An ideal gas has Z = 1; real molecules attract (Z < 1 at moderate pressure) and take up space (Z > 1 at high pressure); van der Waals corrects both.',
     groups: [
@@ -986,6 +993,7 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   // concept's Educational Brain entry (educational-brain/concepts/chemistry/).
   'chem.org.pericyclic': () => buildCellComparisonScene({
     conceptId: 'chem.org.pericyclic',
+    gridFromGroups: 3, // three groups of long clauses: two rows, not three columns ~140px apart on a phone
     title: 'Three Families of Pericyclic Reactions',
     teachingGoal: 'Every pericyclic reaction is concerted — electron pairs flow round one cyclic transition state with no intermediate; the Woodward–Hoffmann rules decide whether heat or light allows it.',
     groups: [
@@ -1009,6 +1017,7 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   }),
   'chem.poly.biodegradable': () => buildCellComparisonScene({
     conceptId: 'chem.poly.biodegradable',
+    gridFromGroups: 3, // three groups of long clauses: two rows, not three columns ~140px apart on a phone
     title: 'Polymer Behaviour Follows the Backbone, Not the Feedstock',
     teachingGoal: 'Biodegradability is decided by backbone chemistry — hydrolysable linkages or none — not by whether the monomer came from plants; conductivity needs a conjugated π-system AND a doping step.',
     groups: [

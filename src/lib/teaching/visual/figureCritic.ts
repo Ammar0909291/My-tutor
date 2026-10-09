@@ -225,7 +225,17 @@ export function checkRendering(figure: GeneratedFigure): { verdict: DimensionVer
  * the source and can see what the notation MEANS — which is exactly the class of
  * defect a deterministic check catches better than a model does.
  */
-const LATEX_MARKERS = /\\(?:frac|sqrt|cdot|times|alpha|beta|gamma|theta|pi|mu|Delta|sum|int)\b|\$[^$]+\$|\\\(|\\\[/
+const LATEX_MARKERS = new RegExp([
+  // commands (maths, and the chemistry ones that appeared in generated figures: arrows, \ce, \text, \mathrm)
+  String.raw`\\(?:frac|sqrt|cdot|times|alpha|beta|gamma|theta|pi|mu|Delta|sum|int|rightarrow|leftrightarrow|rightleftharpoons|to|ce|text|mathrm|left|right)\b`,
+  // delimiters
+  String.raw`\$[^$]+\$|\\\(|\\\[`,
+  // brace sub/superscript markup the renderers print literally: Fe^{2+}, K_{sp}, SO_4^{2-}.
+  // Deliberately NOT bare `x^2` / `H_2O` / `H^+`: `figureText` includes a graph's `equation`, where
+  // `y = x^2` is the notation the expression parser compiles. Those plain forms are typeset, not
+  // rejected — see `typesetSceneChemistry`.
+  String.raw`[_^]\{`,
+].join('|'))
 
 export function containsRawLatex(text: string): boolean {
   return LATEX_MARKERS.test(text)

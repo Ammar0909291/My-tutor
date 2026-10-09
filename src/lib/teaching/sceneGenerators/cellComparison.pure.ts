@@ -30,6 +30,13 @@ export interface CellComparisonParams {
   title: string
   teachingGoal: string
   groups: readonly ComparisonGroup[]
+  /**
+   * Put the groups on two rows from this many groups up. Omitted = `GRID_FROM_GROUPS` (5), so every existing
+   * figure — every Biology comparison — is byte-identical. A caller whose item text is long sets it lower: four
+   * columns of 40-character clauses anchored ~85px apart on a 282px phone canvas leave no free space at all
+   * (measured in Chromium, 2026-10-08: real-gases and phase-diagram labels cut off at the canvas edge).
+   */
+  gridFromGroups?: number
 }
 
 // Six, not four: nine Biology comparisons have five or six groups (the five
@@ -54,17 +61,20 @@ const ITEM_PITCH = ITEM_SPACING * 1.6
 // 390px). Four or fewer groups keep the single row unchanged, byte for byte.
 const GRID_FROM_GROUPS = 5
 const GRID_COLUMN_SPACING = 6.5
+/** Two columns have the whole canvas width between them, so each can be given twice the room of a column in a 3-wide grid. */
+const GRID_TWO_COLUMN_SPACING = 10
 const GRID_ROW_GAP = 1.8
 const GRID_CAMERA_DISTANCE = 20
 
 interface GroupPlace { x: number; headerY: number }
 
-function placeGroups(groups: readonly ComparisonGroup[]): GroupPlace[] {
-  if (groups.length < GRID_FROM_GROUPS) {
+function placeGroups(groups: readonly ComparisonGroup[], gridFrom: number): GroupPlace[] {
+  if (groups.length < gridFrom) {
     const offset = ((groups.length - 1) * GROUP_SPACING) / 2
     return groups.map((_, gi) => ({ x: round(gi * GROUP_SPACING - offset), headerY: 2.5 }))
   }
   const columns = Math.ceil(groups.length / 2)
+  const columnSpacing = columns <= 2 ? GRID_TWO_COLUMN_SPACING : GRID_COLUMN_SPACING
   const maxItems = Math.max(...groups.map((g) => g.items.length))
   const rowHeight = (maxItems + 1) * ITEM_PITCH + GRID_ROW_GAP
   // Centre the block vertically: first header to last item.
@@ -73,14 +83,15 @@ function placeGroups(groups: readonly ComparisonGroup[]): GroupPlace[] {
     const row = Math.floor(gi / columns)
     const col = gi % columns
     const inRow = Math.min(columns, groups.length - row * columns)
-    const offset = ((inRow - 1) * GRID_COLUMN_SPACING) / 2
-    return { x: round(col * GRID_COLUMN_SPACING - offset), headerY: round(top - row * rowHeight) }
+    const offset = ((inRow - 1) * columnSpacing) / 2
+    return { x: round(col * columnSpacing - offset), headerY: round(top - row * rowHeight) }
   })
 }
 
 export function buildCellComparisonScene(params: CellComparisonParams): SceneSpec {
   const { conceptId, title, teachingGoal, groups } = params
-  const places = placeGroups(groups)
+  const gridFrom = params.gridFromGroups ?? GRID_FROM_GROUPS
+  const places = placeGroups(groups, gridFrom)
 
   const steps: SceneStep[] = groups.map((group, gi) => {
     const { x, headerY } = places[gi]
@@ -102,7 +113,7 @@ export function buildCellComparisonScene(params: CellComparisonParams): SceneSpe
     title,
     sceneType: 'comparison',
     teachingGoal,
-    cameraDistance: groups.length >= GRID_FROM_GROUPS ? GRID_CAMERA_DISTANCE : 18,
+    cameraDistance: groups.length >= gridFrom ? GRID_CAMERA_DISTANCE : 18,
     ariaLabel: `A comparison of ${groups.length} categories for ${title}: ${groups.map((g) => g.label).join(' vs ')}.`,
     steps,
   }
