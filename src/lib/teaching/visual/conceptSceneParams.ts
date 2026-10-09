@@ -29,6 +29,7 @@ import type { SceneSpec } from '@/lib/teaching/sceneSpec'
 import { fitSceneToFrame } from './layout'
 import { canonicalParametricScene } from './parametricScenes'
 import { buildVectorProductsScene } from '@/lib/teaching/sceneGenerators/vectorProducts'
+import { buildLensPowerScene } from '@/lib/teaching/sceneGenerators/lensPower'
 import { buildCollisionScene } from '@/lib/teaching/sceneGenerators/momentumCollision'
 import { buildRayOpticsScene } from '@/lib/teaching/sceneGenerators/rayOptics'
 import { buildCircuitScene } from '@/lib/teaching/sceneGenerators/electricCircuit'
@@ -369,6 +370,13 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   // registry row names no generator at all, and this table is consulted
   // before the kind is.
   'phys.meas.vector-products': buildVectorProductsScene,
+
+  // Lens power and lens combinations: P = 1/f in dioptres, and P = P1 + P2 for thin lenses in
+  // contact — the two relationships the KG node, the EB entry and the blueprint teach. Until
+  // 2026-10-09 the concept was served the single-lens ray diagram of phys.opt.lenses, which shows
+  // neither (see lensPower.ts). Its registry row names no generator, so — as for vector-products —
+  // this table is what serves it, and it is a static figure rather than the ray_optics sliders.
+  'phys.opt.lens-power': buildLensPowerScene,
 
   'phys.opt.total-internal-reflection': buildTotalInternalReflectionScene,
   'phys.opt.refraction':                buildRefractionScene,
