@@ -11,15 +11,13 @@
 - P1: 12
 - P2: 85
 - P3: 53
-- Status (2026-10-07 pass, 2350ff6; nothing in this pass is production-verified — Vercel deploys blocked; totals = 150 entries):
-  - PARTIALLY FIXED IN REPO: 68
+- Status (after the 2026-10-09 deploy of a9ef53d; DEPLOYED = live, NOT production-verified; totals = 150 entries):
+  - PARTIALLY FIXED: 76
   - FIXED: 38
-  - FIXED IN REPO: 25
-  - PARTIALLY FIXED: 8
+  - DEPLOYED: 26
   - FIXED IN REPO (production row not converged): 7
   - NOT REPRODUCED: 2
   - DEFERRED: 1
-  - DEPLOYED: 1
 <!-- SUMMARY:END -->
 
 **Fix pass (2026-10-05/06, batches A–F, commits dc88764 … dee8428):** each entry's **Status** / **Fix:** line names its commit, cause and evidence. Live re-check on production, disposable accounts deleted afterwards, `scripts/qa/chemDefectRedrive.ts` + `scripts/qa/sessionShareProbe.ts`:
@@ -201,7 +199,7 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (147 occurrences in 140 lessons): #1 (A1) tt13-14/t-; #96 (A6) tt9-11/t-; #133 (A8) tt6/t-; #98 (A6) tt3-t6; #40 (A3) tt17,t23; #49 (A3) tt15/t-; #129 (A7) tt2,t5,t6/t-; #53 (A3) tt2,t14/t-; #106 (A6) tt7,t10,t14/t-; #5 (A1) t-; #6 (A1) t-; #8 (A1) t-; #9 (A1) t-; #11 (A1) t-; #12 (A1) t-; #15 (A1) t-; #16 (A1) t-; #17 (A1) t-; #18 (A1) t-; #169 (A10) t-; #171 (A10) t-; #172 (A10) t-; #174 (A10) t-; #181 (A10) t-; #184 (A10) t-; #185 (A10) t-; #20 (A2) t-; #21 (A2) t-; #22 (A2) t-; #23 (A2) t-; #24 (A2) t-; #25 (A2) t-; #26 (A2) t-; #27 (A2) t-; #28 (A2) t-; #29 (A2) t-; #30 (A2) t-; #31 (A2) t-; #32 (A2) t-; #33 (A2) t-; #34 (A2) t-; #35 (A2) t-; #36 (A2) t-; #38 (A2) t-; #41 (A3) t-; #43 (A3) t-; #44 (A3) t-; #45 (A3) t-; #46 (A3) t-; #47 (A3) t-; #48 (A3) t-; #51 (A3) t-; #52 (A3) t-; #54 (A3) t-; #55 (A3) t-; #56 (A3) t-; #57 (A3) t-; #59 (A4) t-; #61 (A4) t-; #62 (A4) t-; #63 (A4) t-; #64 (A4) t-; #65 (A4) t-; #66 (A4) t-; #67 (A4) t-; #68 (A4) t-; #69 (A4) t-; #70 (A4) t-; #73 (A4) t-; #74 (A4) t-; #75 (A4) t-; #76 (A4) t-; #77 (A5) t-; #78 (A5) t-; #79 (A5) t-; #80 (A5) t-; #81 (A5) t-; #82 (A5) t-; #83 (A5) t-; #84 (A5) t-; #85 (A5) t-; #86 (A5) t-; #89 (A5) t-; #90 (A5) t-; #91 (A5) t-; #93 (A5) t-; #94 (A5) t-; #95 (A5) t-; #100 (A6) t-; #101 (A6) t-; #102 (A6) t-; #103 (A6) t-; #104 (A6) t-; #105 (A6) t-; #107 (A6) t-; #108 (A6) t-; #109 (A6) t-; #110 (A6) t-; #111 (A6) t-; #112 (A6) t-; #114 (A6) t-; #115 (A7) t-; #116 (A7) t-; #117 (A7) t-; #118 (A7) t-; #120 (A7) t-; #121 (A7) t-; #124 (A7) t-; #125 (A7) t-; #126 (A7) t-; #127 (A7) t-; #128 (A7) t-; #130 (A7) t-; #131 (A7) t-; #132 (A7) t-; #134 (A8) t-; #136 (A8) t-; #137 (A8) t-; #139 (A8) t-; #140 (A8) t-; #141 (A8) t-; #142 (A8) t-; #143 (A8) t-; #145 (A8) t-; #147 (A8) t-; #148 (A8) t-; #149 (A8) t-; #150 (A8) t-; #151 (A9) t-; #152 (A9) t-; #153 (A9) t-; #154 (A9) t-; #156 (A9) t-; #157 (A9) t-; #159 (A9) t-; #160 (A9) t-; #162 (A9) t-; #163 (A9) t-; #164 (A9) t-; #165 (A9) t-
 - Notes on occurrences: #1 tt13-14: 2 of 3 counted cards are 2-option · #96 tt9-11: two of three counted cards 2-option, one with an absurd distractor ("This is impossible") · #133 tt6: 2-option card closes the lesson · #98 tt3-t6: 3 of 4 counted cards are trivial or binary · #40 tt17,t23: 2-option "He or NH₃? Why?" card whose options give no "why" · #49 tt15: "Is heat (q) a state function or a path function? Justify." as a 2-option card; options contain no justification · #129 tt2,t5,t6: four of five cards are 2-option; mastery reached at t8 · #53 tt2,t14: options "Incorrect / Correct" on a claim card (no Yes/No or True/False wording)
 - Related defect: —
-- Status: FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: DEPLOYED — live on production since 2026-10-09 (deploy of a9ef53d, READY, aliased my-tutor-flame.vercel.app); not production-verified
 - Fix: d5397b1 — production redrive 2026-10-06: 16 of 35 distinct cards served had 2 options; 12 of those 16 are authored probes (true/false and yes/no items of the 3-probe contract), 4 model-written. Whether a 2-option card may count toward mastery is an OWNER DECISION (also BIO-019); not changed. **2026-10-07 pass (2350ff6):** Owner decision 2026-10-07 ("practice only", applied where reachable): a correct answer on a 2-option card moves the lesson on but banks no verified mastery credit when the concept holds at least 3 authored cards with 3+ options (`turnContract.certifiesMastery`, hoisted once as `certifiedForMastery`; the pool is read by `assets/probePool.ts`, one concept, take 60). Where fewer exist (measured 2026-10-07: every Biology, English and CS concept, 166 Physics, 152 Chemistry, 22 Mathematics) a 2-option card still counts, by the same decision, until more 3+-option cards are authored. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### CHEM-005 — Cards test facts/terms that the lesson has not yet taught
@@ -221,7 +219,7 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (10 occurrences in 10 lessons): #1 (A1) tt14; #115 (A7) tt9-11; #39 (A3) tt3; #169 (A10) tt2-t6; #170 (A10) tafter-complete; #116 (A7) tt1-t3; #58 (A4) tt1,t11; #135 (A8) tt4-t7; #136 (A8) tt3-t24; #17 (A1) tt4
 - Notes on occurrences: #1 tt14: "Homogeneous mixture" option appears; term not taught · #115 tt9-11: SO2 vs Cl2 bleaching, hydrogen bonding in H2O vs H2S, OF6 expanded octet never taught in the transcript · #39 tt3: Graham's-law card in the same message that first introduces Graham's law · #169 tt2-t6: peptide-bond counting, covalent vs non-covalent forces, denaturation and ribonuclease card all asked after only a picture-description turn · #170 tafter-complete: DNA vs RNA question asked though the lesson only covered replication base pairing · #116 tt1-t3: displacement-series and HF/oxidising-power questions asked after a 2-sentence "F2 has a weak bond" turn · #58 tt1,t11: first reply after "ok" is a Q-vs-K calculation problem; later card needs ΔG°=-RT lnK, neither taught · #135 tt4-t7: endo/exo kinetic vs thermodynamic control and Woodward–Hoffmann suprafacial/antarafacial rules asked after only a figure walkthrough; lesson mastered in 7 turns
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Card selection prefers cards whose stem and key words the learner has already met in this lesson (`teachingActionRepository.preferTaughtProbes`, at least half the content words, and any quantity in the key must already have been stated); when none qualifies every card stays available. Heuristic, so partial. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### CHEM-006 — Lesson "Group 16 — Oxygen Family" teaches only the Contact Process; the lesson content is never taught but is tested and marked mastered
@@ -239,7 +237,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: The visual/teaching does not correspond to the lesson concept; mastery is awarded on untaught content.
 - Reproducibility: Observed once (account 7 #115). Not yet re-run on another account.
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: 5e53430 — the only figure was a cached, model-generated "Contact Process" flow (not in the repo), and the teaching followed it. A curated Tier-0 figure (existing buildStatisticsBarChartScene: Group 16 hydride boiling points, water the outlier) now outranks generation for chem.pblock.group16. Verified by test (src/tests/chem006Group16Figure.test.ts). That the model's teaching then covers the group trends is model behaviour and has not been re-checked live. **2026-10-07 pass (2350ff6):** The lesson's KG syllabus line is now in the chat and opening prompts with the rule to teach each part, in order, before asking about it and to promise nothing outside it (`lessonDriftGuard.lessonScopeRule`). Prompt-level, so not guaranteed. Test: src/tests/remainingDefectFixes20261007.test.ts.
 
 ### CHEM-007 — Worked example claims 0.059 V "is exactly" the figure's +0.089 V (explained away as rounding)
@@ -257,7 +255,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Objectively false statement that the two numbers agree; confuses a learner checking the tutor's sum against the picture.
 - Reproducibility: Observed once (#77); prompted by "give me example".
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### CHEM-008 — Tutor describes figure content the figure does not show (concentrations / "larger EMF value" shows which side is richer); opening says Zn–Zn cell but figure is Cu–Cu
@@ -293,7 +291,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Numerical error in feedback of a numeric card, contradicting an earlier turn in the same lesson.
 - Reproducibility: Observed once (#1 t13).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### CHEM-010 — Baked cake presented as a "compound"; ingredient list mismatches (flour/sugar/cocoa → "flour or eggs")
@@ -311,7 +309,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Objectively wrong classification, in a foundations lesson.
 - Reproducibility: Observed once (#1 t6).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts. This item is mainly a plain-prose claim, so it is checked only when the same reply also carries numbers, equations or a worked example; otherwise it remains model output (scope of the owner decision).
 
 ### CHEM-011 — "10 g oxygen + 1 g hydrogen mixed… the extra 2 grams of oxygen floats around freely" — conflates an unreacted mixture with a reacted one
@@ -329,7 +327,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: The numbers example confuses the very distinction being taught.
 - Reproducibility: Observed once (#1 t5).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### CHEM-012 — Contradiction in one lesson: brass "pulled apart with a chemical process (adding acid)" vs "separated without a chemical reaction"
@@ -347,7 +345,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Self-contradiction; the t1 logic does not show "mixture".
 - Reproducibility: Observed once (#1).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts. This item is mainly a plain-prose claim, so it is checked only when the same reply also carries numbers, equations or a worked example; otherwise it remains model output (scope of the owner decision).
 
 ### CHEM-013 — Nature of Matter figure draws "compound" and "mixture" the same way (two touching spheres each)
@@ -365,7 +363,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Visual does not carry the distinction the lesson is about. (Judged from the scene payload; not viewed in a browser.)
 - Reproducibility: Observed in the payload of #1.
 - Related defect: —
-- Status: FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: DEPLOYED — live on production since 2026-10-09 (deploy of a9ef53d, READY, aliased my-tutor-flame.vercel.app); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** chem.found.matter now owns a curated figure — three columns, Element / Compound / Mixture, worded from the EB entry — so the live-generated two-spheres scene is no longer reached (`conceptSceneParams.ts`). Test: src/tests/remainingDefectFixes20261007.test.ts.
 
 ### CHEM-014 — Sulfur dioxide called "a yellow gas" (SO₂ is colourless — tutor said "colourless" two turns earlier)
@@ -383,7 +381,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Factual error and internal contradiction.
 - Reproducibility: Observed once (#115).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts. This item is mainly a plain-prose claim, so it is checked only when the same reply also carries numbers, equations or a worked example; otherwise it remains model output (scope of the owner decision).
 
 ### CHEM-015 — "give me example with numbers" / "show me step by step" answered without numbers / without steps
@@ -443,7 +441,7 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (3 occurrences in 3 lessons): #2 (A1) tt2/t7; #116 (A7) tt2/t10; #20 (A2) tt14-t18
 - Notes on occurrences: #2 tt2/t7: same card twice, the repeat is the final mastery card · #116 tt2/t10: "Can iodine (I₂) displace chlorine from NaCl?" asked twice, last card of lesson; after-complete card repeats the HF card · #20 tt14-t18: every card repeated
 - Related defect: —
-- Status: FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: DEPLOYED — live on production since 2026-10-09 (deploy of a9ef53d, READY, aliased my-tutor-flame.vercel.app); not production-verified
 - Fix: 957978b + afa7322 — same mechanism as CHEM-033, reproduced in production on the same lesson (chem.alc.phenols, A → B → A in one tab). Not deployed (Vercel 402); production re-test pending.
 
 ### CHEM-018 — Wrong-answer feedback talks about the student in the third person ("The learner assumed…")
@@ -519,7 +517,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Mixed signals.
 - Reproducibility: Observed once (#77 t8).
 - Related defect: —
-- Status: FIXED IN REPO — awaiting deployment (Vercel account blocked)
+- Status: DEPLOYED — live on production since 2026-10-09 (deploy of a9ef53d, READY, aliased my-tutor-flame.vercel.app); not production-verified
 - Fix: 5fad26c, e09efe5 — production redrive 2026-10-06 found the same mechanism in other wording beside an attached card in 9 of 143 turns ("When you feel ready, just let me know and we'll move on to a short multiple‑choice quiz", "…I'll give you the first question", "Let's pause the quiz…"), and showed the drop never ran when the card was a held one re-offered under the reply. e09efe5 widens the phrase set and runs the same drop on the card actually served. Test: src/tests/redriveDeferralBesideCard.test.ts. NOT DEPLOYED: Vercel refused the build for e09efe5 ("Account is blocked", Fluid Active CPU); production still serves 05b7868, so the production re-test is pending.
 
 ### CHEM-022 — Figure served for a lesson belongs to a different (adjacent/downstream) concept than the lesson being taught
@@ -595,7 +593,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Invented, false lab observation used as the learner's anchor example.
 - Reproducibility: Observed once (#78).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts. This item is mainly a plain-prose claim, so it is checked only when the same reply also carries numbers, equations or a worked example; otherwise it remains model output (scope of the owner decision).
 
 ### CHEM-026 — Garbled card stem: "the average separation of the particles ______ and the hold the forces between them have ______"
@@ -653,7 +651,7 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (108 occurrences in 72 lessons): #20 (A2) t4; #58 (A4) t7/t5; #3 (A1) t5; #171 (A10) t3; #143 (A8) t4; #161 (A9) tt3, t10/t3/t10; #180 (A10) t4; #30 (A2) t15; #70 (A4) t3; #130 (A7) tt6, t9/t6/t9; #71 (A4) tt3, t18/t3/t18; #72 (A4) t11; #167 (A9) t4; #185 (A10) t4; #35 (A2) t4; #55 (A3) tt5, t9/t5/t9; #37 (A2) t10/t14; #5 (A1) t5; #6 (A1) t9; #8 (A1) t8; #11 (A1) t5; #12 (A1) t12; #14 (A1) t5; #19 (A1) t4; #172 (A10) t4; #175 (A10) t15; #176 (A10) t8; #179 (A10) t9; #182 (A10) t21; #184 (A10) t4; #186 (A10) t3; #22 (A2) t5; #50 (A3) t4; #56 (A3) t12; #59 (A4) t5; #62 (A4) t14; #65 (A4) t8/t23; #68 (A4) t3; #73 (A4) t13; #75 (A4) t4; #79 (A5) t3; #80 (A5) t5; #81 (A5) t12/t16; #82 (A5) t6; #84 (A5) t8; #85 (A5) t4; #89 (A5) t10; #91 (A5) t15; #92 (A5) t3; #94 (A5) t3/t7/t8; #97 (A6) t3; #99 (A6) t5; #102 (A6) t3/t7; #107 (A6) t3; #111 (A6) t17; #114 (A6) t8; #117 (A7) t5; #118 (A7) t5; #119 (A7) t4/t7; #121 (A7) t4; #123 (A7) t4; #125 (A7) t6; #138 (A8) t3/t8/t10; #139 (A8) t3; #142 (A8) t4; #144 (A8) t16; #149 (A8) t3/t12; #152 (A9) t5; #155 (A9) t4; #164 (A9) t8; #165 (A9) t4; #168 (A9) t6
 - Notes on occurrences: #20 t4: correct answer to "Which element comes first?" gets no verdict, only unrelated text + raw markup (CHEM-032) + next card · #58 t7: wrong answer: 90-word paragraph, no "Not quite", then new card · #3 t5: wrong answer ("mixed nuts") -> "How did you decide that a bowl of mixed nuts is a homogeneous mixture?" (no verdict); "that was actually a trick option I put in there!" at t7 · #171 t3: wrong answer to "Which label indicates the site of the ester bonds…?" -> only "You selected “Saturated fatty acid” as the label for the ester-bond site." + next card · #143 t4: "Haloarene" for "What type of haloalkane is CH₃CH₂CH₂Cl?" gets no verdict; reply is a haloarene lecture · #161 tt3, t10: answer picked on stilbene / styrene card gets no verdict; tutor re-explains the Wittig reaction · #180 t4: "Deposition and Acid Rain Formation" for "Which step creates ozone?" gets no verdict; reply is an acid-rain story · #30 t15: "Spherical" on "Which shape best describes an s orbital?" -> "Great, you mentioned spherical" + probing question; no verdict
 - Related defect: —
-- Status: FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: DEPLOYED — live on production since 2026-10-09 (deploy of a9ef53d, READY, aliased my-tutor-flame.vercel.app); not production-verified
 - Fix: d5397b1 — on an authored key the verdict now leads: a correction or confirmation that only appeared later gets "Not quite." or the confirmation in front (wrongAnswerCorrection.ts, answerConfirmation.ts). Not fixed: the observed cards (Tyndall beam, "Which element comes first?") are model-written; an unauthored key stays verdict-free by design, an owner decision. Test: src/tests/chemVerdictFirst.test.ts. **2026-10-07 pass (2350ff6):** Only authored cards are asked (owner decision 2026-10-07): a model-written card is never served (`decideModelProbe` with `authoredCardsOnly: AUTHORED_CARDS_ONLY`), the prompt forbids writing cards or lettered options (`mcq.AUTHORED_ONLY_INSTRUCTION`), and an A)/B)/C) question written into prose is removed with the question that introduced it (`proseMcqGuard.stripProseMultipleChoice`). Every card a learner can answer carries a reviewed key and gets a verdict. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### CHEM-029 — Card has two defensible answers: "Which mixture shows a visible Tyndall beam?" lists a sand suspension (~5 µm) as a distractor
@@ -671,7 +669,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Not a fair question for a learner who reasons correctly.
 - Reproducibility: Observed once (#97).
 - Related defect: —
-- Status: FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: DEPLOYED — live on production since 2026-10-09 (deploy of a9ef53d, READY, aliased my-tutor-flame.vercel.app); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Only authored cards are asked (owner decision 2026-10-07): a model-written card is never served (`decideModelProbe` with `authoredCardsOnly: AUTHORED_CARDS_ONLY`), the prompt forbids writing cards or lettered options (`mcq.AUTHORED_ONLY_INSTRUCTION`), and an A)/B)/C) question written into prose is removed with the question that introduced it (`proseMcqGuard.stripProseMultipleChoice`). Every card a learner can answer carries a reviewed key and gets a verdict. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### CHEM-030 — Contradictory trend explanation in one lesson: "smaller atoms catch an electron more easily" vs a card stating chlorine has a more negative electron affinity than fluorine
@@ -689,7 +687,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Simplified explanation teaches a rule the next question refutes.
 - Reproducibility: Observed once (#116).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts. This item is mainly a plain-prose claim, so it is checked only when the same reply also carries numbers, equations or a worked example; otherwise it remains model output (scope of the owner decision).
 
 ### CHEM-031 — First reply after "ok" confirms an answer the learner never gave ("that's correct — iron fills the 3d subshell…") and previews a later quiz item
@@ -707,7 +705,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Feedback to something the learner did not say; confusing for a weak learner; content out of order.
 - Reproducibility: Observed once (#20 t1); similar "reply to a question that was never asked" pattern at #78 t1 (CHEM-024) and #20 t11.
 - Related defect: —
-- Status: FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: DEPLOYED — live on production since 2026-10-09 (deploy of a9ef53d, READY, aliased my-tutor-flame.vercel.app); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** A plain acknowledgement ("ok", "next", "got it") now counts as a turn that graded nothing, so a leading verdict is dropped — also one behind the learner's name ("test2, that's correct—…") (`replyHygiene.isPlainAcknowledgement`, `dropVerdictOnUngradedRequest`). "yes"/"sure" are left alone: they can answer a yes/no question. Test: src/tests/remainingDefectFixes20261007.test.ts.
 
 ### CHEM-032 — Raw internal answer-key markup shown to the learner: <!" a="s-block" b="p-block" c="d-block" d="f-block" correct="B"-->
@@ -746,7 +744,7 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (137 occurrences in 105 lessons): #2 (A1) tt2/t7/t-; #77 (A5) tt5/t13/t-; #116 (A7) tt2/t10/t-; #151 (A9) tt2/t12/t-; #134 (A8) tt4/t17/t-; #40 (A3) tt3/t19, t12/t20, t13/t21, t17/t23/t-; #3 (A1) tt2/t18/t-; #59 (A4) tt7/t10, t9/t11-12/t-; #79 (A5) tt4/t16, t5/t17-18, t8/t19, t9/t20, t14/t20-21/t-; #117 (A7) tt3/t16, t4?, t3-t19/t-; #171 (A10) tt4/t20, t5/t21, t8/t23, t14/t24, t15/t25/t-; #143 (A8) tt4/t13, t5/t14, t8/t15/t-; #30 (A2) tt3/t21, t4/t22, t8/t23/t-; #69 (A4) tt7/t14, t8/t15, t13/t16/t-; #89 (A5) tt12/t18/t-; #162 (A9) tt3/t8, t5/t11, t6/t12/t-; #31 (A2) tt3/t23, t4/t24, t7/t28, t6/t27/t-; #50 (A3) tt14/t15/t-; #90 (A5) tt7/t13, t8/t16, t9/t17/t-; #15 (A1) tt5/t18, t8/t19, t4/t16/t-; #131 (A7) tt3/t9, t4/t10/t-; #144 (A8) tt2/t22, t3/t23/t-; #145 (A8) tt9/t14, t10/t15/t-; #182 (A10) tt5/t14, t8/t18, t10/t19/t-; #132 (A7) tt3/t8, t5/t9/t-; #51 (A3) tt3/t11, t4/t12, t7/t13, t8/t14/t-; #183 (A10) tt4/t16, t5/t17, t15/t19/t-; #94 (A5) tt4/t14, t5/t15, t10/t13/t-; #165 (A9) tt5/t15, t9/t16, t4/t14/t-; #74 (A4) tt3/t15, t4/t16, t5/t17/t-; #149 (A8) tt3/t18, t4/t18/t-; #57 (A3) tt5/t20, t5/t21/t-; #4 (A1) t-; #7 (A1) t-; #11 (A1) t-; #13 (A1) t-; #14 (A1) t-; #17 (A1) t-; #18 (A1) t-; #172 (A10) t-; #173 (A10) t-; #175 (A10) t-; #176 (A10) t-; #177 (A10) t-; #178 (A10) t-; #179 (A10) t-; #180 (A10) t-; #184 (A10) t-; #186 (A10) t-; #20 (A2) t-; #21 (A2) t-; #23 (A2) t-; #27 (A2) t-; #28 (A2) t-; #29 (A2) t-; #33 (A2) t-; #35 (A2) t-; #36 (A2) t-; #41 (A3) t-; #43 (A3) t-; #44 (A3) t-; #45 (A3) t-; #46 (A3) t-; #48 (A3) t-; #53 (A3) t-; #54 (A3) t-; #55 (A3) t-; #56 (A3) t-; #60 (A4) t-; #61 (A4) t-; #63 (A4) t-; #65 (A4) t-; #66 (A4) t-; #67 (A4) t-; #68 (A4) t-; #70 (A4) t-; #80 (A5) t-; #82 (A5) t-; #83 (A5) t-; #86 (A5) t-; #87 (A5) t-; #88 (A5) t-; #100 (A6) t-; #101 (A6) t-; #102 (A6) t-; #103 (A6) t-; #106 (A6) t-; #119 (A7) t-; #120 (A7) t-; #125 (A7) t-; #129 (A7) t-; #136 (A8) t-; #137 (A8) t-; #139 (A8) t-; #140 (A8) t-; #141 (A8) t-; #142 (A8) t-; #148 (A8) t-; #150 (A8) t-; #152 (A9) t-; #155 (A9) t-; #156 (A9) t-; #159 (A9) t-; #160 (A9) t-; #161 (A9) t-
 - Notes on occurrences: #134 tt4/t17: final mastery card is the t4 card verbatim; after-complete card is the t6 card · #40 tt3/t19, t12/t20, t13/t21, t17/t23: every card repeated; mastery completes on the repeats · #3 tt2/t18: final mastery card is the t2 card · #59 tt7/t10, t9/t11-12: cards repeated · #79 tt4/t16, t5/t17-18, t8/t19, t9/t20, t14/t20-21: every card repeated · #117 tt3/t16, t4?, t3-t19: full-shell, neon-sign and applications cards all repeated; mastery on the repeats · #171 tt4/t20, t5/t21, t8/t23, t14/t24, t15/t25: cards repeated · #143 tt4/t13, t5/t14, t8/t15: cards repeated verbatim
 - Related defect: —
-- Status: FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: DEPLOYED — live on production since 2026-10-09 (deploy of a9ef53d, READY, aliased my-tutor-flame.vercel.app); not production-verified
 - Fix: 957978b + afa7322. Production 2026-10-06 (disposable account, deploy 05b7868): REPRODUCED through the real client path — lesson A chem.alc.phenols (mode next) → lesson B chem.alc.ethers in the same tab (mode next) → back to A (mode resume): the answered EAS card was served again with unused authored probes still in the pool. Stored state confirmed the cause: opening B was a fresh attempt and lesson-init's new-attempt clear nulled the whole teaching history, so A's ledger was gone before the return (957978b's per-concept archive only survives switches inside one attempt). afa7322 makes lesson-init carry the OTHER concepts' ledgers across a fresh attempt (teachingHistoryForNewAttempt); a restart of A still starts A clean. Test: src/tests/ledgerSurvivesLessonSwitch.test.ts. NOT DEPLOYED: Vercel API 402 'Your Team exceeded our fair use limits and has been blocked'; production re-test pending. (An in-lesson excursion does not switch the ledger concept, so it is not this path.)
 
 ### CHEM-034 — Figure caption is a generic placeholder ("it's a general illustration related to the topic") and the figure ("Periodic Trends: Na vs Cl") does not match the lesson "Modern Periodic Law and Table"
@@ -766,7 +764,7 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (22 occurrences in 18 lessons): #40 (A3) tt16/t16; #59 (A4) tt5/t5; #11 (A1) t1/t6; #14 (A1) t16; #177 (A10) t4; #183 (A10) t1; #20 (A2) t1/t8; #21 (A2) t15; #22 (A2) t8; #23 (A2) t15; #29 (A2) t1; #32 (A2) t1; #51 (A3) t15; #60 (A4) t3; #90 (A5) t15; #91 (A5) t13; #92 (A5) t1; #166 (A9) t1
 - Notes on occurrences: #40 tt16: "Take a look at the labelled figure beside this message — it shows Gas Laws." · #59 tt5: "…the labelled figure beside this message — it shows Equilibrium Constants Kc and Kp. Study it while I explain." (generic caption; figure title is "Calculating Kc, Kp and Using ICE Tables")
 - Related defect: —
-- Status: FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: DEPLOYED — live on production since 2026-10-09 (deploy of a9ef53d, READY, aliased my-tutor-flame.vercel.app); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** A domain figure is introduced as "it shows {figure title}, background for this topic rather than a picture of it" when it has a title; the bare "general illustration" sentence remains only for an untitled figure. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### CHEM-035 — The learner's current card answer is not graded: the reply addresses an earlier answer ("I see you chose \"No\"…") instead
@@ -786,7 +784,7 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (4 occurrences in 4 lessons): #152 (A9) t6; #161 (A9) t13; #33 (A2) tt9, t10; #38 (A2) t7
 - Notes on occurrences: #152 t6: verdict "That's right – the Williamson ether synthesis needs a primary alkyl halide" arrives a turn late, in reply to "too many words" · #161 t13: "next question please" answered with "That’s right – the secondary carbon… migrates" (stale previous answer) · #33 tt9, t10: "show me step by step" and "give me example with numbers" answered with "That’s right—because the electrons are free to move…" (verdict on an earlier answer) · #38 t7: "give me example with numbers" answered "Great – you’re right that when the pressure is doubled the volume halves" (verdict on previous card)
 - Related defect: —
-- Status: FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: DEPLOYED — live on production since 2026-10-09 (deploy of a9ef53d, READY, aliased my-tutor-flame.vercel.app); not production-verified
 - Fix: 0b3b0fb — the reproduced shape (#58: a tap on a model-written, unkeyed card answered "I see you chose “No.”…" about a card two turns earlier) now gets the neutral assembled reply (neutralAssembly.ts misattributesChoice, logged liveMisattributes). Not fixed: the four "late verdict" occurrences where the model repeats a verdict on the previous answer in reply to "too many words". Test: src/tests/chem035StaleAnswer.test.ts. **2026-10-07 pass (2350ff6):** Only authored cards are asked (owner decision 2026-10-07): a model-written card is never served (`decideModelProbe` with `authoredCardsOnly: AUTHORED_CARDS_ONLY`), the prompt forbids writing cards or lettered options (`mcq.AUTHORED_ONLY_INSTRUCTION`), and an A)/B)/C) question written into prose is removed with the question that introduced it (`proseMcqGuard.stripProseMultipleChoice`). Every card a learner can answer carries a reviewed key and gets a verdict. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### CHEM-036 — Learner says "i dont understand this picture" in a lesson that has no figure and the tutor plays along ("We'll circle back to the picture in a moment")
@@ -824,7 +822,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Small numeric inaccuracy in a worked value.
 - Reproducibility: Observed once (#58).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### CHEM-038 — Step-by-step answer switches example silently ("the same example we've been using (A ⇌ B)" when the lesson used A + B ⇌ C)
@@ -842,7 +840,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Inconsistent running example; confusing for a weak learner.
 - Reproducibility: Observed once (#58 t9).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts. This item is mainly a plain-prose claim, so it is checked only when the same reply also carries numbers, equations or a worked example; otherwise it remains model output (scope of the owner decision).
 
 ### CHEM-039 — Curved-arrow explanation is wrong: "when a water molecule takes a hydrogen ion, the arrow's tail starts on the oxygen–hydrogen bond… pointing toward the hydrogen atom receiving them"
@@ -880,7 +878,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Learner re-asks without receiving new content; the tutor loops on non-chemical metaphors.
 - Reproducibility: Observed in #134; milder versions in #1 (beads/cake/kitchen drawer), #115 (cake/furniture), #116 (game of catch).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** The analogy cap is one analogy in the last four replies for every subject (was two outside mathematics); past it the reply is regenerated once without an analogy and kept only if it has none. Partial: a retry that still uses an analogy keeps the original. Test: src/tests/remainingDefectFixes20261007.test.ts.
 
 ### CHEM-041 — Canned empathy openers unrelated to the learner message ("this is genuinely tricky, so let's slow down" as the reply to "ok" / to a request for numbers)
@@ -918,7 +916,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Learner is told they mastered "Emulsions and Gels" while half the lesson was never delivered.
 - Reproducibility: Observed once (#98).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** The lesson's KG syllabus line is now in the chat and opening prompts with the rule to teach each part, in order, before asking about it and to promise nothing outside it (`lessonDriftGuard.lessonScopeRule`). Prompt-level, so not guaranteed. Test: src/tests/remainingDefectFixes20261007.test.ts.
 
 ### CHEM-043 — Card stem gives the answer away ("Mayonnaise is an oil-in-water emulsion. Which liquid is the dispersed phase…?")
@@ -974,7 +972,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: The requested example fails to demonstrate the topic; the question is unanswerable.
 - Reproducibility: Observed once (#40 t6).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### CHEM-046 — Figure for "Real Gases and van der Waals Equation" is the ideal-gas Boyle's-law curve P = 10/x, introduced as "it shows Gas Laws"
@@ -1010,7 +1008,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Misspelt scientist name in the opening of a lesson.
 - Reproducibility: Observed once (#40).
 - Related defect: —
-- Status: FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: DEPLOYED — live on production since 2026-10-09 (deploy of a9ef53d, READY, aliased my-tutor-flame.vercel.app); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** A word of the lesson's own KG title dropped from the reply ("van Waals" for "van der Waals") is put back, in lesson openings and chat replies (`replyHygiene.restoreTitleWords`). Test: src/tests/remainingDefectFixes20261007.test.ts.
 
 ### CHEM-048 — Wrong answer ("Na⁺ is oxidised at the anode") is never corrected; the reply instead describes an aqueous chloralkali cell "on your screen" while the screen shows molten NaCl
@@ -1028,7 +1026,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: A wrong chemistry answer on a basic oxidation/reduction point goes uncorrected and the text contradicts the figure.
 - Reproducibility: Observed once (#79 t3); the no-verdict pattern is CHEM-028.
 - Related defect: —
-- Status: FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: DEPLOYED — live on production since 2026-10-09 (deploy of a9ef53d, READY, aliased my-tutor-flame.vercel.app); not production-verified
 - Fix: Production redrive 2026-10-06: about 13 of 35 distinct cards were model-written (no authored key; several are figure-label cards). Whether unkeyed AI-written cards are graded is an OWNER DECISION (also PHYS-020); not changed. **2026-10-07 pass (2350ff6):** Only authored cards are asked (owner decision 2026-10-07): a model-written card is never served (`decideModelProbe` with `authoredCardsOnly: AUTHORED_CARDS_ONLY`), the prompt forbids writing cards or lettered options (`mcq.AUTHORED_ONLY_INSTRUCTION`), and an A)/B)/C) question written into prose is removed with the question that introduced it (`proseMcqGuard.stripProseMultipleChoice`). Every card a learner can answer carries a reviewed key and gets a verdict. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### CHEM-049 — "Show me step by step" for the 193 000 C answer silently changes the problem from 1 mol Cu (n = 2) to 2 mol Na (n = 1)
@@ -1046,7 +1044,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Explanation does not correspond to the question it claims to explain.
 - Reproducibility: Observed once (#79 t11).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### CHEM-050 — Xenon difluoride described as "a pale-yellow solid" made with "a few drops of liquid fluorine" in a warmed ampoule
@@ -1064,7 +1062,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Objective factual error in the opening demonstration of the lesson.
 - Reproducibility: Observed once (#117).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts. This item is mainly a plain-prose claim, so it is checked only when the same reply also carries numbers, equations or a worked example; otherwise it remains model output (scope of the owner decision).
 
 ### CHEM-051 — Two different reasons for noble-gas inertness are presented as if one contradicts the other ("…rather than a simple rule about having eight electrons")
@@ -1082,7 +1080,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Mixed messages about the key idea of the lesson.
 - Reproducibility: Observed once (#117).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts. This item is mainly a plain-prose claim, so it is checked only when the same reply also carries numbers, equations or a worked example; otherwise it remains model output (scope of the owner decision).
 
 ### CHEM-052 — Card's correct option says (E,E)-hexa-2,4-diene is "locked in s-trans and cannot achieve the required geometry"; the tutor's own feedback says it "must rotate to adopt s-cis"
@@ -1118,7 +1116,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Objectively unbalanced equation shown as a worked step.
 - Reproducibility: Observed once (#152 t2).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### CHEM-054 — Stoichiometry error: "0.050 mol of sodium reacts with 0.050 mol of ethanol → … and 0.050 mol of H₂ gas" (should be 0.025 mol)
@@ -1136,7 +1134,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: The requested numeric example contains a mole-ratio error.
 - Reproducibility: Observed once (#152 t8).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### CHEM-055 — "i dont understand this picture" is answered with an unrelated analogy and sometimes by abandoning the picture ("let's put the picture aside completely")
@@ -1156,7 +1154,7 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (2 occurrences in 2 lessons): #134 (A8) t8; #40 (A3) t10
 - Notes on occurrences: #134 t8: baton analogy · #40 t10: elevator analogy, "step back from equations"
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** The analogy cap is one analogy in the last four replies for every subject (was two outside mathematics); past it the reply is regenerated once without an analogy and kept only if it has none. Partial: a retry that still uses an analogy keeps the original. Test: src/tests/remainingDefectFixes20261007.test.ts.
 
 ### CHEM-056 — Ambiguous figure-label card: "Which label indicates the site of the ester bonds that are broken in saponification?" with options Glycerol backbone / Saturated fatty acid / Unsaturated fatty acid / Vitamin D
@@ -1174,7 +1172,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Learner cannot tell which label is meant.
 - Reproducibility: Observed once (#171 t2).
 - Related defect: —
-- Status: FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: DEPLOYED — live on production since 2026-10-09 (deploy of a9ef53d, READY, aliased my-tutor-flame.vercel.app); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Only authored cards are asked (owner decision 2026-10-07): a model-written card is never served (`decideModelProbe` with `authoredCardsOnly: AUTHORED_CARDS_ONLY`), the prompt forbids writing cards or lettered options (`mcq.AUTHORED_ONLY_INSTRUCTION`), and an A)/B)/C) question written into prose is removed with the question that introduced it (`proseMcqGuard.stripProseMultipleChoice`). Every card a learner can answer carries a reviewed key and gets a verdict. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### CHEM-057 — Analogy teaches a wrong picture of saponification: hydroxide is "a strong cleaning soap" and the triglyceride "melts in hot water" like butter with chocolate sticks
@@ -1192,7 +1190,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Misleading analogy for the central reaction.
 - Reproducibility: Observed once (#171 t12).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts. This item is mainly a plain-prose claim, so it is checked only when the same reply also carries numbers, equations or a worked example; otherwise it remains model output (scope of the owner decision).
 
 ### CHEM-058 — Aluminium's ionisation-energy dip is explained as removing an electron from a "half-filled p subshell" (3p¹ is not half-filled)
@@ -1210,7 +1208,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Objectively wrong explanation shown after a correct answer.
 - Reproducibility: Observed once (#22 t7).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts. This item is mainly a plain-prose claim, so it is checked only when the same reply also carries numbers, equations or a worked example; otherwise it remains model output (scope of the owner decision).
 
 ### CHEM-059 — Sodium IE₂ given as 10 000 kJ/mol ("nearly 20 times" IE₁); real value ≈ 4 560 kJ/mol (≈ 9×); the lesson's own dump says "about 10×"
@@ -1228,7 +1226,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Incorrect data in a numerical card, contradicting the preceding explanation.
 - Reproducibility: Observed once (#22 t9/t10).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### CHEM-060 — Three reusable generic 3-D fallback figures (three_electron_shells, three_atomic_structure, three_bond_formation) are served for many different lessons; they cannot show the trend/concept taught (e.g. Atomic and Ionic Radius, Ionization Energy, Electron Affinity, Valency, Electromagnetic Radiation)
@@ -1286,7 +1284,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Objectively wrong half-equation in a worked explanation.
 - Reproducibility: Observed once (#80 t8).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### CHEM-063 — Reply about the lead–acid battery ends "Take a look at the labelled figure beside this message — it shows Batteries and Fuel Cells. Follow it step by step." but the figure is the zinc–carbon dry cell
@@ -1304,7 +1302,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Text and figure disagree; generic caption names the lesson, not the picture.
 - Reproducibility: Observed once (#80 t8).
 - Related defect: —
-- Status: FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: DEPLOYED — live on production since 2026-10-09 (deploy of a9ef53d, READY, aliased my-tutor-flame.vercel.app); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** The figure pointer names the figure's own title ("it shows Zinc–Carbon Dry Cell …"), not the lesson title (`visualAcknowledgement.figureTitleOf`). Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### CHEM-064 — Raw curriculum metadata is returned as the tutor reply: "Surfactants and Micelles covers: Gibbs adsorption (qualitative); critical micelle concentration; detergency mechanism."
@@ -1398,7 +1396,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Wrong constant in the numeric example the learner asked for.
 - Reproducibility: Observed once (#41 t9).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### CHEM-069 — Worked N₂O₄ ⇌ 2NO₂ example stops before the point ([N₂O₄] raised to 0.80 M) and is followed by a temperature-dependence van't Hoff graph ("Study it while I explain")
@@ -1416,7 +1414,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: The numeric example the learner asked for is left unfinished and its picture does not match it.
 - Reproducibility: Observed once (#60 t3).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### CHEM-070 — Stem asks "increase or decrease K?" but the card offers only "Decrease K" and "K is unaffected by temperature"
@@ -1488,7 +1486,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Lesson goal and delivered content diverge; mastery impossible for a learner who follows the tutor.
 - Reproducibility: Observed once (#118).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Lesson drift guard (`lessonDriftGuard.ts`): a reply to a continuation message ("ok", "next", "give me example", "maybe yes") that is at least 25 words and names none of the concept's anchor words (KG title + syllabus line) is regenerated once with the lesson stated; the retry is kept only if it is on the lesson. Partial: a retry that drifts again is not replaced, and a neighbouring concept that shares the lesson's words is not detected. Test: src/tests/remainingDefectFixes20261007.test.ts. The lesson's KG syllabus line is now in the chat and opening prompts with the rule to teach each part, in order, before asking about it and to promise nothing outside it (`lessonDriftGuard.lessonScopeRule`). Prompt-level, so not guaranteed. Test: src/tests/remainingDefectFixes20261007.test.ts.
 
 ### CHEM-074 — Bromine selectivity quoted as "secondary vs primary hydrogen about 1600 to 1" for propane (≈ 82:1; 1600:1 is tertiary vs primary)
@@ -1506,7 +1504,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Wrong constant presented as the key number of the example.
 - Reproducibility: Observed once (#136 t17).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### CHEM-075 — Tutor affirms an off-topic or non-answer as correct ("That's correct—…", "Great, you've captured the key idea", "Exactly—…")
@@ -1564,7 +1562,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Wrong regiochemistry label, wrong structure and a fabricated constant in the numeric example.
 - Reproducibility: Observed once (#154 t7).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts. This item is mainly a plain-prose claim, so it is checked only when the same reply also carries numbers, equations or a worked example; otherwise it remains model output (scope of the owner decision).
 
 ### CHEM-078 — Reply consists only of a canned opener — "test0, this is genuinely tricky — let me try a completely different angle." — with no explanation after it
@@ -1620,7 +1618,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Feedback is not about the question that was asked; the right answer is never stated.
 - Reproducibility: Observed once (#81 t16).
 - Related defect: —
-- Status: FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: DEPLOYED — live on production since 2026-10-09 (deploy of a9ef53d, READY, aliased my-tutor-flame.vercel.app); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Only authored cards are asked (owner decision 2026-10-07): a model-written card is never served (`decideModelProbe` with `authoredCardsOnly: AUTHORED_CARDS_ONLY`), the prompt forbids writing cards or lettered options (`mcq.AUTHORED_ONLY_INSTRUCTION`), and an A)/B)/C) question written into prose is removed with the question that introduced it (`proseMcqGuard.stripProseMultipleChoice`). Every card a learner can answer carries a reviewed key and gets a verdict. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### CHEM-081 — Debatable item: "True or false: 'cathodic protection' is so called because it protects the cathode of the corrosion cell" — keyed False
@@ -1660,7 +1658,7 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (3 occurrences in 3 lessons): #3 (A1) tt6-t9; #152 (A9) tt1,t15; #138 (A8) tt7
 - Notes on occurrences: #3 tt6-t9: "Identify mixture type (homogeneous or" quoted several times · #152 tt1,t15: "Williamson synthesis: alkyl halide +", "Cleavage with HX: ether + HX → alkyl" · #138 tt7: card options "Preparation of Alkynes via" / "Acidic Character: Protonation of the" (truncated figure labels)
 - Related defect: —
-- Status: FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: DEPLOYED — live on production since 2026-10-09 (deploy of a9ef53d, READY, aliased my-tutor-flame.vercel.app); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Cause: `conceptText.extractSteps` clamped every process step to 60 characters ("Check for trapped zeros between"). Steps are now kept whole up to 140; a step longer than a box title gets a short title with an ellipsis and its full wording in the box note (`archetypes.processFlow`). The figure-label card options came from model-written cards, which are no longer served (owner decision 2026-10-07). Test: src/tests/remainingDefectFixes20261007.test.ts.
 
 ### CHEM-083 — Process-flow figure used for a list of unrelated reactions ("Key Reactions Involving Ethers"): arrows imply a sequence Williamson → cleavage → epoxide opening → "diethyl ether as common solvent"
@@ -1678,7 +1676,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Figure form misrepresents the content (sequence where there is none).
 - Reproducibility: Observed on #152.
 - Related defect: —
-- Status: FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: DEPLOYED — live on production since 2026-10-09 (deploy of a9ef53d, READY, aliased my-tutor-flame.vercel.app); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** The figure critic rejects a process_flow whose title names a catalogue ("Key Reactions", "Types of", "Uses of" …) and not a process, or whose boxes are mostly self-contained reactions under a non-sequence title (`figureCritic.processFlowIsAList`); a rejected figure is not shown. Test: src/tests/remainingDefectFixes20261007.test.ts.
 
 ### CHEM-084 — Manganese(II) oxide MnO described as "pale pink" (MnO is green; pale pink is the colour of Mn²⁺ salts/solutions)
@@ -1696,7 +1694,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Factual error in the colour example of the lesson.
 - Reproducibility: Observed once (#119 t3).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts. This item is mainly a plain-prose claim, so it is checked only when the same reply also carries numbers, equations or a worked example; otherwise it remains model output (scope of the owner decision).
 
 ### CHEM-085 — Phase-diagram lines described wrongly ("sloping line from bottom-right up toward top-left separates solid from gas") and CO₂ "raise the pressure to 5.11 atm … we reach the triple point" at −78.5 °C
@@ -1714,7 +1712,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Two objectively wrong statements in the lesson's only explanations of the diagram and its numeric example.
 - Reproducibility: Observed once (#42 t1, t2).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts. This item is mainly a plain-prose claim, so it is checked only when the same reply also carries numbers, equations or a worked example; otherwise it remains model output (scope of the owner decision).
 
 ### CHEM-086 — The "Phase Diagrams" lesson serves no figure at all, although the learner asks about "this picture" four times (earlier audit PCD-027 found a wrong-domain plot for the same concept)
@@ -1786,7 +1784,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Learner is taught wrong magnitudes in the lesson's core fact; the two replies also disagree with each other.
 - Reproducibility: Observed twice in one lesson (#61 t2, t7).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### CHEM-090 — Atomic radii for Na and Cl change between two replies of the same lesson (Na 223 pm / Cl 79 pm vs Na 186 pm / Cl 99 pm) without saying which convention is used
@@ -1804,7 +1802,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: The learner who asks for numbers twice gets two sets; no way to know which is right.
 - Reproducibility: Observed once (#24 t2/t3), consistent with #21 and the #24 cards.
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### CHEM-091 — Stale answer key still live in production: "2g of H₂ contains more" is accepted as correct for "Which contains more molecules: 2 g H₂ or 32 g O₂?" while the feedback says they contain the same number
@@ -1842,7 +1840,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Label is unreadable chemistry; the figure does not support most of the lesson.
 - Reproducibility: Observed once (#82).
 - Related defect: —
-- Status: FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: DEPLOYED — live on production since 2026-10-09 (deploy of a9ef53d, READY, aliased my-tutor-flame.vercel.app); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** The plating anode is labelled "Cu" (`conceptSceneParams.ts`, chem.elect.industrial). Electroplating is one of the four processes in the concept's KG line, so the plating cell stays the concept figure; the pointer now names it. Test: src/tests/remainingDefectFixes20261007.test.ts.
 
 ### CHEM-093 — Learner name glued to the previous word: "…how electroplating workstest5!"
@@ -1878,7 +1876,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Objectively wrong demonstration; also the same reply says a statue "stays bright red-orange" under Cu₂O (copper statues weather to green patina).
 - Reproducibility: Observed once (#120 t1).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts. This item is mainly a plain-prose claim, so it is checked only when the same reply also carries numbers, equations or a worked example; otherwise it remains model output (scope of the owner decision).
 
 ### CHEM-095 — Introductory "Ionic Bonding" lesson is taught from a five-box Born–Haber "cycle" figure (sublimation, dissociation, ionisation, electron affinity, lattice formation) before the learner has met the ionic bond; the "cycle" is a linear process-flow with no ΔH values
@@ -1896,7 +1894,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Level jump and a typographic glitch; the visual does not match the introductory concept.
 - Reproducibility: Observed once (#26).
 - Related defect: —
-- Status: FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: DEPLOYED — live on production since 2026-10-09 (deploy of a9ef53d, READY, aliased my-tutor-flame.vercel.app); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** chem.bond.ionic-bonding now owns a curated electron-transfer figure (Na 2,8,1 → electron transferred → Na⁺ / Cl⁻ → opposite charges attract), so the live-generated Born–Haber flow is no longer reached; the concept left the retired-figure register (`retired.ts`, 15 → 14 rows). Test: src/tests/remainingDefectFixes20261007.test.ts.
 
 ### CHEM-096 — Wrong answer marked correct: in [Co(NH₃)₄Cl₂]⁺ "chlorido" is said to be written before "ammine" ("alphabetical order")
@@ -1932,7 +1930,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: A wrong constant makes the numeric example contradict the lesson's main observation.
 - Reproducibility: Observed once (#121 t15).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### CHEM-098 — Small factual slips in one lesson: "white crystals of potassium permanganate", "the two oxygens give a total of −14" (Cr₂O₇²⁻ has seven), "a manganese atom (element 7)"
@@ -1950,7 +1948,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Objective errors, individually minor.
 - Reproducibility: Observed once (#121).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts. This item is mainly a plain-prose claim, so it is checked only when the same reply also carries numbers, equations or a worked example; otherwise it remains model output (scope of the owner decision).
 
 ### CHEM-099 — Alkyne worked examples misname compounds: "1-butyne (CH₃–C≡CH)" (that is propyne), "2-methyl-1-butyne (CH₃–C≡C–CH₃)" (2-butyne), "2-pentanone (CH₃–CO–CH₂–CH₃)" (butan-2-one), and NH₃ called "the ammonium ion" (pKa 38 vs 25)
@@ -1968,7 +1966,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: The learner who follows the worked example reaches a different answer than the lesson's card; names and formulae do not match.
 - Reproducibility: Observed once (#138 t2, t7).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts. This item is mainly a plain-prose claim, so it is checked only when the same reply also carries numbers, equations or a worked example; otherwise it remains model output (scope of the owner decision).
 
 ### CHEM-100 — Dashboard is clipped on the right at phone width (390×844): stat chips, hero banner, goal card and the subject-progress "0%" labels extend ~27 px past the viewport
@@ -1986,7 +1984,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Mobile layout defect on the first screen a learner sees; hides progress values.
 - Reproducibility: Reproduced on accounts 1 and 2 (same layout). Desktop width not checked.
 - Related defect: —
-- Status: FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: DEPLOYED — live on production since 2026-10-09 (deploy of a9ef53d, READY, aliased my-tutor-flame.vercel.app); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Dashboard grid: `grid-template-columns: minmax(0, 1fr)` and `min-width: 0` on its children at ≤900 px (a plain 1fr track grew to its widest child, 417 px), plus a ≤480 px block (16 px gutters, wrapping stat chips, smaller hero padding and mascot) in `dashboard.module.css`. Not measured in a browser in this pass. Test: src/tests/remainingDefectFixes20261007.test.ts.
 
 ### CHEM-101 — Lesson opens with a content-free "degraded" placeholder: "Let's take one small step together. I'll walk through it with you and pause whenever it helps."
@@ -2006,7 +2004,7 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (6 occurrences in 6 lessons): #122 (A7) t7; #28 (A2) t0; #44 (A3) t0; #45 (A3) t0; #124 (A7) t0; #146 (A8) t0
 - Notes on occurrences: #122 t7: mid-lesson degraded placeholder as reply to "i dont know": "Let\x27s take one small step together. I\x27ll walk through it with you and pause whenever it helps."
 - Related defect: —
-- Status: FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: DEPLOYED — live on production since 2026-10-09 (deploy of a9ef53d, READY, aliased my-tutor-flame.vercel.app); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** With every provider down, the concept's own authored explanation that the learner has not yet seen is served instead of the outage copy (chat: `findUnseenExplanationContent` in the all-providers-down branch, which then does not count as an outage turn; lesson-init: the authored explanation opens the lesson under its title). The outage copy remains only when no unseen authored explanation is left. Provider capacity itself (Gemini credits, OPENROUTER_API_KEY, Groq tier) is still an owner action. Test: src/tests/remainingDefectFixes20261007.test.ts.
 
 ### CHEM-102 — Tutor says goodbye mid-lesson with an invented session limit ("Since our session time is wrapping up, let's pause here… See you next time!") and then continues the lesson
@@ -2044,7 +2042,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Contradictory feedback on the lesson's key skill (reading orders from data); the "why?" is not answered.
 - Reproducibility: Observed once (#84 t9 → t11).
 - Related defect: —
-- Status: FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: DEPLOYED — live on production since 2026-10-09 (deploy of a9ef53d, READY, aliased my-tutor-flame.vercel.app); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** A sentence that quotes an answer the server marked "Not quite" earlier in the same lesson and praises it is dropped, with a following bare praise sentence ("That's a solid start!") (`replyHygiene.dropPraiseOfCorrectedAnswer`, wrong answers read from this lesson's messages). Test: src/tests/remainingDefectFixes20261007.test.ts.
 
 ### CHEM-104 — "1 mol of concentrated HNO₃ (≈ 68 g)" — molar mass of HNO₃ is 63 g/mol (68 % is the acid strength)
@@ -2062,7 +2060,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Small but objective numeric error.
 - Reproducibility: Observed once (#139 t3).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### CHEM-105 — Acetone enol content given as "about 0.001 %" ("one in a hundred thousand molecules"); the real value is ~10⁻⁶ % or less (K_enol ≈ 10⁻⁸)
@@ -2080,7 +2078,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Wrong key number in the only numeric example of tautomerism.
 - Reproducibility: Observed once (#157 t7).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### CHEM-106 — A 10-glucose amylose fragment is said to weigh "10 × 180 = 1800 g/mol" (condensation loses 9 H₂O: ≈ 1638 g/mol) — the opposite of what the preceding lesson teaches
@@ -2098,7 +2096,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Wrong result and a contradiction of the lesson taught immediately before; the same reply ends with an unrelated vulcanisation example and a card.
 - Reproducibility: Observed once (#176 t7).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### CHEM-107 — Under ten concurrent learners the tutor falls back to canned "degraded" replies for long stretches (up to 8 consecutive turns): learning is blocked, mastery counters freeze, and the fallback texts are generic or raw
@@ -2118,7 +2116,7 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (112 occurrences in 71 lessons): #177 (A10) tt?/t-; #28 (A2) tt?/t-; #45 (A3) tt?/tmultiple/t-; #158 (A9) tt?/t-; #68 (A4) tt1,t5,t6,t7/t-; #88 (A5) tt2,t3,t10,t12,t14/t-; #109 (A6) tt1,t2,t7,t9,t12,t13/t-; #127 (A7) tt8,t13,t15,t17,t18/t-; #143 (A8) tt1,t5,t10,t12,t13/t-; #161 (A9) tt2,t4,t16,t21/t-; #180 (A10) tt13,t19/t-; #30 (A2) tt4,t6,t10,t14,t15,t20,t22/t-; #69 (A4) tt3,t7,t9,t11/t-; #49 (A3) tt8,t9,t10/t-; #89 (A5) tt7,t10,t17,t19,t21/t-; #110 (A6) tt1,t4,t12,t16/t-; #181 (A10) tt10,t13/t-; #162 (A9) tt6,t15/t-; #70 (A4) tt4,t7,t8,t11/t-; #31 (A2) tt1,t7,t12,t24,t26,t28/t-; #14 (A1) tt3,t5,t7,t9,t12,t14,t17,t18/t-; #50 (A3) tt11,t13,t14,t16/t-; #130 (A7) tt16,t18/t-; #15 (A1) tt9,t11,t15,t17,t18,t19/t-; #71 (A4) tt1,t4,t8,t17/t-; #131 (A7) tt9,t10/t-; #144 (A8) tt4,t14,t23,t24/t-; #182 (A10) tt9,t10,t11/t-; #91 (A5) tt7,t9,t10/t-; #164 (A9) tt5,t15,t16/t-; #51 (A3) tt3,t7,t13,t14,t16,t17/t-; #32 (A2) tt1,t6,t11,t13,t17,t19/t-; #16 (A1) tt3/t-; #113 (A6) tt4,t14/t-; #146 (A8) tt11,t16,t18/t-; #183 (A10) tt1,t10,t16/t-; #17 (A1) tt2,t10/t-; #33 (A2) tt4/t-; #184 (A10) tt12/t-; #165 (A9) tt4,t14/t-; #11 (A1) t-; #12 (A1) t-; #13 (A1) t-; #175 (A10) t-; #178 (A10) t-; #179 (A10) t-; #29 (A2) t-; #44 (A3) t-; #46 (A3) t-; #47 (A3) t-; #48 (A3) t-; #53 (A3) t-; #65 (A4) t-; #66 (A4) t-; #67 (A4) t-; #72 (A4) t-; #87 (A5) t-; #90 (A5) t-; #92 (A5) t-; #108 (A6) t-; #111 (A6) t-; #122 (A7) t-; #123 (A7) t-; #124 (A7) t-; #125 (A7) t-; #140 (A8) t-; #141 (A8) t-; #142 (A8) t-; #147 (A8) t-; #150 (A8) t-; #160 (A9) t-
 - Notes on occurrences: #177 tt?: 16 of 31 turns degraded, longest streak 8 · #28 tt?: 9 of 31 turns degraded, longest streak 6 · #45 tt?: 8 of 31 turns degraded · #158 tt?: 3 degraded turns · #45 tmultiple: degraded open + 4 degraded turns; the final degraded replies ("Let me ask you something concrete…", "I\x27m still getting my thoughts together…") are followed by "Let\x27s pause Vapour Pressure of Solutions here for now" — lesson marked needs-review although the learner was at c1/p1 · #68 tt1,t5,t6,t7: degraded fallback replies · #88 tt2,t3,t10,t12,t14: degraded fallback replies; t14 "what's one thing you notice or find surprising" on "give me example" · #109 tt1,t2,t7,t9,t12,t13: degraded fallback replies incl. raw "covers:" line (t9) and "what's one thing you notice" (t2)
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked) + OWNER ACTION (provider capacity)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified + OWNER ACTION (provider capacity)
 - Fix: No code cause beyond 562c3c3. Production 2026-10-06 targeted probes: 6 degraded live replies in 36 turns while another session was running a Mathematics QA campaign on the same production deployment; graded answers still received their verdict. OPENROUTER_API_KEY missing (health endpoint). Owner: provider keys/credits and concurrent QA load. **2026-10-07 pass (2350ff6):** With every provider down, the concept's own authored explanation that the learner has not yet seen is served instead of the outage copy (chat: `findUnseenExplanationContent` in the all-providers-down branch, which then does not count as an outage turn; lesson-init: the authored explanation opens the lesson under its title). The outage copy remains only when no unseen authored explanation is left. Provider capacity itself (Gemini credits, OPENROUTER_API_KEY, Groq tier) is still an owner action. Test: src/tests/remainingDefectFixes20261007.test.ts.
 
 ### CHEM-108 — Newman-projection item keyed "Four" for "how many bonds does the FRONT carbon show?" while the explanation says only three are drawn (the C–C bond "is not drawn")
@@ -2154,7 +2152,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Learner cannot know what is being asked; counts toward mastery.
 - Reproducibility: Observed once (#107 t2–t3).
 - Related defect: —
-- Status: FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: DEPLOYED — live on production since 2026-10-09 (deploy of a9ef53d, READY, aliased my-tutor-flame.vercel.app); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Only authored cards are asked (owner decision 2026-10-07): a model-written card is never served (`decideModelProbe` with `authoredCardsOnly: AUTHORED_CARDS_ONLY`), the prompt forbids writing cards or lettered options (`mcq.AUTHORED_ONLY_INSTRUCTION`), and an A)/B)/C) question written into prose is removed with the question that introduced it (`proseMcqGuard.stripProseMultipleChoice`). Every card a learner can answer carries a reviewed key and gets a verdict. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### CHEM-110 — Ozone pre-equilibrium example is internally wrong: O₂ ⇌ 2 O called "bimolecular" with K = k₁/k₋₁ in M⁻¹ (K = [O]²/[O₂] has units M); no overall equation; rate-constant units do not match
@@ -2172,7 +2170,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: A weak learner copying the units-checked derivation would learn wrong molecularity and unit analysis in a lesson about exactly those ideas.
 - Reproducibility: Observed once (#87 t13).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### CHEM-111 — Gasoline fraction (C₅–C₁₂) said to boil "roughly between 25 °C and 75 °C"; real range ≈ 40–200 °C
@@ -2190,7 +2188,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Numbers presented as a realistic refinery example are off by a factor of 2–3.
 - Reproducibility: Observed twice in one lesson (#141 t4, t5).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### CHEM-112 — Card keyed against the chemically correct choice: "Which has HIGHER molar solubility?" — answer "Salt B" is marked wrong; the keyed option is "Cannot assume from Ksp alone", whose own working concludes Salt B is far more soluble
@@ -2226,7 +2224,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: The headline numeric example of the lesson is wrong in three ways and self-contradictory.
 - Reproducibility: Observed once (#108 t11).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### CHEM-114 — Invented "second-order rate constants for reaction with H₂O" for acyl derivatives (1×10³ … 1×10⁻⁶ M⁻¹ s⁻¹, i.e. 10⁹ span) while the lesson's own card says the span is "something like 10¹³"
@@ -2244,7 +2242,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Fabricated-looking data the learner cannot check; inconsistent with the lesson's own card.
 - Reproducibility: Observed once (#160 t5).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### CHEM-115 — Titration opener says phenolphthalein turns pink at the half-equivalence point (pH ≈ 4.75) and that acid + conjugate base are already a buffer before any NaOH is added
@@ -2262,7 +2260,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Directly contradicts the lesson's own later statement (phenolphthalein range 8.2–10) and builds the endpoint/half-equivalence confusion the lesson is meant to remove.
 - Reproducibility: Observed once (#68 t1).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts. This item is mainly a plain-prose claim, so it is checked only when the same reply also carries numbers, equations or a worked example; otherwise it remains model output (scope of the owner decision).
 
 ### CHEM-116 — Equivalence-point pH of 0.1 M acetic acid + 0.1 M NaOH given as "around 9.3" and as the card's top option, while the same lesson later computes 8.7
@@ -2280,7 +2278,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Numerical contradiction within a lesson; the card cannot be answered by correct calculation.
 - Reproducibility: Observed once (#68 t2 vs t11/t12).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Only authored cards are asked (owner decision 2026-10-07): a model-written card is never served (`decideModelProbe` with `authoredCardsOnly: AUTHORED_CARDS_ONLY`), the prompt forbids writing cards or lettered options (`mcq.AUTHORED_ONLY_INSTRUCTION`), and an A)/B)/C) question written into prose is removed with the question that introduced it (`proseMcqGuard.stripProseMultipleChoice`). Every card a learner can answer carries a reviewed key and gets a verdict. Test: src/tests/ownerDecisions20261007.test.ts. The "≈ 9.3" number in the reply itself is covered by the check pass only: Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### CHEM-117 — "I dont understand this picture" on a lesson with no figure gets a bathtub/drain analogy that is chemically backwards
@@ -2316,7 +2314,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Teaches a false mechanism to a learner who asked for a shorter version; it also conflicts with the balanced equation shown earlier in the same lesson.
 - Reproducibility: Observed once (#109 t14).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts. This item is mainly a plain-prose claim, so it is checked only when the same reply also carries numbers, equations or a worked example; otherwise it remains model output (scope of the owner decision).
 
 ### CHEM-119 — Wittig opener and example: methylenetriphenylphosphorane (or "Ph₃P=CHCH₃ from methyltriphenylphosphonium bromide") + benzaldehyde is said to give trans-stilbene
@@ -2334,7 +2332,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: The lesson's headline example teaches an impossible transformation and then contradicts itself.
 - Reproducibility: Observed once (#161 t1, t2, t3).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### CHEM-120 — Card treats "(E)-styrene" as the correct product and "a mixture of (E)- and (Z)-styrene" as a distractor, but styrene has no E/Z isomers; example also claims a "(E)-styrene" isolated yield
@@ -2352,7 +2350,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Teaches wrong nomenclature; a careful learner cannot reason to the "right" option.
 - Reproducibility: Observed once (#161 t9, t10).
 - Related defect: —
-- Status: FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: DEPLOYED — live on production since 2026-10-09 (deploy of a9ef53d, READY, aliased my-tutor-flame.vercel.app); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Only authored cards are asked (owner decision 2026-10-07): a model-written card is never served (`decideModelProbe` with `authoredCardsOnly: AUTHORED_CARDS_ONLY`), the prompt forbids writing cards or lettered options (`mcq.AUTHORED_ONLY_INSTRUCTION`), and an A)/B)/C) question written into prose is removed with the question that introduced it (`proseMcqGuard.stripProseMultipleChoice`). Every card a learner can answer carries a reviewed key and gets a verdict. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### CHEM-121 — O₂ worked example uses "ten valence electrons (five from each O)" and fills the N₂ configuration, giving bond order 3 for O₂; the same lesson elsewhere says O₂ has bond order 2 and two unpaired π* electrons
@@ -2370,7 +2368,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: The requested worked example for the lesson's flagship molecule is wrong and contradicts other lesson content.
 - Reproducibility: Observed once (#30 t12).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### CHEM-122 — Wrong-answer verdict reads "Not quite — the answer is: Not quite — …" (the authored explanation is inserted where the correct option should be)
@@ -2406,7 +2404,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Reinforces the misconception that oxidation state = electrons transferred, in the lesson that is meant to remove it.
 - Reproducibility: Observed once (#69 t1).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### CHEM-124 — Worked ozone example: 6.0×10²⁸ O₃ molecules is converted to "1.2×10⁶ g (1.2 tonnes)"; correct mass is ≈ 4.8×10⁶ g
@@ -2424,7 +2422,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: The one numeric result the learner asked for is wrong; a learner who checks it will fail to reproduce it.
 - Reproducibility: Observed once (#181 t9).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### CHEM-125 — BaSO₄ low solubility explained by "a much stronger lattice energy" for the larger Ba²⁺; lattice energy actually decreases down the group
@@ -2442,7 +2440,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Teaches a false trend in the same breath as the correct solubility trend.
 - Reproducibility: Observed once (#110 t11).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts. This item is mainly a plain-prose claim, so it is checked only when the same reply also carries numbers, equations or a worked example; otherwise it remains model output (scope of the owner decision).
 
 ### CHEM-126 — Ca + 2H₂O → Ca(OH)₂ + H₂ given as "about −65 kJ mol⁻¹"; real value ≈ −413 kJ mol⁻¹
@@ -2460,7 +2458,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Wrong thermochemical number in a numbers-requested example.
 - Reproducibility: Observed once (#110 t11).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### CHEM-127 — Calcium said to lose its "two outer 2s electrons" (it is 4s), contradicting the same lesson's "[Ar] 4s²"
@@ -2478,7 +2476,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Internal contradiction on a basic configuration.
 - Reproducibility: Observed once (#110 t13).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts. This item is mainly a plain-prose claim, so it is checked only when the same reply also carries numbers, equations or a worked example; otherwise it remains model output (scope of the owner decision).
 
 ### CHEM-128 — Cyclobutanone ¹H NMR described as one CH₂ signal plus "a separate singlet for the carbonyl-adjacent proton"
@@ -2496,7 +2494,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: The learner asked for an example of reading NMR; the example gives a wrong spectrum for a molecule whose structure was just stated.
 - Reproducibility: Observed once (#162 t9).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts. This item is mainly a plain-prose claim, so it is checked only when the same reply also carries numbers, equations or a worked example; otherwise it remains model output (scope of the owner decision).
 
 ### CHEM-129 — Answer cards show raw markup for ions and subscripts (Fe^{2+}, MnO_4^-, Q_sp, K_n, Δn_gas) that the lesson renderer does not typeset
@@ -2550,7 +2548,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: The first teaching reply of the lesson blurs the two points the lesson exists to separate (freezing at 0 °C; density maximum at 4 °C).
 - Reproducibility: Observed once (#111 t1).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts. This item is mainly a plain-prose claim, so it is checked only when the same reply also carries numbers, equations or a worked example; otherwise it remains model output (scope of the owner decision).
 
 ### CHEM-132 — Boron-family opener asks why "BF₃ forms a stable adduct with NF₃" (a poor Lewis base) and says B and N have "similar electronegativities"
@@ -2568,7 +2566,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: A weak learner cannot answer a question whose premise is wrong; it also contradicts the lesson's own later BF₃·NH₃ card.
 - Reproducibility: Observed once (#112 t1).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts. This item is mainly a plain-prose claim, so it is checked only when the same reply also carries numbers, equations or a worked example; otherwise it remains model output (scope of the owner decision).
 
 ### CHEM-133 — "Crystal Systems" lesson drifts: replies to "ok" and "next question please" teach metallic bonding, and the seven crystal systems are barely taught
@@ -2586,7 +2584,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Lesson objective in the opener ("seven basic crystal systems") is not what is taught or quizzed.
 - Reproducibility: Observed once (#90).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Lesson drift guard (`lessonDriftGuard.ts`): a reply to a continuation message ("ok", "next", "give me example", "maybe yes") that is at least 25 words and names none of the concept's anchor words (KG title + syllabus line) is regenerated once with the lesson stated; the retry is kept only if it is on the lesson. Partial: a retry that drifts again is not replaced, and a neighbouring concept that shares the lesson's words is not detected. Test: src/tests/remainingDefectFixes20261007.test.ts.
 
 ### CHEM-134 — Wrong answer to "which species’ concentration appears in the SN1 rate law?" is praised as "a solid observation" and never corrected
@@ -2604,7 +2602,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: A wrong answer is rewarded and the misconception (leaving group concentration in the rate law) is left standing.
 - Reproducibility: Observed once (#144 t16). Related: CHEM-075 (non-answers affirmed), CHEM-028 (no verdict).
 - Related defect: —
-- Status: FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: DEPLOYED — live on production since 2026-10-09 (deploy of a9ef53d, READY, aliased my-tutor-flame.vercel.app); not production-verified
 - Fix: d5397b1 — the false praise ("That's a solid observation—you've picked out the chloride ion") is stripped on an unauthored-key grade (answerConfirmation.ts UNBACKED_PRAISE). Not fixed: the card was model-written, so its key is unverified and, by design, no verdict or correct answer is stated (route.ts correctForConfirmation). Stating verdicts from model-invented keys is an owner decision. Test: src/tests/chemBatchDTextShape.test.ts. **2026-10-07 pass (2350ff6):** Only authored cards are asked (owner decision 2026-10-07): a model-written card is never served (`decideModelProbe` with `authoredCardsOnly: AUTHORED_CARDS_ONLY`), the prompt forbids writing cards or lettered options (`mcq.AUTHORED_ONLY_INSTRUCTION`), and an A)/B)/C) question written into prose is removed with the question that introduced it (`proseMcqGuard.stripProseMultipleChoice`). Every card a learner can answer carries a reviewed key and gets a verdict. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### CHEM-135 — Iodoform explanation says primary alcohols "such as ethanol" give the test; only ethanol (not primary alcohols in general) does
@@ -2622,7 +2620,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Undermines the correct answer the learner just chose.
 - Reproducibility: Observed once (#131 t9).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts. This item is mainly a plain-prose claim, so it is checked only when the same reply also carries numbers, equations or a worked example; otherwise it remains model output (scope of the owner decision).
 
 ### CHEM-136 — Amine basicity example gives pKb 3.4 / 3.1 / 2.9 for CH₃NH₂ / (CH₃)₂NH / (CH₃)₃N and concludes "primary < secondary < tertiary" in basicity
@@ -2640,7 +2638,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: A wrong number table and wrong trend in the example the learner asked for; contradicts the lesson's own card.
 - Reproducibility: Observed twice in #163 (t2, t4).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### CHEM-137 — Eutrophication example: BOD 12 mg/L is said to lower 8 mg/L dissolved oxygen "to roughly 3 mg/L"
@@ -2658,7 +2656,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: The worked example's arithmetic is inconsistent, in a lesson whose goal is to teach the BOD/dissolved-oxygen relationship.
 - Reproducibility: Observed once (#182 t12).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### CHEM-138 — NMR feedback says "A CH₃ gives three signals while an OH gives one, so the CH₃ peak is larger"; also equates peak height with integration
@@ -2676,7 +2674,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: The correction teaches a false statement about the very quantity the card tests.
 - Reproducibility: Observed twice (#132 t5, t9).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts. This item is mainly a plain-prose claim, so it is checked only when the same reply also carries numbers, equations or a worked example; otherwise it remains model output (scope of the owner decision).
 
 ### CHEM-139 — Yes/No card offers "Correct" as an option: "Does it therefore have no intermolecular forces? — Correct / No"
@@ -2712,7 +2710,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Numbers the learner asked for are inconsistent and partly wrong.
 - Reproducibility: Observed once (#32 t13, t14).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### CHEM-141 — Bond Enthalpy lesson walks through a Born–Haber cycle and calls sublimation and ionisation "bond-breaking" processes
@@ -2730,7 +2728,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Wrong-concept figure plus a false statement about ionisation.
 - Reproducibility: Observed once (#52 t1–t3). Figure part is another instance of CHEM-022.
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts. This item is mainly a plain-prose claim, so it is checked only when the same reply also carries numbers, equations or a worked example; otherwise it remains model output (scope of the owner decision).
 
 ### CHEM-142 — E2 elimination examples: acyclic haloalkane in a "chair-like conformation"; Hofmann product named "1-methyl-1-butene"; 3-methyl-1-butene called the Zaitsev product with a C2=C3 double bond
@@ -2748,7 +2746,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: The lesson's central rule (Zaitsev vs Hofmann) is illustrated with wrong products and names.
 - Reproducibility: Observed in #146 t1 and t3 (one session).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts. This item is mainly a plain-prose claim, so it is checked only when the same reply also carries numbers, equations or a worked example; otherwise it remains model output (scope of the owner decision).
 
 ### CHEM-143 — Reply to "continue" is a raw malformed HTML comment containing card options and the answer key: <!" a="Filter precipitate" … correct="A"-->
@@ -2802,7 +2800,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: First explanation contradicts the lesson's own key; also the same reply mixes in the Haber process before it is taught.
 - Reproducibility: Observed once (#114 t1).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts. This item is mainly a plain-prose claim, so it is checked only when the same reply also carries numbers, equations or a worked example; otherwise it remains model output (scope of the owner decision).
 
 ### CHEM-146 — A degraded reply swaps the card under the learner; the next answer then matches no option ("I couldn’t tell which option your answer matched — tap the choice you mean… Got it — you’re saying…")

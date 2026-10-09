@@ -11,13 +11,11 @@
 - P1: 4
 - P2: 22
 - P3: 16
-- Status (2026-10-07 pass, 2350ff6; nothing in this pass is production-verified — Vercel deploys blocked; totals = 42 entries):
-  - PARTIALLY FIXED IN REPO: 21
+- Status (after the 2026-10-09 deploy of a9ef53d; DEPLOYED = live, NOT production-verified; totals = 42 entries):
+  - PARTIALLY FIXED: 23
   - FIXED: 13
-  - FIXED IN REPO: 3
-  - PARTIALLY FIXED: 2
+  - DEPLOYED: 4
   - NOT REPRODUCED: 2
-  - DEPLOYED: 1
 <!-- SUMMARY:END -->
 
 **Fix pass (2026-10-06, commits c4a6afc, 62f7821; plus the shared chemistry fixes d5397b1/dee8428):** each entry's **Status** / **Fix:** line names its commit, cause and evidence. Live re-drive on production (6f6ccaa), two disposable accounts (deleted afterwards), one tabId per lesson, lessons #1, 3, 21, 22, 41, 61, 82, 101, 102, 120, 121, 141, 161, 181 — 14 lessons, 181 turns:
@@ -170,7 +168,7 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (25 occurrences in 25 lessons): #61 (A4) t16; #101 (A6) tt3,t6,t12,t14; #141 (A8) tt1,t2,t5,t11,t12,t13,t15; #161 (A9) tt6,t12; #121 (A7) tt6,t9,t18; #81 (A5) tt2,t5,t9,t10; #21 (A2) tt4,t17,t18; #16 (A1) t-; #188 (A10) t-; #190 (A10) t-; #196 (A10) t-; #25 (A2) t-; #34 (A2) t-; #42 (A3) t-; #44 (A3) t-; #65 (A4) t-; #108 (A6) t-; #109 (A6) t-; #110 (A6) t-; #136 (A7) t-; #155 (A8) t-; #157 (A8) t-; #158 (A8) t-; #159 (A8) t-; #167 (A9) t-
 - Notes on occurrences: #61 t16: family photo album analogy · #101 tt3,t6,t12,t14: delivery driver / truck / two courses / deck of cards analogies · #141 tt1,t2,t5,t11,t12,t13,t15: mailbox / billboard / restaurant / castle walls / front desk analogies · #161 tt6,t12: grocery list / highway analogies · #121 tt6,t9,t18: kitchen sink / bathtub-soap analogies · #81 tt2,t5,t9,t10: snowball / microphone-speaker / thermostat / rubber band analogies · #21 tt4,t17,t18: dough loaves / deck of cards / bread loaf analogies
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: d5397b1 (CHEM-039) — past two analogies in four replies, one regeneration without an analogy (kept only if it has none). Not guaranteed when the retry also uses one. **2026-10-07 pass (2350ff6):** The analogy cap is one analogy in the last four replies for every subject (was two outside mathematics); past it the reply is regenerated once without an analogy and kept only if it has none. Partial: a retry that still uses an analogy keeps the original. Test: src/tests/remainingDefectFixes20261007.test.ts.
 
 ### BIO-005 — "next question please" / "ok" gets a content-free reply or a different topic instead of a question
@@ -250,7 +248,7 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (175 occurrences in 73 lessons): #23 (A2) tt2,t6/t2/t6/t12/t14; #84 (A5) t1/t11/t12/t18/t21/t22/t24; #186 (A10) t15/t16; #144 (A8) t19/t3/t8/t20; #27 (A2) t1; #105 (A6) t4/t7; #127 (A7) t1/t21; #147 (A8) t13/t20; #126 (A7) t12; #188 (A10) t6/t17; #1 (A1) t13; #2 (A1) t17; #4 (A1) t4/t16/t17/t18/t19/t20; #5 (A1) t19; #9 (A1) t12; #10 (A1) t8; #11 (A1) t4; #17 (A1) t18; #183 (A10) t3; #185 (A10) t3/t6/t18; #187 (A10) t4/t21/t23; #189 (A10) t7/t11/t14/t16/t21/t27; #190 (A10) t4/t10/t11; #191 (A10) t3/t8; #198 (A10) t6/t7; #24 (A2) t6/t7; #25 (A2) t18; #29 (A2) t6; #30 (A2) t1; #42 (A3) t22; #43 (A3) t12/t21; #44 (A3) t6/t21/t22; #45 (A3) t6/t9/t13/t24; #47 (A3) t10/t13; #49 (A3) t8; #50 (A3) t13; #62 (A4) t17/t18; #63 (A4) t16/t18/t24/t25; #64 (A4) t2/t6; #65 (A4) t3/t22; #67 (A4) t1; #71 (A4) t5; #72 (A4) t1; #83 (A5) t18; #85 (A5) t2/t4/t16/t18/t19; #86 (A5) t3/t13/t25; #87 (A5) t10/t11; #88 (A5) t4/t6/t7; #102 (A6) t14/t19/t24; #103 (A6) t5/t7/t20; #104 (A6) t1/t7; #108 (A6) t22; #109 (A6) t5/t7/t20; #110 (A6) t8/t13; #122 (A7) t7; #123 (A7) t2/t5/t10; #124 (A7) t2/t3/t10/t14; #125 (A7) t4/t10; #128 (A7) t10/t14; #129 (A7) t1/t2/t7/t23/t24; #143 (A8) t3/t15/t16; #145 (A8) t13; #146 (A8) t2; #148 (A8) t6/t11; #149 (A8) t14/t16; #162 (A9) t19/t20; #163 (A9) t3/t16; #164 (A9) t9; #165 (A9) t3/t4/t6/t16; #166 (A9) t21/t22; #168 (A9) t2/t4/t14; #169 (A9) t3; #170 (A9) t13
 - Notes on occurrences: #23 tt2,t6: degraded replies on "show me step by step" and "give me example with numbers" · #84 t1: lesson opens with a degraded fallback reply · #186 t15: degraded reply on "show me step by step" with a stray figure line · #144 t19: degraded reply on "give me example with numbers" · #27 t1: lesson opens with a degraded fallback · #105 t4: degraded reply on "give me example with numbers" · #127 t1: lesson opens with a degraded fallback · #147 t13: degraded reply on "give me example"
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked) + OWNER ACTION (provider capacity)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified + OWNER ACTION (provider capacity)
 - Fix: Same as CHEM-107: provider capacity — Gemini 402 (credits depleted), no OpenRouter key, Groq burst limits under ten concurrent learners; bounded retry + honest copy shipped in 562c3c3. Owner: top up Gemini / add OPENROUTER_API_KEY / raise the Groq tier. **2026-10-07 pass (2350ff6):** With every provider down, the concept's own authored explanation that the learner has not yet seen is served instead of the outage copy (chat: `findUnseenExplanationContent` in the all-providers-down branch, which then does not count as an outage turn; lesson-init: the authored explanation opens the lesson under its title). The outage copy remains only when no unseen authored explanation is left. Provider capacity itself (Gemini credits, OPENROUTER_API_KEY, Groq tier) is still an owner action. Test: src/tests/remainingDefectFixes20261007.test.ts.
 
 ### BIO-009 — Cytochrome c example: protein length and difference counts are inconsistent between replies and wrong (100 vs 154 residues; human–mouse 5; human–yeast 30 vs 45)
@@ -268,7 +266,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Invented numbers presented as "real" and inconsistent across replies.
 - Reproducibility: Observed once (#61 t13 vs t15).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: Model-generated numbers in a worked example; the authored cytochrome c figures (0 and 45 differences) are defensible. Numeric verification (N1/N2/N3) is CLOSED — NOT READY FOR ENFORCEMENT (owner, 2026-10-04); not patched. **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### BIO-010 — Raw curriculum goal returned as the tutor reply ("Fossil record, comparative anatomy — homologous and analogous structures, embryology, biogeography…")
@@ -403,7 +401,7 @@ Mastery/progress · Concurrency/session isolation.
 - Reproducibility: Seen in #181 t3 and #161 t3.
 - Also observed (24 occurrences in 23 lessons): #1 (A1) t17; #9 (A1) t9; #10 (A1) t5; #12 (A1) t13; #15 (A1) t16; #20 (A1) t9; #181 (A10) t4; #37 (A2) t6; #45 (A3) t5/t21; #54 (A3) t10; #62 (A4) t14; #69 (A4) t13; #77 (A4) t7; #105 (A6) t17; #108 (A6) t16; #121 (A7) t20; #122 (A7) t5; #135 (A7) t9; #142 (A8) t14; #144 (A8) t22; #151 (A8) t15; #153 (A8) t11; #170 (A9) t11
 - Related defect: —
-- Status: FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: DEPLOYED — live on production since 2026-10-09 (deploy of a9ef53d, READY, aliased my-tutor-flame.vercel.app); not production-verified
 - Fix: d5397b1 (CHEM-028) — on an authored key the verdict leads. The observed card was model-written (figure labels as options); an unauthored key stays verdict-free by design — owner decision (same as CHEM-048/134). **2026-10-07 pass (2350ff6):** Only authored cards are asked (owner decision 2026-10-07): a model-written card is never served (`decideModelProbe` with `authoredCardsOnly: AUTHORED_CARDS_ONLY`), the prompt forbids writing cards or lettered options (`mcq.AUTHORED_ONLY_INSTRUCTION`), and an A)/B)/C) question written into prose is removed with the question that introduced it (`proseMcqGuard.stripProseMultipleChoice`). Every card a learner can answer carries a reviewed key and gets a verdict. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### BIO-017 — "Advanced Biogeochemical Cycling" is taught from an untitled food-chain figure (producers → herbivores → carnivores); the sulfur/nitrogen cycle is forced onto it
@@ -442,7 +440,7 @@ Mastery/progress · Concurrency/session isolation.
 - Reproducibility: Counted automatically over all lessons at the end.
 - Also observed (233 occurrences in 142 lessons): #1 (A1) t16; #2 (A1) t18; #3 (A1) t6; #5 (A1) t10/t11; #6 (A1) t13; #7 (A1) t11; #8 (A1) t17; #9 (A1) t8/t9; #11 (A1) t9/t10; #12 (A1) t12/t13; #13 (A1) t14; #14 (A1) t11; #15 (A1) t16; #16 (A1) t20/t24/t25; #19 (A1) t19/t20; #20 (A1) t11/t12; #182 (A10) t21/t22; #183 (A10) t15; #186 (A10) t17; #187 (A10) t19; #189 (A10) t24/t28/t29; #191 (A10) t12/t15/t16; #193 (A10) t8/t9; #194 (A10) t8; #197 (A10) t18/t19; #198 (A10) t17; #21 (A2) t10/t13; #22 (A2) t11; #23 (A2) t9/t10; #24 (A2) t15; #25 (A2) t19/t20; #27 (A2) t11; #28 (A2) t17/t18; #29 (A2) t10; #30 (A2) t20; #31 (A2) t23/t24/t25; #32 (A2) t15/t16; #33 (A2) t15; #34 (A2) t19/t23/t24; #35 (A2) t10/t11; #36 (A2) t10/t11/t12; #37 (A2) t12/t16; #39 (A2) t23/t24; #40 (A2) t9; #41 (A3) t14; #43 (A3) t14/t15; #45 (A3) t20/t21; #46 (A3) t13; #47 (A3) t20/t21; #48 (A3) t15; #49 (A3) t15/t16; #50 (A3) t13/t14/t15; #51 (A3) t10/t11; #53 (A3) t14/t15/t16; #55 (A3) t16/t17/t18; #57 (A3) t15; #58 (A3) t9; #60 (A3) t18/t19; #61 (A4) t11; #62 (A4) t13; #63 (A4) t21/t25; #64 (A4) t17; #65 (A4) t14; #66 (A4) t10/t11; #67 (A4) t12; #70 (A4) t8; #71 (A4) t18; #72 (A4) t25; #73 (A4) t18/t19; #75 (A4) t12; #77 (A4) t11; #78 (A4) t14; #79 (A4) t13/t14; #80 (A4) t9/t10/t18; #81 (A5) t12; #82 (A5) t14/t15; #83 (A5) t13; #85 (A5) t13/t14; #86 (A5) t17/t20; #87 (A5) t15/t16; #88 (A5) t13/t14; #89 (A5) t13; #90 (A5) t16; #91 (A5) t12/t13; #92 (A5) t14/t15; #93 (A5) t24/t25; #94 (A5) t17; #96 (A5) t10/t11; #98 (A5) t11/t12; #99 (A5) t14/t18/t19; #100 (A5) t18/t19; #101 (A6) t16; #102 (A6) t11; #105 (A6) t16/t17; #106 (A6) t8; #107 (A6) t16; #108 (A6) t19; #112 (A6) t8/t9; #113 (A6) t7; #118 (A6) t11/t12; #120 (A6) t16/t17; #121 (A7) t19/t20; #122 (A7) t10; #123 (A7) t17; #124 (A7) t17; #125 (A7) t15/t16; #128 (A7) t12; #129 (A7) t21; #130 (A7) t9/t10; #132 (A7) t13/t16/t17; #135 (A7) t8; #136 (A7) t17/t18/t19; #137 (A7) t19/t20; #139 (A7) t11; #140 (A7) t14; #141 (A8) t16; #142 (A8) t13; #148 (A8) t9; #149 (A8) t8; #150 (A8) t20/t21; #151 (A8) t13/t14; #152 (A8) t6/t8; #153 (A8) t20/t21; #155 (A8) t17/t18/t19; #156 (A8) t11; #158 (A8) t25; #159 (A8) t18/t19; #160 (A8) t12/t15; #161 (A9) t9/t10; #162 (A9) t17; #163 (A9) t11/t12; #165 (A9) t13/t14; #166 (A9) t17/t18; #169 (A9) t14; #170 (A9) t11/t15; #171 (A9) t13/t14; #172 (A9) t20/t21; #173 (A9) t14; #175 (A9) t11/t12; #176 (A9) t16/t17; #178 (A9) t9; #180 (A9) t12/t13
 - Related defect: —
-- Status: FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: DEPLOYED — live on production since 2026-10-09 (deploy of a9ef53d, READY, aliased my-tutor-flame.vercel.app); not production-verified
 - Fix: 957978b + afa7322 — the cross-lesson mechanism was reproduced in production (chemistry, A → B → A in one tab; see CHEM-033) and fixed in afa7322; not deployed (Vercel 402). Separate observation on the original lesson (bio.cell.mitosis, 2026-10-06): one correctly answered card was shown again — production logs show it was answered at phase GUIDE (no mastery credit) after the concept's 3 authored probes were all used, which is the owner-decided single re-ask (teachingHistory.recordMcqOutcome, option (c)), not a ledger fault.
 
 ### BIO-019 — Most cards have only 2 options (Yes/No, True/False, two statements), so guessing succeeds 50 % of the time
@@ -461,7 +459,7 @@ Mastery/progress · Concurrency/session isolation.
 - Reproducibility: Percentages computed over all cards at the end.
 - Also observed (290 occurrences in 190 lessons): #1 (A1) t11/t16; #2 (A1) t9/t10; #3 (A1) t4/t6; #5 (A1) t8; #6 (A1) t6/t13; #7 (A1) t9; #8 (A1) t6/t17; #9 (A1) t4/t8; #10 (A1) t4; #11 (A1) t7; #12 (A1) t4/t12; #13 (A1) t9; #14 (A1) t9; #15 (A1) t15; #16 (A1) t3/t20; #18 (A1) t8; #19 (A1) t15/t20; #20 (A1) t5/t11; #181 (A10) t3; #182 (A10) t19; #183 (A10) t13/t15; #184 (A10) t4; #186 (A10) t5/t17; #187 (A10) t14; #189 (A10) t11/t24; #190 (A10) t17; #191 (A10) t4/t12; #192 (A10) t3; #193 (A10) t6; #194 (A10) t6; #197 (A10) t12/t19; #198 (A10) t15; #199 (A10) t13; #21 (A2) t6/t13; #22 (A2) t10; #23 (A2) t4/t7/t9; #24 (A2) t10; #25 (A2) t10/t20; #26 (A2) t7; #27 (A2) t9/t11; #28 (A2) t3/t17; #29 (A2) t8; #30 (A2) t15/t20; #31 (A2) t13/t24; #32 (A2) t14; #33 (A2) t14; #34 (A2) t4/t8/t19/t24; #35 (A2) t8; #36 (A2) t4/t10; #37 (A2) t3/t12; #38 (A2) t7; #39 (A2) t22; #40 (A2) t7; #41 (A3) t11; #42 (A3) t13; #43 (A3) t6/t15; #45 (A3) t4/t20; #46 (A3) t8; #47 (A3) t16/t21; #48 (A3) t10/t15; #49 (A3) t11; #50 (A3) t10/t15; #51 (A3) t3/t10; #53 (A3) t7/t16; #54 (A3) t9; #55 (A3) t12/t18; #56 (A3) t11/t12; #57 (A3) t13; #58 (A3) t6; #59 (A3) t20; #60 (A3) t15/t19; #61 (A4) t8; #62 (A4) t6/t13; #63 (A4) t4/t21; #64 (A4) t8/t17; #65 (A4) t13; #66 (A4) t9/t11; #67 (A4) t10; #68 (A4) t3; #69 (A4) t12; #70 (A4) t4/t8; #71 (A4) t3/t18; #72 (A4) t19/t25; #73 (A4) t17; #74 (A4) t3; #75 (A4) t5/t12; #76 (A4) t10; #77 (A4) t4; #78 (A4) t3/t14; #79 (A4) t11; #80 (A4) t4/t9; #81 (A5) t7/t12; #82 (A5) t8/t15; #83 (A5) t6/t13; #84 (A5) t18; #85 (A5) t11; #86 (A5) t15; #87 (A5) t8/t15; #88 (A5) t4/t13; #89 (A5) t11; #90 (A5) t15; #91 (A5) t11/t13; #92 (A5) t6/t14; #93 (A5) t11/t24; #94 (A5) t15; #95 (A5) t7; #96 (A5) t4/t10; #97 (A5) t4; #98 (A5) t4/t11; #99 (A5) t5/t14; #100 (A5) t17; #101 (A6) t9/t16; #102 (A6) t8; #103 (A6) t15; #105 (A6) t13/t17; #106 (A6) t6/t8; #107 (A6) t15; #108 (A6) t3/t19; #109 (A6) t7; #110 (A6) t14; #111 (A6) t4; #112 (A6) t4/t8; #113 (A6) t4/t6; #114 (A6) t9; #115 (A6) t5; #116 (A6) t4; #117 (A6) t5; #118 (A6) t4/t11; #119 (A6) t9; #120 (A6) t10/t16; #121 (A7) t4/t19; #122 (A7) t4/t10; #123 (A7) t15; #124 (A7) t7/t17; #125 (A7) t12/t16; #126 (A7) t10; #127 (A7) t14; #128 (A7) t11; #129 (A7) t9/t21; #130 (A7) t4/t9; #131 (A7) t8; #132 (A7) t9/t16; #133 (A7) t16; #134 (A7) t5; #135 (A7) t3/t8; #136 (A7) t8/t17; #137 (A7) t14/t20; #138 (A7) t13; #139 (A7) t7; #140 (A7) t12; #141 (A8) t9/t16; #142 (A8) t8/t13; #143 (A8) t9; #144 (A8) t21; #145 (A8) t5; #146 (A8) t9; #147 (A8) t11; #148 (A8) t3/t9; #149 (A8) t3; #150 (A8) t4/t20; #151 (A8) t9/t14; #152 (A8) t3; #153 (A8) t10/t20; #154 (A8) t4; #155 (A8) t9/t17; #156 (A8) t9/t11; #157 (A8) t6; #158 (A8) t15/t25; #159 (A8) t8/t18; #160 (A8) t7/t12; #161 (A9) t3/t9; #162 (A9) t5/t17; #163 (A9) t6/t11; #164 (A9) t19; #165 (A9) t9/t14; #166 (A9) t13/t18; #167 (A9) t11; #168 (A9) t8; #169 (A9) t13; #170 (A9) t8/t15; #171 (A9) t6/t13; #172 (A9) t5/t20; #173 (A9) t6/t14; #174 (A9) t8; #175 (A9) t3/t11; #176 (A9) t9/t16; #177 (A9) t14; #178 (A9) t6; #179 (A9) t12; #180 (A9) t8/t12
 - Related defect: —
-- Status: FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: DEPLOYED — live on production since 2026-10-09 (deploy of a9ef53d, READY, aliased my-tutor-flame.vercel.app); not production-verified
 - Fix: Same as CHEM-004: the 2-option cards are authored true/false probes of the 3-probe contract; whether they may count toward mastery is policy. A model-written two-option "why" card is no longer served (d5397b1). **2026-10-07 pass (2350ff6):** Owner decision 2026-10-07 ("practice only", applied where reachable): a correct answer on a 2-option card moves the lesson on but banks no verified mastery credit when the concept holds at least 3 authored cards with 3+ options (`turnContract.certifiesMastery`, hoisted once as `certifiedForMastery`; the pool is read by `assets/probePool.ts`, one concept, take 60). Where fewer exist (measured 2026-10-07: every Biology, English and CS concept, 166 Physics, 152 Chemistry, 22 Mathematics) a 2-option card still counts, by the same decision, until more 3+-option cards are authored. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### BIO-020 — A stock caption sentence ("Take a look at the figure/process/comparison beside this message — it shows <lesson title>. Follow it step by step.") is appended to replies that are not about the figure, including degraded fallbacks
@@ -500,7 +498,7 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (3 occurrences in 3 lessons): #103 (A6) t17; #45 (A3) t15; #187 (A10) t16
 - Notes on occurrences: #103 t17: "show me step by step" in Fertilisation and Embryonic Development -> a menstrual-cycle calendar walk-through (follicular phase, ovulation) · #45 t15: "show me step by step" in Alternative Splicing -> transcription "zipper" explanation · #187 t16: "show me step by step" in Social Behaviour and Eusociality -> flowers attracting bees (a courtship/display analogy)
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: Step-by-step requests answered with a neighbouring concept (mitosis in a meiosis lesson). The step-shape check (CHEM-015) enforces steps, not the topic; no deterministic topic check exists. **2026-10-07 pass (2350ff6):** The lesson's KG syllabus line is now in the chat and opening prompts with the rule to teach each part, in order, before asking about it and to promise nothing outside it (`lessonDriftGuard.lessonScopeRule`). Prompt-level, so not guaranteed. Test: src/tests/remainingDefectFixes20261007.test.ts. The drift guard does not catch a neighbouring concept (mitosis in a meiosis lesson) because the two share words.
 
 ### BIO-022 — Markdown pipe tables in tutor replies; the lesson renderer has no table support
@@ -538,7 +536,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Off-topic teaching in a Biology lesson; possible context bleed from the English subject on the same account (uncertain: the English transcript was not inspected). The trigger text came from a scripted free-text answer quoting the card option "calendar-only rhythm methods".
 - Reproducibility: Observed once (#102 t20–t23).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: Observed once (#102 t20–t23). The drift sentences match English-subject assets (stress-timed rhythm, "The cat chased the mouse"), suggesting a cross-subject lookup, but the request logs are past the billing window and the DB connector was unauthorised this session. Related: PHYS-001 knowledge-gap fix (253d90a). **2026-10-07 pass (2350ff6):** Lesson drift guard (`lessonDriftGuard.ts`): a reply to a continuation message ("ok", "next", "give me example", "maybe yes") that is at least 25 words and names none of the concept's anchor words (KG title + syllabus line) is regenerated once with the lesson stated; the retry is kept only if it is on the lesson. Partial: a retry that drifts again is not replaced, and a neighbouring concept that shares the lesson's words is not detected. Test: src/tests/remainingDefectFixes20261007.test.ts.
 
 ### BIO-024 — Stickleback fixed-action-pattern example: the sign stimulus is "the bright red belly of a receptive female"
@@ -556,7 +554,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Misstates the textbook sign-stimulus example the lesson is built on.
 - Reproducibility: Observed once (#183 t11).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: The stickleback example is model-written (no authored text gives the female the red belly); no deterministic check of biology facts in model prose exists. **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts. This item is mainly a plain-prose claim, so it is checked only when the same reply also carries numbers, equations or a worked example; otherwise it remains model output (scope of the owner decision).
 
 ### BIO-025 — Classification example: "Kingdom Animalia – about 30 million described animal species"
@@ -574,7 +572,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Wrong order of magnitude for a basic figure.
 - Reproducibility: Observed once (#3 t14).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: Model-generated number; numeric verification is CLOSED (owner, 2026-10-04). **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### BIO-026 — The reply grades the previous card, not the one just answered ("That’s right—species is the most specific rank" to an answer about beetle genera)
@@ -610,7 +608,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Order-of-magnitude error in the one number the learner asked for.
 - Reproducibility: Observed once (#85 t10).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: Model-generated numbers; numeric verification is CLOSED (owner, 2026-10-04). **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### BIO-028 — Invented data presented as real gene/experiment facts in "example with numbers" (BLNK four-exon sizes; eyeless enhancer stripe 0.8→0.6 mm; dN/dS = 20/4 = 5)
@@ -630,7 +628,7 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (2 occurrences in 2 lessons): #47 (A3) tnum; #67 (A4) tnum
 - Notes on occurrences: #47 tnum: invented effect sizes presented as facts ("insulin doubles PFK-1 activity, triples glycogen synthase… glucose-6-phosphatase to 50 %") · #67 tnum: "A few thousand years ago the fastest cheetahs ran about 90 km/h… rose to 110" (invented arms-race data)
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: Invented data in model examples; numeric verification is CLOSED (owner, 2026-10-04). **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### BIO-029 — Textbook quantities wrong by an order of magnitude in worked examples (phosphocreatine 0.5 mol/kg of muscle; hen egg yolk "about 10 % of the weight")
@@ -648,7 +646,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Wrong magnitudes taught as facts.
 - Reproducibility: Observed in #86 and #105.
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: Model-generated magnitudes; numeric verification is CLOSED (owner, 2026-10-04). **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### BIO-030 — Audition example: a 1 kHz tone at 80 dB SPL is said to have a pressure variation of "about 0.02 Pa"
@@ -666,7 +664,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: The level and the pressure do not match.
 - Reproducibility: Observed once (#188 t7).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: Model-generated number; numeric verification is CLOSED (owner, 2026-10-04). **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### BIO-031 — Arithmetic and magnitude errors inside worked "example with numbers" replies (mitochondria per cell, heart volume, degradation time, extinction rates)
@@ -684,7 +682,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Numbers the learner asked for are wrong or self-contradictory.
 - Reproducibility: Observed in #8, #48, #69 (three lessons).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: Model arithmetic/magnitude errors; numeric verification is CLOSED (owner, 2026-10-04). **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### BIO-032 — Worked numbers that do not compute or contradict basic biology: K⁺ ΔG (−7.5 kJ/mol claimed; correct arithmetic gives −15.5 with the sign used, and −2 kJ/mol with the correct electrical sign), 75 %/67 % trophic transfer, fibroblast speed 12 µm/min
@@ -702,7 +700,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: The learner who asked for numbers gets numbers that contradict the principle being taught (the 10 % rule, ΔG sign conventions).
 - Reproducibility: Observed in #10, #29, #30 (three lessons).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: Model arithmetic/sign errors; numeric verification is CLOSED (owner, 2026-10-04). **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### BIO-033 — Plant respiration example: mitochondria "consuming 3 µmol CO₂ and releasing the same amount of O₂" (respiration consumes O₂ and releases CO₂)
@@ -720,7 +718,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Reverses the core reaction of the lesson in the worked example.
 - Reproducibility: Observed once (#88 num).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: Model-written plant-respiration example with O₂/CO₂ swapped; no authored text carries it. **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts. This item is mainly a plain-prose claim, so it is checked only when the same reply also carries numbers, equations or a worked example; otherwise it remains model output (scope of the owner decision).
 
 ### BIO-034 — Smaller factual/magnitude errors in examples: lung pressure drop 760→750 mmHg for a 2.5→3.0 L volume change; xylem tension "−0.1 MPa per metre"; an oak tree given arbuscular (Glomus) mycorrhiza; "about 20 billion neurons fire" in the frontal lobe
@@ -738,7 +736,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Wrong numbers or associations taught as facts.
 - Reproducibility: Seen in four lessons (one each).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: Model-generated magnitudes (the oak/arbuscular slip is model prose; the authored mycorrhiza entry is correct); numeric verification is CLOSED. **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### BIO-035 — More worked-example errors: nitrogen fixation off by ~10³ (10⁸ cells × 10⁻⁹ mol/cell/h = 0.1 mol/h, not "1 mmol/day"), nodule mass 2 g for a 5 mm nodule, tripalmitin MW ignoring condensation (860 vs 807), phage P1 infecting Streptococcus pneumoniae
@@ -756,7 +754,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Numbers and organisms given as fact do not hold up.
 - Reproducibility: Seen in #92, #32, #132.
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: Model arithmetic errors; numeric verification is CLOSED (owner, 2026-10-04). **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### BIO-036 — Action-potential repolarisation: "pulling the voltage down roughly 1 mV for every 0.5 mM K⁺ that leaves"
@@ -774,7 +772,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Teaches a wrong mechanism for the numbers asked for.
 - Reproducibility: Observed once (#75 num).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: Model-generated number; numeric verification is CLOSED (owner, 2026-10-04). **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### BIO-037 — Microbiome example credits Bacteroides with turning fibre into vitamin K₂ and butyrate
@@ -792,7 +790,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Oversimplified/incorrect attribution presented as the lesson example.
 - Reproducibility: Observed once (#135 ex, num).
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: Model-written microbiome claim; no authored text credits Bacteroides with K₂/butyrate. **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts. This item is mainly a plain-prose claim, so it is checked only when the same reply also carries numbers, equations or a worked example; otherwise it remains model output (scope of the owner decision).
 
 ### BIO-038 — Neutrophil "ingest and destroy roughly 10⁶ bacteria per hour" each; transcription example sequence contains in-frame stop codons from codon 3
@@ -810,7 +808,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Example numbers/sequences undermine the concept being taught.
 - Reproducibility: Observed in #137 and #37.
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: Model-generated numbers/sequence; numeric verification is CLOSED (owner, 2026-10-04). **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### BIO-039 — Dollar amounts are turned into math delimiters: "At a market price of \(200 per cubic metre… = 5 × 100 × 200 = **\)100 000 per year**"
@@ -846,7 +844,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Specific facts given as real data are incorrect.
 - Reproducibility: Observed in #80, #178, #177.
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: Model-generated magnitudes/names; numeric verification is CLOSED (owner, 2026-10-04). **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### BIO-041 — Vaccine efficacy misread: "95 % effective → about 950 of 1,000 vaccinated people develop protective immunity"; lac repressor Kd given as 0.1 µM
@@ -864,7 +862,7 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Wrong interpretation of a public-health figure and a wrong constant.
 - Reproducibility: Observed in #139 and #39.
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: Model misreading of efficacy and a Kd; numeric verification is CLOSED (owner, 2026-10-04). **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts.
 
 ### BIO-042 — Three lessons open at once on one account: all three are taught the content and figure of one of them

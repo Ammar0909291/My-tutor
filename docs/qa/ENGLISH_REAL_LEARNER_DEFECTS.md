@@ -11,9 +11,9 @@
 - P1: 1
 - P2: 12
 - P3: 4
-- Status (2026-10-07 pass, 2350ff6; nothing in this pass is production-verified — Vercel deploys blocked; totals = 17 entries):
-  - FIXED IN REPO: 10
-  - PARTIALLY FIXED IN REPO: 6
+- Status (after the 2026-10-09 deploy of a9ef53d; DEPLOYED = live, NOT production-verified; totals = 17 entries):
+  - DEPLOYED: 10
+  - PARTIALLY FIXED: 6
   - NOT A DEFECT: 1
 <!-- SUMMARY:END -->
 
@@ -105,7 +105,7 @@ P0 = learning completely blocked · P1 = seriously damages learning/trust · P2 
 - Reproducibility: Seen in the first lessons; counted over all English lessons at the end.
 - Also observed (73 occurrences in 73 lessons): #1 (A1) t22; #2 (A1) t24; #3 (A1) t24; #7 (A1) t15; #8 (A1) t14; #10 (A1) t29; #11 (A1) t21; #21 (A1) t20; #203 (A10) t25; #205 (A10) t25; #216 (A10) t18; #24 (A2) t16; #25 (A2) t20; #26 (A2) t22; #27 (A2) t17; #32 (A2) t15; #36 (A2) t20; #37 (A2) t27; #38 (A2) t22; #40 (A2) t22; #41 (A2) t20; #42 (A2) t21; #48 (A3) t22; #49 (A3) t20; #50 (A3) t25; #53 (A3) t17; #54 (A3) t23; #55 (A3) t23; #56 (A3) t22; #58 (A3) t21; #64 (A3) t20; #65 (A3) t21; #67 (A4) t19; #81 (A4) t21; #85 (A4) t23; #87 (A4) t24; #88 (A4) t23; #90 (A5) t25; #91 (A5) t23; #92 (A5) t17; #93 (A5) t24; #94 (A5) t18; #98 (A5) t28; #105 (A5) t29; #106 (A5) t24; #107 (A5) t22; #112 (A6) t22; #120 (A6) t24; #122 (A6) t19; #126 (A6) t19; #128 (A6) t17; #130 (A6) t19; #135 (A7) t28; #137 (A7) t19; #138 (A7) t24; #143 (A7) t28; #147 (A7) t19; #156 (A8) t29; #159 (A8) t25; #161 (A8) t19; #170 (A8) t19; #172 (A8) t22; #178 (A9) t24; #181 (A9) t23; #182 (A9) t14; #183 (A9) t22; #185 (A9) t18; #188 (A9) t21; #189 (A9) t29; #190 (A9) t21; #191 (A9) t22; #192 (A9) t29; #195 (A9) t20
 - Related defect: —
-- Status: FIXED IN REPO — awaiting deployment (Vercel blocked)
+- Status: DEPLOYED — live on production since 2026-10-09 (deploy of a9ef53d, READY, aliased my-tutor-flame.vercel.app); not production-verified
 - Fix: Shared mechanism MATH-001, fixed in 532055e after this run's code version: the budget close waits one turn for a help request whatever budget reason fired, a bare "why?" counts, and a verdict graded on the closing turn stays above the close. Not changed: closes after "continue"/an answer at the end of the turn budget (12 + 6 turns, 3 teaching attempts) — owner policy. Test: src/tests/mathRealLearnerFixes.test.ts (MATH-001). Production-verified: no. **2026-10-07 pass (2350ff6):** Owner decision 2026-10-07 (stay until mastery): an engaged learner's turn allowance is the 30-turn ceiling (`conceptBudget.STAY_UNTIL_MASTERY`, `effectiveTurnBudget`; the 12 + 6 budget is kept as `legacyTurnBudget`). The attempts and consecutive-failures exits still move a struggling concept to review, and an explicit stop still ends the session. Test: src/tests/ownerDecisions20261007.test.ts. This covers the part not covered by 532055e: a close after "continue" or an answer while mastery is incomplete.
 
 ### ENGL-002 — Degraded fallback replies ("Sorry — my answer didn't come through just now…", "I'm still getting my thoughts together on that one") instead of an answer — the Groq call failed
@@ -124,7 +124,7 @@ P0 = learning completely blocked · P1 = seriously damages learning/trust · P2 
 - Reproducibility: Counted automatically over all English transcripts.
 - Also observed (230 occurrences in 101 lessons): #1 (A1) t4; #2 (A1) t2/t13/t22; #3 (A1) t1/t17/t22; #5 (A1) t1/t7; #10 (A1) t15; #11 (A1) t19; #13 (A1) t5; #14 (A1) t17/t18; #15 (A1) t25/t27/t29; #16 (A1) t4; #17 (A1) t1/t30; #200 (A10) t1/t6; #201 (A10) t1; #202 (A10) t9; #203 (A10) t13/t16/t19/t21/t24; #205 (A10) t1/t2/t3; #207 (A10) t8/t18/t20; #208 (A10) t18/t20; #209 (A10) t5; #210 (A10) t1/t2; #211 (A10) t1; #213 (A10) t5; #214 (A10) t3/t19; #215 (A10) t13; #26 (A2) t3/t16; #27 (A2) t14; #34 (A2) t1/t5/t11/t12; #36 (A2) t3/t9; #38 (A2) t2/t4/t8/t9; #39 (A2) t13/t15/t19/t27; #45 (A3) t16; #46 (A3) t2/t4/t9/t10/t12; #47 (A3) t3/t14/t15; #48 (A3) t2/t15; #49 (A3) t6/t7/t11/t13; #54 (A3) t17; #56 (A3) t8; #61 (A3) t3; #63 (A3) t1/t19; #67 (A4) t16; #69 (A4) t5/t6/t8; #70 (A4) t1/t2/t9; #71 (A4) t2/t3/t10; #72 (A4) t1/t6; #73 (A4) t5; #75 (A4) t6/t8; #80 (A4) t1; #81 (A4) t8/t14/t19; #85 (A4) t1; #86 (A4) t1; #87 (A4) t2/t13; #88 (A4) t2/t4/t18; #90 (A5) t3/t4/t6/t15/t18; #91 (A5) t5/t22; #92 (A5) t15; #93 (A5) t6/t20; #98 (A5) t2/t7/t8/t12/t16/t26; #99 (A5) t2; #101 (A5) t9; #102 (A5) t1/t2/t10/t11/t30; #103 (A5) t20/t23; #105 (A5) t11/t21; #106 (A5) t17/t19/t21; #107 (A5) t16; #111 (A6) t16/t20/t21/t22/t25; #112 (A6) t1/t7; #113 (A6) t3/t13/t15/t17/t20/t25/t27; #115 (A6) t15; #116 (A6) t10/t17; #117 (A6) t1/t7; #119 (A6) t2; #120 (A6) t6/t11/t15; #125 (A6) t6; #126 (A6) t18; #135 (A7) t9/t19/t25; #137 (A7) t15/t16; #139 (A7) t2/t3/t4; #140 (A7) t3/t8; #144 (A7) t2/t3; #145 (A7) t3; #148 (A7) t3/t6/t12/t14; #149 (A7) t1/t7; #152 (A7) t7; #156 (A8) t7/t19/t20/t23; #159 (A8) t5; #160 (A8) t12/t14; #164 (A8) t11/t14/t16/t20; #167 (A8) t1/t4/t5/t9/t27; #169 (A8) t3; #170 (A8) t17; #178 (A9) t5/t8/t11/t15; #179 (A9) t2; #181 (A9) t2/t19; #183 (A9) t13; #186 (A9) t7; #188 (A9) t9/t10/t12; #189 (A9) t1/t2/t3/t5/t13/t27; #192 (A9) t9/t27; #193 (A9) t9/t10; #194 (A9) t1/t6; #195 (A9) t16
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel blocked) + OWNER ACTION (provider capacity)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified + OWNER ACTION (provider capacity)
 - Fix: The Groq call failed (provider=degraded, 442 of 3,832 replies). Not a code path this pass can fix: provider quota/rate limits are Groq-console/GROQ_API_KEY configuration (CLAUDE.md, owner 2026-09-25). No code change. **2026-10-07 pass (2350ff6):** With every provider down, the concept's own authored explanation that the learner has not yet seen is served instead of the outage copy (chat: `findUnseenExplanationContent` in the all-providers-down branch, which then does not count as an outage turn; lesson-init: the authored explanation opens the lesson under its title). The outage copy remains only when no unseen authored explanation is left. Provider capacity itself (Gemini credits, OPENROUTER_API_KEY, Groq tier) is still an owner action. Test: src/tests/remainingDefectFixes20261007.test.ts.
 
 ### ENGL-003 — A card answer gets no verdict: the reply is a definition, an unrelated explanation or a stock line instead of right/wrong
@@ -143,7 +143,7 @@ P0 = learning completely blocked · P1 = seriously damages learning/trust · P2 
 - Reproducibility: Counted automatically (reply to a card answer without any verdict wording).
 - Also observed (80 occurrences in 67 lessons): #2 (A1) t15/t19/t21; #4 (A1) t4; #6 (A1) t7; #10 (A1) t17; #11 (A1) t4; #18 (A1) t3; #19 (A1) t4; #21 (A1) t3; #199 (A10) t15; #201 (A10) t7; #207 (A10) t4; #210 (A10) t12; #25 (A2) t8; #26 (A2) t7; #27 (A2) t4/t16; #31 (A2) t4; #33 (A2) t5; #34 (A2) t7; #42 (A2) t3; #45 (A3) t4/t14; #50 (A3) t4; #55 (A3) t5; #57 (A3) t3; #63 (A3) t13; #64 (A3) t4/t13; #65 (A3) t12; #68 (A4) t5; #83 (A4) t8; #84 (A4) t3; #89 (A5) t5; #90 (A5) t8; #94 (A5) t3; #98 (A5) t18; #99 (A5) t4; #100 (A5) t4/t10; #101 (A5) t4/t8; #103 (A5) t9; #105 (A5) t13/t17; #106 (A5) t4/t10; #107 (A5) t5; #110 (A5) t4; #111 (A6) t4/t12; #114 (A6) t8; #115 (A6) t12; #118 (A6) t3; #121 (A6) t22; #122 (A6) t9; #124 (A6) t5; #125 (A6) t3; #129 (A6) t4; #132 (A6) t4; #134 (A7) t4; #135 (A7) t4/t11/t13/t21; #138 (A7) t10; #140 (A7) t10; #144 (A7) t4; #150 (A7) t7; #153 (A7) t10; #157 (A8) t5; #164 (A8) t23; #166 (A8) t8; #172 (A8) t3; #177 (A9) t5; #181 (A9) t8; #185 (A9) t10; #188 (A9) t15; #190 (A9) t4
 - Related defect: —
-- Status: FIXED IN REPO — awaiting deployment (Vercel has built nothing since 05b7868, 2026-10-06 10:08 UTC; pushes of afa7322, 532055e and 6ff5a40 started no build)
+- Status: DEPLOYED — live on production since 2026-10-09 (deploy of a9ef53d, READY, aliased my-tutor-flame.vercel.app); not production-verified
 - Fix: Two parts. (1) 532055e (MATH-002 residual): a regeneration that erased the server verdict gets it back. (2) 6ff5a40: several fallbacks that run AFTER that hygiene pass (question-delivery contract, withheld-question and figure fallbacks) replace the whole reply with the concept's KG description, erasing the restored verdict (#2 t15, production row: provider groq, DETECT_MISCONCEPTION). One final guard just before the reply ships now puts the authored-key verdict in front of any model-written reply on a graded turn that states none. Test: src/tests/englishRealLearnerFixes.test.ts (ENGL-003 / ENGL-007). Production-verified: no.
 
 ### ENGL-004 — The same card is shown again word for word within one lesson
@@ -162,7 +162,7 @@ P0 = learning completely blocked · P1 = seriously damages learning/trust · P2 
 - Reproducibility: Counted automatically.
 - Also observed (208 occurrences in 89 lessons): #5 (A1) t14/t15/t16; #7 (A1) t9/t10/t11; #12 (A1) t17/t18/t19/t20.5; #15 (A1) t22; #16 (A1) t12/t13.5; #18 (A1) t10.5; #21 (A1) t14/t15; #199 (A10) t18.5; #200 (A10) t15.5; #201 (A10) t12.5; #208 (A10) t28/t29.5; #209 (A10) t13/t14/t15.5; #210 (A10) t16/t17.5; #211 (A10) t18.5; #212 (A10) t24.5; #213 (A10) t16.5; #215 (A10) t18.5; #216 (A10) t9; #28 (A2) t20/t21/t22/t23/t24; #30 (A2) t10/t11.5; #32 (A2) t9/t10/t11; #34 (A2) t18/t19.5; #35 (A2) t23/t27; #36 (A2) t14/t15/t16; #37 (A2) t22/t25; #40 (A2) t15/t16/t17/t18; #47 (A3) t21/t22/t23/t24.5; #50 (A3) t20/t21/t25.5; #55 (A3) t18; #66 (A3) t15/t16/t17.5; #69 (A4) t21/t22/t23/t24/t25.5; #71 (A4) t17/t18/t19.5; #72 (A4) t10/t11/t12.5; #73 (A4) t16.5; #74 (A4) t11.5; #75 (A4) t18.5; #78 (A4) t16/t17/t18/t19.5; #79 (A4) t13/t14.5; #84 (A4) t10/t11/t12.5; #85 (A4) t18/t19/t20/t21; #91 (A5) t17/t18/t19; #94 (A5) t10/t11; #99 (A5) t11/t12; #100 (A5) t13.5; #101 (A5) t15/t16.5; #102 (A5) t26; #103 (A5) t26; #108 (A5) t10/t11/t12.5; #109 (A5) t13/t14.5; #113 (A6) t30; #115 (A6) t28/t29.5; #116 (A6) t24/t25/t26/t27; #117 (A6) t13/t14/t15.5; #118 (A6) t12.5; #119 (A6) t14.5; #123 (A6) t14.5; #126 (A6) t9/t10/t11; #127 (A6) t13.5; #138 (A7) t13/t14/t15/t16; #139 (A7) t12/t13; #140 (A7) t20/t21/t22/t23.5; #141 (A7) t16/t17/t18/t19/t20.5; #142 (A7) t17/t18/t19; #143 (A7) t14/t21/t22/t23/t24; #144 (A7) t7/t16/t17.5; #148 (A7) t27/t28.5; #149 (A7) t22/t23/t24.5; #151 (A7) t11/t12.5; #152 (A7) t14.5; #153 (A7) t18/t19.5; #154 (A7) t23/t24.5; #156 (A8) t16/t26; #157 (A8) t12/t13/t14.5; #160 (A8) t22/t23.5; #164 (A8) t29; #166 (A8) t13/t14.5; #167 (A8) t23/t29; #168 (A8) t13.5; #169 (A8) t18/t19.5; #170 (A8) t15; #171 (A8) t16.5; #174 (A8) t14/t15/t16/t17/t18; #175 (A8) t9/t10.5; #180 (A9) t12; #182 (A9) t9/t10/t11; #189 (A9) t22/t23/t24/t25; #192 (A9) t19/t20/t21/t22/t23; #193 (A9) t17/t18/t19/t20.5; #198 (A9) t21/t22/t23.5
 - Related defect: —
-- Status: NOT A DEFECT — owner-decided single re-ask (as MATH-003); cross-lesson part FIXED IN REPO (afa7322), awaiting deployment (Vercel has built nothing since 05b7868, 2026-10-06 10:08 UTC; pushes of afa7322, 532055e and 6ff5a40 started no build)
+- Status: NOT A DEFECT — owner-decided single re-ask (as MATH-003); cross-lesson part (afa7322) DEPLOYED 2026-10-09 with a9ef53d, not production-verified
 - Fix: Production evidence_events (PROBE_OUTCOME, 23:30–06:40 UTC, English): 1,081 card/session pairs graded once, 157 twice, 15 three or four times. All 15 of the 3–4× pairs are grades hours apart (e.g. 23:35, 02:48, 03:18) — the account's one shared session re-entered for the concurrency probes and later lessons, not a repeat inside one lesson attempt. Within a lesson no card was graded more than twice = the owner-decided single re-ask after the pool runs dry (teachingHistory.recordMcqOutcome option (c)). The answered-card return across a lesson switch is CHEM-033 (afa7322). No code change this pass.
 
 ### ENGL-005 — Canned empathy openers unrelated to what the learner wrote ("I hear you’re feeling stuck, so let’s…")
@@ -181,7 +181,7 @@ P0 = learning completely blocked · P1 = seriously damages learning/trust · P2 
 - Reproducibility: Counted automatically.
 - Also observed (228 occurrences in 136 lessons): #1 (A1) t2/t21; #2 (A1) t7/t16/t23; #3 (A1) t19; #5 (A1) t2; #8 (A1) t6/t13; #10 (A1) t6/t14/t23/t24; #11 (A1) t14; #13 (A1) t3; #14 (A1) t12; #15 (A1) t8; #17 (A1) t10; #21 (A1) t6; #199 (A10) t12; #200 (A10) t2; #202 (A10) t7/t16/t17/t18; #203 (A10) t15; #204 (A10) t4; #205 (A10) t24; #207 (A10) t9/t17; #208 (A10) t8/t17/t25; #210 (A10) t2/t10; #211 (A10) t3/t6/t12; #212 (A10) t2/t7/t16; #214 (A10) t7/t12; #215 (A10) t3; #216 (A10) t17; #25 (A2) t15; #26 (A2) t19; #27 (A2) t12; #28 (A2) t11; #29 (A2) t10/t17; #30 (A2) t2; #33 (A2) t8/t13; #35 (A2) t18; #36 (A2) t18; #37 (A2) t11/t16; #38 (A2) t19; #39 (A2) t16; #40 (A2) t21; #41 (A2) t11/t17; #42 (A2) t7/t8/t10; #45 (A3) t7/t9; #46 (A3) t10/t17; #47 (A3) t11; #48 (A3) t4/t20; #49 (A3) t6; #53 (A3) t10; #54 (A3) t21; #55 (A3) t20; #58 (A3) t9/t16/t20; #63 (A3) t3/t16; #64 (A3) t15/t19; #65 (A3) t3; #66 (A3) t9/t10; #67 (A4) t18; #68 (A4) t3; #69 (A4) t2; #70 (A4) t14/t15; #73 (A4) t2; #75 (A4) t11; #80 (A4) t4; #81 (A4) t13/t18/t20; #83 (A4) t2/t4; #85 (A4) t10; #87 (A4) t10; #89 (A5) t3; #90 (A5) t2/t14/t19/t24; #91 (A5) t2; #92 (A5) t8; #93 (A5) t2/t7/t18/t23; #94 (A5) t14; #98 (A5) t8/t22/t26; #102 (A5) t4/t17/t29; #105 (A5) t9/t20; #106 (A5) t2/t18; #107 (A5) t21; #109 (A5) t8; #111 (A6) t10/t23; #112 (A6) t12; #113 (A6) t8/t14/t23/t28; #114 (A6) t3; #115 (A6) t8/t16; #116 (A6) t8/t15; #119 (A6) t9; #120 (A6) t2/t23; #121 (A6) t11/t26; #122 (A6) t2/t3/t4; #123 (A6) t6; #124 (A6) t2; #127 (A6) t5; #130 (A6) t17; #135 (A7) t15/t23; #137 (A7) t8; #138 (A7) t8/t18/t22; #140 (A7) t2; #141 (A7) t12; #142 (A7) t4; #143 (A7) t4/t9/t17; #146 (A7) t9; #147 (A7) t2/t4; #148 (A7) t9/t18; #149 (A7) t3/t11/t13; #150 (A7) t4; #152 (A7) t3/t8; #153 (A7) t4; #154 (A7) t6/t19; #155 (A8) t3; #156 (A8) t20; #159 (A8) t2/t4/t23; #160 (A8) t9/t16; #161 (A8) t7/t13/t18; #163 (A8) t2/t7; #164 (A8) t13/t18/t24; #167 (A8) t26; #168 (A8) t11; #169 (A8) t2; #171 (A8) t3/t10; #172 (A8) t6/t18; #177 (A9) t8/t10; #178 (A9) t11/t19; #180 (A9) t3; #181 (A9) t18/t22; #183 (A9) t7; #185 (A9) t17; #187 (A9) t5; #188 (A9) t18; #189 (A9) t10/t28; #190 (A9) t16; #191 (A9) t19; #192 (A9) t10/t13/t28; #193 (A9) t7/t8/t10; #194 (A9) t2/t9; #195 (A9) t12; #196 (A9) t8/t10; #197 (A9) t10; #198 (A9) t8/t10/t11
 - Related defect: —
-- Status: FIXED IN REPO — awaiting deployment (Vercel has built nothing since 05b7868, 2026-10-06 10:08 UTC; pushes of afa7322, 532055e and 6ff5a40 started no build)
+- Status: DEPLOYED — live on production since 2026-10-09 (deploy of a9ef53d, READY, aliased my-tutor-flame.vercel.app); not production-verified
 - Fix: Shared mechanism MATH-017 (532055e): the empathy cap is re-applied after the shape/picture regenerations, so a second stock opener within four replies is stripped. Test: src/tests/englishRealLearnerFixes.test.ts (ENGL-005). Production-verified: no.
 
 ### ENGL-006 — "i dont know" / "i dont understand" is answered with empathy and then a bare list of options or nothing useful
@@ -200,7 +200,7 @@ P0 = learning completely blocked · P1 = seriously damages learning/trust · P2 
 - Reproducibility: Counted automatically.
 - Also observed (7 occurrences in 6 lessons): #208 (A10) t17/t25; #29 (A2) t10; #36 (A2) t18; #58 (A3) t9; #102 (A5) t17; #135 (A7) t15
 - Related defect: —
-- Status: FIXED IN REPO — awaiting deployment (Vercel has built nothing since 05b7868, 2026-10-06 10:08 UTC; pushes of afa7322, 532055e and 6ff5a40 started no build)
+- Status: DEPLOYED — live on production since 2026-10-09 (deploy of a9ef53d, READY, aliased my-tutor-flame.vercel.app); not production-verified
 - Fix: Shared mechanism MATH-004/016 (532055e): on a help turn ("i dont know", "i dont understand") a comfort-only or option-dump reply is a stub and is replaced by an unseen authored explanation (else one regeneration kept only if it teaches). Test: src/tests/englishRealLearnerFixes.test.ts (ENGL-006). Production-verified: no.
 
 ### ENGL-007 — The raw curriculum goal / description is returned as the tutor reply
@@ -219,7 +219,7 @@ P0 = learning completely blocked · P1 = seriously damages learning/trust · P2 
 - Reproducibility: Counted automatically.
 - Also observed (14 occurrences in 12 lessons): #2 (A1) t15; #5 (A1) t4; #212 (A10) t4; #216 (A10) t16; #28 (A2) t12; #75 (A4) t7; #85 (A4) t4; #87 (A4) t22; #106 (A5) t14; #147 (A7) t15; #150 (A7) t5; #198 (A9) t15
 - Related defect: —
-- Status: FIXED IN REPO — awaiting deployment (Vercel has built nothing since 05b7868, 2026-10-06 10:08 UTC; pushes of afa7322, 532055e and 6ff5a40 started no build)
+- Status: DEPLOYED — live on production since 2026-10-09 (deploy of a9ef53d, READY, aliased my-tutor-flame.vercel.app); not production-verified
 - Fix: Same root cause as ENGL-003 part (2): the KG description is the final fallback of several repairs; on a card-answer turn it shipped as the whole reply. Fixed by the final verdict guard in 6ff5a40 (the description may still follow the verdict when nothing else survived). Help turns: MATH-023 teaching floor (532055e). Test: src/tests/englishRealLearnerFixes.test.ts. Production-verified: no.
 
 ### ENGL-008 — "explain simpler / again / too many words" is answered with a new everyday analogy each time instead of simpler language
@@ -238,7 +238,7 @@ P0 = learning completely blocked · P1 = seriously damages learning/trust · P2 
 - Reproducibility: Counted automatically (3+ analogy replies in one lesson).
 - Also observed (30 occurrences in 30 lessons): #1 (A1) t-; #2 (A1) t-; #14 (A1) t-; #15 (A1) t-; #17 (A1) t-; #203 (A10) t-; #208 (A10) t-; #214 (A10) t-; #37 (A2) t-; #38 (A2) t-; #39 (A2) t-; #42 (A2) t-; #58 (A3) t-; #64 (A3) t-; #69 (A4) t-; #70 (A4) t-; #102 (A5) t-; #105 (A5) t-; #111 (A6) t-; #115 (A6) t-; #120 (A6) t-; #121 (A6) t-; #135 (A7) t-; #148 (A7) t-; #156 (A8) t-; #159 (A8) t-; #161 (A8) t-; #164 (A8) t-; #178 (A9) t-; #190 (A9) t-
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel has built nothing since 05b7868, 2026-10-06 10:08 UTC; pushes of afa7322, 532055e and 6ff5a40 started no build)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: MATH-018's analogy cap (532055e) applied to mathematics only (cap 1 in 4 replies); every other subject kept 2. 6ff5a40 applies cap 1 to english: a second analogy within four replies triggers one regeneration with no analogy, kept only if it complies. Partial: one analogy per four replies is still allowed, and a regeneration that fails is not shipped in place. Test: src/tests/englishRealLearnerFixes.test.ts (ENGL-008). Production-verified: no.
 
 ### ENGL-009 — Lesson opens with a content-free fragment or a line that assumes context never given ("That’s exactly right…", "Imagine hearing the short sentence…" with nothing following)
@@ -257,7 +257,7 @@ P0 = learning completely blocked · P1 = seriously damages learning/trust · P2 
 - Reproducibility: Counted automatically (openers under 170 characters or opening with a verdict).
 - Also observed (16 occurrences in 16 lessons): #16 (A1) t1; #18 (A1) t1; #20 (A1) t1; #24 (A2) t1; #35 (A2) t1; #64 (A3) t1; #89 (A5) t1; #105 (A5) t1; #111 (A6) t1; #124 (A6) t1; #132 (A6) t1; #133 (A7) t1; #138 (A7) t1; #154 (A7) t1; #168 (A8) t1; #158 (A8) t1
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel has built nothing since 05b7868, 2026-10-06 10:08 UTC; pushes of afa7322, 532055e and 6ff5a40 started no build)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: Shared MATH-009 (532055e): the lesson's first "ok" is owed the lesson — a stub, an orphan "If not, …" opener or a lone figure pointer is replaced by authored teaching. Not covered: a 20–30-word opener that does teach a little ("Imagine hearing … 'I wanna go'.") is not a stub by the floor's rule. Production-verified: no.
 
 ### ENGL-010 — "show me step by step" / "give me example" is answered with a new question instead of the steps or the example
@@ -276,7 +276,7 @@ P0 = learning completely blocked · P1 = seriously damages learning/trust · P2 
 - Reproducibility: Counted automatically.
 - Also observed (3 occurrences in 3 lessons): #35 (A2) t22; #70 (A4) t2; #112 (A6) t2
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel has built nothing since 05b7868, 2026-10-06 10:08 UTC; pushes of afa7322, 532055e and 6ff5a40 started no build)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: Shared MATH-005 (532055e): a reply that is nothing but a counter-question is a stub on a help turn and is replaced by an authored worked example (preferred for "step by step"/"example"). Not covered: #70's shape — one example sentence followed by a question — is not a stub. Test: src/tests/englishRealLearnerFixes.test.ts (ENGL-010). Production-verified: no.
 
 ### ENGL-011 — Tutor addresses the learner by the account login label ("test", "test10")
@@ -295,7 +295,7 @@ P0 = learning completely blocked · P1 = seriously damages learning/trust · P2 
 - Reproducibility: Counted automatically.
 - Also observed (8 occurrences in 8 lessons): #11 (A1) t16; #202 (A10) t2; #205 (A10) t24; #209 (A10) t1; #47 (A3) t17; #120 (A6) t8; #135 (A7) t1; #141 (A7) t1
 - Related defect: —
-- Status: FIXED IN REPO — awaiting deployment (Vercel has built nothing since 05b7868, 2026-10-06 10:08 UTC; pushes of afa7322, 532055e and 6ff5a40 started no build)
+- Status: DEPLOYED — live on production since 2026-10-09 (deploy of a9ef53d, READY, aliased my-tutor-flame.vercel.app); not production-verified
 - Fix: Shared MATH-028 (532055e): a handle-like display name ("test", "test10", digits, @ _ .) is never given to the tutor as a name. Test: src/tests/englishRealLearnerFixes.test.ts (ENGL-011). Production-verified: no.
 
 ### ENGL-012 — Quoted example text is missing from replies, leaving orphan quotation marks ("” – they look for clues…", "1.” 2. Sam…")
@@ -314,7 +314,7 @@ P0 = learning completely blocked · P1 = seriously damages learning/trust · P2 
 - Reproducibility: Counted automatically (orphan quotation marks in replies).
 - Also observed (5 occurrences in 5 lessons): #3 (A1) t16; #215 (A10) t6; #63 (A3) t11; #92 (A5) t15; #138 (A7) t10
 - Related defect: —
-- Status: FIXED IN REPO — awaiting deployment (Vercel has built nothing since 05b7868, 2026-10-06 10:08 UTC; pushes of afa7322, 532055e and 6ff5a40 started no build)
+- Status: DEPLOYED — live on production since 2026-10-09 (deploy of a9ef53d, READY, aliased my-tutor-flame.vercel.app); not production-verified
 - Fix: Root cause reproduced locally from the production row of #185: confirmBackRepair.dropQuestionSentences (the no-question repair beside a card) split sentences on every "?", including one inside a quoted example (“What was happening when this was written?”), and dropped the text from the sentence start to that "?", leaving the closing ” — exactly "” – they look for clues…" and "1.” 2. Sam…". 6ff5a40 masks quoted spans on one line before the split; questions to the learner still go. Test: src/tests/englishRealLearnerFixes.test.ts (ENGL-012). Production-verified: no.
 
 ### ENGL-013 — Tutor says "There is no picture in this lesson yet" although the lesson does carry a figure
@@ -333,7 +333,7 @@ P0 = learning completely blocked · P1 = seriously damages learning/trust · P2 
 - Reproducibility: Counted automatically (13 turns across lessons).
 - Also observed (13 occurrences in 6 lessons): #11 (A1) t20; #14 (A1) t18; #15 (A1) t2/t20/t26; #102 (A5) t19/t24/t30; #116 (A6) t19; #121 (A6) t20/t27
 - Related defect: —
-- Status: FIXED IN REPO — awaiting deployment (Vercel has built nothing since 05b7868, 2026-10-06 10:08 UTC; pushes of afa7322, 532055e and 6ff5a40 started no build)
+- Status: DEPLOYED — live on production since 2026-10-09 (deploy of a9ef53d, READY, aliased my-tutor-flame.vercel.app); not production-verified
 - Fix: Shared MATH-019 (532055e): the "no picture in this lesson yet" rewrite now checks the rendered-reality log, so a figure already shown for the concept is never denied. Test: src/tests/englishRealLearnerFixes.test.ts (ENGL-013). Production-verified: no.
 
 ### ENGL-014 — Asked "why?", the tutor explains its own internal instruction ("that placeholder was just a reminder to avoid repeating the exact same explanation") instead of the lesson
@@ -352,7 +352,7 @@ P0 = learning completely blocked · P1 = seriously damages learning/trust · P2 
 - Reproducibility: Seen once (lesson 152 turn 8); not reproduced.
 - Also observed (1 occurrence in 1 lesson): #152 (A7) t8
 - Related defect: —
-- Status: FIXED IN REPO — awaiting deployment (Vercel has built nothing since 05b7868, 2026-10-06 10:08 UTC; pushes of afa7322, 532055e and 6ff5a40 started no build)
+- Status: DEPLOYED — live on production since 2026-10-09 (deploy of a9ef53d, READY, aliased my-tutor-flame.vercel.app); not production-verified
 - Fix: The meta-talk stripper (reuseCaps.stripMetaTalk, BIO-001/MATH-021) did not know "that placeholder was …" or "the exact same explanation". 6ff5a40 adds both shapes; the sentence goes, the teaching stays. Test: src/tests/englishRealLearnerFixes.test.ts (ENGL-014). Production-verified: no.
 
 ### ENGL-015 — "next question please" is answered with a scene description, not a question
@@ -371,7 +371,7 @@ P0 = learning completely blocked · P1 = seriously damages learning/trust · P2 
 - Reproducibility: 7 instances counted automatically.
 - Also observed (7 occurrences in 7 lessons): #3 (A1) t2; #11 (A1) t16; #208 (A10) t18; #69 (A4) t5; #90 (A5) t17; #126 (A6) t17; #195 (A9) t8
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel has built nothing since 05b7868, 2026-10-06 10:08 UTC; pushes of afa7322, 532055e and 6ff5a40 started no build)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: Shared MATH-020 (532055e): "next question please" is a practice request, and a stub reply on it is replaced by authored teaching. Not covered: a one-sentence scene setup of ≥12 words is not a stub, and no card is forced. Production-verified: no.
 
 ### ENGL-016 — Process-flow figures: step text spills over the number badge and past the box edges; some badges are empty with the number outside the circle
@@ -390,7 +390,7 @@ P0 = learning completely blocked · P1 = seriously damages learning/trust · P2 
 - Reproducibility: Rendered in a local harness from captured payloads; 49 lessons carry process_flow figures; 2 screenshotted (same pattern). Others not screenshotted.
 - Also observed (49 occurrences in 49 lessons): #1 (A1) t-; #2 (A1) t-; #4 (A1) t-; #5 (A1) t-; #11 (A1) t-; #14 (A1) t-; #15 (A1) t-; #203 (A10) t-; #204 (A10) t-; #205 (A10) t-; #206 (A10) t-; #207 (A10) t-; #208 (A10) t-; #209 (A10) t-; #210 (A10) t-; #46 (A3) t-; #47 (A3) t-; #69 (A4) t-; #72 (A4) t-; #73 (A4) t-; #90 (A5) t-; #93 (A5) t-; #94 (A5) t-; #95 (A5) t-; #96 (A5) t-; #97 (A5) t-; #98 (A5) t-; #102 (A5) t-; #111 (A6) t-; #113 (A6) t-; #114 (A6) t-; #115 (A6) t-; #116 (A6) t-; #117 (A6) t-; #118 (A6) t-; #120 (A6) t-; #121 (A6) t-; #133 (A7) t-; #134 (A7) t-; #135 (A7) t-; #155 (A8) t-; #156 (A8) t-; #157 (A8) t-; #158 (A8) t-; #160 (A8) t-; #161 (A8) t-; #163 (A8) t-; #164 (A8) t-; #178 (A9) t-
 - Related defect: MATH-013 (Mathematics, same renderer)
-- Status: FIXED IN REPO — awaiting deployment (Vercel has built nothing since 05b7868, 2026-10-06 10:08 UTC; pushes of afa7322, 532055e and 6ff5a40 started no build)
+- Status: DEPLOYED — live on production since 2026-10-09 (deploy of a9ef53d, READY, aliased my-tutor-flame.vercel.app); not production-verified
 - Fix: Same renderer as MATH-013, fixed in 532055e (text wraps right of the badge, the box grows). Rendered locally (react-dom server render of the app's ProcessFlowRenderer + headless Chromium at 1280 px and 390 px) with the two production payloads (visualization_cache rows for eng.phonics.print-concepts and eng.phonics.blending-segmenting): 0 text over a badge, 0 text past the box, 0 digits outside a badge, 0 empty badges. Limit: static render at the default 360 px figure width, not the live client. Test: src/tests/englishRealLearnerFixes.test.ts (ENGL-016). Production-verified: no.
 
 ### ENGL-017 — Scene figures are sparse and use dark label colours on a dark background (Semantic Fields, Descriptive Writing, Setting and Atmosphere, Translation Studies); intonation graph shows an unlabelled parabola on a -10..10 axis
@@ -410,7 +410,7 @@ P0 = learning completely blocked · P1 = seriously damages learning/trust · P2 
 - Also observed (5 occurrences in 5 lessons): #23 (A2) t3; #48 (A3) t1; #116 (A6) t5; #165 (A8) t3; #202 (A10) t1
 - Notes on occurrences: #23 t3: intonation (screenshot) · #48 t1: semantic (screenshot) · #116 t5: descriptive (screenshot) · #165 t3: setting (screenshot) · #202 t1: translation (screenshot)
 - Related defect: —
-- Status: PARTIALLY FIXED IN REPO — awaiting deployment (Vercel has built nothing since 05b7868, 2026-10-06 10:08 UTC; pushes of afa7322, 532055e and 6ff5a40 started no build)
+- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
 - Fix: Production payload (visualization_cache scene:v1:fig:eng.vocab.semantic-fields) colours labels with CSS names "red"/"blue", which themeColor passes through: #0000ff on the #243329 board is ~1.6:1. 6ff5a40: SceneLabel (the one leaf every scene label uses) lifts label text to ≥4.5:1 against the figure surface in both themes; mesh colours unchanged. Intonation: the cached "0.5x + 200" pitch graph is now refused as nothing-drawable by the existing check; a generated graph with a time x-axis and no domain opens on 0…10 (visualEngine), and the axis-name/zoom overlap was fixed in 532055e (MATH-014). Not fixed: sparse scenes (one sphere, three labels) are model content — no change. Contrast checked numerically, not by a WebGL screenshot. Test: src/tests/englishRealLearnerFixes.test.ts (ENGL-017). Production-verified: no.
 
 ## Systemic observations (counts computed from the transcripts)
