@@ -77,10 +77,17 @@ with no false negatives among the 19 predicted safe.
 ## 4. Repairs
 
 **Shared (renderer / engine)**
-* `layout.ts` + `SceneLabelLayer.tsx` — **wrap-to-fit retry**: if a label has no safe placement at its natural width, the
-  solver retries it wrapped to progressively narrower widths (never narrower than its longest word). Same words, same
-  type size; reached only after the natural box failed, so a figure that already places cleanly is byte-identical (pinned).
-  The renderer paints the width the solver planned; the layout predicate checks that box.
+* `layout.ts` + `SceneLabelLayer.tsx` — **wrap-to-fit retry** in the label solver: if a label has no safe placement at its natural
+  width, retry it wrapped to progressively narrower widths (same words, same type size; a figure that already places cleanly is
+  byte-identical, pinned). The Physics visual campaign landed the same mechanism independently (`fallbacks`: narrower wrap, then a
+  tier step-down, with a fine-grid search, an edge inset and a backing plate on bodies) — a superset — so **at the merge the
+  upstream solver was taken as-is and this duplicate was dropped**; `chemLayoutAndControls.test.ts` pins what Chemistry relies on
+  (placed, inside the canvas, nothing unresolved, untouched when it already fits).
+* `asset.ts` / `figureAudit.ts` — after the merge there are two admission predicates behind the one function: upstream's
+  subject-agnostic `payloadBlockers` runs first, then Chemistry's `chemistryAdmission` (a deterministic FAIL from the chemistry
+  validators). The extended raw-LaTeX marker set (arrows, `\ce`, `\text`, `\mathrm`, brace sub/superscripts; bare `x^2` still
+  not flagged) now lives in upstream's single `containsRawLatex`. Both sides had made the identical `--on-accent` fix to the 3D
+  playback glyph.
 * `layout.ts` `fitSceneToFrame` — **perspective-aware framing**. The fitted camera distance was derived from the geometry's x/y
   extent alone, as if every point sat on the focal plane. A point `z` nearer the camera is magnified by `d/(d−z)`, so the
   ammonia figure (nearest H at z = +6.4, fitted distance 11.5 → 2.25×) lost its third hydrogen and a bond off the top-left
@@ -103,7 +110,7 @@ with no false negatives among the 19 predicted safe.
   overflowed its box and was painted over the stage stepper and legend (now `auto`; the frame's own `overflow: auto`
   scrolls instead, which is what its comment always promised).
 * `parametricScenes.ts` — periodic-trend options derived from the generator's table.
-* `figureCritic.ts` — raw-LaTeX check extended to `\rightarrow \leftrightarrow \to \ce \text \mathrm \left \right` and
+* `figureCritic.ts` / `figureAudit.ts` — raw-LaTeX check extended to `\rightarrow \leftrightarrow \to \ce \text \mathrm \left \right` and
   brace sub/superscripts. **Deliberately not** bare `x^2`/`H_2O`: `figureText()` includes a graph's `equation`, where
   `y = x^2` is the notation the parser compiles (a bare-caret rule would have rejected every quadratic graph in every
   subject; pinned).
@@ -158,30 +165,33 @@ expanded view.
 
 | | PASS | REVIEW_REQUIRED | FAIL |
 |---|---|---|---|
-| **instances** (worst state over viewports/themes), baseline → final | 35 → **43** | 21 → **41** | 26 → **0** |
+| **instances** (worst state over viewports/themes), baseline → final | 35 → **55** | 21 → **29** | 26 → **0** |
 | — cards (5) | 0 → 3 | 0 → 2 | 5 → 0 |
-| — scenes (32) | 7 → 10 | 5 → 22 | 20 → 0 |
-| — interactive variants (47) | 28 → 30 | 16 → 17 | 1 → 0 |
-| rendered states @1280 | 233 → 349 | 64 → 61 | 67 → 0 |
-| rendered states @390 | 215 → 353 | 76 → 57 | 73 → 0 |
-| **all states** | 448 → **702** | 140 → **118** | 140 → **0** |
+| — scenes (32) | 7 → 12 | 5 → 20 | 20 → 0 |
+| — interactive variants (47) | 28 → 40 | 16 → 7 | 1 → 0 |
+| rendered states @1280 | 233 → 375 | 64 → 35 | 67 → 0 |
+| rendered states @390 | 215 → 361 | 76 → 49 | 73 → 0 |
+| **all states** | 448 → **736** | 140 → **84** | 140 → **0** |
 
-(The two columns that grew — REVIEW instances and the matching drop in FAIL — are failures that became *reviewable* findings, not
-failures that were hidden: each category below says what remains and why.)
+(The 81 instances present in both audits: 34 PASS · 21 REVIEW · 26 FAIL → 52 · 29 · 0. Failures became passes or *reviewable* findings;
+each category below says what remains and why.) **This final run is on the merged tree** — after `origin/main` (the Physics visual
+campaign's label solver, backing plates and audit gate) was merged into this work. The identical figures measured *before* the merge
+were 702 PASS · 118 REVIEW · 0 FAIL, so the shared solver the merge brought in also cut the Chemistry contrast reviews from 98 to 61.
 
 Findings by code, baseline → final: `LABEL_COLLISION` fail 153 → **0** (review 57 → 0) · `CLIPPED` fail 126 → **0** ·
-`CONTRAST_LOW` fail 54 → **0** (review 99 → 98) · `CLIPPED_AWAY` 274 → **0** · `FONT_TOO_SMALL` 0 → 0 (minimum effective font
-10.0px, the repo's floor) · `INNER_SCROLL_X` review 0 → 109, **all in the expanded view** (34 states), see R15.
+`CONTRAST_LOW` fail 54 → **0** (review 99 → 61) · `CLIPPED_AWAY` 274 → **0** · `FONT_TOO_SMALL` 0 → 0 (minimum effective font
+10.0px, the repo's floor) · `INNER_SCROLL_X` review 0 → 109, **all in the expanded view** (34 states, 18 instances), see R15.
 
-What the 118 REVIEW states are: 34 are the expanded view scrolling (R15); the rest are `CONTRAST_LOW` review where the glyph sits on a
-saturated 3D fill or carries a halo (R16). **No state is REVIEW or FAIL for an overlapping, clipped, unreadable or off-canvas label.**
+What the 84 REVIEW states are: 34 are the expanded view scrolling (R15); the rest are `CONTRAST_LOW` review (56 states) where the
+glyph sits on a saturated 3D fill or carries a halo (R16; ratios 2.13–4.49:1). **No state is REVIEW or FAIL for an overlapping,
+clipped, unreadable or off-canvas label.**
 
 Contrast tooling note — two harness rules were corrected while auditing, each recorded here because they *reduce* findings:
 (1) contrast sampling is inset past the element's own 1px border (a pill's border `rgba(241,237,226,.10)` over the dark surface is
 `#39463c` and was ≥10% of a small control's pixels, so it counted as a second "background": a false 4.02:1 against the real 5.38:1);
 (2) a failure produced only by a *minority* background bucket, where the dominant in-box background and the surrounding ring both pass,
 is downgraded FAIL → REVIEW (it stays visible, with the reason in the finding). 3 findings were affected by (2); the rest of the
-98 are halo/complex-background reviews that were REVIEW before. `--selftest` still catches all 22 known-bad samples.
+the rest are halo/complex-background reviews that were REVIEW before. `--selftest` still catches all 22 known-bad samples.
 
 The last four label-collision states that survived the first post-fix run were the Born–Haber cycle at 1280px, and a stage-by-stage
 view of the Hess cycle in the expanded frame; both are fixed (second-pass `energyCycle.ts`, §4). The browser also found what no
@@ -196,7 +206,7 @@ REVIEW_REQUIRED · 0 FAIL**. No control builds nothing; the reference tables agr
 | category | what was verified (deterministically, from coordinates / numbers / parsed species) | outcome |
 |---|---|---|
 | **Readability** | no overlapping, clipped or off-canvas label in any of 820 states; minimum effective font 10.0px; **412 of 820 states still carry text under the 12px recommendation** (401 of them at 390px: the phone label tier is 11.5px) | PASS on collisions/clipping; the 11.5px tier is unchanged and is a shared typography decision |
-| **Contrast** | 0 fail-severity findings; amber result text 2.0 → 5.64:1 (light) / 6.86:1 (dark); 3D playback glyph 1.84 → on-accent; 98 REVIEW (halo / saturated fill, R16) | PASS with R16 |
+| **Contrast** | 0 fail-severity findings; amber result text 2.0 → 5.64:1 (light) / 6.86:1 (dark); 3D playback glyph 1.84 → on-accent; 61 REVIEW (halo / saturated fill, R16) | PASS with R16 |
 | **Formulas, charges, subscripts** | every served chemistry figure string typeset (`Zn²⁺`, `NH₃`, `[Ti(H₂O)₆]³⁺`); idempotent; verifiers notation-neutral (parity pinned over all 29 authored scenes); `F-MINUS-MIX` 6 and `F-DOUBLE-SIGN` 4 are info | PASS |
 | **Molecular structures** | single connected component, valence/octet, atom multiset = formula, VSEPR geometry recomputed from coordinates, title geometry and bond-angle label = drawn angle (6 molecules); electron shells: electron count = Z, aufbau occupancy, valence = group (20 elements, all PASS); coordination: geometry from coordinates, ligand counts vs narration, name prefix, oxidation state vs charge, cis/trans from coordinates (13, all PASS); NH₃ and CH₄ now framed with perspective counted | PASS; lone pairs / bond order are **not drawn** (R2), so the molecule figures stay REVIEW |
 | **Reactions** | atom/charge conservation between consecutive levels, ΔU = Q + W (6 first-law figures, arrows follow the sign), EMF sign vs "spontaneous", ΔG = −nFE with integer n, electron flow anode → cathode (19 cells) | verified claims PASS; the 6 first-law figures stay REVIEW (no unit anywhere on the figure, R8) and the 19 cells stay REVIEW because the standard potentials, electrode materials and half-reactions are reference data (R17). The one unbalanced reaction found is a seed *probe*, not a figure (R1) |
@@ -227,8 +237,8 @@ deterministically from the figure:
 | R11 | **Tier 2 (approved) and Tier 3 (generated) figures are not enumerable offline**; none was audited | inventory §1 | needs the production DB / live LLM |
 | R12 | **135 concepts have no figure at all** (123 unbound, 12 retired) | inventory §1 | content authoring programme, out of scope |
 | R13 | Production has **not** been deployed or re-measured | §11 | Vercel has built nothing since `05b7868`; no deploy is claimed |
-| R15 | The **expanded/fullscreen** view scrolls (all 17 instances that offer it, at 1280×800 and 390×844; text below the fold by 6–110px): the chrome around the scene is taller than the window. It used to *not* scroll only because the scene was crushed below its own floor (223×167 at 390px, labels piled up and the stepper painted over). `figureFitsOneViewport.test.ts` pinned `--fig-scene-h: none`; that token was the bug and the pin now says `100vh` | §4 | restoring the documented "scrolling a little beats crushing the picture"; making the chrome shorter (or the scene fill the window and the chrome scroll) is a shared UX change |
-| R16 | **Label text drawn on a saturated 3D fill** (atoms, bars) measures 1.6–2.7:1 against the fill (worst: `Ce³⁺ 101.0 pm` on a blue bar 1.64:1, `C`/`O` on atoms, `DNA`/`RNA`); every one carries a text halo/outline and was read in the screenshots, but WCAG 4.5:1 cannot be met by a glyph on a saturated sphere | §5 | the fix is a design one (label beside the atom, or a plate behind it) in the shared label layer |
+| R15 | The **expanded/fullscreen** view scrolls (the 18 instances that offer it, at 1280×800 and 390×844; text below the fold by 6–110px): the chrome around the scene is taller than the window. It used to *not* scroll only because the scene was crushed below its own floor (223×167 at 390px, labels piled up and the stepper painted over). `figureFitsOneViewport.test.ts` pinned `--fig-scene-h: none`; that token was the bug and the pin now says `100vh` | §4 | restoring the documented "scrolling a little beats crushing the picture"; making the chrome shorter (or the scene fill the window and the chrome scroll) is a shared UX change |
+| R16 | **Label text drawn on a saturated 3D fill** (atoms, bars) measures 2.1–4.5:1 against the fill (worst: the `C` and `O` atom labels, 2.13:1; also `DNA`/`RNA`); every one carries a text halo/outline and was read in the screenshots, but WCAG 4.5:1 cannot be met by a glyph on a saturated sphere | §5 | the fix is a design one (label beside the atom, or a plate behind it) in the shared label layer |
 | R17 | **Reference data inside figures** — ΔH, IE, EA, lattice energy, Δo, standard potentials, boiling points, radii, log K — is checked only for internal consistency (paths agree, arrows follow signs, EMF sign vs spontaneity, bar heights vs labels), never against an authoritative table | §6–7 | there is no authoritative chemistry data source in the repository to verify against; inventing one would be exactly the silent authoring that was forbidden |
 | R18 | **Prose** pathways and comparisons (6 instances: the organometallic cycle and five comparisons) contain chemistry statements — names, conditions, numbers, mechanism steps — that no deterministic check can verify | §6–7 | needs a chemist's read |
 | R19 | **Five fixed React-component cards** (atomic structure, electron shells, bond formation, molecular shapes, crystal lattice) — their internal content is not inspectable from the payload (`U-CARD`); they were rendered and measured as pixels only | §6–7 | no payload to audit |

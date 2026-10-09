@@ -3,8 +3,9 @@
 Full record, numbers and the REVIEW_REQUIRED list: `docs/qa/CHEMISTRY_VISUAL_QUALITY_AUDIT.md`. This file keeps the
 things a future session must not have to rediscover.
 
-**Final measured state (complete re-render on the final code):** baseline 728 states / 82 instances = 448 PASS · 140 REVIEW ·
-**140 FAIL** → final 820 states / 84 instances = **702 PASS · 118 REVIEW · 0 FAIL** (instances 35/21/26 → 43/41/0).
+**Final measured state (complete re-render on the final, merged code):** baseline 728 states / 82 instances = 448 PASS · 140 REVIEW ·
+**140 FAIL** → final 820 states / 84 instances = **736 PASS · 84 REVIEW · 0 FAIL** (instances 35/21/26 → 55/29/0). The same figures
+before merging `origin/main` (the Physics campaign's shared label solver) were 702/118/0.
 Chemistry-semantic: 374 instances, 238 PASS · 136 REVIEW · 0 FAIL. Not committed to production by this pass (see QA doc §11).
 
 ## What was built (permanent)
@@ -45,6 +46,11 @@ Chemistry-semantic: 374 instances, 238 PASS · 136 REVIEW · 0 FAIL. Not committ
   off a 282px phone canvas; the right-hand offset therefore stays at the bar edge.
 * Contrast sampling must exclude the control's own border (it is a "second background" otherwise), and a failure produced only
   by a minority background bucket while the dominant background and the ring both pass is REVIEW, not FAIL.
+* **Two campaigns edited the same shared files in parallel** (the Physics visual audit and this one: `layout.ts`, `asset.ts`,
+  `figureCritic.ts`, `SceneLabelLayer.tsx`, `VisualPlaybackControls.tsx`) and had independently built the same wrap-to-fit label
+  solver and the same `--on-accent` fix. Fetch `origin/main` before starting shared-renderer work, not only before pushing; at
+  the merge the upstream solver (a superset) won and the duplicate was dropped. Re-run the browser audit after a merge — the
+  shared solver changed what Chemistry looks like (contrast reviews 98 → 61).
 * The pin `figureFitsOneViewport.test.ts` asserted `--fig-scene-h: none`; the pinned value was the bug. Read what a test pins
   before treating it as a requirement.
 
