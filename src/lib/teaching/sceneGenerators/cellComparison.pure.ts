@@ -30,6 +30,13 @@ export interface CellComparisonParams {
   title: string
   teachingGoal: string
   groups: readonly ComparisonGroup[]
+  /**
+   * Put the groups on two rows from this many groups up. Omitted = `GRID_FROM_GROUPS_LEGACY` (5), so every existing
+   * non-Biology figure is byte-identical; Biology figures ignore it (they always use the grid from THREE). A caller whose item text is long sets it lower: four
+   * columns of 40-character clauses anchored ~85px apart on a 282px phone canvas leave no free space at all
+   * (measured in Chromium, 2026-10-08: real-gases and phase-diagram labels cut off at the canvas edge).
+   */
+  gridFromGroups?: number
 }
 
 // Six, not four: nine Biology comparisons have five or six groups (the five
@@ -57,6 +64,8 @@ const ITEM_PITCH = ITEM_SPACING * 1.6
 const GRID_FROM_GROUPS_BIO = 3
 const GRID_FROM_GROUPS_LEGACY = 5
 const GRID_COLUMN_SPACING = 6.5
+/** Two columns have the whole canvas width between them, so each can be given twice the room of a column in a 3-wide grid (non-Biology). */
+const GRID_TWO_COLUMN_SPACING = 10
 const GRID_ROW_GAP_LEGACY = 1.8
 const GRID_CAMERA_DISTANCE = 20
 
@@ -86,7 +95,7 @@ const SLOT_PAD = 0.9
 /** Clear space between the header's stub and the top of the first item caption. */
 const FIRST_ITEM_CLEAR = 1.2
 /** Two-column grids (three or four groups) are spaced wider: their captions wrap to a column of this pitch. */
-const GRID_TWO_COLUMN_SPACING = 11
+const BIO_GRID_TWO_COLUMN_SPACING = 11
 /** Three-column Biology grids (five or six groups): wider than the legacy 6.5 so adjacent columns keep a gutter. */
 const BIO_GRID_THREE_COLUMN_SPACING = 7.2
 /** Gap kept between a column's wrapped captions and the next column's. Under ~1 unit the label solver treated the two
@@ -152,6 +161,7 @@ function placeGroups(groups: readonly ComparisonGroup[], gridFrom: number, rowGa
     return groups.map((_, gi) => ({ x: round(gi * GROUP_SPACING - offset), headerY: 2.5 }))
   }
   const columns = Math.ceil(groups.length / 2)
+  const columnSpacing = columns <= 2 ? GRID_TWO_COLUMN_SPACING : GRID_COLUMN_SPACING
   const maxItems = Math.max(...groups.map((g) => g.items.length))
   const rowHeight = (maxItems + 1) * ITEM_PITCH + rowGap
   // Centre the block vertically: first header to last item.
@@ -160,8 +170,8 @@ function placeGroups(groups: readonly ComparisonGroup[], gridFrom: number, rowGa
     const row = Math.floor(gi / columns)
     const col = gi % columns
     const inRow = Math.min(columns, groups.length - row * columns)
-    const offset = ((inRow - 1) * GRID_COLUMN_SPACING) / 2
-    return { x: round(col * GRID_COLUMN_SPACING - offset), headerY: round(top - row * rowHeight) }
+    const offset = ((inRow - 1) * columnSpacing) / 2
+    return { x: round(col * columnSpacing - offset), headerY: round(top - row * rowHeight) }
   })
 }
 
@@ -172,7 +182,7 @@ function placeGroupsBio(groups: readonly ComparisonGroup[], layouts: readonly { 
     return groups.map((_, gi) => ({ x: round(gi * BIO_PAIR_SPACING - offset), headerY: 2.5 }))
   }
   const columns = Math.ceil(groups.length / 2)
-  const pitch = columns <= 2 ? GRID_TWO_COLUMN_SPACING : BIO_GRID_THREE_COLUMN_SPACING
+  const pitch = columns <= 2 ? BIO_GRID_TWO_COLUMN_SPACING : BIO_GRID_THREE_COLUMN_SPACING
   const rows = Math.ceil(groups.length / columns)
   const rowHeights = Array.from({ length: rows }, (_, r) =>
     Math.max(...groups.slice(r * columns, (r + 1) * columns).map((_, k) => layouts[r * columns + k].bottom)) + HEADER_CLEAR + 0.8)
@@ -190,9 +200,10 @@ function placeGroupsBio(groups: readonly ComparisonGroup[], layouts: readonly { 
 export function buildCellComparisonScene(params: CellComparisonParams): SceneSpec {
   const { conceptId, title, teachingGoal, groups } = params
   const bio = isBiologyScene(conceptId)
-  const gridFrom = bio ? GRID_FROM_GROUPS_BIO : GRID_FROM_GROUPS_LEGACY
+  // A non-Biology caller whose item text is long may ask for the grid earlier (`gridFromGroups`); Biology figures always use THREE.
+  const gridFrom = bio ? GRID_FROM_GROUPS_BIO : (params.gridFromGroups ?? GRID_FROM_GROUPS_LEGACY)
   const inGrid = groups.length >= gridFrom
-  const columnPitch = !inGrid ? (bio ? BIO_PAIR_SPACING : GROUP_SPACING) : (columnsFor(groups.length, gridFrom) <= 2 ? GRID_TWO_COLUMN_SPACING : (bio ? BIO_GRID_THREE_COLUMN_SPACING : GRID_COLUMN_SPACING))
+  const columnPitch = !inGrid ? (bio ? BIO_PAIR_SPACING : GROUP_SPACING) : (columnsFor(groups.length, gridFrom) <= 2 ? (bio ? BIO_GRID_TWO_COLUMN_SPACING : GRID_TWO_COLUMN_SPACING) : (bio ? BIO_GRID_THREE_COLUMN_SPACING : GRID_COLUMN_SPACING))
   const wrapUnits = round(columnPitch - (bio ? BIO_COLUMN_GUTTER : 0.8))
   // Two groups compare item by item: item k of one beside item k of the other, each row as tall as the taller caption.
   const pair = bio && !inGrid

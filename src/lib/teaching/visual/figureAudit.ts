@@ -182,7 +182,17 @@ const isDecorAxisLetter = (t: AuditText) => t.region === 'scene-label' && /^[xyz
  * `figureCritic` re-exports it, so the generated-figure critic and the audit
  * cannot disagree about what counts.)
  */
-const LATEX_MARKERS = /\\(?:frac|sqrt|cdot|times|alpha|beta|gamma|theta|pi|mu|Delta|sum|int)\b|\$[^$]+\$|\\\(|\\\[/
+const LATEX_MARKERS = new RegExp([
+  // commands (maths, and the chemistry ones that appeared in generated figures: arrows, \ce, \text, \mathrm)
+  String.raw`\\(?:frac|sqrt|cdot|times|alpha|beta|gamma|theta|pi|mu|Delta|sum|int|rightarrow|leftrightarrow|rightleftharpoons|to|ce|text|mathrm|left|right)\b`,
+  // delimiters
+  String.raw`\$[^$]+\$|\\\(|\\\[`,
+  // brace sub/superscript markup the renderers print literally: Fe^{2+}, K_{sp}, SO_4^{2-}.
+  // Deliberately NOT bare `x^2` / `H_2O` / `H^+`: a graph's `equation` is part of the figure text, and
+  // `y = x^2` is the notation the expression parser compiles. Those plain forms are typeset, not rejected
+  // (typesetSceneChemistry), so a bare-caret rule would reject every quadratic graph in every subject.
+  String.raw`[_^]\{`,
+].join('|'))
 
 export function containsRawLatex(text: string): boolean {
   return LATEX_MARKERS.test(text)

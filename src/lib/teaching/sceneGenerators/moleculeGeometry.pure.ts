@@ -119,6 +119,9 @@ export function buildMoleculeScene(def: MoleculeDef): SceneSpec {
     id: `molecule-${def.name.toLowerCase().replace(/\s+/g, '-')}`,
     title: `${def.name} — ${def.geometry.replace(/_/g, ' ')} (${def.bondAngle}° bond angle)`,
     sceneType: 'diagram',
+    // The x/y/z triad names no quantity in this figure (a molecule / lattice / shell has no meaningful axes) and its letters
+    // collided with the atom labels at the origin (measured 2026-10-08: x|y|z|O stacked at stage 1). Grid left as it was.
+    stage: { axes: false },
     teachingGoal: `Show the real ${def.geometry.replace(/_/g, ' ')} shape of ${def.name}, with its ${def.bondAngle}° bond angle.`,
     cameraDistance: BOND_LEN * 3,
     ariaLabel: `${def.name} molecule: a central ${def.central} atom bonded to ${def.count} ${def.peripheral} atoms in a ${def.geometry.replace(/_/g, ' ')} arrangement with a ${def.bondAngle} degree bond angle.`,

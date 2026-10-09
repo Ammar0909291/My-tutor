@@ -510,6 +510,33 @@ function sceneExtent(scene: SceneSpec): Extent | null {
   return minX > maxX ? null : { minX, maxX, minY, maxY }
 }
 
+/**
+ * The camera distance at which every drawable point stays inside `fill` of the frame once PERSPECTIVE is counted.
+ *
+ * `fitSceneToFrame` sized the frame from the geometry's x/y extent alone, as if every point sat on the focal plane (z = 0).
+ * A point `z` units nearer the camera is magnified by d / (d − z), so a 3D figure fitted that way pushed its near atoms out of
+ * the canvas: measured in Chromium (2026-10-08) the third hydrogen of ammonia (z = +6.4 at a fitted distance of 11.5, a 2.25×
+ * magnification) and its bond ran off the top-left corner at both 1280 and 390px, while the learner was told "it bonds to
+ * 3 H atoms". Solving |y|·d / (d − z) ≤ fill·d·tan(fov/2) for d gives  d ≥ |y| / (fill·tan) + z  (and the same for x).
+ *
+ * Only points NEARER than the focal plane (z > 0) constrain it. Returns null when there are none, so a flat scene — every
+ * scene before this existed — keeps the original formula and its exact output.
+ */
+function perspectiveDistance(scene: SceneSpec, cx: number, cy: number, fill: number, aspect: number): number | null {
+  const tan = Math.tan(FOV_RADIANS / 2)
+  let needed = -Infinity
+  for (const step of scene.steps ?? []) {
+    for (const obj of step.objects ?? []) {
+      const points = [obj.position, obj.from, obj.to, ...(obj.points ?? [])].filter(Boolean) as Vec3[]
+      for (const p of points) {
+        if (!(p[2] > 0)) continue
+        needed = Math.max(needed, Math.abs(p[1] - cy) / (fill * tan) + p[2], Math.abs(p[0] - cx) / (fill * tan * aspect) + p[2])
+      }
+    }
+  }
+  return needed === -Infinity ? null : needed
+}
+
 /** Half-extents of the camera frustum at the z = 0 plane, for a 4:3 canvas. */
 function frustum(cameraDistance: number): { halfW: number; halfH: number } {
   const halfH = Math.tan(FOV_RADIANS / 2) * cameraDistance
@@ -573,7 +600,9 @@ export function fitSceneToFrame(scene: SceneSpec): SceneSpec {
   const tan = Math.tan(FOV_RADIANS / 2)
   const neededForHeight = spanY / (2 * TARGET_FRAME_FILL * tan)
   const neededForWidth = spanX / (2 * TARGET_FRAME_FILL * tan * (4 / 3))
-  const distance = Math.max(neededForHeight, neededForWidth)
+  const flatDistance = Math.max(neededForHeight, neededForWidth)
+  const depthDistance = perspectiveDistance(scene, cx, cy, TARGET_FRAME_FILL, 4 / 3)
+  const distance = depthDistance === null ? flatDistance : Math.max(flatDistance, depthDistance)
   if (!Number.isFinite(distance) || distance <= 0) return scene
 
   const shift = (p: Vec3): Vec3 => [p[0] - cx, p[1] - cy, p[2]]

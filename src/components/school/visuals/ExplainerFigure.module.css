@@ -95,7 +95,7 @@
 .resultValue {
   font-size: 15px;
   font-weight: 800;
-  color: var(--accent-amber, #f59e0b);
+  color: var(--accent-amber, #a04a08);
 }
 
 /* ── legend ───────────────────────────────────────────────────────────── */
@@ -220,7 +220,7 @@
 
 .panelLineEmphasis {
   font-weight: 800;
-  color: var(--accent-amber, #f59e0b);
+  color: var(--accent-amber, #a04a08);
 }
 
 /* ── footer: insight beside the controls ──────────────────────────────── */
@@ -609,7 +609,7 @@
   font-family: var(--font-mono);
   font-size: 19px;
   font-weight: 800;
-  color: var(--accent-amber, #f59e0b);
+  color: var(--accent-amber, #a04a08);
 }
 
 /* ── expanded: the same figure, given the window ──────────────────────────
@@ -677,20 +677,33 @@
 
   /* Both of these reach the scene box through ThreeDVisual's INLINE style, and
    * an inline declaration cannot be overridden from a stylesheet — so the
-   * tokens are the only way in. `none` lifts the height cap so the flex column
-   * below decides the height; the shape returns to the scene's own proportion,
-   * overriding the 1/1 the in-flow fallback sets (its class is applied here
-   * too, since both mean "expanded"). */
-  --fig-scene-h: none;
+   * tokens are the only way in. A cap of one viewport height lifts the height
+   * limit so the flex column below decides the height; the shape returns to
+   * the scene's own proportion, overriding the 1/1 the in-flow fallback sets
+   * (its class is applied here too, since both mean "expanded").
+   *
+   * It is `100vh`, NOT `none`. ThreeDVisual also uses this token inside its
+   * floor, `min-height: min(260px, var(--fig-scene-h))`, and `min(260px, none)`
+   * is invalid: the inline declaration then computes to `auto`, which still
+   * beats the stylesheet's own `min-height` below — so the floor this block
+   * relies on ("a floor remains") silently vanished. Measured in Chromium at
+   * 390px (2026-10-08): the expanded scene was 223x167, SMALLER than the 324x260
+   * it has inline, with the same fixed-size labels crowded into it. */
+  --fig-scene-h: 100vh;
   --fig-scene-aspect: 4 / 3;
   --fig-scene-w: auto;
 }
 
-.frame:fullscreen .body { flex: 1 1 auto; min-height: 0; }
+/* `min-height: auto`, not 0. Both boxes may still GROW into spare space (flex: 1 1 auto — that is how the picture takes
+ * "exactly what is left" on a big screen), but they may not SHRINK below their content. With 0, a scene that has a floor
+ * (it does now: see --fig-scene-h above) overflowed its box on a short window and was painted over the sections below it —
+ * measured at 390px: the stage stepper half-covered by the legend. With auto the frame's own `overflow: auto` scrolls
+ * instead, which is what the comment below promised ("scrolling a little beats crushing the picture"). */
+.frame:fullscreen .body { flex: 1 1 auto; min-height: auto; }
 
 .frame:fullscreen .stage {
   flex: 1 1 auto;
-  min-height: 0;
+  min-height: auto;
   display: flex;
   flex-direction: column;
 }
@@ -741,4 +754,16 @@
 
 @media (max-width: 640px) {
   .frame:fullscreen { padding: 12px 12px 16px; }
+}
+
+/*
+ * The amber result colour on a LIGHT card. `#f59e0b` on the cream surface (#faf7ee) is 2.0:1 — measured in
+ * Chromium (2026-10-08) on the result chip, the emphasised panel line and the "Working" result of ten chemistry
+ * figures. `#a04a08` keeps the amber hue at 5.64:1 (5.0:1 on the grey card). The dark theme keeps the bright amber,
+ * which is 6.9:1 on its card.
+ */
+:global([data-theme='dark']) .resultValue,
+:global([data-theme='dark']) .panelLineEmphasis,
+:global([data-theme='dark']) .workingResult {
+  color: var(--accent-amber, #f59e0b);
 }
