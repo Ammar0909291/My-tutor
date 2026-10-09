@@ -1,0 +1,141 @@
+{
+ "base": "https://my-tutor-flame.vercel.app",
+ "at": "2026-10-09T01:10:52.685Z",
+ "rows": [
+  {
+   "conceptId": "phys.meas.vector-addition",
+   "figureOnWire": true,
+   "label": "title=Vector Addition: |R| ≈ 5 at 53.1°",
+   "kind": "scene",
+   "sameAsAudited": true,
+   "blockers": [],
+   "dataFails": []
+  },
+  {
+   "conceptId": "phys.mech.kinematics-1d",
+   "figureOnWire": true,
+   "label": "title=Kinematics graphs for u=0 m/s, a=2 m/s²",
+   "kind": "scene",
+   "sameAsAudited": true,
+   "blockers": [],
+   "dataFails": []
+  },
+  {
+   "conceptId": "phys.em.electric-dipole",
+   "figureOnWire": true,
+   "label": "title=Electric dipole: q = 4 nC, d = 3 cm, E = 8 N/C, θ = 60°",
+   "kind": "scene",
+   "sameAsAudited": true,
+   "blockers": [],
+   "dataFails": []
+  },
+  {
+   "conceptId": "phys.mech.torque",
+   "figureOnWire": true,
+   "label": "title=Torque: r = 2 m, F = 10 N, θ = 90°",
+   "kind": "scene",
+   "sameAsAudited": true,
+   "blockers": [],
+   "dataFails": []
+  },
+  {
+   "conceptId": "phys.mech.newtons-second-law",
+   "figureOnWire": true,
+   "label": "title=Newton's second law: F = 10 N, m = 2.0 kg",
+   "kind": "scene",
+   "sameAsAudited": true,
+   "blockers": [],
+   "dataFails": []
+  },
+  {
+   "conceptId": "phys.wave.pendulum",
+   "figureOnWire": true,
+   "label": "title=Simple pendulum: L = 1.00 m, 10° swing, 0.5 kg bob",
+   "kind": "scene",
+   "sameAsAudited": true,
+   "blockers": [],
+   "dataFails": []
+  },
+  {
+   "conceptId": "phys.mod.bohr-model",
+   "figureOnWire": true,
+   "label": "visual=energy_level_diagram",
+   "kind": "card",
+   "sameAsAudited": null,
+   "blockers": [],
+   "dataFails": []
+  },
+  {
+   "conceptId": "phys.mech.variation-of-g",
+   "figureOnWire": true,
+   "label": "title=g with distance from the Earth's centre",
+   "kind": "scene",
+   "sameAsAudited": true,
+   "blockers": [],
+   "dataFails": []
+  },
+  {
+   "conceptId": "phys.em.moving-coil-galvanometer",
+   "figureOnWire": true,
+   "label": "title=One galvanometer, two meters",
+   "kind": "scene",
+   "sameAsAudited": true,
+   "blockers": [],
+   "dataFails": []
+  },
+  {
+   "conceptId": "phys.mech.orbital-mechanics",
+   "figureOnWire": true,
+   "label": "title=Orbital Motion: v ≈ 7544.5 m/s, T ≈ 5829.7 s",
+   "kind": "scene",
+   "sameAsAudited": true,
+   "blockers": [],
+   "dataFails": []
+  },
+  {
+   "conceptId": "phys.opt.mirrors",
+   "figureOnWire": true,
+   "label": "title=concave mirror: u=-30cm, f=-10cm → v=-15cm",
+   "kind": "scene",
+   "sameAsAudited": true,
+   "blockers": [],
+   "dataFails": []
+  },
+  {
+   "conceptId": "phys.opt.lenses",
+   "figureOnWire": true,
+   "label": "title=convex lens: u=-30cm, f=10cm → v=15cm",
+   "kind": "scene",
+   "sameAsAudited": true,
+   "blockers": [],
+   "dataFails": []
+  },
+  {
+   "conceptId": "phys.opt.lens-power",
+   "figureOnWire": true,
+   "label": "title=convex lens: u=-30cm, f=10cm → v=15cm",
+   "kind": "scene",
+   "sameAsAudited": true,
+   "blockers": [],
+   "dataFails": []
+  },
+  {
+   "conceptId": "phys.mech.conservation-of-momentum",
+   "figureOnWire": true,
+   "label": "title=Elastic Collision (1D) — v1f=-0.33, v2f=4.67 m/s",
+   "kind": "scene",
+   "sameAsAudited": true,
+   "blockers": [],
+   "dataFails": []
+  },
+  {
+   "conceptId": "phys.particle.particle-classification",
+   "figureOnWire": true,
+   "label": "title=Classifying particles",
+   "kind": "scene",
+   "sameAsAudited": true,
+   "blockers": [],
+   "dataFails": []
+  }
+ ]
+}

@@ -50,7 +50,7 @@ import { SceneLabel } from './SceneLabel'
 import type { Theme } from '@/components/Providers'
 import type { SceneObject, SceneSpec, Vec3 } from '@/lib/teaching/sceneSpec'
 import {
-  labelWrapWidth, placeSceneLabels, screenToWorld, viewportFromCanvas,
+  labelWrapWidth, placeSceneLabels, screenToWorld, viewportFromCanvas, wrapPxIfNeeded, wrapPxOf,
 } from '@/lib/teaching/visual/layout'
 
 /** A label a figure wants drawn, in the figure's own world coordinates. */
@@ -62,6 +62,17 @@ export interface LayerLabel {
   color?: string
   /** Typographic tier — a multiplier, exactly as SceneLabel means it. */
   tier?: number
+  /**
+   * Always back this label with the surface colour. For a label that is DRAWN
+   * ON a line by construction — the axis triad's letters sit at the end of the
+   * axis they name, and the z axis points at the camera so its tip lands on the
+   * x and y lines (39 % of the letter's box on ink in the browser).
+   */
+  plate?: boolean
+  /** Opt-in share of the canvas width one line may use before wrapping (see `wrapPxOf`). */
+  wrapFraction?: number
+  /** Opt-in wrap width in SCENE UNITS — a column's own width — converted at the live scale (see `wrapPxOf`). */
+  wrapUnits?: number
 }
 
 const DEFAULT_LABEL_COLOR = '#5B8DEF'
@@ -97,6 +108,12 @@ function flattenObstacle(obj: SceneObject, cameraDistance: number): SceneObject 
 export interface SceneLabelLayerProps {
   labels: LayerLabel[]
   /**
+   * Labels whose position depends on the canvas's shape (the stage triad's
+   * letters sit where the triad does, and that depends on the aspect). Appended
+   * AFTER `labels`, so authored text keeps first claim on free space.
+   */
+  lateLabels?: (aspect: number) => LayerLabel[]
+  /**
    * Everything the labels must avoid, in world coordinates. Omitting it costs
    * only geometry avoidance — containment and label-on-label are still solved.
    */
@@ -106,8 +123,10 @@ export interface SceneLabelLayerProps {
   theme: Theme
 }
 
-export function SceneLabelLayer({ labels, obstacles = [], cameraDistance, theme }: SceneLabelLayerProps) {
+export function SceneLabelLayer({ labels: authored, lateLabels, obstacles = [], cameraDistance, theme }: SceneLabelLayerProps) {
   const size = useThree((s) => s.size)
+  const aspect = size.width / Math.max(1, size.height)
+  const labels = useMemo(() => (lateLabels ? [...authored, ...lateLabels(aspect)] : authored), [authored, lateLabels, aspect])
   // SceneLabel sizes text in `vw`, which resolves against the WINDOW, not the
   // canvas. A VisualCard is capped well below the window width, so the two
   // must be tracked separately or every modelled label comes out too small.
@@ -123,6 +142,17 @@ export function SceneLabelLayer({ labels, obstacles = [], cameraDistance, theme 
   const placed = useMemo(() => {
     if (labels.length === 0) return []
     const viewport = viewportFromCanvas(size.width, size.height, windowWidth)
+    const labelObjects = labels.map((l): SceneObject => ({
+      type: 'label',
+      text: l.text,
+      position: flatten(l.position, cameraDistance),
+      size: l.tier,
+      ...(l.wrapFraction || l.wrapUnits
+        ? { properties: { ...(l.wrapFraction ? { labelWrapFraction: l.wrapFraction } : {}), ...(l.wrapUnits ? { labelWrapUnits: l.wrapUnits } : {}) } }
+        : {}),
+    }))
+    // An authored wrap (a column's own width) is planned by the solver and painted by SceneLabel at the SAME px.
+    const authoredWrapPx = labelObjects.map((o) => wrapPxIfNeeded(o.text ?? '', viewport, o.size, wrapPxOf(o, viewport, cameraDistance)))
     const scene: SceneSpec = {
       id: 'label-layer',
       title: '',
@@ -131,12 +161,7 @@ export function SceneLabelLayer({ labels, obstacles = [], cameraDistance, theme 
       steps: [{
         objects: [
           ...obstacles.map((o) => flattenObstacle(o, cameraDistance)),
-          ...labels.map((l): SceneObject => ({
-            type: 'label',
-            text: l.text,
-            position: flatten(l.position, cameraDistance),
-            size: l.tier,
-          })),
+          ...labelObjects,
         ],
       }],
     }
@@ -147,10 +172,13 @@ export function SceneLabelLayer({ labels, obstacles = [], cameraDistance, theme 
       text: s.text,
       position: screenToWorld(s.x, s.y, viewport, cameraDistance),
       color: labels[i]?.color ?? DEFAULT_LABEL_COLOR,
-      tier: labels[i]?.tier,
+      // A label the solver had to step down a typographic tier is drawn at the
+      // tier it was planned at; the box it reserved is only true at that size.
+      tier: s.tier ?? labels[i]?.tier,
+      plate: labels[i]?.plate === true || s.onGeometry === true,
       // The width the solver reserved, so the painted box matches the planned
       // one. Null for every label that fits on a line — almost all of them.
-      maxWidthPx: labelWrapWidth(s.text, viewport, labels[i]?.tier) ?? undefined,
+      maxWidthPx: s.wrapPx ?? authoredWrapPx[i] ?? labelWrapWidth(s.text, viewport, s.tier ?? labels[i]?.tier) ?? undefined,
     }))
   }, [labels, obstacles, cameraDistance, size.width, size.height, windowWidth])
 
@@ -165,6 +193,7 @@ export function SceneLabelLayer({ labels, obstacles = [], cameraDistance, theme 
           theme={theme}
           tier={p.tier}
           maxWidthPx={p.maxWidthPx}
+          plate={p.plate}
         />
       ))}
     </>

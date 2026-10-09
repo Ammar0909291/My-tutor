@@ -612,3 +612,35 @@ except diagram-turn latency, whose root cause (function region ≠ database regi
 handed to the owner with the one-line change. New since the last verdict: the case-only probe
 defect (fixed), the duplicate-request gap (documented, deferred primitive), and the
 leaked-transaction pool starvation (mitigated, owner decision above).
+
+## RENDER AUDIT (2026-10-08/09): every Biology figure rendered, inspected, repaired and re-rendered
+
+Full report, per-concept record and harnesses: `docs/qa/biology-visual-audit/` (README.md is the report). Read it before touching
+Biology figure layout. Headline (final merged build): **199 concepts, 199 rendered at 1280 px and 390 px, PASS 193 · FAIL 0 ·
+REVIEW_REQUIRED 6**; 0 label overlaps, 0 labels outside the canvas, 0 horizontal scroll, 0 page errors, min caption contrast 4.6 : 1.
+Baseline was FAIL 119 / REVIEW_REQUIRED 55 / PASS 25 (rule-derived) and semantic FAIL 24 / REVIEW_REQUIRED 13.
+
+What the earlier campaigns could not see: they proved a figure *resolves* and carries the right words. Rendered, 71 concepts had a
+sphere or caption cut off by the canvas, captions sat on spheres in the sphere colour (2.2–4.5 : 1), pathways showed no direction, and
+seven `bio.eco` concepts were served the generic food-chain card.
+
+Rules this audit adds (binding for Biology figure work):
+
+1. **Biology-only.** Every layout rule in `cellComparison/cellHub/cellPathway/cellStructure.pure.ts` is gated by `isBiologyScene(conceptId)`
+   and the figure-level framing/stage growth by `ExplainerFigure`'s `fitToCanvas` (on only for `subjectSlug === 'biology'`). Physics,
+   Chemistry and Mathematics share these generators and the renderer, and their committed audits fingerprint byte-identical output.
+   Switching the framing on for everyone changed 114 Physics / 19 Chemistry / 1 Mathematics canvas views. `biologyFigureFraming.test.ts`
+   pins the gate.
+2. **Caption height decides spacing, at the scale it is drawn at.** `cellComparison.pure.ts` estimates a caption's wrapped height from its
+   length and column width (`CHARS_PER_UNIT`, `LINE_UNITS`) — a grid is pulled back to ~16–19 px/unit, a pair stays at the camera's own
+   ~20–27. Re-measure with the render harness and `scripts` replay of `placeSceneLabels` if you change a constant; a caption the solver has
+   to move > ~60 px is a defect (it lands in the neighbouring column).
+3. **`cameraDistanceToContainFigure` is a fixed point**, because caption wrap narrows as the camera backs away; `stageHeightToFit` must use
+   the renderer's exact framing (aspect rule ∨ viewport rule) or it validates a layout the learner never gets.
+4. **More than nine `label` objects are held back by the complexity policy** (`maxLabels` 9, intermediate level). Keep item captions short and put
+   the detail in the stage narration; `node` captions do not count.
+5. Pathways of six or more stages alternate captions above/below the line.
+
+Re-run: `node scripts/qa/biologyVisualRenderAudit.mjs <out> --file ids.txt --base http://localhost:3001 [--theme light]` (≤ 4 shards), then judge
+the screenshots — the harness measures, it does not judge. Open items (6 REVIEW_REQUIRED, all content/depiction decisions): see the report.
+Production browser validation was unavailable in this session.

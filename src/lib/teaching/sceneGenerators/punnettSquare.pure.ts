@@ -115,19 +115,32 @@ export function buildPunnettSquareScene(params: PunnettParams): SceneSpec {
     { type: 'label', id: 'header-row-1', position: [round(-CELL_SIZE * 0.4), round(-1.5 * CELL_SIZE), 0], text: grid.parent1Alleles[1], color: '#f59e0b' },
   ]
 
+  // The square itself: three horizontal and three vertical rules. The figure was four genotypes and four
+  // allele headers floating in space with nothing drawn between them — a table of letters, not a square.
+  const GRID_COLOR = '#9AA5B8'
+  const size2 = 2 * CELL_SIZE
+  const gridObjects: SceneObject[] = []
+  for (let k = 0; k <= 2; k++) {
+    gridObjects.push({ type: 'bond', id: `grid-h-${k}`, from: [0, round(-k * CELL_SIZE), 0], to: [round(size2), round(-k * CELL_SIZE), 0], color: GRID_COLOR, thickness: 0.05 })
+    gridObjects.push({ type: 'bond', id: `grid-v-${k}`, from: [round(k * CELL_SIZE), 0, 0], to: [round(k * CELL_SIZE), round(-size2), 0], color: GRID_COLOR, thickness: 0.05 })
+  }
+
   const ratioPos: Vec3 = [round(CELL_SIZE), round(-2.5 * CELL_SIZE), 0]
 
   return {
     id: `punnett-${params.parent1Genotype}-${params.parent2Genotype}`,
     title: `Punnett Square: ${params.parent1Genotype} × ${params.parent2Genotype}`,
     sceneType: 'diagram',
+    // No ground grid or axis triad: a Punnett square is a table of allele combinations, not a spatial scene, and the
+    // triad's x / y / z captions were MEASURED printed over the figure (one outside the canvas).
+    stage: { grid: false, axes: false },
     teachingGoal: 'Show how each parent’s alleles combine in a Punnett square to determine the genotype and phenotype ratio of the offspring.',
     cameraDistance: CELL_SIZE * 8,
     ariaLabel: `A 2 by 2 Punnett square crossing ${params.parent1Genotype} with ${params.parent2Genotype}, showing all four offspring genotypes.`,
     steps: [
       {
         narration: `Parent 1 has genotype ${params.parent1Genotype} (alleles ${grid.parent1Alleles.join(', ')}). Parent 2 has genotype ${params.parent2Genotype} (alleles ${grid.parent2Alleles.join(', ')}).`,
-        objects: headerObjects,
+        objects: [...headerObjects, ...gridObjects],
       },
       {
         narration: `Each parent's alleles combine across the grid: ${grid.cells.flat().join(', ')} — the four possible offspring genotypes.`,

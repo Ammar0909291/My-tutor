@@ -357,7 +357,8 @@ export function buildDipoleScene(params: DipoleParams): SceneSpec {
       },
       {
         intent: 'resolve',
-        focus: ['pVector', 'fieldArrow1', 'angleArc', 'torqueLabel'],
+        // The arc is not drawn near θ = 0° / 180° (angleArc returns null), so it cannot be focused there.
+        focus: ['pVector', 'fieldArrow1', ...(arc ? ['angleArc'] : []), 'torqueLabel'],
         narration: `The field exerts a torque τ = pE sin θ = ${formatSci(geo.torque)} N·m on the dipole, ${sense}, trying to rotate p to line up with E.`,
         predict: {
           question: 'Will the torque rotate the dipole clockwise, counter-clockwise, or not at all?',

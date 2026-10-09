@@ -59,13 +59,17 @@ describe('the physics the figure draws', () => {
  * concept-bound illustration of the right kind (pendulum, circuit, orbit…)
  * rather than a figure authored for the concept alone. They were never part of
  * the "no figure" gap batches 1-14 closed. Batch 15 promoted the fourteen
- * card-backed ones; these twelve come from shared generator kinds and are the
+ * card-backed ones; these eleven come from shared generator kinds and are the
  * next upgrade. Pinned so the list only changes deliberately.
+ *
+ * 12 -> 11 (2026-10-09): 'phys.opt.lens-power' owns an authored P = 1/f and P = P1 + P2 figure
+ * (lensPower.ts, CONCEPT_SCENES) — the KG node, the EB entry and the blueprint teach both; the
+ * single-lens ray diagram it used to be served shows neither.
  */
 const DOMAIN_SCOPED = [
   'phys.meas.scalars-vectors', 'phys.mech.kinematics-2d', 'phys.mech.momentum', 'phys.mech.rotational-dynamics',
   'phys.mech.universal-gravitation', 'phys.mech.gravitational-field', 'phys.wave.shm', 'phys.wave.shm-energy',
-  'phys.opt.lens-power', 'phys.em.electric-current', 'phys.em.ohms-law', 'phys.em.dc-circuits',
+  'phys.em.electric-current', 'phys.em.ohms-law', 'phys.em.dc-circuits',
 ]
 
 describe('campaign end state', () => {

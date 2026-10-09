@@ -18,9 +18,11 @@ import type { SceneSpec } from '@/lib/teaching/sceneSpec'
 import type { CurriculumLevel } from '@/lib/curriculum/levels'
 
 export function SceneSpecFigure({
-  spec, learnerLevel,
+  spec, learnerLevel, fitToCanvas,
 }: {
   spec: SceneSpec
+  /** Biology lessons only — see `ExplainerFigure`'s `fitToCanvas`. */
+  fitToCanvas?: boolean
   /**
    * The learner's canonical level, from the turn that carried this figure.
    * Optional: absent means the intermediate default, which is what every
@@ -28,5 +30,5 @@ export function SceneSpecFigure({
    */
   learnerLevel?: CurriculumLevel | string | null
 }) {
-  return <ExplainerFigure spec={spec} learnerLevel={learnerLevel} />
+  return <ExplainerFigure spec={spec} learnerLevel={learnerLevel} fitToCanvas={fitToCanvas} />
 }

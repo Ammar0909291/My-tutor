@@ -1,0 +1,288 @@
+{
+ "reviewedOn": "2026-10-08",
+ "about": "Human semantic review of the 21 concepts the render audit left REVIEW_REQUIRED (a REVIEW_REQUIRED machine verdict means no deterministic assertion covered the physics). 'decision' is the review outcome: PASS (reviewed, no defect, evidence cited), FIXED→PASS (a real defect was found and fixed, evidence cited) or REVIEW_REQUIRED (still not decidable by this repository, reason and owner decision recorded). The machine verdicts in audit-summary.json are NOT edited by this file; src/tests/physicsSemanticReview.test.ts fails if a machine REVIEW_REQUIRED concept has no entry here, or an entry cites a test that no longer exists.",
+ "concepts": {
+  "phys.meas.units": {
+   "initial": "ST-03: text only, no drawn geometry",
+   "decision": "PASS",
+   "finding": "Genuinely a text figure: a ring of the seven SI base quantities with their units, then 1 N = 1 kg·m/s². Nothing misleading is drawn; every printed pair was compared with an independently written SI table, and the newton with F = m·a.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "src/tests/physicsCardSemantics.test.ts",
+     "describe": "SI units figure: seven base units, and the newton built from them"
+    }
+   ],
+   "remaining": "None for correctness. The machine ST-03 note stays by design (no geometry to validate)."
+  },
+  "phys.meas.dimensions": {
+   "initial": "ST-03: text only, no drawn geometry",
+   "decision": "PASS",
+   "finding": "Genuinely a text figure. Every printed dimension bracket was parsed and the algebra redone: [L T⁻²][T] = [L T⁻¹] (consistent), [L T⁻²][T²] = [L] ≠ [L T⁻¹] (inconsistent), so both verdicts follow from what is printed.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "src/tests/physicsCardSemantics.test.ts",
+     "describe": "dimensions figure: every bracket it prints is right"
+    }
+   ],
+   "remaining": "None for correctness. ST-03 stays by design."
+  },
+  "phys.meas.vector-products": {
+   "initial": "SM-02: no physics assertion",
+   "decision": "PASS",
+   "finding": "The two panels share one pair |A|=3, |B|=4, θ=60°. Existing tests already re-derive the perpendicular, the right-hand direction of A×B and |A||B| sin θ from the drawn endpoints; this review added that the printed 6 and 10.39 are what the drawn projection and parallelogram measure.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "src/tests/physicsCardSemantics.test.ts",
+     "describe": "vector products: the printed 6 and 10.39 are what the drawn geometry measures"
+    },
+    {
+     "file": "src/tests/vectorProductVisualSelection.test.ts",
+     "describe": "the authored figure is geometrically correct, re-derived from what it draws"
+    }
+   ],
+   "remaining": "The A×B arrow is a fixed display length (it is an area); the narration says so."
+  },
+  "phys.mech.free-body-diagram": {
+   "initial": "SM-02: no physics assertion (shared force_diagram card)",
+   "decision": "FIXED→PASS",
+   "finding": "Three real defects in the drawing: the friction arrow-head pointed AT the body (same way as the applied force — the marker was drawn pointing left and orient=auto turned it round again); applied (45) was longer than friction (40), an unbalanced body; and the body floated 20 units above the ground so the normal force had no contact.",
+   "fix": "ForceDiagram.tsx: marker polygon along +x, one length per opposing pair, body rests on the ground line; labels lifted clear of the heads; 2026-10-09: the ground was raised 10 units because seating the body on it had pushed the weight arrow's head 5 units past the bottom of the drawing, where it was cut flat (found only by viewing the completed production render; pinned by the 'every arrow-head lies inside the drawing' test).",
+   "evidence": [
+    {
+     "file": "src/tests/physicsCardSemantics.test.ts",
+     "describe": "the shared force diagram draws what each of its four concepts says"
+    }
+   ],
+   "remaining": "Forces are drawn from the body's edges, not its centre; the card draws the four standard forces only."
+  },
+  "phys.mech.friction": {
+   "initial": "SM-02: no physics assertion (shared force_diagram card)",
+   "decision": "FIXED→PASS",
+   "finding": "Same card: friction now points opposite the applied force, from the contact side, with the head away from the body; equal length to the applied force (static friction holding the body).",
+   "fix": "As free-body-diagram; 2026-10-09: the ground was raised 10 units because seating the body on it had pushed the weight arrow's head 5 units past the bottom of the drawing, where it was cut flat (found only by viewing the completed production render; pinned by the 'every arrow-head lies inside the drawing' test).",
+   "evidence": [
+    {
+     "file": "src/tests/physicsCardSemantics.test.ts",
+     "describe": "the shared force diagram draws what each of its four concepts says"
+    }
+   ],
+   "remaining": "The card shows the static (balanced) case; kinetic friction < applied is not drawn."
+  },
+  "phys.mech.normal-force": {
+   "initial": "SM-02: no physics assertion (shared force_diagram card)",
+   "decision": "FIXED→PASS",
+   "finding": "The body now rests on the surface, so the normal force has a contact it acts at; it is perpendicular to the surface, upward, and the same length as the weight (true for a level surface with no vertical applied force).",
+   "fix": "As free-body-diagram; 2026-10-09: the ground was raised 10 units because seating the body on it had pushed the weight arrow's head 5 units past the bottom of the drawing, where it was cut flat (found only by viewing the completed production render; pinned by the 'every arrow-head lies inside the drawing' test).",
+   "evidence": [
+    {
+     "file": "src/tests/physicsCardSemantics.test.ts",
+     "describe": "the shared force diagram draws what each of its four concepts says"
+    }
+   ],
+   "remaining": "Only the level-surface case is drawn: that N ≠ mg on a slope or with a vertical push is not shown and must come from the tutor's text. In the lesson the card shows as many steps as the page's narration has lines, so a reply shorter than five lines never draws the normal arrow (pre-existing design, not a diagram defect). Production, 2026-10-09 (deployment dpl_EBE7hccxEBbr4daYxPCdTUQfMYhF, main 34def29): in a six-line reply on the real /learn page all five steps were drawn - the normal arrow leaves the top of the body, is perpendicular to the ground line (cos 0.00), points up (head above the body), same length as the weight - at 390 and 1280 px, dark and light, 4/4 PASS, screenshots viewed (production-browser-audit-closure.json, run Z1)."
+  },
+  "phys.mech.equilibrium": {
+   "initial": "SM-02: no physics assertion (shared force_diagram card)",
+   "decision": "FIXED→PASS",
+   "finding": "The diagram was unbalanced (applied 45 vs friction 40). It now has four forces in two equal opposite pairs through the body — net force and net torque zero — which is what 'equilibrium is balanced forces, not no forces' needs.",
+   "fix": "As free-body-diagram; 2026-10-09: the ground was raised 10 units because seating the body on it had pushed the weight arrow's head 5 units past the bottom of the drawing, where it was cut flat (found only by viewing the completed production render; pinned by the 'every arrow-head lies inside the drawing' test).",
+   "evidence": [
+    {
+     "file": "src/tests/physicsCardSemantics.test.ts",
+     "describe": "the shared force diagram draws what each of its four concepts says"
+    }
+   ],
+   "remaining": "Static equilibrium only."
+  },
+  "phys.mech.conservation-of-momentum": {
+   "initial": "SM-02: no physics assertion (3D collision card)",
+   "decision": "FIXED→PASS",
+   "finding": "The 3D card drew unlabeled spheres and arrows: nothing said the total was the same before and after, and the sphere sizes implied masses for which the drawn velocities did not conserve momentum.",
+   "fix": "visualRegistry.ts: the concept takes the 'collision' scene generator like its siblings (masses and velocities printed, elastic / perfectly inelastic switchable, total re-derived from the drawn vectors); the card stays the fallback. Recorded as a judged generator-default in visualGeneratorDefaultScope.test.ts.",
+   "evidence": [
+    {
+     "file": "src/tests/physicsCardSemantics.test.ts",
+     "describe": "conservation of momentum is shown with numbers that conserve it"
+    }
+   ],
+   "remaining": "The totals are not printed as one number; the narration states conservation and the printed masses and velocities let the learner check it."
+  },
+  "phys.opt.mirrors": {
+   "initial": "LY-02: P and F labels overlap the axis",
+   "decision": "FIXED→PASS",
+   "finding": "P (pole) and F (focus) name points that lie ON the principal axis, so their boxes meet the axis line by construction: intentional and pedagogically correct, left where they are; their positions are verified (F at |f|, correct side for each of the four elements). Real defects found instead: the title printed magnitudes beside a signed v (1/-15 + 1/30 ≠ 1/10); the mirror was only a dot (the rays bent at nothing); and the figure used ~0.3 % of the canvas.",
+   "fix": "rayOptics.pure.ts: signed u, f, v in the title; the mirror plane is drawn; the camera is framed to the drawn extent.",
+   "evidence": [
+    {
+     "file": "src/tests/physicsCardSemantics.test.ts",
+     "describe": "ray-optics figures print u, f and v that satisfy"
+    }
+   ],
+   "remaining": "The mirror is drawn as a plane through the pole (paraxial convention), not as a curved surface. LY-02 stays as a machine REVIEW."
+  },
+  "phys.opt.lenses": {
+   "initial": "ST-03 text only, LY-02: P / F overlap the axis",
+   "decision": "FIXED→PASS",
+   "finding": "Not text-only: the ray diagram was drawn at ~0.26 % ink with no lens. Also the lens's centre was labelled P, which is a mirror's pole (a lens has an optical centre, O), and the title printed unsigned u and f beside a signed v. F and O sit on the axis by construction (kept).",
+   "fix": "rayOptics.pure.ts: O for lenses, signed title, the lens plane drawn, camera framed to the drawn extent.",
+   "evidence": [
+    {
+     "file": "src/tests/physicsCardSemantics.test.ts",
+     "describe": "ray-optics figures print u, f and v that satisfy"
+    }
+   ],
+   "remaining": "LY-02 stays as a machine REVIEW (point labels on a line)."
+  },
+  "phys.opt.lens-power": {
+   "initial": "ST-03 text only, LY-02: P / F overlap the axis",
+   "decision": "FIXED→PASS",
+   "closedOn": "2026-10-09 (the 2026-10-08 review left it REVIEW_REQUIRED for an owner decision; the lesson was then read and the decision made)",
+   "finding": "The lesson explicitly teaches both relationships: the KG node (\"The power of a lens is the reciprocal of focal length in metres; combined lenses have powers that add algebraically\"), the Educational Brain's Core Understanding and Mental Models stages 2-3 (P = 1/f in dioptres; P_total = P₁ + P₂ for thin lenses in contact), and the blueprint's Level 2. The served figure was the single-lens ray diagram of phys.opt.lenses — correct, but it showed neither power nor a combination (scope.ts had demoted it for that reason). The concept's own claims, not an adjacent one, were missing.",
+   "fix": "New authored figure, lensPower.ts, served through CONCEPT_SCENES (no new engine or renderer): row 1, one converging lens, f = 0.50 m → P = 1/f = +2 D; row 2, a +5 D converging and a −2 D diverging lens in contact, the first lens alone (aid ray, F₁) and the pair together, P₁ + P₂ = +3 D, f = 0.33 m, 'powers add, focal lengths do not', and the thin-lens-in-contact limit. The numbers are the EB's own worked ones. The registry row lost its ray_optics generator (it would have given this concept the sliders of phys.opt.lenses) and the scope.ts demotion was removed.",
+   "evidence": [
+    {
+     "file": "src/tests/physicsCardSemantics.test.ts",
+     "describe": "lens power figure: the printed powers are the ones its drawn rays have, and they add"
+    },
+    {
+     "file": "src/tests/physicsCardSemantics.test.ts",
+     "describe": "ray-optics figures print u, f and v that satisfy"
+    }
+   ],
+   "remaining": "Static figure (no sliders): the learner cannot vary f₁ and f₂. Only thin lenses in contact are drawn — the separated-lens correction (EB: P = P₁ + P₂ − d·P₁P₂) is named in the figure's limit but not drawn. The machine semantic PASS comes from its test-file-name heuristic; the real evidence is the slope-derived test cited here. Production, 2026-10-09: the real /learn page rendered the three-stage figure at 390 and 1280 px, dark and light, 4/4 PASS, screenshots viewed (production-browser-audit-closure.json, run X3)."
+  },
+  "phys.mod.wave-particle-duality": {
+   "initial": "SM-02: no physics assertion (double_slit card)",
+   "decision": "FIXED→PASS",
+   "finding": "The slits were unequal (6 and 12 units wide), the screen pattern was five hand-placed bands that were not symmetric about the axis, and a card captioned 'particles passing through two slits' showed no particles.",
+   "fix": "DoubleSlit.tsx: two equal slits from one geometry table; step 5 draws 150 detection dots drawn from the wave's two-slit intensity (fixed seed), captioned 'one dot = one detection' / 'wave sets where dots land'. The caption is deliberately neutral because the same card serves Young's experiment.",
+   "evidence": [
+    {
+     "file": "src/tests/physicsCardSemantics.test.ts",
+     "describe": "double-slit card: two equal slits, and particles that build up a pattern"
+    }
+   ],
+   "remaining": "Wavefronts in step 3 are schematic arcs."
+  },
+  "phys.qm.wave-function": {
+   "initial": "SM-02: no physics assertion (wave_function card)",
+   "decision": "FIXED→PASS",
+   "finding": "|ψ|² is exactly ψ² (computed from ψ) and is never negative; but the y-axis arrow-head pointed left and the axis was labelled 'ψ' only although both curves are drawn on it.",
+   "fix": "WaveFunctionPlot.tsx: arrow marker along +x, axis labelled 'ψ, |ψ|²', the curves exported as numbers.",
+   "evidence": [
+    {
+     "file": "src/tests/physicsCardSemantics.test.ts",
+     "describe": "wave-function card: |ψ|² is ψ squared, and the two are kept apart"
+    }
+   ],
+   "remaining": "ψ is real here; a complex ψ (phase) is not drawn."
+  },
+  "phys.qm.particle-in-box": {
+   "initial": "LY-02: caption overlap, SM-02: no physics assertion (potential_well card)",
+   "decision": "FIXED→PASS",
+   "finding": "The levels were drawn compressed (heights 1 : 2.75 : 5) while labelled E₂ = 4E₁ and E₃ = 9E₁, so the picture contradicted its own labels. The waves were already ψₙ = sin(nπx/L), zero at both walls.",
+   "fix": "PotentialWell.tsx: level n drawn n² units above the floor.",
+   "evidence": [
+    {
+     "file": "src/tests/physicsCardSemantics.test.ts",
+     "describe": "potential-well card: levels at n², and genuine particle-in-a-box states"
+    }
+   ],
+   "remaining": "Three levels only."
+  },
+  "phys.qm.hydrogen-atom-qm": {
+   "initial": "SM-02: no physics assertion (3D orbital card)",
+   "decision": "FIXED→PASS",
+   "finding": "The cloud shapes are the orbitals they name (1s spherical, 2s with a radial node, 2p with a nodal plane and two lobes) and are drawn as probability clouds, not orbits. The final side-by-side view showed three coloured clouds with nothing naming them (meaning by colour alone).",
+   "fix": "HydrogenOrbital3D.tsx: 1s / 2s / 2p labels through the shared SceneLabelLayer (auto-rotation off, as for every labelled 3D card).",
+   "evidence": [
+    {
+     "file": "src/tests/physicsCardSemantics.test.ts",
+     "describe": "hydrogen orbital card: the cloud shapes are the orbitals they name"
+    }
+   ],
+   "remaining": "Quantum numbers and energy levels are not drawn; the three clouds are not to a common scale."
+  },
+  "phys.qm.spin": {
+   "initial": "SM-02: no physics assertion (Stern–Gerlach card)",
+   "decision": "PASS",
+   "finding": "One beam in, split into exactly two symmetric outcomes labelled +½ and −½; the caption says spin is quantised and never calls it a rotation.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "src/tests/physicsCardSemantics.test.ts",
+     "describe": "Stern–Gerlach card: one beam in, two symmetric outcomes"
+    }
+   ],
+   "remaining": "None found."
+  },
+  "phys.qm.quantum-tunneling": {
+   "initial": "SM-02: no physics assertion (quantum_tunneling card)",
+   "decision": "FIXED→PASS",
+   "finding": "Inside the barrier the curve was decay × cos(…), i.e. still oscillating, where ψ must be a real exponential decay (evanescent); and the transmitted wave started at 4× the amplitude the decay had reached at the barrier's far wall, so the figure did not join up there.",
+   "fix": "QuantumTunneling.tsx: a real exponential from the incident amplitude, the transmitted wave starting at exactly the decayed amplitude (amp·e^(−κ)) with the incident wavelength (energy unchanged); the incident label moved above the crests.",
+   "evidence": [
+    {
+     "file": "src/tests/physicsCardSemantics.test.ts",
+     "describe": "quantum tunneling card draws an evanescent barrier region"
+    }
+   ],
+   "remaining": "Reflection from the barrier is not drawn."
+  },
+  "phys.stat.probability-basics": {
+   "initial": "SM-02: no physics assertion (statistical-distribution card)",
+   "decision": "PASS",
+   "finding": "A frequency histogram of counts (never called probabilities), bell-shaped and symmetric; the red mean line is at the mean of the data; the 'symmetric' label is true of it.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "src/tests/physicsCardSemantics.test.ts",
+     "describe": "statistical distribution card: the mean line and the"
+    }
+   ],
+   "remaining": "A generic distribution, not one over microscopic states; the tutor's text makes that link."
+  },
+  "phys.astro.gravitational-waves": {
+   "initial": "SM-02: no physics assertion (pathway scene)",
+   "decision": "PASS",
+   "finding": "An ordered pathway (accelerating masses → ripples in spacetime → amplitude falls as 1/r → interferometer measures strain), in the Educational Brain's order. It says no medium is needed, says 1/r not 1/r², and defines strain h = ΔL/L; it draws no medium and no claim contradicts the entry.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "src/tests/physicsCardSemantics.test.ts",
+     "describe": "gravitational-waves figure: the stages are in physical order"
+    }
+   ],
+   "remaining": "A process diagram, not a picture of the wave."
+  },
+  "phys.particle.particle-classification": {
+   "initial": "ST-03: text only",
+   "decision": "FIXED→PASS",
+   "finding": "The tree was scrambled by the label solver at 390 px and 1280 px ('leptons' above 'particles', 'hadrons' below its own children) because two 20-character labels were 4.8 units apart.",
+   "fix": "physicsCoreScenesB10.ts: the tree is data (PARTICLE_TREE), names short with qualifiers on a second line, spaced so no label leaves its place; examples (p, n / π, K) moved into the narration to stay inside the nine-label budget.",
+   "evidence": [
+    {
+     "file": "src/tests/physicsCardSemantics.test.ts",
+     "describe": "particle classification tree: the structure is true"
+    }
+   ],
+   "remaining": "Text-and-lines figure (ST-03 stays as a machine REVIEW)."
+  },
+  "phys.particle.conservation-laws": {
+   "initial": "ST-03: text only",
+   "decision": "PASS",
+   "finding": "Genuinely a text figure. Both reactions' B and L tallies and their ✓ / ✗ were recomputed from an independent particle table: neutron decay balances B, L and charge; p → e⁺ + γ breaks B and L but not charge.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "src/tests/physicsCardSemantics.test.ts",
+     "describe": "conservation-laws figure: the printed tallies and verdicts are the ones the particles give"
+    }
+   ],
+   "remaining": "None for correctness. ST-03 stays by design."
+  }
+ }
+}

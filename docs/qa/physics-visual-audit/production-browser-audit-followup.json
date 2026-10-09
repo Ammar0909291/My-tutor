@@ -1,0 +1,703 @@
+{
+ "deployment": "dpl_CXRW4xg7LmvBbvoqRUzWyYsmrivy",
+ "commit": "9ffaec0bd2bb9f95798fb55f18928ddf1cb8d3ac",
+ "page": "/learn?subject=physics (real lesson page, production bundle)",
+ "viewports": [
+  "mobile 390",
+  "desktop-column 1280"
+ ],
+ "themes": [
+  "dark",
+  "light"
+ ],
+ "accounts": "disposable, deleted after each run",
+ "runs": [
+  {
+   "run": "scenes (first run; the same run also measured cards mid-reveal and the orbital explorer with a mis-marked frame \u2014 superseded by the card runs below)",
+   "base": "https://my-tutor-flame.vercel.app",
+   "at": "2026-10-08T23:00:03.971Z",
+   "rows": [
+    {
+     "conceptId": "phys.mech.conservation-of-momentum",
+     "vp": "mobile",
+     "theme": "dark",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.mech.conservation-of-momentum",
+     "vp": "mobile",
+     "theme": "light",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.mech.conservation-of-momentum",
+     "vp": "desktop-column",
+     "theme": "dark",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.mech.conservation-of-momentum",
+     "vp": "desktop-column",
+     "theme": "light",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.opt.mirrors",
+     "vp": "mobile",
+     "theme": "dark",
+     "verdict": "REVIEW_REQUIRED",
+     "fails": [],
+     "reviews": [
+      "LY-02 \"P\" overlaps drawn geometry (25% of its box)"
+     ]
+    },
+    {
+     "conceptId": "phys.opt.mirrors",
+     "vp": "mobile",
+     "theme": "light",
+     "verdict": "REVIEW_REQUIRED",
+     "fails": [],
+     "reviews": [
+      "LY-02 \"P\" overlaps drawn geometry (25% of its box)"
+     ]
+    },
+    {
+     "conceptId": "phys.opt.mirrors",
+     "vp": "desktop-column",
+     "theme": "dark",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.opt.mirrors",
+     "vp": "desktop-column",
+     "theme": "light",
+     "verdict": "REVIEW_REQUIRED",
+     "fails": [],
+     "reviews": [
+      "LY-02 \"F\" overlaps drawn geometry (22% of its box)"
+     ]
+    },
+    {
+     "conceptId": "phys.opt.lenses",
+     "vp": "mobile",
+     "theme": "dark",
+     "verdict": "REVIEW_REQUIRED",
+     "fails": [],
+     "reviews": [
+      "LY-02 \"O\" overlaps drawn geometry (25% of its box)"
+     ]
+    },
+    {
+     "conceptId": "phys.opt.lenses",
+     "vp": "mobile",
+     "theme": "light",
+     "verdict": "REVIEW_REQUIRED",
+     "fails": [],
+     "reviews": [
+      "LY-02 \"O\" overlaps drawn geometry (25% of its box)",
+      "LY-02 \"F\" overlaps drawn geometry (23% of its box)"
+     ]
+    },
+    {
+     "conceptId": "phys.opt.lenses",
+     "vp": "desktop-column",
+     "theme": "dark",
+     "verdict": "REVIEW_REQUIRED",
+     "fails": [],
+     "reviews": [
+      "LY-02 \"F\" overlaps drawn geometry (24% of its box)"
+     ]
+    },
+    {
+     "conceptId": "phys.opt.lenses",
+     "vp": "desktop-column",
+     "theme": "light",
+     "verdict": "REVIEW_REQUIRED",
+     "fails": [],
+     "reviews": [
+      "LY-02 \"O\" overlaps drawn geometry (22% of its box)",
+      "LY-02 \"F\" overlaps drawn geometry (25% of its box)"
+     ]
+    },
+    {
+     "conceptId": "phys.opt.lens-power",
+     "vp": "mobile",
+     "theme": "dark",
+     "verdict": "REVIEW_REQUIRED",
+     "fails": [],
+     "reviews": [
+      "LY-02 \"O\" overlaps drawn geometry (25% of its box)"
+     ]
+    },
+    {
+     "conceptId": "phys.opt.lens-power",
+     "vp": "mobile",
+     "theme": "light",
+     "verdict": "REVIEW_REQUIRED",
+     "fails": [],
+     "reviews": [
+      "LY-02 \"O\" overlaps drawn geometry (25% of its box)",
+      "LY-02 \"F\" overlaps drawn geometry (23% of its box)"
+     ]
+    },
+    {
+     "conceptId": "phys.opt.lens-power",
+     "vp": "desktop-column",
+     "theme": "dark",
+     "verdict": "REVIEW_REQUIRED",
+     "fails": [],
+     "reviews": [
+      "LY-02 \"F\" overlaps drawn geometry (24% of its box)"
+     ]
+    },
+    {
+     "conceptId": "phys.opt.lens-power",
+     "vp": "desktop-column",
+     "theme": "light",
+     "verdict": "REVIEW_REQUIRED",
+     "fails": [],
+     "reviews": [
+      "LY-02 \"O\" overlaps drawn geometry (22% of its box)",
+      "LY-02 \"F\" overlaps drawn geometry (25% of its box)"
+     ]
+    },
+    {
+     "conceptId": "phys.particle.particle-classification",
+     "vp": "mobile",
+     "theme": "dark",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.particle.particle-classification",
+     "vp": "mobile",
+     "theme": "light",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.particle.particle-classification",
+     "vp": "desktop-column",
+     "theme": "dark",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.particle.particle-classification",
+     "vp": "desktop-column",
+     "theme": "light",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    }
+   ]
+  },
+  {
+   "run": "cards-A",
+   "description": "force, free-body-diagram, friction, normal-force, equilibrium, hydrogen-atom-qm \u2014 waited until the picture stopped changing",
+   "base": "https://my-tutor-flame.vercel.app",
+   "at": "2026-10-09T00:31:24.430Z",
+   "tally": {
+    "PASS": 24
+   },
+   "rows": [
+    {
+     "conceptId": "phys.mech.force",
+     "vp": "mobile",
+     "theme": "dark",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.mech.force",
+     "vp": "mobile",
+     "theme": "light",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.mech.force",
+     "vp": "desktop-column",
+     "theme": "dark",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.mech.force",
+     "vp": "desktop-column",
+     "theme": "light",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.mech.free-body-diagram",
+     "vp": "mobile",
+     "theme": "dark",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.mech.free-body-diagram",
+     "vp": "mobile",
+     "theme": "light",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.mech.free-body-diagram",
+     "vp": "desktop-column",
+     "theme": "dark",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.mech.free-body-diagram",
+     "vp": "desktop-column",
+     "theme": "light",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.mech.friction",
+     "vp": "mobile",
+     "theme": "dark",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.mech.friction",
+     "vp": "mobile",
+     "theme": "light",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.mech.friction",
+     "vp": "desktop-column",
+     "theme": "dark",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.mech.friction",
+     "vp": "desktop-column",
+     "theme": "light",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.mech.normal-force",
+     "vp": "mobile",
+     "theme": "dark",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.mech.normal-force",
+     "vp": "mobile",
+     "theme": "light",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.mech.normal-force",
+     "vp": "desktop-column",
+     "theme": "dark",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.mech.normal-force",
+     "vp": "desktop-column",
+     "theme": "light",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.mech.equilibrium",
+     "vp": "mobile",
+     "theme": "dark",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.mech.equilibrium",
+     "vp": "mobile",
+     "theme": "light",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.mech.equilibrium",
+     "vp": "desktop-column",
+     "theme": "dark",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.mech.equilibrium",
+     "vp": "desktop-column",
+     "theme": "light",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.qm.hydrogen-atom-qm",
+     "vp": "mobile",
+     "theme": "dark",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.qm.hydrogen-atom-qm",
+     "vp": "mobile",
+     "theme": "light",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.qm.hydrogen-atom-qm",
+     "vp": "desktop-column",
+     "theme": "dark",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.qm.hydrogen-atom-qm",
+     "vp": "desktop-column",
+     "theme": "light",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    }
+   ]
+  },
+  {
+   "run": "cards-B",
+   "description": "wave-particle-duality, youngs-experiment, wave-function, particle-in-box, quantum-tunneling \u2014 waited until the picture stopped changing",
+   "base": "https://my-tutor-flame.vercel.app",
+   "at": "2026-10-09T00:27:18.945Z",
+   "tally": {
+    "PASS": 20
+   },
+   "rows": [
+    {
+     "conceptId": "phys.mod.wave-particle-duality",
+     "vp": "mobile",
+     "theme": "dark",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.mod.wave-particle-duality",
+     "vp": "mobile",
+     "theme": "light",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.mod.wave-particle-duality",
+     "vp": "desktop-column",
+     "theme": "dark",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.mod.wave-particle-duality",
+     "vp": "desktop-column",
+     "theme": "light",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.opt.youngs-experiment",
+     "vp": "mobile",
+     "theme": "dark",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.opt.youngs-experiment",
+     "vp": "mobile",
+     "theme": "light",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.opt.youngs-experiment",
+     "vp": "desktop-column",
+     "theme": "dark",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.opt.youngs-experiment",
+     "vp": "desktop-column",
+     "theme": "light",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.qm.wave-function",
+     "vp": "mobile",
+     "theme": "dark",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.qm.wave-function",
+     "vp": "mobile",
+     "theme": "light",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.qm.wave-function",
+     "vp": "desktop-column",
+     "theme": "dark",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.qm.wave-function",
+     "vp": "desktop-column",
+     "theme": "light",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.qm.particle-in-box",
+     "vp": "mobile",
+     "theme": "dark",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.qm.particle-in-box",
+     "vp": "mobile",
+     "theme": "light",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.qm.particle-in-box",
+     "vp": "desktop-column",
+     "theme": "dark",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.qm.particle-in-box",
+     "vp": "desktop-column",
+     "theme": "light",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.qm.quantum-tunneling",
+     "vp": "mobile",
+     "theme": "dark",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.qm.quantum-tunneling",
+     "vp": "mobile",
+     "theme": "light",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.qm.quantum-tunneling",
+     "vp": "desktop-column",
+     "theme": "dark",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.qm.quantum-tunneling",
+     "vp": "desktop-column",
+     "theme": "light",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    }
+   ]
+  },
+  {
+   "run": "retry-tunneling-normal-force",
+   "description": "a second tutor reply for normal-force and quantum-tunneling (the first replies were too short to reveal every step of the card)",
+   "base": "https://my-tutor-flame.vercel.app",
+   "at": "2026-10-09T01:00:28.182Z",
+   "tally": {
+    "PASS": 8
+   },
+   "rows": [
+    {
+     "conceptId": "phys.mech.normal-force",
+     "vp": "mobile",
+     "theme": "dark",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.mech.normal-force",
+     "vp": "mobile",
+     "theme": "light",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.mech.normal-force",
+     "vp": "desktop-column",
+     "theme": "dark",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.mech.normal-force",
+     "vp": "desktop-column",
+     "theme": "light",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.qm.quantum-tunneling",
+     "vp": "mobile",
+     "theme": "dark",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.qm.quantum-tunneling",
+     "vp": "mobile",
+     "theme": "light",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.qm.quantum-tunneling",
+     "vp": "desktop-column",
+     "theme": "dark",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.qm.quantum-tunneling",
+     "vp": "desktop-column",
+     "theme": "light",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    }
+   ]
+  },
+  {
+   "run": "retry-normal-force",
+   "description": "a third normal-force reply (one desktop-column/dark navigation timed out; ERR_TIMED_OUT, not a figure failure)",
+   "base": "https://my-tutor-flame.vercel.app",
+   "at": "2026-10-09T01:04:40.731Z",
+   "tally": {
+    "PASS": 3,
+    "NOT_RUN": 1
+   },
+   "rows": [
+    {
+     "conceptId": "phys.mech.normal-force",
+     "vp": "mobile",
+     "theme": "dark",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.mech.normal-force",
+     "vp": "mobile",
+     "theme": "light",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    },
+    {
+     "conceptId": "phys.mech.normal-force",
+     "vp": "desktop-column",
+     "theme": "dark",
+     "verdict": "NOT_RUN",
+     "fails": [],
+     "reviews": [],
+     "note": "Error: page.goto: net::ERR_TIMED_OUT at https://my-tutor-flame.vercel.app/learn?subject=physics"
+    },
+    {
+     "conceptId": "phys.mech.normal-force",
+     "vp": "desktop-column",
+     "theme": "light",
+     "verdict": "PASS",
+     "fails": [],
+     "reviews": []
+    }
+   ]
+  }
+ ]
+}

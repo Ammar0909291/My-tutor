@@ -47,6 +47,7 @@ import { Html } from '@react-three/drei'
 import type { Theme } from '@/components/Providers'
 import type { Vec3 } from '@/lib/teaching/sceneSpec'
 import { LABEL_LINE_HEIGHT_RATIO } from '@/lib/teaching/visual/layout'
+import { FIGURE_SURFACE, readableTextColor } from '@/lib/teaching/sceneGenerators/visualDesign'
 
 /**
  * RESPONSIVE SIZE, ONE RULE FOR EVERY SCENE.
@@ -90,9 +91,18 @@ export interface SceneLabelProps {
    * planned for and the box the browser paints are one box.
    */
   maxWidthPx?: number
+  /**
+   * Back the text with the figure's own surface colour. Set by the placement
+   * layer ONLY for a label the solver could not move clear of drawn geometry
+   * (a large body, a crowded corner): text over a same-hue sphere measured
+   * 2.3:1 in the browser, below the 4.5:1 every label must hold. The plate is a
+   * box-shadow, so it adds no layout width and the solver's planned box is
+   * still the painted one; a label in free space never gets one.
+   */
+  plate?: boolean
 }
 
-export function SceneLabel({ text, position, color, theme, tier, maxWidthPx }: SceneLabelProps) {
+export function SceneLabel({ text, position, color, theme, tier, maxWidthPx, plate }: SceneLabelProps) {
   const scale = typeof tier === 'number' && tier > 0 ? Math.min(tier, 3) : 1
   const heading = scale >= HEADING_TIER
 
@@ -106,7 +116,8 @@ export function SceneLabel({ text, position, color, theme, tier, maxWidthPx }: S
           fontSize: `clamp(${(FLOOR_PX * scale).toFixed(2)}px, ${(IDEAL_VW * scale).toFixed(2)}vw, ${(CEILING_PX * scale).toFixed(2)}px)`,
           fontWeight: heading ? 800 : 700,
           letterSpacing: heading ? '0.02em' : undefined,
-          color,
+          // ENGL-017: label text never drops below 4.5:1 on the figure surface.
+          color: readableTextColor(color, theme === 'light' ? 'light' : 'dark'),
           // `width`, not `maxWidth`: drei's <Html> wrapper is a zero-width
           // absolutely-positioned box, so an inline-block inside it shrinks to
           // its minimum content width — measured, that wrapped a caption to ONE
@@ -125,6 +136,13 @@ export function SceneLabel({ text, position, color, theme, tier, maxWidthPx }: S
           // exists to separate a label from a ray or a wave crossing behind it;
           // a black glow around dark text on a light panel does the opposite.
           // This is the single rule the two 3D primitives were missing.
+          ...(plate
+            ? {
+                background: FIGURE_SURFACE[theme === 'light' ? 'light' : 'dark'],
+                boxShadow: `0 0 0 2px ${FIGURE_SURFACE[theme === 'light' ? 'light' : 'dark']}`,
+                borderRadius: 2,
+              }
+            : {}),
           textShadow: theme === 'light'
             ? (heading ? '0 1px 4px rgba(255,255,255,0.95)' : '0 0 3px rgba(255,255,255,0.9)')
             : (heading ? '0 1px 4px rgba(0,0,0,0.85)' : '0 0 3px rgba(0,0,0,0.6)'),

@@ -121,8 +121,18 @@ export function dropQuestionSentences(text: string): string {
   const tags: string[] = []
   const masked = (text ?? '')
     .replace(/<!--[\s\S]*?-->/g, (tag) => (tag.includes('?') ? '' : `\u0000${tags.push(tag) - 1}\u0000`))
-  if (!/\?/.test(masked)) return masked.replace(/\u0000(\d+)\u0000/g, (_, i) => tags[Number(i)]).replace(/\n{3,}/g, '\n\n').trim()
-  return masked
+  // ENGL-012 (2026-10-07, english #185, #138, #92): a "?" inside quotation
+  // marks is quoted example text ("The historian asks, “What was happening?”"),
+  // not a question to the learner. Splitting on it dropped everything from the
+  // sentence start to the "?" and left the closing ” — "” – they look for
+  // clues…", "1.” 2. Sam…". A quoted span on one line is masked whole first.
+  const quotes: string[] = []
+  const quoteMasked = masked.replace(/“[^”\n]*”|"[^"\n]*"/g, (q) => `\u0001${quotes.push(q) - 1}\u0001`)
+  const restore = (s: string) => s
+    .replace(/\u0001(\d+)\u0001/g, (_, i) => quotes[Number(i)])
+    .replace(/\u0000(\d+)\u0000/g, (_, i) => tags[Number(i)])
+  if (!/\?/.test(quoteMasked)) return restore(quoteMasked).replace(/\n{3,}/g, '\n\n').trim()
+  return restore(quoteMasked
     .split(/\n{2,}/)
     .map((para) => para
       .split('\n')
@@ -135,8 +145,7 @@ export function dropQuestionSentences(text: string): string {
       .join('\n'))
     .filter(Boolean)
     .join('\n\n')
-    .replace(/\u0000(\d+)\u0000/g, (_, i) => tags[Number(i)])
-    .trim()
+    .trim())
 }
 
 /**

@@ -186,6 +186,10 @@ npx tsc --noEmit       # pre-existing stripe/subscription errors are expected on
 - **No boards/curricula yet (owner, 2026-09-25):** there is no CBSE, ICSE or any other board mapping in the product. Work subject by subject on the canonical KGs only — never add, assume or optimise for a board/syllabus mapping unless the owner says so.
 - **AI provider (owner, 2026-09-25): Groq first, from now on.** Keep the default chain Groq -> Gemini -> OpenRouter; Gemini is fallback only. Never set `AI_PROVIDER_MODE=gemini_only`. If production logs show Groq `spend_limit_reached`, tell the owner (it is a Groq-console/`GROQ_API_KEY` fix, not a code fix).
 
+- **Biology figure layout is Biology-only (2026-10-09).** Shared scene generators/renderer layout rules stay behind `isBiologyScene` /
+  `ExplainerFigure`'s `fitToCanvas`; Physics/Chemistry/Mathematics audits fingerprint byte-identical output. Rendered-figure audit,
+  harnesses and rules: `docs/qa/biology-visual-audit/README.md`, `docs/architecture/BIOLOGY_VISUAL_COVERAGE_HANDOVER.md` (render-audit section).
+
 ## Repository branch policy (binding)
 - `main` is THE only active working branch. Check out `main`, commit on `main`, push to `main` —
   this OVERRIDES any session-designated feature branch a harness may configure: if a session
@@ -201,6 +205,11 @@ npx tsc --noEmit       # pre-existing stripe/subscription errors are expected on
   verify/change — no session in this environment has Vercel env-var/branch-config credentials).
 
 ## Where to find live subject/asset state (don't trust a number in this file — regenerate it)
+- Physics visual render audit (2026-10-08): every served physics figure is rendered in Chromium (390 px + 1280 px,
+  both themes) and verdicted; `physicsVisualAudit.test.ts` FAILS, naming the concepts, when a served physics figure
+  changes without a re-audit. The 21 figures the machine leaves REVIEW_REQUIRED carry a human decision in
+  `docs/qa/physics-visual-audit/semantic-review.json` (`physicsSemanticReview.test.ts` enforces it; 2026-10-08). Re-audit only those concepts (`render.ts --concepts` → `validate.ts` → `merge-audit.ts`):
+  `docs/history/physics-visual-readability-gate.md`; report `docs/qa/PHYSICS_VISUAL_QUALITY_REPORT.md`.
 - Mathematics: `npx tsx scripts/math/state.ts`
 - Physics: `npx tsx scripts/physics/state.ts`
 - Asset-contract readiness (all subjects, incl. KG-registered-but-unauthored ones):

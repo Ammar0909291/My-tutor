@@ -42,6 +42,7 @@
 
 import { compileExpression } from '@/lib/visuals/mathParser'
 import { isLayoutSafe, checkSceneLayoutAllViewports } from './layout'
+import { containsRawLatex, payloadBlockers } from './figureAudit'
 import { generateJSON } from '@/lib/ai/client'
 import type { ArchetypeContext } from './archetypes'
 import type { GeneratedFigure } from './visualEngine'
@@ -168,6 +169,16 @@ export function figureText(figure: GeneratedFigure): string[] {
  * describe as a curve.
  */
 export function checkRendering(figure: GeneratedFigure): { verdict: DimensionVerdict; reason: string } {
+  // The SAME payload blockers the admission gate applies to every authored
+  // figure (figureAudit.payloadBlockers): a generated figure is held to no
+  // weaker a bar than an authored one.
+  const blockers = payloadBlockers(
+    figure.kind === 'scene'
+      ? { renderer: 'scene', sceneSpec: figure.scene }
+      : { renderer: 'spec', visualSpec: figure.spec },
+  )
+  if (blockers.length) return { verdict: 'fail', reason: `payload blocked: ${blockers[0]}` }
+
   if (figure.kind === 'scene') {
     if (!isLayoutSafe(figure.scene)) {
       const reports = checkSceneLayoutAllViewports(figure.scene)
@@ -249,11 +260,7 @@ export function processFlowIsAList(spec: { title?: unknown; steps?: unknown }): 
  * the source and can see what the notation MEANS — which is exactly the class of
  * defect a deterministic check catches better than a model does.
  */
-const LATEX_MARKERS = /\\(?:frac|sqrt|cdot|times|alpha|beta|gamma|theta|pi|mu|Delta|sum|int)\b|\$[^$]+\$|\\\(|\\\[/
-
-export function containsRawLatex(text: string): boolean {
-  return LATEX_MARKERS.test(text)
-}
+export { containsRawLatex } // single definition lives in figureAudit; re-exported for existing importers
 
 /**
  * GROUNDING — can the tutor talk about this figure from what it carries?

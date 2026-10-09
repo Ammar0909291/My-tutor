@@ -37,7 +37,10 @@ export function VisualPlaybackControls({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    color: '#fff',
+    // On a --coral fill the glyph must use --on-accent: the dark theme's coral is
+    // chalk-yellow, where a literal white measured 1.84:1 (the repo's own token
+    // note: "White on chalk-yellow is ~1.7:1"). Fallback keeps the old white.
+    color: 'var(--on-accent, #fff)',
     background: 'var(--coral, #FF6B5E)',
     boxShadow: '0 2px 0 rgba(0,0,0,0.18)',
     lineHeight: 1,
@@ -106,9 +109,12 @@ export function VisualPlaybackControls({
                 cursor: 'pointer',
                 borderRadius: 999,
                 padding: '3px 8px',
+                // WCAG 2.2 target size: the speed chips measured 38x21, 26x21 px.
+                minHeight: 24,
+                minWidth: 24,
                 fontSize: 10,
                 fontWeight: 800,
-                color: active ? '#fff' : 'var(--text-secondary, #aaa)',
+                color: active ? 'var(--on-accent, #fff)' : 'var(--text-secondary, #aaa)',
                 background: active ? 'var(--coral, #FF6B5E)' : 'transparent',
               }}
             >

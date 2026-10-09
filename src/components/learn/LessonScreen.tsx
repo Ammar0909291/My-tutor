@@ -5592,7 +5592,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                         message, so a reply never carries both. */}
                     {!isUser && !msg.streaming && msg.sceneSpec && (
                       <div style={hasCanvasVisual ? CANVAS_VISUAL_FRAME : VISUAL_FRAME}>
-                        <SceneSpecFigure spec={msg.sceneSpec} learnerLevel={learnerLevel} />
+                        <SceneSpecFigure spec={msg.sceneSpec} learnerLevel={learnerLevel} fitToCanvas={subjectSlug === 'biology'} />
                       </div>
                     )}
 

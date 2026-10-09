@@ -1,0 +1,79 @@
+[
+ {
+  "kind": "torque_diagram",
+  "states": 36,
+  "built": 36,
+  "refusedByValidator": 0,
+  "failures": []
+ },
+ {
+  "kind": "electric_dipole",
+  "states": 176,
+  "built": 176,
+  "refusedByValidator": 0,
+  "failures": []
+ },
+ {
+  "kind": "projectile",
+  "states": 12,
+  "built": 12,
+  "refusedByValidator": 0,
+  "failures": []
+ },
+ {
+  "kind": "vector",
+  "states": 93,
+  "built": 87,
+  "refusedByValidator": 6,
+  "failures": []
+ },
+ {
+  "kind": "circular",
+  "states": 15,
+  "built": 15,
+  "refusedByValidator": 0,
+  "failures": []
+ },
+ {
+  "kind": "pendulum",
+  "states": 15,
+  "built": 15,
+  "refusedByValidator": 0,
+  "failures": []
+ },
+ {
+  "kind": "collision",
+  "states": 176,
+  "built": 42,
+  "refusedByValidator": 134,
+  "failures": []
+ },
+ {
+  "kind": "kinematics_graphs",
+  "states": 36,
+  "built": 36,
+  "refusedByValidator": 0,
+  "failures": []
+ },
+ {
+  "kind": "ray_optics",
+  "states": 121,
+  "built": 120,
+  "refusedByValidator": 1,
+  "failures": []
+ },
+ {
+  "kind": "electric_circuit",
+  "states": 65,
+  "built": 65,
+  "refusedByValidator": 0,
+  "failures": []
+ },
+ {
+  "kind": "gravitation_orbit",
+  "states": 12,
+  "built": 12,
+  "refusedByValidator": 0,
+  "failures": []
+ }
+]

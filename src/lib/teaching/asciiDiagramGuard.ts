@@ -100,6 +100,8 @@
 // effect... (think of the two arms of an interferometer):") before its
 // terminating colon — over 150 characters of ordinary sentence, not
 // decoration. Checked against the exact reproduced text, not assumed.
+import { parseSpecies } from '@/lib/text/chemSpecies.pure'
+
 const ASCII_LEADIN_RE =
   /(?:^|\n)([^\n]{0,160}\bascii\b[^\n]{0,40}\b(?:sketch|diagram|art|drawing|figure|picture)\b[^\n]{0,200}?|[^\n]{0,160}\b(?:sketch|diagram|art|drawing|figure|picture)\b[^\n]{0,40}\bascii\b[^\n]{0,200}?)[.:]\s*\n+([^\n]+(?:\n[^\n]+)*)\n+/gi
 
@@ -134,6 +136,39 @@ function isPointerOnlyLine(line: string): boolean {
   return /^[\s^|<>\-+*=~.:_/\\]*$/.test(line)
 }
 
+/**
+ * A fence holding ONE line that is a chain of chemical species — "S → SO₂ → SO₃ → H₂SO₄",
+ * "N₂ + 3H₂ → 2NH₃ → NO" — is a reaction written as text, not a drawing.
+ *
+ * The arrow-glyph rule below ("two or more arrows in a fence is a drawing") was added for a drawn
+ * grammar sketch ("The dog → barks → loudly" over a row of labels). It cannot tell that from a
+ * single-line reaction chain, and on the 135 chemistry concepts that have no figure the chain was
+ * deleted whole, leaving the lead-in ("Here is the Contact Process:") hanging on nothing
+ * (2026-10-08 Chemistry Visual Quality audit, executed against the real function).
+ *
+ * Deliberately narrow: ONE line, and every part between the arrows (split on " + " too) must parse as
+ * a species — every letter group a real element, via the same parser the chemistry audit uses — with
+ * at least one part carrying real chemistry (a subscript, a charge, a state symbol or a coefficient,
+ * so "S → A → B" is not enough). Anything with words in it ("The dog", "reactants", "step 1") fails
+ * to parse and is still treated as a drawing.
+ */
+const ARROW_SPLIT_RE = /\s*(?:→|⇒|⟶|↔|⇌|-{1,2}>|=>)\s*/
+export function isReactionChainLine(body: string): boolean {
+  const trimmed = body.trim()
+  if (trimmed.length === 0 || trimmed.includes('\n')) return false
+  const parts = trimmed.split(ARROW_SPLIT_RE)
+  if (parts.length < 2) return false
+  let sawChemistry = false
+  for (const part of parts) {
+    for (const species of part.split(/\s+\+\s+/)) {
+      const sp = parseSpecies(species.trim())
+      if (!sp.ok) return false
+      if (sp.hasChemSignal) sawChemistry = true
+    }
+  }
+  return sawChemistry
+}
+
 /** Names a diagram-shaped noun — the vocabulary actually observed in the two
  *  reproduced lead-ins, kept short rather than guessed wider. */
 const DIAGRAM_WORD_RE = /\b(diagram|chart|sketch|picture|figure)\b/i
@@ -158,7 +193,7 @@ function processFenceBody(
   // figure attached): "The dog → barks → loudly / (subject) (verb) (adverb)".
   // Code does not use these glyphs (JavaScript's arrow is "=>"), so two or more
   // of them in a fence is a drawing, and with no figure it goes.
-  if ((body.match(/[→←↑↓⇒⇐⇑⇓↔]/g) ?? []).length >= 2) {
+  if ((body.match(/[→←↑↓⇒⇐⇑⇓↔]/g) ?? []).length >= 2 && !isReactionChainLine(body)) {
     return { text: '', removed: true }
   }
   const lines = body.split('\n')

@@ -21,3 +21,14 @@ export function countAxisPoints(xMin: number, xMax: number, maxPoints = 60): num
   for (let n = lo; n <= hi; n += step) out.push(n)
   return out
 }
+
+/**
+ * ENGL-017 (2026-10-07, eng.phonetics.intonation-patterns #23): an intonation
+ * graph titled "Pitch over Time" opened on −10…10 s, so half the curve sat at
+ * negative time. A time/duration x-axis with no authored domain starts at 0.
+ */
+const NON_NEGATIVE_AXIS_RE = /\b(?:time|duration|seconds?|elapsed)\b|\((?:s|sec|ms|min|h)\)/i
+
+export function isNonNegativeAxis(xLabel: string | null | undefined): boolean {
+  return NON_NEGATIVE_AXIS_RE.test((xLabel ?? '').trim())
+}

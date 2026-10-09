@@ -274,3 +274,108 @@ function parseHex(hex: string): [number, number, number] | null {
   const n = parseInt(m[1], 16)
   return [(n >> 16) & 255, (n >> 8) & 255, n & 255]
 }
+
+// ── label text contrast floor (ENGL-017) ─────────────────────────────────────
+// ENGL-017 (2026-10-07, english #48 Semantic Fields, #116, #165, #202): a
+// generated scene coloured its labels with CSS names ("blue", "red", "purple")
+// that themeColor() passes through untouched — "Weather Field" in #0000ff on the
+// #243329 chalkboard is 1.6:1, effectively invisible. Mesh colours stay as
+// authored; only TEXT is held to 4.5:1 against the figure surface, by mixing
+// the authored hue toward white (dark) or black (light) until it clears.
+
+export const FIGURE_SURFACE = { dark: '#243329', light: '#FAF7EE' } as const
+
+const NAMED: Record<string, string> = {
+  black: '#000000', white: '#ffffff', red: '#ff0000', green: '#008000', blue: '#0000ff',
+  navy: '#000080', darkblue: '#00008b', mediumblue: '#0000cd', purple: '#800080', indigo: '#4b0082',
+  violet: '#ee82ee', magenta: '#ff00ff', fuchsia: '#ff00ff', maroon: '#800000', darkred: '#8b0000',
+  brown: '#a52a2a', darkgreen: '#006400', olive: '#808000', teal: '#008080', gray: '#808080',
+  grey: '#808080', darkgray: '#a9a9a9', darkgrey: '#a9a9a9', dimgray: '#696969', orange: '#ffa500',
+  yellow: '#ffff00', gold: '#ffd700', pink: '#ffc0cb', cyan: '#00ffff', aqua: '#00ffff',
+  lime: '#00ff00', silver: '#c0c0c0', crimson: '#dc143c', rebeccapurple: '#663399',
+  darkviolet: '#9400d3', darkslategray: '#2f4f4f', slateblue: '#6a5acd', royalblue: '#4169e1',
+}
+
+function toRgb(color: string): [number, number, number] | null {
+  const c = color.trim().toLowerCase()
+  const hex = NAMED[c] ?? c
+  const m = /^#([0-9a-f]{3}|[0-9a-f]{6})$/.exec(hex)
+  if (!m) return null
+  const h = m[1].length === 3 ? m[1].split('').map((x) => x + x).join('') : m[1]
+  return [0, 2, 4].map((i) => parseInt(h.slice(i, i + 2), 16)) as [number, number, number]
+}
+
+function luminance([r, g, b]: [number, number, number]): number {
+  const f = (v: number) => { const s = v / 255; return s <= 0.03928 ? s / 12.92 : ((s + 0.055) / 1.055) ** 2.4 }
+  return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b)
+}
+
+function ratio(a: [number, number, number], b: [number, number, number]): number {
+  const [x, y] = [luminance(a), luminance(b)].sort((p, q) => q - p)
+  return (x + 0.05) / (y + 0.05)
+}
+
+/** `color` as label text, lifted to ≥ 4.5:1 on the figure surface. Unparseable colours are returned as given. */
+export function readableTextColor(color: string, theme: 'dark' | 'light'): string {
+  const rgb = toRgb(color)
+  if (!rgb) return color
+  const surface = toRgb(FIGURE_SURFACE[theme])!
+  if (ratio(rgb, surface) >= 4.5) return color
+  const target = theme === 'dark' ? 255 : 0
+  for (let t = 0.1; t <= 1.0001; t += 0.1) {
+    const mixed = rgb.map((v) => Math.round(v + (target - v) * t)) as [number, number, number]
+    if (ratio(mixed, surface) >= 4.5) return '#' + mixed.map((v) => v.toString(16).padStart(2, '0')).join('')
+  }
+  return theme === 'dark' ? '#ffffff' : '#000000'
+}
+
+/**
+ * `fg` lifted until it holds `min`:1 on an ARBITRARY backdrop (the 2D SVG cards,
+ * whose text can sit on the board or on a box a figure paints itself).
+ *
+ * `readableTextColor` above answers the same question for scene labels against
+ * the two known figure surfaces; this is the general form. Same method: keep the
+ * authored hue, mix it toward white (dark backdrop) or black (light backdrop)
+ * in steps until it clears, so a figure that already reads well is untouched and
+ * one that does not keeps its colour identity as far as legibility allows.
+ */
+export function liftToContrast(
+  fg: [number, number, number],
+  bg: [number, number, number],
+  min = 4.5,
+): [number, number, number] {
+  if (ratio(fg, bg) >= min) return fg
+  // Black and white contrast equally with a backdrop of relative luminance
+  // ~0.179: darker than that, lift toward white; lighter, toward black.
+  const target = luminance(bg) > 0.179 ? 0 : 255
+  for (let t = 0.05; t <= 1.0001; t += 0.05) {
+    const mixed = fg.map((v) => Math.round(v + (target - v) * t)) as [number, number, number]
+    if (ratio(mixed, bg) >= min) return mixed
+  }
+  return [target, target, target]
+}
+
+/**
+ * The colour a figure DRAWS a graphic in (an arrow, a curve, a body, a legend
+ * swatch): `themeColor`'s answer, held to 3:1 on the figure surface — WCAG
+ * 1.4.11, for a graphic that carries meaning.
+ *
+ * `themeColor` itself still returns every non-palette colour untouched (the
+ * stored value is a wire format; two tests pin that). This is the separate,
+ * render-time step for the colours it passes through. Measured over the physics
+ * corpus: amber `#f59e0b` is 2.0:1 on the light board (the acceleration curve,
+ * a projectile's peak), `#eab308` 1.8:1 (mirrors, lenses), `#93c5fd` 1.7:1
+ * (vector figures) and `#64748b` 2.8:1 on the dark one. Only what falls short is
+ * lifted, as little as it takes; a colour that cannot be parsed is unchanged.
+ * Text has its own, stricter floor: `readableTextColor`.
+ */
+export function meshColor(color: string | null | undefined, theme: 'dark' | 'light'): string | undefined {
+  const resolved = themeColor(color, theme)
+  if (!resolved) return undefined
+  const rgb = toRgb(resolved)
+  if (!rgb) return resolved
+  const surface = toRgb(FIGURE_SURFACE[theme])!
+  if (ratio(rgb, surface) >= 3) return resolved
+  const lifted = liftToContrast(rgb, surface, 3)
+  return '#' + lifted.map((v) => v.toString(16).padStart(2, '0')).join('')
+}

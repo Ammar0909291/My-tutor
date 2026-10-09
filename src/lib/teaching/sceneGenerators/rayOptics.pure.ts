@@ -34,6 +34,9 @@ export interface RayOpticsParams {
 }
 
 const VISUAL_MAX = 14
+/** Camera framing, as in visual/layout.ts: a 50° field of view, geometry filling 78 % of the frame. */
+const TAN_HALF_FOV = Math.tan((50 * Math.PI) / 360)
+const FRAME_FILL = 0.78
 
 /** Sign convention: mirror/concave-lens focal length is negative; object distance is always negative. */
 function signedFocalLength(opticsType: OpticsType, magnitude: number): number {
@@ -148,6 +151,13 @@ export function buildRayOpticsScene(params: RayOpticsParams): SceneSpec {
   const imgY = round(geo.imageHeight * scale)
 
   const objectPos: Vec3 = [objX, objY, 0]
+  const planeHalf = round(Math.max(Math.abs(objY), Math.abs(imgY)) * 1.25 + 0.4)
+  // Everything drawn sits inside ±VISUAL_MAX across, and ±(plane + result label) up and down.
+  const halfY = planeHalf + 2.5
+  const cameraDistance = Math.round(Math.max(
+    VISUAL_MAX / (FRAME_FILL * TAN_HALF_FOV * (4 / 3)),
+    halfY / (FRAME_FILL * TAN_HALF_FOV),
+  ) * 10) / 10
   const imagePos: Vec3 = [imgX, imgY, 0]
   const elementLabel = params.opticsType.replace('_', ' ')
   // Light leaves a lens on the far side (+x) and a mirror back on the object side (−x).
@@ -155,10 +165,20 @@ export function buildRayOpticsScene(params: RayOpticsParams): SceneSpec {
 
   return {
     id: `ray-optics-${params.opticsType}-${params.objectDistance}-${params.focalLength}`,
-    title: `${elementLabel}: u=${params.objectDistance}cm, f=${params.focalLength}cm → v=${round(geo.v, 2)}cm`,
+    // SIGNED, in the Cartesian convention the formulas use (1/f = 1/v + 1/u for a mirror,
+    // 1/f = 1/v − 1/u for a lens): the object is always on the incoming side, so u < 0, and
+    // f is negative for a concave mirror / concave lens. The title used to print the magnitudes
+    // u=30, f=10 beside a SIGNED v=-15, so the three numbers on screen did not satisfy the
+    // formula printed in the lesson (1/-15 + 1/30 ≠ 1/10). The prose below still speaks in distances.
+    title: `${elementLabel}: u=${round(geo.u, 2)}cm, f=${round(geo.f, 2)}cm → v=${round(geo.v, 2)}cm`,
     sceneType: 'diagram',
     teachingGoal: 'Show how a mirror or lens forms an image from an object, and whether that image is real/virtual and erect/inverted.',
-    cameraDistance: VISUAL_MAX * 3,
+    // Framed to what is drawn, by the same rule `fitSceneToFrame` uses (4:3 frame, TARGET_FRAME_FILL):
+    // a fixed 3×VISUAL_MAX put the figure — a long, low strip, since heights are ~1/6 of distances
+    // when drawn to scale — at ~190 px of a 566 px desktop canvas (0.26 % ink), and cut a tall one
+    // (a 12 cm object 5 cm from a lens) off the top. A narrower canvas still moves the camera further
+    // out at render time (`cameraDistanceToContain`).
+    cameraDistance,
     // A flat ray diagram: no 3D floor grid or axis triad behind it.
     stage: { grid: false, axes: false },
     ariaLabel: `A ${elementLabel} forming a ${geo.real ? 'real' : 'virtual'}, ${geo.erect ? 'erect' : 'inverted'} image.`,
@@ -167,8 +187,15 @@ export function buildRayOpticsScene(params: RayOpticsParams): SceneSpec {
         narration: `An object of height ${params.objectHeight}cm sits ${params.objectDistance}cm from a ${elementLabel} with focal length ${params.focalLength}cm.`,
         objects: [
           { type: 'path', id: 'axis', points: [[-VISUAL_MAX, 0, 0], [VISUAL_MAX, 0, 0]], color: '#94a3b8' },
+          // The element itself: a plane through the pole/optical centre, tall enough to take both
+          // principal rays (the parallel ray meets it at the object's height). Without it the lens or
+          // mirror was only a dot with a name, and the rays bent at nothing.
+          { type: 'path', id: geo.isMirror ? 'mirror-plane' : 'lens-plane', points: [[0, -planeHalf, 0], [0, planeHalf, 0]], color: '#3b82f6' },
           { type: 'node', id: 'optical-element', position: [0, 0, 0], text: elementLabel, color: '#3b82f6', radius: 0.5 },
-          { type: 'node', id: 'pole', position: [0, 0, 0], text: 'P', color: '#3b82f6', radius: 0.1 },
+          // P is the POLE of a MIRROR; the matching point on a lens is its OPTICAL CENTRE, O. A lens
+          // figure labelled "P" named a point that does not exist on a lens, and on the lens-power
+          // lesson (P = 1/f) it also read as the power. The node id stays 'pole' for its consumers.
+          { type: 'node', id: 'pole', position: [0, 0, 0], text: geo.isMirror ? 'P' : 'O', color: '#3b82f6', radius: 0.1 },
           { type: 'node', id: 'focus', position: [focusX, 0, 0], text: 'F', color: '#f59e0b', radius: 0.3 },
           { type: 'arrow', id: 'object', from: [objX, 0, 0], to: objectPos, color: '#22c55e' },
         ],

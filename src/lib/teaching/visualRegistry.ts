@@ -167,7 +167,16 @@ const CONCEPT_VISUALS: Record<string, VisualEntry> = {
   // elastic/inelastic also correctly inherit the 'collision' scene
   // generator the orphaned 'phys.mech.collisions' key was clearly intended
   // for but could never reach (KG has no 'phys.mech.collisions' concept).
-  'phys.mech.conservation-of-momentum': { primary: 'three_momentum_collision', all: ['three_momentum_collision'] },
+  // Conservation of momentum is the one concept in this family that the 3D card
+  // could not teach: it draws unlabeled spheres and arrows, so nothing on screen
+  // says the total is the same before and after — and its sphere sizes (the only
+  // mass cue) implied masses for which the drawn velocities did NOT conserve
+  // momentum. It now takes the 'collision' generator like its siblings: masses and
+  // velocities are printed, the generator re-derives the total from the DRAWN vectors
+  // (checkCollisionConsistency), and the learner can switch between an elastic and a
+  // perfectly inelastic collision — the EB's own "individual speeds change, the sum
+  // does not" example. The card stays the primary/fallback.
+  'phys.mech.conservation-of-momentum': { primary: 'three_momentum_collision', all: ['three_momentum_collision'], sceneGenerator: 'collision' },
   'phys.mech.collisions-elastic':     { primary: 'three_momentum_collision', all: ['three_momentum_collision'], sceneGenerator: 'collision' },
   'phys.mech.collisions-inelastic':   { primary: 'three_momentum_collision', all: ['three_momentum_collision'], sceneGenerator: 'collision' },
   // Gravitation/orbital concepts pair with the same gravitation_orbit scene
@@ -224,7 +233,10 @@ const CONCEPT_VISUALS: Record<string, VisualEntry> = {
   // already models (a single thin lens, object/image/focal-length) — power
   // is just 1/f of that identical lens, not a different phenomenon. Reuses
   // the lenses mapping rather than inventing a second entry for one formula.
-  'phys.opt.lens-power':              { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'ray_optics' },
+  // No sceneGenerator on purpose (2026-10-09): a ray_optics row would give this concept the single-lens
+  // sliders of phys.opt.lenses. Its own figure — P = 1/f and P = P1 + P2 — is authored in CONCEPT_SCENES
+  // (lensPower.ts), which is consulted before the card, exactly as for phys.meas.vector-products.
+  'phys.opt.lens-power':              { primary: 'force_diagram', all: ['force_diagram'] },
   // Young's Double-Slit Experiment IS the double_slit visual — exact title
   // match, and the visual's own description ("particles... build up a
   // wave-like interference pattern") is this experiment. Deliberately NOT

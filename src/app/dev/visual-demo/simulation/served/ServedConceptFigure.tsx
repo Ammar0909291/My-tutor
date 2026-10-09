@@ -24,7 +24,7 @@ export function ServedConceptFigure({ conceptId, provenance, renderer, visualTyp
         <dt>card</dt><dd data-testid="served-card">{visualType ?? '—'}</dd>
         <dt>scene kind</dt><dd data-testid="served-kind">{sceneSpec?.parametric?.kind ?? '—'}</dd>
       </dl>
-      {sceneSpec && <SceneSpecFigure spec={sceneSpec} />}
+      {sceneSpec && <SceneSpecFigure spec={sceneSpec} fitToCanvas={conceptId.startsWith('bio.')} />}
     </main>
   )
 }

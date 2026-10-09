@@ -20,11 +20,15 @@
  * no sliding clamp: none is in the concept, so none may be claimed.
  *
  * GEOMETRY (x grows to the right; the fork moves LEFT, into unwound parent):
- *   top template     3′ at the fork side … 5′ at the right
- *   bottom template  5′ at the fork side … 3′ at the right   (antiparallel)
- *   New DNA is built 5′→3′ only, so its arrowheads mark its 3′ end.
- *   · On the top template the new strand's 3′ end points AT the fork, so it
- *     can follow the fork continuously: the LEADING strand, one primer.
+ *   top template     5′ at the fork side … 3′ at the right
+ *   bottom template  3′ at the fork side … 5′ at the right   (antiparallel)
+ *   New DNA is built 5′→3′ only, so its arrowheads mark its 3′ end, and a new
+ *   strand runs ANTIPARALLEL to the template it copies.
+ *   · On the top template the new strand's 5′ end is at the right (against the
+ *     template's 3′ end) and its growing 3′ end points AT the fork, so it can
+ *     follow the fork continuously: the LEADING strand, one primer. This is the
+ *     textbook rule: the leading-strand template is read 3′→5′ in the direction
+ *     the fork moves (here leftward, from its 3′ end at the right to its 5′ end).
  *   · On the bottom template the new strand's 3′ end points AWAY from the
  *     fork, so it is made in short pieces, each started by its own primer
  *     near the fork: the LAGGING strand, Okazaki fragments. The oldest
@@ -85,10 +89,14 @@ export function buildDNAReplicationScene(): SceneSpec {
     line([FORK[0], -Y_PARENT, 0], [X_ARM, -Y_TEMPLATE, 0], PARENT, 0.06),
     line([X_ARM, -Y_TEMPLATE, 0], [X_END, -Y_TEMPLATE, 0], PARENT, 0.06),
     // Polarity: the parental ends at the left, the template ends at the right.
-    label('3′', [-4.95, 0.55, 0], PARENT, 'detail'),
-    label('5′', [-4.95, -0.55, 0], PARENT, 'detail'),
-    label('5′', [4.95, Y_TEMPLATE, 0], PARENT, 'detail'),
-    label('3′', [4.95, -Y_TEMPLATE, 0], PARENT, 'detail'),
+    // Each strand's two ends are opposite (5′ at one, 3′ at the other), and the two
+    // strands are antiparallel. The top strand is the LEADING-strand template, so its
+    // 3′ end is the far (right) end; labelling it the other way round made the drawn
+    // leading strand run parallel to its own template.
+    label('5′', [-4.95, 0.55, 0], PARENT, 'detail'),
+    label('3′', [-4.95, -0.55, 0], PARENT, 'detail'),
+    label('3′', [4.95, Y_TEMPLATE, 0], PARENT, 'detail'),
+    label('5′', [4.95, -Y_TEMPLATE, 0], PARENT, 'detail'),
     label('template', [3.0, 2.35, 0], PARENT, 'detail'),
   ]
 
@@ -98,7 +106,7 @@ export function buildDNAReplicationScene(): SceneSpec {
     // The newest lagging piece's primer, just laid down near the fork.
     line([OKAZAKI[0].primer![0], -Y_NEW, 0], [OKAZAKI[0].primer![1], -Y_NEW, 0], PRIMER, 0.08),
     dot([-1.0, -Y_NEW, 0], ENZYME, 0.18),
-    label('primase', [-1.9, -3.2, 0], ENZYME, 'primary'),
+    label('primase', [-1.4, -2.35, 0], ENZYME, 'primary'),
     label('RNA primer', [4.0, 0.6, 0], PRIMER, 'detail'),
   ]
 
@@ -142,8 +150,8 @@ export function buildDNAReplicationScene(): SceneSpec {
       'that a primer provides.',
     ariaLabel:
       'A replication fork. Parental double-stranded DNA on the left is unwound by helicase at the fork, ' +
-      'which moves left. The two template strands run in opposite directions: the top one 3′ to 5′ ' +
-      'from the fork, the bottom one 5′ to 3′. On the top template a new leading strand, started from ' +
+      'which moves left. The two template strands run in opposite directions: the top one 5′ to 3′ ' +
+      'away from the fork, the bottom one 3′ to 5′. On the top template a new leading strand, started from ' +
       'one RNA primer, is built continuously toward the fork by DNA polymerase. On the bottom template ' +
       'the lagging strand is built away from the fork in short Okazaki fragments, each begun by an RNA ' +
       'primer laid down by primase; ligase joins the fragments. Each new DNA molecule keeps one parental ' +
@@ -160,7 +168,7 @@ export function buildDNAReplicationScene(): SceneSpec {
         intent: 'relate',
         narration:
           'Each separated strand is now a template. They run in opposite directions: the top template ' +
-          'runs 3′ to 5′ away from the fork, the bottom one 5′ to 3′.',
+          'runs 5′ to 3′ away from the fork, the bottom one 3′ to 5′.',
         objects: templates,
       },
       {

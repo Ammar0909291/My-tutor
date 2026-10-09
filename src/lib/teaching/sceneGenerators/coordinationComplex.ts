@@ -24,6 +24,7 @@
 
 import type { SceneObject, SceneSpec, Vec3 } from '../sceneSpec'
 import { round, type ConsistencyResult } from './shared'
+import { chargeSuffix, metalChargeOf } from '@/lib/text/chemSpecies.pure'
 
 export type CoordinationGeometry = 'octahedral' | 'square_planar'
 export type Isomer = 'cis' | 'trans'
@@ -119,6 +120,18 @@ const LIGAND_COLOR_A = '#3b82f6'
 const LIGAND_COLOR_B = '#f59e0b'
 const METAL_COLOR = '#ef4444'
 
+/**
+ * "a central Co3+ ion" — the METAL's charge, derived from the complex's overall charge and its ligands' charges.
+ * The generator used to print `def.charge` (the OVERALL charge) after the metal, which is only right when every ligand
+ * is neutral: [PtCl₄]²⁻ was "a central Pt2- ion", and a neutral complex like cisplatin got no charge at all. When a
+ * ligand's charge is not known, nothing is claimed about the metal's.
+ */
+function centralMetalPhrase(def: CoordinationComplexDef): string {
+  const q = metalChargeOf(def.charge, def.ligands)
+  if (q === null) return `a central ${def.centralMetal} metal ion`
+  return q === 0 ? `a central ${def.centralMetal} atom` : `a central ${def.centralMetal}${chargeSuffix(q)} ion`
+}
+
 export function buildCoordinationComplexScene(def: CoordinationComplexDef): SceneSpec {
   const assigned = assignLigands(def)
   const heteroleptic = def.ligands.length === 2
@@ -148,14 +161,17 @@ export function buildCoordinationComplexScene(def: CoordinationComplexDef): Scen
     id: `coord-${def.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`,
     title: `${def.name}${isomerNote} — ${geometryName}`,
     sceneType: 'diagram',
+    // The x/y/z triad names no quantity in this figure (a molecule / lattice / shell has no meaningful axes) and its letters
+    // collided with the atom labels at the origin (measured 2026-10-08: x|y|z|O stacked at stage 1). Grid left as it was.
+    stage: { axes: false },
     teachingGoal: heteroleptic
       ? `Show the ${def.isomer} arrangement of ${ligandA.formula} and ${ligandB.formula} around ${def.centralMetal} — the ${def.isomer === 'cis' ? 'adjacent' : 'opposite'} placement is the whole difference between the two isomers.`
       : `Show the ${geometryName} arrangement of ${def.coordinationNumber} ${ligandA.formula} ligands around ${def.centralMetal}, coordination number ${def.coordinationNumber}.`,
     cameraDistance: BOND_LEN * 3,
-    ariaLabel: `${def.name}: a central ${def.centralMetal} atom${def.charge ? ` (${def.charge})` : ''} bonded to ${def.coordinationNumber} ligands in a ${geometryName} arrangement${isomerNote}.`,
+    ariaLabel: `${def.name}: a central ${def.centralMetal} atom${def.charge ? ` in a complex of overall charge ${def.charge}` : ''} bonded to ${def.coordinationNumber} ligands in a ${geometryName} arrangement${isomerNote}.`,
     steps: [
       {
-        narration: `${def.name}: a central ${def.centralMetal}${def.charge} ion.`,
+        narration: `${def.name}: ${centralMetalPhrase(def)}.`,
         objects: [{ type: 'node', id: 'central', position: [0, 0, 0], text: def.centralMetal, color: METAL_COLOR, radius: 0.7 }],
       },
       {

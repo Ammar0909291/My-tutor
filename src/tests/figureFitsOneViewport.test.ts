@@ -154,7 +154,11 @@ describe('expand is a study mode, not a second figure', () => {
     // `max-height: none` rule aimed at the box was simply ignored and the scene
     // stayed capped at 640px. The tokens are the only way in.
     const fs = [...FIG_CSS.matchAll(/\.frame:fullscreen\s*\{[^}]*\}/g)].map((m) => m[0]).join('\n')
-    expect(fs).toMatch(/--fig-scene-h:\s*none/)
+    // `100vh`, not `none`: ThreeDVisual's own floor is `min(260px, var(--fig-scene-h))`, and `min(260px, none)` is invalid, so with
+    // `none` the floor silently vanished and the expanded scene shrank BELOW its inline size (223x167 at 390px, 2026-10-08).
+    // A cap of one viewport height lifts the height limit just the same and keeps the floor valid.
+    expect(fs).toMatch(/--fig-scene-h:\s*100vh/)
+    expect(fs).not.toMatch(/--fig-scene-h:\s*none/)
     expect(fs).toMatch(/--fig-scene-w:\s*auto/)
     expect(fs).toMatch(/--fig-scene-aspect:\s*4 \/ 3/)
     expect(THREE_D).toMatch(/width: 'var\(--fig-scene-w, 100%\)'/)

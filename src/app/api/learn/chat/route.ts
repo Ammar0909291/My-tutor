@@ -13780,6 +13780,29 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         } catch { /* a repair must never break a turn */ }
       }
 
+      // ── A GRADED CARD ALWAYS GETS ITS VERDICT (ENGL-003 / ENGL-007) ──────
+      // English run 2026-10-07 (80 replies in 67 lessons; #2 t15 is the
+      // concept's KG description, verbatim, as the whole reaction to a tapped
+      // answer): a card graded by its authored key this turn, and the reply
+      // that ships says nothing about right or wrong. Several fallbacks after
+      // the hygiene pass (the question-delivery contract, the withheld-question
+      // and figure fallbacks) replace the whole reply with the concept's
+      // description, taking the verdict the hygiene pass restored with them.
+      // This is the last point before the reply ships, so every such path is
+      // covered once; a reply that already states a verdict is unchanged.
+      if (gradeForVerdict !== null && !serveLessonComplete && !lessonCompletionHoisted
+        && !['memory', 'gate', 'degraded', 'deterministic', 'fallback'].includes(provider)
+        && pendingMcqHoisted && Array.isArray(pendingMcqHoisted.options) && typeof pendingMcqHoisted.correctIndex === 'number') {
+        try {
+          const { restoreServerVerdict } = await import('@/lib/teaching/replyHygiene')
+          const withVerdict = restoreServerVerdict(cleanText, gradeForVerdict.correct, pendingMcqHoisted.options[pendingMcqHoisted.correctIndex] ?? null)
+          if (withVerdict !== cleanText) {
+            console.log('[verdict-final] ' + JSON.stringify({ conceptId: resolvedConceptId ?? null, correct: gradeForVerdict.correct }))
+            cleanText = withVerdict
+          }
+        } catch { /* a wording repair never breaks a turn */ }
+      }
+
       // ── PHASE 0: TURN DECISION PROVENANCE ────────────────────────────
       //
       // The latest point at which everything is known: after every text

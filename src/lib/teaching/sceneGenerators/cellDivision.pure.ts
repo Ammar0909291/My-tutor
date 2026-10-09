@@ -17,7 +17,7 @@
  */
 
 import type { SceneObject, SceneSpec, SceneStep, Vec3 } from '../sceneSpec'
-import { round, type ConsistencyResult } from './shared'
+import { captionBeside, round, type ConsistencyResult } from './shared'
 
 // ── Curated reference data: textbook-fixed mitosis/meiosis stage sequences ───
 
@@ -76,31 +76,63 @@ export function validateCellDivisionParams(raw: unknown): CellDivisionParams | n
 // ── Deterministic layout (pure lookup; never LLM-generated) ──────────────────
 
 const STAGE_SPACING = 5
+// Stages wrap into rows of at most four. Meiosis has eight stages, and in ONE row they span 35 units:
+// MEASURED at 390px the eight captions (and the eight pile-up headings above them) overlapped each other,
+// and on desktop the headings were stacked in a column at one point. Two rows of four also put Meiosis I
+// above Meiosis II, which is the structure the stage names already describe.
+const STAGES_PER_ROW = 4
+const ROW_PITCH = 5
+const NODE_RADIUS = 0.5
+
+function stageRows(stageCount: number): number {
+  return Math.ceil(stageCount / STAGES_PER_ROW)
+}
+
+/** Where stage `i` sits: left to right along its row, rows top to bottom, the block centred on the origin. */
+function stagePosition(i: number, stageCount: number): Vec3 {
+  const rows = stageRows(stageCount)
+  const row = Math.floor(i / STAGES_PER_ROW)
+  const inRow = Math.min(STAGES_PER_ROW, stageCount - row * STAGES_PER_ROW)
+  const col = i % STAGES_PER_ROW
+  return [round((col - (inRow - 1) / 2) * STAGE_SPACING), round(((rows - 1) / 2 - row) * ROW_PITCH + 2), 0]
+}
 
 /** Build one SceneSpec step per stage, then a final daughter-cell summary step. */
 export function buildCellDivisionScene(params: CellDivisionParams): SceneSpec {
   const { stages, result } = DIVISION_DATA[params.divisionType]
 
   const stageSteps: SceneStep[] = stages.map((stage, i) => {
+    const at = stagePosition(i, stages.length)
     const objects: SceneObject[] = [
-      { type: 'label', id: `stage-${i}`, position: [0, round(4), 0] as Vec3, text: stage.name, color: '#3b82f6' },
-      { type: 'node', id: `stage-cell-${i}`, position: [round(i * STAGE_SPACING - ((stages.length - 1) * STAGE_SPACING) / 2), 0, 0] as Vec3, color: '#22c55e', text: stage.name },
+      // The stage's name is drawn ONCE, directly above its own cell. It used to be drawn twice — a heading
+      // at one shared point (every stage's heading stacked on the others) and again on the cell.
+      { type: 'label', id: `stage-${i}`, position: [at[0], round(at[1] + NODE_RADIUS + 0.7), 0] as Vec3, text: stage.name, color: '#3b82f6' },
+      { type: 'node', id: `stage-cell-${i}`, position: at, radius: NODE_RADIUS, color: '#22c55e' },
     ]
+    // An arrow from the previous stage along the row makes the ORDER explicit rather than implied by position.
+    if (i > 0 && Math.floor((i - 1) / STAGES_PER_ROW) === Math.floor(i / STAGES_PER_ROW)) {
+      const prev = stagePosition(i - 1, stages.length)
+      objects.push({ type: 'arrow', id: `stage-arrow-${i}`, from: [round(prev[0] + NODE_RADIUS + 0.4), prev[1], 0] as Vec3, to: [round(at[0] - NODE_RADIUS - 0.4), at[1], 0] as Vec3, color: '#9AA5B8', thickness: 0.05 })
+    }
     return { narration: stage.description, objects }
   })
 
+  const lastRowY = stagePosition(stages.length - 1, stages.length)[1]
+  const daughterY = round(lastRowY - ROW_PITCH - 1)
   const daughterCellObjects: SceneObject[] = Array.from({ length: result.daughterCellCount }, (_, i) => ({
     type: 'node' as const,
     id: `daughter-cell-${i}`,
-    position: [round((i - (result.daughterCellCount - 1) / 2) * STAGE_SPACING), round(-5), 0] as Vec3,
+    position: [round((i - (result.daughterCellCount - 1) / 2) * STAGE_SPACING), daughterY, 0] as Vec3,
+    radius: NODE_RADIUS,
     color: '#f59e0b',
     text: `Daughter cell ${i + 1}`,
+    properties: captionBeside(NODE_RADIUS, 'below'),
   }))
 
   const summaryLabel: SceneObject = {
     type: 'label',
     id: 'division-summary',
-    position: [0, round(-8), 0] as Vec3,
+    position: [0, round(daughterY - 3), 0] as Vec3,
     text: `${result.daughterCellCount} daughter cells: ${result.ploidyLabel}`,
     color: '#ef4444',
   }
@@ -115,7 +147,7 @@ export function buildCellDivisionScene(params: CellDivisionParams): SceneSpec {
     title: `Cell Division: ${params.divisionType === 'mitosis' ? 'Mitosis' : 'Meiosis'}`,
     sceneType: 'process',
     teachingGoal: `Show the stages of ${params.divisionType} in order and connect them to the number and type of daughter cells produced.`,
-    cameraDistance: 22,
+    cameraDistance: 20,
     ariaLabel: `An animation of the stages of ${params.divisionType}, ending with ${result.daughterCellCount} daughter cells that are ${result.ploidyLabel}.`,
     steps: [...stageSteps, summaryStep],
   }

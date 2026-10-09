@@ -118,6 +118,9 @@ export function buildLatticeScene(def: LatticeDef): SceneSpec {
     id: `lattice-${def.kind}`,
     title: `${def.name} unit cell — ${def.atomsPerCell} atom${def.atomsPerCell === 1 ? '' : 's'} per cell`,
     sceneType: 'diagram',
+    // The x/y/z triad names no quantity in this figure (a molecule / lattice / shell has no meaningful axes) and its letters
+    // collided with the atom labels at the origin (measured 2026-10-08: x|y|z|O stacked at stage 1). Grid left as it was.
+    stage: { axes: false },
     teachingGoal: `Show the ${def.name} unit cell and how corner/face/body sharing gives ${def.atomsPerCell} effective atom${def.atomsPerCell === 1 ? '' : 's'} per cell.`,
     cameraDistance: HALF * 5,
     ariaLabel: `A ${def.name} unit cell with ${atoms.length} atoms drawn, equivalent to ${def.atomsPerCell} atoms per cell after sharing.`,
