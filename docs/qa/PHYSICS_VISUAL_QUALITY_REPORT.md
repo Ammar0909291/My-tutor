@@ -11,6 +11,8 @@ Record: `docs/qa/physics-visual-audit/` · method and fixes: `docs/history/physi
 **Headline.** 283 concepts: baseline **90 PASS / 1 REVIEW / 192 FAIL** → final **262 PASS / 21 REVIEW_REQUIRED / 0 FAIL**,
 0 missing renders, no threshold lowered. Newton and Pendulum PASS in every driven state.
 
+**Update 2026-10-08 — see §17.** The 21 REVIEW_REQUIRED figures were reviewed by hand: 7 PASS, 13 fixed, 1 left for the owner (`phys.opt.lens-power`); machine audit now **264 PASS / 19 REVIEW_REQUIRED / 0 FAIL**. The numbers in §§1-16 are the 2026-10-07 record and are kept unchanged.
+
 ---
 
 ## 1. Inventory
@@ -155,7 +157,17 @@ Patterns matching the English ENGL-016/017 defects (raw LaTeX in a label, label 
 
 ## 13. Production status
 
-See the final report for the push and deploy outcome; production on entry was `b07037f` (English fixes), an ancestor of this branch — a fast-forward cannot overwrite it. The dev render page `/dev/physics-audit` is `notFound()` when `NODE_ENV === 'production'`, so production rendering cannot be driven by this harness; production verification needs a real signed-in lesson session (disposable QA account).
+Deployed: `main` fast-forwarded `b07037f` (English fixes) → `c2cba6a`; Vercel deployment `dpl_8dhQ4cU4knAoimkytLPTNZevTjo9` built from `c2cba6a` and is **READY** on the production alias. The English fixes are an ancestor of the deployed commit, so they were not overwritten. Deployed only after: 0 FAIL in the full browser re-audit, the new regression tests, the full suite (905 files), tsc, ESLint and `npm run build` all green.
+
+Verified again in production, as a disposable learner (account created through the app, deleted afterwards):
+
+1. **Served figure = audited figure** (`production-verification.json`): for 10 repaired concepts the scene sent over the wire for "show me a diagram" is byte-identical to what `resolveVisual` serves from this commit (9/9 scenes; the 10th, Bohr model, is the `energy_level_diagram` card), with 0 payload blockers and 0 data FAILs.
+2. **Rendered in the real production lesson page** (`production-browser-audit.json`): the deployed app's `/learn` page, in Chromium, 390 px and 1280 px, dark and light, 9 concepts x 4 = **36 renders, 36 PASS**, measured with the same in-page auditor and the same rules as the dev-page audit. One navigation timeout (`net::ERR_TIMED_OUT`, orbital-mechanics mobile/dark) was re-run and passed. Default state only; slider and simulation sweeps were done on the dev page (§10) because the dev page cannot exist in production.
+3. `/dev/physics-audit` answers 404 in production (it is `notFound()` outside development).
+
+Not verified in production: the 158 cached generated figures (no way to enumerate them), the 274 concepts not in the sample of 9, and non-default slider states. Those rest on the local audit of the same source.
+
+**Blast radius beyond Physics (read this).** The label solver, `SceneLabel` plate, `useFigureLegibility` text lift and `cameraDistanceToContain` are shared components. They are additive and fail-safe (they act only where a label previously overlapped, sat on a body, or text was under 4.5:1), the full suite including the other subjects' visual tests is green, but **other subjects' figures were not browser-audited** and may look slightly different (e.g. a label that used to sit on a body now sits on a small surface-colour plate; SVG text lifted to 4.5:1). Production rollback target if needed: deployment `dpl_9KsxZ4GFAvL1igMK8v33ZnqaLo8t` (`b07037f`).
 
 ## 14. Remaining failures
 
@@ -179,4 +191,96 @@ Branch `claude/hopeful-franklin-ga706b` (ahead of `origin/main` `b07037f`):
 * `d343331` Physics visual audit: interactive dimension rolls up non-default states; add audit freshness gate test
 * `aecc7d7` fix(visual): label solver finds a clear box for every label …
 * `ae33b54` fix(visual): keep the ground plane and axis triad inside the canvas; plate decor letters; make the orbit figure visible
-* (this commit) per-concept audit fingerprints, `merge-audit.ts`, committed audit record, this report
+* `c2cba6a` docs(qa): Physics visual quality report, committed render audit (283 concepts, 0 FAIL), per-concept freshness gate — **deployed**
+* (this commit) production verification scripts and records
+
+
+---
+
+## 17. REVIEW_REQUIRED FOLLOW-UP — 2026-10-08
+
+Scope: only the 21 concepts §15 left REVIEW_REQUIRED. For each: resolve the production figure, render it (390 px and the 1280 px column, dark and light, slider states), read the KG entry, the Educational Brain entry and the figure's source, and compare **what the figure claims** with **what it draws**. A concept is PASS only with a cited test or measurement. Nothing else in Physics, no other subject, no threshold, no ADR 12/16 code was touched; no new renderer — existing `SceneSpec` / cards / registry / label solver.
+
+**Result.** 21 reviewed: **7 PASS** (no defect) · **13 FIXED→PASS** (a real defect, fixed, with a deterministic test) · **1 REVIEW_REQUIRED** (`phys.opt.lens-power`, owner decision) · **0 FIX_REQUIRED**. Machine audit after re-rendering the 16 changed concepts and merging: **264 PASS / 19 REVIEW_REQUIRED / 0 FAIL** (was 262 / 21 / 0). Machine verdicts are not edited; the human decision is in `docs/qa/physics-visual-audit/semantic-review.json` and `physicsSemanticReview.test.ts` fails if a machine-REVIEW concept has no entry or an entry cites a test that no longer exists.
+
+| # | Concept | Initial reason | Final | Evidence / fix |
+|---|---|---|---|---|
+| 1 | `phys.meas.units` | ST-03: text only, no drawn geometry | **PASS** | Seven SI base pairs and 1 N = 1 kg·m/s² checked against an independent table |
+| 2 | `phys.meas.dimensions` | ST-03: text only, no drawn geometry | **PASS** | Every bracket parsed, dimension algebra redone; both verdicts follow |
+| 3 | `phys.meas.vector-products` | SM-02: no physics assertion | **PASS** | Printed 6 and 10.39 equal the drawn projection and parallelogram; existing right-hand-rule / perpendicular tests |
+| 4 | `phys.mech.free-body-diagram` | SM-02: no physics assertion | **FIXED→PASS** | Friction head, balanced pairs, body on ground (force-diagram card) |
+| 5 | `phys.mech.friction` | SM-02: no physics assertion | **FIXED→PASS** | Friction opposes the applied force, head away from body |
+| 6 | `phys.mech.normal-force` | SM-02: no physics assertion | **FIXED→PASS** | Body rests on the surface; N ⟂ surface, up |
+| 7 | `phys.mech.equilibrium` | SM-02: no physics assertion | **FIXED→PASS** | Four forces in two equal opposite pairs; net force and torque zero |
+| 8 | `phys.mech.conservation-of-momentum` | SM-02: no physics assertion | **FIXED→PASS** | Rebound to the collision generator; totals re-derived from drawn vectors |
+| 9 | `phys.opt.mirrors` | LY-02: P and F labels overlap the axis | **FIXED→PASS** | Signed u, f, v; mirror plane drawn; P/F on the axis kept by design; camera framed |
+| 10 | `phys.opt.lenses` | ST-03 text only, LY-02: P / F overlap the axis | **FIXED→PASS** | O (not P) on lenses; signed numbers; lens drawn; camera framed |
+| 11 | `phys.opt.lens-power` | ST-03 text only, LY-02: P / F overlap the axis | **REVIEW_REQUIRED** | Correct but does not depict P = 1/f or P₁ + P₂ — owner decision |
+| 12 | `phys.mod.wave-particle-duality` | SM-02: no physics assertion | **FIXED→PASS** | Two equal slits; 150 detection dots from the two-slit intensity |
+| 13 | `phys.qm.wave-function` | SM-02: no physics assertion | **FIXED→PASS** | |ψ|² = ψ²; y-axis arrow and label fixed |
+| 14 | `phys.qm.particle-in-box` | LY-02: caption overlap, SM-02: no physics assertion | **FIXED→PASS** | Levels at n² (were compressed); ψₙ zero at the walls |
+| 15 | `phys.qm.hydrogen-atom-qm` | SM-02: no physics assertion | **FIXED→PASS** | Cloud shapes verified; 1s / 2s / 2p now named |
+| 16 | `phys.qm.spin` | SM-02: no physics assertion | **PASS** | One beam, two symmetric ±½ outcomes; never "rotation" |
+| 17 | `phys.qm.quantum-tunneling` | SM-02: no physics assertion | **FIXED→PASS** | Real exponential decay, joined transmitted wave, same wavelength |
+| 18 | `phys.stat.probability-basics` | SM-02: no physics assertion | **PASS** | Frequency histogram; mean line and "symmetric" true of the data |
+| 19 | `phys.astro.gravitational-waves` | SM-02: no physics assertion | **PASS** | Stages in physical order; no medium; 1/r not 1/r²; strain h = ΔL/L |
+| 20 | `phys.particle.particle-classification` | ST-03: text only | **FIXED→PASS** | Tree stays in place at every width; examples in the narration |
+| 21 | `phys.particle.conservation-laws` | ST-03: text only | **PASS** | B/L tallies and ✓/✗ recomputed from an independent particle table |
+
+Full finding, fix, cited tests and remaining uncertainty per concept: `semantic-review.json`.
+
+### Defects the numeric audit could not see (found by reading the geometry against the claim)
+
+* **Force diagram (4 concepts):** the friction arrow-head pointed *at* the body (an SVG `orient="auto"` marker drawn pointing the wrong way — friction looked like it helped the push); applied 45 vs friction 40 (an unbalanced body, the wrong picture for equilibrium); the body floated 20 units above the ground, so the normal force had no contact. Fixed in `ForceDiagram.tsx`; the test parses the rendered markup's lines and marker polygons.
+* **Double slit:** slits 6 and 12 units wide, a hand-placed asymmetric band pattern, no particles on a card about particles. Now two equal slits and 150 detection dots drawn from the two-slit intensity (fixed seed). The caption is neutral ("one dot = one detection") because the same card serves Young's experiment — which is why it was re-rendered and why its first caption ("one particle") was changed.
+* **Potential well:** levels drawn 1 : 2.75 : 5 against labels E₂ = 4E₁, E₃ = 9E₁. Now n².
+* **Quantum tunneling:** the barrier curve was decay × cos (still oscillating) and the transmitted wave did not join it. Now a real exponential, e^(−κ) continuity, same wavelength.
+* **Wave function:** y-axis arrow-head pointed left; axis named only ψ although |ψ|² shares it.
+* **Particle tree:** scrambled by the label solver at both widths; now data-driven, short names, qualifiers beneath, examples in the narration (stays inside the nine-label budget; the first attempt with inline examples pushed leaves 24-30 px and was rejected by measurement).
+* **Ray optics (mirrors, lenses, lens power):** the title printed unsigned u, f beside a signed v (the three numbers did not satisfy the lesson's own formula); a lens's centre was labelled *P* (a mirror's pole; on the lens-power lesson also read as "power"); the lens/mirror was only a dot and the whole figure used ~0.26 % of the canvas. Now signed numbers, *O* on lenses, the element drawn, the camera framed to the drawn extent (applied at render time on narrower canvases).
+* **Conservation of momentum:** the 3D card drew unlabeled spheres whose arrows did not conserve momentum for the masses their sizes implied; now served by the `collision` generator (masses and velocities printed, total re-derived from the drawn vectors), recorded as a judged generator-default.
+* **Hydrogen orbitals:** the side-by-side clouds were distinguished by colour only; now named 1s / 2s / 2p (shared `SceneLabelLayer`, auto-rotation off like every labelled 3D card).
+
+### Left as machine REVIEW on purpose
+
+* *P*, *F*, *O* labels on the optical axis (LY-02): each names a point that lies on the axis, so its box meets the line by construction — intentional and correct; positions are verified. Not moved to satisfy a validator.
+* Text-only figures (units, dimensions, conservation laws; ST-03): genuinely text; contents verified by recomputation.
+* `phys.opt.lens-power`: correct figure, but it shows neither P = 1/f nor P₁ + P₂ (recorded in `scope.ts` since before this review). Closing it is new content from the Educational Brain's worked numbers — the owner's call.
+
+### Tests
+
+New: `physicsCardSemantics.test.ts` (72 tests — geometry read from what each figure draws, checked against independent tables; negative controls run on the SI, dimension and force-diagram tests) and `physicsSemanticReview.test.ts` (4). Updated: `visualGeneratorDefaultScope.test.ts` (judged generator-default). `physicsVisualAudit.test.ts` passes against the re-rendered record.
+
+| Check | Result |
+|---|---|
+| Full vitest | **907 files / 18,173 passed, 9 skipped, 0 failed** (baseline 905 / 18,097 / 9: +2 files, +76 tests, nothing removed) |
+| `tsc --noEmit` | 0 errors |
+| `next lint` | 0 errors, 12 warnings (identical to baseline; none in touched files) |
+| `npm run build` | exit 0 |
+| Browser re-audit of the 16 changed concepts (390 + 1280 column, dark + light, 23-27 slider states for the interactive ones) | 0 FAIL |
+
+### Production (2026-10-08 → 10-09)
+
+`main` `01ece10` → `9ffaec0`, deployment `dpl_CXRW4xg7LmvBbvoqRUzWyYsmrivy` **READY** (alias `my-tutor-flame.vercel.app`). Disposable learners only (all deleted).
+
+1. **Served = audited, over the wire** (`production-verification-followup.json`): the 5 scene-served changed concepts — mirrors, lenses, lens-power, conservation-of-momentum, particle-classification — are byte-identical to what `resolveVisual` serves from this commit, 0 blockers. (The older 10 concepts re-checked too: unchanged.)
+2. **Rendered in the real `/learn` page** (`production-browser-audit-followup.json`, screenshots viewed): 16 concepts × 390 / 1280 × dark / light.
+   * Scenes: particle-classification 4/4 PASS, conservation-of-momentum 4/4 PASS; mirrors, lenses, lens-power REVIEW_REQUIRED only for the on-axis *P/F/O* labels (same as local).
+   * Cards (11): **all PASS**, with the finished figure seen for force, free-body-diagram, friction, equilibrium, hydrogen (comparison with 1s/2s/2p labels), double slit ×2 (with dots), wave function, potential well and quantum tunneling (decay, transmitted wave, labels).
+3. Two harness bugs found and fixed on the way (not app defects): ThreeDVisual also sets `data-scene-box`, so a 3D card was framed as the whole page (4 false FAILs on hydrogen); and a card measured on arrival is only partly revealed.
+
+**Observation, pre-existing, not changed.** In the lesson a card is driven by the tutor's narration and shows **as many steps as the reply has sentences** (`visualStepForSegment`). A one- or four-sentence reply leaves the last steps unseen — e.g. normal-force never reached its fifth step (the normal arrow) in three production replies, while the tutor's text already described that arrow; tunneling stopped at step 3 in one reply. The identical force-diagram card showed all five steps for four sibling concepts, so the normal-force *figure* is verified, but not in a reply of its own. This is worth an owner look.
+
+### Remaining uncertainty
+
+* Normal-force's fifth step was not seen in a production reply of its own (above).
+* Slider / simulation states were verified locally, not in production (production audits default state only).
+* The 158 cached generated figures and the other 262 concepts were not re-browsed in production.
+* `phys.opt.lens-power` stays REVIEW_REQUIRED.
+
+### Commits
+
+* `6d1b89a` fix(visual): physics cards draw what their concepts say
+* `4d14a0b` fix(visual): physics scenes — particle tree, ray-optics figures, conservation of momentum
+* `9ffaec0` test(visual): deterministic semantic assertions + review ledger + re-audited records — **deployed**
+* (this commit) production verification scripts and records, report

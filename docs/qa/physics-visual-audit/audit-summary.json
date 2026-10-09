@@ -1,6 +1,6 @@
 {
- "generatedAt": "2026-10-08T12:35:12.789Z",
- "fingerprint": "9dd61ac7c44955376cb1fab93f589726441ff6caa2b0b45c7c1170abb85b9433",
+ "generatedAt": "2026-10-08T19:09:56.497Z",
+ "fingerprint": "454ee4bcad2d864b863edbbf8ddd005d04af3df250e552f9ff3a30eb2dc65d71",
  "fingerprints": {
   "phys.meas.units": "689b537633be33f5",
   "phys.meas.scalars-vectors": "566feb21908a8419",
@@ -43,7 +43,7 @@
   "phys.mech.conservative-forces": "70854de93acb4187",
   "phys.mech.momentum": "2321b736427c50b4",
   "phys.mech.impulse": "0d1e235d4be30b9a",
-  "phys.mech.conservation-of-momentum": "ce557fd5e74f989e",
+  "phys.mech.conservation-of-momentum": "ab4bdfae8b99878a",
   "phys.mech.collisions-elastic": "20243996cb065e3a",
   "phys.mech.collisions-inelastic": "565be851cd589309",
   "phys.mech.center-of-mass": "701edb2078552d9f",
@@ -125,11 +125,11 @@
   "phys.opt.rectilinear-propagation": "15494fc8e192bbaa",
   "phys.opt.nature-of-light": "739ca3b0ff550906",
   "phys.opt.reflection": "3a46252e5a9cec47",
-  "phys.opt.mirrors": "20a113211c64cf5c",
+  "phys.opt.mirrors": "93ea20098c2aeefc",
   "phys.opt.refraction": "68fa7432ad15d062",
   "phys.opt.total-internal-reflection": "a784035ad52541f4",
-  "phys.opt.lenses": "28ef426566002db0",
-  "phys.opt.lens-power": "93cd938bc590188f",
+  "phys.opt.lenses": "cb5e461a9fcaeb24",
+  "phys.opt.lens-power": "d0c2787e25a23d27",
   "phys.opt.human-eye": "d58a3f32074479f4",
   "phys.opt.optical-instruments": "fa031acff9dc20eb",
   "phys.opt.dispersion": "2e29aaa29035803c",
@@ -262,7 +262,7 @@
   "phys.astro.black-holes": "490e6b7ad6401905",
   "phys.astro.gravitational-waves": "e27b5e2d6c3d6c0e",
   "phys.particle.four-forces": "a184595fc6ce9252",
-  "phys.particle.particle-classification": "bca62cb6bb85032f",
+  "phys.particle.particle-classification": "8fe0559aef399927",
   "phys.particle.antimatter": "cab7b833e6640dff",
   "phys.particle.quarks": "04ca0a5cf97ac565",
   "phys.particle.leptons": "14704d6d0d956d3e",
@@ -297,23 +297,23 @@
  "summary": {
   "concepts": 283,
   "verdicts": {
-   "REVIEW_REQUIRED": 21,
-   "PASS": 262
+   "REVIEW_REQUIRED": 19,
+   "PASS": 264
   },
   "byViewport": {
    "mobile": {
-    "PASS": 277,
-    "REVIEW_REQUIRED": 6
+    "PASS": 278,
+    "REVIEW_REQUIRED": 5
    },
    "desktop-column": {
-    "REVIEW_REQUIRED": 6,
-    "PASS": 277
+    "REVIEW_REQUIRED": 5,
+    "PASS": 278
    }
   },
   "byDimension": {
    "structural": {
-    "REVIEW_REQUIRED": 6,
-    "PASS": 277
+    "REVIEW_REQUIRED": 3,
+    "PASS": 280
    },
    "readability": {
     "PASS": 283
@@ -322,15 +322,15 @@
     "PASS": 283
    },
    "layout": {
-    "PASS": 279,
-    "REVIEW_REQUIRED": 4
+    "PASS": 280,
+    "REVIEW_REQUIRED": 3
    },
    "graph": {
     "PASS": 283
    },
    "semantic": {
-    "PASS": 269,
-    "REVIEW_REQUIRED": 14
+    "PASS": 270,
+    "REVIEW_REQUIRED": 13
    },
    "interactive": {
     "PASS": 281,
@@ -1420,11 +1420,11 @@
   },
   {
    "id": "phys.mech.conservation-of-momentum",
-   "verdict": "REVIEW_REQUIRED",
-   "class": "card",
-   "authorship": "curated-card",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "shared-generator-default",
    "scope": "concept",
-   "interactive": false,
+   "interactive": true,
    "graph": false,
    "dims": {
     "structural": "PASS",
@@ -1432,19 +1432,17 @@
     "contrast": "PASS",
     "layout": "PASS",
     "graph": "PASS",
-    "semantic": "REVIEW_REQUIRED",
+    "semantic": "PASS",
     "interactive": "PASS"
    },
    "byViewport": {
     "mobile": "PASS",
     "desktop-column": "PASS"
    },
-   "semantic": "REVIEW_REQUIRED",
-   "states": 3,
+   "semantic": "PASS",
+   "states": 27,
    "fail": 0,
-   "review": [
-    "SM-02: no deterministic physics assertion covers this figure (no arithmetic chain, no physics test)"
-   ]
+   "review": []
   },
   {
    "id": "phys.mech.collisions-elastic",
@@ -3579,9 +3577,7 @@
    "states": 3,
    "fail": 0,
    "review": [
-    "LY-02: \"P\" overlaps drawn geometry (22% of its box)",
-    "LY-02: \"P\" overlaps drawn geometry (33% of its box)",
-    "LY-02: \"F\" overlaps drawn geometry (28% of its box)"
+    "LY-02: \"P\" overlaps drawn geometry (25% of its box)"
    ]
   },
   {
@@ -3645,7 +3641,7 @@
    "interactive": true,
    "graph": false,
    "dims": {
-    "structural": "REVIEW_REQUIRED",
+    "structural": "PASS",
     "readability": "PASS",
     "contrast": "PASS",
     "layout": "REVIEW_REQUIRED",
@@ -3661,10 +3657,10 @@
    "states": 23,
    "fail": 0,
    "review": [
-    "ST-03: the canvas holds text only, no drawn geometry (ink 0.26%)",
     "LY-02: \"F\" overlaps drawn geometry (27% of its box)",
-    "LY-02: \"P\" overlaps drawn geometry (25% of its box)",
-    "LY-02: \"F\" overlaps drawn geometry (31% of its box)"
+    "LY-02: \"O\" overlaps drawn geometry (27% of its box)",
+    "LY-02: \"O\" overlaps drawn geometry (24% of its box)",
+    "LY-02: \"F\" overlaps drawn geometry (24% of its box)"
    ]
   },
   {
@@ -3676,7 +3672,7 @@
    "interactive": true,
    "graph": false,
    "dims": {
-    "structural": "REVIEW_REQUIRED",
+    "structural": "PASS",
     "readability": "PASS",
     "contrast": "PASS",
     "layout": "REVIEW_REQUIRED",
@@ -3692,10 +3688,10 @@
    "states": 23,
    "fail": 0,
    "review": [
-    "ST-03: the canvas holds text only, no drawn geometry (ink 0.26%)",
     "LY-02: \"F\" overlaps drawn geometry (27% of its box)",
-    "LY-02: \"P\" overlaps drawn geometry (25% of its box)",
-    "LY-02: \"F\" overlaps drawn geometry (31% of its box)"
+    "LY-02: \"O\" overlaps drawn geometry (27% of its box)",
+    "LY-02: \"O\" overlaps drawn geometry (24% of its box)",
+    "LY-02: \"F\" overlaps drawn geometry (24% of its box)"
    ]
   },
   {
@@ -5872,20 +5868,19 @@
     "structural": "PASS",
     "readability": "PASS",
     "contrast": "PASS",
-    "layout": "REVIEW_REQUIRED",
+    "layout": "PASS",
     "graph": "PASS",
     "semantic": "REVIEW_REQUIRED",
     "interactive": "PASS"
    },
    "byViewport": {
-    "mobile": "REVIEW_REQUIRED",
+    "mobile": "PASS",
     "desktop-column": "PASS"
    },
    "semantic": "REVIEW_REQUIRED",
    "states": 3,
    "fail": 0,
    "review": [
-    "LY-02: \"infinite square well\" overlaps drawn geometry (23% of its box)",
     "SM-02: no deterministic physics assertion covers this figure (no arithmetic chain, no physics test)"
    ]
   },
@@ -7149,14 +7144,14 @@
   },
   {
    "id": "phys.particle.particle-classification",
-   "verdict": "REVIEW_REQUIRED",
+   "verdict": "PASS",
    "class": "scene",
    "authorship": "authored-concept",
    "scope": "concept",
    "interactive": false,
    "graph": false,
    "dims": {
-    "structural": "REVIEW_REQUIRED",
+    "structural": "PASS",
     "readability": "PASS",
     "contrast": "PASS",
     "layout": "PASS",
@@ -7166,14 +7161,12 @@
    },
    "byViewport": {
     "mobile": "PASS",
-    "desktop-column": "REVIEW_REQUIRED"
+    "desktop-column": "PASS"
    },
    "semantic": "PASS",
    "states": 3,
    "fail": 0,
-   "review": [
-    "ST-03: the canvas holds text only, no drawn geometry (ink 0.27%)"
-   ]
+   "review": []
   },
   {
    "id": "phys.particle.antimatter",
