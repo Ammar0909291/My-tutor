@@ -75,16 +75,28 @@ function columnsFor(groupCount: number, gridFrom: number): number {
 // ── Biology: item spacing follows the caption, not a fixed pitch ───────────────────────────────────────────────
 // Items used to sit a fixed 1.76 units apart however many lines their wrapped caption needed, so in a grid (three or
 // more groups) a three-line caption ran into the next item and the next ROW's header (measured at 390px). A
-// caption's height is estimated from its length and the width it may wrap to (greedy word wrap, ~3.2 characters
-// per scene unit of width, one line ≈ 0.68 units), and the next item starts below it. The estimate is deliberately a
+// caption's height is estimated from its length and the width it may wrap to (greedy word wrap, ~2.6 characters
+// per scene unit of width, one line ≈ 0.85 units — both measured on rendered figures at 1280 and 390px (a 13.4px / 10px label
+// wraps at ~25 characters per 9.2-unit column and a line is ~0.9 units tall); the earlier 3.2 / 0.68 under-counted
+// and a caption was pushed out of its column by the label solver), and the next item starts below it. The estimate is deliberately a
 // little generous: a figure with spare room is better than one with captions on top of each other.
-const CHARS_PER_UNIT = 3.2
-const LINE_UNITS = 0.68
-const SLOT_PAD = 0.62
+const CHARS_PER_UNIT = 2.4
+const LINE_UNITS = 0.93
+const SLOT_PAD = 0.9
+/** Clear space between the header's stub and the top of the first item caption. */
+const FIRST_ITEM_CLEAR = 1.2
 /** Two-column grids (three or four groups) are spaced wider: their captions wrap to a column of this pitch. */
-const GRID_TWO_COLUMN_SPACING = 10
+const GRID_TWO_COLUMN_SPACING = 11
+/** Three-column Biology grids (five or six groups): wider than the legacy 6.5 so adjacent columns keep a gutter. */
+const BIO_GRID_THREE_COLUMN_SPACING = 7.2
+/** Gap kept between a column's wrapped captions and the next column's. Under ~1 unit the label solver treated the two
+ * columns' backing plates as touching and moved a caption into the neighbouring column (measured at 390px: a 5px gap). */
+const BIO_COLUMN_GUTTER = 1.6
+/** Biology figures of two groups: columns 5.5 apart left each caption ~4.7 units (9-15 characters) to wrap in — a six-line
+ * caption in a canvas three-quarters empty. Spaced like a two-column grid instead. */
+const BIO_PAIR_SPACING = 9.5
 /** Clearance for the next row's header caption, which sits above its sphere. */
-const HEADER_CLEAR = 1.7
+const HEADER_CLEAR = 3.4
 
 function estimateLines(text: string, charsPerLine: number): number {
   let lines = 1
@@ -97,12 +109,34 @@ function estimateLines(text: string, charsPerLine: number): number {
   return lines
 }
 
+interface SlotOptions {
+  /** Height of one wrapped line, in scene units, at the scale this layout is drawn at. */
+  lineUnits: number
+  /** Padding added to every caption's slot. */
+  pad: number
+  /** Clear space between the header's stub and the first caption. */
+  firstClear: number
+  /** Per-index line counts the slots must be at least as tall as: keeps item k of two groups on one row. */
+  minLines?: readonly number[]
+}
+const GRID_SLOTS: SlotOptions = { lineUnits: LINE_UNITS, pad: SLOT_PAD, firstClear: FIRST_ITEM_CLEAR }
+/** Two groups sit in ONE row with plenty of room: tighter slots, and item k of both groups on the same row. */
+// A pair stays at its own camera (18), ~27px per unit on desktop and ~20 on a phone, so a 13.4px / 10px line is ~0.7 units;
+// a grid is pulled back to ~16-19px per unit, which is the 0.93 above.
+const PAIR_SLOTS: SlotOptions = { lineUnits: 0.72, pad: 0.5, firstClear: 0.75 }
+
+const charsPerLineFor = (wrapUnits: number) => Math.max(8, Math.floor(wrapUnits * CHARS_PER_UNIT))
+
 /** Centre offsets (below the header) of each item's caption, and the bottom of the last one. */
-function itemCenters(items: readonly string[], wrapUnits: number): { centers: number[]; bottom: number } {
-  const charsPerLine = Math.max(8, Math.floor(wrapUnits * CHARS_PER_UNIT))
-  const slots = items.map((t) => Math.max(ITEM_PITCH, estimateLines(t, charsPerLine) * LINE_UNITS + SLOT_PAD))
+function itemCenters(items: readonly string[], wrapUnits: number, opts: SlotOptions = GRID_SLOTS): { centers: number[]; bottom: number } {
+  const charsPerLine = charsPerLineFor(wrapUnits)
+  const lines = items.map((t, k) => Math.max(estimateLines(t, charsPerLine), opts.minLines?.[k] ?? 1))
+  const slots = lines.map((n) => Math.max(ITEM_PITCH, n * opts.lineUnits + opts.pad))
   const centers: number[] = []
-  let c = ITEM_PITCH
+  // The first caption starts below the header's sphere AND its stub, so its CENTRE sits half its own height past them:
+  // a three-line caption anchored a fixed 1.76 units down collided with the sphere, the label solver moved it ~30px,
+  // and every caption after it was pushed along until the last one landed beside its header (measured at 1280 and 390px).
+  let c = Math.max(ITEM_PITCH, GROUP_RADIUS + opts.firstClear + ((lines[0] ?? 1) * opts.lineUnits) / 2)
   slots.forEach((slot, k) => {
     if (k > 0) c += (slots[k - 1] + slot) / 2
     centers.push(round(c))
@@ -134,11 +168,11 @@ function placeGroups(groups: readonly ComparisonGroup[], gridFrom: number, rowGa
 /** Biology: the same placement, with each row as tall as its tallest group's wrapped captions need. */
 function placeGroupsBio(groups: readonly ComparisonGroup[], layouts: readonly { bottom: number }[]): GroupPlace[] {
   if (groups.length < GRID_FROM_GROUPS_BIO) {
-    const offset = ((groups.length - 1) * GROUP_SPACING) / 2
-    return groups.map((_, gi) => ({ x: round(gi * GROUP_SPACING - offset), headerY: 2.5 }))
+    const offset = ((groups.length - 1) * BIO_PAIR_SPACING) / 2
+    return groups.map((_, gi) => ({ x: round(gi * BIO_PAIR_SPACING - offset), headerY: 2.5 }))
   }
   const columns = Math.ceil(groups.length / 2)
-  const pitch = columns <= 2 ? GRID_TWO_COLUMN_SPACING : GRID_COLUMN_SPACING
+  const pitch = columns <= 2 ? GRID_TWO_COLUMN_SPACING : BIO_GRID_THREE_COLUMN_SPACING
   const rows = Math.ceil(groups.length / columns)
   const rowHeights = Array.from({ length: rows }, (_, r) =>
     Math.max(...groups.slice(r * columns, (r + 1) * columns).map((_, k) => layouts[r * columns + k].bottom)) + HEADER_CLEAR + 0.8)
@@ -157,9 +191,15 @@ export function buildCellComparisonScene(params: CellComparisonParams): SceneSpe
   const { conceptId, title, teachingGoal, groups } = params
   const bio = isBiologyScene(conceptId)
   const gridFrom = bio ? GRID_FROM_GROUPS_BIO : GRID_FROM_GROUPS_LEGACY
-  const columnPitch = groups.length < gridFrom ? GROUP_SPACING : (columnsFor(groups.length, gridFrom) <= 2 ? GRID_TWO_COLUMN_SPACING : GRID_COLUMN_SPACING)
-  const wrapUnits = round(columnPitch - 0.8)
-  const layouts = groups.map((g) => itemCenters(g.items, wrapUnits))
+  const inGrid = groups.length >= gridFrom
+  const columnPitch = !inGrid ? (bio ? BIO_PAIR_SPACING : GROUP_SPACING) : (columnsFor(groups.length, gridFrom) <= 2 ? GRID_TWO_COLUMN_SPACING : (bio ? BIO_GRID_THREE_COLUMN_SPACING : GRID_COLUMN_SPACING))
+  const wrapUnits = round(columnPitch - (bio ? BIO_COLUMN_GUTTER : 0.8))
+  // Two groups compare item by item: item k of one beside item k of the other, each row as tall as the taller caption.
+  const pair = bio && !inGrid
+  const pairLines = pair
+    ? Array.from({ length: Math.max(...groups.map((g) => g.items.length)) }, (_, k) => Math.max(...groups.map((g) => (g.items[k] === undefined ? 1 : estimateLines(g.items[k], charsPerLineFor(wrapUnits))))))
+    : undefined
+  const layouts = groups.map((g) => itemCenters(g.items, wrapUnits, pair ? { ...PAIR_SLOTS, minLines: pairLines } : GRID_SLOTS))
   const places = bio ? placeGroupsBio(groups, layouts) : placeGroups(groups, gridFrom, GRID_ROW_GAP_LEGACY)
   // Biology captions wrap to their column: a share of the canvas AND the column pitch. A share of the canvas alone
   // let desktop captions run wider than the pitch, and the next column's captions interleaved with them.

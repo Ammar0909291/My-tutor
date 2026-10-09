@@ -10,9 +10,11 @@
  *   · the 11 structure figures drew an opaque radius-4 sphere with the parts INSIDE it, so no part showed.
  */
 import { describe, it, expect } from 'vitest'
+import { readFileSync } from 'node:fs'
+import { join } from 'node:path'
 import type { SceneSpec, SceneObject } from '@/lib/teaching/sceneSpec'
 import {
-  VIEWPORTS, cameraDistanceToContainFigure, checkSceneLayout, sceneTextObjects, stageHeightToFit,
+  VIEWPORTS, cameraDistanceToContain, cameraDistanceToContainFigure, checkSceneLayout, sceneTextObjects, stageHeightToFit,
   viewportFromCanvas, wrapPxOf,
 } from '@/lib/teaching/visual/layout'
 import { buildCanonicalScene, CONCEPT_SCENE_OVERRIDES } from '@/lib/teaching/visual/conceptSceneParams'
@@ -188,11 +190,11 @@ describe('captions sit beside their sphere, not on it', () => {
     const groups = (n: number) => Array.from({ length: n }, (_, i) => ({ label: `G${i}`, description: 'd', items: ['item'] }))
     const labelOf = (sc: SceneSpec) => sc.steps.flatMap((st) => st.objects).find((o) => o.type === 'label')!
     const two = buildCellComparisonScene({ conceptId: 'bio.t', title: 'T', teachingGoal: 'g', groups: groups(2) })
-    expect(labelOf(two).properties).toMatchObject({ labelWrapFraction: 0.42, labelWrapUnits: 4.7 })
+    expect(labelOf(two).properties).toMatchObject({ labelWrapFraction: 0.42, labelWrapUnits: 7.9 }) // two columns, 9.5 apart less a 1.6 gutter
     const four = buildCellComparisonScene({ conceptId: 'bio.t', title: 'T', teachingGoal: 'g', groups: groups(4) })
-    expect(labelOf(four).properties).toMatchObject({ labelWrapFraction: 0.42, labelWrapUnits: 9.2 }) // two columns, 10 apart
+    expect(labelOf(four).properties).toMatchObject({ labelWrapFraction: 0.42, labelWrapUnits: 9.4 }) // two columns, 11 apart less a 1.6 gutter
     const six = buildCellComparisonScene({ conceptId: 'bio.t', title: 'T', teachingGoal: 'g', groups: groups(6) })
-    expect(labelOf(six).properties).toMatchObject({ labelWrapFraction: 0.28, labelWrapUnits: 5.7 }) // three columns
+    expect(labelOf(six).properties).toMatchObject({ labelWrapFraction: 0.28, labelWrapUnits: 5.6 }) // three columns, 7.2 apart less a 1.6 gutter
   })
 
   it('a long hub caption is a heading above the figure; a short one stays on the hub', () => {
@@ -230,7 +232,8 @@ describe('corpus gate: every authored Biology figure lays out cleanly at phone a
         if (!sc) continue
         const height = stageHeightToFit(sc, w, h, bw, 600)
         const vp = viewportFromCanvas(w, height, bw)
-        const framed = { ...sc, cameraDistance: cameraDistanceToContainFigure(sc, vp) }
+        // The framing `ExplainerFigure` applies on a Biology lesson: the aspect rule and the viewport rule, whichever is further.
+        const framed = { ...sc, cameraDistance: Math.max(cameraDistanceToContain(sc, w / height), cameraDistanceToContainFigure(sc, vp)) }
         const report = checkSceneLayout(framed, vp)
         if (!report.ok) failures.push(`${id}: ${report.violations.length}`)
       }
@@ -240,5 +243,58 @@ describe('corpus gate: every authored Biology figure lays out cleanly at phone a
 
   it('the three supported viewports are the ones this gate is calibrated against', () => {
     expect(VIEWPORTS.map((v) => v.name)).toEqual(['desktop', 'tablet', 'mobile'])
+  })
+})
+
+describe('long pathways stagger their captions; pairs compare item by item', () => {
+  const stageNames = (n: number) => Array.from({ length: n }, (_, i) => ({ name: `Stage ${i}`, description: `d${i}` }))
+  const captionSides = (n: number, conceptId = 'bio.t.stagger') => {
+    const sc = buildCellPathwayScene({ conceptId, title: 'T', teachingGoal: 'g', stages: stageNames(n) })
+    return sc.steps.flatMap((st) => st.objects).filter((o) => o.type === 'node').map((o) => (o.properties!.labelOffset as number[])[1] > 0 ? 'above' : 'below')
+  }
+  it('six or more stages alternate above / below the line, so neighbouring captions are two pitches apart', () => {
+    expect(captionSides(6)).toEqual(['above', 'below', 'above', 'below', 'above', 'below'])
+  })
+  it('five or fewer stages keep every caption above the line', () => {
+    expect(captionSides(5)).toEqual(['above', 'above', 'above', 'above', 'above'])
+  })
+  it('a non-Biology pathway is untouched: no caption properties at all', () => {
+    const sc = buildCellPathwayScene({ conceptId: 'phys.t.p', title: 'T', teachingGoal: 'g', stages: stageNames(8) })
+    expect(sc.steps.flatMap((st) => st.objects).some((o) => o.properties !== undefined)).toBe(false)
+  })
+  it('two groups: item k of one column sits level with item k of the other, whichever column wraps to more lines', () => {
+    const sc = buildCellComparisonScene({
+      conceptId: 'bio.t.pair', title: 'T', teachingGoal: 'g',
+      groups: [
+        { label: 'A', description: 'a', items: ['short', 'another short one'] },
+        { label: 'B', description: 'b', items: ['a considerably longer caption that has to wrap onto several lines in its column', 'also short'] },
+      ],
+    })
+    const items = (gi: number) => sc.steps[gi].objects.filter((o) => o.type === 'label').map((o) => o.position![1])
+    const [a, b] = [items(0), items(1)]
+    expect(a).toHaveLength(2)
+    expect(a[1]).toBeCloseTo(b[1], 1) // the second row is shared; the taller first caption pushes both columns down together
+  })
+  it('the first item caption starts below the header sphere and its stub, even when it wraps to several lines', () => {
+    const sc = buildCellComparisonScene({
+      conceptId: 'bio.t.first', title: 'T', teachingGoal: 'g',
+      groups: [{ label: 'A', description: 'a', items: ['one two three four five six seven eight nine ten eleven twelve'] }, { label: 'B', description: 'b', items: ['x'] }],
+    })
+    const header = sc.steps[0].objects.find((o) => o.type === 'node')!
+    const item = sc.steps[0].objects.find((o) => o.type === 'label')!
+    expect(header.position![1] - item.position![1]).toBeGreaterThan(2.5)
+  })
+})
+
+describe('the figure-level containment and stage growth are Biology-only', () => {
+  const read = (rel: string) => readFileSync(join(process.cwd(), rel), 'utf8')
+  it('ExplainerFigure applies them only when fitToCanvas is on, and it defaults to off', () => {
+    const src = read('src/components/school/visuals/ExplainerFigure.tsx')
+    expect(src).toMatch(/fitToCanvas = false/)
+    expect(src).toMatch(/if \(!fitToCanvas \|\| !sceneBox \|\| simulation\.active\) return/)
+    expect(src).toMatch(/: !fitToCanvas\s*\n\s*\? \(sceneAspect === null \? null : cameraDistanceToContain\(drawn, sceneAspect\)\)/)
+  })
+  it('only a Biology lesson turns it on', () => {
+    expect(read('src/components/learn/LessonScreen.tsx')).toMatch(/<SceneSpecFigure spec=\{msg\.sceneSpec\} learnerLevel=\{learnerLevel\} fitToCanvas=\{subjectSlug === 'biology'\} \/>/)
   })
 })

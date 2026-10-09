@@ -101,10 +101,13 @@ describe('comparisons of five or more groups use two rows', () => {
     for (const y of rows) expect(h.filter((p) => p[1] === y).length).toBeLessThanOrEqual(2)
     expect(h[0][1]).toBeGreaterThan(h[n - 1][1])
   })
-  it('Biology, one or two groups: one row, 5.5 apart, headers at y = 2.5', () => {
+  it('Biology, one or two groups: one row, 9.5 apart (room for a caption per column), headers at y = 2.5', () => {
     const h = headers(buildBio(2))
     expect(h.map((p) => p[1])).toEqual([2.5, 2.5])
-    expect(h.map((p) => p[0])).toEqual([-2.75, 2.75])
+    expect(h.map((p) => p[0])).toEqual([-4.75, 4.75])
+  })
+  it('a non-Biology one or two group comparison keeps its original 5.5 spacing', () => {
+    expect(headers(build(2)).map((p) => p[0])).toEqual([-2.75, 2.75])
   })
   it('a non-Biology comparison is byte-identical to the original layout: no offsets, no wrap, a connector per item', () => {
     const sc = build(2)
@@ -136,7 +139,7 @@ describe('comparisons of five or more groups use two rows', () => {
     expect(big.length).toBeGreaterThanOrEqual(9)
     for (const [id, s] of big) {
       expect(new Set(headers(s).map((p) => p[1])).size, id).toBe(2)
-      for (const p of headers(s)) expect(Math.abs(p[0]), id).toBeLessThanOrEqual(6.5)
+      for (const p of headers(s)) expect(Math.abs(p[0]), id).toBeLessThanOrEqual(7.2)
     }
   })
 })

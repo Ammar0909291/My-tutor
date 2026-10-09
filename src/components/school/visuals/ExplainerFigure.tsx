@@ -73,10 +73,17 @@ const MODE_HINT: Record<SceneMode, string> = {
 }
 
 export function ExplainerFigure({
-  spec, learnerLevel, onSimulationUpdate,
+  spec, learnerLevel, onSimulationUpdate, fitToCanvas = false,
 }: {
   spec: SceneSpec
   learnerLevel?: string | null
+  /**
+   * Biology's render audit (2026-10-08): contain every caption's painted box in the canvas it is drawn in, and let the
+   * stage grow in height when a figure cannot read at its natural height. OFF by default so every other subject
+   * renders exactly as its own audit measured it (measured: switching this on for all subjects changed the framing
+   * of 114 Physics, 19 Chemistry and 1 Mathematics canvas views). The Biology lesson surface turns it on.
+   */
+  fitToCanvas?: boolean
   /**
    * Dev-only inspection hook (ADR 16, G2): the dev simulation demo reads the
    * control state, current frame and in-memory evidence through this. No
@@ -280,14 +287,14 @@ export function ExplainerFigure({
   const figureId = drawn.id
   useEffect(() => { setFitStage(null) }, [figureId])
   useEffect(() => {
-    if (!sceneBox || simulation.active) return
+    if (!fitToCanvas || !sceneBox || simulation.active) return
     if (fitStage && fitStage.w !== sceneBox.w) { setFitStage(null); return } // re-measure the natural height at the new width
     if (fitStage) return // the grown height is stable for this width: it does not depend on the measured box
     const browserW = typeof window === 'undefined' ? sceneBox.w : window.innerWidth
     const maxH = Math.min(600, Math.round((typeof window === 'undefined' ? 800 : window.innerHeight) * 0.7))
     const h = stageHeightToFit(drawnRef.current, sceneBox.w, sceneBox.h, browserW, Math.max(maxH, sceneBox.h))
     if (h > sceneBox.h) setFitStage({ w: sceneBox.w, h })
-  }, [sceneBox, simulation.active, fitStage, figureId])
+  }, [fitToCanvas, sceneBox, simulation.active, fitStage, figureId])
   // Not memoised: one pass over a few dozen coordinates, and `drawn` is itself
   // rebuilt per render in the sweep branch, so a memo keyed on it buys nothing.
   //
@@ -301,12 +308,14 @@ export function ExplainerFigure({
     ? null
     : simulation.active
       ? cameraDistanceForAspect(drawn, sceneAspect ?? 4 / 3)
-      // Both rules only ever move the camera FURTHER: the aspect rule (geometry incl. a sphere's body) and the
-      // viewport rule (also each caption's painted box); the larger distance satisfies both.
-      : Math.max(
-          sceneAspect === null ? 0 : cameraDistanceToContain(drawn, sceneAspect),
-          cameraDistanceToContainFigure(drawn, viewportFromCanvas(sceneBox.w, sceneBox.h, typeof window === 'undefined' ? undefined : window.innerWidth)),
-        )
+      : !fitToCanvas
+        ? (sceneAspect === null ? null : cameraDistanceToContain(drawn, sceneAspect))
+        // Both rules only ever move the camera FURTHER: the aspect rule (geometry incl. a sphere's body) and the
+        // viewport rule (also each caption's painted box); the larger distance satisfies both.
+        : Math.max(
+            sceneAspect === null ? 0 : cameraDistanceToContain(drawn, sceneAspect),
+            cameraDistanceToContainFigure(drawn, viewportFromCanvas(sceneBox.w, sceneBox.h, typeof window === 'undefined' ? undefined : window.innerWidth)),
+          )
   const framed = framedDistance === null || framedDistance === drawn.cameraDistance
     ? drawn
     : { ...drawn, cameraDistance: framedDistance }
@@ -541,7 +550,7 @@ export function ExplainerFigure({
         <div
           className={styles.stage}
           ref={stageRef}
-          style={fitStage && !expanded ? ({ '--fig-scene-h': `${fitStage.h}px`, '--fig-scene-aspect': `${fitStage.w} / ${fitStage.h}` } as React.CSSProperties) : undefined}
+          style={fitToCanvas && fitStage && !expanded ? ({ '--fig-scene-h': `${fitStage.h}px`, '--fig-scene-aspect': `${fitStage.w} / ${fitStage.h}` } as React.CSSProperties) : undefined}
         >
           <SceneSpecRenderer
             spec={framed}

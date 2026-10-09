@@ -76,7 +76,9 @@ export function buildCellStructureScene(params: CellStructureParams): SceneSpec 
   const boundaryStep: SceneStep = {
     narration: boundaryNarration ?? `${subject}: the ${boundaryLabel.toLowerCase()} marks the outer boundary.`,
     objects: [
-      { type: 'path', id: 'boundary', points: ring, color: BOUNDARY_COLOR, thickness: 0.07, radius: 0.04, text: boundaryLabel, properties: { labelOffset: [0, 0.55, 0], labelWrapFraction: WRAP_FRACTION, labelWrapUnits: WRAP_UNITS } },
+      { type: 'path', id: 'boundary', points: ring, color: BOUNDARY_COLOR, thickness: 0.07, radius: 0.04, text: boundaryLabel, // The boundary caption sits just above the ring, as wide as the ring itself: narrowed to a part's width it wrapped
+      // to three lines whose backing plate erased the top of the ring (measured on desktop).
+      properties: { labelOffset: [0, 0.9, 0], labelWrapFraction: 0.6, labelWrapUnits: BOUNDARY_RADIUS * 2 } },
     ],
   }
 

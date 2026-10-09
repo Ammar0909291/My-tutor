@@ -53,8 +53,14 @@ const NODE_RADIUS = 0.8
 // Biology: a stage's name is painted above its sphere (below it for a stage drawn in the lower half), against the
 // figure's surface — not in the sphere's own colour on the sphere, which MEASURED 2.7–4.5 : 1 in Chromium — and no
 // wider than one node pitch, so neighbouring captions cannot run into each other.
-function bioNode(id: string, position: Vec3, text: string): SceneObject {
-  return { type: 'node', id, position, radius: NODE_RADIUS, color: NODE_COLOR, text, properties: { ...captionBeside(NODE_RADIUS, position[1] < 0 ? 'below' : 'above'), labelWrapUnits: SPACING - 0.6 } }
+//
+// A long sequence (six or more stages in a row) alternates its captions above and below the line: on one side, every
+// caption is confined to one pitch and neighbours touch ("Implantation Gastrulation Neurulation" printed as one run
+// at 1280px); alternating gives each caption two pitches of room and a clear gap to the next one on its side.
+const STAGGER_FROM_STAGES = 6
+function bioNode(id: string, position: Vec3, text: string, side?: 'above' | 'below'): SceneObject {
+  const where = side ?? (position[1] < 0 ? 'below' : 'above')
+  return { type: 'node', id, position, radius: NODE_RADIUS, color: NODE_COLOR, text, properties: { ...captionBeside(NODE_RADIUS, where), labelWrapUnits: side ? 2 * SPACING - 0.6 : SPACING - 0.6 } }
 }
 function legacyNode(id: string, position: Vec3, text: string): SceneObject {
   return { type: 'node', id, position, radius: NODE_RADIUS, color: NODE_COLOR, text }
@@ -106,7 +112,13 @@ function branchLines(a: PathwayStage, b: PathwayStage): string {
 export function buildCellPathwayScene(params: CellPathwayParams): SceneSpec {
   const { conceptId, title, teachingGoal, cyclic, branchStart, stages, branchEnd } = params
   const bio = isBiologyScene(conceptId)
-  const node = bio ? bioNode : legacyNode
+  const stagger = bio && !cyclic && !branchStart && !branchEnd && stages.length >= STAGGER_FROM_STAGES
+  const node = bio
+    ? (id: string, position: Vec3, text: string) => {
+        const m = /^stage-(\d+)$/.exec(id)
+        return stagger && m ? bioNode(id, position, text, Number(m[1]) % 2 === 1 ? 'below' : 'above') : bioNode(id, position, text)
+      }
+    : legacyNode
   const arrow = bio ? bioArrow : legacyArrow
   const steps: SceneStep[] = []
 

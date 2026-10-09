@@ -918,9 +918,9 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     teachingGoal: 'A population is described by measurable attributes and grows exponentially only without limits; in reality density-dependent factors level it off at the carrying capacity, and different species interact in classifiable ways.',
     groups: [
       { label: 'Exponential growth', description: 'a J-shaped curve, doubling at a fixed rate, only under idealised unlimited resources', items: ['Fixed doubling rate'] },
-      { label: 'Logistic growth', description: 'an S-shaped curve: density-dependent factors progressively slow growth', items: ['Limiting food, disease in crowds, predators, competition', 'Levels off at the carrying capacity K', 'K changes when environmental conditions change'] },
+      { label: 'Logistic growth', description: 'an S-shaped curve: density-dependent factors (limiting food, disease in crowds, predators, competition) progressively slow growth until it levels off at the carrying capacity K, which itself changes when environmental conditions change', items: ['Density-dependent limits slow growth', 'It levels off at the carrying capacity K'] },
       { label: 'Population attributes', description: 'measurable features of all the individuals of one species in an area', items: ['Density, birth rate, death rate', 'Age structure, sex ratio'] },
-      { label: 'Species interactions', description: 'characteristic, classifiable ways populations affect each other', items: ['Competition: both harmed', 'Predation: predator gains, prey harmed', 'Parasitism: parasite gains, host harmed', 'Mutualism: both benefit', 'Commensalism: one benefits, one unaffected'] },
+      { label: 'Species interactions', description: 'characteristic, classifiable ways populations affect each other: competition (both harmed), predation (predator gains, prey harmed), parasitism (parasite gains, host harmed), mutualism (both benefit) and commensalism (one benefits, one unaffected)', items: ['Competition: both harmed', 'Predation, parasitism: one gains, one harmed', 'Mutualism: both benefit; commensalism: one benefits'] },
     ],
   }),
   'bio.eco.nutrient-cycling': () => buildCellPathwayScene({
@@ -955,10 +955,10 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     title: 'Environmental Issues: Different Causes, Different Mechanisms',
     teachingGoal: 'Climate change, ozone depletion, eutrophication and deforestation are often conflated but operate through distinct causal mechanisms, so each must be understood on its own terms.',
     groups: [
-      { label: 'Climate change', description: 'burning fossil fuels raises atmospheric CO2, which enhances the greenhouse effect', items: ['Infrared radiation trapped in the lower atmosphere: warming', 'Altered rainfall, sea level, timing of breeding and migration'] },
-      { label: 'Ozone depletion', description: 'a separate mechanism: CFCs destroy ozone in the stratosphere', items: ['More UV reaches the surface: DNA damage, skin cancer, cataracts', 'Montreal Protocol (1989) phased out CFCs; ozone is recovering'] },
-      { label: 'Eutrophication', description: 'excess nitrogen and phosphorus, often from agricultural runoff, enter a body of water', items: ['Explosive algal bloom', 'Decomposers of the dead algae use up dissolved oxygen', 'Hypoxic dead zones: most aquatic animals cannot survive'] },
-      { label: 'Deforestation', description: 'one cause with several simultaneous consequences', items: ['Wildlife habitat destroyed: biodiversity loss', 'Carbon sink removed and stored carbon released', 'Water cycles disrupted; more soil erosion'] },
+      { label: 'Climate change', description: 'burning fossil fuels raises atmospheric CO2, which enhances the greenhouse effect: infrared radiation is trapped in the lower atmosphere, warming it, and rainfall, sea level and the timing of breeding and migration all shift', items: ['Infrared radiation trapped in the lower atmosphere: warming', 'Altered rainfall, sea level, breeding timing'] },
+      { label: 'Ozone depletion', description: 'a separate mechanism: CFCs destroy ozone in the stratosphere, so more UV reaches the surface (DNA damage, skin cancer, cataracts); the Montreal Protocol (1989) phased out CFCs and ozone is recovering', items: ['More UV reaches the surface: DNA damage, skin cancer', 'Montreal Protocol (1989): ozone recovering'] },
+      { label: 'Eutrophication', description: 'excess nitrogen and phosphorus, often from agricultural runoff, enter a body of water: an explosive algal bloom follows, decomposers of the dead algae use up dissolved oxygen, and hypoxic dead zones form in which most aquatic animals cannot survive', items: ['Algal bloom; decomposers use up oxygen', 'Hypoxic dead zones: aquatic animals cannot survive'] },
+      { label: 'Deforestation', description: 'one cause with several simultaneous consequences: wildlife habitat destroyed (biodiversity loss), a carbon sink removed and stored carbon released, water cycles disrupted and more soil erosion', items: ['Habitat destroyed: biodiversity loss', 'Carbon sink removed; stored carbon released'] },
     ],
   }),
   'bio.eco.community-ecology': () => buildCellComparisonScene({
@@ -966,10 +966,10 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     title: 'Community Ecology: Interactions, Keystones, Disturbance, Succession',
     teachingGoal: 'Species interactions are classified by their effect on each partner; keystone species and moderate disturbance have counter-intuitive effects on diversity; and communities change over time through succession.',
     groups: [
-      { label: 'Species interactions', description: 'classified by the effect on each participant', items: ['Competition: both harmed (−/−)', 'Predation or parasitism: one harmed, one helped (−/+)', 'Mutualism: both helped (+/+)', 'Commensalism: one helped, one unaffected (+/0)', 'Amensalism: one harmed, one unaffected (−/0)'] },
+      { label: 'Species interactions', description: 'classified by the effect on each participant: competition (−/−, both harmed), predation or parasitism (−/+, one harmed, one helped), mutualism (+/+, both helped), commensalism (+/0, one helped, one unaffected) and amensalism (−/0, one harmed, one unaffected)', items: ['Competition: both harmed', 'Predation, parasitism: one harmed, one helped', 'Mutualism: both helped', 'Commensalism, amensalism: one partner unaffected'] },
       { label: 'Keystone species', description: 'an effect far out of proportion to its abundance; removing one can trigger a trophic cascade', items: ['Yellowstone wolves: elk controlled, riparian plants recover, biodiversity rises'] },
-      { label: 'Intermediate disturbance', description: 'species diversity peaks at moderate disturbance, not at the lowest level', items: ['Too little: the strongest competitor excludes the others', 'Too much: species are eliminated outright', 'Moderate: exclusion never completes, so diversity is highest'] },
-      { label: 'Succession', description: 'communities change over time', items: ['Pioneer species colonise bare substrate (primary succession)', 'A sequence of seral stages', 'A climax community'] },
+      { label: 'Intermediate disturbance', description: 'species diversity peaks at moderate disturbance, not at the lowest level: too little and the strongest competitor excludes the others, too much and species are eliminated outright, while at a moderate level exclusion never completes', items: ['Moderate disturbance: diversity is highest'] },
+      { label: 'Succession', description: 'communities change over time: pioneer species colonise bare substrate (primary succession), then a sequence of seral stages leads to a climax community', items: ['Pioneer species colonise bare substrate', 'Seral stages lead to a climax community'] },
     ],
   }),
   'bio.eco.global-change-biology': () => buildCellComparisonScene({
@@ -977,10 +977,10 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     title: 'Global Change: Distinct Biological Responses',
     teachingGoal: 'Phenological shifts and range shifts are separate responses to climate change; ocean acidification harms calcifiers by one specific chemical mechanism; and biotic homogenisation is a loss of regional distinctiveness.',
     groups: [
-      { label: 'Phenological shift', description: 'a change in the TIMING of recurring life-cycle events', items: ['Flowering date, migration timing, breeding onset', 'Typically the same geographic location'] },
-      { label: 'Range shift', description: 'a change in GEOGRAPHIC distribution', items: ['Poleward or upslope as suitable climate moves', 'Spatial relocation, not rescheduling', 'Can occur independently of, or together with, a phenological shift'] },
-      { label: 'Ocean acidification', description: 'a specific carbonate-chemistry effect, not generic pollution damage', items: ['More CO2 dissolves, forming carbonic acid: lower pH', 'Fewer carbonate ions in seawater', 'Shells and skeletons harder and costlier to build; they can dissolve'] },
-      { label: 'Biotic homogenisation', description: 'different regional communities become progressively more similar', items: ['Restricted native species replaced by generalist and invasive ones', 'Regional distinctiveness is lost even if local species counts stay similar'] },
+      { label: 'Phenological shift', description: 'a change in the TIMING of recurring life-cycle events (flowering date, migration timing, breeding onset), typically at the same geographic location', items: ['Flowering, migration, breeding timing', 'Same geographic location'] },
+      { label: 'Range shift', description: 'a change in GEOGRAPHIC distribution, poleward or upslope as suitable climate moves: spatial relocation, not rescheduling; it can occur independently of, or together with, a phenological shift', items: ['Poleward or upslope relocation', 'Not rescheduling'] },
+      { label: 'Ocean acidification', description: 'a specific carbonate-chemistry effect, not generic pollution damage: more CO2 dissolves, forming carbonic acid and lowering pH, so fewer carbonate ions remain and shells and skeletons become harder and costlier to build (they can dissolve)', items: ['More CO2 dissolves: lower pH', 'Fewer carbonate ions: shells harder to build'] },
+      { label: 'Biotic homogenisation', description: 'different regional communities become progressively more similar as restricted native species are replaced by generalist and invasive ones; regional distinctiveness is lost even if local species counts stay similar', items: ['Natives replaced by generalists, invasives', 'Regional distinctiveness lost'] },
     ],
   }),
   // BIO-017 (2026-10-05, biology real-learner run #121, #123–#126): these five
@@ -1162,7 +1162,7 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     title: 'Eukaryotic Cell Structure',
     teachingGoal: 'Contrast plant and animal cells while recognising the compartmentalised organelles they share.',
     groups: [
-      { label: 'Shared by both', description: 'both cell types compartmentalise their functions into membrane-bound organelles', items: ['Plasma membrane', 'Membrane-bound nucleus', 'Mitochondria', 'Endoplasmic reticulum', 'Golgi apparatus', 'Ribosomes'] },
+      { label: 'Shared by both', description: 'both cell types compartmentalise their functions into membrane-bound organelles', items: ['Plasma membrane', 'Membrane-bound nucleus', 'Mitochondria, ER, Golgi apparatus, ribosomes'] },
       { label: 'Plant cell (additionally)', description: 'plant cells add a cellulose cell wall, chloroplasts and a large central vacuole — but not every plant cell has every one: a root cell, never exposed to light, lacks chloroplasts', items: ['Cellulose cell wall', 'Chloroplasts (absent from root cells)', 'Large central vacuole'] },
       { label: 'Animal cell (additionally)', description: 'animal cells add centrioles and lysosomes', items: ['Centrioles', 'Lysosomes'] },
     ],
@@ -1342,10 +1342,10 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     title: 'Cell Adhesion and Tissue Organisation',
     teachingGoal: 'Tell the three adhesion families apart by what each one binds, and see that loss of adhesion (EMT) is one mechanism at work in both normal development and cancer.',
     groups: [
-      { label: 'Cadherins', description: 'cell-to-cell adhesion by homophilic binding: a cadherin binds an identical cadherin on an adjacent cell, typically calcium-dependent, holding cells of the same type together into a tissue', items: ['Binds: an identical cadherin on the next cell', 'Calcium-dependent', 'Holds same-type cells together'] },
-      { label: 'Selectins', description: "transient, weaker adhesion: they bind specific carbohydrate (sugar) structures on an adjacent cell's surface, giving rapid, reversible “catch-and-roll” adhesion", items: ['Binds: specific carbohydrates (sugars)', 'Transient and reversible', 'e.g. white blood cells sticking to vessel walls in inflammation'] },
+      { label: 'Cadherins', description: 'cell-to-cell adhesion by homophilic binding: a cadherin binds an identical cadherin on an adjacent cell, typically calcium-dependent, holding cells of the same type together into a tissue', items: ['Binds: an identical cadherin on the next cell (calcium-dependent)', 'Holds same-type cells together'] },
+      { label: 'Selectins', description: "transient, weaker adhesion: they bind specific carbohydrate (sugar) structures on an adjacent cell's surface, giving rapid, reversible “catch-and-roll” adhesion", items: ['Binds: specific carbohydrates (sugars); transient, reversible', 'e.g. white blood cells sticking to vessel walls in inflammation'] },
       { label: 'Integrins', description: 'cell-to-extracellular-matrix adhesion: they bind matrix proteins such as fibronectin or collagen rather than another cell, anchoring the cell to its structural scaffold', items: ['Binds: matrix proteins (fibronectin, collagen)', 'Anchors a cell to its matrix, not to neighbours'] },
-      { label: 'Loss of adhesion (EMT)', description: 'in epithelial-mesenchymal transition, epithelial cells reversibly lose cell-cell adhesion and polarity and become mobile; the same mechanism serves normal development and, when dysregulated, drives cancer', items: ['Normal: gastrulation', 'Normal: wound healing, then MET restores the sheet', 'Pathological: cancer cells detach, invade, metastasise'] },
+      { label: 'Loss of adhesion (EMT)', description: 'in epithelial-mesenchymal transition, epithelial cells reversibly lose cell-cell adhesion and polarity and become mobile; in normal development and wound healing the reverse transition (MET) later restores the sheet, and the same mechanism, when dysregulated, drives cancer', items: ['Normal: gastrulation and wound healing', 'Pathological: cancer cells detach, invade, metastasise'] },
     ],
   }),
 
@@ -1421,9 +1421,9 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     title: 'Immune Disorders: Three Failure Modes',
     teachingGoal: 'Autoimmune disease and allergy are BOTH overactivity problems (misdirected or overreacting); only immunodeficiency is underactivity — none of the three is a generic "weak immune system."',
     groups: [
-      { label: 'Autoimmune disease', description: 'tolerance failure — T and B cells attack the body’s own tissue', items: ['Type 1 diabetes (pancreatic β-cells)', 'Rheumatoid arthritis (joints)', 'Multiple sclerosis (myelin)', 'Lupus (multiple organs)'] },
+      { label: 'Autoimmune disease', description: 'tolerance failure — T and B cells attack the body’s own tissue', items: ['Type 1 diabetes (pancreatic β-cells)', 'Rheumatoid arthritis (joints)', 'Multiple sclerosis (myelin); lupus (multiple organs)'] },
       { label: 'Allergy', description: 'Type I hypersensitivity — an IgE-mediated overreaction to a harmless antigen', items: ['Sensitisation: IgE binds mast cells, no symptoms', 'Re-exposure: cross-linking triggers degranulation', 'Anaphylaxis: the severe, systemic form'] },
-      { label: 'Immunodeficiency', description: 'the immune system fails to defend against real pathogens', items: ['Primary: genetic (e.g. SCID)', 'Secondary: acquired (e.g. HIV destroys CD4⁺ T cells, causing AIDS)'] },
+      { label: 'Immunodeficiency', description: 'the immune system fails to defend against real pathogens', items: ['Primary: genetic (e.g. SCID)', 'Secondary: acquired, e.g. HIV destroys CD4⁺ T cells'] },
     ],
   }),
 
@@ -2305,7 +2305,7 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     groups: [
       { label: 'Mosses', description: 'the gametophyte (n) is dominant (the visible green plant); the sporophyte (2n) is a small, dependent stalk', items: ['Gametophyte: dominant', 'Sporophyte: small dependent stalk', 'Sperm needs a water film to swim'] },
       { label: 'Ferns', description: 'dominance reverses — the large fern IS the sporophyte (2n); the gametophyte (n) is a tiny, independent prothallus', items: ['Sporophyte: dominant', 'Gametophyte: tiny independent prothallus', 'Sperm needs a water film to swim'] },
-      { label: 'Seed plants', description: 'the gametophyte is microscopic and entirely dependent on the sporophyte (pollen grain, embryo sac)', items: ['Sporophyte: dominant', 'Gametophyte: microscopic, dependent', 'No water film needed — free for dry land'] },
+      { label: 'Seed plants', description: 'the gametophyte is microscopic and entirely dependent on the sporophyte (pollen grain, embryo sac), so no water film is needed for sperm — freeing seed plants to colonise dry land', items: ['Sporophyte: dominant', 'Gametophyte: microscopic, dependent', 'No water film needed for sperm'] },
     ],
   }),
 
@@ -3284,7 +3284,7 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     teachingGoal: "The endosperm or cotyledons store food reserves that fuel the embryo's initial growth before the seedling can photosynthesise independently.",
     parts: [
       { name: 'Embryo', description: 'the developing young plant itself' },
-      { name: 'Endosperm/cotyledons', description: "food reserves fuelling the embryo's initial growth" },
+      { name: 'Endosperm / cotyledons', description: "food reserves fuelling the embryo's initial growth" },
     ],
   }),
 

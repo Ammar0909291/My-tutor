@@ -717,39 +717,60 @@ export function cameraDistanceToContainFigure(scene: SceneSpec, viewport: Viewpo
   // scale its own camera gives and only ever reduce it.
   const tan = Math.tan(FOV_RADIANS / 2)
   const ownScale = viewport.hostHeight / (2 * tan * own)
-  let scale = ownScale
 
   // Distance `v` (scene units) from the centre, plus `margin` px that do not
   // scale (a label's painted half-box) and `r` scene units that do (a radius).
-  const limit = (v: number, r: number, marginPx: number, half: number) => {
+  const limit = (cap: number, v: number, r: number, marginPx: number, half: number): number => {
     const reach = Math.abs(v) + r
-    if (reach <= 0) return
+    if (reach <= 0) return cap
     const room = half - marginPx
     // A label wider than the canvas cannot be contained by moving the camera;
     // the label layer wraps it instead, and `labelExtent` already reflects that.
-    if (room <= 0) return
-    scale = Math.min(scale, room / reach)
+    if (room <= 0) return cap
+    return Math.min(cap, room / reach)
   }
 
+  // Geometry does not change with the camera: its limit is computed once.
+  let geometryScale = ownScale
   for (const step of scene.steps ?? []) {
     for (const obj of step.objects ?? []) {
       const r = typeof obj.radius === 'number' && obj.type !== 'bar' ? obj.radius : 0
       const pts = [obj.position, obj.from, obj.to, ...(obj.points ?? [])].filter(Boolean) as Vec3[]
       for (const p of pts) {
-        limit(p[0], r, 0, halfW)
-        limit(p[1], r, 0, halfH)
+        geometryScale = limit(geometryScale, p[0], r, 0, halfW)
+        geometryScale = limit(geometryScale, p[1], r, 0, halfH)
       }
     }
   }
-  for (const { text, position, object } of sceneTextObjects(scene)) {
-    const { halfW: lw, halfH: lh } = labelExtent(text, viewport, tierOf(object), wrapPxOf(object, viewport, own))
-    limit(position[0], 0, Math.min(lw, halfW * 0.98), halfW)
-    limit(position[1], 0, Math.min(lh, halfH * 0.98), halfH)
-  }
+  const textObjects = sceneTextObjects(scene)
 
+  // A caption's wrap width is a share of the canvas AND a number of scene units (`wrapPxOf`), so it narrows as the
+  // camera backs away — and a narrower caption wraps to MORE lines and is taller. Containing the figure at the
+  // wrap measured at the scene's own distance therefore under-reserves room, and the lowest captions end up past
+  // the canvas edge where the placement solver pushes them into a neighbouring column (measured at 1280 and 390px:
+  // the last caption of a bottom-row group painted beside its header, above the item it should follow). So the
+  // distance is solved to a fixed point: measure the captions at the distance just found, and again, until stable.
+  const scaleAt = (distance: number): number => {
+    let scale = geometryScale
+    for (const { text, position, object } of textObjects) {
+      const { halfW: lw, halfH: lh } = labelExtent(text, viewport, tierOf(object), wrapPxOf(object, viewport, distance))
+      scale = limit(scale, position[0], 0, Math.min(lw, halfW * 0.98), halfW)
+      scale = limit(scale, position[1], 0, Math.min(lh, halfH * 0.98), halfH)
+    }
+    return scale
+  }
+  const toDistance = (scale: number) => viewport.hostHeight / (2 * tan * scale)
+
+  let scale = scaleAt(own)
   if (scale >= ownScale - 1e-6) return own
-  const needed = viewport.hostHeight / (2 * tan * scale)
-  return Math.round(Math.min(needed, own * MAX_PULLBACK) * 10) / 10
+  let distance = Math.min(toDistance(scale), own * MAX_PULLBACK)
+  for (let pass = 0; pass < 4 && distance < own * MAX_PULLBACK; pass++) {
+    scale = scaleAt(distance)
+    const next = Math.min(toDistance(scale), own * MAX_PULLBACK)
+    if (next <= distance + 0.05) break
+    distance = next
+  }
+  return Math.round(distance * 10) / 10
 }
 
 /**
@@ -788,7 +809,7 @@ function captionsOnSpheres(scene: SceneSpec, viewport: Viewport): number {
 }
 
 /**
- * How many captions with an authored column width the solver moved sideways OUT of their column. A caption pushed far
+ * How many captions with an authored column width the solver moved sideways OUT of their column (or far along it). A caption pushed far
  * from its anchor reads as belonging to the neighbouring group (measured: "Protein complexes (fully)" printed under the
  * wrong group at 390px) — worse than overlapping, because nothing looks wrong. Counted so the stage grows until the
  * captions can stay where they were authored.
@@ -799,7 +820,11 @@ function captionsOutOfColumn(scene: SceneSpec, viewport: Viewport): number {
   let count = 0
   placeSceneLabels(scene, viewport).labels.forEach((l, i) => {
     const wrapPx = wrapPxOf(textObjects[i].object, viewport, camera)
-    if (wrapPx !== undefined && Math.abs(l.x - l.anchorX) > Math.max(24, 0.3 * wrapPx)) count++
+    if (wrapPx === undefined) return
+    // Sideways out of its column, or far up/down the column — a bottom-row caption pushed past its neighbours reads as
+    // belonging to the group above it just as surely (measured at 1280px: the last caption of a group painted beside
+    // its own header, above the caption that should precede it).
+    if (Math.abs(l.x - l.anchorX) > Math.max(24, 0.3 * wrapPx) || Math.abs(l.y - l.anchorY) > Math.max(48, 0.14 * viewport.hostHeight)) count++
   })
   return count
 }
@@ -826,7 +851,8 @@ export function stageHeightToFit(
 ): number {
   const violationsAt = (h: number): number => {
     const viewport = viewportFromCanvas(hostWidth, h, browserWidth)
-    const framed = { ...scene, cameraDistance: cameraDistanceToContainFigure(scene, viewport) }
+    // The SAME framing the renderer applies (`ExplainerFigure`): the aspect rule and the viewport rule, whichever is further.
+    const framed = { ...scene, cameraDistance: Math.max(cameraDistanceToContain(scene, hostWidth / h), cameraDistanceToContainFigure(scene, viewport)) }
     return checkSceneLayout(framed, viewport).violations.length + captionsOnSpheres(framed, viewport) + captionsOutOfColumn(framed, viewport)
   }
   const atBase = violationsAt(baseHeight)

@@ -35,7 +35,7 @@ const HUB_RADIUS = 0.9
 const RING_RADIUS = 3.4
 // Seven or more spokes need a wider ring: their captions (above the upper spheres, below the lower ones) crowded each
 // other and the spheres at 3.4 (measured on the 8-spoke Hallmarks of Cancer figure).
-const RING_RADIUS_PER_SPOKE_OVER_SIX = 0.55
+const RING_RADIUS_PER_SPOKE_OVER_SIX = 1.1
 const ringRadiusFor = (spokeCount: number): number => RING_RADIUS + Math.max(0, spokeCount - 6) * RING_RADIUS_PER_SPOKE_OVER_SIX
 // A hub caption longer than this is a HEADING, not a name: painted beside the hub sphere it ran across the
 // connector lines and the upper spoke spheres (measured on every hub with a sentence-length caption), so it is
@@ -43,6 +43,9 @@ const ringRadiusFor = (spokeCount: number): number => RING_RADIUS + Math.max(0, 
 const HUB_HEADING_CHARS = 18
 const HUB_HEADING_EXTRA = 0.7 + 2.0
 const SPOKE_RADIUS = 0.7
+// With seven or more spokes the neighbours are closer than a caption is wide, so each caption wraps to the arc it owns.
+const spokeWrap = (n: number): { labelWrapUnits?: number } =>
+  n >= 7 ? { labelWrapUnits: Math.round((2 * ringRadiusFor(n) * Math.sin(Math.PI / n) - 0.4) * 10) / 10 } : {}
 
 export function buildCellHubScene(params: CellHubParams): SceneSpec {
   const { conceptId, hubLabel, title, teachingGoal, spokes } = params
@@ -62,7 +65,7 @@ export function buildCellHubScene(params: CellHubParams): SceneSpec {
     const position: Vec3 = [round(Math.cos(angle) * ringRadiusFor(spokes.length)), round(Math.sin(angle) * ringRadiusFor(spokes.length)), 0]
     const objects: SceneObject[] = [
       // Caption on the outward (upper or lower) side of its sphere, not on it.
-      { type: 'node', id: `spoke-${i}`, position, radius: SPOKE_RADIUS, color: SPOKE_COLOR, text: spoke.name, properties: captionBeside(SPOKE_RADIUS, position[1] >= 0 ? 'above' : 'below') },
+      { type: 'node', id: `spoke-${i}`, position, radius: SPOKE_RADIUS, color: SPOKE_COLOR, text: spoke.name, properties: { ...captionBeside(SPOKE_RADIUS, position[1] >= 0 ? 'above' : 'below'), ...spokeWrap(spokes.length) } },
       { type: 'path', id: `spoke-line-${i}`, points: [[0, 0, 0] as Vec3, position], color: LINE_COLOR },
     ]
     return { narration: `${spoke.name}: ${spoke.description}`, objects }
