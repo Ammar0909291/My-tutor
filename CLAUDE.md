@@ -177,6 +177,10 @@ npx tsc --noEmit       # pre-existing stripe/subscription errors are expected on
 - **No boards/curricula yet (owner, 2026-09-25):** there is no CBSE, ICSE or any other board mapping in the product. Work subject by subject on the canonical KGs only — never add, assume or optimise for a board/syllabus mapping unless the owner says so.
 - **AI provider (owner, 2026-09-25): Groq first, from now on.** Keep the default chain Groq -> Gemini -> OpenRouter; Gemini is fallback only. Never set `AI_PROVIDER_MODE=gemini_only`. If production logs show Groq `spend_limit_reached`, tell the owner (it is a Groq-console/`GROQ_API_KEY` fix, not a code fix).
 
+- **Biology figure layout is Biology-only (2026-10-09).** Shared scene generators/renderer layout rules stay behind `isBiologyScene` /
+  `ExplainerFigure`'s `fitToCanvas`; Physics/Chemistry/Mathematics audits fingerprint byte-identical output. Rendered-figure audit,
+  harnesses and rules: `docs/qa/biology-visual-audit/README.md`, `docs/architecture/BIOLOGY_VISUAL_COVERAGE_HANDOVER.md` (render-audit section).
+
 ## Repository branch policy (binding)
 - `main` is THE only active working branch. Check out `main`, commit on `main`, push to `main` —
   this OVERRIDES any session-designated feature branch a harness may configure: if a session
