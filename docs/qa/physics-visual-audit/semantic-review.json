@@ -82,7 +82,7 @@
      "describe": "the shared force diagram draws what each of its four concepts says"
     }
    ],
-   "remaining": "Only the level-surface case is drawn: that N ≠ mg on a slope or with a vertical push is not shown and must come from the tutor's text. In the lesson the card shows as many steps as the reply has lines, so a short reply never draws the normal arrow (pre-existing; see report §18)."
+   "remaining": "Only the level-surface case is drawn: that N ≠ mg on a slope or with a vertical push is not shown and must come from the tutor's text. In the lesson the card shows as many steps as the page's narration has lines, so a reply shorter than five lines never draws the normal arrow (pre-existing design, not a diagram defect). Production, 2026-10-09 (deployment dpl_EBE7hccxEBbr4daYxPCdTUQfMYhF, main 34def29): in a six-line reply on the real /learn page all five steps were drawn - the normal arrow leaves the top of the body, is perpendicular to the ground line (cos 0.00), points up (head above the body), same length as the weight - at 390 and 1280 px, dark and light, 4/4 PASS, screenshots viewed (production-browser-audit-closure.json, run Z1)."
   },
   "phys.mech.equilibrium": {
    "initial": "SM-02: no physics assertion (shared force_diagram card)",
@@ -152,7 +152,7 @@
      "describe": "ray-optics figures print u, f and v that satisfy"
     }
    ],
-   "remaining": "Static figure (no sliders): the learner cannot vary f₁ and f₂. Only thin lenses in contact are drawn — the separated-lens correction (EB: P = P₁ + P₂ − d·P₁P₂) is named in the figure's limit but not drawn. The machine semantic PASS comes from its test-file-name heuristic; the real evidence is the slope-derived test cited here."
+   "remaining": "Static figure (no sliders): the learner cannot vary f₁ and f₂. Only thin lenses in contact are drawn — the separated-lens correction (EB: P = P₁ + P₂ − d·P₁P₂) is named in the figure's limit but not drawn. The machine semantic PASS comes from its test-file-name heuristic; the real evidence is the slope-derived test cited here. Production, 2026-10-09: the real /learn page rendered the three-stage figure at 390 and 1280 px, dark and light, 4/4 PASS, screenshots viewed (production-browser-audit-closure.json, run X3)."
   },
   "phys.mod.wave-particle-duality": {
    "initial": "SM-02: no physics assertion (double_slit card)",

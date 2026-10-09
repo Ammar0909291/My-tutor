@@ -215,7 +215,7 @@ Scope: only the 21 concepts §15 left REVIEW_REQUIRED. For each: resolve the pro
 | 8 | `phys.mech.conservation-of-momentum` | SM-02: no physics assertion | **FIXED→PASS** | Rebound to the collision generator; totals re-derived from drawn vectors |
 | 9 | `phys.opt.mirrors` | LY-02: P and F labels overlap the axis | **FIXED→PASS** | Signed u, f, v; mirror plane drawn; P/F on the axis kept by design; camera framed |
 | 10 | `phys.opt.lenses` | ST-03 text only, LY-02: P / F overlap the axis | **FIXED→PASS** | O (not P) on lenses; signed numbers; lens drawn; camera framed |
-| 11 | `phys.opt.lens-power` | ST-03 text only, LY-02: P / F overlap the axis | **REVIEW_REQUIRED** | Correct but does not depict P = 1/f or P₁ + P₂ — owner decision |
+| 11 | `phys.opt.lens-power` | ST-03 text only, LY-02: P / F overlap the axis | **REVIEW_REQUIRED** *(closed 2026-10-09 → FIXED→PASS, §18)* | Correct but did not depict P = 1/f or P₁ + P₂ |
 | 12 | `phys.mod.wave-particle-duality` | SM-02: no physics assertion | **FIXED→PASS** | Two equal slits; 150 detection dots from the two-slit intensity |
 | 13 | `phys.qm.wave-function` | SM-02: no physics assertion | **FIXED→PASS** | |ψ|² = ψ²; y-axis arrow and label fixed |
 | 14 | `phys.qm.particle-in-box` | LY-02: caption overlap, SM-02: no physics assertion | **FIXED→PASS** | Levels at n² (were compressed); ψₙ zero at the walls |
@@ -273,10 +273,12 @@ New: `physicsCardSemantics.test.ts` (72 tests — geometry read from what each f
 
 ### Remaining uncertainty
 
-* Normal-force's fifth step was not seen in a production reply of its own (above).
+*(Updated 2026-10-09 — the first and last items below are closed in §18.)*
+
+* ~~Normal-force's fifth step was not seen in a production reply of its own (above).~~ Seen — §18.
 * Slider / simulation states were verified locally, not in production (production audits default state only).
 * The 158 cached generated figures and the other 262 concepts were not re-browsed in production.
-* `phys.opt.lens-power` stays REVIEW_REQUIRED.
+* ~~`phys.opt.lens-power` stays REVIEW_REQUIRED.~~ Closed with its own figure — §18.
 
 ### Commits
 
@@ -284,3 +286,54 @@ New: `physicsCardSemantics.test.ts` (72 tests — geometry read from what each f
 * `4d14a0b` fix(visual): physics scenes — particle tree, ray-optics figures, conservation of momentum
 * `9ffaec0` test(visual): deterministic semantic assertions + review ledger + re-audited records — **deployed**
 * (this commit) production verification scripts and records, report
+
+---
+
+## 18. FINAL REVIEW CLOSURE — 2026-10-09
+
+Scope: only the two items §17 left open. Nothing else in Physics, no other subject, no threshold, no new renderer — an authored scene through the existing `CONCEPT_SCENES` → `resolveVisual` path, the existing force-diagram card, the existing label solver.
+
+### 18.1 `phys.opt.lens-power` — decided, built, verified (REVIEW_REQUIRED → FIXED→PASS)
+
+**Decision (no owner decision was needed).** The lesson explicitly teaches both relationships — the KG node ("the power of a lens is the reciprocal of focal length in metres; combined lenses have powers that add algebraically"), the Educational Brain's Core Understanding and Mental Models stages 2–3 (P = 1/f in dioptres; P_total = P₁ + P₂ for thin lenses in contact) and the blueprint's Level 2. The served figure was the single-lens ray diagram of `phys.opt.lenses`: correct, but it showed neither power nor a combination. A dedicated figure therefore adds no unsupported scope — it draws what the concept already claims, with the EB's own worked numbers.
+
+**Figure** (`src/lib/teaching/sceneGenerators/lensPower.ts`, three cumulative steps, served from `conceptSceneParams.ts`): (1) one converging lens, f = 0.50 m → P = 1/f = +2 D; (2) a +5 D converging and a −2 D diverging lens in contact — the first lens alone (aid ray, F₁); (3) the pair together, P₁ + P₂ = +3 D, f = 0.33 m, "powers add, focal lengths do not", thin lenses in contact only. Rays are drawn from the powers (`y' = y − h·P·dx`), so the printed numbers are the ones the geometry has. The registry row lost its `ray_optics` generator (it would have given this concept the sliders of `phys.opt.lenses`); the `scope.ts` demotion was removed; three pinned backlog lists drop lens-power (domain-scoped 12 → 11, remaining generators ten).
+
+**Evidence.** `physicsCardSemantics.test.ts` (now 81 tests) derives the powers from the *slope of the drawn rays* (single lens +2 D, pair +5/−2 → +3 D, difference −2 D), checks the printed numbers and the lens outline sign, that focal lengths do not add, the panel lines, bounds, the nine-label budget, narrations < 220 characters, determinism and label placement. Machine audit: structural, readability, contrast, layout and semantic all PASS at 390 and 1280 px, dark and light (`audit-summary.json`: **265 PASS / 18 REVIEW_REQUIRED / 0 FAIL**, was 264 / 19 / 0). Production: rendered in the real `/learn` page, 4/4 PASS, screenshots viewed (full three-stage figure, legible in both themes).
+
+**Left true:** static figure (the learner cannot vary f₁, f₂); only thin lenses in contact are drawn — the separated-lens correction is named in the figure's limit, not drawn.
+
+### 18.2 `phys.mech.normal-force` — the fifth step, in production
+
+**Seen.** On deployment `dpl_EBE7hccxEBbr4daYxPCdTUQfMYhF` (`main` `34def29`, READY, alias `my-tutor-flame.vercel.app`), a disposable learner (deleted afterwards) asked the Tutor for a diagram on the normal-force lesson; the reply had six lines, so the page's own narration drove the card through **all five steps**. Read back from the live DOM (screen pixels): the normal arrow leaves the top of the body, runs **straight up** (390 px: (195, 1170.2) → (195, 1130.8); 1280 px: (980, 762.6) → (980, 700.3)), is **perpendicular to the ground line** (dot product 0, `perpendicularToGround`), its head is **above the body**, it is labelled "Normal (N)", and it has the **same length as the weight arrow** (39.4 px / 62.3 px). 390 and 1280 px × dark and light: **4/4 PASS** (`production-browser-audit-closure.json`, run Z1; screenshots viewed). Equilibrium (same card): 4/4 PASS with the normal arrow drawn; force, free-body-diagram and friction: 4/4 PASS each with the normal arrow drawn.
+
+**Why §17 could not see it — a harness defect, not a diagram defect.** The retry loop asked the Tutor again in a fresh session each time and framed the card with `document.querySelector`, i.e. the **first** card on the page. The lesson page lists the lesson's messages from **every** session of the learner (history is lesson-scoped; ending a session does not hide it — checked: three sessions, two ended, the page still held all three replies), so after a retry it holds one figure per attempt, oldest first, and the harness kept measuring the first, short reply: 18 retries on normal-force and equilibrium never reached step 5 while the same three-line card sat in front of the harness every time. `physicsProductionBrowserAudit.ts` now frames the **last** card. Checked on the retry path: equilibrium replies of 3, 7, 3 and 9 lines — the measured card drew the normal arrow, which the first (3-line) card cannot have; normal-force (4, 6, 4, 3 lines) measured the last, 3-line card and correctly showed no normal arrow. The card still shows only as many steps as the narration has lines (`visualStepForSegment`, unchanged): a reply shorter than five lines never draws the normal arrow — that is the lesson card's design, and no pass is claimed for a step that was not on screen.
+
+**A real defect found by looking.** The previous round's production claim ("finished figure seen for force, FBD, friction, equilibrium") had **overlooked a clipped weight arrow-head**: seating the body on the ground (`groundY` 130) pushed the head's tip to y = 175 in a 170-unit drawing, so it was cut flat. It was found by viewing the completed production screenshots, fixed (`groundY` 120; the drawing's size, ground, arrow lengths and head reach are now one exported constant, `FORCE_DIAGRAM`), pinned by a new test ("every arrow-head lies inside the drawing", with a negative control), and the five force-diagram concepts were re-rendered and re-merged. The post-fix production renders show the weight head whole at both widths and both themes.
+
+### 18.3 Observations (not defects fixed here)
+
+* **Real, pre-existing defect in the shared legibility hook — not fixed here (owner decision).** `useFigureLegibility` lifts 2D-figure text to 4.5:1, but it finds the backdrop with `document.elementsFromPoint`, which only hits what is inside the viewport. A card mounted **outside the viewport** — every older figure of a lesson that is restored with several, because history is lesson-scoped — gets **no lift**, and nothing triggers another pass when it is scrolled into view. Reproduced in production (three sessions on the normal-force lesson, 390 × 844): the newest card, in view, had "Applied" / "Friction" lifted; the two older cards, above the fold, had every label `plain`, and the first one **still** had every label plain 6 s after being scrolled to the centre of the screen. The authored colours on the figure surface are 3.99:1 ("Applied", dark), 3.61:1 ("Friction", dark), 3.11:1 / 3.43:1 (light) — just under the 4.5:1 the hook promises, not illegible. This is the **intermittent CT-01 FAIL** seen in 4 of about 40 harness measurements for this closure: each was a page holding several cards (retries), measured on an older card (the harness framed the first one, see 18.2); every single-card page — run Z1, the equilibrium run of Y1 (one attempt), the one-attempt probe, and 18 direct probes — lifted. It applies to every subject's 2D card (the hook sits in the shared frame), so the fix — re-run the pass when the figure enters the viewport (an `IntersectionObserver` in the hook, a few lines) — was **not made**: it changes shared code under every subject's figures and needs an owner decision plus a cross-subject re-audit. The new harness (last card) no longer measures this state, so it will not surface again in Physics audits.
+* **"Weight (W=mg)" abuts the weight arrow-head at 1280 px** (about 1 px gap in the screenshots). Pre-existing (the label's x was not touched), inside the audit's tolerance (markers are not geometry boxes to it). A one-line move (x from `cx + 44` to about `cx + 50`) would clear it; not done — it is a cosmetic nit that would cost another re-audit and deploy cycle, so it is left for an owner call.
+
+### 18.4 Tests and build (merged tree, `main` `34def29` plus docs)
+
+| Check | Result |
+|---|---|
+| Full vitest | **913 files / 18,587 passed, 9 skipped, 0 failed** |
+| `tsc --noEmit` | 0 errors |
+| `next lint` | 0 errors, 12 warnings (identical to baseline) |
+| `npm run build` | exit 0 |
+| Re-render of 20 physics concepts on the merged tree (other sessions' Biology/Chemistry shared-layout changes merged in) | verdicts identical to the committed audit |
+
+### 18.5 Production status
+
+Deployment `dpl_EBE7hccxEBbr4daYxPCdTUQfMYhF` (`34def29`) READY; **browser-verified** in production: normal-force (4/4), equilibrium (4/4), force, free-body-diagram, friction (4/4 each), lens-power (4/4). Not browser-verified in production: the concepts and states not listed (slider states, the other physics concepts, the cached generated figures). READY alone was never taken as verification.
+
+### 18.6 Commits
+
+* `36466a4` feat(visual): `phys.opt.lens-power` gets its own figure — P = 1/f and P = P₁ + P₂
+* `72c25ec` fix(visual): force diagram — the weight arrow's head is no longer cut off by the card
+* `9387af7` test(visual): lens-power figure and force-diagram head are pinned; the three backlog lists drop lens-power; ledger and audit record updated
+* `34def29` merge `origin/main` (Biology / Chemistry layout work by other sessions; clean)
+* (this commit) production-audit harness fix, production evidence record, ledger and report
