@@ -62,7 +62,8 @@ describe('ENGL-014 the tutor\'s account of its own instruction goes', () => {
 
 describe('ENGL-008 English caps analogies at one in four replies', () => {
   it('route passes 1 for english, as for mathematics', () => {
-    expect(ROUTE).toMatch(/caps\.analogyCapReached\(priorTutor, \['mathematics', 'english'\]\.includes\(learnSession\.subject\.slug\) \? 1 : 2\)/)
+    // 2026-10-07 (CHEM-040 / CHEM-055): the cap of one now applies to every subject, english included.
+    expect(ROUTE).toMatch(/caps\.analogyCapReached\(priorTutor, 1\)/)
     expect(analogyCapReached(['Imagine a train carrying words.', 'Print goes left to right.'], 1)).toBe(true)
   })
 })
