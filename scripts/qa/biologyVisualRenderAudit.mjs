@@ -73,6 +73,29 @@ const MEASURE = () => {
   }
 }
 
+/**
+ * Wait until the figure stops moving. A fixed 1.3 s wait caught the heavier figures mid-transition (the stage grows to fit its figure and
+ * the labels glide to their solved spots), so labels read as outside the canvas for a frame that a real browser shows for ~300 ms — a
+ * harness artefact, not a defect. Two identical consecutive reads of the canvas size and every label position = settled.
+ */
+async function settle(page, maxMs = 12000) {
+  const read = () => page.evaluate(() => {
+    const fig = document.querySelector('figure[role="figure"]')
+    if (!fig) return ''
+    const c = fig.querySelector('canvas')?.getBoundingClientRect()
+    const ls = [...fig.querySelectorAll('div[style*="translate3d"] span')].map((s) => { const r = s.getBoundingClientRect(); return `${s.textContent.trim().slice(0, 12)}@${Math.round(r.x)},${Math.round(r.y)}` })
+    return `${c ? Math.round(c.width) + 'x' + Math.round(c.height) : ''}|${ls.join(';')}`
+  }).catch(() => '')
+  let prev = await read()
+  const t0 = Date.now()
+  while (Date.now() - t0 < maxMs) {
+    await page.waitForTimeout(400)
+    const cur = await read()
+    if (cur === prev && cur.includes('@')) return
+    prev = cur
+  }
+}
+
 async function shot(page, file) {
   const fig = page.locator('figure[role="figure"]').first()
   await fig.screenshot({ path: file })
@@ -104,6 +127,7 @@ try {
         // layout; a capture taken before that is a blank figure. Wait for the real first render.
         await page.waitForFunction(() => { const c = document.querySelector('figure[role="figure"] canvas'); return !!c && !(c.width === 300 && c.height === 150) }, null, { timeout: 60000 }).catch(() => {})
         await page.waitForTimeout(1300)
+        await settle(page)
         v.provenance = await page.locator('[data-testid="served-provenance"]').textContent().catch(() => null)
         v.renderer = await page.locator('[data-testid="served-renderer"]').textContent().catch(() => null)
         v.hasWebGLCanvas = (await page.locator('figure[role="figure"] canvas').count()) > 0
@@ -118,12 +142,12 @@ try {
         // walk stages
         const next = page.getByRole('button', { name: 'Next stage' })
         if (await next.count()) {
-          await next.first().click(); await page.waitForTimeout(450)
+          await next.first().click(); await page.waitForTimeout(450); await settle(page, 4000)
           v.states.stage1 = await page.evaluate(MEASURE)
           await shot(page, path.join(idDir, `${vpName}-stage1.png`))
           let guard = 0
           while (guard++ < 14 && (await next.first().isEnabled().catch(() => false))) { await next.first().click(); await page.waitForTimeout(150) }
-          await page.waitForTimeout(450)
+          await page.waitForTimeout(450); await settle(page, 4000)
           v.states.last = await page.evaluate(MEASURE)
           await shot(page, path.join(idDir, `${vpName}-last.png`))
         }

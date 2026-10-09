@@ -136,6 +136,9 @@ import { buildEnergyCycleScene } from '@/lib/teaching/sceneGenerators/energyCycl
 import { buildCoordinationComplexScene, type CoordinationComplexDef } from '@/lib/teaching/sceneGenerators/coordinationComplex'
 import { buildSystemBoundaryScene, buildFirstLawScene as buildChemFirstLawScene } from '@/lib/teaching/sceneGenerators/chemistrySystemScenes'
 import { buildCellStructureScene } from '@/lib/teaching/sceneGenerators/cellStructure'
+import { buildBrainRegionsScene } from '@/lib/teaching/sceneGenerators/brainRegions'
+import { buildPredatorPreyScene } from '@/lib/teaching/sceneGenerators/predatorPreyCycles'
+import { buildRootSymbiosesScene } from '@/lib/teaching/sceneGenerators/rootSymbioses'
 import { buildCellPathwayScene } from '@/lib/teaching/sceneGenerators/cellPathway'
 import { buildCellHubScene } from '@/lib/teaching/sceneGenerators/cellHub'
 import { buildCellComparisonScene } from '@/lib/teaching/sceneGenerators/cellComparison'
@@ -1053,16 +1056,9 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
       { label: 'Logistic', description: 'dN/dt = rN(1 − N/K)', items: ['N small: (1 − N/K) ≈ 1, near-exponential', 'N → K: (1 − N/K) → 0, growth stops', 'S-shaped curve levelling at K'] },
     ],
   }),
-  'bio.eco.predator-prey-dynamics': () => buildCellComparisonScene({
-    conceptId: 'bio.eco.predator-prey-dynamics',
-    title: 'Predator and Prey: Two Coupled Equations',
-    teachingGoal: 'In the Lotka–Volterra model each population’s growth rate depends on BOTH populations at once — the coupling that makes the two rise and fall together.',
-    groups: [
-      { label: 'Prey equation', description: 'its growth rate depends on the predators too', items: ['rises with its own reproduction', 'falls with predation, which grows with predator numbers'] },
-      { label: 'Predator equation', description: 'its growth rate depends on the prey too', items: ['rises with prey available to eat', 'falls with its own natural mortality'] },
-      { label: 'Predation rate', description: 'two distinct parts: individual predator behaviour versus change in the predator population, over a longer timescale', items: ['functional response: prey killed per individual predator as prey density changes', 'numerical response: how predator numbers change in response to prey availability'] },
-    ],
-  }),
+  // 2026-10-09 (Biology closure): was a three-group text comparison with no population cycle. The concept's Learning Objective is boom-bust
+  // cycles as an emergent property of the coupled system, so the figure is now the time-series itself (predatorPreyCycles.pure.ts).
+  'bio.eco.predator-prey-dynamics': () => buildPredatorPreyScene(),
 
   // Archetype C — the system-boundary/energy-balance diagram.
   'chem.thermo.system': () => buildSystemBoundaryScene('closed'),
@@ -1138,12 +1134,31 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   // generator (already imported above for the civics/history domain) rather
   // than any of the four new ones — the concept's own description IS a
   // timeline (Schleiden & Schwann, then Virchow).
-  'bio.cell.cell-theory': () => buildTimelineScene({
-    events: [
-      { year: 1838, event: 'Schleiden: plants are built from cells' },
-      { year: 1839, event: 'Schwann: extended it to animals' },
-      { year: 1855, event: 'Virchow: cells arise only from pre-existing cells' },
+  // 2026-10-09 (Biology closure): the three-event timeline carried the chronology and nothing else. The concept's
+  // Learning Objective is to state the THREE TENETS, attribute the third to Virchow (distinct from Schleiden and
+  // Schwann) and explain why the origin of the first cells does not contradict cell theory. Same events, same order and
+  // attributions, now leading to the theory they built, with the tenets and the scope limit stated in the frame.
+  'bio.cell.cell-theory': () => buildCellPathwayScene({
+    conceptId: 'bio.cell.cell-theory',
+    title: 'How Cell Theory Was Built',
+    teachingGoal: 'Three contributions, in sequence, built the generalisation: Schleiden (1838) for plants, Schwann (1839) for animals, and Virchow (1855), who added that cells arise only from pre-existing cells.',
+    stages: [
+      { name: 'Schleiden, 1838', description: 'established the generalisation for plants: plants are built from cells' },
+      { name: 'Schwann, 1839', description: 'extended it to animals: every living organism is built from one or more cells' },
+      { name: 'Virchow, 1855', description: 'added “omnis cellula e cellula”: cells arise only from pre-existing cells, which ruled out spontaneous generation of new cells under present conditions' },
+      { name: 'Cell theory', description: 'the three tenets together: all organisms are made of one or more cells; the cell is the basic structural and functional unit of life; all cells arise from pre-existing cells. How the very first cells arose is a separate question (abiogenesis) that cell theory neither addresses nor contradicts' },
     ],
+    explainer: {
+      insight: {
+        heading: 'The three tenets of cell theory',
+        bullets: [
+          'All organisms are made of one or more cells.',
+          'The cell is the basic structural and functional unit of life.',
+          'All cells arise from pre-existing cells — Virchow, 1855; not Schleiden or Schwann.',
+        ],
+        note: 'This describes how cells arise today. The origin of the very first cells (abiogenesis) is a separate question that cell theory neither addresses nor is threatened by.',
+      },
+    },
   }),
 
   'bio.cell.prokaryotic-cell': () => buildCellStructureScene({
@@ -1924,16 +1939,19 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     ],
   }),
 
+  // Every caption below is a claim from educational-brain/concepts/biology/bio.plant.plant-growth-hormones.md: the five groups' own
+  // roles, phototropism's two-step mechanism, auxin's shoot/root sensitivity (roots ~1000x more sensitive), and cytokinins/ethylene as the
+  // opposing pair for senescence. Nine captions in all — the most one view may carry — so each hormone shows what it does, not only its name.
   'bio.plant.plant-growth-hormones': () => buildCellComparisonScene({
     conceptId: 'bio.plant.plant-growth-hormones',
     title: 'The Five Plant Hormones',
     teachingGoal: '"Auxins always promote growth" is false — the same concentration that promotes shoot elongation INHIBITS root elongation.',
     groups: [
-      { label: 'Auxins (IAA)', description: 'cell elongation in shoot tips; redistributes with light and gravity', items: ['Phototropism: migrates to the shaded side'] },
-      { label: 'Gibberellins', description: 'stem elongation, seed germination, breaking dormancy', items: [] },
-      { label: 'Cytokinins', description: 'cell division; delays leaf senescence', items: [] },
-      { label: 'Abscisic acid', description: 'the "stress hormone" — stomatal closure, dormancy', items: [] },
-      { label: 'Ethylene', description: 'a GAS, not a liquid signal — fruit ripening, abscission', items: [] },
+      { label: 'Auxins (IAA)', description: 'promote cell elongation in shoot tips and redistribute with light and gravity. In phototropism auxin moves AWAY from the light, so the SHADED side elongates more and the shoot bends toward the light. Roots are about 1000x more sensitive than shoots, so a level that promotes shoot elongation can inhibit root elongation', items: ['Shoot-tip cell elongation', 'Moves away from light: shaded side grows more', 'Roots ~1000× more sensitive'] },
+      { label: 'Gibberellins', description: 'promote stem elongation, seed germination, and breaking dormancy', items: ['Stem growth, germination, breaking dormancy'] },
+      { label: 'Cytokinins', description: 'promote cell division and DELAY leaf senescence. Ethylene promotes senescence: the two are an opposing pair controlling whether a leaf or fruit ages and falls', items: ['Cell division; delays leaf senescence', 'Opposes ethylene on senescence'] },
+      { label: 'Abscisic acid', description: 'the "stress hormone": promotes stomatal closure during drought, and promotes dormancy and seed maturation', items: ['Stomatal closure, dormancy'] },
+      { label: 'Ethylene', description: 'a GAS rather than a liquid-phase signal: promotes fruit ripening and leaf and fruit abscission (falling), and opposes cytokinins on senescence', items: ['A gas: fruit ripening, abscission', 'Opposes cytokinins on senescence'] },
     ],
   }),
 
@@ -2999,18 +3017,10 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     ],
   }),
 
-  'bio.neuro.brain-regional-organization': () => buildCellStructureScene({
-    conceptId: 'bio.neuro.brain-regional-organization',
-    subject: 'Cerebral Cortex',
-    boundaryLabel: 'Cortical surface',
-    teachingGoal: 'The four lobes are a further subdivision within the forebrain, operating at a different structural scale than the forebrain/midbrain/hindbrain scheme — not a competing classification of the same structures.',
-    parts: [
-      { name: 'Frontal lobe', description: 'planning, decision-making, and voluntary movement initiation' },
-      { name: 'Parietal lobe', description: 'sensory integration and spatial processing' },
-      { name: 'Temporal lobe', description: 'auditory processing and aspects of memory and language' },
-      { name: 'Occipital lobe', description: 'visual processing' },
-    ],
-  }),
+  // 2026-10-09 (Biology closure): was a ring of four dots named after the lobes — one of the concept's two schemes, with no
+  // anatomy. Now a lateral schematic showing the forebrain / midbrain / hindbrain division, the four lobes INSIDE the forebrain,
+  // the limbic system as a linked set, and the cerebellum and medulla and pons (see brainRegions.pure.ts).
+  'bio.neuro.brain-regional-organization': () => buildBrainRegionsScene(),
 
   // Batch 12 (bio.neuro, 9 concepts; bio.physio, 3 concepts):
   'bio.neuro.cognitive-neuroscience-consciousness': () => buildCellHubScene({
@@ -3208,17 +3218,9 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     ],
   }),
 
-  'bio.plant.mycorrhizae-plant-symbioses': () => buildCellPathwayScene({
-    conceptId: 'bio.plant.mycorrhizae-plant-symbioses',
-    title: 'Rhizobium-Legume Nitrogen Fixation, Step by Step',
-    teachingGoal: "Leghaemoglobin's oxygen-binding role is not an incidental detail but the specific solution to nitrogenase's specific oxygen-sensitivity constraint.",
-    stages: [
-      { name: 'Root hair infection', description: 'rhizobium bacteria infect legume root hairs' },
-      { name: 'Nodule formation', description: 'specialised root structures form, housing the bacteria' },
-      { name: 'Low-oxygen nodule', description: "leghaemoglobin, made by the plant, binds free oxygen tightly, keeping the nodule's free oxygen low so nitrogenase is not irreversibly inactivated, while still supplying enough bound oxygen for the bacteria's own respiration" },
-      { name: 'Nitrogen fixation', description: 'nitrogenase converts atmospheric N2 into biologically usable ammonia — it can work only because free oxygen is kept low' },
-    ],
-  }),
+  // 2026-10-09 (Biology closure): was the rhizobium-legume chain only, under the concept's mycorrhizae name. The Learning Objective opens with
+  // arbuscular vs ectomycorrhizal (WHERE the hyphae are) and treats the rhizobium nodule as a different partnership; the figure now draws both.
+  'bio.plant.mycorrhizae-plant-symbioses': () => buildRootSymbiosesScene(),
 
   'bio.plant.phytochrome-photoperiodic-flowering': () => buildCellPathwayScene({
     conceptId: 'bio.plant.phytochrome-photoperiodic-flowering',

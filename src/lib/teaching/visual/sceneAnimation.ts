@@ -78,7 +78,10 @@ function traceablePaths(spec: SceneSpec): SceneObject[] {
     .filter((o) => (o.type === 'path' || o.type === 'trajectory')
       && (o.points?.length ?? 0) >= MIN_TRACE_POINTS
       && o.id
-      && roleOf(o.color) !== 'reference')
+      && roleOf(o.color) !== 'reference'
+      // A path that FILLS a region (the brain schematic's thick brush strokes) is not a route: walking a marker along it
+      // is motion that teaches nothing. Opt-in; no existing scene sets it.
+      && o.properties?.trace !== false)
 }
 
 /**
