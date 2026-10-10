@@ -21,10 +21,20 @@
  *   noSteps     "step by step" answered with < 2 step lines  (CHEM-015)
  *   lateVerdict "Not quite" present but not first            (CHEM-028)
  *   degraded    provider=degraded
- *   quizNoCard / twoOption / unkeyedCard / degradedCardSwap / repeatAnswered
+ *   quizNoCard / twoOption / degradedCardSwap / repeatAnswered
  *               systemic re-checks (CHEM-061, 004, 048, 146, 033/017)
+ *   picDescribe picture question, no figure seen, and the reply is not the
+ *               honest no-picture reply or still describes a figure (Issue A, 2026-10-10)
+ *   quizSilent  explicit quiz request, no card, and no honest "no question" line (Issue B)
+ *   cardNotInCorpus  the served card's question is not an authored stem in
+ *               src/lib/teaching/assets/* (replaces the unkeyedCard heuristic: the
+ *               client payload never carries assetId, by design)
+ *
+ *   QA_BEATS=closure runs the final-defect-closure persona (picture questions,
+ *   "quiz me" / "ask me a question" / "test my understanding" at the start,
+ *   middle and end, repeated requests, "give me example").
  */
-import { writeFileSync } from 'fs'
+import { writeFileSync, readFileSync, readdirSync } from 'fs'
 import { BASE, createQaAccount, deleteQaAccount, type QaAccount } from './liveAccount'
 import { createSession, openLesson, say, figureLabel, type TurnPayload } from './liveSession'
 import { isOffLesson } from '../../src/lib/teaching/lessonDriftGuard'
@@ -40,7 +50,7 @@ const SLUGS = (process.env.QA_SLUGS ?? '').split(',').map((x) => x.trim()).filte
 const OUT = process.env.QA_OUT ?? '/tmp/claude-0/sp/chem-redrive.txt'
 const THINK_MS = Number(process.env.QA_THINK_MS ?? 2500)
 
-const BEATS = [
+const STANDARD_BEATS = [
   'ok',
   'i dont understand this picture. what is it showing?',
   'too many words',
@@ -55,6 +65,38 @@ const BEATS = [
   'next question please',
   '@card-right',
 ]
+const CLOSURE_BEATS = [
+  'What is this picture showing?',
+  'quiz me',
+  '@card-right',
+  'ok',
+  'give me example',
+  'i dont understand this picture. what is it showing?',
+  'ask me a question',
+  '@card-wrong',
+  'test my understanding',
+  'quiz me',
+  '@card-right',
+  'explain simpler',
+  'quiz me',
+  '@card-right',
+  'quiz me',
+  'quiz me',
+]
+const BEATS = process.env.QA_BEATS === 'closure' ? CLOSURE_BEATS : STANDARD_BEATS
+
+// Authored corpus: every probe stem in src/lib/teaching/assets/*.ts, string
+// concatenations joined, lower-cased, whitespace collapsed.
+const normStem = (t: string) => t.toLowerCase().replace(/^\s*\[[^\]]*\]\s*/, '').replace(/[\u2018\u2019]/g, "'").replace(/[\u201c\u201d]/g, '"').replace(/\s+/g, ' ').trim()
+const CORPUS: Array<{ file: string; text: string }> = readdirSync('src/lib/teaching/assets').filter((f) => f.endsWith('.ts'))
+  .map((f) => ({ file: f, text: normStem(readFileSync(`src/lib/teaching/assets/${f}`, 'utf8').replace(/(['"`])\s*\+\s*\n?\s*(['"`])/g, '').replace(/\\'/g, "'")) }))
+export function corpusFileOf(question: string): string | null {
+  const q = normStem(question).slice(0, 70)
+  return CORPUS.find((c) => c.text.includes(q))?.file ?? null
+}
+const QUIZ_REQUEST = /^(?:quiz me|ask me a question|test my understanding)$/i
+const HONEST_NO_QUESTION = /^(?:This is the question you have not answered yet|You have answered every practice question|I don't have a practice question I can give you)/
+const FIGURE_DESCRIPTION = /\b(?:(?:the|this|that) (?:picture|figure|diagram|image|graph|drawing) (?:shows|has|is showing|displays)|(?:is|are) drawn|on the (?:horizontal|vertical|x|y)[- ]axis|usually shows?|normally shows?|curved arrow|colou?red (?:box|arrow|line))\b/i
 
 const words = (s: string) => (s.match(/\S+/g) ?? []).length
 const EMPATHY = /genuinely tricky|i hear you|completely normal|can feel (?:overwhelming|tricky|confusing)|slow (?:right )?down/i
@@ -85,9 +127,12 @@ function flags(p: TurnPayload, learner: string, prevTutor: string, figureSeen: b
   if (/beside this message/.test(t) && /beside this message/.test(prevTutor)) f.push('captionRepeat')
   if (/system is set up|wanted to first acknowledge|repeat(?:ing)? the (?:same|earlier) explanation/i.test(t)) f.push('metaTalk')
   // Systemic re-check signals (2026-10-06): CHEM-061, CHEM-004, CHEM-048.
-  if (/^quiz me$/i.test(learner) && !p.mcq) f.push('quizNoCard')
+  if (QUIZ_REQUEST.test(learner) && !p.mcq) f.push('quizNoCard')
   if (p.mcq && p.mcq.options.length === 2) f.push('twoOption')
-  if (p.mcq && !(typeof (p.mcq as { assetId?: unknown }).assetId === 'string')) f.push('unkeyedCard')
+  if (p.mcq && !corpusFileOf(p.mcq.question)) f.push('cardNotInCorpus')
+  if (/picture/i.test(learner) && !figureSeen && !figureLabel(p)
+    && (!/^There is no picture in this lesson yet/.test(t) || FIGURE_DESCRIPTION.test(t))) f.push('picDescribe')
+  if (QUIZ_REQUEST.test(learner) && !p.mcq && !HONEST_NO_QUESTION.test(t)) f.push('quizSilent')
   // 2026-10-07 owner-decision pass (2350ff6): signatures each fix removes.
   if (hasProseMultipleChoice(t)) f.push('proseOptions')                                   // CHEM-048 / PHYS-020
   if (isPlainAcknowledgement(learner) && /^\s*(?:[A-Za-z][\w.-]{0,24},\s+)?(?:correct|that(?:'|’)?s (?:right|correct)|exactly right|well done|spot on)\b/i.test(t)) f.push('verdictOnAck') // CHEM-031
@@ -154,7 +199,7 @@ async function main() {
       if (beat.startsWith('@card') && card) answered.add(card.question)
       card = p.mcq ?? null
       prevTutor = String(p.text ?? '')
-      log.push(`[learner] ${msg}\n[tutor provider=${p.provider} fig=${figureLabel(p) ?? 'none'} card=${p.mcq ? JSON.stringify(p.mcq.question.slice(0, 140)) + ' ' + JSON.stringify(p.mcq.options.map((o) => o.slice(0, 40))) : 'none'} flags=${f.join(',') || '-'}]\n${p.text ?? ''}`)
+      log.push(`[learner] ${msg}\n[tutor provider=${p.provider} fig=${figureLabel(p) ?? 'none'} card=${p.mcq ? JSON.stringify(p.mcq.question.slice(0, 140)) + ' ' + JSON.stringify(p.mcq.options.map((o) => o.slice(0, 40))) + ' corpus=' + (corpusFileOf(p.mcq.question) ?? 'NOT-FOUND') : 'none'} flags=${f.join(',') || '-'}]\n${p.text ?? ''}`)
     }
     for (const x of lf) if (x === 'closeOpen' || x === 'covers') tally[x] = (tally[x] ?? 0) + 1
     perLesson.push({ order, slug: l.topicSlug, turns: n, figure: figureSeen, flags: lf })

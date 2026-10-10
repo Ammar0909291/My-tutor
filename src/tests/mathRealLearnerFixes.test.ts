@@ -180,7 +180,9 @@ describe('MATH-010/011/012/025/029 stock cards only where they depict the concep
 
 describe('MATH-019 a figure already shown is never denied', () => {
   it('route: the "no picture" rewrite checks the rendered-reality log', () => {
-    expect(ROUTE).toMatch(/if \(!figureOnScreen && figureQuestionHoisted && !figureShownForConcept\)/)
+    // Issue A 2026-10-10: availability = evidence (this response, the rendered-reality log, a sent photo).
+    expect(ROUTE).toMatch(/const figureShownForConcept = figureAvailableToLearner\(\{[\s\S]{0,120}renderedLog: snapshotRRMLog/)
+    expect(ROUTE).toMatch(/if \(figureQuestionHoisted && !figureShownForConcept\)/)
   })
 })
 

@@ -809,3 +809,58 @@ export function answerFigureQuestionWithoutFigure(text: string, conceptFallback?
   const body = thin && conceptFallback ? [kept, conceptFallback].filter(Boolean).join(' ') : kept
   return { text: body ? `${NO_FIGURE_ON_SCREEN} ${body}` : NO_FIGURE_ON_SCREEN, changed: true }
 }
+
+// ── ISSUE A (2026-10-10 live re-drive): the no-figure evidence gate ─────────
+/**
+ * Production 2026-10-10, 3 of 18 chemistry lessons (`chem.kinet.rate-law`,
+ * `chem.elect.corrosion`, `chem.org.arrow-pushing`): "i dont understand this
+ * picture. what is it showing?" with no figure in the learner's browser was
+ * answered "I'm sorry you can't see a picture right now, so let me describe it
+ * for you. The figure has concentration … on the horizontal axis … Three
+ * different lines are drawn" / "let me describe what it normally shows" /
+ * "such pictures usually show …". Two causes:
+ *  1. availability was read from the server's held-figure session
+ *     (`session.turns > 0`), server-only state the browser may never have
+ *     received — so the honest answer above was skipped;
+ *  2. where it did run it removed only sentences naming "the/this picture";
+ *     an imagined description ("Three different lines are drawn: 1. A straight
+ *     line passing through the origin …") has no such words.
+ *
+ * The gate is therefore built on evidence of what the LEARNER has:
+ *  - a figure in THIS response's payload, or
+ *  - a figure the rendered-reality log (written only when a figure is actually
+ *    sent; cleared at every lesson open) records for this concept, or
+ *  - a photo the learner sent through the camera button (`📸`, /api/vision).
+ * Nothing else — not a card's server-only assetId, not registry metadata, not
+ * the held-figure session — counts. With none of these, the whole model reply
+ * is replaced by a deterministic one: no picture is visible, how to send one,
+ * and the idea taught from the lesson's own authored text. Nothing in it can
+ * describe a figure, because none of it is model-written.
+ */
+export function figureAvailableToLearner(input: {
+  figureInThisResponse: boolean
+  renderedLog: ReadonlyArray<{ matchedConcept: string | null }>
+  conceptId: string | null | undefined
+  recentLearnerMessages: readonly string[]
+}): boolean {
+  if (input.figureInThisResponse) return true
+  if (input.conceptId && input.renderedLog.some((e) => e.matchedConcept === input.conceptId)) return true
+  return input.recentLearnerMessages.some((m) => /^\s*📸/u.test(m ?? ''))
+}
+
+export const NO_FIGURE_LEAD =
+  "There is no picture in this lesson yet, so I can't tell you what one shows. "
+  + "If you have a picture from somewhere else, send it with the camera button and I'll look at it. Here is the idea in words:"
+
+/** Sentences of authored text that point at a figure (an authored explanation may have been written beside one). */
+export function withoutFigureSentences(text: string): string {
+  return ((text ?? '').match(/(?:[^.!?\n]|[.!?](?=\S))+(?:[.!?]+|$)/g) ?? [])
+    .map((s) => s.trim())
+    .filter((s) => s && !PRESENT_FIGURE_RE.test(s) && !/\b(?:beside this message|on (?:your|the) screen|shown (?:here|below|above))\b/i.test(s))
+    .join(' ')
+}
+
+export function noFigureAnswer(teaching: string | null | undefined): string {
+  const body = withoutFigureSentences(teaching ?? '').trim()
+  return body ? `${NO_FIGURE_LEAD}\n\n${body}` : NO_FIGURE_LEAD.replace(/ Here is the idea in words:$/, '')
+}

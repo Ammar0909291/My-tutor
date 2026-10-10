@@ -151,7 +151,8 @@ describe('nothing else was changed', () => {
     // 9 -> 10 (2026-10-07, owner decision): the check pass (factCheckPass.ts) —
     // one call on a reply that carries numbers, equations or a worked example;
     // it can only replace the reply with a corrected copy of itself.
-    expect((ROUTE.match(/await routeAI\(/g) ?? []).length).toBe(10)
+    // 10 -> 11 (2026-10-10, Issue C): the grounded prose check (groundedProseCheck.ts).
+    expect((ROUTE.match(/await routeAI\(/g) ?? []).length).toBe(11)
   })
 
   it('grading, evidence and the MCQ attach line are untouched', () => {

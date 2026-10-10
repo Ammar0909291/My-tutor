@@ -101,7 +101,9 @@ describe('shared 532055e fixes hold on the English evidence', () => {
     expect(isStubReply('What do you notice about the verb in “She walks to school every morning”?')).toBe(true)
   })
   it('ENGL-013: the "no picture" rewrite checks the figure already shown', () => {
-    expect(ROUTE).toMatch(/if \(!figureOnScreen && figureQuestionHoisted && !figureShownForConcept\)/)
+    // Issue A 2026-10-10: availability = evidence (this response, the rendered-reality log, a sent photo).
+    expect(ROUTE).toMatch(/const figureShownForConcept = figureAvailableToLearner\(\{[\s\S]{0,120}renderedLog: snapshotRRMLog/)
+    expect(ROUTE).toMatch(/if \(figureQuestionHoisted && !figureShownForConcept\)/)
   })
 })
 

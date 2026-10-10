@@ -351,3 +351,40 @@ export async function reviewExplanationAsset(assetId: string, action: 'approve' 
   })
   return prisma.assetIdentity.update({ where: { assetId }, data: { status: AssetStatus.ACTIVE } })
 }
+
+/**
+ * Issue C (2026-10-10): the authoritative text the grounded prose check reads —
+ * the concept's ACTIVE authored explanations and its authored probes stated as
+ * question + correct answer (both transcribed from the Educational Brain
+ * entry). Concept-scoped and capped (≤ 12 rows each); [] on any failure.
+ */
+export async function loadConceptSourceTexts(input: { conceptId: string; language: string }): Promise<string[]> {
+  try {
+    const [expl, probes] = await Promise.all([
+      prisma.assetIdentity.findMany({
+        where: { family: AssetFamily.EXPLANATION, conceptId: input.conceptId, language: input.language, status: AssetStatus.ACTIVE },
+        select: { explanationAsset: { select: { content: true } } },
+        take: 12,
+      }),
+      prisma.assetIdentity.findMany({
+        where: { family: AssetFamily.PROBE, conceptId: input.conceptId, language: input.language, status: AssetStatus.ACTIVE },
+        select: { probeAsset: { select: { stem: true, choices: true, correctValue: true } } },
+        take: 12,
+      }),
+    ])
+    const out: string[] = []
+    for (const r of expl) if (r.explanationAsset?.content) out.push(r.explanationAsset.content)
+    for (const r of probes) {
+      const p = r.probeAsset
+      if (!p?.stem) continue
+      const choices = Array.isArray(p.choices) ? (p.choices as Array<{ text?: unknown; isCorrect?: unknown }>) : []
+      const right = choices.find((c) => c?.isCorrect === true && typeof c.text === 'string')?.text as string | undefined
+      const answer = right ?? p.correctValue ?? null
+      if (answer) out.push(`Question: ${p.stem} Correct answer: ${answer}`)
+    }
+    return out
+  } catch (err) {
+    console.warn('[explanationMemory] loadConceptSourceTexts failed:', err)
+    return []
+  }
+}

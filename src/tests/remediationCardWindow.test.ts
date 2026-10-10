@@ -166,7 +166,8 @@ describe('the route holds on a NON-remediation turn', () => {
     // (regenerateWithAppendix) for an unhonoured "with numbers"/"step by step" request
     // and for the analogy cap; kept only if the retry complies.
     // 9 -> 10 (2026-10-07, owner decision): the check pass (factCheckPass.ts).
-    expect((ROUTE.match(/await routeAI\(/g) ?? []).length).toBe(10)
+    // 10 -> 11 (2026-10-10, Issue C): the grounded prose check (groundedProseCheck.ts).
+    expect((ROUTE.match(/await routeAI\(/g) ?? []).length).toBe(11)
     // The refusal reason lives in the lookup, which is where the boundary is.
     const cards = readFileSync(join(process.cwd(), 'src/lib/teaching/remediationCards.ts'), 'utf8')
     expect(cards).toContain('draft-not-promoted')
@@ -244,7 +245,8 @@ describe('a held turn that teaches past the card is rejected', () => {
     // (regenerateWithAppendix) for an unhonoured "with numbers"/"step by step" request
     // and for the analogy cap; kept only if the retry complies.
     // 9 -> 10 (2026-10-07, owner decision): the check pass (factCheckPass.ts).
-    expect((ROUTE.match(/await routeAI\(/g) ?? []).length).toBe(10)
+    // 10 -> 11 (2026-10-10, Issue C): the grounded prose check (groundedProseCheck.ts).
+    expect((ROUTE.match(/await routeAI\(/g) ?? []).length).toBe(11)
   })
 })
 

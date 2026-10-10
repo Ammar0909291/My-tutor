@@ -56,10 +56,16 @@ const LANE = { probes: PROBES, subjectSlug: 'physics', conceptId: 'phys.meas.uni
 const text = (t: TurnResult) => String((t.body as { text?: string }).text ?? '')
 
 describe('route: "quiz me" at OBSERVE with a bare-contract pool', () => {
-  it('the learner gets the model question', async () => {
+  // Issue B (2026-10-10, campaign product decision): an explicit request
+  // outranks keeping the authored cards for the mastery check. The reserved
+  // card is spent — logged, never silently — instead of the model question.
+  it('the learner gets an authored card, and the spend of a reserved card is logged', async () => {
     await driveTurns(h, POST, [{ learnerSays: "ok, let's start", modelReplies: 'Two friends measure a plank.' }], LANE)
     const [q] = await driveTurns(h, POST, [{ learnerSays: 'quiz me', modelReplies: `Sure. ${Q}` }], LANE)
-    expect(q.logs.some((l) => l.includes('below-guide-no-surplus'))).toBe(true)
-    expect(text(q)).toContain(Q)
+    const mcq = (q.body as { mcq?: { question: string } | null }).mcq ?? null
+    expect(mcq).not.toBeNull()
+    expect(PROBES.map((p) => p.stem)).toContain(mcq!.question)
+    expect(q.logs.some((l) => l.includes('quiz-request-spends-reserved-card'))).toBe(true)
+    expect(q.logs.some((l) => l.includes('below-guide-no-surplus'))).toBe(false)
   }, 120_000)
 })

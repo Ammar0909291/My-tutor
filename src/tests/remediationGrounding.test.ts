@@ -270,7 +270,8 @@ describe('H5 — the grounding is on the remediation path only', () => {
     // (regenerateWithAppendix) for an unhonoured "with numbers"/"step by step" request
     // and for the analogy cap; kept only if the retry complies.
     // 9 -> 10 (2026-10-07, owner decision): the check pass (factCheckPass.ts).
-    expect((ROUTE.match(/await routeAI\(/g) ?? []).length).toBe(10)
+    // 10 -> 11 (2026-10-10, Issue C): the grounded prose check (groundedProseCheck.ts).
+    expect((ROUTE.match(/await routeAI\(/g) ?? []).length).toBe(11)
   })
 
   it('it changes no decision, no arbitration, no mastery, no grading, no ladder', () => {

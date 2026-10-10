@@ -991,6 +991,11 @@ const PRACTICE_REQUEST_RE: readonly RegExp[] = [
   // "quiz me" / "give me a question", in the words learners use.
   /\b(?:next|another|new)\s+question\b/i,
   /\bcheck\s+(?:me|my\s+understanding)\b/i,
+  // Issue B (2026-10-10): "test my understanding", "test my knowledge", "give
+  // me a quiz", "can I have a quiz" — the request forms the campaign names.
+  // "test" and "quiz" stay bound to a request frame ("test tube" never matches).
+  /\btest\s+(?:my|our)\s+(?:understanding|knowledge)\b/i,
+  /\b(?:give\s+me|can\s+i\s+(?:have|get|take)|let'?s\s+(?:do|have|try))\s+(?:a|an|another|one\s+more)\s+(?:quick\s+|short\s+|little\s+)?quiz\b/i,
 ]
 
 /**

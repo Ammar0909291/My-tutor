@@ -5082,7 +5082,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           (phaseBeforeTurn === 'GUIDE' && evidenceMoveHoisted === 'ask') ||
           (phaseBeforeTurn === 'DEMONSTRATE') ||
           (phaseBeforeTurn === 'OBSERVE' && evidenceMoveHoisted === 'ask') ||
-          transferNeedsVerifiedCredit
+          transferNeedsVerifiedCredit ||
+          // Issue B (2026-10-10): an explicit "quiz me" is answered with an
+          // authored card in any phase. Credit is unchanged — whether the
+          // answer counts is still `isProbeAttachablePhase` (probeWouldCount…).
+          turnIntent.wantsPractice
         phaseAllowsProbeHoisted = phaseAllowsProbe
         // R82: the mirror image of the OBSERVE disjunct just above. R81
         // measured 79/238 concepts failing certification because OBSERVE's
@@ -5195,7 +5199,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           probeAttachablePhase:
             isProbeAttachablePhase(phaseBeforeTurn) || phaseBeforeTurn === 'DEMONSTRATE' ||
             (phaseBeforeTurn === 'OBSERVE' && evidenceMoveHoisted === 'ask') ||
-            transferNeedsVerifiedCredit,
+            transferNeedsVerifiedCredit || turnIntent.wantsPractice,
           hasMemoryState: memoryState !== null,
           noUnansweredProbeOnScreen: !unansweredProbeOnScreen,
           // A learner's own "quiz me" is honoured in lesson one too — see the
@@ -5363,9 +5367,26 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // pool on every call, so two early spends across OBSERVE and
           // DEMONSTRATE in one session can never both fire when doing so
           // would leave fewer than CREDITS_REQUIRED_FOR_MASTERY.
-          const belowGuideBlocked =
+          const reservationBlocks =
             (phaseBeforeTurn === 'DEMONSTRATE' || phaseBeforeTurn === 'OBSERVE')
             && !(probe ? mayAttachProbeBelowGuide(phaseBeforeTurn, probe.poolSize) : false)
+          // Issue B (2026-10-10, owner product decision in the campaign brief):
+          // an explicit "quiz me" outranks keeping this card for the mastery
+          // check. Never silent: the spend and what it leaves for the check
+          // are logged, and the card is recorded as asked like any other, so
+          // later selection never re-asks it. Whether this answer earns credit
+          // is unchanged (below GUIDE it does not).
+          const quizRequestSpendsReserved = reservationBlocks && probe !== null && turnIntent.wantsPractice
+          if (quizRequestSpendsReserved) {
+            console.log('[gate-assessment] ' + JSON.stringify({
+              event: 'quiz-request-spends-reserved-card',
+              phase: phaseBeforeTurn,
+              poolSize: probe?.poolSize ?? 0,
+              leftForMasteryCheck: Math.max(0, (probe?.poolSize ?? 0) - 1),
+              assetId: probe?.assetId ?? null,
+            }))
+          }
+          const belowGuideBlocked = reservationBlocks && !quizRequestSpendsReserved
           if (belowGuideBlocked) {
             console.log('[gate-assessment] ' + JSON.stringify({
               declined: 'below-guide-no-surplus',
@@ -10491,9 +10512,18 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // opening. The rendered-reality log does (the same signal the unmet
         // picture-request acknowledgement reads below), so a figure already
         // shown for this concept is never denied.
-        const figureShownForConcept = resolvedConceptId !== null && resolvedConceptId !== undefined
-          && snapshotRRMLog.some((e) => e.matchedConcept === resolvedConceptId)
-        if (!figureOnScreen && figureQuestionHoisted && !figureShownForConcept) {
+        // Issue A (2026-10-10): availability is read from evidence of what the
+        // learner has (figureReference.figureAvailableToLearner), not from the
+        // held-figure session — the final gate before the reply ships repeats
+        // this and replaces the whole reply.
+        const { figureAvailableToLearner } = await import('@/lib/teaching/figureReference')
+        const figureShownForConcept = figureAvailableToLearner({
+          figureInThisResponse: visualFired,
+          renderedLog: snapshotRRMLog,
+          conceptId: resolvedConceptId,
+          recentLearnerMessages: [],
+        })
+        if (figureQuestionHoisted && !figureShownForConcept) {
           const { answerFigureQuestionWithoutFigure } = await import('@/lib/teaching/figureReference')
           let fallbackForFigure: string | null = null
           if (resolvedConceptId) {
@@ -13609,6 +13639,34 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             const { getKGNode: kgFc } = await import('@/lib/curriculum/knowledgeGraph')
             const { splitVisualPointer: splitFc } = await import('@/lib/teaching/visual/visualAcknowledgement')
             const parts = splitFc(cleanText)
+            // Issue C (2026-10-10): the grounded prose check runs beside the
+            // numeric pass on the same text (groundedProseCheck.ts — scope,
+            // validation and limits are documented there). Its edits are keyed
+            // by sentence text and never touch a sentence with a number, so the
+            // two passes cannot rewrite the same sentence.
+            const gp = await import('@/lib/teaching/groundedProseCheck')
+            const groundedPromise = (async () => {
+              if (teachingLang !== 'en' || !resolvedConceptId || !gp.needsGroundedCheck(parts.body, learnerAuthoredMessage)) {
+                return { edits: [] as import('@/lib/teaching/groundedProseCheck').GroundedEdit[], checked: false, reason: teachingLang !== 'en' ? 'not-english' : 'out-of-scope', rejected: [] as string[] }
+              }
+              const node = kgFc(resolvedConceptId)
+              const { loadConceptSourceTexts } = await import('@/lib/teaching/assets/explanationMemory')
+              const authoredSources = await loadConceptSourceTexts({ conceptId: resolvedConceptId, language: teachingLang })
+              const sources = [...(node?.title && node.description ? [`${node.title}: ${node.description}`] : []), ...authoredSources]
+              return gp.runGroundedProseCheck({
+                text: parts.body,
+                learnerMessage: learnerAuthoredMessage,
+                conceptTitle: node?.title ?? null,
+                sources,
+                isStub: hy.isStubReply,
+                ask: async (system, user) => {
+                  llmCallCount++ // instrumentation only (grounded prose check)
+                  const routedGp = await routeAI([{ role: 'user', content: user }], system, country, 2048, teachingLang,
+                    { userId, subject: learnSession.subject.slug }, groqModelOverride, undefined, forceProvider)
+                  return routedGp.text ?? null
+                },
+              })
+            })().catch(() => ({ edits: [] as import('@/lib/teaching/groundedProseCheck').GroundedEdit[], checked: false, reason: 'error', rejected: [] as string[] }))
             const r = await fc.runFactCheckPass({
               text: parts.body,
               conceptTitle: resolvedConceptId ? (kgFc(resolvedConceptId)?.title ?? null) : null,
@@ -13620,9 +13678,25 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               },
             })
             console.log('[fact-check-pass] ' + JSON.stringify({ conceptId: resolvedConceptId ?? null, checked: r.checked, corrected: r.corrected, reason: r.reason }))
-            if (r.corrected) {
-              cleanText = parts.pointer ? `${r.text}\n\n${parts.pointer}` : r.text
-              done.push('fact-check-corrected')
+            let checkedBody = r.corrected ? r.text : parts.body
+            if (r.corrected) done.push('fact-check-corrected')
+            const g = await groundedPromise
+            let groundedApplied: string = 'none'
+            if (g.edits.length > 0) {
+              const applied = gp.applyGroundedEdits(checkedBody, g.edits, hy.isStubReply)
+              groundedApplied = applied ? applied.reason : 'over-limit-kept'
+              if (applied && applied.reason === 'applied') {
+                checkedBody = applied.text
+                done.push('grounded-prose-check')
+              }
+            }
+            console.log('[grounded-prose-check] ' + JSON.stringify({
+              conceptId: resolvedConceptId ?? null, checked: g.checked, reason: g.reason, applied: groundedApplied,
+              edits: g.edits.map((e) => ({ action: e.action, sentence: e.sentence.slice(0, 160), replacement: e.replacement?.slice(0, 160) ?? null, sourceQuote: e.sourceQuote?.slice(0, 160) ?? null })),
+              rejected: g.rejected,
+            }))
+            if (checkedBody !== parts.body) {
+              cleanText = parts.pointer ? `${checkedBody}\n\n${parts.pointer}` : checkedBody
             }
           } catch { /* the check never breaks a turn */ }
           if (done.length > 0) console.log('[reply-hygiene] ' + JSON.stringify({ conceptId: resolvedConceptId ?? null, done }))
@@ -13789,6 +13863,93 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               }
               if (floorText) cleanText = pointer ? `${floorText}\n\n${pointer}` : floorText
             }
+          }
+        } catch { /* a repair must never break a turn */ }
+      }
+
+      // ── "QUIZ ME" GETS A QUESTION OR IS TOLD WHY NOT (Issue B, 2026-10-10) ─
+      // Production re-drive: 3 of 62 "quiz me" turns got a worked example and
+      // no card. The gate now answers an explicit request in any phase and
+      // over the mastery-check reservation; when no authored card ships all
+      // the same (every card used, none authored, a close or recovery turn),
+      // the reply says so first instead of passing a worked example off as
+      // the quiz. A card the learner has not answered yet is re-offered with
+      // a line saying it is the same one, so repeated requests are predictable.
+      if (turnIntent.wantsPractice && !serveLessonComplete && !lessonCompletionHoisted && provider !== 'degraded') {
+        try {
+          const { quizRequestNotice } = await import('@/lib/teaching/quizRequest')
+          const { getKGNode } = await import('@/lib/curriculum/knowledgeGraph')
+          const notice = quizRequestNotice({
+            cardAttached: Boolean(servedMcq),
+            cardIsTheUnansweredOne: Boolean(servedMcq) && pendingMcqHoisted !== null && mcqGradeHoisted === null
+              && typeof servedMcq?.question === 'string' && servedMcq.question === pendingMcqHoisted.question,
+            poolExhausted: (authoredPoolExhaustedHoisted as boolean),
+            conceptTitle: resolvedConceptId ? (getKGNode(resolvedConceptId)?.title ?? null) : null,
+            reply: cleanText,
+          })
+          if (notice.changed) {
+            console.log('[quiz-request] ' + JSON.stringify({
+              event: notice.reason, conceptId: resolvedConceptId ?? null, provider,
+              phase: phaseBeforeTurnHoisted, poolExhausted: (authoredPoolExhaustedHoisted as boolean),
+            }))
+            cleanText = notice.text
+          }
+        } catch { /* a repair must never break a turn */ }
+      }
+
+      // ── NO PICTURE, NO DESCRIPTION OF ONE (Issue A, 2026-10-10) ──────────
+      // Production re-drive, 3 of 18 chemistry lessons: "i dont understand
+      // this picture" with nothing in the learner's browser got an imagined
+      // figure ("Three different lines are drawn …", "such pictures usually
+      // show …"). The earlier repairs trusted the held-figure session and
+      // removed only sentences naming "the picture". Here, after every path
+      // (model, memory, regeneration, fallback) has converged, the learner's
+      // picture question with no figure EVIDENCE — one in this response, one
+      // the rendered-reality log records for this concept, or a photo the
+      // learner sent — gets a reply that is not model-written at all: no
+      // picture is visible, how to send one, and an authored explanation (else
+      // the concept's KG line). A card on screen stays; its verdict is not
+      // touched (a picture question is not a card answer).
+      if (figureQuestionHoisted && !serveLessonComplete && !lessonCompletionHoisted && provider !== 'degraded') {
+        try {
+          const fr = await import('@/lib/teaching/figureReference')
+          const learnerTexts = (learnSession.messages as Array<{ role: unknown; content?: unknown }>)
+            .filter((m) => m.role === MessageRole.USER && typeof m.content === 'string')
+            .slice(-6)
+            .map((m) => m.content as string)
+          const available = fr.figureAvailableToLearner({
+            figureInThisResponse: visualFired,
+            renderedLog: snapshotRRMLog,
+            conceptId: resolvedConceptId,
+            recentLearnerMessages: learnerTexts,
+          })
+          if (!available) {
+            let teaching: string | null = null
+            if (resolvedConceptId) {
+              const priorTutorNf = (learnSession.messages as Array<{ role: unknown; content?: unknown }>)
+                .filter((m) => m.role === MessageRole.ASSISTANT && typeof m.content === 'string')
+                .map((m) => m.content as string)
+              const { findUnseenExplanationContent } = await import('@/lib/teaching/assets/explanationMemory')
+              const authored = await findUnseenExplanationContent({
+                conceptId: resolvedConceptId,
+                language: teachingLang,
+                userMessage: learnerAuthoredMessage,
+                priorTutorTexts: priorTutorNf,
+                preferKinds: [],
+              })
+              teaching = authored ? fr.withoutFigureSentences(authored.content) : null
+              if (!teaching) {
+                const { getKGNode } = await import('@/lib/curriculum/knowledgeGraph')
+                const node = getKGNode(resolvedConceptId)
+                if (node?.title && node.description) teaching = (await import('@/lib/teaching/conceptFallback')).conceptFallbackText(node.title, node.description)
+              }
+            }
+            const answer = fr.noFigureAnswer(teaching)
+            console.warn('[figure-evidence] ' + JSON.stringify({
+              event: 'no-figure-evidence-reply-replaced', conceptId: resolvedConceptId ?? null, provider,
+              teachingSource: teaching ? 'authored-or-kg' : 'none', charsBefore: cleanText.length,
+            }))
+            cleanText = answer
           }
         } catch { /* a repair must never break a turn */ }
       }

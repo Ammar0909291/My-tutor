@@ -93,8 +93,9 @@ describe('the gate at TRANSFER below the bar', () => {
     expect(route).toMatch(/const transferNeedsVerifiedCredit = transferBelowVerifiedBar\(conversationStateHoisted\)/)
   })
   it('phaseAllowsProbe, probeAttachablePhase and probeWouldCountThisPhase all include it', () => {
-    expect(route).toMatch(/\(phaseBeforeTurn === 'OBSERVE' && evidenceMoveHoisted === 'ask'\) \|\|\s*transferNeedsVerifiedCredit\s*\n\s*phaseAllowsProbeHoisted = phaseAllowsProbe/)
-    expect(route).toMatch(/probeAttachablePhase:[\s\S]{0,260}\|\|\s*transferNeedsVerifiedCredit,/)
+    // Issue B (2026-10-10) appends the explicit quiz request after it.
+    expect(route).toMatch(/\(phaseBeforeTurn === 'OBSERVE' && evidenceMoveHoisted === 'ask'\) \|\|\s*transferNeedsVerifiedCredit \|\|[\s\S]{0,300}turnIntent\.wantsPractice\s*\n\s*phaseAllowsProbeHoisted = phaseAllowsProbe/)
+    expect(route).toMatch(/probeAttachablePhase:[\s\S]{0,260}\|\|\s*transferNeedsVerifiedCredit \|\| turnIntent\.wantsPractice,/)
     expect(route).toMatch(/probeWouldCountThisPhaseHoisted = isProbeAttachablePhase\(phaseBeforeTurn\) \|\| transferNeedsVerifiedCredit/)
   })
 })
