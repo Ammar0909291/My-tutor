@@ -864,3 +864,41 @@ export function noFigureAnswer(teaching: string | null | undefined): string {
   const body = withoutFigureSentences(teaching ?? '').trim()
   return body ? `${NO_FIGURE_LEAD}\n\n${body}` : NO_FIGURE_LEAD.replace(/ Here is the idea in words:$/, '')
 }
+
+/**
+ * Production 2026-10-10 on cf79346 (chem.kinet.rate-law, a recovery turn): a
+ * figure HAD been shown earlier in the lesson ("Determining Rate Law and Order
+ * via Initial-Rate Method"), so a picture was genuinely available — and the
+ * reply said "I'm sorry you can't see a picture right now, so let me describe
+ * what a typical illustration … would show. Usually the diagram has two parts…",
+ * and later "Picture yourself with a simple flow chart…". A reply that denies
+ * a figure the learner has, or describes a typical / imagined one, is not an
+ * answer from the figure's evidence.
+ */
+export const DENIES_OR_IMAGINES_FIGURE_RE = new RegExp([
+  String.raw`\b(?:can(?:'|’)?t|cannot|can not|unable to|not able to|don(?:'|’)?t|do not|am not)\s+(?:see|seeing|view|show|display)\b[^.!?\n]{0,40}\b(?:picture|figure|diagram|image|illustration)`,
+  String.raw`\bno\s+(?:picture|figure|diagram|image)\b`,
+  String.raw`\b(?:typical|usual|generic|such)\s+(?:picture|figure|diagram|illustration|image|graph)s?\b`,
+  String.raw`\b(?:usually|normally|typically|generally)\s+(?:shows?|has|have|looks?|contains?|depicts?)\b`,
+  String.raw`\bwould\s+(?:show|look like|depict|contain)\b`,
+  String.raw`\bpicture yourself\b`,
+  String.raw`\bimagine\s+(?:a|the|that)\s+(?:picture|diagram|figure|flow ?chart|graph|drawing)\b`,
+].join('|'), 'i')
+
+/** The deterministic answer about a figure the learner has, built only from what the renderer drew. */
+export function figureEvidenceAnswer(
+  drawn: { caption: string | null; text: string[] } | null | undefined,
+  fallbackSemantics: string | null | undefined,
+  where: 'this-message' | 'earlier',
+  teaching: string | null | undefined,
+): string {
+  const place = where === 'this-message' ? 'The picture with this message' : 'The picture for this lesson is further up in our chat. It'
+  const caption = drawn?.caption?.trim() || (fallbackSemantics ?? '').replace(/^A 3D scene:\s*/i, '').trim() || null
+  const text = (drawn?.text ?? []).map((t) => t.trim()).filter(Boolean).slice(0, 12)
+  const parts: string[] = []
+  parts.push(caption ? `${place} is titled “${caption}”.` : `${place} is the figure shown for this idea.`)
+  if (text.length) parts.push(`The words written on it are: ${text.map((t) => `“${t}”`).join(', ')}.`)
+  parts.push('Tell me which of those parts is confusing and I will explain it.')
+  const body = withoutFigureSentences(teaching ?? '').trim()
+  return body ? `${parts.join(' ')}\n\n${body}` : parts.join(' ')
+}

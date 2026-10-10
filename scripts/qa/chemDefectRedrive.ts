@@ -25,6 +25,8 @@
  *               systemic re-checks (CHEM-061, 004, 048, 146, 033/017)
  *   picDescribe picture question, no figure seen, and the reply is not the
  *               honest no-picture reply or still describes a figure (Issue A, 2026-10-10)
+ *   picDenied   picture question after a figure WAS shown, answered "no picture"
+ *   picImagined picture question after a figure WAS shown, reply denies it or describes a typical/imagined one
  *   quizSilent  explicit quiz request, no card, and no honest "no question" line (Issue B)
  *   cardNotInCorpus  the served card's question is not an authored stem in
  *               src/lib/teaching/assets/* (replaces the unkeyedCard heuristic: the
@@ -42,6 +44,7 @@ import { isPlainAcknowledgement } from '../../src/lib/teaching/replyHygiene'
 import { hasProseMultipleChoice } from '../../src/lib/teaching/proseMcqGuard'
 import { usesAnalogy, analogyCapReached } from '../../src/lib/teaching/reuseCaps'
 import { getKGNode } from '../../src/lib/curriculum/knowledgeGraph'
+import { DENIES_OR_IMAGINES_FIGURE_RE } from '../../src/lib/teaching/figureReference'
 
 const SUBJECT = process.env.QA_SUBJECT ?? 'chemistry'
 const ORDERS = (process.env.QA_ORDERS ?? '').split(',').filter(Boolean).map(Number)
@@ -66,21 +69,23 @@ const STANDARD_BEATS = [
   '@card-right',
 ]
 const CLOSURE_BEATS = [
-  'What is this picture showing?',
-  'quiz me',
+  'What is this picture showing?',          // no figure yet in the lesson
+  'quiz me',                                // start of lesson
   '@card-right',
   'ok',
-  'give me example',
+  'give me example',                        // BIO-024 shape (prose example)
   'i dont understand this picture. what is it showing?',
-  'ask me a question',
+  'ask me a question',                      // middle
   '@card-wrong',
   'test my understanding',
-  'quiz me',
+  'quiz me',                                // repeated, card unanswered
   '@card-right',
+  'show me a diagram',                      // a genuine figure, when the concept has one
+  'i dont understand this picture. what is it showing?',
   'explain simpler',
-  'quiz me',
+  'give me a quiz',
   '@card-right',
-  'quiz me',
+  'quiz me',                                // end: pool likely spent
   'quiz me',
 ]
 const BEATS = process.env.QA_BEATS === 'closure' ? CLOSURE_BEATS : STANDARD_BEATS
@@ -94,7 +99,7 @@ export function corpusFileOf(question: string): string | null {
   const q = normStem(question).slice(0, 70)
   return CORPUS.find((c) => c.text.includes(q))?.file ?? null
 }
-const QUIZ_REQUEST = /^(?:quiz me|ask me a question|test my understanding)$/i
+const QUIZ_REQUEST = /^(?:quiz me|ask me a question|test my understanding|give me a quiz)$/i
 const HONEST_NO_QUESTION = /^(?:This is the question you have not answered yet|You have answered every practice question|I don't have a practice question I can give you)/
 const FIGURE_DESCRIPTION = /\b(?:(?:the|this|that) (?:picture|figure|diagram|image|graph|drawing) (?:shows|has|is showing|displays)|(?:is|are) drawn|on the (?:horizontal|vertical|x|y)[- ]axis|usually shows?|normally shows?|curved arrow|colou?red (?:box|arrow|line))\b/i
 
@@ -133,6 +138,8 @@ function flags(p: TurnPayload, learner: string, prevTutor: string, figureSeen: b
   if (/picture/i.test(learner) && !figureSeen && !figureLabel(p)
     && (!/^There is no picture in this lesson yet/.test(t) || FIGURE_DESCRIPTION.test(t))) f.push('picDescribe')
   if (QUIZ_REQUEST.test(learner) && !p.mcq && !HONEST_NO_QUESTION.test(t)) f.push('quizSilent')
+  if (/picture/i.test(learner) && (figureSeen || figureLabel(p)) && /^There is no picture in this lesson yet/.test(t)) f.push('picDenied')
+  if (/picture/i.test(learner) && (figureSeen || figureLabel(p)) && DENIES_OR_IMAGINES_FIGURE_RE.test(t)) f.push('picImagined')
   // 2026-10-07 owner-decision pass (2350ff6): signatures each fix removes.
   if (hasProseMultipleChoice(t)) f.push('proseOptions')                                   // CHEM-048 / PHYS-020
   if (isPlainAcknowledgement(learner) && /^\s*(?:[A-Za-z][\w.-]{0,24},\s+)?(?:correct|that(?:'|’)?s (?:right|correct)|exactly right|well done|spot on)\b/i.test(t)) f.push('verdictOnAck') // CHEM-031

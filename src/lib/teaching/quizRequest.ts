@@ -24,10 +24,40 @@ export type QuizRequestReason =
 export const QUIZ_UNANSWERED_LEAD =
   'This is the question you have not answered yet — choose an answer below and I will mark it.'
 
-export function quizPoolExhaustedLead(conceptTitle: string | null | undefined): string {
+/**
+ * Production re-drive on cf79346 (bio.behav.innate-behavior-instinct, 2026-10-10):
+ * "give me a quiz" at DEMONSTRATE was told every question was used, and the
+ * very next "quiz me" (at GUIDE) brought back a question answered wrong
+ * earlier — the owner-approved one re-ask of a missed question (G2, 2026-09-24),
+ * which runs only from GUIDE on. Both lines now say so: the exhausted line
+ * mentions that seen questions come back once more (when one is waiting), and
+ * a re-asked card is introduced as one seen before. Allocation is unchanged.
+ */
+export function quizPoolExhaustedLead(conceptTitle: string | null | undefined, reaskLater = false): string {
   const on = conceptTitle ? ` on ${conceptTitle}` : ''
+  if (reaskLater) {
+    return `You have answered every new practice question I have${on} in this lesson. `
+      + 'A question you have already seen comes back once more after a little more teaching. '
+      + 'Say "next" to move on, or tell me which part you want to go over.'
+  }
   return `You have answered every practice question I have${on} in this lesson, so I can't give you a new one. `
     + 'Say "next" to move on, or tell me which part you want to go over.'
+}
+
+/** The teaching floor's own exhausted line (it then teaches the idea again). */
+export function quizPoolExhaustedFloorLead(conceptTitle: string, reaskLater = false): string {
+  return reaskLater
+    ? `You have answered every new practice question I have on ${conceptTitle} in this lesson; a question you have already seen comes back once more a little later. Here is the idea once more.`
+    : `You have answered every practice question I have on ${conceptTitle} in this lesson, so here is the idea once more.`
+}
+
+export const QUIZ_REASK_LEAD = 'You have seen this question before in this lesson — here it is once more.'
+
+/** A re-asked card is introduced as one the learner has seen. Idempotent. */
+export function labelReaskedCard(reply: string): { text: string; changed: boolean } {
+  const t = (reply ?? '').trim()
+  if (t.startsWith(QUIZ_REASK_LEAD)) return { text: reply, changed: false }
+  return { text: t ? `${QUIZ_REASK_LEAD}\n\n${t}` : QUIZ_REASK_LEAD, changed: true }
 }
 
 export function quizUnavailableLead(conceptTitle: string | null | undefined): string {
@@ -37,7 +67,7 @@ export function quizUnavailableLead(conceptTitle: string | null | undefined): st
 }
 
 /** Leads this module or the teaching floor already wrote — never added twice. */
-const ALREADY_SAID_RE = /^(?:This is the question you have not answered yet|You have answered every practice question|I don't have a practice question I can give you)/i
+const ALREADY_SAID_RE = /^(?:This is the question you have not answered yet|You have answered every (?:new )?practice question|I don't have a practice question I can give you)/i
 
 export function quizRequestNotice(input: {
   cardAttached: boolean
@@ -45,6 +75,8 @@ export function quizRequestNotice(input: {
   poolExhausted: boolean
   conceptTitle: string | null | undefined
   reply: string
+  /** A question already seen is still waiting for its one re-ask (blocked this turn by phase). */
+  reaskLater?: boolean
 }): { text: string; changed: boolean; reason: QuizRequestReason } {
   const reply = (input.reply ?? '').trim()
   if (input.cardAttached && !input.cardIsTheUnansweredOne) return { text: input.reply, changed: false, reason: 'card-served' }
@@ -57,7 +89,7 @@ export function quizRequestNotice(input: {
   if (input.cardAttached) {
     return { text: reply ? `${QUIZ_UNANSWERED_LEAD}\n\n${reply}` : QUIZ_UNANSWERED_LEAD, changed: true, reason: 'unanswered-card-reoffered' }
   }
-  const lead = input.poolExhausted ? quizPoolExhaustedLead(input.conceptTitle) : quizUnavailableLead(input.conceptTitle)
+  const lead = input.poolExhausted ? quizPoolExhaustedLead(input.conceptTitle, input.reaskLater === true) : quizUnavailableLead(input.conceptTitle)
   return {
     text: reply ? `${lead}\n\n${reply}` : lead,
     changed: true,

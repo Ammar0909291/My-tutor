@@ -45,6 +45,10 @@ export interface RRMEntry {
    *  so every entry written today omits it, exactly as before. Absent means
    *  "no intent was recorded", never "no intent existed". */
   visualIntent?: VisualIntent
+  /** Issue A (2026-10-10): what the renderer actually drew, for answering a
+   *  later "what is this picture showing?" from evidence rather than from the
+   *  model. Optional; entries written before it existed simply lack it. */
+  drawn?: { caption: string | null; text: string[] }
 }
 
 export type RRMLog = RRMEntry[]
@@ -104,6 +108,8 @@ export interface CreateEntryInput {
   /** WP-7 / VH-4. Optional and unsupplied by every current caller, so entries
    *  are shape-identical to before. */
   visualIntent?: VisualIntent
+  /** Issue A (2026-10-10). See RRMEntry.drawn. */
+  drawn?: { caption: string | null; text: string[] }
 }
 
 export function createRRMEntry(input: CreateEntryInput): RRMEntry | null {
@@ -122,6 +128,7 @@ export function createRRMEntry(input: CreateEntryInput): RRMEntry | null {
     // Spread only when supplied, so an entry from a caller that forms no
     // intent is byte-identical to a pre-WP-7 entry.
     ...(input.visualIntent !== undefined && { visualIntent: input.visualIntent }),
+    ...(input.drawn !== undefined && { drawn: input.drawn }),
   }
 }
 

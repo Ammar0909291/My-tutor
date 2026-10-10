@@ -9,9 +9,10 @@ import { describe, it, expect } from 'vitest'
 import { readFileSync } from 'fs'
 import {
   figureAvailableToLearner, noFigureAnswer, withoutFigureSentences, NO_FIGURE_LEAD,
+  DENIES_OR_IMAGINES_FIGURE_RE, figureEvidenceAnswer,
 } from '@/lib/teaching/figureReference'
 import { asksAboutTheFigure, asksForPractice } from '@/lib/teaching/masteryGate'
-import { quizRequestNotice, QUIZ_UNANSWERED_LEAD } from '@/lib/teaching/quizRequest'
+import { quizRequestNotice, QUIZ_UNANSWERED_LEAD, QUIZ_REASK_LEAD, labelReaskedCard, quizPoolExhaustedFloorLead } from '@/lib/teaching/quizRequest'
 import { mayAttachProbeBelowGuide } from '@/lib/teaching/masteryReachability'
 import { readTurnIntent } from '@/lib/teaching/turnIntent'
 
@@ -112,7 +113,10 @@ describe('Issue A — the no-figure reply', () => {
     }
     // After the gate, only the graded-card verdict may touch the text, and a picture question is not a card answer.
     const after = ROUTE.slice(gate, ROUTE.indexOf('PHASE 0: TURN DECISION PROVENANCE', gate))
-    expect((after.match(/cleanText = /g) ?? []).length).toBe(2) // the gate's own write + withVerdict
+    // the gate's two writes (grounded-to-shown-figure, no-figure answer) + withVerdict
+    expect((after.match(/cleanText = /g) ?? []).length).toBe(3)
+    expect(after).toMatch(/cleanText = grounded/)
+    expect(after).toMatch(/cleanText = answer/)
     expect(after).toMatch(/cleanText = withVerdict/)
   })
   it('the earlier repair no longer trusts the held-figure session for a picture question', () => {
@@ -121,6 +125,33 @@ describe('Issue A — the no-figure reply', () => {
   })
   it('every production imagined reply would be judged a figure description by the harness check', () => {
     for (const s of IMAGINED) expect(FIGURE_WORDS.test(s)).toBe(true)
+  })
+})
+
+describe('Issue A follow-up — a figure the learner HAS is answered from what was drawn (production, cf79346)', () => {
+  /** chem.kinet.rate-law, production 2026-10-10, a figure shown at turn 3. */
+  const RATE_LAW_TURN_6 = 'I’m sorry you can’t see a picture right now, so let me describe what a typical illustration of a rate‑law diagram would show.\n\nUsually the diagram has two parts.'
+  const RATE_LAW_TURN_13 = 'I understand the picture looks confusing, so let’s walk through what each part represents in words.\n\nPicture yourself with a simple flow chart that moves from left to right.'
+  /** chem.org.arrow-pushing, production 2026-10-10, figure shown the turn before: accurate, kept. */
+  const ARROW_ACCURATE = 'Let’s walk through the picture together, step by step.\n\n- **“Identify nucleophile and electrophile”** – this box tells you to look at the reactants and decide which species will donate a pair of electrons.'
+  it('denials and typical/imagined descriptions are recognised', () => {
+    for (const t of [RATE_LAW_TURN_6, RATE_LAW_TURN_13, 'There is no picture here, but let me describe one.', 'Such diagrams usually show two curves.', 'It would show the rate on the y-axis.']) {
+      expect(DENIES_OR_IMAGINES_FIGURE_RE.test(t), t).toBe(true)
+    }
+  })
+  it('an accurate reply about the real figure is not', () => {
+    expect(DENIES_OR_IMAGINES_FIGURE_RE.test(ARROW_ACCURATE)).toBe(false)
+    expect(DENIES_OR_IMAGINES_FIGURE_RE.test('The figure shows iron with an anodic region and a cathodic region.')).toBe(false)
+  })
+  it('the grounded answer uses only the drawn caption and labels', () => {
+    const out = figureEvidenceAnswer({ caption: 'Determining Rate Law and Order via Initial-Rate Method', text: ['Run experiments', 'Compare initial rates', 'Find the orders'] }, null, 'earlier', 'Rate Law and Order covers: rate = k[A]^m[B]^n.')
+    expect(out).toMatch(/^The picture for this lesson is further up in our chat\. It is titled “Determining Rate Law and Order via Initial-Rate Method”\./)
+    expect(out).toMatch(/“Run experiments”, “Compare initial rates”, “Find the orders”/)
+    expect(out).not.toMatch(/typical|usually|two parts/i)
+  })
+  it('an entry written before the drawn field existed still yields its title (no invented parts)', () => {
+    const out = figureEvidenceAnswer(undefined, 'A 3D scene: Determining Rate Law and Order via Initial-Rate Method', 'earlier', null)
+    expect(out).toBe('The picture for this lesson is further up in our chat. It is titled “Determining Rate Law and Order via Initial-Rate Method”. Tell me which of those parts is confusing and I will explain it.')
   })
 })
 
@@ -205,6 +236,20 @@ describe('Issue B — the reply when no new card ships', () => {
     expect(r.text).toMatch(/^I don't have a practice question I can give you on Rate Law right now/)
     const empty = quizRequestNotice({ cardAttached: false, cardIsTheUnansweredOne: false, poolExhausted: false, conceptTitle: null, reply: '' })
     expect(empty.text).toMatch(/^I don't have a practice question I can give you right now/)
+  })
+  it('production follow-up: with a seen question still waiting for its one re-ask, the exhausted line says it comes back', () => {
+    const r = quizRequestNotice({ cardAttached: false, cardIsTheUnansweredOne: false, poolExhausted: true, conceptTitle: 'Photosynthesis', reply: WORKED, reaskLater: true })
+    expect(r.text).toMatch(/^You have answered every new practice question I have on Photosynthesis in this lesson\. A question you have already seen comes back once more/)
+    expect(r.text).not.toMatch(/can't give you a new one/)
+    expect(quizPoolExhaustedFloorLead('Photosynthesis', true)).toMatch(/comes back once more a little later\. Here is the idea once more\.$/)
+    expect(quizPoolExhaustedFloorLead('Photosynthesis')).toBe('You have answered every practice question I have on Photosynthesis in this lesson, so here is the idea once more.')
+    // the floor's own line is recognised, in both forms
+    expect(quizRequestNotice({ cardAttached: false, cardIsTheUnansweredOne: false, poolExhausted: true, conceptTitle: 'Photosynthesis', reply: quizPoolExhaustedFloorLead('Photosynthesis', true) + '\n\n' + WORKED, reaskLater: true }).changed).toBe(false)
+  })
+  it('a re-asked card is labelled once, never twice', () => {
+    const a = labelReaskedCard('Quick check. Think it through before you choose.')
+    expect(a.text.startsWith(QUIZ_REASK_LEAD)).toBe(true)
+    expect(labelReaskedCard(a.text).changed).toBe(false)
   })
   it('the teaching floor\'s own exhausted line is not repeated', () => {
     const floor = 'You have answered every practice question I have on Rate Law in this lesson, so here is the idea once more.\n\n' + WORKED

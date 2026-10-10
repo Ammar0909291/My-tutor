@@ -4766,6 +4766,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // authored probes exist but are all spent this lesson. See
       // inventedProbeGuard.ts's `authoredPoolExhausted`.
       let authoredPoolExhaustedHoisted = false
+      // Issue B follow-up (2026-10-10): the card served this turn is a re-ask
+      // of a question already seen, and whether one is still waiting for its
+      // re-ask (quizRequest.ts — wording only, allocation unchanged).
+      let reaskServedQuestionHoisted: string | null = null
+      let reaskWaitingHoisted = false
       let gateDeclinedByPolicyHoisted = false
       // R1 — THE TOPIC-PROGRESS EVIDENCE WRITE MUST FINISH BEFORE THE RESPONSE.
       //
@@ -5398,7 +5403,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // A re-ask arrives from the selector with its options already rotated.
           if (converted && probe?.reask) {
             console.log('[gate-assessment] ' + JSON.stringify({ event: 'missed-probe-reasked', phase: phaseBeforeTurn, assetId: probe.assetId }))
+            reaskServedQuestionHoisted = converted.question
           }
+          reaskWaitingHoisted = Boolean(history && history.mcqMissed.some((fp) => !history.mcqReasked.includes(fp)))
           if (converted) {
             gateMcqHoisted = converted
             // The block still goes in: if the deterministic renderer refuses
@@ -11113,6 +11120,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       if (visualFired) {
         try {
           const { createRRMEntry } = await import('@/lib/teaching/renderedRealityModel')
+          const { describeVisualPayload } = await import('@/lib/teaching/visual/visualSemantics')
           rrmEntryThisTurn = createRRMEntry({
             visualType: responseVisual,
             visualSpec: detectedVisualSpec,
@@ -11121,6 +11129,19 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             responseVisual,
             matchedConcept: resolvedConceptId ?? snapshotCurrentConceptId ?? resolvedLibraryConceptNodeId ?? null,
             turnNumber: snapshotRRMLog.length + 1,
+            // Issue A (2026-10-10): what the renderer draws — its caption and
+            // every label — kept so a later question about this figure is
+            // answered from evidence (figureReference.figureEvidenceAnswer).
+            drawn: (() => {
+              try {
+                const payload = detectedSceneSpec ? { renderer: 'scene', sceneSpec: detectedSceneSpec }
+                  : detectedVisualSpec ? { renderer: 'spec', visualSpec: detectedVisualSpec }
+                  : responseVisual ? { renderer: 'card', visualType: responseVisual } : null
+                const sem = describeVisualPayload(payload as never)
+                const text = [...(sem.readable ?? []), ...(sem.steps ?? [])].map((t) => String(t).slice(0, 120))
+                return { caption: sem.caption ?? null, text: Array.from(new Set(text)).slice(0, 16) }
+              } catch { return undefined }
+            })(),
           })
         } catch { /* non-fatal — RRM is additive, absence = today's behavior */ }
       }
@@ -13859,7 +13880,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // used (owner decision 2026-10-07: only authored cards are asked)
               // is told so, instead of being promised a question that never comes.
               if (floorText && asksForPractice(learnerAuthoredMessage) && authoredPoolExhaustedHoisted && node?.title) {
-                floorText = `You have answered every practice question I have on ${node.title} in this lesson, so here is the idea once more.\n\n${floorText}`
+                const { quizPoolExhaustedFloorLead } = await import('@/lib/teaching/quizRequest')
+                floorText = `${quizPoolExhaustedFloorLead(node.title, reaskWaitingHoisted as boolean)}\n\n${floorText}`
               }
               if (floorText) cleanText = pointer ? `${floorText}\n\n${pointer}` : floorText
             }
@@ -13886,6 +13908,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             poolExhausted: (authoredPoolExhaustedHoisted as boolean),
             conceptTitle: resolvedConceptId ? (getKGNode(resolvedConceptId)?.title ?? null) : null,
             reply: cleanText,
+            reaskLater: (reaskWaitingHoisted as boolean),
           })
           if (notice.changed) {
             console.log('[quiz-request] ' + JSON.stringify({
@@ -13895,6 +13918,17 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             cleanText = notice.text
           }
         } catch { /* a repair must never break a turn */ }
+      }
+
+      // A re-asked card (a question seen before, its one re-ask) is introduced
+      // as one — production 2026-10-10 showed it as if new (quizRequest.ts).
+      if (servedMcq && reaskServedQuestionHoisted && servedMcq.question === reaskServedQuestionHoisted) {
+        const { labelReaskedCard } = await import('@/lib/teaching/quizRequest')
+        const labelled = labelReaskedCard(cleanText)
+        if (labelled.changed) {
+          console.log('[quiz-request] ' + JSON.stringify({ event: 'reasked-card-labelled', conceptId: resolvedConceptId ?? null }))
+          cleanText = labelled.text
+        }
       }
 
       // ── NO PICTURE, NO DESCRIPTION OF ONE (Issue A, 2026-10-10) ──────────
@@ -13910,7 +13944,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // picture is visible, how to send one, and an authored explanation (else
       // the concept's KG line). A card on screen stays; its verdict is not
       // touched (a picture question is not a card answer).
-      if (figureQuestionHoisted && !serveLessonComplete && !lessonCompletionHoisted && provider !== 'degraded') {
+      // Production 2026-10-10 on cf79346 (chem.kinet.rate-law, a recovery turn —
+      // "i dont understand this picture" read as distress): the imagined
+      // description shipped and this gate logged nothing. The learner's own
+      // words are therefore read here again, not only through the flag set
+      // early in the turn, and every picture question logs the evidence the
+      // decision used.
+      const figureQuestionFinal = figureQuestionHoisted
+        || (await import('@/lib/teaching/masteryGate')).asksAboutTheFigure(learnerAuthoredMessage)
+      if (figureQuestionFinal && !serveLessonComplete && !lessonCompletionHoisted && provider !== 'degraded') {
         try {
           const fr = await import('@/lib/teaching/figureReference')
           const learnerTexts = (learnSession.messages as Array<{ role: unknown; content?: unknown }>)
@@ -13923,6 +13965,48 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             conceptId: resolvedConceptId,
             recentLearnerMessages: learnerTexts,
           })
+          console.log('[figure-evidence] ' + JSON.stringify({
+            event: 'figure-question', conceptId: resolvedConceptId ?? null, available,
+            flagEarly: figureQuestionHoisted, figureInThisResponse: visualFired,
+            renderedConcepts: snapshotRRMLog.map((e) => e.matchedConcept ?? null).slice(-6),
+            photoSent: learnerTexts.some((m) => /^\s*📸/u.test(m)), provider,
+          }))
+          // A figure the learner HAS, which the reply denies or replaces with a
+          // typical / imagined one (rate-law, cf79346): answered from what the
+          // renderer drew instead. An accurate reply about the figure is kept.
+          const photoSent = learnerTexts.some((m) => /^\s*📸/u.test(m))
+          if (available && !photoSent && fr.DENIES_OR_IMAGINES_FIGURE_RE.test(cleanText)) {
+            const shown = [...snapshotRRMLog].reverse().find((e) => e.matchedConcept === resolvedConceptId) ?? null
+            let drawnNow: { caption: string | null; text: string[] } | null = null
+            if (visualFired) {
+              try {
+                const { describeVisualPayload } = await import('@/lib/teaching/visual/visualSemantics')
+                const payload = detectedSceneSpec ? { renderer: 'scene', sceneSpec: detectedSceneSpec }
+                  : detectedVisualSpec ? { renderer: 'spec', visualSpec: detectedVisualSpec }
+                  : responseVisual ? { renderer: 'card', visualType: responseVisual } : null
+                const sem = describeVisualPayload(payload as never)
+                drawnNow = { caption: sem.caption ?? null, text: Array.from(new Set([...(sem.readable ?? []), ...(sem.steps ?? [])].map(String))) }
+              } catch { /* fall back to the log */ }
+            }
+            let teachingShown: string | null = null
+            if (resolvedConceptId) {
+              const { getKGNode } = await import('@/lib/curriculum/knowledgeGraph')
+              const node = getKGNode(resolvedConceptId)
+              if (node?.title && node.description) teachingShown = (await import('@/lib/teaching/conceptFallback')).conceptFallbackText(node.title, node.description)
+            }
+            const grounded = fr.figureEvidenceAnswer(
+              drawnNow ?? (shown as { drawn?: { caption: string | null; text: string[] } } | null)?.drawn ?? null,
+              visualFired ? null : (shown?.visualSemantics ?? null),
+              visualFired ? 'this-message' : 'earlier',
+              teachingShown,
+            )
+            console.warn('[figure-evidence] ' + JSON.stringify({
+              event: 'figure-reply-grounded-to-shown-figure', conceptId: resolvedConceptId ?? null, provider,
+              source: visualFired ? 'this-response' : 'rendered-log', hadDrawnText: Boolean(drawnNow?.text.length || (shown as { drawn?: unknown } | null)?.drawn),
+              charsBefore: cleanText.length,
+            }))
+            cleanText = grounded
+          }
           if (!available) {
             let teaching: string | null = null
             if (resolvedConceptId) {
@@ -13951,7 +14035,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             }))
             cleanText = answer
           }
-        } catch { /* a repair must never break a turn */ }
+        } catch (err) {
+          // A repair must never break a turn — but a skipped gate is logged.
+          console.warn('[figure-evidence] ' + JSON.stringify({ event: 'gate-error', conceptId: resolvedConceptId ?? null, error: String(err).slice(0, 200) }))
+        }
       }
 
       // ── A GRADED CARD ALWAYS GETS ITS VERDICT (ENGL-003 / ENGL-007) ──────
