@@ -940,6 +940,17 @@ export function evidenceFromPayload(
   const base = evidenceFromSemantics(payload ? describe(payload as never) : null)
   const spec = (payload?.visualSpec ?? null) as Record<string, unknown> | null
   const extra: string[] = []
+  // What is DRAWN, not only what is written (production on 9a0cee7a: the
+  // innate-behaviour scene draws two line stubs, the photosynthesis scene an arrow).
+  const drawn = new Set<string>()
+  const scene = (payload?.sceneSpec ?? null) as { steps?: Array<{ objects?: Array<{ type?: string }> }>; objects?: Array<{ type?: string }> } | null
+  for (const o of [...(scene?.objects ?? []), ...(scene?.steps ?? []).flatMap((st) => st?.objects ?? [])]) {
+    if (o?.type === 'arrow' || o?.type === 'vector') drawn.add('arrow')
+    if (o?.type === 'path' || o?.type === 'line') drawn.add('line')
+    if (o?.type === 'box' || o?.type === 'rect') drawn.add('box')
+  }
+  if (spec?.type === 'process_flow' || spec?.type === 'flowchart') { drawn.add('box'); drawn.add('arrow') }
+  if (drawn.size > 0) extra.push(`drawn: ${Array.from(drawn).sort().join(', ')}`)
   if (spec) {
     for (const k of ['title', 'xLabel', 'yLabel', 'caption']) if (typeof spec[k] === 'string') extra.push(spec[k] as string)
     if (Array.isArray(spec.steps)) for (const st of spec.steps as Array<Record<string, unknown>>) {
@@ -950,12 +961,17 @@ export function evidenceFromPayload(
   return { caption: base.caption, text: Array.from(new Set([...base.text, ...extra.map((t) => t.trim()).filter(Boolean)])).slice(0, 32) }
 }
 
-export const FIGURE_POINTING_RE = /\b(?:(?:the|this|that|your)\s+(?:picture|figure|diagram|image|sketch|drawing|chart|graph|flow ?chart|illustration)|in the (?:sketch|drawing)|box(?:es)?|arrows?|labell?ed|labels?|(?:left|right)[- ]hand side|on the (?:left|right)|at the (?:top|bottom)|(?:top|bottom) (?:left|right)|the (?:horizontal|vertical) (?:line|axis)|the [xy][- ]?axis|the axes|the curve|one side|the other side)\b/i
+export const FIGURE_POINTING_RE = /\b(?:(?:the|this|that|your)\s+(?:picture|figure|diagram|image|sketch|drawing|chart|graph|flow ?chart|illustration)|in the (?:sketch|drawing)|box(?:es)?|arrows?|labell?ed|labels?|(?:left|right)[- ]hand side|on the (?:left|right)|at the (?:top|bottom)|(?:top|bottom) (?:left|right)|the (?:horizontal|vertical) (?:line|axis)|the [xy][- ]?axis|the axes|the curve|one side|the other side|the (?:two|three|four) (?:straight |dashed |dotted |coloured |colored )?lines)\b/i
 const FIGURE_NOUN_RE = /\b(?:picture|figure|diagram|image|sketch|drawing|chart|graph|illustration)\b/i
 const ANALOGY_AS_FIGURE_RE = /\b(?:picture yourself|imagine|think of (?:it|this|the (?:picture|figure|diagram)) (?:as|like)|as if)\b/i
-const STRUCTURE_RE = /\b(x[- ]?axis|y[- ]?axis|axis|axes|horizontal (?:line|axis)|vertical (?:line|axis)|curves?|plotted|bar chart|bars|grid|stacks?|sketch|slope|peaks?|plateau|pie chart|table)\b/gi
-const LABEL_CLAIM_RE = /\b(?:labell?ed|labels?|reads?|says|written|titled|marked|caption|heading)\b/i
+const STRUCTURE_RE = /\b(x[- ]?axis|y[- ]?axis|axis|axes|horizontal (?:line|axis)|vertical (?:line|axis)|(?:two|three|four) (?:straight |dashed |dotted |coloured |colored )?lines|curves?|plotted|bar chart|bars|grid|stacks?|(?:the|this|that) sketch|slope|peaks?|plateau|pie chart|table)\b/gi
+const LABEL_CLAIM_RE = /\b(?:labell?ed|labels?|written|titled|marked|caption|heading)\b|\b(?:label|box|figure|picture|diagram|caption|title|heading|sign|panel|it)\s+(?:\w+\s+){0,2}?(?:reads?|says)\b/i
 const EXPLAINS_PART_RE = /\b(?:the|this|that|these|those)\s+(?:\w+\s+){0,2}?(?:box(?:es)?|arrows?|sections?|parts?|sides?|lines?)\b[^.!?]{0,60}\b(?:represents?|stands? for|shows?|means?)\b/i
+/** "grey arrow", "right side (blue)": a bolded description of a part, not a quoted label. */
+const PART_WORDS_RE = /\b(?:(?:top|bottom|upper|lower|left|right|centre|center|middle)(?:[- ]hand)?|red|blue|green|orange|purple|grey|gray|black|white|yellow|pink|brown|teal|light|dark|arrows?|box(?:es)?|sides?|lines?|sections?|panels?|parts?|areas?|the|a|an|and)\b/gi
+function onlyPartWords(term: string): boolean {
+  return term.replace(PART_WORDS_RE, '').replace(/[()\s,.-]+/g, '').length === 0
+}
 const POSITION_OR_COLOUR_RE = /^(?:(?:top|bottom|upper|lower)\s*)?(?:left|right|centre|center|middle|top|bottom)(?:\s+(?:left|right|side))?$|^(?:red|blue|green|orange|purple|grey|gray|black|white|yellow|pink|brown|teal)$/i
 const STOP = new Set(['this', 'that', 'with', 'from', 'they', 'them', 'their', 'there', 'which', 'when', 'what', 'into', 'than', 'then', 'also', 'each', 'shows', 'show', 'represent', 'represents', 'picture', 'figure', 'diagram', 'boxes', 'arrow', 'arrows', 'part', 'parts', 'side', 'here', 'just', 'like'])
 const norm = (t: string): string => (t ?? '').toLowerCase().replace(/[‐-―−]/g, '-').replace(/[“”"*’‘']/g, '').replace(/\s+/g, ' ').trim()
@@ -972,24 +988,29 @@ export function checkFigureClaims(reply: string, evidence: FigureEvidence): { te
   for (const p of parts) {
     const s = p ?? ''
     if (!s.trim() || !/[A-Za-z]{2,}/.test(s) || !FIGURE_POINTING_RE.test(s)) { out.push(s); continue }
+    // A question to the learner claims nothing about the figure.
+    if (/\?\s*(?:\*\*|["”’])?\s*$/.test(s)) { out.push(s); continue }
     let bad = false
     if (ANALOGY_AS_FIGURE_RE.test(s) && FIGURE_NOUN_RE.test(s)) bad = true
     if (!bad) {
       for (const m of s.matchAll(STRUCTURE_RE)) {
         const w = m[1].toLowerCase()
-        if (!ev.includes(w.replace(/s$/, ''))) { bad = true; break }
+        const key = /^(?:two|three|four) /.test(w) ? 'line' : w.replace(/^(?:the|this|that) /, '').replace(/s$/, '')
+        if (!ev.includes(key)) { bad = true; break }
       }
     }
     if (!bad && LABEL_CLAIM_RE.test(s)) {
-      const terms = Array.from(s.matchAll(/“([^”]{2,80})”|"([^"]{2,80})"|\*\*([^*]{2,80})\*\*/g)).map((m) => norm(m[1] ?? m[2] ?? m[3] ?? ''))
-        .filter((t) => t.length >= 2 && !POSITION_OR_COLOUR_RE.test(t))
+      const terms = Array.from(s.matchAll(/“([^”]{2,80})”|"([^"]{2,80})"|\*\*([^*]{2,80})\*\*/g)).map((m) => norm(m[1] ?? m[2] ?? m[3] ?? '').replace(/[,.;!]+$/, '').trim())
+        .filter((t) => t.length >= 2 && !POSITION_OR_COLOUR_RE.test(t) && !/:\s*$/.test(t) && !onlyPartWords(t))
       for (const t of terms) {
         if (!(ev.includes(t) || labels.some((l) => l.length >= 4 && t.includes(l)))) { bad = true; break }
       }
     }
     if (!bad && EXPLAINS_PART_RE.test(s) && !/“|"|\*\*/.test(s)) {
       const overlap = contentWords(s).map((w) => w.replace(/(?:es|s)$/, '')).filter((w) => evWords.has(w))
-      if (new Set(overlap).size < 2) bad = true
+      const part = /\b(box|arrow|line)/i.exec(EXPLAINS_PART_RE.exec(s)?.[0] ?? '')?.[1]?.toLowerCase()
+      const partDrawn = part ? new RegExp(`drawn: [^|]*\\b${part}`).test(ev) : false
+      if (new Set(overlap).size < (partDrawn ? 1 : 2)) bad = true
     }
     if (bad) { removed.push(s.trim()); continue }
     out.push(s)

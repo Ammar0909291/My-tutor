@@ -1,0 +1,138 @@
+
+=== order 52 eng.grammar.verbs ===
+[open provider=groq fig=none flags=-]
+**Lesson: Verbs**  
+
+In this lesson we’ll look at words that tell us what someone or something does, or what state they are in. By the end you’ll be able to spot and use the main verbs and helping (auxiliary) verbs in simple sentences.  
+
+Let’s start with something you see every day: a **ball**.  
+
+Imagine you’re at the park and you **throw** the ball to a friend. In that moment, the word *throw* tells us the action that’s happening.  
+
+Think of a short picture in your mind: a person’s arm moves, the ball flies, and the friend catches it. The word that describes that movement is a **verb**.  
+
+In plain language, a **verb** is a word that expresses an action (like *run*, *eat*, *throw*) or a state of being (like *is*, *feel*, *seem*).  
+
+**Verb** – the name for these action‑or‑state words.  
+
+Now, look at this simple sentence:  
+
+*She throws the ball.*  
+
+**Question:** What do you notice about the word **throws** in this sentence?
+[learner] What is this picture showing?
+[tutor provider=groq fig=none card=none flags=-]
+There is no picture in this lesson yet, so I can't tell you what one shows. If you have a picture from somewhere else, send it with the camera button and I'll look at it. Here is the idea in words:
+
+Verbs express action OR state of being — "is," "am," "are," "seem," "feel," "become" are all verbs even though they don’t show physical movement; in "She IS happy," nothing physically moves, but "is" still does a verb’s job, connecting the subject to a description. Mental/emotional verbs (think, want, believe, love) work the same way. Check whether a word expresses action OR a state/condition/mental process — not just visible physical movement.
+[learner] quiz me
+[tutor provider=gate fig=none card="In \"I understand the contract,\" is anything physically happening? Is \"understand\" still a verb?" ["Nothing is physically happening, but \"un","\"Understand\" cannot be a verb since noth"] corpus=englishAdultBandBatch3.ts flags=twoOption]
+One to try, on Verbs. There's no rush.
+[learner] Nothing is physically happening, but "understand" is still a verb — it expresses a mental state, not just physical action
+[tutor provider=groq fig=none card="In \"She believes the plan will work,\" is anything physically happening? Is \"believes\" still a verb?" ["\"Believes\" is not a real verb, since no ","Nothing is physically happening, but \"be"] corpus=englishAdultBandBatch3.ts flags=twoOption]
+That's right.
+
+The sentence describes a mental state, not a physical action, so nothing is happening physically. "Understand" functions as the main verb, expressing that mental state.
+
+Verbs can describe internal processes such as thinking, feeling, or understanding. These mental‑state verbs are still true verbs even though they do not involve visible movement.
+
+Quick check. Think it through before you choose.
+[learner] ok
+[tutor provider=groq fig=none card="In \"She believes the plan will work,\" is anything physically happening? Is \"believes\" still a verb?" ["\"Believes\" is not a real verb, since no ","Nothing is physically happening, but \"be"] corpus=englishAdultBandBatch3.ts flags=twoOption]
+Let’s look at a sentence that uses a helping (auxiliary) verb:
+
+**She is reading a book.** 
+Here the words **is reading** together tell us two things: the action **reading** is happening, and it is happening **right now**. The word **is** isn’t just extra; it is a verb that works with the main verb **reading** to show the present‑continuous tense. If we drop **is**, we get “She reading a book,” which is not a correct English sentence.
+
+In English, certain verbs always act as helpers. They join with another verb to give information about **time (tense), duration (aspect), ability, permission, obligation, or possibility**. The most common helping verbs are:
+
+- **be** forms: am, is, are, was, were 
+- **have** forms: have, has, had 
+- **modal** verbs: will, would, can, could, may, might, must, shall, should, do, does, did 
+
+When a helping verb pairs with a main verb, the whole pair is called a **verb phrase**, and it functions as the single verb of the sentence.
+
+Now that you’ve seen how a helping verb works together with a main verb, let me know when you’re ready to try a quick check where you pick out the verb phrase in a new sentence.
+[learner] give me example
+[tutor provider=groq fig=none card=none flags=-]
+Let’s look at a simple sentence that shows both a main verb and a helping (auxiliary) verb:
+
+**Sentence:** *She has understood the instructions.*
+
+**What’s happening here?** 
+- **has** – this is the helping verb. It tells us the time (present perfect) and that the action is completed. 
+- **understood** – this is the main verb. It carries the core meaning “to grasp” or “to get”. 
+
+Together, **has understood** forms the complete verb phrase. Without the helping verb, *She understood the instructions* would be a simple past statement, and without the main verb, *She has* would be incomplete.
+
+**Why does this matter?** 
+The helping verb adds essential information about when the action happened and whether it’s ongoing, finished, possible, etc. Both words are needed for a grammatically correct sentence.
+[learner] i dont understand this picture. what is it showing?
+[tutor provider=groq fig=none card=none flags=-]
+There is no picture in this lesson yet, so I can't tell you what one shows. If you have a picture from somewhere else, send it with the camera button and I'll look at it. Here is the idea in words:
+
+Words expressing action or state of being, including main verbs and auxiliary (helping) verbs.
+[learner] ask me a question
+[tutor provider=memory fig=none card="In \"The report has been reviewed,\" is \"reviewed\" the only verb, or is \"has been\" also part of it?" ["\"Has been reviewed\" together is the comp","Only \"reviewed\" is the verb"] corpus=englishAdultBandBatch3.ts flags=twoOption]
+Verbs express action or state of being/mental process — linking verbs ("is," "seems," "becomes") and mental-process verbs (think, believe, want) are genuine verbs despite showing no physical movement. Separately, helping (auxiliary) verbs combine with a main verb to form the complete verb phrase, carrying essential tense, aspect, and modal information ("has been waiting," "will have finished") — the full phrase, not just the main verb alone, is the grammatically complete unit.
+[learner] Only "reviewed" is the verb
+[tutor provider=groq fig=none card=none flags=-]
+Not quite — the answer is: "Has been reviewed" together is the complete verb phrase — "has" and "been" are genuine helping verbs
+
+The phrase "has been reviewed" includes the auxiliaries "has" and "been", which together form the verb phrase. Ignoring them leaves out the complete tense and voice.
+
+In English, helping verbs combine with the main verb to show time, aspect, or voice. The auxiliaries are essential parts of the verb phrase, so they must be counted together with the main verb.
+[learner] test my understanding
+[tutor provider=gate fig=none card="In \"She IS happy,\" is anything physically moving? Is \"is\" still a verb?" ["\"Is\" cannot be a verb since nothing is p","Nothing is physically moving, but \"is\" i"] corpus=authoredSeedAssets.ts flags=twoOption]
+Here's a question on Verbs — take your time with it.
+[learner] quiz me
+[tutor provider=groq fig=none card="In \"She IS happy,\" is anything physically moving? Is \"is\" still a verb?" ["\"Is\" cannot be a verb since nothing is p","Nothing is physically moving, but \"is\" i"] corpus=authoredSeedAssets.ts flags=twoOption]
+This is the question you have not answered yet — choose an answer below and I will mark it.
+
+Here’s a sentence for you to look at:
+
+**She has been reviewed by the committee.**
+[learner] "Is" cannot be a verb since nothing is physically moving
+[tutor provider=groq fig=none card="In \"She is running,\" is \"running\" the only verb, or is \"is\" also part of the verb?" ["Only \"running\" is the verb","\"Is running\" together is the complete ve"] corpus=authoredSeedAssets.ts flags=twoOption]
+Not quite — the answer is: Nothing is physically moving, but "is" is still a verb — it connects the subject to a state or description
+
+The verb "is" is a linking verb even though nothing moves. Verbs can show a state or condition, not only action. Therefore "is" is still a verb.
+
+Linking verbs, also called copular verbs, connect the subject to a description or state. In "She is happy," "is" links "she" to the adjective "happy," showing a condition. Recognizing linking verbs helps you see that verbs are not limited to actions.
+
+Let's check this one before we go further.
+[learner] show me a diagram
+[tutor provider=groq fig=none card="In \"She is running,\" is \"running\" the only verb, or is \"is\" also part of the verb?" ["Only \"running\" is the verb","\"Is running\" together is the complete ve"] corpus=authoredSeedAssets.ts flags=twoOption]
+I don't have a picture for this one, so I'll explain it in words.
+
+Words expressing action or state of being, including main verbs and auxiliary (helping) verbs.
+[learner] i dont understand this picture. what is it showing?
+[tutor provider=groq fig=none card=none flags=-]
+There is no picture in this lesson yet, so I can't tell you what one shows. If you have a picture from somewhere else, send it with the camera button and I'll look at it. Here is the idea in words:
+
+Words expressing action or state of being, including main verbs and auxiliary (helping) verbs.
+[learner] explain simpler
+[tutor provider=groq fig=none card=none flags=-]
+Imagine a basketball game. The **player** who dribbles, passes, or shoots is doing the **action**—that’s like a main verb such as *run* or *eat*. But the **coach** on the sidelines also speaks: “You **must** pass now,” “You **can** shoot,” or “You **will** defend.” The coach’s words don’t describe a physical move themselves, yet they are essential to the play; they tell the player **when**, **how**, or **if** the action should happen. In the sentence “She **is** running,” *running* is the player’s action, while *is* is the coach’s instruction that tells us the action is happening right now. Both parts together make the full verb phrase, just like the player and coach together shape the game.
+
+So, a **verb** is any word that shows an action (like the player’s move) **or** a state/condition (like the coach saying “is ready”). When a helping verb joins a main verb, it works like the coach’s guidance, adding tense, ability, or necessity to the action. Together they form the complete verb phrase that makes a sentence meaningful.
+[learner] give me a quiz
+[tutor provider=gate fig=none card="In \"I know the answer,\" is anything physically happening? Is \"know\" still a verb?" ["Nothing is physically happening, but \"kn","\"Know\" cannot be a verb since nothing is"] corpus=englishProbeBatch3.ts flags=twoOption]
+One to try, on Verbs. There's no rush.
+[learner] Nothing is physically happening, but "know" is still a verb — it expresses a mental state, not just physical action
+[tutor provider=groq fig=none card=none flags=-]
+That's right.
+
+Your answer is right because the sentence involves no physical action, yet "know" functions as a verb. It describes a mental state rather than a movement. Verbs can express states as well as actions.
+
+In grammar, verbs are divided into dynamic (action) verbs and stative verbs. Stative verbs like "know", "believe", or "love" describe conditions or mental states. They still count as verbs even though nothing observable is happening.
+[learner] quiz me
+[tutor provider=gate fig=none card="In \"They have finished the project,\" is \"finished\" the only verb, or is \"have\" also part of the verb?" ["\"Have finished\" together is the complete","Only \"finished\" is the verb"] corpus=englishProbeBatch3.ts flags=twoOption]
+Quick check. Think it through before you choose.
+[learner] quiz me
+[tutor provider=groq fig=none card="In \"They have finished the project,\" is \"finished\" the only verb, or is \"have\" also part of the verb?" ["\"Have finished\" together is the complete","Only \"finished\" is the verb"] corpus=englishProbeBatch3.ts flags=twoOption]
+This is the question you have not answered yet — choose an answer below and I will mark it.
+
+Here’s a quick check for you:
+
+When you’re ready, write your answer below.

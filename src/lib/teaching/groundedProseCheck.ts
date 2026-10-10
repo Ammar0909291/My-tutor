@@ -189,10 +189,28 @@ export const UNCOVERED_EXAMPLE_NOTE =
   'The details of this example are not in your lesson materials, so treat them as an illustration of the idea, not as facts to learn.'
 export const UNCOVERED_QUALIFY_AT = 2
 
-/** Append the qualifier once. */
+/**
+ * Only a turn that GIVES an example is qualified: the learner asked for one, or
+ * the reply names one ("for example", "e.g.", "a classic example"). Production
+ * on 9a0cee7a also qualified a figure walkthrough and an overview on a quiz
+ * turn, where "this example" named nothing.
+ */
+const EXAMPLE_ASKED_RE = /\b(?:example|instance|real[- ]life|real[- ]world)\b/i
+const EXAMPLE_GIVEN_RE = /\b(?:for example|for instance|e\.g\.|an example|example of|classic example|famous example|real[- ]world (?:example|fixed|case))\b/i
+export function isExampleTurn(reply: string, learnerMessage: string): boolean {
+  return EXAMPLE_ASKED_RE.test(learnerMessage ?? '') || EXAMPLE_GIVEN_RE.test(reply ?? '')
+}
+
+/** Add the qualifier once — before a closing question, so the question stays last. */
 export function qualifyUncovered(text: string): { text: string; changed: boolean } {
-  if ((text ?? '').includes(UNCOVERED_EXAMPLE_NOTE)) return { text, changed: false }
-  return { text: `${(text ?? '').trim()}\n\n${UNCOVERED_EXAMPLE_NOTE}`, changed: true }
+  const t = (text ?? '').trim()
+  if (t.includes(UNCOVERED_EXAMPLE_NOTE)) return { text, changed: false }
+  const paras = t.split(/\n{2,}/)
+  const last = paras[paras.length - 1] ?? ''
+  if (paras.length > 1 && /\?\s*(?:\*\*|__)?\s*$/.test(last)) {
+    return { text: [...paras.slice(0, -1), UNCOVERED_EXAMPLE_NOTE, last].join('\n\n'), changed: true }
+  }
+  return { text: `${t}\n\n${UNCOVERED_EXAMPLE_NOTE}`, changed: true }
 }
 
 export function decideGroundedEdits(text: string, claims: CheckerClaim[], sources: readonly string[]): { edits: GroundedEdit[]; rejected: string[]; uncovered: string[] } {

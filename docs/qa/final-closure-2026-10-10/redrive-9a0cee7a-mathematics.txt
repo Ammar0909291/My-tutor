@@ -1,0 +1,185 @@
+
+=== order 184 math.alg.linear-equation-1var ===
+[open provider=groq fig=none flags=-]
+**Lesson: Linear Equation in One Variable**
+
+Imagine a simple kitchen scale. You place a bag of flour on one side, and on the other side you add a known weight (say, a 2‑kg brick) plus an unknown amount of flour you want to find. The scale balances when the total weight on both sides is the same.
+
+In everyday life, this is like buying fruit: you know the total cost you paid, you know the price per kilogram, and you want to figure out how many kilograms you bought.
+
+🟦 = 🟥 + ❓ (known weight + unknown weight = total weight)
+
+We can write a statement that says “the known part plus the unknown part equals the total.” That statement is called an *equation*. When the equation involves only one unknown number (the ❓), and the unknown is multiplied by a number and maybe added to another number, we have a **linear equation in one variable**.
+
+**Key terms:**  
+- **Variable** – the unknown quantity (we’ll use *x*).  
+- **Coefficient** – the number multiplied by the variable (the “a” in *a x*).  
+- **Constant term** – a number added or subtracted (the “b” in *a x + b*).  
+
+When everything is balanced, the equation looks like:
+
+*a x* + *b* = *c*, with *a* ≠ 0.
+
+(Just describe it in words.)
+[learner] What is this picture showing?
+[tutor provider=groq fig=none card=none flags=-]
+There is no picture in this lesson yet, so I can't tell you what one shows. If you have a picture from somewhere else, send it with the camera button and I'll look at it. Here is the idea in words:
+
+Solve 3x + 5 = 20 step by step. Goal: get x alone. Step 1 — the +5 is in the way, so undo it with its inverse: subtract 5 from BOTH sides. Left: 3x + 5 − 5 = 3x. Right: 20 − 5 = 15. Now 3x = 15. Step 2 — x is multiplied by 3, so undo with the inverse: divide BOTH sides by 3. x = 5. Notice the order: constant first, coefficient second. If you divide by 3 first you get x + 5/3 = 20/3 — still true, but now everything is fractions. Subtracting the constant first keeps the arithmetic clean. Step 3 — verify: 3(5) + 5 = 15 + 5 = 20. ✓
+[learner] quiz me
+[tutor provider=gate fig=none card="To solve 3x = 12, which single step finishes it?" ["Subtract 3 from both sides","Multiply both sides by 3","Divide both sides by 3 — the inverse of "] corpus=mathematicsSeedAssets.ts flags=-]
+Here's a question — take your time with it.
+[learner] Subtract 3 from both sides
+[tutor provider=groq fig=none card="Solve x/4 = 3." ["x = 7","x = −1","x = 3/4","x = 12"] corpus=mathematicsDepthAlgebraAssets.ts flags=-]
+Not quite — the answer is: Divide both sides by 3 — the inverse of multiplying by 3
+
+Subtracting 3 does not remove the coefficient 3 attached to x. The equation needs the coefficient eliminated, not the constant term. The correct step is to use the inverse operation of multiplication, which is division.
+
+When solving an equation, apply the inverse operation to the same side as the term you want to eliminate. For a term multiplied by a number, divide both sides by that number to isolate the variable.
+
+Quick check. Think it through before you choose.
+[learner] ok
+[tutor provider=groq fig=none card="Solve x/4 = 3." ["x = 7","x = −1","x = 3/4","x = 12"] corpus=mathematicsDepthAlgebraAssets.ts flags=-]
+Consider the equation  
+
+\[
+x + 3 = 7
+\]
+
+(the left side has the unknown \(x\) plus three, the right side is seven). To keep the balance, we do the same operation on **both** sides: subtract 3.
+
+\[
+\begin{aligned}
+x + 3 \;-\; 3 &= 7 \;-\; 3 \\
+x &= 4
+\end{aligned}
+\]
+
+Now check the solution by putting \(x = 4\) back into the original equation:  
+
+\(4 + 3 = 7\) which is true, so the answer is correct. 
+
+**Balance principle:** whatever you do to one side of an equation, you must do identically to the other side to preserve equality.
+[learner] give me example
+[tutor provider=groq fig=none card=none flags=-]
+Imagine a kitchen scale that is perfectly balanced. On the left pan you place **3 × x** (three times the weight of an unknown number of apples, x) together with a bag that weighs **5 units**. On the right pan you put a bag that weighs **20 units**. The scale stays level, so the total weight on each side is the same.
+
+In words, this situation is described by the equation 
+
+\[
+3x + 5 = 20
+\] 
+
+(three x plus five equals twenty). Our goal is to find the single value of x that makes the two sides balance.
+
+**Step 1 – Remove the constant term:** 
+To get rid of the + 5 on the left, we subtract 5 from **both** sides of the equation (the balance principle says we must do the same thing to each side). 
+
+\[
+3x + 5 - 5 = 20 - 5 \quad\Longrightarrow\quad 3x = 15
+\]
+
+**Step 2 – Isolate the variable term:** 
+Now the unknown x is multiplied by 3. To undo this multiplication, we divide **both** sides by 3. 
+
+\[
+\frac{3x}{3} = \frac{15}{3} \quad\Longrightarrow\quad x = 5
+\]
+
+**Check:** Put x = 5 back into the original equation: 
+
+\[
+3(5) + 5 = 15 + 5 = 20,
+\] 
+
+which is true, so the solution is correct.
+[learner] i dont understand this picture. what is it showing?
+[tutor provider=groq fig=none card=none flags=-]
+There is no picture in this lesson yet, so I can't tell you what one shows. If you have a picture from somewhere else, send it with the camera button and I'll look at it. Here is the idea in words:
+
+In this lesson on Linear Equation in One Variable we will look at an equation of the form ax + b = c with a ≠ 0 and has a unique solution x = (c − b)/a.
+[learner] ask me a question
+[tutor provider=gate fig=none card="A student solving 5x − 3 = 12 writes \"5x = 12 − 3 = 9\" as their first step. What went wrong?" ["The −3 must be undone by adding 3 to bot","Nothing — terms change sign when they cr"] corpus=authoredSeedAssets.ts flags=twoOption]
+Quick check on Linear Equation in One Variable. Think it through before you choose.
+[learner] Nothing — terms change sign when they cross the equals sign, so −3 becomes part of the right side
+[tutor provider=groq fig=none card=none flags=-]
+Not quite — the answer is: The −3 must be undone by adding 3 to both sides: 5x = 15
+
+The step is wrong because the -3 stays on the left side; you cannot move it to the right without changing its sign. To keep the equation balanced you must add 3 to both sides.
+
+Add 3 to both sides to get 5x = 15, then divide both sides by 5 to find x = 3. This shows the proper way to isolate the variable.
+[learner] test my understanding
+[tutor provider=gate fig=none card="Solve: 4x + 7 = 31. What is x?" ["x = 6","x = 24","x = 9.5"] corpus=authoredSeedAssets.ts flags=-]
+Here's a question — take your time with it.
+[learner] quiz me
+[tutor provider=groq fig=none card="Solve: 4x + 7 = 31. What is x?" ["x = 6","x = 24","x = 9.5"] corpus=authoredSeedAssets.ts flags=-]
+This is the question you have not answered yet — choose an answer below and I will mark it.
+
+Let’s try a new one.
+
+In the equation
+
+\(2x - 5 = 13\)
+[learner] x = 6
+[tutor provider=groq fig=none card=none flags=-]
+That's right.
+
+You correctly subtracted 7 from both sides to get 4x = 24. Then you divided by 4 to find x = 6.
+
+When solving equations, always reverse the operations that are applied to the variable. First undo addition or subtraction, then undo multiplication or division. This order works for any linear equation such as 5x + 3 = 23, where you subtract 3 and then divide by 5 to get x = 4.
+[learner] show me a diagram
+[tutor provider=groq fig=none card=none flags=-]
+I don't have a picture for this one, so I'll explain it in words.
+
+Imagine a simple balance scale:
+
+left pan right pan
+
+The scale is perfectly level, meaning the total weight on the left equals the total weight on the right. To find the unknown weight \(x\), we must keep the scale balanced: whatever we do to the left side, we do the same to the right side.
+
+Step 1 – remove the constant 5 from the left pan by **subtracting 5** from both sides:
+
+left pan right pan
+
+Now the equation is \(3x = 15\).
+
+Step 2 – isolate \(x\) by **dividing both sides by 3**:
+
+left pan right pan
+
+Both pans now show the same weight, so \(x = 5\).
+[learner] i dont understand this picture. what is it showing?
+[tutor provider=groq fig=none card=none flags=-]
+There is no picture in this lesson yet, so I can't tell you what one shows. If you have a picture from somewhere else, send it with the camera button and I'll look at it. Here is the idea in words:
+
+In this lesson on Linear Equation in One Variable we will look at an equation of the form ax + b = c with a ≠ 0 and has a unique solution x = (c − b)/a.
+[learner] explain simpler
+[tutor provider=groq fig=none card=none flags=analogyRepeat]
+Imagine a simple playground seesaw that stays level only when the total weight on the left side equals the total weight on the right side. 
+If you put a 5‑kilogram backpack on the left, the seesaw tilts. To bring it back level you can either add the same 5 kilograms to the right side **or** take the 5 kilograms off the left side. The key idea is that whatever you do to one side, you must do the same to the other side to keep the balance.
+
+A linear equation works the same way. One side of the equation is like the left side of the seesaw, the other side is the right side. The “ x ” term is a weight we don’t know yet, and the numbers are other known weights. To find the value of x, we keep the seesaw balanced by performing the same arithmetic operation on both sides—just like adding or removing weight on both ends of the seesaw.
+
+For example, with the equation 3x + 5 = 20, think of 3x as an unknown weight on the left and 5 kg as an extra weight already there. First we **remove** the 5 kg from the left side by taking 5 away from both sides (just like taking the same weight off both ends). That gives 3x = 15. Now we have only the unknown weight 3x on the left, and we know the total on that side must be 15 kg. To find the weight of one “x”, we **divide** both sides by 3 (splitting the total weight equally among the three identical “x” blocks). So x = 5.
+
+**What do you notice about the two sides of the equation when we take the same number away from both sides?**
+[learner] give me a quiz
+[tutor provider=gate fig=none card="Solve 2(x − 1) = 10." ["x = 5.5","x = 9","x = 6","x = 4"] corpus=mathematicsDepthAlgebraAssets.ts flags=-]
+One to try, on Linear Equation in One Variable. There's no rush.
+[learner] x = 5.5
+[tutor provider=groq fig=none card=none flags=-]
+Not quite — the answer is: x = 6
+
+You added 1 to the wrong side, which gave 5.5 instead of the correct value. The step of isolating x was done incorrectly.
+
+After simplifying 2(x‑1)=10, first divide both sides by 2 to get x‑1=5, then add 1 to both sides to find x=6.
+[learner] quiz me
+[tutor provider=groq fig=none card=none flags=quizNoCard]
+You have answered every new practice question I have on Linear Equation in One Variable in this lesson; a question you have already seen comes back once more a little later. Here is the idea once more.
+
+A linear equation like 3x + 5 = 20 is a balance scale that is currently level: whatever is on the left weighs exactly the same as whatever is on the right. Solving means finding what x must weigh — and the ONE rule is that anything you do to one pan, you must do identically to the other, or the scale tips and the equation stops being true. Take 5 off the left? Take 5 off the right too: 3x = 15. Split the left pan into 3 equal parts? Split the right the same way: x = 5. Check by putting 5 back in the original: 3(5) + 5 = 20. It balances — that substitution check is how YOU know the answer is right without asking anyone.
+[learner] quiz me
+[tutor provider=gate fig=none card="Solve: 4x + 7 = 31. What is x?" ["x = 9.5","x = 6","x = 24"] corpus=authoredSeedAssets.ts flags=repeatAnswered]
+You have seen this question before in this lesson — here it is once more.
+
+Here's a question — take your time with it.

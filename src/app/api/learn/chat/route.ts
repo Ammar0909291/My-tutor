@@ -13714,7 +13714,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // C-1: confident claims no source covers are qualified honestly.
             const uncoveredCount = (g as { uncovered?: string[] }).uncovered?.length ?? 0
             let qualified = false
-            if (uncoveredCount >= gp.UNCOVERED_QUALIFY_AT) {
+            if (uncoveredCount >= gp.UNCOVERED_QUALIFY_AT && gp.isExampleTurn(checkedBody, learnerAuthoredMessage)) {
               const q = gp.qualifyUncovered(checkedBody)
               if (q.changed) { checkedBody = q.text; qualified = true; done.push('grounded-prose-qualified') }
             }

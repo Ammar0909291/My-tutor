@@ -273,6 +273,14 @@ describe('Issue C through the route', () => {
     expect(readLog(t, '[grounded-prose-check]')).toMatchObject({ checked: true, qualified: true })
   }, 120_000)
 
+  it('C-1: the same uncovered verdicts on a turn that gives no example add no note (9a0cee7a false positive)', async () => {
+    checker.grounded = JSON.stringify({ claims: [{ sentence: 1, verdict: 'supported' }, { sentence: 2, verdict: 'supported' }, { sentence: 3, verdict: 'unsupported' }] })
+    const plain = 'A reflex arc is the simplest route through the nervous system, from a sensory neuron to the spinal cord. The spinal cord connects it straight to a motor neuron that makes the muscle contract. Because the signal does not travel to the brain first, the response is fast and automatic, which is why it is so useful.'
+    const [t] = await driveTurns(h, POST, [{ learnerSays: 'explain simpler', modelReplies: plain }], INNATE)
+    expect(text(t)).not.toContain(UNCOVERED_EXAMPLE_NOTE)
+    expect(readLog(t, '[grounded-prose-check]')).toMatchObject({ checked: true, qualified: false })
+  }, 120_000)
+
   it('C-1: claims the checker grounds with a verbatim source quote are not qualified', async () => {
     checker.grounded = JSON.stringify({ claims: [{ sentence: 4, verdict: 'supported', source_quote: 'stereotyped, largely unmodifiable behavioural sequences' }] })
     const [t] = await driveTurns(h, POST, [{ learnerSays: 'give me example', modelReplies: BIO024 }], INNATE)

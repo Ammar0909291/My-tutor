@@ -280,7 +280,7 @@ describe('Issue B — the reply when no new card ships', () => {
 import {
   needsGroundedCheck, splitSentences, decideGroundedEdits, applyGroundedEdits, runGroundedProseCheck,
   parseCheckerAnswer, correctionIsGrounded, GROUNDED_CHECK_SYSTEM_PROMPT,
-  qualifyUncovered, UNCOVERED_EXAMPLE_NOTE, UNCOVERED_QUALIFY_AT,
+  qualifyUncovered, UNCOVERED_EXAMPLE_NOTE, UNCOVERED_QUALIFY_AT, isExampleTurn,
 } from '@/lib/teaching/groundedProseCheck'
 import { BIOLOGY_EXTENSION_EXPLANATIONS } from '@/lib/teaching/assets/biologyExtensionSeedAssets'
 import { getKGNode } from '@/lib/curriculum/knowledgeGraph'
@@ -546,7 +546,60 @@ describe('C-1 — an example no source covers is qualified honestly', () => {
     expect(g.uncovered ?? []).toEqual([])
   })
   it('route: the qualifier is applied from the checker result and logged', () => {
-    expect(ROUTE).toMatch(/if \(uncoveredCount >= gp\.UNCOVERED_QUALIFY_AT\)/)
+    expect(ROUTE).toMatch(/if \(uncoveredCount >= gp\.UNCOVERED_QUALIFY_AT && gp\.isExampleTurn\(checkedBody, learnerAuthoredMessage\)\)/)
     expect(ROUTE).toMatch(/done\.push\('grounded-prose-qualified'\)/)
+  })
+})
+
+// ── Production on 9a0cee7a (2026-10-10): precision follow-up ────────────────
+describe('A-2 / C-1 follow-up from the 9a0cee7a re-drive', () => {
+  const FAP_FIGURE = { caption: 'Reflex vs. Fixed Action Pattern', text: ['Simple reflex', 'Fixed action pattern', 'E.g. the knee-jerk reflex', 'E.g. courtship display, nest-building', 'Stereotyped and largely unmodifiable once triggered'] }
+  it('"the two straight lines illustrate …" on a figure that draws no lines is removed', () => {
+    const s = '- The two straight lines illustrate the two stages: first a **sign stimulus** releases the fixed action pattern, then the behavior runs to completion.'
+    expect(checkFigureClaims(s, FAP_FIGURE).removed).toHaveLength(1)
+  })
+  it('teaching about "the straight line" of a log plot is not a figure claim (rate-law, 76c2edd)', () => {
+    const s = 'If you plot log(rate) against **log(concentration)** of a single reactant, the slope of the straight line equals that reactant’s order.'
+    expect(checkFigureClaims(s, RATE_LAW_EVIDENCE).removed).toEqual([])
+  })
+  it('the accurate walkthrough of the same figure (production, bio turn 13) is kept', () => {
+    const s = 'Look at the picture beside you. On the left side you see **“Simple reflex”** in blue, with the example **“the knee‑jerk reflex”** written in grey. On the right side the orange box reads **“Fixed action pattern”** and gives **“courtship display, nest‑building”** as examples.'
+    expect(checkFigureClaims(s, FAP_FIGURE).removed).toEqual([])
+  })
+  it('a bolded description of a part ("grey arrow", "right side (blue)") is not a label claim (photosynthesis, 9a0cee7a)', () => {
+    const PHOTO = { caption: 'Photosynthesis: Two Coupled Stages', text: ['Light-Dependent Reactions', 'Calvin Cycle'] }
+    expect(checkFigureClaims('A **grey arrow** points from those light‑driven steps to the **right side (blue)** labeled **Calvin Cycle**.', PHOTO).removed).toEqual([])
+    expect(checkFigureClaims('The right side is labeled **Dark Reactions**.', PHOTO).removed).toHaveLength(1) // a real wrong label still goes
+  })
+  it('what a scene DRAWS is evidence too: its line stubs and arrows (9a0cee7a sweep)', () => {
+    const scene = { renderer: 'scene', sceneSpec: { title: 'Reflex vs. Fixed Action Pattern', steps: [{ narration: 'x', objects: [{ type: 'node', text: 'Simple reflex' }, { type: 'path', points: [] }, { type: 'arrow', from: [0, 0, 0], to: [1, 0, 0] }] }] } }
+    const ev = evidenceFromPayload(scene as never, describeVisualPayload as never)
+    expect(ev.text).toContain('drawn: arrow, line')
+    expect(checkFigureClaims('The two straight lines simply separate the two columns; they don’t carry additional meaning.', ev).removed).toEqual([])
+    expect(checkFigureClaims('The two straight lines simply separate the two columns.', FAP_FIGURE).removed).toHaveLength(1) // nothing drawn → still removed
+  })
+  it('"sketch" as a verb and "says" without a figure subject are not figure claims', () => {
+    const ev = evidenceFromPayload(ARROW_SPEC as never, describeVisualPayload as never)
+    expect(checkFigureClaims('When you’re ready, use this idea to sketch the arrow for an SN2 reaction: start the arrow at the nucleophile’s lone pair and point it toward the carbon bearing the leaving group.', ev).removed).toEqual([])
+    expect(checkFigureClaims('To get rid of the + 5 on the left, we subtract 5 from **both** sides of the equation (the balance principle says we must do the same thing to each side).', RATE_LAW_EVIDENCE).removed).toEqual([])
+  })
+  it('a quoted label with trailing punctuation inside the quotes still matches', () => {
+    const s = 'The orange box in the picture, labeled “Fixed action pattern” with examples like “courtship display, nest‑building,” is showing that same kind of built‑in behaviour.'
+    expect(checkFigureClaims(s, FAP_FIGURE).removed).toEqual([])
+  })
+  it('a question to the learner about the figure is not a claim (innate behaviour, 9a0cee7a)', () => {
+    const q = '**Question:** In the figure, which label tells you that a behavior only starts when a specific “sign stimulus” is present and then runs its full course without outside input?'
+    expect(checkFigureClaims(q, FAP_FIGURE).removed).toEqual([])
+  })
+  it('only a turn that gives an example is qualified', () => {
+    expect(isExampleTurn('Let’s look at a real‑world fixed action pattern. A male stickleback …', 'give me example')).toBe(true)
+    expect(isExampleTurn('For example, a male stickleback attacks red objects.', 'ok')).toBe(true)
+    // the two false positives seen in production
+    expect(isExampleTurn('Top left, “Simple reflex” – the basic, automatic response like the knee-jerk reflex.', 'i dont understand this picture. what is it showing?')).toBe(false)
+    expect(isExampleTurn('Think of the nervous system as the body’s communication highway … like a tap on the knee.', 'quiz me')).toBe(false)
+  })
+  it('the note goes before a closing question, so the question stays last', () => {
+    const r = qualifyUncovered('A stickleback example.\n\n**What do you notice about the sign stimulus?**')
+    expect(r.text).toBe(`A stickleback example.\n\n${UNCOVERED_EXAMPLE_NOTE}\n\n**What do you notice about the sign stimulus?**`)
   })
 })
