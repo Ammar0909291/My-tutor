@@ -1,0 +1,75 @@
+{
+  "base": "https://my-tutor-flame.vercel.app",
+  "subject": "biology",
+  "slug": "bio.behav.innate-behavior-instinct",
+  "rows": [
+    {
+      "turn": 1,
+      "said": "give me example",
+      "shot": "/tmp/claude-0/-home-user-My-tutor/dc379fd1-b178-5c91-99c5-3718dddf5a6f/scratchpad/redrive3/shots-bio/01.png",
+      "provider": "groq",
+      "reply": "Let’s look at a classic example of an **innate, fixed‑action pattern**: the courtship dance of the male **great crested grebe** (a water bird). \n\nWhen a female grebe arrives at the nest, she displays a bright orange patch on her throat. That orange patch is the **sign stimulus** – a specific visual cue that the male’s nervous system is wired to recognize. As soon as the male sees this patch, a whole, stereotyped sequence is released: he inflates his chest, spreads his head feathers, performs a series of synchronized hops and splashes, and finally presents food to the female. Once started, the dance runs to completion even if the female moves away, showing that the behavior is largely unmodifiable once triggered. \n\nScientists have shown that this courtship routine is **heritable**: offspring of grebes inherit the same neural circuitry that responds to the orange throat patch, and natural selection has refined the pattern because it improves mating success. \n\nWhat part of this example stands out to you as the key trigger that starts the whole behavior?",
+      "replyRendered": false,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": true
+    },
+    {
+      "turn": 2,
+      "said": "test my understanding",
+      "shot": "/tmp/claude-0/-home-user-My-tutor/dc379fd1-b178-5c91-99c5-3718dddf5a6f/scratchpad/redrive3/shots-bio/02.png",
+      "provider": "groq",
+      "reply": "Looking at the diagram, you can see the orange‑colored label “Fixed action pattern” with the example “courtship display, nest‑building” on the right side.",
+      "replyRendered": true,
+      "card": "What is the specific role of a \"sign stimulus\" in a fixed action pattern?",
+      "cardOptions": [
+        "It is the reward the animal receives after completing the behaviour",
+        "It is a random event with no specific relationship to the behaviour",
+        "It is the specific trigger required to release the pre-programmed behavioural sequence",
+        "It is a signal the animal must be taught to recognise through experience"
+      ],
+      "cardQuestionRendered": true,
+      "cardOptionsVisible": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "figure": false
+    },
+    {
+      "turn": 3,
+      "said": "It is a signal the animal must be taught to recognise through experience",
+      "shot": "/tmp/claude-0/-home-user-My-tutor/dc379fd1-b178-5c91-99c5-3718dddf5a6f/scratchpad/redrive3/shots-bio/03.png",
+      "provider": "groq",
+      "reply": "Not quite — the answer is: It is the specific trigger required to release the pre-programmed behavioural sequence\n\nA sign stimulus is not something the animal learns; it is an innate cue that automatically activates the fixed action pattern. It does not require teaching or experience.\n\nSign stimuli are simple, species‑specific cues such as a specific shape, color, or movement that instantly trigger a pre‑programmed behavior. For example, a goose’s egg‑rolling response is released by the sight of an egg-shaped object, regardless of the bird’s prior experience.",
+      "replyRendered": true,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": false
+    },
+    {
+      "turn": 4,
+      "said": "give me a quiz",
+      "shot": "/tmp/claude-0/-home-user-My-tutor/dc379fd1-b178-5c91-99c5-3718dddf5a6f/scratchpad/redrive3/shots-bio/04.png",
+      "provider": "memory",
+      "reply": "Fixed action patterns (FAPs) are stereotyped (performed the same way across individuals of a species) and largely unmodifiable behavioural sequences — once triggered, a FAP typically runs to completion in its characteristic form, largely independent of ongoing feedback. Critically, a FAP is not spontaneous: it requires a specific sign stimulus (a specific, often simple environmental cue) to release it — the sequence is performed only when that specific trigger is present. Innate behaviour must be further distinguished from simple reflexes: a reflex is a direct, typically single-muscle-group stimulus-response (like the knee-jerk reflex) — simple, immediate, minimal neural processing. A fixed action pattern is substantially more complex, coordinated, and multi-step (like an elaborate courtship display or nest-building sequence) — many more coordinated movements over an extended time, though still triggered by a specific sign stimulus and still largely stereotyped once initiated. Innate behaviour also has a genetic basis: it is a heritable trait shaped by natural selection over evolutionary time, exactly as physical structures are — a FAP that reliably improves survival or reproduction can be favoured by selection and become a stable, species-typical trait.",
+      "replyRendered": true,
+      "card": "A student says \"a reflex and a fixed action pattern are basically the same thing — both are just automatic innate behaviours.\" What is the best response?",
+      "cardOptions": [
+        "No, that is wrong",
+        "Yes, that is correct"
+      ],
+      "cardQuestionRendered": true,
+      "cardOptionsVisible": [
+        true,
+        true
+      ],
+      "figure": false
+    }
+  ]
+}

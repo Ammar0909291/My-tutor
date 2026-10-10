@@ -11,10 +11,10 @@
 - P1: 12
 - P2: 85
 - P3: 53
-- Status (after the 2026-10-10 live re-drive; DEPLOYED = live, not yet production-verified; totals = 150 entries):
-  - PARTIALLY FIXED: 76
-  - FIXED: 40
-  - PRODUCTION-VERIFIED: 20
+- Status (after the 2026-10-10 final closure campaign, cf79346/76c2edd; DEPLOYED = live, not yet production-verified; OPEN = not fixed; totals = 150 entries):
+  - PARTIALLY FIXED: 75
+  - FIXED: 38
+  - PRODUCTION-VERIFIED: 23
   - DEPLOYED: 11
   - NOT REPRODUCED: 2
   - DEFERRED: 1
@@ -804,8 +804,8 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (96 occurrences in 48 lessons): #134 (A8) t8; #59 (A4) t2; #117 (A7) t7; #68 (A4) t13; #109 (A6) t3; #143 (A8) t2; #110 (A6) t18/t12; #31 (A2) tt15,t21,t30/t15/t21/t26/t30; #130 (A7) tt13,t14,t18/t13/t18; #15 (A1) t2; #71 (A4) t6/t17/t21; #164 (A9) tt11,t16,t20/t11/t16/t20; #146 (A8) t2/t18; #73 (A4) t8; #114 (A6) t5; #147 (A8) tt11,t20/t11/t20; #181 (A10) t14/t16; #183 (A10) t2/t21; #30 (A2) t9; #32 (A2) t12/t19; #34 (A2) t2; #40 (A3) t10; #41 (A3) t10/t24; #42 (A3) t10/t16; #55 (A3) t6; #58 (A4) t10; #61 (A4) t6/t22; #62 (A4) t11; #63 (A4) t10; #64 (A4) t3/t17; #65 (A4) t19/t20/t24; #81 (A5) t5; #93 (A5) t6/t18; #96 (A6) t7; #99 (A6) t3/t19; #108 (A6) t13/t15; #112 (A6) t4; #113 (A6) t9/t15; #118 (A7) t14; #121 (A7) t16/t18; #125 (A7) t19/t21/t25; #127 (A7) t2/t15/t18; #136 (A8) t6/t21; #137 (A8) t9/t23; #154 (A9) t11/t19; #159 (A9) t5; #161 (A9) t2; #168 (A9) t2
 - Notes on occurrences: #134 t8: "i dont understand this picture" — no figure in the lesson; tutor answers with a baton analogy and never says there is no picture · #59 t2: "i dont understand this picture" at t2 although the first figure appears only at t5; tutor replies with a recipe analogy · #117 t7: "i dont understand this picture" — lesson has no figure; tutor answers with a landlord/deposit analogy · #68 t13: picture asked, no figure on lesson · #109 t3: "i dont understand this picture" answered with a balloon analogy before any figure was shown (figure first appeared t11) · #143 t2: picture asked, no figure; "let's set it aside" + toy-car analogy · #110 t18: picture asked, no figure on lesson · #31 tt15,t21,t30: "i dont understand this picture" three times, no figure on lesson
 - Related defect: —
-- Status: FIXED
-- Fix: 440b55c — when the learner asks about the figure and none is on screen, sentences treating "the picture" as present are removed and the reply opens "There is no picture in this lesson yet, so let me say it in words." (figureReference.ts answerFigureQuestionWithoutFigure). The PHYS-021 prompt rule (5b53ec8) shipped at 17:48 UTC, after this run. Test: src/tests/chemBatchEVisuals.test.ts. Verified by test only.
+- Status: PRODUCTION-VERIFIED — 2026-10-10 (cf79346 + 76c2edd)
+- Fix: 440b55c — when the learner asks about the figure and none is on screen, sentences treating "the picture" as present are removed and the reply opens "There is no picture in this lesson yet, so let me say it in words." (figureReference.ts answerFigureQuestionWithoutFigure). The PHYS-021 prompt rule (5b53ec8) shipped at 17:48 UTC, after this run. Test: src/tests/chemBatchEVisuals.test.ts. Verified by test only. **2026-10-10 final closure (cf79346, 76c2edd):** a picture question with no figure EVIDENCE (one in this reply, one the rendered-reality log records for this concept, or a photo sent with the camera button — never the held-figure session or server-only asset metadata) gets a deterministic reply: no picture is visible, how to send one, and the idea from authored text (figureReference.figureAvailableToLearner / noFigureAnswer; the gate runs after every fallback). Tests: src/tests/finalDefectClosure20261010.test.ts, src/tests/finalDefectClosureRoute20261010.test.ts. Production evidence 2026-10-10 on dpl_BV8uceAYfB4Pu99ahYcMcpAuQQTb (76c2edd; the alias later moved to dpl_Fa3c1weGTWstXRH9YbWPdGywWFym = 82e3e89, a QA-script-only commit, same app code), disposable qa-*@mytutor-qa.invalid accounts, all deleted (re-login refused): 10 of 10 no-figure picture questions answered honestly with authored teaching (rate-law, corrosion ×3, linear-equation ×3, verbs ×3); the real /learn page (Chromium, 390 px) shows the honest reply (docs/history/tutor-max-final-closure-2026-10-10.md). Separate, NOT closed: when a figure WAS shown, an imagined description phrased as an analogy can still pass (see LIVE_REDRIVE_2026-10-10.md, finding A-2).
 
 ### CHEM-037 — ΔG° for K = 4.2×10⁶ stated as "−37 kJ/mol" (−RT ln K at 298 K = −37.8 kJ/mol)
 
@@ -1266,8 +1266,8 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (4 occurrences in 3 lessons): #99 (A6) t18; #7 (A1) t17; #27 (A2) t11/t14
 - Notes on occurrences: #99 t18: "quiz me" answered with a prose recap, no card · #7 t17: reply to a learner message: "You\x27ve built a solid understanding of using mole ratios, so let\x27s test the reasoning behind it." — no question follows · #27 t11: "next question please" -> "…let’s apply what you’ve learned to decide which description fits the molecule you just built." (no question) · #27 t14: "quiz me" -> "Let\x27s pause Covalent Bonding here for now" at c3/p1 (needs p2)
 - Related defect: —
-- Status: PARTIALLY FIXED
-- Fix: 5fad26c, e09efe5 — production redrive 2026-10-06: "quiz me" got a card in 9 of 9 lessons (0 quiz-me turns without a card); one reply (#79) said "Let's pause the quiz… when you feel ready… a short multiple‑choice quiz" beside the card — fix e09efe5 is in the repo but NOT deployed (Vercel account blocked; see CHEM-021). Kept PARTIALLY FIXED: a quiz-me turn still depends on a card being available. **2026-10-07 pass (2350ff6):** With only authored cards served, "quiz me" when every authored card has been used is told so ("You have answered every practice question I have on …") instead of being promised a question.
+- Status: PRODUCTION-VERIFIED — 2026-10-10 (cf79346 + 76c2edd)
+- Fix: 5fad26c, e09efe5 — production redrive 2026-10-06: "quiz me" got a card in 9 of 9 lessons (0 quiz-me turns without a card); one reply (#79) said "Let's pause the quiz… when you feel ready… a short multiple‑choice quiz" beside the card — fix e09efe5 is in the repo but NOT deployed (Vercel account blocked; see CHEM-021). Kept PARTIALLY FIXED: a quiz-me turn still depends on a card being available. **2026-10-07 pass (2350ff6):** With only authored cards served, "quiz me" when every authored card has been used is told so ("You have answered every practice question I have on …") instead of being promised a question. **2026-10-10 final closure:** an explicit quiz request ("quiz me", "ask me a question", "test my understanding", "give me a quiz") opens the gate in any phase and outranks the mastery-check reservation (logged `quiz-request-spends-reserved-card` with what is left for the check; credit rules unchanged); with no new card the reply says why first (quizRequest.ts). Production evidence 2026-10-10 on dpl_BV8uceAYfB4Pu99ahYcMcpAuQQTb (76c2edd; the alias later moved to dpl_Fa3c1weGTWstXRH9YbWPdGywWFym = 82e3e89, a QA-script-only commit, same app code), disposable qa-*@mytutor-qa.invalid accounts, all deleted (re-login refused): 56 explicit quiz requests in 8 lessons across 5 subjects — 53 authored cards (every stem found in src/lib/teaching/assets/*), 3 honest no-new-card lines, 0 worked examples passed off as the quiz; the real /learn page shows the Quick Check card and grades a tap by the authored key.
 
 ### CHEM-062 — Lead–acid anode half-reaction is wrong/unbalanced: "Pb(s) → PbSO₄(s) + 2e⁻ + SO₄²⁻"
 
@@ -2296,8 +2296,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Plays along with a non-existent figure and gives a misleading analogy for acid–base neutralisation.
 - Reproducibility: Observed once (#68 t13).
 - Related defect: —
-- Status: FIXED
-- Fix: 440b55c — same no-figure answer as CHEM-036. The backwards bathtub analogy itself is model output and is not checked. Test: src/tests/chemBatchEVisuals.test.ts.
+- Status: PRODUCTION-VERIFIED — 2026-10-10 (cf79346 + 76c2edd), no-figure answer only
+- Fix: 440b55c — same no-figure answer as CHEM-036. The backwards bathtub analogy itself is model output and is not checked. Test: src/tests/chemBatchEVisuals.test.ts. **2026-10-10 final closure:** same evidence gate and deterministic no-figure reply as CHEM-036, production-verified the same way. The backwards bathtub analogy is model prose: the grounded prose check (groundedProseCheck.ts) now checks example/analogy replies against the concept's KG line and authored assets, but a claim no source covers is only removed when the checker doubts it — it is not guaranteed.
 
 ### CHEM-118 — "Too many words" simplification of the alkali-metal/water reaction invents hydride (H⁻) formation
 

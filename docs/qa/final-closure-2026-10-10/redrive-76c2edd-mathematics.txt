@@ -1,0 +1,174 @@
+
+=== order 184 math.alg.linear-equation-1var ===
+[open provider=groq fig=none flags=-]
+**Linear Equation in One Variable**  
+
+In this lesson we’ll see how an equation like \(ax + b = c\) (with \(a \neq 0\)) works, and by the end you’ll be able to solve it for the unknown \(x\).
+
+Imagine a kitchen balance scale. On the left pan you place a bag of oranges, and on the right pan you put a known weight \(c\) plus a small extra weight \(b\). The scale balances when the total weight on each side is the same.  
+
+Now picture that you don’t know how many oranges are in the bag, but you do know each orange weighs the same amount, say \(a\) units. The balance tells you:
+
+\[
+\text{(number of oranges)} \times a \;+\; b \;=\; c
+\]
+
+In plain words, a **linear equation in one variable** is a statement that two expressions are equal, where the unknown (the variable) appears only to the first power and is multiplied by a constant, then possibly shifted by another constant.
+
+The key words are:
+- **variable** – the unknown quantity we’re looking for (here \(x\))
+- **coefficient** – the number that multiplies the variable (here \(a\))
+- **constant term** – a number added or subtracted (here \(b\) or \(c\))
+
+When everything is written in the standard form, it looks like:
+
+\[
+a x + b = c
+\]
+
+where \(a\) is not zero, so the equation has exactly one solution.
+
+🧐 **What do you notice about the two sides of the balance scale?**
+[learner] What is this picture showing?
+[tutor provider=groq fig=none card=none flags=-]
+There is no picture in this lesson yet, so I can't tell you what one shows. If you have a picture from somewhere else, send it with the camera button and I'll look at it. Here is the idea in words:
+
+Solve 3x + 5 = 20 step by step. Goal: get x alone. Step 1 — the +5 is in the way, so undo it with its inverse: subtract 5 from BOTH sides. Left: 3x + 5 − 5 = 3x. Right: 20 − 5 = 15. Now 3x = 15. Step 2 — x is multiplied by 3, so undo with the inverse: divide BOTH sides by 3. x = 5. Notice the order: constant first, coefficient second. If you divide by 3 first you get x + 5/3 = 20/3 — still true, but now everything is fractions. Subtracting the constant first keeps the arithmetic clean. Step 3 — verify: 3(5) + 5 = 15 + 5 = 20. ✓
+[learner] quiz me
+[tutor provider=gate fig=none card="To solve 3x = 12, which single step finishes it?" ["Subtract 3 from both sides","Multiply both sides by 3","Divide both sides by 3 — the inverse of "] corpus=mathematicsSeedAssets.ts flags=-]
+Here's a question — take your time with it.
+[learner] Subtract 3 from both sides
+[tutor provider=groq fig=none card="Solve x/4 = 3." ["x = 7","x = −1","x = 3/4","x = 12"] corpus=mathematicsDepthAlgebraAssets.ts flags=-]
+Not quite — the answer is: Divide both sides by 3 — the inverse of multiplying by 3
+
+Subtracting 3 does not undo the multiplication of x by 3. The coefficient 3 must be removed by an inverse operation, which is division, not subtraction.
+
+When a variable is multiplied by a number, solve the equation by dividing both sides by that number. This reverses the multiplication and isolates the variable. For any equation of the form ax = b, the solution is x = b / a.
+
+Quick check. Think it through before you choose.
+[learner] ok
+[tutor provider=groq fig=none card="Solve x/4 = 3." ["x = 7","x = −1","x = 3/4","x = 12"] corpus=mathematicsDepthAlgebraAssets.ts flags=-]
+Quick check. Think it through before you choose.
+[learner] give me example
+[tutor provider=groq fig=none card=none flags=-]
+Let’s solve a specific linear equation together:
+
+**Equation:** \(4x + 7 = 31\) (“four x plus seven equals thirty‑one”).
+
+1. **First step – keep the balance:** 
+ To get the term with \(x\) alone, we remove the constant \(7\) from the left side. 
+ We do the same to the right side: subtract \(7\) from both sides. 
+
+ \[
+ 4x + 7 - 7 = 31 - 7
+ \]
+
+ This simplifies to 
+
+ \[
+ 4x = 24
+ \]
+
+2. **Second step – isolate the variable:** 
+ The coefficient of \(x\) is \(4\). We divide both sides by \(4\) to keep the equation balanced.
+
+ \[
+ \frac{4x}{4} = \frac{24}{4}
+ \]
+
+ Giving 
+
+ \[
+ x = 6
+ \]
+
+3. **Check the solution:** 
+ Put \(x = 6\) back into the original equation:
+
+ \[
+ 4(6) + 7 = 24 + 7 = 31
+ \]
+
+ Both sides are equal, so the solution is correct.
+
+**Question:** Why do we subtract the constant \(7\) before we divide by the coefficient \(4\) instead of dividing first? 
+
+(Think about how the size of the numbers you work with changes.)
+[learner] i dont understand this picture. what is it showing?
+[tutor provider=groq fig=none card=none flags=-]
+There is no picture in this lesson yet, so I can't tell you what one shows. If you have a picture from somewhere else, send it with the camera button and I'll look at it. Here is the idea in words:
+
+In this lesson on Linear Equation in One Variable we will look at an equation of the form ax + b = c with a ≠ 0 and has a unique solution x = (c − b)/a.
+[learner] ask me a question
+[tutor provider=gate fig=none card="Solve: 4x + 7 = 31. What is x?" ["x = 6","x = 24","x = 9.5"] corpus=authoredSeedAssets.ts flags=-]
+Here's a question — take your time with it.
+[learner] x = 9.5
+[tutor provider=groq fig=none card=none flags=-]
+Not quite — the answer is: x = 6 — subtract 7 from both sides (4x = 24), then divide by 4
+
+You added 7 to both sides instead of subtracting it. This makes the equation 4x = 38, which is not true. The correct step is to subtract 7, giving 4x = 24.
+
+After moving a term, keep its sign correct. A positive number moved across the equals sign becomes negative, and a negative number becomes positive. Then finish solving by dividing by the coefficient of the variable.
+[learner] test my understanding
+[tutor provider=gate fig=none card="Solve 2(x − 1) = 10." ["x = 5.5","x = 9","x = 6","x = 4"] corpus=mathematicsDepthAlgebraAssets.ts flags=-]
+One to try, on Linear Equation in One Variable. There's no rush.
+[learner] quiz me
+[tutor provider=groq fig=none card="Solve 2(x − 1) = 10." ["x = 5.5","x = 9","x = 6","x = 4"] corpus=mathematicsDepthAlgebraAssets.ts flags=-]
+This is the question you have not answered yet — choose an answer below and I will mark it.
+
+Let me check your thinking with this.
+[learner] x = 5.5
+[tutor provider=groq fig=none card=none flags=-]
+Not quite — the answer is: x = 6
+
+You divided 10 by 2 but forgot to add the 1 after isolating x. The equation 2(x‑1)=10 gives x‑1=5, so x=6.
+
+When solving equations, first undo the multiplication by dividing both sides, then undo the subtraction by adding the same number to both sides. Always check your answer by substituting it back into the original equation.
+[learner] show me a diagram
+[tutor provider=groq fig=none card=none flags=-]
+I don't have a picture for this one, so I'll explain it in words.
+
+Each arrow shows the same operation (first dividing by 2, then adding 1) applied to both sides, so the equation stays balanced.
+[learner] i dont understand this picture. what is it showing?
+[tutor provider=groq fig=none card=none flags=-]
+There is no picture in this lesson yet, so I can't tell you what one shows. If you have a picture from somewhere else, send it with the camera button and I'll look at it. Here is the idea in words:
+
+In this lesson on Linear Equation in One Variable we will look at an equation of the form ax + b = c with a ≠ 0 and has a unique solution x = (c − b)/a.
+[learner] explain simpler
+[tutor provider=groq fig=none card=none flags=-]
+Think of the equation like two bank accounts that must always have the same total amount of money. 
+Suppose one account shows **2 × x + 5 dollars** and the other shows **19 dollars**. The “= ” sign means the balances are equal right now. 
+
+If you decide to withdraw 5 dollars from both accounts, the equality stays true: 
+
+- Left side: 2 × x + 5 – 5 = 2 × x 
+- Right side: 19 – 5 = 14 
+
+Now the accounts read **2 × x = 14**. To make the left side just “x”, you divide both accounts by 2 (the same operation on both sides): 
+
+- Left side: (2 × x) ÷ 2 = x 
+- Right side: 14 ÷ 2 = 7 
+
+Now the balances are **x = 7**, so the unknown amount x must be 7 dollars. The key idea is that whatever you do to one side, you must do to the other, just like making the same deposit or withdrawal in both accounts keeps them equal.
+
+**What do you notice about the balances after each step?**
+[learner] give me a quiz
+[tutor provider=gate fig=none card="A student solving 5x − 3 = 12 writes \"5x = 12 − 3 = 9\" as their first step. What went wrong?" ["The −3 must be undone by adding 3 to bot","Nothing — terms change sign when they cr"] corpus=authoredSeedAssets.ts flags=twoOption]
+Quick check on Linear Equation in One Variable. Think it through before you choose.
+[learner] The −3 must be undone by adding 3 to both sides: 5x = 15
+[tutor provider=groq fig=none card=none flags=-]
+That's right.
+
+The -3 must be removed from the left side by adding 3 to both sides. This gives 5x = 15, which is the correct next step.
+
+After obtaining 5x = 15, finish the solution by dividing both sides by 5. This isolates x and yields x = 3, the solution to the original equation.
+[learner] quiz me
+[tutor provider=memory fig=none card="Solve: 4x + 7 = 31. What is x?" ["x = 9.5","x = 6","x = 24"] corpus=authoredSeedAssets.ts flags=repeatAnswered]
+You have seen this question before in this lesson — here it is once more.
+
+A linear equation like 3x + 5 = 20 is a balance scale that is currently level: whatever is on the left weighs exactly the same as whatever is on the right. Solving means finding what x must weigh — and the one rule is that anything you do to one pan, you must do identically to the other, or the scale tips and the equation stops being true. Take 5 off the left? Take 5 off the right too: 3x = 15. Split the left pan into 3 equal parts? Split the right the same way: x = 5. Check by putting 5 back in the original: 3(5) + 5 = 20. It balances — that substitution check is how YOU know the answer is right without asking anyone.
+[learner] quiz me
+[tutor provider=groq fig=none card="Solve: 4x + 7 = 31. What is x?" ["x = 9.5","x = 6","x = 24"] corpus=authoredSeedAssets.ts flags=repeatAnswered]
+This is the question you have not answered yet — choose an answer below and I will mark it.
+
+Now that the constant term is gone, the next move is to isolate the variable itself. Since the term 5x means “5 times x,” we undo the multiplication by doing the opposite operation on both sides: divide each side by 5. This gives x = 15 ÷ 5, which simplifies to x = 3. The equation is balanced at every step because we always perform the same operation on both sides, preserving equality. When you substitute x = 3 back into the original equation, both sides match, confirming the solution.

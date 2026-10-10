@@ -55,6 +55,13 @@ Providers over 399 learner turns: groq 413 replies (incl. openings), memory 7, g
 
 ## Seen live, not fixed in this pass
 
+> **Reconciled 2026-10-10 (final closure campaign, below).** These three behaviours were listed here as open while
+> the ledgers carried no OPEN entry: CHEM-036/CHEM-117 read FIXED and CHEM-061 PARTIALLY FIXED, and BIO-024 PARTIALLY
+> FIXED, although the re-drive had just seen each of them live. Their statuses are now set from production evidence
+> (section "Final defect closure" below): CHEM-036, CHEM-117, CHEM-061 → PRODUCTION-VERIFIED; BIO-024 → OPEN. The text
+> below is kept as it was recorded.
+
+
 - **Picture question with no figure on screen** — 3 of 18 chemistry lessons (`chem.kinet.rate-law`,
   `chem.elect.corrosion`, `chem.org.arrow-pushing`): "I'm sorry you can't see the picture, so let me describe what it
   normally shows …" followed by an imagined figure. Mathematics answered the same message correctly ("There is no
@@ -69,3 +76,58 @@ Providers over 399 learner turns: groq 413 replies (incl. openings), memory 7, g
 - **Harness note** — the `unkeyedCard` flag is a false positive: the client payload never carries `assetId` (it is
   stripped with the answer key by design); authored-ness was checked against the corpus instead. `noSteps` mostly
   flagged inline "1. … 2. …" steps written on one line.
+
+## Final defect closure — 2026-10-10 (cf79346, 76c2edd)
+
+Campaign: "TUTOR MAX FINAL DEFECT CLOSURE" then "FINAL PRODUCTION CLOSURE". Disposable `qa-*@mytutor-qa.invalid`
+accounts only, one per run, every one deleted afterwards with re-login refused (11 accounts in total). No real account
+and no password was used. Transcripts and the real /learn page screenshots are in `docs/qa/final-closure-2026-10-10/`;
+full record in `docs/history/tutor-max-final-closure-2026-10-10.md`.
+
+| Deploy | Commit | Role |
+|---|---|---|
+| dpl_9WRpYHVYG7wiAfoWfpKkS5CNcjYe | cf79346 | Issues A, B, C first deploy; re-driven (chemistry 5 lessons / 89 turns, biology 2 / 34) |
+| dpl_BV8uceAYfB4Pu99ahYcMcpAuQQTb | 76c2edd | follow-up fixes; final re-drive (8 lessons / 141 turns, 5 subjects) + /learn browser runs |
+| dpl_Fa3c1weGTWstXRH9YbWPdGywWFym | 82e3e89 | QA-harness one-line change only (same app code); took the alias at ~19:32 UTC, served the last 3 arrow-pushing turns |
+
+### Results on 76c2edd
+
+- **A — picture question, no figure:** 10 of 10 answered "There is no picture in this lesson yet … send it with the
+  camera button … Here is the idea in words:" + authored teaching (rate-law ×1, corrosion ×3, linear-equation ×3,
+  verbs ×3). Server log for every one: `[figure-evidence] figure-question available:false` → `no-figure-evidence-reply-replaced`.
+  Real /learn page: `corrosion-01-no-figure-honest.png`.
+- **A — figure genuinely shown:** 14 picture questions after a real figure (physics 3, biology 6, rate-law 2,
+  arrow-pushing 3); 13 were answered about that figure, 1 was not (finding A-2 below). The cf79346 failure (rate-law: "I'm sorry you can't see a picture
+  right now … a typical illustration … would show") is fixed: the reply is rebuilt from what the renderer drew
+  (`figure-reply-grounded-to-shown-figure`, title "Determining Rate Law and Order via Initial-Rate Method").
+  **Finding A-2, OPEN:** in the same lesson a later picture question got an imagined description phrased as an analogy
+  ("the horizontal line shows … the vertical line shows … In the sketch …"), and a "show me a diagram" turn with no
+  figure re-sent said "The boxes represent the concentrations of reactants A and B; the arrow shows …". The gate only
+  rewrites a reply that denies the figure or describes a "typical" one; an imagined description that does neither
+  passes. Proposed fix (not implemented): check every figure-pointing sentence against the figure's recorded caption
+  and labels, not only replies to a picture question.
+- **B — explicit quiz requests:** 56 requests ("quiz me", "ask me a question", "test my understanding", "give me a quiz")
+  in 8 lessons: 53 authored cards (stems all found in `src/lib/teaching/assets/*`), 3 honest no-new-card lines, 0 silent.
+  The repeated request re-offers the unanswered card with "This is the question you have not answered yet …"; a card
+  coming back once under the owner's re-ask rule says "You have seen this question before in this lesson — here it is
+  once more." Strict grading unchanged (wrong taps graded by the authored key: `corrosion-03-graded-tap.png`).
+  Allocation is logged on every reserved spend (`quiz-request-spends-reserved-card`); 4 of the 6 spends logged left
+  `leftForMasteryCheck` 0 or 1 — mastery then relies on the existing one re-ask of a question answered without credit
+  (owner option (c), 2026-09-27). This is the cost of the campaign's product decision and is reported, not hidden.
+- **C — grounded prose check:** production logs 19:15–19:36 UTC: 124 model-written replies logged, 34 checked against
+  sources, 1 changed (an English sentence removed — "All three parts together tell us *when* the reviewing happened …" —
+  probably a false positive), 90 out of scope, 0 timeouts/errors in that window (earlier, on cf79346: 1 timeout,
+  1 unparseable, 1 error, each keeping the reply; 1 removal — "Sunlight provides eight photons that excite chlorophyll
+  in Photosystem II." — borderline). **Finding C-1, OPEN (BIO-024):** "give me example" produced a great crested grebe
+  courtship with an orange throat patch as the female's sign stimulus (`biology-01-give-me-example-grebe.png`); no
+  source covers it and the checker passed it. The checker does not establish truth; it only removes or corrects what
+  the lesson's own sources contradict or what it doubts.
+- **Cross-subject:** physics `phys.meas.units` (formerly "quiz me" without a card) — 7 of 7 requests carded; maths
+  `math.alg.linear-equation-1var` and English `eng.grammar.verbs` — every request carded, no-figure picture questions
+  honest. One degraded (provider outage) turn in physics, card and figure kept.
+- **Harness:** `unkeyedCard` replaced by `cardNotInCorpus` (0 in all runs). `quizSilent` fired 3× — all on the honest
+  "every new practice question" line the harness regex did not yet know (fixed in 82e3e89). `picDescribe` fired 2× on
+  cf79346 for arrow-pushing's own teaching about curved arrows (false positive).
+- **Browser:** this Chromium build rejects the sandbox egress CA (ERR_CERT_AUTHORITY_INVALID even with the CA in NSS),
+  so `scripts/qa/learnPageEvidence.ts` lets Playwright fetch app requests on the Node side (`route.fetch()`, certificate
+  verified there) and hands them to the real page; no TLS check is disabled.

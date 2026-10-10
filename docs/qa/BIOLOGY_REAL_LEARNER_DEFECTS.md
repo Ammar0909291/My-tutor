@@ -11,12 +11,13 @@
 - P1: 4
 - P2: 22
 - P3: 16
-- Status (after the 2026-10-10 live re-drive; DEPLOYED = live, not yet production-verified; totals = 42 entries):
-  - PARTIALLY FIXED: 23
+- Status (after the 2026-10-10 final closure campaign, cf79346/76c2edd; DEPLOYED = live, not yet production-verified; OPEN = not fixed; totals = 42 entries):
+  - PARTIALLY FIXED: 22
   - FIXED: 13
   - DEPLOYED: 3
   - NOT REPRODUCED: 2
   - PRODUCTION-VERIFIED: 1
+  - OPEN: 1
 <!-- SUMMARY:END -->
 
 **Fix pass (2026-10-06, commits c4a6afc, 62f7821; plus the shared chemistry fixes d5397b1/dee8428):** each entry's **Status** / **Fix:** line names its commit, cause and evidence. Live re-drive on production (6f6ccaa), two disposable accounts (deleted afterwards), one tabId per lesson, lessons #1, 3, 21, 22, 41, 61, 82, 101, 102, 120, 121, 141, 161, 181 — 14 lessons, 181 turns:
@@ -555,8 +556,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Misstates the textbook sign-stimulus example the lesson is built on.
 - Reproducibility: Observed once (#183 t11).
 - Related defect: —
-- Status: PARTIALLY FIXED — DEPLOYED 2026-10-09 (a9ef53d); not production-verified
-- Fix: The stickleback example is model-written (no authored text gives the female the red belly); no deterministic check of biology facts in model prose exists. **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts. This item is mainly a plain-prose claim, so it is checked only when the same reply also carries numbers, equations or a worked example; otherwise it remains model output (scope of the owner decision).
+- Status: OPEN — grounded prose check deployed 2026-10-10 (cf79346), the error class is not caught in production
+- Fix: The stickleback example is model-written (no authored text gives the female the red belly); no deterministic check of biology facts in model prose exists. **2026-10-07 pass (2350ff6):** Check pass (owner decision 2026-10-07, `factCheckPass.ts`): a reply or lesson opening that carries numbers, equations or a worked example is recomputed by a second model call and replaced only by a corrected copy of itself (the copy must keep at least 60 % of the original's words, any failure keeps the original); `WORKED_EXAMPLE_RULES` are in the chat and opening prompts. Lowers the rate, does not guarantee it: the checker is itself a model, and a reply with no number, equation or worked example is not checked. Test: src/tests/ownerDecisions20261007.test.ts. This item is mainly a plain-prose claim, so it is checked only when the same reply also carries numbers, equations or a worked example; otherwise it remains model output (scope of the owner decision). **2026-10-10 final closure campaign:** a grounded prose check now runs on model-written English replies that make concrete-case claims (examples, analogies, "give me an example"): a second model returns per-sentence verdicts against the concept's KG line and ACTIVE authored explanations/probes; a correction is applied only when its quote is verbatim in those sources, a doubted unhedged uncovered claim is removed (groundedProseCheck.ts; tests in finalDefectClosure20261010.test.ts, route behaviour in finalDefectClosureRoute20261010.test.ts). No authored source mentions sticklebacks, so a correction is impossible by design. Production evidence 2026-10-10 on dpl_BV8uceAYfB4Pu99ahYcMcpAuQQTb (76c2edd; the alias later moved to dpl_Fa3c1weGTWstXRH9YbWPdGywWFym = 82e3e89, a QA-script-only commit, same app code), disposable qa-*@mytutor-qa.invalid accounts, all deleted (re-login refused): "give me example" on this concept produced a sandpiper example (API run) and a great crested grebe example (/learn page) — the stickleback error did not recur, but the grebe example's sign stimulus (an orange throat patch shown by the female) is unsupported by any source and the checker passed it. Not fixed; see LIVE_REDRIVE_2026-10-10.md finding C-1.
 
 ### BIO-025 — Classification example: "Kingdom Animalia – about 30 million described animal species"
 
