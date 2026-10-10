@@ -14,11 +14,10 @@
 - Status (after the 2026-10-10 live re-drive; DEPLOYED = live, not yet production-verified; totals = 150 entries):
   - PARTIALLY FIXED: 76
   - FIXED: 40
-  - PRODUCTION-VERIFIED: 19
+  - PRODUCTION-VERIFIED: 20
   - DEPLOYED: 11
   - NOT REPRODUCED: 2
   - DEFERRED: 1
-  - FIXED IN REPO: 1
 <!-- SUMMARY:END -->
 
 **Fix pass (2026-10-05/06, batches A–F, commits dc88764 … dee8428):** each entry's **Status** / **Fix:** line names its commit, cause and evidence. Live re-check on production, disposable accounts deleted afterwards, `scripts/qa/chemDefectRedrive.ts` + `scripts/qa/sessionShareProbe.ts`:
@@ -1659,7 +1658,7 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (3 occurrences in 3 lessons): #3 (A1) tt6-t9; #152 (A9) tt1,t15; #138 (A8) tt7
 - Notes on occurrences: #3 tt6-t9: "Identify mixture type (homogeneous or" quoted several times · #152 tt1,t15: "Williamson synthesis: alkyl halide +", "Cleavage with HX: ether + HX → alkyl" · #138 tt7: card options "Preparation of Alkynes via" / "Acidic Character: Protonation of the" (truncated figure labels)
 - Related defect: —
-- Status: FIXED IN REPO — second cause found live 2026-10-10, not yet re-verified
+- Status: PRODUCTION-VERIFIED — live re-drive 2026-10-10 on 864e3fd (docs/qa/LIVE_REDRIVE_2026-10-10.md)
 - Fix: **2026-10-07 pass (2350ff6):** Cause: `conceptText.extractSteps` clamped every process step to 60 characters ("Check for trapped zeros between"). Steps are now kept whole up to 140; a step longer than a box title gets a short title with an ellipsis and its full wording in the box note (`archetypes.processFlow`). The figure-label card options came from model-written cards, which are no longer served (owner decision 2026-10-07). Test: src/tests/remainingDefectFixes20261007.test.ts. **Live re-drive 2026-10-10:** the approved sig-figs figure stores the full labels; visualSemantics.ts cut each label to 40 characters when describing the figure to the tutor, which read out "Check for trapped zeros between". Labels are now described whole (60); a label that genuinely stops mid-phrase is refused on every re-validating tier (truncated-step-label). Test: remainingDefectFixes20261007.test.ts.
 
 ### CHEM-083 — Process-flow figure used for a list of unrelated reactions ("Key Reactions Involving Ethers"): arrows imply a sequence Williamson → cleavage → epoxide opening → "diethyl ether as common solvent"

@@ -14,6 +14,7 @@ Server-side behaviour was read from the production runtime logs (Vercel) of the 
 |---|---|---|---|
 | Main pass — chemistry 18, biology 3, physics 3, mathematics 3, English 1 | `a9ef53d` → `2cda53c` (docs-only differences) | 28 | 360 |
 | Verification of the first fixes — `phys.meas.units`, `math.alg.linear-equation-1var`, `chem.found.significant-figures` | `2139722` | 3 | 39 |
+| Verification of the second fixes — `math.alg.linear-equation-1var`, `math.found.set`, `chem.found.significant-figures`, `chem.pblock.trends` | `864e3fd` | 4 | 52 |
 
 Providers over 399 learner turns: groq 413 replies (incl. openings), memory 7, gate 10, **degraded 0** — the outage path
 (CHEM-101/107, MATH-006, BIO-008) was not exercised.
@@ -42,13 +43,15 @@ Providers over 399 learner turns: groq 413 replies (incl. openings), memory 7, g
 3. **"explain simpler" with a card on screen → only a card lead-in** (`math.alg.linear-equation-1var`). Logs: the model
    replied "I see you got x = 5.5" plus two counter-questions; `[assembled-attach]` removed the questions beside the
    card. The teaching floor now runs on that turn and treats comfort-plus-questions as a stub. First fix in `2139722`
-   did not cover it (re-drive on `2139722` still showed it); completed in the next commit — not yet re-verified live.
+   did not cover it (re-drive on `2139722` still showed it); completed in `864e3fd` and **verified live**: "explain
+   simpler" with a card on screen got a real simpler explanation in all 4 re-driven lessons.
 4. **CHEM-082 still visible**: the approved sig-figs figure stores the FULL labels ("Check for trapped zeros between
    non-zero digits"; read-only query); `visualSemantics.ts` cut each label to 40 characters when describing the figure
    to the tutor, which then read out "Check for trapped zeros between". Now described whole (60). A process-flow label
-   that genuinely stops mid-phrase is also refused on every re-validating tier. Not yet re-verified live.
+   that genuinely stops mid-phrase is also refused on every re-validating tier. `864e3fd`, **verified live**: the tutor
+   read out "Check for trapped zeros between non-zero digits"; 0 cut labels.
 5. **Drift false positive on hyphenated anchors** (`chem.pblock.trends`): "Inert-pair" did not match "inert‑pair"
-   (non-breaking hyphen). Anchors now split on hyphens. Not yet re-verified live.
+   (non-breaking hyphen). Anchors now split on hyphens. `864e3fd`, **verified live**: 0 drift flags in the re-driven lesson.
 
 ## Seen live, not fixed in this pass
 
