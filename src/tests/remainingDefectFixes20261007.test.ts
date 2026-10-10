@@ -218,3 +218,30 @@ describe('"explain simpler" with a card on screen (re-drive 2026-10-10)', () => 
     expect(ROUTE).toMatch(/if \(\(!servedMcq \|\| adaptationAskedWithCard\) && !serveLessonComplete/)
   })
 })
+
+describe('CHEM-082 the figure description carries whole step labels', () => {
+  it('the approved sig-figs flow is described with its full labels', async () => {
+    const { describeVisualPayload } = await import('@/lib/teaching/visual/visualSemantics')
+    const d = JSON.stringify(describeVisualPayload({ renderer: 'spec', visualSpec: { type: 'process_flow', title: 'Determining Significant Figures in a Measurement', steps: [
+      { title: 'Identify all non-zero digits' }, { title: 'Check for trapped zeros between non-zero digits' },
+      { title: 'Evaluate leading zeros as never significant' }, { title: 'Determine trailing zeros based on decimal presence' },
+    ] } } as never))
+    expect(d).toContain('Check for trapped zeros between non-zero digits')
+    expect(d).toContain('Determine trailing zeros based on decimal presence')
+  })
+})
+
+describe('comfort plus counter-questions is a stub (re-drive 2026-10-10)', () => {
+  it('"I see you got x = 5.5." followed only by questions teaches nothing', async () => {
+    const { isStubReply } = await import('@/lib/teaching/replyHygiene')
+    expect(isStubReply('I see you got \\(x = 5.5\\). Could you walk me through the steps you took to reach that number? How did you handle the “ 2 ” and the “ – 1 ” in the equation?')).toBe(true)
+    expect(isStubReply('Subtract 5 from both sides to get 3x = 15, then divide by 3. What do you get for x?')).toBe(false)
+  })
+})
+
+describe('drift anchors split hyphenated words (re-drive 2026-10-10, chem.pblock.trends)', () => {
+  it('"inert‑pair" with a non-breaking hyphen matches the anchor "Inert-pair"', () => {
+    const a = conceptAnchors('Trends Across p-Block', 'Inert-pair effect; metallic character; anomalous first-member behaviour; diagonal relationships.')
+    expect(mentionsConcept('Alright, let’s check how the inert‑pair effect shows up in oxidation states for Group 14.', a)).toBe(true)
+  })
+})

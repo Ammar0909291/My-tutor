@@ -39,7 +39,7 @@ function stem(w: string): string {
 
 /** The concept's anchor stems from its title and syllabus line. */
 export function conceptAnchors(title: string, description: string | null | undefined): string[] {
-  const words = `${title} ${description ?? ''}`.match(/[A-Za-z][A-Za-z'-]{3,}/g) ?? []
+  const words = `${title} ${description ?? ''}`.match(/[A-Za-z]{4,}/g) ?? []
   const out = new Set<string>()
   for (const raw of words) {
     const w = raw.toLowerCase().replace(/'s$/, '')
@@ -59,7 +59,7 @@ export function isContinuationMessage(message: string): boolean {
 /** Does the reply name anything the lesson is about? */
 export function mentionsConcept(reply: string, anchors: string[]): boolean {
   if (anchors.length === 0) return true
-  const words = (reply ?? '').match(/[A-Za-z][A-Za-z'-]{3,}/g) ?? []
+  const words = (reply ?? '').match(/[A-Za-z]{4,}/g) ?? []
   const stems = new Set(words.map((w) => stem(w.replace(/'s$/i, ''))))
   return anchors.some((a) => stems.has(a))
 }

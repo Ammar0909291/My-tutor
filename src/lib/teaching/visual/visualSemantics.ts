@@ -372,7 +372,11 @@ function fromSpec(spec: VisualSpec): VisualSemantics {
     }
     case 'process_flow': {
       caption = caption ?? clamp(spec.title, 60)
-      for (const step of spec.steps.slice(0, MAX_STEPS)) elements.push(`a step box labelled "${clamp(step.title, 40)}"`)
+      // CHEM-082 (re-drive 2026-10-10): clamp(…, 40) cut the stored label
+      // "Check for trapped zeros between non-zero digits" to "Check for trapped
+      // zeros between", and the tutor read that out as the box's text. A step
+      // title is at most 60 characters (visualSpec.ts), so it is described whole.
+      for (const step of spec.steps.slice(0, MAX_STEPS)) elements.push(`a step box labelled "${clamp(step.title, 60)}"`)
       elements.push('arrows connecting the steps in order')
       break
     }

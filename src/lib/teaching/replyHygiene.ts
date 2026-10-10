@@ -192,8 +192,13 @@ export function isStubReply(body: string): boolean {
   const sentences = t.split(/\n+/).flatMap(sentencesOf).map((s) => s.trim()).filter((s) => words(s) > 0)
   if (sentences.length === 0) return true
   // Only questions (a request answered with a counter-question, MATH-005).
-  if (sentences.every((s) => /\?\s*["'’”)]*$/.test(s))) return true
-  return sentences.every(teachesNothing)
+  const isQuestion = (s: string) => /\?\s*["'’”)]*$/.test(s)
+  if (sentences.every(isQuestion)) return true
+  // Re-drive 2026-10-10 (math.alg.linear-equation-1var): "explain simpler" →
+  // "I see you got x = 5.5. Could you walk me through the steps…? How did you
+  // handle the 2 and the −1…?" — comfort plus counter-questions teaches nothing
+  // either; the questions were then removed beside the card, leaving a lead-in.
+  return sentences.every((s) => isQuestion(s) || teachesNothing(s))
 }
 
 /**
