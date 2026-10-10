@@ -11,12 +11,14 @@
 - P1: 12
 - P2: 85
 - P3: 53
-- Status (after the 2026-10-09 deploy of a9ef53d and the 2026-10-10 card convergence; DEPLOYED = live, NOT production-verified; totals = 150 entries):
+- Status (after the 2026-10-10 live re-drive; DEPLOYED = live, not yet production-verified; totals = 150 entries):
   - PARTIALLY FIXED: 76
-  - FIXED: 45
-  - DEPLOYED: 26
+  - FIXED: 40
+  - PRODUCTION-VERIFIED: 19
+  - DEPLOYED: 11
   - NOT REPRODUCED: 2
   - DEFERRED: 1
+  - FIXED IN REPO: 1
 <!-- SUMMARY:END -->
 
 **Fix pass (2026-10-05/06, batches A–F, commits dc88764 … dee8428):** each entry's **Status** / **Fix:** line names its commit, cause and evidence. Live re-check on production, disposable accounts deleted afterwards, `scripts/qa/chemDefectRedrive.ts` + `scripts/qa/sessionShareProbe.ts`:
@@ -362,8 +364,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Visual does not carry the distinction the lesson is about. (Judged from the scene payload; not viewed in a browser.)
 - Reproducibility: Observed in the payload of #1.
 - Related defect: —
-- Status: DEPLOYED — live on production since 2026-10-09 (deploy of a9ef53d, READY, aliased my-tutor-flame.vercel.app); not production-verified
-- Fix: **2026-10-07 pass (2350ff6):** chem.found.matter now owns a curated figure — three columns, Element / Compound / Mixture, worded from the EB entry — so the live-generated two-spheres scene is no longer reached (`conceptSceneParams.ts`). Test: src/tests/remainingDefectFixes20261007.test.ts.
+- Status: PRODUCTION-VERIFIED — live re-drive 2026-10-10 (docs/qa/LIVE_REDRIVE_2026-10-10.md)
+- Fix: **2026-10-07 pass (2350ff6):** chem.found.matter now owns a curated figure — three columns, Element / Compound / Mixture, worded from the EB entry — so the live-generated two-spheres scene is no longer reached (`conceptSceneParams.ts`). Test: src/tests/remainingDefectFixes20261007.test.ts. **Live re-drive 2026-10-10:** chem.found.matter served the curated "Elements, Compounds and Mixtures" figure.
 
 ### CHEM-014 — Sulfur dioxide called "a yellow gas" (SO₂ is colourless — tutor said "colourless" two turns earlier)
 
@@ -650,8 +652,8 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (108 occurrences in 72 lessons): #20 (A2) t4; #58 (A4) t7/t5; #3 (A1) t5; #171 (A10) t3; #143 (A8) t4; #161 (A9) tt3, t10/t3/t10; #180 (A10) t4; #30 (A2) t15; #70 (A4) t3; #130 (A7) tt6, t9/t6/t9; #71 (A4) tt3, t18/t3/t18; #72 (A4) t11; #167 (A9) t4; #185 (A10) t4; #35 (A2) t4; #55 (A3) tt5, t9/t5/t9; #37 (A2) t10/t14; #5 (A1) t5; #6 (A1) t9; #8 (A1) t8; #11 (A1) t5; #12 (A1) t12; #14 (A1) t5; #19 (A1) t4; #172 (A10) t4; #175 (A10) t15; #176 (A10) t8; #179 (A10) t9; #182 (A10) t21; #184 (A10) t4; #186 (A10) t3; #22 (A2) t5; #50 (A3) t4; #56 (A3) t12; #59 (A4) t5; #62 (A4) t14; #65 (A4) t8/t23; #68 (A4) t3; #73 (A4) t13; #75 (A4) t4; #79 (A5) t3; #80 (A5) t5; #81 (A5) t12/t16; #82 (A5) t6; #84 (A5) t8; #85 (A5) t4; #89 (A5) t10; #91 (A5) t15; #92 (A5) t3; #94 (A5) t3/t7/t8; #97 (A6) t3; #99 (A6) t5; #102 (A6) t3/t7; #107 (A6) t3; #111 (A6) t17; #114 (A6) t8; #117 (A7) t5; #118 (A7) t5; #119 (A7) t4/t7; #121 (A7) t4; #123 (A7) t4; #125 (A7) t6; #138 (A8) t3/t8/t10; #139 (A8) t3; #142 (A8) t4; #144 (A8) t16; #149 (A8) t3/t12; #152 (A9) t5; #155 (A9) t4; #164 (A9) t8; #165 (A9) t4; #168 (A9) t6
 - Notes on occurrences: #20 t4: correct answer to "Which element comes first?" gets no verdict, only unrelated text + raw markup (CHEM-032) + next card · #58 t7: wrong answer: 90-word paragraph, no "Not quite", then new card · #3 t5: wrong answer ("mixed nuts") -> "How did you decide that a bowl of mixed nuts is a homogeneous mixture?" (no verdict); "that was actually a trick option I put in there!" at t7 · #171 t3: wrong answer to "Which label indicates the site of the ester bonds…?" -> only "You selected “Saturated fatty acid” as the label for the ester-bond site." + next card · #143 t4: "Haloarene" for "What type of haloalkane is CH₃CH₂CH₂Cl?" gets no verdict; reply is a haloarene lecture · #161 tt3, t10: answer picked on stilbene / styrene card gets no verdict; tutor re-explains the Wittig reaction · #180 t4: "Deposition and Acid Rain Formation" for "Which step creates ozone?" gets no verdict; reply is an acid-rain story · #30 t15: "Spherical" on "Which shape best describes an s orbital?" -> "Great, you mentioned spherical" + probing question; no verdict
 - Related defect: —
-- Status: DEPLOYED — live on production since 2026-10-09 (deploy of a9ef53d, READY, aliased my-tutor-flame.vercel.app); not production-verified
-- Fix: d5397b1 — on an authored key the verdict now leads: a correction or confirmation that only appeared later gets "Not quite." or the confirmation in front (wrongAnswerCorrection.ts, answerConfirmation.ts). Not fixed: the observed cards (Tyndall beam, "Which element comes first?") are model-written; an unauthored key stays verdict-free by design, an owner decision. Test: src/tests/chemVerdictFirst.test.ts. **2026-10-07 pass (2350ff6):** Only authored cards are asked (owner decision 2026-10-07): a model-written card is never served (`decideModelProbe` with `authoredCardsOnly: AUTHORED_CARDS_ONLY`), the prompt forbids writing cards or lettered options (`mcq.AUTHORED_ONLY_INSTRUCTION`), and an A)/B)/C) question written into prose is removed with the question that introduced it (`proseMcqGuard.stripProseMultipleChoice`). Every card a learner can answer carries a reviewed key and gets a verdict. Test: src/tests/ownerDecisions20261007.test.ts.
+- Status: PRODUCTION-VERIFIED — live re-drive 2026-10-10 (docs/qa/LIVE_REDRIVE_2026-10-10.md)
+- Fix: d5397b1 — on an authored key the verdict now leads: a correction or confirmation that only appeared later gets "Not quite." or the confirmation in front (wrongAnswerCorrection.ts, answerConfirmation.ts). Not fixed: the observed cards (Tyndall beam, "Which element comes first?") are model-written; an unauthored key stays verdict-free by design, an owner decision. Test: src/tests/chemVerdictFirst.test.ts. **2026-10-07 pass (2350ff6):** Only authored cards are asked (owner decision 2026-10-07): a model-written card is never served (`decideModelProbe` with `authoredCardsOnly: AUTHORED_CARDS_ONLY`), the prompt forbids writing cards or lettered options (`mcq.AUTHORED_ONLY_INSTRUCTION`), and an A)/B)/C) question written into prose is removed with the question that introduced it (`proseMcqGuard.stripProseMultipleChoice`). Every card a learner can answer carries a reviewed key and gets a verdict. Test: src/tests/ownerDecisions20261007.test.ts. **Live re-drive 2026-10-10:** 70 distinct cards served in 31 lessons, all authored (stems found in the corpus); 0 replies with lettered A)/B)/C) options in 399 turns.
 
 ### CHEM-029 — Card has two defensible answers: "Which mixture shows a visible Tyndall beam?" lists a sand suspension (~5 µm) as a distractor
 
@@ -668,8 +670,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Not a fair question for a learner who reasons correctly.
 - Reproducibility: Observed once (#97).
 - Related defect: —
-- Status: DEPLOYED — live on production since 2026-10-09 (deploy of a9ef53d, READY, aliased my-tutor-flame.vercel.app); not production-verified
-- Fix: **2026-10-07 pass (2350ff6):** Only authored cards are asked (owner decision 2026-10-07): a model-written card is never served (`decideModelProbe` with `authoredCardsOnly: AUTHORED_CARDS_ONLY`), the prompt forbids writing cards or lettered options (`mcq.AUTHORED_ONLY_INSTRUCTION`), and an A)/B)/C) question written into prose is removed with the question that introduced it (`proseMcqGuard.stripProseMultipleChoice`). Every card a learner can answer carries a reviewed key and gets a verdict. Test: src/tests/ownerDecisions20261007.test.ts.
+- Status: PRODUCTION-VERIFIED — live re-drive 2026-10-10 (docs/qa/LIVE_REDRIVE_2026-10-10.md)
+- Fix: **2026-10-07 pass (2350ff6):** Only authored cards are asked (owner decision 2026-10-07): a model-written card is never served (`decideModelProbe` with `authoredCardsOnly: AUTHORED_CARDS_ONLY`), the prompt forbids writing cards or lettered options (`mcq.AUTHORED_ONLY_INSTRUCTION`), and an A)/B)/C) question written into prose is removed with the question that introduced it (`proseMcqGuard.stripProseMultipleChoice`). Every card a learner can answer carries a reviewed key and gets a verdict. Test: src/tests/ownerDecisions20261007.test.ts. **Live re-drive 2026-10-10:** 70 distinct cards served in 31 lessons, all authored (stems found in the corpus); 0 replies with lettered A)/B)/C) options in 399 turns.
 
 ### CHEM-030 — Contradictory trend explanation in one lesson: "smaller atoms catch an electron more easily" vs a card stating chlorine has a more negative electron affinity than fluorine
 
@@ -704,8 +706,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Feedback to something the learner did not say; confusing for a weak learner; content out of order.
 - Reproducibility: Observed once (#20 t1); similar "reply to a question that was never asked" pattern at #78 t1 (CHEM-024) and #20 t11.
 - Related defect: —
-- Status: DEPLOYED — live on production since 2026-10-09 (deploy of a9ef53d, READY, aliased my-tutor-flame.vercel.app); not production-verified
-- Fix: **2026-10-07 pass (2350ff6):** A plain acknowledgement ("ok", "next", "got it") now counts as a turn that graded nothing, so a leading verdict is dropped — also one behind the learner's name ("test2, that's correct—…") (`replyHygiene.isPlainAcknowledgement`, `dropVerdictOnUngradedRequest`). "yes"/"sure" are left alone: they can answer a yes/no question. Test: src/tests/remainingDefectFixes20261007.test.ts.
+- Status: PRODUCTION-VERIFIED — live re-drive 2026-10-10 (docs/qa/LIVE_REDRIVE_2026-10-10.md)
+- Fix: **2026-10-07 pass (2350ff6):** A plain acknowledgement ("ok", "next", "got it") now counts as a turn that graded nothing, so a leading verdict is dropped — also one behind the learner's name ("test2, that's correct—…") (`replyHygiene.isPlainAcknowledgement`, `dropVerdictOnUngradedRequest`). "yes"/"sure" are left alone: they can answer a yes/no question. Test: src/tests/remainingDefectFixes20261007.test.ts. **Live re-drive 2026-10-10:** 0 verdicts on a plain "ok" in 31 lessons.
 
 ### CHEM-032 — Raw internal answer-key markup shown to the learner: <!" a="s-block" b="p-block" c="d-block" d="f-block" correct="B"-->
 
@@ -763,8 +765,8 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (22 occurrences in 18 lessons): #40 (A3) tt16/t16; #59 (A4) tt5/t5; #11 (A1) t1/t6; #14 (A1) t16; #177 (A10) t4; #183 (A10) t1; #20 (A2) t1/t8; #21 (A2) t15; #22 (A2) t8; #23 (A2) t15; #29 (A2) t1; #32 (A2) t1; #51 (A3) t15; #60 (A4) t3; #90 (A5) t15; #91 (A5) t13; #92 (A5) t1; #166 (A9) t1
 - Notes on occurrences: #40 tt16: "Take a look at the labelled figure beside this message — it shows Gas Laws." · #59 tt5: "…the labelled figure beside this message — it shows Equilibrium Constants Kc and Kp. Study it while I explain." (generic caption; figure title is "Calculating Kc, Kp and Using ICE Tables")
 - Related defect: —
-- Status: DEPLOYED — live on production since 2026-10-09 (deploy of a9ef53d, READY, aliased my-tutor-flame.vercel.app); not production-verified
-- Fix: **2026-10-07 pass (2350ff6):** A domain figure is introduced as "it shows {figure title}, background for this topic rather than a picture of it" when it has a title; the bare "general illustration" sentence remains only for an untitled figure. Test: src/tests/ownerDecisions20261007.test.ts.
+- Status: PRODUCTION-VERIFIED — live re-drive 2026-10-10 (docs/qa/LIVE_REDRIVE_2026-10-10.md)
+- Fix: **2026-10-07 pass (2350ff6):** A domain figure is introduced as "it shows {figure title}, background for this topic rather than a picture of it" when it has a title; the bare "general illustration" sentence remains only for an untitled figure. Test: src/tests/ownerDecisions20261007.test.ts. **Live re-drive 2026-10-10:** 0 "general illustration" captions in 31 lessons.
 
 ### CHEM-035 — The learner's current card answer is not graded: the reply addresses an earlier answer ("I see you chose \"No\"…") instead
 
@@ -783,8 +785,8 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (4 occurrences in 4 lessons): #152 (A9) t6; #161 (A9) t13; #33 (A2) tt9, t10; #38 (A2) t7
 - Notes on occurrences: #152 t6: verdict "That's right – the Williamson ether synthesis needs a primary alkyl halide" arrives a turn late, in reply to "too many words" · #161 t13: "next question please" answered with "That’s right – the secondary carbon… migrates" (stale previous answer) · #33 tt9, t10: "show me step by step" and "give me example with numbers" answered with "That’s right—because the electrons are free to move…" (verdict on an earlier answer) · #38 t7: "give me example with numbers" answered "Great – you’re right that when the pressure is doubled the volume halves" (verdict on previous card)
 - Related defect: —
-- Status: DEPLOYED — live on production since 2026-10-09 (deploy of a9ef53d, READY, aliased my-tutor-flame.vercel.app); not production-verified
-- Fix: 0b3b0fb — the reproduced shape (#58: a tap on a model-written, unkeyed card answered "I see you chose “No.”…" about a card two turns earlier) now gets the neutral assembled reply (neutralAssembly.ts misattributesChoice, logged liveMisattributes). Not fixed: the four "late verdict" occurrences where the model repeats a verdict on the previous answer in reply to "too many words". Test: src/tests/chem035StaleAnswer.test.ts. **2026-10-07 pass (2350ff6):** Only authored cards are asked (owner decision 2026-10-07): a model-written card is never served (`decideModelProbe` with `authoredCardsOnly: AUTHORED_CARDS_ONLY`), the prompt forbids writing cards or lettered options (`mcq.AUTHORED_ONLY_INSTRUCTION`), and an A)/B)/C) question written into prose is removed with the question that introduced it (`proseMcqGuard.stripProseMultipleChoice`). Every card a learner can answer carries a reviewed key and gets a verdict. Test: src/tests/ownerDecisions20261007.test.ts.
+- Status: PRODUCTION-VERIFIED — live re-drive 2026-10-10 (docs/qa/LIVE_REDRIVE_2026-10-10.md)
+- Fix: 0b3b0fb — the reproduced shape (#58: a tap on a model-written, unkeyed card answered "I see you chose “No.”…" about a card two turns earlier) now gets the neutral assembled reply (neutralAssembly.ts misattributesChoice, logged liveMisattributes). Not fixed: the four "late verdict" occurrences where the model repeats a verdict on the previous answer in reply to "too many words". Test: src/tests/chem035StaleAnswer.test.ts. **2026-10-07 pass (2350ff6):** Only authored cards are asked (owner decision 2026-10-07): a model-written card is never served (`decideModelProbe` with `authoredCardsOnly: AUTHORED_CARDS_ONLY`), the prompt forbids writing cards or lettered options (`mcq.AUTHORED_ONLY_INSTRUCTION`), and an A)/B)/C) question written into prose is removed with the question that introduced it (`proseMcqGuard.stripProseMultipleChoice`). Every card a learner can answer carries a reviewed key and gets a verdict. Test: src/tests/ownerDecisions20261007.test.ts. **Live re-drive 2026-10-10:** 70 distinct cards served in 31 lessons, all authored (stems found in the corpus); 0 replies with lettered A)/B)/C) options in 399 turns.
 
 ### CHEM-036 — Learner says "i dont understand this picture" in a lesson that has no figure and the tutor plays along ("We'll circle back to the picture in a moment")
 
@@ -933,8 +935,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Trivial item inflates mastery evidence. Similar: #1 t14 ("Oxygen gas is written O₂. Is one particle … the same thing as one oxygen ELEMENT?").
 - Reproducibility: Observed in #98 and #1.
 - Related defect: —
-- Status: FIXED — production row converged 2026-10-10 (read-back verified)
-- Fix: **2026-10-07 pass (2350ff6):** Authored card corrected in the repo (`src/lib/teaching/assets/chemistryDepthSeedAssets.ts`). The production row is not yet updated: the asset bootstrap is create-only, so the edit reaches production only through an owner-approved convergence write (`scripts/assets/converge-probe-edits.ts --apply`, backup first, precedent docs/qa/backups/probe-converge-2026-10-06.json). The mayonnaise stem asks for the emulsion type instead of stating it. **2026-10-10:** converged to production (owner-approved write; the 7 production rows matched the old corpus exactly before the write; read-back after the write matches the corpus 7/7 on stem, choices and key; backup docs/qa/backups/probe-converge-2026-10-10.json).
+- Status: PRODUCTION-VERIFIED — live re-drive 2026-10-10 (docs/qa/LIVE_REDRIVE_2026-10-10.md)
+- Fix: **2026-10-07 pass (2350ff6):** Authored card corrected in the repo (`src/lib/teaching/assets/chemistryDepthSeedAssets.ts`). The production row is not yet updated: the asset bootstrap is create-only, so the edit reaches production only through an owner-approved convergence write (`scripts/assets/converge-probe-edits.ts --apply`, backup first, precedent docs/qa/backups/probe-converge-2026-10-06.json). The mayonnaise stem asks for the emulsion type instead of stating it. **2026-10-10:** converged to production (owner-approved write; the 7 production rows matched the old corpus exactly before the write; read-back after the write matches the corpus 7/7 on stem, choices and key; backup docs/qa/backups/probe-converge-2026-10-10.json). **Live re-drive 2026-10-10:** the corrected card was served in production with the new text.
 
 ### CHEM-044 — First teaching reply after "ok" is an untaught multi-part calculation problem / a question about an attempt the learner never made
 
@@ -1007,8 +1009,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Misspelt scientist name in the opening of a lesson.
 - Reproducibility: Observed once (#40).
 - Related defect: —
-- Status: DEPLOYED — live on production since 2026-10-09 (deploy of a9ef53d, READY, aliased my-tutor-flame.vercel.app); not production-verified
-- Fix: **2026-10-07 pass (2350ff6):** A word of the lesson's own KG title dropped from the reply ("van Waals" for "van der Waals") is put back, in lesson openings and chat replies (`replyHygiene.restoreTitleWords`). Test: src/tests/remainingDefectFixes20261007.test.ts.
+- Status: PRODUCTION-VERIFIED — live re-drive 2026-10-10 (docs/qa/LIVE_REDRIVE_2026-10-10.md)
+- Fix: **2026-10-07 pass (2350ff6):** A word of the lesson's own KG title dropped from the reply ("van Waals" for "van der Waals") is put back, in lesson openings and chat replies (`replyHygiene.restoreTitleWords`). Test: src/tests/remainingDefectFixes20261007.test.ts. **Live re-drive 2026-10-10:** chem.state.real-gases wrote "van der Waals"; 0 occurrences of "van Waals".
 
 ### CHEM-048 — Wrong answer ("Na⁺ is oxidised at the anode") is never corrected; the reply instead describes an aqueous chloralkali cell "on your screen" while the screen shows molten NaCl
 
@@ -1025,8 +1027,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: A wrong chemistry answer on a basic oxidation/reduction point goes uncorrected and the text contradicts the figure.
 - Reproducibility: Observed once (#79 t3); the no-verdict pattern is CHEM-028.
 - Related defect: —
-- Status: DEPLOYED — live on production since 2026-10-09 (deploy of a9ef53d, READY, aliased my-tutor-flame.vercel.app); not production-verified
-- Fix: Production redrive 2026-10-06: about 13 of 35 distinct cards were model-written (no authored key; several are figure-label cards). Whether unkeyed AI-written cards are graded is an OWNER DECISION (also PHYS-020); not changed. **2026-10-07 pass (2350ff6):** Only authored cards are asked (owner decision 2026-10-07): a model-written card is never served (`decideModelProbe` with `authoredCardsOnly: AUTHORED_CARDS_ONLY`), the prompt forbids writing cards or lettered options (`mcq.AUTHORED_ONLY_INSTRUCTION`), and an A)/B)/C) question written into prose is removed with the question that introduced it (`proseMcqGuard.stripProseMultipleChoice`). Every card a learner can answer carries a reviewed key and gets a verdict. Test: src/tests/ownerDecisions20261007.test.ts.
+- Status: PRODUCTION-VERIFIED — live re-drive 2026-10-10 (docs/qa/LIVE_REDRIVE_2026-10-10.md)
+- Fix: Production redrive 2026-10-06: about 13 of 35 distinct cards were model-written (no authored key; several are figure-label cards). Whether unkeyed AI-written cards are graded is an OWNER DECISION (also PHYS-020); not changed. **2026-10-07 pass (2350ff6):** Only authored cards are asked (owner decision 2026-10-07): a model-written card is never served (`decideModelProbe` with `authoredCardsOnly: AUTHORED_CARDS_ONLY`), the prompt forbids writing cards or lettered options (`mcq.AUTHORED_ONLY_INSTRUCTION`), and an A)/B)/C) question written into prose is removed with the question that introduced it (`proseMcqGuard.stripProseMultipleChoice`). Every card a learner can answer carries a reviewed key and gets a verdict. Test: src/tests/ownerDecisions20261007.test.ts. **Live re-drive 2026-10-10:** 70 distinct cards served in 31 lessons, all authored (stems found in the corpus); 0 replies with lettered A)/B)/C) options in 399 turns.
 
 ### CHEM-049 — "Show me step by step" for the 193 000 C answer silently changes the problem from 1 mol Cu (n = 2) to 2 mol Na (n = 1)
 
@@ -1171,8 +1173,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Learner cannot tell which label is meant.
 - Reproducibility: Observed once (#171 t2).
 - Related defect: —
-- Status: DEPLOYED — live on production since 2026-10-09 (deploy of a9ef53d, READY, aliased my-tutor-flame.vercel.app); not production-verified
-- Fix: **2026-10-07 pass (2350ff6):** Only authored cards are asked (owner decision 2026-10-07): a model-written card is never served (`decideModelProbe` with `authoredCardsOnly: AUTHORED_CARDS_ONLY`), the prompt forbids writing cards or lettered options (`mcq.AUTHORED_ONLY_INSTRUCTION`), and an A)/B)/C) question written into prose is removed with the question that introduced it (`proseMcqGuard.stripProseMultipleChoice`). Every card a learner can answer carries a reviewed key and gets a verdict. Test: src/tests/ownerDecisions20261007.test.ts.
+- Status: PRODUCTION-VERIFIED — live re-drive 2026-10-10 (docs/qa/LIVE_REDRIVE_2026-10-10.md)
+- Fix: **2026-10-07 pass (2350ff6):** Only authored cards are asked (owner decision 2026-10-07): a model-written card is never served (`decideModelProbe` with `authoredCardsOnly: AUTHORED_CARDS_ONLY`), the prompt forbids writing cards or lettered options (`mcq.AUTHORED_ONLY_INSTRUCTION`), and an A)/B)/C) question written into prose is removed with the question that introduced it (`proseMcqGuard.stripProseMultipleChoice`). Every card a learner can answer carries a reviewed key and gets a verdict. Test: src/tests/ownerDecisions20261007.test.ts. **Live re-drive 2026-10-10:** 70 distinct cards served in 31 lessons, all authored (stems found in the corpus); 0 replies with lettered A)/B)/C) options in 399 turns.
 
 ### CHEM-057 — Analogy teaches a wrong picture of saponification: hydroxide is "a strong cleaning soap" and the triglyceride "melts in hot water" like butter with chocolate sticks
 
@@ -1377,8 +1379,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Question/format mismatch and answer leakage.
 - Reproducibility: Observed once (#4).
 - Related defect: —
-- Status: FIXED — production row converged 2026-10-10 (read-back verified)
-- Fix: **2026-10-07 pass (2350ff6):** Authored card corrected in the repo (`src/lib/teaching/assets/chemistrySeedAssets.ts`). The production row is not yet updated: the asset bootstrap is create-only, so the edit reaches production only through an owner-approved convergence write (`scripts/assets/converge-probe-edits.ts --apply`, backup first, precedent docs/qa/backups/probe-converge-2026-10-06.json). Stem "Convert 0.025 kg to milligrams." with 25,000 / 25 / 2,500 mg. **2026-10-10:** converged to production (owner-approved write; the 7 production rows matched the old corpus exactly before the write; read-back after the write matches the corpus 7/7 on stem, choices and key; backup docs/qa/backups/probe-converge-2026-10-10.json).
+- Status: PRODUCTION-VERIFIED — live re-drive 2026-10-10 (docs/qa/LIVE_REDRIVE_2026-10-10.md)
+- Fix: **2026-10-07 pass (2350ff6):** Authored card corrected in the repo (`src/lib/teaching/assets/chemistrySeedAssets.ts`). The production row is not yet updated: the asset bootstrap is create-only, so the edit reaches production only through an owner-approved convergence write (`scripts/assets/converge-probe-edits.ts --apply`, backup first, precedent docs/qa/backups/probe-converge-2026-10-06.json). Stem "Convert 0.025 kg to milligrams." with 25,000 / 25 / 2,500 mg. **2026-10-10:** converged to production (owner-approved write; the 7 production rows matched the old corpus exactly before the write; read-back after the write matches the corpus 7/7 on stem, choices and key; backup docs/qa/backups/probe-converge-2026-10-10.json). **Live re-drive 2026-10-10:** the corrected card was served in production with the new text.
 
 ### CHEM-068 — Ethanol vapour pressure at 20 °C given as 44 kPa (actual ≈ 5.9 kPa)
 
@@ -1431,8 +1433,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Stem/option mismatch; guessable.
 - Reproducibility: Observed once (#60 t7, t10).
 - Related defect: —
-- Status: FIXED — production row converged 2026-10-10 (read-back verified)
-- Fix: **2026-10-07 pass (2350ff6):** Authored card corrected in the repo (`src/lib/teaching/assets/chemistrySeedAssets.ts`). The production row is not yet updated: the asset bootstrap is create-only, so the edit reaches production only through an owner-approved convergence write (`scripts/assets/converge-probe-edits.ts --apply`, backup first, precedent docs/qa/backups/probe-converge-2026-10-06.json). Options are Decrease / Increase / Unaffected, matching the stem. **2026-10-10:** converged to production (owner-approved write; the 7 production rows matched the old corpus exactly before the write; read-back after the write matches the corpus 7/7 on stem, choices and key; backup docs/qa/backups/probe-converge-2026-10-10.json).
+- Status: PRODUCTION-VERIFIED — live re-drive 2026-10-10 (docs/qa/LIVE_REDRIVE_2026-10-10.md)
+- Fix: **2026-10-07 pass (2350ff6):** Authored card corrected in the repo (`src/lib/teaching/assets/chemistrySeedAssets.ts`). The production row is not yet updated: the asset bootstrap is create-only, so the edit reaches production only through an owner-approved convergence write (`scripts/assets/converge-probe-edits.ts --apply`, backup first, precedent docs/qa/backups/probe-converge-2026-10-06.json). Options are Decrease / Increase / Unaffected, matching the stem. **2026-10-10:** converged to production (owner-approved write; the 7 production rows matched the old corpus exactly before the write; read-back after the write matches the corpus 7/7 on stem, choices and key; backup docs/qa/backups/probe-converge-2026-10-10.json). **Live re-drive 2026-10-10:** the corrected card was served in production with the new text.
 
 ### CHEM-071 — Names duplicated in parentheses ("silicon tetrachloride (silicon tetrachloride)", "hydrogen chloride (hydrogen chloride)")
 
@@ -1467,8 +1469,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: The learner who picked the only grammatical-looking alternative is told "Not quite" and the lesson is then paused.
 - Reproducibility: Observed once (#118 t17).
 - Related defect: —
-- Status: FIXED — production row converged 2026-10-10 (read-back verified)
-- Fix: **2026-10-07 pass (2350ff6):** Authored card corrected in the repo (`src/lib/teaching/assets/chemistrySeedAssets.ts`). The production row is not yet updated: the asset bootstrap is create-only, so the edit reaches production only through an owner-approved convergence write (`scripts/assets/converge-probe-edits.ts --apply`, backup first, precedent docs/qa/backups/probe-converge-2026-10-06.json). New stem with three explained options. **2026-10-10:** converged to production (owner-approved write; the 7 production rows matched the old corpus exactly before the write; read-back after the write matches the corpus 7/7 on stem, choices and key; backup docs/qa/backups/probe-converge-2026-10-10.json).
+- Status: PRODUCTION-VERIFIED — live re-drive 2026-10-10 (docs/qa/LIVE_REDRIVE_2026-10-10.md)
+- Fix: **2026-10-07 pass (2350ff6):** Authored card corrected in the repo (`src/lib/teaching/assets/chemistrySeedAssets.ts`). The production row is not yet updated: the asset bootstrap is create-only, so the edit reaches production only through an owner-approved convergence write (`scripts/assets/converge-probe-edits.ts --apply`, backup first, precedent docs/qa/backups/probe-converge-2026-10-06.json). New stem with three explained options. **2026-10-10:** converged to production (owner-approved write; the 7 production rows matched the old corpus exactly before the write; read-back after the write matches the corpus 7/7 on stem, choices and key; backup docs/qa/backups/probe-converge-2026-10-10.json). **Live re-drive 2026-10-10:** the corrected card was served in production with the new text.
 
 ### CHEM-073 — Lesson "Trends Across p-Block" opens with SiCl₄ hydrolysis and never teaches radius / ionisation energy / electronegativity trends before testing them
 
@@ -1617,8 +1619,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Feedback is not about the question that was asked; the right answer is never stated.
 - Reproducibility: Observed once (#81 t16).
 - Related defect: —
-- Status: DEPLOYED — live on production since 2026-10-09 (deploy of a9ef53d, READY, aliased my-tutor-flame.vercel.app); not production-verified
-- Fix: **2026-10-07 pass (2350ff6):** Only authored cards are asked (owner decision 2026-10-07): a model-written card is never served (`decideModelProbe` with `authoredCardsOnly: AUTHORED_CARDS_ONLY`), the prompt forbids writing cards or lettered options (`mcq.AUTHORED_ONLY_INSTRUCTION`), and an A)/B)/C) question written into prose is removed with the question that introduced it (`proseMcqGuard.stripProseMultipleChoice`). Every card a learner can answer carries a reviewed key and gets a verdict. Test: src/tests/ownerDecisions20261007.test.ts.
+- Status: PRODUCTION-VERIFIED — live re-drive 2026-10-10 (docs/qa/LIVE_REDRIVE_2026-10-10.md)
+- Fix: **2026-10-07 pass (2350ff6):** Only authored cards are asked (owner decision 2026-10-07): a model-written card is never served (`decideModelProbe` with `authoredCardsOnly: AUTHORED_CARDS_ONLY`), the prompt forbids writing cards or lettered options (`mcq.AUTHORED_ONLY_INSTRUCTION`), and an A)/B)/C) question written into prose is removed with the question that introduced it (`proseMcqGuard.stripProseMultipleChoice`). Every card a learner can answer carries a reviewed key and gets a verdict. Test: src/tests/ownerDecisions20261007.test.ts. **Live re-drive 2026-10-10:** 70 distinct cards served in 31 lessons, all authored (stems found in the corpus); 0 replies with lettered A)/B)/C) options in 399 turns.
 
 ### CHEM-081 — Debatable item: "True or false: 'cathodic protection' is so called because it protects the cathode of the corrosion cell" — keyed False
 
@@ -1637,8 +1639,8 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (2 occurrences in 2 lessons): #84 (A5) t8; #65 (A4) t4
 - Notes on occurrences: #84 t8: wrong answer "3" to "if the concentration is 3 mol/L, what is the rate?" -> reply discusses 2 mol/L ("the vertical rate is 4, because 2 squared is 4"); the right answer (9) is never given · #65 t4: wrong answer "Neither ion" to "Which ion in sodium acetate will undergo hydrolysis?" -> "Exactly—when you dissolve table salt (NaCl)… neither the sodium ion nor the chloride ion reacts"; acetate is never named as the answer
 - Related defect: —
-- Status: FIXED — production row converged 2026-10-10 (read-back verified)
-- Fix: **2026-10-07 pass (2350ff6):** Authored card corrected in the repo (`src/lib/teaching/assets/chemistrySeedAssets.ts`). The production row is not yet updated: the asset bootstrap is create-only, so the edit reaches production only through an owner-approved convergence write (`scripts/assets/converge-probe-edits.ts --apply`, backup first, precedent docs/qa/backups/probe-converge-2026-10-06.json). One unambiguous true statement about which electrode the protected steel becomes. **2026-10-10:** converged to production (owner-approved write; the 7 production rows matched the old corpus exactly before the write; read-back after the write matches the corpus 7/7 on stem, choices and key; backup docs/qa/backups/probe-converge-2026-10-10.json).
+- Status: PRODUCTION-VERIFIED — live re-drive 2026-10-10 (docs/qa/LIVE_REDRIVE_2026-10-10.md)
+- Fix: **2026-10-07 pass (2350ff6):** Authored card corrected in the repo (`src/lib/teaching/assets/chemistrySeedAssets.ts`). The production row is not yet updated: the asset bootstrap is create-only, so the edit reaches production only through an owner-approved convergence write (`scripts/assets/converge-probe-edits.ts --apply`, backup first, precedent docs/qa/backups/probe-converge-2026-10-06.json). One unambiguous true statement about which electrode the protected steel becomes. **2026-10-10:** converged to production (owner-approved write; the 7 production rows matched the old corpus exactly before the write; read-back after the write matches the corpus 7/7 on stem, choices and key; backup docs/qa/backups/probe-converge-2026-10-10.json). **Live re-drive 2026-10-10:** the corrected card was served in production with the new text.
 
 ### CHEM-082 — Figure labels are quoted/cut mid-phrase in tutor text and card options ("Check for trapped zeros between", "Determine trailing zeros based on", "Identify mixture type (homogeneous or", "Williamson synthesis: alkyl halide +")
 
@@ -1657,8 +1659,8 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (3 occurrences in 3 lessons): #3 (A1) tt6-t9; #152 (A9) tt1,t15; #138 (A8) tt7
 - Notes on occurrences: #3 tt6-t9: "Identify mixture type (homogeneous or" quoted several times · #152 tt1,t15: "Williamson synthesis: alkyl halide +", "Cleavage with HX: ether + HX → alkyl" · #138 tt7: card options "Preparation of Alkynes via" / "Acidic Character: Protonation of the" (truncated figure labels)
 - Related defect: —
-- Status: DEPLOYED — live on production since 2026-10-09 (deploy of a9ef53d, READY, aliased my-tutor-flame.vercel.app); not production-verified
-- Fix: **2026-10-07 pass (2350ff6):** Cause: `conceptText.extractSteps` clamped every process step to 60 characters ("Check for trapped zeros between"). Steps are now kept whole up to 140; a step longer than a box title gets a short title with an ellipsis and its full wording in the box note (`archetypes.processFlow`). The figure-label card options came from model-written cards, which are no longer served (owner decision 2026-10-07). Test: src/tests/remainingDefectFixes20261007.test.ts.
+- Status: FIXED IN REPO — second cause found live 2026-10-10, not yet re-verified
+- Fix: **2026-10-07 pass (2350ff6):** Cause: `conceptText.extractSteps` clamped every process step to 60 characters ("Check for trapped zeros between"). Steps are now kept whole up to 140; a step longer than a box title gets a short title with an ellipsis and its full wording in the box note (`archetypes.processFlow`). The figure-label card options came from model-written cards, which are no longer served (owner decision 2026-10-07). Test: src/tests/remainingDefectFixes20261007.test.ts. **Live re-drive 2026-10-10:** the approved sig-figs figure stores the full labels; visualSemantics.ts cut each label to 40 characters when describing the figure to the tutor, which read out "Check for trapped zeros between". Labels are now described whole (60); a label that genuinely stops mid-phrase is refused on every re-validating tier (truncated-step-label). Test: remainingDefectFixes20261007.test.ts.
 
 ### CHEM-083 — Process-flow figure used for a list of unrelated reactions ("Key Reactions Involving Ethers"): arrows imply a sequence Williamson → cleavage → epoxide opening → "diethyl ether as common solvent"
 
@@ -1893,8 +1895,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Level jump and a typographic glitch; the visual does not match the introductory concept.
 - Reproducibility: Observed once (#26).
 - Related defect: —
-- Status: DEPLOYED — live on production since 2026-10-09 (deploy of a9ef53d, READY, aliased my-tutor-flame.vercel.app); not production-verified
-- Fix: **2026-10-07 pass (2350ff6):** chem.bond.ionic-bonding now owns a curated electron-transfer figure (Na 2,8,1 → electron transferred → Na⁺ / Cl⁻ → opposite charges attract), so the live-generated Born–Haber flow is no longer reached; the concept left the retired-figure register (`retired.ts`, 15 → 14 rows). Test: src/tests/remainingDefectFixes20261007.test.ts.
+- Status: PRODUCTION-VERIFIED — live re-drive 2026-10-10 (docs/qa/LIVE_REDRIVE_2026-10-10.md)
+- Fix: **2026-10-07 pass (2350ff6):** chem.bond.ionic-bonding now owns a curated electron-transfer figure (Na 2,8,1 → electron transferred → Na⁺ / Cl⁻ → opposite charges attract), so the live-generated Born–Haber flow is no longer reached; the concept left the retired-figure register (`retired.ts`, 15 → 14 rows). Test: src/tests/remainingDefectFixes20261007.test.ts. **Live re-drive 2026-10-10:** chem.bond.ionic-bonding served "Ionic Bonding: One Electron Moves from Na to Cl".
 
 ### CHEM-096 — Wrong answer marked correct: in [Co(NH₃)₄Cl₂]⁺ "chlorido" is said to be written before "ammine" ("alphabetical order")
 
@@ -2151,8 +2153,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Learner cannot know what is being asked; counts toward mastery.
 - Reproducibility: Observed once (#107 t2–t3).
 - Related defect: —
-- Status: DEPLOYED — live on production since 2026-10-09 (deploy of a9ef53d, READY, aliased my-tutor-flame.vercel.app); not production-verified
-- Fix: **2026-10-07 pass (2350ff6):** Only authored cards are asked (owner decision 2026-10-07): a model-written card is never served (`decideModelProbe` with `authoredCardsOnly: AUTHORED_CARDS_ONLY`), the prompt forbids writing cards or lettered options (`mcq.AUTHORED_ONLY_INSTRUCTION`), and an A)/B)/C) question written into prose is removed with the question that introduced it (`proseMcqGuard.stripProseMultipleChoice`). Every card a learner can answer carries a reviewed key and gets a verdict. Test: src/tests/ownerDecisions20261007.test.ts.
+- Status: PRODUCTION-VERIFIED — live re-drive 2026-10-10 (docs/qa/LIVE_REDRIVE_2026-10-10.md)
+- Fix: **2026-10-07 pass (2350ff6):** Only authored cards are asked (owner decision 2026-10-07): a model-written card is never served (`decideModelProbe` with `authoredCardsOnly: AUTHORED_CARDS_ONLY`), the prompt forbids writing cards or lettered options (`mcq.AUTHORED_ONLY_INSTRUCTION`), and an A)/B)/C) question written into prose is removed with the question that introduced it (`proseMcqGuard.stripProseMultipleChoice`). Every card a learner can answer carries a reviewed key and gets a verdict. Test: src/tests/ownerDecisions20261007.test.ts. **Live re-drive 2026-10-10:** 70 distinct cards served in 31 lessons, all authored (stems found in the corpus); 0 replies with lettered A)/B)/C) options in 399 turns.
 
 ### CHEM-110 — Ozone pre-equilibrium example is internally wrong: O₂ ⇌ 2 O called "bimolecular" with K = k₁/k₋₁ in M⁻¹ (K = [O]²/[O₂] has units M); no overall equation; rate-constant units do not match
 
@@ -2349,8 +2351,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Teaches wrong nomenclature; a careful learner cannot reason to the "right" option.
 - Reproducibility: Observed once (#161 t9, t10).
 - Related defect: —
-- Status: DEPLOYED — live on production since 2026-10-09 (deploy of a9ef53d, READY, aliased my-tutor-flame.vercel.app); not production-verified
-- Fix: **2026-10-07 pass (2350ff6):** Only authored cards are asked (owner decision 2026-10-07): a model-written card is never served (`decideModelProbe` with `authoredCardsOnly: AUTHORED_CARDS_ONLY`), the prompt forbids writing cards or lettered options (`mcq.AUTHORED_ONLY_INSTRUCTION`), and an A)/B)/C) question written into prose is removed with the question that introduced it (`proseMcqGuard.stripProseMultipleChoice`). Every card a learner can answer carries a reviewed key and gets a verdict. Test: src/tests/ownerDecisions20261007.test.ts.
+- Status: PRODUCTION-VERIFIED — live re-drive 2026-10-10 (docs/qa/LIVE_REDRIVE_2026-10-10.md)
+- Fix: **2026-10-07 pass (2350ff6):** Only authored cards are asked (owner decision 2026-10-07): a model-written card is never served (`decideModelProbe` with `authoredCardsOnly: AUTHORED_CARDS_ONLY`), the prompt forbids writing cards or lettered options (`mcq.AUTHORED_ONLY_INSTRUCTION`), and an A)/B)/C) question written into prose is removed with the question that introduced it (`proseMcqGuard.stripProseMultipleChoice`). Every card a learner can answer carries a reviewed key and gets a verdict. Test: src/tests/ownerDecisions20261007.test.ts. **Live re-drive 2026-10-10:** 70 distinct cards served in 31 lessons, all authored (stems found in the corpus); 0 replies with lettered A)/B)/C) options in 399 turns.
 
 ### CHEM-121 — O₂ worked example uses "ten valence electrons (five from each O)" and fills the N₂ configuration, giving bond order 3 for O₂; the same lesson elsewhere says O₂ has bond order 2 and two unpaired π* electrons
 
@@ -2601,8 +2603,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: A wrong answer is rewarded and the misconception (leaving group concentration in the rate law) is left standing.
 - Reproducibility: Observed once (#144 t16). Related: CHEM-075 (non-answers affirmed), CHEM-028 (no verdict).
 - Related defect: —
-- Status: DEPLOYED — live on production since 2026-10-09 (deploy of a9ef53d, READY, aliased my-tutor-flame.vercel.app); not production-verified
-- Fix: d5397b1 — the false praise ("That's a solid observation—you've picked out the chloride ion") is stripped on an unauthored-key grade (answerConfirmation.ts UNBACKED_PRAISE). Not fixed: the card was model-written, so its key is unverified and, by design, no verdict or correct answer is stated (route.ts correctForConfirmation). Stating verdicts from model-invented keys is an owner decision. Test: src/tests/chemBatchDTextShape.test.ts. **2026-10-07 pass (2350ff6):** Only authored cards are asked (owner decision 2026-10-07): a model-written card is never served (`decideModelProbe` with `authoredCardsOnly: AUTHORED_CARDS_ONLY`), the prompt forbids writing cards or lettered options (`mcq.AUTHORED_ONLY_INSTRUCTION`), and an A)/B)/C) question written into prose is removed with the question that introduced it (`proseMcqGuard.stripProseMultipleChoice`). Every card a learner can answer carries a reviewed key and gets a verdict. Test: src/tests/ownerDecisions20261007.test.ts.
+- Status: PRODUCTION-VERIFIED — live re-drive 2026-10-10 (docs/qa/LIVE_REDRIVE_2026-10-10.md)
+- Fix: d5397b1 — the false praise ("That's a solid observation—you've picked out the chloride ion") is stripped on an unauthored-key grade (answerConfirmation.ts UNBACKED_PRAISE). Not fixed: the card was model-written, so its key is unverified and, by design, no verdict or correct answer is stated (route.ts correctForConfirmation). Stating verdicts from model-invented keys is an owner decision. Test: src/tests/chemBatchDTextShape.test.ts. **2026-10-07 pass (2350ff6):** Only authored cards are asked (owner decision 2026-10-07): a model-written card is never served (`decideModelProbe` with `authoredCardsOnly: AUTHORED_CARDS_ONLY`), the prompt forbids writing cards or lettered options (`mcq.AUTHORED_ONLY_INSTRUCTION`), and an A)/B)/C) question written into prose is removed with the question that introduced it (`proseMcqGuard.stripProseMultipleChoice`). Every card a learner can answer carries a reviewed key and gets a verdict. Test: src/tests/ownerDecisions20261007.test.ts. **Live re-drive 2026-10-10:** 70 distinct cards served in 31 lessons, all authored (stems found in the corpus); 0 replies with lettered A)/B)/C) options in 399 turns.
 
 ### CHEM-135 — Iodoform explanation says primary alcohols "such as ethanol" give the test; only ethanol (not primary alcohols in general) does
 

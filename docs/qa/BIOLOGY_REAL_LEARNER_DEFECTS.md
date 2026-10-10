@@ -11,11 +11,12 @@
 - P1: 4
 - P2: 22
 - P3: 16
-- Status (after the 2026-10-09 deploy of a9ef53d; DEPLOYED = live, NOT production-verified; totals = 42 entries):
+- Status (after the 2026-10-10 live re-drive; DEPLOYED = live, not yet production-verified; totals = 42 entries):
   - PARTIALLY FIXED: 23
   - FIXED: 13
-  - DEPLOYED: 4
+  - DEPLOYED: 3
   - NOT REPRODUCED: 2
+  - PRODUCTION-VERIFIED: 1
 <!-- SUMMARY:END -->
 
 **Fix pass (2026-10-06, commits c4a6afc, 62f7821; plus the shared chemistry fixes d5397b1/dee8428):** each entry's **Status** / **Fix:** line names its commit, cause and evidence. Live re-drive on production (6f6ccaa), two disposable accounts (deleted afterwards), one tabId per lesson, lessons #1, 3, 21, 22, 41, 61, 82, 101, 102, 120, 121, 141, 161, 181 — 14 lessons, 181 turns:
@@ -401,8 +402,8 @@ Mastery/progress · Concurrency/session isolation.
 - Reproducibility: Seen in #181 t3 and #161 t3.
 - Also observed (24 occurrences in 23 lessons): #1 (A1) t17; #9 (A1) t9; #10 (A1) t5; #12 (A1) t13; #15 (A1) t16; #20 (A1) t9; #181 (A10) t4; #37 (A2) t6; #45 (A3) t5/t21; #54 (A3) t10; #62 (A4) t14; #69 (A4) t13; #77 (A4) t7; #105 (A6) t17; #108 (A6) t16; #121 (A7) t20; #122 (A7) t5; #135 (A7) t9; #142 (A8) t14; #144 (A8) t22; #151 (A8) t15; #153 (A8) t11; #170 (A9) t11
 - Related defect: —
-- Status: DEPLOYED — live on production since 2026-10-09 (deploy of a9ef53d, READY, aliased my-tutor-flame.vercel.app); not production-verified
-- Fix: d5397b1 (CHEM-028) — on an authored key the verdict leads. The observed card was model-written (figure labels as options); an unauthored key stays verdict-free by design — owner decision (same as CHEM-048/134). **2026-10-07 pass (2350ff6):** Only authored cards are asked (owner decision 2026-10-07): a model-written card is never served (`decideModelProbe` with `authoredCardsOnly: AUTHORED_CARDS_ONLY`), the prompt forbids writing cards or lettered options (`mcq.AUTHORED_ONLY_INSTRUCTION`), and an A)/B)/C) question written into prose is removed with the question that introduced it (`proseMcqGuard.stripProseMultipleChoice`). Every card a learner can answer carries a reviewed key and gets a verdict. Test: src/tests/ownerDecisions20261007.test.ts.
+- Status: PRODUCTION-VERIFIED — live re-drive 2026-10-10 (docs/qa/LIVE_REDRIVE_2026-10-10.md)
+- Fix: d5397b1 (CHEM-028) — on an authored key the verdict leads. The observed card was model-written (figure labels as options); an unauthored key stays verdict-free by design — owner decision (same as CHEM-048/134). **2026-10-07 pass (2350ff6):** Only authored cards are asked (owner decision 2026-10-07): a model-written card is never served (`decideModelProbe` with `authoredCardsOnly: AUTHORED_CARDS_ONLY`), the prompt forbids writing cards or lettered options (`mcq.AUTHORED_ONLY_INSTRUCTION`), and an A)/B)/C) question written into prose is removed with the question that introduced it (`proseMcqGuard.stripProseMultipleChoice`). Every card a learner can answer carries a reviewed key and gets a verdict. Test: src/tests/ownerDecisions20261007.test.ts. **Live re-drive 2026-10-10:** 70 distinct cards served in 31 lessons, all authored (stems found in the corpus); 0 replies with lettered A)/B)/C) options in 399 turns.
 
 ### BIO-017 — "Advanced Biogeochemical Cycling" is taught from an untitled food-chain figure (producers → herbivores → carnivores); the sulfur/nitrogen cycle is forced onto it
 
