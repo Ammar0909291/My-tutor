@@ -100,12 +100,11 @@ full record in `docs/history/tutor-max-final-closure-2026-10-10.md`.
   arrow-pushing 3); 13 were answered about that figure, 1 was not (finding A-2 below). The cf79346 failure (rate-law: "I'm sorry you can't see a picture
   right now … a typical illustration … would show") is fixed: the reply is rebuilt from what the renderer drew
   (`figure-reply-grounded-to-shown-figure`, title "Determining Rate Law and Order via Initial-Rate Method").
-  **Finding A-2, OPEN:** in the same lesson a later picture question got an imagined description phrased as an analogy
+  **Finding A-2 (fixed later the same day — see "A-2 and C-1 closure" below):** in the same lesson a later picture question got an imagined description phrased as an analogy
   ("the horizontal line shows … the vertical line shows … In the sketch …"), and a "show me a diagram" turn with no
   figure re-sent said "The boxes represent the concentrations of reactants A and B; the arrow shows …". The gate only
   rewrites a reply that denies the figure or describes a "typical" one; an imagined description that does neither
-  passes. Proposed fix (not implemented): check every figure-pointing sentence against the figure's recorded caption
-  and labels, not only replies to a picture question.
+  passes. Fixed in 9a0cee7a/f32eeb04/3e7bdcc4 by checking every figure-pointing sentence against the figure's evidence.
 - **B — explicit quiz requests:** 56 requests ("quiz me", "ask me a question", "test my understanding", "give me a quiz")
   in 8 lessons: 53 authored cards (stems all found in `src/lib/teaching/assets/*`), 3 honest no-new-card lines, 0 silent.
   The repeated request re-offers the unanswered card with "This is the question you have not answered yet …"; a card
@@ -118,7 +117,7 @@ full record in `docs/history/tutor-max-final-closure-2026-10-10.md`.
   sources, 1 changed (an English sentence removed — "All three parts together tell us *when* the reviewing happened …" —
   probably a false positive), 90 out of scope, 0 timeouts/errors in that window (earlier, on cf79346: 1 timeout,
   1 unparseable, 1 error, each keeping the reply; 1 removal — "Sunlight provides eight photons that excite chlorophyll
-  in Photosystem II." — borderline). **Finding C-1, OPEN (BIO-024):** "give me example" produced a great crested grebe
+  in Photosystem II." — borderline). **Finding C-1 (BIO-024; qualified from 9a0cee7a on — see "A-2 and C-1 closure" below):** "give me example" produced a great crested grebe
   courtship with an orange throat patch as the female's sign stimulus (`biology-01-give-me-example-grebe.png`); no
   source covers it and the checker passed it. The checker does not establish truth; it only removes or corrects what
   the lesson's own sources contradict or what it doubts.
@@ -131,3 +130,50 @@ full record in `docs/history/tutor-max-final-closure-2026-10-10.md`.
 - **Browser:** this Chromium build rejects the sandbox egress CA (ERR_CERT_AUTHORITY_INVALID even with the CA in NSS),
   so `scripts/qa/learnPageEvidence.ts` lets Playwright fetch app requests on the Node side (`route.fetch()`, certificate
   verified there) and hands them to the real page; no TLS check is disabled.
+
+## A-2 and C-1 closure — 9a0cee7a → f32eeb04 → 3e7bdcc4 (2026-10-10, owner "Go fix all")
+
+Each round: fix, gates (tsc, ESLint, full vitest, `next build`), push to `main`, Vercel READY on
+`my-tutor-flame.vercel.app`, re-drive on disposable `qa-*@mytutor-qa.invalid` accounts (every one deleted, re-login
+refused), production logs pulled inside the 1-hour retention window. Transcripts and /learn evidence:
+`docs/qa/final-closure-2026-10-10/redrive-9a0cee7a-*.txt`, `redrive-f32eeb04-*.txt`, `biology-f32eeb04-*`.
+
+- **A-2 fix (9a0cee7a).** Every model-written reply that points at an AVAILABLE figure (picture question or not) is
+  checked sentence by sentence against the figure's own evidence (`figureReference.checkFigureClaims`): imagined
+  structure (axes, "the horizontal line", "in the sketch"), a quoted/bolded label the figure does not carry, and a
+  "the box/arrow … represents/shows" claim that shares no words with the figure are removed; a picture question then
+  opens with what the figure shows. Production 9a0cee7a: rate-law picture questions answered from the drawn figure
+  (`figure-reply-grounded-to-shown-figure` ×2); 2 removals, both false positives (a bolded "grey arrow" on the
+  photosynthesis figure; a "**Question:**" lead-in).
+- **Precision (f32eeb04).** Evidence includes what a scene DRAWS (arrows, line stubs, flow-chart boxes); questions,
+  bolded part descriptions, "sketch" as a verb and "says" without a figure subject are not label claims. Production
+  f32eeb04: 15 picture questions with a figure available, 1 without (honest reply); 1 removal, borderline (an analogy
+  explaining the photosynthesis arrow: "the baker can't start without the ingredients from the solar oven"). New miss
+  found: a rate-law picture answer mapped the boxes wrongly ("the first box represents the reactants, the second shows
+  their concentrations … the final box represents the products") and passed on word overlap.
+- **Ordinal claims (3e7bdcc4).** Evidence keeps the figure's steps in order; "the N-th box/step is X" must share a
+  word with step N. Offline sweep over 474 production replies (76c2edd, 9a0cee7a, f32eeb04): 5 sentences removed, all
+  imagined (the three rate-law axis/sketch sentences, the "concentration-to-exponent boxes", the wrong box mapping).
+- **C-1 fix (9a0cee7a).** The prose checker must quote its source for "supported"; a real-world example is never
+  "not_factual". When ≥ 2 confident sentences are not covered by the lesson's sources, the reply says: "The details of
+  this example are not in your lesson materials, so treat them as an illustration of the idea, not as facts to learn."
+  Nothing is invented or rewritten. Production 9a0cee7a: the stickleback error recurred ("the bright red belly of the
+  female") and was qualified; 11 qualified turns logged, most of them not examples (figure walkthroughs, a quiz turn).
+- **Scope (f32eeb04, 3e7bdcc4).** The note is added only when the learner asked for an example or the reply opens with
+  one, never on a picture question; it is placed right after the paragraph with the first uncovered sentence (on
+  /learn a long reply folds under "Read more", and on f32eeb04 the note was below the fold while the claim was above
+  it: `biology-f32eeb04-01-give-me-example-qualified.png`). Against the 9 notes production added, the new rule keeps
+  only the "give me example" one.
+- **Limit (stated, not hidden).** C-1 qualifies; it does not correct. No authored biology source mentions
+  sticklebacks, so the wrong sign stimulus can only be labelled as not lesson fact. Correcting it needs authored text
+  (a content decision for the owner).
+- **Production on 3e7bdcc4 (dpl_HcnzWw9p4K4LrjimuzsLpkqYu3uU, 21:33–21:43 UTC).** Chemistry (rate-law, arrow-pushing),
+  biology (innate behaviour, photosynthesis), physics (units) over the API, and the real /learn page for biology; 4
+  disposable accounts, all deleted, re-login refused. Picture questions: 17 with a figure available, 1 without
+  (honest no-figure reply); rate-law denial answered from the drawn figure (`figure-reply-grounded-to-shown-figure`);
+  1 removal, the analogy opener "Think of the picture like a two-room kitchen." (rest of the reply kept). Prose check:
+  2 turns qualified, both "give me example" in biology (bowerbird over the API; stickleback on /learn, note shown
+  directly under the claim, above "Read more": `biology-3e7bdcc4-01-give-me-example-note-above-fold.png`); turns with
+  2–9 uncovered sentences that were not examples (physics, rate-law, picture and quiz turns) carried no note. Seen in
+  passing (older behaviour, not changed here): the prose check removed one accurate figure-mapping sentence on the
+  innate concept ("That whole, pre-programmed routine is the fixed action pattern on the right side of the figure").
