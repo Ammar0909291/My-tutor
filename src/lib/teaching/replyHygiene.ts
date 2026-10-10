@@ -139,7 +139,11 @@ export function balanceMathDelimiters(text: string): { text: string; repaired: b
 
 // ── A STUB IS NOT A REPLY ──────────────────────────────────────────────────
 /** Starts in the middle of a formula: "=\mu Q(x)\)?", ") so", "\] and". */
-const FRAGMENT_START_RE = /^\s*(?:[=)\]}+*/^_,;:]|\\[)\]])/
+// A leading "*" is a fragment ("*x = 3") but not markdown: "**Step 1** …" (bold)
+// and "* item" (a bullet) open real replies. Production 2026-10-10
+// (phys.meas.units): an 859-character step-by-step answer opening "**Step 1**"
+// was judged a stub and replaced by an authored paragraph with no steps.
+const FRAGMENT_START_RE = /^\s*(?:[=)\]}+/^_,;:]|\*(?![*\s])|\\[)\]])/
 
 /**
  * A sentence that teaches nothing: comfort, a promise of help to come, an
@@ -158,6 +162,16 @@ const CONTENT_FREE_SENTENCE_RE = new RegExp([
   String.raw`^let(?:'|’)?s\s+(?:make\s+it\s+(?:simpler|easier|tiny|a\s+tiny\s+step)|take\s+(?:a|one)\s+(?:tiny|small|little)\s+step|simplify\s+it|cut\s+to\s+the\s+essentials|come\s+at\s+it\s+differently|try\s+(?:a\s+)?(?:fresh|different)\s+(?:angle|way|approach)|slow\s+(?:right\s+)?down|break\s+it\s+down|keep\s+building)`,
   String.raw`\b(?:just\s+let\s+me\s+know|whenever\s+you(?:'|’)?re\s+ready|i(?:'|’)?ll\s+send\s+it|stay\s+tuned|give\s+it\s+a\s+try|coming\s+up)\b`,
   String.raw`\brecogni[sz]ing\s+that\s+is\s+(?:already\s+)?a\b`,
+  // Confirm-back with nothing in it (production 2026-10-10, phys.meas.units, reply to
+  // "ok"): "It sounds like you're ready to continue … did I understand that correctly?
+  // Please let me know if that's right or if anything needs fixing."
+  String.raw`\bdid\s+i\s+(?:understand|get)\s+(?:that|you|this)\s+(?:correctly|right)\b`,
+  String.raw`\blet\s+me\s+know\s+if\s+(?:that(?:'|’)?s|this\s+is|i(?:'|’)?ve\s+got\s+(?:that|it))\s+right\b`,
+  String.raw`^it\s+sounds\s+like\s+you(?:'|’)?re\s+ready\s+to\s+(?:continue|move\s+on|go\s+on)\b`,
+  // Card lead-ins: they introduce a card, they teach nothing.
+  String.raw`^here(?:'|’)?s\s+(?:a|another|one)\s+(?:question|quick\s+check)\b`,
+  String.raw`\blet\s+me\s+check\s+your\s+thinking\b`,
+  String.raw`\btake\s+your\s+time\s+with\s+it\b`,
 ].join('|'), 'i')
 
 function teachesNothing(sentence: string): boolean {

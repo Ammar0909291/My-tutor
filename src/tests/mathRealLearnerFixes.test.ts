@@ -92,7 +92,8 @@ describe('MATH-004/005/016/020/022/023/027 a stub is not a reply', () => {
     const floor = ROUTE.indexOf('THE TEACHING FLOOR (MATH-004')
     expect(floor).toBeGreaterThan(ROUTE.indexOf('THE FALLBACK SENTENCE IS NOT SAID TWICE'))
     expect(floor).toBeLessThan(ROUTE.indexOf('PHASE 0: TURN DECISION PROVENANCE'))
-    expect(ROUTE).toMatch(/if \(!servedMcq && !serveLessonComplete && !lessonCompletionHoisted && provider !== 'degraded' && resolvedConceptId\) \{/)
+    // 2026-10-10: also on an ungraded "explain simpler/again" turn with a card still on screen.
+    expect(ROUTE).toMatch(/if \(\(!servedMcq \|\| adaptationAskedWithCard\) && !serveLessonComplete && !lessonCompletionHoisted && provider !== 'degraded' && resolvedConceptId\) \{/)
     expect(ROUTE).toMatch(/let floorText = authored\?\.content\.trim\(\) \?\? regenerated/)
     // with nothing unseen, one regeneration — kept only if it teaches and recites nothing
     expect(ROUTE).toMatch(/const retry = await regenerateWithAppendix\(hy\.TEACHING_FLOOR_APPENDIX\)/)
@@ -250,6 +251,6 @@ describe('MATH-002 residual: a regeneration never erases the server verdict', ()
 describe('MATH-009 the opening turn is owed the lesson', () => {
   it('a lone figure pointer or an orphan "If not, …" on the first "ok" is refilled', () => {
     expect(isStubReply('')).toBe(true)
-    expect(ROUTE).toMatch(/const wantsTeaching = openingTurn \|\| hy\.learnerWantsTeaching\(/)
+    expect(ROUTE).toMatch(/const wantsTeaching = openingTurn \|\| hy\.isPlainAcknowledgement\(learnerAuthoredMessage\) \|\| hy\.learnerWantsTeaching\(/)
   })
 })

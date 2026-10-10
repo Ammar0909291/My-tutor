@@ -180,3 +180,41 @@ describe('authored figures replace live-generated ones (CHEM-095 / CHEM-013 / CH
     expect(steps).toContain('Check for trapped zeros between non-zero digits')
   })
 })
+
+describe('live re-drive 2026-10-10 findings', () => {
+  it('a step-by-step reply opening with markdown bold or a bullet is not a stub', async () => {
+    const { isStubReply } = await import('@/lib/teaching/replyHygiene')
+    expect(isStubReply('**Step 1** – Start with the given value, 72 km/h.\n\n**Step 2** – Replace each kilometre with 1000 metres.\n\n**Step 3** – Replace each hour with 3600 seconds, giving 20 m/s.')).toBe(false)
+    expect(isStubReply('* Start with 72 km/h.\n* Multiply by 1000 m per km.\n* Divide by 3600 s per h to get 20 m/s.')).toBe(false)
+    expect(isStubReply('*x = 3 so the')).toBe(true)
+  })
+  it('a content-free confirm-back is a stub', async () => {
+    const { isStubReply } = await import('@/lib/teaching/replyHygiene')
+    expect(isStubReply('It sounds like you’re ready to continue and feel the unit‑analysis point is clear—did I understand that correctly? Please let me know if that’s right or if anything needs fixing.')).toBe(true)
+  })
+  it('the drift guard keeps a retry only if it teaches, and a mid-lesson "ok" is owed teaching', () => {
+    expect(ROUTE).toMatch(/&& !hy\.isStubReply\(retry\) && \(retry\.match\(\/\\S\+\/g\) \?\? \[\]\)\.length >= 25/)
+    expect(ROUTE).toMatch(/const wantsTeaching = openingTurn \|\| hy\.isPlainAcknowledgement\(learnerAuthoredMessage\)/)
+  })
+})
+
+describe('CHEM-082 truncated step labels are refused on every tier', () => {
+  it('the approved sig-figs labels seen live are truncated; whole labels are not', async () => {
+    const { hasTruncatedStepLabel } = await import('@/lib/teaching/visual/visualEngine')
+    expect(hasTruncatedStepLabel({ steps: [{ title: 'Identify all non‑zero digits' }, { title: 'Check for trapped zeros between' }] })).toBe(true)
+    expect(hasTruncatedStepLabel({ steps: [{ title: 'Determine trailing zeros based on' }] })).toBe(true)
+    expect(hasTruncatedStepLabel({ steps: [{ title: 'Identify mixture type (homogeneous or' }] })).toBe(true)
+    expect(hasTruncatedStepLabel({ steps: [{ title: 'Check for trapped zeros between non-zero digits' }, { title: 'Divide by 4' }, { title: 'Check (substitute back)' }] })).toBe(false)
+  })
+})
+
+describe('"explain simpler" with a card on screen (re-drive 2026-10-10)', () => {
+  it('a reply that is only a card lead-in is a stub', async () => {
+    const { isStubReply } = await import('@/lib/teaching/replyHygiene')
+    expect(isStubReply("I see you arrived at x = 7—that’s a common slip.  Here's a question — take your time with it.")).toBe(true)
+  })
+  it('the teaching floor runs on an ungraded adaptation request even when the card stays', () => {
+    expect(ROUTE).toMatch(/const adaptationAskedWithCard = servedMcq && mcqGradeHoisted === null/)
+    expect(ROUTE).toMatch(/if \(\(!servedMcq \|\| adaptationAskedWithCard\) && !serveLessonComplete/)
+  })
+})

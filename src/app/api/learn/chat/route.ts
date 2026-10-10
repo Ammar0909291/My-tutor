@@ -13569,7 +13569,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               const partsDg = splitDg(cleanText)
               if (nodeDg && dg.isOffLesson({ learnerMessage: learnerAuthoredMessage, reply: partsDg.body, conceptTitle: nodeDg.title, conceptDescription: nodeDg.description })) {
                 const retry = await regenerateWithAppendix(dg.stayOnLessonAppendix(nodeDg.title, nodeDg.description))
+                // Production 2026-10-10 (phys.meas.units): a retry that named "unit"
+                // but taught nothing ("…did I understand that correctly?") was kept.
                 const kept = !!retry && dg.mentionsConcept(retry, dg.conceptAnchors(nodeDg.title, nodeDg.description))
+                  && !hy.isStubReply(retry) && (retry.match(/\S+/g) ?? []).length >= 25
                 console.log('[lesson-drift] ' + JSON.stringify({ conceptId: resolvedConceptId, regenerated: true, kept }))
                 if (kept) { cleanText = partsDg.pointer ? `${retry}\n\n${partsDg.pointer}` : retry; done.push('lesson-drift') }
               }
@@ -13707,7 +13710,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // recovery path. The learner gets an AUTHORED explanation of the concept
       // they have not already read; when every authored one has been shown,
       // the reply is left as it was.
-      if (!servedMcq && !serveLessonComplete && !lessonCompletionHoisted && provider !== 'degraded' && resolvedConceptId) {
+      // Re-drive 2026-10-10 (math.alg.linear-equation-1var): "explain simpler"
+      // with a card still on screen got only "I see you arrived at x = 7—that's
+      // a common slip. Here's a question — take your time with it." An ungraded
+      // turn that asks for a simpler/other explanation is owed one even when the
+      // card stays attached; the card itself is not touched.
+      const adaptationAskedWithCard = servedMcq && mcqGradeHoisted === null
+        && ((await import('@/lib/teaching/masteryGate')).detectLearnerRequest(learnerAuthoredMessage) === 'explain_differently'
+          || (await import('@/lib/teaching/adaptationRequest')).adaptationKind(learnerAuthoredMessage) !== null)
+      if ((!servedMcq || adaptationAskedWithCard) && !serveLessonComplete && !lessonCompletionHoisted && provider !== 'degraded' && resolvedConceptId) {
         try {
           const hy = await import('@/lib/teaching/replyHygiene')
           const { readsAsRequestToTutor } = await import('@/lib/teaching/mcq')
@@ -13722,7 +13733,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           const openingTurn = isBareAcknowledgement(learnerAuthoredMessage)
             && !learnSession.messages.some((m) => m.role === MessageRole.USER
               && (m as { lessonKey?: string | null }).lessonKey === resolvedLessonKeyThisTurn)
-          const wantsTeaching = openingTurn || hy.learnerWantsTeaching(learnerAuthoredMessage, {
+          // A mid-lesson "ok" / "next" is owed the next piece too: a content-free
+          // confirm-back on it (production 2026-10-10, phys.meas.units) is a stub.
+          const wantsTeaching = openingTurn || hy.isPlainAcknowledgement(learnerAuthoredMessage) || hy.learnerWantsTeaching(learnerAuthoredMessage, {
             request: readsAsRequestToTutor(learnerAuthoredMessage) || requestKind !== null || adaptation !== null,
             practice: asksForPractice(learnerAuthoredMessage),
           })

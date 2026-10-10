@@ -167,6 +167,8 @@ export type EngineRejection =
    * life as ordered PROCESSES, asserting a sequence neither concept has.
    */
   | 'no-suitable-form'
+  /** A process_flow box whose label stops mid-phrase (CHEM-082). */
+  | 'truncated-step-label'
 
 export type EngineResult =
   | { ok: true; scene: SceneSpec; cached: boolean }
@@ -841,6 +843,18 @@ const EMPTY_SCENE: SceneSpec = { id: 'spec', title: '', sceneType: 'diagram', st
  * Validate whichever form the model chose. An unrecognised shape is a
  * rejection — the closed set is closed.
  */
+/** A step label ending on a word that cannot end a phrase, or with an open bracket. */
+export function hasTruncatedStepLabel(spec: { steps?: unknown }): boolean {
+  const steps = Array.isArray(spec.steps) ? spec.steps : []
+  return steps.some((st) => {
+    const title = typeof st === 'string' ? st : (st as { title?: unknown })?.title
+    if (typeof title !== 'string') return false
+    const t = title.trim().replace(/[.:;,]+$/, '')
+    if ((t.match(/\(/g) ?? []).length > (t.match(/\)/g) ?? []).length) return true
+    return /\b(?:between|based\s+on|as|or|and|of|to|with|for|the|a|an|in|on|at|by|from|than|into|whether|that|which|is|are)$/i.test(t)
+  })
+}
+
 export function validateGeneratedFigure(
   raw: unknown,
   ctx: ArchetypeContext,
@@ -873,6 +887,13 @@ export function validateGeneratedFigure(
     // ENGL-017: a time axis with no authored domain opens on 0…10, not −10…10.
     if (spec.type === 'graph' && !spec.domain && isNonNegativeAxis(spec.xLabel)) spec = { ...spec, domain: [0, 10] }
     if (!isSpecAnchoredToConcept(spec, ctx)) return { ok: false, reason: 'not-anchored-to-concept' }
+    // CHEM-082 (re-drive 2026-10-10): an APPROVED sig-figs flow still read
+    // "Check for trapped zeros between" / "Determine trailing zeros based on" —
+    // labels cut at the old 60-character clamp before approval. A box that
+    // stops mid-phrase is a rendering defect, not an authoring preference, so
+    // it is refused on every tier that re-validates (generation, cache,
+    // approved, restore) and the concept falls through to a fresh figure.
+    if (spec.type === 'process_flow' && hasTruncatedStepLabel(spec)) return { ok: false, reason: 'truncated-step-label' }
     // A GENERATED graph must say what its axes mean.
     //
     // Measured: a kinetic-energy graph reached a learner with bare −5…5 ticks
