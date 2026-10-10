@@ -27,9 +27,16 @@
 import { writeFileSync } from 'fs'
 import { BASE, createQaAccount, deleteQaAccount, type QaAccount } from './liveAccount'
 import { createSession, openLesson, say, figureLabel, type TurnPayload } from './liveSession'
+import { isOffLesson } from '../../src/lib/teaching/lessonDriftGuard'
+import { isPlainAcknowledgement } from '../../src/lib/teaching/replyHygiene'
+import { hasProseMultipleChoice } from '../../src/lib/teaching/proseMcqGuard'
+import { usesAnalogy, analogyCapReached } from '../../src/lib/teaching/reuseCaps'
+import { getKGNode } from '../../src/lib/curriculum/knowledgeGraph'
 
 const SUBJECT = process.env.QA_SUBJECT ?? 'chemistry'
-const ORDERS = (process.env.QA_ORDERS ?? '115,151,78').split(',').map(Number)
+const ORDERS = (process.env.QA_ORDERS ?? '').split(',').filter(Boolean).map(Number)
+// QA_SLUGS=chem.found.matter,chem.bond.ionic-bonding — lessons by KG id instead of order.
+const SLUGS = (process.env.QA_SLUGS ?? '').split(',').map((x) => x.trim()).filter(Boolean)
 const OUT = process.env.QA_OUT ?? '/tmp/claude-0/sp/chem-redrive.txt'
 const THINK_MS = Number(process.env.QA_THINK_MS ?? 2500)
 
@@ -52,7 +59,7 @@ const BEATS = [
 const words = (s: string) => (s.match(/\S+/g) ?? []).length
 const EMPATHY = /genuinely tricky|i hear you|completely normal|can feel (?:overwhelming|tricky|confusing)|slow (?:right )?down/i
 
-function flags(p: TurnPayload, learner: string, prevTutor: string, figureSeen: boolean): string[] {
+function flags(p: TurnPayload, learner: string, prevTutor: string, figureSeen: boolean, conceptId = '', priorTutor: string[] = []): string[] {
   const t = String(p.text ?? '')
   const outsideMath = t.replace(/\\\([\s\S]+?\\\)|\\\[[\s\S]+?\\\]|\$\$[\s\S]+?\$\$/g, '')
   const f: string[] = []
@@ -81,6 +88,14 @@ function flags(p: TurnPayload, learner: string, prevTutor: string, figureSeen: b
   if (/^quiz me$/i.test(learner) && !p.mcq) f.push('quizNoCard')
   if (p.mcq && p.mcq.options.length === 2) f.push('twoOption')
   if (p.mcq && !(typeof (p.mcq as { assetId?: unknown }).assetId === 'string')) f.push('unkeyedCard')
+  // 2026-10-07 owner-decision pass (2350ff6): signatures each fix removes.
+  if (hasProseMultipleChoice(t)) f.push('proseOptions')                                   // CHEM-048 / PHYS-020
+  if (isPlainAcknowledgement(learner) && /^\s*(?:[A-Za-z][\w.-]{0,24},\s+)?(?:correct|that(?:'|’)?s (?:right|correct)|exactly right|well done|spot on)\b/i.test(t)) f.push('verdictOnAck') // CHEM-031
+  const node = conceptId ? getKGNode(conceptId) : null
+  if (node && isOffLesson({ learnerMessage: learner, reply: t, conceptTitle: node.title, conceptDescription: node.description })) f.push('drift') // CHEM-133 / BIO-023
+  if (/general illustration related to the topic/i.test(t)) f.push('genericCaption')     // CHEM-034
+  if (usesAnalogy(t) && analogyCapReached(priorTutor.slice(-3), 1)) f.push('analogyRepeat') // CHEM-040 / 055
+  if (/let(?:'|’)s pause|on pause\b/i.test(t)) f.push('pause')                           // MATH-001 (stay until mastery)
   return f
 }
 
@@ -100,9 +115,10 @@ async function main() {
   const tally: Record<string, number> = {}
   const perLesson: Array<{ order: number; slug: string; turns: number; figure: boolean; flags: string[] }> = []
   let turns = 0
-  for (const order of ORDERS) {
-    const l = lessons.find((x) => x.order === order)
-    if (!l) { log.push(`order ${order}: not in curriculum`); continue }
+  const targets = [...ORDERS.map((o) => lessons.find((x) => x.order === o)), ...SLUGS.map((sl) => lessons.find((x) => x.topicSlug === sl))]
+  for (const l of targets) {
+    if (!l) { log.push('lesson not in curriculum'); continue }
+    const order = l.order
     const sid = await createSession(cookie, SUBJECT, `redrive-${order}-${Date.now()}`)
     const open = await openLesson(cookie, sid, { lessonTitle: l.lessonTitle, lessonOrder: l.order, topicSlug: l.topicSlug, unitTitle: l.unitTitle, totalLessons: lessons.length })
     const openText = String(open.text ?? '')
@@ -115,6 +131,7 @@ async function main() {
     let prevTutor = openText
     let n = 0
     const answered = new Set<string>()
+    const priorTutor: string[] = [openText]
     for (const beat of BEATS) {
       let msg = beat
       if (beat.startsWith('@card')) {
@@ -126,7 +143,8 @@ async function main() {
       let p: TurnPayload
       try { p = await say(cookie, sid, msg) } catch (e) { log.push(`[learner] ${msg}\n[error] ${String(e).slice(0, 200)}`); continue }
       turns++; n++
-      const f = flags(p, msg, prevTutor, figureSeen)
+      const f = flags(p, msg, prevTutor, figureSeen, l.topicSlug, priorTutor)
+      priorTutor.push(String(p.text ?? ''))
       if (figureLabel(p)) figureSeen = true
       for (const x of f) { tally[x] = (tally[x] ?? 0) + 1; lf.push(x) }
       // CHEM-146: a degraded reply that replaces an unanswered card.
