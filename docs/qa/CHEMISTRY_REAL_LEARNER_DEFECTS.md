@@ -11,11 +11,10 @@
 - P1: 12
 - P2: 85
 - P3: 53
-- Status (after the 2026-10-09 deploy of a9ef53d; DEPLOYED = live, NOT production-verified; totals = 150 entries):
+- Status (after the 2026-10-09 deploy of a9ef53d and the 2026-10-10 card convergence; DEPLOYED = live, NOT production-verified; totals = 150 entries):
   - PARTIALLY FIXED: 76
-  - FIXED: 38
+  - FIXED: 45
   - DEPLOYED: 26
-  - FIXED IN REPO (production row not converged): 7
   - NOT REPRODUCED: 2
   - DEFERRED: 1
 <!-- SUMMARY:END -->
@@ -557,8 +556,8 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (9 occurrences in 8 lessons): #39 (A3) t3; #151 (A9) tt3; #2 (A1) tt4; #97 (A6) tt9; #116 (A7) tt7; #79 (A5) tt14; #117 (A7) tt14; #152 (A9) tt11/tt4
 - Notes on occurrences: #39 t3: correct option is the only long explanatory one · #151 tt3: distractor "This must be an error" vs full-sentence correct option · #2 tt4: correct option is a ~60-word paragraph vs. "It cannot have evaporated" · #97 tt9: closing card: "Nothing in the sugar solution, but a bright visible path through the milk" vs "The same in both" · #116 tt7: correct option 50+ words vs distractor "This must be an error" · #79 tt14: correct option contains the full reasoning "(doubling current AND doubling time both double the total charge Q=It, so charge quadruples overall)" · #117 tt14: Bartlett card: correct option is a full sentence vs distractor "This must have been a measurement error, since noble gases are proven to be completely and permanently unreactive under all conditions" · #152 tt11: distractor "This must be an error"
 - Related defect: —
-- Status: FIXED IN REPO — production row not yet converged (owner-approved write pending)
-- Fix: **2026-10-07 pass (2350ff6):** Authored card corrected in the repo (`src/lib/teaching/assets/chemistrySeedAssets.ts`). The production row is not yet updated: the asset bootstrap is create-only, so the edit reaches production only through an owner-approved convergence write (`scripts/assets/converge-probe-edits.ts --apply`, backup first, precedent docs/qa/backups/probe-converge-2026-10-06.json). The options are plain sequences with no explanatory parentheticals.
+- Status: FIXED — production row converged 2026-10-10 (read-back verified)
+- Fix: **2026-10-07 pass (2350ff6):** Authored card corrected in the repo (`src/lib/teaching/assets/chemistrySeedAssets.ts`). The production row is not yet updated: the asset bootstrap is create-only, so the edit reaches production only through an owner-approved convergence write (`scripts/assets/converge-probe-edits.ts --apply`, backup first, precedent docs/qa/backups/probe-converge-2026-10-06.json). The options are plain sequences with no explanatory parentheticals. **2026-10-10:** converged to production (owner-approved write; the 7 production rows matched the old corpus exactly before the write; read-back after the write matches the corpus 7/7 on stem, choices and key; backup docs/qa/backups/probe-converge-2026-10-10.json).
 
 ### CHEM-024 — First reply after "ok" presupposes a learner attempt that never happened; lesson then teaches nothing and is marked mastered from cards alone
 
@@ -934,8 +933,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Trivial item inflates mastery evidence. Similar: #1 t14 ("Oxygen gas is written O₂. Is one particle … the same thing as one oxygen ELEMENT?").
 - Reproducibility: Observed in #98 and #1.
 - Related defect: —
-- Status: FIXED IN REPO — production row not yet converged (owner-approved write pending)
-- Fix: **2026-10-07 pass (2350ff6):** Authored card corrected in the repo (`src/lib/teaching/assets/chemistryDepthSeedAssets.ts`). The production row is not yet updated: the asset bootstrap is create-only, so the edit reaches production only through an owner-approved convergence write (`scripts/assets/converge-probe-edits.ts --apply`, backup first, precedent docs/qa/backups/probe-converge-2026-10-06.json). The mayonnaise stem asks for the emulsion type instead of stating it.
+- Status: FIXED — production row converged 2026-10-10 (read-back verified)
+- Fix: **2026-10-07 pass (2350ff6):** Authored card corrected in the repo (`src/lib/teaching/assets/chemistryDepthSeedAssets.ts`). The production row is not yet updated: the asset bootstrap is create-only, so the edit reaches production only through an owner-approved convergence write (`scripts/assets/converge-probe-edits.ts --apply`, backup first, precedent docs/qa/backups/probe-converge-2026-10-06.json). The mayonnaise stem asks for the emulsion type instead of stating it. **2026-10-10:** converged to production (owner-approved write; the 7 production rows matched the old corpus exactly before the write; read-back after the write matches the corpus 7/7 on stem, choices and key; backup docs/qa/backups/probe-converge-2026-10-10.json).
 
 ### CHEM-044 — First teaching reply after "ok" is an untaught multi-part calculation problem / a question about an attempt the learner never made
 
@@ -1098,8 +1097,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: The right answer states something untrue and is contradicted in the same turn.
 - Reproducibility: Observed once (#135 t3/t4).
 - Related defect: —
-- Status: FIXED IN REPO — production row not yet converged (owner-approved write pending)
-- Fix: **2026-10-07 pass (2350ff6):** Authored card corrected in the repo (`src/lib/teaching/assets/chemistrySeedAssets.ts`). The production row is not yet updated: the asset bootstrap is create-only, so the edit reaches production only through an owner-approved convergence write (`scripts/assets/converge-probe-edits.ts --apply`, backup first, precedent docs/qa/backups/probe-converge-2026-10-06.json). The correct option no longer says the (E,E)-diene is "locked" in s-trans.
+- Status: FIXED — production row converged 2026-10-10 (read-back verified)
+- Fix: **2026-10-07 pass (2350ff6):** Authored card corrected in the repo (`src/lib/teaching/assets/chemistrySeedAssets.ts`). The production row is not yet updated: the asset bootstrap is create-only, so the edit reaches production only through an owner-approved convergence write (`scripts/assets/converge-probe-edits.ts --apply`, backup first, precedent docs/qa/backups/probe-converge-2026-10-06.json). The correct option no longer says the (E,E)-diene is "locked" in s-trans. **2026-10-10:** converged to production (owner-approved write; the 7 production rows matched the old corpus exactly before the write; read-back after the write matches the corpus 7/7 on stem, choices and key; backup docs/qa/backups/probe-converge-2026-10-10.json).
 
 ### CHEM-053 — Unbalanced equation in the Williamson worked example: "C₆H₅OH + 2 Na → C₆H₅ONa + H₂↑"
 
@@ -1378,8 +1377,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Question/format mismatch and answer leakage.
 - Reproducibility: Observed once (#4).
 - Related defect: —
-- Status: FIXED IN REPO — production row not yet converged (owner-approved write pending)
-- Fix: **2026-10-07 pass (2350ff6):** Authored card corrected in the repo (`src/lib/teaching/assets/chemistrySeedAssets.ts`). The production row is not yet updated: the asset bootstrap is create-only, so the edit reaches production only through an owner-approved convergence write (`scripts/assets/converge-probe-edits.ts --apply`, backup first, precedent docs/qa/backups/probe-converge-2026-10-06.json). Stem "Convert 0.025 kg to milligrams." with 25,000 / 25 / 2,500 mg.
+- Status: FIXED — production row converged 2026-10-10 (read-back verified)
+- Fix: **2026-10-07 pass (2350ff6):** Authored card corrected in the repo (`src/lib/teaching/assets/chemistrySeedAssets.ts`). The production row is not yet updated: the asset bootstrap is create-only, so the edit reaches production only through an owner-approved convergence write (`scripts/assets/converge-probe-edits.ts --apply`, backup first, precedent docs/qa/backups/probe-converge-2026-10-06.json). Stem "Convert 0.025 kg to milligrams." with 25,000 / 25 / 2,500 mg. **2026-10-10:** converged to production (owner-approved write; the 7 production rows matched the old corpus exactly before the write; read-back after the write matches the corpus 7/7 on stem, choices and key; backup docs/qa/backups/probe-converge-2026-10-10.json).
 
 ### CHEM-068 — Ethanol vapour pressure at 20 °C given as 44 kPa (actual ≈ 5.9 kPa)
 
@@ -1432,8 +1431,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: Stem/option mismatch; guessable.
 - Reproducibility: Observed once (#60 t7, t10).
 - Related defect: —
-- Status: FIXED IN REPO — production row not yet converged (owner-approved write pending)
-- Fix: **2026-10-07 pass (2350ff6):** Authored card corrected in the repo (`src/lib/teaching/assets/chemistrySeedAssets.ts`). The production row is not yet updated: the asset bootstrap is create-only, so the edit reaches production only through an owner-approved convergence write (`scripts/assets/converge-probe-edits.ts --apply`, backup first, precedent docs/qa/backups/probe-converge-2026-10-06.json). Options are Decrease / Increase / Unaffected, matching the stem.
+- Status: FIXED — production row converged 2026-10-10 (read-back verified)
+- Fix: **2026-10-07 pass (2350ff6):** Authored card corrected in the repo (`src/lib/teaching/assets/chemistrySeedAssets.ts`). The production row is not yet updated: the asset bootstrap is create-only, so the edit reaches production only through an owner-approved convergence write (`scripts/assets/converge-probe-edits.ts --apply`, backup first, precedent docs/qa/backups/probe-converge-2026-10-06.json). Options are Decrease / Increase / Unaffected, matching the stem. **2026-10-10:** converged to production (owner-approved write; the 7 production rows matched the old corpus exactly before the write; read-back after the write matches the corpus 7/7 on stem, choices and key; backup docs/qa/backups/probe-converge-2026-10-10.json).
 
 ### CHEM-071 — Names duplicated in parentheses ("silicon tetrachloride (silicon tetrachloride)", "hydrogen chloride (hydrogen chloride)")
 
@@ -1468,8 +1467,8 @@ Mastery/progress · Concurrency/session isolation.
 - Why it is a defect: The learner who picked the only grammatical-looking alternative is told "Not quite" and the lesson is then paused.
 - Reproducibility: Observed once (#118 t17).
 - Related defect: —
-- Status: FIXED IN REPO — production row not yet converged (owner-approved write pending)
-- Fix: **2026-10-07 pass (2350ff6):** Authored card corrected in the repo (`src/lib/teaching/assets/chemistrySeedAssets.ts`). The production row is not yet updated: the asset bootstrap is create-only, so the edit reaches production only through an owner-approved convergence write (`scripts/assets/converge-probe-edits.ts --apply`, backup first, precedent docs/qa/backups/probe-converge-2026-10-06.json). New stem with three explained options.
+- Status: FIXED — production row converged 2026-10-10 (read-back verified)
+- Fix: **2026-10-07 pass (2350ff6):** Authored card corrected in the repo (`src/lib/teaching/assets/chemistrySeedAssets.ts`). The production row is not yet updated: the asset bootstrap is create-only, so the edit reaches production only through an owner-approved convergence write (`scripts/assets/converge-probe-edits.ts --apply`, backup first, precedent docs/qa/backups/probe-converge-2026-10-06.json). New stem with three explained options. **2026-10-10:** converged to production (owner-approved write; the 7 production rows matched the old corpus exactly before the write; read-back after the write matches the corpus 7/7 on stem, choices and key; backup docs/qa/backups/probe-converge-2026-10-10.json).
 
 ### CHEM-073 — Lesson "Trends Across p-Block" opens with SiCl₄ hydrolysis and never teaches radius / ionisation energy / electronegativity trends before testing them
 
@@ -1638,8 +1637,8 @@ Mastery/progress · Concurrency/session isolation.
 - Also observed (2 occurrences in 2 lessons): #84 (A5) t8; #65 (A4) t4
 - Notes on occurrences: #84 t8: wrong answer "3" to "if the concentration is 3 mol/L, what is the rate?" -> reply discusses 2 mol/L ("the vertical rate is 4, because 2 squared is 4"); the right answer (9) is never given · #65 t4: wrong answer "Neither ion" to "Which ion in sodium acetate will undergo hydrolysis?" -> "Exactly—when you dissolve table salt (NaCl)… neither the sodium ion nor the chloride ion reacts"; acetate is never named as the answer
 - Related defect: —
-- Status: FIXED IN REPO — production row not yet converged (owner-approved write pending)
-- Fix: **2026-10-07 pass (2350ff6):** Authored card corrected in the repo (`src/lib/teaching/assets/chemistrySeedAssets.ts`). The production row is not yet updated: the asset bootstrap is create-only, so the edit reaches production only through an owner-approved convergence write (`scripts/assets/converge-probe-edits.ts --apply`, backup first, precedent docs/qa/backups/probe-converge-2026-10-06.json). One unambiguous true statement about which electrode the protected steel becomes.
+- Status: FIXED — production row converged 2026-10-10 (read-back verified)
+- Fix: **2026-10-07 pass (2350ff6):** Authored card corrected in the repo (`src/lib/teaching/assets/chemistrySeedAssets.ts`). The production row is not yet updated: the asset bootstrap is create-only, so the edit reaches production only through an owner-approved convergence write (`scripts/assets/converge-probe-edits.ts --apply`, backup first, precedent docs/qa/backups/probe-converge-2026-10-06.json). One unambiguous true statement about which electrode the protected steel becomes. **2026-10-10:** converged to production (owner-approved write; the 7 production rows matched the old corpus exactly before the write; read-back after the write matches the corpus 7/7 on stem, choices and key; backup docs/qa/backups/probe-converge-2026-10-10.json).
 
 ### CHEM-082 — Figure labels are quoted/cut mid-phrase in tutor text and card options ("Check for trapped zeros between", "Determine trailing zeros based on", "Identify mixture type (homogeneous or", "Williamson synthesis: alkyl halide +")
 

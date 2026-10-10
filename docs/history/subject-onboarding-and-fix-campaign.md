@@ -1233,3 +1233,10 @@ width, seven authored chemistry cards corrected. Tests: `ownerDecisions20261007.
 Not done, owner action: production convergence of the seven edited chemistry probes (create-only bootstrap; needs an
 approved `converge-probe-edits.ts --apply`); deployment (Vercel 402, team blocked since 05b7868); provider capacity.
 Statuses per entry: the five `docs/qa/*_REAL_LEARNER_DEFECTS.md` logs (no entry left OPEN).
+
+**2026-10-10 — the seven corrected chemistry cards converged to production** (owner: "Approve the 7-card write, go
+ahead"). No DATABASE_URL in the session, so the write went through the Supabase connector: the 7 ACTIVE rows were read
+first and matched the pre-edit corpus (71ace9b) exactly, the old values were backed up to
+`docs/qa/backups/probe-converge-2026-10-10.json`, and `probe_assets.stem/choices/correctValue` was updated for those
+7 `assetId`s only. Two statements whose text held an en dash timed out at the connector twice without writing; they
+were re-sent base64-encoded (`convert_from(decode(...))`). Read-back: 7/7 match the corpus. Nothing else touched.
