@@ -100,7 +100,7 @@ export function corpusFileOf(question: string): string | null {
   return CORPUS.find((c) => c.text.includes(q))?.file ?? null
 }
 const QUIZ_REQUEST = /^(?:quiz me|ask me a question|test my understanding|give me a quiz)$/i
-const HONEST_NO_QUESTION = /^(?:This is the question you have not answered yet|You have answered every practice question|I don't have a practice question I can give you)/
+const HONEST_NO_QUESTION = /^(?:This is the question you have not answered yet|You have answered every (?:new )?practice question|I don't have a practice question I can give you)/
 const FIGURE_DESCRIPTION = /\b(?:(?:the|this|that) (?:picture|figure|diagram|image|graph|drawing) (?:shows|has|is showing|displays)|(?:is|are) drawn|on the (?:horizontal|vertical|x|y)[- ]axis|usually shows?|normally shows?|curved arrow|colou?red (?:box|arrow|line))\b/i
 
 const words = (s: string) => (s.match(/\S+/g) ?? []).length
