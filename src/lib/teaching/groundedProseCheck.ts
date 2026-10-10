@@ -103,10 +103,12 @@ export const GROUNDED_CHECK_SYSTEM_PROMPT = [
   '- "contradicted": a source sentence says something incompatible with it;',
   '- "unsupported": the sources do not cover it;',
   '- "not_factual": an analogy, a hypothetical, an instruction, a question or encouragement.',
+  'A real-world example (a named organism, substance, place, event or person) states facts: judge it, never "not_factual".',
+  'For "supported", copy the supporting source text EXACTLY into "source_quote".',
   'For "contradicted", copy the contradicting source text EXACTLY into "source_quote" and give "correction": the',
   'sentence rewritten to agree with that quote, changing as little as possible and adding nothing the quote does not say.',
   'For "unsupported", set "doubtful": true only if you believe the sentence is factually wrong.',
-  'Answer with JSON only, no prose: {"claims":[{"sentence":1,"verdict":"supported"},',
+  'Answer with JSON only, no prose: {"claims":[{"sentence":1,"verdict":"supported","source_quote":"..."},',
   '{"sentence":2,"verdict":"contradicted","source_quote":"...","correction":"..."},',
   '{"sentence":3,"verdict":"unsupported","doubtful":true}]}. Omit sentences you have nothing to say about.',
 ].join('\n')
@@ -173,16 +175,47 @@ export interface GroundedEdit { sentence: string; action: 'corrected' | 'removed
  * Decide the edits. Keyed by sentence text so they can be applied to a reply
  * the numeric pass has since corrected (a sentence it changed no longer matches).
  */
-export function decideGroundedEdits(text: string, claims: CheckerClaim[], sources: readonly string[]): { edits: GroundedEdit[]; rejected: string[] } {
+/**
+ * C-1 (BIO-024 class, production 2026-10-10 on 76c2edd): "give me example" on
+ * bio.behav.innate-behavior-instinct produced a great crested grebe courtship
+ * whose sign stimulus (an orange throat patch shown by the female) no lesson
+ * source covers — and the checker passed it. No source can correct it, so the
+ * reply is QUALIFIED honestly instead: when two or more confident factual
+ * sentences are not covered by the sources (unsupported, or "supported"
+ * without a verbatim quote), the reply says its details are not from the
+ * lesson materials.
+ */
+export const UNCOVERED_EXAMPLE_NOTE =
+  'The details of this example are not in your lesson materials, so treat them as an illustration of the idea, not as facts to learn.'
+export const UNCOVERED_QUALIFY_AT = 2
+
+/** Append the qualifier once. */
+export function qualifyUncovered(text: string): { text: string; changed: boolean } {
+  if ((text ?? '').includes(UNCOVERED_EXAMPLE_NOTE)) return { text, changed: false }
+  return { text: `${(text ?? '').trim()}\n\n${UNCOVERED_EXAMPLE_NOTE}`, changed: true }
+}
+
+export function decideGroundedEdits(text: string, claims: CheckerClaim[], sources: readonly string[]): { edits: GroundedEdit[]; rejected: string[]; uncovered: string[] } {
   const segs = splitSentences(text)
   const byIndex = new Map(segs.filter((s) => s.index !== null).map((s) => [s.index as number, s]))
   const edits: GroundedEdit[] = []
   const rejected: string[] = []
+  const uncovered: string[] = []
+  const quoted = (q: string | undefined) => {
+    const n = norm(q ?? '')
+    return n.length >= 12 && sources.some((src) => norm(src).includes(n))
+  }
   for (const c of claims) {
     const seg = byIndex.get(c.sentence)
     if (!seg) { rejected.push(`no-sentence-${c.sentence}`); continue }
     const sentence = seg.text
     if (carriesNumber(sentence)) { if (c.verdict === 'contradicted' || c.doubtful) rejected.push(`numeric-owned-${c.sentence}`); continue }
+    // A confident claim the sources do not cover (or a "supported" verdict
+    // that cannot show its source) is counted for the honest qualifier.
+    if (!HEDGE_RE.test(sentence) && !c.doubtful
+      && (c.verdict === 'unsupported' || (c.verdict === 'supported' && !quoted(c.source_quote)))) {
+      uncovered.push(sentence)
+    }
     if (c.verdict === 'contradicted') {
       if (correctionIsGrounded(sentence, c, sources)) {
         const lead = /^\s*(?:[-*•]|\d+[.)])\s+/.exec(sentence)?.[0] ?? ''
@@ -200,7 +233,7 @@ export function decideGroundedEdits(text: string, claims: CheckerClaim[], source
       edits.push({ sentence, action: 'removed' })
     }
   }
-  return { edits, rejected }
+  return { edits, rejected, uncovered }
 }
 
 /** Apply edits; null when the limits are exceeded or the result would not teach. */
@@ -238,7 +271,7 @@ export async function runGroundedProseCheck(input: {
   isStub: (t: string) => boolean
   ask: (system: string, user: string) => Promise<string | null>
   timeoutMs?: number
-}): Promise<{ edits: GroundedEdit[]; checked: boolean; reason: string; rejected: string[] }> {
+}): Promise<{ edits: GroundedEdit[]; checked: boolean; reason: string; rejected: string[]; uncovered?: string[] }> {
   if (!needsGroundedCheck(input.text, input.learnerMessage)) return { edits: [], checked: false, reason: 'out-of-scope', rejected: [] }
   if (input.isStub(input.text)) return { edits: [], checked: false, reason: 'stub-not-checked', rejected: [] }
   const sources = input.sources.map((s) => (s ?? '').trim()).filter((s) => s.length > 0)
@@ -252,8 +285,11 @@ export async function runGroundedProseCheck(input: {
     if (answer === null) return { edits: [], checked: false, reason: 'timeout-or-no-answer', rejected: [] }
     const claims = parseCheckerAnswer(answer)
     if (!claims) return { edits: [], checked: false, reason: 'unparseable', rejected: [] }
-    const { edits, rejected } = decideGroundedEdits(input.text, claims, sources)
-    return { edits, checked: true, reason: edits.length ? 'edits' : 'no-edits', rejected }
+    const { edits, rejected, uncovered } = decideGroundedEdits(input.text, claims, sources)
+    // A removed sentence is not also qualified.
+    const removedSet = new Set(edits.filter((e) => e.action === 'removed').map((e) => e.sentence))
+    const stillUncovered = uncovered.filter((u) => !removedSet.has(u))
+    return { edits, checked: true, reason: edits.length ? 'edits' : 'no-edits', rejected, uncovered: stillUncovered }
   } catch {
     return { edits: [], checked: false, reason: 'error', rejected: [] }
   }

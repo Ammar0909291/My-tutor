@@ -27,6 +27,9 @@
  *               honest no-picture reply or still describes a figure (Issue A, 2026-10-10)
  *   picDenied   picture question after a figure WAS shown, answered "no picture"
  *   picImagined picture question after a figure WAS shown, reply denies it or describes a typical/imagined one
+ *   picImaginedParts  a figure WAS shown and the reply places imagined parts on it
+ *               ("the horizontal line", "in the sketch") — A-2, 2026-10-10
+ *   exampleQualified  (informational) the reply carries the uncovered-example note (C-1)
  *   quizSilent  explicit quiz request, no card, and no honest "no question" line (Issue B)
  *   cardNotInCorpus  the served card's question is not an authored stem in
  *               src/lib/teaching/assets/* (replaces the unkeyedCard heuristic: the
@@ -45,6 +48,7 @@ import { hasProseMultipleChoice } from '../../src/lib/teaching/proseMcqGuard'
 import { usesAnalogy, analogyCapReached } from '../../src/lib/teaching/reuseCaps'
 import { getKGNode } from '../../src/lib/curriculum/knowledgeGraph'
 import { DENIES_OR_IMAGINES_FIGURE_RE } from '../../src/lib/teaching/figureReference'
+import { UNCOVERED_EXAMPLE_NOTE } from '../../src/lib/teaching/groundedProseCheck'
 
 const SUBJECT = process.env.QA_SUBJECT ?? 'chemistry'
 const ORDERS = (process.env.QA_ORDERS ?? '').split(',').filter(Boolean).map(Number)
@@ -140,6 +144,10 @@ function flags(p: TurnPayload, learner: string, prevTutor: string, figureSeen: b
   if (QUIZ_REQUEST.test(learner) && !p.mcq && !HONEST_NO_QUESTION.test(t)) f.push('quizSilent')
   if (/picture/i.test(learner) && (figureSeen || figureLabel(p)) && /^There is no picture in this lesson yet/.test(t)) f.push('picDenied')
   if (/picture/i.test(learner) && (figureSeen || figureLabel(p)) && DENIES_OR_IMAGINES_FIGURE_RE.test(t)) f.push('picImagined')
+  // A-2 (2026-10-10): imagined parts placed on a real figure (rate-law analogy reply).
+  if ((figureSeen || figureLabel(p)) && /\b(?:the (?:horizontal|vertical) line|in the sketch|one side \(|the other side \()/i.test(t)) f.push('picImaginedParts')
+  // C-1 (informational): the reply says its example is an illustration, not lesson fact.
+  if (t.includes(UNCOVERED_EXAMPLE_NOTE)) f.push('exampleQualified')
   // 2026-10-07 owner-decision pass (2350ff6): signatures each fix removes.
   if (hasProseMultipleChoice(t)) f.push('proseOptions')                                   // CHEM-048 / PHYS-020
   if (isPlainAcknowledgement(learner) && /^\s*(?:[A-Za-z][\w.-]{0,24},\s+)?(?:correct|that(?:'|’)?s (?:right|correct)|exactly right|well done|spot on)\b/i.test(t)) f.push('verdictOnAck') // CHEM-031

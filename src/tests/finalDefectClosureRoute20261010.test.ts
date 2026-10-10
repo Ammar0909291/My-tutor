@@ -11,7 +11,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { driveTurns, readLog, type TurnResult } from './support/turnHarness'
 import { NO_FIGURE_LEAD } from '@/lib/teaching/figureReference'
 import { QUIZ_UNANSWERED_LEAD } from '@/lib/teaching/quizRequest'
-import { GROUNDED_CHECK_SYSTEM_PROMPT } from '@/lib/teaching/groundedProseCheck'
+import { GROUNDED_CHECK_SYSTEM_PROMPT, UNCOVERED_EXAMPLE_NOTE } from '@/lib/teaching/groundedProseCheck'
 import { FACT_CHECK_SYSTEM_PROMPT } from '@/lib/teaching/factCheckPass'
 
 const h = await vi.hoisted(async () => (await import('./support/turnHarness')).createHarness())
@@ -49,6 +49,13 @@ const CORROSION = { subjectSlug: 'chemistry', conceptId: 'chem.elect.corrosion',
 const IMAGINED = 'There is no picture in this lesson yet, so let me say it in words. It usually shows a piece of iron with two regions: one area where oxygen is plentiful (the cathode) and another where oxygen is scarce, such as under a rust-filled crevice (the anode). Electrons flow through the metal from the anode to the cathode.'
 const PICTURE_Q = 'i dont understand this picture. what is it showing?'
 const rrm = (concept: string) => ({ renderedRealityLog: [{ visualIdentity: 'scene:corrosion-cell', visualSemantics: 'Iron with an anodic and a cathodic region', sourcePipeline: 'detectedSceneSpec', matchedConcept: concept, turnPosition: 1 }] })
+
+/** A figure shown earlier for chem.elect.corrosion, with what it drew. */
+const DRAWN = { renderedRealityLog: [{
+  visualIdentity: 'scene:corrosion-cell', visualSemantics: 'A 3D scene: Corrosion of Iron: Anode and Cathode',
+  sourcePipeline: 'detectedSceneSpec', matchedConcept: 'chem.elect.corrosion', turnPosition: 1,
+  drawn: { caption: 'Corrosion of Iron: Anode and Cathode', text: ['Anode: Fe → Fe²⁺ + 2e⁻', 'Cathode: O₂ + 2H₂O + 4e⁻ → 4OH⁻'] },
+}] }
 
 describe('Issue A through the route', () => {
   it('no figure anywhere: the imagined description is replaced by the honest, teaching reply', async () => {
@@ -102,6 +109,48 @@ describe('Issue A through the route', () => {
     const [t] = await driveTurns(h, POST, [{ learnerSays: PICTURE_Q, modelReplies: IMAGINED }], CORROSION)
     expect(text(t).startsWith(NO_FIGURE_LEAD)).toBe(true)
     expect(text(t)).not.toMatch(/It usually shows/)
+  }, 120_000)
+
+  it('A-2 (rate-law, 76c2edd): an analogy that puts imagined axes and a sketch on the real figure loses those sentences', async () => {
+    h.state.snapshot = DRAWN
+    const imagined = [
+      'I hear you, the picture can feel abstract. Let us think of it like a kitchen pan left wet overnight in a damp sink.',
+      '- One side (the horizontal line) shows how much water touches the iron.',
+      '- The other side (the vertical line) shows how much air reaches it.',
+      'In the sketch, moving farther right changes the height of the stack of rust.',
+      'Where water and air meet the iron together, the iron slowly gives up electrons and rust builds up over the following days and weeks.',
+    ].join('\n')
+    const [t] = await driveTurns(h, POST, [{ learnerSays: PICTURE_Q, modelReplies: imagined }], CORROSION)
+    expect(text(t)).toMatch(/^The picture for this lesson is further up in our chat\. It is titled “Corrosion of Iron: Anode and Cathode”\./)
+    expect(text(t)).not.toMatch(/horizontal line|vertical line|In the sketch/)
+    expect(text(t)).toMatch(/gives up electrons/) // the rest of the teaching stays
+    const line = t.logs.find((l) => l.includes('unsupported-figure-claims-removed'))
+    expect(line && JSON.parse(line.slice(line.indexOf('{')))).toMatchObject({ keptModelText: true })
+  }, 120_000)
+
+  it('A-2: a reply that only says what is on the real figure is kept as written', async () => {
+    h.state.snapshot = DRAWN
+    const accurate = 'The figure is titled **“Corrosion of Iron: Anode and Cathode”**. The label **“Anode: Fe → Fe²⁺ + 2e⁻”** shows iron losing electrons, and the label **“Cathode: O₂ + 2H₂O + 4e⁻ → 4OH⁻”** shows oxygen gaining them.'
+    const [t] = await driveTurns(h, POST, [{ learnerSays: PICTURE_Q, modelReplies: accurate }], CORROSION)
+    // (the opening "The figure is titled" is dropped by the older phantom-claim
+    // stripper because no figure is attached THIS turn — unchanged behaviour)
+    expect(text(t)).toMatch(/The label \*\*“Anode: Fe → Fe²⁺ \+ 2e⁻”\*\* shows iron losing electrons, and the label \*\*“Cathode: O₂ \+ 2H₂O \+ 4e⁻ → 4OH⁻”\*\* shows oxygen gaining them\./)
+    expect(t.logs.some((l) => l.includes('unsupported-figure-claims-removed'))).toBe(false)
+  }, 120_000)
+
+  it('A-2: a reply that points at an imagined part of the real figure is checked without a picture question', async () => {
+    h.state.snapshot = DRAWN
+    const reply = 'Rust forms when iron meets water and oxygen together, and the iron slowly loses electrons to oxygen. The boxes represent the amount of salt and the arrows show rain falling on the metal over time.'
+    const [t] = await driveTurns(h, POST, [{ learnerSays: 'ok go on', modelReplies: reply }], CORROSION)
+    expect(text(t)).not.toMatch(/The boxes represent/)
+    expect(text(t)).toMatch(/^Rust forms when iron meets water/) // no figure lead: nobody asked about it
+    expect(t.logs.some((l) => l.includes('"event":"figure-question"'))).toBe(false)
+  }, 120_000)
+
+  it('A-2: with no figure for the concept, a reply mentioning arrows is not touched', async () => {
+    const reply = 'In a cell the electrons flow from the anode to the cathode through the wire, and the arrows in your notes point the same way.'
+    const [t] = await driveTurns(h, POST, [{ learnerSays: 'ok go on', modelReplies: reply }], CORROSION)
+    expect(text(t)).toBe(reply)
   }, 120_000)
 
   it('a photo the learner sent with the camera button counts as a picture', async () => {
@@ -213,6 +262,22 @@ describe('Issue C through the route', () => {
     const [t] = await driveTurns(h, POST, [{ learnerSays: 'give me example', modelReplies: BIO024 }], INNATE)
     expect(text(t)).not.toMatch(/swollen silver belly/)
     expect(readLog(t, '[grounded-prose-check]')).toMatchObject({ rejected: ['ungrounded-correction-2'] })
+  }, 120_000)
+
+  it('C-1 (grebe, 76c2edd): "supported" without a source quote leaves the example uncovered, so the reply says it is an illustration', async () => {
+    checker.grounded = JSON.stringify({ claims: [{ sentence: 1, verdict: 'supported' }, { sentence: 2, verdict: 'supported' }, { sentence: 3, verdict: 'unsupported' }] })
+    const [t] = await driveTurns(h, POST, [{ learnerSays: 'give me example', modelReplies: BIO024 }], INNATE)
+    expect(text(t)).toMatch(/zig-zag courtship dance/) // nothing is removed or rewritten
+    expect(text(t)).toContain(UNCOVERED_EXAMPLE_NOTE)
+    expect(text(t).split(UNCOVERED_EXAMPLE_NOTE)).toHaveLength(2) // said once
+    expect(readLog(t, '[grounded-prose-check]')).toMatchObject({ checked: true, qualified: true })
+  }, 120_000)
+
+  it('C-1: claims the checker grounds with a verbatim source quote are not qualified', async () => {
+    checker.grounded = JSON.stringify({ claims: [{ sentence: 4, verdict: 'supported', source_quote: 'stereotyped, largely unmodifiable behavioural sequences' }] })
+    const [t] = await driveTurns(h, POST, [{ learnerSays: 'give me example', modelReplies: BIO024 }], INNATE)
+    expect(text(t)).not.toMatch(/illustration of the idea/)
+    expect(readLog(t, '[grounded-prose-check]')).toMatchObject({ checked: true, qualified: false })
   }, 120_000)
 
   it('a short reply outside the scope is not sent to the checker', async () => {

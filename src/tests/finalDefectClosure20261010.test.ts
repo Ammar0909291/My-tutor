@@ -9,8 +9,10 @@ import { describe, it, expect } from 'vitest'
 import { readFileSync } from 'fs'
 import {
   figureAvailableToLearner, noFigureAnswer, withoutFigureSentences, NO_FIGURE_LEAD,
-  DENIES_OR_IMAGINES_FIGURE_RE, figureEvidenceAnswer,
+  DENIES_OR_IMAGINES_FIGURE_RE, figureEvidenceAnswer, checkFigureClaims, evidenceFromPayload,
 } from '@/lib/teaching/figureReference'
+import { resolveVisual } from '@/lib/teaching/visual/resolveVisual'
+import { describeVisualPayload } from '@/lib/teaching/visual/visualSemantics'
 import { asksAboutTheFigure, asksForPractice } from '@/lib/teaching/masteryGate'
 import { quizRequestNotice, QUIZ_UNANSWERED_LEAD, QUIZ_REASK_LEAD, labelReaskedCard, quizPoolExhaustedFloorLead } from '@/lib/teaching/quizRequest'
 import { mayAttachProbeBelowGuide } from '@/lib/teaching/masteryReachability'
@@ -113,8 +115,9 @@ describe('Issue A — the no-figure reply', () => {
     }
     // After the gate, only the graded-card verdict may touch the text, and a picture question is not a card answer.
     const after = ROUTE.slice(gate, ROUTE.indexOf('PHASE 0: TURN DECISION PROVENANCE', gate))
-    // the gate's two writes (grounded-to-shown-figure, no-figure answer) + withVerdict
-    expect((after.match(/cleanText = /g) ?? []).length).toBe(3)
+    // the gate's three writes (grounded-to-shown-figure, unsupported-claims-removed, no-figure answer) + withVerdict
+    expect((after.match(/cleanText = /g) ?? []).length).toBe(4)
+    expect(after).toMatch(/cleanText = enough \?/)
     expect(after).toMatch(/cleanText = grounded/)
     expect(after).toMatch(/cleanText = answer/)
     expect(after).toMatch(/cleanText = withVerdict/)
@@ -151,7 +154,7 @@ describe('Issue A follow-up — a figure the learner HAS is answered from what w
   })
   it('an entry written before the drawn field existed still yields its title (no invented parts)', () => {
     const out = figureEvidenceAnswer(undefined, 'A 3D scene: Determining Rate Law and Order via Initial-Rate Method', 'earlier', null)
-    expect(out).toBe('The picture for this lesson is further up in our chat. It is titled “Determining Rate Law and Order via Initial-Rate Method”. Tell me which of those parts is confusing and I will explain it.')
+    expect(out).toBe('The picture for this lesson is further up in our chat. It is titled “Determining Rate Law and Order via Initial-Rate Method”. Tell me which part of it is confusing and I will explain it.')
   })
 })
 
@@ -277,6 +280,7 @@ describe('Issue B — the reply when no new card ships', () => {
 import {
   needsGroundedCheck, splitSentences, decideGroundedEdits, applyGroundedEdits, runGroundedProseCheck,
   parseCheckerAnswer, correctionIsGrounded, GROUNDED_CHECK_SYSTEM_PROMPT,
+  qualifyUncovered, UNCOVERED_EXAMPLE_NOTE, UNCOVERED_QUALIFY_AT,
 } from '@/lib/teaching/groundedProseCheck'
 import { BIOLOGY_EXTENSION_EXPLANATIONS } from '@/lib/teaching/assets/biologyExtensionSeedAssets'
 import { getKGNode } from '@/lib/curriculum/knowledgeGraph'
@@ -443,5 +447,106 @@ describe('Issue C — claims checked against the sources', () => {
     // inside the model-written-only hygiene block
     const guard = ROUTE.lastIndexOf("['memory', 'gate', 'degraded', 'deterministic', 'fallback'].includes(provider)", at)
     expect(guard).toBeGreaterThan(at - 12000)
+  })
+})
+
+// ── A-2 (production 2026-10-10 on 76c2edd): claims about a REAL figure ─────
+/** chem.org.arrow-pushing's served figure, read from production (visual_assets, read-only). */
+const ARROW_SPEC = { renderer: 'spec', visualSpec: { type: 'process_flow', title: 'Electron Flow Using Curved Arrow Notation', steps: [
+  { title: 'Identify nucleophile and electrophile', note: 'Locate the electron‑rich species and the atom that will accept electrons.' },
+  { title: 'Draw nucleophilic attack arrow', note: 'Curved arrow from the nucleophile’s lone pair to the electrophilic carbon.' },
+  { title: 'Show bond‑breaking arrow', note: 'Curved arrow from the bond to the leaving group indicating electron flow away.' },
+  { title: 'Complete product structures', note: 'Display the newly formed bond and the separated leaving group as distinct species.' }] } }
+/** Production replies (docs/qa/final-closure-2026-10-10/redrive-76c2edd-*.txt). */
+const ARROW_ACCURATE = 'The figure is a flow‑chart titled **“Electron Flow Using Curved Arrow Notation.”** It contains four step boxes linked by arrows that show the order of actions:\n\n1. **“Identify nucleophile and electrophile”** – first you decide which species will donate electrons (the nucleophile) and which will accept them (the electrophile). \n2. **“Draw nucleophilic attack arrow”** – next you draw a curved arrow that starts from the nucleophile’s lone‑pair or π‑bond and points to the electrophilic atom.'
+const PHYS_ACCURATE = 'The diagram in front of you shows the seven fundamental quantities that the International System of Units (SI) is built on. In the centre, a green label reads **“SI”**. Around it you see:\n\n* At the top (red) – **length: m** (the metre) \n* Top‑right (blue) – **mass: kg** (kilograms) \n\nOverall, the picture tells us that these seven base units are the reference – the agreed‑upon measures – and that any other unit we use can be expressed as a combination of them.'
+const RATE_LAW_IMAGINED = 'I hear you — the picture can feel a bit abstract. Let’s think of it like a kitchen.\n\nImagine you’re making a sauce that needs two ingredients: tomatoes (A) and onions (B). The “speed” at which the sauce thickens is the reaction rate.\n\n- One side (the horizontal line) shows how much tomato you have – that’s the concentration of A. \n- The other side (the vertical line) shows how much onion you have – that’s the concentration of B. \n\nIn the sketch, moving farther right (more tomatoes) or higher up (more onions) changes the height of the stack according to the exponents m and n.'
+const RATE_LAW_BOXES = '- The boxes represent the concentrations of reactants A and B; the arrow shows they combine to give a rate that follows the formula shown.'
+const RATE_LAW_EVIDENCE = { caption: 'Determining Rate Law and Order via Initial-Rate Method', text: [] as string[] }
+
+describe('A-2 — what a reply says is on a real figure must be on it', () => {
+  it('evidence from a stored process-flow spec carries every step title and note', () => {
+    const ev = evidenceFromPayload(ARROW_SPEC as never, describeVisualPayload as never)
+    expect(ev.caption).toBe('Electron Flow Using Curved Arrow Notation')
+    expect(ev.text).toContain('Identify nucleophile and electrophile')
+    expect(ev.text).toContain('Curved arrow from the nucleophile’s lone pair to the electrophilic carbon.')
+  })
+  it('the imagined axes, lines and "sketch" beside the rate-law figure are removed; the analogy itself stays', () => {
+    const r = checkFigureClaims(RATE_LAW_IMAGINED, RATE_LAW_EVIDENCE)
+    expect(r.removed.join(' ')).toMatch(/horizontal line/)
+    expect(r.removed.join(' ')).toMatch(/vertical line/)
+    expect(r.removed.join(' ')).toMatch(/In the sketch/)
+    expect(r.text).not.toMatch(/horizontal line|vertical line|In the sketch/)
+    expect(r.text).toMatch(/making a sauce/)
+  })
+  it('"the boxes represent …" naming nothing on the figure is removed', () => {
+    expect(checkFigureClaims(RATE_LAW_BOXES, RATE_LAW_EVIDENCE).removed).toHaveLength(1)
+  })
+  it('an accurate reply about the real arrow-pushing figure is kept byte-identical', () => {
+    const r = checkFigureClaims(ARROW_ACCURATE, evidenceFromPayload(ARROW_SPEC as never, describeVisualPayload as never))
+    expect(r.removed).toEqual([])
+    expect(r.text).toBe(ARROW_ACCURATE)
+  })
+  it('an accurate reply about the real SI-units figure (positions and colours not judged) is kept', () => {
+    const d = resolveVisual({ message: 'show me a diagram', lessonConceptId: 'phys.meas.units', learnerRequest: 'diagram', subject: 'physics' } as Parameters<typeof resolveVisual>[0])
+    const ev = evidenceFromPayload((d.graphical ? d.payload : null) as never, describeVisualPayload as never)
+    expect(ev.text.length).toBeGreaterThan(5)
+    expect(checkFigureClaims(PHYS_ACCURATE, ev).removed).toEqual([])
+  })
+  it('a quoted label not on the figure is removed when the sentence says it is written there', () => {
+    const r = checkFigureClaims('The top box is labelled **“Rate constant k”**. The steps run in order.', RATE_LAW_EVIDENCE)
+    expect(r.removed).toEqual(['The top box is labelled **“Rate constant k”**.'])
+  })
+  it('a sentence that does not point at the figure is never judged', () => {
+    const t = 'Imagine a kitchen where the sauce thickens faster with more tomatoes.'
+    expect(checkFigureClaims(t, RATE_LAW_EVIDENCE).removed).toEqual([])
+  })
+  it('route: model-written replies that point at a figure are checked even without a picture question', () => {
+    const at = ROUTE.indexOf('NO PICTURE, NO DESCRIPTION OF ONE')
+    const gate = ROUTE.slice(at, ROUTE.indexOf('A GRADED CARD ALWAYS GETS ITS VERDICT', at))
+    expect(gate).toMatch(/const pointsAtFigureFinal = modelWrittenFig/)
+    expect(gate).toMatch(/if \(\(figureQuestionFinal \|\| pointsAtFigureFinal\)/)
+    expect(gate).toMatch(/fr\.checkFigureClaims\(cleanText, evidence\)/)
+    expect(gate).toMatch(/if \(!available && figureQuestionFinal\)/)
+  })
+})
+
+// ── C-1 (BIO-024 class, production 2026-10-10 on 76c2edd) ───────────────────
+/** The /learn page reply (docs/qa/final-closure-2026-10-10/biology-evidence.json, turn 1). */
+const GREBE = 'Let’s look at a classic example of an **innate, fixed‑action pattern**: the courtship dance of the male **great crested grebe** (a water bird). \n\nWhen a female grebe arrives at the nest, she displays a bright orange patch on her throat. That orange patch is the **sign stimulus** – a specific visual cue that the male’s nervous system is wired to recognize. As soon as the male sees this patch, a whole, stereotyped sequence is released: he inflates his chest, spreads his head feathers, performs a series of synchronized hops and splashes, and finally presents food to the female. Once started, the dance runs to completion even if the female moves away, showing that the behavior is largely unmodifiable once triggered.'
+
+describe('C-1 — an example no source covers is qualified honestly', () => {
+  it('the checker is told a real-world example is factual and that "supported" must quote its source', () => {
+    expect(GROUNDED_CHECK_SYSTEM_PROMPT).toMatch(/real-world example .* states facts/)
+    expect(GROUNDED_CHECK_SYSTEM_PROMPT).toMatch(/For "supported", copy the supporting source text EXACTLY/)
+  })
+  it('"supported" without a verbatim quote counts as uncovered; with one it does not', () => {
+    const noQuote = decideGroundedEdits(GREBE, [{ sentence: 2, verdict: 'supported' }, { sentence: 4, verdict: 'supported' }], SOURCES)
+    expect(noQuote.uncovered).toHaveLength(2)
+    const withQuote = decideGroundedEdits(GREBE, [{ sentence: 5, verdict: 'supported', source_quote: 'once triggered, a FAP typically runs to completion' }], SOURCES)
+    expect(withQuote.uncovered).toHaveLength(0)
+  })
+  it('the grebe reply as production checked it ("no-edits") is now qualified, without inventing a correction', async () => {
+    const g = await run(GREBE, [{ sentence: 2, verdict: 'supported' }, { sentence: 3, verdict: 'unsupported' }, { sentence: 4, verdict: 'supported' }])
+    expect(g.edits).toEqual([])
+    expect((g.uncovered ?? []).length).toBeGreaterThanOrEqual(UNCOVERED_QUALIFY_AT)
+    const q = qualifyUncovered(GREBE)
+    expect(q.text.endsWith(UNCOVERED_EXAMPLE_NOTE)).toBe(true)
+    expect(q.text.startsWith(GREBE.trim())).toBe(true)
+    expect(qualifyUncovered(q.text).changed).toBe(false)
+  })
+  it('hedged and doubted sentences are not counted (one is kept as qualified, the other removed)', () => {
+    const t = 'For example, many birds may court with a display that is often colourful. A fixed action pattern is released by a sign stimulus, and it runs to the end once it starts, which is why biologists call it stereotyped behaviour.'
+    const d = decideGroundedEdits(t, [{ sentence: 1, verdict: 'unsupported' }, { sentence: 2, verdict: 'unsupported', doubtful: true }], SOURCES)
+    expect(d.uncovered).toEqual([])
+  })
+  it('a sound reply whose claims quote the sources is not qualified', async () => {
+    const sound = 'For example, a knee-jerk is a reflex: one quick response. A courtship display is a fixed action pattern: many coordinated steps released by a specific sign stimulus, which natural selection can fix as a species-typical trait over many generations of animals.'
+    const g = await run(sound, [{ sentence: 2, verdict: 'supported', source_quote: 'it requires a specific sign stimulus' }])
+    expect(g.uncovered ?? []).toEqual([])
+  })
+  it('route: the qualifier is applied from the checker result and logged', () => {
+    expect(ROUTE).toMatch(/if \(uncoveredCount >= gp\.UNCOVERED_QUALIFY_AT\)/)
+    expect(ROUTE).toMatch(/done\.push\('grounded-prose-qualified'\)/)
   })
 })

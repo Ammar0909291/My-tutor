@@ -898,7 +898,102 @@ export function figureEvidenceAnswer(
   const parts: string[] = []
   parts.push(caption ? `${place} is titled “${caption}”.` : `${place} is the figure shown for this idea.`)
   if (text.length) parts.push(`The words written on it are: ${text.map((t) => `“${t}”`).join(', ')}.`)
-  parts.push('Tell me which of those parts is confusing and I will explain it.')
+  parts.push(text.length ? 'Tell me which of those parts is confusing and I will explain it.' : 'Tell me which part of it is confusing and I will explain it.')
   const body = withoutFigureSentences(teaching ?? '').trim()
   return body ? `${parts.join(' ')}\n\n${body}` : parts.join(' ')
+}
+
+// ── A-2 (production 2026-10-10 on 76c2edd): claims about a REAL figure ─────
+/**
+ * chem.kinet.rate-law, a figure ("Determining Rate Law and Order via
+ * Initial-Rate Method") shown earlier in the lesson. Two replies described a
+ * picture that is not that figure, without denying it or calling it typical:
+ *   "One side (the horizontal line) shows how much tomato you have … In the
+ *    sketch, moving farther right … changes the height of the stack"
+ *   "The boxes represent the concentrations of reactants A and B; the arrow
+ *    shows they combine to give a rate …"
+ * The check below reads every sentence that points at a figure and keeps it
+ * only when what it claims is on the figure is in the figure's evidence (its
+ * caption and every label the renderer draws). It removes a sentence that
+ *  - dresses an analogy up as the figure ("picture yourself", "in the sketch"),
+ *  - names a structure the figure does not have (axes, horizontal/vertical
+ *    lines, curves, stacks, bars, a grid, a table),
+ *  - quotes a label as written on the figure that is not on it, or
+ *  - says what a box/arrow/part "represents" naming nothing on the figure.
+ * Positions and colours are not judged here (figureFidelity owns colours).
+ * Pure.
+ */
+export interface FigureEvidence { caption: string | null; text: string[] }
+
+/** Evidence from a described payload: caption, every readable label, step text, and labels named in elements. */
+export function evidenceFromSemantics(sem: { caption?: string | null; readable?: string[]; steps?: string[]; elements?: string[] } | null | undefined): FigureEvidence {
+  const quoted = (sem?.elements ?? []).flatMap((e) => Array.from(String(e).matchAll(/"([^"]{1,120})"/g)).map((m) => m[1]))
+  const text = Array.from(new Set([...(sem?.readable ?? []), ...(sem?.steps ?? []), ...quoted].map((t) => String(t).trim()).filter(Boolean)))
+  return { caption: sem?.caption ?? null, text: text.slice(0, 24) }
+}
+
+/** Evidence straight from a payload: the described semantics plus what a spec draws beyond them (step notes, axis labels). */
+export function evidenceFromPayload(
+  payload: { renderer?: string; visualSpec?: unknown; sceneSpec?: unknown; visualType?: unknown } | null | undefined,
+  describe: (p: never) => { caption?: string | null; readable?: string[]; steps?: string[]; elements?: string[] },
+): FigureEvidence {
+  const base = evidenceFromSemantics(payload ? describe(payload as never) : null)
+  const spec = (payload?.visualSpec ?? null) as Record<string, unknown> | null
+  const extra: string[] = []
+  if (spec) {
+    for (const k of ['title', 'xLabel', 'yLabel', 'caption']) if (typeof spec[k] === 'string') extra.push(spec[k] as string)
+    if (Array.isArray(spec.steps)) for (const st of spec.steps as Array<Record<string, unknown>>) {
+      if (typeof st?.title === 'string') extra.push(st.title)
+      if (typeof st?.note === 'string') extra.push(st.note)
+    }
+  }
+  return { caption: base.caption, text: Array.from(new Set([...base.text, ...extra.map((t) => t.trim()).filter(Boolean)])).slice(0, 32) }
+}
+
+export const FIGURE_POINTING_RE = /\b(?:(?:the|this|that|your)\s+(?:picture|figure|diagram|image|sketch|drawing|chart|graph|flow ?chart|illustration)|in the (?:sketch|drawing)|box(?:es)?|arrows?|labell?ed|labels?|(?:left|right)[- ]hand side|on the (?:left|right)|at the (?:top|bottom)|(?:top|bottom) (?:left|right)|the (?:horizontal|vertical) (?:line|axis)|the [xy][- ]?axis|the axes|the curve|one side|the other side)\b/i
+const FIGURE_NOUN_RE = /\b(?:picture|figure|diagram|image|sketch|drawing|chart|graph|illustration)\b/i
+const ANALOGY_AS_FIGURE_RE = /\b(?:picture yourself|imagine|think of (?:it|this|the (?:picture|figure|diagram)) (?:as|like)|as if)\b/i
+const STRUCTURE_RE = /\b(x[- ]?axis|y[- ]?axis|axis|axes|horizontal (?:line|axis)|vertical (?:line|axis)|curves?|plotted|bar chart|bars|grid|stacks?|sketch|slope|peaks?|plateau|pie chart|table)\b/gi
+const LABEL_CLAIM_RE = /\b(?:labell?ed|labels?|reads?|says|written|titled|marked|caption|heading)\b/i
+const EXPLAINS_PART_RE = /\b(?:the|this|that|these|those)\s+(?:\w+\s+){0,2}?(?:box(?:es)?|arrows?|sections?|parts?|sides?|lines?)\b[^.!?]{0,60}\b(?:represents?|stands? for|shows?|means?)\b/i
+const POSITION_OR_COLOUR_RE = /^(?:(?:top|bottom|upper|lower)\s*)?(?:left|right|centre|center|middle|top|bottom)(?:\s+(?:left|right|side))?$|^(?:red|blue|green|orange|purple|grey|gray|black|white|yellow|pink|brown|teal)$/i
+const STOP = new Set(['this', 'that', 'with', 'from', 'they', 'them', 'their', 'there', 'which', 'when', 'what', 'into', 'than', 'then', 'also', 'each', 'shows', 'show', 'represent', 'represents', 'picture', 'figure', 'diagram', 'boxes', 'arrow', 'arrows', 'part', 'parts', 'side', 'here', 'just', 'like'])
+const norm = (t: string): string => (t ?? '').toLowerCase().replace(/[‐-―−]/g, '-').replace(/[“”"*’‘']/g, '').replace(/\s+/g, ' ').trim()
+const contentWords = (t: string): string[] => (norm(t).match(/[a-z][a-z-]{3,}/g) ?? []).filter((w) => !STOP.has(w))
+
+export function checkFigureClaims(reply: string, evidence: FigureEvidence): { text: string; removed: string[] } {
+  const ev = norm([evidence.caption ?? '', ...evidence.text].join(' | '))
+  const evWords = new Set(contentWords(ev).map((w) => w.replace(/(?:es|s)$/, '')))
+  const labels = [evidence.caption ?? '', ...evidence.text].map(norm).filter((l) => l.length >= 3)
+  const removed: string[] = []
+  // Split as the grounded prose check does, keeping every character.
+  const parts = (reply ?? '').split(/(?<=[.!?])(\s+)|(\n+)/).filter((p) => p !== undefined)
+  const out: string[] = []
+  for (const p of parts) {
+    const s = p ?? ''
+    if (!s.trim() || !/[A-Za-z]{2,}/.test(s) || !FIGURE_POINTING_RE.test(s)) { out.push(s); continue }
+    let bad = false
+    if (ANALOGY_AS_FIGURE_RE.test(s) && FIGURE_NOUN_RE.test(s)) bad = true
+    if (!bad) {
+      for (const m of s.matchAll(STRUCTURE_RE)) {
+        const w = m[1].toLowerCase()
+        if (!ev.includes(w.replace(/s$/, ''))) { bad = true; break }
+      }
+    }
+    if (!bad && LABEL_CLAIM_RE.test(s)) {
+      const terms = Array.from(s.matchAll(/“([^”]{2,80})”|"([^"]{2,80})"|\*\*([^*]{2,80})\*\*/g)).map((m) => norm(m[1] ?? m[2] ?? m[3] ?? ''))
+        .filter((t) => t.length >= 2 && !POSITION_OR_COLOUR_RE.test(t))
+      for (const t of terms) {
+        if (!(ev.includes(t) || labels.some((l) => l.length >= 4 && t.includes(l)))) { bad = true; break }
+      }
+    }
+    if (!bad && EXPLAINS_PART_RE.test(s) && !/“|"|\*\*/.test(s)) {
+      const overlap = contentWords(s).map((w) => w.replace(/(?:es|s)$/, '')).filter((w) => evWords.has(w))
+      if (new Set(overlap).size < 2) bad = true
+    }
+    if (bad) { removed.push(s.trim()); continue }
+    out.push(s)
+  }
+  if (removed.length === 0) return { text: reply, removed }
+  return { text: out.join('').replace(/\n{3,}/g, '\n\n').replace(/^[ \t]*[-*•][ \t]*$/gm, '').replace(/\n{3,}/g, '\n\n').trim(), removed }
 }

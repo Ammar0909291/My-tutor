@@ -11121,6 +11121,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         try {
           const { createRRMEntry } = await import('@/lib/teaching/renderedRealityModel')
           const { describeVisualPayload } = await import('@/lib/teaching/visual/visualSemantics')
+          const { evidenceFromPayload } = await import('@/lib/teaching/figureReference')
           rrmEntryThisTurn = createRRMEntry({
             visualType: responseVisual,
             visualSpec: detectedVisualSpec,
@@ -11137,9 +11138,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 const payload = detectedSceneSpec ? { renderer: 'scene', sceneSpec: detectedSceneSpec }
                   : detectedVisualSpec ? { renderer: 'spec', visualSpec: detectedVisualSpec }
                   : responseVisual ? { renderer: 'card', visualType: responseVisual } : null
-                const sem = describeVisualPayload(payload as never)
-                const text = [...(sem.readable ?? []), ...(sem.steps ?? [])].map((t) => String(t).slice(0, 120))
-                return { caption: sem.caption ?? null, text: Array.from(new Set(text)).slice(0, 16) }
+                const ev = evidenceFromPayload(payload as never, describeVisualPayload as never)
+                return { caption: ev.caption, text: ev.text.map((t) => t.slice(0, 120)).slice(0, 24) }
               } catch { return undefined }
             })(),
           })
@@ -13711,8 +13711,16 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 done.push('grounded-prose-check')
               }
             }
+            // C-1: confident claims no source covers are qualified honestly.
+            const uncoveredCount = (g as { uncovered?: string[] }).uncovered?.length ?? 0
+            let qualified = false
+            if (uncoveredCount >= gp.UNCOVERED_QUALIFY_AT) {
+              const q = gp.qualifyUncovered(checkedBody)
+              if (q.changed) { checkedBody = q.text; qualified = true; done.push('grounded-prose-qualified') }
+            }
             console.log('[grounded-prose-check] ' + JSON.stringify({
               conceptId: resolvedConceptId ?? null, checked: g.checked, reason: g.reason, applied: groundedApplied,
+              uncovered: uncoveredCount, qualified,
               edits: g.edits.map((e) => ({ action: e.action, sentence: e.sentence.slice(0, 160), replacement: e.replacement?.slice(0, 160) ?? null, sourceQuote: e.sourceQuote?.slice(0, 160) ?? null })),
               rejected: g.rejected,
             }))
@@ -13952,7 +13960,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // decision used.
       const figureQuestionFinal = figureQuestionHoisted
         || (await import('@/lib/teaching/masteryGate')).asksAboutTheFigure(learnerAuthoredMessage)
-      if (figureQuestionFinal && !serveLessonComplete && !lessonCompletionHoisted && provider !== 'degraded') {
+      // A-2 (production 76c2edd, rate-law): a model-written reply that points at
+      // a figure is checked against what that figure draws even when the learner
+      // did not ask about the picture ("show me a diagram" answered "The boxes
+      // represent the concentrations of reactants A and B" beside a figure that
+      // has no such boxes).
+      const modelWrittenFig = !['memory', 'gate', 'degraded', 'deterministic', 'fallback'].includes(provider)
+      const pointsAtFigureFinal = modelWrittenFig
+        && (await import('@/lib/teaching/figureReference')).FIGURE_POINTING_RE.test(cleanText)
+      if ((figureQuestionFinal || pointsAtFigureFinal) && !serveLessonComplete && !lessonCompletionHoisted && provider !== 'degraded') {
         try {
           const fr = await import('@/lib/teaching/figureReference')
           const learnerTexts = (learnSession.messages as Array<{ role: unknown; content?: unknown }>)
@@ -13965,49 +13981,70 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             conceptId: resolvedConceptId,
             recentLearnerMessages: learnerTexts,
           })
-          console.log('[figure-evidence] ' + JSON.stringify({
-            event: 'figure-question', conceptId: resolvedConceptId ?? null, available,
-            flagEarly: figureQuestionHoisted, figureInThisResponse: visualFired,
-            renderedConcepts: snapshotRRMLog.map((e) => e.matchedConcept ?? null).slice(-6),
-            photoSent: learnerTexts.some((m) => /^\s*📸/u.test(m)), provider,
-          }))
-          // A figure the learner HAS, which the reply denies or replaces with a
-          // typical / imagined one (rate-law, cf79346): answered from what the
-          // renderer drew instead. An accurate reply about the figure is kept.
           const photoSent = learnerTexts.some((m) => /^\s*📸/u.test(m))
-          if (available && !photoSent && fr.DENIES_OR_IMAGINES_FIGURE_RE.test(cleanText)) {
+          if (figureQuestionFinal) {
+            console.log('[figure-evidence] ' + JSON.stringify({
+              event: 'figure-question', conceptId: resolvedConceptId ?? null, available,
+              flagEarly: figureQuestionHoisted, figureInThisResponse: visualFired,
+              renderedConcepts: snapshotRRMLog.map((e) => e.matchedConcept ?? null).slice(-6),
+              photoSent, provider,
+            }))
+          }
+          if (available && !photoSent) {
+            // The evidence: what this reply's figure draws, else what the
+            // rendered-reality log recorded for the figure shown earlier.
             const shown = [...snapshotRRMLog].reverse().find((e) => e.matchedConcept === resolvedConceptId) ?? null
-            let drawnNow: { caption: string | null; text: string[] } | null = null
+            let evidence: { caption: string | null; text: string[] } | null = null
             if (visualFired) {
               try {
                 const { describeVisualPayload } = await import('@/lib/teaching/visual/visualSemantics')
                 const payload = detectedSceneSpec ? { renderer: 'scene', sceneSpec: detectedSceneSpec }
                   : detectedVisualSpec ? { renderer: 'spec', visualSpec: detectedVisualSpec }
                   : responseVisual ? { renderer: 'card', visualType: responseVisual } : null
-                const sem = describeVisualPayload(payload as never)
-                drawnNow = { caption: sem.caption ?? null, text: Array.from(new Set([...(sem.readable ?? []), ...(sem.steps ?? [])].map(String))) }
+                evidence = fr.evidenceFromPayload(payload as never, describeVisualPayload as never)
               } catch { /* fall back to the log */ }
             }
+            evidence = evidence ?? (shown as { drawn?: { caption: string | null; text: string[] } } | null)?.drawn
+              ?? { caption: (shown?.visualSemantics ?? '').replace(/^A 3D scene:\s*/i, '') || null, text: [] }
             let teachingShown: string | null = null
             if (resolvedConceptId) {
               const { getKGNode } = await import('@/lib/curriculum/knowledgeGraph')
               const node = getKGNode(resolvedConceptId)
               if (node?.title && node.description) teachingShown = (await import('@/lib/teaching/conceptFallback')).conceptFallbackText(node.title, node.description)
             }
-            const grounded = fr.figureEvidenceAnswer(
-              drawnNow ?? (shown as { drawn?: { caption: string | null; text: string[] } } | null)?.drawn ?? null,
-              visualFired ? null : (shown?.visualSemantics ?? null),
-              visualFired ? 'this-message' : 'earlier',
-              teachingShown,
-            )
-            console.warn('[figure-evidence] ' + JSON.stringify({
-              event: 'figure-reply-grounded-to-shown-figure', conceptId: resolvedConceptId ?? null, provider,
-              source: visualFired ? 'this-response' : 'rendered-log', hadDrawnText: Boolean(drawnNow?.text.length || (shown as { drawn?: unknown } | null)?.drawn),
-              charsBefore: cleanText.length,
-            }))
-            cleanText = grounded
+            const where = visualFired ? 'this-message' as const : 'earlier' as const
+            if (figureQuestionFinal && fr.DENIES_OR_IMAGINES_FIGURE_RE.test(cleanText)) {
+              // A figure the learner HAS, which the reply denies or replaces with
+              // a typical / imagined one (rate-law, cf79346).
+              const grounded = fr.figureEvidenceAnswer(evidence, null, where, teachingShown)
+              console.warn('[figure-evidence] ' + JSON.stringify({
+                event: 'figure-reply-grounded-to-shown-figure', conceptId: resolvedConceptId ?? null, provider,
+                source: visualFired ? 'this-response' : 'rendered-log', hadDrawnText: evidence.text.length > 0,
+                charsBefore: cleanText.length,
+              }))
+              cleanText = grounded
+            } else if (modelWrittenFig) {
+              // Every figure-pointing sentence is checked against the evidence;
+              // what the figure does not support is removed and the reply opens
+              // with what the figure does show.
+              const chk = fr.checkFigureClaims(cleanText, evidence)
+              if (chk.removed.length > 0) {
+                const remaining = chk.text.trim()
+                const words = (remaining.match(/\S+/g) ?? []).length
+                // A picture question opens with what the figure shows; an
+                // unprompted reply just loses the unsupported sentences.
+                const enough = figureQuestionFinal ? words >= 20 : words >= 8
+                const lead = fr.figureEvidenceAnswer(evidence, null, where, null)
+                cleanText = enough ? (figureQuestionFinal ? `${lead}\n\n${remaining}` : remaining) : fr.figureEvidenceAnswer(evidence, null, where, teachingShown)
+                console.warn('[figure-evidence] ' + JSON.stringify({
+                  event: 'unsupported-figure-claims-removed', conceptId: resolvedConceptId ?? null, provider,
+                  source: visualFired ? 'this-response' : 'rendered-log', evidenceLabels: evidence.text.length,
+                  removed: chk.removed.map((r) => r.slice(0, 160)), keptModelText: enough,
+                }))
+              }
+            }
           }
-          if (!available) {
+          if (!available && figureQuestionFinal) {
             let teaching: string | null = null
             if (resolvedConceptId) {
               const priorTutorNf = (learnSession.messages as Array<{ role: unknown; content?: unknown }>)
