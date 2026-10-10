@@ -923,7 +923,12 @@ export function figureEvidenceAnswer(
  * Positions and colours are not judged here (figureFidelity owns colours).
  * Pure.
  */
-export interface FigureEvidence { caption: string | null; text: string[] }
+export interface FigureEvidence {
+  caption: string | null
+  text: string[]
+  /** The figure's steps/boxes IN ORDER (title + note), when it has an order. */
+  order?: string[]
+}
 
 /** Evidence from a described payload: caption, every readable label, step text, and labels named in elements. */
 export function evidenceFromSemantics(sem: { caption?: string | null; readable?: string[]; steps?: string[]; elements?: string[] } | null | undefined): FigureEvidence {
@@ -958,7 +963,20 @@ export function evidenceFromPayload(
       if (typeof st?.note === 'string') extra.push(st.note)
     }
   }
-  return { caption: base.caption, text: Array.from(new Set([...base.text, ...extra.map((t) => t.trim()).filter(Boolean)])).slice(0, 32) }
+  const order: string[] = []
+  if (spec && Array.isArray(spec.steps)) {
+    for (const st of spec.steps as Array<Record<string, unknown>>) {
+      const t = [st?.title, st?.note].filter((x) => typeof x === 'string').join(' — ')
+      if (t) order.push(t)
+    }
+  } else if (scene?.steps && (payload?.sceneSpec as { sceneType?: string }).sceneType === 'process') {
+    for (const st of scene.steps as Array<{ narration?: string }>) if (typeof st?.narration === 'string' && st.narration.trim()) order.push(st.narration.trim())
+  }
+  return {
+    caption: base.caption,
+    text: Array.from(new Set([...base.text, ...extra.map((t) => t.trim()).filter(Boolean)])).slice(0, 32),
+    ...(order.length >= 2 && { order: order.slice(0, 12) }),
+  }
 }
 
 export const FIGURE_POINTING_RE = /\b(?:(?:the|this|that|your)\s+(?:picture|figure|diagram|image|sketch|drawing|chart|graph|flow ?chart|illustration)|in the (?:sketch|drawing)|box(?:es)?|arrows?|labell?ed|labels?|(?:left|right)[- ]hand side|on the (?:left|right)|at the (?:top|bottom)|(?:top|bottom) (?:left|right)|the (?:horizontal|vertical) (?:line|axis)|the [xy][- ]?axis|the axes|the curve|one side|the other side|the (?:two|three|four) (?:straight |dashed |dotted |coloured |colored )?lines)\b/i
@@ -972,6 +990,8 @@ const PART_WORDS_RE = /\b(?:(?:top|bottom|upper|lower|left|right|centre|center|m
 function onlyPartWords(term: string): boolean {
   return term.replace(PART_WORDS_RE, '').replace(/[()\s,.-]+/g, '').length === 0
 }
+const ORDINALS: Record<string, number> = { first: 1, second: 2, third: 3, fourth: 4, fifth: 5, sixth: 6, seventh: 7, eighth: 8, last: -1, final: -1 }
+const ORDINAL_CLAIM_RE = /\b(first|second|third|fourth|fifth|sixth|seventh|eighth|last|final)(?:\s+(?:box|step|stage|one))?\s+(?:represents?|shows?|indicates?|is|stands? for|contains?|says)\s+([^,;.]{3,80})/gi
 const POSITION_OR_COLOUR_RE = /^(?:(?:top|bottom|upper|lower)\s*)?(?:left|right|centre|center|middle|top|bottom)(?:\s+(?:left|right|side))?$|^(?:red|blue|green|orange|purple|grey|gray|black|white|yellow|pink|brown|teal)$/i
 const STOP = new Set(['this', 'that', 'with', 'from', 'they', 'them', 'their', 'there', 'which', 'when', 'what', 'into', 'than', 'then', 'also', 'each', 'shows', 'show', 'represent', 'represents', 'picture', 'figure', 'diagram', 'boxes', 'arrow', 'arrows', 'part', 'parts', 'side', 'here', 'just', 'like'])
 const norm = (t: string): string => (t ?? '').toLowerCase().replace(/[‐-―−]/g, '-').replace(/[“”"*’‘']/g, '').replace(/\s+/g, ' ').trim()
@@ -1011,6 +1031,19 @@ export function checkFigureClaims(reply: string, evidence: FigureEvidence): { te
       const part = /\b(box|arrow|line)/i.exec(EXPLAINS_PART_RE.exec(s)?.[0] ?? '')?.[1]?.toLowerCase()
       const partDrawn = part ? new RegExp(`drawn: [^|]*\\b${part}`).test(ev) : false
       if (new Set(overlap).size < (partDrawn ? 1 : 2)) bad = true
+    }
+    if (!bad && evidence.order && evidence.order.length >= 2) {
+      // "the first box represents the reactants, the second shows …": each
+      // ordinal claim must share a word with THAT step (rate-law, f32eeb04).
+      for (const m of s.matchAll(ORDINAL_CLAIM_RE)) {
+        const n = ORDINALS[m[1].toLowerCase()] ?? 0
+        const idx = n === -1 ? evidence.order.length - 1 : n - 1
+        const step = evidence.order[idx]
+        const said = contentWords(norm(m[2])).map((w) => w.replace(/(?:es|s)$/, ''))
+        if (said.length === 0) continue
+        const stepWords = new Set(step ? contentWords(norm(step)).map((w) => w.replace(/(?:es|s)$/, '')) : [])
+        if (!said.some((w) => stepWords.has(w))) { bad = true; break }
+      }
     }
     if (bad) { removed.push(s.trim()); continue }
     out.push(s)

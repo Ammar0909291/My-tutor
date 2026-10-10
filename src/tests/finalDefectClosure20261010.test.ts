@@ -598,6 +598,29 @@ describe('A-2 / C-1 follow-up from the 9a0cee7a re-drive', () => {
     expect(isExampleTurn('Top left, “Simple reflex” – the basic, automatic response like the knee-jerk reflex.', 'i dont understand this picture. what is it showing?')).toBe(false)
     expect(isExampleTurn('Think of the nervous system as the body’s communication highway … like a tap on the knee.', 'quiz me')).toBe(false)
   })
+  it('f32eeb04: never on a picture question, and a mid-text "For example:" is not an example turn', () => {
+    expect(isExampleTurn('Overall, the picture shows the seven base quantities and an example of how a derived unit is built.', 'i dont understand this picture. what is it showing?')).toBe(false)
+    expect(isExampleTurn('Let’s look at the last step in the figure. The rate law we wrote is rate = k[A]^m[B]^n. So the units of k follow. For example: zero order gives mol L⁻¹ s⁻¹.', 'quiz me')).toBe(false)
+    expect(isExampleTurn('Here is a classic example of a fixed action pattern in the stickleback.', 'ok')).toBe(true)
+  })
+  it('f32eeb04 rate-law: ordinal box claims are checked against the figure\'s steps in order', () => {
+    const RATE_SPEC = { renderer: 'spec', visualSpec: { type: 'process_flow', title: 'Determining Rate Law and Order via Initial-Rate Method', steps: [
+      'Prepare reactant solutions at varying concentrations.', 'Initiate reaction and record initial rate.', 'Plot initial rate vs concentration of each reactant.',
+      'Determine slope to find reaction order for each reactant.', 'Sum individual orders to get overall order.', 'Calculate rate constant k and its units.'].map((title) => ({ title })) } }
+    const ev = evidenceFromPayload(RATE_SPEC as never, describeVisualPayload as never)
+    expect(ev.order).toHaveLength(6)
+    const wrong = 'The first box represents the reactants, the second shows their concentrations, the third indicates the reaction‑rate expression, the fourth is the rate constant *k*, the fifth shows the overall order (the sum of the exponents), and the final box represents the products.'
+    expect(checkFigureClaims(wrong, ev).removed).toHaveLength(1)
+    const right = 'The first box shows preparing reactant solutions at different concentrations, and the final box is calculating the rate constant k and its units.'
+    expect(checkFigureClaims(right, ev).removed).toEqual([])
+    expect(evidenceFromPayload(ARROW_SPEC as never, describeVisualPayload as never).order).toHaveLength(4)
+    expect(checkFigureClaims(ARROW_ACCURATE, evidenceFromPayload(ARROW_SPEC as never, describeVisualPayload as never)).removed).toEqual([])
+  })
+  it('f32eeb04 /learn page: the note follows the paragraph with the first uncovered claim, above the "Read more" fold', () => {
+    const reply = 'In the figure you can see the orange box.\n\nA classic real-world instance is the male three-spined stickleback fish. It spots the bright red belly on the female.\n\nOnce started, the dance runs to completion.'
+    const r = qualifyUncovered(reply, 'It spots the bright red belly on the female.')
+    expect(r.text.split('\n\n')).toEqual(['In the figure you can see the orange box.', 'A classic real-world instance is the male three-spined stickleback fish. It spots the bright red belly on the female.', UNCOVERED_EXAMPLE_NOTE, 'Once started, the dance runs to completion.'])
+  })
   it('the note goes before a closing question, so the question stays last', () => {
     const r = qualifyUncovered('A stickleback example.\n\n**What do you notice about the sign stimulus?**')
     expect(r.text).toBe(`A stickleback example.\n\n${UNCOVERED_EXAMPLE_NOTE}\n\n**What do you notice about the sign stimulus?**`)

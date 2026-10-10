@@ -191,21 +191,36 @@ export const UNCOVERED_QUALIFY_AT = 2
 
 /**
  * Only a turn that GIVES an example is qualified: the learner asked for one, or
- * the reply names one ("for example", "e.g.", "a classic example"). Production
- * on 9a0cee7a also qualified a figure walkthrough and an overview on a quiz
- * turn, where "this example" named nothing.
+ * the reply OPENS with one ("For example, …", "Here is a classic example …").
+ * Never a picture question (the figure gate answers those). Production on
+ * 9a0cee7a / f32eeb04 also qualified figure walkthroughs and a quiz-turn reply
+ * with a mid-text "For example:", where "this example" named nothing.
  */
 const EXAMPLE_ASKED_RE = /\b(?:example|instance|real[- ]life|real[- ]world)\b/i
-const EXAMPLE_GIVEN_RE = /\b(?:for example|for instance|e\.g\.|an example|example of|classic example|famous example|real[- ]world (?:example|fixed|case))\b/i
+const PICTURE_ASKED_RE = /\b(?:picture|figure|diagram|image|drawing|sketch|graph)\b/i
+const EXAMPLE_OPENS_RE = /\b(?:for example|for instance|e\.g\.|(?:a|one|here is an?) (?:classic|famous|real[- ]world|real[- ]life|simple) example|here is an example|let(?:'|’)s look at an? (?:\S+\s+)?example|real[- ]world (?:fixed|case))\b/i
 export function isExampleTurn(reply: string, learnerMessage: string): boolean {
-  return EXAMPLE_ASKED_RE.test(learnerMessage ?? '') || EXAMPLE_GIVEN_RE.test(reply ?? '')
+  const learner = learnerMessage ?? ''
+  if (PICTURE_ASKED_RE.test(learner)) return false // the figure gate answers picture questions
+  if (EXAMPLE_ASKED_RE.test(learner)) return true
+  // Otherwise only a reply that OPENS with an example (first two sentences).
+  const opening = (reply ?? '').split(/(?<=[.!?:])\s+/).slice(0, 2).join(' ')
+  return EXAMPLE_OPENS_RE.test(opening)
 }
 
-/** Add the qualifier once — before a closing question, so the question stays last. */
-export function qualifyUncovered(text: string): { text: string; changed: boolean } {
+/**
+ * Add the qualifier once, right after the paragraph that holds the first
+ * uncovered sentence: on /learn a long reply folds under "Read more", and a
+ * note at the end was below the fold while the claim was above it (f32eeb04).
+ * Without that anchor: before a closing question, else at the end.
+ */
+export function qualifyUncovered(text: string, firstUncovered?: string | null): { text: string; changed: boolean } {
   const t = (text ?? '').trim()
   if (t.includes(UNCOVERED_EXAMPLE_NOTE)) return { text, changed: false }
   const paras = t.split(/\n{2,}/)
+  const anchor = (firstUncovered ?? '').trim().slice(0, 60)
+  const at = anchor ? paras.findIndex((p) => p.includes(anchor)) : -1
+  if (at >= 0) return { text: [...paras.slice(0, at + 1), UNCOVERED_EXAMPLE_NOTE, ...paras.slice(at + 1)].join('\n\n'), changed: true }
   const last = paras[paras.length - 1] ?? ''
   if (paras.length > 1 && /\?\s*(?:\*\*|__)?\s*$/.test(last)) {
     return { text: [...paras.slice(0, -1), UNCOVERED_EXAMPLE_NOTE, last].join('\n\n'), changed: true }

@@ -13715,7 +13715,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             const uncoveredCount = (g as { uncovered?: string[] }).uncovered?.length ?? 0
             let qualified = false
             if (uncoveredCount >= gp.UNCOVERED_QUALIFY_AT && gp.isExampleTurn(checkedBody, learnerAuthoredMessage)) {
-              const q = gp.qualifyUncovered(checkedBody)
+              const q = gp.qualifyUncovered(checkedBody, (g as { uncovered?: string[] }).uncovered?.[0] ?? null)
               if (q.changed) { checkedBody = q.text; qualified = true; done.push('grounded-prose-qualified') }
             }
             console.log('[grounded-prose-check] ' + JSON.stringify({

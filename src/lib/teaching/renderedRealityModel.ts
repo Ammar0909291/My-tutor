@@ -48,7 +48,7 @@ export interface RRMEntry {
   /** Issue A (2026-10-10): what the renderer actually drew, for answering a
    *  later "what is this picture showing?" from evidence rather than from the
    *  model. Optional; entries written before it existed simply lack it. */
-  drawn?: { caption: string | null; text: string[] }
+  drawn?: { caption: string | null; text: string[]; order?: string[] }
 }
 
 export type RRMLog = RRMEntry[]
@@ -109,7 +109,7 @@ export interface CreateEntryInput {
    *  are shape-identical to before. */
   visualIntent?: VisualIntent
   /** Issue A (2026-10-10). See RRMEntry.drawn. */
-  drawn?: { caption: string | null; text: string[] }
+  drawn?: { caption: string | null; text: string[]; order?: string[] }
 }
 
 export function createRRMEntry(input: CreateEntryInput): RRMEntry | null {
