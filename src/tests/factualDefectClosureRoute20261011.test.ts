@@ -5,7 +5,7 @@
  */
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { driveTurns, readLog, type TurnResult } from './support/turnHarness'
-import { GROUNDED_CHECK_SYSTEM_PROMPT, NAMED_EXAMPLE_LEAD, UNCOVERED_EXAMPLE_NOTE } from '@/lib/teaching/groundedProseCheck'
+import { GROUNDED_CHECK_SYSTEM_PROMPT, NAMED_EXAMPLE_LEAD, NAMED_EXAMPLE_REPEAT_LEAD, UNCOVERED_EXAMPLE_NOTE } from '@/lib/teaching/groundedProseCheck'
 import { FACT_CHECK_SYSTEM_PROMPT } from '@/lib/teaching/factCheckPass'
 import { BIOLOGY_EXTENSION_EXPLANATIONS, BIOLOGY_EXTENSION_PROBES } from '@/lib/teaching/assets/biologyExtensionSeedAssets'
 
@@ -55,6 +55,20 @@ describe('BIO-024 through the route', () => {
     expect(text(t)).not.toContain(UNCOVERED_EXAMPLE_NOTE) // nothing uncovered is left to qualify
     expect(readLog(t, '[grounded-prose-check]')).toMatchObject({ named: 4, namedAction: 'replaced', qualified: false })
   }, 120_000)
+
+  it('three example requests in a row: two different authored examples, then an honest repeat (production d10f8a09)', async () => {
+    checker.grounded = JSON.stringify({ claims: [{ sentence: 2, verdict: 'unsupported', named: true }] })
+    const [a, b, c] = await driveTurns(h, POST, [
+      { learnerSays: 'give me example', modelReplies: STICKLEBACK },
+      { learnerSays: 'give me another example', modelReplies: STICKLEBACK },
+      { learnerSays: 'give me another example', modelReplies: STICKLEBACK },
+    ], INNATE)
+    expect(text(a)).toContain(NAMED_EXAMPLE_LEAD)
+    expect(text(b)).toContain(NAMED_EXAMPLE_LEAD)
+    expect(text(b)).not.toBe(text(a))
+    expect(text(c)).toContain(NAMED_EXAMPLE_REPEAT_LEAD)
+    for (const t of [a, b, c]) expect(text(t)).not.toMatch(/red belly|stickleback/i)
+  }, 180_000)
 
   it('C-1 unchanged: the same reply with no named tags is qualified, not replaced', async () => {
     checker.grounded = JSON.stringify({ claims: [{ sentence: 1, verdict: 'unsupported' }, { sentence: 2, verdict: 'unsupported' }] })

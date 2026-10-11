@@ -13680,6 +13680,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 conceptTitle: node?.title ?? null,
                 sources,
                 isStub: hy.isStubReply,
+                alreadyShown: (learnSession.messages as Array<{ role: unknown; content?: unknown }>)
+                  .filter((m) => m.role === MessageRole.ASSISTANT && typeof m.content === 'string')
+                  .map((m) => m.content as string),
                 ask: async (system, user) => {
                   llmCallCount++ // instrumentation only (grounded prose check)
                   const routedGp = await routeAI([{ role: 'user', content: user }], system, country, 2048, teachingLang,
@@ -13714,10 +13717,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // BIO-024: on an example turn, unsupported facts about a named real
             // organism/substance/place/event/person are removed, or the reply
             // becomes the lesson's own authored example.
-            const gx = g as { uncovered?: string[]; named?: string[]; sourceExample?: string | null }
+            const gx = g as { uncovered?: string[]; named?: string[]; sourceExample?: string | null; sourceExampleRepeat?: boolean }
             let namedAction: string = 'none'
             if ((gx.named?.length ?? 0) > 0 && gp.isExampleTurn(checkedBody, learnerAuthoredMessage)) {
-              const nr = gp.resolveNamedClaims(checkedBody, gx.named ?? [], gx.sourceExample ?? null, hy.isStubReply)
+              const nr = gp.resolveNamedClaims(checkedBody, gx.named ?? [], gx.sourceExample ?? null, hy.isStubReply, gx.sourceExampleRepeat === true)
               namedAction = nr.action
               if (nr.action === 'removed' || nr.action === 'replaced') { checkedBody = nr.text; done.push(`grounded-named-${nr.action}`) }
             }
@@ -13733,6 +13736,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             console.log('[grounded-prose-check] ' + JSON.stringify({
               conceptId: resolvedConceptId ?? null, checked: g.checked, reason: g.reason, applied: groundedApplied,
               uncovered: uncoveredCount, qualified, named: gx.named?.length ?? 0, namedAction,
+              namedSentences: (gx.named ?? []).map((n) => n.slice(0, 160)), sourceExampleRepeat: gx.sourceExampleRepeat ?? null,
               edits: g.edits.map((e) => ({ action: e.action, sentence: e.sentence.slice(0, 160), replacement: e.replacement?.slice(0, 160) ?? null, sourceQuote: e.sourceQuote?.slice(0, 160) ?? null })),
               rejected: g.rejected,
             }))

@@ -336,26 +336,37 @@ export function decideGroundedEdits(text: string, claims: CheckerClaim[], source
 export const NAMED_EXAMPLE_LEAD = 'I will keep to the examples in your lesson materials, so every detail here is one you can rely on:'
 const SOURCE_EXAMPLE_RE = /\((?:like|e\.g\.?,?)\s|\bfor example\b|\bfor instance\b|\bsuch as\b/gi
 
-/** The authored explanation that carries the most examples (never a probe: that would give its answer away). */
-export function pickSourceExample(sources: readonly string[]): string | null {
-  let best: string | null = null
-  let bestN = 0
-  for (const src of sources) {
-    const t = (src ?? '').trim()
-    if (!t || /^Question:/i.test(t) || t.length < 80) continue
-    const n = (t.match(SOURCE_EXAMPLE_RE) ?? []).length
-    if (n > bestN) { best = t; bestN = n }
-  }
-  return best
+/** Shown again when every authored example has already been given in this session. */
+export const NAMED_EXAMPLE_REPEAT_LEAD = 'Your lesson materials have no other example than the ones you have already seen, so here is one of them again:'
+
+/**
+ * The authored explanation that carries the most examples (never a probe: that
+ * would give its answer away), preferring one not already shown in this
+ * session (production d10f8a09: "give me another example" repeated the same text).
+ */
+export function pickSourceExample(sources: readonly string[], alreadyShown: readonly string[] = []): string | null {
+  return pickSourceExampleWithStatus(sources, alreadyShown).text
+}
+export function pickSourceExampleWithStatus(sources: readonly string[], alreadyShown: readonly string[] = []): { text: string | null; repeat: boolean } {
+  const ranked = sources
+    .map((src) => (src ?? '').trim())
+    .filter((t) => t.length >= 80 && !/^Question:/i.test(t))
+    .map((t) => ({ t, n: (t.match(SOURCE_EXAMPLE_RE) ?? []).length }))
+    .filter((x) => x.n > 0)
+    .sort((a, b) => b.n - a.n)
+  if (ranked.length === 0) return { text: null, repeat: false }
+  const seen = (t: string) => alreadyShown.some((m) => (m ?? '').includes(t.slice(0, 80)))
+  const fresh = ranked.find((x) => !seen(x.t))
+  return fresh ? { text: fresh.t, repeat: false } : { text: ranked[0].t, repeat: true }
 }
 
 export function resolveNamedClaims(
-  body: string, named: readonly string[], sourceExample: string | null, isStub: (t: string) => boolean,
+  body: string, named: readonly string[], sourceExample: string | null, isStub: (t: string) => boolean, repeat = false,
 ): { text: string; action: 'none' | 'removed' | 'replaced' | 'kept-no-source' } {
   if (named.length === 0) return { text: body, action: 'none' }
   // The whole example goes: the production reply repeated the false detail in
   // a later sentence ("… triggered by a specific sign stimulus (the red belly)").
-  if (sourceExample) return { text: `${NAMED_EXAMPLE_LEAD}\n\n${sourceExample}`, action: 'replaced' }
+  if (sourceExample) return { text: `${repeat ? NAMED_EXAMPLE_REPEAT_LEAD : NAMED_EXAMPLE_LEAD}\n\n${sourceExample}`, action: 'replaced' }
   const removed = applyGroundedEdits(body, named.map((sentence) => ({ sentence, action: 'removed' as const })), isStub)
   if (removed && removed.reason === 'applied') return { text: removed.text, action: 'removed' }
   return { text: body, action: 'kept-no-source' }
@@ -396,7 +407,9 @@ export async function runGroundedProseCheck(input: {
   isStub: (t: string) => boolean
   ask: (system: string, user: string) => Promise<string | null>
   timeoutMs?: number
-}): Promise<{ edits: GroundedEdit[]; checked: boolean; reason: string; rejected: string[]; uncovered?: string[]; named?: string[]; sourceExample?: string | null }> {
+  /** Tutor messages already in this session (so an authored example is not repeated). */
+  alreadyShown?: readonly string[]
+}): Promise<{ edits: GroundedEdit[]; checked: boolean; reason: string; rejected: string[]; uncovered?: string[]; named?: string[]; sourceExample?: string | null; sourceExampleRepeat?: boolean }> {
   if (!needsGroundedCheck(input.text, input.learnerMessage)) return { edits: [], checked: false, reason: 'out-of-scope', rejected: [] }
   if (input.isStub(input.text)) return { edits: [], checked: false, reason: 'stub-not-checked', rejected: [] }
   const sources = input.sources.map((s) => (s ?? '').trim()).filter((s) => s.length > 0)
@@ -416,7 +429,11 @@ export async function runGroundedProseCheck(input: {
     const stillUncovered = uncovered.filter((u) => !removedSet.has(u))
     return {
       edits, checked: true, reason: edits.length ? 'edits' : 'no-edits', rejected, uncovered: stillUncovered,
-      named, sourceExample: named.length > 0 ? pickSourceExample(sources) : null,
+      named,
+      ...(named.length > 0 && (() => {
+        const pick = pickSourceExampleWithStatus(sources, input.alreadyShown ?? [])
+        return { sourceExample: pick.text, sourceExampleRepeat: pick.repeat }
+      })()),
     }
   } catch {
     return { edits: [], checked: false, reason: 'error', rejected: [] }

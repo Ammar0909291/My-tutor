@@ -18,7 +18,7 @@
 import { describe, it, expect } from 'vitest'
 import {
   decideGroundedEdits, resolveNamedClaims, pickSourceExample, applyGroundedEdits, splitSentences,
-  GROUNDED_CHECK_SYSTEM_PROMPT, NAMED_EXAMPLE_LEAD, UNCOVERED_EXAMPLE_NOTE, isExampleTurn, qualifyUncovered, parseCheckerAnswer,
+  GROUNDED_CHECK_SYSTEM_PROMPT, NAMED_EXAMPLE_LEAD, NAMED_EXAMPLE_REPEAT_LEAD, pickSourceExampleWithStatus, UNCOVERED_EXAMPLE_NOTE, isExampleTurn, qualifyUncovered, parseCheckerAnswer,
 } from '@/lib/teaching/groundedProseCheck'
 import { BIOLOGY_EXTENSION_EXPLANATIONS, BIOLOGY_EXTENSION_PROBES } from '@/lib/teaching/assets/biologyExtensionSeedAssets'
 import { getKGNode } from '@/lib/curriculum/knowledgeGraph'
@@ -78,6 +78,17 @@ describe('BIO-024 — the stickleback claim never reaches the learner as fact', 
     expect(r.text.startsWith(NAMED_EXAMPLE_LEAD)).toBe(true)
     // aligned with the objective: FAP + sign stimulus + reflex contrast + genetic basis
     for (const re of [/fixed action pattern|FAP/i, /sign stimulus/, /knee-jerk reflex/, /courtship display/, /heritable trait shaped by natural selection/]) expect(r.text).toMatch(re)
+  })
+  it('production d10f8a09: "give me another example" gets the other authored example, then says honestly there is no other', () => {
+    const first = pickSourceExampleWithStatus(SOURCES, [])
+    const second = pickSourceExampleWithStatus(SOURCES, [`${NAMED_EXAMPLE_LEAD}\n\n${first.text}`])
+    expect(second.repeat).toBe(false)
+    expect(second.text).not.toBe(first.text)
+    expect(second.text).toMatch(/like a full courtship display/) // the misconception-repair explanation
+    const third = pickSourceExampleWithStatus(SOURCES, [first.text!, second.text!])
+    expect(third.repeat).toBe(true)
+    const r = resolveNamedClaims(STICKLEBACK, ['x'], third.text, notStub, third.repeat)
+    expect(r.text.startsWith(NAMED_EXAMPLE_REPEAT_LEAD)).toBe(true)
   })
   it('even if the checker tags only the first false sentence, the repeated "(the red belly)" goes too', () => {
     const d = decideGroundedEdits(STICKLEBACK, [{ sentence: 2, verdict: 'unsupported', named: true }], SOURCES)
