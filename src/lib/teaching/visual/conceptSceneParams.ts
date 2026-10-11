@@ -145,6 +145,11 @@ import {
   buildPointScene, buildLineScene, buildLineSegmentScene, buildRayScene, buildPlaneScene, buildPerpendicularLinesScene,
   buildTrapezoidScene, buildAreaScene, buildTranslationScene, buildRotationScene, buildTransformReflectionScene, buildDilationScene,
 } from '@/lib/teaching/sceneGenerators/mathCoreScenesB4'
+import {
+  buildTrigFunctionsScene, buildPythagoreanIdentitiesScene, buildLawOfSinesScene, buildLawOfCosinesScene, buildEulersFormulaScene,
+  buildCompletingTheSquareScene, buildDiscriminantScene, buildRemainderTheoremScene, buildFactorTheoremScene,
+  buildPolynomialInequalityScene, buildRationalExpressionsScene, buildInequalityScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB5'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -364,6 +369,20 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'math.geom.rotation':                  buildRotationScene,
   'math.geom.reflection':                buildTransformReflectionScene,
   'math.geom.dilation':                  buildDilationScene,
+
+  // Mathematics visual campaign, batch 5 (2026-10-11). See mathCoreScenesB5.ts.
+  'math.trig.trig-functions':            buildTrigFunctionsScene,
+  'math.trig.pythagorean-identities':    buildPythagoreanIdentitiesScene,
+  'math.trig.law-of-sines':              buildLawOfSinesScene,
+  'math.trig.law-of-cosines':            buildLawOfCosinesScene,
+  'math.trig.eulers-formula':            buildEulersFormulaScene,
+  'math.alg.completing-the-square':      buildCompletingTheSquareScene,
+  'math.alg.discriminant':               buildDiscriminantScene,
+  'math.alg.remainder-theorem':          buildRemainderTheoremScene,
+  'math.alg.factor-theorem':             buildFactorTheoremScene,
+  'math.alg.polynomial-inequality':      buildPolynomialInequalityScene,
+  'math.alg.rational-expressions':       buildRationalExpressionsScene,
+  'math.alg.inequality':                 buildInequalityScene,
 
   // The Punnett generator is single-gene by construction (genotypes are two
   // alleles). A dihybrid cross drawn as a monohybrid square teaches the wrong
