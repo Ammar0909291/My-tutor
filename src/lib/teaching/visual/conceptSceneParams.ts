@@ -126,6 +126,11 @@ import {
   buildThermoProcessesScene, buildCarnotScene, buildResistivityScene, buildEmfScene, buildSchrodingerScene,
   buildSelectionRulesScene,
 } from '@/lib/teaching/sceneGenerators/physicsCoreScenesB15'
+import {
+  buildPythagoreanScene, buildSlopeScene, buildParabolaScene, buildGraphOfFunctionScene,
+  buildInverseFunctionsScene, buildDomainRangeScene, buildLinearSystemScene, buildCircleEquationScene,
+  buildDeterminantScene, buildEigenScene, buildConditionalProbabilityScene, buildNormalDistributionScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB1'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -288,6 +293,20 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'math.calc.critical-points': () => buildCalculusGraphScene({
     functionType: 'polynomial', coefficients: [1, 0, -3, 0], domainMin: -2.5, domainMax: 2.5,
   }),
+
+  // Mathematics visual campaign, batch 1 (2026-10-11). See mathCoreScenesB1.ts.
+  'math.geom.pythagorean-theorem':       buildPythagoreanScene,
+  'math.geom.slope':                     buildSlopeScene,
+  'math.geom.parabola':                  buildParabolaScene,
+  'math.func.graph-of-function':         buildGraphOfFunctionScene,
+  'math.func.inverse-functions':         buildInverseFunctionsScene,
+  'math.func.domain-range':              buildDomainRangeScene,
+  'math.alg.system-linear-equations':    buildLinearSystemScene,
+  'math.geom.circle-equation':           buildCircleEquationScene,
+  'math.linalg.determinant':             buildDeterminantScene,
+  'math.linalg.eigenvalues':             buildEigenScene,
+  'math.prob.conditional-probability':   buildConditionalProbabilityScene,
+  'math.prob.normal-distribution':       buildNormalDistributionScene,
 
   // The Punnett generator is single-gene by construction (genotypes are two
   // alleles). A dihybrid cross drawn as a monohybrid square teaches the wrong
