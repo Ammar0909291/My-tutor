@@ -281,3 +281,14 @@ describe('controlled production run on ae3ef570', () => {
     removed('The blue line on the graph is labelled “yield point”.', STRESS_EV)
   })
 })
+
+// ── Production on 3cd4398f (2026-10-11) ──────────────────────────────────────
+describe('3cd4398f production follow-up', () => {
+  it('a label written with added brackets ("stress (F / A)") is kept', () => {
+    kept('It shows a curve that relates **stress (F / A)**, written at the top left, to **strain (ΔL / L)**, written at the bottom right.', STRESS_EV)
+  })
+  it('NEGATIVE: brackets do not make different words or symbols match', () => {
+    removed('It shows a curve that relates **stress (F × A)**, written at the top left.', STRESS_EV)
+    removed('It shows a curve that relates **pressure (F / A)**, written at the top left.', STRESS_EV)
+  })
+})

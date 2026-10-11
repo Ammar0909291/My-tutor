@@ -1064,6 +1064,9 @@ const tight = (t: string): string => t
   .replace(/([a-z])_\{?([a-z0-9]{1,3})\}?/gi, '$1$2')
   .replace(/([a-z])\(([a-z0-9])\)/gi, '$1$2')
   .replace(/\s*([/=×·+*^−-])\s*/g, '$1')
+  // "stress (F / A)" for the label "stress F/A" (3cd4398f): brackets are
+  // dropped on both sides, the words and symbols must still match.
+  .replace(/[()]/g, ' ').replace(/\s+/g, ' ').trim()
 const stemWord = (w: string): string => w.replace(/(?:es|s)$/, '')
 const contentWords = (t: string): string[] => (norm(t).match(/[a-z]{4,}/g) ?? []).filter((w) => !STOP.has(w))
 
