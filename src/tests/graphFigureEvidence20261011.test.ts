@@ -247,3 +247,25 @@ describe('1d41551f production follow-up', () => {
     removed('On the graph, the slope is labelled **“yield strength”**.', STRESS_EV)
   })
 })
+
+// ── Controlled production negative run on f7630937 (2026-10-11) ─────────────
+describe('controlled production run (learner asked the tutor to repeat a sentence)', () => {
+  it('the three false sentences production removed are still removed', () => {
+    removed('The x-axis on the graph is labelled “time (s)”.', SQRT_EV)
+    removed('The bars on the graph show how big each square root is.', SQRT_EV)
+    removed('On the graph, the slope of the straight line shows the breaking stress of the wire.', STRESS_EV)
+  })
+  it('the true control production removed is now kept (only what the part is said to show is judged)', () => {
+    kept('On the graph, the horizontal line is the x-axis and the curve shows y = √x.', SQRT_EV)
+    kept('On the graph, the slope of the straight line is Young’s modulus E.', STRESS_EV)
+  })
+  it('NEGATIVE: a drawn part said to show something the figure does not state is still removed', () => {
+    removed('- Grey arrows run along the curve to show the direction of increasing load.', STRESS_EV)
+    removed('On the graph, the horizontal line shows the temperature of the room.', STRESS_EV)
+  })
+  it('KNOWN LIMIT (documented, not a regression): a wrong part meaning that shares one word with the figure text passes', () => {
+    // "wire" is in the stage text ("Pull a metal wire …"); the old whole-sentence
+    // rule kept this sentence too. An axis-meaning rule would be new scope.
+    kept('On the graph, the horizontal line shows the time the wire was stretched for.', STRESS_EV)
+  })
+})

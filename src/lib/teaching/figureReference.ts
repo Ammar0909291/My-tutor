@@ -1125,11 +1125,19 @@ export function checkFigureClaims(reply: string, evidence: FigureEvidence): { te
         bad = true; break
       }
     }
-    if (!bad && EXPLAINS_PART_RE.test(s) && !/“|"|\*\*/.test(s)) {
-      const overlap = contentWords(s).map((w) => w.replace(/(?:es|s)$/, '')).filter((w) => evWords.has(w))
-      const part = /\b(box|arrow|line)/i.exec(EXPLAINS_PART_RE.exec(s)?.[0] ?? '')?.[1]?.toLowerCase()
+    const partClaim = !bad && !/“|"|\*\*/.test(s) ? EXPLAINS_PART_RE.exec(s) : null
+    if (partClaim) {
+      // Only what the part is said to show is judged — the words after the
+      // verb ("… the curve shows y = √x"), not the whole sentence: production
+      // a60b6397 removed "On the graph, the horizontal line is the x-axis and
+      // the curve shows y = √x." A meaning of symbols only is left to the
+      // label rules.
+      const meaning = s.slice(partClaim.index + partClaim[0].length).split(/[.;!?]/)[0] ?? ''
+      const said = Array.from(new Set(contentWords(meaning).map((w) => w.replace(/(?:es|s)$/, ''))))
+      const overlap = said.filter((w) => evWords.has(w))
+      const part = /\b(box|arrow|line)/i.exec(partClaim[0])?.[1]?.toLowerCase()
       const partDrawn = part ? new RegExp(`drawn: [^|]*\\b${part}`).test(ev) : false
-      if (new Set(overlap).size < (partDrawn ? 1 : 2)) bad = true
+      if (said.length > 0 && overlap.length < Math.min(partDrawn ? 1 : 2, said.length)) bad = true
     }
     if (!bad) {
       // What the slope MEANS must come from the figure (a label or its stage
