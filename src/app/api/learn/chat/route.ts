@@ -13711,16 +13711,28 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 done.push('grounded-prose-check')
               }
             }
-            // C-1: confident claims no source covers are qualified honestly.
-            const uncoveredCount = (g as { uncovered?: string[] }).uncovered?.length ?? 0
+            // BIO-024: on an example turn, unsupported facts about a named real
+            // organism/substance/place/event/person are removed, or the reply
+            // becomes the lesson's own authored example.
+            const gx = g as { uncovered?: string[]; named?: string[]; sourceExample?: string | null }
+            let namedAction: string = 'none'
+            if ((gx.named?.length ?? 0) > 0 && gp.isExampleTurn(checkedBody, learnerAuthoredMessage)) {
+              const nr = gp.resolveNamedClaims(checkedBody, gx.named ?? [], gx.sourceExample ?? null, hy.isStubReply)
+              namedAction = nr.action
+              if (nr.action === 'removed' || nr.action === 'replaced') { checkedBody = nr.text; done.push(`grounded-named-${nr.action}`) }
+            }
+            // C-1: confident claims no source covers are qualified honestly
+            // (only those still in the reply).
+            const stillUncovered = (gx.uncovered ?? []).filter((u) => checkedBody.includes(u.trim().slice(0, 60)))
+            const uncoveredCount = stillUncovered.length
             let qualified = false
             if (uncoveredCount >= gp.UNCOVERED_QUALIFY_AT && gp.isExampleTurn(checkedBody, learnerAuthoredMessage)) {
-              const q = gp.qualifyUncovered(checkedBody, (g as { uncovered?: string[] }).uncovered?.[0] ?? null)
+              const q = gp.qualifyUncovered(checkedBody, stillUncovered[0] ?? null)
               if (q.changed) { checkedBody = q.text; qualified = true; done.push('grounded-prose-qualified') }
             }
             console.log('[grounded-prose-check] ' + JSON.stringify({
               conceptId: resolvedConceptId ?? null, checked: g.checked, reason: g.reason, applied: groundedApplied,
-              uncovered: uncoveredCount, qualified,
+              uncovered: uncoveredCount, qualified, named: gx.named?.length ?? 0, namedAction,
               edits: g.edits.map((e) => ({ action: e.action, sentence: e.sentence.slice(0, 160), replacement: e.replacement?.slice(0, 160) ?? null, sourceQuote: e.sourceQuote?.slice(0, 160) ?? null })),
               rejected: g.rejected,
             }))

@@ -103,14 +103,18 @@ export const GROUNDED_CHECK_SYSTEM_PROMPT = [
   '- "contradicted": a source sentence says something incompatible with it;',
   '- "unsupported": the sources do not cover it;',
   '- "not_factual": an analogy, a hypothetical, an instruction, a question or encouragement.',
-  'A real-world example (a named organism, substance, place, event or person) states facts: judge it, never "not_factual".',
+  'A real-world example about a specific, real, named organism, substance, place, event or person states facts: judge it,',
+  'never "not_factual", and set "named": true on that sentence.',
+  'An analogy that compares the idea to everyday life (an alarm, a recipe, a party), and a sentence that maps such an',
+  'analogy onto the lesson\'s idea or its figure, is "not_factual".',
   'For "supported", copy the supporting source text EXACTLY into "source_quote".',
   'For "contradicted", copy the contradicting source text EXACTLY into "source_quote" and give "correction": the',
   'sentence rewritten to agree with that quote, changing as little as possible and adding nothing the quote does not say.',
   'For "unsupported", set "doubtful": true only if you believe the sentence is factually wrong.',
   'Answer with JSON only, no prose: {"claims":[{"sentence":1,"verdict":"supported","source_quote":"..."},',
   '{"sentence":2,"verdict":"contradicted","source_quote":"...","correction":"..."},',
-  '{"sentence":3,"verdict":"unsupported","doubtful":true}]}. Omit sentences you have nothing to say about.',
+  '{"sentence":3,"verdict":"unsupported","doubtful":true},{"sentence":4,"verdict":"unsupported","named":true}]}.',
+  'Omit sentences you have nothing to say about.',
 ].join('\n')
 
 export function buildGroundedCheckRequest(segments: Segment[], sources: readonly string[], conceptTitle: string | null): string {
@@ -120,7 +124,15 @@ export function buildGroundedCheckRequest(segments: Segment[], sources: readonly
 }
 
 export type ClaimVerdict = 'supported' | 'contradicted' | 'unsupported' | 'not_factual'
-export interface CheckerClaim { sentence: number; verdict: ClaimVerdict; source_quote?: string; correction?: string; doubtful?: boolean }
+export interface CheckerClaim {
+  sentence: number
+  verdict: ClaimVerdict
+  source_quote?: string
+  correction?: string
+  doubtful?: boolean
+  /** A fact about a specific, real, named organism, substance, place, event or person. */
+  named?: boolean
+}
 
 /** Parse the checker's JSON. Anything malformed → null (keep the reply). */
 export function parseCheckerAnswer(answer: string | null | undefined): CheckerClaim[] | null {
@@ -143,6 +155,7 @@ export function parseCheckerAnswer(answer: string | null | undefined): CheckerCl
       source_quote: typeof o.source_quote === 'string' ? o.source_quote : undefined,
       correction: typeof o.correction === 'string' ? o.correction : undefined,
       doubtful: o.doubtful === true,
+      named: o.named === true,
     })
   }
   return out
@@ -228,12 +241,36 @@ export function qualifyUncovered(text: string, firstUncovered?: string | null): 
   return { text: `${t}\n\n${UNCOVERED_EXAMPLE_NOTE}`, changed: true }
 }
 
-export function decideGroundedEdits(text: string, claims: CheckerClaim[], sources: readonly string[]): { edits: GroundedEdit[]; rejected: string[]; uncovered: string[] } {
+/**
+ * The opening sentence of each sentence's paragraph, so an analogy passage
+ * ("Now picture a birthday cake-cutting ceremony. … That whole routine is the
+ * fixed action pattern …") is recognised from its opener.
+ */
+function paragraphOpeners(segs: Segment[]): Map<number, string> {
+  const out = new Map<number, string>()
+  let opener: string | null = null
+  for (const seg of segs) {
+    if (seg.index !== null) {
+      if (opener === null) opener = seg.text
+      out.set(seg.index, opener)
+    }
+    if (/\n\s*\n/.test(seg.sep)) opener = null
+  }
+  return out
+}
+const ANALOGY_OPENER_RE = /^\s*(?:(?:now|so|okay|ok)\s*,?\s+)?(?:think of|imagine|picture|pretend)\b|\b(?:it(?:'|’)s|this is|that(?:'|’)s) (?:just |a bit )?like\b/i
+
+export function decideGroundedEdits(text: string, claims: CheckerClaim[], sources: readonly string[]): { edits: GroundedEdit[]; rejected: string[]; uncovered: string[]; named: string[] } {
   const segs = splitSentences(text)
   const byIndex = new Map(segs.filter((s) => s.index !== null).map((s) => [s.index as number, s]))
+  const openers = paragraphOpeners(segs)
   const edits: GroundedEdit[] = []
   const rejected: string[] = []
   const uncovered: string[] = []
+  // BIO-024: confident facts about a specific real organism/substance/place/
+  // event/person that the sources do not support (route: removed or replaced
+  // on an example turn, never shown as fact).
+  const named: string[] = []
   const quoted = (q: string | undefined) => {
     const n = norm(q ?? '')
     return n.length >= 12 && sources.some((src) => norm(src).includes(n))
@@ -243,6 +280,12 @@ export function decideGroundedEdits(text: string, claims: CheckerClaim[], source
     if (!seg) { rejected.push(`no-sentence-${c.sentence}`); continue }
     const sentence = seg.text
     if (carriesNumber(sentence)) { if (c.verdict === 'contradicted' || c.doubtful) rejected.push(`numeric-owned-${c.sentence}`); continue }
+    if (c.named && !HEDGE_RE.test(sentence)
+      && (c.verdict === 'unsupported' || c.verdict === 'contradicted' || (c.verdict === 'supported' && !quoted(c.source_quote)))
+      && !(c.verdict === 'contradicted' && correctionIsGrounded(sentence, c, sources))) {
+      named.push(sentence)
+      continue
+    }
     // A confident claim the sources do not cover (or a "supported" verdict
     // that cannot show its source) is counted for the honest qualifier.
     if (!HEDGE_RE.test(sentence) && !c.doubtful
@@ -257,6 +300,16 @@ export function decideGroundedEdits(text: string, claims: CheckerClaim[], source
         continue
       }
       rejected.push(`ungrounded-correction-${c.sentence}`)
+      // An analogy is not a factual claim: inside an analogy passage an
+      // unverifiable "contradiction" keeps the sentence (production 3e7bdcc4,
+      // innate behaviour: "That whole, pre-programmed routine is the fixed
+      // action pattern on the right side of the figure …" after "Now picture a
+      // birthday cake-cutting ceremony." was removed). Counted as uncovered.
+      if (ANALOGY_OPENER_RE.test(openers.get(c.sentence) ?? '') || ANALOGY_OPENER_RE.test(sentence)) {
+        rejected.push(`analogy-kept-${c.sentence}`)
+        if (!HEDGE_RE.test(sentence)) uncovered.push(sentence)
+        continue
+      }
       // Unverifiable correction: treated as a doubted, uncovered claim.
       if (!HEDGE_RE.test(sentence)) edits.push({ sentence, action: 'removed' })
       continue
@@ -266,7 +319,46 @@ export function decideGroundedEdits(text: string, claims: CheckerClaim[], source
       edits.push({ sentence, action: 'removed' })
     }
   }
-  return { edits, rejected, uncovered }
+  return { edits, rejected, uncovered, named }
+}
+
+/**
+ * BIO-024 (production 2026-10-10, three runs): "give me example" on
+ * bio.behav.innate-behavior-instinct gave the three-spined stickleback with the
+ * sign stimulus "a female with a bright red belly". No lesson source covers
+ * sticklebacks and the lesson objective does not need them, so the claim is not
+ * corrected from outside knowledge: on an example turn the reply becomes the
+ * lesson's own authored example (an elaborate courtship display, a
+ * nest-building sequence, the knee-jerk reflex). With no authored example the
+ * named sentences are removed (within the removal limits); otherwise the C-1
+ * note still marks them as not lesson fact.
+ */
+export const NAMED_EXAMPLE_LEAD = 'I will keep to the examples in your lesson materials, so every detail here is one you can rely on:'
+const SOURCE_EXAMPLE_RE = /\((?:like|e\.g\.?,?)\s|\bfor example\b|\bfor instance\b|\bsuch as\b/gi
+
+/** The authored explanation that carries the most examples (never a probe: that would give its answer away). */
+export function pickSourceExample(sources: readonly string[]): string | null {
+  let best: string | null = null
+  let bestN = 0
+  for (const src of sources) {
+    const t = (src ?? '').trim()
+    if (!t || /^Question:/i.test(t) || t.length < 80) continue
+    const n = (t.match(SOURCE_EXAMPLE_RE) ?? []).length
+    if (n > bestN) { best = t; bestN = n }
+  }
+  return best
+}
+
+export function resolveNamedClaims(
+  body: string, named: readonly string[], sourceExample: string | null, isStub: (t: string) => boolean,
+): { text: string; action: 'none' | 'removed' | 'replaced' | 'kept-no-source' } {
+  if (named.length === 0) return { text: body, action: 'none' }
+  // The whole example goes: the production reply repeated the false detail in
+  // a later sentence ("… triggered by a specific sign stimulus (the red belly)").
+  if (sourceExample) return { text: `${NAMED_EXAMPLE_LEAD}\n\n${sourceExample}`, action: 'replaced' }
+  const removed = applyGroundedEdits(body, named.map((sentence) => ({ sentence, action: 'removed' as const })), isStub)
+  if (removed && removed.reason === 'applied') return { text: removed.text, action: 'removed' }
+  return { text: body, action: 'kept-no-source' }
 }
 
 /** Apply edits; null when the limits are exceeded or the result would not teach. */
@@ -304,7 +396,7 @@ export async function runGroundedProseCheck(input: {
   isStub: (t: string) => boolean
   ask: (system: string, user: string) => Promise<string | null>
   timeoutMs?: number
-}): Promise<{ edits: GroundedEdit[]; checked: boolean; reason: string; rejected: string[]; uncovered?: string[] }> {
+}): Promise<{ edits: GroundedEdit[]; checked: boolean; reason: string; rejected: string[]; uncovered?: string[]; named?: string[]; sourceExample?: string | null }> {
   if (!needsGroundedCheck(input.text, input.learnerMessage)) return { edits: [], checked: false, reason: 'out-of-scope', rejected: [] }
   if (input.isStub(input.text)) return { edits: [], checked: false, reason: 'stub-not-checked', rejected: [] }
   const sources = input.sources.map((s) => (s ?? '').trim()).filter((s) => s.length > 0)
@@ -318,11 +410,14 @@ export async function runGroundedProseCheck(input: {
     if (answer === null) return { edits: [], checked: false, reason: 'timeout-or-no-answer', rejected: [] }
     const claims = parseCheckerAnswer(answer)
     if (!claims) return { edits: [], checked: false, reason: 'unparseable', rejected: [] }
-    const { edits, rejected, uncovered } = decideGroundedEdits(input.text, claims, sources)
+    const { edits, rejected, uncovered, named } = decideGroundedEdits(input.text, claims, sources)
     // A removed sentence is not also qualified.
     const removedSet = new Set(edits.filter((e) => e.action === 'removed').map((e) => e.sentence))
     const stillUncovered = uncovered.filter((u) => !removedSet.has(u))
-    return { edits, checked: true, reason: edits.length ? 'edits' : 'no-edits', rejected, uncovered: stillUncovered }
+    return {
+      edits, checked: true, reason: edits.length ? 'edits' : 'no-edits', rejected, uncovered: stillUncovered,
+      named, sourceExample: named.length > 0 ? pickSourceExample(sources) : null,
+    }
   } catch {
     return { edits: [], checked: false, reason: 'error', rejected: [] }
   }
