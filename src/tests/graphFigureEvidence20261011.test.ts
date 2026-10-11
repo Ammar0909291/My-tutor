@@ -269,3 +269,15 @@ describe('controlled production run (learner asked the tutor to repeat a sentenc
     kept('On the graph, the horizontal line shows the time the wire was stretched for.', STRESS_EV)
   })
 })
+
+// ── Controlled production run on ae3ef570 (2026-10-11) ──────────────────────
+describe('controlled production run on ae3ef570', () => {
+  it('the model\'s accurate correction of an invented label is kept (the denied label is not a claim)', () => {
+    kept('Actually, the blue line on the graph is labelled “slope = E”, not “yield point”.', STRESS_EV)
+    kept('The plastic curve on the graph is labelled “plastic”, rather than “yield strength”.', STRESS_EV)
+  })
+  it('NEGATIVE: an invented label stated positively in the same sentence is still removed', () => {
+    removed('The blue line on the graph is labelled “yield point”, not “slope = E”.', STRESS_EV)
+    removed('The blue line on the graph is labelled “yield point”.', STRESS_EV)
+  })
+})

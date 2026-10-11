@@ -1103,6 +1103,9 @@ export function checkFigureClaims(reply: string, evidence: FigureEvidence): { te
       // A quoted word glossed in brackets — "(the “radicand”)" — names a term,
       // it does not claim a label (34faa394, square roots).
       const glossFree = s.replace(/\(\s*(?:the|a|an|called|i\.e\.,?|aka)?\s*(?:“[^”]{1,40}”|"[^"]{1,40}")\s*\)/gi, ' ')
+        // A label the sentence DENIES is not claimed: "labelled “slope = E”,
+        // not “yield point”" (controlled production run on ae3ef570).
+        .replace(/\b(?:not|never|rather than|instead of)\s+(?:[\w’']+\s+){0,2}?\**\s*(?:“[^”]{1,80}”|"[^"]{1,80}")\s*\**/gi, ' ')
       // One-character quotes count as a quoted label too (“E”, f6a1170c), so the
       // bold around them stays emphasis; the length filter below skips them.
       const quotedTerms = Array.from(glossFree.matchAll(/“([^”]{1,80})”|"([^"]{1,80})"/g)).map((m) => m[1] ?? m[2] ?? '')
