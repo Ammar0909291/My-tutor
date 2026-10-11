@@ -141,6 +141,10 @@ import {
   buildPlaceValueScene, buildMultiplicationScene, buildDivisionScene, buildNumberBaseScene,
   buildRatioScene, buildDirectVariationScene, buildInverseVariationScene, buildPercentageChangeScene,
 } from '@/lib/teaching/sceneGenerators/mathCoreScenesB3'
+import {
+  buildPointScene, buildLineScene, buildLineSegmentScene, buildRayScene, buildPlaneScene, buildPerpendicularLinesScene,
+  buildTrapezoidScene, buildAreaScene, buildTranslationScene, buildRotationScene, buildTransformReflectionScene, buildDilationScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB4'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -346,6 +350,20 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'math.arith.direct-variation':         buildDirectVariationScene,
   'math.arith.inverse-variation':        buildInverseVariationScene,
   'math.arith.percentage-change':        buildPercentageChangeScene,
+
+  // Mathematics visual campaign, batch 4 (2026-10-11). See mathCoreScenesB4.ts.
+  'math.geom.point':                     buildPointScene,
+  'math.geom.line':                      buildLineScene,
+  'math.geom.line-segment':              buildLineSegmentScene,
+  'math.geom.ray':                       buildRayScene,
+  'math.geom.plane':                     buildPlaneScene,
+  'math.geom.perpendicular-lines':       buildPerpendicularLinesScene,
+  'math.geom.trapezoid':                 buildTrapezoidScene,
+  'math.geom.area':                      buildAreaScene,
+  'math.geom.translation':               buildTranslationScene,
+  'math.geom.rotation':                  buildRotationScene,
+  'math.geom.reflection':                buildTransformReflectionScene,
+  'math.geom.dilation':                  buildDilationScene,
 
   // The Punnett generator is single-gene by construction (genotypes are two
   // alleles). A dihybrid cross drawn as a monohybrid square teaches the wrong

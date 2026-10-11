@@ -147,3 +147,24 @@ cylinder (`fracBar`); the cell outline stays visible because the cylinder is dra
 | math.arith.direct-variation | y = 2x through the origin, y ÷ x = 2 at (1, 2), (2, 4), (3, 6) |
 | math.arith.inverse-variation | y = 6/x, equal-area rectangles under (2, 3) and (3, 2): x × y = 6 |
 | math.arith.percentage-change | 50 → 65 is +30% and 80 → 60 is −25%, each as a fraction of the OLD bar |
+
+
+# Batch 4 (2026-10-11): elementary geometry and transformations
+
+`sceneGenerators/mathCoreScenesB4.ts` + `mathCoreScenesBatch4.test.ts` (98 checks, every claim re-derived from the DRAWN coordinates).
+Naming note: the reflection builder is `buildTransformReflectionScene` because `buildReflectionScene` already exists (optics).
+
+| Concept | Figure |
+|---|---|
+| math.geom.point | a point (dot + crosshair on the exact spot) against a segment (length) and a square (length and width) |
+| math.geom.line | two points fix exactly one line (arrowheads both ways); many lines through A, one through A and B |
+| math.geom.line-segment | the part of the line between endpoints, laid against a ruler: AB = 5 |
+| math.geom.ray | ray AB (endpoint A, through B, forever) and ray BA, the other way |
+| math.geom.plane | three non-collinear points, the sheet through them, extended lines staying in the plane |
+| math.geom.perpendicular-lines | two lines at 90°; from P the perpendicular (3) is shorter than slanted segments (5, 5) |
+| math.geom.trapezoid | bases 4 and 8, height 3; an upside-down copy makes a 12 × 3 parallelogram (36), so the area is ½(4 + 8)·3 = 18 |
+| math.geom.area | 4 × 3 unit squares = 12; right triangle on the same base and height = 6; L-shape 12 + 2 = 14 |
+| math.geom.translation | triangle ABC slid by (4, 2): three equal arrows, congruent image, same orientation |
+| math.geom.rotation | triangle PQR turned 90° about O: arcs about O, (x, y) → (−y, x), distances from O unchanged |
+| math.geom.reflection | mirror line, perpendicular guides bisected by it, image with reversed corner order |
+| math.geom.dilation | rays from O, image at k = 2 times the distance, similar triangle, sides ×2 and parallel |
