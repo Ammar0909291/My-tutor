@@ -192,3 +192,31 @@ coordinates are rounded to 0.01 on a steep curve, everything else is exact to th
 
 Not done yet and still open for the algebra domain: `math.alg.exponential-function` and `math.alg.logarithm` (the func-domain
 exponential and log figures could be registered for them) and `pascals-triangle`, `fundamental-theorem-algebra`, `rational-inequality`.
+
+
+# Batch 6 (2026-10-11): single-variable calculus
+
+`sceneGenerators/mathCoreScenesB6.ts` + `mathCoreScenesBatch6.test.ts` (110 checks). The generic suite now also runs the repo's own
+admission audit (`payloadBlockers`, figureAudit.ts) on every figure: during this batch it rejected two figures that the schema
+validator had passed, and the learner would have seen NO figure for them:
+
+- a label containing the word "undefined" is treated as internal-state leakage (ST-04). Say "no value" instead.
+- a zero-length `bond` (a Riemann rectangle of height 0) fails ST-07. Skip zero-height sides.
+
+Name collision to remember: `buildContinuityScene` already exists (fluid continuity, physics), so the calculus one is
+`buildPointContinuityScene`. `tsc` flags these as duplicate identifiers in conceptSceneParams.ts.
+
+| Concept | Figure |
+|---|---|
+| math.calc.limits | (x² − 1)/(x − 1) with a hole at (1, 2): both approaches close in on 2 |
+| math.calc.one-sided-limits | a jump at x = 1: left limit 1 (open circle), right limit 3 (filled dot), no two-sided limit |
+| math.calc.limits-at-infinity | 2 + 1/x sinking to the asymptote y = 2 on the right and rising to it on the left |
+| math.calc.continuity | the three conditions at x = 1 on x²/2 + 1/2: f(1) = 1, limit 1, equal |
+| math.calc.continuity-types | removable hole, jump, infinite (1/x) in three small panels |
+| math.calc.derivative-intro | tangents at P(2, 1) (slope 1) and Q(4, 4) (slope 2) on x²/4 |
+| math.calc.derivative-definition | secants with h = 2, 1, 0.5 have slopes 1.5, 1.25, 1.125 → the tangent slope 1 |
+| math.calc.differentiability | smooth x², corner |x| (slopes −1 and +1), vertical tangent ∛x |
+| math.calc.increasing-decreasing | x³/3 − x coloured by the sign of f′ = x² − 1 |
+| math.calc.local-extrema | x⁴/4 − x²: horizontal tangents at the max (0, 0) and minima (±√2, −1) |
+| math.calc.concavity | x³/6 above its tangent for x > 0, below for x < 0, inflection at 0 |
+| math.calc.riemann-sums | left sums of x²/4 on [0, 4]: n = 4 gives 3.5, n = 8 gives 4.375, exact 16/3 |

@@ -150,6 +150,11 @@ import {
   buildCompletingTheSquareScene, buildDiscriminantScene, buildRemainderTheoremScene, buildFactorTheoremScene,
   buildPolynomialInequalityScene, buildRationalExpressionsScene, buildInequalityScene,
 } from '@/lib/teaching/sceneGenerators/mathCoreScenesB5'
+import {
+  buildLimitScene, buildOneSidedLimitsScene, buildLimitsAtInfinityScene, buildPointContinuityScene, buildContinuityTypesScene,
+  buildDerivativeIntroScene, buildDerivativeDefinitionScene, buildDifferentiabilityScene, buildIncreasingDecreasingScene,
+  buildLocalExtremaScene, buildConcavityScene, buildRiemannSumsScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB6'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -383,6 +388,20 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'math.alg.polynomial-inequality':      buildPolynomialInequalityScene,
   'math.alg.rational-expressions':       buildRationalExpressionsScene,
   'math.alg.inequality':                 buildInequalityScene,
+
+  // Mathematics visual campaign, batch 6 (2026-10-11). See mathCoreScenesB6.ts.
+  'math.calc.limits':                    buildLimitScene,
+  'math.calc.one-sided-limits':          buildOneSidedLimitsScene,
+  'math.calc.limits-at-infinity':        buildLimitsAtInfinityScene,
+  'math.calc.continuity':                buildPointContinuityScene,
+  'math.calc.continuity-types':          buildContinuityTypesScene,
+  'math.calc.derivative-intro':          buildDerivativeIntroScene,
+  'math.calc.derivative-definition':     buildDerivativeDefinitionScene,
+  'math.calc.differentiability':         buildDifferentiabilityScene,
+  'math.calc.increasing-decreasing':     buildIncreasingDecreasingScene,
+  'math.calc.local-extrema':             buildLocalExtremaScene,
+  'math.calc.concavity':                 buildConcavityScene,
+  'math.calc.riemann-sums':              buildRiemannSumsScene,
 
   // The Punnett generator is single-gene by construction (genotypes are two
   // alleles). A dihybrid cross drawn as a monohybrid square teaches the wrong
