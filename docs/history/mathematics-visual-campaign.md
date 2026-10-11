@@ -60,3 +60,69 @@ registrations next to the existing math entry). Nothing else is touched.
 
 One session built the 12 figures, their tests, the renders and this note, including the canary detour. See the owner report for
 the session-count estimate this gives.
+
+
+---
+
+# Batch 2 (2026-10-11, owner instruction: "make all remaining Mathematics visuals ... cross check they are 100% correct ... keep me posting each visual")
+
+The pilot's one-batch limit was lifted by that instruction; the campaign now runs batch after batch until the essential tier is covered.
+
+## Re-measured before batch 2 (main at b0ea7445)
+
+`npx tsx scripts/math/visual-coverage.ts` (new, committed): 59 of 908 concepts had a fixed figure after batch 1 (the earlier audit script
+mis-read `CONCEPT_SCENE_OVERRIDES`, which is an array of ids, so it undercounted authored figures; the committed script is correct).
+Tier E (essential, my own priority tiers in `docs/qa/mathematics-visual-campaign/tiers.json`): 57 of 346 covered, 289 open.
+
+## What batch 2 added (new modules `sceneGenerators/mathSceneKit.ts` + `mathCoreScenesB2.ts`)
+
+Thirteen figures (twelve planned plus one swap, see "Reserved concepts"):
+
+| Concept | Figure |
+|---|---|
+| math.geom.coordinate-plane | grid with numbered axes, origin, A (3, 2) reached 3 right + 2 up, B (−2, −3) 2 left + 3 down |
+| math.geom.quadrants | four quadrants I–IV counter-clockwise, sign pair of each, one example point in each |
+| math.geom.midpoint-formula | A (−4, −1), B (2, 3): x-values average to −1, y-values to 1, M (−1, 1), AM = MB |
+| math.geom.parallel-lines | two parallel lines + a 60° transversal: corresponding, alternate interior (60°) and co-interior (120° + 60° = 180°) arcs |
+| math.geom.pythagorean-converse | 5-12-13 passes 25 + 144 = 169 = 13² (right angle); 5-12-14 fails (169 ≠ 196, angle ≈ 103°) |
+| math.geom.parallelogram | area = base × height: cut the triangle at one end and slide it to make a 5 × 3 rectangle |
+| math.geom.line-equation | y = 2x + 1 in slope-intercept, point-slope (through (1, 3)) and standard form (2x − y = −1) |
+| math.func.quadratic-function | x² − 2x − 3: vertex on x = −b/2a = 1 at (1, −4), roots −1 and 3, y-intercept −3 |
+| math.func.vertex-form | y = x², then (x − 2)² + 1 (vertex (2, 1)), then a = −1 flips it to a maximum |
+| math.func.exponential-function | 2ˣ through (0, 1), ×2 per step, never reaches 0, and (½)ˣ as the mirror image |
+| math.func.logarithmic-function | y = 2ˣ reflected in y = x gives y = log₂ x, only for x > 0 |
+| math.func.composition | 3 → g (add 2) → 5 → f (square) → 25, versus 3 → f → 9 → g → 11: the order matters |
+| math.func.even-odd-functions | x² even, x³/2 odd, (x² + x)/2 neither, with the matched points that show it |
+
+## How "100% correct" is enforced
+
+`mathCoreScenesBatch2.test.ts` (93 checks) maps the DRAWN coordinates back to maths coordinates and re-derives each claim independently:
+every sampled curve point satisfies its equation, every dot sits where its label says, arcs subtend the angle their label states,
+drawn side lengths are in the stated ratios, the three printed line forms hold for 6 sample x-values, and so on. All of it must hold on
+the figure as rendered, not just in the constants. Each figure was also rendered in Chromium through the real renderer
+(`/dev/physics-audit?concept=…`, 1280 px and 390 px) and looked at; layout fixes from that look: labels moved off the curves,
+the Converse figure rescaled to stay inside ±5, boxes widened so the composition machine names stay inside them.
+
+## Reserved concepts (do NOT give these a figure without reading this)
+
+- `math.linalg.vector-addition`: the AI canary (`visualCanaryConcept.test.ts`).
+- `math.func.linear-function`: four existing tests (`visualApprovedFigureTier`, `visualFigureBreadth`, `visualFigureCritic`,
+  `visualGenerationOutcomeStore`) use it as their "uncurated concept" fixture for the AI-generation path. A figure for it made 8 of
+  those tests fail in the full run. To release it later: change that constant and the fixture text in those four files to another
+  concept first. Equations of Lines (`math.geom.line-equation`) carries the y = mx + b figure instead.
+
+## Handover: how to continue
+
+1. `npx tsx scripts/math/visual-coverage.ts` lists the next essential gaps (the canary is excluded) and the per-domain count.
+2. New figures go in the next `sceneGenerators/mathCoreScenesBn.ts` (helpers in `mathSceneKit.ts`; per-step limit is 50 objects,
+   `validateSceneSpec`; a "filled" bar cell is one thick `line()`), registered in `conceptSceneParams.ts` under a dated comment,
+   with a `mathCoreScenesBatchn.test.ts` that re-derives the maths from the drawn coordinates.
+3. Render check: `npx next dev -p 3000`, then a Playwright script that opens `/dev/physics-audit?concept=<id>&fw=1026` (and 316) and
+   screenshots `[data-audit-frame]` (Chromium at /opt/pw-browsers, swiftshader args as in the physics audit).
+4. Run `npx vitest run visual Scene scene math curriculum` (about 6 minutes) before every push; the full suite takes about 20 minutes.
+5. Coordinates stay inside ±5; the camera looks at the origin, so centre each figure's drawn extent on (0, 0).
+
+## Pace
+
+Batch 2 took one working session of roughly 85k tokens including the render rounds and the linear-function discovery.
+About 275 essential concepts remain (about 23 more batches of 12) before helpful-tier work.

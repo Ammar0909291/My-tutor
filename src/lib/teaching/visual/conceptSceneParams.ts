@@ -131,6 +131,11 @@ import {
   buildInverseFunctionsScene, buildDomainRangeScene, buildLinearSystemScene, buildCircleEquationScene,
   buildDeterminantScene, buildEigenScene, buildConditionalProbabilityScene, buildNormalDistributionScene,
 } from '@/lib/teaching/sceneGenerators/mathCoreScenesB1'
+import {
+  buildCoordinatePlaneScene, buildQuadrantsScene, buildMidpointScene, buildParallelLinesScene,
+  buildPythagoreanConverseScene, buildParallelogramScene, buildLineEquationScene, buildEvenOddScene, buildQuadraticFunctionScene,
+  buildVertexFormScene, buildExponentialFunctionScene, buildLogarithmicFunctionScene, buildCompositionScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB2'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -307,6 +312,21 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'math.linalg.eigenvalues':             buildEigenScene,
   'math.prob.conditional-probability':   buildConditionalProbabilityScene,
   'math.prob.normal-distribution':       buildNormalDistributionScene,
+
+  // Mathematics visual campaign, batch 2 (2026-10-11). See mathCoreScenesB2.ts.
+  'math.geom.coordinate-plane':          buildCoordinatePlaneScene,
+  'math.geom.quadrants':                 buildQuadrantsScene,
+  'math.geom.midpoint-formula':          buildMidpointScene,
+  'math.geom.parallel-lines':            buildParallelLinesScene,
+  'math.geom.pythagorean-converse':      buildPythagoreanConverseScene,
+  'math.geom.parallelogram':             buildParallelogramScene,
+  'math.geom.line-equation':             buildLineEquationScene,
+  'math.func.even-odd-functions':        buildEvenOddScene,
+  'math.func.quadratic-function':        buildQuadraticFunctionScene,
+  'math.func.vertex-form':               buildVertexFormScene,
+  'math.func.exponential-function':      buildExponentialFunctionScene,
+  'math.func.logarithmic-function':      buildLogarithmicFunctionScene,
+  'math.func.composition':               buildCompositionScene,
 
   // The Punnett generator is single-gene by construction (genotypes are two
   // alleles). A dihybrid cross drawn as a monohybrid square teaches the wrong
