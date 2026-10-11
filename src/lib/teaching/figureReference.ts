@@ -1100,10 +1100,13 @@ export function checkFigureClaims(reply: string, evidence: FigureEvidence): { te
       // A quoted label inside a bolded part description ("**Blue line labeled
       // “slope = E”**") is judged on its own; the bold remainder is a part
       // description (stress-strain, d10f8a09).
-      const quotedTerms = Array.from(s.matchAll(/“([^”]{2,80})”|"([^"]{2,80})"/g)).map((m) => m[1] ?? m[2] ?? '')
+      // A quoted word glossed in brackets — "(the “radicand”)" — names a term,
+      // it does not claim a label (34faa394, square roots).
+      const glossFree = s.replace(/\(\s*(?:the|a|an|called|i\.e\.,?|aka)?\s*(?:“[^”]{1,40}”|"[^"]{1,40}")\s*\)/gi, ' ')
+      const quotedTerms = Array.from(glossFree.matchAll(/“([^”]{2,80})”|"([^"]{2,80})"/g)).map((m) => m[1] ?? m[2] ?? '')
       // A bold-wrapped quote (**“Simple reflex”**) goes with its asterisks, or
       // the leftover "**" pairs would wrap the text between two labels.
-      const unquoted = s.replace(/\*\*\s*(?:“[^”]{0,80}”|"[^"]{0,80}")[,.;:!?]?\s*\*\*/g, ' ').replace(/“[^”]{0,80}”|"[^"]{0,80}"/g, ' ')
+      const unquoted = glossFree.replace(/\*\*\s*(?:“[^”]{0,80}”|"[^"]{0,80}")[,.;:!?]?\s*\*\*/g, ' ').replace(/“[^”]{0,80}”|"[^"]{0,80}"/g, ' ')
       const boldTerms = Array.from(unquoted.matchAll(/\*\*([^*]{1,80}?)\*\*/g)).map((m) => m[1] ?? '')
       // A sentence that quotes its label uses bold only for emphasis ("At
       // **4 kelvin** … the label “R = 0 below T_c = 7.2 K”").
@@ -1133,7 +1136,9 @@ export function checkFigureClaims(reply: string, evidence: FigureEvidence): { te
       for (const m of s.matchAll(SLOPE_MEANING_RE)) {
         // "exactly the ratio of stress to strain" for "E = stress/strain":
         // wording words are not part of the claim.
-        const said = contentWords(m[1]).map(stemWord).filter((w) => !SLOPE_WORDING.has(w))
+        // A possessive names whose property it is ("the material's Young's
+        // modulus", 34faa394), not what the slope is.
+        const said = contentWords(m[1].replace(/\b[\w-]+(?:’|')s\b/g, ' ')).map(stemWord).filter((w) => !SLOPE_WORDING.has(w))
         if (said.length === 0) continue
         if (!slopeEntries.some((e) => said.every((w) => e.has(w)))) { bad = true; break }
       }

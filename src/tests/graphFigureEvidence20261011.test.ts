@@ -210,3 +210,17 @@ describe('16888708 production follow-up', () => {
     kept('- The **grey arrows** show the two quantities we are plotting: on the horizontal axis you see “strain ΔL/L” (the fractional change in length), and on the vertic', STRESS_EV)
   })
 })
+
+// ── Production on 34faa394 (2026-10-11, this campaign's disposable accounts) ──
+describe('34faa394 production follow-up', () => {
+  it('the slope meaning with a possessive owner ("the material\'s Young\'s modulus") is kept', () => {
+    kept('- The straight blue line in the lower‑left part has the label **slope = E**; its slope is the material’s Young’s modulus, the ratio of stress to strain in the e', STRESS_EV)
+  })
+  it('a bracketed gloss of a term (the “radicand”) is not a label claim', () => {
+    kept('- The horizontal axis is labeled \\(x\\); it represents the number we put under the square‑root sign (the “radicand”).', SQRT_EV)
+  })
+  it('NEGATIVE: a possessive does not hide a wrong slope meaning; a quoted label outside brackets is still checked', () => {
+    removed('On the graph, the slope is the wire’s breaking stress.', STRESS_EV)
+    removed('The horizontal axis on the graph is labelled “radicand”.', SQRT_EV)
+  })
+})
