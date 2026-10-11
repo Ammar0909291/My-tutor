@@ -1045,7 +1045,7 @@ function onlyPartWords(term: string): boolean {
   return term.replace(PART_WORDS_RE, '').replace(/[()\s,.-]+/g, '').length === 0
 }
 const SLOPE_WORDING = new Set(['exactly', 'simply', 'just', 'really', 'actually', 'basically', 'called', 'known', 'value', 'ratio', 'quotient', 'amount', 'measure', 'number', 'divided', 'over', 'equal', 'same', 'what', 'tells', 'gives', 'which', 'that'])
-const SLOPE_MEANING_RE = /\bslope\b(?:\s+of\s+[^.;,]{1,40}?)?\s+(?:is|represents?|equals?|gives?|shows?|stands? for|means?|tells? (?:you|us))\s+(?:the\s+|a\s+|an\s+)?([^.;,()–—]{2,60})/gi
+const SLOPE_MEANING_RE = /\bslope\b(?:\s+(?:labell?ed|marked|called)\s+\**\s*[“"][^”"]{1,30}[”"])?\**(?:\s+of\s+[^.;,]{1,40}?)?\s+(?:is|represents?|equals?|gives?|shows?|stands? for|means?|tells? (?:you|us))\s+(?:the\s+|a\s+|an\s+)?([^.;,()–—]{2,60})/gi
 const ORDINALS: Record<string, number> = { first: 1, second: 2, third: 3, fourth: 4, fifth: 5, sixth: 6, seventh: 7, eighth: 8, last: -1, final: -1 }
 const ORDINAL_CLAIM_RE = /\b(first|second|third|fourth|fifth|sixth|seventh|eighth|last|final)(?:\s+(?:box|step|stage|one))?\s+(?:represents?|shows?|indicates?|is|stands? for|contains?|says)\s+([^,;.]{3,80})/gi
 const POSITION_OR_COLOUR_RE = /^(?:(?:top|bottom|upper|lower)\s*)?(?:left|right|centre|center|middle|top|bottom)(?:\s+(?:left|right|side))?$|^(?:red|blue|green|orange|purple|grey|gray|black|white|yellow|pink|brown|teal)$/i
@@ -1103,7 +1103,9 @@ export function checkFigureClaims(reply: string, evidence: FigureEvidence): { te
       // A quoted word glossed in brackets — "(the “radicand”)" — names a term,
       // it does not claim a label (34faa394, square roots).
       const glossFree = s.replace(/\(\s*(?:the|a|an|called|i\.e\.,?|aka)?\s*(?:“[^”]{1,40}”|"[^"]{1,40}")\s*\)/gi, ' ')
-      const quotedTerms = Array.from(glossFree.matchAll(/“([^”]{2,80})”|"([^"]{2,80})"/g)).map((m) => m[1] ?? m[2] ?? '')
+      // One-character quotes count as a quoted label too (“E”, f6a1170c), so the
+      // bold around them stays emphasis; the length filter below skips them.
+      const quotedTerms = Array.from(glossFree.matchAll(/“([^”]{1,80})”|"([^"]{1,80})"/g)).map((m) => m[1] ?? m[2] ?? '')
       // A bold-wrapped quote (**“Simple reflex”**) goes with its asterisks, or
       // the leftover "**" pairs would wrap the text between two labels.
       const unquoted = glossFree.replace(/\*\*\s*(?:“[^”]{0,80}”|"[^"]{0,80}")[,.;:!?]?\s*\*\*/g, ' ').replace(/“[^”]{0,80}”|"[^"]{0,80}"/g, ' ')

@@ -1,0 +1,46 @@
+{
+  "base": "https://my-tutor-flame.vercel.app",
+  "subject": "physics",
+  "slug": "phys.mod.superconductivity",
+  "rows": [
+    {
+      "turn": 1,
+      "said": "show me the graph",
+      "shot": "01.png",
+      "provider": "groq",
+      "reply": "Take a look at the figure on your screen. You can see three coloured sections:\n\n* The **blue** curve labeled “normal metal” shows the resistance of an ordinary metal as it cools – it drops gradually and then levels off at a small residual value. \n* The **red** part says “R = 0 below T(c) = 7.2 K”, and the red curve drops sharply to zero exactly at the critical temperature T(c). \n* The **purple** arrow “field lines go round” and the green label “superconducting” indicate that below T(c) the material also expels magnetic fields (the Meissner effect).\n\nWhat do you notice about the resistance behavior as the temperature passes the point marked T(c)?",
+      "replyRendered": true,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": true
+    },
+    {
+      "turn": 2,
+      "said": "i dont understand this picture. what is it showing?",
+      "shot": "02.png",
+      "provider": "groq",
+      "reply": "- In the centre you see the label **“T (K)”**, which is the temperature axis measured in kelvin.\n- At the top left the word **“resistance”** tells you the vertical axis shows electrical resistance.\n- The curve labelled **“normal metal”** (in blue) shows how a regular metal’s resistance falls as it cools, then levels off at a small residual value.\n- On the left side you see **“R = 0 below T(c) = 7.2 K”** (in red). This marks the point where the resistance of a super‑conductor drops abruptly to exactly zero once the temperature falls below the critical temperature T(c) = 7.2 kelvin.\n- At the top right the phrase **“field lines go round”** (in purple) indicates that, below T(c), magnetic field lines are expelled from the interior of the material – the Meissner effect.\n- In the bottom‑right area you have two items: **“4.2 K: 0.053 T”** (in red) showing the critical magnetic field value at 4.2 kelvin, and the word **“superconducting”** (in green) labeling the region where the material is in the superconducting state.\n\nOverall, the picture shows the two hallmark signs of superconductivity: the resistance falling to exactly zero at the critical temperature, and the expulsion of magnetic fields (Meissner effect) that defines the superconducting region.",
+      "replyRendered": false,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": false
+    },
+    {
+      "turn": 3,
+      "said": "what does the red label mean?",
+      "shot": "03.png",
+      "provider": "groq",
+      "reply": "The red label **“R = 0 below T(c) = 7.2 K”** tells us that when the material’s temperature drops beneath the critical temperature of 7.2 kelvin, its electrical resistance becomes exactly zero. The additional red note **“4.2 K: 0.053 T”** marks a specific point on the curve: at 4.2 kelvin the superconductor can still expel a magnetic field up to a strength of 0.053 tesla before superconductivity is destroyed.",
+      "replyRendered": false,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": false
+    }
+  ]
+}

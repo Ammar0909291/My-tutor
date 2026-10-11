@@ -224,3 +224,14 @@ describe('34faa394 production follow-up', () => {
     removed('The horizontal axis on the graph is labelled “radicand”.', SQRT_EV)
   })
 })
+
+// ── Production on f6a1170c (2026-10-11) ──────────────────────────────────────
+describe('f6a1170c production follow-up', () => {
+  it('a one-letter quoted label inside bold ("**slope labelled “E”**") keeps the bold as emphasis', () => {
+    kept('In the straight‑line (blue) region the graph shows a proportional relationship: stress increases linearly with strain, and the **slope labelled “E”** is exactly', STRESS_EV)
+    kept('The **slope labelled “E”** is Young’s modulus.', STRESS_EV)
+  })
+  it('NEGATIVE: a wrong slope meaning beside the same bold label is still removed', () => {
+    removed('On the graph, the **slope labelled “E”** is the breaking stress.', STRESS_EV)
+  })
+})
