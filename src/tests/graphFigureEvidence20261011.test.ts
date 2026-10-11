@@ -235,3 +235,15 @@ describe('f6a1170c production follow-up', () => {
     removed('On the graph, the **slope labelled “E”** is the breaking stress.', STRESS_EV)
   })
 })
+
+// ── Production on 1d41551f (2026-10-11) ──────────────────────────────────────
+describe('1d41551f production follow-up', () => {
+  it('"its slope is labelled “slope = E”" names a label, not a meaning — kept', () => {
+    kept('- A straight blue line starts from the origin; its slope is labelled **“slope = E”**, meaning the Young’s modulus E, the material’s intrinsic stiffness (stress ', STRESS_EV)
+    kept('It shows a stress‑strain graph for a metal: the horizontal axis is **strain ΔL/L**, the vertical axis is **stress F/A**, a straight blue line at the start whose slope is labelled **“slope = E”**.', STRESS_EV)
+  })
+  it('NEGATIVE: a wrong label after "is labelled" is still removed by the label check', () => {
+    removed('On the graph, the slope is labelled **“slope = 2E”**.', STRESS_EV)
+    removed('On the graph, the slope is labelled **“yield strength”**.', STRESS_EV)
+  })
+})

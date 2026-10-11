@@ -1,0 +1,46 @@
+{
+  "base": "https://my-tutor-flame.vercel.app",
+  "subject": "mathematics",
+  "slug": "math.arith.square-roots",
+  "rows": [
+    {
+      "turn": 1,
+      "said": "show me a graph",
+      "shot": "01.png",
+      "provider": "groq",
+      "reply": "Here’s the graph of the square‑root function \\(y = \\sqrt{x}\\). The curve begins at the origin \\((0,0)\\) and rises gently, getting steeper as you move to the right.\n\nWhat do you notice about how the \\(y\\)-values change as the \\(x\\)-values increase?",
+      "replyRendered": false,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": true
+    },
+    {
+      "turn": 2,
+      "said": "i dont understand this picture. what is it showing?",
+      "shot": "02.png",
+      "provider": "groq",
+      "reply": "I hear you’re feeling stuck—let’s look at the picture together step by step.\n\nThe horizontal line is the **x‑axis**; it shows the input numbers (the values we’re taking the square root of). The vertical line is the **y‑axis**; it shows the results, the square‑root values. \n\nThe smooth curve that rises from the origin (0, 0) is the plot of **y = √x**. For each point on the curve, the x‑coordinate is a number and the y‑coordinate is the non‑negative number whose square gives that x‑value. \n\nBecause the curve gets flatter as it moves to the right, the picture tells us that the square‑root function grows more slowly than the original number: as x gets larger, √x still gets larger, but at a decreasing rate.",
+      "replyRendered": true,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": false
+    },
+    {
+      "turn": 3,
+      "said": "what do the axes and the curve mean?",
+      "shot": "03.png",
+      "provider": "groq",
+      "reply": "The graph you see is the picture of the square‑root function. \n- The horizontal axis (the x‑axis) represents the number you start with – the value \\(x\\) that you want to take the square root of. \n- The vertical axis (the y‑axis) shows the result of the square root – the value \\(y\\) that satisfies \\(y^{2}=x\\). \n- The curved line is the set of all points \\((x, y)\\) where \\(y = \\sqrt{x}\\). As \\(x\\) gets larger, the curve rises, but it does so more slowly than a straight line would.\n\nNow look at the point where the curve passes through \\((4, 2)\\).",
+      "replyRendered": true,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": false
+    }
+  ]
+}

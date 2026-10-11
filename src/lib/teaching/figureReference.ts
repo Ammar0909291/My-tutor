@@ -1136,6 +1136,9 @@ export function checkFigureClaims(reply: string, evidence: FigureEvidence): { te
       // text): "slope = E … the slope is Young's modulus" (stress-strain)
       // supports "Young's modulus", never "the breaking stress".
       for (const m of s.matchAll(SLOPE_MEANING_RE)) {
+        // "its slope is labelled “slope = E”" names a label (checked above),
+        // not a meaning (1d41551f, stress-strain).
+        if (/^\s*\**\s*(?:labell?ed|marked|called|written|shown|drawn|given)\b/i.test(m[1])) continue
         // "exactly the ratio of stress to strain" for "E = stress/strain":
         // wording words are not part of the claim.
         // A possessive names whose property it is ("the material's Young's
