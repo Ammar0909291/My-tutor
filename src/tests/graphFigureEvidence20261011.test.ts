@@ -12,7 +12,7 @@
  * recorded them (cut at 160 characters by the log).
  */
 import { describe, it, expect } from 'vitest'
-import { evidenceFromPayload, checkFigureClaims, type FigureEvidence } from '@/lib/teaching/figureReference'
+import { evidenceFromPayload, checkFigureClaims, evidenceForLog, figureEvidenceAnswer, type FigureEvidence } from '@/lib/teaching/figureReference'
 import { describeVisualPayload } from '@/lib/teaching/visual/visualSemantics'
 import { resolveVisual } from '@/lib/teaching/visual/resolveVisual'
 
@@ -123,5 +123,63 @@ describe('Strictness preserved', () => {
     const innate = (resolveVisual({ message: 'show me a diagram', lessonConceptId: 'bio.behav.innate-behavior-instinct', learnerRequest: 'diagram', subject: 'biology' } as never) as { payload: unknown }).payload
     kept('On the left side you see **“Simple reflex”** in blue, with the example **“the knee‑jerk reflex”** written in grey.', ev(innate))
     kept('- **Top left** reads **“Simple reflex”** and the grey text underneath it says **“E.g.', ev(innate))
+  })
+})
+
+// ── Production on 31bafe03 (2026-10-11, this campaign's disposable accounts) ──
+/** Removed on 31bafe03 (logged sentences); square roots used the STORED (rendered-log) evidence. */
+const SQRT_REMOVED_31B = [
+  'When you look at the picture, follow a point straight up from the x‑axis to the curve, then straight left to the y‑axis; the y‑value you read is the side length',
+  'The horizontal axis is labeled **x** (the number whose root we want) and the vertical axis is labeled **y**.',
+  'The horizontal line is the **x‑axis**; it represents the numbers we put into the square‑root operation (the “radicand”).',
+  'The vertical line is the **y‑axis**; it shows the result we get after taking the square root.',
+  'Take a look at the picture: the horizontal line (the x‑axis) represents the number you’re taking the square root of, and the vertical line (the y‑axis) shows th',
+  'The graph you see has the horizontal axis (the **x‑axis**) representing the number you start with, x.',
+  'The vertical axis (the **y‑axis**) shows the value of the square‑root of that number, √x.',
+  'The horizontal line at the bottom is the **x‑axis**; it represents the input numbers x that we might want to take a square root of.',
+  'The vertical line on the left is the **y‑axis**; it shows the output values √x, the square‑root of each x.',
+]
+const STRESS_REMOVED_31B = [
+  '- **“stress F/A”** (top left) – the vertical axis shows tensile stress, which is the pulling force F divided by the cross‑sectional area A of the material.',
+  'Now look at the figure on your screen: the top‑left label “stress F / A” tells you that stress is the applied force divided by the cross‑sectional area, while t',
+  'The straight blue line in the graph has the label “slope = E”; this slope is exactly the ratio of stress to strain, which is why E stays the same for any piece ',
+  '- The **grey arrows** show the two quantities we are plotting: on the horizontal axis you see “strain ΔL/L” (the fractional change in length), and on the vertic',
+  '- Starting from the origin, the **blue straight line** has the label “slope = E”.',
+  '- **“stress F/A”** at the top left – this is the vertical axis, representing stress, which is the force divided by the cross‑sectional area.',
+]
+
+describe('31bafe03 production follow-up', () => {
+  it('root cause: the stored (rendered-log) copy kept "drawn: …" cut at 120 characters, losing "x-axis, y-axis"', () => {
+    const drawn = SQRT_EV.text.find((t) => t.startsWith('drawn: '))!
+    expect(drawn.length).toBeGreaterThan(120)
+    expect(drawn.slice(0, 120)).not.toContain('y-axis') // what production stored before
+    const logged = evidenceForLog(SQRT_EV)
+    expect(logged.text.find((t) => t.startsWith('drawn: '))).toBe(drawn)
+    // other entries are still capped
+    const long = evidenceForLog({ caption: null, text: ['x'.repeat(300), drawn] })
+    expect(long.text[0]).toHaveLength(120)
+  })
+  it('square roots: every sentence removed on 31bafe03 is kept against the STORED evidence', () => {
+    const stored = evidenceForLog(SQRT_EV)
+    for (const t of SQRT_REMOVED_31B) kept(t, stored)
+  })
+  it('stress-strain: every sentence removed on 31bafe03 is kept (stored and this-response evidence)', () => {
+    for (const t of STRESS_REMOVED_31B) { kept(t, STRESS_EV); kept(t, evidenceForLog(STRESS_EV)) }
+  })
+  it('the picture answer never reads the "drawn: …" list out as words written on the figure', () => {
+    const a = figureEvidenceAnswer(evidenceForLog(SQRT_EV), null, 'earlier', null)
+    expect(a).not.toMatch(/drawn:/)
+    expect(a).toContain('“x (unitless)”')
+    expect(a).toContain('“√x (unitless)”')
+  })
+  it('NEGATIVE: wording words do not let an unsupported slope meaning through', () => {
+    removed('On the graph, the slope is exactly the breaking stress of the wire.', STRESS_EV)
+    removed('In the figure, the slope is simply the ratio of length to time.', STRESS_EV)
+  })
+  it('NEGATIVE: spacing normalisation does not accept a different label', () => {
+    removed('The top-left label on the graph reads “stress F × A”.'.replace('reads', 'is labelled'), STRESS_EV)
+  })
+  it('NEGATIVE: a one-letter bold axis name does not shield an invented label beside it', () => {
+    removed('The horizontal axis is labeled **x** and the vertical axis is labeled **“growth rate”**.', SQRT_EV)
   })
 })

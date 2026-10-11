@@ -1,0 +1,59 @@
+{
+  "base": "https://my-tutor-flame.vercel.app",
+  "subject": "mathematics",
+  "slug": "math.arith.square-roots",
+  "rows": [
+    {
+      "turn": 1,
+      "said": "show me a graph",
+      "shot": "01.png",
+      "provider": "groq",
+      "reply": "On the screen you can see the graph of the square‑root function. The curve starts at the point where both x and y are 0, then moves upward to the right, getting flatter as x gets larger.\n\nWhat do you notice about how the y‑values change as the x‑values increase?",
+      "replyRendered": true,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": true
+    },
+    {
+      "turn": 2,
+      "said": "i dont understand this picture. what is it showing?",
+      "shot": "02.png",
+      "provider": "groq",
+      "reply": "The picture for this lesson is further up in our chat. It is titled “Square root function”. The words written on it are: “x^0.5”, “drawn: axes, curve, grid, horizontal axis, horizontal line, plotted curve, tick numbers, vertical axis, vertical line, x”, “Square root function”, “x (unitless)”, “√x (unitless)”. Tell me which of those parts is confusing and I will explain it.\n\nThe curved line that starts at the origin and rises gently to the right is the **graph of the function y = √x**. It tells us that as x gets larger, its square root also gets larger, but the growth slows down (the curve flattens).",
+      "replyRendered": true,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": false
+    },
+    {
+      "turn": 3,
+      "said": "what do the axes and the curve mean?",
+      "shot": "03.png",
+      "provider": "groq",
+      "reply": "The curved line is the set of points (x, √x); as x gets larger, its square‑root gets larger too, but more slowly—this is why the curve rises gently.\n\nNow picture a square whose area is 9 square units. \nThe length of each side of that square is the number that, when multiplied by itself, gives 9. That side length is the square root of 9.",
+      "replyRendered": true,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": false
+    },
+    {
+      "turn": 4,
+      "said": "explain simpler",
+      "shot": "04.png",
+      "provider": "groq",
+      "reply": "The smooth curve that rises from the origin is the set of points \\((x,\\,\\sqrt{x})\\); as the input \\(x\\) gets bigger, the output \\(y\\) (the square root) also gets bigger, but more slowly.\n\nWhat do you notice about how the curve moves as you go farther to the right?",
+      "replyRendered": true,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": false
+    }
+  ]
+}

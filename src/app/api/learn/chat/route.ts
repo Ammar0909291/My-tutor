@@ -11121,7 +11121,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         try {
           const { createRRMEntry } = await import('@/lib/teaching/renderedRealityModel')
           const { describeVisualPayload } = await import('@/lib/teaching/visual/visualSemantics')
-          const { evidenceFromPayload } = await import('@/lib/teaching/figureReference')
+          const { evidenceFromPayload, evidenceForLog } = await import('@/lib/teaching/figureReference')
           rrmEntryThisTurn = createRRMEntry({
             visualType: responseVisual,
             visualSpec: detectedVisualSpec,
@@ -11138,8 +11138,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 const payload = detectedSceneSpec ? { renderer: 'scene', sceneSpec: detectedSceneSpec }
                   : detectedVisualSpec ? { renderer: 'spec', visualSpec: detectedVisualSpec }
                   : responseVisual ? { renderer: 'card', visualType: responseVisual } : null
-                const ev = evidenceFromPayload(payload as never, describeVisualPayload as never)
-                return { caption: ev.caption, text: ev.text.map((t) => t.slice(0, 120)).slice(0, 24) }
+                return evidenceForLog(evidenceFromPayload(payload as never, describeVisualPayload as never))
               } catch { return undefined }
             })(),
           })

@@ -895,7 +895,9 @@ export function figureEvidenceAnswer(
 ): string {
   const place = where === 'this-message' ? 'The picture with this message' : 'The picture for this lesson is further up in our chat. It'
   const caption = drawn?.caption?.trim() || (fallbackSemantics ?? '').replace(/^A 3D scene:\s*/i, '').trim() || null
-  const text = (drawn?.text ?? []).map((t) => t.trim()).filter(Boolean).slice(0, 12)
+  // "drawn: …" lists what is drawn, not words written on the figure (it was
+  // read out as a label on 31bafe03).
+  const text = (drawn?.text ?? []).map((t) => t.trim()).filter((t) => t && !/^drawn: /.test(t)).slice(0, 12)
   const parts: string[] = []
   parts.push(caption ? `${place} is titled “${caption}”.` : `${place} is the figure shown for this idea.`)
   if (text.length) parts.push(`The words written on it are: ${text.map((t) => `“${t}”`).join(', ')}.`)
@@ -1021,6 +1023,16 @@ export function evidenceFromPayload(
   }
 }
 
+/**
+ * The copy kept in the rendered-reality log for later questions: labels and
+ * stage text are capped at 120 characters each (session size); the "drawn: …"
+ * list is kept whole — cut at 120 it lost "x-axis, y-axis" and accurate axis
+ * sentences were removed (31bafe03, math.arith.square-roots).
+ */
+export function evidenceForLog(ev: FigureEvidence): { caption: string | null; text: string[] } {
+  return { caption: ev.caption, text: ev.text.map((t) => (/^drawn: /.test(t) ? t : t.slice(0, 120))).slice(0, 24) }
+}
+
 export const FIGURE_POINTING_RE = /\b(?:(?:the|this|that|your)\s+(?:picture|figure|diagram|image|sketch|drawing|chart|graph|flow ?chart|illustration)|in the (?:sketch|drawing)|box(?:es)?|arrows?|labell?ed|labels?|(?:left|right)[- ]hand side|on the (?:left|right)|at the (?:top|bottom)|(?:top|bottom) (?:left|right)|the (?:horizontal|vertical) (?:line|axis)|the [xy][- ]?axis|the axes|the curve|one side|the other side|the (?:two|three|four) (?:straight |dashed |dotted |coloured |colored )?lines)\b/i
 const FIGURE_NOUN_RE = /\b(?:picture|figure|diagram|image|sketch|drawing|chart|graph|illustration)\b/i
 const ANALOGY_AS_FIGURE_RE = /\b(?:picture yourself|imagine|think of (?:it|this|the (?:picture|figure|diagram)) (?:as|like)|as if)\b/i
@@ -1028,22 +1040,25 @@ const STRUCTURE_RE = /\b(x[-‐‑ ]?axis|y[-‐‑ ]?axis|axis|axes|horizontal 
 const LABEL_CLAIM_RE = /\b(?:labell?ed|labels?|written|titled|marked|caption|heading)\b|\b(?:label|box|figure|picture|diagram|caption|title|heading|sign|panel|it)\s+(?:\w+\s+){0,2}?(?:reads?|says)\b/i
 const EXPLAINS_PART_RE = /\b(?:the|this|that|these|those)\s+(?:\w+\s+){0,2}?(?:box(?:es)?|arrows?|sections?|parts?|sides?|lines?)\b[^.!?]{0,60}\b(?:represents?|stands? for|shows?|means?)\b/i
 /** "grey arrow", "right side (blue)": a bolded description of a part, not a quoted label. */
-const PART_WORDS_RE = /\b(?:(?:top|bottom|upper|lower|left|right|centre|center|middle)(?:[- ]hand)?|red|blue|green|orange|purple|grey|gray|black|white|yellow|pink|brown|teal|light|dark|arrows?|box(?:es)?|sides?|lines?|sections?|panels?|parts?|areas?|labell?ed|markers?|curves?|points?|dots?|the|a|an|and)\b/gi
+const PART_WORDS_RE = /\b(?:(?:top|bottom|upper|lower|left|right|centre|center|middle)(?:[- ]hand)?|red|blue|green|orange|purple|grey|gray|black|white|yellow|pink|brown|teal|light|dark|arrows?|box(?:es)?|sides?|lines?|sections?|panels?|parts?|areas?|labell?ed|markers?|curves?|points?|dots?|straight|curved|dashed|dotted|smooth|thin|thick|the|a|an|and)\b/gi
 function onlyPartWords(term: string): boolean {
   return term.replace(PART_WORDS_RE, '').replace(/[()\s,.-]+/g, '').length === 0
 }
+const SLOPE_WORDING = new Set(['exactly', 'simply', 'just', 'really', 'actually', 'basically', 'called', 'known', 'value', 'ratio', 'quotient', 'amount', 'measure', 'number', 'divided', 'over', 'equal', 'same', 'what', 'tells', 'gives', 'which', 'that'])
 const SLOPE_MEANING_RE = /\bslope\b(?:\s+of\s+[^.;,]{1,40}?)?\s+(?:is|represents?|equals?|gives?|shows?|stands? for|means?|tells? (?:you|us))\s+(?:the\s+|a\s+|an\s+)?([^.;,()–—]{2,60})/gi
 const ORDINALS: Record<string, number> = { first: 1, second: 2, third: 3, fourth: 4, fifth: 5, sixth: 6, seventh: 7, eighth: 8, last: -1, final: -1 }
 const ORDINAL_CLAIM_RE = /\b(first|second|third|fourth|fifth|sixth|seventh|eighth|last|final)(?:\s+(?:box|step|stage|one))?\s+(?:represents?|shows?|indicates?|is|stands? for|contains?|says)\s+([^,;.]{3,80})/gi
 const POSITION_OR_COLOUR_RE = /^(?:(?:top|bottom|upper|lower)\s*)?(?:left|right|centre|center|middle|top|bottom)(?:\s+(?:left|right|side))?$|^(?:red|blue|green|orange|purple|grey|gray|black|white|yellow|pink|brown|teal)$/i
 const STOP = new Set(['this', 'that', 'with', 'from', 'they', 'them', 'their', 'there', 'which', 'when', 'what', 'into', 'than', 'then', 'also', 'each', 'shows', 'show', 'represent', 'represents', 'picture', 'figure', 'diagram', 'boxes', 'arrow', 'arrows', 'part', 'parts', 'side', 'here', 'just', 'like'])
 const norm = (t: string): string => (t ?? '').toLowerCase().replace(/[‐-―−]/g, '-').replace(/[“”"*’‘']/g, '').replace(/\s+/g, ' ').trim()
+const tight = (t: string): string => t.replace(/\s*([/=×·+*^−-])\s*/g, '$1')
 const stemWord = (w: string): string => w.replace(/(?:es|s)$/, '')
 const contentWords = (t: string): string[] => (norm(t).match(/[a-z][a-z-]{3,}/g) ?? []).filter((w) => !STOP.has(w))
 
 export function checkFigureClaims(reply: string, evidence: FigureEvidence): { text: string; removed: string[] } {
   const ev = norm([evidence.caption ?? '', ...evidence.text].join(' | '))
   const evWords = new Set(contentWords(ev).map((w) => w.replace(/(?:es|s)$/, '')))
+  const evTight = tight(ev)
   const entryTexts = [evidence.caption ?? '', ...evidence.text].filter(Boolean)
   const entries = entryTexts.map((e) => new Set(contentWords(e).map(stemWord)))
   const slopeEntries = entryTexts.filter((e) => /\bslope\b/i.test(e)).map((e) => new Set(contentWords(e).map(stemWord)))
@@ -1074,11 +1089,13 @@ export function checkFigureClaims(reply: string, evidence: FigureEvidence): { te
       // A bold-wrapped quote (**“Simple reflex”**) goes with its asterisks, or
       // the leftover "**" pairs would wrap the text between two labels.
       const unquoted = s.replace(/\*\*\s*(?:“[^”]{0,80}”|"[^"]{0,80}")[,.;:!?]?\s*\*\*/g, ' ').replace(/“[^”]{0,80}”|"[^"]{0,80}"/g, ' ')
-      const boldTerms = Array.from(unquoted.matchAll(/\*\*([^*]{2,80})\*\*/g)).map((m) => m[1] ?? '')
+      const boldTerms = Array.from(unquoted.matchAll(/\*\*([^*]{1,80}?)\*\*/g)).map((m) => m[1] ?? '')
       const terms = [...quotedTerms, ...boldTerms].map((t) => norm(t).replace(/[,.;!]+$/, '').trim())
         .filter((t) => t.length >= 2 && !POSITION_OR_COLOUR_RE.test(t) && !/[:?]\s*$/.test(t) && !onlyPartWords(t))
       for (const t of terms) {
         if (ev.includes(t) || labels.some((l) => l.length >= 4 && t.includes(l))) continue
+        // "stress F / A" for the label "stress F/A": spacing around operators.
+        if (evTight.includes(tight(t))) continue
         // A label restated in words ("stress = force / area" for "stress F/A"):
         // every content word, at least two, in ONE label or stage text.
         const tw = contentWords(t).map(stemWord)
@@ -1097,7 +1114,9 @@ export function checkFigureClaims(reply: string, evidence: FigureEvidence): { te
       // text): "slope = E … the slope is Young's modulus" (stress-strain)
       // supports "Young's modulus", never "the breaking stress".
       for (const m of s.matchAll(SLOPE_MEANING_RE)) {
-        const said = contentWords(m[1]).map(stemWord)
+        // "exactly the ratio of stress to strain" for "E = stress/strain":
+        // wording words are not part of the claim.
+        const said = contentWords(m[1]).map(stemWord).filter((w) => !SLOPE_WORDING.has(w))
         if (said.length === 0) continue
         if (!slopeEntries.some((e) => said.every((w) => e.has(w)))) { bad = true; break }
       }
