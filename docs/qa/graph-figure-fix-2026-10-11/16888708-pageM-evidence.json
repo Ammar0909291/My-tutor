@@ -1,0 +1,59 @@
+{
+  "base": "https://my-tutor-flame.vercel.app",
+  "subject": "mathematics",
+  "slug": "math.arith.square-roots",
+  "rows": [
+    {
+      "turn": 1,
+      "said": "show me a graph",
+      "shot": "01.png",
+      "provider": "groq",
+      "reply": "The graph shows the curve of the square‑root function \\(y=\\sqrt{x}\\): it starts at the point \\((0,0)\\) and rises steadily, getting flatter as \\(x\\) gets larger, illustrating that the square root grows more slowly than the original number.",
+      "replyRendered": true,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": true
+    },
+    {
+      "turn": 2,
+      "said": "i dont understand this picture. what is it showing?",
+      "shot": "02.png",
+      "provider": "groq",
+      "reply": "The horizontal line is the **x‑axis**, labeled “x”. It shows the numbers you put into the square‑root function. \nThe vertical line is the **y‑axis**, labeled “y”. It shows the result you get out of the function. \nThe curved line that starts at the origin (0, 0) and rises gently to the right is the **graph of y = √x**. Every point on this curve satisfies the relationship “the y‑value is the square root of the x‑value”. \n\nThe grid behind the curve gives you a sense of scale, letting you see roughly how big the numbers are as you move rightward.\n\nSo the whole picture tells us how the square‑root function behaves: as x gets larger, √x also gets larger, but more slowly, following that smooth curve.",
+      "replyRendered": false,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": false
+    },
+    {
+      "turn": 3,
+      "said": "what do the axes and the curve mean?",
+      "shot": "03.png",
+      "provider": "groq",
+      "reply": "The graph you see is the picture of the **square‑root function** \\(y = \\sqrt{x}\\).\n\n- The **horizontal axis** (the x‑axis) represents the number you start with – the value \\(x\\) that is inside the square‑root sign. \n- The **vertical axis** (the y‑axis) shows the result of taking the square root – the value \\(y\\) such that \\(y^{2}=x\\). \n\nThe curved line draws all the pairs \\((x,\\,\\sqrt{x})\\). As \\(x\\) gets larger, the square‑root grows, but more slowly, so the curve rises gently. It passes through points like \\((0,0)\\), \\((1,1)\\), \\((4,2)\\), \\((9,3)\\), and so on.\n\nNow look at the point where the curve goes through \\((9, 3)\\). \n\n**What do you notice about the numbers at that point?**",
+      "replyRendered": false,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": false
+    },
+    {
+      "turn": 4,
+      "said": "explain simpler",
+      "shot": "04.png",
+      "provider": "groq",
+      "reply": "Think of a square garden. If you know how many square‑metres of land you have (that’s the number on the horizontal line), the length of one side of the garden is the number on the vertical line. The curve on the picture is just showing, for every possible garden size, what the side length would be. As the garden gets bigger, the side gets longer, but it grows more slowly than the total area.\n\nSo the bottom line (the horizontal axis) tells you “how much space” you start with, and the side line (the vertical axis) tells you “how long each side must be” to make that amount of space a perfect square. The smooth line connects all those pairs of numbers.",
+      "replyRendered": true,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": false
+    }
+  ]
+}

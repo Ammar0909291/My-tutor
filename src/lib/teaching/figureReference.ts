@@ -1038,7 +1038,7 @@ const FIGURE_NOUN_RE = /\b(?:picture|figure|diagram|image|sketch|drawing|chart|g
 const ANALOGY_AS_FIGURE_RE = /\b(?:picture yourself|imagine|think of (?:it|this|the (?:picture|figure|diagram)) (?:as|like)|as if)\b/i
 const STRUCTURE_RE = /\b(x[-‐‑ ]?axis|y[-‐‑ ]?axis|axis|axes|horizontal (?:line|axis)|vertical (?:line|axis)|(?:two|three|four) (?:straight |dashed |dotted |coloured |colored )?lines|curves?|plotted|bar chart|bars|grid|stacks?|(?:the|this|that) sketch|slope|peaks?|plateau|pie chart|table)\b/gi
 const LABEL_CLAIM_RE = /\b(?:labell?ed|labels?|written|titled|marked|caption|heading)\b|\b(?:label|box|figure|picture|diagram|caption|title|heading|sign|panel|it)\s+(?:\w+\s+){0,2}?(?:reads?|says)\b/i
-const EXPLAINS_PART_RE = /\b(?:the|this|that|these|those)\s+(?:\w+\s+){0,2}?(?:box(?:es)?|arrows?|sections?|parts?|sides?|lines?)\b[^.!?]{0,60}\b(?:represents?|stands? for|shows?|means?)\b/i
+const EXPLAINS_PART_RE = /(?:\b(?:the|this|that|these|those)\s+|^[\s\-*•]*)(?:[\w*]+\s+){0,2}?\**(?:box(?:es)?|arrows?|sections?|parts?|sides?|lines?)\b[^.!?]{0,60}\b(?:represents?|stands? for|shows?|means?)\b/i
 /** "grey arrow", "right side (blue)": a bolded description of a part, not a quoted label. */
 const PART_WORDS_RE = /\b(?:(?:top|bottom|upper|lower|left|right|centre|center|middle)(?:[- ]hand)?|red|blue|green|orange|purple|grey|gray|black|white|yellow|pink|brown|teal|light|dark|arrows?|box(?:es)?|sides?|lines?|sections?|panels?|parts?|areas?|labell?ed|markers?|curves?|points?|dots?|straight|curved|dashed|dotted|smooth|thin|thick|the|a|an|and)\b/gi
 function onlyPartWords(term: string): boolean {
@@ -1051,13 +1051,28 @@ const ORDINAL_CLAIM_RE = /\b(first|second|third|fourth|fifth|sixth|seventh|eight
 const POSITION_OR_COLOUR_RE = /^(?:(?:top|bottom|upper|lower)\s*)?(?:left|right|centre|center|middle|top|bottom)(?:\s+(?:left|right|side))?$|^(?:red|blue|green|orange|purple|grey|gray|black|white|yellow|pink|brown|teal)$/i
 const STOP = new Set(['this', 'that', 'with', 'from', 'they', 'them', 'their', 'there', 'which', 'when', 'what', 'into', 'than', 'then', 'also', 'each', 'shows', 'show', 'represent', 'represents', 'picture', 'figure', 'diagram', 'boxes', 'arrow', 'arrows', 'part', 'parts', 'side', 'here', 'just', 'like'])
 const norm = (t: string): string => (t ?? '').toLowerCase().replace(/[‐-―−]/g, '-').replace(/[“”"*’‘']/g, '').replace(/\s+/g, ' ').trim()
-const tight = (t: string): string => t.replace(/\s*([/=×·+*^−-])\s*/g, '$1')
+const SUBSCRIPTS: Record<string, string> = { '₀': '0', '₁': '1', '₂': '2', '₃': '3', '₄': '4', '₅': '5', '₆': '6', '₇': '7', '₈': '8', '₉': '9', 'ₐ': 'a', 'ₑ': 'e', 'ₒ': 'o', 'ₓ': 'x', 'ₙ': 'n', 'ₘ': 'm', 'ₖ': 'k', 'ₜ': 't', 'ₚ': 'p', 'ₛ': 's' }
+/**
+ * Spacing around operators and subscript notation do not change a label:
+ * "stress F / A" = "stress F/A"; T(c), \(T_c\), T₍c₎ and T_c are one symbol
+ * (phys.mod.superconductivity, 16888708).
+ */
+const tight = (t: string): string => t
+  .replace(/\\[()[\]]/g, '')
+  .replace(/[₀-₉ₐₑₒₓₙₘₖₜₚₛ]/g, (c) => SUBSCRIPTS[c] ?? c)
+  .replace(/[₍₎]/g, '')
+  .replace(/([a-z])_\{?([a-z0-9]{1,3})\}?/gi, '$1$2')
+  .replace(/([a-z])\(([a-z0-9])\)/gi, '$1$2')
+  .replace(/\s*([/=×·+*^−-])\s*/g, '$1')
 const stemWord = (w: string): string => w.replace(/(?:es|s)$/, '')
-const contentWords = (t: string): string[] => (norm(t).match(/[a-z][a-z-]{3,}/g) ?? []).filter((w) => !STOP.has(w))
+const contentWords = (t: string): string[] => (norm(t).match(/[a-z]{4,}/g) ?? []).filter((w) => !STOP.has(w))
 
 export function checkFigureClaims(reply: string, evidence: FigureEvidence): { text: string; removed: string[] } {
   const ev = norm([evidence.caption ?? '', ...evidence.text].join(' | '))
-  const evWords = new Set(contentWords(ev).map((w) => w.replace(/(?:es|s)$/, '')))
+  // Meaning comes from written labels and stage text, never from the list of
+  // drawn primitives ("Grey arrows run along the curve to show the direction
+  // of increasing load" must not pass on "curve", 16888708).
+  const evWords = new Set(contentWords([evidence.caption ?? '', ...evidence.text.filter((t) => !/^drawn: /.test(t))].join(' | ')).map((w) => w.replace(/(?:es|s)$/, '')))
   const evTight = tight(ev)
   const entryTexts = [evidence.caption ?? '', ...evidence.text].filter(Boolean)
   const entries = entryTexts.map((e) => new Set(contentWords(e).map(stemWord)))
@@ -1090,7 +1105,9 @@ export function checkFigureClaims(reply: string, evidence: FigureEvidence): { te
       // the leftover "**" pairs would wrap the text between two labels.
       const unquoted = s.replace(/\*\*\s*(?:“[^”]{0,80}”|"[^"]{0,80}")[,.;:!?]?\s*\*\*/g, ' ').replace(/“[^”]{0,80}”|"[^"]{0,80}"/g, ' ')
       const boldTerms = Array.from(unquoted.matchAll(/\*\*([^*]{1,80}?)\*\*/g)).map((m) => m[1] ?? '')
-      const terms = [...quotedTerms, ...boldTerms].map((t) => norm(t).replace(/[,.;!]+$/, '').trim())
+      // A sentence that quotes its label uses bold only for emphasis ("At
+      // **4 kelvin** … the label “R = 0 below T_c = 7.2 K”").
+      const terms = [...quotedTerms, ...(quotedTerms.length > 0 ? [] : boldTerms)].map((t) => norm(t).replace(/[,.;!]+$/, '').trim())
         .filter((t) => t.length >= 2 && !POSITION_OR_COLOUR_RE.test(t) && !/[:?]\s*$/.test(t) && !onlyPartWords(t))
       for (const t of terms) {
         if (ev.includes(t) || labels.some((l) => l.length >= 4 && t.includes(l))) continue

@@ -183,3 +183,30 @@ describe('31bafe03 production follow-up', () => {
     removed('The horizontal axis is labeled **x** and the vertical axis is labeled **“growth rate”**.', SQRT_EV)
   })
 })
+
+// ── Production on 16888708 (2026-10-11) ─────────────────────────────────────
+const SUPER = (resolveVisual({ message: 'show me a diagram', lessonConceptId: 'phys.mod.superconductivity', learnerRequest: 'diagram', subject: 'physics' } as never) as { payload: unknown }).payload
+const SUPER_EV = ev(SUPER)
+
+describe('16888708 production follow-up', () => {
+  it('phys.mod.superconductivity (other learners\' traffic): the label written with any subscript notation is kept', () => {
+    expect(SUPER_EV.text).toContain('R = 0 below T_c = 7.2 K')
+    for (const t of [
+      'The red line labeled **“R = 0 below T(c) = 7.2 K”** tells us that once the temperature drops below the critical temperature 7.2 kelvin, the resistance suddenly ',
+      'At **4 kelvin** (well below \\(T_c\\)) the figure’s label “R = 0 below \\(T_c\\)= 7.2 K” tells us the electrical resistance of the lead loop is exactly zero.',
+      'For example, in the figure the red label reads “R = 0 below T₍c₎ = 7.2 K”, showing that once the temperature drops to that point the resistance drops abruptly t',
+      'This part of the figure shows the magnetic‑field behavior.',
+    ]) kept(t, SUPER_EV)
+  })
+  it('NEGATIVE: subscript normalisation does not accept a different value or symbol', () => {
+    removed('The red line on the figure is labeled “R = 0 below T(c) = 9.2 K”.', SUPER_EV)
+    removed('The red line on the figure is labeled “R = 0 below T(m) = 7.2 K”.', SUPER_EV)
+  })
+  it('NEGATIVE: bold emphasis beside a quoted label does not let a wrong quoted label through', () => {
+    removed('At **4 kelvin** the figure’s label “R = 1 above T_c” tells us the resistance is high.', SUPER_EV)
+  })
+  it('stress-strain page (16888708): an invented role for the axis arrows is removed; the accurate one is kept', () => {
+    removed('- Grey arrows run along the curve to show the direction of increasing load.', STRESS_EV)
+    kept('- The **grey arrows** show the two quantities we are plotting: on the horizontal axis you see “strain ΔL/L” (the fractional change in length), and on the vertic', STRESS_EV)
+  })
+})
