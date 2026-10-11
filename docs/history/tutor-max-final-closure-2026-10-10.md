@@ -119,3 +119,13 @@ slope-meaning rules kept strict by negative tests. Six production rounds (31bafe
 graph sentence removed on square roots, stress-strain or superconductivity. Square roots and stress-strain
 PRODUCTION-VERIFIED; strict rejection FIXED-TESTED-NOT-PRODUCTION-VERIFIED (no natural fabricated claim in the final
 round). Full record: `docs/qa/LIVE_REDRIVE_2026-10-10.md` ("A-2 graph-figure false positives — 2026-10-11").
+
+### 2026-10-11 — controlled negative verification (f7630937 → 4db74a61)
+
+Owner: unit tests do not establish production behaviour. A disposable learner asked the tutor on the real /learn page
+to repeat false figure sentences; the deployed gate removed the invented label ("time (s)"), the absent feature
+("bars") and the wrong slope meaning ("breaking stress") — PRODUCTION-VERIFIED. The runs also exposed three false
+positives (a true x-axis/curve sentence, the model's own "not “yield point”" correction, a bracketed label), each
+fixed and re-verified; final round 4db74a61 removed only the two intended negatives. One-letter labels investigated:
+"vertical axis is labeled y" (axis reads "√x (unitless)") — wording slip with correct meaning; removal would delete
+correct teaching; left unchanged and documented. Record: LIVE_REDRIVE_2026-10-10.md.

@@ -281,6 +281,7 @@ passed, 9 skipped; `npm run build` 0.
 - Strict rejection of unsupported graph claims — **FIXED-TESTED-NOT-PRODUCTION-VERIFIED**: proven by the negative unit
   and route tests; no fabricated graph claim occurred naturally in the final round (the only production removal there
   was the existing analogy-opener rule).
+  → superseded the same day: **PRODUCTION-VERIFIED** by the controlled negative runs below.
 - `drawn:` read out as figure text — **PRODUCTION-VERIFIED** fixed (absent from every page and transcript since 34faa394).
 
 **Limits.** Each production round surfaced new phrasings; the rules cover every phrasing seen in 893 replies, not every
@@ -288,3 +289,44 @@ possible one. A one-letter label claim ("the vertical axis is labeled **y**" whe
 not checked — single characters were already skipped before this change. The harness flag `picImaginedParts` keys on
 "the horizontal line" and fires on accurate descriptions of real axes (2 per square-roots run); it is a harness
 heuristic, not a product defect.
+
+### Controlled negative verification and one-letter labels — 2026-10-11 (f7630937 → 4db74a61)
+
+**Method.** No production hook can script the tutor's reply (only a model/provider override for flagged accounts), so
+the negative case was driven through the real /learn page: a disposable learner asks the tutor to repeat a false figure
+sentence verbatim while the graph is on screen, plus a true control sentence. Each case counts only when the server log
+shows the model wrote the sentence and the gate's decision. 11 disposable accounts across four runs (2 + 3 + 3 + 3), all deleted,
+re-login refused. Evidence: `docs/qa/graph-figure-fix-2026-10-11/negative-*`.
+
+| Deploy | Rejected by the deployed gate (model wrote it; log `unsupported-figure-claims-removed`) | Controls kept | Found |
+|---|---|---|---|
+| f7630937 dpl_vZHQoqVrKi4oUxNRGHKsrzBxGQpo | "The x-axis on the graph is labelled “time (s)”."; "The bars on the graph show how big each square root is."; "On the graph, the slope of the straight line shows the breaking stress of the wire." | "… the slope of the straight line is Young's modulus E." | control "On the graph, the horizontal line is the x-axis and the curve shows y = √x." REMOVED — part rule judged the whole sentence |
+| ae3ef570 dpl_75zSMkTjzucDoRnQoJ4Bnz3V9GFU | same three again | x-axis/curve control now kept; Young's modulus; axis labels | the model's correction "Actually, the blue line on the graph is labelled “slope = E”, not “yield point”." REMOVED — denied quote read as a label |
+| 3cd4398f dpl_EAB48Y9GN4S4gy82udkgnSr38xuD | "time (s)"; "bars" | all controls; the "not “yield point”" correction | description "… relates **stress (F / A)** … to **strain (ΔL / L)** …" REMOVED — brackets |
+| 4db74a61 dpl_BDeZYgVKbUakrECxTGrvK3iTKUiR | "time (s)"; "bars" (the only two removals logged) | all controls, the correction and the bracketed description | — |
+
+Fixes from these runs: a part claim is judged on the words after its verb (ae3ef570); a quote after not / never /
+rather than / instead of is not a label claim (3cd4398f); brackets are ignored in label matching, on both sides
+(4db74a61). Each has unit tests with negative controls. Final gates on 4db74a61: tsc 0; ESLint 0; vitest 921 files,
+18,854 passed, 9 skipped; build 0; sweep over 946 saved replies unchanged (5 known imagined claims + 1 no-figure
+artifact). The model refused or corrected some prompts itself ("room temperature", "breaking stress" on 4db74a61) and
+twice a turn was answered from authored content; those turns are not counted.
+
+**Status.** Rejection of an invented graph label ("time (s)", "yield point"), an absent feature ("bars") and a wrong
+slope meaning ("breaking stress") — **PRODUCTION-VERIFIED** (f7630937, ae3ef570; label/feature again on 3cd4398f and
+4db74a61). "yield strength" was never exercised (both attempts answered from authored content) — covered by unit tests only.
+
+**One-letter labels — investigated, left unchanged (documented).** Every single-character label claim in the saved
+production evidence (15 pattern matches → 9 real) is on `math.arith.square-roots`: "the horizontal axis is labeled
+**x**" (rendered axis name "x (unitless)" — accurate) and "the vertical axis is labeled **y**" / “y” / \(y\) (6
+distinct sentences; rendered axis name "√x (unitless)" — the label text is wrong, the meaning is right: the curve is
+y = √x and each sentence goes on to say the axis shows √x; see `negative-f7630937-pageM-02.png`, where the tutor says
+"labelled **y** (the root)" above an axis reading "√x (unitless)"). The checker can only REMOVE a sentence; removing
+these would delete correct teaching ("The vertical axis is labeled **y**; it shows the output √x for each x."), which is
+worse for the learner than the wording slip. Judged low severity; not a removal case. If it is to be addressed, the
+lever is the wording (the axis is named √x), not this checker.
+
+**Other limit (pinned by a test, not a regression).** A wrong part meaning that shares one word with the figure's
+text passes: "On the graph, the horizontal line shows the time the wire was stretched for." ("wire" is in the stage
+text). The old whole-sentence rule kept it too; an axis-meaning rule would be new scope and no production turn has
+shown it.
