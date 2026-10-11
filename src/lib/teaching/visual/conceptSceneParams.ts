@@ -136,6 +136,11 @@ import {
   buildPythagoreanConverseScene, buildParallelogramScene, buildLineEquationScene, buildEvenOddScene, buildQuadraticFunctionScene,
   buildVertexFormScene, buildExponentialFunctionScene, buildLogarithmicFunctionScene, buildCompositionScene,
 } from '@/lib/teaching/sceneGenerators/mathCoreScenesB2'
+import {
+  buildEquivalentFractionsScene, buildFractionSimplificationScene, buildFractionAdditionScene, buildImproperFractionsScene,
+  buildPlaceValueScene, buildMultiplicationScene, buildDivisionScene, buildNumberBaseScene,
+  buildRatioScene, buildDirectVariationScene, buildInverseVariationScene, buildPercentageChangeScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB3'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -327,6 +332,20 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'math.func.exponential-function':      buildExponentialFunctionScene,
   'math.func.logarithmic-function':      buildLogarithmicFunctionScene,
   'math.func.composition':               buildCompositionScene,
+
+  // Mathematics visual campaign, batch 3 (2026-10-11). See mathCoreScenesB3.ts.
+  'math.arith.fraction-equivalence':     buildEquivalentFractionsScene,
+  'math.arith.fraction-simplification':  buildFractionSimplificationScene,
+  'math.arith.fraction-addition':        buildFractionAdditionScene,
+  'math.arith.improper-fractions':       buildImproperFractionsScene,
+  'math.arith.place-value':              buildPlaceValueScene,
+  'math.arith.multiplication':           buildMultiplicationScene,
+  'math.arith.division':                 buildDivisionScene,
+  'math.arith.number-base':              buildNumberBaseScene,
+  'math.arith.ratios':                   buildRatioScene,
+  'math.arith.direct-variation':         buildDirectVariationScene,
+  'math.arith.inverse-variation':        buildInverseVariationScene,
+  'math.arith.percentage-change':        buildPercentageChangeScene,
 
   // The Punnett generator is single-gene by construction (genotypes are two
   // alleles). A dihybrid cross drawn as a monohybrid square teaches the wrong
