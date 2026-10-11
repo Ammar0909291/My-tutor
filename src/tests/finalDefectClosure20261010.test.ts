@@ -574,7 +574,8 @@ describe('A-2 / C-1 follow-up from the 9a0cee7a re-drive', () => {
   it('what a scene DRAWS is evidence too: its line stubs and arrows (9a0cee7a sweep)', () => {
     const scene = { renderer: 'scene', sceneSpec: { title: 'Reflex vs. Fixed Action Pattern', steps: [{ narration: 'x', objects: [{ type: 'node', text: 'Simple reflex' }, { type: 'path', points: [] }, { type: 'arrow', from: [0, 0, 0], to: [1, 0, 0] }] }] } }
     const ev = evidenceFromPayload(scene as never, describeVisualPayload as never)
-    expect(ev.text).toContain('drawn: arrow, line')
+    // the node is drawn as a point too (graph-evidence fix, 2026-10-11)
+    expect(ev.text).toContain('drawn: arrow, line, marked point')
     expect(checkFigureClaims('The two straight lines simply separate the two columns; they don’t carry additional meaning.', ev).removed).toEqual([])
     expect(checkFigureClaims('The two straight lines simply separate the two columns.', FAP_FIGURE).removed).toHaveLength(1) // nothing drawn → still removed
   })

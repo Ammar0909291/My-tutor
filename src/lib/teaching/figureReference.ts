@@ -55,6 +55,7 @@
  * is true and is left exactly as written.
  */
 import { conceptFallbackText } from './conceptFallback'
+import { isCountAxis } from '@/lib/visuals/graphAxis'
 
 /** Words that place the thing on screen rather than in the prose. */
 const ON_SCREEN =
@@ -937,6 +938,24 @@ export function evidenceFromSemantics(sem: { caption?: string | null; readable?:
   return { caption: sem?.caption ?? null, text: text.slice(0, 24) }
 }
 
+const AXIS_PRIMITIVES = ['axes', 'x-axis', 'y-axis', 'horizontal axis', 'vertical axis', 'horizontal line', 'vertical line']
+const near = (a: number, b: number) => Math.abs(a - b) < 1e-6
+/** Two arrows from the same origin, one horizontal and one vertical. */
+function hasAxes(arrows: Array<{ from?: number[]; to?: number[] }>): boolean {
+  const ok = (a: { from?: number[]; to?: number[] }) => Array.isArray(a.from) && Array.isArray(a.to) && a.from.length >= 2 && a.to.length >= 2
+  const horiz = arrows.filter((a) => ok(a) && near(a.from![1], a.to![1]) && !near(a.from![0], a.to![0]))
+  const vert = arrows.filter((a) => ok(a) && near(a.from![0], a.to![0]) && !near(a.from![1], a.to![1]))
+  return horiz.some((h) => vert.some((v) => near(h.from![0], v.from![0]) && near(h.from![1], v.from![1])))
+}
+/** A path whose points all lie on one straight line (two-point stubs included). */
+function isStraight(points: number[][] | undefined): boolean {
+  const pts = (points ?? []).filter((p) => Array.isArray(p) && p.length >= 2)
+  if (pts.length < 3) return true
+  const [a, b] = [pts[0], pts[pts.length - 1]]
+  const len = Math.hypot(b[0] - a[0], b[1] - a[1]) || 1
+  return pts.every((p) => Math.abs((b[0] - a[0]) * (a[1] - p[1]) - (a[0] - p[0]) * (b[1] - a[1])) / len < 1e-3 * len)
+}
+
 /** Evidence straight from a payload: the described semantics plus what a spec draws beyond them (step notes, axis labels). */
 export function evidenceFromPayload(
   payload: { renderer?: string; visualSpec?: unknown; sceneSpec?: unknown; visualType?: unknown } | null | undefined,
@@ -948,13 +967,36 @@ export function evidenceFromPayload(
   // What is DRAWN, not only what is written (production on 9a0cee7a: the
   // innate-behaviour scene draws two line stubs, the photosynthesis scene an arrow).
   const drawn = new Set<string>()
-  const scene = (payload?.sceneSpec ?? null) as { steps?: Array<{ objects?: Array<{ type?: string }> }>; objects?: Array<{ type?: string }> } | null
+  type DrawnObject = { type?: string; from?: number[]; to?: number[]; points?: number[][] }
+  const scene = (payload?.sceneSpec ?? null) as { steps?: Array<{ objects?: DrawnObject[] }>; objects?: DrawnObject[] } | null
+  const arrows: DrawnObject[] = []
   for (const o of [...(scene?.objects ?? []), ...(scene?.steps ?? []).flatMap((st) => st?.objects ?? [])]) {
-    if (o?.type === 'arrow' || o?.type === 'vector') drawn.add('arrow')
-    if (o?.type === 'path' || o?.type === 'line') drawn.add('line')
+    if (o?.type === 'arrow' || o?.type === 'vector') { drawn.add('arrow'); arrows.push(o) }
+    if (o?.type === 'line' || o?.type === 'bond') { drawn.add('line'); drawn.add('straight line') }
+    if (o?.type === 'path') {
+      drawn.add('line')
+      if (!isStraight(o.points)) { drawn.add('curve'); drawn.add('plotted curve') }
+    }
+    if (o?.type === 'node' || o?.type === 'point') drawn.add('marked point')
     if (o?.type === 'box' || o?.type === 'rect') drawn.add('box')
   }
+  // A-2 graph false positives (production d10f8a09, 2026-10-11): a scene's
+  // axes are two arrows from one origin, one horizontal and one vertical
+  // (phys.mech.stress-strain) — "this arrow points to the vertical axis" was
+  // removed because nothing said the figure HAS axes.
+  if (hasAxes(arrows)) for (const t of AXIS_PRIMITIVES) drawn.add(t)
   if (spec?.type === 'process_flow' || spec?.type === 'flowchart') { drawn.add('box'); drawn.add('arrow') }
+  // GraphRenderer draws a grid, both axes (with tick numbers and the axis
+  // names), the curve of the equation — or, on a count axis, points only —
+  // and the title with the equation (math.arith.square-roots: "The
+  // horizontal line is the x-axis", "the curve" were removed).
+  if (spec?.type === 'graph') {
+    for (const t of AXIS_PRIMITIVES) drawn.add(t)
+    drawn.add('grid'); drawn.add('tick numbers')
+    if (isCountAxis(typeof spec.xLabel === 'string' ? spec.xLabel : null)) drawn.add('plotted points')
+    else { drawn.add('curve'); drawn.add('plotted curve') }
+    if (typeof spec.equation === 'string') extra.push(spec.equation)
+  }
   if (drawn.size > 0) extra.push(`drawn: ${Array.from(drawn).sort().join(', ')}`)
   if (spec) {
     for (const k of ['title', 'xLabel', 'yLabel', 'caption']) if (typeof spec[k] === 'string') extra.push(spec[k] as string)
@@ -982,24 +1024,29 @@ export function evidenceFromPayload(
 export const FIGURE_POINTING_RE = /\b(?:(?:the|this|that|your)\s+(?:picture|figure|diagram|image|sketch|drawing|chart|graph|flow ?chart|illustration)|in the (?:sketch|drawing)|box(?:es)?|arrows?|labell?ed|labels?|(?:left|right)[- ]hand side|on the (?:left|right)|at the (?:top|bottom)|(?:top|bottom) (?:left|right)|the (?:horizontal|vertical) (?:line|axis)|the [xy][- ]?axis|the axes|the curve|one side|the other side|the (?:two|three|four) (?:straight |dashed |dotted |coloured |colored )?lines)\b/i
 const FIGURE_NOUN_RE = /\b(?:picture|figure|diagram|image|sketch|drawing|chart|graph|illustration)\b/i
 const ANALOGY_AS_FIGURE_RE = /\b(?:picture yourself|imagine|think of (?:it|this|the (?:picture|figure|diagram)) (?:as|like)|as if)\b/i
-const STRUCTURE_RE = /\b(x[- ]?axis|y[- ]?axis|axis|axes|horizontal (?:line|axis)|vertical (?:line|axis)|(?:two|three|four) (?:straight |dashed |dotted |coloured |colored )?lines|curves?|plotted|bar chart|bars|grid|stacks?|(?:the|this|that) sketch|slope|peaks?|plateau|pie chart|table)\b/gi
+const STRUCTURE_RE = /\b(x[-‐‑ ]?axis|y[-‐‑ ]?axis|axis|axes|horizontal (?:line|axis)|vertical (?:line|axis)|(?:two|three|four) (?:straight |dashed |dotted |coloured |colored )?lines|curves?|plotted|bar chart|bars|grid|stacks?|(?:the|this|that) sketch|slope|peaks?|plateau|pie chart|table)\b/gi
 const LABEL_CLAIM_RE = /\b(?:labell?ed|labels?|written|titled|marked|caption|heading)\b|\b(?:label|box|figure|picture|diagram|caption|title|heading|sign|panel|it)\s+(?:\w+\s+){0,2}?(?:reads?|says)\b/i
 const EXPLAINS_PART_RE = /\b(?:the|this|that|these|those)\s+(?:\w+\s+){0,2}?(?:box(?:es)?|arrows?|sections?|parts?|sides?|lines?)\b[^.!?]{0,60}\b(?:represents?|stands? for|shows?|means?)\b/i
 /** "grey arrow", "right side (blue)": a bolded description of a part, not a quoted label. */
-const PART_WORDS_RE = /\b(?:(?:top|bottom|upper|lower|left|right|centre|center|middle)(?:[- ]hand)?|red|blue|green|orange|purple|grey|gray|black|white|yellow|pink|brown|teal|light|dark|arrows?|box(?:es)?|sides?|lines?|sections?|panels?|parts?|areas?|the|a|an|and)\b/gi
+const PART_WORDS_RE = /\b(?:(?:top|bottom|upper|lower|left|right|centre|center|middle)(?:[- ]hand)?|red|blue|green|orange|purple|grey|gray|black|white|yellow|pink|brown|teal|light|dark|arrows?|box(?:es)?|sides?|lines?|sections?|panels?|parts?|areas?|labell?ed|markers?|curves?|points?|dots?|the|a|an|and)\b/gi
 function onlyPartWords(term: string): boolean {
   return term.replace(PART_WORDS_RE, '').replace(/[()\s,.-]+/g, '').length === 0
 }
+const SLOPE_MEANING_RE = /\bslope\b(?:\s+of\s+[^.;,]{1,40}?)?\s+(?:is|represents?|equals?|gives?|shows?|stands? for|means?|tells? (?:you|us))\s+(?:the\s+|a\s+|an\s+)?([^.;,()–—]{2,60})/gi
 const ORDINALS: Record<string, number> = { first: 1, second: 2, third: 3, fourth: 4, fifth: 5, sixth: 6, seventh: 7, eighth: 8, last: -1, final: -1 }
 const ORDINAL_CLAIM_RE = /\b(first|second|third|fourth|fifth|sixth|seventh|eighth|last|final)(?:\s+(?:box|step|stage|one))?\s+(?:represents?|shows?|indicates?|is|stands? for|contains?|says)\s+([^,;.]{3,80})/gi
 const POSITION_OR_COLOUR_RE = /^(?:(?:top|bottom|upper|lower)\s*)?(?:left|right|centre|center|middle|top|bottom)(?:\s+(?:left|right|side))?$|^(?:red|blue|green|orange|purple|grey|gray|black|white|yellow|pink|brown|teal)$/i
 const STOP = new Set(['this', 'that', 'with', 'from', 'they', 'them', 'their', 'there', 'which', 'when', 'what', 'into', 'than', 'then', 'also', 'each', 'shows', 'show', 'represent', 'represents', 'picture', 'figure', 'diagram', 'boxes', 'arrow', 'arrows', 'part', 'parts', 'side', 'here', 'just', 'like'])
 const norm = (t: string): string => (t ?? '').toLowerCase().replace(/[‐-―−]/g, '-').replace(/[“”"*’‘']/g, '').replace(/\s+/g, ' ').trim()
+const stemWord = (w: string): string => w.replace(/(?:es|s)$/, '')
 const contentWords = (t: string): string[] => (norm(t).match(/[a-z][a-z-]{3,}/g) ?? []).filter((w) => !STOP.has(w))
 
 export function checkFigureClaims(reply: string, evidence: FigureEvidence): { text: string; removed: string[] } {
   const ev = norm([evidence.caption ?? '', ...evidence.text].join(' | '))
   const evWords = new Set(contentWords(ev).map((w) => w.replace(/(?:es|s)$/, '')))
+  const entryTexts = [evidence.caption ?? '', ...evidence.text].filter(Boolean)
+  const entries = entryTexts.map((e) => new Set(contentWords(e).map(stemWord)))
+  const slopeEntries = entryTexts.filter((e) => /\bslope\b/i.test(e)).map((e) => new Set(contentWords(e).map(stemWord)))
   const labels = [evidence.caption ?? '', ...evidence.text].map(norm).filter((l) => l.length >= 3)
   const removed: string[] = []
   // Split as the grounded prose check does, keeping every character.
@@ -1014,16 +1061,29 @@ export function checkFigureClaims(reply: string, evidence: FigureEvidence): { te
     if (ANALOGY_AS_FIGURE_RE.test(s) && FIGURE_NOUN_RE.test(s)) bad = true
     if (!bad) {
       for (const m of s.matchAll(STRUCTURE_RE)) {
-        const w = m[1].toLowerCase()
-        const key = /^(?:two|three|four) /.test(w) ? 'line' : w.replace(/^(?:the|this|that) /, '').replace(/s$/, '')
+        const w = norm(m[1])
+        const key = /^(?:two|three|four) /.test(w) ? 'line' : w.replace(/^(?:the|this|that) /, '').replace(/^([xy])[\s-]?axis$/, '$1-axis').replace(/s$/, '')
         if (!ev.includes(key)) { bad = true; break }
       }
     }
     if (!bad && LABEL_CLAIM_RE.test(s)) {
-      const terms = Array.from(s.matchAll(/“([^”]{2,80})”|"([^"]{2,80})"|\*\*([^*]{2,80})\*\*/g)).map((m) => norm(m[1] ?? m[2] ?? m[3] ?? '').replace(/[,.;!]+$/, '').trim())
-        .filter((t) => t.length >= 2 && !POSITION_OR_COLOUR_RE.test(t) && !/:\s*$/.test(t) && !onlyPartWords(t))
+      // A quoted label inside a bolded part description ("**Blue line labeled
+      // “slope = E”**") is judged on its own; the bold remainder is a part
+      // description (stress-strain, d10f8a09).
+      const quotedTerms = Array.from(s.matchAll(/“([^”]{2,80})”|"([^"]{2,80})"/g)).map((m) => m[1] ?? m[2] ?? '')
+      // A bold-wrapped quote (**“Simple reflex”**) goes with its asterisks, or
+      // the leftover "**" pairs would wrap the text between two labels.
+      const unquoted = s.replace(/\*\*\s*(?:“[^”]{0,80}”|"[^"]{0,80}")[,.;:!?]?\s*\*\*/g, ' ').replace(/“[^”]{0,80}”|"[^"]{0,80}"/g, ' ')
+      const boldTerms = Array.from(unquoted.matchAll(/\*\*([^*]{2,80})\*\*/g)).map((m) => m[1] ?? '')
+      const terms = [...quotedTerms, ...boldTerms].map((t) => norm(t).replace(/[,.;!]+$/, '').trim())
+        .filter((t) => t.length >= 2 && !POSITION_OR_COLOUR_RE.test(t) && !/[:?]\s*$/.test(t) && !onlyPartWords(t))
       for (const t of terms) {
-        if (!(ev.includes(t) || labels.some((l) => l.length >= 4 && t.includes(l)))) { bad = true; break }
+        if (ev.includes(t) || labels.some((l) => l.length >= 4 && t.includes(l))) continue
+        // A label restated in words ("stress = force / area" for "stress F/A"):
+        // every content word, at least two, in ONE label or stage text.
+        const tw = contentWords(t).map(stemWord)
+        if (tw.length >= 2 && entries.some((e) => tw.every((w) => e.has(w)))) continue
+        bad = true; break
       }
     }
     if (!bad && EXPLAINS_PART_RE.test(s) && !/“|"|\*\*/.test(s)) {
@@ -1031,6 +1091,16 @@ export function checkFigureClaims(reply: string, evidence: FigureEvidence): { te
       const part = /\b(box|arrow|line)/i.exec(EXPLAINS_PART_RE.exec(s)?.[0] ?? '')?.[1]?.toLowerCase()
       const partDrawn = part ? new RegExp(`drawn: [^|]*\\b${part}`).test(ev) : false
       if (new Set(overlap).size < (partDrawn ? 1 : 2)) bad = true
+    }
+    if (!bad) {
+      // What the slope MEANS must come from the figure (a label or its stage
+      // text): "slope = E … the slope is Young's modulus" (stress-strain)
+      // supports "Young's modulus", never "the breaking stress".
+      for (const m of s.matchAll(SLOPE_MEANING_RE)) {
+        const said = contentWords(m[1]).map(stemWord)
+        if (said.length === 0) continue
+        if (!slopeEntries.some((e) => said.every((w) => e.has(w)))) { bad = true; break }
+      }
     }
     if (!bad && evidence.order && evidence.order.length >= 2) {
       // "the first box represents the reactants, the second shows …": each
