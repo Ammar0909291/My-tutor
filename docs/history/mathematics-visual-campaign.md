@@ -220,3 +220,28 @@ Name collision to remember: `buildContinuityScene` already exists (fluid continu
 | math.calc.local-extrema | x⁴/4 − x²: horizontal tangents at the max (0, 0) and minima (±√2, −1) |
 | math.calc.concavity | x³/6 above its tangent for x > 0, below for x < 0, inflection at 0 |
 | math.calc.riemann-sums | left sums of x²/4 on [0, 4]: n = 4 gives 3.5, n = 8 gives 4.375, exact 16/3 |
+
+
+# Batch 7 (2026-10-11): single-variable calculus, part 2
+
+`sceneGenerators/mathCoreScenesB7.ts` + `mathCoreScenesBatch7.test.ts` (110 checks). New in this batch: `mathVisualCampaignAudit.test.ts`
+runs `validateSceneSpec` + `payloadBlockers` + concept-scope serving over EVERY `math.*` entry in CONCEPT_SCENES, so a future figure
+that the admission audit would silently drop fails CI by name. Raise its `toBeGreaterThanOrEqual` count with each batch.
+
+Hatched areas are checked by summing the drawn hatch lines (length ÷ unit × step) against the exact integral. Two figures use a
+stretched vertical scale on purpose and say so in their ariaLabel / the test: improper integrals (×3.2) and the Fourier square wave (×1.6).
+
+| Concept | Figure |
+|---|---|
+| math.calc.mean-value-theorem | x²/4 on [1, 5]: secant slope 1.5 and the parallel tangent at c = 3 |
+| math.calc.related-rates | a 5-long ladder, foot at 3 sliding out at 1: x dx/dt + y dy/dt = 0 gives dy/dt = −3/4 (arrows in that ratio) |
+| math.calc.linearization | √x and its tangent at 4: error 0.002 at 4.4, 0.25 at 1 |
+| math.calc.definite-integral | (x − 1)(x − 3) on [0, 4]: +4/3, −4/3, +4/3, total 4/3 |
+| math.calc.ftc-part1 | area under t/2 is A(x) = x²/4, and the slope of A at 3 equals the height f(3) = 1.5 |
+| math.calc.ftc-part2 | area under y = x from 1 to 3 is 4 = F(3) − F(1) with F = x²/2 |
+| math.calc.improper-integrals | 1/x² from 1 to R: 0.5, 0.667, 0.833 → 1 − 1/R → 1 |
+| math.calc.integral-area | strips of height x − x² between y = x and y = x²: 1/6 |
+| math.calc.arc-length | chords n = 2, 4, 8 give 5.84, 5.90, 5.91 below the exact 5.92 |
+| math.calc.taylor-series | sin x with x, x − x³/6 and x − x³/6 + x⁵/120 |
+| math.calc.parametric-curves | x = 3 cos t, y = 2 sin t: marked t values, counter-clockwise, x²/9 + y²/4 = 1 |
+| math.calc.fourier-series-intro | square wave and the partial sums (4/π) sin x and the first three odd terms |

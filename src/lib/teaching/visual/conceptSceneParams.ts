@@ -155,6 +155,11 @@ import {
   buildDerivativeIntroScene, buildDerivativeDefinitionScene, buildDifferentiabilityScene, buildIncreasingDecreasingScene,
   buildLocalExtremaScene, buildConcavityScene, buildRiemannSumsScene,
 } from '@/lib/teaching/sceneGenerators/mathCoreScenesB6'
+import {
+  buildMeanValueTheoremScene, buildRelatedRatesScene, buildLinearizationScene, buildDefiniteIntegralScene, buildFtcPart1Scene,
+  buildFtcPart2Scene, buildImproperIntegralsScene, buildIntegralAreaScene, buildArcLengthScene, buildTaylorSeriesScene,
+  buildParametricCurvesScene, buildFourierSeriesIntroScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB7'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -402,6 +407,20 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'math.calc.local-extrema':             buildLocalExtremaScene,
   'math.calc.concavity':                 buildConcavityScene,
   'math.calc.riemann-sums':              buildRiemannSumsScene,
+
+  // Mathematics visual campaign, batch 7 (2026-10-11). See mathCoreScenesB7.ts.
+  'math.calc.mean-value-theorem':        buildMeanValueTheoremScene,
+  'math.calc.related-rates':             buildRelatedRatesScene,
+  'math.calc.linearization':             buildLinearizationScene,
+  'math.calc.definite-integral':         buildDefiniteIntegralScene,
+  'math.calc.ftc-part1':                 buildFtcPart1Scene,
+  'math.calc.ftc-part2':                 buildFtcPart2Scene,
+  'math.calc.improper-integrals':        buildImproperIntegralsScene,
+  'math.calc.integral-area':             buildIntegralAreaScene,
+  'math.calc.arc-length':                buildArcLengthScene,
+  'math.calc.taylor-series':             buildTaylorSeriesScene,
+  'math.calc.parametric-curves':         buildParametricCurvesScene,
+  'math.calc.fourier-series-intro':      buildFourierSeriesIntroScene,
 
   // The Punnett generator is single-gene by construction (genotypes are two
   // alleles). A dihybrid cross drawn as a monohybrid square teaches the wrong
