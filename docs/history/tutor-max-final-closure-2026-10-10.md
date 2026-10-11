@@ -15,6 +15,8 @@ Non-Numeric Factual Accuracy", then "FINAL PRODUCTION CLOSURE AFTER cf79346". So
 | 9a0cee7a | dpl_A2SahaRQC8xoBXwkefHWBR4RJVWy | A-2: every figure-pointing sentence checked against the figure's evidence; C-1: uncovered examples qualified ("Go fix all") |
 | f32eeb04 | dpl_FpCgtwM2KUna2KD8CNCPvxnaXfan | Precision from the 9a0cee7a re-drive: drawn primitives in evidence, questions/part descriptions not label claims, note only on example turns |
 | 3e7bdcc4 | dpl_HcnzWw9p4K4LrjimuzsLpkqYu3uU | Ordinal box/step claims checked against the figure's step order; note placed above the /learn "Read more" fold |
+| d10f8a09 | dpl_6CxuUEHXwRAcQM67sw1DuYEDfbtP | 2026-10-11 targeted factual closure: BIO-024 named-claim replacement by the authored example; analogy sentences kept on an unverifiable contradiction |
+| aa804e11 | dpl_3o4JWGbVmmTUNoJgLZYErrhZj6vA | Authored examples rotate, then an honest repeat line; named sentences logged |
 
 Gates on 76c2edd's tree: `tsc --noEmit` exit 0; `npm run lint` exit 0, 0 errors, 12 warnings (none in changed
 files); `vitest run` 917 files, 18,754 passed, 9 skipped, exit 0; `npm run build` exit 0.
@@ -93,3 +95,16 @@ qualification, not correction — no authored source covers sticklebacks.
 This Chromium build rejects the sandbox egress CA (ERR_CERT_AUTHORITY_INVALID, also with the CA added to NSS; the NSS
 entry was removed again). `scripts/qa/learnPageEvidence.ts` fetches app requests on the Node side (`route.fetch()`,
 certificate verified there) and gives them to the real page; nothing disables TLS checking.
+
+## 2026-10-11 — targeted factual defect closure (BIO-024 + innate false positive)
+
+Owner brief "TARGETED FACTUAL DEFECT CLOSURE — minimum necessary changes only". BIO-024: the lesson objective does not
+require sticklebacks (no KG/EB/seed mention), so no curriculum was added; a checker-tagged named real-world claim the
+sources do not support, on an example turn, makes the reply the lesson's own authored example — PRODUCTION-VERIFIED on
+aa804e11 (the model wrote "a female with a bright red belly" again; replaced; /learn showed only authored examples).
+Innate false positive: an analogy sentence removed by the ungrounded-correction rule; now kept inside an analogy
+passage, with paired tests proving genuine claims are still removed — FIXED-TESTED-NOT-PRODUCTION-VERIFIED (trigger did
+not recur; 0 analogy removals across 7 production "explain simpler" turns). New out-of-scope finding: A-2 removes
+accurate graph descriptions (square roots, stress-strain) because graph evidence lacks axis/curve words. Full record:
+`docs/qa/LIVE_REDRIVE_2026-10-10.md` ("Targeted factual defect closure — 2026-10-11"), BIOLOGY_REAL_LEARNER_DEFECTS.md
+BIO-024, evidence `docs/qa/factual-closure-2026-10-11/`.

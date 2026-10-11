@@ -1,0 +1,59 @@
+{
+  "base": "https://my-tutor-flame.vercel.app",
+  "subject": "biology",
+  "slug": "bio.behav.innate-behavior-instinct",
+  "rows": [
+    {
+      "turn": 1,
+      "said": "explain simpler",
+      "shot": "01.png",
+      "provider": "groq",
+      "reply": "A reflex is an automatic, very fast response that happens without you thinking about it—​for example, when a doctor taps the spot just below your kneecap and your leg kicks out.\n\nIn the figure you’re looking at, the blue box in the top‑left corner is labeled **“Simple reflex”** and gives the example **“the knee‑jerk reflex.”**\n\nWhat do you notice about this simple reflex compared with the orange‑colored “Fixed action pattern” on the right?",
+      "replyRendered": true,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": true
+    },
+    {
+      "turn": 2,
+      "said": "give me example",
+      "shot": "02.png",
+      "provider": "groq",
+      "reply": "I will keep to the examples in your lesson materials, so every detail here is one you can rely on:\n\nFixed action patterns (FAPs) are stereotyped (performed the same way across individuals of a species) and largely unmodifiable behavioural sequences — once triggered, a FAP typically runs to completion in its characteristic form, largely independent of ongoing feedback. Critically, a FAP is NOT spontaneous: it requires a specific sign stimulus (a specific, often simple environmental cue) to release it — the sequence is performed only when that specific trigger is present. Innate behaviour must be further distinguished from simple reflexes: a reflex is a direct, typically single-muscle-group stimulus-response (like the knee-jerk reflex) — simple, immediate, minimal neural processing. A fixed action pattern is substantially more complex, coordinated, and multi-step (like an elaborate courtship display or nest-building sequence) — many more coordinated movements over an extended time, though still triggered by a specific sign stimulus and still largely stereotyped once initiated. Innate behaviour also has a genetic basis: it is a heritable trait shaped by natural selection over evolutionary time, exactly as physical structures are — a FAP that reliably improves survival or reproduction can be favoured by selection and become a stable, species-typical trait.",
+      "replyRendered": true,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": false
+    },
+    {
+      "turn": 3,
+      "said": "i dont understand this picture. what is it showing?",
+      "shot": "03.png",
+      "provider": "groq",
+      "reply": "I hear you’re feeling stuck—let’s walk through the picture together, step by step.\n\n- At the **top left**, the blue label **“Simple reflex”** points to a basic, one‑step response. \n- Directly below it, the grey text **“E.g. the knee‑jerk reflex”** gives an everyday example of that simple reflex. \n- At the **top right**, the orange label **“Fixed action pattern”** marks a more complex, multi‑step behaviour that is still innate. \n- Beneath that, the grey text **“E.g. courtship display, nest‑building”** shows typical examples of such fixed action patterns. \n- Finally, at the **bottom right**, the grey note **“Stereotyped and largely unmodifiable once triggered”** tells us that once a fixed action pattern starts, it runs to completion and does not change much, even if conditions vary.\n\nOverall, the figure contrasts a quick, single‑muscle reflex with a longer, coordinated innate behaviour that requires a specific “sign stimulus” to start and then proceeds automatically.",
+      "replyRendered": true,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": false
+    },
+    {
+      "turn": 4,
+      "said": "explain simpler",
+      "shot": "04.png",
+      "provider": "groq",
+      "reply": "Think of a traffic light. When the light turns red (the **sign stimulus**), every driver automatically stops their car and stays stopped until the light changes. The driver doesn’t think about each step—just “stop, wait, go”—and this whole sequence runs to completion even if the road ahead is busy. In the picture, the orange box titled **“Fixed action pattern”** works the same way: a specific cue releases a built‑in, stereotyped behavior that runs its full course.",
+      "replyRendered": true,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": false
+    }
+  ]
+}

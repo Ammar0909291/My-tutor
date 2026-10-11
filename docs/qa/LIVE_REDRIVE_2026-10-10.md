@@ -177,3 +177,42 @@ refused), production logs pulled inside the 1-hour retention window. Transcripts
   2–9 uncovered sentences that were not examples (physics, rate-law, picture and quiz turns) carried no note. Seen in
   passing (older behaviour, not changed here): the prose check removed one accurate figure-mapping sentence on the
   innate concept ("That whole, pre-programmed routine is the fixed action pattern on the right side of the figure").
+
+## Targeted factual defect closure — 2026-10-11 (d10f8a09 → aa804e11)
+
+Baseline: `main` = `origin/main` = c10fb7c8, production dpl_9ijTyDfsFwbAcBFZvjrQjm7S9FTo READY on c10fb7c8, no
+concurrent commits. Gates on aa804e11's tree: `tsc --noEmit` 0; ESLint (changed files) 0; vitest 919 files, 18,811
+passed, 9 skipped; `npm run build` 0. Deploys: d10f8a09 → dpl_6CxuUEHXwRAcQM67sw1DuYEDfbtP; aa804e11 →
+dpl_3o4JWGbVmmTUNoJgLZYErrhZj6vA (READY, alias my-tutor-flame.vercel.app). 8 disposable accounts across both
+rounds, all deleted, re-login refused. Evidence: `docs/qa/factual-closure-2026-10-11/`.
+
+- **BIO-024 — PRODUCTION-VERIFIED.** Not required by the lesson objective (no KG, EB or seed text mentions
+  sticklebacks), so no example was added. On an example turn a checker-tagged named real-world claim the sources do not
+  support makes the reply the lesson's own authored example (rotating, then an honest repeat line). Production
+  aa804e11: the model wrote "a female with a bright red belly" again; logs show `namedAction: replaced`; the /learn page
+  showed only authored examples. Details: BIOLOGY_REAL_LEARNER_DEFECTS.md, BIO-024.
+- **Innate-behaviour false positive — FIXED-TESTED-NOT-PRODUCTION-VERIFIED.** Original (3e7bdcc4, learner "explain
+  simpler"): sentence 8 of a birthday-cake analogy, "That whole, pre‑programmed routine is the **fixed action pattern** on
+  the right side of the figure (the courtship display, nest‑building example).", removed with `rejected:
+  ["ungrounded-correction-8"]` — the checker called it "contradicted" but could not ground a correction, and that rule
+  turned the unverifiable contradiction into a removal. The full original reply is reconstructed from
+  `redrive-3e7bdcc4-bio.txt` plus the logged sentence (no provider key in this environment, so the checker call could
+  not be replayed). Narrowest fix: inside an analogy passage (paragraph or sentence opening "Think of / Imagine /
+  Picture / Now picture / Pretend", or "it's/this is/that's like") an unverifiable contradiction keeps the sentence and
+  counts it as uncovered (`analogy-kept-N`); the checker prompt says an analogy and its mapping onto the idea or figure
+  are "not_factual". Unchanged: doubted unsupported claims are removed, contradictions outside an analogy are removed,
+  named claims inside one are not shielded (paired tests). Production: across 7 "explain simpler" turns on d10f8a09 and
+  aa804e11 the prose check removed no analogy sentence (smoke alarm, wedding, morning routine, kitchen timer, traffic
+  light — all kept), but the exact trigger (an ungrounded "contradicted" verdict on an analogy) did not recur, so the
+  new rule path itself is verified by tests only.
+- **Regression checks.** A-2/C-1 suites (105 tests) unchanged and passing; chemistry rate-law and physics units closure
+  personas on d10f8a09 clean (no picImagined/picDescribe/quizSilent, no false notes). One A-2 removal on aa804e11 was
+  the existing analogy-opener rule ("Let's think of the picture like two everyday safety devices."; rest kept).
+- **New finding (not fixed, outside this brief): A-2 false positives on graph figures in other production traffic.**
+  d10f8a09 logs (region cle1, not this campaign's accounts): accurate descriptions of real graphs removed —
+  `math.arith.square-roots` ("The horizontal line is the **x‑axis** …", "Look at the curve on your screen …",
+  `keptModelText: false` once) and `phys.mech.stress-strain` ("Blue line labeled “slope = E”", "elastic limit",
+  "plastic"). Those figures' evidence (3 and 10 labels) carries no axis/curve words, so STRUCTURE_RE claims fail. Present
+  since 9a0cee7a, not caused by this change; the brief forbids reopening A-2 without a regression from the new change.
+  Proposed fix: add graph primitives (axes, curve, grid, plotted labels) to `evidenceFromPayload` for graph/function
+  figure types, with these production sentences as regression tests.
