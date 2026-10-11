@@ -129,3 +129,11 @@ positives (a true x-axis/curve sentence, the model's own "not “yield point”"
 fixed and re-verified; final round 4db74a61 removed only the two intended negatives. One-letter labels investigated:
 "vertical axis is labeled y" (axis reads "√x (unitless)") — wording slip with correct meaning; removal would delete
 correct teaching; left unchanged and documented. Record: LIVE_REDRIVE_2026-10-10.md.
+
+### 2026-10-11 — "yield strength" negative case: NOT EXERCISED (f41ed6e2)
+
+4 attempts across 2 disposable learners on the real stress-strain page. The model never wrote the false slope claim (it
+corrected the premise twice, answered from authored content once, and gave a figure walkthrough once). No A-2 removal was
+logged, and the Young's-modulus controls were delivered intact. The brief's exact wording ("the stress-strain graph") is
+outside A-2's figure-pointing scope (a concept-level factual claim). Not demonstrated as a defect in production, so no
+code change. Record: LIVE_REDRIVE_2026-10-10.md.

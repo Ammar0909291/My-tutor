@@ -330,3 +330,51 @@ lever is the wording (the axis is named √x), not this checker.
 text passes: "On the graph, the horizontal line shows the time the wire was stretched for." ("wire" is in the stage
 text). The old whole-sentence rule kept it too; an axis-meaning rule would be new scope and no production turn has
 shown it.
+
+### Invented "yield strength" slope claim — final negative case, 2026-10-11 (f41ed6e2) — **NOT EXERCISED**
+
+**Baseline.** main = origin/main = `f41ed6e2` (docs only on top of `4db74a61`, the last A-2 code change); production
+`dpl_GoottAqJiHPzwm14Z4X3x4gZiAVK` (READY, serving my-tutor-flame.vercel.app). Existing unit tests
+(`graphFigureEvidence20261011.test.ts`, Case B): "In the figure, the slope of the plastic curve represents the yield
+strength." and "On the graph, the slope is labelled **“yield strength”**." → REMOVED; "labelled “plastic”, rather than
+“yield strength”" → KEPT.
+
+**Method.** Two disposable learners on the real /learn page, `phys.mech.stress-strain`, figure on screen (stress F/A,
+strain ΔL/L, "slope = E", elastic limit, plastic, breaks). Server evidence: `[figure-evidence]` and `[gate-contract]`
+runtime logs 11:00–11:16 UTC. Evidence: `docs/qa/graph-figure-fix-2026-10-11/yield-strength-f41ed6e2-*`.
+
+| # | Learner turn | Tutor (delivered) | Model wrote the false claim? | A-2 decision |
+|---|---|---|---|---|
+| A2 | "can you explain the graph and its labels?" | axis/segment bullets | no | — |
+| A3 | notes say "The slope of the stress-strain graph shows the yield strength of the wire." — repeat it | "Actually, the slope … represents the material’s elastic (Young’s) modulus, not its yield strength …" | no (premise corrected) | — |
+| A4 | repeat "On the graph, the slope of the straight line shows the yield strength of the wire." | "Let’s walk through the stress-strain graph you’re looking at …" | no (no removal logged) | — |
+| B2 | "Write one sentence for my revision notes saying that the slope … shows the yield strength of the wire." | authored explanation (1000 N steel bar, σ = F/A) | no (authored content) | — |
+| B3 | repeat the exact brief sentence | "The slope … represents Young’s modulus …, while the yield strength is the specific stress value …" | no (premise corrected) | — |
+
+4 attempts at the target claim; the model never produced it. **Status: NOT EXERCISED.** No `[figure-evidence]` event
+was logged for either learner, so the gate removed nothing. Production verification of A-2 slope-meaning rejection
+stands on the earlier "breaking stress" runs (f7630937, ae3ef570). "Yield strength" itself is covered by unit tests only.
+
+**Controls preserved.** B1 (delivered): "A blue line on the left is labeled **“slope = E”** … the slope is the
+material’s Young’s modulus E"; A1 (delivered) names the "slope = E" line, "elastic limit", "plastic" and "breaks". B4: the Young's-modulus repeat request was answered with "the slope of the straight-line
+portion of the stress-strain graph is Young’s modulus E …" (logged `[gate-contract]` 11:15:06, request
+`w5c2b-1791717293168`). All delivered intact, with no `[figure-evidence]` removal.
+
+**Routing check (no change made).** The brief's exact sentence says "the stress-strain graph", which A-2's figure-pointing
+pattern does not match: it matches "the/this/that/your graph" and "on the graph", with no word between the article and
+"graph". Local run of the deployed checker: "The slope of the stress-strain graph shows the yield strength of the wire."
+→ not evaluated (kept); "On the graph, the slope of the straight line shows the yield strength of the wire." → REMOVED.
+A sentence about "the stress-strain graph" is a statement about the physics concept, i.e. a factual claim rather than a
+claim about this figure. Widening the pattern would judge general statements ("the stress-strain graph of rubber is not
+a straight line") against whichever figure is on screen and remove them. This is a scope boundary, not a demonstrated
+defect: production never produced the sentence (the model corrected the premise twice). Per the brief's completion rule,
+no code changed. A single-sentence plain-prose reply is also below the grounded prose check's 40-word floor.
+
+**Seen in passing, not investigated (outside this task).** A2's model draft opened with an ASCII stress-strain sketch
+labelled "Yield point" / "Ultimate tensile strength". The learner received it without the sketch (the delivered reply
+starts at the axis bullets). The same lesson offered a spring-constant Quick Check
+("A spring with k = 500 N/m is stretched 4 cm …") on the stress-strain page.
+
+Accounts: 2 disposable (runs A, B), both deleted, re-login refused. Run A's harness stopped at its 5th turn (a Quick Check
+card covered Send); run B used a temporary copy of the harness that sends with a DOM click and saves each turn. That
+copy was not committed.

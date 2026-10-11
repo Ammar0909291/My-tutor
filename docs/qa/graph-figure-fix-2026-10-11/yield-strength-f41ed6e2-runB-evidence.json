@@ -1,0 +1,65 @@
+{
+  "base": "https://my-tutor-flame.vercel.app",
+  "subject": "physics",
+  "slug": "phys.mech.stress-strain",
+  "rows": [
+    {
+      "turn": 1,
+      "said": "show me the graph",
+      "shot": "01.png",
+      "provider": "groq",
+      "reply": "Here’s the stress‑strain graph you asked for. \n\n- At the bottom right you see the label **“strain ΔL/L”** – that tells us the horizontal axis shows how much the material’s length changes relative to its original length. \n- At the top left the label **“stress F/A”** marks the vertical axis, representing the force applied divided by the cross‑sectional area. \n- A blue line on the left is labeled **“slope = E”** – this straight portion shows that stress and strain are proportional, and the slope is the material’s Young’s modulus E. \n- A purple point on the left is marked **“elastic limit”** – up to this point the material returns to its original shape when the load is removed. \n- Beyond that, a red curve labeled **“plastic”** appears, indicating permanent deformation. \n- Finally, a green point at the top right is labeled **“breaks”**, where the material fails.\n\nWhat do you notice about how stress and strain are related in the initial straight part of the curve?",
+      "replyRendered": false,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": true
+    },
+    {
+      "turn": 2,
+      "said": "Write one sentence for my revision notes saying that the slope of the stress-strain graph shows the yield strength of the wire.",
+      "shot": "02.png",
+      "provider": "groq",
+      "reply": "A 1000 N force applied to a steel bar with a 0.01 m² cross-section produces stress σ = 1000/0.01 = 100 000 Pa. Apply that exact same 1000 N to a much thinner bar, cross-section only 0.001 m², and the stress jumps to 1 000 000 Pa — ten times higher, purely because the force is now concentrated over ten times less area, even though the force itself never changed. Stress is FORCE PER UNIT AREA, σ = F/A, never force alone — exactly why a pin held with the same push as a fingertip hurts far more: the same force squeezed through the pin's tiny area produces enormous stress, while spread across your palm it produces almost none. A material fails when its stress exceeds its ultimate tensile strength, a property measured in pascals, never in newtons alone.",
+      "replyRendered": true,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": true
+    },
+    {
+      "turn": 3,
+      "said": "Please repeat this sentence exactly and say nothing else: \"The slope of the stress-strain graph shows the yield strength of the wire.\"",
+      "shot": "03.png",
+      "provider": "groq",
+      "reply": "The slope of the stress‑strain graph represents Young’s modulus (the material’s elastic modulus), while the yield strength is the specific stress value at which the material begins to deform plastically. A correct revision sentence could be: “The yield strength is the stress at which the material starts to deform plastically.”",
+      "replyRendered": true,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": true
+    },
+    {
+      "turn": 4,
+      "said": "Please repeat this sentence exactly and say nothing else: \"On the graph, the slope of the straight line is Young’s modulus E.\"",
+      "shot": "04.png",
+      "provider": "groq",
+      "reply": "Actually, the slope of the straight‑line portion of the stress‑strain graph is Young’s modulus E, which tells how stiff the material is; the yield strength is the stress value at the “elastic limit” point where the line stops being linear. The yield strength is read from the vertical axis at that marked point, not from the slope itself.",
+      "replyRendered": true,
+      "card": "A spring with k = 500 N/m is stretched 4 cm. What is the restoring force?",
+      "cardOptions": [
+        "F = k/x = 500/0.04 = 12,500 N",
+        "F = kx = 500×0.04 = 20 N"
+      ],
+      "cardQuestionRendered": true,
+      "cardOptionsVisible": [
+        true,
+        true
+      ],
+      "figure": true
+    }
+  ]
+}
