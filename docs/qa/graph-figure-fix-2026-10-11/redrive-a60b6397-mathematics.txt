@@ -1,0 +1,118 @@
+
+=== order 137 math.arith.square-roots ===
+[open provider=groq fig=none flags=-]
+**Square Roots** – In this lesson we’ll discover what a square root is and how it tells us the length of a side when we know the area of a square. By the end you’ll be able to find the square‑root of a number and understand the idea of n‑th roots for whole‑number n.  
+
+Imagine a garden that is shaped like a perfect square. If the garden covers 16 square meters, you might wonder how long each side must be to give that area. Picture a square drawn on paper: the whole shape is the “area” (the number 16), and the length of one side is the number that, when multiplied by itself, recreates that area. In plain words, the square root of a number is the side length of a square whose area equals that number.  
+
+We call this side length the **square root**, written as √x, where x is called the *radicand* (the number under the root sign). The square root is always the non‑negative number y that satisfies y² = x.  
+
+If you have a square whose area is 9 square meters, what do you notice about the relationship between its side length and its area?
+[learner] What is this picture showing?
+[tutor provider=groq fig=title=Square root function card=none flags=picImaginedParts]
+The figure is a graph of the square‑root function \(y=\sqrt{x}\).
+
+- The horizontal line is the **x‑axis**; it represents the numbers we put under the radical (the radicand).
+- The vertical line is the **y‑axis**; it shows the resulting square‑root values.
+- The smooth curve that starts at the origin (0, 0) and rises to the right is the plot of **\(y=\sqrt{x}\)**. For each point on this curve, the x‑coordinate and the y‑coordinate satisfy the relationship “the y‑value squared equals the x‑value.”
+- The grid behind the curve helps you see approximate numerical values for both axes.
+
+Overall, the picture tells us how the square‑root of a non‑negative number grows: as the input \(x\) gets larger, the square root \(\sqrt{x}\) also gets larger, but more slowly (the curve flattens out).
+
+What do you notice about how steep the curve is near the origin compared with farther to the right?
+[learner] quiz me
+[tutor provider=groq fig=none card="What is √49?" ["7","24.5","±7"] corpus=mathematicsPowersVariationAssets.ts flags=-]
+The graph on your screen plots the curve y = √x, showing how the square‑root value grows as x gets larger.
+[learner] 7
+[tutor provider=groq fig=none card="Solve x² = 49." ["x = 7 only — that is what √49 gives","x = 49/2","x = 7 or x = −7 — both square to 49, so "] corpus=mathematicsPowersVariationAssets.ts flags=-]
+That's right.
+
+You identified the positive root correctly. The square root of 49 is the number that multiplied by itself gives 49, which is 7.
+
+Remember that the square‑root symbol refers to the principal (non‑negative) root. While both 7 and –7 satisfy the equation x²=49, √49 always denotes the positive value 7. This convention keeps calculations consistent and avoids ambiguity.
+
+Here's a question — take your time with it.
+[learner] ok
+[tutor provider=groq fig=none card="Solve x² = 49." ["x = 7 only — that is what √49 gives","x = 49/2","x = 7 or x = −7 — both square to 49, so "] corpus=mathematicsPowersVariationAssets.ts flags=-]
+Now notice the difference between the square‑root symbol and solving a quadratic equation. If we write √36, we get a single answer, 6. But if a problem asks “solve y² = 36,” we must list both numbers whose square is 36, so the solutions are y = 6 and y = –6. The √ sign is a function that returns only the non‑negative root, while “solve y² = x” asks for every number that satisfies the equation. Let’s look at how roots behave with odd versus even indices. An even‑index root, like a square root, cannot be taken of a negative number in the real numbers—√(–9) is undefined. In contrast, an odd‑index root, such as the cube root, works for negatives because an odd power preserves the sign: the cube root of –8 is –2, since (–2)³ = –8. This shows why the rule about non‑negative radicands applies only to even‑indexed roots. Whenever you’re ready, just let me know and we can try another example together.
+[learner] give me example
+[tutor provider=groq fig=none card=none flags=-]
+Imagine a square whose **area** is 20 square units. 
+The side length of that square is the number y that satisfies y² = 20, so the side length is √20.
+
+We know the perfect squares 4² = 16 and 5² = 25. 
+Since 16 < 20 < 25, the square‑root function (the curve you see on the graph) tells us that the side length must lie between the side lengths of those two perfect‑square squares. 
+Therefore 4 < √20 < 5 — the side length is a non‑integer number a little bigger than 4 but smaller than 5.
+[learner] i dont understand this picture. what is it showing?
+[tutor provider=groq fig=none card=none flags=-]
+I hear you’re having trouble with the picture—let’s look at it together.
+
+The figure shows a smooth curve that starts at the origin (where x = 0, y = 0) and rises to the right. The horizontal axis is labeled x and the vertical axis is labeled y. The curve is the graph of the function y = √x (the square‑root function). As you move farther right along the x‑axis, the y‑values increase, but they do so more slowly; the curve flattens out.
+
+What this tells us is that the square‑root of a number grows, but not as fast as the number itself. In other words, if you double the x‑value, the y‑value (the square root) increases by less than double.
+
+**Question:** Why does the curve become flatter as x gets larger?
+[learner] ask me a question
+[tutor provider=groq fig=none card="What is √(9 × 16)?" ["25","144","12","7"] corpus=mathematicsDepthArithAssets.ts flags=-]
+Here's a question — take your time with it.
+[learner] 7
+[tutor provider=groq fig=none card=none flags=-]
+Not quite — the answer is: 12
+
+You chose 7, but the square root of 9 × 16 is not 7. The product 9 × 16 equals 144, and the square root of 144 is 12.
+
+Remember to first do the multiplication, then apply the square‑root operation. For any expression √(a × b), compute a × b first, then find the number whose square gives that product.
+[learner] test my understanding
+[tutor provider=groq fig=none card="Estimate √60 without a calculator." ["30","About 7.7","8"] corpus=mathematicsPowersVariationAssets.ts flags=-]
+One to try. There's no rush.
+[learner] quiz me
+[tutor provider=groq fig=none card="Estimate √60 without a calculator." ["30","About 7.7","8"] corpus=mathematicsPowersVariationAssets.ts flags=-]
+This is the question you have not answered yet — choose an answer below and I will mark it.
+
+Let me check your thinking with this.
+[learner] 30
+[tutor provider=groq fig=none card="Which is the best estimate of √30?" ["5","15","6","5.5"] corpus=mathematicsDepthArithAssets.ts flags=-]
+Not quite — the answer is: About 7.7 — it sits between 7 and 8, and nearer 8 since 60 is nearer 64 than 49
+
+You chose 30, but a square root is the number that multiplies by itself to give 60. 30 × 30 is 900, far larger than 60, so 30 cannot be the square root.
+
+Since 7²=49 and 8²=64, the square root of 60 lies between 7 and 8. It is closer to 8 because 60 is nearer to 64 than to 49, giving an estimate of about 7.7.
+
+One to try. There's no rush.
+[learner] show me a diagram
+[tutor provider=groq fig=title=Square root function card="Which is the best estimate of √30?" ["5","15","6","5.5"] corpus=mathematicsDepthArithAssets.ts flags=-]
+You’re looking at the curve that plots \(y=\sqrt{x}\). Notice how the line starts at the origin (0, 0) and then rises slowly: for each \(x\)‑value on the horizontal axis, the height of the curve tells you the side length of a square whose area is \(x\). For example, when \(x=9\) the point on the curve is at \(y=3\) because a square of area 9 has sides 3 units long. The graph therefore shows the **inverse** of squaring: squaring takes a side length \(y\) and gives an area \(y^{2}\); the square‑root curve takes an area \(x\) and returns the side length \(y\) that satisfies \(y^{2}=x\). The symbol \(\sqrt{x}\) always picks the non‑negative side length, so the curve stays in the first quadrant.
+
+In this picture you can also see why \(\sqrt{60}\) is about 7.7: the point with \(x=60\) lies between the points \(x=49\) (\(y=7\)) and \(x=64\) (\(y=8\)), so the height of the curve there must be a little more than 7 and a little less than 8 — roughly 7.7. That’s the idea behind estimating square roots using the graph.
+[learner] i dont understand this picture. what is it showing?
+[tutor provider=groq fig=none card=none flags=picImaginedParts]
+I hear you’re feeling stuck—let’s walk through the picture together.
+
+The graph you see is the **square‑root function**. 
+- The horizontal line is the **x‑axis** (the input values). 
+- The vertical line is the **y‑axis** (the output values). 
+- The curved line that starts at the origin (0, 0) and rises gently to the right is the plot of **y = √x**; for each x‑value, the height of the curve gives the square root of that x. 
+- The grid behind the curve helps you see the numbers: as x moves from 1 to 4, the curve goes from y = 1 up to y = 2, and it continues upward more slowly as x gets larger.
+[learner] explain simpler
+[tutor provider=groq fig=none card=none flags=-]
+For example, look at the point where the horizontal axis (the x‑axis) reads 9. The curve rises up to the point (9, 3). That means a square that covers an area of 9 square units has each side 3 units long, because 3 × 3 = 9. The whole curve works the same way: for any x you pick, the height of the curve gives the side length y that satisfies y² = x.
+[learner] give me a quiz
+[tutor provider=groq fig=none card=none flags=quizNoCard]
+You have answered every new practice question I have on Square Roots in this lesson. A question you have already seen comes back once more after a little more teaching. Say "next" to move on, or tell me which part you want to go over.
+
+The picture is a graph of the function \(y = \sqrt{x}\). 
+- The horizontal axis (the bottom line) is the *x* values you put in. 
+- The vertical axis (the side line) shows the result *y*, the square‑root of that *x*. 
+- As you move right‑hand along the bottom (making *x* bigger), the curve rises, meaning the square‑root gets larger, but it rises more gently than a straight line would.
+
+**Quick check:** Looking at this curve, what happens to the *y*‑value when the *x*‑value gets larger?
+[learner] quiz me
+[tutor provider=groq fig=none card="What is √49?" ["24.5","±7","7"] corpus=mathematicsPowersVariationAssets.ts flags=repeatAnswered]
+You have seen this question before in this lesson — here it is once more.
+
+Sure! Quick check. Think it through before you choose.
+[learner] quiz me
+[tutor provider=groq fig=none card="What is √49?" ["24.5","±7","7"] corpus=mathematicsPowersVariationAssets.ts flags=repeatAnswered]
+This is the question you have not answered yet — choose an answer below and I will mark it.
+
+Give it a try!

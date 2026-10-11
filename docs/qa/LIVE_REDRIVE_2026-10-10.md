@@ -216,3 +216,75 @@ rounds, all deleted, re-login refused. Evidence: `docs/qa/factual-closure-2026-1
   since 9a0cee7a, not caused by this change; the brief forbids reopening A-2 without a regression from the new change.
   Proposed fix: add graph primitives (axes, curve, grid, plotted labels) to `evidenceFromPayload` for graph/function
   figure types, with these production sentences as regression tests.
+
+## A-2 graph-figure false positives — 2026-10-11 (31bafe03 → a60b6397)
+
+Baseline: `main` = `origin/main` = 9fee6594, clean; production dpl_3o4JWGbVmmTUNoJgLZYErrhZj6vA READY on aa804e11
+(the 9fee659 docs-only deploy failed with Vercel `git_info_fail` before any build step; the alias never moved to it).
+Evidence: `docs/qa/graph-figure-fix-2026-10-11/` (per-round /learn screenshots and evidence JSON, API transcripts).
+
+**Original failures** (d10f8a09, other learners' traffic, region cle1): accurate descriptions of real graphs were removed
+— `math.arith.square-roots` ("The horizontal line is the **x‑axis**…", "Look at the curve…", "The grid behind the curve…",
+`keptModelText: false` once) and `phys.mech.stress-strain` ("this arrow points to the vertical axis", "**Blue line labeled
+“slope = E”** – the straight, initial part of the curve", "the “stress = force / area” label"). The square-roots figure is
+the stored graph spec `{type: graph, title: "Square root function", xLabel: "x (unitless)", yLabel: "√x (unitless)",
+equation: "x^0.5"}` (production `visual_assets`, read-only query); stress-strain is the authored scene.
+
+**Root cause.** `figureReference.evidenceFromPayload` recorded only written labels; nothing said a figure HAS axes, a
+curve or a grid, so every "x-axis / curve / grid" sentence failed the structure check. Found during verification: the
+rendered-reality copy of the evidence (`route.ts`, used for questions about a figure shown earlier) cut each entry at
+120 characters, so the `drawn:` list lost "x-axis, y-axis"; and the picture answer read that list out to learners as
+"words written on it" (visible since f32eeb04).
+
+**Changes** (`src/lib/teaching/figureReference.ts`; one call site in `route.ts`):
+- evidence from what the renderers draw — graph specs (GraphRenderer): both axes, grid, tick numbers, the curve
+  (points on a count axis), the equation; scenes: two arrows from one origin (one horizontal, one vertical) = axes,
+  a non-straight path = curve, segments = straight lines, nodes = marked points;
+- `evidenceForLog`: the stored copy keeps the `drawn:` list whole; `figureEvidenceAnswer` never lists it as words;
+- label check: a quoted label inside bold is judged on its own and bold beside a quoted label is emphasis; question
+  terms are not labels; a label restated in words passes only if all its (≥2) content words are in ONE label or stage
+  text; spacing around operators and subscript notation (T_c = T(c) = \(T_c\) = T₍c₎) are normalised; a bracketed
+  gloss "(the “radicand”)" is a term, not a label;
+- new: what a slope MEANS must be stated by a label or stage text mentioning the slope ("Young's modulus" kept;
+  "the breaking stress", "yield strength" removed); wording words and possessive owners are not part of the meaning;
+  "the slope is labelled …" is left to the label check;
+- strictness gap closed during verification: the part-explanation check also covers a bare/bulleted start and counts
+  only written labels and stage text as meaning ("Grey arrows run along the curve to show the direction of increasing
+  load" — removed again).
+
+**Tests.** `src/tests/graphFigureEvidence20261011.test.ts` (33: every logged production sentence from d10f8a09,
+31bafe03, 16888708, 34faa394, f6a1170c and 1d41551f as positives; negatives — invented axis label, slope label on the
+square-root graph, bars, wrong slope meanings, invented labels, wrong paraphrase, wrong subscript value/symbol, a wrong
+label beside bold emphasis, a figure with no evidence, a scene without axes, arrows that are not axes); 
+`src/tests/graphFigureEvidenceRoute20261011.test.ts` (2, real route: accurate square-root reply kept; an invented axis
+label in the same reply removed). One A-2 pin updated (the node's "marked point" is now also expected). Offline sweep
+over 893 saved production replies: 5 removals — exactly the known imagined rate-law claims — plus 1 sentence from a
+no-figure lesson that production never checks. Final gates on a60b6397: `tsc` 0; ESLint 0; vitest 921 files, 18,846
+passed, 9 skipped; `npm run build` 0.
+
+**Deploys and production rounds** (disposable accounts, 34 in total, every one deleted, re-login refused):
+| Commit | Deploy | What the /learn page and logs showed |
+|---|---|---|
+| 31bafe03 | dpl_3Wv3TSsT7sBLwZdxgiNRfWjRMuJv | still removed (stored copy truncated); `drawn:` read out to learners |
+| 16888708 | dpl_2evzdbPjsBXxDZX6a3mr7ZHPBH5P | graph sentences kept on the page; superconductivity labels with T(c) removed (other traffic); a fabricated "grey arrows … direction of increasing load" kept |
+| 34faa394 | dpl_5CPuXb9CHdhtbdXJfwpcm5CHBkVz | two removals: possessive in a slope meaning; bracketed “radicand” |
+| f6a1170c | dpl_5brwxgxGATJLho6qvgA6SohU7yUG | one removal: one-letter quote “E” inside bold |
+| 1d41551f | dpl_9hRdS51DEWBuH8cGZCGVLDjBP5SC | two removals: "its slope is labelled “slope = E”" |
+| a60b6397 | dpl_71dU1dxV1ogXrzyd55dmssXAjwKr | 13 graph picture questions: no accurate sentence removed; only removal the existing analogy opener ("Think of the picture as a map…", rest kept); no `drawn:` text |
+
+**Status.**
+- Case A (square roots) and Case B (stress-strain) false positives — **PRODUCTION-VERIFIED** on a60b6397: the real
+  /learn pages show "The horizontal line is the **x‑axis**…", "The vertical line is the **y‑axis**…", "the curved line …
+  graph of y = √x", "the label **“slope = E”**; this slope is Young's modulus", and the logs record no removal of them.
+- Third graph found on the way (`phys.mod.superconductivity`, label "R = 0 below T_c = 7.2 K") — **PRODUCTION-VERIFIED**
+  on a60b6397 (labels written T(c) / T c kept on the page).
+- Strict rejection of unsupported graph claims — **FIXED-TESTED-NOT-PRODUCTION-VERIFIED**: proven by the negative unit
+  and route tests; no fabricated graph claim occurred naturally in the final round (the only production removal there
+  was the existing analogy-opener rule).
+- `drawn:` read out as figure text — **PRODUCTION-VERIFIED** fixed (absent from every page and transcript since 34faa394).
+
+**Limits.** Each production round surfaced new phrasings; the rules cover every phrasing seen in 893 replies, not every
+possible one. A one-letter label claim ("the vertical axis is labeled **y**" when the axis name is "√x (unitless)") is
+not checked — single characters were already skipped before this change. The harness flag `picImaginedParts` keys on
+"the horizontal line" and fires on accurate descriptions of real axes (2 per square-roots run); it is a harness
+heuristic, not a product defect.

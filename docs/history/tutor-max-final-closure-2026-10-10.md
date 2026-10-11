@@ -17,6 +17,7 @@ Non-Numeric Factual Accuracy", then "FINAL PRODUCTION CLOSURE AFTER cf79346". So
 | 3e7bdcc4 | dpl_HcnzWw9p4K4LrjimuzsLpkqYu3uU | Ordinal box/step claims checked against the figure's step order; note placed above the /learn "Read more" fold |
 | d10f8a09 | dpl_6CxuUEHXwRAcQM67sw1DuYEDfbtP | 2026-10-11 targeted factual closure: BIO-024 named-claim replacement by the authored example; analogy sentences kept on an unverifiable contradiction |
 | aa804e11 | dpl_3o4JWGbVmmTUNoJgLZYErrhZj6vA | Authored examples rotate, then an honest repeat line; named sentences logged |
+| 31bafe03 → a60b6397 | dpl_3Wv3… → dpl_71dU1dxV1ogXrzyd55dmssXAjwKr | A-2 graph-figure false positives: evidence names drawn axes/curve/grid; stored copy kept whole; label and slope-meaning rules (6 production rounds) |
 
 Gates on 76c2edd's tree: `tsc --noEmit` exit 0; `npm run lint` exit 0, 0 errors, 12 warnings (none in changed
 files); `vitest run` 917 files, 18,754 passed, 9 skipped, exit 0; `npm run build` exit 0.
@@ -108,3 +109,13 @@ not recur; 0 analogy removals across 7 production "explain simpler" turns). New 
 accurate graph descriptions (square roots, stress-strain) because graph evidence lacks axis/curve words. Full record:
 `docs/qa/LIVE_REDRIVE_2026-10-10.md` ("Targeted factual defect closure — 2026-10-11"), BIOLOGY_REAL_LEARNER_DEFECTS.md
 BIO-024, evidence `docs/qa/factual-closure-2026-10-11/`.
+
+## 2026-10-11 — A-2 graph-figure false positives
+
+Owner brief "A-2 GRAPH FIGURE FALSE-POSITIVE FIX". Root cause in the shared evidence layer (`figureReference.ts`):
+graph evidence carried labels only, and the stored copy for earlier figures cut the drawn list at 120 characters.
+Fixed from what the renderers draw (GraphRenderer axes/grid/curve; scene axis arrows/paths), with label and new
+slope-meaning rules kept strict by negative tests. Six production rounds (31bafe03 → a60b6397); final round: no accurate
+graph sentence removed on square roots, stress-strain or superconductivity. Square roots and stress-strain
+PRODUCTION-VERIFIED; strict rejection FIXED-TESTED-NOT-PRODUCTION-VERIFIED (no natural fabricated claim in the final
+round). Full record: `docs/qa/LIVE_REDRIVE_2026-10-10.md` ("A-2 graph-figure false positives — 2026-10-11").
