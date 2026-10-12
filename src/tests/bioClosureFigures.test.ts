@@ -25,6 +25,10 @@ import { buildBrainRegionsScene, BRAIN_REGIONS_SCENE_ID } from '@/lib/teaching/s
 import { buildPredatorPreyScene, PREDATOR_PREY_SCENE_ID } from '@/lib/teaching/sceneGenerators/predatorPreyCycles'
 import { buildRootSymbiosesScene, ROOT_SYMBIOSES_SCENE_ID } from '@/lib/teaching/sceneGenerators/rootSymbioses'
 import { CONCEPT_SCENE_OVERRIDES } from '@/lib/teaching/visual/conceptSceneParams'
+import { deriveExplainer } from '@/lib/teaching/visual/explainer'
+import { buildCellComparisonScene } from '@/lib/teaching/sceneGenerators/cellComparison'
+import { buildCellHubScene } from '@/lib/teaching/sceneGenerators/cellHub'
+import { getKnowledgeGraph, getAllNodes } from '@/lib/curriculum/knowledgeGraph'
 
 const objects = (s: SceneSpec): SceneObject[] => s.steps.flatMap((st) => st.objects)
 const texts = (s: SceneSpec): string[] => objects(s).map((o) => o.text ?? '').filter(Boolean)
@@ -238,7 +242,7 @@ describe('E. mycorrhizae-plant-symbioses — arbuscular vs ectomycorrhizal by WH
   it('narration follows the entry: leghaemoglobin keeps free oxygen low so nitrogenase can fix N2', () => {
     const n = spec.steps.map((s) => s.narration ?? '').join(' ')
     expect(n).toMatch(/Nitrogenase is IRREVERSIBLY INACTIVATED by oxygen/)
-    expect(n).toMatch(/Leghaemoglobin/)
+    expect(n).toMatch(/leghaemoglobin/)
     expect(n).toMatch(/N2 into ammonia/)
   })
   it('no label is thrown more than 30 px from its anchor on a phone or a desktop canvas (was 66-84 px)', () => {
@@ -291,4 +295,110 @@ describe('traceablePaths: a path may opt out of "Play the motion" with propertie
   it('only the literal false opts out: a truthy or absent value changes nothing', () => {
     for (const v of [true, 0, null, 'false']) expect(availableAnimations(sceneOf({ ...route({ trace: v }), color: '#22c55e' })).some((a) => a.kind === 'trace'), String(v)).toBe(true)
   })
+})
+
+describe('cellComparison: a Biology group with no items draws its own description, not only its name (20 figures had bare groups)', () => {
+  const groups = [
+    { label: 'IgM', description: 'the first responder, assembled as a pentamer', items: [] },
+    { label: 'IgG', description: 'the most abundant class — the ONLY class that crosses the placenta', items: [] },
+    { label: 'IgA', description: 'found in mucosal secretions and breast milk', items: ['Also in tears'] },
+  ] as const
+  const captions = (id: string) => objects(buildCellComparisonScene({ conceptId: id, title: 't', teachingGoal: 'g', groups })).filter((o) => /^group-\d-item-/.test(o.id ?? '')).map((o) => `${o.id}=${o.text}`)
+  it('Biology: each bare group gets its description as one caption (capitalised); a group that has items is left alone', () => {
+    expect(captions('bio.immuno.antibody-structure-function')).toEqual([
+      'group-0-item-0=The first responder, assembled as a pentamer',
+      'group-1-item-0=The most abundant class — the ONLY class that crosses the placenta',
+      'group-2-item-0=Also in tears',
+    ])
+  })
+  it('the stage narration is untouched (it already carried the description)', () => {
+    const spec = buildCellComparisonScene({ conceptId: 'bio.immuno.antibody-structure-function', title: 't', teachingGoal: 'g', groups })
+    expect(spec.steps[0].narration).toBe('IgM: the first responder, assembled as a pentamer')
+  })
+  it('non-Biology callers are byte-identical: bare groups stay bare', () => {
+    expect(captions('phys.mech.force')).toEqual(['group-2-item-0=Also in tears'])
+  })
+  it('across the whole Biology corpus no served comparison figure has a name-only group any more', () => {
+    const kg = getKnowledgeGraph('biology')!
+    const bare: string[] = []
+    for (const n of getAllNodes(kg).filter((x) => x.id.startsWith('bio.'))) {
+      const d = resolveVisual({ message: 'show me a diagram', lessonConceptId: n.id, subject: 'biology', learnerRequest: 'diagram' })
+      const spec = (d.payload as { sceneSpec?: SceneSpec } | null)?.sceneSpec
+      if (!spec || !spec.id.startsWith('cell-comparison')) continue
+      const objs = objects(spec)
+      for (const g of objs.filter((o) => /^group-\d+$/.test(o.id ?? ''))) {
+        if (!objs.some((o) => o.id?.startsWith(`${g.id}-item-`))) bare.push(`${n.id}:${g.text}`)
+      }
+    }
+    expect(bare).toEqual([])
+  }, 60_000)
+  it('and every one of them still fits the 9-label budget, so no caption is held back', () => {
+    const kg = getKnowledgeGraph('biology')!
+    for (const n of getAllNodes(kg).filter((x) => x.id.startsWith('bio.'))) {
+      const spec = served(n.id)
+      if (!spec.id.startsWith('cell-comparison')) continue
+      expect(labelsHeldBack(objects(spec), complexityFor('intermediate')), n.id).toBe(0)
+    }
+  }, 60_000)
+})
+
+describe('bio.found.binomial-nomenclature — a caption never covers its own sphere at phone width', () => {
+  it('the epithet caption is anchored a caption-height above its sphere, and the solver leaves it clear of every node at 324 px', () => {
+    const spec = served('bio.found.binomial-nomenclature')
+    const epithet = objects(spec).find((o) => o.id === 'part-1')!
+    expect((epithet.properties as { labelOffset: number[] }).labelOffset[1]).toBeGreaterThanOrEqual(2)
+    const rows = placementReport(spec)
+    for (const r of rows) expect(r.unresolved, `${r.box} stage ${r.stage}`).toBe(0)
+  })
+})
+
+describe('structure figures: the cell outline is not a route, so no "Play the motion" walks a marker round it (10 figures offered it)', () => {
+  const kg = getKnowledgeGraph('biology')!
+  it('no Biology figure offers a trace of its boundary ring; the stage walk is still offered', () => {
+    const offending: string[] = []
+    let structures = 0
+    for (const n of getAllNodes(kg).filter((x) => x.id.startsWith('bio.'))) {
+      const spec = served(n.id)
+      if (spec.id.startsWith('cell-structure-')) {
+        structures++
+        expect(availableAnimations(spec).some((a) => a.kind === 'stages'), n.id).toBe(true)
+      }
+      if (availableAnimations(spec).some((a) => a.kind === 'trace')) offending.push(n.id)
+    }
+    expect(structures).toBeGreaterThanOrEqual(10)
+    expect(offending).toEqual([])
+  }, 60_000)
+})
+
+describe('cellHub: a lower-side caption of an odd-spoke hub stays clear of the vertical connector (Biology only)', () => {
+  const spokes = ['Bioremediation', 'Agriculture', 'Medicine', 'Industrial biotechnology', 'Food production'].map((name) => ({ name, description: name }))
+  const hub = (conceptId: string) => buildCellHubScene({ conceptId, hubLabel: 'Beneficial Microbes', title: 't', teachingGoal: 'g', spokes })
+  const wrapOf = (spec: SceneSpec, i: number) => (objects(spec).find((o) => o.id === `spoke-${i}`)!.properties as { labelWrapUnits?: number }).labelWrapUnits
+  it('Biology: the two lower side spokes wrap to the width they own (twice their distance from the axis, less a margin); the straight-down spoke and the upper ones are untouched', () => {
+    const spec = hub('bio.micro.microbes-in-human-welfare')
+    const lower = objects(spec).filter((o) => /^spoke-\d$/.test(o.id ?? '') && o.position![1] < 0 && Math.abs(o.position![0]) > 0.5)
+    expect(lower).toHaveLength(2)
+    for (const o of lower) {
+      const w = wrapOf(spec, Number(o.id!.split('-')[1]))!
+      expect(w).toBeGreaterThanOrEqual(3)
+      expect(w).toBeLessThan(2 * Math.abs(o.position![0]))
+    }
+    const upper = objects(spec).filter((o) => /^spoke-\d$/.test(o.id ?? '') && o.position![1] >= 0)
+    for (const o of upper) expect(wrapOf(spec, Number(o.id!.split('-')[1]))).toBeUndefined()
+  })
+  it('non-Biology callers are byte-identical: no wrap is added', () => {
+    const spec = hub('chem.state.phase-diagram')
+    for (let i = 0; i < 5; i++) expect(wrapOf(spec, i)).toBeUndefined()
+  })
+})
+
+describe('the "What\'s happening?" panel (cut at 1000 characters, in whole lines) keeps every stage of the re-authored figures', () => {
+  for (const [name, id] of [['brain', IDS.brain], ['mycorrhizae', IDS.myco], ['cell theory', IDS.theory], ['hormones', IDS.hormones]] as const) {
+    it(`${name}: no narration line is dropped from the panel`, () => {
+      const spec = served(id)
+      const lines = spec.steps.map((st) => st.narration?.trim() ?? '').filter(Boolean)
+      const body = deriveExplainer(spec).panels.find((p) => p.heading === "What's happening?")?.body ?? ''
+      expect(body.split('\n').length).toBe(lines.length)
+    })
+  }
 })

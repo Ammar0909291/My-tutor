@@ -153,50 +153,45 @@ export function buildRootSymbiosesScene(): SceneSpec {
   const lowOxygen: SceneObject[] = [stageNode(2, 'Low-oxygen nodule'), chainArrow(2)]
   const fixation: SceneObject[] = [stageNode(3, 'Nitrogen fixation'), chainArrow(3)]
 
+  // Kept short: the "What's happening?" panel is cut at 1000 characters, in whole lines, so seven narrations must total less than that or the last
+  // stages (the oxygen-protected nodule, the fixation itself) vanish from the panel.
   const steps: SceneStep[] = [
     {
       intent: 'establish',
       narration:
-        'Arbuscular mycorrhiza: fungal hyphae PENETRATE INTO the root cells and branch into tree-like arbuscules WITHIN the plant cell (still outside the cell\'s own plasma membrane). ' +
-        'This intimate, intracellular arrangement maximises the surface for nutrient exchange between fungus and plant.',
+        'Arbuscular: hyphae PENETRATE INTO the root cells and branch into tree-like arbuscules WITHIN the cell (outside its plasma membrane), giving close contact for nutrient exchange.',
       objects: arbuscular,
     },
     {
       intent: 'relate',
       narration:
-        'Ectomycorrhiza: the hyphae stay OUTSIDE the root cells. They form a dense sheath (the mantle) around the root\'s exterior and a network BETWEEN the cells (the Hartig net), ' +
-        'without ever penetrating into an individual cell. The difference between the two types is WHERE the hyphae are.',
+        'Ectomycorrhizal: hyphae stay OUTSIDE the cells, as a dense sheath (the mantle) on the root and a network BETWEEN the cells (the Hartig net). The difference is WHERE the hyphae are.',
       objects: ectomycorrhizal,
     },
     {
       intent: 'relate',
-      narration:
-        'The shared benefit, reached by different structures: both extend the root\'s effective absorptive surface for water and minerals, in exchange for photosynthetically-derived ' +
-        'sugars from the plant.',
+      narration: 'Shared benefit: more absorptive surface for water and minerals, in exchange for the plant\'s sugars.',
       objects: exchange,
     },
     {
       intent: 'establish',
-      narration: 'A DIFFERENT partnership, with bacteria rather than fungi. Rhizobium bacteria infect the root hairs of a legume.',
+      narration: 'A DIFFERENT partner, bacteria not fungi: rhizobium infect the root hairs of a legume.',
       objects: infection,
     },
     {
       intent: 'relate',
-      narration: 'The infection triggers nodule formation: specialised root structures that house the bacteria.',
+      narration: 'Infection triggers nodule formation: root structures that house the bacteria.',
       objects: nodule,
     },
     {
       intent: 'relate',
       narration:
-        'Nitrogenase is IRREVERSIBLY INACTIVATED by oxygen, so the nodule must stay low in free oxygen. Leghaemoglobin, made by the plant, binds free oxygen tightly, keeping the nodule\'s ' +
-        'free oxygen low while still supplying enough bound oxygen for the bacteria\'s own respiration.',
+        'Nitrogenase is IRREVERSIBLY INACTIVATED by oxygen, so the nodule must stay low in free oxygen: plant-made leghaemoglobin binds it tightly yet still supplies oxygen for the bacteria\'s respiration.',
       objects: lowOxygen,
     },
     {
       intent: 'resolve',
-      narration:
-        'Nitrogenase converts atmospheric N2 into ammonia — nitrogen fixation. It can work only because free oxygen is kept low: the oxygen exclusion is the specific solution to nitrogenase\'s ' +
-        'specific oxygen sensitivity, not an incidental detail.',
+      narration: 'Nitrogenase converts atmospheric N2 into ammonia (nitrogen fixation), working only because free oxygen is kept low.',
       objects: fixation,
     },
   ]

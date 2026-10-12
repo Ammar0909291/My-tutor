@@ -6,7 +6,7 @@
  * lesson uses) in headless Chromium with WebGL, at DESKTOP (1280) and MOBILE (390), in several
  * interaction states, and records DOM measurements + a screenshot for every state.
  *
- *   node scripts/qa/biologyVisualRenderAudit.mjs <outDir> [--ids a,b,c | --file ids.txt] [--base http://localhost:3000] [--theme dark|light]
+ *   node scripts/qa/biologyVisualRenderAudit.mjs <outDir> [--ids a,b,c | --file ids.txt] [--base http://localhost:3000] [--theme dark|light] [--all-stages]
  *
  * Writes <outDir>/<conceptId>/<viewport>-<state>.png and <outDir>/results-<shard>.json.
  * It measures; it does not judge — judgment (PASS/FAIL/REVIEW_REQUIRED) is made by inspecting the
@@ -22,6 +22,8 @@ const opt = (name, dflt) => { const i = args.indexOf(name); return i >= 0 ? args
 const base = opt('--base', 'http://localhost:3000')
 const theme = opt('--theme', null)
 const shard = opt('--shard', 'all')
+// --all-stages: measure (and screenshot) EVERY stage, not only the first and last.
+const allStages = args.includes('--all-stages')
 let ids = []
 if (opt('--ids', null)) ids = opt('--ids').split(',')
 else if (opt('--file', null)) ids = fs.readFileSync(opt('--file'), 'utf8').split('\n').map((s) => s.trim()).filter(Boolean)
@@ -145,8 +147,17 @@ try {
           await next.first().click(); await page.waitForTimeout(450); await settle(page, 4000)
           v.states.stage1 = await page.evaluate(MEASURE)
           await shot(page, path.join(idDir, `${vpName}-stage1.png`))
-          let guard = 0
-          while (guard++ < 14 && (await next.first().isEnabled().catch(() => false))) { await next.first().click(); await page.waitForTimeout(150) }
+          let guard = 0, k = 1
+          while (guard++ < 14 && (await next.first().isEnabled().catch(() => false))) {
+            await next.first().click(); k++
+            if (allStages) {
+              await page.waitForTimeout(450); await settle(page, 4000)
+              if (await next.first().isEnabled().catch(() => false)) {
+                v.states[`stage${k}`] = await page.evaluate(MEASURE)
+                await shot(page, path.join(idDir, `${vpName}-stage${k}.png`))
+              }
+            } else await page.waitForTimeout(150)
+          }
           await page.waitForTimeout(450); await settle(page, 4000)
           v.states.last = await page.evaluate(MEASURE)
           await shot(page, path.join(idDir, `${vpName}-last.png`))

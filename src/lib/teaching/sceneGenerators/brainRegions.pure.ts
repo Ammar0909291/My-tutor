@@ -183,35 +183,31 @@ export function buildBrainRegionsScene(): SceneSpec {
     {
       intent: 'establish',
       narration:
-        'The brain is first divided into three broad regions. The forebrain includes the cerebral cortex, the limbic system and other structures for ' +
-        'higher cognition, sensory processing and emotional regulation. The midbrain is a relay and processing hub for visual and auditory reflexes ' +
-        'and some movement coordination. The hindbrain (medulla, pons and cerebellum) governs vital automatic functions and movement coordination.',
+        'The brain divides into three broad regions. The forebrain holds the cerebral cortex and limbic system (higher cognition, senses, emotion); the midbrain ' +
+        'relays visual and auditory reflexes; the hindbrain (medulla, pons, cerebellum) runs vital automatic functions and coordinates movement.',
       objects: divisions,
     },
     {
       intent: 'relate',
       narration:
-        'A second scheme works at a different scale: the cerebral cortex is divided into four lobes, a finer subdivision WITHIN the forebrain, not a rival ' +
-        'to it. The frontal lobe is for planning, decision-making and starting voluntary movement; the parietal lobe for sensory integration and spatial ' +
-        'processing; the temporal lobe for hearing and aspects of memory and language; the occipital lobe for vision. So the frontal lobe belongs to ' +
-        'both schemes at once, at two zoom levels.',
+        'A finer scheme: the cerebral cortex has four lobes, a subdivision WITHIN the forebrain, not a rival to it. Frontal: planning, decisions, voluntary ' +
+        'movement. Parietal: sensory integration, spatial processing. Temporal: hearing, aspects of memory and language. Occipital: vision.',
       objects: lobes,
       focus: idsOf(lobes),
     },
     {
       intent: 'relate',
       narration:
-        'The limbic system, central to emotion and memory, is not one anatomical structure. It is a set of interconnected structures — such as the ' +
-        'hippocampus and the amygdala, and others — grouped by what they do together, not by sitting in one place. Drawn here as if seen through the cortex.',
+        'The limbic system, central to emotion and memory, is not one structure but a set of interconnected structures (such as the hippocampus and amygdala) ' +
+        'grouped by what they do together, not by where they sit.',
       objects: limbic,
       focus: idsOf(limbic),
     },
     {
       intent: 'resolve',
       narration:
-        'Two hindbrain structures make distinct contributions. The cerebellum times and fine-tunes voluntary movement that is initiated elsewhere (by the ' +
-        'frontal lobe) and contributes to motor learning. The brainstem, here the medulla and pons, runs vital automatic functions such as breathing and ' +
-        'heart rate, largely below conscious control.',
+        'The cerebellum fine-tunes voluntary movement started elsewhere (by the frontal lobe) and aids motor learning; the brainstem (here medulla and pons) ' +
+        'runs breathing and heart rate, largely below conscious control.',
       // No `focus` here: the final stage is also the view the figure opens on (every stage revealed), and a focus set would dim
       // everything but the hindbrain in it.
       objects: hindbrainParts,

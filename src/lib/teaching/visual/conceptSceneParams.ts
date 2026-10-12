@@ -255,6 +255,17 @@ const CANONICAL_SCENES: Record<string, () => SceneSpec> = {
  * faithfully draw this concept" — the resolver then falls through to the
  * concept's VisualCard rather than showing a figure of something else.
  */
+/** The scene with one node's caption anchor moved to `lift` scene units above its sphere's centre. Only `properties.labelOffset` of that node changes. */
+function liftCaption(scene: SceneSpec, nodeId: string, lift: number): SceneSpec {
+  return {
+    ...scene,
+    steps: scene.steps.map((st) => ({
+      ...st,
+      objects: st.objects.map((o) => (o.id === nodeId ? { ...o, properties: { ...o.properties, labelOffset: [0, lift, 0] } } : o)),
+    })),
+  }
+}
+
 const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   // The ONLY concept bound to the 'electric_dipole' generator kind (Physics
   // Interactive Lesson Upgrade) — a concept-owned figure, not a kind default
@@ -1557,7 +1568,10 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     ],
   }),
 
-  'bio.found.binomial-nomenclature': () => buildCellStructureScene({
+  // The epithet's caption wraps to two lines at phone width; anchored at the structure ring's standard offset (1.25) its lower line fell on its own
+  // sphere (88% of the sphere covered at 390 px, measured by the 2026-10-09 occlusion scan — the only figure in the corpus where a caption covers a node).
+  // Lifting its anchor one caption-height higher clears the sphere at both widths.
+  'bio.found.binomial-nomenclature': () => liftCaption(buildCellStructureScene({
     conceptId: 'bio.found.binomial-nomenclature',
     subject: 'Scientific Name Format',
     boundaryLabel: 'Homo sapiens',
@@ -1568,7 +1582,7 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
       { name: 'Species epithet: sapiens', description: 'lowercase, never capitalised; never used alone, because it identifies a species only within its genus' },
       { name: 'Whole name italicised', description: 'the entire binomial is italicised (or underlined by hand)' },
     ],
-  }),
+  }), 'part-1', 2.0),
 
   'bio.found.viruses-viroids-lichens': () => buildCellComparisonScene({
     conceptId: 'bio.found.viruses-viroids-lichens',
