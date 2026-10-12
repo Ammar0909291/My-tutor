@@ -1083,9 +1083,39 @@ Notes: superscript letters such as "2ˣ" render fine. A hop-length numeral place
 horizontal rules needs rows >= 0.95 apart or the label solver pushes quotients sideways. In a figure test, pair a box's edges by their known height (`rectBoxes(..., height)`), not by "any higher edge",
 or stacked boxes with the same x-span produce extra pairs. `numsIn` must normalise "−" (U+2212) to "-" before parsing negatives.
 
-Next (batch 30): the 8 remaining nt helpers — euclidean-algorithm, lcm, congruence, residue-classes, pythagorean-triples, prime-distribution, prime-number-theorem, continued-fractions — then abst (13),
-linalg (18), de (12), stats (11), disc (11), calc (11), prob (10), seq (7), real (7), meas (6), top (4), opt (4), geom (4), func (4), cx (4), graph (3), fnal (3), trig (2), cat (2), num (1); then tier N
-(352) if still wanted. List what is left with `npx tsx scripts/math/visual-coverage.ts --list H`.
+(Batch 29's plan for batch 30 is carried out below.)
+
+# Batch 30 (2026-10-12): the rest of number theory and the first abstract-algebra helpers (13 figures)
+
+`sceneGenerators/mathCoreScenesB30.ts` + `mathCoreScenesBatch30.test.ts` (132 checks); campaign audit threshold now 378. Coverage after this batch:
+424 of 908 concepts with a fixed figure; essential tier 344 / 346 (complete), tier H 78 / 210, tier N 2 / 352. All `math.nt.*` helpful concepts are now covered.
+Pre-push checklist: full `npx vitest run`, `scripts/ci/tsc-ratchet.sh` 0 errors, `validate-visualization-coverage.ts` PASS, and the new `scripts/math/label-displacement.ts mathCoreScenesB30` (0 unresolved, 0 card-host moves).
+
+| Concept | Figure |
+|---|---|
+| math.nt.euclidean-algorithm | 48 × 18 rectangle tiled by squares: 2 of 18, 1 of 12, 2 of 6 → 48 = 2·18 + 12, 18 = 1·12 + 6, 12 = 2·6 + 0, gcd = 6 |
+| math.nt.lcm | multiples of 4 and of 6 up to 24 on two rows; common 12, 24; lcm = 12 = 4 × 6 ÷ 2 |
+| math.nt.congruence | mod-5 clock with three laps 0…14; 2, 7, 12 on one ray; 7 ≡ 2, 12 ≡ 7 (mod 5) |
+| math.nt.residue-classes | integers −5…8 coloured by class mod 4; hops 2 then 3 from 0 land on 5 ∈ [1], so [2] + [3] = [1] |
+| math.nt.pythagorean-triples | right triangles 3-4-5 (m = 2, n = 1) and 5-12-13 (m = 3, n = 2), a² + b² = c² |
+| math.nt.prime-distribution | primes per block of 20 up to 100: 8, 4, 5, 5, 3 (25 in all, average 5) |
+| math.nt.prime-number-theorem | staircase π(x) vs x/ln x to 100 (25 vs 21.7, ratio 1.15); the test checks the ratio falls towards 1 at 10³…10⁶ |
+| math.nt.continued-fractions | 17/5: Euclid rows 17 = 3·5 + 2, 5 = 2·2 + 1, 2 = 2·1 + 0 → nested 3 + 1/(2 + 1/2) = 3.4 = [3; 2, 2] |
+| math.abst.algebraic-structure | Z₄ tables: + is a group (Latin square, identity, inverses), × is not (rows 0 and 2 have no 1) |
+| math.abst.binary-operation | + on {0, 1, 2} gives 3, 3, 4 (red, not closed) vs + mod 3 (closed) |
+| math.abst.group-theory | group axioms on (ℤ₃, +): closed, associative (27 triples checked from the cells), identity row/column, inverse pairs |
+| math.abst.group-operation | Cayley table of S₃ (e, r, q, s, t, u); r∘s = t but s∘r = u, so not commutative |
+| math.abst.subgroup | ℤ₆: H = {0, 2, 4} is a subgroup (closed, inverses, 3 | 6); 1 + 2 = 3 shows {0, 1, 2} is not closed |
+
+Findings: (1) The test for the S₃ figure caught a real caption error — with (a ∘ b)(x) = a(b(x)) the table says r ∘ s = t and s ∘ r = u; the first draft of the caption had them swapped. Always recompute a table from first
+principles in the test, not only read it back. (2) NEW TOOL `scripts/math/label-displacement.ts [module|all] [px]` runs the production label solver (`placeSceneLabels`) on a 570 × 370 card host and the phone host and lists
+labels it had to move. Dense tables and rulers need spacing >= 0.75 x 0.65 world units per cell and no line or dot within ~0.35 of an entry (outlines and cross-outs shove entries into the wrong cell: use colour or
+a dot offset by 0.4 instead). Measured over batches 1-30: 0 unresolved labels anywhere; 218 figure/host combinations in batches 1-29 have long captions or entries moved more than 14 px on the card host (review items for the
+Mathematics render audit queued below, not defects the learner can misread in most cases). (3) SM-01 reads "π(100)" as π × 100: name such labels in words ("25 primes up to 100").
+
+Next (batch 31): the 8 remaining abst helpers — coset, normal-subgroup, quotient-group, group-homomorphism, group-isomorphism, group-action, symmetric-group, field-extension — then linalg (18), de (12), stats (11), disc (11),
+calc (11), prob (10), seq (7), real (7), meas (6), top (4), opt (4), geom (4), func (4), cx (4), graph (3), fnal (3), trig (2), cat (2), num (1); then tier N (352) if still wanted. List what is left with
+`npx tsx scripts/math/visual-coverage.ts --list H`.
 
 # Deferred follow-up — do AFTER the Mathematics figure campaign (recorded 2026-10-12 at the owner's request)
 
@@ -1103,5 +1133,6 @@ Queue for AFTER the Mathematics campaign (in this order; each needs a fresh owne
 2. Mathematics semantic review — compare each figure with the concept's KG description / Educational Brain Core Understanding; record a human verdict ledger like `docs/qa/physics-visual-audit/semantic-review.json`.
 3. Production check of a sample of the Mathematics figures in the real /learn page (disposable `qa-*@mytutor-qa.invalid` accounts only, delete afterwards, never log a password).
 4. English visual validation (no figure campaign exists yet).
+4b. Review the card-host label-displacement items listed by `npx tsx scripts/math/label-displacement.ts all 14` (218 figure/host combinations over 14 px for batches 1-29): move the nearby line/dot or add spacing wherever a short table/ruler entry is displaced.
 5. Close the documented REVIEW findings (Chemistry 84 REVIEW states, Biology 6, Physics 19) only if the owner wants them closed.
 Unconfirmed: what the other account's own instruction/remaining task was. Ask the owner to paste it before assuming the list above is the intended scope.

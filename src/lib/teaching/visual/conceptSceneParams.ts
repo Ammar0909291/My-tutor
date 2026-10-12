@@ -274,6 +274,11 @@ import {
   buildLogarithmPropertiesScene, buildNaturalLogarithmScene, buildLogarithmicEquationsScene, buildBinomialTheoremScene,
   buildDivisibilityScene, buildPrimeNumberScene, buildCompositeNumberScene, buildPrimeFactorizationScene, buildGcdScene,
 } from '@/lib/teaching/sceneGenerators/mathCoreScenesB29'
+import {
+  buildEuclideanAlgorithmScene, buildLcmScene, buildCongruenceScene, buildResidueClassesScene, buildPythagoreanTriplesScene,
+  buildPrimeDistributionScene, buildPrimeNumberTheoremScene, buildContinuedFractionsScene, buildAlgebraicStructureScene,
+  buildBinaryOperationScene, buildGroupTheoryScene, buildGroupOperationScene, buildSubgroupScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB30'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -861,6 +866,21 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'math.nt.composite-number':            buildCompositeNumberScene,
   'math.nt.prime-factorization':         buildPrimeFactorizationScene,
   'math.nt.gcd':                         buildGcdScene,
+
+  // Mathematics visual campaign, batch 30 (2026-10-12). See mathCoreScenesB30.ts.
+  'math.nt.euclidean-algorithm':         buildEuclideanAlgorithmScene,
+  'math.nt.lcm':                         buildLcmScene,
+  'math.nt.congruence':                  buildCongruenceScene,
+  'math.nt.residue-classes':             buildResidueClassesScene,
+  'math.nt.pythagorean-triples':         buildPythagoreanTriplesScene,
+  'math.nt.prime-distribution':          buildPrimeDistributionScene,
+  'math.nt.prime-number-theorem':        buildPrimeNumberTheoremScene,
+  'math.nt.continued-fractions':         buildContinuedFractionsScene,
+  'math.abst.algebraic-structure':       buildAlgebraicStructureScene,
+  'math.abst.binary-operation':          buildBinaryOperationScene,
+  'math.abst.group-theory':              buildGroupTheoryScene,
+  'math.abst.group-operation':           buildGroupOperationScene,
+  'math.abst.subgroup':                  buildSubgroupScene,
 
   // The Punnett generator is single-gene by construction (genotypes are two
   // alleles). A dihybrid cross drawn as a monohybrid square teaches the wrong
