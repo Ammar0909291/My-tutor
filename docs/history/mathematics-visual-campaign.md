@@ -392,3 +392,40 @@ Notes for later batches:
 Left in `func` (essential): real-valued-function, rational-root; math.func.linear-function stays reserved.
 Next (batch 12 plan): geometry (circle theorems, conic sections, ellipse, hyperbola, polar coordinates and curves, 2D vectors,
 dot product, cross product, curvature, …) — check `visual-coverage.ts --list E`.
+
+
+# Batch 12 (2026-10-12): geometry
+
+`sceneGenerators/mathCoreScenesB12.ts` + `mathCoreScenesBatch12.test.ts` (125 checks); campaign audit threshold now 146. Coverage after this batch:
+192 of 908 concepts with a fixed figure; essential tier 190 / 346.
+
+Notes for later batches:
+- The audit's SM-01 also reads `name = value` labels: several labels with the same last token before `=` but different values blank the
+  whole figure ("circle e = 0" and "ellipse e = 0.5" would both be `e`, so the conic labels are written `circle: eccentricity 0`; the polar
+  conversions are `x = r cos θ: 1.5`, not `… = 1.5`, next to `θ = 60°`).
+- Conic family: r = ℓ/(1 − e cos θ) about a common focus; the test checks focus-distance = e × directrix-distance for every drawn point
+  (circle e = 0 is r = 1), and that the ellipse's drawn extreme focal distances give e = 0.5.
+- 3D vectors are drawn in an oblique projection (screen = ((y − k x) u, (z − k x) u), k = 0.35); the test inverts it from the drawn component
+  edges to (2, 2, 1) and |v| = 3. No true 3-D rendering is needed.
+- Curvature test: κ is recovered from first principles as the Menger circle through three very close points of y = x²/2 (no derivative
+  formula), then the drawn osculating circles are checked against R = 1/κ, centres on the normal.
+- A dot's `position` has three entries; slice to 2 before comparing with a 2-D array.
+
+| Concept | Figure |
+|---|---|
+| math.geom.circle-theorems | central angle 100° at the centre, inscribed angle 50° from two points of the far arc, tangent ⟂ radius |
+| math.geom.conic-sections | circle, ellipse, parabola, hyperbola as r = 1/(1 − e cos θ) about one focus (e = 0, 0.5, 1, 2), directrix of the parabola |
+| math.geom.ellipse | x²/9 + y²/4 = 1, foci (±√5, 0); two points whose focal distances (4.12 + 1.88, 1.21 + 4.79) both add to 2a = 6 |
+| math.geom.hyperbola | x²/4 − y²/2.25 = 1, foci (±2.5, 0), 5.75 − 1.75 = 2a = 4, asymptotes y = ±0.75x, box (±2, ±1.5) |
+| math.geom.polar-coordinates | polar grid; (3, 60°) = (1.5, 2.60) with guides; (2, 210°) = (−1.73, −1) |
+| math.geom.polar-curves | cardioid r = 1 + cos θ, 3-petal rose r = cos 3θ, spiral r = θ/π in three panels |
+| math.geom.vectors-2d | a = (3, 1), b = (1, 2): head-to-tail sum (4, 3), length 5; 2a = (6, 2) |
+| math.geom.vectors-3d | v = (2, 2, 1) in oblique view: component staircase, floor diagonal 2√2, |v| = 3 |
+| math.geom.dot-product | a = (4, 1), b = (2, 3): a·b = 11, θ ≈ 42.3°, projection 2.67; c = (−1, 4) ⟂ a gives 0 |
+| math.geom.cross-product | parallelogram on (3, 0), (1, 2): area 6 = a₁b₂ − a₂b₁; ⊙ for a × b out of the page, ⊗ for b × a |
+| math.geom.curvature | y = x²/2: osculating circle radius 1 at the vertex (κ = 1), radius 2.83 at x = 1 (κ = 0.354) |
+| math.geom.x-y-coordinates | P(−4, 3) and Q(2, −3) with guides showing signed distances to the axes; R(0, −2) on the y-axis |
+
+Left in `geom` (essential): platonic-solids, differential-geometry-curves, frenet-serret (3-D, need a decision on how to draw space curves),
+plus whatever `visual-coverage.ts --list E` shows. Next (batch 13 plan): linear algebra (24 essential) — vectors, span, basis, matrix
+transformations, determinant, eigenvectors.

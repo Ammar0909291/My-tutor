@@ -180,6 +180,11 @@ import {
   buildPolynomialFunctionScene, buildEndBehaviorScene, buildRationalFunctionScene, buildVerticalAsymptoteScene,
   buildHorizontalAsymptoteScene, buildPiecewiseFunctionScene, buildMonotonicFunctionScene,
 } from '@/lib/teaching/sceneGenerators/mathCoreScenesB11'
+import {
+  buildCircleTheoremsScene, buildConicSectionsScene, buildEllipseScene, buildHyperbolaScene, buildPolarCoordinatesScene,
+  buildPolarCurvesScene, buildVectors2dScene, buildVectors3dScene, buildDotProductScene, buildCrossProductScene,
+  buildCurvatureScene, buildXyCoordinatesScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB12'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -497,6 +502,20 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'math.func.horizontal-asymptote':      buildHorizontalAsymptoteScene,
   'math.func.piecewise-function':        buildPiecewiseFunctionScene,
   'math.func.monotonic-function':        buildMonotonicFunctionScene,
+
+  // Mathematics visual campaign, batch 12 (2026-10-12). See mathCoreScenesB12.ts.
+  'math.geom.circle-theorems':           buildCircleTheoremsScene,
+  'math.geom.conic-sections':            buildConicSectionsScene,
+  'math.geom.ellipse':                   buildEllipseScene,
+  'math.geom.hyperbola':                 buildHyperbolaScene,
+  'math.geom.polar-coordinates':         buildPolarCoordinatesScene,
+  'math.geom.polar-curves':              buildPolarCurvesScene,
+  'math.geom.vectors-2d':                buildVectors2dScene,
+  'math.geom.vectors-3d':                buildVectors3dScene,
+  'math.geom.dot-product':               buildDotProductScene,
+  'math.geom.cross-product':             buildCrossProductScene,
+  'math.geom.curvature':                 buildCurvatureScene,
+  'math.geom.x-y-coordinates':           buildXyCoordinatesScene,
 
   // The Punnett generator is single-gene by construction (genotypes are two
   // alleles). A dihybrid cross drawn as a monohybrid square teaches the wrong
