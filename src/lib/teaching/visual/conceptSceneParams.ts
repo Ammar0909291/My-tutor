@@ -185,6 +185,11 @@ import {
   buildPolarCurvesScene, buildVectors2dScene, buildVectors3dScene, buildDotProductScene, buildCrossProductScene,
   buildCurvatureScene, buildXyCoordinatesScene,
 } from '@/lib/teaching/sceneGenerators/mathCoreScenesB12'
+import {
+  buildVectorScene, buildScalarMultiplicationScene, buildNormScene, buildUnitVectorScene, buildOrthogonalityScene,
+  buildSpanScene, buildLinearIndependenceScene, buildBasisScene, buildCoordinatesScene, buildChangeOfBasisScene,
+  buildLinearMapScene, buildProjectionScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB13'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -516,6 +521,20 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'math.geom.cross-product':             buildCrossProductScene,
   'math.geom.curvature':                 buildCurvatureScene,
   'math.geom.x-y-coordinates':           buildXyCoordinatesScene,
+
+  // Mathematics visual campaign, batch 13 (2026-10-12). See mathCoreScenesB13.ts.
+  'math.linalg.vector':                  buildVectorScene,
+  'math.linalg.scalar-multiplication':   buildScalarMultiplicationScene,
+  'math.linalg.norm':                    buildNormScene,
+  'math.linalg.unit-vector':             buildUnitVectorScene,
+  'math.linalg.orthogonality':           buildOrthogonalityScene,
+  'math.linalg.span':                    buildSpanScene,
+  'math.linalg.linear-independence':     buildLinearIndependenceScene,
+  'math.linalg.basis':                   buildBasisScene,
+  'math.linalg.coordinates':             buildCoordinatesScene,
+  'math.linalg.change-of-basis':         buildChangeOfBasisScene,
+  'math.linalg.linear-map':              buildLinearMapScene,
+  'math.linalg.projection':              buildProjectionScene,
 
   // The Punnett generator is single-gene by construction (genotypes are two
   // alleles). A dihybrid cross drawn as a monohybrid square teaches the wrong

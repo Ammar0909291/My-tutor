@@ -429,3 +429,37 @@ Notes for later batches:
 Left in `geom` (essential): platonic-solids, differential-geometry-curves, frenet-serret (3-D, need a decision on how to draw space curves),
 plus whatever `visual-coverage.ts --list E` shows. Next (batch 13 plan): linear algebra (24 essential) — vectors, span, basis, matrix
 transformations, determinant, eigenvectors.
+
+
+# Batch 13 (2026-10-12): linear algebra in the plane
+
+`sceneGenerators/mathCoreScenesB13.ts` + `mathCoreScenesBatch13.test.ts` (122 checks); campaign audit threshold now 158. Coverage after this batch:
+204 of 908 concepts with a fixed figure; essential tier 202 / 346.
+
+Notes for later batches:
+- Every figure is a 2-D picture of ℝ²; vectors are `arrow()`s whose displacement (screen length ÷ u) the tests read back, so a vector figure
+  is verified by what is drawn, not by its constants. `solveBasis` (Cramer's rule) recovers coordinates in a basis from drawn points.
+- A bad rounding in a label is caught by the audit-free test: √17 + √10 = 7.2854, so the label says 7.29 (not 7.28); recompute printed
+  numbers from the constants before writing them.
+- Skew-basis grids are drawn as two families of `line()` segments; the tests count them (10 for the coordinate figures, 14 for the basis grid).
+- The linear-algebra `dot-product` and `cross-product` concepts (and the other still-open ones below) have NOT been given figures yet:
+  `math.geom.dot-product` / `math.geom.cross-product` already exist with a geometric emphasis; the linalg versions should show the
+  algebraic side (component formula, ℝ³, the determinant) rather than reuse those scenes.
+
+| Concept | Figure |
+|---|---|
+| math.linalg.vector | (3, 2) with components; the same displacement from other tails is the same vector; (2, 3) is different |
+| math.linalg.scalar-multiplication | v = (2, 1), 2v = (4, 2), ½v = (1, 0.5), −v = (−2, −1): length |c||v|, c < 0 reverses |
+| math.linalg.norm | |(3, 4)| = 5 by Pythagoras; |p + q| = 6.40 ≤ 7.29; unit balls of the 1-, 2-, ∞-norms |
+| math.linalg.unit-vector | unit circle, e₁, e₂; v = (3, 4) of length 5 normalised to (0.6, 0.8) |
+| math.linalg.orthogonality | u·w = 0 at a right angle; u·w′ = 4 at 36.9°; |u + w|² = 5 + 5 = 10 |
+| math.linalg.span | multiples of v₁ = a line; 25 combinations c₁v₁ + c₂v₂ fill the plane; 2v₁ adds nothing |
+| math.linalg.linear-independence | (2, 1), (−1, 1) independent (det 3); v₃ = 2v₁ dependent; v₄ = v₁ + v₂ |
+| math.linalg.basis | w = (3, 1) = 3e₁ + e₂ = 2b₁ − b₂ for b₁ = (1, 1), b₂ = (−1, 1) on two grids |
+| math.linalg.coordinates | skew basis (2, 0), (1, 1): (4, 2) = 1·b₁ + 2·b₂, so [w]_B = (1, 2) |
+| math.linalg.change-of-basis | M = [[2, 1], [0, 1]], M⁻¹ = [[0.5, −0.5], [0, 1]]: (4, 2) ↔ (1, 2), (3, 1) ↔ (1, 1) |
+| math.linalg.linear-map | T(x, y) = (2x + y, x + 2y): columns (2, 1), (1, 2); unit square (area 1) → parallelogram (area 3); T(1, 1) = (3, 3) |
+| math.linalg.projection | proj_u(v) = (2.7, 0.9) is the closest point (2.21 vs 2.72, 2.55); Pythagoras 13 = 8.1 + 4.9 |
+
+Left in `linalg` (essential): dot-product, cross-product, row-reduction, subspace, null-space, column-space, kernel-image, eigenspace,
+orthogonal-basis, least-squares, svd (11; vector-addition stays reserved). Next (batch 14 plan): those eleven plus one more domain item.
