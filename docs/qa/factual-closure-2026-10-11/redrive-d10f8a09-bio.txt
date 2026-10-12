@@ -1,0 +1,117 @@
+
+=== order 183 bio.behav.innate-behavior-instinct ===
+[open provider=groq fig=none flags=-]
+**Lesson: Innate Behaviour and Instinct**  
+
+In this lesson we’ll explore behaviours that animals are born with – they don’t have to learn them. By the end you’ll be able to describe fixed‑action patterns, recognize the sign stimuli that trigger them, differentiate reflexes from more complex instinctive actions, and explain how genetics shapes these innate behaviours.  
+
+Imagine a mother goose sitting on her nest. One of her eggs rolls out of the nest and lands a short distance away. The goose immediately turns, walks straight to the stray egg, and pushes it back into the nest with a single, smooth motion, as if following a preset script.  
+
+That smooth, unchanging sequence of actions is called a **fixed‑action pattern** – a stereotyped behaviour that is released automatically when the right cue appears.  
+
+Now, think about what the goose is actually responding to. What do you notice about the goose’s behaviour when it sees the egg outside the nest?
+[learner] What is this picture showing?
+[tutor provider=groq fig=title=Reflex vs. Fixed Action Pattern card=none flags=-]
+The picture compares two kinds of innate behaviours. In the top‑left corner it reads **“Simple reflex,”** and just below on the left it gives the example **“E.g. the knee‑jerk reflex.”** In the top‑right corner it reads **“Fixed action pattern,”** with the example **“E.g. courtship display, nest‑building”** on the right, and at the bottom‑right it adds **“Stereotyped and largely unmodifiable once triggered.”** Two straight lines illustrate the two stages shown in the diagram.
+
+What do you notice about how the simple reflex and the fixed action pattern are presented in this diagram?
+[learner] quiz me
+[tutor provider=groq fig=none card="What is the specific role of a \"sign stimulus\" in a fixed action pattern?" ["It is the reward the animal receives aft","It is a random event with no specific re","It is the specific trigger required to r","It is a signal the animal must be taught"] corpus=biologyExtensionSeedAssets.ts flags=-]
+Here's a question — take your time with it.
+[learner] It is the reward the animal receives after completing the behaviour
+[tutor provider=groq fig=none card=none flags=-]
+Not quite — the answer is: It is the specific trigger required to release the pre-programmed behavioural sequence
+
+A sign stimulus is not a reward given after the behavior. It is the external cue that initiates the fixed action pattern.
+
+The sign stimulus is a specific feature of the environment, such as a red belly in a male stickleback, that automatically activates the innate sequence. When the animal detects that cue, the whole behavior runs without further input.
+[learner] ok
+[tutor provider=groq fig=none card=none flags=-]
+Fixed action patterns (FAPs) are stereotyped (performed the same way across individuals of a species) and largely unmodifiable behavioural sequences — once triggered, a FAP typically runs to completion in its characteristic form, largely independent of ongoing feedback. Critically, a FAP is NOT spontaneous: it requires a specific sign stimulus (a specific, often simple environmental cue) to release it — the sequence is performed only when that specific trigger is present. Innate behaviour must be further distinguished from simple reflexes: a reflex is a direct, typically single-muscle-group stimulus-response (like the knee-jerk reflex) — simple, immediate, minimal neural processing. A fixed action pattern is substantially more complex, coordinated, and multi-step (like an elaborate courtship display or nest-building sequence) — many more coordinated movements over an extended time, though still triggered by a specific sign stimulus and still largely stereotyped once initiated. Innate behaviour also has a genetic basis: it is a heritable trait shaped by natural selection over evolutionary time, exactly as physical structures are — a FAP that reliably improves survival or reproduction can be favoured by selection and become a stable, species-typical trait.
+[learner] give me example
+[tutor provider=groq fig=none card=none flags=-]
+Let’s look at a classic fixed‑action pattern: **the egg‑retrieval behavior of a goose**. 
+
+When a goose notices an egg that has rolled out of its nest, the sight of the displaced egg is the **sign stimulus**. This visual cue instantly triggers a stereotyped sequence: the goose approaches the egg, uses its beak to roll the egg back toward the nest, and then continues the motion until the egg is safely inside. Once started, the goose keeps rolling the egg even if the egg’s position changes slightly; the pattern runs to completion without needing further feedback. 
+
+Notice that this behavior is **not a simple reflex** (like the knee‑jerk). A reflex involves a single, direct muscle response to a stimulus, whereas the goose’s egg‑retrieval involves several coordinated steps and a specific trigger that must be present. 
+
+**What do you notice about the trigger and the behavior in this example?**
+[learner] i dont understand this picture. what is it showing?
+[tutor provider=groq fig=none card=none flags=-]
+I hear you—it can feel a bit overwhelming at first. 
+
+- **Simple reflex** (top left, blue) – this is a very quick, automatic response to a stimulus. 
+- **E.g. the knee‑jerk reflex** (left, grey) – an example of that simple reflex; tapping the knee makes the leg kick without thinking. 
+- **Fixed action pattern** (top right, orange) – a more complex, pre‑programmed sequence of actions that is released by a specific cue. 
+- **E.g. courtship display, nest‑building** (right, grey) – examples of fixed action patterns; a bird’s elaborate dance or the steps it follows to build a nest. 
+- **Stereotyped and largely unmodifiable once triggered** (bottom right, grey) – a note telling us that once a fixed action pattern starts, it runs to completion and does not change much even if conditions vary. 
+
+The two straight lines illustrate the two stages shown in the figure: the simple reflex stage and the fixed‑action‑pattern stage.
+
+**What the whole picture tells us:** it contrasts a basic reflex, which is a single, immediate response, with a fixed action pattern, which is a multi‑step, stereotyped behavior that needs a specific “sign stimulus” to start and then proceeds largely on its own.
+[learner] ask me a question
+[tutor provider=groq fig=none card="A student says \"a reflex and a fixed action pattern are basically the same thing — both are just automatic innate behaviours.\" What is the b" ["No, that is wrong","Yes, that is correct"] corpus=biologyExtensionSeedAssets.ts flags=twoOption]
+Let's check this one before we go further.
+[learner] Yes, that is correct
+[tutor provider=groq fig=title=Reflex vs. Fixed Action Pattern card=none flags=-]
+Not quite — the answer is: No, that is wrong — a reflex is a simple, direct, single-response reaction, while a fixed action pattern is a far more complex, coordinated, multi-step sequence
+
+A reflex is a simple, single response to a stimulus. A fixed action pattern is a coordinated, multi‑step behavior that unfolds over time. The two are not the same mechanism.
+
+Fixed action patterns are released by a specific sign stimulus and then run to completion without further input, unlike reflexes which stop after the immediate response. Understanding this helps you see how innate behaviors can vary in complexity.
+[learner] test my understanding
+[tutor provider=groq fig=none card="A bird performs an elaborate, multi-step courtship dance only when it sees a specific coloured patch on a potential mate's feathers, and the" ["Both are fixed action patterns since bot","The courtship dance — it is a complex, m","Neither — both are learned behaviours ac","The leg-jerk reaction — any instant reac"] corpus=biologyExtensionSeedAssets.ts flags=-]
+In the figure, the **sign stimulus** is the specific trigger that starts the fixed action pattern.
+[learner] quiz me
+[tutor provider=groq fig=none card="A bird performs an elaborate, multi-step courtship dance only when it sees a specific coloured patch on a potential mate's feathers, and the" ["Both are fixed action patterns since bot","The courtship dance — it is a complex, m","Neither — both are learned behaviours ac","The leg-jerk reaction — any instant reac"] corpus=biologyExtensionSeedAssets.ts flags=-]
+This is the question you have not answered yet — choose an answer below and I will mark it.
+
+Let me check your thinking with this.
+[learner] Both are fixed action patterns since both are innate and automatic
+[tutor provider=groq fig=none card="What is the specific role of a \"sign stimulus\" in a fixed action pattern?" ["It is a random event with no specific re","It is a signal the animal must be taught","It is the reward the animal receives aft","It is the specific trigger required to r"] corpus=biologyExtensionSeedAssets.ts flags=repeatAnswered]
+Not quite — the answer is: The courtship dance — it is a complex, multi-step sequence released by a specific sign stimulus (the coloured patch)
+
+The leg‑jerk is a simple reflex, not a multi‑step innate sequence. Fixed action patterns are complex, stereotyped sequences released by a specific sign stimulus, like the courtship dance triggered by the coloured patch. The dance fits the definition, the leg‑jerk does not.
+
+A reflex is a single, immediate response to a stimulus, such as pulling away from heat. A fixed action pattern is a longer, fixed series of actions that runs to completion once started, and it is triggered by a particular sign stimulus.
+
+Here's a question — take your time with it.
+[learner] show me a diagram
+[tutor provider=groq fig=title=Reflex vs. Fixed Action Pattern card="What is the specific role of a \"sign stimulus\" in a fixed action pattern?" ["It is a random event with no specific re","It is a signal the animal must be taught","It is the reward the animal receives aft","It is the specific trigger required to r"] corpus=biologyExtensionSeedAssets.ts flags=repeatAnswered]
+Here’s the picture you’re looking at:
+
+- In the **top‑left** corner, the blue label reads **“Simple reflex”** and just below it, in grey, you see **“E.g. the knee‑jerk reflex.”** 
+- In the **top‑right** corner, the orange label says **“Fixed action pattern”** and the grey text on the right gives **“E.g. courtship display, nest‑building.”** 
+- At the **bottom‑right**, still in grey, the note says **“Stereotyped and largely unmodifiable once triggered.”**
+
+The diagram is split into two columns, each showing a different type of behaviour and an example.
+[learner] i dont understand this picture. what is it showing?
+[tutor provider=groq fig=none card=none flags=-]
+I hear you—it can be confusing at first.
+
+- **Simple reflex** (top left): this is a quick, automatic response, like the knee‑jerk reflex shown on the left side.
+- **Fixed action pattern** (top right): this is a longer, pre‑programmed sequence, such as a courtship display or nest‑building shown on the right side.
+- **Stereotyped and largely unmodifiable once triggered** (bottom right): once the fixed action pattern starts, it runs to completion and does not change much, even if conditions vary.
+
+Together, the diagram contrasts a brief reflex with a more complex, innate behaviour that needs a specific sign stimulus to start and then proceeds automatically.
+[learner] explain simpler
+[tutor provider=groq fig=none card=none flags=-]
+Think of a **simple reflex** like a fire alarm that rings the moment it detects smoke – the alarm goes off immediately and stops, without any extra steps. In the picture this is the blue box labeled “Simple reflex” (top left) with the example “the knee‑jerk reflex” underneath.
+
+A **fixed action pattern** is more like a wedding ceremony that only starts when the bride walks down the aisle (the cue). Once that cue appears, the whole sequence – music, vows, ring exchange, celebration – runs automatically, even if the couple later hears a loud noise. In the figure this is the orange box “Fixed action pattern” (top right) with the example “courtship display, nest‑building”, and the note “Stereotyped and largely unmodifiable once triggered”. The cue that starts the ceremony is called a **sign stimulus** – the specific trigger that releases the whole pre‑programmed behavior.
+[learner] give me a quiz
+[tutor provider=groq fig=title=Reflex vs. Fixed Action Pattern card=none flags=quizNoCard]
+You have answered every new practice question I have on Innate Behaviour and Instinct in this lesson. A question you have already seen comes back once more after a little more teaching. Say "next" to move on, or tell me which part you want to go over.
+
+Look at the left half of the picture. The blue box says **“Simple reflex”** and underneath it gives the example **“the knee‑jerk reflex.”** This is a very direct response: a tap on the tendon (the stimulus) instantly makes the leg muscle contract. There’s only one step, no planning, and the animal can’t change the response while it’s happening.
+
+Now shift to the right half. The orange box reads **“Fixed action pattern”** with examples like **“courtship display, nest‑building.”** Here a specific **sign stimulus**—for instance a particular visual cue on a mate—triggers a whole, pre‑programmed sequence of movements. Once that sequence starts, it runs to completion in the same way every time, and the animal can’t easily modify it even if conditions change.
+[learner] quiz me
+[tutor provider=groq fig=none card="A student says \"a reflex and a fixed action pattern are basically the same thing — both are just automatic innate behaviours.\" What is the b" ["Yes, that is correct","No, that is wrong"] corpus=biologyExtensionSeedAssets.ts flags=twoOption,repeatAnswered]
+You have seen this question before in this lesson — here it is once more.
+
+Alright, let’s see how well you’ve grasped the difference between a simple reflex and a fixed‑action pattern. Let's check this one before we go further.
+[learner] quiz me
+[tutor provider=groq fig=none card="A student says \"a reflex and a fixed action pattern are basically the same thing — both are just automatic innate behaviours.\" What is the b" ["Yes, that is correct","No, that is wrong"] corpus=biologyExtensionSeedAssets.ts flags=twoOption,repeatAnswered]
+Let's check this one before we go further.

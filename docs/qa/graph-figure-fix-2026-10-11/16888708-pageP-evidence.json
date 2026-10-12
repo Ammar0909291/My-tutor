@@ -1,0 +1,59 @@
+{
+  "base": "https://my-tutor-flame.vercel.app",
+  "subject": "physics",
+  "slug": "phys.mech.stress-strain",
+  "rows": [
+    {
+      "turn": 1,
+      "said": "show me the graph",
+      "shot": "01.png",
+      "provider": "groq",
+      "reply": "Here’s the stress‑strain graph you asked for. \n- At the top left the label reads **“stress F / A”** and a blue line is marked **“slope = E”**. \n- At the bottom right you see **“strain ΔL / L”**. \n- The curve begins as a straight line, then at the purple point labeled **“elastic limit”** it bends into a red region labeled **“plastic”**, and finally a green point marked **“breaks”** appears. \n- Grey arrows run along the curve to show the direction of increasing load.\n\nLooking at this picture, what do you notice about how stress and strain are related in the first (straight‑line) part of the curve?",
+      "replyRendered": false,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": true
+    },
+    {
+      "turn": 2,
+      "said": "i dont understand this picture. what is it showing?",
+      "shot": "02.png",
+      "provider": "groq",
+      "reply": "The picture is a stress‑strain graph that shows how a metal’s stress (force per area) and strain (fractional change in length) are related as you pull on it.\n\n- **Top left “stress F/A”** – this label tells us that stress is the applied force divided by the cross‑sectional area of the material. \n- **Bottom right “strain ΔL/L”** – this label tells us that strain is the amount the material’s length changes (ΔL) divided by its original length (L). \n- **Blue straight line with “slope = E”** – the slope of this initial straight part is Young’s modulus E, which is the ratio of stress to strain and characterizes the material’s intrinsic stiffness. \n- **Purple point “elastic limit”** – the highest stress at which the material still returns to its original shape when the load is removed. \n- **Red curve “plastic”** – beyond the elastic limit the material deforms permanently; stress keeps increasing but the strain no longer follows the straight‑line rule. \n- **Green point “breaks”** – the point where the material finally fractures.\n\nOverall, the graph tells us that a material first stretches elastically (linear region), then plastically (non‑linear region), and finally breaks when the stress becomes too large.",
+      "replyRendered": true,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": false
+    },
+    {
+      "turn": 3,
+      "said": "what does the slope of the graph mean?",
+      "shot": "03.png",
+      "provider": "groq",
+      "reply": "The straight‑line part of the graph is the **elastic region**. Its slope – the line that rises from the origin – is called **Young’s modulus (E)**. \nMathematically, E = stress ÷ strain, so the slope tells you how much stress is needed to produce a given amount of strain. A steeper (larger) slope means the material is **stiffer** – it resists stretching more.",
+      "replyRendered": false,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": true
+    },
+    {
+      "turn": 4,
+      "said": "explain the axes simpler",
+      "shot": "04.png",
+      "provider": "groq",
+      "reply": "Imagine you have a simple chart that plots how far a car travels (distance) against how long it has been driving (time). On the original graph the horizontal axis might be marked in seconds (0, 10, 20, 30 s) and the vertical axis in metres (0, 50, 100, 150 m). \n\nNow suppose you want to compare many different trips, but the distances and times are very different. One way to make the graph easier to read is to **scale the axes**: you pick a convenient reference value—say 10 s for time and 100 m for distance—and then plot the data as a fraction of those references. The new horizontal axis shows “time / 10 s” (so a point that was at 20 s now appears at 2), and the vertical axis shows “distance / 100 m” (so 150 m becomes 1.5). \n\nBecause each axis now carries a *ratio* rather than an absolute unit, the numbers are smaller and the plot looks less crowded. \n\n**What do you notice about the numbers on the simplified axes compared to the original ones?**",
+      "replyRendered": true,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": false
+    }
+  ]
+}

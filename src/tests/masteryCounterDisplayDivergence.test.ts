@@ -344,7 +344,9 @@ describe('FIX-2 — [ladder] telemetry', () => {
     // write site).
     expect(LADDER).toContain('verifiedCheck: conversationStateAfterTurnHoisted?.verifiedCorrectAtCheck ?? null')
     expect(LADDER).toContain('verifiedPractice: conversationStateAfterTurnHoisted?.verifiedCorrectAtPractice ?? null')
-    expect(LADDER).toContain('serverGraded: certifies(resolvedGrade)')
+    // 2026-10-07 (owner, CHEM-004/BIO-019): one hoisted derivation,
+    // `certifiedForMastery` = certifiesMastery(resolvedGrade, …) — still one path.
+    expect(LADDER).toContain('serverGraded: certifiedForMastery')
     // Nothing in the telemetry recomputes a verdict or derives correctness.
     expect(LADDER).not.toContain('masteryVerifiedStrict')
     expect(LADDER).not.toContain('conceptMasteryVerdict')
@@ -361,7 +363,10 @@ describe('FIX-2 — [ladder] telemetry', () => {
     // TurnDelivery shadow input, whose own comment explains why it stays on
     // the old derivation.
     expect((route.match(/serverGraded: gradedAgainstServerKeyHoisted,/g) ?? []).length).toBe(1)
-    expect(route.split('serverGraded: certifies(resolvedGrade)').length - 1).toBeGreaterThanOrEqual(3)
+    // 2026-10-07: all three read the one hoisted `certifiedForMastery`, itself
+    // derived from `resolvedGrade` exactly once.
+    expect(route.split('serverGraded: certifiedForMastery').length - 1).toBeGreaterThanOrEqual(3)
+    expect((route.match(/const certifiedForMastery: boolean = /g) ?? []).length).toBe(1)
   })
 })
 

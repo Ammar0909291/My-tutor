@@ -1,0 +1,137 @@
+[
+ {
+  "assetId": "d2f44b7f-3802-4ad1-89a3-3035d180d356",
+  "slug": "chem.bio.nucleic-acids:mcq:en:high",
+  "stem": "A DNA strand has the base sequence 5'-ATGCCC-3'. What is the complementary strand, written 5'→3'?",
+  "choices": [
+   {
+    "text": "5'-GGGCAT-3' (complement antiparallel: A pairs T, T pairs A, G pairs C)",
+    "isCorrect": true
+   },
+   {
+    "text": "5'-TACGGG-3' (complement written in same direction)",
+    "isCorrect": false,
+    "misconceptionId": "chem.bio.nucleic-acids:MC1"
+   },
+   {
+    "text": "5'-ATGCCC-3' (identical sequence)",
+    "isCorrect": false,
+    "misconceptionId": "chem.bio.nucleic-acids:MC1"
+   }
+  ],
+  "correctValue": "5'-GGGCAT-3'"
+ },
+ {
+  "assetId": "90fbdeee-7139-40da-b1b1-4c02090f6060",
+  "slug": "chem.elect.corrosion:true_false:en:high",
+  "stem": "True or false: \"cathodic protection\" is so called because it protects the cathode of the corrosion cell.",
+  "choices": [
+   {
+    "text": "False — it protects the structure BY MAKING IT the cathode. A more reactive metal (or an impressed current) is attached so the steel is forced to be the cathode, where reduction happens and no metal is lost; the sacrificial anode corrodes instead. The name describes the role the protected object is pushed into, not the thing being protected",
+    "isCorrect": true
+   },
+   {
+    "text": "True — the technique works by shielding the cathode from attack, which is where corrosion would otherwise occur",
+    "isCorrect": false,
+    "misconceptionId": "chem.elect.corrosion:MC3"
+   }
+  ],
+  "correctValue": "False — the protected structure is MADE the cathode; the sacrificial anode corrodes"
+ },
+ {
+  "assetId": "e95de76b-fe00-4a1c-a0c3-c31e456c6b66",
+  "slug": "chem.equil.le-chatelier:misconception_probe:en:high",
+  "stem": "For an exothermic reaction A ⇌ B + heat, does raising the temperature increase or decrease K?",
+  "choices": [
+   {
+    "text": "Decrease K — treating heat as a product, adding more heat shifts equilibrium backward (toward reactant A), meaning at the new (higher) temperature, less product is favored, so K decreases",
+    "isCorrect": true
+   },
+   {
+    "text": "K is unaffected by temperature — only concentration and pressure changes affect K",
+    "isCorrect": false,
+    "misconceptionId": "chem.equil.le-chatelier:MC2"
+   }
+  ],
+  "correctValue": "K decreases for exothermic reactions when heated"
+ },
+ {
+  "assetId": "6fa166fe-c918-4c08-ad3b-bca8a837215f",
+  "slug": "chem.found.measurement:misconception_probe:en:high",
+  "stem": "Convert 0.025 kg to milligrams. Show your unit-cancellation steps.",
+  "choices": [
+   {
+    "text": "25,000 mg (0.025 kg × 1000 g/kg × 1000 mg/g)",
+    "isCorrect": true
+   },
+   {
+    "text": "25 mg (just move the decimal three places)",
+    "isCorrect": false,
+    "misconceptionId": "chem.found.measurement:MC2"
+   }
+  ],
+  "correctValue": "25000 mg"
+ },
+ {
+  "assetId": "00b9cdc0-075d-4f73-a552-d4406d1668b4",
+  "slug": "chem.org.pericyclic:mcq:en:undergraduate",
+  "stem": "Why does cyclopentadiene react much more readily as a Diels–Alder diene than (E,E)-hexa-2,4-diene?",
+  "choices": [
+   {
+    "text": "Cyclopentadiene is locked in the s-cis conformation; (E,E)-hexa-2,4-diene is locked in s-trans and cannot achieve the required geometry",
+    "isCorrect": true
+   },
+   {
+    "text": "Cyclopentadiene has more pi electrons available for overlap with the dienophile",
+    "isCorrect": false,
+    "misconceptionId": "chem.org.pericyclic:MC1"
+   },
+   {
+    "text": "The ring strain in cyclopentadiene lowers the activation energy for [4+2] cycloaddition",
+    "isCorrect": false
+   }
+  ],
+  "correctValue": "Cyclopentadiene locked s-cis; (E,E) locked s-trans"
+ },
+ {
+  "assetId": "593718a0-6e7d-429b-a86e-026a7fb83a16",
+  "slug": "chem.pblock.trends:step_check:en:high",
+  "stem": "PRACTICE: NaCl just dissolves in water. Why does SiCl4 fume and hydrolyse violently instead?",
+  "choices": [
+   {
+    "text": "Because NaCl is IONIC — its ions simply hydrate, with no covalent bonds to break — while SiCl4 is COVALENT and silicon has vacant d orbitals, so water's lone pair attacks the silicon and the Si-Cl bonds are cleaved",
+    "isCorrect": true
+   },
+   {
+    "text": "It does not — SiCl4 is a simple chloride like NaCl and dissolves in the same way",
+    "isCorrect": false,
+    "misconceptionId": "chem.pblock.trends:MC2"
+   }
+  ],
+  "correctValue": "ionic hydration vs covalent hydrolysis"
+ },
+ {
+  "assetId": "19762571-73b3-41cf-87e6-62d7a567afcf",
+  "slug": "chem.surface.emulsions:numeric:en:high",
+  "stem": "Mayonnaise is an oil-in-water emulsion. Which liquid is the dispersed phase and which is the continuous one?",
+  "choices": [
+   {
+    "text": "Oil dispersed, water continuous",
+    "isCorrect": true
+   },
+   {
+    "text": "Water dispersed, oil continuous",
+    "isCorrect": false
+   },
+   {
+    "text": "Both are continuous",
+    "isCorrect": false
+   },
+   {
+    "text": "Neither — the two have mixed completely",
+    "isCorrect": false
+   }
+  ],
+  "correctValue": "oil dispersed in continuous water"
+ }
+]

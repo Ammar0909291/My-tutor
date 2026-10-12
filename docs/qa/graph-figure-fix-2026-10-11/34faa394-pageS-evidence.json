@@ -1,0 +1,46 @@
+{
+  "base": "https://my-tutor-flame.vercel.app",
+  "subject": "physics",
+  "slug": "phys.mod.superconductivity",
+  "rows": [
+    {
+      "turn": 1,
+      "said": "show me the graph",
+      "shot": "01.png",
+      "provider": "groq",
+      "reply": "In the figure you can see three main parts:\n\n- At the top left the label **“resistance”** marks the vertical axis, while the centre label **“T (K)”** marks the horizontal axis for temperature in kelvin. \n- The blue curve, labelled **“normal metal,”** shows how a ordinary metal’s resistance falls as it cools, then levels off at a small residual value. \n- The red curve, labelled **“R = 0 below T(c) = 7.2 K,”** drops sharply to zero exactly at the point where the temperature reaches **T(c) = 7.2 kelvin**. Below that temperature the resistance stays at zero. \n\nOn the right side, the purple text **“field lines go round”** and the green label **“superconducting”** indicate that, in this low‑temperature region, magnetic field lines are expelled from the material (the Meissner effect). The small note **“4.2 K: 0.053 T”** shows the critical magnetic field value at a lower temperature.\n\n**What do you notice about the resistance curve when the temperature reaches the point marked T(c) = 7.2 kelvin?**",
+      "replyRendered": true,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": true
+    },
+    {
+      "turn": 2,
+      "said": "i dont understand this picture. what is it showing?",
+      "shot": "02.png",
+      "provider": "groq",
+      "reply": "The label **“T (K)”** in the centre is the temperature axis, measured in kelvin. \n\nThe vertical label **“resistance”** at the top left tells you the vertical axis is electrical resistance. \n\nThe curve marked **“normal metal”** (blue) shows how a regular metal’s resistance drops as it cools, then levels off at a small residual value. \n\nThe red line **“R = 0 below T(c) = 7.2 K”** indicates that, for a superconductor, the resistance falls abruptly to exactly zero once the temperature drops below the critical temperature T(c) = 7.2 kelvin. \n\nThe note **“field lines go round”** (purple) at the top right represents the Meissner effect: magnetic field lines are expelled from the interior of the superconductor. \n\nThe text **“4.2 K: 0.053 T”** (bottom right) gives an example of the critical magnetic field at a low temperature (4.2 kelvin), showing the maximum field the superconductor can expel before losing its superconducting state. \n\nThe label **“superconducting”** (green, bottom right) marks the region where both zero resistance and magnetic‑field expulsion occur. \n\n**Overall**, the picture compares a normal metal’s gradual resistance decrease with a superconductor’s sudden drop to zero at T(c), and it adds the magnetic‑field behaviour that distinguishes true superconductivity from merely low resistance.",
+      "replyRendered": false,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": false
+    },
+    {
+      "turn": 3,
+      "said": "what does the red label mean?",
+      "shot": "03.png",
+      "provider": "groq",
+      "reply": "The red label **“R = 0 below T₍c₎ = 7.2 K”** tells us that when the material is cooled below its **critical temperature** (about seven kelvin), its electrical resistance becomes exactly zero – not just very small, but truly zero. The second red note, **“4.2 K: 0.053 T,”** shows the size of the magnetic field (about 0.053 tesla) that the superconductor can still expel at a temperature of 4.2 kelvin; above that field the superconducting state would be destroyed.\n\nNow look at the red curve that drops straight down to the horizontal line labeled “R = 0.” \n**What do you notice about the resistance at the point where the temperature reaches the critical temperature?**",
+      "replyRendered": false,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": false
+    }
+  ]
+}

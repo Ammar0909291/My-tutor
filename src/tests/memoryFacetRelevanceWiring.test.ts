@@ -88,8 +88,9 @@ describe('production wiring — findBestExplanation defaults the explanation slo
     // Confirms the fix did not bleed into findBestProbe: probe tags are
     // [subjectSlug, probeKind] and never carry 'core_explanation', so
     // defaulting requiredTags there would zero out every probe candidate.
-    expect(REPOSITORY).toContain('const best = pickBest(state, rows, options)')
-    expect(REPOSITORY).toContain('const fallback = pickBest(state, rows, options, 0)')
+    // CHEM-005 (2026-10-07): ranked over `pool` (rows narrowed to taught content).
+    expect(REPOSITORY).toContain('const best = pickBest(state, pool, options)')
+    expect(REPOSITORY).toContain('const fallback = pickBest(state, pool, options, 0) ?? pickBest(state, rows, options, 0)')
     expect(REPOSITORY).not.toContain('core_explanation')
     expect(REPOSITORY).not.toContain('defaultExplanationFacet')
   })

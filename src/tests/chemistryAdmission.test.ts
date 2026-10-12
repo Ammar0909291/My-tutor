@@ -108,10 +108,14 @@ describe('no chemistry figure the resolver serves today is blanked by the gate',
   const concepts = getAllNodes(getKnowledgeGraph('chemistry'))
   const decisions = concepts.map((n) => ({ id: n.id, d: resolveVisual({ message: '', lessonConceptId: n.id, subject: 'chemistry' }) }))
 
-  it('serves 45 concepts a figure (51 until the R4 review retired 6 domain-default cards that did not depict their concept; nothing rejected:chemistry-validation-failed)', () => {
+  // 51 -> 53 (2026-10-07): chem.found.matter (CHEM-013) and chem.bond.ionic-bonding (CHEM-095)
+  // gained curated figures; both pass this gate (nothing rejected).
+  // 53 -> N (2026-10-09, R4): the closure review retired 6 domain-default cards that did not depict their concept
+  // (electromagnetic radiation, photoelectric effect, early classification, electron affinity, ionic solids, solid properties).
+  it('serves the concepts that have a faithful figure (nothing rejected:chemistry-validation-failed)', () => {
     const rejected = decisions.filter((x) => String(x.d.reason ?? '').includes('chemistry-validation-failed')).map((x) => x.id)
     expect(rejected).toEqual([])
-    expect(decisions.filter((x) => x.d.graphical).length).toBe(45)
+    expect(decisions.filter((x) => x.d.graphical).length).toBe(47)
   })
 
   it('every served chemistry scene audits without a single FAIL finding', () => {

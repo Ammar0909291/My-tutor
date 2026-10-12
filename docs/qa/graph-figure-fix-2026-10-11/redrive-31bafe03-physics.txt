@@ -1,0 +1,159 @@
+
+=== order 63 phys.mech.stress-strain ===
+[open provider=groq fig=none flags=-]
+**Lesson: Stress, Strain, and Elastic Moduli**  
+
+In this lesson we’ll explore how forces change the shape of materials. By the end, you’ll be able to describe what stress and strain are, tell how they are measured, and understand why their ratio—called the elastic modulus—is useful for comparing how “stiff” different materials are.  
+
+Imagine a simple rubber band you keep on your desk. When you pull it gently, it stretches a little and feels soft. If you pull harder, it stretches more and you feel a stronger pull. This everyday object shows us two important ideas: the force you apply (the pull) and how much the band changes its length.  
+
+Now picture using that rubber band to hold a few pencils together. The band is stretched between the pencils, and the force you apply is spread over the thin cross‑section of the band. The way the band resists the pull is what we call **stress**—the force applied per unit area of the material.  
+
+At the same time, the rubber band gets longer. The amount it lengthens compared to its original length is called **strain**—a dimension‑less measure of how much the material deforms.  
+
+So, in plain words:  
+* **Stress** tells us how much “push” or “pull” is acting on each tiny piece of a material.  
+* **Strain** tells us how much that material’s shape changes relative to its original shape.  
+
+These two ideas lead to the **elastic modulus** (or Young’s modulus), which is simply the ratio of stress to strain for a material that returns to its original shape after the force is removed.  
+
+🔎 **Question:** When you stretch the rubber band, what do you notice about how the pull feels as you stretch it more? (Just describe what you observe.)
+[learner] What is this picture showing?
+[tutor provider=groq fig=title=Stress and strain card=none flags=-]
+The figure is a stress‑strain graph for a metal. 
+- The label **“stress F/A”** at the top left tells you that the vertical axis represents the force applied divided by the cross‑sectional area of the material (tensile stress). 
+- The label **“strain ΔL/L”** at the bottom right shows that the horizontal axis is the fractional change in length (change in length divided by original length). 
+- The blue straight line on the left has the note **“slope = E”**; its slope is the Young’s modulus E, the material’s intrinsic stiffness (stress divided by strain). 
+- The purple point marked **“elastic limit”** indicates the highest stress at which the material still returns to its original shape when the load is removed. 
+- Above that, the red curved part labeled **“plastic”** shows the region where deformation becomes permanent. 
+- Finally, the green point labeled **“breaks”** marks where the material fractures. 
+- The grey arrows simply point to the axes and the key regions.
+
+Looking at this picture, what do you notice about how the line changes from the straight (elastic) part to the curved (plastic) part?
+[learner] quiz me
+[tutor provider=groq fig=none card="A spring with k = 500 N/m is stretched 4 cm. What is the restoring force?" ["F = k/x = 500/0.04 = 12,500 N","F = kx = 500×0.04 = 20 N"] corpus=authoredSeedAssets.ts flags=twoOption]
+Here's a question — take your time with it.
+[learner] F = k/x = 500/0.04 = 12,500 N
+[tutor provider=groq fig=none card="A wire stretches by 1.0 mm as the load on it rises steadily from zero to 100 N (within the elastic limit). How much elastic energy does it s" ["0.05 J","100 J","50 J","0.1 J"] corpus=authoredSeedAssets.ts flags=-]
+Not quite — the answer is: F = kx = 500×0.04 = 20 N
+
+You used the wrong formula. The restoring force is calculated by multiplying the spring constant by the displacement, not dividing. Using k/x gives an unrealistically large force.
+
+Hooke's law states that F = k x, where k is in newtons per meter and x in meters. Multiplying gives the correct magnitude and proper units of newtons.
+
+Quick check. Think it through before you choose.
+[learner] ok
+[tutor provider=groq fig=none card="A wire stretches by 1.0 mm as the load on it rises steadily from zero to 100 N (within the elastic limit). How much elastic energy does it s" ["0.05 J","100 J","50 J","0.1 J"] corpus=authoredSeedAssets.ts flags=-]
+Let me check your thinking with this.
+[learner] give me example
+[tutor provider=groq fig=none card=none flags=-]
+Let me put it in the simplest words I have.
+
+Stress is force per unit area, and strain is fractional deformation. Their ratio defines the elastic modulus of a material.
+
+Tell me which part of that is the fuzzy one, and I will go slower there.
+[learner] i dont understand this picture. what is it showing?
+[tutor provider=groq fig=none card=none flags=-]
+The picture for this lesson is further up in our chat. It is titled “Stress and strain — Show a stress–strain graph for a metal: a straight elastic region whose slope is Young's modulus E = stress/strain, an elastic limit, then plastic deformation”. The words written on it are: “strain ΔL/L”, “stress F/A”, “slope = E”, “elastic limit”, “plastic”, “breaks”, “Stress is force per area (F/A); strain is the fractional stretch (ΔL/L). Pull a metal wire and plot one against the othe”, “At first stress is proportional to strain and the wire springs back when released. The slope is Young's modulus, E = str”, “Beyond the elastic limit the wire deforms permanently (plastic region), until it breaks.”, “drawn: arrow, axes, curve, horizontal axis, horizontal line, line, marked point, plotted curve, straight line, vertical”. Tell me which of those parts is confusing and I will explain it.
+
+That slope is the Young’s modulus E, which is the ratio of stress to strain in the linear (elastic) region. 
+- The **purple point** marks the “elastic limit”. Up to this point the material returns to its original shape when the load is removed. 
+- Beyond that, the curve turns **red** and is labeled “plastic”. In this region the deformation is permanent. 
+- Finally, the **green point** at the far right says “breaks”. That is where the material fails and can no longer bear load.
+
+Overall, the graph tells us how a material’s stress increases with strain, where it behaves elastically, where it yields plastically, and where it ultimately breaks.
+[learner] ask me a question
+[tutor provider=groq fig=none card="A short, thick steel rod and a long, thin steel wire have very different spring constants k. Do they also have different Young’s moduli E?" ["Yes","No"] corpus=authoredSeedAssets.ts flags=twoOption]
+Let's check this one before we go further.
+[learner] No
+[tutor provider=groq fig=title=Stress and strain card=none flags=-]
+That's right.
+
+Young's modulus is a property of the material, not its shape. Both the rod and the wire are made of steel, so they have the same E. The difference in spring constant comes from their geometry.
+
+Remember that the spring constant k equals (E·A)/L. Changing the cross‑sectional area A or the length L changes k, but E stays the same for a given material.
+[learner] test my understanding
+[tutor provider=memory fig=none card="A steel wire of length 2.0 m and cross-section 1.0 × 10⁻⁶ m² carries a load of 100 N. Steel has a Young modulus of 200 GPa. By how much does" ["1.0 m","0.5 mm","2.0 mm","1.0 mm"] corpus=physicsDepthSeedAssets.ts flags=-]
+A 1000 N force applied to a steel bar with a 0.01 m² cross-section produces stress σ = 1000/0.01 = 100 000 Pa. Apply that exact same 1000 N to a much thinner bar, cross-section only 0.001 m², and the stress jumps to 1 000 000 Pa — ten times higher, purely because the force is now concentrated over ten times less area, even though the force itself never changed. Stress is force PER unit area, σ = F/A, never force alone — exactly why a pin held with the same push as a fingertip hurts far more: the same force squeezed through the pin's tiny area produces enormous stress, while spread across your palm it produces almost none. A material fails when its stress exceeds its ultimate tensile strength, a property measured in pascals, never in newtons alone.
+[learner] quiz me
+[tutor provider=groq fig=none card="A steel wire of length 2.0 m and cross-section 1.0 × 10⁻⁶ m² carries a load of 100 N. Steel has a Young modulus of 200 GPa. By how much does" ["1.0 m","0.5 mm","2.0 mm","1.0 mm"] corpus=physicsDepthSeedAssets.ts flags=-]
+This is the question you have not answered yet — choose an answer below and I will mark it.
+
+Remember, Young’s modulus E describes how a *material* itself resists deformation; it depends only on the type of material, not on the piece’s length or cross‑section. By contrast, the spring constant k does depend on geometry ( k = EA⁄L ), so changing the size changes k while E stays unchanged.
+[learner] 1.0 m
+[tutor provider=groq fig=none card="The same 1000 N force is applied to two bars of different cross-sectional area: Bar A (0.01 m²) and Bar B (0.001 m², ten times smaller). Do " ["No","Yes"] corpus=authoredSeedAssets.ts flags=twoOption]
+Not quite — the answer is: 1.0 mm
+
+You assumed the wire stretches by a metre, but the extension is far smaller. The calculation must use ΔL = FL/(AE). Using the given values gives a result in millimetres, not metres.
+
+Compute ΔL = (100 N)(2.0 m) / [(200 × 10⁹ Pa)(1.0 × 10⁻⁶ m²)] = 1.0 × 10⁻³ m, which is 1.0 mm. The large Young’s modulus and small load keep the stretch tiny.
+
+One to try. There's no rush.
+[learner] show me a diagram
+[tutor provider=groq fig=title=Stress and strain card="The same 1000 N force is applied to two bars of different cross-sectional area: Bar A (0.01 m²) and Bar B (0.001 m², ten times smaller). Do " ["No","Yes"] corpus=authoredSeedAssets.ts flags=twoOption]
+Here’s the diagram that’s already on your screen. Let’s walk through it together:
+
+- At the top left you see the label **“stress F/A”** in blue. This reminds us that stress is the pulling force divided by the cross‑sectional area of the material. - At the bottom right the label **“strain ΔL/L”** appears in purple. Strain is the change in length divided by the original length – a pure number that tells us how much the material has stretched relative to its size. - A straight line starts from the origin and extends upward; the blue text **“slope = E”** sits next to it. The slope of this line is the Young’s modulus E, which is the ratio of stress to strain for the material while it behaves elastically. - Moving along the line, a purple point marks the **“elastic limit”**. Up to this point, if you release the load the material returns to its original shape. - Beyond that point the curve turns red and is labelled **“plastic”**. In this region the material deforms permanently. - Finally, at the far right a green point labeled **“breaks”** shows where the material fails and snaps.
+
+Now, you earlier answered **1.0 m** to a question I asked.
+[learner] i dont understand this picture. what is it showing?
+[tutor provider=groq fig=none card=none flags=-]
+The picture for this lesson is further up in our chat. It is titled “Stress and strain — Show a stress–strain graph for a metal: a straight elastic region whose slope is Young's modulus E = stress/strain, an elastic limit, then plastic deformation”. The words written on it are: “strain ΔL/L”, “stress F/A”, “slope = E”, “elastic limit”, “plastic”, “breaks”, “Stress is force per area (F/A); strain is the fractional stretch (ΔL/L). Pull a metal wire and plot one against the othe”, “At first stress is proportional to strain and the wire springs back when released. The slope is Young's modulus, E = str”, “Beyond the elastic limit the wire deforms permanently (plastic region), until it breaks.”, “drawn: arrow, axes, curve, horizontal axis, horizontal line, line, marked point, plotted curve, straight line, vertical”. Tell me which of those parts is confusing and I will explain it.
+
+The picture is a stress‑strain graph for a metal.
+
+ 
+- **“strain ΔL/L”** (bottom right) – the horizontal axis shows tensile strain, the fractional change in length (extension ΔL over original length L). 
+- The straight line at the start of the curve is coloured **blue** and labeled **“slope = E”** – its slope is Young’s modulus E, the ratio of stress to strain in the elastic region. 
+- The point where the line bends is marked in **purple** as **“elastic limit”** – up to this point the material returns to its original shape when the load is removed. 
+- Beyond that point the curve turns into a **red** region labelled **“plastic”** – here the material deforms permanently even if the load is released. 
+- At the far right the curve ends at a **green** point labelled **“breaks”** – this is where the material finally fractures.
+
+Overall, the diagram shows how a metal’s stress increases with strain, how the initial linear portion defines the material’s stiffness (Young’s modulus), and how the behavior changes once the elastic limit is exceeded, leading to plastic deformation and eventual breakage.
+[learner] explain simpler
+[tutor provider=memory fig=none card=none flags=-]
+A thin steel wire stretches easily; a thick steel bar barely moves. Both are steel, and steel has not changed. What differs is the shape. To talk about the material rather than the object, you compare the force spread over the area it acts on with the fraction of its length the thing stretched. Do that and the wire and the bar give the same number — because that number belongs to steel, not to either object. It is what lets an engineer choose a material before deciding what shape to make it.
+
+A thin steel wire and a thick steel bar. Same material stiffness number?
+[learner] give me a quiz
+[tutor provider=groq fig=title=Stress and strain card="A wire of cross-sectional area 2.0 × 10⁻⁶ m² is pulled by a tensile force of 60 N. What is the tensile stress in the wire?" ["1.2 × 10⁻⁴ Pa","3.3 × 10⁻⁸ Pa","3.0 × 10⁷ Pa (30 MPa)","60 Pa"] corpus=physicsDepthSeedAssets.ts flags=-]
+Alright, let’s see how well you’ve grasped what the stress‑strain graph is showing. Let's check this one before we go further.
+[learner] 1.2 × 10⁻⁴ Pa
+[tutor provider=groq fig=none card=none flags=-]
+Not quite — the answer is: 3.0 × 10⁷ Pa (30 MPa)
+
+You multiplied the force by the area, but tensile stress is calculated by dividing the force by the cross‑sectional area. The units also do not match a realistic stress value for a metal wire.
+
+Stress = force ÷ area. Using the given numbers, 60 N ÷ 2.0×10⁻⁶ m² equals 3.0×10⁷ Pa, which is 30 MPa. This shows how a relatively small force can produce a large stress when the area is very small.
+[learner] quiz me
+[tutor provider=groq fig=none card=none flags=quizNoCard]
+You have answered every new practice question I have on Stress, Strain, and Elastic Moduli in this lesson. A question you have already seen comes back once more after a little more teaching. Say "next" to move on, or tell me which part you want to go over.
+
+Let’s see how the ideas on the screen work with a simple, concrete case. 
+
+Imagine a steel wire that is 1 metre long and has a cross‑sectional area of 2 × 10⁻⁶ square metres. If we pull on it with a force of 200 newtons, the **stress** on the wire is the force divided by the area:
+
+\[
+\sigma = \frac{F}{A} = \frac{200\ \text{N}}{2\times10^{-6}\ \text{m}^2}=1.0\times10^{8}\ \text{Pa}
+\]
+
+Now suppose the wire stretches by 0.5 millimetres (that’s ΔL = 5 × 10⁻⁴ m). The **strain** is the change in length divided by the original length:
+
+\[
+\varepsilon = \frac{\Delta L}{L} = \frac{5\times10^{-4}\ \text{m}}{1\ \text{m}} = 5\times10^{-4}
+\]
+
+The ratio of stress to strain gives the **Young’s modulus** of the material:
+
+\[
+E = \frac{\sigma}{\varepsilon}= \frac{1.0\times10^{8}\ \text{Pa}}{5\times10^{-4}} = 2.0\times10^{11}\ \text{Pa}
+\]
+
+You can see that the same material (steel) always yields the same \(E\) no matter how long or thick the piece is; only the geometry changes the stress and strain values. 
+
+Now that we’ve watched the numbers play out, we can move on to a short quiz question to check your understanding.
+[learner] quiz me
+[tutor provider=groq fig=none card="A spring with k = 500 N/m is stretched 4 cm. What is the restoring force?" ["F = kx = 500×0.04 = 20 N","F = k/x = 500/0.04 = 12,500 N"] corpus=authoredSeedAssets.ts flags=twoOption,repeatAnswered]
+You have seen this question before in this lesson — here it is once more.
+
+Sure, here’s a quick check on what we just covered.

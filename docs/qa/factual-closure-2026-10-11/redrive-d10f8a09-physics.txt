@@ -1,0 +1,134 @@
+
+=== order 1 phys.meas.units ===
+[open provider=groq fig=none flags=-]
+**Lesson: SI Units and Measurement**
+
+In this lesson we’ll explore the International System of Units (SI) and learn how the seven base units let us describe any physical quantity. By the end, you’ll be able to name each base unit, know what it measures, and use the correct symbols when solving problems.
+
+Imagine you have a kitchen ruler that you use every day to cut bread or measure a piece of fabric. In the grocery store you see “1 kg of apples” or “2 L of milk” – these everyday items are expressed with SI units.
+
+Think of the ruler as a “standard length” that everyone agrees on. In plain words, the SI defines a **metre (m)** as the distance light travels in a vacuum in 1⁄299 792 458 of a second. This is the first of the seven base units, and it measures **length**.
+
+🟢 **What is the everyday object we just talked about that helps us measure length?**
+[learner] What is this picture showing?
+[tutor provider=groq fig=title=The seven SI base units card=none flags=-]
+The diagram has a green circle in the centre labelled “SI”. Around it are seven coloured labels that name the basic quantities and their symbols: at the top (red) “length: m”, top‑left (red) “luminous intensity: cd”, top‑right (blue) “mass: kg”, right side (red) “time: s”, bottom‑right (blue) “current: A”, bottom‑left (red) “temperature: K”, and left side (blue) “amount: mol”. Below the circle, also in green, is the relation “1 N = 1 kg·m/s²”, showing how another unit is built from the basic ones.
+
+Taken together, the picture tells us that these seven symbols are the reference units for all physical measure and that any other unit can be expressed by combining them. 
+What do you notice about where the label “m” appears in the diagram?
+[learner] quiz me
+[tutor provider=groq fig=none card="Which of these is the SI base unit for temperature?" ["degree Celsius (°C)","kelvin (K)","degree Fahrenheit (°F)"] corpus=authoredSeedAssets.ts flags=-]
+One to try. There's no rush.
+[learner] degree Celsius (°C)
+[tutor provider=groq fig=none card=none flags=-]
+Not quite — the answer is: kelvin (K)
+
+Celsius is a derived unit, not an SI base unit. The SI base unit for temperature is the kelvin.
+
+The kelvin is defined by absolute zero and the triple point of water, providing an absolute scale. Unlike Celsius, it does not depend on any reference point other than these physical constants, making it the fundamental unit for temperature in the SI system.
+[learner] ok
+[tutor provider=groq fig=none card=none flags=-]
+Imagine ordering a table "four hands wide" from a carpenter with bigger hands than yours. You'd get the wrong table — not because anyone measured badly, but because you weren't using the same ruler. That's the whole reason SI units exist: the world agreed on ONE ruler for each kind of quantity, so a metre in Tokyo is exactly a metre in Delhi. There are only seven of these agreed base units — metre for length, kilogram for mass, second for time, ampere for current, kelvin for temperature, mole for amount of substance, candela for light intensity. Every other unit you will ever meet is built out of these seven, the way every word is built from letters.
+[learner] give me example
+[tutor provider=groq fig=none card=none flags=-]
+Let’s see how the base units combine in a real calculation. 
+Suppose we want the **force** needed to give a 5 kilogram mass an **acceleration** of 2 metres per second squared. Using the relationship shown in the figure, “1 newton equals 1 kilogram metre per second squared,” we write
+
+\(F = 5 kg \times 2 m/s² = 10 kg·m/s²\).
+
+Because 1 newton = 1 kg·m/s², the result is **10 newtons**. You can see the units cancel just like numbers, leaving the final unit of force.
+[learner] i dont understand this picture. what is it showing?
+[tutor provider=groq fig=none card=none flags=-]
+I hear you — let’s walk through the picture together, step by step.
+
+In the centre the green label **“SI”** reminds us we are looking at the International System of Units. Around it are the seven base quantities and their units:
+
+- **Length: m** (top, red) – the metre is the unit for measuring distance. 
+- **Mass: kg** (top right, blue) – the kilogram is the unit for how much matter an object has. 
+- **Time: s** (right, red) – the second measures duration. 
+- **Current: A** (bottom right, blue) – the ampere is the unit for electric current. 
+- **Temperature: K** (bottom left, red) – the kelvin measures thermodynamic temperature. 
+- **Amount: mol** (left, blue) – the mole counts how many particles are present. 
+- **Luminous intensity: cd** (top left, red) – the candela measures the brightness of light.
+
+Below the circle, in green, you see **“1 N = 1 kg·m/s²”** – this shows how a derived unit (the newton, a unit of force) is built from the base units.
+
+Overall, the diagram tells us that all physical quantities can be expressed using these seven fundamental units; any other unit is just a combination of them.
+[learner] ask me a question
+[tutor provider=groq fig=none card="Which of these is not one of the seven SI base units?" ["The second","The ampere","The newton","The kilogram"] corpus=physicsDepthSeedAssets.ts flags=-]
+Quick check. Think it through before you choose.
+[learner] The kilogram
+[tutor provider=groq fig=title=The seven SI base units card=none flags=-]
+Not quite — the answer is: The newton — it is derived, standing for kg·m·s⁻²
+
+The kilogram is a base unit of mass, so it belongs to the seven SI base units. The newton, however, is a derived unit defined as kg·m·s⁻².
+
+Remember that any unit expressed as a combination of base units is a derived unit. For example, force is measured in newtons, which are built from the base units kilogram, meter, and second.
+[learner] test my understanding
+[tutor provider=groq fig=none card="Why is kelvin, rather than degrees Celsius, the SI base unit of temperature?" ["It is simply the older of the two scales","Its zero is absolute","Because its degrees are finer, giving mo"] corpus=physicsBandGapAssets.ts flags=-]
+One to try. There's no rush.
+[learner] quiz me
+[tutor provider=groq fig=none card="Why is kelvin, rather than degrees Celsius, the SI base unit of temperature?" ["It is simply the older of the two scales","Its zero is absolute","Because its degrees are finer, giving mo"] corpus=physicsBandGapAssets.ts flags=-]
+This is the question you have not answered yet — choose an answer below and I will mark it.
+
+Let me check your thinking with this.
+[learner] It is simply the older of the two scales, so it was adopted first
+[tutor provider=groq fig=none card=none flags=-]
+Not quite — the answer is: Its zero is absolute — the point where thermal motion stops — so ratios and products behave correctly in equations
+
+The answer assumes the older scale was chosen, but the SI unit is based on an absolute zero point, not on historical age.
+
+Kelvin is defined so that 0 K corresponds to the absence of thermal motion. This absolute reference lets scientists use temperature ratios and combine temperatures with other physical quantities without offset errors.
+[learner] show me a diagram
+[tutor provider=groq fig=title=The seven SI base units card=none flags=-]
+Take a look at the picture beside this message. In the centre you see the word **SI** in green. Around it are seven labels, each in a different colour:
+
+- At the top (red) is **length: m** – the metre.  
+- On the right (red) is **time: s** – the second.  
+- At the bottom‑right (blue) is **current: A** – the ampere.  
+- At the bottom (green) is **mass: kg** – the kilogram.  
+- At the bottom‑left (red) is **temperature: K** – the kelvin.  
+- On the left (blue) is **amount: mol** – the mole.  
+- At the top‑left (red) is **luminous intensity: cd** – the candela.
+
+Below the circle, also in green, you can read the relationship **1 N = 1 kg·m/s²**, showing how a newton (a unit of force) is built from the three base units kilogram, metre and second.
+
+The unit shown at the top of the diagram is **metre (m)**.
+[learner] i dont understand this picture. what is it showing?
+[tutor provider=groq fig=none card=none flags=-]
+I hear you’re feeling stuck—let’s walk through the picture together, step by step.
+
+In the centre you see the word **“SI.”** Around it are the seven base quantities and their units:
+
+- At the **top**: **length: m** – the metre for measuring distance.
+- At the **top right**: **mass: kg** – the kilogram for measuring mass.
+- At the **right**: **time: s** – the second for measuring duration.
+- At the **bottom right**: **current: A** – the ampere for measuring electric current.
+- At the **bottom left**: **temperature: K** – the kelvin for measuring thermodynamic temperature.
+- At the **left**: **amount: mol** – the mole for measuring the amount of substance.
+- At the **top left**: **luminous intensity: cd** – the candela for measuring light intensity.
+
+Below these labels, in the **bottom** part of the figure, you see **“1 N = 1 kg·m/s².”** This shows how a derived unit (the newton, a unit of force) is built from the base units kilogram, metre, and second.
+
+So the whole picture is telling us that the International System of Units is built on these seven fundamental units, and every other unit can be expressed as a combination of them.
+[learner] explain simpler
+[tutor provider=memory fig=none card=none flags=-]
+A table described as just "two" long tells nobody anything. Two metres is a table; two centimetres is a toy. The number alone carries no information — it only means something once the size being counted is named. That is what a unit is: an agreed size that everyone measures against. Scientists agree on a small set of these so that a result measured in one place means the same in another. Without the unit, the number stops being a measurement.
+[learner] give me a quiz
+[tutor provider=groq fig=title=The seven SI base units card="Is the SI base unit for temperature the degree Celsius (°C) or the kelvin (K)?" ["Degree Celsius (°C)","Kelvin (K)"] corpus=authoredSeedAssets.ts flags=twoOption]
+Let's check this one before we go further.
+[learner] Degree Celsius (°C)
+[tutor provider=groq fig=none card=none flags=-]
+Not quite — the answer is: Kelvin (K)
+
+The SI base unit for temperature is the kelvin, not the degree Celsius. Celsius is a derived unit that is defined as a shift from the kelvin scale.
+
+Kelvin is the absolute temperature scale used in the SI system. It starts at absolute zero and each kelvin equals one degree Celsius in size. Because it has no offset, kelvin is used for scientific calculations, while Celsius is convenient for everyday use.
+[learner] quiz me
+[tutor provider=groq fig=none card="Sort test: which one of these is an SI base unit?" ["gram (g)","litre (L)","hour (h)","second (s)"] corpus=authoredSeedAssets.ts flags=-]
+Quick check. Think it through before you choose.
+[learner] quiz me
+[tutor provider=groq fig=none card="Sort test: which one of these is an SI base unit?" ["gram (g)","litre (L)","hour (h)","second (s)"] corpus=authoredSeedAssets.ts flags=-]
+This is the question you have not answered yet — choose an answer below and I will mark it.
+
+Let me check your thinking with this.

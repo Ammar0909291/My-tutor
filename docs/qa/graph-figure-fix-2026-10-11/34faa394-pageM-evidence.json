@@ -1,0 +1,46 @@
+{
+  "base": "https://my-tutor-flame.vercel.app",
+  "subject": "mathematics",
+  "slug": "math.arith.square-roots",
+  "rows": [
+    {
+      "turn": 1,
+      "said": "show me a graph",
+      "shot": "01.png",
+      "provider": "groq",
+      "reply": "The graph shows the curve \\(y = \\sqrt{x}\\); it begins at the origin (0, 0) and rises, becoming steeper as \\(x\\) gets larger. What do you notice about how the \\(y\\)-values change as \\(x\\) increases?",
+      "replyRendered": false,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": true
+    },
+    {
+      "turn": 2,
+      "said": "i dont understand this picture. what is it showing?",
+      "shot": "02.png",
+      "provider": "groq",
+      "reply": "The picture for this lesson is further up in our chat. It is titled “Square root function”. The words written on it are: “x^0.5”, “Square root function”, “x (unitless)”, “√x (unitless)”. Tell me which of those parts is confusing and I will explain it.\n\nI hear you — let’s look at the picture together.\n\nThe graph is a plot of the equation \\(y = \\sqrt{x}\\). \n \n- The vertical axis is labeled \\(y\\); it shows the resulting square‑root value. \n- The curved line starts at the origin (0, 0) and moves upward to the right. Because we are taking a square root, only non‑negative \\(x\\) values appear, and for each \\(x\\) there is exactly one point on the curve—one output \\(y\\). \n\nIn other words, the picture shows a **function**: a rule that assigns each input \\(x\\) a single output \\(y\\) (here, the square root of \\(x\\)). As \\(x\\) gets larger, \\(y\\) also gets larger, but the increase slows down, so the curve flattens.\n\nWhat do you notice about how the curve bends compared to a straight line?",
+      "replyRendered": true,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": false
+    },
+    {
+      "turn": 3,
+      "said": "what do the axes and the curve mean?",
+      "shot": "03.png",
+      "provider": "groq",
+      "reply": "The horizontal x‑axis represents the number you put under the square‑root sign (the “radicand”). \nThe vertical y‑axis shows the result of taking the square root of that number. \nThe curve itself is the set of all points \\((x, y)\\) where \\(y = \\sqrt{x}\\); in other words, for each \\(x\\) on the bottom, the height of the curve tells you the square‑root value.",
+      "replyRendered": true,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": false
+    }
+  ]
+}

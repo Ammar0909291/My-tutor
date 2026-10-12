@@ -113,6 +113,34 @@ export function certifies(g: ServerGrade | null): boolean {
   return g?.kind === 'graded' && g.keyProvenance === 'authored'
 }
 
+/**
+ * OWNER DECISION (2026-10-07, CHEM-004 / BIO-019): a 2-option card (yes/no,
+ * true/false) can be passed by guessing half the time, so it is PRACTICE ONLY —
+ * its correct answer moves the lesson on (the plain counters) but never banks a
+ * VERIFIED mastery credit. Verified mastery needs an authored card with three
+ * or more options. `optionCount` null (unknown) keeps the old rule.
+ */
+export const MIN_OPTIONS_FOR_VERIFIED_MASTERY = 3
+/** Verified credits a concept needs (VERIFIED_CHECK_BAR 1 + VERIFIED_PRACTICE_BAR 2). */
+export const VERIFIED_CREDITS_NEEDED = 3
+/**
+ * Applied WHERE REACHABLE (owner, 2026-10-07): only when the concept holds at
+ * least VERIFIED_CREDITS_NEEDED authored cards with 3+ options. Measured
+ * 2026-10-07: every Biology, English and CS concept and 166 Physics / 152
+ * Chemistry / 22 Mathematics concepts hold fewer, so there a 2-option card
+ * still counts — otherwise verified mastery would be unreachable.
+ * `threePlusOptionPool` null (unknown) keeps the old rule.
+ */
+export function certifiesMastery(
+  g: ServerGrade | null,
+  optionCount: number | null | undefined,
+  threePlusOptionPool: number | null | undefined = null,
+): boolean {
+  if (!certifies(g)) return false
+  if (typeof optionCount !== 'number' || optionCount >= MIN_OPTIONS_FOR_VERIFIED_MASTERY) return true
+  return !(typeof threePlusOptionPool === 'number' && threePlusOptionPool >= VERIFIED_CREDITS_NEEDED)
+}
+
 /** True iff a consumer may state a verdict to the learner with full confidence. */
 export function mayStateVerdict(g: ServerGrade | null): boolean {
   return certifies(g)

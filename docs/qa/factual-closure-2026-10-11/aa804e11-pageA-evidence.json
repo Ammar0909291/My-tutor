@@ -1,0 +1,59 @@
+{
+  "base": "https://my-tutor-flame.vercel.app",
+  "subject": "biology",
+  "slug": "bio.behav.innate-behavior-instinct",
+  "rows": [
+    {
+      "turn": 1,
+      "said": "give me example",
+      "shot": "01.png",
+      "provider": "groq",
+      "reply": "I will keep to the examples in your lesson materials, so every detail here is one you can rely on:\n\nFixed action patterns (FAPs) are stereotyped (performed the same way across individuals of a species) and largely unmodifiable behavioural sequences — once triggered, a FAP typically runs to completion in its characteristic form, largely independent of ongoing feedback. Critically, a FAP is NOT spontaneous: it requires a specific sign stimulus (a specific, often simple environmental cue) to release it — the sequence is performed only when that specific trigger is present. Innate behaviour must be further distinguished from simple reflexes: a reflex is a direct, typically single-muscle-group stimulus-response (like the knee-jerk reflex) — simple, immediate, minimal neural processing. A fixed action pattern is substantially more complex, coordinated, and multi-step (like an elaborate courtship display or nest-building sequence) — many more coordinated movements over an extended time, though still triggered by a specific sign stimulus and still largely stereotyped once initiated. Innate behaviour also has a genetic basis: it is a heritable trait shaped by natural selection over evolutionary time, exactly as physical structures are — a FAP that reliably improves survival or reproduction can be favoured by selection and become a stable, species-typical trait.",
+      "replyRendered": true,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": true
+    },
+    {
+      "turn": 2,
+      "said": "give me another example",
+      "shot": "02.png",
+      "provider": "groq",
+      "reply": "I will keep to the examples in your lesson materials, so every detail here is one you can rely on:\n\nTwo mistakes are common here. First, students often picture a fixed action pattern as happening spontaneously, out of nowhere — but a FAP always requires a specific sign stimulus to release it; without that trigger present, the behaviour does not occur. Second, students often lump reflexes and fixed action patterns together as \"the same kind of automatic behaviour\" — but a reflex is a simple, single, direct response (like a knee-jerk), while a fixed action pattern is a much more complex, coordinated, multi-step sequence (like a full courtship display). Both are innate and largely unmodifiable, but they sit at genuinely different levels of behavioural complexity — checking the specific trigger and the specific complexity level distinguishes them correctly.",
+      "replyRendered": true,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": false
+    },
+    {
+      "turn": 3,
+      "said": "give me another example",
+      "shot": "03.png",
+      "provider": "groq",
+      "reply": "Your lesson materials have no other example than the ones you have already seen, so here is one of them again:\n\nFixed action patterns (FAPs) are stereotyped (performed the same way across individuals of a species) and largely unmodifiable behavioural sequences — once triggered, a FAP typically runs to completion in its characteristic form, largely independent of ongoing feedback. Critically, a FAP is NOT spontaneous: it requires a specific sign stimulus (a specific, often simple environmental cue) to release it — the sequence is performed only when that specific trigger is present. Innate behaviour must be further distinguished from simple reflexes: a reflex is a direct, typically single-muscle-group stimulus-response (like the knee-jerk reflex) — simple, immediate, minimal neural processing. A fixed action pattern is substantially more complex, coordinated, and multi-step (like an elaborate courtship display or nest-building sequence) — many more coordinated movements over an extended time, though still triggered by a specific sign stimulus and still largely stereotyped once initiated. Innate behaviour also has a genetic basis: it is a heritable trait shaped by natural selection over evolutionary time, exactly as physical structures are — a FAP that reliably improves survival or reproduction can be favoured by selection and become a stable, species-typical trait.",
+      "replyRendered": true,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": false
+    },
+    {
+      "turn": 4,
+      "said": "explain simpler",
+      "shot": "04.png",
+      "provider": "groq",
+      "reply": "Think of a kitchen timer that you set when you want to bake a cake.\n\n1️⃣ **The timer’s “ding” is the sign stimulus** – a specific cue that tells the kitchen “it’s time to start baking.” \n2️⃣ **The whole baking routine (mixing, pouring, heating, cooling) is a fixed action pattern** – once the timer dings, the steps run in order without you having to think about each one, and you can’t easily stop them mid‑way.\n\nIn contrast, a simple reflex is like touching a hot pan: the pain signal makes you pull your hand away immediately, without a long sequence of steps.\n\nSo, an innate behaviour is a built‑in program that animals carry in their genes. When the right sign stimulus appears (like a particular sound, smell, or visual cue), the animal automatically performs the whole fixed action pattern, just as the timer triggers the whole baking process.",
+      "replyRendered": true,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": false
+    }
+  ]
+}

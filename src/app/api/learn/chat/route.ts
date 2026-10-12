@@ -2396,6 +2396,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           return phase === 'CHECK' || phase === 'PRACTICE'
         })()
         systemPrompt += buildMcqInstruction({ atMasteryGate: gatePhaseNow })
+        // Owner decision 2026-10-07: worked examples are computed and checked (factCheckPass.ts).
+        systemPrompt += (await import('@/lib/teaching/factCheckPass')).WORKED_EXAMPLE_RULES
+        // CHEM-042 / CHEM-073: the lesson's syllabus line, taught part by part.
+        try {
+          const { getKGNode: kgScope } = await import('@/lib/curriculum/knowledgeGraph')
+          const nodeScope = resolvedConceptId ? kgScope(resolvedConceptId) : null
+          systemPrompt += (await import('@/lib/teaching/lessonDriftGuard')).lessonScopeRule(nodeScope?.title, nodeScope?.description)
+        } catch { /* the prompt is complete without it */ }
 
         // Prose-MCQ guard (defect observed live, 2026-08-16). When the tutor's
         // previous turn asked a multiple-choice question in prose WITHOUT the
@@ -4758,6 +4766,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // authored probes exist but are all spent this lesson. See
       // inventedProbeGuard.ts's `authoredPoolExhausted`.
       let authoredPoolExhaustedHoisted = false
+      // Issue B follow-up (2026-10-10): the card served this turn is a re-ask
+      // of a question already seen, and whether one is still waiting for its
+      // re-ask (quizRequest.ts — wording only, allocation unchanged).
+      let reaskServedQuestionHoisted: string | null = null
+      let reaskWaitingHoisted = false
       let gateDeclinedByPolicyHoisted = false
       // R1 — THE TOPIC-PROGRESS EVIDENCE WRITE MUST FINISH BEFORE THE RESPONSE.
       //
@@ -5074,7 +5087,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           (phaseBeforeTurn === 'GUIDE' && evidenceMoveHoisted === 'ask') ||
           (phaseBeforeTurn === 'DEMONSTRATE') ||
           (phaseBeforeTurn === 'OBSERVE' && evidenceMoveHoisted === 'ask') ||
-          transferNeedsVerifiedCredit
+          transferNeedsVerifiedCredit ||
+          // Issue B (2026-10-10): an explicit "quiz me" is answered with an
+          // authored card in any phase. Credit is unchanged — whether the
+          // answer counts is still `isProbeAttachablePhase` (probeWouldCount…).
+          turnIntent.wantsPractice
         phaseAllowsProbeHoisted = phaseAllowsProbe
         // R82: the mirror image of the OBSERVE disjunct just above. R81
         // measured 79/238 concepts failing certification because OBSERVE's
@@ -5187,7 +5204,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           probeAttachablePhase:
             isProbeAttachablePhase(phaseBeforeTurn) || phaseBeforeTurn === 'DEMONSTRATE' ||
             (phaseBeforeTurn === 'OBSERVE' && evidenceMoveHoisted === 'ask') ||
-            transferNeedsVerifiedCredit,
+            transferNeedsVerifiedCredit || turnIntent.wantsPractice,
           hasMemoryState: memoryState !== null,
           noUnansweredProbeOnScreen: !unansweredProbeOnScreen,
           // A learner's own "quiz me" is honoured in lesson one too — see the
@@ -5282,6 +5299,11 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             ? recordMcqAskedForGate(history, pendingMcqHoisted.question)
             : history
           const probe = await findBestProbe(memoryState, {
+            // CHEM-005: prefer a card about what this lesson has already taught.
+            taughtText: learnSession.messages
+              .filter((m) => m.role === MessageRole.ASSISTANT && typeof m.content === 'string'
+                && (m as { lessonKey?: string | null }).lessonKey === lessonKeyThisTurnHoisted)
+              .map((m) => m.content as string).join('\n'),
             // Never re-ask a question this concept has already spent. 145 of
             // physics's 238 concepts carry only two gradeable authored probes
             // while closing a concept needs three graded answers, so running
@@ -5350,9 +5372,26 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // pool on every call, so two early spends across OBSERVE and
           // DEMONSTRATE in one session can never both fire when doing so
           // would leave fewer than CREDITS_REQUIRED_FOR_MASTERY.
-          const belowGuideBlocked =
+          const reservationBlocks =
             (phaseBeforeTurn === 'DEMONSTRATE' || phaseBeforeTurn === 'OBSERVE')
             && !(probe ? mayAttachProbeBelowGuide(phaseBeforeTurn, probe.poolSize) : false)
+          // Issue B (2026-10-10, owner product decision in the campaign brief):
+          // an explicit "quiz me" outranks keeping this card for the mastery
+          // check. Never silent: the spend and what it leaves for the check
+          // are logged, and the card is recorded as asked like any other, so
+          // later selection never re-asks it. Whether this answer earns credit
+          // is unchanged (below GUIDE it does not).
+          const quizRequestSpendsReserved = reservationBlocks && probe !== null && turnIntent.wantsPractice
+          if (quizRequestSpendsReserved) {
+            console.log('[gate-assessment] ' + JSON.stringify({
+              event: 'quiz-request-spends-reserved-card',
+              phase: phaseBeforeTurn,
+              poolSize: probe?.poolSize ?? 0,
+              leftForMasteryCheck: Math.max(0, (probe?.poolSize ?? 0) - 1),
+              assetId: probe?.assetId ?? null,
+            }))
+          }
+          const belowGuideBlocked = reservationBlocks && !quizRequestSpendsReserved
           if (belowGuideBlocked) {
             console.log('[gate-assessment] ' + JSON.stringify({
               declined: 'below-guide-no-surplus',
@@ -5364,7 +5403,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // A re-ask arrives from the selector with its options already rotated.
           if (converted && probe?.reask) {
             console.log('[gate-assessment] ' + JSON.stringify({ event: 'missed-probe-reasked', phase: phaseBeforeTurn, assetId: probe.assetId }))
+            reaskServedQuestionHoisted = converted.question
           }
+          reaskWaitingHoisted = Boolean(history && history.mcqMissed.some((fp) => !history.mcqReasked.includes(fp)))
           if (converted) {
             gateMcqHoisted = converted
             // The block still goes in: if the deterministic renderer refuses
@@ -6596,13 +6637,36 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // actively asking it to start; by the third consecutive outage the
           // learner is told plainly that something is wrong on our side.
           const prevOutages = typeof snapshot?.consecutiveOutages === 'number' ? snapshot.consecutiveOutages : 0
-          consecutiveOutagesHoisted = prevOutages + 1
+          // CHEM-107 / MATH-006 / BIO-008 (ten concurrent learners: up to 8
+          // degraded turns in a row, "Let's take one small step together…"):
+          // with every provider down, the concept's own authored explanation
+          // the learner has not yet seen is real teaching that needs no
+          // model. It is served first; the outage copy only when none is left.
+          let authoredOutage: { assetId: string; content: string } | null = null
+          if (resolvedConceptId) {
+            try {
+              const { findUnseenExplanationContent } = await import('@/lib/teaching/assets/explanationMemory')
+              authoredOutage = await findUnseenExplanationContent({
+                conceptId: resolvedConceptId,
+                language: teachingLang,
+                userMessage: message,
+                priorTutorTexts: learnSession.messages
+                  .filter((m) => m.role === MessageRole.ASSISTANT && typeof m.content === 'string')
+                  .map((m) => m.content as string),
+                preferKinds: [],
+              })
+            } catch { authoredOutage = null }
+          }
+          consecutiveOutagesHoisted = authoredOutage ? prevOutages : prevOutages + 1
           const { renderOutage, chooseFallback } = await import('@/lib/kernel/verifier/templateFallback')
-          const outageText = renderOutage(
-            consecutiveOutagesHoisted,
-            chooseFallback(['SHOW_EASIEST_LEGAL']),
-            { register: contentRegister, learnerText: message },
-          )
+          const outageText = authoredOutage
+            ? authoredOutage.content.trim()
+            : renderOutage(
+              consecutiveOutagesHoisted,
+              chooseFallback(['SHOW_EASIEST_LEGAL']),
+              { register: contentRegister, learnerText: message },
+            )
+          console.log('[outage-authored] ' + JSON.stringify({ conceptId: resolvedConceptId ?? null, served: authoredOutage !== null, assetId: authoredOutage?.assetId ?? null }))
           routed = { text: outageText, provider: degraded.provider, finishReason: degraded.finishReason }
         }
         text = routed.text
@@ -6709,7 +6773,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // all is a failure" (masteryReachability).
       let modelProbeWithheld: import('@/lib/teaching/inventedProbeGuard').ModelProbeVerdict | null = null
       {
-        const { decideModelProbe } = await import('@/lib/teaching/inventedProbeGuard')
+        const { decideModelProbe, AUTHORED_CARDS_ONLY } = await import('@/lib/teaching/inventedProbeGuard')
         // A LEARNER'S EXACT QUESTION MUST NOT COME BACK VERBATIM. Real-
         // student session (2026-09): the model confirmed a just-graded
         // correct answer and, in the SAME reply, wrote out the identical
@@ -6720,6 +6784,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // a model-WRITTEN tag until now.
         const { hasAskedMcq: hasAskedMcqForModelProbe } = await import('@/lib/teaching/teachingHistory')
         const d = decideModelProbe({
+          authoredCardsOnly: AUTHORED_CARDS_ONLY,
           // The ORIGINAL predicate, deliberately NOT the gate's E1-widened
           // copy: GUIDE and the mastery gates only. See the field's own note.
           probeWouldCountThisPhase: probeWouldCountThisPhaseHoisted,
@@ -7807,6 +7872,20 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         resolvedGrade !== null && resolvedGrade.kind === 'graded' && mayStateVerdict(resolvedGrade)
           ? resolvedGrade
           : null
+      // CHEM-004 / BIO-019 (owner, 2026-10-07): a 2-option card is practice only
+      // where the concept holds enough 3+-option authored cards to reach
+      // verified mastery without it. Read only when a 2-option card was graded.
+      let threePlusOptionPoolHoisted: number | null = null
+      if (gradeForVerdict !== null && resolvedConceptId && Array.isArray(pendingMcqHoisted?.options)
+        && pendingMcqHoisted.options.length < 3) {
+        threePlusOptionPoolHoisted = await (await import('@/lib/teaching/assets/probePool'))
+          .countThreePlusOptionProbes(resolvedConceptId, teachingLang)
+      }
+      // The ONE derivation of "this turn may bank a verified mastery credit",
+      // read by both folds and the [ladder] log: certifies(resolvedGrade),
+      // narrowed by the 2-option rule above.
+      const certifiedForMastery: boolean = (await import('@/lib/teaching/turnContract'))
+        .certifiesMastery(resolvedGrade, pendingMcqHoisted?.options?.length ?? null, threePlusOptionPoolHoisted)
       // `signalVerificationStatusHoisted` is RESULT-classified but both its
       // writes (L6514/L6562-ish, both inside this same D1 block) happen
       // BEFORE the delivery-compile point — the same "safe to migrate"
@@ -9914,7 +9993,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // the proof. `masteryCounterInvariant.test.ts` and A4 (design doc
             // §5.1) both depend on this field; re-verified unchanged by this
             // substitution, not just asserted.
-            serverGraded: certifies(resolvedGrade),
+            // + CHEM-004/BIO-019 (owner, 2026-10-07): a 2-option card is practice only.
+            serverGraded: certifiedForMastery,
             // Counted, never credited — see the downgrade above.
             unauthoredKey: resolvedGrade !== null && !certifies(resolvedGrade),
             parityViolation: parityViolationThisTurn,
@@ -10077,7 +10157,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // already-hoisted values the fold used — no second calculation.
             verifiedCheck: conversationStateAfterTurnHoisted?.verifiedCorrectAtCheck ?? null,
             verifiedPractice: conversationStateAfterTurnHoisted?.verifiedCorrectAtPractice ?? null,
-            serverGraded: certifies(resolvedGrade),
+            serverGraded: certifiedForMastery,
             // ── PHASE 7N-2: WHY `move` WAS WHAT IT WAS ──────────────────────
             //
             // Phase 7M-B proved, in production, that a learner can ask to be
@@ -10439,9 +10519,18 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // opening. The rendered-reality log does (the same signal the unmet
         // picture-request acknowledgement reads below), so a figure already
         // shown for this concept is never denied.
-        const figureShownForConcept = resolvedConceptId !== null && resolvedConceptId !== undefined
-          && snapshotRRMLog.some((e) => e.matchedConcept === resolvedConceptId)
-        if (!figureOnScreen && figureQuestionHoisted && !figureShownForConcept) {
+        // Issue A (2026-10-10): availability is read from evidence of what the
+        // learner has (figureReference.figureAvailableToLearner), not from the
+        // held-figure session — the final gate before the reply ships repeats
+        // this and replaces the whole reply.
+        const { figureAvailableToLearner } = await import('@/lib/teaching/figureReference')
+        const figureShownForConcept = figureAvailableToLearner({
+          figureInThisResponse: visualFired,
+          renderedLog: snapshotRRMLog,
+          conceptId: resolvedConceptId,
+          recentLearnerMessages: [],
+        })
+        if (figureQuestionHoisted && !figureShownForConcept) {
           const { answerFigureQuestionWithoutFigure } = await import('@/lib/teaching/figureReference')
           let fallbackForFigure: string | null = null
           if (resolvedConceptId) {
@@ -11031,6 +11120,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       if (visualFired) {
         try {
           const { createRRMEntry } = await import('@/lib/teaching/renderedRealityModel')
+          const { describeVisualPayload } = await import('@/lib/teaching/visual/visualSemantics')
+          const { evidenceFromPayload, evidenceForLog } = await import('@/lib/teaching/figureReference')
           rrmEntryThisTurn = createRRMEntry({
             visualType: responseVisual,
             visualSpec: detectedVisualSpec,
@@ -11039,6 +11130,17 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             responseVisual,
             matchedConcept: resolvedConceptId ?? snapshotCurrentConceptId ?? resolvedLibraryConceptNodeId ?? null,
             turnNumber: snapshotRRMLog.length + 1,
+            // Issue A (2026-10-10): what the renderer draws — its caption and
+            // every label — kept so a later question about this figure is
+            // answered from evidence (figureReference.figureEvidenceAnswer).
+            drawn: (() => {
+              try {
+                const payload = detectedSceneSpec ? { renderer: 'scene', sceneSpec: detectedSceneSpec }
+                  : detectedVisualSpec ? { renderer: 'spec', visualSpec: detectedVisualSpec }
+                  : responseVisual ? { renderer: 'card', visualType: responseVisual } : null
+                return evidenceForLog(evidenceFromPayload(payload as never, describeVisualPayload as never))
+              } catch { return undefined }
+            })(),
           })
         } catch { /* non-fatal — RRM is additive, absence = today's behavior */ }
       }
@@ -11309,7 +11411,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             console.log('[empathy-opener-cap] stripped a repeated or unprompted empathy opener')
             cleanText = emp.text
           }
-          if (caps.usesAnalogy(cleanText) && caps.analogyCapReached(priorTutor, ['mathematics', 'english'].includes(learnSession.subject.slug) ? 1 : 2)) {
+          // CHEM-040 / CHEM-055: "i dont understand / why? / explain simpler"
+          // answered with a fourth relay-baton analogy — one analogy in four
+          // replies for every subject (was two outside mathematics).
+          if (caps.usesAnalogy(cleanText) && caps.analogyCapReached(priorTutor, 1)) {
             const retry = await regenerateWithAppendix(caps.NO_ANALOGY_APPENDIX)
             const kept = retry && !caps.usesAnalogy(retry) && (retry.match(/\S+/g) ?? []).length >= 12
             console.log('[analogy-cap] ' + JSON.stringify({ regenerated: true, kept }))
@@ -12531,7 +12636,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
               // fold above). Same source, so both folds agree on whether this
               // turn may bank a verified mastery credit. `certifies(resolvedGrade)`
               // — see the primary fold's Batch 3 comment for the proof.
-              serverGraded: certifies(resolvedGrade),
+              // + CHEM-004/BIO-019: same 2-option rule as the primary fold.
+              serverGraded: certifiedForMastery,
               parityViolation: !!(resolvedEvidenceMove === 'ask' && !fallbackAskedQ),
               // Same guard as the upstream fold — the two must not disagree
               // about whether an outage template taught anything.
@@ -13474,10 +13580,53 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             const asked = readsAsRequestToTutor(learnerAuthoredMessage) || detectLearnerRequest(learnerAuthoredMessage) !== null
               || adaptationKind(learnerAuthoredMessage) !== null || asksForPractice(learnerAuthoredMessage)
               || hy.isBareWhyQuestion(learnerAuthoredMessage)
+              // CHEM-031: "ok" -> "test2, that's correct—iron fills the 3d subshell…"
+              || hy.isPlainAcknowledgement(learnerAuthoredMessage)
             if (asked) {
               const v = hy.dropVerdictOnUngradedRequest(cleanText)
               if (v.dropped) { cleanText = v.text; done.push('verdict-on-request') }
             }
+            // CHEM-103: an answer the server marked wrong in this lesson is not
+            // praised later ("`rate = k[A][B]`, which is exactly the correct form…").
+            const wrongAnswers: string[] = []
+            const msgs = learnSession.messages
+            for (let i = 0; i + 1 < msgs.length; i++) {
+              const m = msgs[i], prev = msgs[i + 1]
+              if ((m as { lessonKey?: string | null }).lessonKey !== resolvedLessonKeyThisTurn) continue
+              if (m.role === MessageRole.ASSISTANT && typeof m.content === 'string' && /^\s*not quite\b/i.test(m.content)
+                && prev.role === MessageRole.USER && typeof prev.content === 'string') wrongAnswers.push(prev.content)
+            }
+            const praise = hy.dropPraiseOfCorrectedAnswer(cleanText, wrongAnswers)
+            if (praise.dropped.length > 0) { cleanText = praise.text; done.push('praise-of-corrected-answer') }
+          }
+          // CHEM-047: "the van Waals equation" — a word of the lesson's own
+          // name dropped; put back from the KG title.
+          try {
+            const { getKGNode: kgTw } = await import('@/lib/curriculum/knowledgeGraph')
+            const tw = hy.restoreTitleWords(cleanText, resolvedConceptId ? kgTw(resolvedConceptId)?.title : null)
+            if (tw.repaired) { cleanText = tw.text; done.push('title-words') }
+          } catch { /* keep the reply */ }
+          // CHEM-133 / BIO-023 / CHEM-073: a reply to "ok" / "next" / "give me
+          // example" that names nothing of the lesson drifted off it (metallic
+          // bonding in Crystal Systems; musical rhythm in Human Reproduction).
+          // One regeneration with the lesson stated, kept only if on the lesson.
+          if (mcqGradeHoisted === null && !mcqHoisted) {
+            try {
+              const dg = await import('@/lib/teaching/lessonDriftGuard')
+              const { getKGNode: kgDg } = await import('@/lib/curriculum/knowledgeGraph')
+              const nodeDg = resolvedConceptId ? kgDg(resolvedConceptId) : null
+              const { splitVisualPointer: splitDg } = await import('@/lib/teaching/visual/visualAcknowledgement')
+              const partsDg = splitDg(cleanText)
+              if (nodeDg && dg.isOffLesson({ learnerMessage: learnerAuthoredMessage, reply: partsDg.body, conceptTitle: nodeDg.title, conceptDescription: nodeDg.description })) {
+                const retry = await regenerateWithAppendix(dg.stayOnLessonAppendix(nodeDg.title, nodeDg.description))
+                // Production 2026-10-10 (phys.meas.units): a retry that named "unit"
+                // but taught nothing ("…did I understand that correctly?") was kept.
+                const kept = !!retry && dg.mentionsConcept(retry, dg.conceptAnchors(nodeDg.title, nodeDg.description))
+                  && !hy.isStubReply(retry) && (retry.match(/\S+/g) ?? []).length >= 25
+                console.log('[lesson-drift] ' + JSON.stringify({ conceptId: resolvedConceptId, regenerated: true, kept }))
+                if (kept) { cleanText = partsDg.pointer ? `${retry}\n\n${partsDg.pointer}` : retry; done.push('lesson-drift') }
+              }
+            } catch { /* keep the reply */ }
           }
           // MATH-002 residual (2026-10-06, after the 10:08 deploy: 41 of 1,198
           // server-graded wrong answers): the analogy and shape regenerations
@@ -13490,10 +13639,110 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             const restored = hy.restoreServerVerdict(cleanText, gradeForVerdict.correct, pendingMcqHoisted.options[pendingMcqHoisted.correctIndex] ?? null)
             if (restored !== cleanText) { cleanText = restored; done.push('verdict-restored') }
           }
+          // Owner decision 2026-10-07 (CHEM-048 / PHYS-020): only authored
+          // cards are asked — a multiple-choice question written into the
+          // prose has no reviewed key and goes; the teaching stays.
+          const { stripProseMultipleChoice } = await import('@/lib/teaching/proseMcqGuard')
+          const prose = stripProseMultipleChoice(cleanText)
+          if (prose.stripped) { cleanText = prose.text; done.push('prose-multiple-choice') }
           const orphan = hy.dropOrphanConditionalOpener(cleanText)
           if (orphan.dropped) { cleanText = orphan.text; done.push('orphan-conditional') }
           const bal = hy.balanceMathDelimiters(cleanText)
           if (bal.repaired) { cleanText = bal.text; done.push('math-delimiters') }
+          // ── THE CHECK PASS (owner decision 2026-10-07; factCheckPass.ts) ──
+          // A reply carrying numbers, equations or a worked example is
+          // recomputed by a second call and replaced only by a corrected copy
+          // of itself; any failure keeps the reply (≈50 logged factual
+          // defects: MATH-007/008, CHEM-007…145, BIO-009…041).
+          try {
+            const fc = await import('@/lib/teaching/factCheckPass')
+            const { getKGNode: kgFc } = await import('@/lib/curriculum/knowledgeGraph')
+            const { splitVisualPointer: splitFc } = await import('@/lib/teaching/visual/visualAcknowledgement')
+            const parts = splitFc(cleanText)
+            // Issue C (2026-10-10): the grounded prose check runs beside the
+            // numeric pass on the same text (groundedProseCheck.ts — scope,
+            // validation and limits are documented there). Its edits are keyed
+            // by sentence text and never touch a sentence with a number, so the
+            // two passes cannot rewrite the same sentence.
+            const gp = await import('@/lib/teaching/groundedProseCheck')
+            const groundedPromise = (async () => {
+              if (teachingLang !== 'en' || !resolvedConceptId || !gp.needsGroundedCheck(parts.body, learnerAuthoredMessage)) {
+                return { edits: [] as import('@/lib/teaching/groundedProseCheck').GroundedEdit[], checked: false, reason: teachingLang !== 'en' ? 'not-english' : 'out-of-scope', rejected: [] as string[] }
+              }
+              const node = kgFc(resolvedConceptId)
+              const { loadConceptSourceTexts } = await import('@/lib/teaching/assets/explanationMemory')
+              const authoredSources = await loadConceptSourceTexts({ conceptId: resolvedConceptId, language: teachingLang })
+              const sources = [...(node?.title && node.description ? [`${node.title}: ${node.description}`] : []), ...authoredSources]
+              return gp.runGroundedProseCheck({
+                text: parts.body,
+                learnerMessage: learnerAuthoredMessage,
+                conceptTitle: node?.title ?? null,
+                sources,
+                isStub: hy.isStubReply,
+                alreadyShown: (learnSession.messages as Array<{ role: unknown; content?: unknown }>)
+                  .filter((m) => m.role === MessageRole.ASSISTANT && typeof m.content === 'string')
+                  .map((m) => m.content as string),
+                ask: async (system, user) => {
+                  llmCallCount++ // instrumentation only (grounded prose check)
+                  const routedGp = await routeAI([{ role: 'user', content: user }], system, country, 2048, teachingLang,
+                    { userId, subject: learnSession.subject.slug }, groqModelOverride, undefined, forceProvider)
+                  return routedGp.text ?? null
+                },
+              })
+            })().catch(() => ({ edits: [] as import('@/lib/teaching/groundedProseCheck').GroundedEdit[], checked: false, reason: 'error', rejected: [] as string[] }))
+            const r = await fc.runFactCheckPass({
+              text: parts.body,
+              conceptTitle: resolvedConceptId ? (kgFc(resolvedConceptId)?.title ?? null) : null,
+              ask: async (system, user) => {
+                llmCallCount++ // instrumentation only (check pass)
+                const routedFc = await routeAI([{ role: 'user', content: user }], system, country, 2048, teachingLang,
+                  { userId, subject: learnSession.subject.slug }, groqModelOverride, undefined, forceProvider)
+                return routedFc.text ?? null
+              },
+            })
+            console.log('[fact-check-pass] ' + JSON.stringify({ conceptId: resolvedConceptId ?? null, checked: r.checked, corrected: r.corrected, reason: r.reason }))
+            let checkedBody = r.corrected ? r.text : parts.body
+            if (r.corrected) done.push('fact-check-corrected')
+            const g = await groundedPromise
+            let groundedApplied: string = 'none'
+            if (g.edits.length > 0) {
+              const applied = gp.applyGroundedEdits(checkedBody, g.edits, hy.isStubReply)
+              groundedApplied = applied ? applied.reason : 'over-limit-kept'
+              if (applied && applied.reason === 'applied') {
+                checkedBody = applied.text
+                done.push('grounded-prose-check')
+              }
+            }
+            // BIO-024: on an example turn, unsupported facts about a named real
+            // organism/substance/place/event/person are removed, or the reply
+            // becomes the lesson's own authored example.
+            const gx = g as { uncovered?: string[]; named?: string[]; sourceExample?: string | null; sourceExampleRepeat?: boolean }
+            let namedAction: string = 'none'
+            if ((gx.named?.length ?? 0) > 0 && gp.isExampleTurn(checkedBody, learnerAuthoredMessage)) {
+              const nr = gp.resolveNamedClaims(checkedBody, gx.named ?? [], gx.sourceExample ?? null, hy.isStubReply, gx.sourceExampleRepeat === true)
+              namedAction = nr.action
+              if (nr.action === 'removed' || nr.action === 'replaced') { checkedBody = nr.text; done.push(`grounded-named-${nr.action}`) }
+            }
+            // C-1: confident claims no source covers are qualified honestly
+            // (only those still in the reply).
+            const stillUncovered = (gx.uncovered ?? []).filter((u) => checkedBody.includes(u.trim().slice(0, 60)))
+            const uncoveredCount = stillUncovered.length
+            let qualified = false
+            if (uncoveredCount >= gp.UNCOVERED_QUALIFY_AT && gp.isExampleTurn(checkedBody, learnerAuthoredMessage)) {
+              const q = gp.qualifyUncovered(checkedBody, stillUncovered[0] ?? null)
+              if (q.changed) { checkedBody = q.text; qualified = true; done.push('grounded-prose-qualified') }
+            }
+            console.log('[grounded-prose-check] ' + JSON.stringify({
+              conceptId: resolvedConceptId ?? null, checked: g.checked, reason: g.reason, applied: groundedApplied,
+              uncovered: uncoveredCount, qualified, named: gx.named?.length ?? 0, namedAction,
+              namedSentences: (gx.named ?? []).map((n) => n.slice(0, 160)), sourceExampleRepeat: gx.sourceExampleRepeat ?? null,
+              edits: g.edits.map((e) => ({ action: e.action, sentence: e.sentence.slice(0, 160), replacement: e.replacement?.slice(0, 160) ?? null, sourceQuote: e.sourceQuote?.slice(0, 160) ?? null })),
+              rejected: g.rejected,
+            }))
+            if (checkedBody !== parts.body) {
+              cleanText = parts.pointer ? `${checkedBody}\n\n${parts.pointer}` : checkedBody
+            }
+          } catch { /* the check never breaks a turn */ }
           if (done.length > 0) console.log('[reply-hygiene] ' + JSON.stringify({ conceptId: resolvedConceptId ?? null, done }))
         } catch { /* a wording repair never breaks a turn */ }
       }
@@ -13579,7 +13828,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // recovery path. The learner gets an AUTHORED explanation of the concept
       // they have not already read; when every authored one has been shown,
       // the reply is left as it was.
-      if (!servedMcq && !serveLessonComplete && !lessonCompletionHoisted && provider !== 'degraded' && resolvedConceptId) {
+      // Re-drive 2026-10-10 (math.alg.linear-equation-1var): "explain simpler"
+      // with a card still on screen got only "I see you arrived at x = 7—that's
+      // a common slip. Here's a question — take your time with it." An ungraded
+      // turn that asks for a simpler/other explanation is owed one even when the
+      // card stays attached; the card itself is not touched.
+      const adaptationAskedWithCard = servedMcq && mcqGradeHoisted === null
+        && ((await import('@/lib/teaching/masteryGate')).detectLearnerRequest(learnerAuthoredMessage) === 'explain_differently'
+          || (await import('@/lib/teaching/adaptationRequest')).adaptationKind(learnerAuthoredMessage) !== null)
+      if ((!servedMcq || adaptationAskedWithCard) && !serveLessonComplete && !lessonCompletionHoisted && provider !== 'degraded' && resolvedConceptId) {
         try {
           const hy = await import('@/lib/teaching/replyHygiene')
           const { readsAsRequestToTutor } = await import('@/lib/teaching/mcq')
@@ -13594,7 +13851,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           const openingTurn = isBareAcknowledgement(learnerAuthoredMessage)
             && !learnSession.messages.some((m) => m.role === MessageRole.USER
               && (m as { lessonKey?: string | null }).lessonKey === resolvedLessonKeyThisTurn)
-          const wantsTeaching = openingTurn || hy.learnerWantsTeaching(learnerAuthoredMessage, {
+          // A mid-lesson "ok" / "next" is owed the next piece too: a content-free
+          // confirm-back on it (production 2026-10-10, phys.meas.units) is a stub.
+          const wantsTeaching = openingTurn || hy.isPlainAcknowledgement(learnerAuthoredMessage) || hy.learnerWantsTeaching(learnerAuthoredMessage, {
             request: readsAsRequestToTutor(learnerAuthoredMessage) || requestKind !== null || adaptation !== null,
             practice: asksForPractice(learnerAuthoredMessage),
           })
@@ -13639,11 +13898,199 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
                 source: authored ? 'authored' : regenerated ? 'regenerated' : null, wasFallback: isFallback,
                 stubChars: trimmedBody.length, assetId: authored?.assetId ?? null,
               }))
-              const floorText = authored?.content.trim() ?? regenerated
+              let floorText = authored?.content.trim() ?? regenerated
+              // "quiz me" with every authored card for this concept already
+              // used (owner decision 2026-10-07: only authored cards are asked)
+              // is told so, instead of being promised a question that never comes.
+              if (floorText && asksForPractice(learnerAuthoredMessage) && authoredPoolExhaustedHoisted && node?.title) {
+                const { quizPoolExhaustedFloorLead } = await import('@/lib/teaching/quizRequest')
+                floorText = `${quizPoolExhaustedFloorLead(node.title, reaskWaitingHoisted as boolean)}\n\n${floorText}`
+              }
               if (floorText) cleanText = pointer ? `${floorText}\n\n${pointer}` : floorText
             }
           }
         } catch { /* a repair must never break a turn */ }
+      }
+
+      // ── "QUIZ ME" GETS A QUESTION OR IS TOLD WHY NOT (Issue B, 2026-10-10) ─
+      // Production re-drive: 3 of 62 "quiz me" turns got a worked example and
+      // no card. The gate now answers an explicit request in any phase and
+      // over the mastery-check reservation; when no authored card ships all
+      // the same (every card used, none authored, a close or recovery turn),
+      // the reply says so first instead of passing a worked example off as
+      // the quiz. A card the learner has not answered yet is re-offered with
+      // a line saying it is the same one, so repeated requests are predictable.
+      if (turnIntent.wantsPractice && !serveLessonComplete && !lessonCompletionHoisted && provider !== 'degraded') {
+        try {
+          const { quizRequestNotice } = await import('@/lib/teaching/quizRequest')
+          const { getKGNode } = await import('@/lib/curriculum/knowledgeGraph')
+          const notice = quizRequestNotice({
+            cardAttached: Boolean(servedMcq),
+            cardIsTheUnansweredOne: Boolean(servedMcq) && pendingMcqHoisted !== null && mcqGradeHoisted === null
+              && typeof servedMcq?.question === 'string' && servedMcq.question === pendingMcqHoisted.question,
+            poolExhausted: (authoredPoolExhaustedHoisted as boolean),
+            conceptTitle: resolvedConceptId ? (getKGNode(resolvedConceptId)?.title ?? null) : null,
+            reply: cleanText,
+            reaskLater: (reaskWaitingHoisted as boolean),
+          })
+          if (notice.changed) {
+            console.log('[quiz-request] ' + JSON.stringify({
+              event: notice.reason, conceptId: resolvedConceptId ?? null, provider,
+              phase: phaseBeforeTurnHoisted, poolExhausted: (authoredPoolExhaustedHoisted as boolean),
+            }))
+            cleanText = notice.text
+          }
+        } catch { /* a repair must never break a turn */ }
+      }
+
+      // A re-asked card (a question seen before, its one re-ask) is introduced
+      // as one — production 2026-10-10 showed it as if new (quizRequest.ts).
+      if (servedMcq && reaskServedQuestionHoisted && servedMcq.question === reaskServedQuestionHoisted) {
+        const { labelReaskedCard } = await import('@/lib/teaching/quizRequest')
+        const labelled = labelReaskedCard(cleanText)
+        if (labelled.changed) {
+          console.log('[quiz-request] ' + JSON.stringify({ event: 'reasked-card-labelled', conceptId: resolvedConceptId ?? null }))
+          cleanText = labelled.text
+        }
+      }
+
+      // ── NO PICTURE, NO DESCRIPTION OF ONE (Issue A, 2026-10-10) ──────────
+      // Production re-drive, 3 of 18 chemistry lessons: "i dont understand
+      // this picture" with nothing in the learner's browser got an imagined
+      // figure ("Three different lines are drawn …", "such pictures usually
+      // show …"). The earlier repairs trusted the held-figure session and
+      // removed only sentences naming "the picture". Here, after every path
+      // (model, memory, regeneration, fallback) has converged, the learner's
+      // picture question with no figure EVIDENCE — one in this response, one
+      // the rendered-reality log records for this concept, or a photo the
+      // learner sent — gets a reply that is not model-written at all: no
+      // picture is visible, how to send one, and an authored explanation (else
+      // the concept's KG line). A card on screen stays; its verdict is not
+      // touched (a picture question is not a card answer).
+      // Production 2026-10-10 on cf79346 (chem.kinet.rate-law, a recovery turn —
+      // "i dont understand this picture" read as distress): the imagined
+      // description shipped and this gate logged nothing. The learner's own
+      // words are therefore read here again, not only through the flag set
+      // early in the turn, and every picture question logs the evidence the
+      // decision used.
+      const figureQuestionFinal = figureQuestionHoisted
+        || (await import('@/lib/teaching/masteryGate')).asksAboutTheFigure(learnerAuthoredMessage)
+      // A-2 (production 76c2edd, rate-law): a model-written reply that points at
+      // a figure is checked against what that figure draws even when the learner
+      // did not ask about the picture ("show me a diagram" answered "The boxes
+      // represent the concentrations of reactants A and B" beside a figure that
+      // has no such boxes).
+      const modelWrittenFig = !['memory', 'gate', 'degraded', 'deterministic', 'fallback'].includes(provider)
+      const pointsAtFigureFinal = modelWrittenFig
+        && (await import('@/lib/teaching/figureReference')).FIGURE_POINTING_RE.test(cleanText)
+      if ((figureQuestionFinal || pointsAtFigureFinal) && !serveLessonComplete && !lessonCompletionHoisted && provider !== 'degraded') {
+        try {
+          const fr = await import('@/lib/teaching/figureReference')
+          const learnerTexts = (learnSession.messages as Array<{ role: unknown; content?: unknown }>)
+            .filter((m) => m.role === MessageRole.USER && typeof m.content === 'string')
+            .slice(-6)
+            .map((m) => m.content as string)
+          const available = fr.figureAvailableToLearner({
+            figureInThisResponse: visualFired,
+            renderedLog: snapshotRRMLog,
+            conceptId: resolvedConceptId,
+            recentLearnerMessages: learnerTexts,
+          })
+          const photoSent = learnerTexts.some((m) => /^\s*📸/u.test(m))
+          if (figureQuestionFinal) {
+            console.log('[figure-evidence] ' + JSON.stringify({
+              event: 'figure-question', conceptId: resolvedConceptId ?? null, available,
+              flagEarly: figureQuestionHoisted, figureInThisResponse: visualFired,
+              renderedConcepts: snapshotRRMLog.map((e) => e.matchedConcept ?? null).slice(-6),
+              photoSent, provider,
+            }))
+          }
+          if (available && !photoSent) {
+            // The evidence: what this reply's figure draws, else what the
+            // rendered-reality log recorded for the figure shown earlier.
+            const shown = [...snapshotRRMLog].reverse().find((e) => e.matchedConcept === resolvedConceptId) ?? null
+            let evidence: { caption: string | null; text: string[] } | null = null
+            if (visualFired) {
+              try {
+                const { describeVisualPayload } = await import('@/lib/teaching/visual/visualSemantics')
+                const payload = detectedSceneSpec ? { renderer: 'scene', sceneSpec: detectedSceneSpec }
+                  : detectedVisualSpec ? { renderer: 'spec', visualSpec: detectedVisualSpec }
+                  : responseVisual ? { renderer: 'card', visualType: responseVisual } : null
+                evidence = fr.evidenceFromPayload(payload as never, describeVisualPayload as never)
+              } catch { /* fall back to the log */ }
+            }
+            evidence = evidence ?? (shown as { drawn?: { caption: string | null; text: string[] } } | null)?.drawn
+              ?? { caption: (shown?.visualSemantics ?? '').replace(/^A 3D scene:\s*/i, '') || null, text: [] }
+            let teachingShown: string | null = null
+            if (resolvedConceptId) {
+              const { getKGNode } = await import('@/lib/curriculum/knowledgeGraph')
+              const node = getKGNode(resolvedConceptId)
+              if (node?.title && node.description) teachingShown = (await import('@/lib/teaching/conceptFallback')).conceptFallbackText(node.title, node.description)
+            }
+            const where = visualFired ? 'this-message' as const : 'earlier' as const
+            if (figureQuestionFinal && fr.DENIES_OR_IMAGINES_FIGURE_RE.test(cleanText)) {
+              // A figure the learner HAS, which the reply denies or replaces with
+              // a typical / imagined one (rate-law, cf79346).
+              const grounded = fr.figureEvidenceAnswer(evidence, null, where, teachingShown)
+              console.warn('[figure-evidence] ' + JSON.stringify({
+                event: 'figure-reply-grounded-to-shown-figure', conceptId: resolvedConceptId ?? null, provider,
+                source: visualFired ? 'this-response' : 'rendered-log', hadDrawnText: evidence.text.length > 0,
+                charsBefore: cleanText.length,
+              }))
+              cleanText = grounded
+            } else if (modelWrittenFig) {
+              // Every figure-pointing sentence is checked against the evidence;
+              // what the figure does not support is removed and the reply opens
+              // with what the figure does show.
+              const chk = fr.checkFigureClaims(cleanText, evidence)
+              if (chk.removed.length > 0) {
+                const remaining = chk.text.trim()
+                const words = (remaining.match(/\S+/g) ?? []).length
+                // A picture question opens with what the figure shows; an
+                // unprompted reply just loses the unsupported sentences.
+                const enough = figureQuestionFinal ? words >= 20 : words >= 8
+                const lead = fr.figureEvidenceAnswer(evidence, null, where, null)
+                cleanText = enough ? (figureQuestionFinal ? `${lead}\n\n${remaining}` : remaining) : fr.figureEvidenceAnswer(evidence, null, where, teachingShown)
+                console.warn('[figure-evidence] ' + JSON.stringify({
+                  event: 'unsupported-figure-claims-removed', conceptId: resolvedConceptId ?? null, provider,
+                  source: visualFired ? 'this-response' : 'rendered-log', evidenceLabels: evidence.text.length,
+                  removed: chk.removed.map((r) => r.slice(0, 160)), keptModelText: enough,
+                }))
+              }
+            }
+          }
+          if (!available && figureQuestionFinal) {
+            let teaching: string | null = null
+            if (resolvedConceptId) {
+              const priorTutorNf = (learnSession.messages as Array<{ role: unknown; content?: unknown }>)
+                .filter((m) => m.role === MessageRole.ASSISTANT && typeof m.content === 'string')
+                .map((m) => m.content as string)
+              const { findUnseenExplanationContent } = await import('@/lib/teaching/assets/explanationMemory')
+              const authored = await findUnseenExplanationContent({
+                conceptId: resolvedConceptId,
+                language: teachingLang,
+                userMessage: learnerAuthoredMessage,
+                priorTutorTexts: priorTutorNf,
+                preferKinds: [],
+              })
+              teaching = authored ? fr.withoutFigureSentences(authored.content) : null
+              if (!teaching) {
+                const { getKGNode } = await import('@/lib/curriculum/knowledgeGraph')
+                const node = getKGNode(resolvedConceptId)
+                if (node?.title && node.description) teaching = (await import('@/lib/teaching/conceptFallback')).conceptFallbackText(node.title, node.description)
+              }
+            }
+            const answer = fr.noFigureAnswer(teaching)
+            console.warn('[figure-evidence] ' + JSON.stringify({
+              event: 'no-figure-evidence-reply-replaced', conceptId: resolvedConceptId ?? null, provider,
+              teachingSource: teaching ? 'authored-or-kg' : 'none', charsBefore: cleanText.length,
+            }))
+            cleanText = answer
+          }
+        } catch (err) {
+          // A repair must never break a turn — but a skipped gate is logged.
+          console.warn('[figure-evidence] ' + JSON.stringify({ event: 'gate-error', conceptId: resolvedConceptId ?? null, error: String(err).slice(0, 200) }))
+        }
       }
 
       // ── A GRADED CARD ALWAYS GETS ITS VERDICT (ENGL-003 / ENGL-007) ──────

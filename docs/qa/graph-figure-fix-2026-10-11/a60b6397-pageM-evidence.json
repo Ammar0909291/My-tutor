@@ -1,0 +1,46 @@
+{
+  "base": "https://my-tutor-flame.vercel.app",
+  "subject": "mathematics",
+  "slug": "math.arith.square-roots",
+  "rows": [
+    {
+      "turn": 1,
+      "said": "show me a graph",
+      "shot": "01.png",
+      "provider": "groq",
+      "reply": "Here’s the graph of the square‑root function \\(y = \\sqrt{x}\\). \nYou can see a smooth curve that starts at the point where the two axes meet (the origin). As you move right along the x‑axis, the curve rises, but it does so more gently the farther you go – it never goes down and it never bends back toward the x‑axis.\n\nWhat do you notice about how the y‑values change as the x‑values get larger?",
+      "replyRendered": false,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": true
+    },
+    {
+      "turn": 2,
+      "said": "i dont understand this picture. what is it showing?",
+      "shot": "02.png",
+      "provider": "groq",
+      "reply": "Sure, let’s look at the picture together.\n\n- The horizontal line is the **x‑axis**; it shows the numbers you put into the square‑root function.\n- The vertical line is the **y‑axis**; it shows the result you get out, √x.\n- The curved line that starts at the origin and rises gently to the right is the **graph of y = √x**. As the x‑values get larger, the y‑values (the square roots) also get larger, but they grow more slowly.\n- The grid behind the curve just helps you see the shape and read approximate values.\n\nOverall, the picture tells us how the square‑root function behaves: for each input x, the height of the curve gives the non‑negative number y such that y² = x.",
+      "replyRendered": true,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": false
+    },
+    {
+      "turn": 3,
+      "said": "what do the axes and the curve mean?",
+      "shot": "03.png",
+      "provider": "groq",
+      "reply": "The horizontal axis (the x‑axis) shows the number you start with – the value x that you want the square root of. \nThe vertical axis (the y‑axis) shows the result of the square‑root operation – the non‑negative number y such that y² = x. \nThe curved line is the graph of the function y = √x; it tells you, for each x, what the square root y is. As x gets larger, the square root grows, but more slowly, which is why the curve rises gently.\n\nNow picture a square whose area is the x‑value and whose side length is the y‑value. The graph is showing how the side length changes as the area changes.",
+      "replyRendered": true,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": false
+    }
+  ]
+}

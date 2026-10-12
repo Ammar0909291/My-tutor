@@ -1,0 +1,46 @@
+{
+  "base": "https://my-tutor-flame.vercel.app",
+  "subject": "physics",
+  "slug": "phys.mech.stress-strain",
+  "rows": [
+    {
+      "turn": 1,
+      "said": "show me the graph",
+      "shot": "01.png",
+      "provider": "groq",
+      "reply": "Take a look at the figure on your screen. It shows a stress‑versus‑strain plot for a metal. In the lower‑right corner you see the label “strain ΔL/L”, and in the upper‑left corner the label “stress F/A”. A straight blue line runs from the origin up to a point marked in purple as the “elastic limit”. The slope of that blue line is written in blue as “slope = E”. Beyond the elastic limit the curve turns red and is labelled “plastic”, and finally a green point at the far right is labelled “breaks”.\n\nWhat do you notice about how the stress and strain are related in the blue part of the graph?",
+      "replyRendered": true,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": true
+    },
+    {
+      "turn": 2,
+      "said": "i dont understand this picture. what is it showing?",
+      "shot": "02.png",
+      "provider": "groq",
+      "reply": "I hear you’re having trouble with the picture, so let’s read it together.\n\n- The grey arrows point to the two axes: the horizontal axis is labelled **strain ΔL/L** (bottom right) and the vertical axis is labelled **stress F/A** (top left). \n- The straight blue line in the lower‑left part has the note **slope = E**; this means that in this region stress is proportional to strain, and the proportionality constant is the material’s Young’s modulus E. \n- The purple marker labeled **elastic limit** marks the end of that straight‑line region; up to this point the material will return to its original shape when the load is removed. \n- Beyond the elastic limit the red curve is labelled **plastic**; here the material deforms permanently even though the load keeps increasing. \n- At the far right the green point says **breaks**; this is where the material can no longer sustain the load and it fractures.\n\nOverall, the graph shows how a metal’s stress (force per area) increases with strain (fractional stretch), first linearly (elastic behavior) and then non‑linearly (plastic deformation) until it finally breaks.",
+      "replyRendered": true,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": false
+    },
+    {
+      "turn": 3,
+      "said": "what does the slope of the graph mean?",
+      "shot": "03.png",
+      "provider": "groq",
+      "reply": "The straight‑line part of the graph is the **elastic region**. Its slope tells you how quickly the stress ( force ÷ area ) rises as the strain ( change in length ÷ original length ) increases. That slope is called **Young’s modulus** — the material’s intrinsic “stiffness”. In symbols, \n\n\\(E = \\dfrac{\\text{stress}}{\\text{strain}}\\) (Young’s modulus = stress divided by strain).\n\nNow look at the **blue straight line** on the figure (the part labelled “slope = E”). \n**What do you notice about that line compared with the rest of the curve?**",
+      "replyRendered": false,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": true
+    }
+  ]
+}

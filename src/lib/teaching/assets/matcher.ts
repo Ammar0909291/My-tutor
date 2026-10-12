@@ -102,6 +102,14 @@ export interface MatchableAsset {
 export interface MatchOptions {
   activeMisconceptionIds?: string[]
   /**
+   * CHEM-005 (2026-10-07): what the tutor has already said in this lesson.
+   * When given, probe selection prefers unasked cards whose key words already
+   * appeared in it (teachingActionRepository.preferTaughtProbes) — a card
+   * should test what was taught. Never blocks: with no such card, every card
+   * stays eligible.
+   */
+  taughtText?: string
+  /**
    * P1 (memory retrieval facet relevance, 2026-08-22) — an optional, caller-
    * supplied set of facet tags the returned asset MUST carry at least one of.
    *

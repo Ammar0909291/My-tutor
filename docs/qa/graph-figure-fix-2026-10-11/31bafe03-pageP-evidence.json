@@ -1,0 +1,59 @@
+{
+  "base": "https://my-tutor-flame.vercel.app",
+  "subject": "physics",
+  "slug": "phys.mech.stress-strain",
+  "rows": [
+    {
+      "turn": 1,
+      "said": "show me the graph",
+      "shot": "01.png",
+      "provider": "groq",
+      "reply": "Here is the stress–strain graph. What do you notice about how stress changes with strain in the blue straight portion?",
+      "replyRendered": true,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": true
+    },
+    {
+      "turn": 2,
+      "said": "i dont understand this picture. what is it showing?",
+      "shot": "02.png",
+      "provider": "groq",
+      "reply": "The picture for this lesson is further up in our chat. It is titled “Stress and strain — Show a stress–strain graph for a metal: a straight elastic region whose slope is Young's modulus E = stress/strain, an elastic limit, then plastic deformation”. The words written on it are: “strain ΔL/L”, “stress F/A”, “slope = E”, “elastic limit”, “plastic”, “breaks”, “Stress is force per area (F/A); strain is the fractional stretch (ΔL/L). Pull a metal wire and plot one against the othe”, “At first stress is proportional to strain and the wire springs back when released. The slope is Young's modulus, E = str”, “Beyond the elastic limit the wire deforms permanently (plastic region), until it breaks.”, “drawn: arrow, axes, curve, horizontal axis, horizontal line, line, marked point, plotted curve, straight line, vertical”. Tell me which of those parts is confusing and I will explain it.\n\nI hear you’re finding the picture confusing, so let’s walk through it step by step.\n\nThe graph shows several labeled parts:\n\n \n- **“strain ΔL/L”** at the bottom right – this is the horizontal axis, representing strain, the fractional change in length (extension divided by original length). \n- **“slope = E”** on the blue straight line – the slope of this initial linear region is Young’s modulus E, the ratio of stress to strain for the material. \n- **“elastic limit”** marked where the straight line ends – up to this point the material returns to its original shape when the load is removed. \n- **“plastic”** in the curved region above the elastic limit – beyond the elastic limit the material deforms permanently. \n- **“breaks”** at the far right – the point where the material finally fractures.\n\nOverall, the picture tells us how a material’s stress grows with strain: initially it’s a straight, proportional relationship (the elastic region), then it deviates into a plastic region, and finally the material breaks.\n\nDo you see the label “stress F/A” at the top left of the graph?",
+      "replyRendered": true,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": false
+    },
+    {
+      "turn": 3,
+      "said": "what does the slope of the graph mean?",
+      "shot": "03.png",
+      "provider": "groq",
+      "reply": "The blue straight line in the graph is the **elastic region**. Its slope tells us how much stress (force per area) is needed to produce a given amount of strain (fractional stretch). That slope is called **Young’s modulus E**, and it is a property of the material itself: a steeper slope means the material is “stiffer” – you need a larger stress to achieve the same strain.",
+      "replyRendered": false,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": true
+    },
+    {
+      "turn": 4,
+      "said": "explain the axes simpler",
+      "shot": "04.png",
+      "provider": "groq",
+      "reply": "Imagine you have a thin rubber band that you pull gently. When you pull it, two things happen:\n\n* **How much it stretches** – you can think of this as “how far compared to its original length.” That is the *strain*. It has no units because it’s a ratio (change in length ÷ original length).\n\n* **How hard you are pulling** – the force you apply spread over the cross‑section of the band. That is the *stress*. On the graph it appears on the vertical (up‑and‑down) axis. Its unit is pascals, which means newtons per square metre.\n\nSo the bottom axis tells you the relative stretch, and the side axis tells you the intensity of the pulling force per area.",
+      "replyRendered": true,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": false
+    }
+  ]
+}

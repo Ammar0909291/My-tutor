@@ -228,8 +228,24 @@
 .quest-pct { font-size: 11px; font-weight: 700; color: var(--ink-soft); margin-top: 3px; display: block; }
 
 @media (max-width: 900px) {
-  .wrap { grid-template-columns: 1fr; }
+  /* CHEM-100 (390×844): a plain 1fr track is at least as wide as its widest
+     child's min-content, so the stat chips and hero banner pushed the column
+     to 417 px and were clipped. minmax(0, 1fr) + min-width: 0 keeps it at
+     the viewport. */
+  .wrap { grid-template-columns: minmax(0, 1fr); }
+  .wrap > * { min-width: 0; }
   .modes { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  .wrap { padding: 16px 16px 60px; }
+  .topbar { flex-wrap: wrap; gap: 8px; }
+  .top-stats { flex-wrap: wrap; gap: 6px; }
+  .stat-chip { padding: 7px 10px; font-size: 14px; }
+  .hero-banner { padding: 20px 16px; }
+  .hb-content { gap: 8px; }
+  .hb-greet { font-size: 22px; }
+  .hb-mascot svg { max-width: 72px; height: auto; }
 }
 
 /* ===== FULL-WIDTH GRID ITEM ===== */

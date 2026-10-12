@@ -1,0 +1,46 @@
+{
+  "base": "https://my-tutor-flame.vercel.app",
+  "subject": "physics",
+  "slug": "phys.mech.stress-strain",
+  "rows": [
+    {
+      "turn": 1,
+      "said": "show me the graph",
+      "shot": "01.png",
+      "provider": "groq",
+      "reply": "The figure plots **stress F / A** (vertical) against **strain ΔL / L** (horizontal). \n\n- The straight blue line at the start has the label **“slope = E”**; this slope is Young’s modulus, the material’s intrinsic stiffness. \n- The purple point marks the **elastic limit** – up to this point stress and strain stay proportional and the material returns to its original shape when the load is removed. \n- Beyond the elastic limit the red curve shows the **plastic** region, where deformation becomes permanent. \n- The green point at the far right indicates where the material **breaks**.",
+      "replyRendered": false,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": true
+    },
+    {
+      "turn": 2,
+      "said": "i dont understand this picture. what is it showing?",
+      "shot": "02.png",
+      "provider": "groq",
+      "reply": "- The grey arrows point to the two quantities written on the figure: **“stress F/A”** (top left) and **“strain ΔL/L”** (bottom right). These are the axes of the graph – stress is force divided by the cross‑sectional area, and strain is the change in length divided by the original length. \n- The blue straight line is labeled **“slope = E”**. Its slope is the Young’s modulus E, which tells us how much stress is needed for a given amount of strain while the material is still elastic. \n- The purple marked point says **“elastic limit”**. Up to this point the material returns to its original shape when the load is removed. \n- The red curve is labeled **“plastic”**. Beyond the elastic limit the material deforms permanently; stress keeps increasing but not proportionally to strain. \n- The green marked point says **“breaks”**. This is where the material finally fractures.\n\nOverall, the graph shows the relationship between stress and strain for a metal: a linear elastic region (slope = E) followed by a plastic region that ends when the material breaks.",
+      "replyRendered": false,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": false
+    },
+    {
+      "turn": 3,
+      "said": "what does the slope of the graph mean?",
+      "shot": "03.png",
+      "provider": "groq",
+      "reply": "The straight, blue part of the curve is the **elastic region**. Its slope – the way the line rises – is called **Young’s modulus (E)**. It tells us how much stress (force per area) increases for a given amount of strain (fractional stretch). A steeper slope means the material is “stiffer” – a larger stress is needed to produce the same strain.",
+      "replyRendered": false,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": true
+    }
+  ]
+}

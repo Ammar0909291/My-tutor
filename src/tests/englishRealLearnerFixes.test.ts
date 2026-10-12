@@ -62,7 +62,8 @@ describe('ENGL-014 the tutor\'s account of its own instruction goes', () => {
 
 describe('ENGL-008 English caps analogies at one in four replies', () => {
   it('route passes 1 for english, as for mathematics', () => {
-    expect(ROUTE).toMatch(/caps\.analogyCapReached\(priorTutor, \['mathematics', 'english'\]\.includes\(learnSession\.subject\.slug\) \? 1 : 2\)/)
+    // 2026-10-07 (CHEM-040 / CHEM-055): the cap of one now applies to every subject, english included.
+    expect(ROUTE).toMatch(/caps\.analogyCapReached\(priorTutor, 1\)/)
     expect(analogyCapReached(['Imagine a train carrying words.', 'Print goes left to right.'], 1)).toBe(true)
   })
 })
@@ -100,7 +101,9 @@ describe('shared 532055e fixes hold on the English evidence', () => {
     expect(isStubReply('What do you notice about the verb in “She walks to school every morning”?')).toBe(true)
   })
   it('ENGL-013: the "no picture" rewrite checks the figure already shown', () => {
-    expect(ROUTE).toMatch(/if \(!figureOnScreen && figureQuestionHoisted && !figureShownForConcept\)/)
+    // Issue A 2026-10-10: availability = evidence (this response, the rendered-reality log, a sent photo).
+    expect(ROUTE).toMatch(/const figureShownForConcept = figureAvailableToLearner\(\{[\s\S]{0,120}renderedLog: snapshotRRMLog/)
+    expect(ROUTE).toMatch(/if \(figureQuestionHoisted && !figureShownForConcept\)/)
   })
 })
 

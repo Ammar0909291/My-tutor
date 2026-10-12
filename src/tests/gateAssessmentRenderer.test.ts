@@ -202,7 +202,9 @@ describe('route wiring — fewer LLM calls, nothing else changed (7,8,9,11,12)',
     // 8 -> 9 (2026-10-05, CHEM-015/CHEM-039): one shared regeneration with an appendix
     // (regenerateWithAppendix) for an unhonoured "with numbers"/"step by step" request
     // and for the analogy cap; kept only if the retry complies.
-    expect((ROUTE.match(/await routeAI\(/g) ?? []).length).toBe(9)
+    // 9 -> 10 (2026-10-07, owner decision): the check pass (factCheckPass.ts).
+    // 10 -> 11 (2026-10-10, Issue C): the grounded prose check (groundedProseCheck.ts).
+    expect((ROUTE.match(/await routeAI\(/g) ?? []).length).toBe(11)
     expect(ROUTE).toContain("provider = 'gate'")
   })
 
