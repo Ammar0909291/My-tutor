@@ -1058,3 +1058,22 @@ Sign changes of a sampled curve that hits a root exactly on a sample point must 
 Next (batch 29): the remaining 8 alg helpers — quadratic-formula, fractional-exponent, radicals, exponential-equations, logarithm-properties, natural-logarithm, logarithmic-equations,
 binomial-theorem — then nt (13), abst (13), linalg (18), de (12), stats (11), disc (11), calc (11), prob (10), seq (7), real (7), meas (6), top (4), opt (4), geom (4),
 func (4), cx (4), graph (3), fnal (3), trig (2), cat (2), num (1); then tier N (352) if still wanted. List what is left with `npx tsx scripts/math/visual-coverage.ts --list H`.
+
+# Deferred follow-up — do AFTER the Mathematics figure campaign (recorded 2026-10-12 at the owner's request)
+
+Context: the owner said another account was "validating visuals for all 4 subjects". A read-only audit of the last 10 days (2026-10-02 → 10-12) on `origin/main` and every remote branch found:
+
+- That account's work is entirely merged into main (branches wait-a-sec-32cist, hopeful-franklin-ga706b, brave-galileo-g5bq8l, ecstatic-noether-sc65l2, sweet-davinci-edk0s9 all show 0 unmerged commits). Its last commit is 4432627a (2026-10-11): the A-2 "yield strength" negative case, recorded NOT EXERCISED, no code change.
+- Visual validation is DONE and merged for three subjects only: Physics (283 concepts, 264 PASS / 19 REVIEW / 0 FAIL, freshness gate `physicsVisualAudit.test.ts` + `physicsSemanticReview.test.ts`; report `docs/qa/PHYSICS_VISUAL_QUALITY_REPORT.md`), Biology (199 rendered, 193 PASS / 6 REVIEW / 0 FAIL; `docs/qa/biology-visual-audit/README.md`) and Chemistry (82 served-figure instances, final 52 PASS / 29 REVIEW / 0 FAIL; `docs/qa/CHEMISTRY_VISUAL_QUALITY_AUDIT.md`).
+- Mathematics and English have NO render audit, no semantic review and no freshness gate. All Mathematics figures (batches 2 onward) have only been checked in a local Chromium render plus unit tests, never in production.
+- Real-learner ledgers (`docs/qa/*_REAL_LEARNER_DEFECTS.md`) — read the status summary at the TOP of each file, not raw word counts: Biology 42 entries (22 partially fixed, 13 fixed, 3 deployed, 1 production-verified, 1 OPEN); Chemistry 150 (75 partially fixed, 38 fixed, 23 production-verified, 11 deployed, 1 deferred); English 17 (10 deployed, 6 partially fixed); Mathematics 31 (20 deployed, 7 partially fixed, 1 production-verified, 1 deferred); Physics has no summary line (PHYS-004 deferred; PHYS-006/010/011/012/017 partially fixed). "Deployed" = live, not production-verified.
+- Unmerged older branches: learner-intent-interpreter-ab-pof2vd (1 WIP commit, "do not merge"), sweet-heisenberg-77swb5 (curriculum-state docs, already on main), physics-verifier-batch-4-9tgycs (1 old commit; the harness-designated branch — it is 1,489 commits behind main, so pointing it at main would need a force push: NOT done, needs an explicit owner decision).
+- Open owner decision elsewhere: the σ-algebra content write to production is awaiting owner approval (session "Mathematics production readiness loop"); no production write was run by this campaign.
+
+Queue for AFTER the Mathematics campaign (in this order; each needs a fresh owner go-ahead before starting):
+1. Mathematics render audit — render every served Mathematics figure in Chromium (390 px + 1280 px, both themes), verdict it, commit the audit JSON and a report under `docs/qa/`, and add a freshness-gate test modelled on `physicsVisualAudit.test.ts` (keep the Physics/Chemistry/Biology rules untouched; Mathematics-only gating).
+2. Mathematics semantic review — compare each figure with the concept's KG description / Educational Brain Core Understanding; record a human verdict ledger like `docs/qa/physics-visual-audit/semantic-review.json`.
+3. Production check of a sample of the Mathematics figures in the real /learn page (disposable `qa-*@mytutor-qa.invalid` accounts only, delete afterwards, never log a password).
+4. English visual validation (no figure campaign exists yet).
+5. Close the documented REVIEW findings (Chemistry 84 REVIEW states, Biology 6, Physics 19) only if the owner wants them closed.
+Unconfirmed: what the other account's own instruction/remaining task was. Ask the owner to paste it before assuming the list above is the intended scope.
