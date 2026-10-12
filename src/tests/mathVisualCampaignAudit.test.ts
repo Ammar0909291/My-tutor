@@ -20,7 +20,7 @@ const MATH = (CONCEPT_SCENE_OVERRIDES as string[]).filter((id) => id.startsWith(
 
 describe('every authored mathematics figure', () => {
   it('is a non-empty set (the campaign has shipped figures)', () => {
-    expect(MATH.length).toBeGreaterThanOrEqual(235)
+    expect(MATH.length).toBeGreaterThanOrEqual(249)
   })
   it.each(MATH)('%s builds, validates and has no audit blockers', (id) => {
     const scene = buildCanonicalScene(null, id)

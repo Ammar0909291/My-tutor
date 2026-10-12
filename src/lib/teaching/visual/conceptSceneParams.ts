@@ -220,6 +220,12 @@ import {
   buildFourierSeriesScene, buildFourierConvergenceScene, buildFourierSineCosineScene, buildPdeScene, buildHeatEquationScene,
   buildWaveEquationScene, buildLaplaceEquationScene,
 } from '@/lib/teaching/sceneGenerators/mathCoreScenesB19'
+import {
+  buildMultivariableIntroScene, buildPartialDerivativesScene, buildGradientScene, buildDirectionalDerivativeScene,
+  buildMultivariableExtremaScene, buildVectorFieldsScene, buildCurlDivergenceScene, buildLineIntegralsScene,
+  buildChangeOfVariablesScene, buildDoubleIntegralsScene, buildMultipleIntegralsScene, buildTripleIntegralsScene,
+  buildSurfaceIntegralsScene, buildDivergenceTheoremScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB20'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -657,6 +663,22 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'math.de.heat-equation':               buildHeatEquationScene,
   'math.de.wave-equation':               buildWaveEquationScene,
   'math.de.laplace-equation':            buildLaplaceEquationScene,
+
+  // Mathematics visual campaign, batch 20 (2026-10-12). See mathCoreScenesB20.ts.
+  'math.calc.multivariable-intro':       buildMultivariableIntroScene,
+  'math.calc.partial-derivatives':       buildPartialDerivativesScene,
+  'math.calc.gradient':                  buildGradientScene,
+  'math.calc.directional-derivative':    buildDirectionalDerivativeScene,
+  'math.calc.multivariable-extrema':     buildMultivariableExtremaScene,
+  'math.calc.vector-fields':             buildVectorFieldsScene,
+  'math.calc.curl-divergence':           buildCurlDivergenceScene,
+  'math.calc.line-integrals':            buildLineIntegralsScene,
+  'math.calc.change-of-variables':       buildChangeOfVariablesScene,
+  'math.calc.double-integrals':          buildDoubleIntegralsScene,
+  'math.calc.multiple-integrals':        buildMultipleIntegralsScene,
+  'math.calc.triple-integrals':          buildTripleIntegralsScene,
+  'math.calc.surface-integrals':         buildSurfaceIntegralsScene,
+  'math.calc.divergence-theorem':        buildDivergenceTheoremScene,
 
   // The Punnett generator is single-gene by construction (genotypes are two
   // alleles). A dihybrid cross drawn as a monohybrid square teaches the wrong

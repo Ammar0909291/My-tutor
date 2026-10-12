@@ -713,3 +713,44 @@ Next (batch 20 plan; 67 essential concepts still uncovered): `math.disc.boolean-
 `math.graph.connectivity` / `maximum-flow` / `matching`, `real` (9: sup-inf, convergence-sequences, cauchy-sequence, open-sets, continuity-rigorous, uniform-continuity,
 riemann-integral, uniform-convergence, pointwise-convergence), `top` (8), `cx` (7), `opt` (6), `num` (4 left: newtons-method, interpolation, numerical-differentiation,
 numerical-integration), `cat` (4), multivariable calculus (14), `meas` (2), `abst` / `fnal` (1 each), geom 3-D (3), func (3 incl. the reserved fixture).
+
+---
+
+# Batch 20 (2026-10-12): multivariable calculus
+
+`sceneGenerators/mathCoreScenesB20.ts` + `mathCoreScenesBatch20.test.ts` (142 checks); campaign audit threshold now 249. Coverage after this batch:
+295 of 908 concepts with a fixed figure; essential tier 293 / 346 (tier H 0 / 210, tier N 2 / 352). All 14 `math.calc.*` multivariable concepts are covered.
+
+Notes for later batches:
+- **3-D is drawn by an oblique projection and verified by inverting it.** `oblique(o)` maps (x, y, z) to (ox + ux·x + dxy·y, oy + uz·z + dyy·y); `obliqueInv(o, base, z)`
+  undoes it. Tests read dots / lines back from the scene, invert the projection and recompute the surface integral, the volume element, the Riemann sum, etc.
+- **Level curves are checked against the function**: the gradient test fits each drawn ellipse to f(x, y) = c and checks the arrow against a finite-difference gradient;
+  the extrema test recomputes D = f_xx f_yy − f_xy² with its own Hessian; the directional test compares the drawn D_u f curve with ∇f·u(θ) (max = |∇f| = 2.83).
+- **Field arrows at the origin have zero length** (invalid arrow): the line-integral and vector-field figures skip the arrow at (0, 0).
+- **Tolerances that were too tight (all fixed in the tests, not the figures)**: ring radii of a circle fit come out 0.9996 / 1.9994 (use `toBeCloseTo`);
+  ray angles read back after 0.01 rounding are 1.01 / 2.99 of π/8; the cylindrical element box (inner-corner straight-edged) is within 16 % of r dr dθ dz while the
+  exact wedge formula ½(r₂² − r₁²)Δθ Δz equals r̄ Δr Δθ Δz exactly.
+- Window: the directional-derivative left panel uses u = 1.2 and the right plot x₀ = 0.5, ux = 1/90, uy = 0.55 to stay inside ±5.
+
+| Concept | Figure |
+|---|---|
+| math.calc.multivariable-intro | f: ℝ² → ℝ with f(A) = f(B) = 1, f(C) = 2 (a point on the plane maps to one height) |
+| math.calc.partial-derivatives | contour plot with two slices through a point: ∂f/∂x = 2 (blue slice), ∂f/∂y = 1 (red slice) |
+| math.calc.gradient | level ellipses with ∇f arrows perpendicular to the level curve at three points |
+| math.calc.directional-derivative | D_u f(θ) = ∇f·u: max 2.83 at θ = 45°, 0 at 135°, 2 along the x-axis |
+| math.calc.multivariable-extrema | min (D 4, f_xx 2), max (D 4, f_xx −2), saddle (D −4) contour sketches |
+| math.calc.vector-fields | F = (−y, x) rotation and G = (x, y) outflow arrows; potential f = ½(x² + y²) for the conservative one |
+| math.calc.curl-divergence | G = 2 net outflow vs ∇×F = 2 net circulation through a small square |
+| math.calc.line-integrals | F = (−y, x) along the arc A→B: ∫ F·dr = π/2; chord 1; path dependence |
+| math.calc.change-of-variables | (r, θ) rectangle ↦ polar sector, J = r, element dr dθ → r dr dθ |
+| math.calc.double-integrals | Riemann sum Σ f ΔA = 3 vs ∫₀² (x + ½) dx = 3 on z = x + y |
+| math.calc.multiple-integrals | both orders of integration on the triangle give area ½ (dy dx columns vs dx dy rows) |
+| math.calc.triple-integrals | cylinder 0 ≤ z ≤ 2 with volume element r dr dθ dz; ∭ dV = 2π |
+| math.calc.surface-integrals | flux of F = (0, 0, 1) through a tilted plane: F·n = 0.89, dS = 1.12 dA, ∬ F·dS = 1 |
+| math.calc.divergence-theorem | F = (x, y, z) on the unit sphere: ∬ F·dS = 4π = 3 × (4π/3) |
+
+Next (batch 21 plan; 53 essential concepts still uncovered, by domain: real 9, top 8, cx 7, opt 6, num 4, cat 4, graph 3, geom 3, func 3, meas 2, fnal 1, disc 1, abst 1):
+`math.disc.boolean-circuits` (gates + a netlist the test simulates against its truth table), `math.graph.connectivity` / `maximum-flow` / `matching`,
+`real` (sup-inf, convergence-sequences, cauchy-sequence, open-sets, continuity-rigorous, uniform-continuity, riemann-integral, uniform-convergence, pointwise-convergence),
+`top` (8), `cx` (7), `opt` (6), `num` (newtons-method, interpolation, numerical-differentiation, numerical-integration), `cat` (4), `meas` (2), `abst.cyclic-group`,
+`fnal.convolution`, geom 3-D (platonic-solids, differential-geometry-curves, frenet-serret), func (real-valued-function, rational-root; the third is the reserved fixture).
