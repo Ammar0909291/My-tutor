@@ -228,3 +228,41 @@ asset_identity 369 B full / 87 B id+slug, topic_progress 190 B, mistake_records 
 - **Mathematics probe-depth campaign (same day):** +1,833 seed probes. The bounded prefetch
   (EGRESS-4) reads ~11k slugs × 87 B ≈ 1 MB per unconverged cold start; at ~150 rows per cold
   start the new rows converge in ~12 cold starts ≈ 12 MB once. Negligible against 5 GB.
+
+## EGRESS-7 — user report "egress above 5 GB": measured attribution + the one live, growing read removed (2026-10-12)
+Owner: "fix egress size which is above 5 GB". Method: the same two-snapshot `pg_stat_statements` delta (lifetime counters,
+`stats_reset` 2026-07-05), widths from `pg_column_size` (topic_progress 6/8/14 columns 105/113/191 B, mistake_records 107/194 B,
+messages 575 B, asset_identity 388 B, learn_sessions row 6,374 B of which `contextSnapshot` 6,034 B, explanation_assets 699 B,
+probe_assets 684 B, spine_events 472 B). The Supabase billing meter itself is NOT readable through the MCP — the dashboard is the
+only source for the cycle total, so the cycle figure below is an estimate, not the meter.
+- **No historical leak has restarted.** Snapshot 2026-10-09 14:44 → 2026-10-12 15:44: spine replay (2599099062474326428)
+  228,732 calls / 110,437,546 rows in both, +0; two of the three EGRESS-5 topic_progress shapes +0 (the per-turn memo holds:
+  one read per turn); `pg_timezone_names` (Studio) +0.
+- **Where the cycle's bytes went (confirmed from the data, estimated in bytes):** 2026-10-05 → 10-07 the `messages` table took
+  73,672 rows (27,676 / 37,316 / 8,680) — about 36,800 chat turns — from twelve heavy synthetic accounts (`test1…test10`,
+  `suaibamr5/6`; ~6,000 messages each, 4–5 sessions, 150 topic_progress rows, ~650 mistake_records, 4,100–4,700 evidence_events
+  and ~13,000 spine_events each), i.e. the Mathematics (908 lessons) and English (216 lessons) real-learner campaigns. A heavy
+  account costs roughly 65–90 KB of database reads per turn (topic_progress 8-column 150 rows ≈ 17 KB, 14-column 46 rows ≈ 9 KB,
+  mistake_records ≈ 6 + 11 KB, history 21 messages ≈ 12 KB, session row 6.4 KB, asset lineage ≈ 15 KB) → **≈ 2.4–3.3 GB for those
+  three days alone**; with the 10-04/05 `suaibamr` runs, QA accounts and dashboard use the 5 GB cycle quota is plausibly spent.
+  Spent egress is not recoverable; the quota resets with the billing cycle.
+- **Live rate today is ≈ 29 MB/day (≈ 0.9 GB/month):** the last three days read ≈ 86 MB for 2,350 turns (≈ 36 KB/turn, light
+  accounts) — messages history 28 %, asset-lineage reads 17.5 %, learn_sessions row 17 %.
+- **Found and fixed — the one live read that grows with use.** `captureGeneratedExplanation` / `captureGeneratedProbe` loaded the
+  ENTIRE lineage of a `canonicalSlug` (every version, with its full text) to make a decision that reads exactly two rows (an exact
+  `contentHash` duplicate and the highest version), and every non-duplicate capture adds a version. `phys.mech.friction` has 368
+  versions (≈ 400 KB per capture); 30,436 AI-authored DRAFT explanations exist; the statement averaged 29 → 48 rows per call
+  (≈ 52 KB per capture incl. the child rows) and was ≈ half of the live read volume. Now two single-row reads with a narrow
+  `select`; same decision for every candidate (equivalence test against the full lineage) and constant bytes per capture
+  (`src/tests/captureLineageEgress.test.ts`, 14 tests, incl. a 368-version lineage and a source pin forbidding `assetIdentity.findMany`
+  in both capture functions).
+- **Not changed, on purpose:** `messages` history (`take: 30`, the model's context), the session row (`contextSnapshot` is read by
+  the turn), topic_progress (one memoized read per turn, EGRESS-5), retrieval (`ACTIVE`, `take: 50`).
+- **Observation for the owner (not an egress fix):** the database is 717 MB (spine_events 283 MB, messages 144 MB, evidence_events
+  66 MB, learn_sessions 41 MB) and 30,436 never-served DRAFT explanations are 30 % of the identity table. If the project is on the
+  free plan, the 500 MB database limit — not only the 5 GB egress — needs a decision (pruning DRAFT lineages / old spine events is
+  a data-retention call, not made here).
+- **Budget rule for synthetic campaigns:** ~36 KB/turn light account, 65–90 KB/turn heavy account → 1,000 turns ≈ 36–90 MB. A
+  campaign of tens of thousands of turns against production must be sized against the remaining quota first.
+- **Re-measure after deploy** with the same delta on queryid 1960876089180252044 (canonicalSlug lineage; expect rows per call ≈ 1–2,
+  not 48) and the `explanation_assets … IN ($1…$N)` content reads.

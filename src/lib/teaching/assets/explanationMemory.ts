@@ -263,12 +263,20 @@ export async function captureGeneratedExplanation(input: CaptureExplanationInput
     const canonicalSlug = `${input.conceptId}:${familyKind}:${input.language}`
     const contentHash = hashContent(input.content)
 
-    const existingLineage = await prisma.assetIdentity.findMany({
-      where: { canonicalSlug, family: AssetFamily.EXPLANATION },
-      include: { explanationAsset: true },
-    })
-    const lineageRows: LineageAsset[] = existingLineage
-      .filter((a) => a.explanationAsset)
+    // EGRESS-7 (2026-10-12): `decideCaptureAction` reads exactly TWO rows of the lineage — one whose
+    // contentHash equals the candidate's (exact duplicate) and the highest version (what a
+    // near-duplicate is measured against and what a new version points at). The previous read pulled
+    // the WHOLE lineage with every version's full text, and every non-duplicate capture adds a row, so
+    // the cost per capture grew with each capture (phys.mech.friction: 368 versions, ~400 KB per
+    // capture). Same two rows, same decision, constant bytes. Rows with no explanation child were
+    // never part of the lineage (filtered out before), hence the `isNot: null`.
+    const lineageSelect = { assetId: true, contentHash: true, version: true, explanationAsset: { select: { content: true } } } as const
+    const hasChild = { explanationAsset: { isNot: null } } as const
+    const [exactRow, latestRow] = await Promise.all([
+      prisma.assetIdentity.findFirst({ where: { canonicalSlug, family: AssetFamily.EXPLANATION, contentHash, ...hasChild }, select: lineageSelect }),
+      prisma.assetIdentity.findFirst({ where: { canonicalSlug, family: AssetFamily.EXPLANATION, ...hasChild }, orderBy: { version: 'desc' }, select: lineageSelect }),
+    ])
+    const lineageRows: LineageAsset[] = uniqueByAssetId([exactRow, latestRow])
       .map((a) => ({ assetId: a.assetId, contentHash: a.contentHash, content: a.explanationAsset!.content, version: a.version }))
 
     const decision = decideCaptureAction(input.content, contentHash, lineageRows)
@@ -319,6 +327,15 @@ export async function captureGeneratedExplanation(input: CaptureExplanationInput
 
 function deriveTags(subjectSlug: string, familyKind: string): string[] {
   return [subjectSlug, familyKind]
+}
+
+function uniqueByAssetId<T extends { assetId: string }>(rows: Array<T | null>): T[] {
+  const seen = new Set<string>()
+  const out: T[] = []
+  for (const r of rows) {
+    if (r && !seen.has(r.assetId)) { seen.add(r.assetId); out.push(r) }
+  }
+  return out
 }
 
 // ─── Review workflow (admin-only; see /api/admin/knowledge-assets/route.ts) ───
