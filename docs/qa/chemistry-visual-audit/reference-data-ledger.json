@@ -308,11 +308,11 @@
   {
    "figure": "Claim G: phase-diagram landmarks",
    "quantity": "Water triple point P",
-   "valueInFigure": "611 Pa",
+   "valueInFigure": "612 Pa (was 611 Pa before the R18 edit)",
    "authoritativeValue": "0.00061165 MPa = 611.65 Pa (NIST fluid, IAPWS-95); Wikipedia 'Triple point' 611.657 Pa (Wagner/Saul/Pruss 1994)",
    "source": "NIST fluid saturation table (URL above) ; https://en.wikipedia.org/wiki/Triple_point",
-   "verdict": "WITHIN_ROUNDING",
-   "note": "Figure truncates 611.65 to 611 (strict rounding gives 612); <0.2 %."
+   "verdict": "MATCH",
+   "note": "R18: the figure truncated 611.65 to 611; it now reads the correctly rounded 612 Pa."
   },
   {
    "figure": "Claim G: phase-diagram landmarks",

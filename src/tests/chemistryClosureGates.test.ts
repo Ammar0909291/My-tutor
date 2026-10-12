@@ -20,7 +20,7 @@ import { admitVisualAsset, makeVisualAsset } from '@/lib/teaching/visual/asset'
 import { validateGeneratedFigure } from '@/lib/teaching/visual/visualEngine'
 import { kgTopicIdentity } from '@/lib/teaching/visual/topicIdentity'
 import { figureFingerprint } from '@/lib/teaching/visual/verdictCache'
-import { retiredAssetVerdict } from '@/lib/teaching/visual/retired'
+import { retiredAssetVerdict, isRetiredVisualBinding, RETIRED_GENERATED_FIGURES } from '@/lib/teaching/visual/retired'
 import { bondOrderOf, parallelBondEnds, MULTI_BOND_SPACING } from '@/lib/teaching/visual/bondGeometry'
 import { buildMoleculeScene, checkMoleculeConsistency, lonePairDirections, lookupMolecule } from '@/lib/teaching/sceneGenerators/moleculeGeometry.pure'
 import { validateSceneSpec } from '@/lib/teaching/sceneSpecValidator'
@@ -138,8 +138,16 @@ describe('the production Tier-3 figures, by content (snapshot of the verdict/fig
     expect(retiredAssetVerdict(id, { provenance: asset!.provenance, fingerprint: figureFingerprint(asset!.payload) })).toBe('retired-asset')
   })
 
-  it('a regenerated figure with new content for a retired concept is a REPLACEMENT, not refused', () => {
-    expect(retiredAssetVerdict('chem.equil.titration', { provenance: 'engine', fingerprint: 'fNEWCONTENT' })).toBe('replacement')
+  it('a regenerated figure with new content is judged afresh (the concept is not retired), and none of the 16 is a retired BINDING', () => {
+    // The table names one figure by its content; it never retires the concept, so the semantic-moat register is untouched.
+    expect(retiredAssetVerdict('chem.equil.titration', { provenance: 'engine', fingerprint: 'fNEWCONTENT' })).toBe('not-retired')
+    // (Two of them already had a retired CARD binding before this closure; the closure added no binding row for any.)
+    const ALREADY_RETIRED_CARD = ['chem.atomic.quantum-mech-model', 'chem.bond.intermolecular']
+    for (const id of RETIRED) {
+      expect(isRetiredVisualBinding(id), id).toBe(ALREADY_RETIRED_CARD.includes(id))
+      expect(RETIRED_GENERATED_FIGURES[id]?.length, id).toBeGreaterThan(0)
+    }
+    expect(Object.keys(RETIRED_GENERATED_FIGURES).sort()).toEqual([...RETIRED].sort())
   })
 
   it.each([

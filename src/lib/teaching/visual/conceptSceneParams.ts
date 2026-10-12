@@ -1529,7 +1529,7 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     groups: [
       { label: 'Three regions', description: 'every P–T point is solid, liquid or gas', items: ['solid: low T, high P', 'liquid: between the two', 'gas: high T, low P'] },
       { label: 'Boundary curves', description: 'along a curve two phases coexist', items: ['solid–gas: sublimation (dry ice)', 'liquid–gas: vapour pressure; read the boiling point', 'solid–liquid: melting; slopes backwards for water'] },
-      { label: 'Triple point', description: 'all three phases coexist', items: ['water: 273.16 K, 611 Pa'] },
+      { label: 'Triple point', description: 'all three phases coexist', items: ['water: 273.16 K, 612 Pa'] },
       { label: 'Critical point', description: 'end of the liquid–gas curve; beyond it a supercritical fluid', items: ['CO₂: 304 K, 73 atm', 'water: 647 K, 218 atm'] },
     ],
   }),
@@ -1539,12 +1539,12 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     conceptId: 'chem.state.real-gases',
     gridFromGroups: 4, // four groups of long clauses: a 2x2 grid, not four columns ~85px apart on a phone
     title: 'Why Real Gases Deviate: Z = PV/(nRT)',
-    teachingGoal: 'An ideal gas has Z = 1; real molecules attract (Z < 1 at moderate pressure) and take up space (Z > 1 at high pressure); van der Waals corrects both.',
+    teachingGoal: 'An ideal gas has Z = 1; for most gases near room temperature the molecules attract (Z < 1 at moderate pressure) and take up space (Z > 1 at high pressure); van der Waals corrects both.',
     groups: [
       { label: 'Ideal gas', description: 'point particles, no attractions', items: ['Z = 1 at every pressure'] },
       { label: 'Moderate pressure', description: 'attractions pull molecules back from the walls', items: ['lower pressure than ideal', 'Z < 1'] },
       { label: 'High pressure', description: 'the molecules’ own volume matters', items: ['less free space than the container', 'Z > 1'] },
-      { label: 'van der Waals', description: '(P + a/Vm²)(Vm − b) = RT', items: ['a/Vm²: adds back pressure lost to attractions', 'b: removes the volume the molecules occupy'] },
+      { label: 'van der Waals', description: '(P + a/Vm²)(Vm − b) = RT', items: ['a/Vm²: adds back pressure lost to attractions', 'b: the excluded volume (about 4× the molecules’ own volume)'] },
     ],
   }),
   // CHEM-022: "Nucleic Acids" got a DNA-replication flow chart and taught
@@ -1765,7 +1765,7 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     title: 'Three Families of Pericyclic Reactions',
     teachingGoal: 'Every pericyclic reaction is concerted — electron pairs flow round one cyclic transition state with no intermediate; the Woodward–Hoffmann rules decide whether heat or light allows it.',
     groups: [
-      { label: 'Cycloaddition', description: 'two separate π-systems form a ring through two new σ-bonds', items: ['[4+2] Diels–Alder: thermally allowed', '[2+2]: thermally forbidden, photochemically allowed'] },
+      { label: 'Cycloaddition', description: 'two separate π-systems form a ring through two new σ-bonds', items: ['[4+2] Diels–Alder: thermally allowed', '[2+2]: thermally forbidden (suprafacial), photochemically allowed'] },
       { label: 'Electrocyclic', description: 'a conjugated polyene ring-closes or ring-opens as one σ-bond forms or breaks', items: ['4n electrons: conrotatory when heated', '4n+2 electrons: disrotatory when heated'] },
       { label: 'Sigmatropic', description: 'a σ-bond migrates across a π-system', items: ['[1,5]H and [3,3] (Cope, Claisen): thermally allowed', '[1,3]H: thermally forbidden (suprafacial)'] },
     ],
@@ -1773,7 +1773,7 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'chem.dblock.organometallics': () => buildCellPathwayScene({
     conceptId: 'chem.dblock.organometallics',
     title: 'Wilkinson’s Catalyst: The Hydrogenation Cycle',
-    teachingGoal: 'The metal is a shuttle between oxidation states — Rh(I) → Rh(III) → Rh(I) — and is never consumed: the alkene enters, the alkane leaves, the 16-electron catalyst is regenerated.',
+    teachingGoal: 'One commonly drawn route: the metal is a shuttle between oxidation states — Rh(I) → Rh(III) → Rh(I) — and is never consumed: the alkene enters, the alkane leaves, the 16-electron catalyst is regenerated.',
     cyclic: true,
     stages: [
       { name: 'Rh(I) catalyst, 16 e⁻', description: 'Rh(PPh₃)₃Cl is coordinatively unsaturated — one empty site, ready for oxidative addition' },
@@ -1787,9 +1787,9 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     conceptId: 'chem.poly.biodegradable',
     gridFromGroups: 3, // three groups of long clauses: two rows, not three columns ~140px apart on a phone
     title: 'Polymer Behaviour Follows the Backbone, Not the Feedstock',
-    teachingGoal: 'Biodegradability is decided by backbone chemistry — hydrolysable linkages or none — not by whether the monomer came from plants; conductivity needs a conjugated π-system AND a doping step.',
+    teachingGoal: 'Whether a polymer can biodegrade starts with its backbone chemistry — hydrolysable linkages or none — not with whether the monomer came from plants; conductivity needs a conjugated π-system AND a doping step.',
     groups: [
-      { label: 'Hydrolysable backbone', description: 'ester linkages that moisture and microbial enzymes can cleave — biodegradable', items: ['PLA (often plant-derived)'] },
+      { label: 'Hydrolysable backbone', description: 'aliphatic ester linkages that moisture and microbial enzymes can cleave — can biodegrade, but slowly outside industrial composting', items: ['PLA (often plant-derived; needs industrial composting)'] },
       { label: 'All-carbon backbone', description: 'no hydrolysable linkage — not biodegradable, whatever the feedstock', items: ['Bio-polyethylene (from bio-based ethanol)', 'Petroleum polyethylene (chemically identical)'] },
       { label: 'Conducting polymers', description: 'need an extended conjugated π-system AND a doping step', items: ['Undoped: only a modest semiconductor', 'Doped polyacetylene, polypyrrole: mobile charge carriers'] },
     ],
