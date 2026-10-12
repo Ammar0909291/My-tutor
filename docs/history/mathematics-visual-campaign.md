@@ -754,3 +754,46 @@ Next (batch 21 plan; 53 essential concepts still uncovered, by domain: real 9, t
 `real` (sup-inf, convergence-sequences, cauchy-sequence, open-sets, continuity-rigorous, uniform-continuity, riemann-integral, uniform-convergence, pointwise-convergence),
 `top` (8), `cx` (7), `opt` (6), `num` (newtons-method, interpolation, numerical-differentiation, numerical-integration), `cat` (4), `meas` (2), `abst.cyclic-group`,
 `fnal.convolution`, geom 3-D (platonic-solids, differential-geometry-curves, frenet-serret), func (real-valued-function, rational-root; the third is the reserved fixture).
+
+---
+
+# Batch 21 (2026-10-12): Boolean circuits, graph connectivity / flow / matching, real analysis
+
+`sceneGenerators/mathCoreScenesB21.ts` + `mathCoreScenesBatch21.test.ts` (132 checks); campaign audit threshold now 262. Coverage after this batch:
+308 of 908 concepts with a fixed figure; essential tier 306 / 346 (tier H 0 / 210, tier N 2 / 352). The `real` and `graph` essential concepts are complete.
+
+Notes for later batches:
+- **A circuit is verified by simulating its DRAWN wires.** `simulateCircuit(A, B, wires)` merges wire endpoints into nets (union-find on coordinates rounded to 0.01), evaluates each
+  gate from the nets on its pins and reads the net at Y. Wires that merely cross share no endpoint, so they are not connected (a T-junction needs an endpoint at the join: the
+  vertical wire is split there). The test also deletes one wire and checks the answer changes.
+- **Graph theory figures are rebuilt from the drawing** (dots + lines → vertex / edge lists) and the numbers recomputed by brute force: κ, λ, δ, the minimum b–e vertex cut
+  (Menger), Edmonds–Karp max flow from the drawn capacity numbers, Hall's condition and the symmetric difference M △ P for the matching.
+- **Label width is ≈ 0.26 screen units per character** (primary tier). A 15-character caption is 3.9 units wide: three captions at x = −3.3 / 0 / 3.3 overlap unless they are
+  short ("size 2", "augmenting", "perfect"). Plan panel captions by character count, not by eye.
+- **Panels side by side need ≥ 3.4 between centres** when the graph has outward vertex letters; the connectivity figure uses a triangle layout (two panels on top, one below).
+- A label pushed off a thick curve may land on a neighbouring label: stagger heights explicitly (the sin-x box heights use offsets 0.4 / 1.0 / 0.4).
+- Highlight dots drawn on top of a coloured curve of the same colour vanish; mark them with the ink colour (uniform-convergence markers).
+- Tolerances: the ε–δ test uses the largest allowed δ (0.2247 for ε = 0.5 on x² at 1) and checks the drawn δ = 0.22 is below it; the sup/inf test treats dots as members only if within 0.002 in value.
+
+| Concept | Figure |
+|---|---|
+| math.disc.boolean-circuits | AND / OR / NOT symbols; XOR = (A OR B) AND NOT(A AND B) wired from four gates, simulated from the drawn wires: 0, 1, 1, 0 |
+| math.graph.connectivity | hexagon + chord: κ = 2 (vertex cut {a, d}), λ = 2 (edge cut ab, cd), δ = 2; Menger: two disjoint b–e paths |
+| math.graph.maximum-flow | s → a, b → t with capacities 3, 3, 1, 2, 2; flow 3, 1, 1, 2, 2 = 4; min cut a→t, b→t = 2 + 2 |
+| math.graph.matching | bipartite 1, 2, 3 / A, B, C: M = {1A, 3B}; augmenting path 2–A–1–B–3–C; perfect matching {2A, 1B, 3C} |
+| math.real.sup-inf | S = {1 − 1/n}: sup 1 not attained (0.9 fails: 0.909 ∈ S), inf 0 attained |
+| math.real.convergence-sequences | 2 + (−1)ⁿ/n: ε = 0.3 → N = 3; ε = 0.15 → N = 6 |
+| math.real.cauchy-sequence | sₙ = 2 − 2^(1−n): beyond N = 4 pairs closer than ε = 0.1; (−1)ⁿ not Cauchy (gap 2) |
+| math.real.open-sets | dashed-edge disc with ball inside; solid-edge disc with an edge point whose balls stick out; complement ball outside |
+| math.real.continuity-rigorous | x² at 1: ε = 0.5, δ = 0.22 (max 0.2247); jump function: no δ works |
+| math.real.uniform-continuity | same δ = 0.5 windows: sin x changes 0.36, 0.09, 0.46; x² changes 0.75, 1.75, 2.75 |
+| math.real.riemann-integral | x² Darboux sums: n = 4 → 0.22 / 0.47, n = 8 → 0.27 / 0.40, squeezing 1/3 |
+| math.real.uniform-convergence | x + sin(nx)/n inside the ε = 0.3 tube for n = 5, 12 (n = 2 leaves); xⁿ reaches ½ at 2^(−1/n) above its tube |
+| math.real.pointwise-convergence | xⁿ → 0: N(x, 0.1) = 2, 4, 7, 11, 22, 45 at x = 0.2 … 0.95, unbounded as x → 1 |
+
+Next (batch 22 plan; 40 essential concepts still uncovered, 39 excluding the reserved fixture `math.func.linear-function`; by domain: top 8, cx 7, opt 6, num 4, cat 4, geom 3, func 3, meas 2, fnal 1, abst 1):
+`top` (open-sets, homeomorphism, quotient-space, homotopy, fundamental-group, euler-characteristic, manifold, smooth-manifold), `cx` (complex-numbers-analysis, complex-integration,
+cauchy-theorem, residue-theorem, real-integral-residues, mobius-transformation, riemann-surface), `opt` (unconstrained, convex-function, convex-set, linear-programming,
+lagrange-multipliers, gradient-methods), `num` (newtons-method, interpolation, numerical-differentiation, numerical-integration), `cat` (category, morphism-types, functor,
+natural-transformation), `meas` (simple-function, lebesgue-integral), `abst.cyclic-group`, `fnal.convolution`, geom 3-D (platonic-solids, differential-geometry-curves, frenet-serret),
+func (real-valued-function, rational-root; linear-function stays figure-less). Then tier H (210) and tier N (350).

@@ -226,6 +226,11 @@ import {
   buildChangeOfVariablesScene, buildDoubleIntegralsScene, buildMultipleIntegralsScene, buildTripleIntegralsScene,
   buildSurfaceIntegralsScene, buildDivergenceTheoremScene,
 } from '@/lib/teaching/sceneGenerators/mathCoreScenesB20'
+import {
+  buildBooleanCircuitsScene, buildVertexConnectivityScene, buildMaximumFlowScene, buildMatchingScene, buildSupInfScene,
+  buildConvergenceSequencesScene, buildCauchySequenceScene, buildOpenSetsScene, buildContinuityRigorousScene,
+  buildUniformContinuityScene, buildRiemannIntegralScene, buildUniformConvergenceScene, buildPointwiseConvergenceScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB21'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -679,6 +684,21 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'math.calc.triple-integrals':          buildTripleIntegralsScene,
   'math.calc.surface-integrals':         buildSurfaceIntegralsScene,
   'math.calc.divergence-theorem':        buildDivergenceTheoremScene,
+
+  // Mathematics visual campaign, batch 21 (2026-10-12). See mathCoreScenesB21.ts.
+  'math.disc.boolean-circuits':          buildBooleanCircuitsScene,
+  'math.graph.connectivity':             buildVertexConnectivityScene,
+  'math.graph.maximum-flow':             buildMaximumFlowScene,
+  'math.graph.matching':                 buildMatchingScene,
+  'math.real.sup-inf':                   buildSupInfScene,
+  'math.real.convergence-sequences':     buildConvergenceSequencesScene,
+  'math.real.cauchy-sequence':           buildCauchySequenceScene,
+  'math.real.open-sets':                 buildOpenSetsScene,
+  'math.real.continuity-rigorous':       buildContinuityRigorousScene,
+  'math.real.uniform-continuity':        buildUniformContinuityScene,
+  'math.real.riemann-integral':          buildRiemannIntegralScene,
+  'math.real.uniform-convergence':       buildUniformConvergenceScene,
+  'math.real.pointwise-convergence':     buildPointwiseConvergenceScene,
 
   // The Punnett generator is single-gene by construction (genotypes are two
   // alleles). A dihybrid cross drawn as a monohybrid square teaches the wrong
