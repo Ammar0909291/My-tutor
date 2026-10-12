@@ -279,6 +279,11 @@ import {
   buildPrimeDistributionScene, buildPrimeNumberTheoremScene, buildContinuedFractionsScene, buildAlgebraicStructureScene,
   buildBinaryOperationScene, buildGroupTheoryScene, buildGroupOperationScene, buildSubgroupScene,
 } from '@/lib/teaching/sceneGenerators/mathCoreScenesB30'
+import {
+  buildCosetScene, buildNormalSubgroupScene, buildQuotientGroupScene, buildGroupHomomorphismScene, buildGroupIsomorphismScene,
+  buildGroupActionScene, buildSymmetricGroupScene, buildFieldExtensionScene, buildMatrixScene, buildMatrixAdditionScene,
+  buildMatrixMultiplicationScene, buildMatrixTransposeScene, buildSymmetricMatrixScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB31'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -881,6 +886,21 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'math.abst.group-theory':              buildGroupTheoryScene,
   'math.abst.group-operation':           buildGroupOperationScene,
   'math.abst.subgroup':                  buildSubgroupScene,
+
+  // Mathematics visual campaign, batch 31 (2026-10-12). See mathCoreScenesB31.ts.
+  'math.abst.coset':                     buildCosetScene,
+  'math.abst.normal-subgroup':           buildNormalSubgroupScene,
+  'math.abst.quotient-group':            buildQuotientGroupScene,
+  'math.abst.group-homomorphism':        buildGroupHomomorphismScene,
+  'math.abst.group-isomorphism':         buildGroupIsomorphismScene,
+  'math.abst.group-action':              buildGroupActionScene,
+  'math.abst.symmetric-group':           buildSymmetricGroupScene,
+  'math.abst.field-extension':           buildFieldExtensionScene,
+  'math.linalg.matrix':                  buildMatrixScene,
+  'math.linalg.matrix-addition':         buildMatrixAdditionScene,
+  'math.linalg.matrix-multiplication':   buildMatrixMultiplicationScene,
+  'math.linalg.matrix-transpose':        buildMatrixTransposeScene,
+  'math.linalg.symmetric-matrix':        buildSymmetricMatrixScene,
 
   // The Punnett generator is single-gene by construction (genotypes are two
   // alleles). A dihybrid cross drawn as a monohybrid square teaches the wrong

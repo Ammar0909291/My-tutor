@@ -1113,9 +1113,37 @@ labels it had to move. Dense tables and rulers need spacing >= 0.75 x 0.65 world
 a dot offset by 0.4 instead). Measured over batches 1-30: 0 unresolved labels anywhere; 218 figure/host combinations in batches 1-29 have long captions or entries moved more than 14 px on the card host (review items for the
 Mathematics render audit queued below, not defects the learner can misread in most cases). (3) SM-01 reads "π(100)" as π × 100: name such labels in words ("25 primes up to 100").
 
-Next (batch 31): the 8 remaining abst helpers — coset, normal-subgroup, quotient-group, group-homomorphism, group-isomorphism, group-action, symmetric-group, field-extension — then linalg (18), de (12), stats (11), disc (11),
-calc (11), prob (10), seq (7), real (7), meas (6), top (4), opt (4), geom (4), func (4), cx (4), graph (3), fnal (3), trig (2), cat (2), num (1); then tier N (352) if still wanted. List what is left with
-`npx tsx scripts/math/visual-coverage.ts --list H`.
+(Batch 30's plan for batch 31 is carried out below.)
+
+# Batch 31 (2026-10-12): the rest of abstract algebra and the first linear-algebra helpers (13 figures)
+
+`sceneGenerators/mathCoreScenesB31.ts` + `mathCoreScenesBatch31.test.ts` (132 checks); campaign audit threshold now 391. Coverage after this batch:
+437 of 908 concepts with a fixed figure; essential tier 344 / 346 (complete), tier H 91 / 210, tier N 2 / 352. All `math.abst.*` helpful concepts are now covered.
+Pre-push checklist: full `npx vitest run`, `scripts/ci/tsc-ratchet.sh` 0 errors, `validate-visualization-coverage.ts` PASS, `scripts/math/label-displacement.ts mathCoreScenesB31` (0 unresolved, 0 card-host moves).
+
+| Concept | Figure |
+|---|---|
+| math.abst.coset | ℤ₆ ring, H = {0, 3}: cosets {0, 3}, {1, 4}, {2, 5} as coloured chords; index 6 ÷ 2 = 3 |
+| math.abst.normal-subgroup | S₃: for H = {e, s}, g = r the left coset {r, t} (blue) ≠ right coset {r, u} (red) → not normal; for N = {e, r, q}, g = s both are {s, t, u} → normal |
+| math.abst.quotient-group | ℤ₆ coloured by cosets of {0, 3}, collapsed to three classes [0], [1], [2]; 1 + 2 = 3 and 4 + 5 = 9 both land in [0] |
+| math.abst.group-homomorphism | parity map ℤ₆ → ℤ₂: kernel {0, 2, 4} (red arrows), image {0, 1} |
+| math.abst.group-isomorphism | ℤ₄ (+ mod 4) and {1, i, −1, −i} (×) as tables with identical colour patterns, k ↦ iᵏ |
+| math.abst.group-action | square symmetries on 4 corners: orbit of corner 1 = 4 (green), stabiliser 2 (violet diagonal), 4 × 2 = 8 |
+| math.abst.symmetric-group | the 6 permutations of {1, 2, 3} as wiring diagrams e, r, q, s, t, u; 3 × 2 × 1 = 6 |
+| math.abst.field-extension | ℚ(√2) as a plane with basis 1, √2 (degree 2); (1 + √2)² = 3 + 2√2 is the point (3, 2) |
+| math.linalg.matrix | 2 × 3 matrix [[1, 2, 3], [4, 5, 6]] between brackets; a₂₃ = 6 |
+| math.linalg.matrix-addition | [[1, 2], [3, 4]] + [[5, 6], [7, 8]] = [[6, 8], [10, 12]], 2 + 6 = 8 highlighted |
+| math.linalg.matrix-multiplication | the same A × B = [[19, 22], [43, 50]]: green row · red column = 1 × 5 + 2 × 7 = 19 (three labels) |
+| math.linalg.matrix-transpose | [[1, 2, 3], [4, 5, 6]] → [[1, 4], [2, 5], [3, 6]]: green row becomes green column |
+| math.linalg.symmetric-matrix | [[1, 2, 3], [2, 4, 5], [3, 5, 6]] with mirror pairs in matching colours, A = Aᵀ |
+
+Notes: the tests recompute coset sets, permutation compositions, orbits (from the DRAWN corner coordinates), matrix products and complex products from scratch and compare with what the figure draws. Dots drawn next to a
+label (cosets, orbit marks) need radius >= 0.13 and an offset >= 0.4 to read at card size. Never write a dot product as one label ("1 × 5 + 2 × 7 = 19" is read left to right by SM-01 and rejected): use one
+label per product and one for the sum. `as Pt` on an array-of-arrays lookup needs `as const` on the array (the type-error ratchet caught it).
+
+Next (batch 32): the remaining 13 linalg helpers — rank, augmented-matrix, matrix-inverse, vector-space, dimension, matrix-representation, diagonalization, spectral-theorem, inner-product, inner-product-space,
+qr-factorization, singular-values, tensor — then de (12), stats (11), disc (11), calc (11), prob (10), seq (7), real (7), meas (6), top (4), opt (4), geom (4), func (4), cx (4), graph (3), fnal (3), trig (2),
+cat (2), num (1); then tier N (352) if still wanted. List what is left with `npx tsx scripts/math/visual-coverage.ts --list H`.
 
 # Deferred follow-up — do AFTER the Mathematics figure campaign (recorded 2026-10-12 at the owner's request)
 
