@@ -175,6 +175,11 @@ import {
   buildNormalApproximationScene, buildCurveSketchingScene, buildVolumeRevolutionScene, buildSurfaceAreaIntegralScene,
   buildParametricCalculusScene, buildPeriodicFunctionScene,
 } from '@/lib/teaching/sceneGenerators/mathCoreScenesB10'
+import {
+  buildFunctionConceptScene, buildInjectivityScene, buildSurjectivityScene, buildBijectionScene, buildTransformationsFunctionsScene,
+  buildPolynomialFunctionScene, buildEndBehaviorScene, buildRationalFunctionScene, buildVerticalAsymptoteScene,
+  buildHorizontalAsymptoteScene, buildPiecewiseFunctionScene, buildMonotonicFunctionScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB11'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -478,6 +483,20 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'math.calc.surface-area-integral':     buildSurfaceAreaIntegralScene,
   'math.calc.parametric-calculus':       buildParametricCalculusScene,
   'math.func.periodic-function':         buildPeriodicFunctionScene,
+
+  // Mathematics visual campaign, batch 11 (2026-10-12). See mathCoreScenesB11.ts.
+  'math.func.function-concept':          buildFunctionConceptScene,
+  'math.func.injectivity':               buildInjectivityScene,
+  'math.func.surjectivity':              buildSurjectivityScene,
+  'math.func.bijection':                 buildBijectionScene,
+  'math.func.transformations-functions': buildTransformationsFunctionsScene,
+  'math.func.polynomial-function':       buildPolynomialFunctionScene,
+  'math.func.end-behavior':              buildEndBehaviorScene,
+  'math.func.rational-function':         buildRationalFunctionScene,
+  'math.func.vertical-asymptote':        buildVerticalAsymptoteScene,
+  'math.func.horizontal-asymptote':      buildHorizontalAsymptoteScene,
+  'math.func.piecewise-function':        buildPiecewiseFunctionScene,
+  'math.func.monotonic-function':        buildMonotonicFunctionScene,
 
   // The Punnett generator is single-gene by construction (genotypes are two
   // alleles). A dihybrid cross drawn as a monohybrid square teaches the wrong

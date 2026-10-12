@@ -358,3 +358,37 @@ Next (batch 11 plan): essential concepts still open (list with `npx tsx scripts/
 remaining calculus (multivariable: partial derivatives, gradient, double integrals, vector fields, …), functions (injectivity,
 surjectivity, bijection, rational function, asymptotes, piecewise, transformations), geometry (circle theorems, conics, vectors,
 polar), sequences/series, discrete and graph theory.
+
+
+# Batch 11 (2026-10-12): functions
+
+`sceneGenerators/mathCoreScenesB11.ts` + `mathCoreScenesBatch11.test.ts` (122 checks); campaign audit threshold now 134. Coverage after this batch:
+180 of 908 concepts with a fixed figure; essential tier 178 / 346.
+
+Notes for later batches:
+- `mappingFrame(cx, gap, sp, dom, cod)` draws the two-oval mapping diagrams (function concept, surjective, bijective): domain dots red,
+  codomain dots blue, element order top to bottom; the tests recover each arrow's input/output from its y coordinate (`idxAt`).
+- Drawn tube width is about twice `thickness`; side-by-side bars and curves need that in mind.
+- Crossing counts for the horizontal line test use `>= level` sign changes (a drawn point can land exactly on the level after 2-decimal
+  rounding, which defeats a strict `a * b < 0` test).
+- `-0` fails `toBe(0)`: compare computed zeros with `toBeCloseTo(0, 12)` (a product with a zero factor is often `-0`).
+- Where a figure uses unequal horizontal/vertical scales it says so in the aria label (polynomial, injectivity, monotonic).
+
+| Concept | Figure |
+|---|---|
+| math.func.function-concept | f(x) = x² on {−1, 0, 1, 2}: one arrow from each input, two share an output, range {0, 1, 4} inside codomain {0..5} |
+| math.func.injectivity | horizontal line test: x³ hit once by each line, x² hit twice at ±1.5, x² on x ≥ 0 hit once |
+| math.func.surjectivity | f onto {1,2,3} (3 has two arrows) vs g into {1,2,3,4} (4 never reached) |
+| math.func.bijection | f(x) = 2x pairing {1,2,3} with {2,4,6} one-to-one, inverse arrows y/2 |
+| math.func.transformations-functions | x², f(x−2)+1 (vertex (2,1)), −f(x) (mirror), 2f(x) (stretch ×2) |
+| math.func.polynomial-function | (x+2)(x−1)(x−3): roots −2, 1, 3, p(0) = 6, two turning points (≈ 8.2, ≈ −4.1) |
+| math.func.end-behavior | ±x², ±x³: even degree ends match, odd ends opposite, arrows at each end |
+| math.func.rational-function | (x+2)(x−1)/((x−3)(x−1)): asymptote x = 3, hole at (1, −1.5), zero −2, y = 1 |
+| math.func.vertical-asymptote | 1/(x−2): 2, 5, 10 from the right, −2, −5, −10 from the left |
+| math.func.horizontal-asymptote | (2x²+1)/(x²+1) → 2 (= 2 − 1/(x²+1)) and 4/(x²+1) → 0; f(4) ≈ 1.94, f(6) ≈ 1.97 |
+| math.func.piecewise-function | −x, x², 6 − x meet at (0,0) and (2,4); a last piece 7 − x would jump 4 → 5 |
+| math.func.monotonic-function | (x³+3x)/4 increasing, its negative decreasing, x³ − 3x neither (rises, falls, rises) |
+
+Left in `func` (essential): real-valued-function, rational-root; math.func.linear-function stays reserved.
+Next (batch 12 plan): geometry (circle theorems, conic sections, ellipse, hyperbola, polar coordinates and curves, 2D vectors,
+dot product, cross product, curvature, …) — check `visual-coverage.ts --list E`.
