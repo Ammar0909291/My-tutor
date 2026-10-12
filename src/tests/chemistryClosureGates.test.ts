@@ -262,7 +262,7 @@ describe('R12 — the two concepts that had no figure each own a faithful one', 
 
   it('water: 104.5° (not 120°), hydrogen bonding, ice less dense, both kinds of hardness, D₂O', () => {
     const t = text('chem.sblock.water')
-    for (const s of ['104.5°', 'two lone pairs', '0.917 g/cm³', 'temporary', 'permanent', 'Na₂CO₃', 'D₂O', 'amphoteric']) expect(t).toContain(s)
+    for (const s of ['104.5°', 'two lone pairs', '0.917 vs 1.000 g/cm³', 'temporary', 'permanent', 'Na₂CO₃', 'D₂O', 'amphoteric', '101.4 °C']) expect(t).toContain(s)
     expect(t).not.toContain('120')
   })
 })

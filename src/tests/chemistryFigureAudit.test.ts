@@ -910,8 +910,8 @@ describe('E — electrochemical cells, system boundaries, the first law', () => 
     const s = cellScene()
     const sub = (a: string | RegExp, b: string) => { const c = clone(s); for (const st of c.steps) for (const o of st.objects) if (o.text) o.text = o.text.replace(a, b); for (const st of c.steps) if (st.narration) st.narration = st.narration.replace(a, b); return c }
     expect(codes(verifyElectrochemicalCellFigure(sub(/(?<!non-)spontaneous/, 'non-spontaneous')))).toContain('E-ELEC-SPONTANEITY')
-    expect(codes(verifyElectrochemicalCellFigure(sub('ΔG = -212.27', 'ΔG = 212.27')))).toContain('E-ELEC-DG-SIGN')
-    expect(codes(verifyElectrochemicalCellFigure(sub('-212.27', '-150')))).toContain('E-ELEC-NFE')
+    expect(codes(verifyElectrochemicalCellFigure(sub('ΔG = −212.27', 'ΔG = 212.27')))).toContain('E-ELEC-DG-SIGN')
+    expect(codes(verifyElectrochemicalCellFigure(sub('−212.27', '−150')))).toContain('E-ELEC-NFE')
   })
   it('FAILS an electron-flow arrow that runs cathode → anode', () => {
     const s = cellScene()

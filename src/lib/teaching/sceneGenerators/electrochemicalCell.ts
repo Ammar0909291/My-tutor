@@ -244,7 +244,7 @@ export function buildElectrochemicalCellScene(p: ElectrochemicalCellParams): Sce
     resultParts.push(`E${p.cellType === 'galvanic' ? 'cell' : ''} = ${d.cellEmf > 0 ? '+' : ''}${d.cellEmf} V`)
     resultParts.push(d.spontaneous ? 'spontaneous' : 'non-spontaneous')
   }
-  if (d.deltaGkJ !== null) resultParts.push(`ΔG = ${d.deltaGkJ} kJ/mol`)
+  if (d.deltaGkJ !== null) resultParts.push(`ΔG = ${String(d.deltaGkJ).replace('-', '−')} kJ/mol`)   // U+2212, not the ASCII hyphen a bare number prints
 
   const steps = [
     {

@@ -728,7 +728,9 @@ export function scanFormulaTokens(item: TextItem, nameFormulas: ReadonlySet<stri
             continue
           }
         }
-        if (/[₀-₉₊₋⁺⁻]/.test(core) && sp.unknownSymbols.length > 0 && /^[A-Z(\[]/.test(core)) {
+        // D and T are hydrogen isotopes (D₂O, T₂O, CH₃D): a formula whose only unknowns are those is not a quantity.
+        const isotopeFormula = sp.unknownSymbols.length > 0 && sp.unknownSymbols.every((u) => u === 'D' || u === 'T') && parseSpecies(core.replace(/[DT](?![a-z])/g, 'H')).ok
+        if (!isotopeFormula && /[₀-₉₊₋⁺⁻]/.test(core) && sp.unknownSymbols.length > 0 && /^[A-Z(\[]/.test(core)) {
           // Unicode subscripts are also used for QUANTITIES (M₁V₁, IE₁, [A]₀, Kb₂), so this can only be a note, never a verdict.
           findings.push(info('F-UNKNOWN-ELEMENT', `"${core}" is written like a formula but "${sp.unknownSymbols.join(', ')}" is not an element symbol (a quantity such as M₁ or IE₁?)`, item.where))
           continue
@@ -2311,8 +2313,9 @@ export function verifyFirstLawFigure(scene: SceneSpec): FamilyReport {
   if (Math.abs(qv + wv - dv) > 0.0051) rep.findings.push(fail('E-FIRSTLAW-ARITHMETIC', `ΔU is printed ${dv} but q + w = ${qv} + ${wv} = ${round(qv + wv, 2)}`, 'steps'))
   else rep.verified.push('delta-u-equals-q-plus-w')
   for (const it of items) {
-    const m = it.text.match(/ΔU = q \+ w = (-?\d+(?:\.\d+)?) \+ (-?\d+(?:\.\d+)?) = (-?\d+(?:\.\d+)?)/)
-    if (m && (Number(m[1]) !== qv || Number(m[2]) !== wv || Number(m[3]) !== dv)) rep.findings.push(fail('E-FIRSTLAW-ARITHMETIC', `narration quotes ${m[1]} + ${m[2]} = ${m[3]} but the labels say q = ${qv}, w = ${wv}, ΔU = ${dv}`, it.where))
+    // "ΔU = q + w = 100 + (−40) = 60 J": the true minus sign and a bracketed negative addend are the figure's own form; the ASCII forms still read.
+    const m = it.text.match(/ΔU = q \+ w = \(?([-−]?\d+(?:\.\d+)?)\)? \+ \(?([-−]?\d+(?:\.\d+)?)\)? = ([-−]?\d+(?:\.\d+)?)/)
+    if (m && (n(m[1]) !== qv || n(m[2]) !== wv || n(m[3]) !== dv)) rep.findings.push(fail('E-FIRSTLAW-ARITHMETIC', `narration quotes ${m[1]} + ${m[2]} = ${m[3]} but the labels say q = ${qv}, w = ${wv}, ΔU = ${dv}`, it.where))
     if (/Positive means heat flows out/i.test(it.text) || /Positive means work is done by the system/i.test(it.text)) {
       rep.findings.push(fail('E-FIRSTLAW-SIGN', `"${it.text}" contradicts the sign convention (+ = into the system) the labels use`, it.where))
     }

@@ -1541,10 +1541,10 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     title: 'Water: A Bent, Polar, Hydrogen-Bonded Molecule',
     teachingGoal: 'Two lone pairs bend water to about 104.5°, so its bond dipoles do not cancel; hydrogen bonding then explains its high boiling point and the low density of ice; Ca²⁺ and Mg²⁺ make water hard; D₂O is the heavy isotopologue.',
     groups: [
-      { label: 'Bent, polar molecule', description: 'oxygen is far more electronegative than hydrogen', items: ['H–O–H ≈ 104.5°: two lone pairs squeeze the angle below 109.5°', 'the two bond dipoles do not cancel: a large net dipole'] },
-      { label: 'Hydrogen bonding', description: 'each molecule donates 2 and accepts 2 hydrogen bonds', items: ['boils at 100 °C; H₂S, with no hydrogen bonds, boils at −60 °C', 'ice (0.917 g/cm³) is less dense than liquid water (1.000 g/cm³ at 4 °C)'] },
-      { label: 'Hard water', description: 'dissolved Ca²⁺ and Mg²⁺ ions stop soap lathering', items: ['temporary (hydrogencarbonates): removed by boiling', 'permanent (sulfates, chlorides): ion exchange or washing soda, Na₂CO₃'] },
-      { label: 'Heavy water, D₂O', description: 'both hydrogens are deuterium (²H)', items: ['boils at 101.4 °C; moderator in CANDU reactors; ¹H NMR solvent', 'water is amphoteric: it donates H⁺ (→ OH⁻) and accepts H⁺ (→ H₃O⁺)'] },
+      { label: 'Bent, polar molecule', description: 'oxygen is far more electronegative than hydrogen; two lone pairs squeeze the angle below 109.5°', items: ['H–O–H ≈ 104.5°', 'dipoles do not cancel'] },
+      { label: 'Hydrogen bonding', description: 'each molecule donates 2 and accepts 2 hydrogen bonds', items: ['boils at 100 °C (H₂S: −60 °C)', 'ice floats: 0.917 vs 1.000 g/cm³'] },
+      { label: 'Hard water', description: 'dissolved Ca²⁺ and Mg²⁺ ions stop soap lathering', items: ['temporary: boil it away', 'permanent: ion exchange, Na₂CO₃'] },
+      { label: 'Heavy water, D₂O', description: 'both hydrogens are deuterium (²H); water itself is amphoteric, donating H⁺ (→ OH⁻) and accepting H⁺ (→ H₃O⁺)', items: ['boils at 101.4 °C', 'CANDU moderator, NMR solvent'] },
     ],
   }),
   'chem.state.phase-diagram': () => buildCellComparisonScene({
