@@ -632,3 +632,44 @@ Next (batch 18 plan, from `visual-coverage.ts --list E`; 95 essential concepts s
 differential-geometry-curves, frenet-serret), func (3: real-valued-function, rational-root and one more). A natural batch 18: `disc` (stars-bars,
 inclusion-exclusion, graph, graph-types, graph-representation, graph-connectivity, euler-hamiltonian, graph-trees, spanning-tree, graph-coloring,
 planar-graph, boolean-circuits, asymptotic-notation) — all drawable, many reusable for `math.graph.*` (graph, connectivity, tree, matching, coloring).
+
+---
+
+# Batch 18 (2026-10-12): discrete mathematics — graphs, stars and bars, inclusion–exclusion, asymptotics
+
+`sceneGenerators/mathCoreScenesB18.ts` + `mathCoreScenesBatch18.test.ts` (149 checks); campaign audit threshold now 222. Coverage after this batch:
+268 of 908 concepts with a fixed figure; essential tier 266 / 346 (tier H 0 / 210, tier N 2 / 352). Twelve new figures plus three registrations:
+`math.graph.graph`, `math.graph.tree` and `math.graph.graph-coloring` use the `math.disc.*` figures (same KG statements: degrees / handshaking, trees, colouring).
+`math.disc.boolean-circuits` is the one `disc` essential left (needs a netlist-style test — see below).
+
+Notes for later batches:
+- **Graph figures are verified by rebuilding the graph from the drawing**: a vertex is a dot (r 0.16), an edge a bond whose two ends sit on dots; the tests
+  compute degrees, components, acyclicity, paths, Kruskal, colourings and crossings from that, never from the constants. Highlights (marks r 0.2-0.26) swallow
+  the small dot; highlighted edges are thicker bonds drawn over the grey ones.
+- A vertex letter is a label placed OUTWARD from its dot (0.45), a degree numeral further out (0.95); edge numbers / weights sit 0.35-0.4 outward from the edge
+  midpoint. Parallel edges (multigraph) are drawn as a straight edge plus a bent one (two bonds through a bend point that is NOT a vertex).
+- The asymptotic figure plots the RATIO f(n)/n² = 3 + 5/n against the constants 3 and 4; plotting f, 3n² and 4n² on one axis gave three overlapping parabolas.
+- SM-01 again: `C(7, 2) = 21` and a second `C(4, 2) = 6` share the last token `2)` and would drop the figure, so the second is worded
+  `with every bin non-empty: 6 ways` (no `=`).
+- Kruskal on the drawn weights is recomputed in the test and the drawn green edges must equal it; each rejected edge must already be joined by a cheaper
+  path of kept edges (that is exactly "would close a cycle").
+- K₄ in the colouring figure is drawn already coloured (marks only), C₅ is drawn grey first then coloured — the test takes K₄'s vertices from the marks.
+
+| Concept | Figure |
+|---|---|
+| math.disc.graph (+ math.graph.graph) | pentagon + chord A–C: degrees 3, 2, 3, 2, 2; Σdeg = 12 = 2 × 6 |
+| math.disc.graph-types | K₄ (all 6 pairs), K₂,₃ (blue–red only), a multigraph (doubled edge), C₅ (regular, degree 2) |
+| math.disc.graph-representation | triangle + tail; 4 × 4 adjacency matrix (symmetric, zero diagonal) and the adjacency lists |
+| math.disc.graph-connectivity | a green 5-vertex path, a violet 4-cycle, a disconnected graph with no path between the red dots |
+| math.disc.euler-hamiltonian | bowtie with edge order 1–6 (all degrees even, Euler circuit); Hamiltonian outer pentagon |
+| math.disc.graph-trees (+ math.graph.tree) | 7 vertices, 6 edges; unique path c–a–d; an extra edge e–f closes the cycle e–b–f |
+| math.disc.spanning-tree | weighted graph; Kruskal keeps AB 1, BC 2, DE 3, AD 4 (total 10), rejects 5, 6, 7 |
+| math.disc.graph-coloring (+ math.graph.graph-coloring) | C₅ with 3 colours (χ = 3, an odd cycle), K₄ with 4 colours (χ = 4) |
+| math.disc.planar-graph | K₄ drawn without crossings (4 − 6 + 4 = 2); K₅ on a pentagon with its 5 crossings; 10 > 3V − 6 = 9 |
+| math.disc.stars-bars | ★★\|★\|★★ rows (2 + 1 + 2, 0 + 5 + 0, 1 + 1 + 3 = 5); C(7, 2) = 21 ways; 6 if every bin is non-empty |
+| math.disc.inclusion-exclusion | multiples of 2 and 3 up to 30: regions 10, 5, 5, 10; 15 + 10 − 5 = 20 |
+| math.disc.asymptotic-notation | f(n)/n² = 3 + 5/n squeezed between 3 and 4 from n₀ = 5: f is Θ(n²) |
+
+Next (batch 19 plan; 80 essential concepts still uncovered): `math.disc.boolean-circuits` (gates + a netlist the test simulates against its truth table),
+`math.graph.connectivity` / `maximum-flow` / `matching`, `de` (12: slope-field, euler-method, harmonic-oscillator, resonance, stability-analysis, fourier-*, pde, heat /
+wave / Laplace), `real` (9), `top` (8), `cx` (7), `opt` (6), `num` (5), `cat` (4), multivariable calculus (14), `meas` (2), `abst` / `fnal` (1 each), geom 3-D (3), func (3).

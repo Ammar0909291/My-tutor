@@ -210,6 +210,11 @@ import {
   buildModularArithmeticScene, buildConvergentSequenceScene, buildDivergentSequenceScene, buildGeometricSeriesScene,
   buildComparisonTestScene, buildIntegralTestScene, buildAlternatingSeriesScene,
 } from '@/lib/teaching/sceneGenerators/mathCoreScenesB17'
+import {
+  buildGraphScene, buildGraphTypesScene, buildGraphRepresentationScene, buildGraphConnectivityScene, buildEulerHamiltonianScene,
+  buildGraphTreesScene, buildSpanningTreeScene, buildGraphColoringScene, buildPlanarGraphScene, buildStarsBarsScene,
+  buildInclusionExclusionScene, buildAsymptoticNotationScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB18'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -613,6 +618,24 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'math.seq.comparison-test':            buildComparisonTestScene,
   'math.seq.integral-test':              buildIntegralTestScene,
   'math.seq.alternating-series':         buildAlternatingSeriesScene,
+
+  // Mathematics visual campaign, batch 18 (2026-10-12). See mathCoreScenesB18.ts. The three math.graph.* concepts below share
+  // the figures of their math.disc.* twins (graph = degrees / handshaking, tree, colouring: the same KG statements).
+  'math.disc.graph':                     buildGraphScene,
+  'math.disc.graph-types':               buildGraphTypesScene,
+  'math.disc.graph-representation':      buildGraphRepresentationScene,
+  'math.disc.graph-connectivity':        buildGraphConnectivityScene,
+  'math.disc.euler-hamiltonian':         buildEulerHamiltonianScene,
+  'math.disc.graph-trees':               buildGraphTreesScene,
+  'math.disc.spanning-tree':             buildSpanningTreeScene,
+  'math.disc.graph-coloring':            buildGraphColoringScene,
+  'math.disc.planar-graph':              buildPlanarGraphScene,
+  'math.disc.stars-bars':                buildStarsBarsScene,
+  'math.disc.inclusion-exclusion':       buildInclusionExclusionScene,
+  'math.disc.asymptotic-notation':       buildAsymptoticNotationScene,
+  'math.graph.graph':                    buildGraphScene,
+  'math.graph.tree':                     buildGraphTreesScene,
+  'math.graph.graph-coloring':           buildGraphColoringScene,
 
   // The Punnett generator is single-gene by construction (genotypes are two
   // alleles). A dihybrid cross drawn as a monohybrid square teaches the wrong
