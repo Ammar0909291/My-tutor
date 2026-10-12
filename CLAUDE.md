@@ -179,7 +179,9 @@ npx tsc --noEmit       # pre-existing stripe/subscription errors are expected on
 
 - **Biology figure layout is Biology-only (2026-10-09).** Shared scene generators/renderer layout rules stay behind `isBiologyScene` /
   `ExplainerFigure`'s `fitToCanvas`; Physics/Chemistry/Mathematics audits fingerprint byte-identical output. Rendered-figure audit,
-  harnesses and rules: `docs/qa/biology-visual-audit/README.md`, `docs/architecture/BIOLOGY_VISUAL_COVERAGE_HANDOVER.md` (render-audit section).
+  harnesses and rules: `docs/qa/biology-visual-audit/README.md`, `docs/architecture/BIOLOGY_VISUAL_COVERAGE_HANDOVER.md` (render-audit and
+  closure sections). Durable additions (2026-10-12): a figure's narrations must total < ~950 chars (the "What's happening?" panel drops whole
+  trailing lines past 1000 — `bioClosureFigures.test.ts`), and render/interaction harnesses must wait for the figure to settle before measuring.
 
 ## Repository branch policy (binding)
 - `main` is THE only active working branch. Check out `main`, commit on `main`, push to `main` —

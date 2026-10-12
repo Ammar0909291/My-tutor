@@ -1,4 +1,7 @@
-# Biology visual quality audit — 2026-10-08
+# Biology visual quality audit — 2026-10-08, closed 2026-10-12
+
+> **Read the "Closure campaign (2026-10-09/12)" section first** — it supersedes the "Final re-audit" and "Remaining issues" sections below,
+> which are kept as the record of the intermediate state (PASS 193 / REVIEW_REQUIRED 6).
 
 Scope: Biology only. The **rendered learner experience** of the current Biology figures — what
 `resolveVisual` serves for a "show me a diagram" request, drawn by the real `SceneSpecFigure →
@@ -15,17 +18,79 @@ Artifacts in this directory:
 | `../../../scripts/qa/biologyVisualInventory.ts` | inventory: the real resolver for all 199 concepts |
 | `../../../scripts/qa/biologyVisualRenderAudit.mjs` | Playwright/Chromium render + DOM measurements + screenshots |
 | `../../../scripts/qa/biologyVisualInteractionAudit.mjs` | Play / stop / reset / Situation-Diagram / modes / legend / expand / reduced-motion |
+| `../../../scripts/qa/biologyProductionBrowserAudit.ts` | the same measurement against the DEPLOYED `/learn` page, with a disposable QA account that is deleted afterwards |
 
 Reproduce (dev server on 3001; the harnesses read the dev-only `/dev/visual-demo/simulation/served?concept=<id>`):
 
 ```
 npx tsx scripts/qa/biologyVisualInventory.ts /tmp/inventory.json
-node scripts/qa/biologyVisualRenderAudit.mjs /tmp/render --file ids.txt --base http://localhost:3001 [--theme light] --shard 0
+node scripts/qa/biologyVisualRenderAudit.mjs /tmp/render --file ids.txt --base http://localhost:3001 [--theme light] [--all-stages] --shard 0
+npx tsx scripts/qa/biologyProductionBrowserAudit.ts --shots /tmp/prod --out /tmp/prod.json   # needs network access to the deployed app
 node scripts/qa/biologyVisualInteractionAudit.mjs /tmp/interaction --ids bio.cell.mitosis,bio.eco.community-ecology --base http://localhost:3001
 ```
 
 Use at most four render shards: SwiftShader WebGL is CPU-bound and a loaded machine captures figures
 mid-transition (three false overlaps were seen that way and disappeared when re-rendered alone).
+
+## Closure campaign (2026-10-09/12)
+
+**Question this answers:** after the render audit, six figures were REVIEW_REQUIRED. Resolve each from its Educational Brain entry, re-audit
+**all 199** on the final merged code (both viewports, both themes, every stage, interaction states), and verify on the deployed app.
+
+### Result
+
+| | |
+|---|---|
+| Biology KG concepts | **199** (all `renderer: scene`, 196 concept-owned, 3 generator-served: `bio.cell.mitosis`, `bio.gen.mendelian-genetics`, `bio.eco.ecosystem-structure-function`) |
+| Rendered in a real browser (Chromium + WebGL) | **199 × 2 viewports (1280, 390) × 2 themes (dark, light) = 796 renders**, every stage walked: **3,716 measured states** (1,858 per theme) |
+| Automated flags over all 3,716 states | **0** label overlaps · **0** labels outside the canvas · **0** horizontal scroll · **0** figure overflow · **0** leaked ids · **0** page errors (see "environment noise") · min caption font **10 px** (the readability floor) · min contrast **4.60 : 1** dark / **4.65 : 1** light (WCAG AA) |
+| Eyeballed | every concept's final **dark and light** all-stages view (desktop + mobile) in this pass (the 24 figures changed during the campaign were re-viewed after their last change); the six repaired figures **stage by stage** (dark, desktop + mobile). Every other stage and the light stage views were measured automatically, not eyeballed |
+| Semantic | the six repairs were additionally reviewed by an independent reviewer (below) |
+| Interaction audit (Play the stages, stop, Show-all reset, Situation↔Diagram, modes, legend pin, Expand→Return, reduced motion), desktop + mobile | the six repaired figures + four changed ones: all controls pass. The other 189 share the same controls and were render-measured, not driven |
+| Non-Biology blast radius | **1,712** Physics / Chemistry / Mathematics / CS / English served-figure payloads are **byte-identical** to `origin/main` (fingerprint of the whole payload) |
+| Final status words | **PASS 199 · FAIL 0 · REVIEW_REQUIRED 0** — with the observations below recorded, not hidden |
+
+Per-concept manifest (concept, figure type, renderer, per-viewport/theme measurements, repaired / regenerated, semantic baseline → final, status):
+`audit-final.json` — each record keeps its `baseline` and `final` blocks and gains a `closure` block. `semantic-review-baseline.json` is untouched
+apart from an appended `closureReview` block.
+
+### The six figures
+
+| figure | what was wrong | what it is now (source: its EB entry) |
+|---|---|---|
+| `bio.neuro.brain-regional-organization` | four lobes as dots in a circle | lateral brain, one brush path per region (the first draft had 100+ objects per stage and was **rejected by the admission gate** ST-07 and served nothing — fixed by drawing, not by loosening the gate); three divisions (forebrain/midbrain/hindbrain), four lobes, amygdala + hippocampus as the limbic structures "not one place"; no focus on the last stage so the opening view is not dimmed |
+| `bio.cell.cell-theory` | a thin three-event timeline | Schleiden 1838 → Schwann 1839 → Virchow 1855 → the theory's three tenets, "all cells arise from pre-existing cells" attributed to Virchow only, and the abiogenesis scoping note |
+| `bio.mol.dna-replication` | 17 labels (budget 9) so eight were silently held back; mobile lagging-strand caption ~96 px from its strand | 9 labels; "lagging strand (Okazaki fragments)" sits on the fragments; legend carries parental DNA / new DNA built 5′→3′ / RNA primer / enzymes; 5′/3′ polarity, leading/lagging and fork direction kept |
+| `bio.eco.predator-prey-dynamics` | the two equations as text; no cycle | population-over-time plot from an RK4 integration of the Lotka–Volterra pair, two cycles, predator lagging prey, four numbered phases, numerical vs functional response; passes the graph audit (GR-01/02/04) |
+| `bio.plant.mycorrhizae-plant-symbioses` | only the rhizobium half of the entry | arbuscular (hypha crosses the wall; arbuscule twigs all **inside** the cell) vs ectomycorrhizal (mantle **outside**, Hartig net **between** the cells) vs the rhizobium–legume nodule, drawn apart and labelled "bacteria not fungi"; oxygen-protected nodule before nitrogen fixation |
+| `bio.plant.plant-growth-hormones` | four of five hormones showed only a name | each hormone carries a source-supported function: auxin (elongation; moves away from light, shaded side grows more; roots ~1000× more sensitive), gibberellins, cytokinins (delay senescence; oppose ethylene), ABA, ethylene (a gas; ripening, abscission; opposes cytokinins) — no "always" anywhere |
+
+### Defects the full re-audit found beyond the six (all fixed, all Biology-only)
+
+| defect | scope | fix |
+|---|---|---|
+| a comparison group drew only its **name**; its clause lived in the narration, beside groups that carried examples | 20 figures (five antibody classes, three gene-transfer routes, four arthropod classes were bare) | `cellComparison.pure.ts` draws the group's own authored `description` as its caption — nothing new written |
+| the vertical connector of an odd-spoke hub cut the first letter of a lower side caption ("|ndustrial biotechnology" at 390 px) | 3 hubs | `cellHub.pure.ts` wraps lower-side captions to the width they own |
+| "Play the motion" offered to walk a marker round a cell **outline** | 10 structure figures | boundary ring opts out (`properties.trace === false`, honoured by `sceneAnimation.traceablePaths`; no other scene sets it) |
+| a caption covered 88 % of its own sphere at 390 px | `bio.found.binomial-nomenclature` (the only one in the corpus: scanned every stage at both widths) | caption anchor lifted |
+| the "What's happening?" panel is cut at 1000 characters in whole lines, so long narrations lost their last stages | the two re-authored figures (brain 2 of 4 stages, mycorrhizae 5 of 7) — **caught by the full test suite**, not by any render | narrations shortened under the budget; a test pins it |
+| harness read heavy figures before their labels mounted | render + interaction harnesses | both now wait for the figure to settle; `--all-stages` added |
+
+### Independent semantic review of the six repairs
+
+REVIEW_PLACEHOLDER
+
+### Observations (recorded, not defects; none changes a status)
+
+* **Stage height variance.** `ExplainerFigure`'s fit search can settle at heights that differ by ±40–120 px between runs (e.g. `bio.neuro.sleep-circadian-biology`
+  at 390 px keeps spare space under the figure). Pre-existing, shared layout code, never clips anything; not touched.
+* **Hub caption touching its sphere** at 390 px on a few three-spoke figures (e.g. `bio.sys.gene-regulatory-networks`: a one-line caption sits 2–3 px above its sphere).
+  Below the occlusion threshold (> 15 % of the sphere) used by the scan; no legibility loss.
+* **Environment noise in the dev harness, not the app:** every page logs `ClientFetchError … server configuration` / HTTP 500 from `/api/auth/session` (the dev
+  server has no `AUTH_SECRET`), and the light theme logs React hydration warnings ("Prop `fill` did not match", a server-vs-client colour on the legend swatch).
+  Neither occurs in a figure's own rendering; both are excluded from the "page errors" count above and counted separately (dark 280, light 1,589 + 296).
+* **Provider failures are a separate matter.** Production logs show the Gemini fallback returning `403 … project has been denied access` and occasional
+  `503`s (details under "Production"). No keys were rotated and no provider policy was changed.
 
 ## Inventory
 
