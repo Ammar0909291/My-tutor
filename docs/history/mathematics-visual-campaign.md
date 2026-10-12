@@ -1214,6 +1214,38 @@ Next (batch 34): the 11 statistics helpers — population-sample, sampling, stan
 then disc (11), calc (11), prob (10), seq (7), real (7), meas (6), top (4), opt (4), geom (4), func (4), cx (4), graph (3), fnal (3), trig (2), cat (2), num (1); then tier N (352) if still wanted.
 List what is left with `npx tsx scripts/math/visual-coverage.ts --list H`.
 
+# Batch 34 (2026-10-12): the statistics helpers (11 figures)
+
+`sceneGenerators/mathCoreScenesB34.ts` + `mathCoreScenesBatch34.test.ts` (112 checks); campaign audit threshold now 427. Coverage after this batch:
+473 of 908 concepts with a fixed figure (52.1%); essential tier 344 / 346 (complete), tier H 127 / 210 (60.5%), tier N 2 / 352; target (E + H) 471 / 556 = 84.7%. All `math.stats.*` helpful concepts are now covered.
+Pre-push checklist: full `npx vitest run`, `scripts/ci/tsc-ratchet.sh` 0 errors, `validate-visualization-coverage.ts` PASS, `scripts/math/label-displacement.ts mathCoreScenesB34` (0 unresolved, 0 card-host moves),
+`scripts/math/campaign-tools/audit-module.ts mathCoreScenesB34` (11 / 11 admitted). Mutation check: eleven deliberate wrong numbers (a population value, a systematic pick, the SE formula, the observed z, the critical value,
+the t exponent, an ANOVA cell mean, a data point, the prior, an interval end, a block layout) each made exactly one test fail.
+
+| Concept | Figure |
+|---|---|
+| math.stats.population-sample | dot plot of 24 values (mean 60, green line) with a sample of 6 (violet dots, mean 63, violet line): sampling error |
+| math.stats.sampling | four 6 × 6 grids, 6 units each: SRS, stratified (2 per band), cluster (2 groups of 3), systematic (every 6th); the test checks each structure from the dot cells |
+| math.stats.standard-error | x̄ ~ N(100, SE²), σ = 8: n = 4 → SE = 8 ÷ 2 = 4 (wide), n = 16 → SE = 8 ÷ 4 = 2 (narrow); the test measures each drawn curve's standard deviation |
+| math.stats.test-statistic | N(0, 1) with the observed z = 2.1 and the tail bars: p ≈ 0.018 |
+| math.stats.z-test | σ = 15, n = 36 → SE = 2.5; x̄ = 106 → z = 6 ÷ 2.5 = 2.4; two red tails beyond ±1.96 (5%); p ≈ 0.016 |
+| math.stats.t-test | N(0, 1) vs t(9) (nearly identical in the middle), marks ±1.96 and ±2.262 for 95%, and the upper tail magnified 48× where the red curve lies above the blue |
+| math.stats.two-way-anova | interaction plots of a 2 × 2 design: gaps 4, 4 (parallel, no interaction) vs 4, −4 (crossing, interaction) |
+| math.stats.covariance-matrix | five points (1, 1), (2, 3), (3, 2), (4, 5), (5, 4): means (3, 3), Σ = [[2.5, 2], [2, 2.5]], eigenvalues 4.5 and 0.5 |
+| math.stats.bayesian-inference | prior Beta(5, 5) × likelihood of 7 heads in 10 → posterior Beta(12, 8), MAP 11/18 ≈ 0.61 between 0.5 and 0.7 |
+| math.stats.credible-interval | the Beta(12, 8) posterior with the central 95% interval [0.38, 0.80] as 22 bars, 2.5% in each tail |
+| math.stats.experimental-design | 12 plots in 3 blocks of 4; treatments A and B assigned at random within each block (2 each per block, 6 each overall) |
+
+Notes: areas are checked by integrating the DRAWN polyline (`areaBetween`), the 95% marks and quantiles are found independently by bisection on a Simpson-integrated density (Φ via Abramowitz–Stegun, Student's t(9) from its known
+constant, the Beta constants 630, 1320 and 604656), and the Bayes check is pointwise: posterior / (prior × likelihood) is the same constant at every drawn θ. A truncated curve has a smaller standard deviation than the true one
+(the ±3σ wide curve measures 3.945, not 4): compare with a tolerance that allows for it. Layout lessons: the label solver pushes any caption whose box would cross the card edge, and labels stacked closer than ~0.9 world units
+or sharing a row within a few pixels are moved apart; a long caption (about 30 characters, 290 px) must be centred where both ends stay inside the 570 px card; keep captions of a left and right column on different rows or well
+apart; scatter and dot figures need tick numerals (free, 1-2 characters) so the values can be read back. Tooling: `new-batch-test.py` now rewrites only the `import * as M` line of the previous head (it used to rewrite every generator import).
+
+Next (batch 35): the 11 discrete-mathematics helpers — counting-principles, permutations, combinations, binomial-theorem, combinatorics, recurrence-relation, linear-recurrence, divide-conquer-recurrence, propositional-logic,
+algorithm-complexity, complexity-classes — then calc (11), prob (10), seq (7), real (7), meas (6), top (4), opt (4), geom (4), func (4), cx (4), graph (3), fnal (3), trig (2), cat (2), num (1); then tier N (352) if still wanted.
+List what is left with `npx tsx scripts/math/visual-coverage.ts --list H`.
+
 # Deferred follow-up — do AFTER the Mathematics figure campaign (recorded 2026-10-12 at the owner's request)
 
 Context: the owner said another account was "validating visuals for all 4 subjects". A read-only audit of the last 10 days (2026-10-02 → 10-12) on `origin/main` and every remote branch found:

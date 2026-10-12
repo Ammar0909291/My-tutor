@@ -294,6 +294,11 @@ import {
   buildWronskianScene, buildLaplaceTransformScene, buildSystemsOdeScene, buildFourierTransformScene,
   buildHarmonicFunctionsScene, buildGreensFunctionScene, buildNonlinearOdeScene,
 } from '@/lib/teaching/sceneGenerators/mathCoreScenesB33'
+import {
+  buildPopulationSampleScene, buildSamplingScene, buildStandardErrorScene, buildTestStatisticScene, buildZTestScene,
+  buildTTestScene, buildTwoWayAnovaScene, buildCovarianceMatrixScene, buildBayesianInferenceScene,
+  buildCredibleIntervalScene, buildExperimentalDesignScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB34'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -940,6 +945,19 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'math.de.harmonic-functions':          buildHarmonicFunctionsScene,
   'math.de.greens-function':             buildGreensFunctionScene,
   'math.de.nonlinear-ode':               buildNonlinearOdeScene,
+
+  // Mathematics visual campaign, batch 34 (2026-10-12). See mathCoreScenesB34.ts.
+  'math.stats.population-sample':        buildPopulationSampleScene,
+  'math.stats.sampling':                 buildSamplingScene,
+  'math.stats.standard-error':           buildStandardErrorScene,
+  'math.stats.test-statistic':           buildTestStatisticScene,
+  'math.stats.z-test':                   buildZTestScene,
+  'math.stats.t-test':                   buildTTestScene,
+  'math.stats.two-way-anova':            buildTwoWayAnovaScene,
+  'math.stats.covariance-matrix':        buildCovarianceMatrixScene,
+  'math.stats.bayesian-inference':       buildBayesianInferenceScene,
+  'math.stats.credible-interval':        buildCredibleIntervalScene,
+  'math.stats.experimental-design':      buildExperimentalDesignScene,
 
   // The Punnett generator is single-gene by construction (genotypes are two
   // alleles). A dihybrid cross drawn as a monohybrid square teaches the wrong
