@@ -919,3 +919,53 @@ Next (batch 25 onward): the HELPFUL tier, 210 concepts (`npx tsx scripts/math/vi
 calc 11, prob 10, seq 7, real 7, meas 6, top 4, opt 4, geom 4, func 4, cx 4, graph 3, fnal 3, trig 2, cat 2, num 1. Same method: read the KG description, design a verifiable figure, add the
 audit, the per-figure test that reads the drawn coordinates, register in `conceptSceneParams.ts`, render and review in Chromium, raise the audit threshold, push, post the sheets.
 Then tier N (350, only if the owner still wants them).
+
+---
+
+# CI repair (2026-10-12) — read this before pushing anything else
+
+GitHub CI (`validate`, runs the WHOLE `npx vitest run`) had been red since batch 16 while the pre-push subset
+(`npx vitest run visual Scene scene math curriculum`) stayed green. Cause: `src/tests/graphFigureEvidenceRoute20261011.test.ts`
+used `math.arith.square-roots` as a figure-less lesson; batch 16 gave that concept its own figure, so the chat route (correctly) described the
+new figure instead of the spec graph the test planted. Fix: the test now uses the deliberately figure-less fixture `math.func.linear-function`.
+The same trap bit `visualRuntimeBudgetWiring.test.ts` (used `math.found.set-operations`) when batch 25 covered it; fixed the same way.
+
+**Rules for the rest of the campaign**
+1. Before every push run the FULL suite: `npx vitest run` (≈ 10 min; run it in the background while writing the next batch). The subset above does NOT match
+   route tests such as `graphFigure*` or anything not containing visual/Scene/scene/math/curriculum in its name.
+2. Before every push also run the other CI steps that the vitest failure used to hide: `bash scripts/ci/tsc-ratchet.sh` (must report 0 errors) and
+   `npx tsx scripts/validate-visualization-coverage.ts` (must print STATUS: PASS).
+3. After a push check CI: `gh api "repos/Ammar0909291/My-tutor/actions/runs?branch=main&per_page=3"` then
+   `gh api repos/Ammar0909291/My-tutor/check-runs/<job id>/annotations` (the built-in `gh` cannot download job logs; annotations name the failing test and assertion).
+4. Tests that need a concept WITHOUT a figure must use `math.func.linear-function` or `math.linalg.vector-addition` (the two reserved fixtures), never an ordinary uncovered concept:
+   the campaign will cover it sooner or later.
+
+---
+
+# Batch 25 (2026-10-12): set theory and relations (first helpful-tier batch)
+
+`sceneGenerators/mathCoreScenesB25.ts` + `mathCoreScenesBatch25.test.ts` (132 checks); campaign audit threshold now 313. Coverage after this batch:
+359 of 908 concepts with a fixed figure; essential tier 344 / 346 (complete), tier H 13 / 210, tier N 2 / 352.
+
+| Concept | Figure |
+|---|---|
+| math.found.set-membership | S = {a, b, c} as an oval: b ∈ S, c ∈ S (inside), d ∉ S, e ∉ S (outside) |
+| math.found.empty-set | ∅ (empty ring), {∅} (ring holding one empty ring), ∅ ⊆ A |
+| math.found.finite-set | five elements matched one-to-one with 1…5; into {1…4} two collide (pigeonhole) |
+| math.found.set-operations | A = {1–4}, B = {3–6}, U = {1–7}: ∪ {1…6}, ∩ {3, 4}, ∖ {1, 2}, Aᶜ {5, 6, 7} |
+| math.found.power-set | eight panels for the 2³ subsets of {a, b, c} |
+| math.found.cartesian-product | {1, 2, 3} × {p, q}: six grid points, (2, q) highlighted |
+| math.found.ordered-pair | (1, 3) ≠ (3, 1), mirror images in y = x |
+| math.found.relation | R = {(1,a), (1,b), (2,b), (3,c)} as arrows and as marked cells of A × B; not a function |
+| math.found.reflexive-relation | loops at all four elements vs a missing loop at 3 |
+| math.found.symmetric-relation | every arrow has a return arrow vs two one-way arrows |
+| math.found.transitive-relation | 1 → 2 → 3 with the shortcut 1 → 3 vs without |
+| math.found.equivalence-class | {0…8} mod 3: [0] = {0, 3, 6}, [1] = {1, 4, 7}, [2] = {2, 5, 8} |
+| math.found.partition | {1,2}, {3}, {4,5,6} (a partition) vs overlapping blocks leaving 6 out |
+
+Notes: relations are verified as sets of pairs read from the drawn arrows (nearest dot at each end), reflexivity / symmetry / transitivity by closure checks over the drawn arrows, a partition by the three
+conditions (non-empty, disjoint, covering) on boxes read from the drawn lines. A loop drawn as a ring must pass THROUGH its element (centre offset = r·0.9 along the outward direction).
+
+Next (batch 26): the rest of `math.found.*` (partial-order, total-order, function-set-theoretic, cardinality, countable-set, uncountable-set, natural-numbers, ordinal-number, proof-by-induction,
+strong-induction, truth-table, logical-equivalence); then arith (18), alg (17), nt (13), abst (13), linalg (18), de (12), stats (11), disc (11), calc (11), prob (10), seq (7), real (7),
+meas (6), top (4), opt (4), geom (4), func (4), cx (4), graph (3), fnal (3), trig (2), cat (2), num (1) — see `npx tsx scripts/math/visual-coverage.ts --list H`.

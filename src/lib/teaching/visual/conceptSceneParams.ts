@@ -247,6 +247,11 @@ import {
   buildPlatonicSolidsScene, buildCurvesInSpaceScene, buildFrenetSerretScene, buildSimpleFunctionScene,
   buildLebesgueIntegralScene, buildCyclicGroupScene, buildConvolutionScene,
 } from '@/lib/teaching/sceneGenerators/mathCoreScenesB24'
+import {
+  buildSetMembershipScene, buildEmptySetScene, buildFiniteSetScene, buildSetOperationsScene, buildPowerSetScene,
+  buildCartesianProductScene, buildOrderedPairScene, buildRelationScene, buildReflexiveRelationScene,
+  buildSymmetricRelationScene, buildTransitiveRelationScene, buildEquivalenceClassScene, buildPartitionScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB25'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -759,6 +764,21 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'math.meas.lebesgue-integral':         buildLebesgueIntegralScene,
   'math.abst.cyclic-group':              buildCyclicGroupScene,
   'math.fnal.convolution':               buildConvolutionScene,
+
+  // Mathematics visual campaign, batch 25 (2026-10-12), first helpful-tier batch. See mathCoreScenesB25.ts.
+  'math.found.set-membership':           buildSetMembershipScene,
+  'math.found.empty-set':                buildEmptySetScene,
+  'math.found.finite-set':               buildFiniteSetScene,
+  'math.found.set-operations':           buildSetOperationsScene,
+  'math.found.power-set':                buildPowerSetScene,
+  'math.found.cartesian-product':        buildCartesianProductScene,
+  'math.found.ordered-pair':             buildOrderedPairScene,
+  'math.found.relation':                 buildRelationScene,
+  'math.found.reflexive-relation':       buildReflexiveRelationScene,
+  'math.found.symmetric-relation':       buildSymmetricRelationScene,
+  'math.found.transitive-relation':      buildTransitiveRelationScene,
+  'math.found.equivalence-class':        buildEquivalenceClassScene,
+  'math.found.partition':                buildPartitionScene,
 
   // The Punnett generator is single-gene by construction (genotypes are two
   // alleles). A dihybrid cross drawn as a monohybrid square teaches the wrong
