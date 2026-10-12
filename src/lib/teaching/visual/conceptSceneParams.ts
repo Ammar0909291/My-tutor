@@ -160,6 +160,11 @@ import {
   buildFtcPart2Scene, buildImproperIntegralsScene, buildIntegralAreaScene, buildArcLengthScene, buildTaylorSeriesScene,
   buildParametricCurvesScene, buildFourierSeriesIntroScene,
 } from '@/lib/teaching/sceneGenerators/mathCoreScenesB7'
+import {
+  buildEventScene, buildTotalProbabilityScene, buildDistributionScene, buildDiscreteDistributionsScene,
+  buildContinuousDistributionsScene, buildQuantileScene, buildVarianceScene, buildStandardDeviationScene,
+  buildJointDistributionScene, buildMarginalDistributionScene, buildConditionalDistributionScene, buildLawOfLargeNumbersScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB8'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -421,6 +426,20 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'math.calc.taylor-series':             buildTaylorSeriesScene,
   'math.calc.parametric-curves':         buildParametricCurvesScene,
   'math.calc.fourier-series-intro':      buildFourierSeriesIntroScene,
+
+  // Mathematics visual campaign, batch 8 (2026-10-11). See mathCoreScenesB8.ts.
+  'math.prob.event':                     buildEventScene,
+  'math.prob.total-probability':         buildTotalProbabilityScene,
+  'math.prob.distribution':              buildDistributionScene,
+  'math.prob.discrete-distributions':    buildDiscreteDistributionsScene,
+  'math.prob.continuous-distributions':  buildContinuousDistributionsScene,
+  'math.prob.quantile':                  buildQuantileScene,
+  'math.prob.variance':                  buildVarianceScene,
+  'math.prob.standard-deviation':        buildStandardDeviationScene,
+  'math.prob.joint-distribution':        buildJointDistributionScene,
+  'math.prob.marginal-distribution':     buildMarginalDistributionScene,
+  'math.prob.conditional-distribution':  buildConditionalDistributionScene,
+  'math.prob.lln':                       buildLawOfLargeNumbersScene,
 
   // The Punnett generator is single-gene by construction (genotypes are two
   // alleles). A dihybrid cross drawn as a monohybrid square teaches the wrong
