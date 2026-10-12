@@ -53,6 +53,8 @@ const VIEWS: Array<{ vp: 'mobile' | 'desktop-column'; width: number; height: num
 ]
 const THEMES: ThemeName[] = ['dark', 'light']
 const arg = (n: string) => { const i = process.argv.indexOf(`--${n}`); return i >= 0 ? process.argv[i + 1] : undefined }
+/** The subject under test (default physics). Chemistry/Biology figures use the same page, account and association code. */
+const SUBJECT = arg('subject') ?? 'physics'
 
 /**
  * What the force-diagram card actually drew, read back from the live DOM in SCREEN pixels (so any scaling or
@@ -64,13 +66,15 @@ export interface ForceArrowProbe {
   arrows: Record<'applied' | 'friction' | 'weight' | 'normal', { tail: [number, number]; head: [number, number] } | null>
   ground: { from: [number, number]; to: [number, number] } | null
   normal: { perpendicularToGround: boolean; pointsUp: boolean; headAboveBox: boolean; labelText: string | null } | null
+  /** Screen-pixel gap between each vertical arrow's arrowhead (its widest point) and the label printed beside it. Negative = overlap. */
+  labelClear: { weight: number | null; normal: number | null }
 }
 /**
  * Open the lesson page, find the figure's own frame, and — for a card — run the narration at 1.5x until the picture
  * stops changing. Returns what kind of figure it is. (Shared by the pre-flight and by every measured view.)
  */
 async function driveToFinalState(page: Page, target: { replyText?: string; index?: number }): Promise<{ kind: 'card' | 'scene'; selection: FigureSelection }> {
-  await page.goto(`${BASE}/learn?subject=physics`, { waitUntil: 'domcontentloaded', timeout: 60_000 })
+  await page.goto(`${BASE}/learn?subject=${SUBJECT}`, { waitUntil: 'domcontentloaded', timeout: 60_000 })
   await page.waitForSelector('[data-scene-box], [aria-label^="Visual aid:"]', { timeout: 60_000 })
   // The lesson page lists the lesson's messages from EVERY session, so it holds one figure per reply. Take the one that belongs
   // to the reply under test, and wait for it (an older figure can be on screen before the newest message has mounted).
@@ -134,7 +138,20 @@ const FORCE_ARROW_PROBE_JS = `(() => {
     const label = texts.find((t) => /normal/i.test(t)) || null;
     normal = { perpendicularToGround: cos < 0.02, pointsUp: n[1] < 0, headAboveBox: box ? arrows.normal.head[1] < box.top : false, labelText: label };
   }
-  return { arrows, ground, normal };
+  const clearOf = (arrow, re) => {
+    if (!arrow) return null;
+    const line = svg.querySelector('line[marker-end="url(#' + (arrow === arrows.weight ? 'rArr' : 'pArr') + ')"]');
+    const m = line && line.getScreenCTM();
+    const t = Array.from(svg.querySelectorAll('text')).find((x) => re.test(x.textContent || ''));
+    if (!m || !t) return null;
+    const scale = Math.hypot(m.a, m.b);
+    const r = t.getBoundingClientRect();
+    const x = arrow.tail[0];
+    const half = 10 * scale;
+    return Math.round((r.left > x ? r.left - (x + half) : (x - half) - r.right) * 10) / 10;
+  };
+  const labelClear = { weight: clearOf(arrows.weight, /weight|^mg$/i), normal: clearOf(arrows.normal, /normal|^N$/i) };
+  return { arrows, ground, normal, labelClear };
 })()`
 async function probeForceArrows(page: import('playwright').Page): Promise<ForceArrowProbe | undefined> {
   return ((await page.evaluate(FORCE_ARROW_PROBE_JS)) as ForceArrowProbe | null) ?? undefined
@@ -143,15 +160,16 @@ async function probeForceArrows(page: import('playwright').Page): Promise<ForceA
 async function main() {
   const out = arg('out'), shots = arg('shots')
   if (shots) mkdirSync(shots, { recursive: true })
-  const acct = await createQaAccount('physbrowser')
+  const acct = await createQaAccount(`${SUBJECT.slice(0, 4)}browser`)
+  let accountCleanup: { deleted: boolean; reloginBlocked: boolean } | undefined
   const rows: Array<{ conceptId: string; vp: string; theme: string; verdict: string; fails: string[]; reviews: string[]; note?: string; segments?: number; attempts?: number; forceArrows?: ForceArrowProbe; figure?: FigureSelection; replySegments?: number; screenshot?: string | null }> = []
   try {
     const ob = await fetch(`${BASE}/api/onboarding`, {
       method: 'POST', headers: { 'content-type': 'application/json', cookie: acct.cookie },
-      body: JSON.stringify({ subjectSlug: 'physics', currentLevel: 'beginner', voiceChoice: 'male', teachingLanguage: 'en', selfDescription: 'I am learning physics.' }),
+      body: JSON.stringify({ subjectSlug: SUBJECT, currentLevel: 'beginner', voiceChoice: 'male', teachingLanguage: 'en', selfDescription: `I am learning ${SUBJECT}.` }),
     })
     if (!ob.ok) throw new Error(`onboarding ${ob.status}`)
-    const curr = await (await fetch(`${BASE}/api/curriculum?subject=physics`, { headers: { cookie: acct.cookie } })).json() as
+    const curr = await (await fetch(`${BASE}/api/curriculum?subject=${SUBJECT}`, { headers: { cookie: acct.cookie } })).json() as
       { lessons?: { unitTitle: string; lessonTitle: string; order: number; topicSlug: string }[] }
     const lessons = curr.lessons ?? []
     const browser = await chromium.launch({ executablePath: process.env.PW_CHROMIUM_PATH ?? '/opt/pw-browsers/chromium', args: CHROMIUM_ARGS })
@@ -164,7 +182,7 @@ async function main() {
       return { base, page }
     }
     try {
-      for (const id of CONCEPTS.filter((c) => !arg('only') || arg('only')!.split(',').includes(c))) {
+      for (const id of (arg('concepts')?.split(',') ?? CONCEPTS).filter((c) => !arg('only') || arg('only')!.split(',').includes(c))) {
         const l = lessons.find((x) => x.topicSlug === id)
         if (!l) { rows.push({ conceptId: id, vp: '-', theme: '-', verdict: 'NOT_RUN', fails: [], reviews: [], note: 'not in production curriculum' }); continue }
         // Every attempt adds another message (and another figure) to the lesson page — history is lesson-scoped, not
@@ -178,7 +196,7 @@ async function main() {
         const requireNormal = process.argv.includes('--require-normal')
         for (; attempts < maxAttempts;) {
           attempts++
-          const sid = await createSession(acct.cookie, 'physics')
+          const sid = await createSession(acct.cookie, SUBJECT)
           await openLesson(acct.cookie, sid, { lessonTitle: l.lessonTitle, lessonOrder: l.order, topicSlug: id, unitTitle: l.unitTitle, totalLessons: lessons.length })
           const turn = await say(acct.cookie, sid, arg('say') ?? 'Show me a diagram')
           replyText = turn.text ?? ''
@@ -213,6 +231,8 @@ async function main() {
             const fails = findings.filter((f) => f.severity === 'FAIL').map((f) => `${f.id} ${f.message}`)
             const reviews = findings.filter((f) => f.severity === 'REVIEW').map((f) => `${f.id} ${f.message}`)
             const forceArrows = kind === 'card' ? await probeForceArrows(page) : undefined
+            // Weight/normal labels must clear their arrowheads (ForceDiagram FORCE_DIAGRAM.labelGap). A label that touches the head is a defect.
+            for (const [which, clear] of Object.entries(forceArrows?.labelClear ?? {})) if (typeof clear === 'number' && clear < 4) fails.push(`LABEL-CLEAR the ${which} label is ${clear}px from its arrowhead (needs >= 4px)`)
             rows.push({
               conceptId: id, vp: v.vp, theme, verdict: fails.length ? 'FAIL' : reviews.length ? 'REVIEW_REQUIRED' : 'PASS', fails, reviews,
               segments, attempts, replySegments: segments, figure: selection, screenshot: shot, ...(forceArrows ? { forceArrows } : {}),
@@ -227,10 +247,12 @@ async function main() {
       }
     } finally { await browser.close() }
   } finally {
-    console.log('disposable account deleted =', (await deleteQaAccount(acct)).deleted)
+    const gone = await deleteQaAccount(acct)
+    console.log(`disposable account deleted = ${gone.deleted}, re-login blocked = ${gone.reloginBlocked}`)
+    accountCleanup = gone
   }
   const tally = rows.reduce<Record<string, number>>((m, r) => { m[r.verdict] = (m[r.verdict] ?? 0) + 1; return m }, {})
   console.log('TALLY', JSON.stringify(tally))
-  if (out) writeFileSync(out, JSON.stringify({ base: BASE, at: new Date().toISOString(), tally, rows }, null, 1))
+  if (out) writeFileSync(out, JSON.stringify({ base: BASE, subject: SUBJECT, deployment: arg('deployment') ?? null, commit: arg('commit') ?? null, at: new Date().toISOString(), tally, accountCleanup, rows }, null, 1))
 }
 main().catch((e) => { console.error(e); process.exit(1) })

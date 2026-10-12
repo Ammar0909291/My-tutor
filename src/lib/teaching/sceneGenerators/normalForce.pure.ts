@@ -200,6 +200,9 @@ export function buildNormalForceScene(params: NormalForceParams = NORMAL_FORCE_D
     title: 'Normal force: perpendicular to the surface, and not always mg',
     sceneType: 'diagram',
     cameraDistance: 13,
+    // A force diagram on a tilted surface has no ground to stand on: the stage's horizontal grid and axis triad would read as a
+    // second, competing 'floor' and shrink the figure to make room for it.
+    stage: { grid: false, axes: false },
     teachingGoal:
       'The normal force is the perpendicular push a surface exerts — whatever value stops the block moving into it: N = mg only on a ' +
       'level surface with nothing else pushing down; N = mg cos θ on a slope; and it is not the weight\'s Newton\'s-Third-Law partner.',

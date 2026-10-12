@@ -266,3 +266,10 @@ only source for the cycle total, so the cycle figure below is an estimate, not t
   campaign of tens of thousands of turns against production must be sized against the remaining quota first.
 - **Re-measure after deploy** with the same delta on queryid 1960876089180252044 (canonicalSlug lineage; expect rows per call ≈ 1–2,
   not 48) and the `explanation_assets … IN ($1…$N)` content reads.
+- **Interim re-measure, 2026-10-12 21:12 (BEFORE the capture-lineage fix is deployed; `snap4`, 5 h 27 min after `snap3`):** the
+  spine replay (2599099062474326428) is still +0 (228,732 calls / 110,437,546 rows); across the 45 heaviest statements the whole
+  window read 19,086 rows ≈ 3–4 MB (≈ 17 MB/day), dominated by 45 topic_progress reads of a heavy account (228 rows/call) —
+  the read-volume rate stays an order of magnitude under the quota (5 GB ÷ 30 d ≈ 167 MB/day). The capture-lineage statement
+  (1960876089180252044) still averages 20 rows/call (+37 calls, +746 rows) because the old code is what is deployed; the post-deploy
+  value is recorded in the closure report. The 5 GB figure the owner sees is the cycle total (spent 2026-10-05 → 10-07), not a
+  current rate; this window cannot lower it.
