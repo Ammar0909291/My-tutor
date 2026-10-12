@@ -236,6 +236,12 @@ import {
   buildRealIntegralResiduesScene, buildMobiusTransformationScene, buildRiemannSurfaceScene, buildTopologyOpenSetsScene,
   buildHomeomorphismScene, buildQuotientSpaceScene, buildHomotopyScene, buildFundamentalGroupScene, buildEulerCharacteristicScene,
 } from '@/lib/teaching/sceneGenerators/mathCoreScenesB22'
+import {
+  buildUnconstrainedOptimizationScene, buildConvexFunctionScene, buildConvexSetScene, buildLinearProgrammingScene,
+  buildLagrangeMultipliersScene, buildGradientMethodsScene, buildNewtonsMethodScene, buildInterpolationScene,
+  buildNumericalDifferentiationScene, buildNumericalIntegrationScene, buildRealValuedFunctionScene, buildRationalRootScene,
+  buildTopologicalManifoldScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB23'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -719,6 +725,21 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'math.top.homotopy':                   buildHomotopyScene,
   'math.top.fundamental-group':          buildFundamentalGroupScene,
   'math.top.euler-characteristic':       buildEulerCharacteristicScene,
+
+  // Mathematics visual campaign, batch 23 (2026-10-12). See mathCoreScenesB23.ts.
+  'math.opt.unconstrained-optimization': buildUnconstrainedOptimizationScene,
+  'math.opt.convex-function':            buildConvexFunctionScene,
+  'math.opt.convex-set':                 buildConvexSetScene,
+  'math.opt.linear-programming':         buildLinearProgrammingScene,
+  'math.opt.lagrange-multipliers':       buildLagrangeMultipliersScene,
+  'math.opt.gradient-methods':           buildGradientMethodsScene,
+  'math.num.newtons-method':             buildNewtonsMethodScene,
+  'math.num.interpolation':              buildInterpolationScene,
+  'math.num.numerical-differentiation':  buildNumericalDifferentiationScene,
+  'math.num.numerical-integration':      buildNumericalIntegrationScene,
+  'math.func.real-valued-function':      buildRealValuedFunctionScene,
+  'math.func.rational-root':             buildRationalRootScene,
+  'math.top.manifold':                   buildTopologicalManifoldScene,
 
   // The Punnett generator is single-gene by construction (genotypes are two
   // alleles). A dihybrid cross drawn as a monohybrid square teaches the wrong

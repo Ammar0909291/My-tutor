@@ -841,3 +841,42 @@ Next (batch 23 plan; 27 essential concepts still uncovered, 26 excluding the res
 numerical-differentiation, numerical-integration), `cat` (category, morphism-types, functor, natural-transformation), `meas` (simple-function, lebesgue-integral), `abst.cyclic-group`,
 `fnal.convolution`, geom 3-D (platonic-solids, differential-geometry-curves, frenet-serret), func (real-valued-function, rational-root; linear-function stays figure-less).
 Then tier H (210) and tier N (350).
+
+---
+
+# Batch 23 (2026-10-12): optimisation, numerical analysis, functions, manifolds
+
+`sceneGenerators/mathCoreScenesB23.ts` + `mathCoreScenesBatch23.test.ts` (132 checks); campaign audit threshold now 288. Coverage after this batch:
+334 of 908 concepts with a fixed figure; essential tier 332 / 346 (tier H 0 / 210, tier N 2 / 352). The `opt`, `num` and `func` essential concepts are complete (except the reserved
+fixture `math.func.linear-function`, which stays figure-less on purpose).
+
+Notes for later batches:
+- **Numerical-analysis figures are verified by re-running the algorithm on the drawn data**: the gradient-descent test starts from the DRAWN start point and checks every drawn iterate and
+  step against x − α∇f; Newton's tangents are checked against f′(xₖ) = 2xₖ and the next iterate; the secant slopes of the differentiation figure and the areas of the quadrature figure
+  (shoelace over the drawn trapezoids, Simpson arcs integrated along the drawn points) are recomputed; Lagrange interpolation is solved from the drawn dots.
+- **Rounding tolerance on steep curves again**: points of a curve rounded to 0.01 on screen are off by slope × 0.005 in value; the (x² − 1)² + 0.4x and sin tests use 0.03–0.04 (use
+  `Math.abs(y − f(x)) < 0.03` rather than 0.012 for anything with slope above 5).
+- **A concave polygon cannot be ordered by angle around its centroid** (convex-set test): read the corners in drawing order from the edge list instead.
+- Quadratic convergence is a limit: for Newton on x² − 2 the ratio eₖ₊₁/eₖ² is 0.25, 0.33, … → 0.354 = f″/(2f′); assert the last ratio tightly and the first loosely.
+- Chart arrows crossing a second chart bar read as wrong: lay the two charts side by side and slant the arrows (manifold figure).
+- Zero-length bonds appear when a vertical drop to the axis starts on the axis (sin at 0 and π): filter them out.
+
+| Concept | Figure |
+|---|---|
+| math.opt.unconstrained-optimization | (x² − 1)² + 0.4x: f′ = 0 at three points; f″ > 0 minima, f″ < 0 maximum; global vs local minimum |
+| math.opt.convex-function | x² chord above the graph (f″ ≥ 0); sin x chord dips below (not convex, f″ changes sign) |
+| math.opt.convex-set | pentagon (segment stays inside), dart (segment leaves), convex hull of seven points |
+| math.opt.linear-programming | max x + 2y over x + y ≤ 4, x, y ≤ 3, x, y ≥ 0: level lines, vector (1, 2), optimum 7 at vertex (1, 3) |
+| math.opt.lagrange-multipliers | x² + y² on x + y = 2: tangent circle √2 at (1, 1), ∇f = (2, 2) = 2∇g |
+| math.opt.gradient-methods | x² + 4y² with α = 0.2 from (2, 1): zigzag iterates, f falls ×0.36 per step |
+| math.num.newtons-method | x² − 2 from x₀ = 2: tangents to 1.5, 1.4167, 1.41422; errors 0.59, 0.086, 0.0025 |
+| math.num.interpolation | unique parabola through three points; Runge: 5 and 9 equally spaced nodes on 1/(1 + 25x²) |
+| math.num.numerical-differentiation | sin at 1: forward 0.165 vs centred 0.484 vs tangent 0.540; error bars O(h) vs O(h²) |
+| math.num.numerical-integration | ∫₀^π sin x: trapezoid 1.90 (error 0.10) vs Simpson 2.00 (error 0.005) with four panels |
+| math.func.real-valued-function | x² − 1 on [−2, 2]: domain, range [−1, 3], vertical-line test; circle fails it |
+| math.func.rational-root | 0.25(x + 2)(x − 1)²(x − 3): roots −2, 1, 3, crossing vs touching, sign pattern |
+| math.top.manifold | circle covered by two open arcs with linear charts; figure eight is not a manifold at its crossing |
+
+Next (batch 24 plan; 14 essential concepts still uncovered, 13 excluding the reserved fixture; this would finish the essential tier):
+`top.smooth-manifold`, `cat` (category, morphism-types, functor, natural-transformation), `geom` 3-D (platonic-solids, differential-geometry-curves, frenet-serret), `meas`
+(simple-function, lebesgue-integral), `abst.cyclic-group`, `fnal.convolution`. Then tier H (210) and tier N (350).
