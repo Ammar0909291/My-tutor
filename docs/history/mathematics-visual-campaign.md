@@ -1147,6 +1147,39 @@ Next (batch 32): the remaining 13 linalg helpers — rank, augmented-matrix, mat
 qr-factorization, singular-values, tensor — then de (12), stats (11), disc (11), calc (11), prob (10), seq (7), real (7), meas (6), top (4), opt (4), geom (4), func (4), cx (4), graph (3), fnal (3), trig (2),
 cat (2), num (1); then tier N (352) if still wanted. List what is left with `npx tsx scripts/math/visual-coverage.ts --list H`.
 
+# Batch 32 (2026-10-12): the rest of linear algebra (13 figures)
+
+`sceneGenerators/mathCoreScenesB32.ts` + `mathCoreScenesBatch32.test.ts` (132 checks); campaign audit threshold now 404. Coverage after this batch:
+450 of 908 concepts with a fixed figure (49.6%); essential tier 344 / 346 (complete), tier H 104 / 210 (49.5%), tier N 2 / 352; target (E + H) 448 / 556 = 80.6%. All `math.linalg.*` helpful concepts are now covered.
+Pre-push checklist: full `npx vitest run`, `scripts/ci/tsc-ratchet.sh` 0 errors, `validate-visualization-coverage.ts` PASS, `scripts/math/label-displacement.ts mathCoreScenesB32` (0 unresolved, 0 card-host moves),
+`scripts/math/campaign-tools/audit-module.ts mathCoreScenesB32` (13 / 13 admitted). The tests were mutation-checked: ten deliberate wrong numbers in the generator (a matrix entry, a pivot, an inverse entry, a bar length, an R entry, a tensor entry, a singular-value matrix entry, D, the image vector, a basis vector) each made exactly one test fail.
+
+| Concept | Figure |
+|---|---|
+| math.linalg.augmented-matrix | x + y = 3, x − y = 1 as [A \| b] (violet bar, green b column); R₂ − R₁ gives [[1, 1 \| 3], [0, −2 \| −2]]; solution (x, y) = (2, 1) |
+| math.linalg.rank | [[1, 2, 3], [2, 4, 6], [1, 0, 1]] (row 2 = 2 × row 1, red) → echelon form with the two pivots 1 and −2 green and a grey zero row: rank 2 |
+| math.linalg.matrix-inverse | A = [[2, 1], [1, 1]], det A = 1, A⁻¹ = [[1, −1], [−1, 2]], A A⁻¹ = I (green diagonal) |
+| math.linalg.vector-space | ℝ² with u = (1, 2), v = (2, 1): the parallelogram diagonal u + v = (3, 3), 2u and −u (violet): closed under + and scalars |
+| math.linalg.dimension | e₁, e₂ (2 basis arrows) for dim ℝ² = 2; line U = span{(2, 1)} dim 1; U⊥ = span{(−1, 2)} dim 1 with a right-angle mark; 1 + 1 = 2 |
+| math.linalg.matrix-representation | A = [[1, −1], [1, 1]]: its columns are the drawn images T(e₁) = (1, 1) (red) and T(e₂) = (−1, 1) (blue); v = (2, 1) ↦ T(v) = (1, 3) (green) |
+| math.linalg.diagonalization | A = [[3, 1], [0, 2]]: eigenvectors (1, 0), (1, −1) stretched ×3 and ×2; D = diag(3, 2); A = P D P⁻¹ |
+| math.linalg.spectral-theorem | symmetric [[2, 1], [1, 2]]: unit circle → ellipse (73 points each, point by point), axes along the orthogonal eigenvectors, ×3 and ×1 |
+| math.linalg.inner-product | u = (3, 1), v = (1, 2): 3 × 1 = 3, 1 × 2 = 2, 3 + 2 = 5 = u · v; θ = 45° arc; the perpendicular drop of v lands at 0.5 u |
+| math.linalg.inner-product-space | Cauchy–Schwarz for u = (3, 4), v = (4, 3): bars |u||v| = 25 vs \|⟨u, v⟩\| = 24 drawn in the true ratio; for v = 2u both bars are 50 |
+| math.linalg.qr-factorization | a₁ = (4, 3), a₂ = (1, 2) → Gram–Schmidt q₁ = (0.8, 0.6), q₂ = (−0.6, 0.8); R = [[5, 2], [0, 1]] (5 = \|a₁\|, 2 = a₂ along q₁, 1 = the rest) |
+| math.linalg.singular-values | A = [[1.8, −0.8], [2.4, 0.6]]: A e₁ has length 3, A e₂ length 1, perpendicular; unit circle → ellipse with semi-axes σ₁ = 3, σ₂ = 1; AᵀA = diag(9, 1) |
+| math.linalg.tensor | u = (1, 2) down, v = (3, 4) across, u ⊗ v = [[3, 4], [6, 8]] aligned like a multiplication table; Tᵢⱼ = uᵢ vⱼ, rank 1 |
+
+Notes: the tests read every matrix back from the DRAWN numerals (a shared `mAt(spec, i, j)` grid), recompute rank by elimination, A A⁻¹, the Gram–Schmidt steps, A = P D P⁻¹, AᵀA and its eigenvalues, the ellipse point by point
+(ellipse = A × circle at the same parameter) and the bar ratios, and compare with the drawn numbers. Reusable pieces in `mathCoreScenesB32.ts`: `MSpec`, `mAt`, `brackets`, `matrix` (numerals between brackets), `vec`.
+Lessons: caption lines stacked closer than ~0.65 world units push each other apart in the label solver (0.5 cascaded to a 30 px move) — keep >= 0.65; a figure that re-emits a numeral to recolour it duplicates the label
+(colour the entry in the step that first draws it); `rightAngleMark` takes mutable `[number, number]` tuples (a `readonly` tuple is a type error); a doc-comment containing `chromium-*/chrome-linux` ends the block comment at `*/`
+(this broke `shot.cjs` once). Tooling added this batch: `scripts/math/campaign-tools/` (audit-module, shot, montage, new-batch-test + test-helpers.txt, update-handover) and the live handover `MATHEMATICS_VISUAL_HANDOVER.md`.
+
+Next (batch 33): the 12 differential-equation helpers — ode, solution-types, ivp, existence-uniqueness, first-order-ode, wronskian, laplace-transform, systems-ode, fourier-transform, harmonic-functions, greens-function,
+nonlinear-ode — then stats (11), disc (11), calc (11), prob (10), seq (7), real (7), meas (6), top (4), opt (4), geom (4), func (4), cx (4), graph (3), fnal (3), trig (2), cat (2), num (1); then tier N (352) if still wanted.
+List what is left with `npx tsx scripts/math/visual-coverage.ts --list H`.
+
 # Deferred follow-up — do AFTER the Mathematics figure campaign (recorded 2026-10-12 at the owner's request)
 
 Context: the owner said another account was "validating visuals for all 4 subjects". A read-only audit of the last 10 days (2026-10-02 → 10-12) on `origin/main` and every remote branch found:

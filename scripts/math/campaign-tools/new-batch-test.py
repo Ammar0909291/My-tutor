@@ -10,8 +10,8 @@ coordinates back and re-derives every number the figure states.
       math.linalg.rank:buildRankScene:math-rank math.linalg.dimension:buildDimensionScene:math-dimension ...
 
 Each triple is  <concept id>:<exported build function>:<scene id used in the figure's `id:`>.
-Helpers you will want in the body (copy from src/tests/mathCoreScenesBatch31.test.ts): dist, labelAt, numsIn, evalLR, readGrid, matMul, crossings,
-lineParams, rectBoxes. Raise the threshold in src/tests/mathVisualCampaignAudit.test.ts by the number of figures.
+Generic helpers come from test-helpers.txt (dist, labelAt, numsIn, numOf, evalLR, matMul, closeVec, closeMat, vecOf, arrowsFrom, rankOf, det2, mulVec);
+matrix-grid readers (gridLabels / numGrid / colorsOf) depend on the batch's generator exports — copy them from src/tests/mathCoreScenesBatch32.test.ts. Raise the threshold in src/tests/mathVisualCampaignAudit.test.ts by the number of figures.
 """
 import re, sys, glob, os
 
@@ -19,8 +19,9 @@ n, module, *triples = sys.argv[1:]
 root = os.getcwd()
 prev = sorted(glob.glob(os.path.join(root, 'src/tests/mathCoreScenesBatch*.test.ts')), key=lambda p: int(re.search(r'Batch(\d+)', p).group(1)))[-1]
 src = open(prev, encoding='utf8').read()
-head_end = src.index("describe('the mathematics each figure draws'")
+head_end = src.index("// ── helpers") if "// ── helpers" in src else src.index("describe('the mathematics each figure draws'")
 head = src[:head_end]
+helpers = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'test-helpers.txt'), encoding='utf8').read()
 # the header comment, module import and BATCH list are batch specific
 head = re.sub(r"/\*\*.*?\*/", f"/**\n * Mathematics visual campaign, batch {n} (2026-10-12): TODO describe the concepts. Every number a figure states is re-derived here from the\n * DRAWN dots, numerals, lines, arrows and curves, never from the generator's own constants alone.\n */", head, count=1, flags=re.S)
 head = re.sub(r"mathCoreScenesB\d+'", f"{module}'", head)
@@ -29,5 +30,5 @@ batch = 'const BATCH: Array<[string, () => SceneSpec, string]> = [\n' + ''.join(
 head = re.sub(r"const BATCH: Array<\[string, \(\) => SceneSpec, string\]> = \[.*?\n\]\n", batch, head, count=1, flags=re.S)
 body = "describe('the mathematics each figure draws', () => {\n" + ''.join(f"  it.todo('{c}: re-derive every stated number from the drawn coordinates')\n" for c, f, i in rows) + '})\n'
 dest = os.path.join(root, f'src/tests/mathCoreScenesBatch{n}.test.ts')
-open(dest, 'w', encoding='utf8').write(head + body)
+open(dest, 'w', encoding='utf8').write(head + helpers + body)
 print('wrote', dest, 'from the head of', os.path.basename(prev))

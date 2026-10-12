@@ -284,6 +284,11 @@ import {
   buildGroupActionScene, buildSymmetricGroupScene, buildFieldExtensionScene, buildMatrixScene, buildMatrixAdditionScene,
   buildMatrixMultiplicationScene, buildMatrixTransposeScene, buildSymmetricMatrixScene,
 } from '@/lib/teaching/sceneGenerators/mathCoreScenesB31'
+import {
+  buildAugmentedMatrixScene, buildRankScene, buildMatrixInverseScene, buildVectorSpaceScene, buildDimensionScene,
+  buildMatrixRepresentationScene, buildDiagonalizationScene, buildSpectralTheoremScene, buildInnerProductScene,
+  buildInnerProductSpaceScene, buildQrFactorizationScene, buildSingularValuesScene, buildTensorScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB32'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -901,6 +906,21 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'math.linalg.matrix-multiplication':   buildMatrixMultiplicationScene,
   'math.linalg.matrix-transpose':        buildMatrixTransposeScene,
   'math.linalg.symmetric-matrix':        buildSymmetricMatrixScene,
+
+  // Mathematics visual campaign, batch 32 (2026-10-12). See mathCoreScenesB32.ts.
+  'math.linalg.augmented-matrix':        buildAugmentedMatrixScene,
+  'math.linalg.rank':                    buildRankScene,
+  'math.linalg.matrix-inverse':          buildMatrixInverseScene,
+  'math.linalg.vector-space':            buildVectorSpaceScene,
+  'math.linalg.dimension':               buildDimensionScene,
+  'math.linalg.matrix-representation':   buildMatrixRepresentationScene,
+  'math.linalg.diagonalization':         buildDiagonalizationScene,
+  'math.linalg.spectral-theorem':        buildSpectralTheoremScene,
+  'math.linalg.inner-product':           buildInnerProductScene,
+  'math.linalg.inner-product-space':     buildInnerProductSpaceScene,
+  'math.linalg.qr-factorization':        buildQrFactorizationScene,
+  'math.linalg.singular-values':         buildSingularValuesScene,
+  'math.linalg.tensor':                  buildTensorScene,
 
   // The Punnett generator is single-gene by construction (genotypes are two
   // alleles). A dihybrid cross drawn as a monohybrid square teaches the wrong
