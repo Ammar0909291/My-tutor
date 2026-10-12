@@ -30,6 +30,7 @@ import { ATOM_MODEL } from '@/components/school/visuals/AtomicStructure3D'
 import { SHELL_ELECTRONS_DRAWN } from '@/components/school/visuals/ElectronShells3D'
 import { ELECTRONS_PER_ATOM_BEFORE, SHARED_PAIR_ELECTRONS } from '@/components/school/visuals/BondFormation3D'
 import { LATTICE_STAGES } from '@/components/school/visuals/CrystalLattice3D'
+import { OUTER as TETRAHEDRAL_ATOMS } from '@/components/school/visuals/MolecularShapes3D'
 import { resolveVisual } from '@/lib/teaching/visual/resolveVisual'
 import { buildCanonicalScene } from '@/lib/teaching/visual/conceptSceneParams'
 
@@ -237,6 +238,16 @@ describe('R19 — the four fixed React cards the payload audit cannot see are he
     expect(2 * ELECTRONS_PER_ATOM_BEFORE).toBe(SHARED_PAIR_ELECTRONS)
   })
 
+  it('the molecular-shapes card draws a real tetrahedron: four equal bonds, every pair of bonds 109.47° apart (the 109.5° it labels)', () => {
+    expect(TETRAHEDRAL_ATOMS).toHaveLength(4)
+    const len = (v: number[]) => Math.hypot(v[0], v[1], v[2])
+    for (const v of TETRAHEDRAL_ATOMS) expect(len(v)).toBeCloseTo(len(TETRAHEDRAL_ATOMS[0]), 6)
+    for (let i = 0; i < 4; i++) for (let j = i + 1; j < 4; j++) {
+      const a = TETRAHEDRAL_ATOMS[i], b = TETRAHEDRAL_ATOMS[j]
+      expect((Math.acos((a[0] * b[0] + a[1] * b[1] + a[2] * b[2]) / (len(a) * len(b))) * 180) / Math.PI).toBeCloseTo(109.47, 1)
+    }
+  })
+
   it('the lattice card REPEATS its unit cell and then grows it (the "repeated" stage used to equal the unit cell)', () => {
     const n = (g: readonly number[]) => g[0] * g[1] * g[2]
     expect(n(LATTICE_STAGES.unitCell)).toBe(8)
@@ -255,14 +266,30 @@ describe('R12 — the two concepts that had no figure each own a faithful one', 
     expect(chemistryAdmissionFailure(id, d.payload)).toBeNull()
   })
 
-  it('colloids: the three-box model by particle size, with the Tyndall and membrane tests', () => {
+  it('colloids: the three-box model by particle size, the Tyndall and dialysis tests, and suspensions scatter light too', () => {
     const t = text('chem.surface.colloids')
-    for (const s of ['below about 1 nm', 'about 1–1000 nm', 'above about 1000 nm', 'scatters a light beam (Tyndall effect)', 'homogeneous; no Tyndall effect', 'settles on standing']) expect(t).toContain(s)
+    for (const s of ['dissolved molecules or ions, mostly below about 1 nm', 'about 1–1000 nm', 'above about 1000 nm', 'scatters a light beam (Tyndall effect)', 'homogeneous; no Tyndall effect',
+      'passes filter paper, not a dialysis membrane', 'scatters light too', 'settles on standing']) expect(t).toContain(s)
   })
 
-  it('water: 104.5° (not 120°), hydrogen bonding, ice less dense, both kinds of hardness, D₂O', () => {
+  it('water: 104.5° (not 120°), hydrogen bonding with its conditions, both kinds of hardness, D₂O, amphoteric', () => {
     const t = text('chem.sblock.water')
-    for (const s of ['104.5°', 'two lone pairs', '0.917 vs 1.000 g/cm³', 'temporary', 'permanent', 'Na₂CO₃', 'D₂O', 'amphoteric', '101.4 °C']) expect(t).toContain(s)
+    for (const s of ['104.5°', 'two lone pairs', '0.917 g/cm³ vs water 1.000', '(1 atm)', 'temporary (hydrogencarbonates)', 'permanent (sulfates, chlorides)', 'Na₂CO₃', 'D₂O', 'amphoteric', '101.4 °C']) expect(t).toContain(s)
     expect(t).not.toContain('120')
+  })
+})
+
+describe('R12 follow-up — a cell is named by what it is, not by how many beakers it has', () => {
+  const goal = (id: string) => buildCanonicalScene(null, id)!.teachingGoal ?? ''
+
+  it('the zinc–carbon dry cell is a GALVANIC cell (it was taught as "an electrolytic cell")', () => {
+    const g = goal('chem.elect.batteries')
+    expect(g).toContain('a galvanic cell with one electrolyte')
+    expect(g).not.toContain('electrolytic')
+  })
+
+  it('divided galvanic cells stay "divided galvanic" and the electrolytic cells stay "electrolytic"', () => {
+    expect(goal('chem.elect.galvanic-cell')).toContain('a divided galvanic cell')
+    for (const id of ['chem.elect.electrolysis', 'chem.elect.industrial']) expect(goal(id), id).toContain('an electrolytic cell')
   })
 })

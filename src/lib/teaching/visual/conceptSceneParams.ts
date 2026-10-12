@@ -1423,7 +1423,7 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     quantity: { name: 'log Kf', kind: 'magnitude' },
     bars: [
       { label: '[Cu(NH3)4]2+ (monodentate)', frequency: 13.0 },
-      { label: '[Cu(EDTA)]2− (chelate)', frequency: 18.8 },
+      { label: '[Cu(EDTA)]²⁻ (chelate)', frequency: 18.8 },   // authored with the superscript: the typesetter cannot parse the EDTA ligand, so "2−" stayed flat beside the typeset [Cu(NH₃)₄]²⁺
     ],
   }),
   'chem.thermo.heat-capacities': () => buildStatisticsBarChartScene({
@@ -1526,11 +1526,11 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'chem.surface.colloids': () => buildCellComparisonScene({
     conceptId: 'chem.surface.colloids',
     title: 'Solution, Colloid, Suspension: Particle Size Decides',
-    teachingGoal: 'A colloid sits between a true solution and a suspension: its particles (about 1–1000 nm) are too small to settle and too large to pass a membrane, yet large enough to scatter light (the Tyndall effect).',
+    teachingGoal: 'A colloid sits between a true solution and a suspension: its particles (about 1–1000 nm) stay dispersed instead of settling, pass ordinary filter paper but not a dialysis membrane, and scatter light (the Tyndall effect).',
     groups: [
-      { label: 'True solution', description: 'particles below about 1 nm: single molecules or ions', items: ['homogeneous; no Tyndall effect', 'does not settle; passes a membrane'] },
-      { label: 'Colloid', description: 'particles about 1–1000 nm', items: ['scatters a light beam (Tyndall effect)', 'does not settle; too large to pass a membrane (dialysis)', 'e.g. gelatin sol, gold sol'] },
-      { label: 'Suspension', description: 'particles above about 1000 nm', items: ['heterogeneous: visibly chunky', 'settles on standing'] },
+      { label: 'True solution', description: 'dissolved molecules or ions, mostly below about 1 nm', items: ['homogeneous; no Tyndall effect', 'passes filter paper and a dialysis membrane'] },
+      { label: 'Colloid', description: 'particles about 1–1000 nm', items: ['scatters a light beam (Tyndall effect)', 'stays dispersed; passes filter paper, not a dialysis membrane', 'e.g. warm gelatin sol, gold sol'] },
+      { label: 'Suspension', description: 'particles above about 1000 nm', items: ['heterogeneous and cloudy; scatters light too', 'settles on standing; filter paper holds it back'] },
     ],
   }),
   // R12: "Chemistry of Water" had no figure — the cached generated one drew H–O–H at 120° (refused by the VSEPR gate). Four groups,
@@ -1541,10 +1541,10 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     title: 'Water: A Bent, Polar, Hydrogen-Bonded Molecule',
     teachingGoal: 'Two lone pairs bend water to about 104.5°, so its bond dipoles do not cancel; hydrogen bonding then explains its high boiling point and the low density of ice; Ca²⁺ and Mg²⁺ make water hard; D₂O is the heavy isotopologue.',
     groups: [
-      { label: 'Bent, polar molecule', description: 'oxygen is far more electronegative than hydrogen; two lone pairs squeeze the angle below 109.5°', items: ['H–O–H ≈ 104.5°', 'dipoles do not cancel'] },
-      { label: 'Hydrogen bonding', description: 'each molecule donates 2 and accepts 2 hydrogen bonds', items: ['boils at 100 °C (H₂S: −60 °C)', 'ice floats: 0.917 vs 1.000 g/cm³'] },
-      { label: 'Hard water', description: 'dissolved Ca²⁺ and Mg²⁺ ions stop soap lathering', items: ['temporary: boil it away', 'permanent: ion exchange, Na₂CO₃'] },
-      { label: 'Heavy water, D₂O', description: 'both hydrogens are deuterium (²H); water itself is amphoteric, donating H⁺ (→ OH⁻) and accepting H⁺ (→ H₃O⁺)', items: ['boils at 101.4 °C', 'CANDU moderator, NMR solvent'] },
+      { label: 'Bent, polar molecule', description: 'oxygen is far more electronegative than hydrogen; two lone pairs squeeze the angle below 109.5°. Water is also amphoteric: it donates H⁺ (→ OH⁻) and accepts H⁺ (→ H₃O⁺)', items: ['H–O–H ≈ 104.5°', 'dipoles do not cancel'] },
+      { label: 'Hydrogen bonding', description: 'each molecule can donate 2 and accept 2 hydrogen bonds (4 in ice; about 3.5 on average in liquid water)', items: ['boils at 100 °C (1 atm); H₂S: −60 °C', 'ice floats: 0.917 g/cm³ vs water 1.000'] },
+      { label: 'Hard water', description: 'dissolved Ca²⁺ and Mg²⁺ ions turn soap to scum instead of lather', items: ['temporary (hydrogencarbonates): boiling reduces it', 'permanent (sulfates, chlorides): ion exchange, Na₂CO₃'] },
+      { label: 'Heavy water, D₂O', description: 'both hydrogens are deuterium (²H)', items: ['boils at 101.4 °C (1 atm)', 'CANDU moderator; ¹H NMR solvent'] },
     ],
   }),
   'chem.state.phase-diagram': () => buildCellComparisonScene({
@@ -1570,7 +1570,7 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
       { label: 'Ideal gas', description: 'point particles, no attractions', items: ['Z = 1 at every pressure'] },
       { label: 'Moderate pressure', description: 'attractions pull molecules back from the walls', items: ['lower pressure than ideal', 'Z < 1'] },
       { label: 'High pressure', description: 'the molecules’ own volume matters', items: ['less free space than the container', 'Z > 1'] },
-      { label: 'van der Waals', description: '(P + a/Vm²)(Vm − b) = RT', items: ['a/Vm²: adds back pressure lost to attractions', 'b: the excluded volume (about 4× the molecules’ own volume)'] },
+      { label: 'van der Waals', description: '(P + a/Vm²)(Vm − b) = RT', items: ['a/Vm²: adds back pressure lost to attractions', 'b: excluded volume, ~4× molecular volume'] },
     ],
   }),
   // CHEM-022: "Nucleic Acids" got a DNA-replication flow chart and taught
@@ -1816,7 +1816,7 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     teachingGoal: 'Whether a polymer can biodegrade starts with its backbone chemistry — hydrolysable linkages or none — not with whether the monomer came from plants; conductivity needs a conjugated π-system AND a doping step.',
     groups: [
       { label: 'Hydrolysable backbone', description: 'aliphatic ester linkages that moisture and microbial enzymes can cleave — can biodegrade, but slowly outside industrial composting', items: ['PLA (often plant-derived; needs industrial composting)'] },
-      { label: 'All-carbon backbone', description: 'no hydrolysable linkage — not biodegradable, whatever the feedstock', items: ['Bio-polyethylene (from bio-based ethanol)', 'Petroleum polyethylene (chemically identical)'] },
+      { label: 'All-carbon backbone', description: 'no hydrolysable linkage — resists biodegradation, whatever the feedstock', items: ['Bio-polyethylene (from bio-based ethanol)', 'Petroleum polyethylene (chemically identical)'] },
       { label: 'Conducting polymers', description: 'need an extended conjugated π-system AND a doping step', items: ['Undoped: only a modest semiconductor', 'Doped polyacetylene, polypyrrole: mobile charge carriers'] },
     ],
   }),

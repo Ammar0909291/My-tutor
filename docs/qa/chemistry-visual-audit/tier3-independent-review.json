@@ -1,0 +1,558 @@
+{
+ "generated": "2026-10-09",
+ "about": "Independent chemistry review of every Tier-3 (generated, cached in production visualization_cache) figure the resolver would serve, read against authoritative public sources by reviewers who had not seen the code or any verdict. The review packet was the figure exactly as cached (docs/qa/chemistry-visual-audit/tier23-snapshot/figures.json). Verdict scale: ACCURATE (nothing wrong), MINOR (true but loose, ambiguous or incomplete), WRONG (a statement or drawing contradicts the chemistry or the concept). The 16 figures refused by content fingerprint in src/lib/teaching/visual/retired.ts (RETIRED_GENERATED_FIGURES) are the 15 WRONG ones plus chem.hyd.polycyclic: its review is MINOR, but the defect it lists is a drawing error, not a wording one — a ring labelled 'Furan' is drawn with no oxygen (a carbocycle) and no fused system appears under a 'polycyclic' title — so it was retired as depicting something the label contradicts. The other reviewed figures are MINOR or ACCURATE; those the resolver still serves stay served and stay REVIEW_REQUIRED in semantic-review.json with the reviewer's notes.",
+ "counts": {
+  "ACCURATE": 10,
+  "MINOR": 36,
+  "WRONG": 15
+ },
+ "entries": [
+  {
+   "conceptId": "chem.found.matter",
+   "verdict": "WRONG",
+   "issues": [
+    "BORDERLINE-WRONG (depiction contradicts the narration). Compound pair (green@x=3, red@x=3.5) and mixture pair (purple@x=5, orange@x=5.5) are drawn with identical geometry: centre spacing 0.5 with radius 0.5 each, i.e. half-overlapping, fused-looking spheres. The mixture is therefore drawn exactly like the 'chemically bonded' compound, so the very distinction the teachingGoal claims ('distinguish pure substances from mixtures', narration 'not chemically bonded') is not shown. Correct depiction: bonded atoms as a joined unit, mixture components as separate, non-touching particles (ideally several of each).",
+    "Element is a single lone sphere (no hint of many identical atoms); no bond sticks anywhere. Narration text itself (element/compound/mixture definitions) is correct."
+   ],
+   "sources": [
+    "Own computation from the scene coordinates (vector dot products), run in this review"
+   ]
+  },
+  {
+   "conceptId": "chem.found.states-of-matter",
+   "verdict": "MINOR",
+   "issues": [
+    "No false statement, but the 'Interconversion' flow only runs one way (Solid -> Melting -> Liquid -> Evaporation -> Gas). Freezing, condensation, sublimation and deposition are absent; 'Evaporation (Heating)' should be vaporisation/boiling in a heating-curve context. No particle-arrangement or energy information."
+   ],
+   "sources": []
+  },
+  {
+   "conceptId": "chem.found.pure-substances",
+   "verdict": "MINOR",
+   "issues": [
+    "No false statement. It is a separation procedure (identify mixture type -> pick technique -> apply -> verify), not a depiction of what a pure substance (element/compound) versus a homogeneous/heterogeneous mixture is. Steps 3-4 are generic ('apply the chosen technique')."
+   ],
+   "sources": []
+  },
+  {
+   "conceptId": "chem.found.mole-concept",
+   "verdict": "ACCURATE",
+   "issues": [
+    "Conversions are correct: g / (g/mol) = mol; mol x 6.022x10^23 = particles. Only nit: Avogadro constant unit (mol^-1) omitted; value 6.022x10^23 is the standard 4-s.f. figure (SI-exact 6.02214076x10^23 mol^-1)."
+   ],
+   "sources": [
+    "CODATA/SI definition of the Avogadro constant, 6.02214076e23 mol^-1: https://physics.nist.gov/cgi-bin/cuu/Value?na (well-established; not re-fetched in this review)"
+   ]
+  },
+  {
+   "conceptId": "chem.found.concentration",
+   "verdict": "MINOR",
+   "issues": [
+    "No false statement (M = n/V and M1V1 = M2V2 are correct) but it is a generic problem-solving checklist: only molarity is named, molality/mass %/ppm/mole fraction are never mentioned, so 'converting between concentration units' is not actually taught; the dilution step is not a unit conversion; 'convert to moles' is not needed for every conversion (e.g. % to ppm)."
+   ],
+   "sources": []
+  },
+  {
+   "conceptId": "chem.atomic.quantum-mech-model",
+   "verdict": "WRONG",
+   "issues": [
+    "BORDERLINE-WRONG. Graph is psi(x) = sin(x) with x-axis 'Position (m)' plotted over [-10, 10] (about 3 full periods, constant amplitude 1: values sin(-10)=0.544, sin(-5)=0.959, sin(5)=-0.959, sin(10)=-0.544). That is an unbounded, non-normalisable plane-wave-like function on a metre scale, whereas the quantum mechanical model of the atom is about bound, normalisable wavefunctions localised on ~1e-10 m with quantised nodes and a probability density |psi|^2. Axis scale (metres, +/-10 m) and form imply the electron is equally likely everywhere over 20 m, which is false for an atomic electron. No orbital, quantum number, node count or |psi|^2 shown. (A particle-in-a-box sin(n pi x/L) on 0<x<L, or a hydrogen 1s radial plot in Bohr radii, would be defensible.)"
+   ],
+   "sources": [
+    "Own computation from the scene coordinates (vector dot products), run in this review (numeric evaluation of sin(x) with the repository's mathParser)"
+   ]
+  },
+  {
+   "conceptId": "chem.bond.ionic-bonding",
+   "verdict": "MINOR",
+   "issues": [
+    "All five steps (sublimation, dissociation, ionisation, electron affinity, lattice formation) are valid Born-Haber contributions, but a Born-Haber cycle is an energetics bookkeeping tool: the linear arrow flow omits the formation enthalpy that closes the cycle, signs/magnitudes of each step, and never shows electron transfer or electrostatic attraction between ions, i.e. ionic bonding itself."
+   ],
+   "sources": []
+  },
+  {
+   "conceptId": "chem.bond.mo-theory",
+   "verdict": "ACCURATE",
+   "issues": [
+    "All statements correct: bonding/antibonding sigma, pi and sigma*, pi* from LCAO; bond order = (bonding - antibonding)/2; unpaired electrons -> paramagnetic, all paired -> diamagnetic; Pauli and Hund. Nit: Aufbau (lowest energy first) is only implicit, 's-p mixing' for N2-and-lighter ordering is not mentioned, and no actual MO energy diagram is drawn."
+   ],
+   "sources": []
+  },
+  {
+   "conceptId": "chem.bond.intermolecular",
+   "verdict": "WRONG",
+   "issues": [
+    "BORDERLINE-WRONG ('missing the very feature it claims to show'). The three panels are geometrically identical: two unlabelled spheres joined by a 2-unit stick (colour is the only change). Step 2 claims to 'depict hydrogen bonding between water molecules' but there is no water (no O, no H, no O-H...O arrangement, no partial charges); step 1/2 show no induced/permanent dipole (delta+/delta-). Solid sticks are the scene's bond primitive, so intermolecular attractions are drawn as covalent-looking bonds of equal length, which contradicts the goal 'relative strengths' (dispersion < dipole-dipole < H-bond) and reinforces the misconception that IMFs are bonds."
+   ],
+   "sources": [
+    "Own computation from the scene coordinates (vector dot products), run in this review"
+   ]
+  },
+  {
+   "conceptId": "chem.bond.metallic-bonding",
+   "verdict": "MINOR",
+   "issues": [
+    "No false statement: positive ion lattice (3x3, spacing 2) plus small mobile electrons is the correct electron-sea picture. Weak points: 9 ions vs 6 electrons and no charge labels, so charge balance is not shown; the gold vectors only run ion->electron for two ions; the stated goal (explaining conductivity and malleability) is never actually depicted; ions are not close-packed."
+   ],
+   "sources": []
+  },
+  {
+   "conceptId": "chem.bond.coordinate-bond",
+   "verdict": "ACCURATE",
+   "issues": [
+    "Correct: Lewis base lone pair + Lewis acid empty orbital -> donated pair -> coordinate (dative) bond. Abstract (no NH3->BF3 style example) but nothing wrong."
+   ],
+   "sources": []
+  },
+  {
+   "conceptId": "chem.state.kinetic-theory",
+   "verdict": "MINOR",
+   "issues": [
+    "No false statement (elastic collisions, momentum transfer -> pressure, temperature) but only ONE molecule is drawn, no wall is drawn, and 'Pressure'/'Temperature (T)' are floating labels. KMT is about many molecules in random motion with T proportional to mean kinetic energy and P from the rate of many wall collisions; that is not conveyed."
+   ],
+   "sources": []
+  },
+  {
+   "conceptId": "chem.state.gas-laws",
+   "verdict": "MINOR",
+   "issues": [
+    "Equation P = 10/V is a correct Boyle's-law hyperbola (PV = 10 atm L constant: V=1 ->10, 2 ->5, 5 ->2, 10 ->1 atm). Weaknesses: the renderer plots x over [-10,10], so the mirror branch with NEGATIVE volume and NEGATIVE pressure (e.g. x=-5 -> -2) is drawn and x=0 is a singularity; n and T are not stated; only Boyle's law (title is 'Gas Laws')."
+   ],
+   "sources": [
+    "Own computation from the scene coordinates (vector dot products), run in this review (mathParser evaluation); repository GraphRenderer.tsx draws the whole [-10,10] view"
+   ]
+  },
+  {
+   "conceptId": "chem.state.molar-mass-gas",
+   "verdict": "WRONG",
+   "issues": [
+    "Step 4 'Calculate molecular mass from empirical formula' is false as a procedure: an empirical formula gives only the empirical-formula MASS; the molecular formula/molecular mass needs the experimental molar mass (from step 2, M = dRT/P): n = M(exp)/M(empirical). The flow also places 'Determine empirical formula from elemental composition' after the gas-density step without ever linking the two, so it teaches the empirical/molecular-formula confusion. Step 5 (Graham's law to 'compare effusion rates') is a separate topic, not part of obtaining molar mass from gas data (except as an alternative method). Step 2 is correct (M = dRT/P)."
+   ],
+   "sources": []
+  },
+  {
+   "conceptId": "chem.sol.solubility",
+   "verdict": "MINOR",
+   "issues": [
+    "Constant 0.034 mol/(L atm) equals Henry's constant of CO2 in water at 25 degC (3.4e-4 mol/(m3 Pa)); correct for CO2 but the figure says only 'gas' and gives no gas or temperature (O2 is ~1.3e-3, N2 ~6e-4 mol/(L atm)). Linear C = kH P is correct. Rendered in the default [-10,10] view (vertical half-range ~7) the line only reaches 0.34, i.e. it lies ~6 px from the x-axis and looks flat; the negative-pressure half-line is drawn too."
+   ],
+   "sources": [
+    "R. Sander, Compilation of Henry's law constants (v5.0.0), Atmos. Chem. Phys. 23, 10901 (2023); CO2 entry https://henrys-law.org/henry/casrn/124-38-9 (Hscp ~3.4e-4 mol/(m3 Pa) = ~0.034 mol/(L atm) at 298 K)"
+   ]
+  },
+  {
+   "conceptId": "chem.sol.colligative",
+   "verdict": "MINOR",
+   "issues": [
+    "Constant 0.512 degC kg/mol is the correct Kb of water and 'y = 0.512 * x' parses (checked: m=1 -> 0.512, m=10 -> 5.12 degC). Limits: only boiling-point elevation (title is 'Colligative Properties'; no freezing-point depression, vapour-pressure lowering or osmotic pressure); valid only for dilute non-volatile non-electrolyte (i = 1), not stated; molality up to 10 and negative molality are drawn."
+   ],
+   "sources": [
+    "Wikipedia, Boiling-point elevation (Kb of water = 0.512 degC kg/mol): https://en.wikipedia.org/wiki/Boiling-point_elevation"
+   ]
+  },
+  {
+   "conceptId": "chem.equil.kw-ph",
+   "verdict": "MINOR",
+   "issues": [
+    "Correct: pH 0-14 scale, neutral 7 at 25 degC (Kw = 1.0e-14). But the figure shows only a bare number line with 7 highlighted; Kw, [H+][OH-], pOH and the temperature dependence of neutrality (title: 'Water Ionization and pH') are not shown."
+   ],
+   "sources": []
+  },
+  {
+   "conceptId": "chem.equil.acids-bases",
+   "verdict": "MINOR",
+   "issues": [
+    "Brønsted-Lowry arrow (acid -> base, 'donates H+') and Lewis arrow (base -> acid, electron pair flows to the acid) are directionally correct. Weak points: the Arrhenius row has an unlabelled arrow from acid to base that suggests a transfer, whereas Arrhenius acids/bases dissociate in water (H+ / OH- release); labels are long and sit on the arrow ends; Lewis arrow text 'accepts e- pair' describes the acid, not the arrow's flow."
+   ],
+   "sources": []
+  },
+  {
+   "conceptId": "chem.equil.titration",
+   "verdict": "WRONG",
+   "issues": [
+    "Equation pH = 7 + 3/(1+exp(-5(x-5))) is not a real acid-base titration curve. Numerically: pH = 7.00 for 0 <= x <= ~2, 8.5 at x=5 mL, 10.0 for x>=7 mL. A titration of an acid/base analyte starts far from neutral (strong acid ~1, 0.1 M weak acid ~3; for a base ~11-13), not at pH 7.0, and shows a buffer region for weak species; the curve here starts at 7.0, has its steepest point (equivalence) at pH 8.5 (which would imply a weak acid whose start should be ~3) and ends at only pH 10. In the default view (vertical half-range ~7.2) the learner sees a flat line at pH 7 that leaves the top of the plot near x~4.5 mL. Correct: strong acid + strong base starts low (~1), equivalence at pH 7 with a near-vertical jump to ~12-13; weak acid + strong base starts ~3, equivalence ~8.7 for 0.1 M acetic acid."
+   ],
+   "sources": [
+    "LibreTexts, Titration curves: https://chem.libretexts.org/Courses/Brevard_College/CHE_104%3A_Principles_of_Chemistry_II/07%3A_Acid_and_Base_Equilibria/7.20%3A_Titration_Curves ; UW-Madison ChemSkills, weak acid/strong base titration: https://wisc.pb.unizin.org/chem104workingcopy/?p=223",
+    "Own computation from the scene coordinates (vector dot products), run in this review (mathParser evaluation)"
+   ]
+  },
+  {
+   "conceptId": "chem.redox.balancing",
+   "verdict": "MINOR",
+   "issues": [
+    "Half-reaction method steps are right, but: 'Balance hydrogen atoms with H+ (acidic) or OH- (basic)' is imprecise for basic solution (adding OH- also adds O; the standard way is to balance as in acid and then add OH- to both sides to neutralise H+, or add H2O/OH- in pairs); the final step says 'combine' without the essential step of multiplying half-reactions so electrons cancel."
+   ],
+   "sources": []
+  },
+  {
+   "conceptId": "chem.redox.titrations",
+   "verdict": "MINOR",
+   "issues": [
+    "Generic and mostly correct, but 'Add indicator' is not universal (KMnO4 is self-indicating; iodine/starch, redox indicators otherwise), 'calculate equivalents and molar mass' is an odd end-point (normally concentration/amount of analyte), and acidification/medium and stoichiometry (n-factor) are not shown."
+   ],
+   "sources": []
+  },
+  {
+   "conceptId": "chem.kinet.rate-law",
+   "verdict": "MINOR",
+   "issues": [
+    "Equation y = x^2 is correct for rate = k[A]^2 with k = 1 M^-1 s^-1 (units: M^-1 s^-1 x M^2 = M s^-1). Weak points: x in [-10,10] is plotted, so the mirror branch gives positive rate for NEGATIVE concentration (x=-5 -> 25); 10 M and 100 M/s are unrealistic; only one order is shown, so 'order' is not contrasted (0th linear/constant, 1st linear, 2nd parabola); in the default view only |[A]| <= ~2.7 is visible."
+   ],
+   "sources": [
+    "Own computation from the scene coordinates (vector dot products), run in this review (mathParser evaluation)"
+   ]
+  },
+  {
+   "conceptId": "chem.kinet.catalysis",
+   "verdict": "MINOR",
+   "issues": [
+    "No false statement (alternative pathway with lower activation energy, catalyst regenerated), but steps 3-4 are redundant, 'substrate binds to catalyst' is enzyme/surface-specific, and the key points (no change in Delta H or equilibrium position, rate of both directions raised, energy profile) are missing."
+   ],
+   "sources": []
+  },
+  {
+   "conceptId": "chem.kinet.photochemistry",
+   "verdict": "MINOR",
+   "issues": [
+    "Steps 1-3 are right (absorption, excited state, primary photochemical step). 'Secondary reaction involving radicals' is not general, competing photophysical decay (fluorescence, internal conversion, intersystem crossing) is omitted, and steps 5-6 (quantum yield, Beer-Lambert) are analysis methods, not part of the reaction sequence, so the flow mixes mechanism with measurement."
+   ],
+   "sources": []
+  },
+  {
+   "conceptId": "chem.surface.colloids",
+   "verdict": "MINOR",
+   "issues": [
+    "Colloidal particles and Brownian motion are fine. In the Tyndall step the light-beam arrow runs along y=2 while all particles sit at y=0 with radius 0.5 (particle tops at y=0.5), so the beam misses every particle and no scattered light is drawn; the dispersion medium is not depicted; narration calls it a 'colloidal suspension' (a colloid is not a suspension). Teaching value of the Tyndall step is therefore weak, but nothing is chemically false."
+   ],
+   "sources": [
+    "Own computation from the scene coordinates (vector dot products), run in this review"
+   ]
+  },
+  {
+   "conceptId": "chem.surface.surfactants",
+   "verdict": "ACCURATE",
+   "issues": [
+    "Correct sequence: adsorption at interface lowers surface tension; tension falls until the CMC then plateaus; above CMC micelles form; hydrophobic cores solubilise oily dirt (detergency). No structure of an amphiphile is drawn but no statement is wrong."
+   ],
+   "sources": []
+  },
+  {
+   "conceptId": "chem.sblock.water",
+   "verdict": "WRONG",
+   "issues": [
+    "Water (step 0) and heavy water D2O (step 1) are drawn with O at origin, H at (1,0,0) and (-0.5,0.866,0): computed H-O-H angle = 120.0 degrees. Real H2O/D2O angle is ~104.5 degrees (bent, ~104.5 for D2O as well, from two lone pairs on O). 120 degrees implies sp2/trigonal geometry. Also 'Amphoteric' is only a floating label with no depiction, and the Ca2+ and Mg2+ spheres overlap (distance 1.0 < r 0.6 + 0.5). Isotope labelling (D) and ion identities are correct."
+   ],
+   "sources": [
+    "UW-Madison Chem 109 notes (experimental H-O-H angle 104.5 deg, O-H 94 pm): https://wisc.pb.unizin.org/chem109fall2022/?p=194",
+    "Own computation from the scene coordinates (vector dot products), run in this review"
+   ]
+  },
+  {
+   "conceptId": "chem.pblock.group15",
+   "verdict": "WRONG",
+   "issues": [
+    "BORDERLINE-WRONG. Step 5 'Separate unreacted gases by pressure swing adsorption' misstates the Haber loop: after NH3 is condensed the unreacted N2/H2 (single-pass conversion only ~15-20 %) are RECYCLED to the reactor, with a small purge to bleed off Ar/CH4; PSA is only one (the least common) option for recovering H2 from that purge stream. The recycle, which is the key feature of the process, is missing. Other steps are right (150-300 atm, 400-500 degC, Fe catalyst, N2 + 3H2 -> 2NH3 [really an equilibrium], condensation of NH3, Ostwald process to HNO3). The figure also covers only the Haber process, not 'Group 15 - Nitrogen family'."
+   ],
+   "sources": [
+    "Air Liquide, Hydrogen recovery for ammonia production (membrane > cryogenic > PSA for purge-gas H2 recovery; unreacted gas recycled): https://engineering.airliquide.com/technologies/membranes/hydrogen-recovery-ammonia-production"
+   ]
+  },
+  {
+   "conceptId": "chem.pblock.group18",
+   "verdict": "MINOR",
+   "issues": [
+    "Geometry is correct: XeF2 linear (computed F-Xe-F 180 degrees), XeF4 square planar (computed F-Xe-F 90 and 180 degrees; 4 F in one plane). Weak points: lone pairs on Xe (3 in XeF2, 2 in XeF4), which cause the shapes, are not shown; Xe-F lengths are inconsistent (1.0 vs 1.41); only two xenon fluorides are shown for the whole noble-gas group (no inertness/ionisation-energy trend, no He-Rn data); XeF4 label overlaps the Xe sphere."
+   ],
+   "sources": [
+    "Own computation from the scene coordinates (vector dot products), run in this review"
+   ]
+  },
+  {
+   "conceptId": "chem.dblock.oxo-species",
+   "verdict": "WRONG",
+   "issues": [
+    "Trend is backwards. Equation 10^(x - 1.7) with x = pH gives the ratio [Cr2O7 2-]/[CrO4 2-] INCREASING with pH (pH 0 -> 0.02, pH 2 -> 2, pH 5 -> 2000, pH 10 -> 2e8). In reality 2CrO4(2-) + 2H+ <=> Cr2O7(2-) + H2O: dichromate (orange) dominates in ACID, chromate (yellow) in base; the ratio falls with pH (slope -2 log units per pH unit at fixed total Cr, K ~1e14). The figure therefore teaches the opposite of the chromate/dichromate equilibrium. Also the default view only shows y <= ~7.2 (pH < ~2.5) and negative pH."
+   ],
+   "sources": [
+    "Wikipedia, Chromate and dichromate (chromate dominates in alkaline, dichromate in acidic solution; 2CrO4(2-)+2H+ <=> Cr2O7(2-)+H2O): https://en.wikipedia.org/wiki/Chromate_and_dichromate",
+    "Own computation from the scene coordinates (vector dot products), run in this review (mathParser evaluation)"
+   ]
+  },
+  {
+   "conceptId": "chem.org.iupac",
+   "verdict": "MINOR",
+   "issues": [
+    "No outright false step, but step 1 'longest continuous carbon chain' is the simplified rule: the parent chain must first contain the principal characteristic group (suffix) and then (older rules) the maximum multiple bonds before length. The order is also illogical: numbering (step 2) is done before functional groups are identified (step 3), alphabetical ordering of prefixes is omitted, and step 6 repeats step 3."
+   ],
+   "sources": [
+    "IUPAC Blue Book 2013, P-44 (seniority of parent hydrides: principal characteristic group first): https://iupac.qmul.ac.uk/BlueBook/P4.html"
+   ]
+  },
+  {
+   "conceptId": "chem.org.hybridization",
+   "verdict": "WRONG",
+   "issues": [
+    "sp3 (bond vectors (1,1,1),(-1,-1,1),(-1,1,-1),(1,-1,-1): all computed angles 109.47) and sp2 (3 sigma bonds at 120, p arrow along +z) are correct. sp panel is wrong: its two 'pi' arrows go to (3,0,+1) and (3,0,-1), i.e. collinear (180 degrees apart, both along z), which depicts the two lobes of ONE p orbital (one pi bond). The narration says 'two pi bonds'; an sp carbon has two mutually PERPENDICULAR p orbitals (py and pz), so the two pi bonds lie in perpendicular planes (e.g. arrows along +z and +y). Minor: C-X lengths 1.73 (sp3) vs 1.0 (sp2) vs 1.0 (sp) do not differentiate sp2 from sp."
+   ],
+   "sources": [
+    "LibreTexts, sp hybrid orbitals and the structure of acetylene (two perpendicular pi bonds from py and pz): https://chem.libretexts.org/Courses/Athabasca_University/Chemistry_350:_Organic_Chemistry_I/01:_Structure_and_Bonding/1.09:_sp_Hybrid_Orbitals_and_the_Structure_of_Acetylene",
+    "Own computation from the scene coordinates (vector dot products), run in this review"
+   ]
+  },
+  {
+   "conceptId": "chem.org.electronic-effects",
+   "verdict": "WRONG",
+   "issues": [
+    "The '-I' arrow runs from the electron-withdrawing group R at (2,0,0) toward the chain at (0,0,0), i.e. it points AWAY from the withdrawing group. By convention the inductive-effect arrow's head points in the direction of the electron displacement, toward the more electronegative group, so for -I it must point from the chain TO R; as drawn it depicts +I (donation from R into the chain). Also: R (alkyl symbol) is used for the withdrawing group, +I is never shown although the teachingGoal promises '+I, -I'; the mesomeric panel is a single plain stick with a straight arrow labelled 'M' (no sign +M/-M, no pi bond, lone pair or conjugated system, and mesomeric shifts are shown by curved arrows, not a straight arrow along a sigma bond)."
+   ],
+   "sources": [
+    "Wikipedia, Inductive effect (-I: electron density shifted toward the more electronegative atom/group; arrow denotes the displacement): https://en.wikipedia.org/wiki/Inductive_effect"
+   ]
+  },
+  {
+   "conceptId": "chem.org.reactive-intermediates",
+   "verdict": "MINOR",
+   "issues": [
+    "Very generic: no intermediate (carbocation, carbanion, radical, carbene) is named or drawn. The order is chemically unsound: 'possible rearrangement (e.g. hydride shift)' is listed AFTER reaction with a nucleophile/electrophile, but a carbocation rearranges before it is trapped (it competes with trapping); once trapped there is nothing left to rearrange. 'Termination by bond formation or elimination' is vague."
+   ],
+   "sources": []
+  },
+  {
+   "conceptId": "chem.hyd.alkynes",
+   "verdict": "WRONG",
+   "issues": [
+    "Step 2 'Acidic Character: Protonation of the Triple Bond' is false. The acidic character of terminal alkynes (pKa ~25) is DEPROTONATION of the sp C-H (with NaNH2 etc.) to give an acetylide anion. Protonation of the triple bond is the first step of electrophilic addition (a different step in the same flow). Other steps are right: dehydrohalogenation of dihalides (strong base), electrophilic addition, nucleophilic addition (e.g. ROH/base, HCN), hydration (HgSO4/H2SO4) to a ketone (acetylene gives acetaldehyde)."
+   ],
+   "sources": [
+    "Wikipedia, Alkyne (terminal alkynes pKa ~25, deprotonated to acetylides; hydration to carbonyls): https://en.wikipedia.org/wiki/Alkyne"
+   ]
+  },
+  {
+   "conceptId": "chem.hyd.arenes",
+   "verdict": "WRONG",
+   "issues": [
+    "Step 1 'Generate electrophile (e.g., NO2+ from HNO3 & AlCl3)' names the wrong reagent. The nitronium ion NO2+ is generated from HNO3 with concentrated H2SO4 (HNO3 + 2H2SO4 -> NO2+ + H3O+ + 2HSO4-). AlCl3 is the Lewis acid for Friedel-Crafts alkylation/acylation and halogenation, not nitration. The remaining steps (sigma complex/arenium ion, loss of H+ restoring aromaticity, nitrobenzene) are correct."
+   ],
+   "sources": [
+    "chemguide, The nitration of benzene (conc. HNO3 + conc. H2SO4 give NO2+): https://www.chemguide.uk/mechanisms/elsub/nitration.html"
+   ]
+  },
+  {
+   "conceptId": "chem.hyd.polycyclic",
+   "verdict": "MINOR",
+   "issues": [
+    "Benzene is a regular hexagon (computed interior angles 120 deg) and the furan ring has 5 vertices/5 bonds (correct ring size; computed interior angles 90,120,120,120,90 so it is a distorted pentagon with one 1.73-long side). But the heteroatom O is not marked (furan is drawn as an anonymous five-ring), no double bonds/aromatic circle are shown for either ring, and no polycyclic (fused) system such as naphthalene is shown although the title is 'Polycyclic and Heterocyclic Systems'."
+   ],
+   "sources": [
+    "Own computation from the scene coordinates (vector dot products), run in this review"
+   ]
+  },
+  {
+   "conceptId": "chem.hal.sn1",
+   "verdict": "MINOR",
+   "issues": [
+    "Overall sequence (ionisation to carbocation, nucleophile attack, deprotonation) is the standard SN1 solvolysis mechanism, but step 2 'Carbocation racemization' is a misnomer: the planar sp2 carbocation is achiral; racemic product arises because the nucleophile attacks either face, not because the carbocation racemises. 'Deprotonation' applies only to neutral nucleophiles (H2O, ROH), not to anionic ones (Br-, CN-). Rate-determining first step and unimolecular kinetics are not stated."
+   ],
+   "sources": []
+  },
+  {
+   "conceptId": "chem.hal.sn2",
+   "verdict": "ACCURATE",
+   "issues": [
+    "Correct: backside attack, five-coordinate (pentacoordinate) transition state, simultaneous departure of leaving group, Walden inversion. Nit: carbon in the TS is pentacoordinate, not 'pentavalent'; steps 4-5 are redundant; concerted single-step nature is implied rather than stated."
+   ],
+   "sources": []
+  },
+  {
+   "conceptId": "chem.hal.grignard",
+   "verdict": "ACCURATE",
+   "issues": [
+    "Correct: RMgX/RLi from R-X + Mg/Li in dry ether, reaction with electrophile, protic quench/workup, moisture sensitivity (water or alcohol destroy the reagent to give R-H). Nit: the quench is normally aqueous acid or NH4Cl to protonate the alkoxide; no example electrophile (carbonyl, CO2) is named."
+   ],
+   "sources": []
+  },
+  {
+   "conceptId": "chem.hal.cfcs",
+   "verdict": "ACCURATE",
+   "issues": [
+    "Correct chain: CFC emission -> transport to stratosphere -> UV photolysis releases Cl atoms -> catalytic ozone destruction (Cl + O3 -> ClO + O2; ClO + O -> Cl + O2) -> ozone depletion."
+   ],
+   "sources": []
+  },
+  {
+   "conceptId": "chem.alc.phenols",
+   "verdict": "ACCURATE",
+   "issues": [
+    "Cumene process is correctly described: benzene + propene -> cumene (acid-catalysed alkylation); oxidation (O2) to cumene hydroperoxide; acid-catalysed cleavage to phenol + acetone. Covers only the industrial preparation, not phenol acidity or reactions."
+   ],
+   "sources": []
+  },
+  {
+   "conceptId": "chem.alc.ethers",
+   "verdict": "MINOR",
+   "issues": [
+    "Williamson synthesis (R-X + RO-), HX cleavage (with excess HX the alcohol is converted further to R-X) and epoxide opening are valid, but 'epoxide + base -> diol' omits the water/hydroxide nucleophile (base alone does not give a diol; aqueous NaOH or acid/water does), and 'Diethyl ether as common solvent' is a use, not a reaction, under the title 'Key Reactions Involving Ethers'. Peroxide formation, the ether's lack of reactivity and the acid-cleavage mechanism are absent."
+   ],
+   "sources": []
+  },
+  {
+   "conceptId": "chem.alc.protection",
+   "verdict": "MINOR",
+   "issues": [
+    "The sequence is chemically plausible, but it does not demonstrate orthogonality: TBS is removed (step 4) BEFORE MOM is installed (step 5), so neither group is ever removed in the presence of the other. 'Orthogonal (TBS, MOM)' is also only one-way: fluoride removes TBS and leaves MOM, but the acid needed to cleave MOM also attacks TBS ethers. Selective TBS protection of an alcohol in the presence of a free phenol is not automatic (phenols silylate readily with TBSCl/imidazole). UNSURE on how strictly to grade; no hard false statement."
+   ],
+   "sources": [
+    "Organic Chemistry Portal, TBDMS ethers (cleaved by fluoride and by acid): https://www.organic-chemistry.org/protectivegroups/hydroxyl/tbdms-ethers.htm"
+   ]
+  },
+  {
+   "conceptId": "chem.carb.ketones",
+   "verdict": "WRONG",
+   "issues": [
+    "BORDERLINE-WRONG ('missing the very feature it claims to show'). The 'ketone' is one vertical stick from (0,0,0) to (0,1,0) and the 'enol' is two sticks forming an L at 90 degrees: no C=O, no R groups, no C=C, no O-H, no migrating H, so neither structure is recognisable as a ketone or an enol. Tautomerism is drawn with a single one-way arrow, whereas keto-enol tautomerism is an equilibrium that lies overwhelmingly on the keto side (acetone K_enol ~5e-7), normally drawn with equilibrium arrows (the title uses a double arrow, the drawing does not). The figure is also narrow for a 'Ketones' concept."
+   ],
+   "sources": [
+    "Wikipedia, Keto-enol tautomerism (acetone Kenol ~5.1e-7; equilibrium arrows): https://en.wikipedia.org/wiki/Keto%E2%80%93enol_tautomerism"
+   ]
+  },
+  {
+   "conceptId": "chem.nitro.amines",
+   "verdict": "WRONG",
+   "issues": [
+    "Step 3 states 'basicity trend: primary < secondary < tertiary' with arrows 1deg -> 2deg -> 3deg. That order holds only in the gas phase. In water (the context of an amine-basicity lesson) it is false: pKa of conjugate acids are methylamine 10.66, dimethylamine 10.73, trimethylamine ~9.8 (2deg > 1deg > 3deg); ethylamine 10.8, diethylamine 10.98, triethylamine 10.75 (2deg > 3deg ~ 1deg). No monotonic 1 < 2 < 3 order exists in aqueous solution because solvation of the ammonium ion falls as N-H count falls. The labels (RNH2, R2NH, R3N) are correct, but the figure contains no structures."
+   ],
+   "sources": [
+    "Wikipedia pKa of conjugate acids: methylamine 10.66 (https://en.wikipedia.org/wiki/Methylamine), dimethylamine 10.73 (https://en.wikipedia.org/wiki/Dimethylamine), trimethylamine pKb 4.19 -> pKaH ~9.8 (https://en.wikipedia.org/wiki/Trimethylamine), ethylamine 10.8 (https://en.wikipedia.org/wiki/Ethylamine), diethylamine 10.98 (https://en.wikipedia.org/wiki/Diethylamine), triethylamine 10.75 (https://en.wikipedia.org/wiki/Triethylamine)",
+    "JoVE, Basicity of aliphatic amines (gas phase 3 deg > 2 deg > 1 deg > NH3; in water 2 deg > 1 deg > 3 deg for methylamines because of solvation of the conjugate acid): https://app.jove.com/v/12526"
+   ]
+  },
+  {
+   "conceptId": "chem.nitro.heterocycles",
+   "verdict": "MINOR",
+   "issues": [
+    "Pyridine skeleton is correct: six bonds forming a regular hexagon (computed 120 deg angles), five C and one N, and the N is correctly flagged basic (pyridine pKaH ~5.2, lone pair in plane in an sp2 orbital). But only pyridine is shown for 'Nitrogen Heterocycles' (no pyrrole, whose N lone pair is part of the aromatic sextet and is NOT basic, no indole/purine), no double bonds/aromaticity or lone pair are drawn, and 'Basic nitrogen' sits beside rather than on the N."
+   ],
+   "sources": [
+    "Own computation from the scene coordinates (vector dot products), run in this review"
+   ]
+  },
+  {
+   "conceptId": "chem.nitro.amino-acids",
+   "verdict": "MINOR",
+   "issues": [
+    "Amino-acid components are named correctly (alpha carbon, NH3+, COO-, side chain R, peptide bond between the carboxyl of one residue and the amino N of the next). Depiction problems: the alpha carbon shows only three substituents (no H), with NH3+ and COO- collinear at 180 degrees and R at 90 degrees rather than tetrahedral ~109.5; no bond sticks are drawn between the alpha carbon and its groups; colours invert CPK convention (amino/N red, carboxyl blue); the cumulative figure still labels the carboxyl as COO- while also drawing a peptide bond from it (after peptide formation it is an amide C=O, not a carboxylate); R-group classification promised in the teachingGoal is not shown."
+   ],
+   "sources": [
+    "Own computation from the scene coordinates (vector dot products), run in this review"
+   ]
+  },
+  {
+   "conceptId": "chem.bio.proteins",
+   "verdict": "WRONG",
+   "issues": [
+    "Step 2 narration: 'Secondary structure: alpha helix formed by residues 2-4 and a disulfide bridge between residues 1 and 4.' A disulfide bridge (covalent S-S between cysteines) is a tertiary-structure feature; secondary structure (alpha helix/beta sheet) is stabilised by backbone N-H...O=C hydrogen bonds. Step 3 narration speaks of 'two subunits and haemoglobin' and labels a single sphere 'Quaternary Structure/Haemoglobin': a single sphere is one folded chain (tertiary), and haemoglobin is a tetramer (2 alpha + 2 beta, four subunits), not two. Depiction: the 'disulfide bridge' bond from (-4,0,0) to (-1,0,0) lies exactly on the straight primary-chain path (all y=z=0), so it is invisible, and the alpha helix is only a text label on the straight chain."
+   ],
+   "sources": [
+    "LibreTexts, Quaternary structure of proteins (haemoglobin = tetramer of two alpha and two beta subunits): https://chem.libretexts.org/Bookshelves/Introductory_Chemistry/Introduction_to_Organic_and_Biochemistry_(Malik)/07%3A_Proteins/7.06%3A_Quaternary_structure_of_proteins",
+    "Own computation from the scene coordinates (vector dot products), run in this review"
+   ]
+  },
+  {
+   "conceptId": "chem.bio.lipids",
+   "verdict": "MINOR",
+   "issues": [
+    "Three-chain glycerol triglyceride with ester linkages and saturated/unsaturated chains is conceptually right, and vitamin D is a fat-soluble vitamin (correct). But it is crude: the glycerol is a single node, chains are straight vectors (arrows) at 90/180 degrees with no cis-double-bond kink, 'ester bonds' are bare sticks, the fat-soluble vitamin is an unrelated yellow sphere, and phospholipids/steroids/waxes (rest of 'Lipids') are absent."
+   ],
+   "sources": []
+  },
+  {
+   "conceptId": "chem.bio.vitamins",
+   "verdict": "MINOR",
+   "issues": [
+    "Factual pairs are correct (B -> beriberi, C -> scurvy, D -> rickets, A -> night blindness; water-soluble B and C; fat-soluble A, D, E, K; cortisol and oestrogen are steroid hormones). Weak points: beriberi is specifically thiamine (B1) deficiency, not 'B vitamin' in general; 'three main groups of vitamins and hormones' treats steroid hormones as the hormone group and omits peptide/protein and amine hormones (insulin, adrenaline, thyroxine); it is a labelled list with no chemical structure or function."
+   ],
+   "sources": []
+  },
+  {
+   "conceptId": "chem.poly.addition",
+   "verdict": "MINOR",
+   "issues": [
+    "Initiation (radical/cationic/anionic), propagation and the listed products (PE, PVC, PS, PTFE, natural rubber as an isoprene addition polymer) are acceptable. 'Termination: Chain capping' is not standard terminology (radical termination is by combination or disproportionation; chain transfer is omitted; living anionic polymerisation has no termination), and no monomer-to-polymer chemistry (C=C opening) is shown."
+   ],
+   "sources": []
+  },
+  {
+   "conceptId": "chem.poly.condensation",
+   "verdict": "ACCURATE",
+   "issues": [
+    "Correct: complementary monomers, step-growth with loss of a small molecule (water for diacid + diol polyesters), and cross-linking giving thermosetting phenol-formaldehyde resin (Bakelite). Cross-linking applies only when monomers have functionality > 2, which is implied by the Bakelite example."
+   ],
+   "sources": []
+  },
+  {
+   "conceptId": "chem.poly.natural",
+   "verdict": "MINOR",
+   "issues": [
+    "Vulcanisation facts are right (natural rubber = cis-1,4-polyisoprene; sulfur with accelerator, heat roughly 100-160 degC; sulfur cross-links between chains; improved elasticity/strength). But the figure covers only one process on one natural polymer; polysaccharides (starch, cellulose), proteins and nucleic acids (the bulk of 'Natural Polymers') are absent, latex coagulation is skipped, and 'cool and test' is not chemistry."
+   ],
+   "sources": []
+  },
+  {
+   "conceptId": "chem.env.atmosphere",
+   "verdict": "MINOR",
+   "issues": [
+    "Layer order and 'ozone layer in the stratosphere' are correct, but the title promises composition and none is given (N2 78 %, O2 21 %, Ar 0.93 %, CO2 ~0.04 %). The layers are overlapping equal-size spheres (r = 1.5) larger than the Earth sphere (r = 1) and centred at y=1 and y=3, so the troposphere (~12 km, <0.2 % of Earth's radius) is drawn bigger than the Earth and as thick as the stratosphere. The upward arrow labelled 'Greenhouse Gases' wrongly suggests the gases move upward; the greenhouse effect is absorption/re-emission of outgoing IR."
+   ],
+   "sources": []
+  },
+  {
+   "conceptId": "chem.env.air-pollution",
+   "verdict": "MINOR",
+   "issues": [
+    "Generic and correct in outline, but no pollutant is named (SO2, NOx, CO, VOCs, PM, ground-level O3), and 'photochemical transformation' and 'acid rain formation' are not explained; acid rain is formed by atmospheric oxidation before wet/dry deposition, so listing it as part of 'deposition' blurs the order."
+   ],
+   "sources": []
+  },
+  {
+   "conceptId": "chem.env.water-soil",
+   "verdict": "MINOR",
+   "issues": [
+    "Individual statements are correct (nutrients -> eutrophication/algal bloom -> decomposition raises BOD/COD -> oxygen depletion; 12 Principles of Green Chemistry). But the 8-step linear chain mixes separate, unrelated pathways (nutrients, heavy metals, soil acidity) as if each caused the next, and the final mitigation step is a prevention philosophy rather than a step in the pollution pathway."
+   ],
+   "sources": []
+  },
+  {
+   "conceptId": "chem.anal.gravimetric",
+   "verdict": "ACCURATE",
+   "issues": [
+    "Standard, correct sequence: dissolve, precipitate, filter, wash, dry/ignite to constant mass, weigh, convert with the gravimetric factor, assess errors. Minor omission: digestion/ageing of the precipitate and co-precipitation are not mentioned."
+   ],
+   "sources": []
+  },
+  {
+   "conceptId": "chem.anal.volumetric",
+   "verdict": "MINOR",
+   "issues": [
+    "Steps are individually valid, but the flow presents alternative techniques (back-titration 'if necessary', EDTA complexometric titration) as consecutive steps of one procedure, which is misleading; an indicator marks the end point, which approximates (is not identical to) the equivalence point."
+   ],
+   "sources": []
+  },
+  {
+   "conceptId": "chem.anal.chromatography",
+   "verdict": "MINOR",
+   "issues": [
+    "No false statement, but it is a generic lab workflow; the defining principle (differential distribution of components between stationary and mobile phases, giving different migration rates / Rf or retention time) is never stated, and 'collect purified fractions' applies only to preparative chromatography."
+   ],
+   "sources": []
+  },
+  {
+   "conceptId": "chem.anal.spectroscopy",
+   "verdict": "MINOR",
+   "issues": [
+    "Completely generic five-step analytical workflow; it contains no spectroscopy (no light-matter interaction, absorption/emission, UV-Vis/IR/NMR/MS distinction) and would fit any instrumental method."
+   ],
+   "sources": []
+  }
+ ]
+}

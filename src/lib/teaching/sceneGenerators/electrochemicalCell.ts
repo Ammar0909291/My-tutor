@@ -281,7 +281,9 @@ export function buildElectrochemicalCellScene(p: ElectrochemicalCellParams): Sce
     // The x/y/z triad names no quantity in this figure (a molecule / lattice / shell has no meaningful axes) and its letters
     // collided with the atom labels at the origin (measured 2026-10-08: x|y|z|O stacked at stage 1). Grid left as it was.
     stage: { axes: false },
-    teachingGoal: `Show ${divided ? 'a divided galvanic cell' : 'an electrolytic cell'}: the anode/cathode half-reactions, the direction of electron flow, and ${d.cellEmf !== null ? 'the resulting cell EMF' : 'how the cell is driven'}.${p.scopeNote ? ` ${p.scopeNote}` : ''}`,
+    // The KIND of cell comes from `cellType`, never from `divided`: this used to say "an electrolytic cell" for every undivided cell, so the
+    // zinc–carbon dry cell (a galvanic, non-rechargeable cell with one paste electrolyte) was taught as an electrolytic one.
+    teachingGoal: `Show ${p.cellType === 'electrolytic' ? 'an electrolytic cell' : divided ? 'a divided galvanic cell' : 'a galvanic cell with one electrolyte'}: the anode/cathode half-reactions, the direction of electron flow, and ${d.cellEmf !== null ? 'the resulting cell EMF' : p.cellType === 'electrolytic' ? 'how the cell is driven' : 'that the cell itself drives the flow'}.${p.scopeNote ? ` ${p.scopeNote}` : ''}`,
     cameraDistance: 18,
     ariaLabel: `${p.name}: an electrochemical cell with a ${p.anode.material} anode and a ${p.cathode.material} cathode${divided ? ', connected by a salt bridge' : ''}, with electrons flowing from anode to cathode through the external wire.${d.cellEmf !== null ? ` Cell EMF is ${d.cellEmf} volts, ${d.spontaneous ? 'spontaneous' : 'non-spontaneous'}.` : ''}`,
     steps,
