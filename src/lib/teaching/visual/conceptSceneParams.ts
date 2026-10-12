@@ -304,6 +304,11 @@ import {
   buildCombinatoricsScene, buildRecurrenceRelationScene, buildLinearRecurrenceScene, buildDivideConquerRecurrenceScene,
   buildPropositionalLogicScene, buildAlgorithmComplexityScene, buildComplexityClassesScene,
 } from '@/lib/teaching/sceneGenerators/mathCoreScenesB35'
+import {
+  buildLimitLawsScene, buildChainRuleScene, buildImplicitDifferentiationScene, buildOptimizationScene, buildAntiderivativesScene,
+  buildTrigSubstitutionScene, buildPowerSeriesScene, buildRadiusOfConvergenceScene, buildTaylorRemainderScene,
+  buildChainRuleMultivariableScene, buildSequenceLimitsScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB36'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -976,6 +981,19 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'math.disc.propositional-logic':       buildPropositionalLogicScene,
   'math.disc.algorithm-complexity':      buildAlgorithmComplexityScene,
   'math.disc.complexity-classes':        buildComplexityClassesScene,
+
+  // Mathematics visual campaign, batch 36 (2026-10-12). See mathCoreScenesB36.ts.
+  'math.calc.limit-laws':                buildLimitLawsScene,
+  'math.calc.chain-rule':                buildChainRuleScene,
+  'math.calc.implicit-differentiation':  buildImplicitDifferentiationScene,
+  'math.calc.optimization':              buildOptimizationScene,
+  'math.calc.antiderivatives':           buildAntiderivativesScene,
+  'math.calc.trig-substitution':         buildTrigSubstitutionScene,
+  'math.calc.power-series':              buildPowerSeriesScene,
+  'math.calc.radius-of-convergence':     buildRadiusOfConvergenceScene,
+  'math.calc.taylor-remainder':          buildTaylorRemainderScene,
+  'math.calc.chain-rule-multivariable':  buildChainRuleMultivariableScene,
+  'math.calc.sequence-limits':           buildSequenceLimitsScene,
 
   // The Punnett generator is single-gene by construction (genotypes are two
   // alleles). A dihybrid cross drawn as a monohybrid square teaches the wrong

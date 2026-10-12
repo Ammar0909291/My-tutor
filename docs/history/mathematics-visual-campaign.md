@@ -1278,6 +1278,38 @@ Next (batch 36): the 11 calculus helpers — limit-laws, chain-rule, implicit-di
 chain-rule-multivariable, sequence-limits — then prob (10), seq (7), real (7), meas (6), top (4), opt (4), geom (4), func (4), cx (4), graph (3), fnal (3), trig (2), cat (2), num (1); then tier N (352) if still wanted.
 List what is left with `npx tsx scripts/math/visual-coverage.ts --list H`.
 
+# Batch 36 (2026-10-12): the calculus helpers (11 figures)
+
+`sceneGenerators/mathCoreScenesB36.ts` + `mathCoreScenesBatch36.test.ts` (112 checks); campaign audit threshold now 449. Coverage after this batch:
+495 of 908 concepts with a fixed figure (54.5%); essential tier 344 / 346 (complete), tier H 149 / 210 (71.0%), tier N 2 / 352; target (E + H) 493 / 556 = 88.7%.
+Pre-push checklist: full `npx vitest run`, `scripts/ci/tsc-ratchet.sh` 0 errors, `validate-visualization-coverage.ts` PASS, `scripts/math/label-displacement.ts mathCoreScenesB36` (0 unresolved, 0 card-host moves),
+`scripts/math/campaign-tools/audit-module.ts mathCoreScenesB36` (11 / 11 admitted). Mutation check: five deliberate wrong numbers (the product curve (x + 2)x², the composite (x² + 1)², the area x(21 − x),
+the radius R = 3, the Taylor error with x³/5) each made at least one test fail.
+
+| Concept | Figure |
+|---|---|
+| math.calc.limit-laws | f = x + 1 and g = x² near x = 2: the limits 3 and 4; the product (x + 1)x² tends to 3 × 4 = 12 and the sum to 3 + 4 = 7 (four dots on the guide x = 2) |
+| math.calc.chain-rule | three panels: inner u = x² + 1 (tangent slope 2 at x = 1), outer y = u³ (slope 12 at u = 2), composite y = (x² + 1)³ (slope 24 at x = 1); 12 × 2 = 24 |
+| math.calc.implicit-differentiation | circle x² + y² = 25 with the point (3, 4), the radius (slope 4/3) and the tangent of slope −x/y = −3/4; (−3/4) × (4/3) = −1 (right-angle mark) |
+| math.calc.optimization | A(x) = x(20 − x) on [0, 20]: endpoints A(0) = A(20) = 0, flat tangent at x = 10 where A = 100 (a 10 × 10 square) |
+| math.calc.antiderivatives | F(x) = x² + C for C = −1, 0, 1, 2: four vertical shifts, all with tangent slope 2 at x = 1 (so F′ = 2x = f) |
+| math.calc.trig-substitution | right triangle with hypotenuse 3 and θ = 30°: x = 3 sin θ = 1.5 and √(9 − x²) = 3 cos θ = 2.598 (Pythagoras checked from the drawn corners) |
+| math.calc.power-series | 1/(1 − x) with the partial sums P₁, P₂, P₄: at x = 0.5 they are 1.5, 1.75, 1.94 against 2; the series converges for \|x\| < 1 |
+| math.calc.radius-of-convergence | Σ xⁿ/2ⁿ on the number line: ratio 0.5, R = 1 ÷ 0.5 = 2, green interval (−2, 2), red outside |
+| math.calc.taylor-remainder | the bound x⁴/24 (M = 1) above the true error sin x − (x − x³/6) on [0, 1.2]: 0.008 ≤ 0.042 at x = 1 |
+| math.calc.chain-rule-multivariable | tree for z = x²y, x = t, y = t²: branch derivatives 2, 1, 1, 2 at t = 1, paths 2 × 1 = 2 and 1 × 2 = 2, sum 2 + 2 = 4 = d(t⁴)/dt |
+| math.calc.sequence-limits | aₙ = sin(n)/n for n = 1…12 squeezed between 1/n and −1/n; the limit 0 |
+
+Notes: the tests read every number back from what is DRAWN (a polyline sampled at x = 2, tangent segments' slopes, the lengths of triangle sides, the centres of the tree nodes), never from the generator's own
+constants, and compare against an independent closed form (central differences, bisection, an integral of the drawn polyline); node label positions are 3-component, so compare only the first two. A drawn value
+beside a limit is not the limit: the h = (x + 1)x² curve at x = 2 ± 0.1 is 1.65 away from 12 because its slope there is 16 — set tolerances from the slope times the step. Label placement: a title directly above an axis
+arrow collides with it — move it left of the curve's end; two captions on one row need ≥ 105 px between centres (`true error` / `0.008` first sat 84 px apart); numerals on a tick row must stay clear of the plotted curve (the
+`4` tick was pushed 30 px by the green 1/n curve until the tick row moved above the curve).
+
+Next (batch 37): the 10 probability helpers — sample-space, classical-probability, combinatorial-probability, independence, bayesian-inference, random-variable, expected-value, markov-inequality, transition-matrix,
+poisson-process — then seq (7), real (7), meas (6), top (4), opt (4), geom (4), func (4), cx (4), graph (3), fnal (3), trig (2), cat (2), num (1); then tier N (352) if still wanted.
+List what is left with `npx tsx scripts/math/visual-coverage.ts --list H`.
+
 # Deferred follow-up — do AFTER the Mathematics figure campaign (recorded 2026-10-12 at the owner's request)
 
 Context: the owner said another account was "validating visuals for all 4 subjects". A read-only audit of the last 10 days (2026-10-02 → 10-12) on `origin/main` and every remote branch found:
