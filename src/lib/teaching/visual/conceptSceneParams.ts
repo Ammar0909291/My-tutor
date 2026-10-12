@@ -269,6 +269,11 @@ import {
   buildEliminationMethodScene, buildDegreeScene, buildPolynomialOperationsScene, buildPolynomialDivisionScene,
   buildFactoringScene, buildFactoringTrinomialsScene,
 } from '@/lib/teaching/sceneGenerators/mathCoreScenesB28'
+import {
+  buildQuadraticFormulaScene, buildFractionalExponentScene, buildRadicalsScene, buildExponentialEquationsScene,
+  buildLogarithmPropertiesScene, buildNaturalLogarithmScene, buildLogarithmicEquationsScene, buildBinomialTheoremScene,
+  buildDivisibilityScene, buildPrimeNumberScene, buildCompositeNumberScene, buildPrimeFactorizationScene, buildGcdScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB29'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -841,6 +846,21 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'math.alg.polynomial-division':        buildPolynomialDivisionScene,
   'math.alg.factoring':                  buildFactoringScene,
   'math.alg.factoring-trinomials':       buildFactoringTrinomialsScene,
+
+  // Mathematics visual campaign, batch 29 (2026-10-12). See mathCoreScenesB29.ts.
+  'math.alg.quadratic-formula':          buildQuadraticFormulaScene,
+  'math.alg.fractional-exponent':        buildFractionalExponentScene,
+  'math.alg.radicals':                   buildRadicalsScene,
+  'math.alg.exponential-equations':      buildExponentialEquationsScene,
+  'math.alg.logarithm-properties':       buildLogarithmPropertiesScene,
+  'math.alg.natural-logarithm':          buildNaturalLogarithmScene,
+  'math.alg.logarithmic-equations':      buildLogarithmicEquationsScene,
+  'math.alg.binomial-theorem':           buildBinomialTheoremScene,
+  'math.nt.divisibility':                buildDivisibilityScene,
+  'math.nt.prime-number':                buildPrimeNumberScene,
+  'math.nt.composite-number':            buildCompositeNumberScene,
+  'math.nt.prime-factorization':         buildPrimeFactorizationScene,
+  'math.nt.gcd':                         buildGcdScene,
 
   // The Punnett generator is single-gene by construction (genotypes are two
   // alleles). A dihybrid cross drawn as a monohybrid square teaches the wrong

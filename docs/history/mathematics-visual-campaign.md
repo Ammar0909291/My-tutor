@@ -1055,9 +1055,37 @@ Notes: the label solver pushes a label off any object near it, so a cross-out dr
 Steep sampled curves lose precision when read back through P() (0.01 rounding): the tolerance has to scale with the slope. `toBe` fails on `-0` vs `0`: use `toBeCloseTo` for polynomial identities.
 Sign changes of a sampled curve that hits a root exactly on a sample point must skip the zero sample (helper `crossings` in the test).
 
-Next (batch 29): the remaining 8 alg helpers — quadratic-formula, fractional-exponent, radicals, exponential-equations, logarithm-properties, natural-logarithm, logarithmic-equations,
-binomial-theorem — then nt (13), abst (13), linalg (18), de (12), stats (11), disc (11), calc (11), prob (10), seq (7), real (7), meas (6), top (4), opt (4), geom (4),
-func (4), cx (4), graph (3), fnal (3), trig (2), cat (2), num (1); then tier N (352) if still wanted. List what is left with `npx tsx scripts/math/visual-coverage.ts --list H`.
+(Batch 28's plan for batch 29 is carried out below.)
+
+# Batch 29 (2026-10-12): the last algebra helpers and the first number-theory helpers (13 figures)
+
+`sceneGenerators/mathCoreScenesB29.ts` + `mathCoreScenesBatch29.test.ts` (132 checks); campaign audit threshold now 365. Coverage after this batch:
+411 of 908 concepts with a fixed figure; essential tier 344 / 346 (complete), tier H 65 / 210, tier N 2 / 352. All `math.alg.*` helpful concepts are now covered.
+Pre-push checklist: full `npx vitest run`, `scripts/ci/tsc-ratchet.sh` 0 errors, `validate-visualization-coverage.ts` PASS.
+
+| Concept | Figure |
+|---|---|
+| math.alg.quadratic-formula | parabola x² − 2x − 3: roots −1, 3; axis x = −b/2a = 1; green half-widths √D/2a = 2, so x = 1 ± 2 |
+| math.alg.fractional-exponent | 8^(2/3): 8 →(³√) 2 →(²) 4 and 8 →(²) 64 →(³√) 4, the same 4 either way |
+| math.alg.radicals | 6 × 6 square, diagonal √72 = √(36 × 2) = 6√2 |
+| math.alg.exponential-equations | y = 2ˣ meets y = 8 at x = 3; 2ˣ = 2³ |
+| math.alg.logarithm-properties | log ruler (2ᵏ at distance k): 4 × 8 = 32 is 2 + 3 = 5, 32 ÷ 4 = 8 is 5 − 2 = 3, 4³ = 64 is 3 × 2 = 6 |
+| math.alg.natural-logarithm | y = ln x through (1, 0) and (e, 1); tangent slope 1/e |
+| math.alg.logarithmic-equations | log x + log(x − 2) = 3: crossing at x = 4, chain x(x − 2) = 2³ → x² − 2x − 8 = 0, −2 rejected (domain x > 2) |
+| math.alg.binomial-theorem | Pascal's triangle rows 0-5; 3 + 3 = 6; row 4 = 1, 4, 6, 4, 1 = coefficients of (a + b)⁴, sums to 16 |
+| math.nt.divisibility | 12 dots = three boxes of 4 exactly; 13 dots = three boxes + 1 spare (remainder 1) |
+| math.nt.prime-number | sieve of Eratosthenes 2…30: multiples of 2, then 3 and 5; the 10 survivors are the primes |
+| math.nt.composite-number | 12 dots as 2 × 6 and 3 × 4 rectangles; 7 dots only 1 × 7 |
+| math.nt.prime-factorization | division ladder 72 → 36 → 18 → 9 → 3 → 1 with divisors 2, 2, 2, 3, 3; 72 = 2³ × 3² |
+| math.nt.gcd | Venn of the divisors of 12 and 18; overlap 1, 2, 3, 6; gcd = 6 |
+
+Notes: superscript letters such as "2ˣ" render fine. A hop-length numeral placed 0.8 above its ruler lands on the previous row's captions unless the rows are 2.6 apart (log ruler). A ladder with
+horizontal rules needs rows >= 0.95 apart or the label solver pushes quotients sideways. In a figure test, pair a box's edges by their known height (`rectBoxes(..., height)`), not by "any higher edge",
+or stacked boxes with the same x-span produce extra pairs. `numsIn` must normalise "−" (U+2212) to "-" before parsing negatives.
+
+Next (batch 30): the 8 remaining nt helpers — euclidean-algorithm, lcm, congruence, residue-classes, pythagorean-triples, prime-distribution, prime-number-theorem, continued-fractions — then abst (13),
+linalg (18), de (12), stats (11), disc (11), calc (11), prob (10), seq (7), real (7), meas (6), top (4), opt (4), geom (4), func (4), cx (4), graph (3), fnal (3), trig (2), cat (2), num (1); then tier N
+(352) if still wanted. List what is left with `npx tsx scripts/math/visual-coverage.ts --list H`.
 
 # Deferred follow-up — do AFTER the Mathematics figure campaign (recorded 2026-10-12 at the owner's request)
 
