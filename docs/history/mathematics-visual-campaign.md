@@ -549,3 +549,42 @@ Next (batch 16 plan, from `visual-coverage.ts --list E`; 119 essential concepts 
 geom 3-D (platonic-solids, differential-geometry-curves, frenet-serret), func (3). `math.arith.*` (counting, subitizing, expanded-form,
 multiplication-table, long-multiplication, fraction-multiplication, mixed-numbers, proportion, rounding, square/cube numbers, square roots) is the
 next obvious block of 12.
+
+---
+
+# Batch 16 (2026-10-12): arithmetic
+
+`sceneGenerators/mathCoreScenesB16.ts` + `mathCoreScenesBatch16.test.ts` (122 checks); campaign audit threshold now 194. Coverage after this batch:
+240 of 908 concepts with a fixed figure; essential tier 238 / 346 (tier H 0 / 210, tier N 2 / 352). The `arith` domain is complete (32 / 32 essential).
+
+Notes for later batches:
+- **Fraction notation in a label is evaluated left to right by the semantic audit (SM-01).** `3/4 ÷ 3/8 = 2` is parsed as ((3/4) ÷ 3) / 8 = 0.031 and the
+  figure silently vanishes; write `(3/4) ÷ (3/8) = 2`. `2/3 × 3/4 = 1/2` happens to evaluate correctly left to right. Always run the audit script
+  (`payloadBlockers` with `renderer: 'scene'`) after writing labels that contain `/`, `÷` or `×`.
+- Digit labels (1 character) are free of the label budget, so place-value layouts can use real numerals in columns (`LONG`): the test reads each
+  row's digits back by position, checks the ones digits share a column and re-does the column addition with carries from the DRAWN digits.
+- Thick `line()`s make good filled bars (mixed numbers, fraction bar model): a bar is a bond of thickness ≈ 0.09-0.17, and the test reads its length.
+- Oblique 3-D lattices of dots (cube numbers, `cubePoint`) read well up to 3 × 3 × 3; layers are told apart by colour and the test recovers each
+  layer's n × n lattice and the oblique shift between layers. Keep a dot radius ≤ 0.1 there.
+- Staggering text vertically (expanded form: term labels at y −2.0 / −2.7 / −2.0) is the cheap fix when three equally wide labels sit in a row.
+
+| Concept | Figure |
+|---|---|
+| math.arith.counting | 6 dots each paired with one of 1…6 left to right, bracket "count: 6"; the same dots numbered 3, 6, 1, 5, 2, 4 — still a bijection onto 1…6 |
+| math.arith.subitizing | dice patterns for 1, 2, 3, 4 recognised at a glance; 7 scattered dots read as brackets of 4 and 3 |
+| math.arith.expanded-form | stacks of 3, 4, 5 counters worth 10², 10¹, 10⁰: 3 × 100 = 300, 4 × 10 = 40, 5 × 1 = 5, 345 = 300 + 40 + 5 |
+| math.arith.multiplication-table | 12 × 12 grid; the 7-by-8 rectangle (56 cells) and its mirror over the diagonal, the 8-by-7 rectangle (56 cells) |
+| math.arith.long-multiplication | 23 × 14 in H/T/O columns: carry 1, partial products 92 and 230, total 322 |
+| math.arith.fraction-multiplication | 4 × 3 grid: 3/4 wide ∩ 2/3 high = 6 of 12 cells = 1/2; bar model (3/4) ÷ (3/8) = 2 |
+| math.arith.mixed-numbers | 3 whole bars + a half = 7 half bars: 3½ = 7/2, 3 × 2 + 1 = 7, 7 ÷ 2 = 3 r 1 |
+| math.arith.proportion | 3 : 4 and 6 : 8 rectangles with equal diagonals; 3/4 = 6/8 = 0.75; cross products 24 = 24 |
+| math.arith.rounding | 3.40–3.50 ruler: 3.44 → 3.4, 3.46 → 3.5, the halfway 3.45 rounds up to 3.5 |
+| math.arith.square-numbers | 5 × 5 dots in L layers of 1, 3, 5, 7, 9; nested squares 1, 4, 9, 16, 25; n² = sum of the first n odd numbers |
+| math.arith.cube-numbers | cubes of side 1, 2, 3 as oblique dot lattices: 1, 8, 27 dots = n layers of n × n |
+| math.arith.square-roots | squares of area 4, 9, 16, 10 with side bars √4 = 2, √9 = 3, √16 = 4, √10 ≈ 3.16 and √10 on a 3-to-4 number line |
+
+Next (batch 17 plan, from `visual-coverage.ts --list E`; 108 essential concepts still uncovered): `disc` (13), `de` (12), `real` (9), `top` (8), `cx` (7), `seq` (6),
+`opt` (6), `graph` (6), `num` (5), `alg` (5: fundamental-theorem-algebra, exponential-function, logarithm, rational-inequality, pascals-triangle), `cat` (4),
+multivariable calculus (14), `nt` (2: sieve-of-eratosthenes, modular-arithmetic), `meas` (2), `abst` / `fnal` (1 each), geom 3-D (platonic-solids,
+differential-geometry-curves, frenet-serret), func (3). A natural batch 17: `alg` (5) + `nt` (2) + `seq` (5: convergent, divergent-sequence, geometric-series,
+comparison-test, integral-test) — all picture-friendly.

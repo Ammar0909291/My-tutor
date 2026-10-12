@@ -200,6 +200,11 @@ import {
   buildSetDifferenceScene, buildComplementScene, buildVennDiagramScene, buildHasseDiagramScene, buildIrrationalNumbersScene,
   buildComplexNumbersScene,
 } from '@/lib/teaching/sceneGenerators/mathCoreScenesB15'
+import {
+  buildCountingScene, buildSubitizingScene, buildExpandedFormScene, buildMultiplicationTableScene, buildLongMultiplicationScene,
+  buildFractionMultiplicationScene, buildMixedNumbersScene, buildProportionScene, buildRoundingScene, buildSquareNumbersScene,
+  buildCubeNumbersScene, buildSquareRootsScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB16'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -573,6 +578,20 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'math.found.hasse-diagram':            buildHasseDiagramScene,
   'math.found.irrational-numbers':       buildIrrationalNumbersScene,
   'math.found.complex-numbers':          buildComplexNumbersScene,
+
+  // Mathematics visual campaign, batch 16 (2026-10-12). See mathCoreScenesB16.ts.
+  'math.arith.counting':                 buildCountingScene,
+  'math.arith.subitizing':               buildSubitizingScene,
+  'math.arith.expanded-form':            buildExpandedFormScene,
+  'math.arith.multiplication-table':     buildMultiplicationTableScene,
+  'math.arith.long-multiplication':      buildLongMultiplicationScene,
+  'math.arith.fraction-multiplication':  buildFractionMultiplicationScene,
+  'math.arith.mixed-numbers':            buildMixedNumbersScene,
+  'math.arith.proportion':               buildProportionScene,
+  'math.arith.rounding':                 buildRoundingScene,
+  'math.arith.square-numbers':           buildSquareNumbersScene,
+  'math.arith.cube-numbers':             buildCubeNumbersScene,
+  'math.arith.square-roots':             buildSquareRootsScene,
 
   // The Punnett generator is single-gene by construction (genotypes are two
   // alleles). A dihybrid cross drawn as a monohybrid square teaches the wrong
