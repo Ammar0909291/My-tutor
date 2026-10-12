@@ -797,3 +797,47 @@ cauchy-theorem, residue-theorem, real-integral-residues, mobius-transformation, 
 lagrange-multipliers, gradient-methods), `num` (newtons-method, interpolation, numerical-differentiation, numerical-integration), `cat` (category, morphism-types, functor,
 natural-transformation), `meas` (simple-function, lebesgue-integral), `abst.cyclic-group`, `fnal.convolution`, geom 3-D (platonic-solids, differential-geometry-curves, frenet-serret),
 func (real-valued-function, rational-root; linear-function stays figure-less). Then tier H (210) and tier N (350).
+
+---
+
+# Batch 22 (2026-10-12): complex analysis and topology
+
+`sceneGenerators/mathCoreScenesB22.ts` + `mathCoreScenesBatch22.test.ts` (132 checks); campaign audit threshold now 275. Coverage after this batch:
+321 of 908 concepts with a fixed figure; essential tier 319 / 346 (tier H 0 / 210, tier N 2 / 352). All 7 `math.cx.*` essential concepts are covered; `math.top.manifold`
+and `math.top.smooth-manifold` are the two topology essentials still open.
+
+Notes for later batches:
+- **Contour integrals are verified numerically along the DRAWN curve.** `contour(pts, f, toZ)` sums f(midpoint)·Δz over the drawn polyline (screen points mapped back to complex
+  numbers). It confirms ∮ dz/(z − z₀) = 2πi, ∮ z² dz = 0, the residue-theorem total 4πi, the closed real-integral contour π and ∫ dz/z over the semicircle = iπ; the tests also
+  integrate small circles round each pole to recover Res = 1. A circle with 72 segments is accurate to about 0.01.
+- **Winding numbers are counted from the drawing** (`winding(pts, c)` sums signed angle steps). Used for Cauchy (1 round the hole, 0 elsewhere), homotopy (f against g winds 0 times,
+  f against k once) and the fundamental group (+1, +2, −1).
+- **The finite topology is rebuilt from the drawn boxes** (connected groups of slate lines → boxes → which dots lie inside), then opens = unions of blocks, closeds = complements,
+  and interior / closure / boundary are computed by brute force over all open and closed sets (and the topology axioms are checked).
+- **Planarity is checked, not assumed**: Euler-characteristic graphs are tested for crossing edges (proper segment intersection) before F = E − V + 2.
+- Reading a Möbius image back (1/w) is ill-conditioned near w = 0 because screen points are rounded to 0.01; skip points with |w| < 0.3.
+- Where a circle starts exactly at x = 0 `p.points[0][0] < 0` fails: classify panels by a threshold between the panels (< 1 / > 1), not by zero.
+- Dot / ring helpers: a loop that winds twice is r(θ) = r₀ + w·sin(θ/2), which closes at θ = 4π and crosses itself once at the base point.
+- Panels stacked in a column read better than three tiny panels side by side when every panel is small (open-sets topology figure).
+
+| Concept | Figure |
+|---|---|
+| math.cx.complex-numbers-analysis | z = 3 + 4i: modulus 5, argument 53.13°, polar form, conjugate 3 − 4i, z z̄ = 25 = \|z\|² |
+| math.cx.complex-integration | ∫ dz/z over the upper unit semicircle: integrand f γ′ = i constant, integral iπ, \|∫\| = π ≤ 1 · π |
+| math.cx.cauchy-theorem | simply connected domain: ∮ = 0 and two paths A → B agree; punctured domain: ∮ = 2πi |
+| math.cx.residue-theorem | poles 0, −1 (inside, residue 1 each), 3 (outside): ∮ = 2πi(1 + 1) = 4πi |
+| math.cx.real-integral-residues | ∫ dx/(1 + x²): real segment + upper semicircle, pole i inside, Res 1/(2i), result π, arc → 0 |
+| math.cx.mobius-transformation | w = 1/z: line Re z = 1 → circle ½, circle \|z\| = 1.6 → circle 0.625, A B C → A′ B′ C′ |
+| math.cx.riemann-surface | helicoid of log z, three turns, points θ = 0, 2π, 4π over the same z = 1 |
+| math.top.open-sets | partition topology on {a, b, c, d}: A = {a, c}, int A = {a}, cl A = {a, c, d}, ∂A = {c, d} |
+| math.top.homeomorphism | circle → square by sliding along rays (h and h⁻¹); circle minus a point 1 piece vs figure eight minus a point 2 |
+| math.top.quotient-space | interval → circle, square with arrows → torus, disc with boundary pinched → sphere |
+| math.top.homotopy | f ≃ g by H = (1 − t) f + t g (t = ¼, ½, ¾) avoiding the hole; path k below the hole is not homotopic to f |
+| math.top.fundamental-group | annulus loops with winding 1, 2, −1 (π₁(S¹) = ℤ); disc loops shrinking to a point (π₁ = 0) |
+| math.top.euler-characteristic | cube 8 − 12 + 6 = 2 and tetrahedron 4 − 6 + 4 = 2 as planar graphs; sphere, torus, double torus χ = 2, 0, −2 |
+
+Next (batch 23 plan; 27 essential concepts still uncovered, 26 excluding the reserved fixture `math.func.linear-function`; by domain: opt 6, num 4, cat 4, geom 3, func 3, top 2, meas 2, fnal 1, abst 1):
+`top` (manifold, smooth-manifold), `opt` (unconstrained, convex-function, convex-set, linear-programming, lagrange-multipliers, gradient-methods), `num` (newtons-method, interpolation,
+numerical-differentiation, numerical-integration), `cat` (category, morphism-types, functor, natural-transformation), `meas` (simple-function, lebesgue-integral), `abst.cyclic-group`,
+`fnal.convolution`, geom 3-D (platonic-solids, differential-geometry-curves, frenet-serret), func (real-valued-function, rational-root; linear-function stays figure-less).
+Then tier H (210) and tier N (350).

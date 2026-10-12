@@ -231,6 +231,11 @@ import {
   buildConvergenceSequencesScene, buildCauchySequenceScene, buildOpenSetsScene, buildContinuityRigorousScene,
   buildUniformContinuityScene, buildRiemannIntegralScene, buildUniformConvergenceScene, buildPointwiseConvergenceScene,
 } from '@/lib/teaching/sceneGenerators/mathCoreScenesB21'
+import {
+  buildComplexNumbersAnalysisScene, buildComplexIntegrationScene, buildCauchyTheoremScene, buildResidueTheoremScene,
+  buildRealIntegralResiduesScene, buildMobiusTransformationScene, buildRiemannSurfaceScene, buildTopologyOpenSetsScene,
+  buildHomeomorphismScene, buildQuotientSpaceScene, buildHomotopyScene, buildFundamentalGroupScene, buildEulerCharacteristicScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB22'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -699,6 +704,21 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'math.real.riemann-integral':          buildRiemannIntegralScene,
   'math.real.uniform-convergence':       buildUniformConvergenceScene,
   'math.real.pointwise-convergence':     buildPointwiseConvergenceScene,
+
+  // Mathematics visual campaign, batch 22 (2026-10-12). See mathCoreScenesB22.ts.
+  'math.cx.complex-numbers-analysis':    buildComplexNumbersAnalysisScene,
+  'math.cx.complex-integration':         buildComplexIntegrationScene,
+  'math.cx.cauchy-theorem':              buildCauchyTheoremScene,
+  'math.cx.residue-theorem':             buildResidueTheoremScene,
+  'math.cx.real-integral-residues':      buildRealIntegralResiduesScene,
+  'math.cx.mobius-transformation':       buildMobiusTransformationScene,
+  'math.cx.riemann-surface':             buildRiemannSurfaceScene,
+  'math.top.open-sets':                  buildTopologyOpenSetsScene,
+  'math.top.homeomorphism':              buildHomeomorphismScene,
+  'math.top.quotient-space':             buildQuotientSpaceScene,
+  'math.top.homotopy':                   buildHomotopyScene,
+  'math.top.fundamental-group':          buildFundamentalGroupScene,
+  'math.top.euler-characteristic':       buildEulerCharacteristicScene,
 
   // The Punnett generator is single-gene by construction (genotypes are two
   // alleles). A dihybrid cross drawn as a monohybrid square teaches the wrong
