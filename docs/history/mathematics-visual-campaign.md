@@ -1310,6 +1310,37 @@ Next (batch 37): the 10 probability helpers — sample-space, classical-probabil
 poisson-process — then seq (7), real (7), meas (6), top (4), opt (4), geom (4), func (4), cx (4), graph (3), fnal (3), trig (2), cat (2), num (1); then tier N (352) if still wanted.
 List what is left with `npx tsx scripts/math/visual-coverage.ts --list H`.
 
+# Batch 37 (2026-10-12): the probability helpers (9 figures + 1 twin registration)
+
+`sceneGenerators/mathCoreScenesB37.ts` + `mathCoreScenesBatch37.test.ts` (93 checks); campaign audit threshold now 459. Coverage after this batch:
+505 of 908 concepts with a fixed figure (55.6%); essential tier 344 / 346 (complete), tier H 159 / 210 (75.7%), tier N 2 / 352; target (E + H) 503 / 556 = 90.5%.
+Pre-push checklist: full `npx vitest run`, `scripts/ci/tsc-ratchet.sh` 0 errors, `validate-visualization-coverage.ts` PASS, `scripts/math/label-displacement.ts mathCoreScenesB37` (0 unresolved, 0 card-host moves),
+`scripts/math/campaign-tools/audit-module.ts mathCoreScenesB37` (9 / 9 admitted). Mutation check: eleven deliberate wrong numbers (the sum-7 diagonal, P(A) = 0.7, the expected-value bars out of order, a different Markov pmf, a changed
+transition row, a duplicated outcome name, arrival dots shifted off the staircase, the caption λ = 2, 2 boys instead of 3, a missing sample-space outcome, a shortened bound bar) each made at least one test fail.
+
+| Concept | Figure |
+|---|---|
+| math.prob.sample-space | three panels: finite Ω = {HH, HT, TH, TT} in a box (4 = 2 × 2), the countable Ω = {1, 2, 3, …} (six numbered dots and an arrow running on), the uncountable interval [0, 1] with a point ω |
+| math.prob.classical-probability | 6 × 6 grid of the 36 outcomes of two dice; the 6 blue dots on the diagonal are the sum 7 (6 of 36 = 1/6); the red corner (6, 6) is the only sum 12 (1 of 36) |
+| math.prob.combinatorial-probability | 3 boys + 2 girls on a pentagon; the 10 segments = C(5, 2) pairs coloured 3 boy–boy, 1 girl–girl, 3 × 2 = 6 mixed; same sex 3 + 1 = 4; 6 of 10 are mixed |
+| math.prob.independence | unit square of probability: A = left 0.6 (blue verticals), B = bottom 0.5 (red horizontals), the green overlap has area 0.6 × 0.5 = 0.3; inside B the share of A is 0.3 ÷ 0.5 = 0.6 = P(A) |
+| math.prob.bayesian-inference | registered to the figure of its `math.stats` twin (batch 34, Beta(5, 5) prior × 7 of 10 → Beta(12, 8)) — no new figure; one twin test |
+| math.prob.random-variable | the 4 outcomes of two flips and a number line: one arrow from each outcome to its number of heads (HH → 2, HT and TH → 1, TT → 0); 1 of 4, 2 of 4, 1 of 4 beside the values |
+| math.prob.expected-value | bars 0.1, 0.2, 0.3, 0.4 (heights in %) over the values 0…3 on a beam; the pivot at E[X] = 2 balances it: left pull 2 × 0.1 + 1 × 0.2 = 0.4, right pull 1 × 0.4 = 0.4 |
+| math.prob.markov-inequality | pmf 0.30, 0.20, 0.20, 0.10, 0.05 × 4 on 0…7 (mean 2); the red tail P(X ≥ 4) = 0.2 against the green bound E[X] ÷ 4 = 0.5; the inequality holds for every a = 1…7 on the drawn bars |
+| math.prob.transition-matrix | P = [[90, 10], [50, 50]] % (rows add to 100) × P = P² = [[86, 14], [70, 30]]; the row, column and entry that give 86 = 81 + 5 are outlined blue, red, green |
+| math.prob.poisson-process | nine arrival dots on [0, 6], the staircase N(t) climbing 0 → 9, three windows of length 2 holding 3, 3, 3 (expected 1.5 × 2 = 3), mean count 1.5 × 6 = 9 for the rate λ = 1.5 |
+
+Notes: look for twins first — `math.prob.bayesian-inference` is the same KG statement as `math.stats.bayesian-inference`, so the batch-34 builder is registered under both ids. Tests that use `texts(s).find((t) => t.startsWith('86'))` match the
+matrix NUMERAL "86" before the caption "86 = 81 + 5": select with the full prefix ("86 ="). A mutation that moves a value consistently everywhere (one Poisson arrival time) correctly does NOT fail — the tests read the drawing, so mutate one
+part of a figure only (dots shifted off the staircase) to prove the cross-checks work. Contact sheets: the montage crop is 630 px wide (205–835); a long caption that runs past the crop (the last line of independence) is cut in the sheet
+only — open `<dir>/<id>_1026.png` for the whole card. Captions between two vertical guides need ≥ 0.35 world units of clearance on both sides: the Poisson captions were moved to the free lower-right zone (x = 3.4) instead of squeezing between the
+guides at t = 2 and t = 4. The solver centres a label on its anchor, so a caption of 16+ characters needs ≥ 1.5 units on either side.
+
+Next (batch 38): the 7 sequences-and-series helpers — sequence, arithmetic-sequence, series, partial-sums, arithmetic-series, series-convergence, harmonic-series (twins exist for geometric-sequence/series, divergent-sequence and
+alternating-series: do not repeat them) plus 4 of the real-analysis helpers — metric-space, compactness, connectedness, riemann-integrability — then real (3 left), meas (6), top (4), opt (4), geom (4), func (4), cx (4), graph (3), fnal (3),
+trig (2), cat (2), num (1); then tier N (352) if still wanted. List what is left with `npx tsx scripts/math/visual-coverage.ts --list H`.
+
 # Deferred follow-up — do AFTER the Mathematics figure campaign (recorded 2026-10-12 at the owner's request)
 
 Context: the owner said another account was "validating visuals for all 4 subjects". A read-only audit of the last 10 days (2026-10-02 → 10-12) on `origin/main` and every remote branch found:

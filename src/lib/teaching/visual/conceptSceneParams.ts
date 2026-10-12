@@ -309,6 +309,10 @@ import {
   buildTrigSubstitutionScene, buildPowerSeriesScene, buildRadiusOfConvergenceScene, buildTaylorRemainderScene,
   buildChainRuleMultivariableScene, buildSequenceLimitsScene,
 } from '@/lib/teaching/sceneGenerators/mathCoreScenesB36'
+import {
+  buildSampleSpaceScene, buildClassicalProbabilityScene, buildCombinatorialProbabilityScene, buildIndependenceScene,
+  buildRandomVariableScene, buildExpectedValueScene, buildMarkovInequalityScene, buildTransitionMatrixScene, buildPoissonProcessScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB37'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -994,6 +998,19 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'math.calc.taylor-remainder':          buildTaylorRemainderScene,
   'math.calc.chain-rule-multivariable':  buildChainRuleMultivariableScene,
   'math.calc.sequence-limits':           buildSequenceLimitsScene,
+
+  // Mathematics visual campaign, batch 37 (2026-10-12). See mathCoreScenesB37.ts.
+  // math.prob.bayesian-inference is the twin of math.stats.bayesian-inference (batch 34): same KG statement, same figure.
+  'math.prob.sample-space':              buildSampleSpaceScene,
+  'math.prob.classical-probability':     buildClassicalProbabilityScene,
+  'math.prob.combinatorial-probability': buildCombinatorialProbabilityScene,
+  'math.prob.independence':              buildIndependenceScene,
+  'math.prob.bayesian-inference':        buildBayesianInferenceScene,
+  'math.prob.random-variable':           buildRandomVariableScene,
+  'math.prob.expected-value':            buildExpectedValueScene,
+  'math.prob.markov-inequality':         buildMarkovInequalityScene,
+  'math.prob.transition-matrix':         buildTransitionMatrixScene,
+  'math.prob.poisson-process':           buildPoissonProcessScene,
 
   // The Punnett generator is single-gene by construction (genotypes are two
   // alleles). A dihybrid cross drawn as a monohybrid square teaches the wrong

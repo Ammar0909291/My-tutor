@@ -4,8 +4,8 @@ Crops the figure area out of each rendered card (see shot.cjs) and tiles them 3 
 
   python3 scripts/math/campaign-tools/montage.py sheet1.png math.linalg.rank math.linalg.dimension ... [--dir /tmp/math-visual-shots]
 
-Writes <dir>/<out>. Six figures per sheet reads well. The crop (230,100,800,470) cuts a long title label off the TOP of a tall figure
-in the sheet only; open the single PNG (<dir>/<id>_1026.png) to see the whole card.
+Writes <dir>/<out>. Six figures per sheet reads well. The crop (205,100,835,470) cuts a long title label off the TOP of a tall figure and a caption that runs past the
+right edge in the sheet only; open the single PNG (<dir>/<id>_1026.png) to see the whole card.
 """
 import os, sys
 from PIL import Image
@@ -17,7 +17,7 @@ if '--dir' in args:
 if len(args) < 2:
     sys.exit('usage: montage.py out.png conceptId [conceptId ...] [--dir DIR]')
 out, ids = args[0], args[1:]
-cells = [Image.open(os.path.join(d, i.replace('.', '_') + '_1026.png')).convert('RGB').crop((230, 100, 800, 470)) for i in ids]
+cells = [Image.open(os.path.join(d, i.replace('.', '_') + '_1026.png')).convert('RGB').crop((205, 100, 835, 470)) for i in ids]
 cols = 3
 rows = (len(cells) + cols - 1) // cols
 w, h = cells[0].size
