@@ -165,6 +165,11 @@ import {
   buildContinuousDistributionsScene, buildQuantileScene, buildVarianceScene, buildStandardDeviationScene,
   buildJointDistributionScene, buildMarginalDistributionScene, buildConditionalDistributionScene, buildLawOfLargeNumbersScene,
 } from '@/lib/teaching/sceneGenerators/mathCoreScenesB8'
+import {
+  buildMarkovChainScene, buildCovarianceScene, buildCorrelationScene, buildDescriptiveStatisticsScene, buildMeasuresOfCenterScene,
+  buildMeasuresOfSpreadScene, buildPercentileScene, buildSamplingDistributionScene, buildConfidenceIntervalScene, buildCiMeanScene,
+  buildCiProportionScene, buildHypothesisTestingScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB9'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -440,6 +445,20 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'math.prob.marginal-distribution':     buildMarginalDistributionScene,
   'math.prob.conditional-distribution':  buildConditionalDistributionScene,
   'math.prob.lln':                       buildLawOfLargeNumbersScene,
+
+  // Mathematics visual campaign, batch 9 (2026-10-12). See mathCoreScenesB9.ts.
+  'math.prob.markov-chain':              buildMarkovChainScene,
+  'math.prob.covariance':                buildCovarianceScene,
+  'math.prob.correlation':               buildCorrelationScene,
+  'math.stats.descriptive-statistics':   buildDescriptiveStatisticsScene,
+  'math.stats.measures-of-center':       buildMeasuresOfCenterScene,
+  'math.stats.measures-of-spread':       buildMeasuresOfSpreadScene,
+  'math.stats.percentile':               buildPercentileScene,
+  'math.stats.sampling-distribution':    buildSamplingDistributionScene,
+  'math.stats.confidence-interval':      buildConfidenceIntervalScene,
+  'math.stats.ci-mean':                  buildCiMeanScene,
+  'math.stats.ci-proportion':            buildCiProportionScene,
+  'math.stats.hypothesis-testing':       buildHypothesisTestingScene,
 
   // The Punnett generator is single-gene by construction (genotypes are two
   // alleles). A dihybrid cross drawn as a monohybrid square teaches the wrong
