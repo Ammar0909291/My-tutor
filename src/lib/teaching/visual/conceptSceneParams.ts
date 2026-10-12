@@ -252,6 +252,11 @@ import {
   buildCartesianProductScene, buildOrderedPairScene, buildRelationScene, buildReflexiveRelationScene,
   buildSymmetricRelationScene, buildTransitiveRelationScene, buildEquivalenceClassScene, buildPartitionScene,
 } from '@/lib/teaching/sceneGenerators/mathCoreScenesB25'
+import {
+  buildPartialOrderScene, buildTotalOrderScene, buildSetTheoreticFunctionScene, buildCardinalityScene,
+  buildCountableSetScene, buildUncountableSetScene, buildNaturalNumbersScene, buildOrdinalNumberScene,
+  buildProofByInductionScene, buildStrongInductionScene, buildTruthTableScene, buildLogicalEquivalenceScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB26'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -779,6 +784,20 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'math.found.transitive-relation':      buildTransitiveRelationScene,
   'math.found.equivalence-class':        buildEquivalenceClassScene,
   'math.found.partition':                buildPartitionScene,
+
+  // Mathematics visual campaign, batch 26 (2026-10-12). See mathCoreScenesB26.ts.
+  'math.found.partial-order':            buildPartialOrderScene,
+  'math.found.total-order':              buildTotalOrderScene,
+  'math.found.function-set-theoretic':   buildSetTheoreticFunctionScene,
+  'math.found.cardinality':              buildCardinalityScene,
+  'math.found.countable-set':            buildCountableSetScene,
+  'math.found.uncountable-set':          buildUncountableSetScene,
+  'math.found.natural-numbers':          buildNaturalNumbersScene,
+  'math.found.ordinal-number':           buildOrdinalNumberScene,
+  'math.found.proof-by-induction':       buildProofByInductionScene,
+  'math.found.strong-induction':         buildStrongInductionScene,
+  'math.found.truth-table':              buildTruthTableScene,
+  'math.found.logical-equivalence':      buildLogicalEquivalenceScene,
 
   // The Punnett generator is single-gene by construction (genotypes are two
   // alleles). A dihybrid cross drawn as a monohybrid square teaches the wrong

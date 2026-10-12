@@ -969,3 +969,35 @@ conditions (non-empty, disjoint, covering) on boxes read from the drawn lines. A
 Next (batch 26): the rest of `math.found.*` (partial-order, total-order, function-set-theoretic, cardinality, countable-set, uncountable-set, natural-numbers, ordinal-number, proof-by-induction,
 strong-induction, truth-table, logical-equivalence); then arith (18), alg (17), nt (13), abst (13), linalg (18), de (12), stats (11), disc (11), calc (11), prob (10), seq (7), real (7),
 meas (6), top (4), opt (4), geom (4), func (4), cx (4), graph (3), fnal (3), trig (2), cat (2), num (1) — see `npx tsx scripts/math/visual-coverage.ts --list H`.
+
+---
+
+# Batch 26 (2026-10-12): the rest of the foundations
+
+`sceneGenerators/mathCoreScenesB26.ts` + `mathCoreScenesBatch26.test.ts` (122 checks); campaign audit threshold now 325. Coverage after this batch:
+371 of 908 concepts with a fixed figure; essential tier 344 / 346 (complete), tier H 25 / 210, tier N 2 / 352. Every `math.found.*` helpful concept is now covered.
+Pre-push checklist used for this push (see the CI-repair section above): full `npx vitest run` 948 files / 22,651 tests green, `scripts/ci/tsc-ratchet.sh` 0 errors,
+`validate-visualization-coverage.ts` PASS.
+
+| Concept | Figure |
+|---|---|
+| math.found.partial-order | Hasse diagram of divisibility on {1, 2, 3, 4, 6, 12}; 2 ≤ 12 along 2–4–12; 2 and 3 incomparable |
+| math.found.total-order | comparability tables: ≤ on {1…5} all 25 cells filled; divisibility on {2…6} only 11 |
+| math.found.function-set-theoretic | grids of pairs: one mark per row (function) vs counts 2, 0, 1 (not a function) |
+| math.found.cardinality | {a, b, c} ↔ {1, 2, 3}; n ↦ 2n pairs ℕ with the evens; |A| = 3 < |P(A)| = 8 |
+| math.found.countable-set | Cantor zig-zag through the p/q grid, coprime cells numbered 1…11, repeats circled |
+| math.found.uncountable-set | diagonal argument: flip the diagonal 0, 1, 1, 1, 0 to get d = 1, 0, 0, 0, 1, on no row |
+| math.found.natural-numbers | 0…7 with successor arrows, 2 + 3 = 5 as three successor hops, induction turns all green |
+| math.found.ordinal-number | 0, 1, 2, … crowd toward ω (ring), then ω + 1, ω + 2, ω + 3 |
+| math.found.proof-by-induction | eight dominoes: base case, P(n) ⟹ P(n + 1) arrows, all fall |
+| math.found.strong-induction | factor tree of 60 = 6 × 10 = 2 · 3 · 2 · 5 with the hypothesis on smaller numbers |
+| math.found.truth-table | p, q, p∧q, p∨q, p⇒q over the four rows |
+| math.found.logical-equivalence | ¬(p∧q) ≡ ¬p∨¬q (identical columns), p∧q opposite in every row |
+
+Notes: a ring drawn around a digit makes the label solver push the digit aside — circle table entries with an ellipse that leaves the text box clear (rx 0.5, ry 0.3). Gaps that halve
+shrink below the 0.01 rounding after about five steps: assert halving only on the first gaps. A figure needs at least one NAMED (3+ character) label for the generic test; add a short caption
+if all labels are digits.
+
+Next (batch 27): arithmetic (18): addition, subtraction, counting-sequence, column-addition, divisor-dividend, remainder, long-division, exponentiation, exponent-rules, scientific-notation,
+percentage-calculations, unit-rate, estimation (then decimal-operations, terminating-decimals, repeating-decimals, fraction-reciprocal, irrational-roots), then alg (17), nt (13), abst (13),
+linalg (18), de (12), stats (11), disc (11), calc (11), prob (10), seq (7), real (7), meas (6), top (4), opt (4), geom (4), func (4), cx (4), graph (3), fnal (3), trig (2), cat (2), num (1).
