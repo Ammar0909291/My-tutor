@@ -673,3 +673,43 @@ Notes for later batches:
 Next (batch 19 plan; 80 essential concepts still uncovered): `math.disc.boolean-circuits` (gates + a netlist the test simulates against its truth table),
 `math.graph.connectivity` / `maximum-flow` / `matching`, `de` (12: slope-field, euler-method, harmonic-oscillator, resonance, stability-analysis, fourier-*, pde, heat /
 wave / Laplace), `real` (9), `top` (8), `cx` (7), `opt` (6), `num` (5), `cat` (4), multivariable calculus (14), `meas` (2), `abst` / `fnal` (1 each), geom 3-D (3), func (3).
+
+---
+
+# Batch 19 (2026-10-12): differential equations
+
+`sceneGenerators/mathCoreScenesB19.ts` + `mathCoreScenesBatch19.test.ts` (131 checks); campaign audit threshold now 235. Coverage after this batch:
+281 of 908 concepts with a fixed figure; essential tier 279 / 346 (tier H 0 / 210, tier N 2 / 352). The `de` domain is complete (12 / 12 essential);
+`math.num.euler-method` is registered to the Euler figure of `math.de.euler-method` (the same y_{n+1} = y_n + h f(x_n, y_n) statement).
+
+Notes for later batches:
+- **Curves are verified against the equation, not against the generator.** The oscillator and resonance tests integrate x″ + b x′ + 4x = 0 and x″ + x = cos ωt
+  with their own RK4 and compare the drawn samples; the Fourier tests integrate the coefficients by Simpson's rule and rebuild the partial sums; the heat test takes
+  the sine coefficients of the DRAWN t = 0 curve, evolves each mode by e^(−n²kt) and compares with the drawn t = 0.1 and 0.3 curves; the wave test also checks the
+  conserved area √π; the Laplace test checks the mean value property on the drawn circle and that the extremes sit on the boundary.
+- **Rounding tolerance on steep curves**: `P()` rounds to 0.01 on screen, so a partial sum with slope 37 (S₂₉ at the jump) is off by 0.07 in value at a sample.
+  The tests use `offBy(f, x, y, dx)`: the distance to the curve allowing a small x-shift. Do not compare second differences of drawn samples (noise ×4/dt²); integrate the ODE instead.
+- A solution plotted on a window must be centred: a time axis drawn from `ox = −4.4` with `ut = 0.28` filled only the left half of the canvas. Pick `ut` so that `T·ut ≈ 8`.
+- Labels named `Δ < 0` / `Δ > 0` / `u_xx + u_yy = 0` are fine for SM-01 as long as no two share the last token before an `=` with different numbers
+  (`u_t`, `u_tt`, `u_yy` are distinct).
+- The PDE classification figure puts the conic icons at ±3.5 (not ±4) so the hyperbola branches stay inside ±5.
+
+| Concept | Figure |
+|---|---|
+| math.de.slope-field | y′ = x − y: 42 tangent segments on a lattice; the solution through (0, 1) follows them; flat isocline y = x |
+| math.de.euler-method (+ math.num.euler-method) | y′ = y: Euler paths h = 0.5 (5.06) and h = 0.25 (5.96) under the exact eˣ (7.39); error ∝ h |
+| math.de.harmonic-oscillator | m = 1, k = 4: underdamped b = 1 (oscillates), critical b = 4 (b² = 4mk), overdamped b = 6 |
+| math.de.resonance | x″ + x = cos ωt: ω = 0.7 bounded (beats), ω = 1 grows like (t/2) sin t inside ±t/2 |
+| math.de.stability-analysis | y′ = y(1 − y): f(y) parabola, phase-line arrows, 0 unstable (f′ = 1), 1 stable (f′ = −1) |
+| math.de.fourier-series | square wave and S₁, S₃, S₅ = (4/π)Σ sin(kx)/k |
+| math.de.fourier-convergence | S₉ and S₂₉ at the jump: midpoint 0, Gibbs overshoot ≈ 1.179 (≈ 9 % of 2) |
+| math.de.fourier-sine-cosine | x on [0, π]: odd extension → sine series, even extension (|x|) → cosine series |
+| math.de.pde | Δ = B² − 4AC: Laplace −4 elliptic, heat 0 parabolic, wave +4 hyperbolic, with ellipse / parabola / hyperbola icons |
+| math.de.heat-equation | sin x + ½ sin 3x smoothing at t = 0, 0.1, 0.3 (modes decay like e^(−n²kt)) |
+| math.de.wave-equation | e^(−x²) splits into two half-height pulses at x = ±ct (t = 0, 2, 4) |
+| math.de.laplace-equation | contours of x² − y², mean value property on a circle, extremes on the boundary |
+
+Next (batch 20 plan; 67 essential concepts still uncovered): `math.disc.boolean-circuits` (gates + a netlist the test simulates against its truth table),
+`math.graph.connectivity` / `maximum-flow` / `matching`, `real` (9: sup-inf, convergence-sequences, cauchy-sequence, open-sets, continuity-rigorous, uniform-continuity,
+riemann-integral, uniform-convergence, pointwise-convergence), `top` (8), `cx` (7), `opt` (6), `num` (4 left: newtons-method, interpolation, numerical-differentiation,
+numerical-integration), `cat` (4), multivariable calculus (14), `meas` (2), `abst` / `fnal` (1 each), geom 3-D (3), func (3 incl. the reserved fixture).

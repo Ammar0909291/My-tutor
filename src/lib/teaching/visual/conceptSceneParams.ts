@@ -215,6 +215,11 @@ import {
   buildGraphTreesScene, buildSpanningTreeScene, buildGraphColoringScene, buildPlanarGraphScene, buildStarsBarsScene,
   buildInclusionExclusionScene, buildAsymptoticNotationScene,
 } from '@/lib/teaching/sceneGenerators/mathCoreScenesB18'
+import {
+  buildSlopeFieldScene, buildEulerMethodScene, buildHarmonicOscillatorScene, buildResonanceScene, buildStabilityAnalysisScene,
+  buildFourierSeriesScene, buildFourierConvergenceScene, buildFourierSineCosineScene, buildPdeScene, buildHeatEquationScene,
+  buildWaveEquationScene, buildLaplaceEquationScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB19'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -636,6 +641,22 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'math.graph.graph':                    buildGraphScene,
   'math.graph.tree':                     buildGraphTreesScene,
   'math.graph.graph-coloring':           buildGraphColoringScene,
+
+  // Mathematics visual campaign, batch 19 (2026-10-12). See mathCoreScenesB19.ts. math.num.euler-method shares the figure of
+  // math.de.euler-method (the same y_{n+1} = y_n + h f(x_n, y_n) statement).
+  'math.de.slope-field':                 buildSlopeFieldScene,
+  'math.de.euler-method':                buildEulerMethodScene,
+  'math.num.euler-method':               buildEulerMethodScene,
+  'math.de.harmonic-oscillator':         buildHarmonicOscillatorScene,
+  'math.de.resonance':                   buildResonanceScene,
+  'math.de.stability-analysis':          buildStabilityAnalysisScene,
+  'math.de.fourier-series':              buildFourierSeriesScene,
+  'math.de.fourier-convergence':         buildFourierConvergenceScene,
+  'math.de.fourier-sine-cosine':         buildFourierSineCosineScene,
+  'math.de.pde':                         buildPdeScene,
+  'math.de.heat-equation':               buildHeatEquationScene,
+  'math.de.wave-equation':               buildWaveEquationScene,
+  'math.de.laplace-equation':            buildLaplaceEquationScene,
 
   // The Punnett generator is single-gene by construction (genotypes are two
   // alleles). A dihybrid cross drawn as a monohybrid square teaches the wrong
