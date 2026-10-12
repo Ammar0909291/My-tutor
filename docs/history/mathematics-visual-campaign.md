@@ -998,6 +998,34 @@ Notes: a ring drawn around a digit makes the label solver push the digit aside �
 shrink below the 0.01 rounding after about five steps: assert halving only on the first gaps. A figure needs at least one NAMED (3+ character) label for the generic test; add a short caption
 if all labels are digits.
 
-Next (batch 27): arithmetic (18): addition, subtraction, counting-sequence, column-addition, divisor-dividend, remainder, long-division, exponentiation, exponent-rules, scientific-notation,
-percentage-calculations, unit-rate, estimation (then decimal-operations, terminating-decimals, repeating-decimals, fraction-reciprocal, irrational-roots), then alg (17), nt (13), abst (13),
-linalg (18), de (12), stats (11), disc (11), calc (11), prob (10), seq (7), real (7), meas (6), top (4), opt (4), geom (4), func (4), cx (4), graph (3), fnal (3), trig (2), cat (2), num (1).
+(Batch 26's plan for batch 27 is carried out below.)
+
+# Batch 27 (2026-10-12): arithmetic, first 13 of 18
+
+`sceneGenerators/mathCoreScenesB27.ts` + `mathCoreScenesBatch27.test.ts` (132 checks); campaign audit threshold now 338. Coverage after this batch:
+384 of 908 concepts with a fixed figure; essential tier 344 / 346 (complete), tier H 38 / 210, tier N 2 / 352.
+Pre-push checklist: full `npx vitest run`, `scripts/ci/tsc-ratchet.sh` 0 errors, `validate-visualization-coverage.ts` PASS (see the CI-repair section above).
+
+| Concept | Figure |
+|---|---|
+| math.arith.addition | 4 + 3 = 7 as three green hops above the number line; 3 + 4 = 7 as four violet hops below it, same landing point |
+| math.arith.subtraction | 9 − 4 = 5 as four red hops left; the same fact as a bar: whole 9 = part 4 (red) + difference 5 (blue) |
+| math.arith.counting-sequence | three rows 1…10: by ones all lit, by twos 2, 4, 6, 8, 10, by fives 5, 10 (lit = multiples of the step) |
+| math.arith.column-addition | 47 + 38: ones 7 + 8 = 15 write 5 carry 1, tens 4 + 3 + 1 = 8, answer 85 |
+| math.arith.divisor-dividend | 20 dots in five boxes of 4: dividend 20, divisor 4, quotient 5 |
+| math.arith.remainder | 17 dots: three boxes of 5, two red spare dots, 17 = 3 × 5 + 2, 2 < 5 |
+| math.arith.long-division | 156 ÷ 12 laid out digit by digit (quotient 13, subtractions 12 and 36, remainders 3 and 0) |
+| math.arith.exponentiation | bars 2¹ … 2⁵ = 2, 4, 8, 16, 32, each double the last, × 2 arrows |
+| math.arith.exponent-rules | factor dots: a³·a² = a⁵ (add), (a²)³ = a⁶ (multiply), a⁵ ÷ a² = a³ (subtract, two crossed out) |
+| math.arith.scientific-notation | 4 500 000: the point hops 6 places left to after the 4, giving 4.5 × 10⁶ |
+| math.arith.percentage-calculations | bar of 80 = 100% cut into four 25% = 20 quarters; 25% of 80 = 20, 80 + 20 = 100 |
+| math.arith.unit-rate | apples against cost: (1, 2), (2, 4), (3, 6), (6, 12) on a line of slope 2; $2 per apple |
+| math.arith.estimation | 47 → 50, 38 → 40 on a number line; estimate 40 + 50 = 90 vs exact 85 (5 off) |
+
+Notes: SM-01 treats `≈` like `=`: a label "47 ≈ 50" is rejected as two different values for the same token, so these labels use "→". Row names ("by ones") were added to the counting figure
+because the generic test requires one NAMED label (digits alone do not count). Number-line tick labels go on the side opposite the hops (below for the upper hops, above for lower hops) or the
+label solver shoves them aside. Floating-point: compare percentages with `toBeCloseTo`, not `toBe`.
+
+Next (batch 28): the five remaining helpful arithmetic concepts — decimal-operations, terminating-decimals, repeating-decimals, fraction-reciprocal, irrational-roots — plus the start of
+alg (17). Then nt (13), abst (13), linalg (18), de (12), stats (11), disc (11), calc (11), prob (10), seq (7), real (7), meas (6), top (4), opt (4), geom (4), func (4), cx (4),
+graph (3), fnal (3), trig (2), cat (2), num (1); then tier N (352) if still wanted. List what is left with `npx tsx scripts/math/visual-coverage.ts --list H`.

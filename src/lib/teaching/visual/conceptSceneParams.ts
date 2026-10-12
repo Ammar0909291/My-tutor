@@ -257,6 +257,12 @@ import {
   buildCountableSetScene, buildUncountableSetScene, buildNaturalNumbersScene, buildOrdinalNumberScene,
   buildProofByInductionScene, buildStrongInductionScene, buildTruthTableScene, buildLogicalEquivalenceScene,
 } from '@/lib/teaching/sceneGenerators/mathCoreScenesB26'
+import {
+  buildAdditionScene, buildSubtractionScene, buildCountingSequenceScene, buildColumnAdditionScene,
+  buildDivisorDividendScene, buildRemainderScene, buildLongDivisionScene, buildExponentiationScene,
+  buildExponentRulesScene, buildScientificNotationScene, buildPercentageCalculationsScene, buildUnitRateScene,
+  buildEstimationScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB27'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -798,6 +804,21 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'math.found.strong-induction':         buildStrongInductionScene,
   'math.found.truth-table':              buildTruthTableScene,
   'math.found.logical-equivalence':      buildLogicalEquivalenceScene,
+
+  // Mathematics visual campaign, batch 27 (2026-10-12). See mathCoreScenesB27.ts.
+  'math.arith.addition':                 buildAdditionScene,
+  'math.arith.subtraction':              buildSubtractionScene,
+  'math.arith.counting-sequence':        buildCountingSequenceScene,
+  'math.arith.column-addition':          buildColumnAdditionScene,
+  'math.arith.divisor-dividend':         buildDivisorDividendScene,
+  'math.arith.remainder':                buildRemainderScene,
+  'math.arith.long-division':            buildLongDivisionScene,
+  'math.arith.exponentiation':           buildExponentiationScene,
+  'math.arith.exponent-rules':           buildExponentRulesScene,
+  'math.arith.scientific-notation':      buildScientificNotationScene,
+  'math.arith.percentage-calculations':  buildPercentageCalculationsScene,
+  'math.arith.unit-rate':                buildUnitRateScene,
+  'math.arith.estimation':               buildEstimationScene,
 
   // The Punnett generator is single-gene by construction (genotypes are two
   // alleles). A dihybrid cross drawn as a monohybrid square teaches the wrong
