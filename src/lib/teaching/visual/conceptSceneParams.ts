@@ -299,6 +299,11 @@ import {
   buildTTestScene, buildTwoWayAnovaScene, buildCovarianceMatrixScene, buildBayesianInferenceScene,
   buildCredibleIntervalScene, buildExperimentalDesignScene,
 } from '@/lib/teaching/sceneGenerators/mathCoreScenesB34'
+import {
+  buildCountingPrinciplesScene, buildPermutationsScene, buildCombinationsScene,
+  buildCombinatoricsScene, buildRecurrenceRelationScene, buildLinearRecurrenceScene, buildDivideConquerRecurrenceScene,
+  buildPropositionalLogicScene, buildAlgorithmComplexityScene, buildComplexityClassesScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB35'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -958,6 +963,19 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'math.stats.bayesian-inference':       buildBayesianInferenceScene,
   'math.stats.credible-interval':        buildCredibleIntervalScene,
   'math.stats.experimental-design':      buildExperimentalDesignScene,
+
+  // Mathematics visual campaign, batch 35 (2026-10-12). See mathCoreScenesB35.ts.
+  'math.disc.counting-principles':       buildCountingPrinciplesScene,
+  'math.disc.permutations':              buildPermutationsScene,
+  'math.disc.combinations':              buildCombinationsScene,
+  'math.disc.binomial-theorem':          buildBinomialTheoremScene, // twin of math.alg.binomial-theorem (batch 29): Pascal's triangle
+  'math.disc.combinatorics':             buildCombinatoricsScene,
+  'math.disc.recurrence-relation':       buildRecurrenceRelationScene,
+  'math.disc.linear-recurrence':         buildLinearRecurrenceScene,
+  'math.disc.divide-conquer-recurrence': buildDivideConquerRecurrenceScene,
+  'math.disc.propositional-logic':       buildPropositionalLogicScene,
+  'math.disc.algorithm-complexity':      buildAlgorithmComplexityScene,
+  'math.disc.complexity-classes':        buildComplexityClassesScene,
 
   // The Punnett generator is single-gene by construction (genotypes are two
   // alleles). A dihybrid cross drawn as a monohybrid square teaches the wrong

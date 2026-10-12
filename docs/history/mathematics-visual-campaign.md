@@ -1246,6 +1246,38 @@ Next (batch 35): the 11 discrete-mathematics helpers — counting-principles, pe
 algorithm-complexity, complexity-classes — then calc (11), prob (10), seq (7), real (7), meas (6), top (4), opt (4), geom (4), func (4), cx (4), graph (3), fnal (3), trig (2), cat (2), num (1); then tier N (352) if still wanted.
 List what is left with `npx tsx scripts/math/visual-coverage.ts --list H`.
 
+# Batch 35 (2026-10-12): the discrete-mathematics helpers (10 figures + 1 twin registration)
+
+`sceneGenerators/mathCoreScenesB35.ts` + `mathCoreScenesBatch35.test.ts` (103 checks); campaign audit threshold now 438. Coverage after this batch:
+484 of 908 concepts with a fixed figure (53.3%); essential tier 344 / 346 (complete), tier H 138 / 210 (65.7%), tier N 2 / 352; target (E + H) 482 / 556 = 86.7%.
+Pre-push checklist: full `npx vitest run`, `scripts/ci/tsc-ratchet.sh` 0 errors, `validate-visualization-coverage.ts` PASS, `scripts/math/label-displacement.ts mathCoreScenesB35` (0 unresolved, 0 card-host moves),
+`scripts/math/campaign-tools/audit-module.ts mathCoreScenesB35` (10 / 10 admitted). Mutation check: ten deliberate wrong numbers (a route count, the table size, a caption product, the highlighted path, a Fibonacci value,
+the closed form, a tree level, the De Morgan column, n², a region position) each made at least one test fail.
+
+| Concept | Figure |
+|---|---|
+| math.disc.counting-principles | tree of 3 shirts × 2 trousers = 6 leaves; 4 bus + 3 train routes (disjoint) = 7 |
+| math.disc.permutations | 4 × 4 table of ordered pairs without the diagonal: 12 cells = 4 × 3 = 24 ÷ 2; (1, 2) and (2, 1) are different cells |
+| math.disc.combinations | the 10 segments joining 5 points (5 sides + 5 diagonals): C(5, 2) = 20 ÷ 2 = 10 |
+| math.disc.binomial-theorem | registered to the Pascal's-triangle figure of its `math.alg` twin (batch 29, same KG statement) — no new figure; one twin test |
+| math.disc.combinatorics | binary tree of 3-bit strings (2 × 2 × 2 = 8 leaves) with the green path 101 ↔ the subset {1, 3} |
+| math.disc.recurrence-relation | Fibonacci stacked bars F₁…F₈ = 1, 1, 2, 3, 5, 8, 13, 21: each bar = a lower part as tall as the previous bar (blue) + an upper part as tall as the one before (green) |
+| math.disc.linear-recurrence | aₙ = 5aₙ₋₁ − 6aₙ₋₂: terms 1, 5, 19, 65, 211 on a log scale, r² − 5r + 6 = 0 with roots 2 and 3, aₙ = 3·3ⁿ − 2·2ⁿ |
+| math.disc.divide-conquer-recurrence | merge-sort tree for n = 8: levels of 1, 2, 4, 8 nodes of sizes 8, 4, 2, 1; each level costs 8, 4 levels, total 32 |
+| math.disc.propositional-logic | truth table of p, q, ¬(p ∧ q), ¬p ∨ ¬q: the last two columns are equal (De Morgan) |
+| math.disc.algorithm-complexity | n, n log₂ n, n², 2ⁿ for n ≤ 8; 2ⁿ meets n² at n = 2 and 4; at n = 6 the values are 6, 15.5, 36, 64 |
+| math.disc.complexity-classes | NP (outer region) containing the disjoint regions P (sorting) and NP-complete (SAT, 3-colouring, TSP); caption P = NP ? |
+
+Notes: before writing a figure for a concept check the registry for a twin (`grep -n "binomial-theorem" conceptSceneParams.ts`): batch 18/19 already registered `math.disc.*` twins to `math.alg/…` figures and batch 35 reused the
+binomial one instead of drawing a duplicate (a duplicate export name also breaks the registry import — TS2300). The first Fibonacci design (golden-ratio squares) failed the label solver — the unit squares are too small for a
+numeral (a label needs ~0.35 world units of clearance from every line) — and was replaced by stacked bars. A figure can be wrong in a way the tests of the drawing cannot see: the first claim "2ⁿ stays below n² before n = 4"
+was false (2¹ = 2 > 1 and 2ⁿ = n² at n = 2) and the test caught it — compare curves only where the claim is true. Captions in a row need ≥ 105 px (≈ 2.8 world units at this zoom) between centres, and a caption stack ≥ 0.9
+world units between rows. The scaffold's copied head can carry a batch-specific import (here `mAt` from B32): remove the leftover.
+
+Next (batch 36): the 11 calculus helpers — limit-laws, chain-rule, implicit-differentiation, optimization, antiderivatives, trig-substitution, power-series, radius-of-convergence, taylor-remainder,
+chain-rule-multivariable, sequence-limits — then prob (10), seq (7), real (7), meas (6), top (4), opt (4), geom (4), func (4), cx (4), graph (3), fnal (3), trig (2), cat (2), num (1); then tier N (352) if still wanted.
+List what is left with `npx tsx scripts/math/visual-coverage.ts --list H`.
+
 # Deferred follow-up — do AFTER the Mathematics figure campaign (recorded 2026-10-12 at the owner's request)
 
 Context: the owner said another account was "validating visuals for all 4 subjects". A read-only audit of the last 10 days (2026-10-02 → 10-12) on `origin/main` and every remote branch found:
