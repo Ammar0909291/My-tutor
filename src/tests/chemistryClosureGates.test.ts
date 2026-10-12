@@ -30,6 +30,8 @@ import { ATOM_MODEL } from '@/components/school/visuals/AtomicStructure3D'
 import { SHELL_ELECTRONS_DRAWN } from '@/components/school/visuals/ElectronShells3D'
 import { ELECTRONS_PER_ATOM_BEFORE, SHARED_PAIR_ELECTRONS } from '@/components/school/visuals/BondFormation3D'
 import { LATTICE_STAGES } from '@/components/school/visuals/CrystalLattice3D'
+import { resolveVisual } from '@/lib/teaching/visual/resolveVisual'
+import { buildCanonicalScene } from '@/lib/teaching/visual/conceptSceneParams'
 
 const graph = (over: Record<string, unknown>) => ({ type: 'graph', title: 't', xLabel: 'Volume (L)', yLabel: 'Pressure (atm)', equation: '10 / x', ...over })
 const codes = (r: { findings: Array<{ code: string }> }) => r.findings.map((f) => f.code)
@@ -240,5 +242,27 @@ describe('R19 — the four fixed React cards the payload audit cannot see are he
     expect(n(LATTICE_STAGES.unitCell)).toBe(8)
     expect(n(LATTICE_STAGES.repeated)).toBeGreaterThan(n(LATTICE_STAGES.unitCell))
     expect(n(LATTICE_STAGES.growth)).toBeGreaterThan(n(LATTICE_STAGES.repeated))
+  })
+})
+
+describe('R12 — the two concepts that had no figure each own a faithful one', () => {
+  const text = (id: string) => buildCanonicalScene(null, id)!.steps.flatMap((st) => [st.narration ?? '', ...st.objects.map((o) => o.text ?? '')]).join(' | ')
+
+  it.each(['chem.surface.colloids', 'chem.sblock.water'])('%s: resolves to its own scene and passes the chemistry gate', (id) => {
+    const d = resolveVisual({ message: 'show me a diagram', lessonConceptId: id, subject: 'chemistry', learnerRequest: 'diagram' })
+    expect(d.graphical).toBe(true)
+    expect(d.provenance).toBe(`generator:${id}:concept-authored`)
+    expect(chemistryAdmissionFailure(id, d.payload)).toBeNull()
+  })
+
+  it('colloids: the three-box model by particle size, with the Tyndall and membrane tests', () => {
+    const t = text('chem.surface.colloids')
+    for (const s of ['below about 1 nm', 'about 1–1000 nm', 'above about 1000 nm', 'scatters a light beam (Tyndall effect)', 'homogeneous; no Tyndall effect', 'settles on standing']) expect(t).toContain(s)
+  })
+
+  it('water: 104.5° (not 120°), hydrogen bonding, ice less dense, both kinds of hardness, D₂O', () => {
+    const t = text('chem.sblock.water')
+    for (const s of ['104.5°', 'two lone pairs', '0.917 g/cm³', 'temporary', 'permanent', 'Na₂CO₃', 'D₂O', 'amphoteric']) expect(t).toContain(s)
+    expect(t).not.toContain('120')
   })
 })

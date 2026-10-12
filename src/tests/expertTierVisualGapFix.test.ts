@@ -75,7 +75,7 @@ describe('the scenes say what the Educational Brain says', () => {
   it('pericyclic: the three families and their thermal Woodward–Hoffmann outcomes', () => {
     const t = text(buildCanonicalScene(null, 'chem.org.pericyclic')!)
     for (const s of ['Cycloaddition', 'Electrocyclic', 'Sigmatropic', 'Diels–Alder: thermally allowed',
-      '[2+2]: thermally forbidden, photochemically allowed', '4n electrons: conrotatory when heated',
+      '[2+2]: thermally forbidden (suprafacial), photochemically allowed', '4n electrons: conrotatory when heated',
       '4n+2 electrons: disrotatory when heated']) expect(t).toContain(s)
   })
 

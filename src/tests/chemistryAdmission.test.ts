@@ -112,10 +112,12 @@ describe('no chemistry figure the resolver serves today is blanked by the gate',
   // gained curated figures; both pass this gate (nothing rejected).
   // 53 -> 53 (2026-10-09, R4): the closure review judged the 12 domain-default cards under the semantic-moat doctrine (inert is
   // kept, harmful is retired — none was harmful) and replaced one — chem.solid.packing now owns the face-centred-cubic cell.
+  // 53 -> 55 (2026-10-12, R12): chem.surface.colloids and chem.sblock.water had no figure (the review set); each now owns a
+  // concept-authored comparison scene worded from its Educational Brain entry, and both pass this gate.
   it('serves the concepts that have a faithful figure (nothing rejected:chemistry-validation-failed)', () => {
     const rejected = decisions.filter((x) => String(x.d.reason ?? '').includes('chemistry-validation-failed')).map((x) => x.id)
     expect(rejected).toEqual([])
-    expect(decisions.filter((x) => x.d.graphical).length).toBe(53)
+    expect(decisions.filter((x) => x.d.graphical).length).toBe(55)
   })
 
   it('every served chemistry scene audits without a single FAIL finding', () => {
