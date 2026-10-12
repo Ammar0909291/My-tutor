@@ -14,7 +14,10 @@
  * audited figure legibly in the real page chrome.
  *
  *   npx tsx scripts/qa/physicsProductionBrowserAudit.ts [--out file.json] [--shots dir] [--only id,id] [--say "message"]
- *                 [--min-segments N] [--attempts N] [--views mobile/dark,desktop-column/light] [--require-normal]
+ *                 [--min-segments N] [--attempts N] [--views mobile/dark,desktop-column/light] [--require-normal] [--card-index N]
+ *   (the figure measured is the one that BELONGS to the reply just asked for — scripts/qa/physicsVisual/figureAssociation.ts —
+ *   never "the first" or "the last" on the page; --card-index N picks a figure by position instead and is recorded as explicit.
+ *   Each row carries `figure` {index,total,kind,selection,ambiguous,messageId}, `replySegments` and the screenshot path.)
  *   (--require-normal: for the force-diagram card, keep asking, in a fresh session each time, until a pre-flight load of the
  *   real page shows the fifth step's normal arrow; the sentence count alone proved an unreliable predictor.)
  *   (a card in the lesson shows as many steps as the tutor's reply has sentences/lines, so a short reply leaves the
@@ -30,6 +33,7 @@ import { createSession, openLesson, say, carriesFigure } from './liveSession'
 import { extractNarrationSegments } from '../../src/lib/visuals/narrationSource'
 import { auditRenderedState } from '../../src/lib/teaching/visual/figureAudit'
 import { capture, openContext, settle, CHROMIUM_ARGS, type ThemeName } from './physicsVisual/render'
+import { selectTargetFigure, markFigure, type FigureSelection } from './physicsVisual/figureAssociation'
 
 const CONCEPTS = [
   'phys.meas.vector-addition', 'phys.mech.kinematics-1d', 'phys.em.electric-dipole', 'phys.mech.torque',
@@ -65,37 +69,20 @@ export interface ForceArrowProbe {
  * Open the lesson page, find the figure's own frame, and — for a card — run the narration at 1.5x until the picture
  * stops changing. Returns what kind of figure it is. (Shared by the pre-flight and by every measured view.)
  */
-async function driveToFinalState(page: Page): Promise<'card' | 'scene'> {
+async function driveToFinalState(page: Page, target: { replyText?: string; index?: number }): Promise<{ kind: 'card' | 'scene'; selection: FigureSelection }> {
   await page.goto(`${BASE}/learn?subject=physics`, { waitUntil: 'domcontentloaded', timeout: 60_000 })
   await page.waitForSelector('[data-scene-box], [aria-label^="Visual aid:"]', { timeout: 60_000 })
-  // Mark the figure's own frame: the nearest ancestor of the canvas box that also holds its controls
-  // (a scene), or the card's own root (a card).
-  // A card is identified by ITS OWN root (only VisualCard sets this label). `[data-scene-box]` cannot decide it:
-  // ThreeDVisual sets it too, so a 3D card (e.g. the orbital explorer) also contains one.
-  const kind: 'card' | 'scene' = await page.evaluate(() => (document.querySelector('[aria-label^="Visual aid:"]') ? 'card' : 'scene'))
-  const marked = await page.evaluate(() => {
-    // The lesson page lists the lesson's messages from EVERY session of the learner (history is lesson-scoped), so after a
-    // retry it holds one figure per attempt, oldest first. The figure under test is the LAST one.
-    const cards = document.querySelectorAll('[aria-label^="Visual aid:"]')
-    const card = cards.length ? cards[cards.length - 1] : null
-    if (card) {
-      card.setAttribute('data-audit-frame', '')
-      card.scrollIntoView({ block: 'start' })
-      return true
+  // The lesson page lists the lesson's messages from EVERY session, so it holds one figure per reply. Take the one that belongs
+  // to the reply under test, and wait for it (an older figure can be on screen before the newest message has mounted).
+  let selection: FigureSelection | undefined
+  for (const t0 = Date.now(); !selection; ) {
+    try { selection = await selectTargetFigure(page, target) } catch (e) {
+      if (!/NO_FIGURE/.test(String(e)) || Date.now() - t0 > 60_000) throw e
+      await page.waitForTimeout(1_000)
     }
-    const boxes = document.querySelectorAll('[data-scene-box]')
-    const box = boxes.length ? boxes[boxes.length - 1] : null
-    let el: Element | null = box
-    while (el && el.parentElement) {
-      el = el.parentElement
-      if (el.querySelector('input[type="range"]') || /Play the stages|Play the motion/.test(el.textContent ?? '')) break
-    }
-    if (!el) return false
-    el.setAttribute('data-audit-frame', '')
-    el.scrollIntoView({ block: 'start' })
-    return true
-  })
-  if (!marked) throw new Error('figure frame not found')
+  }
+  if (!(await markFigure(page, selection.index))) throw new Error('figure frame not found')
+  const kind = selection.kind
   // In the lesson a card is driven by the tutor's narration: one beat per sentence, 0.7 s each (VisualCard),
   // so a measurement taken on arrival sees a PARTIAL figure (one measured: friction with only the box on
   // screen). Run it at 1.5x and let the whole narration play out. (The main button cannot be used as the
@@ -114,7 +101,7 @@ async function driveToFinalState(page: Page): Promise<'card' | 'scene'> {
       if (now === prev) same++; else { same = 0; prev = now }
     }
   }
-  return kind
+  return { kind, selection }
 }
 
 /** Plain JS in a string on purpose: a transpiled callback can carry helper wrappers (esbuild's __name) the page does not have. */
@@ -157,7 +144,7 @@ async function main() {
   const out = arg('out'), shots = arg('shots')
   if (shots) mkdirSync(shots, { recursive: true })
   const acct = await createQaAccount('physbrowser')
-  const rows: Array<{ conceptId: string; vp: string; theme: string; verdict: string; fails: string[]; reviews: string[]; note?: string; segments?: number; attempts?: number; forceArrows?: ForceArrowProbe }> = []
+  const rows: Array<{ conceptId: string; vp: string; theme: string; verdict: string; fails: string[]; reviews: string[]; note?: string; segments?: number; attempts?: number; forceArrows?: ForceArrowProbe; figure?: FigureSelection; replySegments?: number; screenshot?: string | null }> = []
   try {
     const ob = await fetch(`${BASE}/api/onboarding`, {
       method: 'POST', headers: { 'content-type': 'application/json', cookie: acct.cookie },
@@ -181,17 +168,21 @@ async function main() {
         const l = lessons.find((x) => x.topicSlug === id)
         if (!l) { rows.push({ conceptId: id, vp: '-', theme: '-', verdict: 'NOT_RUN', fails: [], reviews: [], note: 'not in production curriculum' }); continue }
         // Every attempt adds another message (and another figure) to the lesson page — history is lesson-scoped, not
-        // session-scoped — so the page holds one card per attempt and `driveToFinalState` frames the LAST one. (Framing the
-        // first one made 18 retries of normal-force/equilibrium keep measuring the first, short reply.)
+        // session-scoped — so the page holds one figure per reply. The one measured is the one that BELONGS to the latest
+        // reply (figureAssociation.ts), never "the first" (18 retries of normal-force/equilibrium once kept measuring the
+        // first, short reply) and never "the last" (wrong the moment anything sits after the target).
         const need = Number(arg('min-segments') ?? 0), maxAttempts = Number(arg('attempts') ?? 6)
-        let segments = 0, attempts = 0, normalSeen = false
+        let segments = 0, attempts = 0, normalSeen = false, replyText = ''
+        const cardIndex = arg('card-index')
+        const target = (): { replyText?: string; index?: number } => cardIndex !== undefined ? { index: Number(cardIndex) } : { replyText }
         const requireNormal = process.argv.includes('--require-normal')
         for (; attempts < maxAttempts;) {
           attempts++
           const sid = await createSession(acct.cookie, 'physics')
           await openLesson(acct.cookie, sid, { lessonTitle: l.lessonTitle, lessonOrder: l.order, topicSlug: id, unitTitle: l.unitTitle, totalLessons: lessons.length })
           const turn = await say(acct.cookie, sid, arg('say') ?? 'Show me a diagram')
-          segments = extractNarrationSegments(turn.text ?? '').segments.length
+          replyText = turn.text ?? ''
+          segments = extractNarrationSegments(replyText).segments.length
           console.log(`  ${id} attempt ${attempts}: ${segments} segment(s), figure=${carriesFigure(turn)}`)
           let enough = !need || (segments >= need && carriesFigure(turn))
           if (requireNormal) {
@@ -199,7 +190,7 @@ async function main() {
             // ask the page: load it, let the narration finish, and see whether the normal arrow was drawn.
             const { base, page } = await openLearnerPage(VIEWS[0], 'dark')
             try {
-              await driveToFinalState(page)
+              await driveToFinalState(page, target())
               normalSeen = Boolean((await probeForceArrows(page))?.normal)
             } catch (e) { normalSeen = false; console.log(`  pre-flight failed: ${String(e).split('\n')[0].slice(0, 120)}`) } finally { await base.close() }
             console.log(`  ${id} attempt ${attempts}: normal arrow drawn in the page = ${normalSeen}`)
@@ -214,7 +205,7 @@ async function main() {
           const { base, page } = await openLearnerPage(v, theme)
           const pix = await base.newPage()
           try {
-            const kind = await driveToFinalState(page)
+            const { kind, selection } = await driveToFinalState(page, target())
             await settle(page, kind, kind === 'scene')
             const shot = shots ? resolve(shots, `${id}__${v.vp}__${theme}.png`) : null
             const st = await capture(page, pix, 'default', {}, shot)
@@ -224,7 +215,7 @@ async function main() {
             const forceArrows = kind === 'card' ? await probeForceArrows(page) : undefined
             rows.push({
               conceptId: id, vp: v.vp, theme, verdict: fails.length ? 'FAIL' : reviews.length ? 'REVIEW_REQUIRED' : 'PASS', fails, reviews,
-              segments, attempts, ...(forceArrows ? { forceArrows } : {}),
+              segments, attempts, replySegments: segments, figure: selection, screenshot: shot, ...(forceArrows ? { forceArrows } : {}),
               ...(shortReply ? { note: `HARNESS LIMIT: after ${attempts} attempt(s) the tutor's reply never made the card reach its last step (${segments} segment(s) in the last reply); later steps of the card were not shown` } : {}),
             })
           } catch (e) {

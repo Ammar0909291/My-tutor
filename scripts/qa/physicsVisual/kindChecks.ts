@@ -34,6 +34,8 @@ import { buildPendulumScene, validatePendulumParams, checkPendulumConsistency } 
 import { buildCollisionScene, validateCollisionParams, checkCollisionConsistency } from '../../../src/lib/teaching/sceneGenerators/momentumCollision.pure'
 import { buildKinematicsGraphScene, validateKinematicsParams, checkKinematicsConsistency } from '../../../src/lib/teaching/sceneGenerators/kinematicsGraphs.pure'
 import { buildRayOpticsScene, validateRayOpticsParams, checkRayOpticsConsistency } from '../../../src/lib/teaching/sceneGenerators/rayOptics.pure'
+import { buildLensPowerScene, validateLensPowerParams, checkLensPowerConsistency } from '../../../src/lib/teaching/sceneGenerators/lensPower.pure'
+import { buildNormalForceScene, validateNormalForceParams, checkNormalForceConsistency } from '../../../src/lib/teaching/sceneGenerators/normalForce.pure'
 import { buildCircuitScene, validateCircuitParams, checkCircuitConsistency } from '../../../src/lib/teaching/sceneGenerators/electricCircuit.pure'
 import { buildGravitationOrbitScene, validateGravitationParams, checkGravitationConsistency } from '../../../src/lib/teaching/sceneGenerators/gravitationOrbit.pure'
 
@@ -58,6 +60,8 @@ export const CHECKED_KINDS: Record<string, Kind> = {
   collision: { validate: validateCollisionParams, build: buildCollisionScene as never, check: checkCollisionConsistency as never },
   kinematics_graphs: { validate: validateKinematicsParams, build: buildKinematicsGraphScene as never, check: checkKinematicsConsistency as never, fixed: { initialPosition: 0 } },
   ray_optics: { validate: validateRayOpticsParams, build: buildRayOpticsScene as never, check: checkRayOpticsConsistency as never },
+  lens_power: { validate: validateLensPowerParams, build: buildLensPowerScene as never, check: checkLensPowerConsistency as never },
+  normal_force: { validate: validateNormalForceParams, build: buildNormalForceScene as never, check: checkNormalForceConsistency as never },
   electric_circuit: {
     validate: validateCircuitParams, build: buildCircuitScene as never, check: checkCircuitConsistency as never,
     adapt: (p) => ({
@@ -71,9 +75,14 @@ export const CHECKED_KINDS: Record<string, Kind> = {
   },
 }
 
-/** {min, mid, max} per slider, every option per choice. */
+/**
+ * {min, mid, max} per slider, every option per choice — and EVERY position of a slider that only has a few (<= 8), so a
+ * small control (the normal-force tilt has 7 positions, the lens gap 5) is swept completely instead of at three points.
+ */
 function levels(v: SceneVariable): Array<number | string> {
   if (v.kind === 'choice') return v.options.map((o) => o.value)
+  const positions = Math.round((v.max - v.min) / v.step) + 1
+  if (positions <= 8) return Array.from({ length: positions }, (_, i) => Math.round((v.min + i * v.step) * 1e6) / 1e6)
   const mid = Math.round(((v.min + v.max) / 2) / v.step) * v.step
   return [...new Set([v.min, mid, v.max])]
 }
