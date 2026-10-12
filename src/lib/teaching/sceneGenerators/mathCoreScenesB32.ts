@@ -27,11 +27,11 @@ const num = (v: number) => (v < 0 ? '−' + String(-v) : String(v))
 /** A matrix drawn as numerals between square brackets: entry (i, j) sits at mAt(spec, i, j). */
 export type MSpec = { cx: number; cy: number; dx: number; dy: number; rows: number; cols: number }
 export const mAt = (m: MSpec, i: number, j: number): Pt => [m.cx + (j - (m.cols - 1) / 2) * m.dx, m.cy + ((m.rows - 1) / 2 - i) * m.dy]
-function brackets(m: MSpec, padX = 0.5, padY = 0.42, tip = 0.2): SceneObject[] {
+export function brackets(m: MSpec, padX = 0.5, padY = 0.42, tip = 0.2): SceneObject[] {
   const x0 = mAt(m, 0, 0)[0] - padX, x1 = mAt(m, 0, m.cols - 1)[0] + padX, y0 = mAt(m, 0, 0)[1] + padY, y1 = mAt(m, m.rows - 1, 0)[1] - padY
   return [ln([x0, y0], [x0, y1], ROLE.reference, 0.05), ln([x0, y0], [x0 + tip, y0], ROLE.reference, 0.05), ln([x0, y1], [x0 + tip, y1], ROLE.reference, 0.05), ln([x1, y0], [x1, y1], ROLE.reference, 0.05), ln([x1, y0], [x1 - tip, y0], ROLE.reference, 0.05), ln([x1, y1], [x1 - tip, y1], ROLE.reference, 0.05)]
 }
-function matrix(m: MSpec, vals: ReadonlyArray<readonly number[]>, colorOf: (i: number, j: number, v: number) => string = () => ROLE.ink, padX = 0.5): SceneObject[] {
+export function matrix(m: MSpec, vals: ReadonlyArray<readonly number[]>, colorOf: (i: number, j: number, v: number) => string = () => ROLE.ink, padX = 0.5): SceneObject[] {
   return [...brackets(m, padX), ...vals.flatMap((row, i) => row.map((v, j) => lb(num(v), mAt(m, i, j), colorOf(i, j, v))))]
 }
 

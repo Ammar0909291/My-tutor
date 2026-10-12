@@ -1180,6 +1180,40 @@ Next (batch 33): the 12 differential-equation helpers — ode, solution-types, i
 nonlinear-ode — then stats (11), disc (11), calc (11), prob (10), seq (7), real (7), meas (6), top (4), opt (4), geom (4), func (4), cx (4), graph (3), fnal (3), trig (2), cat (2), num (1); then tier N (352) if still wanted.
 List what is left with `npx tsx scripts/math/visual-coverage.ts --list H`.
 
+# Batch 33 (2026-10-12): the differential-equation helpers (12 figures)
+
+`sceneGenerators/mathCoreScenesB33.ts` + `mathCoreScenesBatch33.test.ts` (122 checks); campaign audit threshold now 416. Coverage after this batch:
+462 of 908 concepts with a fixed figure (50.9%); essential tier 344 / 346 (complete), tier H 116 / 210 (55.2%), tier N 2 / 352; target (E + H) 460 / 556 = 82.7%. All `math.de.*` helpful concepts are now covered.
+Pre-push checklist: full `npx vitest run`, `scripts/ci/tsc-ratchet.sh` 0 errors, `validate-visualization-coverage.ts` PASS, `scripts/math/label-displacement.ts mathCoreScenesB33` (0 unresolved, 0 card-host moves),
+`scripts/math/campaign-tools/audit-module.ts mathCoreScenesB33` (12 / 12 admitted). Mutation check: twelve deliberate wrong numbers in the generator (a degree caption, the parabola, the highlighted curve, the cubic,
+the bell exponent, e^(1.5x), s = 3, the matrix A, sinc without the 2, a sample point, the tent peak and end, the logistic rate) each made exactly one test fail.
+
+| Concept | Figure |
+|---|---|
+| math.de.ode | three equations y′ = 2x, y″ + y = 0, (y′)³ + y = x with captions order 1/2/1 and degree 1/1/3 (the test parses order and degree from the equation text) |
+| math.de.solution-types | Clairaut y = xy′ + (y′)²: lines y = Cx + C² (C = −2…2, blue) = general, C = 1 (violet) = particular, parabola y = −x²/4 with green tangent dots at (−2C, −C²) = singular |
+| math.de.ivp | y′ = y, y(0) = 1: three curves Ce^x (C = 0.5, 1, 2); only C = 1 passes through the red point; green y = eˣ and a slope-1 tangent |
+| math.de.existence-uniqueness | y′ = y has one solution through (0, 1); y′ = 3y^(2/3) has y = 0 and y = x³ through (0, 0) because ∂f/∂y = 2y^(−1/3) is unbounded |
+| math.de.first-order-ode | y′ = −2xy → dy/y = −2x dx → ln y = −x² + c → bell curves y = Ce^(−x²), C = 1, 2 |
+| math.de.wronskian | (eˣ, e²ˣ): W(0) = 1 independent; (eˣ, 2eˣ): W = 0 dependent |
+| math.de.laplace-transform | area under e^(−2t) as 23 midpoint bars of width 0.1 = 1/s = 0.5 (the unseen tail is under 0.005) |
+| math.de.systems-ode | y″ + y = 0 → v = y′, x′ = A x with A = [[0, 1], [−1, 0]]; circular phase portrait (r = 1, 2) with clockwise arrows A x |
+| math.de.fourier-transform | pulse on [−1, 1] and its transform 2 sin ω / ω (peak 2 = the pulse's area, zeros at ±π, ±2π, ±3π) |
+| math.de.harmonic-functions | u = x² − y² on the circle of radius 1 about (1, 1): samples 3, −1, −3, 1 average to u(1, 1) = 0 |
+| math.de.greens-function | −u″ = δ(x − ξ), ξ = 0.4: the tent G with peak 0.24, slopes 0.6 and −0.4 (a jump of −1) |
+| math.de.nonlinear-ode | logistic y′ = y(1 − y): equilibria y = 0 (unstable, red) and y = 1 (stable, green), S-curves from below and a curve from y(0) = 2 |
+
+Notes: the tests check every drawn curve against an INDEPENDENT closed form and the closed form against its ODE (a central difference of the formula), and several figures are checked by a different route: the Fourier curve against
+Simpson integration of the DRAWN pulse, the Laplace bars against the area and a fitted decay rate, the Wronskian by fitting ln y to each drawn curve and computing W from the fitted exponents, the harmonic mean over the drawn
+circle, the Green's tent against second differences. `P()` rounds drawn coordinates to 0.01, which is a large relative error for small y — read values back only where y is not tiny (y >= 0.4 for ln fits, y > 0.5 for ratios)
+and loosen derivative checks accordingly (a central difference over 0.13 of x carries ±0.07 of noise). Layout lessons: a bar or line of height < 0.005 world units rounds to a zero-length bond and is rejected (ST-07) — only draw
+bars that are tall enough; SM-01 reads "W(0) = 1" as W × 0 = 1 (implicit product) and flags it next to "W = 0" — phrase such captions without "=" ("W(0) is 1, not 0"); axis arrows start `ux × (x₀ − 0.3)` left of the origin, which
+can leave the ±5 window for wide panels.
+
+Next (batch 34): the 11 statistics helpers — population-sample, sampling, standard-error, test-statistic, z-test, t-test, two-way-anova, covariance-matrix, bayesian-inference, credible-interval, experimental-design —
+then disc (11), calc (11), prob (10), seq (7), real (7), meas (6), top (4), opt (4), geom (4), func (4), cx (4), graph (3), fnal (3), trig (2), cat (2), num (1); then tier N (352) if still wanted.
+List what is left with `npx tsx scripts/math/visual-coverage.ts --list H`.
+
 # Deferred follow-up — do AFTER the Mathematics figure campaign (recorded 2026-10-12 at the owner's request)
 
 Context: the owner said another account was "validating visuals for all 4 subjects". A read-only audit of the last 10 days (2026-10-02 → 10-12) on `origin/main` and every remote branch found:

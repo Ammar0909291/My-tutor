@@ -289,6 +289,11 @@ import {
   buildMatrixRepresentationScene, buildDiagonalizationScene, buildSpectralTheoremScene, buildInnerProductScene,
   buildInnerProductSpaceScene, buildQrFactorizationScene, buildSingularValuesScene, buildTensorScene,
 } from '@/lib/teaching/sceneGenerators/mathCoreScenesB32'
+import {
+  buildOdeScene, buildSolutionTypesScene, buildIvpScene, buildExistenceUniquenessScene, buildFirstOrderOdeScene,
+  buildWronskianScene, buildLaplaceTransformScene, buildSystemsOdeScene, buildFourierTransformScene,
+  buildHarmonicFunctionsScene, buildGreensFunctionScene, buildNonlinearOdeScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB33'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -921,6 +926,20 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'math.linalg.qr-factorization':        buildQrFactorizationScene,
   'math.linalg.singular-values':         buildSingularValuesScene,
   'math.linalg.tensor':                  buildTensorScene,
+
+  // Mathematics visual campaign, batch 33 (2026-10-12). See mathCoreScenesB33.ts.
+  'math.de.ode':                         buildOdeScene,
+  'math.de.solution-types':              buildSolutionTypesScene,
+  'math.de.ivp':                         buildIvpScene,
+  'math.de.existence-uniqueness':        buildExistenceUniquenessScene,
+  'math.de.first-order-ode':             buildFirstOrderOdeScene,
+  'math.de.wronskian':                   buildWronskianScene,
+  'math.de.laplace-transform':           buildLaplaceTransformScene,
+  'math.de.systems-ode':                 buildSystemsOdeScene,
+  'math.de.fourier-transform':           buildFourierTransformScene,
+  'math.de.harmonic-functions':          buildHarmonicFunctionsScene,
+  'math.de.greens-function':             buildGreensFunctionScene,
+  'math.de.nonlinear-ode':               buildNonlinearOdeScene,
 
   // The Punnett generator is single-gene by construction (genotypes are two
   // alleles). A dihybrid cross drawn as a monohybrid square teaches the wrong
