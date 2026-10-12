@@ -1026,6 +1026,35 @@ Notes: SM-01 treats `≈` like `=`: a label "47 ≈ 50" is rejected as two diffe
 because the generic test requires one NAMED label (digits alone do not count). Number-line tick labels go on the side opposite the hops (below for the upper hops, above for lower hops) or the
 label solver shoves them aside. Floating-point: compare percentages with `toBeCloseTo`, not `toBe`.
 
-Next (batch 28): the five remaining helpful arithmetic concepts — decimal-operations, terminating-decimals, repeating-decimals, fraction-reciprocal, irrational-roots — plus the start of
-alg (17). Then nt (13), abst (13), linalg (18), de (12), stats (11), disc (11), calc (11), prob (10), seq (7), real (7), meas (6), top (4), opt (4), geom (4), func (4), cx (4),
-graph (3), fnal (3), trig (2), cat (2), num (1); then tier N (352) if still wanted. List what is left with `npx tsx scripts/math/visual-coverage.ts --list H`.
+(Batch 27's plan for batch 28 is carried out below.)
+
+# Batch 28 (2026-10-12): the rest of decimal/root arithmetic and the first algebra helpers (14 figures)
+
+`sceneGenerators/mathCoreScenesB28.ts` + `mathCoreScenesBatch28.test.ts` (142 checks); campaign audit threshold now 352. Coverage after this batch:
+398 of 908 concepts with a fixed figure; essential tier 344 / 346 (complete), tier H 52 / 210, tier N 2 / 352. All `math.arith.*` helpful concepts are now covered.
+Pre-push checklist: full `npx vitest run`, `scripts/ci/tsc-ratchet.sh` 0 errors, `validate-visualization-coverage.ts` PASS.
+
+| Concept | Figure |
+|---|---|
+| math.arith.fraction-reciprocal | y = 1/x: every curve point has xy = 1; (2, 1/2) and (1/2, 2) swap coordinates, both rectangles with the axes have area 1; 3/4 × 4/3 = 1 |
+| math.arith.decimal-operations | 2.35 + 1.40 = 3.75 with the points in one column; 0.3 × 0.4 = 0.12 as 3 columns × 4 rows = 12 of 100 grid squares |
+| math.arith.terminating-decimals | denominators 2…25 dotted green iff only prime factors 2 and 5 (2, 4, 5, 8, 10, 16, 20, 25); 1/8 = 0.125, 1/7 → 0.142857… |
+| math.arith.repeating-decimals | ring of the remainders 1, 3, 2, 6, 4, 5 of 1 ÷ 7, arrows r → 10r mod 7 with digits 1, 4, 2, 8, 5, 7, period 6 |
+| math.arith.irrational-roots | unit square, diagonal √2 (1² + 1² = 2), arc to the number line at 1.414 between ticks 1.4 and 1.5 (1.4² = 1.96 < 2 < 2.25) |
+| math.alg.equation | balance scale: x block (4 units wide) + 3 units = 7 units, level beam; take 3 off both sides, x = 4 |
+| math.alg.solution-set | 2x + 1 = 7 meets once ({3}), x² = 4 twice ({−2, 2}), x + 1 = x never (∅) |
+| math.alg.substitution-method | lines y = x + 1 and 2x + y = 7 cross at (2, 3); written chain 2x + (x + 1) = 7 → 3x + 1 = 7 → x = 2 → y = 3 |
+| math.alg.elimination-method | x + y = 5, x − y = 1: y cancels, 2x = 6, x = 3, y = 2; the lines cross at (3, 2) |
+| math.alg.degree | x − 1, x² − 1, x³ − 3x: 1, 2, 3 crossings of the x-axis = degree |
+| math.alg.polynomial-operations | area model of (x + 2)(x + 3): x², 3x, 2x, six unit squares → x² + 5x + 6 |
+| math.alg.polynomial-division | long division (x² + 5x + 7) ÷ (x + 2) = x + 3 remainder 1 |
+| math.alg.factoring | parabola x² + 5x + 6 crosses at −3 and −2 → (x + 3)(x + 2) |
+| math.alg.factoring-trinomials | pairs with product 6 and their sums; only (2, 3) sums to 5; split 5x = 2x + 3x |
+
+Notes: the label solver pushes a label off any object near it, so a cross-out drawn over a letter shoves the letter aside — put crosses BETWEEN rows (elimination) or give the rows 1.2 spacing.
+Steep sampled curves lose precision when read back through P() (0.01 rounding): the tolerance has to scale with the slope. `toBe` fails on `-0` vs `0`: use `toBeCloseTo` for polynomial identities.
+Sign changes of a sampled curve that hits a root exactly on a sample point must skip the zero sample (helper `crossings` in the test).
+
+Next (batch 29): the remaining 8 alg helpers — quadratic-formula, fractional-exponent, radicals, exponential-equations, logarithm-properties, natural-logarithm, logarithmic-equations,
+binomial-theorem — then nt (13), abst (13), linalg (18), de (12), stats (11), disc (11), calc (11), prob (10), seq (7), real (7), meas (6), top (4), opt (4), geom (4),
+func (4), cx (4), graph (3), fnal (3), trig (2), cat (2), num (1); then tier N (352) if still wanted. List what is left with `npx tsx scripts/math/visual-coverage.ts --list H`.

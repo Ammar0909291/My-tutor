@@ -263,6 +263,12 @@ import {
   buildExponentRulesScene, buildScientificNotationScene, buildPercentageCalculationsScene, buildUnitRateScene,
   buildEstimationScene,
 } from '@/lib/teaching/sceneGenerators/mathCoreScenesB27'
+import {
+  buildReciprocalScene, buildDecimalOperationsScene, buildTerminatingDecimalsScene, buildRepeatingDecimalsScene,
+  buildIrrationalRootsScene, buildEquationScene, buildSolutionSetScene, buildSubstitutionMethodScene,
+  buildEliminationMethodScene, buildDegreeScene, buildPolynomialOperationsScene, buildPolynomialDivisionScene,
+  buildFactoringScene, buildFactoringTrinomialsScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB28'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -819,6 +825,22 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'math.arith.percentage-calculations':  buildPercentageCalculationsScene,
   'math.arith.unit-rate':                buildUnitRateScene,
   'math.arith.estimation':               buildEstimationScene,
+
+  // Mathematics visual campaign, batch 28 (2026-10-12). See mathCoreScenesB28.ts.
+  'math.arith.fraction-reciprocal':      buildReciprocalScene,
+  'math.arith.decimal-operations':       buildDecimalOperationsScene,
+  'math.arith.terminating-decimals':     buildTerminatingDecimalsScene,
+  'math.arith.repeating-decimals':       buildRepeatingDecimalsScene,
+  'math.arith.irrational-roots':         buildIrrationalRootsScene,
+  'math.alg.equation':                   buildEquationScene,
+  'math.alg.solution-set':               buildSolutionSetScene,
+  'math.alg.substitution-method':        buildSubstitutionMethodScene,
+  'math.alg.elimination-method':         buildEliminationMethodScene,
+  'math.alg.degree':                     buildDegreeScene,
+  'math.alg.polynomial-operations':      buildPolynomialOperationsScene,
+  'math.alg.polynomial-division':        buildPolynomialDivisionScene,
+  'math.alg.factoring':                  buildFactoringScene,
+  'math.alg.factoring-trinomials':       buildFactoringTrinomialsScene,
 
   // The Punnett generator is single-gene by construction (genotypes are two
   // alleles). A dihybrid cross drawn as a monohybrid square teaches the wrong
