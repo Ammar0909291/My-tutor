@@ -195,6 +195,11 @@ import {
   buildColumnSpaceScene, buildKernelImageScene, buildEigenspaceScene, buildOrthogonalBasisScene, buildLeastSquaresScene,
   buildSvdScene, buildGeometricSequenceScene,
 } from '@/lib/teaching/sceneGenerators/mathCoreScenesB14'
+import {
+  buildSetScene, buildSubsetScene, buildProperSubsetScene, buildSetEqualityScene, buildUnionScene, buildIntersectionScene,
+  buildSetDifferenceScene, buildComplementScene, buildVennDiagramScene, buildHasseDiagramScene, buildIrrationalNumbersScene,
+  buildComplexNumbersScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB15'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -554,6 +559,20 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'math.linalg.least-squares':           buildLeastSquaresScene,
   'math.linalg.svd':                     buildSvdScene,
   'math.seq.geometric-sequence':         buildGeometricSequenceScene,
+
+  // Mathematics visual campaign, batch 15 (2026-10-12). See mathCoreScenesB15.ts.
+  'math.found.set':                      buildSetScene,
+  'math.found.subset':                   buildSubsetScene,
+  'math.found.proper-subset':            buildProperSubsetScene,
+  'math.found.set-equality':             buildSetEqualityScene,
+  'math.found.union':                    buildUnionScene,
+  'math.found.intersection':             buildIntersectionScene,
+  'math.found.set-difference':           buildSetDifferenceScene,
+  'math.found.complement':               buildComplementScene,
+  'math.found.venn-diagram':             buildVennDiagramScene,
+  'math.found.hasse-diagram':            buildHasseDiagramScene,
+  'math.found.irrational-numbers':       buildIrrationalNumbersScene,
+  'math.found.complex-numbers':          buildComplexNumbersScene,
 
   // The Punnett generator is single-gene by construction (genotypes are two
   // alleles). A dihybrid cross drawn as a monohybrid square teaches the wrong

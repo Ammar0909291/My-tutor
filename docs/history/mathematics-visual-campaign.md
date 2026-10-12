@@ -502,3 +502,50 @@ Notes for later batches:
 Next (batch 15 plan, from `visual-coverage.ts --list E`; 131 essential concepts still uncovered (132 less the reserved canary)): `found` sets (12), `arith` (12), `de` (12), `disc` (13),
 `real` (9), `top` (8), `cx` (7), `seq` (6), `opt` (6), `graph` (6), `num` (5), `alg` (5), `cat` (4), multivariable calculus (14),
 `nt` (2), `meas` (2), `abst` / `fnal` (1 each), geom 3-D (platonic-solids, differential-geometry-curves, frenet-serret), func (3: real-valued-function, rational-root + 1).
+
+---
+
+# Batch 15 (2026-10-12): sets, Venn / Hasse diagrams, irrational and complex numbers
+
+`sceneGenerators/mathCoreScenesB15.ts` + `mathCoreScenesBatch15.test.ts` (134 checks); campaign audit threshold now 182. Coverage after this batch:
+228 of 908 concepts with a fixed figure; essential tier 226 / 346 (tier H 0 / 210, tier N 2 / 352). The `found` domain is now complete
+(15 / 15 essential).
+
+Notes for later batches (these cost real time in this batch — read before drawing a set / Venn figure):
+- **A numeral must NOT sit on top of a mark.** The label solver pushes any label off every object it overlaps (rings, hatch lines, dots), so a
+  numeral drawn inside a green ring is displaced and ends up outside the region it belongs to. The element is therefore a small ink dot (r 0.08)
+  with its numeral BESIDE it (`elems()`, offset 0.3 + 0.12 × digits), and a highlight is a larger coloured dot (r 0.2, `mark()`) that swallows
+  the small one. A hatched region (shadeConvex) pushes labels the same way — the lens of the intersection is OUTLINED instead (`lensOutline`).
+- Labels also keep ≥ ~0.45 clear of circle lines; element numerals placed nearer than that get pushed across the line. Keep numeral centres
+  well inside the circle. The test `element dots and numerals stay unambiguous` (generic suite) fails when a dot's own numeral is not clearly the
+  nearest one or when two elements crowd (< 0.6) — it caught `5` landing on top of the dot for `3` and `6` beside `10`.
+- Set membership is READ BACK FROM GEOMETRY in the tests (`circlesOf`, `setIn`, `markedNumerals`): a numeral belongs to a circle when its dot lies
+  inside the fitted circle. A set figure is therefore verified by what is drawn, not by the constants. The Venn region counts are classified the
+  same way (`signature` of the circles each count sits in) and the totals (11, 11, 9, 20, 24) and inclusion–exclusion are recomputed from them.
+- SM-01 (same last token before `=` with different numbers silently drops the whole figure) shaped the wording: no `A ∪ B = …` next to
+  `B = {…}`; statements use `A ∖ B: {1, 2, 3}`, `union: …`, `|A ∪ B ∪ C| = 20` (token `C|` ≠ `|C|`), and `z*` / `iz` / `|z|` instead of repeating `z`.
+- The Hasse test recomputes the covering relations of divisibility on the divisors of 12 and requires the drawn edges to be exactly those, all
+  pointing upward, with the transitive closure of the drawn edges equal to divisibility; the meet / join rings are checked against gcd / lcm.
+- The irrational-numbers test maps the magnified ruler back to values (7/5, 41/29, 17/12 within 3e-5), recomputes their squares (1.96, 1.9988,
+  2.0069) and checks exhaustively that 2q² is never a perfect square for q ≤ 2000.
+
+| Concept | Figure |
+|---|---|
+| math.found.set | circle A = {2, 4, 6, 8, 10} (even, ≤ 10) with 3, 7, 9 outside; 4 ∈ A, 7 ∉ A; \|A\| = 5 |
+| math.found.subset | A = {2, 4} drawn inside B = {1…6} (A ⊆ B); C = {2, 7} crosses B's edge (7 ∈ C, 7 ∉ B, so C ⊄ B) |
+| math.found.proper-subset | A = {1, 2} ⊂ B = {1, 2, 3} ⊂ C = {1, 2, 3, 4}: nested, 3 ∈ B∖A and 4 ∈ C∖B marked, sizes 2 < 3 < 4 |
+| math.found.set-equality | A = {1, 2, 3} and B = {3, 1, 2} pair up (connectors cross); A and C = {1, 2, 4}: 3 and 4 unmatched |
+| math.found.union | A = {1…5}, B = {4…7} in U = {1…10}: A ∪ B = {1…7}, \|A ∪ B\| = 5 + 4 − 2 = 7 |
+| math.found.intersection | the lens outlined in green holds {4, 5}; 5 + 4 − 7 = 2 |
+| math.found.set-difference | A ∖ B = {1, 2, 3} (4, 5 removed), B ∖ A = {6, 7}, A ∖ B ≠ B ∖ A |
+| math.found.complement | A′ = {6…10} outside A inside U; A ∪ A′ = U, 5 + 5 = 10 |
+| math.found.venn-diagram | three circles, seven region counts (5, 4, 3, 2, 1, 2, 3) + 4 outside: \|A\| = 11, \|B\| = 11, \|C\| = 9, union 20, \|U\| = 24 |
+| math.found.hasse-diagram | divisors of 12 under divisibility: 7 covering edges, chain 1 \| 2 \| 4 \| 12, 4 and 6 incomparable, meet 2 (gcd), join 12 (lcm) |
+| math.found.irrational-numbers | unit-square diagonal swung onto the line at √2; ruler 1.400–1.420: 7/5, 41/29, 17/12 square to 1.96, 1.9988, 2.0069, none to 2 |
+| math.found.complex-numbers | z = 3 + 2i, z* = 3 − 2i (mirror), \|z\| = 3.61 (circle), iz = −2 + 3i (90° turn) |
+
+Next (batch 16 plan, from `visual-coverage.ts --list E`; 119 essential concepts still uncovered): `arith` (12), `de` (12), `disc` (13), `real` (9), `top` (8),
+`cx` (7), `seq` (6), `opt` (6), `graph` (6), `num` (5), `alg` (5), `cat` (4), multivariable calculus (14), `nt` (2), `meas` (2), `abst` / `fnal` (1 each),
+geom 3-D (platonic-solids, differential-geometry-curves, frenet-serret), func (3). `math.arith.*` (counting, subitizing, expanded-form,
+multiplication-table, long-multiplication, fraction-multiplication, mixed-numbers, proportion, rounding, square/cube numbers, square roots) is the
+next obvious block of 12.
