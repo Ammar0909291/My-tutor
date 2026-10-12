@@ -880,3 +880,42 @@ Notes for later batches:
 Next (batch 24 plan; 14 essential concepts still uncovered, 13 excluding the reserved fixture; this would finish the essential tier):
 `top.smooth-manifold`, `cat` (category, morphism-types, functor, natural-transformation), `geom` 3-D (platonic-solids, differential-geometry-curves, frenet-serret), `meas`
 (simple-function, lebesgue-integral), `abst.cyclic-group`, `fnal.convolution`. Then tier H (210) and tier N (350).
+
+---
+
+# Batch 24 (2026-10-12): the last essential-tier batch — categories, curves, measure, groups, convolution
+
+`sceneGenerators/mathCoreScenesB24.ts` + `mathCoreScenesBatch24.test.ts` (122 checks); campaign audit threshold now 300. Coverage after this batch:
+346 of 908 concepts with a fixed figure; **essential tier 344 / 346 — COMPLETE**: the two left are the deliberately figure-less AI-generation fixtures
+`math.linalg.vector-addition` (canary) and `math.func.linear-function` (reserved fixture); do not give them figures. Tier H 0 / 210, tier N 2 / 352.
+
+Notes for later batches:
+- **Categories are verified as categories**: the category test reads dom / cod of every drawn arrow by nearest object, checks every composable pair of drawn arrows has its composite drawn
+  and that (h∘g)∘f and h∘(g∘f) give the same arrow; the functor figure is the image of C shifted by a fixed vector, so F on objects, arrows and composites is checked by translation;
+  the naturality square is a parallelogram (Ff ∥ Gf, ηX ∥ ηY, both paths equal the diagonal).
+- **Polyhedra**: vertices are exact (tetrahedron, cube, octahedron, icosahedron with φ, dodecahedron with 1/φ); edges are all pairs at minimum distance; the test recomputes V, E, F (= 2 − V + E),
+  vertex degrees, equal edge lengths and the projected edges. Wireframes with hidden edges: ≤ 50 objects per step needs ≤ 30 lines + labels per step, so no vertex dots on the big ones.
+- **Frenet–Serret is checked by finite differences, independently of the generator** (T = r′/|r′|, N from dT/ds, B = T × N, then T′ = κN, N′ = −κT + τB, B′ = −τN with κ = 0.8, τ = 0.4).
+- **Normalise before comparing cross products of long arrows**: a rounded endpoint (0.01) times a length of 5 gives a cross product of 0.02; divide by |a||b| first.
+- **Label width ≈ 0.26 per character, again**: the two bottom Platonic names ("dodecahedron", "icosahedron") merged at spacing 3.8; spacing 5.2 fixed it.
+- The intermediate label budget (≤ 9 named labels) also counts numerals of 3+ characters such as 0.25 / 0.50: drop a caption that the narration already says (Lebesgue figure).
+
+| Concept | Figure |
+|---|---|
+| math.top.smooth-manifold | circle with stereographic charts u = x/(1 − y), v = x/(1 + y); transition v = 1/u smooth for u ≠ 0 |
+| math.cat.category | objects A–D, f, g, h, composites g∘f, h∘g, h∘g∘f, identity loops; associativity |
+| math.cat.morphism-types | in Set: mono (injective), epi (surjective), iso (bijection with inverse arrows) |
+| math.cat.functor | C → D by translation: F on objects and arrows, F(g∘f) = Fg∘Ff |
+| math.cat.natural-transformation | naturality square ηY∘Ff = Gf∘ηX, green diagonal |
+| math.geom.platonic-solids | tetrahedron, cube, octahedron, dodecahedron, icosahedron wireframes (V − E + F = 2) |
+| math.geom.differential-geometry-curves | ellipse with unit tangents; osculating circles radius 0.8 (κ 1.25) and 2.7 (κ 0.37) |
+| math.geom.frenet-serret | helix with T, N, B at t = π; T′ = κN, N′ = −κT + τB, B′ = −τN; κ = 0.8, τ = 0.4 |
+| math.meas.simple-function | step function 1, 3, 2 on [0,1), [1,2.5), [2.5,4]: ∫φ = 8.5; staircases φ₁ ≤ φ₂ ≤ x |
+| math.meas.lebesgue-integral | slabs of x²: sets of measure 0.50, 0.29, 0.13, sum 0.23 → 1/3; Dirichlet ∫ 1_ℚ = 0 |
+| math.abst.cyclic-group | ℤ₆ hexagon, ⟨g²⟩ = {0, 2, 4}, ⟨g³⟩ = {0, 3}, generators 1 and 5 |
+| math.fnal.convolution | box * box: overlap 0.5 at x = 0.5, 1 at x = 1; triangle min(x, 2 − x) |
+
+Next (batch 25 onward): the HELPFUL tier, 210 concepts (`npx tsx scripts/math/visual-coverage.ts --list H`), by domain: found 25, linalg 18, arith 18, alg 17, nt 13, abst 13, de 12, stats 11, disc 11,
+calc 11, prob 10, seq 7, real 7, meas 6, top 4, opt 4, geom 4, func 4, cx 4, graph 3, fnal 3, trig 2, cat 2, num 1. Same method: read the KG description, design a verifiable figure, add the
+audit, the per-figure test that reads the drawn coordinates, register in `conceptSceneParams.ts`, render and review in Chromium, raise the audit threshold, push, post the sheets.
+Then tier N (350, only if the owner still wants them).

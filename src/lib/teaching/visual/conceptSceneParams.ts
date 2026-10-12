@@ -242,6 +242,11 @@ import {
   buildNumericalDifferentiationScene, buildNumericalIntegrationScene, buildRealValuedFunctionScene, buildRationalRootScene,
   buildTopologicalManifoldScene,
 } from '@/lib/teaching/sceneGenerators/mathCoreScenesB23'
+import {
+  buildSmoothManifoldScene, buildCategoryScene, buildMorphismTypesScene, buildFunctorScene, buildNaturalTransformationScene,
+  buildPlatonicSolidsScene, buildCurvesInSpaceScene, buildFrenetSerretScene, buildSimpleFunctionScene,
+  buildLebesgueIntegralScene, buildCyclicGroupScene, buildConvolutionScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB24'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -740,6 +745,20 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'math.func.real-valued-function':      buildRealValuedFunctionScene,
   'math.func.rational-root':             buildRationalRootScene,
   'math.top.manifold':                   buildTopologicalManifoldScene,
+
+  // Mathematics visual campaign, batch 24 (2026-10-12), the last essential-tier batch. See mathCoreScenesB24.ts.
+  'math.top.smooth-manifold':            buildSmoothManifoldScene,
+  'math.cat.category':                   buildCategoryScene,
+  'math.cat.morphism-types':             buildMorphismTypesScene,
+  'math.cat.functor':                    buildFunctorScene,
+  'math.cat.natural-transformation':     buildNaturalTransformationScene,
+  'math.geom.platonic-solids':           buildPlatonicSolidsScene,
+  'math.geom.differential-geometry-curves': buildCurvesInSpaceScene,
+  'math.geom.frenet-serret':             buildFrenetSerretScene,
+  'math.meas.simple-function':           buildSimpleFunctionScene,
+  'math.meas.lebesgue-integral':         buildLebesgueIntegralScene,
+  'math.abst.cyclic-group':              buildCyclicGroupScene,
+  'math.fnal.convolution':               buildConvolutionScene,
 
   // The Punnett generator is single-gene by construction (genotypes are two
   // alleles). A dihybrid cross drawn as a monohybrid square teaches the wrong
