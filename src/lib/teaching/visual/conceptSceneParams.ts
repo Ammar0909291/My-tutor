@@ -190,6 +190,11 @@ import {
   buildSpanScene, buildLinearIndependenceScene, buildBasisScene, buildCoordinatesScene, buildChangeOfBasisScene,
   buildLinearMapScene, buildProjectionScene,
 } from '@/lib/teaching/sceneGenerators/mathCoreScenesB13'
+import {
+  buildLinalgDotProductScene, buildLinalgCrossProductScene, buildRowReductionScene, buildSubspaceScene, buildNullSpaceScene,
+  buildColumnSpaceScene, buildKernelImageScene, buildEigenspaceScene, buildOrthogonalBasisScene, buildLeastSquaresScene,
+  buildSvdScene, buildGeometricSequenceScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB14'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -535,6 +540,20 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'math.linalg.change-of-basis':         buildChangeOfBasisScene,
   'math.linalg.linear-map':              buildLinearMapScene,
   'math.linalg.projection':              buildProjectionScene,
+
+  // Mathematics visual campaign, batch 14 (2026-10-12). See mathCoreScenesB14.ts.
+  'math.linalg.dot-product':             buildLinalgDotProductScene,
+  'math.linalg.cross-product':           buildLinalgCrossProductScene,
+  'math.linalg.row-reduction':           buildRowReductionScene,
+  'math.linalg.subspace':                buildSubspaceScene,
+  'math.linalg.null-space':              buildNullSpaceScene,
+  'math.linalg.column-space':            buildColumnSpaceScene,
+  'math.linalg.kernel-image':            buildKernelImageScene,
+  'math.linalg.eigenspace':              buildEigenspaceScene,
+  'math.linalg.orthogonal-basis':        buildOrthogonalBasisScene,
+  'math.linalg.least-squares':           buildLeastSquaresScene,
+  'math.linalg.svd':                     buildSvdScene,
+  'math.seq.geometric-sequence':         buildGeometricSequenceScene,
 
   // The Punnett generator is single-gene by construction (genotypes are two
   // alleles). A dihybrid cross drawn as a monohybrid square teaches the wrong

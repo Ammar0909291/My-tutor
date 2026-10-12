@@ -463,3 +463,42 @@ Notes for later batches:
 
 Left in `linalg` (essential): dot-product, cross-product, row-reduction, subspace, null-space, column-space, kernel-image, eigenspace,
 orthogonal-basis, least-squares, svd (11; vector-addition stays reserved). Next (batch 14 plan): those eleven plus one more domain item.
+
+---
+
+# Batch 14 (2026-10-12): the rest of linear algebra + the geometric sequence
+
+`sceneGenerators/mathCoreScenesB14.ts` + `mathCoreScenesBatch14.test.ts` (122 checks); campaign audit threshold now 170. Coverage after this batch:
+216 of 908 concepts with a fixed figure; essential tier 214 / 346 (tier H 0 / 210, tier N 2 / 352). `linalg` essential is now 25 / 26 — the one left
+is `math.linalg.vector-addition`, which is the reserved canary and must stay figure-less.
+
+Notes for later batches:
+- Row operations are verified by DRAWING every equation as a line and testing that all four lines pass through the screen origin (the solution is
+  drawn there); consecutive systems are re-solved by Cramer's rule in the test, so a wrong row operation cannot slip through a label.
+- 3-D (dot-product bars over ℝ³ components, cross-product) uses the oblique projection `projectL` (k = 0.35). Floor vectors (z = 0) are decoded back
+  from the drawn arrow in the test; the a × b arrow is purely vertical, so only its length (4 = parallelogram area) is read back.
+- Least squares: label values come from `lsqFit` / `lsqSse` (SSE 1/6 for the fit, 1.00 for the line through two points), never typed by hand.
+  The test also grid-searches (c, m) to confirm nothing beats the fitted line, and checks Aᵀr = 0.
+- Labels were kept distinct per panel (`A v₁: length 4`, `A v₂: length 2`; `E₃: …, λ = 3`, `E₁: …, λ = 1`) so SM-01 (same last token before `=` with different
+  numbers silently drops the whole figure) cannot trigger; the audit (`payloadBlockers` with `renderer: 'scene'`) reported no blockers for all twelve.
+  panel (`A v₁: length 4`, `A v₂: length 2`).
+- A figure that rounds an angle: θ = arccos(9/√294) = 58.34° → label "θ ≈ 58.3°". The test asserts both the 2-decimal value and the 1-decimal label.
+
+| Concept | Figure |
+|---|---|
+| math.linalg.dot-product | a = (2, −1, 3), b = (4, 2, 1): component bars, products 8, −2, 3 summing to 9 = |a||b|cos θ, θ ≈ 58.3° |
+| math.linalg.cross-product | a = (2, 0, 0), b = (1, 2, 0), a × b = (0, 0, 4) perpendicular, length 4 = parallelogram area, b × a reverses it |
+| math.linalg.row-reduction | 2x + y = 5, x − y = 1 → R₁ − 2R₂, ÷3 → y = 1 → R₂ + R₁ → x = 2: four lines, one common point (2, 1) |
+| math.linalg.subspace | line y = x/2 (through 0, closed under + and scaling) vs y = x/2 + 1 (misses 0; p + q leaves it) |
+| math.linalg.null-space | A = [[1, 2], [2, 4]]: N(A) is the line along (−2, 1); A(1, 1) = (3, 6); all solutions of Ax = (3, 6) are (1, 1) + N(A) |
+| math.linalg.column-space | same A: columns (1, 1), (2, 2) span only y = x; b = (3, 3) reachable, b′ = (1, 0) is not |
+| math.linalg.kernel-image | T(x, y) = (x + y, 2x + 2y): ker T is x + y = 0, im T the line along (1, 2), lines x + y = c collapse to (c, 2c) |
+| math.linalg.eigenspace | A = [[2, 1], [1, 2]]: E₃ on y = x (stretched ×3), E₁ on y = −x (kept), w = (2, 0) goes to (4, 2) and is turned |
+| math.linalg.orthogonal-basis | e = (1, 1)/√2, f = (−1, 1)/√2: ⟨v, e⟩ = 2.83, ⟨v, f⟩ = −1.41 rebuild v = (3, 1) as a right-angled staircase |
+| math.linalg.least-squares | points (1, 1), (2, 2), (3, 2): y = 2/3 + x/2, residuals −1/6, 1/3, −1/6, SSE 1/6 (line through two points: 1.00) |
+| math.linalg.svd | A = [[3, 1], [1, 3]]: unit circle → ellipse with semi-axes σ₁ = 4, σ₂ = 2 along v₁, v₂ |
+| math.seq.geometric-sequence | ×2 (1, 2, 4, 8, 16), ×½ (16 … 1), ×(−½) (8, −4, 2, −1, 0.5): constant ratio, alternation, shrinking |
+
+Next (batch 15 plan, from `visual-coverage.ts --list E`; 131 essential concepts still uncovered (132 less the reserved canary)): `found` sets (12), `arith` (12), `de` (12), `disc` (13),
+`real` (9), `top` (8), `cx` (7), `seq` (6), `opt` (6), `graph` (6), `num` (5), `alg` (5), `cat` (4), multivariable calculus (14),
+`nt` (2), `meas` (2), `abst` / `fnal` (1 each), geom 3-D (platonic-solids, differential-geometry-curves, frenet-serret), func (3: real-valued-function, rational-root + 1).
