@@ -205,6 +205,11 @@ import {
   buildFractionMultiplicationScene, buildMixedNumbersScene, buildProportionScene, buildRoundingScene, buildSquareNumbersScene,
   buildCubeNumbersScene, buildSquareRootsScene,
 } from '@/lib/teaching/sceneGenerators/mathCoreScenesB16'
+import {
+  buildFundamentalTheoremAlgebraScene, buildRationalInequalityScene, buildPascalsTriangleScene, buildSieveOfEratosthenesScene,
+  buildModularArithmeticScene, buildConvergentSequenceScene, buildDivergentSequenceScene, buildGeometricSeriesScene,
+  buildComparisonTestScene, buildIntegralTestScene, buildAlternatingSeriesScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB17'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -592,6 +597,22 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'math.arith.square-numbers':           buildSquareNumbersScene,
   'math.arith.cube-numbers':             buildCubeNumbersScene,
   'math.arith.square-roots':             buildSquareRootsScene,
+
+  // Mathematics visual campaign, batch 17 (2026-10-12). See mathCoreScenesB17.ts. The two algebra concepts below share
+  // the batch-2 figures of their math.func.* twins: the same KG statement (f(x) = a^x and its inverse log_a x).
+  'math.alg.exponential-function':       buildExponentialFunctionScene,
+  'math.alg.logarithm':                  buildLogarithmicFunctionScene,
+  'math.alg.fundamental-theorem-algebra': buildFundamentalTheoremAlgebraScene,
+  'math.alg.rational-inequality':        buildRationalInequalityScene,
+  'math.alg.pascals-triangle':           buildPascalsTriangleScene,
+  'math.nt.sieve-of-eratosthenes':       buildSieveOfEratosthenesScene,
+  'math.nt.modular-arithmetic':          buildModularArithmeticScene,
+  'math.seq.convergent':                 buildConvergentSequenceScene,
+  'math.seq.divergent-sequence':         buildDivergentSequenceScene,
+  'math.seq.geometric-series':           buildGeometricSeriesScene,
+  'math.seq.comparison-test':            buildComparisonTestScene,
+  'math.seq.integral-test':              buildIntegralTestScene,
+  'math.seq.alternating-series':         buildAlternatingSeriesScene,
 
   // The Punnett generator is single-gene by construction (genotypes are two
   // alleles). A dihybrid cross drawn as a monohybrid square teaches the wrong

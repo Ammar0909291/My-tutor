@@ -588,3 +588,47 @@ Next (batch 17 plan, from `visual-coverage.ts --list E`; 108 essential concepts 
 multivariable calculus (14), `nt` (2: sieve-of-eratosthenes, modular-arithmetic), `meas` (2), `abst` / `fnal` (1 each), geom 3-D (platonic-solids,
 differential-geometry-curves, frenet-serret), func (3). A natural batch 17: `alg` (5) + `nt` (2) + `seq` (5: convergent, divergent-sequence, geometric-series,
 comparison-test, integral-test) — all picture-friendly.
+
+---
+
+# Batch 17 (2026-10-12): algebra, number theory, sequences and series
+
+`sceneGenerators/mathCoreScenesB17.ts` + `mathCoreScenesBatch17.test.ts` (130 checks); campaign audit threshold now 207. Coverage after this batch:
+253 of 908 concepts with a fixed figure; essential tier 251 / 346 (tier H 0 / 210, tier N 2 / 352). The `alg`, `nt` (essential) and `seq` domains are complete.
+Thirteen concepts: eleven new figures plus `math.alg.exponential-function` and `math.alg.logarithm`, which are registered to the batch-2 builders of their
+`math.func.*` twins (same KG statement, f(x) = aˣ and its inverse log_a x, and the batch-2 figures already show exactly that).
+
+Notes for later batches:
+- **A label is also an obstacle for lines.** Underlines / bullets / bracket lines closer than ~0.5 to a numeral push it off its place (the Pascal 10s and the
+  sieve numerals scrambled until the marks moved clear). Rules that worked: sieve markers are UNDERLINES 0.42 below the numeral on a 1.0 row pitch;
+  the Pascal bracket sits 0.5 below the two summands and drops to the sum; row spacing 1.3.
+- **Audit surprises**: a label containing the word "undefined" trips ST-04 ("looks like leakage") — say "not allowed: −2". Fraction/division labels are
+  evaluated left to right by SM-01 (see batch 16).
+- Branches of a rational function are clipped where |y| reaches the window (`RAT.left`, `RAT.right`), and the test accepts a slope-dependent tolerance
+  (|f′| grows near the pole) when mapping drawn points back onto the curve.
+- The ε–N figure draws the band as two lines and recolours the terms with larger dots (green inside the band, red on/outside); the test recomputes the
+  least N for ε = 0.2 and 0.1 (5 and 10 — a₅ = 0.2 is NOT < 0.2) and checks that the colour split and the vertical guide sit exactly there.
+- The integral-test rectangles share edges, so the test reads each rectangle's height from its own top line, not from the vertical edges.
+- Left to do in `seq`: nothing essential. Left in the helpful tier: series / sequence / absolute-convergence / telescoping etc.
+
+| Concept | Figure |
+|---|---|
+| math.alg.exponential-function | (batch-2 figure) 2ˣ and (½)ˣ, through (0, 1), × 2 per step, never 0 |
+| math.alg.logarithm | (batch-2 figure) log₂ x as the mirror of 2ˣ in y = x, domain x > 0 |
+| math.alg.fundamental-theorem-algebra | roots of z³ − 1 on the unit circle, 120° apart (sum 0, product 1); (z − 1)²(z + 1): root 1 counted twice, 3 with multiplicity |
+| math.alg.rational-inequality | graph of (x − 1)/(x + 2) with pole −2 and zero 1; sign chart + − +; solution x < −2 or x > 1 |
+| math.alg.pascals-triangle | rows 0–5; 4 + 6 = 10 = C(5, 2) bracket; row sums 1, 2, 4, 8, 16, 32 |
+| math.nt.sieve-of-eratosthenes | 1…49 grid, underlines by smallest prime factor (23 / 7 / 2 / 1), 15 green primes |
+| math.nt.modular-arithmetic | mod-5 clock, 3 + 4 = 7 ≡ 2 by four hops; table 0…14 with the 2, 7, 12 column outlined |
+| math.seq.convergent | aₙ = 1/n with ε-bands 0.2 (N = 5) and 0.1 (N = 10) |
+| math.seq.divergent-sequence | (−1)ⁿ with an empty ±0.5 band (no limit); aₙ = n passing the bound 6 |
+| math.seq.geometric-series | 1 + ½ + ¼ + … on a number line: partial sums 1, 1.5, 1.75, 1.875 → a/(1 − r) = 2 |
+| math.seq.comparison-test | bars bₙ = 1/n² and aₙ = 1/(n² + 1): aₙ ≤ bₙ, Σbₙ → 1.645 |
+| math.seq.integral-test | 1/x² with rectangles under the curve (converges) and 1/x with rectangles over it (diverges) |
+| math.seq.alternating-series | hops 1, −½, +⅓, … closing in on ln 2 ≈ 0.693 |
+
+Next (batch 18 plan, from `visual-coverage.ts --list E`; 95 essential concepts still uncovered): `disc` (13), `de` (12), `real` (9), `top` (8), `cx` (7),
+`opt` (6), `graph` (6), `num` (5), `cat` (4), multivariable calculus (14), `meas` (2), `abst` / `fnal` (1 each), geom 3-D (platonic-solids,
+differential-geometry-curves, frenet-serret), func (3: real-valued-function, rational-root and one more). A natural batch 18: `disc` (stars-bars,
+inclusion-exclusion, graph, graph-types, graph-representation, graph-connectivity, euler-hamiltonian, graph-trees, spanning-tree, graph-coloring,
+planar-graph, boolean-circuits, asymptotic-notation) — all drawable, many reusable for `math.graph.*` (graph, connectivity, tree, matching, coloring).
