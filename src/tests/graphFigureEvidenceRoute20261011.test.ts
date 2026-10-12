@@ -26,20 +26,23 @@ vi.mock('@/lib/ai/router', async (o) => ({
 }))
 const { POST } = await import('@/app/api/learn/chat/route')
 const text = (t: TurnResult) => String((t.body as { text?: string }).text ?? '')
-const SQRT_LESSON = { subjectSlug: 'mathematics', conceptId: 'math.arith.square-roots', lessonTitle: 'Square Roots' }
+// The host lesson must be a concept with NO authored concept-level figure, otherwise the route serves (and describes) that figure
+// instead of the spec graph recorded in the log. math.func.linear-function is the campaign's deliberately figure-less fixture
+// (mathVisualCampaignAudit / visualCanaryConcept keep it so); math.arith.square-roots stopped being one when it got its own figure.
+const SQRT_LESSON = { subjectSlug: 'mathematics', conceptId: 'math.func.linear-function', lessonTitle: 'Linear Function' }
 const SQRT = { renderer: 'spec', visualSpec: { type: 'graph', title: 'Square root function', xLabel: 'x (unitless)', yLabel: '√x (unitless)', equation: 'x^0.5' } }
 beforeEach(() => {
   h.state.messages = []
   h.state.snapshot = { renderedRealityLog: [{
     visualIdentity: 'spec:square-root-graph', visualSemantics: 'Square root function', sourcePipeline: 'detectedVisualSpec',
-    matchedConcept: 'math.arith.square-roots', turnPosition: 1, drawn: evidenceFromPayload(SQRT as never, describeVisualPayload as never),
+    matchedConcept: 'math.func.linear-function', turnPosition: 1, drawn: evidenceFromPayload(SQRT as never, describeVisualPayload as never),
   }] }
 })
 /** The production reply (d10f8a09) whose sentences were all removed. */
 const ACCURATE = 'Here is what the graph shows.\n\n- The horizontal line is the **x‑axis**; it marks the input numbers (the numbers we are taking the square root of).\n- The vertical line is the **y‑axis**; it marks the output numbers (the square‑root values).\n\nAs you move rightward along the x‑axis, the y‑value on the curve tells you the square‑root of that x‑value. The grid behind the curve just helps you see where points lie.'
 
 describe('A-2 graph evidence through the route', () => {
-  it('math.arith.square-roots: the accurate axis and curve description reaches the learner unchanged', async () => {
+  it('a spec graph in a figure-less lesson: the accurate axis and curve description reaches the learner unchanged', async () => {
     const [t] = await driveTurns(h, POST, [{ learnerSays: 'i dont understand this picture. what is it showing?', modelReplies: ACCURATE }], SQRT_LESSON)
     expect(text(t)).toContain('The horizontal line is the **x‑axis**')
     expect(text(t)).toContain('The grid behind the curve')
