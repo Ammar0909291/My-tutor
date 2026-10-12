@@ -1,0 +1,114 @@
+
+=== order 52 eng.grammar.verbs ===
+[open provider=groq fig=none flags=-]
+Let’s start our lesson on **Verbs**. A verb is a word that tells what someone or something does, or what state it is in. By the end of this lesson you’ll be able to spot main verbs and helping (auxiliary) verbs in sentences and use them correctly.
+
+Imagine a bright red **ball** on a playground.  
+A child picks it up, runs, and **throws** the ball far across the field.  
+Picture the moment the ball flies through the air, its path showing the action.
+
+In plain words, the words **run**, **throw**, **is**, and **feel** are verbs because they describe an action (running, throwing) or a state of being (is, feel).  
+
+The word we call this part of speech is **verb**.  
+When a verb shows an action, we call it an **action verb**; when it shows a state of being, it’s a **state verb**.
+
+🟢 What do you notice about the word **run** in the sentence “She runs fast”?
+[learner] What is this picture showing?
+[tutor provider=groq fig=none card=none flags=-]
+There is no picture in this lesson yet, so I can't tell you what one shows. If you have a picture from somewhere else, send it with the camera button and I'll look at it. Here is the idea in words:
+
+Verbs express action OR state of being — "is," "am," "are," "seem," "feel," "become" are all verbs even though they don’t show physical movement; in "She IS happy," nothing physically moves, but "is" still does a verb’s job, connecting the subject to a description. Mental/emotional verbs (think, want, believe, love) work the same way. Check whether a word expresses action OR a state/condition/mental process — not just visible physical movement.
+[learner] quiz me
+[tutor provider=gate fig=none card="In \"I understand the contract,\" is anything physically happening? Is \"understand\" still a verb?" ["Nothing is physically happening, but \"un","\"Understand\" cannot be a verb since noth"] corpus=englishAdultBandBatch3.ts flags=twoOption]
+One to try, on Verbs. There's no rush.
+[learner] Nothing is physically happening, but "understand" is still a verb — it expresses a mental state, not just physical action
+[tutor provider=groq fig=none card="In \"She believes the plan will work,\" is anything physically happening? Is \"believes\" still a verb?" ["\"Believes\" is not a real verb, since no ","Nothing is physically happening, but \"be"] corpus=englishAdultBandBatch3.ts flags=twoOption]
+That's right.
+
+The sentence describes a mental state, not a physical action. "Understand" is the main verb and it shows cognition. Verbs can express mental processes as well as physical actions.
+
+Verbs are not limited to actions you can see. Words like think, believe, love, and understand are verbs because they tell us about what someone is experiencing in their mind. Recognizing mental‑state verbs helps you see how language describes both what we do and what we feel or know.
+
+Quick check. Think it through before you choose.
+[learner] ok
+[tutor provider=groq fig=none card="In \"She believes the plan will work,\" is anything physically happening? Is \"believes\" still a verb?" ["\"Believes\" is not a real verb, since no ","Nothing is physically happening, but \"be"] corpus=englishAdultBandBatch3.ts flags=twoOption]
+Now let’s look at verbs that link a subject to a description or condition. Consider the sentence **“She is happy.”** The word **is** connects *she* to the feeling *happy*. There’s no movement, but **is** is still doing the work of a verb: it tells us *what* the subject is like right now. In the same way, sentences like **“The sky became dark.”** or **“He seems tired.”** use **became** and **seems** to link the subject to a state. These are called **linking (or state) verbs** because they link the subject to a description rather than showing an action. So, a linking or state verb is a verb that expresses a condition, quality, or identity of the subject, even though nothing is physically moving. Whenever you see a sentence, look for words that tell you *what* something **is**, **becomes**, **seems**, **feels**, or **appears**—those are linking/state verbs. Feel free to try a sentence of your own, and we’ll see the linking verb together.
+[learner] give me example
+[tutor provider=groq fig=none card=none flags=-]
+Here’s a clear example: 
+
+**Sentence:** “She understands the instructions.” 
+
+In this sentence the word **understands** tells us what action the subject (she) is doing. Even though there’s no physical movement, “understands” is still a verb because it expresses a mental activity—her grasp of the instructions.
+[learner] i dont understand this picture. what is it showing?
+[tutor provider=groq fig=none card=none flags=-]
+There is no picture in this lesson yet, so I can't tell you what one shows. If you have a picture from somewhere else, send it with the camera button and I'll look at it. Here is the idea in words:
+
+Words expressing action or state of being, including main verbs and auxiliary (helping) verbs.
+[learner] ask me a question
+[tutor provider=memory fig=none card="In \"The report has been reviewed,\" is \"reviewed\" the only verb, or is \"has been\" also part of it?" ["\"Has been reviewed\" together is the comp","Only \"reviewed\" is the verb"] corpus=englishAdultBandBatch3.ts flags=twoOption]
+Verbs express action or state of being/mental process — linking verbs ("is," "seems," "becomes") and mental-process verbs (think, believe, want) are genuine verbs despite showing no physical movement. Separately, helping (auxiliary) verbs combine with a main verb to form the complete verb phrase, carrying essential tense, aspect, and modal information ("has been waiting," "will have finished") — the full phrase, not just the main verb alone, is the grammatically complete unit.
+[learner] Only "reviewed" is the verb
+[tutor provider=groq fig=none card=none flags=-]
+Not quite — the answer is: "Has been reviewed" together is the complete verb phrase — "has" and "been" are genuine helping verbs
+
+The auxiliary verbs 'has' and 'been' combine with 'reviewed' to form the complete verb phrase. In English, auxiliaries are part of the verb and cannot be ignored. So the full verb is 'has been reviewed'.
+
+Auxiliary (helping) verbs show tense, aspect, or voice and always work together with the main verb. In the present perfect passive, 'has' marks present perfect, 'been' marks passive voice, and 'reviewed' is the past participle. Recognizing all three as a single verb phrase helps you identify the correct structure in similar sentences.
+[learner] test my understanding
+[tutor provider=gate fig=none card="In \"She IS happy,\" is anything physically moving? Is \"is\" still a verb?" ["\"Is\" cannot be a verb since nothing is p","Nothing is physically moving, but \"is\" i"] corpus=authoredSeedAssets.ts flags=twoOption]
+Here's a question on Verbs — take your time with it.
+[learner] quiz me
+[tutor provider=groq fig=none card="In \"She IS happy,\" is anything physically moving? Is \"is\" still a verb?" ["\"Is\" cannot be a verb since nothing is p","Nothing is physically moving, but \"is\" i"] corpus=authoredSeedAssets.ts flags=twoOption]
+This is the question you have not answered yet — choose an answer below and I will mark it.
+
+Let me check your thinking with this.
+[learner] "Is" cannot be a verb since nothing is physically moving
+[tutor provider=groq fig=none card="In \"She is running,\" is \"running\" the only verb, or is \"is\" also part of the verb?" ["Only \"running\" is the verb","\"Is running\" together is the complete ve"] corpus=authoredSeedAssets.ts flags=twoOption]
+Not quite — the answer is: Nothing is physically moving, but "is" is still a verb — it connects the subject to a state or description
+
+The choice says "is" cannot be a verb because nothing moves, but "is" is a verb that links the subject to a state. Verbs include linking verbs that do not show physical action.
+
+Linking verbs such as "is", "am", "are", "was", and "were" connect a subject to a description or condition. They do not describe motion, but they are still verbs because they express a state of being.
+
+Let's check this one before we go further.
+[learner] show me a diagram
+[tutor provider=groq fig=none card="In \"She is running,\" is \"running\" the only verb, or is \"is\" also part of the verb?" ["Only \"running\" is the verb","\"Is running\" together is the complete ve"] corpus=authoredSeedAssets.ts flags=twoOption]
+I don't have a picture for this one, so I'll explain it in words.
+
+Sentence: She is running
+
+The helping verb **is** and the main verb **running** together make the full verb phrase.
+[learner] i dont understand this picture. what is it showing?
+[tutor provider=groq fig=none card=none flags=-]
+There is no picture in this lesson yet, so I can't tell you what one shows. If you have a picture from somewhere else, send it with the camera button and I'll look at it. Here is the idea in words:
+
+Words expressing action or state of being, including main verbs and auxiliary (helping) verbs.
+[learner] explain simpler
+[tutor provider=groq fig=none card=none flags=-]
+Think of a sentence like a simple recipe.
+
+- The **helping verb** is the stove that provides the heat. It tells us *when* and *how* the cooking happens (past, present, ability, etc.). 
+- The **main verb** is the food you’re cooking. It’s the actual action or state that the stove works on.
+
+In the sentence **“She is running,”** *is* is the stove (helping verb) and *running* is the food (main verb). Together they create the complete “dish” – the full verb phrase that tells us she is currently doing the action of running.
+
+Now you can see that the helping verb isn’t extra; it’s essential, just like the stove is needed to cook the food.
+[learner] give me a quiz
+[tutor provider=gate fig=none card="In \"I know the answer,\" is anything physically happening? Is \"know\" still a verb?" ["Nothing is physically happening, but \"kn","\"Know\" cannot be a verb since nothing is"] corpus=englishProbeBatch3.ts flags=twoOption]
+One to try, on Verbs. There's no rush.
+[learner] Nothing is physically happening, but "know" is still a verb — it expresses a mental state, not just physical action
+[tutor provider=groq fig=none card=none flags=-]
+That's right.
+
+The verb “know” expresses a mental state, so it remains a verb even though no physical action occurs. Verbs can describe states as well as actions.
+
+Stative verbs such as know, believe, and seem describe conditions or mental states rather than observable movements. They serve as the main verb in a sentence and can combine with auxiliary verbs, showing that verbs are not limited to physical actions.
+[learner] quiz me
+[tutor provider=gate fig=none card="In \"They have finished the project,\" is \"finished\" the only verb, or is \"have\" also part of the verb?" ["\"Have finished\" together is the complete","Only \"finished\" is the verb"] corpus=englishProbeBatch3.ts flags=twoOption]
+Quick check. Think it through before you choose.
+[learner] quiz me
+[tutor provider=groq fig=none card="In \"They have finished the project,\" is \"finished\" the only verb, or is \"have\" also part of the verb?" ["\"Have finished\" together is the complete","Only \"finished\" is the verb"] corpus=englishProbeBatch3.ts flags=twoOption]
+This is the question you have not answered yet — choose an answer below and I will mark it.
+
+Let me check your thinking with this.

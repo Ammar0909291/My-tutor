@@ -9,7 +9,7 @@
 import { describe, it, expect } from 'vitest'
 import { readFileSync } from 'node:fs'
 import { advanceConversationState, initialConversationState, type TurnEvidence } from '@/lib/teaching/conversationState'
-import { CONCEPT_TURN_BUDGET, ABSOLUTE_TURN_CEILING, evaluateConceptBudget } from '@/lib/teaching/conceptBudget'
+import { TURN_BUDGET_IN_FORCE, ABSOLUTE_TURN_CEILING, evaluateConceptBudget } from '@/lib/teaching/conceptBudget'
 import { isLearnerInitiatedTurn } from '@/lib/teaching/learnerEngagement'
 
 const ev = (over: Partial<TurnEvidence> = {}): TurnEvidence =>
@@ -26,14 +26,14 @@ describe('budget accounting', () => {
 
   it('the measured shape — 12 turns with 4 learner questions — is no longer exhausted', () => {
     let s = initialConversationState('c1')
-    for (let i = 0; i < CONCEPT_TURN_BUDGET; i++) s = advanceConversationState(s, ev({ learnerInitiated: i % 3 === 1 }))
-    expect(s.turnsOnConcept).toBe(CONCEPT_TURN_BUDGET - 4)
+    for (let i = 0; i < 12; i++) s = advanceConversationState(s, ev({ learnerInitiated: i % 3 === 1 }))
+    expect(s.turnsOnConcept).toBe(12 - 4)
     expect(evaluateConceptBudget(s).status).not.toBe('exhausted')
   })
 
   it('without learner questions the base budget still closes the concept exactly as before', () => {
     let s = initialConversationState('c1')
-    for (let i = 0; i < CONCEPT_TURN_BUDGET; i++) s = advanceConversationState(s, ev())
+    for (let i = 0; i < TURN_BUDGET_IN_FORCE; i++) s = advanceConversationState(s, ev())
     expect(evaluateConceptBudget(s)).toMatchObject({ status: 'exhausted', reason: 'turns' })
   })
 

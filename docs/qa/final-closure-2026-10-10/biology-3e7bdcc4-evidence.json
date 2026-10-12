@@ -1,0 +1,69 @@
+{
+  "base": "https://my-tutor-flame.vercel.app",
+  "subject": "biology",
+  "slug": "bio.behav.innate-behavior-instinct",
+  "rows": [
+    {
+      "turn": 1,
+      "said": "give me example",
+      "shot": "01.png",
+      "provider": "groq",
+      "reply": "Imagine a male three‑spined stickleback fish swimming in a shallow pond. When it spots a female with a bright red belly—this red colour is the **sign stimulus**—the male instantly launches a stereotyped courtship display: it darts toward the female, flares its dorsal spines, and circles her in a precise sequence. Once the display starts, the fish continues the whole pattern even if the female moves away; the behaviour is largely unmodifiable and runs to completion.\n\nThe details of this example are not in your lesson materials, so treat them as an illustration of the idea, not as facts to learn.\n\nIn the figure you see on your screen, the orange box labeled **“Fixed action pattern”** (top right) matches this example. The text “E.g. courtship display, nest‑building” is exactly what we’re watching with the stickleback: a complex, coordinated series of actions that is triggered by a specific sign stimulus (the red belly) and then proceeds automatically.\n\nFor contrast, the blue box **“Simple reflex”** (top left) shows the knee‑jerk reflex. That is a single‑muscle response to a tap on the patellar tendon, requiring only a direct neural loop and no extended sequence. Unlike the stickleback’s courtship, the reflex stops as soon as the stimulus ends.",
+      "replyRendered": true,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": true
+    },
+    {
+      "turn": 2,
+      "said": "show me a diagram",
+      "shot": "02.png",
+      "provider": "groq",
+      "reply": "On the right side of the diagram you can see the orange box titled **“Fixed action pattern.”** \nA **fixed action pattern** is a stereotyped, multi‑step behavior that, once started, runs to completion without needing further input. It is released by a specific **sign stimulus** – a particular cue that tells the animal to begin the sequence.\n\nInside that orange box you’ll notice the line **“E.g. courtship display, nest‑building.”** – that text gives an example of a fixed action pattern.",
+      "replyRendered": true,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": true
+    },
+    {
+      "turn": 3,
+      "said": "i dont understand this picture. what is it showing?",
+      "shot": "03.png",
+      "provider": "groq",
+      "reply": "I hear you—it can look a bit dense at first.\n\n- **“Simple reflex”** (top left, blue) – this labels a basic, one‑step response. \n- Directly beneath it, **“E.g. the knee‑jerk reflex”** (grey, left) – an example of that simple reflex: a tap on the tendon makes the leg kick without any thought. \n\n- On the right side, **“Fixed action pattern”** (top right, orange) – this marks a more complex, pre‑programmed behavior that involves several coordinated steps. \n- Below that, **“E.g. courtship display, nest‑building”** (grey, right) – examples of a fixed action pattern: a bird’s elaborate dance or the sequence of building a nest, both triggered by a specific cue. \n\n- At the bottom right, **“Stereotyped and largely unmodifiable once triggered”** (grey) – this describes the key property of a fixed action pattern: once the appropriate sign stimulus appears, the whole sequence runs to completion and does not change much even if conditions vary. \n\nThe two straight lines in the diagram simply separate the two sections; they do not carry additional meaning.\n\n**What the whole picture tells us:** it contrasts a simple reflex (a single, immediate response) with a fixed action pattern (a multi‑step, innate behavior that needs a specific sign stimulus to start and then proceeds in a stereotyped way). Both are forms of innate behavior, but they differ in complexity and flexibility.",
+      "replyRendered": true,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": false
+    },
+    {
+      "turn": 4,
+      "said": "quiz me",
+      "shot": "04.png",
+      "provider": "memory",
+      "reply": "Fixed action patterns (FAPs) are stereotyped (performed the same way across individuals of a species) and largely unmodifiable behavioural sequences — once triggered, a FAP typically runs to completion in its characteristic form, largely independent of ongoing feedback. Critically, a FAP is not spontaneous: it requires a specific sign stimulus (a specific, often simple environmental cue) to release it — the sequence is performed only when that specific trigger is present. Innate behaviour must be further distinguished from simple reflexes: a reflex is a direct, typically single-muscle-group stimulus-response (like the knee-jerk reflex) — simple, immediate, minimal neural processing. A fixed action pattern is substantially more complex, coordinated, and multi-step (like an elaborate courtship display or nest-building sequence) — many more coordinated movements over an extended time, though still triggered by a specific sign stimulus and still largely stereotyped once initiated. Innate behaviour also has a genetic basis: it is a heritable trait shaped by natural selection over evolutionary time, exactly as physical structures are — a FAP that reliably improves survival or reproduction can be favoured by selection and become a stable, species-typical trait.",
+      "replyRendered": true,
+      "card": "What is the specific role of a \"sign stimulus\" in a fixed action pattern?",
+      "cardOptions": [
+        "It is the reward the animal receives after completing the behaviour",
+        "It is a random event with no specific relationship to the behaviour",
+        "It is the specific trigger required to release the pre-programmed behavioural sequence",
+        "It is a signal the animal must be taught to recognise through experience"
+      ],
+      "cardQuestionRendered": true,
+      "cardOptionsVisible": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "figure": false
+    }
+  ]
+}

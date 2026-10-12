@@ -57,7 +57,11 @@ export function extractSteps(description: string, maxSteps = 8): string[] {
     .map((p) => p.replace(/[.;,]\s*$/, ''))
     .map(tidy)
     .filter((p) => p.length >= 3)
-    .map((p) => sentenceCase(clamp(p, 60)))          // process_flow title max = 60
+    // CHEM-082: was clamp(p, 60) — "Check for trapped zeros between" was the
+    // whole box, and the tutor quoted it. A step is kept whole up to the
+    // note limit (140); processFlow() shortens the box title and puts the
+    // full step in its note.
+    .map((p) => sentenceCase(clamp(p, 140)))
 
   // De-duplicate while preserving order.
   const seen = new Set<string>()

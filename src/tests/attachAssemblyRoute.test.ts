@@ -85,7 +85,10 @@ describe('attach assembly (Phase 3 step 2)', () => {
     expect(logged.served).toBe('assembled')
     expect(logged.removed).toContain('Does that make sense so far?')
     expect(text.endsWith(logged.afterTail)).toBe(true)
-    expect(text.startsWith('Momentum is the product of mass and velocity')).toBe(true)
+    // Issue B (2026-10-10): "quiz me" with the turn-1 card still unanswered
+    // re-offers it under a line saying so (quizRequest.ts); the teaching follows.
+    const { QUIZ_UNANSWERED_LEAD } = await import('@/lib/teaching/quizRequest')
+    expect(text.replace(`${QUIZ_UNANSWERED_LEAD}\n\n`, '').startsWith('Momentum is the product of mass and velocity')).toBe(true)
     const { appendMcqToHistoryText } = await import('@/lib/teaching/mcq')
     const stored = [...h.state.messages].reverse().find((m) => m.role === 'ASSISTANT')!
     // Save once: the row is the served text, plus the card when this turn newly

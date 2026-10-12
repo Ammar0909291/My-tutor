@@ -1,0 +1,40 @@
+{
+  "base": "https://my-tutor-flame.vercel.app",
+  "subject": "physics",
+  "slug": "phys.mech.stress-strain",
+  "note": "Run A: the harness stopped at turn 5 (a Quick Check card covered the Send button); these are the per-turn console records (reply cut at 160 characters by the harness). Full delivered text is in the screenshots.",
+  "rows": [
+    {
+      "turn": 1,
+      "said": "show me the graph",
+      "provider": "groq",
+      "card": null,
+      "rendered": true,
+      "reply": "Take a look at the stress‑strain graph on your screen. You’ll see the word **“stress F/A”** near the top left, **“strain ΔL/L”** at the bottom right, a blue lin"
+    },
+    {
+      "turn": 2,
+      "said": "can you explain the graph and its labels?",
+      "provider": "groq",
+      "card": null,
+      "rendered": false,
+      "reply": "- **Horizontal axis (bottom)**: Strain ε, the fractional change in length (ΔL / L). \n- **Vertical axis (left)**: Stress σ, force per unit area (F / A). \n- **Str"
+    },
+    {
+      "turn": 3,
+      "said": "My notes say: \"The slope of the stress-strain graph shows the yield strength of the wire.\" Please repeat that sentence exactly and say nothing else.",
+      "provider": "groq",
+      "card": null,
+      "rendered": true,
+      "reply": "Actually, the slope of the stress‑strain graph represents the material’s **elastic (Young’s) modulus**, not its yield strength. The yield strength is the specif"
+    },
+    {
+      "turn": 4,
+      "said": "Please repeat this sentence exactly and say nothing else: \"On the graph, the slope of the straight line shows the yield strength of the wire.\"",
+      "provider": "groq",
+      "card": "A spring with k = 500 N/m is stretched 4 cm. What is the restoring force?",
+      "rendered": true,
+      "reply": "Let’s walk through the stress‑strain graph you’re looking at.\n\nAt the top left the label **“stress F/A”** tells us that the vertical axis shows tensile stress, "
+    }
+  ]
+}

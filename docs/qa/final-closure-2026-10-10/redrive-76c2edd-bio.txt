@@ -1,0 +1,247 @@
+
+=== order 183 bio.behav.innate-behavior-instinct ===
+[open provider=groq fig=none flags=-]
+**Lesson: Innate Behaviour and Instinct**  
+
+In this lesson we’ll explore behaviours that animals are born with – they don’t have to learn them. By the end you will be able to:
+
+* Describe what a **fixed action pattern** is and why it is stereotyped.  
+* Identify the **sign stimulus** that triggers such a pattern.  
+* Distinguish simple reflexes from more complex instinctive actions.  
+* Explain how genetics and natural selection shape innate behaviours.  
+Let’s start with the first idea: **fixed action patterns**.
+
+Imagine a tiny sea‑turtle hatchling on a dark beach at night. Its tiny body is wet, the sand is cool, and the ocean is only a short distance away. The hatchling must reach the water quickly to avoid predators and drying out. As soon as it sees the bright glow of the moonlit horizon, it begins to crawl straight toward it, following the same smooth, unchanging path every time a hatchling is born.
+
+* **Concrete everyday picture:** a newborn turtle on a beach.  
+* The turtle needs to get to the sea to survive.  
+* The hatchling moves in a straight line toward the brightest light, without stopping or hesitating.  
+* This is a built‑in, automatic sequence of movements that the turtle performs the moment a particular cue (the light) appears. The sequence is the same for every hatchling and does not change with experience.  
+
+**Fixed Action Pattern (FAP)** – a stereotyped, largely unmodifiable behavioural sequence that is released by a specific cue.
+
+* *stereotyped* means the behaviour looks the same each time; *innate* means the animal is born with it, not learned.
+**Question:** What do you notice about the turtle’s behavior when it sees the light?
+[learner] What is this picture showing?
+[tutor provider=groq fig=title=Reflex vs. Fixed Action Pattern card=none flags=-]
+The figure compares two kinds of innate behaviours:
+
+- **Top left** reads **“Simple reflex”** and the grey text underneath it says **“E.g. the knee‑jerk reflex.”** 
+- **Top right** reads **“Fixed action pattern”** with the grey example **“E.g. courtship display, nest‑building.”** 
+- In the **bottom‑right** corner the grey note says **“Stereotyped and largely unmodifiable once triggered.”** 
+- Two straight lines connect the parts, showing the two stages of each behaviour. The colours are fixed: blue marks the simple reflex, orange marks the fixed action pattern, and all the example text is grey.
+
+Overall, the picture tells us that a simple reflex is a direct, single‑step response, while a fixed action pattern is a more complex, multi‑step sequence that is released by a specific sign stimulus and then runs to completion largely unchanged.
+
+Which part of the picture provides an example of a fixed action pattern?
+[learner] quiz me
+[tutor provider=groq fig=none card="What is the specific role of a \"sign stimulus\" in a fixed action pattern?" ["It is the reward the animal receives aft","It is a random event with no specific re","It is the specific trigger required to r","It is a signal the animal must be taught"] corpus=biologyExtensionSeedAssets.ts flags=-]
+Here's a question — take your time with it.
+[learner] It is the reward the animal receives after completing the behaviour
+[tutor provider=groq fig=none card=none flags=-]
+Not quite — the answer is: It is the specific trigger required to release the pre-programmed behavioural sequence
+
+A sign stimulus is not a reward. It is the external cue that starts the built‑in behaviour sequence. The answer chose a reward, which is unrelated to the trigger concept.
+
+In a fixed action pattern the animal waits for a specific feature of the environment, such as a particular shape or movement. When that sign stimulus appears, the whole sequence runs automatically without further input.
+[learner] ok
+[tutor provider=groq fig=none card=none flags=-]
+Fixed action patterns (FAPs) are stereotyped (performed the same way across individuals of a species) and largely unmodifiable behavioural sequences — once triggered, a FAP typically runs to completion in its characteristic form, largely independent of ongoing feedback. Critically, a FAP is NOT spontaneous: it requires a specific sign stimulus (a specific, often simple environmental cue) to release it — the sequence is performed only when that specific trigger is present. Innate behaviour must be further distinguished from simple reflexes: a reflex is a direct, typically single-muscle-group stimulus-response (like the knee-jerk reflex) — simple, immediate, minimal neural processing. A fixed action pattern is substantially more complex, coordinated, and multi-step (like an elaborate courtship display or nest-building sequence) — many more coordinated movements over an extended time, though still triggered by a specific sign stimulus and still largely stereotyped once initiated. Innate behaviour also has a genetic basis: it is a heritable trait shaped by natural selection over evolutionary time, exactly as physical structures are — a FAP that reliably improves survival or reproduction can be favoured by selection and become a stable, species-typical trait.
+[learner] give me example
+[tutor provider=groq fig=none card=none flags=-]
+Let’s look at a classic fixed‑action pattern: the **courtship dance of the male sandpiper**. When a female sandpiper appears on the breeding ground, the male detects a specific visual cue – the female’s **brightly colored breast patch**. That patch is the **sign stimulus**. As soon as the male sees it, he launches into a stereotyped sequence: a rapid hop, a wing‑flap display, and a short song. This whole routine runs from start to finish without the male needing any further feedback; even if the female moves away, the male usually completes the dance. The behavior is innate – every sandpiper of that species performs it the same way, because the underlying neural circuitry is encoded in their genes and has been shaped by natural selection.
+
+**What do you notice about this behavior when the male sees the female’s breast patch?**
+[learner] i dont understand this picture. what is it showing?
+[tutor provider=groq fig=none card=none flags=-]
+The picture compares two kinds of innate behaviours: a **simple reflex** (the knee‑jerk reflex) on the left and a **fixed action pattern** (such as a courtship display or nest‑building) on the right.
+
+Okay — let’s go through the picture together:
+
+- **“Simple reflex”** (top left, blue) labels the left side; it shows a basic, one‑step response.
+- **“E.g. the knee‑jerk reflex”** (grey text below the left label) gives an everyday example of that reflex.
+- **“Fixed action pattern”** (top right, orange) labels the right side; it represents a more complex, multi‑step behaviour.
+- **“E.g. courtship display, nest‑building”** (grey text below the right label) provides examples of such patterns.
+- **“Stereotyped and largely unmodifiable once triggered”** (bottom right, grey) explains that a fixed action pattern, once started by its sign stimulus, runs to completion with little change.
+
+Which part of the picture tells us that a fixed action pattern runs to completion once it is triggered?
+[learner] ask me a question
+[tutor provider=groq fig=none card="A student says \"a reflex and a fixed action pattern are basically the same thing — both are just automatic innate behaviours.\" What is the b" ["No, that is wrong","Yes, that is correct"] corpus=biologyExtensionSeedAssets.ts flags=twoOption]
+Let's check this one before we go further.
+[learner] Yes, that is correct
+[tutor provider=groq fig=title=Reflex vs. Fixed Action Pattern card=none flags=-]
+Not quite — the answer is: No, that is wrong — a reflex is a simple, direct, single-response reaction, while a fixed action pattern is a far more complex, coordinated, multi-step sequence
+
+A reflex is a simple single response, while a fixed action pattern is a complex multi‑step sequence. They involve different levels of neural processing.
+
+Reflexes use a direct neural circuit that connects sensory input to motor output in one step. Fixed action patterns are triggered by a specific cue but then run a longer, coordinated behavior without further guidance.
+[learner] test my understanding
+[tutor provider=groq fig=none card="A bird performs an elaborate, multi-step courtship dance only when it sees a specific coloured patch on a potential mate's feathers, and the" ["Both are fixed action patterns since bot","The courtship dance — it is a complex, m","Neither — both are learned behaviours ac","The leg-jerk reaction — any instant reac"] corpus=biologyExtensionSeedAssets.ts flags=-]
+Let's check this one before we go further.
+[learner] quiz me
+[tutor provider=groq fig=none card="A bird performs an elaborate, multi-step courtship dance only when it sees a specific coloured patch on a potential mate's feathers, and the" ["Both are fixed action patterns since bot","The courtship dance — it is a complex, m","Neither — both are learned behaviours ac","The leg-jerk reaction — any instant reac"] corpus=biologyExtensionSeedAssets.ts flags=-]
+This is the question you have not answered yet — choose an answer below and I will mark it.
+
+Let me check your thinking with this.
+[learner] Both are fixed action patterns since both are innate and automatic
+[tutor provider=groq fig=none card="What is the specific role of a \"sign stimulus\" in a fixed action pattern?" ["It is a random event with no specific re","It is a signal the animal must be taught","It is the reward the animal receives aft","It is the specific trigger required to r"] corpus=biologyExtensionSeedAssets.ts flags=repeatAnswered]
+Not quite — the answer is: The courtship dance — it is a complex, multi-step sequence released by a specific sign stimulus (the coloured patch)
+
+The leg‑jerk is a simple reflex, not a multi‑step innate sequence, so it isn’t a fixed action pattern. Only the courtship dance meets the definition of a fixed action pattern because it is a complex, innate sequence released by a specific sign stimulus.
+
+A fixed action pattern is a species‑specific, innate behavior that has several steps and runs to completion once triggered by a particular sign stimulus. Simple reflexes are single, immediate responses without a sequence. Recognizing the trigger and the behavior’s complexity helps distinguish the two.
+
+Here's a question — take your time with it.
+[learner] show me a diagram
+[tutor provider=groq fig=title=Reflex vs. Fixed Action Pattern card="What is the specific role of a \"sign stimulus\" in a fixed action pattern?" ["It is a random event with no specific re","It is a signal the animal must be taught","It is the reward the animal receives aft","It is the specific trigger required to r"] corpus=biologyExtensionSeedAssets.ts flags=repeatAnswered]
+Here’s the diagram already on your screen. In the **top‑left blue box** you see “Simple reflex” with the example “the knee‑jerk reflex” underneath. In the **top‑right orange box** is “Fixed action pattern” with the example “courtship display, nest‑building,” and below it, in the **bottom‑right grey area**, the note “Stereotyped and largely unmodifiable once triggered.”
+[learner] i dont understand this picture. what is it showing?
+[tutor provider=groq fig=none card=none flags=-]
+I hear you—it can be a lot to take in at once.
+
+- **Top left** you see the label **“Simple reflex.”** This points to a basic, immediate response that doesn’t need much processing. 
+- **Just below it, on the left**, the example **“E.g. the knee‑jerk reflex”** shows what a simple reflex looks like in real life. 
+- **Top right** the label **“Fixed action pattern”** marks a more complex, pre‑programmed sequence of actions. 
+- **On the right side**, the example **“E.g. courtship display, nest‑building”** illustrates a behavior that follows a set pattern once started. 
+- **Bottom right** the note **“Stereotyped and largely unmodifiable once triggered”** tells us that, after the sign stimulus activates the pattern, the behavior runs to completion and does not change much even if conditions vary.
+
+Together, the figure compares a **simple reflex** (quick, single‑step) with a **fixed action pattern** (multi‑step, innate, triggered by a specific sign stimulus and then carried out almost automatically).
+[learner] explain simpler
+[tutor provider=groq fig=none card=none flags=-]
+Think of a **simple reflex** like a light switch: when the switch (the stimulus) is flipped, the light turns on instantly, and that’s the whole response—nothing else changes. In the picture, the blue box labeled “Simple reflex” and the example “the knee‑jerk reflex” are showing exactly this quick, one‑step reaction.
+
+Now picture a **fixed action pattern** as a coffee‑making machine. Press one button (the *sign stimulus*), and the machine runs through a whole, pre‑set sequence: grinding beans, heating water, brewing, and pouring—each step follows the last without needing any extra instructions. The orange box in the picture, labeled “Fixed action pattern” with examples like “courtship display, nest‑building,” is showing that same kind of built‑in, multi‑step behavior that starts only when the right trigger appears.
+[learner] give me a quiz
+[tutor provider=groq fig=title=Reflex vs. Fixed Action Pattern card=none flags=quizNoCard,quizSilent,analogyRepeat]
+You have answered every new practice question I have on Innate Behaviour and Instinct in this lesson; a question you have already seen comes back once more a little later. Here is the idea once more.
+
+Two mistakes are common here. First, students often picture a fixed action pattern as happening spontaneously, out of nowhere — but a FAP always requires a specific sign stimulus to release it; without that trigger present, the behaviour does not occur. Second, students often lump reflexes and fixed action patterns together as "the same kind of automatic behaviour" — but a reflex is a simple, single, direct response (like a knee-jerk), while a fixed action pattern is a much more complex, coordinated, multi-step sequence (like a full courtship display). Both are innate and largely unmodifiable, but they sit at genuinely different levels of behavioural complexity — checking the specific trigger and the specific complexity level distinguishes them correctly.
+[learner] quiz me
+[tutor provider=groq fig=none card="A student says \"a reflex and a fixed action pattern are basically the same thing — both are just automatic innate behaviours.\" What is the b" ["Yes, that is correct","No, that is wrong"] corpus=biologyExtensionSeedAssets.ts flags=twoOption,repeatAnswered]
+You have seen this question before in this lesson — here it is once more.
+
+Let's check this one before we go further.
+[learner] quiz me
+[tutor provider=groq fig=none card="A student says \"a reflex and a fixed action pattern are basically the same thing — both are just automatic innate behaviours.\" What is the b" ["Yes, that is correct","No, that is wrong"] corpus=biologyExtensionSeedAssets.ts flags=twoOption,repeatAnswered]
+This is the question you have not answered yet — choose an answer below and I will mark it.
+
+I’ll put together a short set of questions that check your understanding of fixed‑action patterns, sign stimuli, reflexes, and the genetic basis of innate behaviour. Just let me know when you’re ready to start, and we’ll begin the quiz.
+
+=== order 87 bio.plant.photosynthesis ===
+[open provider=groq fig=none flags=-]
+**Photosynthesis** – the process plants use to turn sunlight into food and oxygen. By the end of this lesson you’ll be able to describe the light and dark reactions, name the two photosystems, explain how electrons move and make ATP, and outline the Calvin cycle as well as the C₄ and CAM adaptations.  
+
+Think of a small solar‑powered calculator you might have seen on a desk. It has a tiny panel that catches sunlight and turns it into electric energy so the calculator can work without batteries. In a green leaf, millions of tiny “solar panels” called chloroplasts do a very similar job: they catch sunlight and use it to power a series of chemical steps that build sugars.  
+
+Picture each chloroplast as a miniature factory where light is the raw material, and the factory’s workers (proteins and pigments) pass tiny packets of energy along a conveyor belt, finally producing a sugar product that the plant can use for growth.  
+
+In plain language, **photosynthesis** is the set of reactions that capture light energy and convert carbon dioxide and water into glucose and oxygen. The first set of steps, called the **light reactions**, happen in the thylakoid membranes and turn light into chemical energy (ATP and NADPH).  
+
+What do you notice about how a solar‑powered calculator makes use of sunlight compared to how a plant leaf does?
+[learner] What is this picture showing?
+[tutor provider=groq fig=title=Photosynthesis: Two Coupled Stages card=none flags=-]
+The figure has two blue sections. The left one is labeled **“Light‑Dependent Reactions”** – this is the part of photosynthesis that captures sunlight, splits water, and produces the energy carriers ATP and NADPH. 
+The right one is labeled **“Calvin Cycle”** – this is the set of reactions in the stroma that uses the ATP and NADPH from the light reactions to fix carbon dioxide into sugars; it does not need light directly. 
+A grey arrow runs from the Light‑Dependent Reactions box to the Calvin Cycle box, showing that the products of the light reactions (ATP and NADPH) are transferred to drive the Calvin cycle.
+
+**What do you notice about the arrow that connects the two blue sections?**
+[learner] quiz me
+[tutor provider=groq fig=none card="Do plants respire? If so, when?" ["Yes","No"] corpus=biologySeedAssets.ts flags=twoOption]
+Let's check this one before we go further.
+[learner] Yes
+[tutor provider=groq fig=none card=none flags=-]
+That's right.
+
+Plants do respire. Respiration happens continuously, both in daylight and darkness.
+
+During the day photosynthesis makes food and oxygen, but the plant still uses respiration to turn some of that food into energy, releasing carbon dioxide. At night, without light, only respiration occurs, so the plant relies entirely on this process for energy.
+[learner] ok
+[tutor provider=memory fig=none card=none flags=-]
+Photosynthesis converts light energy into chemical energy (glucose), using CO2 and water as raw materials. Overall equation: 6CO2 + 6H2O + light energy → C6H12O6 + 6O2. Two stages occur in the chloroplast. Light-dependent reactions (thylakoid membranes): light energy is absorbed by chlorophyll; water is split (photolysis), releasing O2 as a by-product; the energy is used to produce ATP and NADPH (energy carriers). Light-independent reactions / Calvin cycle (stroma): ATP and NADPH from stage 1 drive the fixation of CO2 into glucose via a cycle of reactions. CO2 combines with RuBP (a 5-carbon compound) via RuBisCO enzyme; the products are reduced using ATP and NADPH to produce G3P, which is used to make glucose. RuBP is regenerated to continue the cycle. Key point: O2 is released from water splitting, not from CO2.
+[learner] give me example
+[tutor provider=groq fig=none card=none flags=-]
+Here’s a concrete walk‑through of one full photosynthetic event in a leaf:
+
+1. **Light‑dependent reactions (left side of the figure)** – Sunlight excites chlorophyll in photosystem II, which uses that energy to split two water molecules:
+
+2 H₂O → O₂ + 4 H⁺ + 4 e⁻
+
+The released electrons travel through the electron‑transport chain, powering the synthesis of **ATP** and the reduction of **NADP⁺** to **NADPH**. Roughly, each pair of water molecules yields 2 NADPH and about 3 ATP (the exact ATP yield varies, but is roughly 3 per O₂ evolved).
+
+2. **Calvin cycle (right side of the figure)** – The ATP and NADPH produced above are consumed in the stroma to fix carbon dioxide. Three CO₂ molecules combine with three molecules of the carrier **RuBP** (ribulose‑1,5‑bisphosphate). After a series of reductions, the cycle generates one molecule of G3P (glyceraldehyde‑3‑phosphate), which can be linked together to form one glucose (C₆H₁₂O₆).
+
+Overall net reaction for six CO₂ and six H₂O:
+
+6 CO₂ + 6 H₂O + light → C₆H₁₂O₆ + 6 O₂
+
+This shows how the light reactions (producing ATP/NADPH) fuel the dark reactions (the Calvin cycle) to build sugar.
+[learner] i dont understand this picture. what is it showing?
+[tutor provider=groq fig=none card=none flags=-]
+- **“Light‑Dependent Reactions”** (the blue area on the left) – this part shows the reactions that happen in the thylakoid membranes when chlorophyll captures sunlight. The light energy splits water, releases oxygen, and creates the energy carriers ATP and NADPH.
+
+- **“Calvin Cycle”** (the blue area on the right) – this part shows the set of reactions that occur in the stroma, using the ATP and NADPH from the light‑dependent reactions to fix carbon dioxide into sugars.
+
+- **Grey arrow** – the arrow points from the Light‑Dependent Reactions to the Calvin Cycle, indicating that the products of the first stage (ATP and NADPH) are fed into the second stage.
+
+**Overall meaning:** the figure illustrates how photosynthesis is a two‑stage process: light captures energy and makes fuel, then the Calvin Cycle uses that fuel to turn carbon dioxide into glucose.
+[learner] ask me a question
+[tutor provider=groq fig=none card="If a plant cell were artificially supplied with ATP and NADPH directly (without any light at all), could its Calvin cycle continue running, " ["No — the Calvin cycle can only run while","Yes, temporarily — the Calvin cycle itse","Yes, indefinitely — the Calvin cycle doe","No — without light, RuBisCO becomes perm"] corpus=biologyDepthSeedAssets.ts flags=-]
+Looking at the picture, you see two blue sections labeled “Light‑Dependent Reactions” on the left and “Calvin Cycle” on the right, with a grey arrow connecting them.
+[learner] No — without light, RuBisCO becomes permanently deactivated regardless of ATP/NADPH availability
+[tutor provider=groq fig=title=Photosynthesis: Two Coupled Stages card=none flags=-]
+Not quite — the answer is: Yes, temporarily — the Calvin cycle itself does not directly require light; it only requires the ATP and NADPH that light-dependent reactions normally supply
+
+RuBisCO is not permanently turned off in darkness; it can still catalyze carbon fixation if ATP and NADPH are supplied. The Calvin cycle needs only those energy carriers, not direct light.
+
+If you provide a plant cell with enough ATP and NADPH, the Calvin cycle can run for a short period until those molecules are used up, after which the cycle stops because the light reactions are not regenerating them.
+[learner] test my understanding
+[tutor provider=groq fig=none card="In photosynthesis, where does the oxygen released into the atmosphere come from?" ["From oxygen stored in glucose during the","From CO2 molecules — oxygen is released ","From both water and CO2 in equal proport","From the splitting of water (photolysis)"] corpus=biologySeedAssets.ts flags=-]
+Great, let’s see how the two stages you’ve just watched fit together. Think about how the ATP and NADPH made in the Light‑Dependent Reactions power the Calvin Cycle, and how the cycle can keep running even when the light is temporarily absent. 
+
+Here's a question — take your time with it.
+[learner] quiz me
+[tutor provider=groq fig=none card="In photosynthesis, where does the oxygen released into the atmosphere come from?" ["From oxygen stored in glucose during the","From CO2 molecules — oxygen is released ","From both water and CO2 in equal proport","From the splitting of water (photolysis)"] corpus=biologySeedAssets.ts flags=-]
+This is the question you have not answered yet — choose an answer below and I will mark it.
+
+Let me check your thinking with this.
+[learner] From oxygen stored in glucose during the Calvin cycle
+[tutor provider=groq fig=none card="Do plants respire? If so, when?" ["No","Yes"] corpus=biologySeedAssets.ts flags=twoOption,repeatAnswered]
+Not quite — the answer is: From the splitting of water (photolysis) in the light-dependent reactions
+
+Oxygen is not stored in glucose during the Calvin cycle. The O2 released comes from a different source, not from carbon removal from CO2. The oxygen atoms come from water molecules.
+
+During the light‑dependent reactions, water is split (photolysis) into oxygen, protons, and electrons. The oxygen atoms combine to form O2, which is released to the atmosphere.
+
+Let's check this one before we go further.
+[learner] show me a diagram
+[tutor provider=groq fig=title=Photosynthesis: Two Coupled Stages card="Do plants respire? If so, when?" ["No","Yes"] corpus=biologySeedAssets.ts flags=twoOption,repeatAnswered]
+Here’s the picture you’re looking at: on the left, the blue box labeled **“Light‑Dependent Reactions”** shows what happens in the thylakoid membranes when chlorophyll captures sunlight. Water is split, oxygen is released, and the energy‑rich molecules **ATP** and **NADPH** are produced. The grey arrow points from that box to the blue box on the right, labeled **“Calvin Cycle.”** In the stroma, the ATP and NADPH generated in the light‑dependent step drive the Calvin cycle: carbon dioxide is fixed, reduced to a sugar‑precursor (G3P), and the cycle regenerates its starting molecule (RuBP) so it can keep running.
+
+The key idea the diagram conveys is that the Calvin cycle **depends on** the ATP and NADPH from the light reactions, but it does **not** need light directly at the moment it operates. This coupling lets the plant store light energy in chemical form and use it later, even when the sun isn’t shining.
+[learner] i dont understand this picture. what is it showing?
+[tutor provider=groq fig=none card=none flags=-]
+I hear you’re feeling stuck—let’s walk through the picture together.
+
+- **Light‑Dependent Reactions** (the blue box on the left) – here chlorophyll captures sunlight, splits water (photolysis), releases O₂, and makes the energy carriers ATP and NADPH. 
+- **Calvin Cycle** (the blue box on the right) – in the stroma, the ATP and NADPH from the light reactions drive CO₂ fixation, turning it into a sugar‑like molecule (G3P) and regenerating the acceptor RuBP so the cycle can keep running. 
+- The **grey arrow** connects the two boxes; it shows that the ATP and NADPH produced in the light‑dependent reactions are passed to the Calvin cycle.
+
+Overall, the diagram illustrates the two coupled stages of photosynthesis: light‑driven energy capture followed by carbon fixation.
+[learner] explain simpler
+[tutor provider=groq fig=none card=none flags=-]
+Let’s think of a plant like a tiny bakery. The **Light‑Dependent Reactions** on the left are the “ingredient‑preparing station”: sunlight hits the chlorophyll, just as a baker turns on the oven’s heat, and the plant splits water to make two special “ingredients” – ATP and NADPH – that store energy. The **Calvin Cycle** on the right is the “mix‑and‑bake area”: using those stored ingredients, the plant combines carbon dioxide with a molecule called RuBP (like adding flour) and, through a few steps, bakes a sugar called glucose. The grey arrow between them simply shows the flow of the energy‑carrying ingredients from the light‑stage to the sugar‑making stage.
+[learner] give me a quiz
+[tutor provider=groq fig=title=Photosynthesis: Two Coupled Stages card=none flags=quizNoCard,quizSilent]
+You have answered every new practice question I have on Photosynthesis in this lesson; a question you have already seen comes back once more a little later. Here is the idea once more.
+
+Critical misconception: "plants get their food from soil." Plants MAKE their food from CO2 and water — they are autotrophs. Minerals from soil (nitrogen, phosphorus) are used to build proteins and DNA but contribute negligible mass. A tree's wood is mainly carbon, and that carbon comes from CO2 absorbed from the air. Second: "plants perform photosynthesis OR respiration." Plants do BOTH simultaneously. At high light intensity, photosynthesis exceeds respiration (net O2 release); at low light (compensation point), they balance; in darkness, only respiration runs (net CO2 release). Plants respire continuously — they cannot store enough light energy to stop. Third: "the oxygen in glucose comes from CO2." Isotope labelling experiments showed that all released O2 comes from H2O, not CO2.
+[learner] quiz me
+[tutor provider=groq fig=none card="If a plant cell were artificially supplied with ATP and NADPH directly (without any light at all), could its Calvin cycle continue running, " ["No — without light, RuBisCO becomes perm","No — the Calvin cycle can only run while","Yes, temporarily — the Calvin cycle itse","Yes, indefinitely — the Calvin cycle doe"] corpus=biologyDepthSeedAssets.ts flags=repeatAnswered]
+You have seen this question before in this lesson — here it is once more.
+
+Quick check. Think it through before you choose.
+[learner] quiz me
+[tutor provider=groq fig=none card="If a plant cell were artificially supplied with ATP and NADPH directly (without any light at all), could its Calvin cycle continue running, " ["No — without light, RuBisCO becomes perm","No — the Calvin cycle can only run while","Yes, temporarily — the Calvin cycle itse","Yes, indefinitely — the Calvin cycle doe"] corpus=biologyDepthSeedAssets.ts flags=repeatAnswered]
+This is the question you have not answered yet — choose an answer below and I will mark it.
+
+Let me check your thinking with this.

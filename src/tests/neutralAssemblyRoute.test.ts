@@ -9,6 +9,11 @@ import { driveTurns, type TurnResult } from './support/turnHarness'
 
 const h = await vi.hoisted(async () => (await import('./support/turnHarness')).createHarness())
 vi.mock('@/lib/auth', () => ({ auth: () => h.auth() }))
+// These tests cover a tap on a MODEL-WRITTEN card. Since the owner decision of
+// 2026-10-07 the route never serves one (inventedProbeGuard.AUTHORED_CARDS_ONLY);
+// the tap path still exists for a card already on screen, so it is exercised
+// here with the policy switched off.
+vi.mock('@/lib/teaching/inventedProbeGuard', async (o) => ({ ...(await o<Record<string, unknown>>()), AUTHORED_CARDS_ONLY: false }))
 vi.mock('@/lib/db/prisma', () => ({ prisma: h.prisma }))
 vi.mock('@/lib/rateLimit', () => ({ checkRateLimit: async () => ({ allowed: true }), rateLimitResponse: () => new Response('{}', { status: 429 }) }))
 vi.mock('@/lib/ai/router', async (o) => ({ ...(await o<Record<string, unknown>>()), routeAI: (...a: unknown[]) => h.routeAI(...a) }))

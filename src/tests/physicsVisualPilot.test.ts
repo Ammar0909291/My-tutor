@@ -287,9 +287,9 @@ describe('nothing outside the pilot changed', () => {
     expect(ask('chem.solid.defects').graphical).toBe(false)
     // bio.cell.apoptosis was retired until the 2026-09-24 Biology cell visual
     // replacement gave it its own faithful Tier 0 scene — see
-    // bioCellVisualReplacement.test.ts; chem.bond.ionic-bonding stands in as
+    // bioCellVisualReplacement.test.ts; chem.bond.metallic-bonding stands in as
     // this test's second example, still retired.
-    expect(ask('chem.bond.ionic-bonding').graphical).toBe(false)
+    expect(ask('chem.bond.metallic-bonding').graphical).toBe(false)
   })
 
   it('domain illustrations are still domain-scoped', () => {

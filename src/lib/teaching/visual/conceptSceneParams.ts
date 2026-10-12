@@ -126,6 +126,169 @@ import {
   buildThermoProcessesScene, buildCarnotScene, buildResistivityScene, buildEmfScene, buildSchrodingerScene,
   buildSelectionRulesScene,
 } from '@/lib/teaching/sceneGenerators/physicsCoreScenesB15'
+import {
+  buildPythagoreanScene, buildSlopeScene, buildParabolaScene, buildGraphOfFunctionScene,
+  buildInverseFunctionsScene, buildDomainRangeScene, buildLinearSystemScene, buildCircleEquationScene,
+  buildDeterminantScene, buildEigenScene, buildConditionalProbabilityScene, buildNormalDistributionScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB1'
+import {
+  buildCoordinatePlaneScene, buildQuadrantsScene, buildMidpointScene, buildParallelLinesScene,
+  buildPythagoreanConverseScene, buildParallelogramScene, buildLineEquationScene, buildEvenOddScene, buildQuadraticFunctionScene,
+  buildVertexFormScene, buildExponentialFunctionScene, buildLogarithmicFunctionScene, buildCompositionScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB2'
+import {
+  buildEquivalentFractionsScene, buildFractionSimplificationScene, buildFractionAdditionScene, buildImproperFractionsScene,
+  buildPlaceValueScene, buildMultiplicationScene, buildDivisionScene, buildNumberBaseScene,
+  buildRatioScene, buildDirectVariationScene, buildInverseVariationScene, buildPercentageChangeScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB3'
+import {
+  buildPointScene, buildLineScene, buildLineSegmentScene, buildRayScene, buildPlaneScene, buildPerpendicularLinesScene,
+  buildTrapezoidScene, buildAreaScene, buildTranslationScene, buildRotationScene, buildTransformReflectionScene, buildDilationScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB4'
+import {
+  buildTrigFunctionsScene, buildPythagoreanIdentitiesScene, buildLawOfSinesScene, buildLawOfCosinesScene, buildEulersFormulaScene,
+  buildCompletingTheSquareScene, buildDiscriminantScene, buildRemainderTheoremScene, buildFactorTheoremScene,
+  buildPolynomialInequalityScene, buildRationalExpressionsScene, buildInequalityScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB5'
+import {
+  buildLimitScene, buildOneSidedLimitsScene, buildLimitsAtInfinityScene, buildPointContinuityScene, buildContinuityTypesScene,
+  buildDerivativeIntroScene, buildDerivativeDefinitionScene, buildDifferentiabilityScene, buildIncreasingDecreasingScene,
+  buildLocalExtremaScene, buildConcavityScene, buildRiemannSumsScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB6'
+import {
+  buildMeanValueTheoremScene, buildRelatedRatesScene, buildLinearizationScene, buildDefiniteIntegralScene, buildFtcPart1Scene,
+  buildFtcPart2Scene, buildImproperIntegralsScene, buildIntegralAreaScene, buildArcLengthScene, buildTaylorSeriesScene,
+  buildParametricCurvesScene, buildFourierSeriesIntroScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB7'
+import {
+  buildEventScene, buildTotalProbabilityScene, buildDistributionScene, buildDiscreteDistributionsScene,
+  buildContinuousDistributionsScene, buildQuantileScene, buildVarianceScene, buildStandardDeviationScene,
+  buildJointDistributionScene, buildMarginalDistributionScene, buildConditionalDistributionScene, buildLawOfLargeNumbersScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB8'
+import {
+  buildMarkovChainScene, buildCovarianceScene, buildCorrelationScene, buildDescriptiveStatisticsScene, buildMeasuresOfCenterScene,
+  buildMeasuresOfSpreadScene, buildPercentileScene, buildSamplingDistributionScene, buildConfidenceIntervalScene, buildCiMeanScene,
+  buildCiProportionScene, buildHypothesisTestingScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB9'
+import {
+  buildPValueScene, buildTypeErrorsScene, buildStatisticalPowerScene, buildAnovaScene, buildStatsCorrelationScene, buildLinearRegressionScene,
+  buildNormalApproximationScene, buildCurveSketchingScene, buildVolumeRevolutionScene, buildSurfaceAreaIntegralScene,
+  buildParametricCalculusScene, buildPeriodicFunctionScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB10'
+import {
+  buildFunctionConceptScene, buildInjectivityScene, buildSurjectivityScene, buildBijectionScene, buildTransformationsFunctionsScene,
+  buildPolynomialFunctionScene, buildEndBehaviorScene, buildRationalFunctionScene, buildVerticalAsymptoteScene,
+  buildHorizontalAsymptoteScene, buildPiecewiseFunctionScene, buildMonotonicFunctionScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB11'
+import {
+  buildCircleTheoremsScene, buildConicSectionsScene, buildEllipseScene, buildHyperbolaScene, buildPolarCoordinatesScene,
+  buildPolarCurvesScene, buildVectors2dScene, buildVectors3dScene, buildDotProductScene, buildCrossProductScene,
+  buildCurvatureScene, buildXyCoordinatesScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB12'
+import {
+  buildVectorScene, buildScalarMultiplicationScene, buildNormScene, buildUnitVectorScene, buildOrthogonalityScene,
+  buildSpanScene, buildLinearIndependenceScene, buildBasisScene, buildCoordinatesScene, buildChangeOfBasisScene,
+  buildLinearMapScene, buildProjectionScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB13'
+import {
+  buildLinalgDotProductScene, buildLinalgCrossProductScene, buildRowReductionScene, buildSubspaceScene, buildNullSpaceScene,
+  buildColumnSpaceScene, buildKernelImageScene, buildEigenspaceScene, buildOrthogonalBasisScene, buildLeastSquaresScene,
+  buildSvdScene, buildGeometricSequenceScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB14'
+import {
+  buildSetScene, buildSubsetScene, buildProperSubsetScene, buildSetEqualityScene, buildUnionScene, buildIntersectionScene,
+  buildSetDifferenceScene, buildComplementScene, buildVennDiagramScene, buildHasseDiagramScene, buildIrrationalNumbersScene,
+  buildComplexNumbersScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB15'
+import {
+  buildCountingScene, buildSubitizingScene, buildExpandedFormScene, buildMultiplicationTableScene, buildLongMultiplicationScene,
+  buildFractionMultiplicationScene, buildMixedNumbersScene, buildProportionScene, buildRoundingScene, buildSquareNumbersScene,
+  buildCubeNumbersScene, buildSquareRootsScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB16'
+import {
+  buildFundamentalTheoremAlgebraScene, buildRationalInequalityScene, buildPascalsTriangleScene, buildSieveOfEratosthenesScene,
+  buildModularArithmeticScene, buildConvergentSequenceScene, buildDivergentSequenceScene, buildGeometricSeriesScene,
+  buildComparisonTestScene, buildIntegralTestScene, buildAlternatingSeriesScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB17'
+import {
+  buildGraphScene, buildGraphTypesScene, buildGraphRepresentationScene, buildGraphConnectivityScene, buildEulerHamiltonianScene,
+  buildGraphTreesScene, buildSpanningTreeScene, buildGraphColoringScene, buildPlanarGraphScene, buildStarsBarsScene,
+  buildInclusionExclusionScene, buildAsymptoticNotationScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB18'
+import {
+  buildSlopeFieldScene, buildEulerMethodScene, buildHarmonicOscillatorScene, buildResonanceScene, buildStabilityAnalysisScene,
+  buildFourierSeriesScene, buildFourierConvergenceScene, buildFourierSineCosineScene, buildPdeScene, buildHeatEquationScene,
+  buildWaveEquationScene, buildLaplaceEquationScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB19'
+import {
+  buildMultivariableIntroScene, buildPartialDerivativesScene, buildGradientScene, buildDirectionalDerivativeScene,
+  buildMultivariableExtremaScene, buildVectorFieldsScene, buildCurlDivergenceScene, buildLineIntegralsScene,
+  buildChangeOfVariablesScene, buildDoubleIntegralsScene, buildMultipleIntegralsScene, buildTripleIntegralsScene,
+  buildSurfaceIntegralsScene, buildDivergenceTheoremScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB20'
+import {
+  buildBooleanCircuitsScene, buildVertexConnectivityScene, buildMaximumFlowScene, buildMatchingScene, buildSupInfScene,
+  buildConvergenceSequencesScene, buildCauchySequenceScene, buildOpenSetsScene, buildContinuityRigorousScene,
+  buildUniformContinuityScene, buildRiemannIntegralScene, buildUniformConvergenceScene, buildPointwiseConvergenceScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB21'
+import {
+  buildComplexNumbersAnalysisScene, buildComplexIntegrationScene, buildCauchyTheoremScene, buildResidueTheoremScene,
+  buildRealIntegralResiduesScene, buildMobiusTransformationScene, buildRiemannSurfaceScene, buildTopologyOpenSetsScene,
+  buildHomeomorphismScene, buildQuotientSpaceScene, buildHomotopyScene, buildFundamentalGroupScene, buildEulerCharacteristicScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB22'
+import {
+  buildUnconstrainedOptimizationScene, buildConvexFunctionScene, buildConvexSetScene, buildLinearProgrammingScene,
+  buildLagrangeMultipliersScene, buildGradientMethodsScene, buildNewtonsMethodScene, buildInterpolationScene,
+  buildNumericalDifferentiationScene, buildNumericalIntegrationScene, buildRealValuedFunctionScene, buildRationalRootScene,
+  buildTopologicalManifoldScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB23'
+import {
+  buildSmoothManifoldScene, buildCategoryScene, buildMorphismTypesScene, buildFunctorScene, buildNaturalTransformationScene,
+  buildPlatonicSolidsScene, buildCurvesInSpaceScene, buildFrenetSerretScene, buildSimpleFunctionScene,
+  buildLebesgueIntegralScene, buildCyclicGroupScene, buildConvolutionScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB24'
+import {
+  buildSetMembershipScene, buildEmptySetScene, buildFiniteSetScene, buildSetOperationsScene, buildPowerSetScene,
+  buildCartesianProductScene, buildOrderedPairScene, buildRelationScene, buildReflexiveRelationScene,
+  buildSymmetricRelationScene, buildTransitiveRelationScene, buildEquivalenceClassScene, buildPartitionScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB25'
+import {
+  buildPartialOrderScene, buildTotalOrderScene, buildSetTheoreticFunctionScene, buildCardinalityScene,
+  buildCountableSetScene, buildUncountableSetScene, buildNaturalNumbersScene, buildOrdinalNumberScene,
+  buildProofByInductionScene, buildStrongInductionScene, buildTruthTableScene, buildLogicalEquivalenceScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB26'
+import {
+  buildAdditionScene, buildSubtractionScene, buildCountingSequenceScene, buildColumnAdditionScene,
+  buildDivisorDividendScene, buildRemainderScene, buildLongDivisionScene, buildExponentiationScene,
+  buildExponentRulesScene, buildScientificNotationScene, buildPercentageCalculationsScene, buildUnitRateScene,
+  buildEstimationScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB27'
+import {
+  buildReciprocalScene, buildDecimalOperationsScene, buildTerminatingDecimalsScene, buildRepeatingDecimalsScene,
+  buildIrrationalRootsScene, buildEquationScene, buildSolutionSetScene, buildSubstitutionMethodScene,
+  buildEliminationMethodScene, buildDegreeScene, buildPolynomialOperationsScene, buildPolynomialDivisionScene,
+  buildFactoringScene, buildFactoringTrinomialsScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB28'
+import {
+  buildQuadraticFormulaScene, buildFractionalExponentScene, buildRadicalsScene, buildExponentialEquationsScene,
+  buildLogarithmPropertiesScene, buildNaturalLogarithmScene, buildLogarithmicEquationsScene, buildBinomialTheoremScene,
+  buildDivisibilityScene, buildPrimeNumberScene, buildCompositeNumberScene, buildPrimeFactorizationScene, buildGcdScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB29'
+import {
+  buildEuclideanAlgorithmScene, buildLcmScene, buildCongruenceScene, buildResidueClassesScene, buildPythagoreanTriplesScene,
+  buildPrimeDistributionScene, buildPrimeNumberTheoremScene, buildContinuedFractionsScene, buildAlgebraicStructureScene,
+  buildBinaryOperationScene, buildGroupTheoryScene, buildGroupOperationScene, buildSubgroupScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB30'
+import {
+  buildCosetScene, buildNormalSubgroupScene, buildQuotientGroupScene, buildGroupHomomorphismScene, buildGroupIsomorphismScene,
+  buildGroupActionScene, buildSymmetricGroupScene, buildFieldExtensionScene, buildMatrixScene, buildMatrixAdditionScene,
+  buildMatrixMultiplicationScene, buildMatrixTransposeScene, buildSymmetricMatrixScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB31'
+import {
+  buildAugmentedMatrixScene, buildRankScene, buildMatrixInverseScene, buildVectorSpaceScene, buildDimensionScene,
+  buildMatrixRepresentationScene, buildDiagonalizationScene, buildSpectralTheoremScene, buildInnerProductScene,
+  buildInnerProductSpaceScene, buildQrFactorizationScene, buildSingularValuesScene, buildTensorScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB32'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -288,6 +451,476 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'math.calc.critical-points': () => buildCalculusGraphScene({
     functionType: 'polynomial', coefficients: [1, 0, -3, 0], domainMin: -2.5, domainMax: 2.5,
   }),
+
+  // Mathematics visual campaign, batch 1 (2026-10-11). See mathCoreScenesB1.ts.
+  'math.geom.pythagorean-theorem':       buildPythagoreanScene,
+  'math.geom.slope':                     buildSlopeScene,
+  'math.geom.parabola':                  buildParabolaScene,
+  'math.func.graph-of-function':         buildGraphOfFunctionScene,
+  'math.func.inverse-functions':         buildInverseFunctionsScene,
+  'math.func.domain-range':              buildDomainRangeScene,
+  'math.alg.system-linear-equations':    buildLinearSystemScene,
+  'math.geom.circle-equation':           buildCircleEquationScene,
+  'math.linalg.determinant':             buildDeterminantScene,
+  'math.linalg.eigenvalues':             buildEigenScene,
+  'math.prob.conditional-probability':   buildConditionalProbabilityScene,
+  'math.prob.normal-distribution':       buildNormalDistributionScene,
+
+  // Mathematics visual campaign, batch 2 (2026-10-11). See mathCoreScenesB2.ts.
+  'math.geom.coordinate-plane':          buildCoordinatePlaneScene,
+  'math.geom.quadrants':                 buildQuadrantsScene,
+  'math.geom.midpoint-formula':          buildMidpointScene,
+  'math.geom.parallel-lines':            buildParallelLinesScene,
+  'math.geom.pythagorean-converse':      buildPythagoreanConverseScene,
+  'math.geom.parallelogram':             buildParallelogramScene,
+  'math.geom.line-equation':             buildLineEquationScene,
+  'math.func.even-odd-functions':        buildEvenOddScene,
+  'math.func.quadratic-function':        buildQuadraticFunctionScene,
+  'math.func.vertex-form':               buildVertexFormScene,
+  'math.func.exponential-function':      buildExponentialFunctionScene,
+  'math.func.logarithmic-function':      buildLogarithmicFunctionScene,
+  'math.func.composition':               buildCompositionScene,
+
+  // Mathematics visual campaign, batch 3 (2026-10-11). See mathCoreScenesB3.ts.
+  'math.arith.fraction-equivalence':     buildEquivalentFractionsScene,
+  'math.arith.fraction-simplification':  buildFractionSimplificationScene,
+  'math.arith.fraction-addition':        buildFractionAdditionScene,
+  'math.arith.improper-fractions':       buildImproperFractionsScene,
+  'math.arith.place-value':              buildPlaceValueScene,
+  'math.arith.multiplication':           buildMultiplicationScene,
+  'math.arith.division':                 buildDivisionScene,
+  'math.arith.number-base':              buildNumberBaseScene,
+  'math.arith.ratios':                   buildRatioScene,
+  'math.arith.direct-variation':         buildDirectVariationScene,
+  'math.arith.inverse-variation':        buildInverseVariationScene,
+  'math.arith.percentage-change':        buildPercentageChangeScene,
+
+  // Mathematics visual campaign, batch 4 (2026-10-11). See mathCoreScenesB4.ts.
+  'math.geom.point':                     buildPointScene,
+  'math.geom.line':                      buildLineScene,
+  'math.geom.line-segment':              buildLineSegmentScene,
+  'math.geom.ray':                       buildRayScene,
+  'math.geom.plane':                     buildPlaneScene,
+  'math.geom.perpendicular-lines':       buildPerpendicularLinesScene,
+  'math.geom.trapezoid':                 buildTrapezoidScene,
+  'math.geom.area':                      buildAreaScene,
+  'math.geom.translation':               buildTranslationScene,
+  'math.geom.rotation':                  buildRotationScene,
+  'math.geom.reflection':                buildTransformReflectionScene,
+  'math.geom.dilation':                  buildDilationScene,
+
+  // Mathematics visual campaign, batch 5 (2026-10-11). See mathCoreScenesB5.ts.
+  'math.trig.trig-functions':            buildTrigFunctionsScene,
+  'math.trig.pythagorean-identities':    buildPythagoreanIdentitiesScene,
+  'math.trig.law-of-sines':              buildLawOfSinesScene,
+  'math.trig.law-of-cosines':            buildLawOfCosinesScene,
+  'math.trig.eulers-formula':            buildEulersFormulaScene,
+  'math.alg.completing-the-square':      buildCompletingTheSquareScene,
+  'math.alg.discriminant':               buildDiscriminantScene,
+  'math.alg.remainder-theorem':          buildRemainderTheoremScene,
+  'math.alg.factor-theorem':             buildFactorTheoremScene,
+  'math.alg.polynomial-inequality':      buildPolynomialInequalityScene,
+  'math.alg.rational-expressions':       buildRationalExpressionsScene,
+  'math.alg.inequality':                 buildInequalityScene,
+
+  // Mathematics visual campaign, batch 6 (2026-10-11). See mathCoreScenesB6.ts.
+  'math.calc.limits':                    buildLimitScene,
+  'math.calc.one-sided-limits':          buildOneSidedLimitsScene,
+  'math.calc.limits-at-infinity':        buildLimitsAtInfinityScene,
+  'math.calc.continuity':                buildPointContinuityScene,
+  'math.calc.continuity-types':          buildContinuityTypesScene,
+  'math.calc.derivative-intro':          buildDerivativeIntroScene,
+  'math.calc.derivative-definition':     buildDerivativeDefinitionScene,
+  'math.calc.differentiability':         buildDifferentiabilityScene,
+  'math.calc.increasing-decreasing':     buildIncreasingDecreasingScene,
+  'math.calc.local-extrema':             buildLocalExtremaScene,
+  'math.calc.concavity':                 buildConcavityScene,
+  'math.calc.riemann-sums':              buildRiemannSumsScene,
+
+  // Mathematics visual campaign, batch 7 (2026-10-11). See mathCoreScenesB7.ts.
+  'math.calc.mean-value-theorem':        buildMeanValueTheoremScene,
+  'math.calc.related-rates':             buildRelatedRatesScene,
+  'math.calc.linearization':             buildLinearizationScene,
+  'math.calc.definite-integral':         buildDefiniteIntegralScene,
+  'math.calc.ftc-part1':                 buildFtcPart1Scene,
+  'math.calc.ftc-part2':                 buildFtcPart2Scene,
+  'math.calc.improper-integrals':        buildImproperIntegralsScene,
+  'math.calc.integral-area':             buildIntegralAreaScene,
+  'math.calc.arc-length':                buildArcLengthScene,
+  'math.calc.taylor-series':             buildTaylorSeriesScene,
+  'math.calc.parametric-curves':         buildParametricCurvesScene,
+  'math.calc.fourier-series-intro':      buildFourierSeriesIntroScene,
+
+  // Mathematics visual campaign, batch 8 (2026-10-11). See mathCoreScenesB8.ts.
+  'math.prob.event':                     buildEventScene,
+  'math.prob.total-probability':         buildTotalProbabilityScene,
+  'math.prob.distribution':              buildDistributionScene,
+  'math.prob.discrete-distributions':    buildDiscreteDistributionsScene,
+  'math.prob.continuous-distributions':  buildContinuousDistributionsScene,
+  'math.prob.quantile':                  buildQuantileScene,
+  'math.prob.variance':                  buildVarianceScene,
+  'math.prob.standard-deviation':        buildStandardDeviationScene,
+  'math.prob.joint-distribution':        buildJointDistributionScene,
+  'math.prob.marginal-distribution':     buildMarginalDistributionScene,
+  'math.prob.conditional-distribution':  buildConditionalDistributionScene,
+  'math.prob.lln':                       buildLawOfLargeNumbersScene,
+
+  // Mathematics visual campaign, batch 9 (2026-10-12). See mathCoreScenesB9.ts.
+  'math.prob.markov-chain':              buildMarkovChainScene,
+  'math.prob.covariance':                buildCovarianceScene,
+  'math.prob.correlation':               buildCorrelationScene,
+  'math.stats.descriptive-statistics':   buildDescriptiveStatisticsScene,
+  'math.stats.measures-of-center':       buildMeasuresOfCenterScene,
+  'math.stats.measures-of-spread':       buildMeasuresOfSpreadScene,
+  'math.stats.percentile':               buildPercentileScene,
+  'math.stats.sampling-distribution':    buildSamplingDistributionScene,
+  'math.stats.confidence-interval':      buildConfidenceIntervalScene,
+  'math.stats.ci-mean':                  buildCiMeanScene,
+  'math.stats.ci-proportion':            buildCiProportionScene,
+  'math.stats.hypothesis-testing':       buildHypothesisTestingScene,
+
+  // Mathematics visual campaign, batch 10 (2026-10-12). See mathCoreScenesB10.ts.
+  'math.stats.p-value':                  buildPValueScene,
+  'math.stats.type-errors':              buildTypeErrorsScene,
+  'math.stats.power':                    buildStatisticalPowerScene,
+  'math.stats.anova':                    buildAnovaScene,
+  'math.stats.correlation':              buildStatsCorrelationScene,
+  'math.stats.linear-regression':        buildLinearRegressionScene,
+  'math.stats.normal-approximation':     buildNormalApproximationScene,
+  'math.calc.curve-sketching':           buildCurveSketchingScene,
+  'math.calc.volume-revolution':         buildVolumeRevolutionScene,
+  'math.calc.surface-area-integral':     buildSurfaceAreaIntegralScene,
+  'math.calc.parametric-calculus':       buildParametricCalculusScene,
+  'math.func.periodic-function':         buildPeriodicFunctionScene,
+
+  // Mathematics visual campaign, batch 11 (2026-10-12). See mathCoreScenesB11.ts.
+  'math.func.function-concept':          buildFunctionConceptScene,
+  'math.func.injectivity':               buildInjectivityScene,
+  'math.func.surjectivity':              buildSurjectivityScene,
+  'math.func.bijection':                 buildBijectionScene,
+  'math.func.transformations-functions': buildTransformationsFunctionsScene,
+  'math.func.polynomial-function':       buildPolynomialFunctionScene,
+  'math.func.end-behavior':              buildEndBehaviorScene,
+  'math.func.rational-function':         buildRationalFunctionScene,
+  'math.func.vertical-asymptote':        buildVerticalAsymptoteScene,
+  'math.func.horizontal-asymptote':      buildHorizontalAsymptoteScene,
+  'math.func.piecewise-function':        buildPiecewiseFunctionScene,
+  'math.func.monotonic-function':        buildMonotonicFunctionScene,
+
+  // Mathematics visual campaign, batch 12 (2026-10-12). See mathCoreScenesB12.ts.
+  'math.geom.circle-theorems':           buildCircleTheoremsScene,
+  'math.geom.conic-sections':            buildConicSectionsScene,
+  'math.geom.ellipse':                   buildEllipseScene,
+  'math.geom.hyperbola':                 buildHyperbolaScene,
+  'math.geom.polar-coordinates':         buildPolarCoordinatesScene,
+  'math.geom.polar-curves':              buildPolarCurvesScene,
+  'math.geom.vectors-2d':                buildVectors2dScene,
+  'math.geom.vectors-3d':                buildVectors3dScene,
+  'math.geom.dot-product':               buildDotProductScene,
+  'math.geom.cross-product':             buildCrossProductScene,
+  'math.geom.curvature':                 buildCurvatureScene,
+  'math.geom.x-y-coordinates':           buildXyCoordinatesScene,
+
+  // Mathematics visual campaign, batch 13 (2026-10-12). See mathCoreScenesB13.ts.
+  'math.linalg.vector':                  buildVectorScene,
+  'math.linalg.scalar-multiplication':   buildScalarMultiplicationScene,
+  'math.linalg.norm':                    buildNormScene,
+  'math.linalg.unit-vector':             buildUnitVectorScene,
+  'math.linalg.orthogonality':           buildOrthogonalityScene,
+  'math.linalg.span':                    buildSpanScene,
+  'math.linalg.linear-independence':     buildLinearIndependenceScene,
+  'math.linalg.basis':                   buildBasisScene,
+  'math.linalg.coordinates':             buildCoordinatesScene,
+  'math.linalg.change-of-basis':         buildChangeOfBasisScene,
+  'math.linalg.linear-map':              buildLinearMapScene,
+  'math.linalg.projection':              buildProjectionScene,
+
+  // Mathematics visual campaign, batch 14 (2026-10-12). See mathCoreScenesB14.ts.
+  'math.linalg.dot-product':             buildLinalgDotProductScene,
+  'math.linalg.cross-product':           buildLinalgCrossProductScene,
+  'math.linalg.row-reduction':           buildRowReductionScene,
+  'math.linalg.subspace':                buildSubspaceScene,
+  'math.linalg.null-space':              buildNullSpaceScene,
+  'math.linalg.column-space':            buildColumnSpaceScene,
+  'math.linalg.kernel-image':            buildKernelImageScene,
+  'math.linalg.eigenspace':              buildEigenspaceScene,
+  'math.linalg.orthogonal-basis':        buildOrthogonalBasisScene,
+  'math.linalg.least-squares':           buildLeastSquaresScene,
+  'math.linalg.svd':                     buildSvdScene,
+  'math.seq.geometric-sequence':         buildGeometricSequenceScene,
+
+  // Mathematics visual campaign, batch 15 (2026-10-12). See mathCoreScenesB15.ts.
+  'math.found.set':                      buildSetScene,
+  'math.found.subset':                   buildSubsetScene,
+  'math.found.proper-subset':            buildProperSubsetScene,
+  'math.found.set-equality':             buildSetEqualityScene,
+  'math.found.union':                    buildUnionScene,
+  'math.found.intersection':             buildIntersectionScene,
+  'math.found.set-difference':           buildSetDifferenceScene,
+  'math.found.complement':               buildComplementScene,
+  'math.found.venn-diagram':             buildVennDiagramScene,
+  'math.found.hasse-diagram':            buildHasseDiagramScene,
+  'math.found.irrational-numbers':       buildIrrationalNumbersScene,
+  'math.found.complex-numbers':          buildComplexNumbersScene,
+
+  // Mathematics visual campaign, batch 16 (2026-10-12). See mathCoreScenesB16.ts.
+  'math.arith.counting':                 buildCountingScene,
+  'math.arith.subitizing':               buildSubitizingScene,
+  'math.arith.expanded-form':            buildExpandedFormScene,
+  'math.arith.multiplication-table':     buildMultiplicationTableScene,
+  'math.arith.long-multiplication':      buildLongMultiplicationScene,
+  'math.arith.fraction-multiplication':  buildFractionMultiplicationScene,
+  'math.arith.mixed-numbers':            buildMixedNumbersScene,
+  'math.arith.proportion':               buildProportionScene,
+  'math.arith.rounding':                 buildRoundingScene,
+  'math.arith.square-numbers':           buildSquareNumbersScene,
+  'math.arith.cube-numbers':             buildCubeNumbersScene,
+  'math.arith.square-roots':             buildSquareRootsScene,
+
+  // Mathematics visual campaign, batch 17 (2026-10-12). See mathCoreScenesB17.ts. The two algebra concepts below share
+  // the batch-2 figures of their math.func.* twins: the same KG statement (f(x) = a^x and its inverse log_a x).
+  'math.alg.exponential-function':       buildExponentialFunctionScene,
+  'math.alg.logarithm':                  buildLogarithmicFunctionScene,
+  'math.alg.fundamental-theorem-algebra': buildFundamentalTheoremAlgebraScene,
+  'math.alg.rational-inequality':        buildRationalInequalityScene,
+  'math.alg.pascals-triangle':           buildPascalsTriangleScene,
+  'math.nt.sieve-of-eratosthenes':       buildSieveOfEratosthenesScene,
+  'math.nt.modular-arithmetic':          buildModularArithmeticScene,
+  'math.seq.convergent':                 buildConvergentSequenceScene,
+  'math.seq.divergent-sequence':         buildDivergentSequenceScene,
+  'math.seq.geometric-series':           buildGeometricSeriesScene,
+  'math.seq.comparison-test':            buildComparisonTestScene,
+  'math.seq.integral-test':              buildIntegralTestScene,
+  'math.seq.alternating-series':         buildAlternatingSeriesScene,
+
+  // Mathematics visual campaign, batch 18 (2026-10-12). See mathCoreScenesB18.ts. The three math.graph.* concepts below share
+  // the figures of their math.disc.* twins (graph = degrees / handshaking, tree, colouring: the same KG statements).
+  'math.disc.graph':                     buildGraphScene,
+  'math.disc.graph-types':               buildGraphTypesScene,
+  'math.disc.graph-representation':      buildGraphRepresentationScene,
+  'math.disc.graph-connectivity':        buildGraphConnectivityScene,
+  'math.disc.euler-hamiltonian':         buildEulerHamiltonianScene,
+  'math.disc.graph-trees':               buildGraphTreesScene,
+  'math.disc.spanning-tree':             buildSpanningTreeScene,
+  'math.disc.graph-coloring':            buildGraphColoringScene,
+  'math.disc.planar-graph':              buildPlanarGraphScene,
+  'math.disc.stars-bars':                buildStarsBarsScene,
+  'math.disc.inclusion-exclusion':       buildInclusionExclusionScene,
+  'math.disc.asymptotic-notation':       buildAsymptoticNotationScene,
+  'math.graph.graph':                    buildGraphScene,
+  'math.graph.tree':                     buildGraphTreesScene,
+  'math.graph.graph-coloring':           buildGraphColoringScene,
+
+  // Mathematics visual campaign, batch 19 (2026-10-12). See mathCoreScenesB19.ts. math.num.euler-method shares the figure of
+  // math.de.euler-method (the same y_{n+1} = y_n + h f(x_n, y_n) statement).
+  'math.de.slope-field':                 buildSlopeFieldScene,
+  'math.de.euler-method':                buildEulerMethodScene,
+  'math.num.euler-method':               buildEulerMethodScene,
+  'math.de.harmonic-oscillator':         buildHarmonicOscillatorScene,
+  'math.de.resonance':                   buildResonanceScene,
+  'math.de.stability-analysis':          buildStabilityAnalysisScene,
+  'math.de.fourier-series':              buildFourierSeriesScene,
+  'math.de.fourier-convergence':         buildFourierConvergenceScene,
+  'math.de.fourier-sine-cosine':         buildFourierSineCosineScene,
+  'math.de.pde':                         buildPdeScene,
+  'math.de.heat-equation':               buildHeatEquationScene,
+  'math.de.wave-equation':               buildWaveEquationScene,
+  'math.de.laplace-equation':            buildLaplaceEquationScene,
+
+  // Mathematics visual campaign, batch 20 (2026-10-12). See mathCoreScenesB20.ts.
+  'math.calc.multivariable-intro':       buildMultivariableIntroScene,
+  'math.calc.partial-derivatives':       buildPartialDerivativesScene,
+  'math.calc.gradient':                  buildGradientScene,
+  'math.calc.directional-derivative':    buildDirectionalDerivativeScene,
+  'math.calc.multivariable-extrema':     buildMultivariableExtremaScene,
+  'math.calc.vector-fields':             buildVectorFieldsScene,
+  'math.calc.curl-divergence':           buildCurlDivergenceScene,
+  'math.calc.line-integrals':            buildLineIntegralsScene,
+  'math.calc.change-of-variables':       buildChangeOfVariablesScene,
+  'math.calc.double-integrals':          buildDoubleIntegralsScene,
+  'math.calc.multiple-integrals':        buildMultipleIntegralsScene,
+  'math.calc.triple-integrals':          buildTripleIntegralsScene,
+  'math.calc.surface-integrals':         buildSurfaceIntegralsScene,
+  'math.calc.divergence-theorem':        buildDivergenceTheoremScene,
+
+  // Mathematics visual campaign, batch 21 (2026-10-12). See mathCoreScenesB21.ts.
+  'math.disc.boolean-circuits':          buildBooleanCircuitsScene,
+  'math.graph.connectivity':             buildVertexConnectivityScene,
+  'math.graph.maximum-flow':             buildMaximumFlowScene,
+  'math.graph.matching':                 buildMatchingScene,
+  'math.real.sup-inf':                   buildSupInfScene,
+  'math.real.convergence-sequences':     buildConvergenceSequencesScene,
+  'math.real.cauchy-sequence':           buildCauchySequenceScene,
+  'math.real.open-sets':                 buildOpenSetsScene,
+  'math.real.continuity-rigorous':       buildContinuityRigorousScene,
+  'math.real.uniform-continuity':        buildUniformContinuityScene,
+  'math.real.riemann-integral':          buildRiemannIntegralScene,
+  'math.real.uniform-convergence':       buildUniformConvergenceScene,
+  'math.real.pointwise-convergence':     buildPointwiseConvergenceScene,
+
+  // Mathematics visual campaign, batch 22 (2026-10-12). See mathCoreScenesB22.ts.
+  'math.cx.complex-numbers-analysis':    buildComplexNumbersAnalysisScene,
+  'math.cx.complex-integration':         buildComplexIntegrationScene,
+  'math.cx.cauchy-theorem':              buildCauchyTheoremScene,
+  'math.cx.residue-theorem':             buildResidueTheoremScene,
+  'math.cx.real-integral-residues':      buildRealIntegralResiduesScene,
+  'math.cx.mobius-transformation':       buildMobiusTransformationScene,
+  'math.cx.riemann-surface':             buildRiemannSurfaceScene,
+  'math.top.open-sets':                  buildTopologyOpenSetsScene,
+  'math.top.homeomorphism':              buildHomeomorphismScene,
+  'math.top.quotient-space':             buildQuotientSpaceScene,
+  'math.top.homotopy':                   buildHomotopyScene,
+  'math.top.fundamental-group':          buildFundamentalGroupScene,
+  'math.top.euler-characteristic':       buildEulerCharacteristicScene,
+
+  // Mathematics visual campaign, batch 23 (2026-10-12). See mathCoreScenesB23.ts.
+  'math.opt.unconstrained-optimization': buildUnconstrainedOptimizationScene,
+  'math.opt.convex-function':            buildConvexFunctionScene,
+  'math.opt.convex-set':                 buildConvexSetScene,
+  'math.opt.linear-programming':         buildLinearProgrammingScene,
+  'math.opt.lagrange-multipliers':       buildLagrangeMultipliersScene,
+  'math.opt.gradient-methods':           buildGradientMethodsScene,
+  'math.num.newtons-method':             buildNewtonsMethodScene,
+  'math.num.interpolation':              buildInterpolationScene,
+  'math.num.numerical-differentiation':  buildNumericalDifferentiationScene,
+  'math.num.numerical-integration':      buildNumericalIntegrationScene,
+  'math.func.real-valued-function':      buildRealValuedFunctionScene,
+  'math.func.rational-root':             buildRationalRootScene,
+  'math.top.manifold':                   buildTopologicalManifoldScene,
+
+  // Mathematics visual campaign, batch 24 (2026-10-12), the last essential-tier batch. See mathCoreScenesB24.ts.
+  'math.top.smooth-manifold':            buildSmoothManifoldScene,
+  'math.cat.category':                   buildCategoryScene,
+  'math.cat.morphism-types':             buildMorphismTypesScene,
+  'math.cat.functor':                    buildFunctorScene,
+  'math.cat.natural-transformation':     buildNaturalTransformationScene,
+  'math.geom.platonic-solids':           buildPlatonicSolidsScene,
+  'math.geom.differential-geometry-curves': buildCurvesInSpaceScene,
+  'math.geom.frenet-serret':             buildFrenetSerretScene,
+  'math.meas.simple-function':           buildSimpleFunctionScene,
+  'math.meas.lebesgue-integral':         buildLebesgueIntegralScene,
+  'math.abst.cyclic-group':              buildCyclicGroupScene,
+  'math.fnal.convolution':               buildConvolutionScene,
+
+  // Mathematics visual campaign, batch 25 (2026-10-12), first helpful-tier batch. See mathCoreScenesB25.ts.
+  'math.found.set-membership':           buildSetMembershipScene,
+  'math.found.empty-set':                buildEmptySetScene,
+  'math.found.finite-set':               buildFiniteSetScene,
+  'math.found.set-operations':           buildSetOperationsScene,
+  'math.found.power-set':                buildPowerSetScene,
+  'math.found.cartesian-product':        buildCartesianProductScene,
+  'math.found.ordered-pair':             buildOrderedPairScene,
+  'math.found.relation':                 buildRelationScene,
+  'math.found.reflexive-relation':       buildReflexiveRelationScene,
+  'math.found.symmetric-relation':       buildSymmetricRelationScene,
+  'math.found.transitive-relation':      buildTransitiveRelationScene,
+  'math.found.equivalence-class':        buildEquivalenceClassScene,
+  'math.found.partition':                buildPartitionScene,
+
+  // Mathematics visual campaign, batch 26 (2026-10-12). See mathCoreScenesB26.ts.
+  'math.found.partial-order':            buildPartialOrderScene,
+  'math.found.total-order':              buildTotalOrderScene,
+  'math.found.function-set-theoretic':   buildSetTheoreticFunctionScene,
+  'math.found.cardinality':              buildCardinalityScene,
+  'math.found.countable-set':            buildCountableSetScene,
+  'math.found.uncountable-set':          buildUncountableSetScene,
+  'math.found.natural-numbers':          buildNaturalNumbersScene,
+  'math.found.ordinal-number':           buildOrdinalNumberScene,
+  'math.found.proof-by-induction':       buildProofByInductionScene,
+  'math.found.strong-induction':         buildStrongInductionScene,
+  'math.found.truth-table':              buildTruthTableScene,
+  'math.found.logical-equivalence':      buildLogicalEquivalenceScene,
+
+  // Mathematics visual campaign, batch 27 (2026-10-12). See mathCoreScenesB27.ts.
+  'math.arith.addition':                 buildAdditionScene,
+  'math.arith.subtraction':              buildSubtractionScene,
+  'math.arith.counting-sequence':        buildCountingSequenceScene,
+  'math.arith.column-addition':          buildColumnAdditionScene,
+  'math.arith.divisor-dividend':         buildDivisorDividendScene,
+  'math.arith.remainder':                buildRemainderScene,
+  'math.arith.long-division':            buildLongDivisionScene,
+  'math.arith.exponentiation':           buildExponentiationScene,
+  'math.arith.exponent-rules':           buildExponentRulesScene,
+  'math.arith.scientific-notation':      buildScientificNotationScene,
+  'math.arith.percentage-calculations':  buildPercentageCalculationsScene,
+  'math.arith.unit-rate':                buildUnitRateScene,
+  'math.arith.estimation':               buildEstimationScene,
+
+  // Mathematics visual campaign, batch 28 (2026-10-12). See mathCoreScenesB28.ts.
+  'math.arith.fraction-reciprocal':      buildReciprocalScene,
+  'math.arith.decimal-operations':       buildDecimalOperationsScene,
+  'math.arith.terminating-decimals':     buildTerminatingDecimalsScene,
+  'math.arith.repeating-decimals':       buildRepeatingDecimalsScene,
+  'math.arith.irrational-roots':         buildIrrationalRootsScene,
+  'math.alg.equation':                   buildEquationScene,
+  'math.alg.solution-set':               buildSolutionSetScene,
+  'math.alg.substitution-method':        buildSubstitutionMethodScene,
+  'math.alg.elimination-method':         buildEliminationMethodScene,
+  'math.alg.degree':                     buildDegreeScene,
+  'math.alg.polynomial-operations':      buildPolynomialOperationsScene,
+  'math.alg.polynomial-division':        buildPolynomialDivisionScene,
+  'math.alg.factoring':                  buildFactoringScene,
+  'math.alg.factoring-trinomials':       buildFactoringTrinomialsScene,
+
+  // Mathematics visual campaign, batch 29 (2026-10-12). See mathCoreScenesB29.ts.
+  'math.alg.quadratic-formula':          buildQuadraticFormulaScene,
+  'math.alg.fractional-exponent':        buildFractionalExponentScene,
+  'math.alg.radicals':                   buildRadicalsScene,
+  'math.alg.exponential-equations':      buildExponentialEquationsScene,
+  'math.alg.logarithm-properties':       buildLogarithmPropertiesScene,
+  'math.alg.natural-logarithm':          buildNaturalLogarithmScene,
+  'math.alg.logarithmic-equations':      buildLogarithmicEquationsScene,
+  'math.alg.binomial-theorem':           buildBinomialTheoremScene,
+  'math.nt.divisibility':                buildDivisibilityScene,
+  'math.nt.prime-number':                buildPrimeNumberScene,
+  'math.nt.composite-number':            buildCompositeNumberScene,
+  'math.nt.prime-factorization':         buildPrimeFactorizationScene,
+  'math.nt.gcd':                         buildGcdScene,
+
+  // Mathematics visual campaign, batch 30 (2026-10-12). See mathCoreScenesB30.ts.
+  'math.nt.euclidean-algorithm':         buildEuclideanAlgorithmScene,
+  'math.nt.lcm':                         buildLcmScene,
+  'math.nt.congruence':                  buildCongruenceScene,
+  'math.nt.residue-classes':             buildResidueClassesScene,
+  'math.nt.pythagorean-triples':         buildPythagoreanTriplesScene,
+  'math.nt.prime-distribution':          buildPrimeDistributionScene,
+  'math.nt.prime-number-theorem':        buildPrimeNumberTheoremScene,
+  'math.nt.continued-fractions':         buildContinuedFractionsScene,
+  'math.abst.algebraic-structure':       buildAlgebraicStructureScene,
+  'math.abst.binary-operation':          buildBinaryOperationScene,
+  'math.abst.group-theory':              buildGroupTheoryScene,
+  'math.abst.group-operation':           buildGroupOperationScene,
+  'math.abst.subgroup':                  buildSubgroupScene,
+
+  // Mathematics visual campaign, batch 31 (2026-10-12). See mathCoreScenesB31.ts.
+  'math.abst.coset':                     buildCosetScene,
+  'math.abst.normal-subgroup':           buildNormalSubgroupScene,
+  'math.abst.quotient-group':            buildQuotientGroupScene,
+  'math.abst.group-homomorphism':        buildGroupHomomorphismScene,
+  'math.abst.group-isomorphism':         buildGroupIsomorphismScene,
+  'math.abst.group-action':              buildGroupActionScene,
+  'math.abst.symmetric-group':           buildSymmetricGroupScene,
+  'math.abst.field-extension':           buildFieldExtensionScene,
+  'math.linalg.matrix':                  buildMatrixScene,
+  'math.linalg.matrix-addition':         buildMatrixAdditionScene,
+  'math.linalg.matrix-multiplication':   buildMatrixMultiplicationScene,
+  'math.linalg.matrix-transpose':        buildMatrixTransposeScene,
+  'math.linalg.symmetric-matrix':        buildSymmetricMatrixScene,
+
+  // Mathematics visual campaign, batch 32 (2026-10-12). See mathCoreScenesB32.ts.
+  'math.linalg.augmented-matrix':        buildAugmentedMatrixScene,
+  'math.linalg.rank':                    buildRankScene,
+  'math.linalg.matrix-inverse':          buildMatrixInverseScene,
+  'math.linalg.vector-space':            buildVectorSpaceScene,
+  'math.linalg.dimension':               buildDimensionScene,
+  'math.linalg.matrix-representation':   buildMatrixRepresentationScene,
+  'math.linalg.diagonalization':         buildDiagonalizationScene,
+  'math.linalg.spectral-theorem':        buildSpectralTheoremScene,
+  'math.linalg.inner-product':           buildInnerProductScene,
+  'math.linalg.inner-product-space':     buildInnerProductSpaceScene,
+  'math.linalg.qr-factorization':        buildQrFactorizationScene,
+  'math.linalg.singular-values':         buildSingularValuesScene,
+  'math.linalg.tensor':                  buildTensorScene,
 
   // The Punnett generator is single-gene by construction (genotypes are two
   // alleles). A dihybrid cross drawn as a monohybrid square teaches the wrong
@@ -851,6 +1484,34 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   // generators only; every label is taken from the concept's own EB entry
   // (educational-brain/concepts/chemistry/<id>.md, Core Understanding).
   // CHEM-086: "Phase Diagrams" served no figure on any of 18 turns.
+  // CHEM-095: the introductory "Ionic Bonding" lesson was taught from a
+  // live-generated five-box Born–Haber "cycle" (sublimation … lattice
+  // formation) before the learner had met the ionic bond. The concept's
+  // figure is the electron transfer itself.
+  'chem.bond.ionic-bonding': () => buildCellPathwayScene({
+    conceptId: 'chem.bond.ionic-bonding',
+    title: 'Ionic Bonding: One Electron Moves from Na to Cl',
+    teachingGoal: 'A metal atom gives an electron to a non-metal atom; the two ions have opposite charges and attract — that attraction is the ionic bond.',
+    stages: [
+      { name: 'Na atom (2,8,1)', description: 'sodium has one electron in its outer shell' },
+      { name: 'Electron transferred', description: 'Na gives that electron to Cl (2,8,7)' },
+      { name: 'Na⁺ (2,8) and Cl⁻ (2,8,8)', description: 'each ion now has a full outer shell; charges +1 and −1' },
+      { name: 'Opposite charges attract', description: 'the electrostatic attraction is the ionic bond; ions pack in a lattice (NaCl)' },
+    ],
+  }),
+  // CHEM-013: the live-generated "Nature of Matter" scene drew a compound and
+  // a mixture the same way (two touching spheres each). Each class gets its
+  // own column, worded from the EB entry's Core Understanding.
+  'chem.found.matter': () => buildCellComparisonScene({
+    conceptId: 'chem.found.matter',
+    title: 'Elements, Compounds and Mixtures',
+    teachingGoal: 'An element has one kind of atom; a compound has two or more elements chemically combined in a fixed ratio; a mixture holds substances that keep their own properties and can be separated physically.',
+    groups: [
+      { label: 'Element', description: 'pure: one kind of atom', items: ['e.g. iron, oxygen (O₂)', 'fixed melting and boiling point'] },
+      { label: 'Compound', description: 'pure: elements chemically bonded in a fixed ratio', items: ['e.g. water, H₂O — always 8 g O : 1 g H', 'separated only by a chemical reaction'] },
+      { label: 'Mixture', description: 'two or more substances, not bonded', items: ['e.g. salt water, air', 'any ratio; each part keeps its properties', 'separated physically (filter, evaporate, distil)'] },
+    ],
+  }),
   'chem.state.phase-diagram': () => buildCellComparisonScene({
     conceptId: 'chem.state.phase-diagram',
     gridFromGroups: 4, // four groups of long clauses: a 2x2 grid, not four columns ~85px apart on a phone
