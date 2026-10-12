@@ -1,5 +1,7 @@
 # Mathematics visual campaign (2026-10-11, owner instruction: "Run one batch of 12 Mathematics visuals first. Show me also every visual.")
 
+> **Current state, resume commands and the per-batch loop: [`MATHEMATICS_VISUAL_HANDOVER.md`](./MATHEMATICS_VISUAL_HANDOVER.md) (generated status block, refreshed every batch).** This file is the long per-batch log.
+
 Mathematics content work was paused (CLAUDE.md); this batch runs on that explicit fresh instruction. It is a **pilot**: one batch of
 12 to measure how much work a batch is, before the owner decides on the rest.
 
