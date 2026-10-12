@@ -1341,6 +1341,36 @@ Next (batch 38): the 7 sequences-and-series helpers — sequence, arithmetic-seq
 alternating-series: do not repeat them) plus 4 of the real-analysis helpers — metric-space, compactness, connectedness, riemann-integrability — then real (3 left), meas (6), top (4), opt (4), geom (4), func (4), cx (4), graph (3), fnal (3),
 trig (2), cat (2), num (1); then tier N (352) if still wanted. List what is left with `npx tsx scripts/math/visual-coverage.ts --list H`.
 
+# Batch 38 (2026-10-12): sequences and series + four real-analysis helpers (11 figures)
+
+`sceneGenerators/mathCoreScenesB38.ts` + `mathCoreScenesBatch38.test.ts` (112 checks); campaign audit threshold now 470. Coverage after this batch:
+516 of 908 concepts with a fixed figure (56.8%); essential tier 344 / 346 (complete), tier H 170 / 210 (81.0%), tier N 2 / 352; target (E + H) 514 / 556 = 92.4%.
+Pre-push checklist: full `npx vitest run`, `scripts/ci/tsc-ratchet.sh` 0 errors, `validate-visualization-coverage.ts` PASS, `scripts/math/label-displacement.ts mathCoreScenesB38` (0 unresolved, 0 card-host moves),
+`scripts/math/campaign-tools/audit-module.ts mathCoreScenesB38` (11 / 11 admitted). Mutation check: eleven deliberate wrong numbers (dots off the squares, an AP step of 3, a last term 6, a partial-sum ratio 0.4, a non-AP series, a shifted limit line,
+a shortened harmonic bar, a 4.5 leg, a cover ending at 0.95, a smaller gap, a moved jump) each made at least one test fail. The tests also caught a REAL defect while the figures were being written: the grey guide line of the
+arithmetic-sequence figure had slope 2.35, not 2, so it missed the dots (the test measured the distance of every drawn dot to the drawn line).
+
+| Concept | Figure |
+|---|---|
+| math.seq.sequence | aₙ = n²: five isolated dots (n, aₙ) at 1, 4, 9, 16, 25 — nothing joins them; the dot over n = 3 is a₃ = 9 |
+| math.seq.arithmetic-sequence | aₙ = 3 + 2(n − 1): dots 3, 5, 7, 9, 11 on one straight line; four equal runs (violet) and rises (red) +2; d = 2, a₅ = 3 + 8 = 11 |
+| math.seq.series | the terms 1, 2, 3, 4, 5 laid end to end as coloured segments; the running totals 1, 3, 6, 10, 15 under the ends; the series 1 + 2 + 3 + 4 + 5 = 15 |
+| math.seq.partial-sums | Σ 1/2ⁿ: dots S₁ … S₆ = 0.5, 0.75, 0.875, … under the violet limit 1, red gaps halving; S₂ = 0.5 + 0.25 = 0.75, S₃ = 0.75 + 0.125 = 0.875 |
+| math.seq.arithmetic-series | bars 3, 5, 7, 9, 11 plus the reversed copy stacked on top: every column is 14, 5 columns = 70, S₅ = 5 × 14 ÷ 2 = 35 |
+| math.seq.series-convergence | left: partial sums of Σ 1/n² level off below π²/6 ≈ 1.645; right: 1 − 1 + 1 − … gives 1, 0, 1, 0, … and settles nowhere |
+| math.seq.harmonic-series | bars 1/n for n = 1…8; the groups {3, 4} and {5…8} each add up to more than 0.5; H₈ = 2.72 is above 1 + 1.5 = 2.5 |
+| math.real.metric-space | right triangle x, y, z with the distances 3, 4, 5; 5 ≤ 3 + 4 (the detour through x is 7); the taxicab distance of y and z is 3 + 4 = 7 |
+| math.real.compactness | [0, 1] covered by three open intervals (finite subcover); (0, 1] with the intervals (1/k, 1.2) leaves (0, 1/4] uncovered — compact ⟺ closed and bounded |
+| math.real.connectedness | [0, 3] cut at 1.5: the parts touch; [0, 1] ∪ [2, 3] has a gap with a cut in it; f(x) = 2x − 1 maps [0, 3] onto one piece [−1, 5] |
+| math.real.riemann-integrability | f = 1 then 2 with a jump at 0.4: the cell holding the jump is 1/n wide, so U − L = 1 × 1/n = 0.25, 0.125, 0.0625 for n = 4, 8, 16 → 0; integral 1.6 |
+
+Notes: twins checked first — `math.seq.geometric-sequence`, `divergent-sequence`, `geometric-series`, `alternating-series` and `math.real.convergence-sequences`, `cauchy-sequence`, `riemann-integral` already have figures, so none of these repeat them.
+Draw a guide line through its dots by the SAME formula (`apsTerm(0.7)`, not an estimated offset) — and always test the distance of every dot to it. The claim "each group of 2ᵏ⁻¹ terms adds more than 1/2" holds from k = 2: the first group {2} is exactly 1/2.
+Long captions (~25 characters) need the label's centre ≤ ≈ 3.0 world units at the card's right edge or the solver moves them; keep captions out of the lane between a guide and an axis (needs ≥ 0.35 clearance on both sides); a caption near the right end of a line needs ≥ 1.8 units from the line end.
+
+Next (batch 39): the 3 remaining real-analysis helpers — differentiability-rigorous, taylor-rigorous, ftc-rigorous — plus the 6 measure-theory helpers (measure, lebesgue-measure, measure-zero, convergence-theorems, lp-space, l2-space) and the 4 topology helpers
+(topological-space, product-space, homotopy-equivalence, homology), then opt (4), geom (4), func (4), cx (4), graph (3), fnal (3), trig (2), cat (2), num (1); then tier N (352) if still wanted. List what is left with `npx tsx scripts/math/visual-coverage.ts --list H`.
+
 # Deferred follow-up — do AFTER the Mathematics figure campaign (recorded 2026-10-12 at the owner's request)
 
 Context: the owner said another account was "validating visuals for all 4 subjects". A read-only audit of the last 10 days (2026-10-02 → 10-12) on `origin/main` and every remote branch found:

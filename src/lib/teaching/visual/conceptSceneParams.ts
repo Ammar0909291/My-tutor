@@ -313,6 +313,11 @@ import {
   buildSampleSpaceScene, buildClassicalProbabilityScene, buildCombinatorialProbabilityScene, buildIndependenceScene,
   buildRandomVariableScene, buildExpectedValueScene, buildMarkovInequalityScene, buildTransitionMatrixScene, buildPoissonProcessScene,
 } from '@/lib/teaching/sceneGenerators/mathCoreScenesB37'
+import {
+  buildSequenceScene, buildArithmeticSequenceScene, buildSeriesScene, buildPartialSumsScene, buildArithmeticSeriesScene,
+  buildSeriesConvergenceScene, buildHarmonicSeriesScene, buildMetricSpaceScene, buildCompactnessScene, buildConnectednessScene,
+  buildRiemannIntegrabilityScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB38'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -1011,6 +1016,19 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'math.prob.markov-inequality':         buildMarkovInequalityScene,
   'math.prob.transition-matrix':         buildTransitionMatrixScene,
   'math.prob.poisson-process':           buildPoissonProcessScene,
+
+  // Mathematics visual campaign, batch 38 (2026-10-12). See mathCoreScenesB38.ts.
+  'math.seq.sequence':                   buildSequenceScene,
+  'math.seq.arithmetic-sequence':        buildArithmeticSequenceScene,
+  'math.seq.series':                     buildSeriesScene,
+  'math.seq.partial-sums':               buildPartialSumsScene,
+  'math.seq.arithmetic-series':          buildArithmeticSeriesScene,
+  'math.seq.series-convergence':         buildSeriesConvergenceScene,
+  'math.seq.harmonic-series':            buildHarmonicSeriesScene,
+  'math.real.metric-space':              buildMetricSpaceScene,
+  'math.real.compactness':               buildCompactnessScene,
+  'math.real.connectedness':             buildConnectednessScene,
+  'math.real.riemann-integrability':     buildRiemannIntegrabilityScene,
 
   // The Punnett generator is single-gene by construction (genotypes are two
   // alleles). A dihybrid cross drawn as a monohybrid square teaches the wrong
