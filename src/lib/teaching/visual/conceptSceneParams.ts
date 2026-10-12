@@ -170,6 +170,11 @@ import {
   buildMeasuresOfSpreadScene, buildPercentileScene, buildSamplingDistributionScene, buildConfidenceIntervalScene, buildCiMeanScene,
   buildCiProportionScene, buildHypothesisTestingScene,
 } from '@/lib/teaching/sceneGenerators/mathCoreScenesB9'
+import {
+  buildPValueScene, buildTypeErrorsScene, buildStatisticalPowerScene, buildAnovaScene, buildStatsCorrelationScene, buildLinearRegressionScene,
+  buildNormalApproximationScene, buildCurveSketchingScene, buildVolumeRevolutionScene, buildSurfaceAreaIntegralScene,
+  buildParametricCalculusScene, buildPeriodicFunctionScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB10'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -459,6 +464,20 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'math.stats.ci-mean':                  buildCiMeanScene,
   'math.stats.ci-proportion':            buildCiProportionScene,
   'math.stats.hypothesis-testing':       buildHypothesisTestingScene,
+
+  // Mathematics visual campaign, batch 10 (2026-10-12). See mathCoreScenesB10.ts.
+  'math.stats.p-value':                  buildPValueScene,
+  'math.stats.type-errors':              buildTypeErrorsScene,
+  'math.stats.power':                    buildStatisticalPowerScene,
+  'math.stats.anova':                    buildAnovaScene,
+  'math.stats.correlation':              buildStatsCorrelationScene,
+  'math.stats.linear-regression':        buildLinearRegressionScene,
+  'math.stats.normal-approximation':     buildNormalApproximationScene,
+  'math.calc.curve-sketching':           buildCurveSketchingScene,
+  'math.calc.volume-revolution':         buildVolumeRevolutionScene,
+  'math.calc.surface-area-integral':     buildSurfaceAreaIntegralScene,
+  'math.calc.parametric-calculus':       buildParametricCalculusScene,
+  'math.func.periodic-function':         buildPeriodicFunctionScene,
 
   // The Punnett generator is single-gene by construction (genotypes are two
   // alleles). A dihybrid cross drawn as a monohybrid square teaches the wrong
