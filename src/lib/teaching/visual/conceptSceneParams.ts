@@ -322,6 +322,11 @@ import {
   buildDifferentiabilityRigorousScene, buildTaylorRigorousScene, buildFtcRigorousScene, buildMeasureScene,
   buildLebesgueMeasureScene, buildMeasureZeroScene, buildConvergenceTheoremsScene, buildLpSpaceScene, buildL2SpaceScene,
 } from '@/lib/teaching/sceneGenerators/mathCoreScenesB39'
+import {
+  buildTopologicalSpaceScene, buildProductSpaceScene, buildHomotopyEquivalenceScene, buildHomologyScene,
+  buildConvexOptimizationScene, buildQuadraticProgrammingScene, buildIntegerProgrammingScene, buildDynamicProgrammingScene,
+  buildNormedSpaceScene, buildDistributionsScene, buildSpecialFunctionsScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB40'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -1044,6 +1049,19 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'math.meas.convergence-theorems':      buildConvergenceTheoremsScene,
   'math.meas.lp-space':                  buildLpSpaceScene,
   'math.meas.l2-space':                  buildL2SpaceScene,
+
+  // Mathematics visual campaign, batch 40 (2026-10-13). See mathCoreScenesB40.ts.
+  'math.top.topological-space':          buildTopologicalSpaceScene,
+  'math.top.product-space':              buildProductSpaceScene,
+  'math.top.homotopy-equivalence':       buildHomotopyEquivalenceScene,
+  'math.top.homology':                   buildHomologyScene,
+  'math.opt.convex-optimization':        buildConvexOptimizationScene,
+  'math.opt.quadratic-programming':      buildQuadraticProgrammingScene,
+  'math.opt.integer-programming':        buildIntegerProgrammingScene,
+  'math.opt.dynamic-programming':        buildDynamicProgrammingScene,
+  'math.fnal.normed-space':              buildNormedSpaceScene,
+  'math.fnal.distributions':             buildDistributionsScene,
+  'math.fnal.special-functions':         buildSpecialFunctionsScene,
 
   // The Punnett generator is single-gene by construction (genotypes are two
   // alleles). A dihybrid cross drawn as a monohybrid square teaches the wrong
