@@ -10,7 +10,7 @@
  */
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 import { chromium, type Browser, type Page } from 'playwright'
-import { replyKey, selectTargetFigure, markFigure } from '../../scripts/qa/physicsVisual/figureAssociation'
+import { replyKey, replyKeys, selectTargetFigure, markFigure } from '../../scripts/qa/physicsVisual/figureAssociation'
 import { findChromium, REQUIRE_BROWSER } from './helpers/chromiumPath'
 
 const CHROMIUM = findChromium()
@@ -25,7 +25,7 @@ const REPLY = {
 }
 const stepsOf = (t: string) => t.split(/[.!?]+\s+/).filter(Boolean).length
 
-type Msg = { text: string; figure?: 'card' | 'scene' | '3d-card'; tag?: string }
+type Msg = { text: string; figure?: 'card' | 'scene' | '3d-card'; tag?: string; collapsed?: number }
 /** A lesson page as /learn renders it: a message block (text + its figure frame) per reply, oldest first. */
 function lessonPage(msgs: Msg[], layout: 'stacked' | 'canvas' = 'stacked'): string {
   const fig = (m: Msg, i: number) => {
@@ -35,7 +35,7 @@ function lessonPage(msgs: Msg[], layout: 'stacked' | 'canvas' = 'stacked'): stri
     return ''
   }
   const block = (m: Msg, i: number) => layout === 'stacked'
-    ? `<div class="msg" data-message-id="m${i}"><div class="bubble">${m.text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/_(.+?)_/g, '<em>$1</em>')}</div>${fig(m, i)}</div>`
+    ? `<div class="msg" data-message-id="m${i}"><div class="bubble">${(m.collapsed ? m.text.slice(0, m.collapsed) + '…</div><button>Read more →</button><div>' : m.text).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/_(.+?)_/g, '<em>$1</em>')}</div>${fig(m, i)}</div>`
     : `<div class="msg" data-message-id="m${i}"><div class="left"><div class="bubble">${m.text}</div></div><div class="right">${fig(m, i)}</div></div>`
   return `<!doctype html><html><body><div id="list">${msgs.map(block).join('')}</div></body></html>`
 }
@@ -79,6 +79,32 @@ suite('the harness measures the figure of the reply it asked for', { timeout: 60
     const selShort = await selectTargetFigure(page, { replyText: REPLY.short })
     expect(selShort.index).toBe(1)
     await page.context().close()
+  })
+
+  it('A LONG REPLY THE PAGE COLLAPSES BEHIND "Read more": the figure is still tied to its own message by the reply\'s opening', async () => {
+    // The first production run of the lens-power interaction: a 730-character reply whose longest run was past the cut, so the old
+    // key was not in the DOM and the scene could not be tied to its reply.
+    const long = 'Look at the top of the figure where it reads f equals 0.50 metres and the power P is plus two dioptres. Then follow the arrows down to the left hand label and the bottom left label. Finally see the right hand note and the bottom label which together show how the individual powers combine to give the total power and the resulting focal length of the pair of thin lenses placed in contact.'
+    const page = await open([{ text: REPLY.short, figure: 'card', tag: 'a' }, { text: long, figure: 'scene', tag: 'collapsed-target', collapsed: 130 }])
+    expect(await page.evaluate(`document.querySelectorAll('.msg')[1].innerText.includes('focal length of the pair')`)).toBe(false)
+    const sel = await selectTargetFigure(page, { replyText: long })
+    expect(sel).toMatchObject({ index: 1, kind: 'scene', selection: 'association', ambiguous: false, messageId: 'm1' })
+    await page.context().close()
+  })
+
+  it('a collapsed reply is still not tied to a NEIGHBOUR\'s figure: a reply that is nowhere on the page still throws', async () => {
+    const long = 'Look at the top of the figure where it reads f equals 0.50 metres and the power P is plus two dioptres and then follow the arrows down to the left hand label.'
+    const page = await open([{ text: REPLY.short, figure: 'card' }, { text: REPLY.mid, figure: 'card', collapsed: 40 }])
+    await expect(selectTargetFigure(page, { replyText: long })).rejects.toThrow(/NO_FIGURE_TIED_TO_REPLY/)
+    await page.context().close()
+  })
+
+  it('reply keys are most specific first, always include the opening, and are stable across markdown', () => {
+    const keys = replyKeys(REPLY.markdown)
+    expect(keys.length).toBeGreaterThan(0)
+    for (let i = 1; i < keys.length; i++) expect(keys[i - 1].length).toBeGreaterThanOrEqual(keys[i].length)
+    expect(keys).toEqual(replyKeys(REPLY.markdown.replace(/\*\*/g, '').replace(/_/g, '')))
+    expect(keys.some((k) => 'force is a push or a pull measured in n a diagram shows each force as an arrow with a label'.startsWith(k))).toBe(true)
   })
 
   it('a figure AFTER the target does not become the target (target is in the middle)', async () => {
