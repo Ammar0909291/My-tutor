@@ -1,0 +1,550 @@
+{
+ "base": "https://my-tutor-flame.vercel.app",
+ "mode": "legibility",
+ "subject": "physics",
+ "deployment": null,
+ "commit": "485f75d (pre-fix main; no message markers)",
+ "at": "2026-10-12T21:19:20.590Z",
+ "tally": {
+  "PASS": 8,
+  "FAIL": 8
+ },
+ "accountCleanup": {
+  "deleted": true,
+  "reloginBlocked": true
+ },
+ "rows": [
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "mobile",
+   "theme": "dark",
+   "step": "card 1/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 0,
+    "kind": "card",
+    "selection": "explicit",
+    "ambiguous": false,
+    "key": "",
+    "messageId": null
+   },
+   "markers": {
+    "index": 0,
+    "messageId": null,
+    "inViewport": true,
+    "top": 117,
+    "height": 320,
+    "legibilityMarker": false,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-before/shots/legibility__phys.mech.force__mobile__dark__card1.png",
+   "verdict": "PASS",
+   "deployment": null,
+   "commit": "485f75d (pre-fix main; no message markers)"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "mobile",
+   "theme": "dark",
+   "step": "card 2/4 scrolled into view",
+   "fails": [
+    "CT-01 \"Applied\" has 3.99:1 against its backdrop (needs 4.5:1)",
+    "CT-01 \"Friction\" has 3.61:1 against its backdrop (needs 4.5:1)"
+   ],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 1,
+    "kind": "card",
+    "selection": "explicit",
+    "ambiguous": false,
+    "key": "",
+    "messageId": null
+   },
+   "markers": {
+    "index": 1,
+    "messageId": null,
+    "inViewport": true,
+    "top": 117,
+    "height": 320,
+    "legibilityMarker": false,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-before/shots/legibility__phys.mech.force__mobile__dark__card2.png",
+   "verdict": "FAIL",
+   "deployment": null,
+   "commit": "485f75d (pre-fix main; no message markers)"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "mobile",
+   "theme": "dark",
+   "step": "card 3/4 scrolled into view",
+   "fails": [
+    "CT-01 \"Applied\" has 3.99:1 against its backdrop (needs 4.5:1)"
+   ],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 2,
+    "kind": "card",
+    "selection": "explicit",
+    "ambiguous": false,
+    "key": "",
+    "messageId": null
+   },
+   "markers": {
+    "index": 2,
+    "messageId": null,
+    "inViewport": true,
+    "top": 117,
+    "height": 320,
+    "legibilityMarker": false,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-before/shots/legibility__phys.mech.force__mobile__dark__card3.png",
+   "verdict": "FAIL",
+   "deployment": null,
+   "commit": "485f75d (pre-fix main; no message markers)"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "mobile",
+   "theme": "dark",
+   "step": "card 4/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 3,
+    "kind": "card",
+    "selection": "explicit",
+    "ambiguous": false,
+    "key": "",
+    "messageId": null
+   },
+   "markers": {
+    "index": 3,
+    "messageId": null,
+    "inViewport": true,
+    "top": 339,
+    "height": 320,
+    "legibilityMarker": false,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-before/shots/legibility__phys.mech.force__mobile__dark__card4.png",
+   "verdict": "PASS",
+   "deployment": null,
+   "commit": "485f75d (pre-fix main; no message markers)"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "mobile",
+   "theme": "light",
+   "step": "card 1/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 0,
+    "kind": "card",
+    "selection": "explicit",
+    "ambiguous": false,
+    "key": "",
+    "messageId": null
+   },
+   "markers": {
+    "index": 0,
+    "messageId": null,
+    "inViewport": true,
+    "top": 117,
+    "height": 320,
+    "legibilityMarker": false,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-before/shots/legibility__phys.mech.force__mobile__light__card1.png",
+   "verdict": "PASS",
+   "deployment": null,
+   "commit": "485f75d (pre-fix main; no message markers)"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "mobile",
+   "theme": "light",
+   "step": "card 2/4 scrolled into view",
+   "fails": [
+    "CT-01 \"Applied\" has 3.11:1 against its backdrop (needs 4.5:1)",
+    "CT-01 \"Friction\" has 3.43:1 against its backdrop (needs 4.5:1)"
+   ],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 1,
+    "kind": "card",
+    "selection": "explicit",
+    "ambiguous": false,
+    "key": "",
+    "messageId": null
+   },
+   "markers": {
+    "index": 1,
+    "messageId": null,
+    "inViewport": true,
+    "top": 117,
+    "height": 320,
+    "legibilityMarker": false,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-before/shots/legibility__phys.mech.force__mobile__light__card2.png",
+   "verdict": "FAIL",
+   "deployment": null,
+   "commit": "485f75d (pre-fix main; no message markers)"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "mobile",
+   "theme": "light",
+   "step": "card 3/4 scrolled into view",
+   "fails": [
+    "CT-01 \"Applied\" has 3.11:1 against its backdrop (needs 4.5:1)"
+   ],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 2,
+    "kind": "card",
+    "selection": "explicit",
+    "ambiguous": false,
+    "key": "",
+    "messageId": null
+   },
+   "markers": {
+    "index": 2,
+    "messageId": null,
+    "inViewport": true,
+    "top": 117,
+    "height": 320,
+    "legibilityMarker": false,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-before/shots/legibility__phys.mech.force__mobile__light__card3.png",
+   "verdict": "FAIL",
+   "deployment": null,
+   "commit": "485f75d (pre-fix main; no message markers)"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "mobile",
+   "theme": "light",
+   "step": "card 4/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 3,
+    "kind": "card",
+    "selection": "explicit",
+    "ambiguous": false,
+    "key": "",
+    "messageId": null
+   },
+   "markers": {
+    "index": 3,
+    "messageId": null,
+    "inViewport": true,
+    "top": 339,
+    "height": 320,
+    "legibilityMarker": false,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-before/shots/legibility__phys.mech.force__mobile__light__card4.png",
+   "verdict": "PASS",
+   "deployment": null,
+   "commit": "485f75d (pre-fix main; no message markers)"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "desktop-column",
+   "theme": "dark",
+   "step": "card 1/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 0,
+    "kind": "card",
+    "selection": "explicit",
+    "ambiguous": false,
+    "key": "",
+    "messageId": null
+   },
+   "markers": {
+    "index": 0,
+    "messageId": null,
+    "inViewport": true,
+    "top": 117,
+    "height": 413,
+    "legibilityMarker": false,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-before/shots/legibility__phys.mech.force__desktop-column__dark__card1.png",
+   "verdict": "PASS",
+   "deployment": null,
+   "commit": "485f75d (pre-fix main; no message markers)"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "desktop-column",
+   "theme": "dark",
+   "step": "card 2/4 scrolled into view",
+   "fails": [
+    "CT-01 \"Applied\" has 3.99:1 against its backdrop (needs 4.5:1)",
+    "CT-01 \"Friction\" has 3.61:1 against its backdrop (needs 4.5:1)"
+   ],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 1,
+    "kind": "card",
+    "selection": "explicit",
+    "ambiguous": false,
+    "key": "",
+    "messageId": null
+   },
+   "markers": {
+    "index": 1,
+    "messageId": null,
+    "inViewport": true,
+    "top": 117,
+    "height": 413,
+    "legibilityMarker": false,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-before/shots/legibility__phys.mech.force__desktop-column__dark__card2.png",
+   "verdict": "FAIL",
+   "deployment": null,
+   "commit": "485f75d (pre-fix main; no message markers)"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "desktop-column",
+   "theme": "dark",
+   "step": "card 3/4 scrolled into view",
+   "fails": [
+    "CT-01 \"Applied\" has 3.99:1 against its backdrop (needs 4.5:1)"
+   ],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 2,
+    "kind": "card",
+    "selection": "explicit",
+    "ambiguous": false,
+    "key": "",
+    "messageId": null
+   },
+   "markers": {
+    "index": 2,
+    "messageId": null,
+    "inViewport": true,
+    "top": 117,
+    "height": 413,
+    "legibilityMarker": false,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-before/shots/legibility__phys.mech.force__desktop-column__dark__card3.png",
+   "verdict": "FAIL",
+   "deployment": null,
+   "commit": "485f75d (pre-fix main; no message markers)"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "desktop-column",
+   "theme": "dark",
+   "step": "card 4/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 3,
+    "kind": "card",
+    "selection": "explicit",
+    "ambiguous": false,
+    "key": "",
+    "messageId": null
+   },
+   "markers": {
+    "index": 3,
+    "messageId": null,
+    "inViewport": true,
+    "top": 202,
+    "height": 413,
+    "legibilityMarker": false,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-before/shots/legibility__phys.mech.force__desktop-column__dark__card4.png",
+   "verdict": "PASS",
+   "deployment": null,
+   "commit": "485f75d (pre-fix main; no message markers)"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "desktop-column",
+   "theme": "light",
+   "step": "card 1/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 0,
+    "kind": "card",
+    "selection": "explicit",
+    "ambiguous": false,
+    "key": "",
+    "messageId": null
+   },
+   "markers": {
+    "index": 0,
+    "messageId": null,
+    "inViewport": true,
+    "top": 117,
+    "height": 413,
+    "legibilityMarker": false,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-before/shots/legibility__phys.mech.force__desktop-column__light__card1.png",
+   "verdict": "PASS",
+   "deployment": null,
+   "commit": "485f75d (pre-fix main; no message markers)"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "desktop-column",
+   "theme": "light",
+   "step": "card 2/4 scrolled into view",
+   "fails": [
+    "CT-01 \"Applied\" has 3.11:1 against its backdrop (needs 4.5:1)",
+    "CT-01 \"Friction\" has 3.43:1 against its backdrop (needs 4.5:1)"
+   ],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 1,
+    "kind": "card",
+    "selection": "explicit",
+    "ambiguous": false,
+    "key": "",
+    "messageId": null
+   },
+   "markers": {
+    "index": 1,
+    "messageId": null,
+    "inViewport": true,
+    "top": 117,
+    "height": 413,
+    "legibilityMarker": false,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-before/shots/legibility__phys.mech.force__desktop-column__light__card2.png",
+   "verdict": "FAIL",
+   "deployment": null,
+   "commit": "485f75d (pre-fix main; no message markers)"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "desktop-column",
+   "theme": "light",
+   "step": "card 3/4 scrolled into view",
+   "fails": [
+    "CT-01 \"Applied\" has 3.11:1 against its backdrop (needs 4.5:1)"
+   ],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 2,
+    "kind": "card",
+    "selection": "explicit",
+    "ambiguous": false,
+    "key": "",
+    "messageId": null
+   },
+   "markers": {
+    "index": 2,
+    "messageId": null,
+    "inViewport": true,
+    "top": 117,
+    "height": 413,
+    "legibilityMarker": false,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-before/shots/legibility__phys.mech.force__desktop-column__light__card3.png",
+   "verdict": "FAIL",
+   "deployment": null,
+   "commit": "485f75d (pre-fix main; no message markers)"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "desktop-column",
+   "theme": "light",
+   "step": "card 4/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 3,
+    "kind": "card",
+    "selection": "explicit",
+    "ambiguous": false,
+    "key": "",
+    "messageId": null
+   },
+   "markers": {
+    "index": 3,
+    "messageId": null,
+    "inViewport": true,
+    "top": 202,
+    "height": 413,
+    "legibilityMarker": false,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-before/shots/legibility__phys.mech.force__desktop-column__light__card4.png",
+   "verdict": "PASS",
+   "deployment": null,
+   "commit": "485f75d (pre-fix main; no message markers)"
+  }
+ ]
+}

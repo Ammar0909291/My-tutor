@@ -361,7 +361,7 @@ the Physics, Chemistry and Biology audits re-run as the regression gate. §18's 
 * **Production, after the fix** (`dpl_DfiW33EVTKByZMBMRYPkECGoX855`, commit `74f4207`, alias `my-tutor-flame.vercel.app`; disposable account, deleted, re-login blocked):
   `scripts/qa/productionVisualClosure.ts --mode legibility` — 4 force-diagram cards on one `/learn` page, 390 px and 1280 px, dark and light, each card scrolled into view
   the way a learner does: **16/16 PASS**, every card carries the hook's marker and none is left "unmeasured"; the card that failed before (card 2: "Applied" 3.99:1, "Friction" 3.61:1)
-  passes. Report `docs/qa/physics-visual-audit/production-visual-closure-2026-10-13.json`; screenshots named by concept/viewport/theme/card.
+  passes. Evidence: `docs/qa/physics-visual-audit/production-2026-10-13/` (`legibility-before-485f75d.json`, `legibility-after-74f4207.json`, `interact-after-74f4207.json`, `force-family-after-74f4207.json`, and a `screenshots/` set named by deployment/concept/viewport/theme).
 
 ### 19.2 Harness — the audit measures the figure of the reply it asked for — FIXED AND VERIFIED (QA-harness defect, kept separate from app defects)
 
