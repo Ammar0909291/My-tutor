@@ -1,0 +1,549 @@
+{
+ "base": "https://my-tutor-flame.vercel.app",
+ "subject": "biology",
+ "deployment": "dpl_DfiW33EVTKByZMBMRYPkECGoX855",
+ "commit": "74f4207",
+ "at": "2026-10-13T11:55:38.853Z",
+ "tally": {
+  "PASS": 22,
+  "FAIL": 2
+ },
+ "accountCleanup": {
+  "deleted": true,
+  "reloginBlocked": true
+ },
+ "rows": [
+  {
+   "conceptId": "bio.neuro.brain-regional-organization",
+   "vp": "mobile",
+   "theme": "dark",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 3,
+   "attempts": 1,
+   "replySegments": 3,
+   "figure": {
+    "total": 1,
+    "roots": 1,
+    "index": 0,
+    "kind": "scene",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "here s the diagram that s already displayed on your screen take a look at the label forebrain at the top of the drawing what do you notice about its position co",
+    "messageId": "cmv6m6qn2000hjs0657211sqy"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-bio/bio.neuro.brain-regional-organization__mobile__dark.png"
+  },
+  {
+   "conceptId": "bio.neuro.brain-regional-organization",
+   "vp": "mobile",
+   "theme": "light",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 3,
+   "attempts": 1,
+   "replySegments": 3,
+   "figure": {
+    "total": 1,
+    "roots": 1,
+    "index": 0,
+    "kind": "scene",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "here s the diagram that s already displayed on your screen take a look at the label forebrain at the top of the drawing what do you notice about its position co",
+    "messageId": "cmv6m6qn2000hjs0657211sqy"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-bio/bio.neuro.brain-regional-organization__mobile__light.png"
+  },
+  {
+   "conceptId": "bio.neuro.brain-regional-organization",
+   "vp": "desktop-column",
+   "theme": "dark",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 3,
+   "attempts": 1,
+   "replySegments": 3,
+   "figure": {
+    "total": 1,
+    "roots": 1,
+    "index": 0,
+    "kind": "scene",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "here s the diagram that s already displayed on your screen take a look at the label forebrain at the top of the drawing what do you notice about its position co",
+    "messageId": "cmv6m6qn2000hjs0657211sqy"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-bio/bio.neuro.brain-regional-organization__desktop-column__dark.png"
+  },
+  {
+   "conceptId": "bio.neuro.brain-regional-organization",
+   "vp": "desktop-column",
+   "theme": "light",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 3,
+   "attempts": 1,
+   "replySegments": 3,
+   "figure": {
+    "total": 1,
+    "roots": 1,
+    "index": 0,
+    "kind": "scene",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "here s the diagram that s already displayed on your screen take a look at the label forebrain at the top of the drawing what do you notice about its position co",
+    "messageId": "cmv6m6qn2000hjs0657211sqy"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-bio/bio.neuro.brain-regional-organization__desktop-column__light.png"
+  },
+  {
+   "conceptId": "bio.cell.cell-theory",
+   "vp": "mobile",
+   "theme": "dark",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 2,
+   "attempts": 1,
+   "replySegments": 2,
+   "figure": {
+    "total": 1,
+    "roots": 1,
+    "index": 0,
+    "kind": "scene",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "take a look at the blue label schleiden 1838 on the left side of the figure and the grey arrow that starts there and points toward the centre what do you notice",
+    "messageId": "cmv6m961c0015js06n0pr0uvx"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-bio/bio.cell.cell-theory__mobile__dark.png"
+  },
+  {
+   "conceptId": "bio.cell.cell-theory",
+   "vp": "mobile",
+   "theme": "light",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 2,
+   "attempts": 1,
+   "replySegments": 2,
+   "figure": {
+    "total": 1,
+    "roots": 1,
+    "index": 0,
+    "kind": "scene",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "take a look at the blue label schleiden 1838 on the left side of the figure and the grey arrow that starts there and points toward the centre what do you notice",
+    "messageId": "cmv6m961c0015js06n0pr0uvx"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-bio/bio.cell.cell-theory__mobile__light.png"
+  },
+  {
+   "conceptId": "bio.cell.cell-theory",
+   "vp": "desktop-column",
+   "theme": "dark",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 2,
+   "attempts": 1,
+   "replySegments": 2,
+   "figure": {
+    "total": 1,
+    "roots": 1,
+    "index": 0,
+    "kind": "scene",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "take a look at the blue label schleiden 1838 on the left side of the figure and the grey arrow that starts there and points toward the centre what do you notice",
+    "messageId": "cmv6m961c0015js06n0pr0uvx"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-bio/bio.cell.cell-theory__desktop-column__dark.png"
+  },
+  {
+   "conceptId": "bio.cell.cell-theory",
+   "vp": "desktop-column",
+   "theme": "light",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 2,
+   "attempts": 1,
+   "replySegments": 2,
+   "figure": {
+    "total": 1,
+    "roots": 1,
+    "index": 0,
+    "kind": "scene",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "take a look at the blue label schleiden 1838 on the left side of the figure and the grey arrow that starts there and points toward the centre what do you notice",
+    "messageId": "cmv6m961c0015js06n0pr0uvx"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-bio/bio.cell.cell-theory__desktop-column__light.png"
+  },
+  {
+   "conceptId": "bio.mol.dna-replication",
+   "vp": "mobile",
+   "theme": "dark",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 6,
+   "attempts": 1,
+   "replySegments": 6,
+   "figure": {
+    "total": 1,
+    "roots": 1,
+    "index": 0,
+    "kind": "scene",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "take a look at the figure of the replication fork in front of you on the left you ll see the purple colored helicase label and next to it an arrow marked fork m",
+    "messageId": "cmv6mb1pf001xjs06w8x4o2oo"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-bio/bio.mol.dna-replication__mobile__dark.png"
+  },
+  {
+   "conceptId": "bio.mol.dna-replication",
+   "vp": "mobile",
+   "theme": "light",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 6,
+   "attempts": 1,
+   "replySegments": 6,
+   "figure": {
+    "total": 1,
+    "roots": 1,
+    "index": 0,
+    "kind": "scene",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "take a look at the figure of the replication fork in front of you on the left you ll see the purple colored helicase label and next to it an arrow marked fork m",
+    "messageId": "cmv6mb1pf001xjs06w8x4o2oo"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-bio/bio.mol.dna-replication__mobile__light.png"
+  },
+  {
+   "conceptId": "bio.mol.dna-replication",
+   "vp": "desktop-column",
+   "theme": "dark",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 6,
+   "attempts": 1,
+   "replySegments": 6,
+   "figure": {
+    "total": 1,
+    "roots": 1,
+    "index": 0,
+    "kind": "scene",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "take a look at the figure of the replication fork in front of you on the left you ll see the purple colored helicase label and next to it an arrow marked fork m",
+    "messageId": "cmv6mb1pf001xjs06w8x4o2oo"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-bio/bio.mol.dna-replication__desktop-column__dark.png"
+  },
+  {
+   "conceptId": "bio.mol.dna-replication",
+   "vp": "desktop-column",
+   "theme": "light",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 6,
+   "attempts": 1,
+   "replySegments": 6,
+   "figure": {
+    "total": 1,
+    "roots": 1,
+    "index": 0,
+    "kind": "scene",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "take a look at the figure of the replication fork in front of you on the left you ll see the purple colored helicase label and next to it an arrow marked fork m",
+    "messageId": "cmv6mb1pf001xjs06w8x4o2oo"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-bio/bio.mol.dna-replication__desktop-column__light.png"
+  },
+  {
+   "conceptId": "bio.eco.predator-prey-dynamics",
+   "vp": "mobile",
+   "theme": "dark",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 2,
+   "attempts": 1,
+   "replySegments": 2,
+   "figure": {
+    "total": 1,
+    "roots": 1,
+    "index": 0,
+    "kind": "scene",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "take a look at the figure on your screen the green curve labeled prey and the red curve labeled predator trace each population over time while the arrows at the",
+    "messageId": "cmv6md3ao002pjs06hnc1zbau"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-bio/bio.eco.predator-prey-dynamics__mobile__dark.png"
+  },
+  {
+   "conceptId": "bio.eco.predator-prey-dynamics",
+   "vp": "mobile",
+   "theme": "light",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 2,
+   "attempts": 1,
+   "replySegments": 2,
+   "figure": {
+    "total": 1,
+    "roots": 1,
+    "index": 0,
+    "kind": "scene",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "take a look at the figure on your screen the green curve labeled prey and the red curve labeled predator trace each population over time while the arrows at the",
+    "messageId": "cmv6md3ao002pjs06hnc1zbau"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-bio/bio.eco.predator-prey-dynamics__mobile__light.png"
+  },
+  {
+   "conceptId": "bio.eco.predator-prey-dynamics",
+   "vp": "desktop-column",
+   "theme": "dark",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 2,
+   "attempts": 1,
+   "replySegments": 2,
+   "figure": {
+    "total": 1,
+    "roots": 1,
+    "index": 0,
+    "kind": "scene",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "take a look at the figure on your screen the green curve labeled prey and the red curve labeled predator trace each population over time while the arrows at the",
+    "messageId": "cmv6md3ao002pjs06hnc1zbau"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-bio/bio.eco.predator-prey-dynamics__desktop-column__dark.png"
+  },
+  {
+   "conceptId": "bio.eco.predator-prey-dynamics",
+   "vp": "desktop-column",
+   "theme": "light",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 2,
+   "attempts": 1,
+   "replySegments": 2,
+   "figure": {
+    "total": 1,
+    "roots": 1,
+    "index": 0,
+    "kind": "scene",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "take a look at the figure on your screen the green curve labeled prey and the red curve labeled predator trace each population over time while the arrows at the",
+    "messageId": "cmv6md3ao002pjs06hnc1zbau"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-bio/bio.eco.predator-prey-dynamics__desktop-column__light.png"
+  },
+  {
+   "conceptId": "bio.plant.mycorrhizae-plant-symbioses",
+   "vp": "mobile",
+   "theme": "dark",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 1,
+   "attempts": 1,
+   "replySegments": 1,
+   "figure": {
+    "total": 1,
+    "roots": 1,
+    "index": 0,
+    "kind": "scene",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "in the top left corner of the figure the purple arrow points to the label arbuscule branches inside the cell what do you notice about this part of the diagram",
+    "messageId": "cmv6mfaxd000ojj06ja2tyeav"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-bio/bio.plant.mycorrhizae-plant-symbioses__mobile__dark.png"
+  },
+  {
+   "conceptId": "bio.plant.mycorrhizae-plant-symbioses",
+   "vp": "mobile",
+   "theme": "light",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 1,
+   "attempts": 1,
+   "replySegments": 1,
+   "figure": {
+    "total": 1,
+    "roots": 1,
+    "index": 0,
+    "kind": "scene",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "in the top left corner of the figure the purple arrow points to the label arbuscule branches inside the cell what do you notice about this part of the diagram",
+    "messageId": "cmv6mfaxd000ojj06ja2tyeav"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-bio/bio.plant.mycorrhizae-plant-symbioses__mobile__light.png"
+  },
+  {
+   "conceptId": "bio.plant.mycorrhizae-plant-symbioses",
+   "vp": "desktop-column",
+   "theme": "dark",
+   "verdict": "FAIL",
+   "fails": [
+    "RD-02 \"More insights\" is clipped (91% visible)"
+   ],
+   "reviews": [],
+   "segments": 1,
+   "attempts": 1,
+   "replySegments": 1,
+   "figure": {
+    "total": 1,
+    "roots": 1,
+    "index": 0,
+    "kind": "scene",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "in the top left corner of the figure the purple arrow points to the label arbuscule branches inside the cell what do you notice about this part of the diagram",
+    "messageId": "cmv6mfaxd000ojj06ja2tyeav"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-bio/bio.plant.mycorrhizae-plant-symbioses__desktop-column__dark.png"
+  },
+  {
+   "conceptId": "bio.plant.mycorrhizae-plant-symbioses",
+   "vp": "desktop-column",
+   "theme": "light",
+   "verdict": "FAIL",
+   "fails": [
+    "RD-02 \"More insights\" is clipped (44% visible)"
+   ],
+   "reviews": [],
+   "segments": 1,
+   "attempts": 1,
+   "replySegments": 1,
+   "figure": {
+    "total": 1,
+    "roots": 1,
+    "index": 0,
+    "kind": "scene",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "in the top left corner of the figure the purple arrow points to the label arbuscule branches inside the cell what do you notice about this part of the diagram",
+    "messageId": "cmv6mfaxd000ojj06ja2tyeav"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-bio/bio.plant.mycorrhizae-plant-symbioses__desktop-column__light.png"
+  },
+  {
+   "conceptId": "bio.plant.plant-growth-hormones",
+   "vp": "mobile",
+   "theme": "dark",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 7,
+   "attempts": 1,
+   "replySegments": 7,
+   "figure": {
+    "total": 1,
+    "roots": 1,
+    "index": 0,
+    "kind": "scene",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "in the figure you re looking at five hormone groups are shown as colored blocks blue auxins iaa at the top left linked to shoot tip cell elongation auxin leaves",
+    "messageId": "cmv6mi763000bl6062y9jz728"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-bio/bio.plant.plant-growth-hormones__mobile__dark.png"
+  },
+  {
+   "conceptId": "bio.plant.plant-growth-hormones",
+   "vp": "mobile",
+   "theme": "light",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 7,
+   "attempts": 1,
+   "replySegments": 7,
+   "figure": {
+    "total": 1,
+    "roots": 1,
+    "index": 0,
+    "kind": "scene",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "in the figure you re looking at five hormone groups are shown as colored blocks blue auxins iaa at the top left linked to shoot tip cell elongation auxin leaves",
+    "messageId": "cmv6mi763000bl6062y9jz728"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-bio/bio.plant.plant-growth-hormones__mobile__light.png"
+  },
+  {
+   "conceptId": "bio.plant.plant-growth-hormones",
+   "vp": "desktop-column",
+   "theme": "dark",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 7,
+   "attempts": 1,
+   "replySegments": 7,
+   "figure": {
+    "total": 1,
+    "roots": 1,
+    "index": 0,
+    "kind": "scene",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "in the figure you re looking at five hormone groups are shown as colored blocks blue auxins iaa at the top left linked to shoot tip cell elongation auxin leaves",
+    "messageId": "cmv6mi763000bl6062y9jz728"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-bio/bio.plant.plant-growth-hormones__desktop-column__dark.png"
+  },
+  {
+   "conceptId": "bio.plant.plant-growth-hormones",
+   "vp": "desktop-column",
+   "theme": "light",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 7,
+   "attempts": 1,
+   "replySegments": 7,
+   "figure": {
+    "total": 1,
+    "roots": 1,
+    "index": 0,
+    "kind": "scene",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "in the figure you re looking at five hormone groups are shown as colored blocks blue auxins iaa at the top left linked to shoot tip cell elongation auxin leaves",
+    "messageId": "cmv6mi763000bl6062y9jz728"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-bio/bio.plant.plant-growth-hormones__desktop-column__light.png"
+  }
+ ]
+}
