@@ -112,7 +112,7 @@ export function ExplainerFigure({
     () => controlsFor(spec.parametric?.kind, policy.maxControls),
     [spec.parametric?.kind, policy.maxControls],
   )
-  const live = params ?? spec.parametric?.params ?? {}
+  const live = useMemo<SceneParams>(() => params ?? spec.parametric?.params ?? {}, [params, spec.parametric?.params])
   // Every variable's value as the controls show it (the live value, else its default) — a choice that must differ from a
   // partner needs the partner's, whether or not the learner has touched it yet.
   const liveValues = useMemo(
