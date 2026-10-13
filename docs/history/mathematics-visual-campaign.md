@@ -1371,6 +1371,39 @@ Long captions (~25 characters) need the label's centre ≤ ≈ 3.0 world units a
 Next (batch 39): the 3 remaining real-analysis helpers — differentiability-rigorous, taylor-rigorous, ftc-rigorous — plus the 6 measure-theory helpers (measure, lebesgue-measure, measure-zero, convergence-theorems, lp-space, l2-space) and the 4 topology helpers
 (topological-space, product-space, homotopy-equivalence, homology), then opt (4), geom (4), func (4), cx (4), graph (3), fnal (3), trig (2), cat (2), num (1); then tier N (352) if still wanted. List what is left with `npx tsx scripts/math/visual-coverage.ts --list H`.
 
+# Batch 39 (2026-10-12): the rest of rigorous calculus and six measure-theory helpers (9 figures)
+
+`sceneGenerators/mathCoreScenesB39.ts` + `mathCoreScenesBatch39.test.ts` (92 checks); campaign audit threshold now 479. Coverage after this batch:
+525 of 908 concepts with a fixed figure (57.8%); essential tier 344 / 346 (complete), tier H 179 / 210 (85.2%), tier N 2 / 352; target (E + H) 523 / 556 = 94.1%.
+The generator and the test body were installed from the drafts in `docs/history/mathematics-visual-drafts/` (written at the end of the previous session, tests not yet run); the drafts were removed once installed.
+Pre-push checklist: full `npx vitest run`, `scripts/ci/tsc-ratchet.sh` 0 errors, `validate-visualization-coverage.ts` PASS, `scripts/math/label-displacement.ts mathCoreScenesB39` (0 unresolved, 0 card-host moves),
+`scripts/math/campaign-tools/audit-module.ts mathCoreScenesB39` (9 / 9 admitted). Mutation check: thirteen deliberate single-part wrong numbers (a right secant of slope 2, a secant at h = 0.3, the Lagrange level 25 R instead of 24 R, the tangent point moved to 2.5,
+a tangent of slope 2, a piece ending at 0.6, a cover that no longer covers E, interval lengths ε/3ⁿ, f₄ drawn as f₃, a circle stretched in x, the point at 0.6, f drawn as (3, 5), the rotated basis arrow off f) each made at least one test fail.
+Defects found while verifying (all fixed before the commit): (1) the Lp-space narration read "‖v‖₁ = 0.71 + 0.71 = 1.41", which is arithmetically wrong as written (0.71 + 0.71 = 1.42): the point is (1/√2, 1/√2), so the narration now says ‖v‖₁ = 2/√2 = √2 ≈ 1.41;
+(2) the FTC caption "F′(2) = f(2) = 4" sat on the violet height-9 line and far from its tangent — moved to open space above the tangent (an earlier candidate position was shoved 48 px by the label solver on the card host, so it was rejected: always re-run `label-displacement.ts` after moving a caption);
+(3) the rotated basis arrows of the L² figure had no names — each now carries e₁′ / e₂′ at its tip, and the test checks that each name is nearer its own arrow than the other.
+Four drafted test assertions needed tolerance work, all read-back noise and not wrong figures: the marker of c reads back 0.196 against the exact c = arcsin(24 R₃(1)) = 0.19657 → 0.197 (the label is right; test now compares the label with the first-principles value and the drawn marker within 0.01);
+the measure-zero sums read back 0.1 against the exact 0.1 · (1 − 1/32) = 0.096875 (each tiny width is rounded to 0.01); the Lp point reads back 0.71 + 0.71 = 1.42 against √2 = 1.414; the label "f′(0) = 0" contains two zeros (read the value after "=").
+
+| Concept | Figure |
+|---|---|
+| math.real.differentiability-rigorous | left: f = |x| at 0 — the one-sided difference quotients are −1 (red secant) and +1 (green), so there is no limit; right: f = x² with secants through the origin of slope 1, 0.5, 0.25 → 0, f′(0) = 0 |
+| math.real.taylor-rigorous | sin t on [0, 1] with the level 24 R₃(1) = 24 × 0.00814 ≈ 0.195 (R₃(1) = sin 1 − 5/6) meeting the curve at c ≈ 0.197: Lagrange's f⁗(c)/4! = sin(c)/24 is exactly the error |
+| math.real.ftc-rigorous | f(t) = t² with the area 0 → 2 hatched (8/3 = 2.67) beside F(x) = x³/3: the tangent at x = 2 has slope f(2) = 4; the heights F(3) = 9 and F(1) = 0.33 give ∫₁³ t² = 9 − 0.33 = 8.67 |
+| math.meas.measure | [0, 1] split into A = [0, 0.3), B = [0.3, 0.5), C = [0.5, 1] with sizes 0.3, 0.2, 0.5: additivity 0.3 + 0.2 + 0.5 = 1 = μ(X), μ(∅) = 0 |
+| math.meas.lebesgue-measure | E = [0.1, 0.35] ∪ [0.5, 0.8] (length 0.25 + 0.3 = 0.55) and three covers by open intervals of total length 0.75, 0.63, 0.57, each ≥ 0.55 and tending to it: m(E) = 0.55 |
+| math.meas.measure-zero | five points covered by intervals of length ε/2ⁿ: ε = 0.4 gives 0.3875 ≈ 0.39, ε = 0.1 gives 0.096875 ≈ 0.097 — as small as we like, so a countable set has measure 0 |
+| math.meas.convergence-theorems | fₙ(x) = min(nx, 1) for n = 1, 2, 4 rising to 1; the areas 1 − 1/(2n) = 0.5, 0.75, 0.875 increase to 1 = ∫f (monotone convergence) |
+| math.meas.lp-space | the unit balls of p = 1 (diamond), p = 2 (circle), p = ∞ (square), nested; the point (1/√2, 1/√2) has the norms 1.41, 1, 0.71 |
+| math.meas.l2-space | f = (3, 4): the squared coordinates 9 + 16 = 25 = ‖f‖² (‖f‖ = 5); in the rotated orthonormal basis e₁′ = (0.6, 0.8), e₂′ = (−0.8, 0.6) the coordinates are 5 and 0, and again 25 + 0 = 25 (Parseval) |
+
+Notes: twins checked first — none of the nine concept ids had a registry entry; `math.calc.taylor-remainder` (batch 36) draws sin x ≈ x − x³/6 with the bound x⁴/24, so the figure here shows the *point c* of the Lagrange form instead and does not repeat it.
+A figure whose statement uses a rounded number in an equation ("0.71 + 0.71 = 1.41") is wrong on screen even when every drawn coordinate is right: state the exact form (2/√2 = √2 ≈ 1.41) or the unrounded values.
+When a caption is moved, a position that looks free in the render can still be shoved by the label solver on the card host: try candidates in a loop (`sed` the position, run `label-displacement.ts <module> 14`, grep the figure) and keep the first with 0 card-host moves; then render it and look.
+An exact value stated in a label is better checked against a first-principles computation in the test (here c = arcsin(24 (sin 1 − 5/6)), Σ ε/2ⁿ = ε (1 − 2⁻⁵), the norms of (1/√2, 1/√2)) plus the drawn read-back within the 0.01 rounding of `P()`, than by rounding the drawn read-back itself.
+
+Next (batch 40): the 4 topology helpers (topological-space, product-space, homotopy-equivalence, homology), the 4 optimisation helpers (convex-optimization, quadratic-programming, integer-programming, dynamic-programming) and the 3 functional-analysis helpers (normed-space, distributions, special-functions) — 11; then geom (4), func (4), cx (4) as batch 41, then graph (3), trig (2), cat (2), num (1); then tier N (352) if still wanted. List what is left with `npx tsx scripts/math/visual-coverage.ts --list H`.
+
 # Deferred follow-up — do AFTER the Mathematics figure campaign (recorded 2026-10-12 at the owner's request)
 
 Context: the owner said another account was "validating visuals for all 4 subjects". A read-only audit of the last 10 days (2026-10-02 → 10-12) on `origin/main` and every remote branch found:

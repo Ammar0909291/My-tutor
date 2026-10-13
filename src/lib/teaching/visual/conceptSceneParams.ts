@@ -318,6 +318,10 @@ import {
   buildSeriesConvergenceScene, buildHarmonicSeriesScene, buildMetricSpaceScene, buildCompactnessScene, buildConnectednessScene,
   buildRiemannIntegrabilityScene,
 } from '@/lib/teaching/sceneGenerators/mathCoreScenesB38'
+import {
+  buildDifferentiabilityRigorousScene, buildTaylorRigorousScene, buildFtcRigorousScene, buildMeasureScene,
+  buildLebesgueMeasureScene, buildMeasureZeroScene, buildConvergenceTheoremsScene, buildLpSpaceScene, buildL2SpaceScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB39'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -1029,6 +1033,17 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'math.real.compactness':               buildCompactnessScene,
   'math.real.connectedness':             buildConnectednessScene,
   'math.real.riemann-integrability':     buildRiemannIntegrabilityScene,
+
+  // Mathematics visual campaign, batch 39 (2026-10-12). See mathCoreScenesB39.ts.
+  'math.real.differentiability-rigorous': buildDifferentiabilityRigorousScene,
+  'math.real.taylor-rigorous':           buildTaylorRigorousScene,
+  'math.real.ftc-rigorous':              buildFtcRigorousScene,
+  'math.meas.measure':                   buildMeasureScene,
+  'math.meas.lebesgue-measure':          buildLebesgueMeasureScene,
+  'math.meas.measure-zero':              buildMeasureZeroScene,
+  'math.meas.convergence-theorems':      buildConvergenceTheoremsScene,
+  'math.meas.lp-space':                  buildLpSpaceScene,
+  'math.meas.l2-space':                  buildL2SpaceScene,
 
   // The Punnett generator is single-gene by construction (genotypes are two
   // alleles). A dihybrid cross drawn as a monohybrid square teaches the wrong

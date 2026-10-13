@@ -1,3 +1,134 @@
+/**
+ * Mathematics visual campaign, batch 39 (2026-10-12): three rigorous-calculus helpers (differentiability, Taylor with the Lagrange remainder, the fundamental theorem of calculus) and six measure-theory helpers (measure, Lebesgue measure, measure zero, the convergence theorems, Lᵖ spaces, L²). Every number a figure states is re-derived here from the
+ * DRAWN dots, numerals, lines, arrows and curves, never from the generator's own constants alone.
+ */
+import { describe, it, expect } from 'vitest'
+import { resolveVisual } from '@/lib/teaching/visual/resolveVisual'
+import { isRetiredVisualBinding } from '@/lib/teaching/visual/retired'
+import { INSUFFICIENT_FOR_CONCEPT } from '@/lib/teaching/visual/scope'
+import { complexityFor, isGlyphLabel } from '@/lib/teaching/visual/visualComplexity'
+import type { SceneSpec } from '@/lib/teaching/sceneSpec'
+import { validateSceneSpec } from '@/lib/teaching/sceneSpecValidator'
+import { payloadBlockers } from '@/lib/teaching/visual/figureAudit'
+import * as M from '@/lib/teaching/sceneGenerators/mathCoreScenesB39'
+import { mAt } from '@/lib/teaching/sceneGenerators/mathCoreScenesB32'
+
+type Obj = { type?: string; text?: string; color?: string; radius?: number; thickness?: number; from?: number[]; to?: number[]; position?: number[]; points?: number[][] }
+const objs = (s: SceneSpec): Obj[] => s.steps.flatMap((st) => st.objects as Obj[])
+const texts = (s: SceneSpec) => objs(s).map((o) => o.text ?? '')
+const RED = '#ef4444', BLUE = '#3b82f6', GREEN = '#22c55e', VIOLET = '#a78bfa', SLATE = '#94a3b8', INK = '#e2e8f0'
+const lines = (s: SceneSpec, color?: string) => objs(s).filter((o) => (o.type === 'bond' || o.type === 'arrow') && o.from && o.to && (!color || o.color === color))
+const bonds = (s: SceneSpec, color: string, thickness: number) => lines(s, color).filter((o) => o.type === 'bond' && near(o.thickness ?? 0, thickness, 1e-9))
+const arrows = (s: SceneSpec, color: string) => lines(s, color).filter((o) => o.type === 'arrow')
+const dots = (s: SceneSpec, color?: string) => objs(s).filter((o) => o.type === 'node' && o.position && (!color || o.color === color))
+const paths = (s: SceneSpec, color?: string) => objs(s).filter((o) => o.type === 'path' && o.points && (!color || o.color === color))
+const labelsOf = (s: SceneSpec) => objs(s).filter((o) => o.type === 'label')
+const len = (o: Obj) => Math.hypot(o.to![0] - o.from![0], o.to![1] - o.from![1])
+const near = (a: number, b: number, tol = 0.02) => Math.abs(a - b) <= tol
+const sum = (xs: readonly number[]) => xs.reduce((s, v) => s + v, 0)
+const disp = (o: Obj, u: number): [number, number] => [(o.to![0] - o.from![0]) / u, (o.to![1] - o.from![1]) / u]
+const crossz = (p: readonly number[], q: readonly number[]) => p[0] * q[1] - p[1] * q[0]
+const dotp = (p: readonly number[], q: readonly number[]) => p[0] * q[0] + p[1] * q[1]
+const approx = (v: readonly number[], tol = 1) => v.map((x) => expect.closeTo(x, tol))
+const slope = (o: Obj) => (o.to![1] - o.from![1]) / (o.to![0] - o.from![0])
+/** Distance from point p to the infinite line through a drawn segment. */
+const distToLine = (o: Obj, p: number[]) => Math.abs(crossz([o.to![0] - o.from![0], o.to![1] - o.from![1]], [p[0] - o.from![0], p[1] - o.from![1]])) / len(o)
+const extent = (p: Obj) => { const xs = p.points!.map((q) => q[0]), ys = p.points!.map((q) => q[1]); return { cx: (Math.max(...xs) + Math.min(...xs)) / 2, cy: (Math.max(...ys) + Math.min(...ys)) / 2, rx: (Math.max(...xs) - Math.min(...xs)) / 2, ry: (Math.max(...ys) - Math.min(...ys)) / 2 } }
+
+const BATCH: Array<[string, () => SceneSpec, string]> = [
+  ['math.real.differentiability-rigorous', M.buildDifferentiabilityRigorousScene, 'math-differentiability-rigorous'],
+  ['math.real.taylor-rigorous', M.buildTaylorRigorousScene, 'math-taylor-rigorous'],
+  ['math.real.ftc-rigorous', M.buildFtcRigorousScene, 'math-ftc-rigorous'],
+  ['math.meas.measure', M.buildMeasureScene, 'math-measure'],
+  ['math.meas.lebesgue-measure', M.buildLebesgueMeasureScene, 'math-lebesgue-measure'],
+  ['math.meas.measure-zero', M.buildMeasureZeroScene, 'math-measure-zero'],
+  ['math.meas.convergence-theorems', M.buildConvergenceTheoremsScene, 'math-convergence-theorems'],
+  ['math.meas.lp-space', M.buildLpSpaceScene, 'math-lp-space'],
+  ['math.meas.l2-space', M.buildL2SpaceScene, 'math-l2-space'],
+]
+
+describe('each concept is served its own figure, as a figure OF the concept', () => {
+  it.each(BATCH)('%s', (conceptId, _build, id) => {
+    for (const req of [null, 'diagram'] as const) {
+      const d = resolveVisual({ message: req ? 'show me a diagram' : '', lessonConceptId: conceptId, learnerRequest: req, subject: 'mathematics' } as Parameters<typeof resolveVisual>[0])
+      expect(d.graphical, `${conceptId} ${d.provenance}`).toBe(true)
+      expect(d.asset?.scope, conceptId).toBe('concept')
+      expect((d.payload as { sceneSpec?: { id?: string } }).sceneSpec?.id).toBe(id)
+    }
+    expect(isRetiredVisualBinding(conceptId)).toBe(false)
+    expect(INSUFFICIENT_FOR_CONCEPT.has(conceptId)).toBe(false)
+  })
+  it.each(['math.linalg.vector-addition', 'math.func.linear-function'])('%s is deliberately still figure-less (reserved fixture for the AI-generation tests)', (conceptId) => {
+    const d = resolveVisual({ message: '', lessonConceptId: conceptId, learnerRequest: null, subject: 'mathematics' } as Parameters<typeof resolveVisual>[0])
+    expect(d.asset?.scope).not.toBe('concept')
+  })
+})
+
+describe('every figure is well-formed', () => {
+  it.each(BATCH)('%s passes the scene validator the renderer uses', (_id, build) => {
+    const v = validateSceneSpec(build()) as { valid?: boolean; ok?: boolean; errors?: unknown }
+    expect(v.valid ?? v.ok, JSON.stringify(v.errors ?? v)).toBe(true)
+  })
+  it.each(BATCH)('%s passes the figure audit that admits a figure to a learner (no blockers)', (_id, build) => {
+    expect(payloadBlockers({ renderer: 'scene', sceneSpec: build() } as never)).toEqual([])
+  })
+  it.each(BATCH)('%s keeps every coordinate inside +-5', (conceptId, build) => {
+    for (const o of objs(build())) {
+      for (const p of [o.from, o.to, o.position, ...(o.points ?? [])].filter(Boolean) as number[][]) {
+        expect(Math.abs(p[0]), `${conceptId} x`).toBeLessThanOrEqual(5)
+        expect(Math.abs(p[1]), `${conceptId} y`).toBeLessThanOrEqual(5)
+      }
+    }
+  })
+  it.each(BATCH)('%s fits the intermediate label budget (marks of 1-2 characters are free)', (_id, build) => {
+    const named = labelsOf(build()).filter((o) => !isGlyphLabel(o as never))
+    expect(named.length).toBeLessThanOrEqual(complexityFor('intermediate').maxLabels)
+    expect(named.length).toBeGreaterThan(0)
+  })
+  it.each(BATCH)('%s stays under the 50-objects-per-step limit', (_id, build) => {
+    for (const st of build().steps) expect(st.objects.length).toBeLessThanOrEqual(50)
+  })
+  it.each(BATCH)('%s has three cumulative steps with narration', (_id, build) => {
+    const s = build()
+    expect(s.steps).toHaveLength(3)
+    for (const st of s.steps) expect((st.narration ?? '').length).toBeGreaterThan(20)
+    expect((s.ariaLabel ?? '').length).toBeGreaterThan(60)
+  })
+  it.each(BATCH)('%s uses only semantic role colours and a framing camera distance', (_id, build) => {
+    const roles = new Set([SLATE, INK, RED, BLUE, VIOLET, GREEN])
+    const s = build()
+    for (const o of objs(s)) if (o.color) expect(roles.has(o.color.toLowerCase()), `${o.type} ${o.color}`).toBe(true)
+    expect(s.cameraDistance!).toBeGreaterThanOrEqual(7)
+    expect(s.cameraDistance!).toBeLessThanOrEqual(13)
+  })
+  it.each(BATCH)('%s never draws a zero-length line', (_id, build) => {
+    for (const o of lines(build())) expect(len(o)).toBeGreaterThan(0)
+  })
+})
+
+
+// ── helpers ────────────────────────────────────────────────────────────────────────────────
+const dist = (a: readonly number[], b: readonly number[]) => Math.hypot(a[0] - b[0], a[1] - b[1])
+const labelAt = (s: SceneSpec, p: readonly number[], tol = 0.06) => labelsOf(s).find((o) => dist(o.position!, p) < tol)
+const numsIn = (t: string) => (t.replace(/−/g, '-').match(/-?\d+(?:\.\d+)?/g) ?? []).map(Number)
+const numOf = (t: string) => Number(t.replace(/−/g, '-'))
+const evalLR = (expr: string) => {
+  const toks = expr.split('=')[0].trim().split(/\s+/)
+  let acc = Number(toks[0])
+  for (let i = 1; i < toks.length; i += 2) { const v = Number(toks[i + 1]); acc = toks[i] === '+' ? acc + v : toks[i] === '−' ? acc - v : toks[i] === '×' ? acc * v : acc / v }
+  return acc
+}
+const matMul = (A: number[][], B: number[][]) => A.map((row) => B[0].map((_, j) => row.reduce((t, v, k) => t + v * B[k][j], 0)))
+const closeVec = (a: readonly number[], b: readonly number[], tol = 0.02) => { expect(a).toHaveLength(b.length); a.forEach((x, i) => expect(Math.abs(x - b[i]), `${a} vs ${b}`).toBeLessThanOrEqual(tol)) }
+const closeMat = (A: number[][], B: number[][], tol = 0.02) => A.forEach((row, i) => closeVec(row, B[i], tol))
+/** a drawn arrow as the vector it shows, in world units of the figure (origin o, scale s) */
+const vecOf = (a: Obj, o: readonly number[], s: number): [number, number] => [(a.to![0] - o[0]) / s, (a.to![1] - o[1]) / s]
+const startsAt = (a: Obj, p: readonly number[]) => dist(a.from!, p) < 0.02
+const arrowsFrom = (sc: SceneSpec, color: string, o: readonly number[]) => arrows(sc, color).filter((a) => startsAt(a, o))
+const rankOf = (m: number[][]) => { const A = m.map((r) => [...r]); let r = 0; for (let c = 0; c < A[0].length && r < A.length; c++) { let p = r; for (let i = r + 1; i < A.length; i++) if (Math.abs(A[i][c]) > Math.abs(A[p][c])) p = i; if (Math.abs(A[p][c]) < 1e-9) continue; [A[r], A[p]] = [A[p], A[r]]; for (let i = r + 1; i < A.length; i++) { const f = A[i][c] / A[r][c]; for (let k = c; k < A[0].length; k++) A[i][k] -= f * A[r][k] } r++ } return r }
+const det2 = (A: number[][]) => A[0][0] * A[1][1] - A[0][1] * A[1][0]
+const mulVec = (A: number[][], v: readonly number[]) => [A[0][0] * v[0] + A[0][1] * v[1], A[1][0] * v[0] + A[1][1] * v[1]]
+
 describe('the mathematics each figure draws', () => {
   const after = (t: string, sep: string) => t.slice(t.indexOf(sep) + sep.length)
   const textStarting = (s: SceneSpec, p: string) => texts(s).find((t) => t.startsWith(p))!
@@ -31,7 +162,7 @@ describe('the mathematics each figure draws', () => {
     const slopes = secs.map((o) => slopeG(o, R))
     slopes.forEach((q, i) => { expect(q).toBeCloseTo([1, 0.5, 0.25][i], 1); const [x, y] = toG(R, secs[i].to!); expect(y).toBeCloseTo(x * x, 1); expect(q).toBeCloseTo(x, 1) })    // slope of the secant through (h, h²) is h
     slopes.slice(1).forEach((q, i) => expect(q / slopes[i]).toBeCloseTo(0.5, 1))       // decreasing to the limit 0
-    expect(numsIn(textStarting(s, 'slopes'))).toEqual([1, 0.5, 0.25]); expect(numsIn(textStarting(s, 'f′(0)'))).toEqual([0])
+    expect(numsIn(textStarting(s, 'slopes'))).toEqual([1, 0.5, 0.25]); expect(numsIn(after(textStarting(s, 'f′(0)'), '='))).toEqual([0])       // the limit of the secant slopes, read after the "=" (the label also contains the 0 of f′(0))
     for (const t of ['f = |x|', 'left −1', 'right +1', 'no f′(0)', 'f = x²']) expect(texts(s)).toContain(t)
   })
 
@@ -61,7 +192,8 @@ describe('the mathematics each figure draws', () => {
     expect(numsIn(textStarting(s, 'error')).slice(-1)).toEqual([Math.round(R3 * 1e5) / 1e5])
     const [k24, r, v] = numsIn(textStarting(s, '24'))
     expect(k24).toBe(24); expect(k24 * r).toBeCloseTo(v, 2); expect(v).toBeCloseTo(level, 2)
-    expect(numsIn(textStarting(s, 'c ≈'))).toEqual([Math.round(c * 1000) / 1000])
+    expect(numsIn(textStarting(s, 'c ≈'))).toEqual([Math.round(Math.asin(24 * (Math.sin(1) - 5 / 6)) * 1000) / 1000])   // the label is the exact c = arcsin(24 R₃(1))
+    expect(numsIn(textStarting(s, 'c ≈'))[0]).toBeCloseTo(c, 2)                                                    // and the drawn marker agrees within P()'s 0.01 rounding
   })
 
   it('math.real.ftc-rigorous: the hatched area under t² on [0, 2] is F(2) = 8/3, the tangent of F = x³/3 at 2 has the slope f(2) = 4, and ∫₁³ t² = F(3) − F(1) = 9 − 0.33 = 8.67', () => {
@@ -164,7 +296,9 @@ describe('the mathematics each figure draws', () => {
     expect(totals[0]).toBeCloseTo(0.3875, 2); expect(totals[1]).toBeCloseTo(0.096875, 2)
     totals.forEach((t, i) => expect(t).toBeLessThanOrEqual(eps[i] + 1e-9))             // Σ ε/2ⁿ ≤ ε
     expect(totals[0] / totals[1]).toBeCloseTo(4, 0)
-    expect(numsIn(textStarting(s, 'ε = 0.4'))).toEqual([0.4, Math.round(totals[0] * 100) / 100]); expect(numsIn(textStarting(s, 'ε = 0.1'))).toEqual([0.1, Math.round(totals[1] * 1000) / 1000])
+    const exact = (e: number) => e * (1 - Math.pow(2, -5))                                     // Σ ε/2ⁿ, n = 1..5, the five drawn intervals
+    expect(numsIn(textStarting(s, 'ε = 0.4'))).toEqual([0.4, Math.round(exact(0.4) * 100) / 100]); expect(numsIn(textStarting(s, 'ε = 0.1'))).toEqual([0.1, Math.round(exact(0.1) * 1000) / 1000])
+    totals.forEach((t, i) => expect(t).toBeCloseTo(exact(eps[i]), 1))                          // the drawn widths (rounded to 0.01 each) agree with the exact sum
     for (const t of ['a countable set', 'ε → 0: measure 0']) expect(texts(s)).toContain(t)
   })
 
@@ -208,7 +342,9 @@ describe('the mathematics each figure draws', () => {
     const [q] = dots(s, VIOLET)
     const [x, y] = rel(q.position!)
     const n1 = Math.abs(x) + Math.abs(y), n2 = Math.hypot(x, y), ninf = Math.max(Math.abs(x), Math.abs(y))
-    expect([n1, n2, ninf].map((v) => Math.round(v * 100) / 100)).toEqual(numsIn(textStarting(s, 'norms')))
+    const ideal = [Math.SQRT2, 1, Math.SQRT1_2]                                                   // the point (1/√2, 1/√2): |x|+|y|, √(x²+y²), max(|x|,|y|)
+    expect(numsIn(textStarting(s, 'norms'))).toEqual(ideal.map((v) => Math.round(v * 100) / 100))
+    ;[n1, n2, ninf].forEach((v, i) => expect(Math.abs(v - ideal[i])).toBeLessThanOrEqual(0.02))     // the drawn point agrees within P()'s 0.01 rounding
     expect(n1).toBeGreaterThan(n2); expect(n2).toBeGreaterThan(ninf)
     for (const t of ['p = 1', 'p = 2', 'p = ∞']) expect(texts(s)).toContain(t)
   })
@@ -241,5 +377,9 @@ describe('the mathematics each figure draws', () => {
     expect(d1).toBeCloseTo(5, 1); expect(d2).toBeCloseTo(0, 1)
     expect(d1 * d1 + d2 * d2).toBeCloseTo(c1 * c1 + c2 * c2, 1)                       // basis-independent
     expect(evalLR(after(textStarting(s, 'other basis'), ': '))).toBe(25)
+    // each rotated arrow carries its own name at its tip: e₁′ on the long one (along f), e₂′ on the short perpendicular one
+    const nearTip = (o: Obj, name: string) => { const l = labelsOf(s).find((q) => q.text === name)!; return dist(l.position!, o.to!) < 0.9 }
+    expect(nearTip(rot[0], 'e₁′')).toBe(true); expect(nearTip(rot[1], 'e₂′')).toBe(true)
+    expect(nearTip(rot[0], 'e₂′')).toBe(false); expect(nearTip(rot[1], 'e₁′')).toBe(false)
   })
 })
