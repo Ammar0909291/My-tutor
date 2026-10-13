@@ -197,9 +197,26 @@ function placeGroupsBio(groups: readonly ComparisonGroup[], layouts: readonly { 
   })
 }
 
+/**
+ * Biology: a group with no items used to draw only its NAME in the figure, its defining clause living in the stage narration alone. Twenty
+ * Biology comparisons did this (2026-10-09 audit): five antibody classes, three gene-transfer routes and four arthropod classes were five, three
+ * and four bare names, and a figure mixing bare groups with groups that carried examples read as if the bare ones had nothing to say. The group's own
+ * `description` — the clause already authored from the KG and Educational Brain entry and already shown as that stage's narration — is drawn as
+ * its single caption. Nothing new is written; non-Biology callers are returned unchanged, byte for byte.
+ */
+function withDescribedBareGroups(groups: readonly ComparisonGroup[], bio: boolean): readonly ComparisonGroup[] {
+  if (!bio) return groups
+  return groups.map((g) => {
+    const clause = g.description.trim()
+    if (g.items.length > 0 || !clause) return g
+    return { ...g, items: [clause.charAt(0).toUpperCase() + clause.slice(1)] }
+  })
+}
+
 export function buildCellComparisonScene(params: CellComparisonParams): SceneSpec {
-  const { conceptId, title, teachingGoal, groups } = params
+  const { conceptId, title, teachingGoal } = params
   const bio = isBiologyScene(conceptId)
+  const groups = withDescribedBareGroups(params.groups, bio)
   // A non-Biology caller whose item text is long may ask for the grid earlier (`gridFromGroups`); Biology figures always use THREE.
   const gridFrom = bio ? GRID_FROM_GROUPS_BIO : (params.gridFromGroups ?? GRID_FROM_GROUPS_LEGACY)
   const inGrid = groups.length >= gridFrom

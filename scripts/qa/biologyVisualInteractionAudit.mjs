@@ -49,6 +49,28 @@ const snapshot = () => {
 }
 const same = (a, b) => JSON.stringify(a.labels) === JSON.stringify(b.labels)
 
+/**
+ * Wait until the figure stops moving (canvas size and every label position identical on two reads in a row). A fixed wait read a heavy figure's
+ * baseline before its labels had mounted (labelCount 0), so "Show all restored the initial view" compared a settled figure with a blank one.
+ */
+async function settle(page, maxMs = 12000) {
+  const read = () => page.evaluate(() => {
+    const fig = document.querySelector('figure[role="figure"]')
+    if (!fig) return ''
+    const c = fig.querySelector('canvas')?.getBoundingClientRect()
+    const ls = [...fig.querySelectorAll('div[style*="translate3d"] span')].map((s) => { const r = s.getBoundingClientRect(); return `${s.textContent.trim().slice(0, 12)}@${Math.round(r.x)},${Math.round(r.y)}` })
+    return `${c ? Math.round(c.width) + 'x' + Math.round(c.height) : ''}|${ls.join(';')}`
+  }).catch(() => '')
+  let prev = await read()
+  const t0 = Date.now()
+  while (Date.now() - t0 < maxMs) {
+    await page.waitForTimeout(400)
+    const cur = await read()
+    if (cur === prev && cur.includes('@')) return
+    prev = cur
+  }
+}
+
 async function shot(page, file) { await page.locator(FIG).first().screenshot({ path: file }) }
 async function click(page, name, exact = true) {
   const b = page.getByRole('button', { name, exact }).first()
@@ -122,12 +144,14 @@ try {
         await page.waitForSelector(`${FIG} canvas`)
         await page.waitForFunction(() => { const c = document.querySelector('figure[role="figure"] canvas'); return !!c && !(c.width === 300 && c.height === 150) }, null, { timeout: 60000 }).catch(() => {})
         await page.waitForTimeout(1200)
+        await settle(page)
         const base0 = await page.evaluate(snapshot)
         if (await click(page, 'Next stage')) {
           await page.waitForTimeout(500)
           const one = await page.evaluate(snapshot)
           const showAll = await click(page, 'Show all', false)
           await page.waitForTimeout(500)
+          await settle(page)
           const back = await page.evaluate(snapshot)
           v.checks.reset = { stage1Labels: one.labelCount, showAllPresent: showAll, restoredToInitial: same(base0, back) }
         }
@@ -191,6 +215,7 @@ try {
         await rp.waitForSelector(`${FIG} canvas`, { timeout: 60000 })
         await rp.waitForFunction(() => { const c = document.querySelector('figure[role="figure"] canvas'); return !!c && !(c.width === 300 && c.height === 150) }, null, { timeout: 60000 }).catch(() => {})
         await rp.waitForTimeout(1300)
+        await settle(rp) // the figure's own load-time settling is not 'animating on its own'
         const a = await rp.locator(FIG).first().screenshot()
         await rp.waitForTimeout(1500)
         const b = await rp.locator(FIG).first().screenshot()

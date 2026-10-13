@@ -22,6 +22,7 @@ import { isRetiredVisualBinding } from '@/lib/teaching/visual/retired'
 import { INSUFFICIENT_FOR_CONCEPT } from '@/lib/teaching/visual/scope'
 import { figureFingerprint } from '@/lib/teaching/visual/fingerprint'
 import { buildDNAReplicationScene, DNA_REPLICATION_SCENE_ID } from '@/lib/teaching/sceneGenerators/dnaReplication'
+import { complexityFor, isGlyphLabel, labelsHeldBack } from '@/lib/teaching/visual/visualComplexity'
 
 const ID = 'bio.mol.dna-replication'
 const resolve = (request: boolean) => resolveVisual({
@@ -92,14 +93,34 @@ describe('4. the geometry says what the concept says', () => {
   const primers = objs.filter((o) => o.type === 'bond' && o.color === '#ef4444')
 
   it('names every component the KG description lists, and nothing it does not', () => {
+    // 2026-10-09: "parental DNA", "template" and "replication fork" were separate labels until the figure carried 17 against a budget of 9,
+    // so the stage view silently dropped eight of them. They are named in the legend, the title and the "fork moves" arrow instead, and
+    // "Okazaki fragments" is merged into the lagging-strand label that sits on the fragments.
     const t = new Set(texts(scene))
-    for (const need of ['helicase', 'DNA polymerase', 'primase', 'ligase', 'leading strand', 'lagging strand',
-      'Okazaki fragments', 'RNA primer', 'replication fork', 'template', 'parental DNA', 'semiconservative', '3′', '5′']) {
+    for (const need of ['helicase', 'DNA polymerase', 'primase', 'ligase', 'leading strand', 'lagging strand (Okazaki fragments)',
+      'RNA primer', 'fork moves', 'semiconservative', '3′', '5′']) {
       expect(t.has(need), need).toBe(true)
     }
+    const legend = (scene.explainer?.legend ?? []).map((l) => l.label).join(' | ')
+    expect(legend).toMatch(/Parental DNA \(the two templates\)/)
+    expect(legend).toMatch(/New DNA, built 5′→3′/)
+    expect(legend).toMatch(/RNA primer/)
+    expect(scene.title).toMatch(/Replication Fork/)
     for (const absent of [/topoisomerase/i, /single.?strand/i, /clamp/i, /GC content/i]) {
       expect(texts(scene).some((x) => absent.test(x)), String(absent)).toBe(false)
     }
+  })
+
+  it('carries no more labels than a stage view may show, so none is dropped (budget 9; was 17)', () => {
+    expect(labelsHeldBack(objs, complexityFor('intermediate'))).toBe(0)
+    expect(objs.filter((o) => o.type === 'label' && !isGlyphLabel(o)).length).toBeLessThanOrEqual(9)
+  })
+
+  it('the lagging-strand label sits on the fragments, not detached from them', () => {
+    const label = objs.find((o) => o.type === 'label' && o.text === 'lagging strand (Okazaki fragments)')!
+    const fragment = bottom[0]
+    // within 1.5 scene units vertically of the bottom new strand (it was ~96px away at 390px before)
+    expect(Math.abs(label.position![1] - fragment.from![1])).toBeLessThan(1.5)
   })
 
   it('the templates are antiparallel, and each new strand runs antiparallel to ITS template', () => {
