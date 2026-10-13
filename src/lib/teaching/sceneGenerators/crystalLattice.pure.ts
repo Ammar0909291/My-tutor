@@ -84,6 +84,14 @@ export function buildLatticeScene(def: LatticeDef): SceneSpec {
   const atoms = latticeAtoms(def)
   const edges = cubeEdges()
   const colorFor = (role: LatticeAtom['role']) => role === 'corner' ? '#3b82f6' : role === 'body' ? '#ef4444' : '#f59e0b'
+  // R7: the three atom classes were told apart by hue ALONE. Each class now also carries a TEXT label drawn beside one of its
+  // atoms (in the class's own hue, so it keys the colour as well), so the figure reads the same without colour vision.
+  const roleName = { corner: 'corner atom', body: 'body-centre atom', face: 'face-centre atom' } as const
+  const keyLabel = (role: LatticeAtom['role'], at: Vec3, offset: Vec3): SceneSpec['steps'][number]['objects'][number] => ({
+    type: 'label' as const, id: `key-${role}`, text: roleName[role], color: colorFor(role),
+    position: [at[0] + offset[0], at[1] + offset[1], at[2] + offset[2]] as Vec3, properties: { key: role },
+  })
+  const firstExtra = atoms.find((a) => a.role !== 'corner')
 
   const steps: SceneSpec['steps'] = [
       {
@@ -91,6 +99,7 @@ export function buildLatticeScene(def: LatticeDef): SceneSpec {
         objects: [
           ...edges.map(([i, j], k) => ({ type: 'bond' as const, id: `edge${k}`, from: CORNERS[i], to: CORNERS[j], color: '#cbd5e1' })),
           ...CORNERS.map((p, i) => ({ type: 'node' as const, id: `corner${i}`, position: p, color: '#3b82f6', radius: 0.6, properties: { role: 'corner' } })),
+          keyLabel('corner', CORNERS[6], [1.6, 1.2, 0]),
         ],
       },
       {
@@ -99,9 +108,12 @@ export function buildLatticeScene(def: LatticeDef): SceneSpec {
           : def.kind === 'bcc'
             ? `Body-centred cubic adds one atom at the very centre of the cube.`
             : `Face-centred cubic adds one atom at the centre of each of the 6 faces.`,
-        objects: atoms.filter((a) => a.role !== 'corner').map((a, i) => ({
-          type: 'node' as const, id: `extra${i}`, position: a.pos, color: colorFor(a.role), radius: 0.6, properties: { role: a.role },
-        })),
+        objects: [
+          ...atoms.filter((a) => a.role !== 'corner').map((a, i) => ({
+            type: 'node' as const, id: `extra${i}`, position: a.pos, color: colorFor(a.role), radius: 0.6, properties: { role: a.role },
+          })),
+          ...(firstExtra ? [keyLabel(firstExtra.role, firstExtra.pos, firstExtra.role === 'body' ? [0, 1.3, 0] : [1.8, 0, 0])] : []),
+        ],
       },
       {
         narration: `Counting shares — each corner counts 1/8, each face 1/2, a body atom 1 — gives ${def.atomsPerCell} atom${def.atomsPerCell === 1 ? '' : 's'} per unit cell.`,
@@ -120,12 +132,26 @@ export function buildLatticeScene(def: LatticeDef): SceneSpec {
     sceneType: 'diagram',
     // The x/y/z triad names no quantity in this figure (a molecule / lattice / shell has no meaningful axes) and its letters
     // collided with the atom labels at the origin (measured 2026-10-08: x|y|z|O stacked at stage 1). Grid left as it was.
-    stage: { axes: false },
+    // R16: the floor grid ran under the bottom label and was the pixels it measured against (3.9–4.5:1 in a minority bucket); a
+    // molecule / unit cell has no floor and the grid names no quantity, so the stage draws neither grid nor axes.
+    stage: { grid: false, axes: false },
     teachingGoal: `Show the ${def.name} unit cell and how corner/face/body sharing gives ${def.atomsPerCell} effective atom${def.atomsPerCell === 1 ? '' : 's'} per cell.`,
     cameraDistance: HALF * 5,
     ariaLabel: `A ${def.name} unit cell with ${atoms.length} atoms drawn, equivalent to ${def.atomsPerCell} atoms per cell after sharing.`,
     steps,
   }
+}
+
+/**
+ * "Close packing and efficiency" (chem.solid.packing). Cubic close packing IS the face-centred cubic cell — 4 atoms per cell,
+ * the number the 74 % packing efficiency is computed from — so the concept is shown the FCC cell rather than the one-colour
+ * simple-cubic card it used to get from the domain default (the least efficient arrangement, and not close-packed). The same
+ * verified scene with its own id and title: the FCC cell is also the lattice picker's default figure, and two figures that
+ * differ (this one has no picker) must not share an id.
+ */
+export function buildClosePackingScene(): SceneSpec {
+  const fcc = buildLatticeScene(lookupLattice('fcc')!)
+  return { ...fcc, id: 'lattice-fcc-close-packing', title: 'Close packing: Face-Centred Cubic (FCC) unit cell — 4 atoms per cell' }
 }
 
 // ── Safety-net consistency checker (independent: the sharing rule) ────────────

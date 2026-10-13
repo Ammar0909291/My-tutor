@@ -94,29 +94,42 @@ export function checkSystemBoundaryConsistency(spec: SceneSpec, systemType: Syst
  * `qv`/`qp`). The arrow direction is derived from the sign, never hardcoded,
  * so the figure can never show heat "entering" a system whose q is negative.
  */
+/**
+ * The unit the first-law figure's numbers are in. The figure is generic (q and w are slider values), so it states ONE energy
+ * unit on every number it prints — a bare "q = +100" is a quantity with no dimension (R8). Joules: the SI unit, and the
+ * scale (|q|, |w| ≤ 100) of the small-system examples the figure is used for.
+ */
+const FIRST_LAW_UNIT = 'J'
+
+/** A signed energy as printed: the true minus sign U+2212 for a negative (a bare JS number prints an ASCII hyphen), "+" never added here. */
+const signedEnergy = (v: number): string => (v < 0 ? `−${Math.abs(v)}` : String(v))
+/** The addend of "q + w": a negative one is bracketed, so the line never reads "100 + −40". */
+const addend = (v: number): string => (v < 0 ? `(${signedEnergy(v)})` : String(v))
+const labelledEnergy = (v: number): string => `${v >= 0 ? '+' : ''}${signedEnergy(v)}`
+
 export function buildFirstLawScene(q: number, w: number): SceneSpec {
   const deltaU = round(q + w, 2)
   const boundary = box(-3, -3, 3, 3, ROLE.reference)
   const qArrow = q >= 0
-    ? arrow([-5, 1, 0], [-3, 1, 0], ROLE.input, `q = ${q >= 0 ? '+' : ''}${q}`)
-    : arrow([-3, 1, 0], [-5, 1, 0], ROLE.output, `q = ${q}`)
+    ? arrow([-5, 1, 0], [-3, 1, 0], ROLE.input, `q = ${labelledEnergy(q)} ${FIRST_LAW_UNIT}`)
+    : arrow([-3, 1, 0], [-5, 1, 0], ROLE.output, `q = ${labelledEnergy(q)} ${FIRST_LAW_UNIT}`)
   const wArrow = w >= 0
-    ? arrow([-5, -1, 0], [-3, -1, 0], ROLE.input, `w = ${w >= 0 ? '+' : ''}${w}`)
-    : arrow([-3, -1, 0], [-5, -1, 0], ROLE.output, `w = ${w}`)
+    ? arrow([-5, -1, 0], [-3, -1, 0], ROLE.input, `w = ${labelledEnergy(w)} ${FIRST_LAW_UNIT}`)
+    : arrow([-3, -1, 0], [-5, -1, 0], ROLE.output, `w = ${labelledEnergy(w)} ${FIRST_LAW_UNIT}`)
 
   return {
     id: 'chem-first-law',
     title: 'First Law of Thermodynamics',
     sceneType: 'diagram',
-    teachingGoal: `Show ΔU = q + w for a system receiving q = ${q} and w = ${w}, giving ΔU = ${deltaU}.`,
+    teachingGoal: `Show ΔU = q + w for a system receiving q = ${signedEnergy(q)} ${FIRST_LAW_UNIT} and w = ${signedEnergy(w)} ${FIRST_LAW_UNIT}, giving ΔU = ${signedEnergy(deltaU)} ${FIRST_LAW_UNIT}.`,
     cameraDistance: 16,
-    ariaLabel: `A system with heat q = ${q} and work w = ${w} crossing its boundary, giving a change in internal energy delta U = ${deltaU}.`,
+    ariaLabel: `A system with heat q = ${signedEnergy(q)} ${FIRST_LAW_UNIT} and work w = ${signedEnergy(w)} ${FIRST_LAW_UNIT} crossing its boundary, giving a change in internal energy delta U = ${signedEnergy(deltaU)} ${FIRST_LAW_UNIT}.`,
     stage: { grid: false, axes: false },
     steps: [
       { narration: 'Internal energy U changes only through heat and work crossing the boundary.', objects: [...boundary, label('system, U', [0, 0, 0], ROLE.ink, 'primary')] },
-      { narration: `Heat: q = ${q}. Positive means heat flows in.`, objects: [qArrow] },
-      { narration: `Work: w = ${w}. Positive means work is done on the system.`, objects: [wArrow] },
-      { narration: `ΔU = q + w = ${q} + ${w} = ${deltaU}.`, objects: [heading(`ΔU = ${deltaU}`, [0, 4, 0], ROLE.result)] },
+      { narration: `Heat: q = ${signedEnergy(q)} ${FIRST_LAW_UNIT}. Positive means heat flows in.`, objects: [qArrow] },
+      { narration: `Work: w = ${signedEnergy(w)} ${FIRST_LAW_UNIT}. Positive means work is done on the system.`, objects: [wArrow] },
+      { narration: `ΔU = q + w = ${signedEnergy(q)} + ${addend(w)} = ${signedEnergy(deltaU)} ${FIRST_LAW_UNIT}.`, objects: [heading(`ΔU = ${signedEnergy(deltaU)} ${FIRST_LAW_UNIT}`, [0, 4, 0], ROLE.result)] },
     ],
   }
 }
@@ -125,8 +138,8 @@ export function checkFirstLawConsistency(spec: SceneSpec, q: number, w: number):
   const deltaU = round(q + w, 2)
   const allText = spec.steps.flatMap((s) => s.objects.map((o) => o.text ?? '')).join(' | ')
   const errors: string[] = []
-  if (!allText.includes(`ΔU = ${deltaU}`)) errors.push(`scene does not state the derived ΔU = ${deltaU}`)
-  if (!allText.includes(`q = ${q >= 0 ? '+' : ''}${q}`)) errors.push('scene does not label q correctly')
-  if (!allText.includes(`w = ${w >= 0 ? '+' : ''}${w}`)) errors.push('scene does not label w correctly')
+  if (!allText.includes(`ΔU = ${signedEnergy(deltaU)}`)) errors.push(`scene does not state the derived ΔU = ${signedEnergy(deltaU)}`)
+  if (!allText.includes(`q = ${labelledEnergy(q)}`)) errors.push('scene does not label q correctly')
+  if (!allText.includes(`w = ${labelledEnergy(w)}`)) errors.push('scene does not label w correctly')
   return { ok: errors.length === 0, errors }
 }

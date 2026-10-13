@@ -562,7 +562,11 @@ function main(): void {
   const covered = instances.reduce((n, i) => n + i.conceptIds.length, 0)
   if (covered !== withFigure.length) throw new Error(`instance map covers ${covered} concepts, expected ${withFigure.length}`)
   const ids = new Set(instances.map((i) => i.instanceId))
-  if (ids.size !== instances.length) throw new Error('instanceId collision between different payloads')
+  if (ids.size !== instances.length) {
+    const seen = new Set<string>()
+    const dup = instances.map((i) => i.instanceId).filter((id) => (seen.has(id) ? true : (seen.add(id), false)))
+    throw new Error(`instanceId collision between different payloads: ${[...new Set(dup)].join(', ')}`)
+  }
 
   // ── stdout ─────────────────────────────────────────────────────────────────
   console.log(JSON.stringify(summary, null, 2))

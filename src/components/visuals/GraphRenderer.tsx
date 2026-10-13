@@ -335,16 +335,19 @@ export function GraphRenderer({
               Anchored to the plot edges rather than to the origin, so they
               stay on screen at every pan and zoom. Drawn at 11px, above the
               10px tick labels, and given the plot background so a tick digit
-              underneath can never collide with a word. */}
+              underneath can never collide with a word. The plot background is --bg-surface: the old `--surface` is defined nowhere, so the
+              halo fell back to near-black #0d1117 and ringed the grey words in black on the light theme (measured, Tier-3 chemistry graphs). */}
           {spec.xLabel?.trim() && (
-            // MATH-014: above the zoom buttons (bottom-right, 24 px + 8 px inset).
-            <text x={w - 6} y={h - 40} fontSize={11} textAnchor="end" fontWeight={600}
-                  fill="var(--text-secondary, #6b7280)" stroke="var(--surface, #0d1117)" strokeWidth={3}
+            // MATH-014: above the zoom buttons (bottom-right: 28 px tall + 8 px inset = 36 px). Chemistry visual closure (2026-10-12): the
+            // baseline sits 46 px up, so the text, its descenders and its 3 px halo clear the buttons (at 40 px the label touched them:
+            // the x-axis name was half hidden on all four served Tier-3 chemistry graphs at 1280 and 390 px).
+            <text x={w - 6} y={h - 46} fontSize={11} textAnchor="end" fontWeight={600}
+                  fill="var(--text-secondary, #6b7280)" stroke="var(--bg-surface, #fff)" strokeWidth={3}
                   paintOrder="stroke">{spec.xLabel.trim()}</text>
           )}
           {spec.yLabel?.trim() && (
             <text x={6} y={12} fontSize={11} textAnchor="start" fontWeight={600}
-                  fill="var(--text-secondary, #6b7280)" stroke="var(--surface, #0d1117)" strokeWidth={3}
+                  fill="var(--text-secondary, #6b7280)" stroke="var(--bg-surface, #fff)" strokeWidth={3}
                   paintOrder="stroke">{spec.yLabel.trim()}</text>
           )}
           {/* curve */}

@@ -1404,6 +1404,43 @@ An exact value stated in a label is better checked against a first-principles co
 
 Next (batch 40): the 4 topology helpers (topological-space, product-space, homotopy-equivalence, homology), the 4 optimisation helpers (convex-optimization, quadratic-programming, integer-programming, dynamic-programming) and the 3 functional-analysis helpers (normed-space, distributions, special-functions) — 11; then geom (4), func (4), cx (4) as batch 41, then graph (3), trig (2), cat (2), num (1); then tier N (352) if still wanted. List what is left with `npx tsx scripts/math/visual-coverage.ts --list H`.
 
+# Batch 40 (2026-10-13): topology, optimisation and functional-analysis helpers (11 figures)
+
+`sceneGenerators/mathCoreScenesB40.ts` + `mathCoreScenesBatch40.test.ts` (112 checks); campaign audit threshold now 490. Coverage after this batch:
+536 of 908 concepts with a fixed figure (59.0%); essential tier 344 / 346 (complete), tier H 190 / 210 (90.5%), tier N 2 / 352; target (E + H) 534 / 556 = 96.0%.
+Pre-push checklist: full `npx vitest run`, `scripts/ci/tsc-ratchet.sh` 0 errors, `validate-visualization-coverage.ts` PASS, `scripts/math/label-displacement.ts mathCoreScenesB40` (0 unresolved, 0 card-host moves),
+`scripts/math/campaign-tools/audit-module.ts mathCoreScenesB40` (11 / 11 admitted). Mutation check: fifteen deliberate single-part wrong numbers (a box that swallows c, a count numeral 2-1-0, U drawn to 3.5, arrows that land off the circle, a figure-eight pulled apart,
+a wrong loop numeral, w without its tilt, a moved chord end, a solution slid along the edge, a moved polygon corner, the constraint 10x + 6y ≤ 46, a wrong green value beside A, a band of radius 0.3, a bump of height 1.5/w, dots 0.5 above Γ) each made at least one test fail.
+Defects found while verifying (all fixed before the commit): (1) dynamic programming — the cost "4" of the road B → D sat only 0.07 nearer to its own road than to B → C (both fan out of B), so a reader could attach it to the wrong road; the numeral of every road now goes to the side that keeps it
+farthest from all OTHER roads (`dpCostAt`), and the test requires a margin of at least 0.15 and a one-to-one numeral/road matching; (2) integer programming — the polygon was invisible (its axis edges were the same grey as the axes) and the two objective lines ran across the whole plot looking like extra polygon edges:
+thicker polygon edges, short level segments through their dots, larger lattice dots, shorter branch lines; (3) normed space — h equals f outside its bump, so the red curve painted over the blue one and f read as red: h is drawn only where it departs from f ([0.5, 0.9]);
+(4) topological space — the caption {a, b} was squeezed between two box edges and the renderer pushed it OUTSIDE the grey box (reading as a name for X): moved into the clear space above b; (5) distributions — nothing said each bump has area 1: caption added and tested;
+(6) quadratic programming — "min of f" was shoved away from the dot it names by the real renderer (see the notes).
+Test-logic issues (not figure defects): a road-centric numeral matching was ambiguous where roads cross (now numeral-centric); the flat bottom of Γ is only readable to ±0.2 because every coordinate is rounded to 0.01 (the test uses the mean x of the flat bottom and the minimum value).
+
+| Concept | Figure |
+|---|---|
+| math.top.topological-space | X = {a, b, c} and τ = {∅, {a}, {a, b}, X} as nested boxes: unions and intersections stay in τ, a lies in 3 open sets, b in 2, c in 1, and {a, c} is not open |
+| math.top.product-space | the plane X × Y: U = (1, 3) on X, V = (0.5, 2) on Y; the strips π₁⁻¹(U) and π₂⁻¹(V) cross in the basic open set U × V whose projections are U and V |
+| math.top.homotopy-equivalence | ℝ² ∖ {0} and the unit circle: p ↦ p/|p| slides three points along their rays onto S¹; g∘f = id; the midpoints of the slide lie at radius (|p| + 1)/2 |
+| math.top.homology | a point (1 piece, 0 loops), a circle (1, 1), a figure-eight (1, 2) and two separate circles (2, 2): H₀ = pieces (blue), H₁ = loops (red) |
+| math.opt.convex-optimization | f = (x − 1.5)² has one dip and every chord above its graph; w = (x² − 1)² + 0.3x has two dips, the right one (≈ 0.29) local only, the left (≈ −0.31) global |
+| math.opt.quadratic-programming | minimise (x − 3)² + (y − 2.5)² on x, y ≥ 0, x + y ≤ 4: the level circle of radius 1.06 touches the edge at (2.25, 1.75); −∇f points along the edge normal |
+| math.opt.integer-programming | maximise 5x + 4y on x + y ≤ 5, 10x + 6y ≤ 45: 19 lattice points; the LP corner (3.75, 1.25) gives 23.75, the best lattice point (3, 2) gives 23; branch lines x = 3 and x = 4 |
+| math.opt.dynamic-programming | S → {A, B} → {C, D} → T with road costs; cheapest cost to T filled backwards: C 3, D 6, A 8, B 4, S 9; the route S → B → C → T costs 5 + 1 + 3 = 9, the greedy walk 10 |
+| math.fnal.normed-space | C([0, 1]) with the sup norm: a band of radius 0.25 round f; g stays inside (largest gap 0.15), h leaves it (0.4); the triangle inequality holds on the drawn curves |
+| math.fnal.distributions | bumps of width 1, ½, ¼ and height 1, 2, 4 (area 1 each) tested against φ = cos x: the averages 0.96, 0.99, 1.00 tend to φ(0) = 1 — the Dirac δ |
+| math.fnal.special-functions | Γ(x) from x = 0.5 to 4.2 (checked against the defining integral), the factorials 1, 1, 2, 6 at x = 1…4, and B(2, 2) = 1 × 1 ÷ 6 ≈ 0.17 |
+
+Notes: twins checked first — none of the eleven ids had a registry entry (top: euler-characteristic, fundamental-group, homeomorphism, homotopy, manifold, open-sets, quotient-space, smooth-manifold; opt: convex-function, convex-set, gradient-methods, lagrange-multipliers, linear-programming, unconstrained-optimization; fnal: convolution were already drawn and not repeated; the normed-space figure uses the sup-norm band instead of the p-ball picture of `math.meas.lp-space`).
+A `dot()` with its own `text` is reported by `label-displacement.ts` as moved 18 px on the card host, always, so it can never meet the zero-card-move rule: use a free label (plus a thin leader line if it must name a dot).
+The label-displacement tool uses a 570 x 370 card; the real Chromium card can still push a label that sits INSIDE a circle or a closed curve out to the figure's margin (the QP "min of f" went to the top row wherever it was placed inside the circles): look at the render, and put such a caption outside the curve with a leader line.
+The first figure rendered right after `next dev` starts can come out with an empty canvas (the card chrome only): re-render it alone before concluding anything about the figure.
+A figure that must show two curves that coincide over a stretch (h = f outside the bump) should draw the second curve only where it differs, or it paints over the first.
+Merged with the Biology/Physics visual fixes another session pushed to `main` while this batch was being built (`origin/main` @ 478adb0f): a plain `git merge origin/main`, no conflicts, and the full suite re-run on the merged tree before pushing.
+
+Next (batch 41): geom (4: geometric-proof, length, differential-geometry-surfaces, geometric-constructions), func (4: function-notation, zero-of-function, step-function, function-operations) and cx (4: analytic-continuation, singularities, residue, argument-principle) — 12; then batch 42: graph (3), trig (2), cat (2), num (1). List what is left with `npx tsx scripts/math/visual-coverage.ts --list H`.
+
 # Deferred follow-up — do AFTER the Mathematics figure campaign (recorded 2026-10-12 at the owner's request)
 
 Context: the owner said another account was "validating visuals for all 4 subjects". A read-only audit of the last 10 days (2026-10-02 → 10-12) on `origin/main` and every remote branch found:
