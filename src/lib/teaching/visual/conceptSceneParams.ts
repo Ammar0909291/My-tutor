@@ -288,6 +288,39 @@ import {
   buildMatrixRepresentationScene, buildDiagonalizationScene, buildSpectralTheoremScene, buildInnerProductScene,
   buildInnerProductSpaceScene, buildQrFactorizationScene, buildSingularValuesScene, buildTensorScene,
 } from '@/lib/teaching/sceneGenerators/mathCoreScenesB32'
+import {
+  buildOdeScene, buildSolutionTypesScene, buildIvpScene, buildExistenceUniquenessScene, buildFirstOrderOdeScene,
+  buildWronskianScene, buildLaplaceTransformScene, buildSystemsOdeScene, buildFourierTransformScene,
+  buildHarmonicFunctionsScene, buildGreensFunctionScene, buildNonlinearOdeScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB33'
+import {
+  buildPopulationSampleScene, buildSamplingScene, buildStandardErrorScene, buildTestStatisticScene, buildZTestScene,
+  buildTTestScene, buildTwoWayAnovaScene, buildCovarianceMatrixScene, buildBayesianInferenceScene,
+  buildCredibleIntervalScene, buildExperimentalDesignScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB34'
+import {
+  buildCountingPrinciplesScene, buildPermutationsScene, buildCombinationsScene,
+  buildCombinatoricsScene, buildRecurrenceRelationScene, buildLinearRecurrenceScene, buildDivideConquerRecurrenceScene,
+  buildPropositionalLogicScene, buildAlgorithmComplexityScene, buildComplexityClassesScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB35'
+import {
+  buildLimitLawsScene, buildChainRuleScene, buildImplicitDifferentiationScene, buildOptimizationScene, buildAntiderivativesScene,
+  buildTrigSubstitutionScene, buildPowerSeriesScene, buildRadiusOfConvergenceScene, buildTaylorRemainderScene,
+  buildChainRuleMultivariableScene, buildSequenceLimitsScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB36'
+import {
+  buildSampleSpaceScene, buildClassicalProbabilityScene, buildCombinatorialProbabilityScene, buildIndependenceScene,
+  buildRandomVariableScene, buildExpectedValueScene, buildMarkovInequalityScene, buildTransitionMatrixScene, buildPoissonProcessScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB37'
+import {
+  buildSequenceScene, buildArithmeticSequenceScene, buildSeriesScene, buildPartialSumsScene, buildArithmeticSeriesScene,
+  buildSeriesConvergenceScene, buildHarmonicSeriesScene, buildMetricSpaceScene, buildCompactnessScene, buildConnectednessScene,
+  buildRiemannIntegrabilityScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB38'
+import {
+  buildDifferentiabilityRigorousScene, buildTaylorRigorousScene, buildFtcRigorousScene, buildMeasureScene,
+  buildLebesgueMeasureScene, buildMeasureZeroScene, buildConvergenceTheoremsScene, buildLpSpaceScene, buildL2SpaceScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB39'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -924,6 +957,96 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'math.linalg.qr-factorization':        buildQrFactorizationScene,
   'math.linalg.singular-values':         buildSingularValuesScene,
   'math.linalg.tensor':                  buildTensorScene,
+
+  // Mathematics visual campaign, batch 33 (2026-10-12). See mathCoreScenesB33.ts.
+  'math.de.ode':                         buildOdeScene,
+  'math.de.solution-types':              buildSolutionTypesScene,
+  'math.de.ivp':                         buildIvpScene,
+  'math.de.existence-uniqueness':        buildExistenceUniquenessScene,
+  'math.de.first-order-ode':             buildFirstOrderOdeScene,
+  'math.de.wronskian':                   buildWronskianScene,
+  'math.de.laplace-transform':           buildLaplaceTransformScene,
+  'math.de.systems-ode':                 buildSystemsOdeScene,
+  'math.de.fourier-transform':           buildFourierTransformScene,
+  'math.de.harmonic-functions':          buildHarmonicFunctionsScene,
+  'math.de.greens-function':             buildGreensFunctionScene,
+  'math.de.nonlinear-ode':               buildNonlinearOdeScene,
+
+  // Mathematics visual campaign, batch 34 (2026-10-12). See mathCoreScenesB34.ts.
+  'math.stats.population-sample':        buildPopulationSampleScene,
+  'math.stats.sampling':                 buildSamplingScene,
+  'math.stats.standard-error':           buildStandardErrorScene,
+  'math.stats.test-statistic':           buildTestStatisticScene,
+  'math.stats.z-test':                   buildZTestScene,
+  'math.stats.t-test':                   buildTTestScene,
+  'math.stats.two-way-anova':            buildTwoWayAnovaScene,
+  'math.stats.covariance-matrix':        buildCovarianceMatrixScene,
+  'math.stats.bayesian-inference':       buildBayesianInferenceScene,
+  'math.stats.credible-interval':        buildCredibleIntervalScene,
+  'math.stats.experimental-design':      buildExperimentalDesignScene,
+
+  // Mathematics visual campaign, batch 35 (2026-10-12). See mathCoreScenesB35.ts.
+  'math.disc.counting-principles':       buildCountingPrinciplesScene,
+  'math.disc.permutations':              buildPermutationsScene,
+  'math.disc.combinations':              buildCombinationsScene,
+  'math.disc.binomial-theorem':          buildBinomialTheoremScene, // twin of math.alg.binomial-theorem (batch 29): Pascal's triangle
+  'math.disc.combinatorics':             buildCombinatoricsScene,
+  'math.disc.recurrence-relation':       buildRecurrenceRelationScene,
+  'math.disc.linear-recurrence':         buildLinearRecurrenceScene,
+  'math.disc.divide-conquer-recurrence': buildDivideConquerRecurrenceScene,
+  'math.disc.propositional-logic':       buildPropositionalLogicScene,
+  'math.disc.algorithm-complexity':      buildAlgorithmComplexityScene,
+  'math.disc.complexity-classes':        buildComplexityClassesScene,
+
+  // Mathematics visual campaign, batch 36 (2026-10-12). See mathCoreScenesB36.ts.
+  'math.calc.limit-laws':                buildLimitLawsScene,
+  'math.calc.chain-rule':                buildChainRuleScene,
+  'math.calc.implicit-differentiation':  buildImplicitDifferentiationScene,
+  'math.calc.optimization':              buildOptimizationScene,
+  'math.calc.antiderivatives':           buildAntiderivativesScene,
+  'math.calc.trig-substitution':         buildTrigSubstitutionScene,
+  'math.calc.power-series':              buildPowerSeriesScene,
+  'math.calc.radius-of-convergence':     buildRadiusOfConvergenceScene,
+  'math.calc.taylor-remainder':          buildTaylorRemainderScene,
+  'math.calc.chain-rule-multivariable':  buildChainRuleMultivariableScene,
+  'math.calc.sequence-limits':           buildSequenceLimitsScene,
+
+  // Mathematics visual campaign, batch 37 (2026-10-12). See mathCoreScenesB37.ts.
+  // math.prob.bayesian-inference is the twin of math.stats.bayesian-inference (batch 34): same KG statement, same figure.
+  'math.prob.sample-space':              buildSampleSpaceScene,
+  'math.prob.classical-probability':     buildClassicalProbabilityScene,
+  'math.prob.combinatorial-probability': buildCombinatorialProbabilityScene,
+  'math.prob.independence':              buildIndependenceScene,
+  'math.prob.bayesian-inference':        buildBayesianInferenceScene,
+  'math.prob.random-variable':           buildRandomVariableScene,
+  'math.prob.expected-value':            buildExpectedValueScene,
+  'math.prob.markov-inequality':         buildMarkovInequalityScene,
+  'math.prob.transition-matrix':         buildTransitionMatrixScene,
+  'math.prob.poisson-process':           buildPoissonProcessScene,
+
+  // Mathematics visual campaign, batch 38 (2026-10-12). See mathCoreScenesB38.ts.
+  'math.seq.sequence':                   buildSequenceScene,
+  'math.seq.arithmetic-sequence':        buildArithmeticSequenceScene,
+  'math.seq.series':                     buildSeriesScene,
+  'math.seq.partial-sums':               buildPartialSumsScene,
+  'math.seq.arithmetic-series':          buildArithmeticSeriesScene,
+  'math.seq.series-convergence':         buildSeriesConvergenceScene,
+  'math.seq.harmonic-series':            buildHarmonicSeriesScene,
+  'math.real.metric-space':              buildMetricSpaceScene,
+  'math.real.compactness':               buildCompactnessScene,
+  'math.real.connectedness':             buildConnectednessScene,
+  'math.real.riemann-integrability':     buildRiemannIntegrabilityScene,
+
+  // Mathematics visual campaign, batch 39 (2026-10-12). See mathCoreScenesB39.ts.
+  'math.real.differentiability-rigorous': buildDifferentiabilityRigorousScene,
+  'math.real.taylor-rigorous':           buildTaylorRigorousScene,
+  'math.real.ftc-rigorous':              buildFtcRigorousScene,
+  'math.meas.measure':                   buildMeasureScene,
+  'math.meas.lebesgue-measure':          buildLebesgueMeasureScene,
+  'math.meas.measure-zero':              buildMeasureZeroScene,
+  'math.meas.convergence-theorems':      buildConvergenceTheoremsScene,
+  'math.meas.lp-space':                  buildLpSpaceScene,
+  'math.meas.l2-space':                  buildL2SpaceScene,
 
   // The Punnett generator is single-gene by construction (genotypes are two
   // alleles). A dihybrid cross drawn as a monohybrid square teaches the wrong

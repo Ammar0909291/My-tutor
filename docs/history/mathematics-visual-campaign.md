@@ -1180,6 +1180,230 @@ Next (batch 33): the 12 differential-equation helpers — ode, solution-types, i
 nonlinear-ode — then stats (11), disc (11), calc (11), prob (10), seq (7), real (7), meas (6), top (4), opt (4), geom (4), func (4), cx (4), graph (3), fnal (3), trig (2), cat (2), num (1); then tier N (352) if still wanted.
 List what is left with `npx tsx scripts/math/visual-coverage.ts --list H`.
 
+# Batch 33 (2026-10-12): the differential-equation helpers (12 figures)
+
+`sceneGenerators/mathCoreScenesB33.ts` + `mathCoreScenesBatch33.test.ts` (122 checks); campaign audit threshold now 416. Coverage after this batch:
+462 of 908 concepts with a fixed figure (50.9%); essential tier 344 / 346 (complete), tier H 116 / 210 (55.2%), tier N 2 / 352; target (E + H) 460 / 556 = 82.7%. All `math.de.*` helpful concepts are now covered.
+Pre-push checklist: full `npx vitest run`, `scripts/ci/tsc-ratchet.sh` 0 errors, `validate-visualization-coverage.ts` PASS, `scripts/math/label-displacement.ts mathCoreScenesB33` (0 unresolved, 0 card-host moves),
+`scripts/math/campaign-tools/audit-module.ts mathCoreScenesB33` (12 / 12 admitted). Mutation check: twelve deliberate wrong numbers in the generator (a degree caption, the parabola, the highlighted curve, the cubic,
+the bell exponent, e^(1.5x), s = 3, the matrix A, sinc without the 2, a sample point, the tent peak and end, the logistic rate) each made exactly one test fail.
+
+| Concept | Figure |
+|---|---|
+| math.de.ode | three equations y′ = 2x, y″ + y = 0, (y′)³ + y = x with captions order 1/2/1 and degree 1/1/3 (the test parses order and degree from the equation text) |
+| math.de.solution-types | Clairaut y = xy′ + (y′)²: lines y = Cx + C² (C = −2…2, blue) = general, C = 1 (violet) = particular, parabola y = −x²/4 with green tangent dots at (−2C, −C²) = singular |
+| math.de.ivp | y′ = y, y(0) = 1: three curves Ce^x (C = 0.5, 1, 2); only C = 1 passes through the red point; green y = eˣ and a slope-1 tangent |
+| math.de.existence-uniqueness | y′ = y has one solution through (0, 1); y′ = 3y^(2/3) has y = 0 and y = x³ through (0, 0) because ∂f/∂y = 2y^(−1/3) is unbounded |
+| math.de.first-order-ode | y′ = −2xy → dy/y = −2x dx → ln y = −x² + c → bell curves y = Ce^(−x²), C = 1, 2 |
+| math.de.wronskian | (eˣ, e²ˣ): W(0) = 1 independent; (eˣ, 2eˣ): W = 0 dependent |
+| math.de.laplace-transform | area under e^(−2t) as 23 midpoint bars of width 0.1 = 1/s = 0.5 (the unseen tail is under 0.005) |
+| math.de.systems-ode | y″ + y = 0 → v = y′, x′ = A x with A = [[0, 1], [−1, 0]]; circular phase portrait (r = 1, 2) with clockwise arrows A x |
+| math.de.fourier-transform | pulse on [−1, 1] and its transform 2 sin ω / ω (peak 2 = the pulse's area, zeros at ±π, ±2π, ±3π) |
+| math.de.harmonic-functions | u = x² − y² on the circle of radius 1 about (1, 1): samples 3, −1, −3, 1 average to u(1, 1) = 0 |
+| math.de.greens-function | −u″ = δ(x − ξ), ξ = 0.4: the tent G with peak 0.24, slopes 0.6 and −0.4 (a jump of −1) |
+| math.de.nonlinear-ode | logistic y′ = y(1 − y): equilibria y = 0 (unstable, red) and y = 1 (stable, green), S-curves from below and a curve from y(0) = 2 |
+
+Notes: the tests check every drawn curve against an INDEPENDENT closed form and the closed form against its ODE (a central difference of the formula), and several figures are checked by a different route: the Fourier curve against
+Simpson integration of the DRAWN pulse, the Laplace bars against the area and a fitted decay rate, the Wronskian by fitting ln y to each drawn curve and computing W from the fitted exponents, the harmonic mean over the drawn
+circle, the Green's tent against second differences. `P()` rounds drawn coordinates to 0.01, which is a large relative error for small y — read values back only where y is not tiny (y >= 0.4 for ln fits, y > 0.5 for ratios)
+and loosen derivative checks accordingly (a central difference over 0.13 of x carries ±0.07 of noise). Layout lessons: a bar or line of height < 0.005 world units rounds to a zero-length bond and is rejected (ST-07) — only draw
+bars that are tall enough; SM-01 reads "W(0) = 1" as W × 0 = 1 (implicit product) and flags it next to "W = 0" — phrase such captions without "=" ("W(0) is 1, not 0"); axis arrows start `ux × (x₀ − 0.3)` left of the origin, which
+can leave the ±5 window for wide panels.
+
+Next (batch 34): the 11 statistics helpers — population-sample, sampling, standard-error, test-statistic, z-test, t-test, two-way-anova, covariance-matrix, bayesian-inference, credible-interval, experimental-design —
+then disc (11), calc (11), prob (10), seq (7), real (7), meas (6), top (4), opt (4), geom (4), func (4), cx (4), graph (3), fnal (3), trig (2), cat (2), num (1); then tier N (352) if still wanted.
+List what is left with `npx tsx scripts/math/visual-coverage.ts --list H`.
+
+# Batch 34 (2026-10-12): the statistics helpers (11 figures)
+
+`sceneGenerators/mathCoreScenesB34.ts` + `mathCoreScenesBatch34.test.ts` (112 checks); campaign audit threshold now 427. Coverage after this batch:
+473 of 908 concepts with a fixed figure (52.1%); essential tier 344 / 346 (complete), tier H 127 / 210 (60.5%), tier N 2 / 352; target (E + H) 471 / 556 = 84.7%. All `math.stats.*` helpful concepts are now covered.
+Pre-push checklist: full `npx vitest run`, `scripts/ci/tsc-ratchet.sh` 0 errors, `validate-visualization-coverage.ts` PASS, `scripts/math/label-displacement.ts mathCoreScenesB34` (0 unresolved, 0 card-host moves),
+`scripts/math/campaign-tools/audit-module.ts mathCoreScenesB34` (11 / 11 admitted). Mutation check: eleven deliberate wrong numbers (a population value, a systematic pick, the SE formula, the observed z, the critical value,
+the t exponent, an ANOVA cell mean, a data point, the prior, an interval end, a block layout) each made exactly one test fail.
+
+| Concept | Figure |
+|---|---|
+| math.stats.population-sample | dot plot of 24 values (mean 60, green line) with a sample of 6 (violet dots, mean 63, violet line): sampling error |
+| math.stats.sampling | four 6 × 6 grids, 6 units each: SRS, stratified (2 per band), cluster (2 groups of 3), systematic (every 6th); the test checks each structure from the dot cells |
+| math.stats.standard-error | x̄ ~ N(100, SE²), σ = 8: n = 4 → SE = 8 ÷ 2 = 4 (wide), n = 16 → SE = 8 ÷ 4 = 2 (narrow); the test measures each drawn curve's standard deviation |
+| math.stats.test-statistic | N(0, 1) with the observed z = 2.1 and the tail bars: p ≈ 0.018 |
+| math.stats.z-test | σ = 15, n = 36 → SE = 2.5; x̄ = 106 → z = 6 ÷ 2.5 = 2.4; two red tails beyond ±1.96 (5%); p ≈ 0.016 |
+| math.stats.t-test | N(0, 1) vs t(9) (nearly identical in the middle), marks ±1.96 and ±2.262 for 95%, and the upper tail magnified 48× where the red curve lies above the blue |
+| math.stats.two-way-anova | interaction plots of a 2 × 2 design: gaps 4, 4 (parallel, no interaction) vs 4, −4 (crossing, interaction) |
+| math.stats.covariance-matrix | five points (1, 1), (2, 3), (3, 2), (4, 5), (5, 4): means (3, 3), Σ = [[2.5, 2], [2, 2.5]], eigenvalues 4.5 and 0.5 |
+| math.stats.bayesian-inference | prior Beta(5, 5) × likelihood of 7 heads in 10 → posterior Beta(12, 8), MAP 11/18 ≈ 0.61 between 0.5 and 0.7 |
+| math.stats.credible-interval | the Beta(12, 8) posterior with the central 95% interval [0.38, 0.80] as 22 bars, 2.5% in each tail |
+| math.stats.experimental-design | 12 plots in 3 blocks of 4; treatments A and B assigned at random within each block (2 each per block, 6 each overall) |
+
+Notes: areas are checked by integrating the DRAWN polyline (`areaBetween`), the 95% marks and quantiles are found independently by bisection on a Simpson-integrated density (Φ via Abramowitz–Stegun, Student's t(9) from its known
+constant, the Beta constants 630, 1320 and 604656), and the Bayes check is pointwise: posterior / (prior × likelihood) is the same constant at every drawn θ. A truncated curve has a smaller standard deviation than the true one
+(the ±3σ wide curve measures 3.945, not 4): compare with a tolerance that allows for it. Layout lessons: the label solver pushes any caption whose box would cross the card edge, and labels stacked closer than ~0.9 world units
+or sharing a row within a few pixels are moved apart; a long caption (about 30 characters, 290 px) must be centred where both ends stay inside the 570 px card; keep captions of a left and right column on different rows or well
+apart; scatter and dot figures need tick numerals (free, 1-2 characters) so the values can be read back. Tooling: `new-batch-test.py` now rewrites only the `import * as M` line of the previous head (it used to rewrite every generator import).
+
+Next (batch 35): the 11 discrete-mathematics helpers — counting-principles, permutations, combinations, binomial-theorem, combinatorics, recurrence-relation, linear-recurrence, divide-conquer-recurrence, propositional-logic,
+algorithm-complexity, complexity-classes — then calc (11), prob (10), seq (7), real (7), meas (6), top (4), opt (4), geom (4), func (4), cx (4), graph (3), fnal (3), trig (2), cat (2), num (1); then tier N (352) if still wanted.
+List what is left with `npx tsx scripts/math/visual-coverage.ts --list H`.
+
+# Batch 35 (2026-10-12): the discrete-mathematics helpers (10 figures + 1 twin registration)
+
+`sceneGenerators/mathCoreScenesB35.ts` + `mathCoreScenesBatch35.test.ts` (103 checks); campaign audit threshold now 438. Coverage after this batch:
+484 of 908 concepts with a fixed figure (53.3%); essential tier 344 / 346 (complete), tier H 138 / 210 (65.7%), tier N 2 / 352; target (E + H) 482 / 556 = 86.7%.
+Pre-push checklist: full `npx vitest run`, `scripts/ci/tsc-ratchet.sh` 0 errors, `validate-visualization-coverage.ts` PASS, `scripts/math/label-displacement.ts mathCoreScenesB35` (0 unresolved, 0 card-host moves),
+`scripts/math/campaign-tools/audit-module.ts mathCoreScenesB35` (10 / 10 admitted). Mutation check: ten deliberate wrong numbers (a route count, the table size, a caption product, the highlighted path, a Fibonacci value,
+the closed form, a tree level, the De Morgan column, n², a region position) each made at least one test fail.
+
+| Concept | Figure |
+|---|---|
+| math.disc.counting-principles | tree of 3 shirts × 2 trousers = 6 leaves; 4 bus + 3 train routes (disjoint) = 7 |
+| math.disc.permutations | 4 × 4 table of ordered pairs without the diagonal: 12 cells = 4 × 3 = 24 ÷ 2; (1, 2) and (2, 1) are different cells |
+| math.disc.combinations | the 10 segments joining 5 points (5 sides + 5 diagonals): C(5, 2) = 20 ÷ 2 = 10 |
+| math.disc.binomial-theorem | registered to the Pascal's-triangle figure of its `math.alg` twin (batch 29, same KG statement) — no new figure; one twin test |
+| math.disc.combinatorics | binary tree of 3-bit strings (2 × 2 × 2 = 8 leaves) with the green path 101 ↔ the subset {1, 3} |
+| math.disc.recurrence-relation | Fibonacci stacked bars F₁…F₈ = 1, 1, 2, 3, 5, 8, 13, 21: each bar = a lower part as tall as the previous bar (blue) + an upper part as tall as the one before (green) |
+| math.disc.linear-recurrence | aₙ = 5aₙ₋₁ − 6aₙ₋₂: terms 1, 5, 19, 65, 211 on a log scale, r² − 5r + 6 = 0 with roots 2 and 3, aₙ = 3·3ⁿ − 2·2ⁿ |
+| math.disc.divide-conquer-recurrence | merge-sort tree for n = 8: levels of 1, 2, 4, 8 nodes of sizes 8, 4, 2, 1; each level costs 8, 4 levels, total 32 |
+| math.disc.propositional-logic | truth table of p, q, ¬(p ∧ q), ¬p ∨ ¬q: the last two columns are equal (De Morgan) |
+| math.disc.algorithm-complexity | n, n log₂ n, n², 2ⁿ for n ≤ 8; 2ⁿ meets n² at n = 2 and 4; at n = 6 the values are 6, 15.5, 36, 64 |
+| math.disc.complexity-classes | NP (outer region) containing the disjoint regions P (sorting) and NP-complete (SAT, 3-colouring, TSP); caption P = NP ? |
+
+Notes: before writing a figure for a concept check the registry for a twin (`grep -n "binomial-theorem" conceptSceneParams.ts`): batch 18/19 already registered `math.disc.*` twins to `math.alg/…` figures and batch 35 reused the
+binomial one instead of drawing a duplicate (a duplicate export name also breaks the registry import — TS2300). The first Fibonacci design (golden-ratio squares) failed the label solver — the unit squares are too small for a
+numeral (a label needs ~0.35 world units of clearance from every line) — and was replaced by stacked bars. A figure can be wrong in a way the tests of the drawing cannot see: the first claim "2ⁿ stays below n² before n = 4"
+was false (2¹ = 2 > 1 and 2ⁿ = n² at n = 2) and the test caught it — compare curves only where the claim is true. Captions in a row need ≥ 105 px (≈ 2.8 world units at this zoom) between centres, and a caption stack ≥ 0.9
+world units between rows. The scaffold's copied head can carry a batch-specific import (here `mAt` from B32): remove the leftover.
+
+Next (batch 36): the 11 calculus helpers — limit-laws, chain-rule, implicit-differentiation, optimization, antiderivatives, trig-substitution, power-series, radius-of-convergence, taylor-remainder,
+chain-rule-multivariable, sequence-limits — then prob (10), seq (7), real (7), meas (6), top (4), opt (4), geom (4), func (4), cx (4), graph (3), fnal (3), trig (2), cat (2), num (1); then tier N (352) if still wanted.
+List what is left with `npx tsx scripts/math/visual-coverage.ts --list H`.
+
+# Batch 36 (2026-10-12): the calculus helpers (11 figures)
+
+`sceneGenerators/mathCoreScenesB36.ts` + `mathCoreScenesBatch36.test.ts` (112 checks); campaign audit threshold now 449. Coverage after this batch:
+495 of 908 concepts with a fixed figure (54.5%); essential tier 344 / 346 (complete), tier H 149 / 210 (71.0%), tier N 2 / 352; target (E + H) 493 / 556 = 88.7%.
+Pre-push checklist: full `npx vitest run`, `scripts/ci/tsc-ratchet.sh` 0 errors, `validate-visualization-coverage.ts` PASS, `scripts/math/label-displacement.ts mathCoreScenesB36` (0 unresolved, 0 card-host moves),
+`scripts/math/campaign-tools/audit-module.ts mathCoreScenesB36` (11 / 11 admitted). Mutation check: five deliberate wrong numbers (the product curve (x + 2)x², the composite (x² + 1)², the area x(21 − x),
+the radius R = 3, the Taylor error with x³/5) each made at least one test fail.
+
+| Concept | Figure |
+|---|---|
+| math.calc.limit-laws | f = x + 1 and g = x² near x = 2: the limits 3 and 4; the product (x + 1)x² tends to 3 × 4 = 12 and the sum to 3 + 4 = 7 (four dots on the guide x = 2) |
+| math.calc.chain-rule | three panels: inner u = x² + 1 (tangent slope 2 at x = 1), outer y = u³ (slope 12 at u = 2), composite y = (x² + 1)³ (slope 24 at x = 1); 12 × 2 = 24 |
+| math.calc.implicit-differentiation | circle x² + y² = 25 with the point (3, 4), the radius (slope 4/3) and the tangent of slope −x/y = −3/4; (−3/4) × (4/3) = −1 (right-angle mark) |
+| math.calc.optimization | A(x) = x(20 − x) on [0, 20]: endpoints A(0) = A(20) = 0, flat tangent at x = 10 where A = 100 (a 10 × 10 square) |
+| math.calc.antiderivatives | F(x) = x² + C for C = −1, 0, 1, 2: four vertical shifts, all with tangent slope 2 at x = 1 (so F′ = 2x = f) |
+| math.calc.trig-substitution | right triangle with hypotenuse 3 and θ = 30°: x = 3 sin θ = 1.5 and √(9 − x²) = 3 cos θ = 2.598 (Pythagoras checked from the drawn corners) |
+| math.calc.power-series | 1/(1 − x) with the partial sums P₁, P₂, P₄: at x = 0.5 they are 1.5, 1.75, 1.94 against 2; the series converges for \|x\| < 1 |
+| math.calc.radius-of-convergence | Σ xⁿ/2ⁿ on the number line: ratio 0.5, R = 1 ÷ 0.5 = 2, green interval (−2, 2), red outside |
+| math.calc.taylor-remainder | the bound x⁴/24 (M = 1) above the true error sin x − (x − x³/6) on [0, 1.2]: 0.008 ≤ 0.042 at x = 1 |
+| math.calc.chain-rule-multivariable | tree for z = x²y, x = t, y = t²: branch derivatives 2, 1, 1, 2 at t = 1, paths 2 × 1 = 2 and 1 × 2 = 2, sum 2 + 2 = 4 = d(t⁴)/dt |
+| math.calc.sequence-limits | aₙ = sin(n)/n for n = 1…12 squeezed between 1/n and −1/n; the limit 0 |
+
+Notes: the tests read every number back from what is DRAWN (a polyline sampled at x = 2, tangent segments' slopes, the lengths of triangle sides, the centres of the tree nodes), never from the generator's own
+constants, and compare against an independent closed form (central differences, bisection, an integral of the drawn polyline); node label positions are 3-component, so compare only the first two. A drawn value
+beside a limit is not the limit: the h = (x + 1)x² curve at x = 2 ± 0.1 is 1.65 away from 12 because its slope there is 16 — set tolerances from the slope times the step. Label placement: a title directly above an axis
+arrow collides with it — move it left of the curve's end; two captions on one row need ≥ 105 px between centres (`true error` / `0.008` first sat 84 px apart); numerals on a tick row must stay clear of the plotted curve (the
+`4` tick was pushed 30 px by the green 1/n curve until the tick row moved above the curve).
+
+Next (batch 37): the 10 probability helpers — sample-space, classical-probability, combinatorial-probability, independence, bayesian-inference, random-variable, expected-value, markov-inequality, transition-matrix,
+poisson-process — then seq (7), real (7), meas (6), top (4), opt (4), geom (4), func (4), cx (4), graph (3), fnal (3), trig (2), cat (2), num (1); then tier N (352) if still wanted.
+List what is left with `npx tsx scripts/math/visual-coverage.ts --list H`.
+
+# Batch 37 (2026-10-12): the probability helpers (9 figures + 1 twin registration)
+
+`sceneGenerators/mathCoreScenesB37.ts` + `mathCoreScenesBatch37.test.ts` (93 checks); campaign audit threshold now 459. Coverage after this batch:
+505 of 908 concepts with a fixed figure (55.6%); essential tier 344 / 346 (complete), tier H 159 / 210 (75.7%), tier N 2 / 352; target (E + H) 503 / 556 = 90.5%.
+Pre-push checklist: full `npx vitest run`, `scripts/ci/tsc-ratchet.sh` 0 errors, `validate-visualization-coverage.ts` PASS, `scripts/math/label-displacement.ts mathCoreScenesB37` (0 unresolved, 0 card-host moves),
+`scripts/math/campaign-tools/audit-module.ts mathCoreScenesB37` (9 / 9 admitted). Mutation check: eleven deliberate wrong numbers (the sum-7 diagonal, P(A) = 0.7, the expected-value bars out of order, a different Markov pmf, a changed
+transition row, a duplicated outcome name, arrival dots shifted off the staircase, the caption λ = 2, 2 boys instead of 3, a missing sample-space outcome, a shortened bound bar) each made at least one test fail.
+
+| Concept | Figure |
+|---|---|
+| math.prob.sample-space | three panels: finite Ω = {HH, HT, TH, TT} in a box (4 = 2 × 2), the countable Ω = {1, 2, 3, …} (six numbered dots and an arrow running on), the uncountable interval [0, 1] with a point ω |
+| math.prob.classical-probability | 6 × 6 grid of the 36 outcomes of two dice; the 6 blue dots on the diagonal are the sum 7 (6 of 36 = 1/6); the red corner (6, 6) is the only sum 12 (1 of 36) |
+| math.prob.combinatorial-probability | 3 boys + 2 girls on a pentagon; the 10 segments = C(5, 2) pairs coloured 3 boy–boy, 1 girl–girl, 3 × 2 = 6 mixed; same sex 3 + 1 = 4; 6 of 10 are mixed |
+| math.prob.independence | unit square of probability: A = left 0.6 (blue verticals), B = bottom 0.5 (red horizontals), the green overlap has area 0.6 × 0.5 = 0.3; inside B the share of A is 0.3 ÷ 0.5 = 0.6 = P(A) |
+| math.prob.bayesian-inference | registered to the figure of its `math.stats` twin (batch 34, Beta(5, 5) prior × 7 of 10 → Beta(12, 8)) — no new figure; one twin test |
+| math.prob.random-variable | the 4 outcomes of two flips and a number line: one arrow from each outcome to its number of heads (HH → 2, HT and TH → 1, TT → 0); 1 of 4, 2 of 4, 1 of 4 beside the values |
+| math.prob.expected-value | bars 0.1, 0.2, 0.3, 0.4 (heights in %) over the values 0…3 on a beam; the pivot at E[X] = 2 balances it: left pull 2 × 0.1 + 1 × 0.2 = 0.4, right pull 1 × 0.4 = 0.4 |
+| math.prob.markov-inequality | pmf 0.30, 0.20, 0.20, 0.10, 0.05 × 4 on 0…7 (mean 2); the red tail P(X ≥ 4) = 0.2 against the green bound E[X] ÷ 4 = 0.5; the inequality holds for every a = 1…7 on the drawn bars |
+| math.prob.transition-matrix | P = [[90, 10], [50, 50]] % (rows add to 100) × P = P² = [[86, 14], [70, 30]]; the row, column and entry that give 86 = 81 + 5 are outlined blue, red, green |
+| math.prob.poisson-process | nine arrival dots on [0, 6], the staircase N(t) climbing 0 → 9, three windows of length 2 holding 3, 3, 3 (expected 1.5 × 2 = 3), mean count 1.5 × 6 = 9 for the rate λ = 1.5 |
+
+Notes: look for twins first — `math.prob.bayesian-inference` is the same KG statement as `math.stats.bayesian-inference`, so the batch-34 builder is registered under both ids. Tests that use `texts(s).find((t) => t.startsWith('86'))` match the
+matrix NUMERAL "86" before the caption "86 = 81 + 5": select with the full prefix ("86 ="). A mutation that moves a value consistently everywhere (one Poisson arrival time) correctly does NOT fail — the tests read the drawing, so mutate one
+part of a figure only (dots shifted off the staircase) to prove the cross-checks work. Contact sheets: the montage crop is 630 px wide (205–835); a long caption that runs past the crop (the last line of independence) is cut in the sheet
+only — open `<dir>/<id>_1026.png` for the whole card. Captions between two vertical guides need ≥ 0.35 world units of clearance on both sides: the Poisson captions were moved to the free lower-right zone (x = 3.4) instead of squeezing between the
+guides at t = 2 and t = 4. The solver centres a label on its anchor, so a caption of 16+ characters needs ≥ 1.5 units on either side.
+
+Next (batch 38): the 7 sequences-and-series helpers — sequence, arithmetic-sequence, series, partial-sums, arithmetic-series, series-convergence, harmonic-series (twins exist for geometric-sequence/series, divergent-sequence and
+alternating-series: do not repeat them) plus 4 of the real-analysis helpers — metric-space, compactness, connectedness, riemann-integrability — then real (3 left), meas (6), top (4), opt (4), geom (4), func (4), cx (4), graph (3), fnal (3),
+trig (2), cat (2), num (1); then tier N (352) if still wanted. List what is left with `npx tsx scripts/math/visual-coverage.ts --list H`.
+
+# Batch 38 (2026-10-12): sequences and series + four real-analysis helpers (11 figures)
+
+`sceneGenerators/mathCoreScenesB38.ts` + `mathCoreScenesBatch38.test.ts` (112 checks); campaign audit threshold now 470. Coverage after this batch:
+516 of 908 concepts with a fixed figure (56.8%); essential tier 344 / 346 (complete), tier H 170 / 210 (81.0%), tier N 2 / 352; target (E + H) 514 / 556 = 92.4%.
+Pre-push checklist: full `npx vitest run`, `scripts/ci/tsc-ratchet.sh` 0 errors, `validate-visualization-coverage.ts` PASS, `scripts/math/label-displacement.ts mathCoreScenesB38` (0 unresolved, 0 card-host moves),
+`scripts/math/campaign-tools/audit-module.ts mathCoreScenesB38` (11 / 11 admitted). Mutation check: eleven deliberate wrong numbers (dots off the squares, an AP step of 3, a last term 6, a partial-sum ratio 0.4, a non-AP series, a shifted limit line,
+a shortened harmonic bar, a 4.5 leg, a cover ending at 0.95, a smaller gap, a moved jump) each made at least one test fail. The tests also caught a REAL defect while the figures were being written: the grey guide line of the
+arithmetic-sequence figure had slope 2.35, not 2, so it missed the dots (the test measured the distance of every drawn dot to the drawn line).
+
+| Concept | Figure |
+|---|---|
+| math.seq.sequence | aₙ = n²: five isolated dots (n, aₙ) at 1, 4, 9, 16, 25 — nothing joins them; the dot over n = 3 is a₃ = 9 |
+| math.seq.arithmetic-sequence | aₙ = 3 + 2(n − 1): dots 3, 5, 7, 9, 11 on one straight line; four equal runs (violet) and rises (red) +2; d = 2, a₅ = 3 + 8 = 11 |
+| math.seq.series | the terms 1, 2, 3, 4, 5 laid end to end as coloured segments; the running totals 1, 3, 6, 10, 15 under the ends; the series 1 + 2 + 3 + 4 + 5 = 15 |
+| math.seq.partial-sums | Σ 1/2ⁿ: dots S₁ … S₆ = 0.5, 0.75, 0.875, … under the violet limit 1, red gaps halving; S₂ = 0.5 + 0.25 = 0.75, S₃ = 0.75 + 0.125 = 0.875 |
+| math.seq.arithmetic-series | bars 3, 5, 7, 9, 11 plus the reversed copy stacked on top: every column is 14, 5 columns = 70, S₅ = 5 × 14 ÷ 2 = 35 |
+| math.seq.series-convergence | left: partial sums of Σ 1/n² level off below π²/6 ≈ 1.645; right: 1 − 1 + 1 − … gives 1, 0, 1, 0, … and settles nowhere |
+| math.seq.harmonic-series | bars 1/n for n = 1…8; the groups {3, 4} and {5…8} each add up to more than 0.5; H₈ = 2.72 is above 1 + 1.5 = 2.5 |
+| math.real.metric-space | right triangle x, y, z with the distances 3, 4, 5; 5 ≤ 3 + 4 (the detour through x is 7); the taxicab distance of y and z is 3 + 4 = 7 |
+| math.real.compactness | [0, 1] covered by three open intervals (finite subcover); (0, 1] with the intervals (1/k, 1.2) leaves (0, 1/4] uncovered — compact ⟺ closed and bounded |
+| math.real.connectedness | [0, 3] cut at 1.5: the parts touch; [0, 1] ∪ [2, 3] has a gap with a cut in it; f(x) = 2x − 1 maps [0, 3] onto one piece [−1, 5] |
+| math.real.riemann-integrability | f = 1 then 2 with a jump at 0.4: the cell holding the jump is 1/n wide, so U − L = 1 × 1/n = 0.25, 0.125, 0.0625 for n = 4, 8, 16 → 0; integral 1.6 |
+
+Notes: twins checked first — `math.seq.geometric-sequence`, `divergent-sequence`, `geometric-series`, `alternating-series` and `math.real.convergence-sequences`, `cauchy-sequence`, `riemann-integral` already have figures, so none of these repeat them.
+Draw a guide line through its dots by the SAME formula (`apsTerm(0.7)`, not an estimated offset) — and always test the distance of every dot to it. The claim "each group of 2ᵏ⁻¹ terms adds more than 1/2" holds from k = 2: the first group {2} is exactly 1/2.
+Long captions (~25 characters) need the label's centre ≤ ≈ 3.0 world units at the card's right edge or the solver moves them; keep captions out of the lane between a guide and an axis (needs ≥ 0.35 clearance on both sides); a caption near the right end of a line needs ≥ 1.8 units from the line end.
+
+Next (batch 39): the 3 remaining real-analysis helpers — differentiability-rigorous, taylor-rigorous, ftc-rigorous — plus the 6 measure-theory helpers (measure, lebesgue-measure, measure-zero, convergence-theorems, lp-space, l2-space) and the 4 topology helpers
+(topological-space, product-space, homotopy-equivalence, homology), then opt (4), geom (4), func (4), cx (4), graph (3), fnal (3), trig (2), cat (2), num (1); then tier N (352) if still wanted. List what is left with `npx tsx scripts/math/visual-coverage.ts --list H`.
+
+# Batch 39 (2026-10-12): the rest of rigorous calculus and six measure-theory helpers (9 figures)
+
+`sceneGenerators/mathCoreScenesB39.ts` + `mathCoreScenesBatch39.test.ts` (92 checks); campaign audit threshold now 479. Coverage after this batch:
+525 of 908 concepts with a fixed figure (57.8%); essential tier 344 / 346 (complete), tier H 179 / 210 (85.2%), tier N 2 / 352; target (E + H) 523 / 556 = 94.1%.
+The generator and the test body were installed from the drafts in `docs/history/mathematics-visual-drafts/` (written at the end of the previous session, tests not yet run); the drafts were removed once installed.
+Pre-push checklist: full `npx vitest run`, `scripts/ci/tsc-ratchet.sh` 0 errors, `validate-visualization-coverage.ts` PASS, `scripts/math/label-displacement.ts mathCoreScenesB39` (0 unresolved, 0 card-host moves),
+`scripts/math/campaign-tools/audit-module.ts mathCoreScenesB39` (9 / 9 admitted). Mutation check: thirteen deliberate single-part wrong numbers (a right secant of slope 2, a secant at h = 0.3, the Lagrange level 25 R instead of 24 R, the tangent point moved to 2.5,
+a tangent of slope 2, a piece ending at 0.6, a cover that no longer covers E, interval lengths ε/3ⁿ, f₄ drawn as f₃, a circle stretched in x, the point at 0.6, f drawn as (3, 5), the rotated basis arrow off f) each made at least one test fail.
+Defects found while verifying (all fixed before the commit): (1) the Lp-space narration read "‖v‖₁ = 0.71 + 0.71 = 1.41", which is arithmetically wrong as written (0.71 + 0.71 = 1.42): the point is (1/√2, 1/√2), so the narration now says ‖v‖₁ = 2/√2 = √2 ≈ 1.41;
+(2) the FTC caption "F′(2) = f(2) = 4" sat on the violet height-9 line and far from its tangent — moved to open space above the tangent (an earlier candidate position was shoved 48 px by the label solver on the card host, so it was rejected: always re-run `label-displacement.ts` after moving a caption);
+(3) the rotated basis arrows of the L² figure had no names — each now carries e₁′ / e₂′ at its tip, and the test checks that each name is nearer its own arrow than the other.
+Four drafted test assertions needed tolerance work, all read-back noise and not wrong figures: the marker of c reads back 0.196 against the exact c = arcsin(24 R₃(1)) = 0.19657 → 0.197 (the label is right; test now compares the label with the first-principles value and the drawn marker within 0.01);
+the measure-zero sums read back 0.1 against the exact 0.1 · (1 − 1/32) = 0.096875 (each tiny width is rounded to 0.01); the Lp point reads back 0.71 + 0.71 = 1.42 against √2 = 1.414; the label "f′(0) = 0" contains two zeros (read the value after "=").
+
+| Concept | Figure |
+|---|---|
+| math.real.differentiability-rigorous | left: f = |x| at 0 — the one-sided difference quotients are −1 (red secant) and +1 (green), so there is no limit; right: f = x² with secants through the origin of slope 1, 0.5, 0.25 → 0, f′(0) = 0 |
+| math.real.taylor-rigorous | sin t on [0, 1] with the level 24 R₃(1) = 24 × 0.00814 ≈ 0.195 (R₃(1) = sin 1 − 5/6) meeting the curve at c ≈ 0.197: Lagrange's f⁗(c)/4! = sin(c)/24 is exactly the error |
+| math.real.ftc-rigorous | f(t) = t² with the area 0 → 2 hatched (8/3 = 2.67) beside F(x) = x³/3: the tangent at x = 2 has slope f(2) = 4; the heights F(3) = 9 and F(1) = 0.33 give ∫₁³ t² = 9 − 0.33 = 8.67 |
+| math.meas.measure | [0, 1] split into A = [0, 0.3), B = [0.3, 0.5), C = [0.5, 1] with sizes 0.3, 0.2, 0.5: additivity 0.3 + 0.2 + 0.5 = 1 = μ(X), μ(∅) = 0 |
+| math.meas.lebesgue-measure | E = [0.1, 0.35] ∪ [0.5, 0.8] (length 0.25 + 0.3 = 0.55) and three covers by open intervals of total length 0.75, 0.63, 0.57, each ≥ 0.55 and tending to it: m(E) = 0.55 |
+| math.meas.measure-zero | five points covered by intervals of length ε/2ⁿ: ε = 0.4 gives 0.3875 ≈ 0.39, ε = 0.1 gives 0.096875 ≈ 0.097 — as small as we like, so a countable set has measure 0 |
+| math.meas.convergence-theorems | fₙ(x) = min(nx, 1) for n = 1, 2, 4 rising to 1; the areas 1 − 1/(2n) = 0.5, 0.75, 0.875 increase to 1 = ∫f (monotone convergence) |
+| math.meas.lp-space | the unit balls of p = 1 (diamond), p = 2 (circle), p = ∞ (square), nested; the point (1/√2, 1/√2) has the norms 1.41, 1, 0.71 |
+| math.meas.l2-space | f = (3, 4): the squared coordinates 9 + 16 = 25 = ‖f‖² (‖f‖ = 5); in the rotated orthonormal basis e₁′ = (0.6, 0.8), e₂′ = (−0.8, 0.6) the coordinates are 5 and 0, and again 25 + 0 = 25 (Parseval) |
+
+Notes: twins checked first — none of the nine concept ids had a registry entry; `math.calc.taylor-remainder` (batch 36) draws sin x ≈ x − x³/6 with the bound x⁴/24, so the figure here shows the *point c* of the Lagrange form instead and does not repeat it.
+A figure whose statement uses a rounded number in an equation ("0.71 + 0.71 = 1.41") is wrong on screen even when every drawn coordinate is right: state the exact form (2/√2 = √2 ≈ 1.41) or the unrounded values.
+When a caption is moved, a position that looks free in the render can still be shoved by the label solver on the card host: try candidates in a loop (`sed` the position, run `label-displacement.ts <module> 14`, grep the figure) and keep the first with 0 card-host moves; then render it and look.
+An exact value stated in a label is better checked against a first-principles computation in the test (here c = arcsin(24 (sin 1 − 5/6)), Σ ε/2ⁿ = ε (1 − 2⁻⁵), the norms of (1/√2, 1/√2)) plus the drawn read-back within the 0.01 rounding of `P()`, than by rounding the drawn read-back itself.
+
+Next (batch 40): the 4 topology helpers (topological-space, product-space, homotopy-equivalence, homology), the 4 optimisation helpers (convex-optimization, quadratic-programming, integer-programming, dynamic-programming) and the 3 functional-analysis helpers (normed-space, distributions, special-functions) — 11; then geom (4), func (4), cx (4) as batch 41, then graph (3), trig (2), cat (2), num (1); then tier N (352) if still wanted. List what is left with `npx tsx scripts/math/visual-coverage.ts --list H`.
+
 # Deferred follow-up — do AFTER the Mathematics figure campaign (recorded 2026-10-12 at the owner's request)
 
 Context: the owner said another account was "validating visuals for all 4 subjects". A read-only audit of the last 10 days (2026-10-02 → 10-12) on `origin/main` and every remote branch found:
