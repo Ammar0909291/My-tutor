@@ -348,7 +348,7 @@ function raw_buildInverseFunctionsScene(): SceneSpec {
       {
         narration: 'Here is f(x) = x³/4. It never turns back, so each output comes from exactly one input and f can be undone.',
         objects: [
-          ...axes(0, 0, -3.8, 3.8, -3.4, 3.4), label('x', P(3.65, 0.35), ROLE.reference, 'detail'), label('y', P(0.35, 3.3), ROLE.reference, 'detail'),
+          ...axes(0, 0, -3.8, 3.8, -3.4, 3.4), label('x', P(3.5, -0.45), ROLE.reference, 'detail'), label('y', P(0.35, 3.3), ROLE.reference, 'detail'),
           curve(sample(invF, -xmax, xmax, 80), ROLE.output), label('y = f(x)', P(1.15, 3.05), ROLE.output, 'primary'),
         ],
       },

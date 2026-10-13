@@ -1,0 +1,50 @@
+{
+  "concepts": 556,
+  "verdicts": {
+    "REVIEW_REQUIRED": 61,
+    "PASS": 495
+  },
+  "byViewport": {
+    "mobile": {
+      "REVIEW_REQUIRED": 11,
+      "PASS": 545
+    },
+    "desktop": {
+      "REVIEW_REQUIRED": 14,
+      "PASS": 542
+    },
+    "desktop-column": {
+      "REVIEW_REQUIRED": 13,
+      "PASS": 543
+    }
+  },
+  "byDimension": {
+    "structural": {
+      "REVIEW_REQUIRED": 12,
+      "PASS": 544
+    },
+    "readability": {
+      "PASS": 556
+    },
+    "contrast": {
+      "PASS": 556
+    },
+    "layout": {
+      "PASS": 551,
+      "REVIEW_REQUIRED": 5
+    },
+    "graph": {
+      "PASS": 556
+    },
+    "semantic": {
+      "PASS": 509,
+      "REVIEW_REQUIRED": 47
+    },
+    "interactive": {
+      "PASS": 555,
+      "REVIEW_REQUIRED": 1
+    }
+  },
+  "withMissingRenders": 0,
+  "failureClusters": []
+}

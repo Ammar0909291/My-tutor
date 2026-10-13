@@ -1516,3 +1516,9 @@ Test-logic issues (not figure defects): a numeral inside "2θ =" is read as a nu
 Notes: twins checked first — none of the eight ids had a registry entry. Lessons: the label solver also treats a caption as colliding with a neighbouring caption when their boxes overlap in x and sit within ~30 px in y — the width of a caption (≈ 10 px per character) is part of the layout; a path that must show as separate colours must not reuse an edge already drawn in another colour.
 **The figure campaign is complete for tiers E and H** (556 / 908; 344 / 346 essential, 210 / 210 high). Nothing queued remains under the campaign; the deferred queue in the handover (Mathematics render audit + freshness gate, semantic review, production sample check, English visual validation) needs a fresh owner go-ahead.
 
+# Mathematics render audit (2026-10-13) — deferred queue item 1 DONE
+
+Owner go-ahead in chat ("Math render audit + gate"). Tooling `scripts/qa/mathVisual/`, record `docs/qa/mathematics-visual-audit/`, gate `src/tests/mathVisualAudit.test.ts`, report `docs/qa/MATHEMATICS_VISUAL_QUALITY_REPORT.md`, procedure `docs/history/mathematics-visual-render-audit.md`.
+556 of 908 concepts serve a figure; 2,224 Chromium renders; final record 0 FAIL / 495 PASS / 61 REVIEW_REQUIRED. The first phone/dark pass found 55 FAIL (the geometry_shape card's 180° fact clipped and overlapping for 26 concepts, 17 graphs with an unnamed axis, a curve with no axes — the shared
+calculus_graph generator now draws named axes —, raw brace-LaTeX / "$2 … $4" / the word "undefined" read as leaks in 9 figures, a fraction caption on a cell divider, a prime count on the average line); all repaired in the figures or the shared cards, no audit rule relaxed. The queue's remaining items (semantic review, production sample check, English visual validation) need a fresh owner go-ahead.
+

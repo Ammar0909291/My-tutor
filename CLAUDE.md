@@ -225,6 +225,9 @@ npx tsc --noEmit       # pre-existing stripe/subscription errors are expected on
   a figure to the reply it asked for (`scripts/qa/physicsVisual/figureAssociation.ts`, `data-message-id` markers; it throws `WRONG_FIGURE`, never "first/last figure"), and a
   render on a COLD dev server (unstyled page) is not evidence. Drivers: `scripts/qa/productionVisualClosure.ts` (multi-card legibility, slider interaction) and
   `scripts/qa/physicsProductionBrowserAudit.ts --subject <s> --concepts …`; disposable accounts only, deleted with re-login verified.
+- Mathematics visual render audit (2026-10-13): every served Mathematics figure (556 of 908 concepts; 0 FAIL / 495 PASS / 61 REVIEW_REQUIRED) was rendered in Chromium at 390 px (dark + light), 1280 px
+  and the 50/50 column; `mathVisualAudit.test.ts` FAILS, naming the concepts, when a served Mathematics figure changes without a re-audit (a partial re-render: `docs/history/mathematics-visual-render-audit.md`).
+  Report: `docs/qa/MATHEMATICS_VISUAL_QUALITY_REPORT.md`. Semantic review, production sample check and English visual validation are still queued (each needs a fresh owner go-ahead).
 - Mathematics: `npx tsx scripts/math/state.ts`
 - Physics: `npx tsx scripts/physics/state.ts`
 - Asset-contract readiness (all subjects, incl. KG-registered-but-unauthored ones):
