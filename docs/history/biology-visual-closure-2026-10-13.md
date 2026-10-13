@@ -29,14 +29,15 @@ boundary `trace:false`, panel length, harness settle-wait) · `06b440e` docs · 
 * Gemini fallback returns `403 … project has been denied access` (since 2026-08-19, last seen 2026-10-09): an owner action in the Google console,
   not touched here; Groq (primary) served every audited turn.
 
-## Final verification (2026-10-13, HEAD `1fb5e21`)
-Re-checked rather than assumed, because `main` moved (Mathematics batch 40, Physics visual work; edits to shared visual files). Details and the
-evidence table: `docs/qa/biology-visual-audit/README.md` ("Final verification"); persisted evidence: `docs/qa/biology-visual-audit/evidence/`.
-* The alias now serves `dpl_2kR4EW7kPxbcjqQsxpRBE1f9p1At` (`1fb5e21`), not the deployment named in the first closure report.
-* CI `validate` (full vitest) was green on `478adb0` — the exact final Biology code tree — closing the "no full run after `d19b00f`" gap; local full vitest on
-  `1fb5e21`: 968 files, 24,779 passed, 9 skipped; tsc 0; eslint 0 errors.
-* All 199 Biology payload fingerprints identical between `b35bb4c` and `1fb5e21`; render re-audit of all 199 × 4 views: 0 flags, 0 drift.
-* Gap found and closed: the independent review's six wording fixes (`d19b00f`) had no regression test except the auxin caption. Five tests added
-  to `bioClosureFigures.test.ts` (mutation-checked).
-* Evidence persisted into the repo (it had lived only in a session scratchpad): production audit JSON/logs, 24 production screenshots, fingerprints, re-audit summary.
-* Production-browser sample stays 14 of 199; no human review of any figure. No Biology source, KG, Educational Brain or curriculum file was changed.
+## Final verification (2026-10-13, last verified tree `6e69667`)
+Re-checked rather than assumed, because `main` moved twice (Mathematics batches 40-41, Physics visual work, a Chemistry visual closure; edits to shared render files).
+Details and the evidence table: `docs/qa/biology-visual-audit/README.md` ("Final verification"); persisted evidence: `docs/qa/biology-visual-audit/evidence/`.
+* The alias now serves `dpl_2qXa8KT6TL49AFbwnqicesn57jWa` (`23c52bf`), not the deployment named in the first closure report.
+* CI `validate` (full vitest) green on `478adb0` — the exact final Biology code tree — closing the "no full run after `d19b00f`" gap, and on every later main commit checked;
+  local full vitest: `1fb5e21` 968 files / 24,779 passed; merged tree `6e69667` 974 files / 25,032 passed; tsc 0; eslint 0 errors.
+* All 199 Biology payload fingerprints identical across `b35bb4c` → `1fb5e21` → `6e69667`; render re-audit of 199 × 4 views on both `1fb5e21` and `6e69667`: 0 flags, 0 drift.
+* Production browser on the code deployed now (`23c52bf`): the six repaired figures × 4 views, 24/24 MEASURED_CLEAN (3 views re-run after network timeouts). Another session's
+  audit flagged `mycorrhizae` @1280 "More insights clipped"; re-checked at four window sizes in both themes: reachable and uncovered (harness position artifact).
+* Gap found and closed: the independent review's wording fixes (`d19b00f`) had no regression test except the auxin caption. Five tests added to `bioClosureFigures.test.ts` (mutation-checked).
+* Evidence persisted into the repo (it had lived only in a session scratchpad). Production-browser sample: 14 of 199 at `478adb0` + the six at `23c52bf`; no human review of any figure.
+  No Biology source, KG, Educational Brain or curriculum file was changed.

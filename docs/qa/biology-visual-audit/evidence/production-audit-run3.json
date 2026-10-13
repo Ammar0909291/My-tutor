@@ -1,0 +1,1286 @@
+{
+ "base": "https://my-tutor-flame.vercel.app",
+ "at": "2026-10-13T14:07:25.748Z",
+ "rows": [
+  {
+   "conceptId": "bio.neuro.brain-regional-organization",
+   "vp": "mobile",
+   "theme": "dark",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "verdict": "NOT_RUN",
+   "note": "Error: page.goto: net::ERR_TIMED_OUT at https://my-tutor-flame.vercel.app/learn?subject=biology"
+  },
+  {
+   "conceptId": "bio.neuro.brain-regional-organization",
+   "vp": "mobile",
+   "theme": "light",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "verdict": "NOT_RUN",
+   "note": "TimeoutError: page.waitForSelector: Timeout 60000ms exceeded."
+  },
+  {
+   "conceptId": "bio.neuro.brain-regional-organization",
+   "vp": "desktop",
+   "theme": "dark",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 526,
+     "h": 380
+    },
+    "labelCount": 11,
+    "minFont": 13.44,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Regional Organisation of the Brain",
+    "hScroll": false
+   },
+   "stages": [
+    {
+     "stage": 1,
+     "figures": 1,
+     "canvas": {
+      "w": 526,
+      "h": 380
+     },
+     "labelCount": 3,
+     "minFont": 15.488,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Regional Organisation of the Brain",
+     "hScroll": false
+    },
+    {
+     "stage": 2,
+     "figures": 1,
+     "canvas": {
+      "w": 526,
+      "h": 380
+     },
+     "labelCount": 7,
+     "minFont": 15.488,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Regional Organisation of the Brain",
+     "hScroll": false
+    },
+    {
+     "stage": 3,
+     "figures": 1,
+     "canvas": {
+      "w": 526,
+      "h": 380
+     },
+     "labelCount": 9,
+     "minFont": 13.44,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Regional Organisation of the Brain",
+     "hScroll": false
+    },
+    {
+     "stage": 4,
+     "figures": 1,
+     "canvas": {
+      "w": 526,
+      "h": 380
+     },
+     "labelCount": 11,
+     "minFont": 13.44,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Regional Organisation of the Brain",
+     "hScroll": false
+    }
+   ],
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.neuro.brain-regional-organization",
+   "vp": "desktop",
+   "theme": "light",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 526,
+     "h": 380
+    },
+    "labelCount": 11,
+    "minFont": 13.44,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Regional Organisation of the Brain",
+    "hScroll": false
+   },
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.cell.cell-theory",
+   "vp": "mobile",
+   "theme": "dark",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 330,
+     "h": 260
+    },
+    "labelCount": 4,
+    "minFont": 10,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "How Cell Theory Was Built",
+    "hScroll": false
+   },
+   "stages": [
+    {
+     "stage": 1,
+     "figures": 1,
+     "canvas": {
+      "w": 330,
+      "h": 260
+     },
+     "labelCount": 1,
+     "minFont": 10,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "How Cell Theory Was Built",
+     "hScroll": false
+    },
+    {
+     "stage": 2,
+     "figures": 1,
+     "canvas": {
+      "w": 330,
+      "h": 260
+     },
+     "labelCount": 2,
+     "minFont": 10,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "How Cell Theory Was Built",
+     "hScroll": false
+    },
+    {
+     "stage": 3,
+     "figures": 1,
+     "canvas": {
+      "w": 330,
+      "h": 260
+     },
+     "labelCount": 3,
+     "minFont": 10,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "How Cell Theory Was Built",
+     "hScroll": false
+    },
+    {
+     "stage": 4,
+     "figures": 1,
+     "canvas": {
+      "w": 330,
+      "h": 260
+     },
+     "labelCount": 4,
+     "minFont": 10,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "How Cell Theory Was Built",
+     "hScroll": false
+    }
+   ],
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.cell.cell-theory",
+   "vp": "mobile",
+   "theme": "light",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 330,
+     "h": 260
+    },
+    "labelCount": 4,
+    "minFont": 10,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "How Cell Theory Was Built",
+    "hScroll": false
+   },
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.cell.cell-theory",
+   "vp": "desktop",
+   "theme": "dark",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 526,
+     "h": 300
+    },
+    "labelCount": 4,
+    "minFont": 13.44,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "How Cell Theory Was Built",
+    "hScroll": false
+   },
+   "stages": [
+    {
+     "stage": 1,
+     "figures": 1,
+     "canvas": {
+      "w": 526,
+      "h": 300
+     },
+     "labelCount": 1,
+     "minFont": 13.44,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "How Cell Theory Was Built",
+     "hScroll": false
+    },
+    {
+     "stage": 2,
+     "figures": 1,
+     "canvas": {
+      "w": 526,
+      "h": 300
+     },
+     "labelCount": 2,
+     "minFont": 13.44,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "How Cell Theory Was Built",
+     "hScroll": false
+    },
+    {
+     "stage": 3,
+     "figures": 1,
+     "canvas": {
+      "w": 526,
+      "h": 300
+     },
+     "labelCount": 3,
+     "minFont": 13.44,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "How Cell Theory Was Built",
+     "hScroll": false
+    },
+    {
+     "stage": 4,
+     "figures": 1,
+     "canvas": {
+      "w": 526,
+      "h": 300
+     },
+     "labelCount": 4,
+     "minFont": 13.44,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "How Cell Theory Was Built",
+     "hScroll": false
+    }
+   ],
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.cell.cell-theory",
+   "vp": "desktop",
+   "theme": "light",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 526,
+     "h": 300
+    },
+    "labelCount": 4,
+    "minFont": 13.44,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "How Cell Theory Was Built",
+    "hScroll": false
+   },
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.mol.dna-replication",
+   "vp": "mobile",
+   "theme": "dark",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 330,
+     "h": 340
+    },
+    "labelCount": 14,
+    "minFont": 10,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "DNA Replication at a Replication Fork",
+    "hScroll": false
+   },
+   "stages": [
+    {
+     "stage": 1,
+     "figures": 1,
+     "canvas": {
+      "w": 330,
+      "h": 340
+     },
+     "labelCount": 2,
+     "minFont": 10,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "DNA Replication at a Replication Fork",
+     "hScroll": false
+    },
+    {
+     "stage": 2,
+     "figures": 1,
+     "canvas": {
+      "w": 330,
+      "h": 340
+     },
+     "labelCount": 6,
+     "minFont": 10,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "DNA Replication at a Replication Fork",
+     "hScroll": false
+    },
+    {
+     "stage": 3,
+     "figures": 1,
+     "canvas": {
+      "w": 330,
+      "h": 340
+     },
+     "labelCount": 8,
+     "minFont": 10,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "DNA Replication at a Replication Fork",
+     "hScroll": false
+    },
+    {
+     "stage": 4,
+     "figures": 1,
+     "canvas": {
+      "w": 330,
+      "h": 340
+     },
+     "labelCount": 10,
+     "minFont": 10,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "DNA Replication at a Replication Fork",
+     "hScroll": false
+    },
+    {
+     "stage": 5,
+     "figures": 1,
+     "canvas": {
+      "w": 330,
+      "h": 340
+     },
+     "labelCount": 13,
+     "minFont": 10,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "DNA Replication at a Replication Fork",
+     "hScroll": false
+    },
+    {
+     "stage": 6,
+     "figures": 1,
+     "canvas": {
+      "w": 330,
+      "h": 340
+     },
+     "labelCount": 14,
+     "minFont": 10,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "DNA Replication at a Replication Fork",
+     "hScroll": false
+    }
+   ],
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.mol.dna-replication",
+   "vp": "mobile",
+   "theme": "light",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 330,
+     "h": 340
+    },
+    "labelCount": 14,
+    "minFont": 10,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "DNA Replication at a Replication Fork",
+    "hScroll": false
+   },
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.mol.dna-replication",
+   "vp": "desktop",
+   "theme": "dark",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "verdict": "NOT_RUN",
+   "note": "Error: page.goto: net::ERR_TIMED_OUT at https://my-tutor-flame.vercel.app/learn?subject=biology"
+  },
+  {
+   "conceptId": "bio.mol.dna-replication",
+   "vp": "desktop",
+   "theme": "light",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 526,
+     "h": 460
+    },
+    "labelCount": 14,
+    "minFont": 13.44,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "DNA Replication at a Replication Fork",
+    "hScroll": false
+   },
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.eco.predator-prey-dynamics",
+   "vp": "mobile",
+   "theme": "dark",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 330,
+     "h": 260
+    },
+    "labelCount": 10,
+    "minFont": 10,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Predator and Prey",
+    "hScroll": false
+   },
+   "stages": [
+    {
+     "stage": 1,
+     "figures": 1,
+     "canvas": {
+      "w": 330,
+      "h": 260
+     },
+     "labelCount": 3,
+     "minFont": 11.5,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Predator and Prey",
+     "hScroll": false
+    },
+    {
+     "stage": 2,
+     "figures": 1,
+     "canvas": {
+      "w": 330,
+      "h": 260
+     },
+     "labelCount": 4,
+     "minFont": 11.5,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Predator and Prey",
+     "hScroll": false
+    },
+    {
+     "stage": 3,
+     "figures": 1,
+     "canvas": {
+      "w": 330,
+      "h": 260
+     },
+     "labelCount": 8,
+     "minFont": 10,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Predator and Prey",
+     "hScroll": false
+    },
+    {
+     "stage": 4,
+     "figures": 1,
+     "canvas": {
+      "w": 330,
+      "h": 260
+     },
+     "labelCount": 10,
+     "minFont": 10,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Predator and Prey",
+     "hScroll": false
+    }
+   ],
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.eco.predator-prey-dynamics",
+   "vp": "mobile",
+   "theme": "light",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 330,
+     "h": 260
+    },
+    "labelCount": 10,
+    "minFont": 10,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Predator and Prey",
+    "hScroll": false
+   },
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.eco.predator-prey-dynamics",
+   "vp": "desktop",
+   "theme": "dark",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 526,
+     "h": 340
+    },
+    "labelCount": 10,
+    "minFont": 13.44,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Predator and Prey",
+    "hScroll": false
+   },
+   "stages": [
+    {
+     "stage": 1,
+     "figures": 1,
+     "canvas": {
+      "w": 526,
+      "h": 340
+     },
+     "labelCount": 3,
+     "minFont": 15.488,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Predator and Prey",
+     "hScroll": false
+    },
+    {
+     "stage": 2,
+     "figures": 1,
+     "canvas": {
+      "w": 526,
+      "h": 340
+     },
+     "labelCount": 4,
+     "minFont": 15.488,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Predator and Prey",
+     "hScroll": false
+    },
+    {
+     "stage": 3,
+     "figures": 1,
+     "canvas": {
+      "w": 526,
+      "h": 340
+     },
+     "labelCount": 8,
+     "minFont": 13.44,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Predator and Prey",
+     "hScroll": false
+    },
+    {
+     "stage": 4,
+     "figures": 1,
+     "canvas": {
+      "w": 526,
+      "h": 340
+     },
+     "labelCount": 10,
+     "minFont": 13.44,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Predator and Prey",
+     "hScroll": false
+    }
+   ],
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.eco.predator-prey-dynamics",
+   "vp": "desktop",
+   "theme": "light",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 526,
+     "h": 340
+    },
+    "labelCount": 10,
+    "minFont": 13.44,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Predator and Prey",
+    "hScroll": false
+   },
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.plant.mycorrhizae-plant-symbioses",
+   "vp": "mobile",
+   "theme": "dark",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 330,
+     "h": 460
+    },
+    "labelCount": 10,
+    "minFont": 10,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Root Symbioses",
+    "hScroll": false
+   },
+   "stages": [
+    {
+     "stage": 1,
+     "figures": 1,
+     "canvas": {
+      "w": 330,
+      "h": 460
+     },
+     "labelCount": 2,
+     "minFont": 11.5,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Root Symbioses",
+     "hScroll": false
+    },
+    {
+     "stage": 2,
+     "figures": 1,
+     "canvas": {
+      "w": 330,
+      "h": 460
+     },
+     "labelCount": 5,
+     "minFont": 10,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Root Symbioses",
+     "hScroll": false
+    },
+    {
+     "stage": 3,
+     "figures": 1,
+     "canvas": {
+      "w": 330,
+      "h": 460
+     },
+     "labelCount": 5,
+     "minFont": 10,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Root Symbioses",
+     "hScroll": false
+    },
+    {
+     "stage": 4,
+     "figures": 1,
+     "canvas": {
+      "w": 330,
+      "h": 460
+     },
+     "labelCount": 7,
+     "minFont": 10,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Root Symbioses",
+     "hScroll": false
+    },
+    {
+     "stage": 5,
+     "figures": 1,
+     "canvas": {
+      "w": 330,
+      "h": 460
+     },
+     "labelCount": 8,
+     "minFont": 10,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Root Symbioses",
+     "hScroll": false
+    },
+    {
+     "stage": 6,
+     "figures": 1,
+     "canvas": {
+      "w": 330,
+      "h": 460
+     },
+     "labelCount": 9,
+     "minFont": 10,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Root Symbioses",
+     "hScroll": false
+    },
+    {
+     "stage": 7,
+     "figures": 1,
+     "canvas": {
+      "w": 330,
+      "h": 460
+     },
+     "labelCount": 10,
+     "minFont": 10,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Root Symbioses",
+     "hScroll": false
+    }
+   ],
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.plant.mycorrhizae-plant-symbioses",
+   "vp": "mobile",
+   "theme": "light",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 330,
+     "h": 460
+    },
+    "labelCount": 10,
+    "minFont": 10,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Root Symbioses",
+    "hScroll": false
+   },
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.plant.mycorrhizae-plant-symbioses",
+   "vp": "desktop",
+   "theme": "dark",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 526,
+     "h": 580
+    },
+    "labelCount": 10,
+    "minFont": 13.44,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Root Symbioses",
+    "hScroll": false
+   },
+   "stages": [
+    {
+     "stage": 1,
+     "figures": 1,
+     "canvas": {
+      "w": 526,
+      "h": 580
+     },
+     "labelCount": 2,
+     "minFont": 15.488,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Root Symbioses",
+     "hScroll": false
+    },
+    {
+     "stage": 2,
+     "figures": 1,
+     "canvas": {
+      "w": 526,
+      "h": 580
+     },
+     "labelCount": 5,
+     "minFont": 13.44,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Root Symbioses",
+     "hScroll": false
+    },
+    {
+     "stage": 3,
+     "figures": 1,
+     "canvas": {
+      "w": 526,
+      "h": 580
+     },
+     "labelCount": 5,
+     "minFont": 13.44,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Root Symbioses",
+     "hScroll": false
+    },
+    {
+     "stage": 4,
+     "figures": 1,
+     "canvas": {
+      "w": 526,
+      "h": 580
+     },
+     "labelCount": 7,
+     "minFont": 13.44,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Root Symbioses",
+     "hScroll": false
+    },
+    {
+     "stage": 5,
+     "figures": 1,
+     "canvas": {
+      "w": 526,
+      "h": 580
+     },
+     "labelCount": 8,
+     "minFont": 13.44,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Root Symbioses",
+     "hScroll": false
+    },
+    {
+     "stage": 6,
+     "figures": 1,
+     "canvas": {
+      "w": 526,
+      "h": 580
+     },
+     "labelCount": 9,
+     "minFont": 13.44,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Root Symbioses",
+     "hScroll": false
+    },
+    {
+     "stage": 7,
+     "figures": 1,
+     "canvas": {
+      "w": 526,
+      "h": 580
+     },
+     "labelCount": 10,
+     "minFont": 13.44,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Root Symbioses",
+     "hScroll": false
+    }
+   ],
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.plant.mycorrhizae-plant-symbioses",
+   "vp": "desktop",
+   "theme": "light",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 526,
+     "h": 580
+    },
+    "labelCount": 10,
+    "minFont": 13.44,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Root Symbioses",
+    "hScroll": false
+   },
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.plant.plant-growth-hormones",
+   "vp": "mobile",
+   "theme": "dark",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 330,
+     "h": 420
+    },
+    "labelCount": 14,
+    "minFont": 10,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Five Major Plant Hormone Groups",
+    "hScroll": false
+   },
+   "stages": [
+    {
+     "stage": 1,
+     "figures": 1,
+     "canvas": {
+      "w": 330,
+      "h": 420
+     },
+     "labelCount": 4,
+     "minFont": 10,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Five Major Plant Hormone Groups",
+     "hScroll": false
+    },
+    {
+     "stage": 2,
+     "figures": 1,
+     "canvas": {
+      "w": 330,
+      "h": 420
+     },
+     "labelCount": 6,
+     "minFont": 10,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Five Major Plant Hormone Groups",
+     "hScroll": false
+    },
+    {
+     "stage": 3,
+     "figures": 1,
+     "canvas": {
+      "w": 330,
+      "h": 420
+     },
+     "labelCount": 9,
+     "minFont": 10,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Five Major Plant Hormone Groups",
+     "hScroll": false
+    },
+    {
+     "stage": 4,
+     "figures": 1,
+     "canvas": {
+      "w": 330,
+      "h": 420
+     },
+     "labelCount": 11,
+     "minFont": 10,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Five Major Plant Hormone Groups",
+     "hScroll": false
+    },
+    {
+     "stage": 5,
+     "figures": 1,
+     "canvas": {
+      "w": 330,
+      "h": 420
+     },
+     "labelCount": 14,
+     "minFont": 10,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Five Major Plant Hormone Groups",
+     "hScroll": false
+    }
+   ],
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.plant.plant-growth-hormones",
+   "vp": "mobile",
+   "theme": "light",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 330,
+     "h": 420
+    },
+    "labelCount": 14,
+    "minFont": 10,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Five Major Plant Hormone Groups",
+    "hScroll": false
+   },
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.plant.plant-growth-hormones",
+   "vp": "desktop",
+   "theme": "dark",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 526,
+     "h": 580
+    },
+    "labelCount": 14,
+    "minFont": 13.44,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Five Major Plant Hormone Groups",
+    "hScroll": false
+   },
+   "stages": [
+    {
+     "stage": 1,
+     "figures": 1,
+     "canvas": {
+      "w": 526,
+      "h": 580
+     },
+     "labelCount": 4,
+     "minFont": 13.44,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Five Major Plant Hormone Groups",
+     "hScroll": false
+    },
+    {
+     "stage": 2,
+     "figures": 1,
+     "canvas": {
+      "w": 526,
+      "h": 580
+     },
+     "labelCount": 6,
+     "minFont": 13.44,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Five Major Plant Hormone Groups",
+     "hScroll": false
+    },
+    {
+     "stage": 3,
+     "figures": 1,
+     "canvas": {
+      "w": 526,
+      "h": 580
+     },
+     "labelCount": 9,
+     "minFont": 13.44,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Five Major Plant Hormone Groups",
+     "hScroll": false
+    },
+    {
+     "stage": 4,
+     "figures": 1,
+     "canvas": {
+      "w": 526,
+      "h": 580
+     },
+     "labelCount": 11,
+     "minFont": 13.44,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Five Major Plant Hormone Groups",
+     "hScroll": false
+    },
+    {
+     "stage": 5,
+     "figures": 1,
+     "canvas": {
+      "w": 526,
+      "h": 580
+     },
+     "labelCount": 14,
+     "minFont": 13.44,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Five Major Plant Hormone Groups",
+     "hScroll": false
+    }
+   ],
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.plant.plant-growth-hormones",
+   "vp": "desktop",
+   "theme": "light",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 526,
+     "h": 580
+    },
+    "labelCount": 14,
+    "minFont": 13.44,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Five Major Plant Hormone Groups",
+    "hScroll": false
+   },
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  }
+ ]
+}

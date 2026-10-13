@@ -692,6 +692,7 @@ the account in a `finally` block — if the run is killed (worker restart) the a
 with the password derived from its stamp and delete it through `/api/user/delete-account`. The earlier sentence "Production browser validation
 was unavailable in this session" belongs to the first (2026-10-08) pass only.
 
-Final verification (2026-10-13, HEAD `1fb5e21`): CI and local full suite green, all 199 payloads unchanged since the audited build, 199 × 4 views re-rendered
-with 0 flags, five wording-pin tests added, the production audit records and screenshots persisted under `docs/qa/biology-visual-audit/evidence/`.
-Production-browser coverage is still the 14-concept sample; no human reviewed any figure. See the README's "Final verification".
+Final verification (2026-10-13, last verified tree `6e69667`): CI and local full suite green, all 199 payloads unchanged since the audited build, 199 × 4 views re-rendered on
+two later trees with 0 flags, the six repaired figures re-measured in the production browser on the code deployed at `23c52bf` (24/24), five wording-pin tests added, the production
+audit records and screenshots persisted under `docs/qa/biology-visual-audit/evidence/`. Production-browser coverage is still a sample (14 of 199, then the six again); no human reviewed
+any figure. See the README's "Final verification".
