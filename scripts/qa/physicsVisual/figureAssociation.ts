@@ -117,6 +117,11 @@ export async function markFigure(page: Page, index: number): Promise<boolean> {
     if (!root) return false;
     document.querySelectorAll('[data-audit-frame]').forEach(function (n) { n.removeAttribute('data-audit-frame'); });
     if (root.matches('[aria-label^="Visual aid:"]')) { root.setAttribute('data-audit-frame', ''); root.scrollIntoView({ block: 'start' }); return true; }
+    // A scene's controls (the value sliders) live in the figure's own root, below the canvas — further up than the first ancestor
+    // that merely mentions "Play the stages". Frame the WHOLE figure when it has a root of its own (ExplainerFigure: role="figure"),
+    // so the sliders are inside the frame the harness reads and drives; fall back to the walk-up for a page without one.
+    var fig = root.closest('[role="figure"]');
+    if (fig && !fig.matches('[aria-label^="Visual aid:"]')) { fig.setAttribute('data-audit-frame', ''); fig.scrollIntoView({ block: 'start' }); return true; }
     var el = root;
     while (el && el.parentElement) {
       el = el.parentElement;

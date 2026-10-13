@@ -190,6 +190,18 @@ suite('the harness measures the figure of the reply it asked for', { timeout: 60
     await page.context().close()
   })
 
+  it('a scene is framed by its OWN figure root, so the value sliders below the canvas are inside the frame the harness drives', async () => {
+    const page = await (await browser.newContext()).newPage()
+    await page.setContent(`<!doctype html><html><body><div data-message-id="m0"><p>Look at the lens figure and its powers.</p>
+      <section role="figure" aria-label="Lens power" id="root"><div data-scene-box></div><div>Play the stages</div><div><p>What is happening</p><div role="group" aria-label="Values"><input type="range" min="0" max="5" id="s1"></div></div></section></div></body></html>`)
+    const sel = await selectTargetFigure(page, { replyText: 'Look at the lens figure and its powers.' })
+    expect(sel.kind).toBe('scene')
+    await markFigure(page, sel.index)
+    expect(await page.evaluate(`document.querySelector('[data-audit-frame]').id`)).toBe('root')
+    expect(await page.evaluate(`document.querySelectorAll('[data-audit-frame] input[type=range]').length`)).toBe(1)
+    await page.context().close()
+  })
+
   it('marking moves the frame: exactly one frame is ever marked', async () => {
     const page = await open([{ text: REPLY.short, figure: 'card', tag: 'a' }, { text: REPLY.long, figure: 'card', tag: 'b' }])
     await markFigure(page, 0); await markFigure(page, 1)
