@@ -1406,7 +1406,7 @@ Next (batch 40): the 4 topology helpers (topological-space, product-space, homot
 
 # Batch 40 (2026-10-13): topology, optimisation and functional-analysis helpers (11 figures)
 
-`sceneGenerators/mathCoreScenesB40.ts` + `mathCoreScenesBatch40.test.ts` (113 checks); campaign audit threshold now 490. Coverage after this batch:
+`sceneGenerators/mathCoreScenesB40.ts` + `mathCoreScenesBatch40.test.ts` (112 checks); campaign audit threshold now 490. Coverage after this batch:
 536 of 908 concepts with a fixed figure (59.0%); essential tier 344 / 346 (complete), tier H 190 / 210 (90.5%), tier N 2 / 352; target (E + H) 534 / 556 = 96.0%.
 Pre-push checklist: full `npx vitest run`, `scripts/ci/tsc-ratchet.sh` 0 errors, `validate-visualization-coverage.ts` PASS, `scripts/math/label-displacement.ts mathCoreScenesB40` (0 unresolved, 0 card-host moves),
 `scripts/math/campaign-tools/audit-module.ts mathCoreScenesB40` (11 / 11 admitted). Mutation check: fifteen deliberate single-part wrong numbers (a box that swallows c, a count numeral 2-1-0, U drawn to 3.5, arrows that land off the circle, a figure-eight pulled apart,
@@ -1437,7 +1437,7 @@ A `dot()` with its own `text` is reported by `label-displacement.ts` as moved 18
 The label-displacement tool uses a 570 x 370 card; the real Chromium card can still push a label that sits INSIDE a circle or a closed curve out to the figure's margin (the QP "min of f" went to the top row wherever it was placed inside the circles): look at the render, and put such a caption outside the curve with a leader line.
 The first figure rendered right after `next dev` starts can come out with an empty canvas (the card chrome only): re-render it alone before concluding anything about the figure.
 A figure that must show two curves that coincide over a stretch (h = f outside the bump) should draw the second curve only where it differs, or it paints over the first.
-Merged with the Biology/Physics visual fixes another session pushed to `main` while this batch was being built (`origin/main` @ 478adb0f); no conflicts in `conceptSceneParams.ts` beyond the registration blocks.
+Merged with the Biology/Physics visual fixes another session pushed to `main` while this batch was being built (`origin/main` @ 478adb0f): a plain `git merge origin/main`, no conflicts, and the full suite re-run on the merged tree before pushing.
 
 Next (batch 41): geom (4: geometric-proof, length, differential-geometry-surfaces, geometric-constructions), func (4: function-notation, zero-of-function, step-function, function-operations) and cx (4: analytic-continuation, singularities, residue, argument-principle) — 12; then batch 42: graph (3), trig (2), cat (2), num (1). List what is left with `npx tsx scripts/math/visual-coverage.ts --list H`.
 
