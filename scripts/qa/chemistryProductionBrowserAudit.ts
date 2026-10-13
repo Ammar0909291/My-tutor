@@ -31,7 +31,7 @@ import { capture, openContext, settle, CHROMIUM_ARGS, type ThemeName } from './p
 const CONCEPTS = [
   // Tier 0 / 1 — changed or newly audited
   'chem.bond.vsepr', 'chem.thermo.first-law', 'chem.thermo.bond-enthalpy', 'chem.thermo.enthalpy', 'chem.solid.packing',
-  'chem.period.periodic-properties', 'chem.elect.batteries', 'chem.elect.industrial', 'chem.elect.electrolysis',
+  'chem.period.periodic-properties', 'chem.period.modern-periodic-law', 'chem.elect.batteries', 'chem.elect.industrial', 'chem.elect.electrolysis',
   'chem.coord.stability', 'chem.atomic.bohr-model', 'chem.atomic.electronic-config', 'chem.bond.covalent-bonding',
   'chem.state.real-gases', 'chem.dblock.organometallics',
   // authored or reworded by the closure's second round

@@ -105,6 +105,8 @@ fingerprints on the wire equal the checkout's for every concept measured (20, 0 
 * **Retired concepts regenerate figures** (3 of 6 sampled). A content fingerprint cannot stop a new generation. Owner decision: author the 14 or add a pre-generation withhold.
 * **A header label can sit on its sphere** (colloids). Not machine-detectable (WebGL pixels). A larger gap was tried, did not help and was reverted: the cause is framing headroom (Biology-only `fitToCanvas`).
 
+Re-verified after the deploy (`6fe384b`, `dpl_8xJhAhCHsRz7gCvnGWVUjwHjAdR5`): the three periodic/control concepts passed 12/12 at 390/1280 px in both themes with the audited fingerprint on the wire. The tutor's own text quoted a different radius for Cl (99 pm, covalent) than the figure's calculated 79 pm — recorded in QA §13.1, not a figure defect.
+
 ## Rules learned the hard way (production follow-up)
 * **A local audit is a model of production, not production.** Run the deployed harness before calling a visual set closed; it found a defect in the one figure family whose machine verdict was a clean PASS.
 * **A check you did not run is not a PASS.** The local render has no ink check; the new static gate states the property directly instead of waiting for a browser to see it.
