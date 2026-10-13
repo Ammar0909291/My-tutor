@@ -1,0 +1,29 @@
+{
+ "about": "Regression of the shared-component changes on the merged tree (hook useFigureLegibility + GraphRenderer axis-name halo), real Chromium, dev render pipeline.",
+ "physicsGraphConcepts": {
+  "rendered": 40,
+  "viewports": [
+   "mobile",
+   "desktop-column"
+  ],
+  "themes": [
+   "dark",
+   "light"
+  ],
+  "states": "default",
+  "verdictsUnchangedVsCommittedAudit": 40,
+  "verdictCounts": {
+   "PASS": 40
+  },
+  "renderErrors": 0
+ },
+ "chemistryTier23": {
+  "states": 180,
+  "verdicts": {
+   "PASS": 164,
+   "REVIEW_REQUIRED": 16,
+   "FAIL": 0
+  },
+  "differsFromCommittedRenderStatesJson": "0 verdict differences; the 16 REVIEW states are the committed LABEL_OVER_STROKE ones (finding multiplicity differs only in how the two tools count)"
+ }
+}

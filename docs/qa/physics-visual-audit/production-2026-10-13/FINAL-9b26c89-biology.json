@@ -1,0 +1,549 @@
+{
+ "base": "https://my-tutor-flame.vercel.app",
+ "subject": "biology",
+ "deployment": "dpl_CY88qN1UHmAUXVMNczbrUc6yesQp",
+ "commit": "9b26c89",
+ "at": "2026-10-13T12:42:07.945Z",
+ "tally": {
+  "PASS": 22,
+  "FAIL": 2
+ },
+ "accountCleanup": {
+  "deleted": true,
+  "reloginBlocked": true
+ },
+ "rows": [
+  {
+   "conceptId": "bio.neuro.brain-regional-organization",
+   "vp": "mobile",
+   "theme": "dark",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 2,
+   "attempts": 1,
+   "replySegments": 2,
+   "figure": {
+    "total": 1,
+    "roots": 1,
+    "index": 0,
+    "kind": "scene",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "take a look at the figure the three broad brain regions are clearly labeled forebrain at the top midbrain in cyan at the lower left and hindbrain in purple at t",
+    "messageId": "cmv6nuq0e002jjs06s22oa5t2"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-final/shots-bio/bio.neuro.brain-regional-organization__mobile__dark.png"
+  },
+  {
+   "conceptId": "bio.neuro.brain-regional-organization",
+   "vp": "mobile",
+   "theme": "light",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 2,
+   "attempts": 1,
+   "replySegments": 2,
+   "figure": {
+    "total": 1,
+    "roots": 1,
+    "index": 0,
+    "kind": "scene",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "take a look at the figure the three broad brain regions are clearly labeled forebrain at the top midbrain in cyan at the lower left and hindbrain in purple at t",
+    "messageId": "cmv6nuq0e002jjs06s22oa5t2"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-final/shots-bio/bio.neuro.brain-regional-organization__mobile__light.png"
+  },
+  {
+   "conceptId": "bio.neuro.brain-regional-organization",
+   "vp": "desktop-column",
+   "theme": "dark",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 2,
+   "attempts": 1,
+   "replySegments": 2,
+   "figure": {
+    "total": 1,
+    "roots": 1,
+    "index": 0,
+    "kind": "scene",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "take a look at the figure the three broad brain regions are clearly labeled forebrain at the top midbrain in cyan at the lower left and hindbrain in purple at t",
+    "messageId": "cmv6nuq0e002jjs06s22oa5t2"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-final/shots-bio/bio.neuro.brain-regional-organization__desktop-column__dark.png"
+  },
+  {
+   "conceptId": "bio.neuro.brain-regional-organization",
+   "vp": "desktop-column",
+   "theme": "light",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 2,
+   "attempts": 1,
+   "replySegments": 2,
+   "figure": {
+    "total": 1,
+    "roots": 1,
+    "index": 0,
+    "kind": "scene",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "take a look at the figure the three broad brain regions are clearly labeled forebrain at the top midbrain in cyan at the lower left and hindbrain in purple at t",
+    "messageId": "cmv6nuq0e002jjs06s22oa5t2"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-final/shots-bio/bio.neuro.brain-regional-organization__desktop-column__light.png"
+  },
+  {
+   "conceptId": "bio.cell.cell-theory",
+   "vp": "mobile",
+   "theme": "dark",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 1,
+   "attempts": 1,
+   "replySegments": 1,
+   "figure": {
+    "total": 1,
+    "roots": 1,
+    "index": 0,
+    "kind": "scene",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "in the diagram the blue label on the left says schleiden 1838 the centre shows schwann 1839 the next centre reads virchow 1855 and the rightmost blue label stat",
+    "messageId": "cmv6nx1fs0032js06vc5ygwq4"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-final/shots-bio/bio.cell.cell-theory__mobile__dark.png"
+  },
+  {
+   "conceptId": "bio.cell.cell-theory",
+   "vp": "mobile",
+   "theme": "light",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 1,
+   "attempts": 1,
+   "replySegments": 1,
+   "figure": {
+    "total": 1,
+    "roots": 1,
+    "index": 0,
+    "kind": "scene",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "in the diagram the blue label on the left says schleiden 1838 the centre shows schwann 1839 the next centre reads virchow 1855 and the rightmost blue label stat",
+    "messageId": "cmv6nx1fs0032js06vc5ygwq4"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-final/shots-bio/bio.cell.cell-theory__mobile__light.png"
+  },
+  {
+   "conceptId": "bio.cell.cell-theory",
+   "vp": "desktop-column",
+   "theme": "dark",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 1,
+   "attempts": 1,
+   "replySegments": 1,
+   "figure": {
+    "total": 1,
+    "roots": 1,
+    "index": 0,
+    "kind": "scene",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "in the diagram the blue label on the left says schleiden 1838 the centre shows schwann 1839 the next centre reads virchow 1855 and the rightmost blue label stat",
+    "messageId": "cmv6nx1fs0032js06vc5ygwq4"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-final/shots-bio/bio.cell.cell-theory__desktop-column__dark.png"
+  },
+  {
+   "conceptId": "bio.cell.cell-theory",
+   "vp": "desktop-column",
+   "theme": "light",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 1,
+   "attempts": 1,
+   "replySegments": 1,
+   "figure": {
+    "total": 1,
+    "roots": 1,
+    "index": 0,
+    "kind": "scene",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "in the diagram the blue label on the left says schleiden 1838 the centre shows schwann 1839 the next centre reads virchow 1855 and the rightmost blue label stat",
+    "messageId": "cmv6nx1fs0032js06vc5ygwq4"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-final/shots-bio/bio.cell.cell-theory__desktop-column__light.png"
+  },
+  {
+   "conceptId": "bio.mol.dna-replication",
+   "vp": "mobile",
+   "theme": "dark",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 4,
+   "attempts": 1,
+   "replySegments": 4,
+   "figure": {
+    "total": 1,
+    "roots": 1,
+    "index": 0,
+    "kind": "scene",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "take a look at the figure of the replication fork that s now on your screen you can see the purple word helicase positioned on the left side of the fork where t",
+    "messageId": "cmv6nz6mg003wjs06h2xy6z8j"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-final/shots-bio/bio.mol.dna-replication__mobile__dark.png"
+  },
+  {
+   "conceptId": "bio.mol.dna-replication",
+   "vp": "mobile",
+   "theme": "light",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 4,
+   "attempts": 1,
+   "replySegments": 4,
+   "figure": {
+    "total": 1,
+    "roots": 1,
+    "index": 0,
+    "kind": "scene",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "take a look at the figure of the replication fork that s now on your screen you can see the purple word helicase positioned on the left side of the fork where t",
+    "messageId": "cmv6nz6mg003wjs06h2xy6z8j"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-final/shots-bio/bio.mol.dna-replication__mobile__light.png"
+  },
+  {
+   "conceptId": "bio.mol.dna-replication",
+   "vp": "desktop-column",
+   "theme": "dark",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 4,
+   "attempts": 1,
+   "replySegments": 4,
+   "figure": {
+    "total": 1,
+    "roots": 1,
+    "index": 0,
+    "kind": "scene",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "take a look at the figure of the replication fork that s now on your screen you can see the purple word helicase positioned on the left side of the fork where t",
+    "messageId": "cmv6nz6mg003wjs06h2xy6z8j"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-final/shots-bio/bio.mol.dna-replication__desktop-column__dark.png"
+  },
+  {
+   "conceptId": "bio.mol.dna-replication",
+   "vp": "desktop-column",
+   "theme": "light",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 4,
+   "attempts": 1,
+   "replySegments": 4,
+   "figure": {
+    "total": 1,
+    "roots": 1,
+    "index": 0,
+    "kind": "scene",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "take a look at the figure of the replication fork that s now on your screen you can see the purple word helicase positioned on the left side of the fork where t",
+    "messageId": "cmv6nz6mg003wjs06h2xy6z8j"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-final/shots-bio/bio.mol.dna-replication__desktop-column__light.png"
+  },
+  {
+   "conceptId": "bio.eco.predator-prey-dynamics",
+   "vp": "mobile",
+   "theme": "dark",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 5,
+   "attempts": 1,
+   "replySegments": 5,
+   "figure": {
+    "total": 1,
+    "roots": 1,
+    "index": 0,
+    "kind": "scene",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "the lotka volterra predator prey equations extend the single species logistic model into a coupled system of two differential equations where each population s",
+    "messageId": "cmv6o1c6p004pjs06vlp92sfi"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-final/shots-bio/bio.eco.predator-prey-dynamics__mobile__dark.png"
+  },
+  {
+   "conceptId": "bio.eco.predator-prey-dynamics",
+   "vp": "mobile",
+   "theme": "light",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 5,
+   "attempts": 1,
+   "replySegments": 5,
+   "figure": {
+    "total": 1,
+    "roots": 1,
+    "index": 0,
+    "kind": "scene",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "the lotka volterra predator prey equations extend the single species logistic model into a coupled system of two differential equations where each population s",
+    "messageId": "cmv6o1c6p004pjs06vlp92sfi"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-final/shots-bio/bio.eco.predator-prey-dynamics__mobile__light.png"
+  },
+  {
+   "conceptId": "bio.eco.predator-prey-dynamics",
+   "vp": "desktop-column",
+   "theme": "dark",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 5,
+   "attempts": 1,
+   "replySegments": 5,
+   "figure": {
+    "total": 1,
+    "roots": 1,
+    "index": 0,
+    "kind": "scene",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "the lotka volterra predator prey equations extend the single species logistic model into a coupled system of two differential equations where each population s",
+    "messageId": "cmv6o1c6p004pjs06vlp92sfi"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-final/shots-bio/bio.eco.predator-prey-dynamics__desktop-column__dark.png"
+  },
+  {
+   "conceptId": "bio.eco.predator-prey-dynamics",
+   "vp": "desktop-column",
+   "theme": "light",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 5,
+   "attempts": 1,
+   "replySegments": 5,
+   "figure": {
+    "total": 1,
+    "roots": 1,
+    "index": 0,
+    "kind": "scene",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "the lotka volterra predator prey equations extend the single species logistic model into a coupled system of two differential equations where each population s",
+    "messageId": "cmv6o1c6p004pjs06vlp92sfi"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-final/shots-bio/bio.eco.predator-prey-dynamics__desktop-column__light.png"
+  },
+  {
+   "conceptId": "bio.plant.mycorrhizae-plant-symbioses",
+   "vp": "mobile",
+   "theme": "dark",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 2,
+   "attempts": 1,
+   "replySegments": 2,
+   "figure": {
+    "total": 1,
+    "roots": 1,
+    "index": 0,
+    "kind": "scene",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "take a look at the arrow that points to the label arbuscule branches inside the cell in the top left part of the figure what do you notice about where the arbus",
+    "messageId": "cmv6o3n1u005ijs065zmyikwf"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-final/shots-bio/bio.plant.mycorrhizae-plant-symbioses__mobile__dark.png"
+  },
+  {
+   "conceptId": "bio.plant.mycorrhizae-plant-symbioses",
+   "vp": "mobile",
+   "theme": "light",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 2,
+   "attempts": 1,
+   "replySegments": 2,
+   "figure": {
+    "total": 1,
+    "roots": 1,
+    "index": 0,
+    "kind": "scene",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "take a look at the arrow that points to the label arbuscule branches inside the cell in the top left part of the figure what do you notice about where the arbus",
+    "messageId": "cmv6o3n1u005ijs065zmyikwf"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-final/shots-bio/bio.plant.mycorrhizae-plant-symbioses__mobile__light.png"
+  },
+  {
+   "conceptId": "bio.plant.mycorrhizae-plant-symbioses",
+   "vp": "desktop-column",
+   "theme": "dark",
+   "verdict": "FAIL",
+   "fails": [
+    "RD-02 \"More insights\" is clipped (91% visible)"
+   ],
+   "reviews": [],
+   "segments": 2,
+   "attempts": 1,
+   "replySegments": 2,
+   "figure": {
+    "total": 1,
+    "roots": 1,
+    "index": 0,
+    "kind": "scene",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "take a look at the arrow that points to the label arbuscule branches inside the cell in the top left part of the figure what do you notice about where the arbus",
+    "messageId": "cmv6o3n1u005ijs065zmyikwf"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-final/shots-bio/bio.plant.mycorrhizae-plant-symbioses__desktop-column__dark.png"
+  },
+  {
+   "conceptId": "bio.plant.mycorrhizae-plant-symbioses",
+   "vp": "desktop-column",
+   "theme": "light",
+   "verdict": "FAIL",
+   "fails": [
+    "RD-02 \"More insights\" is clipped (91% visible)"
+   ],
+   "reviews": [],
+   "segments": 2,
+   "attempts": 1,
+   "replySegments": 2,
+   "figure": {
+    "total": 1,
+    "roots": 1,
+    "index": 0,
+    "kind": "scene",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "take a look at the arrow that points to the label arbuscule branches inside the cell in the top left part of the figure what do you notice about where the arbus",
+    "messageId": "cmv6o3n1u005ijs065zmyikwf"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-final/shots-bio/bio.plant.mycorrhizae-plant-symbioses__desktop-column__light.png"
+  },
+  {
+   "conceptId": "bio.plant.plant-growth-hormones",
+   "vp": "mobile",
+   "theme": "dark",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 8,
+   "attempts": 1,
+   "replySegments": 8,
+   "figure": {
+    "total": 1,
+    "roots": 1,
+    "index": 0,
+    "kind": "scene",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "here s the diagram you asked for it displays the five major plant hormone groups auxins iaa in blue at the top left with notes that they promote shoot tip cell",
+    "messageId": "cmv6o5zic006jjs06614ol8oo"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-final/shots-bio/bio.plant.plant-growth-hormones__mobile__dark.png"
+  },
+  {
+   "conceptId": "bio.plant.plant-growth-hormones",
+   "vp": "mobile",
+   "theme": "light",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 8,
+   "attempts": 1,
+   "replySegments": 8,
+   "figure": {
+    "total": 1,
+    "roots": 1,
+    "index": 0,
+    "kind": "scene",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "here s the diagram you asked for it displays the five major plant hormone groups auxins iaa in blue at the top left with notes that they promote shoot tip cell",
+    "messageId": "cmv6o5zic006jjs06614ol8oo"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-final/shots-bio/bio.plant.plant-growth-hormones__mobile__light.png"
+  },
+  {
+   "conceptId": "bio.plant.plant-growth-hormones",
+   "vp": "desktop-column",
+   "theme": "dark",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 8,
+   "attempts": 1,
+   "replySegments": 8,
+   "figure": {
+    "total": 1,
+    "roots": 1,
+    "index": 0,
+    "kind": "scene",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "here s the diagram you asked for it displays the five major plant hormone groups auxins iaa in blue at the top left with notes that they promote shoot tip cell",
+    "messageId": "cmv6o5zic006jjs06614ol8oo"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-final/shots-bio/bio.plant.plant-growth-hormones__desktop-column__dark.png"
+  },
+  {
+   "conceptId": "bio.plant.plant-growth-hormones",
+   "vp": "desktop-column",
+   "theme": "light",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 8,
+   "attempts": 1,
+   "replySegments": 8,
+   "figure": {
+    "total": 1,
+    "roots": 1,
+    "index": 0,
+    "kind": "scene",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "here s the diagram you asked for it displays the five major plant hormone groups auxins iaa in blue at the top left with notes that they promote shoot tip cell",
+    "messageId": "cmv6o5zic006jjs06614ol8oo"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-final/shots-bio/bio.plant.plant-growth-hormones__desktop-column__light.png"
+  }
+ ]
+}

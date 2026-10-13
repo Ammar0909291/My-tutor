@@ -1,0 +1,529 @@
+{
+ "base": "https://my-tutor-flame.vercel.app",
+ "mode": "legibility",
+ "subject": "physics",
+ "deployment": "dpl_CY88qN1UHmAUXVMNczbrUc6yesQp",
+ "commit": "9b26c89",
+ "at": "2026-10-13T12:04:42.878Z",
+ "tally": {
+  "PASS": 16
+ },
+ "accountCleanup": {
+  "deleted": true,
+  "reloginBlocked": true
+ },
+ "rows": [
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "mobile",
+   "theme": "dark",
+   "step": "card 1/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 0,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "take a look at the force diagram on your screen it shows a single object with several arrows pointing toward or away from it what do you notice about the direct",
+    "messageId": "cmv6mnrcg0015l9061ryig6b9"
+   },
+   "markers": {
+    "index": 0,
+    "messageId": "cmv6mnrcg0015l9061ryig6b9",
+    "inViewport": true,
+    "top": 117,
+    "height": 320,
+    "legibilityMarker": true,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-final/shots-legibility/legibility__phys.mech.force__mobile__dark__card1.png",
+   "verdict": "PASS",
+   "deployment": "dpl_CY88qN1UHmAUXVMNczbrUc6yesQp",
+   "commit": "9b26c89"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "mobile",
+   "theme": "dark",
+   "step": "card 2/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 1,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "here s the diagram you re looking at an object sits in the centre and arrows extend outward and inward each labeled to indicate the type of force what do you no",
+    "messageId": "cmv6mo7fi001vl90674k6u7sq"
+   },
+   "markers": {
+    "index": 1,
+    "messageId": "cmv6mo7fi001vl90674k6u7sq",
+    "inViewport": true,
+    "top": 117,
+    "height": 320,
+    "legibilityMarker": true,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-final/shots-legibility/legibility__phys.mech.force__mobile__dark__card2.png",
+   "verdict": "PASS",
+   "deployment": "dpl_CY88qN1UHmAUXVMNczbrUc6yesQp",
+   "commit": "9b26c89"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "mobile",
+   "theme": "dark",
+   "step": "card 3/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 2,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "in the diagram on your screen the object has three arrows attached to it which arrow shows the force that pulls the object downward",
+    "messageId": "cmv6mor8m002dl906xzvs804p"
+   },
+   "markers": {
+    "index": 2,
+    "messageId": "cmv6mor8m002dl906xzvs804p",
+    "inViewport": true,
+    "top": 117,
+    "height": 320,
+    "legibilityMarker": true,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-final/shots-legibility/legibility__phys.mech.force__mobile__dark__card3.png",
+   "verdict": "PASS",
+   "deployment": "dpl_CY88qN1UHmAUXVMNczbrUc6yesQp",
+   "commit": "9b26c89"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "mobile",
+   "theme": "dark",
+   "step": "card 4/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 3,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "the diagram shows the object with three force arrows attached which of these arrows represents the force that pulls the object downward",
+    "messageId": "cmv6mp5n2002pl906sj40nscg"
+   },
+   "markers": {
+    "index": 3,
+    "messageId": "cmv6mp5n2002pl906sj40nscg",
+    "inViewport": true,
+    "top": 339,
+    "height": 320,
+    "legibilityMarker": true,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-final/shots-legibility/legibility__phys.mech.force__mobile__dark__card4.png",
+   "verdict": "PASS",
+   "deployment": "dpl_CY88qN1UHmAUXVMNczbrUc6yesQp",
+   "commit": "9b26c89"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "mobile",
+   "theme": "light",
+   "step": "card 1/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 0,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "take a look at the force diagram on your screen it shows a single object with several arrows pointing toward or away from it what do you notice about the direct",
+    "messageId": "cmv6mnrcg0015l9061ryig6b9"
+   },
+   "markers": {
+    "index": 0,
+    "messageId": "cmv6mnrcg0015l9061ryig6b9",
+    "inViewport": true,
+    "top": 117,
+    "height": 320,
+    "legibilityMarker": true,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-final/shots-legibility/legibility__phys.mech.force__mobile__light__card1.png",
+   "verdict": "PASS",
+   "deployment": "dpl_CY88qN1UHmAUXVMNczbrUc6yesQp",
+   "commit": "9b26c89"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "mobile",
+   "theme": "light",
+   "step": "card 2/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 1,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "here s the diagram you re looking at an object sits in the centre and arrows extend outward and inward each labeled to indicate the type of force what do you no",
+    "messageId": "cmv6mo7fi001vl90674k6u7sq"
+   },
+   "markers": {
+    "index": 1,
+    "messageId": "cmv6mo7fi001vl90674k6u7sq",
+    "inViewport": true,
+    "top": 117,
+    "height": 320,
+    "legibilityMarker": true,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-final/shots-legibility/legibility__phys.mech.force__mobile__light__card2.png",
+   "verdict": "PASS",
+   "deployment": "dpl_CY88qN1UHmAUXVMNczbrUc6yesQp",
+   "commit": "9b26c89"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "mobile",
+   "theme": "light",
+   "step": "card 3/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 2,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "in the diagram on your screen the object has three arrows attached to it which arrow shows the force that pulls the object downward",
+    "messageId": "cmv6mor8m002dl906xzvs804p"
+   },
+   "markers": {
+    "index": 2,
+    "messageId": "cmv6mor8m002dl906xzvs804p",
+    "inViewport": true,
+    "top": 117,
+    "height": 320,
+    "legibilityMarker": true,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-final/shots-legibility/legibility__phys.mech.force__mobile__light__card3.png",
+   "verdict": "PASS",
+   "deployment": "dpl_CY88qN1UHmAUXVMNczbrUc6yesQp",
+   "commit": "9b26c89"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "mobile",
+   "theme": "light",
+   "step": "card 4/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 3,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "the diagram shows the object with three force arrows attached which of these arrows represents the force that pulls the object downward",
+    "messageId": "cmv6mp5n2002pl906sj40nscg"
+   },
+   "markers": {
+    "index": 3,
+    "messageId": "cmv6mp5n2002pl906sj40nscg",
+    "inViewport": true,
+    "top": 339,
+    "height": 320,
+    "legibilityMarker": true,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-final/shots-legibility/legibility__phys.mech.force__mobile__light__card4.png",
+   "verdict": "PASS",
+   "deployment": "dpl_CY88qN1UHmAUXVMNczbrUc6yesQp",
+   "commit": "9b26c89"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "desktop-column",
+   "theme": "dark",
+   "step": "card 1/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 0,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "take a look at the force diagram on your screen it shows a single object with several arrows pointing toward or away from it what do you notice about the direct",
+    "messageId": "cmv6mnrcg0015l9061ryig6b9"
+   },
+   "markers": {
+    "index": 0,
+    "messageId": "cmv6mnrcg0015l9061ryig6b9",
+    "inViewport": true,
+    "top": 117,
+    "height": 413,
+    "legibilityMarker": true,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-final/shots-legibility/legibility__phys.mech.force__desktop-column__dark__card1.png",
+   "verdict": "PASS",
+   "deployment": "dpl_CY88qN1UHmAUXVMNczbrUc6yesQp",
+   "commit": "9b26c89"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "desktop-column",
+   "theme": "dark",
+   "step": "card 2/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 1,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "here s the diagram you re looking at an object sits in the centre and arrows extend outward and inward each labeled to indicate the type of force what do you no",
+    "messageId": "cmv6mo7fi001vl90674k6u7sq"
+   },
+   "markers": {
+    "index": 1,
+    "messageId": "cmv6mo7fi001vl90674k6u7sq",
+    "inViewport": true,
+    "top": 117,
+    "height": 413,
+    "legibilityMarker": true,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-final/shots-legibility/legibility__phys.mech.force__desktop-column__dark__card2.png",
+   "verdict": "PASS",
+   "deployment": "dpl_CY88qN1UHmAUXVMNczbrUc6yesQp",
+   "commit": "9b26c89"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "desktop-column",
+   "theme": "dark",
+   "step": "card 3/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 2,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "in the diagram on your screen the object has three arrows attached to it which arrow shows the force that pulls the object downward",
+    "messageId": "cmv6mor8m002dl906xzvs804p"
+   },
+   "markers": {
+    "index": 2,
+    "messageId": "cmv6mor8m002dl906xzvs804p",
+    "inViewport": true,
+    "top": 117,
+    "height": 413,
+    "legibilityMarker": true,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-final/shots-legibility/legibility__phys.mech.force__desktop-column__dark__card3.png",
+   "verdict": "PASS",
+   "deployment": "dpl_CY88qN1UHmAUXVMNczbrUc6yesQp",
+   "commit": "9b26c89"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "desktop-column",
+   "theme": "dark",
+   "step": "card 4/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 3,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "the diagram shows the object with three force arrows attached which of these arrows represents the force that pulls the object downward",
+    "messageId": "cmv6mp5n2002pl906sj40nscg"
+   },
+   "markers": {
+    "index": 3,
+    "messageId": "cmv6mp5n2002pl906sj40nscg",
+    "inViewport": true,
+    "top": 202,
+    "height": 413,
+    "legibilityMarker": true,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-final/shots-legibility/legibility__phys.mech.force__desktop-column__dark__card4.png",
+   "verdict": "PASS",
+   "deployment": "dpl_CY88qN1UHmAUXVMNczbrUc6yesQp",
+   "commit": "9b26c89"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "desktop-column",
+   "theme": "light",
+   "step": "card 1/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 0,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "take a look at the force diagram on your screen it shows a single object with several arrows pointing toward or away from it what do you notice about the direct",
+    "messageId": "cmv6mnrcg0015l9061ryig6b9"
+   },
+   "markers": {
+    "index": 0,
+    "messageId": "cmv6mnrcg0015l9061ryig6b9",
+    "inViewport": true,
+    "top": 109,
+    "height": 413,
+    "legibilityMarker": true,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-final/shots-legibility/legibility__phys.mech.force__desktop-column__light__card1.png",
+   "verdict": "PASS",
+   "deployment": "dpl_CY88qN1UHmAUXVMNczbrUc6yesQp",
+   "commit": "9b26c89"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "desktop-column",
+   "theme": "light",
+   "step": "card 2/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 1,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "here s the diagram you re looking at an object sits in the centre and arrows extend outward and inward each labeled to indicate the type of force what do you no",
+    "messageId": "cmv6mo7fi001vl90674k6u7sq"
+   },
+   "markers": {
+    "index": 1,
+    "messageId": "cmv6mo7fi001vl90674k6u7sq",
+    "inViewport": true,
+    "top": 117,
+    "height": 413,
+    "legibilityMarker": true,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-final/shots-legibility/legibility__phys.mech.force__desktop-column__light__card2.png",
+   "verdict": "PASS",
+   "deployment": "dpl_CY88qN1UHmAUXVMNczbrUc6yesQp",
+   "commit": "9b26c89"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "desktop-column",
+   "theme": "light",
+   "step": "card 3/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 2,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "in the diagram on your screen the object has three arrows attached to it which arrow shows the force that pulls the object downward",
+    "messageId": "cmv6mor8m002dl906xzvs804p"
+   },
+   "markers": {
+    "index": 2,
+    "messageId": "cmv6mor8m002dl906xzvs804p",
+    "inViewport": true,
+    "top": 117,
+    "height": 413,
+    "legibilityMarker": true,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-final/shots-legibility/legibility__phys.mech.force__desktop-column__light__card3.png",
+   "verdict": "PASS",
+   "deployment": "dpl_CY88qN1UHmAUXVMNczbrUc6yesQp",
+   "commit": "9b26c89"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "desktop-column",
+   "theme": "light",
+   "step": "card 4/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 3,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "the diagram shows the object with three force arrows attached which of these arrows represents the force that pulls the object downward",
+    "messageId": "cmv6mp5n2002pl906sj40nscg"
+   },
+   "markers": {
+    "index": 3,
+    "messageId": "cmv6mp5n2002pl906sj40nscg",
+    "inViewport": true,
+    "top": 202,
+    "height": 413,
+    "legibilityMarker": true,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-final/shots-legibility/legibility__phys.mech.force__desktop-column__light__card4.png",
+   "verdict": "PASS",
+   "deployment": "dpl_CY88qN1UHmAUXVMNczbrUc6yesQp",
+   "commit": "9b26c89"
+  }
+ ]
+}
