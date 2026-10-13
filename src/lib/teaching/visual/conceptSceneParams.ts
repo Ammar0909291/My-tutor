@@ -332,6 +332,10 @@ import {
   buildFunctionNotationScene, buildZeroOfFunctionScene, buildStepFunctionScene, buildFunctionOperationsScene,
   buildAnalyticContinuationScene, buildSingularitiesScene, buildResidueScene, buildArgumentPrincipleScene,
 } from '@/lib/teaching/sceneGenerators/mathCoreScenesB41'
+import {
+  buildGraphInvariantsScene, buildGraphOperationsScene, buildRandomGraphScene, buildTrigIdentitiesScene,
+  buildTrigEquationsScene, buildLimitsScene, buildAdjunctionScene, buildErrorAnalysisScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB42'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -1099,6 +1103,14 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'math.cx.singularities':               buildSingularitiesScene,
   'math.cx.residue':                     buildResidueScene,
   'math.cx.argument-principle':          buildArgumentPrincipleScene,
+  'math.graph.graph-invariants':         buildGraphInvariantsScene,
+  'math.graph.graph-operations':         buildGraphOperationsScene,
+  'math.graph.random-graph':             buildRandomGraphScene,
+  'math.trig.trig-identities':           buildTrigIdentitiesScene,
+  'math.trig.trig-equations':            buildTrigEquationsScene,
+  'math.cat.limits':                     buildLimitsScene,
+  'math.cat.adjunction':                 buildAdjunctionScene,
+  'math.num.error-analysis':             buildErrorAnalysisScene,
 
   // The Punnett generator is single-gene by construction (genotypes are two
   // alleles). A dihybrid cross drawn as a monohybrid square teaches the wrong
