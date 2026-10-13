@@ -24,7 +24,7 @@ head = src[:head_end]
 helpers = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'test-helpers.txt'), encoding='utf8').read()
 # the header comment, module import and BATCH list are batch specific
 head = re.sub(r"/\*\*.*?\*/", f"/**\n * Mathematics visual campaign, batch {n} (2026-10-12): TODO describe the concepts. Every number a figure states is re-derived here from the\n * DRAWN dots, numerals, lines, arrows and curves, never from the generator's own constants alone.\n */", head, count=1, flags=re.S)
-head = re.sub(r"mathCoreScenesB\d+'", f"{module}'", head)
+head = re.sub(r"(import \* as M from '@/lib/teaching/sceneGenerators/)mathCoreScenesB\d+'", lambda m: m.group(1) + module + "'", head)
 rows = [t.split(':') for t in triples]
 batch = 'const BATCH: Array<[string, () => SceneSpec, string]> = [\n' + ''.join(f"  ['{c}', M.{f}, '{i}'],\n" for c, f, i in rows) + ']\n'
 head = re.sub(r"const BATCH: Array<\[string, \(\) => SceneSpec, string\]> = \[.*?\n\]\n", batch, head, count=1, flags=re.S)
