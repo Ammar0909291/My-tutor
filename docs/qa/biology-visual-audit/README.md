@@ -44,10 +44,10 @@ mid-transition (three false overlaps were seen that way and disappeared when re-
 | Biology KG concepts | **199** (all `renderer: scene`, 196 concept-owned, 3 generator-served: `bio.cell.mitosis`, `bio.gen.mendelian-genetics`, `bio.eco.ecosystem-structure-function`) |
 | Rendered in a real browser (Chromium + WebGL) | **199 × 2 viewports (1280, 390) × 2 themes (dark, light) = 796 renders**, every stage walked: **3,716 measured states** (1,858 per theme); the six repaired figures were re-measured on the final code after the review wording fixes |
 | Automated flags over all 3,716 states | **0** label overlaps · **0** labels outside the canvas · **0** horizontal scroll · **0** figure overflow · **0** leaked ids · **0** page errors (see "environment noise") · min caption font **10 px** (the readability floor) · min contrast **4.60 : 1** dark / **4.65 : 1** light (WCAG AA) |
-| Eyeballed | every concept's final **dark and light** all-stages view (desktop + mobile) in this pass (the 24 figures changed during the campaign were re-viewed after their last change); the six repaired figures **stage by stage** (dark, desktop + mobile). Every other stage and the light stage views were measured automatically, not eyeballed |
+| Eyeballed | every concept's final **dark and light** all-stages view (desktop + mobile) in this pass (the 39 figures whose served scene the closure changed — the six repaired + 33 touched by the shared Biology-only fixes — were re-viewed after their last change); the six repaired figures **stage by stage** (dark, desktop + mobile). Every other stage and the light stage views were measured automatically, not eyeballed |
 | Semantic | the six repairs were additionally reviewed by an independent reviewer (below) |
 | Interaction audit (Play the stages, stop, Show-all reset, Situation↔Diagram, modes, legend pin, Expand→Return, reduced motion), desktop + mobile | the six repaired figures + four changed ones: all controls pass. The other 189 share the same controls and were render-measured, not driven |
-| Non-Biology blast radius | **1,712** Physics / Chemistry / Mathematics / CS / English served-figure payloads are **byte-identical** to `origin/main` (fingerprint of the whole payload) |
+| Non-Biology blast radius | **1,712** Physics / Chemistry / Mathematics / CS / English served-figure payloads were **byte-identical** to `origin/main` when the campaign merged (fingerprint of the whole payload; Physics/Mathematics work has landed on `main` since — see "Final verification") |
 | Final status words | **PASS 199 · FAIL 0 · REVIEW_REQUIRED 0** — with the observations below recorded, not hidden |
 
 Per-concept manifest (concept, figure type, renderer, per-viewport/theme measurements, repaired / regenerated, semantic baseline → final, status):
@@ -105,7 +105,7 @@ Brain text; it removes my own anchoring, it is not a human domain review.
   Below the occlusion threshold (> 15 % of the sphere) used by the scan; no legibility loss.
 * **Environment noise in the dev harness, not the app:** every page logs `ClientFetchError … server configuration` / HTTP 500 from `/api/auth/session` (the dev
   server has no `AUTH_SECRET`), and the light theme logs React hydration warnings ("Prop `fill` did not match", a server-vs-client colour on the legend swatch).
-  Neither occurs in a figure's own rendering; both are excluded from the "page errors" count above and counted separately (dark 280, light 1,589 + 296).
+  Neither occurs in a figure's own rendering; both are excluded from the "page errors" count above and counted separately. The counts vary run to run with the dev server's state (the 2026-10-13 re-audit on `1fb5e21` logged 1,592 `ClientFetchError` per theme and 296 hydration warnings in light).
 * **Provider failures are a separate matter.** Production logs show the Gemini fallback returning `403 … project has been denied access` and occasional
   `503`s (details under "Production"). No keys were rotated and no provider policy was changed.
 
@@ -223,6 +223,42 @@ Polish observations (judged PASS): `bio.micro.microbes-in-human-welfare` at 390 
 Dev-only: the light-theme harness (theme forced through `localStorage`) logs React hydration warnings on a server-vs-client colour prop;
 not measured on production.
 
+## Final verification (2026-10-13, repository HEAD `1fb5e21`)
+
+**Question this answers:** is the closure above still true on the code that is on `main` and deployed now? Between the closure report and this pass,
+`main` gained Mathematics batch 40 and Physics visual work (`b35bb4c..1fb5e21`, 11 commits), including edits to shared visual files, so the earlier
+claims were re-checked rather than assumed. No Biology source was changed; one test block was added (below).
+
+| Check | Result |
+|---|---|
+| Branch / tree | `main`; local HEAD = `origin/main` = `1fb5e211d4248ad54011780ff7bc4f508c7e3f56`; working tree clean before this pass's changes |
+| Production alias | `my-tutor-flame.vercel.app` → `dpl_2kR4EW7kPxbcjqQsxpRBE1f9p1At`, READY, built from `1fb5e21` (the earlier deployments `dpl_2oRc…` / `dpl_C8yy…` are no longer the alias target); `/api/health` 200, `db: true` |
+| CI (`validate`: type ratchet, full vitest, KG validator, package determinism, visualization coverage) | success on `478adb0` (the final Biology code tree, includes `d19b00f`), `b35bb4c`, `74f4207` and `1fb5e21`. This closes the "full suite not rerun after `d19b00f`" gap |
+| Local gates on `1fb5e21` | `tsc --noEmit` exit 0 · eslint on `src/lib/teaching`, `src/components/school/visuals`, `scripts/qa`, the Biology test: 0 errors (6 pre-existing `exhaustive-deps` warnings in `CrystalLattice3D.tsx` / `ExplainerFigure.tsx`) · **full vitest 968 files, 24,779 passed, 9 skipped, 0 failed** |
+| Biology figure payloads, `b35bb4c` (audited + deployed Biology code) vs `1fb5e21` | **199 / 199 identical** (`figureFingerprint` of every resolved payload; `evidence/figure-fingerprints-1fb5e21.json`) |
+| Can the upstream edits reach a Biology render? | No path found: the files changed upstream under `src/lib/teaching/visual`, `sceneGenerators` and `src/components` are `conceptSceneParams.ts` (new Mathematics + Physics entries only), `labelSpots.ts` (imported by `lensPower` / `normalForce` only), `parametricScenes.ts` / `visualRegistry.ts` / `resolveVisual.ts` (Physics kinds), `useFigureLegibility.ts` (used by the 2D SVG renderers, not by `SceneSpecFigure → ExplainerFigure → SceneSpecRenderer`) and a `data-message-id` attribute in `LessonScreen.tsx`. The solver, `ExplainerFigure` and the scene renderer are untouched |
+| Inventory (`biologyVisualInventory.ts`) | 199 / 199 `renderer: scene`, 196 concept-owned + 3 kind-default generators (`bio.cell.mitosis`, `bio.gen.mendelian-genetics`, `bio.eco.ecosystem-structure-function`); identical to the campaign-final inventory |
+| Render re-audit on `1fb5e21` (Chromium + WebGL, 1280 / 390, dark + light, every stage) | **199 concepts × 4 views, 3,716 states, 0 flags**: 0 overlaps · 0 outside the canvas · 0 horizontal scroll · 0 figure overflow · 0 leaked ids · 0 page errors · min caption 10 px · min contrast 4.60 dark / 4.65 light. Label count, state count and canvas size of every concept × view equal the campaign manifest (0 drift). The six repaired figures are among them (all six measured; three of them — mycorrhizae, predator-prey, dna-replication — also looked at by eye on the re-render). Per-concept numbers: `evidence/reaudit-1fb5e21.json` |
+| Regression pins | every closure fix is pinned in `bioClosureFigures.test.ts` / `dnaReplicationVisual.test.ts`. One gap was found: the six wording fixes from the independent review (`d19b00f`) were pinned only for the auxin caption. A block of five tests was added, each tied to the Educational Brain sentence it follows; with each wording reverted its test fails and the other 55 pass (mutation-checked, mutations reverted). 105 Biology/visual test files (3,937 tests) pass |
+| Disposable QA accounts | none left from the Biology closure runs (read-only count: 28 `qa-*@mytutor-qa.invalid` accounts exist — 26 created 2026-09-01…10-02 by earlier campaigns and 2 created 2026-10-13 08:15 by a concurrent Physics harness; none created by this Biology work, none touched here) |
+
+### What each kind of evidence covers (do not conflate)
+
+| Kind | Scope | Source |
+|---|---|---|
+| Locally rendered and measured | all 199 concepts, both viewports, both themes, every stage | `evidence/reaudit-1fb5e21.json`, `audit-final.json` |
+| Production-browser verified | **14 of 199** concepts × 4 views (the six repaired + 8 unchanged controls), taken against `dpl_2oRc…` (`478adb0`); the served scene equalled the audited one. Figure payloads are identical at `1fb5e21`, so the sample was not repeated | `evidence/production-audit-run2.json`, `production-audit-run1.log`, `evidence/production-screenshots/` (the six repaired figures, 4 views each) |
+| Automated semantic review | the six repaired figures, by an independent read-only **model** reviewer reading the Educational Brain text; a mechanical check that the pinned wording follows the entry | `semantic-review-baseline.json` → `closureReview`, the new tests |
+| Human review | **none** — no educator or domain expert has signed off any Biology figure | — |
+
+Persisted evidence: until this pass the production audit records and screenshots lived only in a session scratchpad. Under `evidence/` now: the
+production audit JSON and both run logs, the 24 default-view production screenshots of the six repaired figures (the stage-by-stage walk
+screenshots, 6.8 MB, were not kept; their measurements are in the JSON for the concepts run 2 covered), the 199 figure fingerprints and the re-audit summary.
+Run 1's JSON was lost to a worker restart; its log is kept.
+
+Confirmed defects: none new. Observations unchanged (stage-height variance, a 2–3 px hub caption touch, dev-harness noise). Provider failures
+(Gemini 403/503, Resend, `CredentialsSignin`) are separate and untouched.
+
 ## Production
 
 **Deployment verified and browser-audited on the real learner page.** The campaign's final figure code is deployed:
@@ -231,7 +267,7 @@ not measured on production.
 | --- | --- |
 | Pushed commit | `478adb0f983f3cc25085a19f6547c3b3880bb137` (origin/main) |
 | Vercel deployment | `dpl_2oRcCMGxnxAJ7GCL5D8bMD3pPw5g` — state READY, project `prj_FwjmRdthApGhwdQY7FyDYThD7WJD` |
-| Production alias | `my-tutor-flame.vercel.app` → the deployment above |
+| Production alias at the time of the audit | `my-tutor-flame.vercel.app` → the deployment above (the alias has moved on since, with every later push to `main`; see "Final verification" for what it serves now) |
 | Curriculum read | `/api/curriculum?subject=biology` → 199 Biology lessons |
 | AI provider during the runs | `groq` (the Gemini fallback was not reached) |
 
