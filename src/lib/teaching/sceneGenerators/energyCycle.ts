@@ -159,6 +159,9 @@ function stepLabelOffset(text: string, side: -1 | 1): number {
   return HALF_BAR + 0.3 + Math.min(text.length, STEP_LABEL_MAX_CHARS) * perChar
 }
 
+/** U+2212 for a negative number, matching the step labels ("ΔH = −393.5 kJ/mol"); a bare JS number prints an ASCII hyphen. */
+const signed = (n: number): string => String(n).replace('-', '−')
+
 export function buildEnergyCycleScene(p: EnergyCycleParams): SceneSpec {
   const paths = derivePaths(p)
   const maxAbsHeight = Math.max(1e-9, ...paths.flatMap((path) => path.levels.map((l) => Math.abs(l.height))))
@@ -246,8 +249,6 @@ export function buildEnergyCycleScene(p: EnergyCycleParams): SceneSpec {
   const resultObjects: SceneObject[] = []
   if (paths.length > 1) {
     const totals = paths.map((path) => path.total)
-    // U+2212 for a negative total, matching the step labels ("ΔH = −393.5 kJ/mol"); a bare JS number prints an ASCII hyphen.
-    const signed = (n: number): string => String(n).replace('-', '−')
     resultObjects.push(label(
       allPathsAgree
         // One line at every viewport (31 characters at the detail tier fits a 282px phone canvas). The longer
@@ -276,7 +277,7 @@ export function buildEnergyCycleScene(p: EnergyCycleParams): SceneSpec {
       ? `Show that ${p.startLabel} reaches the same final state by every path, with the same total ${p.unit}.`
       : `Show the energy gap between two levels.`,
     cameraDistance: 22,
-    ariaLabel: `${p.title}: an energy level diagram starting at ${p.startLabel}${paths.length > 1 ? `, compared across ${paths.length} paths that all total ${paths[0].total} ${p.unit}` : ''}.`,
+    ariaLabel: `${p.title}: an energy level diagram starting at ${p.startLabel}${paths.length > 1 ? `, compared across ${paths.length} paths that all total ${signed(paths[0].total)} ${p.unit}` : ''}.`,
     stage: { grid: false, axes: false },
     steps: [
       { narration: `${p.startLabel} is the shared starting point.`, objects: establishObjects, intent: 'establish' },

@@ -728,7 +728,9 @@ export function scanFormulaTokens(item: TextItem, nameFormulas: ReadonlySet<stri
             continue
           }
         }
-        if (/[₀-₉₊₋⁺⁻]/.test(core) && sp.unknownSymbols.length > 0 && /^[A-Z(\[]/.test(core)) {
+        // D and T are hydrogen isotopes (D₂O, T₂O, CH₃D): a formula whose only unknowns are those is not a quantity.
+        const isotopeFormula = sp.unknownSymbols.length > 0 && sp.unknownSymbols.every((u) => u === 'D' || u === 'T') && parseSpecies(core.replace(/[DT](?![a-z])/g, 'H')).ok
+        if (!isotopeFormula && /[₀-₉₊₋⁺⁻]/.test(core) && sp.unknownSymbols.length > 0 && /^[A-Z(\[]/.test(core)) {
           // Unicode subscripts are also used for QUANTITIES (M₁V₁, IE₁, [A]₀, Kb₂), so this can only be a note, never a verdict.
           findings.push(info('F-UNKNOWN-ELEMENT', `"${core}" is written like a formula but "${sp.unknownSymbols.join(', ')}" is not an element symbol (a quantity such as M₁ or IE₁?)`, item.where))
           continue
@@ -939,6 +941,8 @@ export interface MolGraph { atoms: AtomNode[]; bonds: BondEdge[]; nodes: FlatObj
 
 /** `O`, `N+`, `Cl-`, `Na^+` → {symbol, charge}; null if the text is not exactly one atom. */
 export function parseAtomText(text: string): { symbol: string; charge: number } | null {
+  // D (deuterium) and T (tritium) are IUPAC-recognised symbols of hydrogen isotopes — atoms of H, not unknown elements.
+  if (text.trim() === 'D' || text.trim() === 'T') return { symbol: 'H', charge: 0 }
   const p = parseSpecies(text)
   if (!p.ok || p.isElectron || p.hasCoeff || p.state) return null
   const keys = Object.keys(p.atoms)
@@ -970,13 +974,6 @@ export function extractMolecularGraph(scene: SceneSpec): MolGraph {
     bonds.push({ a, b, order: ord ?? 1, orderSpecified: ord !== undefined, where })
   }
   return { atoms, bonds, nodes }
-}
-
-function components(n: number, bonds: readonly BondEdge[]): number {
-  const parent = Array.from({ length: n }, (_, i) => i)
-  const root = (x: number): number => (parent[x] === x ? x : (parent[x] = root(parent[x])))
-  for (const b of bonds) parent[root(b.a)] = root(b.b)
-  return new Set(parent.map((_, i) => root(i))).size
 }
 
 /** VSEPR: (bonded domains, lone pairs on the centre) → geometry name and the legal bond-angle window. */
@@ -1058,19 +1055,53 @@ export function verifyMolecularStructure(scene: SceneSpec): FamilyReport {
     return rep
   }
 
-  // Candidate element-ish labels that are not elements.
+  // Candidate element-ish labels that are not elements (D and T are hydrogen isotopes, not errors).
   for (const f of g.nodes) {
     const t = (f.o.text ?? '').trim()
-    if (/^[A-Z][a-z]?$/.test(t) && !isElementSymbol(t)) rep.findings.push(fail('E-ELEMENT', `"${t}" is not an element symbol`, f.where + '.text'))
+    if (/^[A-Z][a-z]?$/.test(t) && t !== 'D' && t !== 'T' && !isElementSymbol(t)) rep.findings.push(fail('E-ELEMENT', `"${t}" is not an element symbol`, f.where + '.text'))
   }
 
+  // Connectivity. A figure may legitimately draw SEVERAL molecules (XeF₂ beside XeF₄) and ions beside them; what
+  // it may not do is leave a neutral non-noble atom bonded to nothing — that is a missing bond, not a species.
+  const pieces = componentIndexSets(g.atoms.length, g.bonds)
+  const molecules = pieces.filter((c) => c.length >= 2)
+  const dangling = pieces.filter((c) => c.length === 1).map((c) => g.atoms[c[0]]).filter((a) => a.charge === 0 && !NOBLE_GAS_SYMBOLS.has(a.symbol))
+  if (dangling.length) {
+    rep.findings.push(fail('E-DISCONNECTED', `${dangling.length === 1 ? 'a neutral atom' : `${dangling.length} neutral atoms`} (${dangling.slice(0, 4).map((a) => a.symbol).join(', ')}) drawn bonded to nothing — every atom of a molecule must belong to one connected component`, 'steps'))
+  } else if (pieces.length === 1) rep.verified.push('single-connected-component')
+  else rep.verified.push(`${molecules.length} separate molecule(s)${pieces.length > molecules.length ? ' and lone ions/atoms' : ''}, each checked on its own`)
+  const single = pieces.length === 1
+  if (!single) rep.unverified.push('compound name/formula, narration wording, title geometry and angle labels are compared only for a single-molecule figure')
+
+  molecules.forEach((idxs) => verifyOneMolecule(rep, scene, subGraph(g, idxs), single))
+  return rep
+}
+
+/** The atoms of `g` listed in `idxs`, with bonds re-indexed into the sub-graph. */
+function subGraph(g: MolGraph, idxs: readonly number[]): MolGraph {
+  const remap = new Map(idxs.map((old, i) => [old, i]))
+  const atoms = idxs.map((old, i) => ({ ...g.atoms[old], idx: i }))
+  const bonds = g.bonds.filter((b) => remap.has(b.a) && remap.has(b.b)).map((b) => ({ ...b, a: remap.get(b.a)!, b: remap.get(b.b)! }))
+  return { atoms, bonds, nodes: g.nodes }
+}
+
+const NOBLE_GAS_SYMBOLS: ReadonlySet<string> = new Set(['He', 'Ne', 'Ar', 'Kr', 'Xe', 'Rn'])
+
+/** Atom-index sets of the connected components of an atom/bond graph. */
+function componentIndexSets(n: number, bonds: readonly BondEdge[]): number[][] {
+  const parent = Array.from({ length: n }, (_, i) => i)
+  const root = (x: number): number => (parent[x] === x ? x : (parent[x] = root(parent[x])))
+  for (const b of bonds) parent[root(b.a)] = root(b.b)
+  const groups = new Map<number, number[]>()
+  for (let i = 0; i < n; i++) { const r = root(i); groups.set(r, [...(groups.get(r) ?? []), i]) }
+  return [...groups.values()]
+}
+
+/** Valence, VSEPR geometry and (for a single-molecule figure) formula / title / narration checks for ONE connected molecule. */
+function verifyOneMolecule(rep: FamilyReport, scene: SceneSpec, g: MolGraph, single: boolean): void {
   const sums = g.atoms.map(() => 0)
   const deg = g.atoms.map(() => 0)
   for (const b of g.bonds) { sums[b.a] += b.order; sums[b.b] += b.order; deg[b.a]++; deg[b.b]++ }
-
-  if (components(g.atoms.length, g.bonds) > 1) {
-    rep.findings.push(fail('E-DISCONNECTED', `the drawn atoms form ${components(g.atoms.length, g.bonds)} separate pieces — a single molecule must be one connected component`, 'steps'))
-  } else rep.verified.push('single-connected-component')
 
   const anyOrderKnown = g.bonds.some((b) => b.orderSpecified)
   let tm = false
@@ -1113,8 +1144,8 @@ export function verifyMolecularStructure(scene: SceneSpec): FamilyReport {
   const titleText = `${scene.title ?? ''} ${scene.ariaLabel ?? ''}`.toLowerCase()
   const named = Object.entries(COMMON_COMPOUNDS).filter(([nm]) => titleText.includes(nm)).sort((a, b) => b[0].length - a[0].length)[0]
   const written = (scene.title ?? '').split(/\s+/).map(trimCore).map(parseSpecies).find((s) => s.ok && s.groups >= 1 && (/\d/.test(s.body) || s.groups >= 2))
-  const expectedAtoms = named ? parseFormulaBody(named[1]).atoms : written?.atoms
-  if (expectedAtoms) {
+  const expectedAtoms = single ? (named ? parseFormulaBody(named[1]).atoms : written?.atoms) : undefined
+  if (!single) { /* compared only for a single-molecule figure — see the note recorded above */ } else if (expectedAtoms) {
     const keys = new Set([...Object.keys(drawn), ...Object.keys(expectedAtoms)])
     const bad = [...keys].filter((k) => (drawn[k] ?? 0) !== (expectedAtoms[k] ?? 0))
     if (bad.length) {
@@ -1123,7 +1154,7 @@ export function verifyMolecularStructure(scene: SceneSpec): FamilyReport {
   } else rep.unverified.push('no compound name/formula in the figure to compare the atom multiset with')
 
   // "central X atom" / "bonds to N Y atoms" in narration.
-  for (const it of items.filter((i) => i.kind === 'narration')) {
+  for (const it of single ? items.filter((i) => i.kind === 'narration') : []) {
     const cm = it.text.match(/central ([A-Z][a-z]?) atom/)
     if (cm && cm[1] !== centre.symbol) rep.findings.push(fail('E-LABEL-MISMATCH', `narration says the central atom is ${cm[1]} but the drawn centre is labelled ${centre.symbol}`, it.where))
     const bm = it.text.match(/bonds to (\d+) ([A-Z][a-z]?) atoms?/)
@@ -1139,11 +1170,22 @@ export function verifyMolecularStructure(scene: SceneSpec): FamilyReport {
   const el = ELEMENT_BY_SYMBOL.get(centre.symbol)
   const V = el ? valenceElectronsOf(el.z) : null
   const drawnGeom = classifyDrawnGeometry(centre.pos as V3, nbPos)
-  const titleGeom = geometryWordIn(scene.title ?? '')
+  const titleGeom = single ? geometryWordIn(scene.title ?? '') : null
   if (V !== null && orders.every((o): o is number => o !== null) && nbrIdx.length >= 2) {
     const sumOrd = (orders as number[]).reduce((a, b) => a + b, 0)
     const lp2 = V - sumOrd - centre.charge
     const lp = lp2 / 2
+    // Lone pairs the figure DRAWS on the centre (objects tagged properties.kind === 'lone-pair'): their number must be the
+    // number valence-electron counting gives, and each must sit clear of every bond (VSEPR puts them in the free domains).
+    const drawnLP = single ? flatObjects(scene).filter((f) => f.o.properties?.kind === 'lone-pair' && f.o.position) : []
+    if (drawnLP.length) {
+      if (!Number.isInteger(lp) || drawnLP.length !== lp) {
+        rep.findings.push(fail('E-LONE-PAIR-COUNT', `${drawnLP.length} lone pair(s) are drawn on ${centre.symbol}, but ${centre.symbol} (${V} valence electrons, bond-order sum ${sumOrd}, charge ${centre.charge}) has ${lp}`, drawnLP[0].where))
+      } else rep.verified.push('lone-pair-count-equals-vsepr')
+      const crowded = drawnLP.filter((f) => nbrIdx.some((i) => angleDeg(sub(f.o.position as V3, centre.pos as V3), sub(g.atoms[i].pos as V3, centre.pos as V3)) < 80))
+      if (crowded.length) rep.findings.push(fail('E-LONE-PAIR-PLACEMENT', `a drawn lone pair sits within 80° of a bond to ${centre.symbol} — lone pairs occupy the domains the bonds leave free`, crowded[0].where))
+      else rep.verified.push('lone-pair-clear-of-bonds')
+    }
     const predicted = Number.isInteger(lp) && lp >= 0 ? VSEPR_TABLE[`${nbrIdx.length},${lp}`] : undefined
     if (predicted) {
       if (drawnGeom && drawnGeom !== predicted.geometry && !(predicted.geometry === 'bent' && drawnGeom === 'bent')) {
@@ -1159,7 +1201,7 @@ export function verifyMolecularStructure(scene: SceneSpec): FamilyReport {
         rep.findings.push(fail('E-VSEPR-MISMATCH', `drawn bond angle ${round(minAng, 1)}° is outside the ${predicted.angle[0]}–${predicted.angle[1]}° window VSEPR allows for ${predicted.geometry}`, 'steps'))
       } else rep.verified.push('bond-angle-in-vsepr-window')
       // The number printed on the figure must be the number that is drawn.
-      for (const it of items) {
+      for (const it of single ? items : []) {
         const am = it.text.match(/(\d+(?:\.\d+)?)\s*°\s*bond angle/)
         if (am && it.kind === 'label') {
           if (Math.abs(Number(am[1]) - minAng) > 0.6) rep.findings.push(fail('E-ANGLE-LABEL', `label says ${am[1]}° but the drawn atoms make ${round(minAng, 1)}°`, it.where))
@@ -1171,12 +1213,11 @@ export function verifyMolecularStructure(scene: SceneSpec): FamilyReport {
 
   // Overall charge written on the figure vs formal charges drawn.
   const sumFormal = g.atoms.reduce((a, b) => a + b.charge, 0)
-  const chargedWritten = (scene.title ?? '').split(/\s+/).map(trimCore).map(parseSpecies).find((s) => s.ok && s.charge !== 0 && s.groups >= 1)
+  const chargedWritten = single ? (scene.title ?? '').split(/\s+/).map(trimCore).map(parseSpecies).find((s) => s.ok && s.charge !== 0 && s.groups >= 1) : undefined
   if (chargedWritten) {
     if (sumFormal !== chargedWritten.charge) rep.findings.push(fail('E-CHARGE-ARITHMETIC', `title writes "${chargedWritten.raw}" (charge ${chargedWritten.charge}) but the drawn formal charges sum to ${sumFormal}`, 'title'))
     else rep.verified.push('charge-arithmetic')
   }
-  return rep
 }
 
 // ── coordination complexes ────────────────────────────────────────────────
@@ -1380,6 +1421,32 @@ function trendRule(a: { period: number; group: number }, b: { period: number; gr
   return null
 }
 
+/**
+ * REFERENCE DATA the periodic-trend figure's order claims are checked against — a copy that is NOT the generator's own table
+ * (a test pins the two equal, so editing one without the other fails CI). Recorded with sources in
+ * docs/qa/chemistry-visual-audit/reference-data-ledger.json (2026-10-09, checked against the standard data tables):
+ *   en           Pauling electronegativity (17/17 equal the tabulated WebElements/Allred–Huheey column; the CRC column itself
+ *                was not separable in the fetched text);
+ *   calculatedPm "calculated" atomic radius, Clementi–Raimondi–Reinhardt, J. Chem. Phys. 47, 1300 (1967) (17/17);
+ *   covalentPm   covalent radius, Cordero et al., Dalton Trans. 2008, 2832 (sp³ carbon 76 pm).
+ */
+export const PERIODIC_REFERENCE: Readonly<Record<string, { en: number; calculatedPm: number; covalentPm: number }>> = {
+  H: { en: 2.20, calculatedPm: 53, covalentPm: 31 }, Li: { en: 0.98, calculatedPm: 167, covalentPm: 128 }, Be: { en: 1.57, calculatedPm: 112, covalentPm: 96 },
+  B: { en: 2.04, calculatedPm: 87, covalentPm: 84 }, C: { en: 2.55, calculatedPm: 67, covalentPm: 76 }, N: { en: 3.04, calculatedPm: 56, covalentPm: 71 },
+  O: { en: 3.44, calculatedPm: 48, covalentPm: 66 }, F: { en: 3.98, calculatedPm: 42, covalentPm: 57 }, Na: { en: 0.93, calculatedPm: 190, covalentPm: 166 },
+  Mg: { en: 1.31, calculatedPm: 145, covalentPm: 141 }, Al: { en: 1.61, calculatedPm: 118, covalentPm: 121 }, Si: { en: 1.90, calculatedPm: 111, covalentPm: 111 },
+  P: { en: 2.19, calculatedPm: 98, covalentPm: 107 }, S: { en: 2.58, calculatedPm: 88, covalentPm: 105 }, Cl: { en: 3.16, calculatedPm: 79, covalentPm: 102 },
+  K: { en: 0.82, calculatedPm: 243, covalentPm: 203 }, Ca: { en: 1.00, calculatedPm: 194, covalentPm: 176 },
+}
+
+/** The element with the larger `key` value in the reference table; null on a tie or an element it has no row for. */
+function largerByReference(a: string, b: string, key: 'en' | 'calculatedPm' | 'covalentPm'): string | null {
+  const x = PERIODIC_REFERENCE[a]?.[key]
+  const y = PERIODIC_REFERENCE[b]?.[key]
+  if (x === undefined || y === undefined || x === y) return null
+  return x > y ? a : b
+}
+
 /** Verify a "Periodic Trends: A vs B" figure against group/period derived from Z and the trend rules. */
 export function verifyPeriodicTrendFigure(scene: SceneSpec): FamilyReport {
   const rep = emptyReport()
@@ -1415,7 +1482,10 @@ export function verifyPeriodicTrendFigure(scene: SceneSpec): FamilyReport {
     if (claims && claims !== rel) rep.findings.push(fail('I-TREND-RELATION', `narration describes a ${claims === 'none' ? 'cross' : 'same-' + claims} comparison but the elements are ${rel === 'none' ? 'in neither the same period nor group' : 'in the same ' + rel}`, 'steps[1].narration'))
     else if (claims) rep.verified.push('trend-relation-text-matches-placement')
     const rule = trendRule(el[0], el[1])
-    const lr = objs.find((f) => f.o.id === 'larger-radius')?.o.text?.match(/Larger atomic radius: ([A-Z][a-z]?)$/)?.[1]
+    const lrText = objs.find((f) => f.o.id === 'larger-radius')?.o.text ?? ''
+    const lr = lrText.match(/^Larger atomic radius: ([A-Z][a-z]?)$/)?.[1]
+    // The scale-dependent form, for the 8 pairs where calculated and covalent radii disagree.
+    const lrScaled = lrText.match(/^Larger atomic radius depends on the scale: ([A-Z][a-z]?) \(calculated\), ([A-Z][a-z]?) \(covalent\)$/)
     const en = objs.find((f) => f.o.id === 'higher-electronegativity')?.o.text?.match(/Higher electronegativity: ([A-Z][a-z]?)$/)?.[1]
     if (rule) {
       const expR = [el[0].sym, el[1].sym][rule.largerRadius]
@@ -1424,7 +1494,27 @@ export function verifyPeriodicTrendFigure(scene: SceneSpec): FamilyReport {
       else if (lr) rep.verified.push('atomic-radius-claim-follows-trend')
       if (en && en !== expE) rep.findings.push(fail('I-TREND-CLAIM', `"Higher electronegativity: ${en}" contradicts the periodic trend (expected ${expE})`, 'steps[1]'))
       else if (en) rep.verified.push('electronegativity-claim-follows-trend')
-    } else if (lr || en) rep.unverified.push(`${el[0].sym} vs ${el[1].sym}: radius/electronegativity order is not decidable from placement alone (needs measured data)`)
+    } else {
+      // Not the same period or group: placement cannot order them, so the claim is checked against the pinned, sourced reference table.
+      const [a, b] = [el[0].sym, el[1].sym]
+      const refCalc = largerByReference(a, b, 'calculatedPm')
+      const refCov = largerByReference(a, b, 'covalentPm')
+      const refEN = largerByReference(a, b, 'en')
+      if (lr !== undefined) {
+        if (refCalc !== null && refCalc === refCov && lr === refCalc) rep.verified.push('atomic-radius-claim-matches-reference-table')
+        else if (refCalc !== null && refCalc !== refCov) rep.findings.push(fail('I-TREND-CLAIM', `"${lrText}" states one answer, but the calculated radii make ${refCalc} larger and the covalent radii make ${refCov ?? 'neither'} larger — the figure must say it depends on the scale`, 'steps[1]'))
+        else if (refCalc !== null) rep.findings.push(fail('I-TREND-CLAIM', `"${lrText}" contradicts the reference radii (${refCalc} is larger)`, 'steps[1]'))
+        else rep.unverified.push(`${a} vs ${b}: no reference radii for this pair`)
+      } else if (lrScaled) {
+        if (refCalc !== null && refCov !== null && refCalc !== refCov && lrScaled[1] === refCalc && lrScaled[2] === refCov) rep.verified.push('scale-dependent-radius-claim-matches-reference-table')
+        else rep.findings.push(fail('I-TREND-CLAIM', `"${lrText}" does not match the reference radii (calculated: ${refCalc ?? '?'} larger, covalent: ${refCov ?? '?'} larger)`, 'steps[1]'))
+      }
+      if (en !== undefined) {
+        if (refEN !== null && en === refEN) rep.verified.push('electronegativity-claim-matches-reference-table')
+        else if (refEN !== null) rep.findings.push(fail('I-TREND-CLAIM', `"Higher electronegativity: ${en}" contradicts the Pauling reference table (${refEN} is higher)`, 'steps[1]'))
+        else rep.unverified.push(`${a} vs ${b}: no electronegativity reference for this pair`)
+      }
+    }
   } else rep.unverified.push('element labels not parseable')
   return rep
 }
@@ -1834,6 +1924,9 @@ export function chemRangeRule(label: string): RangeRule | null {
   if (/mole fraction|\bχ\b/.test(l)) return { name: 'mole fraction', min: 0, max: 1 }
   if (/temperature|\bt\s*\(k\)|\(k\)|kelvin/.test(l) && /\(k\)|kelvin/.test(l)) return { name: 'temperature in K', min: 0 }
   if (/temperature/.test(l) && /°c|celsius/.test(l)) return { name: 'temperature in °C', min: -273.15 }
+  if (/ionic strength/.test(l)) return { name: 'ionic strength', min: 0 }
+  if (/molality|mol\s?\/\s?kg|mol\s?kg⁻¹/.test(l)) return { name: 'molality', min: 0 }
+  if (/\btime\b/.test(l)) return { name: 'time', min: 0 }
   if (/concentration|molarity|\[[^\]]+\]|mol\s?\/\s?l|mol\s?l⁻¹|mol\/dm/.test(l)) return { name: 'concentration', min: 0 }
   if (/pressure/.test(l)) return { name: 'pressure', min: 0 }
   if (/\bvolume\b/.test(l)) return { name: 'volume', min: 0 }
@@ -1907,6 +2000,39 @@ export function validateGraphSpec(spec: Record<string, unknown>): ValidatorResul
     if (Math.max(...tail) - Math.min(...tail) > 0.03 * range) out.push(review('L-NO-FEATURE', 'title promises an equilibrium/plateau but the curve is still changing at the right edge', 'equation'))
   }
   return resultOf(out)
+}
+
+/**
+ * REPAIR, not a verdict: the physically meaningful window for an `equation` graph whose author left `domain` unset.
+ *
+ * The renderer draws an unset domain as [-10, 10]. For a quantity that cannot be negative (volume, pressure,
+ * concentration, molality, time …) that window plots negative volume — a defect of the DRAWING, not of the chemistry
+ * the equation states (Boyle's `10 / x`, Henry's `0.034 * x`, a second-order `x^2` are all correct curves). The
+ * x-axis is clipped to the part of the default window the label allows, and a lower end where the equation is not
+ * finite (the 1/x pole at 0) moves in to a twentieth of the span. Nothing about the equation, its constants, its
+ * labels or its title changes; an author-chosen `domain` is never touched, and a repair that would leave the curve
+ * outside its y-axis range (a negative pressure) is not made — the gate then judges the figure as it stands.
+ */
+export function normalizeChemGraphSpec<T extends Record<string, unknown>>(spec: T): T {
+  if (!spec || spec.type !== 'graph' || typeof spec.equation !== 'string' || Array.isArray(spec.domain)) return spec
+  const xl = typeof spec.xLabel === 'string' ? spec.xLabel : ''
+  const xr = xl ? chemRangeRule(xl) : null
+  if (!xr) return spec
+  const [d0, d1] = [-10, 10]
+  if (!((xr.min !== undefined && d0 < xr.min) || (xr.max !== undefined && d1 > xr.max))) return spec
+  const compiled = compileExpression(spec.equation)
+  if (!compiled) return spec
+  let lo = xr.min !== undefined ? (xr.max !== undefined ? Math.ceil(xr.min) + 0 : Math.max(d0, xr.min)) : d0   // `+ 0`: Math.ceil(-0.5) is -0
+  const hi = xr.max !== undefined ? Math.floor(xr.max) : d1
+  if (!(hi > lo)) return spec
+  if (!Number.isFinite(compiled.eval(lo))) lo = lo + (hi - lo) / 20
+  const N = 120
+  const ys: number[] = []
+  for (let i = 0; i <= N; i++) { const y = compiled.eval(lo + ((hi - lo) * i) / N); if (Number.isFinite(y)) ys.push(y) }
+  if (ys.length < N * 0.9) return spec
+  const yl = typeof spec.yLabel === 'string' ? chemRangeRule(spec.yLabel) : null
+  if (yl && ((yl.min !== undefined && Math.min(...ys) < yl.min - 1e-9) || (yl.max !== undefined && Math.max(...ys) > yl.max + 1e-9))) return spec
+  return { ...spec, domain: [round(lo, 6), hi] as [number, number] }
 }
 
 /** L — number line: positive width, highlights inside, pH lines inside 0–14. */
@@ -2176,9 +2302,9 @@ export function verifyFirstLawFigure(scene: SceneSpec): FamilyReport {
   const rep = emptyReport()
   const objs = flatObjects(scene)
   const items = collectSceneTexts(scene)
-  const q = objs.map((f) => f.o.text?.match(/^q = ([+\-−]?\d+(?:\.\d+)?)$/)).find(Boolean)
-  const w = objs.map((f) => f.o.text?.match(/^w = ([+\-−]?\d+(?:\.\d+)?)$/)).find(Boolean)
-  const du = objs.map((f) => f.o.text?.match(/^ΔU = ([+\-−]?\d+(?:\.\d+)?)$/)).find(Boolean)
+  const q = objs.map((f) => f.o.text?.match(/^q = ([+\-−]?\d+(?:\.\d+)?)(?: (?:J|kJ))?$/)).find(Boolean)
+  const w = objs.map((f) => f.o.text?.match(/^w = ([+\-−]?\d+(?:\.\d+)?)(?: (?:J|kJ))?$/)).find(Boolean)
+  const du = objs.map((f) => f.o.text?.match(/^ΔU = ([+\-−]?\d+(?:\.\d+)?)(?: (?:J|kJ))?$/)).find(Boolean)
   const n = (s: string): number => Number(s.replace('−', '-').replace('+', ''))
   if (!q || !w || !du) { rep.unverified.push('q / w / ΔU labels not found'); return rep }
   const qv = n(q[1])
@@ -2187,8 +2313,9 @@ export function verifyFirstLawFigure(scene: SceneSpec): FamilyReport {
   if (Math.abs(qv + wv - dv) > 0.0051) rep.findings.push(fail('E-FIRSTLAW-ARITHMETIC', `ΔU is printed ${dv} but q + w = ${qv} + ${wv} = ${round(qv + wv, 2)}`, 'steps'))
   else rep.verified.push('delta-u-equals-q-plus-w')
   for (const it of items) {
-    const m = it.text.match(/ΔU = q \+ w = (-?\d+(?:\.\d+)?) \+ (-?\d+(?:\.\d+)?) = (-?\d+(?:\.\d+)?)/)
-    if (m && (Number(m[1]) !== qv || Number(m[2]) !== wv || Number(m[3]) !== dv)) rep.findings.push(fail('E-FIRSTLAW-ARITHMETIC', `narration quotes ${m[1]} + ${m[2]} = ${m[3]} but the labels say q = ${qv}, w = ${wv}, ΔU = ${dv}`, it.where))
+    // "ΔU = q + w = 100 + (−40) = 60 J": the true minus sign and a bracketed negative addend are the figure's own form; the ASCII forms still read.
+    const m = it.text.match(/ΔU = q \+ w = \(?([-−]?\d+(?:\.\d+)?)\)? \+ \(?([-−]?\d+(?:\.\d+)?)\)? = ([-−]?\d+(?:\.\d+)?)/)
+    if (m && (n(m[1]) !== qv || n(m[2]) !== wv || n(m[3]) !== dv)) rep.findings.push(fail('E-FIRSTLAW-ARITHMETIC', `narration quotes ${m[1]} + ${m[2]} = ${m[3]} but the labels say q = ${qv}, w = ${wv}, ΔU = ${dv}`, it.where))
     if (/Positive means heat flows out/i.test(it.text) || /Positive means work is done by the system/i.test(it.text)) {
       rep.findings.push(fail('E-FIRSTLAW-SIGN', `"${it.text}" contradicts the sign convention (+ = into the system) the labels use`, it.where))
     }

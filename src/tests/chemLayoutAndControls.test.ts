@@ -17,7 +17,7 @@ import {
 } from '@/lib/teaching/visual/layout'
 import { checkSceneLayoutByStage, sceneAtStage } from '@/lib/teaching/visual/layoutStages'
 import { buildCanonicalScene, CONCEPT_SCENE_OVERRIDES } from '@/lib/teaching/visual/conceptSceneParams'
-import { PARAMETRIC_SCENES, rebuildScene, variablesFor } from '@/lib/teaching/visual/parametricScenes'
+import { PARAMETRIC_SCENES, choiceOptionAvailable, rebuildScene, variablesFor, type ChoiceVariable } from '@/lib/teaching/visual/parametricScenes'
 import { ELEMENTS } from '@/lib/teaching/sceneGenerators/periodicTrends.pure'
 import { validateSceneSpec } from '@/lib/teaching/sceneSpecValidator'
 import { auditChemistryScene } from '@/lib/teaching/visual/chemistryFigureAudit.pure'
@@ -144,6 +144,22 @@ describe('periodic_trends control', () => {
       }
     }
     expect(built).toBe(symbols.length * (symbols.length - 1))
+  })
+
+  it('R6: the two pickers cannot be set to the same element — the partner\'s pick is not offered, everything else is', () => {
+    const [a, b] = ['element1Symbol', 'element2Symbol'].map((k) => variablesFor('periodic_trends').find((v) => v.key === k) as ChoiceVariable)
+    expect(a.distinctFrom).toBe('element2Symbol')
+    expect(b.distinctFrom).toBe('element1Symbol')
+    const values = { element1Symbol: 'Na', element2Symbol: 'Cl' }
+    expect(a.options.filter((o) => !choiceOptionAvailable(a, o.value, values)).map((o) => o.value)).toEqual(['Cl'])
+    expect(b.options.filter((o) => !choiceOptionAvailable(b, o.value, values)).map((o) => o.value)).toEqual(['Na'])
+    // Every pair the controls can reach (partner's pick excluded) builds a figure: nothing selectable is a no-op.
+    for (const x of a.options) for (const y of b.options) {
+      const reachable = choiceOptionAvailable(a, x.value, { ...values, element2Symbol: y.value }) && choiceOptionAvailable(b, y.value, { ...values, element1Symbol: x.value })
+      if (reachable) expect(rebuildScene('periodic_trends', { element1Symbol: x.value, element2Symbol: y.value }), `${x.value} vs ${y.value}`).not.toBeNull()
+    }
+    // A variable with no partner is never restricted.
+    expect(choiceOptionAvailable({ kind: 'choice', key: 'k', label: 'k', effect: '', options: [{ value: 'x', label: 'x' }] } as ChoiceVariable, 'x', { k: 'x' })).toBe(true)
   })
 
   it('every choice control of every chemistry parametric kind offers only values that build (none dead but the same-element rule)', () => {

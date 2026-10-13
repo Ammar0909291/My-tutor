@@ -75,7 +75,7 @@ describe('the scenes say what the Educational Brain says', () => {
   it('pericyclic: the three families and their thermal Woodward–Hoffmann outcomes', () => {
     const t = text(buildCanonicalScene(null, 'chem.org.pericyclic')!)
     for (const s of ['Cycloaddition', 'Electrocyclic', 'Sigmatropic', 'Diels–Alder: thermally allowed',
-      '[2+2]: thermally forbidden, photochemically allowed', '4n electrons: conrotatory when heated',
+      '[2+2]: thermally forbidden (suprafacial), photochemically allowed', '4n electrons: conrotatory when heated',
       '4n+2 electrons: disrotatory when heated']) expect(t).toContain(s)
   })
 
@@ -87,11 +87,12 @@ describe('the scenes say what the Educational Brain says', () => {
     expect(s.steps.at(-1)!.narration).toBe('The cycle returns to Rh(I) catalyst, 16 e⁻: the sequence repeats.')
   })
 
-  it('biodegradable: the backbone decides — bio-polyethylene is NOT biodegradable', () => {
+  it('biodegradable: the backbone matters first — bio-polyethylene is chemically polyethylene and resists biodegradation', () => {
     const s = buildCanonicalScene(null, 'chem.poly.biodegradable')!
     const carbon = s.steps.find((st) => (st.narration ?? '').startsWith('All-carbon backbone'))!
-    expect(carbon.narration).toContain('not biodegradable, whatever the feedstock')
-    expect(carbon.objects.map((o) => o.text)).toContain('Bio-polyethylene (from bio-based ethanol)')
+    expect(carbon.narration).toContain('generally resists biodegradation, whatever the feedstock')
+    expect(carbon.objects.map((o) => o.text)).toContain('Bio-based polyethylene')
+    expect(carbon.narration).toContain('polyethylene from bio-based ethanol is chemically identical to the petroleum one')
     expect(text(s)).toContain('a conjugated π-system AND a doping step')
   })
 })

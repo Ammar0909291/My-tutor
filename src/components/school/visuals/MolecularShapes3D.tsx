@@ -22,7 +22,8 @@ const CENTER: [number, number, number] = [0, 0, 0]
 // Tetrahedral vertex directions, scaled to bond length.
 const BOND_LEN = 1.4
 const CAMERA_DISTANCE = 6
-const OUTER: [number, number, number][] = [
+/** The four outer atoms, exported so a test can hold the drawn angle to the 109.5° the card labels (Chemistry visual closure R19). */
+export const OUTER: [number, number, number][] = [
   [1, 1, 1], [1, -1, -1], [-1, 1, -1], [-1, -1, 1],
 ].map((v) => {
   const len = Math.sqrt(v[0] ** 2 + v[1] ** 2 + v[2] ** 2)

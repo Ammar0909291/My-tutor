@@ -1,0 +1,313 @@
+{
+ "generated": "2026-10-09",
+ "about": "Reference-table verification for the periodic-trend pickers (src/lib/teaching/sceneGenerators/periodicTrends.pure.ts): the 17 elements' Pauling electronegativity and the radius series compared with authoritative tables, and every ordered pair whose order depends on the scale chosen.",
+ "enSource": "Pauling EN of all 17 elements equals the 'WEL' column (WebElements; Allred 1961 / Huheey 1993) of Wikipedia 'Electronegativities of the elements (data page)' and the Pauling table in Wikipedia 'Electronegativity' (both identical, 17/17 exact). The data page also has CRC (84th ed.) and Lange sub-columns, but the flattened extraction could not assign them reliably, so agreement with the CRC Handbook column itself is UNVERIFIED (not fetched separately); WebElements page https://www.webelements.com/periodicity/electronegativity_pauling/ returned 404.",
+ "radiusScaleOfRepoNumbers": "'Calculated atomic radius' (Clementi, Raimondi & Reinhardt 1963/1967 SCF screening constants): 17/17 repo values equal the 'Calculated' column of Wikipedia 'Atomic radii of the elements (data page)'. They are NOT the empirical (Slater 1964) radii (0/17 equal: e.g. Na 180, Cl 100) and NOT covalent radii (Cordero 2008: Na 166, Cl 102). The calculated H = 53 pm is flagged 'citation needed' on Wikipedia.",
+ "perElement": [
+  {
+   "symbol": "H",
+   "repoEN": 2.2,
+   "refEN": 2.2,
+   "refEN_Allen": 2.3,
+   "repoRadius": 53,
+   "refCalculated": 53,
+   "refEmpirical": 25,
+   "refCovalent_Cordero2008": 31,
+   "refCovalent_WebElementsColumn": 32,
+   "notes": "Wikipedia flags the calculated H = 53 pm as 'citation needed' (equals the Bohr radius 52.9 pm)."
+  },
+  {
+   "symbol": "Li",
+   "repoEN": 0.98,
+   "refEN": 0.98,
+   "refEN_Allen": 0.912,
+   "repoRadius": 167,
+   "refCalculated": 167,
+   "refEmpirical": 145,
+   "refCovalent_Cordero2008": 128,
+   "refCovalent_WebElementsColumn": 133,
+   "notes": ""
+  },
+  {
+   "symbol": "Be",
+   "repoEN": 1.57,
+   "refEN": 1.57,
+   "refEN_Allen": 1.576,
+   "repoRadius": 112,
+   "refCalculated": 112,
+   "refEmpirical": 105,
+   "refCovalent_Cordero2008": 96,
+   "refCovalent_WebElementsColumn": 102,
+   "notes": ""
+  },
+  {
+   "symbol": "B",
+   "repoEN": 2.04,
+   "refEN": 2.04,
+   "refEN_Allen": 2.051,
+   "repoRadius": 87,
+   "refCalculated": 87,
+   "refEmpirical": 85,
+   "refCovalent_Cordero2008": 84,
+   "refCovalent_WebElementsColumn": 85,
+   "notes": ""
+  },
+  {
+   "symbol": "C",
+   "repoEN": 2.55,
+   "refEN": 2.55,
+   "refEN_Allen": 2.544,
+   "repoRadius": 67,
+   "refCalculated": 67,
+   "refEmpirical": 70,
+   "refCovalent_Cordero2008": 76,
+   "refCovalent_WebElementsColumn": 75,
+   "notes": "Cordero 2008 gives sp3 76, sp2 73, sp 69; 76 used for comparisons."
+  },
+  {
+   "symbol": "N",
+   "repoEN": 3.04,
+   "refEN": 3.04,
+   "refEN_Allen": 3.066,
+   "repoRadius": 56,
+   "refCalculated": 56,
+   "refEmpirical": 65,
+   "refCovalent_Cordero2008": 71,
+   "refCovalent_WebElementsColumn": 71,
+   "notes": ""
+  },
+  {
+   "symbol": "O",
+   "repoEN": 3.44,
+   "refEN": 3.44,
+   "refEN_Allen": 3.61,
+   "repoRadius": 48,
+   "refCalculated": 48,
+   "refEmpirical": 60,
+   "refCovalent_Cordero2008": 66,
+   "refCovalent_WebElementsColumn": 63,
+   "notes": ""
+  },
+  {
+   "symbol": "F",
+   "repoEN": 3.98,
+   "refEN": 3.98,
+   "refEN_Allen": 4.193,
+   "repoRadius": 42,
+   "refCalculated": 42,
+   "refEmpirical": 50,
+   "refCovalent_Cordero2008": 57,
+   "refCovalent_WebElementsColumn": 64,
+   "notes": ""
+  },
+  {
+   "symbol": "Na",
+   "repoEN": 0.93,
+   "refEN": 0.93,
+   "refEN_Allen": 0.869,
+   "repoRadius": 190,
+   "refCalculated": 190,
+   "refEmpirical": 180,
+   "refCovalent_Cordero2008": 166,
+   "refCovalent_WebElementsColumn": 155,
+   "notes": ""
+  },
+  {
+   "symbol": "Mg",
+   "repoEN": 1.31,
+   "refEN": 1.31,
+   "refEN_Allen": 1.293,
+   "repoRadius": 145,
+   "refCalculated": 145,
+   "refEmpirical": 150,
+   "refCovalent_Cordero2008": 141,
+   "refCovalent_WebElementsColumn": 139,
+   "notes": ""
+  },
+  {
+   "symbol": "Al",
+   "repoEN": 1.61,
+   "refEN": 1.61,
+   "refEN_Allen": 1.613,
+   "repoRadius": 118,
+   "refCalculated": 118,
+   "refEmpirical": 125,
+   "refCovalent_Cordero2008": 121,
+   "refCovalent_WebElementsColumn": 126,
+   "notes": ""
+  },
+  {
+   "symbol": "Si",
+   "repoEN": 1.9,
+   "refEN": 1.9,
+   "refEN_Allen": 1.916,
+   "repoRadius": 111,
+   "refCalculated": 111,
+   "refEmpirical": 110,
+   "refCovalent_Cordero2008": 111,
+   "refCovalent_WebElementsColumn": 116,
+   "notes": ""
+  },
+  {
+   "symbol": "P",
+   "repoEN": 2.19,
+   "refEN": 2.19,
+   "refEN_Allen": 2.253,
+   "repoRadius": 98,
+   "refCalculated": 98,
+   "refEmpirical": 100,
+   "refCovalent_Cordero2008": 107,
+   "refCovalent_WebElementsColumn": 111,
+   "notes": "Slater empirical radii are 100 pm for P, S and Cl (ties among these three on that scale)."
+  },
+  {
+   "symbol": "S",
+   "repoEN": 2.58,
+   "refEN": 2.58,
+   "refEN_Allen": 2.589,
+   "repoRadius": 88,
+   "refCalculated": 88,
+   "refEmpirical": 100,
+   "refCovalent_Cordero2008": 105,
+   "refCovalent_WebElementsColumn": 103,
+   "notes": "Slater empirical radii are 100 pm for P, S and Cl (ties among these three on that scale)."
+  },
+  {
+   "symbol": "Cl",
+   "repoEN": 3.16,
+   "refEN": 3.16,
+   "refEN_Allen": 2.869,
+   "repoRadius": 79,
+   "refCalculated": 79,
+   "refEmpirical": 100,
+   "refCovalent_Cordero2008": 102,
+   "refCovalent_WebElementsColumn": 99,
+   "notes": "Slater empirical radii are 100 pm for P, S and Cl (ties among these three on that scale). Allen EN 2.869 vs Pauling 3.16 (Allen and Pauling scales differ most for Cl, F, O)."
+  },
+  {
+   "symbol": "K",
+   "repoEN": 0.82,
+   "refEN": 0.82,
+   "refEN_Allen": 0.734,
+   "repoRadius": 243,
+   "refCalculated": 243,
+   "refEmpirical": 220,
+   "refCovalent_Cordero2008": 203,
+   "refCovalent_WebElementsColumn": 196,
+   "notes": ""
+  },
+  {
+   "symbol": "Ca",
+   "repoEN": 1.0,
+   "refEN": 1.0,
+   "refEN_Allen": 1.034,
+   "repoRadius": 194,
+   "refCalculated": 194,
+   "refEmpirical": 180,
+   "refCovalent_Cordero2008": 176,
+   "refCovalent_WebElementsColumn": 171,
+   "notes": ""
+  }
+ ],
+ "disagreeingPairs": [
+  {
+   "pair": "H-O",
+   "quantity": "atomic radius (larger = ?)",
+   "repoOrder": "H>O",
+   "otherScaleOrder": "Slater empirical: H<O; Cordero 2008 covalent (C=sp3 76): H<O; data-page covalent (WebElements-sourced): H<O"
+  },
+  {
+   "pair": "H-F",
+   "quantity": "atomic radius (larger = ?)",
+   "repoOrder": "H>F",
+   "otherScaleOrder": "Slater empirical: H<F; Cordero 2008 covalent (C=sp3 76): H<F; data-page covalent (WebElements-sourced): H<F"
+  },
+  {
+   "pair": "Li-Mg",
+   "quantity": "atomic radius (larger = ?)",
+   "repoOrder": "Li>Mg",
+   "otherScaleOrder": "Slater empirical: Li<Mg; Cordero 2008 covalent (C=sp3 76): Li<Mg; data-page covalent (WebElements-sourced): Li<Mg"
+  },
+  {
+   "pair": "Be-Si",
+   "quantity": "atomic radius (larger = ?)",
+   "repoOrder": "Be>Si",
+   "otherScaleOrder": "Slater empirical: Be<Si; Cordero 2008 covalent (C=sp3 76): Be<Si; data-page covalent (WebElements-sourced): Be<Si"
+  },
+  {
+   "pair": "Be-P",
+   "quantity": "atomic radius (larger = ?)",
+   "repoOrder": "Be>P",
+   "otherScaleOrder": "Cordero 2008 covalent (C=sp3 76): Be<P; data-page covalent (WebElements-sourced): Be<P"
+  },
+  {
+   "pair": "Be-S",
+   "quantity": "atomic radius (larger = ?)",
+   "repoOrder": "Be>S",
+   "otherScaleOrder": "Cordero 2008 covalent (C=sp3 76): Be<S; data-page covalent (WebElements-sourced): Be<S"
+  },
+  {
+   "pair": "Be-Cl",
+   "quantity": "atomic radius (larger = ?)",
+   "repoOrder": "Be>Cl",
+   "otherScaleOrder": "Cordero 2008 covalent (C=sp3 76): Be<Cl"
+  },
+  {
+   "pair": "B-Cl",
+   "quantity": "atomic radius (larger = ?)",
+   "repoOrder": "B>Cl",
+   "otherScaleOrder": "Slater empirical: B<Cl; Cordero 2008 covalent (C=sp3 76): B<Cl; data-page covalent (WebElements-sourced): B<Cl"
+  },
+  {
+   "pair": "O-F",
+   "quantity": "atomic radius (larger = ?)",
+   "repoOrder": "O>F",
+   "otherScaleOrder": "data-page covalent (WebElements-sourced): O<F"
+  },
+  {
+   "pair": "Na-Ca",
+   "quantity": "atomic radius (larger = ?)",
+   "repoOrder": "Na<Ca",
+   "otherScaleOrder": "Slater empirical: Na=Ca (tie)"
+  },
+  {
+   "pair": "P-S",
+   "quantity": "atomic radius (larger = ?)",
+   "repoOrder": "P>S",
+   "otherScaleOrder": "Slater empirical: P=S (tie)"
+  },
+  {
+   "pair": "P-Cl",
+   "quantity": "atomic radius (larger = ?)",
+   "repoOrder": "P>Cl",
+   "otherScaleOrder": "Slater empirical: P=Cl (tie)"
+  },
+  {
+   "pair": "S-Cl",
+   "quantity": "atomic radius (larger = ?)",
+   "repoOrder": "S>Cl",
+   "otherScaleOrder": "Slater empirical: S=Cl (tie)"
+  },
+  {
+   "pair": "N-Cl",
+   "quantity": "electronegativity (higher = ?)",
+   "repoOrder": "N<Cl",
+   "otherScaleOrder": "Allen: N>Cl"
+  }
+ ],
+ "summary": {
+  "unorderedPairsTotal": 136,
+  "radiusPairsDifferingFromAtLeastOneOtherScale": 13,
+  "enPairsDifferingFromAllen": 1,
+  "note": "Each unordered pair here corresponds to two ordered pairs (A,B) and (B,A) that both flip. Ties count as differing. Radius comparison scales: Slater empirical, Cordero 2008 covalent (C = sp3 76), and the covalent column printed on the Wikipedia data page (WebElements-sourced, older: e.g. C 75, F 64). EN comparison is repo (Pauling) vs Allen 1989/2000 as an alternative scale; Pauling-vs-CRC/Lange columns were not separable."
+ },
+ "sources": [
+  "https://en.wikipedia.org/wiki/Atomic_radii_of_the_elements_(data_page)",
+  "https://en.wikipedia.org/wiki/Covalent_radius",
+  "https://en.wikipedia.org/wiki/Electronegativities_of_the_elements_(data_page)",
+  "https://en.wikipedia.org/wiki/Electronegativity",
+  "Clementi, Raimondi, Reinhardt, J. Chem. Phys. 47, 1300 (1967)",
+  "Slater, J. Chem. Phys. 41, 3199 (1964)",
+  "Cordero et al., Dalton Trans. 2008, 2832, doi:10.1039/b801115j"
+ ]
+}

@@ -53,6 +53,27 @@ describe('typesetChemText — rewrites real species', () => {
   }
 })
 
+describe('typesetChemText — indexed quantities and the generic lanthanide ion (R9)', () => {
+  const cases: Array<[string, string]> = [
+    ['Ln3+', 'Ln³⁺'],
+    ['ionic radius of Ln3+ (pm), La to Lu', 'ionic radius of Ln³⁺ (pm), La to Lu'],
+    ['ΔH1 = −110.5 kJ/mol', 'ΔH₁ = −110.5 kJ/mol'],
+    ['ΔH2 = −283.0 kJ/mol', 'ΔH₂ = −283.0 kJ/mol'],
+    ['ΔS1 and ΔG2', 'ΔS₁ and ΔG₂'],
+    ['IE1 = 496', 'IE₁ = 496'],
+    ['pKa2 = 7.2', 'pKa₂ = 7.2'],
+  ]
+  for (const [raw, want] of cases) {
+    it(`${JSON.stringify(raw)} → ${JSON.stringify(want)}`, () => expect(typesetChemText(raw)).toBe(want))
+  }
+  it('only the exact shapes: a locant, a plain quantity and a count are untouched', () => {
+    for (const s of ['ΔH = −393.5 kJ/mol', 'ΔH10', 'ΔHf', 'IE', 'Ln', 'Ln33+', 'LnCl3', 'K1', 'V1', 'Ln3']) expect(typesetChemText(s), s).toBe(s)
+  })
+  it('is idempotent on its own output', () => {
+    for (const raw of ['Ln3+ and ΔH1 and IE2']) { const once = typesetChemText(raw); expect(typesetChemText(once)).toBe(once) }
+  })
+})
+
 describe('typesetChemText — leaves everything else byte-identical', () => {
   const untouched = [
     // already typeset
@@ -65,7 +86,7 @@ describe('typesetChemText — leaves everything else byte-identical', () => {
     // ambiguous diatomic-former + one digit + sign: oxide vs superoxide, H₂⁺ vs H²⁺
     'O2-', 'H2+',
     // orbital labels, generic symbols that are not elements
-    'sp3d2', 't2g', 'Ln3+', 'M2+',
+    'sp3d2', 't2g', 'M2+',
     // words that look chemical
     'NOW', 'OK', 'Co', 'No', 'CO', 'Pa', 'kPa', 'mol/L',
     // a URL

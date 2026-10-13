@@ -21,6 +21,7 @@ import { pathSegments, visibleObjects, type SceneObject, type SceneSpec } from '
 import { sceneTextObjects } from '@/lib/teaching/visual/layout'
 import { dimColor, meshColor, themeColor } from '@/lib/teaching/sceneGenerators/visualDesign'
 import { emphasisOf } from '@/lib/teaching/visual/sceneStage'
+import { bondOrderOf, parallelBondEnds } from '@/lib/teaching/visual/bondGeometry'
 import { SceneStageDecor, stageAxisLabels } from './SceneStageDecor'
 import { useTheme, type Theme } from '@/components/Providers'
 
@@ -110,16 +111,17 @@ function renderObject(obj: SceneObject, key: number, theme: Theme, focusIds: Rea
         </group>
       )
     }
-    case 'bond':
+    case 'bond': {
+      // A double / triple bond (`properties.order`) is drawn as parallel sticks; order 1 is the single stick it always was.
+      const ends = parallelBondEnds(obj.from ?? [0, 0, 0], obj.to ?? [1, 0, 0], bondOrderOf(obj.properties))
       return (
-        <BondLine
-          key={key}
-          from={obj.from ?? [0, 0, 0]}
-          to={obj.to ?? [1, 0, 0]}
-          color={color ?? '#9aa4b2'}
-          thickness={obj.thickness ?? 0.04}
-        />
+        <group key={key}>
+          {ends.map(([from, to], i) => (
+            <BondLine key={i} from={from} to={to} color={color ?? '#9aa4b2'} thickness={obj.thickness ?? 0.04} />
+          ))}
+        </group>
       )
+    }
     case 'bar': {
       // `bar` was reaching `default` and returning null, so its GEOMETRY AND
       // its label were both discarded — a scene could declare a bar chart and

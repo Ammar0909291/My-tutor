@@ -56,7 +56,7 @@ describe('the First Law — ΔU = q + w, with a signed, derived (never hardcoded
     const check = checkFirstLawConsistency(scene, q, w)
     expect(check).toEqual({ ok: true, errors: [] })
     const text = scene.steps.flatMap((s) => s.objects.map((o) => o.text ?? '')).join('|')
-    expect(text).toContain(`ΔU = ${expected}`)
+    expect(text).toContain(`ΔU = ${expected < 0 ? `−${Math.abs(expected)}` : expected}`)   // the true minus sign U+2212, never an ASCII hyphen
   })
 
   it('negative control: a scene tampered to show the wrong ΔU fails the check', () => {

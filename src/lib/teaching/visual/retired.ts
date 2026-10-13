@@ -281,6 +281,38 @@ export const RETIRED_ASSET_FINGERPRINTS: Readonly<Record<string, readonly string
   'cs.algo.np-completeness': ['f5c9e4fe6'], // card:three_algorithm_visualization
 }
 
+// ── RETIRED GENERATED FIGURES (Chemistry visual closure, 2026-10-09) ────────────────────────────────
+//
+// A different thing from the register above. RETIRED_VISUAL_BINDINGS records that a concept's BINDING (a card, a generator
+// default) was judged wrong — the register this repository's semantic-moat doctrine governs, pinned at 14 audited concepts
+// (visualRetiredBindings.test.ts). This table records that one specific GENERATED (Tier 3) figure — a cached LLM figure, named by
+// its content fingerprint — was read by two independent reviewers against authoritative chemistry and found WRONG. The concept
+// itself is not retired: no binding is touched, no broad rule is affected, and a regenerated figure with new content is judged
+// afresh (it is simply not in this table). Consulted only through `retiredAssetVerdict`, i.e. for asset serving on every tier.
+//
+// Fingerprints are `figureFingerprint(asset.payload)` of the validated, typeset, repaired payload, exactly as `resolveVisual` takes them
+// (verdictCache.ts); `chemistryClosureGates.test.ts` rebuilds each from the committed production snapshot
+// (docs/qa/chemistry-visual-audit/tier23-snapshot) and fails if any stops matching.
+export interface RetiredGeneratedFigure { fingerprint: string; reason: string }
+export const RETIRED_GENERATED_FIGURES: Readonly<Record<string, readonly RetiredGeneratedFigure[]>> = {
+  'chem.found.matter': [{ fingerprint: 'fd4ab73b9', reason: 'compound and mixture drawn identically (two half-overlapping spheres each): the bonded / not-bonded distinction the figure exists to show is not in the picture' }],
+  'chem.atomic.quantum-mech-model': [{ fingerprint: 'f2f1d8837', reason: 'psi(x) = sin(x) on a "Position (m)" axis over -10 m..+10 m: an unbounded wave of constant amplitude on a metre scale, not an atomic wavefunction (~1e-10 m, normalisable)' }],
+  'chem.bond.intermolecular': [{ fingerprint: 'f3860c52a', reason: 'three geometrically identical panels (two unlabelled spheres joined by a stick) draw intermolecular attractions as covalent-looking bonds; the hydrogen-bond panel contains no O or H' }],
+  'chem.state.molar-mass-gas': [{ fingerprint: 'fa285b2e2', reason: '"calculate molecular mass from empirical formula" is not a procedure: the empirical formula gives only the empirical-formula mass; the molecular mass needs the measured molar mass (M = dRT/P) and n = M / M_empirical' }],
+  'chem.equil.titration': [{ fingerprint: 'fda07a237', reason: 'pH = 7 + 3/(1 + exp(-5(x-5))) starts at pH 7.00, has its midpoint at pH 8.5 and plateaus at 10: not an acid-base titration curve (a strong acid starts near pH 1, a weak acid near 3)' }],
+  'chem.sblock.water': [{ fingerprint: 'f46177674', reason: 'H-O-H drawn at 120 degrees for both H2O and D2O (real ~104.5 degrees, two lone pairs on O); mixes unrelated content (heavy water, hard-water ions, a floating "Amphoteric" label)' }],
+  'chem.pblock.group15': [{ fingerprint: 'f625132ae', reason: 'the Haber loop separates unreacted gases by pressure-swing adsorption; after NH3 is condensed the unreacted N2/H2 (single-pass conversion ~15-20 %) are recycled to the reactor — and the figure is the Haber process, not the nitrogen family' }],
+  'chem.dblock.oxo-species': [{ fingerprint: 'f4735963e', reason: '10^(x - 1.7) makes [Cr2O7 2-]/[CrO4 2-] rise with pH; for 2 CrO4 2- + 2 H+ <=> Cr2O7 2- + H2O dichromate dominates in acid, so the ratio must fall with pH' }],
+  'chem.org.hybridization': [{ fingerprint: 'f6005d9c3', reason: 'the two pi bonds of sp carbon are drawn collinear (+z and -z: one p orbital); two pi bonds use perpendicular p orbitals (py and pz)' }],
+  'chem.org.electronic-effects': [{ fingerprint: 'f1d2cf5f1', reason: 'the "-I" arrow points away from the electron-withdrawing group (the inductive arrow points toward it), so as drawn it shows +I; the "M" arrow runs along a sigma bond with no pi system' }],
+  'chem.hyd.alkynes': [{ fingerprint: 'fab861c0a', reason: '"Acidic Character: Protonation of the Triple Bond" is false: terminal-alkyne acidity (pKa ~25) is deprotonation of the sp C-H to an acetylide' }],
+  'chem.hyd.arenes': [{ fingerprint: 'f21199c8c', reason: '"NO2+ from HNO3 & AlCl3" names the wrong reagent: nitronium comes from HNO3 with concentrated H2SO4; AlCl3 is the Friedel-Crafts / halogenation Lewis acid' }],
+  'chem.carb.ketones': [{ fingerprint: 'f7cb46efb', reason: 'the "ketone" and "enol" are bare sticks with no C=O, C=C, O-H or R groups, and keto-enol tautomerism (an equilibrium) is drawn as a single one-way arrow' }],
+  'chem.nitro.amines': [{ fingerprint: 'f1af5182e', reason: '"basicity primary < secondary < tertiary" is the gas-phase order; in water the conjugate-acid pKa values give secondary > primary ~ tertiary (MeNH2 10.66, Me2NH 10.73, Me3N 9.8)' }],
+  'chem.bio.proteins': [{ fingerprint: 'f4a228c14', reason: 'a disulfide bridge is narrated as secondary structure (it is tertiary); haemoglobin is a single sphere with "two subunits" (an alpha2-beta2 tetramer); the helix is a straight line' }],
+  'chem.hyd.polycyclic': [{ fingerprint: 'f183f0236', reason: 'a ring labelled "furan" with no oxygen drawn (a distorted five-vertex ring) and no fused / polycyclic system: neither thing in the concept title is shown' }],
+}
+
 /** Assets that are never concept-specific, so never a replacement. */
 const BROAD_PROVENANCE: ReadonlySet<string> = new Set(['domain-default', 'generator-default'])
 
@@ -303,6 +335,11 @@ export function retiredAssetVerdict(
   asset: { provenance: string; fingerprint: string },
   table: Readonly<Record<string, readonly string[]>> = RETIRED_ASSET_FINGERPRINTS,
 ): RetiredAssetVerdict {
+  // One specific generated figure found wrong by review — refused by content on every tier, with the concept itself untouched.
+  // Only for the real table: a caller passing its own table is asking a question about THAT table.
+  if (table === RETIRED_ASSET_FINGERPRINTS && (RETIRED_GENERATED_FIGURES[conceptId] ?? []).some((r) => r.fingerprint === asset.fingerprint)) {
+    return 'retired-asset'
+  }
   if (!isRetiredVisualBinding(conceptId) && !Object.prototype.hasOwnProperty.call(table, conceptId)) {
     return 'not-retired'
   }

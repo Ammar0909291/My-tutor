@@ -45,6 +45,9 @@ function unitCellEdges(): [[number, number, number], [number, number, number]][]
   return edges
 }
 
+/** Grid sizes of the three stages the card draws, exported so a test can hold them to "the unit cell is repeated, then grown". */
+export const LATTICE_STAGES = { unitCell: [2, 2, 2], repeated: [3, 3, 2], growth: [3, 3, 3] } as const
+
 function Scene({ revealStep, theme }: { revealStep: number; theme: Theme }) {
   const showUnitCell = revealStep >= 1
   const showRepeated = revealStep >= 2
@@ -52,8 +55,10 @@ function Scene({ revealStep, theme }: { revealStep: number; theme: Theme }) {
   const showSymmetry = revealStep >= 4
   const completed = revealStep >= 5
 
-  const gridSize: [number, number, number] = showGrowth ? [3, 3, 2] : showRepeated ? [2, 2, 2] : [2, 2, 2]
-  const nodes = showRepeated || showGrowth ? gridPositions(...gridSize) : gridPositions(2, 2, 2)
+  // The unit cell is 2×2×2 points; "repeated structure" must actually REPEAT it (3×3×2, R19 — it used to draw the same 2×2×2),
+  // and growth continues to 3×3×3.
+  const gridSize: [number, number, number] = showGrowth ? [...LATTICE_STAGES.growth] : showRepeated ? [...LATTICE_STAGES.repeated] : [...LATTICE_STAGES.unitCell]
+  const nodes = gridPositions(...gridSize)
   const edges = unitCellEdges()
 
   const { labels, obstacles } = useMemo(() => {

@@ -19,11 +19,15 @@ function shellLabelAnchor(radius: number): [number, number, number] {
   return [radius + 0.25, 0, 0]
 }
 
+/** `capacity` is the number of electrons DRAWN (argon: 2, 8, 8) — the M shell can hold up to 18; see the label below. */
 const SHELLS = [
   { name: 'K', radius: 1.0, capacity: 2, color: '#4DD0E1' },
   { name: 'L', radius: 1.8, capacity: 8, color: '#81C784' },
   { name: 'M', radius: 2.6, capacity: 8, color: '#FFB74D' },
 ]
+
+/** The electrons the populated card draws per shell — argon, exported so a test can hold it to the aufbau filling. */
+export const SHELL_ELECTRONS_DRAWN = SHELLS.map((sh) => sh.capacity)
 
 function Shell({ radius, color, electronCount }: { radius: number; name: string; color: string; electronCount: number }) {
   return (
@@ -70,6 +74,9 @@ function Scene({ revealStep, theme }: { revealStep: number; theme: Theme }) {
         obstacles.push({ type: 'point', position: [Math.cos(a) * shell.radius, 0, Math.sin(a) * shell.radius], radius: 0.08 })
       }
     })
+    // What the populated figure IS: argon, 2 + 8 + 8. The M shell's own capacity is 18; it holds 8 here only because this is the
+    // 18-electron atom, so the figure says so instead of letting "K 2, L 8, M 8" read as three capacities (R19).
+    if (populate) labels.push({ text: 'Argon: 2 + 8 + 8 = 18 electrons', position: [0, -3.2, 0], color: '#FFB74D' })
     return { labels, obstacles }
   }, [showNucleus, showK, showL, showM, populate])
 

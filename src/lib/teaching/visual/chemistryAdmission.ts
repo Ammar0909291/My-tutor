@@ -24,7 +24,7 @@
  */
 
 import type { VisualPayload } from './types'
-import { auditChemistryPayload, type AuditablePayload } from './chemistryFigureAudit.pure'
+import { auditChemistryPayload, normalizeChemGraphSpec, type AuditablePayload } from './chemistryFigureAudit.pure'
 
 /** `null` = admit. Otherwise a one-line, auditable reason naming the first FAIL findings. */
 export function chemistryAdmissionFailure(conceptId: string, payload: VisualPayload): string | null {
@@ -39,4 +39,17 @@ export function chemistryAdmissionFailure(conceptId: string, payload: VisualPayl
   } catch {
     return null
   }
+}
+
+/**
+ * The deterministic repairs a chemistry figure gets BEFORE the gate judges it (`makeVisualAsset`, every tier).
+ * Today: an equation graph with no `domain` is clipped to its axis quantity's physical range (see
+ * `normalizeChemGraphSpec`). Non-chemistry payloads, cards and scenes come back as the same object.
+ */
+export function repairChemistryPayload<P extends VisualPayload>(conceptId: string, payload: P): P {
+  if (!conceptId.startsWith('chem.') || payload.renderer !== 'spec') return payload
+  const p = payload as unknown as { visualSpec?: Record<string, unknown> }
+  if (!p.visualSpec) return payload
+  const visualSpec = normalizeChemGraphSpec(p.visualSpec)
+  return visualSpec === p.visualSpec ? payload : ({ ...payload, visualSpec } as P)
 }

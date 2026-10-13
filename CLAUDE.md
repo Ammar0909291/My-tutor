@@ -216,6 +216,10 @@ npx tsc --noEmit       # pre-existing stripe/subscription errors are expected on
   changes without a re-audit. The 21 figures the machine leaves REVIEW_REQUIRED carry a human decision in
   `docs/qa/physics-visual-audit/semantic-review.json` (`physicsSemanticReview.test.ts` enforces it; 2026-10-08). Re-audit only those concepts (`render.ts --concepts` → `validate.ts` → `merge-audit.ts`):
   `docs/history/physics-visual-readability-gate.md`; report `docs/qa/PHYSICS_VISUAL_QUALITY_REPORT.md`.
+- Chemistry visual closure (2026-10-12): every concept is classified A–E and every served figure (Tier 0/1/2/3, Tier 2/3 replayed from a production snapshot) was rendered
+  at 390/1280 px, both themes, every control state: 990 PASS · 96 REVIEW · 0 FAIL. `chemistryVisualAudit.test.ts` FAILS, naming the concepts, when a served chemistry figure changes
+  without a re-audit; `chemistrySemanticReview.test.ts` binds each REVIEW figure's human decision to its fingerprint. Procedure and owner decisions:
+  `docs/qa/CHEMISTRY_VISUAL_QUALITY_AUDIT.md` §12, `docs/history/chemistry-visual-quality-audit-2026-10-08.md`.
 - Mathematics: `npx tsx scripts/math/state.ts`
 - Physics: `npx tsx scripts/physics/state.ts`
 - Asset-contract readiness (all subjects, incl. KG-registered-but-unauthored ones):

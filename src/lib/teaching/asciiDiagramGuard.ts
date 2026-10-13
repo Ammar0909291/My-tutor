@@ -422,6 +422,15 @@ export function stripUnbackedAsciiDiagram(
     }
   }
 
+  // Pass 6 — the three remnants R10 names, none of which carry a fence, an "ASCII" lead-in or a stroke the earlier passes know
+  // (measured on the real function, 2026-10-09: all three shipped unchanged): a drawn +---+ box, an unfenced Lewis structure,
+  // and the orphan strokes ("|", "v") a removed drawing leaves glued to the sentence after it. Figure-gated like Passes 3-5.
+  if (!figureOnScreen) {
+    const before = result
+    result = stripBoxAndLewisDrawings(result)
+    if (result !== before) removedBlocks += 1
+  }
+
   if (removedBlocks === 0) return { text, stripped: false, removedBlocks: 0 }
   // Collapse a run of blank lines a removal can leave behind, never touching
   // a single blank line (ordinary paragraph spacing).
@@ -430,10 +439,105 @@ export function stripUnbackedAsciiDiagram(
 
 const CONNECTOR_RUN_RE = /-{3,}|={3,}|-{2,}>|<-{2,}|={2,}>/
 
+// ── PASS 6 helpers ─────────────────────────────────────────────────────────
+
+/** `+-----+`, `+--+--+`, `+=====+` — one edge of a drawn box (plus signs joined by dashes or equals). */
+const BOX_EDGE_RE = /^\+(?:[-=]{2,}\+)+(?:\s*(?:←|<-+|->|→)?\s*[A-Za-z][\w ]{0,20})?$/
+/** `| Zn | Cu |` — a row of a drawn box: starts and ends with a bar and has cells. */
+const BOX_ROW_RE = /^\|[^|\n]*(?:\|[^|\n]*)*\|$/
+
+/** One element-like token: a capital and an optional lowercase letter. */
+const ATOM = '[A-Z][a-z]?'
+/** `H - N - H`, `O = C = O`, `H : O : H`, `:O::C::O:` — atoms joined by bond / electron-pair glyphs, no words. */
+const LEWIS_CHAIN_RE = new RegExp(`^:{0,2}\\s*${ATOM}(?:\\s*(?:[-=≡:·•.]{1,3})\\s*${ATOM})+\\s*:{0,2}$`)
+/** A row of nothing but electron dots (`..`, `: :`) — the lone pairs drawn under or over a Lewis structure. */
+const DOT_ROW_RE = /^[\s.:·•]+$/
+/** A single atom symbol on its own line (the H over the stem of a skeletal formula). */
+const LONE_ATOM_RE = new RegExp(`^${ATOM}$`)
+
+function isLewisShapedLine(line: string): boolean {
+  const t = line.trim()
+  if (t.length === 0 || t.length > 40) return false
+  if (isStrokeLine(t) || DOT_ROW_RE.test(t) && /[.:·•]/.test(t)) return true
+  if (LONE_ATOM_RE.test(t)) return true
+  return LEWIS_CHAIN_RE.test(t) && (t.match(new RegExp(ATOM, 'g')) ?? []).length >= 2
+}
+
+/** A paragraph that is a Lewis structure: every line is a stroke, a lone atom, an atom chain or a row of dots, and it holds ≥ 2 atoms. */
+function isLewisParagraph(lines: string[]): boolean {
+  if (lines.length < 1 || !lines.every(isLewisShapedLine)) return false
+  const atoms = lines.reduce((n, l) => n + (l.match(new RegExp(ATOM, 'g')) ?? []).length, 0)
+  const hasBondGlyph = lines.some((l) => /[-=≡:|·•]/.test(l.trim()) && !/^[A-Z][a-z]?$/.test(l.trim()))
+  return atoms >= 2 && hasBondGlyph
+}
+
+/** A drawn box: ≥ 2 edge lines, or an edge plus a bar-delimited row, and nothing else in the paragraph but such lines or short labels. */
+function isBoxParagraph(lines: string[]): boolean {
+  const edges = lines.filter((l) => BOX_EDGE_RE.test(l.trim())).length
+  const rows = lines.filter((l) => BOX_ROW_RE.test(l.trim()) && !/^\|?(\s*:?-{3,}:?\s*\|)+/.test(l.trim())).length
+  if (edges === 0 || edges + rows < 2) return false
+  return lines.every((l) => {
+    const t = l.trim()
+    return BOX_EDGE_RE.test(t) || BOX_ROW_RE.test(t) || isCaptionLine(t) || isStrokeLine(t)
+  })
+}
+
+/** A stroke or arrow-head fragment: `|`, `│`, `^`, `↓`, or a lone `v`/`V` directly under a stroke. */
+function isOrphanStroke(line: string, prevWasStroke: boolean): boolean {
+  const t = line.trim()
+  if (isStrokeLine(t)) return true
+  return prevWasStroke && /^[vV]$/.test(t)
+}
+
+function stripBoxAndLewisDrawings(text: string): string {
+  const lines = text.split('\n')
+  const drop = new Set<number>()
+  let inFence = false
+  let para: number[] = []
+  let prev: number[] = []
+  const dropLeadIn = () => {
+    // "Here is the cell:" / "The Lewis structure of water is:" — a colon-terminated one-liner that points at the drawing.
+    if (prev.length === 1 && /:\s*$/.test(lines[prev[0]])) drop.add(prev[0])
+  }
+  const flush = () => {
+    if (para.length === 0) return
+    const body = para.map((i) => lines[i])
+    if (isBoxParagraph(body) || isLewisParagraph(body)) {
+      para.forEach((i) => drop.add(i))
+      dropLeadIn()
+    } else if (body.some((l) => isStrokeLine(l))) {
+      // Orphan strokes glued to PROSE in the same paragraph ("|", "v", then "The next step is …"): peel the leading and trailing
+      // runs of pure strokes; prose, bullets, tables and rules in the middle are never touched.
+      let a = 0
+      let prevStroke = false
+      while (a < para.length && isOrphanStroke(lines[para[a]], prevStroke)) { prevStroke = isStrokeLine(lines[para[a]]); a++ }
+      let b = para.length
+      while (b > a && isOrphanStroke(lines[para[b - 1]], b - 2 >= a && isStrokeLine(lines[para[b - 2]]))) b--
+      if (a > 0 && a < para.length) for (let k = 0; k < a; k++) drop.add(para[k])
+      if (b < para.length && b > a) for (let k = b; k < para.length; k++) drop.add(para[k])
+    }
+    prev = para
+    para = []
+  }
+  lines.forEach((line, i) => {
+    if (/^\s*```/.test(line)) { flush(); inFence = !inFence; return }
+    if (inFence) return
+    if (line.trim() === '') { flush(); return }
+    para.push(i)
+  })
+  flush()
+  return drop.size === 0 ? text : lines.filter((_, i) => !drop.has(i)).join('\n')
+}
+
+
 /** A line that draws rather than says: a connector run and at most two words of prose outside [labels]. */
 export function isStandaloneArtLine(line: string): boolean {
   const t = line.trim()
   if (t.length === 0 || !CONNECTOR_RUN_RE.test(t)) return false
+  // A reaction written on one line ("Zn --> Zn2+ + 2e-") has a connector run and almost no prose, exactly like a drawn
+  // process line, and Pass 5 deleted it (R10, 2026-10-09: the half-equation vanished, leaving "Oxidation happens at the
+  // anode." with nothing to refer to). It is content: every part parses as a real species — the same test the fenced path uses.
+  if (isReactionChainLine(t)) return false
   if (/^[-=]{3,}$/.test(t)) return false // a markdown rule, not a drawing
   if (/^\|.*\|$/.test(t)) return false // a markdown table row or separator
   // A drawing of a process LABELS its parts; a bare box edge ("+-----+") is

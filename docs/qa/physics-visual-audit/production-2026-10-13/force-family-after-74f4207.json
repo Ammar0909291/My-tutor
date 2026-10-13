@@ -1,0 +1,1180 @@
+{
+ "base": "https://my-tutor-flame.vercel.app",
+ "subject": "physics",
+ "deployment": "dpl_DfiW33EVTKByZMBMRYPkECGoX855",
+ "commit": "74f4207",
+ "at": "2026-10-13T08:39:18.770Z",
+ "tally": {
+  "PASS": 16
+ },
+ "accountCleanup": {
+  "deleted": true,
+  "reloginBlocked": true
+ },
+ "rows": [
+  {
+   "conceptId": "phys.mech.force",
+   "vp": "mobile",
+   "theme": "dark",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 2,
+   "attempts": 6,
+   "replySegments": 2,
+   "figure": {
+    "total": 6,
+    "roots": 6,
+    "index": 5,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "the diagram is already displayed right above please take a look at it what do you notice about the arrows shown in the figure",
+    "messageId": "cmv6es0fo002dle06qihoyque"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-force/phys.mech.force__mobile__dark.png",
+   "forceArrows": {
+    "arrows": {
+     "applied": {
+      "tail": [
+       228.8,
+       2245.9
+      ],
+      "head": [
+       279.5,
+       2245.9
+      ]
+     },
+     "friction": null,
+     "weight": null,
+     "normal": null
+    },
+    "ground": {
+     "from": [
+      71.1,
+      2268.4
+     ],
+     "to": [
+      318.9,
+      2268.4
+     ]
+    },
+    "normal": null,
+    "labelClear": {
+     "weight": null,
+     "normal": null
+    }
+   },
+   "note": "HARNESS LIMIT: after 6 attempt(s) the tutor's reply never made the card reach its last step (2 segment(s) in the last reply); later steps of the card were not shown"
+  },
+  {
+   "conceptId": "phys.mech.force",
+   "vp": "mobile",
+   "theme": "light",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 2,
+   "attempts": 6,
+   "replySegments": 2,
+   "figure": {
+    "total": 6,
+    "roots": 6,
+    "index": 5,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "the diagram is already displayed right above please take a look at it what do you notice about the arrows shown in the figure",
+    "messageId": "cmv6es0fo002dle06qihoyque"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-force/phys.mech.force__mobile__light.png",
+   "forceArrows": {
+    "arrows": {
+     "applied": {
+      "tail": [
+       228.8,
+       2285.9
+      ],
+      "head": [
+       279.5,
+       2285.9
+      ]
+     },
+     "friction": null,
+     "weight": null,
+     "normal": null
+    },
+    "ground": {
+     "from": [
+      71.1,
+      2308.4
+     ],
+     "to": [
+      318.9,
+      2308.4
+     ]
+    },
+    "normal": null,
+    "labelClear": {
+     "weight": null,
+     "normal": null
+    }
+   },
+   "note": "HARNESS LIMIT: after 6 attempt(s) the tutor's reply never made the card reach its last step (2 segment(s) in the last reply); later steps of the card were not shown"
+  },
+  {
+   "conceptId": "phys.mech.force",
+   "vp": "desktop-column",
+   "theme": "dark",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 2,
+   "attempts": 6,
+   "replySegments": 2,
+   "figure": {
+    "total": 6,
+    "roots": 6,
+    "index": 5,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "the diagram is already displayed right above please take a look at it what do you notice about the arrows shown in the figure",
+    "messageId": "cmv6es0fo002dle06qihoyque"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-force/phys.mech.force__desktop-column__dark.png",
+   "forceArrows": {
+    "arrows": {
+     "applied": {
+      "tail": [
+       1033.4,
+       1357.7
+      ],
+      "head": [
+       1113.5,
+       1357.7
+      ]
+     },
+     "friction": null,
+     "weight": null,
+     "normal": null
+    },
+    "ground": {
+     "from": [
+      784.2,
+      1393.3
+     ],
+     "to": [
+      1175.8,
+      1393.3
+     ]
+    },
+    "normal": null,
+    "labelClear": {
+     "weight": null,
+     "normal": null
+    }
+   },
+   "note": "HARNESS LIMIT: after 6 attempt(s) the tutor's reply never made the card reach its last step (2 segment(s) in the last reply); later steps of the card were not shown"
+  },
+  {
+   "conceptId": "phys.mech.force",
+   "vp": "desktop-column",
+   "theme": "light",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 2,
+   "attempts": 6,
+   "replySegments": 2,
+   "figure": {
+    "total": 6,
+    "roots": 6,
+    "index": 5,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "the diagram is already displayed right above please take a look at it what do you notice about the arrows shown in the figure",
+    "messageId": "cmv6es0fo002dle06qihoyque"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-force/phys.mech.force__desktop-column__light.png",
+   "forceArrows": {
+    "arrows": {
+     "applied": {
+      "tail": [
+       1033.4,
+       1357.7
+      ],
+      "head": [
+       1113.5,
+       1357.7
+      ]
+     },
+     "friction": null,
+     "weight": null,
+     "normal": null
+    },
+    "ground": {
+     "from": [
+      784.2,
+      1393.3
+     ],
+     "to": [
+      1175.8,
+      1393.3
+     ]
+    },
+    "normal": null,
+    "labelClear": {
+     "weight": null,
+     "normal": null
+    }
+   },
+   "note": "HARNESS LIMIT: after 6 attempt(s) the tutor's reply never made the card reach its last step (2 segment(s) in the last reply); later steps of the card were not shown"
+  },
+  {
+   "conceptId": "phys.mech.free-body-diagram",
+   "vp": "mobile",
+   "theme": "dark",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 5,
+   "attempts": 2,
+   "replySegments": 5,
+   "figure": {
+    "total": 2,
+    "roots": 2,
+    "index": 1,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "please look at the force diagram that s displayed on your screen it shows a single block with three arrows attached an arrow pointing straight down labeled w fo",
+    "messageId": "cmv6ez4vj003hle06uqy05y1q"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-force/phys.mech.free-body-diagram__mobile__dark.png",
+   "forceArrows": {
+    "arrows": {
+     "applied": {
+      "tail": [
+       228.8,
+       2170.4
+      ],
+      "head": [
+       279.5,
+       2170.4
+      ]
+     },
+     "friction": {
+      "tail": [
+       161.2,
+       2170.4
+      ],
+      "head": [
+       110.5,
+       2170.4
+      ]
+     },
+     "weight": {
+      "tail": [
+       195,
+       2192.9
+      ],
+      "head": [
+       195,
+       2232.3
+      ]
+     },
+     "normal": {
+      "tail": [
+       195,
+       2147.8
+      ],
+      "head": [
+       195,
+       2108.4
+      ]
+     }
+    },
+    "ground": {
+     "from": [
+      71.1,
+      2192.9
+     ],
+     "to": [
+      318.9,
+      2192.9
+     ]
+    },
+    "normal": {
+     "perpendicularToGround": true,
+     "pointsUp": true,
+     "headAboveBox": true,
+     "labelText": "Normal (N)"
+    },
+    "labelClear": {
+     "weight": 6.8,
+     "normal": 6.8
+    }
+   }
+  },
+  {
+   "conceptId": "phys.mech.free-body-diagram",
+   "vp": "mobile",
+   "theme": "light",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 5,
+   "attempts": 2,
+   "replySegments": 5,
+   "figure": {
+    "total": 2,
+    "roots": 2,
+    "index": 1,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "please look at the force diagram that s displayed on your screen it shows a single block with three arrows attached an arrow pointing straight down labeled w fo",
+    "messageId": "cmv6ez4vj003hle06uqy05y1q"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-force/phys.mech.free-body-diagram__mobile__light.png",
+   "forceArrows": {
+    "arrows": {
+     "applied": {
+      "tail": [
+       228.8,
+       2170.4
+      ],
+      "head": [
+       279.5,
+       2170.4
+      ]
+     },
+     "friction": {
+      "tail": [
+       161.2,
+       2170.4
+      ],
+      "head": [
+       110.5,
+       2170.4
+      ]
+     },
+     "weight": {
+      "tail": [
+       195,
+       2192.9
+      ],
+      "head": [
+       195,
+       2232.3
+      ]
+     },
+     "normal": {
+      "tail": [
+       195,
+       2147.8
+      ],
+      "head": [
+       195,
+       2108.4
+      ]
+     }
+    },
+    "ground": {
+     "from": [
+      71.1,
+      2192.9
+     ],
+     "to": [
+      318.9,
+      2192.9
+     ]
+    },
+    "normal": {
+     "perpendicularToGround": true,
+     "pointsUp": true,
+     "headAboveBox": true,
+     "labelText": "Normal (N)"
+    },
+    "labelClear": {
+     "weight": 6.8,
+     "normal": 6.8
+    }
+   }
+  },
+  {
+   "conceptId": "phys.mech.free-body-diagram",
+   "vp": "desktop-column",
+   "theme": "dark",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 5,
+   "attempts": 2,
+   "replySegments": 5,
+   "figure": {
+    "total": 2,
+    "roots": 2,
+    "index": 1,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "please look at the force diagram that s displayed on your screen it shows a single block with three arrows attached an arrow pointing straight down labeled w fo",
+    "messageId": "cmv6ez4vj003hle06uqy05y1q"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-force/phys.mech.free-body-diagram__desktop-column__dark.png",
+   "forceArrows": {
+    "arrows": {
+     "applied": {
+      "tail": [
+       1033.4,
+       1357.7
+      ],
+      "head": [
+       1113.5,
+       1357.7
+      ]
+     },
+     "friction": {
+      "tail": [
+       926.6,
+       1357.7
+      ],
+      "head": [
+       846.5,
+       1357.7
+      ]
+     },
+     "weight": {
+      "tail": [
+       980,
+       1393.3
+      ],
+      "head": [
+       980,
+       1455.6
+      ]
+     },
+     "normal": {
+      "tail": [
+       980,
+       1322.1
+      ],
+      "head": [
+       980,
+       1259.8
+      ]
+     }
+    },
+    "ground": {
+     "from": [
+      784.2,
+      1393.3
+     ],
+     "to": [
+      1175.8,
+      1393.3
+     ]
+    },
+    "normal": {
+     "perpendicularToGround": true,
+     "pointsUp": true,
+     "headAboveBox": true,
+     "labelText": "Normal (N)"
+    },
+    "labelClear": {
+     "weight": 10.7,
+     "normal": 10.7
+    }
+   }
+  },
+  {
+   "conceptId": "phys.mech.free-body-diagram",
+   "vp": "desktop-column",
+   "theme": "light",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 5,
+   "attempts": 2,
+   "replySegments": 5,
+   "figure": {
+    "total": 2,
+    "roots": 2,
+    "index": 1,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "please look at the force diagram that s displayed on your screen it shows a single block with three arrows attached an arrow pointing straight down labeled w fo",
+    "messageId": "cmv6ez4vj003hle06uqy05y1q"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-force/phys.mech.free-body-diagram__desktop-column__light.png",
+   "forceArrows": {
+    "arrows": {
+     "applied": {
+      "tail": [
+       1033.4,
+       1357.7
+      ],
+      "head": [
+       1113.5,
+       1357.7
+      ]
+     },
+     "friction": {
+      "tail": [
+       926.6,
+       1357.7
+      ],
+      "head": [
+       846.5,
+       1357.7
+      ]
+     },
+     "weight": {
+      "tail": [
+       980,
+       1393.3
+      ],
+      "head": [
+       980,
+       1455.6
+      ]
+     },
+     "normal": {
+      "tail": [
+       980,
+       1322.1
+      ],
+      "head": [
+       980,
+       1259.8
+      ]
+     }
+    },
+    "ground": {
+     "from": [
+      784.2,
+      1393.3
+     ],
+     "to": [
+      1175.8,
+      1393.3
+     ]
+    },
+    "normal": {
+     "perpendicularToGround": true,
+     "pointsUp": true,
+     "headAboveBox": true,
+     "labelText": "Normal (N)"
+    },
+    "labelClear": {
+     "weight": 10.7,
+     "normal": 10.7
+    }
+   }
+  },
+  {
+   "conceptId": "phys.mech.friction",
+   "vp": "mobile",
+   "theme": "dark",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 3,
+   "attempts": 6,
+   "replySegments": 3,
+   "figure": {
+    "total": 6,
+    "roots": 6,
+    "index": 5,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "here s the force diagram again a block sits in the centre what do you notice about the directions of these arrows",
+    "messageId": "cmv6f79ev005xle06z1kz83t7"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-force/phys.mech.friction__mobile__dark.png",
+   "forceArrows": {
+    "arrows": {
+     "applied": {
+      "tail": [
+       228.8,
+       2286.2
+      ],
+      "head": [
+       279.5,
+       2286.2
+      ]
+     },
+     "friction": {
+      "tail": [
+       161.2,
+       2286.2
+      ],
+      "head": [
+       110.5,
+       2286.2
+      ]
+     },
+     "weight": null,
+     "normal": null
+    },
+    "ground": {
+     "from": [
+      71.1,
+      2308.8
+     ],
+     "to": [
+      318.9,
+      2308.8
+     ]
+    },
+    "normal": null,
+    "labelClear": {
+     "weight": null,
+     "normal": null
+    }
+   },
+   "note": "HARNESS LIMIT: after 6 attempt(s) the tutor's reply never made the card reach its last step (3 segment(s) in the last reply); later steps of the card were not shown"
+  },
+  {
+   "conceptId": "phys.mech.friction",
+   "vp": "mobile",
+   "theme": "light",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 3,
+   "attempts": 6,
+   "replySegments": 3,
+   "figure": {
+    "total": 6,
+    "roots": 6,
+    "index": 5,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "here s the force diagram again a block sits in the centre what do you notice about the directions of these arrows",
+    "messageId": "cmv6f79ev005xle06z1kz83t7"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-force/phys.mech.friction__mobile__light.png",
+   "forceArrows": {
+    "arrows": {
+     "applied": {
+      "tail": [
+       228.8,
+       2246.2
+      ],
+      "head": [
+       279.5,
+       2246.2
+      ]
+     },
+     "friction": {
+      "tail": [
+       161.2,
+       2246.2
+      ],
+      "head": [
+       110.5,
+       2246.2
+      ]
+     },
+     "weight": null,
+     "normal": null
+    },
+    "ground": {
+     "from": [
+      71.1,
+      2268.8
+     ],
+     "to": [
+      318.9,
+      2268.8
+     ]
+    },
+    "normal": null,
+    "labelClear": {
+     "weight": null,
+     "normal": null
+    }
+   },
+   "note": "HARNESS LIMIT: after 6 attempt(s) the tutor's reply never made the card reach its last step (3 segment(s) in the last reply); later steps of the card were not shown"
+  },
+  {
+   "conceptId": "phys.mech.friction",
+   "vp": "desktop-column",
+   "theme": "dark",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 3,
+   "attempts": 6,
+   "replySegments": 3,
+   "figure": {
+    "total": 6,
+    "roots": 6,
+    "index": 5,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "here s the force diagram again a block sits in the centre what do you notice about the directions of these arrows",
+    "messageId": "cmv6f79ev005xle06z1kz83t7"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-force/phys.mech.friction__desktop-column__dark.png",
+   "forceArrows": {
+    "arrows": {
+     "applied": {
+      "tail": [
+       1033.4,
+       1357.5
+      ],
+      "head": [
+       1113.5,
+       1357.5
+      ]
+     },
+     "friction": {
+      "tail": [
+       926.6,
+       1357.5
+      ],
+      "head": [
+       846.5,
+       1357.5
+      ]
+     },
+     "weight": null,
+     "normal": null
+    },
+    "ground": {
+     "from": [
+      784.2,
+      1393.1
+     ],
+     "to": [
+      1175.8,
+      1393.1
+     ]
+    },
+    "normal": null,
+    "labelClear": {
+     "weight": null,
+     "normal": null
+    }
+   },
+   "note": "HARNESS LIMIT: after 6 attempt(s) the tutor's reply never made the card reach its last step (3 segment(s) in the last reply); later steps of the card were not shown"
+  },
+  {
+   "conceptId": "phys.mech.friction",
+   "vp": "desktop-column",
+   "theme": "light",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 3,
+   "attempts": 6,
+   "replySegments": 3,
+   "figure": {
+    "total": 6,
+    "roots": 6,
+    "index": 5,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "here s the force diagram again a block sits in the centre what do you notice about the directions of these arrows",
+    "messageId": "cmv6f79ev005xle06z1kz83t7"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-force/phys.mech.friction__desktop-column__light.png",
+   "forceArrows": {
+    "arrows": {
+     "applied": {
+      "tail": [
+       1033.4,
+       1357.5
+      ],
+      "head": [
+       1113.5,
+       1357.5
+      ]
+     },
+     "friction": {
+      "tail": [
+       926.6,
+       1357.5
+      ],
+      "head": [
+       846.5,
+       1357.5
+      ]
+     },
+     "weight": null,
+     "normal": null
+    },
+    "ground": {
+     "from": [
+      784.2,
+      1393.1
+     ],
+     "to": [
+      1175.8,
+      1393.1
+     ]
+    },
+    "normal": null,
+    "labelClear": {
+     "weight": null,
+     "normal": null
+    }
+   },
+   "note": "HARNESS LIMIT: after 6 attempt(s) the tutor's reply never made the card reach its last step (3 segment(s) in the last reply); later steps of the card were not shown"
+  },
+  {
+   "conceptId": "phys.mech.equilibrium",
+   "vp": "mobile",
+   "theme": "dark",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 5,
+   "attempts": 2,
+   "replySegments": 5,
+   "figure": {
+    "total": 2,
+    "roots": 2,
+    "index": 1,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "the figure in front of you is a force diagram of a rigid block that could be resting on a support a downward arrow labeled w weight points at the centre of the",
+    "messageId": "cmv6fe5yu0071le06hejwrfuc"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-force/phys.mech.equilibrium__mobile__dark.png",
+   "forceArrows": {
+    "arrows": {
+     "applied": {
+      "tail": [
+       228.8,
+       2286.5
+      ],
+      "head": [
+       279.5,
+       2286.5
+      ]
+     },
+     "friction": {
+      "tail": [
+       161.2,
+       2286.5
+      ],
+      "head": [
+       110.5,
+       2286.5
+      ]
+     },
+     "weight": {
+      "tail": [
+       195,
+       2309.1
+      ],
+      "head": [
+       195,
+       2348.5
+      ]
+     },
+     "normal": {
+      "tail": [
+       195,
+       2264
+      ],
+      "head": [
+       195,
+       2224.6
+      ]
+     }
+    },
+    "ground": {
+     "from": [
+      71.1,
+      2309.1
+     ],
+     "to": [
+      318.9,
+      2309.1
+     ]
+    },
+    "normal": {
+     "perpendicularToGround": true,
+     "pointsUp": true,
+     "headAboveBox": true,
+     "labelText": "Normal (N)"
+    },
+    "labelClear": {
+     "weight": 6.8,
+     "normal": 6.8
+    }
+   }
+  },
+  {
+   "conceptId": "phys.mech.equilibrium",
+   "vp": "mobile",
+   "theme": "light",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 5,
+   "attempts": 2,
+   "replySegments": 5,
+   "figure": {
+    "total": 2,
+    "roots": 2,
+    "index": 1,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "the figure in front of you is a force diagram of a rigid block that could be resting on a support a downward arrow labeled w weight points at the centre of the",
+    "messageId": "cmv6fe5yu0071le06hejwrfuc"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-force/phys.mech.equilibrium__mobile__light.png",
+   "forceArrows": {
+    "arrows": {
+     "applied": {
+      "tail": [
+       228.8,
+       2246.5
+      ],
+      "head": [
+       279.5,
+       2246.5
+      ]
+     },
+     "friction": {
+      "tail": [
+       161.2,
+       2246.5
+      ],
+      "head": [
+       110.5,
+       2246.5
+      ]
+     },
+     "weight": {
+      "tail": [
+       195,
+       2269.1
+      ],
+      "head": [
+       195,
+       2308.5
+      ]
+     },
+     "normal": {
+      "tail": [
+       195,
+       2224
+      ],
+      "head": [
+       195,
+       2184.6
+      ]
+     }
+    },
+    "ground": {
+     "from": [
+      71.1,
+      2269.1
+     ],
+     "to": [
+      318.9,
+      2269.1
+     ]
+    },
+    "normal": {
+     "perpendicularToGround": true,
+     "pointsUp": true,
+     "headAboveBox": true,
+     "labelText": "Normal (N)"
+    },
+    "labelClear": {
+     "weight": 6.8,
+     "normal": 6.8
+    }
+   }
+  },
+  {
+   "conceptId": "phys.mech.equilibrium",
+   "vp": "desktop-column",
+   "theme": "dark",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 5,
+   "attempts": 2,
+   "replySegments": 5,
+   "figure": {
+    "total": 2,
+    "roots": 2,
+    "index": 1,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "the figure in front of you is a force diagram of a rigid block that could be resting on a support a downward arrow labeled w weight points at the centre of the",
+    "messageId": "cmv6fe5yu0071le06hejwrfuc"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-force/phys.mech.equilibrium__desktop-column__dark.png",
+   "forceArrows": {
+    "arrows": {
+     "applied": {
+      "tail": [
+       1033.4,
+       1357.5
+      ],
+      "head": [
+       1113.5,
+       1357.5
+      ]
+     },
+     "friction": {
+      "tail": [
+       926.6,
+       1357.5
+      ],
+      "head": [
+       846.5,
+       1357.5
+      ]
+     },
+     "weight": {
+      "tail": [
+       980,
+       1393.1
+      ],
+      "head": [
+       980,
+       1455.4
+      ]
+     },
+     "normal": {
+      "tail": [
+       980,
+       1321.9
+      ],
+      "head": [
+       980,
+       1259.6
+      ]
+     }
+    },
+    "ground": {
+     "from": [
+      784.2,
+      1393.1
+     ],
+     "to": [
+      1175.8,
+      1393.1
+     ]
+    },
+    "normal": {
+     "perpendicularToGround": true,
+     "pointsUp": true,
+     "headAboveBox": true,
+     "labelText": "Normal (N)"
+    },
+    "labelClear": {
+     "weight": 10.7,
+     "normal": 10.7
+    }
+   }
+  },
+  {
+   "conceptId": "phys.mech.equilibrium",
+   "vp": "desktop-column",
+   "theme": "light",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 5,
+   "attempts": 2,
+   "replySegments": 5,
+   "figure": {
+    "total": 2,
+    "roots": 2,
+    "index": 1,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "the figure in front of you is a force diagram of a rigid block that could be resting on a support a downward arrow labeled w weight points at the centre of the",
+    "messageId": "cmv6fe5yu0071le06hejwrfuc"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-force/phys.mech.equilibrium__desktop-column__light.png",
+   "forceArrows": {
+    "arrows": {
+     "applied": {
+      "tail": [
+       1033.4,
+       1357.5
+      ],
+      "head": [
+       1113.5,
+       1357.5
+      ]
+     },
+     "friction": {
+      "tail": [
+       926.6,
+       1357.5
+      ],
+      "head": [
+       846.5,
+       1357.5
+      ]
+     },
+     "weight": {
+      "tail": [
+       980,
+       1393.1
+      ],
+      "head": [
+       980,
+       1455.4
+      ]
+     },
+     "normal": {
+      "tail": [
+       980,
+       1321.9
+      ],
+      "head": [
+       980,
+       1259.6
+      ]
+     }
+    },
+    "ground": {
+     "from": [
+      784.2,
+      1393.1
+     ],
+     "to": [
+      1175.8,
+      1393.1
+     ]
+    },
+    "normal": {
+     "perpendicularToGround": true,
+     "pointsUp": true,
+     "headAboveBox": true,
+     "labelText": "Normal (N)"
+    },
+    "labelClear": {
+     "weight": 10.7,
+     "normal": 10.7
+    }
+   }
+  }
+ ]
+}

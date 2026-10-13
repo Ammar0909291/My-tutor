@@ -1,0 +1,1700 @@
+{
+ "reviewedOn": "2026-10-12",
+ "about": "Human semantic review of the figures the machine audit leaves REVIEW_REQUIRED (no deterministic assertion covers the chemistry — reference data, prose claims, a fixed React card, a generated or approved figure). Keyed by figure instance and BOUND to the figure's fingerprint: if a figure changes, its review is void and src/tests/chemistrySemanticReview.test.ts fails naming it. 'decision' is PASS (reviewed, no defect, evidence cited), FIXED→PASS (a real defect was found and fixed, evidence cited) or REVIEW_REQUIRED (still not decidable by this repository; reason and owner decision recorded). The machine verdicts in audit-summary.json are NOT edited by this file. Evidence is a file and the text it must still contain; sources are the public references the reviewers read. Independent reviews are recorded in tier3-independent-review.json, prose-figure-review.json, reference-data-ledger.json and periodic-reference-ledger.json; where I (the author of the fixes) read a figure myself — electrode roles in three cells without a printed potential, the fixed cards — the entry says so and rests on deterministic tests.",
+ "figures": {
+  "card:three_atomic_structure": {
+   "fingerprint": "ff29a2223",
+   "concepts": [
+    "chem.atomic.atomic-theory",
+    "chem.atomic.subatomic-particles",
+    "chem.atomic.electromagnetic-radiation",
+    "chem.atomic.atomic-spectra",
+    "chem.atomic.bohr-model",
+    "chem.atomic.quantum-numbers",
+    "chem.atomic.photoelectric-effect"
+   ],
+   "family": "card:three_atomic_structure",
+   "initial": "semantic audit REVIEW_REQUIRED (no deterministic assertion covers this family)",
+   "decision": "FIXED→PASS",
+   "finding": "A fixed React card: its content is not in the payload, so it was read in the code and rendered. It drew 3 protons + 3 neutrons with 2 + 4 + 4 = 10 electrons: a charged atom with a shell filling no element has (L at 4 of 8 while M already holds 4).",
+   "fix": "Now one real, neutral atom: magnesium-24, 12 protons, 12 neutrons, 12 electrons in shells 2, 8, 2; the numbers are exported (ATOM_MODEL) and held to the periodic table and the aufbau filling by test.",
+   "evidence": [
+    {
+     "file": "src/tests/chemistryClosureGates.test.ts",
+     "contains": "R19 — the four fixed React cards"
+    }
+   ],
+   "remaining": "None for the chemistry. "
+  },
+  "card:three_electron_shells": {
+   "fingerprint": "f8b26bd2",
+   "concepts": [
+    "chem.period.classification",
+    "chem.period.atomic-radius",
+    "chem.period.electron-affinity",
+    "chem.period.valency"
+   ],
+   "family": "card:three_electron_shells",
+   "initial": "semantic audit REVIEW_REQUIRED (no deterministic assertion covers this family)",
+   "decision": "FIXED→PASS",
+   "finding": "A fixed React card read in the code: it labelled K 2, L 8, M 8 as three capacities (the M shell holds up to 18).",
+   "fix": "The populated figure now says what it is — \"Argon: 2 + 8 + 8 = 18 electrons\" — and the drawn counts are exported (SHELL_ELECTRONS_DRAWN) and held to the aufbau filling of Z = 18 by test.",
+   "evidence": [
+    {
+     "file": "src/tests/chemistryClosureGates.test.ts",
+     "contains": "R19 — the four fixed React cards"
+    }
+   ],
+   "remaining": "None for the chemistry. "
+  },
+  "card:three_bond_formation": {
+   "fingerprint": "f4a1f0cb9",
+   "concepts": [
+    "chem.bond.covalent-bonding"
+   ],
+   "family": "card:three_bond_formation",
+   "initial": "semantic audit REVIEW_REQUIRED (no deterministic assertion covers this family)",
+   "decision": "FIXED→PASS",
+   "finding": "A fixed React card read in the code: it drew two electrons per atom before bonding and a shared pair after, so two electrons vanished.",
+   "fix": "One valence electron on each atom, a shared pair after; the counts are exported and held to conservation (1 + 1 = 2) by test.",
+   "evidence": [
+    {
+     "file": "src/tests/chemistryClosureGates.test.ts",
+     "contains": "R19 — the four fixed React cards"
+    }
+   ],
+   "remaining": "None for the chemistry. "
+  },
+  "card:three_crystal_lattice": {
+   "fingerprint": "ffdc76ff",
+   "concepts": [
+    "chem.solid.ionic-solids",
+    "chem.solid.properties"
+   ],
+   "family": "card:three_crystal_lattice",
+   "initial": "semantic audit REVIEW_REQUIRED (no deterministic assertion covers this family); render REVIEW: CONTRAST_LOW",
+   "decision": "FIXED→PASS",
+   "finding": "A fixed React card read in the code: its \"repeated structure\" stage drew the same 2×2×2 grid as the unit cell, so nothing was repeated.",
+   "fix": "The unit cell is 2×2×2, the repeated stage 3×3×2 and growth 3×3×3 (exported as LATTICE_STAGES, held by test).",
+   "evidence": [
+    {
+     "file": "src/tests/chemistryClosureGates.test.ts",
+     "contains": "R19 — the four fixed React cards"
+    }
+   ],
+   "remaining": "None for the chemistry. A glyph on a saturated 3D fill is drawn with a text halo; its WCAG ratio cannot reach 4.5:1 (R16, every such label was read in the screenshots)."
+  },
+  "card:three_molecular_shapes": {
+   "fingerprint": "fb6e07b25",
+   "concepts": [
+    "chem.bond.hybridization",
+    "chem.bond.bond-parameters"
+   ],
+   "family": "card:three_molecular_shapes",
+   "initial": "semantic audit REVIEW_REQUIRED (no deterministic assertion covers this family); render REVIEW: CONTRAST_LOW",
+   "decision": "PASS",
+   "finding": "A fixed React card read in the code: a CH₄-shaped tetrahedron, one central atom and four equal bonds, labelled \"109.5° tetrahedral angles\". Its four outer vertices were computed: every pair of bonds is 109.47° apart.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "src/tests/chemistryClosureGates.test.ts",
+     "contains": "the molecular-shapes card draws a real tetrahedron"
+    }
+   ],
+   "remaining": "None for the chemistry. A glyph on a saturated 3D fill is drawn with a text halo; its WCAG ratio cannot reach 4.5:1 (R16, every such label was read in the screenshots)."
+  },
+  "scene:comparison-First-ionisation-energy-across-period-3-(kJ/mol):-rising,-with-dips-at-Al-and-S": {
+   "fingerprint": "fa1d5dc83",
+   "concepts": [
+    "chem.period.ionization-energy"
+   ],
+   "family": "bar-chart",
+   "initial": "semantic audit REVIEW_REQUIRED (no deterministic assertion covers this family)",
+   "decision": "PASS",
+   "finding": "All eight first ionisation energies (Na 496 … Ar 1520 kJ/mol) were checked against NIST / CRC-derived tables: 2 MATCH, 6 within rounding; the \"dips at Al and S\" pattern and its explanation hold.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/reference-data-ledger.json",
+     "contains": "Claim C: first ionisation energies"
+    }
+   ],
+   "remaining": "None for the chemistry. ",
+   "sources": [
+    "NIST Chemistry WebBook / CRC Handbook via the sources named per row in reference-data-ledger.json (Claim C)"
+   ]
+  },
+  "scene:comparison-Boiling-points-of-the-Group-16-hydrides-(K):-water-is-the-outlier": {
+   "fingerprint": "f689a465f",
+   "concepts": [
+    "chem.pblock.group16"
+   ],
+   "family": "bar-chart",
+   "initial": "semantic audit REVIEW_REQUIRED (no deterministic assertion covers this family)",
+   "decision": "PASS",
+   "finding": "H₂O 373 K, H₂S 213 K, H₂Se 232 K, H₂Te 271 K were checked against NIST: all within rounding; the water-is-the-outlier claim follows from them.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/reference-data-ledger.json",
+     "contains": "Claim I: Group 16 hydride normal boiling points"
+    }
+   ],
+   "remaining": "None for the chemistry. ",
+   "sources": [
+    "NIST Chemistry WebBook (Claim I rows)"
+   ]
+  },
+  "scene:comparison-Lanthanide-contraction:-ionic-radius-of-Ln3+-(pm),-La-to-Lu": {
+   "fingerprint": "f88d0f524",
+   "concepts": [
+    "chem.dblock.lanthanides"
+   ],
+   "family": "bar-chart",
+   "initial": "semantic audit REVIEW_REQUIRED (no deterministic assertion covers this family); render REVIEW: INNER_SCROLL_X",
+   "decision": "PASS",
+   "finding": "Six Shannon (1976) effective ionic radii for Ln³⁺ at CN VI (La 103.2 … Lu 86.1 pm) were checked: all six MATCH. \"Ln\" is the IUPAC generic lanthanide symbol, not an element — the formula scanner notes it (INFO) and it is correct.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/reference-data-ledger.json",
+     "contains": "Claim J: Shannon (1976) effective ionic radii"
+    }
+   ],
+   "remaining": "None for the chemistry. The expanded (fullscreen) view scrolls: the chrome around the scene is taller than the window (R15, measured and bounded, by design).",
+   "sources": [
+    "Shannon, Acta Cryst. A32 (1976) 751, via the secondary sources named in Claim J"
+   ]
+  },
+  "scene:comparison-log-Kf:-the-chelate-effect": {
+   "fingerprint": "faec9eb6c",
+   "concepts": [
+    "chem.coord.stability"
+   ],
+   "family": "bar-chart",
+   "initial": "semantic audit REVIEW_REQUIRED (no deterministic assertion covers this family)",
+   "decision": "REVIEW_REQUIRED",
+   "finding": "Two bars: [Cu(NH₃)₄]²⁺ log Kf 13.0 and [Cu(EDTA)]²⁻ 18.8. EDTA 18.8 MATCHES (20 °C, 0.1 M). 13.0 sits inside the range general-chemistry texts quote (1.1–2.1 × 10¹³) but the critical compilation gives log β₄ = 11.75 (25 °C, I = 0), ~1.25 log units lower, and the figure states no conditions. The pair is also not like-for-like for the \"chelate effect\": EDTA is hexadentate N₂O₄ and 4− charged, the effect is cleanest at equal donor sets (Cu: 4 NH₃ = 11.75 vs 2 en = 19.55, same table, 25 °C, I = 0). The Educational Brain's own example is [Ni(en)₃]²⁺ vs [Ni(NH₃)₆]²⁺.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/reference-data-ledger.json",
+     "contains": "chem.coord.stability (conceptSceneParams.ts:779-786), Claim H"
+    }
+   ],
+   "remaining": "Typography fixed here ([Cu(EDTA)]²⁻ superscript, matching [Cu(NH₃)₄]²⁺); the data and the comparison are not changed.",
+   "sources": [
+    "Martell & Smith, Critical Stability Constants, via Harvey (LibreTexts) Formation Constants"
+   ],
+   "reason": "The value 13.0 is unverified against a critical compilation at stated conditions (UNVERIFIED in the reference-data ledger) and the EDTA-vs-NH₃ pair mixes denticity with donor set and charge. Neither is false, but a learner is not told the conditions or the caveat, and which fix is right is a teaching decision.",
+   "ownerDecision": "Owner / curriculum to choose: (a) keep and add the conditions and the caveat to the figure; (b) switch to the like-for-like pair, Cu²⁺ with 4 NH₃ (log β₄ 11.75) vs 2 en (log β₂ 19.55), both Martell & Smith, 25 °C, I = 0; (c) use the Educational Brain's Ni(en)₃ / Ni(NH₃)₆ pair. Recommended: (b). pcd040MagnitudeChart.test.ts pins 13.0 / 18.8 and must be updated with the choice."
+  },
+  "scene:energy-cycle-hess-s-law-combustion-of-carbon": {
+   "fingerprint": "f152cc87",
+   "concepts": [
+    "chem.thermo.enthalpy"
+   ],
+   "family": "energy-cycle",
+   "initial": "semantic audit REVIEW_REQUIRED (no deterministic assertion covers this family); render REVIEW: CONTRAST_LOW, INNER_SCROLL_X",
+   "decision": "FIXED→PASS",
+   "finding": "ΔH(C→CO₂) −393.5, via CO −110.5 and −283.0 kJ/mol: all three MATCH NIST and the two paths sum to the same total; arrows follow the signs.",
+   "fix": "The accessible description and the result lane now use the true minus sign (U+2212) throughout; the descriptive text printed an ASCII hyphen.",
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/reference-data-ledger.json",
+     "contains": "Claim B: Hess's law carbon combustion"
+    },
+    {
+     "file": "src/tests/chemVisualQualityAudit.test.ts",
+     "contains": "describe('energy cycles lay their text out in separate lanes'"
+    }
+   ],
+   "remaining": "None for the chemistry. A glyph on a saturated 3D fill is drawn with a text halo; its WCAG ratio cannot reach 4.5:1 (R16, every such label was read in the screenshots). The expanded (fullscreen) view scrolls: the chrome around the scene is taller than the window (R15, measured and bounded, by design).",
+   "sources": [
+    "NIST Chemistry WebBook (Claim B rows)"
+   ]
+  },
+  "scene:energy-cycle-born-haber-cycle-formation-of-nacl": {
+   "fingerprint": "fb9cf7ce0",
+   "concepts": [
+    "chem.thermo.bond-enthalpy"
+   ],
+   "family": "energy-cycle",
+   "initial": "semantic audit REVIEW_REQUIRED (no deterministic assertion covers this family); render REVIEW: INNER_SCROLL_X",
+   "decision": "FIXED→PASS",
+   "finding": "Seven values (sublimation, ½ bond dissociation, ionisation, electron affinity, lattice energy, ΔfH) were checked against NIST: 3 MATCH, 4 within rounding; the two paths agree on −411 kJ/mol. The advanced level is a known phone-width density gap (R5), recorded not hidden.",
+   "fix": "Step labels carry kJ/mol (R8); the description uses the true minus sign.",
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/reference-data-ledger.json",
+     "contains": "Claim A: Born-Haber cycle NaCl"
+    },
+    {
+     "file": "src/tests/chemLayoutAndControls.test.ts",
+     "contains": "the ADVANCED level"
+    }
+   ],
+   "remaining": "None for the chemistry. The expanded (fullscreen) view scrolls: the chrome around the scene is taller than the window (R15, measured and bounded, by design).",
+   "sources": [
+    "NIST Chemistry WebBook (Claim A rows)"
+   ]
+  },
+  "scene:energy-cycle-crystal-field-splitting-ti-h2o-6-3-": {
+   "fingerprint": "f4bd44a57",
+   "concepts": [
+    "chem.coord.cft"
+   ],
+   "family": "energy-cycle",
+   "initial": "semantic audit REVIEW_REQUIRED (no deterministic assertion covers this family)",
+   "decision": "PASS",
+   "finding": "Two levels, t₂g below e_g, one gap Δo, for [Ti(H₂O)₆]³⁺ (d¹): the d-count (group 4 − charge 3 = 1) and the level order are verified by the energy-cycle validator; no numeric splitting is printed, so there is no reference value to check.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "src/tests/chemistryFigureAudit.test.ts",
+     "contains": "describe('K — energy profiles and cycles'"
+    }
+   ],
+   "remaining": "None for the chemistry. "
+  },
+  "scene:electrochemical-cell-daniell-cell-—-δg-=-−nfe": {
+   "fingerprint": "fdd0bcab6",
+   "concepts": [
+    "chem.thermo.cell-thermo"
+   ],
+   "family": "electrochemical-cell",
+   "initial": "semantic audit REVIEW_REQUIRED (no deterministic assertion covers this family); render REVIEW: CONTRAST_LOW, INNER_SCROLL_X",
+   "decision": "FIXED→PASS",
+   "finding": "E°(Zn²⁺/Zn) −0.76 V, E°(Cu²⁺/Cu) +0.34 V, E = +1.10 V and ΔG = −212.27 kJ/mol (n = 2, F = 96485) were checked: within rounding; ΔG = −nFE is re-derived by the validator.",
+   "fix": "ΔG is printed with the true minus sign (−212.27), not an ASCII hyphen; the scene states which cell it shows and that others exist (R3).",
+   "evidence": [
+    {
+     "file": "src/tests/chemistryFigureAudit.test.ts",
+     "contains": "describe('E — electrochemical cells, system boundaries, the first law'"
+    },
+    {
+     "file": "docs/qa/chemistry-visual-audit/reference-data-ledger.json",
+     "contains": "Claim E: standard electrode potentials"
+    }
+   ],
+   "remaining": "None for the chemistry. A glyph on a saturated 3D fill is drawn with a text halo; its WCAG ratio cannot reach 4.5:1 (R16, every such label was read in the screenshots). The expanded (fullscreen) view scrolls: the chrome around the scene is taller than the window (R15, measured and bounded, by design)."
+  },
+  "scene:electrochemical-cell-daniell-cell": {
+   "fingerprint": "f3112f714",
+   "concepts": [
+    "chem.elect.galvanic-cell"
+   ],
+   "family": "electrochemical-cell",
+   "initial": "semantic audit REVIEW_REQUIRED (no deterministic assertion covers this family); render REVIEW: CONTRAST_LOW, INNER_SCROLL_X",
+   "decision": "FIXED→PASS",
+   "finding": "The same Daniell cell values (Claim E) were checked; electrons flow anode → cathode, oxidation at Zn, reduction at Cu.",
+   "fix": "scopeNote added (R3): this is one example of a galvanic cell.",
+   "evidence": [
+    {
+     "file": "src/tests/chemistryFigureAudit.test.ts",
+     "contains": "describe('E — electrochemical cells, system boundaries, the first law'"
+    },
+    {
+     "file": "docs/qa/chemistry-visual-audit/reference-data-ledger.json",
+     "contains": "Claim E: standard electrode potentials"
+    }
+   ],
+   "remaining": "None for the chemistry. A glyph on a saturated 3D fill is drawn with a text halo; its WCAG ratio cannot reach 4.5:1 (R16, every such label was read in the screenshots). The expanded (fullscreen) view scrolls: the chrome around the scene is taller than the window (R15, measured and bounded, by design)."
+  },
+  "scene:electrochemical-cell-zinc-vs.-standard-hydrogen-electrode": {
+   "fingerprint": "f6da17768",
+   "concepts": [
+    "chem.elect.standard-electrode"
+   ],
+   "family": "electrochemical-cell",
+   "initial": "semantic audit REVIEW_REQUIRED (no deterministic assertion covers this family); render REVIEW: CONTRAST_LOW, INNER_SCROLL_X",
+   "decision": "PASS",
+   "finding": "Zn vs SHE: E = +0.76 V and ΔG = −146.66 kJ/mol (n = 2) were checked within rounding; Zn is the anode, the Pt/H₂ electrode the cathode.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "src/tests/chemistryFigureAudit.test.ts",
+     "contains": "describe('E — electrochemical cells, system boundaries, the first law'"
+    },
+    {
+     "file": "docs/qa/chemistry-visual-audit/reference-data-ledger.json",
+     "contains": "Zn vs SHE: E = +0.76 V"
+    }
+   ],
+   "remaining": "None for the chemistry. A glyph on a saturated 3D fill is drawn with a text halo; its WCAG ratio cannot reach 4.5:1 (R16, every such label was read in the screenshots). The expanded (fullscreen) view scrolls: the chrome around the scene is taller than the window (R15, measured and bounded, by design)."
+  },
+  "scene:electrochemical-cell-daniell-cell-at-non-standard-concentrations": {
+   "fingerprint": "f4e91fc1b",
+   "concepts": [
+    "chem.elect.nernst"
+   ],
+   "family": "electrochemical-cell",
+   "initial": "semantic audit REVIEW_REQUIRED (no deterministic assertion covers this family); render REVIEW: CONTRAST_LOW, INNER_SCROLL_X",
+   "decision": "PASS",
+   "finding": "Nernst: E = +1.041 V at [Zn²⁺] = 1 M, [Cu²⁺] = 0.01 M MATCHES (25 °C, 0.05916 V/decade); ΔG = −200.88 kJ/mol within rounding.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "src/tests/chemistryFigureAudit.test.ts",
+     "contains": "describe('E — electrochemical cells, system boundaries, the first law'"
+    },
+    {
+     "file": "docs/qa/chemistry-visual-audit/reference-data-ledger.json",
+     "contains": "Claim F: Nernst checks"
+    }
+   ],
+   "remaining": "None for the chemistry. A glyph on a saturated 3D fill is drawn with a text halo; its WCAG ratio cannot reach 4.5:1 (R16, every such label was read in the screenshots). The expanded (fullscreen) view scrolls: the chrome around the scene is taller than the window (R15, measured and bounded, by design)."
+  },
+  "scene:electrochemical-cell-copper-concentration-cell": {
+   "fingerprint": "f4d7a2f64",
+   "concepts": [
+    "chem.elect.concentration-cell"
+   ],
+   "family": "electrochemical-cell",
+   "initial": "semantic audit REVIEW_REQUIRED (no deterministic assertion covers this family); render REVIEW: CONTRAST_LOW, INNER_SCROLL_X",
+   "decision": "PASS",
+   "finding": "Copper concentration cell, 0.001 M vs 1 M: E = +0.089 V MATCHES the Nernst value; ΔG = −17.17 kJ/mol within rounding.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "src/tests/chemistryFigureAudit.test.ts",
+     "contains": "describe('E — electrochemical cells, system boundaries, the first law'"
+    },
+    {
+     "file": "docs/qa/chemistry-visual-audit/reference-data-ledger.json",
+     "contains": "Claim F: Nernst checks"
+    }
+   ],
+   "remaining": "None for the chemistry. A glyph on a saturated 3D fill is drawn with a text halo; its WCAG ratio cannot reach 4.5:1 (R16, every such label was read in the screenshots). The expanded (fullscreen) view scrolls: the chrome around the scene is taller than the window (R15, measured and bounded, by design)."
+  },
+  "scene:electrochemical-cell-electrolysis-of-molten-nacl": {
+   "fingerprint": "f40e8a639",
+   "concepts": [
+    "chem.elect.electrolysis"
+   ],
+   "family": "electrochemical-cell",
+   "initial": "semantic audit REVIEW_REQUIRED (no deterministic assertion covers this family); render REVIEW: CONTRAST_LOW, INNER_SCROLL_X",
+   "decision": "FIXED→PASS",
+   "finding": "No potential is printed. The electrode roles were read: Cl⁻ is oxidised at the graphite anode, Na⁺ reduced at the steel cathode, the 4 V external source drives a non-spontaneous cell, electrons flow anode → cathode — all standard and checked by the cell validator.",
+   "fix": "scopeNote (R3): this is one electrolysis example; Faraday's laws say how much forms.",
+   "evidence": [
+    {
+     "file": "src/tests/chemistryFigureAudit.test.ts",
+     "contains": "describe('E — electrochemical cells, system boundaries, the first law'"
+    }
+   ],
+   "remaining": "None for the chemistry. A glyph on a saturated 3D fill is drawn with a text halo; its WCAG ratio cannot reach 4.5:1 (R16, every such label was read in the screenshots). The expanded (fullscreen) view scrolls: the chrome around the scene is taller than the window (R15, measured and bounded, by design)."
+  },
+  "scene:electrochemical-cell-zinc–carbon-dry-cell-(primary-battery)": {
+   "fingerprint": "fdda7aded",
+   "concepts": [
+    "chem.elect.batteries"
+   ],
+   "family": "electrochemical-cell",
+   "initial": "semantic audit REVIEW_REQUIRED (no deterministic assertion covers this family); render REVIEW: CONTRAST_LOW, INNER_SCROLL_X",
+   "decision": "FIXED→PASS",
+   "finding": "No potential is printed. Zn (case) is the anode (oxidised), MnO₂/carbon rod the cathode (reduced): correct for the zinc–carbon (Leclanché) cell.",
+   "fix": "The figure's goal text called this undivided GALVANIC cell \"an electrolytic cell\"; it is now named by its cellType (a galvanic cell with one electrolyte, whose own chemistry drives the flow). scopeNote added (R3).",
+   "evidence": [
+    {
+     "file": "src/tests/chemistryFigureAudit.test.ts",
+     "contains": "describe('E — electrochemical cells, system boundaries, the first law'"
+    },
+    {
+     "file": "src/tests/chemistryClosureGates.test.ts",
+     "contains": "the zinc–carbon dry cell is a GALVANIC cell"
+    }
+   ],
+   "remaining": "None for the chemistry. A glyph on a saturated 3D fill is drawn with a text halo; its WCAG ratio cannot reach 4.5:1 (R16, every such label was read in the screenshots). The expanded (fullscreen) view scrolls: the chrome around the scene is taller than the window (R15, measured and bounded, by design)."
+  },
+  "scene:electrochemical-cell-copper-electroplating": {
+   "fingerprint": "f394390b5",
+   "concepts": [
+    "chem.elect.industrial"
+   ],
+   "family": "electrochemical-cell",
+   "initial": "semantic audit REVIEW_REQUIRED (no deterministic assertion covers this family); render REVIEW: CONTRAST_LOW, INNER_SCROLL_X",
+   "decision": "FIXED→PASS",
+   "finding": "No potential is printed. The Cu anode dissolves (Cu → Cu²⁺ + 2e⁻) and Cu²⁺ is reduced on the object at the cathode, driven by the external 2 V source: correct for electroplating, and checked by the cell validator.",
+   "fix": "scopeNote (R3): one example of industrial electrolysis.",
+   "evidence": [
+    {
+     "file": "src/tests/chemistryFigureAudit.test.ts",
+     "contains": "describe('E — electrochemical cells, system boundaries, the first law'"
+    }
+   ],
+   "remaining": "None for the chemistry. A glyph on a saturated 3D fill is drawn with a text halo; its WCAG ratio cannot reach 4.5:1 (R16, every such label was read in the screenshots). The expanded (fullscreen) view scrolls: the chrome around the scene is taller than the window (R15, measured and bounded, by design)."
+  },
+  "scene:molecule-water": {
+   "fingerprint": "f46585a",
+   "concepts": [
+    "chem.bond.vsepr"
+   ],
+   "family": "molecule",
+   "initial": "semantic audit PASS; render REVIEW: INNER_SCROLL_X",
+   "decision": "FIXED→PASS",
+   "finding": "Water: H–O–H 104.5° (MATCH, NIST CCCBDB / VSEPR), two lone pairs drawn at the free tetrahedral domains (109.47° apart, ≥ 105° from each bond).",
+   "fix": "Lone pairs and bond order are now drawn (R2), and the grid is off so the scene does not read as a coordinate plot.",
+   "evidence": [
+    {
+     "file": "src/tests/chemistryClosureGates.test.ts",
+     "contains": "describe('R2 — bond order and lone pairs are drawn'"
+    },
+    {
+     "file": "docs/qa/chemistry-visual-audit/reference-data-ledger.json",
+     "contains": "Claim L: VSEPR / molecular geometry"
+    }
+   ],
+   "remaining": "None for the chemistry. The expanded (fullscreen) view scrolls: the chrome around the scene is taller than the window (R15, measured and bounded, by design).",
+   "sources": [
+    "NIST CCCBDB (Claim L rows)"
+   ]
+  },
+  "scene:lattice-fcc": {
+   "fingerprint": "fd8c4725",
+   "concepts": [
+    "chem.solid.crystal-systems"
+   ],
+   "family": "crystal-lattice",
+   "initial": "semantic audit PASS; render REVIEW: INNER_SCROLL_X",
+   "decision": "FIXED→PASS",
+   "finding": "Face-centred cubic: 8 corners × 1/8 + 6 faces × 1/2 = 4 atoms per cell, coordination number 12 (MATCH).",
+   "fix": "Atom classes carry a key label (R7: they were distinguished by colour only) and the grid is off (R16).",
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/reference-data-ledger.json",
+     "contains": "Claim M: cubic unit cells"
+    }
+   ],
+   "remaining": "None for the chemistry. The expanded (fullscreen) view scrolls: the chrome around the scene is taller than the window (R15, measured and bounded, by design)."
+  },
+  "scene:lattice-fcc-close-packing": {
+   "fingerprint": "ffd778f31",
+   "concepts": [
+    "chem.solid.packing"
+   ],
+   "family": "crystal-lattice",
+   "initial": "semantic audit PASS; render REVIEW: INNER_SCROLL_X",
+   "decision": "PASS",
+   "finding": "chem.solid.packing now owns this concept-authored face-centred-cubic cell (it was served the generic simple-cubic default, whose one-colour lattice stated the opposite of close packing). Same verified 4 atoms per cell, CN 12.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/reference-data-ledger.json",
+     "contains": "Claim M: cubic unit cells"
+    },
+    {
+     "file": "src/tests/chemistryAdmission.test.ts",
+     "contains": "chem.solid.packing now owns the face-centred-cubic cell"
+    }
+   ],
+   "remaining": "None for the chemistry. The expanded (fullscreen) view scrolls: the chrome around the scene is taller than the window (R15, measured and bounded, by design)."
+  },
+  "scene:chem-first-law": {
+   "fingerprint": "fe61dd34b",
+   "concepts": [
+    "chem.thermo.first-law"
+   ],
+   "family": "first-law",
+   "initial": "semantic audit PASS; render REVIEW: INNER_SCROLL_X",
+   "decision": "FIXED→PASS",
+   "finding": "ΔU = q + w is re-derived by the first-law validator for every interactive state (e.g. 100 + (−40) = 60 J), the arrow directions follow the signs, the unit is on every label.",
+   "fix": "J on every label (R8), the true minus sign everywhere, and a bracketed negative addend (\"100 + (−40)\") instead of \"100 + -40\".",
+   "evidence": [
+    {
+     "file": "src/tests/chemistrySystemScenes.test.ts",
+     "contains": "the First Law — ΔU = q + w"
+    }
+   ],
+   "remaining": "None for the chemistry. The expanded (fullscreen) view scrolls: the chrome around the scene is taller than the window (R15, measured and bounded, by design)."
+  },
+  "scene:coord-cisplatin": {
+   "fingerprint": "f80581334",
+   "concepts": [
+    "chem.coord.isomerism"
+   ],
+   "family": "coordination-complex",
+   "initial": "semantic audit PASS; render REVIEW: CONTRAST_LOW",
+   "decision": "PASS",
+   "finding": "cis-[Pt(NH₃)₂Cl₂]: square planar, two NH₃ adjacent, two Cl adjacent, charge-neutral: the ligand count, geometry and charge are verified by the coordination validator.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "src/tests/chemistryFigureAudit.test.ts",
+     "contains": "describe('E — coordination complexes'"
+    }
+   ],
+   "remaining": "None for the chemistry. A glyph on a saturated 3D fill is drawn with a text halo; its WCAG ratio cannot reach 4.5:1 (R16, every such label was read in the screenshots)."
+  },
+  "scene:coord-cisplatin-the-isomer-that-works-as-a-drug": {
+   "fingerprint": "f7879d1ff",
+   "concepts": [
+    "chem.coord.applications"
+   ],
+   "family": "coordination-complex",
+   "initial": "semantic audit PASS; render REVIEW: CONTRAST_LOW",
+   "decision": "PASS",
+   "finding": "The same cis-[Pt(NH₃)₂Cl₂] geometry as above; \"the isomer that works as a drug\" is the established cis/trans pharmacology claim, stated without numbers.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "src/tests/chemistryFigureAudit.test.ts",
+     "contains": "describe('E — coordination complexes'"
+    }
+   ],
+   "remaining": "None for the chemistry. A glyph on a saturated 3D fill is drawn with a text halo; its WCAG ratio cannot reach 4.5:1 (R16, every such label was read in the screenshots)."
+  },
+  "scene:cell-comparison-chem.found.matter": {
+   "fingerprint": "fe2c285e3",
+   "concepts": [
+    "chem.found.matter"
+   ],
+   "family": "prose-comparison",
+   "initial": "semantic audit REVIEW_REQUIRED (no deterministic assertion covers this family)",
+   "decision": "FIXED→PASS",
+   "finding": "Read independently against sources: the first read found imprecise wording (8:1 is a rounding of 7.94:1, 'any ratio', 'not bonded', a property listed only under 'Element'); the re-read of the corrected text is CORRECT.",
+   "fix": "Element 'all atoms have the same atomic number'; compound '2 H : 1 O by number, about 8 g O : 1 g H by mass' and 'sharp melting point'; mixture 'not chemically combined', 'variable ratio; each part keeps its chemical identity' (the goal says the same).",
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/prose-figure-review.json",
+     "contains": "\"figure\": \"cell-comparison-chem.found.matter\""
+    }
+   ],
+   "remaining": "Minor and left: 'fixed melting and boiling point' has no pressure qualifier (a school-level point; carbon and arsenic sublime at 1 atm).",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Chemical_element",
+    "https://en.wikipedia.org/wiki/Mixture",
+    "https://ciaaw.org/oxygen.htm"
+   ]
+  },
+  "scene:cell-pathway-chem.bond.ionic-bonding": {
+   "fingerprint": "f1121920d",
+   "concepts": [
+    "chem.bond.ionic-bonding"
+   ],
+   "family": "prose-pathway",
+   "initial": "semantic audit REVIEW_REQUIRED (no deterministic assertion covers this family); render REVIEW: INNER_SCROLL_X",
+   "decision": "FIXED→PASS",
+   "finding": "Read independently: the electron counts and the lattice / formula-unit wording are correct after the edit; the first read's 'full outer shell' and 'NaCl is a molecule' risks are fixed.",
+   "fix": "'noble-gas (stable octet) arrangement' instead of 'full outer shell'; 'each Na⁺ touches 6 Cl⁻, so NaCl is a formula unit, not a molecule'.",
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/prose-figure-review.json",
+     "contains": "\"figure\": \"cell-pathway-chem.bond.ionic-bonding\""
+    }
+   ],
+   "remaining": "Optional caveat left: electron transfer between isolated atoms is endothermic and lattice formation pays for it (Born–Haber, owned by chem.thermo.bond-enthalpy). The expanded (fullscreen) view scrolls: the chrome around the scene is taller than the window (R15, measured and bounded, by design).",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Ionic_bonding",
+    "https://en.wikipedia.org/wiki/Sodium_chloride"
+   ]
+  },
+  "scene:cell-comparison-chem.state.real-gases": {
+   "fingerprint": "fd9aeec94",
+   "concepts": [
+    "chem.state.real-gases"
+   ],
+   "family": "prose-comparison",
+   "initial": "semantic audit REVIEW_REQUIRED (no deterministic assertion covers this family); render REVIEW: INNER_SCROLL_X",
+   "decision": "FIXED→PASS",
+   "finding": "Read independently twice: Z = PV/(nRT), the qualitative Z < 1 / Z > 1 story and (P + a/Vm²)(Vm − b) = RT are correct; the earlier looseness (Z < 1 only below the Boyle temperature; b is the excluded volume, ~4× the molecular volume) is fixed.",
+   "fix": "'for most gases near room temperature'; 'b: excluded volume, ~4× molecular volume' (the first, longer wording clipped and collided at 1280 px in the browser audit and was shortened).",
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/prose-figure-review.json",
+     "contains": "\"figure\": \"cell-comparison-chem.state.real-gases\""
+    }
+   ],
+   "remaining": "H₂ and He are the standard counter-examples at room temperature ('most gases' covers it); van der Waals corrects both qualitatively, not quantitatively. The expanded (fullscreen) view scrolls: the chrome around the scene is taller than the window (R15, measured and bounded, by design).",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Van_der_Waals_equation",
+    "https://en.wikipedia.org/wiki/Compressibility_factor"
+   ]
+  },
+  "scene:cell-comparison-chem.state.phase-diagram": {
+   "fingerprint": "f160fe0c4",
+   "concepts": [
+    "chem.state.phase-diagram"
+   ],
+   "family": "prose-comparison",
+   "initial": "semantic audit REVIEW_REQUIRED (no deterministic assertion covers this family); render REVIEW: INNER_SCROLL_X",
+   "decision": "FIXED→PASS",
+   "finding": "Read independently twice: the layout, 273.16 K / 612 Pa, CO₂ 304 K / 73 atm and water 647 K / 218 atm check against NIST-derived values; the earlier '611 Pa' truncation is fixed.",
+   "fix": "Triple-point pressure 611 Pa → 612 Pa (3-significant-figure rounding of 611.657 Pa).",
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/prose-figure-review.json",
+     "contains": "\"figure\": \"cell-comparison-chem.state.phase-diagram\""
+    }
+   ],
+   "remaining": "One generic sketch carries two substance-specific facts (dry-ice sublimation, water's backward melting curve); nothing says which substance each is. The expanded (fullscreen) view scrolls: the chrome around the scene is taller than the window (R15, measured and bounded, by design).",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Triple_point",
+    "https://en.wikipedia.org/wiki/Critical_point_(thermodynamics)"
+   ]
+  },
+  "scene:cell-comparison-chem.surface.colloids": {
+   "fingerprint": "f62b149da",
+   "concepts": [
+    "chem.surface.colloids"
+   ],
+   "family": "prose-comparison",
+   "initial": "semantic audit REVIEW_REQUIRED (no deterministic assertion covers this family); render REVIEW: INNER_SCROLL_X",
+   "decision": "FIXED→PASS",
+   "finding": "New in this closure (R12: the concept had no figure). Read independently twice: the first read found a misconception risk (Tyndall presented as unique to colloids; 'membrane' without dialysis; 'single molecules' vs gelatin); the re-read of the revised text is CORRECT.",
+   "fix": "Authored with the conditions and the three-way contrast (filter paper vs dialysis membrane, suspensions scatter light too); laid out with the captioned layout so each caption stays under its own group.",
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/prose-figure-review.json",
+     "contains": "\"figure\": \"cell-comparison-chem.surface.colloids\""
+    }
+   ],
+   "remaining": "Minor and left: the drawn labels say 'membrane' (the narration says dialysis membrane); textbooks conflict on whether colloids are 'filterable'; the 1 nm / 1000 nm limits are conventions. The expanded (fullscreen) view scrolls: the chrome around the scene is taller than the window (R15, measured and bounded, by design).",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Colloid",
+    "https://en.wikipedia.org/wiki/Tyndall_effect",
+    "https://en.wikipedia.org/wiki/Dialysis_(chemistry)"
+   ]
+  },
+  "scene:cell-comparison-chem.sblock.water": {
+   "fingerprint": "fd883b2b6",
+   "concepts": [
+    "chem.sblock.water"
+   ],
+   "family": "prose-comparison",
+   "initial": "semantic audit REVIEW_REQUIRED (no deterministic assertion covers this family); render REVIEW: INNER_SCROLL_X",
+   "decision": "FIXED→PASS",
+   "finding": "New in this closure (R12: the cached generated figure drew H–O–H at 120° and was refused). Read independently twice: every number and mechanism checks (104.5° gas phase, 100 °C at 1 atm, H₂S −60 °C, ice 0.917 / water 1.000 g/cm³ at 0 °C / 4 °C, hardness, D₂O 101.4 °C, CANDU, ¹H NMR, amphoteric); the final text is CORRECT.",
+   "fix": "Authored from the Educational Brain entry with conditions in the narration; captioned layout.",
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/prose-figure-review.json",
+     "contains": "\"figure\": \"cell-comparison-chem.sblock.water\""
+    }
+   ],
+   "remaining": "Minor and left: labels are rounded; 'about 3.5 hydrogen bonds' depends on the counting rule; the drawn density label carries no temperatures (they are in the narration). The expanded (fullscreen) view scrolls: the chrome around the scene is taller than the window (R15, measured and bounded, by design).",
+   "sources": [
+    "https://cccbdb.nist.gov/exp2x.asp?casno=7732185",
+    "https://en.wikipedia.org/wiki/Properties_of_water",
+    "https://en.wikipedia.org/wiki/Hard_water",
+    "https://chem.umd.edu/sites/default/files/NMR/isotope_solvent.pdf"
+   ]
+  },
+  "scene:cell-pathway-chem.dblock.organometallics": {
+   "fingerprint": "f4c985a78",
+   "concepts": [
+    "chem.dblock.organometallics"
+   ],
+   "family": "prose-pathway",
+   "initial": "semantic audit REVIEW_REQUIRED (no deterministic assertion covers this family); render REVIEW: INNER_SCROLL_X",
+   "decision": "FIXED→PASS",
+   "finding": "Read independently twice: the electron counts and oxidation states are internally correct for the drawn route; the route order (H₂ before PPh₃ loss) differs from the textbook route, which the goal now says ('one commonly drawn route').",
+   "fix": "Goal says 'One commonly drawn route'.",
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/prose-figure-review.json",
+     "contains": "\"figure\": \"cell-pathway-chem.dblock.organometallics\""
+    }
+   ],
+   "remaining": "A student comparing with a textbook sees PPh₃ dissociation first; 'one empty site' is shorthand for 'two electrons short of 18'. The expanded (fullscreen) view scrolls: the chrome around the scene is taller than the window (R15, measured and bounded, by design).",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Wilkinson%27s_catalyst"
+   ]
+  },
+  "scene:cell-comparison-chem.org.pericyclic": {
+   "fingerprint": "fc6bc2dee",
+   "concepts": [
+    "chem.org.pericyclic"
+   ],
+   "family": "prose-comparison",
+   "initial": "semantic audit REVIEW_REQUIRED (no deterministic assertion covers this family)",
+   "decision": "FIXED→PASS",
+   "finding": "Read independently twice: every Woodward–Hoffmann statement is correct; the [2+2] label now carries '(suprafacial)' like the [1,3]H label.",
+   "fix": "'[2+2]: thermally forbidden (suprafacial), photochemically allowed'.",
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/prose-figure-review.json",
+     "contains": "\"figure\": \"cell-comparison-chem.org.pericyclic\""
+    }
+   ],
+   "remaining": "'Forbidden' is not 'impossible' (ketene [2+2]); 'allowed' is not 'fast'; three families are the main classes, not all of them.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Woodward%E2%80%93Hoffmann_rules",
+    "https://en.wikipedia.org/wiki/Pericyclic_reaction"
+   ]
+  },
+  "scene:cell-comparison-chem.bio.nucleic-acids": {
+   "fingerprint": "fe60a32bf",
+   "concepts": [
+    "chem.bio.nucleic-acids"
+   ],
+   "family": "prose-comparison",
+   "initial": "semantic audit REVIEW_REQUIRED (no deterministic assertion covers this family)",
+   "decision": "PASS",
+   "finding": "Read independently: A–T 2 and G–C 3 hydrogen bonds, T vs U, deoxyribose vs ribose and the 2′-OH, the purine–pyrimidine fit — all CORRECT.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/prose-figure-review.json",
+     "contains": "\"figure\": \"cell-comparison-chem.bio.nucleic-acids\""
+    }
+   ],
+   "remaining": "None for the chemistry.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Nucleic_acid"
+   ]
+  },
+  "scene:cell-comparison-chem.poly.biodegradable": {
+   "fingerprint": "f6a1e3677",
+   "concepts": [
+    "chem.poly.biodegradable"
+   ],
+   "family": "prose-comparison",
+   "initial": "semantic audit REVIEW_REQUIRED (no deterministic assertion covers this family); render REVIEW: INNER_SCROLL_X",
+   "decision": "FIXED→PASS",
+   "finding": "Read independently three times: the first read found loose claims (PLA unqualified; 'decided by' backbone chemistry; all-carbon 'not biodegradable'; conductivity scope; 'modest semiconductor'); the re-read of the final text is CORRECT.",
+   "fix": "PLA 'needs industrial composting'; 'starts with' the backbone; 'generally resists biodegradation'; 'intrinsic electronic conductivity'; undoped 'poor semiconductor' (narration: poor semiconductors or insulators); captioned layout.",
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/prose-figure-review.json",
+     "contains": "\"figure\": \"cell-comparison-chem.poly.biodegradable\""
+    }
+   ],
+   "remaining": "Minor and left: 'hydrolysable backbone' must stay paired with 'aliphatic' (the narration does); biodegradation is also a system property (crystallinity, molar mass, conditions). The expanded (fullscreen) view scrolls: the chrome around the scene is taller than the window (R15, measured and bounded, by design).",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Biodegradable_plastic",
+    "https://en.wikipedia.org/wiki/Polylactic_acid",
+    "https://en.wikipedia.org/wiki/Conductive_polymer"
+   ]
+  },
+  "tier3:chem.found.states-of-matter": {
+   "fingerprint": "f42a1faaf",
+   "concepts": [
+    "chem.found.states-of-matter"
+   ],
+   "family": "generated:tier3",
+   "initial": "generated (Tier 3) figure: no deterministic semantic audit covers it; admitted by chemistryAdmission; independent review MINOR",
+   "decision": "REVIEW_REQUIRED",
+   "finding": "Independent review of the figure as cached in production: MINOR. No false statement, but the 'Interconversion' flow only runs one way (Solid -> Melting -> Liquid -> Evaporation -> Gas). Freezing, condensation, sublimation and deposition are absent; 'Evaporation (Heating)' should be vaporisation/boiling in a heating-curve context. No particle-arrangement or energy information.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/tier3-independent-review.json",
+     "contains": "\"conceptId\": \"chem.found.states-of-matter\""
+    }
+   ],
+   "remaining": "The reviewer found nothing that contradicts the chemistry; the points above are looseness or omission. ",
+   "reason": "Independent review: No false statement, but the 'Interconversion' flow only runs one way (Solid -> Melting -> Liquid -> Evaporation -> Gas). Freezing, condensation, sublimation and deposition are absent; 'Evaporation (Heating)' should be vaporisation/boiling in a heating-curve context. No particle-arrangement or energy information.",
+   "ownerDecision": "Owner / Curriculum Production Pipeline: accept the imprecision as is, or have the figure regenerated or retired. A generated figure is never edited in place; nothing was changed by this closure."
+  },
+  "tier3:chem.found.pure-substances": {
+   "fingerprint": "f6b3f56cd",
+   "concepts": [
+    "chem.found.pure-substances"
+   ],
+   "family": "generated:tier3",
+   "initial": "generated (Tier 3) figure: no deterministic semantic audit covers it; admitted by chemistryAdmission; independent review MINOR",
+   "decision": "REVIEW_REQUIRED",
+   "finding": "Independent review of the figure as cached in production: MINOR. No false statement. It is a separation procedure (identify mixture type -> pick technique -> apply -> verify), not a depiction of what a pure substance (element/compound) versus a homogeneous/heterogeneous mixture is. Steps 3-4 are generic ('apply the chosen technique').",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/tier3-independent-review.json",
+     "contains": "\"conceptId\": \"chem.found.pure-substances\""
+    }
+   ],
+   "remaining": "The reviewer found nothing that contradicts the chemistry; the points above are looseness or omission. ",
+   "reason": "Independent review: No false statement. It is a separation procedure (identify mixture type -> pick technique -> apply -> verify), not a depiction of what a pure substance (element/compound) versus a homogeneous/heterogeneous mixture is. Steps 3-4 are generic ('apply the chosen technique').",
+   "ownerDecision": "Owner / Curriculum Production Pipeline: accept the imprecision as is, or have the figure regenerated or retired. A generated figure is never edited in place; nothing was changed by this closure."
+  },
+  "tier2:chem.found.significant-figures": {
+   "fingerprint": "f87108c9b",
+   "concepts": [
+    "chem.found.significant-figures"
+   ],
+   "family": "generated:tier2",
+   "initial": "semantic audit REVIEW_REQUIRED (no deterministic assertion covers this family)",
+   "decision": "REVIEW_REQUIRED",
+   "finding": "An approved Tier 2 process flow, read independently: Step 4 'trailing zeros based on decimal presence' hides the rule: trailing zeros count if there is a decimal point; without one the count is ambiguous (not simply insignificant) and scientific notation fixes it. Missing: counted and defined numbers are exact; the definition (all certain digits plus the first uncertain one). The four rules are a checklist, not a strict sequence.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/prose-figure-review.json",
+     "contains": "tier2:chem.found.significant-figures"
+    },
+    {
+     "file": "docs/qa/chemistry-visual-audit/tier2-corrections-prepared.md",
+     "contains": "`chem.found.significant-figures`"
+    }
+   ],
+   "remaining": "Correct in outline; the imprecisions above stand. ",
+   "sources": [
+    "https://chem.libretexts.org/Courses/Modesto_Junior_College/Chemistry_142:_Pre-General_Chemistry_(Brzezinski)/CHEM_142:_Text_(Brzezinski)/02:_Numbers_and_Measurement/2.01:_Significant_Figures_-_Writing_Numbers_to_Reflect_Precision",
+    "https://chem.libretexts.org/Courses/University_of_Arkansas_Little_Rock/Chem_1300:_Preparatory_Chemistry/Learning_Modules/02:_Mathematical_Fundamentals/2.05:_Measured_Numbers_and_Significant_Digits",
+    "https://en.wikipedia.org/wiki/Significant_figures"
+   ],
+   "reason": "An approved production row that is correct in outline but imprecise (step 4 hides the trailing-zero rule; exact numbers are not mentioned). Editing an approved row is a production write.",
+   "ownerDecision": "Owner to apply (or decline) the corrections in tier2-corrections-prepared.md through the asset-approval flow; retiring the row is not recommended (inert, never harmful)."
+  },
+  "tier3:chem.found.mole-concept": {
+   "fingerprint": "f2e384d34",
+   "concepts": [
+    "chem.found.mole-concept"
+   ],
+   "family": "generated:tier3",
+   "initial": "generated (Tier 3) figure: no deterministic semantic audit covers it; admitted by chemistryAdmission; independent review ACCURATE",
+   "decision": "PASS",
+   "finding": "Independent review of the figure as cached in production: ACCURATE. Conversions are correct: g / (g/mol) = mol; mol x 6.022x10^23 = particles. Only nit: Avogadro constant unit (mol^-1) omitted; value 6.022x10^23 is the standard 4-s.f. figure (SI-exact 6.02214076x10^23 mol^-1).",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/tier3-independent-review.json",
+     "contains": "\"conceptId\": \"chem.found.mole-concept\""
+    }
+   ],
+   "remaining": "The reviewer's only note, if any, is quoted in the finding; the machine gates (chemistry admission, the shared validators) passed and the figure rendered in both viewports and themes. ",
+   "sources": [
+    "CODATA/SI definition of the Avogadro constant, 6.02214076e23 mol^-1: https://physics.nist.gov/cgi-bin/cuu/Value?na (well-established; not re-fetched in this review)"
+   ]
+  },
+  "tier2:chem.found.stoichiometry": {
+   "fingerprint": "fa6206cbc",
+   "concepts": [
+    "chem.found.stoichiometry"
+   ],
+   "family": "generated:tier2",
+   "initial": "semantic audit REVIEW_REQUIRED (no deterministic assertion covers this family)",
+   "decision": "REVIEW_REQUIRED",
+   "finding": "An approved Tier 2 process flow, read independently: Step 3 'molar mole ratios' is a doubled, non-standard term ('mole ratio' or 'molar ratio'). Step 4 omits the moles-to-grams conversion that gives the theoretical yield, the limiting-reactant check when more than one reactant amount is given, and that the actual yield is a measured input, not a result.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/prose-figure-review.json",
+     "contains": "tier2:chem.found.stoichiometry"
+    },
+    {
+     "file": "docs/qa/chemistry-visual-audit/tier2-corrections-prepared.md",
+     "contains": "`chem.found.stoichiometry`"
+    }
+   ],
+   "remaining": "Correct in outline; the imprecisions above stand. ",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Stoichiometry",
+    "https://en.wikipedia.org/wiki/Yield_(chemistry)",
+    "https://en.wikipedia.org/wiki/Limiting_reagent",
+    "https://chem.libretexts.org/Courses/Howard_University/General_Chemistry:_An_Atoms_First_Approach/Unit_3:_Stoichiometry/Chapter_7:_Stoichiometry/Chapter_7.4:_Stoichiometry"
+   ],
+   "reason": "An approved production row that is correct in outline but imprecise (step 3 reads 'molar mole ratios' and step 4 omits the moles-to-grams conversion, the limiting-reactant check and the measured actual yield). Editing an approved row is a production write.",
+   "ownerDecision": "Owner to apply (or decline) the corrections in tier2-corrections-prepared.md through the asset-approval flow; retiring the row is not recommended (inert, never harmful)."
+  },
+  "tier3:chem.found.concentration": {
+   "fingerprint": "f2df4d844",
+   "concepts": [
+    "chem.found.concentration"
+   ],
+   "family": "generated:tier3",
+   "initial": "generated (Tier 3) figure: no deterministic semantic audit covers it; admitted by chemistryAdmission; independent review MINOR",
+   "decision": "REVIEW_REQUIRED",
+   "finding": "Independent review of the figure as cached in production: MINOR. No false statement (M = n/V and M1V1 = M2V2 are correct) but it is a generic problem-solving checklist: only molarity is named, molality/mass %/ppm/mole fraction are never mentioned, so 'converting between concentration units' is not actually taught; the dilution step is not a unit conversion; 'convert to moles' is not needed for every conversion (e.g. % to ppm).",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/tier3-independent-review.json",
+     "contains": "\"conceptId\": \"chem.found.concentration\""
+    }
+   ],
+   "remaining": "The reviewer found nothing that contradicts the chemistry; the points above are looseness or omission. ",
+   "reason": "Independent review: No false statement (M = n/V and M1V1 = M2V2 are correct) but it is a generic problem-solving checklist: only molarity is named, molality/mass %/ppm/mole fraction are never mentioned, so 'converting between concentration units' is not actually taught; the dilution step is not a unit conversion; 'convert to moles' is not needed for every conversion (e.g. % to ppm).",
+   "ownerDecision": "Owner / Curriculum Production Pipeline: accept the imprecision as is, or have the figure regenerated or retired. A generated figure is never edited in place; nothing was changed by this closure."
+  },
+  "tier3:chem.bond.mo-theory": {
+   "fingerprint": "f91f477cb",
+   "concepts": [
+    "chem.bond.mo-theory"
+   ],
+   "family": "generated:tier3",
+   "initial": "generated (Tier 3) figure: no deterministic semantic audit covers it; admitted by chemistryAdmission; independent review ACCURATE",
+   "decision": "PASS",
+   "finding": "Independent review of the figure as cached in production: ACCURATE. All statements correct: bonding/antibonding sigma, pi and sigma*, pi* from LCAO; bond order = (bonding - antibonding)/2; unpaired electrons -> paramagnetic, all paired -> diamagnetic; Pauli and Hund. Nit: Aufbau (lowest energy first) is only implicit, 's-p mixing' for N2-and-lighter ordering is not mentioned, and no actual MO energy diagram is drawn.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/tier3-independent-review.json",
+     "contains": "\"conceptId\": \"chem.bond.mo-theory\""
+    }
+   ],
+   "remaining": "The reviewer's only note, if any, is quoted in the finding; the machine gates (chemistry admission, the shared validators) passed and the figure rendered in both viewports and themes. "
+  },
+  "tier3:chem.bond.metallic-bonding": {
+   "fingerprint": "f22ce4bee",
+   "concepts": [
+    "chem.bond.metallic-bonding"
+   ],
+   "family": "generated:tier3",
+   "initial": "generated (Tier 3) figure: no deterministic semantic audit covers it; admitted by chemistryAdmission; independent review MINOR",
+   "decision": "REVIEW_REQUIRED",
+   "finding": "Independent review of the figure as cached in production: MINOR. No false statement: positive ion lattice (3x3, spacing 2) plus small mobile electrons is the correct electron-sea picture. Weak points: 9 ions vs 6 electrons and no charge labels, so charge balance is not shown; the gold vectors only run ion->electron for two ions; the stated goal (explaining conductivity and malleability) is never actually depicted; ions are not close-packed.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/tier3-independent-review.json",
+     "contains": "\"conceptId\": \"chem.bond.metallic-bonding\""
+    }
+   ],
+   "remaining": "The reviewer found nothing that contradicts the chemistry; the points above are looseness or omission. ",
+   "reason": "Independent review: No false statement: positive ion lattice (3x3, spacing 2) plus small mobile electrons is the correct electron-sea picture. Weak points: 9 ions vs 6 electrons and no charge labels, so charge balance is not shown; the gold vectors only run ion->electron for two ions; the stated goal (explaining conductivity and malleability) is never actually depicted; ions are not close-packed.",
+   "ownerDecision": "Owner / Curriculum Production Pipeline: accept the imprecision as is, or have the figure regenerated or retired. A generated figure is never edited in place; nothing was changed by this closure."
+  },
+  "tier3:chem.bond.coordinate-bond": {
+   "fingerprint": "f5288eb13",
+   "concepts": [
+    "chem.bond.coordinate-bond"
+   ],
+   "family": "generated:tier3",
+   "initial": "generated (Tier 3) figure: no deterministic semantic audit covers it; admitted by chemistryAdmission; independent review ACCURATE",
+   "decision": "PASS",
+   "finding": "Independent review of the figure as cached in production: ACCURATE. Correct: Lewis base lone pair + Lewis acid empty orbital -> donated pair -> coordinate (dative) bond. Abstract (no NH3->BF3 style example) but nothing wrong.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/tier3-independent-review.json",
+     "contains": "\"conceptId\": \"chem.bond.coordinate-bond\""
+    }
+   ],
+   "remaining": "The reviewer's only note, if any, is quoted in the finding; the machine gates (chemistry admission, the shared validators) passed and the figure rendered in both viewports and themes. "
+  },
+  "tier3:chem.state.kinetic-theory": {
+   "fingerprint": "fd42ddd7f",
+   "concepts": [
+    "chem.state.kinetic-theory"
+   ],
+   "family": "generated:tier3",
+   "initial": "generated (Tier 3) figure: no deterministic semantic audit covers it; admitted by chemistryAdmission; independent review MINOR",
+   "decision": "REVIEW_REQUIRED",
+   "finding": "Independent review of the figure as cached in production: MINOR. No false statement (elastic collisions, momentum transfer -> pressure, temperature) but only ONE molecule is drawn, no wall is drawn, and 'Pressure'/'Temperature (T)' are floating labels. KMT is about many molecules in random motion with T proportional to mean kinetic energy and P from the rate of many wall collisions; that is not conveyed.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/tier3-independent-review.json",
+     "contains": "\"conceptId\": \"chem.state.kinetic-theory\""
+    }
+   ],
+   "remaining": "The reviewer found nothing that contradicts the chemistry; the points above are looseness or omission. ",
+   "reason": "Independent review: No false statement (elastic collisions, momentum transfer -> pressure, temperature) but only ONE molecule is drawn, no wall is drawn, and 'Pressure'/'Temperature (T)' are floating labels. KMT is about many molecules in random motion with T proportional to mean kinetic energy and P from the rate of many wall collisions; that is not conveyed.",
+   "ownerDecision": "Owner / Curriculum Production Pipeline: accept the imprecision as is, or have the figure regenerated or retired. A generated figure is never edited in place; nothing was changed by this closure."
+  },
+  "tier3:chem.state.gas-laws": {
+   "fingerprint": "f215856e5",
+   "concepts": [
+    "chem.state.gas-laws"
+   ],
+   "family": "generated:tier3",
+   "initial": "generated (Tier 3) figure: no deterministic semantic audit covers it; admitted by chemistryAdmission; independent review MINOR; render REVIEW: LABEL_OVER_STROKE",
+   "decision": "REVIEW_REQUIRED",
+   "finding": "Independent review of the figure as cached in production: MINOR. Equation P = 10/V is a correct Boyle's-law hyperbola (PV = 10 atm L constant: V=1 ->10, 2 ->5, 5 ->2, 10 ->1 atm). Weaknesses: the renderer plots x over [-10,10], so the mirror branch with NEGATIVE volume and NEGATIVE pressure (e.g. x=-5 -> -2) is drawn and x=0 is a singularity; n and T are not stated; only Boyle's law (title is 'Gas Laws').",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/tier3-independent-review.json",
+     "contains": "\"conceptId\": \"chem.state.gas-laws\""
+    }
+   ],
+   "remaining": "The reviewer found nothing that contradicts the chemistry; the points above are looseness or omission. A graph gridline passes behind a tick numeral (the graph renderer draws tick labels on their gridlines); the harness reports it as REVIEW.",
+   "sources": [
+    "Own computation from the scene coordinates (vector dot products), run in this review (mathParser evaluation); repository GraphRenderer.tsx draws the whole [-10,10] view"
+   ],
+   "reason": "Independent review: Equation P = 10/V is a correct Boyle's-law hyperbola (PV = 10 atm L constant: V=1 ->10, 2 ->5, 5 ->2, 10 ->1 atm). Weaknesses: the renderer plots x over [-10,10], so the mirror branch with NEGATIVE volume and NEGATIVE pressure (e.g. x=-5 -> -2) is drawn and x=0 is a singularity; n and T are not stated; only Boyle's law (title is 'Gas Laws').",
+   "ownerDecision": "Owner / Curriculum Production Pipeline: accept the imprecision as is, or have the figure regenerated or retired. A generated figure is never edited in place; nothing was changed by this closure."
+  },
+  "tier3:chem.sol.solubility": {
+   "fingerprint": "fba64871f",
+   "concepts": [
+    "chem.sol.solubility"
+   ],
+   "family": "generated:tier3",
+   "initial": "generated (Tier 3) figure: no deterministic semantic audit covers it; admitted by chemistryAdmission; independent review MINOR; render REVIEW: LABEL_OVER_STROKE",
+   "decision": "REVIEW_REQUIRED",
+   "finding": "Independent review of the figure as cached in production: MINOR. Constant 0.034 mol/(L atm) equals Henry's constant of CO2 in water at 25 degC (3.4e-4 mol/(m3 Pa)); correct for CO2 but the figure says only 'gas' and gives no gas or temperature (O2 is ~1.3e-3, N2 ~6e-4 mol/(L atm)). Linear C = kH P is correct. Rendered in the default [-10,10] view (vertical half-range ~7) the line only reaches 0.34, i.e. it lies ~6 px from the x-axis and looks flat; the negative-pressure half-line is drawn too.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/tier3-independent-review.json",
+     "contains": "\"conceptId\": \"chem.sol.solubility\""
+    }
+   ],
+   "remaining": "The reviewer found nothing that contradicts the chemistry; the points above are looseness or omission. A graph gridline passes behind a tick numeral (the graph renderer draws tick labels on their gridlines); the harness reports it as REVIEW.",
+   "sources": [
+    "R. Sander, Compilation of Henry's law constants (v5.0.0), Atmos. Chem. Phys. 23, 10901 (2023); CO2 entry https://henrys-law.org/henry/casrn/124-38-9 (Hscp ~3.4e-4 mol/(m3 Pa) = ~0.034 mol/(L atm) at 298 K)"
+   ],
+   "reason": "Independent review: Constant 0.034 mol/(L atm) equals Henry's constant of CO2 in water at 25 degC (3.4e-4 mol/(m3 Pa)); correct for CO2 but the figure says only 'gas' and gives no gas or temperature (O2 is ~1.3e-3, N2 ~6e-4 mol/(L atm)). Linear C = kH P is correct. Rendered in the default [-10,10] view (vertical half-range ~7) the line only reaches 0.34, i.e. it lies ~6 px from the x-axis and looks flat; the negative-pressure half-line ...",
+   "ownerDecision": "Owner / Curriculum Production Pipeline: accept the imprecision as is, or have the figure regenerated or retired. A generated figure is never edited in place; nothing was changed by this closure."
+  },
+  "tier3:chem.sol.colligative": {
+   "fingerprint": "f9a098143",
+   "concepts": [
+    "chem.sol.colligative"
+   ],
+   "family": "generated:tier3",
+   "initial": "generated (Tier 3) figure: no deterministic semantic audit covers it; admitted by chemistryAdmission; independent review MINOR; render REVIEW: LABEL_OVER_STROKE",
+   "decision": "REVIEW_REQUIRED",
+   "finding": "Independent review of the figure as cached in production: MINOR. Constant 0.512 degC kg/mol is the correct Kb of water and 'y = 0.512 * x' parses (checked: m=1 -> 0.512, m=10 -> 5.12 degC). Limits: only boiling-point elevation (title is 'Colligative Properties'; no freezing-point depression, vapour-pressure lowering or osmotic pressure); valid only for dilute non-volatile non-electrolyte (i = 1), not stated; molality up to 10 and negative molality are drawn.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/tier3-independent-review.json",
+     "contains": "\"conceptId\": \"chem.sol.colligative\""
+    }
+   ],
+   "remaining": "The reviewer found nothing that contradicts the chemistry; the points above are looseness or omission. A graph gridline passes behind a tick numeral (the graph renderer draws tick labels on their gridlines); the harness reports it as REVIEW.",
+   "sources": [
+    "Wikipedia, Boiling-point elevation (Kb of water = 0.512 degC kg/mol): https://en.wikipedia.org/wiki/Boiling-point_elevation"
+   ],
+   "reason": "Independent review: Constant 0.512 degC kg/mol is the correct Kb of water and 'y = 0.512 * x' parses (checked: m=1 -> 0.512, m=10 -> 5.12 degC). Limits: only boiling-point elevation (title is 'Colligative Properties'; no freezing-point depression, vapour-pressure lowering or osmotic pressure); valid only for dilute non-volatile non-electrolyte (i = 1), not stated; molality up to 10 and negative molality are drawn.",
+   "ownerDecision": "Owner / Curriculum Production Pipeline: accept the imprecision as is, or have the figure regenerated or retired. A generated figure is never edited in place; nothing was changed by this closure."
+  },
+  "tier3:chem.equil.kw-ph": {
+   "fingerprint": "f73364694",
+   "concepts": [
+    "chem.equil.kw-ph"
+   ],
+   "family": "generated:tier3",
+   "initial": "generated (Tier 3) figure: no deterministic semantic audit covers it; admitted by chemistryAdmission; independent review MINOR",
+   "decision": "REVIEW_REQUIRED",
+   "finding": "Independent review of the figure as cached in production: MINOR. Correct: pH 0-14 scale, neutral 7 at 25 degC (Kw = 1.0e-14). But the figure shows only a bare number line with 7 highlighted; Kw, [H+][OH-], pOH and the temperature dependence of neutrality (title: 'Water Ionization and pH') are not shown.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/tier3-independent-review.json",
+     "contains": "\"conceptId\": \"chem.equil.kw-ph\""
+    }
+   ],
+   "remaining": "The reviewer found nothing that contradicts the chemistry; the points above are looseness or omission. ",
+   "reason": "Independent review: Correct: pH 0-14 scale, neutral 7 at 25 degC (Kw = 1.0e-14). But the figure shows only a bare number line with 7 highlighted; Kw, [H+][OH-], pOH and the temperature dependence of neutrality (title: 'Water Ionization and pH') are not shown.",
+   "ownerDecision": "Owner / Curriculum Production Pipeline: accept the imprecision as is, or have the figure regenerated or retired. A generated figure is never edited in place; nothing was changed by this closure."
+  },
+  "tier3:chem.equil.acids-bases": {
+   "fingerprint": "f58f15feb",
+   "concepts": [
+    "chem.equil.acids-bases"
+   ],
+   "family": "generated:tier3",
+   "initial": "generated (Tier 3) figure: no deterministic semantic audit covers it; admitted by chemistryAdmission; independent review MINOR",
+   "decision": "REVIEW_REQUIRED",
+   "finding": "Independent review of the figure as cached in production: MINOR. Brønsted-Lowry arrow (acid -> base, 'donates H+') and Lewis arrow (base -> acid, electron pair flows to the acid) are directionally correct. Weak points: the Arrhenius row has an unlabelled arrow from acid to base that suggests a transfer, whereas Arrhenius acids/bases dissociate in water (H+ / OH- release); labels are long and sit on the arrow ends; Lewis arrow text 'accepts e- pair' describes the acid, not the arrow's flow.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/tier3-independent-review.json",
+     "contains": "\"conceptId\": \"chem.equil.acids-bases\""
+    }
+   ],
+   "remaining": "The reviewer found nothing that contradicts the chemistry; the points above are looseness or omission. ",
+   "reason": "Independent review: Brønsted-Lowry arrow (acid -> base, 'donates H+') and Lewis arrow (base -> acid, electron pair flows to the acid) are directionally correct. Weak points: the Arrhenius row has an unlabelled arrow from acid to base that suggests a transfer, whereas Arrhenius acids/bases dissociate in water (H+ / OH- release); labels are long and sit on the arrow ends; Lewis arrow text 'accepts e- pair' describes the acid, not the arro...",
+   "ownerDecision": "Owner / Curriculum Production Pipeline: accept the imprecision as is, or have the figure regenerated or retired. A generated figure is never edited in place; nothing was changed by this closure."
+  },
+  "tier3:chem.redox.balancing": {
+   "fingerprint": "f7e2ff6b5",
+   "concepts": [
+    "chem.redox.balancing"
+   ],
+   "family": "generated:tier3",
+   "initial": "generated (Tier 3) figure: no deterministic semantic audit covers it; admitted by chemistryAdmission; independent review MINOR",
+   "decision": "REVIEW_REQUIRED",
+   "finding": "Independent review of the figure as cached in production: MINOR. Half-reaction method steps are right, but: 'Balance hydrogen atoms with H+ (acidic) or OH- (basic)' is imprecise for basic solution (adding OH- also adds O; the standard way is to balance as in acid and then add OH- to both sides to neutralise H+, or add H2O/OH- in pairs); the final step says 'combine' without the essential step of multiplying half-reactions so electrons cancel.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/tier3-independent-review.json",
+     "contains": "\"conceptId\": \"chem.redox.balancing\""
+    }
+   ],
+   "remaining": "The reviewer found nothing that contradicts the chemistry; the points above are looseness or omission. ",
+   "reason": "Independent review: Half-reaction method steps are right, but: 'Balance hydrogen atoms with H+ (acidic) or OH- (basic)' is imprecise for basic solution (adding OH- also adds O; the standard way is to balance as in acid and then add OH- to both sides to neutralise H+, or add H2O/OH- in pairs); the final step says 'combine' without the essential step of multiplying half-reactions so electrons cancel.",
+   "ownerDecision": "Owner / Curriculum Production Pipeline: accept the imprecision as is, or have the figure regenerated or retired. A generated figure is never edited in place; nothing was changed by this closure."
+  },
+  "tier3:chem.redox.titrations": {
+   "fingerprint": "fc55eb48b",
+   "concepts": [
+    "chem.redox.titrations"
+   ],
+   "family": "generated:tier3",
+   "initial": "generated (Tier 3) figure: no deterministic semantic audit covers it; admitted by chemistryAdmission; independent review MINOR",
+   "decision": "REVIEW_REQUIRED",
+   "finding": "Independent review of the figure as cached in production: MINOR. Generic and mostly correct, but 'Add indicator' is not universal (KMnO4 is self-indicating; iodine/starch, redox indicators otherwise), 'calculate equivalents and molar mass' is an odd end-point (normally concentration/amount of analyte), and acidification/medium and stoichiometry (n-factor) are not shown.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/tier3-independent-review.json",
+     "contains": "\"conceptId\": \"chem.redox.titrations\""
+    }
+   ],
+   "remaining": "The reviewer found nothing that contradicts the chemistry; the points above are looseness or omission. ",
+   "reason": "Independent review: Generic and mostly correct, but 'Add indicator' is not universal (KMnO4 is self-indicating; iodine/starch, redox indicators otherwise), 'calculate equivalents and molar mass' is an odd end-point (normally concentration/amount of analyte), and acidification/medium and stoichiometry (n-factor) are not shown.",
+   "ownerDecision": "Owner / Curriculum Production Pipeline: accept the imprecision as is, or have the figure regenerated or retired. A generated figure is never edited in place; nothing was changed by this closure."
+  },
+  "tier3:chem.kinet.rate-law": {
+   "fingerprint": "f72d1c45",
+   "concepts": [
+    "chem.kinet.rate-law"
+   ],
+   "family": "generated:tier3",
+   "initial": "generated (Tier 3) figure: no deterministic semantic audit covers it; admitted by chemistryAdmission; independent review MINOR; render REVIEW: LABEL_OVER_STROKE",
+   "decision": "REVIEW_REQUIRED",
+   "finding": "Independent review of the figure as cached in production: MINOR. Equation y = x^2 is correct for rate = k[A]^2 with k = 1 M^-1 s^-1 (units: M^-1 s^-1 x M^2 = M s^-1). Weak points: x in [-10,10] is plotted, so the mirror branch gives positive rate for NEGATIVE concentration (x=-5 -> 25); 10 M and 100 M/s are unrealistic; only one order is shown, so 'order' is not contrasted (0th linear/constant, 1st linear, 2nd parabola); in the default view only |[A]| <= ~2.7 is visible.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/tier3-independent-review.json",
+     "contains": "\"conceptId\": \"chem.kinet.rate-law\""
+    }
+   ],
+   "remaining": "The reviewer found nothing that contradicts the chemistry; the points above are looseness or omission. A graph gridline passes behind a tick numeral (the graph renderer draws tick labels on their gridlines); the harness reports it as REVIEW.",
+   "sources": [
+    "Own computation from the scene coordinates (vector dot products), run in this review (mathParser evaluation)"
+   ],
+   "reason": "Independent review: Equation y = x^2 is correct for rate = k[A]^2 with k = 1 M^-1 s^-1 (units: M^-1 s^-1 x M^2 = M s^-1). Weak points: x in [-10,10] is plotted, so the mirror branch gives positive rate for NEGATIVE concentration (x=-5 -> 25); 10 M and 100 M/s are unrealistic; only one order is shown, so 'order' is not contrasted (0th linear/constant, 1st linear, 2nd parabola); in the default view only |[A]| <= ~2.7 is visible.",
+   "ownerDecision": "Owner / Curriculum Production Pipeline: accept the imprecision as is, or have the figure regenerated or retired. A generated figure is never edited in place; nothing was changed by this closure."
+  },
+  "tier3:chem.kinet.catalysis": {
+   "fingerprint": "f100c6bf4",
+   "concepts": [
+    "chem.kinet.catalysis"
+   ],
+   "family": "generated:tier3",
+   "initial": "generated (Tier 3) figure: no deterministic semantic audit covers it; admitted by chemistryAdmission; independent review MINOR",
+   "decision": "REVIEW_REQUIRED",
+   "finding": "Independent review of the figure as cached in production: MINOR. No false statement (alternative pathway with lower activation energy, catalyst regenerated), but steps 3-4 are redundant, 'substrate binds to catalyst' is enzyme/surface-specific, and the key points (no change in Delta H or equilibrium position, rate of both directions raised, energy profile) are missing.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/tier3-independent-review.json",
+     "contains": "\"conceptId\": \"chem.kinet.catalysis\""
+    }
+   ],
+   "remaining": "The reviewer found nothing that contradicts the chemistry; the points above are looseness or omission. ",
+   "reason": "Independent review: No false statement (alternative pathway with lower activation energy, catalyst regenerated), but steps 3-4 are redundant, 'substrate binds to catalyst' is enzyme/surface-specific, and the key points (no change in Delta H or equilibrium position, rate of both directions raised, energy profile) are missing.",
+   "ownerDecision": "Owner / Curriculum Production Pipeline: accept the imprecision as is, or have the figure regenerated or retired. A generated figure is never edited in place; nothing was changed by this closure."
+  },
+  "tier3:chem.kinet.photochemistry": {
+   "fingerprint": "f305ed12c",
+   "concepts": [
+    "chem.kinet.photochemistry"
+   ],
+   "family": "generated:tier3",
+   "initial": "generated (Tier 3) figure: no deterministic semantic audit covers it; admitted by chemistryAdmission; independent review MINOR",
+   "decision": "REVIEW_REQUIRED",
+   "finding": "Independent review of the figure as cached in production: MINOR. Steps 1-3 are right (absorption, excited state, primary photochemical step). 'Secondary reaction involving radicals' is not general, competing photophysical decay (fluorescence, internal conversion, intersystem crossing) is omitted, and steps 5-6 (quantum yield, Beer-Lambert) are analysis methods, not part of the reaction sequence, so the flow mixes mechanism with measurement.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/tier3-independent-review.json",
+     "contains": "\"conceptId\": \"chem.kinet.photochemistry\""
+    }
+   ],
+   "remaining": "The reviewer found nothing that contradicts the chemistry; the points above are looseness or omission. ",
+   "reason": "Independent review: Steps 1-3 are right (absorption, excited state, primary photochemical step). 'Secondary reaction involving radicals' is not general, competing photophysical decay (fluorescence, internal conversion, intersystem crossing) is omitted, and steps 5-6 (quantum yield, Beer-Lambert) are analysis methods, not part of the reaction sequence, so the flow mixes mechanism with measurement.",
+   "ownerDecision": "Owner / Curriculum Production Pipeline: accept the imprecision as is, or have the figure regenerated or retired. A generated figure is never edited in place; nothing was changed by this closure."
+  },
+  "tier3:chem.surface.surfactants": {
+   "fingerprint": "f693afc1",
+   "concepts": [
+    "chem.surface.surfactants"
+   ],
+   "family": "generated:tier3",
+   "initial": "generated (Tier 3) figure: no deterministic semantic audit covers it; admitted by chemistryAdmission; independent review ACCURATE",
+   "decision": "PASS",
+   "finding": "Independent review of the figure as cached in production: ACCURATE. Correct sequence: adsorption at interface lowers surface tension; tension falls until the CMC then plateaus; above CMC micelles form; hydrophobic cores solubilise oily dirt (detergency). No structure of an amphiphile is drawn but no statement is wrong.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/tier3-independent-review.json",
+     "contains": "\"conceptId\": \"chem.surface.surfactants\""
+    }
+   ],
+   "remaining": "The reviewer's only note, if any, is quoted in the finding; the machine gates (chemistry admission, the shared validators) passed and the figure rendered in both viewports and themes. "
+  },
+  "tier3:chem.pblock.group18": {
+   "fingerprint": "f9a8bbabf",
+   "concepts": [
+    "chem.pblock.group18"
+   ],
+   "family": "generated:tier3",
+   "initial": "generated (Tier 3) figure: no deterministic semantic audit covers it; admitted by chemistryAdmission; independent review MINOR",
+   "decision": "REVIEW_REQUIRED",
+   "finding": "Independent review of the figure as cached in production: MINOR. Geometry is correct: XeF2 linear (computed F-Xe-F 180 degrees), XeF4 square planar (computed F-Xe-F 90 and 180 degrees; 4 F in one plane). Weak points: lone pairs on Xe (3 in XeF2, 2 in XeF4), which cause the shapes, are not shown; Xe-F lengths are inconsistent (1.0 vs 1.41); only two xenon fluorides are shown for the whole noble-gas group (no inertness/ionisation-energy trend, no He-Rn data); XeF4 label overlaps the Xe sphere.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/tier3-independent-review.json",
+     "contains": "\"conceptId\": \"chem.pblock.group18\""
+    }
+   ],
+   "remaining": "The reviewer found nothing that contradicts the chemistry; the points above are looseness or omission. ",
+   "sources": [
+    "Own computation from the scene coordinates (vector dot products), run in this review"
+   ],
+   "reason": "Independent review: Geometry is correct: XeF2 linear (computed F-Xe-F 180 degrees), XeF4 square planar (computed F-Xe-F 90 and 180 degrees; 4 F in one plane). Weak points: lone pairs on Xe (3 in XeF2, 2 in XeF4), which cause the shapes, are not shown; Xe-F lengths are inconsistent (1.0 vs 1.41); only two xenon fluorides are shown for the whole noble-gas group (no inertness/ionisation-energy trend, no He-Rn data); XeF4 label overlaps the...",
+   "ownerDecision": "Owner / Curriculum Production Pipeline: accept the imprecision as is, or have the figure regenerated or retired. A generated figure is never edited in place; nothing was changed by this closure."
+  },
+  "tier3:chem.org.iupac": {
+   "fingerprint": "f3c811578",
+   "concepts": [
+    "chem.org.iupac"
+   ],
+   "family": "generated:tier3",
+   "initial": "generated (Tier 3) figure: no deterministic semantic audit covers it; admitted by chemistryAdmission; independent review MINOR",
+   "decision": "REVIEW_REQUIRED",
+   "finding": "Independent review of the figure as cached in production: MINOR. No outright false step, but step 1 'longest continuous carbon chain' is the simplified rule: the parent chain must first contain the principal characteristic group (suffix) and then (older rules) the maximum multiple bonds before length. The order is also illogical: numbering (step 2) is done before functional groups are identified (step 3), alphabetical ordering of prefixes is omitted, and step 6 repeats step 3.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/tier3-independent-review.json",
+     "contains": "\"conceptId\": \"chem.org.iupac\""
+    }
+   ],
+   "remaining": "The reviewer found nothing that contradicts the chemistry; the points above are looseness or omission. ",
+   "sources": [
+    "IUPAC Blue Book 2013, P-44 (seniority of parent hydrides: principal characteristic group first): https://iupac.qmul.ac.uk/BlueBook/P4.html"
+   ],
+   "reason": "Independent review: No outright false step, but step 1 'longest continuous carbon chain' is the simplified rule: the parent chain must first contain the principal characteristic group (suffix) and then (older rules) the maximum multiple bonds before length. The order is also illogical: numbering (step 2) is done before functional groups are identified (step 3), alphabetical ordering of prefixes is omitted, and step 6 repeats step 3.",
+   "ownerDecision": "Owner / Curriculum Production Pipeline: accept the imprecision as is, or have the figure regenerated or retired. A generated figure is never edited in place; nothing was changed by this closure."
+  },
+  "tier3:chem.org.reactive-intermediates": {
+   "fingerprint": "ffe70d376",
+   "concepts": [
+    "chem.org.reactive-intermediates"
+   ],
+   "family": "generated:tier3",
+   "initial": "generated (Tier 3) figure: no deterministic semantic audit covers it; admitted by chemistryAdmission; independent review MINOR",
+   "decision": "REVIEW_REQUIRED",
+   "finding": "Independent review of the figure as cached in production: MINOR. Very generic: no intermediate (carbocation, carbanion, radical, carbene) is named or drawn. The order is chemically unsound: 'possible rearrangement (e.g. hydride shift)' is listed AFTER reaction with a nucleophile/electrophile, but a carbocation rearranges before it is trapped (it competes with trapping); once trapped there is nothing left to rearrange. 'Termination by bond formation or elimination' is vague.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/tier3-independent-review.json",
+     "contains": "\"conceptId\": \"chem.org.reactive-intermediates\""
+    }
+   ],
+   "remaining": "The reviewer found nothing that contradicts the chemistry; the points above are looseness or omission. ",
+   "reason": "Independent review: Very generic: no intermediate (carbocation, carbanion, radical, carbene) is named or drawn. The order is chemically unsound: 'possible rearrangement (e.g. hydride shift)' is listed AFTER reaction with a nucleophile/electrophile, but a carbocation rearranges before it is trapped (it competes with trapping); once trapped there is nothing left to rearrange. 'Termination by bond formation or elimination' is vague.",
+   "ownerDecision": "Owner / Curriculum Production Pipeline: accept the imprecision as is, or have the figure regenerated or retired. A generated figure is never edited in place; nothing was changed by this closure."
+  },
+  "tier3:chem.hal.sn1": {
+   "fingerprint": "f9188302",
+   "concepts": [
+    "chem.hal.sn1"
+   ],
+   "family": "generated:tier3",
+   "initial": "generated (Tier 3) figure: no deterministic semantic audit covers it; admitted by chemistryAdmission; independent review MINOR",
+   "decision": "REVIEW_REQUIRED",
+   "finding": "Independent review of the figure as cached in production: MINOR. Overall sequence (ionisation to carbocation, nucleophile attack, deprotonation) is the standard SN1 solvolysis mechanism, but step 2 'Carbocation racemization' is a misnomer: the planar sp2 carbocation is achiral; racemic product arises because the nucleophile attacks either face, not because the carbocation racemises. 'Deprotonation' applies only to neutral nucleophiles (H2O, ROH), not to anionic ones (Br-, CN-). Rate-determining first step and unimolecular kinetics are not stated.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/tier3-independent-review.json",
+     "contains": "\"conceptId\": \"chem.hal.sn1\""
+    }
+   ],
+   "remaining": "The reviewer found nothing that contradicts the chemistry; the points above are looseness or omission. ",
+   "reason": "Independent review: Overall sequence (ionisation to carbocation, nucleophile attack, deprotonation) is the standard SN1 solvolysis mechanism, but step 2 'Carbocation racemization' is a misnomer: the planar sp2 carbocation is achiral; racemic product arises because the nucleophile attacks either face, not because the carbocation racemises. 'Deprotonation' applies only to neutral nucleophiles (H2O, ROH), not to anionic ones (Br-, CN-). Ra...",
+   "ownerDecision": "Owner / Curriculum Production Pipeline: accept the imprecision as is, or have the figure regenerated or retired. A generated figure is never edited in place; nothing was changed by this closure."
+  },
+  "tier3:chem.hal.sn2": {
+   "fingerprint": "f1cdcc73c",
+   "concepts": [
+    "chem.hal.sn2"
+   ],
+   "family": "generated:tier3",
+   "initial": "generated (Tier 3) figure: no deterministic semantic audit covers it; admitted by chemistryAdmission; independent review ACCURATE",
+   "decision": "PASS",
+   "finding": "Independent review of the figure as cached in production: ACCURATE. Correct: backside attack, five-coordinate (pentacoordinate) transition state, simultaneous departure of leaving group, Walden inversion. Nit: carbon in the TS is pentacoordinate, not 'pentavalent'; steps 4-5 are redundant; concerted single-step nature is implied rather than stated.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/tier3-independent-review.json",
+     "contains": "\"conceptId\": \"chem.hal.sn2\""
+    }
+   ],
+   "remaining": "The reviewer's only note, if any, is quoted in the finding; the machine gates (chemistry admission, the shared validators) passed and the figure rendered in both viewports and themes. "
+  },
+  "tier3:chem.hal.grignard": {
+   "fingerprint": "f1d04b1f0",
+   "concepts": [
+    "chem.hal.grignard"
+   ],
+   "family": "generated:tier3",
+   "initial": "generated (Tier 3) figure: no deterministic semantic audit covers it; admitted by chemistryAdmission; independent review ACCURATE",
+   "decision": "PASS",
+   "finding": "Independent review of the figure as cached in production: ACCURATE. Correct: RMgX/RLi from R-X + Mg/Li in dry ether, reaction with electrophile, protic quench/workup, moisture sensitivity (water or alcohol destroy the reagent to give R-H). Nit: the quench is normally aqueous acid or NH4Cl to protonate the alkoxide; no example electrophile (carbonyl, CO2) is named.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/tier3-independent-review.json",
+     "contains": "\"conceptId\": \"chem.hal.grignard\""
+    }
+   ],
+   "remaining": "The reviewer's only note, if any, is quoted in the finding; the machine gates (chemistry admission, the shared validators) passed and the figure rendered in both viewports and themes. "
+  },
+  "tier3:chem.hal.cfcs": {
+   "fingerprint": "f8c46c3f4",
+   "concepts": [
+    "chem.hal.cfcs"
+   ],
+   "family": "generated:tier3",
+   "initial": "generated (Tier 3) figure: no deterministic semantic audit covers it; admitted by chemistryAdmission; independent review ACCURATE",
+   "decision": "PASS",
+   "finding": "Independent review of the figure as cached in production: ACCURATE. Correct chain: CFC emission -> transport to stratosphere -> UV photolysis releases Cl atoms -> catalytic ozone destruction (Cl + O3 -> ClO + O2; ClO + O -> Cl + O2) -> ozone depletion.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/tier3-independent-review.json",
+     "contains": "\"conceptId\": \"chem.hal.cfcs\""
+    }
+   ],
+   "remaining": "The reviewer's only note, if any, is quoted in the finding; the machine gates (chemistry admission, the shared validators) passed and the figure rendered in both viewports and themes. "
+  },
+  "tier3:chem.alc.phenols": {
+   "fingerprint": "fe3877b8d",
+   "concepts": [
+    "chem.alc.phenols"
+   ],
+   "family": "generated:tier3",
+   "initial": "generated (Tier 3) figure: no deterministic semantic audit covers it; admitted by chemistryAdmission; independent review ACCURATE",
+   "decision": "PASS",
+   "finding": "Independent review of the figure as cached in production: ACCURATE. Cumene process is correctly described: benzene + propene -> cumene (acid-catalysed alkylation); oxidation (O2) to cumene hydroperoxide; acid-catalysed cleavage to phenol + acetone. Covers only the industrial preparation, not phenol acidity or reactions.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/tier3-independent-review.json",
+     "contains": "\"conceptId\": \"chem.alc.phenols\""
+    }
+   ],
+   "remaining": "The reviewer's only note, if any, is quoted in the finding; the machine gates (chemistry admission, the shared validators) passed and the figure rendered in both viewports and themes. "
+  },
+  "tier3:chem.alc.ethers": {
+   "fingerprint": "fc81a075f",
+   "concepts": [
+    "chem.alc.ethers"
+   ],
+   "family": "generated:tier3",
+   "initial": "generated (Tier 3) figure: no deterministic semantic audit covers it; admitted by chemistryAdmission; independent review MINOR",
+   "decision": "REVIEW_REQUIRED",
+   "finding": "Independent review of the figure as cached in production: MINOR. Williamson synthesis (R-X + RO-), HX cleavage (with excess HX the alcohol is converted further to R-X) and epoxide opening are valid, but 'epoxide + base -> diol' omits the water/hydroxide nucleophile (base alone does not give a diol; aqueous NaOH or acid/water does), and 'Diethyl ether as common solvent' is a use, not a reaction, under the title 'Key Reactions Involving Ethers'. Peroxide formation, the ether's lack of reactivity and the acid-cleavage mechanism are absent.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/tier3-independent-review.json",
+     "contains": "\"conceptId\": \"chem.alc.ethers\""
+    }
+   ],
+   "remaining": "The reviewer found nothing that contradicts the chemistry; the points above are looseness or omission. ",
+   "reason": "Independent review: Williamson synthesis (R-X + RO-), HX cleavage (with excess HX the alcohol is converted further to R-X) and epoxide opening are valid, but 'epoxide + base -> diol' omits the water/hydroxide nucleophile (base alone does not give a diol; aqueous NaOH or acid/water does), and 'Diethyl ether as common solvent' is a use, not a reaction, under the title 'Key Reactions Involving Ethers'. Peroxide formation, the ether's lack ...",
+   "ownerDecision": "Owner / Curriculum Production Pipeline: accept the imprecision as is, or have the figure regenerated or retired. A generated figure is never edited in place; nothing was changed by this closure."
+  },
+  "tier3:chem.alc.protection": {
+   "fingerprint": "f6a721321",
+   "concepts": [
+    "chem.alc.protection"
+   ],
+   "family": "generated:tier3",
+   "initial": "generated (Tier 3) figure: no deterministic semantic audit covers it; admitted by chemistryAdmission; independent review MINOR",
+   "decision": "REVIEW_REQUIRED",
+   "finding": "Independent review of the figure as cached in production: MINOR. The sequence is chemically plausible, but it does not demonstrate orthogonality: TBS is removed (step 4) BEFORE MOM is installed (step 5), so neither group is ever removed in the presence of the other. 'Orthogonal (TBS, MOM)' is also only one-way: fluoride removes TBS and leaves MOM, but the acid needed to cleave MOM also attacks TBS ethers. Selective TBS protection of an alcohol in the presence of a free phenol is not automatic (phenols silylate readily with TBSCl/imidazole). UNSURE on how strictly to grade; no hard false statement.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/tier3-independent-review.json",
+     "contains": "\"conceptId\": \"chem.alc.protection\""
+    }
+   ],
+   "remaining": "The reviewer found nothing that contradicts the chemistry; the points above are looseness or omission. ",
+   "sources": [
+    "Organic Chemistry Portal, TBDMS ethers (cleaved by fluoride and by acid): https://www.organic-chemistry.org/protectivegroups/hydroxyl/tbdms-ethers.htm"
+   ],
+   "reason": "Independent review: The sequence is chemically plausible, but it does not demonstrate orthogonality: TBS is removed (step 4) BEFORE MOM is installed (step 5), so neither group is ever removed in the presence of the other. 'Orthogonal (TBS, MOM)' is also only one-way: fluoride removes TBS and leaves MOM, but the acid needed to cleave MOM also attacks TBS ethers. Selective TBS protection of an alcohol in the presence of a free phenol is n...",
+   "ownerDecision": "Owner / Curriculum Production Pipeline: accept the imprecision as is, or have the figure regenerated or retired. A generated figure is never edited in place; nothing was changed by this closure."
+  },
+  "tier3:chem.nitro.heterocycles": {
+   "fingerprint": "f56a91724",
+   "concepts": [
+    "chem.nitro.heterocycles"
+   ],
+   "family": "generated:tier3",
+   "initial": "generated (Tier 3) figure: no deterministic semantic audit covers it; admitted by chemistryAdmission; independent review MINOR",
+   "decision": "REVIEW_REQUIRED",
+   "finding": "Independent review of the figure as cached in production: MINOR. Pyridine skeleton is correct: six bonds forming a regular hexagon (computed 120 deg angles), five C and one N, and the N is correctly flagged basic (pyridine pKaH ~5.2, lone pair in plane in an sp2 orbital). But only pyridine is shown for 'Nitrogen Heterocycles' (no pyrrole, whose N lone pair is part of the aromatic sextet and is NOT basic, no indole/purine), no double bonds/aromaticity or lone pair are drawn, and 'Basic nitrogen' sits beside rather than on the N.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/tier3-independent-review.json",
+     "contains": "\"conceptId\": \"chem.nitro.heterocycles\""
+    }
+   ],
+   "remaining": "The reviewer found nothing that contradicts the chemistry; the points above are looseness or omission. ",
+   "sources": [
+    "Own computation from the scene coordinates (vector dot products), run in this review"
+   ],
+   "reason": "Independent review: Pyridine skeleton is correct: six bonds forming a regular hexagon (computed 120 deg angles), five C and one N, and the N is correctly flagged basic (pyridine pKaH ~5.2, lone pair in plane in an sp2 orbital). But only pyridine is shown for 'Nitrogen Heterocycles' (no pyrrole, whose N lone pair is part of the aromatic sextet and is NOT basic, no indole/purine), no double bonds/aromaticity or lone pair are drawn, and 'B...",
+   "ownerDecision": "Owner / Curriculum Production Pipeline: accept the imprecision as is, or have the figure regenerated or retired. A generated figure is never edited in place; nothing was changed by this closure."
+  },
+  "tier3:chem.nitro.amino-acids": {
+   "fingerprint": "fc50d6f66",
+   "concepts": [
+    "chem.nitro.amino-acids"
+   ],
+   "family": "generated:tier3",
+   "initial": "generated (Tier 3) figure: no deterministic semantic audit covers it; admitted by chemistryAdmission; independent review MINOR",
+   "decision": "REVIEW_REQUIRED",
+   "finding": "Independent review of the figure as cached in production: MINOR. Amino-acid components are named correctly (alpha carbon, NH3+, COO-, side chain R, peptide bond between the carboxyl of one residue and the amino N of the next). Depiction problems: the alpha carbon shows only three substituents (no H), with NH3+ and COO- collinear at 180 degrees and R at 90 degrees rather than tetrahedral ~109.5; no bond sticks are drawn between the alpha carbon and its groups; colours invert CPK convention (amino/N red, carboxyl blue); the cumulative figure still labels the carboxyl as COO- while also drawing a peptide bond from it (after peptide formation it is an amide C=O, not a carboxylate); R-group classification promised in the teachingGoal is not shown.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/tier3-independent-review.json",
+     "contains": "\"conceptId\": \"chem.nitro.amino-acids\""
+    }
+   ],
+   "remaining": "The reviewer found nothing that contradicts the chemistry; the points above are looseness or omission. ",
+   "sources": [
+    "Own computation from the scene coordinates (vector dot products), run in this review"
+   ],
+   "reason": "Independent review: Amino-acid components are named correctly (alpha carbon, NH3+, COO-, side chain R, peptide bond between the carboxyl of one residue and the amino N of the next). Depiction problems: the alpha carbon shows only three substituents (no H), with NH3+ and COO- collinear at 180 degrees and R at 90 degrees rather than tetrahedral ~109.5; no bond sticks are drawn between the alpha carbon and its groups; colours invert CPK co...",
+   "ownerDecision": "Owner / Curriculum Production Pipeline: accept the imprecision as is, or have the figure regenerated or retired. A generated figure is never edited in place; nothing was changed by this closure."
+  },
+  "tier3:chem.bio.lipids": {
+   "fingerprint": "ff32f7fbc",
+   "concepts": [
+    "chem.bio.lipids"
+   ],
+   "family": "generated:tier3",
+   "initial": "generated (Tier 3) figure: no deterministic semantic audit covers it; admitted by chemistryAdmission; independent review MINOR",
+   "decision": "REVIEW_REQUIRED",
+   "finding": "Independent review of the figure as cached in production: MINOR. Three-chain glycerol triglyceride with ester linkages and saturated/unsaturated chains is conceptually right, and vitamin D is a fat-soluble vitamin (correct). But it is crude: the glycerol is a single node, chains are straight vectors (arrows) at 90/180 degrees with no cis-double-bond kink, 'ester bonds' are bare sticks, the fat-soluble vitamin is an unrelated yellow sphere, and phospholipids/steroids/waxes (rest of 'Lipids') are absent.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/tier3-independent-review.json",
+     "contains": "\"conceptId\": \"chem.bio.lipids\""
+    }
+   ],
+   "remaining": "The reviewer found nothing that contradicts the chemistry; the points above are looseness or omission. ",
+   "reason": "Independent review: Three-chain glycerol triglyceride with ester linkages and saturated/unsaturated chains is conceptually right, and vitamin D is a fat-soluble vitamin (correct). But it is crude: the glycerol is a single node, chains are straight vectors (arrows) at 90/180 degrees with no cis-double-bond kink, 'ester bonds' are bare sticks, the fat-soluble vitamin is an unrelated yellow sphere, and phospholipids/steroids/waxes (rest of...",
+   "ownerDecision": "Owner / Curriculum Production Pipeline: accept the imprecision as is, or have the figure regenerated or retired. A generated figure is never edited in place; nothing was changed by this closure."
+  },
+  "tier3:chem.bio.vitamins": {
+   "fingerprint": "fa3388f0d",
+   "concepts": [
+    "chem.bio.vitamins"
+   ],
+   "family": "generated:tier3",
+   "initial": "generated (Tier 3) figure: no deterministic semantic audit covers it; admitted by chemistryAdmission; independent review MINOR",
+   "decision": "REVIEW_REQUIRED",
+   "finding": "Independent review of the figure as cached in production: MINOR. Factual pairs are correct (B -> beriberi, C -> scurvy, D -> rickets, A -> night blindness; water-soluble B and C; fat-soluble A, D, E, K; cortisol and oestrogen are steroid hormones). Weak points: beriberi is specifically thiamine (B1) deficiency, not 'B vitamin' in general; 'three main groups of vitamins and hormones' treats steroid hormones as the hormone group and omits peptide/protein and amine hormones (insulin, adrenaline, thyroxine); it is a labelled list with no chemical structure or function.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/tier3-independent-review.json",
+     "contains": "\"conceptId\": \"chem.bio.vitamins\""
+    }
+   ],
+   "remaining": "The reviewer found nothing that contradicts the chemistry; the points above are looseness or omission. ",
+   "reason": "Independent review: Factual pairs are correct (B -> beriberi, C -> scurvy, D -> rickets, A -> night blindness; water-soluble B and C; fat-soluble A, D, E, K; cortisol and oestrogen are steroid hormones). Weak points: beriberi is specifically thiamine (B1) deficiency, not 'B vitamin' in general; 'three main groups of vitamins and hormones' treats steroid hormones as the hormone group and omits peptide/protein and amine hormones (insulin,...",
+   "ownerDecision": "Owner / Curriculum Production Pipeline: accept the imprecision as is, or have the figure regenerated or retired. A generated figure is never edited in place; nothing was changed by this closure."
+  },
+  "tier3:chem.poly.addition": {
+   "fingerprint": "f28c38713",
+   "concepts": [
+    "chem.poly.addition"
+   ],
+   "family": "generated:tier3",
+   "initial": "generated (Tier 3) figure: no deterministic semantic audit covers it; admitted by chemistryAdmission; independent review MINOR",
+   "decision": "REVIEW_REQUIRED",
+   "finding": "Independent review of the figure as cached in production: MINOR. Initiation (radical/cationic/anionic), propagation and the listed products (PE, PVC, PS, PTFE, natural rubber as an isoprene addition polymer) are acceptable. 'Termination: Chain capping' is not standard terminology (radical termination is by combination or disproportionation; chain transfer is omitted; living anionic polymerisation has no termination), and no monomer-to-polymer chemistry (C=C opening) is shown.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/tier3-independent-review.json",
+     "contains": "\"conceptId\": \"chem.poly.addition\""
+    }
+   ],
+   "remaining": "The reviewer found nothing that contradicts the chemistry; the points above are looseness or omission. ",
+   "reason": "Independent review: Initiation (radical/cationic/anionic), propagation and the listed products (PE, PVC, PS, PTFE, natural rubber as an isoprene addition polymer) are acceptable. 'Termination: Chain capping' is not standard terminology (radical termination is by combination or disproportionation; chain transfer is omitted; living anionic polymerisation has no termination), and no monomer-to-polymer chemistry (C=C opening) is shown.",
+   "ownerDecision": "Owner / Curriculum Production Pipeline: accept the imprecision as is, or have the figure regenerated or retired. A generated figure is never edited in place; nothing was changed by this closure."
+  },
+  "tier3:chem.poly.condensation": {
+   "fingerprint": "f4ef82065",
+   "concepts": [
+    "chem.poly.condensation"
+   ],
+   "family": "generated:tier3",
+   "initial": "generated (Tier 3) figure: no deterministic semantic audit covers it; admitted by chemistryAdmission; independent review ACCURATE",
+   "decision": "PASS",
+   "finding": "Independent review of the figure as cached in production: ACCURATE. Correct: complementary monomers, step-growth with loss of a small molecule (water for diacid + diol polyesters), and cross-linking giving thermosetting phenol-formaldehyde resin (Bakelite). Cross-linking applies only when monomers have functionality > 2, which is implied by the Bakelite example.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/tier3-independent-review.json",
+     "contains": "\"conceptId\": \"chem.poly.condensation\""
+    }
+   ],
+   "remaining": "The reviewer's only note, if any, is quoted in the finding; the machine gates (chemistry admission, the shared validators) passed and the figure rendered in both viewports and themes. "
+  },
+  "tier3:chem.poly.natural": {
+   "fingerprint": "f847fbc9a",
+   "concepts": [
+    "chem.poly.natural"
+   ],
+   "family": "generated:tier3",
+   "initial": "generated (Tier 3) figure: no deterministic semantic audit covers it; admitted by chemistryAdmission; independent review MINOR",
+   "decision": "REVIEW_REQUIRED",
+   "finding": "Independent review of the figure as cached in production: MINOR. Vulcanisation facts are right (natural rubber = cis-1,4-polyisoprene; sulfur with accelerator, heat roughly 100-160 degC; sulfur cross-links between chains; improved elasticity/strength). But the figure covers only one process on one natural polymer; polysaccharides (starch, cellulose), proteins and nucleic acids (the bulk of 'Natural Polymers') are absent, latex coagulation is skipped, and 'cool and test' is not chemistry.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/tier3-independent-review.json",
+     "contains": "\"conceptId\": \"chem.poly.natural\""
+    }
+   ],
+   "remaining": "The reviewer found nothing that contradicts the chemistry; the points above are looseness or omission. ",
+   "reason": "Independent review: Vulcanisation facts are right (natural rubber = cis-1,4-polyisoprene; sulfur with accelerator, heat roughly 100-160 degC; sulfur cross-links between chains; improved elasticity/strength). But the figure covers only one process on one natural polymer; polysaccharides (starch, cellulose), proteins and nucleic acids (the bulk of 'Natural Polymers') are absent, latex coagulation is skipped, and 'cool and test' is not che...",
+   "ownerDecision": "Owner / Curriculum Production Pipeline: accept the imprecision as is, or have the figure regenerated or retired. A generated figure is never edited in place; nothing was changed by this closure."
+  },
+  "tier3:chem.env.atmosphere": {
+   "fingerprint": "f373f737f",
+   "concepts": [
+    "chem.env.atmosphere"
+   ],
+   "family": "generated:tier3",
+   "initial": "generated (Tier 3) figure: no deterministic semantic audit covers it; admitted by chemistryAdmission; independent review MINOR",
+   "decision": "REVIEW_REQUIRED",
+   "finding": "Independent review of the figure as cached in production: MINOR. Layer order and 'ozone layer in the stratosphere' are correct, but the title promises composition and none is given (N2 78 %, O2 21 %, Ar 0.93 %, CO2 ~0.04 %). The layers are overlapping equal-size spheres (r = 1.5) larger than the Earth sphere (r = 1) and centred at y=1 and y=3, so the troposphere (~12 km, <0.2 % of Earth's radius) is drawn bigger than the Earth and as thick as the stratosphere. The upward arrow labelled 'Greenhouse Gases' wrongly suggests the gases move upward; the greenhouse effect is absorption/re-emission of outgoing IR.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/tier3-independent-review.json",
+     "contains": "\"conceptId\": \"chem.env.atmosphere\""
+    }
+   ],
+   "remaining": "The reviewer found nothing that contradicts the chemistry; the points above are looseness or omission. ",
+   "reason": "Independent review: Layer order and 'ozone layer in the stratosphere' are correct, but the title promises composition and none is given (N2 78 %, O2 21 %, Ar 0.93 %, CO2 ~0.04 %). The layers are overlapping equal-size spheres (r = 1.5) larger than the Earth sphere (r = 1) and centred at y=1 and y=3, so the troposphere (~12 km, <0.2 % of Earth's radius) is drawn bigger than the Earth and as thick as the stratosphere. The upward arrow lab...",
+   "ownerDecision": "Owner / Curriculum Production Pipeline: accept the imprecision as is, or have the figure regenerated or retired. A generated figure is never edited in place; nothing was changed by this closure."
+  },
+  "tier3:chem.env.air-pollution": {
+   "fingerprint": "fecd44252",
+   "concepts": [
+    "chem.env.air-pollution"
+   ],
+   "family": "generated:tier3",
+   "initial": "generated (Tier 3) figure: no deterministic semantic audit covers it; admitted by chemistryAdmission; independent review MINOR",
+   "decision": "REVIEW_REQUIRED",
+   "finding": "Independent review of the figure as cached in production: MINOR. Generic and correct in outline, but no pollutant is named (SO2, NOx, CO, VOCs, PM, ground-level O3), and 'photochemical transformation' and 'acid rain formation' are not explained; acid rain is formed by atmospheric oxidation before wet/dry deposition, so listing it as part of 'deposition' blurs the order.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/tier3-independent-review.json",
+     "contains": "\"conceptId\": \"chem.env.air-pollution\""
+    }
+   ],
+   "remaining": "The reviewer found nothing that contradicts the chemistry; the points above are looseness or omission. ",
+   "reason": "Independent review: Generic and correct in outline, but no pollutant is named (SO2, NOx, CO, VOCs, PM, ground-level O3), and 'photochemical transformation' and 'acid rain formation' are not explained; acid rain is formed by atmospheric oxidation before wet/dry deposition, so listing it as part of 'deposition' blurs the order.",
+   "ownerDecision": "Owner / Curriculum Production Pipeline: accept the imprecision as is, or have the figure regenerated or retired. A generated figure is never edited in place; nothing was changed by this closure."
+  },
+  "tier3:chem.env.water-soil": {
+   "fingerprint": "ff42a7353",
+   "concepts": [
+    "chem.env.water-soil"
+   ],
+   "family": "generated:tier3",
+   "initial": "generated (Tier 3) figure: no deterministic semantic audit covers it; admitted by chemistryAdmission; independent review MINOR",
+   "decision": "REVIEW_REQUIRED",
+   "finding": "Independent review of the figure as cached in production: MINOR. Individual statements are correct (nutrients -> eutrophication/algal bloom -> decomposition raises BOD/COD -> oxygen depletion; 12 Principles of Green Chemistry). But the 8-step linear chain mixes separate, unrelated pathways (nutrients, heavy metals, soil acidity) as if each caused the next, and the final mitigation step is a prevention philosophy rather than a step in the pollution pathway.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/tier3-independent-review.json",
+     "contains": "\"conceptId\": \"chem.env.water-soil\""
+    }
+   ],
+   "remaining": "The reviewer found nothing that contradicts the chemistry; the points above are looseness or omission. ",
+   "reason": "Independent review: Individual statements are correct (nutrients -> eutrophication/algal bloom -> decomposition raises BOD/COD -> oxygen depletion; 12 Principles of Green Chemistry). But the 8-step linear chain mixes separate, unrelated pathways (nutrients, heavy metals, soil acidity) as if each caused the next, and the final mitigation step is a prevention philosophy rather than a step in the pollution pathway.",
+   "ownerDecision": "Owner / Curriculum Production Pipeline: accept the imprecision as is, or have the figure regenerated or retired. A generated figure is never edited in place; nothing was changed by this closure."
+  },
+  "tier3:chem.anal.gravimetric": {
+   "fingerprint": "fe133683a",
+   "concepts": [
+    "chem.anal.gravimetric"
+   ],
+   "family": "generated:tier3",
+   "initial": "generated (Tier 3) figure: no deterministic semantic audit covers it; admitted by chemistryAdmission; independent review ACCURATE",
+   "decision": "PASS",
+   "finding": "Independent review of the figure as cached in production: ACCURATE. Standard, correct sequence: dissolve, precipitate, filter, wash, dry/ignite to constant mass, weigh, convert with the gravimetric factor, assess errors. Minor omission: digestion/ageing of the precipitate and co-precipitation are not mentioned.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/tier3-independent-review.json",
+     "contains": "\"conceptId\": \"chem.anal.gravimetric\""
+    }
+   ],
+   "remaining": "The reviewer's only note, if any, is quoted in the finding; the machine gates (chemistry admission, the shared validators) passed and the figure rendered in both viewports and themes. "
+  },
+  "tier3:chem.anal.volumetric": {
+   "fingerprint": "f6f8a7d9d",
+   "concepts": [
+    "chem.anal.volumetric"
+   ],
+   "family": "generated:tier3",
+   "initial": "generated (Tier 3) figure: no deterministic semantic audit covers it; admitted by chemistryAdmission; independent review MINOR",
+   "decision": "REVIEW_REQUIRED",
+   "finding": "Independent review of the figure as cached in production: MINOR. Steps are individually valid, but the flow presents alternative techniques (back-titration 'if necessary', EDTA complexometric titration) as consecutive steps of one procedure, which is misleading; an indicator marks the end point, which approximates (is not identical to) the equivalence point.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/tier3-independent-review.json",
+     "contains": "\"conceptId\": \"chem.anal.volumetric\""
+    }
+   ],
+   "remaining": "The reviewer found nothing that contradicts the chemistry; the points above are looseness or omission. ",
+   "reason": "Independent review: Steps are individually valid, but the flow presents alternative techniques (back-titration 'if necessary', EDTA complexometric titration) as consecutive steps of one procedure, which is misleading; an indicator marks the end point, which approximates (is not identical to) the equivalence point.",
+   "ownerDecision": "Owner / Curriculum Production Pipeline: accept the imprecision as is, or have the figure regenerated or retired. A generated figure is never edited in place; nothing was changed by this closure."
+  },
+  "tier3:chem.anal.chromatography": {
+   "fingerprint": "fd6f0f538",
+   "concepts": [
+    "chem.anal.chromatography"
+   ],
+   "family": "generated:tier3",
+   "initial": "generated (Tier 3) figure: no deterministic semantic audit covers it; admitted by chemistryAdmission; independent review MINOR",
+   "decision": "REVIEW_REQUIRED",
+   "finding": "Independent review of the figure as cached in production: MINOR. No false statement, but it is a generic lab workflow; the defining principle (differential distribution of components between stationary and mobile phases, giving different migration rates / Rf or retention time) is never stated, and 'collect purified fractions' applies only to preparative chromatography.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/tier3-independent-review.json",
+     "contains": "\"conceptId\": \"chem.anal.chromatography\""
+    }
+   ],
+   "remaining": "The reviewer found nothing that contradicts the chemistry; the points above are looseness or omission. ",
+   "reason": "Independent review: No false statement, but it is a generic lab workflow; the defining principle (differential distribution of components between stationary and mobile phases, giving different migration rates / Rf or retention time) is never stated, and 'collect purified fractions' applies only to preparative chromatography.",
+   "ownerDecision": "Owner / Curriculum Production Pipeline: accept the imprecision as is, or have the figure regenerated or retired. A generated figure is never edited in place; nothing was changed by this closure."
+  },
+  "tier3:chem.anal.spectroscopy": {
+   "fingerprint": "f26432b69",
+   "concepts": [
+    "chem.anal.spectroscopy"
+   ],
+   "family": "generated:tier3",
+   "initial": "generated (Tier 3) figure: no deterministic semantic audit covers it; admitted by chemistryAdmission; independent review MINOR",
+   "decision": "REVIEW_REQUIRED",
+   "finding": "Independent review of the figure as cached in production: MINOR. Completely generic five-step analytical workflow; it contains no spectroscopy (no light-matter interaction, absorption/emission, UV-Vis/IR/NMR/MS distinction) and would fit any instrumental method.",
+   "fix": null,
+   "evidence": [
+    {
+     "file": "docs/qa/chemistry-visual-audit/tier3-independent-review.json",
+     "contains": "\"conceptId\": \"chem.anal.spectroscopy\""
+    }
+   ],
+   "remaining": "The reviewer found nothing that contradicts the chemistry; the points above are looseness or omission. ",
+   "reason": "Independent review: Completely generic five-step analytical workflow; it contains no spectroscopy (no light-matter interaction, absorption/emission, UV-Vis/IR/NMR/MS distinction) and would fit any instrumental method.",
+   "ownerDecision": "Owner / Curriculum Production Pipeline: accept the imprecision as is, or have the figure regenerated or retired. A generated figure is never edited in place; nothing was changed by this closure."
+  }
+ }
+}
