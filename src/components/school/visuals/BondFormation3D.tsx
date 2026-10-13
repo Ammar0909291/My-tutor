@@ -23,20 +23,17 @@ const NEAR_A: [number, number, number] = [-0.75, 0, 0]
 const NEAR_B: [number, number, number] = [0.75, 0, 0]
 const CAMERA_DISTANCE = 6
 
+/** ONE valence electron on each atom: a single covalent bond is a shared PAIR, and each atom contributes one electron to it (R19 — the card drew two per atom, then a pair, so two electrons vanished). */
+/** Electrons per atom before bonding, and electrons in the shared pair after: the card must conserve them (1 + 1 = 2). */
+export const ELECTRONS_PER_ATOM_BEFORE = 1
+export const SHARED_PAIR_ELECTRONS = 2
+
 function ValenceElectrons({ center, side }: { center: [number, number, number]; side: 1 | -1 }) {
-  const offsets: [number, number, number][] = [
-    [side * 0.35, 0.2, 0],
-    [side * 0.35, -0.2, 0],
-  ]
   return (
-    <group>
-      {offsets.map((o, i) => (
-        <mesh key={i} position={[center[0] + o[0], center[1] + o[1], center[2] + o[2]]}>
-          <sphereGeometry args={[0.06, 10, 10]} />
-          <meshStandardMaterial color="#4DD0E1" emissive="#4DD0E1" emissiveIntensity={0.5} />
-        </mesh>
-      ))}
-    </group>
+    <mesh position={[center[0] + side * 0.4, center[1], center[2]]}>
+      <sphereGeometry args={[0.07, 10, 10]} />
+      <meshStandardMaterial color="#4DD0E1" emissive="#4DD0E1" emissiveIntensity={0.5} />
+    </mesh>
   )
 }
 
@@ -88,10 +85,13 @@ function Scene({ revealStep, theme }: { revealStep: number; theme: Theme }) {
       {bonded && (
         <>
           <Bond3D atomA={posA} atomB={posB} bondOrder={1} color="#81C784" />
-          <mesh position={[0, 0, 0]}>
-            <sphereGeometry args={[0.07, 10, 10]} />
-            <meshStandardMaterial color="#81C784" emissive="#81C784" emissiveIntensity={0.6} />
-          </mesh>
+          {/* the shared PAIR: the two electrons, one from each atom, now between the nuclei */}
+          {[0.11, -0.11].map((dy) => (
+            <mesh key={dy} position={[0, dy, 0]}>
+              <sphereGeometry args={[0.06, 10, 10]} />
+              <meshStandardMaterial color="#81C784" emissive="#81C784" emissiveIntensity={0.6} />
+            </mesh>
+          ))}
         </>
       )}
 

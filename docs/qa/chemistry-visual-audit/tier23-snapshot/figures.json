@@ -1,0 +1,8302 @@
+[
+ {
+  "conceptId": "chem.alc.alcohols",
+  "renderCount": 29,
+  "cachedOn": "2026-08-17",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Hydration of alkenes or reduction of carbonyls"
+    },
+    {
+     "title": "Hydrogen bonding in aqueous solution"
+    },
+    {
+     "title": "Reaction with sodium metal releasing hydrogen"
+    },
+    {
+     "title": "Oxidation to aldehydes, ketones, or acids"
+    },
+    {
+     "title": "Acid-catalyzed dehydration to alkenes"
+    }
+   ],
+   "title": "Preparation and Reactions of Alcohols"
+  }
+ },
+ {
+  "conceptId": "chem.alc.epoxides",
+  "renderCount": 31,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Epoxidation of Alkene"
+    },
+    {
+     "title": "Acid-Catalyzed Ring Opening"
+    },
+    {
+     "title": "Base-Catalyzed Ring Opening"
+    },
+    {
+     "title": "Regioselectivity Considerations"
+    },
+    {
+     "title": "Synthetic Applications"
+    }
+   ],
+   "title": "Epoxide Formation and Ring Opening"
+  }
+ },
+ {
+  "conceptId": "chem.alc.ethers",
+  "renderCount": 52,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Williamson synthesis: alkyl halide + alkoxide → ether"
+    },
+    {
+     "title": "Cleavage with HX: ether + HX → alkyl halide + alcohol"
+    },
+    {
+     "title": "Epoxide ring opening: epoxide + base → diol"
+    },
+    {
+     "title": "Diethyl ether as common solvent"
+    }
+   ],
+   "title": "Key Reactions Involving Ethers"
+  }
+ },
+ {
+  "conceptId": "chem.alc.phenols",
+  "renderCount": 94,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Alkylation of benzene with propene to form cumene"
+    },
+    {
+     "title": "Oxidation of cumene to cumene hydroperoxide"
+    },
+    {
+     "title": "Acid-catalyzed cleavage to phenol and acetone"
+    }
+   ],
+   "title": "Industrial Preparation of Phenol via the Cumene Process"
+  }
+ },
+ {
+  "conceptId": "chem.alc.protection",
+  "renderCount": 53,
+  "cachedOn": "2026-08-21",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Select orthogonal protecting groups (TBS, MOM)"
+    },
+    {
+     "title": "Protect alcohol with TBS"
+    },
+    {
+     "title": "Perform selective reaction on phenol"
+    },
+    {
+     "title": "Deprotect TBS to free alcohol"
+    },
+    {
+     "title": "Protect phenol with MOM"
+    },
+    {
+     "title": "Perform reaction on alcohol"
+    },
+    {
+     "title": "Deprotect MOM to free phenol"
+    }
+   ],
+   "title": "Protecting Group Strategy"
+  }
+ },
+ {
+  "conceptId": "chem.anal.chromatography",
+  "renderCount": 28,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Prepare stationary phase"
+    },
+    {
+     "title": "Apply sample"
+    },
+    {
+     "title": "Introduce mobile phase"
+    },
+    {
+     "title": "Develop separation"
+    },
+    {
+     "title": "Detect separated components"
+    },
+    {
+     "title": "Collect purified fractions"
+    }
+   ],
+   "title": "Chromatography Process"
+  }
+ },
+ {
+  "conceptId": "chem.anal.gravimetric",
+  "renderCount": 36,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Dissolve sample in solvent"
+    },
+    {
+     "title": "Add reagent to precipitate analyte"
+    },
+    {
+     "title": "Filter precipitate"
+    },
+    {
+     "title": "Wash precipitate"
+    },
+    {
+     "title": "Dry/ignite to constant mass"
+    },
+    {
+     "title": "Weigh precipitate"
+    },
+    {
+     "title": "Calculate analyte mass using gravimetric factor"
+    },
+    {
+     "title": "Evaluate errors"
+    }
+   ],
+   "title": "Gravimetric Analysis Procedure"
+  }
+ },
+ {
+  "conceptId": "chem.anal.spectroscopy",
+  "renderCount": 53,
+  "cachedOn": "2026-08-21",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Prepare sample for analysis"
+    },
+    {
+     "title": "Select appropriate spectroscopic technique"
+    },
+    {
+     "title": "Acquire spectrum using chosen instrument"
+    },
+    {
+     "title": "Process raw data to extract quantitative information"
+    },
+    {
+     "title": "Interpret results to identify or quantify analytes"
+    }
+   ],
+   "title": "Spectroscopic Methods"
+  }
+ },
+ {
+  "conceptId": "chem.anal.volumetric",
+  "renderCount": 50,
+  "cachedOn": "2026-08-21",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Prepare primary standard solution"
+    },
+    {
+     "title": "Standardise the titrant using primary standard"
+    },
+    {
+     "title": "Perform the titration (add titrant to analyte)"
+    },
+    {
+     "title": "Identify the equivalence point (e.g., pH indicator change)"
+    },
+    {
+     "title": "Conduct back-titration if necessary"
+    },
+    {
+     "title": "Execute complexometric (EDTA) titration for metal ions"
+    }
+   ],
+   "title": "Volumetric Analysis Procedure"
+  }
+ },
+ {
+  "conceptId": "chem.atomic.orbitals",
+  "renderCount": 80,
+  "cachedOn": "2026-08-26",
+  "figure": {
+   "id": "atomic_orbitals_scene",
+   "steps": [
+    {
+     "objects": [
+      {
+       "id": "s_orbital",
+       "type": "particle",
+       "color": "#1f77b4",
+       "radius": 1.5,
+       "position": [
+        0,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "label_s",
+       "text": "s orbital",
+       "type": "label",
+       "color": "black",
+       "position": [
+        0,
+        0,
+        2
+       ]
+      }
+     ],
+     "narration": "Begin with the s orbital, a spherical shape centered at the nucleus."
+    },
+    {
+     "objects": [
+      {
+       "id": "p_lobe1",
+       "type": "particle",
+       "color": "#2ca02c",
+       "radius": 1,
+       "position": [
+        -2,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "p_lobe2",
+       "type": "particle",
+       "color": "#2ca02c",
+       "radius": 1,
+       "position": [
+        2,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "label_p",
+       "text": "p orbital",
+       "type": "label",
+       "color": "black",
+       "position": [
+        0,
+        0,
+        2
+       ]
+      }
+     ],
+     "narration": "Next, add the p orbital, consisting of two lobes along the x‑axis."
+    },
+    {
+     "objects": [
+      {
+       "id": "d_lobe1",
+       "type": "particle",
+       "color": "#ff7f0e",
+       "radius": 0.8,
+       "position": [
+        0,
+        2,
+        0
+       ]
+      },
+      {
+       "id": "d_lobe2",
+       "type": "particle",
+       "color": "#ff7f0e",
+       "radius": 0.8,
+       "position": [
+        0,
+        -2,
+        0
+       ]
+      },
+      {
+       "id": "d_lobe3",
+       "type": "particle",
+       "color": "#ff7f0e",
+       "radius": 0.8,
+       "position": [
+        2,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "d_lobe4",
+       "type": "particle",
+       "color": "#ff7f0e",
+       "radius": 0.8,
+       "position": [
+        -2,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "label_d",
+       "text": "d orbital",
+       "type": "label",
+       "color": "black",
+       "position": [
+        0,
+        0,
+        2
+       ]
+      }
+     ],
+     "narration": "The d orbital shows four lobes arranged in a clover‑leaf pattern."
+    },
+    {
+     "objects": [
+      {
+       "id": "f_lobe1",
+       "type": "particle",
+       "color": "#d62728",
+       "radius": 0.7,
+       "position": [
+        0,
+        1.5,
+        1.5
+       ]
+      },
+      {
+       "id": "f_lobe2",
+       "type": "particle",
+       "color": "#d62728",
+       "radius": 0.7,
+       "position": [
+        0,
+        -1.5,
+        1.5
+       ]
+      },
+      {
+       "id": "f_lobe3",
+       "type": "particle",
+       "color": "#d62728",
+       "radius": 0.7,
+       "position": [
+        0,
+        1.5,
+        -1.5
+       ]
+      },
+      {
+       "id": "f_lobe4",
+       "type": "particle",
+       "color": "#d62728",
+       "radius": 0.7,
+       "position": [
+        0,
+        -1.5,
+        -1.5
+       ]
+      },
+      {
+       "id": "f_lobe5",
+       "type": "particle",
+       "color": "#d62728",
+       "radius": 0.7,
+       "position": [
+        1.5,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "f_lobe6",
+       "type": "particle",
+       "color": "#d62728",
+       "radius": 0.7,
+       "position": [
+        -1.5,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "label_f",
+       "text": "f orbital",
+       "type": "label",
+       "color": "black",
+       "position": [
+        0,
+        0,
+        2
+       ]
+      }
+     ],
+     "narration": "Finally, the f orbital presents a complex shape with multiple lobes."
+    }
+   ],
+   "title": "Atomic Orbitals",
+   "ariaLabel": "3D diagram of atomic orbitals",
+   "sceneType": "diagram",
+   "teachingGoal": "Illustrate the shapes of s, p, d, and f orbitals and their nodes.",
+   "cameraDistance": 10
+  }
+ },
+ {
+  "conceptId": "chem.atomic.quantum-mech-model",
+  "renderCount": 25,
+  "cachedOn": "2026-08-21",
+  "figure": {
+   "type": "graph",
+   "title": "Wave function ψ(x)",
+   "xLabel": "Position (m)",
+   "yLabel": "ψ(x)",
+   "equation": "sin(x)"
+  }
+ },
+ {
+  "conceptId": "chem.bio.enzyme-kinetics",
+  "renderCount": 25,
+  "cachedOn": "2026-08-21",
+  "figure": {
+   "type": "graph",
+   "title": "Michaelis–Menten Plot",
+   "xLabel": "Substrate concentration (µM)",
+   "yLabel": "Reaction velocity (µmol/min)",
+   "equation": "V = Vmax * [S] / (Km + [S])"
+  }
+ },
+ {
+  "conceptId": "chem.bio.lipids",
+  "renderCount": 46,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "id": "lipid_scene_01",
+   "steps": [
+    {
+     "objects": [
+      {
+       "id": "glycerol",
+       "text": "Glycerol backbone",
+       "type": "node",
+       "position": [
+        0,
+        0,
+        0
+       ]
+      }
+     ],
+     "narration": "Introduce the glycerol backbone of the triglyceride."
+    },
+    {
+     "objects": [
+      {
+       "id": "bond1",
+       "to": [
+        2,
+        0,
+        0
+       ],
+       "from": [
+        0,
+        0,
+        0
+       ],
+       "type": "bond"
+      },
+      {
+       "id": "bond2",
+       "to": [
+        -2,
+        0,
+        0
+       ],
+       "from": [
+        0,
+        0,
+        0
+       ],
+       "type": "bond"
+      },
+      {
+       "id": "bond3",
+       "to": [
+        0,
+        2,
+        0
+       ],
+       "from": [
+        0,
+        0,
+        0
+       ],
+       "type": "bond"
+      }
+     ],
+     "narration": "Add ester bonds connecting fatty acid chains to the backbone."
+    },
+    {
+     "objects": [
+      {
+       "id": "chain_sat1",
+       "to": [
+        2,
+        0,
+        0
+       ],
+       "from": [
+        0,
+        0,
+        0
+       ],
+       "type": "vector",
+       "color": "red",
+       "thickness": 0.2
+      },
+      {
+       "id": "label_sat1",
+       "text": "Saturated fatty acid",
+       "type": "label",
+       "position": [
+        2.5,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "chain_unsat",
+       "to": [
+        -2,
+        0,
+        0
+       ],
+       "from": [
+        0,
+        0,
+        0
+       ],
+       "type": "vector",
+       "color": "green",
+       "thickness": 0.2
+      },
+      {
+       "id": "label_unsat",
+       "text": "Unsaturated fatty acid",
+       "type": "label",
+       "position": [
+        -2.5,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "chain_sat2",
+       "to": [
+        0,
+        2,
+        0
+       ],
+       "from": [
+        0,
+        0,
+        0
+       ],
+       "type": "vector",
+       "color": "red",
+       "thickness": 0.2
+      },
+      {
+       "id": "label_sat2",
+       "text": "Saturated fatty acid",
+       "type": "label",
+       "position": [
+        0,
+        2.5,
+        0
+       ]
+      }
+     ],
+     "narration": "Show the fatty acid chains, labeling saturated and unsaturated."
+    },
+    {
+     "objects": [
+      {
+       "id": "vitaminD",
+       "type": "particle",
+       "color": "yellow",
+       "radius": 0.3,
+       "position": [
+        3,
+        3,
+        0
+       ]
+      },
+      {
+       "id": "label_vitD",
+       "text": "Vitamin D",
+       "type": "label",
+       "position": [
+        3.5,
+        3,
+        0
+       ]
+      }
+     ],
+     "narration": "Add a fat-soluble vitamin to the diagram."
+    }
+   ],
+   "title": "Triglyceride Structure and Fat-Soluble Vitamin",
+   "ariaLabel": "Triglyceride molecule with saturated and unsaturated fatty acid chains and a fat-soluble vitamin",
+   "sceneType": "diagram",
+   "teachingGoal": "Show the structure of a triglyceride with saturated and unsaturated fatty acid chains, and illustrate a fat-soluble vitamin.",
+   "cameraDistance": 10
+  }
+ },
+ {
+  "conceptId": "chem.bio.nucleic-acids",
+  "renderCount": 22,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Unwinding the double helix"
+    },
+    {
+     "title": "Base pairing with free nucleotides"
+    },
+    {
+     "title": "Formation of two identical DNA molecules"
+    }
+   ],
+   "title": "DNA Replication Steps"
+  }
+ },
+ {
+  "conceptId": "chem.bio.proteins",
+  "renderCount": 98,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "id": "protein-structure-illustration",
+   "steps": [
+    {
+     "objects": [
+      {
+       "id": "primary-chain",
+       "type": "path",
+       "color": "#888",
+       "points": [
+        [
+         -4,
+         0,
+         0
+        ],
+        [
+         -3,
+         0,
+         0
+        ],
+        [
+         -2,
+         0,
+         0
+        ],
+        [
+         -1,
+         0,
+         0
+        ],
+        [
+         0,
+         0,
+         0
+        ]
+       ]
+      }
+     ],
+     "narration": "Primary amino acid sequence represented as a linear chain."
+    },
+    {
+     "objects": [
+      {
+       "id": "alpha-helix-label",
+       "text": "α‑helix",
+       "type": "label",
+       "color": "#0066cc",
+       "position": [
+        -2,
+        0.5,
+        0
+       ]
+      },
+      {
+       "id": "disulfide-bridge",
+       "to": [
+        -1,
+        0,
+        0
+       ],
+       "from": [
+        -4,
+        0,
+        0
+       ],
+       "type": "bond",
+       "color": "#ff0000"
+      }
+     ],
+     "narration": "Secondary structure: alpha helix formed by residues 2-4 and a disulfide bridge between residues 1 and 4."
+    },
+    {
+     "objects": [
+      {
+       "id": "protein-core",
+       "type": "node",
+       "color": "#33aa33",
+       "radius": 1.5,
+       "position": [
+        1,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "quaternary-label",
+       "text": "Quaternary Structure",
+       "type": "label",
+       "color": "#000",
+       "position": [
+        1,
+        1.5,
+        0
+       ]
+      },
+      {
+       "id": "haemoglobin-label",
+       "text": "Haemoglobin",
+       "type": "label",
+       "color": "#aa0000",
+       "position": [
+        1,
+        -1.5,
+        0
+       ]
+      }
+     ],
+     "narration": "Tertiary and quaternary structure: folded globular protein with two subunits and haemoglobin."
+    }
+   ],
+   "title": "Protein Structure Levels",
+   "ariaLabel": "Diagram showing the linear amino acid chain, an alpha helix, a disulfide bridge, a folded globular core, and labels for quaternary structure and haemoglobin.",
+   "sceneType": "diagram",
+   "teachingGoal": "Illustrate primary, secondary, tertiary, and quaternary structures of a protein, including disulfide bridges and haemoglobin.",
+   "cameraDistance": 10
+  }
+ },
+ {
+  "conceptId": "chem.bio.vitamins",
+  "renderCount": 161,
+  "cachedOn": "2026-08-21",
+  "figure": {
+   "id": "vitamins-hormones-diagram",
+   "steps": [
+    {
+     "objects": [
+      {
+       "id": "water",
+       "text": "Water‑soluble vitamins (B, C)",
+       "type": "point",
+       "color": "#1f77b4",
+       "position": [
+        -3,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "fat",
+       "text": "Fat‑soluble vitamins (A, D, E, K)",
+       "type": "point",
+       "color": "#2ca02c",
+       "position": [
+        0,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "hormone",
+       "text": "Steroid hormones",
+       "type": "point",
+       "color": "#d62728",
+       "position": [
+        3,
+        0,
+        0
+       ]
+      }
+     ],
+     "narration": "Identify the three main groups of vitamins and hormones."
+    },
+    {
+     "objects": [
+      {
+       "id": "beriberi",
+       "text": "Beriberi (B vitamin deficiency)",
+       "type": "point",
+       "color": "#ff7f0e",
+       "position": [
+        -3,
+        -2,
+        0
+       ]
+      },
+      {
+       "id": "scurvy",
+       "text": "Scurvy (C vitamin deficiency)",
+       "type": "point",
+       "color": "#ff7f0e",
+       "position": [
+        -3,
+        -4,
+        0
+       ]
+      },
+      {
+       "id": "rickets",
+       "text": "Rickets (D vitamin deficiency)",
+       "type": "point",
+       "color": "#ff7f0e",
+       "position": [
+        0,
+        -2,
+        0
+       ]
+      },
+      {
+       "id": "nightblind",
+       "text": "Night blindness (A vitamin deficiency)",
+       "type": "point",
+       "color": "#ff7f0e",
+       "position": [
+        0,
+        -4,
+        0
+       ]
+      },
+      {
+       "id": "cortisol",
+       "text": "Cortisol",
+       "type": "point",
+       "color": "#9467bd",
+       "position": [
+        3,
+        -2,
+        0
+       ]
+      },
+      {
+       "id": "estrogen",
+       "text": "Estrogen",
+       "type": "point",
+       "color": "#9467bd",
+       "position": [
+        3,
+        -4,
+        0
+       ]
+      }
+     ],
+     "narration": "See common deficiency diseases and examples of steroid hormones."
+    }
+   ],
+   "title": "Vitamins and Hormones Overview",
+   "ariaLabel": "Diagram showing water‑soluble and fat‑soluble vitamins, deficiency diseases, and steroid hormones",
+   "sceneType": "diagram",
+   "teachingGoal": "Understand vitamin categories, deficiency diseases, and steroid hormones",
+   "cameraDistance": 10
+  }
+ },
+ {
+  "conceptId": "chem.bond.coordinate-bond",
+  "renderCount": 29,
+  "cachedOn": "2026-08-21",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Lewis base has a lone pair of electrons"
+    },
+    {
+     "title": "Lewis acid has an empty orbital"
+    },
+    {
+     "title": "Base donates lone pair to acid"
+    },
+    {
+     "title": "Coordinate (dative) bond is formed"
+    }
+   ],
+   "title": "Coordinate and Dative Bonding"
+  }
+ },
+ {
+  "conceptId": "chem.bond.intermolecular",
+  "renderCount": 96,
+  "cachedOn": "2026-08-21",
+  "figure": {
+   "id": "intermolecular_forces",
+   "type": "scene",
+   "steps": [
+    {
+     "objects": [
+      {
+       "id": "moleculeA",
+       "type": "particle",
+       "position": [
+        -3,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "moleculeB",
+       "type": "particle",
+       "position": [
+        -1,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "bond1",
+       "to": [
+        -1,
+        0,
+        0
+       ],
+       "from": [
+        -3,
+        0,
+        0
+       ],
+       "type": "bond",
+       "color": "gray",
+       "thickness": 0.1
+      },
+      {
+       "id": "label1",
+       "text": "London dispersion",
+       "type": "label",
+       "color": "black",
+       "position": [
+        -2,
+        0.5,
+        0
+       ]
+      }
+     ],
+     "narration": "Illustrate London dispersion between two nonpolar molecules."
+    },
+    {
+     "objects": [
+      {
+       "id": "moleculeC",
+       "type": "particle",
+       "position": [
+        1,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "moleculeD",
+       "type": "particle",
+       "position": [
+        3,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "bond2",
+       "to": [
+        3,
+        0,
+        0
+       ],
+       "from": [
+        1,
+        0,
+        0
+       ],
+       "type": "bond",
+       "color": "blue",
+       "thickness": 0.15
+      },
+      {
+       "id": "label2",
+       "text": "Dipole-dipole",
+       "type": "label",
+       "color": "black",
+       "position": [
+        2,
+        0.5,
+        0
+       ]
+      }
+     ],
+     "narration": "Show dipole-dipole interaction between two polar molecules."
+    },
+    {
+     "objects": [
+      {
+       "id": "water1",
+       "type": "particle",
+       "position": [
+        -1,
+        2,
+        0
+       ]
+      },
+      {
+       "id": "water2",
+       "type": "particle",
+       "position": [
+        1,
+        2,
+        0
+       ]
+      },
+      {
+       "id": "bond3",
+       "to": [
+        1,
+        2,
+        0
+       ],
+       "from": [
+        -1,
+        2,
+        0
+       ],
+       "type": "bond",
+       "color": "red",
+       "thickness": 0.2
+      },
+      {
+       "id": "label3",
+       "text": "Hydrogen bond",
+       "type": "label",
+       "color": "black",
+       "position": [
+        0,
+        2.5,
+        0
+       ]
+      }
+     ],
+     "narration": "Depict hydrogen bonding between water molecules."
+    }
+   ],
+   "title": "Intermolecular Forces Diagram",
+   "ariaLabel": "Diagram illustrating London dispersion, dipole-dipole, and hydrogen bonding",
+   "sceneType": "diagram",
+   "teachingGoal": "Show different intermolecular forces and their relative strengths",
+   "cameraDistance": 10
+  }
+ },
+ {
+  "conceptId": "chem.bond.ionic-bonding",
+  "renderCount": 89,
+  "cachedOn": "2026-08-14",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Metal sublimation (solid to gas)"
+    },
+    {
+     "title": "Non-metal dissociation (molecule to atoms)"
+    },
+    {
+     "title": "Ionisation of metal (electron removal)"
+    },
+    {
+     "title": "Electron gain by non-metal (electron affinity)"
+    },
+    {
+     "title": "Lattice formation (ions to crystal lattice)"
+    }
+   ],
+   "title": "Born-Haber Cycle Steps for Ionic Compound Formation"
+  }
+ },
+ {
+  "conceptId": "chem.bond.metallic-bonding",
+  "renderCount": 99,
+  "cachedOn": "2026-08-17",
+  "figure": {
+   "id": "metallic-bonding-electron-sea",
+   "type": "scene",
+   "steps": [
+    {
+     "objects": [
+      {
+       "id": "ion1",
+       "type": "particle",
+       "color": "#ff4d4d",
+       "radius": 0.5,
+       "position": [
+        -2,
+        -2,
+        0
+       ]
+      },
+      {
+       "id": "ion2",
+       "type": "particle",
+       "color": "#ff4d4d",
+       "radius": 0.5,
+       "position": [
+        0,
+        -2,
+        0
+       ]
+      },
+      {
+       "id": "ion3",
+       "type": "particle",
+       "color": "#ff4d4d",
+       "radius": 0.5,
+       "position": [
+        2,
+        -2,
+        0
+       ]
+      },
+      {
+       "id": "ion4",
+       "type": "particle",
+       "color": "#ff4d4d",
+       "radius": 0.5,
+       "position": [
+        -2,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "ion5",
+       "type": "particle",
+       "color": "#ff4d4d",
+       "radius": 0.5,
+       "position": [
+        0,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "ion6",
+       "type": "particle",
+       "color": "#ff4d4d",
+       "radius": 0.5,
+       "position": [
+        2,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "ion7",
+       "type": "particle",
+       "color": "#ff4d4d",
+       "radius": 0.5,
+       "position": [
+        -2,
+        2,
+        0
+       ]
+      },
+      {
+       "id": "ion8",
+       "type": "particle",
+       "color": "#ff4d4d",
+       "radius": 0.5,
+       "position": [
+        0,
+        2,
+        0
+       ]
+      },
+      {
+       "id": "ion9",
+       "type": "particle",
+       "color": "#ff4d4d",
+       "radius": 0.5,
+       "position": [
+        2,
+        2,
+        0
+       ]
+      },
+      {
+       "id": "lbl_ion",
+       "text": "Positive Metal Ions",
+       "type": "label",
+       "position": [
+        0,
+        -3.2,
+        0
+       ]
+      }
+     ],
+     "narration": "Metals form a regular crystal lattice of positive ions."
+    },
+    {
+     "objects": [
+      {
+       "id": "e1",
+       "type": "particle",
+       "color": "#3399ff",
+       "radius": 0.2,
+       "position": [
+        -1,
+        -1,
+        0.5
+       ]
+      },
+      {
+       "id": "e2",
+       "type": "particle",
+       "color": "#3399ff",
+       "radius": 0.2,
+       "position": [
+        1,
+        -1,
+        -0.5
+       ]
+      },
+      {
+       "id": "e3",
+       "type": "particle",
+       "color": "#3399ff",
+       "radius": 0.2,
+       "position": [
+        -1,
+        1,
+        -0.5
+       ]
+      },
+      {
+       "id": "e4",
+       "type": "particle",
+       "color": "#3399ff",
+       "radius": 0.2,
+       "position": [
+        1,
+        1,
+        0.5
+       ]
+      },
+      {
+       "id": "e5",
+       "type": "particle",
+       "color": "#3399ff",
+       "radius": 0.2,
+       "position": [
+        -2.5,
+        0,
+        0.5
+       ]
+      },
+      {
+       "id": "e6",
+       "type": "particle",
+       "color": "#3399ff",
+       "radius": 0.2,
+       "position": [
+        2.5,
+        0,
+        -0.5
+       ]
+      },
+      {
+       "id": "lbl_sea",
+       "text": "Delocalized Electron Sea",
+       "type": "label",
+       "position": [
+        0,
+        3.2,
+        0
+       ]
+      }
+     ],
+     "narration": "Valence electrons detach from individual atoms, forming a shared sea of delocalized electrons."
+    },
+    {
+     "objects": [
+      {
+       "id": "v1",
+       "to": [
+        -1,
+        0,
+        0
+       ],
+       "from": [
+        -2,
+        0,
+        0
+       ],
+       "type": "vector",
+       "color": "#ffd700",
+       "thickness": 2
+      },
+      {
+       "id": "v2",
+       "to": [
+        1,
+        0,
+        0
+       ],
+       "from": [
+        0,
+        0,
+        0
+       ],
+       "type": "vector",
+       "color": "#ffd700",
+       "thickness": 2
+      },
+      {
+       "id": "lbl_bond",
+       "text": "Metallic Bond",
+       "type": "label",
+       "position": [
+        0,
+        0,
+        1.5
+       ]
+      }
+     ],
+     "narration": "Electrostatic attraction between the positive ions and the mobile electron sea holds the metallic structure tightly together."
+    }
+   ],
+   "title": "Metallic Bonding and the Electron-Sea Model",
+   "ariaLabel": "A 3D diagram showing positive metal ions surrounded by a sea of delocalized electrons, demonstrating metallic bonding.",
+   "sceneType": "diagram",
+   "teachingGoal": "Demonstrate the delocalization of valence electrons in a metal lattice and how the electron-sea model explains conductivity and malleability.",
+   "cameraDistance": 14
+  }
+ },
+ {
+  "conceptId": "chem.bond.mo-theory",
+  "renderCount": 58,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "note": "Select valence s and p orbitals of each atom involved.",
+     "title": "Identify atomic orbitals"
+    },
+    {
+     "note": "Create bonding (σ, π) and antibonding (σ*, π*) molecular orbitals from atomic orbitals.",
+     "title": "Combine AOs to form MOs (LCAO)"
+    },
+    {
+     "note": "Arrange σ, σ*, π, π* levels according to symmetry and atomic energy ordering.",
+     "title": "Order MOs by energy"
+    },
+    {
+     "note": "Place electrons in lowest‑energy MOs, pairing spins and following Hund's rule for degenerate orbitals.",
+     "title": "Fill electrons according to Pauli and Hund"
+    },
+    {
+     "note": "Bond order = (electrons in bonding MOs – electrons in antibonding MOs) / 2.",
+     "title": "Calculate bond order"
+    },
+    {
+     "note": "Unpaired electrons indicate paramagnetism; all paired electrons indicate diamagnetism.",
+     "title": "Predict magnetic properties"
+    }
+   ],
+   "title": "Constructing a Molecular Orbital Diagram"
+  }
+ },
+ {
+  "conceptId": "chem.bond.polar-molecules",
+  "renderCount": 112,
+  "cachedOn": "2026-08-23",
+  "figure": {
+   "type": "graph",
+   "title": "Dipole Moment vs Electronegativity Difference",
+   "xLabel": "Electronegativity Difference (ΔEN)",
+   "yLabel": "Dipole Moment (Debye)",
+   "equation": "2x"
+  }
+ },
+ {
+  "conceptId": "chem.bond.resonance",
+  "renderCount": 123,
+  "cachedOn": "2026-08-21",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Identify atoms with multiple bonds or lone pairs"
+    },
+    {
+     "title": "Draw all possible Lewis structures"
+    },
+    {
+     "title": "Evaluate stability using formal charge and octet rules"
+    },
+    {
+     "title": "Combine structures into a resonance hybrid"
+    }
+   ],
+   "title": "Determining Resonance Structures"
+  }
+ },
+ {
+  "conceptId": "chem.carb.alpha-reactions",
+  "renderCount": 35,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Enolate formation from a carbonyl"
+    },
+    {
+     "title": "Aldol condensation to form β-hydroxy carbonyl"
+    },
+    {
+     "title": "Retro-aldol cleavage to regenerate carbonyls"
+    },
+    {
+     "title": "Claisen condensation forming β-keto ester"
+    },
+    {
+     "title": "Malonic ester synthesis via α-carbon activation"
+    }
+   ],
+   "title": "Alpha-Carbon Reaction Sequence"
+  }
+ },
+ {
+  "conceptId": "chem.carb.carboxylic",
+  "renderCount": 71,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Preparation of Carboxylic Acids"
+    },
+    {
+     "title": "Acidic Proton Dissociation (pKa)"
+    },
+    {
+     "title": "Resonance Stabilization of Carboxylate"
+    },
+    {
+     "title": "Inductive Effects of Substituents"
+    },
+    {
+     "title": "Esterification of Carboxylic Acids"
+    },
+    {
+     "title": "Decarboxylation of Carboxylic Acids"
+    }
+   ],
+   "title": "Carboxylic Acids Overview"
+  }
+ },
+ {
+  "conceptId": "chem.carb.derivatives",
+  "renderCount": 42,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "id": "carboxylic-acid-derivatives",
+   "steps": [
+    {
+     "objects": [
+      {
+       "id": "acyl-chloride-label",
+       "text": "Acyl Chloride",
+       "type": "label",
+       "color": "red",
+       "position": [
+        -3,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "acyl-chloride-bond",
+       "to": [
+        -2.5,
+        0,
+        0
+       ],
+       "from": [
+        -3,
+        0,
+        0
+       ],
+       "type": "bond",
+       "color": "black",
+       "thickness": 0.2
+      }
+     ],
+     "narration": "First, the acyl chloride structure is displayed."
+    },
+    {
+     "objects": [
+      {
+       "id": "anhydride-label",
+       "text": "Anhydride",
+       "type": "label",
+       "color": "blue",
+       "position": [
+        -1,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "anhydride-bond",
+       "to": [
+        -0.5,
+        0,
+        0
+       ],
+       "from": [
+        -1,
+        0,
+        0
+       ],
+       "type": "bond",
+       "color": "black",
+       "thickness": 0.2
+      }
+     ],
+     "narration": "Next, the anhydride is added to the diagram."
+    },
+    {
+     "objects": [
+      {
+       "id": "ester-label",
+       "text": "Ester",
+       "type": "label",
+       "color": "green",
+       "position": [
+        1,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "ester-bond",
+       "to": [
+        1.5,
+        0,
+        0
+       ],
+       "from": [
+        1,
+        0,
+        0
+       ],
+       "type": "bond",
+       "color": "black",
+       "thickness": 0.2
+      }
+     ],
+     "narration": "Then, the ester structure is shown."
+    },
+    {
+     "objects": [
+      {
+       "id": "amide-label",
+       "text": "Amide",
+       "type": "label",
+       "color": "purple",
+       "position": [
+        3,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "amide-bond",
+       "to": [
+        3.5,
+        0,
+        0
+       ],
+       "from": [
+        3,
+        0,
+        0
+       ],
+       "type": "bond",
+       "color": "black",
+       "thickness": 0.2
+      }
+     ],
+     "narration": "Finally, the amide is added to complete the set."
+    }
+   ],
+   "title": "Carboxylic Acid Derivatives",
+   "ariaLabel": "Diagram showing acyl chloride, anhydride, ester, and amide structures.",
+   "sceneType": "diagram",
+   "teachingGoal": "Illustrate the structures of common carboxylic acid derivatives and their relative reactivity.",
+   "cameraDistance": 10
+  }
+ },
+ {
+  "conceptId": "chem.carb.ketones",
+  "renderCount": 50,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "id": "ketoneTautomerism",
+   "steps": [
+    {
+     "objects": [
+      {
+       "id": "ketoneBond",
+       "to": [
+        0,
+        1,
+        0
+       ],
+       "from": [
+        0,
+        0,
+        0
+       ],
+       "type": "bond",
+       "color": "black"
+      },
+      {
+       "id": "ketoneLabel",
+       "text": "Ketone",
+       "type": "label",
+       "color": "black",
+       "position": [
+        0,
+        1.5,
+        0
+       ]
+      }
+     ],
+     "narration": "Show the ketone structure."
+    },
+    {
+     "objects": [
+      {
+       "id": "tautomerArrow",
+       "to": [
+        2,
+        0.5,
+        0
+       ],
+       "from": [
+        0,
+        0.5,
+        0
+       ],
+       "type": "arrow",
+       "color": "blue"
+      }
+     ],
+     "narration": "Show the tautomerization arrow."
+    },
+    {
+     "objects": [
+      {
+       "id": "enolBond1",
+       "to": [
+        3,
+        0,
+        0
+       ],
+       "from": [
+        2,
+        0,
+        0
+       ],
+       "type": "bond",
+       "color": "black"
+      },
+      {
+       "id": "enolBond2",
+       "to": [
+        3,
+        1,
+        0
+       ],
+       "from": [
+        3,
+        0,
+        0
+       ],
+       "type": "bond",
+       "color": "black"
+      },
+      {
+       "id": "enolLabel",
+       "text": "Enol",
+       "type": "label",
+       "color": "black",
+       "position": [
+        3,
+        1.5,
+        0
+       ]
+      }
+     ],
+     "narration": "Show the enol structure."
+    }
+   ],
+   "title": "Ketone ↔ Enol Tautomerism",
+   "ariaLabel": "Diagram showing the ketone structure, a tautomerization arrow, and the enol structure.",
+   "sceneType": "diagram",
+   "teachingGoal": "Illustrate keto‑enol tautomerism of a simple ketone.",
+   "cameraDistance": 10
+  }
+ },
+ {
+  "conceptId": "chem.carb.named-reactions",
+  "renderCount": 21,
+  "cachedOn": "2026-10-05",
+  "figure": {
+   "id": "named-carbonyl-reactions",
+   "steps": [
+    {
+     "objects": [
+      {
+       "id": "C",
+       "text": "C",
+       "type": "point",
+       "position": [
+        0,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "O",
+       "text": "O",
+       "type": "point",
+       "position": [
+        0,
+        1,
+        0
+       ]
+      },
+      {
+       "id": "C=O",
+       "to": [
+        0,
+        1,
+        0
+       ],
+       "from": [
+        0,
+        0,
+        0
+       ],
+       "type": "bond",
+       "color": "gray",
+       "thickness": 0.1
+      }
+     ],
+     "narration": "The carbonyl functional group (C=O) is shown."
+    },
+    {
+     "objects": [
+      {
+       "id": "arrow_perkin",
+       "to": [
+        2,
+        2,
+        0
+       ],
+       "from": [
+        0,
+        0.5,
+        0
+       ],
+       "type": "arrow",
+       "color": "blue",
+       "thickness": 0.05
+      },
+      {
+       "id": "label_perkin",
+       "text": "Perkin",
+       "type": "label",
+       "position": [
+        2,
+        2,
+        0
+       ]
+      }
+     ],
+     "narration": "The Perkin condensation transforms the carbonyl."
+    },
+    {
+     "objects": [
+      {
+       "id": "arrow_kno",
+       "to": [
+        -2,
+        2,
+        0
+       ],
+       "from": [
+        0,
+        0.5,
+        0
+       ],
+       "type": "arrow",
+       "color": "green",
+       "thickness": 0.05
+      },
+      {
+       "id": "label_kno",
+       "text": "Knoevenagel",
+       "type": "label",
+       "position": [
+        -2,
+        2,
+        0
+       ]
+      },
+      {
+       "id": "arrow_reform",
+       "to": [
+        2,
+        -2,
+        0
+       ],
+       "from": [
+        0,
+        0.5,
+        0
+       ],
+       "type": "arrow",
+       "color": "red",
+       "thickness": 0.05
+      },
+      {
+       "id": "label_reform",
+       "text": "Reformatsky",
+       "type": "label",
+       "position": [
+        2,
+        -2,
+        0
+       ]
+      },
+      {
+       "id": "arrow_wittig",
+       "to": [
+        -2,
+        -2,
+        0
+       ],
+       "from": [
+        0,
+        0.5,
+        0
+       ],
+       "type": "arrow",
+       "color": "purple",
+       "thickness": 0.05
+      },
+      {
+       "id": "label_wittig",
+       "text": "Wittig",
+       "type": "label",
+       "position": [
+        -2,
+        -2,
+        0
+       ]
+      },
+      {
+       "id": "arrow_bv",
+       "to": [
+        0,
+        -3,
+        0
+       ],
+       "from": [
+        0,
+        0.5,
+        0
+       ],
+       "type": "arrow",
+       "color": "orange",
+       "thickness": 0.05
+      },
+      {
+       "id": "label_bv",
+       "text": "Baeyer–Villiger",
+       "type": "label",
+       "position": [
+        0,
+        -3,
+        0
+       ]
+      }
+     ],
+     "narration": "Other common carbonyl reactions are illustrated."
+    }
+   ],
+   "title": "Named Carbonyl Reactions Overview",
+   "ariaLabel": "Diagram of a carbonyl group with arrows to Perkin, Knoevenagel, Reformatsky, Wittig, and Baeyer–Villiger reactions",
+   "sceneType": "diagram",
+   "teachingGoal": "Show common carbonyl transformations and their names",
+   "cameraDistance": 10
+  }
+ },
+ {
+  "conceptId": "chem.carb.spectro",
+  "renderCount": 29,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Record IR spectrum of the compound"
+    },
+    {
+     "title": "Identify the C=O absorption peak (~1700 cm⁻¹)"
+    },
+    {
+     "title": "Record ¹H and ¹³C NMR spectra"
+    },
+    {
+     "title": "Locate carbonyl signals: H ~2–3 ppm, C ~200 ppm"
+    },
+    {
+     "title": "Record mass spectrum"
+    },
+    {
+     "title": "Observe α‑cleavage and McLafferty rearrangement"
+    }
+   ],
+   "title": "Spectroscopic Identification of Carbonyls"
+  }
+ },
+ {
+  "conceptId": "chem.coord.applications",
+  "renderCount": 9,
+  "cachedOn": "2026-09-05",
+  "figure": {
+   "id": "coord-applications",
+   "steps": [
+    {
+     "objects": [
+      {
+       "id": "haemoglobin",
+       "type": "point",
+       "position": [
+        -4,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "haemoglobin_label",
+       "text": "Haemoglobin",
+       "type": "label",
+       "position": [
+        -4,
+        0.5,
+        0
+       ]
+      },
+      {
+       "id": "chlorophyll",
+       "type": "point",
+       "position": [
+        -2,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "chlorophyll_label",
+       "text": "Chlorophyll",
+       "type": "label",
+       "position": [
+        -2,
+        0.5,
+        0
+       ]
+      }
+     ],
+     "narration": "Haemoglobin and chlorophyll illustrate biological uses of coordination compounds."
+    },
+    {
+     "objects": [
+      {
+       "id": "cisplatin",
+       "type": "point",
+       "position": [
+        0,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "cisplatin_label",
+       "text": "Cisplatin",
+       "type": "label",
+       "position": [
+        0,
+        0.5,
+        0
+       ]
+      },
+      {
+       "id": "thiosulfate",
+       "type": "point",
+       "position": [
+        2,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "thiosulfate_label",
+       "text": "Thiosulfate",
+       "type": "label",
+       "position": [
+        2,
+        0.5,
+        0
+       ]
+      }
+     ],
+     "narration": "Cisplatin demonstrates medicinal applications, while thiosulfate shows industrial uses."
+    },
+    {
+     "objects": [
+      {
+       "id": "metal_extraction",
+       "type": "point",
+       "position": [
+        4,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "metal_extraction_label",
+       "text": "Metallurgical Extraction",
+       "type": "label",
+       "position": [
+        4,
+        0.5,
+        0
+       ]
+      }
+     ],
+     "narration": "Metallurgical extraction highlights industrial processing of metals."
+    }
+   ],
+   "title": "Applications of Coordination Chemistry",
+   "ariaLabel": "Diagram showing key coordination chemistry applications",
+   "sceneType": "diagram",
+   "teachingGoal": "Illustrate key real-world applications of coordination compounds.",
+   "cameraDistance": 10
+  }
+ },
+ {
+  "conceptId": "chem.coord.bonding",
+  "renderCount": 10,
+  "cachedOn": "2026-09-05",
+  "figure": {
+   "id": "coord_bonding_scene",
+   "type": "scene",
+   "steps": [
+    {
+     "objects": [
+      {
+       "id": "metal1",
+       "type": "point",
+       "color": "gold",
+       "position": [
+        0,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "lig1",
+       "type": "point",
+       "color": "blue",
+       "position": [
+        1,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "lig2",
+       "type": "point",
+       "color": "blue",
+       "position": [
+        -1,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "lig3",
+       "type": "point",
+       "color": "blue",
+       "position": [
+        0,
+        1,
+        0
+       ]
+      },
+      {
+       "id": "lig4",
+       "type": "point",
+       "color": "blue",
+       "position": [
+        0,
+        -1,
+        0
+       ]
+      },
+      {
+       "id": "lig5",
+       "type": "point",
+       "color": "blue",
+       "position": [
+        0,
+        0,
+        1
+       ]
+      },
+      {
+       "id": "lig6",
+       "type": "point",
+       "color": "blue",
+       "position": [
+        0,
+        0,
+        -1
+       ]
+      },
+      {
+       "id": "bond1",
+       "to": [
+        1,
+        0,
+        0
+       ],
+       "from": [
+        0,
+        0,
+        0
+       ],
+       "type": "bond",
+       "color": "gray"
+      },
+      {
+       "id": "bond2",
+       "to": [
+        -1,
+        0,
+        0
+       ],
+       "from": [
+        0,
+        0,
+        0
+       ],
+       "type": "bond",
+       "color": "gray"
+      },
+      {
+       "id": "bond3",
+       "to": [
+        0,
+        1,
+        0
+       ],
+       "from": [
+        0,
+        0,
+        0
+       ],
+       "type": "bond",
+       "color": "gray"
+      },
+      {
+       "id": "bond4",
+       "to": [
+        0,
+        -1,
+        0
+       ],
+       "from": [
+        0,
+        0,
+        0
+       ],
+       "type": "bond",
+       "color": "gray"
+      },
+      {
+       "id": "bond5",
+       "to": [
+        0,
+        0,
+        1
+       ],
+       "from": [
+        0,
+        0,
+        0
+       ],
+       "type": "bond",
+       "color": "gray"
+      },
+      {
+       "id": "bond6",
+       "to": [
+        0,
+        0,
+        -1
+       ],
+       "from": [
+        0,
+        0,
+        0
+       ],
+       "type": "bond",
+       "color": "gray"
+      },
+      {
+       "id": "labelOct",
+       "text": "Octahedral",
+       "type": "label",
+       "color": "black",
+       "position": [
+        0,
+        0,
+        2
+       ]
+      }
+     ],
+     "narration": "Octahedral complex with VBT hybridization"
+    },
+    {
+     "objects": [
+      {
+       "id": "metal2",
+       "type": "point",
+       "color": "gold",
+       "position": [
+        3,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "lig7",
+       "type": "point",
+       "color": "blue",
+       "position": [
+        4,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "lig8",
+       "type": "point",
+       "color": "blue",
+       "position": [
+        2,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "lig9",
+       "type": "point",
+       "color": "blue",
+       "position": [
+        3,
+        1,
+        0
+       ]
+      },
+      {
+       "id": "lig10",
+       "type": "point",
+       "color": "blue",
+       "position": [
+        3,
+        -1,
+        0
+       ]
+      },
+      {
+       "id": "bond7",
+       "to": [
+        4,
+        0,
+        0
+       ],
+       "from": [
+        3,
+        0,
+        0
+       ],
+       "type": "bond",
+       "color": "gray"
+      },
+      {
+       "id": "bond8",
+       "to": [
+        2,
+        0,
+        0
+       ],
+       "from": [
+        3,
+        0,
+        0
+       ],
+       "type": "bond",
+       "color": "gray"
+      },
+      {
+       "id": "bond9",
+       "to": [
+        3,
+        1,
+        0
+       ],
+       "from": [
+        3,
+        0,
+        0
+       ],
+       "type": "bond",
+       "color": "gray"
+      },
+      {
+       "id": "bond10",
+       "to": [
+        3,
+        -1,
+        0
+       ],
+       "from": [
+        3,
+        0,
+        0
+       ],
+       "type": "bond",
+       "color": "gray"
+      },
+      {
+       "id": "labelSquare",
+       "text": "Square planar",
+       "type": "label",
+       "color": "black",
+       "position": [
+        3,
+        0,
+        2
+       ]
+      }
+     ],
+     "narration": "Square planar complex – VBT hybridization"
+    },
+    {
+     "objects": [
+      {
+       "id": "metal3",
+       "type": "point",
+       "color": "gold",
+       "position": [
+        -3,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "lig11",
+       "type": "point",
+       "color": "blue",
+       "position": [
+        -2,
+        1,
+        0
+       ]
+      },
+      {
+       "id": "lig12",
+       "type": "point",
+       "color": "blue",
+       "position": [
+        -2,
+        -1,
+        0
+       ]
+      },
+      {
+       "id": "lig13",
+       "type": "point",
+       "color": "blue",
+       "position": [
+        -2,
+        0,
+        1
+       ]
+      },
+      {
+       "id": "lig14",
+       "type": "point",
+       "color": "blue",
+       "position": [
+        -2,
+        0,
+        -1
+       ]
+      },
+      {
+       "id": "bond11",
+       "to": [
+        -2,
+        1,
+        0
+       ],
+       "from": [
+        -3,
+        0,
+        0
+       ],
+       "type": "bond",
+       "color": "gray"
+      },
+      {
+       "id": "bond12",
+       "to": [
+        -2,
+        -1,
+        0
+       ],
+       "from": [
+        -3,
+        0,
+        0
+       ],
+       "type": "bond",
+       "color": "gray"
+      },
+      {
+       "id": "bond13",
+       "to": [
+        -2,
+        0,
+        1
+       ],
+       "from": [
+        -3,
+        0,
+        0
+       ],
+       "type": "bond",
+       "color": "gray"
+      },
+      {
+       "id": "bond14",
+       "to": [
+        -2,
+        0,
+        -1
+       ],
+       "from": [
+        -3,
+        0,
+        0
+       ],
+       "type": "bond",
+       "color": "gray"
+      },
+      {
+       "id": "labelTetra",
+       "text": "Tetrahedral",
+       "type": "label",
+       "color": "black",
+       "position": [
+        -3,
+        0,
+        2
+       ]
+      }
+     ],
+     "narration": "Tetrahedral complex – VBT hybridization"
+    }
+   ],
+   "title": "Bonding in Complexes – VBT Hybridization and Ligand Field Theory",
+   "ariaLabel": "Diagram of coordination geometries with VBT hybridization labels",
+   "sceneType": "diagram",
+   "teachingGoal": "Illustrate VBT hybridization in octahedral, square planar, and tetrahedral coordination geometries and introduce ligand field theory.",
+   "cameraDistance": 10
+  }
+ },
+ {
+  "conceptId": "chem.coord.cft",
+  "renderCount": 11,
+  "cachedOn": "2026-09-05",
+  "figure": {
+   "id": "cft_octet",
+   "type": "scene",
+   "steps": [
+    {
+     "objects": [
+      {
+       "id": "metal",
+       "type": "point",
+       "color": "gold",
+       "radius": 0.5,
+       "position": [
+        0,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "lig1",
+       "type": "point",
+       "color": "blue",
+       "radius": 0.3,
+       "position": [
+        1,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "lig2",
+       "type": "point",
+       "color": "blue",
+       "radius": 0.3,
+       "position": [
+        -1,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "lig3",
+       "type": "point",
+       "color": "blue",
+       "radius": 0.3,
+       "position": [
+        0,
+        1,
+        0
+       ]
+      },
+      {
+       "id": "lig4",
+       "type": "point",
+       "color": "blue",
+       "radius": 0.3,
+       "position": [
+        0,
+        -1,
+        0
+       ]
+      },
+      {
+       "id": "lig5",
+       "type": "point",
+       "color": "blue",
+       "radius": 0.3,
+       "position": [
+        0,
+        0,
+        1
+       ]
+      },
+      {
+       "id": "lig6",
+       "type": "point",
+       "color": "blue",
+       "radius": 0.3,
+       "position": [
+        0,
+        0,
+        -1
+       ]
+      },
+      {
+       "id": "labelMetal",
+       "text": "M",
+       "type": "label",
+       "color": "black",
+       "position": [
+        0,
+        0,
+        0
+       ]
+      }
+     ],
+     "narration": "Central metal ion surrounded by six ligands in an octahedral arrangement."
+    },
+    {
+     "objects": [
+      {
+       "id": "arrowEg",
+       "to": [
+        1,
+        0,
+        0
+       ],
+       "from": [
+        0,
+        0,
+        0
+       ],
+       "type": "arrow",
+       "color": "red",
+       "thickness": 0.1
+      },
+      {
+       "id": "arrowT2g",
+       "to": [
+        0,
+        1,
+        0
+       ],
+       "from": [
+        0,
+        0,
+        0
+       ],
+       "type": "arrow",
+       "color": "green",
+       "thickness": 0.1
+      },
+      {
+       "id": "labelEg",
+       "text": "eg",
+       "type": "label",
+       "color": "red",
+       "position": [
+        1.2,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "labelT2g",
+       "text": "t2g",
+       "type": "label",
+       "color": "green",
+       "position": [
+        0,
+        1.2,
+        0
+       ]
+      },
+      {
+       "id": "labelDeltaO",
+       "text": "Δo",
+       "type": "label",
+       "color": "purple",
+       "position": [
+        0.5,
+        0.5,
+        0
+       ]
+      }
+     ],
+     "narration": "d‑orbitals split into lower‑energy t2g and higher‑energy eg sets; Δo represents the energy gap."
+    },
+    {
+     "objects": [
+      {
+       "id": "labelHighSpin",
+       "text": "High‑spin",
+       "type": "label",
+       "color": "orange",
+       "position": [
+        0,
+        0,
+        1.5
+       ]
+      },
+      {
+       "id": "labelLowSpin",
+       "text": "Low‑spin",
+       "type": "label",
+       "color": "blue",
+       "position": [
+        0,
+        0,
+        -1.5
+       ]
+      }
+     ],
+     "narration": "Depending on ligand field strength, complexes can be high‑spin or low‑spin."
+    }
+   ],
+   "title": "Crystal Field Theory: Octahedral Splitting",
+   "ariaLabel": "Octahedral complex with d‑orbital splitting",
+   "sceneType": "diagram",
+   "teachingGoal": "Illustrate d‑orbital splitting, Δo, and high‑/low‑spin states in an octahedral complex",
+   "cameraDistance": 10
+  }
+ },
+ {
+  "conceptId": "chem.coord.nomenclature",
+  "renderCount": 28,
+  "cachedOn": "2026-09-05",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Identify the metal and its oxidation state."
+    },
+    {
+     "title": "List ligands alphabetically and assign prefixes."
+    },
+    {
+     "title": "Write the complex name with metal and ligands."
+    },
+    {
+     "title": "Add counter ions after the complex name."
+    },
+    {
+     "title": "Indicate overall charge if the complex is ionic."
+    }
+   ],
+   "title": "Nomenclature of Complexes"
+  }
+ },
+ {
+  "conceptId": "chem.coord.stability",
+  "renderCount": 32,
+  "cachedOn": "2026-08-21",
+  "figure": {
+   "type": "graph",
+   "title": "Chelate Effect: Number of Donor Atoms vs log Kf",
+   "xLabel": "Number of donor atoms",
+   "yLabel": "log Kf",
+   "equation": "0.5x + 1"
+  }
+ },
+ {
+  "conceptId": "chem.coord.werner",
+  "renderCount": 12,
+  "cachedOn": "2026-08-21",
+  "figure": {
+   "id": "werner_theory_diagram",
+   "steps": [
+    {
+     "objects": [
+      {
+       "id": "metal",
+       "type": "point",
+       "color": "blue",
+       "radius": 0.3,
+       "position": [
+        0,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "label_metal",
+       "text": "Co³⁺",
+       "type": "label",
+       "color": "black",
+       "position": [
+        0,
+        0.6,
+        0
+       ]
+      },
+      {
+       "id": "lig1",
+       "type": "point",
+       "color": "green",
+       "radius": 0.2,
+       "position": [
+        2,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "lig2",
+       "type": "point",
+       "color": "green",
+       "radius": 0.2,
+       "position": [
+        -2,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "lig3",
+       "type": "point",
+       "color": "green",
+       "radius": 0.2,
+       "position": [
+        0,
+        2,
+        0
+       ]
+      },
+      {
+       "id": "lig4",
+       "type": "point",
+       "color": "green",
+       "radius": 0.2,
+       "position": [
+        0,
+        -2,
+        0
+       ]
+      },
+      {
+       "id": "lig5",
+       "type": "point",
+       "color": "green",
+       "radius": 0.2,
+       "position": [
+        0,
+        0,
+        2
+       ]
+      },
+      {
+       "id": "lig6",
+       "type": "point",
+       "color": "green",
+       "radius": 0.2,
+       "position": [
+        0,
+        0,
+        -2
+       ]
+      },
+      {
+       "id": "bond1",
+       "to": [
+        2,
+        0,
+        0
+       ],
+       "from": [
+        0,
+        0,
+        0
+       ],
+       "type": "bond",
+       "color": "gray",
+       "thickness": 0.05
+      },
+      {
+       "id": "bond2",
+       "to": [
+        -2,
+        0,
+        0
+       ],
+       "from": [
+        0,
+        0,
+        0
+       ],
+       "type": "bond",
+       "color": "gray",
+       "thickness": 0.05
+      },
+      {
+       "id": "bond3",
+       "to": [
+        0,
+        2,
+        0
+       ],
+       "from": [
+        0,
+        0,
+        0
+       ],
+       "type": "bond",
+       "color": "gray",
+       "thickness": 0.05
+      },
+      {
+       "id": "bond4",
+       "to": [
+        0,
+        -2,
+        0
+       ],
+       "from": [
+        0,
+        0,
+        0
+       ],
+       "type": "bond",
+       "color": "gray",
+       "thickness": 0.05
+      },
+      {
+       "id": "bond5",
+       "to": [
+        0,
+        0,
+        2
+       ],
+       "from": [
+        0,
+        0,
+        0
+       ],
+       "type": "bond",
+       "color": "gray",
+       "thickness": 0.05
+      },
+      {
+       "id": "bond6",
+       "to": [
+        0,
+        0,
+        -2
+       ],
+       "from": [
+        0,
+        0,
+        0
+       ],
+       "type": "bond",
+       "color": "gray",
+       "thickness": 0.05
+      }
+     ],
+     "narration": "The central metal ion (Co³⁺) is surrounded by six ligands (NH₃) forming coordinate bonds."
+    },
+    {
+     "objects": [
+      {
+       "id": "cl1",
+       "type": "point",
+       "color": "red",
+       "radius": 0.25,
+       "position": [
+        3,
+        1,
+        0
+       ]
+      },
+      {
+       "id": "cl2",
+       "type": "point",
+       "color": "red",
+       "radius": 0.25,
+       "position": [
+        -3,
+        1,
+        0
+       ]
+      },
+      {
+       "id": "cl3",
+       "type": "point",
+       "color": "red",
+       "radius": 0.25,
+       "position": [
+        0,
+        -3,
+        1
+       ]
+      },
+      {
+       "id": "bond_cl1",
+       "to": [
+        3,
+        1,
+        0
+       ],
+       "from": [
+        0,
+        0,
+        0
+       ],
+       "type": "bond",
+       "color": "orange",
+       "thickness": 0.04
+      },
+      {
+       "id": "bond_cl2",
+       "to": [
+        -3,
+        1,
+        0
+       ],
+       "from": [
+        0,
+        0,
+        0
+       ],
+       "type": "bond",
+       "color": "orange",
+       "thickness": 0.04
+      },
+      {
+       "id": "bond_cl3",
+       "to": [
+        0,
+        -3,
+        1
+       ],
+       "from": [
+        0,
+        0,
+        0
+       ],
+       "type": "bond",
+       "color": "orange",
+       "thickness": 0.04
+      },
+      {
+       "id": "label_primary",
+       "text": "Primary valency (ionic bonds) = 3 Cl⁻",
+       "type": "label",
+       "color": "black",
+       "position": [
+        0,
+        -2.5,
+        0
+       ]
+      }
+     ],
+     "narration": "Three chloride ions are ionically bonded, representing the primary valency."
+    },
+    {
+     "objects": [
+      {
+       "id": "label_secondary",
+       "text": "Secondary valency = coordination number = 6",
+       "type": "label",
+       "color": "black",
+       "position": [
+        0,
+        0,
+        -2.5
+       ]
+      }
+     ],
+     "narration": "The number of coordinate bonds (six) defines the secondary valency, i.e., the coordination number."
+    }
+   ],
+   "title": "Werner's Theory of Coordination Compounds",
+   "ariaLabel": "3D diagram of a Werner coordination complex",
+   "sceneType": "diagram",
+   "teachingGoal": "Illustrate primary vs secondary valency and coordination number",
+   "cameraDistance": 10
+  }
+ },
+ {
+  "conceptId": "chem.dblock.general",
+  "renderCount": 11,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "id": "transition_metals_general",
+   "type": "scene",
+   "steps": [
+    {
+     "objects": [
+      {
+       "id": "Fe2",
+       "text": "Fe²⁺",
+       "type": "particle",
+       "color": "#FF0000",
+       "radius": 1,
+       "position": [
+        0,
+        0,
+        0
+       ]
+      }
+     ],
+     "narration": "Introduce a transition metal ion in its +2 oxidation state."
+    },
+    {
+     "objects": [
+      {
+       "id": "Fe3",
+       "text": "Fe³⁺",
+       "type": "particle",
+       "color": "#00FF00",
+       "radius": 1,
+       "position": [
+        3,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "magnetic",
+       "to": [
+        0,
+        2,
+        0
+       ],
+       "from": [
+        0,
+        0,
+        0
+       ],
+       "text": "Magnetic Moment",
+       "type": "arrow",
+       "color": "#0000FF",
+       "thickness": 0.1
+      },
+      {
+       "id": "alloy",
+       "text": "Alloy",
+       "type": "particle",
+       "color": "#AAAAAA",
+       "radius": 1.5,
+       "position": [
+        -3,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "labelCatalyst",
+       "text": "Catalyst",
+       "type": "label",
+       "position": [
+        0,
+        -1.5,
+        0
+       ]
+      }
+     ],
+     "narration": "Add the +3 oxidation state, show magnetic moment, catalytic role, and an alloy cluster."
+    }
+   ],
+   "title": "Transition Metals — General Properties",
+   "ariaLabel": "Diagram showing transition metal ions with variable oxidation states, magnetic moment arrows, catalytic role, and alloy cluster.",
+   "sceneType": "diagram",
+   "teachingGoal": "Illustrate key general properties of transition metals such as variable oxidation states, magnetic moments, color, catalytic activity, and alloy formation.",
+   "cameraDistance": 10
+  }
+ },
+ {
+  "conceptId": "chem.dblock.lanthanides",
+  "renderCount": 9,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "type": "graph",
+   "title": "Lanthanide Contraction",
+   "xLabel": "Atomic Number (Z)",
+   "yLabel": "Atomic Radius (pm)",
+   "equation": "y = -0.5 * x + 200"
+  }
+ },
+ {
+  "conceptId": "chem.dblock.oxo-species",
+  "renderCount": 17,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "type": "graph",
+   "title": "Chromate/Dichromate Equilibrium vs pH",
+   "xLabel": "pH (unitless)",
+   "yLabel": "Ratio [Cr2O7^2-]/[CrO4^2-] (unitless)",
+   "equation": "10^(x - 1.7)"
+  }
+ },
+ {
+  "conceptId": "chem.elect.concentration-cell",
+  "renderCount": 27,
+  "cachedOn": "2026-08-21",
+  "figure": {
+   "type": "graph",
+   "title": "EMF of a Concentration Cell",
+   "xLabel": "Concentration Ratio [c1]/[c2]",
+   "yLabel": "EMF (V)",
+   "equation": "E = (RT/nF) ln(x)"
+  }
+ },
+ {
+  "conceptId": "chem.elect.conductance",
+  "renderCount": 46,
+  "cachedOn": "2026-08-30",
+  "figure": {
+   "type": "graph",
+   "title": "Molar Conductivity vs Concentration (Kohlrausch's Law)",
+   "xLabel": "Concentration (mol L^-1)",
+   "yLabel": "Molar Conductivity (S m^2 mol^-1)",
+   "equation": "Λm = Λm0 - k*sqrt(c)"
+  }
+ },
+ {
+  "conceptId": "chem.elect.corrosion",
+  "renderCount": 30,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Metal exposed to aqueous environment"
+    },
+    {
+     "title": "Anodic oxidation releases electrons"
+    },
+    {
+     "title": "Metal ions migrate into solution"
+    },
+    {
+     "title": "Cathodic reduction of dissolved oxygen"
+    },
+    {
+     "title": "Formation of hydrated iron oxides (rust)"
+    },
+    {
+     "title": "Apply protective coating to block access"
+    },
+    {
+     "title": "Galvanize by coating with zinc layer"
+    },
+    {
+     "title": "Cathodic protection using sacrificial anode"
+    }
+   ],
+   "title": "Electrochemical Corrosion Mechanism and Prevention"
+  }
+ },
+ {
+  "conceptId": "chem.elect.electrolysis",
+  "renderCount": 26,
+  "cachedOn": "2026-08-21",
+  "figure": {
+   "type": "graph",
+   "title": "Mass Deposited vs. Charge Passed",
+   "xLabel": "Charge (C)",
+   "yLabel": "Mass Deposited (g)",
+   "equation": "m = k * Q"
+  }
+ },
+ {
+  "conceptId": "chem.elect.galvanic-cell",
+  "renderCount": 29,
+  "cachedOn": "2026-08-26",
+  "figure": {
+   "id": "galvanic-cell",
+   "steps": [
+    {
+     "objects": [
+      {
+       "id": "anode",
+       "type": "node",
+       "color": "red",
+       "radius": 0.5,
+       "position": [
+        -2,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "cathode",
+       "type": "node",
+       "color": "blue",
+       "radius": 0.5,
+       "position": [
+        2,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "label-anode",
+       "text": "Anode",
+       "type": "label",
+       "color": "black",
+       "position": [
+        -2,
+        0.7,
+        0
+       ]
+      },
+      {
+       "id": "label-cathode",
+       "text": "Cathode",
+       "type": "label",
+       "color": "black",
+       "position": [
+        2,
+        0.7,
+        0
+       ]
+      }
+     ],
+     "narration": "Show the two half‑cells with their metal electrodes."
+    },
+    {
+     "objects": [
+      {
+       "id": "salt-bridge",
+       "type": "path",
+       "color": "green",
+       "points": [
+        [
+         -1,
+         0,
+         0
+        ],
+        [
+         1,
+         0,
+         0
+        ]
+       ],
+       "thickness": 0.2
+      },
+      {
+       "id": "label-salt-bridge",
+       "text": "Salt Bridge",
+       "type": "label",
+       "color": "black",
+       "position": [
+        0,
+        0.7,
+        0
+       ]
+      }
+     ],
+     "narration": "Add the salt bridge connecting the two compartments."
+    },
+    {
+     "objects": [
+      {
+       "id": "label-notation",
+       "text": "Zn(s) | Zn²⁺(0.1 M) || Cu²⁺(0.1 M) | Cu(s)",
+       "type": "label",
+       "color": "black",
+       "position": [
+        0,
+        -0.5,
+        0
+       ]
+      },
+      {
+       "id": "label-emf",
+       "text": "E° = +1.10 V",
+       "type": "label",
+       "color": "black",
+       "position": [
+        0,
+        -1.2,
+        0
+       ]
+      }
+     ],
+     "narration": "Display the cell notation and EMF value."
+    }
+   ],
+   "title": "Galvanic Cell Diagram",
+   "ariaLabel": "Diagram of a galvanic cell showing anode, cathode, salt bridge, and cell notation.",
+   "sceneType": "diagram",
+   "teachingGoal": "Illustrate the components of a galvanic cell and their roles.",
+   "cameraDistance": 10
+  }
+ },
+ {
+  "conceptId": "chem.elect.industrial",
+  "renderCount": 5,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Prepare electrolyte solution"
+    },
+    {
+     "title": "Set up electrolytic cell with electrodes"
+    },
+    {
+     "title": "Apply electrical potential to drive reaction"
+    },
+    {
+     "title": "Electrode reactions produce desired products"
+    },
+    {
+     "title": "Collect and separate products from cell"
+    }
+   ],
+   "title": "Industrial Electrolysis Process Overview"
+  }
+ },
+ {
+  "conceptId": "chem.elect.nernst",
+  "renderCount": 7,
+  "cachedOn": "2026-08-21",
+  "figure": {
+   "type": "graph",
+   "title": "Nernst Equation",
+   "xLabel": "ln(Q) (dimensionless)",
+   "yLabel": "EMF (V)",
+   "equation": "E = E0 - (0.0592/n) * ln(Q)"
+  }
+ },
+ {
+  "conceptId": "chem.elect.standard-electrode",
+  "renderCount": 17,
+  "cachedOn": "2026-08-21",
+  "figure": {
+   "end": 2,
+   "type": "number_line",
+   "start": -2,
+   "title": "Standard Electrode Potentials (V)",
+   "highlight": [
+    0,
+    0.34
+   ]
+  }
+ },
+ {
+  "conceptId": "chem.env.air-pollution",
+  "renderCount": 34,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Emission of Primary Pollutants"
+    },
+    {
+     "title": "Transport and Dispersion"
+    },
+    {
+     "title": "Photochemical Transformation"
+    },
+    {
+     "title": "Deposition and Acid Rain Formation"
+    },
+    {
+     "title": "Control Strategies and Mitigation"
+    }
+   ],
+   "title": "Air Pollution Process"
+  }
+ },
+ {
+  "conceptId": "chem.env.atmosphere",
+  "renderCount": 53,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "id": "atm_layers",
+   "steps": [
+    {
+     "objects": [
+      {
+       "id": "earth",
+       "text": "Earth",
+       "type": "node",
+       "color": "#8B4513",
+       "radius": 1,
+       "position": [
+        0,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "troposphere_label",
+       "text": "Troposphere",
+       "type": "label",
+       "position": [
+        0,
+        1.5,
+        0
+       ]
+      },
+      {
+       "id": "troposphere",
+       "text": "Troposphere",
+       "type": "node",
+       "color": "#87CEFA",
+       "radius": 1.5,
+       "position": [
+        0,
+        1,
+        0
+       ]
+      }
+     ],
+     "narration": "The Earth’s surface and the lowest layer, the troposphere, where weather occurs."
+    },
+    {
+     "objects": [
+      {
+       "id": "stratosphere",
+       "text": "Stratosphere",
+       "type": "node",
+       "color": "#B0E0E6",
+       "radius": 1.5,
+       "position": [
+        0,
+        3,
+        0
+       ]
+      },
+      {
+       "id": "ozone_label",
+       "text": "Ozone Layer",
+       "type": "label",
+       "position": [
+        0,
+        3.5,
+        0
+       ]
+      }
+     ],
+     "narration": "Above the troposphere lies the stratosphere, containing the ozone layer."
+    },
+    {
+     "objects": [
+      {
+       "id": "greenhouse_arrow",
+       "to": [
+        0,
+        2,
+        0
+       ],
+       "from": [
+        0,
+        1,
+        0
+       ],
+       "text": "Greenhouse Gases",
+       "type": "arrow",
+       "color": "#FF4500",
+       "thickness": 0.1
+      }
+     ],
+     "narration": "Greenhouse gases in the lower atmosphere trap heat, creating the natural greenhouse effect."
+    }
+   ],
+   "title": "Atmospheric Layers and Composition",
+   "ariaLabel": "3D diagram of Earth's atmosphere showing troposphere, stratosphere, ozone layer, and greenhouse gases.",
+   "sceneType": "diagram",
+   "teachingGoal": "Illustrate the main atmospheric layers, their composition, and the natural greenhouse effect.",
+   "cameraDistance": 10
+  }
+ },
+ {
+  "conceptId": "chem.env.ozone",
+  "renderCount": 35,
+  "cachedOn": "2026-08-21",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Solar UV photolyzes O₂ to produce O atoms"
+    },
+    {
+     "title": "O atoms combine with O₂ to form O₃ (Chapman cycle)"
+    },
+    {
+     "title": "CFCs release Cl atoms that catalytically destroy O₃"
+    },
+    {
+     "title": "Polar vortex traps ozone, intensifying depletion"
+    },
+    {
+     "title": "Montreal Protocol cuts CFC emissions, reducing loss"
+    },
+    {
+     "title": "More UV-B reaches surface, harming skin and ecosystems"
+    }
+   ],
+   "title": "Ozone Depletion Cycle"
+  }
+ },
+ {
+  "conceptId": "chem.env.water-soil",
+  "renderCount": 21,
+  "cachedOn": "2026-10-05",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Release of pollutants (nutrients, heavy metals, pesticides)"
+    },
+    {
+     "note": "Movement from land to water/soil",
+     "title": "Transport via runoff and leaching"
+    },
+    {
+     "title": "Accumulation in water bodies and soils"
+    },
+    {
+     "title": "Eutrophication: algal bloom from excess nutrients"
+    },
+    {
+     "title": "Increase in BOD/COD causing oxygen depletion"
+    },
+    {
+     "title": "Toxic effects on aquatic organisms and crops"
+    },
+    {
+     "title": "Soil acidity alteration affecting plant health"
+    },
+    {
+     "note": "Design less hazardous chemicals, waste prevention, etc.",
+     "title": "Mitigation using 12 Green Chemistry principles"
+    }
+   ],
+   "title": "Pathways and Impacts of Water and Soil Pollution"
+  }
+ },
+ {
+  "conceptId": "chem.equil.acids-bases",
+  "renderCount": 43,
+  "cachedOn": "2026-08-21",
+  "figure": {
+   "id": "acid_base_theories",
+   "steps": [
+    {
+     "objects": [
+      {
+       "id": "acid_arr",
+       "text": "Arrhenius Acid (H⁺)",
+       "type": "label",
+       "position": [
+        -3,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "base_arr",
+       "text": "Arrhenius Base (OH⁻)",
+       "type": "label",
+       "position": [
+        3,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "arrow_arr",
+       "to": [
+        2,
+        0,
+        0
+       ],
+       "from": [
+        -2,
+        0,
+        0
+       ],
+       "type": "arrow",
+       "color": "blue",
+       "thickness": 0.1
+      }
+     ],
+     "narration": "Arrhenius theory: acids release H⁺, bases release OH⁻ in water."
+    },
+    {
+     "objects": [
+      {
+       "id": "acid_br",
+       "text": "Brønsted–Lowry Acid (HA)",
+       "type": "label",
+       "position": [
+        -3,
+        -2,
+        0
+       ]
+      },
+      {
+       "id": "base_br",
+       "text": "Brønsted–Lowry Base (B)",
+       "type": "label",
+       "position": [
+        3,
+        -2,
+        0
+       ]
+      },
+      {
+       "id": "arrow_br",
+       "to": [
+        2,
+        -2,
+        0
+       ],
+       "from": [
+        -2,
+        -2,
+        0
+       ],
+       "text": "donates H⁺",
+       "type": "arrow",
+       "color": "green",
+       "thickness": 0.1
+      }
+     ],
+     "narration": "Brønsted–Lowry theory: acids donate protons to bases."
+    },
+    {
+     "objects": [
+      {
+       "id": "acid_lewis",
+       "text": "Lewis Acid (electron‑pair acceptor)",
+       "type": "label",
+       "position": [
+        -3,
+        2,
+        0
+       ]
+      },
+      {
+       "id": "base_lewis",
+       "text": "Lewis Base (electron‑pair donor)",
+       "type": "label",
+       "position": [
+        3,
+        2,
+        0
+       ]
+      },
+      {
+       "id": "arrow_lewis",
+       "to": [
+        -2,
+        2,
+        0
+       ],
+       "from": [
+        2,
+        2,
+        0
+       ],
+       "text": "accepts e⁻ pair",
+       "type": "arrow",
+       "color": "red",
+       "thickness": 0.1
+      }
+     ],
+     "narration": "Lewis theory: acids accept electron pairs from bases."
+    }
+   ],
+   "title": "Acid–Base Theories Overview",
+   "sceneType": "diagram",
+   "teachingGoal": "Illustrate the three major acid–base theories and their key concepts",
+   "cameraDistance": 10
+  }
+ },
+ {
+  "conceptId": "chem.equil.buffer",
+  "renderCount": 22,
+  "cachedOn": "2026-08-25",
+  "figure": {
+   "type": "graph",
+   "title": "Henderson–Hasselbalch relationship for a buffer",
+   "xLabel": "Concentration ratio [A-]/[HA] (unitless)",
+   "yLabel": "pH (unitless)",
+   "equation": "pH = 4.75 + log10(x)"
+  }
+ },
+ {
+  "conceptId": "chem.equil.complex-equil",
+  "renderCount": 18,
+  "cachedOn": "2026-08-21",
+  "figure": {
+   "type": "graph",
+   "title": "Stepwise Formation Constants",
+   "xLabel": "Step number",
+   "yLabel": "Log formation constant (log Kf)",
+   "equation": "2x + 1"
+  }
+ },
+ {
+  "conceptId": "chem.equil.concept",
+  "renderCount": 90,
+  "cachedOn": "2026-08-21",
+  "figure": {
+   "type": "graph",
+   "title": "Approach to Chemical Equilibrium",
+   "xLabel": "Time (s)",
+   "yLabel": "Concentration (mol·L⁻¹)",
+   "equation": "C_eq*(1 - exp(-k*t))"
+  }
+ },
+ {
+  "conceptId": "chem.equil.hydrolysis",
+  "renderCount": 16,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Salt dissociates into cation and anion"
+    },
+    {
+     "title": "Cation hydrolysis (if from weak acid)"
+    },
+    {
+     "title": "Anion hydrolysis (if from weak base)"
+    },
+    {
+     "title": "Net pH determined from hydrolysis products"
+    }
+   ],
+   "title": "Salt Hydrolysis Process"
+  }
+ },
+ {
+  "conceptId": "chem.equil.kc-kp",
+  "renderCount": 29,
+  "cachedOn": "2026-08-27",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Write the balanced chemical equation"
+    },
+    {
+     "title": "Set up the ICE table with initial concentrations"
+    },
+    {
+     "title": "Determine the change in concentrations at equilibrium"
+    },
+    {
+     "title": "Calculate the equilibrium concentrations"
+    },
+    {
+     "title": "Write the Kc expression from equilibrium concentrations"
+    },
+    {
+     "title": "Convert Kc to Kp using Δn and temperature"
+    },
+    {
+     "title": "For heterogeneous equilibria, Δn = 0, so Kp = Kc"
+    }
+   ],
+   "title": "Equilibrium Constants Kc and Kp"
+  }
+ },
+ {
+  "conceptId": "chem.equil.kw-ph",
+  "renderCount": 17,
+  "cachedOn": "2026-08-11",
+  "figure": {
+   "end": 14,
+   "type": "number_line",
+   "start": 0,
+   "title": "The pH Scale at 25°C (Acidic to Basic)",
+   "highlight": [
+    7
+   ]
+  }
+ },
+ {
+  "conceptId": "chem.equil.le-chatelier",
+  "renderCount": 51,
+  "cachedOn": "2026-09-11",
+  "figure": {
+   "type": "graph",
+   "title": "Van't Hoff Isocline: ln K vs 1/T",
+   "xLabel": "Inverse Temperature (1/K)",
+   "yLabel": "ln K",
+   "equation": "-5000*(1/x)+10"
+  }
+ },
+ {
+  "conceptId": "chem.equil.solubility",
+  "renderCount": 15,
+  "cachedOn": "2026-08-27",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Dissolve the salt in pure water."
+    },
+    {
+     "title": "Determine the solubility product Ksp."
+    },
+    {
+     "title": "Calculate the solubility S = sqrt(Ksp)."
+    },
+    {
+     "title": "Add a common ion to the solution."
+    },
+    {
+     "title": "Recalculate the ionic product Q."
+    },
+    {
+     "title": "Compare Q to Ksp to decide if precipitation occurs."
+    }
+   ],
+   "title": "Solubility Equilibria"
+  }
+ },
+ {
+  "conceptId": "chem.equil.titration",
+  "renderCount": 41,
+  "cachedOn": "2026-08-26",
+  "figure": {
+   "type": "graph",
+   "title": "Titration Curve",
+   "xLabel": "Volume of titrant added (mL)",
+   "yLabel": "pH",
+   "equation": "7 + 3/(1+exp(-5*(x-5)))"
+  }
+ },
+ {
+  "conceptId": "chem.equil.weak-acid",
+  "renderCount": 59,
+  "cachedOn": "2026-08-21",
+  "figure": {
+   "type": "graph",
+   "title": "pH of a Weak Acid as a Function of Initial Concentration",
+   "xLabel": "Initial concentration, c (M)",
+   "yLabel": "pH",
+   "equation": "y = 0.5*(pKa - log10(x))"
+  }
+ },
+ {
+  "conceptId": "chem.found.concentration",
+  "renderCount": 113,
+  "cachedOn": "2026-08-21",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Identify the given concentration value and its unit"
+    },
+    {
+     "title": "Convert the given amount to moles of solute"
+    },
+    {
+     "title": "Determine the desired concentration unit"
+    },
+    {
+     "title": "Apply the formula for the target unit (e.g., M = n/V)"
+    },
+    {
+     "title": "For dilutions, use M1·V1 = M2·V2 to find unknown"
+    },
+    {
+     "title": "Calculate the final value and include proper units"
+    },
+    {
+     "title": "Check calculations and round to appropriate sig figs"
+    }
+   ],
+   "title": "Converting Between Concentration Units"
+  }
+ },
+ {
+  "conceptId": "chem.found.matter",
+  "renderCount": 50,
+  "cachedOn": "2026-09-19",
+  "figure": {
+   "id": "nature-of-matter",
+   "steps": [
+    {
+     "objects": [
+      {
+       "id": "label-element",
+       "text": "Element",
+       "type": "label",
+       "color": "blue",
+       "position": [
+        0,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "particle-element",
+       "type": "particle",
+       "color": "blue",
+       "radius": 0.5,
+       "position": [
+        0,
+        0,
+        0
+       ]
+      }
+     ],
+     "narration": "An element is a pure substance made of one type of atom."
+    },
+    {
+     "objects": [
+      {
+       "id": "label-compound",
+       "text": "Compound",
+       "type": "label",
+       "color": "green",
+       "position": [
+        3,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "particle-compound-1",
+       "type": "particle",
+       "color": "green",
+       "radius": 0.5,
+       "position": [
+        3,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "particle-compound-2",
+       "type": "particle",
+       "color": "red",
+       "radius": 0.5,
+       "position": [
+        3.5,
+        0,
+        0
+       ]
+      }
+     ],
+     "narration": "A compound is a pure substance made of two or more elements chemically bonded."
+    },
+    {
+     "objects": [
+      {
+       "id": "label-mixture",
+       "text": "Mixture",
+       "type": "label",
+       "color": "purple",
+       "position": [
+        5,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "particle-mixture-1",
+       "type": "particle",
+       "color": "purple",
+       "radius": 0.5,
+       "position": [
+        5,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "particle-mixture-2",
+       "type": "particle",
+       "color": "orange",
+       "radius": 0.5,
+       "position": [
+        5.5,
+        0,
+        0
+       ]
+      }
+     ],
+     "narration": "A mixture contains two or more substances that are not chemically bonded."
+    }
+   ],
+   "title": "Nature of Matter",
+   "ariaLabel": "Diagram showing element, compound, and mixture",
+   "sceneType": "comparison",
+   "teachingGoal": "Show classification of matter into elements, compounds, and mixtures, and distinguish pure substances from mixtures.",
+   "cameraDistance": 10
+  }
+ },
+ {
+  "conceptId": "chem.found.measurement",
+  "renderCount": 41,
+  "cachedOn": "2026-10-02",
+  "figure": {
+   "end": 12,
+   "type": "number_line",
+   "start": -12,
+   "title": "SI prefixes and scientific notation",
+   "highlight": [
+    -9,
+    -6,
+    -3,
+    0,
+    3,
+    6,
+    9
+   ]
+  }
+ },
+ {
+  "conceptId": "chem.found.mole-concept",
+  "renderCount": 287,
+  "cachedOn": "2026-08-17",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Mass in Grams"
+    },
+    {
+     "title": "Divide by Molar Mass (g/mol) to get Moles"
+    },
+    {
+     "title": "Moles (mol)"
+    },
+    {
+     "title": "Multiply by Avogadro's Number (6.022 x 10^23)"
+    },
+    {
+     "title": "Number of Particles"
+    }
+   ],
+   "title": "Interconverting Mass, Moles, and Number of Particles",
+   "direction": "horizontal"
+  }
+ },
+ {
+  "conceptId": "chem.found.pure-substances",
+  "renderCount": 131,
+  "cachedOn": "2026-09-19",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Identify mixture type (homogeneous or heterogeneous)"
+    },
+    {
+     "title": "Select appropriate separation technique"
+    },
+    {
+     "title": "Apply the chosen technique (e.g., filtration, distillation)"
+    },
+    {
+     "title": "Collect and verify pure substances"
+    }
+   ],
+   "title": "Separating a Mixture into Pure Substances"
+  }
+ },
+ {
+  "conceptId": "chem.found.significant-figures",
+  "renderCount": 2,
+  "cachedOn": "2026-08-10",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Identify all non-zero digits"
+    },
+    {
+     "title": "Check for trapped zeros between non-zero digits"
+    },
+    {
+     "title": "Evaluate leading zeros as never significant"
+    },
+    {
+     "title": "Determine trailing zeros based on decimal presence"
+    }
+   ],
+   "title": "Determining Significant Figures in a Measurement"
+  }
+ },
+ {
+  "conceptId": "chem.found.states-of-matter",
+  "renderCount": 170,
+  "cachedOn": "2026-08-11",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Solid State"
+    },
+    {
+     "title": "Melting (Heating)"
+    },
+    {
+     "title": "Liquid State"
+    },
+    {
+     "title": "Evaporation (Heating)"
+    },
+    {
+     "title": "Gas State"
+    }
+   ],
+   "title": "Interconversion of States of Matter"
+  }
+ },
+ {
+  "conceptId": "chem.found.stoichiometry",
+  "renderCount": 8,
+  "cachedOn": "2026-08-10",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Balance the chemical equation"
+    },
+    {
+     "title": "Convert given mass to moles"
+    },
+    {
+     "title": "Apply molar mole ratios"
+    },
+    {
+     "title": "Calculate theoretical and percent yield"
+    }
+   ],
+   "title": "Stoichiometric Calculation Steps"
+  }
+ },
+ {
+  "conceptId": "chem.hal.cfcs",
+  "renderCount": 32,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "CFC emitted into atmosphere"
+    },
+    {
+     "title": "CFC transported to stratosphere"
+    },
+    {
+     "title": "UV photolysis releases chlorine atoms"
+    },
+    {
+     "title": "Cl atoms catalyze ozone destruction"
+    },
+    {
+     "title": "Ozone layer depletion and environmental impact"
+    }
+   ],
+   "title": "Ozone Depletion by CFCs"
+  }
+ },
+ {
+  "conceptId": "chem.hal.elimination",
+  "renderCount": 35,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Start with alkyl halide substrate"
+    },
+    {
+     "title": "Select base strength and temperature"
+    },
+    {
+     "title": "Strong base + high temp → E2 pathway"
+    },
+    {
+     "title": "E2: concerted proton removal and leaving group departure"
+    },
+    {
+     "title": "Weak base + low temp → E1 pathway"
+    },
+    {
+     "title": "E1: formation of carbocation intermediate"
+    },
+    {
+     "title": "Carbocation deprotonates to form alkene"
+    },
+    {
+     "title": "Saytzeff's rule: more substituted alkene favored"
+    },
+    {
+     "title": "Hofmann's rule: bulky base favors less substituted alkene"
+    },
+    {
+     "title": "Competition with substitution: SN1/E1 vs SN2/E2"
+    }
+   ],
+   "title": "Elimination Reactions: E1 vs E2"
+  }
+ },
+ {
+  "conceptId": "chem.hal.grignard",
+  "renderCount": 41,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Prepare RMgX/RLi from alkyl halide and Mg/Li in dry ether"
+    },
+    {
+     "title": "Add electrophile to organometallic reagent"
+    },
+    {
+     "title": "Quench with water or alcohol to release product"
+    },
+    {
+     "title": "Limitations: moisture sensitivity, side reactions"
+    }
+   ],
+   "title": "Preparation and Use of Grignard and Organolithium Reagents"
+  }
+ },
+ {
+  "conceptId": "chem.hal.haloarenes",
+  "renderCount": 35,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Nucleophile attacks electron-deficient aromatic ring"
+    },
+    {
+     "title": "Formation of Meisenheimer (σ) complex"
+    },
+    {
+     "title": "Leaving group departs, rearomatization occurs"
+    },
+    {
+     "title": "Product formed, aromaticity restored"
+    }
+   ],
+   "title": "SNAr Mechanism for Haloarenes"
+  }
+ },
+ {
+  "conceptId": "chem.hal.sn1",
+  "renderCount": 57,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Ionization to form carbocation"
+    },
+    {
+     "title": "Carbocation racemization"
+    },
+    {
+     "title": "Nucleophile attack"
+    },
+    {
+     "title": "Deprotonation and product formation"
+    }
+   ],
+   "title": "SN1 Mechanism"
+  }
+ },
+ {
+  "conceptId": "chem.hal.sn2",
+  "renderCount": 32,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Nucleophile approaches substrate from backside"
+    },
+    {
+     "title": "Pentavalent transition state forms"
+    },
+    {
+     "title": "Leaving group departs"
+    },
+    {
+     "title": "Configuration inverts (Walden inversion)"
+    },
+    {
+     "title": "Product with inverted stereochemistry is released"
+    }
+   ],
+   "title": "SN2 Mechanism"
+  }
+ },
+ {
+  "conceptId": "chem.hyd.alkenes",
+  "renderCount": 38,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Elimination of HX from alkanes to form alkenes"
+    },
+    {
+     "title": "Electrophilic addition of HBr to alkene (general)"
+    },
+    {
+     "title": "Markovnikov addition of HBr to alkene (specific)"
+    },
+    {
+     "title": "Ozonolysis of alkene to produce aldehydes/ketones"
+    },
+    {
+     "title": "Polymerization of alkene to produce polyethylene"
+    }
+   ],
+   "title": "Alkene Preparation and Key Reactions"
+  }
+ },
+ {
+  "conceptId": "chem.hyd.alkynes",
+  "renderCount": 39,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Preparation of Alkynes via Dehydrohalogenation"
+    },
+    {
+     "title": "Acidic Character: Protonation of the Triple Bond"
+    },
+    {
+     "title": "Electrophilic Addition to the Alkyne"
+    },
+    {
+     "title": "Nucleophilic Addition to the Alkyne"
+    },
+    {
+     "title": "Hydration to Form a Ketone"
+    }
+   ],
+   "title": "Alkyne Chemistry Overview"
+  }
+ },
+ {
+  "conceptId": "chem.hyd.arenes",
+  "renderCount": 37,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Generate electrophile (e.g., NO2+ from HNO3 & AlCl3)"
+    },
+    {
+     "title": "Electrophile attacks benzene ring forming σ-complex"
+    },
+    {
+     "title": "σ-Complex loses a proton to restore aromaticity"
+    },
+    {
+     "title": "Product (e.g., nitrobenzene) is formed"
+    }
+   ],
+   "title": "Electrophilic Aromatic Substitution (EAS) Mechanism"
+  }
+ },
+ {
+  "conceptId": "chem.hyd.conformations",
+  "renderCount": 41,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "id": "conformationalAnalysisScene",
+   "steps": [
+    {
+     "objects": [
+      {
+       "id": "chairPath",
+       "type": "path",
+       "color": "blue",
+       "points": [
+        [
+         0,
+         0,
+         0
+        ],
+        [
+         1,
+         0,
+         0
+        ],
+        [
+         2,
+         1,
+         1
+        ],
+        [
+         3,
+         1,
+         1
+        ],
+        [
+         4,
+         0,
+         0
+        ],
+        [
+         5,
+         0,
+         0
+        ],
+        [
+         0,
+         0,
+         0
+        ]
+       ]
+      },
+      {
+       "id": "chairLabel",
+       "text": "Chair conformation",
+       "type": "label",
+       "color": "black",
+       "position": [
+        2.5,
+        0.5,
+        0.5
+       ]
+      }
+     ],
+     "narration": "Display the chair conformation of cyclohexane."
+    },
+    {
+     "objects": [
+      {
+       "id": "boatPath",
+       "type": "path",
+       "color": "red",
+       "points": [
+        [
+         0,
+         0,
+         0
+        ],
+        [
+         1,
+         0,
+         0
+        ],
+        [
+         2,
+         1,
+         0
+        ],
+        [
+         3,
+         1,
+         0
+        ],
+        [
+         4,
+         0,
+         1
+        ],
+        [
+         5,
+         0,
+         1
+        ],
+        [
+         0,
+         0,
+         0
+        ]
+       ]
+      },
+      {
+       "id": "boatLabel",
+       "text": "Boat conformation",
+       "type": "label",
+       "color": "black",
+       "position": [
+        2.5,
+        0.5,
+        0.5
+       ]
+      }
+     ],
+     "narration": "Add the boat conformation for comparison."
+    }
+   ],
+   "title": "Conformational Analysis: Chair vs Boat Cyclohexane",
+   "ariaLabel": "Diagram showing chair and boat conformations of cyclohexane",
+   "sceneType": "diagram",
+   "teachingGoal": "Illustrate ring conformations and ring strain",
+   "cameraDistance": 10
+  }
+ },
+ {
+  "conceptId": "chem.hyd.petroleum",
+  "renderCount": 45,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Fractional Distillation of crude oil"
+    },
+    {
+     "title": "Collection of Distillation Fractions"
+    },
+    {
+     "title": "Cracking of heavy fractions"
+    },
+    {
+     "title": "Reforming of low-octane fractions"
+    },
+    {
+     "title": "Octane Number Adjustment and Quality Control"
+    }
+   ],
+   "title": "Petroleum Refining"
+  }
+ },
+ {
+  "conceptId": "chem.hyd.polycyclic",
+  "renderCount": 37,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "id": "polycyclic-heterocyclic-illustration",
+   "steps": [
+    {
+     "objects": [
+      {
+       "id": "b1",
+       "to": [
+        0.5,
+        0.8660254037844386,
+        0
+       ],
+       "from": [
+        1,
+        0,
+        0
+       ],
+       "type": "bond"
+      },
+      {
+       "id": "b2",
+       "to": [
+        -0.5,
+        0.8660254037844386,
+        0
+       ],
+       "from": [
+        0.5,
+        0.8660254037844386,
+        0
+       ],
+       "type": "bond"
+      },
+      {
+       "id": "b3",
+       "to": [
+        -1,
+        0,
+        0
+       ],
+       "from": [
+        -0.5,
+        0.8660254037844386,
+        0
+       ],
+       "type": "bond"
+      },
+      {
+       "id": "b4",
+       "to": [
+        -0.5,
+        -0.8660254037844386,
+        0
+       ],
+       "from": [
+        -1,
+        0,
+        0
+       ],
+       "type": "bond"
+      },
+      {
+       "id": "b5",
+       "to": [
+        0.5,
+        -0.8660254037844386,
+        0
+       ],
+       "from": [
+        -0.5,
+        -0.8660254037844386,
+        0
+       ],
+       "type": "bond"
+      },
+      {
+       "id": "b6",
+       "to": [
+        1,
+        0,
+        0
+       ],
+       "from": [
+        0.5,
+        -0.8660254037844386,
+        0
+       ],
+       "type": "bond"
+      },
+      {
+       "id": "l1",
+       "text": "Benzene",
+       "type": "label",
+       "position": [
+        0,
+        0,
+        0
+       ]
+      }
+     ],
+     "narration": "Illustrate the benzene ring, a classic aromatic system."
+    },
+    {
+     "objects": [
+      {
+       "id": "f1",
+       "to": [
+        3.5,
+        0.8660254037844386,
+        0
+       ],
+       "from": [
+        4,
+        0,
+        0
+       ],
+       "type": "bond"
+      },
+      {
+       "id": "f2",
+       "to": [
+        2.5,
+        0.8660254037844386,
+        0
+       ],
+       "from": [
+        3.5,
+        0.8660254037844386,
+        0
+       ],
+       "type": "bond"
+      },
+      {
+       "id": "f3",
+       "to": [
+        2,
+        0,
+        0
+       ],
+       "from": [
+        2.5,
+        0.8660254037844386,
+        0
+       ],
+       "type": "bond"
+      },
+      {
+       "id": "f4",
+       "to": [
+        2.5,
+        -0.8660254037844386,
+        0
+       ],
+       "from": [
+        2,
+        0,
+        0
+       ],
+       "type": "bond"
+      },
+      {
+       "id": "f5",
+       "to": [
+        4,
+        0,
+        0
+       ],
+       "from": [
+        2.5,
+        -0.8660254037844386,
+        0
+       ],
+       "type": "bond"
+      },
+      {
+       "id": "l2",
+       "text": "Furan",
+       "type": "label",
+       "position": [
+        3,
+        0,
+        0
+       ]
+      }
+     ],
+     "narration": "Add the furan ring, a heterocyclic aromatic system containing oxygen."
+    }
+   ],
+   "title": "Polycyclic and Heterocyclic Systems",
+   "ariaLabel": "Illustration of benzene and furan rings",
+   "sceneType": "diagram",
+   "teachingGoal": "Show aromatic benzene and heteroaromatic furan rings",
+   "cameraDistance": 10
+  }
+ },
+ {
+  "conceptId": "chem.kinet.arrhenius",
+  "renderCount": 56,
+  "cachedOn": "2026-08-21",
+  "figure": {
+   "type": "graph",
+   "title": "Arrhenius Plot",
+   "xLabel": "1/T (K⁻¹)",
+   "yLabel": "ln k (dimensionless)",
+   "equation": "-Ea/R * x + ln A"
+  }
+ },
+ {
+  "conceptId": "chem.kinet.catalysis",
+  "renderCount": 49,
+  "cachedOn": "2026-08-27",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Substrate binds to catalyst"
+    },
+    {
+     "title": "Transition state formed with lower activation energy"
+    },
+    {
+     "title": "Product released, catalyst remains"
+    },
+    {
+     "title": "Catalyst regenerated, ready for next cycle"
+    }
+   ],
+   "title": "Catalytic Cycle"
+  }
+ },
+ {
+  "conceptId": "chem.kinet.integrated-rate",
+  "renderCount": 22,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "type": "graph",
+   "title": "First-Order Integrated Rate Law",
+   "xLabel": "Time (s)",
+   "yLabel": "Concentration (M)",
+   "equation": "y = A0 * exp(-k*x)"
+  }
+ },
+ {
+  "conceptId": "chem.kinet.mechanism",
+  "renderCount": 51,
+  "cachedOn": "2026-08-27",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Elementary step 1: Bimolecular collision (A + B → AB*)"
+    },
+    {
+     "title": "Step 2: Decomposition (AB* → A + B) – rate-determining"
+    },
+    {
+     "title": "Step 3: Conversion (AB* → Products)"
+    },
+    {
+     "title": "Step 4: Apply steady-state approximation to AB*"
+    }
+   ],
+   "title": "Reaction Mechanism Overview"
+  }
+ },
+ {
+  "conceptId": "chem.kinet.photochemistry",
+  "renderCount": 41,
+  "cachedOn": "2026-08-21",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Photon absorption by chromophore"
+    },
+    {
+     "title": "Formation of excited electronic state"
+    },
+    {
+     "title": "Primary photochemical reaction (e.g., bond cleavage)"
+    },
+    {
+     "title": "Secondary reaction involving radicals"
+    },
+    {
+     "title": "Determine quantum yield of the primary step"
+    },
+    {
+     "title": "Apply Beer-Lambert law to measure reactant concentration"
+    }
+   ],
+   "title": "Photochemical Reaction Sequence"
+  }
+ },
+ {
+  "conceptId": "chem.kinet.rate",
+  "renderCount": 30,
+  "cachedOn": "2026-08-21",
+  "figure": {
+   "type": "graph",
+   "title": "Concentration vs Time for a First‑Order Reaction",
+   "xLabel": "Time (s)",
+   "yLabel": "Concentration (M)",
+   "equation": "exp(-0.5*t)"
+  }
+ },
+ {
+  "conceptId": "chem.kinet.rate-law",
+  "renderCount": 82,
+  "cachedOn": "2026-08-21",
+  "figure": {
+   "type": "graph",
+   "title": "Rate law: rate = k [A]^2 (k = 1 M^-1 s^-1)",
+   "xLabel": "Concentration of A (M)",
+   "yLabel": "Rate (M s^-1)",
+   "equation": "x^2"
+  }
+ },
+ {
+  "conceptId": "chem.nitro.amines",
+  "renderCount": 20,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "id": "amine_basicity_scene",
+   "type": "scene",
+   "steps": [
+    {
+     "objects": [
+      {
+       "id": "primary_label",
+       "text": "Primary amine (RNH₂)",
+       "type": "label",
+       "color": "#000000",
+       "position": [
+        -3,
+        0,
+        0
+       ]
+      }
+     ],
+     "narration": "Introduce the primary amine."
+    },
+    {
+     "objects": [
+      {
+       "id": "secondary_label",
+       "text": "Secondary amine (R₂NH)",
+       "type": "label",
+       "color": "#000000",
+       "position": [
+        0,
+        0,
+        0
+       ]
+      }
+     ],
+     "narration": "Add the secondary amine."
+    },
+    {
+     "objects": [
+      {
+       "id": "tertiary_label",
+       "text": "Tertiary amine (R₃N)",
+       "type": "label",
+       "color": "#000000",
+       "position": [
+        3,
+        0,
+        0
+       ]
+      }
+     ],
+     "narration": "Show the tertiary amine."
+    },
+    {
+     "objects": [
+      {
+       "id": "arrow1",
+       "to": [
+        0,
+        0,
+        0
+       ],
+       "from": [
+        -3,
+        0,
+        0
+       ],
+       "type": "arrow",
+       "color": "#FF0000"
+      },
+      {
+       "id": "arrow2",
+       "to": [
+        3,
+        0,
+        0
+       ],
+       "from": [
+        0,
+        0,
+        0
+       ],
+       "type": "arrow",
+       "color": "#FF0000"
+      }
+     ],
+     "narration": "Illustrate the basicity trend: primary < secondary < tertiary."
+    }
+   ],
+   "title": "Amines: Classification and Basicity",
+   "ariaLabel": "Diagram of amine classification and basicity",
+   "sceneType": "diagram",
+   "teachingGoal": "Show classification of primary, secondary, tertiary amines and their basicity order",
+   "cameraDistance": 10
+  }
+ },
+ {
+  "conceptId": "chem.nitro.amino-acids",
+  "renderCount": 32,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "id": "chem.nitro.amino-acids",
+   "steps": [
+    {
+     "objects": [
+      {
+       "id": "alphaC",
+       "type": "particle",
+       "color": "#FFFFFF",
+       "radius": 0.3,
+       "position": [
+        0,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "labelAlpha",
+       "text": "α‑Carbon",
+       "type": "label",
+       "color": "#000000",
+       "position": [
+        0,
+        0.5,
+        0
+       ]
+      }
+     ],
+     "narration": "The central carbon atom of an amino acid."
+    },
+    {
+     "objects": [
+      {
+       "id": "amino1",
+       "type": "particle",
+       "color": "#FF0000",
+       "radius": 0.3,
+       "position": [
+        0,
+        1,
+        0
+       ]
+      },
+      {
+       "id": "labelAmino",
+       "text": "Amino group (–NH3⁺)",
+       "type": "label",
+       "color": "#000000",
+       "position": [
+        0,
+        1.5,
+        0
+       ]
+      },
+      {
+       "id": "carboxyl1",
+       "type": "particle",
+       "color": "#0000FF",
+       "radius": 0.3,
+       "position": [
+        0,
+        -1,
+        0
+       ]
+      },
+      {
+       "id": "labelCarboxyl",
+       "text": "Carboxyl group (–COO⁻)",
+       "type": "label",
+       "color": "#000000",
+       "position": [
+        0,
+        -1.5,
+        0
+       ]
+      }
+     ],
+     "narration": "The amino and carboxyl groups form the zwitterionic structure."
+    },
+    {
+     "objects": [
+      {
+       "id": "Rgroup",
+       "type": "particle",
+       "color": "#00FF00",
+       "radius": 0.3,
+       "position": [
+        1,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "labelR",
+       "text": "R‑group (side chain)",
+       "type": "label",
+       "color": "#000000",
+       "position": [
+        1,
+        0.5,
+        0
+       ]
+      }
+     ],
+     "narration": "The side chain (R‑group) varies among amino acids."
+    },
+    {
+     "objects": [
+      {
+       "id": "amino2",
+       "type": "particle",
+       "color": "#FF0000",
+       "radius": 0.3,
+       "position": [
+        0,
+        -2,
+        0
+       ]
+      },
+      {
+       "id": "labelAmino2",
+       "text": "Amino group of next residue",
+       "type": "label",
+       "color": "#000000",
+       "position": [
+        0,
+        -2.5,
+        0
+       ]
+      },
+      {
+       "id": "peptideBond",
+       "to": [
+        0,
+        -2,
+        0
+       ],
+       "from": [
+        0,
+        -1,
+        0
+       ],
+       "type": "bond",
+       "color": "#808080",
+       "thickness": 0.1
+      },
+      {
+       "id": "labelPeptide",
+       "text": "Peptide bond",
+       "type": "label",
+       "color": "#000000",
+       "position": [
+        0,
+        -1.5,
+        0
+       ]
+      }
+     ],
+     "narration": "A peptide bond links the carboxyl of one residue to the amino of the next."
+    }
+   ],
+   "title": "α‑Amino Acid Structure",
+   "ariaLabel": "Diagram of an α‑amino acid showing functional groups and peptide bond",
+   "sceneType": "diagram",
+   "teachingGoal": "Illustrate the structure of an α‑amino acid, its zwitterionic form, R‑group classification, and peptide bond.",
+   "cameraDistance": 10
+  }
+ },
+ {
+  "conceptId": "chem.nitro.diazonium",
+  "renderCount": 34,
+  "cachedOn": "2026-08-21",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Generate diazonium salt from aniline and nitrous acid"
+    },
+    {
+     "title": "Perform Balz–Schiemann to form aryl diazonium salt"
+    },
+    {
+     "title": "Execute Sandmeyer reaction to replace diazonium with halide"
+    },
+    {
+     "title": "Conduct azo coupling with aromatic compounds"
+    },
+    {
+     "title": "Carry out replacement reactions (e.g., substitution)"
+    },
+    {
+     "title": "Synthesize dyes via diazonium coupling"
+    }
+   ],
+   "title": "Preparation and Use of Diazonium Salts"
+  }
+ },
+ {
+  "conceptId": "chem.nitro.heterocycles",
+  "renderCount": 22,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "id": "chem.nitro.heterocycles.scene",
+   "steps": [
+    {
+     "objects": [
+      {
+       "id": "bond1",
+       "to": [
+        1,
+        0,
+        0
+       ],
+       "from": [
+        0,
+        0,
+        0
+       ],
+       "type": "bond"
+      },
+      {
+       "id": "bond2",
+       "to": [
+        1.5,
+        0.866,
+        0
+       ],
+       "from": [
+        1,
+        0,
+        0
+       ],
+       "type": "bond"
+      },
+      {
+       "id": "bond3",
+       "to": [
+        1,
+        1.732,
+        0
+       ],
+       "from": [
+        1.5,
+        0.866,
+        0
+       ],
+       "type": "bond"
+      },
+      {
+       "id": "bond4",
+       "to": [
+        0,
+        1.732,
+        0
+       ],
+       "from": [
+        1,
+        1.732,
+        0
+       ],
+       "type": "bond"
+      },
+      {
+       "id": "bond5",
+       "to": [
+        -0.5,
+        0.866,
+        0
+       ],
+       "from": [
+        0,
+        1.732,
+        0
+       ],
+       "type": "bond"
+      },
+      {
+       "id": "bond6",
+       "to": [
+        0,
+        0,
+        0
+       ],
+       "from": [
+        -0.5,
+        0.866,
+        0
+       ],
+       "type": "bond"
+      },
+      {
+       "id": "atom0",
+       "text": "C",
+       "type": "label",
+       "color": "black",
+       "position": [
+        0,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "atom1",
+       "text": "C",
+       "type": "label",
+       "color": "black",
+       "position": [
+        1,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "atom2",
+       "text": "C",
+       "type": "label",
+       "color": "black",
+       "position": [
+        1.5,
+        0.866,
+        0
+       ]
+      },
+      {
+       "id": "atom3",
+       "text": "C",
+       "type": "label",
+       "color": "black",
+       "position": [
+        1,
+        1.732,
+        0
+       ]
+      },
+      {
+       "id": "atom4",
+       "text": "C",
+       "type": "label",
+       "color": "black",
+       "position": [
+        0,
+        1.732,
+        0
+       ]
+      },
+      {
+       "id": "atom5",
+       "text": "N",
+       "type": "label",
+       "color": "blue",
+       "position": [
+        -0.5,
+        0.866,
+        0
+       ]
+      }
+     ],
+     "narration": "Draw the pyridine ring structure."
+    },
+    {
+     "objects": [
+      {
+       "id": "ringLabel",
+       "text": "Pyridine",
+       "type": "label",
+       "color": "green",
+       "position": [
+        0.5,
+        0.5,
+        0
+       ]
+      },
+      {
+       "id": "basicLabel",
+       "text": "Basic nitrogen",
+       "type": "label",
+       "color": "red",
+       "position": [
+        -0.5,
+        1.2,
+        0
+       ]
+      }
+     ],
+     "narration": "Label the nitrogen as basic and identify the ring."
+    }
+   ],
+   "title": "Nitrogen Heterocycles Diagram",
+   "ariaLabel": "Diagram of a nitrogen heterocycle",
+   "sceneType": "diagram",
+   "teachingGoal": "Illustrate the structure of a nitrogen heterocycle and its basicity",
+   "cameraDistance": 10
+  }
+ },
+ {
+  "conceptId": "chem.nitro.nitro-compounds",
+  "renderCount": 41,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Nitration of benzene to form nitrobenzene"
+    },
+    {
+     "title": "Reduction of nitrobenzene to aniline"
+    },
+    {
+     "title": "Partial reduction to nitrosobenzene"
+    },
+    {
+     "title": "Effect on ring reactivity"
+    }
+   ],
+   "title": "Nitro Compounds: Nitration and Reduction"
+  }
+ },
+ {
+  "conceptId": "chem.org.aromaticity",
+  "renderCount": 44,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Count the π electrons in the ring"
+    },
+    {
+     "title": "Check if the count equals 4n+2"
+    },
+    {
+     "title": "Classify as aromatic, anti‑aromatic, or non‑aromatic"
+    }
+   ],
+   "title": "Determining Aromaticity"
+  }
+ },
+ {
+  "conceptId": "chem.org.arrow-pushing",
+  "renderCount": 52,
+  "cachedOn": "2026-08-29",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Nucleophile approaches electrophilic center"
+    },
+    {
+     "title": "Nucleophile donates electron pair to form new bond"
+    },
+    {
+     "title": "Leaving group departs as bond breaks"
+    }
+   ],
+   "title": "Electron Flow in SN2 Reaction"
+  }
+ },
+ {
+  "conceptId": "chem.org.electronic-effects",
+  "renderCount": 10,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "id": "electronic-effects-fig",
+   "steps": [
+    {
+     "objects": [
+      {
+       "id": "bond1",
+       "to": [
+        2,
+        0,
+        0
+       ],
+       "from": [
+        -2,
+        0,
+        0
+       ],
+       "type": "bond"
+      },
+      {
+       "id": "label1",
+       "text": "C-C chain",
+       "type": "label",
+       "position": [
+        0,
+        0,
+        0
+       ]
+      }
+     ],
+     "narration": "Draw the central carbon chain."
+    },
+    {
+     "objects": [
+      {
+       "id": "group1",
+       "text": "R",
+       "type": "point",
+       "color": "#ff0000",
+       "radius": 0.3,
+       "position": [
+        2,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "arrow1",
+       "to": [
+        0,
+        0,
+        0
+       ],
+       "from": [
+        2,
+        0,
+        0
+       ],
+       "text": "-I",
+       "type": "arrow",
+       "color": "#0000ff",
+       "thickness": 0.1
+      },
+      {
+       "id": "label2",
+       "text": "Inductive effect",
+       "type": "label",
+       "position": [
+        1,
+        0.5,
+        0
+       ]
+      }
+     ],
+     "narration": "Add an electron-withdrawing group and its inductive effect."
+    },
+    {
+     "objects": [
+      {
+       "id": "bond2",
+       "to": [
+        -2,
+        0,
+        0
+       ],
+       "from": [
+        -4,
+        0,
+        0
+       ],
+       "type": "bond"
+      },
+      {
+       "id": "arrow2",
+       "to": [
+        -2,
+        0,
+        0
+       ],
+       "from": [
+        -4,
+        0,
+        0
+       ],
+       "text": "M",
+       "type": "arrow",
+       "color": "#00aa00",
+       "thickness": 0.1
+      },
+      {
+       "id": "label3",
+       "text": "Mesomeric effect",
+       "type": "label",
+       "position": [
+        -3,
+        0.5,
+        0
+       ]
+      }
+     ],
+     "narration": "Show a conjugated double bond and its mesomeric effect."
+    }
+   ],
+   "title": "Inductive and Mesomeric Effects",
+   "ariaLabel": "Diagram showing a carbon chain with inductive and mesomeric effects.",
+   "sceneType": "diagram",
+   "teachingGoal": "Illustrate +I, -I inductive effects and mesomeric effects in a simple carbon chain.",
+   "cameraDistance": 10
+  }
+ },
+ {
+  "conceptId": "chem.org.hybridization",
+  "renderCount": 9,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "id": "hybridization_diagram",
+   "steps": [
+    {
+     "objects": [
+      {
+       "id": "C_sp3",
+       "type": "particle",
+       "color": "#000000",
+       "radius": 0.3,
+       "position": [
+        -3,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "bond_sp3_1",
+       "to": [
+        -2,
+        1,
+        1
+       ],
+       "from": [
+        -3,
+        0,
+        0
+       ],
+       "type": "bond",
+       "color": "#ff0000",
+       "thickness": 0.1
+      },
+      {
+       "id": "bond_sp3_2",
+       "to": [
+        -4,
+        -1,
+        1
+       ],
+       "from": [
+        -3,
+        0,
+        0
+       ],
+       "type": "bond",
+       "color": "#ff0000",
+       "thickness": 0.1
+      },
+      {
+       "id": "bond_sp3_3",
+       "to": [
+        -4,
+        1,
+        -1
+       ],
+       "from": [
+        -3,
+        0,
+        0
+       ],
+       "type": "bond",
+       "color": "#ff0000",
+       "thickness": 0.1
+      },
+      {
+       "id": "bond_sp3_4",
+       "to": [
+        -2,
+        -1,
+        -1
+       ],
+       "from": [
+        -3,
+        0,
+        0
+       ],
+       "type": "bond",
+       "color": "#ff0000",
+       "thickness": 0.1
+      },
+      {
+       "id": "label_sp3",
+       "text": "sp³ hybridized carbon",
+       "type": "label",
+       "color": "#000000",
+       "position": [
+        -3,
+        0.5,
+        0
+       ]
+      }
+     ],
+     "narration": "Show a carbon atom with sp³ hybridization forming four sigma bonds in a tetrahedral geometry."
+    },
+    {
+     "objects": [
+      {
+       "id": "C_sp2",
+       "type": "particle",
+       "color": "#000000",
+       "radius": 0.3,
+       "position": [
+        0,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "bond_sp2_1",
+       "to": [
+        1,
+        0,
+        0
+       ],
+       "from": [
+        0,
+        0,
+        0
+       ],
+       "type": "bond",
+       "color": "#00ff00",
+       "thickness": 0.1
+      },
+      {
+       "id": "bond_sp2_2",
+       "to": [
+        -0.5,
+        0.866,
+        0
+       ],
+       "from": [
+        0,
+        0,
+        0
+       ],
+       "type": "bond",
+       "color": "#00ff00",
+       "thickness": 0.1
+      },
+      {
+       "id": "bond_sp2_3",
+       "to": [
+        -0.5,
+        -0.866,
+        0
+       ],
+       "from": [
+        0,
+        0,
+        0
+       ],
+       "type": "bond",
+       "color": "#00ff00",
+       "thickness": 0.1
+      },
+      {
+       "id": "pi_sp2",
+       "to": [
+        0,
+        0,
+        1
+       ],
+       "from": [
+        0,
+        0,
+        0
+       ],
+       "type": "arrow",
+       "color": "#0000ff",
+       "thickness": 0.08
+      },
+      {
+       "id": "label_sp2",
+       "text": "sp² hybridized carbon",
+       "type": "label",
+       "color": "#000000",
+       "position": [
+        0,
+        0.5,
+        0
+       ]
+      }
+     ],
+     "narration": "Add a carbon atom with sp² hybridization forming three sigma bonds in a trigonal planar arrangement and one pi bond."
+    },
+    {
+     "objects": [
+      {
+       "id": "C_sp",
+       "type": "particle",
+       "color": "#000000",
+       "radius": 0.3,
+       "position": [
+        3,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "bond_sp_1",
+       "to": [
+        4,
+        0,
+        0
+       ],
+       "from": [
+        3,
+        0,
+        0
+       ],
+       "type": "bond",
+       "color": "#ff00ff",
+       "thickness": 0.1
+      },
+      {
+       "id": "bond_sp_2",
+       "to": [
+        2,
+        0,
+        0
+       ],
+       "from": [
+        3,
+        0,
+        0
+       ],
+       "type": "bond",
+       "color": "#ff00ff",
+       "thickness": 0.1
+      },
+      {
+       "id": "pi_sp_1",
+       "to": [
+        3,
+        0,
+        1
+       ],
+       "from": [
+        3,
+        0,
+        0
+       ],
+       "type": "arrow",
+       "color": "#0000ff",
+       "thickness": 0.08
+      },
+      {
+       "id": "pi_sp_2",
+       "to": [
+        3,
+        0,
+        -1
+       ],
+       "from": [
+        3,
+        0,
+        0
+       ],
+       "type": "arrow",
+       "color": "#0000ff",
+       "thickness": 0.08
+      },
+      {
+       "id": "label_sp",
+       "text": "sp hybridized carbon",
+       "type": "label",
+       "color": "#000000",
+       "position": [
+        3,
+        0.5,
+        0
+       ]
+      }
+     ],
+     "narration": "Add a carbon atom with sp hybridization forming two sigma bonds in a linear arrangement and two pi bonds."
+    }
+   ],
+   "title": "Carbon Hybridization Diagram",
+   "ariaLabel": "Hybridization diagram",
+   "sceneType": "diagram",
+   "teachingGoal": "Illustrate the geometry and bonding of sp³, sp², and sp hybridized carbon atoms.",
+   "cameraDistance": 10
+  }
+ },
+ {
+  "conceptId": "chem.org.isomerism",
+  "renderCount": 18,
+  "cachedOn": "2026-09-07",
+  "figure": {
+   "id": "isomerism_diagram",
+   "steps": [
+    {
+     "objects": [
+      {
+       "id": "label_nbutane",
+       "text": "n‑Butane (chain isomer)",
+       "type": "label",
+       "position": [
+        -4,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "label_isobutane",
+       "text": "i‑Butane",
+       "type": "label",
+       "position": [
+        -2,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "bond_nbutane",
+       "to": [
+        -3.5,
+        0.2,
+        0
+       ],
+       "from": [
+        -4.5,
+        -0.2,
+        0
+       ],
+       "type": "bond",
+       "color": "gray",
+       "thickness": 0.1
+      },
+      {
+       "id": "bond_isobutane",
+       "to": [
+        -1.5,
+        0.2,
+        0
+       ],
+       "from": [
+        -2.5,
+        -0.2,
+        0
+       ],
+       "type": "bond",
+       "color": "gray",
+       "thickness": 0.1
+      }
+     ],
+     "narration": "Chain isomerism: straight‑chain n‑butane versus branched i‑butane."
+    },
+    {
+     "objects": [
+      {
+       "id": "label_cis",
+       "text": "cis‑2‑Butene",
+       "type": "label",
+       "position": [
+        1,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "label_trans",
+       "text": "trans‑2‑Butene",
+       "type": "label",
+       "position": [
+        3,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "bond_cis",
+       "to": [
+        1.5,
+        0.2,
+        0
+       ],
+       "from": [
+        0.5,
+        -0.2,
+        0
+       ],
+       "type": "bond",
+       "color": "green",
+       "thickness": 0.1
+      },
+      {
+       "id": "bond_trans",
+       "to": [
+        3.5,
+        0.2,
+        0
+       ],
+       "from": [
+        2.5,
+        -0.2,
+        0
+       ],
+       "type": "bond",
+       "color": "green",
+       "thickness": 0.1
+      }
+     ],
+     "narration": "Cis‑trans stereoisomerism shown for 2‑butene."
+    },
+    {
+     "objects": [
+      {
+       "id": "label_R",
+       "text": "R‑2‑Butanol",
+       "type": "label",
+       "position": [
+        0,
+        2,
+        0
+       ]
+      },
+      {
+       "id": "label_S",
+       "text": "S‑2‑Butanol",
+       "type": "label",
+       "position": [
+        0,
+        4,
+        0
+       ]
+      },
+      {
+       "id": "chiral_center_R",
+       "type": "point",
+       "color": "blue",
+       "radius": 0.2,
+       "position": [
+        0,
+        2,
+        0
+       ]
+      },
+      {
+       "id": "chiral_center_S",
+       "type": "point",
+       "color": "red",
+       "radius": 0.2,
+       "position": [
+        0,
+        4,
+        0
+       ]
+      }
+     ],
+     "narration": "Optical isomerism illustrated with R‑ and S‑2‑butanol."
+    }
+   ],
+   "title": "Structural and Stereoisomerism Overview",
+   "ariaLabel": "Diagram of various isomers including chain, position, functional group, cis‑trans, and chiral centers",
+   "sceneType": "diagram",
+   "teachingGoal": "Show examples of structural and stereoisomers",
+   "cameraDistance": 10
+  }
+ },
+ {
+  "conceptId": "chem.org.iupac",
+  "renderCount": 16,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Identify the longest continuous carbon chain"
+    },
+    {
+     "title": "Number the chain to give lowest locants to functional groups"
+    },
+    {
+     "title": "Identify functional groups and assign suffixes"
+    },
+    {
+     "title": "Identify substituents and assign prefixes"
+    },
+    {
+     "title": "Combine substituent names with locants and chain name"
+    },
+    {
+     "title": "Add suffixes for functional groups and additional suffixes"
+    }
+   ],
+   "title": "IUPAC Nomenclature Procedure"
+  }
+ },
+ {
+  "conceptId": "chem.org.mechanisms",
+  "renderCount": 23,
+  "cachedOn": "2026-08-21",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Nucleophile attacks electrophile, forming a new bond"
+    },
+    {
+     "title": "Transition state forms as bonds rearrange"
+    },
+    {
+     "title": "Product is released, completing the reaction"
+    }
+   ],
+   "title": "Organic Reaction Mechanisms"
+  }
+ },
+ {
+  "conceptId": "chem.org.pericyclic",
+  "renderCount": 54,
+  "cachedOn": "2026-08-30",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Apply Woodward–Hoffmann rule to predict allowedness"
+    },
+    {
+     "title": "Electrons shift in a cyclic transition state"
+    },
+    {
+     "title": "Transition state collapses to form product"
+    },
+    {
+     "title": "Thermal or photochemical conditions influence outcome"
+    }
+   ],
+   "title": "Pericyclic Reaction Mechanism"
+  }
+ },
+ {
+  "conceptId": "chem.org.reactive-intermediates",
+  "renderCount": 8,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Short-lived formation of a reactive intermediate"
+    },
+    {
+     "title": "Rapid reaction with nucleophile or electrophile"
+    },
+    {
+     "title": "Possible rearrangement (e.g., hydride shift)"
+    },
+    {
+     "title": "Termination by bond formation or elimination"
+    }
+   ],
+   "title": "Lifecycle of Reactive Intermediates"
+  }
+ },
+ {
+  "conceptId": "chem.pblock.group14",
+  "renderCount": 33,
+  "cachedOn": "2026-09-05",
+  "figure": {
+   "type": "graph",
+   "title": "Atomic radius trend in Group 14 elements",
+   "xLabel": "Atomic number (Z)",
+   "yLabel": "Atomic radius (pm)",
+   "equation": "0.3*x - 1.5"
+  }
+ },
+ {
+  "conceptId": "chem.pblock.group15",
+  "renderCount": 62,
+  "cachedOn": "2026-08-21",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Compress nitrogen and hydrogen gases to high pressure."
+    },
+    {
+     "title": "Heat mixture to 400-500°C over iron catalyst."
+    },
+    {
+     "title": "Ammonia forms via reaction N2 + 3H2 → 2NH3."
+    },
+    {
+     "title": "Cool and condense ammonia gas."
+    },
+    {
+     "title": "Separate unreacted gases by pressure swing adsorption."
+    },
+    {
+     "title": "Use ammonia in Ostwald process to produce nitric acid."
+    }
+   ],
+   "title": "Haber Process for Ammonia Synthesis"
+  }
+ },
+ {
+  "conceptId": "chem.pblock.group16",
+  "renderCount": 38,
+  "cachedOn": "2026-08-24",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Burn sulfur to produce sulfur dioxide (SO2)"
+    },
+    {
+     "title": "Oxidize SO2 to sulfur trioxide (SO3) using a catalyst"
+    },
+    {
+     "title": "Hydrate SO3 to form sulfuric acid (H2SO4)"
+    }
+   ],
+   "title": "Contact Process for Sulfuric Acid"
+  }
+ },
+ {
+  "conceptId": "chem.pblock.group17",
+  "renderCount": 8,
+  "cachedOn": "2026-09-12",
+  "figure": {
+   "type": "graph",
+   "title": "Acid Strength of HX Across Group 17",
+   "xLabel": "Halogen (index)",
+   "yLabel": "pKa (acid strength)",
+   "equation": "-0.5x + 10"
+  }
+ },
+ {
+  "conceptId": "chem.pblock.group18",
+  "renderCount": 20,
+  "cachedOn": "2026-09-05",
+  "figure": {
+   "id": "noble_gases_structures",
+   "type": "scene",
+   "steps": [
+    {
+     "objects": [
+      {
+       "id": "XeF2_Xe",
+       "text": "Xe",
+       "type": "particle",
+       "color": "gray",
+       "radius": 0.5,
+       "position": [
+        0,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "XeF2_F1",
+       "text": "F",
+       "type": "particle",
+       "color": "red",
+       "radius": 0.3,
+       "position": [
+        -1,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "XeF2_F2",
+       "text": "F",
+       "type": "particle",
+       "color": "red",
+       "radius": 0.3,
+       "position": [
+        1,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "XeF2_bond1",
+       "to": [
+        -1,
+        0,
+        0
+       ],
+       "from": [
+        0,
+        0,
+        0
+       ],
+       "type": "bond",
+       "color": "black",
+       "thickness": 0.1
+      },
+      {
+       "id": "XeF2_bond2",
+       "to": [
+        1,
+        0,
+        0
+       ],
+       "from": [
+        0,
+        0,
+        0
+       ],
+       "type": "bond",
+       "color": "black",
+       "thickness": 0.1
+      },
+      {
+       "id": "XeF2_label",
+       "text": "XeF2",
+       "type": "label",
+       "color": "black",
+       "position": [
+        0,
+        0.5,
+        0
+       ]
+      }
+     ],
+     "narration": "Linear geometry of XeF2."
+    },
+    {
+     "objects": [
+      {
+       "id": "XeF4_Xe",
+       "text": "Xe",
+       "type": "particle",
+       "color": "gray",
+       "radius": 0.5,
+       "position": [
+        3,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "XeF4_F1",
+       "text": "F",
+       "type": "particle",
+       "color": "red",
+       "radius": 0.3,
+       "position": [
+        2,
+        1,
+        0
+       ]
+      },
+      {
+       "id": "XeF4_F2",
+       "text": "F",
+       "type": "particle",
+       "color": "red",
+       "radius": 0.3,
+       "position": [
+        2,
+        -1,
+        0
+       ]
+      },
+      {
+       "id": "XeF4_F3",
+       "text": "F",
+       "type": "particle",
+       "color": "red",
+       "radius": 0.3,
+       "position": [
+        4,
+        1,
+        0
+       ]
+      },
+      {
+       "id": "XeF4_F4",
+       "text": "F",
+       "type": "particle",
+       "color": "red",
+       "radius": 0.3,
+       "position": [
+        4,
+        -1,
+        0
+       ]
+      },
+      {
+       "id": "XeF4_bond1",
+       "to": [
+        2,
+        1,
+        0
+       ],
+       "from": [
+        3,
+        0,
+        0
+       ],
+       "type": "bond",
+       "color": "black",
+       "thickness": 0.1
+      },
+      {
+       "id": "XeF4_bond2",
+       "to": [
+        2,
+        -1,
+        0
+       ],
+       "from": [
+        3,
+        0,
+        0
+       ],
+       "type": "bond",
+       "color": "black",
+       "thickness": 0.1
+      },
+      {
+       "id": "XeF4_bond3",
+       "to": [
+        4,
+        1,
+        0
+       ],
+       "from": [
+        3,
+        0,
+        0
+       ],
+       "type": "bond",
+       "color": "black",
+       "thickness": 0.1
+      },
+      {
+       "id": "XeF4_bond4",
+       "to": [
+        4,
+        -1,
+        0
+       ],
+       "from": [
+        3,
+        0,
+        0
+       ],
+       "type": "bond",
+       "color": "black",
+       "thickness": 0.1
+      },
+      {
+       "id": "XeF4_label",
+       "text": "XeF4",
+       "type": "label",
+       "color": "black",
+       "position": [
+        3,
+        0.5,
+        0
+       ]
+      }
+     ],
+     "narration": "Square planar geometry of XeF4."
+    }
+   ],
+   "title": "Group 18: Noble Gas Molecules",
+   "sceneType": "diagram",
+   "teachingGoal": "Illustrate the molecular geometry of XeF2 and XeF4",
+   "cameraDistance": 10
+  }
+ },
+ {
+  "conceptId": "chem.pblock.trends",
+  "renderCount": 18,
+  "cachedOn": "2026-08-21",
+  "figure": {
+   "type": "graph",
+   "title": "Trend of Metallic Character Across p-Block Groups",
+   "xLabel": "Group number",
+   "yLabel": "Metallic character (qualitative scale)",
+   "equation": "0.8x - 9.4"
+  }
+ },
+ {
+  "conceptId": "chem.poly.addition",
+  "renderCount": 15,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Initiation: Radical, Cationic, Anionic"
+    },
+    {
+     "title": "Propagation: Chain Growth"
+    },
+    {
+     "title": "Termination: Chain Capping"
+    },
+    {
+     "title": "Polymer Products: PE, PVC, PS, PTFE, NR"
+    }
+   ],
+   "title": "Addition Polymerization Mechanisms"
+  }
+ },
+ {
+  "conceptId": "chem.poly.biodegradable",
+  "renderCount": 19,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "id": "polymer_scene",
+   "steps": [
+    {
+     "objects": [
+      {
+       "id": "pla_chain",
+       "type": "particle",
+       "color": "#FF5733",
+       "radius": 0.5,
+       "position": [
+        0,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "pla_label",
+       "text": "PLA",
+       "type": "label",
+       "color": "#000000",
+       "position": [
+        0,
+        0.7,
+        0
+       ]
+      }
+     ],
+     "narration": "Show the structure of Polylactic Acid (PLA) as a linear polymer chain."
+    },
+    {
+     "objects": [
+      {
+       "id": "phb_chain",
+       "type": "particle",
+       "color": "#33C1FF",
+       "radius": 0.5,
+       "position": [
+        2,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "phb_label",
+       "text": "PHB",
+       "type": "label",
+       "color": "#000000",
+       "position": [
+        2,
+        0.7,
+        0
+       ]
+      }
+     ],
+     "narration": "Add Polyhydroxybutyrate (PHB) chain next to PLA."
+    },
+    {
+     "objects": [
+      {
+       "id": "conducting_chain",
+       "type": "particle",
+       "color": "#A020F0",
+       "radius": 0.5,
+       "position": [
+        4,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "conducting_label",
+       "text": "Conducting Polymer",
+       "type": "label",
+       "color": "#000000",
+       "position": [
+        4,
+        0.7,
+        0
+       ]
+      }
+     ],
+     "narration": "Introduce a conducting polymer segment."
+    },
+    {
+     "objects": [
+      {
+       "id": "block_copolymer_chain",
+       "type": "particle",
+       "color": "#FF8C00",
+       "radius": 0.5,
+       "position": [
+        -2,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "block_copolymer_label",
+       "text": "Block Copolymer",
+       "type": "label",
+       "color": "#000000",
+       "position": [
+        -2,
+        0.7,
+        0
+       ]
+      },
+      {
+       "id": "nano_composite_chain",
+       "type": "particle",
+       "color": "#00FA9A",
+       "radius": 0.5,
+       "position": [
+        -4,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "nano_composite_label",
+       "text": "Nano-Composite",
+       "type": "label",
+       "color": "#000000",
+       "position": [
+        -4,
+        0.7,
+        0
+       ]
+      }
+     ],
+     "narration": "Display a block copolymer and a nano-composite."
+    }
+   ],
+   "title": "Biodegradable and Functional Polymers Overview",
+   "ariaLabel": "Diagram of different polymer types",
+   "sceneType": "diagram",
+   "teachingGoal": "Introduce various biodegradable and functional polymers and their key characteristics.",
+   "cameraDistance": 10
+  }
+ },
+ {
+  "conceptId": "chem.poly.condensation",
+  "renderCount": 35,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Monomers with complementary functional groups"
+    },
+    {
+     "title": "Condensation forms covalent bonds, releasing small molecule"
+    },
+    {
+     "title": "Growing polymer chain via step‑growth mechanism"
+    },
+    {
+     "title": "Polyester example: water is eliminated during linkage"
+    },
+    {
+     "title": "Cross‑linking yields thermosetting resin (e.g., Bakelite)"
+    }
+   ],
+   "title": "Condensation Polymerization Process"
+  }
+ },
+ {
+  "conceptId": "chem.poly.natural",
+  "renderCount": 36,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Collect natural rubber (cis‑polyisoprene)"
+    },
+    {
+     "title": "Add sulfur and accelerator agents"
+    },
+    {
+     "title": "Heat mixture to 140–160 °C to initiate cross‑linking"
+    },
+    {
+     "title": "Form sulfur cross‑links between polymer chains"
+    },
+    {
+     "title": "Cool the material and test elasticity and durability"
+    }
+   ],
+   "title": "Vulcanization of Natural Rubber"
+  }
+ },
+ {
+  "conceptId": "chem.redox.activity-series",
+  "renderCount": 27,
+  "cachedOn": "2026-08-30",
+  "figure": {
+   "end": 1.5,
+   "type": "number_line",
+   "start": -2.5,
+   "title": "Electrochemical Activity Series (Standard Reduction Potentials)",
+   "highlight": [
+    -2.5,
+    0
+   ]
+  }
+ },
+ {
+  "conceptId": "chem.redox.balancing",
+  "renderCount": 33,
+  "cachedOn": "2026-08-30",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Determine oxidation states of all atoms"
+    },
+    {
+     "title": "Write separate oxidation and reduction half‑reactions"
+    },
+    {
+     "title": "Balance atoms other than O and H in each half‑reaction"
+    },
+    {
+     "title": "Balance oxygen atoms with H₂O"
+    },
+    {
+     "title": "Balance hydrogen atoms with H⁺ (acidic) or OH⁻ (basic)"
+    },
+    {
+     "title": "Balance charge with electrons and combine half‑reactions"
+    },
+    {
+     "title": "Simplify the overall equation by canceling common species"
+    }
+   ],
+   "title": "Balancing Redox Equations"
+  }
+ },
+ {
+  "conceptId": "chem.redox.disproportionation",
+  "renderCount": 19,
+  "cachedOn": "2026-08-30",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Reactants: H2O2"
+    },
+    {
+     "title": "Products: H2O + O2"
+    }
+   ],
+   "title": "Disproportionation of Hydrogen Peroxide"
+  }
+ },
+ {
+  "conceptId": "chem.redox.oxidation-state",
+  "renderCount": 22,
+  "cachedOn": "2026-08-21",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "List all atoms present in the compound"
+    },
+    {
+     "title": "Assign known oxidation numbers (O = -2, H = +1, ions)"
+    },
+    {
+     "title": "Total oxidation numbers equal the compound's charge"
+    },
+    {
+     "title": "Solve for any unknown oxidation numbers"
+    },
+    {
+     "title": "Element with increased oxidation number is oxidising agent"
+    },
+    {
+     "title": "Element with decreased oxidation number is reducing agent"
+    }
+   ],
+   "title": "Assigning Oxidation States and Identifying Redox Agents"
+  }
+ },
+ {
+  "conceptId": "chem.redox.titrations",
+  "renderCount": 31,
+  "cachedOn": "2026-08-21",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Prepare the sample and titrant"
+    },
+    {
+     "title": "Add indicator to the sample"
+    },
+    {
+     "title": "Titrate until the endpoint is reached"
+    },
+    {
+     "title": "Record the volume of titrant used"
+    },
+    {
+     "title": "Calculate equivalents and molar mass"
+    }
+   ],
+   "title": "Redox Titration Procedure"
+  }
+ },
+ {
+  "conceptId": "chem.sblock.alkali",
+  "renderCount": 22,
+  "cachedOn": "2026-08-21",
+  "figure": {
+   "type": "graph",
+   "title": "Atomic radius of alkali metals vs period",
+   "xLabel": "Period number (n)",
+   "yLabel": "Atomic radius (pm)",
+   "equation": "0.5*x + 100"
+  }
+ },
+ {
+  "conceptId": "chem.sblock.alkaline-earth",
+  "renderCount": 21,
+  "cachedOn": "2026-08-21",
+  "figure": {
+   "type": "graph",
+   "title": "Atomic radius of alkaline earth metals",
+   "xLabel": "Atomic number (Z)",
+   "yLabel": "Atomic radius (Å)",
+   "equation": "2.5 - 0.05*x"
+  }
+ },
+ {
+  "conceptId": "chem.sblock.water",
+  "renderCount": 25,
+  "cachedOn": "2026-08-21",
+  "figure": {
+   "id": "chem_water_scene",
+   "type": "scene",
+   "steps": [
+    {
+     "objects": [
+      {
+       "id": "O1",
+       "text": "O",
+       "type": "particle",
+       "color": "red",
+       "radius": 0.5,
+       "position": [
+        0,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "H1",
+       "text": "H",
+       "type": "particle",
+       "color": "white",
+       "radius": 0.3,
+       "position": [
+        1,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "H2",
+       "text": "H",
+       "type": "particle",
+       "color": "white",
+       "radius": 0.3,
+       "position": [
+        -0.5,
+        0.866,
+        0
+       ]
+      },
+      {
+       "id": "bond1",
+       "to": [
+        1,
+        0,
+        0
+       ],
+       "from": [
+        0,
+        0,
+        0
+       ],
+       "type": "bond",
+       "color": "gray"
+      },
+      {
+       "id": "bond2",
+       "to": [
+        -0.5,
+        0.866,
+        0
+       ],
+       "from": [
+        0,
+        0,
+        0
+       ],
+       "type": "bond",
+       "color": "gray"
+      }
+     ],
+     "narration": "Water molecule structure."
+    },
+    {
+     "objects": [
+      {
+       "id": "O2",
+       "text": "O",
+       "type": "particle",
+       "color": "red",
+       "radius": 0.5,
+       "position": [
+        0,
+        3,
+        0
+       ]
+      },
+      {
+       "id": "D1",
+       "text": "D",
+       "type": "particle",
+       "color": "white",
+       "radius": 0.3,
+       "position": [
+        1,
+        3,
+        0
+       ]
+      },
+      {
+       "id": "D2",
+       "text": "D",
+       "type": "particle",
+       "color": "white",
+       "radius": 0.3,
+       "position": [
+        -0.5,
+        3.866,
+        0
+       ]
+      },
+      {
+       "id": "bond3",
+       "to": [
+        1,
+        3,
+        0
+       ],
+       "from": [
+        0,
+        3,
+        0
+       ],
+       "type": "bond",
+       "color": "gray"
+      },
+      {
+       "id": "bond4",
+       "to": [
+        -0.5,
+        3.866,
+        0
+       ],
+       "from": [
+        0,
+        3,
+        0
+       ],
+       "type": "bond",
+       "color": "gray"
+      }
+     ],
+     "narration": "Heavy water (D₂O) structure."
+    },
+    {
+     "objects": [
+      {
+       "id": "Ca",
+       "text": "Ca²⁺",
+       "type": "particle",
+       "color": "blue",
+       "radius": 0.6,
+       "position": [
+        3,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "Mg",
+       "text": "Mg²⁺",
+       "type": "particle",
+       "color": "green",
+       "radius": 0.5,
+       "position": [
+        3,
+        1,
+        0
+       ]
+      }
+     ],
+     "narration": "Hard water ions Ca²⁺ and Mg²⁺."
+    },
+    {
+     "objects": [
+      {
+       "id": "labelHard",
+       "text": "Hard water",
+       "type": "label",
+       "color": "black",
+       "position": [
+        3.5,
+        0.5,
+        0
+       ]
+      },
+      {
+       "id": "labelAmph",
+       "text": "Amphoteric",
+       "type": "label",
+       "color": "black",
+       "position": [
+        0,
+        -1,
+        0
+       ]
+      }
+     ],
+     "narration": "Labels for hardness and amphoteric behavior."
+    }
+   ],
+   "title": "Chemistry of Water: Structure and Properties",
+   "ariaLabel": "Diagram showing water molecule, heavy water, calcium and magnesium ions, and labels for hardness and amphoteric behavior.",
+   "sceneType": "diagram",
+   "teachingGoal": "Illustrate water structure, heavy water, hardness ions, and amphoteric nature.",
+   "cameraDistance": 10
+  }
+ },
+ {
+  "conceptId": "chem.sol.activity",
+  "renderCount": 32,
+  "cachedOn": "2026-08-21",
+  "figure": {
+   "type": "graph",
+   "title": "Debye–Hückel limiting law",
+   "xLabel": "Ionic strength (mol kg⁻¹)",
+   "yLabel": "log₁₀(activity coefficient γ)",
+   "equation": "-0.51*sqrt(x)"
+  }
+ },
+ {
+  "conceptId": "chem.sol.colligative",
+  "renderCount": 59,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "type": "graph",
+   "title": "Boiling Point Elevation vs Molality",
+   "xLabel": "Molality (mol/kg)",
+   "yLabel": "Boiling point elevation (°C)",
+   "equation": "y = 0.512 * x"
+  }
+ },
+ {
+  "conceptId": "chem.sol.osmosis",
+  "renderCount": 26,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Water moves from low to high solute concentration."
+    },
+    {
+     "title": "Concentration gradient creates osmotic pressure (π = iCRT)."
+    },
+    {
+     "title": "Water flow continues until osmotic pressure balances."
+    },
+    {
+     "title": "If external pressure > osmotic pressure, flow stops."
+    },
+    {
+     "title": "Reverse osmosis forces water against solutes."
+    }
+   ],
+   "title": "Osmosis and Osmotic Pressure"
+  }
+ },
+ {
+  "conceptId": "chem.sol.solubility",
+  "renderCount": 37,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "type": "graph",
+   "title": "Henry's Law: Gas Solubility vs Partial Pressure",
+   "xLabel": "Partial pressure of gas (atm)",
+   "yLabel": "Concentration of gas in solution (mol/L)",
+   "equation": "0.034 * x"
+  }
+ },
+ {
+  "conceptId": "chem.sol.types",
+  "renderCount": 30,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "id": "chem-sol-types-1",
+   "type": "scene",
+   "steps": [
+    {
+     "objects": [
+      {
+       "id": "gas-in-gas-node",
+       "type": "node",
+       "color": "#FF0000",
+       "radius": 0.5,
+       "position": [
+        -4,
+        2,
+        0
+       ]
+      },
+      {
+       "id": "gas-in-gas-label",
+       "text": "Gas‑in‑Gas",
+       "type": "label",
+       "position": [
+        -4,
+        2.7,
+        0
+       ]
+      },
+      {
+       "id": "gas-in-liquid-node",
+       "type": "node",
+       "color": "#00FF00",
+       "radius": 0.5,
+       "position": [
+        -2,
+        2,
+        0
+       ]
+      },
+      {
+       "id": "gas-in-liquid-label",
+       "text": "Gas‑in‑Liquid",
+       "type": "label",
+       "position": [
+        -2,
+        2.7,
+        0
+       ]
+      }
+     ],
+     "narration": "Introduce gas‑based solutions."
+    },
+    {
+     "objects": [
+      {
+       "id": "liquid-in-liquid-node",
+       "type": "node",
+       "color": "#0000FF",
+       "radius": 0.5,
+       "position": [
+        2,
+        2,
+        0
+       ]
+      },
+      {
+       "id": "liquid-in-liquid-label",
+       "text": "Liquid‑in‑Liquid",
+       "type": "label",
+       "position": [
+        2,
+        2.7,
+        0
+       ]
+      },
+      {
+       "id": "solid-in-liquid-node",
+       "type": "node",
+       "color": "#FFFF00",
+       "radius": 0.5,
+       "position": [
+        4,
+        2,
+        0
+       ]
+      },
+      {
+       "id": "solid-in-liquid-label",
+       "text": "Solid‑in‑Liquid",
+       "type": "label",
+       "position": [
+        4,
+        2.7,
+        0
+       ]
+      },
+      {
+       "id": "like-dissolves-label",
+       "text": "Like dissolves like",
+       "type": "label",
+       "position": [
+        0,
+        -1,
+        0
+       ]
+      }
+     ],
+     "narration": "Add liquid‑based solutions and the like‑dissolves‑like rule."
+    }
+   ],
+   "title": "Types of Solutions",
+   "ariaLabel": "Diagram showing four types of solutions: gas‑in‑gas, gas‑in‑liquid, liquid‑in‑liquid, solid‑in‑liquid.",
+   "sceneType": "diagram",
+   "teachingGoal": "Illustrate the four main types of solutions and the principle of like‑dissolves‑like.",
+   "cameraDistance": 10
+  }
+ },
+ {
+  "conceptId": "chem.sol.vapour-pressure",
+  "renderCount": 57,
+  "cachedOn": "2026-08-27",
+  "figure": {
+   "type": "graph",
+   "title": "Vapour Pressure of Solutions",
+   "xLabel": "Mole fraction of solvent (x)",
+   "yLabel": "Vapour pressure (kPa)",
+   "equation": "p = x * p0"
+  }
+ },
+ {
+  "conceptId": "chem.solid.amorphous",
+  "renderCount": 14,
+  "cachedOn": "2026-09-05",
+  "figure": {
+   "id": "chem.solid.amorphous_scene",
+   "steps": [
+    {
+     "objects": [
+      {
+       "id": "crystal_point",
+       "type": "point",
+       "color": "blue",
+       "radius": 0.2,
+       "position": [
+        0,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "crystal_label",
+       "text": "Crystalline lattice",
+       "type": "label",
+       "color": "black",
+       "position": [
+        0,
+        0,
+        2
+       ]
+      }
+     ],
+     "narration": "A regular lattice of atoms represents a crystalline solid."
+    },
+    {
+     "objects": [
+      {
+       "id": "amorphous_point1",
+       "type": "point",
+       "color": "red",
+       "radius": 0.2,
+       "position": [
+        2,
+        1,
+        0
+       ]
+      },
+      {
+       "id": "amorphous_point2",
+       "type": "point",
+       "color": "red",
+       "radius": 0.2,
+       "position": [
+        -1,
+        2,
+        0
+       ]
+      },
+      {
+       "id": "amorphous_label",
+       "text": "Amorphous structure",
+       "type": "label",
+       "color": "black",
+       "position": [
+        1,
+        3,
+        0
+       ]
+      },
+      {
+       "id": "glass_label",
+       "text": "Glass (supercooled liquid)",
+       "type": "label",
+       "color": "green",
+       "position": [
+        0,
+        -3,
+        0
+       ]
+      }
+     ],
+     "narration": "Randomly arranged atoms illustrate an amorphous solid, such as glass, which behaves like a supercooled liquid."
+    }
+   ],
+   "title": "Crystalline vs Amorphous Solids",
+   "ariaLabel": "Comparison of crystalline and amorphous structures",
+   "sceneType": "comparison",
+   "teachingGoal": "Illustrate structural differences between crystalline and amorphous solids.",
+   "cameraDistance": 10
+  }
+ },
+ {
+  "conceptId": "chem.solid.defects",
+  "renderCount": 23,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "id": "crystal-defects-diagram",
+   "steps": [
+    {
+     "objects": [
+      {
+       "id": "atom1",
+       "type": "particle",
+       "position": [
+        0,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "atom2",
+       "type": "particle",
+       "position": [
+        1,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "atom3",
+       "type": "particle",
+       "position": [
+        0,
+        1,
+        0
+       ]
+      },
+      {
+       "id": "atom4",
+       "type": "particle",
+       "position": [
+        1,
+        1,
+        0
+       ]
+      },
+      {
+       "id": "atom5",
+       "type": "particle",
+       "position": [
+        0,
+        0,
+        1
+       ]
+      },
+      {
+       "id": "atom6",
+       "type": "particle",
+       "position": [
+        1,
+        0,
+        1
+       ]
+      },
+      {
+       "id": "atom7",
+       "type": "particle",
+       "position": [
+        0,
+        1,
+        1
+       ]
+      }
+     ],
+     "narration": "Show a perfect crystal lattice."
+    },
+    {
+     "objects": [
+      {
+       "id": "vacancyLabel",
+       "text": "Vacancy (Schottky defect)",
+       "type": "label",
+       "position": [
+        1,
+        1,
+        1
+       ]
+      }
+     ],
+     "narration": "Introduce a vacancy, a Schottky defect."
+    },
+    {
+     "objects": [
+      {
+       "id": "interstitial",
+       "type": "particle",
+       "position": [
+        0.5,
+        0.5,
+        0.5
+       ]
+      },
+      {
+       "id": "interstitialLabel",
+       "text": "Interstitial (Frenkel defect)",
+       "type": "label",
+       "position": [
+        0.5,
+        0.5,
+        0.5
+       ]
+      }
+     ],
+     "narration": "Add an interstitial atom, a Frenkel defect."
+    },
+    {
+     "objects": [
+      {
+       "id": "densityLabel",
+       "text": "Reduced density",
+       "type": "label",
+       "position": [
+        1.5,
+        1.5,
+        1.5
+       ]
+      }
+     ],
+     "narration": "Show the effect of the vacancy on density."
+    },
+    {
+     "objects": [
+      {
+       "id": "conductivityLabel",
+       "text": "Increased conductivity",
+       "type": "label",
+       "position": [
+        0.5,
+        0.5,
+        -0.5
+       ]
+      }
+     ],
+     "narration": "Show the effect of the interstitial on electrical conductivity."
+    }
+   ],
+   "title": "Crystal Defects",
+   "ariaLabel": "Crystal defects diagram",
+   "sceneType": "diagram",
+   "teachingGoal": "Illustrate crystal defects and their effects on density and electrical properties.",
+   "cameraDistance": 10
+  }
+ },
+ {
+  "conceptId": "chem.state.gas-laws",
+  "renderCount": 44,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "type": "graph",
+   "title": "Boyle's Law: Pressure vs Volume",
+   "xLabel": "Volume (L)",
+   "yLabel": "Pressure (atm)",
+   "equation": "10 / x"
+  }
+ },
+ {
+  "conceptId": "chem.state.kinetic-theory",
+  "renderCount": 53,
+  "cachedOn": "2026-08-30",
+  "figure": {
+   "id": "kmt_scene",
+   "steps": [
+    {
+     "objects": [
+      {
+       "id": "molecule1",
+       "type": "particle",
+       "color": "blue",
+       "radius": 0.5,
+       "position": [
+        0,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "label_molecule",
+       "text": "Gas molecule",
+       "type": "label",
+       "color": "black",
+       "position": [
+        0.6,
+        0,
+        0
+       ]
+      }
+     ],
+     "narration": "A gas molecule moves freely in space."
+    },
+    {
+     "objects": [
+      {
+       "id": "arrow_momentum",
+       "to": [
+        2,
+        0,
+        0
+       ],
+       "from": [
+        0,
+        0,
+        0
+       ],
+       "type": "arrow",
+       "color": "red",
+       "thickness": 0.1
+      },
+      {
+       "id": "label_momentum",
+       "text": "Momentum transfer",
+       "type": "label",
+       "color": "black",
+       "position": [
+        1,
+        0.2,
+        0
+       ]
+      },
+      {
+       "id": "label_pressure",
+       "text": "Pressure",
+       "type": "label",
+       "color": "black",
+       "position": [
+        2.2,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "label_temperature",
+       "text": "Temperature (T)",
+       "type": "label",
+       "color": "black",
+       "position": [
+        0,
+        2,
+        0
+       ]
+      }
+     ],
+     "narration": "The molecule collides elastically with a wall, transferring momentum and creating pressure."
+    }
+   ],
+   "title": "Kinetic Molecular Theory of Gases",
+   "ariaLabel": "Diagram of gas molecules moving and transferring momentum to walls, showing pressure and temperature.",
+   "sceneType": "diagram",
+   "teachingGoal": "Illustrate gas molecules in motion, momentum transfer, pressure, and temperature.",
+   "cameraDistance": 10
+  }
+ },
+ {
+  "conceptId": "chem.state.liquids",
+  "renderCount": 45,
+  "cachedOn": "2026-08-21",
+  "figure": {
+   "type": "graph",
+   "title": "Vapour Pressure vs Temperature",
+   "xLabel": "Temperature (°C)",
+   "yLabel": "Vapour Pressure (kPa)",
+   "equation": "P = 0.01*T^2 + 0.5*T + 1"
+  }
+ },
+ {
+  "conceptId": "chem.state.molar-mass-gas",
+  "renderCount": 29,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Measure gas density at known temperature and pressure"
+    },
+    {
+     "title": "Calculate molar mass using the ideal gas law"
+    },
+    {
+     "title": "Determine empirical formula from elemental composition"
+    },
+    {
+     "title": "Calculate molecular mass from empirical formula"
+    },
+    {
+     "title": "Apply Graham's law to compare effusion rates"
+    }
+   ],
+   "title": "Determining Molar Mass and Molecular Mass from Gas Data"
+  }
+ },
+ {
+  "conceptId": "chem.state.phase-diagram",
+  "renderCount": 40,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "type": "graph",
+   "title": "Phase Diagram of a Substance",
+   "xLabel": "Temperature (K)",
+   "yLabel": "Pressure (bar)",
+   "equation": "-0.4*x^2 + 4*x"
+  }
+ },
+ {
+  "conceptId": "chem.state.real-gases",
+  "renderCount": 46,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "type": "graph",
+   "title": "Compressibility Factor vs Pressure for Real Gases",
+   "xLabel": "Pressure (MPa)",
+   "yLabel": "Compressibility Factor Z",
+   "equation": "Z = 1 + 0.02*P - 0.001*P^2"
+  }
+ },
+ {
+  "conceptId": "chem.surface.adsorption",
+  "renderCount": 44,
+  "cachedOn": "2026-08-30",
+  "figure": {
+   "type": "graph",
+   "title": "Langmuir Isotherm",
+   "xLabel": "Pressure (Pa)",
+   "yLabel": "Adsorbed amount (mol/m²)",
+   "equation": "q = (qmax*K*p)/(1+K*p)"
+  }
+ },
+ {
+  "conceptId": "chem.surface.colloids",
+  "renderCount": 34,
+  "cachedOn": "2026-09-05",
+  "figure": {
+   "id": "colloids_scene",
+   "steps": [
+    {
+     "objects": [
+      {
+       "id": "p1",
+       "text": "Colloidal particle",
+       "type": "particle",
+       "color": "#ff6666",
+       "radius": 0.5,
+       "position": [
+        -2,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "p2",
+       "text": "Colloidal particle",
+       "type": "particle",
+       "color": "#ff6666",
+       "radius": 0.5,
+       "position": [
+        0,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "p3",
+       "text": "Colloidal particle",
+       "type": "particle",
+       "color": "#ff6666",
+       "radius": 0.5,
+       "position": [
+        2,
+        0,
+        0
+       ]
+      }
+     ],
+     "narration": "Three colloidal particles suspended in a fluid."
+    },
+    {
+     "objects": [
+      {
+       "id": "a1",
+       "to": [
+        -1.5,
+        0.5,
+        0
+       ],
+       "from": [
+        -2,
+        0,
+        0
+       ],
+       "text": "Brownian motion",
+       "type": "arrow",
+       "color": "#00aa00",
+       "thickness": 0.05
+      },
+      {
+       "id": "a2",
+       "to": [
+        0.5,
+        -0.4,
+        0
+       ],
+       "from": [
+        0,
+        0,
+        0
+       ],
+       "text": "Brownian motion",
+       "type": "arrow",
+       "color": "#00aa00",
+       "thickness": 0.05
+      },
+      {
+       "id": "a3",
+       "to": [
+        1.5,
+        0.3,
+        0
+       ],
+       "from": [
+        2,
+        0,
+        0
+       ],
+       "text": "Brownian motion",
+       "type": "arrow",
+       "color": "#00aa00",
+       "thickness": 0.05
+      }
+     ],
+     "narration": "Brownian motion causes random movement of the particles."
+    },
+    {
+     "objects": [
+      {
+       "id": "l1",
+       "to": [
+        5,
+        2,
+        0
+       ],
+       "from": [
+        -5,
+        2,
+        0
+       ],
+       "text": "Light beam (Tyndall effect)",
+       "type": "arrow",
+       "color": "#ffff00",
+       "thickness": 0.1
+      },
+      {
+       "id": "l2",
+       "text": "Tyndall effect",
+       "type": "label",
+       "position": [
+        0,
+        2.5,
+        0
+       ]
+      }
+     ],
+     "narration": "A light beam passes through the colloidal suspension, scattering visible to the eye (Tyndall effect)."
+    }
+   ],
+   "title": "Colloidal particles in fluid",
+   "ariaLabel": "Colloidal particles in fluid with Brownian motion and Tyndall effect",
+   "sceneType": "diagram",
+   "teachingGoal": "Illustrate colloidal particles, Brownian motion, and the Tyndall effect.",
+   "cameraDistance": 10
+  }
+ },
+ {
+  "conceptId": "chem.surface.emulsions",
+  "renderCount": 15,
+  "cachedOn": "2026-09-05",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Combine oil and water"
+    },
+    {
+     "title": "Add emulsifying agent"
+    },
+    {
+     "title": "Apply mechanical shear (homogenization)"
+    },
+    {
+     "title": "Stabilize droplets to prevent coalescence"
+    },
+    {
+     "title": "Resulting stable oil-in-water emulsion"
+    }
+   ],
+   "title": "Emulsion Formation Process"
+  }
+ },
+ {
+  "conceptId": "chem.surface.heterogeneous-cat",
+  "renderCount": 19,
+  "cachedOn": "2026-09-05",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Adsorption of reactants onto catalyst surface"
+    },
+    {
+     "title": "Surface reaction at active sites"
+    },
+    {
+     "title": "Desorption of products"
+    },
+    {
+     "title": "Catalyst poisoning (if applicable)"
+    }
+   ],
+   "title": "Mechanism of Heterogeneous Catalysis"
+  }
+ },
+ {
+  "conceptId": "chem.surface.surfactants",
+  "renderCount": 24,
+  "cachedOn": "2026-09-05",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Surfactant molecules dispersed in water"
+    },
+    {
+     "title": "Adsorption at interface reduces surface tension"
+    },
+    {
+     "title": "Surface tension decreases until CMC"
+    },
+    {
+     "title": "Above CMC, excess surfactants assemble into micelles"
+    },
+    {
+     "title": "Micelles encapsulate hydrophobic contaminants for detergency"
+    }
+   ],
+   "title": "Surfactant Behavior and Detergency"
+  }
+ },
+ {
+  "conceptId": "chem.thermo.bond-enthalpy",
+  "renderCount": 9,
+  "cachedOn": "2026-08-27",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Sublimation of metal (M(s) → M(g))"
+    },
+    {
+     "title": "Ionization of metal (M(g) → M⁺(g) + e⁻)"
+    },
+    {
+     "title": "Dissociation of nonmetal diatomic (X₂(g) → 2X(g))"
+    },
+    {
+     "title": "Electron affinity of nonmetal (X(g) + e⁻ → X⁻(g))"
+    },
+    {
+     "title": "Lattice enthalpy of ionic compound (M⁺(g) + X⁻(g) → MX(s))"
+    },
+    {
+     "title": "Net reaction enthalpy (ΔH_f° = sum of steps)"
+    }
+   ],
+   "title": "Born–Haber Cycle for Bond Enthalpy"
+  }
+ },
+ {
+  "conceptId": "chem.thermo.cell-thermo",
+  "renderCount": 3,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "type": "graph",
+   "title": "Temperature dependence of cell EMF",
+   "xLabel": "Temperature (K)",
+   "yLabel": "EMF (V)",
+   "equation": "E = 1.0 - 0.0000861*T"
+  }
+ },
+ {
+  "conceptId": "chem.thermo.enthalpy",
+  "renderCount": 10,
+  "cachedOn": "2026-08-25",
+  "figure": {
+   "type": "process_flow",
+   "steps": [
+    {
+     "title": "Gather ΔH°f values for all reactants and products."
+    },
+    {
+     "title": "Write the balanced chemical equation for the reaction."
+    },
+    {
+     "title": "Use Hess's law: ΔH°rxn = ΣΔH°f(products) – ΣΔH°f(reactants)."
+    },
+    {
+     "title": "Interpret ΔH°rxn: negative exothermic, positive endothermic."
+    }
+   ],
+   "title": "Calculating Reaction Enthalpy with Hess's Law"
+  }
+ },
+ {
+  "conceptId": "chem.thermo.entropy",
+  "renderCount": 61,
+  "cachedOn": "2026-08-21",
+  "figure": {
+   "type": "graph",
+   "title": "Entropy Increase Over Time for an Isolated System",
+   "xLabel": "Time (s)",
+   "yLabel": "Entropy Change (J/K)",
+   "equation": "2x"
+  }
+ },
+ {
+  "conceptId": "chem.thermo.gibbs",
+  "renderCount": 26,
+  "cachedOn": "2026-08-11",
+  "figure": {
+   "type": "graph",
+   "title": "Gibbs Free Energy vs. Temperature",
+   "xLabel": "Temperature [K]",
+   "yLabel": "Gibbs Free Energy [ΔG]",
+   "equation": "H - T*S"
+  }
+ },
+ {
+  "conceptId": "chem.thermo.heat-capacities",
+  "renderCount": 5,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "type": "graph",
+   "title": "Heat Capacity Ratio γ vs Temperature",
+   "xLabel": "Temperature (K)",
+   "yLabel": "γ (dimensionless)",
+   "equation": "1.4 + 0.0001*x"
+  }
+ },
+ {
+  "conceptId": "chem.thermo.system",
+  "renderCount": 7,
+  "cachedOn": "2026-09-06",
+  "figure": {
+   "id": "chem.thermo.system",
+   "type": "scene",
+   "steps": [
+    {
+     "objects": [
+      {
+       "id": "surroundings",
+       "type": "point",
+       "color": "grey",
+       "position": [
+        0,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "openSystem",
+       "type": "point",
+       "color": "blue",
+       "position": [
+        -3,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "closedSystem",
+       "type": "point",
+       "color": "green",
+       "position": [
+        0,
+        2,
+        0
+       ]
+      },
+      {
+       "id": "isolatedSystem",
+       "type": "point",
+       "color": "red",
+       "position": [
+        3,
+        0,
+        0
+       ]
+      },
+      {
+       "id": "labelSurroundings",
+       "text": "Surroundings",
+       "type": "label",
+       "position": [
+        0,
+        0.5,
+        0
+       ]
+      },
+      {
+       "id": "labelOpen",
+       "text": "Open System",
+       "type": "label",
+       "position": [
+        -3,
+        0.5,
+        0
+       ]
+      },
+      {
+       "id": "labelClosed",
+       "text": "Closed System",
+       "type": "label",
+       "position": [
+        0,
+        2.5,
+        0
+       ]
+      },
+      {
+       "id": "labelIsolated",
+       "text": "Isolated System",
+       "type": "label",
+       "position": [
+        3,
+        0.5,
+        0
+       ]
+      },
+      {
+       "id": "arrowIn",
+       "to": [
+        -3,
+        0,
+        0
+       ],
+       "from": [
+        0,
+        0,
+        0
+       ],
+       "type": "arrow",
+       "color": "black"
+      },
+      {
+       "id": "arrowOut",
+       "to": [
+        0,
+        0,
+        0
+       ],
+       "from": [
+        -3,
+        0,
+        0
+       ],
+       "type": "arrow",
+       "color": "black"
+      }
+     ],
+     "narration": "Introduce the system and surroundings with open, closed, and isolated examples."
+    },
+    {
+     "objects": [
+      {
+       "id": "labelState",
+       "text": "State Functions (e.g., Entropy, Energy)",
+       "type": "label",
+       "position": [
+        -3,
+        -1,
+        0
+       ]
+      },
+      {
+       "id": "labelPath",
+       "text": "Path Functions (e.g., Work, Heat)",
+       "type": "label",
+       "position": [
+        0,
+        -1,
+        0
+       ]
+      }
+     ],
+     "narration": "Show the distinction between state and path functions."
+    },
+    {
+     "objects": [
+      {
+       "id": "labelExtensive",
+       "text": "Extensive vs Intensive",
+       "type": "label",
+       "position": [
+        3,
+        -1,
+        0
+       ]
+      }
+     ],
+     "narration": "Highlight extensive vs intensive properties."
+    }
+   ],
+   "title": "System, Surroundings, and State Functions",
+   "ariaLabel": "Diagram showing system types and state vs path functions",
+   "sceneType": "diagram",
+   "teachingGoal": "Illustrate the distinction between system and surroundings, the types of systems, and the difference between state and path functions, as well as extensive vs intensive properties.",
+   "cameraDistance": 10
+  }
+ },
+ {
+  "conceptId": "chem.thermo.third-law",
+  "renderCount": 74,
+  "cachedOn": "2026-08-21",
+  "figure": {
+   "type": "graph",
+   "title": "Absolute Entropy vs Temperature (Third Law)",
+   "xLabel": "Temperature (K)",
+   "yLabel": "Entropy (J/(mol·K))",
+   "equation": "S = T"
+  }
+ }
+]

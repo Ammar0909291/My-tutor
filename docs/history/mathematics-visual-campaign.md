@@ -1437,7 +1437,7 @@ A `dot()` with its own `text` is reported by `label-displacement.ts` as moved 18
 The label-displacement tool uses a 570 x 370 card; the real Chromium card can still push a label that sits INSIDE a circle or a closed curve out to the figure's margin (the QP "min of f" went to the top row wherever it was placed inside the circles): look at the render, and put such a caption outside the curve with a leader line.
 The first figure rendered right after `next dev` starts can come out with an empty canvas (the card chrome only): re-render it alone before concluding anything about the figure.
 A figure that must show two curves that coincide over a stretch (h = f outside the bump) should draw the second curve only where it differs, or it paints over the first.
-Merged with the Biology/Physics visual fixes another session pushed to `main` while this batch was being built (`origin/main` @ 478adb0f): a plain `git merge origin/main`, no conflicts, and the full suite re-run on the merged tree before pushing.
+Merged with the Biology/Physics visual fixes another session pushed to `main` while this batch was being built (`origin/main` @ 478adb0f): a plain `git merge origin/main`, no conflicts, and the full suite run on the pre-merge tree (a second merge of 8 further commits was verified with the targeted suites only).
 
 Next (batch 41): geom (4: geometric-proof, length, differential-geometry-surfaces, geometric-constructions), func (4: function-notation, zero-of-function, step-function, function-operations) and cx (4: analytic-continuation, singularities, residue, argument-principle) — 12; then batch 42: graph (3), trig (2), cat (2), num (1). List what is left with `npx tsx scripts/math/visual-coverage.ts --list H`.
 
@@ -1460,3 +1460,32 @@ Queue for AFTER the Mathematics campaign (in this order; each needs a fresh owne
 4b. Review the card-host label-displacement items listed by `npx tsx scripts/math/label-displacement.ts all 14` (218 figure/host combinations over 14 px for batches 1-29): move the nearby line/dot or add spacing wherever a short table/ruler entry is displaced.
 5. Close the documented REVIEW findings (Chemistry 84 REVIEW states, Biology 6, Physics 19) only if the owner wants them closed.
 Unconfirmed: what the other account's own instruction/remaining task was. Ask the owner to paste it before assuming the list above is the intended scope.
+
+# Batch 41 (2026-10-13): geometry, functions and complex-analysis figures (12)
+
+`sceneGenerators/mathCoreScenesB41.ts` + `mathCoreScenesBatch41.test.ts` (122 checks); campaign audit threshold now 502. Coverage after this batch:
+548 of 908 concepts with a fixed figure (60.4%); essential tier 344 / 346 (complete), tier H 202 / 210 (96.2%), tier N 2 / 352.
+Pre-push checklist: full `npx vitest run`, `scripts/ci/tsc-ratchet.sh` 0 errors, `validate-visualization-coverage.ts` PASS, `scripts/math/label-displacement.ts mathCoreScenesB41 14` (0 unresolved, 0 card-host moves; phone-host moves only),
+`scripts/math/campaign-tools/audit-module.ts mathCoreScenesB41` (12 / 12 admitted). Mutation check: fifteen deliberate single-part wrong numbers (alpha 55, a red arc spanning 70, a three-chord "two-chord" path, a saddle section bending up, compass radius 2.6, f = x² + 2, a zero at x² − 2x − 4,
+rings on the wrong end of the ceiling steps, f = x + 2, the point −1.2 moved inside the first disc, a pole drawn as 2/r, a third distance 0.2, circle centred 1.5, an image with 3e^(2it), chord ends at 85°) each made at least one test fail.
+The first mutation run left two survivors, both test-side faults, fixed before the commit: the argument-principle test compared the drawn image with the generator's own `arpImage` (self-consistent, so a wrong formula passed) — it now recomputes f(0.5 + 2e^(it)) = z² − 1 from first principles; one "length" mutation was a no-op (pattern replaced by itself).
+Defects found while verifying (all fixed): the surface-curvature figure ran past ±5 (columns moved to x = −3.2/0/3.2, sign marks below the panels); eight figures had card-host label moves (geometric proof letters and arcs, residue captions, singularities spacing, surface signs, zero-of-function captions, function-operations sum label, constructions P/Q, the straight-angle caption) — repositioned until the gate read 0.
+
+| Concept | Figure |
+|---|---|
+| math.geom.geometric-proof | triangle 50° / 60° / 70° with a parallel through the apex: alternate angles equal, α + β + γ fill a straight line, 50° + 70° + 60° = 180° |
+| math.geom.length | quarter circle of radius 1 (drawn ×4) with 1, 2, 4 equal chords: 1.41, 1.53, 1.56 climb to the arc π/2 ≈ 1.57 |
+| math.geom.differential-geometry-surfaces | sphere, cylinder, saddle: two principal sections through one point with signs (+,+), (+,0), (+,−) so K > 0, = 0, < 0 |
+| math.geom.geometric-constructions | equal circles about A and B (radius 2.4) meet in P and Q; PQ ⊥ AB through the midpoint M, PA = PB |
+| math.func.function-notation | f(x) = x² + 1: f(2) = 5 and f(−1) = 2 as points on the graph with drop lines |
+| math.func.zero-of-function | f(x) = x² − 2x − 3: zeros −1 and 3, sign change between f(2) = −3 and f(4) = 5 |
+| math.func.step-function | floor and ceiling steps with ring/dot ends: ⌊2.7⌋ = 2, ⌊−1.2⌋ = −2, ⌈2.1⌉ = 3 |
+| math.func.function-operations | f(x) = x + 1, g(x) = x²: (f + g)(2) = 7, f after g at 2 = 5, g after f at 2 = 9 |
+| math.cx.analytic-continuation | discs of radius 1 and 1.5 whose series agree on the overlap; the pole at 1 on both boundaries; the point −1.2 only in the second |
+| math.cx.singularities | |f| near sin z / z (bounded), 1/z (unbounded), e^(1/z) (no limit) |
+| math.cx.residue | f = 3/(z − 2): (z − 2) f stays 3 for h = 1, ½, ¼ while f itself grows 3, 6, 12 |
+| math.cx.argument-principle | f(z) = z² − 1 on |z − 0.5| = 2: zeros ±1 inside, the image curve winds twice round 0, Z − P = 2 − 0 = 2 |
+
+Notes: twins checked first — none of the twelve ids had a registry entry. Lessons: a `dot()` with its own text always reads as an 18 px card move (use free labels); the real card pushes labels placed inside circles or closed curves outward; the first render after `next dev` can be blank (re-shoot); a test must recompute from FIRST PRINCIPLES, never from the generator's own helper, or a wrong formula passes (the argument-principle survivor).
+
+Next (batch 42): graph (3: graph-invariants, graph-operations, random-graph), trig (2: trig-identities, trig-equations), cat (2: limits, adjunction), num (1: error-analysis) — 8; then tier H is empty. List what is left with `npx tsx scripts/math/visual-coverage.ts --list H`.

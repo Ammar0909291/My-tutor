@@ -1,0 +1,633 @@
+{
+ "generated": "2026-10-09",
+ "method": "Each in-figure reference value located in the repo, then checked against an authoritative public source (NIST Chemistry WebBook / NIST CODATA / CCCBDB, Martell & Smith via Harvey LibreTexts, Shannon 1976 via KnowledgeDoor, Wikipedia data pages that cite NIST/CRC). Verdicts: MATCH (value agrees at the figure precision), WITHIN_ROUNDING (agrees after rounding/truncation, difference noted), MISMATCH (disagrees), UNVERIFIED (could not establish).",
+ "limits": "The CRC Handbook, the original Shannon paper text and NIST SRD 46 (Windows software) could not be read; values attributed to them rest on the secondary sources named per entry.",
+ "counts": {
+  "MATCH": 41,
+  "WITHIN_ROUNDING": 27,
+  "UNVERIFIED": 1
+ },
+ "entries": [
+  {
+   "figure": "Claim A: Born-Haber cycle NaCl (kJ/mol, 298 K)",
+   "quantity": "Standard enthalpy of formation NaCl(s)",
+   "valueInFigure": "-411 kJ/mol",
+   "authoritativeValue": "-411.12 kJ/mol (298.15 K, 1 bar, solid; S° = 72.11 J/mol K)",
+   "source": "NIST Chemistry WebBook, NaCl condensed-phase thermochemistry: https://webbook.nist.gov/cgi/cbook.cgi?ID=C7647145&Mask=2",
+   "verdict": "MATCH",
+   "note": "Note the WebBook lists the liquid first (-385.92); solid is the standard state."
+  },
+  {
+   "figure": "Claim A: Born-Haber cycle NaCl (kJ/mol, 298 K)",
+   "quantity": "Sublimation (atomisation) enthalpy Na(s)->Na(g)",
+   "valueInFigure": "+107 kJ/mol",
+   "authoritativeValue": "DfH(gas, Na) = 107.5 +/- 0.7 kJ/mol (CODATA review, Cox/Wagman 1984); Chase 1998 lists 107.30 kJ/mol; 298.15 K",
+   "source": "NIST Chemistry WebBook, Na gas-phase thermochemistry: https://webbook.nist.gov/cgi/cbook.cgi?ID=C7440235&Mask=1",
+   "verdict": "WITHIN_ROUNDING",
+   "note": "107.5 vs 107 is 0.5 kJ/mol; textbooks use 107-108."
+  },
+  {
+   "figure": "Claim A: Born-Haber cycle NaCl (kJ/mol, 298 K)",
+   "quantity": "First ionisation energy Na",
+   "valueInFigure": "+496 kJ/mol",
+   "authoritativeValue": "IE (evaluated) = 5.13908 eV = 495.85 kJ/mol (my conversion, 1 eV = 96.4853 kJ/mol); NIST ASD/Lide 1992",
+   "source": "NIST Chemistry WebBook, Na ion energetics: https://webbook.nist.gov/cgi/cbook.cgi?ID=C7440235&Mask=20 ; kJ/mol column also 495.8 in https://en.wikipedia.org/wiki/Ionization_energies_of_the_elements_(data_page)",
+   "verdict": "MATCH",
+   "note": "WebBook gives eV only; conversion is mine. Ionisation energy is a 0 K energy; 298 K enthalpy differs by a few kJ/mol (see LibreTexts -2RT correction note on lattice row)."
+  },
+  {
+   "figure": "Claim A: Born-Haber cycle NaCl (kJ/mol, 298 K)",
+   "quantity": "1/2 x bond dissociation of Cl2 (= DfH of Cl atom)",
+   "valueInFigure": "+122 kJ/mol",
+   "authoritativeValue": "DfH(gas, Cl) = 121.301 +/- 0.008 kJ/mol (CODATA review), Chase 121.30; 298.15 K => 1/2 D(Cl-Cl) = 121.3",
+   "source": "NIST Chemistry WebBook, Cl atom gas-phase thermochemistry: https://webbook.nist.gov/cgi/cbook.cgi?ID=C22537151&Mask=1",
+   "verdict": "WITHIN_ROUNDING",
+   "note": "Figure value is 0.7 kJ/mol high; textbooks use D(Cl-Cl) = 243-244 so half = 121.5-122. Acceptable."
+  },
+  {
+   "figure": "Claim A: Born-Haber cycle NaCl (kJ/mol, 298 K)",
+   "quantity": "Electron affinity of Cl, as DH of Cl(g)+e- -> Cl-(g)",
+   "valueInFigure": "-349 kJ/mol",
+   "authoritativeValue": "EA(Cl) = 3.612725 +/- 0.000087 eV (Trainham 1987), 3.613577 eV (Berzinsh 1995), 3.6131 eV (Martin & Hepburn 1998) = 348.6 kJ/mol (my conversion)",
+   "source": "NIST Chemistry WebBook, Cl ion energetics: https://webbook.nist.gov/cgi/cbook.cgi?ID=C22537151&Mask=20",
+   "verdict": "WITHIN_ROUNDING",
+   "note": "CONVENTION-DEPENDENT: EA is a 0 K energy released on attachment, so DH is quoted as -EA = -349 (sign negative = exothermic). Some texts quote EA as a positive number (+349) and subtract it in the cycle. Strict 298 K enthalpy carries an RT-type correction (LibreTexts Mink NaCl page applies '-2RT' to the whole cycle: https://chem.libretexts.org/Courses/CSU_San_Bernardino/CHEM_4300%3A_Inorganic_Chemistry_(Mink)/10%3A_Ionic_and_Covalent_Solids_-_Energetics/10.04%3A_Born-Haber_Cycles_for_NaCl_and_Silver_Halides). Size of any 298 K correction was not looked up in a source."
+  },
+  {
+   "figure": "Claim A: Born-Haber cycle NaCl (kJ/mol, 298 K)",
+   "quantity": "Lattice energy NaCl, as DH of Na+(g)+Cl-(g)->NaCl(s)",
+   "valueInFigure": "-787 kJ/mol",
+   "authoritativeValue": "Born-Haber-derived: -786 kJ/mol (Wikipedia 'Lattice energy', citing Shriver & Atkins). Closing the cycle with NIST inputs above gives -411.12 - (107.5 + 495.85 + 121.3 - 348.6) = -787.1. Range in textbooks/handbooks: ~ -776 (older data) / -786 to -788 (Born-Haber) vs ~ -766 to -770 (calculated ionic-model, e.g. OpenStax 769, LibreTexts Born-Mayer -766.5).",
+   "source": "Wikipedia Lattice energy: https://en.wikipedia.org/wiki/Lattice_energy ; OpenStax Chem 2e 7.5: https://openstax.org/books/chemistry-2e/pages/7-5-strengths-of-ionic-and-covalent-bonds ; LibreTexts Mink NaCl page (URL in EA row). CRC/Jenkins value 786 (thermochemical cycle) vs 769 (calculated) reported by a search snippet citing WebElements; the WebElements/Sheffield pages could not be fetched (account suspended) so that CRC figure is NOT directly confirmed.",
+   "verdict": "WITHIN_ROUNDING",
+   "note": "Yes: -787 is an experimental-data (Born-Haber-derived) value, not directly measured, and is NOT the ionic-model/Born-Lande value (about -766 to -770). SIGN CONVENTION: figure uses formation convention (negative, exothermic). OpenStax and the CRC style use the dissociation convention (+769/+786 etc.); Wikipedia states both are widely used. 1 kJ/mol off Wikipedia's 786 comes from input-set rounding."
+  },
+  {
+   "figure": "Claim A: Born-Haber cycle NaCl (kJ/mol, 298 K)",
+   "quantity": "Cycle closure: 107+496+122-349-787",
+   "valueInFigure": "-411 kJ/mol",
+   "authoritativeValue": "-411 (arithmetic)",
+   "source": "Arithmetic; matches NIST DfH -411.12",
+   "verdict": "MATCH",
+   "note": "Figure is internally consistent. Using NIST-grade inputs the closure is -411.1 +/- ~1."
+  },
+  {
+   "figure": "Claim B: Hess's law carbon combustion (kJ/mol, 298 K)",
+   "quantity": "C(s)+O2(g)->CO2(g) DfH",
+   "valueInFigure": "-393.5 kJ/mol",
+   "authoritativeValue": "-393.51 +/- 0.13 kJ/mol (CODATA review); Chase 1998 -393.52",
+   "source": "NIST Chemistry WebBook CO2: https://webbook.nist.gov/cgi/cbook.cgi?ID=C124389&Mask=1",
+   "verdict": "MATCH",
+   "note": "Reference element C is graphite."
+  },
+  {
+   "figure": "Claim B: Hess's law carbon combustion (kJ/mol, 298 K)",
+   "quantity": "C(s)+1/2 O2(g)->CO(g) DfH",
+   "valueInFigure": "-110.5 kJ/mol",
+   "authoritativeValue": "-110.53 +/- 0.17 kJ/mol (CODATA review); Chase 1998 -110.53",
+   "source": "NIST Chemistry WebBook CO: https://webbook.nist.gov/cgi/cbook.cgi?ID=C630080&Mask=1",
+   "verdict": "MATCH",
+   "note": ""
+  },
+  {
+   "figure": "Claim B: Hess's law carbon combustion (kJ/mol, 298 K)",
+   "quantity": "CO(g)+1/2 O2(g)->CO2(g) DH (derived)",
+   "valueInFigure": "-283.0 kJ/mol",
+   "authoritativeValue": "-393.51 - (-110.53) = -282.98 kJ/mol (my arithmetic from NIST values)",
+   "source": "Derived from the two NIST WebBook entries above",
+   "verdict": "MATCH",
+   "note": "-110.5 + (-283.0) = -393.5 closes exactly."
+  },
+  {
+   "figure": "Claim C: first ionisation energies, period 3 (kJ/mol)",
+   "quantity": "First ionisation energy Na",
+   "valueInFigure": "496 kJ/mol",
+   "authoritativeValue": "5.13908 eV = 495.8 kJ/mol (CRC 84th ed. eV; kJ/mol column = NIST ASD-derived)",
+   "source": "Wikipedia 'Ionization energies of the elements (data page)', which cites NIST ASD (Kramida et al.) and CRC Handbook 84th ed.: https://en.wikipedia.org/wiki/Ionization_energies_of_the_elements_(data_page) ; Na also checked directly at https://webbook.nist.gov/cgi/cbook.cgi?ID=C7440235&Mask=20 (5.13908 eV)",
+   "verdict": "MATCH",
+   "note": "Verified directly on NIST WebBook (eV) and converted."
+  },
+  {
+   "figure": "Claim C: first ionisation energies, period 3 (kJ/mol)",
+   "quantity": "First ionisation energy Mg",
+   "valueInFigure": "738 kJ/mol",
+   "authoritativeValue": "7.64624 eV = 737.7 kJ/mol (CRC 84th ed. eV; kJ/mol column = NIST ASD-derived)",
+   "source": "Wikipedia 'Ionization energies of the elements (data page)', which cites NIST ASD (Kramida et al.) and CRC Handbook 84th ed.: https://en.wikipedia.org/wiki/Ionization_energies_of_the_elements_(data_page) ; Na also checked directly at https://webbook.nist.gov/cgi/cbook.cgi?ID=C7440235&Mask=20 (5.13908 eV)",
+   "verdict": "WITHIN_ROUNDING",
+   "note": "Only Na was checked directly on the NIST WebBook; the other seven come from the Wikipedia data page that cites NIST/CRC (secondary aggregation). Figure values for Al, Si, P, S, Ar appear truncated rather than rounded (e.g. 577.5->577, 1011.8->1011, 999.6->999, 1520.6->1520); all within 1 kJ/mol (<0.1 %), fine for teaching."
+  },
+  {
+   "figure": "Claim C: first ionisation energies, period 3 (kJ/mol)",
+   "quantity": "First ionisation energy Al",
+   "valueInFigure": "577 kJ/mol",
+   "authoritativeValue": "5.98577 eV = 577.5 kJ/mol (CRC 84th ed. eV; kJ/mol column = NIST ASD-derived)",
+   "source": "Wikipedia 'Ionization energies of the elements (data page)', which cites NIST ASD (Kramida et al.) and CRC Handbook 84th ed.: https://en.wikipedia.org/wiki/Ionization_energies_of_the_elements_(data_page) ; Na also checked directly at https://webbook.nist.gov/cgi/cbook.cgi?ID=C7440235&Mask=20 (5.13908 eV)",
+   "verdict": "WITHIN_ROUNDING",
+   "note": "Only Na was checked directly on the NIST WebBook; the other seven come from the Wikipedia data page that cites NIST/CRC (secondary aggregation). Figure values for Al, Si, P, S, Ar appear truncated rather than rounded (e.g. 577.5->577, 1011.8->1011, 999.6->999, 1520.6->1520); all within 1 kJ/mol (<0.1 %), fine for teaching."
+  },
+  {
+   "figure": "Claim C: first ionisation energies, period 3 (kJ/mol)",
+   "quantity": "First ionisation energy Si",
+   "valueInFigure": "786 kJ/mol",
+   "authoritativeValue": "8.15169 eV = 786.5 kJ/mol (CRC 84th ed. eV; kJ/mol column = NIST ASD-derived)",
+   "source": "Wikipedia 'Ionization energies of the elements (data page)', which cites NIST ASD (Kramida et al.) and CRC Handbook 84th ed.: https://en.wikipedia.org/wiki/Ionization_energies_of_the_elements_(data_page) ; Na also checked directly at https://webbook.nist.gov/cgi/cbook.cgi?ID=C7440235&Mask=20 (5.13908 eV)",
+   "verdict": "WITHIN_ROUNDING",
+   "note": "Only Na was checked directly on the NIST WebBook; the other seven come from the Wikipedia data page that cites NIST/CRC (secondary aggregation). Figure values for Al, Si, P, S, Ar appear truncated rather than rounded (e.g. 577.5->577, 1011.8->1011, 999.6->999, 1520.6->1520); all within 1 kJ/mol (<0.1 %), fine for teaching."
+  },
+  {
+   "figure": "Claim C: first ionisation energies, period 3 (kJ/mol)",
+   "quantity": "First ionisation energy P",
+   "valueInFigure": "1011 kJ/mol",
+   "authoritativeValue": "10.48669 eV = 1011.8 kJ/mol (CRC 84th ed. eV; kJ/mol column = NIST ASD-derived)",
+   "source": "Wikipedia 'Ionization energies of the elements (data page)', which cites NIST ASD (Kramida et al.) and CRC Handbook 84th ed.: https://en.wikipedia.org/wiki/Ionization_energies_of_the_elements_(data_page) ; Na also checked directly at https://webbook.nist.gov/cgi/cbook.cgi?ID=C7440235&Mask=20 (5.13908 eV)",
+   "verdict": "WITHIN_ROUNDING",
+   "note": "Only Na was checked directly on the NIST WebBook; the other seven come from the Wikipedia data page that cites NIST/CRC (secondary aggregation). Figure values for Al, Si, P, S, Ar appear truncated rather than rounded (e.g. 577.5->577, 1011.8->1011, 999.6->999, 1520.6->1520); all within 1 kJ/mol (<0.1 %), fine for teaching."
+  },
+  {
+   "figure": "Claim C: first ionisation energies, period 3 (kJ/mol)",
+   "quantity": "First ionisation energy S",
+   "valueInFigure": "999 kJ/mol",
+   "authoritativeValue": "10.36001 eV = 999.6 kJ/mol (CRC 84th ed. eV; kJ/mol column = NIST ASD-derived)",
+   "source": "Wikipedia 'Ionization energies of the elements (data page)', which cites NIST ASD (Kramida et al.) and CRC Handbook 84th ed.: https://en.wikipedia.org/wiki/Ionization_energies_of_the_elements_(data_page) ; Na also checked directly at https://webbook.nist.gov/cgi/cbook.cgi?ID=C7440235&Mask=20 (5.13908 eV)",
+   "verdict": "WITHIN_ROUNDING",
+   "note": "Only Na was checked directly on the NIST WebBook; the other seven come from the Wikipedia data page that cites NIST/CRC (secondary aggregation). Figure values for Al, Si, P, S, Ar appear truncated rather than rounded (e.g. 577.5->577, 1011.8->1011, 999.6->999, 1520.6->1520); all within 1 kJ/mol (<0.1 %), fine for teaching."
+  },
+  {
+   "figure": "Claim C: first ionisation energies, period 3 (kJ/mol)",
+   "quantity": "First ionisation energy Cl",
+   "valueInFigure": "1251 kJ/mol",
+   "authoritativeValue": "12.96764 eV = 1251.2 kJ/mol (CRC 84th ed. eV; kJ/mol column = NIST ASD-derived)",
+   "source": "Wikipedia 'Ionization energies of the elements (data page)', which cites NIST ASD (Kramida et al.) and CRC Handbook 84th ed.: https://en.wikipedia.org/wiki/Ionization_energies_of_the_elements_(data_page) ; Na also checked directly at https://webbook.nist.gov/cgi/cbook.cgi?ID=C7440235&Mask=20 (5.13908 eV)",
+   "verdict": "MATCH",
+   "note": "Only Na was checked directly on the NIST WebBook; the other seven come from the Wikipedia data page that cites NIST/CRC (secondary aggregation). Figure values for Al, Si, P, S, Ar appear truncated rather than rounded (e.g. 577.5->577, 1011.8->1011, 999.6->999, 1520.6->1520); all within 1 kJ/mol (<0.1 %), fine for teaching."
+  },
+  {
+   "figure": "Claim C: first ionisation energies, period 3 (kJ/mol)",
+   "quantity": "First ionisation energy Ar",
+   "valueInFigure": "1520 kJ/mol",
+   "authoritativeValue": "15.75962 eV = 1520.6 kJ/mol (CRC 84th ed. eV; kJ/mol column = NIST ASD-derived)",
+   "source": "Wikipedia 'Ionization energies of the elements (data page)', which cites NIST ASD (Kramida et al.) and CRC Handbook 84th ed.: https://en.wikipedia.org/wiki/Ionization_energies_of_the_elements_(data_page) ; Na also checked directly at https://webbook.nist.gov/cgi/cbook.cgi?ID=C7440235&Mask=20 (5.13908 eV)",
+   "verdict": "WITHIN_ROUNDING",
+   "note": "Only Na was checked directly on the NIST WebBook; the other seven come from the Wikipedia data page that cites NIST/CRC (secondary aggregation). Figure values for Al, Si, P, S, Ar appear truncated rather than rounded (e.g. 577.5->577, 1011.8->1011, 999.6->999, 1520.6->1520); all within 1 kJ/mol (<0.1 %), fine for teaching."
+  },
+  {
+   "figure": "Claim C: first ionisation energies, period 3 (kJ/mol)",
+   "quantity": "'Dips at Al and S' pattern and explanation",
+   "valueInFigure": "dip Mg->Al and P->S",
+   "authoritativeValue": "Mg 737.7 > Al 577.5 and P 1011.8 > S 999.6 (data above). Explanation: outer p electron is higher in energy and shielded by the filled s subshell (Mg->Al); in S the 4th p electron is the first to pair in a p orbital, and paired-electron repulsion/shielding makes it easier to remove (P->S).",
+   "source": "Wikipedia 'Ionization energy': https://en.wikipedia.org/wiki/Ionization_energy",
+   "verdict": "MATCH",
+   "note": "The page states the s-shielding argument explicitly for the period-2 analogue (Be->B) and the pairing/shielding argument for O, S, Se; applying both to period 3 is the standard textbook extension (the page does not spell out S separately)."
+  },
+  {
+   "figure": "Claim D / chem.thermo.heat-capacities (conceptSceneParams.ts:787-793ff)",
+   "quantity": "Monatomic ideal gas Cv = 3/2 R",
+   "valueInFigure": "12.47 J/mol K",
+   "authoritativeValue": "1.5 x 8.314462618 = 12.4717 J/mol K",
+   "source": "R = 8.314462618 J/mol K exact (CODATA 2022): https://physics.nist.gov/cgi-bin/cuu/Value?r ; equipartition Cv: https://en.wikipedia.org/wiki/Equipartition_theorem",
+   "verdict": "MATCH",
+   "note": "Equipartition page states 3/2 R."
+  },
+  {
+   "figure": "Claim D / chem.thermo.heat-capacities (conceptSceneParams.ts:787-793ff)",
+   "quantity": "Monatomic ideal gas Cp = 5/2 R",
+   "valueInFigure": "20.79 J/mol K",
+   "authoritativeValue": "2.5 x 8.314462618 = 20.7862 J/mol K (Cp = Cv + R, Mayer relation)",
+   "source": "R = 8.314462618 J/mol K exact (CODATA 2022): https://physics.nist.gov/cgi-bin/cuu/Value?r ; equipartition Cv: https://en.wikipedia.org/wiki/Equipartition_theorem",
+   "verdict": "MATCH",
+   "note": "The Equipartition page fetched does not state Cp = Cv + R; the relation is the ideal-gas Mayer relation (derivation, not a fetched quote)."
+  },
+  {
+   "figure": "Claim D / chem.thermo.heat-capacities (conceptSceneParams.ts:787-793ff)",
+   "quantity": "Diatomic ideal gas (trans+rot) Cv = 5/2 R",
+   "valueInFigure": "20.79 J/mol K",
+   "authoritativeValue": "2.5 x 8.314462618 = 20.7862 J/mol K",
+   "source": "R = 8.314462618 J/mol K exact (CODATA 2022): https://physics.nist.gov/cgi-bin/cuu/Value?r ; equipartition Cv: https://en.wikipedia.org/wiki/Equipartition_theorem",
+   "verdict": "MATCH",
+   "note": "Page implies 5/2 R when vibration is frozen out (Fig. 4 caption). Real N2/O2 at 298 K are ~29.1 for Cp (not fetched)."
+  },
+  {
+   "figure": "Claim D / chem.thermo.heat-capacities (conceptSceneParams.ts:787-793ff)",
+   "quantity": "Diatomic ideal gas (trans+rot) Cp = 7/2 R",
+   "valueInFigure": "29.10 J/mol K",
+   "authoritativeValue": "3.5 x 8.314462618 = 29.1006 J/mol K",
+   "source": "R = 8.314462618 J/mol K exact (CODATA 2022): https://physics.nist.gov/cgi-bin/cuu/Value?r ; equipartition Cv: https://en.wikipedia.org/wiki/Equipartition_theorem",
+   "verdict": "MATCH",
+   "note": "With R = 8.314: 12.471, 20.785, 29.099 - all round to the figure values. Fully classical (with vibration) Cv would be 7/2 R; figure correctly excludes vibration."
+  },
+  {
+   "figure": "Claim E: standard electrode potentials / Daniell cell (25 C, vs SHE)",
+   "quantity": "E°(Zn2+/Zn)",
+   "valueInFigure": "-0.76 V",
+   "authoritativeValue": "-0.7618 V (CRC Handbook, Vanysek, 93rd ed.); 298.15 K, unit activity",
+   "source": "Wikipedia 'Standard electrode potential (data page)' citing CRC: https://en.wikipedia.org/wiki/Standard_electrode_potential_(data_page) ; Daniell page https://en.wikipedia.org/wiki/Daniell_cell",
+   "verdict": "WITHIN_ROUNDING",
+   "note": ""
+  },
+  {
+   "figure": "Claim E: standard electrode potentials / Daniell cell (25 C, vs SHE)",
+   "quantity": "E°(Cu2+/Cu)",
+   "valueInFigure": "+0.34 V",
+   "authoritativeValue": "+0.3419 V (CRC/IUPAC-style tables, e.g. BCcampus appendix https://opentextbc.ca/introductorychemistry/back-matter/appendix-standard-reduction-potentials-by-value/ ); +0.337 V (Bard, Parsons & Jordan 1985, listed on the Wikipedia data page); +0.340 V (Wikipedia Daniell cell)",
+   "source": "Wikipedia data page and Daniell page (URLs above)",
+   "verdict": "WITHIN_ROUNDING",
+   "note": "Literature spread is 0.337-0.342 V depending on edition; 0.34 is the common rounding. I could not open the CRC table itself, so the 0.3419 figure is via secondary tables."
+  },
+  {
+   "figure": "Claim E: standard electrode potentials / Daniell cell (25 C, vs SHE)",
+   "quantity": "Daniell cell E° (printed '+1.1 V')",
+   "valueInFigure": "+1.1 V (+1.10 V in derivations)",
+   "authoritativeValue": "0.3419-(-0.7618) = 1.1037 V; 0.337+0.7618 = 1.0988 V; Wikipedia Daniell: 'actually 1.10 V' (open-circuit 1.1018 V)",
+   "source": "Wikipedia Daniell cell: https://en.wikipedia.org/wiki/Daniell_cell",
+   "verdict": "WITHIN_ROUNDING",
+   "note": "Prints 1.1 (2 s.f.) but derivations use 1.10; both agree with the 1.10 V standard value."
+  },
+  {
+   "figure": "Claim E: standard electrode potentials / Daniell cell (25 C, vs SHE)",
+   "quantity": "DG° Daniell cell, n=2, F=96485, E=1.10 V",
+   "valueInFigure": "-212.27 kJ/mol",
+   "authoritativeValue": "-2 x 96485 x 1.10 = -212.267 kJ/mol (F = 96485.332 exact CODATA gives -212.268). Using tabulated E° 1.1037 V gives -212.98 kJ/mol.",
+   "source": "Re-derived; F from https://physics.nist.gov/cgi-bin/cuu/Value?f",
+   "verdict": "WITHIN_ROUNDING",
+   "note": "Arithmetic is exact for the rounded E° = 1.10 V; true tabulated E° would move DG° by 0.7 kJ/mol (0.3 %)."
+  },
+  {
+   "figure": "Claim E: standard electrode potentials / Daniell cell (25 C, vs SHE)",
+   "quantity": "Zn vs SHE: E = +0.76 V, DG (n=2)",
+   "valueInFigure": "-146.66 kJ/mol",
+   "authoritativeValue": "-2 x 96485 x 0.76 = -146.657 kJ/mol; with 0.7618 V: -147.0 kJ/mol",
+   "source": "Re-derived; E from CRC via Wikipedia data page",
+   "verdict": "WITHIN_ROUNDING",
+   "note": "Sign: +0.76 V is the oxidation potential of Zn vs SHE (Zn -> Zn2+ + 2e-), i.e. -E°red. Consistent. 0.3 kJ/mol rounding difference."
+  },
+  {
+   "figure": "Claim F: Nernst checks (25 C, 0.05916 V/decade)",
+   "quantity": "Daniell cell E, [Zn2+]=1 M, [Cu2+]=0.01 M",
+   "valueInFigure": "+1.041 V",
+   "authoritativeValue": "E = 1.10 - (0.05916/2) log10(1/0.01) = 1.10 - 0.05916 = 1.04084 V (exact RT ln10/F = 0.059159 V at 298.15 K)",
+   "source": "Re-derived (python); constants from NIST CODATA",
+   "verdict": "MATCH",
+   "note": "If E° = 1.1037 were used the result would be 1.0445 V; figure is self-consistent with E° = 1.10. Idealisation: concentrations used in place of activities (0.01 M Cu2+ has gamma ~0.4-0.7), not looked up in a source."
+  },
+  {
+   "figure": "Claim F: Nernst checks (25 C, 0.05916 V/decade)",
+   "quantity": "DG for that cell (n=2)",
+   "valueInFigure": "-200.88 kJ/mol",
+   "authoritativeValue": "-2 x 96485 x 1.04084 = -200.85 kJ/mol; -200.88 results only from the rounded E = 1.041 V",
+   "source": "Re-derived",
+   "verdict": "WITHIN_ROUNDING",
+   "note": "0.03 kJ/mol difference from carrying a rounded voltage; harmless but spurious precision."
+  },
+  {
+   "figure": "Claim F: Nernst checks (25 C, 0.05916 V/decade)",
+   "quantity": "Copper concentration cell, 0.001 M vs 1 M",
+   "valueInFigure": "+0.089 V",
+   "authoritativeValue": "E = (0.05916/2) log10(1/0.001) = 0.02958 x 3 = 0.08874 V",
+   "source": "Re-derived",
+   "verdict": "MATCH",
+   "note": "0.08874 rounds to 0.089."
+  },
+  {
+   "figure": "Claim F: Nernst checks (25 C, 0.05916 V/decade)",
+   "quantity": "DG for concentration cell (n=2)",
+   "valueInFigure": "-17.17 kJ/mol",
+   "authoritativeValue": "-2 x 96485 x 0.08874 = -17.12 kJ/mol; -17.17 results from the rounded 0.089 V",
+   "source": "Re-derived",
+   "verdict": "WITHIN_ROUNDING",
+   "note": "0.05 kJ/mol (0.3 %) from using the rounded E. Prefer -17.1 or recompute from unrounded E."
+  },
+  {
+   "figure": "Claim G: phase-diagram landmarks",
+   "quantity": "Water triple point T",
+   "valueInFigure": "273.16 K",
+   "authoritativeValue": "273.16 K (exact by SI definition of the kelvin before 2019; IAPWS-95 / NIST fluid table starts at 273.16 K)",
+   "source": "NIST Chemistry WebBook fluid (water) saturation table: https://webbook.nist.gov/cgi/fluid.cgi?ID=C7732185 (queried T=273.16 K, Type=SatP)",
+   "verdict": "MATCH",
+   "note": ""
+  },
+  {
+   "figure": "Claim G: phase-diagram landmarks",
+   "quantity": "Water triple point P",
+   "valueInFigure": "612 Pa (was 611 Pa before the R18 edit)",
+   "authoritativeValue": "0.00061165 MPa = 611.65 Pa (NIST fluid, IAPWS-95); Wikipedia 'Triple point' 611.657 Pa (Wagner/Saul/Pruss 1994)",
+   "source": "NIST fluid saturation table (URL above) ; https://en.wikipedia.org/wiki/Triple_point",
+   "verdict": "MATCH",
+   "note": "R18: the figure truncated 611.65 to 611; it now reads the correctly rounded 612 Pa."
+  },
+  {
+   "figure": "Claim G: phase-diagram landmarks",
+   "quantity": "CO2 critical temperature",
+   "valueInFigure": "304 K",
+   "authoritativeValue": "304.1282 K (NIST fluid, Span-Wagner EOS); NIST WebBook phase-change page lists 304.18 K (Suehiro 1996), other studies 304.1-304.35 K",
+   "source": "NIST fluid: https://webbook.nist.gov/cgi/fluid.cgi?ID=C124389 ; phase-change data https://webbook.nist.gov/cgi/cbook.cgi?ID=C124389&Mask=4",
+   "verdict": "WITHIN_ROUNDING",
+   "note": ""
+  },
+  {
+   "figure": "Claim G: phase-diagram landmarks",
+   "quantity": "CO2 critical pressure",
+   "valueInFigure": "73 atm",
+   "authoritativeValue": "7.3773 MPa = 72.81 atm (73.80 bar = 72.8 atm per NIST phase-change page)",
+   "source": "Same NIST pages",
+   "verdict": "WITHIN_ROUNDING",
+   "note": "73 atm is the textbook rounding of 72.8."
+  },
+  {
+   "figure": "Claim G: phase-diagram landmarks",
+   "quantity": "Water critical temperature",
+   "valueInFigure": "647 K",
+   "authoritativeValue": "647.096 K (NIST fluid, IAPWS-95); NIST phase-change page 647 +/- 2 K",
+   "source": "NIST fluid saturation table (water) near 647.1 K; https://webbook.nist.gov/cgi/cbook.cgi?ID=C7732185&Mask=4",
+   "verdict": "WITHIN_ROUNDING",
+   "note": ""
+  },
+  {
+   "figure": "Claim G: phase-diagram landmarks",
+   "quantity": "Water critical pressure",
+   "valueInFigure": "218 atm",
+   "authoritativeValue": "22.064 MPa = 217.75 atm (220.64 bar)",
+   "source": "NIST fluid (water): 22.064 MPa at 647.10 K; page lists Pc = 22.0640 MPa",
+   "verdict": "WITHIN_ROUNDING",
+   "note": ""
+  },
+  {
+   "figure": "Claim G: phase-diagram landmarks",
+   "quantity": "CO2 triple point (T, P)",
+   "valueInFigure": "216.55 K, 5.18 bar",
+   "authoritativeValue": "216.58 K, 5.185 bar (NIST WebBook phase-change: Marsh 1987/Angus 1976); NIST fluid EOS: 0.51796 MPa at 216.59 K; Wikipedia 'Triple point' 216.55 K, 517 kPa",
+   "source": "NIST WebBook https://webbook.nist.gov/cgi/cbook.cgi?ID=C124389&Mask=4 ; https://en.wikipedia.org/wiki/Triple_point",
+   "verdict": "WITHIN_ROUNDING",
+   "note": "0.03 K / 0.005 bar difference between sources. Figure value 216.55 K matches Wikipedia's table; NIST gives 216.58 K."
+  },
+  {
+   "figure": "Claim G: phase-diagram landmarks",
+   "quantity": "CO2: no liquid at 1 atm (sublimation)",
+   "valueInFigure": "liquid CO2 absent at 1 atm",
+   "authoritativeValue": "1 atm = 1.013 bar < triple-point pressure 5.185 bar, so solid sublimes to gas; 760 mmHg vapour pressure at -78.2 C (solid) in CRC 44th-ed vapour-pressure table (~195 K)",
+   "source": "NIST triple-point pressure (WebBook link above); Wikipedia CO2 data page quoting CRC 44th ed.: https://en.wikipedia.org/wiki/Carbon_dioxide_(data_page)",
+   "verdict": "MATCH",
+   "note": "Modern sublimation point ~194.7 K was not fetched; the CRC 44th-ed row (-78.2 C) is an old table but consistent."
+  },
+  {
+   "figure": "chem.coord.stability (conceptSceneParams.ts:779-786), Claim H",
+   "quantity": "[Cu(NH3)4]2+ log Kf (bar labelled 'log Kf', value 13.0; the claim writes log beta4)",
+   "valueInFigure": "13.0",
+   "authoritativeValue": "Martell & Smith stepwise Cu2+/NH3 log K1..K4 = 4.04, 3.43, 2.80, 1.48 => log beta4 = 11.75 (25 C, zero ionic strength). Textbook formation constants: 1.7e13 (log 13.23, OpenStax/LibreTexts Lumen), 2.1e13 (13.32), 1.1e13 (13.04) - media/conditions unstated.",
+   "source": "Harvey, LibreTexts Formation Constants (cites Martell & Smith, Critical Stability Constants): https://chem.libretexts.org/Bookshelves/Analytical_Chemistry/Analytical_Chemistry_Volume_I_(Harvey)/10%3A_Appendix/10.12%3A_Formation_Constants ; OpenStax Kf 1.7e13: https://chem.libretexts.org/Courses/Lumen_Learning/Book%3A_General_Chemistry__Lecture_and_Lab_(Lumen)/10%3A_Appendices/10.11%3A_Formation_Constants_for_Complex_Ions . NIST SRD 46 itself is distributed as Windows software and its tables could not be read online.",
+   "verdict": "UNVERIFIED",
+   "note": "PRIORITY. 13.0 agrees with common general-chemistry Kf (1.1e13) but is ~1.25 log units above the critical-compilation value at I = 0 (11.75), and I could not retrieve SRD 46 to see the I = 0.1 value. Higher-ionic-strength literature values (e.g. Bjerrum-type, I = 2 NH4NO3) were searched but not confirmed. Suggest relabelling 'log beta4 ~ 11.8 (I=0, Martell & Smith)' or 'about 12-13 depending on medium', and stating conditions on the figure. Source line to edit: src/lib/teaching/visual/conceptSceneParams.ts:783."
+  },
+  {
+   "figure": "chem.coord.stability (conceptSceneParams.ts:779-786), Claim H",
+   "quantity": "[Cu(EDTA)]2- log K (K = [CuY2-]/[Cu2+][Y4-])",
+   "valueInFigure": "18.8",
+   "authoritativeValue": "18.80, T = 20 C, mu = 0.1 M (Martell & Smith via Harvey). Metrohm monograph says its table is 25 C, I = 0.1 unless marked and flags Cu as 20 C. Same-table Cu2+/en: log K1 = 10.48, log K2 = 9.07 (25 C, I=0) => log beta2 = 19.55",
+   "source": "Harvey LibreTexts Formation Constants (URL in previous row); search-snippet corroboration from a Kawabe lanthanide-EDTA paper (not opened)",
+   "verdict": "MATCH",
+   "note": "Value matches; condition is 20 C / 0.1 M, not 25 C. FAIRNESS CAVEAT for the 'monodentate vs chelate' framing: the two bars differ in more than denticity - NH3 is a neutral 4-N donor set, EDTA (Y4-) is hexadentate N2O4 and 4- charged, and its log K refers to the fully deprotonated ligand (pH-dependent conditional constant is much lower, not looked up). The clean like-for-like chelate-effect comparison is 4 NH3 vs 2 en (same 4 N donors): 11.75 vs 19.55 at 25 C, I = 0 (both from the Harvey table, ~7.8 log units). Suggest adding a caveat or using Cu-en as the chelate bar. Mixed-ionic-strength note: NH3 constants are I=0, EDTA is I=0.1."
+  },
+  {
+   "figure": "Claim I: Group 16 hydride normal boiling points",
+   "quantity": "H2O",
+   "valueInFigure": "373 K",
+   "authoritativeValue": "373.17 +/- 0.04 K (NIST average of 7 values); 100.0 C = 373.15 K (Wikipedia chalcogenide table, Greenwood & Earnshaw)",
+   "source": "NIST WebBook water phase-change data: https://webbook.nist.gov/cgi/cbook.cgi?ID=C7732185&Mask=4",
+   "verdict": "WITHIN_ROUNDING",
+   "note": ""
+  },
+  {
+   "figure": "Claim I: Group 16 hydride normal boiling points",
+   "quantity": "H2S",
+   "valueInFigure": "213 K",
+   "authoritativeValue": "212.87 K, TRC +/-0.07 (Goodwin 1983); CRC 97th ed. -59.55 C = 213.60 K (via Wikipedia chembox)",
+   "source": "NIST WebBook https://webbook.nist.gov/cgi/cbook.cgi?ID=C7783064&Mask=4 ; https://en.wikipedia.org/wiki/Hydrogen_sulfide",
+   "verdict": "WITHIN_ROUNDING",
+   "note": "Sources span 212.85-213.6 K."
+  },
+  {
+   "figure": "Claim I: Group 16 hydride normal boiling points",
+   "quantity": "H2Se",
+   "valueInFigure": "232 K",
+   "authoritativeValue": "231.90 K (-41.25 C, Wikipedia infobox, uncited); 231.85 K (-41.3 C, Greenwood & Earnshaw via Wikipedia 'Hydrogen chalcogenide')",
+   "source": "Wikipedia: https://en.wikipedia.org/wiki/Hydrogen_selenide ; https://en.wikipedia.org/wiki/Hydrogen_chalcogenide . NIST WebBook lists only an Antoine fit (Stull 1947); solving it at 1.01325 bar gives ~231.5 K (my calculation, not a stated value).",
+   "verdict": "WITHIN_ROUNDING",
+   "note": "No NIST-stated Tboil exists on the WebBook page; value rests on Greenwood & Earnshaw / CRC-type secondary quotes."
+  },
+  {
+   "figure": "Claim I: Group 16 hydride normal boiling points",
+   "quantity": "H2Te",
+   "valueInFigure": "271 K",
+   "authoritativeValue": "270.9 K (-2.2 C, Wikipedia infobox; decomposes above ~ -2 C); 269.15 K (-4 C, Greenwood & Earnshaw); NIST Stull Antoine solved at 1 atm ~271.5 K (my calculation)",
+   "source": "Wikipedia: https://en.wikipedia.org/wiki/Hydrogen_telluride ; https://en.wikipedia.org/wiki/Hydrogen_chalcogenide ; https://webbook.nist.gov/cgi/cbook.cgi?ID=C7783097&Mask=4",
+   "verdict": "WITHIN_ROUNDING",
+   "note": "Sources scatter by ~2 K and the compound is thermally unstable, so '~271 K' is an approximate value. The monotonic H2S<H2Se<H2Te trend and the H2O anomaly are correct."
+  },
+  {
+   "figure": "Claim J: Shannon (1976) effective ionic radii, Ln3+, CN VI (pm)",
+   "quantity": "La3+",
+   "valueInFigure": "103.2 pm",
+   "authoritativeValue": "103.2 pm (effective; crystal radius 117.2)",
+   "source": "Shannon-Prewitt radii as tabulated by KnowledgeDoor Elements Handbook (cites Shannon 1976, Acta Cryst. A32, 751, doi:10.1107/S0567739476001551): https://knowledgedoor.com/2/elements_handbook/shannon-prewitt_effective_ionic_radius_part_2.html . The original Shannon PDF could only be retrieved as an unreadable scan. ; also Wikipedia Ionic radius https://en.wikipedia.org/wiki/Ionic_radius",
+   "verdict": "MATCH",
+   "note": ""
+  },
+  {
+   "figure": "Claim J: Shannon (1976) effective ionic radii, Ln3+, CN VI (pm)",
+   "quantity": "Ce3+",
+   "valueInFigure": "101 pm",
+   "authoritativeValue": "101 pm",
+   "source": "Shannon-Prewitt radii as tabulated by KnowledgeDoor Elements Handbook (cites Shannon 1976, Acta Cryst. A32, 751, doi:10.1107/S0567739476001551): https://knowledgedoor.com/2/elements_handbook/shannon-prewitt_effective_ionic_radius.html . The original Shannon PDF could only be retrieved as an unreadable scan. ; Wikipedia Ionic radius lists 101",
+   "verdict": "MATCH",
+   "note": "Wikipedia 'Lanthanide contraction' table lists 102; Shannon's own value is 1.01 A, 101 is correct."
+  },
+  {
+   "figure": "Claim J: Shannon (1976) effective ionic radii, Ln3+, CN VI (pm)",
+   "quantity": "Nd3+",
+   "valueInFigure": "98.3 pm",
+   "authoritativeValue": "98.3 pm",
+   "source": "Shannon-Prewitt radii as tabulated by KnowledgeDoor Elements Handbook (cites Shannon 1976, Acta Cryst. A32, 751, doi:10.1107/S0567739476001551): https://knowledgedoor.com/2/elements_handbook/shannon-prewitt_effective_ionic_radius_part_3.html . The original Shannon PDF could only be retrieved as an unreadable scan. ; Wikipedia Lanthanide contraction https://en.wikipedia.org/wiki/Lanthanide_contraction",
+   "verdict": "MATCH",
+   "note": ""
+  },
+  {
+   "figure": "Claim J: Shannon (1976) effective ionic radii, Ln3+, CN VI (pm)",
+   "quantity": "Gd3+",
+   "valueInFigure": "93.8 pm",
+   "authoritativeValue": "93.8 pm (KnowledgeDoor, Wikipedia Lanthanide contraction). One extraction of Wikipedia 'Ionic radius' showed 93.5 pm, not corroborated elsewhere and likely a transcription slip.",
+   "source": "Shannon-Prewitt radii as tabulated by KnowledgeDoor Elements Handbook (cites Shannon 1976, Acta Cryst. A32, 751, doi:10.1107/S0567739476001551): https://knowledgedoor.com/2/elements_handbook/shannon-prewitt_effective_ionic_radius_part_2.html . The original Shannon PDF could only be retrieved as an unreadable scan. ; https://en.wikipedia.org/wiki/Lanthanide_contraction",
+   "verdict": "MATCH",
+   "note": ""
+  },
+  {
+   "figure": "Claim J: Shannon (1976) effective ionic radii, Ln3+, CN VI (pm)",
+   "quantity": "Ho3+",
+   "valueInFigure": "90.1 pm",
+   "authoritativeValue": "90.1 pm",
+   "source": "Shannon-Prewitt radii as tabulated by KnowledgeDoor Elements Handbook (cites Shannon 1976, Acta Cryst. A32, 751, doi:10.1107/S0567739476001551): https://knowledgedoor.com/2/elements_handbook/shannon-prewitt_effective_ionic_radius_part_2.html . The original Shannon PDF could only be retrieved as an unreadable scan.",
+   "verdict": "MATCH",
+   "note": ""
+  },
+  {
+   "figure": "Claim J: Shannon (1976) effective ionic radii, Ln3+, CN VI (pm)",
+   "quantity": "Lu3+",
+   "valueInFigure": "86.1 pm",
+   "authoritativeValue": "86.1 pm",
+   "source": "Shannon-Prewitt radii as tabulated by KnowledgeDoor Elements Handbook (cites Shannon 1976, Acta Cryst. A32, 751, doi:10.1107/S0567739476001551): https://knowledgedoor.com/2/elements_handbook/shannon-prewitt_effective_ionic_radius_part_2.html . The original Shannon PDF could only be retrieved as an unreadable scan.",
+   "verdict": "MATCH",
+   "note": "Coordination number is VI (octahedral) for all rows. The 'effective ionic radius' (not the crystal radius) is what the figure reports."
+  },
+  {
+   "figure": "Claim K: textbook facts",
+   "quantity": "Watson-Crick A-T / G-C hydrogen bonds",
+   "valueInFigure": "A-T 2, G-C 3",
+   "authoritativeValue": "A-T two H-bonds, G-C three H-bonds (figure caption)",
+   "source": "Wikipedia 'Base pair': https://en.wikipedia.org/wiki/Base_pair",
+   "verdict": "MATCH",
+   "note": "Secondary source (textbook-level fact)."
+  },
+  {
+   "figure": "Claim K: textbook facts",
+   "quantity": "Wilkinson's catalyst RhCl(PPh3)3 identity",
+   "valueInFigure": "16-electron, square planar, Rh(I)",
+   "authoritativeValue": "16 electrons, slightly distorted square planar by X-ray, d8 Rh(I)",
+   "source": "Wikipedia 'Wilkinson's catalyst': https://en.wikipedia.org/wiki/Wilkinson%27s_catalyst",
+   "verdict": "MATCH",
+   "note": ""
+  },
+  {
+   "figure": "Claim K: textbook facts",
+   "quantity": "Wilkinson hydrogenation step order",
+   "valueInFigure": "PPh3 dissociation -> H2 oxidative addition -> alkene coordination -> migratory insertion -> reductive elimination",
+   "authoritativeValue": "Page lists exactly this order",
+   "source": "Wikipedia 'Wilkinson's catalyst' (URL above)",
+   "verdict": "MATCH",
+   "note": "This is the commonly presented order; the literature also discusses alkene-first/dihydride pathways (Halpern) - not checked here. Fine as a simplified teaching cycle."
+  },
+  {
+   "figure": "Claim K: textbook facts",
+   "quantity": "Woodward-Hoffmann: [4+2] thermal ss allowed; [2+2] thermal forbidden, photochemical allowed",
+   "valueInFigure": "as stated",
+   "authoritativeValue": "Diels-Alder [pi4s+pi2s] allowed; [2+2] observed only photochemically for ordinary alkenes",
+   "source": "Wikipedia 'Woodward-Hoffmann rules': https://en.wikipedia.org/wiki/Woodward%E2%80%93Hoffmann_rules",
+   "verdict": "MATCH",
+   "note": ""
+  },
+  {
+   "figure": "Claim K: textbook facts",
+   "quantity": "Woodward-Hoffmann: electrocyclisation",
+   "valueInFigure": "4n thermal conrotatory; 4n+2 thermal disrotatory",
+   "authoritativeValue": "4n e- conrotatory (thermal); 4n+2 disrotatory (thermal)",
+   "source": "Wikipedia 'Woodward-Hoffmann rules' (URL above)",
+   "verdict": "MATCH",
+   "note": "Reverses (disrotatory for 4n, conrotatory for 4n+2) under photochemical conditions."
+  },
+  {
+   "figure": "Claim K: textbook facts",
+   "quantity": "Woodward-Hoffmann: sigmatropic H shifts",
+   "valueInFigure": "[1,5] thermal suprafacial allowed; [1,3] thermal suprafacial forbidden",
+   "authoritativeValue": "[1,5]-H shifts facile; [1,3]-H shifts not observed thermally (would need antarafacial)",
+   "source": "Wikipedia 'Woodward-Hoffmann rules' (URL above)",
+   "verdict": "MATCH",
+   "note": ""
+  },
+  {
+   "figure": "Claim K: textbook facts",
+   "quantity": "Woodward-Hoffmann: Cope and Claisen",
+   "valueInFigure": "[3,3] thermally allowed",
+   "authoritativeValue": "[3,3] ground-state shift allowed (supra/supra or antara/antara)",
+   "source": "Wikipedia 'Woodward-Hoffmann rules' (URL above)",
+   "verdict": "MATCH",
+   "note": ""
+  },
+  {
+   "figure": "Claim L: VSEPR / molecular geometry",
+   "quantity": "H-O-H angle in water",
+   "valueInFigure": "104.5 deg",
+   "authoritativeValue": "104.4776 deg (+/-0.0019), equilibrium geometry, Hoy & Bunker 1979",
+   "source": "NIST CCCBDB experimental geometry: https://cccbdb.nist.gov/exp2x.asp?casno=7732185",
+   "verdict": "MATCH",
+   "note": ""
+  },
+  {
+   "figure": "Claim L: VSEPR / molecular geometry",
+   "quantity": "H-N-H angle in NH3",
+   "valueInFigure": "107 deg",
+   "authoritativeValue": "106.67 deg (Herzberg 1966)",
+   "source": "NIST CCCBDB: https://cccbdb.nist.gov/exp2x.asp?casno=7664417",
+   "verdict": "WITHIN_ROUNDING",
+   "note": "107 is the usual rounding of 106.7."
+  },
+  {
+   "figure": "Claim L: VSEPR / molecular geometry",
+   "quantity": "H-S-H angle in H2S",
+   "valueInFigure": "~92 deg",
+   "authoritativeValue": "92.11 deg (Cook, De Lucia & Helminger 1975)",
+   "source": "NIST CCCBDB: https://cccbdb.nist.gov/exp2x.asp?casno=7783064",
+   "verdict": "MATCH",
+   "note": "Wikipedia chalcogenide table lists 92.1 deg too."
+  },
+  {
+   "figure": "Claim L: VSEPR / molecular geometry",
+   "quantity": "XeF2 shape",
+   "valueInFigure": "linear",
+   "authoritativeValue": "Linear, Xe-F 197.73 +/- 0.15 pm (vapour)",
+   "source": "Wikipedia 'Xenon difluoride' citing Tramsek & Zemva 2006: https://en.wikipedia.org/wiki/Xenon_difluoride",
+   "verdict": "MATCH",
+   "note": ""
+  },
+  {
+   "figure": "Claim L: VSEPR / molecular geometry",
+   "quantity": "XeF4 shape",
+   "valueInFigure": "square planar",
+   "authoritativeValue": "Square planar, D4h, confirmed by neutron diffraction (Burns, Agron & Levy 1963)",
+   "source": "Wikipedia 'Xenon tetrafluoride': https://en.wikipedia.org/wiki/Xenon_tetrafluoride",
+   "verdict": "MATCH",
+   "note": ""
+  },
+  {
+   "figure": "Claim L: VSEPR / molecular geometry",
+   "quantity": "CO2 shape",
+   "valueInFigure": "linear",
+   "authoritativeValue": "O-C-O 180 deg, D_inf_h, r(C-O) 1.162 A (Herzberg 1966)",
+   "source": "NIST CCCBDB: https://cccbdb.nist.gov/exp2x.asp?casno=124389",
+   "verdict": "MATCH",
+   "note": ""
+  },
+  {
+   "figure": "Claim L: VSEPR / molecular geometry",
+   "quantity": "BF3 shape and F-B-F angle",
+   "valueInFigure": "trigonal planar, 120 deg",
+   "authoritativeValue": "D3h, F-B-F 120 deg (+/-2), r_e(B-F) 1.307 A (Kuchitsu 1998)",
+   "source": "NIST CCCBDB: https://cccbdb.nist.gov/exp2x.asp?casno=7637072",
+   "verdict": "MATCH",
+   "note": ""
+  },
+  {
+   "figure": "Claim M: cubic unit cells",
+   "quantity": "Face-centred cubic",
+   "valueInFigure": "4 atoms/cell, CN 12",
+   "authoritativeValue": "4 lattice points per cell, CN 12; 8 x 1/8 + 6 x 1/2 = 4",
+   "source": "Wikipedia 'Cubic crystal system': https://en.wikipedia.org/wiki/Cubic_crystal_system",
+   "verdict": "MATCH",
+   "note": "Atoms per cell equals lattice points for a one-atom basis."
+  },
+  {
+   "figure": "Claim M: cubic unit cells",
+   "quantity": "Body-centred cubic",
+   "valueInFigure": "2 atoms/cell, CN 8",
+   "authoritativeValue": "2 lattice points per cell, CN 8; 8 x 1/8 + 1 = 2",
+   "source": "Wikipedia 'Cubic crystal system' (URL above)",
+   "verdict": "MATCH",
+   "note": ""
+  },
+  {
+   "figure": "Claim M: cubic unit cells",
+   "quantity": "Simple (primitive) cubic",
+   "valueInFigure": "1 atom/cell, CN 6",
+   "authoritativeValue": "1 atom per cell, CN 6",
+   "source": "Wikipedia 'Cubic crystal system' (URL above)",
+   "verdict": "MATCH",
+   "note": ""
+  }
+ ]
+}

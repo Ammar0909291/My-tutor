@@ -273,3 +273,13 @@ only source for the cycle total, so the cycle figure below is an estimate, not t
   (1960876089180252044) still averages 20 rows/call (+37 calls, +746 rows) because the old code is what is deployed; the post-deploy
   value is recorded in the closure report. The 5 GB figure the owner sees is the cycle total (spent 2026-10-05 → 10-07), not a
   current rate; this window cannot lower it.
+- **Post-deploy re-measure, 2026-10-13 11:43 (`snap5`; deployment `dpl_DfiW33EVTKByZMBMRYPkECGoX855`, commit `74f4207`, carrying the EGRESS-7
+  fix; 14.5 h after `snap4`, a window that includes ~60 chat turns by this campaign's disposable accounts):** across the 29 heaviest
+  statements the window read **5,710 rows** (≈ 1–2 MB — well under 5 MB/day against a 167 MB/day quota share); the spine replay
+  (2599099062474326428) and the old whole-lineage statement (1960876089180252044) both **+0 calls / +0 rows**; the topic_progress read
+  of a heavy account (444473988123706220) +26 calls / +84 rows (3 rows/call: the QA accounts are light). The bounded replacement
+  (`asset_identity WHERE canonicalSlug AND family ORDER BY version DESC LIMIT n`, queryid -4499977664986539268) averages 0.27 rows/call.
+  **Honest limit:** capture reads only happen when the tutor authors a new explanation/probe, which is a small share of turns, so this window
+  does not exercise the old per-call 20–48-row pattern enough to prove the new 1–2-row value by measurement; what proves it is
+  `captureLineageEgress.test.ts` (14 tests: no `findMany`, narrow `select`, a 368-version lineage reads two rows). Re-measure after
+  real-learner traffic. The cycle total on the Supabase dashboard (spent 2026-10-05 → 10-07) is not readable through the MCP and cannot be lowered.

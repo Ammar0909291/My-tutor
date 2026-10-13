@@ -194,7 +194,11 @@ export function placeSvgLabels(svg: SVGSVGElement): number {
   if (scale === null) return 0
   const origin = svg.getBoundingClientRect()
 
-  const texts = Array.from(svg.querySelectorAll('text')) as SVGTextElement[]
+  // `data-fixed-label`: a text that belongs INSIDE a shape the figure drew (the
+  // process-flow step numeral sits on its badge circle). The circle is an
+  // obstacle to every other label, so solving the numeral against it would push
+  // it off the very badge it numbers; it is left exactly where it was authored.
+  const texts = (Array.from(svg.querySelectorAll('text')) as SVGTextElement[]).filter((t) => !t.hasAttribute('data-fixed-label'))
   if (texts.length < 2) return 0   // nothing to collide with
 
   const items: PlacementItem[] = []

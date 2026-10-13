@@ -1,0 +1,529 @@
+{
+ "base": "https://my-tutor-flame.vercel.app",
+ "mode": "legibility",
+ "subject": "physics",
+ "deployment": "dpl_DfiW33EVTKByZMBMRYPkECGoX855",
+ "commit": "74f4207",
+ "at": "2026-10-13T08:08:30.530Z",
+ "tally": {
+  "PASS": 16
+ },
+ "accountCleanup": {
+  "deleted": true,
+  "reloginBlocked": true
+ },
+ "rows": [
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "mobile",
+   "theme": "dark",
+   "step": "card 1/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 0,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "it shows an object in the center with several arrows pointin",
+    "messageId": "cmv6e7ya5000jl406r8k8w8ug"
+   },
+   "markers": {
+    "index": 0,
+    "messageId": "cmv6e7ya5000jl406r8k8w8ug",
+    "inViewport": true,
+    "top": 117,
+    "height": 320,
+    "legibilityMarker": true,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-legibility/legibility__phys.mech.force__mobile__dark__card1.png",
+   "verdict": "PASS",
+   "deployment": "dpl_DfiW33EVTKByZMBMRYPkECGoX855",
+   "commit": "74f4207"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "mobile",
+   "theme": "dark",
+   "step": "card 2/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 1,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "each arrow represents a force showing both which object is e",
+    "messageId": "cmv6e8dvk0011l406oqszfqts"
+   },
+   "markers": {
+    "index": 1,
+    "messageId": "cmv6e8dvk0011l406oqszfqts",
+    "inViewport": true,
+    "top": 117,
+    "height": 320,
+    "legibilityMarker": true,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-legibility/legibility__phys.mech.force__mobile__dark__card2.png",
+   "verdict": "PASS",
+   "deployment": "dpl_DfiW33EVTKByZMBMRYPkECGoX855",
+   "commit": "74f4207"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "mobile",
+   "theme": "dark",
+   "step": "card 3/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 2,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "what do you notice about the directions of these arrows",
+    "messageId": "cmv6e90630008jw063c4fa3zi"
+   },
+   "markers": {
+    "index": 2,
+    "messageId": "cmv6e90630008jw063c4fa3zi",
+    "inViewport": true,
+    "top": 117,
+    "height": 320,
+    "legibilityMarker": true,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-legibility/legibility__phys.mech.force__mobile__dark__card3.png",
+   "verdict": "PASS",
+   "deployment": "dpl_DfiW33EVTKByZMBMRYPkECGoX855",
+   "commit": "74f4207"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "mobile",
+   "theme": "dark",
+   "step": "card 4/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 3,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "what do you notice about the way these arrows are drawn espe",
+    "messageId": "cmv6e9dvl000ljw06awv5yla0"
+   },
+   "markers": {
+    "index": 3,
+    "messageId": "cmv6e9dvl000ljw06awv5yla0",
+    "inViewport": true,
+    "top": 339,
+    "height": 320,
+    "legibilityMarker": true,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-legibility/legibility__phys.mech.force__mobile__dark__card4.png",
+   "verdict": "PASS",
+   "deployment": "dpl_DfiW33EVTKByZMBMRYPkECGoX855",
+   "commit": "74f4207"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "mobile",
+   "theme": "light",
+   "step": "card 1/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 0,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "it shows an object in the center with several arrows pointin",
+    "messageId": "cmv6e7ya5000jl406r8k8w8ug"
+   },
+   "markers": {
+    "index": 0,
+    "messageId": "cmv6e7ya5000jl406r8k8w8ug",
+    "inViewport": true,
+    "top": 117,
+    "height": 320,
+    "legibilityMarker": true,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-legibility/legibility__phys.mech.force__mobile__light__card1.png",
+   "verdict": "PASS",
+   "deployment": "dpl_DfiW33EVTKByZMBMRYPkECGoX855",
+   "commit": "74f4207"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "mobile",
+   "theme": "light",
+   "step": "card 2/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 1,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "each arrow represents a force showing both which object is e",
+    "messageId": "cmv6e8dvk0011l406oqszfqts"
+   },
+   "markers": {
+    "index": 1,
+    "messageId": "cmv6e8dvk0011l406oqszfqts",
+    "inViewport": true,
+    "top": 117,
+    "height": 320,
+    "legibilityMarker": true,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-legibility/legibility__phys.mech.force__mobile__light__card2.png",
+   "verdict": "PASS",
+   "deployment": "dpl_DfiW33EVTKByZMBMRYPkECGoX855",
+   "commit": "74f4207"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "mobile",
+   "theme": "light",
+   "step": "card 3/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 2,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "what do you notice about the directions of these arrows",
+    "messageId": "cmv6e90630008jw063c4fa3zi"
+   },
+   "markers": {
+    "index": 2,
+    "messageId": "cmv6e90630008jw063c4fa3zi",
+    "inViewport": true,
+    "top": 117,
+    "height": 320,
+    "legibilityMarker": true,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-legibility/legibility__phys.mech.force__mobile__light__card3.png",
+   "verdict": "PASS",
+   "deployment": "dpl_DfiW33EVTKByZMBMRYPkECGoX855",
+   "commit": "74f4207"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "mobile",
+   "theme": "light",
+   "step": "card 4/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 3,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "what do you notice about the way these arrows are drawn espe",
+    "messageId": "cmv6e9dvl000ljw06awv5yla0"
+   },
+   "markers": {
+    "index": 3,
+    "messageId": "cmv6e9dvl000ljw06awv5yla0",
+    "inViewport": true,
+    "top": 339,
+    "height": 320,
+    "legibilityMarker": true,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-legibility/legibility__phys.mech.force__mobile__light__card4.png",
+   "verdict": "PASS",
+   "deployment": "dpl_DfiW33EVTKByZMBMRYPkECGoX855",
+   "commit": "74f4207"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "desktop-column",
+   "theme": "dark",
+   "step": "card 1/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 0,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "it shows an object in the center with several arrows pointin",
+    "messageId": "cmv6e7ya5000jl406r8k8w8ug"
+   },
+   "markers": {
+    "index": 0,
+    "messageId": "cmv6e7ya5000jl406r8k8w8ug",
+    "inViewport": true,
+    "top": 109,
+    "height": 413,
+    "legibilityMarker": true,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-legibility/legibility__phys.mech.force__desktop-column__dark__card1.png",
+   "verdict": "PASS",
+   "deployment": "dpl_DfiW33EVTKByZMBMRYPkECGoX855",
+   "commit": "74f4207"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "desktop-column",
+   "theme": "dark",
+   "step": "card 2/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 1,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "each arrow represents a force showing both which object is e",
+    "messageId": "cmv6e8dvk0011l406oqszfqts"
+   },
+   "markers": {
+    "index": 1,
+    "messageId": "cmv6e8dvk0011l406oqszfqts",
+    "inViewport": true,
+    "top": 117,
+    "height": 413,
+    "legibilityMarker": true,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-legibility/legibility__phys.mech.force__desktop-column__dark__card2.png",
+   "verdict": "PASS",
+   "deployment": "dpl_DfiW33EVTKByZMBMRYPkECGoX855",
+   "commit": "74f4207"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "desktop-column",
+   "theme": "dark",
+   "step": "card 3/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 2,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "what do you notice about the directions of these arrows",
+    "messageId": "cmv6e90630008jw063c4fa3zi"
+   },
+   "markers": {
+    "index": 2,
+    "messageId": "cmv6e90630008jw063c4fa3zi",
+    "inViewport": true,
+    "top": 117,
+    "height": 413,
+    "legibilityMarker": true,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-legibility/legibility__phys.mech.force__desktop-column__dark__card3.png",
+   "verdict": "PASS",
+   "deployment": "dpl_DfiW33EVTKByZMBMRYPkECGoX855",
+   "commit": "74f4207"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "desktop-column",
+   "theme": "dark",
+   "step": "card 4/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 3,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "what do you notice about the way these arrows are drawn espe",
+    "messageId": "cmv6e9dvl000ljw06awv5yla0"
+   },
+   "markers": {
+    "index": 3,
+    "messageId": "cmv6e9dvl000ljw06awv5yla0",
+    "inViewport": true,
+    "top": 201,
+    "height": 413,
+    "legibilityMarker": true,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-legibility/legibility__phys.mech.force__desktop-column__dark__card4.png",
+   "verdict": "PASS",
+   "deployment": "dpl_DfiW33EVTKByZMBMRYPkECGoX855",
+   "commit": "74f4207"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "desktop-column",
+   "theme": "light",
+   "step": "card 1/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 0,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "it shows an object in the center with several arrows pointin",
+    "messageId": "cmv6e7ya5000jl406r8k8w8ug"
+   },
+   "markers": {
+    "index": 0,
+    "messageId": "cmv6e7ya5000jl406r8k8w8ug",
+    "inViewport": true,
+    "top": 117,
+    "height": 413,
+    "legibilityMarker": true,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-legibility/legibility__phys.mech.force__desktop-column__light__card1.png",
+   "verdict": "PASS",
+   "deployment": "dpl_DfiW33EVTKByZMBMRYPkECGoX855",
+   "commit": "74f4207"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "desktop-column",
+   "theme": "light",
+   "step": "card 2/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 1,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "each arrow represents a force showing both which object is e",
+    "messageId": "cmv6e8dvk0011l406oqszfqts"
+   },
+   "markers": {
+    "index": 1,
+    "messageId": "cmv6e8dvk0011l406oqszfqts",
+    "inViewport": true,
+    "top": 117,
+    "height": 413,
+    "legibilityMarker": true,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-legibility/legibility__phys.mech.force__desktop-column__light__card2.png",
+   "verdict": "PASS",
+   "deployment": "dpl_DfiW33EVTKByZMBMRYPkECGoX855",
+   "commit": "74f4207"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "desktop-column",
+   "theme": "light",
+   "step": "card 3/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 2,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "what do you notice about the directions of these arrows",
+    "messageId": "cmv6e90630008jw063c4fa3zi"
+   },
+   "markers": {
+    "index": 2,
+    "messageId": "cmv6e90630008jw063c4fa3zi",
+    "inViewport": true,
+    "top": 117,
+    "height": 413,
+    "legibilityMarker": true,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-legibility/legibility__phys.mech.force__desktop-column__light__card3.png",
+   "verdict": "PASS",
+   "deployment": "dpl_DfiW33EVTKByZMBMRYPkECGoX855",
+   "commit": "74f4207"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "desktop-column",
+   "theme": "light",
+   "step": "card 4/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 3,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "what do you notice about the way these arrows are drawn espe",
+    "messageId": "cmv6e9dvl000ljw06awv5yla0"
+   },
+   "markers": {
+    "index": 3,
+    "messageId": "cmv6e9dvl000ljw06awv5yla0",
+    "inViewport": true,
+    "top": 201,
+    "height": 413,
+    "legibilityMarker": true,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-after/shots-legibility/legibility__phys.mech.force__desktop-column__light__card4.png",
+   "verdict": "PASS",
+   "deployment": "dpl_DfiW33EVTKByZMBMRYPkECGoX855",
+   "commit": "74f4207"
+  }
+ ]
+}

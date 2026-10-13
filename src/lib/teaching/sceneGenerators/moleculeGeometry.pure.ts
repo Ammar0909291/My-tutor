@@ -29,15 +29,19 @@ export interface MoleculeDef {
   geometry: GeometryType
   /** Bond angle in degrees (the value the probe got wrong for water). */
   bondAngle: number
+  /** Bond order of every central–peripheral bond (omitted = single). CO₂ is O=C=O. */
+  bondOrder?: number
+  /** Lone pairs on the CENTRAL atom — what makes the shape bent / pyramidal rather than the ideal domain geometry. */
+  lonePairs: number
 }
 
 const MOLECULES: MoleculeDef[] = [
-  { name: 'Water', aliases: ['water', 'h2o', 'h₂o'], central: 'O', peripheral: 'H', count: 2, geometry: 'bent', bondAngle: 104.5 },
-  { name: 'Hydrogen Sulfide', aliases: ['hydrogen sulfide', 'hydrogen sulphide', 'h2s', 'h₂s'], central: 'S', peripheral: 'H', count: 2, geometry: 'bent', bondAngle: 92 },
-  { name: 'Carbon Dioxide', aliases: ['carbon dioxide', 'co2', 'co₂'], central: 'C', peripheral: 'O', count: 2, geometry: 'linear', bondAngle: 180 },
-  { name: 'Ammonia', aliases: ['ammonia', 'nh3', 'nh₃'], central: 'N', peripheral: 'H', count: 3, geometry: 'trigonal_pyramidal', bondAngle: 107 },
-  { name: 'Methane', aliases: ['methane', 'ch4', 'ch₄'], central: 'C', peripheral: 'H', count: 4, geometry: 'tetrahedral', bondAngle: 109.5 },
-  { name: 'Boron Trifluoride', aliases: ['boron trifluoride', 'bf3', 'bf₃'], central: 'B', peripheral: 'F', count: 3, geometry: 'trigonal_planar', bondAngle: 120 },
+  { name: 'Water', aliases: ['water', 'h2o', 'h₂o'], central: 'O', peripheral: 'H', count: 2, geometry: 'bent', bondAngle: 104.5, lonePairs: 2 },
+  { name: 'Hydrogen Sulfide', aliases: ['hydrogen sulfide', 'hydrogen sulphide', 'h2s', 'h₂s'], central: 'S', peripheral: 'H', count: 2, geometry: 'bent', bondAngle: 92, lonePairs: 2 },
+  { name: 'Carbon Dioxide', aliases: ['carbon dioxide', 'co2', 'co₂'], central: 'C', peripheral: 'O', count: 2, geometry: 'linear', bondAngle: 180, bondOrder: 2, lonePairs: 0 },
+  { name: 'Ammonia', aliases: ['ammonia', 'nh3', 'nh₃'], central: 'N', peripheral: 'H', count: 3, geometry: 'trigonal_pyramidal', bondAngle: 107, lonePairs: 1 },
+  { name: 'Methane', aliases: ['methane', 'ch4', 'ch₄'], central: 'C', peripheral: 'H', count: 4, geometry: 'tetrahedral', bondAngle: 109.5, lonePairs: 0 },
+  { name: 'Boron Trifluoride', aliases: ['boron trifluoride', 'bf3', 'bf₃'], central: 'B', peripheral: 'F', count: 3, geometry: 'trigonal_planar', bondAngle: 120, lonePairs: 0 },
 ]
 
 const BOND_LEN = 8
@@ -105,12 +109,45 @@ function computeGeometry(def: MoleculeDef): MoleculeGeometry {
   }
 }
 
+/** Where a lone pair is drawn: inside the bonded atoms (they sit at BOND_LEN), on the central atom's own side. */
+const LONE_PAIR_RADIUS = 2.6
+/** Half the angle between the two lone pairs of a bent AX₂E₂ centre: the tetrahedral domain angle 109.47° / 2. */
+const AX2E2_HALF = (Math.acos(-1 / 3) / 2)
+
+/**
+ * Unit directions of the central atom's lone pairs, from VSEPR electron-domain geometry:
+ *   one lone pair (AX₃E, NH₃)  — straight opposite the three bonds, −y;
+ *   two lone pairs (AX₂E₂, H₂O) — in the plane PERPENDICULAR to the H–X–H plane (z), ±54.7° either side of −y,
+ *                                 so every domain (2 bonds + 2 lone pairs) is tetrahedral.
+ * Any other count has no lone pair drawn (CH₄, BF₃, CO₂ have none on the centre).
+ */
+export function lonePairDirections(def: MoleculeDef): Vec3[] {
+  if (def.lonePairs === 1 && def.geometry === 'trigonal_pyramidal') return [[0, -1, 0]]
+  if (def.lonePairs === 2 && def.geometry === 'bent') {
+    const c = Math.cos(AX2E2_HALF), sn = Math.sin(AX2E2_HALF)
+    return [[0, -c, sn], [0, -c, -sn]] as Vec3[]   // each makes 54.7° with -y, so the pair is 109.47° apart
+  }
+  return []
+}
+
 /** Build a molecule SceneSpec with the textbook-correct bond angle. Pure. */
 export function buildMoleculeScene(def: MoleculeDef): SceneSpec {
   const geo = computeGeometry(def)
+  const order = def.bondOrder ?? 1
   const bonds = geo.atoms.map((a, i) => ({
     type: 'bond' as const, id: `bond${i}`, from: geo.centralPos, to: a.pos, color: '#94a3b8',
+    ...(order > 1 ? { properties: { order } } : {}),
   }))
+  // Lone pairs on the central atom. One carries the words "lone pair" so the drawing says what the amber markers are
+  // (the others are the same class, same size and colour — not told apart by colour alone).
+  const lonePairNodes = lonePairDirections(def).map((d, i) => ({
+    type: 'particle' as const, id: `lp${i}`, position: [round(d[0] * LONE_PAIR_RADIUS), round(d[1] * LONE_PAIR_RADIUS), round(d[2] * LONE_PAIR_RADIUS)] as Vec3,
+    // The words sit BESIDE the marker (labelOffset), never on it: text over a saturated amber sphere cannot hold 4.5:1 (R16).
+    color: '#fbbf24', radius: 0.38, ...(i === 0 ? { text: 'lone pair' } : {}),
+    properties: { kind: 'lone-pair', on: 'central', ...(i === 0 ? { labelOffset: [1.9, -0.3, 0] } : {}) },
+  }))
+  // With lone pairs drawn under the central atom the labels move down so they never sit on a marker.
+  const belowY = def.lonePairs > 0 ? -BOND_LEN * 0.58 : -BOND_LEN * 0.4
   const atomNodes = geo.atoms.map((a, i) => ({
     type: 'node' as const, id: `p${i}`, position: a.pos, text: a.label, color: '#3b82f6', radius: 0.5,
   }))
@@ -121,7 +158,9 @@ export function buildMoleculeScene(def: MoleculeDef): SceneSpec {
     sceneType: 'diagram',
     // The x/y/z triad names no quantity in this figure (a molecule / lattice / shell has no meaningful axes) and its letters
     // collided with the atom labels at the origin (measured 2026-10-08: x|y|z|O stacked at stage 1). Grid left as it was.
-    stage: { axes: false },
+    // R16: the floor grid ran under the bottom label and was the pixels it measured against (3.9–4.5:1 in a minority bucket); a
+    // molecule / unit cell has no floor and the grid names no quantity, so the stage draws neither grid nor axes.
+    stage: { grid: false, axes: false },
     teachingGoal: `Show the real ${def.geometry.replace(/_/g, ' ')} shape of ${def.name}, with its ${def.bondAngle}° bond angle.`,
     cameraDistance: BOND_LEN * 3,
     ariaLabel: `${def.name} molecule: a central ${def.central} atom bonded to ${def.count} ${def.peripheral} atoms in a ${def.geometry.replace(/_/g, ' ')} arrangement with a ${def.bondAngle} degree bond angle.`,
@@ -131,12 +170,19 @@ export function buildMoleculeScene(def: MoleculeDef): SceneSpec {
         objects: [{ type: 'node', id: 'central', position: geo.centralPos, text: def.central, color: '#ef4444', radius: 0.7 }],
       },
       {
-        narration: `It bonds to ${def.count} ${def.peripheral} atom${def.count > 1 ? 's' : ''}.`,
+        narration: `It bonds to ${def.count} ${def.peripheral} atom${def.count > 1 ? 's' : ''}${order === 2 ? ' with double bonds' : order === 3 ? ' with triple bonds' : ''}.`,
         objects: [...bonds, ...atomNodes],
       },
+      ...(lonePairNodes.length ? [{
+        narration: `${def.central} also carries ${def.lonePairs} lone pair${def.lonePairs > 1 ? 's' : ''}: non-bonding electrons that take up room around ${def.central} and push the bonds together.`,
+        objects: lonePairNodes,
+      }] : []),
       {
         narration: `The shape is ${def.geometry.replace(/_/g, ' ')}: the ${def.peripheral}–${def.central}–${def.peripheral} bond angle is ${def.bondAngle}°, not a straight line.`,
-        objects: [{ type: 'label', id: 'angle', position: [0, -BOND_LEN * 0.4, 0], text: `${def.bondAngle}° bond angle`, color: '#f59e0b' }],
+        objects: [
+          { type: 'label', id: 'angle', position: [0, belowY, 0], text: `${def.bondAngle}° bond angle`, color: '#f59e0b' },
+          { type: 'label', id: 'lone-pair-count', position: [0, belowY - 1.6, 0], text: def.lonePairs === 0 ? `no lone pairs on ${def.central}` : `${def.lonePairs} lone pair${def.lonePairs > 1 ? 's' : ''} on ${def.central}`, color: '#f59e0b' },
+        ],
       },
     ],
   }

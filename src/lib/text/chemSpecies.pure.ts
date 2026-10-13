@@ -418,6 +418,22 @@ export function typesetSpecies(core: string): string | null {
 /** Quotes and sentence punctuation that can sit around a formula without being part of it. */
 const EDGE_PUNCT = /[\s"'“”‘’<>!?]/
 
+/**
+ * Two shorthands the species parser (rightly) refuses, typeset by exact shape rather than by guessing:
+ *   • `Ln3+`  — the generic lanthanide symbol with a charge. `Ln` is not an element, so the parser cannot read it,
+ *     but "Ln" + digit + sign in chemistry text is never anything else.  →  `Ln³⁺`
+ *   • `ΔH1`, `ΔS2`, `IE1`, `pKa2` — a thermodynamic quantity, ionisation energy or acid constant with its INDEX
+ *     (first, second …).  The digit is a subscript index, not a count of atoms.  →  `ΔH₁`, `IE₁`, `pKa₂`
+ * Anything that does not match one of these shapes exactly is left to the parser, unchanged.
+ */
+function typesetShorthand(core: string): string | null {
+  let m = core.match(/^Ln(\d)([+\-−])$/)
+  if (m) return `Ln${SUP_OUT[m[1]]}${m[2] === '+' ? SUP_OUT['+'] : SUP_OUT['-']}`
+  m = core.match(/^(Δ[HSGUEA]|IE|pK[ab])(\d)$/)
+  if (m) return `${m[1]}${SUB_OUT[m[2]]}`
+  return null
+}
+
 function typesetPart(part: string): string {
   let a = 0
   let b = part.length
@@ -428,6 +444,8 @@ function typesetPart(part: string): string {
   let core = part.slice(a, b)
   if (!core) return part
 
+  const short = typesetShorthand(core)
+  if (short !== null) return lead + short + trail
   const tried = typesetSpecies(core)
   if (tried !== null) return lead + tried + trail
 

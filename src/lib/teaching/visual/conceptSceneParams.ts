@@ -106,6 +106,7 @@ import {
   buildAngularMomentumAdditionScene, buildBornScene, buildSMatrixScene, buildDensityMatrixScene,
 } from '@/lib/teaching/sceneGenerators/physicsCoreScenesB13'
 import { buildPowerScene } from '@/lib/teaching/sceneGenerators/physicsCoreScenesB14'
+import { buildClosePackingScene } from '@/lib/teaching/sceneGenerators/crystalLattice.pure'
 import { buildDensityScene, buildVernierScene, buildMassWeightScene, buildRectilinearScene } from '@/lib/teaching/sceneGenerators/physicsExtensionScenesB1'
 import { buildExperimentalGraphScene, buildSimpleMachineScene, buildVariationOfGScene, buildTerminalVelocityScene } from '@/lib/teaching/sceneGenerators/physicsExtensionScenesB2'
 import { buildCoolingScene, buildBlackbodyScene, buildEnergyResourcesScene, buildEchoScene } from '@/lib/teaching/sceneGenerators/physicsExtensionScenesB3'
@@ -326,6 +327,11 @@ import {
   buildConvexOptimizationScene, buildQuadraticProgrammingScene, buildIntegerProgrammingScene, buildDynamicProgrammingScene,
   buildNormedSpaceScene, buildDistributionsScene, buildSpecialFunctionsScene,
 } from '@/lib/teaching/sceneGenerators/mathCoreScenesB40'
+import {
+  buildGeometricProofScene, buildLengthScene, buildSurfaceCurvatureScene, buildGeometricConstructionsScene,
+  buildFunctionNotationScene, buildZeroOfFunctionScene, buildStepFunctionScene, buildFunctionOperationsScene,
+  buildAnalyticContinuationScene, buildSingularitiesScene, buildResidueScene, buildArgumentPrincipleScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB41'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -1080,6 +1086,20 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'math.fnal.distributions':             buildDistributionsScene,
   'math.fnal.special-functions':         buildSpecialFunctionsScene,
 
+  // Mathematics visual campaign, batch 41 (2026-10-13). See mathCoreScenesB41.ts.
+  'math.geom.geometric-proof':           buildGeometricProofScene,
+  'math.geom.length':                    buildLengthScene,
+  'math.geom.differential-geometry-surfaces': buildSurfaceCurvatureScene,
+  'math.geom.geometric-constructions':   buildGeometricConstructionsScene,
+  'math.func.function-notation':         buildFunctionNotationScene,
+  'math.func.zero-of-function':          buildZeroOfFunctionScene,
+  'math.func.step-function':             buildStepFunctionScene,
+  'math.func.function-operations':       buildFunctionOperationsScene,
+  'math.cx.analytic-continuation':        buildAnalyticContinuationScene,
+  'math.cx.singularities':               buildSingularitiesScene,
+  'math.cx.residue':                     buildResidueScene,
+  'math.cx.argument-principle':          buildArgumentPrincipleScene,
+
   // The Punnett generator is single-gene by construction (genotypes are two
   // alleles). A dihybrid cross drawn as a monohybrid square teaches the wrong
   // thing, so no scene is produced and the concept's card is used instead.
@@ -1478,6 +1498,7 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     externalVoltage: 4,
     medium: 'molten', // no water: "Na+ in solution" would draw the aqueous cell this one is contrasted with
     name: 'Electrolysis of Molten NaCl',
+    scopeNote: "This is one example (a molten salt); Faraday's laws, m = M·I·t / (n·F), say how much of each product forms.",
   }),
   'chem.elect.industrial': () => buildElectrochemicalCellScene({
     cellType: 'electrolytic',
@@ -1488,6 +1509,7 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     electronsTransferred: 2,
     externalVoltage: 2,
     name: 'Copper Electroplating',
+    scopeNote: 'This is one example of industrial electrolysis; aluminium extraction (Hall–Héroult), chlor-alkali and electrolytic refining use the same kind of cell with other electrodes and electrolytes.',
   }),
   'chem.elect.batteries': () => buildElectrochemicalCellScene({
     cellType: 'galvanic',
@@ -1496,6 +1518,7 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     cathode: { material: 'MnO2 / carbon rod', ion: 'NH4+' },
     electronsTransferred: 2,
     name: 'Zinc–Carbon Dry Cell (Primary Battery)',
+    scopeNote: 'This is one example (a non-rechargeable cell); secondary cells such as lead–acid and lithium-ion, and fuel cells, follow the same anode/cathode logic with other electrodes and electrolytes.',
   }),
 
   // Archetype B — one energy-level/cycle generator serves Hess's Law, the
@@ -1519,11 +1542,11 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     paths: [
       { name: 'Direct', steps: [{ label: 'NaCl(s)', delta: -411, deltaLabel: 'ΔHf° = −411 kJ/mol' }] },
       { name: 'Via ions', steps: [
-        { label: 'Na(g) + ½Cl2(g)', delta: 107, deltaLabel: 'sublimation ΔHsub = +107' },
-        { label: 'Na+(g) + e− + ½Cl2(g)', delta: 496, deltaLabel: 'ionization IE = +496' },
-        { label: 'Na+(g) + e− + Cl(g)', delta: 122, deltaLabel: 'dissociation ½ΔHdiss = +122' },
-        { label: 'Na+(g) + Cl−(g)', delta: -349, deltaLabel: 'electron affinity EA = −349' },
-        { label: 'NaCl(s)', delta: -787, deltaLabel: 'lattice energy U = −787' },
+        { label: 'Na(g) + ½Cl2(g)', delta: 107, deltaLabel: 'sublimation ΔHsub = +107 kJ/mol' },
+        { label: 'Na+(g) + e− + ½Cl2(g)', delta: 496, deltaLabel: 'ionization IE = +496 kJ/mol' },
+        { label: 'Na+(g) + e− + Cl(g)', delta: 122, deltaLabel: 'dissociation ½ΔHdiss = +122 kJ/mol' },
+        { label: 'Na+(g) + Cl−(g)', delta: -349, deltaLabel: 'electron affinity EA = −349 kJ/mol' },
+        { label: 'NaCl(s)', delta: -787, deltaLabel: 'lattice energy U = −787 kJ/mol' },
       ] },
     ],
   }),
@@ -1563,12 +1586,17 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   // not a count. The tutor read that narration and taught from it. Both
   // bindings now declare what the bar heights ARE, which switches the
   // generator to comparison chrome; the numbers are untouched.
+  // R4 (2026-10-09): "Close Packing and Efficiency" was served the one-colour SIMPLE-cubic card — the least efficient, and not a
+  // close-packed structure. Cubic close packing IS the face-centred cubic cell (4 atoms per cell: the number the 74 % efficiency
+  // is computed from), which the existing lattice generator draws and the chemistry audit verifies (sharing rule 8·⅛ + 6·½ = 4).
+  'chem.solid.packing': () => buildClosePackingScene(),
+
   'chem.coord.stability': () => buildStatisticsBarChartScene({
     chartTitle: 'log Kf: the chelate effect',
     quantity: { name: 'log Kf', kind: 'magnitude' },
     bars: [
       { label: '[Cu(NH3)4]2+ (monodentate)', frequency: 13.0 },
-      { label: '[Cu(EDTA)]2− (chelate)', frequency: 18.8 },
+      { label: '[Cu(EDTA)]²⁻ (chelate)', frequency: 18.8 },   // authored with the superscript: the typesetter cannot parse the EDTA ligand, so "2−" stayed flat beside the typeset [Cu(NH₃)₄]²⁺
     ],
   }),
   'chem.thermo.heat-capacities': () => buildStatisticsBarChartScene({
@@ -1649,8 +1677,8 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     stages: [
       { name: 'Na atom (2,8,1)', description: 'sodium has one electron in its outer shell' },
       { name: 'Electron transferred', description: 'Na gives that electron to Cl (2,8,7)' },
-      { name: 'Na⁺ (2,8) and Cl⁻ (2,8,8)', description: 'each ion now has a full outer shell; charges +1 and −1' },
-      { name: 'Opposite charges attract', description: 'the electrostatic attraction is the ionic bond; ions pack in a lattice (NaCl)' },
+      { name: 'Na⁺ (2,8) and Cl⁻ (2,8,8)', description: 'each ion now has a noble-gas (stable octet) arrangement; charges +1 and −1' },
+      { name: 'Opposite charges attract', description: 'the electrostatic attraction between oppositely charged ions is the ionic bond; they pack in a lattice (each Na⁺ touches 6 Cl⁻), so NaCl is a formula unit, not a molecule' },
     ],
   }),
   // CHEM-013: the live-generated "Nature of Matter" scene drew a compound and
@@ -1659,11 +1687,39 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'chem.found.matter': () => buildCellComparisonScene({
     conceptId: 'chem.found.matter',
     title: 'Elements, Compounds and Mixtures',
-    teachingGoal: 'An element has one kind of atom; a compound has two or more elements chemically combined in a fixed ratio; a mixture holds substances that keep their own properties and can be separated physically.',
+    teachingGoal: 'An element has one kind of atom; a compound has two or more elements chemically combined in a fixed ratio; a mixture holds substances that keep their chemical identity and can be separated physically.',
     groups: [
-      { label: 'Element', description: 'pure: one kind of atom', items: ['e.g. iron, oxygen (O₂)', 'fixed melting and boiling point'] },
-      { label: 'Compound', description: 'pure: elements chemically bonded in a fixed ratio', items: ['e.g. water, H₂O — always 8 g O : 1 g H', 'separated only by a chemical reaction'] },
-      { label: 'Mixture', description: 'two or more substances, not bonded', items: ['e.g. salt water, air', 'any ratio; each part keeps its properties', 'separated physically (filter, evaporate, distil)'] },
+      { label: 'Element', description: 'pure: all atoms have the same atomic number', items: ['e.g. iron, oxygen (O₂)', 'fixed melting and boiling point'] },
+      { label: 'Compound', description: 'pure: elements chemically bonded in a fixed ratio of atoms', items: ['e.g. water, H₂O — 2 H : 1 O by number, about 8 g O : 1 g H by mass', 'sharp melting point; split only by a chemical reaction'] },
+      { label: 'Mixture', description: 'two or more substances, not chemically combined (no new substance)', items: ['e.g. salt water, air', 'variable ratio; each part keeps its chemical identity', 'separated physically (filter, evaporate, distil)'] },
+    ],
+  }),
+  // R12 (Chemistry visual closure, 2026-10-12): "Colloids" had no figure — its cached generated one failed live and no curated tier
+  // owned it. Worded from the EB entry's Core Understanding (the three-box model of dispersion; the Tyndall and membrane tests).
+  'chem.surface.colloids': () => buildCellComparisonScene({
+    conceptId: 'chem.surface.colloids',
+    captioned: true, // long item text: wrap to the column and space the items by their wrapped height
+    title: 'Solution, Colloid, Suspension: Particle Size Decides',
+    teachingGoal: 'A colloid sits between a true solution and a suspension: its particles (about 1–1000 nm) stay dispersed instead of settling, pass ordinary filter paper but not a dialysis membrane, and scatter light (the Tyndall effect).',
+    groups: [
+      { label: 'True solution', description: 'a homogeneous mixture of dissolved molecules or ions, mostly below about 1 nm; it passes filter paper and a dialysis membrane', items: ['clear; no Tyndall effect', 'passes filter and membrane'] },
+      { label: 'Colloid', description: 'particles about 1–1000 nm (e.g. warm gelatin sol, gold sol); they stay dispersed, pass ordinary filter paper but not a dialysis membrane', items: ['shows Tyndall effect', 'passes filter, held by membrane'] },
+      { label: 'Suspension', description: 'particles above about 1000 nm: heterogeneous and cloudy, it scatters light too, settles on standing and is held back by filter paper', items: ['cloudy; scatters light too', 'settles; held by filter paper'] },
+    ],
+  }),
+  // R12: "Chemistry of Water" had no figure — the cached generated one drew H–O–H at 120° (refused by the VSEPR gate). Four groups,
+  // each straight from the EB entry's Core Understanding; every number is in the reference-data ledger.
+  'chem.sblock.water': () => buildCellComparisonScene({
+    conceptId: 'chem.sblock.water',
+    captioned: true, // long item text: wrap to the column and space the items by their wrapped height
+    gridFromGroups: 4, // four groups of long clauses: a 2x2 grid, not four columns ~85px apart on a phone
+    title: 'Water: A Bent, Polar, Hydrogen-Bonded Molecule',
+    teachingGoal: 'Two lone pairs bend water to about 104.5°, so its bond dipoles do not cancel; hydrogen bonding then explains its high boiling point and the low density of ice; Ca²⁺ and Mg²⁺ make water hard; D₂O is the heavy isotopologue.',
+    groups: [
+      { label: 'Bent, polar molecule', description: 'oxygen is far more electronegative than hydrogen; two lone pairs squeeze the angle below 109.5° (a gas-phase value). Water is also amphoteric: it donates H⁺ (→ OH⁻) and accepts H⁺ (→ H₃O⁺)', items: ['H–O–H ≈ 104.5°', 'dipoles do not cancel'] },
+      { label: 'Hydrogen bonding', description: 'each molecule can donate 2 and accept 2 hydrogen bonds (4 in ice; about 3.5 on average in liquid water). Boiling points are at 1 atm; the densities are ice at 0 °C and water at 4 °C, its densest', items: ['boils at 100 °C (H₂S: −60 °C)', 'ice floats: 0.917 vs 1.000 g/cm³'] },
+      { label: 'Hard water', description: 'dissolved Ca²⁺ and Mg²⁺ ions turn soap to scum instead of lather. Temporary hardness is Ca/Mg hydrogencarbonate; permanent hardness is Ca/Mg sulfate and chloride', items: ['temporary: boiling reduces it', 'permanent: ion exchange, Na₂CO₃'] },
+      { label: 'Heavy water, D₂O', description: 'both hydrogens are deuterium (²H); it boils at 101.4 °C (1 atm), moderates neutrons in CANDU reactors and is a solvent for ¹H NMR', items: ['boils at 101.4 °C', 'CANDU moderator; ¹H NMR solvent'] },
     ],
   }),
   'chem.state.phase-diagram': () => buildCellComparisonScene({
@@ -1674,7 +1730,7 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     groups: [
       { label: 'Three regions', description: 'every P–T point is solid, liquid or gas', items: ['solid: low T, high P', 'liquid: between the two', 'gas: high T, low P'] },
       { label: 'Boundary curves', description: 'along a curve two phases coexist', items: ['solid–gas: sublimation (dry ice)', 'liquid–gas: vapour pressure; read the boiling point', 'solid–liquid: melting; slopes backwards for water'] },
-      { label: 'Triple point', description: 'all three phases coexist', items: ['water: 273.16 K, 611 Pa'] },
+      { label: 'Triple point', description: 'all three phases coexist', items: ['water: 273.16 K, 612 Pa'] },
       { label: 'Critical point', description: 'end of the liquid–gas curve; beyond it a supercritical fluid', items: ['CO₂: 304 K, 73 atm', 'water: 647 K, 218 atm'] },
     ],
   }),
@@ -1684,12 +1740,12 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     conceptId: 'chem.state.real-gases',
     gridFromGroups: 4, // four groups of long clauses: a 2x2 grid, not four columns ~85px apart on a phone
     title: 'Why Real Gases Deviate: Z = PV/(nRT)',
-    teachingGoal: 'An ideal gas has Z = 1; real molecules attract (Z < 1 at moderate pressure) and take up space (Z > 1 at high pressure); van der Waals corrects both.',
+    teachingGoal: 'An ideal gas has Z = 1; for most gases near room temperature the molecules attract (Z < 1 at moderate pressure) and take up space (Z > 1 at high pressure); van der Waals corrects both.',
     groups: [
       { label: 'Ideal gas', description: 'point particles, no attractions', items: ['Z = 1 at every pressure'] },
       { label: 'Moderate pressure', description: 'attractions pull molecules back from the walls', items: ['lower pressure than ideal', 'Z < 1'] },
       { label: 'High pressure', description: 'the molecules’ own volume matters', items: ['less free space than the container', 'Z > 1'] },
-      { label: 'van der Waals', description: '(P + a/Vm²)(Vm − b) = RT', items: ['a/Vm²: adds back pressure lost to attractions', 'b: removes the volume the molecules occupy'] },
+      { label: 'van der Waals', description: '(P + a/Vm²)(Vm − b) = RT', items: ['a/Vm²: adds back pressure lost to attractions', 'b: excluded volume, ~4× molecular volume'] },
     ],
   }),
   // CHEM-022: "Nucleic Acids" got a DNA-replication flow chart and taught
@@ -1903,7 +1959,7 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     title: 'Three Families of Pericyclic Reactions',
     teachingGoal: 'Every pericyclic reaction is concerted — electron pairs flow round one cyclic transition state with no intermediate; the Woodward–Hoffmann rules decide whether heat or light allows it.',
     groups: [
-      { label: 'Cycloaddition', description: 'two separate π-systems form a ring through two new σ-bonds', items: ['[4+2] Diels–Alder: thermally allowed', '[2+2]: thermally forbidden, photochemically allowed'] },
+      { label: 'Cycloaddition', description: 'two separate π-systems form a ring through two new σ-bonds', items: ['[4+2] Diels–Alder: thermally allowed', '[2+2]: thermally forbidden (suprafacial), photochemically allowed'] },
       { label: 'Electrocyclic', description: 'a conjugated polyene ring-closes or ring-opens as one σ-bond forms or breaks', items: ['4n electrons: conrotatory when heated', '4n+2 electrons: disrotatory when heated'] },
       { label: 'Sigmatropic', description: 'a σ-bond migrates across a π-system', items: ['[1,5]H and [3,3] (Cope, Claisen): thermally allowed', '[1,3]H: thermally forbidden (suprafacial)'] },
     ],
@@ -1911,7 +1967,7 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'chem.dblock.organometallics': () => buildCellPathwayScene({
     conceptId: 'chem.dblock.organometallics',
     title: 'Wilkinson’s Catalyst: The Hydrogenation Cycle',
-    teachingGoal: 'The metal is a shuttle between oxidation states — Rh(I) → Rh(III) → Rh(I) — and is never consumed: the alkene enters, the alkane leaves, the 16-electron catalyst is regenerated.',
+    teachingGoal: 'One commonly drawn route: the metal is a shuttle between oxidation states — Rh(I) → Rh(III) → Rh(I) — and is never consumed: the alkene enters, the alkane leaves, the 16-electron catalyst is regenerated.',
     cyclic: true,
     stages: [
       { name: 'Rh(I) catalyst, 16 e⁻', description: 'Rh(PPh₃)₃Cl is coordinatively unsaturated — one empty site, ready for oxidative addition' },
@@ -1923,13 +1979,14 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   }),
   'chem.poly.biodegradable': () => buildCellComparisonScene({
     conceptId: 'chem.poly.biodegradable',
+    captioned: true, // long item text: wrap to the column and space the items by their wrapped height
     gridFromGroups: 3, // three groups of long clauses: two rows, not three columns ~140px apart on a phone
     title: 'Polymer Behaviour Follows the Backbone, Not the Feedstock',
-    teachingGoal: 'Biodegradability is decided by backbone chemistry — hydrolysable linkages or none — not by whether the monomer came from plants; conductivity needs a conjugated π-system AND a doping step.',
+    teachingGoal: 'Whether a polymer can biodegrade starts with its backbone chemistry — hydrolysable linkages or none — not with whether the monomer came from plants; intrinsic electronic conductivity needs a conjugated π-system AND a doping step.',
     groups: [
-      { label: 'Hydrolysable backbone', description: 'ester linkages that moisture and microbial enzymes can cleave — biodegradable', items: ['PLA (often plant-derived)'] },
-      { label: 'All-carbon backbone', description: 'no hydrolysable linkage — not biodegradable, whatever the feedstock', items: ['Bio-polyethylene (from bio-based ethanol)', 'Petroleum polyethylene (chemically identical)'] },
-      { label: 'Conducting polymers', description: 'need an extended conjugated π-system AND a doping step', items: ['Undoped: only a modest semiconductor', 'Doped polyacetylene, polypyrrole: mobile charge carriers'] },
+      { label: 'Hydrolysable backbone', description: 'aliphatic ester linkages that moisture and microbial enzymes can cleave — can biodegrade, but slowly outside industrial composting (PLA is often plant-derived)', items: ['PLA: needs industrial composting'] },
+      { label: 'All-carbon backbone', description: 'no hydrolysable linkage — generally resists biodegradation, whatever the feedstock: polyethylene from bio-based ethanol is chemically identical to the petroleum one', items: ['Bio-based polyethylene', 'Petroleum polyethylene'] },
+      { label: 'Conducting polymers', description: 'need an extended conjugated π-system AND a doping step: undoped they are poor semiconductors or insulators; doped polyacetylene or polypyrrole carry mobile charge', items: ['Undoped: poor semiconductor', 'Doped: mobile charge carriers'] },
     ],
   }),
 

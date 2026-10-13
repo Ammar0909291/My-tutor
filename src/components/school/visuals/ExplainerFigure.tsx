@@ -39,7 +39,7 @@ import { useTheme } from '@/components/Providers'
 import type { SceneSpec } from '@/lib/teaching/sceneSpec'
 import { deriveExplainer } from '@/lib/teaching/visual/explainer'
 import { availableModes, redactExplainer, redactText, stageView, withheldValues, type SceneMode } from '@/lib/teaching/visual/sceneStage'
-import { controlsFor, defaultValueOf, rebuildScene, variablesFor, type SceneParams, type SceneVariable } from '@/lib/teaching/visual/parametricScenes'
+import { choiceOptionAvailable, controlsFor, defaultValueOf, rebuildScene, variablesFor, type SceneParams, type SceneVariable } from '@/lib/teaching/visual/parametricScenes'
 import { meshColor, readableTextColor, themeColor } from '@/lib/teaching/sceneGenerators/visualDesign'
 import {
   availableAnimations, stageAt, sweepFrame, traceObjects, tracePlayhead,
@@ -112,7 +112,13 @@ export function ExplainerFigure({
     () => controlsFor(spec.parametric?.kind, policy.maxControls),
     [spec.parametric?.kind, policy.maxControls],
   )
-  const live = params ?? spec.parametric?.params ?? {}
+  const live = useMemo<SceneParams>(() => params ?? spec.parametric?.params ?? {}, [params, spec.parametric?.params])
+  // Every variable's value as the controls show it (the live value, else its default) — a choice that must differ from a
+  // partner needs the partner's, whether or not the learner has touched it yet.
+  const liveValues = useMemo(
+    () => Object.fromEntries(allVariables.map((v) => [v.key, live[v.key] ?? defaultValueOf(v)])) as Record<string, number | string>,
+    [allVariables, live],
+  )
 
   // ── time-stepped simulation (ADR 16) ─────────────────────────────────────
   // Inert for every kind that declares no `simulation` — which is every kind
@@ -771,6 +777,7 @@ export function ExplainerFigure({
                       key={v.key}
                       variable={v}
                       value={live[v.key] ?? defaultValueOf(v)}
+                      values={liveValues}
                       idPrefix={shown.id}
                       showEffect={policy.showEffects}
                       disabled={simulationLocked}
@@ -908,6 +915,7 @@ export function ExplainerFigure({
                       key={v.key}
                       variable={v}
                       value={live[v.key] ?? defaultValueOf(v)}
+                      values={liveValues}
                       idPrefix={shown.id}
                       showEffect={policy.showEffects}
                       disabled={simulationLocked}
@@ -978,10 +986,12 @@ export function ExplainerFigure({
  * that survives a screen reader or `prefers-reduced-motion`.
  */
 function Control({
-  variable, value, idPrefix, showEffect, disabled = false, onChange,
+  variable, value, values, idPrefix, showEffect, disabled = false, onChange,
 }: {
   variable: SceneVariable
   value: number | string
+  /** Every variable's current value — a choice that must differ from a partner reads it to disable the partner's pick. */
+  values: Readonly<Record<string, number | string>>
   idPrefix: string
   /**
    * Print the causal claim under the control. On for a beginner, who needs the
@@ -1005,9 +1015,10 @@ function Control({
             <button
               key={opt.value}
               type="button"
-              className={`${styles.chip}${value === opt.value ? ` ${styles.chipActive}` : ''}`}
+              className={`${styles.chip}${value === opt.value ? ` ${styles.chipActive}` : ''}${choiceOptionAvailable(variable, opt.value, values) ? '' : ` ${styles.chipTaken}`}`}
               aria-pressed={value === opt.value}
-              disabled={disabled}
+              disabled={disabled || !choiceOptionAvailable(variable, opt.value, values)}
+              title={choiceOptionAvailable(variable, opt.value, values) ? undefined : 'Already chosen in the other control — a comparison needs two different choices'}
               onClick={() => onChange(variable.key, opt.value)}
             >
               {opt.label}

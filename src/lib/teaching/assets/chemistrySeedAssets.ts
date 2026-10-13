@@ -15756,10 +15756,10 @@ const INDELEC_PROBES: SeedProbe[] = [
     gradeBand: GradeBand.UNDERGRADUATE,
     stem: "In the Hall-Héroult cell the carbon anodes have to be replaced regularly. Why, if they only carry current?",
     choices: [
-      { text: "Because they are CONSUMED. The oxygen released by the reduction of alumina attacks the hot carbon immediately: C + O²⁻ → CO₂ + 4e⁻. The anodes are a genuine reactant, burning away and needing replacement every few weeks, and that carbon consumption is a large part of the process's CO₂ footprint. Inert anodes are still an active research goal precisely because these are not", isCorrect: true },
+      { text: "Because they are CONSUMED. The oxygen released by the reduction of alumina attacks the hot carbon immediately: C + 2O²⁻ → CO₂ + 4e⁻. The anodes are a genuine reactant, burning away and needing replacement every few weeks, and that carbon consumption is a large part of the process's CO₂ footprint. Inert anodes are still an active research goal precisely because these are not", isCorrect: true },
       { text: "They gradually erode from the mechanical and thermal stress of the molten bath; chemically they are inert and just provide the connection", isCorrect: false, misconceptionId: `${INDELEC}:MC2` },
     ],
-    correctValue: "They are consumed: C + O²⁻ → CO₂ + 4e⁻",
+    correctValue: "They are consumed: C + 2O²⁻ → CO₂ + 4e⁻",
     difficulty: ProbeDifficulty.ADVANCED,
     targetedMisconceptions: [`${INDELEC}:MC2`],
     source: `${INDELEC_SRC} — MC-2: Hall-Héroult anodes assumed inert and permanent, when their consumption is part of the cell reaction`,

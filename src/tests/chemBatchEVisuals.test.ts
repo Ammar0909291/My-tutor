@@ -18,7 +18,7 @@ const text = (id: string) => JSON.stringify(buildCanonicalScene(null, id))
 
 describe('curated figures', () => {
   const cases: Array<[string, RegExp[], RegExp]> = [
-    ['chem.state.phase-diagram', [/Triple point/, /Critical point/, /273\.16 K, 611 Pa/, /sublimation/], /Boyle/],
+    ['chem.state.phase-diagram', [/Triple point/, /Critical point/, /273\.16 K, 612 Pa/, /sublimation/], /Boyle/],
     ['chem.state.real-gases', [/Z < 1/, /Z > 1/, /a\/Vm²/, /\(P \+ a\/Vm²\)\(Vm − b\) = RT/], /10 \/ x|Boyle/],
     ['chem.bio.nucleic-acids', [/deoxyribose/, /bases A, U, G, C/, /G–C: 3 hydrogen bonds/], /[Rr]eplication|helicase/],
     ['chem.period.ionization-energy', [/Na 496/, /Al 577/, /S 999/, /Ar 1520/], /three_electron_shells|shell model/],
