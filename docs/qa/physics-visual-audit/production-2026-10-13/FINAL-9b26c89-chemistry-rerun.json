@@ -1,0 +1,38 @@
+{
+ "base": "https://my-tutor-flame.vercel.app",
+ "subject": "chemistry",
+ "deployment": "dpl_CY88qN1UHmAUXVMNczbrUc6yesQp",
+ "commit": "9b26c89",
+ "at": "2026-10-13T12:52:37.467Z",
+ "tally": {
+  "PASS": 1
+ },
+ "accountCleanup": {
+  "deleted": true,
+  "reloginBlocked": true
+ },
+ "rows": [
+  {
+   "conceptId": "chem.state.real-gases",
+   "vp": "desktop-column",
+   "theme": "dark",
+   "verdict": "PASS",
+   "fails": [],
+   "reviews": [],
+   "segments": 7,
+   "attempts": 1,
+   "replySegments": 7,
+   "figure": {
+    "total": 1,
+    "roots": 1,
+    "index": 0,
+    "kind": "scene",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "take a look at the diagram on your screen in the blue section at the top left you see the label ideal gas with the note z 1 at every pressure moving to the oran",
+    "messageId": "cmv6okmur0026l406eaukf4vg"
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-final/shots-chem-rerun/chem.state.real-gases__desktop-column__dark.png"
+  }
+ ]
+}

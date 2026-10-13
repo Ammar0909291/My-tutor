@@ -41,6 +41,12 @@ const VIEWS: Array<{ vp: ViewportName; width: number; height: number }> = [
   { vp: 'mobile', width: 390, height: 844 },
   { vp: 'desktop-column', width: 1280, height: 800 },
 ]
+/** The interaction mode measures pixels of a whole scene (canvas + controls), so — like the dev audit and the production browser audit — it
+ *  uses tall pages: on the real desktop layout the figure sits in a sticky side panel and a short window crops it out of the screenshot. */
+const TALL_VIEWS: typeof VIEWS = [
+  { vp: 'mobile', width: 390, height: 2600 },
+  { vp: 'desktop-column', width: 1280, height: 1700 },
+]
 
 interface Row {
   mode: string; conceptId: string; vp: string; theme: string; step: string
@@ -215,7 +221,7 @@ async function interactMode(acct: QaAccount, lessons: Awaited<ReturnType<typeof 
     try { reply = await askForFigure(acct, lessons, plan.concept) } catch (e) {
       push({ mode: 'interact', conceptId: plan.concept, vp: '-', theme: '-', step: 'ask', fails: [], reviews: [], verdict: 'NOT_RUN', note: String(e).split('\n')[0].slice(0, 160) }); continue
     }
-    for (const v of VIEWS) for (const theme of THEMES) {
+    for (const v of TALL_VIEWS) for (const theme of THEMES) {
       const { ctx, page, pix } = await learnerPage(browser, acct, v, theme)
       try {
         await page.goto(`${BASE}/learn?subject=${SUBJECT}`, { waitUntil: 'domcontentloaded', timeout: 60_000 })

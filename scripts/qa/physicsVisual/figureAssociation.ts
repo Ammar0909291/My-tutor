@@ -45,6 +45,22 @@ export function replyKey(replyText: string): string {
   return longest.slice(0, 60)
 }
 
+/**
+ * Candidate keys, most specific first. The lesson page COLLAPSES a long reply behind "Read more →", keeping only its opening in the
+ * message block's text, so the longest run of the reply (usually in the middle or at the end) may simply not be in the DOM — the
+ * first production run of the lens-power interaction found exactly that (a 730-character reply, `NO_FIGURE_TIED_TO_REPLY`). What is
+ * always kept is the START, so the keys are prefixes of the normalised reply, longest first, then the longest run. A key still has
+ * to be found inside the figure's OWN message block (the marker, not the position): a shorter key only widens what text counts as
+ * "this reply", never which block a figure is allowed to belong to.
+ */
+export function replyKeys(replyText: string): string[] {
+  const norm = (t: string) => t.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ').trim()
+  const whole = norm(replyText)
+  const keys = [160, 100, 60, 36].map((n) => whole.slice(0, n).trim()).filter((k) => k.length >= 24)
+  const run = replyKey(replyText)
+  return [...new Set([run, ...keys].filter(Boolean))].sort((a, b) => b.length - a.length)
+}
+
 /** Plain JS, evaluated in the page (a transpiled callback can carry helper wrappers the page does not have). */
 const SELECT_JS = `(function (opts) {
   var norm = function (s) { return (s || '').toLowerCase().replace(/[^\\p{L}\\p{N}]+/gu, ' ').trim(); };
@@ -63,23 +79,30 @@ const SELECT_JS = `(function (opts) {
     if (opts.index < 0 || opts.index >= roots.length) return Object.assign(out, { error: 'INDEX_OUT_OF_RANGE' });
     return pick(opts.index, 'explicit', false);
   }
-  var key = norm(opts.key);
+  var keys = opts.keys && opts.keys.length ? opts.keys : [opts.key];
   var owned = [];
   var unmarked = 0;
-  roots.forEach(function (r, i) {
-    var m = r.closest('[data-message-id]');
-    if (!m) { unmarked++; return; }
-    if (norm(m.innerText).indexOf(key) >= 0) owned.push(i);
-  });
+  roots.forEach(function (r) { if (!r.closest('[data-message-id]')) unmarked++; });
   if (unmarked === roots.length) return Object.assign(out, { error: 'NO_MESSAGE_MARKERS' });
-  if (!owned.length) return Object.assign(out, { error: 'NO_FIGURE_TIED_TO_REPLY', key: opts.key });
+  var usedKey = keys[0];
+  for (var k = 0; k < keys.length && !owned.length; k++) {
+    var key = norm(keys[k]);
+    usedKey = keys[k];
+    roots.forEach(function (r, i) {
+      var m = r.closest('[data-message-id]');
+      if (m && norm(m.innerText).indexOf(key) >= 0) owned.push(i);
+    });
+  }
+  if (!owned.length) return Object.assign(out, { error: 'NO_FIGURE_TIED_TO_REPLY', key: keys[0] });
+  opts.key = usedKey;
   return pick(owned[owned.length - 1], 'association', owned.length > 1);
 })`
 
 export async function selectTargetFigure(page: Page, opts: { replyText?: string; index?: number }): Promise<FigureSelection> {
-  const key = opts.replyText ? replyKey(opts.replyText) : ''
+  const keys = opts.replyText ? replyKeys(opts.replyText) : []
+  const key = keys[0] ?? ''
   if (opts.index === undefined && !key) throw new Error('WRONG_FIGURE: no reply text and no explicit index — cannot tell which figure to measure')
-  const res = await page.evaluate(`${SELECT_JS}(${JSON.stringify({ key, index: opts.index })})`) as Partial<FigureSelection> & { error?: string; roots: number }
+  const res = await page.evaluate(`${SELECT_JS}(${JSON.stringify({ key, keys, index: opts.index })})`) as Partial<FigureSelection> & { error?: string; roots: number }
   if (res.error) throw new Error(`WRONG_FIGURE: ${res.error} (figures on page: ${res.roots}, key: "${key}")`)
   return res as FigureSelection
 }
@@ -94,6 +117,11 @@ export async function markFigure(page: Page, index: number): Promise<boolean> {
     if (!root) return false;
     document.querySelectorAll('[data-audit-frame]').forEach(function (n) { n.removeAttribute('data-audit-frame'); });
     if (root.matches('[aria-label^="Visual aid:"]')) { root.setAttribute('data-audit-frame', ''); root.scrollIntoView({ block: 'start' }); return true; }
+    // A scene's controls (the value sliders) live in the figure's own root, below the canvas — further up than the first ancestor
+    // that merely mentions "Play the stages". Frame the WHOLE figure when it has a root of its own (ExplainerFigure: role="figure"),
+    // so the sliders are inside the frame the harness reads and drives; fall back to the walk-up for a page without one.
+    var fig = root.closest('[role="figure"]');
+    if (fig && !fig.matches('[aria-label^="Visual aid:"]')) { fig.setAttribute('data-audit-frame', ''); fig.scrollIntoView({ block: 'start' }); return true; }
     var el = root;
     while (el && el.parentElement) {
       el = el.parentElement;
