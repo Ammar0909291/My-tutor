@@ -1504,8 +1504,8 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     stages: [
       { name: 'Na atom (2,8,1)', description: 'sodium has one electron in its outer shell' },
       { name: 'Electron transferred', description: 'Na gives that electron to Cl (2,8,7)' },
-      { name: 'Na⁺ (2,8) and Cl⁻ (2,8,8)', description: 'each ion now has a full outer shell; charges +1 and −1' },
-      { name: 'Opposite charges attract', description: 'the electrostatic attraction is the ionic bond; ions pack in a lattice (NaCl)' },
+      { name: 'Na⁺ (2,8) and Cl⁻ (2,8,8)', description: 'each ion now has a noble-gas (stable octet) arrangement; charges +1 and −1' },
+      { name: 'Opposite charges attract', description: 'the electrostatic attraction between oppositely charged ions is the ionic bond; they pack in a lattice (each Na⁺ touches 6 Cl⁻), so NaCl is a formula unit, not a molecule' },
     ],
   }),
   // CHEM-013: the live-generated "Nature of Matter" scene drew a compound and
@@ -1516,35 +1516,37 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     title: 'Elements, Compounds and Mixtures',
     teachingGoal: 'An element has one kind of atom; a compound has two or more elements chemically combined in a fixed ratio; a mixture holds substances that keep their own properties and can be separated physically.',
     groups: [
-      { label: 'Element', description: 'pure: one kind of atom', items: ['e.g. iron, oxygen (O₂)', 'fixed melting and boiling point'] },
-      { label: 'Compound', description: 'pure: elements chemically bonded in a fixed ratio', items: ['e.g. water, H₂O — always 8 g O : 1 g H', 'separated only by a chemical reaction'] },
-      { label: 'Mixture', description: 'two or more substances, not bonded', items: ['e.g. salt water, air', 'any ratio; each part keeps its properties', 'separated physically (filter, evaporate, distil)'] },
+      { label: 'Element', description: 'pure: all atoms have the same atomic number', items: ['e.g. iron, oxygen (O₂)', 'fixed melting and boiling point'] },
+      { label: 'Compound', description: 'pure: elements chemically bonded in a fixed ratio', items: ['e.g. water, H₂O — 2 H : 1 O atoms, about 8 g O : 1 g H', 'sharp melting point; split only by a chemical reaction'] },
+      { label: 'Mixture', description: 'two or more substances, not chemically combined (no new substance)', items: ['e.g. salt water, air', 'variable ratio; each part keeps its chemical identity', 'separated physically (filter, evaporate, distil)'] },
     ],
   }),
   // R12 (Chemistry visual closure, 2026-10-12): "Colloids" had no figure — its cached generated one failed live and no curated tier
   // owned it. Worded from the EB entry's Core Understanding (the three-box model of dispersion; the Tyndall and membrane tests).
   'chem.surface.colloids': () => buildCellComparisonScene({
     conceptId: 'chem.surface.colloids',
+    captioned: true, // long item text: wrap to the column and space the items by their wrapped height
     title: 'Solution, Colloid, Suspension: Particle Size Decides',
     teachingGoal: 'A colloid sits between a true solution and a suspension: its particles (about 1–1000 nm) stay dispersed instead of settling, pass ordinary filter paper but not a dialysis membrane, and scatter light (the Tyndall effect).',
     groups: [
-      { label: 'True solution', description: 'dissolved molecules or ions, mostly below about 1 nm', items: ['homogeneous; no Tyndall effect', 'passes filter paper and a dialysis membrane'] },
-      { label: 'Colloid', description: 'particles about 1–1000 nm', items: ['scatters a light beam (Tyndall effect)', 'stays dispersed; passes filter paper, not a dialysis membrane', 'e.g. warm gelatin sol, gold sol'] },
-      { label: 'Suspension', description: 'particles above about 1000 nm', items: ['heterogeneous and cloudy; scatters light too', 'settles on standing; filter paper holds it back'] },
+      { label: 'True solution', description: 'a homogeneous mixture of dissolved molecules or ions, mostly below about 1 nm; it passes filter paper and a dialysis membrane', items: ['clear; no Tyndall effect', 'passes filter and membrane'] },
+      { label: 'Colloid', description: 'particles about 1–1000 nm (e.g. warm gelatin sol, gold sol); they stay dispersed, pass ordinary filter paper but not a dialysis membrane', items: ['shows Tyndall effect', 'passes filter, held by membrane'] },
+      { label: 'Suspension', description: 'particles above about 1000 nm: heterogeneous and cloudy, it scatters light too, settles on standing and is held back by filter paper', items: ['cloudy; scatters light too', 'settles; held by filter paper'] },
     ],
   }),
   // R12: "Chemistry of Water" had no figure — the cached generated one drew H–O–H at 120° (refused by the VSEPR gate). Four groups,
   // each straight from the EB entry's Core Understanding; every number is in the reference-data ledger.
   'chem.sblock.water': () => buildCellComparisonScene({
     conceptId: 'chem.sblock.water',
+    captioned: true, // long item text: wrap to the column and space the items by their wrapped height
     gridFromGroups: 4, // four groups of long clauses: a 2x2 grid, not four columns ~85px apart on a phone
     title: 'Water: A Bent, Polar, Hydrogen-Bonded Molecule',
     teachingGoal: 'Two lone pairs bend water to about 104.5°, so its bond dipoles do not cancel; hydrogen bonding then explains its high boiling point and the low density of ice; Ca²⁺ and Mg²⁺ make water hard; D₂O is the heavy isotopologue.',
     groups: [
-      { label: 'Bent, polar molecule', description: 'oxygen is far more electronegative than hydrogen; two lone pairs squeeze the angle below 109.5°. Water is also amphoteric: it donates H⁺ (→ OH⁻) and accepts H⁺ (→ H₃O⁺)', items: ['H–O–H ≈ 104.5°', 'dipoles do not cancel'] },
-      { label: 'Hydrogen bonding', description: 'each molecule can donate 2 and accept 2 hydrogen bonds (4 in ice; about 3.5 on average in liquid water)', items: ['boils at 100 °C (1 atm); H₂S: −60 °C', 'ice floats: 0.917 g/cm³ vs water 1.000'] },
-      { label: 'Hard water', description: 'dissolved Ca²⁺ and Mg²⁺ ions turn soap to scum instead of lather', items: ['temporary (hydrogencarbonates): boiling reduces it', 'permanent (sulfates, chlorides): ion exchange, Na₂CO₃'] },
-      { label: 'Heavy water, D₂O', description: 'both hydrogens are deuterium (²H)', items: ['boils at 101.4 °C (1 atm)', 'CANDU moderator; ¹H NMR solvent'] },
+      { label: 'Bent, polar molecule', description: 'oxygen is far more electronegative than hydrogen; two lone pairs squeeze the angle below 109.5° (a gas-phase value). Water is also amphoteric: it donates H⁺ (→ OH⁻) and accepts H⁺ (→ H₃O⁺)', items: ['H–O–H ≈ 104.5°', 'dipoles do not cancel'] },
+      { label: 'Hydrogen bonding', description: 'each molecule can donate 2 and accept 2 hydrogen bonds (4 in ice; about 3.5 on average in liquid water). Boiling points are at 1 atm; the densities are ice at 0 °C and water at 4 °C, its densest', items: ['boils at 100 °C (H₂S: −60 °C)', 'ice floats: 0.917 vs 1.000 g/cm³'] },
+      { label: 'Hard water', description: 'dissolved Ca²⁺ and Mg²⁺ ions turn soap to scum instead of lather. Temporary hardness is Ca/Mg hydrogencarbonate; permanent hardness is Ca/Mg sulfate and chloride', items: ['temporary: boiling reduces it', 'permanent: ion exchange, Na₂CO₃'] },
+      { label: 'Heavy water, D₂O', description: 'both hydrogens are deuterium (²H); it boils at 101.4 °C (1 atm), moderates neutrons in CANDU reactors and is a solvent for ¹H NMR', items: ['boils at 101.4 °C', 'CANDU moderator; ¹H NMR solvent'] },
     ],
   }),
   'chem.state.phase-diagram': () => buildCellComparisonScene({
@@ -1811,13 +1813,14 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   }),
   'chem.poly.biodegradable': () => buildCellComparisonScene({
     conceptId: 'chem.poly.biodegradable',
+    captioned: true, // long item text: wrap to the column and space the items by their wrapped height
     gridFromGroups: 3, // three groups of long clauses: two rows, not three columns ~140px apart on a phone
     title: 'Polymer Behaviour Follows the Backbone, Not the Feedstock',
-    teachingGoal: 'Whether a polymer can biodegrade starts with its backbone chemistry — hydrolysable linkages or none — not with whether the monomer came from plants; conductivity needs a conjugated π-system AND a doping step.',
+    teachingGoal: 'Whether a polymer can biodegrade starts with its backbone chemistry — hydrolysable linkages or none — not with whether the monomer came from plants; intrinsic electronic conductivity needs a conjugated π-system AND a doping step.',
     groups: [
-      { label: 'Hydrolysable backbone', description: 'aliphatic ester linkages that moisture and microbial enzymes can cleave — can biodegrade, but slowly outside industrial composting', items: ['PLA (often plant-derived; needs industrial composting)'] },
-      { label: 'All-carbon backbone', description: 'no hydrolysable linkage — resists biodegradation, whatever the feedstock', items: ['Bio-polyethylene (from bio-based ethanol)', 'Petroleum polyethylene (chemically identical)'] },
-      { label: 'Conducting polymers', description: 'need an extended conjugated π-system AND a doping step', items: ['Undoped: only a modest semiconductor', 'Doped polyacetylene, polypyrrole: mobile charge carriers'] },
+      { label: 'Hydrolysable backbone', description: 'aliphatic ester linkages that moisture and microbial enzymes can cleave — can biodegrade, but slowly outside industrial composting (PLA is often plant-derived)', items: ['PLA: needs industrial composting'] },
+      { label: 'All-carbon backbone', description: 'no hydrolysable linkage — generally resists biodegradation, whatever the feedstock: polyethylene from bio-based ethanol is chemically identical to the petroleum one', items: ['Bio-based polyethylene', 'Petroleum polyethylene'] },
+      { label: 'Conducting polymers', description: 'need an extended conjugated π-system AND a doping step (doped polyacetylene, polypyrrole)', items: ['Undoped: poor semiconductor', 'Doped: mobile charge carriers'] },
     ],
   }),
 

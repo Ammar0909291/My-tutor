@@ -37,6 +37,13 @@ export interface CellComparisonParams {
    * (measured in Chromium, 2026-10-08: real-gases and phase-diagram labels cut off at the canvas edge).
    */
   gridFromGroups?: number
+  /**
+   * Opt in to the captioned layout Biology figures use (captions wrap to their own column, item slots follow the wrapped height, a stub
+   * ties a column to its header) — for a figure whose item text is long. Omitted = the legacy layout, so every existing figure is
+   * byte-identical. Chemistry visual closure (2026-10-12): with 40-55 character items the legacy layout let one column's items
+   * interleave with the next (colloids, water, polymers: a reader could not tell which caption belonged to which group).
+   */
+  captioned?: boolean
 }
 
 // Six, not four: nine Biology comparisons have five or six groups (the five
@@ -199,7 +206,7 @@ function placeGroupsBio(groups: readonly ComparisonGroup[], layouts: readonly { 
 
 export function buildCellComparisonScene(params: CellComparisonParams): SceneSpec {
   const { conceptId, title, teachingGoal, groups } = params
-  const bio = isBiologyScene(conceptId)
+  const bio = isBiologyScene(conceptId) || params.captioned === true
   // A non-Biology caller whose item text is long may ask for the grid earlier (`gridFromGroups`); Biology figures always use THREE.
   const gridFrom = bio ? GRID_FROM_GROUPS_BIO : (params.gridFromGroups ?? GRID_FROM_GROUPS_LEGACY)
   const inGrid = groups.length >= gridFrom

@@ -268,13 +268,13 @@ describe('R12 — the two concepts that had no figure each own a faithful one', 
 
   it('colloids: the three-box model by particle size, the Tyndall and dialysis tests, and suspensions scatter light too', () => {
     const t = text('chem.surface.colloids')
-    for (const s of ['dissolved molecules or ions, mostly below about 1 nm', 'about 1–1000 nm', 'above about 1000 nm', 'scatters a light beam (Tyndall effect)', 'homogeneous; no Tyndall effect',
-      'passes filter paper, not a dialysis membrane', 'scatters light too', 'settles on standing']) expect(t).toContain(s)
+    for (const s of ['homogeneous mixture of dissolved molecules or ions, mostly below about 1 nm', 'about 1–1000 nm', 'above about 1000 nm', 'shows Tyndall effect', 'no Tyndall effect',
+      'pass ordinary filter paper but not a dialysis membrane', 'scatters light too', 'settles on standing', 'gelatin sol, gold sol']) expect(t).toContain(s)
   })
 
   it('water: 104.5° (not 120°), hydrogen bonding with its conditions, both kinds of hardness, D₂O, amphoteric', () => {
     const t = text('chem.sblock.water')
-    for (const s of ['104.5°', 'two lone pairs', '0.917 g/cm³ vs water 1.000', '(1 atm)', 'temporary (hydrogencarbonates)', 'permanent (sulfates, chlorides)', 'Na₂CO₃', 'D₂O', 'amphoteric', '101.4 °C']) expect(t).toContain(s)
+    for (const s of ['104.5°', 'two lone pairs', '0.917 vs 1.000 g/cm³', 'ice at 0 °C and water at 4 °C', '1 atm', 'Ca/Mg hydrogencarbonate', 'Ca/Mg sulfate and chloride', 'Na₂CO₃', 'D₂O', 'amphoteric', '101.4 °C']) expect(t).toContain(s)
     expect(t).not.toContain('120')
   })
 })

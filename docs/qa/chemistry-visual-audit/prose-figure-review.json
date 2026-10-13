@@ -1,0 +1,101 @@
+{
+ "generated": "2026-10-09",
+ "about": "Independent read of the six prose pathway / comparison figures the machine audit cannot check (R18), by a reviewer who had not seen the code or any verdict, against sources the reviewer read. 'resolution' records what this closure changed in response. Figures are keyed by the manifest instance id suffix (scene:<figure>).",
+ "entries": [
+  {
+   "figure": "cell-comparison-chem.state.real-gases",
+   "verdict": "IMPRECISE",
+   "issues": [
+    "Z = PV/(nRT) = 1 for an ideal gas, Z < 1 when attractions dominate (moderate pressure), Z > 1 when repulsion / excluded volume dominates (high pressure), and the vdW form (P + a/Vm^2)(Vm - b) = RT are all correct. No false statement.",
+    "Loose: 'real molecules attract (Z < 1 at moderate pressure)' is only true BELOW the gas's Boyle temperature. Wikipedia (Compressibility factor): Z decreases with temperature; above the Boyle temperature Z stays above 1 and rises with pressure. Light gases (H2, He) at room temperature are the textbook case of Z > 1 at all pressures (widely stated; I could not retrieve a primary table of their Boyle temperatures, so I give no number). Suggest 'for most gases near room temperature' or 'below the Boyle temperature'.",
+    "Loose: label 'b: removes the volume the molecules occupy'. b is the EXCLUDED volume per mole, about 4x the actual molecular volume (b = 4 N_A V0 for hard spheres; Wikipedia, Van der Waals equation). Suggest 'b: excluded volume (about 4x the molecules' own volume)'.",
+    "Step 2 label 'lower pressure than ideal' is correct (wall pressure is reduced by attractions; the a/Vm^2 term restores it)."
+   ],
+   "sources": [
+    "Compressibility factor - https://en.wikipedia.org/wiki/Compressibility_factor (Z vs T, Boyle temperature 327 K for N2, Z > 1 above Boyle T)",
+    "Van der Waals equation - https://en.wikipedia.org/wiki/Van_der_Waals_equation (b = 4 N V0, molar form (p + a/v^2)(v - b) = RT)",
+    "Search summary (study-help/lecture notes, not primary) on H2/He Z > 1 - https://chemistry.csueastbay.edu/~pfleming/chem/351/chap02/gaslaws2.htm"
+   ],
+   "resolution": "Applied: 'for most gases near room temperature' qualifier on Z < 1; b relabelled as the excluded volume (~4x the molecules' own volume). The first, longer wording of the b label clipped and collided at 1280 px in the browser audit and was shortened."
+  },
+  {
+   "figure": "cell-comparison-chem.state.phase-diagram",
+   "verdict": "IMPRECISE",
+   "issues": [
+    "No false statement. Region layout, sublimation on the solid-gas curve (dry ice), liquid-gas curve giving the boiling point, and the negative solid-liquid slope for water are all correct.",
+    "Triple point label 'water: 273.16 K, 611 Pa': 273.16 K is correct. The pressure is 611.657 Pa (Wikipedia 'Triple point'; IAPWS melting/sublimation release uses p_t = 611.657 Pa, T_t = 273.16 K, as reported by a search result - I did not open the IAPWS PDF itself). '611 Pa' is a TRUNCATION, not a rounding; 3-s.f. rounding is 612 Pa. Error is ~0.1 %, so it is not false and not a safety problem, but the correctly rounded label is '612 Pa' (or '611.657 Pa', or '0.612 kPa / about 0.006 atm'). RECOMMENDATION: change to 612 Pa. (I cannot confirm that any particular textbook prints 611 Pa; older Wagner-era values were ~611.2 Pa, which is why 611 is common, but I did not verify that here - UNSURE.)",
+    "CO2 critical point '304 K, 73 atm': table values 304.19 K (31.04 C) and 72.8 atm (7380 kPa) round to 304 K and 73 atm. Correct.",
+    "Water critical point '647 K, 218 atm': 647.096 K and 22.064 MPa = 217.75 atm round to 647 K and 218 atm. Correct.",
+    "Minor wording: Step 1 says 'every P-T point is solid, liquid or gas' while Step 4 adds a supercritical fluid; consistent only if the supercritical region is read as the continuation of liquid/gas. Optional tweak: 'every P-T point below the critical point...'."
+   ],
+   "sources": [
+    "Triple point - https://en.wikipedia.org/wiki/Triple_point (273.16 K, 611.657 Pa)",
+    "IAPWS Release on melting/sublimation pressures - https://iapws.org/documents/release/MeltSub.download (p_t = 611.657 Pa, T_t = 273.16 K, via search-result summary)",
+    "Critical point (thermodynamics) - https://en.wikipedia.org/wiki/Critical_point_(thermodynamics) (water 647.096 K, 22.064 MPa = 217.75 atm; CO2 304.19 K, 72.8 atm)"
+   ],
+   "resolution": "Applied: triple-point pressure 611 Pa -> 612 Pa (3-s.f. rounding of 611.657 Pa)."
+  },
+  {
+   "figure": "cell-pathway-chem.dblock.organometallics",
+   "verdict": "IMPRECISE",
+   "issues": [
+    "All electron counts and oxidation states in the figure's own sequence check out: RhCl(PPh3)3 is Rh(I) d8 + 4 x 2e = 16e; H2 oxidative addition gives Rh(III) dihydride RhH2Cl(PPh3)3, 18e (oxidation state +2, 16 -> 18); PPh3 loss then alkene binding 18 -> 16 -> 18; migratory insertion (hydride onto alkene) gives a 16e Rh(III) alkyl-hydride RhHCl(PPh3)2(alkyl) (d6 + Cl 2 + H 2 + 2 PPh3 4 + alkyl 2 = 16); reductive elimination of H + alkyl gives alkane and Rh(I); Rh(I) -> Rh(III) -> Rh(I) is correct.",
+    "Loose / incomplete: the textbook and Bristol 'Molecule of the Month' account puts PPh3 dissociation BEFORE H2 addition (a solvated 14e RhCl(PPh3)2(S) adds H2 to give 16e RhH2Cl(PPh3)2, which binds alkene to give 18e). Wikipedia likewise: 'initial dissociation of one or two triphenylphosphine ligands to give 14- or 12-electron complexes' then H2 oxidative addition. The figure instead adds H2 to the intact 16e RhCl(PPh3)3 first ('one empty site, ready for oxidative addition') and loses PPh3 only when the alkene binds. The 18e dihydride RhH2Cl(PPh3)3 is a real species and an on-pathway route in some treatments, so this is NOT false, but it is one variant. I could not retrieve a primary source (Halpern, Inorg. Chim. Acta 1981, 50, 11; Brown/Evans/Lucy 1987) establishing which route dominates - UNSURE. Suggest a caption such as 'simplified; in solution PPh3 loss (14e RhCl(PPh3)2) usually precedes H2 addition'.",
+    "Omission: after reductive elimination the metal fragment is the 14e RhCl(PPh3)2 (Rh(I)); the figure goes straight to 'PPh3 rebinds (16 electrons)'. Not wrong, just skips the 14e species.",
+    "Step 1 'one empty site' for a 4-coordinate square-planar 16e d8 complex is acceptable (vacant axial/coordination site)."
+   ],
+   "sources": [
+    "Wilkinson's catalyst - https://en.wikipedia.org/wiki/Wilkinson%27s_catalyst (Rh(I) d8, 16e; dissociation of PPh3 -> 14e/12e then H2 oxidative addition; insertion rate-limiting)",
+    "Cotton, Molecule of the Month July 2013 (Bristol) - https://www.chm.bris.ac.uk/motm/wilcat/Wilkinson's%20Catalyst%20-%20Molecule%20of%20the%20Month%20July%202013.pdf (solvent replaces PPh3; [RhH2Cl(PPh3)2] 16e Rh(III); alkene adds to give 6-coordinate 18e; insertion; reductive elimination)",
+    "LibreTexts, Hydrogenation by Wilkinson's Catalyst - https://chem.libretexts.org/Bookshelves/Inorganic_Chemistry/Inorganic_Chemistry_(LibreTexts)/14%3A_Organometallic_Reactions_and_Catalysis/14.03%3A_Organometallic_Catalysts/14.3.05%3A_Hydrogenation_by_Wilkinson's_Catalyst (appeared in search results; not opened)"
+   ],
+   "resolution": "Applied: the goal now says 'One commonly drawn route' (the textbook route dissociates PPh3 first; the drawn order is a real on-pathway alternative)."
+  },
+  {
+   "figure": "cell-comparison-chem.org.pericyclic",
+   "verdict": "CORRECT",
+   "issues": [
+    "Every statement holds: [4+2] Diels-Alder is thermally allowed (supra-supra, 6 electrons, zero antarafacial components); electrocyclic 4n electrons is conrotatory thermally (disrotatory photochemically) and 4n+2 is disrotatory thermally; [1,5]-H and [3,3] (Cope, Claisen) shifts are thermally allowed; suprafacial [1,3]-H shifts are not observed thermally (would need an antarafacial path).",
+    "Non-blocking note: '[2+2]: thermally forbidden' is the suprafacial-suprafacial rule (Wikipedia: 'For ordinary alkenes, [2+2] cycloadditions are only observed under photochemical activation'); thermal [pi2s+pi2a] modes (e.g. ketenes) exist. The [1,3]H label carries the qualifier '(suprafacial)' while the [2+2] label does not; adding '(suprafacial)' would make the two consistent. Not an error.",
+    "'Concerted, no intermediate' is the defining feature of pericyclic reactions."
+   ],
+   "sources": [
+    "Woodward-Hoffmann rules - https://en.wikipedia.org/wiki/Woodward%E2%80%93Hoffmann_rules ([4+2] allowed; [2+2] photochemical only for ordinary alkenes; 4n conrotatory thermal / 4n+2 disrotatory thermal; [1,5]-H facile, [1,3]-H not observed, [3,3] allowed)"
+   ],
+   "resolution": "Applied: '[2+2]: thermally forbidden (suprafacial)', consistent with the [1,3]H label."
+  },
+  {
+   "figure": "cell-comparison-chem.bio.nucleic-acids",
+   "verdict": "CORRECT",
+   "issues": [
+    "Every statement holds: DNA has A, T, G, C and deoxyribose (no 2'-OH) and is usually a double helix; RNA has A, U, G, C and ribose and is usually single-stranded ('usually' correctly hedges folded/double-stranded regions and dsRNA viruses); the 2'-OH acts as an internal nucleophile on the adjacent phosphate (2',3'-cyclic phosphate), so RNA's backbone is hydrolysed more easily; A-T has 2 H-bonds, G-C has 3; each pair is one purine + one pyrimidine, giving a constant helix width.",
+    "Non-blocking: DNA is not immune to hydrolysis; the figure says RNA is 'easier to hydrolyse', which is the correct comparative claim."
+   ],
+   "sources": [
+    "RNA hydrolysis - https://en.wikipedia.org/wiki/RNA_hydrolysis (2'-OH nucleophilic attack on adjacent phosphorus, 2',3'-cyclic phosphate; DNA lacks 2'-OH)",
+    "Standard textbook facts (Watson-Crick pairing: A=T two H-bonds, G triple-bond C three H-bonds, purine-pyrimidine geometry); not separately retrieved this session"
+   ],
+   "resolution": "No change needed."
+  },
+  {
+   "figure": "cell-comparison-chem.poly.biodegradable",
+   "verdict": "IMPRECISE",
+   "issues": [
+    "No flatly false statement; the key checkable claims hold: bio-polyethylene (from bio-ethanol -> ethylene) is chemically identical to petroleum PE, so bio-based feedstock does not make it biodegradable; conducting polymers need a conjugated pi-system plus doping; undoped polyacetylene is poorly conducting (cited range ~1e-9 to 1e-5 S/cm) while doped films reach ~1e2-1e3 S/cm (higher with some dopants).",
+    "Loose: 'PLA ... biodegradable' is unqualified. PLA degrades by ester hydrolysis, and is compostable under industrial composting (~58 C, lab mineralisation within weeks), but shows little or no degradation in soil or seawater at ambient temperature (e.g. Royer et al., PLOS ONE 2023: no degradation of PLA textile over 14 months in coastal water). Suggest 'biodegradable (industrial composting; slow at ambient temperature)'.",
+    "Oversimplified rule: 'Biodegradability is decided by backbone chemistry - hydrolysable linkages or none'. Counterexamples: PET is a polyester but resists biodegradation (aromatic rings, crystallinity); polyvinyl alcohol has an all-carbon backbone yet is biodegradable under specific microbial conditions (though slowly/conditionally). Backbone chemistry is the first-order factor, but crystallinity, aromatic content, hydrophobicity, molar mass and environment also matter. Suggest wording like 'chiefly decided by' and 'e.g. aliphatic esters (PLA)' rather than 'ester linkages' in general; 'all-carbon backbones such as polyethylene resist biodegradation' is fine.",
+    "'Undoped: only a modest semiconductor' is acceptable (undoped polyacetylene is essentially a semiconductor/poor conductor; cis form ~1e-9 S/cm). Exact conductivity numbers vary by source and by cis/trans form; I did not put any number on the figure."
+   ],
+   "sources": [
+    "PLA mineralisation at 58 C vs 30 C - https://mspace.lib.umanitoba.ca/items/16e7e809-bebc-4dac-8ae8-d0a641bfe4d8/full",
+    "Royer et al. 2023 PLA in marine water (summary) - https://oceanoculus.com/the-ocean-brief/pla-ocean-breakdown-royer-2yd89",
+    "PLA hydrolytic chain scission depends on Mw, crystallinity, T, humidity - https://pubs.rsc.org/en/content/articlehtml/2025/su/d5su00623f",
+    "PET: aromatic content and crystallinity limit hydrolysis/biodegradation - https://pmc.ncbi.nlm.nih.gov/articles/PMC5948967 (via search summary)",
+    "PVA all-carbon backbone biodegradable under specific conditions - RSC Adv. 2016 review https://pubs.rsc.org/en/content/articlepdf/2016/ra/c6ra05742j (via search summary; attribution of the quoted sentence to this exact paper not verified)",
+    "Bio-PE (sugarcane ethanol -> ethylene -> PE; drop-in, chemically identical) - https://fkur.com/en/brands/im-green/green-lldpe and https://www.plastemart.com/news-plastics-information/Braskem-introduces-polyethylene-made-from-sugarcane-ethanol/10387 (producer/trade sources; non-biodegradability of PE is standard background, not found in these pages)",
+    "Polyacetylene doping and conductivity - https://www.nobelprize.org/prizes/chemistry/2000/popular-information/ (iodine oxidation raised conductivity enormously) and https://patents.google.com/patent/US4481132 (cis ~1e-9 to trans ~1e-5 S/cm, via search summary)"
+   ],
+   "resolution": "Applied: PLA 'needs industrial composting'; 'biodegradation starts with the backbone' instead of 'is decided by'; the all-carbon column says 'resists biodegradation' (poly(vinyl alcohol) is a conditional counter-example); 'aliphatic' ester linkages."
+  }
+ ]
+}

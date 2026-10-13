@@ -90,8 +90,9 @@ describe('the scenes say what the Educational Brain says', () => {
   it('biodegradable: the backbone matters first — bio-polyethylene is chemically polyethylene and resists biodegradation', () => {
     const s = buildCanonicalScene(null, 'chem.poly.biodegradable')!
     const carbon = s.steps.find((st) => (st.narration ?? '').startsWith('All-carbon backbone'))!
-    expect(carbon.narration).toContain('resists biodegradation, whatever the feedstock')
-    expect(carbon.objects.map((o) => o.text)).toContain('Bio-polyethylene (from bio-based ethanol)')
+    expect(carbon.narration).toContain('generally resists biodegradation, whatever the feedstock')
+    expect(carbon.objects.map((o) => o.text)).toContain('Bio-based polyethylene')
+    expect(carbon.narration).toContain('polyethylene from bio-based ethanol is chemically identical to the petroleum one')
     expect(text(s)).toContain('a conjugated π-system AND a doping step')
   })
 })
