@@ -13,7 +13,7 @@
  */
 
 import type { SceneObject, SceneSpec, SceneStep, Vec3 } from '../sceneSpec'
-import { captionBeside, round } from './shared'
+import { captionBeside, isBiologyScene, round } from './shared'
 
 export interface HubSpoke {
   name: string
@@ -47,8 +47,22 @@ const SPOKE_RADIUS = 0.7
 const spokeWrap = (n: number): { labelWrapUnits?: number } =>
   n >= 7 ? { labelWrapUnits: Math.round((2 * ringRadiusFor(n) * Math.sin(Math.PI / n) - 0.4) * 10) / 10 } : {}
 
+/**
+ * Biology only (2026-10-09 audit): an odd spoke count below seven puts one spoke straight DOWN, so its connector is a vertical line from the hub. The
+ * lower side spheres' captions hang below them and, centred on a sphere about 3 units off the axis, ran to the line: on the five-spoke "Microbes in
+ * Human Welfare" figure at 390 px the vertical connector landed on the first letter of "Industrial biotechnology" and read as "|ndustrial". Wrapping
+ * such a caption to the width the sphere owns (twice its distance from the axis, less a margin) keeps its words clear of the line.
+ */
+const AXIS_MARGIN = 0.35
+const MIN_OWN_WIDTH = 3
+function lowerSideWrap(position: Vec3, spokeCount: number): { labelWrapUnits?: number } {
+  if (spokeCount % 2 === 0 || spokeCount >= 7 || position[1] >= 0 || Math.abs(position[0]) < 0.5) return {}
+  return { labelWrapUnits: Math.max(MIN_OWN_WIDTH, round(2 * (Math.abs(position[0]) - AXIS_MARGIN))) }
+}
+
 export function buildCellHubScene(params: CellHubParams): SceneSpec {
   const { conceptId, hubLabel, title, teachingGoal, spokes } = params
+  const bio = isBiologyScene(conceptId)
 
   const hubStep: SceneStep = {
     narration: hubLabel,
@@ -65,7 +79,7 @@ export function buildCellHubScene(params: CellHubParams): SceneSpec {
     const position: Vec3 = [round(Math.cos(angle) * ringRadiusFor(spokes.length)), round(Math.sin(angle) * ringRadiusFor(spokes.length)), 0]
     const objects: SceneObject[] = [
       // Caption on the outward (upper or lower) side of its sphere, not on it.
-      { type: 'node', id: `spoke-${i}`, position, radius: SPOKE_RADIUS, color: SPOKE_COLOR, text: spoke.name, properties: { ...captionBeside(SPOKE_RADIUS, position[1] >= 0 ? 'above' : 'below'), ...spokeWrap(spokes.length) } },
+      { type: 'node', id: `spoke-${i}`, position, radius: SPOKE_RADIUS, color: SPOKE_COLOR, text: spoke.name, properties: { ...captionBeside(SPOKE_RADIUS, position[1] >= 0 ? 'above' : 'below'), ...spokeWrap(spokes.length), ...(bio ? lowerSideWrap(position, spokes.length) : {}) } },
       { type: 'path', id: `spoke-line-${i}`, points: [[0, 0, 0] as Vec3, position], color: LINE_COLOR },
     ]
     return { narration: `${spoke.name}: ${spoke.description}`, objects }

@@ -644,3 +644,46 @@ Rules this audit adds (binding for Biology figure work):
 Re-run: `node scripts/qa/biologyVisualRenderAudit.mjs <out> --file ids.txt --base http://localhost:3001 [--theme light]` (≤ 4 shards), then judge
 the screenshots — the harness measures, it does not judge. Open items (6 REVIEW_REQUIRED, all content/depiction decisions): see the report.
 Production browser validation was unavailable in this session.
+
+## COMPLETE QUALITY CLOSURE (2026-10-09/12): the six REVIEW_REQUIRED figures resolved, all 199 re-audited on the final code
+
+Report and per-concept manifest: `docs/qa/biology-visual-audit/README.md` ("Closure campaign") and `audit-final.json` (each record carries a
+`closure` block). The six figures the render audit left REVIEW_REQUIRED were re-authored from their Educational Brain entries — nothing
+invented, no threshold lowered, Biology-only:
+
+| figure | before | after |
+|---|---|---|
+| `bio.neuro.brain-regional-organization` | four lobes as dots in a circle | a lateral brain drawn as one brush path per region (≤ 50 objects per stage — the first draft was rejected by admission, ST-07), three divisions + four lobes + the limbic structures |
+| `bio.cell.cell-theory` | a thin timeline | Schleiden 1838 → Schwann 1839 → Virchow 1855 → the three tenets, with the abiogenesis scoping note |
+| `bio.mol.dna-replication` | 17 labels against a budget of 9; mobile lagging-strand caption ~96 px from its strand | 9 labels, lagging strand merged with Okazaki fragments and sitting on the strand, legend carries the parental/new/primer/enzyme key, 5′/3′ and fork direction kept |
+| `bio.eco.predator-prey-dynamics` | the two equations as text | a numerically integrated population-over-time cycle, predator lagging prey, numbered phases, numerical vs functional response |
+| `bio.plant.mycorrhizae-plant-symbioses` | rhizobium chain only | arbuscular (inside the cells) vs ectomycorrhizal (mantle outside, Hartig net between) and the rhizobium–legume nodule kept apart |
+| `bio.plant.plant-growth-hormones` | four of five hormones name-only | every hormone carries a source-supported function, including the cytokinin/ethylene opposition and auxin's shoot/root sensitivity |
+
+The full re-audit then found, and this campaign fixed, defects the first audit could not see (all in shared Biology-gated code):
+
+* **Bare comparison groups** (20 figures): a group with no `items` drew only its name; its defining clause lived in the stage narration alone.
+  `cellComparison.pure.ts` now draws the group's own `description` as its caption (`withDescribedBareGroups`). A test asserts no served
+  Biology comparison has a name-only group.
+* **Hub captions cut by the vertical connector** (odd-spoke hubs, 3 figures): `cellHub.pure.ts` wraps the lower side captions to the width they own.
+* **"Play the motion" on a cell outline** (10 structure figures): `cellStructure.pure.ts` marks the boundary ring `properties.trace: false`; the
+  opt-out lives in `sceneAnimation.traceablePaths` (nothing else sets it).
+* **Caption covering its own sphere** (`binomial-nomenclature`): the only such case in the corpus (occlusion scan of every stage at both widths).
+* **Panel truncation**: the "What's happening?" panel is cut at 1000 characters in whole lines, so a re-authored figure with long narration
+  silently lost its last stages (brain 2 of 4, mycorrhizae 5 of 7). Keep a figure's narrations under ~950 characters in total or give it
+  `explainer.panels`. `bioClosureFigures.test.ts` pins it.
+
+New rules (binding):
+
+6. **Wait for the figure to settle before measuring.** The render and interaction harnesses now poll canvas size + every label position until two
+   reads agree; a fixed wait read heavy figures before their labels mounted. `--all-stages` measures and screenshots every stage.
+7. **The stage height can differ run to run by ±40–120 px** (`ExplainerFigure`'s `fitStage` search starts from the box it finds, and on a width
+   change it restarts from a box that may already be grown). Both outcomes are clean; it is a known, pre-existing, non-clipping variance
+   (e.g. `bio.neuro.sleep-circadian-biology` at 390 px leaves empty space below the figure). Fixing it means changing the fit search, which is
+   shared layout code — not done here.
+8. **A caption that wraps to two lines at 390 px is taller in scene units than at 1280 px.** Place anchors for the PHONE (caption half-height ≈ 27 px
+   for two lines, 42 px for three) and replay with `placeSceneLabels`; a leader that starts inside its own label's box is an obstacle the solver
+   moves the label away from, so start leaders ≥ 1 label-height from the label centre or use a node caption instead of label + leader.
+
+Production browser verification: see the report's "Production" section (`scripts/qa/biologyProductionBrowserAudit.ts` registers a disposable
+`qa-*@mytutor-qa.invalid` account, opens the real `/learn` page and deletes the account afterwards).

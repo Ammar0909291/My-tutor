@@ -116,7 +116,7 @@ function raw_buildFtcRigorousScene(): SceneSpec {
     stage: NO_STAGE,
     steps: [
       { narration: 'f(t) = t² (left). The accumulated area F(2) = ∫₀² t² dt is the hatched region under the curve from 0 to 2: 8/3 ≈ 2.67.', objects: [...axesOf(FTL, -0.2, 3.2, -0.5, 9.7), curveOf(FTL, (x) => x * x, 0, 3, ROLE.output, 40), ...hatch, lb('f(t) = t²', [-3.0, 1.5], ROLE.output), lb('area 0 to 2 = 2.67', [-3.3, -2.75], ROLE.output)] },
-      { narration: 'The height of F(x) = x³/3 (right) at x = 2 is that area 2.67. Part 1: its slope at x = 2 is f(2) = 4 (green tangent): F′(x₀) = f(x₀).', objects: [...axesOf(FTR, -0.2, 3.3, -0.5, 9.7), curveOf(FTR, ftcF, 0, 3, ROLE.input, 40), dotAt(FTR, ftcX0, ftcF(ftcX0), ROLE.result, 0.14), lineAt(FTR, [ftcX0 - 0.6, ftcF(ftcX0) - 2.4], [ftcX0 + 0.6, ftcF(ftcX0) + 2.4], ROLE.result, 0.04), lb('F(x) = x³/3', [2.1, 1.5], ROLE.input), lb('F′(2) = f(2) = 4', [0.7, 0.35], ROLE.result)] },
+      { narration: 'The height of F(x) = x³/3 (right) at x = 2 is that area 2.67. Part 1: its slope at x = 2 is f(2) = 4 (green tangent): F′(x₀) = f(x₀).', objects: [...axesOf(FTR, -0.2, 3.3, -0.5, 9.7), curveOf(FTR, ftcF, 0, 3, ROLE.input, 40), dotAt(FTR, ftcX0, ftcF(ftcX0), ROLE.result, 0.14), lineAt(FTR, [ftcX0 - 0.6, ftcF(ftcX0) - 2.4], [ftcX0 + 0.6, ftcF(ftcX0) + 2.4], ROLE.result, 0.04), lb('F(x) = x³/3', [2.1, 1.5], ROLE.input), lb('F′(2) = f(2) = 4', [1.2, -0.1], ROLE.result)] },
       { narration: 'Part 2: the area from 1 to 3 is the difference of two heights of F: F(3) − F(1) = 9 − 0.33 = 8.67 (violet).', objects: [lineAt(FTR, [0, ftcF(1)], [1, ftcF(1)], ROLE.aid, 0.04), lineAt(FTR, [0, ftcF(3)], [3, ftcF(3)], ROLE.aid, 0.04), lb('9', [FTR.ox - 0.45, at(FTR, 0, ftcF(3))[1]], ROLE.aid), lb('0.33', [FTR.ox - 0.75, at(FTR, 0, ftcF(1))[1]], ROLE.aid), lb('9 − 0.33 = 8.67', [2.4, -2.75], ROLE.aid)] },
     ],
   }
@@ -269,14 +269,14 @@ function raw_buildLpSpaceScene(): SceneSpec {
     title: 'Lᵖ spaces: the unit balls of the p-norms',
     sceneType: 'diagram',
     cameraDistance: 13,
-    teachingGoal: 'Show how the choice of p changes the size of a vector. In the plane the vectors of ‖v‖ₚ = 1 form the diamond |x| + |y| = 1 (p = 1, red), the circle x² + y² = 1 (p = 2, blue) and the square max(|x|, |y|) = 1 (p = ∞, green): nested, the larger p the larger the ball. The vector (0.71, 0.71) on the circle has the norms ‖v‖₁ = 1.41, ‖v‖₂ = 1 and ‖v‖∞ = 0.71. The same norms (integrals instead of sums) define the function spaces Lᵖ.',
+    teachingGoal: 'Show how the choice of p changes the size of a vector. In the plane the vectors of ‖v‖ₚ = 1 form the diamond |x| + |y| = 1 (p = 1, red), the circle x² + y² = 1 (p = 2, blue) and the square max(|x|, |y|) = 1 (p = ∞, green): nested, the larger p the larger the ball. The vector v = (1/√2, 1/√2) ≈ (0.71, 0.71) on the circle has the norms ‖v‖₁ = √2 ≈ 1.41, ‖v‖₂ = 1 and ‖v‖∞ = 1/√2 ≈ 0.71. The same norms (integrals instead of sums) define the function spaces Lᵖ.',
     ariaLabel:
       'A red diamond with its corners on the axes, a blue circle through those corners and a green square around the circle, all centred on the same point, captioned p equals 1, p equals 2 and p equals infinity. In the third step a violet dot marks the point at 45 degrees on the circle, captioned the norms 1.41, 1 and 0.71.',
     stage: NO_STAGE,
     steps: [
       { narration: 'The p = 1 norm ‖(x, y)‖₁ = |x| + |y|: its unit ball (all vectors of norm 1) is a diamond (red).', objects: [...poly(corners, ROLE.input, 0.05), lb('p = 1', [LPS.capX, 1.4], ROLE.input)] },
       { narration: 'The p = 2 norm √(x² + y²) gives the circle (blue), and p = ∞ with ‖(x, y)‖∞ = max(|x|, |y|) the square (green): the balls are nested, diamond ⊂ circle ⊂ square.', objects: [curve(lpsCircle(), ROLE.output), ...poly(sq, ROLE.result, 0.05), lb('p = 2', [LPS.capX, 0.5], ROLE.output), lb('p = ∞', [LPS.capX, -0.4], ROLE.result)] },
-      { narration: 'One vector, three sizes: (0.71, 0.71) lies on the circle, so ‖v‖₂ = 1; but ‖v‖₁ = 0.71 + 0.71 = 1.41 and ‖v‖∞ = 0.71.', objects: [dt(lpsPt(LPS_Q, LPS_Q), ROLE.aid, 0.15), lb('norms 1.41, 1, 0.71', [LPS.capX, -1.5], ROLE.aid)] },
+      { narration: 'One vector, three sizes: v = (1/√2, 1/√2) ≈ (0.71, 0.71) lies on the circle, so ‖v‖₂ = 1; but ‖v‖₁ = 2/√2 = √2 ≈ 1.41 and ‖v‖∞ = 1/√2 ≈ 0.71.', objects: [dt(lpsPt(LPS_Q, LPS_Q), ROLE.aid, 0.15), lb('norms 1.41, 1, 0.71', [LPS.capX, -1.5], ROLE.aid)] },
     ],
   }
 }
@@ -299,12 +299,12 @@ function raw_buildL2SpaceScene(): SceneSpec {
     cameraDistance: 13,
     teachingGoal: 'Show Parseval\'s identity with the picture that Hilbert spaces generalise: the vector f = (3, 4) of the plane. Its coordinates along the orthonormal axes e₁, e₂ are ⟨f, e₁⟩ = 3 and ⟨f, e₂⟩ = 4, and the squares add up to the squared length: 9 + 16 = 25 = ‖f‖² (so ‖f‖ = 5). In the rotated orthonormal basis e₁′ = (0.6, 0.8), e₂′ = (−0.8, 0.6) the coordinates are 5 and 0, and again 25 + 0 = 25: the sum of squared coordinates does not depend on the basis.',
     ariaLabel:
-      'A horizontal and a vertical grey axis from a common origin and a green arrow f to the point 3 along and 4 up, with violet guides down to the axes and the numbers 3 and 4 on them. In the second step the captions f equals 3, 4 and 9 plus 16 equals 25 and the length of f is 5 appear. In the third step two violet arrows show the rotated basis, one along f, captioned the other basis 25 plus 0 equals 25.',
+      'A horizontal and a vertical grey axis from a common origin and a green arrow f to the point 3 along and 4 up, with violet guides down to the axes and the numbers 3 and 4 on them. In the second step the captions f equals 3, 4 and 9 plus 16 equals 25 and the length of f is 5 appear. In the third step two violet arrows show the rotated basis, one along f, captioned e 1 prime and e 2 prime, and the other basis 25 plus 0 equals 25.',
     stage: NO_STAGE,
     steps: [
       { narration: 'The vector f = (3, 4): its coordinates in the orthonormal basis e₁, e₂ (the axes) are ⟨f, e₁⟩ = 3 and ⟨f, e₂⟩ = 4.', objects: [ar(l2sPt(0, 0), l2sPt(6.4, 0)), ar(l2sPt(0, 0), l2sPt(0, 6.2)), ar(l2sPt(0, 0), l2sPt(3, 4), ROLE.result), ln(l2sPt(3, 0), l2sPt(3, 4), ROLE.aid, 0.03), ln(l2sPt(0, 4), l2sPt(3, 4), ROLE.aid, 0.03), lb('3', [l2sPt(3, 0)[0], l2sPt(0, 0)[1] - 0.45]), lb('4', [l2sPt(0, 0)[0] - 0.45, l2sPt(0, 4)[1]]), lb('f = (3, 4)', [l2sPt(3, 4)[0] + 1.3, l2sPt(3, 4)[1]], ROLE.result)] },
       { narration: 'Parseval: the squared coordinates add up to the squared length: 3² + 4² = 9 + 16 = 25 = ‖f‖², so ‖f‖ = 5 (the 3-4-5 triangle).', objects: [lb('9 + 16 = 25', [2.6, 0.5], ROLE.result), lb('‖f‖ = 5', [2.6, -0.5], ROLE.result)] },
-      { narration: 'Another orthonormal basis, rotated: e₁′ = (0.6, 0.8) points along f, e₂′ = (−0.8, 0.6) is perpendicular. The coordinates are ⟨f, e₁′⟩ = 5 and ⟨f, e₂′⟩ = 0, and the sum of squares is again 25 + 0 = 25.', objects: [ar(l2sPt(0, 0), l2sPt(0.6 * 6.2, 0.8 * 6.2), ROLE.aid), ar(l2sPt(0, 0), l2sPt(-0.8 * 2.4, 0.6 * 2.4), ROLE.aid), lb('other basis: 25 + 0 = 25', [2.2, -1.5], ROLE.aid)] },
+      { narration: 'Another orthonormal basis, rotated: e₁′ = (0.6, 0.8) points along f, e₂′ = (−0.8, 0.6) is perpendicular. The coordinates are ⟨f, e₁′⟩ = 5 and ⟨f, e₂′⟩ = 0, and the sum of squares is again 25 + 0 = 25.', objects: [ar(l2sPt(0, 0), l2sPt(0.6 * 6.2, 0.8 * 6.2), ROLE.aid), ar(l2sPt(0, 0), l2sPt(-0.8 * 2.4, 0.6 * 2.4), ROLE.aid), lb('other basis: 25 + 0 = 25', [2.2, -1.5], ROLE.aid), lb('e₁′', [l2sPt(0.6 * 6.2, 0.8 * 6.2)[0], l2sPt(0.6 * 6.2, 0.8 * 6.2)[1] + 0.55], ROLE.aid), lb('e₂′', [l2sPt(-0.8 * 2.4, 0.6 * 2.4)[0] - 0.1, l2sPt(-0.8 * 2.4, 0.6 * 2.4)[1] + 0.55], ROLE.aid)] },
     ],
   }
 }
