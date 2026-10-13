@@ -4,8 +4,10 @@ Shared figure legibility · Physics · Chemistry · Biology · production verifi
 Every finding ends in exactly one of: **FIXED AND VERIFIED**, **INTENTIONAL AND VERIFIED**, **BLOCKED** (owner/evidence/finishing test named),
 **NOT REPRODUCIBLE**. Nothing is called production-verified unless it was measured on the deployed `/learn` page; QA-harness defects are kept separate from app defects.
 
-Deployed commit: **`9b26c89`** (`dpl_CY88qN1UHmAUXVMNczbrUc6yesQp`, alias `my-tutor-flame.vercel.app`; READY, `aliasError: null`). The follow-up commits (`e940b7d`, `7d96f1d`, this file) are docs only —
-the app source is identical to `5465509` / `9b26c89`. Evidence: `docs/qa/physics-visual-audit/production-2026-10-13/` (README + JSON + screenshots).
+**Final verified commit: `23c52bf`** on `main` (= `origin/main`, clean working tree) — deployment **`dpl_2qXa8KT6TL49AFbwnqicesn57jWa`**, READY, `aliasError: null`, alias `my-tutor-flame.vercel.app`, exact commit `23c52bf0d8d4942a65a62a2aab39ceff682b30c8`.
+CI (`validate`, run #4601): **success** for `23c52bf` (type-error ratchet, vitest, knowledge-graph validator, educational-package determinism, visualization-registry coverage).
+The earlier verified deployments are `dpl_DfiW33EV…` (`74f4207`) and `dpl_CY88qN1U…` (`9b26c89`); `23c52bf` adds the closure documents and the other worker's Mathematics batch 41 (`mathCoreScenesB41.ts`, its test, 19 registry lines) — no Physics, Chemistry, Biology or hook code.
+After `23c52bf`: `908e019` (this report; docs only, CI #4603 success, deployment `dpl_Cp2Fs7sM…` READY) and the Biology workstream's `772b989`/`8354da1` (their final-verification docs and evidence, plus 29 lines in `src/tests/bioClosureFigures.test.ts`; not part of this campaign's gates — on `8354da1` I ran `tsc --noEmit` = exit 0 and that test file = 60/60 passed; their own run re-audited the six Biology figures on `23c52bf` in production: 24/24 clean, and independently reached the same conclusion on the mycorrhizae footer overlap). Evidence: `docs/qa/physics-visual-audit/production-2026-10-13/` (README + JSON + screenshots).
 
 ## Who did what (so nothing is credited twice)
 
@@ -32,13 +34,27 @@ the app source is identical to `5465509` / `9b26c89`. Evidence: `docs/qa/physics
 | 12 | "Egress above 5 GB" | Cycle total (spent 2026-10-05→07 by synthetic campaigns: ≈ 2.4–3.3 GB for those three days alone, estimate — the meter is not readable through the MCP) cannot be lowered; the one live read that grows with use (`captureGenerated*` loaded the whole lineage: ≈ 52 KB per capture) now reads two rows | `captureLineageEgress.test.ts` (14 tests) | post-deploy `snap5`: spine and whole-lineage reads **+0** over 14.5 h; 5,710 rows across the 29 heaviest statements (< 5 MB/day vs ≈ 167 MB/day share). Honest limit: this window had too few capture-triggering turns to measure the new per-call value — the unit test pins it | **FIXED AND VERIFIED** (code and live rate); the already-spent cycle total is **BLOCKED** on the owner (dashboard-only figure; plan/retention decision, see #13) |
 | 13 | Database size 717 MB (spine_events 283 MB, messages 144 MB, evidence_events 66 MB; 30,436 never-served DRAFT explanations) | Not changed — a data-retention call | — | measured only | **BLOCKED** — owner: decide pruning/retention (and the plan's 500 MB limit if on the free tier). Finishing test: re-measure `pg_database_size` after the decision |
 
-## Gates (final tree)
+## Gates (exact tree `23c52bf`, clean working tree, run 2026-10-13)
 
-* Merged tree before the Chemistry merge (`74f4207`): `tsc` 0 · `next lint` 0 errors (12 pre-existing warnings) · full `vitest` **966 files / 24,582 passed / 9 skipped / 0 failed** (browser suites required) · `npm run build` exit 0.
-* Final tree (`9b26c89` + docs): see the report block in the session hand-off and `final-gates` below.
+| gate | result |
+|---|---|
+| `npx tsc --noEmit` | **exit 0** |
+| `npx next lint` | **exit 0** (0 errors; the 12 pre-existing warnings unchanged) |
+| `REQUIRE_BROWSER_TESTS=1 npx vitest run` (full suite, real-Chromium suites required) | **974 files passed; 25,027 tests passed, 9 skipped, 0 failed** — includes Mathematics batch 41 |
+| `npm run build` (`prisma generate && next build`) | **exit 0** |
+| CI `validate` #4601 on `23c52bf` | **success** |
+| Vercel `dpl_2qXa8KT6TL49AFbwnqicesn57jWa` | **READY**, commit `23c52bf`, aliased to `my-tutor-flame.vercel.app` |
+| Production smoke on that deployment (disposable accounts, deleted, re-login blocked) | shared contrast fix: **16/16 PASS** (4 force-diagram cards, 390/1280, light/dark, each scrolled into view); lens-power + normal-force sliders: **44/44 PASS** (`FINAL2-23c52bf-legibility.json`, `FINAL2-23c52bf-interact.json`) |
 
-Final tree (`9b26c89` + this campaign's docs, before the later Mathematics batch 41 merge): `tsc --noEmit` **exit 0** · `next lint` **exit 0** (0 errors, warnings unchanged) · full `vitest` with browser suites required **973 files / 24,881 passed / 9 skipped / 0 failed** · `npm run build` **exit 0**.
-After merging the other worker's Mathematics batch 41 (math-only: `mathCoreScenesB41.ts`, its test, 19 registry lines): `tsc` and that batch's tests re-run — see the hand-off report.
+History of the same gates on earlier trees: `74f4207` merged tree — full vitest 966 files / 24,582 passed; `9b26c89` + docs — 973 files / 24,881 passed; both with `tsc` 0, lint 0, build 0.
+Nothing was changed in code during this verification; no reopened fixes, no Chemistry data touched, no prepared SQL executed, no scope added.
+
+## Remaining owner decisions (all BLOCKED items, unchanged)
+
+1. **Chemistry — items the Chemistry workstream left REVIEW_REQUIRED:** accept / regenerate / retire the 33 Tier-3 figures judged MINOR; approve (or reject) the 2 prepared Tier-2 corrections (`tier2-corrections-prepared.md`); the chelate-effect chart's 1 UNVERIFIED reference value; **R1's production probe row — the SQL is prepared (`R1-production-probe-fix.sql`) and has NOT been executed**; author a faithful figure for the 14 concepts whose only figure was retired as wrong. Finishing tests: `chemistrySemanticReview.test.ts`, `chemistrySeedEquations.test.ts`.
+2. **Egress:** the already-spent 5 GB cycle total (2026-10-05→07) is a dashboard-only figure and cannot be lowered from the repo; the fix removes the live read that grows with use. Re-measure after real-learner traffic (`captureLineageEgress.test.ts` pins the per-call read).
+3. **Database size 717 MB** (spine_events 283 MB, messages 144 MB, evidence_events 66 MB; 30,436 never-served DRAFT explanations): a data-retention decision. Finishing check: re-measure `pg_database_size` after the decision.
+4. **Observation for the Biology owner (no action requested here):** the all-stages "What's happening?" panel for `bio.plant.mycorrhizae-plant-symbioses` makes that card taller than a laptop window (its last control is reachable by scrolling — verified).
 
 ## Re-running
 

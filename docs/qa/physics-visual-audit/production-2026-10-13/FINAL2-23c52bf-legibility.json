@@ -1,0 +1,529 @@
+{
+ "base": "https://my-tutor-flame.vercel.app",
+ "mode": "legibility",
+ "subject": "physics",
+ "deployment": "dpl_2qXa8KT6TL49AFbwnqicesn57jWa",
+ "commit": "23c52bf",
+ "at": "2026-10-13T13:49:42.759Z",
+ "tally": {
+  "PASS": 16
+ },
+ "accountCleanup": {
+  "deleted": true,
+  "reloginBlocked": true
+ },
+ "rows": [
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "mobile",
+   "theme": "dark",
+   "step": "card 1/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 0,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "take a look at the force diagram on your screen what do you notice about the directions of these arrows",
+    "messageId": "cmv6qets4000dl206skzmzt64"
+   },
+   "markers": {
+    "index": 0,
+    "messageId": "cmv6qets4000dl206skzmzt64",
+    "inViewport": true,
+    "top": 109,
+    "height": 320,
+    "legibilityMarker": true,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-23c52bf/shots-legibility/legibility__phys.mech.force__mobile__dark__card1.png",
+   "verdict": "PASS",
+   "deployment": "dpl_2qXa8KT6TL49AFbwnqicesn57jWa",
+   "commit": "23c52bf"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "mobile",
+   "theme": "dark",
+   "step": "card 2/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 1,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "the diagram you re looking at shows a single object in the centre with several arrows pointing toward or away from it each arrow is labeled gravity an arrow poi",
+    "messageId": "cmv6qfb1r000vl206hirm1oaw"
+   },
+   "markers": {
+    "index": 1,
+    "messageId": "cmv6qfb1r000vl206hirm1oaw",
+    "inViewport": true,
+    "top": 117,
+    "height": 320,
+    "legibilityMarker": true,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-23c52bf/shots-legibility/legibility__phys.mech.force__mobile__dark__card2.png",
+   "verdict": "PASS",
+   "deployment": "dpl_2qXa8KT6TL49AFbwnqicesn57jWa",
+   "commit": "23c52bf"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "mobile",
+   "theme": "dark",
+   "step": "card 3/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 2,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "on the screen you see a simple force diagram a rectangular block represents the object we re examining all the arrows originate from something else earth the su",
+    "messageId": "cmv6qfupl0009l206v1nznf2x"
+   },
+   "markers": {
+    "index": 2,
+    "messageId": "cmv6qfupl0009l206v1nznf2x",
+    "inViewport": true,
+    "top": 117,
+    "height": 320,
+    "legibilityMarker": true,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-23c52bf/shots-legibility/legibility__phys.mech.force__mobile__dark__card3.png",
+   "verdict": "PASS",
+   "deployment": "dpl_2qXa8KT6TL49AFbwnqicesn57jWa",
+   "commit": "23c52bf"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "mobile",
+   "theme": "dark",
+   "step": "card 4/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 3,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": true,
+    "key": "what do you notice about the directions of these arrows",
+    "messageId": "cmv6qg8s5000ll2066eczhps1"
+   },
+   "markers": {
+    "index": 3,
+    "messageId": "cmv6qg8s5000ll2066eczhps1",
+    "inViewport": true,
+    "top": 339,
+    "height": 320,
+    "legibilityMarker": true,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-23c52bf/shots-legibility/legibility__phys.mech.force__mobile__dark__card4.png",
+   "verdict": "PASS",
+   "deployment": "dpl_2qXa8KT6TL49AFbwnqicesn57jWa",
+   "commit": "23c52bf"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "mobile",
+   "theme": "light",
+   "step": "card 1/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 0,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "take a look at the force diagram on your screen what do you notice about the directions of these arrows",
+    "messageId": "cmv6qets4000dl206skzmzt64"
+   },
+   "markers": {
+    "index": 0,
+    "messageId": "cmv6qets4000dl206skzmzt64",
+    "inViewport": true,
+    "top": 117,
+    "height": 320,
+    "legibilityMarker": true,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-23c52bf/shots-legibility/legibility__phys.mech.force__mobile__light__card1.png",
+   "verdict": "PASS",
+   "deployment": "dpl_2qXa8KT6TL49AFbwnqicesn57jWa",
+   "commit": "23c52bf"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "mobile",
+   "theme": "light",
+   "step": "card 2/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 1,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "the diagram you re looking at shows a single object in the centre with several arrows pointing toward or away from it each arrow is labeled gravity an arrow poi",
+    "messageId": "cmv6qfb1r000vl206hirm1oaw"
+   },
+   "markers": {
+    "index": 1,
+    "messageId": "cmv6qfb1r000vl206hirm1oaw",
+    "inViewport": true,
+    "top": 117,
+    "height": 320,
+    "legibilityMarker": true,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-23c52bf/shots-legibility/legibility__phys.mech.force__mobile__light__card2.png",
+   "verdict": "PASS",
+   "deployment": "dpl_2qXa8KT6TL49AFbwnqicesn57jWa",
+   "commit": "23c52bf"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "mobile",
+   "theme": "light",
+   "step": "card 3/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 2,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "on the screen you see a simple force diagram a rectangular block represents the object we re examining all the arrows originate from something else earth the su",
+    "messageId": "cmv6qfupl0009l206v1nznf2x"
+   },
+   "markers": {
+    "index": 2,
+    "messageId": "cmv6qfupl0009l206v1nznf2x",
+    "inViewport": true,
+    "top": 117,
+    "height": 320,
+    "legibilityMarker": true,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-23c52bf/shots-legibility/legibility__phys.mech.force__mobile__light__card3.png",
+   "verdict": "PASS",
+   "deployment": "dpl_2qXa8KT6TL49AFbwnqicesn57jWa",
+   "commit": "23c52bf"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "mobile",
+   "theme": "light",
+   "step": "card 4/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 3,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": true,
+    "key": "what do you notice about the directions of these arrows",
+    "messageId": "cmv6qg8s5000ll2066eczhps1"
+   },
+   "markers": {
+    "index": 3,
+    "messageId": "cmv6qg8s5000ll2066eczhps1",
+    "inViewport": true,
+    "top": 339,
+    "height": 320,
+    "legibilityMarker": true,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-23c52bf/shots-legibility/legibility__phys.mech.force__mobile__light__card4.png",
+   "verdict": "PASS",
+   "deployment": "dpl_2qXa8KT6TL49AFbwnqicesn57jWa",
+   "commit": "23c52bf"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "desktop-column",
+   "theme": "dark",
+   "step": "card 1/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 0,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "take a look at the force diagram on your screen what do you notice about the directions of these arrows",
+    "messageId": "cmv6qets4000dl206skzmzt64"
+   },
+   "markers": {
+    "index": 0,
+    "messageId": "cmv6qets4000dl206skzmzt64",
+    "inViewport": true,
+    "top": 117,
+    "height": 413,
+    "legibilityMarker": true,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-23c52bf/shots-legibility/legibility__phys.mech.force__desktop-column__dark__card1.png",
+   "verdict": "PASS",
+   "deployment": "dpl_2qXa8KT6TL49AFbwnqicesn57jWa",
+   "commit": "23c52bf"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "desktop-column",
+   "theme": "dark",
+   "step": "card 2/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 1,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "the diagram you re looking at shows a single object in the centre with several arrows pointing toward or away from it each arrow is labeled gravity an arrow poi",
+    "messageId": "cmv6qfb1r000vl206hirm1oaw"
+   },
+   "markers": {
+    "index": 1,
+    "messageId": "cmv6qfb1r000vl206hirm1oaw",
+    "inViewport": true,
+    "top": 117,
+    "height": 413,
+    "legibilityMarker": true,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-23c52bf/shots-legibility/legibility__phys.mech.force__desktop-column__dark__card2.png",
+   "verdict": "PASS",
+   "deployment": "dpl_2qXa8KT6TL49AFbwnqicesn57jWa",
+   "commit": "23c52bf"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "desktop-column",
+   "theme": "dark",
+   "step": "card 3/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 2,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "on the screen you see a simple force diagram a rectangular block represents the object we re examining all the arrows originate from something else earth the su",
+    "messageId": "cmv6qfupl0009l206v1nznf2x"
+   },
+   "markers": {
+    "index": 2,
+    "messageId": "cmv6qfupl0009l206v1nznf2x",
+    "inViewport": true,
+    "top": 117,
+    "height": 413,
+    "legibilityMarker": true,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-23c52bf/shots-legibility/legibility__phys.mech.force__desktop-column__dark__card3.png",
+   "verdict": "PASS",
+   "deployment": "dpl_2qXa8KT6TL49AFbwnqicesn57jWa",
+   "commit": "23c52bf"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "desktop-column",
+   "theme": "dark",
+   "step": "card 4/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 3,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": true,
+    "key": "what do you notice about the directions of these arrows",
+    "messageId": "cmv6qg8s5000ll2066eczhps1"
+   },
+   "markers": {
+    "index": 3,
+    "messageId": "cmv6qg8s5000ll2066eczhps1",
+    "inViewport": true,
+    "top": 201,
+    "height": 413,
+    "legibilityMarker": true,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-23c52bf/shots-legibility/legibility__phys.mech.force__desktop-column__dark__card4.png",
+   "verdict": "PASS",
+   "deployment": "dpl_2qXa8KT6TL49AFbwnqicesn57jWa",
+   "commit": "23c52bf"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "desktop-column",
+   "theme": "light",
+   "step": "card 1/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 0,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "take a look at the force diagram on your screen what do you notice about the directions of these arrows",
+    "messageId": "cmv6qets4000dl206skzmzt64"
+   },
+   "markers": {
+    "index": 0,
+    "messageId": "cmv6qets4000dl206skzmzt64",
+    "inViewport": true,
+    "top": 117,
+    "height": 413,
+    "legibilityMarker": true,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-23c52bf/shots-legibility/legibility__phys.mech.force__desktop-column__light__card1.png",
+   "verdict": "PASS",
+   "deployment": "dpl_2qXa8KT6TL49AFbwnqicesn57jWa",
+   "commit": "23c52bf"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "desktop-column",
+   "theme": "light",
+   "step": "card 2/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 1,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "the diagram you re looking at shows a single object in the centre with several arrows pointing toward or away from it each arrow is labeled gravity an arrow poi",
+    "messageId": "cmv6qfb1r000vl206hirm1oaw"
+   },
+   "markers": {
+    "index": 1,
+    "messageId": "cmv6qfb1r000vl206hirm1oaw",
+    "inViewport": true,
+    "top": 117,
+    "height": 413,
+    "legibilityMarker": true,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-23c52bf/shots-legibility/legibility__phys.mech.force__desktop-column__light__card2.png",
+   "verdict": "PASS",
+   "deployment": "dpl_2qXa8KT6TL49AFbwnqicesn57jWa",
+   "commit": "23c52bf"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "desktop-column",
+   "theme": "light",
+   "step": "card 3/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 2,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": false,
+    "key": "on the screen you see a simple force diagram a rectangular block represents the object we re examining all the arrows originate from something else earth the su",
+    "messageId": "cmv6qfupl0009l206v1nznf2x"
+   },
+   "markers": {
+    "index": 2,
+    "messageId": "cmv6qfupl0009l206v1nznf2x",
+    "inViewport": true,
+    "top": 117,
+    "height": 413,
+    "legibilityMarker": true,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-23c52bf/shots-legibility/legibility__phys.mech.force__desktop-column__light__card3.png",
+   "verdict": "PASS",
+   "deployment": "dpl_2qXa8KT6TL49AFbwnqicesn57jWa",
+   "commit": "23c52bf"
+  },
+  {
+   "mode": "legibility",
+   "conceptId": "phys.mech.force",
+   "vp": "desktop-column",
+   "theme": "light",
+   "step": "card 4/4 scrolled into view",
+   "fails": [],
+   "reviews": [],
+   "figure": {
+    "total": 4,
+    "roots": 4,
+    "index": 3,
+    "kind": "card",
+    "selection": "association",
+    "ambiguous": true,
+    "key": "what do you notice about the directions of these arrows",
+    "messageId": "cmv6qg8s5000ll2066eczhps1"
+   },
+   "markers": {
+    "index": 3,
+    "messageId": "cmv6qg8s5000ll2066eczhps1",
+    "inViewport": true,
+    "top": 201,
+    "height": 413,
+    "legibilityMarker": true,
+    "unmeasured": null
+   },
+   "screenshot": "/tmp/claude-0/-home-user-My-tutor/46430cf0-14a2-5d24-b525-3193c314763c/scratchpad/prod-23c52bf/shots-legibility/legibility__phys.mech.force__desktop-column__light__card4.png",
+   "verdict": "PASS",
+   "deployment": "dpl_2qXa8KT6TL49AFbwnqicesn57jWa",
+   "commit": "23c52bf"
+  }
+ ]
+}

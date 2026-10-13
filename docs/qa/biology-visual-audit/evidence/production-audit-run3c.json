@@ -1,0 +1,121 @@
+{
+ "base": "https://my-tutor-flame.vercel.app",
+ "at": "2026-10-13T14:09:59.664Z",
+ "rows": [
+  {
+   "conceptId": "bio.mol.dna-replication",
+   "vp": "desktop",
+   "theme": "dark",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 526,
+     "h": 460
+    },
+    "labelCount": 14,
+    "minFont": 13.44,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "DNA Replication at a Replication Fork",
+    "hScroll": false
+   },
+   "stages": [
+    {
+     "stage": 1,
+     "figures": 1,
+     "canvas": {
+      "w": 526,
+      "h": 460
+     },
+     "labelCount": 2,
+     "minFont": 13.44,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "DNA Replication at a Replication Fork",
+     "hScroll": false
+    },
+    {
+     "stage": 2,
+     "figures": 1,
+     "canvas": {
+      "w": 526,
+      "h": 460
+     },
+     "labelCount": 6,
+     "minFont": 13.44,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "DNA Replication at a Replication Fork",
+     "hScroll": false
+    },
+    {
+     "stage": 3,
+     "figures": 1,
+     "canvas": {
+      "w": 526,
+      "h": 460
+     },
+     "labelCount": 8,
+     "minFont": 13.44,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "DNA Replication at a Replication Fork",
+     "hScroll": false
+    },
+    {
+     "stage": 4,
+     "figures": 1,
+     "canvas": {
+      "w": 526,
+      "h": 460
+     },
+     "labelCount": 10,
+     "minFont": 13.44,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "DNA Replication at a Replication Fork",
+     "hScroll": false
+    },
+    {
+     "stage": 5,
+     "figures": 1,
+     "canvas": {
+      "w": 526,
+      "h": 460
+     },
+     "labelCount": 13,
+     "minFont": 13.44,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "DNA Replication at a Replication Fork",
+     "hScroll": false
+    },
+    {
+     "stage": 6,
+     "figures": 1,
+     "canvas": {
+      "w": 526,
+      "h": 460
+     },
+     "labelCount": 14,
+     "minFont": 13.44,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "DNA Replication at a Replication Fork",
+     "hScroll": false
+    }
+   ],
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  }
+ ]
+}

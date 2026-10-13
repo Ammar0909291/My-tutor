@@ -402,3 +402,32 @@ describe('the "What\'s happening?" panel (cut at 1000 characters, in whole lines
     })
   }
 })
+
+// The independent Educational Brain review of the six repairs (commit d19b00f) changed wording that no other test pinned.
+// Each assertion below follows the entry's own text, so a later edit cannot silently drift the figure away from it.
+describe('wording fixes from the independent Educational Brain review — each pinned to the entry it follows', () => {
+  const narration = (id: string): string[] => served(id).steps.map((s) => s.narration ?? '')
+  it('dna-replication: ligase joins the pieces only once DNA polymerase I has replaced the RNA primers with DNA (EB: "DNA polymerase I then removes the RNA primers and fills the gaps")', () => {
+    const n = narration('bio.mol.dna-replication')
+    expect(n[4]).toMatch(/ligase joins the pieces once DNA polymerase I has replaced the RNA primers with DNA/)
+  })
+  it('cell-theory: Schwann extended it to ANIMALS — the universal first tenet is not put in his mouth (EB: Schleiden 1838 plants, Schwann 1839 animals)', () => {
+    const n = narration(IDS.theory)
+    expect(n[1]).toMatch(/animals, too, are built from cells/)
+    expect(n[1]).not.toMatch(/every living organism|all living things|all organisms|one or more cells/i)
+    expect(n[0]).toMatch(/plants are built from cells/)
+  })
+  it('predator-prey: the functional response is a RATE — kills per predator PER UNIT TIME (EB: "prey killed per predator per unit time")', () => {
+    expect(narration(IDS.predator)[3]).toMatch(/ONE predator kills per unit time/)
+  })
+  it('plant-growth-hormones: titled as the five MAJOR groups (EB: "five major groups"), not a claim that these are the only hormones', () => {
+    expect(served(IDS.hormones).title).toBe('Five Major Plant Hormone Groups')
+  })
+  it('brain-regional-organization: the limbic structures are "functionally linked", not "joined", and the forebrain is the cerebrum and what lies beneath it (EB: limbic system is NOT a single structure)', () => {
+    const spec = served(IDS.brain)
+    expect(spec.ariaLabel).toMatch(/functionally linked/)
+    expect(spec.ariaLabel).not.toMatch(/\bjoined\b/)
+    expect(spec.ariaLabel).toMatch(/the cerebrum and the structures beneath it/)
+    expect(spec.ariaLabel).not.toMatch(/the large cerebrum/)
+  })
+})

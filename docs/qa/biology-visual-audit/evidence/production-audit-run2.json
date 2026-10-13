@@ -1,0 +1,1510 @@
+{
+ "base": "https://my-tutor-flame.vercel.app",
+ "at": "2026-10-13T06:59:18.821Z",
+ "rows": [
+  {
+   "conceptId": "bio.eco.predator-prey-dynamics",
+   "vp": "mobile",
+   "theme": "dark",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 330,
+     "h": 260
+    },
+    "labelCount": 10,
+    "minFont": 10,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Predator and Prey",
+    "hScroll": false
+   },
+   "stages": [
+    {
+     "stage": 1,
+     "figures": 1,
+     "canvas": {
+      "w": 330,
+      "h": 260
+     },
+     "labelCount": 3,
+     "minFont": 11.5,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Predator and Prey",
+     "hScroll": false
+    },
+    {
+     "stage": 2,
+     "figures": 1,
+     "canvas": {
+      "w": 330,
+      "h": 260
+     },
+     "labelCount": 4,
+     "minFont": 11.5,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Predator and Prey",
+     "hScroll": false
+    },
+    {
+     "stage": 3,
+     "figures": 1,
+     "canvas": {
+      "w": 330,
+      "h": 260
+     },
+     "labelCount": 8,
+     "minFont": 10,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Predator and Prey",
+     "hScroll": false
+    },
+    {
+     "stage": 4,
+     "figures": 1,
+     "canvas": {
+      "w": 330,
+      "h": 260
+     },
+     "labelCount": 10,
+     "minFont": 10,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Predator and Prey",
+     "hScroll": false
+    }
+   ],
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.eco.predator-prey-dynamics",
+   "vp": "mobile",
+   "theme": "light",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 330,
+     "h": 260
+    },
+    "labelCount": 10,
+    "minFont": 10,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Predator and Prey",
+    "hScroll": false
+   },
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.eco.predator-prey-dynamics",
+   "vp": "desktop",
+   "theme": "dark",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 526,
+     "h": 340
+    },
+    "labelCount": 10,
+    "minFont": 13.44,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Predator and Prey",
+    "hScroll": false
+   },
+   "stages": [
+    {
+     "stage": 1,
+     "figures": 1,
+     "canvas": {
+      "w": 526,
+      "h": 340
+     },
+     "labelCount": 3,
+     "minFont": 15.488,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Predator and Prey",
+     "hScroll": false
+    },
+    {
+     "stage": 2,
+     "figures": 1,
+     "canvas": {
+      "w": 526,
+      "h": 340
+     },
+     "labelCount": 4,
+     "minFont": 15.488,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Predator and Prey",
+     "hScroll": false
+    },
+    {
+     "stage": 3,
+     "figures": 1,
+     "canvas": {
+      "w": 526,
+      "h": 340
+     },
+     "labelCount": 8,
+     "minFont": 13.44,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Predator and Prey",
+     "hScroll": false
+    },
+    {
+     "stage": 4,
+     "figures": 1,
+     "canvas": {
+      "w": 526,
+      "h": 340
+     },
+     "labelCount": 10,
+     "minFont": 13.44,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Predator and Prey",
+     "hScroll": false
+    }
+   ],
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.eco.predator-prey-dynamics",
+   "vp": "desktop",
+   "theme": "light",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 526,
+     "h": 340
+    },
+    "labelCount": 10,
+    "minFont": 13.44,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Predator and Prey",
+    "hScroll": false
+   },
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.plant.mycorrhizae-plant-symbioses",
+   "vp": "mobile",
+   "theme": "dark",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 330,
+     "h": 460
+    },
+    "labelCount": 10,
+    "minFont": 10,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Root Symbioses",
+    "hScroll": false
+   },
+   "stages": [
+    {
+     "stage": 1,
+     "figures": 1,
+     "canvas": {
+      "w": 330,
+      "h": 460
+     },
+     "labelCount": 2,
+     "minFont": 11.5,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Root Symbioses",
+     "hScroll": false
+    },
+    {
+     "stage": 2,
+     "figures": 1,
+     "canvas": {
+      "w": 330,
+      "h": 460
+     },
+     "labelCount": 5,
+     "minFont": 10,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Root Symbioses",
+     "hScroll": false
+    },
+    {
+     "stage": 3,
+     "figures": 1,
+     "canvas": {
+      "w": 330,
+      "h": 460
+     },
+     "labelCount": 5,
+     "minFont": 10,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Root Symbioses",
+     "hScroll": false
+    },
+    {
+     "stage": 4,
+     "figures": 1,
+     "canvas": {
+      "w": 330,
+      "h": 460
+     },
+     "labelCount": 7,
+     "minFont": 10,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Root Symbioses",
+     "hScroll": false
+    },
+    {
+     "stage": 5,
+     "figures": 1,
+     "canvas": {
+      "w": 330,
+      "h": 460
+     },
+     "labelCount": 8,
+     "minFont": 10,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Root Symbioses",
+     "hScroll": false
+    },
+    {
+     "stage": 6,
+     "figures": 1,
+     "canvas": {
+      "w": 330,
+      "h": 460
+     },
+     "labelCount": 9,
+     "minFont": 10,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Root Symbioses",
+     "hScroll": false
+    },
+    {
+     "stage": 7,
+     "figures": 1,
+     "canvas": {
+      "w": 330,
+      "h": 460
+     },
+     "labelCount": 10,
+     "minFont": 10,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Root Symbioses",
+     "hScroll": false
+    }
+   ],
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.plant.mycorrhizae-plant-symbioses",
+   "vp": "mobile",
+   "theme": "light",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 330,
+     "h": 460
+    },
+    "labelCount": 10,
+    "minFont": 10,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Root Symbioses",
+    "hScroll": false
+   },
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.plant.mycorrhizae-plant-symbioses",
+   "vp": "desktop",
+   "theme": "dark",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 526,
+     "h": 580
+    },
+    "labelCount": 10,
+    "minFont": 13.44,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Root Symbioses",
+    "hScroll": false
+   },
+   "stages": [
+    {
+     "stage": 1,
+     "figures": 1,
+     "canvas": {
+      "w": 526,
+      "h": 580
+     },
+     "labelCount": 2,
+     "minFont": 15.488,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Root Symbioses",
+     "hScroll": false
+    },
+    {
+     "stage": 2,
+     "figures": 1,
+     "canvas": {
+      "w": 526,
+      "h": 580
+     },
+     "labelCount": 5,
+     "minFont": 13.44,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Root Symbioses",
+     "hScroll": false
+    },
+    {
+     "stage": 3,
+     "figures": 1,
+     "canvas": {
+      "w": 526,
+      "h": 580
+     },
+     "labelCount": 5,
+     "minFont": 13.44,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Root Symbioses",
+     "hScroll": false
+    },
+    {
+     "stage": 4,
+     "figures": 1,
+     "canvas": {
+      "w": 526,
+      "h": 580
+     },
+     "labelCount": 7,
+     "minFont": 13.44,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Root Symbioses",
+     "hScroll": false
+    },
+    {
+     "stage": 5,
+     "figures": 1,
+     "canvas": {
+      "w": 526,
+      "h": 580
+     },
+     "labelCount": 8,
+     "minFont": 13.44,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Root Symbioses",
+     "hScroll": false
+    },
+    {
+     "stage": 6,
+     "figures": 1,
+     "canvas": {
+      "w": 526,
+      "h": 580
+     },
+     "labelCount": 9,
+     "minFont": 13.44,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Root Symbioses",
+     "hScroll": false
+    },
+    {
+     "stage": 7,
+     "figures": 1,
+     "canvas": {
+      "w": 526,
+      "h": 580
+     },
+     "labelCount": 10,
+     "minFont": 13.44,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Root Symbioses",
+     "hScroll": false
+    }
+   ],
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.plant.mycorrhizae-plant-symbioses",
+   "vp": "desktop",
+   "theme": "light",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 526,
+     "h": 580
+    },
+    "labelCount": 10,
+    "minFont": 13.44,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Root Symbioses",
+    "hScroll": false
+   },
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.plant.plant-growth-hormones",
+   "vp": "mobile",
+   "theme": "dark",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 330,
+     "h": 420
+    },
+    "labelCount": 14,
+    "minFont": 10,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Five Major Plant Hormone Groups",
+    "hScroll": false
+   },
+   "stages": [
+    {
+     "stage": 1,
+     "figures": 1,
+     "canvas": {
+      "w": 330,
+      "h": 420
+     },
+     "labelCount": 4,
+     "minFont": 10,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Five Major Plant Hormone Groups",
+     "hScroll": false
+    },
+    {
+     "stage": 2,
+     "figures": 1,
+     "canvas": {
+      "w": 330,
+      "h": 420
+     },
+     "labelCount": 6,
+     "minFont": 10,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Five Major Plant Hormone Groups",
+     "hScroll": false
+    },
+    {
+     "stage": 3,
+     "figures": 1,
+     "canvas": {
+      "w": 330,
+      "h": 420
+     },
+     "labelCount": 9,
+     "minFont": 10,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Five Major Plant Hormone Groups",
+     "hScroll": false
+    },
+    {
+     "stage": 4,
+     "figures": 1,
+     "canvas": {
+      "w": 330,
+      "h": 420
+     },
+     "labelCount": 11,
+     "minFont": 10,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Five Major Plant Hormone Groups",
+     "hScroll": false
+    },
+    {
+     "stage": 5,
+     "figures": 1,
+     "canvas": {
+      "w": 330,
+      "h": 420
+     },
+     "labelCount": 14,
+     "minFont": 10,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Five Major Plant Hormone Groups",
+     "hScroll": false
+    }
+   ],
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.plant.plant-growth-hormones",
+   "vp": "mobile",
+   "theme": "light",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 330,
+     "h": 420
+    },
+    "labelCount": 14,
+    "minFont": 10,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Five Major Plant Hormone Groups",
+    "hScroll": false
+   },
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.plant.plant-growth-hormones",
+   "vp": "desktop",
+   "theme": "dark",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 526,
+     "h": 580
+    },
+    "labelCount": 14,
+    "minFont": 13.44,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Five Major Plant Hormone Groups",
+    "hScroll": false
+   },
+   "stages": [
+    {
+     "stage": 1,
+     "figures": 1,
+     "canvas": {
+      "w": 526,
+      "h": 580
+     },
+     "labelCount": 4,
+     "minFont": 13.44,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Five Major Plant Hormone Groups",
+     "hScroll": false
+    },
+    {
+     "stage": 2,
+     "figures": 1,
+     "canvas": {
+      "w": 526,
+      "h": 580
+     },
+     "labelCount": 6,
+     "minFont": 13.44,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Five Major Plant Hormone Groups",
+     "hScroll": false
+    },
+    {
+     "stage": 3,
+     "figures": 1,
+     "canvas": {
+      "w": 526,
+      "h": 580
+     },
+     "labelCount": 9,
+     "minFont": 13.44,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Five Major Plant Hormone Groups",
+     "hScroll": false
+    },
+    {
+     "stage": 4,
+     "figures": 1,
+     "canvas": {
+      "w": 526,
+      "h": 580
+     },
+     "labelCount": 11,
+     "minFont": 13.44,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Five Major Plant Hormone Groups",
+     "hScroll": false
+    },
+    {
+     "stage": 5,
+     "figures": 1,
+     "canvas": {
+      "w": 526,
+      "h": 580
+     },
+     "labelCount": 14,
+     "minFont": 13.44,
+     "overlaps": [],
+     "outside": [],
+     "leaks": [],
+     "title": "Five Major Plant Hormone Groups",
+     "hScroll": false
+    }
+   ],
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.plant.plant-growth-hormones",
+   "vp": "desktop",
+   "theme": "light",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 526,
+     "h": 580
+    },
+    "labelCount": 14,
+    "minFont": 13.44,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Five Major Plant Hormone Groups",
+    "hScroll": false
+   },
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.found.what-is-biology",
+   "vp": "mobile",
+   "theme": "dark",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 330,
+     "h": 260
+    },
+    "labelCount": 7,
+    "minFont": 10,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Biology's Branches Are Entry Angles, Not Separate Subjects",
+    "hScroll": false
+   },
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.found.what-is-biology",
+   "vp": "mobile",
+   "theme": "light",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 330,
+     "h": 260
+    },
+    "labelCount": 7,
+    "minFont": 10,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Biology's Branches Are Entry Angles, Not Separate Subjects",
+    "hScroll": false
+   },
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.found.what-is-biology",
+   "vp": "desktop",
+   "theme": "dark",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 526,
+     "h": 300
+    },
+    "labelCount": 7,
+    "minFont": 13.44,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Biology's Branches Are Entry Angles, Not Separate Subjects",
+    "hScroll": false
+   },
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.found.what-is-biology",
+   "vp": "desktop",
+   "theme": "light",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 526,
+     "h": 300
+    },
+    "labelCount": 7,
+    "minFont": 13.44,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Biology's Branches Are Entry Angles, Not Separate Subjects",
+    "hScroll": false
+   },
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.cell.cell-membrane-transport",
+   "vp": "mobile",
+   "theme": "dark",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 330,
+     "h": 260
+    },
+    "labelCount": 9,
+    "minFont": 10,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Cell Membrane and Transport",
+    "hScroll": false
+   },
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.cell.cell-membrane-transport",
+   "vp": "mobile",
+   "theme": "light",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 330,
+     "h": 260
+    },
+    "labelCount": 9,
+    "minFont": 10,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Cell Membrane and Transport",
+    "hScroll": false
+   },
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.cell.cell-membrane-transport",
+   "vp": "desktop",
+   "theme": "dark",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 526,
+     "h": 380
+    },
+    "labelCount": 9,
+    "minFont": 13.44,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Cell Membrane and Transport",
+    "hScroll": false
+   },
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.cell.cell-membrane-transport",
+   "vp": "desktop",
+   "theme": "light",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 526,
+     "h": 380
+    },
+    "labelCount": 9,
+    "minFont": 13.44,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Cell Membrane and Transport",
+    "hScroll": false
+   },
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.mol.enzymes",
+   "vp": "mobile",
+   "theme": "dark",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 330,
+     "h": 260
+    },
+    "labelCount": 4,
+    "minFont": 10,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Competitive vs. Non-Competitive Enzyme Inhibition",
+    "hScroll": false
+   },
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.mol.enzymes",
+   "vp": "mobile",
+   "theme": "light",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 330,
+     "h": 260
+    },
+    "labelCount": 4,
+    "minFont": 10,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Competitive vs. Non-Competitive Enzyme Inhibition",
+    "hScroll": false
+   },
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.mol.enzymes",
+   "vp": "desktop",
+   "theme": "dark",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 526,
+     "h": 300
+    },
+    "labelCount": 4,
+    "minFont": 13.44,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Competitive vs. Non-Competitive Enzyme Inhibition",
+    "hScroll": false
+   },
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.mol.enzymes",
+   "vp": "desktop",
+   "theme": "light",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 526,
+     "h": 300
+    },
+    "labelCount": 4,
+    "minFont": 13.44,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Competitive vs. Non-Competitive Enzyme Inhibition",
+    "hScroll": false
+   },
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.plant.photosynthesis",
+   "vp": "mobile",
+   "theme": "dark",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 330,
+     "h": 260
+    },
+    "labelCount": 2,
+    "minFont": 10,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Photosynthesis",
+    "hScroll": false
+   },
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.plant.photosynthesis",
+   "vp": "mobile",
+   "theme": "light",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 330,
+     "h": 260
+    },
+    "labelCount": 2,
+    "minFont": 10,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Photosynthesis",
+    "hScroll": false
+   },
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.plant.photosynthesis",
+   "vp": "desktop",
+   "theme": "dark",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 526,
+     "h": 300
+    },
+    "labelCount": 2,
+    "minFont": 13.44,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Photosynthesis",
+    "hScroll": false
+   },
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.plant.photosynthesis",
+   "vp": "desktop",
+   "theme": "light",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 526,
+     "h": 300
+    },
+    "labelCount": 2,
+    "minFont": 13.44,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Photosynthesis",
+    "hScroll": false
+   },
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.gen.mendelian-genetics",
+   "vp": "mobile",
+   "theme": "dark",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 330,
+     "h": 260
+    },
+    "labelCount": 9,
+    "minFont": 10,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Punnett Square",
+    "hScroll": false
+   },
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.gen.mendelian-genetics",
+   "vp": "mobile",
+   "theme": "light",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 330,
+     "h": 260
+    },
+    "labelCount": 9,
+    "minFont": 10,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Punnett Square",
+    "hScroll": false
+   },
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.gen.mendelian-genetics",
+   "vp": "desktop",
+   "theme": "dark",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 526,
+     "h": 300
+    },
+    "labelCount": 9,
+    "minFont": 13.44,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Punnett Square",
+    "hScroll": false
+   },
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.gen.mendelian-genetics",
+   "vp": "desktop",
+   "theme": "light",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 526,
+     "h": 300
+    },
+    "labelCount": 9,
+    "minFont": 13.44,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Punnett Square",
+    "hScroll": false
+   },
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.evo.natural-selection",
+   "vp": "mobile",
+   "theme": "dark",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 330,
+     "h": 260
+    },
+    "labelCount": 5,
+    "minFont": 10,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Natural Selection",
+    "hScroll": false
+   },
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.evo.natural-selection",
+   "vp": "mobile",
+   "theme": "light",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 330,
+     "h": 260
+    },
+    "labelCount": 5,
+    "minFont": 10,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Natural Selection",
+    "hScroll": false
+   },
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.evo.natural-selection",
+   "vp": "desktop",
+   "theme": "dark",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 526,
+     "h": 300
+    },
+    "labelCount": 5,
+    "minFont": 13.44,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Natural Selection",
+    "hScroll": false
+   },
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.evo.natural-selection",
+   "vp": "desktop",
+   "theme": "light",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 526,
+     "h": 300
+    },
+    "labelCount": 5,
+    "minFont": 13.44,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Natural Selection",
+    "hScroll": false
+   },
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.physio.circulatory-system",
+   "vp": "mobile",
+   "theme": "dark",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 330,
+     "h": 260
+    },
+    "labelCount": 4,
+    "minFont": 10,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Double Circulation",
+    "hScroll": false
+   },
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.physio.circulatory-system",
+   "vp": "mobile",
+   "theme": "light",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 330,
+     "h": 260
+    },
+    "labelCount": 4,
+    "minFont": 10,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Double Circulation",
+    "hScroll": false
+   },
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.physio.circulatory-system",
+   "vp": "desktop",
+   "theme": "dark",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 526,
+     "h": 300
+    },
+    "labelCount": 4,
+    "minFont": 13.44,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Double Circulation",
+    "hScroll": false
+   },
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.physio.circulatory-system",
+   "vp": "desktop",
+   "theme": "light",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 526,
+     "h": 300
+    },
+    "labelCount": 4,
+    "minFont": 13.44,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Double Circulation",
+    "hScroll": false
+   },
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.eco.ecosystem-structure-function",
+   "vp": "mobile",
+   "theme": "dark",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 330,
+     "h": 260
+    },
+    "labelCount": 4,
+    "minFont": 10,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Ecological Pyramid",
+    "hScroll": false
+   },
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.eco.ecosystem-structure-function",
+   "vp": "mobile",
+   "theme": "light",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 330,
+     "h": 260
+    },
+    "labelCount": 4,
+    "minFont": 10,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Ecological Pyramid",
+    "hScroll": false
+   },
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.eco.ecosystem-structure-function",
+   "vp": "desktop",
+   "theme": "dark",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 526,
+     "h": 300
+    },
+    "labelCount": 4,
+    "minFont": 13.44,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Ecological Pyramid",
+    "hScroll": false
+   },
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  },
+  {
+   "conceptId": "bio.eco.ecosystem-structure-function",
+   "vp": "desktop",
+   "theme": "light",
+   "provider": "groq",
+   "sameAsAudited": true,
+   "default": {
+    "figures": 1,
+    "canvas": {
+     "w": 526,
+     "h": 300
+    },
+    "labelCount": 4,
+    "minFont": 13.44,
+    "overlaps": [],
+    "outside": [],
+    "leaks": [],
+    "title": "Ecological Pyramid",
+    "hScroll": false
+   },
+   "flags": [],
+   "verdict": "MEASURED_CLEAN"
+  }
+ ]
+}

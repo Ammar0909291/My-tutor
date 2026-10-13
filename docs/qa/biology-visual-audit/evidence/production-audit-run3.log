@@ -1,0 +1,32 @@
+production curriculum: 199 biology lessons
+bio.neuro.brain-regional-organization: provider=groq figure=true sameAsAudited=true
+  mobile  dark  NOT_RUN Error: page.goto: net::ERR_TIMED_OUT at https://my-tutor-flame.vercel.app/learn?subject=biology
+  mobile  light NOT_RUN TimeoutError: page.waitForSelector: Timeout 60000ms exceeded.
+  desktop dark  MEASURED_CLEAN 
+  desktop light MEASURED_CLEAN 
+bio.cell.cell-theory: provider=groq figure=true sameAsAudited=true
+  mobile  dark  MEASURED_CLEAN 
+  mobile  light MEASURED_CLEAN 
+  desktop dark  MEASURED_CLEAN 
+  desktop light MEASURED_CLEAN 
+bio.mol.dna-replication: provider=groq figure=true sameAsAudited=true
+  mobile  dark  MEASURED_CLEAN 
+  mobile  light MEASURED_CLEAN 
+  desktop dark  NOT_RUN Error: page.goto: net::ERR_TIMED_OUT at https://my-tutor-flame.vercel.app/learn?subject=biology
+  desktop light MEASURED_CLEAN 
+bio.eco.predator-prey-dynamics: provider=groq figure=true sameAsAudited=true
+  mobile  dark  MEASURED_CLEAN 
+  mobile  light MEASURED_CLEAN 
+  desktop dark  MEASURED_CLEAN 
+  desktop light MEASURED_CLEAN 
+bio.plant.mycorrhizae-plant-symbioses: provider=groq figure=true sameAsAudited=true
+  mobile  dark  MEASURED_CLEAN 
+  mobile  light MEASURED_CLEAN 
+  desktop dark  MEASURED_CLEAN 
+  desktop light MEASURED_CLEAN 
+bio.plant.plant-growth-hormones: provider=groq figure=true sameAsAudited=true
+  mobile  dark  MEASURED_CLEAN 
+  mobile  light MEASURED_CLEAN 
+  desktop dark  MEASURED_CLEAN 
+  desktop light MEASURED_CLEAN 
+disposable account deleted = true  re-login blocked = true

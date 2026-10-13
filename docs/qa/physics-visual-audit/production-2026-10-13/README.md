@@ -12,6 +12,7 @@ concept and (for figures) the id of the message whose card was measured.
 | `force-family-after-74f4207.json` | weight/normal label clearance for the force-diagram family (free-body-diagram, equilibrium reach step 5: 6.8 px at 390, 10.7 px at 1280; force/friction replies too short to draw those steps — harness limit) | `74f4207` | 16/16 PASS |
 | `74f4207-biology.json`, `FINAL-9b26c89-biology.json` | the six Biology figures resolved by the Biology workstream, 4 views each | `74f4207`; `9b26c89` | 22 PASS + 2 FAIL (both `bio.plant.mycorrhizae-plant-symbioses` @1280, RD-02 "More insights" clipped) — classified below |
 | `74f4207-chemistry.json`, `FINAL-9b26c89-chemistry*.json` | five Chemistry figures incl. Born–Haber (`chem.thermo.bond-enthalpy`), Hess, galvanic cell, real gases, crystal field, 4 views each | `74f4207`; `9b26c89` | 20/20 PASS on `74f4207`; on `9b26c89` 19 PASS + 1 NOT_RUN (network timeout), that cell re-run: PASS |
+| `FINAL2-23c52bf-legibility.json`, `FINAL2-23c52bf-interact.json` | smoke on the last deployment (adds Mathematics batch 41): shared contrast fix and the two interactive scenes | `dpl_2qXa8KT6…` / `23c52bf` | **16/16 PASS** and **44/44 PASS** |
 | `regression-2026-10-13.json` | local real-Chromium regression of the shared-component changes (hook, GraphRenderer) | merged tree | see file: 40 Physics graph concepts 40/40 unchanged; 180 Chemistry Tier-2/3 states identical to the committed record |
 
 ## The two Biology FAIL rows are a harness position artifact, not an app defect (checked, not assumed)
