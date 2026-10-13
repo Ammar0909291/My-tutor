@@ -180,7 +180,7 @@ export function buildPredatorPreyScene(): SceneSpec {
     {
       intent: 'connect',
       narration:
-        'Predation pressure has two parts that act at different levels. The functional response is how many prey ONE predator kills as prey density changes (individual ' +
+        'Predation pressure has two parts that act at different levels. The functional response is how many prey ONE predator kills per unit time as prey density changes (individual ' +
         'behaviour, e.g. limited by handling time). The numerical response is how the predator POPULATION changes with prey supply, through reproduction and migration, over a longer timescale. Both together decide the pressure the prey feel.',
       objects: responses,
     },

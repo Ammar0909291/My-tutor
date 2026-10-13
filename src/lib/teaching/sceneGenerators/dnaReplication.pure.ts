@@ -196,7 +196,7 @@ export function buildDNAReplicationScene(): SceneSpec {
         intent: 'resolve',
         narration:
           'On the bottom template 5′→3′ points away from the fork, so each Okazaki fragment grows away ' +
-          'from it, from a new primer laid nearer the fork as it opens; ligase then joins the pieces.',
+          'from it, from a new primer laid nearer the fork as it opens; ligase joins the pieces once DNA polymerase I has replaced the RNA primers with DNA.',
         objects: [...lagging, ...ligase],
       },
       {

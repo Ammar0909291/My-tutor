@@ -223,8 +223,8 @@ export function buildBrainRegionsScene(): SceneSpec {
       'as a finer subdivision within the forebrain; the limbic system as a functional set of linked structures; the cerebellum and brainstem.',
     cameraDistance: 16,
     ariaLabel:
-      'A side view of the brain, front on the left. Stage 1: the forebrain (the large cerebrum), the midbrain below it and the hindbrain (cerebellum, pons, medulla). ' +
-      'Stage 2: the cerebrum divided into frontal, parietal, temporal and occipital lobes, all inside the forebrain. Stage 3: the hippocampus and amygdala, joined as the ' +
+      'A side view of the brain, front on the left. Stage 1: the forebrain (the cerebrum and the structures beneath it), the midbrain below it and the hindbrain (cerebellum, pons, medulla). ' +
+      'Stage 2: the cerebrum divided into frontal, parietal, temporal and occipital lobes, all inside the forebrain. Stage 3: the hippocampus and amygdala, functionally linked as the ' +
       'limbic system. Stage 4: the cerebellum and the medulla and pons.',
     explainer: {
       legend: [

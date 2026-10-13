@@ -1163,7 +1163,7 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     teachingGoal: 'Three contributions, in sequence, built the generalisation: Schleiden (1838) for plants, Schwann (1839) for animals, and Virchow (1855), who added that cells arise only from pre-existing cells.',
     stages: [
       { name: 'Schleiden, 1838', description: 'established the generalisation for plants: plants are built from cells' },
-      { name: 'Schwann, 1839', description: 'extended it to animals: every living organism is built from one or more cells' },
+      { name: 'Schwann, 1839', description: 'extended it to animals: animals, too, are built from cells' },
       { name: 'Virchow, 1855', description: 'added “omnis cellula e cellula”: cells arise only from pre-existing cells, which ruled out spontaneous generation of new cells under present conditions' },
       { name: 'Cell theory', description: 'the three tenets together: all organisms are made of one or more cells; the cell is the basic structural and functional unit of life; all cells arise from pre-existing cells. How the very first cells arose is a separate question (abiogenesis) that cell theory neither addresses nor contradicts' },
     ],
@@ -1966,10 +1966,10 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   // opposing pair for senescence. Nine captions in all — the most one view may carry — so each hormone shows what it does, not only its name.
   'bio.plant.plant-growth-hormones': () => buildCellComparisonScene({
     conceptId: 'bio.plant.plant-growth-hormones',
-    title: 'The Five Plant Hormones',
+    title: 'Five Major Plant Hormone Groups',
     teachingGoal: '"Auxins always promote growth" is false — the same concentration that promotes shoot elongation INHIBITS root elongation.',
     groups: [
-      { label: 'Auxins (IAA)', description: 'promote cell elongation in shoot tips and redistribute with light and gravity. In phototropism auxin moves AWAY from the light, so the SHADED side elongates more and the shoot bends toward the light. Roots are about 1000x more sensitive than shoots, so a level that promotes shoot elongation can inhibit root elongation', items: ['Shoot-tip cell elongation', 'Moves away from light: shaded side grows more', 'Roots ~1000× more sensitive'] },
+      { label: 'Auxins (IAA)', description: 'promote cell elongation in shoot tips and redistribute with light and gravity. In phototropism auxin moves AWAY from the light, so the SHADED side elongates more and the shoot bends toward the light. Roots are about 1000x more sensitive than shoots, so a level that promotes shoot elongation can inhibit root elongation', items: ['Shoot-tip cell elongation', 'Auxin leaves lit side: shaded side grows more', 'Roots ~1000× more sensitive'] },
       { label: 'Gibberellins', description: 'promote stem elongation, seed germination, and breaking dormancy', items: ['Stem growth, germination, breaking dormancy'] },
       { label: 'Cytokinins', description: 'promote cell division and DELAY leaf senescence. Ethylene promotes senescence: the two are an opposing pair controlling whether a leaf or fruit ages and falls', items: ['Cell division; delays leaf senescence', 'Opposes ethylene on senescence'] },
       { label: 'Abscisic acid', description: 'the "stress hormone": promotes stomatal closure during drought, and promotes dormancy and seed maturation', items: ['Stomatal closure, dormancy'] },

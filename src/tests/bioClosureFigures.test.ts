@@ -259,7 +259,7 @@ describe('F. plant-growth-hormones — every hormone carries a source-supported 
     for (let i = 0; i < 5; i++) expect(group(i).length, `group ${i}`).toBeGreaterThanOrEqual(1)
   })
   it('states the entry\'s load-bearing claims: phototropism direction, root sensitivity, and the cytokinin/ethylene opposition', () => {
-    expect(group(0).join(' | ')).toMatch(/away from light: shaded side grows more/)
+    expect(group(0).join(' | ')).toMatch(/Auxin leaves lit side: shaded side grows more/)
     expect(group(0).join(' | ')).toMatch(/Roots ~1000× more sensitive/)
     expect(group(2).join(' | ')).toMatch(/delays leaf senescence/)
     expect(group(2).join(' | ')).toMatch(/Opposes ethylene/)
