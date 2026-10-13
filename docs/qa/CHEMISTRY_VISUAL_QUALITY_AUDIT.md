@@ -426,7 +426,31 @@ Findings (none fixed by redeploying unreviewed data; each has an owner):
 * The 8 NOT_RUN are all the two Tier-2 concepts above (4 states each); the earlier timeouts on other concepts (`ERR_TIMED_OUT`) passed on re-run.
 
 ### 13.1 After the fix deployed
-Deployment `dpl_8xJhAhCHsRz7gCvnGWVUjwHjAdR5` (commit `6fe384b`, READY; alias `my-tutor-flame.vercel.app` listed on it). A later commit that only adds Mathematics work was already building behind it, so the alias moves on without changing any Chemistry output. Harness re-run on `chem.period.periodic-properties`, `chem.period.modern-periodic-law` and the `chem.bond.vsepr` control: **12/12 PASS** (3 concepts × 390/1280 px × both themes), the wire figure's fingerprint `fdfe75ee0` equals the checkout's, and the screenshots show the two spheres to scale with their pm captions. The disposable account was deleted; a read-only count shows 26 `qa-*@mytutor-qa.invalid` rows, all created 2026-09-01 … 2026-10-02 by earlier campaigns — none from this closure's runs (every run here printed `deleted = true`). They were left alone: deleting them is a production write for the owner.
+Deployment `dpl_8xJhAhCHsRz7gCvnGWVUjwHjAdR5` (commit `6fe384b`, READY; alias `my-tutor-flame.vercel.app` listed on it). A later commit that only adds Mathematics work built behind it, so the alias moved on without changing any Chemistry output. Harness re-run on `chem.period.periodic-properties`, `chem.period.modern-periodic-law` and the `chem.bond.vsepr` control: **12/12 PASS** (3 concepts × 390/1280 px × both themes), the wire figure's fingerprint `fdfe75ee0` equals the checkout's, and the screenshots show the two spheres to scale with their pm captions. The disposable account was deleted; a read-only count shows 26 `qa-*@mytutor-qa.invalid` rows, all created 2026-09-01 … 2026-10-02 by earlier campaigns — none from this closure's runs (every run here printed `deleted = true`). They were left alone: deleting them is a production write for the owner.
 
 Observation, not changed: in that run the tutor's own reply said chlorine has "a radius of 99 pm" while the figure draws and captions 79 pm. Both are real figures (99 pm is a covalent radius; the figure uses the calculated 79 pm and the step narration says so), but the learner sees two numbers. The figure cannot control what the model writes; the model check-pass (`factCheckPass.ts`) did not flag it because both numbers are defensible. If it proves confusing, the captions could say "79 pm (calculated)" — owner's call.
+
+## 14. Closure statement and follow-up backlog (2026-10-13)
+
+**CLOSED — CHEMISTRY VISUAL QUALITY AUDIT.** Verified at `origin/main` = `a2138c9`: GitHub Actions `validate` run #4611 completed `success`
+(`actions/runs/38414968281`); Vercel production deployment `dpl_9ESiipHSwjAXzek9p4P7EusoAeHf` for that commit is READY with `my-tutor-flame.vercel.app`
+attached and no alias error. The committed record was re-read against its files: 186 concepts (E 100 · D 59 · B 14 · A 13), 134 instances, 1,086 rendered states
+(990 PASS · 96 REVIEW_REQUIRED · 0 FAIL), 81 ledger decisions (22 PASS · 23 FIXED→PASS · 36 REVIEW_REQUIRED), reference-data ledger 41 MATCH · 27 WITHIN_ROUNDING ·
+1 UNVERIFIED · 0 MISMATCH. The Periodic Trends production finding is fixed and re-verified (§12.3, §13.1: 12/12 PASS on `6fe384b`, fingerprint `fdfe75ee0`).
+
+**Closing the audit is not resolving every Chemistry issue.** The audit is closed because every served figure was measured, every defect it could fix inside the
+existing architecture was fixed, and every remainder is named below with who decides. Nothing below was executed, applied or deleted by the closure. No further
+Chemistry work is queued; reopen only for a new defect or an explicit owner instruction.
+
+| # | Owner decision (all OPEN) | Kind | Where recorded |
+|---|---|---|---|
+| 1 | Execute `R1-production-probe-fix.sql` (the production probe row) | production write — prepared, **not executed** | §12.2 R1; `docs/qa/chemistry-visual-audit/R1-production-probe-fix.sql` |
+| 2 | Apply the prepared corrections to the two approved Tier-2 flows (`chem.found.significant-figures`, `chem.found.stoichiometry`) | production write — prepared, **not applied** | §12.4; `tier2-corrections-prepared.md` |
+| 3 | The 33 Tier-3 figures the independent reviewer called MINOR: accept, regenerate or retire | content decision; they stay served and REVIEW_REQUIRED | §12.4; `semantic-review.json`, `tier3-independent-review.json` |
+| 4 | The chelate-effect bar chart's data (log Kf 13.0 vs 11.75; a not-like-for-like pair) — the one UNVERIFIED reference value | data decision | §12.4 (R17); `reference-data-ledger.json` |
+| 5 | Retired concepts regenerate unreviewed figures (3 of 6 B concepts sampled in production): author Tier-0 figures for the 14 B concepts, or add a pre-generation withhold | design decision | §13 |
+| 6 | Tier-2 approved figures are not restored after a page reload (restore reads Tier 0/1 and the Tier-3 cache, never the approved `visual_assets` row): let the restore fall back to the approved row under the same re-validation | session-persistence change; the live-turn display of a Tier-2 figure was not browser-verified | §13 |
+| 7 | A header label can sit on its sphere (colloids): frame Chemistry canvases with caption headroom (`fitToCanvas` is Biology-only) | shared-renderer change (Physics and Mathematics use it) | §12.4 |
+| 8 | Optional: caption the periodic-trend spheres "79 pm (calculated)" because the tutor's reply quoted a different (covalent) radius for Cl | wording | §13.1 |
+| 9 | Delete the 26 old `qa-*@mytutor-qa.invalid` rows (created 2026-09-01 … 2026-10-02 by earlier campaigns; none from this closure) | production write | §13.1 |
 

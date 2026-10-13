@@ -112,6 +112,10 @@ Re-verified after the deploy (`6fe384b`, `dpl_8xJhAhCHsRz7gCvnGWVUjwHjAdR5`): th
 * **A check you did not run is not a PASS.** The local render has no ink check; the new static gate states the property directly instead of waiting for a browser to see it.
 * **Do not "fix" a layout symptom by turning the nearest constant.** The gap change moved nothing and made the expanded view overflow; measure what moves before keeping it.
 
-## Not done (see QA doc §12.4)
+## Closure (2026-10-13)
+The Chemistry visual quality audit is CLOSED at `a2138c9` (CI `validate` success, production deployment READY). The nine open owner decisions are consolidated in
+QA doc §14; closing the audit does not resolve them. No Chemistry work is queued until a new defect or an explicit owner instruction.
+
+## Not done (see QA doc §14)
 33 MINOR Tier-3 figures, the two Tier-2 flows, the chelate-effect chart's data and the R1 production row await owner decisions; the 14 retired-as-wrong concepts
 have no figure; production verification is recorded in QA doc §13.
