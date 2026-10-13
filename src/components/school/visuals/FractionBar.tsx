@@ -36,9 +36,9 @@ export function FractionBar({ revealStep = Infinity }: { revealStep?: number }) 
                 <rect key={`f${s}`} className={anim.reveal} x={36 + s * segW} y={y} width={segW - 2} height={barH}
                   fill={color} stroke="var(--border-default)" strokeWidth={1} rx={3} />
               ))}
-            {/* Step 4 — value caption inside the filled part */}
+            {/* Step 4 — value caption inside the filled part: centred in a CELL (the middle filled one, or the first of two), never on a divider — with an even numerator the centre of the filled part is a cell border and the "/" was drawn across it (Mathematics render audit LY-02/CT-01). */}
             {show(4) && (
-              <text className={anim.writeIn} x={36 + (num * segW) / 2} y={y + barH / 2 + 4} textAnchor="middle" fontSize={9} fill="white" fontWeight={700}>{num}/{den}</text>
+              <text className={anim.writeIn} x={36 + (Math.floor((num - 1) / 2) + 0.5) * segW - 1} y={y + barH / 2 + 4} textAnchor="middle" fontSize={9} fill="white" fontWeight={700}>{num}/{den}</text>
             )}
           </g>
         )

@@ -333,7 +333,7 @@ export const approxSimple = (n: number, x: number) => Math.min(n + 1, Math.floor
 export const smpL = (x: number, y: number): Pt => [SMP.L.ox + SMP.L.ux * x, SMP.L.oy + SMP.L.uy * y]
 export const smpR = (x: number, y: number): Pt => [SMP.R.ox + SMP.R.ux * x, SMP.R.oy + SMP.R.uy * y]
 
-/** KG: φ = Σ aᵢ 1_{Eᵢ}, ∫φ dμ = Σ aᵢ μ(Eᵢ); every non-negative measurable f is an increasing limit of simple functions. */
+/** KG: φ = Σ aᵢ 1_Eᵢ, ∫φ dμ = Σ aᵢ μ(Eᵢ); every non-negative measurable f is an increasing limit of simple functions. */
 export function buildSimpleFunctionScene(): SceneSpec {
   return framed(raw_buildSimpleFunctionScene())
 }
@@ -349,7 +349,7 @@ function raw_buildSimpleFunctionScene(): SceneSpec {
     title: 'Simple functions and their integral',
     sceneType: 'diagram',
     cameraDistance: 13,
-    teachingGoal: 'Show simple functions φ = Σ aᵢ 1_{Eᵢ}: finitely many values aᵢ, each taken on a measurable set Eᵢ. Here φ = 1 on [0, 1), 3 on [1, 2.5) and 2 on [2.5, 4]. Their integral is just Σ aᵢ μ(Eᵢ) — value times the measure of where it is taken: 1·1 + 3·1.5 + 2·1.5 = 8.5. Every non-negative measurable function f is the increasing limit of simple functions: φₙ = min(n, ⌊2ⁿf⌋/2ⁿ) for f(x) = x climbs from below, 0.5-steps (φ₁) then 0.25-steps (φ₂), and ∫f is defined as the limit of ∫φₙ.',
+    teachingGoal: 'Show simple functions φ = Σ aᵢ 1_Eᵢ: finitely many values aᵢ, each taken on a measurable set Eᵢ. Here φ = 1 on [0, 1), 3 on [1, 2.5) and 2 on [2.5, 4]. Their integral is just Σ aᵢ μ(Eᵢ) — value times the measure of where it is taken: 1·1 + 3·1.5 + 2·1.5 = 8.5. Every non-negative measurable function f is the increasing limit of simple functions: φₙ = min(n, ⌊2ⁿf⌋/2ⁿ) for f(x) = x climbs from below, 0.5-steps (φ₁) then 0.25-steps (φ₂), and ∫f is defined as the limit of ∫φₙ.',
     ariaLabel:
       'Left: a staircase graph over the interval 0 to 4 with three flat pieces: height 1 on 0 to 1, height 3 on 1 to 2.5 and height 2 on 2.5 to 4, with the three bars below the axis in blue, red and green marking the three sets E1, E2, E3. In the second step each flat piece is shaded as a rectangle labelled with value times length, 1 times 1, 3 times 1.5 and 2 times 1.5, adding to 8.5. Right, third step: the diagonal line f of x equals x with two staircases below it, a coarse red one with steps of 0.5 and a finer blue one with steps of 0.25, both below the line and the blue one closer.',
     stage: NO_STAGE,

@@ -45,7 +45,7 @@ function raw_buildLimitScene(): SceneSpec {
     title: 'Limit: what f(x) approaches as x approaches a',
     sceneType: 'diagram',
     cameraDistance: 13,
-    teachingGoal: 'Show a limit as the height the graph approaches as x gets closer to a from both sides, even when f(a) itself is undefined.',
+    teachingGoal: 'Show a limit as the height the graph approaches as x gets closer to a from both sides, even when f(a) itself is not defined.',
     ariaLabel:
       'The graph of f of x equals (x squared minus 1) over (x minus 1), which is the line y equals x plus 1 with a hole at x equals 1, where f is undefined. Points with x equal to 0.5, 0.8 and 0.95 from the left have heights 1.5, 1.8 and 1.95; points with x equal to 1.5, 1.2 and 1.05 from the right have heights 2.5, 2.2 and 2.05. Both sides close in on the height 2, so the limit is 2.',
     stage: NO_STAGE,

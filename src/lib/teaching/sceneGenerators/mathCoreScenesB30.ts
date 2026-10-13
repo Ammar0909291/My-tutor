@@ -191,13 +191,15 @@ function raw_buildPythagoreanTriplesScene(): SceneSpec {
 export const PDS = { x0: -3.6, dx: 1.8, base: -2.0, sy: 0.4, blocks: [[1, 20], [21, 40], [41, 60], [61, 80], [81, 100]] as ReadonlyArray<readonly [number, number]> }
 export const pdsCount = (k: number) => { const [a, b] = PDS.blocks[k]; let c = 0; for (let n = a; n <= b; n++) if (isPrimeN(n)) c++; return c }
 export const pdsAt = (k: number, v = 0): Pt => [PDS.x0 + PDS.dx * k, PDS.base + PDS.sy * v]
+/** Where a bar's count is written: above its top, but beside it when the bar is shorter than the average line (a count written above a short bar landed on that line — Mathematics render audit LY-02). */
+export const pdsCountAt = (k: number): Pt => pdsCount(k) < 5 ? [pdsAt(k, 0)[0] + 0.65, pdsAt(k, pdsCount(k))[1] + 0.1] : [pdsAt(k, 0)[0], pdsAt(k, pdsCount(k))[1] + 0.4]
 
 /** KG: how many primes lie in each stretch of the integers — they thin out but never stop. */
 export function buildPrimeDistributionScene(): SceneSpec {
   return framed(raw_buildPrimeDistributionScene())
 }
 function raw_buildPrimeDistributionScene(): SceneSpec {
-  const bar = (k: number): SceneObject[] => [ln(pdsAt(k, 0), pdsAt(k, pdsCount(k)), ROLE.output, 0.5), lb(String(pdsCount(k)), [pdsAt(k, 0)[0], pdsAt(k, pdsCount(k))[1] + 0.4]), lb(`${PDS.blocks[k][0]}–${PDS.blocks[k][1]}`, [pdsAt(k, 0)[0], PDS.base - 0.5])]
+  const bar = (k: number): SceneObject[] => [ln(pdsAt(k, 0), pdsAt(k, pdsCount(k)), ROLE.output, 0.5), lb(String(pdsCount(k)), pdsCountAt(k)), lb(`${PDS.blocks[k][0]}–${PDS.blocks[k][1]}`, [pdsAt(k, 0)[0], PDS.base - 0.5])]
   return {
     id: 'math-prime-distribution',
     title: 'How the primes thin out',

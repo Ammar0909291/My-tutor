@@ -228,7 +228,7 @@ describe('the mathematics each figure draws', () => {
     const s = M.buildPrimeDistributionScene(), { sy, base, blocks } = M.PDS
     const bars = bonds(s, BLUE, 0.5).sort((p, q) => p.from![0] - q.from![0]); expect(bars).toHaveLength(5)
     const counts = bars.map((b) => Math.round((b.to![1] - b.from![1]) / sy)); expect(counts).toEqual([8, 4, 5, 5, 3])
-    blocks.forEach(([a, b], k) => { expect(counts[k]).toBe(piOf(b) - piOf(a - 1)); expect(labelAt(s, [bars[k].from![0], bars[k].to![1] + 0.4])?.text).toBe(String(counts[k])); expect(labelAt(s, [bars[k].from![0], base - 0.5])?.text).toBe(`${a}–${b}`); expect(bars[k].from![1]).toBeCloseTo(base, 1) })
+    blocks.forEach(([a, b], k) => { expect(counts[k]).toBe(piOf(b) - piOf(a - 1)); expect(labelsOf(s).filter((o) => /^\d+$/.test(o.text!)).reduce((m, o) => (dist(o.position!, bars[k].to!) < dist(m.position!, bars[k].to!) ? o : m)).text).toBe(String(counts[k])); expect(labelAt(s, [bars[k].from![0], base - 0.5])?.text).toBe(`${a}–${b}`); expect(bars[k].from![1]).toBeCloseTo(base, 1) })
     const total = counts.reduce((p, q) => p + q, 0); expect(total).toBe(25); expect(total).toBe(piOf(100)); expect(numsIn(labelsOf(s).find((o) => o.text!.startsWith('25 primes'))!.text!)[0]).toBe(total)
     const avg = bonds(s, VIOLET, 0.03)[0]; expect((avg.from![1] - base) / sy).toBeCloseTo(total / counts.length, 1); expect(numsIn(labelsOf(s).find((o) => o.text!.startsWith('average'))!.text!)[0]).toBe(5)
     expect(counts.some((c, k) => k > 0 && c > counts[k - 1])).toBe(true); expect(counts[0]).toBeGreaterThan(counts[counts.length - 1])                    // thinning out overall, but not monotonically

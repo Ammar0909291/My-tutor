@@ -10,7 +10,7 @@ export function GeometryShapes({ revealStep = Infinity }: { revealStep?: number 
   const { t } = useLanguage()
   const show = (s: number) => revealStep >= s
   return (
-    <svg viewBox="0 0 300 100" width="100%" style={{ maxWidth: 320 }} aria-hidden="true">
+    <svg viewBox="0 0 300 114" width="100%" style={{ maxWidth: 320 }} aria-hidden="true">
       {/* Step 1 — draw the shape outlines */}
       {show(1) && (
         <g className={anim.reveal}>
@@ -36,9 +36,9 @@ export function GeometryShapes({ revealStep = Infinity }: { revealStep?: number 
           <text x={250} y={95} textAnchor="middle" fontSize={10} fill="var(--text-secondary)">{t('viz_circle')}</text>
         </g>
       )}
-      {/* Step 4 — reveal the formula / key fact */}
+      {/* Step 4 — reveal the formula / key fact: centred under all three shapes. (It used to sit at x=50, y=80 — clipped at the left edge on a phone and drawn across the triangle's base and its name, Mathematics render audit RD-02/LY-01, 26 concepts.) */}
       {show(4) && (
-        <text className={anim.writeIn} x={50} y={80} textAnchor="middle" fontSize={8} fill="var(--text-dim)">∠A + ∠B + ∠C = 180°</text>
+        <text className={anim.writeIn} x={150} y={110} textAnchor="middle" fontSize={9} fill="var(--text-dim)">∠A + ∠B + ∠C = 180°</text>
       )}
     </svg>
   )

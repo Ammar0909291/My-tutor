@@ -205,6 +205,21 @@ export function buildCalculusGraphScene(params: CalculusParams): SceneSpec {
       ])
     : [{ type: 'label', id: 'no-critical-points', position: [0, 0, 0] as Vec3, text: 'No critical points in this domain.', color: '#94a3b8', properties: { critical: false } }]
 
+  // ── A GRAPH WITH NO AXES ──────────────────────────────────────────────────
+  // The curve used to be drawn alone: no axes, so no scale and no meaning for position (Mathematics render audit GR-01, `math.calc.critical-points`
+  // served exactly this figure). A pair of axes along the bottom and left of the curve's box, named x and y — placed at the box's corner so they
+  // are valid whether or not the domain contains 0.
+  const allX = curvePoints.map((p) => p[0]), allY = curvePoints.map((p) => p[1])
+  const AXIS_PAD = 1.2
+  const axX0 = round(Math.min(...allX) - AXIS_PAD), axX1 = round(Math.max(...allX) + AXIS_PAD)
+  const axY0 = round(Math.min(...allY) - AXIS_PAD), axY1 = round(Math.max(...allY, ...s.criticalYs.map((y) => y * s.sy)) + AXIS_PAD)
+  const axisObjects: SceneObject[] = [
+    { type: 'arrow', id: 'axis-x', from: [axX0, axY0, 0] as Vec3, to: [axX1, axY0, 0] as Vec3, color: '#94a3b8', thickness: 0.055 },
+    { type: 'arrow', id: 'axis-y', from: [axX0, axY0, 0] as Vec3, to: [axX0, axY1, 0] as Vec3, color: '#94a3b8', thickness: 0.055 },
+    { type: 'label', id: 'axis-x-label', position: [round(axX1 + 0.8), axY0, 0] as Vec3, text: 'x', color: '#e2e8f0', properties: { labels: 'axis-x' } },
+    { type: 'label', id: 'axis-y-label', position: [axX0, round(axY1 + 0.8), 0] as Vec3, text: 'y', color: '#e2e8f0', properties: { labels: 'axis-y' } },
+  ]
+
   return {
     id: `calculus-${params.functionType}-${params.domainMin}-${params.domainMax}`,
     title: `${params.functionType} function on [${params.domainMin}, ${params.domainMax}] — ${s.criticalXs.length} critical point${s.criticalXs.length === 1 ? '' : 's'}`,
@@ -216,6 +231,7 @@ export function buildCalculusGraphScene(params: CalculusParams): SceneSpec {
       {
         narration: `Here is the graph of the function over [${params.domainMin}, ${params.domainMax}].`,
         objects: [
+          ...axisObjects,
           { type: 'path', id: 'curve', points: curvePoints, color: '#3b82f6' },
           {
             type: 'label', id: 'curve-label',

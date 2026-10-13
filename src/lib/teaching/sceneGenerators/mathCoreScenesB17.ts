@@ -74,7 +74,7 @@ function raw_buildRationalInequalityScene(): SceneSpec {
     title: 'Rational inequality: a sign chart',
     sceneType: 'diagram',
     cameraDistance: 13,
-    teachingGoal: 'Solve (x − 1)/(x + 2) > 0 with a sign chart: the numerator is zero at x = 1 and the denominator at x = −2 (undefined there), these two numbers cut the line into three intervals, and the quotient is positive on x < −2 and on x > 1 (open ends, since the inequality is strict and −2 is excluded) — exactly where the graph is above the axis.',
+    teachingGoal: 'Solve (x − 1)/(x + 2) > 0 with a sign chart: the numerator is zero at x = 1 and the denominator at x = −2 (not defined there), these two numbers cut the line into three intervals, and the quotient is positive on x < −2 and on x > 1 (open ends, since the inequality is strict and −2 is excluded) — exactly where the graph is above the axis.',
     ariaLabel:
       'Top: the graph of y equals (x minus 1) over (x plus 2): two branches either side of a violet vertical asymptote at x equals minus 2, crossing the x axis at the green dot x equals 1; the left branch lies above the axis and the right branch is above the axis only past 1. Bottom: a number line with open circles at minus 2 and 1 and signs plus, minus, plus on the three intervals; green thick segments mark x less than minus 2 and x greater than 1.',
     stage: NO_STAGE,

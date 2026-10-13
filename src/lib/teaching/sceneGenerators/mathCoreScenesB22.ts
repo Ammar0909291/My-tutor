@@ -35,7 +35,7 @@ const DEG = Math.PI / 180
 export const CNA = { c: [-1.0, 0] as Pt, u: 0.95, z: [3, 4] as Pt, arcR: 1.2 }
 export const cnaAt = (re: number, im: number): Pt => [CNA.c[0] + CNA.u * re, CNA.c[1] + CNA.u * im]
 
-/** KG: ℂ = {x + iy}, |z| = √(x² + y²), arg z, polar form z = re^{iθ}, conjugate z̄ = x − iy, |z|² = z z̄. */
+/** KG: ℂ = {x + iy}, |z| = √(x² + y²), arg z, polar form z = re^(iθ), conjugate z̄ = x − iy, |z|² = z z̄. */
 export function buildComplexNumbersAnalysisScene(): SceneSpec {
   return framed(raw_buildComplexNumbersAnalysisScene())
 }
@@ -47,13 +47,13 @@ function raw_buildComplexNumbersAnalysisScene(): SceneSpec {
     title: 'The complex plane: modulus, argument, conjugate',
     sceneType: 'diagram',
     cameraDistance: 13,
-    teachingGoal: 'Show z = 3 + 4i as the point (3, 4) of the complex plane (real part along the horizontal axis, imaginary part along the vertical one). Its modulus is the length of the arrow, |z| = √(3² + 4²) = 5, and its argument is the angle θ ≈ 53° from the positive real axis, so in polar form z = re^{iθ}. Its conjugate z̄ = 3 − 4i is the mirror image in the real axis, and z z̄ = 3² + 4² = 25 = |z|².',
+    teachingGoal: 'Show z = 3 + 4i as the point (3, 4) of the complex plane (real part along the horizontal axis, imaginary part along the vertical one). Its modulus is the length of the arrow, |z| = √(3² + 4²) = 5, and its argument is the angle θ ≈ 53° from the positive real axis, so in polar form z = re^(iθ). Its conjugate z̄ = 3 − 4i is the mirror image in the real axis, and z z̄ = 3² + 4² = 25 = |z|².',
     ariaLabel:
       'A complex plane with a horizontal real axis and a vertical imaginary axis. A blue arrow runs from the origin to the point 3 plus 4i, with violet guide lines down to 3 on the real axis and across to 4 on the imaginary axis. In the second step a green arc marks the angle theta of about 53 degrees from the real axis, and captions give the modulus 5 and the polar form. In the third step a red arrow runs to the mirror point 3 minus 4i below the real axis, the conjugate, with captions z times z-bar equals 25 and the modulus squared equals 25.',
     stage: NO_STAGE,
     steps: [
       { narration: 'A complex number z = x + iy is a point (x, y) of the plane: real part x along the horizontal axis, imaginary part y along the vertical one. Here z = 3 + 4i is the point (3, 4).', objects: [arrow(P(-4.3, 0), P(4.4, 0), ROLE.reference), arrow(P(c[0], -4.6), P(c[0], 4.6), ROLE.reference), ln(at(z[0], 0), zp, ROLE.aid, 0.02), ln(at(0, z[1]), zp, ROLE.aid, 0.02), arrow(P(c[0], c[1]), P(zp[0], zp[1]), ROLE.output), dt(zp, ROLE.ink, 0.14), lb('3', [at(z[0], 0)[0], -0.45]), lb('4', [c[0] - 0.4, at(0, z[1])[1]]), lb('Re', [4.2, 0.45]), lb('Im', [c[0] + 0.5, 4.5]), lb('z = 3 + 4i', [3.2, 4.3], ROLE.output)] },
-      { narration: 'The modulus |z| = √(3² + 4²) = 5 is the length of the arrow, and the argument θ ≈ 53° is its angle from the positive real axis. Together they give the polar form z = re^{iθ} = 5e^{iθ}.', objects: [curve(arcPts(c[0], c[1], arcR, 0, th, 16), ROLE.result), lb('θ', [c[0] + 1.6 * Math.cos((th / 2) * DEG), c[1] + 1.6 * Math.sin((th / 2) * DEG)], ROLE.result), lb('|z| = 5', [3.3, 1.9], ROLE.output), lb('polar: re^(iθ)', [2.8, -1.1], ROLE.result)] },
+      { narration: 'The modulus |z| = √(3² + 4²) = 5 is the length of the arrow, and the argument θ ≈ 53° is its angle from the positive real axis. Together they give the polar form z = re^(iθ) = 5e^(iθ).', objects: [curve(arcPts(c[0], c[1], arcR, 0, th, 16), ROLE.result), lb('θ', [c[0] + 1.6 * Math.cos((th / 2) * DEG), c[1] + 1.6 * Math.sin((th / 2) * DEG)], ROLE.result), lb('|z| = 5', [3.3, 1.9], ROLE.output), lb('polar: re^(iθ)', [2.8, -1.1], ROLE.result)] },
       { narration: 'The conjugate z̄ = 3 − 4i is the reflection of z in the real axis. Multiplying gives z z̄ = (3 + 4i)(3 − 4i) = 9 + 16 = 25, a real number equal to |z|².', objects: [arrow(P(c[0], c[1]), P(at(z[0], -z[1])[0], at(z[0], -z[1])[1]), ROLE.input), dt(at(z[0], -z[1]), ROLE.input, 0.14), lb('z̄ = 3 − 4i', [3.2, -4.3], ROLE.input), lb('z z̄ = 25', [-2.9, 3.4], ROLE.result), lb('|z|² = 25', [-2.9, 2.6], ROLE.result)] },
     ],
   }
@@ -63,7 +63,7 @@ export const cnaArg = () => (Math.atan2(CNA.z[1], CNA.z[0]) * 180) / Math.PI
 
 // ── 2. Complex line integral ─────────────────────────────────────────────────
 
-/** ∫_C dz/z over the upper unit semicircle γ(t) = e^{it}, 0 ≤ t ≤ π: the integrand f(γ)γ′ = e^{−it} · i e^{it} = i is constant, so the integral is iπ; |iπ| = π = max|f| · length. */
+/** ∫_C dz/z over the upper unit semicircle γ(t) = e^(it), 0 ≤ t ≤ π: the integrand f(γ)γ′ = e^(−it) · i e^(it) = i is constant, so the integral is iπ; |iπ| = π = max|f| · length. */
 export const CIN = { c: [0, 0.6] as Pt, R: 2.2, axis: { y: -2.4, x0: -2.5, w: 5.0 }, ts: [0, 1, 2, 3, 4].map((k) => (k * Math.PI) / 4) as readonly number[], tangentAt: [Math.PI / 4, (3 * Math.PI) / 4] as readonly number[] }
 export const cinGamma = (t: number): Pt => [CIN.c[0] + CIN.R * Math.cos(t), CIN.c[1] + CIN.R * Math.sin(t)]
 
@@ -79,13 +79,13 @@ function raw_buildComplexIntegrationScene(): SceneSpec {
     title: 'Complex line integral: ∫ f(γ(t)) γ′(t) dt',
     sceneType: 'diagram',
     cameraDistance: 13,
-    teachingGoal: 'Show how a complex line integral is computed. Take C = the upper unit semicircle γ(t) = e^{it} from 1 to −1 and f(z) = 1/z. The tangent vector is γ′(t) = i e^{it} and f(γ(t)) = e^{−it}, so the integrand f(γ(t)) γ′(t) = i is the same arrow at every t, and ∫_C dz/z = ∫₀^π i dt = iπ. The estimation lemma is sharp here: |∫| = π = max|f| · length(C) = 1 · π.',
+    teachingGoal: 'Show how a complex line integral is computed. Take C = the upper unit semicircle γ(t) = e^(it) from 1 to −1 and f(z) = 1/z. The tangent vector is γ′(t) = i e^(it) and f(γ(t)) = e^(−it), so the integrand f(γ(t)) γ′(t) = i is the same arrow at every t, and ∫_C dz/z = ∫₀^π i dt = iπ. The estimation lemma is sharp here: |∫| = π = max|f| · length(C) = 1 · π.',
     ariaLabel:
       'A blue upper semicircle of radius about two, running counter-clockwise from the point 1 on the right to the point minus 1 on the left, labelled C. In the second step two short red arrows at 45 and 135 degrees point along the curve in the direction of travel, labelled gamma prime, and below the semicircle a horizontal axis from 0 to pi carries five identical blue arrows pointing straight up, captioned f of gamma times gamma prime equals i. In the third step the captions give the integral of dz over z equals i pi, and the absolute value pi is at most 1 times pi.',
     stage: NO_STAGE,
     steps: [
-      { narration: 'The curve C is the upper unit semicircle γ(t) = e^{it}, t from 0 to π, running from 1 to −1. We integrate f(z) = 1/z along it.', objects: [curve(arcPts(c[0], c[1], R, 0, 180, 60), ROLE.output), dt(cinGamma(0), ROLE.ink, 0.12), dt(cinGamma(Math.PI), ROLE.ink, 0.12), lb('1', [c[0] + R + 0.45, c[1]]), lb('−1', [c[0] - R - 0.5, c[1]]), lb('C', [c[0], c[1] + R + 0.5], ROLE.output)] },
-      { narration: 'The tangent is γ′(t) = i e^{it} (red, along the direction of travel) and f(γ(t)) = 1/e^{it} = e^{−it}. Their product f(γ(t)) γ′(t) = e^{−it} · i e^{it} = i is the SAME number for every t — five samples (blue arrows) over t from 0 to π.', objects: [...tangentAt.map((t) => { const p = cinGamma(t); return arrow(P(p[0], p[1]), P(p[0] - 0.7 * Math.sin(t), p[1] + 0.7 * Math.cos(t)), ROLE.input) }), lb('γ′', [cinGamma(Math.PI / 4)[0] + 0.75, cinGamma(Math.PI / 4)[1] + 0.35], ROLE.input), ln([axis.x0, axis.y], [axis.x0 + axis.w, axis.y], ROLE.reference, 0.03), ...ts.map((t) => arrow(P(tx(t), axis.y), P(tx(t), axis.y + 1.0), ROLE.output)), lb('0', [axis.x0, axis.y - 0.45]), lb('π', [axis.x0 + axis.w, axis.y - 0.45]), lb('f(γ)γ′ = i', [0, axis.y - 0.95], ROLE.output)] },
+      { narration: 'The curve C is the upper unit semicircle γ(t) = e^(it), t from 0 to π, running from 1 to −1. We integrate f(z) = 1/z along it.', objects: [curve(arcPts(c[0], c[1], R, 0, 180, 60), ROLE.output), dt(cinGamma(0), ROLE.ink, 0.12), dt(cinGamma(Math.PI), ROLE.ink, 0.12), lb('1', [c[0] + R + 0.45, c[1]]), lb('−1', [c[0] - R - 0.5, c[1]]), lb('C', [c[0], c[1] + R + 0.5], ROLE.output)] },
+      { narration: 'The tangent is γ′(t) = i e^(it) (red, along the direction of travel) and f(γ(t)) = 1/e^(it) = e^(−it). Their product f(γ(t)) γ′(t) = e^(−it) · i e^(it) = i is the SAME number for every t — five samples (blue arrows) over t from 0 to π.', objects: [...tangentAt.map((t) => { const p = cinGamma(t); return arrow(P(p[0], p[1]), P(p[0] - 0.7 * Math.sin(t), p[1] + 0.7 * Math.cos(t)), ROLE.input) }), lb('γ′', [cinGamma(Math.PI / 4)[0] + 0.75, cinGamma(Math.PI / 4)[1] + 0.35], ROLE.input), ln([axis.x0, axis.y], [axis.x0 + axis.w, axis.y], ROLE.reference, 0.03), ...ts.map((t) => arrow(P(tx(t), axis.y), P(tx(t), axis.y + 1.0), ROLE.output)), lb('0', [axis.x0, axis.y - 0.45]), lb('π', [axis.x0 + axis.w, axis.y - 0.45]), lb('f(γ)γ′ = i', [0, axis.y - 0.95], ROLE.output)] },
       { narration: 'So ∫_C dz/z = ∫₀^π i dt = iπ. The estimation lemma |∫_C f dz| ≤ max|f| · length(C) is exact here: |iπ| = π, and max|1/z| = 1 on the circle, length π.', objects: [lb('∫ dz/z = iπ', [0, c[1] - 0.7], ROLE.result), lb('|∫| = π ≤ 1 · π', [0, c[1] - 1.45], ROLE.aid)] },
     ],
   }
@@ -179,7 +179,7 @@ function raw_buildRealIntegralResiduesScene(): SceneSpec {
     title: 'A real integral by residues',
     sceneType: 'diagram',
     cameraDistance: 13,
-    teachingGoal: 'Show how ∫_{−∞}^{∞} dx/(1 + x²) is computed with residues. Integrate f(z) = 1/(1 + z²) along the real segment from −R to R (blue) and close the contour with the upper semicircle of radius R (green). The poles of f are ±i; only i lies inside, with residue 1/(2i), so the closed integral is 2πi · 1/(2i) = π. On the arc |f| ≤ 1/(R² − 1) and the length is πR, so the arc integral is at most πR/(R² − 1) → 0 as R → ∞, leaving ∫_{−∞}^{∞} dx/(1 + x²) = π.',
+    teachingGoal: 'Show how the integral of dx/(1 + x²) over the whole real line, from −∞ to ∞, is computed with residues. Integrate f(z) = 1/(1 + z²) along the real segment from −R to R (blue) and close the contour with the upper semicircle of radius R (green). The poles of f are ±i; only i lies inside, with residue 1/(2i), so the closed integral is 2πi · 1/(2i) = π. On the arc |f| ≤ 1/(R² − 1) and the length is πR, so the arc integral is at most πR/(R² − 1) → 0 as R → ∞, leaving the integral of dx/(1 + x²) from −∞ to ∞ equal to π.',
     ariaLabel:
       'A horizontal blue segment from minus R to R along the real axis with grey crosses at i above it and minus i below it, captioned 1 over 1 plus x squared. In the second step a green upper semicircle of radius R closes the segment into a contour; the cross at i turns into a red dot (inside) and the cross at minus i stays outside. In the third step the captions give the residue 1 over 2i, 2 pi i times 1 over 2i equals pi, and the arc tends to 0 as R grows.',
     stage: NO_STAGE,
@@ -248,7 +248,7 @@ function raw_buildRiemannSurfaceScene(): SceneSpec {
       'A blue spiral winding three times round a vertical axis, rising from a flat grey unit circle at the bottom. In the second step grey radial lines are drawn from the axis at every quarter turn, forming a spiral ramp. In the third step a violet vertical line passes through three red dots, at the start of the first, second and third turns, all lying above the same point of the base circle; they are numbered 1, 2 and 3 and captioned same z.',
     stage: NO_STAGE,
     steps: [
-      { narration: 'Plot the point z = e^{iθ} at height θ/(2π). As θ grows the point circles the origin and climbs: a helix (blue) over the unit circle (grey) — three turns shown, but it goes on forever, upward and downward.', objects: [curve(Array.from({ length: 73 }, (_, i) => proj([Math.cos((2 * Math.PI * i) / 72), Math.sin((2 * Math.PI * i) / 72), 0])), ROLE.reference), arrow(proj([0, 0, 0]), proj([0, 0, o.turns + 0.35]), ROLE.reference), curve(Array.from({ length: N + 1 }, (_, i) => proj(helixPoint((2 * Math.PI * o.turns * i) / N))), ROLE.output), lb('log z', [1.9, 1.0], ROLE.output)] },
+      { narration: 'Plot the point z = e^(iθ) at height θ/(2π). As θ grows the point circles the origin and climbs: a helix (blue) over the unit circle (grey) — three turns shown, but it goes on forever, upward and downward.', objects: [curve(Array.from({ length: 73 }, (_, i) => proj([Math.cos((2 * Math.PI * i) / 72), Math.sin((2 * Math.PI * i) / 72), 0])), ROLE.reference), arrow(proj([0, 0, 0]), proj([0, 0, o.turns + 0.35]), ROLE.reference), curve(Array.from({ length: N + 1 }, (_, i) => proj(helixPoint((2 * Math.PI * o.turns * i) / N))), ROLE.output), lb('log z', [1.9, 1.0], ROLE.output)] },
       { narration: 'Fill in radial lines at every quarter turn: the surface is a spiral ramp (a helicoid). Each full level lies over the entire punctured plane ℂ∖{0}; the origin itself is missing, the axis is the hole.', objects: ribs },
       { narration: 'Walk once round the origin along the ramp and you arrive one level higher, over the SAME point z = 1: the three red points (θ = 0, 2π, 4π) are different points of the surface lying above one z. log z takes different values on them (0, 2πi, 4πi), so on the surface it is a genuine single-valued function.', objects: [line(proj([1, 0, -0.2]), proj([1, 0, o.turns - 0.5]), ROLE.aid, 0.03), ...[0, 1, 2].map((k) => dot(proj([1, 0, k]), ROLE.input, 0.13)), ...[0, 1, 2].map((k) => lb(String(k + 1), [proj([1, 0, k])[0] + 0.45, proj([1, 0, k])[1]], ROLE.input)), lb('same z', [proj([1, 0, 2.2])[0] + 1.2, proj([1, 0, 2.2])[1]], ROLE.aid)] },
     ],

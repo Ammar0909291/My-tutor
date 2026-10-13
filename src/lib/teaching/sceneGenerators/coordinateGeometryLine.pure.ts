@@ -77,7 +77,7 @@ function computeGeometry(p: CoordinateGeometryParams): LineGeometry {
 /** Build a 3-step coordinate-geometry SceneSpec: the two points, the line + midpoint, then the distance/slope labels. */
 export function buildCoordinateGeometryLineScene(params: CoordinateGeometryParams): SceneSpec {
   const geo = computeGeometry(params)
-  const slopeText = geo.slope === null ? 'undefined (the line is vertical)' : round(geo.slope, 3).toString()
+  const slopeText = geo.slope === null ? 'not defined (the line is vertical)' : round(geo.slope, 3).toString()
   const labelPos: Vec3 = [geo.M[0], geo.M[1] + 2, 0]
 
   return {
