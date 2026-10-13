@@ -20,14 +20,17 @@ import { PhysicsAuditFigure } from './PhysicsAuditFigure'
  */
 export const metadata = { robots: { index: false, follow: false } }
 
-export default function PhysicsAuditPage({ searchParams }: { searchParams?: { concept?: string; fw?: string } }) {
+/** Subjects the audit page may resolve under. Absent => 'physics', so the existing Physics tooling is byte-identical; the Mathematics audit passes `subject=mathematics`. */
+const AUDIT_SUBJECTS = new Set(['physics', 'mathematics'])
+
+export default function PhysicsAuditPage({ searchParams }: { searchParams?: { concept?: string; fw?: string; subject?: string } }) {
   if (process.env.NODE_ENV === 'production') notFound()
   const conceptId = searchParams?.concept?.trim() ?? ''
   if (!conceptId) return <p>?concept=&lt;id&gt; required</p>
   const decision = resolveVisual({
     message: 'show me a diagram',
     lessonConceptId: conceptId,
-    subject: 'physics',
+    subject: AUDIT_SUBJECTS.has(searchParams?.subject ?? '') ? searchParams!.subject! : 'physics',
     learnerRequest: 'diagram',
   })
   // `fw` pins the figure frame's width in px so the audit can reproduce the
