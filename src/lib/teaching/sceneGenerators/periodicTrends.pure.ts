@@ -17,7 +17,7 @@
  */
 
 import type { SceneObject, SceneSpec, Vec3 } from '../sceneSpec'
-import { round, type ConsistencyResult } from './shared'
+import { captionBeside, round, type ConsistencyResult } from './shared'
 
 // ── Curated reference data: main-group elements with a defined Pauling EN ────
 
@@ -59,6 +59,12 @@ export const ELEMENTS: ElementTrendDef[] = [
 ]
 
 const ELEMENT_BY_SYMBOL = new Map(ELEMENTS.map((e) => [e.symbol, e]))
+
+/** The largest calculated radius in the table (K, 243 pm) draws as a sphere of MAX_SPHERE_UNITS; every other atom is to the same scale. */
+const MAX_RADIUS_PM = Math.max(...ELEMENTS.map((e) => e.atomicRadiusPm))
+const MAX_SPHERE_UNITS = 2.6
+/** Atom centres sit this far above the element label, clear of the largest sphere. */
+const ATOM_Y = 3.8
 
 // ── Parameters (the ONLY thing the LLM extracts) ─────────────────────────────
 
@@ -131,7 +137,13 @@ function radiusSentence(c: TrendComparison): string {
 export function buildPeriodicTrendScene(params: PeriodicTrendParams): SceneSpec {
   const c = compare(params)
 
+  // Each atom is DRAWN: a sphere whose radius is its calculated atomic radius (the same value the comparison below is decided on),
+  // so the size difference the learner is told about is the one they can see. Before this the figure was four lines of coloured
+  // text in an empty panel (the production browser audit's ST-03 "canvas holds text only"; the local render did not measure ink).
+  const sphereRadius = (pm: number) => round((pm / MAX_RADIUS_PM) * MAX_SPHERE_UNITS)
   const elementObjects: SceneObject[] = [
+    { type: 'node', id: 'atom-1', position: [-6, ATOM_Y, 0] as Vec3, radius: sphereRadius(c.e1.atomicRadiusPm), text: `${c.e1.atomicRadiusPm} pm`, color: '#3b82f6', properties: captionBeside(sphereRadius(c.e1.atomicRadiusPm), 'above', 0.9) },
+    { type: 'node', id: 'atom-2', position: [6, ATOM_Y, 0] as Vec3, radius: sphereRadius(c.e2.atomicRadiusPm), text: `${c.e2.atomicRadiusPm} pm`, color: '#22c55e', properties: captionBeside(sphereRadius(c.e2.atomicRadiusPm), 'above', 0.9) },
     { type: 'label', id: 'element-1', position: [-6, 0, 0] as Vec3, text: `${c.e1.symbol} (period ${c.e1.period}, group ${c.e1.group})`, color: '#3b82f6' },
     { type: 'label', id: 'element-2', position: [6, 0, 0] as Vec3, text: `${c.e2.symbol} (period ${c.e2.period}, group ${c.e2.group})`, color: '#22c55e' },
   ]
@@ -150,7 +162,7 @@ export function buildPeriodicTrendScene(params: PeriodicTrendParams): SceneSpec 
     ariaLabel: `A comparison of ${c.e1.name} and ${c.e2.name}'s atomic radius and electronegativity, based on their periodic table positions.`,
     steps: [
       {
-        narration: `${c.e1.name} (${c.e1.symbol}) is in period ${c.e1.period}, group ${c.e1.group}. ${c.e2.name} (${c.e2.symbol}) is in period ${c.e2.period}, group ${c.e2.group}.`,
+        narration: `${c.e1.name} (${c.e1.symbol}) is in period ${c.e1.period}, group ${c.e1.group}. ${c.e2.name} (${c.e2.symbol}) is in period ${c.e2.period}, group ${c.e2.group}. Each sphere is drawn to scale with its calculated atomic radius (${c.e1.symbol} ${c.e1.atomicRadiusPm} pm, ${c.e2.symbol} ${c.e2.atomicRadiusPm} pm).`,
         objects: elementObjects,
       },
       {

@@ -335,12 +335,14 @@ resolver (Tier 0/1 directly, Tier 2/3 by replaying `resolveVisualForTurn` over t
 * **Zinc–carbon dry cell** — its goal text said "an electrolytic cell" for every undivided cell; it now follows `cellType`.
 * **`GraphRenderer` (the one shared-renderer touch)** — the axis-name halo used `--surface`, a CSS variable defined nowhere, so it fell back to near-black and ringed the grey words in black on the light theme; and the x-axis name sat 4 px above the zoom buttons and was half hidden. Fixed with the app's `--bg-surface` and a 46 px baseline. This renderer is shared with Mathematics and Physics, whose graphs gain the same two corrections (no payload changes, no fingerprint changes).
 * **True minus sign** in the first-law figure, the Hess/Born–Haber descriptions and the cell ΔG line; `D₂O`-style isotope formulas no longer raise an element note.
+* **Periodic trends were four lines of text** (found by the PRODUCTION browser run, §13): `chem.period.modern-periodic-law` and `chem.period.periodic-properties` serve the shared `periodic_trends` generator, which drew only labels — "ST-03: the canvas holds text only, no drawn geometry (ink 0.00%)". The local render did not measure canvas ink (`render-measure.mjs` has no ST-03), so 28 local states had called it PASS. Each atom is now a sphere drawn to the same scale as its calculated radius, captioned in pm, for every ordered pair of the 17 selectable elements (272); `chemistryClosureGates.test.ts` now fails any Chemistry concept whose scene holds nothing but labels (the static form of ST-03, measured: exactly these two concepts), and re-rendered 31 instances (the default Na/Cl in 28 states, 30 element-picker variants) = 148 PASS.
 
 ### 12.4 What is still REVIEW_REQUIRED, and who decides
 * **33 Tier-3 figures** the independent reviewer called MINOR (true, but loose or incomplete) — they stay served; a generated figure is never edited in place. Owner / curriculum pipeline: accept, regenerate or retire (`semantic-review.json` has each reviewer note).
 * **2 approved Tier-2 flows** (`chem.found.significant-figures`, `chem.found.stoichiometry`): correct in outline, imprecise ("molar mole ratios", the trailing-zero rule, a missing moles-to-grams step). Corrections prepared in `tier2-corrections-prepared.md`, **not applied** (a production write).
 * **The chelate-effect chart** (R17 above).
 * **R1's production row** (prepared SQL).
+* **Known limitation — a header label can sit on its sphere** (cosmetic: the text stays legible and nothing is clipped off the figure). In the colloids figure (an opt-in `captioned` comparison; the water and polymer figures use the same layout and showed it in none of the screenshots read) a header is clamped against the canvas edge and its plate covers the top of its own sphere, so the sphere is drawn with a flat top — seen locally under "True solution" and, at the real column width, in production under "Suspension". The machine audit cannot see it (a sphere is WebGL pixels, not DOM, and `render-measure.mjs` has no ink check). A larger header gap in the `captioned` layout was tried and did not move the label and made the expanded view's overflow worse (3, 8 and 7 overflowing text lines in the colloids, water and polymer figures), so it was reverted. Root cause: Chemistry canvases are not framed with headroom for their captions (`fitToCanvas` is Biology-only, `LessonScreen.tsx`); the fix is the shared renderer's framing — Physics and Mathematics use it too — so it is an owner decision.
 * The 14 B concepts have no figure until a faithful one is authored; the 59 D concepts have a generated figure the critic or a gate refuses, and the 13 A concepts a recorded decline.
 
 ### 12.5 Re-running
@@ -356,3 +358,25 @@ npx tsx scripts/chemistry/visual-audit/final-audit.ts --tier01 <t01> --tier23 <t
 `--only` re-renders just the instances whose fingerprint changed (the failing test names the concepts); merge the new `render-results.json` rows over the old
 ones by `instanceId` before `final-audit.ts` (the manifest must be regenerated first — a stale manifest renders stale scenes). Run the render under
 `setsid nohup … < /dev/null`: a plain background job dies with a worker restart. A full render is ~30 minutes at 3 workers (software WebGL).
+
+## 13. Production verification (2026-10-13)
+
+Deployment `dpl_GsCTR3568rmgeRaSoKCmadMWh4td` (commit `5465509`, state READY, alias `my-tutor-flame.vercel.app` serving it). The dev render route
+`/dev/chem-visual-audit` returns 404 in production (verified). Harness: `scripts/qa/chemistryProductionBrowserAudit.ts` — registers a disposable
+`qa-*@mytutor-qa.invalid` account, drives the lesson over the real API for each concept, then loads `/learn` at 390 and 1280 px in both themes, audits the
+figure with the same in-page auditor the local audit uses and compares the figure on the wire with the checkout's `resolveVisual` fingerprint. Four runs
+(a first full run plus three re-runs of the concepts that timed out); every disposable account was deleted (`deleted = true` in each run).
+
+| | |
+|---|---|
+| concepts exercised | 35 (every concept the closure created or changed, a Tier 0 / Tier 1 sample across domains, both Tier 2 rows, one Tier 3 flow, the retired concepts) |
+| states (concept × viewport × theme), best of the runs | 131: **118 PASS · 2 REVIEW_REQUIRED · 3 no-figure-as-expected · 8 NOT_RUN** · 0 FAIL |
+| Tier 0 / Tier 1 fingerprint on the wire vs the checkout | **equal for every concept where both were measured** (20 concepts, 0 mismatches) — production serves exactly the audited figure |
+| screenshots | the production captures were read, not only counted: Periodic Trends (the text-only finding), water and colloids (the sphere/label limitation below). The PNGs are run output and are not committed |
+
+Findings (none fixed by redeploying unreviewed data; each has an owner):
+* **FIXED in code, awaiting a deploy: Periodic Trends is text only** (the 2 REVIEW states, `chem.period.periodic-properties` at 390 px). See §12.3; the figure now draws the atoms. Re-verify after the deploy.
+* **Tier-2 approved figures are not restored after a page reload** (`chem.found.significant-figures`, `chem.found.stoichiometry`: 8 NOT_RUN — the figure never appeared on the reloaded `/learn`, while the wire carried the `visualSpec` and the tutor's text referred to it). Root cause by code reading, not a harness fault: `GET /api/sessions` / history restore re-derives a figure with `restoreVisualSession` (Tier 0/1, synchronous) or `restoreFromFigureCache` (the `visualization_cache` row, Tier 3), and **neither reads the approved `visual_assets` row**, so an approved figure drops on refresh (the figure that arrives in the live turn goes through the ordinary renderer; that live display was not browser-verified here). Two concepts today. Not changed: it is the session-persistence path, outside a visual-quality repair. Proposed fix (owner): let `restoreFromFigureCache`'s caller fall back to `findApprovedFigure`, behind the same re-validation and admission the live path applies.
+* **Retired concepts regenerate figures in production** (3 of the 6 B concepts sampled — `chem.org.hybridization`, `chem.carb.ketones`, `chem.nitro.amines` — served a freshly generated figure; the other three served none). Retiring a figure by content cannot stop the generator proposing a new one, and the admission path judges a new figure afresh. The ketones one repeats the flaw that got the concept retired. Owner decision: author a Tier 0 figure for the 14 B concepts, or add a pre-generation withhold for a retired concept.
+* The 8 NOT_RUN are all the two Tier-2 concepts above (4 states each); the earlier timeouts on other concepts (`ERR_TIMED_OUT`) passed on re-run.
+

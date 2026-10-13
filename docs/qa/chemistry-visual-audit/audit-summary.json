@@ -275,7 +275,7 @@
    "source": "tier0",
    "provenance": "generator-default",
    "instanceId": "scene:periodic-trends-Na-Cl",
-   "fingerprint": "fc51d3111",
+   "fingerprint": "fdfe75ee0",
    "verdict": "PASS",
    "shadowedCachedFigure": false
   },
@@ -315,7 +315,7 @@
    "source": "tier0",
    "provenance": "generator-default",
    "instanceId": "scene:periodic-trends-Na-Cl",
-   "fingerprint": "fc51d3111",
+   "fingerprint": "fdfe75ee0",
    "verdict": "PASS",
    "shadowedCachedFigure": false
   },
@@ -2105,7 +2105,7 @@
     "chem.period.modern-periodic-law",
     "chem.period.periodic-properties"
    ],
-   "fingerprint": "fc51d3111",
+   "fingerprint": "fdfe75ee0",
    "verdict": "PASS",
    "render": "PASS",
    "semantic": "PASS",
@@ -3754,7 +3754,7 @@
     "chem.period.modern-periodic-law",
     "chem.period.periodic-properties"
    ],
-   "fingerprint": "f819ff660",
+   "fingerprint": "f1cf41763",
    "verdict": "PASS",
    "render": "PASS",
    "semantic": "PASS",
@@ -3788,7 +3788,7 @@
     "chem.period.modern-periodic-law",
     "chem.period.periodic-properties"
    ],
-   "fingerprint": "f507a9115",
+   "fingerprint": "fc1c81c69",
    "verdict": "PASS",
    "render": "PASS",
    "semantic": "PASS",
@@ -3822,7 +3822,7 @@
     "chem.period.modern-periodic-law",
     "chem.period.periodic-properties"
    ],
-   "fingerprint": "f1d7a5033",
+   "fingerprint": "f36a49f11",
    "verdict": "PASS",
    "render": "PASS",
    "semantic": "PASS",
@@ -3856,7 +3856,7 @@
     "chem.period.modern-periodic-law",
     "chem.period.periodic-properties"
    ],
-   "fingerprint": "ff643007c",
+   "fingerprint": "f755d4a4b",
    "verdict": "PASS",
    "render": "PASS",
    "semantic": "PASS",
@@ -3890,7 +3890,7 @@
     "chem.period.modern-periodic-law",
     "chem.period.periodic-properties"
    ],
-   "fingerprint": "ff93ffb0d",
+   "fingerprint": "f1ebd7575",
    "verdict": "PASS",
    "render": "PASS",
    "semantic": "PASS",
@@ -3924,7 +3924,7 @@
     "chem.period.modern-periodic-law",
     "chem.period.periodic-properties"
    ],
-   "fingerprint": "f3fd89a4e",
+   "fingerprint": "f45d43db",
    "verdict": "PASS",
    "render": "PASS",
    "semantic": "PASS",
@@ -3958,7 +3958,7 @@
     "chem.period.modern-periodic-law",
     "chem.period.periodic-properties"
    ],
-   "fingerprint": "f4341957d",
+   "fingerprint": "ff384e4a9",
    "verdict": "PASS",
    "render": "PASS",
    "semantic": "PASS",
@@ -3992,7 +3992,7 @@
     "chem.period.modern-periodic-law",
     "chem.period.periodic-properties"
    ],
-   "fingerprint": "f734e228e",
+   "fingerprint": "f5686abe7",
    "verdict": "PASS",
    "render": "PASS",
    "semantic": "PASS",
@@ -4026,7 +4026,7 @@
     "chem.period.modern-periodic-law",
     "chem.period.periodic-properties"
    ],
-   "fingerprint": "faa4fdb0e",
+   "fingerprint": "fcf45ce03",
    "verdict": "PASS",
    "render": "PASS",
    "semantic": "PASS",
@@ -4060,7 +4060,7 @@
     "chem.period.modern-periodic-law",
     "chem.period.periodic-properties"
    ],
-   "fingerprint": "f9764a47b",
+   "fingerprint": "f805f8793",
    "verdict": "PASS",
    "render": "PASS",
    "semantic": "PASS",
@@ -4094,7 +4094,7 @@
     "chem.period.modern-periodic-law",
     "chem.period.periodic-properties"
    ],
-   "fingerprint": "fae076870",
+   "fingerprint": "f274bfe3b",
    "verdict": "PASS",
    "render": "PASS",
    "semantic": "PASS",
@@ -4128,7 +4128,7 @@
     "chem.period.modern-periodic-law",
     "chem.period.periodic-properties"
    ],
-   "fingerprint": "f6228bd78",
+   "fingerprint": "f43cd057a",
    "verdict": "PASS",
    "render": "PASS",
    "semantic": "PASS",
@@ -4162,7 +4162,7 @@
     "chem.period.modern-periodic-law",
     "chem.period.periodic-properties"
    ],
-   "fingerprint": "fc8148061",
+   "fingerprint": "fd2620d5d",
    "verdict": "PASS",
    "render": "PASS",
    "semantic": "PASS",
@@ -4196,7 +4196,7 @@
     "chem.period.modern-periodic-law",
     "chem.period.periodic-properties"
    ],
-   "fingerprint": "f4ae88fd3",
+   "fingerprint": "fa5f543db",
    "verdict": "PASS",
    "render": "PASS",
    "semantic": "PASS",
@@ -4230,7 +4230,7 @@
     "chem.period.modern-periodic-law",
     "chem.period.periodic-properties"
    ],
-   "fingerprint": "fe8365c10",
+   "fingerprint": "f1ed1f52",
    "verdict": "PASS",
    "render": "PASS",
    "semantic": "PASS",
@@ -4264,7 +4264,7 @@
     "chem.period.modern-periodic-law",
     "chem.period.periodic-properties"
    ],
-   "fingerprint": "f1bebd87e",
+   "fingerprint": "fe97d0632",
    "verdict": "PASS",
    "render": "PASS",
    "semantic": "PASS",
@@ -4298,7 +4298,7 @@
     "chem.period.modern-periodic-law",
     "chem.period.periodic-properties"
    ],
-   "fingerprint": "fcf004a57",
+   "fingerprint": "f40c06f00",
    "verdict": "PASS",
    "render": "PASS",
    "semantic": "PASS",
@@ -4332,7 +4332,7 @@
     "chem.period.modern-periodic-law",
     "chem.period.periodic-properties"
    ],
-   "fingerprint": "ff0626f9d",
+   "fingerprint": "f82b2ded8",
    "verdict": "PASS",
    "render": "PASS",
    "semantic": "PASS",
@@ -4366,7 +4366,7 @@
     "chem.period.modern-periodic-law",
     "chem.period.periodic-properties"
    ],
-   "fingerprint": "fcdab445a",
+   "fingerprint": "f2bb7fdc2",
    "verdict": "PASS",
    "render": "PASS",
    "semantic": "PASS",
@@ -4400,7 +4400,7 @@
     "chem.period.modern-periodic-law",
     "chem.period.periodic-properties"
    ],
-   "fingerprint": "f41e6c51d",
+   "fingerprint": "f96fa98f0",
    "verdict": "PASS",
    "render": "PASS",
    "semantic": "PASS",
@@ -4434,7 +4434,7 @@
     "chem.period.modern-periodic-law",
     "chem.period.periodic-properties"
    ],
-   "fingerprint": "f55f9ec62",
+   "fingerprint": "f5daea8fa",
    "verdict": "PASS",
    "render": "PASS",
    "semantic": "PASS",
@@ -4468,7 +4468,7 @@
     "chem.period.modern-periodic-law",
     "chem.period.periodic-properties"
    ],
-   "fingerprint": "f4514d093",
+   "fingerprint": "fc2fe1770",
    "verdict": "PASS",
    "render": "PASS",
    "semantic": "PASS",
@@ -4502,7 +4502,7 @@
     "chem.period.modern-periodic-law",
     "chem.period.periodic-properties"
    ],
-   "fingerprint": "f20cd6992",
+   "fingerprint": "f3293899a",
    "verdict": "PASS",
    "render": "PASS",
    "semantic": "PASS",
@@ -4536,7 +4536,7 @@
     "chem.period.modern-periodic-law",
     "chem.period.periodic-properties"
    ],
-   "fingerprint": "f8d0ed644",
+   "fingerprint": "f7fd5641e",
    "verdict": "PASS",
    "render": "PASS",
    "semantic": "PASS",
@@ -4570,7 +4570,7 @@
     "chem.period.modern-periodic-law",
     "chem.period.periodic-properties"
    ],
-   "fingerprint": "f26cdf93b",
+   "fingerprint": "fb3a14994",
    "verdict": "PASS",
    "render": "PASS",
    "semantic": "PASS",
@@ -4604,7 +4604,7 @@
     "chem.period.modern-periodic-law",
     "chem.period.periodic-properties"
    ],
-   "fingerprint": "fddc616a2",
+   "fingerprint": "fe860cb5c",
    "verdict": "PASS",
    "render": "PASS",
    "semantic": "PASS",
@@ -4638,7 +4638,7 @@
     "chem.period.modern-periodic-law",
     "chem.period.periodic-properties"
    ],
-   "fingerprint": "fbda789be",
+   "fingerprint": "fadf0b53d",
    "verdict": "PASS",
    "render": "PASS",
    "semantic": "PASS",
@@ -4672,7 +4672,7 @@
     "chem.period.modern-periodic-law",
     "chem.period.periodic-properties"
    ],
-   "fingerprint": "f6a1983fd",
+   "fingerprint": "f3ab15506",
    "verdict": "PASS",
    "render": "PASS",
    "semantic": "PASS",
@@ -4706,7 +4706,7 @@
     "chem.period.modern-periodic-law",
     "chem.period.periodic-properties"
    ],
-   "fingerprint": "fb2cdc0e9",
+   "fingerprint": "f77af90",
    "verdict": "PASS",
    "render": "PASS",
    "semantic": "PASS",
@@ -4740,7 +4740,7 @@
     "chem.period.modern-periodic-law",
     "chem.period.periodic-properties"
    ],
-   "fingerprint": "fa2052118",
+   "fingerprint": "f81837333",
    "verdict": "PASS",
    "render": "PASS",
    "semantic": "PASS",

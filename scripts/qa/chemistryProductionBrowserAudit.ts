@@ -34,8 +34,10 @@ const CONCEPTS = [
   'chem.period.periodic-properties', 'chem.elect.batteries', 'chem.elect.industrial', 'chem.elect.electrolysis',
   'chem.coord.stability', 'chem.atomic.bohr-model', 'chem.atomic.electronic-config', 'chem.bond.covalent-bonding',
   'chem.state.real-gases', 'chem.dblock.organometallics',
+  // authored or reworded by the closure's second round
+  'chem.surface.colloids', 'chem.sblock.water', 'chem.poly.biodegradable', 'chem.found.matter', 'chem.bond.ionic-bonding',
   // Tier 3 (generated, would-be-served) and Tier 2 (approved): the process-flow numeral / contrast fix, the graph-domain repair
-  'chem.found.states-of-matter', 'chem.found.mole-concept', 'chem.found.significant-figures', 'chem.state.gas-laws',
+  'chem.found.states-of-matter', 'chem.found.mole-concept', 'chem.found.significant-figures', 'chem.found.stoichiometry', 'chem.state.gas-laws',
   'chem.kinet.rate-law', 'chem.sol.colligative', 'chem.pblock.group18', 'chem.hal.sn2',
 ]
 /** Retired by the review: an explicit diagram request must return NO figure for these (or a regenerated, different one). */
@@ -148,6 +150,8 @@ async function main() {
             const reviews = findings.filter((f) => f.severity === 'REVIEW').map((f) => `${f.id} ${f.message}`)
             rows.push({ conceptId: id, vp: v.vp, theme, verdict: fails.length ? 'FAIL' : reviews.length ? 'REVIEW_REQUIRED' : 'PASS', fails, reviews, wire, expected })
           } catch (e) {
+            // What the page showed when the figure never appeared: the evidence that tells a deployed defect from a flaky load.
+            if (shots) await page.screenshot({ path: resolve(shots, `${id}__${v.vp}__${theme}__NOT_RUN.png`), fullPage: false }).catch(() => undefined)
             rows.push({ conceptId: id, vp: v.vp, theme, verdict: 'NOT_RUN', fails: [], reviews: [], wire, expected, note: String(e).split('\n')[0].slice(0, 160) })
           }
           const r = rows[rows.length - 1]
