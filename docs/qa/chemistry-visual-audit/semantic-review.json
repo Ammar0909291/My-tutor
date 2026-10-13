@@ -545,7 +545,7 @@
    "remaining": "None for the chemistry. A glyph on a saturated 3D fill is drawn with a text halo; its WCAG ratio cannot reach 4.5:1 (R16, every such label was read in the screenshots)."
   },
   "scene:cell-comparison-chem.found.matter": {
-   "fingerprint": "fd9f27167",
+   "fingerprint": "fe2c285e3",
    "concepts": [
     "chem.found.matter"
    ],
@@ -553,7 +553,7 @@
    "initial": "semantic audit REVIEW_REQUIRED (no deterministic assertion covers this family)",
    "decision": "FIXED→PASS",
    "finding": "Read independently against sources: the first read found imprecise wording (8:1 is a rounding of 7.94:1, 'any ratio', 'not bonded', a property listed only under 'Element'); the re-read of the corrected text is CORRECT.",
-   "fix": "Element 'all atoms have the same atomic number'; compound '2 H : 1 O atoms, about 8 g O : 1 g H' and 'sharp melting point'; mixture 'not chemically combined', 'variable ratio; each part keeps its chemical identity' (the goal says the same).",
+   "fix": "Element 'all atoms have the same atomic number'; compound '2 H : 1 O by number, about 8 g O : 1 g H by mass' and 'sharp melting point'; mixture 'not chemically combined', 'variable ratio; each part keeps its chemical identity' (the goal says the same).",
    "evidence": [
     {
      "file": "docs/qa/chemistry-visual-audit/prose-figure-review.json",

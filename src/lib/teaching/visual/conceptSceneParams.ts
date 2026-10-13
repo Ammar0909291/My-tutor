@@ -1625,7 +1625,7 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     teachingGoal: 'An element has one kind of atom; a compound has two or more elements chemically combined in a fixed ratio; a mixture holds substances that keep their chemical identity and can be separated physically.',
     groups: [
       { label: 'Element', description: 'pure: all atoms have the same atomic number', items: ['e.g. iron, oxygen (O₂)', 'fixed melting and boiling point'] },
-      { label: 'Compound', description: 'pure: elements chemically bonded in a fixed ratio', items: ['e.g. water, H₂O — 2 H : 1 O atoms, about 8 g O : 1 g H', 'sharp melting point; split only by a chemical reaction'] },
+      { label: 'Compound', description: 'pure: elements chemically bonded in a fixed ratio of atoms', items: ['e.g. water, H₂O — 2 H : 1 O by number, about 8 g O : 1 g H by mass', 'sharp melting point; split only by a chemical reaction'] },
       { label: 'Mixture', description: 'two or more substances, not chemically combined (no new substance)', items: ['e.g. salt water, air', 'variable ratio; each part keeps its chemical identity', 'separated physically (filter, evaporate, distil)'] },
     ],
   }),

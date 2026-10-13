@@ -84,7 +84,7 @@
    "source": "tier0",
    "provenance": "generator",
    "instanceId": "scene:cell-comparison-chem.found.matter",
-   "fingerprint": "fd9f27167",
+   "fingerprint": "fe2c285e3",
    "verdict": "REVIEW_REQUIRED",
    "shadowedCachedFigure": true
   },
@@ -1963,7 +1963,7 @@
    "conceptIds": [
     "chem.found.matter"
    ],
-   "fingerprint": "fd9f27167",
+   "fingerprint": "fe2c285e3",
    "verdict": "REVIEW_REQUIRED",
    "render": "PASS",
    "semantic": "REVIEW_REQUIRED",

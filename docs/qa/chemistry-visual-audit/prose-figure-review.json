@@ -241,7 +241,7 @@
     "https://ciaaw.org/oxygen.htm",
     "https://ciaaw.org/hydrogen.htm"
    ],
-   "resolution": "Applied: element 'all atoms have the same atomic number'; compound '2 H : 1 O atoms, about 8 g O : 1 g H' and 'sharp melting point'; mixture 'not chemically combined (no new substance)', 'variable ratio; each part keeps its chemical identity'. Not applied: 'at a given pressure' and a heterogeneous mixture example (width).",
+   "resolution": "Applied: element 'all atoms have the same atomic number'; compound '2 H : 1 O by number, about 8 g O : 1 g H by mass' and 'sharp melting point'; mixture 'not chemically combined (no new substance)', 'variable ratio; each part keeps its chemical identity'. Not applied: 'at a given pressure' and a heterogeneous mixture example (width).",
    "finalRead": {
     "date": "2026-10-12",
     "verdict": "CORRECT",
