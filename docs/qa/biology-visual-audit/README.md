@@ -226,7 +226,7 @@ not measured on production.
 ## Final verification (2026-10-13, last verified tree `6e69667`)
 
 **Question this answers:** is the closure above still true on the code that is on `main` and deployed now? Between the closure report and this pass,
-`main` gained Mathematics batches 40-41, Physics visual work and a Chemistry visual closure (`b35bb4c..23c52bf`, 60+ commits) — including edits to
+`main` gained Mathematics batches 40-41, Physics visual work and a Chemistry visual closure (`b35bb4c..23c52bf`, 40 commits) — including edits to
 shared render files (`ExplainerFigure.tsx`, `SceneSpecRenderer.tsx`, `cellComparison.pure.ts`, `useFigureLegibility.ts`, `conceptSceneParams.ts`). The earlier
 claims were therefore re-checked, twice (on `1fb5e21`, then on the merge with the Chemistry work, `6e69667`), rather than assumed. No Biology source was
 changed; one test block was added (below). Later upstream commits (to `908e019`) changed `CLAUDE.md` and `docs/` only.
