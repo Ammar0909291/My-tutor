@@ -383,13 +383,13 @@ on the two lessons whose reply reaches the weight/normal steps (free-body-diagra
 Parametric scene `lens_power` through the EXISTING variable layer (`PARAMETRIC_SCENES`, `CANONICAL_SCENES`, `resolveVisual`): P of one lens (−4…+6 D), P₁, P₂ (−4…+8 D), gap d (0…0.5 m). The canonical state is §18.1's figure. Every printed power is
 re-derived from the DRAWN rays (slope change = −y·P/SCALE); P = 0 prints f = ∞ and nothing divides by zero; negative power diverges; apart, P = P₁ + P₂ − d·P₁P₂ and the figure says the sum rule does not hold
 apart; thin lenses in contact is stated in every state. `lensPowerInteractive.test.ts` (control-space sweep, signs, zero/∞, limit statement, real-figure label budget). Dev render: PASS in all 13 slider states × 390/1280 × light/dark.
-Production (`74f4207`): `--mode interact` — default + P=+4 D (f = 0.25 m), P=−2 D (f = −0.50 m), P=0 (f = ∞), pair +4/+2 in contact (+6 D), pair 0.1 m apart (+5.2 D, "sum rule" label gone): **22/22 PASS** (390/1280 × light/dark).
+Production (`74f4207`): `--mode interact` — default + P=+4 D (f = 0.25 m), P=−2 D (f = −0.50 m), P=0 (f = ∞), pair +4/+2 in contact (+6 D), pair 0.1 m apart (+5.2 D, "sum rule" label gone): **24/24 PASS** (4 views × the default state + 5 checks).
 
 ### 19.5 `phys.mech.normal-force` — scope matched to the lesson — FIXED AND VERIFIED (supersedes §18.2's level-only card)
 
 The lesson teaches N ⟂ surface, N = mg only when level and unpushed, N = mg cos θ on a slope. The level-only card contradicted half of it. Now a parametric scene `normal_force` (θ 0–60°, vertical push F 0–1 mg; N = (mg + F) cos θ; the arrow is perpendicular to the
 DRAWN surface, its length is the printed N, the load is resolved into cos θ / sin θ parts, the Third-Law partner N′ is on the surface; no ground grid for a tilted surface). `normalForceInteractive.test.ts` (23 tests incl. negative controls that fail a figure agreeing
-with the misconception). Production: **22/22 PASS** — level N = 1.00 mg, θ = 30° N = 0.87 mg, θ = 60° N = 0.50 mg, push 0.5 mg N = 1.50 mg, in 390/1280 × light/dark. Friction on a slope is deliberately not drawn (a different concept).
+with the misconception). Production: **20/20 PASS** (4 views × the default state + 4 checks) — level N = 1.00 mg, θ = 30° N = 0.87 mg, θ = 60° N = 0.50 mg, push 0.5 mg N = 1.50 mg, in 390/1280 × light/dark. Friction on a slope is deliberately not drawn (a different concept).
 
 ### 19.6 Physics audit and gates
 
