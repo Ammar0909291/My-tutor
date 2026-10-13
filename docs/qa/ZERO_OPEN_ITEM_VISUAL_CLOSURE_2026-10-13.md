@@ -7,7 +7,7 @@ Every finding ends in exactly one of: **FIXED AND VERIFIED**, **INTENTIONAL AND 
 **Final verified commit: `23c52bf`** on `main` (= `origin/main`, clean working tree) — deployment **`dpl_2qXa8KT6TL49AFbwnqicesn57jWa`**, READY, `aliasError: null`, alias `my-tutor-flame.vercel.app`, exact commit `23c52bf0d8d4942a65a62a2aab39ceff682b30c8`.
 CI (`validate`, run #4601): **success** for `23c52bf` (type-error ratchet, vitest, knowledge-graph validator, educational-package determinism, visualization-registry coverage).
 The earlier verified deployments are `dpl_DfiW33EV…` (`74f4207`) and `dpl_CY88qN1U…` (`9b26c89`); `23c52bf` adds the closure documents and the other worker's Mathematics batch 41 (`mathCoreScenesB41.ts`, its test, 19 registry lines) — no Physics, Chemistry, Biology or hook code.
-Any commit after `23c52bf` is documentation only (this report). Evidence: `docs/qa/physics-visual-audit/production-2026-10-13/` (README + JSON + screenshots).
+After `23c52bf`: `908e019` (this report; docs only, CI #4603 success, deployment `dpl_Cp2Fs7sM…` READY) and the Biology workstream's `772b989`/`8354da1` (their final-verification docs and evidence, plus 29 lines in `src/tests/bioClosureFigures.test.ts`; not part of this campaign's gates — on `8354da1` I ran `tsc --noEmit` = exit 0 and that test file = 60/60 passed; their own run re-audited the six Biology figures on `23c52bf` in production: 24/24 clean, and independently reached the same conclusion on the mycorrhizae footer overlap). Evidence: `docs/qa/physics-visual-audit/production-2026-10-13/` (README + JSON + screenshots).
 
 ## Who did what (so nothing is credited twice)
 
