@@ -16,7 +16,7 @@
  */
 
 import type { SceneObject, SceneSpec, SceneStep, Vec3 } from '../sceneSpec'
-import { captionBeside, round } from './shared'
+import { captionBeside, isBiologyScene, round } from './shared'
 
 export interface CellStructurePart {
   /** The part's name, exactly as the concept's KG description names it. */
@@ -78,7 +78,9 @@ export function buildCellStructureScene(params: CellStructureParams): SceneSpec 
     objects: [
       { type: 'path', id: 'boundary', points: ring, color: BOUNDARY_COLOR, thickness: 0.07, radius: 0.04, text: boundaryLabel, // The boundary caption sits just above the ring, as wide as the ring itself: narrowed to a part's width it wrapped
       // to three lines whose backing plate erased the top of the ring (measured on desktop).
-      properties: { labelOffset: [0, 0.9, 0], labelWrapFraction: 0.6, labelWrapUnits: BOUNDARY_RADIUS * 2 } },
+      // Biology (2026-10-09): the ring is the cell's OUTLINE, not a route, so it opts out of "Play the motion" — ten structure figures offered to walk a
+      // marker round a circle, which shows the learner nothing about the structure.
+      properties: { labelOffset: [0, 0.9, 0], labelWrapFraction: 0.6, labelWrapUnits: BOUNDARY_RADIUS * 2, ...(isBiologyScene(conceptId) ? { trace: false } : {}) } },
     ],
   }
 

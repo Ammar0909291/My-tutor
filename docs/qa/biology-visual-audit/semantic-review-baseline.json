@@ -1796,5 +1796,65 @@
    ],
    "fix": null
   }
- ]
+ ],
+ "closureReview": {
+  "date": "2026-10-13",
+  "note": "Appended by the closure campaign. The baseline verdicts above are unchanged. Final status per concept is in audit-final.json (closure.finalStatus). The six figures that were REVIEW_REQUIRED after the first repair pass were resolved from their Educational Brain entries (the only source) and re-reviewed by an independent read-only reviewer (a model, not a human) that found no contradiction with the EB text in any of the six. Final status words: PASS 199 / FAIL 0 / REVIEW_REQUIRED 0.",
+  "six": [
+   {
+    "id": "bio.neuro.brain-regional-organization",
+    "baseline": "PASS",
+    "afterFirstPass": "REVIEW_REQUIRED",
+    "final": "PASS",
+    "what": "lateral brain with one brush region per lobe/division (forebrain, midbrain, hindbrain, four cortical lobes, limbic structures linked); each stage reveals only what it names"
+   },
+   {
+    "id": "bio.cell.cell-theory",
+    "baseline": "FAIL",
+    "afterFirstPass": "REVIEW_REQUIRED",
+    "final": "PASS",
+    "what": "Schleiden 1838 -> Schwann 1839 -> Virchow 1855 -> the theory; \"all cells arise from pre-existing cells\" is Virchow only; abiogenesis scoped as a separate question"
+   },
+   {
+    "id": "bio.mol.dna-replication",
+    "baseline": "FAIL",
+    "afterFirstPass": "REVIEW_REQUIRED",
+    "final": "PASS",
+    "what": "9 labels (budget), one merged lagging-strand label, direction legend; stage 5 says RNA primers are replaced with DNA before ligase joins the fragments"
+   },
+   {
+    "id": "bio.eco.predator-prey-dynamics",
+    "baseline": "REVIEW_REQUIRED",
+    "afterFirstPass": "REVIEW_REQUIRED",
+    "final": "PASS",
+    "what": "the cycle itself is drawn (RK4 Lotka-Volterra, two cycles, predator lag in the first cycle), numerical vs functional response as callouts"
+   },
+   {
+    "id": "bio.plant.mycorrhizae-plant-symbioses",
+    "baseline": "FAIL",
+    "afterFirstPass": "REVIEW_REQUIRED",
+    "final": "PASS",
+    "what": "arbuscular (arbuscule INSIDE the cell) vs ectomycorrhizal (mantle OUTSIDE, Hartig net BETWEEN cells) vs the rhizobium-legume nodule as a different partner"
+   },
+   {
+    "id": "bio.plant.plant-growth-hormones",
+    "baseline": "PASS",
+    "afterFirstPass": "REVIEW_REQUIRED",
+    "final": "PASS",
+    "what": "five major hormone groups each with their function as a caption; auxin: leaves lit side, shaded side grows more; roots ~1000x more sensitive"
+   }
+  ],
+  "reviewerAdvisoryItems": [
+   "dna-replication: lagging-strand stage now says DNA polymerase I replaces the RNA primers with DNA before ligase joins the pieces (applied)",
+   "cell-theory: Schwann stage no longer carries the universal first-tenet wording (applied)",
+   "predator-prey: functional response is \"per unit time\" (applied)",
+   "plant-growth-hormones: title \"Five Major Plant Hormone Groups\"; auxin caption states the whole direction (applied)",
+   "brain-regional-organization: \"functionally linked\", and the forebrain is the cerebrum and the structures beneath it (applied)"
+  ],
+  "limits": [
+   "the reviewer could not see the rendered plot / limbic layout, only the scene dump and narration; the layout was judged from screenshots by the author",
+   "the reviewer is a model; no human educator signed off these six figures"
+  ],
+  "bareGroupNote": "20 cell-comparison figures whose groups were name-only now show the group's own description as a caption (cellComparison.withDescribedBareGroups, Biology only); the wording is each concept's own EB/KG-grounded description, nothing added."
+ }
 }

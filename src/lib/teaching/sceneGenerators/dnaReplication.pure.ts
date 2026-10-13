@@ -54,9 +54,9 @@ const PRIMER = ROLE.input
 const ENZYME = ROLE.aid
 
 const FORK: Vec3 = [-2.0, 0, 0]
-const Y_PARENT = 0.3      // half-gap of the parental duplex
-const Y_TEMPLATE = 1.8    // template arms
-const Y_NEW = 1.2         // new strands, just inside each template
+const Y_PARENT = 0.35     // half-gap of the parental duplex
+const Y_TEMPLATE = 2.8    // template arms
+const Y_NEW = 2.0         // new strands, just inside each template (room between them for two captions)
 const X_ARM = -1.0        // where each arm levels off
 const X_END = 4.6
 
@@ -73,14 +73,11 @@ export function buildDNAReplicationScene(): SceneSpec {
   const parental: SceneObject[] = [
     line([-4.6, Y_PARENT, 0], [FORK[0], Y_PARENT, 0], PARENT, 0.06),
     line([-4.6, -Y_PARENT, 0], [FORK[0], -Y_PARENT, 0], PARENT, 0.06),
-    label('parental DNA', [-3.3, 1.0, 0], PARENT, 'primary'),
     dot(FORK, ENZYME, 0.22),
-    label('helicase', [-3.0, -1.0, 0], ENZYME, 'primary'),
-    label('replication fork', [-3.4, 1.85, 0], ROLE.ink, 'detail'),
-    arrow([-2.7, 1.5, 0], [-2.15, 0.45, 0], ROLE.aid),
-    // Direction of fork movement. Unlabelled on purpose: its meaning is stated
-    // in stage 1's narration, and the contract carries at most 14 texts.
-    arrow([-2.8, 2.7, 0], [-4.4, 2.7, 0], ROLE.ink),
+    label('helicase', [-3.0, -1.2, 0], ENZYME, 'primary'),
+    // Direction of fork movement. Its caption is the arrow's OWN text (not a label object), so the nine label objects
+    // the intermediate budget shows are all enzymes and strands; an unlabelled arrow read as decoration.
+    arrow([-2.8, 3.9, 0], [-4.4, 3.9, 0], ROLE.ink, 'fork moves'),
   ]
 
   const templates: SceneObject[] = [
@@ -97,7 +94,6 @@ export function buildDNAReplicationScene(): SceneSpec {
     label('3′', [-4.95, -0.55, 0], PARENT, 'detail'),
     label('3′', [4.95, Y_TEMPLATE, 0], PARENT, 'detail'),
     label('5′', [4.95, -Y_TEMPLATE, 0], PARENT, 'detail'),
-    label('template', [3.0, 2.35, 0], PARENT, 'detail'),
   ]
 
   const primers: SceneObject[] = [
@@ -106,16 +102,16 @@ export function buildDNAReplicationScene(): SceneSpec {
     // The newest lagging piece's primer, just laid down near the fork.
     line([OKAZAKI[0].primer![0], -Y_NEW, 0], [OKAZAKI[0].primer![1], -Y_NEW, 0], PRIMER, 0.08),
     dot([-1.0, -Y_NEW, 0], ENZYME, 0.18),
-    label('primase', [-1.4, -2.35, 0], ENZYME, 'primary'),
-    label('RNA primer', [4.0, 0.6, 0], PRIMER, 'detail'),
+    label('primase', [-1.4, -3.6, 0], ENZYME, 'primary'),
+    label('RNA primer', [4.1, 1.2, 0], PRIMER, 'detail'),
   ]
 
   const leading: SceneObject[] = [
     // Built 5′→3′: the arrowhead is the growing 3′ end, pointing at the fork.
     arrow([3.8, Y_NEW, 0], [-0.55, Y_NEW, 0], NEW),
     dot([-0.7, Y_NEW, 0], ENZYME, 0.2),
-    label('DNA polymerase', [-0.8, 2.5, 0], ENZYME, 'primary'),
-    label('leading strand', [0.9, 0.6, 0], NEW, 'primary'),
+    label('DNA polymerase', [0.2, 3.7, 0], ENZYME, 'primary'),
+    label('leading strand', [0.4, 1.2, 0], NEW, 'detail'),
   ]
 
   const lagging: SceneObject[] = [
@@ -124,18 +120,19 @@ export function buildDNAReplicationScene(): SceneSpec {
     // Each piece built 5′→3′, AWAY from the fork.
     ...OKAZAKI.map((f) => arrow([f.dna[0], -Y_NEW, 0], [f.dna[1], -Y_NEW, 0], NEW)),
     dot([1.0, -Y_NEW, 0], ENZYME, 0.2),
-    label('DNA polymerase', [1.1, -2.45, 0], ENZYME, 'primary'),
-    label('lagging strand', [1.0, -0.6, 0], NEW, 'primary'),
-    label('Okazaki fragments', [2.4, -3.2, 0], NEW, 'detail'),
+    label('DNA polymerase', [1.7, -3.7, 0], ENZYME, 'primary'),
+    // ONE caption for the strand and the pieces it is made of: the Okazaki fragments ARE the lagging strand, and a
+    // separate caption for them hung 2 units below the strand, past the template, pointing at nothing.
+    { ...label('lagging strand (Okazaki fragments)', [1.8, -0.95, 0], NEW, 'detail'), properties: { labelWrapUnits: 6 } },
   ]
 
   const ligase: SceneObject[] = [
     dot([2.98, -Y_NEW, 0], ENZYME, 0.2),
-    label('ligase', [4.0, -2.45, 0], ENZYME, 'primary'),
+    label('ligase', [4.5, -3.7, 0], ENZYME, 'primary'),
   ]
 
   const result: SceneObject[] = [
-    heading('semiconservative', [0, -5.0, 0], NEW),
+    heading('semiconservative', [0, -5.4, 0], NEW),
   ]
 
   return {
@@ -156,6 +153,16 @@ export function buildDNAReplicationScene(): SceneSpec {
       'the lagging strand is built away from the fork in short Okazaki fragments, each begun by an RNA ' +
       'primer laid down by primase; ligase joins the fragments. Each new DNA molecule keeps one parental ' +
       'strand and one new strand.',
+    // The frame's derived legend names colours by ROLE ("Construction aid", "Applied / incoming quantity"), which says
+    // nothing about DNA. Authored here, in the figure's own words.
+    explainer: {
+      legend: [
+        { label: 'Parental DNA (the two templates)', color: PARENT, shape: 'line' },
+        { label: 'New DNA, built 5′→3′ (arrowhead = growing 3′ end)', color: NEW, shape: 'arrow' },
+        { label: 'RNA primer', color: PRIMER, shape: 'line' },
+        { label: 'Enzymes', color: ENZYME, shape: 'dot' },
+      ],
+    },
     steps: [
       {
         intent: 'establish',
@@ -189,7 +196,7 @@ export function buildDNAReplicationScene(): SceneSpec {
         intent: 'resolve',
         narration:
           'On the bottom template 5′→3′ points away from the fork, so each Okazaki fragment grows away ' +
-          'from it, from a new primer laid nearer the fork as it opens; ligase then joins the pieces.',
+          'from it, from a new primer laid nearer the fork as it opens; ligase joins the pieces once DNA polymerase I has replaced the RNA primers with DNA.',
         objects: [...lagging, ...ligase],
       },
       {

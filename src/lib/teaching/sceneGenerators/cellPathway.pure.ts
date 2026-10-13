@@ -42,6 +42,11 @@ export interface CellPathwayParams {
   stages: readonly PathwayStage[]
   /** Two parallel stages that both follow the last shared stage — a branching END. */
   branchEnd?: readonly [PathwayStage, PathwayStage]
+  /**
+   * Frame content the stage names cannot carry (the figure's own legend, insight bullets). Passed straight through to
+   * `SceneSpec.explainer`; omitted by every existing caller, whose output is therefore unchanged.
+   */
+  explainer?: SceneSpec['explainer']
 }
 
 const NODE_COLOR = '#4C8DFF'
@@ -110,7 +115,7 @@ function branchLines(a: PathwayStage, b: PathwayStage): string {
 }
 
 export function buildCellPathwayScene(params: CellPathwayParams): SceneSpec {
-  const { conceptId, title, teachingGoal, cyclic, branchStart, stages, branchEnd } = params
+  const { conceptId, title, teachingGoal, cyclic, branchStart, stages, branchEnd, explainer } = params
   const bio = isBiologyScene(conceptId)
   const stagger = bio && !cyclic && !branchStart && !branchEnd && stages.length >= STAGGER_FROM_STAGES
   const node = bio
@@ -204,5 +209,6 @@ export function buildCellPathwayScene(params: CellPathwayParams): SceneSpec {
     cameraDistance: 20,
     ariaLabel: `A ${cyclic ? 'cyclic' : 'sequential'} process diagram of ${title}: ${allStageNames.join(' -> ')}.`,
     steps,
+    ...(explainer ? { explainer } : {}),
   }
 }
