@@ -1,6 +1,6 @@
 {
- "generatedAt": "2026-10-09T04:28:51.669Z",
- "fingerprint": "e5dbf2b276b8559ee19bfa01012d05e06e80362d64104eeb3cf46c4f9ae414bc",
+ "generatedAt": "2026-10-13T02:10:29.131Z",
+ "fingerprint": "07a2d2218b2ee54259ca051774121935c30881f3b689cb559f7906a8be8e2e71",
  "fingerprints": {
   "phys.meas.units": "689b537633be33f5",
   "phys.meas.scalars-vectors": "566feb21908a8419",
@@ -30,7 +30,7 @@
   "phys.mech.friction": "3863d886b0e992dc",
   "phys.mech.tension": "a99d45b7cdda94bb",
   "phys.mech.constraint-motion": "67c9d615477b14d1",
-  "phys.mech.normal-force": "2c0ebf797fef3fb8",
+  "phys.mech.normal-force": "9eb8f85beef305f6",
   "phys.mech.inclined-plane": "9fe037d450388b51",
   "phys.mech.non-inertial-frames": "59a2ad230f715fb1",
   "phys.mech.work": "b992dbfe7350cef1",
@@ -129,7 +129,7 @@
   "phys.opt.refraction": "68fa7432ad15d062",
   "phys.opt.total-internal-reflection": "a784035ad52541f4",
   "phys.opt.lenses": "cb5e461a9fcaeb24",
-  "phys.opt.lens-power": "dd9c9d648c855272",
+  "phys.opt.lens-power": "35f2daef0d09199f",
   "phys.opt.human-eye": "d58a3f32074479f4",
   "phys.opt.optical-instruments": "fa031acff9dc20eb",
   "phys.opt.dispersion": "2e29aaa29035803c",
@@ -297,8 +297,8 @@
  "summary": {
   "concepts": 283,
   "verdicts": {
-   "REVIEW_REQUIRED": 18,
-   "PASS": 265
+   "REVIEW_REQUIRED": 17,
+   "PASS": 266
   },
   "byViewport": {
    "mobile": {
@@ -329,8 +329,8 @@
     "PASS": 283
    },
    "semantic": {
-    "PASS": 270,
-    "REVIEW_REQUIRED": 13
+    "PASS": 271,
+    "REVIEW_REQUIRED": 12
    },
    "interactive": {
     "PASS": 282,
@@ -1080,11 +1080,11 @@
   },
   {
    "id": "phys.mech.normal-force",
-   "verdict": "REVIEW_REQUIRED",
-   "class": "card",
-   "authorship": "curated-card",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "shared-generator-default",
    "scope": "concept",
-   "interactive": false,
+   "interactive": true,
    "graph": false,
    "dims": {
     "structural": "PASS",
@@ -1092,19 +1092,17 @@
     "contrast": "PASS",
     "layout": "PASS",
     "graph": "PASS",
-    "semantic": "REVIEW_REQUIRED",
+    "semantic": "PASS",
     "interactive": "PASS"
    },
    "byViewport": {
     "mobile": "PASS",
     "desktop-column": "PASS"
    },
-   "semantic": "REVIEW_REQUIRED",
-   "states": 3,
+   "semantic": "PASS",
+   "states": 19,
    "fail": 0,
-   "review": [
-    "SM-02: no deterministic physics assertion covers this figure (no arithmetic chain, no physics test)"
-   ]
+   "review": []
   },
   {
    "id": "phys.mech.inclined-plane",
@@ -3667,9 +3665,9 @@
    "id": "phys.opt.lens-power",
    "verdict": "PASS",
    "class": "scene",
-   "authorship": "authored-concept",
+   "authorship": "shared-generator-default",
    "scope": "concept",
-   "interactive": false,
+   "interactive": true,
    "graph": false,
    "dims": {
     "structural": "PASS",
@@ -3685,7 +3683,7 @@
     "desktop-column": "PASS"
    },
    "semantic": "PASS",
-   "states": 3,
+   "states": 27,
    "fail": 0,
    "review": []
   },

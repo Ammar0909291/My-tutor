@@ -32,6 +32,10 @@ export const FORCE_DIAGRAM = {
   width: 300, height: 170,
   /** How far an arrow-head's tip lies beyond the end of its line: marker 8 units x stroke 2.5, half of it past the ref point. */
   headReach: 10,
+  /** Half the width of an arrow-head (the marker is a square, 8 units x stroke 2.5 = 20 units, centred on the line). */
+  headHalfWidth: 10,
+  /** The clear gap kept between a vertical arrow's head and the label that names it. */
+  labelGap: 6,
 } as const
 
 /** A horizontal arrow's label sits this far above its line — clear of the 20-unit arrow-head (markers scale with stroke width). */
@@ -39,7 +43,10 @@ const LABEL_LIFT = 13
 
 export function ForceDiagram({ revealStep = Infinity }: { revealStep?: number }) {
   const { t } = useLanguage()
-  const { cx, boxW, boxH, groundY, horizontalLen, verticalLen } = FORCE_DIAGRAM
+  const { cx, boxW, boxH, groundY, horizontalLen, verticalLen, headHalfWidth, labelGap } = FORCE_DIAGRAM
+  // A label that names a VERTICAL arrow starts just past the arrow-head's side and runs away from it, whatever the
+  // text's width — centring it on a fixed x let a 13-character label start 2 units inside the head (1 px apart at 1280).
+  const sideLabelX = cx + headHalfWidth + labelGap
   const cy = groundY - boxH / 2
   const show = (s: number) => revealStep >= s
 
@@ -74,14 +81,14 @@ export function ForceDiagram({ revealStep = Infinity }: { revealStep?: number })
       {show(4) && (
         <g className={anim.reveal}>
           <line x1={cx} y1={cy + boxH / 2} x2={cx} y2={cy + boxH / 2 + verticalLen} stroke="#FF6B5E" strokeWidth={2.5} markerEnd="url(#rArr)" pathLength={1} strokeDasharray={1} className={anim.drawLine} />
-          <text x={cx + 44} y={cy + boxH / 2 + 28} textAnchor="middle" fontSize={10} fill="#FF6B5E" fontWeight={600}>Weight (W=mg)</text>
+          <text x={sideLabelX} y={cy + boxH / 2 + 28} textAnchor="start" fontSize={10} fill="#FF6B5E" fontWeight={600}>Weight (W=mg)</text>
         </g>
       )}
       {/* Step 5 — Normal */}
       {show(5) && (
         <g className={anim.reveal}>
           <line x1={cx} y1={cy - boxH / 2} x2={cx} y2={cy - boxH / 2 - verticalLen} stroke="#8B5CF6" strokeWidth={2.5} markerEnd="url(#pArr)" pathLength={1} strokeDasharray={1} className={anim.drawLine} />
-          <text x={cx + 22} y={cy - boxH / 2 - 18} textAnchor="middle" fontSize={10} fill="#8B5CF6" fontWeight={600}>{t('viz_normal')}</text>
+          <text x={sideLabelX} y={cy - boxH / 2 - 18} textAnchor="start" fontSize={10} fill="#8B5CF6" fontWeight={600}>{t('viz_normal')}</text>
         </g>
       )}
 

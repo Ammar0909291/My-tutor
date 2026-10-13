@@ -29,7 +29,6 @@ import type { SceneSpec } from '@/lib/teaching/sceneSpec'
 import { fitSceneToFrame } from './layout'
 import { canonicalParametricScene } from './parametricScenes'
 import { buildVectorProductsScene } from '@/lib/teaching/sceneGenerators/vectorProducts'
-import { buildLensPowerScene } from '@/lib/teaching/sceneGenerators/lensPower'
 import { buildCollisionScene } from '@/lib/teaching/sceneGenerators/momentumCollision'
 import { buildRayOpticsScene } from '@/lib/teaching/sceneGenerators/rayOptics'
 import { buildCircuitScene } from '@/lib/teaching/sceneGenerators/electricCircuit'
@@ -374,6 +373,10 @@ const CANONICAL_SCENES: Record<string, () => SceneSpec> = {
   electric_dipole: () => fromRegistry('electric_dipole'),
   gravitation_orbit: () => fromRegistry('gravitation_orbit'),
   ray_optics:      () => fromRegistry('ray_optics'),
+  // 2026-10-12: lens power — P = 1/f and the addition rule, interactive (powers, and the gap that breaks the sum).
+  lens_power:      () => fromRegistry('lens_power'),
+  // 2026-10-12: normal force — the whole lesson (level, tilted, an extra push, and N's Third-Law partner), not only the level case.
+  normal_force:    () => fromRegistry('normal_force'),
   electric_circuit: () => fromRegistry('electric_circuit'),
   kinematics_graphs: () => fromRegistry('kinematics_graphs'),
   // ADR 16 POC: frame 0 of the time-stepped simulation. Inert until a concept
@@ -1159,12 +1162,8 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   // before the kind is.
   'phys.meas.vector-products': buildVectorProductsScene,
 
-  // Lens power and lens combinations: P = 1/f in dioptres, and P = P1 + P2 for thin lenses in
-  // contact — the two relationships the KG node, the EB entry and the blueprint teach. Until
-  // 2026-10-09 the concept was served the single-lens ray diagram of phys.opt.lenses, which shows
-  // neither (see lensPower.ts). Its registry row names no generator, so — as for vector-products —
-  // this table is what serves it, and it is a static figure rather than the ray_optics sliders.
-  'phys.opt.lens-power': buildLensPowerScene,
+  // phys.opt.lens-power is NOT here any more (2026-10-12): it is served by the interactive `lens_power`
+  // kind (parametricScenes.ts, bound in visualRegistry.ts), whose builder is lensPower.pure.ts.
 
   'phys.opt.total-internal-reflection': buildTotalInternalReflectionScene,
   'phys.opt.refraction':                buildRefractionScene,

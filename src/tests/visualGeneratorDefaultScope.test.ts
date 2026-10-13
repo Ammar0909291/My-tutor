@@ -119,6 +119,12 @@ describe('the remaining gap is enumerated and may only shrink', () => {
     // of unlabeled spheres whose arrows did not conserve momentum for the masses their sizes implied.
     'phys.mech.conservation-of-momentum',
     'phys.mech.kinematics-1d',
+    // Judged 2026-10-12, against the EB's Learning Objective for the concept (N is whatever zeroes the net force perpendicular
+    // to the surface; equal to the weight ONLY on a level surface with nothing else vertical; mg cos θ on a slope; more than mg
+    // under an extra push; not gravity's Third-Law partner): the generator was written for THIS concept alone
+    // (normalForce.pure.ts), its default instance is the level baseline and its controls are the objective's own two cases
+    // (the tilt, the extra push). It replaces the shared level-surface card, which could show none of them.
+    'phys.mech.normal-force',
     // ADR 16 G3 (2026-09-29), judged against the KG description "The net force on a
     // body equals the product of its mass and acceleration: F = ma": the shared
     // instance draws the net force, the resulting a = F/m and a v–t graph whose slope
@@ -129,6 +135,12 @@ describe('the remaining gap is enumerated and may only shrink', () => {
     'phys.mech.torque',
     'phys.meas.vector-addition',
     'phys.opt.lenses',
+    // Judged 2026-10-12, against the KG node ("the power of a lens is the reciprocal of focal length in metres;
+    // combined lenses have powers that add algebraically") and the EB (P = 1/f; P_total = P₁ + P₂ for thin lenses in
+    // contact): the generator was written for THIS concept alone (lensPower.pure.ts) — its default instance is the
+    // EB's own worked numbers, every ray is traced from the powers, and its controls are exactly the claims of the lesson
+    // (the power, the pair, and the gap that breaks the sum). Not a stand-in for it.
+    'phys.opt.lens-power',
     'phys.wave.pendulum',
   ]
 

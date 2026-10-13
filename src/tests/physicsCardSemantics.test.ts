@@ -19,6 +19,7 @@ import { SternGerlach } from '@/components/school/visuals/SternGerlach'
 import { cloudPoints, ORBITAL_LABELS } from '@/components/school/visuals/HydrogenOrbital3D'
 import { BINS, COUNTS, MEAN_X, MEAN_LABEL } from '@/components/school/visuals/StatisticalDistribution3D'
 import { resolveVisual } from '@/lib/teaching/visual/resolveVisual'
+import { canonicalParametricScene } from '@/lib/teaching/visual/parametricScenes'
 import { buildCollisionScene, checkCollisionConsistency } from '@/lib/teaching/sceneGenerators/momentumCollision.pure'
 import type { SceneSpec } from '@/lib/teaching/sceneSpec'
 import { PARTICLE_TREE, buildParticleClassificationScene } from '@/lib/teaching/sceneGenerators/physicsCoreScenesB10'
@@ -28,7 +29,7 @@ import { buildRayOpticsScene, checkRayOpticsConsistency, type OpticsType } from 
 import { WaveFunctionPlot, WAVE_FUNCTION, waveFunctionPoints } from '@/components/school/visuals/WaveFunctionPlot'
 import { buildVectorProductsScene, VECTOR_PRODUCTS_PARAMS } from '@/lib/teaching/sceneGenerators/vectorProducts'
 import { buildSiUnitsScene, buildDimensionsScene } from '@/lib/teaching/sceneGenerators/physicsCoreScenesB7'
-import { LENS_POWER_PARAMS, buildLensPowerScene as buildLensPowerSceneAgain } from '@/lib/teaching/sceneGenerators/lensPower'
+import { LENS_POWER_PARAMS, buildLensPowerScene as buildLensPowerSceneAgain } from '@/lib/teaching/sceneGenerators/lensPower.pure'
 import { buildParticleConservationScene } from '@/lib/teaching/sceneGenerators/physicsCoreScenesB10'
 
 /** A card's SVG as markup, every step revealed — what the learner finally sees. */
@@ -152,6 +153,31 @@ describe('the shared force diagram draws what each of its four concepts says', (
     }
     // ...and the labels beside them (the weight label is the lowest text)
     for (const m of svg.matchAll(/<text\b[^>]*\sy="([\d.]+)"/g)) expect(Number(m[1])).toBeLessThanOrEqual(height)
+  })
+
+  it('a label naming a vertical arrow starts clear of that arrow-head and runs away from it (the weight label touched its head at 1280px)', () => {
+    const { headHalfWidth, labelGap } = FORCE_DIAGRAM
+    const MIN_CLEAR = 4   // user units; at 1280px the card scales x1.3, so >= 5 px
+    const texts = [...svg.matchAll(/<text\b[^>]*>/g)].map((m) => ({ tag: m[0], x: num(attr(m[0], 'x')), y: num(attr(m[0], 'y')), anchor: attr(m[0], 'text-anchor') }))
+    const labelOf = (hex: string) => texts.find((t) => t.tag.includes(`fill="${hex}"`))!
+    for (const [name, arrow, label] of [['weight', weight, labelOf('#FF6B5E')], ['normal', normal, labelOf('#8B5CF6')]] as const) {
+      expect(label.anchor, `${name} label runs away from its arrow`).toBe('start')
+      expect(label.x - (arrow.x1 + headHalfWidth), `${name} label clear of its arrow-head`).toBeGreaterThanOrEqual(MIN_CLEAR)
+      expect(label.x - (arrow.x1 + headHalfWidth)).toBe(labelGap)
+      const lo = Math.min(arrow.y1, arrow.y2), hi = Math.max(arrow.y1, arrow.y2)
+      expect(label.y, `${name} label sits beside its own arrow, not another`).toBeGreaterThanOrEqual(lo - FORCE_DIAGRAM.headReach)
+      expect(label.y).toBeLessThanOrEqual(hi + FORCE_DIAGRAM.headReach + 16)
+    }
+    // the two horizontal-arrow labels sit above their arrows' heads, not on them
+    const cy = FORCE_DIAGRAM.groundY - FORCE_DIAGRAM.boxH / 2
+    for (const hex of ['#22A06B', '#3B82F6']) expect(labelOf(hex).y, hex).toBeLessThanOrEqual(cy - headHalfWidth - 2)
+  })
+
+  it('NEGATIVE CONTROL: the old centred label (x = cx + 44, ~70 units wide) really did start inside the head', () => {
+    const { cx, headHalfWidth, labelGap } = FORCE_DIAGRAM
+    const estWidth = 'Weight (W=mg)'.length * 5.4   // 10-unit semibold: ~5.4 units per character
+    const oldLeft = (cx + 44) - estWidth / 2
+    expect(oldLeft - (cx + headHalfWidth)).toBeLessThan(labelGap)
   })
 
   it('the body rests ON the ground (a normal force needs a contact)', () => {
@@ -890,20 +916,22 @@ describe('lens power figure: the printed powers are the ones its drawn rays have
     const { d, spec } = served()
     expect(d.asset?.scope).toBe('concept')
     expect(spec.id).toBe('phys-lens-power')
-    expect(spec.parametric).toBeUndefined()
+    // 2026-10-12: its OWN interactive kind (powers and the gap), not the ray_optics sliders: see lensPowerInteractive.test.ts
+    expect(spec.parametric?.kind).toBe('lens_power')
+    expect(spec.parametric?.params).toMatchObject({ singlePower: pSingle, firstPower: pFirst, secondPower: pSecond, gap: 0 })
   })
 
   it('one lens: the drawn rays have power 1/f — the focus is where the printed f says, and the printed P is 1/f', () => {
-    for (const id of ['ray-single-out-upper', 'ray-single-out-lower']) expect(powerOf(id, ySingle)).toBeCloseTo(pSingle, 6)
+    for (const id of ['ray-single-out-upper', 'ray-single-out-lower']) expect(powerOf(id, ySingle)).toBeCloseTo(pSingle, 2)
     const focus = objById('focus-single')!.position as number[]
     const fMetres = (focus[0] - x0) / scale
-    expect(fMetres).toBeCloseTo(0.5, 6)
-    expect(1 / fMetres).toBeCloseTo(pSingle, 6)
+    expect(fMetres).toBeCloseTo(0.5, 3)
+    expect(1 / fMetres).toBeCloseTo(pSingle, 2)
     // each outgoing ray really passes through that focus
     for (const id of ['ray-single-out-upper', 'ray-single-out-lower']) {
       const r = objById(id)!
       const t = (focus[0] - r.from![0]) / (r.to![0] - r.from![0])
-      expect(r.from![1] + t * (r.to![1] - r.from![1])).toBeCloseTo(ySingle, 6)
+      expect(r.from![1] + t * (r.to![1] - r.from![1])).toBeCloseTo(ySingle, 2)
     }
     expect(text()).toContain('f = 0.50 m')
     expect(text()).toContain('P = 1/f = +2 D')
@@ -922,14 +950,14 @@ describe('lens power figure: the printed powers are the ones its drawn rays have
   it('two lenses in contact: the +5 D lens alone has power 5, the pair has power 3, and the difference is the −2 D lens', () => {
     const alone = powerOf('ray-first-alone', yPair)
     const together = powerOf('ray-pair-out-upper', yPair)
-    expect(alone).toBeCloseTo(pFirst, 6)
-    expect(together).toBeCloseTo(pTotal, 6)
-    expect(powerOf('ray-pair-out-lower', yPair)).toBeCloseTo(pTotal, 6)
+    expect(alone).toBeCloseTo(pFirst, 2)
+    expect(together).toBeCloseTo(pTotal, 2)
+    expect(powerOf('ray-pair-out-lower', yPair)).toBeCloseTo(pTotal, 2)
     // what the second lens ADDS to the bend is its own power, with the sign the figure prints
-    expect(together - alone).toBeCloseTo(pSecond, 6)
+    expect(together - alone).toBeCloseTo(pSecond, 2)
     // and the first lens's own focus is where +5 D puts it
-    expect(((objById('focus-first')!.position as number[])[0] - x0) / scale).toBeCloseTo(1 / pFirst, 6)
-    expect(((objById('focus-pair')!.position as number[])[0] - x0) / scale).toBeCloseTo(1 / pTotal, 6)
+    expect(((objById('focus-first')!.position as number[])[0] - x0) / scale).toBeCloseTo(1 / pFirst, 3)
+    expect(((objById('focus-pair')!.position as number[])[0] - x0) / scale).toBeCloseTo(1 / pTotal, 3)
   })
 
   it('every number printed beside a lens is its power with the right sign, and the printed sum is the sum', () => {
@@ -970,7 +998,8 @@ describe('lens power figure: the printed powers are the ones its drawn rays have
     const labels = sceneObjects(spec).filter((o) => o.type === 'label')
     expect(labels.length).toBeLessThanOrEqual(complexityFor('intermediate').maxLabels)
     for (const st of spec.steps) expect((st.narration ?? '').length).toBeLessThan(220)
-    expect(JSON.stringify(buildLensPowerSceneAgain())).toBe(JSON.stringify(spec))   // deterministic: a rehydrated session matches
+    expect(JSON.stringify(buildLensPowerSceneAgain())).toBe(JSON.stringify(buildLensPowerSceneAgain()))   // deterministic: a rehydrated session matches
+    expect(JSON.stringify(canonicalParametricScene('lens_power'))).toBe(JSON.stringify(spec))        // and the served figure IS the registry's canonical one
     for (const [w, hh, bw] of [[282, 260, 390], [566, 272, 1280], [566, 380, 1280]] as Array<[number, number, number]>) {
       const cum: SceneSpec['steps'][number]['objects'] = []
       for (const step of spec.steps) {

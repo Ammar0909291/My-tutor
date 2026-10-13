@@ -685,5 +685,9 @@ New rules (binding):
    for two lines, 42 px for three) and replay with `placeSceneLabels`; a leader that starts inside its own label's box is an obstacle the solver
    moves the label away from, so start leaders ≥ 1 label-height from the label centre or use a node caption instead of label + leader.
 
-Production browser verification: see the report's "Production" section (`scripts/qa/biologyProductionBrowserAudit.ts` registers a disposable
-`qa-*@mytutor-qa.invalid` account, opens the real `/learn` page and deletes the account afterwards).
+Production browser verification (2026-10-13, deployment `dpl_2oRcCMGxnxAJ7GCL5D8bMD3pPw5g`, commit `478adb0`): 14 concepts (the six repaired + 8
+controls) × 390/1280 × dark/light = 56 views, all `MEASURED_CLEAN`, served scene = audited scene; see the README's "Production" section.
+`scripts/qa/biologyProductionBrowserAudit.ts` registers a disposable `qa-*@mytutor-qa.invalid` account, opens the real `/learn` page and deletes
+the account in a `finally` block — if the run is killed (worker restart) the account is orphaned: look it up read-only by e-mail pattern, log in
+with the password derived from its stamp and delete it through `/api/user/delete-account`. The earlier sentence "Production browser validation
+was unavailable in this session" belongs to the first (2026-10-08) pass only.

@@ -760,6 +760,8 @@ const SCENE_KIND_REPRESENTATION: Record<string, Representation> = {
   collision: 'collision',
   gravitation_orbit: 'orbit',
   ray_optics: 'ray_optics',
+  lens_power: 'ray_optics',
+  normal_force: 'force_diagram',
   torque_diagram: 'force_diagram',
   electric_dipole: 'force_diagram',
   // ADR 16 POC. Consulted only for a concept bound to this kind (none yet, gate G3).

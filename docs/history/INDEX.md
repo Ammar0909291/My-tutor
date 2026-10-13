@@ -47,6 +47,7 @@ log.
 | `MATHEMATICS_VISUAL_HANDOVER.md` | **LIVE handover for the Mathematics figure campaign — read first.** A generated status block (coverage %, tier E/H/N, what is left by domain, recent batch commits, next batch), the 10-minute resume commands, the per-batch loop + pre-push checklist, the traps that cost time, and the post-campaign queue. Refreshed with every batch by `scripts/math/campaign-tools/update-handover.ts`. |
 | `mathematics-visual-campaign.md` | The long log of the Mathematics figure campaign (pilot 2026-10-11, then batches 1-31+): per-batch figure tables, design decisions, defects, and the deferred follow-up queue. Current state is in `MATHEMATICS_VISUAL_HANDOVER.md`. |
 | `tutor-max-final-closure-2026-10-10.md` | Tutor Max final defect closure (cf79346, 76c2edd): no-figure evidence gate, explicit quiz requests vs the mastery-check reservation, grounded prose check; production re-drives (11 disposable accounts), real /learn page evidence, open findings A-2 (imagined description beside a real figure) and C-1 (BIO-024 class not caught). |
+| `biology-visual-closure-2026-10-13.md` | Biology complete visual quality closure: the six REVIEW_REQUIRED figures re-authored from their EB entries, all 199 re-audited (3,716 states, 0 flags), production browser verification (14 concepts × 4 views), the orphaned-QA-account incident, rules learned. |
 
 ## Live pointers (not history — check these first for CURRENT state)
 - `/CLAUDE.md` — live rules.
