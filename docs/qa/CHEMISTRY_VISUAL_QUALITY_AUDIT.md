@@ -219,6 +219,8 @@ REVIEW_REQUIRED · 0 FAIL**. No control builds nothing; the reference tables agr
 
 ## 8. REVIEW_REQUIRED — reported, deliberately not changed
 
+> **Superseded by §12 (2026-10-12):** every item R1–R19 below has a recorded disposition there (fixed, decided, or kept REVIEW_REQUIRED with an owner decision). The table is kept as the baseline.
+
 Verified in the repository this pass, **not** changed — each needs an owner or curriculum decision, or cannot be settled
 deterministically from the figure:
 
@@ -275,3 +277,82 @@ Not deployed by this pass. Production is `b07037f`; Vercel has built nothing sin
 `532055e`, `6ff5a40` (renderer fixes, ENGL-017 contrast lift) are also undeployed. No claim is made about production
 rendering: the browser audit is against this repository's code on a local dev server, and Tier 2/3 figures cannot be
 enumerated offline. After any deploy, re-run the harness against the deployed build and read the Tier 2 ACTIVE visual rows.
+
+
+## 12. Closure (2026-10-12) — R1–R19 dispositions and the final measured state
+
+Scope: the Chemistry visual system only. Mathematics, Physics, English, Biology, CS, the KG, the Educational Brain, GB+, grading, Tutor Max policy and
+mastery were **not** touched (one deliberate shared-renderer fix, `GraphRenderer`, is called out in §12.3). Method: the real resolver (all tiers,
+Tier 2/3 replayed over the committed production snapshot) → the real components in Chromium at 390 and 1280 px, both themes, every control state →
+deterministic validators → independent source-based reviews → a committed, fingerprint-bound record that CI re-checks.
+
+### 12.1 Final measured state (merged code, nothing filtered)
+
+| | |
+|---|---|
+| concepts classified | **186** — E (a figure is served) **100**, D (a generated figure exists, refused) 59, B (should have one; the only figure was retired as wrong) 14, A (generator recorded a deliberate decline) 13 |
+| served by tier | Tier 0 authored/generator 39 · Tier 1 curated/domain card 16 · Tier 2 approved 2 · Tier 3 generated 43 (before the closure the resolver also served 16 wrong generated figures and had no figure for 2 concepts) |
+| figure instances audited | **134** — 42 resolver scenes/cards + 47 interactive-control variants + 45 Tier 2/3 figures |
+| rendered states | **1,086** (instance × viewport × theme × control state): **990 PASS · 96 REVIEW_REQUIRED · 0 FAIL** |
+| machine instance verdicts | 53 PASS · 81 REVIEW_REQUIRED · 0 FAIL (a REVIEW means no deterministic assertion covers the chemistry; §12.4) |
+| what the 96 REVIEW states are | `INNER_SCROLL_X` 42 (expanded view scrolls, R15) · `CONTRAST_LOW` 46 (glyph on a saturated fill, R16; worst 2.13:1) · `LABEL_OVER_STROKE` 16 (a graph gridline behind a tick numeral, four Tier-3 graphs). **No state is REVIEW or FAIL for an overlapping, clipped, unreadable or off-canvas label.** |
+| smallest type / lowest contrast measured | 10.0 px (the repo floor) · 2.13:1 (halo label on a saturated sphere) |
+| human review | 81 REVIEW figures each carry a decision: 22 PASS · 23 FIXED→PASS · 36 REVIEW_REQUIRED (33 Tier-3 figures the reviewer called MINOR, the 2 approved Tier-2 flows, the chelate-effect bar chart) |
+
+Files: `docs/qa/chemistry-visual-audit/audit-summary.json` (per concept: category, tier, provenance, fingerprint, instance, verdict; per instance:
+fingerprint, verdicts, finding codes), `render-states.json` (the per-state manifest), `semantic-review.json` (the ledger),
+`reference-data-ledger.json`, `periodic-reference-ledger.json`, `tier3-independent-review.json`, `prose-figure-review.json`,
+`tier23-snapshot/` (the production cache read of 2026-10-09). CI: `chemistryVisualAudit.test.ts` recomputes every served fingerprint from the
+resolver (Tier 0/1 directly, Tier 2/3 by replaying `resolveVisualForTurn` over the snapshot) and fails, naming the concepts, when the record is stale;
+`chemistrySemanticReview.test.ts` fails when a REVIEW figure has no entry, an entry's fingerprint no longer matches, or its cited evidence has vanished.
+
+### 12.2 R1–R19
+
+| # | disposition | evidence |
+|---|---|---|
+| R1 | **Fixed in the seed** (`C + 2O²⁻ → CO₂ + 4e⁻`); every equation in the seed corpus now balances (test). The live production row is **not** changed: the bootstrap is create-only, so the edit needs a one-row `UPDATE`, **prepared, not executed** (owner confirm) — `R1-production-probe-fix.sql` | `chemistrySeedEquations.test.ts` |
+| R2 | **Fixed**: bond order drawn as parallel sticks, lone pairs drawn in the free VSEPR domains (109.47° apart); the gate checks both | `chemistryClosureGates.test.ts` (R2) |
+| R3 | **Fixed**: the batteries, industrial-electrolysis and electrolysis scenes say which process they show and that others exist; the dry cell is no longer taught as "an electrolytic cell" (found by this closure) | `chemistryClosureGates.test.ts` |
+| R4 | **Decided by the semantic-moat doctrine**: all 12 domain-default cards were read; none depicts the position its concept refutes, so all stay (inert, demoted, scope-claimed at domain level); `chem.solid.packing` now owns a face-centred-cubic cell. No retirement row was added (the register stays at 14). An early draft that retired six of them contradicted the doctrine's pins and was withdrawn | `visualSemanticMoatPhysicsChemistry.test.ts` |
+| R5 | **Decided (policy, unchanged)**: the advanced level shows every label at once by design; the only known gap is Born–Haber at phone width, pinned | `chemLayoutAndControls.test.ts` |
+| R6 | **Fixed**: the periodic picker cannot pick the same element twice (taken chips are struck through); radius and electronegativity order verified against authoritative tables (136 pairs, scale-aware radius narration) | `periodic-reference-ledger.json` |
+| R7 | **Fixed**: lattice atom classes carry a key label (no colour-only coding) | `chemistryFigureAudit.test.ts` |
+| R8 | **Fixed**: units on each label (J on every first-law label; kJ/mol on the Born–Haber steps) | `chemistrySystemScenes.test.ts` |
+| R9 | **Fixed**: `ΔH₁`, `Ln³⁺` and the D/T hydrogen isotopes are handled; "Ln" is the IUPAC generic lanthanide symbol and is noted, not "fixed" | `chemFigureTypeset.test.ts` |
+| R10 | **Fixed**: the ASCII guard strips unfenced box/Lewis drawings and exempts one-line reaction chains | `asciiGuardRemnants.test.ts` |
+| R11 | **Done**: Tier 2 (2 approved rows) and Tier 3 (147 cached figures, 74 promote verdicts, shown ~6,000 times) were read from production (SELECT only), replayed through the real resolver, rendered, and reviewed (61 figures read independently: 10 ACCURATE · 36 MINOR · 15 WRONG; those 15 plus one MINOR drawing error — a ring labelled furan with no oxygen — are refused by content fingerprint in `RETIRED_GENERATED_FIGURES`) | `tier3-independent-review.json` |
+| R12 | **Done**: every concept classified (§12.1); the 2 unexamined concepts now own faithful figures (`chem.surface.colloids`, `chem.sblock.water`); the 14 B concepts are the retired-as-wrong ones awaiting a faithful figure | `audit-summary.json` |
+| R13 | see §13 (production) | |
+| R15 | **Decided (by design, measured)**: the expanded view scrolls in 42 states (the chrome is taller than the window); never a clipped or colliding label | `render-states.json` |
+| R16 | **Documented, measured**: 46 states have a halo label on a saturated fill (2.13–4.49:1); WCAG 4.5:1 cannot be met by a glyph on a saturated sphere, every one was read in its screenshot | `render-states.json` |
+| R17 | **Done**: 69 in-figure reference values checked against NIST / CRC-derived / Martell & Smith / Shannon sources — 41 MATCH · 27 within rounding · 1 UNVERIFIED. The unverified one (`[Cu(NH₃)₄]²⁺` log Kf 13.0 vs the critical 11.75 at I = 0, and a not-like-for-like chelate pair) stays **REVIEW_REQUIRED** with an owner decision | `reference-data-ledger.json`, `chemistrySemanticReview.test.ts` |
+| R18 | **Done**: eleven prose pathway/comparison figures read independently (some three times); every correction applied; final reads CORRECT with minor notes recorded | `prose-figure-review.json` |
+| R19 | **Done**: the five fixed React cards — four were wrong (a charged "atom" with 2/4/4 electrons, M "capacity" 8, two electrons vanishing in bond formation, a "repeated" lattice equal to its cell) and are fixed; the fifth (molecular shapes) was verified (109.47°). All five held to the periodic table by test | `chemistryClosureGates.test.ts` (R19) |
+
+### 12.3 Defects the closure's own browser run found (not in the review)
+* **Real gases** — the R18 wording for `b` clipped and collided with "Z > 1" at 1280 px (the layout *model* said fine; the browser said FAIL). Shortened.
+* **Long-item comparison figures** (colloids, water, polymers) — in the legacy layout one column's items interleaved with the next, so a reader could not tell which caption belonged to which group, though no label collided. The comparison generator gained an **opt-in** `captioned` flag that reuses the Biology caption layout; every figure that does not opt in is byte-identical.
+* **Zinc–carbon dry cell** — its goal text said "an electrolytic cell" for every undivided cell; it now follows `cellType`.
+* **`GraphRenderer` (the one shared-renderer touch)** — the axis-name halo used `--surface`, a CSS variable defined nowhere, so it fell back to near-black and ringed the grey words in black on the light theme; and the x-axis name sat 4 px above the zoom buttons and was half hidden. Fixed with the app's `--bg-surface` and a 46 px baseline. This renderer is shared with Mathematics and Physics, whose graphs gain the same two corrections (no payload changes, no fingerprint changes).
+* **True minus sign** in the first-law figure, the Hess/Born–Haber descriptions and the cell ΔG line; `D₂O`-style isotope formulas no longer raise an element note.
+
+### 12.4 What is still REVIEW_REQUIRED, and who decides
+* **33 Tier-3 figures** the independent reviewer called MINOR (true, but loose or incomplete) — they stay served; a generated figure is never edited in place. Owner / curriculum pipeline: accept, regenerate or retire (`semantic-review.json` has each reviewer note).
+* **2 approved Tier-2 flows** (`chem.found.significant-figures`, `chem.found.stoichiometry`): correct in outline, imprecise ("molar mole ratios", the trailing-zero rule, a missing moles-to-grams step). Corrections prepared in `tier2-corrections-prepared.md`, **not applied** (a production write).
+* **The chelate-effect chart** (R17 above).
+* **R1's production row** (prepared SQL).
+* The 14 B concepts have no figure until a faithful one is authored; the 59 D concepts have a generated figure the critic or a gate refuses, and the 13 A concepts a recorded decline.
+
+### 12.5 Re-running
+```
+npx tsx scripts/chemistry/visual-audit/inventory.ts --out <t01>
+npx tsx scripts/chemistry/visual-audit/tier23-resolve.ts --out <t01>            # also writes tier23-manifest.json (Tier 2/3 served figures)
+npx tsx scripts/chemistry/visual-audit/semantic-audit.ts --manifest <t01>/chem-manifest.json --out <t01>/semantic.json
+npx next dev -p 3437 &                                                         # the render page /dev/chem-visual-audit 404s in production
+node scripts/chemistry/visual-audit/render-measure.mjs --manifest <t01>/chem-manifest.json --out <r1> --base-url http://localhost:3437 --states all --workers 3
+node scripts/chemistry/visual-audit/render-measure.mjs --manifest <t01>/tier23-manifest.json --out <r23> --base-url http://localhost:3437 --states default
+npx tsx scripts/chemistry/visual-audit/final-audit.ts --tier01 <t01> --tier23 <t23> --base docs/qa/chemistry-visual-audit/audit-summary.json
+```
+`--only` re-renders just the instances whose fingerprint changed (the failing test names the concepts); merge the new `render-results.json` rows over the old
+ones by `instanceId` before `final-audit.ts` (the manifest must be regenerated first — a stale manifest renders stale scenes). Run the render under
+`setsid nohup … < /dev/null`: a plain background job dies with a worker restart. A full render is ~30 minutes at 3 workers (software WebGL).

@@ -59,3 +59,42 @@ Tier 2/3 figures cannot be enumerated offline; the advanced level shows every la
 the expanded view scrolls (the chrome is taller than the window); labels on saturated 3D fills read through a halo, not WCAG
 contrast; figure reference data (ΔH, IE, EA, standard potentials…) is checked for consistency only; molecule figures draw no lone pairs or bond order; domain-default cards claimed at `domain` scope; the seed probe
 for `chem.elect.industrial` has an unbalanced equation (`C + O²⁻ → CO₂ + 4e⁻`) — content, owner's call.
+
+
+---
+
+# Follow-up — Chemistry visual closure (2026-10-09 → 2026-10-12)
+
+Full record, R1–R19 dispositions, numbers and the owner-decision list: `docs/qa/CHEMISTRY_VISUAL_QUALITY_AUDIT.md` §12. The baseline above is
+preserved unchanged. This section keeps what a future session must not have to rediscover.
+
+**Final measured state (merged code):** 186 concepts classified (E served 100 · D 59 · B 14 · A 13); 134 audited instances (Tier 0/1 + 47 variants + 45
+Tier 2/3), 1,086 rendered states = **990 PASS · 96 REVIEW · 0 FAIL**; 81 REVIEW figures carry a human decision (22 PASS · 23 FIXED→PASS · 36
+REVIEW_REQUIRED). CI now re-checks the record: `chemistryVisualAudit.test.ts`, `chemistrySemanticReview.test.ts`.
+
+## What was built (permanent)
+* `scripts/chemistry/visual-audit/` gained `tier23Replay.ts` (+ CLI `tier23-resolve.ts`): the REAL `resolveVisualForTurn` over a read-only cache client backed by the
+  committed production snapshot, so Tier 2/3 are enumerable offline; `final-audit.ts` (the committed record and the per-state manifest).
+* `retired.ts` `RETIRED_GENERATED_FIGURES`: one specific cached figure, named by content fingerprint, refused on every tier **without** retiring its concept.
+* `chemistryFigureAudit.pure` per-molecule verification (several molecules per figure, D/T isotopes), lone-pair and bond-order checks, graph-domain repair
+  (`repairChemistryPayload`); `bondGeometry.ts` (parallel bonds); the opt-in `captioned` layout of the comparison generator.
+
+## Rules learned the hard way
+* **The semantic-moat doctrine governs `RETIRED_VISUAL_BINDINGS`.** Retiring "unfaithful" domain-default cards (20 rows added in a first pass) broke 12 pinned tests,
+  correctly: inert figures are kept and demoted, only a HARMFUL one (it depicts the position the concept refutes) is retired. A *wrong generated figure* is a different
+  thing and has its own table keyed by content.
+* **A figure can pass every collision check and still be unreadable.** In the legacy comparison layout, 40–55 character items made one column's captions interleave with the
+  next group's: no overlap, but no way to tell which caption belonged to which header. Read the screenshots, not only the finding counts.
+* **The layout model is a filter, the browser is the authority** (again): the model passed the R18 `b` label that the browser measured clipped and colliding at 1280 px.
+* **A CSS variable that exists nowhere is silent.** `GraphRenderer` used `var(--surface, #0d1117)`; `--surface` is defined nowhere, so every halo was near-black.
+* **An independent reviewer finds what the author cannot**: the dry cell called "electrolytic", "8 g O : 1 g H" as exact, Tyndall shown as unique to colloids, a PLA label with no
+  composting condition. Give a reviewer the figure text only (not your conclusion), and re-read after each rewrite.
+* **A generated figure is never edited in place**, and an approved (Tier 2) row is production data: both are reported with prepared corrections, not changed.
+* **A Tier 0 scene shadows an approved row and many tests use `chem.found.significant-figures` as the no-figure concept** — do not "fix" a Tier 2 figure by authoring one.
+* **Do not trust a background job across a worker restart**: use `setsid nohup … < /dev/null`, re-check the dev server (`curl /dev/chem-visual-audit`) before every render, and
+  regenerate the manifest before re-rendering (a stale manifest renders stale scenes).
+* Long vitest filters (`src/tests/visual src/tests/chem …`) are substring filters over all files: ~4 minutes, 119 files.
+
+## Not done (see QA doc §12.4)
+33 MINOR Tier-3 figures, the two Tier-2 flows, the chelate-effect chart's data and the R1 production row await owner decisions; the 14 retired-as-wrong concepts
+have no figure; production verification is recorded in QA doc §13.
