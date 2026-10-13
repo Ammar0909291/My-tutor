@@ -1489,3 +1489,30 @@ Defects found while verifying (all fixed): the surface-curvature figure ran past
 Notes: twins checked first — none of the twelve ids had a registry entry. Lessons: a `dot()` with its own text always reads as an 18 px card move (use free labels); the real card pushes labels placed inside circles or closed curves outward; the first render after `next dev` can be blank (re-shoot); a test must recompute from FIRST PRINCIPLES, never from the generator's own helper, or a wrong formula passes (the argument-principle survivor).
 
 Next (batch 42): graph (3: graph-invariants, graph-operations, random-graph), trig (2: trig-identities, trig-equations), cat (2: limits, adjunction), num (1: error-analysis) — 8; then tier H is empty. List what is left with `npx tsx scripts/math/visual-coverage.ts --list H`.
+
+# Batch 42 (2026-10-13): graph, trigonometry, category and numerical-analysis figures (8) — tier H is now EMPTY
+
+`sceneGenerators/mathCoreScenesB42.ts` + `mathCoreScenesBatch42.test.ts` (82 checks); campaign audit threshold now 510. Coverage after this batch:
+556 of 908 concepts with a fixed figure (61.2%); essential tier 344 / 346 (the two left are the reserved fixture `math.func.linear-function` and canary `math.linalg.vector-addition`), tier H 210 / 210 (complete), tier N 2 / 352.
+Pre-push checklist: full `npx vitest run`, `scripts/ci/tsc-ratchet.sh` 0 errors, `validate-visualization-coverage.ts` PASS, `scripts/math/label-displacement.ts mathCoreScenesB42 14` (0 unresolved, 0 card-host moves; phone-host moves only),
+`scripts/math/campaign-tools/audit-module.ts mathCoreScenesB42` (8 / 8 admitted). Mutation check: sixteen deliberate single-part wrong numbers (a chord moved, a wrong size/degree-sum caption, S = {1, 2, 4}, an extra edge in G, a sample that falls apart, a threshold dot at 0.4, θ = 40°, level 0.6,
+a mirror at 170°, u landing on the wrong pair, a 2 × 3 = 6 caption, a wrong highlighted pair, an uneven grid, 22/7 replaced by 3.1436, π replaced by 3.1417) each made at least one test fail (16 / 16 on the first run).
+Defects found while verifying (all fixed before the commit): (1) graph invariants — the "diameter" path shared its third edge with the green triangle, so only 2 violet edges were visible: the path now runs v5 → v0 → v4 → v3, clear of the triangle; the degree numeral of v0 sat on the pendant edge (moved to the right of the vertex);
+(2) random graph / trig identities — captions 21 characters wide (≈ 210 px) set 2.4-4.8 units apart overlapped each other and were pushed 30-60 px by the solver: captions are now ≤ 14 characters when two sit in one row ("10 × 0.6 = 6", "chance 0.6") and the long equation moved under the circle;
+(3) limits — "A" and "unique u" sat among the f/g/u arrows and were pushed onto geometry: A below-left of the element 2, "unique u" under the grid; (4) adjunction — the "natural ≅" caption touched the right grid: the gap between the grids was widened to 4.4 units.
+Test-logic issues (not figure defects): a numeral inside "2θ =" is read as a number (the test now takes the last number); a sampled sine crosses a line with up to 0.7° error at 4.5° spacing and every coordinate is rounded to 0.01 = 0.65° on that axis (tolerance 1.2°); closeVec needs equal lengths (dots carry z).
+
+| Concept | Figure |
+|---|---|
+| math.graph.graph-invariants | one graph with 6 vertices and 7 edges: degrees 3 3 3 2 2 1 (sum 14 = 2 × 7), girth 3 (green triangle), diameter 3 (violet path v5 → v0 → v4 → v3) |
+| math.graph.graph-operations | G on four corners (5 edges); the induced subgraph G[S] for S = {1, 2, 3} keeps all 3 edges among them; the complement has the 1 missing pair 2-4 (5 + 1 = 6 pairs) |
+| math.graph.random-graph | G(5, p): 10 possible edges; a p = 0.6 sample (6 edges, connected) and a p = 0.2 sample (2 edges, not connected); the p-line shows 0.2 < log 5 / 5 ≈ 0.32 < 0.6 |
+| math.trig.trig-identities | unit circle at θ = 30° and 2θ = 60°: sin θ 0.5, cos θ 0.87, sin 2θ 0.87; the bars sin 2θ and 2 × 0.5 × 0.87 have the same height |
+| math.trig.trig-equations | sin x = 0.5 on 0°-540°: the line meets the curve at 30°, 150°, 390°, 510°; 180° − 30° = 150° by the mirror at 90°; period 360° |
+| math.cat.limits | the product of A = {1, 2} and B = {a, b} as a 2 × 2 grid (4 pairs); a cone c with f(c) = 2, g(c) = a and the unique u to the pair (2, a) |
+| math.cat.adjunction | Hom(A, GB) and Hom(FA, B) for A = {x, y}, B = Z/3: two 3 × 3 grids of 9; the natural bijection; the pair x ↦ 2, y ↦ 0 highlighted |
+| math.num.error-analysis | magnified ruler (1 tick = 0.001): x = π, x̂ = 3.14 (error 0.00159, relative 0.000507) and x̂ = 22 / 7 (error 0.00126, relative 0.000402) |
+
+Notes: twins checked first — none of the eight ids had a registry entry. Lessons: the label solver also treats a caption as colliding with a neighbouring caption when their boxes overlap in x and sit within ~30 px in y — the width of a caption (≈ 10 px per character) is part of the layout; a path that must show as separate colours must not reuse an edge already drawn in another colour.
+**The figure campaign is complete for tiers E and H** (556 / 908; 344 / 346 essential, 210 / 210 high). Nothing queued remains under the campaign; the deferred queue in the handover (Mathematics render audit + freshness gate, semantic review, production sample check, English visual validation) needs a fresh owner go-ahead.
+
