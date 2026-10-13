@@ -327,6 +327,11 @@ import {
   buildConvexOptimizationScene, buildQuadraticProgrammingScene, buildIntegerProgrammingScene, buildDynamicProgrammingScene,
   buildNormedSpaceScene, buildDistributionsScene, buildSpecialFunctionsScene,
 } from '@/lib/teaching/sceneGenerators/mathCoreScenesB40'
+import {
+  buildGeometricProofScene, buildLengthScene, buildSurfaceCurvatureScene, buildGeometricConstructionsScene,
+  buildFunctionNotationScene, buildZeroOfFunctionScene, buildStepFunctionScene, buildFunctionOperationsScene,
+  buildAnalyticContinuationScene, buildSingularitiesScene, buildResidueScene, buildArgumentPrincipleScene,
+} from '@/lib/teaching/sceneGenerators/mathCoreScenesB41'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -1080,6 +1085,20 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'math.fnal.normed-space':              buildNormedSpaceScene,
   'math.fnal.distributions':             buildDistributionsScene,
   'math.fnal.special-functions':         buildSpecialFunctionsScene,
+
+  // Mathematics visual campaign, batch 41 (2026-10-13). See mathCoreScenesB41.ts.
+  'math.geom.geometric-proof':           buildGeometricProofScene,
+  'math.geom.length':                    buildLengthScene,
+  'math.geom.differential-geometry-surfaces': buildSurfaceCurvatureScene,
+  'math.geom.geometric-constructions':   buildGeometricConstructionsScene,
+  'math.func.function-notation':         buildFunctionNotationScene,
+  'math.func.zero-of-function':          buildZeroOfFunctionScene,
+  'math.func.step-function':             buildStepFunctionScene,
+  'math.func.function-operations':       buildFunctionOperationsScene,
+  'math.cx.analytic-continuation':        buildAnalyticContinuationScene,
+  'math.cx.singularities':               buildSingularitiesScene,
+  'math.cx.residue':                     buildResidueScene,
+  'math.cx.argument-principle':          buildArgumentPrincipleScene,
 
   // The Punnett generator is single-gene by construction (genotypes are two
   // alleles). A dihybrid cross drawn as a monohybrid square teaches the wrong
