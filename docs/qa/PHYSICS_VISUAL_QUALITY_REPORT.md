@@ -337,3 +337,67 @@ Deployment `dpl_EBE7hccxEBbr4daYxPCdTUQfMYhF` (`34def29`) READY; **browser-verif
 * `9387af7` test(visual): lens-power figure and force-diagram head are pinned; the three backlog lists drop lens-power; ledger and audit record updated
 * `34def29` merge `origin/main` (Biology / Chemistry layout work by other sessions; clean)
 * (this commit) production-audit harness fix, production evidence record, ledger and report
+
+## 19. ZERO-OPEN-ITEM VISUAL QUALITY CLOSURE — 2026-10-12/13
+
+Scope (owner mission): close every item §18.3 left open — the shared legibility hook's off-screen contrast defect, the "wrong card" harness class,
+the weight-label gap, lens power as a static figure, and normal force as a level-only figure — and prove each on the deployed `/learn` page, with
+the Physics, Chemistry and Biology audits re-run as the regression gate. §18's baselines are kept; this section supersedes only what it names.
+
+### 19.1 Shared `useFigureLegibility` — off-screen contrast (the §18.3 "owner decision" item) — FIXED AND VERIFIED
+
+* **Root cause (confirmed, not assumed).** The pass found each text's backdrop with `document.elementsFromPoint`, which only hits what is inside the
+  viewport, and ran once at mount (+ fonts/resize). A card mounted ABOVE the fold (an older reply on a lesson page that lists every session's
+  messages) was never lifted, and scrolling it into view never re-ran the pass. Production, before the fix (`485f75d`, 4 cards of the force-diagram lesson,
+  phone-height page so the older cards are off screen): **8 PASS / 8 FAIL** — cards 2 and 3 of 4 failed CT-01 at **3.11:1–3.99:1** ("Applied", "Friction") in
+  both themes and both viewports.
+* **Fix** (`src/components/school/visuals/useFigureLegibility.ts`, one shared owner, no per-subject code): `attachFigureLegibility(node)` re-runs the pass when
+  a figure (or one of its SVGs) becomes visible (IntersectionObserver, thresholds 0…1, watched again if an SVG is replaced), on resize, on DOM mutation, on a
+  `data-theme` flip and on a colour-scheme change; the unmeasurable case (text not hit-testable) is *marked* (`data-contrast-unmeasured`) instead of reported as
+  success, and the pass never lowers the 4.5:1 threshold and keeps each authored colour unless it fails. Cleanup removes every observer and marker; SSR-safe.
+* **Evidence.** `figureLegibilityBrowser.test.ts` — **20 real-Chromium tests** (visible at mount, off-screen at mount, scrolled into view, several cards, enter/leave,
+  remount, theme flip, varied backgrounds, "no false success", observer cleanup, a negative control that reproduces the defect with the old behaviour) and
+  `figureAssociationBrowser.test.ts` (**19**, see 19.2): **39 passed** with `REQUIRE_BROWSER_TESTS=1`.
+* **Production, after the fix** (`dpl_DfiW33EVTKByZMBMRYPkECGoX855`, commit `74f4207`, alias `my-tutor-flame.vercel.app`; disposable account, deleted, re-login blocked):
+  `scripts/qa/productionVisualClosure.ts --mode legibility` — 4 force-diagram cards on one `/learn` page, 390 px and 1280 px, dark and light, each card scrolled into view
+  the way a learner does: **16/16 PASS**, every card carries the hook's marker and none is left "unmeasured"; the card that failed before (card 2: "Applied" 3.99:1, "Friction" 3.61:1)
+  passes. Report `docs/qa/physics-visual-audit/production-visual-closure-2026-10-13.json`; screenshots named by concept/viewport/theme/card.
+
+### 19.2 Harness — the audit measures the figure of the reply it asked for — FIXED AND VERIFIED (QA-harness defect, kept separate from app defects)
+
+`LessonScreen` marks each message block (`data-message-id`, `data-message-role`); `figureAssociation.ts` ties a figure to the block whose own text holds the reply and **throws
+`WRONG_FIGURE` when it cannot** (no marker page, a reply with no figure of its own, an explicit index out of range). Two further defects were found by running it against
+production and fixed with tests: a long reply is collapsed behind "Read more →" so only its opening is in the DOM (keys are now the reply's opening, longest first, still required
+inside the figure's own block), and a scene must be framed by its whole `role="figure"` root or its sliders are outside the frame. Every report row records the message id, selection mode, ambiguity,
+viewport, theme, commit and deployment. App defects found by this harness: none beyond 19.1.
+
+### 19.3 Weight-label spacing — FIXED AND VERIFIED
+
+`ForceDiagram`: the "Weight (W=mg)" and normal labels start `labelGap` (6 units) right of the arrowhead's widest point (`headHalfWidth` 10) and run away from it. Geometry pinned
+(≥ 4 user units; negative control: the old centred label began inside the head). Production, measured on the real page: **6.8 px (390) and 10.7 px (1280)** between head and label, light and dark,
+on the two lessons whose reply reaches the weight/normal steps (free-body-diagram, equilibrium; 8/8 PASS). `force` and `friction` replies were too short to draw those steps in this run
+(recorded as a harness limit, not a pass for those steps); they use the same component.
+
+### 19.4 `phys.opt.lens-power` — interactive, bounded, geometry-checked — FIXED AND VERIFIED (supersedes §18.1 "static figure")
+
+Parametric scene `lens_power` through the EXISTING variable layer (`PARAMETRIC_SCENES`, `CANONICAL_SCENES`, `resolveVisual`): P of one lens (−4…+6 D), P₁, P₂ (−4…+8 D), gap d (0…0.5 m). The canonical state is §18.1's figure. Every printed power is
+re-derived from the DRAWN rays (slope change = −y·P/SCALE); P = 0 prints f = ∞ and nothing divides by zero; negative power diverges; apart, P = P₁ + P₂ − d·P₁P₂ and the figure says the sum rule does not hold
+apart; thin lenses in contact is stated in every state. `lensPowerInteractive.test.ts` (control-space sweep, signs, zero/∞, limit statement, real-figure label budget). Dev render: PASS in all 13 slider states × 390/1280 × light/dark.
+Production (`74f4207`): `--mode interact` — default + P=+4 D (f = 0.25 m), P=−2 D (f = −0.50 m), P=0 (f = ∞), pair +4/+2 in contact (+6 D), pair 0.1 m apart (+5.2 D, "sum rule" label gone): **22/22 PASS** (390/1280 × light/dark).
+
+### 19.5 `phys.mech.normal-force` — scope matched to the lesson — FIXED AND VERIFIED (supersedes §18.2's level-only card)
+
+The lesson teaches N ⟂ surface, N = mg only when level and unpushed, N = mg cos θ on a slope. The level-only card contradicted half of it. Now a parametric scene `normal_force` (θ 0–60°, vertical push F 0–1 mg; N = (mg + F) cos θ; the arrow is perpendicular to the
+DRAWN surface, its length is the printed N, the load is resolved into cos θ / sin θ parts, the Third-Law partner N′ is on the surface; no ground grid for a tilted surface). `normalForceInteractive.test.ts` (23 tests incl. negative controls that fail a figure agreeing
+with the misconception). Production: **22/22 PASS** — level N = 1.00 mg, θ = 30° N = 0.87 mg, θ = 60° N = 0.50 mg, push 0.5 mg N = 1.50 mg, in 390/1280 × light/dark. Friction on a slope is deliberately not drawn (a different concept).
+
+### 19.6 Physics audit and gates
+
+* Committed render audit (`audit-summary.json`): the five changed concepts re-rendered in real Chromium (390/1280, light/dark, every slider state) and merged — lens-power and normal-force **PASS** (were REVIEW_REQUIRED); free-body-diagram, friction, equilibrium stay REVIEW_REQUIRED for SM-02 only
+  (ledger decisions in `semantic-review.json`, updated in place); totals 283 = **266 PASS / 17 REVIEW_REQUIRED / 0 FAIL**. A first render on a cold dev server produced spurious mobile-dark "edge ink" failures (unstyled page); re-rendered on a warm server: 0 — recorded as a harness condition, not an app defect.
+* Merged tree (`main` = `origin/main` + this work, before the Biology merge): `tsc --noEmit` 0; `next lint` 0 errors (warnings unchanged); full vitest **966 files / 24,582 passed / 9 skipped / 0 failed**; `npm run build` exit 0.
+  After the final merge of another worker's Biology fixes: `tsc` 0; 12 targeted files (physics audit/ledger/card semantics, lens-power, normal-force, hook, association, generator purity, egress capture, default-scope, KG registration, Biology closure) **344 passed**.
+
+### 19.7 Commits
+
+`f5d0aa8`, `d4e2b4d`, `5b29733`, merges `d261e27`/`74f4207` (on `main`, deployed), then `1ca6bf2`, `d61206b` (harness), `c387b42` (egress record) — see the closure report for the final pushed hashes.
