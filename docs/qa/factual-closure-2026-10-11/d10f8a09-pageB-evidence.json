@@ -1,0 +1,59 @@
+{
+  "base": "https://my-tutor-flame.vercel.app",
+  "subject": "biology",
+  "slug": "bio.behav.innate-behavior-instinct",
+  "rows": [
+    {
+      "turn": 1,
+      "said": "give me example",
+      "shot": "01.png",
+      "provider": "groq",
+      "reply": "I will keep to the examples in your lesson materials, so every detail here is one you can rely on:\n\nFixed action patterns (FAPs) are stereotyped (performed the same way across individuals of a species) and largely unmodifiable behavioural sequences — once triggered, a FAP typically runs to completion in its characteristic form, largely independent of ongoing feedback. Critically, a FAP is NOT spontaneous: it requires a specific sign stimulus (a specific, often simple environmental cue) to release it — the sequence is performed only when that specific trigger is present. Innate behaviour must be further distinguished from simple reflexes: a reflex is a direct, typically single-muscle-group stimulus-response (like the knee-jerk reflex) — simple, immediate, minimal neural processing. A fixed action pattern is substantially more complex, coordinated, and multi-step (like an elaborate courtship display or nest-building sequence) — many more coordinated movements over an extended time, though still triggered by a specific sign stimulus and still largely stereotyped once initiated. Innate behaviour also has a genetic basis: it is a heritable trait shaped by natural selection over evolutionary time, exactly as physical structures are — a FAP that reliably improves survival or reproduction can be favoured by selection and become a stable, species-typical trait.",
+      "replyRendered": true,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": true
+    },
+    {
+      "turn": 2,
+      "said": "i dont understand this picture. what is it showing?",
+      "shot": "02.png",
+      "provider": "groq",
+      "reply": "I hear you’re feeling stuck—let’s go through the picture together, step by step.\n\n- **“Simple reflex”** (top left, blue) – this label points to the left‑hand side of the figure and names a very basic, automatic response.\n- **“E.g. the knee‑jerk reflex”** (grey text on the left) – this gives a concrete example of that simple reflex: the tap‑your‑knee reaction you get in a doctor’s office.\n- **“Fixed action pattern”** (top right, orange) – this label is on the right‑hand side and names a more complex, innate behavior that is still hard‑wired.\n- **“E.g. courtship display, nest‑building”** (grey text on the right) – these are examples of fixed‑action patterns that animals perform without learning them.\n- **“Stereotyped and largely unmodifiable once triggered”** (bottom right, grey) – this note tells us that once a fixed‑action pattern starts, it runs to completion and does not change much, even if conditions vary.\n\nThe two straight lines in the diagram simply separate the two columns; they do not carry extra meaning beyond showing the two categories side by side.\n\n**Overall meaning:** The picture contrasts a simple reflex (a quick, single‑step response) with a fixed‑action pattern (a multi‑step, innate sequence). The key difference is that the fixed‑action pattern needs a specific “sign stimulus” to start, and then it proceeds automatically, whereas the simple reflex is triggered directly by a stimulus and involves only one muscle action.",
+      "replyRendered": true,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": false
+    },
+    {
+      "turn": 3,
+      "said": "explain simpler",
+      "shot": "03.png",
+      "provider": "groq",
+      "reply": "Think of two everyday actions.\n\nFirst, imagine you accidentally touch a hot pan. Your hand pulls away instantly—no thinking, just a quick, single muscle response. That’s like the **simple reflex** shown in the top‑left of the picture, with the knee‑jerk example on the left side.\n\nSecond, picture your morning routine when the alarm rings: you get out of bed, walk to the kitchen, fill a kettle, brew coffee, and sit down to drink it. Once the alarm (the “sign stimulus”) starts the chain, each step follows automatically until the coffee is ready, even if you’re a bit sleepy. This mirrors the **fixed action pattern** in the top‑right of the picture, with the courtship‑display and nest‑building examples on the right and the note that it is “stereotyped and largely unmodifiable once triggered.”",
+      "replyRendered": true,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": false
+    },
+    {
+      "turn": 4,
+      "said": "give me example",
+      "shot": "04.png",
+      "provider": "groq",
+      "reply": "I will keep to the examples in your lesson materials, so every detail here is one you can rely on:\n\nFixed action patterns (FAPs) are stereotyped (performed the same way across individuals of a species) and largely unmodifiable behavioural sequences — once triggered, a FAP typically runs to completion in its characteristic form, largely independent of ongoing feedback. Critically, a FAP is NOT spontaneous: it requires a specific sign stimulus (a specific, often simple environmental cue) to release it — the sequence is performed only when that specific trigger is present. Innate behaviour must be further distinguished from simple reflexes: a reflex is a direct, typically single-muscle-group stimulus-response (like the knee-jerk reflex) — simple, immediate, minimal neural processing. A fixed action pattern is substantially more complex, coordinated, and multi-step (like an elaborate courtship display or nest-building sequence) — many more coordinated movements over an extended time, though still triggered by a specific sign stimulus and still largely stereotyped once initiated. Innate behaviour also has a genetic basis: it is a heritable trait shaped by natural selection over evolutionary time, exactly as physical structures are — a FAP that reliably improves survival or reproduction can be favoured by selection and become a stable, species-typical trait.",
+      "replyRendered": true,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": false
+    }
+  ]
+}

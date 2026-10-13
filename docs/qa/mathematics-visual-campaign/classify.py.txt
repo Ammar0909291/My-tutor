@@ -1,0 +1,84 @@
+import json, collections, sys
+rows = json.load(open('rows.json'))
+# per domain: default tier, E (essential) list, H (helpful) list. '=' prefix = exact name match; otherwise prefix match (lowercase).
+R = {
+ 'found': ('N', "=set;=subset;=proper subset;=set equality;=union;=intersection;=set difference;=set complement;=venn diagram;=hasse diagram;=complex numbers;=real numbers;=integers;=rational numbers;=irrational numbers",
+               "=power set;=cartesian product;=ordered pair;=relation;=reflexive relation;=symmetric relation;=transitive relation;=equivalence class;=partition;=partial order;=total order;=function (set;=cardinality;=countable set;=uncountable set;=ordinal number;=truth table;=mathematical induction;=strong induction;=natural numbers;=set operations;=empty set;=set membership;=finite set;=logical equivalence"),
+ 'arith': ('N', "=place value;=ones, tens;=expanded form;=number line;=negative numbers;=ordering numbers;=absolute value;=integer arithmetic;=fractions;=equivalent fractions;=fraction simplification;=addition and subtraction of fractions;=multiplication and division of fractions;=mixed numbers;=improper fractions;=decimals;=percentages;=ratio;=proportion;=multiplication;=multiplication table;=perfect squares;=perfect cubes;=square roots;=rounding;=direct variation;=inverse variation;=counting;=subitizing;=number base;=division;=long multiplication;=percentage change",
+               "=addition;=carrying;=column addition;=subtraction;=borrowing;=long division;=remainder;=divisor and dividend;=reciprocal;=decimal operations;=repeating decimals;=terminating decimals;=unit rate;=estimation;=exponentiation;=exponent rules;=scientific notation;=irrational square roots;=counting sequence;=percentage calculations"),
+ 'nt': ('N', "=sieve of eratosthenes;=modular arithmetic",
+               "=prime factorization;=greatest common divisor;=least common multiple;=euclidean algorithm;=congruence;=residue classes;=pythagorean triples;=continued fractions;=distribution of primes;=prime number theorem;=prime number;=composite number;=extended euclidean;=divisibility"),
+ 'alg': ('N', "=linear equation in two;=linear inequality in two;=systems of linear equations;=quadratic equation;=discriminant;=completing the square;=polynomial;=polynomial roots;=exponential function;=logarithm;=absolute value equations;=linear inequality in one;=polynomial inequality;=rational inequality;=inequality;=pascal's triangle;=linear equation in one;=special factoring;=systems of 3;=fundamental theorem of algebra;=rational expressions;=factor theorem;=remainder theorem",
+               "=equation;=factoring trinomials;=polynomial division;=polynomial operations;=complex roots;=degree of a polynomial;=solution set;=substitution method;=elimination method;=exponential equations;=logarithmic equations;=natural logarithm;=change of base;=logarithm properties;=binomial theorem;=quadratic formula;=factoring polynomials;=fractional exponent;=radical expressions"),
+ 'geom': ('E', "", "=geometric proof;=length;=geometric constructions;=differential geometry of surfaces;=frenet"),
+ 'trig': ('N', "angle measure;=right-triangle;=six trigonometric;=trigonometric values;=unit circle;=reference angles;=trigonometric functions;=amplitude;=graphs of trig;=pythagorean identities;=inverse trig;=law of sines;=law of cosines;=polar form;=euler's formula;=degree-radian",
+               "=sum and difference;=trigonometric equations;=de moivre;=hyperbolic;=trigonometric identities;=double angle;=half angle"),
+ 'func': ('E', "", "=function notation;=real-valued;=operations on functions;=composition;=zero of a function;=periodic;=monotonic;=piecewise;=step function"),
+ 'seq': ('N', "=convergent sequence;=divergent sequence;=infinite geometric;=geometric series;=integral test;=comparison test;=alternating series;=geometric sequence",
+               "=sequence;=arithmetic sequence;=recursive;=series;=partial sums;=arithmetic series;=harmonic series;=telescoping;=convergence of series"),
+ 'calc': ('N', "limit of a function;one-sided;limits at infinity;=squeeze;=continuity;=types of discontinuity;=intermediate value;slope of tangent;derivative (definition);=differentiability;=mean value theorem;=rolle;increasing and decreasing;=critical points;=local extrema;concavity;=curve sketching;linearization;=riemann sums;=definite integral;fundamental theorem of calculus;=area by integration;volumes of revolution;=arc length;surface area of revolution;=taylor series;parametric equations;calculus of parametric;introduction to multivariable;=partial derivatives;=gradient;=directional derivative;multivariable extrema;=multiple integrals;=double integrals;=triple integrals;change of variables;=line integrals;=surface integrals;=vector fields;=curl and divergence;=green;=stokes;=divergence theorem;fourier series;=related rates;=improper integrals",
+               "=optimization (calculus);=power series;=radius of convergence;=maclaurin;=implicit differentiation;=higher-order;=l'h;taylor remainder;=trigonometric substitution;limits of sequences;=chain rule;=limit laws;=limits;=antiderivatives;multivariable chain"),
+ 'de': ('N', "=slope field;=euler's method;=phase plane;=stability analysis;=harmonic oscillator;=resonance;=heat equation;=wave equation;=laplace's equation;=bifurcation;=chaotic;fourier series;convergence of fourier;fourier sine;=partial differential equation",
+               "=types of solutions;=initial value problem;existence and uniqueness;=first-order ode;=systems of odes;=matrix method;=boundary value;=fourier transform;=bessel;=legendre;=harmonic functions;=poisson;=green's function;=nonlinear ode;=laplace transform;=ordinary differential equation;=separable;=wronskian"),
+ 'linalg': ('N', "=vector;=vector addition;=scalar multiplication;=dot product;=vector norm;=unit vector;=orthogonality;=cross product;=span;=linear independence;=basis;=coordinates;=change of basis;=null space;=column space;=linear map;kernel and image;eigenvalues;=eigenspace;=orthogonal projection;=gram-schmidt;=least squares;=angle between;=system of linear;=row reduction;=determinant;=singular value decomposition;=subspace;orthogonal and orthonormal",
+               "=matrix;=matrix multiplication;=matrix addition;=matrix transpose;=augmented matrix;=row echelon;=rank;=matrix inverse;=dimension;=vector space;=diagonalization;=inner product;=inner product space;=distance in vector;=singular values;=positive definite;=qr factorization;=tensor;=rank-nullity;=spectral theorem;=symmetric matrix;matrix representation"),
+ 'prob': ('N', "=event;=conditional probability;=law of total probability;=bayes;=probability mass;=probability density;=cumulative distribution;=normal distribution;=standard normal;discrete distributions;continuous distributions;=variance;=standard deviation;=joint distribution;=marginal distribution;=conditional distribution;=law of large numbers;=central limit;=markov chain;=covariance;=correlation;=quantile;=probability distribution",
+               "=sample space;=classical probability;=independence;=expected value;=transition matrix;=stationary;=poisson process;=chebyshev;=markov's inequality;=random variable;=discrete random;=continuous random;=bayesian inference;=combinatorial probability"),
+ 'stats': ('N', "descriptive statistics;measures of center;measures of spread;=percentile;=data visualization;=sampling distribution;=confidence interval;confidence interval for;=hypothesis testing;=p-value;type i and;=power of a test;=analysis of variance;=simple linear regression;=sample correlation;=normal distribution;=normal approximation;=bias-variance",
+               "=standard error;=test statistic;=z-test;=t-test;=chi-squared;=multiple linear;=population and sample;=sampling methods;=experimental design;=credible interval;=bayesian statistics;=maximum likelihood;=consistency;=covariance matrix;two-way anova"),
+ 'disc': ('N', "=graph;=types of graphs;=graph representation;=graph connectivity;euler and hamiltonian;=trees;=spanning tree;=graph coloring;=planar graph;=stars and bars;inclusion-exclusion;boolean circuits;=asymptotic notation",
+               "=counting principles;=permutations;=combinations;=binomial theorem;=combinatorics;=pigeonhole;=recurrence relation;=linear recurrence;divide-and-conquer;=propositional logic;=algorithm complexity;=complexity classes;=catalan"),
+ 'abst': ('N', "=cyclic group",
+               "=group;=group operation examples;=subgroup;=coset;=symmetric group;=group action;=burnside;group homomorphism;group isomorphism;=field extension;=binary operation;=algebraic structure;=normal subgroup;=quotient group"),
+ 'real': ('N', "supremum;convergence of sequences;=cauchy sequence;=uniform continuity;continuity (;=open and closed sets;=extreme value;=intermediate value;=mean value;riemann integral (;=uniform convergence;=pointwise convergence;=banach",
+               "=completeness of;=lipschitz;=compactness;=connectedness;differentiability (;taylor's theorem;fundamental theorem of;=weierstrass;=implicit function;=inverse function;=metric space;=riemann integrability"),
+ 'cx': ('N', "=complex numbers (analysis);=complex line integral;=cauchy's theorem;=cauchy integral;=residue theorem;evaluating real integrals;=conformal;möbius;=riemann surface",
+               "=complex-valued;=cauchy-riemann;=harmonic functions;=power series in;=cauchy-goursat;=singularities;=poles;=laurent;=residue;=riemann mapping;=argument principle;=rouch;=riemann zeta;=analytic continuation;=analytic"),
+ 'top': ('N', "=homeomorphism;=homotopy;=fundamental group;=covering;=simplicial;=euler characteristic;=topological manifold;=smooth manifold;=quotient space;=open and closed sets (topology);=interior",
+               "=homology;=connectedness;=compactness;=topological space;=product topology;=basis for;=continuity;=seifert;=separation;=homotopy equivalence"),
+ 'meas': ('N', "=simple function;=lebesgue integral",
+               "=measure;=lebesgue measure;=measure zero;=convergence theorems;l"),
+ 'fnal': ('N', "=convolution",
+               "=normed space;=hilbert;=distributions;=fourier transform;=special functions;=bounded linear"),
+ 'num': ('N', "=root-finding;=newton's method;=polynomial interpolation;=spline;=numerical differentiation;=numerical integration;=euler's method (numerical",
+               "=runge-kutta;=stiff;=floating-point;=error analysis;=iterative methods"),
+ 'opt': ('N', "=convex function;=convex set;=linear programming;=lagrange multipliers;=gradient descent;=newton's method for;=principal component;=unconstrained optimization",
+               "=convex optimization;=quadratic programming;=duality;=kkt;=stochastic gradient;=integer programming;=dynamic programming"),
+ 'graph': ('N', "=graph;=connectivity;=tree;=minimum spanning;=shortest path;=maximum flow;=matching;=eulerian;=hamiltonian;=graph coloring",
+               "=graph invariants;=graph operations;=ramsey;=random graphs"),
+ 'cat': ('N', "=category;=types of morphisms;=functor;=natural transformation;=pullback;=equalizer",
+               "=adjunction;=limits and colimits"),
+}
+def match(name, keys):
+    n = name.lower().strip()
+    for k in keys.split(';'):
+        k = k.strip().lower()
+        if not k: continue
+        if k.startswith('='):
+            if n == k[1:] or n.startswith(k[1:] + ' (') and False: return True
+            if n == k[1:]: return True
+            # allow truncated exact like '=function (set' : prefix match when key contains '('
+            if '(' in k and n.startswith(k[1:]): return True
+        else:
+            if n.startswith(k): return True
+    return False
+out = []
+for r in rows:
+    d = r['domain']; default, E, H = R[d]
+    n = r['name']
+    if match(n, E): t = 'E'
+    elif match(n, H): t = 'H'
+    else: t = default
+    # geom default E, arith default H when unmatched
+    out.append(dict(r, tier=t))
+json.dump(out, open('tiers.json', 'w'))
+tot = collections.Counter(r['tier'] for r in out)
+print('TOTAL', len(out), dict(tot))
+print('domain  n  E  H  N | covered(E,H,N)')
+for d in R:
+    rs = [r for r in out if r['domain'] == d]
+    c = collections.Counter(r['tier'] for r in rs)
+    cc = collections.Counter(r['tier'] for r in rs if r['covered'])
+    print(f"{d:7} {len(rs):3} {c['E']:3} {c['H']:3} {c['N']:3} | {cc['E']:2} {cc['H']:2} {cc['N']:2}")
+cov = collections.Counter(r['tier'] for r in out if r['covered'])
+print('covered by tier', dict(cov), 'total covered', sum(cov.values()))

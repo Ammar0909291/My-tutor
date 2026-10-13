@@ -1,0 +1,164 @@
+
+=== order 84 chem.kinet.rate-law ===
+[open provider=groq fig=none flags=-]
+**Rate Law and Order** – In this lesson we’ll see how the speed of a chemical reaction depends on the amounts of the substances that are reacting. By the end you’ll be able to write a rate law, tell the order of each reactant, find the overall order, work out the units of the rate constant k, and use the initial‑rate method to get k from experimental data.  
+
+Imagine you’re making a pancake batter. You pour milk and whisk it with flour. If you use a lot of flour, the batter thickens quickly; with just a little flour it stays runny much longer. The “how fast the batter thickens” is like the reaction rate, and the amount of flour you added is like the concentration of a reactant.  
+
+Think of the batter’s thickening as a road where cars (reaction events) move faster when there are more lanes (more reactant molecules). The more lanes you open, the quicker cars can pass through.  
+
+In plain words, the **rate law** tells us how the reaction rate changes when we change the concentrations of the reactants.  
+
+🧩 What do you notice about the batter’s thickening when you add more flour?
+[learner] What is this picture showing?
+[tutor provider=groq fig=none card=none flags=caps]
+There is no picture in this lesson yet, so I can't tell you what one shows. If you have a picture from somewhere else, send it with the camera button and I'll look at it. Here is the idea in words:
+
+The rate law expresses HOW rate depends on concentration: rate = k[A]^m[B]^n. The exponents m, n are the ORDER with respect to each reactant — found ONLY by experiment, never by looking at the balanced equation. Overall order = m+n. The INITIAL RATE METHOD finds these: run several trials, changing ONE concentration at a time while holding others fixed, and observe how the rate changes. If doubling [A] doubles the rate → order 1 in A. If doubling [A] quadruples the rate → order 2 in A. If doubling [A] does nothing → order 0 in A. The rate constant k has UNITS that depend on overall order (this is a giveaway clue): zero order → mol/(L·s); first order → 1/s; second order → L/(mol·s). Once you know the rate law, you integrate it to predict concentration over time — that's where half-life formulas come from.
+[learner] quiz me
+[tutor provider=gate fig=none card="In an experiment, doubling [A] while keeping [B] constant quadruples the rate. Doubling [B] while keeping [A] constant doubles the rate. The" ["rate = k[A][B]","rate = k[A]⁴[B]²","rate = k[A]²[B]¹"] corpus=chemistrySeedAssets.ts flags=-]
+Let's check this one before we go further.
+[learner] rate = k[A][B]
+[tutor provider=groq fig=title=Determining Rate Law and Order via Initial-Rate Method card="The order of a reaction with respect to a given reactant can be established only ______." ["from the equilibrium constant","experimentally, by measuring how the rat","from the coefficients in the balanced eq","from the enthalpy change of the reaction"] corpus=chemistryDepthSeedAssets.ts flags=-]
+Not quite — the answer is: rate = k[A]²[B]¹ — quadrupling from doubling means order 2 in A; doubling from doubling means order 1 in B
+
+The rate does not increase linearly with [A]; doubling A makes the rate four times larger, showing a second‑order dependence on A. The chosen law assumes first order in A, so it cannot match the observed effect. It also misrepresents the order for B.
+
+When experimental data show that doubling a reactant changes the rate by a factor of 2^n, the exponent n is the reaction order in that reactant. Use this rule for each reactant separately to build the correct rate law.
+
+Quick check. Think it through before you choose.
+[learner] ok
+[tutor provider=groq fig=none card="The order of a reaction with respect to a given reactant can be established only ______." ["from the equilibrium constant","experimentally, by measuring how the rat","from the coefficients in the balanced eq","from the enthalpy change of the reaction"] corpus=chemistryDepthSeedAssets.ts flags=moneyAsMath]
+We’ve written the rate law as
+
+\[
+\text{rate}=k\,[A]^{m}[B]^{n}
+\]
+
+where the exponents \(m\) and \(n\) are the orders with respect to each reactant. Now let’s see how the overall order determines the units of the rate constant \(k\).
+
+The rate of a reaction is measured in **moles per litre per second** \((\text{mol L}^{-1}\,\text{s}^{-1})\). The concentration of a reactant is in **moles per litre** \((\text{mol L}^{-1})\).
+
+If the overall order is \(m+n\), we rearrange the rate law:
+
+\[
+k = \frac{\text{rate}}{[A]^{m}[B]^{n}} . \]
+
+So the units of \(k\) are the units of the rate divided by the units of concentration raised to the overall order.
+
+**Example:**
+Consider a reaction that is overall second order (e.g., \(m=1\) and \(n=1\)). The rate might be \(0.020\ \text{mol L}^{-1}\,\text{s}^{-1}\) when \([A]=0.10\ \text{mol L}^{-1}\) and \([B]=0.10\ \text{mol L}^{-1}\).
+
+\[
+k = \frac{0.020\ \text{mol L}^{-1}\,\text{s}^{-1}}{(0.10\ \text{mol L}^{-1})(0.10\ \text{mol L}^{-1})}
+= \frac{0.020}{0.010}\ \frac{\text{mol L}^{-1}\,\text{s}^{-1}}{(\text{mol L}^{-1})^{2}}
+= 2.0\ \text{L mol}^{-1}\,\text{s}^{-1}. \]
+
+Thus, for a second‑order overall reaction, the rate constant \(k\) has units **litres per mole per second** \((\text{L mol}^{-1}\,\text{s}^{-1})\).
+
+---
+
+Quick check. Think it through before you choose.
+[learner] give me example
+[tutor provider=groq fig=none card=none flags=-]
+Let’s look at the gas‑phase reaction 
+
+\[
+\text{2 NO(g) + O}_2\text{(g) → 2 NO}_2\text{(g)}
+\]
+
+Experimental studies show its rate law is 
+
+\[
+\text{rate} = k[\text{NO}]^{2}[\text{O}_2]^{1}
+\]
+
+Here the exponent 2 is the **order with respect to NO**, the exponent 1 is the **order with respect to O₂**, and the **overall order** is \(2+1 = 3\). Because the overall order is three, the units of the rate constant \(k\) must be 
+
+\[
+\text{L}^{2}\,\text{mol}^{-2}\,\text{s}^{-1}
+\]
+
+(so that when multiplied by \([\text{NO}]^{2}[\text{O}_2]\) the result has the units of a rate, mol L⁻¹ s⁻¹).
+
+Now plug in some numbers. Suppose at a certain temperature 
+
+* \([\text{NO}] = 0.10\ \text{mol L}^{-1}\) 
+* \([\text{O}_2] = 0.05\ \text{mol L}^{-1}\) 
+* \(k = 1.2 \times 10^{3}\ \text{L}^{2}\,\text{mol}^{-2}\,\text{s}^{-1}\)
+
+Then 
+
+\[
+\text{rate} = (1.2 \times 10^{3}) \times (0.10)^{2} \times (0.05)
+ = 1.2 \times 10^{3} \times 0.01 \times 0.05
+ = 1.2 \times 10^{3} \times 0.0005
+ = 0.60\ \text{mol L}^{-1}\,\text{s}^{-1}
+\]
+
+So the reaction proceeds at 0.60 mol L⁻¹ s⁻¹ under those conditions.
+[learner] i dont understand this picture. what is it showing?
+[tutor provider=groq fig=none card=none flags=-]
+The picture for this lesson is further up in our chat. It is titled “Determining Rate Law and Order via Initial-Rate Method”. The words written on it are: “Prepare reactant solutions at varying concentrations.”, “Initiate reaction and record initial rate.”, “Plot initial rate vs concentration of each reactant.”, “Determine slope to find reaction order for each reactant.”, “Sum individual orders to get overall order.”, “Calculate rate constant k and its units.”, “drawn: arrow, box”, “Determining Rate Law and Order via Initial-Rate Method”. Tell me which of those parts is confusing and I will explain it.
+
+In this lesson on Rate Law and Order we will look at rate law, order with respect to each reactant, overall order, rate constant k and units and initial-rate method.
+[learner] ask me a question
+[tutor provider=gate fig=none card="For 2NO₂ + F₂ → 2NO₂F, can you determine the rate law directly from the balanced equation?" ["No","Yes"] corpus=chemistrySeedAssets.ts flags=twoOption]
+Here's a question on Rate Law and Order — take your time with it.
+[learner] Yes
+[tutor provider=groq fig=title=Determining Rate Law and Order via Initial-Rate Method card=none flags=-]
+Not quite — the answer is: No — the rate law must be determined experimentally, since this equation likely represents multiple elementary steps and the rate law reflects only the slowest step
+
+The rate law cannot be taken from the stoichiometric coefficients because the reaction may proceed through several steps. Only an elementary step has a rate law that matches its molecularity. Experimental data are needed to find the correct expression.
+
+When a reaction is overall, it often consists of a fast step followed by a slow step. The slow step controls the rate, and its molecularity, not the overall equation, gives the rate law. Measure how the rate changes with concentration to determine the order.
+[learner] test my understanding
+[tutor provider=gate fig=none card="You compute k from two different runs of the same reaction at the same temperature but different starting concentrations. Should the two val" ["No","Yes"] corpus=chemistrySeedAssets.ts flags=twoOption]
+Let's see how Rate Law and Order is sitting. Pick the one you think is right.
+[learner] quiz me
+[tutor provider=groq fig=none card="You compute k from two different runs of the same reaction at the same temperature but different starting concentrations. Should the two val" ["No","Yes"] corpus=chemistrySeedAssets.ts flags=twoOption]
+This is the question you have not answered yet — choose an answer below and I will mark it.
+
+When you look at the rate‑law expression
+
+rate = k [A]ᵐ [B]ⁿ
+[learner] No
+[tutor provider=groq fig=title=Determining Rate Law and Order via Initial-Rate Method card=none flags=-]
+Not quite — the answer is: Yes — k is constant at a fixed temperature. It absorbs the factors that do not depend on concentration (collision frequency per unit concentration, steric factor, activation energy). Disagreement means the rate law itself is wrong
+
+The rate constant does not change with concentration; it is fixed at a given temperature. Different starting concentrations should give the same k if the rate law is correct. A mismatch indicates the assumed rate law is wrong.
+
+When determining k, keep temperature constant and use the correct rate law that matches the reaction order. If calculated k values differ, re‑examine the proposed rate law and look for experimental errors.
+[learner] show me a diagram
+[tutor provider=groq fig=none card=none flags=caps]
+Recurring trap: "The rate law exponents equal the stoichiometric coefficients." FALSE in general — only true for ELEMENTARY reactions (single-step mechanisms). Most reactions you balance are OVERALL equations representing multiple steps, and the rate law reflects only the SLOWEST (rate-determining) step's stoichiometry. For 2NO + O₂ → 2NO₂, the coefficients are 2 and 1, but the EXPERIMENTAL rate law is rate = k[NO]²[O₂] — coincidentally matching here, but you can't assume this without experimental data. For H₂ + Br₂ → 2HBr, the actual rate law is rate = k[H₂][Br₂]^(1/2) / (1 + k'[HBr]/[Br₂]) — nothing like the simple coefficients (1,1) would suggest! Always determine rate laws EXPERIMENTALLY.
+[learner] i dont understand this picture. what is it showing?
+[tutor provider=groq fig=none card=none flags=-]
+The picture for this lesson is further up in our chat. It is titled “Determining Rate Law and Order via Initial-Rate Method”. The words written on it are: “Prepare reactant solutions at varying concentrations.”, “Initiate reaction and record initial rate.”, “Plot initial rate vs concentration of each reactant.”, “Determine slope to find reaction order for each reactant.”, “Sum individual orders to get overall order.”, “Calculate rate constant k and its units.”, “drawn: arrow, box”, “Determining Rate Law and Order via Initial-Rate Method”. Tell me which of those parts is confusing and I will explain it.
+
+In this lesson on Rate Law and Order we will look at rate law, order with respect to each reactant, overall order, rate constant k and units and initial-rate method.
+[learner] explain simpler
+[tutor provider=groq fig=none card=none flags=-]
+Imagine you’re baking a cake and you want it to rise quickly. Two main ingredients affect the rising speed: **flour** (which supplies the starch that holds the batter together) and **baking powder** (the chemical that creates bubbles). The “rate law” works like a recipe rule that tells you how the rise‑time changes when you change the amount of each ingredient.
+
+The exponents (the 2 and the 1) are not taken from the list of ingredients; they are found by actually testing the batter and seeing how the rise‑time responds.
+[learner] give me a quiz
+[tutor provider=gate fig=none card="A reaction has rate = k[A]^-1[B]. What happens to the rate when you double [A]?" ["It doubles","It halves"] corpus=chemistrySeedAssets.ts flags=twoOption]
+Let's check this one before we go further.
+[learner] It doubles
+[tutor provider=groq fig=title=Determining Rate Law and Order via Initial-Rate Method card=none flags=-]
+Not quite — the answer is: It halves — a negative order means the species inhibits the reaction. Raising a concentration does not always speed things up; enzyme inhibition behaves this way in practice
+
+The rate law includes a negative order for A, so increasing its concentration reduces the rate. Doubling [A] makes the rate half, not double.
+
+A negative reaction order indicates inhibition by that species. When the concentration of an inhibitor is increased, the rate changes inversely with that factor. Apply the exponent directly: rate is proportional to [A]⁻¹, so any increase in [A] results in a proportional decrease in rate.
+[learner] quiz me
+[tutor provider=groq fig=none card=none flags=caps,quizNoCard]
+You have answered every new practice question I have on Rate Law and Order in this lesson; a question you have already seen comes back once more a little later. Here is the idea once more.
+
+The rate law expresses HOW rate depends on concentration: rate = k[A]^m[B]^n. The exponents m, n are the ORDER with respect to each reactant — found ONLY by experiment, never by looking at the balanced equation. Overall order = m+n. The INITIAL RATE METHOD finds these: run several trials, changing ONE concentration at a time while holding others fixed, and observe how the rate changes. If doubling [A] doubles the rate → order 1 in A. If doubling [A] quadruples the rate → order 2 in A. If doubling [A] does nothing → order 0 in A. The rate constant k has UNITS that depend on overall order (this is a giveaway clue): zero order → mol/(L·s); first order → 1/s; second order → L/(mol·s). Once you know the rate law, you integrate it to predict concentration over time — that's where half-life formulas come from.
+[learner] quiz me
+[tutor provider=gate fig=none card="For 2NO₂ + F₂ → 2NO₂F, can you determine the rate law directly from the balanced equation?" ["Yes","No"] corpus=chemistrySeedAssets.ts flags=twoOption,repeatAnswered]
+You have seen this question before in this lesson — here it is once more.
+
+Here's a question on Rate Law and Order — take your time with it.

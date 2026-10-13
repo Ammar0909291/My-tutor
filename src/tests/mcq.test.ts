@@ -105,15 +105,17 @@ describe('mcqConfidence — D1 speed x correctness grid', () => {
 })
 
 describe('buildMcqInstruction', () => {
-  it('mandates MCQ and names the open-ended carve-outs', () => {
+  // OWNER DECISION 2026-10-07 (CHEM-048 / PHYS-020 / MATH-002): only authored
+  // cards are asked, so the model is told never to write one — it previously
+  // was told to write every assessment question as an <!--MCQ--> tag.
+  it('tells the model not to write cards, lettered options or the tag', () => {
     const s = buildMcqInstruction()
-    expect(s).toContain('<!--MCQ')
-    expect(s).toMatch(/probe/i)
-    expect(s).toMatch(/recovery/i)
-    expect(s).toMatch(/discovery/i)
+    expect(s).toMatch(/do NOT write multiple-choice questions/)
+    expect(s).toMatch(/lettered options/)
+    expect(s).toMatch(/<!--MCQ--> tag/)
   })
 
-  it('forbids re-typing the options in the visible message', () => {
-    expect(buildMcqInstruction()).toMatch(/do NOT\s+also re-type/i)
+  it('forbids announcing a question that is not asked', () => {
+    expect(buildMcqInstruction()).toMatch(/Never announce a question that you are not asking/)
   })
 })

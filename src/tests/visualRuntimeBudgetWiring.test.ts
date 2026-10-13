@@ -67,8 +67,9 @@ describe('Per-session generation budget — the rule itself', () => {
     const decision = await resolveVisualForTurn(
       {
         message: 'show me a diagram of that',
-        // A concept with no curated figure, so the turn would reach generation.
-        lessonConceptId: 'math.found.set-operations',
+        // A concept with no curated figure, so the turn would reach generation. math.func.linear-function is the
+        // mathematics campaign's deliberately figure-less fixture, so this stays true however far the campaign goes.
+        lessonConceptId: 'math.func.linear-function',
         subject: 'mathematics',
         learnerRequest: 'diagram',
       },
@@ -90,7 +91,7 @@ describe('Per-session generation budget — the rule itself', () => {
     const decision = await resolveVisualForTurn(
       {
         message: 'show me a diagram of that',
-        lessonConceptId: 'math.found.set-operations',
+        lessonConceptId: 'math.func.linear-function',
         subject: 'mathematics',
         learnerRequest: 'diagram',
       },

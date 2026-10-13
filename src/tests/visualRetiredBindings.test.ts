@@ -24,7 +24,7 @@ const ask = (conceptId: string, message = 'explain with diagram') =>
   resolveVisual({ message, lessonConceptId: conceptId, learnerRequest: 'diagram' })
 
 describe('the register itself', () => {
-  it('covers exactly the 15 audited concepts', () => {
+  it('covers exactly the 14 audited concepts', () => {
     // 29 from the M3-A audit + 8 from the visual semantic moat sweep, which
     // ran the resolver over all 238 physics and 186 chemistry concepts and
     // read all 105 bindings that render.
@@ -54,7 +54,9 @@ describe('the register itself', () => {
     // 20 -> 15 (2026-09-30): the last five physics circuit concepts (wheatstone-bridge, potentiometer,
     // self-inductance, mutual-inductance, lc-circuits) left once they owned faithful figures
     // (physicsCoreScenesBatch9.test.ts). Only chemistry and CS rows remain.
-    expect(RETIRED).toHaveLength(15)
+    // 15 -> 14 (2026-10-07, CHEM-095): chem.bond.ionic-bonding left once it owned a faithful
+    // electron-transfer figure (remainingDefectFixes20261007.test.ts).
+    expect(RETIRED).toHaveLength(14)
   })
 
   it('every retired id is a real KG concept — a typo would silently retire nothing', () => {
@@ -105,7 +107,7 @@ describe('every retired concept resolves to NO FIGURE', () => {
     // left the register with its own figure; no retired concept keeps a generator
     // binding now. Retirement beating a generator stays covered by the injected
     // replacement in visualRetirementLifecycle.test.ts.
-    for (const id of ['chem.solid.defects', 'chem.bond.ionic-bonding', 'cs.algo.flowcharts', 'chem.atomic.orbitals']) {
+    for (const id of ['chem.solid.defects', 'chem.bond.metallic-bonding', 'cs.algo.flowcharts', 'chem.atomic.orbitals']) {
       expect(ask(id).graphical, id).toBe(false)
     }
   })
@@ -142,7 +144,7 @@ describe('B1 changed only what it was meant to change', () => {
     // Covalent bonding keeps the bond-formation card; ionic and metallic were
     // retired from it because they are different mechanisms.
     expect(ask('chem.bond.covalent-bonding').graphical).toBe(true)
-    expect(ask('chem.bond.ionic-bonding').graphical).toBe(false)
+    expect(ask('chem.bond.metallic-bonding').graphical).toBe(false)
 
     // Ohm's law keeps the circuit scene; the seven component-specific concepts
     // were retired from the bulb card.

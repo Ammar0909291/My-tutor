@@ -55,6 +55,7 @@
  * is true and is left exactly as written.
  */
 import { conceptFallbackText } from './conceptFallback'
+import { isCountAxis } from '@/lib/visuals/graphAxis'
 
 /** Words that place the thing on screen rather than in the prose. */
 const ON_SCREEN =
@@ -808,4 +809,375 @@ export function answerFigureQuestionWithoutFigure(text: string, conceptFallback?
   const thin = (kept.match(/\S+/g) ?? []).length < 15
   const body = thin && conceptFallback ? [kept, conceptFallback].filter(Boolean).join(' ') : kept
   return { text: body ? `${NO_FIGURE_ON_SCREEN} ${body}` : NO_FIGURE_ON_SCREEN, changed: true }
+}
+
+// ── ISSUE A (2026-10-10 live re-drive): the no-figure evidence gate ─────────
+/**
+ * Production 2026-10-10, 3 of 18 chemistry lessons (`chem.kinet.rate-law`,
+ * `chem.elect.corrosion`, `chem.org.arrow-pushing`): "i dont understand this
+ * picture. what is it showing?" with no figure in the learner's browser was
+ * answered "I'm sorry you can't see a picture right now, so let me describe it
+ * for you. The figure has concentration … on the horizontal axis … Three
+ * different lines are drawn" / "let me describe what it normally shows" /
+ * "such pictures usually show …". Two causes:
+ *  1. availability was read from the server's held-figure session
+ *     (`session.turns > 0`), server-only state the browser may never have
+ *     received — so the honest answer above was skipped;
+ *  2. where it did run it removed only sentences naming "the/this picture";
+ *     an imagined description ("Three different lines are drawn: 1. A straight
+ *     line passing through the origin …") has no such words.
+ *
+ * The gate is therefore built on evidence of what the LEARNER has:
+ *  - a figure in THIS response's payload, or
+ *  - a figure the rendered-reality log (written only when a figure is actually
+ *    sent; cleared at every lesson open) records for this concept, or
+ *  - a photo the learner sent through the camera button (`📸`, /api/vision).
+ * Nothing else — not a card's server-only assetId, not registry metadata, not
+ * the held-figure session — counts. With none of these, the whole model reply
+ * is replaced by a deterministic one: no picture is visible, how to send one,
+ * and the idea taught from the lesson's own authored text. Nothing in it can
+ * describe a figure, because none of it is model-written.
+ */
+export function figureAvailableToLearner(input: {
+  figureInThisResponse: boolean
+  renderedLog: ReadonlyArray<{ matchedConcept: string | null }>
+  conceptId: string | null | undefined
+  recentLearnerMessages: readonly string[]
+}): boolean {
+  if (input.figureInThisResponse) return true
+  if (input.conceptId && input.renderedLog.some((e) => e.matchedConcept === input.conceptId)) return true
+  return input.recentLearnerMessages.some((m) => /^\s*📸/u.test(m ?? ''))
+}
+
+export const NO_FIGURE_LEAD =
+  "There is no picture in this lesson yet, so I can't tell you what one shows. "
+  + "If you have a picture from somewhere else, send it with the camera button and I'll look at it. Here is the idea in words:"
+
+/** Sentences of authored text that point at a figure (an authored explanation may have been written beside one). */
+export function withoutFigureSentences(text: string): string {
+  return ((text ?? '').match(/(?:[^.!?\n]|[.!?](?=\S))+(?:[.!?]+|$)/g) ?? [])
+    .map((s) => s.trim())
+    .filter((s) => s && !PRESENT_FIGURE_RE.test(s) && !/\b(?:beside this message|on (?:your|the) screen|shown (?:here|below|above))\b/i.test(s))
+    .join(' ')
+}
+
+export function noFigureAnswer(teaching: string | null | undefined): string {
+  const body = withoutFigureSentences(teaching ?? '').trim()
+  return body ? `${NO_FIGURE_LEAD}\n\n${body}` : NO_FIGURE_LEAD.replace(/ Here is the idea in words:$/, '')
+}
+
+/**
+ * Production 2026-10-10 on cf79346 (chem.kinet.rate-law, a recovery turn): a
+ * figure HAD been shown earlier in the lesson ("Determining Rate Law and Order
+ * via Initial-Rate Method"), so a picture was genuinely available — and the
+ * reply said "I'm sorry you can't see a picture right now, so let me describe
+ * what a typical illustration … would show. Usually the diagram has two parts…",
+ * and later "Picture yourself with a simple flow chart…". A reply that denies
+ * a figure the learner has, or describes a typical / imagined one, is not an
+ * answer from the figure's evidence.
+ */
+export const DENIES_OR_IMAGINES_FIGURE_RE = new RegExp([
+  String.raw`\b(?:can(?:'|’)?t|cannot|can not|unable to|not able to|don(?:'|’)?t|do not|am not)\s+(?:see|seeing|view|show|display)\b[^.!?\n]{0,40}\b(?:picture|figure|diagram|image|illustration)`,
+  String.raw`\bno\s+(?:picture|figure|diagram|image)\b`,
+  String.raw`\b(?:typical|usual|generic|such)\s+(?:picture|figure|diagram|illustration|image|graph)s?\b`,
+  String.raw`\b(?:usually|normally|typically|generally)\s+(?:shows?|has|have|looks?|contains?|depicts?)\b`,
+  String.raw`\bwould\s+(?:show|look like|depict|contain)\b`,
+  String.raw`\bpicture yourself\b`,
+  String.raw`\bimagine\s+(?:a|the|that)\s+(?:picture|diagram|figure|flow ?chart|graph|drawing)\b`,
+].join('|'), 'i')
+
+/** The deterministic answer about a figure the learner has, built only from what the renderer drew. */
+export function figureEvidenceAnswer(
+  drawn: { caption: string | null; text: string[] } | null | undefined,
+  fallbackSemantics: string | null | undefined,
+  where: 'this-message' | 'earlier',
+  teaching: string | null | undefined,
+): string {
+  const place = where === 'this-message' ? 'The picture with this message' : 'The picture for this lesson is further up in our chat. It'
+  const caption = drawn?.caption?.trim() || (fallbackSemantics ?? '').replace(/^A 3D scene:\s*/i, '').trim() || null
+  // "drawn: …" lists what is drawn, not words written on the figure (it was
+  // read out as a label on 31bafe03).
+  const text = (drawn?.text ?? []).map((t) => t.trim()).filter((t) => t && !/^drawn: /.test(t)).slice(0, 12)
+  const parts: string[] = []
+  parts.push(caption ? `${place} is titled “${caption}”.` : `${place} is the figure shown for this idea.`)
+  if (text.length) parts.push(`The words written on it are: ${text.map((t) => `“${t}”`).join(', ')}.`)
+  parts.push(text.length ? 'Tell me which of those parts is confusing and I will explain it.' : 'Tell me which part of it is confusing and I will explain it.')
+  const body = withoutFigureSentences(teaching ?? '').trim()
+  return body ? `${parts.join(' ')}\n\n${body}` : parts.join(' ')
+}
+
+// ── A-2 (production 2026-10-10 on 76c2edd): claims about a REAL figure ─────
+/**
+ * chem.kinet.rate-law, a figure ("Determining Rate Law and Order via
+ * Initial-Rate Method") shown earlier in the lesson. Two replies described a
+ * picture that is not that figure, without denying it or calling it typical:
+ *   "One side (the horizontal line) shows how much tomato you have … In the
+ *    sketch, moving farther right … changes the height of the stack"
+ *   "The boxes represent the concentrations of reactants A and B; the arrow
+ *    shows they combine to give a rate …"
+ * The check below reads every sentence that points at a figure and keeps it
+ * only when what it claims is on the figure is in the figure's evidence (its
+ * caption and every label the renderer draws). It removes a sentence that
+ *  - dresses an analogy up as the figure ("picture yourself", "in the sketch"),
+ *  - names a structure the figure does not have (axes, horizontal/vertical
+ *    lines, curves, stacks, bars, a grid, a table),
+ *  - quotes a label as written on the figure that is not on it, or
+ *  - says what a box/arrow/part "represents" naming nothing on the figure.
+ * Positions and colours are not judged here (figureFidelity owns colours).
+ * Pure.
+ */
+export interface FigureEvidence {
+  caption: string | null
+  text: string[]
+  /** The figure's steps/boxes IN ORDER (title + note), when it has an order. */
+  order?: string[]
+}
+
+/** Evidence from a described payload: caption, every readable label, step text, and labels named in elements. */
+export function evidenceFromSemantics(sem: { caption?: string | null; readable?: string[]; steps?: string[]; elements?: string[] } | null | undefined): FigureEvidence {
+  const quoted = (sem?.elements ?? []).flatMap((e) => Array.from(String(e).matchAll(/"([^"]{1,120})"/g)).map((m) => m[1]))
+  const text = Array.from(new Set([...(sem?.readable ?? []), ...(sem?.steps ?? []), ...quoted].map((t) => String(t).trim()).filter(Boolean)))
+  return { caption: sem?.caption ?? null, text: text.slice(0, 24) }
+}
+
+const AXIS_PRIMITIVES = ['axes', 'x-axis', 'y-axis', 'horizontal axis', 'vertical axis', 'horizontal line', 'vertical line']
+const near = (a: number, b: number) => Math.abs(a - b) < 1e-6
+/** Two arrows from the same origin, one horizontal and one vertical. */
+function hasAxes(arrows: Array<{ from?: number[]; to?: number[] }>): boolean {
+  const ok = (a: { from?: number[]; to?: number[] }) => Array.isArray(a.from) && Array.isArray(a.to) && a.from.length >= 2 && a.to.length >= 2
+  const horiz = arrows.filter((a) => ok(a) && near(a.from![1], a.to![1]) && !near(a.from![0], a.to![0]))
+  const vert = arrows.filter((a) => ok(a) && near(a.from![0], a.to![0]) && !near(a.from![1], a.to![1]))
+  return horiz.some((h) => vert.some((v) => near(h.from![0], v.from![0]) && near(h.from![1], v.from![1])))
+}
+/** A path whose points all lie on one straight line (two-point stubs included). */
+function isStraight(points: number[][] | undefined): boolean {
+  const pts = (points ?? []).filter((p) => Array.isArray(p) && p.length >= 2)
+  if (pts.length < 3) return true
+  const [a, b] = [pts[0], pts[pts.length - 1]]
+  const len = Math.hypot(b[0] - a[0], b[1] - a[1]) || 1
+  return pts.every((p) => Math.abs((b[0] - a[0]) * (a[1] - p[1]) - (a[0] - p[0]) * (b[1] - a[1])) / len < 1e-3 * len)
+}
+
+/** Evidence straight from a payload: the described semantics plus what a spec draws beyond them (step notes, axis labels). */
+export function evidenceFromPayload(
+  payload: { renderer?: string; visualSpec?: unknown; sceneSpec?: unknown; visualType?: unknown } | null | undefined,
+  describe: (p: never) => { caption?: string | null; readable?: string[]; steps?: string[]; elements?: string[] },
+): FigureEvidence {
+  const base = evidenceFromSemantics(payload ? describe(payload as never) : null)
+  const spec = (payload?.visualSpec ?? null) as Record<string, unknown> | null
+  const extra: string[] = []
+  // What is DRAWN, not only what is written (production on 9a0cee7a: the
+  // innate-behaviour scene draws two line stubs, the photosynthesis scene an arrow).
+  const drawn = new Set<string>()
+  type DrawnObject = { type?: string; from?: number[]; to?: number[]; points?: number[][] }
+  const scene = (payload?.sceneSpec ?? null) as { steps?: Array<{ objects?: DrawnObject[] }>; objects?: DrawnObject[] } | null
+  const arrows: DrawnObject[] = []
+  for (const o of [...(scene?.objects ?? []), ...(scene?.steps ?? []).flatMap((st) => st?.objects ?? [])]) {
+    if (o?.type === 'arrow' || o?.type === 'vector') { drawn.add('arrow'); arrows.push(o) }
+    if (o?.type === 'line' || o?.type === 'bond') { drawn.add('line'); drawn.add('straight line') }
+    if (o?.type === 'path') {
+      drawn.add('line')
+      if (!isStraight(o.points)) { drawn.add('curve'); drawn.add('plotted curve') }
+    }
+    if (o?.type === 'node' || o?.type === 'point') drawn.add('marked point')
+    if (o?.type === 'box' || o?.type === 'rect') drawn.add('box')
+  }
+  // A-2 graph false positives (production d10f8a09, 2026-10-11): a scene's
+  // axes are two arrows from one origin, one horizontal and one vertical
+  // (phys.mech.stress-strain) — "this arrow points to the vertical axis" was
+  // removed because nothing said the figure HAS axes.
+  if (hasAxes(arrows)) for (const t of AXIS_PRIMITIVES) drawn.add(t)
+  if (spec?.type === 'process_flow' || spec?.type === 'flowchart') { drawn.add('box'); drawn.add('arrow') }
+  // GraphRenderer draws a grid, both axes (with tick numbers and the axis
+  // names), the curve of the equation — or, on a count axis, points only —
+  // and the title with the equation (math.arith.square-roots: "The
+  // horizontal line is the x-axis", "the curve" were removed).
+  if (spec?.type === 'graph') {
+    for (const t of AXIS_PRIMITIVES) drawn.add(t)
+    drawn.add('grid'); drawn.add('tick numbers')
+    if (isCountAxis(typeof spec.xLabel === 'string' ? spec.xLabel : null)) drawn.add('plotted points')
+    else { drawn.add('curve'); drawn.add('plotted curve') }
+    if (typeof spec.equation === 'string') extra.push(spec.equation)
+  }
+  if (drawn.size > 0) extra.push(`drawn: ${Array.from(drawn).sort().join(', ')}`)
+  if (spec) {
+    for (const k of ['title', 'xLabel', 'yLabel', 'caption']) if (typeof spec[k] === 'string') extra.push(spec[k] as string)
+    if (Array.isArray(spec.steps)) for (const st of spec.steps as Array<Record<string, unknown>>) {
+      if (typeof st?.title === 'string') extra.push(st.title)
+      if (typeof st?.note === 'string') extra.push(st.note)
+    }
+  }
+  const order: string[] = []
+  if (spec && Array.isArray(spec.steps)) {
+    for (const st of spec.steps as Array<Record<string, unknown>>) {
+      const t = [st?.title, st?.note].filter((x) => typeof x === 'string').join(' — ')
+      if (t) order.push(t)
+    }
+  } else if (scene?.steps && (payload?.sceneSpec as { sceneType?: string }).sceneType === 'process') {
+    for (const st of scene.steps as Array<{ narration?: string }>) if (typeof st?.narration === 'string' && st.narration.trim()) order.push(st.narration.trim())
+  }
+  return {
+    caption: base.caption,
+    text: Array.from(new Set([...base.text, ...extra.map((t) => t.trim()).filter(Boolean)])).slice(0, 32),
+    ...(order.length >= 2 && { order: order.slice(0, 12) }),
+  }
+}
+
+/**
+ * The copy kept in the rendered-reality log for later questions: labels and
+ * stage text are capped at 120 characters each (session size); the "drawn: …"
+ * list is kept whole — cut at 120 it lost "x-axis, y-axis" and accurate axis
+ * sentences were removed (31bafe03, math.arith.square-roots).
+ */
+export function evidenceForLog(ev: FigureEvidence): { caption: string | null; text: string[] } {
+  return { caption: ev.caption, text: ev.text.map((t) => (/^drawn: /.test(t) ? t : t.slice(0, 120))).slice(0, 24) }
+}
+
+export const FIGURE_POINTING_RE = /\b(?:(?:the|this|that|your)\s+(?:picture|figure|diagram|image|sketch|drawing|chart|graph|flow ?chart|illustration)|in the (?:sketch|drawing)|box(?:es)?|arrows?|labell?ed|labels?|(?:left|right)[- ]hand side|on the (?:left|right)|at the (?:top|bottom)|(?:top|bottom) (?:left|right)|the (?:horizontal|vertical) (?:line|axis)|the [xy][- ]?axis|the axes|the curve|one side|the other side|the (?:two|three|four) (?:straight |dashed |dotted |coloured |colored )?lines)\b/i
+const FIGURE_NOUN_RE = /\b(?:picture|figure|diagram|image|sketch|drawing|chart|graph|illustration)\b/i
+const ANALOGY_AS_FIGURE_RE = /\b(?:picture yourself|imagine|think of (?:it|this|the (?:picture|figure|diagram)) (?:as|like)|as if)\b/i
+const STRUCTURE_RE = /\b(x[-‐‑ ]?axis|y[-‐‑ ]?axis|axis|axes|horizontal (?:line|axis)|vertical (?:line|axis)|(?:two|three|four) (?:straight |dashed |dotted |coloured |colored )?lines|curves?|plotted|bar chart|bars|grid|stacks?|(?:the|this|that) sketch|slope|peaks?|plateau|pie chart|table)\b/gi
+const LABEL_CLAIM_RE = /\b(?:labell?ed|labels?|written|titled|marked|caption|heading)\b|\b(?:label|box|figure|picture|diagram|caption|title|heading|sign|panel|it)\s+(?:\w+\s+){0,2}?(?:reads?|says)\b/i
+const EXPLAINS_PART_RE = /(?:\b(?:the|this|that|these|those)\s+|^[\s\-*•]*)(?:[\w*]+\s+){0,2}?\**(?:box(?:es)?|arrows?|sections?|parts?|sides?|lines?)\b[^.!?]{0,60}\b(?:represents?|stands? for|shows?|means?)\b/i
+/** "grey arrow", "right side (blue)": a bolded description of a part, not a quoted label. */
+const PART_WORDS_RE = /\b(?:(?:top|bottom|upper|lower|left|right|centre|center|middle)(?:[- ]hand)?|red|blue|green|orange|purple|grey|gray|black|white|yellow|pink|brown|teal|light|dark|arrows?|box(?:es)?|sides?|lines?|sections?|panels?|parts?|areas?|labell?ed|markers?|curves?|points?|dots?|straight|curved|dashed|dotted|smooth|thin|thick|the|a|an|and)\b/gi
+function onlyPartWords(term: string): boolean {
+  return term.replace(PART_WORDS_RE, '').replace(/[()\s,.-]+/g, '').length === 0
+}
+const SLOPE_WORDING = new Set(['exactly', 'simply', 'just', 'really', 'actually', 'basically', 'called', 'known', 'value', 'ratio', 'quotient', 'amount', 'measure', 'number', 'divided', 'over', 'equal', 'same', 'what', 'tells', 'gives', 'which', 'that'])
+const SLOPE_MEANING_RE = /\bslope\b(?:\s+(?:labell?ed|marked|called)\s+\**\s*[“"][^”"]{1,30}[”"])?\**(?:\s+of\s+[^.;,]{1,40}?)?\s+(?:is|represents?|equals?|gives?|shows?|stands? for|means?|tells? (?:you|us))\s+(?:the\s+|a\s+|an\s+)?([^.;,()–—]{2,60})/gi
+const ORDINALS: Record<string, number> = { first: 1, second: 2, third: 3, fourth: 4, fifth: 5, sixth: 6, seventh: 7, eighth: 8, last: -1, final: -1 }
+const ORDINAL_CLAIM_RE = /\b(first|second|third|fourth|fifth|sixth|seventh|eighth|last|final)(?:\s+(?:box|step|stage|one))?\s+(?:represents?|shows?|indicates?|is|stands? for|contains?|says)\s+([^,;.]{3,80})/gi
+const POSITION_OR_COLOUR_RE = /^(?:(?:top|bottom|upper|lower)\s*)?(?:left|right|centre|center|middle|top|bottom)(?:\s+(?:left|right|side))?$|^(?:red|blue|green|orange|purple|grey|gray|black|white|yellow|pink|brown|teal)$/i
+const STOP = new Set(['this', 'that', 'with', 'from', 'they', 'them', 'their', 'there', 'which', 'when', 'what', 'into', 'than', 'then', 'also', 'each', 'shows', 'show', 'represent', 'represents', 'picture', 'figure', 'diagram', 'boxes', 'arrow', 'arrows', 'part', 'parts', 'side', 'here', 'just', 'like'])
+const norm = (t: string): string => (t ?? '').toLowerCase().replace(/[‐-―−]/g, '-').replace(/[“”"*’‘']/g, '').replace(/\s+/g, ' ').trim()
+const SUBSCRIPTS: Record<string, string> = { '₀': '0', '₁': '1', '₂': '2', '₃': '3', '₄': '4', '₅': '5', '₆': '6', '₇': '7', '₈': '8', '₉': '9', 'ₐ': 'a', 'ₑ': 'e', 'ₒ': 'o', 'ₓ': 'x', 'ₙ': 'n', 'ₘ': 'm', 'ₖ': 'k', 'ₜ': 't', 'ₚ': 'p', 'ₛ': 's' }
+/**
+ * Spacing around operators and subscript notation do not change a label:
+ * "stress F / A" = "stress F/A"; T(c), \(T_c\), T₍c₎ and T_c are one symbol
+ * (phys.mod.superconductivity, 16888708).
+ */
+const tight = (t: string): string => t
+  .replace(/\\[()[\]]/g, '')
+  .replace(/[₀-₉ₐₑₒₓₙₘₖₜₚₛ]/g, (c) => SUBSCRIPTS[c] ?? c)
+  .replace(/[₍₎]/g, '')
+  .replace(/([a-z])_\{?([a-z0-9]{1,3})\}?/gi, '$1$2')
+  .replace(/([a-z])\(([a-z0-9])\)/gi, '$1$2')
+  .replace(/\s*([/=×·+*^−-])\s*/g, '$1')
+  // "stress (F / A)" for the label "stress F/A" (3cd4398f): brackets are
+  // dropped on both sides, the words and symbols must still match.
+  .replace(/[()]/g, ' ').replace(/\s+/g, ' ').trim()
+const stemWord = (w: string): string => w.replace(/(?:es|s)$/, '')
+const contentWords = (t: string): string[] => (norm(t).match(/[a-z]{4,}/g) ?? []).filter((w) => !STOP.has(w))
+
+export function checkFigureClaims(reply: string, evidence: FigureEvidence): { text: string; removed: string[] } {
+  const ev = norm([evidence.caption ?? '', ...evidence.text].join(' | '))
+  // Meaning comes from written labels and stage text, never from the list of
+  // drawn primitives ("Grey arrows run along the curve to show the direction
+  // of increasing load" must not pass on "curve", 16888708).
+  const evWords = new Set(contentWords([evidence.caption ?? '', ...evidence.text.filter((t) => !/^drawn: /.test(t))].join(' | ')).map((w) => w.replace(/(?:es|s)$/, '')))
+  const evTight = tight(ev)
+  const entryTexts = [evidence.caption ?? '', ...evidence.text].filter(Boolean)
+  const entries = entryTexts.map((e) => new Set(contentWords(e).map(stemWord)))
+  const slopeEntries = entryTexts.filter((e) => /\bslope\b/i.test(e)).map((e) => new Set(contentWords(e).map(stemWord)))
+  const labels = [evidence.caption ?? '', ...evidence.text].map(norm).filter((l) => l.length >= 3)
+  const removed: string[] = []
+  // Split as the grounded prose check does, keeping every character.
+  const parts = (reply ?? '').split(/(?<=[.!?])(\s+)|(\n+)/).filter((p) => p !== undefined)
+  const out: string[] = []
+  for (const p of parts) {
+    const s = p ?? ''
+    if (!s.trim() || !/[A-Za-z]{2,}/.test(s) || !FIGURE_POINTING_RE.test(s)) { out.push(s); continue }
+    // A question to the learner claims nothing about the figure.
+    if (/\?\s*(?:\*\*|["”’])?\s*$/.test(s)) { out.push(s); continue }
+    let bad = false
+    if (ANALOGY_AS_FIGURE_RE.test(s) && FIGURE_NOUN_RE.test(s)) bad = true
+    if (!bad) {
+      for (const m of s.matchAll(STRUCTURE_RE)) {
+        const w = norm(m[1])
+        const key = /^(?:two|three|four) /.test(w) ? 'line' : w.replace(/^(?:the|this|that) /, '').replace(/^([xy])[\s-]?axis$/, '$1-axis').replace(/s$/, '')
+        if (!ev.includes(key)) { bad = true; break }
+      }
+    }
+    if (!bad && LABEL_CLAIM_RE.test(s)) {
+      // A quoted label inside a bolded part description ("**Blue line labeled
+      // “slope = E”**") is judged on its own; the bold remainder is a part
+      // description (stress-strain, d10f8a09).
+      // A quoted word glossed in brackets — "(the “radicand”)" — names a term,
+      // it does not claim a label (34faa394, square roots).
+      const glossFree = s.replace(/\(\s*(?:the|a|an|called|i\.e\.,?|aka)?\s*(?:“[^”]{1,40}”|"[^"]{1,40}")\s*\)/gi, ' ')
+        // A label the sentence DENIES is not claimed: "labelled “slope = E”,
+        // not “yield point”" (controlled production run on ae3ef570).
+        .replace(/\b(?:not|never|rather than|instead of)\s+(?:[\w’']+\s+){0,2}?\**\s*(?:“[^”]{1,80}”|"[^"]{1,80}")\s*\**/gi, ' ')
+      // One-character quotes count as a quoted label too (“E”, f6a1170c), so the
+      // bold around them stays emphasis; the length filter below skips them.
+      const quotedTerms = Array.from(glossFree.matchAll(/“([^”]{1,80})”|"([^"]{1,80})"/g)).map((m) => m[1] ?? m[2] ?? '')
+      // A bold-wrapped quote (**“Simple reflex”**) goes with its asterisks, or
+      // the leftover "**" pairs would wrap the text between two labels.
+      const unquoted = glossFree.replace(/\*\*\s*(?:“[^”]{0,80}”|"[^"]{0,80}")[,.;:!?]?\s*\*\*/g, ' ').replace(/“[^”]{0,80}”|"[^"]{0,80}"/g, ' ')
+      const boldTerms = Array.from(unquoted.matchAll(/\*\*([^*]{1,80}?)\*\*/g)).map((m) => m[1] ?? '')
+      // A sentence that quotes its label uses bold only for emphasis ("At
+      // **4 kelvin** … the label “R = 0 below T_c = 7.2 K”").
+      const terms = [...quotedTerms, ...(quotedTerms.length > 0 ? [] : boldTerms)].map((t) => norm(t).replace(/[,.;!]+$/, '').trim())
+        .filter((t) => t.length >= 2 && !POSITION_OR_COLOUR_RE.test(t) && !/[:?]\s*$/.test(t) && !onlyPartWords(t))
+      for (const t of terms) {
+        if (ev.includes(t) || labels.some((l) => l.length >= 4 && t.includes(l))) continue
+        // "stress F / A" for the label "stress F/A": spacing around operators.
+        if (evTight.includes(tight(t))) continue
+        // A label restated in words ("stress = force / area" for "stress F/A"):
+        // every content word, at least two, in ONE label or stage text.
+        const tw = contentWords(t).map(stemWord)
+        if (tw.length >= 2 && entries.some((e) => tw.every((w) => e.has(w)))) continue
+        bad = true; break
+      }
+    }
+    const partClaim = !bad && !/“|"|\*\*/.test(s) ? EXPLAINS_PART_RE.exec(s) : null
+    if (partClaim) {
+      // Only what the part is said to show is judged — the words after the
+      // verb ("… the curve shows y = √x"), not the whole sentence: production
+      // a60b6397 removed "On the graph, the horizontal line is the x-axis and
+      // the curve shows y = √x." A meaning of symbols only is left to the
+      // label rules.
+      const meaning = s.slice(partClaim.index + partClaim[0].length).split(/[.;!?]/)[0] ?? ''
+      const said = Array.from(new Set(contentWords(meaning).map((w) => w.replace(/(?:es|s)$/, ''))))
+      const overlap = said.filter((w) => evWords.has(w))
+      const part = /\b(box|arrow|line)/i.exec(partClaim[0])?.[1]?.toLowerCase()
+      const partDrawn = part ? new RegExp(`drawn: [^|]*\\b${part}`).test(ev) : false
+      if (said.length > 0 && overlap.length < Math.min(partDrawn ? 1 : 2, said.length)) bad = true
+    }
+    if (!bad) {
+      // What the slope MEANS must come from the figure (a label or its stage
+      // text): "slope = E … the slope is Young's modulus" (stress-strain)
+      // supports "Young's modulus", never "the breaking stress".
+      for (const m of s.matchAll(SLOPE_MEANING_RE)) {
+        // "its slope is labelled “slope = E”" names a label (checked above),
+        // not a meaning (1d41551f, stress-strain).
+        if (/^\s*\**\s*(?:labell?ed|marked|called|written|shown|drawn|given)\b/i.test(m[1])) continue
+        // "exactly the ratio of stress to strain" for "E = stress/strain":
+        // wording words are not part of the claim.
+        // A possessive names whose property it is ("the material's Young's
+        // modulus", 34faa394), not what the slope is.
+        const said = contentWords(m[1].replace(/\b[\w-]+(?:’|')s\b/g, ' ')).map(stemWord).filter((w) => !SLOPE_WORDING.has(w))
+        if (said.length === 0) continue
+        if (!slopeEntries.some((e) => said.every((w) => e.has(w)))) { bad = true; break }
+      }
+    }
+    if (!bad && evidence.order && evidence.order.length >= 2) {
+      // "the first box represents the reactants, the second shows …": each
+      // ordinal claim must share a word with THAT step (rate-law, f32eeb04).
+      for (const m of s.matchAll(ORDINAL_CLAIM_RE)) {
+        const n = ORDINALS[m[1].toLowerCase()] ?? 0
+        const idx = n === -1 ? evidence.order.length - 1 : n - 1
+        const step = evidence.order[idx]
+        const said = contentWords(norm(m[2])).map((w) => w.replace(/(?:es|s)$/, ''))
+        if (said.length === 0) continue
+        const stepWords = new Set(step ? contentWords(norm(step)).map((w) => w.replace(/(?:es|s)$/, '')) : [])
+        if (!said.some((w) => stepWords.has(w))) { bad = true; break }
+      }
+    }
+    if (bad) { removed.push(s.trim()); continue }
+    out.push(s)
+  }
+  if (removed.length === 0) return { text: reply, removed }
+  return { text: out.join('').replace(/\n{3,}/g, '\n\n').replace(/^[ \t]*[-*•][ \t]*$/gm, '').replace(/\n{3,}/g, '\n\n').trim(), removed }
 }

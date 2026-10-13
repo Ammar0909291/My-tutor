@@ -21,19 +21,43 @@
  *   noSteps     "step by step" answered with < 2 step lines  (CHEM-015)
  *   lateVerdict "Not quite" present but not first            (CHEM-028)
  *   degraded    provider=degraded
- *   quizNoCard / twoOption / unkeyedCard / degradedCardSwap / repeatAnswered
+ *   quizNoCard / twoOption / degradedCardSwap / repeatAnswered
  *               systemic re-checks (CHEM-061, 004, 048, 146, 033/017)
+ *   picDescribe picture question, no figure seen, and the reply is not the
+ *               honest no-picture reply or still describes a figure (Issue A, 2026-10-10)
+ *   picDenied   picture question after a figure WAS shown, answered "no picture"
+ *   picImagined picture question after a figure WAS shown, reply denies it or describes a typical/imagined one
+ *   picImaginedParts  a figure WAS shown and the reply places imagined parts on it
+ *               ("the horizontal line", "in the sketch") — A-2, 2026-10-10
+ *   exampleQualified  (informational) the reply carries the uncovered-example note (C-1)
+ *   quizSilent  explicit quiz request, no card, and no honest "no question" line (Issue B)
+ *   cardNotInCorpus  the served card's question is not an authored stem in
+ *               src/lib/teaching/assets/* (replaces the unkeyedCard heuristic: the
+ *               client payload never carries assetId, by design)
+ *
+ *   QA_BEATS=closure runs the final-defect-closure persona (picture questions,
+ *   "quiz me" / "ask me a question" / "test my understanding" at the start,
+ *   middle and end, repeated requests, "give me example").
  */
-import { writeFileSync } from 'fs'
+import { writeFileSync, readFileSync, readdirSync } from 'fs'
 import { BASE, createQaAccount, deleteQaAccount, type QaAccount } from './liveAccount'
 import { createSession, openLesson, say, figureLabel, type TurnPayload } from './liveSession'
+import { isOffLesson } from '../../src/lib/teaching/lessonDriftGuard'
+import { isPlainAcknowledgement } from '../../src/lib/teaching/replyHygiene'
+import { hasProseMultipleChoice } from '../../src/lib/teaching/proseMcqGuard'
+import { usesAnalogy, analogyCapReached } from '../../src/lib/teaching/reuseCaps'
+import { getKGNode } from '../../src/lib/curriculum/knowledgeGraph'
+import { DENIES_OR_IMAGINES_FIGURE_RE } from '../../src/lib/teaching/figureReference'
+import { UNCOVERED_EXAMPLE_NOTE } from '../../src/lib/teaching/groundedProseCheck'
 
 const SUBJECT = process.env.QA_SUBJECT ?? 'chemistry'
-const ORDERS = (process.env.QA_ORDERS ?? '115,151,78').split(',').map(Number)
+const ORDERS = (process.env.QA_ORDERS ?? '').split(',').filter(Boolean).map(Number)
+// QA_SLUGS=chem.found.matter,chem.bond.ionic-bonding — lessons by KG id instead of order.
+const SLUGS = (process.env.QA_SLUGS ?? '').split(',').map((x) => x.trim()).filter(Boolean)
 const OUT = process.env.QA_OUT ?? '/tmp/claude-0/sp/chem-redrive.txt'
 const THINK_MS = Number(process.env.QA_THINK_MS ?? 2500)
 
-const BEATS = [
+const STANDARD_BEATS = [
   'ok',
   'i dont understand this picture. what is it showing?',
   'too many words',
@@ -48,11 +72,45 @@ const BEATS = [
   'next question please',
   '@card-right',
 ]
+const CLOSURE_BEATS = [
+  'What is this picture showing?',          // no figure yet in the lesson
+  'quiz me',                                // start of lesson
+  '@card-right',
+  'ok',
+  'give me example',                        // BIO-024 shape (prose example)
+  'i dont understand this picture. what is it showing?',
+  'ask me a question',                      // middle
+  '@card-wrong',
+  'test my understanding',
+  'quiz me',                                // repeated, card unanswered
+  '@card-right',
+  'show me a diagram',                      // a genuine figure, when the concept has one
+  'i dont understand this picture. what is it showing?',
+  'explain simpler',
+  'give me a quiz',
+  '@card-right',
+  'quiz me',                                // end: pool likely spent
+  'quiz me',
+]
+const BEATS = process.env.QA_BEATS === 'closure' ? CLOSURE_BEATS : STANDARD_BEATS
+
+// Authored corpus: every probe stem in src/lib/teaching/assets/*.ts, string
+// concatenations joined, lower-cased, whitespace collapsed.
+const normStem = (t: string) => t.toLowerCase().replace(/^\s*\[[^\]]*\]\s*/, '').replace(/[\u2018\u2019]/g, "'").replace(/[\u201c\u201d]/g, '"').replace(/\s+/g, ' ').trim()
+const CORPUS: Array<{ file: string; text: string }> = readdirSync('src/lib/teaching/assets').filter((f) => f.endsWith('.ts'))
+  .map((f) => ({ file: f, text: normStem(readFileSync(`src/lib/teaching/assets/${f}`, 'utf8').replace(/(['"`])\s*\+\s*\n?\s*(['"`])/g, '').replace(/\\'/g, "'")) }))
+export function corpusFileOf(question: string): string | null {
+  const q = normStem(question).slice(0, 70)
+  return CORPUS.find((c) => c.text.includes(q))?.file ?? null
+}
+const QUIZ_REQUEST = /^(?:quiz me|ask me a question|test my understanding|give me a quiz)$/i
+const HONEST_NO_QUESTION = /^(?:This is the question you have not answered yet|You have answered every (?:new )?practice question|I don't have a practice question I can give you)/
+const FIGURE_DESCRIPTION = /\b(?:(?:the|this|that) (?:picture|figure|diagram|image|graph|drawing) (?:shows|has|is showing|displays)|(?:is|are) drawn|on the (?:horizontal|vertical|x|y)[- ]axis|usually shows?|normally shows?|curved arrow|colou?red (?:box|arrow|line))\b/i
 
 const words = (s: string) => (s.match(/\S+/g) ?? []).length
 const EMPATHY = /genuinely tricky|i hear you|completely normal|can feel (?:overwhelming|tricky|confusing)|slow (?:right )?down/i
 
-function flags(p: TurnPayload, learner: string, prevTutor: string, figureSeen: boolean): string[] {
+function flags(p: TurnPayload, learner: string, prevTutor: string, figureSeen: boolean, conceptId = '', priorTutor: string[] = []): string[] {
   const t = String(p.text ?? '')
   const outsideMath = t.replace(/\\\([\s\S]+?\\\)|\\\[[\s\S]+?\\\]|\$\$[\s\S]+?\$\$/g, '')
   const f: string[] = []
@@ -78,9 +136,26 @@ function flags(p: TurnPayload, learner: string, prevTutor: string, figureSeen: b
   if (/beside this message/.test(t) && /beside this message/.test(prevTutor)) f.push('captionRepeat')
   if (/system is set up|wanted to first acknowledge|repeat(?:ing)? the (?:same|earlier) explanation/i.test(t)) f.push('metaTalk')
   // Systemic re-check signals (2026-10-06): CHEM-061, CHEM-004, CHEM-048.
-  if (/^quiz me$/i.test(learner) && !p.mcq) f.push('quizNoCard')
+  if (QUIZ_REQUEST.test(learner) && !p.mcq) f.push('quizNoCard')
   if (p.mcq && p.mcq.options.length === 2) f.push('twoOption')
-  if (p.mcq && !(typeof (p.mcq as { assetId?: unknown }).assetId === 'string')) f.push('unkeyedCard')
+  if (p.mcq && !corpusFileOf(p.mcq.question)) f.push('cardNotInCorpus')
+  if (/picture/i.test(learner) && !figureSeen && !figureLabel(p)
+    && (!/^There is no picture in this lesson yet/.test(t) || FIGURE_DESCRIPTION.test(t))) f.push('picDescribe')
+  if (QUIZ_REQUEST.test(learner) && !p.mcq && !HONEST_NO_QUESTION.test(t)) f.push('quizSilent')
+  if (/picture/i.test(learner) && (figureSeen || figureLabel(p)) && /^There is no picture in this lesson yet/.test(t)) f.push('picDenied')
+  if (/picture/i.test(learner) && (figureSeen || figureLabel(p)) && DENIES_OR_IMAGINES_FIGURE_RE.test(t)) f.push('picImagined')
+  // A-2 (2026-10-10): imagined parts placed on a real figure (rate-law analogy reply).
+  if ((figureSeen || figureLabel(p)) && /\b(?:the (?:horizontal|vertical) line|in the sketch|one side \(|the other side \()/i.test(t)) f.push('picImaginedParts')
+  // C-1 (informational): the reply says its example is an illustration, not lesson fact.
+  if (t.includes(UNCOVERED_EXAMPLE_NOTE)) f.push('exampleQualified')
+  // 2026-10-07 owner-decision pass (2350ff6): signatures each fix removes.
+  if (hasProseMultipleChoice(t)) f.push('proseOptions')                                   // CHEM-048 / PHYS-020
+  if (isPlainAcknowledgement(learner) && /^\s*(?:[A-Za-z][\w.-]{0,24},\s+)?(?:correct|that(?:'|’)?s (?:right|correct)|exactly right|well done|spot on)\b/i.test(t)) f.push('verdictOnAck') // CHEM-031
+  const node = conceptId ? getKGNode(conceptId) : null
+  if (node && isOffLesson({ learnerMessage: learner, reply: t, conceptTitle: node.title, conceptDescription: node.description })) f.push('drift') // CHEM-133 / BIO-023
+  if (/general illustration related to the topic/i.test(t)) f.push('genericCaption')     // CHEM-034
+  if (usesAnalogy(t) && analogyCapReached(priorTutor.slice(-3), 1)) f.push('analogyRepeat') // CHEM-040 / 055
+  if (/let(?:'|’)s pause|on pause\b/i.test(t)) f.push('pause')                           // MATH-001 (stay until mastery)
   return f
 }
 
@@ -100,9 +175,10 @@ async function main() {
   const tally: Record<string, number> = {}
   const perLesson: Array<{ order: number; slug: string; turns: number; figure: boolean; flags: string[] }> = []
   let turns = 0
-  for (const order of ORDERS) {
-    const l = lessons.find((x) => x.order === order)
-    if (!l) { log.push(`order ${order}: not in curriculum`); continue }
+  const targets = [...ORDERS.map((o) => lessons.find((x) => x.order === o)), ...SLUGS.map((sl) => lessons.find((x) => x.topicSlug === sl))]
+  for (const l of targets) {
+    if (!l) { log.push('lesson not in curriculum'); continue }
+    const order = l.order
     const sid = await createSession(cookie, SUBJECT, `redrive-${order}-${Date.now()}`)
     const open = await openLesson(cookie, sid, { lessonTitle: l.lessonTitle, lessonOrder: l.order, topicSlug: l.topicSlug, unitTitle: l.unitTitle, totalLessons: lessons.length })
     const openText = String(open.text ?? '')
@@ -115,6 +191,7 @@ async function main() {
     let prevTutor = openText
     let n = 0
     const answered = new Set<string>()
+    const priorTutor: string[] = [openText]
     for (const beat of BEATS) {
       let msg = beat
       if (beat.startsWith('@card')) {
@@ -126,7 +203,8 @@ async function main() {
       let p: TurnPayload
       try { p = await say(cookie, sid, msg) } catch (e) { log.push(`[learner] ${msg}\n[error] ${String(e).slice(0, 200)}`); continue }
       turns++; n++
-      const f = flags(p, msg, prevTutor, figureSeen)
+      const f = flags(p, msg, prevTutor, figureSeen, l.topicSlug, priorTutor)
+      priorTutor.push(String(p.text ?? ''))
       if (figureLabel(p)) figureSeen = true
       for (const x of f) { tally[x] = (tally[x] ?? 0) + 1; lf.push(x) }
       // CHEM-146: a degraded reply that replaces an unanswered card.
@@ -136,7 +214,7 @@ async function main() {
       if (beat.startsWith('@card') && card) answered.add(card.question)
       card = p.mcq ?? null
       prevTutor = String(p.text ?? '')
-      log.push(`[learner] ${msg}\n[tutor provider=${p.provider} fig=${figureLabel(p) ?? 'none'} card=${p.mcq ? JSON.stringify(p.mcq.question.slice(0, 140)) + ' ' + JSON.stringify(p.mcq.options.map((o) => o.slice(0, 40))) : 'none'} flags=${f.join(',') || '-'}]\n${p.text ?? ''}`)
+      log.push(`[learner] ${msg}\n[tutor provider=${p.provider} fig=${figureLabel(p) ?? 'none'} card=${p.mcq ? JSON.stringify(p.mcq.question.slice(0, 140)) + ' ' + JSON.stringify(p.mcq.options.map((o) => o.slice(0, 40))) + ' corpus=' + (corpusFileOf(p.mcq.question) ?? 'NOT-FOUND') : 'none'} flags=${f.join(',') || '-'}]\n${p.text ?? ''}`)
     }
     for (const x of lf) if (x === 'closeOpen' || x === 'covers') tally[x] = (tally[x] ?? 0) + 1
     perLesson.push({ order, slug: l.topicSlug, turns: n, figure: figureSeen, flags: lf })

@@ -1,0 +1,46 @@
+{
+  "base": "https://my-tutor-flame.vercel.app",
+  "subject": "mathematics",
+  "slug": "math.arith.square-roots",
+  "rows": [
+    {
+      "turn": 1,
+      "said": "show me a graph",
+      "shot": "01.png",
+      "provider": "groq",
+      "reply": "Here’s the graph of the square‑root function that’s now on your screen. You can see a smooth curve that starts at the origin (0, 0) and rises gently as you move to the right.\n\nWhat do you notice about the shape of this curve as the x‑values get larger?",
+      "replyRendered": true,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": true
+    },
+    {
+      "turn": 2,
+      "said": "i dont understand this picture. what is it showing?",
+      "shot": "02.png",
+      "provider": "groq",
+      "reply": "The picture is a graph of the square‑root function \\(y = \\sqrt{x}\\). \n- The horizontal line is the **x‑axis**, which marks the input numbers \\(x\\). \n- The vertical line is the **y‑axis**, which marks the output numbers \\(y\\). \n- The curved line that starts at the origin \\((0,0)\\) and rises gently shows how the value of \\(\\sqrt{x}\\) grows as \\(x\\) gets larger. \n- The grid behind the curve helps you see the positions of points on the graph.\n\nTogether, the axes, the curve, and the grid illustrate that for each non‑negative \\(x\\), the graph gives the unique non‑negative number \\(y\\) whose square equals \\(x\\).",
+      "replyRendered": true,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": false
+    },
+    {
+      "turn": 3,
+      "said": "what do the axes and the curve mean?",
+      "shot": "03.png",
+      "provider": "groq",
+      "reply": "The picture is a graph of the square‑root function \\(y=\\sqrt{x}\\).\n\n- **Horizontal axis (x‑axis)** – shows the number you put under the square‑root sign, the “radicand.” \n- **Vertical axis (y‑axis)** – shows the result of the square root, the “root.” \n- **The curved line** – connects every pair \\((x,\\,y)\\) where \\(y\\) is the non‑negative number whose square equals \\(x\\). As \\(x\\) gets larger, the root grows, but more slowly, which is why the curve rises gently.\n\nNow look at a specific spot on that curve: the point where the horizontal coordinate is 9 (so the point \\((9,\\,\\;?)\\)). \n\n**What do you notice about the y‑value at that point?**",
+      "replyRendered": true,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": false
+    }
+  ]
+}

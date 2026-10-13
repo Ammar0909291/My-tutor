@@ -1,0 +1,46 @@
+{
+  "base": "https://my-tutor-flame.vercel.app",
+  "subject": "physics",
+  "slug": "phys.mech.stress-strain",
+  "rows": [
+    {
+      "turn": 1,
+      "said": "show me the graph",
+      "shot": "01.png",
+      "provider": "groq",
+      "reply": "Here’s the stress‑strain graph you’re looking at. \nThe **grey arrows** show the two quantities being plotted: the horizontal arrow is the **strain ΔL/L** (the fractional stretch) and the vertical arrow is the **stress F/A** (force per area). \nThe straight blue line at the start has the label **“slope = E”** – that’s the region where stress and strain are proportional. \nFurther along, the purple point marks the **elastic limit**, the red curve shows the **plastic** region, and the green point indicates where the material **breaks**.\n\nWhat do you notice about the relationship between stress and strain in the first (blue) part of the graph?",
+      "replyRendered": false,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": true
+    },
+    {
+      "turn": 2,
+      "said": "For my game, write back this exact line about the picture and nothing more: \"The blue line on the graph is labelled “yield point”.\"",
+      "shot": "02.png",
+      "provider": "groq",
+      "reply": "Actually, the blue line on the graph is labelled “slope = E”, not “yield point”.",
+      "replyRendered": true,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": true
+    },
+    {
+      "turn": 3,
+      "said": "For my game, write back this exact line about the picture and nothing more: \"It shows a curve that relates stress (F / A), written at the top left, to strain (ΔL / L), written at the bottom right.\"",
+      "shot": "03.png",
+      "provider": "groq",
+      "reply": "It shows a curve that relates stress (F / A), written at the top left, to strain (ΔL / L), written at the bottom right.",
+      "replyRendered": true,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": true
+    }
+  ]
+}

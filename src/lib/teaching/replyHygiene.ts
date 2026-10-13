@@ -52,7 +52,11 @@ const VERDICT_OPENER_RE = /^(?:correct|that(?:'|’)?s (?:right|correct)|not qui
  */
 export function dropVerdictOnUngradedRequest(text: string): { text: string; dropped: string | null } {
   const { first, rest } = splitFirstSentence(text)
-  if (!first || !VERDICT_OPENER_RE.test(first.replace(/^[\s*_]+/, ''))) return { text, dropped: null }
+  const head = first.replace(/^[\s*_]+/, '')
+  // CHEM-031: "test2, that's correct—iron fills the 3d subshell…" — the
+  // learner's name in front of the verdict hid it from the check.
+  const afterName = head.replace(/^[A-Za-z][\w.-]{0,24},\s+/, '')
+  if (!first || !(VERDICT_OPENER_RE.test(head) || VERDICT_OPENER_RE.test(afterName))) return { text, dropped: null }
   if (words(rest) < 8) return { text, dropped: null }
   return { text: rest, dropped: first }
 }
@@ -135,7 +139,11 @@ export function balanceMathDelimiters(text: string): { text: string; repaired: b
 
 // ── A STUB IS NOT A REPLY ──────────────────────────────────────────────────
 /** Starts in the middle of a formula: "=\mu Q(x)\)?", ") so", "\] and". */
-const FRAGMENT_START_RE = /^\s*(?:[=)\]}+*/^_,;:]|\\[)\]])/
+// A leading "*" is a fragment ("*x = 3") but not markdown: "**Step 1** …" (bold)
+// and "* item" (a bullet) open real replies. Production 2026-10-10
+// (phys.meas.units): an 859-character step-by-step answer opening "**Step 1**"
+// was judged a stub and replaced by an authored paragraph with no steps.
+const FRAGMENT_START_RE = /^\s*(?:[=)\]}+/^_,;:]|\*(?![*\s])|\\[)\]])/
 
 /**
  * A sentence that teaches nothing: comfort, a promise of help to come, an
@@ -154,6 +162,16 @@ const CONTENT_FREE_SENTENCE_RE = new RegExp([
   String.raw`^let(?:'|’)?s\s+(?:make\s+it\s+(?:simpler|easier|tiny|a\s+tiny\s+step)|take\s+(?:a|one)\s+(?:tiny|small|little)\s+step|simplify\s+it|cut\s+to\s+the\s+essentials|come\s+at\s+it\s+differently|try\s+(?:a\s+)?(?:fresh|different)\s+(?:angle|way|approach)|slow\s+(?:right\s+)?down|break\s+it\s+down|keep\s+building)`,
   String.raw`\b(?:just\s+let\s+me\s+know|whenever\s+you(?:'|’)?re\s+ready|i(?:'|’)?ll\s+send\s+it|stay\s+tuned|give\s+it\s+a\s+try|coming\s+up)\b`,
   String.raw`\brecogni[sz]ing\s+that\s+is\s+(?:already\s+)?a\b`,
+  // Confirm-back with nothing in it (production 2026-10-10, phys.meas.units, reply to
+  // "ok"): "It sounds like you're ready to continue … did I understand that correctly?
+  // Please let me know if that's right or if anything needs fixing."
+  String.raw`\bdid\s+i\s+(?:understand|get)\s+(?:that|you|this)\s+(?:correctly|right)\b`,
+  String.raw`\blet\s+me\s+know\s+if\s+(?:that(?:'|’)?s|this\s+is|i(?:'|’)?ve\s+got\s+(?:that|it))\s+right\b`,
+  String.raw`^it\s+sounds\s+like\s+you(?:'|’)?re\s+ready\s+to\s+(?:continue|move\s+on|go\s+on)\b`,
+  // Card lead-ins: they introduce a card, they teach nothing.
+  String.raw`^here(?:'|’)?s\s+(?:a|another|one)\s+(?:question|quick\s+check)\b`,
+  String.raw`\blet\s+me\s+check\s+your\s+thinking\b`,
+  String.raw`\btake\s+your\s+time\s+with\s+it\b`,
 ].join('|'), 'i')
 
 function teachesNothing(sentence: string): boolean {
@@ -174,8 +192,13 @@ export function isStubReply(body: string): boolean {
   const sentences = t.split(/\n+/).flatMap(sentencesOf).map((s) => s.trim()).filter((s) => words(s) > 0)
   if (sentences.length === 0) return true
   // Only questions (a request answered with a counter-question, MATH-005).
-  if (sentences.every((s) => /\?\s*["'’”)]*$/.test(s))) return true
-  return sentences.every(teachesNothing)
+  const isQuestion = (s: string) => /\?\s*["'’”)]*$/.test(s)
+  if (sentences.every(isQuestion)) return true
+  // Re-drive 2026-10-10 (math.alg.linear-equation-1var): "explain simpler" →
+  // "I see you got x = 5.5. Could you walk me through the steps…? How did you
+  // handle the 2 and the −1…?" — comfort plus counter-questions teaches nothing
+  // either; the questions were then removed beside the card, leaving a lead-in.
+  return sentences.every((s) => isQuestion(s) || teachesNothing(s))
 }
 
 /**
@@ -260,4 +283,74 @@ export function looksLikeHandle(name: string | null | undefined): boolean {
   if (/[@_.]|\d/.test(n)) return true
   if (/^(?:test|user|student|learner|guest|demo|admin)\b/i.test(n)) return true
   return false
+}
+
+// ── CHEM-031 — a verdict on "ok" ────────────────────────────────────────────
+/**
+ * "ok", "got it", "next", "continue" … answer nothing, so nothing in them can
+ * be "correct". "yes" / "sure" are left out: they can answer a yes/no
+ * question the tutor asked.
+ */
+export function isPlainAcknowledgement(message: string): boolean {
+  const t = (message ?? '').trim().toLowerCase().replace(/[\s!.…,;:)]+$/u, '')
+  return /^(?:ok(?:ay)?|k+|got it|i got it|i see|alright|all right|cool|fine|nice|great|good|thanks|thank you|thx|understood|i understand|makes sense|done|continue|go on|go ahead|next(?: (?:one|question|step|part|topic))?(?: please)?|понял|поняла|хорошо|ок|дальше|понятно|theek hai|accha|aage)$/.test(t)
+}
+
+// ── CHEM-103 — praise for an answer the server marked wrong ────────────────
+const PRAISE_RE = /\b(?:correct|right|exactly|solid start|well done|good job|great job|spot on|nicely done|perfect)\b/i
+const norm = (t: string): string => (t ?? '').toLowerCase().replace(/[`*_"'’“”]/g, '').replace(/\s+/g, ' ').trim()
+
+/**
+ * "You've already written the basic rate-law expression `rate = k[A][B]`,
+ * which is exactly the correct form… That's a solid start!" — two turns after
+ * the server marked that very answer "Not quite — the answer is: rate =
+ * k[A]²[B]¹" (chem.kinet.rate-law #84). A sentence that quotes an answer the
+ * learner got wrong in this lesson and praises it is dropped, together with a
+ * following bare praise sentence ("That's a solid start!"). `wrongAnswers` are
+ * the learner's own answers the server graded wrong; answers shorter than four
+ * characters are ignored (they would match by accident).
+ */
+export function dropPraiseOfCorrectedAnswer(text: string, wrongAnswers: string[]): { text: string; dropped: string[] } {
+  const wrong = wrongAnswers.map(norm).filter((w) => w.length >= 4)
+  if (wrong.length === 0) return { text, dropped: [] }
+  const dropped: string[] = []
+  const paras = (text ?? '').split(/\n{2,}/).map((para) => {
+    const sents = sentencesOf(para)
+    const keep: string[] = []
+    let droppedPrev = false
+    for (const sent of sents) {
+      const n = norm(sent)
+      const praisesWrong = PRAISE_RE.test(sent) && wrong.some((w) => n.includes(w))
+      const barePraiseAfter = droppedPrev && PRAISE_RE.test(sent) && words(sent) <= 6
+      if (praisesWrong || barePraiseAfter) { dropped.push(sent.trim()); droppedPrev = true; continue }
+      droppedPrev = false
+      keep.push(sent)
+    }
+    return keep.join('').trim()
+  }).filter(Boolean)
+  if (dropped.length === 0) return { text, dropped: [] }
+  const out = paras.join('\n\n')
+  return words(out) >= 8 ? { text: out, dropped } : { text, dropped: [] }
+}
+
+// ── CHEM-047 — a word dropped from the lesson's own name ────────────────────
+/**
+ * "Real Gases and the van Waals Equation" for "Real Gases and van der Waals
+ * Equation": the opening named the lesson with a word missing. Every run of
+ * three title words "a b c" whose middle word is lost ("a c", not already "a b
+ * c") is put back. Only the lesson's own title is used, so nothing is invented.
+ */
+export function restoreTitleWords(text: string, title: string | null | undefined): { text: string; repaired: boolean } {
+  const tw = (title ?? '').split(/\s+/).filter(Boolean)
+  let out = text ?? ''
+  let repaired = false
+  const esc = (w: string): string => w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+  for (let i = 0; i + 2 < tw.length; i++) {
+    const [a, b, c] = [tw[i], tw[i + 1], tw[i + 2]]
+    if (a.length < 2 || c.length < 3 || /^(?:and|or|the|of|in|to|a|an)$/i.test(b)) continue
+    const re = new RegExp(`\\b${esc(a)}\\s+${esc(c)}\\b`, 'gi')
+    if (!re.test(out)) continue
+    out = out.replace(re, (m) => { repaired = true; return m.replace(/\s+/, ` ${b} `) })
+  }
+  return { text: out, repaired }
 }

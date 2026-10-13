@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest'
 import { initialConversationState, type ConversationState } from '@/lib/teaching/conversationState'
-import { CONCEPT_TURN_BUDGET } from '@/lib/teaching/conceptBudget'
+import { TURN_BUDGET_IN_FORCE } from '@/lib/teaching/conceptBudget'
 import {
   lessonKeyFor, startLessonAttempt, recordConceptOutcome, completeLessonAttempt,
   summaryFromAttempt, isLessonFinished, isConceptClosed,
@@ -14,7 +14,7 @@ function st(conceptId: string, over: Partial<ConversationState> = {}): Conversat
   return { ...initialConversationState(conceptId), ...over }
 }
 const mastered = (id: string) => st(id, { correctAtCheck: 1, correctAtPractice: 2 })
-const exhausted = (id: string) => st(id, { turnsOnConcept: CONCEPT_TURN_BUDGET })
+const exhausted = (id: string) => st(id, { turnsOnConcept: TURN_BUDGET_IN_FORCE })
 const T0 = new Date('2026-08-02T10:00:00Z')
 
 describe('lessonKeyFor — one identity per lesson', () => {
@@ -54,7 +54,7 @@ describe('recordConceptOutcome', () => {
     expect(fixed.misconceptionsCorrected).toEqual(['c1'])
     const unfixed = recordConceptOutcome(
       startLessonAttempt('L', null, T0),
-      st('c2', { turnsOnConcept: CONCEPT_TURN_BUDGET, misconceptionsSeen: ['m'] }),
+      st('c2', { turnsOnConcept: TURN_BUDGET_IN_FORCE, misconceptionsSeen: ['m'] }),
     )
     expect(unfixed.misconceptionsCorrected).toEqual([])
   })

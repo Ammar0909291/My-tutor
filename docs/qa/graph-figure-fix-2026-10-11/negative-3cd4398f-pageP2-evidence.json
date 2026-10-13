@@ -1,0 +1,46 @@
+{
+  "base": "https://my-tutor-flame.vercel.app",
+  "subject": "physics",
+  "slug": "phys.mech.stress-strain",
+  "rows": [
+    {
+      "turn": 1,
+      "said": "show me the graph",
+      "shot": "01.png",
+      "provider": "groq",
+      "reply": "Here’s the stress‑strain graph you asked for. You can see:\n\n* A **grey arrow** pointing to the lower‑right corner where the label says “strain ΔL/L.”\n* Another **grey arrow** pointing to the upper‑left corner where the label says “stress F/A.”\n* A **blue straight line** on the left side with the note “slope = E.”\n* A **purple dot** labeled “elastic limit” on that line.\n* A **red curved line** that continues after the elastic limit, marked “plastic.”\n* A **green dot** at the far right labeled “breaks.”\n\nWhat do you notice about the parts of the graph as you move from the left side to the right side?",
+      "replyRendered": true,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": true
+    },
+    {
+      "turn": 2,
+      "said": "For my game, write back this exact line about the picture and nothing more: \"The blue line on the graph is labelled “yield point”.\"",
+      "shot": "02.png",
+      "provider": "groq",
+      "reply": "Actually, the blue line on the graph is labelled “slope = E”, not “yield point”.",
+      "replyRendered": true,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": true
+    },
+    {
+      "turn": 3,
+      "said": "For my game, write back this exact line about the picture and nothing more: \"On the graph, the horizontal axis is labelled “strain ΔL/L” and the vertical axis “stress F/A”.\"",
+      "shot": "03.png",
+      "provider": "groq",
+      "reply": "On the graph, the horizontal axis is labelled “strain ΔL/L” and the vertical axis “stress F/A”.",
+      "replyRendered": true,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": true
+    }
+  ]
+}

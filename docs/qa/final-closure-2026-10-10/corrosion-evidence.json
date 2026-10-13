@@ -1,0 +1,90 @@
+{
+  "base": "https://my-tutor-flame.vercel.app",
+  "subject": "chemistry",
+  "slug": "chem.elect.corrosion",
+  "rows": [
+    {
+      "turn": 1,
+      "said": "i dont understand this picture. what is it showing?",
+      "shot": "/tmp/claude-0/-home-user-My-tutor/dc379fd1-b178-5c91-99c5-3718dddf5a6f/scratchpad/redrive3/shots-corrosion/01.png",
+      "provider": "groq",
+      "reply": "There is no picture in this lesson yet, so I can't tell you what one shows. If you have a picture from somewhere else, send it with the camera button and I'll look at it. Here is the idea in words:\n\nIn this lesson on Corrosion we will look at electrochemical corrosion, rusting mechanism and galvanizing, cathodic protection, coating.",
+      "replyRendered": true,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": false
+    },
+    {
+      "turn": 2,
+      "said": "quiz me",
+      "shot": "/tmp/claude-0/-home-user-My-tutor/dc379fd1-b178-5c91-99c5-3718dddf5a6f/scratchpad/redrive3/shots-corrosion/02.png",
+      "provider": "memory",
+      "reply": "Corrosion (like iron rusting) is essentially an unwanted, spontaneous electrochemical process — a tiny galvanic cell forms directly ON the metal surface. For iron: at anodic regions, Fe → Fe²⁺ + 2e⁻ (oxidation, iron dissolves); electrons travel through the metal to cathodic regions where O₂ + 2H₂O + 4e⁻ → 4OH⁻ (reduction, using dissolved atmospheric oxygen and water). The Fe²⁺ and OH⁻ then combine and further oxidize (by more O₂) to form Fe₂O₃·xH₂O (rust — a hydrated iron oxide, not metallic iron, and structurally porous/flaky, unlike protective oxide layers on some other metals). Corrosion needs both water and oxygen present simultaneously — neither alone is sufficient (dry iron doesn't rust; iron in oxygen-free water doesn't rust either). Prevention strategies exploit this electrochemistry directly: Sacrificial protection (attaching a more reactive metal like zinc/magnesium — using the activity series — which corrodes preferentially, \"sacrificing\" itself to protect the iron, since it becomes the anode instead), galvanizing (coating iron with a zinc layer, combining a physical barrier with sacrificial protection if the coating is scratched), and simple barrier coatings (paint, oil) that block water/oxygen access entirely.",
+      "replyRendered": true,
+      "card": "A tin-plated (tinned) steel can and a galvanised (zinc-coated) bucket both get scratched to bare iron. Do both keep protecting the iron?",
+      "cardOptions": [
+        "Yes",
+        "No"
+      ],
+      "cardQuestionRendered": true,
+      "cardOptionsVisible": [
+        true,
+        true
+      ],
+      "figure": false
+    },
+    {
+      "turn": 3,
+      "said": "Yes",
+      "shot": "/tmp/claude-0/-home-user-My-tutor/dc379fd1-b178-5c91-99c5-3718dddf5a6f/scratchpad/redrive3/shots-corrosion/03.png",
+      "provider": "groq",
+      "reply": "Not quite — the answer is: No — they behave oppositely once broken. Zinc is more reactive than iron, so it keeps corroding sacrificially and the iron is still protected. Tin is less reactive than iron, so at the scratch the iron becomes the anode of a tin-iron couple and rusts faster than bare iron would. Tin protects only as an unbroken barrier\n\nTin is less reactive than iron, so when the tin layer is scratched the exposed iron becomes the anode and corrodes faster. Zinc is more reactive, so a scratch still allows zinc to act as a sacrificial anode and protect the iron.\n\nRemember that a protective coating works either as a barrier or as a sacrificial metal. If the coating is less noble than the base metal, it will keep corroding and shield the iron; if it is more noble, the exposed iron will corrode rapidly once the coating is broken.",
+      "replyRendered": true,
+      "card": null,
+      "cardOptions": [],
+      "cardQuestionRendered": null,
+      "cardOptionsVisible": [],
+      "figure": false
+    },
+    {
+      "turn": 4,
+      "said": "ask me a question",
+      "shot": "/tmp/claude-0/-home-user-My-tutor/dc379fd1-b178-5c91-99c5-3718dddf5a6f/scratchpad/redrive3/shots-corrosion/04.png",
+      "provider": "gate",
+      "reply": "Let's see how Corrosion is sitting. Pick the one you think is right.",
+      "replyRendered": true,
+      "card": "Why does rust (Fe2O3·xH2O) flake off and expose fresh metal to further corrosion, while aluminum oxide forms a protective layer on aluminum that prevents further corrosion?",
+      "cardOptions": [
+        "Rust is a porous, flaky, chemically distinct compound from iron (a genuine oxidation product), while aluminum oxide forms a dense, adherent, protective coating; the structural difference in the oxide layers determines whether further corrosion is blocked or exposed",
+        "Rust is basically the same substance as iron, just physically weathered, which is why it doesn't protect the metal underneath"
+      ],
+      "cardQuestionRendered": true,
+      "cardOptionsVisible": [
+        true,
+        true
+      ],
+      "figure": false
+    },
+    {
+      "turn": 5,
+      "said": "quiz me",
+      "shot": "/tmp/claude-0/-home-user-My-tutor/dc379fd1-b178-5c91-99c5-3718dddf5a6f/scratchpad/redrive3/shots-corrosion/05.png",
+      "provider": "groq",
+      "reply": "This is the question you have not answered yet — choose an answer below and I will mark it.\n\nLet me check your thinking with this.",
+      "replyRendered": true,
+      "card": "Why does rust (Fe2O3·xH2O) flake off and expose fresh metal to further corrosion, while aluminum oxide forms a protective layer on aluminum that prevents further corrosion?",
+      "cardOptions": [
+        "Rust is a porous, flaky, chemically distinct compound from iron (a genuine oxidation product), while aluminum oxide forms a dense, adherent, protective coating; the structural difference in the oxide layers determines whether further corrosion is blocked or exposed",
+        "Rust is basically the same substance as iron, just physically weathered, which is why it doesn't protect the metal underneath"
+      ],
+      "cardQuestionRendered": true,
+      "cardOptionsVisible": [
+        true,
+        true
+      ],
+      "figure": false
+    }
+  ]
+}

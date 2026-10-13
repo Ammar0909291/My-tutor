@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest'
 import { initialConversationState, type ConversationState } from '@/lib/teaching/conversationState'
-import { CONCEPT_TURN_BUDGET } from '@/lib/teaching/conceptBudget'
+import { TURN_BUDGET_IN_FORCE } from '@/lib/teaching/conceptBudget'
 import {
   startLessonAttempt, recordConceptOutcome, summaryFromAttempt, isConceptClosed,
 } from '@/lib/teaching/lessonAttempt'
@@ -15,7 +15,7 @@ function st(id: string, over: Partial<ConversationState> = {}): ConversationStat
   return { ...initialConversationState(id), ...over }
 }
 const mastered = (id: string) => st(id, { correctAtCheck: 1, correctAtPractice: 2 })
-const exhausted = (id: string) => st(id, { turnsOnConcept: CONCEPT_TURN_BUDGET })
+const exhausted = (id: string) => st(id, { turnsOnConcept: TURN_BUDGET_IN_FORCE })
 const T0 = new Date('2026-08-02T10:00:00Z')
 
 describe('requiredConceptsForLesson — reads the KG mapping, invents nothing', () => {
