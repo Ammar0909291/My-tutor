@@ -1514,7 +1514,7 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'chem.found.matter': () => buildCellComparisonScene({
     conceptId: 'chem.found.matter',
     title: 'Elements, Compounds and Mixtures',
-    teachingGoal: 'An element has one kind of atom; a compound has two or more elements chemically combined in a fixed ratio; a mixture holds substances that keep their own properties and can be separated physically.',
+    teachingGoal: 'An element has one kind of atom; a compound has two or more elements chemically combined in a fixed ratio; a mixture holds substances that keep their chemical identity and can be separated physically.',
     groups: [
       { label: 'Element', description: 'pure: all atoms have the same atomic number', items: ['e.g. iron, oxygen (O₂)', 'fixed melting and boiling point'] },
       { label: 'Compound', description: 'pure: elements chemically bonded in a fixed ratio', items: ['e.g. water, H₂O — 2 H : 1 O atoms, about 8 g O : 1 g H', 'sharp melting point; split only by a chemical reaction'] },
@@ -1820,7 +1820,7 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     groups: [
       { label: 'Hydrolysable backbone', description: 'aliphatic ester linkages that moisture and microbial enzymes can cleave — can biodegrade, but slowly outside industrial composting (PLA is often plant-derived)', items: ['PLA: needs industrial composting'] },
       { label: 'All-carbon backbone', description: 'no hydrolysable linkage — generally resists biodegradation, whatever the feedstock: polyethylene from bio-based ethanol is chemically identical to the petroleum one', items: ['Bio-based polyethylene', 'Petroleum polyethylene'] },
-      { label: 'Conducting polymers', description: 'need an extended conjugated π-system AND a doping step (doped polyacetylene, polypyrrole)', items: ['Undoped: poor semiconductor', 'Doped: mobile charge carriers'] },
+      { label: 'Conducting polymers', description: 'need an extended conjugated π-system AND a doping step: undoped they are poor semiconductors or insulators; doped polyacetylene or polypyrrole carry mobile charge', items: ['Undoped: poor semiconductor', 'Doped: mobile charge carriers'] },
     ],
   }),
 

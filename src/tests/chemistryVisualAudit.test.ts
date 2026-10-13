@@ -72,7 +72,10 @@ describe('Chemistry visual audit — the committed record describes what ships',
     const stale: string[] = []
     for (const c of audit!.concepts) {
       const r = now.get(c.id)!
-      const sameServed = r.asked.graphical === (c.category === 'E') && (!r.asked.graphical || r.asked.fingerprint === c.fingerprint)
+      // The replay fingerprints the figure VALUE; the Tier 0/1 record fingerprints the whole payload (the tier-1 test above compares those).
+      // So here a Tier 0/1 concept is held to "served", and a Tier 2/3 concept to "served with the recorded fingerprint".
+      const viaAsync = c.source === 'tier2' || c.source === 'tier3'
+      const sameServed = r.asked.graphical === (c.category === 'E') && (!viaAsync || r.asked.fingerprint === c.fingerprint)
       if (!sameServed) stale.push(`${c.id} (recorded ${c.category}/${c.fingerprint}, now ${r.category}/${r.asked.fingerprint})`)
     }
     expect(stale, 'The Tier 2/3 resolution changed (a retirement, a gate, a Tier 0/1 scene that now shadows a cached figure, or the snapshot); re-run tier23-resolve.ts, render the new figures and re-run final-audit.ts.').toEqual([])

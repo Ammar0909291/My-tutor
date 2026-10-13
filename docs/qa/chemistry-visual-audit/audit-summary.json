@@ -1,0 +1,6492 @@
+{
+ "schema": 1,
+ "generatedOn": "2026-10-13",
+ "about": "The committed result of the Chemistry visual closure audit: every concept classified A-E (taxonomy), every served figure instance rendered in Chromium at 390 and 1280 px in both themes across every control state, and the machine semantic verdict. A REVIEW_REQUIRED here means no deterministic assertion covers the chemistry; the human answer is semantic-review.json. src/tests/chemistryVisualAudit.test.ts recomputes every served fingerprint from the resolver and fails, naming the concepts, when this file is stale.",
+ "taxonomy": {
+  "A": "intentionally no figure: the generator recorded a deliberate decline (no suitable form) and no faithful figure is authored",
+  "B": "should have a figure and does not: no figure and no recorded decision, or the only figure was retired as wrong and has no replacement yet",
+  "C": "a figure exists in the code or the production cache but the resolver cannot reach it (a curated tier shadows it)",
+  "D": "generated and rejected: a Tier-3 figure exists but the critic, a gate or a retirement refuses it, so none is served",
+  "E": "reachable and displayed: the resolver serves a figure (Tier 0/1 curated or authored, Tier 2 approved, Tier 3 generated)"
+ },
+ "viewports": [
+  "1280",
+  "390"
+ ],
+ "themes": [
+  "dark",
+  "light"
+ ],
+ "snapshot": "docs/qa/chemistry-visual-audit/tier23-snapshot (production cache read 2026-10-09)",
+ "categoryCUnreachableCachedFigures": [
+  "chem.bio.nucleic-acids",
+  "chem.bond.ionic-bonding",
+  "chem.coord.applications",
+  "chem.coord.bonding",
+  "chem.coord.cft",
+  "chem.coord.nomenclature",
+  "chem.coord.stability",
+  "chem.coord.werner",
+  "chem.dblock.lanthanides",
+  "chem.elect.concentration-cell",
+  "chem.elect.electrolysis",
+  "chem.elect.galvanic-cell",
+  "chem.elect.industrial",
+  "chem.elect.nernst",
+  "chem.elect.standard-electrode",
+  "chem.found.matter",
+  "chem.org.pericyclic",
+  "chem.pblock.group16",
+  "chem.poly.biodegradable",
+  "chem.sblock.water",
+  "chem.state.phase-diagram",
+  "chem.state.real-gases",
+  "chem.surface.colloids",
+  "chem.thermo.bond-enthalpy",
+  "chem.thermo.cell-thermo",
+  "chem.thermo.enthalpy",
+  "chem.thermo.heat-capacities",
+  "chem.thermo.system"
+ ],
+ "summary": {
+  "concepts": 186,
+  "byCategory": {
+   "E": 100,
+   "D": 59,
+   "B": 14,
+   "A": 13
+  },
+  "served": 100,
+  "bySource": {
+   "tier0": 39,
+   "tier3": 43,
+   "none": 86,
+   "tier2": 2,
+   "tier1": 16
+  },
+  "instances": 134,
+  "instanceVerdicts": {
+   "REVIEW_REQUIRED": 81,
+   "PASS": 53
+  },
+  "servedConceptVerdicts": {
+   "REVIEW_REQUIRED": 92,
+   "PASS": 8
+  },
+  "statesMeasured": 1086,
+  "categoryCUnreachableCachedFigures": 28,
+  "withMissingRenders": 0
+ },
+ "concepts": [
+  {
+   "id": "chem.found.matter",
+   "category": "E",
+   "source": "tier0",
+   "provenance": "generator",
+   "instanceId": "scene:cell-comparison-chem.found.matter",
+   "fingerprint": "fd9f27167",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": true
+  },
+  {
+   "id": "chem.found.states-of-matter",
+   "category": "E",
+   "source": "tier3",
+   "provenance": "generated:chem.found.states-of-matter:cached",
+   "instanceId": "tier3:chem.found.states-of-matter",
+   "fingerprint": "f42a1faaf",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.found.pure-substances",
+   "category": "E",
+   "source": "tier3",
+   "provenance": "generated:chem.found.pure-substances:cached",
+   "instanceId": "tier3:chem.found.pure-substances",
+   "fingerprint": "f6b3f56cd",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.found.measurement",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.found.significant-figures",
+   "category": "E",
+   "source": "tier2",
+   "provenance": "approved:chem.found.significant-figures",
+   "instanceId": "tier2:chem.found.significant-figures",
+   "fingerprint": "f87108c9b",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.found.mole-concept",
+   "category": "E",
+   "source": "tier3",
+   "provenance": "generated:chem.found.mole-concept:cached",
+   "instanceId": "tier3:chem.found.mole-concept",
+   "fingerprint": "f2e384d34",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.found.stoichiometry",
+   "category": "E",
+   "source": "tier2",
+   "provenance": "approved:chem.found.stoichiometry",
+   "instanceId": "tier2:chem.found.stoichiometry",
+   "fingerprint": "fa6206cbc",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.found.concentration",
+   "category": "E",
+   "source": "tier3",
+   "provenance": "generated:chem.found.concentration:cached",
+   "instanceId": "tier3:chem.found.concentration",
+   "fingerprint": "f2df4d844",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.atomic.atomic-theory",
+   "category": "E",
+   "source": "tier1",
+   "provenance": "curated",
+   "instanceId": "card:three_atomic_structure",
+   "fingerprint": "ff29a2223",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.atomic.subatomic-particles",
+   "category": "E",
+   "source": "tier1",
+   "provenance": "curated",
+   "instanceId": "card:three_atomic_structure",
+   "fingerprint": "ff29a2223",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.atomic.electromagnetic-radiation",
+   "category": "E",
+   "source": "tier1",
+   "provenance": "domain-default",
+   "instanceId": "card:three_atomic_structure",
+   "fingerprint": "ff29a2223",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.atomic.atomic-spectra",
+   "category": "E",
+   "source": "tier1",
+   "provenance": "domain-default",
+   "instanceId": "card:three_atomic_structure",
+   "fingerprint": "ff29a2223",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.atomic.bohr-model",
+   "category": "E",
+   "source": "tier1",
+   "provenance": "domain-default",
+   "instanceId": "card:three_atomic_structure",
+   "fingerprint": "ff29a2223",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.atomic.quantum-numbers",
+   "category": "E",
+   "source": "tier1",
+   "provenance": "domain-default",
+   "instanceId": "card:three_atomic_structure",
+   "fingerprint": "ff29a2223",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.atomic.orbitals",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.atomic.electronic-config",
+   "category": "E",
+   "source": "tier0",
+   "provenance": "generator-default",
+   "instanceId": "scene:electron-shells-na",
+   "fingerprint": "f832d8ca6",
+   "verdict": "PASS",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.atomic.photoelectric-effect",
+   "category": "E",
+   "source": "tier1",
+   "provenance": "domain-default",
+   "instanceId": "card:three_atomic_structure",
+   "fingerprint": "ff29a2223",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.atomic.quantum-mech-model",
+   "category": "B",
+   "source": "none",
+   "provenance": "no-figure:retired-asset",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "note": "retired: every figure on offer was judged wrong; no faithful replacement yet",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.period.classification",
+   "category": "E",
+   "source": "tier1",
+   "provenance": "domain-default",
+   "instanceId": "card:three_electron_shells",
+   "fingerprint": "f8b26bd2",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.period.modern-periodic-law",
+   "category": "E",
+   "source": "tier0",
+   "provenance": "generator-default",
+   "instanceId": "scene:periodic-trends-Na-Cl",
+   "fingerprint": "fc51d3111",
+   "verdict": "PASS",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.period.atomic-radius",
+   "category": "E",
+   "source": "tier1",
+   "provenance": "domain-default",
+   "instanceId": "card:three_electron_shells",
+   "fingerprint": "f8b26bd2",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.period.ionization-energy",
+   "category": "E",
+   "source": "tier0",
+   "provenance": "generator",
+   "instanceId": "scene:comparison-First-ionisation-energy-across-period-3-(kJ/mol):-rising,-with-dips-at-Al-and-S",
+   "fingerprint": "fa1d5dc83",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.period.electron-affinity",
+   "category": "E",
+   "source": "tier1",
+   "provenance": "domain-default",
+   "instanceId": "card:three_electron_shells",
+   "fingerprint": "f8b26bd2",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.period.periodic-properties",
+   "category": "E",
+   "source": "tier0",
+   "provenance": "generator-default",
+   "instanceId": "scene:periodic-trends-Na-Cl",
+   "fingerprint": "fc51d3111",
+   "verdict": "PASS",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.period.valency",
+   "category": "E",
+   "source": "tier1",
+   "provenance": "domain-default",
+   "instanceId": "card:three_electron_shells",
+   "fingerprint": "f8b26bd2",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.bond.ionic-bonding",
+   "category": "E",
+   "source": "tier0",
+   "provenance": "generator",
+   "instanceId": "scene:cell-pathway-chem.bond.ionic-bonding",
+   "fingerprint": "f1121920d",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": true
+  },
+  {
+   "id": "chem.bond.covalent-bonding",
+   "category": "E",
+   "source": "tier1",
+   "provenance": "curated",
+   "instanceId": "card:three_bond_formation",
+   "fingerprint": "f4a1f0cb9",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.bond.vsepr",
+   "category": "E",
+   "source": "tier0",
+   "provenance": "generator-default",
+   "instanceId": "scene:molecule-water",
+   "fingerprint": "f46585a",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.bond.hybridization",
+   "category": "E",
+   "source": "tier1",
+   "provenance": "curated",
+   "instanceId": "card:three_molecular_shapes",
+   "fingerprint": "fb6e07b25",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.bond.mo-theory",
+   "category": "E",
+   "source": "tier3",
+   "provenance": "generated:chem.bond.mo-theory:cached",
+   "instanceId": "tier3:chem.bond.mo-theory",
+   "fingerprint": "f91f477cb",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.bond.polar-molecules",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.bond.intermolecular",
+   "category": "B",
+   "source": "none",
+   "provenance": "no-figure:retired-asset",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "note": "retired: every figure on offer was judged wrong; no faithful replacement yet",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.bond.metallic-bonding",
+   "category": "E",
+   "source": "tier3",
+   "provenance": "generated:chem.bond.metallic-bonding:cached",
+   "instanceId": "tier3:chem.bond.metallic-bonding",
+   "fingerprint": "f22ce4bee",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.bond.resonance",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.bond.bond-parameters",
+   "category": "E",
+   "source": "tier1",
+   "provenance": "curated",
+   "instanceId": "card:three_molecular_shapes",
+   "fingerprint": "fb6e07b25",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.bond.coordinate-bond",
+   "category": "E",
+   "source": "tier3",
+   "provenance": "generated:chem.bond.coordinate-bond:cached",
+   "instanceId": "tier3:chem.bond.coordinate-bond",
+   "fingerprint": "f5288eb13",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.state.kinetic-theory",
+   "category": "E",
+   "source": "tier3",
+   "provenance": "generated:chem.state.kinetic-theory:cached",
+   "instanceId": "tier3:chem.state.kinetic-theory",
+   "fingerprint": "fd42ddd7f",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.state.gas-laws",
+   "category": "E",
+   "source": "tier3",
+   "provenance": "generated:chem.state.gas-laws:cached",
+   "instanceId": "tier3:chem.state.gas-laws",
+   "fingerprint": "f215856e5",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.state.molar-mass-gas",
+   "category": "B",
+   "source": "none",
+   "provenance": "no-figure:retired-asset",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "note": "retired: every figure on offer was judged wrong; no faithful replacement yet",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.state.real-gases",
+   "category": "E",
+   "source": "tier0",
+   "provenance": "generator",
+   "instanceId": "scene:cell-comparison-chem.state.real-gases",
+   "fingerprint": "fd9aeec94",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": true
+  },
+  {
+   "id": "chem.state.liquids",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.state.phase-diagram",
+   "category": "E",
+   "source": "tier0",
+   "provenance": "generator",
+   "instanceId": "scene:cell-comparison-chem.state.phase-diagram",
+   "fingerprint": "f160fe0c4",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": true
+  },
+  {
+   "id": "chem.sol.types",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.sol.solubility",
+   "category": "E",
+   "source": "tier3",
+   "provenance": "generated:chem.sol.solubility:cached",
+   "instanceId": "tier3:chem.sol.solubility",
+   "fingerprint": "fba64871f",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.sol.vapour-pressure",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.sol.colligative",
+   "category": "E",
+   "source": "tier3",
+   "provenance": "generated:chem.sol.colligative:cached",
+   "instanceId": "tier3:chem.sol.colligative",
+   "fingerprint": "f9a098143",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.sol.osmosis",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.sol.activity",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.thermo.system",
+   "category": "E",
+   "source": "tier0",
+   "provenance": "generator",
+   "instanceId": "scene:chem-system-closed",
+   "fingerprint": "f7378c6aa",
+   "verdict": "PASS",
+   "shadowedCachedFigure": true
+  },
+  {
+   "id": "chem.thermo.first-law",
+   "category": "E",
+   "source": "tier0",
+   "provenance": "generator",
+   "instanceId": "scene:chem-first-law",
+   "fingerprint": "fe61dd34b",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.thermo.enthalpy",
+   "category": "E",
+   "source": "tier0",
+   "provenance": "generator",
+   "instanceId": "scene:energy-cycle-hess-s-law-combustion-of-carbon",
+   "fingerprint": "f152cc87",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": true
+  },
+  {
+   "id": "chem.thermo.bond-enthalpy",
+   "category": "E",
+   "source": "tier0",
+   "provenance": "generator",
+   "instanceId": "scene:energy-cycle-born-haber-cycle-formation-of-nacl",
+   "fingerprint": "fb9cf7ce0",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": true
+  },
+  {
+   "id": "chem.thermo.entropy",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.thermo.gibbs",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.thermo.third-law",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.thermo.heat-capacities",
+   "category": "E",
+   "source": "tier0",
+   "provenance": "generator",
+   "instanceId": "scene:comparison-Molar-heat-capacities-(J/mol·K)",
+   "fingerprint": "fafdf84af",
+   "verdict": "PASS",
+   "shadowedCachedFigure": true
+  },
+  {
+   "id": "chem.thermo.cell-thermo",
+   "category": "E",
+   "source": "tier0",
+   "provenance": "generator",
+   "instanceId": "scene:electrochemical-cell-daniell-cell-—-δg-=-−nfe",
+   "fingerprint": "fdd0bcab6",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": true
+  },
+  {
+   "id": "chem.equil.concept",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.equil.kc-kp",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.equil.le-chatelier",
+   "category": "A",
+   "source": "none",
+   "provenance": "no-figure:engine-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.equil.kw-ph",
+   "category": "E",
+   "source": "tier3",
+   "provenance": "generated:chem.equil.kw-ph:cached",
+   "instanceId": "tier3:chem.equil.kw-ph",
+   "fingerprint": "f73364694",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.equil.acids-bases",
+   "category": "E",
+   "source": "tier3",
+   "provenance": "generated:chem.equil.acids-bases:cached",
+   "instanceId": "tier3:chem.equil.acids-bases",
+   "fingerprint": "f58f15feb",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.equil.weak-acid",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.equil.buffer",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.equil.hydrolysis",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.equil.solubility",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.equil.complex-equil",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.equil.titration",
+   "category": "B",
+   "source": "none",
+   "provenance": "no-figure:retired-asset",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "note": "retired: every figure on offer was judged wrong; no faithful replacement yet",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.redox.oxidation-state",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.redox.balancing",
+   "category": "E",
+   "source": "tier3",
+   "provenance": "generated:chem.redox.balancing:cached",
+   "instanceId": "tier3:chem.redox.balancing",
+   "fingerprint": "f7e2ff6b5",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.redox.disproportionation",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.redox.activity-series",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.redox.titrations",
+   "category": "E",
+   "source": "tier3",
+   "provenance": "generated:chem.redox.titrations:cached",
+   "instanceId": "tier3:chem.redox.titrations",
+   "fingerprint": "fc55eb48b",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.elect.galvanic-cell",
+   "category": "E",
+   "source": "tier0",
+   "provenance": "generator",
+   "instanceId": "scene:electrochemical-cell-daniell-cell",
+   "fingerprint": "f3112f714",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": true
+  },
+  {
+   "id": "chem.elect.standard-electrode",
+   "category": "E",
+   "source": "tier0",
+   "provenance": "generator",
+   "instanceId": "scene:electrochemical-cell-zinc-vs.-standard-hydrogen-electrode",
+   "fingerprint": "f6da17768",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": true
+  },
+  {
+   "id": "chem.elect.nernst",
+   "category": "E",
+   "source": "tier0",
+   "provenance": "generator",
+   "instanceId": "scene:electrochemical-cell-daniell-cell-at-non-standard-concentrations",
+   "fingerprint": "f4e91fc1b",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": true
+  },
+  {
+   "id": "chem.elect.concentration-cell",
+   "category": "E",
+   "source": "tier0",
+   "provenance": "generator",
+   "instanceId": "scene:electrochemical-cell-copper-concentration-cell",
+   "fingerprint": "f4d7a2f64",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": true
+  },
+  {
+   "id": "chem.elect.conductance",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.elect.electrolysis",
+   "category": "E",
+   "source": "tier0",
+   "provenance": "generator",
+   "instanceId": "scene:electrochemical-cell-electrolysis-of-molten-nacl",
+   "fingerprint": "f40e8a639",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": true
+  },
+  {
+   "id": "chem.elect.batteries",
+   "category": "E",
+   "source": "tier0",
+   "provenance": "generator",
+   "instanceId": "scene:electrochemical-cell-zinc–carbon-dry-cell-(primary-battery)",
+   "fingerprint": "fdda7aded",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.elect.corrosion",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.elect.industrial",
+   "category": "E",
+   "source": "tier0",
+   "provenance": "generator",
+   "instanceId": "scene:electrochemical-cell-copper-electroplating",
+   "fingerprint": "f394390b5",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": true
+  },
+  {
+   "id": "chem.kinet.rate",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.kinet.rate-law",
+   "category": "E",
+   "source": "tier3",
+   "provenance": "generated:chem.kinet.rate-law:cached",
+   "instanceId": "tier3:chem.kinet.rate-law",
+   "fingerprint": "f72d1c45",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.kinet.integrated-rate",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.kinet.arrhenius",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.kinet.mechanism",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.kinet.catalysis",
+   "category": "E",
+   "source": "tier3",
+   "provenance": "generated:chem.kinet.catalysis:cached",
+   "instanceId": "tier3:chem.kinet.catalysis",
+   "fingerprint": "f100c6bf4",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.kinet.photochemistry",
+   "category": "E",
+   "source": "tier3",
+   "provenance": "generated:chem.kinet.photochemistry:cached",
+   "instanceId": "tier3:chem.kinet.photochemistry",
+   "fingerprint": "f305ed12c",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.solid.crystal-systems",
+   "category": "E",
+   "source": "tier0",
+   "provenance": "generator-default",
+   "instanceId": "scene:lattice-fcc",
+   "fingerprint": "fd8c4725",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.solid.packing",
+   "category": "E",
+   "source": "tier0",
+   "provenance": "generator",
+   "instanceId": "scene:lattice-fcc-close-packing",
+   "fingerprint": "ffd778f31",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.solid.ionic-solids",
+   "category": "E",
+   "source": "tier1",
+   "provenance": "domain-default",
+   "instanceId": "card:three_crystal_lattice",
+   "fingerprint": "ffdc76ff",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.solid.defects",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.solid.properties",
+   "category": "E",
+   "source": "tier1",
+   "provenance": "domain-default",
+   "instanceId": "card:three_crystal_lattice",
+   "fingerprint": "ffdc76ff",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.solid.amorphous",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.surface.adsorption",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.surface.colloids",
+   "category": "E",
+   "source": "tier0",
+   "provenance": "generator",
+   "instanceId": "scene:cell-comparison-chem.surface.colloids",
+   "fingerprint": "f62b149da",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": true
+  },
+  {
+   "id": "chem.surface.emulsions",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.surface.surfactants",
+   "category": "E",
+   "source": "tier3",
+   "provenance": "generated:chem.surface.surfactants:cached",
+   "instanceId": "tier3:chem.surface.surfactants",
+   "fingerprint": "f693afc1",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.surface.heterogeneous-cat",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.coord.werner",
+   "category": "E",
+   "source": "tier0",
+   "provenance": "generator",
+   "instanceId": "scene:coord-hexaamminecobalt-iii-ion",
+   "fingerprint": "f8a0a8a4a",
+   "verdict": "PASS",
+   "shadowedCachedFigure": true
+  },
+  {
+   "id": "chem.coord.nomenclature",
+   "category": "E",
+   "source": "tier0",
+   "provenance": "generator",
+   "instanceId": "scene:coord-hexaamminecobalt-iii-ion",
+   "fingerprint": "f8a0a8a4a",
+   "verdict": "PASS",
+   "shadowedCachedFigure": true
+  },
+  {
+   "id": "chem.coord.isomerism",
+   "category": "E",
+   "source": "tier0",
+   "provenance": "generator",
+   "instanceId": "scene:coord-cisplatin",
+   "fingerprint": "f80581334",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.coord.cft",
+   "category": "E",
+   "source": "tier0",
+   "provenance": "generator",
+   "instanceId": "scene:energy-cycle-crystal-field-splitting-ti-h2o-6-3-",
+   "fingerprint": "f4bd44a57",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": true
+  },
+  {
+   "id": "chem.coord.bonding",
+   "category": "E",
+   "source": "tier0",
+   "provenance": "generator",
+   "instanceId": "scene:coord-hexaamminecobalt-iii-octahedral-geometry",
+   "fingerprint": "f7c7329b5",
+   "verdict": "PASS",
+   "shadowedCachedFigure": true
+  },
+  {
+   "id": "chem.coord.stability",
+   "category": "E",
+   "source": "tier0",
+   "provenance": "generator",
+   "instanceId": "scene:comparison-log-Kf:-the-chelate-effect",
+   "fingerprint": "faec9eb6c",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": true
+  },
+  {
+   "id": "chem.coord.applications",
+   "category": "E",
+   "source": "tier0",
+   "provenance": "generator",
+   "instanceId": "scene:coord-cisplatin-the-isomer-that-works-as-a-drug",
+   "fingerprint": "f7879d1ff",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": true
+  },
+  {
+   "id": "chem.sblock.hydrogen",
+   "category": "A",
+   "source": "none",
+   "provenance": "no-figure:engine-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.sblock.alkali",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:engine-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.sblock.alkaline-earth",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.sblock.water",
+   "category": "E",
+   "source": "tier0",
+   "provenance": "generator",
+   "instanceId": "scene:cell-comparison-chem.sblock.water",
+   "fingerprint": "fd883b2b6",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": true
+  },
+  {
+   "id": "chem.pblock.group13",
+   "category": "A",
+   "source": "none",
+   "provenance": "no-figure:engine-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.pblock.group14",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.pblock.group15",
+   "category": "B",
+   "source": "none",
+   "provenance": "no-figure:retired-asset",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "note": "retired: every figure on offer was judged wrong; no faithful replacement yet",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.pblock.group16",
+   "category": "E",
+   "source": "tier0",
+   "provenance": "generator",
+   "instanceId": "scene:comparison-Boiling-points-of-the-Group-16-hydrides-(K):-water-is-the-outlier",
+   "fingerprint": "f689a465f",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": true
+  },
+  {
+   "id": "chem.pblock.group17",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.pblock.group18",
+   "category": "E",
+   "source": "tier3",
+   "provenance": "generated:chem.pblock.group18:cached",
+   "instanceId": "tier3:chem.pblock.group18",
+   "fingerprint": "f9a8bbabf",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.pblock.trends",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.dblock.general",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.dblock.first-row",
+   "category": "A",
+   "source": "none",
+   "provenance": "no-figure:engine-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.dblock.oxo-species",
+   "category": "B",
+   "source": "none",
+   "provenance": "no-figure:retired-asset",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "note": "retired: every figure on offer was judged wrong; no faithful replacement yet",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.dblock.lanthanides",
+   "category": "E",
+   "source": "tier0",
+   "provenance": "generator",
+   "instanceId": "scene:comparison-Lanthanide-contraction:-ionic-radius-of-Ln3+-(pm),-La-to-Lu",
+   "fingerprint": "f88d0f524",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": true
+  },
+  {
+   "id": "chem.dblock.organometallics",
+   "category": "E",
+   "source": "tier0",
+   "provenance": "generator",
+   "instanceId": "scene:cell-pathway-chem.dblock.organometallics",
+   "fingerprint": "f4c985a78",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.org.iupac",
+   "category": "E",
+   "source": "tier3",
+   "provenance": "generated:chem.org.iupac:cached",
+   "instanceId": "tier3:chem.org.iupac",
+   "fingerprint": "f3c811578",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.org.hybridization",
+   "category": "B",
+   "source": "none",
+   "provenance": "no-figure:retired-asset",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "note": "retired: every figure on offer was judged wrong; no faithful replacement yet",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.org.isomerism",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.org.electronic-effects",
+   "category": "B",
+   "source": "none",
+   "provenance": "no-figure:retired-asset",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "note": "retired: every figure on offer was judged wrong; no faithful replacement yet",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.org.reactive-intermediates",
+   "category": "E",
+   "source": "tier3",
+   "provenance": "generated:chem.org.reactive-intermediates:cached",
+   "instanceId": "tier3:chem.org.reactive-intermediates",
+   "fingerprint": "ffe70d376",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.org.mechanisms",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.org.purification",
+   "category": "A",
+   "source": "none",
+   "provenance": "no-figure:engine-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.org.qualitative-analysis",
+   "category": "A",
+   "source": "none",
+   "provenance": "no-figure:engine-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.org.spectroscopy",
+   "category": "A",
+   "source": "none",
+   "provenance": "no-figure:engine-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.org.aromaticity",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.org.arrow-pushing",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.org.pericyclic",
+   "category": "E",
+   "source": "tier0",
+   "provenance": "generator",
+   "instanceId": "scene:cell-comparison-chem.org.pericyclic",
+   "fingerprint": "fc6bc2dee",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": true
+  },
+  {
+   "id": "chem.hyd.alkanes",
+   "category": "A",
+   "source": "none",
+   "provenance": "no-figure:engine-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.hyd.alkenes",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.hyd.alkynes",
+   "category": "B",
+   "source": "none",
+   "provenance": "no-figure:retired-asset",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "note": "retired: every figure on offer was judged wrong; no faithful replacement yet",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.hyd.arenes",
+   "category": "B",
+   "source": "none",
+   "provenance": "no-figure:retired-asset",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "note": "retired: every figure on offer was judged wrong; no faithful replacement yet",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.hyd.conformations",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.hyd.petroleum",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.hyd.polycyclic",
+   "category": "B",
+   "source": "none",
+   "provenance": "no-figure:retired-asset",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "note": "retired: every figure on offer was judged wrong; no faithful replacement yet",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.hal.introduction",
+   "category": "A",
+   "source": "none",
+   "provenance": "no-figure:engine-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.hal.sn1",
+   "category": "E",
+   "source": "tier3",
+   "provenance": "generated:chem.hal.sn1:cached",
+   "instanceId": "tier3:chem.hal.sn1",
+   "fingerprint": "f9188302",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.hal.sn2",
+   "category": "E",
+   "source": "tier3",
+   "provenance": "generated:chem.hal.sn2:cached",
+   "instanceId": "tier3:chem.hal.sn2",
+   "fingerprint": "f1cdcc73c",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.hal.elimination",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.hal.haloarenes",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.hal.grignard",
+   "category": "E",
+   "source": "tier3",
+   "provenance": "generated:chem.hal.grignard:cached",
+   "instanceId": "tier3:chem.hal.grignard",
+   "fingerprint": "f1d04b1f0",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.hal.cfcs",
+   "category": "E",
+   "source": "tier3",
+   "provenance": "generated:chem.hal.cfcs:cached",
+   "instanceId": "tier3:chem.hal.cfcs",
+   "fingerprint": "f8c46c3f4",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.alc.alcohols",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.alc.phenols",
+   "category": "E",
+   "source": "tier3",
+   "provenance": "generated:chem.alc.phenols:cached",
+   "instanceId": "tier3:chem.alc.phenols",
+   "fingerprint": "fe3877b8d",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.alc.ethers",
+   "category": "E",
+   "source": "tier3",
+   "provenance": "generated:chem.alc.ethers:cached",
+   "instanceId": "tier3:chem.alc.ethers",
+   "fingerprint": "fc81a075f",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.alc.diols",
+   "category": "A",
+   "source": "none",
+   "provenance": "no-figure:engine-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.alc.epoxides",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.alc.protection",
+   "category": "E",
+   "source": "tier3",
+   "provenance": "generated:chem.alc.protection:cached",
+   "instanceId": "tier3:chem.alc.protection",
+   "fingerprint": "f6a721321",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.carb.aldehydes",
+   "category": "A",
+   "source": "none",
+   "provenance": "no-figure:engine-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.carb.ketones",
+   "category": "B",
+   "source": "none",
+   "provenance": "no-figure:retired-asset",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "note": "retired: every figure on offer was judged wrong; no faithful replacement yet",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.carb.alpha-reactions",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.carb.carboxylic",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.carb.derivatives",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.carb.named-reactions",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.carb.spectro",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.nitro.amines",
+   "category": "B",
+   "source": "none",
+   "provenance": "no-figure:retired-asset",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "note": "retired: every figure on offer was judged wrong; no faithful replacement yet",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.nitro.diazonium",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.nitro.nitro-compounds",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.nitro.heterocycles",
+   "category": "E",
+   "source": "tier3",
+   "provenance": "generated:chem.nitro.heterocycles:cached",
+   "instanceId": "tier3:chem.nitro.heterocycles",
+   "fingerprint": "f56a91724",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.nitro.amino-acids",
+   "category": "E",
+   "source": "tier3",
+   "provenance": "generated:chem.nitro.amino-acids:cached",
+   "instanceId": "tier3:chem.nitro.amino-acids",
+   "fingerprint": "fc50d6f66",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.bio.carbohydrates",
+   "category": "A",
+   "source": "none",
+   "provenance": "no-figure:engine-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.bio.proteins",
+   "category": "B",
+   "source": "none",
+   "provenance": "no-figure:retired-asset",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "note": "retired: every figure on offer was judged wrong; no faithful replacement yet",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.bio.nucleic-acids",
+   "category": "E",
+   "source": "tier0",
+   "provenance": "generator",
+   "instanceId": "scene:cell-comparison-chem.bio.nucleic-acids",
+   "fingerprint": "fe60a32bf",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": true
+  },
+  {
+   "id": "chem.bio.lipids",
+   "category": "E",
+   "source": "tier3",
+   "provenance": "generated:chem.bio.lipids:cached",
+   "instanceId": "tier3:chem.bio.lipids",
+   "fingerprint": "ff32f7fbc",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.bio.vitamins",
+   "category": "E",
+   "source": "tier3",
+   "provenance": "generated:chem.bio.vitamins:cached",
+   "instanceId": "tier3:chem.bio.vitamins",
+   "fingerprint": "fa3388f0d",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.bio.enzyme-kinetics",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.poly.addition",
+   "category": "E",
+   "source": "tier3",
+   "provenance": "generated:chem.poly.addition:cached",
+   "instanceId": "tier3:chem.poly.addition",
+   "fingerprint": "f28c38713",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.poly.condensation",
+   "category": "E",
+   "source": "tier3",
+   "provenance": "generated:chem.poly.condensation:cached",
+   "instanceId": "tier3:chem.poly.condensation",
+   "fingerprint": "f4ef82065",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.poly.natural",
+   "category": "E",
+   "source": "tier3",
+   "provenance": "generated:chem.poly.natural:cached",
+   "instanceId": "tier3:chem.poly.natural",
+   "fingerprint": "f847fbc9a",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.poly.properties",
+   "category": "A",
+   "source": "none",
+   "provenance": "no-figure:engine-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.poly.biodegradable",
+   "category": "E",
+   "source": "tier0",
+   "provenance": "generator",
+   "instanceId": "scene:cell-comparison-chem.poly.biodegradable",
+   "fingerprint": "f6a1e3677",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": true
+  },
+  {
+   "id": "chem.env.atmosphere",
+   "category": "E",
+   "source": "tier3",
+   "provenance": "generated:chem.env.atmosphere:cached",
+   "instanceId": "tier3:chem.env.atmosphere",
+   "fingerprint": "f373f737f",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.env.air-pollution",
+   "category": "E",
+   "source": "tier3",
+   "provenance": "generated:chem.env.air-pollution:cached",
+   "instanceId": "tier3:chem.env.air-pollution",
+   "fingerprint": "fecd44252",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.env.ozone",
+   "category": "D",
+   "source": "none",
+   "provenance": "no-figure:retry-generation-failed",
+   "instanceId": null,
+   "fingerprint": null,
+   "verdict": "NO_FIGURE",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.env.water-soil",
+   "category": "E",
+   "source": "tier3",
+   "provenance": "generated:chem.env.water-soil:cached",
+   "instanceId": "tier3:chem.env.water-soil",
+   "fingerprint": "ff42a7353",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.anal.gravimetric",
+   "category": "E",
+   "source": "tier3",
+   "provenance": "generated:chem.anal.gravimetric:cached",
+   "instanceId": "tier3:chem.anal.gravimetric",
+   "fingerprint": "fe133683a",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.anal.volumetric",
+   "category": "E",
+   "source": "tier3",
+   "provenance": "generated:chem.anal.volumetric:cached",
+   "instanceId": "tier3:chem.anal.volumetric",
+   "fingerprint": "f6f8a7d9d",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.anal.chromatography",
+   "category": "E",
+   "source": "tier3",
+   "provenance": "generated:chem.anal.chromatography:cached",
+   "instanceId": "tier3:chem.anal.chromatography",
+   "fingerprint": "fd6f0f538",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  },
+  {
+   "id": "chem.anal.spectroscopy",
+   "category": "E",
+   "source": "tier3",
+   "provenance": "generated:chem.anal.spectroscopy:cached",
+   "instanceId": "tier3:chem.anal.spectroscopy",
+   "fingerprint": "f26432b69",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": false
+  }
+ ],
+ "instances": [
+  {
+   "id": "scene:cell-comparison-chem.found.matter",
+   "tier": "tier0",
+   "origin": "authored",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.found.matter"
+   ],
+   "fingerprint": "fd9f27167",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "PASS",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": "prose-comparison",
+   "statesMeasured": 14,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 14,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.69
+  },
+  {
+   "id": "card:three_atomic_structure",
+   "tier": "tier1",
+   "origin": "authored",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.atomic.atomic-theory",
+    "chem.atomic.subatomic-particles",
+    "chem.atomic.electromagnetic-radiation",
+    "chem.atomic.atomic-spectra",
+    "chem.atomic.bohr-model",
+    "chem.atomic.quantum-numbers",
+    "chem.atomic.photoelectric-effect"
+   ],
+   "fingerprint": "ff29a2223",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "PASS",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": "card:three_atomic_structure",
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 5.02
+  },
+  {
+   "id": "scene:electron-shells-na",
+   "tier": "tier0",
+   "origin": "kind-default",
+   "reachability": "resolver",
+   "interactive": true,
+   "conceptIds": [
+    "chem.atomic.electronic-config"
+   ],
+   "fingerprint": "f832d8ca6",
+   "verdict": "PASS",
+   "render": "PASS",
+   "semantic": "PASS",
+   "semanticFamily": "electron-shells",
+   "statesMeasured": 28,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 28,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.8
+  },
+  {
+   "id": "card:three_electron_shells",
+   "tier": "tier1",
+   "origin": "domain-default",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.period.classification",
+    "chem.period.atomic-radius",
+    "chem.period.electron-affinity",
+    "chem.period.valency"
+   ],
+   "fingerprint": "f8b26bd2",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "PASS",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": "card:three_electron_shells",
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.82
+  },
+  {
+   "id": "scene:periodic-trends-Na-Cl",
+   "tier": "tier0",
+   "origin": "kind-default",
+   "reachability": "resolver",
+   "interactive": true,
+   "conceptIds": [
+    "chem.period.modern-periodic-law",
+    "chem.period.periodic-properties"
+   ],
+   "fingerprint": "fc51d3111",
+   "verdict": "PASS",
+   "render": "PASS",
+   "semantic": "PASS",
+   "semanticFamily": "periodic-trends",
+   "statesMeasured": 28,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 28,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.68
+  },
+  {
+   "id": "scene:comparison-First-ionisation-energy-across-period-3-(kJ/mol):-rising,-with-dips-at-Al-and-S",
+   "tier": "tier0",
+   "origin": "authored",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.period.ionization-energy"
+   ],
+   "fingerprint": "fa1d5dc83",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "PASS",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": "bar-chart",
+   "statesMeasured": 10,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 10,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.62
+  },
+  {
+   "id": "scene:cell-pathway-chem.bond.ionic-bonding",
+   "tier": "tier0",
+   "origin": "authored",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.bond.ionic-bonding"
+   ],
+   "fingerprint": "f1121920d",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "REVIEW_REQUIRED",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": "prose-pathway",
+   "statesMeasured": 16,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 15,
+    "REVIEW_REQUIRED": 1,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [
+    "INNER_SCROLL_X"
+   ],
+   "minFontPx": 10,
+   "minContrast": 4.69
+  },
+  {
+   "id": "card:three_bond_formation",
+   "tier": "tier1",
+   "origin": "authored",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.bond.covalent-bonding"
+   ],
+   "fingerprint": "f4a1f0cb9",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "PASS",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": "card:three_bond_formation",
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.67
+  },
+  {
+   "id": "scene:molecule-water",
+   "tier": "tier0",
+   "origin": "kind-default",
+   "reachability": "resolver",
+   "interactive": true,
+   "conceptIds": [
+    "chem.bond.vsepr"
+   ],
+   "fingerprint": "f46585a",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "REVIEW_REQUIRED",
+   "semantic": "PASS",
+   "semanticFamily": "molecule",
+   "statesMeasured": 28,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 26,
+    "REVIEW_REQUIRED": 2,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [
+    "INNER_SCROLL_X"
+   ],
+   "minFontPx": 10,
+   "minContrast": 4.8
+  },
+  {
+   "id": "card:three_molecular_shapes",
+   "tier": "tier1",
+   "origin": "authored",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.bond.hybridization",
+    "chem.bond.bond-parameters"
+   ],
+   "fingerprint": "fb6e07b25",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "REVIEW_REQUIRED",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": "card:three_molecular_shapes",
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 0,
+    "REVIEW_REQUIRED": 4,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [
+    "CONTRAST_LOW"
+   ],
+   "minFontPx": 10,
+   "minContrast": 2.13
+  },
+  {
+   "id": "scene:cell-comparison-chem.state.real-gases",
+   "tier": "tier0",
+   "origin": "authored",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.state.real-gases"
+   ],
+   "fingerprint": "fd9aeec94",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "REVIEW_REQUIRED",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": "prose-comparison",
+   "statesMeasured": 22,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 20,
+    "REVIEW_REQUIRED": 2,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [
+    "INNER_SCROLL_X"
+   ],
+   "minFontPx": 10,
+   "minContrast": 4.69
+  },
+  {
+   "id": "scene:cell-comparison-chem.state.phase-diagram",
+   "tier": "tier0",
+   "origin": "authored",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.state.phase-diagram"
+   ],
+   "fingerprint": "f160fe0c4",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "REVIEW_REQUIRED",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": "prose-comparison",
+   "statesMeasured": 16,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 15,
+    "REVIEW_REQUIRED": 1,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [
+    "INNER_SCROLL_X"
+   ],
+   "minFontPx": 10,
+   "minContrast": 4.69
+  },
+  {
+   "id": "scene:chem-system-closed",
+   "tier": "tier0",
+   "origin": "authored",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.thermo.system"
+   ],
+   "fingerprint": "f7378c6aa",
+   "verdict": "PASS",
+   "render": "PASS",
+   "semantic": "PASS",
+   "semanticFamily": "system-boundary",
+   "statesMeasured": 12,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 12,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.8
+  },
+  {
+   "id": "scene:chem-first-law",
+   "tier": "tier0",
+   "origin": "authored",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.thermo.first-law"
+   ],
+   "fingerprint": "fe61dd34b",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "REVIEW_REQUIRED",
+   "semantic": "PASS",
+   "semanticFamily": "first-law",
+   "statesMeasured": 26,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 24,
+    "REVIEW_REQUIRED": 2,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [
+    "INNER_SCROLL_X"
+   ],
+   "minFontPx": 10,
+   "minContrast": 4.68
+  },
+  {
+   "id": "scene:energy-cycle-hess-s-law-combustion-of-carbon",
+   "tier": "tier0",
+   "origin": "authored",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.thermo.enthalpy"
+   ],
+   "fingerprint": "f152cc87",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "REVIEW_REQUIRED",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": "energy-cycle",
+   "statesMeasured": 24,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 22,
+    "REVIEW_REQUIRED": 2,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [
+    "CONTRAST_LOW",
+    "INNER_SCROLL_X"
+   ],
+   "minFontPx": 11.5,
+   "minContrast": 4.47
+  },
+  {
+   "id": "scene:energy-cycle-born-haber-cycle-formation-of-nacl",
+   "tier": "tier0",
+   "origin": "authored",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.thermo.bond-enthalpy"
+   ],
+   "fingerprint": "fb9cf7ce0",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "REVIEW_REQUIRED",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": "energy-cycle",
+   "statesMeasured": 24,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 22,
+    "REVIEW_REQUIRED": 2,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [
+    "INNER_SCROLL_X"
+   ],
+   "minFontPx": 11.5,
+   "minContrast": 4.68
+  },
+  {
+   "id": "scene:comparison-Molar-heat-capacities-(J/mol·K)",
+   "tier": "tier0",
+   "origin": "authored",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.thermo.heat-capacities"
+   ],
+   "fingerprint": "fafdf84af",
+   "verdict": "PASS",
+   "render": "PASS",
+   "semantic": "PASS",
+   "semanticFamily": "bar-chart",
+   "statesMeasured": 10,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 10,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.62
+  },
+  {
+   "id": "scene:electrochemical-cell-daniell-cell-—-δg-=-−nfe",
+   "tier": "tier0",
+   "origin": "authored",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.thermo.cell-thermo"
+   ],
+   "fingerprint": "fdd0bcab6",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "REVIEW_REQUIRED",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": "electrochemical-cell",
+   "statesMeasured": 26,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 20,
+    "REVIEW_REQUIRED": 6,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [
+    "CONTRAST_LOW",
+    "INNER_SCROLL_X"
+   ],
+   "minFontPx": 11.5,
+   "minContrast": 4.26
+  },
+  {
+   "id": "scene:electrochemical-cell-daniell-cell",
+   "tier": "tier0",
+   "origin": "authored",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.elect.galvanic-cell"
+   ],
+   "fingerprint": "f3112f714",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "REVIEW_REQUIRED",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": "electrochemical-cell",
+   "statesMeasured": 26,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 20,
+    "REVIEW_REQUIRED": 6,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [
+    "CONTRAST_LOW",
+    "INNER_SCROLL_X"
+   ],
+   "minFontPx": 11.5,
+   "minContrast": 4.26
+  },
+  {
+   "id": "scene:electrochemical-cell-zinc-vs.-standard-hydrogen-electrode",
+   "tier": "tier0",
+   "origin": "authored",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.elect.standard-electrode"
+   ],
+   "fingerprint": "f6da17768",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "REVIEW_REQUIRED",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": "electrochemical-cell",
+   "statesMeasured": 26,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 22,
+    "REVIEW_REQUIRED": 4,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [
+    "CONTRAST_LOW",
+    "INNER_SCROLL_X"
+   ],
+   "minFontPx": 11.5,
+   "minContrast": 4.29
+  },
+  {
+   "id": "scene:electrochemical-cell-daniell-cell-at-non-standard-concentrations",
+   "tier": "tier0",
+   "origin": "authored",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.elect.nernst"
+   ],
+   "fingerprint": "f4e91fc1b",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "REVIEW_REQUIRED",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": "electrochemical-cell",
+   "statesMeasured": 26,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 22,
+    "REVIEW_REQUIRED": 4,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [
+    "CONTRAST_LOW",
+    "INNER_SCROLL_X"
+   ],
+   "minFontPx": 11.5,
+   "minContrast": 4.3
+  },
+  {
+   "id": "scene:electrochemical-cell-copper-concentration-cell",
+   "tier": "tier0",
+   "origin": "authored",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.elect.concentration-cell"
+   ],
+   "fingerprint": "f4d7a2f64",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "REVIEW_REQUIRED",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": "electrochemical-cell",
+   "statesMeasured": 26,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 20,
+    "REVIEW_REQUIRED": 6,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [
+    "CONTRAST_LOW",
+    "INNER_SCROLL_X"
+   ],
+   "minFontPx": 11.5,
+   "minContrast": 4.26
+  },
+  {
+   "id": "scene:electrochemical-cell-electrolysis-of-molten-nacl",
+   "tier": "tier0",
+   "origin": "authored",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.elect.electrolysis"
+   ],
+   "fingerprint": "f40e8a639",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "REVIEW_REQUIRED",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": "electrochemical-cell",
+   "statesMeasured": 22,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 14,
+    "REVIEW_REQUIRED": 8,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [
+    "CONTRAST_LOW",
+    "INNER_SCROLL_X"
+   ],
+   "minFontPx": 11.5,
+   "minContrast": 4.3
+  },
+  {
+   "id": "scene:electrochemical-cell-zinc–carbon-dry-cell-(primary-battery)",
+   "tier": "tier0",
+   "origin": "authored",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.elect.batteries"
+   ],
+   "fingerprint": "fdda7aded",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "REVIEW_REQUIRED",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": "electrochemical-cell",
+   "statesMeasured": 20,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 18,
+    "REVIEW_REQUIRED": 2,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [
+    "CONTRAST_LOW",
+    "INNER_SCROLL_X"
+   ],
+   "minFontPx": 11.5,
+   "minContrast": 4.3
+  },
+  {
+   "id": "scene:electrochemical-cell-copper-electroplating",
+   "tier": "tier0",
+   "origin": "authored",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.elect.industrial"
+   ],
+   "fingerprint": "f394390b5",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "REVIEW_REQUIRED",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": "electrochemical-cell",
+   "statesMeasured": 20,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 12,
+    "REVIEW_REQUIRED": 8,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [
+    "CONTRAST_LOW",
+    "INNER_SCROLL_X"
+   ],
+   "minFontPx": 11.5,
+   "minContrast": 4.3
+  },
+  {
+   "id": "scene:lattice-fcc",
+   "tier": "tier0",
+   "origin": "kind-default",
+   "reachability": "resolver",
+   "interactive": true,
+   "conceptIds": [
+    "chem.solid.crystal-systems"
+   ],
+   "fingerprint": "fd8c4725",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "REVIEW_REQUIRED",
+   "semantic": "PASS",
+   "semanticFamily": "crystal-lattice",
+   "statesMeasured": 24,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 22,
+    "REVIEW_REQUIRED": 2,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [
+    "INNER_SCROLL_X"
+   ],
+   "minFontPx": 10,
+   "minContrast": 4.68
+  },
+  {
+   "id": "scene:lattice-fcc-close-packing",
+   "tier": "tier0",
+   "origin": "authored",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.solid.packing"
+   ],
+   "fingerprint": "ffd778f31",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "REVIEW_REQUIRED",
+   "semantic": "PASS",
+   "semanticFamily": "crystal-lattice",
+   "statesMeasured": 20,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 18,
+    "REVIEW_REQUIRED": 2,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [
+    "INNER_SCROLL_X"
+   ],
+   "minFontPx": 10,
+   "minContrast": 4.68
+  },
+  {
+   "id": "card:three_crystal_lattice",
+   "tier": "tier1",
+   "origin": "domain-default",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.solid.ionic-solids",
+    "chem.solid.properties"
+   ],
+   "fingerprint": "ffdc76ff",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "REVIEW_REQUIRED",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": "card:three_crystal_lattice",
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 2,
+    "REVIEW_REQUIRED": 2,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [
+    "CONTRAST_LOW"
+   ],
+   "minFontPx": 10,
+   "minContrast": 3.54
+  },
+  {
+   "id": "scene:cell-comparison-chem.surface.colloids",
+   "tier": "tier0",
+   "origin": "authored",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.surface.colloids"
+   ],
+   "fingerprint": "f62b149da",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "REVIEW_REQUIRED",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": "prose-comparison",
+   "statesMeasured": 14,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 12,
+    "REVIEW_REQUIRED": 2,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [
+    "INNER_SCROLL_X"
+   ],
+   "minFontPx": 10,
+   "minContrast": 4.69
+  },
+  {
+   "id": "scene:coord-hexaamminecobalt-iii-ion",
+   "tier": "tier0",
+   "origin": "authored",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.coord.werner",
+    "chem.coord.nomenclature"
+   ],
+   "fingerprint": "f8a0a8a4a",
+   "verdict": "PASS",
+   "render": "PASS",
+   "semantic": "PASS",
+   "semanticFamily": "coordination-complex",
+   "statesMeasured": 12,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 12,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.66
+  },
+  {
+   "id": "scene:coord-cisplatin",
+   "tier": "tier0",
+   "origin": "authored",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.coord.isomerism"
+   ],
+   "fingerprint": "f80581334",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "REVIEW_REQUIRED",
+   "semantic": "PASS",
+   "semanticFamily": "coordination-complex",
+   "statesMeasured": 20,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 18,
+    "REVIEW_REQUIRED": 2,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [
+    "CONTRAST_LOW"
+   ],
+   "minFontPx": 10,
+   "minContrast": 4.49
+  },
+  {
+   "id": "scene:energy-cycle-crystal-field-splitting-ti-h2o-6-3-",
+   "tier": "tier0",
+   "origin": "authored",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.coord.cft"
+   ],
+   "fingerprint": "f4bd44a57",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "PASS",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": "energy-cycle",
+   "statesMeasured": 14,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 14,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 11.5,
+   "minContrast": 4.88
+  },
+  {
+   "id": "scene:coord-hexaamminecobalt-iii-octahedral-geometry",
+   "tier": "tier0",
+   "origin": "authored",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.coord.bonding"
+   ],
+   "fingerprint": "f7c7329b5",
+   "verdict": "PASS",
+   "render": "PASS",
+   "semantic": "PASS",
+   "semanticFamily": "coordination-complex",
+   "statesMeasured": 12,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 12,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.68
+  },
+  {
+   "id": "scene:comparison-log-Kf:-the-chelate-effect",
+   "tier": "tier0",
+   "origin": "authored",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.coord.stability"
+   ],
+   "fingerprint": "faec9eb6c",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "PASS",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": "bar-chart",
+   "statesMeasured": 10,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 10,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.62
+  },
+  {
+   "id": "scene:coord-cisplatin-the-isomer-that-works-as-a-drug",
+   "tier": "tier0",
+   "origin": "authored",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.coord.applications"
+   ],
+   "fingerprint": "f7879d1ff",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "REVIEW_REQUIRED",
+   "semantic": "PASS",
+   "semanticFamily": "coordination-complex",
+   "statesMeasured": 20,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 18,
+    "REVIEW_REQUIRED": 2,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [
+    "CONTRAST_LOW"
+   ],
+   "minFontPx": 10,
+   "minContrast": 4.49
+  },
+  {
+   "id": "scene:cell-comparison-chem.sblock.water",
+   "tier": "tier0",
+   "origin": "authored",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.sblock.water"
+   ],
+   "fingerprint": "fd883b2b6",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "REVIEW_REQUIRED",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": "prose-comparison",
+   "statesMeasured": 18,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 16,
+    "REVIEW_REQUIRED": 2,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [
+    "INNER_SCROLL_X"
+   ],
+   "minFontPx": 10,
+   "minContrast": 4.69
+  },
+  {
+   "id": "scene:comparison-Boiling-points-of-the-Group-16-hydrides-(K):-water-is-the-outlier",
+   "tier": "tier0",
+   "origin": "authored",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.pblock.group16"
+   ],
+   "fingerprint": "f689a465f",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "PASS",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": "bar-chart",
+   "statesMeasured": 10,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 10,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.62
+  },
+  {
+   "id": "scene:comparison-Lanthanide-contraction:-ionic-radius-of-Ln3+-(pm),-La-to-Lu",
+   "tier": "tier0",
+   "origin": "authored",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.dblock.lanthanides"
+   ],
+   "fingerprint": "f88d0f524",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "REVIEW_REQUIRED",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": "bar-chart",
+   "statesMeasured": 12,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 10,
+    "REVIEW_REQUIRED": 2,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [
+    "INNER_SCROLL_X"
+   ],
+   "minFontPx": 10,
+   "minContrast": 4.62
+  },
+  {
+   "id": "scene:cell-pathway-chem.dblock.organometallics",
+   "tier": "tier0",
+   "origin": "authored",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.dblock.organometallics"
+   ],
+   "fingerprint": "f4c985a78",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "REVIEW_REQUIRED",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": "prose-pathway",
+   "statesMeasured": 20,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 18,
+    "REVIEW_REQUIRED": 2,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [
+    "INNER_SCROLL_X"
+   ],
+   "minFontPx": 10,
+   "minContrast": 4.69
+  },
+  {
+   "id": "scene:cell-comparison-chem.org.pericyclic",
+   "tier": "tier0",
+   "origin": "authored",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.org.pericyclic"
+   ],
+   "fingerprint": "fc6bc2dee",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "PASS",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": "prose-comparison",
+   "statesMeasured": 14,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 14,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.69
+  },
+  {
+   "id": "scene:cell-comparison-chem.bio.nucleic-acids",
+   "tier": "tier0",
+   "origin": "authored",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.bio.nucleic-acids"
+   ],
+   "fingerprint": "fe60a32bf",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "PASS",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": "prose-comparison",
+   "statesMeasured": 14,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 14,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.69
+  },
+  {
+   "id": "scene:cell-comparison-chem.poly.biodegradable",
+   "tier": "tier0",
+   "origin": "authored",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.poly.biodegradable"
+   ],
+   "fingerprint": "f6a1e3677",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "REVIEW_REQUIRED",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": "prose-comparison",
+   "statesMeasured": 14,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 12,
+    "REVIEW_REQUIRED": 2,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [
+    "INNER_SCROLL_X"
+   ],
+   "minFontPx": 10,
+   "minContrast": 4.69
+  },
+  {
+   "id": "variant:electron_shells:element=H",
+   "tier": "variant",
+   "origin": "kind-default",
+   "reachability": "interactive-variant",
+   "interactive": true,
+   "conceptIds": [
+    "chem.atomic.electronic-config"
+   ],
+   "fingerprint": "f405fcb54",
+   "verdict": "PASS",
+   "render": "PASS",
+   "semantic": "PASS",
+   "semanticFamily": "electron-shells",
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.8
+  },
+  {
+   "id": "variant:electron_shells:element=C",
+   "tier": "variant",
+   "origin": "kind-default",
+   "reachability": "interactive-variant",
+   "interactive": true,
+   "conceptIds": [
+    "chem.atomic.electronic-config"
+   ],
+   "fingerprint": "f454afced",
+   "verdict": "PASS",
+   "render": "PASS",
+   "semantic": "PASS",
+   "semanticFamily": "electron-shells",
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.8
+  },
+  {
+   "id": "variant:electron_shells:element=N",
+   "tier": "variant",
+   "origin": "kind-default",
+   "reachability": "interactive-variant",
+   "interactive": true,
+   "conceptIds": [
+    "chem.atomic.electronic-config"
+   ],
+   "fingerprint": "f655a1479",
+   "verdict": "PASS",
+   "render": "PASS",
+   "semantic": "PASS",
+   "semanticFamily": "electron-shells",
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.8
+  },
+  {
+   "id": "variant:electron_shells:element=O",
+   "tier": "variant",
+   "origin": "kind-default",
+   "reachability": "interactive-variant",
+   "interactive": true,
+   "conceptIds": [
+    "chem.atomic.electronic-config"
+   ],
+   "fingerprint": "f578bc005",
+   "verdict": "PASS",
+   "render": "PASS",
+   "semantic": "PASS",
+   "semanticFamily": "electron-shells",
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.8
+  },
+  {
+   "id": "variant:electron_shells:element=Ne",
+   "tier": "variant",
+   "origin": "kind-default",
+   "reachability": "interactive-variant",
+   "interactive": true,
+   "conceptIds": [
+    "chem.atomic.electronic-config"
+   ],
+   "fingerprint": "fb7ee785a",
+   "verdict": "PASS",
+   "render": "PASS",
+   "semantic": "PASS",
+   "semanticFamily": "electron-shells",
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.8
+  },
+  {
+   "id": "variant:electron_shells:element=Mg",
+   "tier": "variant",
+   "origin": "kind-default",
+   "reachability": "interactive-variant",
+   "interactive": true,
+   "conceptIds": [
+    "chem.atomic.electronic-config"
+   ],
+   "fingerprint": "f19437e80",
+   "verdict": "PASS",
+   "render": "PASS",
+   "semantic": "PASS",
+   "semanticFamily": "electron-shells",
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.8
+  },
+  {
+   "id": "variant:electron_shells:element=Cl",
+   "tier": "variant",
+   "origin": "kind-default",
+   "reachability": "interactive-variant",
+   "interactive": true,
+   "conceptIds": [
+    "chem.atomic.electronic-config"
+   ],
+   "fingerprint": "f880c3f95",
+   "verdict": "PASS",
+   "render": "PASS",
+   "semantic": "PASS",
+   "semanticFamily": "electron-shells",
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.8
+  },
+  {
+   "id": "variant:electron_shells:element=Ar",
+   "tier": "variant",
+   "origin": "kind-default",
+   "reachability": "interactive-variant",
+   "interactive": true,
+   "conceptIds": [
+    "chem.atomic.electronic-config"
+   ],
+   "fingerprint": "fd78ce254",
+   "verdict": "PASS",
+   "render": "PASS",
+   "semantic": "PASS",
+   "semanticFamily": "electron-shells",
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.8
+  },
+  {
+   "id": "variant:electron_shells:element=K",
+   "tier": "variant",
+   "origin": "kind-default",
+   "reachability": "interactive-variant",
+   "interactive": true,
+   "conceptIds": [
+    "chem.atomic.electronic-config"
+   ],
+   "fingerprint": "fce89ee12",
+   "verdict": "PASS",
+   "render": "PASS",
+   "semantic": "PASS",
+   "semanticFamily": "electron-shells",
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.8
+  },
+  {
+   "id": "variant:electron_shells:element=Ca",
+   "tier": "variant",
+   "origin": "kind-default",
+   "reachability": "interactive-variant",
+   "interactive": true,
+   "conceptIds": [
+    "chem.atomic.electronic-config"
+   ],
+   "fingerprint": "fc1cc89b9",
+   "verdict": "PASS",
+   "render": "PASS",
+   "semantic": "PASS",
+   "semanticFamily": "electron-shells",
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.8
+  },
+  {
+   "id": "variant:periodic_trends:element1Symbol=H",
+   "tier": "variant",
+   "origin": "kind-default",
+   "reachability": "interactive-variant",
+   "interactive": true,
+   "conceptIds": [
+    "chem.period.modern-periodic-law",
+    "chem.period.periodic-properties"
+   ],
+   "fingerprint": "f819ff660",
+   "verdict": "PASS",
+   "render": "PASS",
+   "semantic": "PASS",
+   "semanticFamily": "periodic-trends",
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.68
+  },
+  {
+   "id": "variant:periodic_trends:element1Symbol=Li",
+   "tier": "variant",
+   "origin": "kind-default",
+   "reachability": "interactive-variant",
+   "interactive": true,
+   "conceptIds": [
+    "chem.period.modern-periodic-law",
+    "chem.period.periodic-properties"
+   ],
+   "fingerprint": "f507a9115",
+   "verdict": "PASS",
+   "render": "PASS",
+   "semantic": "PASS",
+   "semanticFamily": "periodic-trends",
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.68
+  },
+  {
+   "id": "variant:periodic_trends:element1Symbol=Be",
+   "tier": "variant",
+   "origin": "kind-default",
+   "reachability": "interactive-variant",
+   "interactive": true,
+   "conceptIds": [
+    "chem.period.modern-periodic-law",
+    "chem.period.periodic-properties"
+   ],
+   "fingerprint": "f1d7a5033",
+   "verdict": "PASS",
+   "render": "PASS",
+   "semantic": "PASS",
+   "semanticFamily": "periodic-trends",
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.68
+  },
+  {
+   "id": "variant:periodic_trends:element1Symbol=B",
+   "tier": "variant",
+   "origin": "kind-default",
+   "reachability": "interactive-variant",
+   "interactive": true,
+   "conceptIds": [
+    "chem.period.modern-periodic-law",
+    "chem.period.periodic-properties"
+   ],
+   "fingerprint": "ff643007c",
+   "verdict": "PASS",
+   "render": "PASS",
+   "semantic": "PASS",
+   "semanticFamily": "periodic-trends",
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.68
+  },
+  {
+   "id": "variant:periodic_trends:element1Symbol=C",
+   "tier": "variant",
+   "origin": "kind-default",
+   "reachability": "interactive-variant",
+   "interactive": true,
+   "conceptIds": [
+    "chem.period.modern-periodic-law",
+    "chem.period.periodic-properties"
+   ],
+   "fingerprint": "ff93ffb0d",
+   "verdict": "PASS",
+   "render": "PASS",
+   "semantic": "PASS",
+   "semanticFamily": "periodic-trends",
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.68
+  },
+  {
+   "id": "variant:periodic_trends:element1Symbol=N",
+   "tier": "variant",
+   "origin": "kind-default",
+   "reachability": "interactive-variant",
+   "interactive": true,
+   "conceptIds": [
+    "chem.period.modern-periodic-law",
+    "chem.period.periodic-properties"
+   ],
+   "fingerprint": "f3fd89a4e",
+   "verdict": "PASS",
+   "render": "PASS",
+   "semantic": "PASS",
+   "semanticFamily": "periodic-trends",
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.68
+  },
+  {
+   "id": "variant:periodic_trends:element1Symbol=O",
+   "tier": "variant",
+   "origin": "kind-default",
+   "reachability": "interactive-variant",
+   "interactive": true,
+   "conceptIds": [
+    "chem.period.modern-periodic-law",
+    "chem.period.periodic-properties"
+   ],
+   "fingerprint": "f4341957d",
+   "verdict": "PASS",
+   "render": "PASS",
+   "semantic": "PASS",
+   "semanticFamily": "periodic-trends",
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.68
+  },
+  {
+   "id": "variant:periodic_trends:element1Symbol=F",
+   "tier": "variant",
+   "origin": "kind-default",
+   "reachability": "interactive-variant",
+   "interactive": true,
+   "conceptIds": [
+    "chem.period.modern-periodic-law",
+    "chem.period.periodic-properties"
+   ],
+   "fingerprint": "f734e228e",
+   "verdict": "PASS",
+   "render": "PASS",
+   "semantic": "PASS",
+   "semanticFamily": "periodic-trends",
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.68
+  },
+  {
+   "id": "variant:periodic_trends:element1Symbol=Mg",
+   "tier": "variant",
+   "origin": "kind-default",
+   "reachability": "interactive-variant",
+   "interactive": true,
+   "conceptIds": [
+    "chem.period.modern-periodic-law",
+    "chem.period.periodic-properties"
+   ],
+   "fingerprint": "faa4fdb0e",
+   "verdict": "PASS",
+   "render": "PASS",
+   "semantic": "PASS",
+   "semanticFamily": "periodic-trends",
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.68
+  },
+  {
+   "id": "variant:periodic_trends:element1Symbol=Al",
+   "tier": "variant",
+   "origin": "kind-default",
+   "reachability": "interactive-variant",
+   "interactive": true,
+   "conceptIds": [
+    "chem.period.modern-periodic-law",
+    "chem.period.periodic-properties"
+   ],
+   "fingerprint": "f9764a47b",
+   "verdict": "PASS",
+   "render": "PASS",
+   "semantic": "PASS",
+   "semanticFamily": "periodic-trends",
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.68
+  },
+  {
+   "id": "variant:periodic_trends:element1Symbol=Si",
+   "tier": "variant",
+   "origin": "kind-default",
+   "reachability": "interactive-variant",
+   "interactive": true,
+   "conceptIds": [
+    "chem.period.modern-periodic-law",
+    "chem.period.periodic-properties"
+   ],
+   "fingerprint": "fae076870",
+   "verdict": "PASS",
+   "render": "PASS",
+   "semantic": "PASS",
+   "semanticFamily": "periodic-trends",
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.68
+  },
+  {
+   "id": "variant:periodic_trends:element1Symbol=P",
+   "tier": "variant",
+   "origin": "kind-default",
+   "reachability": "interactive-variant",
+   "interactive": true,
+   "conceptIds": [
+    "chem.period.modern-periodic-law",
+    "chem.period.periodic-properties"
+   ],
+   "fingerprint": "f6228bd78",
+   "verdict": "PASS",
+   "render": "PASS",
+   "semantic": "PASS",
+   "semanticFamily": "periodic-trends",
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.68
+  },
+  {
+   "id": "variant:periodic_trends:element1Symbol=S",
+   "tier": "variant",
+   "origin": "kind-default",
+   "reachability": "interactive-variant",
+   "interactive": true,
+   "conceptIds": [
+    "chem.period.modern-periodic-law",
+    "chem.period.periodic-properties"
+   ],
+   "fingerprint": "fc8148061",
+   "verdict": "PASS",
+   "render": "PASS",
+   "semantic": "PASS",
+   "semanticFamily": "periodic-trends",
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.68
+  },
+  {
+   "id": "variant:periodic_trends:element1Symbol=K",
+   "tier": "variant",
+   "origin": "kind-default",
+   "reachability": "interactive-variant",
+   "interactive": true,
+   "conceptIds": [
+    "chem.period.modern-periodic-law",
+    "chem.period.periodic-properties"
+   ],
+   "fingerprint": "f4ae88fd3",
+   "verdict": "PASS",
+   "render": "PASS",
+   "semantic": "PASS",
+   "semanticFamily": "periodic-trends",
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.68
+  },
+  {
+   "id": "variant:periodic_trends:element1Symbol=Ca",
+   "tier": "variant",
+   "origin": "kind-default",
+   "reachability": "interactive-variant",
+   "interactive": true,
+   "conceptIds": [
+    "chem.period.modern-periodic-law",
+    "chem.period.periodic-properties"
+   ],
+   "fingerprint": "fe8365c10",
+   "verdict": "PASS",
+   "render": "PASS",
+   "semantic": "PASS",
+   "semanticFamily": "periodic-trends",
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.68
+  },
+  {
+   "id": "variant:periodic_trends:element2Symbol=H",
+   "tier": "variant",
+   "origin": "kind-default",
+   "reachability": "interactive-variant",
+   "interactive": true,
+   "conceptIds": [
+    "chem.period.modern-periodic-law",
+    "chem.period.periodic-properties"
+   ],
+   "fingerprint": "f1bebd87e",
+   "verdict": "PASS",
+   "render": "PASS",
+   "semantic": "PASS",
+   "semanticFamily": "periodic-trends",
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.68
+  },
+  {
+   "id": "variant:periodic_trends:element2Symbol=Li",
+   "tier": "variant",
+   "origin": "kind-default",
+   "reachability": "interactive-variant",
+   "interactive": true,
+   "conceptIds": [
+    "chem.period.modern-periodic-law",
+    "chem.period.periodic-properties"
+   ],
+   "fingerprint": "fcf004a57",
+   "verdict": "PASS",
+   "render": "PASS",
+   "semantic": "PASS",
+   "semanticFamily": "periodic-trends",
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.68
+  },
+  {
+   "id": "variant:periodic_trends:element2Symbol=Be",
+   "tier": "variant",
+   "origin": "kind-default",
+   "reachability": "interactive-variant",
+   "interactive": true,
+   "conceptIds": [
+    "chem.period.modern-periodic-law",
+    "chem.period.periodic-properties"
+   ],
+   "fingerprint": "ff0626f9d",
+   "verdict": "PASS",
+   "render": "PASS",
+   "semantic": "PASS",
+   "semanticFamily": "periodic-trends",
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.68
+  },
+  {
+   "id": "variant:periodic_trends:element2Symbol=B",
+   "tier": "variant",
+   "origin": "kind-default",
+   "reachability": "interactive-variant",
+   "interactive": true,
+   "conceptIds": [
+    "chem.period.modern-periodic-law",
+    "chem.period.periodic-properties"
+   ],
+   "fingerprint": "fcdab445a",
+   "verdict": "PASS",
+   "render": "PASS",
+   "semantic": "PASS",
+   "semanticFamily": "periodic-trends",
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.68
+  },
+  {
+   "id": "variant:periodic_trends:element2Symbol=C",
+   "tier": "variant",
+   "origin": "kind-default",
+   "reachability": "interactive-variant",
+   "interactive": true,
+   "conceptIds": [
+    "chem.period.modern-periodic-law",
+    "chem.period.periodic-properties"
+   ],
+   "fingerprint": "f41e6c51d",
+   "verdict": "PASS",
+   "render": "PASS",
+   "semantic": "PASS",
+   "semanticFamily": "periodic-trends",
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.68
+  },
+  {
+   "id": "variant:periodic_trends:element2Symbol=N",
+   "tier": "variant",
+   "origin": "kind-default",
+   "reachability": "interactive-variant",
+   "interactive": true,
+   "conceptIds": [
+    "chem.period.modern-periodic-law",
+    "chem.period.periodic-properties"
+   ],
+   "fingerprint": "f55f9ec62",
+   "verdict": "PASS",
+   "render": "PASS",
+   "semantic": "PASS",
+   "semanticFamily": "periodic-trends",
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.68
+  },
+  {
+   "id": "variant:periodic_trends:element2Symbol=O",
+   "tier": "variant",
+   "origin": "kind-default",
+   "reachability": "interactive-variant",
+   "interactive": true,
+   "conceptIds": [
+    "chem.period.modern-periodic-law",
+    "chem.period.periodic-properties"
+   ],
+   "fingerprint": "f4514d093",
+   "verdict": "PASS",
+   "render": "PASS",
+   "semantic": "PASS",
+   "semanticFamily": "periodic-trends",
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.68
+  },
+  {
+   "id": "variant:periodic_trends:element2Symbol=F",
+   "tier": "variant",
+   "origin": "kind-default",
+   "reachability": "interactive-variant",
+   "interactive": true,
+   "conceptIds": [
+    "chem.period.modern-periodic-law",
+    "chem.period.periodic-properties"
+   ],
+   "fingerprint": "f20cd6992",
+   "verdict": "PASS",
+   "render": "PASS",
+   "semantic": "PASS",
+   "semanticFamily": "periodic-trends",
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.68
+  },
+  {
+   "id": "variant:periodic_trends:element2Symbol=Mg",
+   "tier": "variant",
+   "origin": "kind-default",
+   "reachability": "interactive-variant",
+   "interactive": true,
+   "conceptIds": [
+    "chem.period.modern-periodic-law",
+    "chem.period.periodic-properties"
+   ],
+   "fingerprint": "f8d0ed644",
+   "verdict": "PASS",
+   "render": "PASS",
+   "semantic": "PASS",
+   "semanticFamily": "periodic-trends",
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.68
+  },
+  {
+   "id": "variant:periodic_trends:element2Symbol=Al",
+   "tier": "variant",
+   "origin": "kind-default",
+   "reachability": "interactive-variant",
+   "interactive": true,
+   "conceptIds": [
+    "chem.period.modern-periodic-law",
+    "chem.period.periodic-properties"
+   ],
+   "fingerprint": "f26cdf93b",
+   "verdict": "PASS",
+   "render": "PASS",
+   "semantic": "PASS",
+   "semanticFamily": "periodic-trends",
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.68
+  },
+  {
+   "id": "variant:periodic_trends:element2Symbol=Si",
+   "tier": "variant",
+   "origin": "kind-default",
+   "reachability": "interactive-variant",
+   "interactive": true,
+   "conceptIds": [
+    "chem.period.modern-periodic-law",
+    "chem.period.periodic-properties"
+   ],
+   "fingerprint": "fddc616a2",
+   "verdict": "PASS",
+   "render": "PASS",
+   "semantic": "PASS",
+   "semanticFamily": "periodic-trends",
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.68
+  },
+  {
+   "id": "variant:periodic_trends:element2Symbol=P",
+   "tier": "variant",
+   "origin": "kind-default",
+   "reachability": "interactive-variant",
+   "interactive": true,
+   "conceptIds": [
+    "chem.period.modern-periodic-law",
+    "chem.period.periodic-properties"
+   ],
+   "fingerprint": "fbda789be",
+   "verdict": "PASS",
+   "render": "PASS",
+   "semantic": "PASS",
+   "semanticFamily": "periodic-trends",
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.68
+  },
+  {
+   "id": "variant:periodic_trends:element2Symbol=S",
+   "tier": "variant",
+   "origin": "kind-default",
+   "reachability": "interactive-variant",
+   "interactive": true,
+   "conceptIds": [
+    "chem.period.modern-periodic-law",
+    "chem.period.periodic-properties"
+   ],
+   "fingerprint": "f6a1983fd",
+   "verdict": "PASS",
+   "render": "PASS",
+   "semantic": "PASS",
+   "semanticFamily": "periodic-trends",
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.68
+  },
+  {
+   "id": "variant:periodic_trends:element2Symbol=K",
+   "tier": "variant",
+   "origin": "kind-default",
+   "reachability": "interactive-variant",
+   "interactive": true,
+   "conceptIds": [
+    "chem.period.modern-periodic-law",
+    "chem.period.periodic-properties"
+   ],
+   "fingerprint": "fb2cdc0e9",
+   "verdict": "PASS",
+   "render": "PASS",
+   "semantic": "PASS",
+   "semanticFamily": "periodic-trends",
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.68
+  },
+  {
+   "id": "variant:periodic_trends:element2Symbol=Ca",
+   "tier": "variant",
+   "origin": "kind-default",
+   "reachability": "interactive-variant",
+   "interactive": true,
+   "conceptIds": [
+    "chem.period.modern-periodic-law",
+    "chem.period.periodic-properties"
+   ],
+   "fingerprint": "fa2052118",
+   "verdict": "PASS",
+   "render": "PASS",
+   "semantic": "PASS",
+   "semanticFamily": "periodic-trends",
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.68
+  },
+  {
+   "id": "variant:molecule:molecule=ammonia",
+   "tier": "variant",
+   "origin": "kind-default",
+   "reachability": "interactive-variant",
+   "interactive": true,
+   "conceptIds": [
+    "chem.bond.vsepr"
+   ],
+   "fingerprint": "f109e422b",
+   "verdict": "PASS",
+   "render": "PASS",
+   "semantic": "PASS",
+   "semanticFamily": "molecule",
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.8
+  },
+  {
+   "id": "variant:molecule:molecule=methane",
+   "tier": "variant",
+   "origin": "kind-default",
+   "reachability": "interactive-variant",
+   "interactive": true,
+   "conceptIds": [
+    "chem.bond.vsepr"
+   ],
+   "fingerprint": "f5f87f9b0",
+   "verdict": "PASS",
+   "render": "PASS",
+   "semantic": "PASS",
+   "semanticFamily": "molecule",
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.8
+  },
+  {
+   "id": "variant:molecule:molecule=carbon dioxide",
+   "tier": "variant",
+   "origin": "kind-default",
+   "reachability": "interactive-variant",
+   "interactive": true,
+   "conceptIds": [
+    "chem.bond.vsepr"
+   ],
+   "fingerprint": "fe680a1d2",
+   "verdict": "PASS",
+   "render": "PASS",
+   "semantic": "PASS",
+   "semanticFamily": "molecule",
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.8
+  },
+  {
+   "id": "variant:molecule:molecule=hydrogen sulfide",
+   "tier": "variant",
+   "origin": "kind-default",
+   "reachability": "interactive-variant",
+   "interactive": true,
+   "conceptIds": [
+    "chem.bond.vsepr"
+   ],
+   "fingerprint": "fac177f9b",
+   "verdict": "PASS",
+   "render": "PASS",
+   "semantic": "PASS",
+   "semanticFamily": "molecule",
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.8
+  },
+  {
+   "id": "variant:molecule:molecule=boron trifluoride",
+   "tier": "variant",
+   "origin": "kind-default",
+   "reachability": "interactive-variant",
+   "interactive": true,
+   "conceptIds": [
+    "chem.bond.vsepr"
+   ],
+   "fingerprint": "fb9496fa5",
+   "verdict": "PASS",
+   "render": "PASS",
+   "semantic": "PASS",
+   "semanticFamily": "molecule",
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.8
+  },
+  {
+   "id": "variant:lattice:lattice=simple cubic",
+   "tier": "variant",
+   "origin": "kind-default",
+   "reachability": "interactive-variant",
+   "interactive": true,
+   "conceptIds": [
+    "chem.solid.crystal-systems"
+   ],
+   "fingerprint": "f72a14cba",
+   "verdict": "PASS",
+   "render": "PASS",
+   "semantic": "PASS",
+   "semanticFamily": "crystal-lattice",
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.68
+  },
+  {
+   "id": "variant:lattice:lattice=bcc",
+   "tier": "variant",
+   "origin": "kind-default",
+   "reachability": "interactive-variant",
+   "interactive": true,
+   "conceptIds": [
+    "chem.solid.crystal-systems"
+   ],
+   "fingerprint": "fbdda3e1b",
+   "verdict": "PASS",
+   "render": "PASS",
+   "semantic": "PASS",
+   "semanticFamily": "crystal-lattice",
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.68
+  },
+  {
+   "id": "tier3:chem.found.states-of-matter",
+   "tier": "tier3",
+   "origin": "generated",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.found.states-of-matter"
+   ],
+   "fingerprint": "f42a1faaf",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "PASS",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": null,
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.66
+  },
+  {
+   "id": "tier3:chem.found.pure-substances",
+   "tier": "tier3",
+   "origin": "generated",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.found.pure-substances"
+   ],
+   "fingerprint": "f6b3f56cd",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "PASS",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": null,
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.66
+  },
+  {
+   "id": "tier2:chem.found.significant-figures",
+   "tier": "tier2",
+   "origin": "approved",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.found.significant-figures"
+   ],
+   "fingerprint": "f87108c9b",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "PASS",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": null,
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.66
+  },
+  {
+   "id": "tier3:chem.found.mole-concept",
+   "tier": "tier3",
+   "origin": "generated",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.found.mole-concept"
+   ],
+   "fingerprint": "f2e384d34",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "PASS",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": null,
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.66
+  },
+  {
+   "id": "tier2:chem.found.stoichiometry",
+   "tier": "tier2",
+   "origin": "approved",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.found.stoichiometry"
+   ],
+   "fingerprint": "fa6206cbc",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "PASS",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": null,
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.66
+  },
+  {
+   "id": "tier3:chem.found.concentration",
+   "tier": "tier3",
+   "origin": "generated",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.found.concentration"
+   ],
+   "fingerprint": "f2df4d844",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "PASS",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": null,
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.66
+  },
+  {
+   "id": "tier3:chem.bond.mo-theory",
+   "tier": "tier3",
+   "origin": "generated",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.bond.mo-theory"
+   ],
+   "fingerprint": "f91f477cb",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "PASS",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": null,
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.66
+  },
+  {
+   "id": "tier3:chem.bond.metallic-bonding",
+   "tier": "tier3",
+   "origin": "generated",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.bond.metallic-bonding"
+   ],
+   "fingerprint": "f22ce4bee",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "PASS",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": null,
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.67
+  },
+  {
+   "id": "tier3:chem.bond.coordinate-bond",
+   "tier": "tier3",
+   "origin": "generated",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.bond.coordinate-bond"
+   ],
+   "fingerprint": "f5288eb13",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "PASS",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": null,
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.66
+  },
+  {
+   "id": "tier3:chem.state.kinetic-theory",
+   "tier": "tier3",
+   "origin": "generated",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.state.kinetic-theory"
+   ],
+   "fingerprint": "fd42ddd7f",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "PASS",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": null,
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.66
+  },
+  {
+   "id": "tier3:chem.state.gas-laws",
+   "tier": "tier3",
+   "origin": "generated",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.state.gas-laws"
+   ],
+   "fingerprint": "f215856e5",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "REVIEW_REQUIRED",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": null,
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 0,
+    "REVIEW_REQUIRED": 4,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [
+    "LABEL_OVER_STROKE"
+   ],
+   "minFontPx": 10,
+   "minContrast": 4.7
+  },
+  {
+   "id": "tier3:chem.sol.solubility",
+   "tier": "tier3",
+   "origin": "generated",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.sol.solubility"
+   ],
+   "fingerprint": "fba64871f",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "REVIEW_REQUIRED",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": null,
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 0,
+    "REVIEW_REQUIRED": 4,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [
+    "LABEL_OVER_STROKE"
+   ],
+   "minFontPx": 10,
+   "minContrast": 4.69
+  },
+  {
+   "id": "tier3:chem.sol.colligative",
+   "tier": "tier3",
+   "origin": "generated",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.sol.colligative"
+   ],
+   "fingerprint": "f9a098143",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "REVIEW_REQUIRED",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": null,
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 0,
+    "REVIEW_REQUIRED": 4,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [
+    "LABEL_OVER_STROKE"
+   ],
+   "minFontPx": 10,
+   "minContrast": 4.69
+  },
+  {
+   "id": "tier3:chem.equil.kw-ph",
+   "tier": "tier3",
+   "origin": "generated",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.equil.kw-ph"
+   ],
+   "fingerprint": "f73364694",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "PASS",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": null,
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 5.02
+  },
+  {
+   "id": "tier3:chem.equil.acids-bases",
+   "tier": "tier3",
+   "origin": "generated",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.equil.acids-bases"
+   ],
+   "fingerprint": "f58f15feb",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "PASS",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": null,
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.65
+  },
+  {
+   "id": "tier3:chem.redox.balancing",
+   "tier": "tier3",
+   "origin": "generated",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.redox.balancing"
+   ],
+   "fingerprint": "f7e2ff6b5",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "PASS",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": null,
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.66
+  },
+  {
+   "id": "tier3:chem.redox.titrations",
+   "tier": "tier3",
+   "origin": "generated",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.redox.titrations"
+   ],
+   "fingerprint": "fc55eb48b",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "PASS",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": null,
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.66
+  },
+  {
+   "id": "tier3:chem.kinet.rate-law",
+   "tier": "tier3",
+   "origin": "generated",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.kinet.rate-law"
+   ],
+   "fingerprint": "f72d1c45",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "REVIEW_REQUIRED",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": null,
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 0,
+    "REVIEW_REQUIRED": 4,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [
+    "LABEL_OVER_STROKE"
+   ],
+   "minFontPx": 10,
+   "minContrast": 4.69
+  },
+  {
+   "id": "tier3:chem.kinet.catalysis",
+   "tier": "tier3",
+   "origin": "generated",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.kinet.catalysis"
+   ],
+   "fingerprint": "f100c6bf4",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "PASS",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": null,
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.66
+  },
+  {
+   "id": "tier3:chem.kinet.photochemistry",
+   "tier": "tier3",
+   "origin": "generated",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.kinet.photochemistry"
+   ],
+   "fingerprint": "f305ed12c",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "PASS",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": null,
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.66
+  },
+  {
+   "id": "tier3:chem.surface.surfactants",
+   "tier": "tier3",
+   "origin": "generated",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.surface.surfactants"
+   ],
+   "fingerprint": "f693afc1",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "PASS",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": null,
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.66
+  },
+  {
+   "id": "tier3:chem.pblock.group18",
+   "tier": "tier3",
+   "origin": "generated",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.pblock.group18"
+   ],
+   "fingerprint": "f9a8bbabf",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "PASS",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": null,
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.65
+  },
+  {
+   "id": "tier3:chem.org.iupac",
+   "tier": "tier3",
+   "origin": "generated",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.org.iupac"
+   ],
+   "fingerprint": "f3c811578",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "PASS",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": null,
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.66
+  },
+  {
+   "id": "tier3:chem.org.reactive-intermediates",
+   "tier": "tier3",
+   "origin": "generated",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.org.reactive-intermediates"
+   ],
+   "fingerprint": "ffe70d376",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "PASS",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": null,
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.66
+  },
+  {
+   "id": "tier3:chem.hal.sn1",
+   "tier": "tier3",
+   "origin": "generated",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.hal.sn1"
+   ],
+   "fingerprint": "f9188302",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "PASS",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": null,
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.66
+  },
+  {
+   "id": "tier3:chem.hal.sn2",
+   "tier": "tier3",
+   "origin": "generated",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.hal.sn2"
+   ],
+   "fingerprint": "f1cdcc73c",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "PASS",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": null,
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.66
+  },
+  {
+   "id": "tier3:chem.hal.grignard",
+   "tier": "tier3",
+   "origin": "generated",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.hal.grignard"
+   ],
+   "fingerprint": "f1d04b1f0",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "PASS",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": null,
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.66
+  },
+  {
+   "id": "tier3:chem.hal.cfcs",
+   "tier": "tier3",
+   "origin": "generated",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.hal.cfcs"
+   ],
+   "fingerprint": "f8c46c3f4",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "PASS",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": null,
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.66
+  },
+  {
+   "id": "tier3:chem.alc.phenols",
+   "tier": "tier3",
+   "origin": "generated",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.alc.phenols"
+   ],
+   "fingerprint": "fe3877b8d",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "PASS",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": null,
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.66
+  },
+  {
+   "id": "tier3:chem.alc.ethers",
+   "tier": "tier3",
+   "origin": "generated",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.alc.ethers"
+   ],
+   "fingerprint": "fc81a075f",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "PASS",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": null,
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.66
+  },
+  {
+   "id": "tier3:chem.alc.protection",
+   "tier": "tier3",
+   "origin": "generated",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.alc.protection"
+   ],
+   "fingerprint": "f6a721321",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "PASS",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": null,
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.66
+  },
+  {
+   "id": "tier3:chem.nitro.heterocycles",
+   "tier": "tier3",
+   "origin": "generated",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.nitro.heterocycles"
+   ],
+   "fingerprint": "f56a91724",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "PASS",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": null,
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.65
+  },
+  {
+   "id": "tier3:chem.nitro.amino-acids",
+   "tier": "tier3",
+   "origin": "generated",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.nitro.amino-acids"
+   ],
+   "fingerprint": "fc50d6f66",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "PASS",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": null,
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.66
+  },
+  {
+   "id": "tier3:chem.bio.lipids",
+   "tier": "tier3",
+   "origin": "generated",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.bio.lipids"
+   ],
+   "fingerprint": "ff32f7fbc",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "PASS",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": null,
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.67
+  },
+  {
+   "id": "tier3:chem.bio.vitamins",
+   "tier": "tier3",
+   "origin": "generated",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.bio.vitamins"
+   ],
+   "fingerprint": "fa3388f0d",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "PASS",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": null,
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.5
+  },
+  {
+   "id": "tier3:chem.poly.addition",
+   "tier": "tier3",
+   "origin": "generated",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.poly.addition"
+   ],
+   "fingerprint": "f28c38713",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "PASS",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": null,
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.66
+  },
+  {
+   "id": "tier3:chem.poly.condensation",
+   "tier": "tier3",
+   "origin": "generated",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.poly.condensation"
+   ],
+   "fingerprint": "f4ef82065",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "PASS",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": null,
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.66
+  },
+  {
+   "id": "tier3:chem.poly.natural",
+   "tier": "tier3",
+   "origin": "generated",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.poly.natural"
+   ],
+   "fingerprint": "f847fbc9a",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "PASS",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": null,
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.66
+  },
+  {
+   "id": "tier3:chem.env.atmosphere",
+   "tier": "tier3",
+   "origin": "generated",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.env.atmosphere"
+   ],
+   "fingerprint": "f373f737f",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "PASS",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": null,
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.57
+  },
+  {
+   "id": "tier3:chem.env.air-pollution",
+   "tier": "tier3",
+   "origin": "generated",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.env.air-pollution"
+   ],
+   "fingerprint": "fecd44252",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "PASS",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": null,
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.66
+  },
+  {
+   "id": "tier3:chem.env.water-soil",
+   "tier": "tier3",
+   "origin": "generated",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.env.water-soil"
+   ],
+   "fingerprint": "ff42a7353",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "PASS",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": null,
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.66
+  },
+  {
+   "id": "tier3:chem.anal.gravimetric",
+   "tier": "tier3",
+   "origin": "generated",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.anal.gravimetric"
+   ],
+   "fingerprint": "fe133683a",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "PASS",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": null,
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.66
+  },
+  {
+   "id": "tier3:chem.anal.volumetric",
+   "tier": "tier3",
+   "origin": "generated",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.anal.volumetric"
+   ],
+   "fingerprint": "f6f8a7d9d",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "PASS",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": null,
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.66
+  },
+  {
+   "id": "tier3:chem.anal.chromatography",
+   "tier": "tier3",
+   "origin": "generated",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.anal.chromatography"
+   ],
+   "fingerprint": "fd6f0f538",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "PASS",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": null,
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.66
+  },
+  {
+   "id": "tier3:chem.anal.spectroscopy",
+   "tier": "tier3",
+   "origin": "generated",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.anal.spectroscopy"
+   ],
+   "fingerprint": "f26432b69",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "PASS",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": null,
+   "statesMeasured": 4,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 4,
+    "REVIEW_REQUIRED": 0,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [],
+   "minFontPx": 10,
+   "minContrast": 4.66
+  }
+ ]
+}

@@ -3,8 +3,8 @@
  "method": "Each in-figure reference value located in the repo, then checked against an authoritative public source (NIST Chemistry WebBook / NIST CODATA / CCCBDB, Martell & Smith via Harvey LibreTexts, Shannon 1976 via KnowledgeDoor, Wikipedia data pages that cite NIST/CRC). Verdicts: MATCH (value agrees at the figure precision), WITHIN_ROUNDING (agrees after rounding/truncation, difference noted), MISMATCH (disagrees), UNVERIFIED (could not establish).",
  "limits": "The CRC Handbook, the original Shannon paper text and NIST SRD 46 (Windows software) could not be read; values attributed to them rest on the secondary sources named per entry.",
  "counts": {
-  "MATCH": 40,
-  "WITHIN_ROUNDING": 28,
+  "MATCH": 41,
+  "WITHIN_ROUNDING": 27,
   "UNVERIFIED": 1
  },
  "entries": [

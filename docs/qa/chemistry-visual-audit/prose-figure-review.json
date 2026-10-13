@@ -1,6 +1,6 @@
 {
- "generated": "2026-10-09",
- "about": "Independent read of the six prose pathway / comparison figures the machine audit cannot check (R18), by a reviewer who had not seen the code or any verdict, against sources the reviewer read. 'resolution' records what this closure changed in response. Figures are keyed by the manifest instance id suffix (scene:<figure>).",
+ "generated": "2026-10-12",
+ "about": "Independent reads of the prose pathway / comparison figures and of the two approved (Tier 2) process flows, which no deterministic check can verify (R18, R12, R11). Each entry: the reviewer's verdict, the issues it named and the sources it read; 'resolution' records what this closure changed in response. The reviewers had not seen the code or any earlier verdict. Pass 1 (2026-10-09) is the six R18 figures; pass 2 (2026-10-12) is colloids and water (first pass), then a re-read of the revised colloids / water / polymer text plus a first read of 'Elements, Compounds and Mixtures', 'Ionic Bonding' and the two Tier 2 flows. Figures are keyed by the manifest instance id suffix (scene:<figure> / tier2:<concept>). Where the reviewer cites the IUPAC Gold Book it records that the pages returned HTTP 403/503 and the wording was read through Wikipedia's quotation: treat IUPAC text as secondary-source verified.",
  "entries": [
   {
    "figure": "cell-comparison-chem.state.real-gases",
@@ -16,7 +16,17 @@
     "Van der Waals equation - https://en.wikipedia.org/wiki/Van_der_Waals_equation (b = 4 N V0, molar form (p + a/v^2)(v - b) = RT)",
     "Search summary (study-help/lecture notes, not primary) on H2/He Z > 1 - https://chemistry.csueastbay.edu/~pfleming/chem/351/chap02/gaslaws2.htm"
    ],
-   "resolution": "Applied: 'for most gases near room temperature' qualifier on Z < 1; b relabelled as the excluded volume (~4x the molecules' own volume). The first, longer wording of the b label clipped and collided at 1280 px in the browser audit and was shortened."
+   "resolution": "Applied: 'for most gases near room temperature' qualifier on Z < 1; b relabelled as the excluded volume (~4x the molecules' own volume). The first, longer wording of the b label clipped and collided at 1280 px in the browser audit and was shortened.",
+   "finalRead": {
+    "date": "2026-10-12",
+    "verdict": "CORRECT",
+    "notes": [
+     "Z < 1 exists only below the Boyle temperature (N2 327 K); H2 and He are the standard counter-examples at room temperature ('most gases near room temperature' covers it).",
+     "van der Waals corrects both qualitatively, not quantitatively (Zc 0.375 vs 0.23-0.31)."
+    ],
+    "basis": "the exact final text of the figure (drawn labels and narration), sources read by the reviewer; same reviewer as the earlier pass"
+   },
+   "pass": "2026-10-09 (R18 pass)"
   },
   {
    "figure": "cell-comparison-chem.state.phase-diagram",
@@ -33,7 +43,17 @@
     "IAPWS Release on melting/sublimation pressures - https://iapws.org/documents/release/MeltSub.download (p_t = 611.657 Pa, T_t = 273.16 K, via search-result summary)",
     "Critical point (thermodynamics) - https://en.wikipedia.org/wiki/Critical_point_(thermodynamics) (water 647.096 K, 22.064 MPa = 217.75 atm; CO2 304.19 K, 72.8 atm)"
    ],
-   "resolution": "Applied: triple-point pressure 611 Pa -> 612 Pa (3-s.f. rounding of 611.657 Pa)."
+   "resolution": "Applied: triple-point pressure 611 Pa -> 612 Pa (3-s.f. rounding of 611.657 Pa).",
+   "finalRead": {
+    "date": "2026-10-12",
+    "verdict": "CORRECT",
+    "notes": [
+     "Numbers check: 273.16 K / 611.657 Pa (612 Pa), CO2 304.19 K / 72.8 atm, water 647.096 K / 217.75 atm.",
+     "One generic sketch carries two substance-specific facts (dry-ice sublimation, water's backward melting curve); nothing says which substance each is."
+    ],
+    "basis": "the exact final text of the figure (drawn labels and narration), sources read by the reviewer; same reviewer as the earlier pass"
+   },
+   "pass": "2026-10-09 (R18 pass)"
   },
   {
    "figure": "cell-pathway-chem.dblock.organometallics",
@@ -49,7 +69,17 @@
     "Cotton, Molecule of the Month July 2013 (Bristol) - https://www.chm.bris.ac.uk/motm/wilcat/Wilkinson's%20Catalyst%20-%20Molecule%20of%20the%20Month%20July%202013.pdf (solvent replaces PPh3; [RhH2Cl(PPh3)2] 16e Rh(III); alkene adds to give 6-coordinate 18e; insertion; reductive elimination)",
     "LibreTexts, Hydrogenation by Wilkinson's Catalyst - https://chem.libretexts.org/Bookshelves/Inorganic_Chemistry/Inorganic_Chemistry_(LibreTexts)/14%3A_Organometallic_Reactions_and_Catalysis/14.03%3A_Organometallic_Catalysts/14.3.05%3A_Hydrogenation_by_Wilkinson's_Catalyst (appeared in search results; not opened)"
    ],
-   "resolution": "Applied: the goal now says 'One commonly drawn route' (the textbook route dissociates PPh3 first; the drawn order is a real on-pathway alternative)."
+   "resolution": "Applied: the goal now says 'One commonly drawn route' (the textbook route dissociates PPh3 first; the drawn order is a real on-pathway alternative).",
+   "finalRead": {
+    "date": "2026-10-12",
+    "verdict": "CORRECT",
+    "notes": [
+     "Electron counts and oxidation states are internally correct for the drawn route; the route order differs from every source read (they dissociate PPh3 first) — the goal's 'one commonly drawn route' hedges this.",
+     "'One empty site' is shorthand for two electrons short of 18; the catalyst also sits in equilibrium with an inactive dimer."
+    ],
+    "basis": "the exact final text of the figure (drawn labels and narration), sources read by the reviewer; same reviewer as the earlier pass"
+   },
+   "pass": "2026-10-09 (R18 pass)"
   },
   {
    "figure": "cell-comparison-chem.org.pericyclic",
@@ -62,7 +92,16 @@
    "sources": [
     "Woodward-Hoffmann rules - https://en.wikipedia.org/wiki/Woodward%E2%80%93Hoffmann_rules ([4+2] allowed; [2+2] photochemical only for ordinary alkenes; 4n conrotatory thermal / 4n+2 disrotatory thermal; [1,5]-H facile, [1,3]-H not observed, [3,3] allowed)"
    ],
-   "resolution": "Applied: '[2+2]: thermally forbidden (suprafacial)', consistent with the [1,3]H label."
+   "resolution": "Applied: '[2+2]: thermally forbidden (suprafacial)', consistent with the [1,3]H label.",
+   "finalRead": {
+    "date": "2026-10-12",
+    "verdict": "CORRECT",
+    "notes": [
+     "Every selection rule is correct. 'Forbidden' is not 'impossible' (ketene [2+2]); 'allowed' is not 'fast'; 'three families' are the three main classes (ene, cheletropic, group-transfer and dyotropic also exist)."
+    ],
+    "basis": "the exact final text of the figure (drawn labels and narration), sources read by the reviewer; same reviewer as the earlier pass"
+   },
+   "pass": "2026-10-09 (R18 pass)"
   },
   {
    "figure": "cell-comparison-chem.bio.nucleic-acids",
@@ -75,7 +114,8 @@
     "RNA hydrolysis - https://en.wikipedia.org/wiki/RNA_hydrolysis (2'-OH nucleophilic attack on adjacent phosphorus, 2',3'-cyclic phosphate; DNA lacks 2'-OH)",
     "Standard textbook facts (Watson-Crick pairing: A=T two H-bonds, G triple-bond C three H-bonds, purine-pyrimidine geometry); not separately retrieved this session"
    ],
-   "resolution": "No change needed."
+   "resolution": "No change needed.",
+   "pass": "2026-10-09 (R18 pass)"
   },
   {
    "figure": "cell-comparison-chem.poly.biodegradable",
@@ -95,7 +135,180 @@
     "Bio-PE (sugarcane ethanol -> ethylene -> PE; drop-in, chemically identical) - https://fkur.com/en/brands/im-green/green-lldpe and https://www.plastemart.com/news-plastics-information/Braskem-introduces-polyethylene-made-from-sugarcane-ethanol/10387 (producer/trade sources; non-biodegradability of PE is standard background, not found in these pages)",
     "Polyacetylene doping and conductivity - https://www.nobelprize.org/prizes/chemistry/2000/popular-information/ (iodine oxidation raised conductivity enormously) and https://patents.google.com/patent/US4481132 (cis ~1e-9 to trans ~1e-5 S/cm, via search summary)"
    ],
-   "resolution": "Applied: PLA 'needs industrial composting'; 'biodegradation starts with the backbone' instead of 'is decided by'; the all-carbon column says 'resists biodegradation' (poly(vinyl alcohol) is a conditional counter-example); 'aliphatic' ester linkages."
+   "resolution": "Applied: PLA 'needs industrial composting'; 'biodegradation starts with the backbone' instead of 'is decided by'; the all-carbon column says 'resists biodegradation' (poly(vinyl alcohol) is a conditional counter-example); 'aliphatic' ester linkages.",
+   "pass": "2026-10-09 (R18 pass)"
+  },
+  {
+   "figure": "cell-comparison-chem.surface.colloids",
+   "pass": "2026-10-12 (first pass, then re-read of the revised text)",
+   "verdict": "IMPRECISE -> CORRECT",
+   "issues": [
+    "First pass: the three columns presented the Tyndall effect as unique to colloids (suspensions scatter light too); 'passes a membrane' never said dialysis membrane and never said colloids pass ordinary filter paper; 'single molecules or ions' contradicted the gelatin example (a protein colloid is a single macromolecule); 'too small to settle' stated an absolute; 'visibly chunky' misdescribed a cloudy suspension; the 1 nm / 1000 nm limits are conventions (IUPAC: 'roughly 1 nm to 1 µm', not rigid).",
+    "Re-read: no remaining misconception of that kind. Residual notes: filter-paper pores (about 2-25 µm) do not align exactly with the 1 µm line; some textbooks say colloids 'cannot be filtered' (they mean membrane filtration)."
+   ],
+   "sources": [
+    "https://en.wikipedia.org/wiki/Colloid",
+    "https://en.wikipedia.org/wiki/Tyndall_effect",
+    "https://en.wikipedia.org/wiki/Dialysis_(chemistry)",
+    "https://en.wikipedia.org/wiki/Suspension_(chemistry)",
+    "https://chem.libretexts.org/Bookshelves/General_Chemistry/Chemistry_(OpenSTAX)/11%3A_Solutions_and_Colloids/11.5%3A_Colloids"
+   ],
+   "resolution": "Reworded: 'dissolved molecules or ions, mostly below about 1 nm'; colloids 'stay dispersed' and 'pass ordinary filter paper but not a dialysis membrane'; suspensions 'cloudy, scatter light too'; 'warm gelatin sol'. Items kept short and the conditions put in the narration after the browser audit showed long items made the layout ambiguous.",
+   "finalRead": {
+    "date": "2026-10-12",
+    "verdict": "CORRECT",
+    "notes": [
+     "Drawn labels say 'membrane' without 'dialysis' (the narration does).",
+     "Textbooks conflict ('colloids cannot be filtered' vs 'pass most filters'); the figure's wording is the accurate one.",
+     "'Held by filter paper' is a coarse-suspension statement (paper pores about 2-25 µm)."
+    ],
+    "basis": "the exact final text of the figure (drawn labels and narration), sources read by the reviewer; same reviewer as the earlier pass"
+   }
+  },
+  {
+   "figure": "cell-comparison-chem.sblock.water",
+   "pass": "2026-10-12 (first pass, then re-read of the revised text)",
+   "verdict": "IMPRECISE -> IMPRECISE (one residual)",
+   "issues": [
+    "First pass: no pressure on the boiling points; no temperatures on the density pair (water 1.000 is a rounding of 0.9998-0.99997 for 0-4 °C, 0.997 at 25 °C); 'donates 2 and accepts 2' is the ice maximum (about 3.5 in the liquid); 'removed by boiling' overstates (reduced) and the causes were not named; amphoteric sat in the D2O column; D2O is not NMR-silent (residual HDO about 4.8 ppm).",
+    "Re-read: everything corrected is now CORRECT; the density pair's label still carries no temperatures (they are in the narration); the angle is a gas-phase value (stated in the narration); 'about 3.5' depends on how a hydrogen bond is counted (2.4-3.7)."
+   ],
+   "sources": [
+    "https://cccbdb.nist.gov/exp2x.asp?casno=7732185",
+    "https://webbook.nist.gov/cgi/cbook.cgi?ID=C7732185&Mask=4",
+    "https://webbook.nist.gov/cgi/cbook.cgi?ID=C7783064&Mask=4",
+    "https://www.iapws.org/faq/boil.html",
+    "https://en.wikipedia.org/wiki/Properties_of_water",
+    "https://en.wikipedia.org/wiki/Hard_water",
+    "https://en.wikipedia.org/wiki/Water_softening",
+    "https://en.wikipedia.org/wiki/Amphoterism",
+    "https://chem.umd.edu/sites/default/files/NMR/isotope_solvent.pdf",
+    "https://cnsc-ccsn.gc.ca/eng/acts-and-regulations/regulatory-documents/published/html/regdoc3-6/c"
+   ],
+   "resolution": "Applied: '(1 atm)' and the density temperatures (ice at 0 °C, water at 4 °C, its densest) in the narration; 'about 3.5 on average in liquid water'; 'boiling reduces it' with hydrogencarbonate / sulfate-and-chloride named; amphoteric moved to the ordinary-water column. Not applied: temperatures inside the drawn density label (it would not fit a phone column) and the residual-HDO note.",
+   "finalRead": {
+    "date": "2026-10-12",
+    "verdict": "CORRECT",
+    "notes": [
+     "Rounded labels (100 °C is 99.974 °C at 1 atm; H2S -60.28 °C NIST / -59.55 °C CRC); the narration states 1 atm and 0 °C / 4 °C.",
+     "'About 3.5' depends on the hydrogen-bond counting rule (2.4-3.7); 104.5° is a gas-phase value (stated)."
+    ],
+    "basis": "the exact final text of the figure (drawn labels and narration), sources read by the reviewer; same reviewer as the earlier pass"
+   }
+  },
+  {
+   "figure": "cell-comparison-chem.poly.biodegradable",
+   "pass": "2026-10-12 (re-read of the revised text)",
+   "verdict": "IMPRECISE",
+   "issues": [
+    "'Resists biodegradation' for every all-carbon backbone has a counter-example (poly(vinyl alcohol) is biodegradable under specific conditions): say 'generally'.",
+    "'Conductivity needs a conjugated π-system AND doping' holds for intrinsic electronic conductivity only (composites and ionic conductors are other routes).",
+    "'Modest semiconductor' understates how poor undoped conjugated polymers are (about 1e-10 to 1e-8 S/cm; semiconductor or insulator)."
+   ],
+   "sources": [
+    "https://en.wikipedia.org/wiki/Biodegradable_plastic",
+    "https://en.wikipedia.org/wiki/Polylactic_acid",
+    "https://en.wikipedia.org/wiki/Polyethylene",
+    "https://en.wikipedia.org/wiki/Polyvinyl_alcohol",
+    "https://en.wikipedia.org/wiki/Conductive_polymer",
+    "https://en.wikipedia.org/wiki/Bioplastic"
+   ],
+   "resolution": "Applied: 'generally resists biodegradation'; 'intrinsic electronic conductivity'; 'undoped: poor semiconductor' (label) with 'poor semiconductors or insulators' in the narration; PLA 'needs industrial composting'.",
+   "finalRead": {
+    "date": "2026-10-12",
+    "verdict": "CORRECT",
+    "notes": [
+     "'Hydrolysable backbone' must stay paired with 'aliphatic' (the narration does; PET is aromatic and degrades poorly).",
+     "'Generally resists' acknowledges poly(vinyl alcohol); biodegradation is a system property, the goal's 'starts with' is hedged."
+    ],
+    "basis": "the exact final text of the figure (drawn labels and narration), sources read by the reviewer; same reviewer as the earlier pass"
+   }
+  },
+  {
+   "figure": "cell-comparison-chem.found.matter",
+   "pass": "2026-10-12 (first independent read)",
+   "verdict": "IMPRECISE",
+   "issues": [
+    "'Always 8 g O : 1 g H' is a rounding of 7.94 : 1 and holds only for natural hydrogen (D2O is about 4 : 1).",
+    "'Any ratio' for a mixture ignores solubility limits and air's near-constant composition; 'each part keeps its properties' hides that brine freezes and boils differently from water.",
+    "'Not bonded' is loose (solvent interactions, alloys): 'no new substance formed' is the usable criterion.",
+    "'Fixed melting and boiling point' appears only under 'Element' though pure compounds have sharp ones too; carbon and arsenic sublime at 1 atm."
+   ],
+   "sources": [
+    "https://en.wikipedia.org/wiki/Chemical_element",
+    "https://en.wikipedia.org/wiki/Chemical_compound",
+    "https://en.wikipedia.org/wiki/Mixture",
+    "https://ciaaw.org/oxygen.htm",
+    "https://ciaaw.org/hydrogen.htm"
+   ],
+   "resolution": "Applied: element 'all atoms have the same atomic number'; compound '2 H : 1 O atoms, about 8 g O : 1 g H' and 'sharp melting point'; mixture 'not chemically combined (no new substance)', 'variable ratio; each part keeps its chemical identity'. Not applied: 'at a given pressure' and a heterogeneous mixture example (width).",
+   "finalRead": {
+    "date": "2026-10-12",
+    "verdict": "CORRECT",
+    "notes": [
+     "Goal said mixture components 'keep their own properties' (physical properties change: brine freezes and boils differently) — reworded to 'chemical identity', matching the drawn label.",
+     "'Fixed melting and boiling point' has no pressure qualifier (carbon and arsenic sublime at 1 atm; eutectics melt sharply) — school level, not changed.",
+     "'About 8 g O : 1 g H' is a fair rounding (7.935-7.938 : 1)."
+    ],
+    "basis": "the exact final text of the figure (drawn labels and narration), sources read by the reviewer; same reviewer as the earlier pass"
+   }
+  },
+  {
+   "figure": "cell-pathway-chem.bond.ionic-bonding",
+   "pass": "2026-10-12 (first independent read)",
+   "verdict": "IMPRECISE",
+   "issues": [
+    "The one-Na-one-Cl picture invites 'NaCl is a molecule' / 'a Na+ is bonded to one Cl-': in the crystal each ion has six oppositely charged neighbours.",
+    "Electron transfer between isolated gaseous atoms is endothermic (about +147 kJ/mol); the energy payoff is lattice formation (about -787 kJ/mol), so 'atoms transfer electrons to get full shells' is a bookkeeping rule.",
+    "'Full outer shell' for Cl- is really a stable octet (argon-like)."
+   ],
+   "sources": [
+    "https://en.wikipedia.org/wiki/Ionic_bonding",
+    "https://en.wikipedia.org/wiki/Sodium_chloride",
+    "https://webbook.nist.gov/cgi/cbook.cgi?ID=C22537151&Mask=20",
+    "https://en.wikipedia.org/wiki/Electron_affinity_(data_page)"
+   ],
+   "resolution": "Applied: 'noble-gas (stable octet) arrangement'; 'each Na+ touches 6 Cl-, so NaCl is a formula unit, not a molecule'. Not applied: the Born-Haber energetics (beyond this concept's Educational Brain scope; chem.thermo.bond-enthalpy owns it).",
+   "finalRead": {
+    "date": "2026-10-12",
+    "verdict": "CORRECT",
+    "notes": [
+     "Optional caveat: electron transfer between isolated gaseous atoms costs about +147 kJ/mol; lattice formation (about -787 kJ/mol) pays for it, so 'octet' is not the cause (Born-Haber, owned by chem.thermo.bond-enthalpy).",
+     "Configurations and the lattice / formula-unit wording are correct."
+    ],
+    "basis": "the exact final text of the figure (drawn labels and narration), sources read by the reviewer; same reviewer as the earlier pass"
+   }
+  },
+  {
+   "figure": "tier2:chem.found.significant-figures",
+   "pass": "2026-10-12 (first independent read; approved Tier 2 row, production, ACTIVE)",
+   "verdict": "IMPRECISE",
+   "issues": [
+    "Step 4 'trailing zeros based on decimal presence' hides the rule: trailing zeros count if there is a decimal point; without one the count is ambiguous (not simply insignificant) and scientific notation fixes it.",
+    "Missing: counted and defined numbers are exact; the definition (all certain digits plus the first uncertain one). The four rules are a checklist, not a strict sequence."
+   ],
+   "sources": [
+    "https://chem.libretexts.org/Courses/Modesto_Junior_College/Chemistry_142:_Pre-General_Chemistry_(Brzezinski)/CHEM_142:_Text_(Brzezinski)/02:_Numbers_and_Measurement/2.01:_Significant_Figures_-_Writing_Numbers_to_Reflect_Precision",
+    "https://chem.libretexts.org/Courses/University_of_Arkansas_Little_Rock/Chem_1300:_Preparatory_Chemistry/Learning_Modules/02:_Mathematical_Fundamentals/2.05:_Measured_Numbers_and_Significant_Digits",
+    "https://en.wikipedia.org/wiki/Significant_figures"
+   ],
+   "resolution": "NOT changed: an approved row is production data; editing it is an owner decision (see tier2-corrections-prepared.md, prepared, not executed). Left REVIEW_REQUIRED in semantic-review.json."
+  },
+  {
+   "figure": "tier2:chem.found.stoichiometry",
+   "pass": "2026-10-12 (first independent read; approved Tier 2 row, production, ACTIVE)",
+   "verdict": "IMPRECISE (one wording error)",
+   "issues": [
+    "Step 3 'molar mole ratios' is a doubled, non-standard term ('mole ratio' or 'molar ratio').",
+    "Step 4 omits the moles-to-grams conversion that gives the theoretical yield, the limiting-reactant check when more than one reactant amount is given, and that the actual yield is a measured input, not a result."
+   ],
+   "sources": [
+    "https://en.wikipedia.org/wiki/Stoichiometry",
+    "https://en.wikipedia.org/wiki/Yield_(chemistry)",
+    "https://en.wikipedia.org/wiki/Limiting_reagent",
+    "https://chem.libretexts.org/Courses/Howard_University/General_Chemistry:_An_Atoms_First_Approach/Unit_3:_Stoichiometry/Chapter_7:_Stoichiometry/Chapter_7.4:_Stoichiometry"
+   ],
+   "resolution": "NOT changed (approved production row): see tier2-corrections-prepared.md. Left REVIEW_REQUIRED in semantic-review.json."
   }
  ]
 }
