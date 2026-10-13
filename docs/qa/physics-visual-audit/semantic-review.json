@@ -49,53 +49,77 @@
    "initial": "SM-02: no physics assertion (shared force_diagram card)",
    "decision": "FIXED→PASS",
    "finding": "Three real defects in the drawing: the friction arrow-head pointed AT the body (same way as the applied force — the marker was drawn pointing left and orient=auto turned it round again); applied (45) was longer than friction (40), an unbalanced body; and the body floated 20 units above the ground so the normal force had no contact.",
-   "fix": "ForceDiagram.tsx: marker polygon along +x, one length per opposing pair, body rests on the ground line; labels lifted clear of the heads; 2026-10-09: the ground was raised 10 units because seating the body on it had pushed the weight arrow's head 5 units past the bottom of the drawing, where it was cut flat (found only by viewing the completed production render; pinned by the 'every arrow-head lies inside the drawing' test).",
+   "fix": "ForceDiagram.tsx: marker polygon along +x, one length per opposing pair, body rests on the ground line; labels lifted clear of the heads; 2026-10-09: the ground was raised 10 units because seating the body on it had pushed the weight arrow's head 5 units past the bottom of the drawing, where it was cut flat (found only by viewing the completed production render; pinned by the 'every arrow-head lies inside the drawing' test). || 2026-10-12: the 'Weight (W=mg)' and normal labels start a fixed gap (FORCE_DIAGRAM.labelGap = 6 units) to the right of the arrowhead's widest point (FORCE_DIAGRAM.headHalfWidth = 10) and run away from it, anchored at their START; the old centred label began inside the head at 1280 px. Pinned at the geometry level (>= 4 user units, >= 5 px at the 1.3x desktop scale, with a negative control showing the old placement violated it) and measured on the deployed page by scripts/qa/physicsProductionBrowserAudit.ts (labelClear >= 4 px, 390/1280 × light/dark).",
    "evidence": [
     {
      "file": "src/tests/physicsCardSemantics.test.ts",
      "describe": "the shared force diagram draws what each of its four concepts says"
+    },
+    {
+     "file": "src/tests/physicsCardSemantics.test.ts",
+     "describe": "a label naming a vertical arrow starts clear of that arrow-head and runs away from it"
     }
    ],
-   "remaining": "Forces are drawn from the body's edges, not its centre; the card draws the four standard forces only."
+   "remaining": "Forces are drawn from the body's edges, not its centre; the card draws the four standard forces only.",
+   "closedOn2": "2026-10-12 (weight-label spacing)"
   },
   "phys.mech.friction": {
    "initial": "SM-02: no physics assertion (shared force_diagram card)",
    "decision": "FIXED→PASS",
    "finding": "Same card: friction now points opposite the applied force, from the contact side, with the head away from the body; equal length to the applied force (static friction holding the body).",
-   "fix": "As free-body-diagram; 2026-10-09: the ground was raised 10 units because seating the body on it had pushed the weight arrow's head 5 units past the bottom of the drawing, where it was cut flat (found only by viewing the completed production render; pinned by the 'every arrow-head lies inside the drawing' test).",
+   "fix": "As free-body-diagram; 2026-10-09: the ground was raised 10 units because seating the body on it had pushed the weight arrow's head 5 units past the bottom of the drawing, where it was cut flat (found only by viewing the completed production render; pinned by the 'every arrow-head lies inside the drawing' test). || 2026-10-12: the 'Weight (W=mg)' and normal labels start a fixed gap (FORCE_DIAGRAM.labelGap = 6 units) to the right of the arrowhead's widest point (FORCE_DIAGRAM.headHalfWidth = 10) and run away from it, anchored at their START; the old centred label began inside the head at 1280 px. Pinned at the geometry level (>= 4 user units, >= 5 px at the 1.3x desktop scale, with a negative control showing the old placement violated it) and measured on the deployed page by scripts/qa/physicsProductionBrowserAudit.ts (labelClear >= 4 px, 390/1280 × light/dark).",
    "evidence": [
     {
      "file": "src/tests/physicsCardSemantics.test.ts",
      "describe": "the shared force diagram draws what each of its four concepts says"
+    },
+    {
+     "file": "src/tests/physicsCardSemantics.test.ts",
+     "describe": "a label naming a vertical arrow starts clear of that arrow-head and runs away from it"
     }
    ],
-   "remaining": "The card shows the static (balanced) case; kinetic friction < applied is not drawn."
+   "remaining": "The card shows the static (balanced) case; kinetic friction < applied is not drawn.",
+   "closedOn2": "2026-10-12 (weight-label spacing)"
   },
   "phys.mech.normal-force": {
    "initial": "SM-02: no physics assertion (shared force_diagram card)",
    "decision": "FIXED→PASS",
    "finding": "The body now rests on the surface, so the normal force has a contact it acts at; it is perpendicular to the surface, upward, and the same length as the weight (true for a level surface with no vertical applied force).",
-   "fix": "As free-body-diagram; 2026-10-09: the ground was raised 10 units because seating the body on it had pushed the weight arrow's head 5 units past the bottom of the drawing, where it was cut flat (found only by viewing the completed production render; pinned by the 'every arrow-head lies inside the drawing' test).",
+   "fix": "As free-body-diagram; 2026-10-09: the ground was raised 10 units because seating the body on it had pushed the weight arrow's head 5 units past the bottom of the drawing, where it was cut flat (found only by viewing the completed production render; pinned by the 'every arrow-head lies inside the drawing' test). || 2026-10-12: scope vs lesson objectives. The KG/EB for this concept teach that the normal force is perpendicular to the surface, equals the weight ONLY on a level surface with no vertical push, and is mg cos θ on a slope — so the level-only card contradicted half the lesson's own claim. The concept is now served by an interactive parametric scene 'normal_force' (normalForce.pure.ts + normalForce.ts host, registered through the existing variable layer): controls θ (0..60°, step 10) and a vertical push F (0..1 mg, step 0.25); N = (mg + F) cos θ; the arrow is perpendicular to the DRAWN surface at every angle, its length is the printed magnitude, the load is resolved into its cos θ / sin θ parts, and the Third-Law partner N′ is drawn on the surface (equal and opposite, a different body — not a second force on the block). The stage grid/axes are off (a tilted surface has no ground).",
    "evidence": [
     {
      "file": "src/tests/physicsCardSemantics.test.ts",
      "describe": "the shared force diagram draws what each of its four concepts says"
+    },
+    {
+     "file": "src/tests/normalForceInteractive.test.ts",
+     "describe": "the physics, re-derived from the DRAWN arrows at every control value"
+    },
+    {
+     "file": "src/tests/normalForceInteractive.test.ts",
+     "describe": "NEGATIVE CONTROLS: the checker fails a figure that agrees with the misconception"
     }
    ],
-   "remaining": "Only the level-surface case is drawn: that N ≠ mg on a slope or with a vertical push is not shown and must come from the tutor's text. In the lesson the card shows as many steps as the page's narration has lines, so a reply shorter than five lines never draws the normal arrow (pre-existing design, not a diagram defect). Production, 2026-10-09 (deployment dpl_EBE7hccxEBbr4daYxPCdTUQfMYhF, main 34def29): in a six-line reply on the real /learn page all five steps were drawn - the normal arrow leaves the top of the body, is perpendicular to the ground line (cos 0.00), points up (head above the body), same length as the weight - at 390 and 1280 px, dark and light, 4/4 PASS, screenshots viewed (production-browser-audit-closure.json, run Z1)."
+   "remaining": "Only the level-surface case is drawn: that N ≠ mg on a slope or with a vertical push is not shown and must come from the tutor's text. In the lesson the card shows as many steps as the page's narration has lines, so a reply shorter than five lines never draws the normal arrow (pre-existing design, not a diagram defect). Production, 2026-10-09 (deployment dpl_EBE7hccxEBbr4daYxPCdTUQfMYhF, main 34def29): in a six-line reply on the real /learn page all five steps were drawn - the normal arrow leaves the top of the body, is perpendicular to the ground line (cos 0.00), points up (head above the body), same length as the weight - at 390 and 1280 px, dark and light, 4/4 PASS, screenshots viewed (production-browser-audit-closure.json, run Z1). || 2026-10-12: SUPERSEDES 'Only the level-surface case is drawn' and the five-line-reply limitation above — the lesson page now serves the scene, whose stages are not tied to the reply's sentence count. Friction on the slope is intentionally NOT drawn (a different concept: phys.mech.friction). Production verification of the controls: PHYSICS_VISUAL_QUALITY_REPORT §19.",
+   "closedOn2": "2026-10-12 (owner mission: ZERO-OPEN-ITEM VISUAL QUALITY CLOSURE — the 'level surface only' scope limit is closed)"
   },
   "phys.mech.equilibrium": {
    "initial": "SM-02: no physics assertion (shared force_diagram card)",
    "decision": "FIXED→PASS",
    "finding": "The diagram was unbalanced (applied 45 vs friction 40). It now has four forces in two equal opposite pairs through the body — net force and net torque zero — which is what 'equilibrium is balanced forces, not no forces' needs.",
-   "fix": "As free-body-diagram; 2026-10-09: the ground was raised 10 units because seating the body on it had pushed the weight arrow's head 5 units past the bottom of the drawing, where it was cut flat (found only by viewing the completed production render; pinned by the 'every arrow-head lies inside the drawing' test).",
+   "fix": "As free-body-diagram; 2026-10-09: the ground was raised 10 units because seating the body on it had pushed the weight arrow's head 5 units past the bottom of the drawing, where it was cut flat (found only by viewing the completed production render; pinned by the 'every arrow-head lies inside the drawing' test). || 2026-10-12: the 'Weight (W=mg)' and normal labels start a fixed gap (FORCE_DIAGRAM.labelGap = 6 units) to the right of the arrowhead's widest point (FORCE_DIAGRAM.headHalfWidth = 10) and run away from it, anchored at their START; the old centred label began inside the head at 1280 px. Pinned at the geometry level (>= 4 user units, >= 5 px at the 1.3x desktop scale, with a negative control showing the old placement violated it) and measured on the deployed page by scripts/qa/physicsProductionBrowserAudit.ts (labelClear >= 4 px, 390/1280 × light/dark).",
    "evidence": [
     {
      "file": "src/tests/physicsCardSemantics.test.ts",
      "describe": "the shared force diagram draws what each of its four concepts says"
+    },
+    {
+     "file": "src/tests/physicsCardSemantics.test.ts",
+     "describe": "a label naming a vertical arrow starts clear of that arrow-head and runs away from it"
     }
    ],
-   "remaining": "Static equilibrium only."
+   "remaining": "Static equilibrium only.",
+   "closedOn2": "2026-10-12 (weight-label spacing)"
   },
   "phys.mech.conservation-of-momentum": {
    "initial": "SM-02: no physics assertion (3D collision card)",
@@ -141,7 +165,7 @@
    "decision": "FIXED→PASS",
    "closedOn": "2026-10-09 (the 2026-10-08 review left it REVIEW_REQUIRED for an owner decision; the lesson was then read and the decision made)",
    "finding": "The lesson explicitly teaches both relationships: the KG node (\"The power of a lens is the reciprocal of focal length in metres; combined lenses have powers that add algebraically\"), the Educational Brain's Core Understanding and Mental Models stages 2-3 (P = 1/f in dioptres; P_total = P₁ + P₂ for thin lenses in contact), and the blueprint's Level 2. The served figure was the single-lens ray diagram of phys.opt.lenses — correct, but it showed neither power nor a combination (scope.ts had demoted it for that reason). The concept's own claims, not an adjacent one, were missing.",
-   "fix": "New authored figure, lensPower.ts, served through CONCEPT_SCENES (no new engine or renderer): row 1, one converging lens, f = 0.50 m → P = 1/f = +2 D; row 2, a +5 D converging and a −2 D diverging lens in contact, the first lens alone (aid ray, F₁) and the pair together, P₁ + P₂ = +3 D, f = 0.33 m, 'powers add, focal lengths do not', and the thin-lens-in-contact limit. The numbers are the EB's own worked ones. The registry row lost its ray_optics generator (it would have given this concept the sliders of phys.opt.lenses) and the scope.ts demotion was removed.",
+   "fix": "New authored figure, lensPower.ts, served through CONCEPT_SCENES (no new engine or renderer): row 1, one converging lens, f = 0.50 m → P = 1/f = +2 D; row 2, a +5 D converging and a −2 D diverging lens in contact, the first lens alone (aid ray, F₁) and the pair together, P₁ + P₂ = +3 D, f = 0.33 m, 'powers add, focal lengths do not', and the thin-lens-in-contact limit. The numbers are the EB's own worked ones. The registry row lost its ray_optics generator (it would have given this concept the sliders of phys.opt.lenses) and the scope.ts demotion was removed. || 2026-10-12: the figure is now an interactive parametric scene (lensPower.pure.ts + lensPower.ts host, registered as parametric kind 'lens_power' through the EXISTING variable layer: PARAMETRIC_SCENES / conceptSceneParams CANONICAL_SCENES / resolveVisual; no new engine or renderer). Controls are the lesson's own claims: P of one lens (−4..+6 D, step 0.5), P₁ and P₂ of a pair (−4..+8 D), gap d (0..0.5 m). The canonical state is the 2026-10-09 figure (P = +2 D; +5 D with −2 D in contact = +3 D). Every printed power is re-derived from the DRAWN rays (slope change at the lens = −y·P/SCALE, SCALE = 6 units/m), so a label that disagrees with the geometry fails whichever of the two moved. P = 0 prints 'f = ∞' (a flat plate) and no division by zero happens anywhere; a diverging lens is negative and its rays diverge; the pair apart uses P = P₁ + P₂ − d·P₁P₂ and says that the sum rule does NOT hold apart. Thin lenses in contact is stated in every state.",
    "evidence": [
     {
      "file": "src/tests/physicsCardSemantics.test.ts",
@@ -150,9 +174,22 @@
     {
      "file": "src/tests/physicsCardSemantics.test.ts",
      "describe": "ray-optics figures print u, f and v that satisfy"
+    },
+    {
+     "file": "src/tests/lensPowerInteractive.test.ts",
+     "describe": "the printed power is the power the DRAWN rays have — across the whole control space"
+    },
+    {
+     "file": "src/tests/lensPowerInteractive.test.ts",
+     "describe": "zero and infinite focal length are handled, never divided by"
+    },
+    {
+     "file": "src/tests/lensPowerInteractive.test.ts",
+     "describe": "sign conventions: converging is positive, diverging negative, and the drawing agrees"
     }
    ],
-   "remaining": "Static figure (no sliders): the learner cannot vary f₁ and f₂. Only thin lenses in contact are drawn — the separated-lens correction (EB: P = P₁ + P₂ − d·P₁P₂) is named in the figure's limit but not drawn. The machine semantic PASS comes from its test-file-name heuristic; the real evidence is the slope-derived test cited here. Production, 2026-10-09: the real /learn page rendered the three-stage figure at 390 and 1280 px, dark and light, 4/4 PASS, screenshots viewed (production-browser-audit-closure.json, run X3)."
+   "remaining": "Static figure (no sliders): the learner cannot vary f₁ and f₂. Only thin lenses in contact are drawn — the separated-lens correction (EB: P = P₁ + P₂ − d·P₁P₂) is named in the figure's limit but not drawn. The machine semantic PASS comes from its test-file-name heuristic; the real evidence is the slope-derived test cited here. Production, 2026-10-09: the real /learn page rendered the three-stage figure at 390 and 1280 px, dark and light, 4/4 PASS, screenshots viewed (production-browser-audit-closure.json, run X3). || 2026-10-12: SUPERSEDES 'Static figure (no sliders)' above — the figure is interactive (4 bounded controls, every state geometry-checked, no division by zero). Not drawn, by choice and stated in the figure: thick lenses and lens-to-lens aberrations (thin-lens model only). Production verification of the interaction on the deployed /learn page: see docs/qa/PHYSICS_VISUAL_QUALITY_REPORT.md §19.",
+   "closedOn2": "2026-10-12 (owner mission: ZERO-OPEN-ITEM VISUAL QUALITY CLOSURE — the 2026-10-09 'static figure' limit is closed)"
   },
   "phys.mod.wave-particle-duality": {
    "initial": "SM-02: no physics assertion (double_slit card)",

@@ -102,7 +102,10 @@ const CONCEPT_VISUALS: Record<string, VisualEntry> = {
   'phys.mech.force':                  { primary: 'force_diagram', all: ['force_diagram'] },
   'phys.mech.free-body-diagram':      { primary: 'force_diagram', all: ['force_diagram'] },
   'phys.mech.tension':                { primary: 'force_diagram', all: ['force_diagram'] },
-  'phys.mech.normal-force':           { primary: 'force_diagram', all: ['force_diagram'] },
+  // 2026-10-12: its own interactive figure. The shared force-diagram CARD (level surface only) cannot show the lesson's
+  // objectives — N = mg cos θ on a slope, N > mg under an extra push, N is not the weight's Third-Law partner —
+  // so for this concept it agreed with the misconception the lesson exists to correct (EB MC-NORMAL-EQUALS-WEIGHT).
+  'phys.mech.normal-force':           { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'normal_force' },
   'phys.mech.inclined-plane':         { primary: 'force_diagram', all: ['force_diagram'] },
   'phys.mech.equilibrium':            { primary: 'force_diagram', all: ['force_diagram'] },
   'phys.mech.conservative-forces':    { primary: 'force_diagram', all: ['force_diagram'] },
@@ -229,14 +232,11 @@ const CONCEPT_VISUALS: Record<string, VisualEntry> = {
   'phys.opt.refraction':              { primary: 'force_diagram', all: ['force_diagram'] },
   'phys.opt.mirrors':                 { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'ray_optics' },
   'phys.opt.lenses':                  { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'ray_optics' },
-  // Lens power (1/f) is the SAME physical setup the ray_optics generator
-  // already models (a single thin lens, object/image/focal-length) — power
-  // is just 1/f of that identical lens, not a different phenomenon. Reuses
-  // the lenses mapping rather than inventing a second entry for one formula.
-  // No sceneGenerator on purpose (2026-10-09): a ray_optics row would give this concept the single-lens
-  // sliders of phys.opt.lenses. Its own figure — P = 1/f and P = P1 + P2 — is authored in CONCEPT_SCENES
-  // (lensPower.ts), which is consulted before the card, exactly as for phys.meas.vector-products.
-  'phys.opt.lens-power':              { primary: 'force_diagram', all: ['force_diagram'] },
+  // Lens power: P = 1/f in dioptres, and P = P1 + P2 for thin lenses IN CONTACT — the two relationships the KG node,
+  // the EB entry and the blueprint teach. It is NOT the single-lens `ray_optics` figure of phys.opt.lenses (that shows
+  // neither); its own interactive generator moves the three powers and the gap between the lenses, and re-derives every
+  // ray and printed number from them (lensPower.pure.ts). 2026-10-09 it was a static authored figure; 2026-10-12 it is this.
+  'phys.opt.lens-power':              { primary: 'force_diagram', all: ['force_diagram'], sceneGenerator: 'lens_power' },
   // Young's Double-Slit Experiment IS the double_slit visual — exact title
   // match, and the visual's own description ("particles... build up a
   // wave-like interference pattern") is this experiment. Deliberately NOT

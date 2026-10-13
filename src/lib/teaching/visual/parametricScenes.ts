@@ -53,6 +53,8 @@ import { buildCoordinateGeometryLineScene, validateCoordinateGeometryParams } fr
 import { buildHeightsAndDistancesScene, validateHeightsAndDistancesParams } from '@/lib/teaching/sceneGenerators/heightsAndDistances.pure'
 import { buildKinematicsGraphScene, validateKinematicsParams } from '@/lib/teaching/sceneGenerators/kinematicsGraphs.pure'
 import { buildRayOpticsScene, validateRayOpticsParams } from '@/lib/teaching/sceneGenerators/rayOptics.pure'
+import { LENS_POWER_DEFAULTS, LENS_POWER_LIMITS, buildLensPowerScene, validateLensPowerParams } from '@/lib/teaching/sceneGenerators/lensPower.pure'
+import { NORMAL_FORCE_DEFAULTS, NORMAL_FORCE_LIMITS, buildNormalForceScene, validateNormalForceParams } from '@/lib/teaching/sceneGenerators/normalForce.pure'
 import { buildMoleculeScene, lookupMolecule } from '@/lib/teaching/sceneGenerators/moleculeGeometry.pure'
 import { buildLatticeScene, lookupLattice } from '@/lib/teaching/sceneGenerators/crystalLattice.pure'
 import { buildElectronShellScene, lookupElement } from '@/lib/teaching/sceneGenerators/electronShells.pure'
@@ -404,6 +406,26 @@ export const PARAMETRIC_SCENES: Readonly<Record<string, ParametricScene>> = {
       { key: 'duration', label: 'Time', kind: 'number', unit: 's', min: 1, max: 12, step: 1, effect: 'displacement is the AREA under the velocity graph' },
     ],
     build: guarded(validateKinematicsParams, buildKinematicsGraphScene, { initialPosition: 0 }),
+  },
+
+  normal_force: {
+    defaults: { ...NORMAL_FORCE_DEFAULTS },
+    variables: [
+      { key: 'angleDeg', label: 'θ', kind: 'number', unit: '°', ...NORMAL_FORCE_LIMITS.angleDeg, step: 10, effect: 'N = mg cos θ: the more the surface tilts, the less it must push — N falls below the weight' },
+      { key: 'push', label: 'F (down)', kind: 'number', unit: 'mg', ...NORMAL_FORCE_LIMITS.push, step: 0.25, effect: 'an extra downward push adds to the load on the surface, so N grows: N = (mg + F) cos θ' },
+    ],
+    build: guarded(validateNormalForceParams, buildNormalForceScene),
+  },
+
+  lens_power: {
+    defaults: { ...LENS_POWER_DEFAULTS },
+    variables: [
+      { key: 'singlePower', label: 'P (one lens)', kind: 'number', unit: 'D', ...LENS_POWER_LIMITS.singlePower, step: 0.5, effect: 'P = 1/f: more power means a shorter focal length; a negative power is a diverging lens' },
+      { key: 'firstPower', label: 'P₁', kind: 'number', unit: 'D', ...LENS_POWER_LIMITS.firstPower, step: 0.5, effect: 'the first lens of the pair: converging (+) or diverging (−)' },
+      { key: 'secondPower', label: 'P₂', kind: 'number', unit: 'D', ...LENS_POWER_LIMITS.secondPower, step: 0.5, effect: 'the second lens: in contact the pair acts like ONE lens of power P₁ + P₂' },
+      { key: 'gap', label: 'Gap d', kind: 'number', unit: 'm', ...LENS_POWER_LIMITS.gap, step: 0.05, effect: 'powers add only at d = 0, lenses in contact; apart, P = P₁ + P₂ − d·P₁P₂' },
+    ],
+    build: guarded(validateLensPowerParams, buildLensPowerScene),
   },
 
   ray_optics: {

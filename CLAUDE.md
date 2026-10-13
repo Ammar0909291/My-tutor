@@ -164,6 +164,10 @@ never into this file. This file only changes when a LIVE, currently-binding rule
   plausible-looking refactor would silently undo (e.g. distinguishing "never checked" from
   "checked, found nothing" in the hydration guard; the two-COUNT cheap bootstrap probe instead of
   a full-table prefetch).
+- **Per-turn egress cost (measured 2026-10-12, EGRESS-7):** ~36 KB/turn for a light account, 65–90 KB/turn for a heavy one
+  (150 topic rows, 650 mistakes). A synthetic campaign of tens of thousands of turns against production spent the cycle's quota in
+  three days (10-05→07); size any such run against the remaining quota first. Generated-asset capture reads two lineage rows, never
+  the whole lineage (pinned by `captureLineageEgress.test.ts`).
 - The bootstrap completeness guard bans `assetIdentity.count(` outright as a proxy for "never
   aggregate over the whole table" — any new completeness check must be corpus-scoped and
   intersected against an explicit expected-slug list, never a bare `count()`.

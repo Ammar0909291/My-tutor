@@ -5372,6 +5372,9 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
 
                 return (
                   <div key={msg.id}
+                    // QA/audit hook, no styling: ties a figure to the message it belongs to (the production audit
+                    // measures the figure of the reply it asked for — scripts/qa/physicsVisual/figureAssociation.ts).
+                    data-message-id={msg.id} data-message-role={isUser ? 'user' : 'assistant'}
                     // LEFT-ANCHORED compact width (fix for the regression this
                     // superseded): the previous attempt capped this row to
                     // `maxWidth: 760, margin: '0 auto'`, which CENTERS the row

@@ -242,12 +242,16 @@ export async function captureGeneratedProbe(input: CaptureProbeInput): Promise<C
     const canonicalSlug = `${input.conceptId}:${probeKind}:${input.language}`
     const contentHash = hashContent(input.stem)
 
-    const existingLineage = await prisma.assetIdentity.findMany({
-      where: { canonicalSlug, family: AssetFamily.PROBE },
-      include: { probeAsset: true },
-    })
-    const lineageRows: LineageAsset[] = existingLineage
-      .filter((a) => a.probeAsset)
+    // EGRESS-7: the exact-duplicate row and the highest version are all the decision reads — see
+    // captureGeneratedExplanation. Rows with no probe child were never part of the lineage.
+    const lineageSelect = { assetId: true, contentHash: true, version: true, probeAsset: { select: { stem: true } } } as const
+    const hasChild = { probeAsset: { isNot: null } } as const
+    const [exactRow, latestRow] = await Promise.all([
+      prisma.assetIdentity.findFirst({ where: { canonicalSlug, family: AssetFamily.PROBE, contentHash, ...hasChild }, select: lineageSelect }),
+      prisma.assetIdentity.findFirst({ where: { canonicalSlug, family: AssetFamily.PROBE, ...hasChild }, orderBy: { version: 'desc' }, select: lineageSelect }),
+    ])
+    const lineageRows: LineageAsset[] = [exactRow, latestRow]
+      .filter((a, i, all): a is NonNullable<typeof a> => !!a && all.findIndex((b) => b?.assetId === a.assetId) === i)
       .map((a) => ({ assetId: a.assetId, contentHash: a.contentHash, content: a.probeAsset!.stem, version: a.version }))
 
     const decision = decideCaptureAction(input.stem, contentHash, lineageRows)
