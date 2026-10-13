@@ -30,6 +30,7 @@ boundary `trace:false`, panel length, harness settle-wait) · `06b440e` docs · 
   not touched here; Groq (primary) served every audited turn.
 
 ## Final verification (2026-10-13, last verified tree `6e69667`)
+**STATUS: BIOLOGY VISUALS — CLOSED WITH DOCUMENTED LIMITATIONS (2026-10-13).** One workstream, one status: no individual figure carries a separate open status. Reopen only for a confirmed new defect or an explicit owner instruction. Limitations (each stated below): production-browser coverage is a sample, not all 199; no human educator has reviewed any figure; the `mycorrhizae` card height is an observation, not a defect; the Gemini / Resend / `CredentialsSignin` failures are outside this workstream.
 Re-checked rather than assumed, because `main` moved twice (Mathematics batches 40-41, Physics visual work, a Chemistry visual closure; edits to shared render files).
 Details and the evidence table: `docs/qa/biology-visual-audit/README.md` ("Final verification"); persisted evidence: `docs/qa/biology-visual-audit/evidence/`.
 * The alias now serves `dpl_2qXa8KT6TL49AFbwnqicesn57jWa` (`23c52bf`), not the deployment named in the first closure report.
