@@ -95,6 +95,21 @@ REVIEW_REQUIRED). CI now re-checks the record: `chemistryVisualAudit.test.ts`, `
   regenerate the manifest before re-rendering (a stale manifest renders stale scenes).
 * Long vitest filters (`src/tests/visual src/tests/chem …`) are substring filters over all files: ~4 minutes, 119 files.
 
+## Production verification follow-up (2026-10-13) — what the deployed run found that the local audit could not
+Deployed `5465509` (READY, `my-tutor-flame.vercel.app`); the browser harness ran 35 concepts × 390/1280 px × both themes, with disposable accounts (all deleted). Tier 0/1
+fingerprints on the wire equal the checkout's for every concept measured (20, 0 mismatches). Four findings, recorded in QA doc §12.3/§12.4/§13:
+* **Periodic Trends drew only text** (`chem.period.modern-periodic-law`, `chem.period.periodic-properties`): ST-03 fired in production, and the *local* render had called it PASS in 28 states because
+  `render-measure.mjs` does not measure canvas ink. Fixed (each atom is a sphere to the scale of its calculated radius) and gated statically (`chemistryClosureGates.test.ts`: no Chemistry scene may hold only
+  labels). 31 instances re-rendered, 148 PASS.
+* **Tier-2 approved figures are not restored after a reload** (code reading: the restore paths read Tier 0/1 and the Tier-3 cache, never the approved `visual_assets` row). Not changed — session persistence; owner decision.
+* **Retired concepts regenerate figures** (3 of 6 sampled). A content fingerprint cannot stop a new generation. Owner decision: author the 14 or add a pre-generation withhold.
+* **A header label can sit on its sphere** (colloids). Not machine-detectable (WebGL pixels). A larger gap was tried, did not help and was reverted: the cause is framing headroom (Biology-only `fitToCanvas`).
+
+## Rules learned the hard way (production follow-up)
+* **A local audit is a model of production, not production.** Run the deployed harness before calling a visual set closed; it found a defect in the one figure family whose machine verdict was a clean PASS.
+* **A check you did not run is not a PASS.** The local render has no ink check; the new static gate states the property directly instead of waiting for a browser to see it.
+* **Do not "fix" a layout symptom by turning the nearest constant.** The gap change moved nothing and made the expanded view overflow; measure what moves before keeping it.
+
 ## Not done (see QA doc §12.4)
 33 MINOR Tier-3 figures, the two Tier-2 flows, the chelate-effect chart's data and the R1 production row await owner decisions; the 14 retired-as-wrong concepts
 have no figure; production verification is recorded in QA doc §13.

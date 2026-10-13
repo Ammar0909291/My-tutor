@@ -33,6 +33,8 @@ import { LATTICE_STAGES } from '@/components/school/visuals/CrystalLattice3D'
 import { OUTER as TETRAHEDRAL_ATOMS } from '@/components/school/visuals/MolecularShapes3D'
 import { resolveVisual } from '@/lib/teaching/visual/resolveVisual'
 import { buildCanonicalScene } from '@/lib/teaching/visual/conceptSceneParams'
+import { getKnowledgeGraph, getAllNodes } from '@/lib/curriculum/knowledgeGraph'
+import { ELEMENTS as TREND_ELEMENTS, buildPeriodicTrendScene } from '@/lib/teaching/sceneGenerators/periodicTrends.pure'
 
 const graph = (over: Record<string, unknown>) => ({ type: 'graph', title: 't', xLabel: 'Volume (L)', yLabel: 'Pressure (atm)', equation: '10 / x', ...over })
 const codes = (r: { findings: Array<{ code: string }> }) => r.findings.map((f) => f.code)
@@ -291,5 +293,34 @@ describe('R12 follow-up — a cell is named by what it is, not by how many beake
   it('divided galvanic cells stay "divided galvanic" and the electrolytic cells stay "electrolytic"', () => {
     expect(goal('chem.elect.galvanic-cell')).toContain('a divided galvanic cell')
     for (const id of ['chem.elect.electrolysis', 'chem.elect.industrial']) expect(goal(id), id).toContain('an electrolytic cell')
+  })
+})
+
+describe('production audit follow-up — no chemistry scene is text only', () => {
+  // The production browser audit (ST-03) found `chem.period.*` serving four coloured labels in an empty panel. The LOCAL render does not
+  // measure canvas ink, so the blind spot is closed here, statically: every scene a Chemistry concept serves holds at least one drawn object.
+  const drawn = (scene: SceneSpec) => scene.steps.flatMap((st) => st.objects).filter((o) => o.type !== 'label')
+
+  it('every scene figure a chemistry concept resolves to draws something besides labels', () => {
+    const textOnly: string[] = []
+    for (const n of getAllNodes(getKnowledgeGraph('chemistry')!)) {
+      const d = resolveVisual({ message: '', lessonConceptId: n.id, subject: 'chemistry' })
+      const p = d.graphical ? d.payload : null
+      if (p && p.renderer === 'scene' && drawn(p.sceneSpec).length === 0) textOnly.push(n.id)
+    }
+    expect(textOnly).toEqual([])
+  })
+
+  it('periodic trends draw each atom as a sphere to the same scale as its calculated radius, for every selectable pair', () => {
+    const scene = buildPeriodicTrendScene({ element1Symbol: 'Na', element2Symbol: 'Cl' })
+    const atoms = scene.steps[0].objects.filter((o) => o.type === 'node')
+    expect(atoms.map((a) => a.text)).toEqual(['190 pm', '79 pm'])
+    expect(atoms[0].radius! / atoms[1].radius!).toBeCloseTo(190 / 79, 1)
+    for (const a of TREND_ELEMENTS) for (const b of TREND_ELEMENTS) {
+      if (a.symbol === b.symbol) continue
+      const sc = buildPeriodicTrendScene({ element1Symbol: a.symbol, element2Symbol: b.symbol })
+      expect(drawn(sc).length, `${a.symbol} vs ${b.symbol}`).toBe(2)
+      expect(validateSceneSpec(sc).valid, `${a.symbol} vs ${b.symbol}`).toBe(true)
+    }
   })
 })

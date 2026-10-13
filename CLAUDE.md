@@ -220,6 +220,11 @@ npx tsc --noEmit       # pre-existing stripe/subscription errors are expected on
   at 390/1280 px, both themes, every control state: 990 PASS · 96 REVIEW · 0 FAIL. `chemistryVisualAudit.test.ts` FAILS, naming the concepts, when a served chemistry figure changes
   without a re-audit; `chemistrySemanticReview.test.ts` binds each REVIEW figure's human decision to its fingerprint. Procedure and owner decisions:
   `docs/qa/CHEMISTRY_VISUAL_QUALITY_AUDIT.md` §12, `docs/history/chemistry-visual-quality-audit-2026-10-08.md`.
+- Figure legibility + production figure audits (2026-10-13, `docs/qa/ZERO_OPEN_ITEM_VISUAL_CLOSURE_2026-10-13.md`): `useFigureLegibility` (the shared 2D contrast/type-floor
+  pass used by `VisualCard` and the `visuals/*Renderer`s) reruns when a figure becomes visible — never put a once-at-mount measurement back. A production audit must tie
+  a figure to the reply it asked for (`scripts/qa/physicsVisual/figureAssociation.ts`, `data-message-id` markers; it throws `WRONG_FIGURE`, never "first/last figure"), and a
+  render on a COLD dev server (unstyled page) is not evidence. Drivers: `scripts/qa/productionVisualClosure.ts` (multi-card legibility, slider interaction) and
+  `scripts/qa/physicsProductionBrowserAudit.ts --subject <s> --concepts …`; disposable accounts only, deleted with re-login verified.
 - Mathematics: `npx tsx scripts/math/state.ts`
 - Physics: `npx tsx scripts/physics/state.ts`
 - Asset-contract readiness (all subjects, incl. KG-registered-but-unauthored ones):
