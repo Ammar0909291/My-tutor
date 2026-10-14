@@ -5,6 +5,7 @@
  * Moved verbatim out of LessonScreen.tsx (no behaviour change) so that the message view and the tests share ONE
  * implementation. LessonScreen still imports `extractDisplayMath` and `renderInline` for LessonDocument.
  */
+import { Fragment } from 'react'
 import katex from 'katex'
 
 // ─── MessageContent ───────────────────────────────────────────────────────────
@@ -76,6 +77,16 @@ export function renderInline(text: string, key: string, codeStyle: string, mathB
   return parts.length === 0 ? text : parts
 }
 
+/**
+ * A model sometimes writes a whole list on ONE line ("- In the s-block … +2. - When you enter the p-block …"; chemistry QA 2026-10-14, "Modern Periodic Law"), and
+ * this renderer is line-based, so the second item showed inside the first bullet as a stray " - ". Split a bullet's text at a list marker that can only be one: a
+ * sentence end, whitespace, a dash / bullet, whitespace, then a capital letter. A dash inside a sentence ("Group 1 - the alkali metals") has no sentence end before
+ * it and is left alone. Display only: the stored message, the narration text and the grading never see this.
+ */
+export function splitCollapsedBullets(bulletText: string): string[] {
+  return bulletText.split(/(?<=[.!?])\s+[-•]\s+(?=\p{Lu})/u).map((t) => t.trim()).filter((t) => t.length > 0)
+}
+
 export function MessageContent({ text, isUser }: { text: string; isUser: boolean }) {
   const codeStyle = `px-1.5 py-0.5 rounded text-[0.82em] font-mono ${isUser ? 'bg-white/20' : 'bg-black/30'} ${isUser ? '' : 'text-[var(--coral)]'}`
   const { text: textWithPlaceholders, blocks: mathBlocks } = extractDisplayMath(text)
@@ -86,10 +97,14 @@ export function MessageContent({ text, isUser }: { text: string; isUser: boolean
         if (line.match(/^#+\s/)) return <p key={i} className="font-bold" style={{ color: 'var(--text-primary)' }}>{renderInline(line.replace(/^#+\s/, ''), `${i}`, codeStyle, mathBlocks)}</p>
         const bullet = line.match(/^[-•*]\s+(.*)$/)
         if (bullet) return (
-          <div key={i} className="flex gap-2">
-            <span className="mt-0.5 shrink-0 text-xs" style={{ color: 'var(--coral)' }}>▸</span>
-            <span>{renderInline(bullet[1], `${i}`, codeStyle, mathBlocks)}</span>
-          </div>
+          <Fragment key={i}>
+            {splitCollapsedBullets(bullet[1]).map((item, j) => (
+              <div key={j} className="flex gap-2">
+                <span className="mt-0.5 shrink-0 text-xs" style={{ color: 'var(--coral)' }}>▸</span>
+                <span>{renderInline(item, `${i}-${j}`, codeStyle, mathBlocks)}</span>
+              </div>
+            ))}
+          </Fragment>
         )
         const num = line.match(/^(\d+)\.\s+(.*)$/)
         if (num) return (
