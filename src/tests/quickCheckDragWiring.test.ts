@@ -57,7 +57,11 @@ describe('Quick Check panel — draggable via its header, and nothing else', () 
   })
 
   it('the panel position is a CSS transform layered on top of the existing centering translate — the class/CSS layout itself is untouched', () => {
-    expect(PANEL).toContain('transform: `translate(calc(-50% + ${quickCheckDragOffset.x}px), ${quickCheckDragOffset.y}px)`')
+    // 2026-10-13: the panel is now centred on the Y axis too (owner request), so the expanded transform carries a
+    // `-50%` Y centring beside the drag offset; the minimized bar keeps the old across-only centring. Restated for
+    // the new shape, not dropped: the drag offset is still layered onto a centring translate in both modes.
+    expect(PANEL).toContain('? `translate(calc(-50% + ${quickCheckDragOffset.x}px), ${quickCheckDragOffset.y}px)`')
+    expect(PANEL).toContain(': `translate(calc(-50% + ${quickCheckDragOffset.x}px), calc(-50% + ${quickCheckDragOffset.y}px))`')
     // Still uses the SAME className/CSS module class as before — no second
     // floating-window system, no portal, no new overlay layer.
     expect(PANEL).toContain('className={quickCheckMode === \'minimized\' ? `${styles.quickCheckFloating} ${styles.quickCheckMinimized}` : styles.quickCheckFloating}')

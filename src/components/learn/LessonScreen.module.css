@@ -247,31 +247,41 @@
  * Max instead of appearing as an ordinary chat message. Positioned relative
  * to the chat Panel's own content wrapper (already `position: relative`),
  * so this needs no portal and is not a browser popup — an in-app overlay
- * only. Anchored above the composer, centred, with a comfortable reading
- * width; on narrow screens it widens to most of the viewport instead of
- * staying pinned to a desktop-sized card, and drops closer to the bottom
- * edge so it never fights the keyboard for space above it. */
+ * only.
+ *
+ * CENTRED, AND 1cm LARGER (owner request, 2026-10-13). It used to sit low,
+ * anchored 88px above the composer, 440px wide. It now opens in the middle of
+ * the Tutor Max window — `top: 50%`, with the matching `-50%` Y translate
+ * layered in the inline transform in LessonScreen.tsx, which also carries the
+ * drag offset — and is 1cm larger: 1cm wider (a CSS length, like the 2cm/3cm
+ * canvas insets below) and 1cm taller (0.5cm of extra padding top and bottom,
+ * set inline). On a phone the width is already the whole viewport minus a
+ * gutter, so only the height grows there.
+ *
+ * Minimized is the exception (see .quickCheckMinimized): a header bar parked in
+ * the middle of the screen would cover the very chat that minimizing exists to
+ * uncover, so it keeps its old place above the composer. */
 .quickCheckFloating {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  bottom: 88px;
-  width: min(440px, calc(100% - 24px));
-  max-height: min(56%, 420px);
-  overflow-y: auto;
-  z-index: 30;
-  border-radius: 16px;
+  top: 50%;
+  bottom: auto;
   /* A thin accent cap along the top edge — the "pinned note" identity,
      distinguishing a gradeable question from an ordinary card at a glance
      without changing its shape or position. */
   border-top: 3px solid var(--coral) !important;
+  width: min(calc(440px + 1cm), calc(100% - 24px));
+  max-height: min(calc(100% - 24px), calc(420px + 1cm));
+  overflow-y: auto;
+  z-index: 30;
+  border-radius: 16px;
 }
 
 @media (max-width: 640px) {
   .quickCheckFloating {
-    bottom: 78px;
     width: calc(100% - 16px);
-    max-height: 62%;
+    max-height: min(calc(100% - 16px), calc(62% + 1cm));
   }
 }
 
@@ -338,6 +348,10 @@
   max-height: none;
   overflow: visible;
   padding-bottom: 10px !important;
+  /* Back to the low, above-the-composer place it always had (the inline
+     transform drops its Y centring in this mode). */
+  top: auto;
+  bottom: 88px;
 }
 .quickCheckReopen {
   position: absolute;
@@ -361,4 +375,5 @@
 @media (max-width: 640px) {
   .quickCheckControl { width: 34px; height: 34px; }
   .quickCheckReopen { bottom: 78px; }
+  .quickCheckMinimized { bottom: 78px; }
 }

@@ -47,6 +47,8 @@ import { getTabId } from '@/lib/teaching/tabIdentity'
 import { validateSceneSpec } from '@/lib/teaching/sceneSpecValidator'
 import { parseVisualSpec, type VisualSpec } from '@/lib/visuals/visualSpec'
 import { applyRestoredVisuals } from '@/lib/teaching/visual/messageMerge'
+import { InlineMcqCard } from '@/components/learn/InlineMcqCard'
+import { validTranscriptMcq, withRestoredMcq, type TranscriptMcq } from '@/lib/learn/mcqTranscript'
 import { createRevealController } from '@/lib/teaching/progressiveReveal'
 import type { InlinePracticeQuestion } from '@/lib/school/practice/generateInlinePractice'
 import { parseLessonCompletionTag, parseMathCodeAnswerTags, parseAssessmentResultTag } from '@/lib/school/tutoring/parseAssistantTags'
@@ -741,6 +743,10 @@ function HintCard({ hint }: { hint: string }) {
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 export type ChatMsg = { id: string; role: 'user'|'assistant'; content: string; ts: number; streaming?: boolean; provider?: string; llmCallCount?: number; visual?: string; visualSpec?: VisualSpec; sceneSpec?: SceneSpec; dynamicVisualizationCode?: string; inlinePractice?: InlinePracticeQuestion; hint?: string;
+  // The multiple-choice question THIS tutor message asked, kept on the message so the transcript shows it above the
+  // learner's answer (live: attached when the turn lands; restored: recovered from the stored text — see
+  // src/lib/learn/mcqTranscript.ts). Read-only record: answering stays with the Quick Check panel.
+  mcq?: TranscriptMcq;
   // Progressive reveal (client-side fallback — see progressiveReveal.ts):
   // how many characters of the STRIPPED content are currently shown. Present
   // only while `streaming` is true for a landed-but-still-revealing turn;
@@ -1215,6 +1221,17 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   const quickCheckPanelRef = useRef<HTMLDivElement | null>(null)
   const quickCheckDragRef = useRef<{ pointerId: number; startX: number; startY: number; startOffset: DragPoint; naturalRect: { left: number; top: number; width: number; height: number } } | null>(null)
   useEffect(() => { setQuickCheckDragOffset(ZERO_DRAG_OFFSET) }, [activeMcq?.askedAt])
+  // A multiple-choice question belongs to the lesson that asked it. `LessonScreen` is keyed by subject, not lesson, so
+  // its MCQ state outlives a lesson switch unless it is cleared there: without this, lesson A's pending question and
+  // its "Tutor history" entries would still be on screen in lesson B. Called wherever the transcript is emptied for a
+  // different lesson. UI state only — nothing here touches the server's pending probe or any grading. The Quick Check
+  // window mode needs no reset: it is keyed on the question's `askedAt`, so a stale mode can never apply to a new one.
+  const clearLessonMcqState = useCallback(() => {
+    setActiveMcq(null)
+    setMcqHistoryLog([])
+    setMcqHistoryOpen(false)
+    pendingMcqMasteryBaselineRef.current = null
+  }, [])
   // Drag handle lives on the header row only — the options list and the
   // window-control buttons never get a pointerdown listener at all, so
   // "answer areas must never be draggable" and "controls must stay
@@ -1456,7 +1473,9 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         if (!hist?.success) return
         const raw = hist?.data?.messages
         if (!Array.isArray(raw) || raw.length === 0) return
-        const restored: ChatMsg[] = (raw as Array<{ id: string; role: string; content: string; createdAt: string; provider?: string | null; llmCallCount?: number | null }>)
+        // A question the tutor asked is stored as a text block at the end of its row; withRestoredMcq lifts it back out
+        // so a reload shows the same question card as a live turn (src/lib/learn/mcqTranscript.ts).
+        const restored: ChatMsg[] = withRestoredMcq((raw as Array<{ id: string; role: string; content: string; createdAt: string; provider?: string | null; llmCallCount?: number | null }>)
           .filter((m) => !(m.role === 'USER' && isInternalOpeningPrompt(m.content)))
           .map((m) => ({
             id: m.id,
@@ -1464,7 +1483,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
             content: m.content,
             ts: new Date(m.createdAt).getTime(),
             provider: m.provider ?? undefined, llmCallCount: m.llmCallCount ?? undefined,
-          }))
+          })))
         if (cancelled) return
         // All rows were internal bootstrap prompts (e.g. the only prior turn
         // failed before the tutor replied) → treat as no history at all, so
@@ -2191,16 +2210,16 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       // server-side against the stored probe (see mcqForClient). The client
       // needs only the question and options to render and to submit the chosen
       // option TEXT, so it must not require a key it must never receive.
-      if (
-        rawMcq && typeof rawMcq.question === 'string' && rawMcq.question.trim() !== '' &&
-        Array.isArray(rawMcq.options) && rawMcq.options.length >= 2 && rawMcq.options.length <= 4 &&
-        rawMcq.options.every((o) => typeof o === 'string' && o.trim() !== '')
-      ) {
+      // The SAME rule as before, now one shared function (mcqTranscript.ts) because the transcript needs the validated
+      // question too: it is attached to the tutor message below so the question is in the conversation, not only in
+      // the Quick Check panel.
+      const servedMcq = validTranscriptMcq(rawMcq)
+      if (servedMcq) {
         setActiveMcq({
-          question: rawMcq.question,
-          options: rawMcq.options as string[],
+          question: servedMcq.question,
+          options: servedMcq.options,
           askedAt: Date.now(),
-          renderId: typeof rawMcq.renderId === 'string' ? rawMcq.renderId : null,
+          renderId: typeof rawMcq?.renderId === 'string' ? rawMcq.renderId : null,
         })
       } else {
         setActiveMcq(null)
@@ -2397,7 +2416,11 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       // wait for the reply exactly as before; nothing new to widen for them.
       setMessages((p) => {
         if (typeof data.learnerLevel === 'string') setLearnerLevel(data.learnerLevel)
-      const landed = { content: full, streaming: true as const, revealedLength: 0, provider, llmCallCount: data.llmCallCount, visual: responseVisual, visualSpec: responseVisualSpec, sceneSpec: responseSceneSpec, dynamicVisualizationCode: responseDynamicVisualizationCode, inlinePractice: responseInlinePractice, hint: responseHint }
+      const landed = { content: full, streaming: true as const, revealedLength: 0, provider, llmCallCount: data.llmCallCount, visual: responseVisual, visualSpec: responseVisualSpec, sceneSpec: responseSceneSpec, dynamicVisualizationCode: responseDynamicVisualizationCode, inlinePractice: responseInlinePractice, hint: responseHint,
+        // The question this turn asked, kept ON the tutor message so the transcript shows it above the learner's answer.
+        // A completed lesson clears the Quick Check panel (`setActiveMcq(null)` above), so there is nothing left to
+        // answer and no question is shown for it either.
+        mcq: data.lessonComplete?.complete === true ? undefined : (servedMcq ?? undefined) }
         return p.some((m) => m.id === aid)
           ? p.map((m) => m.id === aid ? { ...m, ...landed } : m)
           : [...p, { id: aid, role: 'assistant' as const, ts: Date.now(), ...landed }]
@@ -2661,6 +2684,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     const next = plan.next
     const initMode = lessonInitModeFor(plan.nextEntryMode)
     setMessages([])
+    clearLessonMcqState()
 
     // P0 (lesson continuation): automatic progression must not wait for a click.
     // Previous fixes corrected WHICH lesson was staged and in what mode — that
@@ -2678,7 +2702,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     setLessonStarted(true)
     initializedRef.current = true
     await callLessonInit(sessionId, initMode, next)
-  }, [handleLessonComplete, curriculumLessons, topicProgressMap, sessionId, callLessonInit])
+  }, [handleLessonComplete, curriculumLessons, topicProgressMap, sessionId, callLessonInit, clearLessonMcqState])
 
   completeAndAdvanceRef.current = completeAndAdvance
 
@@ -2767,10 +2791,11 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
    */
   const resetLessonContext = useCallback(() => {
     setMessages([])
+    clearLessonMcqState()
     setRevisionTopic(null)
     setAssessmentLoading(false)
     initializedRef.current = false
-  }, [])
+  }, [clearLessonMcqState])
 
   // Show a confirmation dialog before switching to any lesson (P0 UX).
   // Free navigation: the Lesson Navigation Panel's Previous/Next buttons and
@@ -2804,6 +2829,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     if (!sessionId) return
     const isRestart = target.order === curriculumProgress.currentLesson
     setMessages([])
+    clearLessonMcqState()
     setLessonStarted(false)
     initializedRef.current = false
     setPendingLesson(target)
@@ -2848,7 +2874,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       const entryMode = decideLessonEntryMode({ lesson: target, progress: curriculumProgress, topicProgressMap })
       await callLessonInit(sessionId, lessonInitModeFor(entryMode), target)
     }
-  }, [sessionId, curriculumProgress, curriculumLessons, topicProgressMap, callLessonInit, startRevision, markLessonSkipped, resetLessonContext])
+  }, [sessionId, curriculumProgress, curriculumLessons, topicProgressMap, callLessonInit, startRevision, markLessonSkipped, resetLessonContext, clearLessonMcqState])
 
   // Confirming the switch dialog selects the target lesson — it must NOT
   // start teaching it. That only happens once the learner explicitly
@@ -3043,7 +3069,9 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         const hist = await histRes.json()
         const histMsgs = hist?.data?.messages
         if (hist.success && Array.isArray(histMsgs) && histMsgs.length > 0) {
-          const restored: ChatMsg[] = (histMsgs as Array<{ id: string; role: string; content: string; createdAt: string; provider?: string | null; llmCallCount?: number | null }>)
+          // A question the tutor asked is stored as a text block at the end of its row; withRestoredMcq lifts it back out
+          // so a reload shows the same question card as a live turn (src/lib/learn/mcqTranscript.ts).
+          const restored: ChatMsg[] = withRestoredMcq((histMsgs as Array<{ id: string; role: string; content: string; createdAt: string; provider?: string | null; llmCallCount?: number | null }>)
             .filter((m) => !(m.role === 'USER' && isInternalOpeningPrompt(m.content)))
             .map((m) => ({
               id: m.id,
@@ -3051,7 +3079,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
               content: m.content,
               ts: new Date(m.createdAt).getTime(),
               provider: m.provider ?? undefined, llmCallCount: m.llmCallCount ?? undefined,
-            }))
+            })))
           if (restored.length > 0) {
             const { messages: withVisuals, anyAttached } = applyRestoredVisuals(restored, hist?.data?.visuals)
             setMessages(withVisuals)
@@ -3064,7 +3092,9 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       // Fallback (history endpoint unavailable): restore the resumed active
       // session's own messages, exactly as before this feature.
       if (!restoredAny && data.resumed && Array.isArray(data.data.messages) && data.data.messages.length > 0) {
-        const restored: ChatMsg[] = (data.data.messages as Array<{ id: string; role: string; content: string; createdAt: string; provider?: string | null; llmCallCount?: number | null }>)
+        // A question the tutor asked is stored as a text block at the end of its row; withRestoredMcq lifts it back out
+        // so a reload shows the same question card as a live turn (src/lib/learn/mcqTranscript.ts).
+        const restored: ChatMsg[] = withRestoredMcq((data.data.messages as Array<{ id: string; role: string; content: string; createdAt: string; provider?: string | null; llmCallCount?: number | null }>)
           .filter((m) => m.role === 'USER' || m.role === 'ASSISTANT')
           .filter((m) => !(m.role === 'USER' && isInternalOpeningPrompt(m.content)))
           .map((m) => ({
@@ -3073,7 +3103,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
             content: m.content,
             ts: new Date(m.createdAt).getTime(),
             provider: m.provider ?? undefined, llmCallCount: m.llmCallCount ?? undefined,
-          }))
+          })))
         const { messages: withVisuals, anyAttached } = applyRestoredVisuals(restored, (data as { messageVisuals?: unknown }).messageVisuals)
         setMessages(withVisuals)
         anyMessageVisual = anyAttached
@@ -5611,6 +5641,15 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                     </div>{/* /right half */}
                     </div>{/* /teaching canvas */}
 
+                    {/* The multiple-choice question this tutor message asked, kept in the transcript: full question and
+                        every option, in the order served, directly above whatever the learner answers next, and still
+                        here after they have answered or reloaded. Read-only RECORD — the Quick Check panel stays the
+                        answering control. Outside the canvas and outside the "Read more" fold on purpose.
+                        See src/lib/learn/mcqTranscript.ts. */}
+                    {!isUser && !msg.streaming && msg.mcq && (
+                      <InlineMcqCard question={msg.mcq.question} options={msg.mcq.options} label={t('lc_quick_check_label')} />
+                    )}
+
                     {/* Sprint W: inline practice MCQ — structured candy card, replacing
                         the old plain-text question the AI used to type out itself.
                         Deliberately OUTSIDE the canvas: the MCQ stays the small
@@ -5883,14 +5922,17 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                   background: 'var(--bg-surface)',
                   border: '1px solid var(--border-subtle)',
                   boxShadow: '0 16px 40px rgba(0,0,0,0.35)',
-                  padding: '12px 14px 14px',
+                  // +1cm tall = 0.5cm more padding top and bottom (CSS adds the 1cm of width).
+                  padding: quickCheckMode === 'minimized' ? '12px 14px 14px' : 'calc(12px + 0.5cm) 14px calc(14px + 0.5cm)',
                   display: 'flex',
                   flexDirection: 'column',
                   gap: 8,
-                  // DRAG (see quickCheckDrag.ts) — a pixel offset layered on
-                  // top of the CSS centering translate; {0,0} reproduces the
-                  // untouched default position exactly.
-                  transform: `translate(calc(-50% + ${quickCheckDragOffset.x}px), ${quickCheckDragOffset.y}px)`,
+                  // DRAG (see quickCheckDrag.ts) — an offset on top of the centring
+                  // translate; {0,0} is the default position. Centred on both axes
+                  // when expanded; minimized stays low (the CSS class).
+                  transform: quickCheckMode === 'minimized'
+                    ? `translate(calc(-50% + ${quickCheckDragOffset.x}px), ${quickCheckDragOffset.y}px)`
+                    : `translate(calc(-50% + ${quickCheckDragOffset.x}px), calc(-50% + ${quickCheckDragOffset.y}px))`,
                   transition: isDraggingQuickCheck ? 'none' : 'transform 120ms ease',
                 }}
               >
