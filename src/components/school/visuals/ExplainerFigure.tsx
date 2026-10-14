@@ -31,6 +31,7 @@
  * it makes, and the withheld count is written out. The figure remains
  * understandable with the canvas ignored entirely.
  */
+import { ScriptedText } from './ScriptedText'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { ChevronLeft, ChevronRight, Maximize2, Minimize2, Pause, Play } from 'lucide-react'
 import { SceneSpecRenderer } from './SceneSpecRenderer'
@@ -533,7 +534,7 @@ export function ExplainerFigure({
               printed the same number in the chip above it. */}
           {explainer.result && !answerWithheld && !simulation.active && (
             <p className={styles.result}>
-              <span>{explainer.result.expression}</span>
+              <span><ScriptedText text={explainer.result.expression} /></span>
               {explainer.result.value && <span className={styles.resultValue}>{explainer.result.value}</span>}
             </p>
           )}
@@ -672,14 +673,19 @@ export function ExplainerFigure({
               contrast back into a demonstration. */}
           {contrasts.length > 0 && !contrast && (
             <div className={styles.bar} style={{ marginTop: 8 }} role="group" aria-label="Check a common idea">
-              {contrasts.map((c) => (
+              {contrasts.map((c, i) => (
                 <button
                   key={c.misconception.id}
                   type="button"
                   className={styles.chip}
+                  // Two registered ideas used to give two chips with the SAME words, so the learner could not tell them
+                  // apart (live, 2026-10-14, Rotational Dynamics). A lone idea keeps its label; several are numbered, and
+                  // each carries its own claim for the accessible name and the tooltip.
+                  title={c.misconception.claim}
+                  aria-label={`Check a common idea${contrasts.length > 1 ? ` ${i + 1} of ${contrasts.length}` : ''}: ${c.misconception.claim}`}
                   onClick={() => { setContrast(c); setContrastRevealed(false); setPlaying(null) }}
                 >
-                  Check a common idea
+                  {contrasts.length > 1 ? `Check a common idea (${i + 1} of ${contrasts.length})` : 'Check a common idea'}
                 </button>
               ))}
             </div>
@@ -833,7 +839,7 @@ export function ExplainerFigure({
             </p>
           )}
 
-          {walking && narration && <p className={styles.narration} style={{ marginTop: 8 }}>{narration}</p>}
+          {walking && narration && <p className={styles.narration} style={{ marginTop: 8 }}><ScriptedText text={narration} /></p>}
 
           {predicting && (
             <div className={styles.predict} style={{ marginTop: 10 }}>
@@ -885,7 +891,7 @@ export function ExplainerFigure({
             {primaryPanels.map((panel) => (
               <section key={panel.heading} className={styles.panel}>
                 <h4 className={styles.panelHeading}>{panel.heading}</h4>
-                {panel.body && <p className={styles.panelBody}>{panel.body}</p>}
+                {panel.body && <p className={styles.panelBody}><ScriptedText text={panel.body} /></p>}
                 {panel.lines && (
                   <div className={styles.panelLines}>
                     {panel.lines.map((linetext, i) => (
@@ -893,7 +899,7 @@ export function ExplainerFigure({
                         key={`${linetext}-${i}`}
                         className={linetext === panel.emphasis ? styles.panelLineEmphasis : undefined}
                       >
-                        {linetext}
+                        <ScriptedText text={linetext} />
                       </span>
                     ))}
                   </div>
@@ -950,7 +956,7 @@ export function ExplainerFigure({
             {tailPanels.map((panel) => (
               <section key={panel.heading} className={styles.panel}>
                 <h4 className={styles.panelHeading}>{panel.heading}</h4>
-                {panel.body && <p className={styles.panelBody}>{panel.body}</p>}
+                {panel.body && <p className={styles.panelBody}><ScriptedText text={panel.body} /></p>}
                 {panel.lines && (
                   <div className={styles.panelLines}>
                     {panel.lines.map((linetext, i) => (
@@ -958,7 +964,7 @@ export function ExplainerFigure({
                         key={`${linetext}-${i}`}
                         className={linetext === panel.emphasis ? styles.panelLineEmphasis : undefined}
                       >
-                        {linetext}
+                        <ScriptedText text={linetext} />
                       </span>
                     ))}
                   </div>

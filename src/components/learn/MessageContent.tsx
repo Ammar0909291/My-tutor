@@ -41,7 +41,10 @@ function renderMath(raw: string, key: string, displayMode: boolean): React.React
   return (
     <span
       key={key}
-      style={displayMode ? { display: 'block', overflowX: 'auto', margin: '4px 0' } : undefined}
+      // Inline maths gets a hair of air on both sides: the prose font's word space is only ~3.7px at 15.6px and a KaTeX
+      // glyph has no side bearing of its own, so "curvature κ and torsion τ" read as "curvatureκ and torsionτ" (live,
+      // 2026-10-14). 0.1em is ~1.6px — enough to separate, too little to show before a comma or bracket.
+      style={displayMode ? { display: 'block', overflowX: 'auto', margin: '4px 0' } : { margin: '0 0.1em' }}
       dangerouslySetInnerHTML={{ __html: html }}
     />
   )

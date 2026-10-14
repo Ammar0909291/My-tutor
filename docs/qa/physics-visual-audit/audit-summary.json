@@ -1,6 +1,6 @@
 {
- "generatedAt": "2026-10-13T02:10:29.131Z",
- "fingerprint": "07a2d2218b2ee54259ca051774121935c30881f3b689cb559f7906a8be8e2e71",
+ "generatedAt": "2026-10-14T21:39:54.906Z",
+ "fingerprint": "aa791efe2cf5b3869193fa25d85745ef0f553ed6fa4200976a04270274b0676f",
  "fingerprints": {
   "phys.meas.units": "689b537633be33f5",
   "phys.meas.scalars-vectors": "566feb21908a8419",
@@ -48,9 +48,9 @@
   "phys.mech.collisions-inelastic": "565be851cd589309",
   "phys.mech.center-of-mass": "701edb2078552d9f",
   "phys.mech.angular-kinematics": "d07e7f6883503d2b",
-  "phys.mech.torque": "ad41def24b024093",
+  "phys.mech.torque": "5bc28942cb8ecf8f",
   "phys.mech.moment-of-inertia": "02a99d5fcc8df22d",
-  "phys.mech.rotational-dynamics": "7b54d8b91649d0b3",
+  "phys.mech.rotational-dynamics": "1cda1326eb5c1478",
   "phys.mech.angular-momentum": "c5fb54988d720a63",
   "phys.mech.conservation-of-angular-momentum": "af2ff74bf06466af",
   "phys.mech.rolling-motion": "85c75f5be608e6ff",
@@ -99,7 +99,7 @@
   "phys.therm.second-law": "a3e36e371a4cd8f7",
   "phys.therm.entropy": "7e2b024a177de4a4",
   "phys.therm.heat-engines": "5874d6e24235e236",
-  "phys.therm.carnot-cycle": "b523dac80379e13d",
+  "phys.therm.carnot-cycle": "64d7f8907d359249",
   "phys.therm.refrigerators": "62412817d9928bf2",
   "phys.therm.third-law": "366a624e35a0ef59",
   "phys.wave.shm": "503fc853dc7b6195",
@@ -288,6 +288,7 @@
  },
  "viewports": [
   "mobile",
+  "desktop",
   "desktop-column"
  ],
  "themes": [
@@ -1565,6 +1566,7 @@
    },
    "byViewport": {
     "mobile": "PASS",
+    "desktop": "PASS",
     "desktop-column": "PASS"
    },
    "semantic": "PASS",
@@ -1617,6 +1619,7 @@
    },
    "byViewport": {
     "mobile": "PASS",
+    "desktop": "PASS",
     "desktop-column": "PASS"
    },
    "semantic": "PASS",
@@ -2893,6 +2896,7 @@
    },
    "byViewport": {
     "mobile": "PASS",
+    "desktop": "PASS",
     "desktop-column": "PASS"
    },
    "semantic": "PASS",

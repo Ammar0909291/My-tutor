@@ -56,6 +56,7 @@ import { Card, CandyButton, Pill, CockroachMascot, useConfetti } from '@/compone
 import { TutorNarratedMessage } from '@/components/narration/TutorNarratedMessage'
 import { NarratedPlaybackControls } from '@/components/narration/NarratedPlaybackControls'
 import { MessageContent, TutorMessageText, extractDisplayMath, renderInline } from '@/components/learn/MessageContent'
+import { truncatePreview } from '@/lib/learn/previewTruncate'
 import styles from './LessonScreen.module.css'
 import {
   quickCheckMode as quickCheckModeFor,
@@ -225,14 +226,6 @@ function extractLastCodeBlock(text: string): string | null {
 function stripCode(text: string) {
   return text.replace(/```[\s\S]*?```/g, '').replace(/\[CODE\][\s\S]*?\[\/CODE\]/gi, '').trim()
 }
-function truncate(text: string, n: number): { preview: string; hasMore: boolean } {
-  const idx: number[] = []
-  const re = /[.!?…]+[\s)]?/g; let m: RegExpExecArray | null
-  while ((m = re.exec(text)) !== null) idx.push(m.index + m[0].length)
-  if (idx.length <= n) return { preview: text, hasMore: false }
-  return { preview: text.slice(0, idx[n - 1]).trim(), hasMore: true }
-}
-
 
 // ─── LessonDocument ─────────────────────────────────────────────────────────
 // Eagle UI alignment sprint: renders the lesson canvas for non-programming
@@ -3524,7 +3517,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
       if (m.role !== 'assistant' || m.streaming) continue
       const full = stripCode(m.content)
       if (full.length < 300) { c[m.id] = { preview: full, full, hasMore: false }; continue }
-      const { preview, hasMore } = truncate(full, 4)
+      const { preview, hasMore } = truncatePreview(full, 4)
       c[m.id] = { preview, full, hasMore }
     }
     return c

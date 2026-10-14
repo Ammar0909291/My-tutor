@@ -140,5 +140,7 @@ describe('the server-side pending probe survives a turn in which it was not answ
     // 3. the assessment machinery is still live, not latched off.
     const gate = readLog(turns[turns.length - 1], '[gate-eligibility]')
     expect(gate).not.toBeNull()
-  })
+    // Three full route turns on a cold worker: the first one imports the whole teaching engine and has timed out at the
+    // 5 s default on a loaded CI runner (seen in the full-suite run only; passes alone). Time limit only — assertions unchanged.
+  }, 30_000)
 })

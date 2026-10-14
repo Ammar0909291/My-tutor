@@ -10573,13 +10573,21 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         const onScreen = visualFired || (resolvedVisualDecision?.session?.turns ?? 0) > 0
         const payload = resolvedVisualDecision?.graphical ? resolvedVisualDecision.payload : null
         if (onScreen && payload?.renderer === 'scene') {
-          const { enforceFigureColours, sceneColourFamilies } = await import('@/lib/teaching/visual/figureFidelity')
+          const { enforceFigureColours, enforcePartColours, sceneColourFamilies } = await import('@/lib/teaching/visual/figureFidelity')
           const fidelity = enforceFigureColours(cleanText, sceneColourFamilies(payload.sceneSpec))
           if (fidelity.changed) {
             console.warn('[figure-fidelity] ' + JSON.stringify({
               event: 'absent-colour-removed', conceptId: resolvedConceptId ?? null, removed: fidelity.removed,
             }))
             cleanText = fidelity.text
+          }
+          // A colour on screen is not yet a colour on THAT part ("the green arc" over a grey arc and a green label).
+          const partFidelity = enforcePartColours(cleanText, payload.sceneSpec)
+          if (partFidelity.changed) {
+            console.warn('[figure-fidelity] ' + JSON.stringify({
+              event: 'part-colour-removed', conceptId: resolvedConceptId ?? null, removed: partFidelity.removed,
+            }))
+            cleanText = partFidelity.text
           }
         }
       } catch (err) {

@@ -27,7 +27,7 @@
  * (partial LaTeX/code has no meaningful intermediate rendering anyway).
  */
 
-interface ProtectedRange { start: number; end: number }
+export interface ProtectedRange { start: number; end: number }
 
 // Mirrors MessageContent's own protected-span patterns (LessonScreen.tsx).
 // Display math / inline math / fenced code use distinct, non-overlapping
@@ -51,7 +51,7 @@ const INDEPENDENT_PROTECTED_PATTERNS: RegExp[] = [
 // component; kept in lockstep by progressiveReveal.test.ts's fixtures.
 const MARKDOWN_SPAN_RE = /(\*\*[^*\n]+\*\*|\*[^*\n]+\*|`[^`\n]+`)/g
 
-function computeProtectedRanges(text: string): ProtectedRange[] {
+export function computeProtectedRanges(text: string): ProtectedRange[] {
   const ranges: ProtectedRange[] = []
   for (const pattern of INDEPENDENT_PROTECTED_PATTERNS) {
     const re = new RegExp(pattern.source, pattern.flags)
@@ -78,7 +78,7 @@ function computeProtectedRanges(text: string): ProtectedRange[] {
 }
 
 /** True when `pos` falls strictly inside a protected span (not at its edge). */
-function isInsideProtected(pos: number, ranges: readonly ProtectedRange[]): boolean {
+export function isInsideProtected(pos: number, ranges: readonly ProtectedRange[]): boolean {
   return ranges.some((r) => pos > r.start && pos < r.end)
 }
 
