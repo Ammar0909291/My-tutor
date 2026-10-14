@@ -64,3 +64,26 @@ the very letters D4 added. The redundant area label was removed (the narration a
 re-rendered and re-merged into the physics audit record (PASS, 0 FAIL). `figureEngineDefects.test.ts` now pins the exact
 nine labels. **My first full local run had shown the same single failure; I committed and backed up to the feature branch
 before acting on it, which is why CI caught it — the order should have been fix, then commit.**
+
+## Live re-check on the deployed app (Test7, production `f16130b`)
+
+Driven in real Chromium against the deployed app after the deploy went READY (a Carnot and an Euler lesson, a diagram requested
+on each, then the page observed). Evidence is the DOM and screenshots of the served figure, not the payload:
+
+- **D1** — 24 collapsed "Read more" previews across both lessons (including the fresh turns): none shows a raw `**`, `\(`, `\[` or
+  `\frac`; each ends at a sentence boundary.
+- **D4** — the served Carnot figure carries the labels A, B, C, D.
+- **D10** — Carnot shows `<sub>` h, c, c, h; Euler shows `<sup>` iθ, iθ, iπ, iπ (figure labels and the result chip).
+- **D2** — Reset view is hidden on load, appears after a hard drag, and the dragged view is tilted a modest amount, readable,
+  never edge-on. Carnot's Reset hid the button and restored the view.
+- **Euler's Reset did NOT restore the view (found here, fixed after).** The button hid for ~300 ms and came back with the camera
+  still tilted. Root cause, confirmed in `three`'s `OrbitControls` source: `reset()` restores position / target but never clears
+  `_sphericalDelta`, the drag's damping momentum; drei enables damping by default, so the leftover keeps rotating the camera
+  after the click, more so at a low frame rate (Euler's heavier scene in software GL). `resetView` now turns damping off,
+  `update()`s once (applies and zeroes the leftover), then `reset()`s, then restores damping. Reproduced and verified locally on
+  the dev audit page with a real drag and an immediate click under 1x / 6x / 12x CPU throttling: **before** the fix the button
+  stayed shown and the frame differed from the authored one at 6x; **after**, the button is hidden and the frame is
+  byte-identical at all three rates. `figureEngineDefects.test.ts` pins the order of the four calls.
+- Not exercised live: D5 (the model's refusal cannot be forced to occur on demand) and D6 (needs a misdescription to occur). Both
+  are covered by `tutorTextDefects.test.ts` only.
+- The Test7 account was not deleted; the 19 sessions left open by today's runs were ended (0 open afterwards).

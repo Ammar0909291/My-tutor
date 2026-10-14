@@ -110,10 +110,22 @@ describe('D2: ThreeDVisual wiring — limited window, Reset view', () => {
     expect(THREE_D).toContain('data-reset-view=""')
     expect(THREE_D).toContain('aria-label="Reset view"')
     expect(THREE_D).toMatch(/enableControls && moved && \(/)
-    expect(THREE_D).toContain('controlsRef.current?.reset()')
+    expect(THREE_D).toContain('c.reset()')
     // it watches every kind of movement: rotation, tilt, zoom and pan
     for (const probe of ['getAzimuthalAngle()', 'getPolarAngle()', 'getDistance()', 'c.target.length()']) expect(THREE_D).toContain(probe)
     expect(THREE_D).toContain('onChange={checkMoved}')
+  })
+
+  it('Reset view flushes the drag\'s damping momentum before reset(), so the camera cannot drift away from the authored view afterwards', () => {
+    const body = THREE_D.slice(THREE_D.indexOf('const resetView = useCallback'), THREE_D.indexOf('const resetView = useCallback') + 900)
+    const order = ['c.enableDamping = false', 'c.update()', 'c.reset()', 'c.enableDamping = damping']
+    let at = -1
+    for (const step of order) {
+      const i = body.indexOf(step, at + 1)
+      expect(i, `"${step}" is present, after the previous step`).toBeGreaterThan(at)
+      at = i
+    }
+    expect(body).toContain('setMoved(false)')
   })
 
   it('a re-framed scene saves its new camera as the state "Reset view" returns to', () => {

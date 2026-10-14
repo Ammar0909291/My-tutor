@@ -105,7 +105,18 @@ export function ThreeDVisual({
     setMoved((prev) => (prev === away ? prev : away))
   }, [cameraDistance])
   const resetView = useCallback(() => {
-    controlsRef.current?.reset()
+    const c = controlsRef.current
+    if (c) {
+      // OrbitControls.reset() puts the camera back but does NOT clear the drag's damping momentum (`_sphericalDelta`), so the
+      // camera keeps rotating away from the authored view after the click — live, 2026-10-14: the Euler figure's Reset view
+      // left it tilted and the button came straight back. With damping off, update() applies the leftover and zeroes it; only
+      // then is reset() exact. Damping is restored for the learner's next drag.
+      const damping = c.enableDamping
+      c.enableDamping = false
+      c.update()
+      c.reset()
+      c.enableDamping = damping
+    }
     setMoved(false)
   }, [])
 
