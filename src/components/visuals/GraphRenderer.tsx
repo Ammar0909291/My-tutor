@@ -138,14 +138,15 @@ export function GraphRenderer({
   // The opening view is fitted to the curve using the frame's REAL height (it is 200 px on a phone and ~300 px on a desktop column). Until the learner pans or
   // zooms, a change of frame height re-fits it; once they have moved the view (`view` no longer the fitted object) it is left alone.
   const autoView = useRef<View | null>(null)
+  const viewRef = useRef(view)
+  viewRef.current = view
   useEffect(() => {
-    setView((prev) => {
-      if (autoView.current !== null && prev !== autoView.current) return prev
-      const fresh = initialGraphView(spec.domain, spec.equation, h)
-      autoView.current = fresh
-      return fresh
-    })
-  }, [h, spec.domain, spec.equation])
+    // Not inside a state updater: updaters must be pure (React runs them twice in development, and the second run would see our own write and keep the stale view).
+    if (autoView.current !== null && viewRef.current !== autoView.current) return   // the learner has moved the view
+    const fresh = initialGraphView(spec.domain, spec.equation, h, w)
+    autoView.current = fresh
+    setView(fresh)
+  }, [h, w, spec.domain, spec.equation])
   // math → screen helpers
   const toSx = useCallback((x: number) => w / 2 + (x - view.cx) * view.ppu, [w, view])
   const toSy = useCallback((y: number) => h / 2 - (y - view.cy) * view.ppu, [h, view])
@@ -230,7 +231,7 @@ export function GraphRenderer({
     })
   }
   const zoomBtn = (factor: number) => setView((v) => ({ ...v, ppu: Math.max(MIN_PPU, Math.min(MAX_PPU, v.ppu * factor)) }))
-  const reset = () => setView((() => { const v = initialGraphView(spec.domain, spec.equation, h); autoView.current = v; return v })())
+  const reset = () => setView((() => { const v = initialGraphView(spec.domain, spec.equation, h, w); autoView.current = v; return v })())
 
   // ── grid + path geometry ──
   const step = niceStep(view.ppu)

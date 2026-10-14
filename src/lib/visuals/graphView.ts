@@ -28,7 +28,7 @@ export interface GraphView { cx: number; cy: number; ppu: number }
  * The robust range ignores the extreme 3 % at each end so a vertical asymptote cannot flatten the whole curve; the scale never goes above the
  * domain-fitted one (the x domain stays visible) and never below `GRAPH_MIN_PPU`.
  */
-export function initialGraphView(domain: readonly [number, number] | undefined, equation?: string, frameHeightPx: number = 360 * GRAPH_ASPECT): GraphView {
+export function initialGraphView(domain: readonly [number, number] | undefined, equation?: string, frameHeightPx: number = 360 * GRAPH_ASPECT, frameWidthPx: number = 360): GraphView {
   const [d0, d1] = domain ?? [-10, 10]
   const span = Math.max(2, Math.abs(d1 - d0))
   const base: GraphView = { cx: (d0 + d1) / 2, cy: 0, ppu: Math.max(GRAPH_MIN_PPU, Math.min(GRAPH_MAX_PPU, 360 / span)) }
@@ -65,7 +65,11 @@ export function initialGraphView(domain: readonly [number, number] | undefined, 
   // Room above the curve for the y-axis title and BELOW it for the x-axis and its tick numerals (the zoom buttons, bottom-right, are an obstacle to the label solver).
   const TOP_PX = 34, BOTTOM_PX = 30
   const ppu = Math.max(GRAPH_MIN_PPU, Math.min(base.ppu, (heightPx - TOP_PX - BOTTOM_PX) / range))
-  return { cx: base.cx, cy: loV + (heightPx / 2 - BOTTOM_PX) / ppu, ppu }
+  // Zooming out to fit the height widens the x extent past the domain, and the renderer draws the curve across the WHOLE visible x range: for a quantity whose domain
+  // starts at or above zero (volume, time, concentration) that exposes the unphysical other branch (V < 0 of P = 10/V — seen on the deployed app after the first version of
+  // this fit). So the left edge stays at the domain's start (less a small margin) and the extra width goes to the right.
+  const cx = d0 >= 0 ? d0 - 0.08 * (d1 - d0) + frameWidthPx / 2 / ppu : base.cx
+  return { cx, cy: loV + (heightPx / 2 - BOTTOM_PX) / ppu, ppu }
 }
 
 /**

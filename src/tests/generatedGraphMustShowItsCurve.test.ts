@@ -90,6 +90,12 @@ describe('the renderer and the check share one opening view', () => {
     expect(boyle.cy + halfH).toBeGreaterThanOrEqual(10)
     expect(boyle.cy - halfH).toBeGreaterThan(-2)
     expect(boyle.cy - halfH).toBeLessThanOrEqual(0)
+    // ...and the zoomed-out view does not reach the unphysical V < 0 branch of the hyperbola (seen on the deployed app after the first version of the fit)
+    for (const w of [256, 360, 414, 560]) {
+      const v = initialGraphView([1, 10], '10/x', 298, w)
+      expect(v.cx - w / 2 / v.ppu, `frame ${w}px`).toBeGreaterThanOrEqual(0)
+      expect(v.cx + w / 2 / v.ppu, `frame ${w}px`).toBeGreaterThanOrEqual(10)   // the domain's end stays in view
+    }
   })
 
   it('the view fits the domain', () => {
