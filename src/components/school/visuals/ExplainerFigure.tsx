@@ -526,7 +526,7 @@ export function ExplainerFigure({
       <header className={styles.header}>
         <div className={styles.titleBlock}>
           <h3 className={styles.title}>{explainer.title}</h3>
-          {explainer.givens && <p className={styles.givens}>{explainer.givens}</p>}
+          {explainer.givens && <p className={styles.givens}><ScriptedText text={explainer.givens} /></p>}
           {/* The result chip states the answer, so it is withheld by exactly
               the modes that withhold the answer inside the figure. Without
               this the challenge layer was defeated by its own header: measured

@@ -272,6 +272,13 @@ describe('D10: a subscript is never drawn under the 10 px type floor', () => {
     expect(out).toContain('font-size:max(10px, 0.72em)')
   })
 
+  it('the explainer draws scripts in its givens line, result chip, narration and panels alike', () => {
+    const src = code(read('src/components/school/visuals/ExplainerFigure.tsx'))
+    for (const probe of ['<ScriptedText text={explainer.givens} />', '<ScriptedText text={explainer.result.expression} />', '<ScriptedText text={narration} />', '<ScriptedText text={panel.body} />', '<ScriptedText text={linetext} />']) {
+      expect(src, probe).toContain(probe)
+    }
+  })
+
   it('text without a script is returned bare, so every other label is untouched', () => {
     expect(renderToStaticMarkup(createElement(ScriptedText, { text: 'heat in' }))).toBe('heat in')
   })
