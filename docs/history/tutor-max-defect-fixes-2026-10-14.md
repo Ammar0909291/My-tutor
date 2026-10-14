@@ -12,7 +12,7 @@ that is recorded separately in the live re-check section at the end, if and when
 |---|---|---|---|---|
 | D1 | "Read more" preview ended inside Markdown/LaTeX and showed raw `\(e^{z}=1 + z + \frac{z^{2}}{2!` / `**“η … = 0.` | `truncate()` in `LessonScreen` counted every `.`, `!`, `?` as a sentence end — decimals, factorials, abbreviations, and ends inside `**bold**`, `\(…\)`, `` `code` `` | `src/lib/learn/previewTruncate.ts`: a sentence end must be followed by whitespace/end, not sit inside a protected range (reuses `progressiveReveal`'s `computeProtectedRanges`/`isInsideProtected`, now exported), and not follow a known abbreviation | `previewTruncate.test.ts` (the two real production messages, the verbatim legacy function as a reproduction control, prose parity for n = 1..6, a 300-trial random balanced-marker property test, a wiring pin) |
 | D2 | Euler's complex plane / Carnot P–V graph could be spun edge-on; every label then piled up | Labels are solved for one fixed camera; a full orbit makes every solved position false. There was also no way back | `orbit` prop on `ThreeDVisual`: a **planar** scene (`sceneOrbit.isPlanarScene` — all z equal in every step) gets a ±0.5 rad / ±0.35 rad window; a scene with real depth keeps the free orbit. A **Reset view** button (`data-reset-view`) appears once the camera has left the authored view (rotation, tilt, zoom or pan) and calls the controls' own `reset()` | `figureEngineDefects.test.ts` (Carnot / Euler / Frenet / torque are planar; vector-products and crystal packing stay free; one off-plane object in ANY step makes a scene free; wiring pins) |
-| D4 | Carnot cycle: no direction arrows, no corner labels | The loop was four unlabelled curves | Carnot scene now has A–D corner labels, an arrowhead on each branch pointing the way the gas travels (A→B→C→D→A), narrations that walk the cycle, and an "enclosed area = net work W" note | `figureEngineDefects.test.ts` — each arrowhead is matched to its branch by exact point membership and its direction is checked against the corner order. **A mutation check caught a real bug in my first version (the D→A arrowhead was reversed)**; the test fails on that and passes on the fix |
+| D4 | Carnot cycle: no direction arrows, no corner labels | The loop was four unlabelled curves | Carnot scene now has A–D corner labels, an arrowhead on each branch pointing the way the gas travels (A→B→C→D→A), narrations that walk the cycle, and the net-work-as-enclosed-area statement in the last step's narration (not a label: see "CI" below) | `figureEngineDefects.test.ts` — each arrowhead is matched to its branch by exact point membership and its direction is checked against the corner order. **A mutation check caught a real bug in my first version (the D→A arrowhead was reversed)**; the test fails on that and passes on the fix |
 | D5 | Tutor said "I can't make multiple-choice questions" while the app attached a card | The model is told never to write MCQs (`AUTHORED_ONLY_INSTRUCTION`) while the app still serves an authored card | `quizRequest.replaceQuizRefusal`: a short refusal paragraph that mentions a quiz is replaced by "Here is a quick check — choose an answer below."; the unanswered-card branch strips it before the lead. No-card branches unchanged | `tutorTextDefects.test.ts` |
 | D6 | "the green arc labelled θ = 90°" over a torque figure whose arc is grey | The fidelity check asked only whether a colour was anywhere on screen (green was — as a label) | `figureFidelity.enforcePartColours`: if the scene has objects of the named kind and none carries the claimed colour, the colour word is removed ("the arc"). Ambiguous nouns, world colours and kinds with no objects are untouched. Wired into the chat route's `[figure-fidelity]` block | `tutorTextDefects.test.ts` (including route source pins) |
 | D7 | θ label floated on the far side of the lever, away from its arc | Fixed offset (`end − 3`) | `angleLabelPosition`: on the arc's bisector at 1.55 × the arc radius | `figureEngineDefects.test.ts` (seven lever/force/angle cases: bearing within 1°, outside the arc, close to it) |
@@ -36,8 +36,8 @@ that is recorded separately in the live re-check section at the end, if and when
 
 ## Known limits
 
-- Carnot's loop is inherently thin (enclosed area ≈ 9 % of its bounding box at Tc/Th = 0.6 for any volume ratio), so the
-  "enclosed area" note sits beside the loop rather than inside it.
+- Carnot's loop is inherently thin (enclosed area ≈ 9 % of its bounding box at Tc/Th = 0.6 for any volume ratio), so there
+  is no room to label its inside; the net-work statement lives in the narration.
 - The `desktop` viewport (1280 px) is not part of the committed physics audit (`mobile` + `desktop-column` only). Rendered
   once as an extra, `phys.mech.torque` / `rotational-dynamics` at θ = max show the "F = 10 N" label overlapping the lever
   (38 % of its box, a REVIEW finding). That code path (`forceLabel`) was not touched by this change; at θ = 180° the force
@@ -47,6 +47,20 @@ that is recorded separately in the live re-check section at the end, if and when
 
 - Physics: `phys.mech.torque`, `phys.mech.rotational-dynamics` and `phys.therm.carnot-cycle` changed spec, so
   `physicsVisualAudit.test.ts` failed, naming exactly those three. Re-rendered in Chromium (mobile + desktop-column, dark +
-  light), validated, merged with `merge-audit.ts`: all three PASS, 0 FAIL. The 41 other physics concepts whose labels now
-  draw scripts were re-rendered the same way (see the section below if it is present).
-- Mathematics / Chemistry audits: unchanged specs, tests pass.
+  light), validated, merged with `merge-audit.ts`: all three PASS, 0 FAIL (Carnot twice — see "CI" below).
+- Script rendering touches labels in 50 other concepts' figures without changing their specs, so the fingerprint gates cannot
+  see it. Re-rendered anyway: the 40 other physics concepts (mobile dark/light + desktop-column dark) — 40 PASS, no verdict
+  changed from the committed record; the 9 mathematics concepts (all viewports, both themes) — 9 PASS, none changed.
+  Those re-renders are evidence, not a change to the committed records.
+- Chemistry: unchanged specs, tests pass; chemistry figures typeset their own scripts (`typesetSceneChemistry`) and are unaffected.
+
+## CI — what failed, and the lesson
+
+The first push (feature branch only, `main` untouched) failed `validate` on exactly one test: `physicsFigureLabelBudget` ›
+`buildCarnotScene`, 10 labels against a budget of 9. The cause was my own D4 change — corner letters A–D plus an
+"enclosed area = net work W" label took the figure from 5 to 10. The budget is not cosmetic: past 9 the explainer holds
+back the lowest-priority labels, and corner letters are low-priority "ink", so a 10th label would have silently hidden one of
+the very letters D4 added. The redundant area label was removed (the narration already says it) and the Carnot spec was
+re-rendered and re-merged into the physics audit record (PASS, 0 FAIL). `figureEngineDefects.test.ts` now pins the exact
+nine labels. **My first full local run had shown the same single failure; I committed and backed up to the feature branch
+before acting on it, which is why CI caught it — the order should have been fix, then commit.**

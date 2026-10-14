@@ -181,9 +181,14 @@ describe('D4: the Carnot cycle shows which way round it runs, and names its corn
     expect([...seen].sort()).toEqual([0, 1, 2, 3])
   })
 
-  it('names the enclosed area as the net work, in the final step', () => {
-    expect(texts(2).join(' | ')).toContain('enclosed area = net work W')
+  it('names the enclosed area as the net work in the final step\'s narration, and keeps the label budget (a 10th label would hide a corner letter)', () => {
+    expect(scene.steps[2].narration).toContain('is the net work done each cycle')
     expect(texts(2).join(' | ')).toContain('η = 1 − T_c/T_h = 1 − 300/500 = 0.4')
+    // The explainer shows at most 9 labels at the default level and holds back the lowest-priority ones — the ink corner
+    // letters first. Axis V, P + corners A–D + T_h, T_c, η is exactly 9; one more and a corner letter would silently vanish.
+    const labels = objs(scene).filter((o) => o.type === 'label')
+    expect(labels).toHaveLength(9)
+    expect(labels.map((l) => l.text).sort()).toEqual(['A', 'B', 'C', 'D', 'P', 'V', 'T_c = 300 K: heat out', 'T_h = 500 K: heat in', 'η = 1 − T_c/T_h = 1 − 300/500 = 0.4'].sort())
   })
 
   it('the arrowheads are drawn in the same step as their branch, so a revealed branch never lacks its direction', () => {

@@ -1,6 +1,6 @@
 {
- "generatedAt": "2026-10-14T21:39:54.906Z",
- "fingerprint": "aa791efe2cf5b3869193fa25d85745ef0f553ed6fa4200976a04270274b0676f",
+ "generatedAt": "2026-10-14T22:24:47.104Z",
+ "fingerprint": "27174343f1627c78f6509a624b64e830b72f94d50ed2238906457beef9347d2a",
  "fingerprints": {
   "phys.meas.units": "689b537633be33f5",
   "phys.meas.scalars-vectors": "566feb21908a8419",
@@ -99,7 +99,7 @@
   "phys.therm.second-law": "a3e36e371a4cd8f7",
   "phys.therm.entropy": "7e2b024a177de4a4",
   "phys.therm.heat-engines": "5874d6e24235e236",
-  "phys.therm.carnot-cycle": "64d7f8907d359249",
+  "phys.therm.carnot-cycle": "a8bd51312850390f",
   "phys.therm.refrigerators": "62412817d9928bf2",
   "phys.therm.third-law": "366a624e35a0ef59",
   "phys.wave.shm": "503fc853dc7b6195",
@@ -305,6 +305,10 @@
    "mobile": {
     "PASS": 279,
     "REVIEW_REQUIRED": 4
+   },
+   "desktop": {
+    "undefined": 280,
+    "PASS": 3
    },
    "desktop-column": {
     "REVIEW_REQUIRED": 4,
