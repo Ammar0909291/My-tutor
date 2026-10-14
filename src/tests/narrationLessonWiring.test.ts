@@ -25,10 +25,12 @@ const read = (p: string) => readFileSync(path.join(process.cwd(), p), 'utf8')
 const LESSON_SCREEN = read('src/components/learn/LessonScreen.tsx')
 
 describe('LessonScreen.tsx is wired to the platform-wide narration layer', () => {
-  it('imports the three narration components from the shared platform layer, not a local/duplicated copy', () => {
+  it('imports the narration boundary and the playback controls from the shared platform layer, not a local/duplicated copy', () => {
     expect(LESSON_SCREEN).toContain("import { TutorNarratedMessage } from '@/components/narration/TutorNarratedMessage'")
-    expect(LESSON_SCREEN).toContain("import { NarratedText } from '@/components/narration/NarratedText'")
     expect(LESSON_SCREEN).toContain("import { NarratedPlaybackControls } from '@/components/narration/NarratedPlaybackControls'")
+    // 2026-10-14: NarratedText (the word-token view) is no longer imported by the lesson screen — see the display tests
+    // below and ttsDisplaySourceSeparation.test.ts. It stays in the platform layer for any caller that wants it.
+    expect(LESSON_SCREEN).not.toContain("from '@/components/narration/NarratedText'")
   })
 
   it('wraps each tutor message in TutorNarratedMessage, passing the message id, the COMPLETE-message narration text (not the Read More-collapsed display text), and the live teaching language/voice/speed/country — not hardcoded or subject-specific values', () => {
@@ -65,14 +67,25 @@ describe('LessonScreen.tsx is wired to the platform-wide narration layer', () =>
     expect(narrationBlock).not.toContain('cached.preview')
   })
 
-  it('renders plain MessageContent — completely unchanged from before this feature — while narration status is IDLE (never played)', () => {
+  it('draws the message through TutorMessageText (MessageContent) with displayText — in EVERY narration status, with no status conditional', () => {
+    // RESTATED 2026-10-14. This test used to pin `narration.status === 'IDLE' ? <MessageContent …/> : <NarratedText …/>`,
+    // i.e. the second renderer that showed raw Markdown/LaTeX the moment Play was pressed. The invariant it defends is
+    // now the opposite one: ONE renderer for the display source, whatever the narration state.
     const block = LESSON_SCREEN.slice(LESSON_SCREEN.indexOf('<TutorNarratedMessage'), LESSON_SCREEN.indexOf('</TutorNarratedMessage>'))
-    expect(block).toMatch(/narration\.status === 'IDLE'\s*\n?\s*\?\s*<MessageContent text={displayText} isUser={false} \/>/)
+    expect(block).toContain('<TutorMessageText displayText={displayText} />')
+    expect(block).not.toMatch(/narration\.status\s*===\s*'IDLE'\s*\n?\s*\?/)
+    expect(block).not.toContain('<NarratedText')
+    expect(block).not.toContain('<MessageContent')
   })
 
-  it('renders NarratedText (the highlighting layer) once narration has actually started, driven by the SAME segments/activeSegmentIndex/activeWordIndex the hook produces', () => {
+  it('never feeds narration segments or word positions into what is displayed (only the controls read narration state)', () => {
     const block = LESSON_SCREEN.slice(LESSON_SCREEN.indexOf('<TutorNarratedMessage'), LESSON_SCREEN.indexOf('</TutorNarratedMessage>'))
-    expect(block).toContain('<NarratedText segments={narration.segments} activeSegmentIndex={narration.activeSegmentIndex} activeWordIndex={narration.activeWordIndex} />')
+    expect(block).not.toContain('narration.segments')
+    expect(block).not.toContain('narration.activeSegmentIndex')
+    expect(block).not.toContain('narration.activeWordIndex')
+    // the narration state this block does read is for the controls only
+    const reads = [...block.matchAll(/narration\.(\w+)/g)].map((m) => m[1])
+    expect([...new Set(reads)].sort()).toEqual(['progressPercent', 'replay', 'status', 'toggle'])
   })
 
   it('wires Play/Pause/Replay to the hook\'s own toggle()/replay() — not a re-implemented local handler', () => {
