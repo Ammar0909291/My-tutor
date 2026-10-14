@@ -15,7 +15,7 @@ import type { ProcessFlowSpec } from '@/lib/visuals/visualSpec'
 import { createMasteryEmitter, type VisualMasteryContext, type VisualMasterySignal } from '@/lib/visuals/visualMastery'
 import { useLanguage } from '@/components/ui/LanguageToggle'
 import { localizeVisualLabel, type VisualLang } from '@/lib/visuals/visualLabels'
-import { layoutStep, TITLE_LINE_H, NOTE_LINE_H } from '@/lib/visuals/processFlowLayout'
+import { layoutStep, TITLE_LINE_H, NOTE_LINE_H, NOTE_FONT_PX } from '@/lib/visuals/processFlowLayout'
 
 const STEP_W = 150
 const STEP_H = 56
@@ -305,7 +305,7 @@ function StepBox({ x, y, w, h, index, step }: { x: number; y: number; w: number;
         {l.titleLines.map((line, k) => <tspan key={k} x={tx} dy={k === 0 ? 0 : TITLE_LINE_H}>{line}</tspan>)}
       </text>
       {l.noteLines.length > 0 && (
-        <text x={tx} y={noteFirstBaseline} fontSize={9.5} fill="var(--text-primary, #1f2328)">
+        <text x={tx} y={noteFirstBaseline} fontSize={NOTE_FONT_PX} fill="var(--text-primary, #1f2328)">
           {l.noteLines.map((line, k) => <tspan key={k} x={tx} dy={k === 0 ? 0 : NOTE_LINE_H}>{line}</tspan>)}
         </text>
       )}

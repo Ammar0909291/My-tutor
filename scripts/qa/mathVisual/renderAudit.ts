@@ -34,7 +34,7 @@ async function renderOne(browser: Browser, row: InventoryRow, vp: ViewportName, 
   const tag = `${row.conceptId}__${vp}__${theme}`
   try {
     let tl = Date.now()
-    await page.goto(`${BASE}/dev/physics-audit?concept=${encodeURIComponent(row.conceptId)}&fw=${cfg.frameW}&subject=mathematics`, { waitUntil: 'domcontentloaded', timeout: 120_000 })
+    await page.goto(`${BASE}/dev/physics-audit?concept=${encodeURIComponent(row.conceptId)}&fw=${cfg.frameW}&subject=mathematics&scope=lesson`, { waitUntil: 'domcontentloaded', timeout: 120_000 })
     tl = lap('goto', tl)
     await page.waitForSelector('[data-audit-frame]', { timeout: 60_000 })
     const renderer = await page.getAttribute('[data-audit-renderer]', 'data-audit-renderer')
@@ -42,7 +42,10 @@ async function renderOne(browser: Browser, row: InventoryRow, vp: ViewportName, 
     if (renderer === 'scene') await page.waitForSelector('[data-scene-box] canvas', { timeout: 60_000 })
     await settle(page, renderer ?? 'none', renderer === 'scene' && row.textObjects > 0)
     await page.evaluate(() => document.fonts?.ready)
-    await page.waitForTimeout(300)
+    // Let every CSS transition / animation finish (a theme or first-paint colour transition caught half way gave one-off contrast failures: the same figure
+    // failed in one view of one run and passed in the next), then settle once more.
+    await page.evaluate(() => Promise.all(document.getAnimations().map((a) => a.finished.catch(() => undefined))))
+    await page.waitForTimeout(500)
     const shotsDir = resolve(outDir, 'shots')
     mkdirSync(shotsDir, { recursive: true })
     const first = await capture(page, pixPage, 'default', {}, resolve(shotsDir, `${tag}.png`))

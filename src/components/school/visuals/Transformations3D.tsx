@@ -11,12 +11,16 @@ import type { SceneObject } from '@/lib/teaching/sceneSpec'
 import { useTheme, type Theme } from '@/components/Providers'
 
 const CAMERA_DISTANCE = 9
-const ORIGINAL_POS: [number, number, number] = [0, 0, 0]
-const TRANSLATED_POS: [number, number, number] = [2.2, 0.8, 0]
-const ROTATION: [number, number, number] = [0, Math.PI / 4, Math.PI / 6]
-const SCALE: [number, number, number] = [1.5, 1.5, 1.5]
+export const ORIGINAL_POS: [number, number, number] = [0, 0, 0]
+export const TRANSLATED_POS: [number, number, number] = [2.2, 0.8, 0]
+export const ROTATION: [number, number, number] = [0, Math.PI / 4, Math.PI / 6]
+export const SCALE: [number, number, number] = [1.5, 1.5, 1.5]
 
-const ROW_POS: [number, number, number][] = [[-3, 0, 0], [-1, 0, 0], [1, 0, 0], [3, 0, 0]]
+export const ROW_POS: [number, number, number][] = [[-3, 0, 0], [-1, 0, 0], [1, 0, 0], [3, 0, 0]]
+/** The side-by-side comparison, as data (asserted in `mathVisualSemanticEvidence.test.ts`): the same cube four times — as it was, moved, turned, enlarged — left to right in caption order. */
+export const COMPARE_CUBE = 0.9
+export const COMPARE_SCALE = 1.3
+export const TRANSFORMS_COMPARE_LABEL = 'Original · Translation · Rotation · Scaling'
 
 function Scene({ revealStep, theme }: { revealStep: number; theme: Theme }) {
   const showOriginal = revealStep >= 1
@@ -30,7 +34,7 @@ function Scene({ revealStep, theme }: { revealStep: number; theme: Theme }) {
     const obstacles: SceneObject[] = []
     if (compare) {
       for (const p of ROW_POS) obstacles.push({ type: 'node', position: p, radius: 0.6 })
-      labels.push({ text: 'Original · Translation · Rotation · Scaling', position: [0, -1.1, 0], color: '#9AA5B8' })
+      labels.push({ text: TRANSFORMS_COMPARE_LABEL, position: [0, -1.1, 0], color: '#9AA5B8' })
     }
     return { labels, obstacles }
   }, [compare])
@@ -68,19 +72,19 @@ function Scene({ revealStep, theme }: { revealStep: number; theme: Theme }) {
       {compare && (
         <>
           <mesh position={ROW_POS[0]}>
-            <boxGeometry args={[0.9, 0.9, 0.9]} />
+            <boxGeometry args={[COMPARE_CUBE, COMPARE_CUBE, COMPARE_CUBE]} />
             <meshStandardMaterial color="#9AA5B8" />
           </mesh>
           <mesh position={ROW_POS[1]}>
-            <boxGeometry args={[0.9, 0.9, 0.9]} />
+            <boxGeometry args={[COMPARE_CUBE, COMPARE_CUBE, COMPARE_CUBE]} />
             <meshStandardMaterial color="#FF6B6B" />
           </mesh>
           <mesh position={ROW_POS[2]} rotation={ROTATION}>
-            <boxGeometry args={[0.9, 0.9, 0.9]} />
+            <boxGeometry args={[COMPARE_CUBE, COMPARE_CUBE, COMPARE_CUBE]} />
             <meshStandardMaterial color="#5B8DEF" />
           </mesh>
-          <mesh position={ROW_POS[3]} scale={[1.3, 1.3, 1.3]}>
-            <boxGeometry args={[0.9, 0.9, 0.9]} />
+          <mesh position={ROW_POS[3]} scale={[COMPARE_SCALE, COMPARE_SCALE, COMPARE_SCALE]}>
+            <boxGeometry args={[COMPARE_CUBE, COMPARE_CUBE, COMPARE_CUBE]} />
             <meshStandardMaterial color="#81C784" />
           </mesh>
         </>

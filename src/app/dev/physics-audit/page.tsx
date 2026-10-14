@@ -2,6 +2,8 @@ import { notFound } from 'next/navigation'
 import { resolveVisual } from '@/lib/teaching/visual/resolveVisual'
 import type { VisualPayload } from '@/lib/teaching/visual/types'
 import { PhysicsAuditFigure } from './PhysicsAuditFigure'
+import { readFileSync } from 'node:fs'
+import { parseVisualSpec } from '@/lib/visuals/visualSpec'
 
 /**
  * Physics visual audit render page — DEV ONLY (404 in production).
@@ -23,8 +25,28 @@ export const metadata = { robots: { index: false, follow: false } }
 /** Subjects the audit page may resolve under. Absent => 'physics', so the existing Physics tooling is byte-identical; the Mathematics audit passes `subject=mathematics`. */
 const AUDIT_SUBJECTS = new Set(['physics', 'mathematics'])
 
-export default function PhysicsAuditPage({ searchParams }: { searchParams?: { concept?: string; fw?: string; subject?: string } }) {
+export default function PhysicsAuditPage({ searchParams }: { searchParams?: { concept?: string; fw?: string; subject?: string; fixture?: string; scope?: string } }) {
   if (process.env.NODE_ENV === 'production') notFound()
+  // English has no static figure (every English figure is generated at runtime), so its render audit feeds the real renderer a fixture
+  // spec instead: `?fixture=<id>` reads scripts/qa/englishVisual/fixtures.json (dev only, id charset-checked, spec re-validated by the
+  // production zod schema). Absent => the concept path below, unchanged.
+  const fixtureId = searchParams?.fixture?.trim() ?? ''
+  if (fixtureId) {
+    const fw0 = Number(searchParams?.fw)
+    const row = /^[A-Za-z0-9._-]+$/.test(fixtureId)
+      ? (JSON.parse(readFileSync('scripts/qa/englishVisual/fixtures.json', 'utf8')) as Array<{ id: string; spec: unknown }>).find((f) => f.id === fixtureId)
+      : undefined
+    const spec = row ? parseVisualSpec(row.spec) : null
+    return (
+      <PhysicsAuditFigure
+        frameWidth={Number.isFinite(fw0) && fw0 > 0 ? fw0 : null}
+        conceptId={fixtureId}
+        provenance="fixture"
+        lessonScope={searchParams?.scope === 'lesson'}
+        payload={spec ? ({ renderer: 'spec', visualSpec: spec } as VisualPayload) : null}
+      />
+    )
+  }
   const conceptId = searchParams?.concept?.trim() ?? ''
   if (!conceptId) return <p>?concept=&lt;id&gt; required</p>
   const decision = resolveVisual({
@@ -43,6 +65,7 @@ export default function PhysicsAuditPage({ searchParams }: { searchParams?: { co
       frameWidth={Number.isFinite(fw) && fw > 0 ? fw : null}
       conceptId={conceptId}
       provenance={decision.provenance}
+      lessonScope={searchParams?.scope === 'lesson'}
       payload={decision.payload as VisualPayload | null}
     />
   )

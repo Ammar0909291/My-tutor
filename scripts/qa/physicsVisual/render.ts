@@ -87,6 +87,8 @@ export interface StateRecord {
   shot: string | null
   /** Times the capture was retaken because the canvas had not painted yet (see `capture`). */
   blankRetries?: number
+  /** Set when the figure's text boxes moved between the DOM measurement and the pixel capture (the pixels then belong to a different layout): the capture was retaken. */
+  layoutMoved?: boolean
 }
 export interface RenderRecord {
   conceptId: string
@@ -215,7 +217,7 @@ async function glyphCheck(page: Page, m: Measure): Promise<string[]> {
 export async function capture(page: Page, pixPage: Page, state: string, params: Record<string, string>, shotPath: string | null): Promise<StateRecord> {
   let rec = await captureOnce(page, pixPage, state, params, shotPath)
   let retries = 0
-  while (retries < 2 && looksUnpainted(rec)) {
+  while (retries < 3 && (looksUnpainted(rec) || rec.layoutMoved)) {
     retries++
     await page.waitForTimeout(1200)
     rec = await captureOnce(page, pixPage, state, params, shotPath)
@@ -245,6 +247,13 @@ async function captureOnce(page: Page, pixPage: Page, state: string, params: Rec
   // Background-only capture → pixels behind every text node.
   await page.evaluate(() => (window as unknown as { __audit: { hideText: (on: boolean) => void } }).__audit.hideText(true))
   await page.waitForTimeout(120)
+  // Under CPU load (software GL, several workers) 120 ms was not always enough for the repaint with the text hidden: the "background-only" screenshot then still
+  // held the glyphs, and a numeral on a badge read 1.7:1 against itself — a one-off contrast FAIL that vanished on a quiet re-render (English audit, 2026-10-13).
+  // Two real animation frames (the page's rAF is the throttled 120 ms clock, see openContext) guarantee a frame was painted after the change.
+  await page.evaluate(() => new Promise<void>((done) => requestAnimationFrame(() => requestAnimationFrame(() => done()))))
+  // A first screenshot after a style change can be taken before every tile of the changed layer is rasterised (software GL): a badge circle was missing from the
+  // "background-only" image while present in the evidence image (English audit, residual one-off contrast FAILs). Take one throwaway frame, then the real one.
+  await page.screenshot({ fullPage: true, clip, animations: 'disabled' })
   const bg = await page.screenshot({ fullPage: true, clip, animations: 'disabled' })
   await page.evaluate(() => (window as unknown as { __audit: { hideText: (on: boolean) => void } }).__audit.hideText(false))
 
@@ -268,7 +277,12 @@ async function captureOnce(page: Page, pixPage: Page, state: string, params: Rec
       },
     },
   )
-  return { state, params, measure, pixels, missingGlyphs: missing, shot }
+  // The pixels are only comparable with the measurement if nothing moved in between (a late re-layout — container width, font swap — made a numeral's measured box
+  // land on the card instead of its badge in the pixel image: a one-off contrast FAIL, English audit). Re-measure and flag a move so `capture` retakes it.
+  const after: Measure = await page.evaluate(() => (window as unknown as { __audit: { measure: () => Measure } }).__audit.measure())
+  const sig = (m: Measure) => JSON.stringify([m.frameRect, m.texts.map((t) => [t.text, Math.round(t.box.x), Math.round(t.box.y)])])
+  const layoutMoved = sig(after) !== sig(measure)
+  return { state, params, measure, pixels, missingGlyphs: missing, shot, ...(layoutMoved ? { layoutMoved: true } : {}) }
 }
 
 /** The figure's value sliders, with their ranges, read from the live DOM. */

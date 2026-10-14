@@ -20,9 +20,11 @@ const TOP_PAD = 10
 const BOTTOM_PAD = 8
 export const TITLE_LINE_H = 15
 export const NOTE_LINE_H = 12
-// Average glyph advance at the renderer's sizes (12 px bold / 9.5 px regular).
+// Average glyph advance at the renderer's sizes (12 px bold / 10 px regular).
+// The note was 9.5 px — under the 10 px readability floor (`figureAudit` RD-01) on a phone, where the figure is drawn 1:1 (English render audit, 2026-10-13).
+export const NOTE_FONT_PX = 10
 const TITLE_CHAR_W = 7
-const NOTE_CHAR_W = 5.4
+const NOTE_CHAR_W = 5.7
 
 /** Whole-word lines no longer than maxChars; a single over-long word is split. */
 export function wrapWords(text: string, maxChars: number): string[] {

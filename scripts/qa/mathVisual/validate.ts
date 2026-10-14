@@ -26,7 +26,9 @@ const inDir = resolve(arg('in', 'tmp/math-visual-audit')!)
 const outDir = resolve(arg('out', inDir)!)
 
 /** Test files whose assertions are about the MATHEMATICS a Mathematics figure draws (each re-derives its numbers from the drawn coordinates). */
-const MATH_ASSERTING = /^mathCoreScenesBatch\d+\.test\.ts$/
+const MATH_ASSERTING = /^(mathCoreScenesBatch\d+|mathVisualSemanticEvidence)\.test\.ts$/
+/** The cards `mathVisualSemanticEvidence.test.ts` asserts on: 2D cards from their markup, the two 3D cards from the exported geometry data, plus the card-belongs-to-the-concept's-domain sweep. */
+const CARD_EVIDENCE = new Set(['number_line', 'fraction_bar', 'percentage_grid', 'coordinate_plane', 'geometry_shape', 'three_geometric_solids', 'three_transformations'])
 
 let testSources: Array<{ file: string; text: string }> | null = null
 function mathEvidence(row: InventoryRow, sceneId: string | null): string[] {
@@ -95,7 +97,11 @@ function main(): void {
       }
     }
     const sem = checkFigureTexts(texts)
-    const evidence = row.figureClass === 'scene' ? mathEvidence(row, sceneId) : []
+    let evidence = row.figureClass === 'scene' ? mathEvidence(row, sceneId) : []
+    if (row.figureClass === 'card' && row.cardType && CARD_EVIDENCE.has(row.cardType)) {
+      const f = 'mathVisualSemanticEvidence.test.ts'
+      if (readFileSync(resolve('src/tests', f), 'utf8').includes(`describe('${row.cardType} card`)) evidence = [`${f} (${row.cardType} card)`]
+    }
     for (const c of sem.results.flatMap((r) => r.contradictions.map((c) => ({ r, c })))) findings.push({ id: 'SM-01', dimension: 'semantic', severity: 'FAIL', message: `"${c.r.text}": ${c.c.reason}`, evidence: { a: c.c.a, b: c.c.b } })
     let semVerdict: Verdict
     if (findings.some((f) => f.dimension === 'semantic' && f.severity === 'FAIL')) semVerdict = 'FAIL'
@@ -139,7 +145,7 @@ function main(): void {
   mkdirSync(outDir, { recursive: true })
   const { fingerprint, fingerprints } = servedFingerprints()
   const compact = {
-    generatedAt: new Date().toISOString(), fingerprint, fingerprints, viewports: wantedVps, themes: wantedThemes,
+    generatedAt: new Date().toISOString(), renderScope: 'lesson' /* the real lesson page's token scope (.learnCandy), see renderAudit.ts */, fingerprint, fingerprints, viewports: wantedVps, themes: wantedThemes,
     summary: { concepts: summary.concepts, verdicts: summary.verdicts, byViewport: summary.byViewport, byDimension: summary.byDimension, withMissingRenders: summary.withMissingRenders },
     concepts: reports.map((r) => ({
       id: r.conceptId, verdict: r.verdict, class: r.figureClass, authorship: r.authorship, scope: r.scope, interactive: r.interactive, graph: r.isGraph,

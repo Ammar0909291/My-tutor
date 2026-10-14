@@ -1522,3 +1522,9 @@ Owner go-ahead in chat ("Math render audit + gate"). Tooling `scripts/qa/mathVis
 556 of 908 concepts serve a figure; 2,224 Chromium renders; final record 0 FAIL / 495 PASS / 61 REVIEW_REQUIRED. The first phone/dark pass found 55 FAIL (the geometry_shape card's 180° fact clipped and overlapping for 26 concepts, 17 graphs with an unnamed axis, a curve with no axes — the shared
 calculus_graph generator now draws named axes —, raw brace-LaTeX / "$2 … $4" / the word "undefined" read as leaks in 9 figures, a fraction caption on a cell divider, a prime count on the average line); all repaired in the figures or the shared cards, no audit rule relaxed. The queue's remaining items (semantic review, production sample check, English visual validation) need a fresh owner go-ahead.
 
+# Mathematics visual quality completion (2026-10-14)
+
+Owner prompt "COMPLETE EVERYTHING IN ONE EXECUTION". Record re-rendered under the lesson token scope: 544 PASS / 12 REVIEW / 0 FAIL (semantic 556 PASS). The 61 first-pass REVIEW figures are dispositioned (43 assertion added, 6 defect fixed, 12 valid text-only figures;
+`review-dispositions.json`). Card and shared-generator figures now have deterministic evidence (`mathVisualSemanticEvidence.test.ts`: 2D card markup, 3D card geometry exports, shared `check*Consistency`). The card-host label-displacement backlog (218 figures, batches 1-29) is closed
+(`scripts/math/labelAssociation.ts`, 9 far labels reviewed and accepted, `mathLabelAssociation.test.ts`). Shared fixes: `CoordinatePlane` tick-numeral halo, `ProcessFlowRenderer` note font 10 px, axis letters and nudges in B1/B3, `pdsCountAt` in B30. Open: production `/learn` check (blocked), English envelope audit (220/222, see the handover), human semantic review.
+

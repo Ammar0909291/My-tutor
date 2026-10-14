@@ -535,7 +535,7 @@ function raw_buildPercentageChangeScene(): SceneSpec {
     steps: [
       {
         narration: 'A price goes from 50 to 65. The old value is 50 and the new value is 65. What is the change?',
-        objects: [tube(0, up.old, ys.upOld, ROLE.output), label(`old ${up.old}`, P(x0 - 0.9, ys.upOld), ROLE.output, 'detail'), tube(0, up.old, ys.upNew, ROLE.output), tube(up.old, up.now, ys.upNew, ROLE.result), label(`new ${up.now}`, P(x0 - 0.9, ys.upNew), ROLE.ink, 'detail'), label(signed(up.now - up.old), P(x0 + ((up.old + up.now) / 2) * unit, ys.upNew + 0.55), ROLE.result, 'detail')],
+        objects: [tube(0, up.old, ys.upOld, ROLE.output), label(`old ${up.old}`, P(x0 - 0.9, ys.upOld), ROLE.output, 'detail'), tube(0, up.old, ys.upNew, ROLE.output), tube(up.old, up.now, ys.upNew, ROLE.result), label(`new ${up.now}`, P(x0 - 0.9, ys.upNew), ROLE.ink, 'detail'), label(signed(up.now - up.old), P(x0 + up.now * unit + 0.6, ys.upNew), ROLE.result, 'detail')],
       },
       {
         narration: 'The change is 65 − 50 = 15. As a fraction of the OLD value that is 15 ÷ 50 = 0.30, which is +30%.',

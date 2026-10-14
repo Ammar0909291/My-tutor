@@ -185,7 +185,7 @@ function raw_buildSlopeScene(): SceneSpec {
       {
         narration: 'Pick any two points on a line. P₁ and P₂ are two points on this one.',
         objects: [
-          ...axes(0, 0, -3.9, 3.9, -2.9, 2.9), label('x', P(3.7, 0.35), ROLE.reference, 'detail'), label('y', P(0.35, 2.75), ROLE.reference, 'detail'),
+          ...axes(0, 0, -3.9, 3.9, -2.9, 2.9), label('x', P(3.6, -0.4), ROLE.reference, 'detail'), label('y', P(0.35, 2.75), ROLE.reference, 'detail'),
           line(P(-3.4, slopeLineY(-3.4)), P(3.4, slopeLineY(3.4)), ROLE.ink, 0.06),
           dot(P(x1, y1), ROLE.ink, 0.14), dot(P(x2, y2), ROLE.ink, 0.14),
           label('P₁', P(x1 - 0.35, y1 - 0.4), ROLE.ink, 'primary'), label('P₂', P(x2 + 0.1, y2 + 0.45), ROLE.ink, 'primary'),
@@ -393,7 +393,7 @@ function raw_buildDomainRangeScene(): SceneSpec {
       {
         narration: 'f(x) = √(9 − x²) draws the upper half of a circle of radius 3.',
         objects: [
-          ...axes(0, sy, -4.5, 4.5, sy - 1.0, sy + 3.9), label('x', P(4.35, sy + 0.35), ROLE.reference, 'detail'), label('y', P(0.35, sy + 3.75), ROLE.reference, 'detail'),
+          ...axes(0, sy, -4.5, 4.5, sy - 1.0, sy + 3.9), label('x', P(4.3, sy - 0.4), ROLE.reference, 'detail'), label('y', P(0.35, sy + 3.75), ROLE.reference, 'detail'),
           curve(sample(drF, -r, r, 90, 0, sy), ROLE.ink), label('f(x) = √(9 − x²)', P(2.95, sy + 3.0), ROLE.ink, 'primary'),
         ],
       },

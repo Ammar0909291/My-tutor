@@ -225,9 +225,12 @@ npx tsc --noEmit       # pre-existing stripe/subscription errors are expected on
   a figure to the reply it asked for (`scripts/qa/physicsVisual/figureAssociation.ts`, `data-message-id` markers; it throws `WRONG_FIGURE`, never "first/last figure"), and a
   render on a COLD dev server (unstyled page) is not evidence. Drivers: `scripts/qa/productionVisualClosure.ts` (multi-card legibility, slider interaction) and
   `scripts/qa/physicsProductionBrowserAudit.ts --subject <s> --concepts …`; disposable accounts only, deleted with re-login verified.
-- Mathematics visual render audit (2026-10-13): every served Mathematics figure (556 of 908 concepts; 0 FAIL / 495 PASS / 61 REVIEW_REQUIRED) was rendered in Chromium at 390 px (dark + light), 1280 px
-  and the 50/50 column; `mathVisualAudit.test.ts` FAILS, naming the concepts, when a served Mathematics figure changes without a re-audit (a partial re-render: `docs/history/mathematics-visual-render-audit.md`).
-  Report: `docs/qa/MATHEMATICS_VISUAL_QUALITY_REPORT.md`. Semantic review, production sample check and English visual validation are still queued (each needs a fresh owner go-ahead).
+- Mathematics visual render audit (2026-10-13/14): every served Mathematics figure (556 of 908 concepts; 0 FAIL / 544 PASS / 12 REVIEW_REQUIRED, the 12 being deliberately text-only) was rendered in Chromium at 390 px (dark + light),
+  1280 px and the 50/50 column UNDER THE LESSON TOKEN SCOPE (`?scope=lesson`, `.learnCandy`); `mathVisualAudit.test.ts` FAILS, naming the concepts, when a served figure changes without a re-audit
+  (partial re-render: `docs/history/mathematics-visual-render-audit.md`). All 61 first-pass REVIEW figures carry a bound disposition (`docs/qa/mathematics-visual-audit/review-dispositions.json`,
+  `mathReviewDispositions.test.ts`; deterministic evidence in `mathVisualSemanticEvidence.test.ts`); the batch 1-29 label-displacement backlog is closed (`mathLabelAssociation.test.ts`). Report:
+  `docs/qa/MATHEMATICS_VISUAL_QUALITY_REPORT.md`; live state and queue: `docs/history/MATHEMATICS_VISUAL_HANDOVER.md`. STILL OPEN: production `/learn` sample check (blocked: needs a disposable account, deletion
+  was out of scope), English envelope audit (tooling in `scripts/qa/englishVisual/`; last run 220/222, record not installed), human semantic review — each needs a fresh owner go-ahead.
 - Mathematics: `npx tsx scripts/math/state.ts`
 - Physics: `npx tsx scripts/physics/state.ts`
 - Asset-contract readiness (all subjects, incl. KG-registered-but-unauthored ones):

@@ -1,0 +1,1443 @@
+{
+ "generatedAt": "2026-10-14",
+ "basis": {
+  "originalReview": 61,
+  "originalAudit": "commit 743e65c67 (global-token harness)",
+  "currentAudit": "lesson-scope harness, docs/qa/mathematics-visual-audit/audit-summary.json"
+ },
+ "dispositions": [
+  "FIXED_DEFECT",
+  "ASSERTION_ADDED",
+  "VALID_TEXT_FIGURE"
+ ],
+ "ownerQuestions": {
+  "Q1": "31 concepts without a figure of their own are shown their DOMAIN's shared overview card (the shapes card for circle-area or unit-circle, the number line for absolute-value, the coordinate plane for the quadratic equation). Accept them as domain-scope overviews, or author concept-specific figures (the tier-N campaign)? Not a rendering defect; a product decision."
+ },
+ "entries": [
+  {
+   "id": "math.found.truth-table",
+   "figure": "math-truth-table",
+   "class": "scene",
+   "scope": "concept",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "ST-03"
+    ],
+    "sample": [
+     "ST-03: the canvas holds text only, no drawn geometry (ink 0.18%)",
+     "ST-03: the canvas holds text only, no drawn geometry (ink 0.21%)",
+     "ST-03: the canvas holds text only, no drawn geometry (ink 0.29%)"
+    ]
+   },
+   "now": "REVIEW_REQUIRED",
+   "fingerprint": "2e45820156ca29f7",
+   "evidence": [
+    "mathCoreScenesBatch26.test.ts"
+   ],
+   "disposition": "VALID_TEXT_FIGURE",
+   "judgement": "The figure is a table / worked layout whose content IS text (numerals, letters, operators in rows and columns); the rule flags \"no drawn geometry\" for exactly such figures. Opened at 390 / 1280 px: every entry is placed, none clipped or overlapping (0 machine FAIL at 3 widths); every number it states is asserted by the named tests from the drawn coordinates.",
+   "ownerDecision": null
+  },
+  {
+   "id": "math.found.integers",
+   "figure": "number_line",
+   "class": "card",
+   "scope": "concept",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "SM-02"
+    ],
+    "sample": [
+     "SM-02: no deterministic mathematics assertion covers this figure (no arithmetic chain, no mathCoreScenesBatch "
+    ]
+   },
+   "now": "PASS",
+   "fingerprint": "9f7bd2c796acc449",
+   "evidence": [
+    "mathVisualSemanticEvidence.test.ts (number_line card)"
+   ],
+   "disposition": "ASSERTION_ADDED",
+   "judgement": "Structure now asserted from the card's own markup / exported geometry (mathVisualSemanticEvidence.test.ts) and the card is verified to belong to the concept's domain. Concept-scoped (curated) card.",
+   "ownerDecision": null
+  },
+  {
+   "id": "math.found.rational-numbers",
+   "figure": "number_line",
+   "class": "card",
+   "scope": "domain",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "SM-02"
+    ],
+    "sample": [
+     "SM-02: no deterministic mathematics assertion covers this figure (no arithmetic chain, no mathCoreScenesBatch "
+    ]
+   },
+   "now": "PASS",
+   "fingerprint": "da90e68215f63e13",
+   "evidence": [
+    "mathVisualSemanticEvidence.test.ts (number_line card)"
+   ],
+   "disposition": "ASSERTION_ADDED",
+   "judgement": "Structure now asserted from the card's own markup / exported geometry (mathVisualSemanticEvidence.test.ts) and the card is verified to belong to the concept's domain. This is the DOMAIN's shared overview card shown because the concept has no figure of its own: readable and domain-correct, but not a figure OF this concept.",
+   "ownerDecision": "Q1"
+  },
+  {
+   "id": "math.found.real-numbers",
+   "figure": "number_line",
+   "class": "card",
+   "scope": "domain",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "SM-02"
+    ],
+    "sample": [
+     "SM-02: no deterministic mathematics assertion covers this figure (no arithmetic chain, no mathCoreScenesBatch "
+    ]
+   },
+   "now": "PASS",
+   "fingerprint": "4d32cc26af72c2ec",
+   "evidence": [
+    "mathVisualSemanticEvidence.test.ts (number_line card)"
+   ],
+   "disposition": "ASSERTION_ADDED",
+   "judgement": "Structure now asserted from the card's own markup / exported geometry (mathVisualSemanticEvidence.test.ts) and the card is verified to belong to the concept's domain. This is the DOMAIN's shared overview card shown because the concept has no figure of its own: readable and domain-correct, but not a figure OF this concept.",
+   "ownerDecision": "Q1"
+  },
+  {
+   "id": "math.arith.column-addition",
+   "figure": "math-column-addition",
+   "class": "scene",
+   "scope": "concept",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "ST-03"
+    ],
+    "sample": [
+     "ST-03: the canvas holds text only, no drawn geometry (ink 0.25%)",
+     "ST-03: the canvas holds text only, no drawn geometry (ink 0.19%)"
+    ]
+   },
+   "now": "REVIEW_REQUIRED",
+   "fingerprint": "0bbecde71445a864",
+   "evidence": [
+    "mathCoreScenesBatch27.test.ts"
+   ],
+   "disposition": "VALID_TEXT_FIGURE",
+   "judgement": "The figure is a table / worked layout whose content IS text (numerals, letters, operators in rows and columns); the rule flags \"no drawn geometry\" for exactly such figures. Opened at 390 / 1280 px: every entry is placed, none clipped or overlapping (0 machine FAIL at 3 widths); every number it states is asserted by the named tests from the drawn coordinates.",
+   "ownerDecision": null
+  },
+  {
+   "id": "math.arith.negative-numbers",
+   "figure": "number_line",
+   "class": "card",
+   "scope": "domain",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "SM-02"
+    ],
+    "sample": [
+     "SM-02: no deterministic mathematics assertion covers this figure (no arithmetic chain, no mathCoreScenesBatch "
+    ]
+   },
+   "now": "PASS",
+   "fingerprint": "ddcc781d8560dec4",
+   "evidence": [
+    "mathVisualSemanticEvidence.test.ts (number_line card)"
+   ],
+   "disposition": "ASSERTION_ADDED",
+   "judgement": "Structure now asserted from the card's own markup / exported geometry (mathVisualSemanticEvidence.test.ts) and the card is verified to belong to the concept's domain. This is the DOMAIN's shared overview card shown because the concept has no figure of its own: readable and domain-correct, but not a figure OF this concept.",
+   "ownerDecision": "Q1"
+  },
+  {
+   "id": "math.arith.number-line",
+   "figure": "number_line",
+   "class": "card",
+   "scope": "concept",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "SM-02"
+    ],
+    "sample": [
+     "SM-02: no deterministic mathematics assertion covers this figure (no arithmetic chain, no mathCoreScenesBatch "
+    ]
+   },
+   "now": "PASS",
+   "fingerprint": "3a4a8a14d88c6296",
+   "evidence": [
+    "mathVisualSemanticEvidence.test.ts (number_line card)"
+   ],
+   "disposition": "ASSERTION_ADDED",
+   "judgement": "Structure now asserted from the card's own markup / exported geometry (mathVisualSemanticEvidence.test.ts) and the card is verified to belong to the concept's domain. Concept-scoped (curated) card.",
+   "ownerDecision": null
+  },
+  {
+   "id": "math.arith.ordering",
+   "figure": "number_line",
+   "class": "card",
+   "scope": "domain",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "SM-02"
+    ],
+    "sample": [
+     "SM-02: no deterministic mathematics assertion covers this figure (no arithmetic chain, no mathCoreScenesBatch "
+    ]
+   },
+   "now": "PASS",
+   "fingerprint": "99d6cd47562297c3",
+   "evidence": [
+    "mathVisualSemanticEvidence.test.ts (number_line card)"
+   ],
+   "disposition": "ASSERTION_ADDED",
+   "judgement": "Structure now asserted from the card's own markup / exported geometry (mathVisualSemanticEvidence.test.ts) and the card is verified to belong to the concept's domain. This is the DOMAIN's shared overview card shown because the concept has no figure of its own: readable and domain-correct, but not a figure OF this concept.",
+   "ownerDecision": "Q1"
+  },
+  {
+   "id": "math.arith.absolute-value",
+   "figure": "number_line",
+   "class": "card",
+   "scope": "domain",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "SM-02"
+    ],
+    "sample": [
+     "SM-02: no deterministic mathematics assertion covers this figure (no arithmetic chain, no mathCoreScenesBatch "
+    ]
+   },
+   "now": "PASS",
+   "fingerprint": "4892d0ad6de54b1a",
+   "evidence": [
+    "mathVisualSemanticEvidence.test.ts (number_line card)"
+   ],
+   "disposition": "ASSERTION_ADDED",
+   "judgement": "Structure now asserted from the card's own markup / exported geometry (mathVisualSemanticEvidence.test.ts) and the card is verified to belong to the concept's domain. This is the DOMAIN's shared overview card shown because the concept has no figure of its own: readable and domain-correct, but not a figure OF this concept.",
+   "ownerDecision": "Q1"
+  },
+  {
+   "id": "math.arith.integer-arithmetic",
+   "figure": "number_line",
+   "class": "card",
+   "scope": "domain",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "SM-02"
+    ],
+    "sample": [
+     "SM-02: no deterministic mathematics assertion covers this figure (no arithmetic chain, no mathCoreScenesBatch "
+    ]
+   },
+   "now": "PASS",
+   "fingerprint": "de03361420785fee",
+   "evidence": [
+    "mathVisualSemanticEvidence.test.ts (number_line card)"
+   ],
+   "disposition": "ASSERTION_ADDED",
+   "judgement": "Structure now asserted from the card's own markup / exported geometry (mathVisualSemanticEvidence.test.ts) and the card is verified to belong to the concept's domain. This is the DOMAIN's shared overview card shown because the concept has no figure of its own: readable and domain-correct, but not a figure OF this concept.",
+   "ownerDecision": "Q1"
+  },
+  {
+   "id": "math.arith.fractions",
+   "figure": "fraction_bar",
+   "class": "card",
+   "scope": "concept",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "SM-02"
+    ],
+    "sample": [
+     "SM-02: no deterministic mathematics assertion covers this figure (no arithmetic chain, no mathCoreScenesBatch "
+    ]
+   },
+   "now": "PASS",
+   "fingerprint": "8858e02064ffa52d",
+   "evidence": [
+    "mathVisualSemanticEvidence.test.ts (fraction_bar card)"
+   ],
+   "disposition": "ASSERTION_ADDED",
+   "judgement": "Structure now asserted from the card's own markup / exported geometry (mathVisualSemanticEvidence.test.ts) and the card is verified to belong to the concept's domain. Concept-scoped (curated) card.",
+   "ownerDecision": null
+  },
+  {
+   "id": "math.arith.decimals",
+   "figure": "number_line",
+   "class": "card",
+   "scope": "concept",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "SM-02"
+    ],
+    "sample": [
+     "SM-02: no deterministic mathematics assertion covers this figure (no arithmetic chain, no mathCoreScenesBatch "
+    ]
+   },
+   "now": "PASS",
+   "fingerprint": "b565e9575772504d",
+   "evidence": [
+    "mathVisualSemanticEvidence.test.ts (number_line card)"
+   ],
+   "disposition": "ASSERTION_ADDED",
+   "judgement": "Structure now asserted from the card's own markup / exported geometry (mathVisualSemanticEvidence.test.ts) and the card is verified to belong to the concept's domain. Concept-scoped (curated) card.",
+   "ownerDecision": null
+  },
+  {
+   "id": "math.arith.percentages",
+   "figure": "percentage_grid",
+   "class": "card",
+   "scope": "concept",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "SM-02"
+    ],
+    "sample": [
+     "SM-02: no deterministic mathematics assertion covers this figure (no arithmetic chain, no mathCoreScenesBatch "
+    ]
+   },
+   "now": "PASS",
+   "fingerprint": "39bdd876705a3ec7",
+   "evidence": [
+    "mathVisualSemanticEvidence.test.ts (percentage_grid card)"
+   ],
+   "disposition": "ASSERTION_ADDED",
+   "judgement": "Structure now asserted from the card's own markup / exported geometry (mathVisualSemanticEvidence.test.ts) and the card is verified to belong to the concept's domain. Concept-scoped (curated) card.",
+   "ownerDecision": null
+  },
+  {
+   "id": "math.arith.percentage-change",
+   "figure": "math-percentage-change",
+   "class": "scene",
+   "scope": "concept",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "LY-02"
+    ],
+    "sample": [
+     "LY-02: \"+15\" overlaps drawn geometry (25% of its box)",
+     "LY-02: \"+15\" overlaps drawn geometry (33% of its box)"
+    ]
+   },
+   "now": "PASS",
+   "fingerprint": "6c0e1f67e859d35f",
+   "evidence": [
+    "mathCoreScenesBatch3.test.ts"
+   ],
+   "disposition": "FIXED_DEFECT",
+   "judgement": "A label / tick numeral sat on drawn geometry; repaired (axis letters moved off the arrow heads, count moved off the bar, tick numerals given a surface-colour halo, the origin \"0\" moved clear of \"-1\"). Re-rendered clean at every viewport and theme.",
+   "ownerDecision": null
+  },
+  {
+   "id": "math.nt.prime-factorization",
+   "figure": "math-prime-factorization",
+   "class": "scene",
+   "scope": "concept",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "ST-03"
+    ],
+    "sample": [
+     "ST-03: the canvas holds text only, no drawn geometry (ink 0.30%)"
+    ]
+   },
+   "now": "REVIEW_REQUIRED",
+   "fingerprint": "cc7ba4f1fed2319b",
+   "evidence": [
+    "mathCoreScenesBatch29.test.ts"
+   ],
+   "disposition": "VALID_TEXT_FIGURE",
+   "judgement": "The figure is a table / worked layout whose content IS text (numerals, letters, operators in rows and columns); the rule flags \"no drawn geometry\" for exactly such figures. Opened at 390 / 1280 px: every entry is placed, none clipped or overlapping (0 machine FAIL at 3 widths); every number it states is asserted by the named tests from the drawn coordinates.",
+   "ownerDecision": null
+  },
+  {
+   "id": "math.nt.congruence",
+   "figure": "math-congruence",
+   "class": "scene",
+   "scope": "concept",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "ST-03"
+    ],
+    "sample": [
+     "ST-03: the canvas holds text only, no drawn geometry (ink 0.08%)",
+     "ST-03: the canvas holds text only, no drawn geometry (ink 0.06%)",
+     "ST-03: the canvas holds text only, no drawn geometry (ink 0.16%)"
+    ]
+   },
+   "now": "REVIEW_REQUIRED",
+   "fingerprint": "9f66c0ec316f297b",
+   "evidence": [
+    "mathCoreScenesBatch30.test.ts"
+   ],
+   "disposition": "VALID_TEXT_FIGURE",
+   "judgement": "The figure is a table / worked layout whose content IS text (numerals, letters, operators in rows and columns); the rule flags \"no drawn geometry\" for exactly such figures. Opened at 390 / 1280 px: every entry is placed, none clipped or overlapping (0 machine FAIL at 3 widths); every number it states is asserted by the named tests from the drawn coordinates.",
+   "ownerDecision": null
+  },
+  {
+   "id": "math.nt.continued-fractions",
+   "figure": "math-continued-fractions",
+   "class": "scene",
+   "scope": "concept",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "ST-03"
+    ],
+    "sample": [
+     "ST-03: the canvas holds text only, no drawn geometry (ink 0.28%)",
+     "ST-03: the canvas holds text only, no drawn geometry (ink 0.20%)",
+     "ST-03: the canvas holds text only, no drawn geometry (ink 0.22%)"
+    ]
+   },
+   "now": "REVIEW_REQUIRED",
+   "fingerprint": "62cd05469b3ac413",
+   "evidence": [
+    "mathCoreScenesBatch30.test.ts"
+   ],
+   "disposition": "VALID_TEXT_FIGURE",
+   "judgement": "The figure is a table / worked layout whose content IS text (numerals, letters, operators in rows and columns); the rule flags \"no drawn geometry\" for exactly such figures. Opened at 390 / 1280 px: every entry is placed, none clipped or overlapping (0 machine FAIL at 3 widths); every number it states is asserted by the named tests from the drawn coordinates.",
+   "ownerDecision": null
+  },
+  {
+   "id": "math.alg.polynomial",
+   "figure": "coordinate_plane",
+   "class": "card",
+   "scope": "domain",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "LY-02"
+    ],
+    "sample": [
+     "LY-02: \"1\" overlaps drawn geometry (22% of its box)",
+     "LY-02: \"2\" overlaps drawn geometry (25% of its box)",
+     "LY-02: \"3\" overlaps drawn geometry (25% of its box)"
+    ]
+   },
+   "now": "PASS",
+   "fingerprint": "3eef742be44072e3",
+   "evidence": [
+    "mathVisualSemanticEvidence.test.ts (coordinate_plane card)"
+   ],
+   "disposition": "FIXED_DEFECT",
+   "judgement": "A label / tick numeral sat on drawn geometry; repaired (axis letters moved off the arrow heads, count moved off the bar, tick numerals given a surface-colour halo, the origin \"0\" moved clear of \"-1\"). Re-rendered clean at every viewport and theme.",
+   "ownerDecision": "Q1"
+  },
+  {
+   "id": "math.alg.factoring-trinomials",
+   "figure": "math-factoring-trinomials",
+   "class": "scene",
+   "scope": "concept",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "ST-03"
+    ],
+    "sample": [
+     "ST-03: the canvas holds text only, no drawn geometry (ink 0.14%)"
+    ]
+   },
+   "now": "REVIEW_REQUIRED",
+   "fingerprint": "34cb64339529055c",
+   "evidence": [
+    "mathCoreScenesBatch28.test.ts"
+   ],
+   "disposition": "VALID_TEXT_FIGURE",
+   "judgement": "The figure is a table / worked layout whose content IS text (numerals, letters, operators in rows and columns); the rule flags \"no drawn geometry\" for exactly such figures. Opened at 390 / 1280 px: every entry is placed, none clipped or overlapping (0 machine FAIL at 3 widths); every number it states is asserted by the named tests from the drawn coordinates.",
+   "ownerDecision": null
+  },
+  {
+   "id": "math.alg.quadratic-equation",
+   "figure": "coordinate_plane",
+   "class": "card",
+   "scope": "domain",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "LY-02"
+    ],
+    "sample": [
+     "LY-02: \"1\" overlaps drawn geometry (22% of its box)",
+     "LY-02: \"2\" overlaps drawn geometry (25% of its box)",
+     "LY-02: \"3\" overlaps drawn geometry (25% of its box)"
+    ]
+   },
+   "now": "PASS",
+   "fingerprint": "842097e581be095f",
+   "evidence": [
+    "mathVisualSemanticEvidence.test.ts (coordinate_plane card)"
+   ],
+   "disposition": "FIXED_DEFECT",
+   "judgement": "A label / tick numeral sat on drawn geometry; repaired (axis letters moved off the arrow heads, count moved off the bar, tick numerals given a surface-colour halo, the origin \"0\" moved clear of \"-1\"). Re-rendered clean at every viewport and theme.",
+   "ownerDecision": "Q1"
+  },
+  {
+   "id": "math.alg.binomial-theorem",
+   "figure": "math-binomial-theorem",
+   "class": "scene",
+   "scope": "concept",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "ST-03"
+    ],
+    "sample": [
+     "ST-03: the canvas holds text only, no drawn geometry (ink 0.27%)"
+    ]
+   },
+   "now": "REVIEW_REQUIRED",
+   "fingerprint": "81f6946366857111",
+   "evidence": [
+    "mathCoreScenesBatch29.test.ts",
+    "mathCoreScenesBatch35.test.ts"
+   ],
+   "disposition": "VALID_TEXT_FIGURE",
+   "judgement": "The figure is a table / worked layout whose content IS text (numerals, letters, operators in rows and columns); the rule flags \"no drawn geometry\" for exactly such figures. Opened at 390 / 1280 px: every entry is placed, none clipped or overlapping (0 machine FAIL at 3 widths); every number it states is asserted by the named tests from the drawn coordinates.",
+   "ownerDecision": null
+  },
+  {
+   "id": "math.alg.pascals-triangle",
+   "figure": "math-pascals-triangle",
+   "class": "scene",
+   "scope": "concept",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "ST-03"
+    ],
+    "sample": [
+     "ST-03: the canvas holds text only, no drawn geometry (ink 0.04%)",
+     "ST-03: the canvas holds text only, no drawn geometry (ink 0.03%)",
+     "ST-03: the canvas holds text only, no drawn geometry (ink 0.05%)"
+    ]
+   },
+   "now": "REVIEW_REQUIRED",
+   "fingerprint": "3a04a5914ef83830",
+   "evidence": [
+    "mathCoreScenesBatch17.test.ts"
+   ],
+   "disposition": "VALID_TEXT_FIGURE",
+   "judgement": "The figure is a table / worked layout whose content IS text (numerals, letters, operators in rows and columns); the rule flags \"no drawn geometry\" for exactly such figures. Opened at 390 / 1280 px: every entry is placed, none clipped or overlapping (0 machine FAIL at 3 widths); every number it states is asserted by the named tests from the drawn coordinates.",
+   "ownerDecision": null
+  },
+  {
+   "id": "math.geom.angle",
+   "figure": "geometry_shape",
+   "class": "card",
+   "scope": "domain",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "SM-02"
+    ],
+    "sample": [
+     "SM-02: no deterministic mathematics assertion covers this figure (no arithmetic chain, no mathCoreScenesBatch "
+    ]
+   },
+   "now": "PASS",
+   "fingerprint": "a8308553ede8097c",
+   "evidence": [
+    "mathVisualSemanticEvidence.test.ts (geometry_shape card)"
+   ],
+   "disposition": "ASSERTION_ADDED",
+   "judgement": "Structure now asserted from the card's own markup / exported geometry (mathVisualSemanticEvidence.test.ts) and the card is verified to belong to the concept's domain. This is the DOMAIN's shared overview card shown because the concept has no figure of its own: readable and domain-correct, but not a figure OF this concept.",
+   "ownerDecision": "Q1"
+  },
+  {
+   "id": "math.geom.angle-types",
+   "figure": "geometry_shape",
+   "class": "card",
+   "scope": "domain",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "SM-02"
+    ],
+    "sample": [
+     "SM-02: no deterministic mathematics assertion covers this figure (no arithmetic chain, no mathCoreScenesBatch "
+    ]
+   },
+   "now": "PASS",
+   "fingerprint": "886a5c15560a3d80",
+   "evidence": [
+    "mathVisualSemanticEvidence.test.ts (geometry_shape card)"
+   ],
+   "disposition": "ASSERTION_ADDED",
+   "judgement": "Structure now asserted from the card's own markup / exported geometry (mathVisualSemanticEvidence.test.ts) and the card is verified to belong to the concept's domain. This is the DOMAIN's shared overview card shown because the concept has no figure of its own: readable and domain-correct, but not a figure OF this concept.",
+   "ownerDecision": "Q1"
+  },
+  {
+   "id": "math.geom.angle-measurement",
+   "figure": "geometry_shape",
+   "class": "card",
+   "scope": "domain",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "SM-02"
+    ],
+    "sample": [
+     "SM-02: no deterministic mathematics assertion covers this figure (no arithmetic chain, no mathCoreScenesBatch "
+    ]
+   },
+   "now": "PASS",
+   "fingerprint": "41deda2c505c039c",
+   "evidence": [
+    "mathVisualSemanticEvidence.test.ts (geometry_shape card)"
+   ],
+   "disposition": "ASSERTION_ADDED",
+   "judgement": "Structure now asserted from the card's own markup / exported geometry (mathVisualSemanticEvidence.test.ts) and the card is verified to belong to the concept's domain. This is the DOMAIN's shared overview card shown because the concept has no figure of its own: readable and domain-correct, but not a figure OF this concept.",
+   "ownerDecision": "Q1"
+  },
+  {
+   "id": "math.geom.angle-pairs",
+   "figure": "geometry_shape",
+   "class": "card",
+   "scope": "domain",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "SM-02"
+    ],
+    "sample": [
+     "SM-02: no deterministic mathematics assertion covers this figure (no arithmetic chain, no mathCoreScenesBatch "
+    ]
+   },
+   "now": "PASS",
+   "fingerprint": "ae7721e5d30dfe92",
+   "evidence": [
+    "mathVisualSemanticEvidence.test.ts (geometry_shape card)"
+   ],
+   "disposition": "ASSERTION_ADDED",
+   "judgement": "Structure now asserted from the card's own markup / exported geometry (mathVisualSemanticEvidence.test.ts) and the card is verified to belong to the concept's domain. This is the DOMAIN's shared overview card shown because the concept has no figure of its own: readable and domain-correct, but not a figure OF this concept.",
+   "ownerDecision": "Q1"
+  },
+  {
+   "id": "math.geom.triangle",
+   "figure": "triangle-60-60",
+   "class": "scene",
+   "scope": "concept",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "SM-02"
+    ],
+    "sample": [
+     "SM-02: no deterministic mathematics assertion covers this figure (no arithmetic chain, no mathCoreScenesBatch "
+    ]
+   },
+   "now": "PASS",
+   "fingerprint": "9d4f948b534701ad",
+   "evidence": [
+    "mathVisualSemanticEvidence.test.ts"
+   ],
+   "disposition": "ASSERTION_ADDED",
+   "judgement": "The shared generator's independent consistency checker is run on the served figure (mathVisualSemanticEvidence.test.ts).",
+   "ownerDecision": null
+  },
+  {
+   "id": "math.geom.triangle-types",
+   "figure": "geometry_shape",
+   "class": "card",
+   "scope": "domain",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "SM-02"
+    ],
+    "sample": [
+     "SM-02: no deterministic mathematics assertion covers this figure (no arithmetic chain, no mathCoreScenesBatch "
+    ]
+   },
+   "now": "PASS",
+   "fingerprint": "62dd76e436e8d202",
+   "evidence": [
+    "mathVisualSemanticEvidence.test.ts (geometry_shape card)"
+   ],
+   "disposition": "ASSERTION_ADDED",
+   "judgement": "Structure now asserted from the card's own markup / exported geometry (mathVisualSemanticEvidence.test.ts) and the card is verified to belong to the concept's domain. This is the DOMAIN's shared overview card shown because the concept has no figure of its own: readable and domain-correct, but not a figure OF this concept.",
+   "ownerDecision": "Q1"
+  },
+  {
+   "id": "math.geom.triangle-angle-sum",
+   "figure": "geometry_shape",
+   "class": "card",
+   "scope": "domain",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "SM-02"
+    ],
+    "sample": [
+     "SM-02: no deterministic mathematics assertion covers this figure (no arithmetic chain, no mathCoreScenesBatch "
+    ]
+   },
+   "now": "PASS",
+   "fingerprint": "edab689b71789e33",
+   "evidence": [
+    "mathVisualSemanticEvidence.test.ts (geometry_shape card)"
+   ],
+   "disposition": "ASSERTION_ADDED",
+   "judgement": "Structure now asserted from the card's own markup / exported geometry (mathVisualSemanticEvidence.test.ts) and the card is verified to belong to the concept's domain. This is the DOMAIN's shared overview card shown because the concept has no figure of its own: readable and domain-correct, but not a figure OF this concept.",
+   "ownerDecision": "Q1"
+  },
+  {
+   "id": "math.geom.right-triangle",
+   "figure": "geometry_shape",
+   "class": "card",
+   "scope": "domain",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "SM-02"
+    ],
+    "sample": [
+     "SM-02: no deterministic mathematics assertion covers this figure (no arithmetic chain, no mathCoreScenesBatch "
+    ]
+   },
+   "now": "PASS",
+   "fingerprint": "fd092dd40603e26a",
+   "evidence": [
+    "mathVisualSemanticEvidence.test.ts (geometry_shape card)"
+   ],
+   "disposition": "ASSERTION_ADDED",
+   "judgement": "Structure now asserted from the card's own markup / exported geometry (mathVisualSemanticEvidence.test.ts) and the card is verified to belong to the concept's domain. This is the DOMAIN's shared overview card shown because the concept has no figure of its own: readable and domain-correct, but not a figure OF this concept.",
+   "ownerDecision": "Q1"
+  },
+  {
+   "id": "math.geom.congruent-triangles",
+   "figure": "geometry_shape",
+   "class": "card",
+   "scope": "domain",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "SM-02"
+    ],
+    "sample": [
+     "SM-02: no deterministic mathematics assertion covers this figure (no arithmetic chain, no mathCoreScenesBatch "
+    ]
+   },
+   "now": "PASS",
+   "fingerprint": "4367c5fbe74d5c33",
+   "evidence": [
+    "mathVisualSemanticEvidence.test.ts (geometry_shape card)"
+   ],
+   "disposition": "ASSERTION_ADDED",
+   "judgement": "Structure now asserted from the card's own markup / exported geometry (mathVisualSemanticEvidence.test.ts) and the card is verified to belong to the concept's domain. This is the DOMAIN's shared overview card shown because the concept has no figure of its own: readable and domain-correct, but not a figure OF this concept.",
+   "ownerDecision": "Q1"
+  },
+  {
+   "id": "math.geom.similar-triangles",
+   "figure": "geometry_shape",
+   "class": "card",
+   "scope": "domain",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "SM-02"
+    ],
+    "sample": [
+     "SM-02: no deterministic mathematics assertion covers this figure (no arithmetic chain, no mathCoreScenesBatch "
+    ]
+   },
+   "now": "PASS",
+   "fingerprint": "26af05acf8d4e0af",
+   "evidence": [
+    "mathVisualSemanticEvidence.test.ts (geometry_shape card)"
+   ],
+   "disposition": "ASSERTION_ADDED",
+   "judgement": "Structure now asserted from the card's own markup / exported geometry (mathVisualSemanticEvidence.test.ts) and the card is verified to belong to the concept's domain. This is the DOMAIN's shared overview card shown because the concept has no figure of its own: readable and domain-correct, but not a figure OF this concept.",
+   "ownerDecision": "Q1"
+  },
+  {
+   "id": "math.geom.triangle-centers",
+   "figure": "geometry_shape",
+   "class": "card",
+   "scope": "domain",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "SM-02"
+    ],
+    "sample": [
+     "SM-02: no deterministic mathematics assertion covers this figure (no arithmetic chain, no mathCoreScenesBatch "
+    ]
+   },
+   "now": "PASS",
+   "fingerprint": "2c6f2e4471b0f6c4",
+   "evidence": [
+    "mathVisualSemanticEvidence.test.ts (geometry_shape card)"
+   ],
+   "disposition": "ASSERTION_ADDED",
+   "judgement": "Structure now asserted from the card's own markup / exported geometry (mathVisualSemanticEvidence.test.ts) and the card is verified to belong to the concept's domain. This is the DOMAIN's shared overview card shown because the concept has no figure of its own: readable and domain-correct, but not a figure OF this concept.",
+   "ownerDecision": "Q1"
+  },
+  {
+   "id": "math.geom.area-triangle",
+   "figure": "geometry_shape",
+   "class": "card",
+   "scope": "domain",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "SM-02"
+    ],
+    "sample": [
+     "SM-02: no deterministic mathematics assertion covers this figure (no arithmetic chain, no mathCoreScenesBatch "
+    ]
+   },
+   "now": "PASS",
+   "fingerprint": "6b09f6ad2265c103",
+   "evidence": [
+    "mathVisualSemanticEvidence.test.ts (geometry_shape card)"
+   ],
+   "disposition": "ASSERTION_ADDED",
+   "judgement": "Structure now asserted from the card's own markup / exported geometry (mathVisualSemanticEvidence.test.ts) and the card is verified to belong to the concept's domain. This is the DOMAIN's shared overview card shown because the concept has no figure of its own: readable and domain-correct, but not a figure OF this concept.",
+   "ownerDecision": "Q1"
+  },
+  {
+   "id": "math.geom.polygon",
+   "figure": "geometry_shape",
+   "class": "card",
+   "scope": "concept",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "SM-02"
+    ],
+    "sample": [
+     "SM-02: no deterministic mathematics assertion covers this figure (no arithmetic chain, no mathCoreScenesBatch "
+    ]
+   },
+   "now": "PASS",
+   "fingerprint": "f9b4344111977c5a",
+   "evidence": [
+    "mathVisualSemanticEvidence.test.ts (geometry_shape card)"
+   ],
+   "disposition": "ASSERTION_ADDED",
+   "judgement": "Structure now asserted from the card's own markup / exported geometry (mathVisualSemanticEvidence.test.ts) and the card is verified to belong to the concept's domain. Concept-scoped (curated) card.",
+   "ownerDecision": null
+  },
+  {
+   "id": "math.geom.polygon-angle-sum",
+   "figure": "geometry_shape",
+   "class": "card",
+   "scope": "domain",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "SM-02"
+    ],
+    "sample": [
+     "SM-02: no deterministic mathematics assertion covers this figure (no arithmetic chain, no mathCoreScenesBatch "
+    ]
+   },
+   "now": "PASS",
+   "fingerprint": "d8e573f85d71321e",
+   "evidence": [
+    "mathVisualSemanticEvidence.test.ts (geometry_shape card)"
+   ],
+   "disposition": "ASSERTION_ADDED",
+   "judgement": "Structure now asserted from the card's own markup / exported geometry (mathVisualSemanticEvidence.test.ts) and the card is verified to belong to the concept's domain. This is the DOMAIN's shared overview card shown because the concept has no figure of its own: readable and domain-correct, but not a figure OF this concept.",
+   "ownerDecision": "Q1"
+  },
+  {
+   "id": "math.geom.quadrilateral",
+   "figure": "geometry_shape",
+   "class": "card",
+   "scope": "concept",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "SM-02"
+    ],
+    "sample": [
+     "SM-02: no deterministic mathematics assertion covers this figure (no arithmetic chain, no mathCoreScenesBatch "
+    ]
+   },
+   "now": "PASS",
+   "fingerprint": "0da79d872a2d4bc0",
+   "evidence": [
+    "mathVisualSemanticEvidence.test.ts (geometry_shape card)"
+   ],
+   "disposition": "ASSERTION_ADDED",
+   "judgement": "Structure now asserted from the card's own markup / exported geometry (mathVisualSemanticEvidence.test.ts) and the card is verified to belong to the concept's domain. Concept-scoped (curated) card.",
+   "ownerDecision": null
+  },
+  {
+   "id": "math.geom.regular-polygon",
+   "figure": "geometry_shape",
+   "class": "card",
+   "scope": "domain",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "SM-02"
+    ],
+    "sample": [
+     "SM-02: no deterministic mathematics assertion covers this figure (no arithmetic chain, no mathCoreScenesBatch "
+    ]
+   },
+   "now": "PASS",
+   "fingerprint": "3f6ff20c7f0d56aa",
+   "evidence": [
+    "mathVisualSemanticEvidence.test.ts (geometry_shape card)"
+   ],
+   "disposition": "ASSERTION_ADDED",
+   "judgement": "Structure now asserted from the card's own markup / exported geometry (mathVisualSemanticEvidence.test.ts) and the card is verified to belong to the concept's domain. This is the DOMAIN's shared overview card shown because the concept has no figure of its own: readable and domain-correct, but not a figure OF this concept.",
+   "ownerDecision": "Q1"
+  },
+  {
+   "id": "math.geom.area-polygon",
+   "figure": "geometry_shape",
+   "class": "card",
+   "scope": "domain",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "SM-02"
+    ],
+    "sample": [
+     "SM-02: no deterministic mathematics assertion covers this figure (no arithmetic chain, no mathCoreScenesBatch "
+    ]
+   },
+   "now": "PASS",
+   "fingerprint": "942c40a688e25e53",
+   "evidence": [
+    "mathVisualSemanticEvidence.test.ts (geometry_shape card)"
+   ],
+   "disposition": "ASSERTION_ADDED",
+   "judgement": "Structure now asserted from the card's own markup / exported geometry (mathVisualSemanticEvidence.test.ts) and the card is verified to belong to the concept's domain. This is the DOMAIN's shared overview card shown because the concept has no figure of its own: readable and domain-correct, but not a figure OF this concept.",
+   "ownerDecision": "Q1"
+  },
+  {
+   "id": "math.geom.perimeter",
+   "figure": "geometry_shape",
+   "class": "card",
+   "scope": "domain",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "SM-02"
+    ],
+    "sample": [
+     "SM-02: no deterministic mathematics assertion covers this figure (no arithmetic chain, no mathCoreScenesBatch "
+    ]
+   },
+   "now": "PASS",
+   "fingerprint": "f85ccb62c2026d1b",
+   "evidence": [
+    "mathVisualSemanticEvidence.test.ts (geometry_shape card)"
+   ],
+   "disposition": "ASSERTION_ADDED",
+   "judgement": "Structure now asserted from the card's own markup / exported geometry (mathVisualSemanticEvidence.test.ts) and the card is verified to belong to the concept's domain. This is the DOMAIN's shared overview card shown because the concept has no figure of its own: readable and domain-correct, but not a figure OF this concept.",
+   "ownerDecision": "Q1"
+  },
+  {
+   "id": "math.geom.circle",
+   "figure": "geometry_shape",
+   "class": "card",
+   "scope": "concept",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "SM-02"
+    ],
+    "sample": [
+     "SM-02: no deterministic mathematics assertion covers this figure (no arithmetic chain, no mathCoreScenesBatch "
+    ]
+   },
+   "now": "PASS",
+   "fingerprint": "671fc5f8ceb4b1db",
+   "evidence": [
+    "mathVisualSemanticEvidence.test.ts (geometry_shape card)"
+   ],
+   "disposition": "ASSERTION_ADDED",
+   "judgement": "Structure now asserted from the card's own markup / exported geometry (mathVisualSemanticEvidence.test.ts) and the card is verified to belong to the concept's domain. Concept-scoped (curated) card.",
+   "ownerDecision": null
+  },
+  {
+   "id": "math.geom.circle-parts",
+   "figure": "geometry_shape",
+   "class": "card",
+   "scope": "domain",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "SM-02"
+    ],
+    "sample": [
+     "SM-02: no deterministic mathematics assertion covers this figure (no arithmetic chain, no mathCoreScenesBatch "
+    ]
+   },
+   "now": "PASS",
+   "fingerprint": "a6162879a871663f",
+   "evidence": [
+    "mathVisualSemanticEvidence.test.ts (geometry_shape card)"
+   ],
+   "disposition": "ASSERTION_ADDED",
+   "judgement": "Structure now asserted from the card's own markup / exported geometry (mathVisualSemanticEvidence.test.ts) and the card is verified to belong to the concept's domain. This is the DOMAIN's shared overview card shown because the concept has no figure of its own: readable and domain-correct, but not a figure OF this concept.",
+   "ownerDecision": "Q1"
+  },
+  {
+   "id": "math.geom.circle-circumference",
+   "figure": "geometry_shape",
+   "class": "card",
+   "scope": "domain",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "SM-02"
+    ],
+    "sample": [
+     "SM-02: no deterministic mathematics assertion covers this figure (no arithmetic chain, no mathCoreScenesBatch "
+    ]
+   },
+   "now": "PASS",
+   "fingerprint": "13001b59e6bb0bf3",
+   "evidence": [
+    "mathVisualSemanticEvidence.test.ts (geometry_shape card)"
+   ],
+   "disposition": "ASSERTION_ADDED",
+   "judgement": "Structure now asserted from the card's own markup / exported geometry (mathVisualSemanticEvidence.test.ts) and the card is verified to belong to the concept's domain. This is the DOMAIN's shared overview card shown because the concept has no figure of its own: readable and domain-correct, but not a figure OF this concept.",
+   "ownerDecision": "Q1"
+  },
+  {
+   "id": "math.geom.circle-area",
+   "figure": "geometry_shape",
+   "class": "card",
+   "scope": "domain",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "SM-02"
+    ],
+    "sample": [
+     "SM-02: no deterministic mathematics assertion covers this figure (no arithmetic chain, no mathCoreScenesBatch "
+    ]
+   },
+   "now": "PASS",
+   "fingerprint": "98d12b16bd785d57",
+   "evidence": [
+    "mathVisualSemanticEvidence.test.ts (geometry_shape card)"
+   ],
+   "disposition": "ASSERTION_ADDED",
+   "judgement": "Structure now asserted from the card's own markup / exported geometry (mathVisualSemanticEvidence.test.ts) and the card is verified to belong to the concept's domain. This is the DOMAIN's shared overview card shown because the concept has no figure of its own: readable and domain-correct, but not a figure OF this concept.",
+   "ownerDecision": "Q1"
+  },
+  {
+   "id": "math.geom.surface-area",
+   "figure": "three_geometric_solids",
+   "class": "card",
+   "scope": "concept",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "SM-02"
+    ],
+    "sample": [
+     "SM-02: no deterministic mathematics assertion covers this figure (no arithmetic chain, no mathCoreScenesBatch "
+    ]
+   },
+   "now": "PASS",
+   "fingerprint": "54c9172bdd0a7c4b",
+   "evidence": [
+    "mathVisualSemanticEvidence.test.ts (three_geometric_solids card)"
+   ],
+   "disposition": "ASSERTION_ADDED",
+   "judgement": "Structure now asserted from the card's own markup / exported geometry (mathVisualSemanticEvidence.test.ts) and the card is verified to belong to the concept's domain. Concept-scoped (curated) card.",
+   "ownerDecision": null
+  },
+  {
+   "id": "math.geom.volume",
+   "figure": "three_geometric_solids",
+   "class": "card",
+   "scope": "concept",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "SM-02"
+    ],
+    "sample": [
+     "SM-02: no deterministic mathematics assertion covers this figure (no arithmetic chain, no mathCoreScenesBatch "
+    ]
+   },
+   "now": "PASS",
+   "fingerprint": "596301c664581607",
+   "evidence": [
+    "mathVisualSemanticEvidence.test.ts (three_geometric_solids card)"
+   ],
+   "disposition": "ASSERTION_ADDED",
+   "judgement": "Structure now asserted from the card's own markup / exported geometry (mathVisualSemanticEvidence.test.ts) and the card is verified to belong to the concept's domain. Concept-scoped (curated) card.",
+   "ownerDecision": null
+  },
+  {
+   "id": "math.geom.solid-3d",
+   "figure": "three_geometric_solids",
+   "class": "card",
+   "scope": "concept",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "SM-02"
+    ],
+    "sample": [
+     "SM-02: no deterministic mathematics assertion covers this figure (no arithmetic chain, no mathCoreScenesBatch "
+    ]
+   },
+   "now": "PASS",
+   "fingerprint": "bb5da9b8e51b7ed8",
+   "evidence": [
+    "mathVisualSemanticEvidence.test.ts (three_geometric_solids card)"
+   ],
+   "disposition": "ASSERTION_ADDED",
+   "judgement": "Structure now asserted from the card's own markup / exported geometry (mathVisualSemanticEvidence.test.ts) and the card is verified to belong to the concept's domain. Concept-scoped (curated) card.",
+   "ownerDecision": null
+  },
+  {
+   "id": "math.geom.distance-formula",
+   "figure": "coord-geo-0-0-4-3",
+   "class": "scene",
+   "scope": "concept",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "SM-02",
+     "ST-03"
+    ],
+    "sample": [
+     "ST-03: the canvas holds text only, no drawn geometry (ink 0.23%)",
+     "ST-03: the canvas holds text only, no drawn geometry (ink 0.21%)",
+     "SM-02: no deterministic mathematics assertion covers this figure (no arithmetic chain, no mathCoreScenesBatch "
+    ]
+   },
+   "now": "REVIEW_REQUIRED",
+   "fingerprint": "55b6a8724e94ea5e",
+   "evidence": [
+    "mathVisualSemanticEvidence.test.ts"
+   ],
+   "disposition": "VALID_TEXT_FIGURE",
+   "judgement": "The figure is a table / worked layout whose content IS text (numerals, letters, operators in rows and columns); the rule flags \"no drawn geometry\" for exactly such figures. Opened at 390 / 1280 px: every entry is placed, none clipped or overlapping (0 machine FAIL at 3 widths); every number it states is asserted by the named tests from the drawn coordinates.",
+   "ownerDecision": null
+  },
+  {
+   "id": "math.geom.slope",
+   "figure": "math-slope",
+   "class": "scene",
+   "scope": "concept",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "LY-02"
+    ],
+    "sample": [
+     "LY-02: \"x\" overlaps drawn geometry (28% of its box)",
+     "LY-02: \"x\" overlaps drawn geometry (32% of its box)",
+     "LY-02: \"x\" overlaps drawn geometry (38% of its box)"
+    ]
+   },
+   "now": "PASS",
+   "fingerprint": "ee3dbff77fd18261",
+   "evidence": [
+    "mathCoreScenesBatch1.test.ts"
+   ],
+   "disposition": "FIXED_DEFECT",
+   "judgement": "A label / tick numeral sat on drawn geometry; repaired (axis letters moved off the arrow heads, count moved off the bar, tick numerals given a surface-colour halo, the origin \"0\" moved clear of \"-1\"). Re-rendered clean at every viewport and theme.",
+   "ownerDecision": null
+  },
+  {
+   "id": "math.geom.transformations",
+   "figure": "three_transformations",
+   "class": "card",
+   "scope": "concept",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "SM-02"
+    ],
+    "sample": [
+     "SM-02: no deterministic mathematics assertion covers this figure (no arithmetic chain, no mathCoreScenesBatch "
+    ]
+   },
+   "now": "PASS",
+   "fingerprint": "9777325f03db2662",
+   "evidence": [
+    "mathVisualSemanticEvidence.test.ts (three_transformations card)"
+   ],
+   "disposition": "ASSERTION_ADDED",
+   "judgement": "Structure now asserted from the card's own markup / exported geometry (mathVisualSemanticEvidence.test.ts) and the card is verified to belong to the concept's domain. Concept-scoped (curated) card.",
+   "ownerDecision": null
+  },
+  {
+   "id": "math.trig.angle-measure",
+   "figure": "geometry_shape",
+   "class": "card",
+   "scope": "domain",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "SM-02"
+    ],
+    "sample": [
+     "SM-02: no deterministic mathematics assertion covers this figure (no arithmetic chain, no mathCoreScenesBatch "
+    ]
+   },
+   "now": "PASS",
+   "fingerprint": "a7dcec306eeab945",
+   "evidence": [
+    "mathVisualSemanticEvidence.test.ts (geometry_shape card)"
+   ],
+   "disposition": "ASSERTION_ADDED",
+   "judgement": "Structure now asserted from the card's own markup / exported geometry (mathVisualSemanticEvidence.test.ts) and the card is verified to belong to the concept's domain. This is the DOMAIN's shared overview card shown because the concept has no figure of its own: readable and domain-correct, but not a figure OF this concept.",
+   "ownerDecision": "Q1"
+  },
+  {
+   "id": "math.trig.right-triangle-trig",
+   "figure": "geometry_shape",
+   "class": "card",
+   "scope": "domain",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "SM-02"
+    ],
+    "sample": [
+     "SM-02: no deterministic mathematics assertion covers this figure (no arithmetic chain, no mathCoreScenesBatch "
+    ]
+   },
+   "now": "PASS",
+   "fingerprint": "e2a899b75a2f8579",
+   "evidence": [
+    "mathVisualSemanticEvidence.test.ts (geometry_shape card)"
+   ],
+   "disposition": "ASSERTION_ADDED",
+   "judgement": "Structure now asserted from the card's own markup / exported geometry (mathVisualSemanticEvidence.test.ts) and the card is verified to belong to the concept's domain. This is the DOMAIN's shared overview card shown because the concept has no figure of its own: readable and domain-correct, but not a figure OF this concept.",
+   "ownerDecision": "Q1"
+  },
+  {
+   "id": "math.trig.special-angles",
+   "figure": "geometry_shape",
+   "class": "card",
+   "scope": "domain",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "SM-02"
+    ],
+    "sample": [
+     "SM-02: no deterministic mathematics assertion covers this figure (no arithmetic chain, no mathCoreScenesBatch "
+    ]
+   },
+   "now": "PASS",
+   "fingerprint": "7d4da70203f128c7",
+   "evidence": [
+    "mathVisualSemanticEvidence.test.ts (geometry_shape card)"
+   ],
+   "disposition": "ASSERTION_ADDED",
+   "judgement": "Structure now asserted from the card's own markup / exported geometry (mathVisualSemanticEvidence.test.ts) and the card is verified to belong to the concept's domain. This is the DOMAIN's shared overview card shown because the concept has no figure of its own: readable and domain-correct, but not a figure OF this concept.",
+   "ownerDecision": "Q1"
+  },
+  {
+   "id": "math.trig.unit-circle",
+   "figure": "geometry_shape",
+   "class": "card",
+   "scope": "domain",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "SM-02"
+    ],
+    "sample": [
+     "SM-02: no deterministic mathematics assertion covers this figure (no arithmetic chain, no mathCoreScenesBatch "
+    ]
+   },
+   "now": "PASS",
+   "fingerprint": "f82163e358b4d0c7",
+   "evidence": [
+    "mathVisualSemanticEvidence.test.ts (geometry_shape card)"
+   ],
+   "disposition": "ASSERTION_ADDED",
+   "judgement": "Structure now asserted from the card's own markup / exported geometry (mathVisualSemanticEvidence.test.ts) and the card is verified to belong to the concept's domain. This is the DOMAIN's shared overview card shown because the concept has no figure of its own: readable and domain-correct, but not a figure OF this concept.",
+   "ownerDecision": "Q1"
+  },
+  {
+   "id": "math.trig.reference-angles",
+   "figure": "geometry_shape",
+   "class": "card",
+   "scope": "domain",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "SM-02"
+    ],
+    "sample": [
+     "SM-02: no deterministic mathematics assertion covers this figure (no arithmetic chain, no mathCoreScenesBatch "
+    ]
+   },
+   "now": "PASS",
+   "fingerprint": "a7f6fe969fa2f795",
+   "evidence": [
+    "mathVisualSemanticEvidence.test.ts (geometry_shape card)"
+   ],
+   "disposition": "ASSERTION_ADDED",
+   "judgement": "Structure now asserted from the card's own markup / exported geometry (mathVisualSemanticEvidence.test.ts) and the card is verified to belong to the concept's domain. This is the DOMAIN's shared overview card shown because the concept has no figure of its own: readable and domain-correct, but not a figure OF this concept.",
+   "ownerDecision": "Q1"
+  },
+  {
+   "id": "math.func.domain-range",
+   "figure": "math-domain-range",
+   "class": "scene",
+   "scope": "concept",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "LY-02"
+    ],
+    "sample": [
+     "LY-02: \"x\" overlaps drawn geometry (28% of its box)",
+     "LY-02: \"x\" overlaps drawn geometry (33% of its box)"
+    ]
+   },
+   "now": "PASS",
+   "fingerprint": "bfb09f37363ca09a",
+   "evidence": [
+    "mathCoreScenesBatch1.test.ts"
+   ],
+   "disposition": "FIXED_DEFECT",
+   "judgement": "A label / tick numeral sat on drawn geometry; repaired (axis letters moved off the arrow heads, count moved off the bar, tick numerals given a surface-colour halo, the origin \"0\" moved clear of \"-1\"). Re-rendered clean at every viewport and theme.",
+   "ownerDecision": null
+  },
+  {
+   "id": "math.calc.critical-points",
+   "figure": "calculus-polynomial--2.5-2.5",
+   "class": "scene",
+   "scope": "concept",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "SM-02"
+    ],
+    "sample": [
+     "SM-02: no deterministic mathematics assertion covers this figure (no arithmetic chain, no mathCoreScenesBatch "
+    ]
+   },
+   "now": "PASS",
+   "fingerprint": "c0d2178d937d618f",
+   "evidence": [
+    "mathVisualSemanticEvidence.test.ts"
+   ],
+   "disposition": "FIXED_DEFECT",
+   "judgement": "The shared calculus_graph generator drew a curve with no axes (GR-01): it now draws a named pair of axes. Semantics: the generator's own consistency checker (critical points of x³ − 3x are ±1, f′ = 0) is run on the served figure.",
+   "ownerDecision": null
+  },
+  {
+   "id": "math.stats.data-visualization",
+   "figure": "statistics-Marks-scored",
+   "class": "scene",
+   "scope": "domain",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "SM-02"
+    ],
+    "sample": [
+     "SM-02: no deterministic mathematics assertion covers this figure (no arithmetic chain, no mathCoreScenesBatch "
+    ]
+   },
+   "now": "PASS",
+   "fingerprint": "42759cc008570d31",
+   "evidence": [
+    "mathVisualSemanticEvidence.test.ts"
+   ],
+   "disposition": "ASSERTION_ADDED",
+   "judgement": "The shared generator's independent consistency checker is run on the served figure (mathVisualSemanticEvidence.test.ts).",
+   "ownerDecision": null
+  },
+  {
+   "id": "math.disc.binomial-theorem",
+   "figure": "math-binomial-theorem",
+   "class": "scene",
+   "scope": "concept",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "ST-03"
+    ],
+    "sample": [
+     "ST-03: the canvas holds text only, no drawn geometry (ink 0.27%)"
+    ]
+   },
+   "now": "REVIEW_REQUIRED",
+   "fingerprint": "b47e195055816f39",
+   "evidence": [
+    "mathCoreScenesBatch29.test.ts",
+    "mathCoreScenesBatch35.test.ts"
+   ],
+   "disposition": "VALID_TEXT_FIGURE",
+   "judgement": "The figure is a table / worked layout whose content IS text (numerals, letters, operators in rows and columns); the rule flags \"no drawn geometry\" for exactly such figures. Opened at 390 / 1280 px: every entry is placed, none clipped or overlapping (0 machine FAIL at 3 widths); every number it states is asserted by the named tests from the drawn coordinates.",
+   "ownerDecision": null
+  },
+  {
+   "id": "math.disc.propositional-logic",
+   "figure": "math-propositional-logic",
+   "class": "scene",
+   "scope": "concept",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "ST-03"
+    ],
+    "sample": [
+     "ST-03: the canvas holds text only, no drawn geometry (ink 0.00%)"
+    ]
+   },
+   "now": "REVIEW_REQUIRED",
+   "fingerprint": "a13177c384a1fdfc",
+   "evidence": [
+    "mathCoreScenesBatch35.test.ts"
+   ],
+   "disposition": "VALID_TEXT_FIGURE",
+   "judgement": "The figure is a table / worked layout whose content IS text (numerals, letters, operators in rows and columns); the rule flags \"no drawn geometry\" for exactly such figures. Opened at 390 / 1280 px: every entry is placed, none clipped or overlapping (0 machine FAIL at 3 widths); every number it states is asserted by the named tests from the drawn coordinates.",
+   "ownerDecision": null
+  },
+  {
+   "id": "math.abst.binary-operation",
+   "figure": "math-binary-operation",
+   "class": "scene",
+   "scope": "concept",
+   "was": {
+    "verdict": "REVIEW_REQUIRED",
+    "rules": [
+     "ST-03"
+    ],
+    "sample": [
+     "ST-03: the canvas holds text only, no drawn geometry (ink 0.00%)"
+    ]
+   },
+   "now": "REVIEW_REQUIRED",
+   "fingerprint": "c78d1569650b0a53",
+   "evidence": [
+    "mathCoreScenesBatch30.test.ts"
+   ],
+   "disposition": "VALID_TEXT_FIGURE",
+   "judgement": "The figure is a table / worked layout whose content IS text (numerals, letters, operators in rows and columns); the rule flags \"no drawn geometry\" for exactly such figures. Opened at 390 / 1280 px: every entry is placed, none clipped or overlapping (0 machine FAIL at 3 widths); every number it states is asserted by the named tests from the drawn coordinates.",
+   "ownerDecision": null
+  }
+ ]
+}

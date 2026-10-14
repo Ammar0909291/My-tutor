@@ -1,21 +1,21 @@
 {
   "concepts": 556,
   "verdicts": {
-    "REVIEW_REQUIRED": 61,
-    "PASS": 495
+    "REVIEW_REQUIRED": 12,
+    "PASS": 544
   },
   "byViewport": {
     "mobile": {
-      "REVIEW_REQUIRED": 11,
-      "PASS": 545
+      "REVIEW_REQUIRED": 6,
+      "PASS": 550
     },
     "desktop": {
-      "REVIEW_REQUIRED": 14,
-      "PASS": 542
+      "REVIEW_REQUIRED": 12,
+      "PASS": 544
     },
     "desktop-column": {
-      "REVIEW_REQUIRED": 13,
-      "PASS": 543
+      "REVIEW_REQUIRED": 9,
+      "PASS": 547
     }
   },
   "byDimension": {
@@ -30,15 +30,13 @@
       "PASS": 556
     },
     "layout": {
-      "PASS": 551,
-      "REVIEW_REQUIRED": 5
+      "PASS": 556
     },
     "graph": {
       "PASS": 556
     },
     "semantic": {
-      "PASS": 509,
-      "REVIEW_REQUIRED": 47
+      "PASS": 556
     },
     "interactive": {
       "PASS": 555,

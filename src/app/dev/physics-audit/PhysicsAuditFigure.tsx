@@ -7,6 +7,7 @@ import { SceneSpecFigure } from '@/components/school/visuals/SceneSpecFigure'
 import { VisualCard } from '@/components/school/visuals/VisualCard'
 import { VisualRenderer } from '@/components/visuals/VisualRenderer'
 import type { VisualPayload } from '@/lib/teaching/visual/types'
+import lessonStyles from '@/components/learn/LessonScreen.module.css'
 
 // LessonScreen's VISUAL_FRAME, verbatim (src/components/learn/LessonScreen.tsx).
 const VISUAL_FRAME: React.CSSProperties = {
@@ -15,14 +16,18 @@ const VISUAL_FRAME: React.CSSProperties = {
 }
 
 export function PhysicsAuditFigure({
-  conceptId, provenance, payload, frameWidth,
-}: { conceptId: string; provenance: string; payload: VisualPayload | null; frameWidth: number | null }) {
+  conceptId, provenance, payload, frameWidth, lessonScope = false,
+}: { conceptId: string; provenance: string; payload: VisualPayload | null; frameWidth: number | null; lessonScope?: boolean }) {
   return (
     <main
       data-audit-concept={conceptId}
       data-audit-provenance={provenance}
       data-audit-renderer={payload?.renderer ?? 'none'}
-      style={{ padding: '12px var(--audit-pad, 16px)', background: 'var(--bg-primary)', minHeight: '100vh', color: 'var(--text-primary)' }}
+      data-audit-scope={lessonScope ? 'lesson' : 'global'}
+      // `lessonScope` puts the figure under the SAME token scope the real lesson page uses (`.learnCandy` in LessonScreen.module.css: --sb-*, --coral, --text-*, --bg-*).
+      // Default off, so the existing Physics / Chemistry / Biology audits are measured exactly as before.
+      className={lessonScope ? lessonStyles.learnCandy : undefined}
+      style={{ padding: '12px var(--audit-pad, 16px)', background: lessonScope ? 'var(--bg-void)' : 'var(--bg-primary)', minHeight: '100vh', color: 'var(--text-primary)' }}
     >
       <div data-audit-frame="" style={frameWidth ? { width: frameWidth, maxWidth: '100%' } : VISUAL_FRAME}>
         {payload?.renderer === 'scene' && <SceneSpecFigure spec={payload.sceneSpec} />}
