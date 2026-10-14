@@ -16,6 +16,11 @@
  *    goes to lower case; acronyms, formulas, Roman numerals stay;
  *  - a cross-reference clause to another unit/concept is removed.
  * Nothing else in the text changes.
+ *
+ * Third rewrite (2026-10-14, chemistry real-learner QA, "Modern Periodic Law"): an electron configuration is authored
+ * as plain digits — "[Ar]3d6 4s2" — and served as "…3d6 4s2", where the occupancy digit reads as part of the label
+ * (3d-six-four-s-two) while the tutor's own replies in the same lesson wrote "3d⁶ 4s²". A subshell label (principal
+ * number 1-7, then s/p/d/f) followed by 1-2 occupancy digits is shown with a superscript occupancy.
  */
 
 const ACRONYMS = new Set([
@@ -74,7 +79,18 @@ function dropCrossReferences(text: string): string {
     .replace(/\s+([,.;:])/g, '$1')
 }
 
+const SUPERSCRIPT_DIGIT: Record<string, string> = { '0': '⁰', '1': '¹', '2': '²', '3': '³', '4': '⁴', '5': '⁵', '6': '⁶', '7': '⁷', '8': '⁸', '9': '⁹' }
+
+/**
+ * "3d6 4s2" -> "3d⁶ 4s²", "[Ar]3d10" -> "[Ar]3d¹⁰". Only a whole token: it must not start inside a longer word or number ("A3d6",
+ * "13d6"), and the occupancy is at most 2 digits (an s/p/d/f subshell holds at most 14). A bare label ("3d", "4s") is left alone.
+ */
+export function superscriptOrbitalOccupancy(text: string): string {
+  return text.replace(/(?<![\p{L}\p{N}])([1-7][spdf])(\d{1,2})(?![\p{L}\p{N}])/gu, (_m, label: string, occ: string) =>
+    label + [...occ].map((d) => SUPERSCRIPT_DIGIT[d]).join(''))
+}
+
 export function authoredProseForLearner(text: string): string {
   if (typeof text !== 'string' || !text) return text
-  return lowerEmphasis(dropCrossReferences(text))
+  return superscriptOrbitalOccupancy(lowerEmphasis(dropCrossReferences(text)))
 }
