@@ -1,0 +1,7 @@
+# English visual validation (2026-10-14)
+
+Queue item 4 of the Mathematics visual follow-ups, done as part of "complete everything in one execution". Result and method: `docs/qa/ENGLISH_VISUAL_VALIDATION.md`. Record: `docs/qa/english-visual-audit/audit-summary.json`. Gate: `src/tests/englishVisualAudit.test.ts` (fingerprints per fixture, no FAIL, both themes, lesson scope, and "English still serves no static figure").
+Tooling: `scripts/qa/englishVisual/` (`buildFixtures`, `fingerprint`, `renderAudit`, `validate`, `fixtures.json`); dev page `?fixture=<id>&scope=lesson`.
+
+Timeline: first runs failed one or two different fixtures per run in single states (CT-01 1.3–3.9:1 while the same fixture passed in its other states). Four harness races were found and fixed in the SHARED harness (`scripts/qa/physicsVisual/render.ts`, additive, no rule or threshold touched): text-hide repaint, first-screenshot raster, DOM measure vs pixel capture layout drift, and an entrance fade caught half way on a retaken state (`settleAnimations`). Final full run: 222/222 PASS, 888 renders.
+Not covered: what a model actually generated in production (needs a logged-in disposable account; see the Mathematics report). The Physics / Chemistry / Biology / Mathematics committed records were rendered before the last two harness additions; their fingerprints do not cover the harness, so they are not stale — a future re-render simply uses the better settling.

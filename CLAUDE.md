@@ -230,7 +230,7 @@ npx tsc --noEmit       # pre-existing stripe/subscription errors are expected on
   (partial re-render: `docs/history/mathematics-visual-render-audit.md`). All 61 first-pass REVIEW figures carry a bound disposition (`docs/qa/mathematics-visual-audit/review-dispositions.json`,
   `mathReviewDispositions.test.ts`; deterministic evidence in `mathVisualSemanticEvidence.test.ts`); the batch 1-29 label-displacement backlog is closed (`mathLabelAssociation.test.ts`). Report:
   `docs/qa/MATHEMATICS_VISUAL_QUALITY_REPORT.md`; live state and queue: `docs/history/MATHEMATICS_VISUAL_HANDOVER.md`. STILL OPEN: production `/learn` sample check (blocked: needs a disposable account, deletion
-  was out of scope), English envelope audit (tooling in `scripts/qa/englishVisual/`; last run 220/222, record not installed), human semantic review — each needs a fresh owner go-ahead.
+  was out of scope), human semantic review — each needs a fresh owner go-ahead. English visual validation is DONE as an envelope audit (222/222 PASS, 2026-10-14, `docs/qa/ENGLISH_VISUAL_VALIDATION.md`, gate `englishVisualAudit.test.ts`; it audits the renderer on synthetic English-shaped figures, not production output).
 - Mathematics: `npx tsx scripts/math/state.ts`
 - Physics: `npx tsx scripts/physics/state.ts`
 - Asset-contract readiness (all subjects, incl. KG-registered-but-unauthored ones):

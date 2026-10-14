@@ -231,7 +231,21 @@ function looksUnpainted(r: StateRecord): boolean {
   return ink !== undefined && ink < AUDIT_THRESHOLDS.minSceneInkFraction && !r.measure.texts.some((t) => t.region === 'scene-label')
 }
 
+/**
+ * Let every FINITE CSS animation / transition finish before a look. A late re-layout can restart a figure's entrance fade after the one-off wait the runners do; the retaken
+ * capture then measured dimmed text (title at partial opacity: 3.4:1 on a figure that measures >= 5.0:1 in all other states and on every quiet re-render — English audit
+ * 2026-10-14, two states, both retakes). Infinite animations never finish and are skipped; the wait is capped.
+ */
+async function settleAnimations(page: Page): Promise<void> {
+  await page.evaluate(() => {
+    const finite = document.getAnimations().filter((a) => a.effect?.getComputedTiming().iterations !== Infinity)
+    return Promise.race([Promise.all(finite.map((a) => a.finished.catch(() => undefined))), new Promise((done) => setTimeout(done, 4000))])
+  })
+  await page.waitForTimeout(150)
+}
+
 async function captureOnce(page: Page, pixPage: Page, state: string, params: Record<string, string>, shotPath: string | null): Promise<StateRecord> {
+  await settleAnimations(page)
   const measure: Measure = await page.evaluate(() => (window as unknown as { __audit: { measure: () => Measure } }).__audit.measure())
   const missing = await glyphCheck(page, measure)
 
