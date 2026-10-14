@@ -41,6 +41,9 @@ function extractLinearModel(equation: string): { m: number; b: number } | null {
   return { m, b }
 }
 
+/** The zoom/reset buttons (3 × 28 px + 2 × 4 px gaps, 28 px tall) plus 2 px of air, in the renderer's own px. */
+const CONTROLS_W = 96
+const CONTROLS_H = 32
 const M_BOUND = 20
 const B_BOUND = 50
 const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v))
@@ -117,7 +120,7 @@ export function GraphRenderer({
 
   // Initial view: center on origin, scale so the optional domain (or [-10,10]) fits.
   // Shared with the server's empty-axes check (graphView.ts).
-  const [view, setView] = useState<View>(() => initialGraphView(spec.domain))
+  const [view, setView] = useState<View>(() => initialGraphView(spec.domain, spec.equation))
 
   // Responsive sizing
   useEffect(() => {
@@ -132,6 +135,17 @@ export function GraphRenderer({
   }, [])
 
   const { w, h } = size
+  // The opening view is fitted to the curve using the frame's REAL height (it is 200 px on a phone and ~300 px on a desktop column). Until the learner pans or
+  // zooms, a change of frame height re-fits it; once they have moved the view (`view` no longer the fitted object) it is left alone.
+  const autoView = useRef<View | null>(null)
+  useEffect(() => {
+    setView((prev) => {
+      if (autoView.current !== null && prev !== autoView.current) return prev
+      const fresh = initialGraphView(spec.domain, spec.equation, h)
+      autoView.current = fresh
+      return fresh
+    })
+  }, [h, spec.domain, spec.equation])
   // math → screen helpers
   const toSx = useCallback((x: number) => w / 2 + (x - view.cx) * view.ppu, [w, view])
   const toSy = useCallback((y: number) => h / 2 - (y - view.cy) * view.ppu, [h, view])
@@ -216,7 +230,7 @@ export function GraphRenderer({
     })
   }
   const zoomBtn = (factor: number) => setView((v) => ({ ...v, ppu: Math.max(MIN_PPU, Math.min(MAX_PPU, v.ppu * factor)) }))
-  const reset = () => setView(initialGraphView(spec.domain))
+  const reset = () => setView((() => { const v = initialGraphView(spec.domain, spec.equation, h); autoView.current = v; return v })())
 
   // ── grid + path geometry ──
   const step = niceStep(view.ppu)
@@ -350,6 +364,9 @@ export function GraphRenderer({
                   fill="var(--text-secondary, #6b7280)" stroke="var(--bg-surface, #fff)" strokeWidth={3}
                   paintOrder="stroke">{spec.yLabel.trim()}</text>
           )}
+          {/* The zoom buttons are HTML laid over this SVG, so the label solver (placeSvgLabels) cannot see them: it moved the x-axis title 12 px down into them
+              (chemistry learner run 2026-10-14, 1280 px). An invisible rect over their zone makes them an obstacle like any drawn shape. */}
+          <rect x={w - CONTROLS_W - 8} y={h - CONTROLS_H - 8} width={CONTROLS_W} height={CONTROLS_H} fill="none" stroke="none" pointerEvents="none" aria-hidden="true" data-controls-zone="" />
           {/* curve */}
           <path d={pathD} fill="none" stroke="var(--coral, #F78166)" strokeWidth={2.5} strokeLinejoin="round" strokeLinecap="round" />
           {countPoints.map((p, i) => (

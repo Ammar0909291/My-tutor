@@ -421,8 +421,14 @@ export function decideContinuity(input: {
     return { kind: 'switch', targetConceptId: lessonConceptId, reason: 'lesson-changed' }
   }
 
-  // Safety valve.
-  if (session.turns >= MAX_EXCURSION_TURNS) {
+  // Safety valve — a ceiling on a DETOUR (`MAX_EXCURSION_TURNS`), so it applies to a figure that is NOT the lesson's own concept.
+  //
+  // CHEMISTRY LEARNER RUN, 2026-10-14 (deployed app, 5 lessons): the lesson's OWN figure was introduced on turn 1, held through turns 2-7, and on turn 8 this
+  // valve released it and the resolver "re-introduced" the very same figure as a new one (`session.turns === 0`), which the route then attached to that reply —
+  // whatever the reply was about (a sodium shell diagram under an Fe2+ answer; the Na/Cl figure under a quick-check verdict). It happened at turn 8 in 4 of the 5
+  // lessons, exactly 6 held turns after turn 1. A lesson figure is not a detour: nothing here can strand a learner on the wrong figure, because it IS the lesson's.
+  const holdingLessonOwnFigure = Boolean(lessonConceptId) && session.conceptId === lessonConceptId
+  if (session.turns >= MAX_EXCURSION_TURNS && !holdingLessonOwnFigure) {
     return { kind: 'switch', targetConceptId: lessonConceptId, reason: 'excursion-turn-limit' }
   }
 

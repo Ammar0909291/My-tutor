@@ -178,3 +178,25 @@ describe('2D layout safety — solver contract under SVG-shaped input', () => {
     }
   })
 })
+
+describe('2D layout safety — the graph\'s zoom buttons are an obstacle', () => {
+  // Chemistry learner run, 2026-10-14 (deployed app, gas laws): the label solver (placeSvgLabels) only sees the SVG, so it moved the x-axis title 12 px down into the HTML
+  // zoom buttons laid over the plot (1280 px frame: title bottom 331 px, buttons top 326 px). An invisible rect over the button zone is an obstacle like any drawn shape.
+  it('GraphRenderer declares the control zone, sized from the real buttons', () => {
+    const src = read('src/components/visuals/GraphRenderer.tsx')
+    expect(src).toMatch(/data-controls-zone/)
+    const w = Number(src.match(/const CONTROLS_W = (\d+)/)![1]), h = Number(src.match(/const CONTROLS_H = (\d+)/)![1])
+    const btn = Number(src.match(/width: 28/)![0].replace(/\D/g, ''))
+    expect(w).toBeGreaterThanOrEqual(3 * btn + 2 * 4)
+    expect(h).toBeGreaterThanOrEqual(btn)
+    // the rect sits where the buttons do: bottom-right, 8 px in from both edges
+    expect(src).toMatch(/x=\{w - CONTROLS_W - 8\} y=\{h - CONTROLS_H - 8\}/)
+    expect(src).toMatch(/style=\{\{ position: 'absolute', right: 8, bottom: 8/)
+  })
+  it('the label solver counts any non-text SVG element with a box as an obstacle (so the declared zone is honoured)', () => {
+    const src = read(PLACEMENT)
+    expect(src).toMatch(/tag === 'text' \|\| tag === 'tspan' \|\| tag === 'defs' \|\| tag === 'g'/)
+    expect(src).toMatch(/out\.push\(\{\s*left: rect\.left - origin\.left/)
+  })
+})
+

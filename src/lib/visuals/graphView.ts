@@ -18,11 +18,54 @@ export const GRAPH_ASPECT = 0.72
 
 export interface GraphView { cx: number; cy: number; ppu: number }
 
-/** Centred on the domain's midpoint (x) and the origin (y), domain-fitted. */
-export function initialGraphView(domain: readonly [number, number] | undefined): GraphView {
+/**
+ * Centred on the domain's midpoint (x) and the origin (y), domain-fitted. When the EQUATION is given and that origin-centred view would clip the curve
+ * (some sample over the domain falls outside it) AND the curve stays strictly on one side of zero, the view is fitted to the curve's own range instead.
+ *
+ * CHEMISTRY LEARNER RUN, 2026-10-14 (deployed app, `chem.state.gas-laws`): "Boyle's Law" P = 10/x on 1…10 opened centred on y = 0 at 33 px per unit — the
+ * curve left the top of the frame at x = 2.5 (the high-pressure end, the whole point of the law, was out of sight) while half the plot below zero (tick "−2 atm")
+ * was empty. A curve that already fits is returned EXACTLY as before, so every graph that was fine keeps its opening view.
+ * The robust range ignores the extreme 3 % at each end so a vertical asymptote cannot flatten the whole curve; the scale never goes above the
+ * domain-fitted one (the x domain stays visible) and never below `GRAPH_MIN_PPU`.
+ */
+export function initialGraphView(domain: readonly [number, number] | undefined, equation?: string, frameHeightPx: number = 360 * GRAPH_ASPECT): GraphView {
   const [d0, d1] = domain ?? [-10, 10]
   const span = Math.max(2, Math.abs(d1 - d0))
-  return { cx: (d0 + d1) / 2, cy: 0, ppu: Math.max(GRAPH_MIN_PPU, Math.min(GRAPH_MAX_PPU, 360 / span)) }
+  const base: GraphView = { cx: (d0 + d1) / 2, cy: 0, ppu: Math.max(GRAPH_MIN_PPU, Math.min(GRAPH_MAX_PPU, 360 / span)) }
+  if (!equation) return base
+  const compiled = compileExpression(equation)
+  if (!compiled) return base
+  const N = 120
+  const ys: number[] = []
+  for (let i = 0; i <= N; i++) {
+    const y = compiled.eval(d0 + ((d1 - d0) * i) / N)
+    if (Number.isFinite(y)) ys.push(y)
+  }
+  if (ys.length < 8) return base
+  const heightPx = frameHeightPx
+  const halfH = (360 * GRAPH_ASPECT) / 2 / base.ppu
+  if (ys.every((y) => Math.abs(y - base.cy) <= halfH)) return base   // the whole curve is already in view
+  ys.sort((a, b) => a - b)
+  // Only a curve that stays STRICTLY on one side of zero (pressure, concentration, rate, a decay) is re-fitted: for it the origin-centred view wastes half the plot and
+  // clips the other half. A curve that crosses or touches zero (y = x, x², sin) simply runs off the frame, which is how a function graph reads, and keeps its view.
+  if (!(ys[0] > 0 || ys[ys.length - 1] < 0)) return base
+  // Each side keeps its TRUE extreme unless a spike (a vertical asymptote) sits far beyond the rest of the curve; then the 3 % trimmed value is used.
+  const trimLo = ys[Math.floor(0.03 * (ys.length - 1))]
+  const trimHi = ys[Math.ceil(0.97 * (ys.length - 1))]
+  const core = trimHi - trimLo
+  const lo = trimLo - ys[0] > 0.5 * core ? trimLo : ys[0]
+  const hi = ys[ys.length - 1] - trimHi > 0.5 * core ? trimHi : ys[ys.length - 1]
+  let range = hi - lo
+  if (!(range > 0)) return base
+  // A quantity that stays on one side of zero and close to it (pressure, concentration, rate) is drawn FROM zero, so the empty far side of the axis is not shown.
+  const zeroFrom = lo > 0 && lo < 0.5 * range ? 0 : lo
+  const zeroTo = hi < 0 && -hi < 0.5 * range ? 0 : hi
+  range = zeroTo - zeroFrom
+  const loV = zeroFrom
+  // Room above the curve for the y-axis title and BELOW it for the x-axis and its tick numerals (the zoom buttons, bottom-right, are an obstacle to the label solver).
+  const TOP_PX = 34, BOTTOM_PX = 30
+  const ppu = Math.max(GRAPH_MIN_PPU, Math.min(base.ppu, (heightPx - TOP_PX - BOTTOM_PX) / range))
+  return { cx: base.cx, cy: loV + (heightPx / 2 - BOTTOM_PX) / ppu, ppu }
 }
 
 /**
@@ -37,6 +80,8 @@ export function visibleCurveFraction(
 ): number | null {
   const compiled = compileExpression(equation)
   if (!compiled) return null
+  // The ADMISSION check deliberately measures the origin-centred opening view (no equation): the renderer's equation-fitted view (`initialGraphView(domain, equation, h)`) only
+  // ever shows MORE of a curve than this one, so a curve visible here is visible there and one empty here stays refused (generatedGraphMustShowItsCurve.test.ts).
   const view = initialGraphView(domain)
   const halfW = widthPx / 2 / view.ppu
   const halfH = (widthPx * GRAPH_ASPECT) / 2 / view.ppu

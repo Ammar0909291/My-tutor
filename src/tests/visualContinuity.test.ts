@@ -129,6 +129,31 @@ describe('Visual continuity — when the figure IS allowed to change', () => {
     if (action.kind === 'switch') expect(action.reason).toBe('excursion-turn-limit')
   })
 
+  it('the turn limit does NOT release the lesson\'s OWN figure (chemistry learner run 2026-10-14: re-introduced on turn 8)', () => {
+    const own: VisualSession = { conceptId: LESSON, representation: 'vector', renderer: 'card', turns: MAX_EXCURSION_TURNS + 4 }
+    const action = decideContinuity({ session: own, message: 'mhm', lessonConceptId: LESSON, requestedConceptId: null, lastAssistantAskedQuestion: true })
+    expect(action.kind).toBe('hold')
+  })
+
+  it('a lesson figure is introduced ONCE: twelve turns of taps and acknowledgements never re-introduce it', () => {
+    const CHEM = 'chem.bond.vsepr'
+    let session: VisualSession | null = null
+    const introduced: boolean[] = []
+    const reasons: Array<string | undefined> = []
+    const msgs = ['Okay, I follow. Please continue.', ...Array.from({ length: 11 }, (_, i) => (i % 2 ? 'Trigonal pyramidal' : 'ok'))]
+    for (const [i, msg] of msgs.entries()) {
+      const d = resolveVisual({
+        message: msg, lessonConceptId: CHEM, subject: 'chemistry', activeSession: session,
+        lastAssistantAskedQuestion: i > 0, offeredMcqOptions: i > 0 ? ['Trigonal pyramidal', 'Tetrahedral', 'Bent'] : undefined,
+      })
+      session = d.session
+      introduced.push(d.session ? d.session.turns === 0 : false)
+      reasons.push(d.continuityReason)
+    }
+    expect(introduced.filter(Boolean).length, `introduced on turns ${introduced.map((v, i) => (v ? i + 1 : 0)).filter(Boolean)}; reasons ${reasons.join(',')}`).toBe(1)
+    expect(reasons).not.toContain('excursion-turn-limit')
+  })
+
   it('turn counter advances while a figure is held', () => {
     const decisions = replay([
       { msg: 'Teach me vector with diagram' },
