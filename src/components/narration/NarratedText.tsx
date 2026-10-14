@@ -23,6 +23,13 @@
  * together, never a single word singled out ahead of what the engine can
  * actually prove — there is no in-between "half-known" word state.
  *
+ * NOT THE LESSON MESSAGE VIEW (2026-10-14). This draws `segment.renderedWords`: plain word tokens cut from the RAW
+ * message source by the speech segmenter. It has no Markdown or KaTeX renderer, so a message drawn with it shows
+ * `**bold**`, `\forall`, `\[...\]` and `\(...\)` as literal characters. LessonScreen used to swap it in for the
+ * message the moment narration left IDLE and that is exactly the defect "clicking TTS turns the lesson into raw
+ * Markdown/LaTeX"; the tutor message is now always drawn by TutorMessageText (MessageContent) in every narration
+ * status, and this component is not mounted by the lesson screen. Do not put it back in front of formatted content.
+ *
  * AUTO-SCROLL: keeps the active WORD comfortably inside its own scrollable
  * container, without fighting a learner who is deliberately scrolling.
  * `scrollFollow.ts` (pure) decides WHETHER to scroll; this component only

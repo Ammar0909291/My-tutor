@@ -47,14 +47,15 @@ import { getTabId } from '@/lib/teaching/tabIdentity'
 import { validateSceneSpec } from '@/lib/teaching/sceneSpecValidator'
 import { parseVisualSpec, type VisualSpec } from '@/lib/visuals/visualSpec'
 import { applyRestoredVisuals } from '@/lib/teaching/visual/messageMerge'
+import { InlineMcqCard } from '@/components/learn/InlineMcqCard'
+import { validTranscriptMcq, withRestoredMcq, type TranscriptMcq } from '@/lib/learn/mcqTranscript'
 import { createRevealController } from '@/lib/teaching/progressiveReveal'
 import type { InlinePracticeQuestion } from '@/lib/school/practice/generateInlinePractice'
 import { parseLessonCompletionTag, parseMathCodeAnswerTags, parseAssessmentResultTag } from '@/lib/school/tutoring/parseAssistantTags'
 import { Card, CandyButton, Pill, CockroachMascot, useConfetti } from '@/components/ui/candy'
 import { TutorNarratedMessage } from '@/components/narration/TutorNarratedMessage'
-import { NarratedText } from '@/components/narration/NarratedText'
 import { NarratedPlaybackControls } from '@/components/narration/NarratedPlaybackControls'
-import katex from 'katex'
+import { MessageContent, TutorMessageText, extractDisplayMath, renderInline } from '@/components/learn/MessageContent'
 import styles from './LessonScreen.module.css'
 import {
   quickCheckMode as quickCheckModeFor,
@@ -232,102 +233,6 @@ function truncate(text: string, n: number): { preview: string; hasMore: boolean 
   return { preview: text.slice(0, idx[n - 1]).trim(), hasMore: true }
 }
 
-// ─── MessageContent ───────────────────────────────────────────────────────────
-// LaTeX math: the AI writes display math as \[...\] / $$...$$ (often spanning
-// multiple lines) and inline math as \(...\). Deliberately NOT matching bare
-// $...$ — that collides with plain currency mentions (economics/finance
-// content). Display math is extracted from the FULL message text (via
-// extractDisplayMath) before the caller splits it into lines/blocks, and
-// swapped for a single-line placeholder so a multi-line \[...\] block
-// survives line-splitting intact; renderInline then resolves placeholders
-// (and matches inline \(...\) directly, since that never spans lines).
-const DISPLAY_MATH_RE = /\$\$[\s\S]+?\$\$|\\\[[\s\S]+?\\\]/g
-const PLACEHOLDER_RE = /(\d+)/
-const INLINE_MATH_OR_PLACEHOLDER_RE = /(\\\([\s\S]+?\\\)|\d+)/g
-
-function extractDisplayMath(text: string): { text: string; blocks: string[] } {
-  const blocks: string[] = []
-  const replaced = text.replace(DISPLAY_MATH_RE, (m) => {
-    blocks.push(m)
-    return `${blocks.length - 1}`
-  })
-  return { text: replaced, blocks }
-}
-
-function renderMath(raw: string, key: string, displayMode: boolean): React.ReactNode {
-  const content = raw.slice(2, -2).trim()
-  let html: string
-  try {
-    html = katex.renderToString(content, { throwOnError: false, displayMode })
-  } catch {
-    return raw
-  }
-  return (
-    <span
-      key={key}
-      style={displayMode ? { display: 'block', overflowX: 'auto', margin: '4px 0' } : undefined}
-      dangerouslySetInnerHTML={{ __html: html }}
-    />
-  )
-}
-
-function renderMarkdownSpans(text: string, key: string, codeStyle: string): React.ReactNode {
-  const re = /(\*\*[^*\n]+\*\*|\*[^*\n]+\*|`[^`\n]+`)/g
-  const parts: React.ReactNode[] = []; let last = 0; let i = 0; let m: RegExpExecArray | null
-  while ((m = re.exec(text)) !== null) {
-    if (m.index > last) parts.push(text.slice(last, m.index))
-    const raw = m[0]
-    if (raw.startsWith('**')) parts.push(<strong key={`${key}-b${i}`} style={{ color: 'var(--text-primary)', fontWeight: 700 }}>{raw.slice(2,-2)}</strong>)
-    else if (raw.startsWith('*')) parts.push(<em key={`${key}-i${i}`} style={{ color: 'var(--text-secondary)' }}>{raw.slice(1,-1)}</em>)
-    else parts.push(<code key={`${key}-c${i}`} className={codeStyle}>{raw.slice(1,-1)}</code>)
-    last = m.index + raw.length; i++
-  }
-  if (last < text.length) parts.push(text.slice(last))
-  return parts.length === 0 ? text : parts
-}
-
-function renderInline(text: string, key: string, codeStyle: string, mathBlocks: string[] = []): React.ReactNode {
-  const parts: React.ReactNode[] = []; let last = 0; let mi = 0; let m: RegExpExecArray | null
-  INLINE_MATH_OR_PLACEHOLDER_RE.lastIndex = 0
-  while ((m = INLINE_MATH_OR_PLACEHOLDER_RE.exec(text)) !== null) {
-    if (m.index > last) parts.push(renderMarkdownSpans(text.slice(last, m.index), `${key}-t${mi}`, codeStyle))
-    const raw = m[0]
-    const placeholder = raw.match(PLACEHOLDER_RE)
-    if (placeholder) parts.push(renderMath(mathBlocks[Number(placeholder[1])] ?? '', `${key}-m${mi}`, true))
-    else parts.push(renderMath(raw, `${key}-m${mi}`, false))
-    last = m.index + raw.length; mi++
-  }
-  if (last < text.length) parts.push(renderMarkdownSpans(text.slice(last), `${key}-t${mi}`, codeStyle))
-  return parts.length === 0 ? text : parts
-}
-
-function MessageContent({ text, isUser }: { text: string; isUser: boolean }) {
-  const codeStyle = `px-1.5 py-0.5 rounded text-[0.82em] font-mono ${isUser ? 'bg-white/20' : 'bg-black/30'} ${isUser ? '' : 'text-[var(--coral)]'}`
-  const { text: textWithPlaceholders, blocks: mathBlocks } = extractDisplayMath(text)
-  return (
-    <div className="space-y-1">
-      {textWithPlaceholders.split('\n').map((line, i) => {
-        if (!line.trim()) return <div key={i} className="h-1" />
-        if (line.match(/^#+\s/)) return <p key={i} className="font-bold" style={{ color: 'var(--text-primary)' }}>{renderInline(line.replace(/^#+\s/, ''), `${i}`, codeStyle, mathBlocks)}</p>
-        const bullet = line.match(/^[-•*]\s+(.*)$/)
-        if (bullet) return (
-          <div key={i} className="flex gap-2">
-            <span className="mt-0.5 shrink-0 text-xs" style={{ color: 'var(--coral)' }}>▸</span>
-            <span>{renderInline(bullet[1], `${i}`, codeStyle, mathBlocks)}</span>
-          </div>
-        )
-        const num = line.match(/^(\d+)\.\s+(.*)$/)
-        if (num) return (
-          <div key={i} className="flex gap-2">
-            <span className="tabular-nums text-xs mt-0.5 shrink-0 font-mono" style={{ color: 'var(--coral)' }}>{num[1]}.</span>
-            <span>{renderInline(num[2], `${i}`, codeStyle, mathBlocks)}</span>
-          </div>
-        )
-        return <p key={i}>{renderInline(line, `${i}`, codeStyle, mathBlocks)}</p>
-      })}
-    </div>
-  )
-}
 
 // ─── LessonDocument ─────────────────────────────────────────────────────────
 // Eagle UI alignment sprint: renders the lesson canvas for non-programming
@@ -741,6 +646,10 @@ function HintCard({ hint }: { hint: string }) {
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 export type ChatMsg = { id: string; role: 'user'|'assistant'; content: string; ts: number; streaming?: boolean; provider?: string; llmCallCount?: number; visual?: string; visualSpec?: VisualSpec; sceneSpec?: SceneSpec; dynamicVisualizationCode?: string; inlinePractice?: InlinePracticeQuestion; hint?: string;
+  // The multiple-choice question THIS tutor message asked, kept on the message so the transcript shows it above the
+  // learner's answer (live: attached when the turn lands; restored: recovered from the stored text — see
+  // src/lib/learn/mcqTranscript.ts). Read-only record: answering stays with the Quick Check panel.
+  mcq?: TranscriptMcq;
   // Progressive reveal (client-side fallback — see progressiveReveal.ts):
   // how many characters of the STRIPPED content are currently shown. Present
   // only while `streaming` is true for a landed-but-still-revealing turn;
@@ -1215,6 +1124,17 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   const quickCheckPanelRef = useRef<HTMLDivElement | null>(null)
   const quickCheckDragRef = useRef<{ pointerId: number; startX: number; startY: number; startOffset: DragPoint; naturalRect: { left: number; top: number; width: number; height: number } } | null>(null)
   useEffect(() => { setQuickCheckDragOffset(ZERO_DRAG_OFFSET) }, [activeMcq?.askedAt])
+  // A multiple-choice question belongs to the lesson that asked it. `LessonScreen` is keyed by subject, not lesson, so
+  // its MCQ state outlives a lesson switch unless it is cleared there: without this, lesson A's pending question and
+  // its "Tutor history" entries would still be on screen in lesson B. Called wherever the transcript is emptied for a
+  // different lesson. UI state only — nothing here touches the server's pending probe or any grading. The Quick Check
+  // window mode needs no reset: it is keyed on the question's `askedAt`, so a stale mode can never apply to a new one.
+  const clearLessonMcqState = useCallback(() => {
+    setActiveMcq(null)
+    setMcqHistoryLog([])
+    setMcqHistoryOpen(false)
+    pendingMcqMasteryBaselineRef.current = null
+  }, [])
   // Drag handle lives on the header row only — the options list and the
   // window-control buttons never get a pointerdown listener at all, so
   // "answer areas must never be draggable" and "controls must stay
@@ -1456,7 +1376,9 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         if (!hist?.success) return
         const raw = hist?.data?.messages
         if (!Array.isArray(raw) || raw.length === 0) return
-        const restored: ChatMsg[] = (raw as Array<{ id: string; role: string; content: string; createdAt: string; provider?: string | null; llmCallCount?: number | null }>)
+        // A question the tutor asked is stored as a text block at the end of its row; withRestoredMcq lifts it back out
+        // so a reload shows the same question card as a live turn (src/lib/learn/mcqTranscript.ts).
+        const restored: ChatMsg[] = withRestoredMcq((raw as Array<{ id: string; role: string; content: string; createdAt: string; provider?: string | null; llmCallCount?: number | null }>)
           .filter((m) => !(m.role === 'USER' && isInternalOpeningPrompt(m.content)))
           .map((m) => ({
             id: m.id,
@@ -1464,7 +1386,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
             content: m.content,
             ts: new Date(m.createdAt).getTime(),
             provider: m.provider ?? undefined, llmCallCount: m.llmCallCount ?? undefined,
-          }))
+          })))
         if (cancelled) return
         // All rows were internal bootstrap prompts (e.g. the only prior turn
         // failed before the tutor replied) → treat as no history at all, so
@@ -2191,16 +2113,16 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       // server-side against the stored probe (see mcqForClient). The client
       // needs only the question and options to render and to submit the chosen
       // option TEXT, so it must not require a key it must never receive.
-      if (
-        rawMcq && typeof rawMcq.question === 'string' && rawMcq.question.trim() !== '' &&
-        Array.isArray(rawMcq.options) && rawMcq.options.length >= 2 && rawMcq.options.length <= 4 &&
-        rawMcq.options.every((o) => typeof o === 'string' && o.trim() !== '')
-      ) {
+      // The SAME rule as before, now one shared function (mcqTranscript.ts) because the transcript needs the validated
+      // question too: it is attached to the tutor message below so the question is in the conversation, not only in
+      // the Quick Check panel.
+      const servedMcq = validTranscriptMcq(rawMcq)
+      if (servedMcq) {
         setActiveMcq({
-          question: rawMcq.question,
-          options: rawMcq.options as string[],
+          question: servedMcq.question,
+          options: servedMcq.options,
           askedAt: Date.now(),
-          renderId: typeof rawMcq.renderId === 'string' ? rawMcq.renderId : null,
+          renderId: typeof rawMcq?.renderId === 'string' ? rawMcq.renderId : null,
         })
       } else {
         setActiveMcq(null)
@@ -2397,7 +2319,11 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       // wait for the reply exactly as before; nothing new to widen for them.
       setMessages((p) => {
         if (typeof data.learnerLevel === 'string') setLearnerLevel(data.learnerLevel)
-      const landed = { content: full, streaming: true as const, revealedLength: 0, provider, llmCallCount: data.llmCallCount, visual: responseVisual, visualSpec: responseVisualSpec, sceneSpec: responseSceneSpec, dynamicVisualizationCode: responseDynamicVisualizationCode, inlinePractice: responseInlinePractice, hint: responseHint }
+      const landed = { content: full, streaming: true as const, revealedLength: 0, provider, llmCallCount: data.llmCallCount, visual: responseVisual, visualSpec: responseVisualSpec, sceneSpec: responseSceneSpec, dynamicVisualizationCode: responseDynamicVisualizationCode, inlinePractice: responseInlinePractice, hint: responseHint,
+        // The question this turn asked, kept ON the tutor message so the transcript shows it above the learner's answer.
+        // A completed lesson clears the Quick Check panel (`setActiveMcq(null)` above), so there is nothing left to
+        // answer and no question is shown for it either.
+        mcq: data.lessonComplete?.complete === true ? undefined : (servedMcq ?? undefined) }
         return p.some((m) => m.id === aid)
           ? p.map((m) => m.id === aid ? { ...m, ...landed } : m)
           : [...p, { id: aid, role: 'assistant' as const, ts: Date.now(), ...landed }]
@@ -2661,6 +2587,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     const next = plan.next
     const initMode = lessonInitModeFor(plan.nextEntryMode)
     setMessages([])
+    clearLessonMcqState()
 
     // P0 (lesson continuation): automatic progression must not wait for a click.
     // Previous fixes corrected WHICH lesson was staged and in what mode — that
@@ -2678,7 +2605,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     setLessonStarted(true)
     initializedRef.current = true
     await callLessonInit(sessionId, initMode, next)
-  }, [handleLessonComplete, curriculumLessons, topicProgressMap, sessionId, callLessonInit])
+  }, [handleLessonComplete, curriculumLessons, topicProgressMap, sessionId, callLessonInit, clearLessonMcqState])
 
   completeAndAdvanceRef.current = completeAndAdvance
 
@@ -2767,10 +2694,11 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
    */
   const resetLessonContext = useCallback(() => {
     setMessages([])
+    clearLessonMcqState()
     setRevisionTopic(null)
     setAssessmentLoading(false)
     initializedRef.current = false
-  }, [])
+  }, [clearLessonMcqState])
 
   // Show a confirmation dialog before switching to any lesson (P0 UX).
   // Free navigation: the Lesson Navigation Panel's Previous/Next buttons and
@@ -2804,6 +2732,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     if (!sessionId) return
     const isRestart = target.order === curriculumProgress.currentLesson
     setMessages([])
+    clearLessonMcqState()
     setLessonStarted(false)
     initializedRef.current = false
     setPendingLesson(target)
@@ -2848,7 +2777,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       const entryMode = decideLessonEntryMode({ lesson: target, progress: curriculumProgress, topicProgressMap })
       await callLessonInit(sessionId, lessonInitModeFor(entryMode), target)
     }
-  }, [sessionId, curriculumProgress, curriculumLessons, topicProgressMap, callLessonInit, startRevision, markLessonSkipped, resetLessonContext])
+  }, [sessionId, curriculumProgress, curriculumLessons, topicProgressMap, callLessonInit, startRevision, markLessonSkipped, resetLessonContext, clearLessonMcqState])
 
   // Confirming the switch dialog selects the target lesson — it must NOT
   // start teaching it. That only happens once the learner explicitly
@@ -3043,7 +2972,9 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
         const hist = await histRes.json()
         const histMsgs = hist?.data?.messages
         if (hist.success && Array.isArray(histMsgs) && histMsgs.length > 0) {
-          const restored: ChatMsg[] = (histMsgs as Array<{ id: string; role: string; content: string; createdAt: string; provider?: string | null; llmCallCount?: number | null }>)
+          // A question the tutor asked is stored as a text block at the end of its row; withRestoredMcq lifts it back out
+          // so a reload shows the same question card as a live turn (src/lib/learn/mcqTranscript.ts).
+          const restored: ChatMsg[] = withRestoredMcq((histMsgs as Array<{ id: string; role: string; content: string; createdAt: string; provider?: string | null; llmCallCount?: number | null }>)
             .filter((m) => !(m.role === 'USER' && isInternalOpeningPrompt(m.content)))
             .map((m) => ({
               id: m.id,
@@ -3051,7 +2982,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
               content: m.content,
               ts: new Date(m.createdAt).getTime(),
               provider: m.provider ?? undefined, llmCallCount: m.llmCallCount ?? undefined,
-            }))
+            })))
           if (restored.length > 0) {
             const { messages: withVisuals, anyAttached } = applyRestoredVisuals(restored, hist?.data?.visuals)
             setMessages(withVisuals)
@@ -3064,7 +2995,9 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
       // Fallback (history endpoint unavailable): restore the resumed active
       // session's own messages, exactly as before this feature.
       if (!restoredAny && data.resumed && Array.isArray(data.data.messages) && data.data.messages.length > 0) {
-        const restored: ChatMsg[] = (data.data.messages as Array<{ id: string; role: string; content: string; createdAt: string; provider?: string | null; llmCallCount?: number | null }>)
+        // A question the tutor asked is stored as a text block at the end of its row; withRestoredMcq lifts it back out
+        // so a reload shows the same question card as a live turn (src/lib/learn/mcqTranscript.ts).
+        const restored: ChatMsg[] = withRestoredMcq((data.data.messages as Array<{ id: string; role: string; content: string; createdAt: string; provider?: string | null; llmCallCount?: number | null }>)
           .filter((m) => m.role === 'USER' || m.role === 'ASSISTANT')
           .filter((m) => !(m.role === 'USER' && isInternalOpeningPrompt(m.content)))
           .map((m) => ({
@@ -3073,7 +3006,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
             content: m.content,
             ts: new Date(m.createdAt).getTime(),
             provider: m.provider ?? undefined, llmCallCount: m.llmCallCount ?? undefined,
-          }))
+          })))
         const { messages: withVisuals, anyAttached } = applyRestoredVisuals(restored, (data as { messageVisuals?: unknown }).messageVisuals)
         setMessages(withVisuals)
         anyMessageVisual = anyAttached
@@ -5499,15 +5432,21 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                       }}>
                         {/* NARRATED READ-ALONG (platform-wide — src/hooks/useNarrationPlayback.ts).
                             One hook instance per message via the TutorNarratedMessage boundary
-                            (hooks can't be called conditionally inside this .map()). Before Play
-                            is ever pressed (status IDLE) the message renders EXACTLY as before —
-                            plain MessageContent, no visual change — so this is purely additive.
+                            (hooks can't be called conditionally inside this .map()).
+                            DISPLAY SOURCE ≠ SPEECH SOURCE. What the learner reads is
+                            <TutorMessageText displayText={displayText} />: the original message,
+                            through MessageContent (Markdown + KaTeX), in EVERY narration status —
+                            idle, loading, playing, paused, completed, failed. It is given no
+                            narration state at all, so TTS cannot change how the message is drawn.
+                            This used to be `status === 'IDLE' ? MessageContent : NarratedText`; the
+                            second branch drew the speech segmenter's plain word tokens and showed
+                            `**bold**`, `\forall`, `\[...\]` and `\(...\)` as raw characters the
+                            moment Play was pressed. The speech text (cleanTextForTTS, segments) is
+                            built inside the hook from `text`, a separate string.
                             `text` is `narrationSourceText`, NOT `displayText`: narration always
                             gets the COMPLETE message regardless of Read More collapse state (see
-                            narratedMessageText.ts) — once status leaves IDLE, NarratedText below
-                            renders every segment it is given unconditionally, which is what
-                            reveals content that was hidden behind "Read more" as narration
-                            reaches it, with no separate reveal/expand mechanism needed. */}
+                            narratedMessageText.ts), and Read More / Collapse stays the learner's own
+                            choice — playing never expands or collapses it. */}
                         {msg.content ? (
                           <TutorNarratedMessage
                             id={msg.id}
@@ -5519,11 +5458,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                           >
                             {(narration) => (
                               <>
-                                <div className="animate-message" style={{ fontSize: 15.6, lineHeight: 1.6, color: 'var(--text-primary)' }}>
-                                  {narration.status === 'IDLE'
-                                    ? <MessageContent text={displayText} isUser={false} />
-                                    : <NarratedText segments={narration.segments} activeSegmentIndex={narration.activeSegmentIndex} activeWordIndex={narration.activeWordIndex} />}
-                                </div>
+                                <TutorMessageText displayText={displayText} />
 
                                 {cached?.hasMore && (
                                   <button onClick={() => setExpanded((p) => ({ ...p, [msg.id]: !isExpanded }))}
@@ -5610,6 +5545,15 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
 
                     </div>{/* /right half */}
                     </div>{/* /teaching canvas */}
+
+                    {/* The multiple-choice question this tutor message asked, kept in the transcript: full question and
+                        every option, in the order served, directly above whatever the learner answers next, and still
+                        here after they have answered or reloaded. Read-only RECORD — the Quick Check panel stays the
+                        answering control. Outside the canvas and outside the "Read more" fold on purpose.
+                        See src/lib/learn/mcqTranscript.ts. */}
+                    {!isUser && !msg.streaming && msg.mcq && (
+                      <InlineMcqCard question={msg.mcq.question} options={msg.mcq.options} label={t('lc_quick_check_label')} />
+                    )}
 
                     {/* Sprint W: inline practice MCQ — structured candy card, replacing
                         the old plain-text question the AI used to type out itself.
@@ -5883,14 +5827,17 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                   background: 'var(--bg-surface)',
                   border: '1px solid var(--border-subtle)',
                   boxShadow: '0 16px 40px rgba(0,0,0,0.35)',
-                  padding: '12px 14px 14px',
+                  // +1cm tall = 0.5cm more padding top and bottom (CSS adds the 1cm of width).
+                  padding: quickCheckMode === 'minimized' ? '12px 14px 14px' : 'calc(12px + 0.5cm) 14px calc(14px + 0.5cm)',
                   display: 'flex',
                   flexDirection: 'column',
                   gap: 8,
-                  // DRAG (see quickCheckDrag.ts) — a pixel offset layered on
-                  // top of the CSS centering translate; {0,0} reproduces the
-                  // untouched default position exactly.
-                  transform: `translate(calc(-50% + ${quickCheckDragOffset.x}px), ${quickCheckDragOffset.y}px)`,
+                  // DRAG (see quickCheckDrag.ts) — an offset on top of the centring
+                  // translate; {0,0} is the default position. Centred on both axes
+                  // when expanded; minimized stays low (the CSS class).
+                  transform: quickCheckMode === 'minimized'
+                    ? `translate(calc(-50% + ${quickCheckDragOffset.x}px), ${quickCheckDragOffset.y}px)`
+                    : `translate(calc(-50% + ${quickCheckDragOffset.x}px), calc(-50% + ${quickCheckDragOffset.y}px))`,
                   transition: isDraggingQuickCheck ? 'none' : 'transform 120ms ease',
                 }}
               >

@@ -211,9 +211,14 @@ describe('Tutor explanation content is ~30% narrower on desktop, anchored to its
   })
 
   it('the message-text wrapper gets a modest, deliberate trim (16.2->15.6 fontSize, 1.7->1.6 lineHeight) — not a blanket 30% font shrink, and still a comfortable size for a weak/lower-intermediate learner (>=15px)', () => {
-    const idx = SRC.indexOf('<div className="animate-message"')
+    // 2026-10-14: the message-text wrapper moved, unchanged, from LessonScreen.tsx into TutorMessageText
+    // (src/components/learn/MessageContent.tsx) when the narration status fork was removed. The pinned literal is the
+    // same; it is read from where it now lives, and LessonScreen is asserted to render that component.
+    const MESSAGE_CONTENT = readFileSync(path.join(process.cwd(), 'src/components/learn/MessageContent.tsx'), 'utf8')
+    expect(SRC).toContain('<TutorMessageText displayText={displayText} />')
+    const idx = MESSAGE_CONTENT.indexOf('<div className="animate-message"')
     expect(idx).toBeGreaterThan(-1)
-    const block = SRC.slice(idx, idx + 200)
+    const block = MESSAGE_CONTENT.slice(idx, idx + 200)
     expect(block).toContain('fontSize: 15.6, lineHeight: 1.6')
     // Sanity floor: still comfortably above a "too small" body-text size.
     expect(15.6).toBeGreaterThanOrEqual(15)
