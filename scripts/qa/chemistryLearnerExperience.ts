@@ -4,7 +4,7 @@
  * record exactly what came back on the wire, then open the real /learn page in Chromium and screenshot every figure frame at phone
  * and desktop width so the figures can be LOOKED AT, not inferred from payloads.
  *
- *   QA_EMAIL=… QA_PASSWORD=… npx tsx scripts/qa/chemistryLearnerExperience.ts --concepts a,b,c --out tmp/chem-exp [--max-turns 16]
+ *   QA_EMAIL=… QA_PASSWORD=… npx tsx scripts/qa/chemistryLearnerExperience.ts --concepts a,b,c --out tmp/chem-exp [--max-turns 16] [--subject chemistry|mathematics|physics|…]
  *
  * The credentials come ONLY from the environment of that one invocation: they are never written to a file or a log, and an error
  * message that could echo them is scrubbed. Nothing is deleted. The lessons are opened in 'next' mode (a fresh lesson is not reset).
@@ -17,19 +17,32 @@ import { resolve } from 'node:path'
 import { login, BASE } from './liveAccount'
 import { createSession, openLesson, say, carriesFigure, figureLabel, type TurnPayload } from './liveSession'
 import { openContext, CHROMIUM_ARGS } from './physicsVisual/render'
-import { CHEMISTRY_PROBES } from '../../src/lib/teaching/assets/chemistrySeedAssets'
-import { CHEMISTRY_DEPTH_PROBES } from '../../src/lib/teaching/assets/chemistryDepthSeedAssets'
+import { readdirSync } from 'node:fs'
+import { pathToFileURL } from 'node:url'
 
 /**
  * The server never sends the answer key to the client, so a scripted "student who knows the material" answers from the AUTHORED probe corpus:
  * find the probe by its stem, then the served option that is (the head of) its correct choice. A card with no authored match is answered with the
  * first option and reported, so a model-written card is visible in the transcript.
  */
-const norm = (s: string) => s.toLowerCase().replace(/^practice\s*:?\s*/i, '').replace(/[^\p{L}\p{N}]+/gu, ' ').trim()
+// Keeps the minus sign and the symbols that tell answers apart in Mathematics: "(1, 0)" and "(−1, 0)" must not normalise to the same string.
+const norm = (s: string) => s.toLowerCase().replace(/^practice\s*:?\s*/i, '').replace(/[\u2212\u2013]/g, '-').replace(/[^\p{L}\p{N}\s\-/√^π°²³⁄]+/gu, ' ').replace(/\s+/g, ' ').trim()
 const PROBES = new Map<string, { correct: string[] }>()
-for (const pr of [...CHEMISTRY_PROBES, ...CHEMISTRY_DEPTH_PROBES] as Array<{ stem?: string; choices?: Array<{ text: string; isCorrect: boolean }> | null }>) {
-  if (!pr.stem || !pr.choices) continue
-  PROBES.set(norm(pr.stem), { correct: pr.choices.filter((c) => c.isCorrect).map((c) => norm(c.text)) })
+/** Every authored probe of the subject: each `src/lib/teaching/assets/<subject>*.ts` module's exported arrays of `{ stem, choices }`. */
+async function loadOracle(subject: string): Promise<number> {
+  const dir = resolve('src/lib/teaching/assets')
+  for (const f of readdirSync(dir).filter((n) => n.toLowerCase().startsWith(subject.toLowerCase()) && n.endsWith('.ts'))) {
+    let mod: Record<string, unknown>
+    try { mod = await import(pathToFileURL(resolve(dir, f)).href) } catch { continue }
+    for (const v of Object.values(mod)) {
+      if (!Array.isArray(v)) continue
+      for (const pr of v as Array<{ stem?: string; choices?: Array<{ text: string; isCorrect: boolean }> | null }>) {
+        if (!pr || typeof pr.stem !== 'string' || !Array.isArray(pr.choices)) continue
+        PROBES.set(norm(pr.stem), { correct: pr.choices.filter((c) => c.isCorrect).map((c) => norm(c.text)) })
+      }
+    }
+  }
+  return PROBES.size
 }
 function oracleIndex(mcq: { question: string; options: string[] }): number {
   const hit = PROBES.get(norm(mcq.question))
@@ -38,6 +51,7 @@ function oracleIndex(mcq: { question: string; options: string[] }): number {
 }
 
 const arg = (n: string, d?: string) => { const i = process.argv.indexOf(`--${n}`); return i >= 0 ? process.argv[i + 1] : d }
+const SUBJECT = arg('subject', 'chemistry')!
 const EMAIL = process.env.QA_EMAIL ?? '', PASSWORD = process.env.QA_PASSWORD ?? ''
 const scrub = (s: string) => (PASSWORD ? s.split(PASSWORD).join('***') : s).split(EMAIL).join('<account>')
 
@@ -58,7 +72,7 @@ const FILLER = [
 ]
 
 async function driveLesson(cookie: string, lesson: { lessonTitle: string; order: number; topicSlug: string; unitTitle: string }, total: number, maxTurns: number) {
-  const sid = await createSession(cookie, 'chemistry', `qa-exp-${lesson.topicSlug}-${Date.now()}`)
+  const sid = await createSession(cookie, SUBJECT, `qa-exp-${lesson.topicSlug}-${Date.now()}`)
   const turns: Turn[] = []
   const t0 = Date.now()
   let p = await openLesson(cookie, sid, { lessonTitle: lesson.lessonTitle, lessonOrder: lesson.order, topicSlug: lesson.topicSlug, unitTitle: lesson.unitTitle, totalLessons: total }, 'en', 'next')
@@ -100,7 +114,7 @@ async function observe(cookie: string, conceptId: string, outDir: string, served
       await page.setViewportSize({ width: w, height: h })
       await ctx.addCookies(cookie.split(';').map((c) => { const [n, ...rest] = c.trim().split('='); return { name: n, value: rest.join('='), domain: new URL(BASE).hostname, path: '/', secure: true, httpOnly: false, sameSite: 'Lax' as const } }))
       try {
-        await page.goto(`${BASE}/learn?subject=chemistry`, { waitUntil: 'domcontentloaded', timeout: 60_000 })
+        await page.goto(`${BASE}/learn?subject=${SUBJECT}`, { waitUntil: 'domcontentloaded', timeout: 60_000 })
         await page.waitForTimeout(8_000)
         const found = await page.evaluate(() => {
           const frames: Element[] = []
@@ -140,9 +154,10 @@ async function main() {
   const outDir = resolve(arg('out', 'tmp/chem-exp')!)
   const maxTurns = Number(arg('max-turns', '16'))
   mkdirSync(outDir, { recursive: true })
+  console.log(`oracle: ${await loadOracle(SUBJECT)} authored ${SUBJECT} probes`)
   const cookie = await login(EMAIL, PASSWORD)
-  const cur = await (await fetch(`${BASE}/api/curriculum?subject=chemistry`, { headers: { cookie } })).json() as { lessons: Array<{ lessonTitle: string; order: number; topicSlug: string; unitTitle: string }> }
-  const tp = await (await fetch(`${BASE}/api/topic-progress?subject=chemistry`, { headers: { cookie } })).json() as { topicProgress: Array<{ topicSlug: string; status: string }> }
+  const cur = await (await fetch(`${BASE}/api/curriculum?subject=${SUBJECT}`, { headers: { cookie } })).json() as { lessons: Array<{ lessonTitle: string; order: number; topicSlug: string; unitTitle: string }> }
+  const tp = await (await fetch(`${BASE}/api/topic-progress?subject=${SUBJECT}`, { headers: { cookie } })).json() as { topicProgress: Array<{ topicSlug: string; status: string }> }
   const before = new Map(tp.topicProgress.map((r) => [r.topicSlug, r.status]))
   for (const id of concepts) {
     const lesson = cur.lessons.find((l) => l.topicSlug === id)
@@ -150,7 +165,7 @@ async function main() {
     console.log(`\n=== ${id} — ${lesson.lessonTitle} (status before: ${before.get(id) ?? 'FRESH'})`)
     if (process.argv.includes('--observe-only')) {
       // Re-open the lesson in 'resume' mode (it must not re-open a finished lesson, lesson-init/route.ts) and LOOK at the page; no learner turn is sent.
-      const sid = await createSession(cookie, 'chemistry', `qa-obs-${id}-${Date.now()}`)
+      const sid = await createSession(cookie, SUBJECT, `qa-obs-${id}-${Date.now()}`)
       await openLesson(cookie, sid, { lessonTitle: lesson.lessonTitle, lessonOrder: lesson.order, topicSlug: id, unitTitle: lesson.unitTitle, totalLessons: cur.lessons.length }, 'en', 'resume')
       for (const n of await observe(cookie, id, outDir, true)) console.log(`  OBSERVE ${n}`)
       continue
@@ -166,7 +181,7 @@ async function main() {
       console.log(`  RUN FAILED: ${scrub(String(e)).split('\n')[0].slice(0, 200)}`)
     }
   }
-  const after = await (await fetch(`${BASE}/api/topic-progress?subject=chemistry`, { headers: { cookie } })).json() as { topicProgress: Array<{ topicSlug: string; status: string; masteryPct: number; attempts: number }> }
+  const after = await (await fetch(`${BASE}/api/topic-progress?subject=${SUBJECT}`, { headers: { cookie } })).json() as { topicProgress: Array<{ topicSlug: string; status: string; masteryPct: number; attempts: number }> }
   for (const id of concepts) { const r = after.topicProgress.find((x) => x.topicSlug === id); console.log(`PROGRESS ${id}: ${r ? `${r.status} mastery=${r.masteryPct}% attempts=${r.attempts}` : 'no row'}`) }
 }
 main().catch((e) => { console.error(scrub(String(e))); process.exit(1) })
