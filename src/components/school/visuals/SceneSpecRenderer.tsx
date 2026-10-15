@@ -21,6 +21,7 @@ import { pathSegments, visibleObjects, type SceneObject, type SceneSpec } from '
 import { sceneTextObjects } from '@/lib/teaching/visual/layout'
 import { dimColor, meshColor, themeColor } from '@/lib/teaching/sceneGenerators/visualDesign'
 import { emphasisOf } from '@/lib/teaching/visual/sceneStage'
+import { orbitFor } from '@/lib/teaching/visual/sceneOrbit'
 import { bondOrderOf, parallelBondEnds } from '@/lib/teaching/visual/bondGeometry'
 import { SceneStageDecor, stageAxisLabels } from './SceneStageDecor'
 import { useTheme, type Theme } from '@/components/Providers'
@@ -289,6 +290,10 @@ export function SceneSpecRenderer({
       // and the layout model's fixed-camera projection stops being true.
       // Pan and zoom stay enabled; only the automatic motion stops.
       autoRotate={false}
+      // A flat drawing (graph, complex plane, lever diagram) may only be nudged, not turned edge-on: after a quarter-turn
+      // every label's solved position is false and the text piles up. A scene with real depth stays free. Both get a
+      // "Reset view" control once the camera has moved. See sceneOrbit.ts.
+      orbit={orbitFor(spec)}
     >
       <group>
         {/* Stage decoration is OPT-IN per scene. It defaults off so no existing

@@ -25,7 +25,7 @@
  *
  * Pure.
  */
-import type { SceneSpec } from '@/lib/teaching/sceneSpec'
+import type { SceneObject, SceneSpec } from '@/lib/teaching/sceneSpec'
 
 export type ColourFamily =
   | 'red' | 'orange' | 'yellow' | 'green' | 'cyan' | 'blue' | 'purple' | 'pink' | 'grey' | 'white' | 'black' | 'brown'
@@ -147,6 +147,67 @@ export function enforceFigureColours(text: string, families: ReadonlySet<ColourF
         })
       }
       return s
+    })
+    if (removed.length === 0) return { text, changed: false, removed: [] }
+    return { text: out.join(''), changed: true, removed }
+  } catch {
+    return { text, changed: false, removed: [] }
+  }
+}
+
+// ── A COLOUR GIVEN TO A KIND OF PART MUST BE A COLOUR THAT KIND OF PART HAS ────────────────────────────────────────────
+
+/**
+ * The colour check above only asks "does the figure contain this colour ANYWHERE?". That passes a claim that is wrong about
+ * the part: live, 2026-10-14, Rotational Dynamics — the tutor said "the green arc labelled θ = 90°" over a figure whose arc is
+ * grey and whose only green is the torque label. Green is on screen, so nothing fired.
+ *
+ * Here the noun narrows it. For a colour word directly before an unambiguous part noun (arrow, arc/curve, dot/sphere) the colour
+ * must be one the scene gives to an object of that kind; if the scene HAS such objects and none carries the claimed colour, the
+ * colour word is dropped and the noun stays ("the green arc" -> "the arc"). A scene with no object of that kind, a noun that is
+ * ambiguous ("line", "circle", "box"), and colours used about the world are all left alone, exactly as above.
+ */
+const PART_NOUNS: Record<string, ReadonlyArray<SceneObject['type']>> = {
+  arrow: ['vector', 'arrow'], arrows: ['vector', 'arrow'], vector: ['vector', 'arrow'], vectors: ['vector', 'arrow'],
+  arc: ['path', 'trajectory'], arcs: ['path', 'trajectory'], curve: ['path', 'trajectory'], curves: ['path', 'trajectory'],
+  dot: ['point', 'node', 'particle'], dots: ['point', 'node', 'particle'], sphere: ['point', 'node', 'particle'], spheres: ['point', 'node', 'particle'],
+}
+
+function familiesOfKind(scene: SceneSpec, types: ReadonlyArray<SceneObject['type']>): Set<ColourFamily> {
+  const out = new Set<ColourFamily>()
+  for (const step of scene.steps ?? []) {
+    for (const obj of step.objects ?? []) {
+      if (!types.includes(obj.type)) continue
+      const f = familyOfHex(obj.color)
+      if (!f) continue
+      out.add(f)
+      if (isMuted(obj.color)) out.add('grey')
+    }
+  }
+  return out
+}
+
+export function enforcePartColours(text: string, scene: SceneSpec | null | undefined): FidelityResult {
+  if (typeof text !== 'string' || text.length === 0 || !scene) return { text, changed: false, removed: [] }
+  const removed: string[] = []
+  const nouns = Object.keys(PART_NOUNS).join('|')
+  const re = new RegExp(`\\b(the|a|an|this|that|its|their)\\s+(${COLOUR_WORD})((?:-coloured|-colored)?)\\s+(${nouns})\\b`, 'gi')
+  const cache = new Map<string, Set<ColourFamily>>()
+  try {
+    const sentences = text.split(/(?<=[.!?])(\s+)/)
+    const out = sentences.map((sentence) => {
+      if (!FIGURE_CONTEXT_RE.test(sentence)) return sentence
+      return sentence.replace(re, (m, det: string, word: string, _suffix: string, noun: string) => {
+        const claimed = WORD_FAMILY[word.toLowerCase()]
+        const kinds = PART_NOUNS[noun.toLowerCase()]
+        if (claimed === undefined || !kinds) return m
+        const key = kinds.join(',')
+        const have = cache.get(key) ?? familiesOfKind(scene, kinds)
+        cache.set(key, have)
+        if (have.size === 0 || have.has(claimed)) return m
+        removed.push(m.trim())
+        return `${det} ${noun}`
+      })
     })
     if (removed.length === 0) return { text, changed: false, removed: [] }
     return { text: out.join(''), changed: true, removed }

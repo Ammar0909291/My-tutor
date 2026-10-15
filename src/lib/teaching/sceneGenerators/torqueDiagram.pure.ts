@@ -132,6 +132,19 @@ function angleArc(end: Vec3, radius: number, angleDeg: number): SceneObject | nu
   return { type: 'path', id: 'angleArc', points: pts, color: ROLE.reference, radius: 0.07 }
 }
 
+/**
+ * Where the θ label goes: just outside the arc, along its bisector. It used to sit 3 units LEFT of the lever's end, on the
+ * force's far side, while the arc is drawn to the right — so the label floated away from the thing it names (live,
+ * 2026-10-14, Rotational Dynamics). The arc is `angleArc`'s: radius `max(1.6, end·0.22)`, swept from the lever's direction
+ * through `angleDeg`.
+ */
+function angleLabelPosition(end: Vec3, angleDeg: number): Vec3 {
+  const radius = Math.max(1.6, end[0] * 0.22)
+  const mid = ((angleDeg / 2) * Math.PI) / 180
+  const out = radius * 1.55
+  return [round(end[0] + out * Math.cos(mid)), round(out * Math.sin(mid)), 0]
+}
+
 /** Build a 3-step torque-diagram SceneSpec: lever arm, then force vector, then torque label. */
 export function buildTorqueScene(params: TorqueParams): SceneSpec {
   const geo = computeGeometry(params)
@@ -198,7 +211,7 @@ export function buildTorqueScene(params: TorqueParams): SceneSpec {
         objects: [
           { type: 'vector', id: 'force', from: geo.end, to: geo.forceTip, color: ROLE.input, thickness: 0.16 },
           { type: 'label', id: 'forceLabel', position: [round(geo.forceTip[0] + 2.2), round(geo.forceTip[1]), 0], text: `F = ${params.force} N`, color: ROLE.input, size: TIER.primary },
-          ...(arc ? [arc, { type: 'label', id: 'angleLabel', position: [round(geo.end[0] - 3), round(Math.max(2.2, geo.end[0] * 0.16)), 0], text: `θ = ${params.angleDeg}°`, color: ROLE.ink, size: TIER.detail } as SceneObject] : []),
+          ...(arc ? [arc, { type: 'label', id: 'angleLabel', position: angleLabelPosition(geo.end, params.angleDeg), text: `θ = ${params.angleDeg}°`, color: ROLE.ink, size: TIER.detail } as SceneObject] : []),
         ],
       },
       {

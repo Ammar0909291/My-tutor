@@ -198,7 +198,7 @@ describe('prelude wiring in LessonScreen', () => {
     expect(start).toBeGreaterThan(-1)
     const body = SRC.slice(start, start + 1400)
     expect(body).toContain("method: 'POST'")
-    expect(body).toContain('setPreludeDismissed(true)')
+    expect(body).toContain('setPreludeDismissedFor(subjectSlug)')
     // Dismissed even on failure — a learner is never trapped behind it.
     expect(body).toContain('catch')
   })

@@ -275,17 +275,29 @@ export function buildCarnotScene(): SceneSpec {
   const st = carnotStates()
   const iso = (T: number, a: number, b: number) => fnPath((x) => Y((k * T) / (x + 3.6)), X(a), X(b), 40)
   const adi = (s: [number, number], e: [number, number]) => fnPath((x) => Y(s[1] * (s[0] / (x + 3.6)) ** gamma), X(s[0]), X(e[0]), 40)
+  /**
+   * A short arrowhead on a branch of the loop, pointing the way the gas travels. Without one the figure is a closed shape and
+   * the learner cannot tell which way round the cycle runs — which is what decides whether the engine does work or consumes it
+   * (live QA 2026-10-14: "no direction arrows"). Placed at ~55% along the branch, along the local tangent.
+   */
+  const heading = (path: V3[], color: string, reverse = false): SceneObject => {
+    const i = Math.min(path.length - 2, Math.max(1, Math.round(path.length * 0.55)))
+    const [a, b] = reverse ? [path[i + 1], path[i - 1]] : [path[i - 1], path[i + 1]]
+    return arrow(a, b, color)
+  }
+  const hot = iso(Th, st[0][0], st[1][0]), adiBC = adi(st[1], st[2]), cold = iso(Tc, st[3][0], st[2][0]), adiDA = adi(st[3], st[0])
+  const corner = (i: number, name: string, dx: number, dy: number) => label(name, P(X(st[i][0]) + dx, Y(st[i][1]) + dy), ROLE.ink, 'detail')
   return {
     id: 'phys-carnot',
     title: 'The Carnot cycle',
     sceneType: 'diagram',
     cameraDistance: 13,
-    teachingGoal: 'Show the Carnot cycle on a P–V diagram: heat Q_h is taken in along the hot isotherm, released as Q_c along the cold one, with two adiabats between — and its efficiency depends only on the two temperatures, η = 1 − T_c/T_h.',
-    ariaLabel: 'A closed loop on a pressure against volume graph made of four curves: an upper curve at 500 kelvin where heat flows in, a steep curve down, a lower curve at 300 kelvin where heat flows out, and a steep curve back up.',
+    teachingGoal: 'Show the Carnot cycle on a P–V diagram, A → B → C → D → A: heat Q_h is taken in along the hot isotherm, released as Q_c along the cold one, with two adiabats between — and its efficiency depends only on the two temperatures, η = 1 − T_c/T_h.',
+    ariaLabel: 'A closed loop on a pressure against volume graph with four corners A, B, C and D, run in that order, made of four curves: an upper curve A to B at 500 kelvin where heat flows in, a steep curve B to C down, a lower curve C to D at 300 kelvin where heat flows out, and a steep curve D to A back up. Arrowheads show the direction. The enclosed area is the work done per cycle.',
     steps: [
-      { narration: `Hot isotherm at ${Th} K: the gas expands, taking in heat Q_h. Then an adiabat: it keeps expanding with no heat flow and cools to ${Tc} K.`, objects: [arrow(P(X(0), Y(0)), P(X(6.9) + 0.2, Y(0)), ROLE.reference), arrow(P(X(0), Y(0)), P(X(0), Y(5.3)), ROLE.reference), label('V', P(X(6.9), Y(0) - 0.45), ROLE.ink, 'detail'), label('P', P(X(0) + 0.4, Y(5.3) + 0.3), ROLE.ink, 'detail'), curve(iso(Th, st[0][0], st[1][0]), ROLE.input), curve(adi(st[1], st[2]), ROLE.reference), ...st.map(([V, p]) => dot(P(X(V), Y(p)), ROLE.ink, 0.1)), label(`T_h = ${Th} K: heat in`, P(X(2) + 1.8, Y((k * Th) / 2) + 0.35), ROLE.input, 'detail')] },
-      { narration: `Cold isotherm at ${Tc} K: the gas is compressed, giving out heat Q_c. A final adiabat heats it back to ${Th} K, closing the loop.`, objects: [curve(iso(Tc, st[3][0], st[2][0]), ROLE.output), curve(adi(st[3], st[0]), ROLE.reference), label(`T_c = ${Tc} K: heat out`, P(X(4.3), Y(0) - 0.5), ROLE.output, 'detail')] },
-      { narration: `The enclosed area is the work done each cycle. No engine between these two temperatures can beat the Carnot efficiency, 1 − T_c/T_h = ${carnotEfficiency()}.`, objects: [label(`η = 1 − T_c/T_h = 1 − ${Tc}/${Th} = ${carnotEfficiency()}`, P(0.6, 3.4), ROLE.result, 'primary')] },
+      { narration: `A → B, the hot isotherm at ${Th} K: the gas expands, taking in heat Q_h. B → C, an adiabat: it keeps expanding with no heat flow and cools to ${Tc} K.`, objects: [arrow(P(X(0), Y(0)), P(X(6.9) + 0.2, Y(0)), ROLE.reference), arrow(P(X(0), Y(0)), P(X(0), Y(5.3)), ROLE.reference), label('V', P(X(6.9), Y(0) - 0.45), ROLE.ink, 'detail'), label('P', P(X(0) + 0.4, Y(5.3) + 0.3), ROLE.ink, 'detail'), curve(hot, ROLE.input), curve(adiBC, ROLE.reference), heading(hot, ROLE.input), heading(adiBC, ROLE.reference), ...st.map(([V, p]) => dot(P(X(V), Y(p)), ROLE.ink, 0.1)), corner(0, 'A', -0.4, 0.3), corner(1, 'B', 0.35, 0.35), corner(2, 'C', 0.4, 0.35), label(`T_h = ${Th} K: heat in`, P(X(2) + 1.8, Y((k * Th) / 2) + 0.35), ROLE.input, 'detail')] },
+      { narration: `C → D, the cold isotherm at ${Tc} K: the gas is compressed, giving out heat Q_c. D → A, a final adiabat heats it back to ${Th} K, closing the loop.`, objects: [curve(cold, ROLE.output), curve(adiDA, ROLE.reference), heading(cold, ROLE.output, true), heading(adiDA, ROLE.reference), corner(3, 'D', -0.4, -0.35), label(`T_c = ${Tc} K: heat out`, P(X(4.3), Y(0) - 0.5), ROLE.output, 'detail')] },
+      { narration: `The area enclosed by A → B → C → D → A is the net work done each cycle. No engine between these two temperatures can beat the Carnot efficiency, 1 − T_c/T_h = ${carnotEfficiency()}.`, objects: [label(`η = 1 − T_c/T_h = 1 − ${Tc}/${Th} = ${carnotEfficiency()}`, P(0.6, 3.4), ROLE.result, 'primary')] },
     ],
   }
 }

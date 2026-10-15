@@ -43,6 +43,7 @@
  * file already documents for colour resolution.
  */
 
+import { ScriptedText } from './ScriptedText'
 import { Html } from '@react-three/drei'
 import type { Theme } from '@/components/Providers'
 import type { Vec3 } from '@/lib/teaching/sceneSpec'
@@ -148,7 +149,7 @@ export function SceneLabel({ text, position, color, theme, tier, maxWidthPx, pla
             : (heading ? '0 1px 4px rgba(0,0,0,0.85)' : '0 0 3px rgba(0,0,0,0.6)'),
         }}
       >
-        {text}
+        <ScriptedText text={text} />
       </span>
     </Html>
   )

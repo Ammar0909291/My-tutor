@@ -66,6 +66,37 @@ export function quizUnavailableLead(conceptTitle: string | null | undefined): st
     + 'Say "next" when you are ready to keep going.'
 }
 
+/**
+ * THE MODEL REFUSES A CARD THE APP IS ABOUT TO SHOW (live, 2026-10-14, Carnot Cycle).
+ *
+ * The model is told never to write a quiz question (AUTHORED_ONLY_INSTRUCTION — only the app's reviewed cards are asked). A learner
+ * who types "ask me a multiple choice question" therefore got "I'm sorry—I can't give a multiple-choice question…" in the tutor's
+ * message while the Quick Check panel opened with a question at the same moment: two statements that cannot both be true. When a
+ * card IS attached this turn, a short apology-or-refusal paragraph about not giving a multiple-choice question / quiz is replaced
+ * by one line introducing the card. Anything longer, or not a refusal, is left alone; a turn with no card attached keeps its
+ * honest "I don't have a practice question" lead (see below).
+ */
+export const QUIZ_CARD_INTRO = 'Here is a quick check — choose an answer below.'
+const REFUSAL_WORD_RE = /\b(?:sorry|apologi[sz]e|unfortunately|unable|not able|can(?:no|['’])t|cannot|won['’]?t be able)\b/i
+const QUIZ_WORD_RE = /\b(?:multiple[- ]choice|mcq|quiz|quick check|practice question|question card)\b/i
+const MAX_REFUSAL_PARAGRAPH = 320
+
+export function replaceQuizRefusal(reply: string, intro: string = QUIZ_CARD_INTRO): { text: string; changed: boolean } {
+  if (typeof reply !== 'string' || reply.trim() === '') return { text: reply, changed: false }
+  const paragraphs = reply.split(/\n{2,}/)
+  let replaced = false
+  const kept: string[] = []
+  for (const p of paragraphs) {
+    const t = p.trim()
+    const refusal = t.length > 0 && t.length <= MAX_REFUSAL_PARAGRAPH && REFUSAL_WORD_RE.test(t) && QUIZ_WORD_RE.test(t)
+    if (!refusal) { kept.push(p); continue }
+    // the first refusal becomes the intro (or nothing when the caller already adds its own lead); later ones are dropped
+    if (!replaced && intro) kept.push(intro)
+    replaced = true
+  }
+  return replaced ? { text: kept.join('\n\n'), changed: true } : { text: reply, changed: false }
+}
+
 /** Leads this module or the teaching floor already wrote — never added twice. */
 const ALREADY_SAID_RE = /^(?:This is the question you have not answered yet|You have answered every (?:new )?practice question|I don't have a practice question I can give you)/i
 
@@ -79,7 +110,10 @@ export function quizRequestNotice(input: {
   reaskLater?: boolean
 }): { text: string; changed: boolean; reason: QuizRequestReason } {
   const reply = (input.reply ?? '').trim()
-  if (input.cardAttached && !input.cardIsTheUnansweredOne) return { text: input.reply, changed: false, reason: 'card-served' }
+  if (input.cardAttached && !input.cardIsTheUnansweredOne) {
+    const fixed = replaceQuizRefusal(input.reply)
+    return { text: fixed.text, changed: fixed.changed, reason: 'card-served' }
+  }
   if (ALREADY_SAID_RE.test(reply)) {
     return {
       text: input.reply, changed: false,
@@ -87,7 +121,8 @@ export function quizRequestNotice(input: {
     }
   }
   if (input.cardAttached) {
-    return { text: reply ? `${QUIZ_UNANSWERED_LEAD}\n\n${reply}` : QUIZ_UNANSWERED_LEAD, changed: true, reason: 'unanswered-card-reoffered' }
+    const body = replaceQuizRefusal(reply, '').text.trim()
+    return { text: body ? `${QUIZ_UNANSWERED_LEAD}\n\n${body}` : QUIZ_UNANSWERED_LEAD, changed: true, reason: 'unanswered-card-reoffered' }
   }
   const lead = input.poolExhausted ? quizPoolExhaustedLead(input.conceptTitle, input.reaskLater === true) : quizUnavailableLead(input.conceptTitle)
   return {

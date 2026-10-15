@@ -244,6 +244,13 @@ export interface PreludeGateContext {
   preludeViewedAt: Date | string | null | undefined
   /** Set when the learner asked to see it again from Subject Overview. */
   replayRequested?: boolean
+  /**
+   * Did the learner's progress for THIS subject actually load? When the
+   * curriculum request failed, preludeViewedAt is unknown — not "never
+   * completed" — and a returning learner was shown the introduction again.
+   * Omitted means known (callers that pass a real row).
+   */
+  progressKnown?: boolean
 }
 
 /**
@@ -261,6 +268,7 @@ export interface PreludeGateContext {
 export function shouldShowPrelude(ctx: PreludeGateContext): boolean {
   if (!hasSubjectPrelude(ctx.subjectSlug)) return false
   if (ctx.replayRequested) return true
+  if (ctx.progressKnown === false) return false
   return !isPreludeCompleted(ctx.preludeViewedAt)
 }
 

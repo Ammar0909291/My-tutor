@@ -7,7 +7,7 @@
  * contents as children and plug into the existing VisualCard revealStep
  * contract exactly like every SVG visual.
  */
-import { Suspense, useEffect, useRef, type ReactNode } from 'react'
+import { Suspense, useCallback, useEffect, useRef, useState, type ElementRef, type ReactNode } from 'react'
 import { Canvas, useThree } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
 import { usePrefersReducedMotion } from './usePrefersReducedMotion'
@@ -30,7 +30,21 @@ interface ThreeDVisualProps {
    * clear of other text. Defaults to true so existing callers are unchanged.
    */
   autoRotate?: boolean
+  /**
+   * How far the learner may orbit.
+   *   'free'    — any angle (the default; every existing caller is unchanged).
+   *   'limited' — a gentle ±~30° sideways and ±~20° up/down of the authored view. For a figure whose geometry is PLANAR
+   *               (a graph, a complex plane, a lever diagram) a full turn adds no information — it only edge-ons the
+   *               drawing — and every label's solved position stops being true, so the text piles up and clips (live,
+   *               2026-10-14: Carnot P–V graph and Euler's complex plane were turned into slivers with overlapping labels).
+   * In either mode a "Reset view" control appears as soon as the camera has left the authored view.
+   */
+  orbit?: 'free' | 'limited'
 }
+
+/** Orbit window for `orbit="limited"`, radians either side of the authored view (azimuth 0, polar π/2). */
+export const LIMITED_ORBIT = { azimuth: 0.5, polar: 0.35 } as const
+const MOVED_EPSILON = 0.03
 
 
 
@@ -61,6 +75,8 @@ function CameraDistanceSync({ distance }: { distance: number }) {
     camera.position.set(0, 0, distance)
     camera.updateProjectionMatrix()
     controls?.update?.()
+    // The authored view moved with the scene's size, so "Reset view" must return to THIS one, not the earlier distance.
+    ;(controls as { saveState?: () => void } | null)?.saveState?.()
   }, [distance, camera, controls])
 
   return null
@@ -72,8 +88,37 @@ export function ThreeDVisual({
   cameraDistance = 6,
   enableControls = true,
   autoRotate = true,
+  orbit = 'free',
 }: ThreeDVisualProps) {
   const reducedMotion = usePrefersReducedMotion()
+  const controlsRef = useRef<ElementRef<typeof OrbitControls> | null>(null)
+  const [moved, setMoved] = useState(false)
+  // Has the camera left the authored view? Read from the controls themselves on every change, so rotating, zooming and
+  // panning all count, and returning to the start (or pressing Reset) hides the button again.
+  const checkMoved = useCallback(() => {
+    const c = controlsRef.current
+    if (!c) return
+    const away = Math.abs(c.getAzimuthalAngle()) > MOVED_EPSILON
+      || Math.abs(c.getPolarAngle() - Math.PI / 2) > MOVED_EPSILON
+      || Math.abs(c.getDistance() - cameraDistance) > cameraDistance * 0.02
+      || c.target.length() > 0.02
+    setMoved((prev) => (prev === away ? prev : away))
+  }, [cameraDistance])
+  const resetView = useCallback(() => {
+    const c = controlsRef.current
+    if (c) {
+      // OrbitControls.reset() puts the camera back but does NOT clear the drag's damping momentum (`_sphericalDelta`), so the
+      // camera keeps rotating away from the authored view after the click — live, 2026-10-14: the Euler figure's Reset view
+      // left it tilted and the button came straight back. With damping off, update() applies the leftover and zeroes it; only
+      // then is reset() exact. Damping is restored for the learner's next drag.
+      const damping = c.enableDamping
+      c.enableDamping = false
+      c.update()
+      c.reset()
+      c.enableDamping = damping
+    }
+    setMoved(false)
+  }, [])
 
   return (
     <div
@@ -113,6 +158,8 @@ export function ThreeDVisual({
         maxHeight: 'var(--fig-scene-h, min(520px, 60vh))',
         borderRadius: 12,
         overflow: 'hidden',
+        // Anchors the "Reset view" control; has no visual effect on its own.
+        position: 'relative',
         background: 'var(--bg-elevated)',
         touchAction: 'none',
       }}
@@ -136,6 +183,8 @@ export function ThreeDVisual({
         <Suspense fallback={null}>{children}</Suspense>
         {enableControls && (
           <OrbitControls
+            ref={controlsRef}
+            onChange={checkMoved}
             // `makeDefault` publishes the controls on the R3F store, which is
             // how CameraDistanceSync above reaches them to re-apply their
             // internal state after it moves the camera.
@@ -148,9 +197,33 @@ export function ThreeDVisual({
             autoRotateSpeed={0.6}
             minDistance={cameraDistance * 0.5}
             maxDistance={cameraDistance * 2}
+            {...(orbit === 'limited'
+              ? {
+                  minAzimuthAngle: -LIMITED_ORBIT.azimuth,
+                  maxAzimuthAngle: LIMITED_ORBIT.azimuth,
+                  minPolarAngle: Math.PI / 2 - LIMITED_ORBIT.polar,
+                  maxPolarAngle: Math.PI / 2 + LIMITED_ORBIT.polar,
+                }
+              : {})}
           />
         )}
       </Canvas>
+      {enableControls && moved && (
+        <button
+          type="button"
+          onClick={resetView}
+          aria-label="Reset view"
+          data-reset-view=""
+          style={{
+            position: 'absolute', top: 8, right: 8, zIndex: 5,
+            padding: '4px 10px', borderRadius: 999, fontSize: 12, fontWeight: 700, lineHeight: 1.2, cursor: 'pointer',
+            background: 'var(--bg-card)', color: 'var(--text-primary)', border: '1px solid var(--border-default)',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.25)',
+          }}
+        >
+          Reset view
+        </button>
+      )}
     </div>
   )
 }
