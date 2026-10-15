@@ -152,10 +152,11 @@ describe('LessonScreen wiring — the question is in the transcript, above the a
     // the window controls — the reset deliberately does not touch it.
     const reset = CODE.slice(CODE.indexOf('const clearLessonMcqState'), CODE.indexOf('}, [])', CODE.indexOf('const clearLessonMcqState')))
     expect(reset).not.toContain('setQuickCheckWindow')
-    // The three lesson-switch sites — advance (completeAndAdvance), staged preview, resetLessonContext — each empty
-    // the transcript and clear the MCQ state in the same breath, and no site empties it without clearing.
-    expect(CODE.match(/setMessages\(\[\]\)\s*\n\s*clearLessonMcqState\(\)/g)).toHaveLength(3)
-    expect(CODE.match(/setMessages\(\[\]\)/g)).toHaveLength(3)
+    // The four lesson-switch sites — advance (completeAndAdvance), staged preview, resetLessonContext and the
+    // Resume/Restart gate's Restart (restartConceptFromGate) — each empty the transcript and clear the MCQ state
+    // in the same breath, and no site empties it without clearing.
+    expect(CODE.match(/setMessages\(\[\]\)\s*\n\s*clearLessonMcqState\(\)/g)).toHaveLength(4)
+    expect(CODE.match(/setMessages\(\[\]\)/g)).toHaveLength(4)
     expect(CODE).toMatch(/const resetLessonContext = useCallback\(\(\) => \{\s*setMessages\(\[\]\)\s*\n\s*clearLessonMcqState\(\)/)
   })
 

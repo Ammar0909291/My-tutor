@@ -978,6 +978,11 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   // Curriculum
   const [curriculumLessons, setCurriculumLessons] = useState<CurriculumLesson[]>([])
   const [curriculumLoaded, setCurriculumLoaded] = useState(false)
+  // Which subject's progress row actually arrived. A failed or unsuccessful
+  // curriculum request leaves curriculumProgress at its seeded default (no
+  // preludeViewedAt) — unknown, not "never completed" — so the subject
+  // introduction must not be decided from it.
+  const [progressLoadedFor, setProgressLoadedFor] = useState<string | null>(null)
   // True once the mount-time history restore has settled (any outcome).
   // Pairs with curriculumLoaded to form the entry-overlay gate below: both
   // facts must be known before we can say whether the prelude or the
@@ -1242,7 +1247,10 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
   // timestamp. Without it the gate would briefly re-render after completion —
   // the same stale-read flicker that makes a one-time screen look like it
   // reappeared.
-  const [preludeDismissed, setPreludeDismissed] = useState(false)
+  // Keyed by subject: dismissing one subject's introduction must neither
+  // suppress another subject's first one nor be forgotten for this subject.
+  const [preludeDismissedFor, setPreludeDismissedFor] = useState<string | null>(null)
+  const preludeDismissed = preludeDismissedFor === subjectSlug
   const [preludeReplay, setPreludeReplay] = useState(false)
   const [preludeSaving, setPreludeSaving] = useState(false)
 
@@ -1631,6 +1639,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
           const progress: CurriculumProgress = data.progress ?? { currentLesson: 1, completedLessons: [] }
           setCurriculumLessons(lessons)
           setCurriculumProgress(progress)
+          setProgressLoadedFor(subjectSlug)
           // Auto-expand the unit containing the current lesson
           const currentLes = lessons.find((l) => l.order === progress.currentLesson)
           if (currentLes) setExpandedUnits([currentLes.unit])
@@ -2512,6 +2521,7 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     subjectSlug,
     preludeViewedAt: curriculumProgress.preludeViewedAt,
     replayRequested: preludeReplay,
+    progressKnown: progressLoadedFor === subjectSlug,
   })
 
   /**
@@ -2539,13 +2549,13 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     } catch { /* dismissed regardless — see above */ }
     setPreludeSaving(false)
     setPreludeReplay(false)
-    setPreludeDismissed(true)
+    setPreludeDismissedFor(subjectSlug)
   }, [subjectSlug])
 
   /** Replay from Subject Overview. Never clears the stored timestamp — a
    *  replay is a view, not an un-completion. */
   const replayPrelude = useCallback(() => {
-    setPreludeDismissed(false)
+    setPreludeDismissedFor(null)
     setPreludeReplay(true)
   }, [])
 
@@ -2797,6 +2807,53 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     setMaximizedPanel('chat')
     stageLessonPreview(target)
   }, [lessonSwitchDialog, stageLessonPreview])
+
+  // ── RESUME / RESTART A STUDIED CONCEPT ─────────────────────────────────────
+  // The Start-Lesson gate offers both when the concept has history. Resume is
+  // the gate's existing start path (non-destructive). Restart first resets the
+  // concept on the server — one transaction, this learner and this concept
+  // only (src/lib/teaching/conceptRestart.ts) — and only on success clears the
+  // screen and opens the concept with lesson-init's `restart` mode, which also
+  // clears the attempt's session state. A failed reset changes nothing here
+  // and says so. The ref makes double clicks and a Resume-after-Restart race
+  // no-ops while a restart is in flight.
+  const [conceptRestart, setConceptRestart] = useState<{ busy: boolean; error: boolean }>({ busy: false, error: false })
+  const conceptRestartInFlightRef = useRef(false)
+  const restartConceptFromGate = useCallback(async (lesson: CurriculumLesson) => {
+    if (!sessionId || conceptRestartInFlightRef.current) return
+    conceptRestartInFlightRef.current = true
+    setConceptRestart({ busy: true, error: false })
+    try {
+      const res = await fetch('/api/learn/concept-restart', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          subjectSlug, topicSlug: lesson.topicSlug || undefined, lessonOrder: lesson.order, lessonTitle: lesson.lessonTitle,
+        }),
+      })
+      const data = await res.json().catch(() => ({}))
+      if (!res.ok || !data?.success) throw new Error(data?.error ?? `HTTP ${res.status}`)
+      // Authoritative: an in-flight chat reply must not restore the old pointer.
+      progressGenerationRef.current += 1
+      if (data.progress) setCurriculumProgress(data.progress)
+      if (lesson.topicSlug) {
+        const slug = lesson.topicSlug
+        setTopicProgressMap((prev) => ({ ...prev, [slug]: { status: 'NOT_STARTED', masteryPct: 0 } }))
+      }
+      pendingLessonRunRef.current = null
+      setPendingLesson(null)
+      setMessages([])
+      clearLessonMcqState()
+      setLessonStarted(true)
+      initializedRef.current = true
+      setConceptRestart({ busy: false, error: false })
+      await callLessonInit(sessionId, 'restart', lesson)
+    } catch {
+      setConceptRestart({ busy: false, error: true })
+    } finally {
+      conceptRestartInFlightRef.current = false
+    }
+  }, [sessionId, subjectSlug, callLessonInit, clearLessonMcqState])
 
   // Whether the learner is currently ON an unstarted preview screen
   // (pendingLesson is set only between a staged switch and either "Start
@@ -5165,8 +5222,19 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                         )}
                       </div>
                     )}
+                    {isResume && previewLesson && (
+                      <div data-testid="concept-continue-choice" style={{ maxWidth: 420, width: '100%', textAlign: 'center', display: 'flex', flexDirection: 'column', gap: 4 }}>
+                        <p style={{ fontSize: 16.2, fontWeight: 700, color: 'var(--text-primary)' }}>{t('concept_continue_title')}</p>
+                        <p style={{ fontSize: 14.4, color: 'var(--text-secondary)' }}>{t('concept_continue_body')}</p>
+                      </div>
+                    )}
                     <button
+                      data-testid="concept-resume-btn"
+                      disabled={conceptRestart.busy}
+                      title={isResume ? t('concept_resume_desc') : undefined}
                       onClick={() => {
+                        if (conceptRestartInFlightRef.current) return
+                        setConceptRestart({ busy: false, error: false })
                         // A confirmed lesson switch defers its actual start to
                         // this click (see confirmLessonSwitch) — run that
                         // instead of the normal mount-time startLesson() flow.
@@ -5190,6 +5258,28 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                       }}>
                       {isResume ? t('resume_lesson_btn') : t('start_lesson_btn')}
                     </button>
+                    {isResume && previewLesson && (
+                      <button
+                        data-testid="concept-restart-btn"
+                        disabled={conceptRestart.busy || !sessionId}
+                        title={t('concept_restart_desc')}
+                        onClick={() => { void restartConceptFromGate(previewLesson) }}
+                        style={{
+                          padding: '9px 20px', borderRadius: 12, fontSize: 15, fontWeight: 700,
+                          cursor: conceptRestart.busy ? 'wait' : 'pointer',
+                          background: 'transparent', color: 'var(--text-primary)', border: '1px solid var(--border-subtle)',
+                        }}>
+                        {conceptRestart.busy ? t('concept_restart_busy') : t('concept_restart_btn')}
+                      </button>
+                    )}
+                    {isResume && (
+                      <p style={{ fontSize: 12.6, color: 'var(--text-dim)', maxWidth: 360, textAlign: 'center' }}>{t('concept_restart_desc')}</p>
+                    )}
+                    {conceptRestart.error && (
+                      <p role="alert" data-testid="concept-restart-error" style={{ fontSize: 13.8, color: 'var(--danger, #dc2626)', maxWidth: 360, textAlign: 'center' }}>
+                        {t('concept_restart_failed')}
+                      </p>
+                    )}
                   </div>
                 )
               })()}
