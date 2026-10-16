@@ -54,6 +54,11 @@
  *  which is exactly how the scorer first measured this criterion at 2%. */
 const flatten = (s: string) =>
   s.replace(/[‘’ʼ]/g, "'").replace(/[“”]/g, '"')
+    // Hyphens too: the tutor writes "spot‑on" with U+2011 (non-breaking
+    // hyphen). MEASURED live 2026-09-27 (bio.gen.mendelian-genetics): the
+    // reply opened "That’s spot‑on", went unrecognised, and the learner read
+    // "That's right. That’s spot‑on – …" — a doubled confirmation.
+    .replace(/[\u2010-\u2013\u2212]/g, '-')
 
 /**
  * An EXPLICIT statement that the answer was right.
@@ -72,7 +77,7 @@ const flatten = (s: string) =>
 // hypertrophy adaptation. None of the other phrasings matched, so the unbacked
 // praise was never stripped. Kept in lockstep with scripts/qa/rubricScore.ts.
 export const CONFIRMS_CORRECT = new RegExp([
-  '\\bcorrect\\b', '\\bexactly\\b', '\\bprecisely\\b', '\\bspot on\\b',
+  '\\bcorrect\\b', '\\bexactly\\b', '\\bprecisely\\b', '\\bspot[ -]?on\\b',
   '\\bwell done\\b', '\\bnicely done\\b', '\\bperfect\\b',
   "\\b(that|this) ?'?s right\\b", '\\bthat is right\\b',
   "\\byou'?re right\\b", '\\byou are right\\b', '\\bquite right\\b',

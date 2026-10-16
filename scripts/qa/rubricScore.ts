@@ -107,7 +107,7 @@ type Scorecard = Record<Criterion, Verdict> & {
  *  because of that — the scorer was measuring its own encoding assumption, not
  *  the product. This is exactly the class of error the calibration pass exists
  *  to catch, and it would have been reported as a catastrophic product failure. */
-const flatten = (s: string) => s.replace(/[\u2018\u2019\u02bc]/g, "'").replace(/[\u201c\u201d]/g, '"').replace(/[\u2013\u2014]/g, '-')
+const flatten = (s: string) => s.replace(/[\u2018\u2019\u02bc]/g, "'").replace(/[\u201c\u201d]/g, '"').replace(/[\u2010-\u2014\u2212]/g, '-')
 const norm = (s: string | undefined) => flatten(s ?? '').split(/\s+/).join(' ').trim()
 const hasFigure = (p: Payload) => Boolean(p.sceneSpec || p.visualSpec || p.visual)
 const modelTurns = (t: Transcript) => t.turns.filter((x) => norm(x.payload.text).length > 0)
@@ -142,7 +142,7 @@ const CLAIMS_A_FIGURE = /\b(the|this) (diagram|figure|picture|image|graph) (show
  *  "You're right-gravity just shifts the equilibrium"). Deliberately NOT a bare
  *  "right", which matches "the right-hand side". */
 const CONFIRMS = new RegExp([
-  "\\bcorrect\\b", "\\bexactly\\b", "\\bprecisely\\b", "\\bspot on\\b",
+  "\\bcorrect\\b", "\\bexactly\\b", "\\bprecisely\\b", "\\bspot[ -]?on\\b",
   "\\bwell done\\b", "\\bnicely done\\b", "\\bperfect\\b",
   "\\b(that|this) ?'?s right\\b", "\\bthat is right\\b",
   "\\byou'?re right\\b", "\\byou are right\\b", "\\bquite right\\b",

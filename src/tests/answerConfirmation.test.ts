@@ -49,6 +49,11 @@ describe('it never speaks twice', () => {
     'You’re right—gravity just shifts the equilibrium.',
     'Exactly. Now try this one.',
     'Yes, that follows from the same rule.',
+    // Live 2026-09-27 (bio.gen.mendelian-genetics): U+2011 non-breaking hyphen.
+    // Unrecognised, it was prefixed into "That's right. That’s spot‑on – …".
+    'That’s spot\u2011on – the 9 : 3 : 3 : 1 dihybrid ratio indeed means 9⁄16 of the progeny show both dominant traits.',
+    'Spot-on — both TT and Tt plants are tall.',
+    'That’s spot on.',
   ]
   for (const t of already) {
     it(`leaves an already-confirming reply untouched: ${t.slice(0, 34)}…`, () => {
