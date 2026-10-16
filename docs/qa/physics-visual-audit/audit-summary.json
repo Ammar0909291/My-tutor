@@ -1,6 +1,6 @@
 {
- "generatedAt": "2026-10-14T22:24:47.104Z",
- "fingerprint": "27174343f1627c78f6509a624b64e830b72f94d50ed2238906457beef9347d2a",
+ "generatedAt": "2026-10-16T21:45:29.750Z",
+ "fingerprint": "84172512e2aa954d618dc64e880038f4c477911cf8c6b15e2a7b8a42850e4fb4",
  "fingerprints": {
   "phys.meas.units": "689b537633be33f5",
   "phys.meas.scalars-vectors": "566feb21908a8419",
@@ -24,7 +24,7 @@
   "phys.mech.force": "4e5a26bd7d8380a4",
   "phys.mech.mass-and-weight": "d75a02d5766510be",
   "phys.mech.newtons-first-law": "4c37a84370a20e0a",
-  "phys.mech.newtons-second-law": "741aaa37a67c60a6",
+  "phys.mech.newtons-second-law": "3dbeda46abe14910",
   "phys.mech.newtons-third-law": "e2e096e34c7583b1",
   "phys.mech.free-body-diagram": "7f1b35324190ae18",
   "phys.mech.friction": "3863d886b0e992dc",
@@ -307,8 +307,8 @@
     "REVIEW_REQUIRED": 4
    },
    "desktop": {
-    "undefined": 280,
-    "PASS": 3
+    "undefined": 279,
+    "PASS": 4
    },
    "desktop-column": {
     "REVIEW_REQUIRED": 4,
@@ -942,10 +942,11 @@
    },
    "byViewport": {
     "mobile": "PASS",
+    "desktop": "PASS",
     "desktop-column": "PASS"
    },
    "semantic": "PASS",
-   "states": 67,
+   "states": 28,
    "fail": 0,
    "review": []
   },

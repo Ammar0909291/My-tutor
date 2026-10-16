@@ -127,6 +127,11 @@ const GRAPH_T_MAX = NEWTON_MAX_TICKS * NEWTON_FIXED_DT // 10 s
 const GRAPH_V_MAX = 45 // m/s — above the largest reachable speed (≈ 40.8)
 const GRAPH_WIDTH = NEWTON_TRACK_M // 20 units for 10 s
 const GRAPH_HEIGHT = 6
+// The speed axis's top number sits level with the track's "0 m" label (the axis
+// top is 1.4 units under the track). At -1.2 the two read as one string on a
+// phone ("45 0 m": measured 390 px, 12 px apart); further left it clears the
+// start label and still hangs off the axis like the other tick numbers.
+const GRAPH_V_MAX_LABEL_X = -2.4
 const GRAPH_SAMPLE_TICKS = 5 // one trace point per 0.1 s
 const MIN_TRACE_POINTS = 8
 
@@ -245,7 +250,7 @@ export function buildNewtonScene(p: NewtonParams, tick = 0): SceneSpec {
     { ...label('v (m/s)', [-2.6, GRAPH_Y0 + GRAPH_HEIGHT / 2, 0], ROLE.reference), id: 'graph-v-label' },
     { ...label('0', [-0.6, GRAPH_Y0 - 0.6, 0], ROLE.reference), id: 'graph-origin' },
     { ...label(fmt(GRAPH_T_MAX, 0), [GRAPH_WIDTH, GRAPH_Y0 - 0.6, 0], ROLE.reference), id: 'graph-t-max' },
-    { ...label(String(GRAPH_V_MAX), [-1.2, GRAPH_Y0 + GRAPH_HEIGHT, 0], ROLE.reference), id: 'graph-v-max' },
+    { ...label(String(GRAPH_V_MAX), [GRAPH_V_MAX_LABEL_X, GRAPH_Y0 + GRAPH_HEIGHT, 0], ROLE.reference), id: 'graph-v-max' },
   ]
 
   const body: SceneObject[] = [

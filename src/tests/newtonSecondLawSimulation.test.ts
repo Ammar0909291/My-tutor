@@ -313,6 +313,20 @@ describe('pilot polish — labels', () => {
     for (const t of ['t (s)', 'v (m/s)', '0', '10', '45']) expect(texts).toContain(t)
   })
 
+  it("the speed axis's top number stays clear of the track's '0 m' label on a phone", () => {
+    // Learner run 2026-10-15, 390 px: the axis-top "45" sat level with "0 m" and
+    // read as "45 0 m" (measured 12.3 px apart in Chromium). At 2.4 units to the
+    // left of the start label the same render measures 17.6 px. The unit scale is
+    // set by the track (20 units across the card), so the authored offset is what
+    // this pins; the browser audit (docs/qa/physics-visual-audit) holds the pixels.
+    const objects = canonicalParametricScene(KIND)!.steps[0].objects
+    const at = (id: string) => (objects.find((o) => o.id === id) as { position: [number, number, number] }).position
+    expect(at('start-label')[0] - at('graph-v-max')[0]).toBeGreaterThanOrEqual(2.4)
+    // and it still hangs off the speed axis (left of it, level with its top end), like the other ticks
+    expect(at('graph-v-max')[0]).toBeLessThan(0)
+    expect(at('graph-v-max')[1]).toBeCloseTo(at('graph-origin')[1] + 6 + 0.6, 6)
+  })
+
   it('the tutor-visible text cannot be read as a measurement on the empty graph', () => {
     // Measured live: "10 s" and "45 m/s" as axis-end labels were narrated as
     // "after 10 seconds it reaches 45 m/s". Ends are bare ticks; the ranges are

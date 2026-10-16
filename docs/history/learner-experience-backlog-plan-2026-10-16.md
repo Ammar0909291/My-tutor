@@ -1,0 +1,105 @@
+# Learner-experience defect backlog — status and plans (2026-10-16)
+
+Scope: the "close the learner-experience defect backlog (2026-10-14 to 10-16)" prompt. State measured on
+`origin/main` b92d3c4 plus this pass's edits. Nothing below that says "PROPOSAL" is implemented.
+
+## 1. Fixed in this pass (code, each with a regression test and a mutation check)
+
+| Id | Defect | Fix | Test |
+|---|---|---|---|
+| M1 | "what does converge even mean, the terms just get small?" in `math.real.convergence-sequences` resolved to `math.func.even-odd-functions` ("Even" is a TITLE_COMPONENT of "Even and Odd Functions", 0.8) and replaced the lesson's figure. The same sentence with "really" resolved to nothing. | `requestedConcept.ts`: new `isAdverbialFragment` filter in the `viable` chain — a lone ordinary adverb counts as naming a concept only when another word of that concept's title sits within 2 tokens ("even function", "even and odd") or the message is ≤2 tokens. Measured over all six KGs, "even" is the only ordinary adverb that is a single-word title component. | `adverbialFragmentNotATopic.test.ts` (9). Mutation: guard disabled → 3 fail. 204 files / 10,859 tests of every suite touching the resolver pass. |
+| M2 | The figure self-description read out the semantics caption (`<title> — <teaching goal>`, goal clipped at 160 chars) and the step narration (clipped at 120 chars in the stored copy) as "the words written on it", cut mid-sentence. | `figureReference.ts` `figureEvidenceAnswer`: the title is the part before " — "; only short labels (≤48 chars, no ellipsis, not a sentence) are quoted. The claim-check evidence (`FigureEvidence.text`) is untouched. | `figureSelfDescriptionLabelsOnly.test.ts` (6). Mutations: tail kept → 2 fail; every entry quoted → 5 fail. |
+| B3 | Newton's-second-law figure, 390 px: the speed-axis top number "45" sat level with the track's "0 m" and read as "45 0 m". Not a data error: the axes are fixed by design. | `newtonSecondLaw.pure.ts`: `GRAPH_V_MAX_LABEL_X` −1.2 → −2.4 (label-only; axes unchanged). Measured in Chromium at 390 px: gap 12.3 px → 17.6 px. | `newtonSecondLawSimulation.test.ts` (+1). Mutation: old position → fails. Physics audit re-run for this concept (`render.ts` → `validate.ts` → `merge-audit.ts`): PASS in every dimension; the freshness gate is green again. |
+
+Audit record note: the committed row for `phys.mech.newtons-second-law` recorded 67 states over mobile + desktop-column;
+the documented default sweep (`render.ts` defaults: 9 slider states in dark on mobile, desktop and desktop-column, 1 default
+state on mobile light) records 28 states over three viewports. Verdict unchanged (PASS, 0 fail).
+
+## 2. Deliberately not changed
+
+- **C1 (numeric accuracy):** closed numeric track (owner, 2026-10-04). Not touched.
+- **C2:** not reproduced today; nothing to fix.
+- **C4 (platform talk):** not reproduced today. The phrase is not in code — it is a model paraphrase, so a deterministic
+  strip would be a guess. Not built.
+- **Re-ask rule (G2, 2026-09-24):** not touched.
+- **A1–A6:** already fixed; their regression tests were re-run green (88 tests in `tutorTextDefects` plus the visual-continuity,
+  `visual2dLayoutSafety`, `generatedGraphMustShowItsCurve`, `orbitalOccupancySuperscript`, `collapsedBulletSplit`,
+  `periodicLawFigureDefault` suites).
+
+## 3. Measured: the authored card pool (all subjects, from the authored corpus via `contract-audit` `load()` + `probeToMcq`)
+
+| Subject | Concepts | Cards | Cards/concept min/median/max | Options 2 / 3 / 4 | Concepts with <3 cards | Concepts with <3 three-plus-option cards | Blind-guess accuracy |
+|---|---|---|---|---|---|---|---|
+| mathematics | 908 | 4,585 | 5/5/15 | 163 / 2,556 / 1,866 | 0 | 22 | 30.5 % |
+| physics | 283 | 1,605 | 5/5/20 | 725 / 300 / 580 | 0 | 166 | 37.9 % |
+| chemistry | 186 | 931 | 5/5/6 | 618 / 69 / 244 | 0 | 151 | 42.2 % |
+| computer science | 119 | 268 | 2/2/3 | 152 / 77 / 39 | 89 | 119 | 41.6 % |
+| biology | 199 | 597 | 3/3/3 | 203 / 104 / 290 | 0 | 199 | 35.0 % |
+| english | 215 | 1,501 | 3/7/7 | 1,493 / 8 / 0 | 0 | 215 | 49.9 % |
+
+("Blind-guess accuracy" = the expected score of answering every card at random.) Owner decision 3 (2026-10-07) makes a
+2-option card practice-only only where the concept holds ≥3 authored 3+-option cards (`turnContract.certifiesMastery`).
+Outside mathematics that condition is mostly unmet, so most 2-option cards still count towards mastery — English's counting
+cards are, in effect, coin flips (1,493 of 1,501 are 2-option).
+
+Cards needed to reach that floor (`Σ max(0, 3 − three-plus cards)` per concept):
+
+| Subject | Concepts under the floor | Cards missing | Coverable by converting an existing 2-option card | Must be newly written |
+|---|---|---|---|---|
+| mathematics | 22 | 22 | 22 | 0 |
+| physics | 166 | 215 | 215 | 0 |
+| chemistry | 151 | 247 | 247 | 0 |
+| computer science | 119 | 241 | 152 | 89 |
+| biology | 199 | 203 | 203 | 0 |
+| english | 215 | 637 | 637 | 0 |
+| **all** | 872 | **1,565** | 1,476 | 89 |
+
+Pool depth also explains the repeated-question reports: 5 cards per concept (3 in biology, 2–3 in CS) are spent in phases that
+do not count towards mastery (GUIDE / DEMONSTRATE), so a learner who stays until mastery (owner decision 4) can exhaust the pool.
+
+## 4. PROPOSALS (not implemented — each needs an owner decision)
+
+### B1 — re-author the cards (guessability) + content sync
+
+Two ways to reach the "≥3 authored 3+-option cards per concept" floor:
+
+- **Path A — add new 3–4-option cards (recommended).** New cards are new identities, which the create-only bootstrap creates on
+  the next cold start, so **no production content sync is needed**; the pool also gets deeper, which helps the repeated-question
+  report. Needs 1,565 new cards (table above). To confirm before writing: slug capacity — the probe slug carries an optional
+  difficulty segment (`buildProbeSlugResolver`); run `npx tsx scripts/brain/seed-knowledge-assets.ts --draft --dry-run` to prove
+  no duplicate `canonicalSlug`.
+- **Path B — re-author the existing 2-option cards in place** (1,476 conversions + 89 new CS cards). Same learner effect, but an
+  edit of an existing identity **never reaches production by itself** (create-only bootstrap): it needs an owner-approved content
+  sync (the 2026-09-22 SQL-equivalent write is the precedent) and a production convergence check afterwards.
+- **Order (worst first):** english (637 cards, 49.9 % blind accuracy) → chemistry (247) → computer science (241) → physics (215)
+  → biology (203) → mathematics (22).
+- **Effort:** one campaign the size of the mathematics probe-depth campaign (1,833 probes in 24 modules) — roughly 10–13 batches of
+  ~120–150 cards, each ending in the dry-run, the contract audit (`contract-audit.ts --min 3`) and `tsc`.
+- **Risk:** content quality only — distractors must be plausible and carry a `misconceptionId`; no engine change. Path A adds
+  production rows on deploy (reversible by status). Path B adds the sync risk above.
+
+### B2 — real figures (measured today with `resolveVisual`)
+
+| Concept | Served today | Proposal |
+|---|---|---|
+| `math.trig.unit-circle` | `registry:domain-default:math.trig:geometry_shape` — a generic geometry card, not a unit-circle figure | Author a unit-circle scene in the existing math batch workflow (`framed()`, label solver, ≤9 named labels, SM-01 label rule), register it, raise the audit threshold, re-render under `?scope=lesson`. ~½ day; low risk (label placement). |
+| `chem.state.phase-diagram` | concept-authored `cell-comparison` scene "Reading a Phase Diagram: Pressure against Temperature" (22 objects) | Render it first (390/1280, both themes) and judge it against a real P–T diagram (three boundary curves, solid/liquid/gas regions, triple and critical points); author a plotted scene only if it falls short. Needs a chemistry audit re-render and an updated semantic-review binding. ~½–1 day; medium risk (audit gate). |
+| `eng.grammar.nouns` | none — `no-figure:no-faithful-visual` (by policy, not a wrong figure) | A sorting figure (person / place / thing / idea) only if it passes the faithfulness policy; never a decorative figure. ~½ day; low–medium risk. |
+| `bio.immuno.immune-disorders` | concept-authored scene "Immune Disorders: Three Failure Modes" (14 objects) — the 2026-09-25 Tier 0 fix | Verification, not authoring: re-run the biology render harness on this concept and confirm in production. ~1 h; low risk. |
+
+All four are code-served registry figures: they ship with a deploy, not with a content sync. Each new or changed figure must pass its
+subject's visual audit gate in the same push.
+
+### B4 — more probes
+
+- **Floor (3 probes, the asset contract):** 89 CS concepts (median 2 cards) are under it today → 89 new cards.
+- **Depth (5 probes, the mathematics/chemistry/physics standard):** CS 327 more, biology 398 more.
+- New identities only, so no production content sync; same dry-run, contract-audit and convergence checks as B1.
+- **Effort:** ~89 cards for the floor (1 batch); ~725 for depth (5–6 batches).
+
+### Owner decisions needed before any of the above starts
+
+1. B1 Path A (add) or Path B (re-author + sync)?
+2. Stop spending authored cards in non-counting phases (GUIDE / DEMONSTRATE)? That is an Educational Brain teaching-decision
+   change, so it needs the G1/G2 sign-off; the alternative is to deepen the pool (B1 Path A / B4).
+3. B2: which of the four to author (the Immune Disorders and Phase Diagram items may need only verification).

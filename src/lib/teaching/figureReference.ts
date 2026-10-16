@@ -886,6 +886,12 @@ export const DENIES_OR_IMAGINES_FIGURE_RE = new RegExp([
   String.raw`\bimagine\s+(?:a|the|that)\s+(?:picture|diagram|figure|flow ?chart|graph|drawing)\b`,
 ].join('|'), 'i')
 
+const LABEL_MAX_CHARS = 48
+/** A label the renderer writes on the figure, as against drawn-list entries and step narration. */
+function isWrittenLabel(t: string): boolean {
+  return t.length > 0 && t.length <= LABEL_MAX_CHARS && !/^drawn: /.test(t) && !/(?:…|\.\.\.)$/.test(t) && !/[.!?]\s+\S/.test(t)
+}
+
 /** The deterministic answer about a figure the learner has, built only from what the renderer drew. */
 export function figureEvidenceAnswer(
   drawn: { caption: string | null; text: string[] } | null | undefined,
@@ -894,10 +900,17 @@ export function figureEvidenceAnswer(
   teaching: string | null | undefined,
 ): string {
   const place = where === 'this-message' ? 'The picture with this message' : 'The picture for this lesson is further up in our chat. It'
-  const caption = drawn?.caption?.trim() || (fallbackSemantics ?? '').replace(/^A 3D scene:\s*/i, '').trim() || null
+  // The caption the semantics layer builds is "<title> — <teaching goal>"; the
+  // goal is an authoring note, clipped at 160 characters, so it was read out to
+  // the learner cut mid-sentence (math.real.convergence-sequences, 2026-10-15).
+  // Only the title is on the figure.
+  const caption = (drawn?.caption?.trim() || (fallbackSemantics ?? '').replace(/^A 3D scene:\s*/i, '').trim() || null)
+    ?.split(' — ')[0].trim() || null
   // "drawn: …" lists what is drawn, not words written on the figure (it was
-  // read out as a label on 31bafe03).
-  const text = (drawn?.text ?? []).map((t) => t.trim()).filter((t) => t && !/^drawn: /.test(t)).slice(0, 12)
+  // read out as a label on 31bafe03). The evidence also carries step narration
+  // (sentences, clipped at 120 characters in the stored copy); a sentence is not
+  // "a word written on" the figure, so only short labels are read out.
+  const text = (drawn?.text ?? []).map((t) => t.trim()).filter(isWrittenLabel).slice(0, 12)
   const parts: string[] = []
   parts.push(caption ? `${place} is titled “${caption}”.` : `${place} is the figure shown for this idea.`)
   if (text.length) parts.push(`The words written on it are: ${text.map((t) => `“${t}”`).join(', ')}.`)

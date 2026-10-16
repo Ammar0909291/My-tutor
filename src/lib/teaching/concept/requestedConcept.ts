@@ -222,6 +222,48 @@ function isDiscourseOnlyMatch(matchedText: string): boolean {
 }
 
 /**
+ * ADVERBIAL FRAGMENT — the word is an ordinary English adverb that happens to
+ * be one conjunct of a longer title.
+ *
+ * Production, six-lesson QA run (2026-10-15), `math.real.convergence-sequences`:
+ *   "what does converge even mean, the terms just get small?"
+ * resolved to `math.func.even-odd-functions` ("Even" is a TITLE_COMPONENT of
+ * "Even and Odd Functions", 0.8) and the lesson's own figure was replaced by
+ * the even/odd one. `isIncidentalWord` cannot catch it: it deliberately lets a
+ * one-word match through when a request cue ("what") sits within three tokens,
+ * and "what does converge even" has one. The same sentence with "really" in
+ * place of "even" resolves to nothing, which is how the defect stayed hidden.
+ *
+ * The rule is positional, not a topic list: a lone adverb counts as naming the
+ * concept only when another word of that concept's title sits right next to it
+ * ("even function", "even and odd", "odd or even"). Measured against all six
+ * KGs, "even" is the only ordinary-English adverb that is a single-word title
+ * component, so a genuine "show me even functions" is untouched.
+ */
+const ADVERBIAL_WORDS: ReadonlySet<string> = new Set([
+  'even', 'just', 'only', 'still', 'also', 'very', 'much', 'quite', 'rather', 'really', 'too', 'ever', 'yet',
+])
+const FRAGMENT_NEIGHBOURHOOD = 2
+function isAdverbialFragment(message: string, matchedText: string, conceptId: string): boolean {
+  const matched = tokens(matchedText)
+  if (matched.length !== 1 || !ADVERBIAL_WORDS.has(matched[0])) return false
+  const title = getKGNode(conceptId)?.title
+  if (!title) return false
+  const siblings = new Set(tokens(title).filter((t) => t !== matched[0] && !STOP_TOKENS.has(t)))
+  if (siblings.size === 0) return false                 // a one-word title is not a fragment
+  const words = tokens(message)
+  if (words.length <= 2) return false                   // "even functions" / "even" — the request IS the word
+  for (let i = 0; i < words.length; i++) {
+    if (words[i] !== matched[0]) continue
+    for (let d = 1; d <= FRAGMENT_NEIGHBOURHOOD; d++) {
+      if (siblings.has(words[i - d]) || siblings.has(words[i + d])) return false
+    }
+  }
+  return true
+}
+const STOP_TOKENS: ReadonlySet<string> = new Set(['a', 'an', 'the', 'of', 'in', 'on', 'and', 'or', 'to', 'for', 'with', 'is', 'are'])
+
+/**
  * E3 · A REQUEST GOVERNS ITS OWN CLAUSE, AND ONLY ITS OWN CLAUSE.
  *
  * ── THE DEFECT, reproduced offline from a production transcript ─────────────
@@ -1014,6 +1056,8 @@ export function resolveRequestedConceptId(
         // Sits alongside the other two "is this really a topic?" filters
         // rather than anywhere else, so all three are read together.
         !isDiscourseOnlyMatch(m.matchedText) &&
+        // "converge even mean" — an adverb that is one conjunct of a longer title.
+        !isAdverbialFragment(message ?? '', m.matchedText, m.conceptId) &&
         // E3: named in a different clause from the request that would justify
         // moving the teaching target. The fourth member of the same family,
         // and the only one that reads position rather than vocabulary.

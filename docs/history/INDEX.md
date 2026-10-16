@@ -54,6 +54,7 @@ log.
 | `tutor-max-inline-mcq-2026-10-13.md` | MCQ questions in the main Tutor Max transcript: root cause (question lived only in the Quick Check panel / Tutor history), `mcqTranscript.ts` + `InlineMcqCard`, restore from the persisted block, per-lesson MCQ state reset, tests, limitations. |
 | `tutor-max-final-closure-2026-10-10.md` | Tutor Max final defect closure (cf79346, 76c2edd): no-figure evidence gate, explicit quiz requests vs the mastery-check reservation, grounded prose check; production re-drives (11 disposable accounts), real /learn page evidence, open findings A-2 (imagined description beside a real figure) and C-1 (BIO-024 class not caught). |
 | `biology-visual-closure-2026-10-13.md` | Biology complete visual quality closure: the six REVIEW_REQUIRED figures re-authored from their EB entries, all 199 re-audited (3,716 states, 0 flags), production browser verification (14 concepts × 4 views), the orphaned-QA-account incident, rules learned. |
+| `learner-experience-backlog-plan-2026-10-16.md` | Learner-experience defect backlog pass: M1 (adverb "even" hijacked the lesson figure), M2 (self-description quoted clipped narration), B3 (Newton "45" label crowding on phones) fixed with tests + mutation checks; measured card-pool depth/guessability per subject; proposals (not implemented) for B1 cards, B2 figures, B4 probes with effort/risk and the owner decisions they need |
 
 ## Live pointers (not history — check these first for CURRENT state)
 - `/CLAUDE.md` — live rules.
