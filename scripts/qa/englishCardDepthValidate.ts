@@ -33,13 +33,14 @@ const words = (s: string) => new Set(norm(s).replace(/[^\p{L}\p{N}\s]/gu, ' ').s
 /**
  * Misconception ids the concept's own educational-brain entry defines (`**M1 — …`, `**P2 — …`), written the way the
  * seed probes write them (`<concept>:M1`). They are authoritative, not invented, even when no probe uses them yet.
+ * An entry writes them as a bold line (`**M1 — …`), a bullet (`- **M1 — …`) or a heading (`### M1 — …`, the biology forms).
  */
 function ebIds(conceptId: string): string[] {
   const root = path.resolve(__dirname, '../../educational-brain/concepts')
   if (!fs.existsSync(root)) return []
   for (const dir of fs.readdirSync(root)) {
     const f = path.join(root, dir, `${conceptId}.md`)
-    if (fs.existsSync(f)) return [...fs.readFileSync(f, 'utf8').matchAll(/^\*\*([A-Z]\d+) —/gm)].map((m) => `${conceptId}:${m[1]}`)
+    if (fs.existsSync(f)) return [...fs.readFileSync(f, 'utf8').matchAll(/^\s*(?:- )?(?:\*\*|#{2,4} )([A-Z]\d+) —/gm)].map((m) => `${conceptId}:${m[1]}`)
   }
   return []
 }

@@ -637,6 +637,30 @@ async function bootstrapAssets(run: import('./lib/db/stopAfterDeadline').Abandon
         await import('./lib/teaching/assets/physicsCardDepthBatch12')
       const { PHYSICS_CARD_DEPTH_BATCH_13 } =
         await import('./lib/teaching/assets/physicsCardDepthBatch13')
+      const { BIOLOGY_CARD_DEPTH_BATCH_1 } =
+        await import('./lib/teaching/assets/biologyCardDepthBatch1')
+      const { BIOLOGY_CARD_DEPTH_BATCH_2 } =
+        await import('./lib/teaching/assets/biologyCardDepthBatch2')
+      const { BIOLOGY_CARD_DEPTH_BATCH_3 } =
+        await import('./lib/teaching/assets/biologyCardDepthBatch3')
+      const { BIOLOGY_CARD_DEPTH_BATCH_4 } =
+        await import('./lib/teaching/assets/biologyCardDepthBatch4')
+      const { BIOLOGY_CARD_DEPTH_BATCH_5 } =
+        await import('./lib/teaching/assets/biologyCardDepthBatch5')
+      const { BIOLOGY_CARD_DEPTH_BATCH_6 } =
+        await import('./lib/teaching/assets/biologyCardDepthBatch6')
+      const { BIOLOGY_CARD_DEPTH_BATCH_7 } =
+        await import('./lib/teaching/assets/biologyCardDepthBatch7')
+      const { BIOLOGY_CARD_DEPTH_BATCH_8 } =
+        await import('./lib/teaching/assets/biologyCardDepthBatch8')
+      const { BIOLOGY_CARD_DEPTH_BATCH_9 } =
+        await import('./lib/teaching/assets/biologyCardDepthBatch9')
+      const { BIOLOGY_CARD_DEPTH_BATCH_10 } =
+        await import('./lib/teaching/assets/biologyCardDepthBatch10')
+      const { BIOLOGY_CARD_DEPTH_BATCH_11 } =
+        await import('./lib/teaching/assets/biologyCardDepthBatch11')
+      const { MATHEMATICS_CARD_DEPTH_BATCH_1 } =
+        await import('./lib/teaching/assets/mathematicsCardDepthBatch1')
       // English phonics gap closure, 2026-09-18: eng.phonics.letter-sound-
       // correspondence @ ELEMENTARY (closed-choice, text-described scenario).
       // phonemic-awareness::EARLY/ADULT and letter-sound-correspondence::EARLY
@@ -1308,6 +1332,18 @@ async function bootstrapAssets(run: import('./lib/db/stopAfterDeadline').Abandon
         ...PHYSICS_CARD_DEPTH_BATCH_7, ...PHYSICS_CARD_DEPTH_BATCH_8, ...PHYSICS_CARD_DEPTH_BATCH_9,
         ...PHYSICS_CARD_DEPTH_BATCH_10, ...PHYSICS_CARD_DEPTH_BATCH_11, ...PHYSICS_CARD_DEPTH_BATCH_12,
         ...PHYSICS_CARD_DEPTH_BATCH_13,
+        ...BIOLOGY_CARD_DEPTH_BATCH_1,
+        ...BIOLOGY_CARD_DEPTH_BATCH_2,
+        ...BIOLOGY_CARD_DEPTH_BATCH_3,
+        ...BIOLOGY_CARD_DEPTH_BATCH_4,
+        ...BIOLOGY_CARD_DEPTH_BATCH_5,
+        ...BIOLOGY_CARD_DEPTH_BATCH_6,
+        ...BIOLOGY_CARD_DEPTH_BATCH_7,
+        ...BIOLOGY_CARD_DEPTH_BATCH_8,
+        ...BIOLOGY_CARD_DEPTH_BATCH_9,
+        ...BIOLOGY_CARD_DEPTH_BATCH_10,
+        ...BIOLOGY_CARD_DEPTH_BATCH_11,
+        ...MATHEMATICS_CARD_DEPTH_BATCH_1,
         ...ENGLISH_LETTER_SOUND_ELEMENTARY_GAP,
         ...BIOLOGY_PROBES, ...BIOLOGY_EXTENSION_PROBES, ...CS_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES,
         ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES,
