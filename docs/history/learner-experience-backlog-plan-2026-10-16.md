@@ -103,3 +103,17 @@ subject's visual audit gate in the same push.
 2. Stop spending authored cards in non-counting phases (GUIDE / DEMONSTRATE)? That is an Educational Brain teaching-decision
    change, so it needs the G1/G2 sign-off; the alternative is to deepen the pool (B1 Path A / B4).
 3. B2: which of the four to author (the Immune Disorders and Phase Diagram items may need only verification).
+
+## 5. Decisions taken on owner delegation (2026-10-17: "Take the best decision yourself")
+
+| # | Item | Decision | Status |
+|---|---|---|---|
+| 1 | Parked `POINTS_AT_MISSING_OPTIONS` widening (38609b7f) | **Finish it, narrowly.** Only the form measured live ("Your turn to pick the answer!", bio.gen.mendelian-genetics, 2026-09-27) is added: `your turn to (pick\|choose\|select) …`. The broader "pick an option" / "choose the option" stays out. Mutation check: the broad version deletes ordinary teaching sentences ("In a multiple-choice question, choose the option that fits your reasoning first."), the narrow one does not. | DONE — `yourTurnToPickWithoutOptions.test.ts` (10 tests) |
+| 2 | B1 | **Path A — add new 3–4-option cards**, no in-place edits, no content sync. Order: english (637) → chemistry (247) → computer science (241) → physics (215) → biology (203) → mathematics (22). | Not started (see gate below) |
+| 3 | Stop spending cards in GUIDE / DEMONSTRATE | **Not taken.** It is an Educational Brain teaching-decision change and needs the real G1/G2 owner sign-off; deepening the pool (decision 2 and B4) removes the need for it without an engine change. | Not started |
+| 4 | B2 | Verify before authoring: re-render `bio.immuno.immune-disorders` and `chem.state.phase-diagram` (390/1280, both themes) and author only if they fall short. `math.trig.unit-circle` goes in the next trigonometry batch of the already-authorised Mathematics figure campaign. `eng.grammar.nouns` last. | Not started |
+| 5 | B4 | Floor first (89 CS cards), depth (5 per concept) afterwards. | Not started |
+
+**Gate on 2–5.** They author teaching content (cards, figures). The standing instruction for the system-layer
+agent is never to modify Physics/Mathematics/English teaching assets unless explicitly asked, so none of it was
+started on a "decide for me" alone. To start any of them, name it ("start B1 Path A, English").

@@ -1474,11 +1474,12 @@ export function withholdClosingProseQuestion(input: {
  * carries no lettered option list of its own (a prose list is a separate case,
  * owned by proseMcqGuard).
  */
-// A widening of this pattern ("your turn to pick the answer", "pick an option") is parked in
-// 38609b7f (claude/learner-intent-interpreter-ab-pof2vd): its author left it untested and
-// unnarrowed — plain "choose the option" can be ordinary teaching prose this function would drop.
+// "your turn to pick the answer" added 2026-10-17 from a live measurement (2026-09-27,
+// bio.gen.mendelian-genetics, PRACTICE, no widget): "Your turn to pick the answer!" closed a reply that
+// offered nothing to pick from. Deliberately ONLY the "your turn to …" form: the broader "pick an option" /
+// "choose the option" (38609b7f) can be ordinary teaching prose this function would delete, so it stays out.
 const POINTS_AT_MISSING_OPTIONS =
-  /\b(which of the following|of the (?:options|choices) (?:below|above|shown)|(?:pick|choose|select|tap) (?:the )?(?:best|correct|right) (?:answer|option|choice)|which (?:option|choice|answer) you (?:choose|pick|select)|from the (?:options|choices|list) (?:below|above)|the options below)\b/i
+  /\b(which of the following|of the (?:options|choices) (?:below|above|shown)|(?:pick|choose|select|tap) (?:the )?(?:best|correct|right) (?:answer|option|choice)|which (?:option|choice|answer) you (?:choose|pick|select)|from the (?:options|choices|list) (?:below|above)|the options below|your turn to (?:pick|choose|select) (?:the |an? )?(?:(?:best|correct|right) )?(?:answer|option|choice))\b/i
 
 /**
  * "Let me know when you'd like another practice problem" — said beside a quiz
