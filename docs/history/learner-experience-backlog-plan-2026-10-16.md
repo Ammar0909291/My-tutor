@@ -140,7 +140,26 @@ example; facts come from the concept's blueprint.
 Batches: `englishCardDepthBatch1` … `Batch24` (≈ 640 cards). Delivered by the create-only bootstrap on the next cold
 start; no content sync is needed.
 
+### B1 Path A — Chemistry: DONE (186 / 186 concepts at the floor)
+
+Same method. Free slots were `short_answer`, `fill_blank`, `numeric` (HIGH) and, for the undergraduate concepts, the
+same labels at UNDERGRADUATE; the kind is only a slot label (`probeToMcq` is the serving predicate). Facts come from
+each concept's blueprint (Misconception Library, replacement and discrimination pairs); wrong answers that match no
+registered misconception carry no id. `scripts/qa/englishCardDepthValidate.ts` now derives the subject prefix from the
+batch and accepts misconception ids defined in `educational-brain/concepts/*/<concept>.md`.
+
+| Gate | Result |
+|---|---|
+| Validator (all 16 batches) | exactly 3 distinct options, one correct; slot free (also across batches); ids known; correct answer strictly longest in 24–40 % of cards per batch |
+| Seed dry-run | 14,100 items, 14,100 distinct identities, 0 duplicates |
+| Contract audit (chemistry) | 186 concepts, 186 pairs, 186 at contract, 0 short |
+| Floor | 247 → **0** |
+| `tsc` ratchet | 0 ≤ 0 |
+| Full suite | 998 files, 25,509 tests passed |
+
+Batches: `chemistryCardDepthBatch1` … `Batch16` (247 cards).
+
 ### Next
 
-Chemistry (247 cards, HIGH `short_answer` / `true_false` / `step_check` slots), then computer science, physics, biology,
-mathematics; then B4 and B2.
+Computer science (241 cards: every one of the 119 concepts is below the floor), then physics, biology, mathematics;
+then B4 and B2.

@@ -579,6 +579,38 @@ async function bootstrapAssets(run: import('./lib/db/stopAfterDeadline').Abandon
         await import('./lib/teaching/assets/englishCardDepthBatch23')
       const { ENGLISH_CARD_DEPTH_BATCH_24 } =
         await import('./lib/teaching/assets/englishCardDepthBatch24')
+      const { CHEMISTRY_CARD_DEPTH_BATCH_1 } =
+        await import('./lib/teaching/assets/chemistryCardDepthBatch1')
+      const { CHEMISTRY_CARD_DEPTH_BATCH_2 } =
+        await import('./lib/teaching/assets/chemistryCardDepthBatch2')
+      const { CHEMISTRY_CARD_DEPTH_BATCH_3 } =
+        await import('./lib/teaching/assets/chemistryCardDepthBatch3')
+      const { CHEMISTRY_CARD_DEPTH_BATCH_4 } =
+        await import('./lib/teaching/assets/chemistryCardDepthBatch4')
+      const { CHEMISTRY_CARD_DEPTH_BATCH_5 } =
+        await import('./lib/teaching/assets/chemistryCardDepthBatch5')
+      const { CHEMISTRY_CARD_DEPTH_BATCH_6 } =
+        await import('./lib/teaching/assets/chemistryCardDepthBatch6')
+      const { CHEMISTRY_CARD_DEPTH_BATCH_7 } =
+        await import('./lib/teaching/assets/chemistryCardDepthBatch7')
+      const { CHEMISTRY_CARD_DEPTH_BATCH_8 } =
+        await import('./lib/teaching/assets/chemistryCardDepthBatch8')
+      const { CHEMISTRY_CARD_DEPTH_BATCH_9 } =
+        await import('./lib/teaching/assets/chemistryCardDepthBatch9')
+      const { CHEMISTRY_CARD_DEPTH_BATCH_10 } =
+        await import('./lib/teaching/assets/chemistryCardDepthBatch10')
+      const { CHEMISTRY_CARD_DEPTH_BATCH_11 } =
+        await import('./lib/teaching/assets/chemistryCardDepthBatch11')
+      const { CHEMISTRY_CARD_DEPTH_BATCH_12 } =
+        await import('./lib/teaching/assets/chemistryCardDepthBatch12')
+      const { CHEMISTRY_CARD_DEPTH_BATCH_13 } =
+        await import('./lib/teaching/assets/chemistryCardDepthBatch13')
+      const { CHEMISTRY_CARD_DEPTH_BATCH_14 } =
+        await import('./lib/teaching/assets/chemistryCardDepthBatch14')
+      const { CHEMISTRY_CARD_DEPTH_BATCH_15 } =
+        await import('./lib/teaching/assets/chemistryCardDepthBatch15')
+      const { CHEMISTRY_CARD_DEPTH_BATCH_16 } =
+        await import('./lib/teaching/assets/chemistryCardDepthBatch16')
       // English phonics gap closure, 2026-09-18: eng.phonics.letter-sound-
       // correspondence @ ELEMENTARY (closed-choice, text-described scenario).
       // phonemic-awareness::EARLY/ADULT and letter-sound-correspondence::EARLY
@@ -1239,6 +1271,12 @@ async function bootstrapAssets(run: import('./lib/db/stopAfterDeadline').Abandon
         ...ENGLISH_CARD_DEPTH_BATCH_17, ...ENGLISH_CARD_DEPTH_BATCH_18, ...ENGLISH_CARD_DEPTH_BATCH_19,
         ...ENGLISH_CARD_DEPTH_BATCH_20, ...ENGLISH_CARD_DEPTH_BATCH_21, ...ENGLISH_CARD_DEPTH_BATCH_22,
         ...ENGLISH_CARD_DEPTH_BATCH_23, ...ENGLISH_CARD_DEPTH_BATCH_24,
+        ...CHEMISTRY_CARD_DEPTH_BATCH_1, ...CHEMISTRY_CARD_DEPTH_BATCH_2, ...CHEMISTRY_CARD_DEPTH_BATCH_3,
+        ...CHEMISTRY_CARD_DEPTH_BATCH_4, ...CHEMISTRY_CARD_DEPTH_BATCH_5, ...CHEMISTRY_CARD_DEPTH_BATCH_6,
+        ...CHEMISTRY_CARD_DEPTH_BATCH_7, ...CHEMISTRY_CARD_DEPTH_BATCH_8, ...CHEMISTRY_CARD_DEPTH_BATCH_9,
+        ...CHEMISTRY_CARD_DEPTH_BATCH_10, ...CHEMISTRY_CARD_DEPTH_BATCH_11, ...CHEMISTRY_CARD_DEPTH_BATCH_12,
+        ...CHEMISTRY_CARD_DEPTH_BATCH_13, ...CHEMISTRY_CARD_DEPTH_BATCH_14, ...CHEMISTRY_CARD_DEPTH_BATCH_15,
+        ...CHEMISTRY_CARD_DEPTH_BATCH_16,
         ...ENGLISH_LETTER_SOUND_ELEMENTARY_GAP,
         ...BIOLOGY_PROBES, ...BIOLOGY_EXTENSION_PROBES, ...CS_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES,
         ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES,
