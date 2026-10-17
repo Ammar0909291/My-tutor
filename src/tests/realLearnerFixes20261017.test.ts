@@ -1,7 +1,8 @@
 import { describe, it, expect } from 'vitest'
+import { readFileSync } from 'node:fs'
+import { join } from 'node:path'
 import { confirmCorrectAnswer, confirmationPhrase } from '@/lib/teaching/answerConfirmation'
 import { qualifyUncovered, UNCOVERED_EXAMPLE_NOTE } from '@/lib/teaching/groundedProseCheck'
-import { analogyCapReached } from '@/lib/teaching/reuseCaps'
 
 describe('a "No" answer is never confirmed with "Yes, …" (English study 2026-10-17)', () => {
   it('skips the Yes phrasing at every rotation position', () => {
@@ -44,9 +45,9 @@ describe('the "not in your lesson materials" note never splits a lead-in from it
   })
 })
 
-describe('analogy limit 0 blocks any analogy', () => {
-  it('is reached even with no earlier analogy', () => {
-    expect(analogyCapReached([], 0)).toBe(true)
-    expect(analogyCapReached([], 1)).toBe(false)
+describe('"too many words" gets no analogy', () => {
+  it('the route regenerates without one whenever that request produced an analogy', () => {
+    const ROUTE = readFileSync(join(process.cwd(), 'src/app/api/learn/chat/route.ts'), 'utf8')
+    expect(ROUTE).toMatch(/shorterAsked \|\| caps\.analogyCapReached\(priorTutor, 1\)/)
   })
 })

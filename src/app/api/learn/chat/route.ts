@@ -11427,8 +11427,8 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // story is not that (English real-learner run, 2026-10-17: a
           // remote-control comparison for "too many words" in a lesson with
           // no earlier analogy) — so no analogy at all on that request.
-          const analogyLimit = (await import('@/lib/teaching/adaptationRequest')).adaptationKind(learnerAuthoredMessage) === 'shorter' ? 0 : 1
-          if (caps.usesAnalogy(cleanText) && caps.analogyCapReached(priorTutor, analogyLimit)) {
+          const shorterAsked = (await import('@/lib/teaching/adaptationRequest')).adaptationKind(learnerAuthoredMessage) === 'shorter'
+          if (caps.usesAnalogy(cleanText) && (shorterAsked || caps.analogyCapReached(priorTutor, 1))) {
             const retry = await regenerateWithAppendix(caps.NO_ANALOGY_APPENDIX)
             const kept = retry && !caps.usesAnalogy(retry) && (retry.match(/\S+/g) ?? []).length >= 12
             console.log('[analogy-cap] ' + JSON.stringify({ regenerated: true, kept }))
