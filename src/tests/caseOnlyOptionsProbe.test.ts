@@ -64,11 +64,14 @@ describe('options that differ only by case', () => {
 })
 
 describe('corpus guard: a case-only option pair must be deliberate', () => {
-  it('the capitalisation probe is the only authored probe whose options differ only by case', async () => {
+  it('the capitalisation probes are the only authored probes whose options differ only by case', async () => {
     // Folding case used to refuse such probes outright, which also caught an
     // ACCIDENTAL pair ("kelvin" / "Kelvin"). Serving them is right for a question
     // about case and wrong for a typo, so a new one must be looked at: add it
     // here only if the question is about case.
+    // 2026-10-17: eng.grammar.capitalization-rules (EARLY short_answer, English card-depth
+    // batch 19) asks which of three sentences is capitalised correctly — a question about
+    // case whose options differ only by case on purpose.
     const dir = join(process.cwd(), 'src/lib/teaching/assets')
     const offenders: string[] = []
     for (const file of readdirSync(dir).filter((f) => f.endsWith('.ts'))) {
@@ -87,6 +90,7 @@ describe('corpus guard: a case-only option pair must be deliberate', () => {
     }
     expect([...new Set(offenders)]).toEqual([
       'bio.found.binomial-nomenclature: Which of the following correctly writes a scientific name?',
+      'eng.grammar.capitalization-rules: Mia writes about her pets. Which is written correctly?',
     ])
   }, 60_000)
 })

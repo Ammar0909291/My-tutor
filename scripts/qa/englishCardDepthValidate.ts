@@ -1,8 +1,9 @@
 /**
- * Validates an English card-depth batch BEFORE it is wired or committed.
+ * Validates a card-depth batch (English or Chemistry) BEFORE it is wired or committed.
  *
  *   npx tsx scripts/qa/englishCardDepthValidate.ts <module-under-assets> <EXPORT_NAME>
  *   e.g. npx tsx scripts/qa/englishCardDepthValidate.ts englishCardDepthBatch1 ENGLISH_CARD_DEPTH_BATCH_1
+ *        npx tsx scripts/qa/englishCardDepthValidate.ts chemistryCardDepthBatch1 CHEMISTRY_CARD_DEPTH_BATCH_1
  *
  * Hard errors (exit 1):
  *  - not exactly 3 options, not exactly one correct option, duplicate option text, empty text
@@ -10,12 +11,14 @@
  *  - the (conceptId, probeKind, gradeBand) slot is already used by another probe, or twice in the
  *    batch — a second probe in a slot promotes it to a 5-segment slug and abandons the live row's
  *    identity (P-10, brainSeedAssets.buildProbeSlugResolver);
- *  - a misconception id the concept's existing probes never use (none may be invented);
+ *  - a misconception id that neither the concept's existing probes use nor its educational-brain entry defines
+ *    (none may be invented);
  *  - the stem repeats an existing stem of the concept.
  * Warnings: a stem whose content words overlap >= 50 % (Jaccard) with an existing stem of the concept
  * (same example re-asked), and the share of cards whose correct answer is strictly the longest option (a cue a
  * guesser can use; 33 % is chance for three options).
  */
+import fs from 'node:fs'
 import path from 'node:path'
 import { load } from '../assets/contract-audit'
 import { probeToMcq } from '../../src/lib/teaching/gateAssessment'
@@ -27,13 +30,28 @@ const norm = (s: string) => s.replace(/\s+/g, ' ').trim().toLowerCase()
 const STOP = new Set(['the', 'and', 'for', 'that', 'this', 'with', 'are', 'was', 'what', 'which', 'complete', 'sentence', 'does', 'not', 'has', 'have', 'its', 'one', 'from', 'when', 'than'])
 const words = (s: string) => new Set(norm(s).replace(/[^\p{L}\p{N}\s]/gu, ' ').split(' ').filter((w) => w.length > 2 && !STOP.has(w)))
 
+/**
+ * Misconception ids the concept's own educational-brain entry defines (`**M1 — …`, `**P2 — …`), written the way the
+ * seed probes write them (`<concept>:M1`). They are authoritative, not invented, even when no probe uses them yet.
+ */
+function ebIds(conceptId: string): string[] {
+  const root = path.resolve(__dirname, '../../educational-brain/concepts')
+  if (!fs.existsSync(root)) return []
+  for (const dir of fs.readdirSync(root)) {
+    const f = path.join(root, dir, `${conceptId}.md`)
+    if (fs.existsSync(f)) return [...fs.readFileSync(f, 'utf8').matchAll(/^\*\*([A-Z]\d+) —/gm)].map((m) => `${conceptId}:${m[1]}`)
+  }
+  return []
+}
+
 async function main() {
   const mod = await import(path.resolve(__dirname, '../../src/lib/teaching/assets', modName))
   const batch = mod[exportName] as Array<any> | undefined
   if (!Array.isArray(batch) || batch.length === 0) { console.error(`${exportName} is not a non-empty array in ${modName}`); process.exit(2) }
   const batchStems = new Set(batch.map((p) => norm(p.stem)))
   const { probes } = (await load()) as unknown as { probes: any[] }
-  const others = probes.filter((p) => p.conceptId.startsWith('eng.') && !batchStems.has(norm(p.stem)))
+  const prefix = `${String(batch[0].conceptId).split('.')[0]}.`   // 'eng.' or 'chem.' — the batch's own subject
+  const others = probes.filter((p) => p.conceptId.startsWith(prefix) && !batchStems.has(norm(p.stem)))
 
   const errors: string[] = [], warnings: string[] = []
   const slots = new Map<string, number>()
@@ -52,7 +70,7 @@ async function main() {
     const slot = `${p.conceptId}|${p.probeKind}|${p.gradeBand}`
     slots.set(slot, (slots.get(slot) ?? 0) + 1)
     if (others.some((o) => `${o.conceptId}|${o.probeKind}|${o.gradeBand}` === slot)) errors.push(`${tag}: slot already used by an existing probe (P-10)`)
-    const known = new Set(others.filter((o) => o.conceptId === p.conceptId).flatMap((o) => o.targetedMisconceptions ?? []))
+    const known = new Set([...others.filter((o) => o.conceptId === p.conceptId).flatMap((o) => o.targetedMisconceptions ?? []), ...ebIds(p.conceptId)])
     for (const id of p.targetedMisconceptions ?? []) if (!known.has(id)) errors.push(`${tag}: misconception id not used by the concept's existing probes: ${id}`)
     for (const c of p.choices ?? []) if (c.misconceptionId && !(p.targetedMisconceptions ?? []).includes(c.misconceptionId)) errors.push(`${tag}: choice misconceptionId missing from targetedMisconceptions`)
     const mine = words(p.stem)

@@ -109,11 +109,38 @@ subject's visual audit gate in the same push.
 | # | Item | Decision | Status |
 |---|---|---|---|
 | 1 | Parked `POINTS_AT_MISSING_OPTIONS` widening (38609b7f) | **Finish it, narrowly.** Only the form measured live ("Your turn to pick the answer!", bio.gen.mendelian-genetics, 2026-09-27) is added: `your turn to (pick\|choose\|select) …`. The broader "pick an option" / "choose the option" stays out. Mutation check: the broad version deletes ordinary teaching sentences ("In a multiple-choice question, choose the option that fits your reasoning first."), the narrow one does not. | DONE — `yourTurnToPickWithoutOptions.test.ts` (10 tests) |
-| 2 | B1 | **Path A — add new 3–4-option cards**, no in-place edits, no content sync. Order: english (637) → chemistry (247) → computer science (241) → physics (215) → biology (203) → mathematics (22). | Not started (see gate below) |
+| 2 | B1 | **Path A — add new 3–4-option cards**, no in-place edits, no content sync. Order: english (637) → chemistry (247) → computer science (241) → physics (215) → biology (203) → mathematics (22). | **IN PROGRESS** — English DONE, see §6 |
 | 3 | Stop spending cards in GUIDE / DEMONSTRATE | **Not taken.** It is an Educational Brain teaching-decision change and needs the real G1/G2 owner sign-off; deepening the pool (decision 2 and B4) removes the need for it without an engine change. | Not started |
 | 4 | B2 | Verify before authoring: re-render `bio.immuno.immune-disorders` and `chem.state.phase-diagram` (390/1280, both themes) and author only if they fall short. `math.trig.unit-circle` goes in the next trigonometry batch of the already-authorised Mathematics figure campaign. `eng.grammar.nouns` last. | Not started |
 | 5 | B4 | Floor first (89 CS cards), depth (5 per concept) afterwards. | Not started |
 
 **Gate on 2–5.** They author teaching content (cards, figures). The standing instruction for the system-layer
 agent is never to modify Physics/Mathematics/English teaching assets unless explicitly asked, so none of it was
-started on a "decide for me" alone. To start any of them, name it ("start B1 Path A, English").
+started on a "decide for me" alone. The gate was lifted by the explicit owner instruction "F it's required then
+go ahead" (2026-10-17), which authorises B1 Path A and the items after it, in the order above.
+
+## 6. Execution log (2026-10-17)
+
+### B1 Path A — English: DONE (216 / 216 concepts at the floor)
+
+Method (every batch): one new card per free `(concept, kind, band)` slot — never a second probe in a used slot, which
+would promote the slot to a 5-segment slug and abandon the live identity (P-10) — with three options: the correct
+answer plus one wrong answer for each of two of the concept's registered misconceptions (ids taken from the concept's
+own existing probes or its educational-brain misconception library, never invented). Every stem is a new worked
+example; facts come from the concept's blueprint.
+
+| Gate | Result |
+|---|---|
+| Validator (`scripts/qa/englishCardDepthValidate.ts`) | exactly 3 distinct options, one correct; slot free; ids known; no repeated stem; correct answer strictly longest in 29–38 % of cards per batch (chance 33 %) |
+| Seed dry-run (`seed-knowledge-assets.ts --draft --dry-run`) | 13,853 items, 13,853 distinct identities, 0 duplicates |
+| Contract audit (English) | 216 concepts, 412 pairs, 410 at contract (was 409); the 2 short pairs are pre-existing gaps, not card-depth (no ADULT probe for `phonemic-awareness`; the EARLY open-recall probe of `letter-sound-correspondence`) |
+| Floor (`Σ max(0, 3 − three-plus cards)`) | 637 → **0** |
+| Full suite | one real finding: the capitalisation card's options differ only by case on purpose, and `caseOnlyOptionsProbe.test.ts` requires such a pair to be listed; it is listed, with the reason |
+
+Batches: `englishCardDepthBatch1` … `Batch24` (≈ 640 cards). Delivered by the create-only bootstrap on the next cold
+start; no content sync is needed.
+
+### Next
+
+Chemistry (247 cards, HIGH `short_answer` / `true_false` / `step_check` slots), then computer science, physics, biology,
+mathematics; then B4 and B2.

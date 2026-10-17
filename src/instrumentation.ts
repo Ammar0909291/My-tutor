@@ -569,6 +569,16 @@ async function bootstrapAssets(run: import('./lib/db/stopAfterDeadline').Abandon
         await import('./lib/teaching/assets/englishCardDepthBatch18')
       const { ENGLISH_CARD_DEPTH_BATCH_19 } =
         await import('./lib/teaching/assets/englishCardDepthBatch19')
+      const { ENGLISH_CARD_DEPTH_BATCH_20 } =
+        await import('./lib/teaching/assets/englishCardDepthBatch20')
+      const { ENGLISH_CARD_DEPTH_BATCH_21 } =
+        await import('./lib/teaching/assets/englishCardDepthBatch21')
+      const { ENGLISH_CARD_DEPTH_BATCH_22 } =
+        await import('./lib/teaching/assets/englishCardDepthBatch22')
+      const { ENGLISH_CARD_DEPTH_BATCH_23 } =
+        await import('./lib/teaching/assets/englishCardDepthBatch23')
+      const { ENGLISH_CARD_DEPTH_BATCH_24 } =
+        await import('./lib/teaching/assets/englishCardDepthBatch24')
       // English phonics gap closure, 2026-09-18: eng.phonics.letter-sound-
       // correspondence @ ELEMENTARY (closed-choice, text-described scenario).
       // phonemic-awareness::EARLY/ADULT and letter-sound-correspondence::EARLY
@@ -1227,6 +1237,8 @@ async function bootstrapAssets(run: import('./lib/db/stopAfterDeadline').Abandon
         ...ENGLISH_CARD_DEPTH_BATCH_11, ...ENGLISH_CARD_DEPTH_BATCH_12, ...ENGLISH_CARD_DEPTH_BATCH_13,
         ...ENGLISH_CARD_DEPTH_BATCH_14, ...ENGLISH_CARD_DEPTH_BATCH_15, ...ENGLISH_CARD_DEPTH_BATCH_16,
         ...ENGLISH_CARD_DEPTH_BATCH_17, ...ENGLISH_CARD_DEPTH_BATCH_18, ...ENGLISH_CARD_DEPTH_BATCH_19,
+        ...ENGLISH_CARD_DEPTH_BATCH_20, ...ENGLISH_CARD_DEPTH_BATCH_21, ...ENGLISH_CARD_DEPTH_BATCH_22,
+        ...ENGLISH_CARD_DEPTH_BATCH_23, ...ENGLISH_CARD_DEPTH_BATCH_24,
         ...ENGLISH_LETTER_SOUND_ELEMENTARY_GAP,
         ...BIOLOGY_PROBES, ...BIOLOGY_EXTENSION_PROBES, ...CS_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES,
         ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES,
