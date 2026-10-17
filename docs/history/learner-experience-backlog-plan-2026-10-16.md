@@ -211,6 +211,27 @@ Batches: `biologyCardDepthBatch1` … `Batch11` (203 cards).
 come from the concepts' own probes and blueprints; every misconception id is one the concept already registers
 (`MC-n` or a long name). Contract audit (mathematics): 908 concepts, 917 pairs, 917 at contract, 0 short. Floor 22 → **0**.
 
+### B4 — Biology depth: DONE (199 / 199 concepts at 5 probes; computer science skipped)
+
+After Path A every biology concept held 4 probes (3 authored + 1 new card; 4 concepts held 5). This adds the fifth: one
+`fill_blank` card per concept (195 cards, 11 batches), each on a facet the other four do not ask — a definition, a
+mechanism, an application or a second misconception — so a learner who stays until mastery meets a new question instead
+of a repeat. Same method and ids as Path A; the free slot was `fill_blank` at the concept's own band (HIGH, UNDERGRADUATE
+for the advanced concepts).
+
+| Gate | Result |
+|---|---|
+| Validator (all 11 batches) | exactly 3 distinct options, one correct; slot free (also across batches); ids known; no repeated stem; correct answer strictly longest in 29–33 % of cards per batch |
+| Seed dry-run | 14,735 items, 14,735 distinct identities, 0 duplicates |
+| Contract audit (biology) | 199 concepts, 199 pairs, 199 at contract, 0 short |
+| Depth (5 probes per concept) | 195 → **0** concepts below |
+| `tsc` ratchet | 0 ≤ 0 |
+| Full suite | 998 files, 25,509 tests passed |
+
+Batches: `biologyDepthBatch1` … `Batch11` (195 cards). The B4 computer-science items (89 floor cards, 327 depth cards) stay
+open: CS was skipped on owner instruction.
+
 ### Next
 
-B4 (biology depth only, CS skipped), then B2.
+B2: verify `bio.immuno.immune-disorders`, replace the `chem.state.phase-diagram` text comparison with a drawn P–T diagram,
+`math.trig.unit-circle`, then `eng.grammar.nouns` last.

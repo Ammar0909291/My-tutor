@@ -661,6 +661,28 @@ async function bootstrapAssets(run: import('./lib/db/stopAfterDeadline').Abandon
         await import('./lib/teaching/assets/biologyCardDepthBatch11')
       const { MATHEMATICS_CARD_DEPTH_BATCH_1 } =
         await import('./lib/teaching/assets/mathematicsCardDepthBatch1')
+      const { BIOLOGY_DEPTH_BATCH_1 } =
+        await import('./lib/teaching/assets/biologyDepthBatch1')
+      const { BIOLOGY_DEPTH_BATCH_2 } =
+        await import('./lib/teaching/assets/biologyDepthBatch2')
+      const { BIOLOGY_DEPTH_BATCH_3 } =
+        await import('./lib/teaching/assets/biologyDepthBatch3')
+      const { BIOLOGY_DEPTH_BATCH_4 } =
+        await import('./lib/teaching/assets/biologyDepthBatch4')
+      const { BIOLOGY_DEPTH_BATCH_5 } =
+        await import('./lib/teaching/assets/biologyDepthBatch5')
+      const { BIOLOGY_DEPTH_BATCH_6 } =
+        await import('./lib/teaching/assets/biologyDepthBatch6')
+      const { BIOLOGY_DEPTH_BATCH_7 } =
+        await import('./lib/teaching/assets/biologyDepthBatch7')
+      const { BIOLOGY_DEPTH_BATCH_8 } =
+        await import('./lib/teaching/assets/biologyDepthBatch8')
+      const { BIOLOGY_DEPTH_BATCH_9 } =
+        await import('./lib/teaching/assets/biologyDepthBatch9')
+      const { BIOLOGY_DEPTH_BATCH_10 } =
+        await import('./lib/teaching/assets/biologyDepthBatch10')
+      const { BIOLOGY_DEPTH_BATCH_11 } =
+        await import('./lib/teaching/assets/biologyDepthBatch11')
       // English phonics gap closure, 2026-09-18: eng.phonics.letter-sound-
       // correspondence @ ELEMENTARY (closed-choice, text-described scenario).
       // phonemic-awareness::EARLY/ADULT and letter-sound-correspondence::EARLY
@@ -1344,6 +1366,17 @@ async function bootstrapAssets(run: import('./lib/db/stopAfterDeadline').Abandon
         ...BIOLOGY_CARD_DEPTH_BATCH_10,
         ...BIOLOGY_CARD_DEPTH_BATCH_11,
         ...MATHEMATICS_CARD_DEPTH_BATCH_1,
+        ...BIOLOGY_DEPTH_BATCH_1,
+        ...BIOLOGY_DEPTH_BATCH_2,
+        ...BIOLOGY_DEPTH_BATCH_3,
+        ...BIOLOGY_DEPTH_BATCH_4,
+        ...BIOLOGY_DEPTH_BATCH_5,
+        ...BIOLOGY_DEPTH_BATCH_6,
+        ...BIOLOGY_DEPTH_BATCH_7,
+        ...BIOLOGY_DEPTH_BATCH_8,
+        ...BIOLOGY_DEPTH_BATCH_9,
+        ...BIOLOGY_DEPTH_BATCH_10,
+        ...BIOLOGY_DEPTH_BATCH_11,
         ...ENGLISH_LETTER_SOUND_ELEMENTARY_GAP,
         ...BIOLOGY_PROBES, ...BIOLOGY_EXTENSION_PROBES, ...CS_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES,
         ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES,
