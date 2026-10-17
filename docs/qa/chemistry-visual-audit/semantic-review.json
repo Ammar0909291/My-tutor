@@ -611,28 +611,6 @@
     "https://en.wikipedia.org/wiki/Compressibility_factor"
    ]
   },
-  "scene:cell-comparison-chem.state.phase-diagram": {
-   "fingerprint": "f160fe0c4",
-   "concepts": [
-    "chem.state.phase-diagram"
-   ],
-   "family": "prose-comparison",
-   "initial": "semantic audit REVIEW_REQUIRED (no deterministic assertion covers this family); render REVIEW: INNER_SCROLL_X",
-   "decision": "FIXED→PASS",
-   "finding": "Read independently twice: the layout, 273.16 K / 612 Pa, CO₂ 304 K / 73 atm and water 647 K / 218 atm check against NIST-derived values; the earlier '611 Pa' truncation is fixed.",
-   "fix": "Triple-point pressure 611 Pa → 612 Pa (3-significant-figure rounding of 611.657 Pa).",
-   "evidence": [
-    {
-     "file": "docs/qa/chemistry-visual-audit/prose-figure-review.json",
-     "contains": "\"figure\": \"cell-comparison-chem.state.phase-diagram\""
-    }
-   ],
-   "remaining": "One generic sketch carries two substance-specific facts (dry-ice sublimation, water's backward melting curve); nothing says which substance each is. The expanded (fullscreen) view scrolls: the chrome around the scene is taller than the window (R15, measured and bounded, by design).",
-   "sources": [
-    "https://en.wikipedia.org/wiki/Triple_point",
-    "https://en.wikipedia.org/wiki/Critical_point_(thermodynamics)"
-   ]
-  },
   "scene:cell-comparison-chem.surface.colloids": {
    "fingerprint": "f62b149da",
    "concepts": [
@@ -1695,6 +1673,37 @@
    "remaining": "The reviewer found nothing that contradicts the chemistry; the points above are looseness or omission. ",
    "reason": "Independent review: Completely generic five-step analytical workflow; it contains no spectroscopy (no light-matter interaction, absorption/emission, UV-Vis/IR/NMR/MS distinction) and would fit any instrumental method.",
    "ownerDecision": "Owner / Curriculum Production Pipeline: accept the imprecision as is, or have the figure regenerated or retired. A generated figure is never edited in place; nothing was changed by this closure."
+  },
+  "scene:phase-diagram-pt": {
+   "fingerprint": "f9e058c5a",
+   "concepts": [
+    "chem.state.phase-diagram"
+   ],
+   "family": "plot",
+   "initial": "semantic audit REVIEW_REQUIRED (no deterministic chemistry verifier exists for this figure family); render REVIEW: INNER_SCROLL_X in the expanded view only (R15)",
+   "decision": "FIXED→PASS",
+   "finding": "Replaces the four-box text comparison (\"prose-comparison\", reviewed FIXED→PASS on 2026-10-12) with a drawn P–T plane. Read from the code, the tests and the Chromium screenshots (390 px dark and light, 1280 px dark): pressure is the vertical axis and temperature the horizontal; the sublimation and vaporisation curves meet the fusion line at the triple point, the vaporisation curve ends at the critical point, and the solid, liquid, gas and supercritical-fluid labels sit in the right regions (solid above the sublimation curve and left of the melting curve, liquid between the melting and vaporisation curves, gas below the vaporisation curve, supercritical fluid beyond the critical point). The melting curve leans left, as water's does (ice is less dense than liquid water), and the narration says so. The numbers in the narration are the ones the reference-data ledger already checks: water 273.16 K and 612 Pa (611.657 Pa rounded to three figures), CO₂ 304 K and 73 atm, water 647 K and 218 atm.",
+   "fix": "The figure was words with no diagram (the inventory already expected a P–T diagram drawn with curves: `graph: true`). New generator `phaseDiagram.ts`: two axes, a sublimation curve, a vaporisation curve and a melting line derived from the triple-point and critical-point anchors, the triple and critical points, nine labels (the intermediate label budget), and a consistency checker that fails when the curves do not meet where they must.",
+   "evidence": [
+    {
+     "file": "src/tests/phaseDiagram.test.ts",
+     "contains": "the three curves meet at the triple point and the vaporisation curve ends at the critical point"
+    },
+    {
+     "file": "docs/qa/chemistry-visual-audit/reference-data-ledger.json",
+     "contains": "\"valueInFigure\": \"273.16 K\""
+    },
+    {
+     "file": "docs/qa/chemistry-visual-audit/reference-data-ledger.json",
+     "contains": "0.00061165 MPa = 611.65 Pa"
+    }
+   ],
+   "remaining": "A schematic, not to scale, drawn water-like: its triple-point numbers are water's, while the critical points of two substances (CO₂ and water) are quoted in the narration rather than on the plot. The drawing cannot show a second substance's different melting slope. The expanded (fullscreen) view scrolls: the chrome around the scene is taller than the window (R15, measured and bounded, by design). On a 390 px phone the figure is small and the 'supercritical fluid' and 'critical point' labels sit close together; no collision or clip is flagged.",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Triple_point",
+    "https://en.wikipedia.org/wiki/Critical_point_(thermodynamics)",
+    "https://en.wikipedia.org/wiki/Phase_diagram"
+   ]
   }
  }
 }

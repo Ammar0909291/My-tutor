@@ -204,19 +204,20 @@ describe('cell comparison layout', () => {
     expect(xsOf(s)).toEqual([-6.5, 0, 6.5, -3.25, 3.25])
   })
 
-  it('the four-group chemistry comparisons that overflowed a phone canvas opted in (real gases, phase diagram)', () => {
-    for (const id of ['chem.state.real-gases', 'chem.state.phase-diagram']) {
+  it('the four-group chemistry comparison that overflowed a phone canvas opted in (real gases)', () => {
+    for (const id of ['chem.state.real-gases']) {
       const s = scene(id)
       expect(new Set(s.steps.map((st) => st.objects[0].position![1])).size, id).toBe(2)
     }
   })
 
-  it('the phase diagram lists all THREE regions it announces (solid, liquid, gas)', () => {
-    // Seen: "every P–T point is solid, liquid or gas" … items: solid, gas — the liquid region was missing.
+  it('the phase diagram names all THREE regions it announces (solid, liquid, gas)', () => {
+    // Seen: "every P–T point is solid, liquid or gas" … items: solid, gas — the liquid region was missing. It is now a drawn
+    // P–T plane (phaseDiagram.ts) and each region is a label on it.
     const t = texts(scene('chem.state.phase-diagram'))
-    expect(t.some((x) => /^solid:/.test(x))).toBe(true)
-    expect(t.some((x) => /^liquid:/.test(x))).toBe(true)
-    expect(t.some((x) => /^gas:/.test(x))).toBe(true)
+    expect(t).toContain('solid')
+    expect(t).toContain('liquid')
+    expect(t).toContain('gas')
   })
 })
 

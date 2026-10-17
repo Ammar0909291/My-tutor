@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "generatedOn": "2026-10-13",
+ "generatedOn": "2026-10-17",
  "about": "The committed result of the Chemistry visual closure audit: every concept classified A-E (taxonomy), every served figure instance rendered in Chromium at 390 and 1280 px in both themes across every control state, and the machine semantic verdict. A REVIEW_REQUIRED here means no deterministic assertion covers the chemistry; the human answer is semantic-review.json. src/tests/chemistryVisualAudit.test.ts recomputes every served fingerprint from the resolver and fails, naming the concepts, when this file is stale.",
  "taxonomy": {
   "A": "intentionally no figure: the generator recorded a deliberate decline (no suitable form) and no faithful figure is authored",
@@ -73,7 +73,7 @@
    "REVIEW_REQUIRED": 92,
    "PASS": 8
   },
-  "statesMeasured": 1086,
+  "statesMeasured": 1092,
   "categoryCUnreachableCachedFigures": 28,
   "withMissingRenders": 0
  },
@@ -496,8 +496,8 @@
    "category": "E",
    "source": "tier0",
    "provenance": "generator",
-   "instanceId": "scene:cell-comparison-chem.state.phase-diagram",
-   "fingerprint": "f160fe0c4",
+   "instanceId": "scene:phase-diagram-pt",
+   "fingerprint": "f9e058c5a",
    "verdict": "REVIEW_REQUIRED",
    "shadowedCachedFigure": true
   },
@@ -2337,7 +2337,7 @@
    "minContrast": 4.69
   },
   {
-   "id": "scene:cell-comparison-chem.state.phase-diagram",
+   "id": "scene:phase-diagram-pt",
    "tier": "tier0",
    "origin": "authored",
    "reachability": "resolver",
@@ -2345,12 +2345,12 @@
    "conceptIds": [
     "chem.state.phase-diagram"
    ],
-   "fingerprint": "f160fe0c4",
+   "fingerprint": "f9e058c5a",
    "verdict": "REVIEW_REQUIRED",
    "render": "REVIEW_REQUIRED",
    "semantic": "REVIEW_REQUIRED",
-   "semanticFamily": "prose-comparison",
-   "statesMeasured": 16,
+   "semanticFamily": "unknown",
+   "statesMeasured": 22,
    "viewports": [
     "1280",
     "390"
@@ -2360,16 +2360,16 @@
     "light"
    ],
    "counts": {
-    "PASS": 15,
-    "REVIEW_REQUIRED": 1,
+    "PASS": 20,
+    "REVIEW_REQUIRED": 2,
     "FAIL": 0
    },
    "failCodes": [],
    "reviewCodes": [
     "INNER_SCROLL_X"
    ],
-   "minFontPx": 10,
-   "minContrast": 4.69
+   "minFontPx": 11.5,
+   "minContrast": 4.68
   },
   {
    "id": "scene:chem-system-closed",

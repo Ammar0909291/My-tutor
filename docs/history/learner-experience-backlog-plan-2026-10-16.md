@@ -231,7 +231,33 @@ for the advanced concepts).
 Batches: `biologyDepthBatch1` … `Batch11` (195 cards). The B4 computer-science items (89 floor cards, 327 depth cards) stay
 open: CS was skipped on owner instruction.
 
+### B2 — figures: `bio.immuno.immune-disorders` verified, `chem.state.phase-diagram` replaced (done); unit circle and nouns open
+
+**`bio.immuno.immune-disorders` — verified, no change needed.** Rendered with `scripts/qa/biologyVisualRenderAudit.mjs --all-stages`
+(dark and light, 390 px and 1280 px, five stage states each = 20 states): 0 label overlaps, 0 labels outside the canvas, 0 leaks,
+no horizontal scroll, label font 13.4 px desktop / 10 px mobile. The repo audit already held PASS for it.
+
+**`chem.state.phase-diagram` — the text comparison is now a drawn pressure–temperature diagram.** New generator
+`src/lib/teaching/sceneGenerators/phaseDiagram.ts` (`buildPhaseDiagramScene`, `checkPhaseDiagramConsistency`): pressure and
+temperature axes, the sublimation, vaporisation and melting curves meeting at the triple point, the curve ending at the critical
+point, and the solid / liquid / gas / supercritical regions labelled. Four steps (axes → regions → boundaries → named points).
+Registered in `conceptSceneParams.ts` for `chem.state.phase-diagram` in place of the cell-comparison entry. Narration keeps the
+numbers (water 273.16 K / 612 Pa; CO₂ 304 K / 73 atm; water 647 K / 218 atm), and names the curves because the default view's label
+budget (9) holds the regions and points. Tests: `src/tests/phaseDiagram.test.ts` (7, with a mutation test); the two older chemistry
+visual tests that pinned the comparison were updated to the new content.
+
+Chemistry visual audit: re-rendered and re-recorded (`audit-summary.json`, `render-states.json`, new `semantic-review.json` entry
+`scene:phase-diagram-pt`, fingerprint `f9e058c5a`, decision FIXED→PASS). 22 states: 20 PASS, 2 REVIEW_REQUIRED (expanded-view scroll
+only, recorded as R15 in the semantic-review ledger).
+
+Gates: full suite 999 files, 25,516 tests passed (9 skipped); `tsc` ratchet 0 ≤ 0; chemistry visual audit and semantic-review gates green.
+
+**Still open under B2**
+- `math.trig.unit-circle`: author a unit-circle scene in the Mathematics figure batch workflow (`framed()`, label solver, ≤ 9
+  labels, tests that re-derive every number from the drawn coordinates, re-render under `?scope=lesson`, update the math audit records).
+- `eng.grammar.nouns`: last; a sorting figure only if it passes the faithfulness policy.
+
 ### Next
 
-B2: verify `bio.immuno.immune-disorders`, replace the `chem.state.phase-diagram` text comparison with a drawn P–T diagram,
-`math.trig.unit-circle`, then `eng.grammar.nouns` last.
+B2: `math.trig.unit-circle`, then `eng.grammar.nouns` last. Then, when the owner un-skips computer science: B1 Path A (89 floor
+cards) and B4 depth (327 cards) for CS.

@@ -344,6 +344,7 @@ import { buildOrgChartScene } from '@/lib/teaching/sceneGenerators/civicsOrgChar
 import { buildDemographicPyramidScene } from '@/lib/teaching/sceneGenerators/demographicPyramid'
 import { buildElectrochemicalCellScene, type ElectrochemicalCellParams } from '@/lib/teaching/sceneGenerators/electrochemicalCell'
 import { buildEnergyCycleScene } from '@/lib/teaching/sceneGenerators/energyCycle'
+import { buildPhaseDiagramScene } from '@/lib/teaching/sceneGenerators/phaseDiagram'
 import { buildCoordinationComplexScene, type CoordinationComplexDef } from '@/lib/teaching/sceneGenerators/coordinationComplex'
 import { buildSystemBoundaryScene, buildFirstLawScene as buildChemFirstLawScene } from '@/lib/teaching/sceneGenerators/chemistrySystemScenes'
 import { buildCellStructureScene } from '@/lib/teaching/sceneGenerators/cellStructure'
@@ -1734,18 +1735,9 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
       { label: 'Heavy water, D₂O', description: 'both hydrogens are deuterium (²H); it boils at 101.4 °C (1 atm), moderates neutrons in CANDU reactors and is a solvent for ¹H NMR', items: ['boils at 101.4 °C', 'CANDU moderator; ¹H NMR solvent'] },
     ],
   }),
-  'chem.state.phase-diagram': () => buildCellComparisonScene({
-    conceptId: 'chem.state.phase-diagram',
-    gridFromGroups: 4, // four groups of long clauses: a 2x2 grid, not four columns ~85px apart on a phone
-    title: 'Reading a Phase Diagram: Pressure against Temperature',
-    teachingGoal: 'Every P–T point lies in one region (solid, liquid or gas); on a boundary curve two phases coexist; at the triple point all three do; beyond the critical point liquid and gas become one supercritical fluid.',
-    groups: [
-      { label: 'Three regions', description: 'every P–T point is solid, liquid or gas', items: ['solid: low T, high P', 'liquid: between the two', 'gas: high T, low P'] },
-      { label: 'Boundary curves', description: 'along a curve two phases coexist', items: ['solid–gas: sublimation (dry ice)', 'liquid–gas: vapour pressure; read the boiling point', 'solid–liquid: melting; slopes backwards for water'] },
-      { label: 'Triple point', description: 'all three phases coexist', items: ['water: 273.16 K, 612 Pa'] },
-      { label: 'Critical point', description: 'end of the liquid–gas curve; beyond it a supercritical fluid', items: ['CO₂: 304 K, 73 atm', 'water: 647 K, 218 atm'] },
-    ],
-  }),
+  // A drawn P–T plane (regions, three boundary curves, triple and critical points). It was a four-box text comparison: the words
+  // of a phase diagram with no diagram (chemistry visual audit, 2026-10-08: "prose-comparison").
+  'chem.state.phase-diagram': () => buildPhaseDiagramScene(),
   // CHEM-046: "Real Gases and van der Waals Equation" was shown the ideal
   // Boyle's-law hyperbola, the opposite of the concept.
   'chem.state.real-gases': () => buildCellComparisonScene({
