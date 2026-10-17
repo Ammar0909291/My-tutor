@@ -527,6 +527,12 @@ async function bootstrapAssets(run: import('./lib/db/stopAfterDeadline').Abandon
       // englishAdultBandBatch21.ts's own header for detail.
       const { ENGLISH_ADULT_BAND_BATCH_21 } =
         await import('./lib/teaching/assets/englishAdultBandBatch21')
+      // English card-depth campaign (2026-10-17): new 3-option cards in FREE
+      // (concept, kind, band) slots so no existing probe's identity moves (P-10).
+      // See englishCardDepthBatch1.ts's own header and
+      // docs/history/learner-experience-backlog-plan-2026-10-16.md.
+      const { ENGLISH_CARD_DEPTH_BATCH_1 } =
+        await import('./lib/teaching/assets/englishCardDepthBatch1')
       // English phonics gap closure, 2026-09-18: eng.phonics.letter-sound-
       // correspondence @ ELEMENTARY (closed-choice, text-described scenario).
       // phonemic-awareness::EARLY/ADULT and letter-sound-correspondence::EARLY
@@ -1178,6 +1184,7 @@ async function bootstrapAssets(run: import('./lib/db/stopAfterDeadline').Abandon
         ...ENGLISH_ADULT_BAND_BATCH_15, ...ENGLISH_ADULT_BAND_BATCH_16, ...ENGLISH_ADULT_BAND_BATCH_17,
         ...ENGLISH_ADULT_BAND_BATCH_18, ...ENGLISH_ADULT_BAND_BATCH_19, ...ENGLISH_ADULT_BAND_BATCH_20,
         ...ENGLISH_ADULT_BAND_BATCH_21,
+        ...ENGLISH_CARD_DEPTH_BATCH_1,
         ...ENGLISH_LETTER_SOUND_ELEMENTARY_GAP,
         ...BIOLOGY_PROBES, ...BIOLOGY_EXTENSION_PROBES, ...CS_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES,
         ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES,
