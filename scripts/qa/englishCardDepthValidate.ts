@@ -12,8 +12,8 @@
  *    identity (P-10, brainSeedAssets.buildProbeSlugResolver);
  *  - a misconception id the concept's existing probes never use (none may be invented);
  *  - the stem repeats an existing stem of the concept.
- * Warnings: a stem sharing >= 60 % of its words with an existing stem of the concept (same example
- * re-asked), and the share of cards whose correct answer is strictly the longest option (a cue a
+ * Warnings: a stem whose content words overlap >= 50 % (Jaccard) with an existing stem of the concept
+ * (same example re-asked), and the share of cards whose correct answer is strictly the longest option (a cue a
  * guesser can use; 33 % is chance for three options).
  */
 import path from 'node:path'
@@ -24,7 +24,8 @@ const [modName, exportName] = process.argv.slice(2)
 if (!modName || !exportName) { console.error('usage: englishCardDepthValidate.ts <module> <EXPORT>'); process.exit(2) }
 
 const norm = (s: string) => s.replace(/\s+/g, ' ').trim().toLowerCase()
-const words = (s: string) => new Set(norm(s).replace(/[^\p{L}\p{N}\s]/gu, ' ').split(' ').filter((w) => w.length > 2))
+const STOP = new Set(['the', 'and', 'for', 'that', 'this', 'with', 'are', 'was', 'what', 'which', 'complete', 'sentence', 'does', 'not', 'has', 'have', 'its', 'one', 'from', 'when', 'than'])
+const words = (s: string) => new Set(norm(s).replace(/[^\p{L}\p{N}\s]/gu, ' ').split(' ').filter((w) => w.length > 2 && !STOP.has(w)))
 
 async function main() {
   const mod = await import(path.resolve(__dirname, '../../src/lib/teaching/assets', modName))
@@ -59,8 +60,8 @@ async function main() {
       if (norm(o.stem) === norm(p.stem)) errors.push(`${tag}: stem repeats an existing stem`)
       const theirs = words(o.stem)
       const inter = [...mine].filter((w) => theirs.has(w)).length
-      const sim = inter / Math.max(1, Math.min(mine.size, theirs.size))
-      if (sim >= 0.6) warnings.push(`${tag}: ${(sim * 100).toFixed(0)}% word overlap with existing "${o.stem.slice(0, 70)}…"`)
+      const sim = inter / Math.max(1, mine.size + theirs.size - inter)   // Jaccard over content words
+      if (sim >= 0.5) warnings.push(`${tag}: ${(sim * 100).toFixed(0)}% word overlap with existing "${o.stem.slice(0, 70)}…"`)
     }
   }
   for (const [s, n] of slots) if (n > 1) errors.push(`${s}: used ${n}x inside the batch`)
