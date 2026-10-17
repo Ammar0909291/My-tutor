@@ -33,7 +33,7 @@ A change to the shared renderers or to a card component (`GeometryShapes`, `Frac
 - A second pass at the end re-renders any concept whose render died ("Target page, context or browser has been closed" — an interrupted browser, not a figure defect).
 
 ## Scope notes
-- 556 concepts serve a figure: 513 scenes, 43 cards (27 domain-fallback cards, 16 curated). 352 serve none. The audit judges READABILITY and STRUCTURE; whether a card is a figure OF its concept is the visual-scope audit's question (`mathematicsVisualScopeAudit.test.ts`).
+- 556 concepts serve a figure: 514 scenes, 42 cards (26 domain-fallback cards, 16 curated; `math.trig.unit-circle` became a scene on 2026-10-17). 352 serve none. The audit judges READABILITY and STRUCTURE; whether a card is a figure OF its concept is the visual-scope audit's question (`mathematicsVisualScopeAudit.test.ts`).
 - Semantic PASS needs a deterministic assertion (a `mathCoreScenesBatch<N>.test.ts` naming the concept/scene id, or an evaluated arithmetic chain). 61 figures have none or carry a REVIEW finding; they await the semantic review (queue item 2).
 
 ## Update 2026-10-14 — lesson token scope, dispositions, evidence

@@ -308,7 +308,7 @@ describe('every Mathematics card figure is a card of the concept\'s own domain',
       const allowed = DOMAINS[type]
       if (!allowed || !allowed.includes(id.split('.').slice(0, 2).join('.'))) offenders.push(`${id} → ${type}`)
     }
-    expect(cards).toBeGreaterThanOrEqual(43)
+    expect(cards).toBeGreaterThanOrEqual(42)                                       // 43 until math.trig.unit-circle got its own figure (batch 43, 2026-10-17)
     expect(offenders).toEqual([])
   }, 120_000)
 })

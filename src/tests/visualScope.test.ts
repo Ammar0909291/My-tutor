@@ -61,7 +61,7 @@ describe('a domain illustration still renders', () => {
   const DOMAIN_CASES = [
     'math.geom.angle-types',
     'math.arith.negative-numbers',
-    'math.trig.unit-circle',
+    'math.geom.circle-area',                   // (math.trig.unit-circle had this slot until it got its own figure, batch 43, 2026-10-17)
     'math.alg.quadratic-equations',
     'math.stat.mean-median-mode',
     'chem.atomic.isotopes',
@@ -94,7 +94,7 @@ describe('a domain illustration cannot claim to be the concept', () => {
   })
 
   it('it never asserts the figure IS a figure of the concept', () => {
-    for (const id of ['math.geom.angle-types', 'math.arith.negative-numbers', 'math.trig.unit-circle']) {
+    for (const id of ['math.geom.angle-types', 'math.arith.negative-numbers', 'math.geom.circle-area']) {
       const title = getKGNode(id)?.title
       if (!title) continue
       const block = contract(id)

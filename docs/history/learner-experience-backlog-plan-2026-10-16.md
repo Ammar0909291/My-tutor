@@ -252,12 +252,24 @@ only, recorded as R15 in the semantic-review ledger).
 
 Gates: full suite 999 files, 25,516 tests passed (9 skipped); `tsc` ratchet 0 ≤ 0; chemistry visual audit and semantic-review gates green.
 
+**`math.trig.unit-circle` — now its own figure (Mathematics batch 43, 2026-10-17).** It was served the geometry domain's shared
+shapes card (owner question Q1). `src/lib/teaching/sceneGenerators/mathCoreScenesB43.ts` (`buildUnitCircleScene`, id
+`math-unit-circle`) draws a radius-1 circle about the axes' crossing with 1 / −1 on both axes, P at 30° (cos θ = 0.87 red leg,
+sin θ = 0.50 blue leg, x² + y² = 1) and Q at 150° (cos 150° = −0.87 left of the vertical axis, sin 150° = 0.50). The value labels sit
+outside the circle: they are wider than one quadrant of it. Test `src/tests/mathCoreScenesBatch43.test.ts` re-derives every stated
+number from the drawn coordinates (constant ring radius, both points on it, radii and arcs sweeping 30° and 150°, each leg's signed
+length = the coordinate, signs, the four axis numerals) and was mutation-checked. Label solver: 0 moved on the card host. Render audit
+(`renderAudit.ts --concepts math.trig.unit-circle --redo` → `validate.ts` → `merge-audit.ts`): PASS at 390 px dark and light, 1280 px
+and the 50/50 column; the first render's LY-02 on a tick numeral was repaired. Ledger entry now FIXED_DEFECT with the new
+fingerprint, owner question Q1 covers 30 concepts, card floor 43 → 42, campaign floor 510 → 511, and `visualScope.test.ts` uses
+`math.geom.circle-area` as its domain-card sample. Gates: full suite 1,000 files, 25,530 tests passed (the one failing file was the
+sample fix above, re-run green); `tsc` ratchet 0 ≤ 0; `validate-visualization-coverage` PASS.
+
 **Still open under B2**
-- `math.trig.unit-circle`: author a unit-circle scene in the Mathematics figure batch workflow (`framed()`, label solver, ≤ 9
-  labels, tests that re-derive every number from the drawn coordinates, re-render under `?scope=lesson`, update the math audit records).
-- `eng.grammar.nouns`: last; a sorting figure only if it passes the faithfulness policy.
+- `eng.grammar.nouns`: last. English serves NO static figure by policy (`englishVisualAudit.test.ts` pins it: "if one appears it
+  needs a real audit"), so a sorting figure is the first English registry figure and needs its own render audit, not the envelope one.
 
 ### Next
 
-B2: `math.trig.unit-circle`, then `eng.grammar.nouns` last. Then, when the owner un-skips computer science: B1 Path A (89 floor
-cards) and B4 depth (327 cards) for CS.
+B2: `eng.grammar.nouns` (see above), then, when the owner un-skips computer science, B1 Path A (89 floor cards) and B4 depth (327
+cards) for CS.

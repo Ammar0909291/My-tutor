@@ -11,7 +11,7 @@
   "VALID_TEXT_FIGURE"
  ],
  "ownerQuestions": {
-  "Q1": "31 concepts without a figure of their own are shown their DOMAIN's shared overview card (the shapes card for circle-area or unit-circle, the number line for absolute-value, the coordinate plane for the quadratic equation). Accept them as domain-scope overviews, or author concept-specific figures (the tier-N campaign)? Not a rendering defect; a product decision."
+  "Q1": "30 concepts without a figure of their own are shown their DOMAIN's shared overview card (the shapes card for circle-area, the number line for absolute-value, the coordinate plane for the quadratic equation). Accept them as domain-scope overviews, or author concept-specific figures (the tier-N campaign)? Not a rendering defect; a product decision."
  },
  "entries": [
   {
@@ -1255,9 +1255,9 @@
   },
   {
    "id": "math.trig.unit-circle",
-   "figure": "geometry_shape",
-   "class": "card",
-   "scope": "domain",
+   "figure": "math-unit-circle",
+   "class": "scene",
+   "scope": "concept",
    "was": {
     "verdict": "REVIEW_REQUIRED",
     "rules": [
@@ -1268,13 +1268,13 @@
     ]
    },
    "now": "PASS",
-   "fingerprint": "f82163e358b4d0c7",
+   "fingerprint": "50a12c3b684647ff",
    "evidence": [
-    "mathVisualSemanticEvidence.test.ts (geometry_shape card)"
+    "mathCoreScenesBatch43.test.ts"
    ],
-   "disposition": "ASSERTION_ADDED",
-   "judgement": "Structure now asserted from the card's own markup / exported geometry (mathVisualSemanticEvidence.test.ts) and the card is verified to belong to the concept's domain. This is the DOMAIN's shared overview card shown because the concept has no figure of its own: readable and domain-correct, but not a figure OF this concept.",
-   "ownerDecision": "Q1"
+   "disposition": "FIXED_DEFECT",
+   "judgement": "The concept was served the geometry domain's shared overview card (no figure of its own). Batch 43 (2026-10-17) authored its own figure: a radius-1 circle about the axes' crossing with the points at 30 and 150 degrees, whose drawn coordinates are re-derived in mathCoreScenesBatch43.test.ts (cos is the x-coordinate, sin the height, the sign of cos flips past 90 degrees). Re-rendered clean at every viewport and theme (the first render's LY-02 on a tick numeral was repaired by lifting the numerals off the axis).",
+   "ownerDecision": null
   },
   {
    "id": "math.trig.reference-angles",

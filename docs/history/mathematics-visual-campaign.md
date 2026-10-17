@@ -1528,3 +1528,15 @@ Owner prompt "COMPLETE EVERYTHING IN ONE EXECUTION". Record re-rendered under th
 `review-dispositions.json`). Card and shared-generator figures now have deterministic evidence (`mathVisualSemanticEvidence.test.ts`: 2D card markup, 3D card geometry exports, shared `check*Consistency`). The card-host label-displacement backlog (218 figures, batches 1-29) is closed
 (`scripts/math/labelAssociation.ts`, 9 far labels reviewed and accepted, `mathLabelAssociation.test.ts`). Shared fixes: `CoordinatePlane` tick-numeral halo, `ProcessFlowRenderer` note font 10 px, axis letters and nudges in B1/B3, `pdsCountAt` in B30. Open: production `/learn` check (blocked), English envelope audit (220/222, see the handover), human semantic review.
 
+
+# Batch 43 (2026-10-17) — `math.trig.unit-circle`
+
+Owner authorisation to close the learner-experience backlog item "unit circle" (plan: `docs/history/learner-experience-backlog-plan-2026-10-16.md`, B2). The concept was served the geometry domain's shared overview card (owner question Q1). It now has its own figure: `src/lib/teaching/sceneGenerators/mathCoreScenesB43.ts` (`buildUnitCircleScene`, id `math-unit-circle`), registered in `conceptSceneParams.ts`.
+
+| Concept | Figure |
+|---|---|
+| math.trig.unit-circle | a circle of radius 1 about the axes' crossing, with 1 and −1 on both axes; P at 30° (cos θ = 0.87 red leg, sin θ = 0.50 blue leg, x² + y² = 1) and Q at 150° (cos 150° = −0.87 on the left of the vertical axis, sin 150° = 0.50, the same height) |
+
+Test: `src/tests/mathCoreScenesBatch43.test.ts` re-derives from the DRAWN coordinates that the ring has constant radius about the axes' crossing, both points lie on it (x² + y² = 1), the radii and arcs sweep 30° and 150°, each leg's signed length is the point's coordinate, every label states that coordinate (signs included, cos 150° = −cos 30°, equal heights) and the 1 / −1 numerals sit at the four axis crossings; mutation-checked (dropping the minus sign, lengthening a leg). Label solver: 0 moved on the card host (5 moved on the 282 px phone host, information only).
+
+Lessons: the value labels ("cos 150° = −0.87" is 16 characters, ~190 px at primary tier) are wider than one quadrant of the circle at card scale, so they sit OUTSIDE the circle beside the foot of each leg (detail tier); tick numerals need ≥ 0.5 world units clear of an axis line or the narrower 50/50 column flags LY-02. Re-audit: `renderAudit.ts --concepts math.trig.unit-circle --redo` → `validate.ts` → `merge-audit.ts` (PASS at 390 px dark and light, 1280 px and the column); the first render's LY-02 on a tick numeral was repaired. Ledger entry in `review-dispositions.json` is now FIXED_DEFECT with the new fingerprint; Q1 now covers 30 concepts; `mathVisualSemanticEvidence.test.ts` card floor 43 → 42; `mathVisualCampaignAudit.test.ts` floor 510 → 511.

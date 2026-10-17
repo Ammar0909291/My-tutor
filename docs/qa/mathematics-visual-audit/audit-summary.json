@@ -1,6 +1,7 @@
 {
- "generatedAt": "2026-10-14T00:33:23.249Z",
- "fingerprint": "1041954f85ce88738017305defa989a456c39a4f8de3b1723d51a67a6a163f27",
+ "generatedAt": "2026-10-17T21:27:24.999Z",
+ "renderScope": "lesson",
+ "fingerprint": "2d5ee64907280851a6086fa45d40d4c3dbe9f7bcdd8b1b8a6dc54fcb127afca0",
  "fingerprints": {
   "math.found.mathematical-thinking": "a083018c52b89e37",
   "math.found.abstraction": "136d7c54677ee095",
@@ -311,7 +312,7 @@
   "math.trig.right-triangle-trig": "e2a899b75a2f8579",
   "math.trig.basic-ratios": "b201fbd2d4555590",
   "math.trig.special-angles": "7d4da70203f128c7",
-  "math.trig.unit-circle": "f82163e358b4d0c7",
+  "math.trig.unit-circle": "50a12c3b684647ff",
   "math.trig.reference-angles": "a7f6fe969fa2f795",
   "math.trig.trig-functions": "6bf364686f37fc52",
   "math.trig.amplitude-period-phase": "fcce528b3c6c6af3",
@@ -6646,9 +6647,9 @@
   {
    "id": "math.trig.unit-circle",
    "verdict": "PASS",
-   "class": "card",
-   "authorship": "domain-fallback-card",
-   "scope": "domain",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
    "interactive": false,
    "graph": false,
    "dims": {
