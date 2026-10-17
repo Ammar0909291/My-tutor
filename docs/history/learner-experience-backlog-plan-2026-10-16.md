@@ -109,7 +109,7 @@ subject's visual audit gate in the same push.
 | # | Item | Decision | Status |
 |---|---|---|---|
 | 1 | Parked `POINTS_AT_MISSING_OPTIONS` widening (38609b7f) | **Finish it, narrowly.** Only the form measured live ("Your turn to pick the answer!", bio.gen.mendelian-genetics, 2026-09-27) is added: `your turn to (pick\|choose\|select) …`. The broader "pick an option" / "choose the option" stays out. Mutation check: the broad version deletes ordinary teaching sentences ("In a multiple-choice question, choose the option that fits your reasoning first."), the narrow one does not. | DONE — `yourTurnToPickWithoutOptions.test.ts` (10 tests) |
-| 2 | B1 | **Path A — add new 3–4-option cards**, no in-place edits, no content sync. Order: english (637) → chemistry (247) → computer science (241) → physics (215) → biology (203) → mathematics (22). | **IN PROGRESS** — English DONE, see §6 |
+| 2 | B1 | **Path A — add new 3–4-option cards**, no in-place edits, no content sync. Order: english (637) → chemistry (247) → computer science (241) → physics (215) → biology (203) → mathematics (22). | **IN PROGRESS** — English, chemistry and physics DONE; computer science SKIPPED on owner instruction ("skip cs"); biology and mathematics next, see §6 |
 | 3 | Stop spending cards in GUIDE / DEMONSTRATE | **Not taken.** It is an Educational Brain teaching-decision change and needs the real G1/G2 owner sign-off; deepening the pool (decision 2 and B4) removes the need for it without an engine change. | Not started |
 | 4 | B2 | Verify before authoring: re-render `bio.immuno.immune-disorders` and `chem.state.phase-diagram` (390/1280, both themes) and author only if they fall short. `math.trig.unit-circle` goes in the next trigonometry batch of the already-authorised Mathematics figure campaign. `eng.grammar.nouns` last. | Not started |
 | 5 | B4 | Floor first (89 CS cards), depth (5 per concept) afterwards. | Not started |
@@ -159,7 +159,33 @@ batch and accepts misconception ids defined in `educational-brain/concepts/*/<co
 
 Batches: `chemistryCardDepthBatch1` … `Batch16` (247 cards).
 
+### Computer science — SKIPPED on owner instruction ("skip cs", 2026-10-17)
+
+The 241 CS cards (11 batches, all validated) were drafted and then removed from the tree on that instruction; nothing
+CS was committed. CS therefore stays at its measured state (119 concepts under the 3-card floor, 89 of them also under
+the 3-probe contract floor, median 2 cards) and the B4 CS items (89 floor cards, 327 depth cards) stay open. Pick it up
+only on a fresh owner instruction.
+
+### B1 Path A — Physics: DONE (283 / 283 concepts at the floor)
+
+Same method. Free slots were `step_check` (165 cards) and `fill_blank` (49) / `numeric` (1) at each concept's own
+band — the kind is only a slot label. Facts come from each concept's blueprint (Misconception Library, replacement and
+discrimination pairs); a wrong answer that states a registered misconception carries that id (physics ids are `MC-n` for
+some concepts and long names for others, e.g. `MC-SPEED-OF-LIGHT-ADDS-LIKE-OTHER-SPEEDS` — read them off the concept's
+own probes); any other wrong answer carries no id.
+
+| Gate | Result |
+|---|---|
+| Validator (all 13 batches) | exactly 3 distinct options, one correct; slot free (also across batches); ids known; no repeated stem; correct answer strictly longest in 24–40 % of cards per batch |
+| Seed dry-run | 14,315 items, 14,315 distinct identities, 0 duplicates |
+| Contract audit (physics) | 283 concepts, 306 pairs, 306 at contract, 0 short |
+| Floor | 215 → **0** |
+| `tsc` ratchet | 0 ≤ 0 |
+| Full suite | 998 files, 25,509 tests passed |
+
+Batches: `physicsCardDepthBatch1` … `Batch13` (215 cards).
+
 ### Next
 
-Computer science (241 cards: every one of the 119 concepts is below the floor), then physics, biology, mathematics;
-then B4 and B2.
+Biology (203 cards, 199 concepts), then mathematics (22 cards, 22 concepts); then B4 (biology depth only, CS skipped)
+and B2.

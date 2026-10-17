@@ -611,6 +611,32 @@ async function bootstrapAssets(run: import('./lib/db/stopAfterDeadline').Abandon
         await import('./lib/teaching/assets/chemistryCardDepthBatch15')
       const { CHEMISTRY_CARD_DEPTH_BATCH_16 } =
         await import('./lib/teaching/assets/chemistryCardDepthBatch16')
+      const { PHYSICS_CARD_DEPTH_BATCH_1 } =
+        await import('./lib/teaching/assets/physicsCardDepthBatch1')
+      const { PHYSICS_CARD_DEPTH_BATCH_2 } =
+        await import('./lib/teaching/assets/physicsCardDepthBatch2')
+      const { PHYSICS_CARD_DEPTH_BATCH_3 } =
+        await import('./lib/teaching/assets/physicsCardDepthBatch3')
+      const { PHYSICS_CARD_DEPTH_BATCH_4 } =
+        await import('./lib/teaching/assets/physicsCardDepthBatch4')
+      const { PHYSICS_CARD_DEPTH_BATCH_5 } =
+        await import('./lib/teaching/assets/physicsCardDepthBatch5')
+      const { PHYSICS_CARD_DEPTH_BATCH_6 } =
+        await import('./lib/teaching/assets/physicsCardDepthBatch6')
+      const { PHYSICS_CARD_DEPTH_BATCH_7 } =
+        await import('./lib/teaching/assets/physicsCardDepthBatch7')
+      const { PHYSICS_CARD_DEPTH_BATCH_8 } =
+        await import('./lib/teaching/assets/physicsCardDepthBatch8')
+      const { PHYSICS_CARD_DEPTH_BATCH_9 } =
+        await import('./lib/teaching/assets/physicsCardDepthBatch9')
+      const { PHYSICS_CARD_DEPTH_BATCH_10 } =
+        await import('./lib/teaching/assets/physicsCardDepthBatch10')
+      const { PHYSICS_CARD_DEPTH_BATCH_11 } =
+        await import('./lib/teaching/assets/physicsCardDepthBatch11')
+      const { PHYSICS_CARD_DEPTH_BATCH_12 } =
+        await import('./lib/teaching/assets/physicsCardDepthBatch12')
+      const { PHYSICS_CARD_DEPTH_BATCH_13 } =
+        await import('./lib/teaching/assets/physicsCardDepthBatch13')
       // English phonics gap closure, 2026-09-18: eng.phonics.letter-sound-
       // correspondence @ ELEMENTARY (closed-choice, text-described scenario).
       // phonemic-awareness::EARLY/ADULT and letter-sound-correspondence::EARLY
@@ -1277,6 +1303,11 @@ async function bootstrapAssets(run: import('./lib/db/stopAfterDeadline').Abandon
         ...CHEMISTRY_CARD_DEPTH_BATCH_10, ...CHEMISTRY_CARD_DEPTH_BATCH_11, ...CHEMISTRY_CARD_DEPTH_BATCH_12,
         ...CHEMISTRY_CARD_DEPTH_BATCH_13, ...CHEMISTRY_CARD_DEPTH_BATCH_14, ...CHEMISTRY_CARD_DEPTH_BATCH_15,
         ...CHEMISTRY_CARD_DEPTH_BATCH_16,
+        ...PHYSICS_CARD_DEPTH_BATCH_1, ...PHYSICS_CARD_DEPTH_BATCH_2, ...PHYSICS_CARD_DEPTH_BATCH_3,
+        ...PHYSICS_CARD_DEPTH_BATCH_4, ...PHYSICS_CARD_DEPTH_BATCH_5, ...PHYSICS_CARD_DEPTH_BATCH_6,
+        ...PHYSICS_CARD_DEPTH_BATCH_7, ...PHYSICS_CARD_DEPTH_BATCH_8, ...PHYSICS_CARD_DEPTH_BATCH_9,
+        ...PHYSICS_CARD_DEPTH_BATCH_10, ...PHYSICS_CARD_DEPTH_BATCH_11, ...PHYSICS_CARD_DEPTH_BATCH_12,
+        ...PHYSICS_CARD_DEPTH_BATCH_13,
         ...ENGLISH_LETTER_SOUND_ELEMENTARY_GAP,
         ...BIOLOGY_PROBES, ...BIOLOGY_EXTENSION_PROBES, ...CS_PROBES, ...MATHEMATICS_PROBES, ...MATHEMATICS_FOUNDATION_PROBES,
         ...MATHEMATICS_ARITHMETIC_PROBES, ...MATHEMATICS_BATCH3_PROBES, ...MATHEMATICS_GEOMETRY_PROBES,
