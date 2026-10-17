@@ -186,11 +186,25 @@ const PHRASINGS = [
   'Yes, exactly right.',
 ] as const
 
-/** The confirmation sentence for a correct answer, rotated by the confirmations already given. */
-export function confirmationPhrase(priorConfirmations?: number): string {
+/**
+ * A learner who answered "No" must not be told "Yes, exactly right." — the
+ * confirmation reads as a contradiction of their own answer (English
+ * real-learner run, 2026-10-17: card "Is this a minimal pair?", learner chose
+ * "No", reply opened "Yes, exactly right."). Only the opening word of the
+ * learner's answer is read; nothing about the question is guessed.
+ */
+const answersNo = (learnerAnswer?: string): boolean => /^\s*no\b/i.test(learnerAnswer ?? '')
+
+function phrasingFor(priorConfirmations: number | undefined, learnerAnswer?: string): string {
+  const pool = answersNo(learnerAnswer) ? PHRASINGS.filter((p) => !/^yes\b/i.test(p)) : PHRASINGS
   const n = priorConfirmations
-  const i = Number.isFinite(n) && (n as number) >= 0 ? Math.floor(n as number) % PHRASINGS.length : 0
-  return PHRASINGS[i]
+  const i = Number.isFinite(n) && (n as number) >= 0 ? Math.floor(n as number) % pool.length : 0
+  return pool[i]
+}
+
+/** The confirmation sentence for a correct answer, rotated by the confirmations already given. */
+export function confirmationPhrase(priorConfirmations?: number, learnerAnswer?: string): string {
+  return phrasingFor(priorConfirmations, learnerAnswer)
 }
 
 export interface ConfirmationInput {
@@ -201,6 +215,8 @@ export interface ConfirmationInput {
   /** How many answers this session has already had confirmed. Rotates the
    *  phrasing; any non-finite or negative value is treated as 0. */
   priorConfirmations?: number
+  /** The learner's answer text for this turn; keeps "Yes, …" off a "No" answer. */
+  learnerAnswer?: string
 }
 
 export interface ConfirmationResult {
@@ -305,13 +321,9 @@ export function confirmCorrectAnswer(input: ConfirmationInput): ConfirmationResu
   const opening = text.trim().split(/(?<=[.!?])\s+|\n+/)[0] ?? ''
   if (!denied && statesCorrect(opening)) return { text, added: false }
   if (text.trim().length === 0) {
-    const n0 = input.priorConfirmations
-    const i0 = Number.isFinite(n0) && (n0 as number) >= 0 ? Math.floor(n0 as number) % PHRASINGS.length : 0
-    return { text: PHRASINGS[i0], added: true }
+    return { text: phrasingFor(input.priorConfirmations, input.learnerAnswer), added: true }
   }
   if (statesCorrect(opening) && statesCorrect(text)) return { text, added: true }
 
-  const n = input.priorConfirmations
-  const index = Number.isFinite(n) && (n as number) >= 0 ? Math.floor(n as number) % PHRASINGS.length : 0
-  return { text: `${PHRASINGS[index]} ${text.trimStart()}`, added: true }
+  return { text: `${phrasingFor(input.priorConfirmations, input.learnerAnswer)} ${text.trimStart()}`, added: true }
 }

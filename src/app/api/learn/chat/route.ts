@@ -8560,6 +8560,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           text: cleanText,
           correct: correctForConfirmation,
           priorConfirmations: resolvedPriorConfirmations,
+          learnerAnswer: message,
         })
         cleanText = confirmed.text
         // PCD-029 — telemetry only, no behavior change. The 65% figure this
@@ -11235,7 +11236,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             if (correctForConfirmation !== null) {
               const { confirmCorrectAnswer: reconfirm } = await import('@/lib/teaching/answerConfirmation')
               const { stateCorrectionForWrongAnswer: recorrect } = await import('@/lib/teaching/wrongAnswerCorrection')
-              cleanText = reconfirm({ text: cleanText, correct: correctForConfirmation, priorConfirmations: resolvedPriorConfirmations }).text
+              cleanText = reconfirm({ text: cleanText, correct: correctForConfirmation, priorConfirmations: resolvedPriorConfirmations, learnerAnswer: message }).text
               cleanText = recorrect({ text: cleanText, correct: correctForConfirmation, probe: pendingMcqHoisted }).text
             }
           }
@@ -11422,7 +11423,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           // CHEM-040 / CHEM-055: "i dont understand / why? / explain simpler"
           // answered with a fourth relay-baton analogy — one analogy in four
           // replies for every subject (was two outside mathematics).
-          if (caps.usesAnalogy(cleanText) && caps.analogyCapReached(priorTutor, 1)) {
+          // "too many words" asks for FEWER words about the same idea; a new
+          // story is not that (English real-learner run, 2026-10-17: a
+          // remote-control comparison for "too many words" in a lesson with
+          // no earlier analogy) — so no analogy at all on that request.
+          const shorterAsked = (await import('@/lib/teaching/adaptationRequest')).adaptationKind(learnerAuthoredMessage) === 'shorter'
+          if (caps.usesAnalogy(cleanText) && (shorterAsked || caps.analogyCapReached(priorTutor, 1))) {
             const retry = await regenerateWithAppendix(caps.NO_ANALOGY_APPENDIX)
             const kept = retry && !caps.usesAnalogy(retry) && (retry.match(/\S+/g) ?? []).length >= 12
             console.log('[analogy-cap] ' + JSON.stringify({ regenerated: true, kept }))
@@ -14312,7 +14318,7 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             const used = ta.usableSlots(parsed, codes, r.facts)
             const probe = { question: r.facts.question, options: r.facts.options, correctIndex: r.facts.correctIndex, rationales: r.facts.rationales }
             const verdictLine = r.facts.correct
-              ? (await import('@/lib/teaching/answerConfirmation')).confirmationPhrase(resolvedPriorConfirmations)
+              ? (await import('@/lib/teaching/answerConfirmation')).confirmationPhrase(resolvedPriorConfirmations, message)
               : (await import('@/lib/teaching/wrongAnswerCorrection')).stateCorrectionForWrongAnswer({ text: '', correct: false, probe: probe as never }).text
             const { neutralLeadInFor } = await import('@/lib/teaching/gateAssessmentRenderer')
             const assembled = ta.assembleGradedTurn({

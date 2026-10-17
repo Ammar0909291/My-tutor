@@ -233,7 +233,16 @@ export function qualifyUncovered(text: string, firstUncovered?: string | null): 
   const paras = t.split(/\n{2,}/)
   const anchor = (firstUncovered ?? '').trim().slice(0, 60)
   const at = anchor ? paras.findIndex((p) => p.includes(anchor)) : -1
-  if (at >= 0) return { text: [...paras.slice(0, at + 1), UNCOVERED_EXAMPLE_NOTE, ...paras.slice(at + 1)].join('\n\n'), changed: true }
+  if (at >= 0) {
+    // Never split a lead-in from what it introduces ("…might be:" + code block):
+    // the note went between them and the example looked cut off (Computer
+    // Science real-learner run, 2026-10-17). Move past an open code fence and
+    // past a paragraph that ends with a colon.
+    let end = at
+    const fences = (upTo: number): number => paras.slice(0, upTo + 1).join('\n\n').split('```').length - 1
+    while (end + 1 < paras.length && (fences(end) % 2 === 1 || /:\s*$/.test(paras[end]))) end++
+    return { text: [...paras.slice(0, end + 1), UNCOVERED_EXAMPLE_NOTE, ...paras.slice(end + 1)].join('\n\n'), changed: true }
+  }
   const last = paras[paras.length - 1] ?? ''
   if (paras.length > 1 && /\?\s*(?:\*\*|__)?\s*$/.test(last)) {
     return { text: [...paras.slice(0, -1), UNCOVERED_EXAMPLE_NOTE, last].join('\n\n'), changed: true }
