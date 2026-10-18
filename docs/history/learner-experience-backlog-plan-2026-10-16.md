@@ -265,11 +265,21 @@ fingerprint, owner question Q1 covers 30 concepts, card floor 43 → 42, campaig
 `math.geom.circle-area` as its domain-card sample. Gates: full suite 1,000 files, 25,530 tests passed (the one failing file was the
 sample fix above, re-run green); `tsc` ratchet 0 ≤ 0; `validate-visualization-coverage` PASS.
 
-**Still open under B2**
-- `eng.grammar.nouns`: last. English serves NO static figure by policy (`englishVisualAudit.test.ts` pins it: "if one appears it
-  needs a real audit"), so a sorting figure is the first English registry figure and needs its own render audit, not the envelope one.
+**`eng.grammar.nouns` — now its own figure (2026-10-18), the first English static figure.** It was `no-figure:no-faithful-visual`: English had
+no registry figure at all, so a learner who asked for a picture was told there was none. Registered in `conceptSceneParams.ts` with the shared
+comparison generator: four groups (Person · Place · Thing · Idea), two or three example nouns each, one stage per group. Faithfulness policy: every
+kind is the KG description's, every example word is one the concept's own teaching asset (teacher, Ms. Chen, city, Paris, dog, book) or EB entry
+(happiness, freedom, honesty) uses, the capital-letter remark is the asset's, and the idea group carries the EB's central point; no number, no extra
+rule. `src/tests/englishStaticFigureContent.test.ts` (8 tests, mutation-checked) re-derives this from the drawn groups against those sources. English
+had no audit for a static figure (the envelope audit feeds synthetic specs), so one was added: `scripts/qa/englishVisual/staticFigures.ts` +
+`staticFingerprint.ts`, the dev page accepts `subject=english`, record `docs/qa/english-visual-audit/static-figures.json` (PASS at 390 px dark and
+light, 1280 px, column), gate `src/tests/englishStaticFigureAudit.test.ts`; the old pin in `englishVisualAudit.test.ts` ("English serves no static
+figure") now means "no static figure the static audit does not cover". Docs: `docs/qa/ENGLISH_VISUAL_VALIDATION.md` (new section), CLAUDE.md line.
+Gates: full suite 1,002 files, 25,542 tests passed; `tsc` ratchet 0 ≤ 0; `validate-visualization-coverage` PASS.
+Not drawn on purpose: countable / uncountable and collective nouns (a second classification would be a second figure). Not verified: production.
+
+**B2 is closed.** Open items under this plan: computer science only (skipped on owner instruction).
 
 ### Next
 
-B2: `eng.grammar.nouns` (see above), then, when the owner un-skips computer science, B1 Path A (89 floor cards) and B4 depth (327
-cards) for CS.
+Computer science, when the owner un-skips it: B1 Path A (89 floor cards) and B4 depth (327 cards).

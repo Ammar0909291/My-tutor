@@ -22,8 +22,8 @@ import { parseVisualSpec } from '@/lib/visuals/visualSpec'
  */
 export const metadata = { robots: { index: false, follow: false } }
 
-/** Subjects the audit page may resolve under. Absent => 'physics', so the existing Physics tooling is byte-identical; the Mathematics audit passes `subject=mathematics`. */
-const AUDIT_SUBJECTS = new Set(['physics', 'mathematics'])
+/** Subjects the audit page may resolve under. Absent => 'physics', so the existing Physics tooling is byte-identical; the Mathematics audit passes `subject=mathematics`, the English static-figure audit `subject=english`. */
+const AUDIT_SUBJECTS = new Set(['physics', 'mathematics', 'english'])
 
 export default function PhysicsAuditPage({ searchParams }: { searchParams?: { concept?: string; fw?: string; subject?: string; fixture?: string; scope?: string } }) {
   if (process.env.NODE_ENV === 'production') notFound()

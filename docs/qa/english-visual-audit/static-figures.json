@@ -1,0 +1,56 @@
+{
+ "generatedAt": "2026-10-18T05:27:55.368Z",
+ "renderScope": "lesson",
+ "fingerprint": "0b9a282cc838393ea0300ef3ebf90f2c90fc3908cb4e7283112d49e57b8cd557",
+ "fingerprints": {
+  "eng.grammar.nouns": "0b9a282cc838393e"
+ },
+ "viewports": [
+  "mobile",
+  "desktop",
+  "desktop-column"
+ ],
+ "themes": [
+  "dark",
+  "light"
+ ],
+ "summary": {
+  "concepts": 1,
+  "verdicts": {
+   "PASS": 1
+  },
+  "withMissingRenders": 0
+ },
+ "concepts": [
+  {
+   "id": "eng.grammar.nouns",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "generator",
+   "scope": "concept",
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "evidence": [
+    "englishStaticFigureContent.test.ts"
+   ],
+   "states": 4,
+   "missing": [],
+   "fail": 0,
+   "review": [],
+   "failures": []
+  }
+ ]
+}

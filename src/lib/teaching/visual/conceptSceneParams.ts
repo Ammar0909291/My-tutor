@@ -1117,6 +1117,23 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   // Mathematics visual campaign, batch 43 (2026-10-17). See mathCoreScenesB43.ts.
   'math.trig.unit-circle':               buildUnitCircleScene,
 
+  // English: the first concept with a figure of its own (2026-10-18, learner-experience backlog B2). A noun names a person, a place, a
+  // thing or an idea; the idea group carries the point the Educational Brain entry makes (an abstract noun is still a noun although
+  // nothing can be touched). Examples are the ones the concept's own teaching asset and EB entry use; nothing else is stated.
+  'eng.grammar.nouns': () => buildCellComparisonScene({
+    conceptId: 'eng.grammar.nouns',
+    captioned: true, // wrap to the column: the clauses are longer than a name
+    gridFromGroups: 4, // four groups: a 2x2 grid, not four columns on a phone
+    title: 'Nouns Name People, Places, Things and Ideas',
+    teachingGoal: 'A noun names a person, a place, a thing or an idea. An idea noun (happiness, freedom, honesty) names a quality, feeling or state that cannot be touched, but it is still a noun: the test is whether the word names any of the four, not whether you can touch it.',
+    groups: [
+      { label: 'Person', description: 'a noun can name a person: a general one (teacher) or one particular person (Ms. Chen, written with a capital letter)', items: ['teacher', 'Ms. Chen'] },
+      { label: 'Place', description: 'a noun can name a place: a general one (city) or one particular place (Paris, written with a capital letter)', items: ['city', 'Paris'] },
+      { label: 'Thing', description: 'a noun can name a thing you can touch', items: ['dog', 'book'] },
+      { label: 'Idea', description: 'a noun can name a quality, feeling or state that you cannot touch; it is still a noun', items: ['happiness', 'freedom', 'honesty'] },
+    ],
+  }),
+
   // The Punnett generator is single-gene by construction (genotypes are two
   // alleles). A dihybrid cross drawn as a monohybrid square teaches the wrong
   // thing, so no scene is produced and the concept's card is used instead.

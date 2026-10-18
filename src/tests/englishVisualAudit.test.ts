@@ -1,12 +1,12 @@
 /**
  * ENGLISH VISUAL VALIDATION — FRESHNESS + CLEANLINESS GATE (envelope audit).
  *
- * English serves NO static figure: `resolveVisual` returns "no figure" for every English concept, so every English figure a learner sees is generated at runtime
+ * English serves almost no static figure (only `eng.grammar.nouns`, audited separately): `resolveVisual` returns "no figure" for every other English concept, so nearly every English figure a learner sees is generated at runtime
  * (admitted by `parseVisualSpec` / `payloadBlockers`, cached in production). The served set therefore cannot be enumerated offline. What is audited is the ENVELOPE:
  * the real renderer fed 222 fixture specs (one realistic `process_flow` per English concept built from that concept's own authored wording + 6 worst-case schema-limit
  * specs), rendered in Chromium at 390 / 1280 / column width, dark + light, under the real lesson page's token scope. See scripts/qa/englishVisual/buildFixtures.ts and
  * docs/history/english-visual-validation.md. This gate proves the committed record still describes the fixtures, that nothing failed, and that English has not
- * silently gained a static figure (which would need a real audit).
+ * silently gained a static figure (which would need a real audit: since 2026-10-18 `eng.grammar.nouns` has one, see englishStaticFigureAudit.test.ts).
  */
 import { existsSync, readFileSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
@@ -46,10 +46,11 @@ describe('English visual audit — the committed envelope audit describes the fi
     expect(audit!.concepts.filter((c) => c.verdict === 'FAIL' || c.fail > 0).map((c) => c.id)).toEqual([])
   })
 
-  it('English still serves no static figure — if one appears it needs a real audit, not this envelope one', () => {
+  it('English serves a static figure ONLY for the concepts the static-figure audit covers — any other needs a real audit, not this envelope one', () => {
     const kg = JSON.parse(readFileSync('docs/english/kg/graph.json', 'utf8'))
     const ids: string[] = (Array.isArray(kg) ? kg : (kg.concepts ?? kg.nodes)).map((n: { id: string }) => n.id)
     const served = ids.filter((id) => resolveVisual({ message: 'show me a diagram', lessonConceptId: id, learnerRequest: 'diagram', subject: 'english' } as Parameters<typeof resolveVisual>[0]).graphical)
-    expect(served, 'these English concepts now serve a static figure: audit them like the Mathematics figures (scripts/qa/mathVisual)').toEqual([])
+    const audited = Object.keys((JSON.parse(readFileSync('docs/qa/english-visual-audit/static-figures.json', 'utf8')) as { fingerprints: Record<string, string> }).fingerprints)
+    expect(served.filter((id) => !audited.includes(id)), 'these English concepts now serve a static figure that no audit covers: scripts/qa/englishVisual/staticFigures.ts (docs/qa/ENGLISH_VISUAL_VALIDATION.md)').toEqual([])
   }, 120_000)
 })

@@ -3,7 +3,7 @@
 **Result: 222 / 222 PASS (0 REVIEW, 0 FAIL), 888 Chromium renders, 0 missing.** This is an ENVELOPE audit, not an audit of what learners were served — read "What this does and does not prove".
 
 ## Why an envelope audit
-English serves NO static figure: `resolveVisual` returns "no figure" for all 216 English concepts (pinned by `src/tests/englishVisualAudit.test.ts`, which fails if one appears). Every English figure a learner sees is generated at runtime (Tier 2/3), admitted by `parseVisualSpec` / `payloadBlockers`, and cached in production. There is no committed corpus of what was served and this environment has no production-data access, so the served set cannot be enumerated here.
+English serves almost no static figure: `resolveVisual` returns "no figure" for 215 of the 216 English concepts (pinned by `src/tests/englishVisualAudit.test.ts`, which fails if a concept serves a static figure the static-figure audit below does not cover). The one exception, `eng.grammar.nouns` (2026-10-18), has its own audit. Every English figure a learner sees is generated at runtime (Tier 2/3), admitted by `parseVisualSpec` / `payloadBlockers`, and cached in production. There is no committed corpus of what was served and this environment has no production-data access, so the served set cannot be enumerated here.
 
 ## What was rendered
 - 216 `process_flow` fixtures, one per English concept, built deterministically from that concept's own authored wording (`key_ideas` in `docs/english/teaching-assets/assets.json`: long sentences with quotes, parentheses, dashes, slashes, phonics notation), cut to the schema limits (title ≤ 60, note ≤ 140, 2–12 steps). 55 key ideas cross-reference other concepts by internal id; the fixture shows the concept NAME instead (a figure must never show an id, audit rule ST-04).
@@ -36,3 +36,24 @@ cp tmp/english-v/audit-summary.json docs/qa/english-visual-audit/
 npx vitest run src/tests/englishVisualAudit.test.ts
 ```
 Partial re-render of named fixtures: `renderAudit.ts --redo --concepts <ids>` then `validate.ts` and merge with `scripts/qa/physicsVisual/merge-audit.ts`.
+
+
+## Static figures — `eng.grammar.nouns` (2026-10-18)
+`eng.grammar.nouns` is the first English concept served a figure of its own: a four-group classification scene (Person · Place · Thing · Idea,
+two or three example nouns each), built with the shared comparison generator and registered in `conceptSceneParams.ts`. Backlog item B2
+(`docs/history/learner-experience-backlog-plan-2026-10-16.md`): the learner who asked for a picture used to be told there was none.
+- **Faithfulness.** Nothing is invented. The four kinds are the KG description's ("people, places, things, or ideas"); every example (teacher, Ms. Chen,
+  city, Paris, dog, book — the teaching asset; happiness, freedom, honesty — the Educational Brain entry) is a word the concept's own sources use; the
+  capital-letter remark is the asset's ("proper … capitalized"); the idea group carries the EB's central point (an abstract noun is still a noun although
+  nothing can be touched). It states no number and no rule beyond these. `src/tests/englishStaticFigureContent.test.ts` re-derives all of this from the DRAWN
+  groups and labels against those sources (mutation-checked: a word not in the sources, a dropped "can touch").
+- **Render audit.** Real resolver (subject `english`) + real renderer under the lesson token scope, 390 px dark and light, 1280 px and the 50/50 column:
+  PASS on every viewport (structure, readability, contrast, layout; semantic evidence = the content test). Tooling:
+  `scripts/qa/englishVisual/staticFigures.ts` (the dev page `/dev/physics-audit` now accepts `subject=english`), record
+  `docs/qa/english-visual-audit/static-figures.json`, fingerprints in `staticFingerprint.ts`.
+- **Gate.** `src/tests/englishStaticFigureAudit.test.ts` fails, naming the concept, when the served figure differs from the audited one, when an English
+  concept serves a static figure the audit does not cover, when a render is missing or a verdict is not PASS. Re-audit:
+  `npx next dev -p 3000` (load one page first) → `npx tsx scripts/qa/englishVisual/staticFigures.ts --out tmp/english-static` → copy
+  `tmp/english-static/audit-summary.json` to `docs/qa/english-visual-audit/static-figures.json`.
+- **Not proved.** That the figure helps a learner (no production sample: it needs a disposable account), and the countable / uncountable and collective
+  distinctions are not drawn (the figure is the four kinds only, by design — a second classification would be a second figure).
