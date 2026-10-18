@@ -43,7 +43,7 @@ import { availableModes, redactExplainer, redactText, stageView, withheldValues,
 import { choiceOptionAvailable, controlsFor, defaultValueOf, rebuildScene, variablesFor, type SceneParams, type SceneVariable } from '@/lib/teaching/visual/parametricScenes'
 import { meshColor, readableTextColor, themeColor } from '@/lib/teaching/sceneGenerators/visualDesign'
 import {
-  availableAnimations, stageAt, sweepFrame, traceObjects, tracePlayhead,
+  availableAnimations, progressAt, stageAt, sweepFrame, togglePlayback, traceObjects, tracePlayhead,
   type SceneAnimation,
 } from '@/lib/teaching/visual/sceneAnimation'
 import { usePrefersReducedMotion } from './usePrefersReducedMotion'
@@ -173,26 +173,35 @@ export function ExplainerFigure({
     () => (simulation.active ? [] : availableAnimations(shown, variables)),
     [shown, variables, simulation.active],
   )
+  // `playing` is the animation the learner chose (its panel and scrub bar show);
+  // `running` is whether the clock is driving it. Pausing clears only `running`,
+  // so the position is kept and Play resumes from it — see togglePlayback.
   const [playing, setPlaying] = useState<SceneAnimation | null>(null)
+  const [running, setRunning] = useState(false)
   const [progress, setProgress] = useState(0)
+  // The clock reads the position it is resuming from; assigned during render so
+  // the effect below starts from the latest value without depending on it.
+  const progressRef = useRef(0)
+  progressRef.current = progress
 
   // One clock, owned here; the animation module stays pure. Under reduced
   // motion nothing is ever driven — the same animations remain available, but
   // only as a scrub the learner moves themselves, which shows the identical
-  // information without motion.
+  // information without motion. A pass that was paused or scrubbed continues
+  // from where it stands (`progressAt`), it does not begin again.
   useEffect(() => {
-    if (!playing || reducedMotion) return
+    if (!playing || !running || reducedMotion) return
     let frame = 0
-    let start = 0
+    let startedAt: number | null = null
+    const from = progressRef.current
     const tick = (now: number) => {
-      if (!start) start = now
-      const elapsed = (now - start) % playing.durationMs
-      setProgress(elapsed / playing.durationMs)
+      if (startedAt === null) startedAt = now
+      setProgress(progressAt(playing.durationMs, from, startedAt, now))
       frame = requestAnimationFrame(tick)
     }
     frame = requestAnimationFrame(tick)
     return () => cancelAnimationFrame(frame)
-  }, [playing, reducedMotion])
+  }, [playing, running, reducedMotion])
 
   // An animation belongs to the figure it was derived from. If the learner
   // moves a slider or switches concept mid-play, stop rather than drive a
@@ -200,6 +209,7 @@ export function ExplainerFigure({
   useEffect(() => {
     if (playing && !animations.some((a) => a.id === playing.id)) {
       setPlaying(null)
+      setRunning(false)
       setProgress(0)
     }
   }, [animations, playing])
@@ -750,19 +760,24 @@ export function ExplainerFigure({
             <div className={styles.bar} style={{ marginTop: 8 }} role="group" aria-label="Animations">
               {animations.map((a) => {
                 const active = playing?.id === a.id
+                // In motion (Pause icon) only while the clock is driving it: a paused
+                // animation is still the chosen one, standing where it stopped.
+                const inMotion = active && running && !reducedMotion
                 return (
                   <button
                     key={a.id}
                     type="button"
                     className={`${styles.chip}${active ? ` ${styles.chipActive}` : ''}`}
-                    aria-pressed={active}
+                    aria-pressed={active && (inMotion || reducedMotion)}
                     onClick={() => {
-                      setPlaying(active ? null : a)
-                      setProgress(0)
+                      const next = togglePlayback({ animation: playing, running, progress }, a, reducedMotion)
+                      setPlaying(next.animation)
+                      setRunning(next.running)
+                      setProgress(next.progress)
                     }}
                   >
                     <span className={styles.chipIcon} aria-hidden="true">
-                      {active && !reducedMotion ? <Pause size={11} /> : <Play size={11} />}
+                      {inMotion ? <Pause size={11} /> : <Play size={11} />}
                     </span>
                     {a.label}
                   </button>
@@ -810,12 +825,23 @@ export function ExplainerFigure({
                   step={0.01}
                   value={progress}
                   aria-label={`Position in ${playing.label}`}
-                  onChange={(e) => setProgress(Number(e.target.value))}
+                  onChange={(e) => { setRunning(false); setProgress(Number(e.target.value)) }}
                 />
                 <output className={styles.controlValue}>
                   {sweep ? `${playing.variable?.key ? '' : ''}${sweep.value}` : `${Math.round(progress * 100)}%`}
                 </output>
               </div>
+              {/* Pause keeps the position; Stop is the way to leave the animation and put the figure back. */}
+              {!reducedMotion && (
+                <button
+                  type="button"
+                  className={styles.chip}
+                  style={{ marginTop: 6 }}
+                  onClick={() => { setPlaying(null); setRunning(false); setProgress(0) }}
+                >
+                  Stop
+                </button>
+              )}
             </div>
           )}
 

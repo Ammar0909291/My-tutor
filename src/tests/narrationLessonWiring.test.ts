@@ -248,7 +248,10 @@ describe('word-level highlighting is wired end to end through the hook and both 
     expect(BROWSER_ENGINE).not.toMatch(/utter\.onboundary\s*=/)
     expect(BROWSER_ENGINE).not.toContain('spokenCharIndexToWordIndex')
     expect(BROWSER_ENGINE).not.toContain('pacingGuard')
-    expect(BROWSER_ENGINE).toContain('utter.onstart = () => { if (!disposed) callbacks.onWordStart(index, null) }')
+    // onstart reports the WHOLE segment (wordIndex null), and only for the current utterance (the liveness guard replaced the bare
+    // `!disposed` on 2026-10-18 so a late event from a superseded utterance cannot move the highlight).
+    expect(BROWSER_ENGINE).toContain('utter.onstart = () => { if (current()) callbacks.onWordStart(index, null) }')
+    expect(BROWSER_ENGINE).toContain('const current = () => !disposed && seq === utteranceSeq')
   })
 
   it('the browser engine no longer imports or invents any timing correction (no clock, no held-back delay)', () => {
@@ -279,5 +282,25 @@ describe('i18n keys added for narration controls are present in every locale blo
       const occurrences = I18N.split(`${key}:`).length - 1
       expect(occurrences, `expected ${key} to be defined in all 3 locale blocks`).toBeGreaterThanOrEqual(3)
     }
+  })
+})
+
+describe('a paused narration is not restarted by the speed or voice control (reported 2026-10-18)', () => {
+  const LESSON = read('src/components/learn/LessonScreen.tsx')
+  const HOOK = read('src/hooks/useNarrationPlayback.ts')
+
+  it('the speed and the voice handlers restart a message only when it is not paused', () => {
+    const guarded = LESSON.split('if (id && !voicePlayback.isPaused(id)) {').length - 1
+    expect(guarded).toBe(2)
+    expect(LESSON).not.toMatch(/const id = speakingIdRef\.current\s*\n\s*if \(id\) \{/)
+  })
+
+  it('the hook tells the playback owner when it pauses and resumes', () => {
+    expect(HOOK).toContain('voicePlayback.setPaused(id, true)')
+    expect(HOOK).toContain('voicePlayback.setPaused(id, false)')
+  })
+
+  it('a setting changed while paused drops the paused engine so Play rebuilds it at the preserved segment', () => {
+    expect(HOOK).toMatch(/if \(stateRef\.current\.status !== 'PAUSED'\) return\s*\n\s*engineRef\.current\?\.dispose\(\)\s*\n\s*engineRef\.current = null\s*\n\s*\}, \[speed, voiceType, lang, country\]\)/)
   })
 })

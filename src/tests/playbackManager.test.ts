@@ -266,3 +266,54 @@ describe('the shared singleton', () => {
     expect(b.live).toBe(0)
   })
 })
+
+// ── a paused playback is registered but not speaking ─────────────────────────────────────────────────────────────────
+// Reported 2026-10-18: after pausing the read-aloud, changing the speed (the 1.5x control) restarted the message from the top,
+// because the settings handler saw a "playing id" and restarted it. A pause keeps the id registered, so the manager has to say so.
+describe('pause state', () => {
+  it('is false until the owner pauses, true while paused, false again once resumed', () => {
+    const m = new VoicePlaybackManager()
+    const a = makeSource()
+    m.start('a', a.source)
+    expect(m.isPaused('a')).toBe(false)
+    m.setPaused('a', true)
+    expect(m.isPaused('a')).toBe(true)
+    expect(m.isPlaying('a')).toBe(true)                    // still registered: Play resumes this very source
+    expect(a.calls.disposed).toBe(0)                       // and it was not disposed
+    m.setPaused('a', false)
+    expect(m.isPaused('a')).toBe(false)
+  })
+
+  it('belongs to one id: pausing a stale id does nothing, and another playback starts un-paused', () => {
+    const m = new VoicePlaybackManager()
+    m.start('a', makeSource().source)
+    m.setPaused('b', true)                                 // b is not the playing id
+    expect(m.isPaused('b')).toBe(false)
+    expect(m.isPaused('a')).toBe(false)
+    m.setPaused('a', true)
+    m.start('b', makeSource().source)                      // anything else claiming the voice clears the pause
+    expect(m.isPaused('a')).toBe(false)
+    expect(m.isPaused('b')).toBe(false)
+  })
+
+  it('is cleared by stop() and by the playback finishing', () => {
+    const m = new VoicePlaybackManager()
+    const a = makeSource()
+    m.start('a', a.source)
+    m.setPaused('a', true)
+    m.stop()
+    expect(m.isPaused('a')).toBe(false)
+    const b = makeSource()
+    m.start('b', b.source)
+    m.setPaused('b', true)
+    b.end()
+    expect(m.isPaused('b')).toBe(false)
+  })
+
+  it('does not change the state event shape', () => {
+    const m = new VoicePlaybackManager()
+    m.start('a', makeSource().source)
+    m.setPaused('a', true)
+    expect(Object.keys(m.getState()).sort()).toEqual(['generation', 'playingId'])
+  })
+})

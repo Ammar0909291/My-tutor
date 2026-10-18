@@ -119,6 +119,9 @@ export function createBrowserSpeechEngine(
   let disposed = false
   let paused = false
   let pendingResumeIndex: number | null = null
+  /** Which utterance is the current one. A late event from a superseded utterance (an earlier segment, or the one a pause
+   *  cut short) must never be read as the current one ending or failing. */
+  let utteranceSeq = 0
   let timeoutHandle: ReturnType<typeof setTimeout> | null = null
   /** The segment index `timeoutHandle` (if set) is scheduled to start —
    *  tracked separately so pause() can recover it after clearing the timer. */
@@ -141,6 +144,8 @@ export function createBrowserSpeechEngine(
     // as "full stop"; the breathing pause between segments already supplies
     // the rhythm cue the period would have.
     const segmentText = segment.spokenText.replace(/\.\s*$/, '')
+    const seq = ++utteranceSeq
+    const current = () => !disposed && seq === utteranceSeq
     const utter = new Utterance(segmentText)
     utter.lang = locale
     utter.pitch = voiceSettings.pitch
@@ -152,14 +157,24 @@ export function createBrowserSpeechEngine(
     // The ONLY two claims this engine makes: the segment starts (real,
     // unconditional per spec) and the segment ends (same). Nothing
     // in between is displayed — see this file's header for why.
-    utter.onstart = () => { if (!disposed) callbacks.onWordStart(index, null) }
+    utter.onstart = () => { if (current()) callbacks.onWordStart(index, null) }
     utter.onend = () => {
-      if (disposed) return
+      if (!current()) return
+      // It ended while the learner had paused. Where pause() freezes the utterance this cannot happen; on a platform whose pause()
+      // ends it instead, the position inside the segment is gone, so the segment is re-read on resume. Skipping on to the next
+      // segment would drop the rest of this one.
+      if (paused) { pendingResumeIndex = index; return }
       const next = index + 1
       if (next >= segments.length) { callbacks.onEnded(); return }
       scheduleNext(next, pauseBeforeSegment(segments[next].spokenText))
     }
-    utter.onerror = () => { if (!disposed) callbacks.onError() }
+    utter.onerror = () => {
+      if (!current()) return
+      // Same platforms: pause() cancels the utterance and raises an error ('interrupted' / 'canceled'). That is the pause, not a
+      // failure — reporting it showed "Playback failed" and made the next Play start the whole message again.
+      if (paused) { pendingResumeIndex = index; return }
+      callbacks.onError()
+    }
     synth.speak(utter)
   }
 
@@ -187,10 +202,14 @@ export function createBrowserSpeechEngine(
       if (disposed || paused) return
       paused = true
       if (timeoutHandle !== null) {
+        // Between two segments nothing is speaking: there is nothing for the synth to pause. (Pausing it anyway left the whole
+        // queue paused, so the next segment, spoken on resume, was queued behind a pause nobody lifted — silence while the
+        // controls said "playing".)
         clearTimeout(timeoutHandle)
         timeoutHandle = null
         pendingResumeIndex = scheduledIndex
         scheduledIndex = null
+        return
       }
       synth?.pause()
     },
@@ -200,6 +219,8 @@ export function createBrowserSpeechEngine(
       if (pendingResumeIndex !== null) {
         const idx = pendingResumeIndex
         pendingResumeIndex = null
+        // Lift any pause the synth still holds, or the segment queued next is spoken into silence.
+        synth?.resume()
         speakFrom(idx)
         return
       }

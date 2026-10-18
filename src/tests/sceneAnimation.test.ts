@@ -195,3 +195,63 @@ describe('every offered animation, on every real figure, states what it teaches'
     }
   })
 })
+
+// ── pause is a pause, not a stop ─────────────────────────────────────────────────────────────────────────────────
+// Reported 2026-10-18: pressing the pause control on "Play the stages" threw the position away and the next Play began the
+// pass again. The control showed a Pause icon, but its click handler cleared the chosen animation and reset the progress to 0.
+import { IDLE_PLAYBACK, progressAt, togglePlayback, type AnimationPlayback } from '@/lib/teaching/visual/sceneAnimation'
+import { readFileSync } from 'node:fs'
+
+describe('pausing an animation keeps its place', () => {
+  const stages = availableAnimations({
+    id: 's', title: 'Four stages', sceneType: 'diagram',
+    steps: [1, 2, 3, 4].map((n) => ({ objects: [{ type: 'label', id: `l${n}`, position: [n, 0, 0], text: `Stage ${n}`, color: ROLE.ink }] })),
+  } as SceneSpec).find((a) => a.kind === 'stages')!
+  const other = { ...stages, id: 'trace:x', kind: 'trace' as const, label: 'Play the motion' }
+
+  it('the first click chooses the animation and runs it from the start', () => {
+    expect(togglePlayback(IDLE_PLAYBACK, stages, false)).toEqual({ animation: stages, running: true, progress: 0 })
+  })
+
+  it('a second click PAUSES: the animation stays chosen and its position is untouched', () => {
+    const mid: AnimationPlayback = { animation: stages, running: true, progress: 0.62 }
+    const paused = togglePlayback(mid, stages, false)
+    expect(paused.animation).toBe(stages)
+    expect(paused.running).toBe(false)
+    expect(paused.progress).toBe(0.62)
+  })
+
+  it('a third click RESUMES from where it paused, not from 0', () => {
+    const paused: AnimationPlayback = { animation: stages, running: false, progress: 0.62 }
+    expect(togglePlayback(paused, stages, false)).toEqual({ animation: stages, running: true, progress: 0.62 })
+  })
+
+  it('choosing a different animation starts that one from 0', () => {
+    expect(togglePlayback({ animation: stages, running: true, progress: 0.62 }, other, false)).toEqual({ animation: other, running: true, progress: 0 })
+  })
+
+  it('under reduced motion nothing runs; the chosen animation is only a scrub and a second click closes it', () => {
+    const opened = togglePlayback(IDLE_PLAYBACK, stages, true)
+    expect(opened).toEqual({ animation: stages, running: false, progress: 0 })
+    expect(togglePlayback({ ...opened, progress: 0.4 }, stages, true)).toEqual(IDLE_PLAYBACK)
+  })
+
+  it('the clock continues from the paused position and loops', () => {
+    const d = stages.durationMs
+    expect(progressAt(d, 0, 1000, 1000)).toBe(0)                                  // a fresh pass starts at 0
+    expect(progressAt(d, 0.62, 5000, 5000)).toBeCloseTo(0.62, 10)                 // resuming starts exactly where it paused
+    expect(progressAt(d, 0.62, 5000, 5000 + d * 0.2)).toBeCloseTo(0.82, 10)       // and moves on from there
+    expect(progressAt(d, 0.9, 0, d * 0.25)).toBeCloseTo(0.15, 10)                 // wraps past the end
+    expect(progressAt(0, 0.5, 0, 100)).toBe(0)                                    // a degenerate duration cannot produce NaN
+  })
+
+  it('the figure wires the pause control to togglePlayback and the clock to progressAt (no reset on pause)', () => {
+    const src = readFileSync('src/components/school/visuals/ExplainerFigure.tsx', 'utf8')
+    expect(src).toMatch(/togglePlayback\(\{ animation: playing, running, progress \}, a, reducedMotion\)/)
+    expect(src).toMatch(/progressAt\(playing\.durationMs, from, startedAt, now\)/)
+    // the old handler: `setPlaying(active ? null : a); setProgress(0)` — a pause that cleared the animation and the position
+    expect(src).not.toMatch(/setPlaying\(active \? null : a\)/)
+    // dragging the position bar pauses the clock instead of being overwritten by it on the next frame
+    expect(src).toMatch(/onChange=\{\(e\) => \{ setRunning\(false\); setProgress\(Number\(e\.target\.value\)\) \}\}/)
+  })
+})

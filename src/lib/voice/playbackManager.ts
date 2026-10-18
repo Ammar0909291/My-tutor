@@ -51,6 +51,8 @@ export class VoicePlaybackManager {
   private generation = 0
   private playingId: PlaybackId | null = null
   private dispose: (() => void) | null = null
+  /** The id whose owner has PAUSED it (still the playing id: pausing keeps the source registered so Play can resume it). */
+  private pausedId: PlaybackId | null = null
   private listeners = new Set<Listener>()
 
   getState(): PlaybackState {
@@ -85,6 +87,7 @@ export class VoicePlaybackManager {
     this.dispose = null
     const wasPlaying = this.playingId !== null
     this.playingId = null
+    this.pausedId = null
     if (dispose) {
       // A throwing disposer must not leave the manager wedged — state is
       // already cleared above, so we are consistent either way.
@@ -111,6 +114,7 @@ export class VoicePlaybackManager {
       if (this.generation !== generation) return
       this.dispose = null
       this.playingId = null
+      this.pausedId = null
       this.emit()
     }
 
@@ -150,6 +154,22 @@ export class VoicePlaybackManager {
   /** True when this id is the one currently playing. */
   isPlaying(id: PlaybackId): boolean {
     return this.playingId === id
+  }
+
+  /**
+   * The owner of `id` paused it (or resumed it). A pause keeps the id registered — the source is not disposed, so Play continues it
+   * — which means "playing id" alone cannot tell a voice that is speaking from one that is waiting. Anything that would RESTART the
+   * playing message (a speed or voice change) must ask `isPaused` first: restarting a paused message starts speech the learner
+   * had stopped, from the beginning. No state event is emitted: nothing mirrors this flag into the UI.
+   */
+  setPaused(id: PlaybackId, paused: boolean): void {
+    if (this.playingId !== id) return
+    this.pausedId = paused ? id : null
+  }
+
+  /** True when `id` is the registered playback AND its owner has paused it. */
+  isPaused(id: PlaybackId): boolean {
+    return this.playingId === id && this.pausedId === id
   }
 
   /** Full teardown: stop playback AND drop every listener. For unmount. */

@@ -278,6 +278,33 @@ figure") now means "no static figure the static audit does not cover". Docs: `do
 Gates: full suite 1,002 files, 25,542 tests passed; `tsc` ratchet 0 ≤ 0; `validate-visualization-coverage` PASS.
 Not drawn on purpose: countable / uncountable and collective nouns (a second classification would be a second figure). Not verified: production.
 
+### Defect: pausing restarts from the beginning (reported 2026-10-18, with a screenshot of the Cytoskeleton figure and a Mathematics lesson)
+
+Three separate causes, found by reading every pause control the lesson page has:
+1. **The figure's "Play the stages" / "Play the motion" / "Sweep" control (`ExplainerFigure.tsx`) — reproduced in Chromium, fixed.** While
+   an animation ran the control showed a Pause icon, but its click handler was `setPlaying(active ? null : a); setProgress(0)`: it cleared
+   the chosen animation and threw the position away, so the next click started the pass over. Now `playing` (chosen) and `running` (clock on)
+   are separate (`togglePlayback` / `progressAt` in `sceneAnimation.ts`, pure and unit-tested): a click on the running animation PAUSES it and
+   keeps the position, the next click resumes from there, a different animation starts from 0, reduced motion keeps the old open/close
+   scrub. Dragging the position bar pauses the clock (before, the next frame overwrote the drag). A "Stop" button leaves the animation.
+   Checked in the real renderer: running 21 % → paused 22 % → still 22 % 1.2 s later → resumed 30 % → Stop closes the panel.
+2. **The read-aloud (browser speech engine) — fixed against a fake Web Speech API; NOT reproduced on a phone.** The transcript showed
+   "Playback failed" on the message. Where `speechSynthesis.pause()` is implemented as a cancel (some mobile browsers), the cancel arrives as an
+   error/end event while the engine is paused; it was reported as a failure (state ERROR → the next Play = `startFresh(0)`, the whole message
+   again). Now an error/end that arrives while paused is the pause itself: the engine remembers the segment and Play re-reads it (not the
+   message from the top, not the next segment). Also fixed: a pause between two segments paused the synth with nothing speaking and the next
+   segment was then queued behind a pause nobody lifted (silence while the controls said "playing"); a late event from a superseded
+   utterance can no longer fail or advance the current one. Genuine errors still report.
+3. **Speed / voice control while paused — fixed.** The 1.5x control (and the voice picker) restarted whatever `voicePlayback` held as the playing
+   id, and a PAUSED narration is still the playing id, so changing the speed while paused started the message again from the top. The manager
+   now has `setPaused` / `isPaused` (the hook sets it on pause/resume, any other playback clears it), the two handlers skip a paused message,
+   and the hook drops its paused engine on a settings change so Play rebuilds it at the preserved segment at the new setting.
+Tests: `sceneAnimation.test.ts` (+7), `narrationEngines.test.ts` (+5), `playbackManager.test.ts` (+4), `narrationLessonWiring.test.ts` (+3); each
+mutation-checked (old engine, old handler, old guard all fail them). Checked and found sound: the card figures' Play/Pause
+(`useTeachingPlayback`, `VisualCard`) and the simulation Pause (`simulationControl`) keep their position.
+Gates: full suite 1,002 files, 25,561 tests passed; `tsc` ratchet 0 <= 0.
+Not verified: the read-aloud pause on a real phone (the browser's own implementation cannot be driven from here).
+
 **B2 is closed.** Open items under this plan: computer science only (skipped on owner instruction).
 
 ### Next

@@ -144,6 +144,7 @@ export function useNarrationPlayback(opts: UseNarrationPlaybackOptions): UseNarr
     const current = stateRef.current
     if (needsFreshStart(current)) { startFresh(0); return }
     if (current.status !== 'PAUSED') return
+    voicePlayback.setPaused(id, false)
     if (engineRef.current) {
       engineRef.current.resume()
       // Preserve the EXACT paused word position — native resume() continues
@@ -157,13 +158,24 @@ export function useNarrationPlayback(opts: UseNarrationPlaybackOptions): UseNarr
     // component was unmounted) — rebuild at the preserved index rather than
     // silently restarting from the beginning.
     startFresh(current.activeSegmentIndex ?? 0)
-  }, [segments.length, startFresh])
+  }, [segments.length, startFresh, id])
 
   const pause = useCallback(() => {
     if (stateRef.current.status !== 'PLAYING') return
     engineRef.current?.pause()
+    // Tell the playback owner this id is waiting, so a speed / voice change does not restart it from the top while paused.
+    voicePlayback.setPaused(id, true)
     setState((s) => pausedState(s))
-  }, [])
+  }, [id])
+
+  // A speed, voice or language chosen WHILE PAUSED applies when the learner presses Play: the paused engine was built with the old
+  // settings, so it is dropped and Play rebuilds one at the preserved segment (play() already handles a lost engine that way)
+  // instead of resuming at the old pace — or, as it used to, being restarted from the top by the settings handler.
+  useEffect(() => {
+    if (stateRef.current.status !== 'PAUSED') return
+    engineRef.current?.dispose()
+    engineRef.current = null
+  }, [speed, voiceType, lang, country])
 
   const toggle = useCallback(() => {
     if (stateRef.current.status === 'PLAYING') pause()

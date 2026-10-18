@@ -505,3 +505,84 @@ describe('server audio engine — real currentTime-driven sync + native pause/re
     expect(audio.pauseCalls).toBeGreaterThanOrEqual(1)
   })
 })
+
+// ── pause is a pause: it must never fail the playback or restart the message ─────────────────────────────────────────
+// Reported 2026-10-18 on a phone: pausing the read-aloud showed "Playback failed", and the next Play started the whole
+// message again. On platforms where speechSynthesis.pause() cancels the utterance instead of freezing it, the cancel arrives as
+// an error / end event while the engine is paused; it was reported as a failure (ERROR -> Play = startFresh(0)).
+describe('browser speech engine — a pause that the platform implements as a cancel', () => {
+  beforeEach(() => vi.useFakeTimers())
+  afterEach(() => vi.useRealTimers())
+  const segments = buildNarrationSegments('First sentence. Second sentence. Third sentence.', 'msg')
+  const make = () => {
+    const synth = makeFakeSynth()
+    const started: number[] = []
+    const events = { errors: 0, ended: 0 }
+    const engine = createBrowserSpeechEngine(
+      segments,
+      { lang: 'en', voiceType: 'warm', speed: 1, speechSynthesisImpl: synth as unknown as SpeechSynthesis, UtteranceCtor: FakeUtterance as unknown as typeof SpeechSynthesisUtterance },
+      { onWordStart: (i) => started.push(i), onEnded: () => { events.ended++ }, onError: () => { events.errors++ } },
+    )
+    return { synth, started, events, engine }
+  }
+
+  it('an error raised by the pause is not "Playback failed", and Play re-reads the paused sentence (not the message from the top)', () => {
+    const { synth, started, events, engine } = make()
+    engine.start(0)
+    synth.utterances[0].onend?.(); vi.advanceTimersByTime(5_000)          // segment 0 done, segment 1 begins
+    expect(started).toEqual([0, 1])
+
+    engine.pause()
+    synth.utterances[1].onerror?.()                                        // the platform cancelled the utterance because of the pause
+    expect(events.errors).toBe(0)                                          // not a failure
+
+    engine.resume()
+    expect(synth.resumeCalls).toBeGreaterThanOrEqual(1)                    // any pause the synth still holds is lifted
+    expect(started).toEqual([0, 1, 1])                                     // the paused segment is read again — not segment 0
+    expect(synth.utterances).toHaveLength(3)
+    expect(synth.utterances[2].text).toBe(synth.utterances[1].text)
+  })
+
+  it('an utterance that ENDS because of the pause is re-read on resume, not skipped past', () => {
+    const { synth, started, events, engine } = make()
+    engine.start(0)
+    engine.pause()
+    synth.utterances[0].onend?.()                                          // the platform ended it instead of freezing it
+    vi.advanceTimersByTime(10_000)
+    expect(started).toEqual([0])                                           // nothing advanced while paused
+    expect(events.ended).toBe(0)
+
+    engine.resume()
+    expect(started).toEqual([0, 0])                                        // the same segment again, not segment 1
+  })
+
+  it('a pause between two segments leaves the synth alone, and Play speaks the next segment', () => {
+    const { synth, started, engine } = make()
+    engine.start(0)
+    synth.utterances[0].onend?.()                                          // gap before segment 1
+    engine.pause()
+    expect(synth.pauseCalls).toBe(0)                                       // nothing was speaking: nothing to pause (a paused queue swallowed the next utterance)
+    engine.resume()
+    expect(started).toEqual([0, 1])
+  })
+
+  it('a late event from an utterance that was superseded is ignored', () => {
+    const { synth, started, events, engine } = make()
+    engine.start(0)
+    engine.pause()
+    engine.resume()                                                        // native pause worked: the same utterance continues
+    engine.start(0)                                                        // Replay: a new first utterance
+    expect(synth.utterances).toHaveLength(2)
+    synth.utterances[0].onerror?.()                                        // the old utterance's cancel finally arrives
+    synth.utterances[0].onend?.()
+    expect(events.errors).toBe(0)
+    expect(started).toEqual([0, 0])                                        // and it advanced nothing
+  })
+
+  it('a genuine error while playing is still reported', () => {
+    const { synth, events, engine } = make()
+    engine.start(0)
+    synth.utterances[0].onerror?.()
+    expect(events.errors).toBe(1)
+  })
+})

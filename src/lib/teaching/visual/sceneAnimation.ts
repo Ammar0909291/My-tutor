@@ -264,3 +264,50 @@ export function stageAt(spec: SceneSpec, progress: number): number {
   const t = Math.min(0.9999, Math.max(0, progress))
   return Math.min(total, Math.floor(t * total) + 1)
 }
+
+// ── playback: pause is a pause, not a stop ────────────────────────────────────────────────────────────────────────
+
+/**
+ * What the player holds. `animation` is the one the learner chose (its panel and scrub bar are shown), `running` is whether the
+ * clock is driving it, and `progress` is where it is, 0..1. Choosing and running are separate on purpose: a paused animation is
+ * still the chosen one, standing exactly where it stopped.
+ */
+export interface AnimationPlayback {
+  animation: SceneAnimation | null
+  running: boolean
+  progress: number
+}
+
+export const IDLE_PLAYBACK: AnimationPlayback = { animation: null, running: false, progress: 0 }
+
+/**
+ * What a click on an animation's control does.
+ *
+ * - A different animation (or none chosen): it is chosen and starts running from the beginning.
+ * - The chosen one, in motion: it PAUSES. Its position is kept, so the next click resumes from there. (It used to be cleared and
+ *   reset to 0 — the control showed a pause icon, but pressing it threw the position away and Play started the pass over.)
+ * - The chosen one, paused: it resumes from where it stopped.
+ * - Under reduced motion nothing is ever driven: the chosen animation is only a scrub the learner moves, and clicking its
+ *   control closes it.
+ */
+export function togglePlayback(
+  state: AnimationPlayback,
+  clicked: SceneAnimation,
+  reducedMotion: boolean,
+): AnimationPlayback {
+  const chosen = state.animation?.id === clicked.id
+  if (!chosen) return { animation: clicked, running: !reducedMotion, progress: 0 }
+  if (reducedMotion) return IDLE_PLAYBACK
+  return { ...state, running: !state.running }
+}
+
+/**
+ * Where the clock puts an animation: it was at `fromProgress` when the clock (re)started at `startedAt`, and one pass takes
+ * `durationMs`. Resuming passes the position it paused at, so the pass continues instead of beginning again. Loops, as a
+ * running animation always has.
+ */
+export function progressAt(durationMs: number, fromProgress: number, startedAt: number, now: number): number {
+  if (!(durationMs > 0)) return 0
+  const p = (fromProgress + (now - startedAt) / durationMs) % 1
+  return p < 0 ? p + 1 : p
+}

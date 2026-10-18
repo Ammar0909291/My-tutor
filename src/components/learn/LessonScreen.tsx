@@ -1854,7 +1854,9 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     // and disposes before starting, so no delay is needed (and delays are
     // exactly what made playback nondeterministic).
     const id = speakingIdRef.current
-    if (id) {
+    // A PAUSED narration is not speaking: restarting it here would start speech from the top that the learner had stopped.
+    // The new setting reaches it when they press Play (useNarrationPlayback drops the paused engine on a settings change).
+    if (id && !voicePlayback.isPaused(id)) {
       const msg = messages.find((m) => m.id === id)
       voicePlayback.stop()
       // Restart at the same pacing it was playing at, so changing voice or
@@ -1871,7 +1873,9 @@ export function LessonScreen({ subjectSlug, subjectName, levelDescription, voice
     // and disposes before starting, so no delay is needed (and delays are
     // exactly what made playback nondeterministic).
     const id = speakingIdRef.current
-    if (id) {
+    // A PAUSED narration is not speaking: restarting it here would start speech from the top that the learner had stopped.
+    // The new setting reaches it when they press Play (useNarrationPlayback drops the paused engine on a settings change).
+    if (id && !voicePlayback.isPaused(id)) {
       const msg = messages.find((m) => m.id === id)
       voicePlayback.stop()
       // Restart at the same pacing it was playing at, so changing voice or
