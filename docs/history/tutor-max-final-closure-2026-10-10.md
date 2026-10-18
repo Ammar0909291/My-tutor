@@ -137,3 +137,4 @@ corrected the premise twice, answered from authored content once, and gave a fig
 logged, and the Young's-modulus controls were delivered intact. The brief's exact wording ("the stress-strain graph") is
 outside A-2's figure-pointing scope (a concept-level factual claim). Not demonstrated as a defect in production, so no
 code change. Record: LIVE_REDRIVE_2026-10-10.md.
+Closed by the owner 2026-10-18: A-2 scope left as is; no further A-2 work queued.
