@@ -199,3 +199,24 @@ The graph now contains 125 concepts across 18 domains. Six mathematical foundati
 Structural checks were performed during commit preparation. The repository validator, TypeScript checks, smoke test, and CI were not executed in this remote-edit session. Comprehensive undergraduate coverage remains incomplete; see `docs/history/computer-science-kg-coverage-extension.md`.
 
 **Verdict:** Structurally integrated, but not yet a comprehensive undergraduate CS curriculum.
+
+
+## 8. Undergraduate CS Knowledge Graph Expansion — 2026-10-20
+
+Section 7 records the preceding 125-concept graph state. The current branch expands that state to **145 concepts across 25 domains** by adding 20 non-duplicate concepts and registering seven additional CS domain labels.
+
+| Measure | Current value |
+|---|---:|
+| Canonical graph version | 1.1.0 |
+| Concepts | 145 |
+| Domains | 25 |
+| `requires` edges | 192 |
+| `unlocks` entries | 192, exact inverse of `requires` |
+| `cross_links` entries | 10 |
+| Root / reachable | `cs.found.intro-computers` / 145 of 145 |
+
+The additional concepts cover formal logic and linear algebra; assembly and performance analysis; programming-language paradigms, type systems and compilers; parallel and distributed systems; HCI; graphics; requirements and software architecture; debugging/reliability; secure software engineering; and AI search, knowledge representation, and responsible ML evaluation.
+
+Structural checks against the edited graph found unique IDs, valid prerequisite references, matching inverse unlock edges, no detected prerequisite cycles, complete reachability from the single root, and the exact 10-field schema. The CS smoke-test sample was expanded to 27 representative concepts. **The repository validator, smoke test, type-check, production build, and CI have not been run in this session.**
+
+The teaching-assets inventory remains at 119 entries and was previously reported as placeholder content. No new placeholders were generated and no teaching-content completeness is claimed. Blueprints, authored assets, Educational Brain entries for the new concepts, assessments, and learner-flow QA remain outstanding. No non-CS curriculum files were changed.
