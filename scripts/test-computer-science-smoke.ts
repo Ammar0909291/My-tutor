@@ -64,7 +64,7 @@ const STUDENT = { level:'T1' as const, current_concepts_mastered:[], weak_concep
   misconceptions:[], retention_score:74, learning_speed:'normal' as const, fatigue_level:'low' as const }
 const HISTORY = { recently_attempted:[], success_rate:71, time_on_task:480, error_patterns:[] }
 
-// Representative concepts — one per major domain cluster, all difficulty levels
+// Representative concepts — existing foundations plus CS2023 gap domains
 const IDS = [
   'cs.found.intro-computers',          // foundational / remember
   'cs.prog.python-basics',             // foundational / remember
@@ -82,10 +82,21 @@ const IDS = [
   'cs.math.probability',
   'cs.math.statistics-for-computing',       // research     / analyze
   'cs.oop.polymorphism-overloading',   // advanced     / analyze
+  'cs.math.propositional-predicate-logic', // proficient / apply
+  'cs.math.linear-algebra',               // advanced   / apply
+  'cs.arch.assembly-machine-code',         // advanced   / apply
+  'cs.lang.compilers-interpreters',        // expert     / analyze
+  'cs.parallel.concurrency-models',        // expert     / evaluate
+  'cs.dist.consistency-replication',       // expert     / evaluate
+  'cs.hci.human-computer-interaction',     // proficient / create
+  'cs.graphics.computer-graphics',         // advanced   / apply
+  'cs.se.software-architecture',           // advanced   / create
+  'cs.sec.secure-software-engineering',    // advanced   / evaluate
+  'cs.ai.ml-evaluation-responsibility',    // advanced   / evaluate
 ]
 
 console.log('\n═══════════════════════════════════════════════════════════')
-console.log('PHASE 4 — COMPUTER SCIENCE TEACHING ENGINE SMOKE TEST (10 concepts)')
+console.log('PHASE 4 — COMPUTER SCIENCE TEACHING ENGINE SMOKE TEST (26 concepts)')
 console.log('           via generic subjectKgAdapter (inferDomain, inferConceptType)')
 console.log('═══════════════════════════════════════════════════════════\n')
 
