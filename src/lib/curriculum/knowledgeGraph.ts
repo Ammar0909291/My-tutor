@@ -10,7 +10,7 @@
  *   mathematics  →  docs/mathematics/kg/graph.json       (908 concepts)
  *   physics      →  docs/physics/kg/graph.json           (216 concepts)
  *   chemistry    →  docs/chemistry/kg/graph.json         (186 concepts)
- *   computer_science → docs/computer-science/kg/graph.json (119 concepts)
+ *   computer_science → docs/computer-science/kg/graph.json (145 concepts)
  *   biology      →  docs/biology/kg/graph.json           (199 concepts, 18 domains)
  *   english      →  docs/english/kg/graph.json           (216 concepts)
  *
@@ -228,6 +228,13 @@ function domainLabel(domain: string): string {
     'cs.theory':  'Theory of Computation',
     'cs.se':      'Software Engineering',
     'cs.math': 'Mathematical Foundations for Computer Science',
+    'cs.arch':    'Computer Architecture & Performance',
+    'cs.lang':    'Programming Languages & Compilers',
+    'cs.parallel':'Parallel Computing & Concurrency',
+    'cs.dist':    'Distributed Systems',
+    'cs.hci':     'Human-Computer Interaction',
+    'cs.graphics':'Computer Graphics',
+    'cs.ai':      'Artificial Intelligence & Reasoning',
     'cs.ds':      'Data Science & AI',
     // ── Biology KG: qualified keys ────────────────────────────────────────────
     'bio.found':   'Foundations of Biology',
