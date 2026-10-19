@@ -10881,7 +10881,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           let next = cb.text
           // ONE REGENERATION when the strip left no real reply (a bare
           // "Not quite — the answer is: X", or nothing). See confirmBackRepair.ts.
-          next = (await repairStubReply(next, 'confirm-back')) ?? next
+          // A second try when the first retry was itself a confirm-back or failed: the alternative is the KG intro sentence again, which
+          // taught nothing on a "please continue" turn (live 2026-10-19, chemistry and CS: "In this lesson on X we will look at ...").
+          next = (await repairStubReply(next, 'confirm-back')) ?? (await repairStubReply(next, 'confirm-back')) ?? next
           const { splitVisualPointer: splitCb } = await import('@/lib/teaching/visual/visualAcknowledgement')
           const cbPointer = splitCb(next)
           if (!cbPointer.body.trim()) {
