@@ -5,8 +5,11 @@
 name: validate
 
 on:
+  # Pushes to main, and every pull request. It used to run on a push to ANY branch, so each experimental branch push (the cs/kg-cs2023-expansion-*
+  # versions, 2026-10-20: -v3 and -v4 carry a stale type error that main already fixed in 9bbe9f10) emailed a failed run. A branch that is
+  # meant to land opens a PR, which still runs this gate.
   push:
-    branches: ['**']
+    branches: [main]
   pull_request:
 
 jobs:
