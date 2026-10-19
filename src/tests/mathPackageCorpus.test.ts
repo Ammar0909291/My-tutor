@@ -79,7 +79,7 @@ describe('committed mathematics package artifacts — every artifact loads and t
       if (!ctx || ctx.block.length < 200) failures.push(`${conceptId}: lesson block missing/too thin`)
     }
     expect(failures).toEqual([])
-  })
+  }, 120_000)   // loads every artifact with a cold cache: over the 5 s default when the full suite loads the machine (failed once, 2026-10-19)
 
   it('every artifact carries the required QA baseline: misconceptions, teaching actions, mastery probes, and an explanation surface', () => {
     const failures: string[] = []
