@@ -51,3 +51,10 @@ describe('a bare progress restatement opening a reply is dropped when teaching f
     expect(stripConfirmBack('So you understood the example.').stripped).toBe(false)
   })
 })
+
+describe('"It sounds like ... Is that right?" is a confirm-back (live 2026-10-19, batch 4)', () => {
+  it('is stripped, and ", right?" after "So you understand" too', () => {
+    expect(stripConfirmBack('It sounds like the explanation about the four strategies made sense and you’re ready to keep going. Is that right?').text).toBe('')
+    expect(stripConfirmBack('So you understand the previous explanation and are ready to move on, right?').text).toBe('')
+  })
+})
