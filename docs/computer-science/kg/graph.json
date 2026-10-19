@@ -20,7 +20,7 @@
       "bloom": "remember",
       "mastery_threshold": 0.7,
       "estimated_hours": 2,
-      "description": "History and generations of computers; characteristics of computers \u2014 speed, accuracy, storage, versatility; types \u2014 micro, mini, mainframe, supercomputer; hardware vs software; applications across domains."
+      "description": "History and generations of computers; characteristics of computers — speed, accuracy, storage, versatility; types — micro, mini, mainframe, supercomputer; hardware vs software; applications across domains."
     },
     {
       "id": "cs.found.computer-organisation",
@@ -39,7 +39,7 @@
       "bloom": "understand",
       "mastery_threshold": 0.7,
       "estimated_hours": 3,
-      "description": "CPU components \u2014 ALU, control unit, registers; memory hierarchy; input/output devices; system buses \u2014 data, address, control; the fetch-decode-execute cycle."
+      "description": "CPU components — ALU, control unit, registers; memory hierarchy; input/output devices; system buses — data, address, control; the fetch-decode-execute cycle."
     },
     {
       "id": "cs.found.number-systems",
@@ -68,14 +68,15 @@
       "unlocks": [
         "cs.found.cpu-architecture",
         "cs.sec.cryptography-basics",
-        "cs.theory.finite-automata"
+        "cs.theory.finite-automata",
+        "cs.math.discrete-mathematics"
       ],
       "cross_links": [],
       "difficulty": "developing",
       "bloom": "apply",
       "mastery_threshold": 0.7,
       "estimated_hours": 3,
-      "description": "Boolean algebra \u2014 AND, OR, NOT operations and De Morgan's laws; logic gates including NAND, NOR, XOR; truth tables; half adder and full adder circuits."
+      "description": "Boolean algebra — AND, OR, NOT operations and De Morgan's laws; logic gates including NAND, NOR, XOR; truth tables; half adder and full adder circuits."
     },
     {
       "id": "cs.found.memory-storage",
@@ -92,7 +93,7 @@
       "bloom": "understand",
       "mastery_threshold": 0.7,
       "estimated_hours": 2,
-      "description": "Primary memory \u2014 DRAM, SRAM, ROM variants; secondary storage \u2014 HDD, SSD, optical media; storage units from bit to terabyte; access time vs capacity trade-offs."
+      "description": "Primary memory — DRAM, SRAM, ROM variants; secondary storage — HDD, SSD, optical media; storage units from bit to terabyte; access time vs capacity trade-offs."
     },
     {
       "id": "cs.found.cpu-architecture",
@@ -111,7 +112,7 @@
       "bloom": "analyze",
       "mastery_threshold": 0.75,
       "estimated_hours": 4,
-      "description": "Von Neumann vs Harvard architecture; instruction set architecture \u2014 RISC vs CISC; addressing modes; register file organisation; clock cycles and instruction throughput."
+      "description": "Von Neumann vs Harvard architecture; instruction set architecture — RISC vs CISC; addressing modes; register file organisation; clock cycles and instruction throughput."
     },
     {
       "id": "cs.found.pipelining-cache",
@@ -126,7 +127,7 @@
       "bloom": "analyze",
       "mastery_threshold": 0.75,
       "estimated_hours": 5,
-      "description": "Instruction pipelining and hazards \u2014 structural, data, control; pipeline stalls; cache levels (L1/L2/L3); cache mapping \u2014 direct, associative, set-associative; locality of reference."
+      "description": "Instruction pipelining and hazards — structural, data, control; pipeline stalls; cache levels (L1/L2/L3); cache mapping — direct, associative, set-associative; locality of reference."
     },
     {
       "id": "cs.found.software-concepts",
@@ -159,7 +160,7 @@
       "bloom": "understand",
       "mastery_threshold": 0.7,
       "estimated_hours": 3,
-      "description": "Functions of an OS \u2014 process, memory, file and I/O management; OS types \u2014 batch, time-sharing, real-time, distributed, mobile; the role of the kernel and system calls."
+      "description": "Functions of an OS — process, memory, file and I/O management; OS types — batch, time-sharing, real-time, distributed, mobile; the role of the kernel and system calls."
     },
     {
       "id": "cs.algo.problem-solving",
@@ -168,14 +169,15 @@
         "cs.found.intro-computers"
       ],
       "unlocks": [
-        "cs.algo.algorithms"
+        "cs.algo.algorithms",
+        "cs.math.discrete-mathematics"
       ],
       "cross_links": [],
       "difficulty": "foundational",
       "bloom": "understand",
       "mastery_threshold": 0.7,
       "estimated_hours": 2,
-      "description": "Stages of problem solving \u2014 analysis, algorithm design, coding, testing, documentation; problem decomposition; abstraction and generalisation as design tools."
+      "description": "Stages of problem solving — analysis, algorithm design, coding, testing, documentation; problem decomposition; abstraction and generalisation as design tools."
     },
     {
       "id": "cs.algo.algorithms",
@@ -193,7 +195,7 @@
       "bloom": "understand",
       "mastery_threshold": 0.7,
       "estimated_hours": 3,
-      "description": "Definition and properties of an algorithm \u2014 finiteness, definiteness, effectiveness; representations \u2014 natural language, pseudocode, flowchart; sequence, selection and iteration constructs."
+      "description": "Definition and properties of an algorithm — finiteness, definiteness, effectiveness; representations — natural language, pseudocode, flowchart; sequence, selection and iteration constructs."
     },
     {
       "id": "cs.algo.flowcharts",
@@ -264,7 +266,7 @@
       "bloom": "apply",
       "mastery_threshold": 0.75,
       "estimated_hours": 4,
-      "description": "The divide-conquer-combine paradigm; recurrence-based analysis; classic examples \u2014 binary search, merge sort, quicksort, fast exponentiation."
+      "description": "The divide-conquer-combine paradigm; recurrence-based analysis; classic examples — binary search, merge sort, quicksort, fast exponentiation."
     },
     {
       "id": "cs.algo.greedy-algorithms",
@@ -298,7 +300,7 @@
       "bloom": "apply",
       "mastery_threshold": 0.75,
       "estimated_hours": 6,
-      "description": "Overlapping subproblems and optimal substructure; memoisation vs tabulation; classic problems \u2014 Fibonacci, knapsack, longest common subsequence, edit distance."
+      "description": "Overlapping subproblems and optimal substructure; memoisation vs tabulation; classic problems — Fibonacci, knapsack, longest common subsequence, edit distance."
     },
     {
       "id": "cs.algo.backtracking",
@@ -314,7 +316,7 @@
       "bloom": "apply",
       "mastery_threshold": 0.75,
       "estimated_hours": 5,
-      "description": "State-space search with pruning; the general backtracking template; classic problems \u2014 N-Queens, Sudoku solving, subset generation, permutations."
+      "description": "State-space search with pruning; the general backtracking template; classic problems — N-Queens, Sudoku solving, subset generation, permutations."
     },
     {
       "id": "cs.algo.np-completeness",
@@ -331,6 +333,105 @@
       "mastery_threshold": 0.8,
       "estimated_hours": 8,
       "description": "P vs NP; polynomial-time reductions; NP-complete and NP-hard problems; the Cook-Levin theorem (informal); approximation and heuristic strategies for intractable problems."
+    },
+    {
+      "id": "cs.math.discrete-mathematics",
+      "name": "Discrete Mathematics Foundations",
+      "requires": [
+        "cs.algo.problem-solving",
+        "cs.found.boolean-logic"
+      ],
+      "unlocks": [
+        "cs.math.proofs-and-induction",
+        "cs.math.sets-relations-functions"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "understand",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 3,
+      "description": "Core discrete structures used to reason about computation: propositions and predicates, sets, relations, functions, and finite sequences. Establish precise notation and explicit assumptions; proof, counting, and probability are separate masterable components."
+    },
+    {
+      "id": "cs.math.proofs-and-induction",
+      "name": "Proof Techniques and Mathematical Induction",
+      "requires": [
+        "cs.math.discrete-mathematics"
+      ],
+      "unlocks": [
+        "cs.math.combinatorics-counting"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "apply",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 4,
+      "description": "Construct direct proofs, contrapositive and contradiction arguments, and counterexamples. Prove simple claims by induction using a base case and an inductive step from arbitrary n to n+1; distinguish examples from general proof."
+    },
+    {
+      "id": "cs.math.sets-relations-functions",
+      "name": "Sets, Relations, and Functions",
+      "requires": [
+        "cs.math.discrete-mathematics"
+      ],
+      "unlocks": [
+        "cs.math.combinatorics-counting"
+      ],
+      "cross_links": [],
+      "difficulty": "developing",
+      "bloom": "apply",
+      "mastery_threshold": 0.7,
+      "estimated_hours": 3,
+      "description": "Perform set operations; classify relations by reflexivity, symmetry, antisymmetry, and transitivity; identify equivalence relations and partial orders; and test mappings for function, injective, surjective, and bijective properties."
+    },
+    {
+      "id": "cs.math.combinatorics-counting",
+      "name": "Combinatorics and Counting Principles",
+      "requires": [
+        "cs.math.proofs-and-induction",
+        "cs.math.sets-relations-functions"
+      ],
+      "unlocks": [
+        "cs.math.probability"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Model finite outcomes using sum and product rules, permutations, combinations, complements, and the pigeonhole principle. Decide whether order matters, repetition is allowed, and cases overlap before selecting a counting formula."
+    },
+    {
+      "id": "cs.math.probability",
+      "name": "Probability for Computing",
+      "requires": [
+        "cs.math.combinatorics-counting"
+      ],
+      "unlocks": [
+        "cs.math.statistics-for-computing"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Model sample spaces and events; calculate probabilities using counting, complements, conditional probability, independence, and Bayes' theorem; interpret discrete random variables, expectation, and variance. Distinguish independence from mutual exclusivity."
+    },
+    {
+      "id": "cs.math.statistics-for-computing",
+      "name": "Statistics for Data and Machine Learning",
+      "requires": [
+        "cs.math.probability"
+      ],
+      "unlocks": [
+        "cs.ds.intro-machine-learning"
+      ],
+      "cross_links": [],
+      "difficulty": "proficient",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 5,
+      "description": "Summarise datasets with appropriate descriptive statistics; reason about samples, populations, variability, distributions, estimation, and uncertainty; identify sampling bias, correlation-versus-causation errors, overfitting, and data leakage."
     },
     {
       "id": "cs.prog.intro-programming",
@@ -362,7 +463,7 @@
       "bloom": "remember",
       "mastery_threshold": 0.7,
       "estimated_hours": 2,
-      "description": "Interactive mode vs script mode; tokens \u2014 keywords, identifiers, literals, operators; comments; print() and input(); the role of indentation in Python syntax."
+      "description": "Interactive mode vs script mode; tokens — keywords, identifiers, literals, operators; comments; print() and input(); the role of indentation in Python syntax."
     },
     {
       "id": "cs.prog.data-types-variables",
@@ -378,7 +479,7 @@
       "bloom": "understand",
       "mastery_threshold": 0.7,
       "estimated_hours": 2,
-      "description": "Built-in types \u2014 int, float, complex, bool, str, NoneType; mutable vs immutable objects; variable assignment, multiple assignment and dynamic typing."
+      "description": "Built-in types — int, float, complex, bool, str, NoneType; mutable vs immutable objects; variable assignment, multiple assignment and dynamic typing."
     },
     {
       "id": "cs.prog.operators-expressions",
@@ -463,7 +564,7 @@
     },
     {
       "id": "cs.control.loops",
-      "name": "Iteration \u2014 while and for Loops",
+      "name": "Iteration — while and for Loops",
       "requires": [
         "cs.control.conditionals"
       ],
@@ -508,7 +609,7 @@
       "bloom": "apply",
       "mastery_threshold": 0.7,
       "estimated_hours": 3,
-      "description": "String creation and indexing; positive/negative indexing and slicing; string operators; key methods \u2014 split(), join(), strip(), replace(), find(); string immutability."
+      "description": "String creation and indexing; positive/negative indexing and slicing; string operators; key methods — split(), join(), strip(), replace(), find(); string immutability."
     },
     {
       "id": "cs.data.lists",
@@ -528,7 +629,7 @@
       "bloom": "apply",
       "mastery_threshold": 0.7,
       "estimated_hours": 3,
-      "description": "List creation, indexing and slicing; mutating methods \u2014 append(), insert(), remove(), pop(), sort(); list comprehensions; lists used as stacks and queues."
+      "description": "List creation, indexing and slicing; mutating methods — append(), insert(), remove(), pop(), sort(); list comprehensions; lists used as stacks and queues."
     },
     {
       "id": "cs.data.tuples",
@@ -560,7 +661,7 @@
       "bloom": "apply",
       "mastery_threshold": 0.7,
       "estimated_hours": 3,
-      "description": "Key-value pair storage; accessing, updating and deleting entries; methods \u2014 keys(), values(), items(), get(), update(); iterating and nesting dictionaries."
+      "description": "Key-value pair storage; accessing, updating and deleting entries; methods — keys(), values(), items(), get(), update(); iterating and nesting dictionaries."
     },
     {
       "id": "cs.data.sets",
@@ -576,7 +677,7 @@
       "bloom": "apply",
       "mastery_threshold": 0.7,
       "estimated_hours": 2,
-      "description": "Unordered unique-element collections; set operators \u2014 union, intersection, difference, symmetric difference; mutating methods; the immutable frozenset."
+      "description": "Unordered unique-element collections; set operators — union, intersection, difference, symmetric difference; mutating methods; the immutable frozenset."
     },
     {
       "id": "cs.data.comprehensions-iterators",
@@ -644,7 +745,7 @@
       "bloom": "apply",
       "mastery_threshold": 0.75,
       "estimated_hours": 4,
-      "description": "Base case and recursive case design; the call stack during recursive calls; classic recursive problems \u2014 factorial, Fibonacci, GCD; recursion versus iteration trade-offs."
+      "description": "Base case and recursive case design; the call stack during recursive calls; classic recursive problems — factorial, Fibonacci, GCD; recursion versus iteration trade-offs."
     },
     {
       "id": "cs.func.lambda-functional",
@@ -692,7 +793,7 @@
       "bloom": "analyze",
       "mastery_threshold": 0.75,
       "estimated_hours": 4,
-      "description": "Functions as first-class objects; wrapping functions to add behaviour; the @decorator syntax; practical uses \u2014 logging, timing, memoisation, access control."
+      "description": "Functions as first-class objects; wrapping functions to add behaviour; the @decorator syntax; practical uses — logging, timing, memoisation, access control."
     },
     {
       "id": "cs.file.text-files",
@@ -726,7 +827,7 @@
       "bloom": "apply",
       "mastery_threshold": 0.75,
       "estimated_hours": 3,
-      "description": "CSV structure and delimiters; the csv module \u2014 reader, writer, DictReader, DictWriter; handling headers; practical tabular-data workflows."
+      "description": "CSV structure and delimiters; the csv module — reader, writer, DictReader, DictWriter; handling headers; practical tabular-data workflows."
     },
     {
       "id": "cs.file.binary-serialisation",
@@ -740,7 +841,7 @@
       "bloom": "apply",
       "mastery_threshold": 0.75,
       "estimated_hours": 3,
-      "description": "Binary versus text file modes; the pickle module \u2014 dump() and load(); object serialisation and deserialisation; persisting structured records to disk."
+      "description": "Binary versus text file modes; the pickle module — dump() and load(); object serialisation and deserialisation; persisting structured records to disk."
     },
     {
       "id": "cs.struct.stacks",
@@ -757,7 +858,7 @@
       "bloom": "apply",
       "mastery_threshold": 0.75,
       "estimated_hours": 3,
-      "description": "LIFO discipline; push, pop and peek operations; array-based and list-based implementations; applications \u2014 expression evaluation, backtracking, undo history."
+      "description": "LIFO discipline; push, pop and peek operations; array-based and list-based implementations; applications — expression evaluation, backtracking, undo history."
     },
     {
       "id": "cs.struct.queues",
@@ -775,7 +876,7 @@
       "bloom": "apply",
       "mastery_threshold": 0.75,
       "estimated_hours": 3,
-      "description": "FIFO discipline; enqueue and dequeue operations; circular queues; implementation with collections.deque; applications \u2014 scheduling, breadth-first traversal."
+      "description": "FIFO discipline; enqueue and dequeue operations; circular queues; implementation with collections.deque; applications — scheduling, breadth-first traversal."
     },
     {
       "id": "cs.struct.deques-priority-queues",
@@ -822,7 +923,7 @@
       "bloom": "apply",
       "mastery_threshold": 0.75,
       "estimated_hours": 4,
-      "description": "Bidirectional traversal with doubly linked nodes; circular list structures; use cases \u2014 undo/redo chains, round-robin scheduling, music playlists."
+      "description": "Bidirectional traversal with doubly linked nodes; circular list structures; use cases — undo/redo chains, round-robin scheduling, music playlists."
     },
     {
       "id": "cs.struct.trees",
@@ -843,7 +944,7 @@
       "bloom": "apply",
       "mastery_threshold": 0.75,
       "estimated_hours": 4,
-      "description": "Tree terminology \u2014 root, leaf, height, depth; binary trees; tree traversals \u2014 preorder, inorder, postorder, level-order; recursive tree algorithms."
+      "description": "Tree terminology — root, leaf, height, depth; binary trees; tree traversals — preorder, inorder, postorder, level-order; recursive tree algorithms."
     },
     {
       "id": "cs.struct.binary-search-trees",
@@ -909,7 +1010,7 @@
       "bloom": "analyze",
       "mastery_threshold": 0.75,
       "estimated_hours": 5,
-      "description": "Hash functions and uniform distribution; collision resolution \u2014 chaining and open addressing; load factor and dynamic resizing; average O(1) lookup versus worst case."
+      "description": "Hash functions and uniform distribution; collision resolution — chaining and open addressing; load factor and dynamic resizing; average O(1) lookup versus worst case."
     },
     {
       "id": "cs.struct.graphs-representation",
@@ -929,7 +1030,7 @@
     },
     {
       "id": "cs.struct.graph-traversal",
-      "name": "Graph Traversal \u2014 BFS and DFS",
+      "name": "Graph Traversal — BFS and DFS",
       "requires": [
         "cs.struct.graphs-representation",
         "cs.struct.queues"
@@ -942,7 +1043,7 @@
       "bloom": "apply",
       "mastery_threshold": 0.75,
       "estimated_hours": 4,
-      "description": "Breadth-first search using a queue; depth-first search using recursion or a stack; visited-set bookkeeping; applications \u2014 connectivity, cycle detection, topological sort."
+      "description": "Breadth-first search using a queue; depth-first search using recursion or a stack; visited-set bookkeeping; applications — connectivity, cycle detection, topological sort."
     },
     {
       "id": "cs.struct.shortest-path-algorithms",
@@ -1012,7 +1113,7 @@
     },
     {
       "id": "cs.struct.elementary-sorts",
-      "name": "Elementary Sorting \u2014 Bubble, Selection, Insertion",
+      "name": "Elementary Sorting — Bubble, Selection, Insertion",
       "requires": [
         "cs.struct.binary-search"
       ],
@@ -1028,7 +1129,7 @@
     },
     {
       "id": "cs.struct.efficient-sorts",
-      "name": "Efficient Sorting \u2014 Merge Sort and Quick Sort",
+      "name": "Efficient Sorting — Merge Sort and Quick Sort",
       "requires": [
         "cs.struct.elementary-sorts",
         "cs.algo.divide-and-conquer"
@@ -1056,7 +1157,7 @@
       "bloom": "understand",
       "mastery_threshold": 0.75,
       "estimated_hours": 3,
-      "description": "Classes and objects; the four pillars \u2014 encapsulation, abstraction, inheritance, polymorphism; comparing OOP to the procedural paradigm."
+      "description": "Classes and objects; the four pillars — encapsulation, abstraction, inheritance, polymorphism; comparing OOP to the procedural paradigm."
     },
     {
       "id": "cs.oop.classes-objects-python",
@@ -1088,7 +1189,7 @@
       "bloom": "apply",
       "mastery_threshold": 0.75,
       "estimated_hours": 3,
-      "description": "Access modifiers by convention \u2014 public, _protected, __private; property decorators for controlled attribute access; abstract base classes and interfaces."
+      "description": "Access modifiers by convention — public, _protected, __private; property decorators for controlled attribute access; abstract base classes and interfaces."
     },
     {
       "id": "cs.oop.inheritance",
@@ -1184,7 +1285,7 @@
       "bloom": "apply",
       "mastery_threshold": 0.75,
       "estimated_hours": 4,
-      "description": "Entities, attributes and relationships; cardinality \u2014 one-to-one, one-to-many, many-to-many; ER diagram notation; translating an ER model into relational tables."
+      "description": "Entities, attributes and relationships; cardinality — one-to-one, one-to-many, many-to-many; ER diagram notation; translating an ER model into relational tables."
     },
     {
       "id": "cs.db.relational-model",
@@ -1201,7 +1302,7 @@
       "bloom": "understand",
       "mastery_threshold": 0.75,
       "estimated_hours": 3,
-      "description": "Tables, rows and columns as the relational structure; keys \u2014 primary, candidate, foreign, super key; entity and referential integrity constraints."
+      "description": "Tables, rows and columns as the relational structure; keys — primary, candidate, foreign, super key; entity and referential integrity constraints."
     },
     {
       "id": "cs.db.normalisation",
@@ -1219,7 +1320,7 @@
     },
     {
       "id": "cs.db.sql-ddl-dml",
-      "name": "SQL \u2014 DDL and DML Basics",
+      "name": "SQL — DDL and DML Basics",
       "requires": [
         "cs.db.relational-model"
       ],
@@ -1231,11 +1332,11 @@
       "bloom": "apply",
       "mastery_threshold": 0.75,
       "estimated_hours": 3,
-      "description": "SQL history and standards; DDL \u2014 CREATE TABLE, ALTER TABLE, DROP TABLE; DML \u2014 INSERT, SELECT, UPDATE, DELETE; the WHERE clause and common SQL data types."
+      "description": "SQL history and standards; DDL — CREATE TABLE, ALTER TABLE, DROP TABLE; DML — INSERT, SELECT, UPDATE, DELETE; the WHERE clause and common SQL data types."
     },
     {
       "id": "cs.db.sql-queries-functions",
-      "name": "SQL \u2014 Queries and Aggregate Functions",
+      "name": "SQL — Queries and Aggregate Functions",
       "requires": [
         "cs.db.sql-ddl-dml"
       ],
@@ -1249,11 +1350,11 @@
       "bloom": "apply",
       "mastery_threshold": 0.75,
       "estimated_hours": 3,
-      "description": "SELECT with ORDER BY, GROUP BY and HAVING; aggregate functions \u2014 COUNT, SUM, AVG, MIN, MAX; DISTINCT, LIKE wildcards, BETWEEN, IN and IS NULL."
+      "description": "SELECT with ORDER BY, GROUP BY and HAVING; aggregate functions — COUNT, SUM, AVG, MIN, MAX; DISTINCT, LIKE wildcards, BETWEEN, IN and IS NULL."
     },
     {
       "id": "cs.db.sql-joins-subqueries",
-      "name": "SQL \u2014 Joins and Subqueries",
+      "name": "SQL — Joins and Subqueries",
       "requires": [
         "cs.db.sql-queries-functions"
       ],
@@ -1283,7 +1384,7 @@
       "bloom": "analyze",
       "mastery_threshold": 0.75,
       "estimated_hours": 5,
-      "description": "Atomicity, consistency, isolation, durability; commit and rollback; concurrent transaction anomalies \u2014 dirty read, lost update; basic locking strategies."
+      "description": "Atomicity, consistency, isolation, durability; commit and rollback; concurrent transaction anomalies — dirty read, lost update; basic locking strategies."
     },
     {
       "id": "cs.db.indexing-query-optimisation",
@@ -1347,7 +1448,7 @@
       "bloom": "understand",
       "mastery_threshold": 0.75,
       "estimated_hours": 3,
-      "description": "Process versus program; process control block; process states \u2014 new, ready, running, waiting, terminated; context switching overhead."
+      "description": "Process versus program; process control block; process states — new, ready, running, waiting, terminated; context switching overhead."
     },
     {
       "id": "cs.os.threads-concurrency",
@@ -1379,7 +1480,7 @@
       "bloom": "apply",
       "mastery_threshold": 0.75,
       "estimated_hours": 5,
-      "description": "Scheduling criteria \u2014 turnaround, waiting time, throughput; FCFS, SJF, round robin and priority scheduling; preemptive versus non-preemptive scheduling."
+      "description": "Scheduling criteria — turnaround, waiting time, throughput; FCFS, SJF, round robin and priority scheduling; preemptive versus non-preemptive scheduling."
     },
     {
       "id": "cs.os.synchronisation-deadlocks",
@@ -1426,7 +1527,7 @@
       "bloom": "analyze",
       "mastery_threshold": 0.8,
       "estimated_hours": 6,
-      "description": "Demand paging; page faults and page replacement policies \u2014 FIFO, LRU, optimal; thrashing and the working-set model."
+      "description": "Demand paging; page faults and page replacement policies — FIFO, LRU, optimal; thrashing and the working-set model."
     },
     {
       "id": "cs.os.file-systems",
@@ -1440,7 +1541,7 @@
       "bloom": "understand",
       "mastery_threshold": 0.75,
       "estimated_hours": 4,
-      "description": "File allocation methods \u2014 contiguous, linked, indexed; directory structures; metadata and inodes; journaling for crash recovery."
+      "description": "File allocation methods — contiguous, linked, indexed; directory structures; metadata and inodes; journaling for crash recovery."
     },
     {
       "id": "cs.net.networking-basics",
@@ -1456,7 +1557,7 @@
       "bloom": "understand",
       "mastery_threshold": 0.75,
       "estimated_hours": 3,
-      "description": "The need for networking; LAN, MAN, WAN and PAN; network topologies \u2014 bus, star, ring, mesh; wired versus wireless transmission media; bandwidth concepts."
+      "description": "The need for networking; LAN, MAN, WAN and PAN; network topologies — bus, star, ring, mesh; wired versus wireless transmission media; bandwidth concepts."
     },
     {
       "id": "cs.net.osi-tcp-ip-models",
@@ -1528,7 +1629,7 @@
     },
     {
       "id": "cs.net.tcp-udp-transport",
-      "name": "TCP and UDP \u2014 Transport Layer",
+      "name": "TCP and UDP — Transport Layer",
       "requires": [
         "cs.net.osi-tcp-ip-models"
       ],
@@ -1540,7 +1641,7 @@
       "bloom": "analyze",
       "mastery_threshold": 0.75,
       "estimated_hours": 4,
-      "description": "Connection-oriented TCP \u2014 handshake, reliability, flow control; connectionless UDP \u2014 speed versus reliability trade-off; choosing a transport protocol per use case."
+      "description": "Connection-oriented TCP — handshake, reliability, flow control; connectionless UDP — speed versus reliability trade-off; choosing a transport protocol per use case."
     },
     {
       "id": "cs.net.routing-congestion",
@@ -1557,7 +1658,7 @@
       "bloom": "analyze",
       "mastery_threshold": 0.8,
       "estimated_hours": 6,
-      "description": "Routers, switches and routing tables; distance-vector versus link-state routing concepts; TCP congestion control \u2014 slow start, congestion avoidance."
+      "description": "Routers, switches and routing tables; distance-vector versus link-state routing concepts; TCP congestion control — slow start, congestion avoidance."
     },
     {
       "id": "cs.net.wireless-mobile-networks",
@@ -1601,7 +1702,7 @@
       "bloom": "understand",
       "mastery_threshold": 0.7,
       "estimated_hours": 2,
-      "description": "Netiquette and digital footprint; cybercrime types \u2014 hacking, identity theft, cyberbullying, phishing; safe browsing practices; copyright and software licensing basics."
+      "description": "Netiquette and digital footprint; cybercrime types — hacking, identity theft, cyberbullying, phishing; safe browsing practices; copyright and software licensing basics."
     },
     {
       "id": "cs.sec.cryptography-basics",
@@ -1637,7 +1738,7 @@
       "bloom": "analyze",
       "mastery_threshold": 0.75,
       "estimated_hours": 5,
-      "description": "TLS/SSL and the HTTPS handshake; firewalls and VPNs; common web vulnerabilities \u2014 SQL injection, XSS, CSRF; the principle of least privilege."
+      "description": "TLS/SSL and the HTTPS handshake; firewalls and VPNs; common web vulnerabilities — SQL injection, XSS, CSRF; the principle of least privilege."
     },
     {
       "id": "cs.sec.data-protection-privacy",
@@ -1697,7 +1798,7 @@
       "bloom": "apply",
       "mastery_threshold": 0.75,
       "estimated_hours": 3,
-      "description": "Resources and URIs; HTTP verbs \u2014 GET, POST, PUT, DELETE; status codes; JSON as a data-exchange format; statelessness as a REST constraint."
+      "description": "Resources and URIs; HTTP verbs — GET, POST, PUT, DELETE; status codes; JSON as a data-exchange format; statelessness as a REST constraint."
     },
     {
       "id": "cs.theory.finite-automata",
@@ -1857,7 +1958,7 @@
       "bloom": "apply",
       "mastery_threshold": 0.75,
       "estimated_hours": 4,
-      "description": "ndarray versus Python lists; array creation \u2014 zeros, ones, arange, linspace; broadcasting; vectorised arithmetic; indexing and slicing multi-dimensional arrays."
+      "description": "ndarray versus Python lists; array creation — zeros, ones, arange, linspace; broadcasting; vectorised arithmetic; indexing and slicing multi-dimensional arrays."
     },
     {
       "id": "cs.ds.pandas-dataframes",
@@ -1898,7 +1999,8 @@
       "id": "cs.ds.intro-machine-learning",
       "name": "Introduction to Machine Learning",
       "requires": [
-        "cs.ds.data-visualisation"
+        "cs.ds.data-visualisation",
+        "cs.math.statistics-for-computing"
       ],
       "unlocks": [
         "cs.ds.supervised-learning-models",

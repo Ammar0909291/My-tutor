@@ -1,7 +1,7 @@
 # Computer Science Knowledge Graph — Validation Report
 
-## Version: 1.0.0
-## Date: 2026-06-29
+## Version: 1.1.0
+## Date: 2026-10-20
 ## Status: PRODUCTION
 ## Platform: Generic Knowledge Graph / Generic Subject Adapter (shared with Mathematics, Physics, Chemistry)
 
@@ -37,12 +37,12 @@ checklist process used for Physics and Chemistry.
 |---|---|
 | File | `docs/computer-science/kg/graph.json` |
 | Schema | Exactly 10 fields per concept: `id, name, requires, unlocks, cross_links, difficulty, bloom, mastery_threshold, estimated_hours, description` — **no `domain`, no `concept_type`** (both derived at runtime by the generic adapter, identical to Chemistry) |
-| Total concepts | 119 |
+| Total concepts | 125 |
 | ID prefix | `cs.` |
-| Domains (qualified `cs.<key>`) | 17 |
+| Domains (qualified `cs.<key>`) | 18 |
 | Root node | `cs.found.intro-computers` (1 root, no prerequisites — same single-root pattern as Math/Physics/Chemistry) |
-| `requires` edges | 145 |
-| `unlocks` edges | 145 (exact inverse of `requires`) |
+| `requires` edges | 154 |
+| `unlocks` edges | 154 (exact inverse of `requires`) |
 | `cross_links` | 5 pairs (10 directed entries) |
 | `mastery_threshold` | {0.7, 0.75, 0.8} — identical band to Chemistry |
 | `estimated_hours` | 2–8 |
@@ -68,14 +68,15 @@ checklist process used for Physics and Chemistry.
 | cs.theory | Theory of Computation | 5 |
 | cs.se | Software Engineering | 4 |
 | cs.ds | Data Science & AI | 7 |
+| cs.math | Mathematical Foundations for CS | 6 |
 
 ### Difficulty distribution
 
 | Difficulty | Count |
 |---|---|
 | foundational | 9 |
-| developing | 18 |
-| proficient | 34 |
+| developing | 21 |
+| proficient | 37 |
 | advanced | 41 |
 | expert | 13 |
 | research | 4 |
@@ -88,9 +89,9 @@ Mathematics and Physics, preserved exactly (no new levels added).
 | Bloom level | Count |
 |---|---|
 | remember | 2 |
-| understand | 26 |
-| apply | 57 |
-| analyze | 25 |
+| understand | 27 |
+| apply | 61 |
+| analyze | 26 |
 | evaluate | 9 |
 | create | 0 |
 
@@ -192,5 +193,10 @@ data source for any code path not yet routed through `knowledgeGraph.ts`.
 - [x] Math/Physics/Chemistry regressions verified unaffected
 - [x] No domain/concept_type fields invented; no new infrastructure built
 
-**Verdict: PRODUCTION READY** — Computer Science is fully integrated on the
-existing generic platform with no subject-specific infrastructure.
+## 7. Coverage-driven extension — 2026-10-20
+
+The graph now contains 125 concepts across 18 domains. Six mathematical foundations nodes were added, and introductory machine learning now requires explicit statistics foundations. Each new node has an Educational Brain entry and two explanations plus three gradeable probes in a dedicated seed corpus.
+
+Structural checks were performed during commit preparation. The repository validator, TypeScript checks, smoke test, and CI were not executed in this remote-edit session. Comprehensive undergraduate coverage remains incomplete; see `docs/history/computer-science-kg-coverage-extension.md`.
+
+**Verdict:** Structurally integrated, but not yet a comprehensive undergraduate CS curriculum.

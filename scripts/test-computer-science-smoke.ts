@@ -74,7 +74,13 @@ const IDS = [
   'cs.os.synchronisation-deadlocks',   // expert       / analyze
   'cs.net.routing-congestion',         // expert       / analyze
   'cs.theory.turing-machines',         // research     / evaluate
-  'cs.ds.neural-networks-intro',       // research     / analyze
+  'cs.ds.neural-networks-intro',
+  'cs.math.discrete-mathematics',
+  'cs.math.proofs-and-induction',
+  'cs.math.sets-relations-functions',
+  'cs.math.combinatorics-counting',
+  'cs.math.probability',
+  'cs.math.statistics-for-computing',       // research     / analyze
   'cs.oop.polymorphism-overloading',   // advanced     / analyze
 ]
 
