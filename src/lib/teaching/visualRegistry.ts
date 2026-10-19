@@ -865,10 +865,13 @@ const STOCK_CARD_SUBJECT: Readonly<Partial<Record<VisualType, { draws: RegExp; n
     never: /\b(?:formulas?|identit\w*|equation|surface|volume|solids?|three-dimensional|3d|polyhedr\w*|theorems)\b/i,
   },
   number_line: { draws: /\b(?:number line|integers?|negative|absolute value|ordering|compar\w*|opposites?)\b/i },
+  // Live 2026-10-19 (cs.net.cloud-computing): the cs.net domain card is a packet travelling a router path; Cloud Computing (IaaS / PaaS /
+  // SaaS) got it, and the tutor described it as if it fit. It serves only the networking concepts it draws.
+  three_network_packet_flow: { draws: /\b(?:network\w*|packets?|routing|routers?|tcp|udp|ip|dns|dhcp|osi|wireless|mobile|protocols?)\b/i },
 }
 
 export function genericCardDepictsConcept(conceptId: string, card: VisualType): boolean {
-  if (!conceptId.startsWith('math.')) return true
+  if (!conceptId.startsWith('math.') && card !== 'three_network_packet_flow') return true
   const rule = STOCK_CARD_SUBJECT[card]
   if (!rule) return true
   const title = getKGNode(conceptId)?.title ?? ''

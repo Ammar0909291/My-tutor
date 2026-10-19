@@ -411,6 +411,9 @@ export function stripConfirmBack(text: string): { text: string; stripped: boolea
       drop[i] = true
       if (prevFramed) drop[i - 1] = true
     }
+    // A bare restatement opening the reply ("So you understood the previous example about ...") with no request after it: the tutor
+    // reporting the learner's progress back instead of teaching (live 2026-10-19, "please continue"). Dropped when teaching follows.
+    if (sentences.length > 1 && /^so\s+you\s+(?:understood|understand|followed|got|have)\b/i.test(flatApos(sentences[0].trim())) && !drop[0]) drop[0] = true
     if (!drop.some(Boolean)) return para
     stripped = true
     return sentences.filter((_, i) => !drop[i]).join(' ').trim()

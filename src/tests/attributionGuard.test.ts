@@ -41,3 +41,13 @@ describe('a numeric axis is not a figure of a language concept (live 2026-10-19)
     expect(numericAxisForLanguageConcept(flow, 'eng.listening.listening-for-detail')).toBe(false)
   })
 })
+
+describe('a bare progress restatement opening a reply is dropped when teaching follows (live 2026-10-19)', () => {
+  it('drops "So you understood ..." but keeps the teaching', () => {
+    const r = stripConfirmBack('So you understood the previous example about the Galois group. Consider the map sigma on the field.')
+    expect(r.text).toBe('Consider the map sigma on the field.')
+  })
+  it('leaves a lone sentence alone', () => {
+    expect(stripConfirmBack('So you understood the example.').stripped).toBe(false)
+  })
+})
