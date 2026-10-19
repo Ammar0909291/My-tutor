@@ -1,9 +1,13 @@
 # Computer Science Knowledge Graph — Validation Report
 
-## Version: 1.0.0
-## Date: 2026-06-29
+## Version: 1.1.0
+## Date: 2026-10-20
 ## Status: PRODUCTION
 ## Platform: Generic Knowledge Graph / Generic Subject Adapter (shared with Mathematics, Physics, Chemistry)
+
+## Current revision note (2026-10-20)
+
+Sections 2–6 record the historical v1.0 baseline (119 concepts, 17 domains) and original smoke-test results. The canonical graph has since been expanded by a separate CS-only mathematics update on `main` and the current CS2023 gap expansion. The authoritative current counts and validation limitations are in **Section 7 — Current Graph State (v1.1.0)** below. Historical figures are not current-state claims.
 
 ## 1. Curriculum
 
@@ -194,3 +198,53 @@ data source for any code path not yet routed through `knowledgeGraph.ts`.
 
 **Verdict: PRODUCTION READY** — Computer Science is fully integrated on the
 existing generic platform with no subject-specific infrastructure.
+
+
+## 7. Current Graph State — v1.1.0 (2026-10-20)
+
+### Current snapshot
+
+| Measure | Current value |
+|---|---:|
+| Canonical graph | `docs/computer-science/kg/graph.json` |
+| Graph version | 1.1.0 |
+| Concepts | 145 (26 above the original 119-concept baseline) |
+| Domains | 25 |
+| `requires` edges | 192 |
+| `unlocks` entries | 192 (exact inverse of `requires`) |
+| `cross_links` entries | 10 |
+| Root | `cs.found.intro-computers` |
+| Reachability | 145 / 145 |
+| Difficulty taxonomy | Existing six levels retained |
+| Bloom taxonomy | All six levels represented; three design-oriented concepts use `create` |
+
+Six explicit mathematical-foundation concepts were added to the live `main` branch while this expansion was being prepared. This branch preserves those six concepts and adds 20 additional, non-duplicate concepts. It does not overwrite or roll back the concurrent CS-only main update.
+
+### New coverage in this branch
+
+- Mathematics: formal propositional/predicate logic and linear algebra for computing, integrated with the existing discrete mathematics, sets/relations/functions, counting, probability, and statistics nodes.
+- Architecture: assembly/machine-code execution and performance benchmarking.
+- Programming languages: paradigms, type systems/semantics, compiler/interpreter design.
+- Parallel/distributed computing: parallelism, concurrency models, distributed-systems fundamentals, replication and consistency.
+- Human-computer interaction and usability.
+- Computer graphics and the rendering pipeline.
+- Software engineering: requirements specification, software architecture, debugging/reliability.
+- Secure software engineering.
+- AI: search/planning/reasoning, knowledge representation, and responsible ML evaluation.
+
+### Structural checks performed on the proposed graph
+
+- Unique IDs; every prerequisite reference resolves.
+- Every unlock reference resolves and is the inverse of a prerequisite edge.
+- Topological traversal visits all 145 concepts; no prerequisite cycle detected.
+- Traversal from the single root reaches all 145 concepts.
+- Every concept retains the exact canonical 10-field schema.
+- Existing concepts and cross-links are retained; the ML introduction now explicitly requires statistics and linear algebra.
+
+These checks were performed against the edited graph content. The repository TypeScript validator, updated smoke test, type-check, and production build have **not** been executed in this session. Do not interpret structural checks as a passing CI result.
+
+### Content-completeness limitation
+
+The CS teaching-assets file remains at 119 entries and its entries were previously reported as placeholders. This change does not create placeholder assets for the 26 concepts absent from that asset inventory and does not claim that any concept has complete instructional content. Blueprints, authored teaching assets, Educational Brain coverage where required, assessments, and learner-flow QA remain follow-up work.
+
+This revision changes CS-specific curriculum files and adds CS domain labels only. No Mathematics, Physics, Chemistry, Biology, or English curriculum files were edited.
