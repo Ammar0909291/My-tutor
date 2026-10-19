@@ -1,9 +1,13 @@
 # Computer Science Knowledge Graph — Validation Report
 
-## Version: 1.0.0
-## Date: 2026-06-29
+## Version: 1.1.0
+## Date: 2026-10-20
 ## Status: PRODUCTION
 ## Platform: Generic Knowledge Graph / Generic Subject Adapter (shared with Mathematics, Physics, Chemistry)
+
+## Current revision note (2026-10-20)
+
+This report's original Sections 2–6 document the v1.0 baseline and its 119-concept / 17-domain graph. The authoritative current state is recorded in **Section 7 — CS2023 Gap Expansion (v1.1.0)** below. The old counts and original smoke-test results are historical baseline results, not a claim that the expanded graph has already passed the repository's runtime test suite.
 
 ## 1. Curriculum
 
@@ -194,3 +198,52 @@ data source for any code path not yet routed through `knowledgeGraph.ts`.
 
 **Verdict: PRODUCTION READY** — Computer Science is fully integrated on the
 existing generic platform with no subject-specific infrastructure.
+
+
+## 7. CS2023 Gap Expansion — v1.1.0 (2026-10-20)
+
+### Current graph snapshot
+
+| Measure | Current value |
+|---|---:|
+| Canonical graph | `docs/computer-science/kg/graph.json` |
+| Graph version | 1.1.0 |
+| Concepts | 143 (119 existing + 24 added) |
+| Domains | 25 (17 existing + 8 added) |
+| `requires` edges | 188 |
+| `unlocks` entries | 188 (computed as exact inverse of `requires`) |
+| `cross_links` entries | 10 (existing set retained) |
+| Roots | 1 — `cs.found.intro-computers` |
+| Reachability | 143 / 143 from the root |
+| Difficulty levels | All six existing canonical levels retained |
+| Bloom levels | All six levels represented; 3 concepts now use `create` |
+
+### Added domains and concepts
+
+- `cs.math` — discrete mathematics; propositional and predicate logic; sets, relations and functions; combinatorics; probability and statistics; linear algebra for computing.
+- `cs.arch` — assembly language and machine-code execution; computer performance and benchmarking.
+- `cs.lang` — programming-language paradigms; type systems and semantics; compiler and interpreter design.
+- `cs.parallel` — parallel-computing fundamentals; concurrency models and coordination.
+- `cs.dist` — distributed-systems fundamentals; replication, consistency and distributed data.
+- `cs.hci` — human-computer interaction and usability.
+- `cs.graphics` — computer-graphics fundamentals.
+- Existing `cs.se` and `cs.sec` domains expanded with requirements engineering, software architecture, debugging/reliability, and secure software engineering.
+- `cs.ai` — AI search/planning/reasoning; knowledge representation; machine-learning evaluation and responsible AI.
+
+### Structural checks performed on the edited graph
+
+- All concept IDs are unique.
+- Every `requires` reference resolves to an existing CS concept.
+- Every `unlocks` reference resolves and is the inverse of a `requires` edge.
+- Topological traversal visits all 143 concepts; no prerequisite cycle detected.
+- Reachability traversal from the single root reaches all 143 concepts.
+- Every concept retains the canonical 10-field schema.
+- Existing cross-links and all pre-existing concepts were retained; the existing machine-learning introduction gained explicit probability/statistics and linear-algebra prerequisites.
+
+These checks were performed against the proposed graph content. The repository's TypeScript validator, smoke test, type-check, and build have **not** been executed in this session and must not be represented as passing.
+
+### Scope and remaining work
+
+This change is CS-only. No Mathematics, Physics, Chemistry, Biology, or English files were edited. The generic knowledge-graph bridge gained labels for the eight new CS domains, and the CS smoke-test sample was expanded to cover the new domains.
+
+The existing `docs/computer-science/teaching-assets/assets.json` remains at 119 entries and its entries are placeholders. No placeholder assets were created for the 24 new concepts, and no concept is claimed to have complete teaching content. The expanded graph therefore improves curriculum breadth and prerequisite structure but is **not yet a complete teaching-ready undergraduate curriculum**. Follow-up work must author and validate CS blueprints, teaching assets, and Educational Brain content under their respective contracts before declaring content completeness.
