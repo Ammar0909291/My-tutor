@@ -74,8 +74,8 @@ checklist process used for Physics and Chemistry.
 | Difficulty | Count |
 |---|---|
 | foundational | 9 |
-| developing | 18 |
-| proficient | 34 |
+| developing | 21 |
+| proficient | 37 |
 | advanced | 41 |
 | expert | 13 |
 | research | 4 |
@@ -88,9 +88,9 @@ Mathematics and Physics, preserved exactly (no new levels added).
 | Bloom level | Count |
 |---|---|
 | remember | 2 |
-| understand | 26 |
-| apply | 57 |
-| analyze | 25 |
+| understand | 27 |
+| apply | 61 |
+| analyze | 26 |
 | evaluate | 9 |
 | create | 0 |
 
