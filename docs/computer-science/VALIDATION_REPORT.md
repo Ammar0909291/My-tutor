@@ -68,6 +68,7 @@ checklist process used for Physics and Chemistry.
 | cs.theory | Theory of Computation | 5 |
 | cs.se | Software Engineering | 4 |
 | cs.ds | Data Science & AI | 7 |
+| cs.math | Mathematical Foundations for CS | 6 |
 
 ### Difficulty distribution
 
