@@ -1,8 +1,8 @@
 {
   "name": "Computer Science Knowledge Graph",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "status": "production",
-  "build_date": "2026-06-29",
+  "build_date": "2026-10-20",
   "concepts": [
     {
       "id": "cs.found.intro-computers",
@@ -67,9 +67,9 @@
       ],
       "unlocks": [
         "cs.found.cpu-architecture",
+        "cs.math.discrete-mathematics",
         "cs.sec.cryptography-basics",
-        "cs.theory.finite-automata",
-        "cs.math.discrete-mathematics"
+        "cs.theory.finite-automata"
       ],
       "cross_links": [],
       "difficulty": "developing",
@@ -99,10 +99,12 @@
       "id": "cs.found.cpu-architecture",
       "name": "CPU Architecture and Instruction Sets",
       "requires": [
-        "cs.found.computer-organisation",
-        "cs.found.boolean-logic"
+        "cs.found.boolean-logic",
+        "cs.found.computer-organisation"
       ],
       "unlocks": [
+        "cs.arch.assembly-machine-code",
+        "cs.arch.performance-analysis",
         "cs.found.pipelining-cache"
       ],
       "cross_links": [
@@ -149,8 +151,8 @@
       "id": "cs.found.os-concepts",
       "name": "Operating System Fundamentals",
       "requires": [
-        "cs.found.software-concepts",
-        "cs.found.computer-organisation"
+        "cs.found.computer-organisation",
+        "cs.found.software-concepts"
       ],
       "unlocks": [
         "cs.os.process-management"
@@ -186,6 +188,7 @@
         "cs.algo.problem-solving"
       ],
       "unlocks": [
+        "cs.ai.search-planning-reasoning",
         "cs.algo.asymptotic-notation",
         "cs.algo.flowcharts",
         "cs.struct.linear-search"
@@ -241,6 +244,8 @@
       "unlocks": [
         "cs.algo.divide-and-conquer",
         "cs.algo.greedy-algorithms",
+        "cs.arch.performance-analysis",
+        "cs.parallel.parallel-computing",
         "cs.struct.hashing-hash-tables"
       ],
       "cross_links": [],
@@ -343,6 +348,7 @@
       ],
       "unlocks": [
         "cs.math.proofs-and-induction",
+        "cs.math.propositional-predicate-logic",
         "cs.math.sets-relations-functions"
       ],
       "cross_links": [],
@@ -375,7 +381,8 @@
         "cs.math.discrete-mathematics"
       ],
       "unlocks": [
-        "cs.math.combinatorics-counting"
+        "cs.math.combinatorics-counting",
+        "cs.math.linear-algebra"
       ],
       "cross_links": [],
       "difficulty": "developing",
@@ -424,6 +431,7 @@
         "cs.math.probability"
       ],
       "unlocks": [
+        "cs.ai.ml-evaluation-responsibility",
         "cs.ds.intro-machine-learning"
       ],
       "cross_links": [],
@@ -440,6 +448,8 @@
         "cs.algo.flowcharts"
       ],
       "unlocks": [
+        "cs.arch.assembly-machine-code",
+        "cs.lang.programming-paradigms",
         "cs.prog.python-basics"
       ],
       "cross_links": [],
@@ -456,6 +466,7 @@
         "cs.prog.intro-programming"
       ],
       "unlocks": [
+        "cs.graphics.computer-graphics",
         "cs.prog.data-types-variables"
       ],
       "cross_links": [],
@@ -472,6 +483,7 @@
         "cs.prog.python-basics"
       ],
       "unlocks": [
+        "cs.lang.type-systems-semantics",
         "cs.prog.operators-expressions"
       ],
       "cross_links": [],
@@ -537,7 +549,8 @@
         "cs.prog.input-output"
       ],
       "unlocks": [
-        "cs.file.text-files"
+        "cs.file.text-files",
+        "cs.se.debugging-reliability"
       ],
       "cross_links": [],
       "difficulty": "proficient",
@@ -799,8 +812,8 @@
       "id": "cs.file.text-files",
       "name": "Text File Handling",
       "requires": [
-        "cs.prog.exception-handling",
-        "cs.func.functions"
+        "cs.func.functions",
+        "cs.prog.exception-handling"
       ],
       "unlocks": [
         "cs.file.binary-serialisation",
@@ -929,8 +942,8 @@
       "id": "cs.struct.trees",
       "name": "Trees",
       "requires": [
-        "cs.struct.linked-lists",
-        "cs.func.recursion"
+        "cs.func.recursion",
+        "cs.struct.linked-lists"
       ],
       "unlocks": [
         "cs.struct.binary-search-trees",
@@ -982,8 +995,8 @@
       "id": "cs.struct.heaps",
       "name": "Heaps",
       "requires": [
-        "cs.struct.trees",
-        "cs.struct.deques-priority-queues"
+        "cs.struct.deques-priority-queues",
+        "cs.struct.trees"
       ],
       "unlocks": [
         "cs.struct.shortest-path-algorithms"
@@ -999,8 +1012,8 @@
       "id": "cs.struct.hashing-hash-tables",
       "name": "Hashing and Hash Tables",
       "requires": [
-        "cs.data.dictionaries",
-        "cs.algo.time-space-complexity"
+        "cs.algo.time-space-complexity",
+        "cs.data.dictionaries"
       ],
       "unlocks": [],
       "cross_links": [
@@ -1036,6 +1049,7 @@
         "cs.struct.queues"
       ],
       "unlocks": [
+        "cs.ai.search-planning-reasoning",
         "cs.struct.shortest-path-algorithms"
       ],
       "cross_links": [],
@@ -1066,8 +1080,8 @@
       "id": "cs.struct.minimum-spanning-tree",
       "name": "Minimum Spanning Trees",
       "requires": [
-        "cs.struct.shortest-path-algorithms",
-        "cs.algo.greedy-algorithms"
+        "cs.algo.greedy-algorithms",
+        "cs.struct.shortest-path-algorithms"
       ],
       "unlocks": [],
       "cross_links": [],
@@ -1081,8 +1095,8 @@
       "id": "cs.struct.linear-search",
       "name": "Linear Search",
       "requires": [
-        "cs.data.lists",
-        "cs.algo.algorithms"
+        "cs.algo.algorithms",
+        "cs.data.lists"
       ],
       "unlocks": [
         "cs.struct.binary-search"
@@ -1098,8 +1112,8 @@
       "id": "cs.struct.binary-search",
       "name": "Binary Search",
       "requires": [
-        "cs.struct.linear-search",
-        "cs.algo.divide-and-conquer"
+        "cs.algo.divide-and-conquer",
+        "cs.struct.linear-search"
       ],
       "unlocks": [
         "cs.struct.elementary-sorts"
@@ -1131,8 +1145,8 @@
       "id": "cs.struct.efficient-sorts",
       "name": "Efficient Sorting — Merge Sort and Quick Sort",
       "requires": [
-        "cs.struct.elementary-sorts",
-        "cs.algo.divide-and-conquer"
+        "cs.algo.divide-and-conquer",
+        "cs.struct.elementary-sorts"
       ],
       "unlocks": [],
       "cross_links": [],
@@ -1150,7 +1164,8 @@
       ],
       "unlocks": [
         "cs.oop.classes-objects-python",
-        "cs.se.sdlc"
+        "cs.se.sdlc",
+        "cs.se.software-architecture"
       ],
       "cross_links": [],
       "difficulty": "advanced",
@@ -1377,7 +1392,8 @@
       ],
       "unlocks": [
         "cs.db.indexing-query-optimisation",
-        "cs.db.nosql-intro"
+        "cs.db.nosql-intro",
+        "cs.dist.consistency-replication"
       ],
       "cross_links": [],
       "difficulty": "advanced",
@@ -1457,7 +1473,8 @@
         "cs.os.process-management"
       ],
       "unlocks": [
-        "cs.os.synchronisation-deadlocks"
+        "cs.os.synchronisation-deadlocks",
+        "cs.parallel.parallel-computing"
       ],
       "cross_links": [],
       "difficulty": "advanced",
@@ -1486,10 +1503,12 @@
       "id": "cs.os.synchronisation-deadlocks",
       "name": "Synchronisation and Deadlocks",
       "requires": [
-        "cs.os.threads-concurrency",
-        "cs.os.cpu-scheduling"
+        "cs.os.cpu-scheduling",
+        "cs.os.threads-concurrency"
       ],
-      "unlocks": [],
+      "unlocks": [
+        "cs.parallel.concurrency-models"
+      ],
       "cross_links": [],
       "difficulty": "expert",
       "bloom": "analyze",
@@ -1634,6 +1653,7 @@
         "cs.net.osi-tcp-ip-models"
       ],
       "unlocks": [
+        "cs.dist.distributed-systems",
         "cs.net.routing-congestion"
       ],
       "cross_links": [],
@@ -1647,8 +1667,8 @@
       "id": "cs.net.routing-congestion",
       "name": "Routing and Congestion Control",
       "requires": [
-        "cs.net.tcp-udp-transport",
-        "cs.net.ip-addressing"
+        "cs.net.ip-addressing",
+        "cs.net.tcp-udp-transport"
       ],
       "unlocks": [
         "cs.net.wireless-mobile-networks"
@@ -1727,11 +1747,12 @@
       "id": "cs.sec.network-web-security",
       "name": "Network and Web Security",
       "requires": [
-        "cs.sec.cryptography-basics",
-        "cs.net.application-protocols"
+        "cs.net.application-protocols",
+        "cs.sec.cryptography-basics"
       ],
       "unlocks": [
-        "cs.sec.data-protection-privacy"
+        "cs.sec.data-protection-privacy",
+        "cs.sec.secure-software-engineering"
       ],
       "cross_links": [],
       "difficulty": "advanced",
@@ -1746,7 +1767,9 @@
       "requires": [
         "cs.sec.network-web-security"
       ],
-      "unlocks": [],
+      "unlocks": [
+        "cs.ai.ml-evaluation-responsibility"
+      ],
       "cross_links": [],
       "difficulty": "proficient",
       "bloom": "evaluate",
@@ -1761,6 +1784,7 @@
         "cs.net.application-protocols"
       ],
       "unlocks": [
+        "cs.hci.human-computer-interaction",
         "cs.web.html-css-basics"
       ],
       "cross_links": [],
@@ -1804,8 +1828,8 @@
       "id": "cs.theory.finite-automata",
       "name": "Finite Automata",
       "requires": [
-        "cs.found.boolean-logic",
-        "cs.algo.asymptotic-notation"
+        "cs.algo.asymptotic-notation",
+        "cs.found.boolean-logic"
       ],
       "unlocks": [
         "cs.theory.regular-expressions"
@@ -1840,6 +1864,7 @@
         "cs.theory.regular-expressions"
       ],
       "unlocks": [
+        "cs.lang.compilers-interpreters",
         "cs.theory.turing-machines"
       ],
       "cross_links": [],
@@ -1869,8 +1894,8 @@
       "id": "cs.theory.complexity-classes",
       "name": "Computational Complexity Classes",
       "requires": [
-        "cs.theory.turing-machines",
-        "cs.algo.np-completeness"
+        "cs.algo.np-completeness",
+        "cs.theory.turing-machines"
       ],
       "unlocks": [],
       "cross_links": [],
@@ -1887,6 +1912,8 @@
         "cs.oop.oop-concepts"
       ],
       "unlocks": [
+        "cs.hci.human-computer-interaction",
+        "cs.se.requirements-specification",
         "cs.se.version-control-git"
       ],
       "cross_links": [],
@@ -1919,7 +1946,9 @@
         "cs.se.version-control-git"
       ],
       "unlocks": [
-        "cs.se.agile-design-principles"
+        "cs.se.agile-design-principles",
+        "cs.se.debugging-reliability",
+        "cs.sec.secure-software-engineering"
       ],
       "cross_links": [],
       "difficulty": "advanced",
@@ -1932,8 +1961,8 @@
       "id": "cs.se.agile-design-principles",
       "name": "Agile Practices and Software Design Principles",
       "requires": [
-        "cs.se.software-testing",
-        "cs.oop.design-patterns-intro"
+        "cs.oop.design-patterns-intro",
+        "cs.se.software-testing"
       ],
       "unlocks": [],
       "cross_links": [],
@@ -1947,8 +1976,8 @@
       "id": "cs.ds.numpy-arrays",
       "name": "NumPy for Numerical Computing",
       "requires": [
-        "cs.func.modules-packages",
-        "cs.data.lists"
+        "cs.data.lists",
+        "cs.func.modules-packages"
       ],
       "unlocks": [
         "cs.ds.pandas-dataframes"
@@ -2000,6 +2029,7 @@
       "name": "Introduction to Machine Learning",
       "requires": [
         "cs.ds.data-visualisation",
+        "cs.math.linear-algebra",
         "cs.math.statistics-for-computing"
       ],
       "unlocks": [
@@ -2020,6 +2050,7 @@
         "cs.ds.intro-machine-learning"
       ],
       "unlocks": [
+        "cs.ai.ml-evaluation-responsibility",
         "cs.ds.neural-networks-intro"
       ],
       "cross_links": [],
@@ -2056,6 +2087,321 @@
       "mastery_threshold": 0.8,
       "estimated_hours": 8,
       "description": "The perceptron and the artificial neuron; activation functions; forward propagation; gradient-based learning and backpropagation at a conceptual level."
+    },
+    {
+      "id": "cs.math.propositional-predicate-logic",
+      "name": "Propositional and Predicate Logic",
+      "requires": [
+        "cs.math.discrete-mathematics"
+      ],
+      "difficulty": "proficient",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Logical connectives, truth tables, predicates, quantifiers, implication, equivalence, validity, and translating precise statements into formal logic.",
+      "unlocks": [
+        "cs.ai.knowledge-representation"
+      ],
+      "cross_links": []
+    },
+    {
+      "id": "cs.math.linear-algebra",
+      "name": "Linear Algebra for Computing",
+      "requires": [
+        "cs.math.sets-relations-functions"
+      ],
+      "difficulty": "advanced",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 5,
+      "description": "Vectors, matrices, matrix operations, linear transformations, dot products, systems of linear equations, and the computational role of dimensionality.",
+      "unlocks": [
+        "cs.ds.intro-machine-learning",
+        "cs.graphics.computer-graphics"
+      ],
+      "cross_links": []
+    },
+    {
+      "id": "cs.arch.assembly-machine-code",
+      "name": "Assembly Language and Machine-Code Execution",
+      "requires": [
+        "cs.found.cpu-architecture",
+        "cs.prog.intro-programming"
+      ],
+      "difficulty": "advanced",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 5,
+      "description": "Registers, instructions, operands, addressing, assembly-to-machine-code translation, stack frames, calling conventions, and tracing short instruction sequences.",
+      "unlocks": [],
+      "cross_links": []
+    },
+    {
+      "id": "cs.arch.performance-analysis",
+      "name": "Computer Performance and Benchmarking",
+      "requires": [
+        "cs.algo.time-space-complexity",
+        "cs.found.cpu-architecture"
+      ],
+      "difficulty": "advanced",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Latency, throughput, speedup, Amdahl's law, measurement noise, representative benchmarks, profiling, and the limits of comparing systems with one metric.",
+      "unlocks": [],
+      "cross_links": []
+    },
+    {
+      "id": "cs.lang.programming-paradigms",
+      "name": "Programming Language Paradigms",
+      "requires": [
+        "cs.prog.intro-programming"
+      ],
+      "difficulty": "proficient",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Imperative, procedural, object-oriented, functional, declarative, and event-driven paradigms; state, composition, side effects, and trade-offs between approaches.",
+      "unlocks": [
+        "cs.lang.type-systems-semantics"
+      ],
+      "cross_links": []
+    },
+    {
+      "id": "cs.lang.type-systems-semantics",
+      "name": "Type Systems and Programming-Language Semantics",
+      "requires": [
+        "cs.lang.programming-paradigms",
+        "cs.prog.data-types-variables"
+      ],
+      "difficulty": "advanced",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 5,
+      "description": "Static versus dynamic typing, strong versus weak typing as language-specific distinctions, type inference, type errors, operational meaning, and how semantics determine program behaviour.",
+      "unlocks": [
+        "cs.lang.compilers-interpreters"
+      ],
+      "cross_links": []
+    },
+    {
+      "id": "cs.lang.compilers-interpreters",
+      "name": "Compiler and Interpreter Design",
+      "requires": [
+        "cs.lang.type-systems-semantics",
+        "cs.theory.context-free-grammars"
+      ],
+      "difficulty": "expert",
+      "bloom": "analyze",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 7,
+      "description": "Lexing, parsing, abstract syntax trees, semantic analysis, intermediate representations, optimisation, code generation, interpretation, and compiler error recovery.",
+      "unlocks": [],
+      "cross_links": []
+    },
+    {
+      "id": "cs.parallel.parallel-computing",
+      "name": "Parallel Computing Fundamentals",
+      "requires": [
+        "cs.algo.time-space-complexity",
+        "cs.os.threads-concurrency"
+      ],
+      "difficulty": "advanced",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 5,
+      "description": "Parallelism versus concurrency, task and data parallelism, decomposition, communication overhead, speedup, scalability, and limits imposed by serial work.",
+      "unlocks": [
+        "cs.dist.distributed-systems",
+        "cs.parallel.concurrency-models"
+      ],
+      "cross_links": []
+    },
+    {
+      "id": "cs.parallel.concurrency-models",
+      "name": "Concurrency Models and Coordination",
+      "requires": [
+        "cs.os.synchronisation-deadlocks",
+        "cs.parallel.parallel-computing"
+      ],
+      "difficulty": "expert",
+      "bloom": "evaluate",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 6,
+      "description": "Shared-memory threads, message passing, actors, async/event-loop models, ordering, race conditions, deadlock risks, and choosing coordination strategies.",
+      "unlocks": [],
+      "cross_links": []
+    },
+    {
+      "id": "cs.dist.distributed-systems",
+      "name": "Distributed Systems Fundamentals",
+      "requires": [
+        "cs.net.tcp-udp-transport",
+        "cs.parallel.parallel-computing"
+      ],
+      "difficulty": "advanced",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 5,
+      "description": "Independent networked nodes, partial failure, latency, time and ordering, fault models, coordination, client-server versus peer-to-peer designs, and failure-aware system behaviour.",
+      "unlocks": [
+        "cs.dist.consistency-replication"
+      ],
+      "cross_links": []
+    },
+    {
+      "id": "cs.dist.consistency-replication",
+      "name": "Replication, Consistency, and Distributed Data",
+      "requires": [
+        "cs.db.transactions-acid",
+        "cs.dist.distributed-systems"
+      ],
+      "difficulty": "expert",
+      "bloom": "evaluate",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 6,
+      "description": "Replication strategies, leader and multi-leader designs, strong versus eventual consistency, quorum intuition, conflict resolution, availability trade-offs, and consistency guarantees.",
+      "unlocks": [],
+      "cross_links": []
+    },
+    {
+      "id": "cs.hci.human-computer-interaction",
+      "name": "Human-Computer Interaction and Usability",
+      "requires": [
+        "cs.se.sdlc",
+        "cs.web.client-server-model"
+      ],
+      "difficulty": "proficient",
+      "bloom": "create",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 5,
+      "description": "User research, task analysis, interaction design, affordances and feedback, accessibility, prototyping, usability testing, and evaluating interfaces against user needs.",
+      "unlocks": [],
+      "cross_links": []
+    },
+    {
+      "id": "cs.graphics.computer-graphics",
+      "name": "Computer Graphics Fundamentals",
+      "requires": [
+        "cs.math.linear-algebra",
+        "cs.prog.python-basics"
+      ],
+      "difficulty": "advanced",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 6,
+      "description": "Coordinate systems, transformations, rasterisation, colour and sampling, geometric primitives, camera and projection concepts, and the rendering pipeline.",
+      "unlocks": [],
+      "cross_links": []
+    },
+    {
+      "id": "cs.se.requirements-specification",
+      "name": "Requirements Engineering and Specification",
+      "requires": [
+        "cs.se.sdlc"
+      ],
+      "difficulty": "proficient",
+      "bloom": "create",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 4,
+      "description": "Stakeholder analysis, functional and non-functional requirements, user stories and use cases, acceptance criteria, traceability, ambiguity reduction, and requirements validation.",
+      "unlocks": [
+        "cs.se.software-architecture"
+      ],
+      "cross_links": []
+    },
+    {
+      "id": "cs.se.software-architecture",
+      "name": "Software Architecture and System Design",
+      "requires": [
+        "cs.oop.oop-concepts",
+        "cs.se.requirements-specification"
+      ],
+      "difficulty": "advanced",
+      "bloom": "create",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 6,
+      "description": "Architectural styles, module boundaries, interfaces, coupling and cohesion, quality attributes, trade-off analysis, architecture diagrams, and documenting design decisions.",
+      "unlocks": [],
+      "cross_links": []
+    },
+    {
+      "id": "cs.se.debugging-reliability",
+      "name": "Debugging, Reliability, and Defensive Programming",
+      "requires": [
+        "cs.prog.exception-handling",
+        "cs.se.software-testing"
+      ],
+      "difficulty": "advanced",
+      "bloom": "analyze",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 5,
+      "description": "Reproducing defects, forming and testing hypotheses, debugging tools, logging, defensive checks, fault handling, reliability measures, and regression prevention.",
+      "unlocks": [],
+      "cross_links": []
+    },
+    {
+      "id": "cs.sec.secure-software-engineering",
+      "name": "Secure Software Engineering",
+      "requires": [
+        "cs.se.software-testing",
+        "cs.sec.network-web-security"
+      ],
+      "difficulty": "advanced",
+      "bloom": "evaluate",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 5,
+      "description": "Threat modelling, attack surfaces, secure defaults, input validation, dependency risk, secrets management, security testing, code review, and integrating security throughout the development lifecycle.",
+      "unlocks": [],
+      "cross_links": []
+    },
+    {
+      "id": "cs.ai.search-planning-reasoning",
+      "name": "AI Search, Planning, and Reasoning",
+      "requires": [
+        "cs.algo.algorithms",
+        "cs.struct.graph-traversal"
+      ],
+      "difficulty": "advanced",
+      "bloom": "apply",
+      "mastery_threshold": 0.75,
+      "estimated_hours": 5,
+      "description": "State-space search, uninformed and heuristic search, admissible heuristics, constraint satisfaction, planning, and reasoning about search completeness and optimality.",
+      "unlocks": [
+        "cs.ai.knowledge-representation"
+      ],
+      "cross_links": []
+    },
+    {
+      "id": "cs.ai.knowledge-representation",
+      "name": "Knowledge Representation and Reasoning",
+      "requires": [
+        "cs.ai.search-planning-reasoning",
+        "cs.math.propositional-predicate-logic"
+      ],
+      "difficulty": "expert",
+      "bloom": "analyze",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 5,
+      "description": "Rules, logic-based representations, knowledge graphs, inference, uncertainty limits, ontologies, and trade-offs between expressive power and tractable reasoning.",
+      "unlocks": [],
+      "cross_links": []
+    },
+    {
+      "id": "cs.ai.ml-evaluation-responsibility",
+      "name": "Machine-Learning Evaluation and Responsible AI",
+      "requires": [
+        "cs.ds.supervised-learning-models",
+        "cs.math.statistics-for-computing",
+        "cs.sec.data-protection-privacy"
+      ],
+      "difficulty": "advanced",
+      "bloom": "evaluate",
+      "mastery_threshold": 0.8,
+      "estimated_hours": 5,
+      "description": "Train/validation/test separation, leakage, calibration, baseline comparison, class imbalance, fairness and bias, explainability limits, privacy, dataset provenance, and responsible deployment.",
+      "unlocks": [],
+      "cross_links": []
     }
   ]
 }
