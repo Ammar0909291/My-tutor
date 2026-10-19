@@ -378,3 +378,7 @@ starts at the axis bullets). The same lesson offered a spring-constant Quick Che
 Accounts: 2 disposable (runs A, B), both deleted, re-login refused. Run A's harness stopped at its 5th turn (a Quick Check
 card covered Send); run B used a temporary copy of the harness that sends with a DOM click and saves each turn. That
 copy was not committed.
+
+**Closed (owner, 2026-10-18).** A-2's figure-pointing scope stays as it is: "the <topic> graph" is not treated as a
+claim about the figure on screen. The "yield strength" case stays NOT EXERCISED in production and is covered by unit
+tests. No further A-2 work is queued.
