@@ -112,6 +112,9 @@ export function balanceMathDelimiters(text: string): { text: string; repaired: b
   const close = { '[': '\\]', '(': '\\)' } as const
   while (i < src.length) {
     const two = src.slice(i, i + 2)
+    // A doubled backslash is a LaTeX row break ("\\", "\\[2pt]" in a matrix), never the start of a delimiter: read as "\" + "\[" it
+    // opened a display formula inside the matrix and the repair closed it again — "2\\]\[2pt]" garbled the matrix (live, 2026-10-19).
+    if (two === '\\\\') { out += two; i += 2; continue }
     if (two === '\\[' || two === '\\(') {
       const kind = two[1] as '[' | '('
       if (open) { out += close[open]; repaired = true }

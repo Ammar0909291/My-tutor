@@ -544,6 +544,9 @@ export function isStandaloneArtLine(line: string): boolean {
   // left to the paragraph passes and their narrower co-occurrence rules.
   if (!/[A-Za-z0-9]/.test(t)) return false
   const prose = t.replace(/\[[^\]]*\]/g, ' ').replace(/[^A-Za-z\s]/g, ' ').split(/\s+/).filter((w) => w.length > 1)
+  // A flow drawn between pipes ("value: 5 | integer | ------> | float |", live 2026-10-19, cs.prog.type-conversion): an arrow run between
+  // two or more "|" cells. A markdown table row has pipes but never an arrow run, so up to six words of cell labels still read as a drawing.
+  if (/\|[^|\n]*-{2,}>[^|\n]*\|/.test(t) && prose.length <= 6) return true
   return prose.length <= 2
 }
 

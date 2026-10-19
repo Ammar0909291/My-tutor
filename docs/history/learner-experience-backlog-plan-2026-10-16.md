@@ -305,6 +305,15 @@ mutation-checked (old engine, old handler, old guard all fail them). Checked and
 Gates: full suite 1,002 files, 25,561 tests passed; `tsc` ratchet 0 <= 0.
 Not verified: the read-aloud pause on a real phone (the browser's own implementation cannot be driven from here).
 
+### Live QA defects, 2026-10-19 (test6 account, 10 concepts, 6 subjects) — fixed
+1. **"Continue" answered with a confirm-back** ("So you understood … have I got that right?", English / CS / biology): `FRAME_START_RE` did not know
+   "So you …" / "you understood|followed|are ready"; `stripConfirmBack` now removes them (and `needsRepair` regenerates a stub). `attributionGuard.test.ts`.
+2. **Garbled matrix** (`2\\]\[2pt]`): `balanceMathDelimiters` read the second backslash of a row break `\\[2pt]` as `\[`. A doubled backslash is now skipped. `mathRowBreakDelimiters.test.ts`.
+3. **ASCII flow line** (`value: 5 | integer | ---> | float |`) shipped in a CS reply: `isStandaloneArtLine` now treats an arrow run between pipes as art.
+4. **Number line served for an English concept** (generated figure): the figure critic rejects a number_line / graph for `eng.*` (`numericAxisForLanguageConcept`).
+Not changed, by design: "answered-but-not-server-graded" means a typed (non-card) answer is not counted by the verified counters (`unverifiedReasonFor`).
+Not changed: biology's few questions per 20 turns and long replies (a pacing/prompt tuning decision, not a defect with a deterministic fix).
+
 **B2 is closed.** Open items under this plan: computer science only (skipped on owner instruction).
 
 ### Next

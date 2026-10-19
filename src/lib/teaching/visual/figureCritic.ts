@@ -334,6 +334,13 @@ export function checkClaimSupport(
   return { verdict: 'pass', reason: 'no unsupported multiplicity claim in the title' }
 }
 
+/** A generated number line or graph offered for an English concept: no language idea is a position on a numeric axis. */
+export function numericAxisForLanguageConcept(figure: GeneratedFigure, conceptId: string): boolean {
+  if (!conceptId.startsWith('eng.') || figure.kind !== 'spec') return false
+  const type = (figure.spec as { type?: string }).type
+  return type === 'number_line' || type === 'graph'
+}
+
 /** The deterministic half. Free, and it can only ever reject. */
 export function staticChecks(figure: GeneratedFigure) {
   return {
@@ -453,7 +460,14 @@ export async function criticiseFigure(
   // A claim the payload mechanically contradicts is as terminal as a figure
   // that cannot render: no reading of the concept makes a title true about a
   // picture that does not contain what it names.
+  // A language concept is never drawn on a numeric axis (live, 2026-10-19, eng.vocab.register-and-formality: a "formality spectrum" was a
+  // number line from -5 to 5, and the tutor asked the learner what they noticed about the labels on it). Terminal, like a figure that
+  // will not render.
+  if (numericAxisForLanguageConcept(figure, ctx.conceptId)) {
+    dimensions.relevance = { verdict: 'fail', reason: 'a numeric axis (number line / graph) is not a figure of a language concept' }
+  }
   const staticFailed =
+    dimensions.relevance.verdict === 'fail' && dimensions.relevance.reason.startsWith('a numeric axis') ||
     dimensions.rendering.verdict === 'fail' ||
     dimensions.grounding.verdict === 'fail' ||
     dimensions.claimSupport.verdict === 'fail'
