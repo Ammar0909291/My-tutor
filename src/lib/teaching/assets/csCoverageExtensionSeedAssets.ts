@@ -3,7 +3,7 @@ import { GradeBand, ProbeDifficulty } from '@prisma/client'
 import type { SeedExplanation, SeedProbe } from './brainSeedAssets'
 type W={text:string;misconceptionId?:string}
 const source=(id:string)=>`educational-brain/concepts/computer_science/${id}.md`
-const exp=(id:string,familyKind:'core_explanation'|'misconception_repair',content:string):SeedExplanation=>({conceptId:id,subjectSlug:'computer_science',familyKind,gradeBand:GradeBand.UNDERGRADUATE,content,source:source(id)})
+const exp=(id:string,familyKind:'core_explanation'|'misconception_repair',content:string):SeedExplanation=>({conceptId:id,subjectSlug:'computer_science',familyKind,gradeBand:GradeBand.UNDERGRADUATE,content,targetedMisconceptions:familyKind==='misconception_repair'?[id+':M1',id+':M2']:[],source:source(id)})
 function q(id:string,probeKind:'mcq'|'misconception_probe'|'short_answer',stem:string,correct:string,wrong:W[],difficulty:ProbeDifficulty,targetedMisconceptions:string[]=[]):SeedProbe{return{conceptId:id,subjectSlug:'computer_science',probeKind,gradeBand:GradeBand.UNDERGRADUATE,stem,choices:[{text:correct,isCorrect:true},...wrong.map(w=>({text:w.text,isCorrect:false,...(w.misconceptionId?{misconceptionId:w.misconceptionId}:{})}))],correctValue:correct,difficulty,targetedMisconceptions,source:source(id)}}
 const DISC='cs.math.discrete-mathematics', PROOF='cs.math.proofs-and-induction', SETS='cs.math.sets-relations-functions', COMB='cs.math.combinatorics-counting', PROB='cs.math.probability', STAT='cs.math.statistics-for-computing'
 export const CS_COVERAGE_EXTENSION_EXPLANATIONS:SeedExplanation[]=[
