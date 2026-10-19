@@ -227,6 +227,7 @@ function domainLabel(domain: string): string {
     'cs.web':     'Web & Cloud Development',
     'cs.theory':  'Theory of Computation',
     'cs.se':      'Software Engineering',
+    'cs.math': 'Mathematical Foundations for Computer Science',
     'cs.ds':      'Data Science & AI',
     // ── Biology KG: qualified keys ────────────────────────────────────────────
     'bio.found':   'Foundations of Biology',
