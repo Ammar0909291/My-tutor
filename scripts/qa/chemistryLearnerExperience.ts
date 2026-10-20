@@ -52,6 +52,8 @@ function oracleIndex(mcq: { question: string; options: string[] }): number {
 
 const arg = (n: string, d?: string) => { const i = process.argv.indexOf(`--${n}`); return i >= 0 ? process.argv[i + 1] : d }
 const SUBJECT = arg('subject', 'chemistry')!
+/** 'next' for a fresh lesson (default); 'restart' re-teaches a concept the account already finished (clears that lesson's state). */
+const OPEN_MODE = (arg('mode', 'next') as 'next' | 'restart' | 'review')
 const EMAIL = process.env.QA_EMAIL ?? '', PASSWORD = process.env.QA_PASSWORD ?? ''
 const scrub = (s: string) => (PASSWORD ? s.split(PASSWORD).join('***') : s).split(EMAIL).join('<account>')
 
@@ -75,7 +77,7 @@ async function driveLesson(cookie: string, lesson: { lessonTitle: string; order:
   const sid = await createSession(cookie, SUBJECT, `qa-exp-${lesson.topicSlug}-${Date.now()}`)
   const turns: Turn[] = []
   const t0 = Date.now()
-  let p = await openLesson(cookie, sid, { lessonTitle: lesson.lessonTitle, lessonOrder: lesson.order, topicSlug: lesson.topicSlug, unitTitle: lesson.unitTitle, totalLessons: total }, 'en', 'next')
+  let p = await openLesson(cookie, sid, { lessonTitle: lesson.lessonTitle, lessonOrder: lesson.order, topicSlug: lesson.topicSlug, unitTitle: lesson.unitTitle, totalLessons: total }, 'en', OPEN_MODE)
   const record = (n: number, sent: string, ms: number, r: TurnPayload) => turns.push({
     n, sent, ms, provider: (r.provider as string | null) ?? null, text: String(r.text ?? ''), figure: carriesFigure(r) ? figureLabel(r) ?? 'figure' : null,
     figureField: figureField(r), mcq: r.mcq ? { question: r.mcq.question, options: r.mcq.options } : null, mastery: r.mastery ?? null, complete: Boolean(r.lessonComplete?.complete) || /Lesson complete|finished — nice work/i.test(String(r.text ?? '')),
