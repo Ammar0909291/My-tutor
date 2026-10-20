@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "generatedOn": "2026-10-17",
+ "generatedOn": "2026-10-20",
  "about": "The committed result of the Chemistry visual closure audit: every concept classified A-E (taxonomy), every served figure instance rendered in Chromium at 390 and 1280 px in both themes across every control state, and the machine semantic verdict. A REVIEW_REQUIRED here means no deterministic assertion covers the chemistry; the human answer is semantic-review.json. src/tests/chemistryVisualAudit.test.ts recomputes every served fingerprint from the resolver and fails, naming the concepts, when this file is stale.",
  "taxonomy": {
   "A": "intentionally no figure: the generator recorded a deliberate decline (no suitable form) and no faithful figure is authored",
@@ -21,6 +21,7 @@
  "categoryCUnreachableCachedFigures": [
   "chem.bio.nucleic-acids",
   "chem.bond.ionic-bonding",
+  "chem.bond.mo-theory",
   "chem.coord.applications",
   "chem.coord.bonding",
   "chem.coord.cft",
@@ -58,8 +59,8 @@
   },
   "served": 100,
   "bySource": {
-   "tier0": 39,
-   "tier3": 43,
+   "tier0": 40,
+   "tier3": 42,
    "none": 86,
    "tier2": 2,
    "tier1": 16
@@ -73,8 +74,8 @@
    "REVIEW_REQUIRED": 92,
    "PASS": 8
   },
-  "statesMeasured": 1092,
-  "categoryCUnreachableCachedFigures": 28,
+  "statesMeasured": 1114,
+  "categoryCUnreachableCachedFigures": 29,
   "withMissingRenders": 0
  },
  "concepts": [
@@ -372,12 +373,12 @@
   {
    "id": "chem.bond.mo-theory",
    "category": "E",
-   "source": "tier3",
-   "provenance": "generated:chem.bond.mo-theory:cached",
-   "instanceId": "tier3:chem.bond.mo-theory",
-   "fingerprint": "f91f477cb",
+   "source": "tier0",
+   "provenance": "generator",
+   "instanceId": "scene:mo-diagram-h2",
+   "fingerprint": "f37c51c67",
    "verdict": "REVIEW_REQUIRED",
-   "shadowedCachedFigure": false
+   "shadowedCachedFigure": true
   },
   {
    "id": "chem.bond.polar-molecules",
@@ -2300,6 +2301,41 @@
    ],
    "minFontPx": 10,
    "minContrast": 2.13
+  },
+  {
+   "id": "scene:mo-diagram-h2",
+   "tier": "tier0",
+   "origin": "authored",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.bond.mo-theory"
+   ],
+   "fingerprint": "f37c51c67",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "REVIEW_REQUIRED",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": "unknown",
+   "statesMeasured": 26,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 24,
+    "REVIEW_REQUIRED": 2,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [
+    "INNER_SCROLL_X"
+   ],
+   "minFontPx": 11.5,
+   "minContrast": 4.68
   },
   {
    "id": "scene:cell-comparison-chem.state.real-gases",
@@ -5170,39 +5206,6 @@
     "chem.found.concentration"
    ],
    "fingerprint": "f2df4d844",
-   "verdict": "REVIEW_REQUIRED",
-   "render": "PASS",
-   "semantic": "REVIEW_REQUIRED",
-   "semanticFamily": null,
-   "statesMeasured": 4,
-   "viewports": [
-    "1280",
-    "390"
-   ],
-   "themes": [
-    "dark",
-    "light"
-   ],
-   "counts": {
-    "PASS": 4,
-    "REVIEW_REQUIRED": 0,
-    "FAIL": 0
-   },
-   "failCodes": [],
-   "reviewCodes": [],
-   "minFontPx": 10,
-   "minContrast": 4.66
-  },
-  {
-   "id": "tier3:chem.bond.mo-theory",
-   "tier": "tier3",
-   "origin": "generated",
-   "reachability": "resolver",
-   "interactive": false,
-   "conceptIds": [
-    "chem.bond.mo-theory"
-   ],
-   "fingerprint": "f91f477cb",
    "verdict": "REVIEW_REQUIRED",
    "render": "PASS",
    "semantic": "REVIEW_REQUIRED",

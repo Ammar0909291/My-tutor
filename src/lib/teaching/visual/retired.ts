@@ -164,10 +164,10 @@ export const RETIRED_VISUAL_BINDINGS: Readonly<Record<string, string>> = {
   // (chem.bond.ionic-bonding and chem.bond.metallic-bonding were already
   // retired above for the same card; chem.bond.bond-parameters is left in
   // place as generic-but-not-wrong, since it IS a bond.)
-  'chem.bond.mo-theory':
-    'The card shows a LOCALISED shared pair between two atoms — which is the valence-bond ' +
-    'picture molecular orbital theory exists to replace. MO theory requires a bonding/' +
-    'antibonding energy-level diagram and delocalised orbitals over the whole molecule.',
+  // REMOVED 2026-10-20: 'chem.bond.mo-theory' ("The card shows a LOCALISED shared pair between two atoms — the valence-bond picture
+  // molecular orbital theory exists to replace. MO theory requires a bonding/antibonding energy-level diagram"). It now owns exactly
+  // that figure (moDiagram.ts: H₂ with σ below the two 1s levels and σ* above, paired electrons in σ, bond order derived from them),
+  // so — as with the physics rows above — the verdict no longer describes what the concept renders. Coverage: moDiagram.test.ts.
   'chem.bond.polar-molecules':
     'The card\'s own label is "shared pair" — EQUAL sharing between two symmetric atoms, ' +
     'i.e. a non-polar bond. Polarity is UNEQUAL sharing and needs partial charges and a ' +
@@ -268,7 +268,6 @@ export const RETIRED_ASSET_FINGERPRINTS: Readonly<Record<string, readonly string
   'chem.found.states-of-matter': ['ffdc76ff'], // card:three_crystal_lattice
   'chem.bond.metallic-bonding': ['f4a1f0cb9'], // card:three_bond_formation
   'chem.solid.amorphous': ['ffdc76ff'], // card:three_crystal_lattice
-  'chem.bond.mo-theory': ['f4a1f0cb9'], // card:three_bond_formation
   'chem.bond.polar-molecules': ['f4a1f0cb9'], // card:three_bond_formation
   'chem.bond.intermolecular': ['f4a1f0cb9'], // card:three_bond_formation
   'chem.bond.resonance': ['f4a1f0cb9'], // card:three_bond_formation

@@ -885,24 +885,6 @@
    "reason": "Independent review: No false statement (M = n/V and M1V1 = M2V2 are correct) but it is a generic problem-solving checklist: only molarity is named, molality/mass %/ppm/mole fraction are never mentioned, so 'converting between concentration units' is not actually taught; the dilution step is not a unit conversion; 'convert to moles' is not needed for every conversion (e.g. % to ppm).",
    "ownerDecision": "Owner / Curriculum Production Pipeline: accept the imprecision as is, or have the figure regenerated or retired. A generated figure is never edited in place; nothing was changed by this closure."
   },
-  "tier3:chem.bond.mo-theory": {
-   "fingerprint": "f91f477cb",
-   "concepts": [
-    "chem.bond.mo-theory"
-   ],
-   "family": "generated:tier3",
-   "initial": "generated (Tier 3) figure: no deterministic semantic audit covers it; admitted by chemistryAdmission; independent review ACCURATE",
-   "decision": "PASS",
-   "finding": "Independent review of the figure as cached in production: ACCURATE. All statements correct: bonding/antibonding sigma, pi and sigma*, pi* from LCAO; bond order = (bonding - antibonding)/2; unpaired electrons -> paramagnetic, all paired -> diamagnetic; Pauli and Hund. Nit: Aufbau (lowest energy first) is only implicit, 's-p mixing' for N2-and-lighter ordering is not mentioned, and no actual MO energy diagram is drawn.",
-   "fix": null,
-   "evidence": [
-    {
-     "file": "docs/qa/chemistry-visual-audit/tier3-independent-review.json",
-     "contains": "\"conceptId\": \"chem.bond.mo-theory\""
-    }
-   ],
-   "remaining": "The reviewer's only note, if any, is quoted in the finding; the machine gates (chemistry admission, the shared validators) passed and the figure rendered in both viewports and themes. "
-  },
   "tier3:chem.bond.metallic-bonding": {
    "fingerprint": "f22ce4bee",
    "concepts": [
@@ -1704,6 +1686,28 @@
     "https://en.wikipedia.org/wiki/Critical_point_(thermodynamics)",
     "https://en.wikipedia.org/wiki/Phase_diagram"
    ]
+  },
+  "scene:mo-diagram-h2": {
+   "fingerprint": "f37c51c67",
+   "concepts": [
+    "chem.bond.mo-theory"
+   ],
+   "family": "plot",
+   "initial": "semantic audit REVIEW_REQUIRED (no deterministic chemistry verifier exists for this figure family); render REVIEW: INNER_SCROLL_X in the expanded view only (R15)",
+   "decision": "FIXED→PASS",
+   "finding": "Replaces the generated six-box procedure flowchart (Tier 3, reviewed ACCURATE on 2026-10-12 with the note \"no actual MO energy diagram is drawn\") with the H₂ energy-level diagram. Read from the code, the tests and the Chromium screenshots (390 px dark and light, 1280 px dark): energy is the vertical axis; each hydrogen 1s level sits at the same height on the left and the right; the bonding σ level lies below them and the antibonding σ* above them; four lines join each 1s level to both molecular levels; the two electrons in σ have opposite spins (Pauli) and each 1s level holds one; the printed bond order (2 − 0) / 2 = 1 is the one the drawn electrons give. The narration extends the same picture to He₂ ((2 − 2) / 2 = 0, no stable molecule) and to O₂ (two parallel-spin electrons in separate π* orbitals, paramagnetic), the outcomes the lesson's cards ask about.",
+   "fix": "The figure was the steps of building an MO diagram with no diagram. New generator `moDiagram.ts`: an energy axis, two 1s levels, σ and σ*, four combination lines, four spin arrows, seven labels, and a consistency checker that derives the bond order from the drawn electrons and fails when the printed number, the level order or the Pauli pairing disagrees.",
+   "evidence": [
+    {
+     "file": "src/tests/moDiagram.test.ts",
+     "contains": "the bond order printed on the figure is the one its drawn electrons give"
+    },
+    {
+     "file": "src/tests/moDiagram.test.ts",
+     "contains": "two parallel spins in σ are rejected"
+    }
+   ],
+   "remaining": "A schematic, not to scale: σ and σ* are drawn symmetric about the 1s level, whereas in reality the antibonding orbital is raised slightly more than the bonding orbital is lowered (the narration does not claim equal shifts). H₂ only; the heteronuclear and second-row diagrams (σ/π ordering, s–p mixing) are described in words, not drawn. The expanded (fullscreen) view scrolls: the chrome around the scene is taller than the window (R15, measured and bounded, by design)."
   }
  }
 }

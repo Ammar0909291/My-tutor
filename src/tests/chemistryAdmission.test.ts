@@ -114,10 +114,11 @@ describe('no chemistry figure the resolver serves today is blanked by the gate',
   // kept, harmful is retired — none was harmful) and replaced one — chem.solid.packing now owns the face-centred-cubic cell.
   // 53 -> 55 (2026-10-12, R12): chem.surface.colloids and chem.sblock.water had no figure (the review set); each now owns a
   // concept-authored comparison scene worded from its Educational Brain entry, and both pass this gate.
+  // 55 -> 56 (2026-10-20): chem.bond.mo-theory (retired card -> no figure) now owns an H₂ energy-level diagram (moDiagram.ts); it passes this gate.
   it('serves the concepts that have a faithful figure (nothing rejected:chemistry-validation-failed)', () => {
     const rejected = decisions.filter((x) => String(x.d.reason ?? '').includes('chemistry-validation-failed')).map((x) => x.id)
     expect(rejected).toEqual([])
-    expect(decisions.filter((x) => x.d.graphical).length).toBe(55)
+    expect(decisions.filter((x) => x.d.graphical).length).toBe(56)
   })
 
   it('every served chemistry scene audits without a single FAIL finding', () => {
