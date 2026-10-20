@@ -49,6 +49,9 @@ Not a timeout. `[visual-v2] provenance: 'no-figure:critic-reject-cached'` on the
 | Chemistry audit | two new instances (`scene:mechanism-energy-profile`, `scene:heterogeneous-catalysis-surface`): 38 PASS, 4 REVIEW (R15, expanded-view scroll), 0 FAIL; `semantic-review.json` entries added; admission pin 56 → 58 | `chemistryVisualAudit`, `chemistrySemanticReview`, `chemistryAdmission` |
 | QA driver oracle read only `physics*.ts` files (769 of 2,326 physics probes), so a Lorentz lesson closed at 33 % on "Not quite" replies the learner had not earned | `scripts/qa/chemistryLearnerExperience.ts` also reads `authoredSeedAssets.ts`; `--mode restart` added | (script) |
 
+### Found on production after the first push of these fixes, and fixed
+`eng.linguistics.language-families` (no authored figure), explicit diagram request: the learner still got "I don't have a picture for this one" followed by a fenced `World Languages ├─ Indo-European …` tree and "This tree shows …". Runtime logs of that request: the ASCII strip ran and removed the first draft's chart, then `[analogy-cap] regenerated: true` wrote a NEW reply (a tree) after every diagram strip had already run, and nothing re-checked it. Fix: a last sweep in `chat/route.ts` (the same ASCII-art and phantom-figure strips, once more on the final text, only when no figure is attached, never to an empty reply) before the no-picture judgement; the one-sentence remainder is then a stub and goes through the one regeneration in words. Pinned by `noPictureRepairWiring.test.ts`.
+
 ## Not changed, with the reason
 - **Biology population genetics (6.5):** its figure (Hardy–Weinberg with the four forces that disturb it) is correct; it does not show p, q or p² + 2pq + q². A second figure for the same concept would be a content decision; not authored.
 - **Physics Lorentz / spacetime:** authored figures (Minkowski diagram; light cone) are good (8/10); the early close was the script oracle.

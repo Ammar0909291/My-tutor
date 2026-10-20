@@ -14,6 +14,12 @@ describe('no-picture repair wiring (chat route)', () => {
     expect(block.length).toBeGreaterThan(500)
     expect(route.indexOf('A PICTURE REQUEST THAT CANNOT BE MET')).toBeLessThan(route.indexOf('AN UNMET PICTURE REQUEST IS SAID OUT LOUD'))
   })
+  it('first sweeps the FINAL text with the ASCII-art and phantom-figure strips (a late regeneration writes the reply after the earlier strips ran), only when no figure is attached, and never to an empty reply', () => {
+    expect(block).toMatch(/THE LAST SWEEP/)
+    expect(block).toMatch(/if \(!attachedNow\) \{[\s\S]*sweepPhantom\(sweepAscii\(cleanText, false\)\.text\)/)
+    expect(block).toMatch(/swept\.trim\(\)\.length > 0/)
+    expect(block.indexOf('THE LAST SWEEP')).toBeLessThan(block.indexOf("learnerRequestHoisted === 'diagram'"))
+  })
   it('runs only for an explicit diagram request with no figure attached, none shown earlier for the concept, no card served and the lesson not complete', () => {
     expect(block).toMatch(/learnerRequestHoisted === 'diagram'/)
     expect(block).toMatch(/!attachedNow/)

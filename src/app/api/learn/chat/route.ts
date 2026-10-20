@@ -13570,6 +13570,19 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         const attachedNow = Boolean(responseVisual) || Boolean(detectedVisualSpec) || Boolean(detectedSceneSpec)
         const shownEarlierForConcept = resolvedConceptId !== null && resolvedConceptId !== undefined
           && snapshotRRMLog.some((e) => e.matchedConcept === resolvedConceptId)
+        // THE LAST SWEEP. A later regeneration (the analogy cap, a stub repair) writes a new reply AFTER the diagram strips above have
+        // run, and nothing re-checks it: production, 2026-10-20, eng.linguistics.language-families — the regenerated reply carried a
+        // fenced "World Languages ├─ Indo-European …" tree and "This tree shows …" under "I don't have a picture". The same two strips,
+        // once more, on the final text (idempotent on text they have already cleaned); never to an empty reply.
+        if (!attachedNow) {
+          const { stripUnbackedAsciiDiagram: sweepAscii } = await import('@/lib/teaching/asciiDiagramGuard')
+          const { stripPhantomVisualClaims: sweepPhantom } = await import('@/lib/teaching/visualRegistry')
+          const swept = sweepPhantom(sweepAscii(cleanText, false).text)
+          if (swept !== cleanText && swept.trim().length > 0) {
+            console.warn('[ascii-diagram] ' + JSON.stringify({ event: 'late-sweep', conceptId: resolvedConceptId ?? null, charsBefore: cleanText.length, charsAfter: swept.length }))
+            cleanText = swept
+          }
+        }
         if (learnerRequestHoisted === 'diagram' && !attachedNow && !shownEarlierForConcept && !servedMcq && !serveLessonComplete) {
           const npr = await import('@/lib/teaching/visual/noPictureRepair')
           if (npr.pictureReplyIsNotAnExplanation(cleanText)) {
