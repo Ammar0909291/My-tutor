@@ -28,10 +28,10 @@ import { pathToFileURL } from 'node:url'
 // Keeps the minus sign and the symbols that tell answers apart in Mathematics: "(1, 0)" and "(−1, 0)" must not normalise to the same string.
 const norm = (s: string) => s.toLowerCase().replace(/^practice\s*:?\s*/i, '').replace(/[\u2212\u2013]/g, '-').replace(/[^\p{L}\p{N}\s\-/√^π°²³⁄]+/gu, ' ').replace(/\s+/g, ' ').trim()
 const PROBES = new Map<string, { correct: string[] }>()
-/** Every authored probe of the subject: each `src/lib/teaching/assets/<subject>*.ts` module's exported arrays of `{ stem, choices }`. */
+/** Every authored probe of the subject: each `src/lib/teaching/assets/<subject>*.ts` module's exported arrays of `{ stem, choices }`, plus the shared `authoredSeedAssets.ts` (the original physics/maths/chemistry corpus lives there; a stem is its own key, so other subjects' probes are harmless). */
 async function loadOracle(subject: string): Promise<number> {
   const dir = resolve('src/lib/teaching/assets')
-  for (const f of readdirSync(dir).filter((n) => n.toLowerCase().startsWith(subject.toLowerCase()) && n.endsWith('.ts'))) {
+  for (const f of readdirSync(dir).filter((n) => (n.toLowerCase().startsWith(subject.toLowerCase()) || n === 'authoredSeedAssets.ts') && n.endsWith('.ts'))) {
     let mod: Record<string, unknown>
     try { mod = await import(pathToFileURL(resolve(dir, f)).href) } catch { continue }
     for (const v of Object.values(mod)) {
