@@ -29,12 +29,13 @@ describe('no-picture repair wiring (chat route)', () => {
   })
   it('judges the reply with pictureReplyIsNotAnExplanation first and keeps the retry only through acceptNoPictureRepair', () => {
     expect(block).toMatch(/pictureReplyIsNotAnExplanation\(cleanText\)/)
-    expect(block).toMatch(/acceptNoPictureRepair\(/)
+    expect(block).toMatch(/judgeNoPictureRepair\(/)
     expect(block).toMatch(/stripUnbackedAsciiDiagram\(retry, false\)/)
   })
   it('adds NO provider call: it goes through repairStubReply, whose routeAI call site is the only one it uses', () => {
     expect(block).not.toMatch(/routeAI\(/)
     expect(block).toMatch(/repairStubReply\(cleanText, 'no-picture'/)
+    expect(block).toMatch(/buildNoPictureSecondAttemptAppendix\(\)/)       // a second, stricter attempt, through the same call site
     const fn = route.slice(route.indexOf('const repairStubReply = async ('), route.indexOf('// ── THE CONFIRM-BACK, WHEREVER IT SITS'))
     expect(fn.match(/routeAI\(/g)).toHaveLength(1)
     expect(fn).toMatch(/override\.appendix/)

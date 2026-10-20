@@ -6,6 +6,7 @@
 import { describe, it, expect } from 'vitest'
 import {
   pictureReplyIsNotAnExplanation, acceptNoPictureRepair, buildNoPictureRepairAppendix, withoutDiagramDebris, MIN_EXPLANATION_CHARS,
+  judgeNoPictureRepair, dropQuestions, buildNoPictureSecondAttemptAppendix,
 } from '@/lib/teaching/visual/noPictureRepair'
 import { stripPhantomVisualClaims, isPhantomVisualClaim } from '@/lib/teaching/visualRegistry'
 
@@ -72,7 +73,26 @@ describe('the debris a stripped diagram leaves behind is removed before judging'
 
 describe('the retry is accepted only when it is an explanation in words', () => {
   it('accepts a real explanation', () => { expect(acceptNoPictureRepair(EXPLANATION)).toBe(EXPLANATION) })
-  it('rejects a retry that asks a question', () => { expect(acceptNoPictureRepair(`${EXPLANATION} Does that make sense?`)).toBeNull() })
+  it('keeps the explanation of a retry that tacks a question on, and drops the question', () => {
+    expect(acceptNoPictureRepair(`${EXPLANATION} Does that make sense?`)).toBe(EXPLANATION)
+    expect(dropQuestions('First paragraph here. Is it clear?\n\nSecond paragraph.')).toBe('First paragraph here.\n\nSecond paragraph.')
+  })
+  it('a retry that is only questions is refused with the reason "short"', () => {
+    expect(judgeNoPictureRepair('What do you think a language family is? How would you test it? Why does it matter?')).toEqual({ text: null, reason: 'short' })
+  })
+  it('refuses with a named reason: fence, short, figure-talk', () => {
+    expect(judgeNoPictureRepair(`${EXPLANATION}\n\n\`\`\`\nA --> B\n\`\`\``).reason).toBe('fence')
+    expect(judgeNoPictureRepair(MECHANISM_STUB).reason).toBe('short')
+    const talk = Array.from({ length: 6 }, (_, i) => `The ${['left', 'right', 'top', 'bottom', 'first', 'second'][i]} box shows a different part of the idea and what it is called in detail.`).join(' ')
+    expect(judgeNoPictureRepair(talk).reason).toBe('figure-talk')
+    expect(judgeNoPictureRepair(EXPLANATION).reason).toBe('ok')
+  })
+  it('the second attempt is stricter than the first', () => {
+    const second = buildNoPictureSecondAttemptAppendix()
+    expect(second).toContain(buildNoPictureRepairAppendix())
+    expect(second).toMatch(/PREVIOUS ATTEMPT DID NOT COMPLY/)
+    expect(second).toMatch(/first character must be a letter/)
+  })
   it('rejects a retry that draws a fenced block', () => { expect(acceptNoPictureRepair(`${EXPLANATION}\n\n\`\`\`\nA --> B\n\`\`\``)).toBeNull() })
   it('rejects a retry that is itself a stub or still describes a figure', () => {
     expect(acceptNoPictureRepair(MECHANISM_STUB)).toBeNull()

@@ -72,15 +72,38 @@ export function buildNoPictureRepairAppendix(): string {
   )
 }
 
+/** Drop the sentences that end in a question mark (a retry that tacked "Does that make sense?" on its explanation keeps the explanation); paragraphs are kept. */
+export function dropQuestions(text: string): string {
+  return text.split(/\n{2,}/)
+    .map((para) => para.split(/(?<=[.!?])\s+(?=\S)/).filter((x) => !/\?["”')\]]*\s*$/.test(x.trim())).join(' ').trim())
+    .filter(Boolean)
+    .join('\n\n')
+}
+
+export interface NoPictureVerdict { text: string | null; reason: 'ok' | 'fence' | 'short' | 'figure-talk' }
+
 /**
- * Judge the retry. It replaces the reply only when it is long enough to be an explanation, asks nothing, and does not describe a
- * figure; otherwise null (the caller keeps what it had).
+ * Judge the retry. It replaces the reply only when, once diagram debris and any questions are gone, it is long enough to be an explanation and
+ * does not describe a figure; otherwise `text` is null and `reason` says why (logged, so a refusal is auditable).
  */
-export function acceptNoPictureRepair(retry: string): string | null {
+export function judgeNoPictureRepair(retry: string): NoPictureVerdict {
   // The fence is looked for on the RAW retry: the debris filter would drop a bare ``` line before it was seen.
-  if (/```/.test(retry)) return null
-  const body = withoutDiagramDebris(retry)
-  if (/\?/.test(body)) return null
-  if (pictureReplyIsNotAnExplanation(body)) return null
-  return body
+  if (/```/.test(retry)) return { text: null, reason: 'fence' }
+  const body = withoutDiagramDebris(dropQuestions(withoutDiagramDebris(retry)))
+  if (body.length < MIN_EXPLANATION_CHARS) return { text: null, reason: 'short' }
+  if (pictureReplyIsNotAnExplanation(body)) return { text: null, reason: 'figure-talk' }
+  return { text: body, reason: 'ok' }
+}
+
+export function acceptNoPictureRepair(retry: string): string | null {
+  return judgeNoPictureRepair(retry).text
+}
+
+/** The stricter instruction for the second attempt, when the first retry drew a diagram or said too little. */
+export function buildNoPictureSecondAttemptAppendix(): string {
+  return (
+    buildNoPictureRepairAppendix()
+    + ' YOUR PREVIOUS ATTEMPT DID NOT COMPLY (it drew or described a diagram, or said too little). Write ONLY ordinary paragraphs: the first character must be a letter, '
+    + 'no line may start with a symbol, no code block, no tree, no table, no list of boxes. At least five full sentences.'
+  )
 }

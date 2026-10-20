@@ -13588,11 +13588,18 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           if (npr.pictureReplyIsNotAnExplanation(cleanText)) {
             const { stripUnbackedAsciiDiagram } = await import('@/lib/teaching/asciiDiagramGuard')
             const { stripPhantomVisualClaims: stripPhantomNp } = await import('@/lib/teaching/visualRegistry')
-            const acceptedNp = await repairStubReply(cleanText, 'no-picture', {
-              appendix: npr.buildNoPictureRepairAppendix(),
-              accept: (retry) => npr.acceptNoPictureRepair(stripPhantomNp(stripUnbackedAsciiDiagram(retry, false).text)),
+            let npReason = 'none'
+            const attemptNp = (appendix: string) => repairStubReply(cleanText, 'no-picture', {
+              appendix,
+              accept: (retry) => {
+                const verdict = npr.judgeNoPictureRepair(stripPhantomNp(stripUnbackedAsciiDiagram(retry, false).text))
+                npReason = verdict.reason
+                return verdict.text
+              },
             })
-            console.log('[no-picture-repair] ' + JSON.stringify({ conceptId: resolvedConceptId ?? null, repaired: acceptedNp !== null, charsBefore: cleanText.length, charsAfter: (acceptedNp ?? cleanText).length }))
+            // Two attempts through the SAME call site: the second, stricter, only when the first retry still drew a diagram or said too little.
+            const acceptedNp = (await attemptNp(npr.buildNoPictureRepairAppendix())) ?? (await attemptNp(npr.buildNoPictureSecondAttemptAppendix()))
+            console.log('[no-picture-repair] ' + JSON.stringify({ conceptId: resolvedConceptId ?? null, repaired: acceptedNp !== null, lastReason: npReason, charsBefore: cleanText.length, charsAfter: (acceptedNp ?? cleanText).length }))
             if (acceptedNp) cleanText = acceptedNp
           }
         }
