@@ -1029,8 +1029,21 @@ const LOOK_AT_CLAIM_RE =
 // + noun + copula/description-verb so it does not fire on a hypothetical
 // ("a diagram would show...") or the legitimate imperative-invitation form
 // already covered by VISUAL_PROMISE_RE.
+// Verbs widened 2026-10-20 (hard-concept learner run, three subjects): "This picture walks through the three-step mechanism…"
+// survived on a turn with no figure because "walks" was not on the list.
 const DEFINITE_DESCRIPTION_RE =
-  /\b(the|this)\s+(diagram|figure|picture|image|graph|chart|illustration|flowchart|flow chart|sketch|drawing|simulation|animation)\b[^.!?\n]{0,10}\b(is|shows|depicts|illustrates|represents|split)\b/i
+  /\b(the|this)\s+(diagram|figure|picture|image|graph|chart|illustration|flowchart|flow chart|sketch|drawing|simulation|animation)\b[^.!?\n]{0,10}\b(is|shows|depicts|illustrates|represents|split|walks|goes|traces|lays out|presents|summari[sz]es|outlines|displays|captures|highlights|contains|has)\b/i
+// A part of a figure that is not there: "the left box shows how…", "the first arrow points to…". Measured 2026-10-20 (English,
+// eng.linguistics.sociolinguistics-intro): after "I don't have a picture for this one" the reply went on to describe "the left box" and
+// "the right box". The part noun is required, so "the left side of the equation" and "the first step" are not matched.
+const FIGURE_PART_CLAIM_RE =
+  /\b(the|this)\s+(left|right|top|bottom|first|second|third|fourth|fifth|last|next|middle|central|centre|center|upper|lower|blue|red|green|orange|purple|violet|grey|gray)(?:-hand)?\s+(box|boxes|panel|column|arrow|circle|block|bubble|pin|node|label|section|curve|line|region|shaded area)\b[^.!?\n]{0,80}\b(show|shows|depict|depicts|illustrate|illustrates|represent|represents|is|are|point|points|contain|contains|label|labelled|labeled|say|says|read|reads)\b/i
+
+/** True when a sentence claims something about a figure (or a part of one) — the test `stripPhantomVisualClaims` applies per sentence. */
+export function isPhantomVisualClaim(sentence: string): boolean {
+  return SCREEN_CLAIM_RE.test(sentence) || LOOK_AT_CLAIM_RE.test(sentence) || VISUAL_PROMISE_RE.test(sentence)
+    || DEFINITE_DESCRIPTION_RE.test(sentence) || FIGURE_PART_CLAIM_RE.test(sentence)
+}
 
 /** Splits on sentence-ending punctuation, keeping the punctuation with the
  *  sentence it ends — deliberately naive (no NLP dependency) since it only
@@ -1051,7 +1064,7 @@ function splitIntoSentences(text: string): string[] {
  */
 export function stripPhantomVisualClaims(text: string): string {
   const isClaim = (s: string) =>
-    SCREEN_CLAIM_RE.test(s) || LOOK_AT_CLAIM_RE.test(s) || VISUAL_PROMISE_RE.test(s) || DEFINITE_DESCRIPTION_RE.test(s)
+    SCREEN_CLAIM_RE.test(s) || LOOK_AT_CLAIM_RE.test(s) || VISUAL_PROMISE_RE.test(s) || DEFINITE_DESCRIPTION_RE.test(s) || FIGURE_PART_CLAIM_RE.test(s)
   // PARAGRAPHS ARE KEPT, AND AN UNTOUCHED TEXT IS RETURNED AS-IS (2026-09-24).
   // This used to re-join every sentence with a single space whether or not
   // anything was removed, so every multi-paragraph reply on a no-figure turn

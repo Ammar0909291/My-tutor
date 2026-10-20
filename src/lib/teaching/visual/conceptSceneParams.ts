@@ -338,6 +338,7 @@ import {
 } from '@/lib/teaching/sceneGenerators/mathCoreScenesB42'
 import { buildUnitCircleScene } from '@/lib/teaching/sceneGenerators/mathCoreScenesB43'
 import { buildStokesTheoremScene } from '@/lib/teaching/sceneGenerators/mathCoreScenesB44'
+import { buildGreensTheoremScene } from '@/lib/teaching/sceneGenerators/mathCoreScenesB45'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -348,6 +349,8 @@ import { buildElectrochemicalCellScene, type ElectrochemicalCellParams } from '@
 import { buildEnergyCycleScene } from '@/lib/teaching/sceneGenerators/energyCycle'
 import { buildPhaseDiagramScene } from '@/lib/teaching/sceneGenerators/phaseDiagram'
 import { buildMoDiagramScene } from '@/lib/teaching/sceneGenerators/moDiagram'
+import { buildFeetScene, buildStyleShiftScene, buildCohesionCoherenceScene } from '@/lib/teaching/sceneGenerators/englishFigures'
+import { buildMechanismProfileScene, buildSurfaceCatalysisScene } from '@/lib/teaching/sceneGenerators/reactionMechanismScenes'
 import { buildLacOperonScene } from '@/lib/teaching/sceneGenerators/lacOperon'
 import { buildCoordinationComplexScene, type CoordinationComplexDef } from '@/lib/teaching/sceneGenerators/coordinationComplex'
 import { buildSystemBoundaryScene, buildFirstLawScene as buildChemFirstLawScene } from '@/lib/teaching/sceneGenerators/chemistrySystemScenes'
@@ -1123,6 +1126,9 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   // Mathematics visual campaign, batch 44 (2026-10-20). See mathCoreScenesB44.ts.
   'math.calc.stokes-theorem':            buildStokesTheoremScene,
 
+  // Mathematics visual campaign, batch 45 (2026-10-20). See mathCoreScenesB45.ts.
+  'math.calc.greens-theorem':            buildGreensTheoremScene,
+
   // English: the first concept with a figure of its own (2026-10-18, learner-experience backlog B2). A noun names a person, a place, a
   // thing or an idea; the idea group carries the point the Educational Brain entry makes (an abstract noun is still a noun although
   // nothing can be touched). Examples are the ones the concept's own teaching asset and EB entry use; nothing else is stated.
@@ -1139,6 +1145,14 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
       { label: 'Idea', description: 'a noun can name a quality, feeling or state that you cannot touch; it is still a noun', items: ['happiness', 'freedom', 'honesty'] },
     ],
   }),
+
+  // English static figures 2-4 (2026-10-20, hard-concept learner run: all three were generated process flowcharts or, for the first ask,
+  // "I don't have a picture"). Each is the figure the concept's own teaching asset asks for (`visual_teaching_suggestions`), drawn:
+  // the five feet as beat diagrams, the style-shifting graph (the order the asset states, not invented values), and the cohesion x
+  // coherence grid with the concept's own specimens. Same faithfulness policy as eng.grammar.nouns; evidence: englishStaticFigureContent.test.ts.
+  'eng.literature.meter-and-rhyme': () => buildFeetScene(),
+  'eng.linguistics.sociolinguistics-intro': () => buildStyleShiftScene(),
+  'eng.linguistics.discourse-analysis-intro': () => buildCohesionCoherenceScene(),
 
   // The Punnett generator is single-gene by construction (genotypes are two
   // alleles). A dihybrid cross drawn as a monohybrid square teaches the wrong
@@ -1768,6 +1782,10 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   // The H₂ molecular-orbital energy diagram (two 1s orbitals → σ and σ*, two electrons paired in σ, bond order 1). It was a generated
   // six-box procedure flowchart: the steps of building an MO diagram with no diagram (hard-concept learner run, 2026-10-20).
   'chem.bond.mo-theory': () => buildMoDiagramScene(),
+  // Two more that were a generic flowchart or no figure (hard-concept learner run, 2026-10-20): the energy profile of a two-step
+  // mechanism, and adsorption / surface reaction / desorption with a poisoned site.
+  'chem.kinet.mechanism': () => buildMechanismProfileScene(),
+  'chem.surface.heterogeneous-cat': () => buildSurfaceCatalysisScene(),
   // CHEM-046: "Real Gases and van der Waals Equation" was shown the ideal
   // Boyle's-law hyperbola, the opposite of the concept.
   'chem.state.real-gases': () => buildCellComparisonScene({

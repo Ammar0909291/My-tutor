@@ -36,6 +36,7 @@
   "chem.elect.nernst",
   "chem.elect.standard-electrode",
   "chem.found.matter",
+  "chem.kinet.mechanism",
   "chem.org.pericyclic",
   "chem.pblock.group16",
   "chem.poly.biodegradable",
@@ -43,6 +44,7 @@
   "chem.state.phase-diagram",
   "chem.state.real-gases",
   "chem.surface.colloids",
+  "chem.surface.heterogeneous-cat",
   "chem.thermo.bond-enthalpy",
   "chem.thermo.cell-thermo",
   "chem.thermo.enthalpy",
@@ -52,30 +54,30 @@
  "summary": {
   "concepts": 186,
   "byCategory": {
-   "E": 100,
-   "D": 59,
+   "E": 102,
+   "D": 57,
    "B": 14,
    "A": 13
   },
-  "served": 100,
+  "served": 102,
   "bySource": {
-   "tier0": 40,
+   "tier0": 42,
    "tier3": 42,
-   "none": 86,
+   "none": 84,
    "tier2": 2,
    "tier1": 16
   },
-  "instances": 134,
+  "instances": 136,
   "instanceVerdicts": {
-   "REVIEW_REQUIRED": 81,
+   "REVIEW_REQUIRED": 83,
    "PASS": 53
   },
   "servedConceptVerdicts": {
-   "REVIEW_REQUIRED": 92,
+   "REVIEW_REQUIRED": 94,
    "PASS": 8
   },
-  "statesMeasured": 1114,
-  "categoryCUnreachableCachedFigures": 29,
+  "statesMeasured": 1156,
+  "categoryCUnreachableCachedFigures": 31,
   "withMissingRenders": 0
  },
  "concepts": [
@@ -945,13 +947,13 @@
   },
   {
    "id": "chem.kinet.mechanism",
-   "category": "D",
-   "source": "none",
-   "provenance": "no-figure:retry-generation-failed",
-   "instanceId": null,
-   "fingerprint": null,
-   "verdict": "NO_FIGURE",
-   "shadowedCachedFigure": false
+   "category": "E",
+   "source": "tier0",
+   "provenance": "generator",
+   "instanceId": "scene:mechanism-energy-profile",
+   "fingerprint": "f67d0c5a9",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": true
   },
   {
    "id": "chem.kinet.catalysis",
@@ -1075,13 +1077,13 @@
   },
   {
    "id": "chem.surface.heterogeneous-cat",
-   "category": "D",
-   "source": "none",
-   "provenance": "no-figure:retry-generation-failed",
-   "instanceId": null,
-   "fingerprint": null,
-   "verdict": "NO_FIGURE",
-   "shadowedCachedFigure": false
+   "category": "E",
+   "source": "tier0",
+   "provenance": "generator",
+   "instanceId": "scene:heterogeneous-catalysis-surface",
+   "fingerprint": "f411803b3",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": true
   },
   {
    "id": "chem.coord.werner",
@@ -2868,6 +2870,41 @@
    "minContrast": 4.3
   },
   {
+   "id": "scene:mechanism-energy-profile",
+   "tier": "tier0",
+   "origin": "authored",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.kinet.mechanism"
+   ],
+   "fingerprint": "f67d0c5a9",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "REVIEW_REQUIRED",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": "unknown",
+   "statesMeasured": 20,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 18,
+    "REVIEW_REQUIRED": 2,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [
+    "INNER_SCROLL_X"
+   ],
+   "minFontPx": 11.5,
+   "minContrast": 4.68
+  },
+  {
    "id": "scene:lattice-fcc",
    "tier": "tier0",
    "origin": "kind-default",
@@ -3007,6 +3044,41 @@
    ],
    "minFontPx": 10,
    "minContrast": 4.69
+  },
+  {
+   "id": "scene:heterogeneous-catalysis-surface",
+   "tier": "tier0",
+   "origin": "authored",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.surface.heterogeneous-cat"
+   ],
+   "fingerprint": "f411803b3",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "REVIEW_REQUIRED",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": "unknown",
+   "statesMeasured": 22,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 20,
+    "REVIEW_REQUIRED": 2,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [
+    "INNER_SCROLL_X"
+   ],
+   "minFontPx": 11.5,
+   "minContrast": 4.68
   },
   {
    "id": "scene:coord-hexaamminecobalt-iii-ion",

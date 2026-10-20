@@ -1708,6 +1708,50 @@
     }
    ],
    "remaining": "A schematic, not to scale: σ and σ* are drawn symmetric about the 1s level, whereas in reality the antibonding orbital is raised slightly more than the bonding orbital is lowered (the narration does not claim equal shifts). H₂ only; the heteronuclear and second-row diagrams (σ/π ordering, s–p mixing) are described in words, not drawn. The expanded (fullscreen) view scrolls: the chrome around the scene is taller than the window (R15, measured and bounded, by design)."
+  },
+  "scene:mechanism-energy-profile": {
+   "fingerprint": "f67d0c5a9",
+   "concepts": [
+    "chem.kinet.mechanism"
+   ],
+   "family": "plot",
+   "initial": "semantic audit REVIEW_REQUIRED (no deterministic chemistry verifier exists for this figure family); render REVIEW: INNER_SCROLL_X in the expanded view only (R15)",
+   "decision": "FIXED→PASS",
+   "finding": "Replaces a generated five-box procedure flowchart (\"Identify reactants → Propose elementary steps → Determine the rate-determining step → Apply steady-state → Derive the rate law\": the method, not the concept) with the energy profile of a two-step mechanism. Read from the code, the tests and the Chromium screenshots (390 px dark, 1280 px dark and light): energy is vertical and reaction progress horizontal; the curve has exactly two maxima (TS₁, TS₂) with one well, the intermediate, between them; each Eₐ arrow spans its barrier measured from where that step starts (reactants for step 1, the intermediate for step 2); the second barrier is the larger and TS₂ is labelled the slow step; the products lie below the reactants. The narration says the rate law is written from the slow step and that an intermediate in it is replaced using the fast step before it. No number appears.",
+   "fix": "New generator `reactionMechanismScenes.ts` (`buildMechanismProfileScene`): the curve is derived from five anchors by a cosine ease so each anchor is an exact extremum; `checkMechanismProfileConsistency` re-derives the extrema from the drawn curve and fails when there are not two maxima around one well, when the second barrier is not the larger, when the Eₐ arrows do not span the drawn barriers, or when the products are not lower than the reactants.",
+   "evidence": [
+    {
+     "file": "src/tests/reactionMechanismScenes.test.ts",
+     "contains": "the second barrier (measured from the intermediate) is larger than the first"
+    },
+    {
+     "file": "src/tests/reactionMechanismScenes.test.ts",
+     "contains": "a figure whose second barrier is the smaller one is rejected"
+    }
+   ],
+   "remaining": "A schematic, not to scale; a two-step mechanism with a fast pre-equilibrium or a steady-state intermediate is described in the narration, not drawn as a separate figure; no activation energies or rate constants are shown. The expanded (fullscreen) view scrolls: the chrome around the scene is taller than the window (R15, measured and bounded, by design)."
+  },
+  "scene:heterogeneous-catalysis-surface": {
+   "fingerprint": "f411803b3",
+   "concepts": [
+    "chem.surface.heterogeneous-cat"
+   ],
+   "family": "plot",
+   "initial": "semantic audit REVIEW_REQUIRED (no deterministic chemistry verifier exists for this figure family); render REVIEW: INNER_SCROLL_X in the expanded view only (R15)",
+   "decision": "FIXED→PASS",
+   "finding": "The concept served no figure: the generator's linear flowchart was rejected by the figure critic on every attempt (production, 2026-10-20: \"the linear flow implies poisoning occurs after regeneration, but poisoning can happen at any stage\"). It now has a drawn storyboard on a solid surface with active sites, read left to right: two gas-phase reactants with arrows down to two sites (adsorption); two adsorbed species on NEIGHBOURING sites joined by a bond (surface reaction); a product leaving upward (desorption); and a poison on its own site at the far right, drawn apart from the sequence and described in the narration as possible at any stage. Read from the code, the tests and the Chromium screenshots (390 px dark, 1280 px dark and light).",
+   "fix": "New generator `reactionMechanismScenes.ts` (`buildSurfaceCatalysisScene`) with `checkSurfaceCatalysisConsistency`, which re-derives from the drawn positions that the reactants are above the surface, the adsorption arrows lead to sites, the reacting pair is on neighbouring sites with a bond, the product is leaving, and the poison does not share a site with a reactant.",
+   "evidence": [
+    {
+     "file": "src/tests/reactionMechanismScenes.test.ts",
+     "contains": "the reacting species sit on NEIGHBOURING sites and are joined by a bond"
+    },
+    {
+     "file": "src/tests/reactionMechanismScenes.test.ts",
+     "contains": "a product that is still on the surface is rejected"
+    }
+   ],
+   "remaining": "A schematic with no energies or rates. One example of each step is drawn (a bimolecular surface reaction); a unimolecular decomposition on the surface and the Langmuir–Hinshelwood / Eley–Rideal distinction are not drawn. The expanded (fullscreen) view scrolls: the chrome around the scene is taller than the window (R15, measured and bounded, by design)."
   }
  }
 }

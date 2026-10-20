@@ -101,3 +101,135 @@ describe('what the nouns figure states comes from the concept\'s own sources', (
     expect(s.teachingGoal).toContain('names a person, a place, a thing or an idea')
   })
 })
+
+// ── figures 2-4 (2026-10-20): the five feet, style-shifting, cohesion × coherence ───────────────────────────────────────────────────
+// Each is the figure the concept's own teaching asset asks for (`visual_teaching_suggestions`), drawn. They were generated process flowcharts
+// ("Steps in Discourse Analysis", "Sociolinguistic analysis workflow", "Analyzing Meter and Rhyme in a Poem") or, on the first ask, "I don't have
+// a picture for this one" (hard-concept learner run, production, 2026-10-20). Faithfulness policy as for nouns: every word is one the sources use,
+// every claim is one they make, and a number appears only if a source states it.
+import * as EF from '@/lib/teaching/sceneGenerators/englishFigures'
+
+const METER = 'eng.literature.meter-and-rhyme', SOCIO = 'eng.linguistics.sociolinguistics-intro', DISCOURSE = 'eng.linguistics.discourse-analysis-intro'
+const findAssetFor = (x: unknown, id: string): Record<string, unknown> | undefined => {
+  if (Array.isArray(x)) { for (const v of x) { const r = findAssetFor(v, id); if (r) return r }; return undefined }
+  if (x && typeof x === 'object') { const o = x as Record<string, unknown>; if (o.concept_id === id) return o; for (const v of Object.values(o)) { const r = findAssetFor(v, id); if (r) return r } }
+  return undefined
+}
+const norm = (t: string) => t.toLowerCase().replace(/[‘’']/g, "'").replace(/[“”]/g, '"')
+const stems = (t: string) => (norm(t).match(/[a-z]{5,}/g) ?? []).map((w) => w.slice(0, 5))
+const ASSETS = JSON.parse(readFileSync('docs/english/teaching-assets/assets.json', 'utf8'))
+const sourcesOf = (id: string) => {
+  const a = findAssetFor(ASSETS, id)!
+  return norm([JSON.stringify(a.concept_summary), JSON.stringify(a.key_ideas), JSON.stringify(a.visual_teaching_suggestions), JSON.stringify(a.worked_example_blueprint), readFileSync(`educational-brain/concepts/english/${id}.md`, 'utf8')].join('\n'))
+}
+const textOf = (s: SceneSpec) => [...objs(s).map((o) => o.text ?? ''), ...s.steps.map((st) => st.narration ?? ''), s.title, s.teachingGoal ?? ''].join(' ')
+
+describe.each([
+  [METER, 'meter-five-feet'], [SOCIO, 'sociolinguistics-style-shifting'], [DISCOURSE, 'discourse-cohesion-coherence'],
+] as const)('%s is served its own drawn figure (%s), from the concept\'s own sources', (id, sceneId) => {
+  const s = sceneOf(id)
+  const sources = sourcesOf(id)
+  it.each([null, 'diagram'] as const)('is a concept-scope registry scene, not retired (request %s)', (req) => {
+    const d = served(id, req)
+    expect(d.graphical, d.provenance).toBe(true)
+    expect(d.asset?.scope).toBe('concept')
+    expect((d.payload as { sceneSpec?: { id?: string } }).sceneSpec?.id).toBe(sceneId)
+    expect(isRetiredVisualBinding(id)).toBe(false)
+    expect(INSUFFICIENT_FOR_CONCEPT.has(id)).toBe(false)
+  })
+  it('passes the scene validator and the figure audit that admits a figure to a learner', () => {
+    const v = validateSceneSpec(s) as { valid?: boolean; ok?: boolean; errors?: unknown }
+    expect(v.valid ?? v.ok, JSON.stringify(v.errors ?? v)).toBe(true)
+    expect(payloadBlockers({ renderer: 'scene', sceneSpec: s } as never)).toEqual([])
+    expect(s.steps.reduce((n, st) => n + (st.narration ?? '').length, 0)).toBeLessThan(1000)
+  })
+  it('every claim (title, goal, narration, labels) uses only words the concept\'s own sources use (5-letter stems)', () => {
+    const sourceStems = new Set(stems(sources))
+    const GENERIC = new Set(['figur', 'shown', 'other', 'there', 'their', 'which', 'these', 'about', 'where', 'whose', 'stage', 'large', 'small', 'drawn'])
+    const missing = [...new Set(stems(textOf(s)))].filter((w) => !sourceStems.has(w) && !GENERIC.has(w))
+    expect(missing, `${id}: words no source uses`).toEqual([])
+  })
+  it('states no internal concept id, and no number the sources do not state', () => {
+    const t = textOf(s)
+    expect(t).not.toMatch(/\beng\.[a-z]+\.[a-z-]+/)
+    for (const n of t.match(/\d+%?/g) ?? []) expect(sources, `number ${n}`).toContain(n)
+  })
+})
+
+describe('eng.literature.meter-and-rhyme: the five feet are drawn as beat diagrams, and the pattern each row spells is read back from the dot sizes', () => {
+  const s = EF.buildFeetScene()
+  const sources = sourcesOf(METER)
+  it('draws the five feet the asset names, with the example the asset gives for each, one row each', () => {
+    expect(EF.FEET.map((f) => f.name)).toEqual(['iamb', 'trochee', 'anapest', 'dactyl', 'spondee'])
+    for (const f of EF.FEET) expect(sources, f.example).toContain(norm(f.example))
+    expect(EF.checkFeetConsistency(s)).toEqual({ ok: true, errors: [] })
+  })
+  it('the drawn dot sizes spell each foot\'s pattern, and that pattern is the one the asset writes beside the foot\'s name', () => {
+    EF.FEET.forEach((f, i) => {
+      expect(EF.drawnPattern(s, i)).toBe(EF.footPatternText(f))
+      expect(sources, f.name).toContain(`${f.name} (${EF.footPatternText(f)})`)
+    })
+  })
+  it('the capitalised syllables of each example are its stressed beats (the stress the figure draws is the stress the word has)', () => {
+    for (const f of EF.FEET) expect((f.example.match(/\b[A-Z]{2,}\b/g) ?? []).length).toBe(f.pattern.filter((p) => p === 's').length)
+  })
+  it('a row whose dots spell the wrong pattern is rejected', () => {
+    const bad = JSON.parse(JSON.stringify(s)) as SceneSpec
+    const row = (bad.steps.flatMap((st) => st.objects as Array<Obj & { position?: number[]; radius?: number }>)).filter((o) => o.type === 'node' && Math.abs(o.position![1] - EF.beatPosition(0, 0)[1]) < 1e-6)
+    row.forEach((o) => { o.radius = o.radius === EF.R_STRESSED ? EF.R_UNSTRESSED : EF.R_STRESSED })   // iamb drawn as a trochee
+    expect(EF.checkFeetConsistency(bad).ok).toBe(false)
+  })
+})
+
+describe('eng.linguistics.sociolinguistics-intro: the style-shifting graph shows the order the asset states, strictly between 0% and 100%', () => {
+  const s = EF.buildStyleShiftScene()
+  const sources = sourcesOf(SOCIO)
+  it('the asset states the order the points draw: highest at the gate, lower with the officer, lowest reading aloud', () => {
+    expect(sources).toMatch(/highest at the gate, lower with the officer, lowest reading aloud/)
+    expect(EF.SETTINGS).toEqual(['reading aloud', 'with the officer', 'at the gate'])
+    expect(EF.checkStyleShiftConsistency(s)).toEqual({ ok: true, errors: [] })
+    const ys = EF.RATE.map((_, i) => EF.pointOf(i)[1])
+    expect([...ys].sort((a, b) => a - b)).toEqual(ys)
+  })
+  it('no point is on the 0% or 100% line: "no setting shows 0% or 100%" is the asset\'s own point', () => {
+    expect(sources).toMatch(/no setting shows 0% or 100%/)
+    for (let i = 0; i < EF.RATE.length; i++) { expect(EF.pointOf(i)[1]).toBeGreaterThan(EF.pointOf(0)[1] - EF.RATE[0] + EF.Y_FLOOR); expect(EF.pointOf(i)[1]).toBeLessThan(EF.pointOf(0)[1] - EF.RATE[0] + EF.Y_CEIL) }
+  })
+  it('the narration says the figure shows an ORDER, not measured values (the asset gives none)', () => {
+    expect(s.steps.map((st) => st.narration).join(' ')).toMatch(/shows this order, not measured values/)
+  })
+  it('mutations: reversed order and a point on the 100% line are rejected', () => {
+    const swapped = JSON.parse(JSON.stringify(s)) as SceneSpec
+    const nodes = swapped.steps.flatMap((st) => st.objects as Array<Obj & { position?: number[] }>).filter((o) => o.type === 'node').sort((a, b) => a.position![0] - b.position![0])
+    ;[nodes[0].position![1], nodes[2].position![1]] = [nodes[2].position![1], nodes[0].position![1]]
+    expect(EF.checkStyleShiftConsistency(swapped).ok).toBe(false)
+    const top = JSON.parse(JSON.stringify(s)) as SceneSpec
+    const n = (top.steps.flatMap((st) => st.objects as Array<Obj & { position?: number[] }>)).filter((o) => o.type === 'node').sort((a, b) => a.position![0] - b.position![0])[2]
+    n.position![1] = -3 + EF.Y_CEIL
+    expect(EF.checkStyleShiftConsistency(top).ok).toBe(false)
+  })
+})
+
+describe('eng.linguistics.discourse-analysis-intro: the cohesion × coherence grid pins the concept\'s own specimens where the concept puts them', () => {
+  const s = EF.buildCohesionCoherenceScene()
+  const sources = sourcesOf(DISCOURSE)
+  it('the specimens are the concept\'s own: the tie-free coherent text, and the every-tie-kept scrambled one', () => {
+    expect(sources).toContain('the gate stood open. nobody came.')
+    expect(sources).toMatch(/keep every tie, scramble the propositions/)
+    expect(EF.checkCohesionCoherenceConsistency(s)).toEqual({ ok: true, errors: [] })
+  })
+  it('the tie-free coherent text sits at few ties / full sense, and the scrambled one at many ties / no sense', () => {
+    const gate = EF.SPECIMENS.find((x) => x.id === 'gate')!, ties = EF.SPECIMENS.find((x) => x.id === 'ties')!
+    expect(gate.pos[0]).toBeLessThan(EF.MID.x); expect(gate.pos[1]).toBeGreaterThan(EF.MID.y)
+    expect(ties.pos[0]).toBeGreaterThan(EF.MID.x); expect(ties.pos[1]).toBeLessThan(EF.MID.y)
+  })
+  it('the asset says the two come apart in both directions (the claim the grid makes visible)', () => {
+    expect(sources).toMatch(/the two dissociate in both directions/)
+  })
+  it('a specimen pinned in the wrong quadrant is rejected', () => {
+    const bad = JSON.parse(JSON.stringify(s)) as SceneSpec
+    const n = (bad.steps.flatMap((st) => st.objects as Array<Obj & { position?: number[] }>)).filter((o) => o.type === 'node')[0]
+    n.position![0] = EF.MID.x + 3
+    expect(EF.checkCohesionCoherenceConsistency(bad).ok).toBe(false)
+  })
+})

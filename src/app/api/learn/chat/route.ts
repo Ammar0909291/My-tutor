@@ -10810,13 +10810,19 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // was right/wrong, or a direct reply — instead of serving a stub or the
       // concept-fallback line. Returns null when no repair was made; the
       // callers' existing fallbacks then apply unchanged. See confirmBackRepair.ts.
-      const repairStubReply = async (stub: string, source: string): Promise<string | null> => {
+      const repairStubReply = async (
+        stub: string,
+        source: string,
+        // `override`: a caller that has already judged the reply a non-answer supplies its own instruction and its own acceptance test
+        // (the no-picture repair); the call site, the routing arguments and the failure handling stay this function's.
+        override?: { appendix: string; accept: (retry: string) => string | null },
+      ): Promise<string | null> => {
         const { needsRepair, buildConfirmBackRepairAppendix, mergeRepair, dropQuestionSentences } = await import('@/lib/teaching/confirmBackRepair')
         // An appended figure pointer is not a reply: judge the stub without it
         // and put it back after the repair (see splitVisualPointer).
         const { splitVisualPointer } = await import('@/lib/teaching/visual/visualAcknowledgement')
         const { body: stubBody, pointer: stubPointer } = splitVisualPointer(stub)
-        if (!needsRepair(stubBody) || serveLessonComplete) return null
+        if (serveLessonComplete || (!override && !needsRepair(stubBody))) return null
         try {
           const { stripConfirmBack } = await import('@/lib/teaching/attributionGuard')
           const opts = pendingMcqHoisted?.options
@@ -10831,13 +10837,18 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           llmCallCount++ // instrumentation only (stub repair)
           const routed = await routeAI(
             [...historyMessages, { role: 'user', content: message }],
-            systemPrompt + appendix + resolvedOutputLanguageBlock,
+            systemPrompt + (override ? override.appendix : appendix) + resolvedOutputLanguageBlock,
             country, 2048, teachingLang,
             { userId, subject: learnSession.subject.slug },
             groqModelOverride,
             undefined,
             forceProvider,
           )
+          if (override) {
+            const accepted = override.accept(routed.text ?? '')
+            console.log('[stub-repair] ' + JSON.stringify({ source, repaired: accepted !== null, chars: (accepted ?? '').length }))
+            return accepted
+          }
           // The retry passes the same strip; a second confirm-back is not served.
           const retry = stripConfirmBack(routed.text ?? '')
           let retryText = retry.text
@@ -13550,6 +13561,31 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         visualTurnServed = record.served
         console.log('[learn/chat] VISUAL_TURN=' + JSON.stringify(record))
       } catch { /* observability never breaks a turn */ }
+      // A PICTURE REQUEST THAT CANNOT BE MET STILL GETS AN EXPLANATION (visual/noPictureRepair.ts, 2026-10-20).
+      // The model, told the screen is empty, still drafts a diagram; the ASCII-art and phantom-figure strips remove it, and what is
+      // left ("y", one mechanism line, "the left box shows …") is not an explanation. One regeneration IN WORDS through the SAME call
+      // site as every other stub repair (repairStubReply — no new provider call), kept only if it is one; otherwise the reply is left
+      // exactly as it was. Same conditions as the acknowledgement below, plus: no card is served.
+      try {
+        const attachedNow = Boolean(responseVisual) || Boolean(detectedVisualSpec) || Boolean(detectedSceneSpec)
+        const shownEarlierForConcept = resolvedConceptId !== null && resolvedConceptId !== undefined
+          && snapshotRRMLog.some((e) => e.matchedConcept === resolvedConceptId)
+        if (learnerRequestHoisted === 'diagram' && !attachedNow && !shownEarlierForConcept && !servedMcq && !serveLessonComplete) {
+          const npr = await import('@/lib/teaching/visual/noPictureRepair')
+          if (npr.pictureReplyIsNotAnExplanation(cleanText)) {
+            const { stripUnbackedAsciiDiagram } = await import('@/lib/teaching/asciiDiagramGuard')
+            const { stripPhantomVisualClaims: stripPhantomNp } = await import('@/lib/teaching/visualRegistry')
+            const acceptedNp = await repairStubReply(cleanText, 'no-picture', {
+              appendix: npr.buildNoPictureRepairAppendix(),
+              accept: (retry) => npr.acceptNoPictureRepair(stripPhantomNp(stripUnbackedAsciiDiagram(retry, false).text)),
+            })
+            console.log('[no-picture-repair] ' + JSON.stringify({ conceptId: resolvedConceptId ?? null, repaired: acceptedNp !== null, charsBefore: cleanText.length, charsAfter: (acceptedNp ?? cleanText).length }))
+            if (acceptedNp) cleanText = acceptedNp
+          }
+        }
+      } catch (npErr) {
+        console.warn('[no-picture-repair] skipped:', npErr)
+      }
       // AN UNMET PICTURE REQUEST IS SAID OUT LOUD (acknowledgeUnavailablePicture).
       // Here, at the final response, because EVERY serving path converges here:
       // the two production turns that exposed it were served from Explanation

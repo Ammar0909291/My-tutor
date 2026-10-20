@@ -1,0 +1,88 @@
+/**
+ * A picture request that cannot be met must still get an explanation (visual/noPictureRepair.ts). The stubs below are the REAL replies
+ * a learner received on production on 2026-10-20 (the text after the strips, as recorded on the wire by the learner-experience run):
+ * each is "I don't have a picture for this one, so I'll explain it in words." followed by something that explains nothing.
+ */
+import { describe, it, expect } from 'vitest'
+import {
+  pictureReplyIsNotAnExplanation, acceptNoPictureRepair, buildNoPictureRepairAppendix, withoutDiagramDebris, MIN_EXPLANATION_CHARS,
+} from '@/lib/teaching/visual/noPictureRepair'
+import { stripPhantomVisualClaims, isPhantomVisualClaim } from '@/lib/teaching/visualRegistry'
+
+const GREENS_STUB = `y\n \nThe closed curve C (the circle) is walked around counter‑clockwise, so the region D stays on your left as you move along C.`
+const MECHANISM_STUB = `A + B ⇌ I (fast pre‑equilibrium)`
+const SOCIO_STUB = `- **Social Factors**: the left box shows how things like class, gender, age, or identity can shape the way people speak—even when they live in the same neighborhood.\n- **Code‑Switching**: the right box shows a speaker who moves fluidly between languages or registers, choosing the one that fits the social situation.`
+const CATALYSIS_STUB = `This picture walks through the three‑step heterogeneous mechanism: reactants adsorb on active sites, react on the surface, and the product desorbs, while the catalyst surface is regenerated.`
+const IMAGINE_STUB = `Imagine this picture: the bold curve C encloses the region D, and the arrow indicates the required counter‑clockwise (positive) orientation.`
+
+/** A real explanation in words (the heterogeneous-catalysis reply that followed, production 2026-10-20). */
+const EXPLANATION = `In heterogeneous catalysis the whole reaction happens on the surface of a solid material. The process always follows three distinct steps. First, adsorption: reactant molecules approach the solid and become attached to specific locations on its surface called active sites, usually by a chemical bond. Second, the surface reaction: while the reactants are held at the active sites their atoms rearrange and form new bonds, and because the surface already shares electrons with them, breaking the original bonds needs less energy than in the gas phase, which is why the catalyst lowers the activation energy. Third, desorption: the new product molecules detach and go back into the surrounding phase, so the active site is free to start the cycle again.`
+
+describe('a reply to an unmet picture request that explains nothing is detected', () => {
+  it.each([
+    ['Green\'s theorem: a stray axis letter and one sentence', GREENS_STUB],
+    ['reaction mechanisms: one line of the mechanism', MECHANISM_STUB],
+    ['sociolinguistics: describes boxes that do not exist', SOCIO_STUB],
+    ['heterogeneous catalysis: "this picture walks through"', CATALYSIS_STUB],
+    ['Green\'s theorem, second ask: "imagine this picture" and one sentence', IMAGINE_STUB],
+    ['an empty reply', ''],
+  ])('%s', (_name, text) => {
+    expect(pictureReplyIsNotAnExplanation(text)).toBe(true)
+  })
+
+  it('a real explanation in words is left alone', () => {
+    expect(EXPLANATION.length).toBeGreaterThan(MIN_EXPLANATION_CHARS)
+    expect(pictureReplyIsNotAnExplanation(EXPLANATION)).toBe(false)
+  })
+
+  it('a long reply that is mostly a description of a figure that is not there is still not an explanation', () => {
+    const long = Array.from({ length: 6 }, (_, i) => `The ${['left', 'right', 'top', 'bottom', 'first', 'second'][i]} box shows a different part of the idea and what it is called in detail.`).join(' ')
+    expect(long.length).toBeGreaterThan(MIN_EXPLANATION_CHARS)
+    expect(pictureReplyIsNotAnExplanation(long)).toBe(true)
+  })
+})
+
+describe('stripPhantomVisualClaims removes a described figure that is not there (the widened detector)', () => {
+  it('"This picture walks through …" and "the left box shows …" are phantom claims', () => {
+    expect(isPhantomVisualClaim(CATALYSIS_STUB)).toBe(true)
+    expect(isPhantomVisualClaim('the left box shows how class shapes speech.')).toBe(true)
+    expect(isPhantomVisualClaim('The first arrow points to the intermediate.')).toBe(true)
+  })
+  it('ordinary teaching prose that merely contains those words is not', () => {
+    for (const s of [
+      'The left side of the equation is the rate.',
+      'The first step is adsorption, and the second step is the surface reaction.',
+      'Draw a box around the answer in your own notes.',
+      'The right answer is the one that keeps the sum constant.',
+      'A flow chart is a way to plan an algorithm.',
+    ]) expect(isPhantomVisualClaim(s), s).toBe(false)
+  })
+  it('keeps the explanation around a removed sentence', () => {
+    const text = `Adsorption holds the reactants on the surface. This picture walks through the three steps. Desorption then frees the product.`
+    expect(stripPhantomVisualClaims(text)).toBe('Adsorption holds the reactants on the surface. Desorption then frees the product.')
+  })
+})
+
+describe('the debris a stripped diagram leaves behind is removed before judging', () => {
+  it('drops one- and two-character lines (an axis letter, a bullet) but keeps equation lines', () => {
+    expect(withoutDiagramDebris('y\n \nx\nSome real sentence about the curve.')).toBe('Some real sentence about the curve.')
+    expect(withoutDiagramDebris('A + B ⇌ I\n|\n→')).toContain('A + B ⇌ I')
+  })
+})
+
+describe('the retry is accepted only when it is an explanation in words', () => {
+  it('accepts a real explanation', () => { expect(acceptNoPictureRepair(EXPLANATION)).toBe(EXPLANATION) })
+  it('rejects a retry that asks a question', () => { expect(acceptNoPictureRepair(`${EXPLANATION} Does that make sense?`)).toBeNull() })
+  it('rejects a retry that draws a fenced block', () => { expect(acceptNoPictureRepair(`${EXPLANATION}\n\n\`\`\`\nA --> B\n\`\`\``)).toBeNull() })
+  it('rejects a retry that is itself a stub or still describes a figure', () => {
+    expect(acceptNoPictureRepair(MECHANISM_STUB)).toBeNull()
+    expect(acceptNoPictureRepair(SOCIO_STUB)).toBeNull()
+  })
+  it('the instruction forbids drawing, claiming a figure, and asking a question', () => {
+    const a = buildNoPictureRepairAppendix()
+    expect(a).toMatch(/IN WORDS/)
+    expect(a).toMatch(/no ASCII or box art/)
+    expect(a).toMatch(/Do NOT say or imply that a picture/)
+    expect(a).toMatch(/Do NOT ask the learner a question/)
+  })
+})
