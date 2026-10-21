@@ -6,7 +6,7 @@
 import { describe, it, expect } from 'vitest'
 import {
   pictureReplyIsNotAnExplanation, acceptNoPictureRepair, buildNoPictureRepairAppendix, withoutDiagramDebris, MIN_EXPLANATION_CHARS,
-  judgeNoPictureRepair, dropQuestions, buildNoPictureSecondAttemptAppendix,
+  judgeNoPictureRepair, dropQuestions, buildNoPictureSecondAttemptAppendix, dropOrphanFigureReferences,
 } from '@/lib/teaching/visual/noPictureRepair'
 import { stripPhantomVisualClaims, isPhantomVisualClaim } from '@/lib/teaching/visualRegistry'
 
@@ -104,5 +104,22 @@ describe('the retry is accepted only when it is an explanation in words', () => 
     expect(a).toMatch(/no ASCII or box art/)
     expect(a).toMatch(/Do NOT say or imply that a picture/)
     expect(a).toMatch(/Do NOT ask the learner a question/)
+  })
+})
+
+describe('talk about a figure that is gone is detected beyond the phantom-claim list (production, 2026-10-20)', () => {
+  const ACCENTS = `I can’t pull up a picture, so let me describe a simple visual layout in text that captures the systematic difference between two well‑known English accents.\n\nThis table lets you see the **systematic pattern**: the same sound rule (dropping post‑vocalic /r/) applies across many different words, not just one isolated case.`
+  const APPLIED = `Imagine a simple flow that starts with a box labeled “Teaching method under review.” An arrow leads to a second box called “Check against acquisition‑research criteria,” which lists items such as meaningful input and communicative practice. From that box two arrows branch: one points to “Method meets criteria.”`
+  const TREE = `Imagine a simple tree diagram that maps language families: at the very bottom write Proto‑World, and from that trunk draw three main branches upward.`
+  it.each([['the table that was stripped', ACCENTS], ['imagine a flow of boxes and arrows', APPLIED], ['imagine a tree diagram and draw it', TREE]])('%s is not an explanation', (_n, text) => {
+    expect(pictureReplyIsNotAnExplanation(text)).toBe(true)
+  })
+  it('a sentence introducing a table that IS in the reply is kept; one pointing at a vanished table is dropped', () => {
+    expect(dropOrphanFigureReferences('This table lets you see the pattern.\n\n| a | b |\n| 1 | 2 |')).toContain('This table lets you see')
+    expect(dropOrphanFigureReferences('The rule applies everywhere. This table lets you see the systematic pattern. That is why accents are rule-governed.')).toBe('The rule applies everywhere. That is why accents are rule-governed.')
+    expect(dropOrphanFigureReferences('This table lets you see the pattern.')).toBe('This table lets you see the pattern.')   // never to an empty reply
+  })
+  it('axis-tick debris of a stripped plot is removed ("  100 |    *")', () => {
+    expect(withoutDiagramDebris('Imagine the plot.\nIntensity\n 100 |                *\nThe right-most peak is the molecular ion.')).not.toMatch(/100 \|/)
   })
 })

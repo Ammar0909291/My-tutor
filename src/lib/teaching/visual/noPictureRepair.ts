@@ -32,10 +32,31 @@ import { isPhantomVisualClaim } from '../visualRegistry'
 /** The shortest reply that can count as an explanation in words (a stub is a line or two; a real answer names several things). */
 export const MIN_EXPLANATION_CHARS = 320
 
+/** A line of a drawn plot's axis: "  100 |       *", "|----". */
+const AXIS_TICK_LINE = /^\s*[\d.]*\s*[|│┃]\s*[*#=\-_+. ]*$/
+
+/** Talk ABOUT a figure that does not exist, beyond what `isPhantomVisualClaim` catches ("Imagine a simple flow that starts with a box labeled …"). */
+const IMAGINE_FIGURE_RE = /\b(imagine|picture|visuali[sz]e)\s+(a|an|this|the)\s+[^.!?\n]{0,50}?\b(diagram|flow|flowchart|tree|chart|plot|table|figure|map|grid|timeline|graph|boxes|box|layout)\b/i
+const BOX_ARROW_RE = /\b(box|boxes|arrow|arrows)\b[^.!?\n]{0,40}\b(labell?ed|titled|called)\b/i
+/** "This table lets you see …" after the table itself was stripped. */
+const ORPHAN_REF_RE = /\b(this|the)\s+(table|tree|chart|layout|map|grid|timeline|plot|graph)\b[^.!?\n]{0,30}\b(lets|allows|shows|helps|illustrates|gives|maps|displays)\b/i
+export const isFigureTalk = (sentence: string): boolean => isPhantomVisualClaim(sentence) || IMAGINE_FIGURE_RE.test(sentence) || BOX_ARROW_RE.test(sentence) || ORPHAN_REF_RE.test(sentence)
+
+/**
+ * Remove sentences that point at a table, tree, chart … the reply no longer contains. Only when the text holds no fenced block and no markdown
+ * table (a sentence introducing a table that IS there is ordinary teaching); never to an empty reply.
+ */
+export function dropOrphanFigureReferences(text: string): string {
+  if (/```/.test(text) || /^\s*\|.*\|\s*$/m.test(text)) return text
+  const out = text.split(/\n{2,}/).map((para) => para.split(/(?<=[.!?])\s+(?=\S)/).filter((x) => !ORPHAN_REF_RE.test(x)).join(' ').trim()).filter(Boolean).join('\n\n')
+  return out.trim().length > 0 ? out : text
+}
+
 /** Remove what a stripped diagram leaves behind: lines of one or two characters (an axis letter, a bullet, "|"), and blank runs. */
 export function withoutDiagramDebris(text: string): string {
   return (typeof text === 'string' ? text : '')
     .split('\n')
+    .filter((line) => !AXIS_TICK_LINE.test(line))
     .filter((line) => line.trim().length === 0 || line.trim().replace(/[^\p{L}\p{N}]/gu, '').length > 2 || /[=⇌→]/.test(line))
     .join('\n')
     .replace(/\n{3,}/g, '\n\n')
@@ -57,7 +78,7 @@ export function pictureReplyIsNotAnExplanation(text: string): boolean {
   const sentences = sentencesOf(body)
   if (sentences.length === 0) return true
   // Still talking about the figure: more than a third of the sentences describe a picture, a box or an arrow.
-  const phantom = sentences.filter((s) => isPhantomVisualClaim(s) || /\bimagine this (picture|diagram|figure)\b/i.test(s)).length
+  const phantom = sentences.filter(isFigureTalk).length
   return phantom / sentences.length > 1 / 3
 }
 

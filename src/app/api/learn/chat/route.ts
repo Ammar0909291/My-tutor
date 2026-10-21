@@ -10850,7 +10850,10 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             return accepted
           }
           // The retry passes the same strip; a second confirm-back is not served.
-          const retry = stripConfirmBack(routed.text ?? '')
+          // Internal annotation tags are parsed out of the MAIN reply earlier in the pipeline; a regenerated reply skips that step, so they
+          // are removed here (an `<!--ATTEMPT …-->` reached a learner through the no-picture repair on 2026-10-20).
+          const { stripAttemptTag: stripAttemptTagRetry } = await import('@/lib/teaching/attemptVectorSignal')
+          const retry = stripConfirmBack(stripAttemptTagRetry(routed.text ?? ''))
           let retryText = retry.text
           try {
             const { stripSimulationGiveaways } = await import('@/lib/teaching/visual/simulationPrompt')
@@ -13574,10 +13577,14 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         // run, and nothing re-checks it: production, 2026-10-20, eng.linguistics.language-families — the regenerated reply carried a
         // fenced "World Languages ├─ Indo-European …" tree and "This tree shows …" under "I don't have a picture". The same two strips,
         // once more, on the final text (idempotent on text they have already cleaned); never to an empty reply.
-        if (!attachedNow) {
+        // A figure the learner already has (held from an earlier turn, or shown earlier for this concept) is still a figure: prose that
+        // refers to it is true and stays (the same question the earlier strips ask with `figureOnScreen`).
+        const figureHeldNow = (resolvedVisualDecision?.session?.turns ?? 0) > 0
+        if (!attachedNow && !figureHeldNow && !shownEarlierForConcept) {
           const { stripUnbackedAsciiDiagram: sweepAscii } = await import('@/lib/teaching/asciiDiagramGuard')
           const { stripPhantomVisualClaims: sweepPhantom } = await import('@/lib/teaching/visualRegistry')
-          const swept = sweepPhantom(sweepAscii(cleanText, false).text)
+          const { dropOrphanFigureReferences } = await import('@/lib/teaching/visual/noPictureRepair')
+          const swept = dropOrphanFigureReferences(sweepPhantom(sweepAscii(cleanText, false).text))
           if (swept !== cleanText && swept.trim().length > 0) {
             console.warn('[ascii-diagram] ' + JSON.stringify({ event: 'late-sweep', conceptId: resolvedConceptId ?? null, charsBefore: cleanText.length, charsAfter: swept.length }))
             cleanText = swept
@@ -13588,11 +13595,15 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           if (npr.pictureReplyIsNotAnExplanation(cleanText)) {
             const { stripUnbackedAsciiDiagram } = await import('@/lib/teaching/asciiDiagramGuard')
             const { stripPhantomVisualClaims: stripPhantomNp } = await import('@/lib/teaching/visualRegistry')
+            const { stripAttemptTag: stripAttemptTagNp } = await import('@/lib/teaching/attemptVectorSignal')
             let npReason = 'none'
             const attemptNp = (appendix: string) => repairStubReply(cleanText, 'no-picture', {
               appendix,
               accept: (retry) => {
-                const verdict = npr.judgeNoPictureRepair(stripPhantomNp(stripUnbackedAsciiDiagram(retry, false).text))
+                // The retry is raw model text that skipped the main pipeline's tag parsing: remove the internal annotation tags (an
+                // `<!--ATTEMPT …-->` leaked to a learner in the first production run of this repair) before judging it.
+                const untagged = stripAttemptTagNp(retry).replace(/<!--[\s\S]*?-->/g, '').replace(/^\s*VISUAL:\s*\S+\s*$/gim, '')
+                const verdict = npr.judgeNoPictureRepair(npr.dropOrphanFigureReferences(stripPhantomNp(stripUnbackedAsciiDiagram(untagged, false).text)))
                 npReason = verdict.reason
                 return verdict.text
               },
