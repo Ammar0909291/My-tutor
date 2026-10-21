@@ -1,9 +1,10 @@
 {
- "generatedAt": "2026-10-20T22:43:12.296Z",
+ "generatedAt": "2026-10-21T01:32:30.104Z",
  "renderScope": "lesson",
- "fingerprint": "14f4baf2b03400fa8a2268abaee648eca540e530e8965ed4394b0ae6f3a8767a",
+ "fingerprint": "666e65a9916b167e0b926bac6b281699b87626c3880c2ee3e9923facc54754d7",
  "fingerprints": {
   "eng.grammar.nouns": "0b9a282cc838393e",
+  "eng.composition.style-voice-and-tone": "7deb9c019a8b9d14",
   "eng.literature.meter-and-rhyme": "dd4dd772a4eb157d",
   "eng.linguistics.discourse-analysis-intro": "c0bee35e5c658c48",
   "eng.linguistics.sociolinguistics-intro": "549bc568a0300491"
@@ -18,15 +19,45 @@
   "light"
  ],
  "summary": {
-  "concepts": 4,
+  "concepts": 5,
   "verdicts": {
-   "PASS": 4
+   "PASS": 5
   },
   "withMissingRenders": 0
  },
  "concepts": [
   {
    "id": "eng.grammar.nouns",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "generator",
+   "scope": "concept",
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "evidence": [
+    "englishStaticFigureContent.test.ts"
+   ],
+   "states": 4,
+   "missing": [],
+   "fail": 0,
+   "review": [],
+   "failures": []
+  },
+  {
+   "id": "eng.composition.style-voice-and-tone",
    "verdict": "PASS",
    "class": "scene",
    "authorship": "generator",

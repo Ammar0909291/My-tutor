@@ -124,8 +124,9 @@ const sourcesOf = (id: string) => {
 }
 const textOf = (s: SceneSpec) => [...objs(s).map((o) => o.text ?? ''), ...s.steps.map((st) => st.narration ?? ''), s.title, s.teachingGoal ?? ''].join(' ')
 
+const STYLE = 'eng.composition.style-voice-and-tone'
 describe.each([
-  [METER, 'meter-five-feet'], [SOCIO, 'sociolinguistics-style-shifting'], [DISCOURSE, 'discourse-cohesion-coherence'],
+  [METER, 'meter-five-feet'], [SOCIO, 'sociolinguistics-style-shifting'], [DISCOURSE, 'discourse-cohesion-coherence'], [STYLE, 'style-voice-tone'],
 ] as const)('%s is served its own drawn figure (%s), from the concept\'s own sources', (id, sceneId) => {
   const s = sceneOf(id)
   const sources = sourcesOf(id)
@@ -231,5 +232,64 @@ describe('eng.linguistics.discourse-analysis-intro: the cohesion × coherence gr
     const n = (bad.steps.flatMap((st) => st.objects as Array<Obj & { position?: number[] }>)).filter((o) => o.type === 'node')[0]
     n.position![0] = EF.MID.x + 3
     expect(EF.checkCohesionCoherenceConsistency(bad).ok).toBe(false)
+  })
+})
+
+// ── figure 5 (2026-10-21): style, voice and tone ───────────────────────────────────────────────────────────────────────────────────────
+// The teaching asset asks for "a three-layer diagram: STYLE (observable choices) → projects → VOICE (persistent identity), with TONE as a per-piece
+// dial on the side" and "a traceability table: stylistic effect ← the concrete choices producing it". The concept had no figure (learner run, 2026-10-21).
+import * as ESF from '@/lib/teaching/sceneGenerators/englishStyleFigure'
+
+describe('eng.composition.style-voice-and-tone: the three layers and two traceability rows are the asset\'s own, and the geometry says what they claim', () => {
+  const s = ESF.buildStyleVoiceToneScene()
+  const sources = sourcesOf(STYLE)
+  const clone = () => JSON.parse(JSON.stringify(s)) as SceneSpec
+
+  it('the asset names this diagram, the three terms and the two traces the figure draws', () => {
+    expect(sources).toMatch(/a three-layer diagram: style \(observable choices\) → projects → voice \(persistent identity\), with tone as a per-piece dial/)
+    expect(sources).toMatch(/voice persists, tone varies/)
+    expect(sources).toMatch(/short declaratives read urgent/)
+    expect(sources).toMatch(/long subordinated sentences read reflective/)
+  })
+  it('passes its own consistency check', () => { expect(ESF.checkStyleVoiceToneConsistency(s)).toEqual({ ok: true, errors: [] }) })
+  it('STYLE is written above VOICE and the projecting arrow runs from the first down to the second', () => {
+    expect(ESF.STYLE_AT[1]).toBeGreaterThan(ESF.VOICE_AT[1])
+    const a = objs(s).find((o) => o.type === 'arrow') as unknown as { from: number[]; to: number[] }
+    expect(a.from[1]).toBeGreaterThan(a.to[1])
+  })
+  it('the dial pointer lies inside its ring', () => {
+    const [x, y] = ESF.pointerEnd()
+    expect(Math.hypot(x - ESF.DIAL.c[0], y - ESF.DIAL.c[1])).toBeLessThan(ESF.DIAL.r)
+  })
+  it('each trace reads left to right, choice → effect, and is a pair the asset states', () => {
+    for (const t of ESF.TRACES) {
+      expect(t.choiceX).toBeLessThan(t.arrow[0]); expect(t.arrow[1]).toBeLessThan(t.effectX)
+      expect(sources, `${t.choice} read ${t.effect}`).toContain(`${t.choice} read ${t.effect}`)
+    }
+  })
+  it('states no number and says voice persists while tone varies', () => {
+    const text = textOf(s)
+    expect(text).not.toMatch(/\d/)
+    expect(s.steps.map((st) => st.narration).join(' ')).toMatch(/Voice persists, tone varies/)
+  })
+  // Mutations: figures that look the same and say something false.
+  it('STYLE written below VOICE (the layers the wrong way round) is rejected', () => {
+    const bad = clone()
+    const all = bad.steps.flatMap((st) => st.objects) as Array<{ type?: string; text?: string; position?: number[] }>
+    const [sl, vl] = [all.find((o) => o.text === 'STYLE: observable choices')!, all.find((o) => o.text === 'VOICE: persistent identity')!]
+    ;[sl.position![1], vl.position![1]] = [vl.position![1], sl.position![1]]
+    expect(ESF.checkStyleVoiceToneConsistency(bad).errors.join(' ')).toMatch(/STYLE is not above VOICE/)
+  })
+  it('a dial pointer that pokes outside its ring is rejected', () => {
+    const bad = clone()
+    const p = (bad.steps.flatMap((st) => st.objects) as Array<{ type?: string; from?: number[]; to?: number[] }>).find((o) => o.type === 'bond' && o.from![0] === ESF.DIAL.c[0])!
+    p.to = [p.to![0] + 3, p.to![1] + 3, 0]
+    expect(ESF.checkStyleVoiceToneConsistency(bad).errors.join(' ')).toMatch(/pointer/)
+  })
+  it('an effect moved off its choice’s line is rejected', () => {
+    const bad = clone()
+    const e = (bad.steps.flatMap((st) => st.objects) as Array<{ type?: string; text?: string; position?: number[] }>).find((o) => o.text === 'urgent')!
+    e.position![1] += 1.5
+    expect(ESF.checkStyleVoiceToneConsistency(bad).ok).toBe(false)
   })
 })

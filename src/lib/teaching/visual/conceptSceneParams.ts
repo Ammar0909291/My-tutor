@@ -350,6 +350,7 @@ import { buildEnergyCycleScene } from '@/lib/teaching/sceneGenerators/energyCycl
 import { buildPhaseDiagramScene } from '@/lib/teaching/sceneGenerators/phaseDiagram'
 import { buildMoDiagramScene } from '@/lib/teaching/sceneGenerators/moDiagram'
 import { buildFeetScene, buildStyleShiftScene, buildCohesionCoherenceScene } from '@/lib/teaching/sceneGenerators/englishFigures'
+import { buildStyleVoiceToneScene } from '@/lib/teaching/sceneGenerators/englishStyleFigure'
 import { buildMechanismProfileScene, buildSurfaceCatalysisScene } from '@/lib/teaching/sceneGenerators/reactionMechanismScenes'
 import { buildLacOperonScene } from '@/lib/teaching/sceneGenerators/lacOperon'
 import { buildComplexEquilibriaScene } from '@/lib/teaching/sceneGenerators/complexEquilibria'
@@ -1156,6 +1157,8 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'eng.literature.meter-and-rhyme': () => buildFeetScene(),
   'eng.linguistics.sociolinguistics-intro': () => buildStyleShiftScene(),
   'eng.linguistics.discourse-analysis-intro': () => buildCohesionCoherenceScene(),
+  // The three-layer diagram (style → projects → voice, tone as a per-piece dial) and two traceability rows its teaching asset asks for (learner run, 2026-10-21).
+  'eng.composition.style-voice-and-tone': () => buildStyleVoiceToneScene(),
 
   // The Punnett generator is single-gene by construction (genotypes are two
   // alleles). A dihybrid cross drawn as a monohybrid square teaches the wrong
