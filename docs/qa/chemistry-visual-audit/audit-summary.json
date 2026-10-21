@@ -38,6 +38,7 @@
   "chem.equil.complex-equil",
   "chem.found.matter",
   "chem.kinet.mechanism",
+  "chem.kinet.photochemistry",
   "chem.org.pericyclic",
   "chem.pblock.group16",
   "chem.poly.biodegradable",
@@ -62,8 +63,8 @@
   },
   "served": 103,
   "bySource": {
-   "tier0": 43,
-   "tier3": 42,
+   "tier0": 44,
+   "tier3": 41,
    "none": 83,
    "tier2": 2,
    "tier1": 16
@@ -77,8 +78,8 @@
    "REVIEW_REQUIRED": 95,
    "PASS": 8
   },
-  "statesMeasured": 1178,
-  "categoryCUnreachableCachedFigures": 32,
+  "statesMeasured": 1194,
+  "categoryCUnreachableCachedFigures": 33,
   "withMissingRenders": 0
  },
  "concepts": [
@@ -969,12 +970,12 @@
   {
    "id": "chem.kinet.photochemistry",
    "category": "E",
-   "source": "tier3",
-   "provenance": "generated:chem.kinet.photochemistry:cached",
-   "instanceId": "tier3:chem.kinet.photochemistry",
-   "fingerprint": "f305ed12c",
+   "source": "tier0",
+   "provenance": "generator",
+   "instanceId": "scene:photochemistry-fate-of-excited-molecule",
+   "fingerprint": "f7374385c",
    "verdict": "REVIEW_REQUIRED",
-   "shadowedCachedFigure": false
+   "shadowedCachedFigure": true
   },
   {
    "id": "chem.solid.crystal-systems",
@@ -2915,6 +2916,41 @@
     "chem.kinet.mechanism"
    ],
    "fingerprint": "f67d0c5a9",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "REVIEW_REQUIRED",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": "unknown",
+   "statesMeasured": 20,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 18,
+    "REVIEW_REQUIRED": 2,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [
+    "INNER_SCROLL_X"
+   ],
+   "minFontPx": 11.5,
+   "minContrast": 4.68
+  },
+  {
+   "id": "scene:photochemistry-fate-of-excited-molecule",
+   "tier": "tier0",
+   "origin": "authored",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.kinet.photochemistry"
+   ],
+   "fingerprint": "f7374385c",
    "verdict": "REVIEW_REQUIRED",
    "render": "REVIEW_REQUIRED",
    "semantic": "REVIEW_REQUIRED",
@@ -5718,39 +5754,6 @@
     "chem.kinet.catalysis"
    ],
    "fingerprint": "f100c6bf4",
-   "verdict": "REVIEW_REQUIRED",
-   "render": "PASS",
-   "semantic": "REVIEW_REQUIRED",
-   "semanticFamily": null,
-   "statesMeasured": 4,
-   "viewports": [
-    "1280",
-    "390"
-   ],
-   "themes": [
-    "dark",
-    "light"
-   ],
-   "counts": {
-    "PASS": 4,
-    "REVIEW_REQUIRED": 0,
-    "FAIL": 0
-   },
-   "failCodes": [],
-   "reviewCodes": [],
-   "minFontPx": 10,
-   "minContrast": 4.66
-  },
-  {
-   "id": "tier3:chem.kinet.photochemistry",
-   "tier": "tier3",
-   "origin": "generated",
-   "reachability": "resolver",
-   "interactive": false,
-   "conceptIds": [
-    "chem.kinet.photochemistry"
-   ],
-   "fingerprint": "f305ed12c",
    "verdict": "REVIEW_REQUIRED",
    "render": "PASS",
    "semantic": "REVIEW_REQUIRED",

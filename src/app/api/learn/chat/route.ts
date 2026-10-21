@@ -5344,6 +5344,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // accepts non-MCQ probes and renders them as prose follow-ups.
             requireMcq: true,
             onAllCandidatesSpent: () => { authoredPoolExhaustedHoisted = true },
+            // Where the answer banks credit (CHECK on) spend a certifying card; where it banks none (GUIDE and earlier) spend a 2-option one.
+            creditPhase: phaseBeforeTurn === 'CHECK' || phaseBeforeTurn === 'PRACTICE' || phaseBeforeTurn === 'TRANSFER' ? true
+              : phaseBeforeTurn === 'OBSERVE' || phaseBeforeTurn === 'DEMONSTRATE' || phaseBeforeTurn === 'GUIDE' ? false : undefined,
             // Owner-approved (G2, 2026-09-24): once every unasked question is
             // spent, a question the learner got WRONG may be asked once more.
             // Read from the ledger as it stood BEFORE this turn, so a question
@@ -6970,6 +6973,18 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             dropped: leak.dropped.map((d) => d.slice(0, 120)),
           }))
           text = leak.text
+        }
+      }
+
+      // A verdict on an answer nobody gave (production, 2026-10-21): the engine attached its own card to "Got it. Can I try a practice question?"
+      // and the lead-in opened "That's correct — you've seen …". Only where nothing was graded and the model was told to write a lead-in only.
+      if (mcqHoisted && mcqHoisted === gateMcqHoisted && mcqGradeHoisted === null && !probeStarvationRelievedHoisted
+        && !(await import('@/lib/teaching/learnerEngagement')).learnerMessageNeedsModelReply(message, { answeredPendingQuestion: false })) {
+        const { dropUnearnedVerdict } = await import('@/lib/teaching/unearnedVerdict')
+        const unearned = dropUnearnedVerdict(text)
+        if (unearned.dropped.length > 0) {
+          console.warn('[unearned-verdict] ' + JSON.stringify({ conceptId: resolvedConceptId ?? null, dropped: unearned.dropped.map((d) => d.slice(0, 120)) }))
+          text = unearned.text
         }
       }
 

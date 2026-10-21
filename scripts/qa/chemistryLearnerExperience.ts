@@ -117,7 +117,9 @@ async function observe(cookie: string, conceptId: string, outDir: string, served
       await ctx.addCookies(cookie.split(';').map((c) => { const [n, ...rest] = c.trim().split('='); return { name: n, value: rest.join('='), domain: new URL(BASE).hostname, path: '/', secure: true, httpOnly: false, sameSite: 'Lax' as const } }))
       try {
         await page.goto(`${BASE}/learn?subject=${SUBJECT}`, { waitUntil: 'domcontentloaded', timeout: 60_000 })
-        await page.waitForTimeout(8_000)
+        // Wait for the lesson itself: five runs at once left a phone-width page on "Loading your lesson…" at the fixed 8 s, and a figure that WAS on the wire was reported as missing.
+        await page.waitForFunction(() => !/Loading your lesson/i.test(document.body.innerText), null, { timeout: 60_000 }).catch(() => undefined)
+        await page.waitForTimeout(5_000)
         const found = await page.evaluate(() => {
           const frames: Element[] = []
           document.querySelectorAll('[aria-label^="Visual aid:"]').forEach((e) => frames.push(e))

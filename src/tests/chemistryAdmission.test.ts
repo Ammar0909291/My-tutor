@@ -120,7 +120,7 @@ describe('no chemistry figure the resolver serves today is blanked by the gate',
   it('serves the concepts that have a faithful figure (nothing rejected:chemistry-validation-failed)', () => {
     const rejected = decisions.filter((x) => String(x.d.reason ?? '').includes('chemistry-validation-failed')).map((x) => x.id)
     expect(rejected).toEqual([])
-    expect(decisions.filter((x) => x.d.graphical).length).toBe(59)
+    expect(decisions.filter((x) => x.d.graphical).length).toBe(60)
   })
 
   it('every served chemistry scene audits without a single FAIL finding', () => {

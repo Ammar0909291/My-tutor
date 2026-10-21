@@ -354,6 +354,8 @@ import { buildStyleVoiceToneScene } from '@/lib/teaching/sceneGenerators/english
 import { buildMechanismProfileScene, buildSurfaceCatalysisScene } from '@/lib/teaching/sceneGenerators/reactionMechanismScenes'
 import { buildLacOperonScene } from '@/lib/teaching/sceneGenerators/lacOperon'
 import { buildComplexEquilibriaScene } from '@/lib/teaching/sceneGenerators/complexEquilibria'
+import { buildPhotochemistryScene } from '@/lib/teaching/sceneGenerators/photochemistryFate'
+import { buildCancerHallmarksScene } from '@/lib/teaching/sceneGenerators/cancerHallmarksLocks'
 import { buildEvoDevoScene } from '@/lib/teaching/sceneGenerators/evoDevoToolkit'
 import { buildHardyWeinbergScene } from '@/lib/teaching/sceneGenerators/hardyWeinbergSquare'
 import { buildCoordinationComplexScene, type CoordinationComplexDef } from '@/lib/teaching/sceneGenerators/coordinationComplex'
@@ -1793,6 +1795,7 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'chem.kinet.mechanism': () => buildMechanismProfileScene(),
   // Complex-ion equilibria: the bars of log Ksp and log Kf stacked into the net constant (generic flowchart before, learner run 2026-10-21).
   'chem.equil.complex-equil': () => buildComplexEquilibriaScene(),
+  'chem.kinet.photochemistry': () => buildPhotochemistryScene(),
   'chem.surface.heterogeneous-cat': () => buildSurfaceCatalysisScene(),
   // CHEM-046: "Real Gases and van der Waals Equation" was shown the ideal
   // Boyle's-law hyperbola, the opposite of the concept.
@@ -2276,24 +2279,9 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     ],
   }),
 
-  // The Hanahan-Weinberg hallmarks are seven independent, coexisting
-  // hallmarks of an integrative framework — a hub, not a sequence, matching
-  // the concept's own KG description exactly.
-  'bio.cell.cancer-biology-hallmarks': () => buildCellHubScene({
-    conceptId: 'bio.cell.cancer-biology-hallmarks',
-    hubLabel: 'Hallmarks of Cancer',
-    title: 'Hallmarks of Cancer',
-    teachingGoal: 'Name the Hanahan-Weinberg hallmarks as independent breakdowns of normally regulated cell behaviour.',
-    spokes: [
-      { name: 'Sustained proliferative signalling', description: 'the cell drives its own division continuously' },
-      { name: 'Evasion of growth suppressors', description: 'the cell ignores signals that would normally stop division' },
-      { name: 'Resistance to apoptosis', description: 'the cell evades programmed cell death' },
-      { name: 'Replicative immortality', description: 'the cell divides without the normal limit on cell divisions' },
-      { name: 'Angiogenesis induction', description: 'the tumour induces new blood vessels to supply itself' },
-      { name: 'Invasion and metastasis', description: 'cells invade nearby tissue and spread to distant sites' },
-      { name: 'Metabolic reprogramming', description: 'the cell rewires its metabolism to support rapid growth' },
-    ],
-  }),
+  // The Hanahan-Weinberg hallmarks: each is the failure of a DIFFERENT normal safeguard, and one is not enough — a tumour must get past several (the entry's
+  // "multiple independent locks"). Replaces the hub of seven names, which could not show that (learner run, 2026-10-21).
+  'bio.cell.cancer-biology-hallmarks': () => buildCancerHallmarksScene(),
 
   // Loss of adhesion (EMT) is one shared event that leads to two different
   // outcomes depending on context — a branching END, the mirror image of
