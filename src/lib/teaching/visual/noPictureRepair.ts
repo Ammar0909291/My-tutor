@@ -93,6 +93,14 @@ export function buildNoPictureRepairAppendix(): string {
   )
 }
 
+/** Remove every sentence that is talk about a figure (`isFigureTalk`), keeping paragraphs; never to an empty text. */
+export function dropFigureTalk(text: string): string {
+  const out = text.split(/\n{2,}/)
+    .map((para) => para.split(/(?<=[.!?:])\s+(?=\S)/).filter((x) => !isFigureTalk(x)).join(' ').trim())
+    .filter(Boolean).join('\n\n')
+  return out.trim().length > 0 ? out : text
+}
+
 /** Drop the sentences that end in a question mark (a retry that tacked "Does that make sense?" on its explanation keeps the explanation); paragraphs are kept. */
 export function dropQuestions(text: string): string {
   return text.split(/\n{2,}/)
@@ -110,8 +118,10 @@ export interface NoPictureVerdict { text: string | null; reason: 'ok' | 'fence' 
 export function judgeNoPictureRepair(retry: string): NoPictureVerdict {
   // The fence is looked for on the RAW retry: the debris filter would drop a bare ``` line before it was seen.
   if (/```/.test(retry)) return { text: null, reason: 'fence' }
-  const body = withoutDiagramDebris(dropQuestions(withoutDiagramDebris(retry)))
-  if (body.length < MIN_EXPLANATION_CHARS) return { text: null, reason: 'short' }
+  const asked = withoutDiagramDebris(dropQuestions(withoutDiagramDebris(retry)))
+  // Sentences that talk about a figure ("imagine the following flow as a simple text diagram …") go; the explanation around them stays.
+  const body = dropFigureTalk(asked)
+  if (body.length < MIN_EXPLANATION_CHARS) return { text: null, reason: asked.length >= MIN_EXPLANATION_CHARS ? 'figure-talk' : 'short' }
   if (pictureReplyIsNotAnExplanation(body)) return { text: null, reason: 'figure-talk' }
   return { text: body, reason: 'ok' }
 }

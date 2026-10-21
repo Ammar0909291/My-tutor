@@ -5,6 +5,7 @@
  */
 import { describe, it, expect } from 'vitest'
 import {
+  dropFigureTalk,
   pictureReplyIsNotAnExplanation, acceptNoPictureRepair, buildNoPictureRepairAppendix, withoutDiagramDebris, MIN_EXPLANATION_CHARS,
   judgeNoPictureRepair, dropQuestions, buildNoPictureSecondAttemptAppendix, dropOrphanFigureReferences,
 } from '@/lib/teaching/visual/noPictureRepair'
@@ -121,5 +122,19 @@ describe('talk about a figure that is gone is detected beyond the phantom-claim 
   })
   it('axis-tick debris of a stripped plot is removed ("  100 |    *")', () => {
     expect(withoutDiagramDebris('Imagine the plot.\nIntensity\n 100 |                *\nThe right-most peak is the molecular ion.')).not.toMatch(/100 \|/)
+  })
+})
+
+describe('a retry that explains in words but opens with talk about a diagram keeps the explanation and loses the talk (production, 2026-10-21)', () => {
+  const RETRY = `I can’t display an actual picture, but imagine the following flow as a simple text diagram that shows how we evaluate a language‑teaching method against research findings: ${EXPLANATION}`
+  it('dropFigureTalk removes the figure sentence and keeps the rest', () => {
+    const out = dropFigureTalk(RETRY)
+    expect(out).not.toMatch(/imagine the following flow/)
+    expect(out).toContain('In heterogeneous catalysis')
+  })
+  it('judgeNoPictureRepair accepts it, without the figure sentence', () => {
+    const v = judgeNoPictureRepair(RETRY)
+    expect(v.reason).toBe('ok')
+    expect(v.text).not.toMatch(/text diagram/)
   })
 })
