@@ -57,7 +57,19 @@ With the sweep deployed, five figure-less concepts were asked for a diagram: Che
 
 ## Not changed, with the reason
 - **The class "a generated process flowchart for a method concept"** (e.g. `eng.linguistics.dialectology` "Dialectology Research Process", `cs.algo.np-completeness`, `eng.linguistics.corpus-linguistics-intro`): legible and passes the critic; a concept gets a drawn figure only when one is authored. This pass authored the ones the runs found (Stokes, Green's, MO theory, mechanisms, surface catalysis, lac operon, meter, sociolinguistics, discourse analysis); hundreds of concepts still rely on generation.
-- **Biology population genetics (6.5):** its figure (Hardy–Weinberg with the four forces that disturb it) is correct; it does not show p, q or p² + 2pq + q². A second figure for the same concept would be a content decision; not authored.
+- **Biology population genetics (6.5):** fixed on 2026-10-21 (batch 4 fixes below): the figure now draws p, q and p² + 2pq + q².
 - **Physics Lorentz / spacetime:** authored figures (Minkowski diagram; light cone) are good (8/10); the early close was the script oracle.
 - **`KNOWLEDGE_EXPOSURE_FAILURE core-understanding-truncated-governing` (authored 5112, exposed 1726 chars)** appears in the runtime logs of every Chemistry turn; it is an Educational Brain exposure budget, not touched here.
 - **Latency 11–29 s and repeated analogies:** model/provider behaviour.
+
+## Batch 4 (2026-10-21): five more hard concepts, and what was fixed
+Run on Test8 against production: `phys.stat.entropy-statistical`, `chem.equil.complex-equil`, `eng.composition.style-voice-and-tone`, `math.de.laplace-transform`, `bio.evo.evo-devo` — all five mastered. Ratings 8 / 5.5 / 5.5-6 / 8 / 6. The three weak ones had no real figure: a generated five-box flowchart (complex ion equilibria), a two-pin label cloud (evo-devo), none (style, voice and tone). Biology population genetics (batch 3, 6.5) lacked p and q.
+
+| Defect | Fix | Pinned by |
+|---|---|---|
+| `chem.equil.complex-equil` served a generic flowchart | `sceneGenerators/complexEquilibria.ts`: log K bars for Ksp (1.8×10⁻¹⁰), Kf (1.7×10⁷) and the net Ksp × Kf (3.1×10⁻³) stacked end to end; every number in a label is formatted from, and re-read against, the length of the bar it names. Chemistry audit re-rendered (`scene:complex-equilibria-log-k`: 20 PASS, 2 REVIEW = expanded-view scroll, R15); `semantic-review.json` entry; admission pin 58 → 59 | `complexEquilibria.test.ts` (10; 4 mutations) |
+| `bio.evo.evo-devo` served two pins | `evoDevoToolkit.ts`: Hox genes in the same order as the body regions they specify, in a fly and a human; mouse Pax6 in a fly makes a FLY eye (the eye is the fly's colour). Biology render harness, 390/1280 px, both themes, every stage: 0 overlaps, nothing clipped | `evoDevoToolkit.test.ts` (10; 4 mutations) |
+| `bio.gen.population-genetics` showed the forces, not the equilibrium | `hardyWeinbergSquare.ts`: the lesson's 9 % example as a gene-pool bar (p = 0.7), a unit square whose AREAS are p², pq, pq, q² (0.49, 0.42, 0.09) and the next generation's bar split in the same place (p unchanged). Same render check | `hardyWeinbergSquare.test.ts` (9; 3 mutations) |
+| **Found while rendering:** the figure frame cut a narration at 160 characters mid-sentence ("… the net bar ends where the stack ended, K") whenever it contained "=", "≈", "<" or ">" plus a digit, because it sent it to the "Working" panel; the sentence was then missing from "What's happening?" too. **328 of the 995 authored scenes** have such a narration (measured) | `explainer.ts`: a relationship narration longer than the Working line limit stays whole in the prose; the headline-result logic is unchanged (`statesRelationship`) | `explainerFrame.test.ts` (new test, mutation-checked) |
+
+Known limit, found while doing this: `docs/qa/chemistry-visual-audit/render-states.json` holds only the rows of the LAST partial re-audit (it was already reduced to the two 2026-10-20 instances before this); the per-instance counts and verdicts live in `audit-summary.json`, which is what `chemistryVisualAudit.test.ts` checks.

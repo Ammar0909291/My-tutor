@@ -176,8 +176,20 @@ export function splitTitle(title: string): { name: string; givens?: string } {
   return { name, givens }
 }
 
-/** True for text that states a relationship — the shape of a formula line. */
+/** The longest line the "Working" panel shows whole. */
+const WORKING_LINE_MAX = 160
+
+/**
+ * True for text that states a relationship — the shape of a formula line — AND is short enough to be shown whole as one. A longer narration
+ * that merely contains an "=" is a sentence about the relationship, not a formula line: it used to be sent to the "Working" panel and cut at
+ * 160 characters mid-sentence ("… the net bar ends where the stack ended, K"), and was missing from "What's happening?" as well. 328 of the
+ * 995 authored scenes had a narration of that kind (measured 2026-10-21); they now stay in the prose, which keeps whole lines.
+ */
 function looksLikeFormula(text: string): boolean {
+  return statesRelationship(text) && text.length <= WORKING_LINE_MAX
+}
+/** Any text that states a relationship, of any length (the headline result may come from a long final-step narration). */
+function statesRelationship(text: string): boolean {
   return /[=≈≠<>]/.test(text) && /[\d)]/.test(text)
 }
 
@@ -194,8 +206,8 @@ function deriveResult(objects: SceneObject[], narrations: string[]): ExplainerRe
   const labels = objects.filter((o) => o.type === 'label' && typeof o.text === 'string' && o.text.trim())
 
   const explicit =
-    labels.find((o) => roleOf(o.color) === 'result' && looksLikeFormula(o.text!)) ??
-    labels.find((o) => looksLikeFormula(o.text!))
+    labels.find((o) => roleOf(o.color) === 'result' && statesRelationship(o.text!)) ??
+    labels.find((o) => statesRelationship(o.text!))
 
   // Next, a short label the author coloured as the result that carries a
   // number ("average 640 W (apparent 800 VA)") — a stated answer without an
@@ -206,7 +218,7 @@ function deriveResult(objects: SceneObject[], narrations: string[]): ExplainerRe
   const resultLabel = explicit ? undefined
     : labels.find((o) => roleOf(o.color) === 'result' && /\d/.test(o.text!) && o.text!.trim().length <= 60)
   if (resultLabel) return { expression: resultLabel.text!.trim() }
-  const narrated = explicit ? undefined : narrations.filter(looksLikeFormula).pop()?.trim()
+  const narrated = explicit ? undefined : narrations.filter(statesRelationship).pop()?.trim()
   const text = explicit?.text?.trim() ?? (narrated && narrated.length <= 70 ? narrated : undefined)
   if (!text) return undefined
 
@@ -382,7 +394,7 @@ function derivePanels(spec: SceneSpec, narrations: string[]): ExplainerPanel[] {
 
   if (formulas.length) {
     // The last line of a derivation is the answer; emphasise it.
-    const lines = formulas.map((f) => f.slice(0, 160))
+    const lines = formulas
     panels.push({ heading: 'Working', lines, emphasis: lines[lines.length - 1] })
   }
 

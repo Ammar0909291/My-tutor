@@ -1752,6 +1752,28 @@
     }
    ],
    "remaining": "A schematic with no energies or rates. One example of each step is drawn (a bimolecular surface reaction); a unimolecular decomposition on the surface and the Langmuir–Hinshelwood / Eley–Rideal distinction are not drawn. The expanded (fullscreen) view scrolls: the chrome around the scene is taller than the window (R15, measured and bounded, by design)."
+  },
+  "scene:complex-equilibria-log-k": {
+   "fingerprint": "fb18d94af",
+   "concepts": [
+    "chem.equil.complex-equil"
+   ],
+   "family": "plot",
+   "initial": "semantic audit REVIEW_REQUIRED (no deterministic chemistry verifier exists for this figure family); render REVIEW: INNER_SCROLL_X in the expanded view only (R15)",
+   "decision": "FIXED→PASS",
+   "finding": "The concept was served a generated five-box flowchart (the procedure for working a problem) with no equilibrium constant on it. It now draws the arithmetic the Educational Brain entry teaches: log K bars for AgCl(s) ⇌ Ag⁺ + Cl⁻ (Ksp 1.8×10⁻¹⁰, a long bar below K = 1), Ag⁺ + 2NH₃ ⇌ [Ag(NH₃)₂]⁺ (Kf 1.7×10⁷, a bar up from where the first ended) and the net AgCl(s) + 2NH₃ ⇌ [Ag(NH₃)₂]⁺ + Cl⁻ (Ksp × Kf = 3.1×10⁻³, the bar from K = 1 down to where the stack ended). Numbers are the entry's own; 1.8×10⁻¹⁰ × 1.7×10⁷ = 3.06×10⁻³ checked. Read from the code, the tests and the Chromium screenshots (390 px dark, 1280 px dark and light, every stage).",
+   "fix": "New generator `complexEquilibria.ts` (`buildComplexEquilibriaScene`) with `checkComplexEquilibriaConsistency`: each number in a label is formatted from, and re-read against, the length of the bar it names; the net bar must be the Ksp bar and the Kf bar stacked end to end and end where the Kf bar ends. Found while rendering it: the frame sent any narration containing an \"=\" to a 160-character \"Working\" line, cutting it mid-sentence (328 of 995 authored scenes were affected); `explainer.ts` now keeps a long relationship sentence whole in the prose (`explainerFrame.test.ts`).",
+   "evidence": [
+    {
+     "file": "src/tests/complexEquilibria.test.ts",
+     "contains": "the net bar is the Ksp bar and the Kf bar stacked end to end"
+    },
+    {
+     "file": "src/tests/complexEquilibria.test.ts",
+     "contains": "a net bar that does not end where the Kf bar ends is rejected"
+    }
+   ],
+   "remaining": "Stepwise constants K₁…K₄ and the overall β₄ = K₁K₂K₃K₄ are stated in the lesson but not drawn (one worked system, AgCl in NH₃, is). The expanded (fullscreen) view scrolls: the chrome around the scene is taller than the window (R15, measured and bounded, by design)."
   }
  }
 }

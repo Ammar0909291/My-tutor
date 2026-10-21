@@ -352,6 +352,9 @@ import { buildMoDiagramScene } from '@/lib/teaching/sceneGenerators/moDiagram'
 import { buildFeetScene, buildStyleShiftScene, buildCohesionCoherenceScene } from '@/lib/teaching/sceneGenerators/englishFigures'
 import { buildMechanismProfileScene, buildSurfaceCatalysisScene } from '@/lib/teaching/sceneGenerators/reactionMechanismScenes'
 import { buildLacOperonScene } from '@/lib/teaching/sceneGenerators/lacOperon'
+import { buildComplexEquilibriaScene } from '@/lib/teaching/sceneGenerators/complexEquilibria'
+import { buildEvoDevoScene } from '@/lib/teaching/sceneGenerators/evoDevoToolkit'
+import { buildHardyWeinbergScene } from '@/lib/teaching/sceneGenerators/hardyWeinbergSquare'
 import { buildCoordinationComplexScene, type CoordinationComplexDef } from '@/lib/teaching/sceneGenerators/coordinationComplex'
 import { buildSystemBoundaryScene, buildFirstLawScene as buildChemFirstLawScene } from '@/lib/teaching/sceneGenerators/chemistrySystemScenes'
 import { buildCellStructureScene } from '@/lib/teaching/sceneGenerators/cellStructure'
@@ -1785,6 +1788,8 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   // Two more that were a generic flowchart or no figure (hard-concept learner run, 2026-10-20): the energy profile of a two-step
   // mechanism, and adsorption / surface reaction / desorption with a poisoned site.
   'chem.kinet.mechanism': () => buildMechanismProfileScene(),
+  // Complex-ion equilibria: the bars of log Ksp and log Kf stacked into the net constant (generic flowchart before, learner run 2026-10-21).
+  'chem.equil.complex-equil': () => buildComplexEquilibriaScene(),
   'chem.surface.heterogeneous-cat': () => buildSurfaceCatalysisScene(),
   // CHEM-046: "Real Gases and van der Waals Equation" was shown the ideal
   // Boyle's-law hyperbola, the opposite of the concept.
@@ -2663,18 +2668,8 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     ],
   }),
 
-  'bio.gen.population-genetics': () => buildCellHubScene({
-    conceptId: 'bio.gen.population-genetics',
-    hubLabel: 'Hardy-Weinberg Equilibrium',
-    title: 'Four Forces That Disturb Hardy-Weinberg Equilibrium',
-    teachingGoal: 'Dominance describes expression in heterozygotes — it says nothing about frequency trend or fitness; a dominant allele does not "win" over time.',
-    spokes: [
-      { name: 'Natural selection', description: 'differential survival/reproduction changes allele frequencies' },
-      { name: 'Mutation', description: 'introduces new alleles into the population' },
-      { name: 'Gene flow (migration)', description: 'moves alleles between populations' },
-      { name: 'Genetic drift', description: 'random sampling variation, strongest in small populations (bottleneck, founder effects)' },
-    ],
-  }),
+  // The Hardy-Weinberg square with p, q and p² + 2pq + q² drawn as areas (the four-spoke hub of forces had no p or q; learner run 2026-10-21).
+  'bio.gen.population-genetics': () => buildHardyWeinbergScene(),
 
   'bio.gen.genetic-engineering': () => buildCellPathwayScene({
     conceptId: 'bio.gen.genetic-engineering',
@@ -3375,15 +3370,8 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     ],
   }),
 
-  'bio.evo.evo-devo': () => buildCellComparisonScene({
-    conceptId: 'bio.evo.evo-devo',
-    title: 'What Drives Morphological Evolution?',
-    teachingGoal: 'Mouse Pax6 expressed in a fly produces a FLY eye, not a mouse eye — the conserved signal is received by the fly’s own downstream genes.',
-    groups: [
-      { label: 'Regulatory region changes', description: 'controlling WHERE and WHEN a conserved gene is expressed', items: ['The actual driver of most major morphological change', 'Limb loss in snakes, eye reduction in cave fish'] },
-      { label: 'Protein-coding sequence changes', description: 'changes to the gene itself', items: ['NOT the typical explanation for major morphological change'] },
-    ],
-  }),
+  // The shared Hox toolkit and the Pax6 swap, drawn (two label pins before; learner run 2026-10-21).
+  'bio.evo.evo-devo': () => buildEvoDevoScene(),
 
   'bio.immuno.mhc-antigen-presentation': () => buildCellComparisonScene({
     conceptId: 'bio.immuno.mhc-antigen-presentation',

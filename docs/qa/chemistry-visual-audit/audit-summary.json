@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "generatedOn": "2026-10-20",
+ "generatedOn": "2026-10-21",
  "about": "The committed result of the Chemistry visual closure audit: every concept classified A-E (taxonomy), every served figure instance rendered in Chromium at 390 and 1280 px in both themes across every control state, and the machine semantic verdict. A REVIEW_REQUIRED here means no deterministic assertion covers the chemistry; the human answer is semantic-review.json. src/tests/chemistryVisualAudit.test.ts recomputes every served fingerprint from the resolver and fails, naming the concepts, when this file is stale.",
  "taxonomy": {
   "A": "intentionally no figure: the generator recorded a deliberate decline (no suitable form) and no faithful figure is authored",
@@ -35,6 +35,7 @@
   "chem.elect.industrial",
   "chem.elect.nernst",
   "chem.elect.standard-electrode",
+  "chem.equil.complex-equil",
   "chem.found.matter",
   "chem.kinet.mechanism",
   "chem.org.pericyclic",
@@ -54,30 +55,30 @@
  "summary": {
   "concepts": 186,
   "byCategory": {
-   "E": 102,
-   "D": 57,
+   "E": 103,
+   "D": 56,
    "B": 14,
    "A": 13
   },
-  "served": 102,
+  "served": 103,
   "bySource": {
-   "tier0": 42,
+   "tier0": 43,
    "tier3": 42,
-   "none": 84,
+   "none": 83,
    "tier2": 2,
    "tier1": 16
   },
-  "instances": 136,
+  "instances": 137,
   "instanceVerdicts": {
-   "REVIEW_REQUIRED": 83,
+   "REVIEW_REQUIRED": 84,
    "PASS": 53
   },
   "servedConceptVerdicts": {
-   "REVIEW_REQUIRED": 94,
+   "REVIEW_REQUIRED": 95,
    "PASS": 8
   },
-  "statesMeasured": 1156,
-  "categoryCUnreachableCachedFigures": 31,
+  "statesMeasured": 1178,
+  "categoryCUnreachableCachedFigures": 32,
   "withMissingRenders": 0
  },
  "concepts": [
@@ -746,13 +747,13 @@
   },
   {
    "id": "chem.equil.complex-equil",
-   "category": "D",
-   "source": "none",
-   "provenance": "no-figure:retry-generation-failed",
-   "instanceId": null,
-   "fingerprint": null,
-   "verdict": "NO_FIGURE",
-   "shadowedCachedFigure": false
+   "category": "E",
+   "source": "tier0",
+   "provenance": "generator",
+   "instanceId": "scene:complex-equilibria-log-k",
+   "fingerprint": "fb18d94af",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": true
   },
   {
    "id": "chem.equil.titration",
@@ -2616,6 +2617,41 @@
    ],
    "minFontPx": 11.5,
    "minContrast": 4.26
+  },
+  {
+   "id": "scene:complex-equilibria-log-k",
+   "tier": "tier0",
+   "origin": "authored",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.equil.complex-equil"
+   ],
+   "fingerprint": "fb18d94af",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "REVIEW_REQUIRED",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": "unknown",
+   "statesMeasured": 22,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 20,
+    "REVIEW_REQUIRED": 2,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [
+    "INNER_SCROLL_X"
+   ],
+   "minFontPx": 11.5,
+   "minContrast": 4.68
   },
   {
    "id": "scene:electrochemical-cell-daniell-cell",
