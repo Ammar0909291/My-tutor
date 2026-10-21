@@ -883,6 +883,8 @@ async function handleChatTurn(req: Request, deadline: RouteDeadline): Promise<Re
     // reason as hintHoisted — attached to the JSON response once cleanText is
     // finalized, so the client can render tappable options.
     let mcqHoisted: import('@/lib/teaching/mcq').TutorMCQ | null = null
+    // True when this turn carries the engine's own card, nothing was graded, and the model was told to write a lead-in only (unearnedVerdict.ts).
+    let unearnedVerdictScopeHoisted = false
     // The MCQ the PREVIOUS turn asked, read back from the session snapshot so
     // this turn's reply can be graded against its stored correctIndex. Written
     // at the end of the turn that asks; cleared once graded, so one question is
@@ -6978,8 +6980,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
 
       // A verdict on an answer nobody gave (production, 2026-10-21): the engine attached its own card to "Got it. Can I try a practice question?"
       // and the lead-in opened "That's correct — you've seen …". Only where nothing was graded and the model was told to write a lead-in only.
-      if (mcqHoisted && mcqHoisted === gateMcqHoisted && mcqGradeHoisted === null && !probeStarvationRelievedHoisted
-        && !(await import('@/lib/teaching/learnerEngagement')).learnerMessageNeedsModelReply(message, { answeredPendingQuestion: false })) {
+      unearnedVerdictScopeHoisted = !!mcqHoisted && mcqHoisted === gateMcqHoisted && mcqGradeHoisted === null && !probeStarvationRelievedHoisted
+        && !(await import('@/lib/teaching/learnerEngagement')).learnerMessageNeedsModelReply(message, { answeredPendingQuestion: false })
+      if (unearnedVerdictScopeHoisted) {
         const { dropUnearnedVerdict } = await import('@/lib/teaching/unearnedVerdict')
         const unearned = dropUnearnedVerdict(text)
         if (unearned.dropped.length > 0) {
@@ -13747,6 +13750,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           if (orphan.dropped) { cleanText = orphan.text; done.push('orphan-conditional') }
           const bal = hy.balanceMathDelimiters(cleanText)
           if (bal.repaired) { cleanText = bal.text; done.push('math-delimiters') }
+          // A regeneration above (stub repair, drift, analogy) can write the verdict again after the first drop emptied the reply (production, 2026-10-21 re-run).
+          if (unearnedVerdictScopeHoisted) {
+            const { dropUnearnedVerdict: dropVerdictAgain } = await import('@/lib/teaching/unearnedVerdict')
+            const unearnedAgain = dropVerdictAgain(cleanText)
+            if (unearnedAgain.dropped.length > 0) { cleanText = unearnedAgain.text; done.push('unearned-verdict') }
+          }
           // ── THE CHECK PASS (owner decision 2026-10-07; factCheckPass.ts) ──
           // A reply carrying numbers, equations or a worked example is
           // recomputed by a second call and replaced only by a corrected copy

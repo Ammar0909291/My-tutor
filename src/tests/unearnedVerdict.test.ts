@@ -56,4 +56,11 @@ describe('the route applies it only where nothing was graded and the model wrote
     expect(before).toMatch(/mcqHoisted === gateMcqHoisted && mcqGradeHoisted === null && !probeStarvationRelievedHoisted/)
     expect(before).toMatch(/learnerMessageNeedsModelReply\(message, \{ answeredPendingQuestion: false \}\)/)
   })
+  it('and again after the regenerations: a one-sentence reply emptied by the first drop can be regenerated with the verdict back (production re-run, 2026-10-21)', () => {
+    expect(route).toMatch(/unearnedVerdictScopeHoisted = !!mcqHoisted && mcqHoisted === gateMcqHoisted && mcqGradeHoisted === null/)
+    const i = route.indexOf('dropVerdictAgain(cleanText)')
+    expect(i).toBeGreaterThan(0)
+    expect(route.slice(i - 400, i)).toMatch(/if \(unearnedVerdictScopeHoisted\)/)
+    expect(route.slice(i, i + 200)).toMatch(/done\.push\('unearned-verdict'\)/)
+  })
 })
