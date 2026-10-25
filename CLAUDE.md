@@ -187,6 +187,7 @@ npx tsc --noEmit       # pre-existing stripe/subscription errors are expected on
 - Branch for current work (canonical): `main`.
 - Do NOT create PRs unless explicitly asked. Do NOT push to other branches.
 - Do NOT redesign UI, navigation, or touch Hindi/Sanskrit subject architecture.
+- **Computer science is EXCLUDED, permanently (owner, 2026-10-25: "Exclude cs for forever").** Do not author, audit, QA-drive, or schedule any computer_science / `cs.*` work (content, cards, figures, KG, live QA batches) unless the owner explicitly lifts this. Stop-and-report if a task would touch it; it overrides every CS item in the sections below.
 - **No boards/curricula yet (owner, 2026-09-25):** there is no CBSE, ICSE or any other board mapping in the product. Work subject by subject on the canonical KGs only — never add, assume or optimise for a board/syllabus mapping unless the owner says so.
 - **AI provider (owner, 2026-09-25): Groq first, from now on.** Keep the default chain Groq -> Gemini -> OpenRouter; Gemini is fallback only. Never set `AI_PROVIDER_MODE=gemini_only`. If production logs show Groq `spend_limit_reached`, tell the owner (it is a Groq-console/`GROQ_API_KEY` fix, not a code fix).
 
