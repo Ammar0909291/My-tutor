@@ -883,6 +883,8 @@ async function handleChatTurn(req: Request, deadline: RouteDeadline): Promise<Re
     // reason as hintHoisted — attached to the JSON response once cleanText is
     // finalized, so the client can render tappable options.
     let mcqHoisted: import('@/lib/teaching/mcq').TutorMCQ | null = null
+    // True when this turn carries the engine's own card, nothing was graded, and the model was told to write a lead-in only (unearnedVerdict.ts).
+    let unearnedVerdictScopeHoisted = false
     // The MCQ the PREVIOUS turn asked, read back from the session snapshot so
     // this turn's reply can be graded against its stored correctIndex. Written
     // at the end of the turn that asks; cleared once graded, so one question is
@@ -5344,6 +5346,9 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             // accepts non-MCQ probes and renders them as prose follow-ups.
             requireMcq: true,
             onAllCandidatesSpent: () => { authoredPoolExhaustedHoisted = true },
+            // Where the answer banks credit (CHECK on) spend a certifying card; where it banks none (GUIDE and earlier) spend a 2-option one.
+            creditPhase: phaseBeforeTurn === 'CHECK' || phaseBeforeTurn === 'PRACTICE' || phaseBeforeTurn === 'TRANSFER' ? true
+              : phaseBeforeTurn === 'OBSERVE' || phaseBeforeTurn === 'DEMONSTRATE' || phaseBeforeTurn === 'GUIDE' ? false : undefined,
             // Owner-approved (G2, 2026-09-24): once every unasked question is
             // spent, a question the learner got WRONG may be asked once more.
             // Read from the ledger as it stood BEFORE this turn, so a question
@@ -6970,6 +6975,19 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
             dropped: leak.dropped.map((d) => d.slice(0, 120)),
           }))
           text = leak.text
+        }
+      }
+
+      // A verdict on an answer nobody gave (production, 2026-10-21): the engine attached its own card to "Got it. Can I try a practice question?"
+      // and the lead-in opened "That's correct — you've seen …". Only where nothing was graded and the model was told to write a lead-in only.
+      unearnedVerdictScopeHoisted = !!mcqHoisted && mcqHoisted === gateMcqHoisted && mcqGradeHoisted === null && !probeStarvationRelievedHoisted
+        && !(await import('@/lib/teaching/learnerEngagement')).learnerMessageNeedsModelReply(message, { answeredPendingQuestion: false })
+      if (unearnedVerdictScopeHoisted) {
+        const { dropUnearnedVerdict } = await import('@/lib/teaching/unearnedVerdict')
+        const unearned = dropUnearnedVerdict(text)
+        if (unearned.dropped.length > 0) {
+          console.warn('[unearned-verdict] ' + JSON.stringify({ conceptId: resolvedConceptId ?? null, dropped: unearned.dropped.map((d) => d.slice(0, 120)) }))
+          text = unearned.text
         }
       }
 
@@ -10810,13 +10828,19 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // was right/wrong, or a direct reply — instead of serving a stub or the
       // concept-fallback line. Returns null when no repair was made; the
       // callers' existing fallbacks then apply unchanged. See confirmBackRepair.ts.
-      const repairStubReply = async (stub: string, source: string): Promise<string | null> => {
+      const repairStubReply = async (
+        stub: string,
+        source: string,
+        // `override`: a caller that has already judged the reply a non-answer supplies its own instruction and its own acceptance test
+        // (the no-picture repair); the call site, the routing arguments and the failure handling stay this function's.
+        override?: { appendix: string; accept: (retry: string) => string | null },
+      ): Promise<string | null> => {
         const { needsRepair, buildConfirmBackRepairAppendix, mergeRepair, dropQuestionSentences } = await import('@/lib/teaching/confirmBackRepair')
         // An appended figure pointer is not a reply: judge the stub without it
         // and put it back after the repair (see splitVisualPointer).
         const { splitVisualPointer } = await import('@/lib/teaching/visual/visualAcknowledgement')
         const { body: stubBody, pointer: stubPointer } = splitVisualPointer(stub)
-        if (!needsRepair(stubBody) || serveLessonComplete) return null
+        if (serveLessonComplete || (!override && !needsRepair(stubBody))) return null
         try {
           const { stripConfirmBack } = await import('@/lib/teaching/attributionGuard')
           const opts = pendingMcqHoisted?.options
@@ -10831,15 +10855,23 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           llmCallCount++ // instrumentation only (stub repair)
           const routed = await routeAI(
             [...historyMessages, { role: 'user', content: message }],
-            systemPrompt + appendix + resolvedOutputLanguageBlock,
+            systemPrompt + (override ? override.appendix : appendix) + resolvedOutputLanguageBlock,
             country, 2048, teachingLang,
             { userId, subject: learnSession.subject.slug },
             groqModelOverride,
             undefined,
             forceProvider,
           )
+          if (override) {
+            const accepted = override.accept(routed.text ?? '')
+            console.log('[stub-repair] ' + JSON.stringify({ source, repaired: accepted !== null, chars: (accepted ?? '').length }))
+            return accepted
+          }
           // The retry passes the same strip; a second confirm-back is not served.
-          const retry = stripConfirmBack(routed.text ?? '')
+          // Internal annotation tags are parsed out of the MAIN reply earlier in the pipeline; a regenerated reply skips that step, so they
+          // are removed here (an `<!--ATTEMPT …-->` reached a learner through the no-picture repair on 2026-10-20).
+          const { stripAttemptTag: stripAttemptTagRetry } = await import('@/lib/teaching/attemptVectorSignal')
+          const retry = stripConfirmBack(stripAttemptTagRetry(routed.text ?? ''))
           let retryText = retry.text
           try {
             const { stripSimulationGiveaways } = await import('@/lib/teaching/visual/simulationPrompt')
@@ -13550,6 +13582,59 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
         visualTurnServed = record.served
         console.log('[learn/chat] VISUAL_TURN=' + JSON.stringify(record))
       } catch { /* observability never breaks a turn */ }
+      // A PICTURE REQUEST THAT CANNOT BE MET STILL GETS AN EXPLANATION (visual/noPictureRepair.ts, 2026-10-20).
+      // The model, told the screen is empty, still drafts a diagram; the ASCII-art and phantom-figure strips remove it, and what is
+      // left ("y", one mechanism line, "the left box shows …") is not an explanation. One regeneration IN WORDS through the SAME call
+      // site as every other stub repair (repairStubReply — no new provider call), kept only if it is one; otherwise the reply is left
+      // exactly as it was. Same conditions as the acknowledgement below, plus: no card is served.
+      try {
+        const attachedNow = Boolean(responseVisual) || Boolean(detectedVisualSpec) || Boolean(detectedSceneSpec)
+        const shownEarlierForConcept = resolvedConceptId !== null && resolvedConceptId !== undefined
+          && snapshotRRMLog.some((e) => e.matchedConcept === resolvedConceptId)
+        // THE LAST SWEEP. A later regeneration (the analogy cap, a stub repair) writes a new reply AFTER the diagram strips above have
+        // run, and nothing re-checks it: production, 2026-10-20, eng.linguistics.language-families — the regenerated reply carried a
+        // fenced "World Languages ├─ Indo-European …" tree and "This tree shows …" under "I don't have a picture". The same two strips,
+        // once more, on the final text (idempotent on text they have already cleaned); never to an empty reply.
+        // A figure the learner already has (held from an earlier turn, or shown earlier for this concept) is still a figure: prose that
+        // refers to it is true and stays (the same question the earlier strips ask with `figureOnScreen`).
+        const figureHeldNow = (resolvedVisualDecision?.session?.turns ?? 0) > 0
+        if (!attachedNow && !figureHeldNow && !shownEarlierForConcept) {
+          const { stripUnbackedAsciiDiagram: sweepAscii } = await import('@/lib/teaching/asciiDiagramGuard')
+          const { stripPhantomVisualClaims: sweepPhantom } = await import('@/lib/teaching/visualRegistry')
+          const { dropOrphanFigureReferences } = await import('@/lib/teaching/visual/noPictureRepair')
+          const swept = dropOrphanFigureReferences(sweepPhantom(sweepAscii(cleanText, false).text))
+          if (swept !== cleanText && swept.trim().length > 0) {
+            console.warn('[ascii-diagram] ' + JSON.stringify({ event: 'late-sweep', conceptId: resolvedConceptId ?? null, charsBefore: cleanText.length, charsAfter: swept.length }))
+            cleanText = swept
+          }
+        }
+        if (learnerRequestHoisted === 'diagram' && !attachedNow && !shownEarlierForConcept && !servedMcq && !serveLessonComplete) {
+          const npr = await import('@/lib/teaching/visual/noPictureRepair')
+          if (npr.pictureReplyIsNotAnExplanation(cleanText)) {
+            const { stripUnbackedAsciiDiagram } = await import('@/lib/teaching/asciiDiagramGuard')
+            const { stripPhantomVisualClaims: stripPhantomNp } = await import('@/lib/teaching/visualRegistry')
+            const { stripAttemptTag: stripAttemptTagNp } = await import('@/lib/teaching/attemptVectorSignal')
+            let npReason = 'none'
+            const attemptNp = (appendix: string) => repairStubReply(cleanText, 'no-picture', {
+              appendix,
+              accept: (retry) => {
+                // The retry is raw model text that skipped the main pipeline's tag parsing: remove the internal annotation tags (an
+                // `<!--ATTEMPT …-->` leaked to a learner in the first production run of this repair) before judging it.
+                const untagged = stripAttemptTagNp(retry).replace(/<!--[\s\S]*?-->/g, '').replace(/^\s*VISUAL:\s*\S+\s*$/gim, '')
+                const verdict = npr.judgeNoPictureRepair(npr.dropOrphanFigureReferences(stripPhantomNp(stripUnbackedAsciiDiagram(untagged, false).text)))
+                npReason = verdict.reason
+                return verdict.text
+              },
+            })
+            // Two attempts through the SAME call site: the second, stricter, only when the first retry still drew a diagram or said too little.
+            const acceptedNp = (await attemptNp(npr.buildNoPictureRepairAppendix())) ?? (await attemptNp(npr.buildNoPictureSecondAttemptAppendix()))
+            console.log('[no-picture-repair] ' + JSON.stringify({ conceptId: resolvedConceptId ?? null, repaired: acceptedNp !== null, lastReason: npReason, charsBefore: cleanText.length, charsAfter: (acceptedNp ?? cleanText).length }))
+            if (acceptedNp) cleanText = acceptedNp
+          }
+        }
+      } catch (npErr) {
+        console.warn('[no-picture-repair] skipped:', npErr)
+      }
       // AN UNMET PICTURE REQUEST IS SAID OUT LOUD (acknowledgeUnavailablePicture).
       // Here, at the final response, because EVERY serving path converges here:
       // the two production turns that exposed it were served from Explanation
@@ -13665,6 +13750,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           if (orphan.dropped) { cleanText = orphan.text; done.push('orphan-conditional') }
           const bal = hy.balanceMathDelimiters(cleanText)
           if (bal.repaired) { cleanText = bal.text; done.push('math-delimiters') }
+          // A regeneration above (stub repair, drift, analogy) can write the verdict again after the first drop emptied the reply (production, 2026-10-21 re-run).
+          if (unearnedVerdictScopeHoisted) {
+            const { dropUnearnedVerdict: dropVerdictAgain } = await import('@/lib/teaching/unearnedVerdict')
+            const unearnedAgain = dropVerdictAgain(cleanText)
+            if (unearnedAgain.dropped.length > 0) { cleanText = unearnedAgain.text; done.push('unearned-verdict') }
+          }
           // ── THE CHECK PASS (owner decision 2026-10-07; factCheckPass.ts) ──
           // A reply carrying numbers, equations or a worked example is
           // recomputed by a second call and replaced only by a corrected copy

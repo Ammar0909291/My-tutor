@@ -23,6 +23,7 @@ import { hashContent } from './similarity'
 import { probeToMcq } from '../gateAssessment'
 import { stripAuthoringLabel, dependsOnEarlierItem } from '../gateProbeContract'
 import type { TutorMCQ } from '../mcq'
+import { MIN_OPTIONS_FOR_VERIFIED_MASTERY, VERIFIED_CREDITS_NEEDED } from '../turnContract'
 
 export interface ProbeMatch {
   assetId: string
@@ -83,6 +84,23 @@ export function preferTaughtProbes<T extends { probeAsset: { stem: string; choic
     return met / words.length >= 0.5
   })
   return covered.length > 0 ? covered : rows
+}
+
+/**
+ * Which cards a turn may draw from when the phase decides what an answer is worth (MatchOptions.creditPhase).
+ *   credit phase (CHECK, PRACTICE, TRANSFER): a fresh certifying card, else a certifying card the learner may be asked once more, else a fresh 2-option card.
+ *   no-credit phase (OBSERVE, DEMONSTRATE, GUIDE): a fresh 2-option card, else a fresh certifying card.
+ * An empty result hands the choice back to the exhausted-pool handling (`rows.length === 0`), so nothing here can serve a card the old rule would not.
+ */
+function chooseTier(
+  creditPhase: boolean,
+  t: { certFresh: ProbeCandidateRow[]; otherFresh: ProbeCandidateRow[]; certReask: ProbeCandidateRow[] },
+): { rows: ProbeCandidateRow[]; reask: boolean } | null {
+  const order: Array<[ProbeCandidateRow[], boolean]> = creditPhase
+    ? [[t.certFresh, false], [t.certReask, true], [t.otherFresh, false]]
+    : [[t.otherFresh, false], [t.certFresh, false]]
+  for (const [rows, reask] of order) if (rows.length > 0) return { rows, reask }
+  return null
 }
 
 export async function findBestProbe(state: StudentState, options: MatchOptions = {}): Promise<ProbeMatch | null> {
@@ -166,8 +184,21 @@ export async function findBestProbe(state: StudentState, options: MatchOptions =
     const reaskable = unasked.length === 0 && options.allowMissedStem
       ? convertible.filter((row) => options.allowMissedStem!(row.probeAsset!.stem))
       : []
-    const reask = reaskable.length > 0
-    const rows = reask ? reaskable : unasked
+    const legacyReask = reaskable.length > 0
+    const legacyRows = legacyReask ? reaskable : unasked
+    // CERTIFYING CARDS ARE SPENT WHERE THEY BANK CREDIT (MatchOptions.creditPhase). See the option's note.
+    const optionCountOf = (row: ProbeCandidateRow) => (Array.isArray(row.probeAsset!.choices) ? (row.probeAsset!.choices as unknown[]).length : 0)
+    const isCertifying = (row: ProbeCandidateRow) => optionCountOf(row) >= MIN_OPTIONS_FOR_VERIFIED_MASTERY
+    const certifying = convertible.filter(isCertifying)
+    const tiered = options.creditPhase !== undefined && certifying.length >= VERIFIED_CREDITS_NEEDED
+      ? chooseTier(options.creditPhase, {
+        certFresh: unasked.filter(isCertifying),
+        otherFresh: unasked.filter((r) => !isCertifying(r)),
+        certReask: options.allowMissedStem ? certifying.filter((r) => options.allowMissedStem!(r.probeAsset!.stem)) : [],
+      })
+      : null
+    const reask = tiered ? tiered.reask : legacyReask
+    const rows = tiered ? tiered.rows : legacyRows
     if (rows.length === 0 && convertible.length > 0) options.onAllCandidatesSpent?.()
 
     // A re-ask shows its options in a new order, so it is answered from
@@ -191,7 +222,7 @@ export async function findBestProbe(state: StudentState, options: MatchOptions =
         choices: choicesOf(best.asset),
         correctValue: best.asset.probeAsset!.correctValue,
         confidence: best.confidence,
-        poolSize: rows.length,
+        poolSize: legacyRows.length,
         ...(reask ? { reask: true } : {}),
       }
     }
@@ -208,7 +239,7 @@ export async function findBestProbe(state: StudentState, options: MatchOptions =
           choices: choicesOf(fallback.asset),
           correctValue: fallback.asset.probeAsset!.correctValue,
           confidence: fallback.confidence,
-          poolSize: rows.length,
+          poolSize: legacyRows.length,
           ...(reask ? { reask: true } : {}),
         }
       }

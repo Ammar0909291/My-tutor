@@ -1,7 +1,7 @@
 {
- "generatedAt": "2026-10-17T21:27:24.999Z",
+ "generatedAt": "2026-10-20T22:15:44.933Z",
  "renderScope": "lesson",
- "fingerprint": "2d5ee64907280851a6086fa45d40d4c3dbe9f7bcdd8b1b8a6dc54fcb127afca0",
+ "fingerprint": "7510976098bf48a89198961670eb3969aab07956aed78ae27603840ba9554a28",
  "fingerprints": {
   "math.found.mathematical-thinking": "a083018c52b89e37",
   "math.found.abstraction": "136d7c54677ee095",
@@ -453,8 +453,8 @@
   "math.calc.surface-integrals": "4fbf926e2c4debb1",
   "math.calc.vector-fields": "fa78d89b68f6967e",
   "math.calc.curl-divergence": "d52735a5eebaadcd",
-  "math.calc.greens-theorem": "bf80e4d8303aecd7",
-  "math.calc.stokes-theorem": "65d0ec8d6bbad269",
+  "math.calc.greens-theorem": "38978a77916524bb",
+  "math.calc.stokes-theorem": "fadea860e1a6f394",
   "math.calc.divergence-theorem": "9382416982e183e6",
   "math.calc.fourier-series-intro": "5f28594ca747351d",
   "math.calc.sequence-limits": "1b43f6d553021b67",
@@ -922,47 +922,47 @@
   "light"
  ],
  "summary": {
-  "concepts": 556,
+  "concepts": 558,
   "verdicts": {
    "REVIEW_REQUIRED": 12,
-   "PASS": 544
+   "PASS": 546
   },
   "byViewport": {
    "mobile": {
     "REVIEW_REQUIRED": 6,
-    "PASS": 550
+    "PASS": 552
    },
    "desktop": {
     "REVIEW_REQUIRED": 12,
-    "PASS": 544
+    "PASS": 546
    },
    "desktop-column": {
     "REVIEW_REQUIRED": 9,
-    "PASS": 547
+    "PASS": 549
    }
   },
   "byDimension": {
    "structural": {
     "REVIEW_REQUIRED": 12,
-    "PASS": 544
+    "PASS": 546
    },
    "readability": {
-    "PASS": 556
+    "PASS": 558
    },
    "contrast": {
-    "PASS": 556
+    "PASS": 558
    },
    "layout": {
-    "PASS": 556
+    "PASS": 558
    },
    "graph": {
-    "PASS": 556
+    "PASS": 558
    },
    "semantic": {
-    "PASS": 556
+    "PASS": 558
    },
    "interactive": {
-    "PASS": 555,
+    "PASS": 557,
     "REVIEW_REQUIRED": 1
    }
   },
@@ -15994,6 +15994,60 @@
   },
   {
    "id": "math.cat.adjunction",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 4,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "math.calc.stokes-theorem",
+   "verdict": "PASS",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
+   "interactive": false,
+   "graph": false,
+   "dims": {
+    "structural": "PASS",
+    "readability": "PASS",
+    "contrast": "PASS",
+    "layout": "PASS",
+    "graph": "PASS",
+    "semantic": "PASS",
+    "interactive": "PASS"
+   },
+   "byViewport": {
+    "mobile": "PASS",
+    "desktop": "PASS",
+    "desktop-column": "PASS"
+   },
+   "semantic": "PASS",
+   "states": 4,
+   "fail": 0,
+   "review": []
+  },
+  {
+   "id": "math.calc.greens-theorem",
    "verdict": "PASS",
    "class": "scene",
    "authorship": "authored-concept",

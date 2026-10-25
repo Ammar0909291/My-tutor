@@ -579,6 +579,40 @@ async function bootstrapAssets(run: import('./lib/db/stopAfterDeadline').Abandon
         await import('./lib/teaching/assets/englishCardDepthBatch23')
       const { ENGLISH_CARD_DEPTH_BATCH_24 } =
         await import('./lib/teaching/assets/englishCardDepthBatch24')
+      const { ENGLISH_CARD_DEPTH_BATCH_25 } =
+        await import('./lib/teaching/assets/englishCardDepthBatch25')
+      const { ENGLISH_CARD_DEPTH_BATCH_26 } =
+        await import('./lib/teaching/assets/englishCardDepthBatch26')
+      const { ENGLISH_CARD_DEPTH_BATCH_27 } =
+        await import('./lib/teaching/assets/englishCardDepthBatch27')
+      const { ENGLISH_CARD_DEPTH_BATCH_28 } =
+        await import('./lib/teaching/assets/englishCardDepthBatch28')
+      const { ENGLISH_CARD_DEPTH_BATCH_29 } =
+        await import('./lib/teaching/assets/englishCardDepthBatch29')
+      const { ENGLISH_CARD_DEPTH_BATCH_30 } =
+        await import('./lib/teaching/assets/englishCardDepthBatch30')
+      const { ENGLISH_CARD_DEPTH_BATCH_31 } =
+        await import('./lib/teaching/assets/englishCardDepthBatch31')
+      const { ENGLISH_CARD_DEPTH_BATCH_32 } =
+        await import('./lib/teaching/assets/englishCardDepthBatch32')
+      const { ENGLISH_CARD_DEPTH_BATCH_33 } =
+        await import('./lib/teaching/assets/englishCardDepthBatch33')
+      const { ENGLISH_CARD_DEPTH_BATCH_34 } =
+        await import('./lib/teaching/assets/englishCardDepthBatch34')
+      const { ENGLISH_CARD_DEPTH_BATCH_35 } =
+        await import('./lib/teaching/assets/englishCardDepthBatch35')
+      const { ENGLISH_CARD_DEPTH_BATCH_36 } =
+        await import('./lib/teaching/assets/englishCardDepthBatch36')
+      const { ENGLISH_CARD_DEPTH_BATCH_37 } =
+        await import('./lib/teaching/assets/englishCardDepthBatch37')
+      const { ENGLISH_CARD_DEPTH_BATCH_38 } =
+        await import('./lib/teaching/assets/englishCardDepthBatch38')
+      const { ENGLISH_CARD_DEPTH_BATCH_39 } =
+        await import('./lib/teaching/assets/englishCardDepthBatch39')
+      const { ENGLISH_CARD_DEPTH_BATCH_40 } =
+        await import('./lib/teaching/assets/englishCardDepthBatch40')
+      const { ENGLISH_CARD_DEPTH_BATCH_41 } =
+        await import('./lib/teaching/assets/englishCardDepthBatch41')
       const { CHEMISTRY_CARD_DEPTH_BATCH_1 } =
         await import('./lib/teaching/assets/chemistryCardDepthBatch1')
       const { CHEMISTRY_CARD_DEPTH_BATCH_2 } =
@@ -1344,7 +1378,7 @@ async function bootstrapAssets(run: import('./lib/db/stopAfterDeadline').Abandon
         ...ENGLISH_CARD_DEPTH_BATCH_14, ...ENGLISH_CARD_DEPTH_BATCH_15, ...ENGLISH_CARD_DEPTH_BATCH_16,
         ...ENGLISH_CARD_DEPTH_BATCH_17, ...ENGLISH_CARD_DEPTH_BATCH_18, ...ENGLISH_CARD_DEPTH_BATCH_19,
         ...ENGLISH_CARD_DEPTH_BATCH_20, ...ENGLISH_CARD_DEPTH_BATCH_21, ...ENGLISH_CARD_DEPTH_BATCH_22,
-        ...ENGLISH_CARD_DEPTH_BATCH_23, ...ENGLISH_CARD_DEPTH_BATCH_24,
+        ...ENGLISH_CARD_DEPTH_BATCH_23, ...ENGLISH_CARD_DEPTH_BATCH_24, ...ENGLISH_CARD_DEPTH_BATCH_25, ...ENGLISH_CARD_DEPTH_BATCH_26, ...ENGLISH_CARD_DEPTH_BATCH_27, ...ENGLISH_CARD_DEPTH_BATCH_28, ...ENGLISH_CARD_DEPTH_BATCH_29, ...ENGLISH_CARD_DEPTH_BATCH_30, ...ENGLISH_CARD_DEPTH_BATCH_31, ...ENGLISH_CARD_DEPTH_BATCH_32, ...ENGLISH_CARD_DEPTH_BATCH_33, ...ENGLISH_CARD_DEPTH_BATCH_34, ...ENGLISH_CARD_DEPTH_BATCH_35, ...ENGLISH_CARD_DEPTH_BATCH_36, ...ENGLISH_CARD_DEPTH_BATCH_37, ...ENGLISH_CARD_DEPTH_BATCH_38, ...ENGLISH_CARD_DEPTH_BATCH_39, ...ENGLISH_CARD_DEPTH_BATCH_40, ...ENGLISH_CARD_DEPTH_BATCH_41,
         ...CHEMISTRY_CARD_DEPTH_BATCH_1, ...CHEMISTRY_CARD_DEPTH_BATCH_2, ...CHEMISTRY_CARD_DEPTH_BATCH_3,
         ...CHEMISTRY_CARD_DEPTH_BATCH_4, ...CHEMISTRY_CARD_DEPTH_BATCH_5, ...CHEMISTRY_CARD_DEPTH_BATCH_6,
         ...CHEMISTRY_CARD_DEPTH_BATCH_7, ...CHEMISTRY_CARD_DEPTH_BATCH_8, ...CHEMISTRY_CARD_DEPTH_BATCH_9,

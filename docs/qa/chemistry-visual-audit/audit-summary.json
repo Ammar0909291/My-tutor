@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "generatedOn": "2026-10-17",
+ "generatedOn": "2026-10-21",
  "about": "The committed result of the Chemistry visual closure audit: every concept classified A-E (taxonomy), every served figure instance rendered in Chromium at 390 and 1280 px in both themes across every control state, and the machine semantic verdict. A REVIEW_REQUIRED here means no deterministic assertion covers the chemistry; the human answer is semantic-review.json. src/tests/chemistryVisualAudit.test.ts recomputes every served fingerprint from the resolver and fails, naming the concepts, when this file is stale.",
  "taxonomy": {
   "A": "intentionally no figure: the generator recorded a deliberate decline (no suitable form) and no faithful figure is authored",
@@ -21,6 +21,7 @@
  "categoryCUnreachableCachedFigures": [
   "chem.bio.nucleic-acids",
   "chem.bond.ionic-bonding",
+  "chem.bond.mo-theory",
   "chem.coord.applications",
   "chem.coord.bonding",
   "chem.coord.cft",
@@ -34,7 +35,10 @@
   "chem.elect.industrial",
   "chem.elect.nernst",
   "chem.elect.standard-electrode",
+  "chem.equil.complex-equil",
   "chem.found.matter",
+  "chem.kinet.mechanism",
+  "chem.kinet.photochemistry",
   "chem.org.pericyclic",
   "chem.pblock.group16",
   "chem.poly.biodegradable",
@@ -42,6 +46,7 @@
   "chem.state.phase-diagram",
   "chem.state.real-gases",
   "chem.surface.colloids",
+  "chem.surface.heterogeneous-cat",
   "chem.thermo.bond-enthalpy",
   "chem.thermo.cell-thermo",
   "chem.thermo.enthalpy",
@@ -51,30 +56,30 @@
  "summary": {
   "concepts": 186,
   "byCategory": {
-   "E": 100,
-   "D": 59,
+   "E": 103,
+   "D": 56,
    "B": 14,
    "A": 13
   },
-  "served": 100,
+  "served": 103,
   "bySource": {
-   "tier0": 39,
-   "tier3": 43,
-   "none": 86,
+   "tier0": 44,
+   "tier3": 41,
+   "none": 83,
    "tier2": 2,
    "tier1": 16
   },
-  "instances": 134,
+  "instances": 137,
   "instanceVerdicts": {
-   "REVIEW_REQUIRED": 81,
+   "REVIEW_REQUIRED": 84,
    "PASS": 53
   },
   "servedConceptVerdicts": {
-   "REVIEW_REQUIRED": 92,
+   "REVIEW_REQUIRED": 95,
    "PASS": 8
   },
-  "statesMeasured": 1092,
-  "categoryCUnreachableCachedFigures": 28,
+  "statesMeasured": 1194,
+  "categoryCUnreachableCachedFigures": 33,
   "withMissingRenders": 0
  },
  "concepts": [
@@ -372,12 +377,12 @@
   {
    "id": "chem.bond.mo-theory",
    "category": "E",
-   "source": "tier3",
-   "provenance": "generated:chem.bond.mo-theory:cached",
-   "instanceId": "tier3:chem.bond.mo-theory",
-   "fingerprint": "f91f477cb",
+   "source": "tier0",
+   "provenance": "generator",
+   "instanceId": "scene:mo-diagram-h2",
+   "fingerprint": "f37c51c67",
    "verdict": "REVIEW_REQUIRED",
-   "shadowedCachedFigure": false
+   "shadowedCachedFigure": true
   },
   {
    "id": "chem.bond.polar-molecules",
@@ -743,13 +748,13 @@
   },
   {
    "id": "chem.equil.complex-equil",
-   "category": "D",
-   "source": "none",
-   "provenance": "no-figure:retry-generation-failed",
-   "instanceId": null,
-   "fingerprint": null,
-   "verdict": "NO_FIGURE",
-   "shadowedCachedFigure": false
+   "category": "E",
+   "source": "tier0",
+   "provenance": "generator",
+   "instanceId": "scene:complex-equilibria-log-k",
+   "fingerprint": "fb18d94af",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": true
   },
   {
    "id": "chem.equil.titration",
@@ -944,13 +949,13 @@
   },
   {
    "id": "chem.kinet.mechanism",
-   "category": "D",
-   "source": "none",
-   "provenance": "no-figure:retry-generation-failed",
-   "instanceId": null,
-   "fingerprint": null,
-   "verdict": "NO_FIGURE",
-   "shadowedCachedFigure": false
+   "category": "E",
+   "source": "tier0",
+   "provenance": "generator",
+   "instanceId": "scene:mechanism-energy-profile",
+   "fingerprint": "f67d0c5a9",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": true
   },
   {
    "id": "chem.kinet.catalysis",
@@ -965,12 +970,12 @@
   {
    "id": "chem.kinet.photochemistry",
    "category": "E",
-   "source": "tier3",
-   "provenance": "generated:chem.kinet.photochemistry:cached",
-   "instanceId": "tier3:chem.kinet.photochemistry",
-   "fingerprint": "f305ed12c",
+   "source": "tier0",
+   "provenance": "generator",
+   "instanceId": "scene:photochemistry-fate-of-excited-molecule",
+   "fingerprint": "f7374385c",
    "verdict": "REVIEW_REQUIRED",
-   "shadowedCachedFigure": false
+   "shadowedCachedFigure": true
   },
   {
    "id": "chem.solid.crystal-systems",
@@ -1074,13 +1079,13 @@
   },
   {
    "id": "chem.surface.heterogeneous-cat",
-   "category": "D",
-   "source": "none",
-   "provenance": "no-figure:retry-generation-failed",
-   "instanceId": null,
-   "fingerprint": null,
-   "verdict": "NO_FIGURE",
-   "shadowedCachedFigure": false
+   "category": "E",
+   "source": "tier0",
+   "provenance": "generator",
+   "instanceId": "scene:heterogeneous-catalysis-surface",
+   "fingerprint": "f411803b3",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": true
   },
   {
    "id": "chem.coord.werner",
@@ -2302,6 +2307,41 @@
    "minContrast": 2.13
   },
   {
+   "id": "scene:mo-diagram-h2",
+   "tier": "tier0",
+   "origin": "authored",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.bond.mo-theory"
+   ],
+   "fingerprint": "f37c51c67",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "REVIEW_REQUIRED",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": "unknown",
+   "statesMeasured": 26,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 24,
+    "REVIEW_REQUIRED": 2,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [
+    "INNER_SCROLL_X"
+   ],
+   "minFontPx": 11.5,
+   "minContrast": 4.68
+  },
+  {
    "id": "scene:cell-comparison-chem.state.real-gases",
    "tier": "tier0",
    "origin": "authored",
@@ -2580,6 +2620,41 @@
    "minContrast": 4.26
   },
   {
+   "id": "scene:complex-equilibria-log-k",
+   "tier": "tier0",
+   "origin": "authored",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.equil.complex-equil"
+   ],
+   "fingerprint": "fb18d94af",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "REVIEW_REQUIRED",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": "unknown",
+   "statesMeasured": 22,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 20,
+    "REVIEW_REQUIRED": 2,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [
+    "INNER_SCROLL_X"
+   ],
+   "minFontPx": 11.5,
+   "minContrast": 4.68
+  },
+  {
    "id": "scene:electrochemical-cell-daniell-cell",
    "tier": "tier0",
    "origin": "authored",
@@ -2832,6 +2907,76 @@
    "minContrast": 4.3
   },
   {
+   "id": "scene:mechanism-energy-profile",
+   "tier": "tier0",
+   "origin": "authored",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.kinet.mechanism"
+   ],
+   "fingerprint": "f67d0c5a9",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "REVIEW_REQUIRED",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": "unknown",
+   "statesMeasured": 20,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 18,
+    "REVIEW_REQUIRED": 2,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [
+    "INNER_SCROLL_X"
+   ],
+   "minFontPx": 11.5,
+   "minContrast": 4.68
+  },
+  {
+   "id": "scene:photochemistry-fate-of-excited-molecule",
+   "tier": "tier0",
+   "origin": "authored",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.kinet.photochemistry"
+   ],
+   "fingerprint": "f7374385c",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "REVIEW_REQUIRED",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": "unknown",
+   "statesMeasured": 20,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 18,
+    "REVIEW_REQUIRED": 2,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [
+    "INNER_SCROLL_X"
+   ],
+   "minFontPx": 11.5,
+   "minContrast": 4.68
+  },
+  {
    "id": "scene:lattice-fcc",
    "tier": "tier0",
    "origin": "kind-default",
@@ -2971,6 +3116,41 @@
    ],
    "minFontPx": 10,
    "minContrast": 4.69
+  },
+  {
+   "id": "scene:heterogeneous-catalysis-surface",
+   "tier": "tier0",
+   "origin": "authored",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.surface.heterogeneous-cat"
+   ],
+   "fingerprint": "f411803b3",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "REVIEW_REQUIRED",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": "unknown",
+   "statesMeasured": 22,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 20,
+    "REVIEW_REQUIRED": 2,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [
+    "INNER_SCROLL_X"
+   ],
+   "minFontPx": 11.5,
+   "minContrast": 4.68
   },
   {
    "id": "scene:coord-hexaamminecobalt-iii-ion",
@@ -5194,39 +5374,6 @@
    "minContrast": 4.66
   },
   {
-   "id": "tier3:chem.bond.mo-theory",
-   "tier": "tier3",
-   "origin": "generated",
-   "reachability": "resolver",
-   "interactive": false,
-   "conceptIds": [
-    "chem.bond.mo-theory"
-   ],
-   "fingerprint": "f91f477cb",
-   "verdict": "REVIEW_REQUIRED",
-   "render": "PASS",
-   "semantic": "REVIEW_REQUIRED",
-   "semanticFamily": null,
-   "statesMeasured": 4,
-   "viewports": [
-    "1280",
-    "390"
-   ],
-   "themes": [
-    "dark",
-    "light"
-   ],
-   "counts": {
-    "PASS": 4,
-    "REVIEW_REQUIRED": 0,
-    "FAIL": 0
-   },
-   "failCodes": [],
-   "reviewCodes": [],
-   "minFontPx": 10,
-   "minContrast": 4.66
-  },
-  {
    "id": "tier3:chem.bond.metallic-bonding",
    "tier": "tier3",
    "origin": "generated",
@@ -5607,39 +5754,6 @@
     "chem.kinet.catalysis"
    ],
    "fingerprint": "f100c6bf4",
-   "verdict": "REVIEW_REQUIRED",
-   "render": "PASS",
-   "semantic": "REVIEW_REQUIRED",
-   "semanticFamily": null,
-   "statesMeasured": 4,
-   "viewports": [
-    "1280",
-    "390"
-   ],
-   "themes": [
-    "dark",
-    "light"
-   ],
-   "counts": {
-    "PASS": 4,
-    "REVIEW_REQUIRED": 0,
-    "FAIL": 0
-   },
-   "failCodes": [],
-   "reviewCodes": [],
-   "minFontPx": 10,
-   "minContrast": 4.66
-  },
-  {
-   "id": "tier3:chem.kinet.photochemistry",
-   "tier": "tier3",
-   "origin": "generated",
-   "reachability": "resolver",
-   "interactive": false,
-   "conceptIds": [
-    "chem.kinet.photochemistry"
-   ],
-   "fingerprint": "f305ed12c",
    "verdict": "REVIEW_REQUIRED",
    "render": "PASS",
    "semantic": "REVIEW_REQUIRED",

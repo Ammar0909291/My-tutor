@@ -200,6 +200,18 @@ export interface MatchOptions {
    * behaviour (an exhausted pool returns null).
    */
   allowMissedStem?: (stem: string) => boolean
+  /**
+   * PROBE RETRIEVAL ONLY. Whether an answer to the card now chosen will BANK mastery credit: false in OBSERVE, DEMONSTRATE and GUIDE (a correct answer
+   * only advances the ladder), true from CHECK on. Undefined keeps the exact prior selection.
+   *
+   * MEASURED (production, 2026-10-21, phys.qm.harmonic-oscillator-qm, a learner who got every card right): the concept holds three 3+-option cards,
+   * which is all `certifiesMastery` counts once it holds three. The first one was spent on "Can I try a practice question?" at GUIDE (no credit,
+   * so it came back once), two 2-option cards then took the practice turns (they never certify), and the learner was re-asked cards they had
+   * answered correctly — 16 turns, 65%. So: where an answer banks nothing, spend a 2-option card first; where it banks credit, spend a certifying
+   * card first, then give a certifying card its one re-ask BEFORE a 2-option card. Applies only when the concept holds three certifying cards (the same
+   * threshold as `certifiesMastery`); with fewer, 2-option cards still count and nothing changes.
+   */
+  creditPhase?: boolean
 }
 
 /**

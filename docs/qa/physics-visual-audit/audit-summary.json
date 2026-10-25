@@ -1,6 +1,6 @@
 {
- "generatedAt": "2026-10-16T21:45:29.750Z",
- "fingerprint": "84172512e2aa954d618dc64e880038f4c477911cf8c6b15e2a7b8a42850e4fb4",
+ "generatedAt": "2026-10-21T03:08:15.495Z",
+ "fingerprint": "adaeb77841cfb7f2230e5fd86ed265d0ec05c40e71db7f23735a14b9dc66343d",
  "fingerprints": {
   "phys.meas.units": "689b537633be33f5",
   "phys.meas.scalars-vectors": "566feb21908a8419",
@@ -214,7 +214,7 @@
   "phys.qm.uncertainty-principle": "3dc3959899d65013",
   "phys.qm.operators": "7311cd5e30f401b9",
   "phys.qm.particle-in-box": "d58fb6169ded2e19",
-  "phys.qm.harmonic-oscillator-qm": "a5c27eec385817d7",
+  "phys.qm.harmonic-oscillator-qm": "f6ac2dcdd43e6f87",
   "phys.qm.hydrogen-atom-qm": "155e1e2cfeee0482",
   "phys.qm.spin": "cef10ee68731e7db",
   "phys.qm.pauli-exclusion": "5f01cb2b6a36c491",
@@ -307,8 +307,8 @@
     "REVIEW_REQUIRED": 4
    },
    "desktop": {
-    "undefined": 279,
-    "PASS": 4
+    "undefined": 278,
+    "PASS": 5
    },
    "desktop-column": {
     "REVIEW_REQUIRED": 4,
@@ -5905,10 +5905,11 @@
    },
    "byViewport": {
     "mobile": "PASS",
+    "desktop": "PASS",
     "desktop-column": "PASS"
    },
    "semantic": "PASS",
-   "states": 3,
+   "states": 4,
    "fail": 0,
    "review": []
   },

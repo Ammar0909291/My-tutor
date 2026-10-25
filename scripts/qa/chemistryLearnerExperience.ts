@@ -28,10 +28,10 @@ import { pathToFileURL } from 'node:url'
 // Keeps the minus sign and the symbols that tell answers apart in Mathematics: "(1, 0)" and "(−1, 0)" must not normalise to the same string.
 const norm = (s: string) => s.toLowerCase().replace(/^practice\s*:?\s*/i, '').replace(/[\u2212\u2013]/g, '-').replace(/[^\p{L}\p{N}\s\-/√^π°²³⁄]+/gu, ' ').replace(/\s+/g, ' ').trim()
 const PROBES = new Map<string, { correct: string[] }>()
-/** Every authored probe of the subject: each `src/lib/teaching/assets/<subject>*.ts` module's exported arrays of `{ stem, choices }`. */
+/** Every authored probe of the subject: each `src/lib/teaching/assets/<subject>*.ts` module's exported arrays of `{ stem, choices }`, plus the shared `authoredSeedAssets.ts` (the original physics/maths/chemistry corpus lives there; a stem is its own key, so other subjects' probes are harmless). */
 async function loadOracle(subject: string): Promise<number> {
   const dir = resolve('src/lib/teaching/assets')
-  for (const f of readdirSync(dir).filter((n) => n.toLowerCase().startsWith(subject.toLowerCase()) && n.endsWith('.ts'))) {
+  for (const f of readdirSync(dir).filter((n) => (n.toLowerCase().startsWith(subject.toLowerCase()) || n === 'authoredSeedAssets.ts') && n.endsWith('.ts'))) {
     let mod: Record<string, unknown>
     try { mod = await import(pathToFileURL(resolve(dir, f)).href) } catch { continue }
     for (const v of Object.values(mod)) {
@@ -52,6 +52,8 @@ function oracleIndex(mcq: { question: string; options: string[] }): number {
 
 const arg = (n: string, d?: string) => { const i = process.argv.indexOf(`--${n}`); return i >= 0 ? process.argv[i + 1] : d }
 const SUBJECT = arg('subject', 'chemistry')!
+/** 'next' for a fresh lesson (default); 'restart' re-teaches a concept the account already finished (clears that lesson's state). */
+const OPEN_MODE = (arg('mode', 'next') as 'next' | 'restart' | 'review')
 const EMAIL = process.env.QA_EMAIL ?? '', PASSWORD = process.env.QA_PASSWORD ?? ''
 const scrub = (s: string) => (PASSWORD ? s.split(PASSWORD).join('***') : s).split(EMAIL).join('<account>')
 
@@ -75,7 +77,7 @@ async function driveLesson(cookie: string, lesson: { lessonTitle: string; order:
   const sid = await createSession(cookie, SUBJECT, `qa-exp-${lesson.topicSlug}-${Date.now()}`)
   const turns: Turn[] = []
   const t0 = Date.now()
-  let p = await openLesson(cookie, sid, { lessonTitle: lesson.lessonTitle, lessonOrder: lesson.order, topicSlug: lesson.topicSlug, unitTitle: lesson.unitTitle, totalLessons: total }, 'en', 'next')
+  let p = await openLesson(cookie, sid, { lessonTitle: lesson.lessonTitle, lessonOrder: lesson.order, topicSlug: lesson.topicSlug, unitTitle: lesson.unitTitle, totalLessons: total }, 'en', OPEN_MODE)
   const record = (n: number, sent: string, ms: number, r: TurnPayload) => turns.push({
     n, sent, ms, provider: (r.provider as string | null) ?? null, text: String(r.text ?? ''), figure: carriesFigure(r) ? figureLabel(r) ?? 'figure' : null,
     figureField: figureField(r), mcq: r.mcq ? { question: r.mcq.question, options: r.mcq.options } : null, mastery: r.mastery ?? null, complete: Boolean(r.lessonComplete?.complete) || /Lesson complete|finished — nice work/i.test(String(r.text ?? '')),
@@ -115,7 +117,9 @@ async function observe(cookie: string, conceptId: string, outDir: string, served
       await ctx.addCookies(cookie.split(';').map((c) => { const [n, ...rest] = c.trim().split('='); return { name: n, value: rest.join('='), domain: new URL(BASE).hostname, path: '/', secure: true, httpOnly: false, sameSite: 'Lax' as const } }))
       try {
         await page.goto(`${BASE}/learn?subject=${SUBJECT}`, { waitUntil: 'domcontentloaded', timeout: 60_000 })
-        await page.waitForTimeout(8_000)
+        // Wait for the lesson itself: five runs at once left a phone-width page on "Loading your lesson…" at the fixed 8 s, and a figure that WAS on the wire was reported as missing.
+        await page.waitForFunction(() => !/Loading your lesson/i.test(document.body.innerText), null, { timeout: 60_000 }).catch(() => undefined)
+        await page.waitForTimeout(5_000)
         const found = await page.evaluate(() => {
           const frames: Element[] = []
           document.querySelectorAll('[aria-label^="Visual aid:"]').forEach((e) => frames.push(e))

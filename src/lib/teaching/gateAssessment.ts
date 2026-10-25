@@ -441,7 +441,8 @@ export function buildGateAssessmentBlock(_mcq: TutorMCQ, opts: { answerLearnerFi
     'what you just taught. Do NOT work a new example or give a new ' +
     'definition this turn — the learner must answer from their own ' +
     'understanding. Do NOT ask any other question, and do NOT emit an MCQ ' +
-    'tag of your own. Never mention that the question was selected for you.'
+    'tag of your own. Never mention that the question was selected for you. ' +
+    'The learner has not answered anything yet: do NOT say "correct", "right" or "well done", and do not say what they have understood or linked.'
   )
 }
 

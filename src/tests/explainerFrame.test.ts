@@ -90,6 +90,15 @@ describe('deriveExplainer', () => {
     expect(frame.panels?.[1].emphasis).toBe('Torque = 2 × 10 = 20 N·m.')
   })
 
+  it('a long narration that contains an "=" stays whole in the prose and is not cut in a Working line (learner run, 2026-10-21)', () => {
+    const long = 'Add the two equations: AgCl(s) + 2NH₃ ⇌ [Ag(NH₃)₂]⁺ + Cl⁻. Adding equations multiplies the K values, so the logs add: the net bar ends where the stack ended, K = Ksp × Kf = 3.1×10⁻³, which is between far above 1 and far below it.'
+    expect(long.length).toBeGreaterThan(160)
+    const f = deriveExplainer({ ...scene, steps: [{ narration: 'Plot log K.', objects: [] }, { narration: long, objects: [] }] })
+    const happening = f.panels?.find((p) => p.heading === "What's happening?")
+    expect(happening?.body).toContain(long)
+    expect(f.panels?.some((p) => p.heading === 'Working')).toBe(false)
+  })
+
   it('turns a teaching goal that lists dependencies into bullets', () => {
     expect(frame.insight?.bullets).toEqual(['The lever arm', 'The force', 'The angle between them'])
   })

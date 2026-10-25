@@ -67,7 +67,7 @@ describe('the chat route judges a stub without the pointer and keeps the pointer
 
   it('repairStubReply tests the body and re-appends the pointer to a repair', () => {
     expect(repair).toMatch(/splitVisualPointer\(stub\)/)
-    expect(repair).toMatch(/if \(!needsRepair\(stubBody\) \|\| serveLessonComplete\) return null/)
+    expect(repair).toMatch(/if \(serveLessonComplete \|\| \(!override && !needsRepair\(stubBody\)\)\) return null/)   // `override`: the no-picture repair judges its own stub (2026-10-20)
     expect(repair).toMatch(/mergeRepair\(stubBody, retryText\)/)
     expect(repair).toMatch(/stubPointer \? `\$\{merged\}\\n\\n\$\{stubPointer\}` : merged/)
   })

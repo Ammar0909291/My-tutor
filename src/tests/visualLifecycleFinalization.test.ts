@@ -219,7 +219,7 @@ describe('A. retirement retires an ARTIFACT, on every tier', () => {
     }
   })
 
-  it('no retirement row was removed by this lifecycle (14 rows of evidence)', () => {
+  it('no retirement row was removed by this lifecycle (13 rows of evidence)', () => {
     // 25 -> 24 (2026-09-30): phys.opt.reflection was removed from the register once it owned
     // a faithful incident/normal/equal-angles figure (physicsCoreScenesBatch1.test.ts).
     // 24 -> 22 (2026-09-30): phys.em.rc-circuits and phys.em.ac-basics were removed once they
@@ -231,7 +231,8 @@ describe('A. retirement retires an ARTIFACT, on every tier', () => {
     // (physicsCoreScenesBatch9.test.ts). Only chemistry and CS rows remain.
     // 15 -> 14 (2026-10-07, CHEM-095): chem.bond.ionic-bonding left once it owned a faithful
     // electron-transfer figure (remainingDefectFixes20261007.test.ts).
-    expect(Object.keys(RETIRED_VISUAL_BINDINGS)).toHaveLength(14)
+    // 14 -> 13 (2026-10-20): chem.bond.mo-theory left once it owned a faithful H₂ energy-level diagram (moDiagram.test.ts).
+    expect(Object.keys(RETIRED_VISUAL_BINDINGS)).toHaveLength(13)
   })
 })
 

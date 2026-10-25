@@ -72,8 +72,8 @@ const REFUTED_BY_ITS_OWN_FIGURE: ReadonlyArray<readonly [string, string, string]
     'one localised structure, which is the picture resonance says is insufficient'],
   ['chemistry', 'chem.bond.coordinate-bond',
     '"shared pair" is the ordinary covalent case the concept is defined against'],
-  ['chemistry', 'chem.bond.mo-theory',
-    'a localised pair is the valence-bond picture MO theory exists to replace'],
+  // chem.bond.mo-theory ('a localised pair is the valence-bond picture MO theory exists to replace') was removed from this list on
+  // 2026-10-20: it now owns an H₂ energy-level diagram (moDiagram.ts), so its retirement row was removed (retired.ts).
   ['chemistry', 'chem.atomic.orbitals',
     'circular shell RINGS assert "an orbital is an orbit" — the concept\'s own documented misconception'],
   ['chemistry', 'chem.atomic.quantum-mech-model',

@@ -70,7 +70,7 @@ describe('the route wiring', () => {
     const i = route.indexOf('const repairStubReply = async')
     const helper = route.slice(i, i + 3000)
     expect(helper).toContain('buildConfirmBackRepairAppendix(')
-    expect(helper).toContain('stripConfirmBack(routed.text')
+    expect(helper).toContain('stripConfirmBack(stripAttemptTagRetry(routed.text')   // the retry's internal tags are removed first (2026-10-20)
   })
 
   it('both clean-up steps call it before their fallbacks', () => {

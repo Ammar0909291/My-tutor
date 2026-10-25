@@ -282,22 +282,36 @@ export function buildUncertaintyScene(): SceneSpec {
  */
 export function qhoEnergy(n: number): number { return n + 0.5 }
 export function buildQuantumOscillatorScene(): SceneSpec {
-  const SX = 1.3, SY = 1.0, Y0 = -3.6
+  const SX = 0.85, SY = 1.0, Y0 = -3.6
   const X = (q: number) => q * SX, Y = (e: number) => Y0 + e * SY
+  const turn = (e: number) => X(Math.sqrt(2 * e))
   const levels: SceneObject[] = []
   for (let n = 0; n <= 4; n++) { const e = qhoEnergy(n), t = Math.sqrt(2 * e); levels.push(line(P(X(-t), Y(e)), P(X(t), Y(e)), ROLE.output, 0.03)) }
   const psi0 = (q: number) => Math.exp(-q * q / 2), psi1 = (q: number) => Math.SQRT2 * q * Math.exp(-q * q / 2)
+  // The gap between two neighbouring levels is MEASURED where it can be seen: leaders carry levels 2 and 3 out to a bracket clear of the bowl.
+  const BRACKET_X = 3.0
+  const gap: SceneObject[] = [
+    line(P(turn(qhoEnergy(2)), Y(qhoEnergy(2))), P(BRACKET_X, Y(qhoEnergy(2))), ROLE.reference, 0.02),
+    line(P(turn(qhoEnergy(3)), Y(qhoEnergy(3))), P(BRACKET_X, Y(qhoEnergy(3))), ROLE.reference, 0.02),
+    arrow(P(BRACKET_X, Y(qhoEnergy(2))), P(BRACKET_X, Y(qhoEnergy(3))), ROLE.output),
+    label('ΔE = ħω', P(BRACKET_X + 1.6, (Y(qhoEnergy(2)) + Y(qhoEnergy(3))) / 2), ROLE.output, 'primary'),
+  ]
+  // The ground level is carried out the same way, so the label names THAT line and not the space under the bowl.
+  const ground: SceneObject[] = [
+    line(P(turn(qhoEnergy(0)), Y(qhoEnergy(0))), P(BRACKET_X, Y(qhoEnergy(0))), ROLE.reference, 0.02),
+    label('E₀ = ½ħω', P(BRACKET_X + 1.6, Y(qhoEnergy(0))), ROLE.input, 'primary'),
+  ]
   return {
     id: 'phys-quantum-oscillator',
     title: 'The quantum harmonic oscillator',
     sceneType: 'diagram',
-    cameraDistance: 13,
+    cameraDistance: 11.5,
     teachingGoal: 'Show a quantum oscillator\'s energy levels inside its parabolic potential: equally spaced by ℏω, starting not at zero but at the zero-point energy ½ℏω.',
-    ariaLabel: 'A parabola, the potential energy of a spring. Inside it, horizontal lines mark the allowed energies, evenly spaced. The lowest is half a quantum above the bottom, not at zero. The ground-state wavefunction is a single hump on the lowest line; the next is one up and one down lobe.',
+    ariaLabel: 'A parabola, the potential energy of a spring. Inside it, horizontal lines mark the allowed energies, evenly spaced; a bracket to the right shows the gap between two neighbouring lines, h-bar omega. The lowest line is half a quantum above the bottom of the parabola, not at zero. The ground-state wavefunction, psi zero, is a single hump on the lowest line; psi one, on the next, is one up and one down lobe.',
     steps: [
-      { narration: 'The potential energy of a quantum spring: a parabola, V = ½mω²x².', objects: [curve(fnPath((x) => Y(0.5 * (x / SX) ** 2), X(-3.4), X(3.4), 100), ROLE.reference), label('V = ½mω²x²', P(3.0, 2.4), ROLE.ink, 'detail')] },
-      { narration: 'Only certain energies are allowed, equally spaced by ℏω: E_n = (n + ½)ℏω.', objects: [...levels, label('ΔE = ħω', P(3.2, Y(2.0)), ROLE.output, 'primary'), label('E_n = (n + ½)ħω', P(-2.8, 3.6), ROLE.result, 'primary')] },
-      { narration: 'The lowest energy is ½ℏω, never zero: even at rest the oscillator jiggles (zero-point energy). The wavefunctions show where it is likely to be found.', objects: [curve(fnPath((x) => Y(qhoEnergy(0)) + 0.7 * psi0(x / SX), X(-2.6), X(2.6), 60), ROLE.input), curve(fnPath((x) => Y(qhoEnergy(1)) + 0.7 * psi1(x / SX), X(-3.0), X(3.0), 60), ROLE.input), label('E₀ = ½ħω', P(3.0, Y(0.5)), ROLE.input, 'primary')] },
+      { narration: 'The potential energy of a quantum spring: a parabola, V = ½mω²x².', objects: [curve(fnPath((x) => Y(0.5 * (x / SX) ** 2), X(-3.4), X(3.4), 100), ROLE.reference), label('V = ½mω²x²', P(-3.4, 3.4), ROLE.ink, 'detail')] },
+      { narration: 'Only certain energies are allowed, equally spaced by ℏω: E_n = (n + ½)ℏω.', objects: [...levels, ...gap, label('E_n = (n + ½)ħω', P(2.2, 4.4), ROLE.result, 'primary')] },
+      { narration: 'The lowest energy is ½ℏω, never zero: even at rest the oscillator jiggles (zero-point energy). The wavefunctions show where it is likely to be found: ψ₀ on the lowest level, ψ₁ on the next.', objects: [curve(fnPath((x) => Y(qhoEnergy(0)) + 0.7 * psi0(x / SX), X(-2.6), X(2.6), 60), ROLE.input), curve(fnPath((x) => Y(qhoEnergy(1)) + 0.7 * psi1(x / SX), X(-3.0), X(3.0), 60), ROLE.aid), ...ground, label('ψ₀', P(X(2.5), Y(qhoEnergy(0)) + 0.55), ROLE.input, 'detail'), label('ψ₁', P(X(3.1), Y(qhoEnergy(1)) + 0.9), ROLE.aid, 'detail')] },
     ],
   }
 }

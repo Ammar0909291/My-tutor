@@ -337,6 +337,8 @@ import {
   buildTrigEquationsScene, buildLimitsScene, buildAdjunctionScene, buildErrorAnalysisScene,
 } from '@/lib/teaching/sceneGenerators/mathCoreScenesB42'
 import { buildUnitCircleScene } from '@/lib/teaching/sceneGenerators/mathCoreScenesB43'
+import { buildStokesTheoremScene } from '@/lib/teaching/sceneGenerators/mathCoreScenesB44'
+import { buildGreensTheoremScene } from '@/lib/teaching/sceneGenerators/mathCoreScenesB45'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -346,6 +348,16 @@ import { buildDemographicPyramidScene } from '@/lib/teaching/sceneGenerators/dem
 import { buildElectrochemicalCellScene, type ElectrochemicalCellParams } from '@/lib/teaching/sceneGenerators/electrochemicalCell'
 import { buildEnergyCycleScene } from '@/lib/teaching/sceneGenerators/energyCycle'
 import { buildPhaseDiagramScene } from '@/lib/teaching/sceneGenerators/phaseDiagram'
+import { buildMoDiagramScene } from '@/lib/teaching/sceneGenerators/moDiagram'
+import { buildFeetScene, buildStyleShiftScene, buildCohesionCoherenceScene } from '@/lib/teaching/sceneGenerators/englishFigures'
+import { buildStyleVoiceToneScene } from '@/lib/teaching/sceneGenerators/englishStyleFigure'
+import { buildMechanismProfileScene, buildSurfaceCatalysisScene } from '@/lib/teaching/sceneGenerators/reactionMechanismScenes'
+import { buildLacOperonScene } from '@/lib/teaching/sceneGenerators/lacOperon'
+import { buildComplexEquilibriaScene } from '@/lib/teaching/sceneGenerators/complexEquilibria'
+import { buildPhotochemistryScene } from '@/lib/teaching/sceneGenerators/photochemistryFate'
+import { buildCancerHallmarksScene } from '@/lib/teaching/sceneGenerators/cancerHallmarksLocks'
+import { buildEvoDevoScene } from '@/lib/teaching/sceneGenerators/evoDevoToolkit'
+import { buildHardyWeinbergScene } from '@/lib/teaching/sceneGenerators/hardyWeinbergSquare'
 import { buildCoordinationComplexScene, type CoordinationComplexDef } from '@/lib/teaching/sceneGenerators/coordinationComplex'
 import { buildSystemBoundaryScene, buildFirstLawScene as buildChemFirstLawScene } from '@/lib/teaching/sceneGenerators/chemistrySystemScenes'
 import { buildCellStructureScene } from '@/lib/teaching/sceneGenerators/cellStructure'
@@ -1117,6 +1129,12 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   // Mathematics visual campaign, batch 43 (2026-10-17). See mathCoreScenesB43.ts.
   'math.trig.unit-circle':               buildUnitCircleScene,
 
+  // Mathematics visual campaign, batch 44 (2026-10-20). See mathCoreScenesB44.ts.
+  'math.calc.stokes-theorem':            buildStokesTheoremScene,
+
+  // Mathematics visual campaign, batch 45 (2026-10-20). See mathCoreScenesB45.ts.
+  'math.calc.greens-theorem':            buildGreensTheoremScene,
+
   // English: the first concept with a figure of its own (2026-10-18, learner-experience backlog B2). A noun names a person, a place, a
   // thing or an idea; the idea group carries the point the Educational Brain entry makes (an abstract noun is still a noun although
   // nothing can be touched). Examples are the ones the concept's own teaching asset and EB entry use; nothing else is stated.
@@ -1133,6 +1151,16 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
       { label: 'Idea', description: 'a noun can name a quality, feeling or state that you cannot touch; it is still a noun', items: ['happiness', 'freedom', 'honesty'] },
     ],
   }),
+
+  // English static figures 2-4 (2026-10-20, hard-concept learner run: all three were generated process flowcharts or, for the first ask,
+  // "I don't have a picture"). Each is the figure the concept's own teaching asset asks for (`visual_teaching_suggestions`), drawn:
+  // the five feet as beat diagrams, the style-shifting graph (the order the asset states, not invented values), and the cohesion x
+  // coherence grid with the concept's own specimens. Same faithfulness policy as eng.grammar.nouns; evidence: englishStaticFigureContent.test.ts.
+  'eng.literature.meter-and-rhyme': () => buildFeetScene(),
+  'eng.linguistics.sociolinguistics-intro': () => buildStyleShiftScene(),
+  'eng.linguistics.discourse-analysis-intro': () => buildCohesionCoherenceScene(),
+  // The three-layer diagram (style → projects → voice, tone as a per-piece dial) and two traceability rows its teaching asset asks for (learner run, 2026-10-21).
+  'eng.composition.style-voice-and-tone': () => buildStyleVoiceToneScene(),
 
   // The Punnett generator is single-gene by construction (genotypes are two
   // alleles). A dihybrid cross drawn as a monohybrid square teaches the wrong
@@ -1759,6 +1787,16 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   // A drawn P–T plane (regions, three boundary curves, triple and critical points). It was a four-box text comparison: the words
   // of a phase diagram with no diagram (chemistry visual audit, 2026-10-08: "prose-comparison").
   'chem.state.phase-diagram': () => buildPhaseDiagramScene(),
+  // The H₂ molecular-orbital energy diagram (two 1s orbitals → σ and σ*, two electrons paired in σ, bond order 1). It was a generated
+  // six-box procedure flowchart: the steps of building an MO diagram with no diagram (hard-concept learner run, 2026-10-20).
+  'chem.bond.mo-theory': () => buildMoDiagramScene(),
+  // Two more that were a generic flowchart or no figure (hard-concept learner run, 2026-10-20): the energy profile of a two-step
+  // mechanism, and adsorption / surface reaction / desorption with a poisoned site.
+  'chem.kinet.mechanism': () => buildMechanismProfileScene(),
+  // Complex-ion equilibria: the bars of log Ksp and log Kf stacked into the net constant (generic flowchart before, learner run 2026-10-21).
+  'chem.equil.complex-equil': () => buildComplexEquilibriaScene(),
+  'chem.kinet.photochemistry': () => buildPhotochemistryScene(),
+  'chem.surface.heterogeneous-cat': () => buildSurfaceCatalysisScene(),
   // CHEM-046: "Real Gases and van der Waals Equation" was shown the ideal
   // Boyle's-law hyperbola, the opposite of the concept.
   'chem.state.real-gases': () => buildCellComparisonScene({
@@ -2241,24 +2279,9 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     ],
   }),
 
-  // The Hanahan-Weinberg hallmarks are seven independent, coexisting
-  // hallmarks of an integrative framework — a hub, not a sequence, matching
-  // the concept's own KG description exactly.
-  'bio.cell.cancer-biology-hallmarks': () => buildCellHubScene({
-    conceptId: 'bio.cell.cancer-biology-hallmarks',
-    hubLabel: 'Hallmarks of Cancer',
-    title: 'Hallmarks of Cancer',
-    teachingGoal: 'Name the Hanahan-Weinberg hallmarks as independent breakdowns of normally regulated cell behaviour.',
-    spokes: [
-      { name: 'Sustained proliferative signalling', description: 'the cell drives its own division continuously' },
-      { name: 'Evasion of growth suppressors', description: 'the cell ignores signals that would normally stop division' },
-      { name: 'Resistance to apoptosis', description: 'the cell evades programmed cell death' },
-      { name: 'Replicative immortality', description: 'the cell divides without the normal limit on cell divisions' },
-      { name: 'Angiogenesis induction', description: 'the tumour induces new blood vessels to supply itself' },
-      { name: 'Invasion and metastasis', description: 'cells invade nearby tissue and spread to distant sites' },
-      { name: 'Metabolic reprogramming', description: 'the cell rewires its metabolism to support rapid growth' },
-    ],
-  }),
+  // The Hanahan-Weinberg hallmarks: each is the failure of a DIFFERENT normal safeguard, and one is not enough — a tumour must get past several (the entry's
+  // "multiple independent locks"). Replaces the hub of seven names, which could not show that (learner run, 2026-10-21).
+  'bio.cell.cancer-biology-hallmarks': () => buildCancerHallmarksScene(),
 
   // Loss of adhesion (EMT) is one shared event that leads to two different
   // outcomes depending on context — a branching END, the mirror image of
@@ -2586,15 +2609,10 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     ],
   }),
 
-  'bio.mol.gene-regulation': () => buildCellComparisonScene({
-    conceptId: 'bio.mol.gene-regulation',
-    title: 'The lac Operon: Negative-Feedback Regulation',
-    teachingGoal: 'The operon switches off by default and switches on only when its specific substrate signal (lactose) is present.',
-    groups: [
-      { label: 'Lactose absent', description: 'the repressor binds the operator, physically blocking RNA polymerase', items: ['Operon genes: OFF'] },
-      { label: 'Lactose present', description: 'allolactose binds and inactivates the repressor, releasing RNA polymerase', items: ['Operon genes: ON'] },
-    ],
-  }),
+  // The lac operon drawn in its two states (repressor on the operator and polymerase blocked / allolactose binds the repressor, polymerase
+  // transcribes). It was two coloured pins with OFF / ON captions: the tutor spoke of an operator, a repressor and RNA polymerase that were
+  // not on the screen (hard-concept learner run, 2026-10-20).
+  'bio.mol.gene-regulation': () => buildLacOperonScene(),
 
   'bio.gen.gene-interactions': () => buildCellComparisonScene({
     conceptId: 'bio.gen.gene-interactions',
@@ -2641,18 +2659,8 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     ],
   }),
 
-  'bio.gen.population-genetics': () => buildCellHubScene({
-    conceptId: 'bio.gen.population-genetics',
-    hubLabel: 'Hardy-Weinberg Equilibrium',
-    title: 'Four Forces That Disturb Hardy-Weinberg Equilibrium',
-    teachingGoal: 'Dominance describes expression in heterozygotes — it says nothing about frequency trend or fitness; a dominant allele does not "win" over time.',
-    spokes: [
-      { name: 'Natural selection', description: 'differential survival/reproduction changes allele frequencies' },
-      { name: 'Mutation', description: 'introduces new alleles into the population' },
-      { name: 'Gene flow (migration)', description: 'moves alleles between populations' },
-      { name: 'Genetic drift', description: 'random sampling variation, strongest in small populations (bottleneck, founder effects)' },
-    ],
-  }),
+  // The Hardy-Weinberg square with p, q and p² + 2pq + q² drawn as areas (the four-spoke hub of forces had no p or q; learner run 2026-10-21).
+  'bio.gen.population-genetics': () => buildHardyWeinbergScene(),
 
   'bio.gen.genetic-engineering': () => buildCellPathwayScene({
     conceptId: 'bio.gen.genetic-engineering',
@@ -3353,15 +3361,8 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
     ],
   }),
 
-  'bio.evo.evo-devo': () => buildCellComparisonScene({
-    conceptId: 'bio.evo.evo-devo',
-    title: 'What Drives Morphological Evolution?',
-    teachingGoal: 'Mouse Pax6 expressed in a fly produces a FLY eye, not a mouse eye — the conserved signal is received by the fly’s own downstream genes.',
-    groups: [
-      { label: 'Regulatory region changes', description: 'controlling WHERE and WHEN a conserved gene is expressed', items: ['The actual driver of most major morphological change', 'Limb loss in snakes, eye reduction in cave fish'] },
-      { label: 'Protein-coding sequence changes', description: 'changes to the gene itself', items: ['NOT the typical explanation for major morphological change'] },
-    ],
-  }),
+  // The shared Hox toolkit and the Pax6 swap, drawn (two label pins before; learner run 2026-10-21).
+  'bio.evo.evo-devo': () => buildEvoDevoScene(),
 
   'bio.immuno.mhc-antigen-presentation': () => buildCellComparisonScene({
     conceptId: 'bio.immuno.mhc-antigen-presentation',
