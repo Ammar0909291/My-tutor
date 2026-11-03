@@ -13750,6 +13750,12 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
           if (orphan.dropped) { cleanText = orphan.text; done.push('orphan-conditional') }
           const bal = hy.balanceMathDelimiters(cleanText)
           if (bal.repaired) { cleanText = bal.text; done.push('math-delimiters') }
+          // The Educational Brain's assessment item copied into the reply as a three-part exercise for the learner (production, 2026-11-03, chem.bond.polar-molecules).
+          if (mcqGradeHoisted === null && !mcqHoisted && !turnIntent.wantsPractice) {
+            const { dropStackedTasks } = await import('@/lib/teaching/stackedTask')
+            const stacked = dropStackedTasks(cleanText)
+            if (stacked.dropped.length > 0) { cleanText = stacked.text; done.push('stacked-task') }
+          }
           // A regeneration above (stub repair, drift, analogy) can write the verdict again after the first drop emptied the reply (production, 2026-10-21 re-run).
           if (unearnedVerdictScopeHoisted) {
             const { dropUnearnedVerdict: dropVerdictAgain } = await import('@/lib/teaching/unearnedVerdict')
