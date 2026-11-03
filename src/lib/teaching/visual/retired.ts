@@ -168,10 +168,10 @@ export const RETIRED_VISUAL_BINDINGS: Readonly<Record<string, string>> = {
   // molecular orbital theory exists to replace. MO theory requires a bonding/antibonding energy-level diagram"). It now owns exactly
   // that figure (moDiagram.ts: H₂ with σ below the two 1s levels and σ* above, paired electrons in σ, bond order derived from them),
   // so — as with the physics rows above — the verdict no longer describes what the concept renders. Coverage: moDiagram.test.ts.
-  'chem.bond.polar-molecules':
-    'The card\'s own label is "shared pair" — EQUAL sharing between two symmetric atoms, ' +
-    'i.e. a non-polar bond. Polarity is UNEQUAL sharing and needs partial charges and a ' +
-    'dipole arrow. The figure depicts the negative case of the concept.',
+  // REMOVED 2026-11-03: 'chem.bond.polar-molecules' ("The card's own label is \"shared pair\" — EQUAL sharing between two symmetric atoms, i.e. a
+  // non-polar bond"). It now owns the figure polarity needs (polarMoleculeDipoles.ts: CO₂'s two opposite bond dipoles cancel, bent water's add and the
+  // net dipole points toward O; the net arrow is the sum of the drawn bond-dipole arrows), so the verdict no longer describes what the concept renders.
+  // Coverage: polarMoleculeDipoles.test.ts.
   'chem.bond.intermolecular':
     'The card animates an INTRAmolecular covalent bond forming. Intermolecular forces act ' +
     'BETWEEN separate molecules and are explicitly not bonds — serving this figure ' +
@@ -268,7 +268,6 @@ export const RETIRED_ASSET_FINGERPRINTS: Readonly<Record<string, readonly string
   'chem.found.states-of-matter': ['ffdc76ff'], // card:three_crystal_lattice
   'chem.bond.metallic-bonding': ['f4a1f0cb9'], // card:three_bond_formation
   'chem.solid.amorphous': ['ffdc76ff'], // card:three_crystal_lattice
-  'chem.bond.polar-molecules': ['f4a1f0cb9'], // card:three_bond_formation
   'chem.bond.intermolecular': ['f4a1f0cb9'], // card:three_bond_formation
   'chem.bond.resonance': ['f4a1f0cb9'], // card:three_bond_formation
   'chem.bond.coordinate-bond': ['f4a1f0cb9'], // card:three_bond_formation

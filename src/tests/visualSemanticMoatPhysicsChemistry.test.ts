@@ -64,8 +64,8 @@ const claimsToBeTheConcept = (conceptId: string, subject: string) => {
  * audit.
  */
 const REFUTED_BY_ITS_OWN_FIGURE: ReadonlyArray<readonly [string, string, string]> = [
-  ['chemistry', 'chem.bond.polar-molecules',
-    'the card is labelled "shared pair" — EQUAL sharing, which is a non-polar bond'],
+  // chem.bond.polar-molecules (the card labelled "shared pair", EQUAL sharing, a non-polar bond) was removed from this list on 2026-11-03: it now owns a
+  // bond-dipole figure (polarMoleculeDipoles.ts), so its retirement row was removed (retired.ts).
   ['chemistry', 'chem.bond.intermolecular',
     'an intramolecular bond, for forces the concept must teach are NOT bonds'],
   ['chemistry', 'chem.bond.resonance',

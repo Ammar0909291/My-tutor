@@ -23,6 +23,8 @@ export interface HubSpoke {
 export interface CellHubParams {
   conceptId: string
   hubLabel: string
+  /** Biology only: set the hub caption as a heading above the whole figure even when it is short (a six-spoke hub has spokes 30° either side of the vertical, so a caption beside the sphere crosses their connectors: learner run, Test6, 2026-11-03, `bio.eco.biodiversity-conservation`). */
+  hubHeading?: boolean
   title: string
   teachingGoal: string
   spokes: readonly HubSpoke[]
@@ -61,14 +63,14 @@ function lowerSideWrap(position: Vec3, spokeCount: number): { labelWrapUnits?: n
 }
 
 export function buildCellHubScene(params: CellHubParams): SceneSpec {
-  const { conceptId, hubLabel, title, teachingGoal, spokes } = params
+  const { conceptId, hubLabel, title, teachingGoal, spokes, hubHeading } = params
   const bio = isBiologyScene(conceptId)
 
   const hubStep: SceneStep = {
     narration: hubLabel,
     // The hub's caption goes ABOVE it, so no spoke may point straight up: an even
     // spoke count is rotated half a step (see the angle below) to leave the top free.
-    objects: [{ type: 'node', id: 'hub', position: [0, 0, 0] as Vec3, radius: HUB_RADIUS, color: HUB_COLOR, text: hubLabel, properties: hubLabel.length > HUB_HEADING_CHARS ? { labelOffset: [0, ringRadiusFor(spokes.length) + HUB_HEADING_EXTRA, 0], labelWrapFraction: 0.8 } : captionBeside(HUB_RADIUS, 'above') }],
+    objects: [{ type: 'node', id: 'hub', position: [0, 0, 0] as Vec3, radius: HUB_RADIUS, color: HUB_COLOR, text: hubLabel, properties: hubLabel.length > HUB_HEADING_CHARS || (hubHeading && isBiologyScene(conceptId)) ? { labelOffset: [0, ringRadiusFor(spokes.length) + HUB_HEADING_EXTRA, 0], labelWrapFraction: 0.8 } : captionBeside(HUB_RADIUS, 'above') }],
   }
 
   const spokeSteps: SceneStep[] = spokes.map((spoke, i) => {

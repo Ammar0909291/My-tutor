@@ -35,12 +35,23 @@ export const MIN_EXPLANATION_CHARS = 320
 /** A line of a drawn plot's axis: "  100 |       *", "|----". */
 const AXIS_TICK_LINE = /^\s*[\d.]*\s*[|│┃]\s*[*#=\-_+. ]*$/
 
+/** A row of a table or box drawn in text: "| I finished | ------> | I went home |" (three or more pipes), or an arrow made of dashes. */
+const TEXT_TABLE_ROW = /^\s*\|(?:[^|\n]*\|){2,}\s*$/
+const DASH_ARROW = /-{3,}\s*>|={3,}\s*>/
+
 /** Talk ABOUT a figure that does not exist, beyond what `isPhantomVisualClaim` catches ("Imagine a simple flow that starts with a box labeled …"). */
 const IMAGINE_FIGURE_RE = /\b(imagine|picture|visuali[sz]e)\s+(a|an|this|the)\s+[^.!?\n]{0,50}?\b(diagram|flow|flowchart|tree|chart|plot|table|figure|map|grid|timeline|graph|boxes|box|layout)\b/i
 const BOX_ARROW_RE = /\b(box|boxes|arrow|arrows)\b[^.!?\n]{0,40}\b(labell?ed|titled|called)\b/i
 /** "This table lets you see …" after the table itself was stripped. */
 const ORPHAN_REF_RE = /\b(this|the)\s+(table|tree|chart|layout|map|grid|timeline|plot|graph)\b[^.!?\n]{0,30}\b(lets|allows|shows|helps|illustrates|gives|maps|displays)\b/i
+/**
+ * "The left side shows two independent clauses …", "In each line the brackets mark the clause …", "This visual layout lets you see at a glance …" — a figure the reply
+ * drew in text (a pipe table, arrows made of dashes) and then described (production, eng.grammar.conjunctions, 2026-11-03, twice in one lesson).
+ */
+const SIDE_SHOWS_RE = /\b(left|right|top|bottom|first|second)\s+(side|half|panel|column|row)\b[^.!?\n]{0,25}\b(shows?|displays?|illustrates?|depicts?)\b/i
+const LAYOUT_TALK_RE = /\b(visual layout|at a glance)\b[^.!?\n]{0,40}\b(lets? you see|shows?)\b|\bin each (line|row|column|box|panel)\b[^.!?\n]{0,50}\b(brackets?|arrows?|boxes|marks?)\b/i
 export const isFigureTalk = (sentence: string): boolean => isPhantomVisualClaim(sentence) || IMAGINE_FIGURE_RE.test(sentence) || BOX_ARROW_RE.test(sentence) || ORPHAN_REF_RE.test(sentence)
+  || SIDE_SHOWS_RE.test(sentence) || LAYOUT_TALK_RE.test(sentence)
 
 /**
  * Remove sentences that point at a table, tree, chart … the reply no longer contains. Only when the text holds no fenced block and no markdown
@@ -57,6 +68,7 @@ export function withoutDiagramDebris(text: string): string {
   return (typeof text === 'string' ? text : '')
     .split('\n')
     .filter((line) => !AXIS_TICK_LINE.test(line))
+    .filter((line) => !TEXT_TABLE_ROW.test(line) && !DASH_ARROW.test(line))
     .filter((line) => line.trim().length === 0 || line.trim().replace(/[^\p{L}\p{N}]/gu, '').length > 2 || /[=⇌→]/.test(line))
     .join('\n')
     .replace(/\n{3,}/g, '\n\n')

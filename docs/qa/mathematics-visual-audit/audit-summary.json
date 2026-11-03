@@ -1,7 +1,7 @@
 {
- "generatedAt": "2026-10-20T22:15:44.933Z",
+ "generatedAt": "2026-11-03T16:46:12.537Z",
  "renderScope": "lesson",
- "fingerprint": "7510976098bf48a89198961670eb3969aab07956aed78ae27603840ba9554a28",
+ "fingerprint": "31dc62585abfdfeb8384461f235581cd7605ee07af5b25d4f7f78395b46cc2f4",
  "fingerprints": {
   "math.found.mathematical-thinking": "a083018c52b89e37",
   "math.found.abstraction": "136d7c54677ee095",
@@ -307,9 +307,9 @@
   "math.geom.frenet-serret": "b9db5260b8ec79fd",
   "math.geom.differential-geometry-surfaces": "53102a0dbb22f70b",
   "math.geom.geometric-constructions": "e5fc03d542edba99",
-  "math.trig.angle-measure": "a7dcec306eeab945",
+  "math.trig.angle-measure": "65ee43db3a6b51b7",
   "math.trig.degree-radian-conversion": "c0c71e98e8fb1f4e",
-  "math.trig.right-triangle-trig": "e2a899b75a2f8579",
+  "math.trig.right-triangle-trig": "46f81acaca54886c",
   "math.trig.basic-ratios": "b201fbd2d4555590",
   "math.trig.special-angles": "7d4da70203f128c7",
   "math.trig.unit-circle": "50a12c3b684647ff",
@@ -6566,9 +6566,9 @@
   {
    "id": "math.trig.angle-measure",
    "verdict": "PASS",
-   "class": "card",
-   "authorship": "domain-fallback-card",
-   "scope": "domain",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
    "interactive": false,
    "graph": false,
    "dims": {
@@ -6593,9 +6593,9 @@
   {
    "id": "math.trig.right-triangle-trig",
    "verdict": "PASS",
-   "class": "card",
-   "authorship": "domain-fallback-card",
-   "scope": "domain",
+   "class": "scene",
+   "authorship": "authored-concept",
+   "scope": "concept",
    "interactive": false,
    "graph": false,
    "dims": {

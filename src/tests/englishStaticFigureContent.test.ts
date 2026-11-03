@@ -125,8 +125,9 @@ const sourcesOf = (id: string) => {
 const textOf = (s: SceneSpec) => [...objs(s).map((o) => o.text ?? ''), ...s.steps.map((st) => st.narration ?? ''), s.title, s.teachingGoal ?? ''].join(' ')
 
 const STYLE = 'eng.composition.style-voice-and-tone'
+const CONJ = 'eng.grammar.conjunctions'
 describe.each([
-  [METER, 'meter-five-feet'], [SOCIO, 'sociolinguistics-style-shifting'], [DISCOURSE, 'discourse-cohesion-coherence'], [STYLE, 'style-voice-tone'],
+  [METER, 'meter-five-feet'], [SOCIO, 'sociolinguistics-style-shifting'], [DISCOURSE, 'discourse-cohesion-coherence'], [STYLE, 'style-voice-tone'], [CONJ, 'conjunctions-equal-and-dependent'],
 ] as const)('%s is served its own drawn figure (%s), from the concept\'s own sources', (id, sceneId) => {
   const s = sceneOf(id)
   const sources = sourcesOf(id)
@@ -291,5 +292,50 @@ describe('eng.composition.style-voice-and-tone: the three layers and two traceab
     const e = (bad.steps.flatMap((st) => st.objects) as Array<{ type?: string; text?: string; position?: number[] }>).find((o) => o.text === 'urgent')!
     e.position![1] += 1.5
     expect(ESF.checkStyleVoiceToneConsistency(bad).ok).toBe(false)
+  })
+})
+
+// The Educational Brain entry's own picture is "the equal-bridge vs. the leaning-bridge". The concept had no figure; a learner who asked for one was told so and the
+// reply then drew an ASCII table and described its "left side" (learner run on Test6, 2026-11-03).
+import * as ECF from '@/lib/teaching/sceneGenerators/englishConjunctionsFigure'
+
+describe('eng.grammar.conjunctions: equal versus dependent is the entry\'s own picture, and the geometry says what it claims', () => {
+  const s = ECF.buildConjunctionsScene()
+  const sources = sourcesOf(CONJ)
+  const clone = () => JSON.parse(JSON.stringify(s)) as SceneSpec
+  const all = (sp: SceneSpec) => sp.steps.flatMap((st) => st.objects) as Array<{ type?: string; text?: string; from?: number[]; to?: number[]; position?: number[] }>
+  const bars = (sp: SceneSpec) => all(sp).filter((o) => o.type === 'bond' && Math.abs(o.to![0] - o.from![0]) > 2)
+
+  it('the entry names the equal-bridge / leaning-bridge picture and the two comma rules the figure carries', () => {
+    expect(sources).toMatch(/equal-bridge/)
+    expect(sources).toMatch(/leaning-bridge/)
+    expect(sources).toMatch(/comma before a coordinating conjunction/)
+  })
+  it('passes its own consistency check', () => { expect(ECF.checkConjunctionsConsistency(s)).toEqual({ ok: true, errors: [] }) })
+  it('the two coordinated bars are the same length; the dependent bar is shorter than the independent one and leans on it', () => {
+    const b = bars(s)
+    const len = (o: { from?: number[]; to?: number[] }) => o.to![0] - o.from![0]
+    expect(len(b[0])).toBeCloseTo(len(b[1]), 9)
+    expect(len(b[2])).toBeGreaterThan(len(b[3]))
+    expect(b[3].from![1]).toBeLessThan(b[2].from![1])
+  })
+  it('names FANBOYS conjunctions on the left and the subordinators on the right, and no number', () => {
+    const t = textOf(s)
+    for (const w of ['and, but, or, so', 'because, although', 'both independent', 'dependent']) expect(t).toContain(w)
+    expect(t).not.toMatch(/\d/)
+  })
+  // Mutations: figures that look the same and teach something false.
+  it('coordinated bars of unequal length (equal ideas drawn unequal) are rejected', () => {
+    const bad = clone(); const b = bars(bad); b[1].to![0] += 1.2
+    expect(ECF.checkConjunctionsConsistency(bad).errors.join(' ')).toMatch(/not equal/)
+  })
+  it('a dependent bar as long as the independent one is rejected', () => {
+    const bad = clone(); const b = bars(bad); b[3].to![0] = b[3].from![0] + (b[2].to![0] - b[2].from![0])
+    expect(ECF.checkConjunctionsConsistency(bad).errors.join(' ')).toMatch(/shorter/)
+  })
+  it('a leaning arrow that points down (independent leaning on dependent) is rejected', () => {
+    const bad = clone(); const a = all(bad).find((o) => o.type === 'arrow' && o.from![0] === o.to![0])!
+    ;[a.from, a.to] = [a.to, a.from]
+    expect(ECF.checkConjunctionsConsistency(bad).errors.join(' ')).toMatch(/lean/)
   })
 })

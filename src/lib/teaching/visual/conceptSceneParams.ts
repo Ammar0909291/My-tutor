@@ -339,6 +339,7 @@ import {
 import { buildUnitCircleScene } from '@/lib/teaching/sceneGenerators/mathCoreScenesB43'
 import { buildStokesTheoremScene } from '@/lib/teaching/sceneGenerators/mathCoreScenesB44'
 import { buildGreensTheoremScene } from '@/lib/teaching/sceneGenerators/mathCoreScenesB45'
+import { buildAngleMeasureScene, buildRightTriangleTrigScene } from '@/lib/teaching/sceneGenerators/mathCoreScenesB46'
 import { buildCalculusGraphScene } from '@/lib/teaching/sceneGenerators/calculusGraph'
 import { buildStatisticsBarChartScene } from '@/lib/teaching/sceneGenerators/statisticsBarChart'
 import { buildCellDivisionScene } from '@/lib/teaching/sceneGenerators/cellDivision'
@@ -355,6 +356,8 @@ import { buildMechanismProfileScene, buildSurfaceCatalysisScene } from '@/lib/te
 import { buildLacOperonScene } from '@/lib/teaching/sceneGenerators/lacOperon'
 import { buildComplexEquilibriaScene } from '@/lib/teaching/sceneGenerators/complexEquilibria'
 import { buildPhotochemistryScene } from '@/lib/teaching/sceneGenerators/photochemistryFate'
+import { buildConjunctionsScene } from '@/lib/teaching/sceneGenerators/englishConjunctionsFigure'
+import { buildPolarMoleculesScene } from '@/lib/teaching/sceneGenerators/polarMoleculeDipoles'
 import { buildCancerHallmarksScene } from '@/lib/teaching/sceneGenerators/cancerHallmarksLocks'
 import { buildEvoDevoScene } from '@/lib/teaching/sceneGenerators/evoDevoToolkit'
 import { buildHardyWeinbergScene } from '@/lib/teaching/sceneGenerators/hardyWeinbergSquare'
@@ -1134,6 +1137,9 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
 
   // Mathematics visual campaign, batch 45 (2026-10-20). See mathCoreScenesB45.ts.
   'math.calc.greens-theorem':            buildGreensTheoremScene,
+  // Batch 46 (2026-11-03). See mathCoreScenesB46.ts.
+  'math.trig.angle-measure':             buildAngleMeasureScene,
+  'math.trig.right-triangle-trig':       buildRightTriangleTrigScene,
 
   // English: the first concept with a figure of its own (2026-10-18, learner-experience backlog B2). A noun names a person, a place, a
   // thing or an idea; the idea group carries the point the Educational Brain entry makes (an abstract noun is still a noun although
@@ -1161,6 +1167,7 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'eng.linguistics.discourse-analysis-intro': () => buildCohesionCoherenceScene(),
   // The three-layer diagram (style → projects → voice, tone as a per-piece dial) and two traceability rows its teaching asset asks for (learner run, 2026-10-21).
   'eng.composition.style-voice-and-tone': () => buildStyleVoiceToneScene(),
+  'eng.grammar.conjunctions': () => buildConjunctionsScene(),
 
   // The Punnett generator is single-gene by construction (genotypes are two
   // alleles). A dihybrid cross drawn as a monohybrid square teaches the wrong
@@ -1796,6 +1803,7 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   // Complex-ion equilibria: the bars of log Ksp and log Kf stacked into the net constant (generic flowchart before, learner run 2026-10-21).
   'chem.equil.complex-equil': () => buildComplexEquilibriaScene(),
   'chem.kinet.photochemistry': () => buildPhotochemistryScene(),
+  'chem.bond.polar-molecules': () => buildPolarMoleculesScene(),
   'chem.surface.heterogeneous-cat': () => buildSurfaceCatalysisScene(),
   // CHEM-046: "Real Gases and van der Waals Equation" was shown the ideal
   // Boyle's-law hyperbola, the opposite of the concept.
@@ -1874,6 +1882,7 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   }),
   'bio.eco.nutrient-cycling': () => buildCellPathwayScene({
     conceptId: 'bio.eco.nutrient-cycling',
+    stagger: true,
     title: 'The Nitrogen Cycle: Matter Cycles, Energy Does Not',
     teachingGoal: 'The same nitrogen atoms cycle between air, soil, water and living things indefinitely, with different bacteria doing the key conversions; energy, by contrast, flows one way and is lost as heat.',
     cyclic: true,
@@ -1888,6 +1897,7 @@ const CONCEPT_SCENES: Record<string, () => SceneSpec | null> = {
   'bio.eco.biodiversity-conservation': () => buildCellHubScene({
     conceptId: 'bio.eco.biodiversity-conservation',
     hubLabel: 'Biodiversity',
+    hubHeading: true,
     title: 'Biodiversity: Levels, Threats and Protection',
     teachingGoal: 'Biodiversity is the variety of life at three levels; it is threatened today at a rate far above the natural background rate, mainly by human activity; and it is protected both in and outside its natural habitat.',
     spokes: [

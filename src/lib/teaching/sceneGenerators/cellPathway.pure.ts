@@ -36,6 +36,8 @@ export interface CellPathwayParams {
   teachingGoal: string
   /** True when the last stage's arrow should return to the first stage. */
   cyclic?: boolean
+  /** Biology only: alternate the captions above and below the line even on a cycle of fewer than six stages (two long neighbouring names — "Decomposition", "Denitrification" — touched at 1280 px: learner run, Test6, 2026-11-03). */
+  stagger?: boolean
   /** Two parallel stages that both lead into `stages[0]` — a branching START. */
   branchStart?: readonly [PathwayStage, PathwayStage]
   /** The shared/main sequence, in real order. */
@@ -117,7 +119,7 @@ function branchLines(a: PathwayStage, b: PathwayStage): string {
 export function buildCellPathwayScene(params: CellPathwayParams): SceneSpec {
   const { conceptId, title, teachingGoal, cyclic, branchStart, stages, branchEnd, explainer } = params
   const bio = isBiologyScene(conceptId)
-  const stagger = bio && !cyclic && !branchStart && !branchEnd && stages.length >= STAGGER_FROM_STAGES
+  const stagger = bio && ((!cyclic && !branchStart && !branchEnd && stages.length >= STAGGER_FROM_STAGES) || (params.stagger === true && !branchStart && !branchEnd))
   const node = bio
     ? (id: string, position: Vec3, text: string) => {
         const m = /^stage-(\d+)$/.exec(id)

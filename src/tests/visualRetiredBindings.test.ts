@@ -24,7 +24,7 @@ const ask = (conceptId: string, message = 'explain with diagram') =>
   resolveVisual({ message, lessonConceptId: conceptId, learnerRequest: 'diagram' })
 
 describe('the register itself', () => {
-  it('covers exactly the 13 audited concepts', () => {
+  it('covers exactly the 12 audited concepts', () => {
     // 29 from the M3-A audit + 8 from the visual semantic moat sweep, which
     // ran the resolver over all 238 physics and 186 chemistry concepts and
     // read all 105 bindings that render.
@@ -58,7 +58,8 @@ describe('the register itself', () => {
     // electron-transfer figure (remainingDefectFixes20261007.test.ts).
     // 14 -> 13 (2026-10-20): chem.bond.mo-theory left once it owned a faithful H₂ energy-level diagram
     // (moDiagram.test.ts).
-    expect(RETIRED).toHaveLength(13)
+    // 13 -> 12 (2026-11-03): chem.bond.polar-molecules left once it owned a faithful bond-dipole figure (polarMoleculeDipoles.test.ts).
+    expect(RETIRED).toHaveLength(12)
   })
 
   it('every retired id is a real KG concept — a typo would silently retire nothing', () => {

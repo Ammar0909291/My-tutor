@@ -13888,14 +13888,22 @@ CRITICAL: The [ASSESSMENT_RESULT ...] tag appears ONCE, at the very end, never m
       // then later repairs that strip sentences). Whichever repair emptied it,
       // the learner must not receive nothing. Same fallbacks the other emptying
       // repairs use; logged so the emptying path can be pinned down.
-      if (!cleanText.trim() && !servedMcq) {
+      // A reply that is ONLY the appended figure pointer ("Take a look at the labelled figure beside this message — it shows X. Follow it step by step.") is blank too:
+      // the repairs above emptied what was written and left the pointer (production, 2026-11-03: phys.wave.wave-speed and eng.grammar.compound-sentences, both the whole
+      // reply to "Okay, I follow. Please continue."). The fallback goes in front of the pointer.
+      const { splitVisualPointer: splitBlank } = await import('@/lib/teaching/visual/visualAcknowledgement')
+      const pointerOnly = splitBlank(cleanText)
+      const blankButForPointer = pointerOnly.pointer.length > 0 && pointerOnly.body.trim().length === 0
+      if ((!cleanText.trim() || blankButForPointer) && !servedMcq) {
+        let fallbackBody = "Good — let's keep going."
         try {
           const { getKGNode } = await import('@/lib/curriculum/knowledgeGraph')
           const node = resolvedConceptId ? getKGNode(resolvedConceptId) : null
           const { conceptFallbackText } = await import('@/lib/teaching/conceptFallback')
-          cleanText = node?.title && node.description ? conceptFallbackText(node.title, node.description) : "Good — let's keep going."
-        } catch { cleanText = "Good — let's keep going." }
-        console.warn('[empty-reply-net] ' + JSON.stringify({ provider, llmCallCount, conceptId: resolvedConceptId ?? null }))
+          if (node?.title && node.description) fallbackBody = conceptFallbackText(node.title, node.description)
+        } catch { /* keep the plain line */ }
+        cleanText = blankButForPointer ? `${fallbackBody}\n\n${pointerOnly.pointer}` : fallbackBody
+        console.warn('[empty-reply-net] ' + JSON.stringify({ provider, llmCallCount, conceptId: resolvedConceptId ?? null, pointerOnly: blankButForPointer }))
       }
 
       // ── THE FALLBACK SENTENCE IS NOT SAID TWICE (2026-09-28) ──────────────

@@ -214,12 +214,12 @@ describe('A. retirement retires an ARTIFACT, on every tier', () => {
   it('3. unrelated retired concepts are unaffected (sync decision still no-figure:retired-binding)', () => {
     EXTRA.conceptId = LC
     EXTRA.fingerprints = ['fdeadbeef']
-    for (const id of ['chem.bond.polar-molecules', 'chem.atomic.orbitals', 'chem.bond.metallic-bonding', 'cs.algo.flowcharts', 'chem.bond.resonance']) {
+    for (const id of ['chem.bond.intermolecular', 'chem.atomic.orbitals', 'chem.bond.metallic-bonding', 'cs.algo.flowcharts', 'chem.bond.resonance']) {
       expect(resolveVisual({ message: '', lessonConceptId: id }).provenance).toBe('no-figure:retired-binding')
     }
   })
 
-  it('no retirement row was removed by this lifecycle (13 rows of evidence)', () => {
+  it('no retirement row was removed by this lifecycle (12 rows of evidence)', () => {
     // 25 -> 24 (2026-09-30): phys.opt.reflection was removed from the register once it owned
     // a faithful incident/normal/equal-angles figure (physicsCoreScenesBatch1.test.ts).
     // 24 -> 22 (2026-09-30): phys.em.rc-circuits and phys.em.ac-basics were removed once they
@@ -232,7 +232,8 @@ describe('A. retirement retires an ARTIFACT, on every tier', () => {
     // 15 -> 14 (2026-10-07, CHEM-095): chem.bond.ionic-bonding left once it owned a faithful
     // electron-transfer figure (remainingDefectFixes20261007.test.ts).
     // 14 -> 13 (2026-10-20): chem.bond.mo-theory left once it owned a faithful H₂ energy-level diagram (moDiagram.test.ts).
-    expect(Object.keys(RETIRED_VISUAL_BINDINGS)).toHaveLength(13)
+    // 13 -> 12 (2026-11-03): chem.bond.polar-molecules left once it owned a faithful bond-dipole figure (polarMoleculeDipoles.test.ts).
+    expect(Object.keys(RETIRED_VISUAL_BINDINGS)).toHaveLength(12)
   })
 })
 

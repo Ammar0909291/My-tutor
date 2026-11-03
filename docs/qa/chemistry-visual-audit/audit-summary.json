@@ -1,6 +1,6 @@
 {
  "schema": 1,
- "generatedOn": "2026-10-21",
+ "generatedOn": "2026-11-03",
  "about": "The committed result of the Chemistry visual closure audit: every concept classified A-E (taxonomy), every served figure instance rendered in Chromium at 390 and 1280 px in both themes across every control state, and the machine semantic verdict. A REVIEW_REQUIRED here means no deterministic assertion covers the chemistry; the human answer is semantic-review.json. src/tests/chemistryVisualAudit.test.ts recomputes every served fingerprint from the resolver and fails, naming the concepts, when this file is stale.",
  "taxonomy": {
   "A": "intentionally no figure: the generator recorded a deliberate decline (no suitable form) and no faithful figure is authored",
@@ -22,6 +22,7 @@
   "chem.bio.nucleic-acids",
   "chem.bond.ionic-bonding",
   "chem.bond.mo-theory",
+  "chem.bond.polar-molecules",
   "chem.coord.applications",
   "chem.coord.bonding",
   "chem.coord.cft",
@@ -56,30 +57,30 @@
  "summary": {
   "concepts": 186,
   "byCategory": {
-   "E": 103,
-   "D": 56,
+   "E": 104,
+   "D": 55,
    "B": 14,
    "A": 13
   },
-  "served": 103,
+  "served": 104,
   "bySource": {
-   "tier0": 44,
+   "tier0": 45,
    "tier3": 41,
-   "none": 83,
+   "none": 82,
    "tier2": 2,
    "tier1": 16
   },
-  "instances": 137,
+  "instances": 138,
   "instanceVerdicts": {
-   "REVIEW_REQUIRED": 84,
+   "REVIEW_REQUIRED": 85,
    "PASS": 53
   },
   "servedConceptVerdicts": {
-   "REVIEW_REQUIRED": 95,
+   "REVIEW_REQUIRED": 96,
    "PASS": 8
   },
-  "statesMeasured": 1194,
-  "categoryCUnreachableCachedFigures": 33,
+  "statesMeasured": 1214,
+  "categoryCUnreachableCachedFigures": 34,
   "withMissingRenders": 0
  },
  "concepts": [
@@ -386,13 +387,13 @@
   },
   {
    "id": "chem.bond.polar-molecules",
-   "category": "D",
-   "source": "none",
-   "provenance": "no-figure:retry-generation-failed",
-   "instanceId": null,
-   "fingerprint": null,
-   "verdict": "NO_FIGURE",
-   "shadowedCachedFigure": false
+   "category": "E",
+   "source": "tier0",
+   "provenance": "generator",
+   "instanceId": "scene:polar-molecules-dipole-sum",
+   "fingerprint": "f99c0a4ad",
+   "verdict": "REVIEW_REQUIRED",
+   "shadowedCachedFigure": true
   },
   {
    "id": "chem.bond.intermolecular",
@@ -2331,6 +2332,41 @@
    ],
    "counts": {
     "PASS": 24,
+    "REVIEW_REQUIRED": 2,
+    "FAIL": 0
+   },
+   "failCodes": [],
+   "reviewCodes": [
+    "INNER_SCROLL_X"
+   ],
+   "minFontPx": 11.5,
+   "minContrast": 4.68
+  },
+  {
+   "id": "scene:polar-molecules-dipole-sum",
+   "tier": "tier0",
+   "origin": "authored",
+   "reachability": "resolver",
+   "interactive": false,
+   "conceptIds": [
+    "chem.bond.polar-molecules"
+   ],
+   "fingerprint": "f99c0a4ad",
+   "verdict": "REVIEW_REQUIRED",
+   "render": "REVIEW_REQUIRED",
+   "semantic": "REVIEW_REQUIRED",
+   "semanticFamily": "unknown",
+   "statesMeasured": 20,
+   "viewports": [
+    "1280",
+    "390"
+   ],
+   "themes": [
+    "dark",
+    "light"
+   ],
+   "counts": {
+    "PASS": 18,
     "REVIEW_REQUIRED": 2,
     "FAIL": 0
    },

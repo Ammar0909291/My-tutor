@@ -1776,6 +1776,28 @@
         }
       ],
       "remaining": "The Beer-Lambert law and the Chapman ozone cycle are in the lesson but not drawn (the figure carries the primary / secondary / quantum-yield idea only). The expanded (fullscreen) view scrolls: the chrome around the scene is taller than the window (R15, measured and bounded, by design)."
+    },
+    "scene:polar-molecules-dipole-sum": {
+      "fingerprint": "f99c0a4ad",
+      "concepts": [
+        "chem.bond.polar-molecules"
+      ],
+      "family": "diagram",
+      "initial": "semantic audit REVIEW_REQUIRED (no deterministic chemistry verifier exists for this figure family); render REVIEW: INNER_SCROLL_X in the expanded view only (R15)",
+      "decision": "FIXED→PASS",
+      "finding": "The concept was served a generated five-box procedure flowchart (identify electronegativities → … → determine overall polarity) with no dipole on it (learner run, 2026-11-03). It now draws the rule the Educational Brain entry teaches: each bond dipole is a vector pointing toward the more electronegative atom; CO₂ (linear) has two identical C=O dipoles in opposite directions that cancel, net dipole zero, nonpolar despite polar bonds; H₂O (bent, 104.5°) has two O–H dipoles that do not cancel, and the net dipole (a green arrow) points toward O. Checked against the drawn arrows by checkPolarMoleculesConsistency: CO₂'s two vectors sum to zero, water's two sum to a non-zero vector on the bisector, the net arrow equals that sum, every dipole points toward O, water is drawn bent. Rendered at 390/1280 px, both themes, every state: 18 PASS, 2 REVIEW (expanded-view scroll only, R15).",
+      "fix": "New generator `polarMoleculeDipoles.ts` (`buildPolarMoleculesScene`) with `checkPolarMoleculesConsistency`, registered for `chem.bond.polar-molecules` in `conceptSceneParams.ts`; the net arrow is the sum of the drawn bond-dipole arrows.",
+      "evidence": [
+        {
+          "file": "src/tests/polarMoleculeDipoles.test.ts",
+          "contains": "CO₂ is linear (C between the O atoms, 180°) and its two DRAWN bond dipoles sum to zero"
+        },
+        {
+          "file": "src/tests/polarMoleculeDipoles.test.ts",
+          "contains": "a net arrow that is not the sum is rejected"
+        }
+      ],
+      "remaining": "Only CO₂ and H₂O are drawn (BF₃, NF₃ and the boiling-point link are in the lesson but not drawn). The expanded (fullscreen) view scrolls: the chrome around the scene is taller than the window (R15, measured and bounded, by design)."
     }
   }
 }

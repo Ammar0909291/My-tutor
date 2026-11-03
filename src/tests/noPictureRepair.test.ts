@@ -7,7 +7,7 @@ import { describe, it, expect } from 'vitest'
 import {
   dropFigureTalk,
   pictureReplyIsNotAnExplanation, acceptNoPictureRepair, buildNoPictureRepairAppendix, withoutDiagramDebris, MIN_EXPLANATION_CHARS,
-  judgeNoPictureRepair, dropQuestions, buildNoPictureSecondAttemptAppendix, dropOrphanFigureReferences,
+  judgeNoPictureRepair, dropQuestions, buildNoPictureSecondAttemptAppendix, dropOrphanFigureReferences, isFigureTalk,
 } from '@/lib/teaching/visual/noPictureRepair'
 import { stripPhantomVisualClaims, isPhantomVisualClaim } from '@/lib/teaching/visualRegistry'
 
@@ -136,5 +136,31 @@ describe('a retry that explains in words but opens with talk about a diagram kee
     const v = judgeNoPictureRepair(RETRY)
     expect(v.reason).toBe('ok')
     expect(v.text).not.toMatch(/text diagram/)
+  })
+})
+
+describe('a figure drawn in text and then described is not an explanation (production, eng.grammar.conjunctions, 2026-11-03)', () => {
+  // The replies as served (text after the stock first line).
+  const TABLE = `Coordinating (equal‑bridge) Subordinating (leaning‑bridge)\n\n | I finished | ------> | I went home | | I was hungry | ------> | I ate pizza |\n | my work. | | early. | | (independent) | | (dependent) |\n\n- The **left side** shows two independent clauses linked by a coordinating conjunction (**AND**). Both clauses could stand alone.\n- The **right side** shows an independent clause followed by a dependent clause linked by a subordinating conjunction (**BECAUSE**). The second clause relies on the first for its meaning.`
+  const LAYOUT = `Coordinating conjunction (but)\n\nIn each line the brackets mark the clause that belongs together, and the comma is placed exactly where shown. This visual layout lets you see at a glance that a coordinating conjunction takes a comma **before** it, while a subordinating conjunction that starts the sentence takes a comma **after** the opening clause.`
+  it.each([['pipe table plus "the left side shows"', TABLE], ['"in each line the brackets mark … this visual layout"', LAYOUT]])('%s is not an explanation', (_n, text) => {
+    expect(pictureReplyIsNotAnExplanation(text)).toBe(true)
+  })
+  it('the text table and the dash arrows are removed as debris; an ordinary sentence with a pipe is kept', () => {
+    const out = withoutDiagramDebris(TABLE)
+    expect(out).not.toMatch(/------>/); expect(out).not.toMatch(/\|\s*my work/)
+    expect(withoutDiagramDebris('Use a vertical bar | for or in some notations.')).toContain('vertical bar')
+  })
+  it.each([
+    'The **left side** shows two independent clauses.', 'The right half illustrates the dependent clause.',
+    'In each line the brackets mark the clause that belongs together.', 'This visual layout lets you see at a glance the comma rule.',
+  ])('"%s" is figure talk', (s) => { expect(isFigureTalk(s)).toBe(true) })
+  it.each([
+    'The left side of the equation is the rate.', 'In each sentence the comma goes before the conjunction.', 'A bracket is a punctuation mark.',
+    'The first clause is independent and the second is dependent.',
+  ])('teaching prose "%s" is not', (s) => { expect(isFigureTalk(s)).toBe(false) })
+  it('a real explanation of the same idea is accepted', () => {
+    const EXPL = `A coordinating conjunction such as and, but, or or so joins two clauses of equal weight, and each of them could stand alone as a sentence, so a comma goes before the conjunction: I was hungry, so I ate pizza. A subordinating conjunction such as because, although, when or if makes one clause dependent, so it cannot stand alone and it leans on the other clause for its meaning: I ate pizza because I was hungry. When the dependent clause comes first, the comma goes after it instead: Because I was hungry, I ate pizza.`
+    expect(pictureReplyIsNotAnExplanation(EXPL)).toBe(false)
   })
 })
