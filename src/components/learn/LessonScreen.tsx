@@ -135,6 +135,7 @@ const VOICE_MAP: Record<string, VoiceType> = {
   alexei: 'male', maria: 'female', dmitry: 'warm',
 }
 import { isInternalOpeningPrompt } from '@/lib/learn/internalPromptFilter'
+import { streamingFallbackText } from '@/lib/learn/streamingFallback'
 import { QUICK_ACTIONS } from '@/lib/learn/quickActions'
 
 function resolveVoice(choice: string): VoiceType { return VOICE_MAP[choice] ?? 'male' }
@@ -5364,10 +5365,7 @@ Student level: "${levelDescription}". Write at a level appropriate for them.`)
                 // once `!msg.streaming` — so both forks share the same
                 // reveal-in-progress fallback there; that is not a truncation
                 // of real narration content, since narration cannot start yet.
-                const streamingFallback = (() => {
-                  const raw = isRevealingText ? (strippedContent as string).slice(0, msg.revealedLength) : (strippedContent as string)
-                  return familiarityLine ? raw.replace(familiarityLine, '').replace(/\n{3,}/g, '\n\n').trim() : raw
-                })()
+                const streamingFallback = streamingFallbackText({ cached: Boolean(cached), stripped: strippedContent, revealing: isRevealingText, revealedLength: msg.revealedLength, familiarityLine })
                 const displayText = cached
                   ? deriveDisplayText(cached, isExpanded, familiarityLine)
                   : streamingFallback
