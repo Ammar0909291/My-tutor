@@ -1,4 +1,5 @@
 'use client'
+import { useEffect } from 'react'
 
 /**
  * Root-layout error boundary — Next.js only mounts this when RootLayout
@@ -6,7 +7,13 @@
  * rendered inside the layout). Must render its own <html>/<body> since the
  * real root layout is what failed; can't rely on Providers/useLanguage.
  */
-export default function GlobalError({ reset }: { error: Error & { digest?: string }; reset: () => void }) {
+export default function GlobalError({ error }: { error: Error & { digest?: string }; reset: () => void }) {
+  useEffect(() => {
+    try {
+      const body = JSON.stringify({ name: error?.name, message: error?.message, digest: error?.digest, stack: error?.stack, url: location.pathname + location.search })
+      if (navigator.sendBeacon) navigator.sendBeacon('/api/client-error', new Blob([body], { type: 'application/json' }))
+    } catch { /* never worse than the crash */ }
+  }, [error])
   return (
     <html lang="en">
       <body style={{ margin: 0, minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'sans-serif', background: '#FFF8F0' }}>

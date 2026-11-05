@@ -2,6 +2,7 @@
 import { useEffect, useTransition } from 'react'
 import { useRouter } from 'next/navigation'
 import { useLanguage } from '@/components/ui/LanguageToggle'
+import { reportClientError, isChunkLoadError } from '@/lib/clientErrorReport'
 import { CandyPage, Card, CandyButton, CockroachMascot } from '@/components/ui/candy'
 
 /**
@@ -16,6 +17,17 @@ export default function Error({ error, reset }: { error: Error & { digest?: stri
 
   useEffect(() => {
     console.error('[app-error-boundary]', error)
+    reportClientError(error)
+    // A page that crashed because its JavaScript chunk could not be loaded (a deploy landed while the tab was open, or the network dropped) recovers with one
+    // hard reload; once, so a real bug can never loop.
+    if (isChunkLoadError(error)) {
+      try {
+        if (sessionStorage.getItem('mytutor_chunk_reload') !== '1') {
+          sessionStorage.setItem('mytutor_chunk_reload', '1')
+          window.location.reload()
+        }
+      } catch { /* storage blocked: leave the boundary showing */ }
+    }
   }, [error])
 
   // P0 (Retry that doesn't retry): for an error thrown by a SERVER component,
@@ -36,6 +48,12 @@ export default function Error({ error, reset }: { error: Error & { digest?: stri
           <p className="text-sm" style={{ color: 'var(--candy-ink-soft)', fontWeight: 600 }}>
             {t('error_body')}
           </p>
+          {/* The cause in one short line (name and message only, never the stack): a screenshot of this screen is now enough to name the crash. */}
+          {!error.digest && error.message && (
+            <p className="text-xs select-all break-words" style={{ color: 'var(--candy-ink-soft)', fontFamily: 'monospace' }}>
+              {`${error.name ?? 'Error'}: ${error.message}`.slice(0, 200)}
+            </p>
+          )}
           {error.digest && (
             // Production strips the real error message/stack for security,
             // but Next.js's error.digest is a stable ID that correlates to
