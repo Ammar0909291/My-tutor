@@ -39,8 +39,7 @@ export default async function AdminAIOpsPage() {
       <div className="rounded-xl border p-5 mb-4" style={{ background: 'var(--bg-elevated)', borderColor: 'var(--border-default)' }}>
         <h2 className="text-xs font-bold uppercase tracking-wide mb-4" style={{ color: 'var(--text-dim)' }}>Providers</h2>
         {[
-          { name: 'Groq (Llama 3)', key: 'groq', note: 'Primary — global routing' },
-          { name: 'YandexGPT', key: 'yandex', note: 'Russia region routing' },
+          { name: 'Groq', key: 'groq', note: 'Primary — every teaching language' },
         ].map(p => {
           const s = Array.isArray(providerStats) ? (providerStats as { provider: string; _count: number; _sum: { estimatedCost: number | null } }[]).find(r => r.provider?.toLowerCase().includes(p.key)) : null
           return (

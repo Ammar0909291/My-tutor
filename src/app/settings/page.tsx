@@ -14,7 +14,7 @@ type LangOption = { key: TeachingLang; icon: string; label: string }
 type CountryOption = { key: Country; flag: string; name: string; desc: string; color: string }
 
 const COUNTRY_OPTIONS: CountryOption[] = [
-  { key: 'ru',     flag: '🇷🇺', name: 'Россия', desc: 'YandexGPT · SpeechKit', color: 'var(--coral)' },
+  { key: 'ru',     flag: '🇷🇺', name: 'Россия', desc: 'Groq · SpeechKit', color: 'var(--coral)' },
   { key: 'in',     flag: '🇮🇳', name: 'India',  desc: 'Groq · Hinglish',      color: 'var(--green)' },
   { key: 'global', flag: '🌍', name: 'Global', desc: 'Groq · English',        color: 'var(--blue)' },
 ]

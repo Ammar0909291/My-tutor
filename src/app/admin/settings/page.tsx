@@ -8,7 +8,7 @@ export default function AdminSettingsPage() {
     { key: 'SMTP_USER', desc: 'Email SMTP user', secret: false },
     { key: 'SMTP_PASS', desc: 'Email SMTP password', secret: true },
     { key: 'GROQ_API_KEY', desc: 'Groq AI provider', secret: true },
-    { key: 'YANDEX_API_KEY', desc: 'YandexGPT provider', secret: true },
+    { key: 'YANDEX_API_KEY', desc: 'Yandex SpeechKit (Russian text-to-speech only)', secret: true },
     { key: 'NEXT_PUBLIC_APP_URL', desc: 'Public app URL', secret: false },
     { key: 'ADMIN_EMAILS', desc: 'Admin bootstrap allowlist (CSV)', secret: false },
     { key: 'AI_GLOBAL_RPM', desc: 'Global AI rate limit (req/min)', secret: false },

@@ -9,15 +9,14 @@ const RETRY_BACKOFF_MS = 500
  *
  * ── THE ARITHMETIC, FROM THIS REPOSITORY'S OWN CONSTANTS ────────────────────
  * `vercel.json` gives `/api/learn/chat` a `maxDuration` of 60s. The provider
- * timeouts are gemini 20s, yandex 15s, groq 8s, openrouter 8s, and the primary
+ * timeouts are gemini 20s, groq 8s, openrouter 8s, and the primary
  * tier gets one same-provider retry after a 500 ms backoff. So:
  *
- *   default chain  groq 8 + 0.5 + groq 8 + gemini 20 + openrouter 8  = 44.5s
- *   russian chain  yandex 15 + 0.5 + yandex 15 + gemini 20
- *                    + openrouter 8 + groq 8                          = 66.5s
+ *   the chain (every language) groq 8 + 0.5 + groq 8 + gemini 20 + openrouter 8  = 44.5s
  *
- * The Russian chain exceeds the function's entire budget on its own, before a
- * single database read, and the default chain leaves 15.5s for everything else
+ * (Until 2026-11-05 a separate Russian chain headed by YandexGPT came to 66.5s and
+ * exceeded the function's entire budget on its own; it was removed, and Russian
+ * now uses the chain above.) The chain leaves 15.5s for everything else
  * the turn does — session load, snapshot CAS, asset assembly, evidence writes,
  * message persistence, and a visual pipeline that carries its own 9s deadline.
  *

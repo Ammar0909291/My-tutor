@@ -21,8 +21,7 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
  * means it is expressed by the ABSENCE of configuration. A default that is
  * only asserted where the env var happens to be set is not asserted at all.
  *
- * The Russian chain's own composition (Yandex -> Gemini -> OpenRouter ->
- * Groq, unreordered) is covered by aiRussianLanguageRouting.test.ts.
+ * Russian uses the same chain (YandexGPT was removed 2026-11-05); that is covered by aiRussianLanguageRouting.test.ts.
  */
 const KEYS = [
   'YANDEX_API_KEY', 'YANDEX_FOLDER_ID', 'GEMINI_API_KEY',
@@ -73,8 +72,8 @@ describe('Groq-primary is the default, with every provider credentialed', () => 
     expect(await chainFor('hi')).toEqual(['groq', 'gemini', 'openrouter'])
   })
 
-  it('RUSSIAN keeps YandexGPT primary — the default-chain reversal does not touch it', async () => {
-    expect(await chainFor('ru')).toEqual(['yandex', 'gemini', 'openrouter', 'groq'])
+  it('RUSSIAN is Groq-primary too — YandexGPT was removed (2026-11-05), one chain for every language', async () => {
+    expect(await chainFor('ru')).toEqual(['groq', 'gemini', 'openrouter'])
   })
 
   it('Gemini is present, second, and reachable — not removed', async () => {

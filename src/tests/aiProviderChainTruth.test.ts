@@ -39,64 +39,38 @@ function candidatesBlock(): string {
 }
 
 describe('AI provider chain — the code is the source of truth', () => {
-  it('ships exactly the four providers the chains claim', () => {
+  it('ships exactly the three LLM providers the chain claims (YandexGPT removed 2026-11-05)', () => {
     const files = readdirSync(PROVIDERS_DIR).filter((f) => f.endsWith('.ts')).sort()
     expect(files).toContain('gemini.ts')
     expect(files).toContain('openrouter.ts')
     expect(files).toContain('groq.ts')
-    expect(files).toContain('yandex.ts')
+    expect(files).not.toContain('yandex.ts')
   })
 
-  it('has a YandexGPT LLM provider, wired into the router', () => {
-    expect(existsSync(join(PROVIDERS_DIR, 'yandex.ts'))).toBe(true)
+  it('has NO YandexGPT LLM provider and the router does not reference one', () => {
+    expect(existsSync(join(PROVIDERS_DIR, 'yandex.ts'))).toBe(false)
     const router = readFileSync(join(AI_DIR, 'router.ts'), 'utf8')
-    expect(router).toMatch(/createYandexProvider/)
-    expect(router).toMatch(/from '\.\/providers\/yandex'/)
+    expect(stripComments(router)).not.toMatch(/yandex/i)
+    expect(readFileSync(join(PROVIDERS_DIR, 'index.ts'), 'utf8')).not.toMatch(/yandex/i)
   })
 
-  it('the Russian chain assembles Yandex -> Gemini -> OpenRouter -> Groq in that order', () => {
-    // Scoped to the `candidates` array, which IS the chain. Searching the whole
-    // file would match the gemini_only diagnostic block, which legitimately
-    // constructs Gemini earlier and is not part of this ordering.
+  it('the chain assembles Groq -> Gemini -> OpenRouter in that order, for every language', () => {
+    // Scoped to the `candidates` array, which IS the chain. Searching the whole file would match the gemini_only diagnostic block, which
+    // legitimately constructs Gemini earlier and is not part of this ordering.
     const chain = candidatesBlock()
-    const yandex = chain.indexOf('createYandexProvider(YANDEX_API_KEY')
+    expect(chain).not.toMatch(/yandex/i)
+    expect(chain).not.toMatch(/chain === 'ru'/)
+    const groq = chain.indexOf('createGroqProvider(GROQ_API_KEY')
     const gemini = chain.indexOf('createGeminiProvider(GEMINI_API_KEY')
     const openrouter = chain.indexOf('createOpenRouterProvider(OPENROUTER_API_KEY')
-    const groq = chain.indexOf('createGroqProvider(GROQ_API_KEY')
-    expect(yandex).toBeGreaterThan(-1)
-    expect(gemini).toBeGreaterThan(yandex)
-    expect(openrouter).toBeGreaterThan(gemini)
-    expect(groq).toBeGreaterThan(openrouter)
-  })
-
-  it('the DEFAULT (non-Russian) chain assembles Groq -> Gemini -> OpenRouter in that order (2026-08-20)', () => {
-    // The `candidates` array is `chain === 'ru' ? [ru array] : [default array]`.
-    // The default array is everything from the `] : [` join to the array's own
-    // closing `]`, scoped past the Russian array so a Yandex mention there
-    // cannot satisfy this block by accident.
-    const src = readFileSync(join(AI_DIR, 'router.ts'), 'utf8')
-    const start = src.indexOf('const candidates:')
-    const joinPoint = src.indexOf('] : [', start)
-    expect(joinPoint, 'the candidates array must have a ru/default ternary split').toBeGreaterThan(start)
-    const end = src.indexOf('\n  ]', joinPoint)
-    expect(end).toBeGreaterThan(joinPoint)
-    const defaultChain = src.slice(joinPoint, end)
-    expect(defaultChain).not.toContain('createYandexProvider')
-    const groq = defaultChain.indexOf('createGroqProvider(GROQ_API_KEY')
-    const gemini = defaultChain.indexOf('createGeminiProvider(GEMINI_API_KEY')
-    const openrouter = defaultChain.indexOf('createOpenRouterProvider(OPENROUTER_API_KEY')
     expect(groq).toBeGreaterThan(-1)
     expect(gemini).toBeGreaterThan(groq)
     expect(openrouter).toBeGreaterThan(gemini)
   })
 
-  it('the Yandex tier is gated on the teaching language, not on a country value', () => {
+  it('the chain key is derived from nothing but the language, and it is the same for every language', () => {
     const router = readFileSync(join(AI_DIR, 'router.ts'), 'utf8')
-    // The chain key is derived from the language and nothing else.
     expect(router).toMatch(/export function chainKeyForLanguage\(/)
-    expect(router).toMatch(/lang === 'ru' \? 'ru' : 'default'/)
-    // Yandex is added on the chain key, never on a country comparison.
-    expect(candidatesBlock()).toMatch(/chain === 'ru'/)
     expect(candidatesBlock()).not.toMatch(/\bcountry\b/)
   })
 
@@ -131,7 +105,9 @@ describe('AI provider chain — the code is the source of truth', () => {
     // current fact — it may only appear as history.
     expect(md).not.toMatch(/^\s*- AI .*There is NO YandexGPT LLM provider/m)
     // The live architecture: language-selected, explicitly not country.
-    expect(md).toMatch(/YandexGPT/)
+    // YandexGPT is named only as REMOVED; the live chain is the same for every teaching language.
+    expect(md).toMatch(/YandexGPT[^\n]*(removed|REMOVED)/)
+    expect(md).not.toMatch(/\*\*YandexGPT -> Gemini/)
     expect(md).toMatch(/teaching language/i)
     expect(md).toMatch(/never their country|not their country|NOTHING else/i)
   })

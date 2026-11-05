@@ -78,13 +78,17 @@ never into this file. This file only changes when a LIVE, currently-binding rule
 - **AI provider routing** (`src/lib/ai/router.ts`, `chainKeyForLanguage()` is the single
   selection authority — keys off the learner's selected teaching language and NOTHING else,
   never their country):
-  - `teachingLanguage === 'ru'` → **YandexGPT -> Gemini -> OpenRouter -> Groq**
-  - every other language → **Groq -> Gemini -> OpenRouter** (Groq primary since 2026-08-20, after
-    a Gemini-only mode caused a total outage when Gemini rate-limited)
+  - **ONE chain for every teaching language, Russian included: Groq -> Gemini -> OpenRouter**
+    (Groq primary since 2026-08-20, after a Gemini-only mode caused a total outage when Gemini
+    rate-limited). **YandexGPT was REMOVED on 2026-11-05** (owner: "set Groq default for Russian,
+    remove YandexGPT"): the separate Russian chain (YandexGPT -> Gemini -> OpenRouter -> Groq) and
+    `providers/yandex.ts` are gone. Yandex **SpeechKit** (Russian text-to-speech, `/api/tts`) is a
+    different integration and is untouched — it keys off the same `lang === 'ru'` signal and still
+    needs `YANDEX_API_KEY` / `YANDEX_FOLDER_ID`.
   - `AI_PROVIDER_MODE=gemini_only` is a diagnostic escape hatch, unset by default (using it again
     risks repeating the 2026-08-20 outage — there is nothing to fail over to). Providers with no
     configured key are filtered out. `routeAI`'s `country` param is logged only, never a routing
-    signal. Yandex TTS shares the same `lang==='ru'` signal. Redis optional.
+    signal. Redis optional.
 - KnowledgeNode: `{ id, domain, title, description, difficulty, prerequisites[] }`. Misconception
   data is runtime (`MistakeRecord`), not in the static KG type. Admin gated by `ADMIN_EMAILS` env
   var (not a DB flag).

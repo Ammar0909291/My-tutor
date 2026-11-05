@@ -215,26 +215,15 @@ describe('SEV-1: AI timeout budget fits the function budget', () => {
     expect(result.provider).toBe('groq')
   })
 
-  it('DEFAULT chain provider order: Groq first, Gemini second, OpenRouter last (2026-08-20 reorder)', () => {
-    // Found stale while investigating PCD-001/PCD-002 (physics/chemistry
-    // defect audit): this test previously asserted "Gemini first, Groq
-    // last", scoped from `const candidates: Array<` onward. But BOTH chains
-    // (`ru` and the default one) live inside that same array literal — the
-    // `ru` branch is listed FIRST in source (Yandex -> Gemini -> OpenRouter
-    // -> Groq) — so `indexOf` from that point found the `ru` chain's own
-    // Gemini/OpenRouter/Groq positions, which happen to satisfy
-    // `gi < oi < qi` too. The test always passed, but it was silently
-    // verifying the RUSSIAN chain's order, never the default chain the
-    // 2026-08-20 CLAUDE.md entry documents as reordered to Groq-primary.
-    // Scoping from the DEFAULT branch's own opening bracket (`] : [`, the
-    // ternary's else-arm) fixes that and pins the order that branch
-    // actually documents: Groq -> Gemini -> OpenRouter.
+  it('the chain (one for every language since 2026-11-05): Groq first, Gemini second, OpenRouter last', () => {
+    // History: this once scoped from the DEFAULT branch of a `chain === 'ru' ? [...] : [...]` ternary, because the Russian array (Yandex -> Gemini ->
+    // OpenRouter -> Groq) came first in source and also satisfied a naive `gi < oi < qi` check. YandexGPT and the Russian array were removed on 2026-11-05;
+    // there is a single `candidates` array, so it is scoped from its own opening to its closing bracket.
     const src = readSource('src/lib/ai/router.ts')
     const candidatesStart = src.indexOf('const candidates: Array<')
     expect(candidatesStart).toBeGreaterThan(-1)
-    const defaultBranchStart = src.indexOf('] : [', candidatesStart)
-    expect(defaultBranchStart, 'could not find the default (non-ru) branch of the candidates ternary').toBeGreaterThan(-1)
-    const scoped = src.slice(defaultBranchStart, src.indexOf(']', defaultBranchStart + 5))
+    const scoped = src.slice(candidatesStart, src.indexOf('\n  ]', candidatesStart))
+    expect(scoped).not.toMatch(/yandex/i)
     const gi = scoped.indexOf('key: GEMINI_API_KEY')
     const oi = scoped.indexOf('key: OPENROUTER_API_KEY')
     const qi = scoped.indexOf('key: GROQ_API_KEY')

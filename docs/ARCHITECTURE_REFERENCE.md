@@ -16,7 +16,7 @@
 | Auth | NextAuth v5 (JWT strategy) |
 | Database | PostgreSQL via Prisma ORM (`db push`, no migration files) |
 | AI — Primary | Groq (openai/gpt-oss-20b) for most users |
-| AI — Regional | YandexGPT (Russia/`country=ru` users only) |
+| AI — Russian | Same Groq → Gemini → OpenRouter chain as every language (YandexGPT removed 2026-11-05; Yandex SpeechKit remains for Russian TTS only) |
 | AI — JSON | Groq via `routeJSON()` (always, faster for structured output) |
 | Cache | Redis (optional; app runs without it — falls back to in-memory) |
 | Rate Limiting | Edge: in-memory sliding window (`src/lib/rateLimitEdge.ts`); Node: Redis-backed (`src/lib/rateLimit.ts`) |

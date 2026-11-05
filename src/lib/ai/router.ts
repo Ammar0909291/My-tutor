@@ -1,7 +1,6 @@
 import { consumeAIBudget } from '@/lib/ai/budget'
 import { captureError } from '@/lib/monitoring'
 import { createGeminiProvider } from './providers/gemini'
-import { createYandexProvider } from './providers/yandex'
 import { createOpenRouterProvider } from './providers/openrouter'
 import { createGroqProvider } from './providers/groq'
 import { createFailoverRouter } from './providers/failoverRouter'
@@ -33,14 +32,6 @@ export function resolveGeminiModel(configured: string | undefined): string {
   }
   return configured
 }
-// ─── YandexGPT (Russian TEACHING LANGUAGE only — never country) ───────────────
-// Restored 2026-08-04 as an intentional product decision. Both credentials are
-// required: YANDEX_FOLDER_ID is part of the model URI, not merely a header, so
-// "configured" means both are present.
-const YANDEX_API_KEY = process.env.YANDEX_API_KEY ?? ''
-const YANDEX_FOLDER_ID = process.env.YANDEX_FOLDER_ID ?? ''
-const YANDEX_MODEL = process.env.YANDEX_MODEL ?? 'yandexgpt-lite/latest'
-
 const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY ?? ''
 const OPENROUTER_MODEL = process.env.OPENROUTER_MODEL ?? 'deepseek/deepseek-chat-v3.1'
 // Third-tier automatic fallback — the model this app ran on before the
@@ -84,20 +75,22 @@ export type TeachingLanguage = 'ru' | 'en' | 'hi'
  * PROVIDER-SELECTION AUTHORITY — nothing else in the codebase may branch on
  * language (or on country) to pick a provider.
  *
- * Explicitly NOT country-based. The pre-52152a18 router keyed YandexGPT off
- * `country === 'ru'`, which is the wrong signal twice over: a Russian-speaking
- * learner in India or Poland got an English-tuned provider, and an
- * English-speaking learner in Russia got YandexGPT. The learner's selected
- * teaching language is what the model has to actually produce, so it is what
- * selects the model — the same signal /api/tts already keys its Yandex voice
- * off (see src/app/api/tts/route.ts), which is what keeps TTS and LLM
- * consistent rather than two independent notions of "is this Russian".
+ * There is ONE chain, for every teaching language: Groq -> Gemini -> OpenRouter.
+ * YandexGPT, which used to head a separate Russian chain (Yandex -> Gemini ->
+ * OpenRouter -> Groq), was REMOVED on 2026-11-05 on the owner's instruction
+ * ("set Groq default for Russian, remove YandexGPT"). Yandex SpeechKit is a
+ * different thing and is untouched: Russian text-to-speech still goes through
+ * /api/tts, keyed on the same teaching-language signal.
+ *
+ * The function is kept (rather than deleted) so every caller and the
+ * "never route on country" rule keep a single, named place to look; it now
+ * returns the same key for every language.
  */
-export function chainKeyForLanguage(lang: TeachingLanguage | undefined): 'ru' | 'default' {
-  return lang === 'ru' ? 'ru' : 'default'
+export function chainKeyForLanguage(_lang: TeachingLanguage | undefined): 'default' {
+  return 'default'
 }
 
-const _routers = new Map<'ru' | 'default', ReturnType<typeof createFailoverRouter>>
+const _routers = new Map<'default', ReturnType<typeof createFailoverRouter>>
 
 /**
  * GEMINI-ONLY MODE — NOW AN OPT-IN DIAGNOSTIC AGAIN (owner instruction,
@@ -123,12 +116,10 @@ const _routers = new Map<'ru' | 'default', ReturnType<typeof createFailoverRoute
  *                                          gemini-only isolation is wanted
  *                                          again later; costs one env var)
  *
- * IT DOES NOT TOUCH YANDEXGPT FOR RUSSIAN TEACHING. The Russian chain is
- * assembled as its own array below (Yandex -> Gemini -> OpenRouter -> Groq,
- * byte-for-byte the 2026-08-04 order) and is not reordered by this change —
- * only the DEFAULT (non-Russian) chain's internal order changes. Russian
- * text-to-speech was never affected by any of this — `/api/tts` still routes
- * Russian audio to Yandex independently.
+ * (Until 2026-11-05 this paragraph described a separate Russian chain headed by
+ * YandexGPT. It was removed; Russian now uses the same chain as every language.
+ * Russian text-to-speech was never affected — `/api/tts` still routes Russian
+ * audio to Yandex SpeechKit independently.)
  */
 export function isGeminiOnlyMode(): boolean {
   // Explicit opt-IN only. Anything else — including unset — uses the full
@@ -243,9 +234,7 @@ function getRouter(lang?: TeachingLanguage, groqModelOverride?: string, forcePro
     // failure count, which would corrupt the very measurement being taken.
     //
     // Language does not widen this: gemini_only means gemini only, for Russian
-    // too. The diagnostic exists to measure Gemini in isolation, and a Russian
-    // turn silently routed to YandexGPT would corrupt that measurement exactly
-    // as a failover hop would.
+    // too. The diagnostic exists to measure Gemini in isolation.
     console.log('[ai/router] gemini-only mode (AI_PROVIDER_MODE=gemini_only) — failover and same-provider retry disabled; unset AI_PROVIDER_MODE to use the full chain')
     const geminiOnly = createFailoverRouter({
       providers: [createGeminiProvider(GEMINI_API_KEY, GEMINI_MODEL)],
@@ -267,31 +256,11 @@ function getRouter(lang?: TeachingLanguage, groqModelOverride?: string, forcePro
   // the one credential this app has always required (CLAUDE.md/.env.example),
   // so the chain is never empty in practice.
   //
-  // Russian's chain is its own array — YandexGPT -> Gemini -> OpenRouter ->
-  // Groq, byte-for-byte the 2026-08-04 order, deliberately NOT reordered by
-  // the 2026-08-20 Groq-primary change below (see isGeminiOnlyMode()'s doc
-  // comment for why). The Yandex tier is subject to the identical empty-key
-  // filter — it needs BOTH credentials, so an unset YANDEX_FOLDER_ID drops it
-  // rather than spending a guaranteed-fail round-trip on a request whose
-  // model URI cannot be formed.
-  //
-  // The DEFAULT (non-Russian) chain is Groq -> Gemini -> OpenRouter
-  // (2026-08-20, owner-authorized reversal of the Gemini-primary order this
-  // chain used before 2026-08-12's Gemini-only default, reasoned above in
-  // isGeminiOnlyMode()'s doc comment): Groq is the credential this app has
-  // always required and was sitting completely unused while Gemini alone
-  // absorbed a rate-limit outage. OpenRouter stays as a third tier — its key
-  // is unset in production today, so it is filtered out below exactly as it
-  // always was; nothing about its role changes.
-  const candidates: Array<{ key: string; provider: AIProvider }> = chain === 'ru' ? [
-    {
-      key: YANDEX_API_KEY && YANDEX_FOLDER_ID ? YANDEX_API_KEY : '',
-      provider: createYandexProvider(YANDEX_API_KEY, YANDEX_FOLDER_ID, YANDEX_MODEL),
-    },
-    { key: GEMINI_API_KEY, provider: createGeminiProvider(GEMINI_API_KEY, GEMINI_MODEL) },
-    { key: OPENROUTER_API_KEY, provider: createOpenRouterProvider(OPENROUTER_API_KEY, OPENROUTER_MODEL) },
-    { key: GROQ_API_KEY, provider: createGroqProvider(GROQ_API_KEY, GROQ_MODEL) },
-  ] : [
+  // ONE chain for every teaching language (YandexGPT removed 2026-11-05): Groq ->
+  // Gemini -> OpenRouter. Groq is the credential this app has always required and
+  // is primary (owner, 2026-08-20 and 2026-09-25); Gemini is the fallback;
+  // OpenRouter is a third tier that is filtered out below when its key is unset.
+  const candidates: Array<{ key: string; provider: AIProvider }> = [
     { key: GROQ_API_KEY, provider: createGroqProvider(GROQ_API_KEY, GROQ_MODEL) },
     { key: GEMINI_API_KEY, provider: createGeminiProvider(GEMINI_API_KEY, GEMINI_MODEL) },
     { key: OPENROUTER_API_KEY, provider: createOpenRouterProvider(OPENROUTER_API_KEY, OPENROUTER_MODEL) },
